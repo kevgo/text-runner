@@ -29,16 +29,21 @@ class VerifyFileContentRunner
 
 
   run: (done) ->
-    console.log """
-      #{@markdown-file-path}:#{@markdown-lines[0] + 1} -- verifying file #{cyan @file-path}
-      """
     try
       content = fs.read-file-sync @file-path, 'utf8'
     catch
       if e.code is 'ENOENT'
-        console.log red "Error: expected file #{@file-path} to exist, but not found"
+        console.log red "#{@markdown-file-path}:#{@markdown-lines[0] + 1} -- file #{@file-path} not found"
         return done 1
-    jsdiff-console content, @content, done
+    jsdiff-console content, @content, (err) ~>
+      if err
+        console.log red "#{@markdown-file-path}:#{@markdown-lines[0] + 1} -- mismatching content in #{@file-path}:"
+        console.log err.message
+        return done err
+      console.log """
+        #{@markdown-file-path}:#{@markdown-lines[0] + 1} -- verifying file #{cyan @file-path}
+        """
+      done!
 
 
 

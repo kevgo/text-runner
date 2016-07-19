@@ -40,11 +40,27 @@ Feature: verifying file content
 
 
   Scenario: file content mismatch
+    Given the file "one.txt" with the content:
+      """
+      Unexpected content here
+      """
+    When running "tut-run"
+    Then the test fails with exit code 1 and the error:
+      """
+      file-content-verifier.md:3 -- mismatching content in one.txt:
+      mismatching records:
+
+      Hello world!Unexpected content here
+      """
+    And the directory still contains a file "one.txt" with content:
+      """
+      Unexpected content here
+      """
 
 
   Scenario: file is missing
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      Error: expected file one.txt to exist, but not found
+      file-content-verifier.md:3 -- file one.txt not found
       """

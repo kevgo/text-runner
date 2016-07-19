@@ -44,8 +44,8 @@ class MarkdownFileRunner extends EventEmitter
     for node in tree
       if node.type is 'htmltag'
 
-        if matches = node.content.match /<a class="runMarkdown_([^"]+)">/
-          throw new Error 'Found a nested <a class="runMarkdown_*"> block' if @running
+        if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
+          throw new Error 'Found a nested <a class="tutorialRunner_*"> block' if @running
           class-name = "#{capitalize matches[1]}Runner"
           debug "instantiating '#{class-name}'"
           clazz = eval class-name

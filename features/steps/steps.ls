@@ -39,7 +39,7 @@ module.exports = ->
     expect(@process.full-output!).to.include expected-text
 
 
-  @Then /^the directory contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
+  @Then /^the directory (?:still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
     expect(fs.read-file-sync path.join('tmp', file-name), 'utf8').to.equal expected-content
 
 

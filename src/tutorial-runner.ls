@@ -23,8 +23,9 @@ class TutorialRunner extends EventEmitter
     async.each-series runners,
                       ((runner, cb) -> runner.run cb),
                       (err) ~>
+                        | err  =>  return @emit 'fail'
                         if @steps-count is 0
-                          console.log 'no activities found'
+                          @emit 'error', 'no activities found'
                           @emit 'fail'
                         else
                           @emit 'pass'

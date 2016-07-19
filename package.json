@@ -12,6 +12,7 @@
     "cucumber": "1.2.1",
     "cucumber-snippets-livescript": "1.0.1",
     "dim-console": "0.3.2",
+    "jsdiff-console": "2.2.1",
     "livescript": "1.5.0",
     "o-tools-livescript": "1.1.2",
     "observable-process": "2.2.0",

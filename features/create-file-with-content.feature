@@ -25,7 +25,7 @@ Feature: creating files with content
       Hello world!
       """
     And the test passes
-    And the directory contains a file "one.txt" with content:
+    And the directory now contains a file "one.txt" with content:
       """
       Hello world!
       """

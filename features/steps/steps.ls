@@ -21,6 +21,11 @@ module.exports = ->
     fs.write-file-sync path.join('tmp', file-name), ''
 
 
+  @Given /^the file "([^"]*)" with the content:$/ (file-name, content) ->
+    fs.write-file-sync path.join('tmp', file-name), content
+
+
+
   @When /^running "([^"]*)"(?: in an empty directory)?$/ (command, done) ->
     args =
       cwd: 'tmp'
@@ -39,7 +44,7 @@ module.exports = ->
     expect(@process.full-output!).to.include expected-text
 
 
-  @Then /^the directory (?:still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
+  @Then /^the directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
     expect(fs.read-file-sync path.join('tmp', file-name), 'utf8').to.equal expected-content
 
 

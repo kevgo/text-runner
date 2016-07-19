@@ -5,8 +5,7 @@ Feature: verifying file content
   So that I am sure my tools performs the correct actions on the hard drive.
 
 
-  @verbose @debug
-  Scenario: file content matches
+  Background:
     Given I am in a directory containing a file "file-content-verifier.md" with the content:
       """
       Our workspace contains the file:
@@ -19,6 +18,13 @@ Feature: verifying file content
       ```
 
       </a>
+      """
+
+
+  Scenario: file content matches
+    Given the file "one.txt" with the content:
+      """
+      Hello world!
       """
     When running "tut-run"
     Then it prints:
@@ -37,3 +43,8 @@ Feature: verifying file content
 
 
   Scenario: file is missing
+    When running "tut-run"
+    Then the test fails with exit code 1 and the error:
+      """
+      Error: expected file one.txt to exist, but not found
+      """

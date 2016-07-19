@@ -1,7 +1,8 @@
 require! {
   'assert'
-  'chalk' : {cyan}
+  'chalk' : {cyan, red}
   'fs'
+  'jsdiff-console'
   'prelude-ls' : {capitalize}
 }
 debug = require('debug')('verify-file-content-runner')
@@ -27,11 +28,17 @@ class VerifyFileContentRunner
     @["_load#{capitalize node.type}"]? node
 
 
-  run: ->
+  run: (done) ->
     console.log """
       #{@markdown-file-path}:#{@markdown-lines[0] + 1} -- verifying file #{cyan @file-path}
       """
-    fs.write-file-sync @file-path, @content
+    try
+      content = fs.read-file-sync @file-path, 'utf8'
+    catch
+      if e.code is 'ENOENT'
+        console.log red "Error: expected file #{@file-path} to exist, but not found"
+        return done 1
+    jsdiff-console content, @content, done
 
 
 

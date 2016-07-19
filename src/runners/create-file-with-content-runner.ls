@@ -26,13 +26,13 @@ class CreateFileWithContentRunner
     @["_load#{capitalize node.type}"]? node
 
 
-  run: ->
+  run: (done) ->
     console.log """
       #{@markdown-file-path}:#{@markdown-lines[0] + 1} -- creating file #{cyan @file-path} with content:
       #{cyan @content}
 
       """
-    fs.write-file-sync @file-path, @content
+    fs.write-file @file-path, @content, done
 
 
 

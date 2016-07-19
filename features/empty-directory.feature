@@ -8,8 +8,7 @@ Feature: failing on empty directory
 
 
   Scenario: running inside an empty directory
-    Given I am in the directory of the tutorial "empty-directory"
-    When running "tut-run"
+    When running "tut-run" in an empty directory
     Then the test fails with exit code 1 and the error:
       """
       no files found

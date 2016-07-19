@@ -38,6 +38,8 @@ class MarkdownFileRunner extends EventEmitter
       return
     markdown-ast = @markdown-parser.parse markdown-text, {}
     @_check-nodes markdown-ast
+    if @runners.length > 0
+      @emit 'found-tests', @path, @runners.length
     async.each-series @runners,
                       ((runner, cb) -> runner.run cb),
                       done

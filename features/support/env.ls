@@ -1,7 +1,16 @@
+require! {
+  'fs'
+  'rimraf'
+}
+
+
 module.exports = ->
 
   @set-default-timeout 500
 
+  @Before ->
+    rimraf.sync 'tmp'
+    fs.mkdir 'tmp'
 
   @Before tags: ['@verbose'], ->
     @verbose = on

@@ -14,7 +14,8 @@
     "dim-console": "0.3.2",
     "livescript": "1.5.0",
     "o-tools-livescript": "1.1.2",
-    "observable-process": "2.2.0"
+    "observable-process": "2.2.0",
+    "rimraf": "2.5.3"
   },
   "homepage": "https://github.com/Originate/tutorial-runner",
   "main": "dist/tutorial-runner.js",

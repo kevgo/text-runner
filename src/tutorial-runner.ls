@@ -9,6 +9,10 @@ require! {
 # Runs the tutorial in the given directory
 class TutorialRunner extends EventEmitter
 
+  ->
+    @steps-count = 0
+
+
   # Runs the given tutorial
   run: (dir) ->
     runners = @_runners(dir)
@@ -18,7 +22,12 @@ class TutorialRunner extends EventEmitter
       return
     async.each-series runners,
                       ((runner, cb) -> runner.run cb),
-                      (err) ~> @emit 'pass'
+                      (err) ~>
+                        if @steps-count is 0
+                          console.log 'no activities found'
+                          @emit 'fail'
+                        else
+                          @emit 'pass'
 
 
   # Returns all the markdown files for this tutorial
@@ -32,6 +41,7 @@ class TutorialRunner extends EventEmitter
       runner = new MarkdownFileRunner file
         ..on 'error', (err) ~> @emit 'error', err
         ..on 'fail', ~> @emit 'fail'
+        ..on 'found-tests', (file, count) ~> @steps-count += 1
       runner
 
 

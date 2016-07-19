@@ -6,13 +6,26 @@ Feature: creating files with content
 
   - a
 
-  @verbose @debug
+  @verbose
   Scenario: running a tutorial that creates files
-    Given I am in the directory of the tutorial "create-files"
+    Given I am in a directory containing a file "creator.md" with the content:
+      """
+      <a class="tutorialRunner_createFileWithContent">
+      __one.txt__
+
+      ```
+      Hello world!
+      ```
+      </a>
+      """
     When running "tut-run"
     Then it prints:
       """
-      one.md:5-7 -- creating file one.txt with content:
+      creator.md:1 -- creating file one.txt with content:
       Hello world!
       """
     And the test passes
+    And the directory contains a file "one.txt" with content:
+      """
+      Hello world!
+      """

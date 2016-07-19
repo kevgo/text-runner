@@ -8,7 +8,7 @@ Feature: running empty files
 
 
   Scenario: a tutorial consisting of an empty file
-    Given I am in the directory of the tutorial "empty-files"
+    Given I am in a directory containing an empty file "empty.md"
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """

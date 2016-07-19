@@ -8,7 +8,10 @@ Feature: Fail on non-actionable Markdown
 
 
   Scenario: tutorial with no actions
-    Given I am in the directory of the tutorial "non-actionable"
+    Given I am in a directory containing a file "just-text.md" with the content:
+      """
+      Just text here, nothing to do!
+      """
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """

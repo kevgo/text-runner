@@ -1,6 +1,7 @@
  require! {
    'chai' : {expect}
    'dim-console'
+   'fs'
    'observable-process' : ObservableProcess
    'path'
  }
@@ -12,10 +13,17 @@ module.exports = ->
      @app-dir = path.join process.cwd!, 'features', 'example-tutorials', name
 
 
+  @Given /^I am in a directory containing a file "([^"]*)" with the content:$/ (file-name, content) ->
+    fs.write-file-sync path.join('tmp', file-name), content
 
-  @When /^running "([^"]*)"$/ (command, done) ->
+
+  @Given /^I am in a directory containing an empty file "([^"]*)"$/ (file-name) ->
+    fs.write-file-sync path.join('tmp', file-name), ''
+
+
+  @When /^running "([^"]*)"(?: in an empty directory)?$/ (command, done) ->
     args =
-      cwd: @app-dir
+      cwd: 'tmp'
       console: off
       env: {}
     if @verbose
@@ -29,6 +37,10 @@ module.exports = ->
 
   @Then /^it prints:$/ (expected-text) ->
     expect(@process.full-output!).to.include expected-text
+
+
+  @Then /^the directory contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
+    expect(fs.read-file-sync path.join('tmp', file-name), 'utf8').to.equal expected-content
 
 
   @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->

@@ -30,7 +30,8 @@ class TutorialRunner extends EventEmitter
   _runners: (dir) ->
     @_markdown-files(dir).map (file) ~>
       runner = new MarkdownFileRunner file
-      runner.on 'error', (err) ~> @emit 'error', err
+        ..on 'error', (err) ~> @emit 'error', err
+        ..on 'fail', ~> @emit 'fail'
       runner
 
 

@@ -1,6 +1,8 @@
 require! {
   'async'
+  'events' : EventEmitter
   'fs'
+  'path'
   'prelude-ls' : {capitalize}
   'remarkable' : Remarkable
   './runners/console-with-dollar-prompt-runner' : ConsoleWithDollarPromptRunner
@@ -12,7 +14,7 @@ debug = require('debug')('markdown-file-runner')
 
 
 # Runs the given Markdown file
-class MarkdownFileRunner
+class MarkdownFileRunner extends EventEmitter
 
   (@path) ->
     @markdown-parser = new Remarkable 'full', html: yes
@@ -26,8 +28,11 @@ class MarkdownFileRunner
 
   run: (done) ->
     debug "checking file #{@path}"
-    markdown-text = fs.read-file-sync @path, 'utf8'
-
+    markdown-text = fs.read-file-sync(@path, 'utf8').trim!
+    if markdown-text.length is 0
+      @emit 'error', "empty file: #{path.relative process.cwd!, @path}"
+      @emit 'fail'
+      return
     markdown-ast = @markdown-parser.parse markdown-text, {}
     @_check-nodes markdown-ast
     async.each-series @runners,

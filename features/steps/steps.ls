@@ -17,14 +17,23 @@ module.exports = ->
     args =
       cwd: @app-dir
       console: off
+      env: {}
     if @verbose
       args.console = dim-console.console
+    if @debug
+      args.env['DEBUG'] = '*'
     @process = new ObservableProcess path.join(process.cwd!, 'bin', command), args
       ..on 'ended', (@exit-code) ~> done!
 
+
+
+  @Then /^it prints:$/ (expected-text) ->
+    expect(@process.full-output!).to.include expected-text
 
 
   @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->
     expect(@process.full-output!).to.include expected-text
     expect(@exit-code).to.equal expected-exit-code
 
+  @Then /^the test passes$/ ->
+    expect(@exit-code).to.equal 0

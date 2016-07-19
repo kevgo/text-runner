@@ -1,6 +1,6 @@
 Feature: running empty files
 
-  As a tutorial developer
+  As a tutorial writer
   I want to get a warning about empty files
   So that I don't forget to finish them.
 

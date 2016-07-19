@@ -12,7 +12,7 @@ Feature: creating files with content
     When running "tut-run"
     Then it prints:
       """
-      creating file one.txt with content
+      one.md:5-7 -- creating file one.txt with content:
       Hello world!
       """
     And the test passes

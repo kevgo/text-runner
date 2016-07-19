@@ -22,6 +22,9 @@ class MarkdownFileRunner extends EventEmitter
     # the current MFR runner instance
     @current-runner = null
 
+    # the current line in the current markdown file
+    @current-lines = 0
+
     # all runners
     @runners = []
 
@@ -42,6 +45,7 @@ class MarkdownFileRunner extends EventEmitter
 
   _check-nodes: (tree) ->
     for node in tree
+      @current-lines = node.lines if node.lines
       if node.type is 'htmltag'
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
@@ -49,7 +53,7 @@ class MarkdownFileRunner extends EventEmitter
           class-name = "#{capitalize matches[1]}Runner"
           debug "instantiating '#{class-name}'"
           clazz = eval class-name
-          @current-runner = new clazz @world
+          @current-runner = new clazz path.relative(process.cwd!, @path), @current-lines
 
         if node.content is '</a>'
           @runners.push @current-runner if @current-runner

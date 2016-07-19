@@ -9,7 +9,7 @@ require! {
 # where each line starts with "$ "
 class CreateFileWithContentRunner
 
-  ->
+  (@filename, @lines) ->
 
     # whether we are currently within a bold section that contains the file path
     @reading-file-path = no
@@ -26,7 +26,11 @@ class CreateFileWithContentRunner
 
 
   run: ->
-    console.log "creating file #{cyan @file-path} with content\n#{cyan @content}"
+    console.log """
+      #{@filename}:#{@lines[0]}-#{@lines[1]} -- creating file #{cyan @file-path} with content:
+      #{cyan @content}
+
+      """
 
 
 

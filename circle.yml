@@ -1,0 +1,22 @@
+machine:
+  node:
+    version: 6.1.0
+
+
+test:
+
+  pre:
+    - mkdir -p $CIRCLE_TEST_REPORTS/cucumber
+    - node_modules/.bin/build
+
+  override:
+    - node_modules/o-tools/bin/lint
+    - NODE_ENV='test' cucumber-js --tags ~@todo --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
+
+
+deployment:
+  publish:
+    branch: release
+    commands:
+      - npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
+      - npm publish

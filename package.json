@@ -1,0 +1,29 @@
+{
+  "name": "tutorial-runner",
+  "version": "0.0.1",
+  "author": "Kevin Goslar",
+  "dependencies": {
+    "remarkable": "1.6.2",
+    "xmldoc": "0.5.1"
+  },
+  "description": "Executes tutorials written in MarkDown",
+  "devDependencies": {
+    "chai": "3.5.0",
+    "cucumber": "1.2.1",
+    "cucumber-snippets-livescript": "1.0.1",
+    "dim-console": "0.3.2",
+    "livescript": "1.5.0",
+    "o-tools-livescript": "1.1.2",
+    "observable-process": "2.2.0"
+  },
+  "homepage": "https://github.com/Originate/tutorial-runner",
+  "main": "dist/tutorial-runner.js",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Originate/tutorial-runner.git"
+  },
+  "scripts": {
+    "test": "cucumber-js"
+  }
+}

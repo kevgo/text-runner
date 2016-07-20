@@ -10,7 +10,7 @@ Feature: running multiple console commands
   Scenario: running multiple console commands
     Given I am in a directory containing a file "running-multiple-commands.md" with the content:
       """
-      <a class="tutorialRunner_ConsoleCommand">
+      <a class="tutorialRunner_consoleCommand">
       ```
       ls -1
       ls -a

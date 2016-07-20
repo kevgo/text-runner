@@ -13,7 +13,7 @@ Feature: running console commands
   Scenario: running console commands
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_ConsoleCommand">
+      <a class="tutorialRunner_consoleCommand">
       ```
       ls -1
       ```
@@ -30,7 +30,7 @@ Feature: running console commands
   Scenario: missing console command block
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_ConsoleCommand">
+      <a class="tutorialRunner_consoleCommand">
       foo
       </a>
       """
@@ -44,7 +44,7 @@ Feature: running console commands
   Scenario: empty console command
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_ConsoleCommand">
+      <a class="tutorialRunner_consoleCommand">
       ```
       ```
       </a>

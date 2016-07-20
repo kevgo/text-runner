@@ -10,7 +10,7 @@ module.exports = ->
 
   @Before ->
     rimraf.sync 'tmp'
-    fs.mkdir 'tmp'
+    fs.mkdir-sync 'tmp'
 
   @Before tags: ['@verbose'], ->
     @verbose = on

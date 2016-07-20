@@ -4,7 +4,10 @@ Feature: creating files with content
   I want to be able to create files with content
   So that my test suite has files to work with.
 
-  - a
+  - to create a file, wrap the code in an A tag with class "tutorialRunner_createFileWithContent"
+  - the file name is provided in bold
+  - content is provided as a triple-fenced code block
+
 
   Scenario: running a tutorial that creates files
     Given I am in a directory containing a file "creator.md" with the content:

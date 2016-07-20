@@ -4,14 +4,15 @@ Feature: running console commands
   I want my users to run console commands
   So that they can execute the tool I am describing.
 
-  - to run a console command, wrap the code in an A tag with class "tutorialRunner_consoleWithDollarPrompt"
+  - to run a console command, wrap the code in an A tag with class "tutorialRunner_consoleCommand"
   - the commands to run are provided in a triple-fenced code block
+  - the commands can be preceded by a dollar sign, which is stripped
 
 
   Scenario: running console commands with dollar signs
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_consoleWithDollarPrompt">
+      <a class="tutorialRunner_ConsoleCommand">
       ```
       $ ls -1
       $ ls -a
@@ -33,7 +34,7 @@ Feature: running console commands
   Scenario: running console commands without dollar signs
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_consoleWithDollarPrompt">
+      <a class="tutorialRunner_ConsoleCommand">
       ```
       ls -1
       ls -a
@@ -55,7 +56,7 @@ Feature: running console commands
   Scenario: missing console command block
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_consoleWithDollarPrompt">
+      <a class="tutorialRunner_ConsoleCommand">
       foo
       </a>
       """
@@ -69,7 +70,7 @@ Feature: running console commands
   Scenario: empty console command
     Given I am in a directory containing a file "running.md" with the content:
       """
-      <a class="tutorialRunner_consoleWithDollarPrompt">
+      <a class="tutorialRunner_ConsoleCommand">
       ```
       ```
       </a>

@@ -10,10 +10,11 @@ debug = require('debug')('console-with-dollar-prompt-runner')
 
 # Runs console command defined in a code block,
 # where each line starts with "$ "
-class ConsoleWithDollarPromptRunner
+class ConsoleCommandRunner
 
   (@markdown-file-path, @markdown-line) ->
     @console-commands = ''
+
 
   load: (node) ->
     @["_load#{capitalize node.type}"]? node
@@ -56,4 +57,4 @@ class ConsoleWithDollarPromptRunner
 
 
 
-module.exports = ConsoleWithDollarPromptRunner
+module.exports = ConsoleCommandRunner

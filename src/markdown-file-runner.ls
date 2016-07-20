@@ -5,7 +5,7 @@ require! {
   'path'
   'prelude-ls' : {capitalize}
   'remarkable' : Remarkable
-  './runners/console-with-dollar-prompt-runner' : ConsoleWithDollarPromptRunner
+  './runners/console-command-runner' : ConsoleCommandRunner
   './runners/console-with-input-from-table-runner' : ConsoleWithInputFromTableRunner
   './runners/create-file-with-content-runner' : CreateFileWithContentRunner
   './runners/verify-file-content-runner' : VerifyFileContentRunner

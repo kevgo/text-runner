@@ -8,7 +8,7 @@ require! {
 
 # Runs console command defined in a code block,
 # where each line starts with "$ "
-class CreateFileWithContentRunner
+class CreateFile
 
   (@markdown-file-path, @markdown-line) ->
 
@@ -70,4 +70,4 @@ class CreateFileWithContentRunner
 
 
 
-module.exports = CreateFileWithContentRunner
+module.exports = CreateFile

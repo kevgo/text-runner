@@ -4,7 +4,7 @@ Feature: creating files with content
   I want to be able to create files with content
   So that my test suite has files to work with.
 
-  - to create a file, wrap the code in an A tag with class "tutorialRunner_createFileWithContent"
+  - to create a file, wrap the code in an A tag with class "tutorialRunner_createFile"
   - the file name is provided in bold
   - content is provided as a triple-fenced code block
 
@@ -12,7 +12,7 @@ Feature: creating files with content
   Scenario: running a tutorial that creates files
     Given I am in a directory containing a file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFileWithContent">
+      <a class="tutorialRunner_createFile">
       __one.txt__
 
       ```
@@ -36,7 +36,7 @@ Feature: creating files with content
   Scenario: no file path given
     Given I am in a directory containing a file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFileWithContent">
+      <a class="tutorialRunner_createFile">
       ```
       Hello world!
       ```
@@ -52,7 +52,7 @@ Feature: creating files with content
   Scenario: no content block given
     Given I am in a directory containing a file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFileWithContent">
+      <a class="tutorialRunner_createFile">
       __one.txt__
       </a>
       """
@@ -66,7 +66,7 @@ Feature: creating files with content
   Scenario: two file paths given
     Given I am in a directory containing a file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFileWithContent">
+      <a class="tutorialRunner_createFile">
       __one.txt__
       __two.txt__
 
@@ -84,7 +84,7 @@ Feature: creating files with content
   Scenario: two content blocks given
     Given I am in a directory containing a file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFileWithContent">
+      <a class="tutorialRunner_createFile">
       __one.txt__
 
       ```

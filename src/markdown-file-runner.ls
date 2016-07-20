@@ -7,7 +7,7 @@ require! {
   'remarkable' : Remarkable
   './runners/console-command-runner' : ConsoleCommandRunner
   './runners/console-with-input-from-table-runner' : ConsoleWithInputFromTableRunner
-  './runners/create-file-with-content-runner' : CreateFileWithContentRunner
+  './runners/create-file-runner' : CreateFileRunner
   './runners/verify-file-content-runner' : VerifyFileContentRunner
 }
 debug = require('debug')('markdown-file-runner')

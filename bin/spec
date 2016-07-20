@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+killall node 2> /dev/null
+set -e
+if [ "$#" == "0" ]; then
+  node_modules/o-tools/bin/lint
+  cucumber-js
+else
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' cucumber-js "$@"
+fi

@@ -4,51 +4,25 @@ Feature: running console commands
   I want my users to run console commands
   So that they can execute the tool I am describing.
 
-  - to run a console command, wrap the code in an A tag with class "tutorialRunner_consoleCommand"
+  - to run a console command, wrap the code in an A tag with class
+    "tutorialRunner_consoleCommand"
   - the commands to run are provided in a triple-fenced code block
-  - the commands can be preceded by a dollar sign, which is stripped
+  - all commands run in a Bash shell, concatenated via " && "
 
 
-  Scenario: running console commands with dollar signs
-    Given I am in a directory containing a file "running.md" with the content:
-      """
-      <a class="tutorialRunner_ConsoleCommand">
-      ```
-      $ ls -1
-      $ ls -a
-      ```
-      </a>
-      """
-    When running "tut-run"
-    Then it prints:
-      """
-      running.md:1 -- running console commands: ls -1 && ls -a
-      running.md
-      .
-      ..
-      running.md
-      """
-    And the test passes
-
-
-  Scenario: running console commands without dollar signs
+  Scenario: running console commands
     Given I am in a directory containing a file "running.md" with the content:
       """
       <a class="tutorialRunner_ConsoleCommand">
       ```
       ls -1
-      ls -a
       ```
       </a>
       """
     When running "tut-run"
     Then it prints:
       """
-      running.md:1 -- running console commands: ls -1 && ls -a
-      running.md
-      .
-      ..
-      running.md
+      running.md:1 -- running console commands: ls -1
       """
     And the test passes
 

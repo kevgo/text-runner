@@ -59,7 +59,9 @@ class CreateFileWithContentRunner
 
   _load-text: (node) ~>
     | !@reading-file-path       =>  return
-    | @file-path.length > 0     =>  throw new Error "Several file paths found: '#{@file-path}' and '#{node.content}'"
+    | @file-path.length > 0     =>
+        console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: several file paths found: #{cyan @file-path} and #{cyan node.content}"
+        process.exit 1
 
     @file-path = node.content.trim!
     if @file-path.length is ''  then throw new Error 'Empty file path found'

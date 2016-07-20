@@ -58,3 +58,22 @@ Feature: creating files with content
       """
       creator.md:1 -- Error: no content given for file to create
       """
+
+
+  Scenario: two file paths given
+    Given I am in a directory containing a file "creator.md" with the content:
+      """
+      <a class="tutorialRunner_createFileWithContent">
+      __one.txt__
+      __two.txt__
+
+      ```
+      Hello world!
+      ```
+      </a>
+      """
+    When running "tut-run"
+    Then the test fails with exit code 1 and the error:
+      """
+      creator.md:1 -- Error: several file paths found: one.txt and two.txt
+      """

@@ -44,7 +44,9 @@ class CreateFileWithContentRunner
 
 
   _load-fence: (node) ~>
-    | @content.length > 0  =>  throw new Error 'Found second file content block, please provide only one'
+    | @content.length > 0  =>
+        console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: found second content block for file to create, please provide only one"
+        process.exit 1
 
     @content = node.content.trim!
 

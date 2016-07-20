@@ -15,5 +15,5 @@ Feature: Fail on non-actionable Markdown
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      no activities found
+      Error: no activities found
       """

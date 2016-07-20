@@ -16,24 +16,24 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  (@path) ->
-    @markdown-parser = new Remarkable 'full', html: yes
+  (@file-path) ->
+    @markdown-parser = new Remarkable 'full', html: on
 
-    # the current MFR runner instance
+    # the current block runner instance
     @current-runner = null
 
     # the current line in the current markdown file
-    @current-lines = 0
+    @current-line = 0
 
     # all runners
     @runners = []
 
 
   run: (done) ->
-    debug "checking file #{@path}"
-    markdown-text = fs.read-file-sync(@path, 'utf8').trim!
+    debug "checking file #{@file-path}"
+    markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0
-      console.log red "Error: found empty file #{cyan(path.relative process.cwd!, @path)}"
+      console.log red "Error: found empty file #{cyan(path.relative process.cwd!, @file-path)}"
       process.exit 1
     markdown-ast = @markdown-parser.parse markdown-text, {}
     @_check-nodes markdown-ast
@@ -44,7 +44,7 @@ class MarkdownFileRunner
 
   _check-nodes: (tree) ->
     for node in tree
-      @current-lines = node.lines if node.lines
+      @current-line = node.lines[0] + 1 if node.lines
       if node.type is 'htmltag'
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
@@ -52,7 +52,7 @@ class MarkdownFileRunner
           class-name = "#{capitalize matches[1]}Runner"
           debug "instantiating '#{class-name}'"
           clazz = eval class-name
-          @current-runner = new clazz path.relative(process.cwd!, @path), @current-lines
+          @current-runner = new clazz path.relative(process.cwd!, @file-path), @current-line
 
         if node.content is '</a>'
           @runners.push @current-runner if @current-runner

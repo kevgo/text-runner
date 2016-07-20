@@ -10,7 +10,7 @@ require! {
 # where each line starts with "$ "
 class CreateFileWithContentRunner
 
-  (@markdown-file-path, @markdown-lines) ->
+  (@markdown-file-path, @markdown-line) ->
 
     # whether we are currently within a bold section that contains the file path
     @reading-file-path = no
@@ -28,7 +28,7 @@ class CreateFileWithContentRunner
 
   run: (done) ->
     console.log """
-      #{@markdown-file-path}:#{@markdown-lines[0] + 1} -- creating file #{cyan @file-path} with content:
+      #{@markdown-file-path}:#{@markdown-line} -- creating file #{cyan @file-path} with content:
       #{cyan @content}
 
       """

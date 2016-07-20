@@ -6,7 +6,6 @@ Feature: creating files with content
 
   - a
 
-  @verbose
   Scenario: running a tutorial that creates files
     Given I am in a directory containing a file "creator.md" with the content:
       """
@@ -31,7 +30,6 @@ Feature: creating files with content
       """
 
 
-  @verbose
   Scenario: no file path given
     Given I am in a directory containing a file "creator.md" with the content:
       """
@@ -45,4 +43,18 @@ Feature: creating files with content
     Then the test fails with exit code 1 and the error:
       """
       creator.md:1 -- Error: no path given for file to create
+      """
+
+
+  Scenario: no content block given
+    Given I am in a directory containing a file "creator.md" with the content:
+      """
+      <a class="tutorialRunner_createFileWithContent">
+      __one.txt__
+      </a>
+      """
+    When running "tut-run"
+    Then the test fails with exit code 1 and the error:
+      """
+      creator.md:1 -- Error: no content given for file to create
       """

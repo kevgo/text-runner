@@ -30,6 +30,9 @@ class CreateFileWithContentRunner
     unless @file-path
       console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: no path given for file to create"
       process.exit 1
+    unless @content
+      console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: no content given for file to create"
+      process.exit 1
     console.log """
       #{@markdown-file-path}:#{@markdown-line} -- creating file #{cyan @file-path} with content:
       #{cyan @content}

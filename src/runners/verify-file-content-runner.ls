@@ -21,7 +21,7 @@ class VerifyFileContentRunner
     @file-path = ''
 
     # content of the file to verify
-    @content = ''
+    @expected-content = ''
 
 
   load: (node) ->
@@ -30,12 +30,12 @@ class VerifyFileContentRunner
 
   run: (done) ->
     try
-      content = fs.read-file-sync @file-path, 'utf8'
+      actual-content = fs.read-file-sync @file-path, 'utf8'
     catch
       if e.code is 'ENOENT'
         console.log red "#{@markdown-file-path}:#{@markdown-lines[0] + 1} -- file #{@file-path} not found"
         return done 1
-    jsdiff-console content, @content, (err) ~>
+    jsdiff-console actual-content, @expected-content, (err) ~>
       if err
         console.log red "#{@markdown-file-path}:#{@markdown-lines[0] + 1} -- mismatching content in #{@file-path}:"
         console.log err.message
@@ -43,14 +43,14 @@ class VerifyFileContentRunner
       console.log """
         #{@markdown-file-path}:#{@markdown-lines[0] + 1} -- verifying file #{cyan @file-path}
         """
-      done!
+      done null, 1
 
 
 
   _load-fence: (node) ~>
-    | @content.length > 0  =>  throw new Error 'Found second file content block, please provide only one'
+    | @expected-content.length > 0  =>  throw new Error 'Found second file content block, please provide only one'
 
-    @content = node.content.trim!
+    @expected-content = node.content.trim!
 
 
   _load-strong_open: (node) ~>
@@ -64,9 +64,9 @@ class VerifyFileContentRunner
   _load-text: (node) ~>
     | !@reading-file-path       =>  return
     | @file-path.length > 0     =>  throw new Error 'Found a file path, but already have one'
-    | node.content.trim! is ''  =>  throw new Error 'No file path found'
 
     @file-path = node.content.trim!
+    if node.content.trim! is '' then throw new Error 'No file path found'
 
 
 

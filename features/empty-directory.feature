@@ -11,6 +11,6 @@ Feature: failing on empty directory
     When running "tut-run" in an empty directory
     Then the test fails with exit code 1 and the error:
       """
-      no files found
+      no Markdown files found
       """
 

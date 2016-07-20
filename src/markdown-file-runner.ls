@@ -1,6 +1,6 @@
 require! {
   'async'
-  'events' : EventEmitter
+  'chalk' : {cyan, red}
   'fs'
   'path'
   'prelude-ls' : {capitalize}
@@ -14,7 +14,7 @@ debug = require('debug')('markdown-file-runner')
 
 
 # Runs the given Markdown file
-class MarkdownFileRunner extends EventEmitter
+class MarkdownFileRunner
 
   (@path) ->
     @markdown-parser = new Remarkable 'full', html: yes
@@ -33,14 +33,11 @@ class MarkdownFileRunner extends EventEmitter
     debug "checking file #{@path}"
     markdown-text = fs.read-file-sync(@path, 'utf8').trim!
     if markdown-text.length is 0
-      @emit 'error', "empty file: #{path.relative process.cwd!, @path}"
-      @emit 'fail'
-      return
+      console.log red "Error: found empty file #{cyan(path.relative process.cwd!, @path)}"
+      process.exit 1
     markdown-ast = @markdown-parser.parse markdown-text, {}
     @_check-nodes markdown-ast
-    if @runners.length > 0
-      @emit 'found-tests', @path, @runners.length
-    async.each-series @runners,
+    async.map-series @runners,
                       ((runner, cb) -> runner.run cb),
                       done
 

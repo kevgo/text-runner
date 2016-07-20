@@ -32,7 +32,8 @@ class CreateFileWithContentRunner
       #{cyan @content}
 
       """
-    fs.write-file @file-path, @content, done
+    fs.write-file @file-path, @content, (err) ->
+      done err, 1
 
 
 

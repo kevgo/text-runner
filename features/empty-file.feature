@@ -12,5 +12,5 @@ Feature: running empty files
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      empty file: empty.md
+      Error: found empty file empty.md
       """

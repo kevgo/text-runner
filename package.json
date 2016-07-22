@@ -19,7 +19,7 @@
     "chai": "3.5.0",
     "cucumber": "1.2.1",
     "cucumber-snippets-livescript": "1.0.1",
-    "o-tools": "0.4.16",
+    "o-tools": "0.4.18",
     "o-tools-livescript": "1.1.2",
     "rimraf": "2.5.3"
   },

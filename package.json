@@ -12,6 +12,7 @@
     "observable-process": "2.2.0",
     "prelude-ls": "1.1.2",
     "remarkable": "1.6.2",
+    "uppercamelcase": "^1.1.0",
     "xmldoc": "0.5.1"
   },
   "description": "Executes tutorials written in MarkDown",

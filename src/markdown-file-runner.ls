@@ -3,11 +3,11 @@ require! {
   'chalk' : {bold, cyan, red}
   'fs'
   'path'
-  'prelude-ls' : {capitalize}
   'remarkable' : Remarkable
   './runners/console-command-runner' : ConsoleCommandRunner
   './runners/create-file-runner' : CreateFileRunner
   './runners/verify-file-content-runner' : VerifyFileContentRunner
+  'uppercamelcase'
 }
 debug = require('debug')('markdown-file-runner')
 
@@ -47,7 +47,7 @@ class MarkdownFileRunner
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
           if @current-runner then @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
-          class-name = "#{capitalize matches[1]}Runner"
+          class-name = "#{uppercamelcase matches[1]}Runner"
           debug "instantiating '#{class-name}'"
           clazz = eval class-name
           @current-runner = new clazz @current-line, @formatter

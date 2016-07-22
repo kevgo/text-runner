@@ -11,7 +11,7 @@ Feature: running console commands
 
 
   Scenario: running console commands
-    Given I am in a directory containing a file "running.md" with the content:
+    Given my workspace contains the file "running.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
@@ -28,7 +28,7 @@ Feature: running console commands
 
 
   Scenario: missing console command block
-    Given I am in a directory containing a file "running.md" with the content:
+    Given my workspace contains the file "running.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       foo
@@ -42,7 +42,7 @@ Feature: running console commands
 
 
   Scenario: empty console command
-    Given I am in a directory containing a file "running.md" with the content:
+    Given my workspace contains the file "running.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```

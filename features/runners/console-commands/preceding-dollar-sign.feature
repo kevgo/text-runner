@@ -9,7 +9,7 @@ Feature: marking console commands with preceding dollar signs
 
 
   Scenario: running console commands with dollar signs
-    Given I am in a directory containing a file "running-with-dollar-sign.md" with the content:
+    Given my workspace contains the file "running-with-dollar-sign.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
@@ -23,8 +23,10 @@ Feature: marking console commands with preceding dollar signs
       """
       running-with-dollar-sign.md:1 -- running console command: ls -1 && ls -a
       running-with-dollar-sign.md
+      tmp
       .
       ..
       running-with-dollar-sign.md
+      tmp
       """
     And the test passes

@@ -2,12 +2,25 @@
    'chai' : {expect}
    'dim-console'
    'fs'
+   'mkdirp'
    'observable-process' : ObservableProcess
    'path'
  }
 
 
 module.exports = ->
+
+
+  @Given /^a runnable file$/ ->
+    fs.write-file-sync path.join('tmp', 'test.md'), """
+      <a class="tutorialRunner_createFile">
+      __one.txt__
+
+      ```
+      Hello world!
+      ```
+      </a>
+      """
 
 
   @Given /^a runnable file "([^"]*)"$/ (file-path) ->
@@ -22,20 +35,19 @@ module.exports = ->
       </a>
       """
 
-  @Given /^I am in the directory of the tutorial "([^"]*)"$/ (name) ->
-     @app-dir = path.join process.cwd!, 'features', 'example-tutorials', name
 
-
-  @Given /^I am in a directory containing a file "([^"]*)" with the content:$/ (file-name, content) ->
+  @Given /^my workspace contains the file "([^"]*)" with the content:$/ (file-name, content) ->
     fs.write-file-sync path.join('tmp', file-name), content
 
 
-  @Given /^I am in a directory containing an empty file "([^"]*)"$/ (file-name) ->
+  @Given /^my workspace contains an empty file "([^"]*)"$/ (file-name) ->
     fs.write-file-sync path.join('tmp', file-name), ''
 
 
-  @Given /^the file "([^"]*)" with the content:$/ (file-name, content) ->
-    fs.write-file-sync path.join('tmp', file-name), content
+  @Given /^the test directory contains the file "([^"]*)" with the content:$/ (file-name, content) ->
+    base-dir = path.join 'tmp', 'tmp', 'tut-run'
+    mkdirp.sync base-dir
+    fs.write-file-sync path.join(base-dir, file-name), content
 
 
 
@@ -53,6 +65,10 @@ module.exports = ->
 
 
 
+  @Then /^it creates a directory "([^"]*)"$/ (directory-path) ->
+    fs.stat-sync path.join 'tmp', directory-path
+
+
   @Then /^it runs (\d+) test$/ (count) ->
     expect(@process.full-output!).to.include " #{count} steps"
 
@@ -61,8 +77,14 @@ module.exports = ->
     expect(@process.full-output!).to.include expected-text
 
 
-  @Then /^the directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
+  @Then /^my workspace still contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
     expect(fs.read-file-sync path.join('tmp', file-name), 'utf8').to.equal expected-content
+
+
+  @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
+    # The first "tmp" folder is for Cucumber (it creates the Markdown test files in there.
+    # The second "tmp" folder is created by Tutorial Runner
+    expect(fs.read-file-sync path.join('tmp', 'tmp', 'tut-run', file-name), 'utf8').to.equal expected-content
 
 
   @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->

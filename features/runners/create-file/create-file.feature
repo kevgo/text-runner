@@ -10,7 +10,7 @@ Feature: creating files with content
 
 
   Scenario: running a tutorial that creates files
-    Given I am in a directory containing a file "creator.md" with the content:
+    Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tutorialRunner_createFile">
       __one.txt__
@@ -26,14 +26,14 @@ Feature: creating files with content
       creator.md:1 -- creating file one.txt
       """
     And the test passes
-    And the directory now contains a file "one.txt" with content:
+    And the test directory now contains a file "one.txt" with content:
       """
       Hello world!
       """
 
 
   Scenario: no file path given
-    Given I am in a directory containing a file "creator.md" with the content:
+    Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tutorialRunner_createFile">
       ```
@@ -49,7 +49,7 @@ Feature: creating files with content
 
 
   Scenario: no content block given
-    Given I am in a directory containing a file "creator.md" with the content:
+    Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tutorialRunner_createFile">
       __one.txt__
@@ -63,7 +63,7 @@ Feature: creating files with content
 
 
   Scenario: two file paths given
-    Given I am in a directory containing a file "creator.md" with the content:
+    Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tutorialRunner_createFile">
       __one.txt__
@@ -81,7 +81,7 @@ Feature: creating files with content
       """
 
   Scenario: two content blocks given
-    Given I am in a directory containing a file "creator.md" with the content:
+    Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tutorialRunner_createFile">
       __one.txt__

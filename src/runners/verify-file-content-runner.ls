@@ -3,6 +3,7 @@ require! {
   'chalk' : {cyan, red}
   'fs'
   'jsdiff-console'
+  'path'
   'prelude-ls' : {capitalize}
 }
 debug = require('debug')('verify-file-content-runner')
@@ -34,7 +35,7 @@ class VerifyFileContentRunner
   run: (done) ->
     @formatter.start-activity "verifying file #{cyan @file-path}", @markdown-line
     try
-      actual-content = fs.read-file-sync @file-path, 'utf8'
+      actual-content = fs.read-file-sync path.join(global.working-dir, @file-path), 'utf8'
     catch
       if e.code is 'ENOENT'
         @formatter.activity-error "file #{@file-path} not found"

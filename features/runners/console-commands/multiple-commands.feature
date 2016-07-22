@@ -7,8 +7,9 @@ Feature: running multiple console commands
   - all commands provided are run in a Bash shell, concatenated via " && "
 
 
+  @verbose
   Scenario: running multiple console commands
-    Given I am in a directory containing a file "running-multiple-commands.md" with the content:
+    Given my workspace contains the file "running-multiple-commands.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
@@ -22,8 +23,10 @@ Feature: running multiple console commands
       """
       running-multiple-commands.md:1 -- running console command: ls -1 && ls -a
       running-multiple-commands.md
+      tmp
       .
       ..
       running-multiple-commands.md
+      tmp
       """
     And the test passes

@@ -1,6 +1,7 @@
 require! {
   'chalk' : {bold, cyan, red}
   'fs'
+  'path'
   'prelude-ls' : {capitalize}
   'xmldoc' : {XmlDocument}
 }
@@ -34,7 +35,7 @@ class CreateFileRunner
     if !@file-path then @formatter.error 'no path given for file to create', @currently-loaded-node-line
     if !@content   then @formatter.error 'no content given for file to create', @currently-loaded-node-line
     @formatter.start-activity "creating file #{cyan @file-path}", @markdown-line
-    fs.write-file @file-path, @content, (err) ~>
+    fs.write-file path.join(global.working-dir, @file-path), @content, (err) ~>
       | err  =>  @formatter.activity-error!
       @formatter.activity-success!
       done null, 1

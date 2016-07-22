@@ -8,7 +8,7 @@ Feature: Fail on non-actionable Markdown
 
 
   Scenario: tutorial with no actions
-    Given I am in a directory containing a file "just-text.md" with the content:
+    Given my workspace contains the file "just-text.md" with the content:
       """
       Just text here, nothing to do!
       """

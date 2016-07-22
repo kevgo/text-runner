@@ -20,12 +20,6 @@ class StandardFormatter
   start-file: (@documentation-file-path) ->
 
 
-  # Called when we ran into an error parsing a block in a markdown file
-  parse-error: (message, line) ->
-    console.log red "#{bold @documentation-file-path}:#{bold line} -- Error: #{message}"
-    process.exit 1
-
-
   # Called when we start performing an activity that was defined in a block
   start-activity: (text, @documentation-file-line) ->
     console.log "#{bold @documentation-file-path}:#{bold @documentation-file-line} -- #{text}"

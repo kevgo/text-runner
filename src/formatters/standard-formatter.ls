@@ -17,15 +17,11 @@ class StandardFormatter
 
 
   # called when we start processing a markdown file
-  start-documentation-file: (@documentation-file-path) ->
-
-
-  # called when we are done processing a markdown file
-  done-with-documentation-file: ->
+  start-file: (@documentation-file-path) ->
 
 
   # Called when we ran into an error parsing a block in a markdown file
-  parse-block-error: (message, line) ->
+  parse-error: (message, line) ->
     console.log red "#{bold @documentation-file-path}:#{bold line} -- Error: #{message}"
     process.exit 1
 
@@ -33,6 +29,7 @@ class StandardFormatter
   # Called when we start performing an activity that was defined in a block
   start-activity: (text, @documentation-file-line) ->
     console.log "#{bold @documentation-file-path}:#{bold @documentation-file-line} -- #{text}"
+
 
   # called when the last started activity finished successful
   activity-success: ->
@@ -50,15 +47,8 @@ class StandardFormatter
 
 
   # called when the whole test suite passed
-  suite-passes: (steps-count) ->
+  suite-success: (steps-count) ->
     console.log green "\nSuccess! #{steps-count} steps passed"
-
-
-
-
-  # indents the given text by the given number of spaces
-  indent-text: (text, count) ->
-    text.replace /^/gm, ' '*count
 
 
 

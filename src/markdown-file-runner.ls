@@ -29,7 +29,7 @@ class MarkdownFileRunner
 
 
   run: (done) ->
-    @formatter.start-documentation-file path.relative(process.cwd!, @file-path)
+    @formatter.start-file path.relative(process.cwd!, @file-path)
     markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0
       @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
@@ -46,7 +46,7 @@ class MarkdownFileRunner
       if node.type is 'htmltag'
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
-          throw new Error 'Found a nested <a class="tutorialRunner_*"> block' if @current-runner
+          if @current-runner then @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
           class-name = "#{capitalize matches[1]}Runner"
           debug "instantiating '#{class-name}'"
           clazz = eval class-name

@@ -31,8 +31,8 @@ class CreateFileRunner
 
 
   run: (done) ->
-    if !@file-path then @formatter.parse-block-error 'no path given for file to create', @currently-loaded-node-line
-    if !@content   then @formatter.parse-block-error 'no content given for file to create', @currently-loaded-node-line
+    if !@file-path then @formatter.parse-error 'no path given for file to create', @currently-loaded-node-line
+    if !@content   then @formatter.parse-error 'no content given for file to create', @currently-loaded-node-line
     @formatter.start-activity "creating file #{cyan @file-path}", @markdown-line
     fs.write-file @file-path, @content, (err) ~>
       | err  =>  @formatter.activity-error!
@@ -42,7 +42,7 @@ class CreateFileRunner
 
 
   _load-fence: (node) ~>
-    | @content.length > 0  =>  @formatter.parse-block-error 'found second content block for file to create, please provide only one', node.lines[0] + 1
+    | @content.length > 0  =>  @formatter.parse-error 'found second content block for file to create, please provide only one', node.lines[0] + 1
     @content = node.content.trim!
 
 
@@ -56,9 +56,9 @@ class CreateFileRunner
 
   _load-text: (node) ~>
     | !@reading-file-path    =>  return
-    | @file-path.length > 0  =>  @formatter.parse-block-error "several file paths found: #{cyan @file-path} and #{cyan node.content}", @currently-loaded-node-line
+    | @file-path.length > 0  =>  @formatter.parse-error "several file paths found: #{cyan @file-path} and #{cyan node.content}", @currently-loaded-node-line
     @file-path = node.content.trim!
-    if @file-path.length is ''  then @formatter.parse-block-error 'Empty file path found'
+    if @file-path.length is ''  then @formatter.parse-error 'Empty file path found'
 
 
 

@@ -21,7 +21,7 @@ class TutorialRunner
       | err  =>  process.exit 1
       if (steps-count = results |> flatten |> sum) is 0
         @formatter.error 'no activities found'
-      @formatter.suite-passes steps-count
+      @formatter.suite-success steps-count
 
 
   # Returns all the markdown files for this tutorial

@@ -11,18 +11,6 @@
 module.exports = ->
 
 
-  @Given /^a runnable file$/ ->
-    fs.write-file-sync path.join('tmp', 'test.md'), """
-      <a class="tutorialRunner_createFile">
-      __one.txt__
-
-      ```
-      Hello world!
-      ```
-      </a>
-      """
-
-
   @Given /^a runnable file "([^"]*)"$/ (file-path) ->
     fs.mkdir-sync path.join 'tmp', subdir if (subdir = path.dirname file-path) isnt '.'
     fs.write-file-sync path.join('tmp', file-path), """
@@ -51,7 +39,7 @@ module.exports = ->
 
 
 
-  @When /^running "([^"]*)"(?: in an empty directory)?$/ (command, done) ->
+  @When /^running "([^"]*)"(?: in an empty workspace)?$/ (command, done) ->
     args =
       cwd: 'tmp'
       console: off
@@ -77,10 +65,6 @@ module.exports = ->
     expect(@process.full-output!).to.include expected-text
 
 
-  @Then /^my workspace still contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
-    expect(fs.read-file-sync path.join('tmp', file-name), 'utf8').to.equal expected-content
-
-
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
     # The first "tmp" folder is for Cucumber (it creates the Markdown test files in there.
     # The second "tmp" folder is created by Tutorial Runner
@@ -90,6 +74,7 @@ module.exports = ->
   @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->
     expect(@process.full-output!).to.include expected-text
     expect(@exit-code).to.equal expected-exit-code
+
 
   @Then /^the test passes$/ ->
     expect(@exit-code).to.equal 0

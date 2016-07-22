@@ -8,7 +8,7 @@ Feature: failing on empty directory
 
 
   Scenario: running inside an empty directory
-    When running "tut-run" in an empty directory
+    When running "tut-run" in an empty workspace
     Then the test fails with exit code 1 and the error:
       """
       no Markdown files found

@@ -9,6 +9,19 @@
 
 module.exports = ->
 
+
+  @Given /^a runnable file "([^"]*)"$/ (file-path) ->
+    fs.mkdir-sync path.join 'tmp', subdir if (subdir = path.dirname file-path) isnt '.'
+    fs.write-file-sync path.join('tmp', file-path), """
+      <a class="tutorialRunner_createFile">
+      __one.txt__
+
+      ```
+      Hello world!
+      ```
+      </a>
+      """
+
   @Given /^I am in the directory of the tutorial "([^"]*)"$/ (name) ->
      @app-dir = path.join process.cwd!, 'features', 'example-tutorials', name
 
@@ -38,6 +51,10 @@ module.exports = ->
     @process = new ObservableProcess path.join(process.cwd!, 'bin', command), args
       ..on 'ended', (@exit-code) ~> done!
 
+
+
+  @Then /^it runs (\d+) test$/ (count) ->
+    expect(@process.full-output!).to.include " #{count} steps"
 
 
   @Then /^it prints:$/ (expected-text) ->

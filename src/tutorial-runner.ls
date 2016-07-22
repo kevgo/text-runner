@@ -26,7 +26,7 @@ class TutorialRunner
 
   # Returns all the markdown files for this tutorial
   _markdown-files: (dir) ->
-    if (files = glob.sync "#{dir}/*.md").length is 0
+    if (files = glob.sync "#{dir}/**/*.md").length is 0
       @formatter.error 'no Markdown files found'
     files
 

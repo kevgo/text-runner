@@ -41,8 +41,17 @@ class StandardFormatter
     process.exit 1
 
 
-  error: (message) ->
-    console.log red "Error: #{message}"
+  # Called on general errors
+  error: (message, line = @documentation-file-line) ->
+    text = ''
+    if @documentation-file-path
+      text += "#{bold @documentation-file-path}"
+    if line > -1
+      text += ":#{bold line}"
+    if text.length > 0
+      text += ' -- '
+    text += "Error: #{message}"
+    console.log red text
     process.exit 1
 
 

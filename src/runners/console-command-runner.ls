@@ -26,7 +26,7 @@ class ConsoleCommandRunner
 
   # Runs all commands given in the current block
   run: (done) ->
-    if !@commands-to-run then @formatter.parse-error 'no console commands to run found', @currently-loaded-node-line
+    if !@commands-to-run then @formatter.error 'no console commands to run found', @currently-loaded-node-line
     @formatter.start-activity "running console command: #{cyan @commands-to-run}", @markdown-line
     new ObservableProcess ['bash', '-c', @commands-to-run], console: dim-console.console
       ..on 'ended', (err) ~>
@@ -37,7 +37,7 @@ class ConsoleCommandRunner
 
   # Loads the commands to be executed from the given code block node
   _load-fence: (node) ->
-    | node.content.trim! is ''  =>  @formatter.parse-error 'the block that defines console commands to run is empty', @currently-loaded-node-line
+    | node.content.trim! is ''  =>  @formatter.error 'the block that defines console commands to run is empty', @currently-loaded-node-line
     @commands-to-run = ([@_trim-dollar(command.trim!) for command in node.content.split '\n'] |> compact).join ' && '
 
 

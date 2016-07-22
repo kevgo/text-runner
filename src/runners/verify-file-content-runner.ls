@@ -47,7 +47,7 @@ class VerifyFileContentRunner
 
 
   _load-fence: (node) ~>
-    | @expected-content.length > 0  =>  @formatter.parse-error 'Found second file content block, please provide only one', @currently-loaded-node-line
+    | @expected-content.length > 0  =>  @formatter.error 'Found second file content block, please provide only one', @currently-loaded-node-line
 
     @expected-content = node.content.trim!
 
@@ -62,10 +62,10 @@ class VerifyFileContentRunner
 
   _load-text: (node) ~>
     | !@reading-file-path       =>  return
-    | @file-path.length > 0     =>  @formatter.parse-error 'Found a file path, but already have one', @currently-loaded-node-line
+    | @file-path.length > 0     =>  @formatter.error 'Found a file path, but already have one', @currently-loaded-node-line
 
     @file-path = node.content.trim!
-    if node.content.trim! is '' then @formatter.parse-error 'No file path found', @currently-loaded-node-line
+    if node.content.trim! is '' then @formatter.error 'No file path found', @currently-loaded-node-line
 
 
 

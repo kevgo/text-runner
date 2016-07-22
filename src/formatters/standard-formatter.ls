@@ -24,22 +24,14 @@ class StandardFormatter
   done-with-documentation-file: ->
 
 
-  # Called when we start processing an active block in a markdown file
-  start-block: (@documentation-file-line) ->
-
-
   # Called when we ran into an error parsing a block in a markdown file
   parse-block-error: (message, line) ->
     console.log red "#{bold @documentation-file-path}:#{bold line} -- Error: #{message}"
     process.exit 1
 
 
-  done-with-block: ->
-    @documentation-file-line = null
-
-
   # Called when we start performing an activity that was defined in a block
-  start-activity: (text) ->
+  start-activity: (text, @documentation-file-line) ->
     console.log "#{bold @documentation-file-path}:#{bold @documentation-file-line} -- #{text}"
 
   # called when the last started activity finished successful

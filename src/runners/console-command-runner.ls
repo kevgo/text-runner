@@ -26,9 +26,8 @@ class ConsoleCommandRunner
 
   # Runs all commands given in the current block
   run: (done) ->
-    @formatter.start-block @markdown-line
     if !@commands-to-run then @formatter.parse-block-error 'no console commands to run found', @currently-loaded-node-line
-    @formatter.start-activity "running console command: #{cyan @commands-to-run}"
+    @formatter.start-activity "running console command: #{cyan @commands-to-run}", @markdown-line
     new ObservableProcess ['bash', '-c', @commands-to-run], console: dim-console.console
       ..on 'ended', (err) ~>
         | err  =>  @formatter.activity-error err

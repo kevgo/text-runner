@@ -31,10 +31,9 @@ class CreateFileRunner
 
 
   run: (done) ->
-    @formatter.start-block @markdown-line
-    if !@file-path then @formatter.activity-error 'no path given for file to create'
-    if !@content   then @formatter.activity-error 'no content given for file to create'
-    @formatter.start-activity "creating file #{cyan @file-path}"
+    if !@file-path then @formatter.parse-block-error 'no path given for file to create', @currently-loaded-node-line
+    if !@content   then @formatter.parse-block-error 'no content given for file to create', @currently-loaded-node-line
+    @formatter.start-activity "creating file #{cyan @file-path}", @markdown-line
     fs.write-file @file-path, @content, (err) ~>
       | err  =>  @formatter.activity-error!
       @formatter.activity-success!

@@ -32,8 +32,7 @@ class VerifyFileContentRunner
 
 
   run: (done) ->
-    @formatter.start-block @markdown-line
-    @formatter.start-activity "verifying file #{cyan @file-path}"
+    @formatter.start-activity "verifying file #{cyan @file-path}", @markdown-line
     try
       actual-content = fs.read-file-sync @file-path, 'utf8'
     catch

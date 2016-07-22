@@ -23,8 +23,7 @@ Feature: creating files with content
     When running "tut-run"
     Then it prints:
       """
-      creator.md:1 -- creating file one.txt with content:
-      Hello world!
+      creator.md:1 -- creating file one.txt
       """
     And the test passes
     And the directory now contains a file "one.txt" with content:
@@ -100,5 +99,5 @@ Feature: creating files with content
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      creator.md:1 -- Error: found second content block for file to create, please provide only one
+      creator.md:8 -- Error: found second content block for file to create, please provide only one
       """

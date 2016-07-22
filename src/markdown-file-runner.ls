@@ -1,12 +1,11 @@
 require! {
   'async'
-  'chalk' : {cyan, red}
+  'chalk' : {bold, cyan, red}
   'fs'
   'path'
   'prelude-ls' : {capitalize}
   'remarkable' : Remarkable
   './runners/console-command-runner' : ConsoleCommandRunner
-  './runners/console-with-input-from-table-runner' : ConsoleWithInputFromTableRunner
   './runners/create-file-runner' : CreateFileRunner
   './runners/verify-file-content-runner' : VerifyFileContentRunner
 }
@@ -16,13 +15,13 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  (@file-path) ->
+  (@file-path, @formatter) ->
+
     @markdown-parser = new Remarkable 'full', html: on
 
     # the current block runner instance
     @current-runner = null
 
-    # the current line in the current markdown file
     @current-line = 0
 
     # all runners
@@ -30,11 +29,10 @@ class MarkdownFileRunner
 
 
   run: (done) ->
-    debug "checking file #{@file-path}"
+    @formatter.start-documentation-file path.relative(process.cwd!, @file-path)
     markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0
-      console.log red "Error: found empty file #{cyan(path.relative process.cwd!, @file-path)}"
-      process.exit 1
+      @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
     markdown-ast = @markdown-parser.parse markdown-text, {}
     @_check-nodes markdown-ast
     async.map-series @runners,
@@ -48,11 +46,11 @@ class MarkdownFileRunner
       if node.type is 'htmltag'
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
-          throw new Error 'Found a nested <a class="tutorialRunner_*"> block' if @running
+          throw new Error 'Found a nested <a class="tutorialRunner_*"> block' if @current-runner
           class-name = "#{capitalize matches[1]}Runner"
           debug "instantiating '#{class-name}'"
           clazz = eval class-name
-          @current-runner = new clazz path.relative(process.cwd!, @file-path), @current-line
+          @current-runner = new clazz @current-line, @formatter
 
         if node.content is '</a>'
           @runners.push @current-runner if @current-runner

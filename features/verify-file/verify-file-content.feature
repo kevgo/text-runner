@@ -47,7 +47,7 @@ Feature: verifying file content
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      file-content-verifier.md:3 -- mismatching content in one.txt:
+      file-content-verifier.md:3 -- Error: mismatching content in one.txt:
       mismatching records:
 
       Hello world!Unexpected content here
@@ -62,5 +62,5 @@ Feature: verifying file content
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      file-content-verifier.md:3 -- file one.txt not found
+      file-content-verifier.md:3 -- Error: file one.txt not found
       """

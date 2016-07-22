@@ -12,7 +12,7 @@ debug = require('debug')('verify-file-content-runner')
 # has the content provided as a code block
 class VerifyFileContentRunner
 
-  (@markdown-file-path, @markdown-line) ->
+  (@markdown-line, @formatter) ->
 
     # whether we are currently within a bold section that contains the file path
     @reading-file-path = no
@@ -23,26 +23,26 @@ class VerifyFileContentRunner
     # content of the file to verify
     @expected-content = ''
 
+    # the line of the node that is currently being parsed
+    @currently-loaded-node-line = 1
+
 
   load: (node) ->
     @["_load#{capitalize node.type}"]? node
 
 
   run: (done) ->
+    @formatter.start-block @markdown-line
+    @formatter.start-activity "verifying file #{cyan @file-path}"
     try
       actual-content = fs.read-file-sync @file-path, 'utf8'
     catch
       if e.code is 'ENOENT'
-        console.log red "#{@markdown-file-path}:#{@markdown-line} -- file #{@file-path} not found"
-        return done 1
+        @formatter.activity-error "file #{@file-path} not found"
     jsdiff-console actual-content, @expected-content, (err) ~>
       if err
-        console.log red "#{@markdown-file-path}:#{@markdown-line} -- mismatching content in #{@file-path}:"
-        console.log err.message
-        return done err
-      console.log """
-        #{@markdown-file-path}:#{@markdown-line} -- verifying file #{cyan @file-path}
-        """
+        @formatter.activity-error "mismatching content in #{@file-path}:\n#{err.message}"
+      @formatter.activity-success!
       done null, 1
 
 

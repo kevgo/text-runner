@@ -20,7 +20,7 @@ Feature: running multiple console commands
     When running "tut-run"
     Then it prints:
       """
-      running-multiple-commands.md:1 -- running console commands: ls -1 && ls -a
+      running-multiple-commands.md:1 -- running console command: ls -1 && ls -a
       running-multiple-commands.md
       .
       ..

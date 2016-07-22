@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {cyan, red}
+  'chalk' : {bold, cyan, red}
   'fs'
   'prelude-ls' : {capitalize}
   'xmldoc' : {XmlDocument}
@@ -8,9 +8,9 @@ require! {
 
 # Runs console command defined in a code block,
 # where each line starts with "$ "
-class CreateFile
+class CreateFileRunner
 
-  (@markdown-file-path, @markdown-line) ->
+  (@markdown-line, @formatter) ->
 
     # whether we are currently within a bold section that contains the file path
     @reading-file-path = no
@@ -21,33 +21,29 @@ class CreateFile
     # content of the file to create
     @content = ''
 
+    # the line of the node that is currently being parsed
+    @currently-loaded-node-line = 1
+
 
   load: (node) ->
+    @currently-loaded-node-line = node.lines[0] + 1 if node.lines
     @["_load#{capitalize node.type}"]? node
 
 
   run: (done) ->
-    unless @file-path
-      console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: no path given for file to create"
-      process.exit 1
-    unless @content
-      console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: no content given for file to create"
-      process.exit 1
-    console.log """
-      #{@markdown-file-path}:#{@markdown-line} -- creating file #{cyan @file-path} with content:
-      #{cyan @content}
-
-      """
-    fs.write-file @file-path, @content, (err) ->
-      done err, 1
+    @formatter.start-block @markdown-line
+    if !@file-path then @formatter.activity-error 'no path given for file to create'
+    if !@content   then @formatter.activity-error 'no content given for file to create'
+    @formatter.start-activity "creating file #{cyan @file-path}"
+    fs.write-file @file-path, @content, (err) ~>
+      | err  =>  @formatter.activity-error!
+      @formatter.activity-success!
+      done null, 1
 
 
 
   _load-fence: (node) ~>
-    | @content.length > 0  =>
-        console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: found second content block for file to create, please provide only one"
-        process.exit 1
-
+    | @content.length > 0  =>  @formatter.parse-block-error 'found second content block for file to create, please provide only one', node.lines[0] + 1
     @content = node.content.trim!
 
 
@@ -60,14 +56,11 @@ class CreateFile
 
 
   _load-text: (node) ~>
-    | !@reading-file-path       =>  return
-    | @file-path.length > 0     =>
-        console.log red "#{@markdown-file-path}:#{@markdown-line} -- Error: several file paths found: #{cyan @file-path} and #{cyan node.content}"
-        process.exit 1
-
+    | !@reading-file-path    =>  return
+    | @file-path.length > 0  =>  @formatter.parse-block-error "several file paths found: #{cyan @file-path} and #{cyan node.content}", @currently-loaded-node-line
     @file-path = node.content.trim!
-    if @file-path.length is ''  then throw new Error 'Empty file path found'
+    if @file-path.length is ''  then @formatter.parse-block-error 'Empty file path found'
 
 
 
-module.exports = CreateFile
+module.exports = CreateFileRunner

@@ -22,7 +22,7 @@ Feature: running console commands
     When running "tut-run"
     Then it prints:
       """
-      running.md:1 -- running console commands: ls -1
+      running.md:1 -- running console command: ls -1
       """
     And the test passes
 
@@ -52,5 +52,5 @@ Feature: running console commands
     When running "tut-run"
     Then the test fails with exit code 1 and the error:
       """
-      running.md:1 -- Error: the block that defines console commands to run is empty
+      running.md:2 -- Error: the block that defines console commands to run is empty
       """

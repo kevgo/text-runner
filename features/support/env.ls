@@ -6,7 +6,7 @@ require! {
 
 module.exports = ->
 
-  @set-default-timeout 500
+  @set-default-timeout 1000
 
   @Before ->
     rimraf.sync 'tmp'

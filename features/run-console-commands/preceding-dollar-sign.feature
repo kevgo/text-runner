@@ -21,7 +21,7 @@ Feature: marking console commands with preceding dollar signs
     When running "tut-run"
     Then it prints:
       """
-      running-with-dollar-sign.md:1 -- running console commands: ls -1 && ls -a
+      running-with-dollar-sign.md:1 -- running console command: ls -1 && ls -a
       running-with-dollar-sign.md
       .
       ..

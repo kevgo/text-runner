@@ -40,7 +40,7 @@ $ chmod +x ./greeter.sh
 
 </a>
 
-Now we can call it with our name:
+When we can call it with our name:
 
 <a class="tutorialRunner_consoleCommand">
 

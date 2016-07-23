@@ -13,7 +13,7 @@ Feature: marking console commands with preceding dollar signs
       """
       <a class="tutorialRunner_consoleCommand">
       ```
-      $ ls -1
+      $ ls -a
       $ ls -a
       ```
       </a>
@@ -21,12 +21,10 @@ Feature: marking console commands with preceding dollar signs
     When running "tut-run"
     Then it prints:
       """
-      running-with-dollar-sign.md:1 -- running console command: ls -1 && ls -a
-      running-with-dollar-sign.md
-      tmp
+      running-with-dollar-sign.md:1 -- running console command: ls -a && ls -a
       .
       ..
-      running-with-dollar-sign.md
-      tmp
+      .
+      ..
       """
     And the test passes

@@ -13,7 +13,7 @@ Feature: running multiple console commands
       """
       <a class="tutorialRunner_consoleCommand">
       ```
-      ls -1
+      ls -a
       ls -a
       ```
       </a>
@@ -21,12 +21,10 @@ Feature: running multiple console commands
     When running "tut-run"
     Then it prints:
       """
-      running-multiple-commands.md:1 -- running console command: ls -1 && ls -a
-      running-multiple-commands.md
-      tmp
+      running-multiple-commands.md:1 -- running console command: ls -a && ls -a
       .
       ..
-      running-multiple-commands.md
-      tmp
+      .
+      ..
       """
     And the test passes

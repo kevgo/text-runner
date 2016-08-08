@@ -42,10 +42,12 @@ module.exports = ->
   @When /^running "([^"]*)"(?: in an empty workspace)?$/ (command, done) ->
     args =
       cwd: 'tmp'
-      console: off
+      stdout: off
+      stderr: off
       env: {}
     if @verbose
-      args.console = dim-console.console
+      args.stdout = dim-console.process.stdout
+      args.stderr = dim-console.process.stderr
     if @debug
       args.env['DEBUG'] = '*'
     @process = new ObservableProcess path.join(process.cwd!, 'bin', command), args

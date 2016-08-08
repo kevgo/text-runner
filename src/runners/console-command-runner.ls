@@ -28,7 +28,7 @@ class ConsoleCommandRunner
   run: (done) ->
     if !@commands-to-run then @formatter.error 'no console commands to run found', @currently-loaded-node-line
     @formatter.start-activity "running console command: #{cyan @commands-to-run}", @markdown-line
-    new ObservableProcess ['bash', '-c', @commands-to-run], cwd: global.working-dir, console: dim-console.console
+    new ObservableProcess ['bash', '-c', @commands-to-run], cwd: global.working-dir, stdout: dim-console.process.stdout, stderr: dim-console.process.stderr
       ..on 'ended', (err) ~>
         | err  =>  @formatter.activity-error err
         | _    =>  @formatter.activity-success!

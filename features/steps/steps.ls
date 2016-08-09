@@ -1,11 +1,9 @@
- require! {
-   'chai' : {expect}
-   'dim-console'
-   'fs'
-   'mkdirp'
-   'observable-process' : ObservableProcess
-   'path'
- }
+require! {
+  'chai' : {expect}
+  'fs'
+  'mkdirp'
+  'path'
+}
 
 
 module.exports = ->
@@ -38,20 +36,8 @@ module.exports = ->
     fs.write-file-sync path.join(base-dir, file-name), content
 
 
-
-  @When /^running "([^"]*)"(?: in an empty workspace)?$/ (command, done) ->
-    args =
-      cwd: 'tmp'
-      stdout: off
-      stderr: off
-      env: {}
-    if @verbose
-      args.stdout = dim-console.process.stdout
-      args.stderr = dim-console.process.stderr
-    if @debug
-      args.env['DEBUG'] = '*'
-    @process = new ObservableProcess path.join(process.cwd!, 'bin', command), args
-      ..on 'ended', (@exit-code) ~> done!
+  @When /^executing the tutorial(?: runner in an empty workspace)?$/ (done) ->
+    @execute-tutorial done
 
 
 
@@ -60,11 +46,11 @@ module.exports = ->
 
 
   @Then /^it runs (\d+) test$/ (count) ->
-    expect(@process.full-output!).to.include " #{count} steps"
+    @verify-tests-run count
 
 
   @Then /^it prints:$/ (expected-text) ->
-    expect(@process.full-output!).to.include expected-text
+    @verify-output expected-text
 
 
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
@@ -74,9 +60,8 @@ module.exports = ->
 
 
   @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->
-    expect(@process.full-output!).to.include expected-text
-    expect(@exit-code).to.equal expected-exit-code
+    @verify-failure expected-exit-code, expected-text
 
 
   @Then /^the test passes$/ ->
-    expect(@exit-code).to.equal 0
+    @verify-success!

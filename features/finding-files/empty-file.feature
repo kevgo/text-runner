@@ -9,7 +9,7 @@ Feature: running empty files
 
   Scenario: a tutorial consisting of an empty file
     Given my workspace contains an empty file "empty.md"
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       Error: found empty file empty.md

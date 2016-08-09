@@ -19,5 +19,5 @@ Feature: separate working directory
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then it creates a directory "tmp/tut-run/"

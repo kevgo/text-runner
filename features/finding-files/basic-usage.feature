@@ -10,11 +10,11 @@ Feature: finding tutorial files to run
 
   Scenario: the current directory contains Markdown files
     Given a runnable file "creator.md"
-    When running "tut-run"
+    When executing the tutorial
     Then it runs 1 test
 
 
   Scenario: the Markdown files are located in a subdirectory
     Given a runnable file "foo/creator.md"
-    When running "tut-run"
+    When executing the tutorial
     Then it runs 1 test

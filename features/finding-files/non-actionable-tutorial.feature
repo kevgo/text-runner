@@ -12,7 +12,7 @@ Feature: Fail on non-actionable Markdown
       """
       Just text here, nothing to do!
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       Error: no activities found

@@ -17,7 +17,7 @@ Feature: running multiple console commands
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then it prints:
       """
       running-multiple-commands.md:1 -- running console command: ls -a && ls -a

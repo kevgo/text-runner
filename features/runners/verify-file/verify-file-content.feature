@@ -27,7 +27,7 @@ Feature: verifying file content
       """
       Hello world!
       """
-    When running "tut-run"
+    When executing the tutorial
     Then it prints:
       """
       file-content-verifier.md:3 -- verifying file one.txt
@@ -45,7 +45,7 @@ Feature: verifying file content
       """
       Unexpected content here
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       file-content-verifier.md:3 -- Error: mismatching content in one.txt:
@@ -60,7 +60,7 @@ Feature: verifying file content
 
 
   Scenario: file is missing
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       file-content-verifier.md:3 -- Error: file one.txt not found

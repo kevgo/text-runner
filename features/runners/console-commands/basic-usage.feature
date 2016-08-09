@@ -19,7 +19,7 @@ Feature: running console commands
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then it prints:
       """
       running.md:1 -- running console command: ls -1
@@ -34,7 +34,7 @@ Feature: running console commands
       foo
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       running.md:1 -- Error: no console commands to run found
@@ -49,7 +49,7 @@ Feature: running console commands
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       running.md:2 -- Error: the block that defines console commands to run is empty

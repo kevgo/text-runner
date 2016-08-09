@@ -20,7 +20,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then it prints:
       """
       creator.md:1 -- creating file one.txt
@@ -41,7 +41,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       creator.md:5 -- Error: no path given for file to create
@@ -55,7 +55,7 @@ Feature: creating files with content
       __one.txt__
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       creator.md:1 -- Error: no content given for file to create
@@ -74,7 +74,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       creator.md:1 -- Error: several file paths found: one.txt and two.txt
@@ -96,7 +96,7 @@ Feature: creating files with content
 
       </a>
       """
-    When running "tut-run"
+    When executing the tutorial
     Then the test fails with exit code 1 and the error:
       """
       creator.md:8 -- Error: found second content block for file to create, please provide only one

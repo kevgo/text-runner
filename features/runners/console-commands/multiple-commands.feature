@@ -7,7 +7,6 @@ Feature: running multiple console commands
   - all commands provided are run in a Bash shell, concatenated via " && "
 
 
-  @verbose
   Scenario: running multiple console commands
     Given my workspace contains the file "running-multiple-commands.md" with the content:
       """

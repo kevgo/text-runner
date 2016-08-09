@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 killall node 2> /dev/null
+node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   node_modules/o-tools/bin/lint

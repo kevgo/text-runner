@@ -23,7 +23,8 @@
     "cucumber-snippets-livescript": "1.0.1",
     "o-tools": "0.5.1",
     "o-tools-livescript": "1.1.2",
-    "rimraf": "2.5.4"
+    "rimraf": "2.5.4",
+    "tertestrial": "0.0.5"
   },
   "homepage": "https://github.com/Originate/tutorial-runner",
   "main": "dist/tutorial-runner.js",

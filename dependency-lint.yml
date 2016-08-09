@@ -22,6 +22,7 @@ ignoreErrors:
     - cucumber-snippets-livescript
     - o-tools
     - o-tools-livescript
+    - tertestrial
 
 requiredModules:
   files:

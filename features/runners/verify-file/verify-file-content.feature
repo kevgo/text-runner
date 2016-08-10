@@ -21,23 +21,21 @@ Feature: verifying file content
       """
 
 
-      @verbose
   Scenario: file content matches
     Given the test directory contains the file "one.txt" with the content:
       """
       Hello world!
       """
     When executing the tutorial
-    Then it prints:
-      """
-      file-content-verifier.md:3 -- verifying file one.txt
-      """
+    Then it signals:
+      | FILENAME | file-content-verifier.md |
+      | LINE     | 3                        |
+      | MESSAGE  | verifying file one.txt   |
     And the test passes
     And the test directory still contains a file "one.txt" with content:
       """
       Hello world!
       """
-
 
 
   Scenario: file content mismatch
@@ -46,13 +44,11 @@ Feature: verifying file content
       Unexpected content here
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      file-content-verifier.md:3 -- Error: mismatching content in one.txt:
-      mismatching records:
-
-      Hello world!Unexpected content here
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | mismatching content in one.txt:\nmismatching records:\n\nHello world!Unexpected content here |
+      | FILENAME      | file-content-verifier.md                                                                     |
+      | LINE          | 3                                                                                            |
+      | EXIT CODE     | 1                                                                                            |
     And the test directory still contains a file "one.txt" with content:
       """
       Unexpected content here
@@ -61,7 +57,8 @@ Feature: verifying file content
 
   Scenario: file is missing
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      file-content-verifier.md:3 -- Error: file one.txt not found
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | file one.txt not found   |
+      | FILENAME      | file-content-verifier.md |
+      | LINE          | 3                        |
+      | EXIT CODE     | 1                        |

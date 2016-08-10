@@ -11,6 +11,8 @@ executedModules:
   shellScripts:
     dev:
       - bin/spec
+      - bin/cuc-api
+      - bin/cuc-cli
     ignore: []
     root: 'bin/*'
 

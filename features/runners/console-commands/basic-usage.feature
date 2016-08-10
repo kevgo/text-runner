@@ -20,10 +20,7 @@ Feature: running console commands
       </a>
       """
     When executing the tutorial
-    Then it prints:
-      """
-      running.md:1 -- running console command: ls -1
-      """
+    Then it runs the console command "ls -1"
     And the test passes
 
 
@@ -35,10 +32,11 @@ Feature: running console commands
       </a>
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      running.md:1 -- Error: no console commands to run found
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | no console commands to run found |
+      | FILENAME      | running.md                       |
+      | LINE          | 1                                |
+      | EXIT CODE     | 1                                |
 
 
   Scenario: empty console command
@@ -50,7 +48,8 @@ Feature: running console commands
       </a>
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      running.md:2 -- Error: the block that defines console commands to run is empty
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | the block that defines console commands to run is empty |
+      | FILENAME      | running.md                                              |
+      | LINE          | 2                                                       |
+      | EXIT CODE     | 1                                                       |

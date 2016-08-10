@@ -5,7 +5,7 @@ node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   node_modules/o-tools/bin/lint
-  cucumber-js
+  cuc-api && cuc-cli
 else
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' cucumber-js "$@"
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' cuc-api "$@" && cuc-cli "$@"
 fi

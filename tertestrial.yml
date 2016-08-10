@@ -1,1 +1,36 @@
-actions: js-cucumber-mocha
+actions:
+
+  - ALL:
+
+      - command: 'node_modules/o-tools-livescript/bin/build && cuc-api && cuc-cli'
+
+      - filename: '\.feature$'
+        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}} && cuc-cli {{filename}}'
+
+      - filename: '\.feature$'
+        line: '\d+'
+        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}}:{{line}} && cuc-cli {{filename}}:{{line}}'
+
+
+  - API:
+
+      - command: 'node_modules/o-tools-livescript/bin/build && cuc-api'
+
+      - filename: '\.feature$'
+        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}}'
+
+      - filename: '\.feature$'
+        line: '\d+'
+        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}}:{{line}}'
+
+
+  - CLI:
+
+      - command: 'node_modules/o-tools-livescript/bin/build && cuc-cli'
+
+      - filename: '\.feature$'
+        command: 'node_modules/o-tools-livescript/bin/build && cuc-cli {{filename}}'
+
+      - filename: '\.feature$'
+        line: '\d+'
+        command: 'node_modules/o-tools-livescript/bin/build && cuc-cli {{filename}}:{{line}}'

@@ -10,7 +10,7 @@ Feature: running empty files
   Scenario: a tutorial consisting of an empty file
     Given my workspace contains an empty file "empty.md"
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      Error: found empty file empty.md
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | found empty file empty.md |
+      | FILENAME      | empty.md                  |
+      | EXIT CODE     | 1                         |

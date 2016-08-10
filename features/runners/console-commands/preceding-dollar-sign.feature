@@ -19,12 +19,8 @@ Feature: marking console commands with preceding dollar signs
       </a>
       """
     When executing the tutorial
-    Then it prints:
-      """
-      running-with-dollar-sign.md:1 -- running console command: ls -a && ls -a
-      .
-      ..
-      .
-      ..
-      """
+    Then it signals:
+      | FILENAME | running-with-dollar-sign.md             |
+      | LINE     | 1                                       |
+      | MESSAGE  | running console command: ls -a && ls -a |
     And the test passes

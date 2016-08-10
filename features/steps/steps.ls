@@ -37,7 +37,7 @@ module.exports = ->
 
 
   @When /^executing the tutorial(?: runner in an empty workspace)?$/ (done) ->
-    @execute-tutorial done
+    @execute-tutorial (@error) ~> done!
 
 
 
@@ -49,8 +49,12 @@ module.exports = ->
     @verify-tests-run count
 
 
-  @Then /^it prints:$/ (expected-text) ->
-    @verify-output expected-text
+  @Then /^it runs the console command "([^"]*)"$/ (command) ->
+    @verify-ran-console-command command
+
+
+  @Then /^it signals:$/ (table) ->
+    @verify-output table.rows-hash!
 
 
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
@@ -59,8 +63,8 @@ module.exports = ->
     expect(fs.read-file-sync path.join('tmp', 'tmp', 'tut-run', file-name), 'utf8').to.equal expected-content
 
 
-  @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->
-    @verify-failure expected-exit-code, expected-text
+  @Then /^the test fails with:$/ (table) ->
+    @verify-failure table.rows-hash!
 
 
   @Then /^the test passes$/ ->

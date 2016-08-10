@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ "$#" != "1" ]; then
+  EXOSERVICE_TEST_DEPTH=CLI cucumber-js --tags ~@todo "$@"
+else
+  EXOSERVICE_TEST_DEPTH=CLI DEBUG='*,-express:*,-body-parser:*,-finalhandler,-text-stream-search,-rails-delegate,-exocom-mock' cucumber-js --tags ~@todo "$@"
+fi

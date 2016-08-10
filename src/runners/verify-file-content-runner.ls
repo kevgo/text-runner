@@ -39,6 +39,7 @@ class VerifyFileContentRunner
     catch
       if e.code is 'ENOENT'
         @formatter.activity-error "file #{@file-path} not found"
+        return done 0
       else throw e
     jsdiff-console actual-content, @expected-content, (err) ~>
       if err

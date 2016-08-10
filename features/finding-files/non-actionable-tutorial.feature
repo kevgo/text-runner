@@ -13,7 +13,6 @@ Feature: Fail on non-actionable Markdown
       Just text here, nothing to do!
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      Error: no activities found
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | no activities found |
+      | EXIT CODE     | 1                   |

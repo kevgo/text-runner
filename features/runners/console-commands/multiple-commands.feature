@@ -18,12 +18,8 @@ Feature: running multiple console commands
       </a>
       """
     When executing the tutorial
-    Then it prints:
-      """
-      running-multiple-commands.md:1 -- running console command: ls -a && ls -a
-      .
-      ..
-      .
-      ..
-      """
+    Then it signals:
+      | FILENAME | running-multiple-commands.md            |
+      | LINE     | 1                                       |
+      | MESSAGE  | running console command: ls -a && ls -a |
     And the test passes

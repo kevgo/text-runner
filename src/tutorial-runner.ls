@@ -1,30 +1,32 @@
 require! {
   'async'
   'chalk' : {green, red}
+  './formatters/standard-formatter' : StandardFormatter
   './markdown-file-runner' : MarkdownFileRunner
   'glob'
   'mkdirp'
   'path'
   'prelude-ls' : {flatten, sum}
-  './formatters/standard-formatter' : StandardFormatter
 }
 
 
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  ->
-    @formatter = new StandardFormatter
+  (@formatter = new StandardFormatter) ->
 
 
   # Runs the given tutorial
-  run: (dir) ->
+  run: (done) ->
     @_create-working-dir!
-    async.map-series @_runners(dir), ((runner, cb) -> runner.run cb), (err, results) ~>
-      | err  =>  process.exit 1
+    async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
+      | err  =>  return done err
       if (steps-count = results |> flatten |> sum) is 0
         @formatter.error 'no activities found'
-      @formatter.suite-success steps-count
+        done? 'no activities found'
+      else
+        @formatter.suite-success steps-count
+        done?!
 
 
   # Creates the temp directory to run the tests in
@@ -34,16 +36,16 @@ class TutorialRunner
 
 
   # Returns all the markdown files for this tutorial
-  _markdown-files: (dir) ->
-    if (files = glob.sync "#{dir}/**/*.md").length is 0
+  _markdown-files: ->
+    if (files = glob.sync "**/*.md").length is 0
       @formatter.error 'no Markdown files found'
     files
 
 
 
   # Returns an array of FileRunners for this tutorial
-  _runners: (dir) ->
-    [new MarkdownFileRunner(file, @formatter) for file in @_markdown-files(dir)]
+  _runners: ->
+    [new MarkdownFileRunner(file, @formatter) for file in @_markdown-files!]
 
 
 

@@ -1,6 +1,3 @@
 #!/usr/bin/env node
 
-TutorialRunner = require('../dist/tutorial-runner')
-
-var runner = new TutorialRunner()
-runner.run(process.cwd())
+require('../dist/cli')

@@ -21,10 +21,10 @@ Feature: creating files with content
       </a>
       """
     When executing the tutorial
-    Then it prints:
-      """
-      creator.md:1 -- creating file one.txt
-      """
+    Then it signals:
+      | FILENAME | creator.md            |
+      | LINE     | 1                     |
+      | MESSAGE  | creating file one.txt |
     And the test passes
     And the test directory now contains a file "one.txt" with content:
       """
@@ -42,10 +42,11 @@ Feature: creating files with content
       </a>
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      creator.md:5 -- Error: no path given for file to create
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | no path given for file to create |
+      | FILENAME      | creator.md                       |
+      | LINE          | 5                                |
+      | EXIT CODE     | 1                                |
 
 
   Scenario: no content block given
@@ -56,10 +57,11 @@ Feature: creating files with content
       </a>
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      creator.md:1 -- Error: no content given for file to create
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | no content given for file to create |
+      | FILENAME      | creator.md                          |
+      | LINE          | 1                                   |
+      | EXIT CODE     | 1                                   |
 
 
   Scenario: two file paths given
@@ -75,10 +77,12 @@ Feature: creating files with content
       </a>
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      creator.md:1 -- Error: several file paths found: one.txt and two.txt
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | several file paths found: one.txt and two.txt |
+      | FILENAME      | creator.md                                    |
+      | LINE          | 1                                             |
+      | EXIT CODE     | 1                                             |
+
 
   Scenario: two content blocks given
     Given my workspace contains the file "creator.md" with the content:
@@ -97,7 +101,8 @@ Feature: creating files with content
       </a>
       """
     When executing the tutorial
-    Then the test fails with exit code 1 and the error:
-      """
-      creator.md:8 -- Error: found second content block for file to create, please provide only one
-      """
+    Then the test fails with:
+      | ERROR MESSAGE | found second content block for file to create, please provide only one |
+      | FILENAME      | creator.md                                                             |
+      | LINE          | 8                                                                      |
+      | EXIT CODE     | 1                                                                      |

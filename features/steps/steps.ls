@@ -37,7 +37,7 @@ module.exports = ->
 
 
   @When /^executing the tutorial(?: runner in an empty workspace)?$/ (done) ->
-    @execute-tutorial (@error) ~> done!
+    @execute-tutorial done
 
 
 

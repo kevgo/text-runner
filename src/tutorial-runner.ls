@@ -1,7 +1,6 @@
 require! {
   'async'
-  'chalk' : {green, red}
-  './formatters/standard-formatter' : StandardFormatter
+  './formatters/colored-formatter' : ColoredFormatter
   './markdown-file-runner' : MarkdownFileRunner
   'glob'
   'mkdirp'
@@ -13,7 +12,7 @@ require! {
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  (@formatter = new StandardFormatter) ->
+  (@formatter = new ColoredFormatter) ->
 
 
   # Runs the given tutorial

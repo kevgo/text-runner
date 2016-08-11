@@ -4,7 +4,7 @@ require! {
 
 
 # The standard formatter
-class StandardFormatter
+class SimpleFormatter
 
   ->
 
@@ -55,4 +55,4 @@ class StandardFormatter
 
 
 
-module.exports = StandardFormatter
+module.exports = SimpleFormatter

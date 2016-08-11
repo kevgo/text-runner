@@ -24,10 +24,12 @@ CliWorld = !->
 
 
   @verify-failure = (table) ->
-    expect(@process.full-output!).to.include switch
-      | table.FILENAME and table.LINE  =>  "#{table.FILENAME}:#{table.LINE} -- Error: #{table['ERROR MESSAGE']}"
-      | table.FILENAME                 =>  "#{table.FILENAME} -- Error: #{table['ERROR MESSAGE']}"
-      | otherwise                      =>  "Error: #{table['ERROR MESSAGE']}"
+    output = @process.full-output!
+    expected-header = switch
+      | table.FILENAME and table.LINE  =>  "#{table.FILENAME}:#{table.LINE}"
+      | table.FILENAME                 =>  "#{table.FILENAME}"
+    expect(output).to.include expected-header if expected-header
+    expect(output).to.include "Error: #{table['ERROR MESSAGE']}"
     expect(@exit-code).to.equal +table['EXIT CODE']
 
 

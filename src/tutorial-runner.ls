@@ -1,4 +1,5 @@
 require! {
+  './actions/action-manager' : ActionManager
   'async'
   './formatters/colored-formatter' : ColoredFormatter
   './markdown-file-runner' : MarkdownFileRunner
@@ -13,6 +14,7 @@ require! {
 class TutorialRunner
 
   (@formatter = new ColoredFormatter) ->
+    @actions = new ActionManager
 
 
   # Runs the given tutorial
@@ -41,10 +43,9 @@ class TutorialRunner
     files
 
 
-
   # Returns an array of FileRunners for this tutorial
   _runners: ->
-    [new MarkdownFileRunner(file, @formatter) for file in @_markdown-files!]
+    [new MarkdownFileRunner(file, @formatter, @actions) for file in @_markdown-files!]
 
 
 

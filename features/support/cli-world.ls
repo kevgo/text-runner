@@ -8,6 +8,21 @@ require! {
 
 CliWorld = !->
 
+  @execute-example = (example-name, done) ->
+    args =
+      cwd: "examples/#{example-name}"
+      stdout: off
+      stderr: off
+      env: {}
+    if @verbose
+      args.stdout = dim-console.process.stdout
+      args.stderr = dim-console.process.stderr
+    if @debug
+      args.env['DEBUG'] = '*'
+    @process = new ObservableProcess path.join(process.cwd!, 'bin', 'tut-run'), args
+      ..on 'ended', (@exit-code) ~> done!
+
+
   @execute-tutorial = (done) ->
     args =
       cwd: 'tmp'

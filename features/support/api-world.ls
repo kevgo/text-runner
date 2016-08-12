@@ -31,6 +31,15 @@ class TestFormatter
 
 ApiWorld = !->
 
+  @execute-example = (example-name, done) ->
+    process.chdir "examples/#{example-name}"
+    @formatter = new TestFormatter
+    @runner = new TutorialRunner @formatter
+      ..run (@error) ~>
+        process.chdir '..'
+        done!
+
+
   @execute-tutorial = (done) ->
     process.chdir 'tmp'
     @formatter = new TestFormatter

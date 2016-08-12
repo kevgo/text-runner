@@ -33,7 +33,20 @@ The actions are configured via the content of your document,
 so you are actually executing what the document says.
 
 
-## Activity Types
+## Terminology
+
+A _tutorial_ is the set of MarkDown files that we want to test here.
+Each MarkDown file consists of text (that is ignored here),
+and a number of _blocks_.
+Blocks are specially marked up regions in the MarkDown file that are runnable.
+They get executed by the corresponding _action_ for the block's _type_.
+For example, the block "createFileWithContent"
+is being executed by the "create-file-with-content" action.
+Tutorial Runner provides a number of built-in actions for common activities.
+It is also possible to define your own custom block types and actions.
+
+
+## Built-in Block Types
 
 __create a file with name and content__
 * assign the `tutorialRunner_createFile` class to the anchor tag

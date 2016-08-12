@@ -1,13 +1,9 @@
 require! {
   'async'
-  'chalk' : {bold, cyan, red}
+  'chalk' : {cyan}
   'fs'
   'path'
   'remarkable' : Remarkable
-  './runners/console-command-runner' : ConsoleCommandRunner
-  './runners/create-file-runner' : CreateFileRunner
-  './runners/verify-file-content-runner' : VerifyFileContentRunner
-  'uppercamelcase'
 }
 debug = require('debug')('markdown-file-runner')
 
@@ -15,7 +11,7 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  (@file-path, @formatter) ->
+  (@file-path, @formatter, @actions) ->
 
     @markdown-parser = new Remarkable 'full', html: on
 
@@ -47,10 +43,8 @@ class MarkdownFileRunner
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
           if @current-runner then @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
-          class-name = "#{uppercamelcase matches[1]}Runner"
-          debug "instantiating '#{class-name}'"
-          clazz = eval class-name
-          @current-runner = new clazz @current-line, @formatter
+          current-runner-class = @actions.action-for matches[1]
+          @current-runner = new current-runner-class @current-line, @formatter
 
         if node.content is '</a>'
           @runners.push @current-runner if @current-runner
@@ -58,6 +52,7 @@ class MarkdownFileRunner
 
       @current-runner?.load node
       @_check-nodes node.children if node.children
+
 
 
 module.exports = MarkdownFileRunner

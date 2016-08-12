@@ -40,6 +40,10 @@ module.exports = ->
     @execute-tutorial done
 
 
+  @When /^executing the "([^"]*)" example/ (example-name, done) ->
+    @execute-example example-name, done
+
+
 
   @Then /^it creates a directory "([^"]*)"$/ (directory-path) ->
     fs.stat-sync path.join 'tmp', directory-path

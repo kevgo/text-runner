@@ -43,8 +43,8 @@ class MarkdownFileRunner
 
         if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
           if @current-runner then @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
-          current-runner-class = @actions.action-for matches[1]
-          @current-runner = new current-runner-class @current-line, @formatter
+          if current-runner-class = @actions.action-for matches[1]
+            @current-runner = new current-runner-class @current-line, @formatter
 
         if node.content is '</a>'
           @runners.push @current-runner if @current-runner

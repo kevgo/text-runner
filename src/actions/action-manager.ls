@@ -11,7 +11,7 @@ require! {
 # Loads and provides built-in and custom actions
 class ActionManager
 
-  ->
+  (@formatter) ->
     @actions = {}
     @load-builtin-actions!
     @load-custom-actions!
@@ -19,7 +19,7 @@ class ActionManager
 
   # Provides the action for the block with the given name
   action-for: (block-name) ->
-    @actions[block-name.to-lower-case!] or throw new Error "Cannot find action for '#{block-name}'"
+    @actions[block-name.to-lower-case!] or @formatter.error "unknown action: '#{block-name}'"
 
 
   # Returns all possible filename extensions that actions can have

@@ -4,6 +4,7 @@ require! {
   'chalk' : {strip-color}
   'dim-console'
   'jsdiff-console'
+  'path'
 }
 
 
@@ -21,7 +22,7 @@ class TestFormatter
   activity-error: (error-message = '') ->
     (@error-messages or= []).push strip-color(error-message).replace 'tmp/', ''
 
-  error: (error-message, error-line = @documentation-file-line) ->
+  error: (error-message, error-line = @documentation-file-line) !->
     (@error-messages or= []).push strip-color(error-message).replace 'tmp/', ''
     (@lines or= []).push error-line
 
@@ -32,11 +33,11 @@ class TestFormatter
 ApiWorld = !->
 
   @execute-example = (example-name, done) ->
-    process.chdir "examples/#{example-name}"
+    process.chdir path.join('examples', example-name)
     @formatter = new TestFormatter
     @runner = new TutorialRunner @formatter
       ..run (@error) ~>
-        process.chdir '..'
+        process.chdir path.join('..', '..')
         done!
 
 

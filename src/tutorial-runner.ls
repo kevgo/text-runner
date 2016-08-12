@@ -14,7 +14,7 @@ require! {
 class TutorialRunner
 
   (@formatter = new ColoredFormatter) ->
-    @actions = new ActionManager
+    @actions = new ActionManager @formatter
 
 
   # Runs the given tutorial

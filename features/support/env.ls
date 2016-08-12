@@ -1,5 +1,6 @@
 require! {
   'fs'
+  'path'
   'rimraf'
 }
 
@@ -11,6 +12,9 @@ module.exports = ->
   @Before ->
     rimraf.sync 'tmp'
     fs.mkdir-sync 'tmp'
+
+  @After ->
+    process.chdir path.join __dirname, '..', '..'
 
   @Before tags: ['@verbose'], ->
     @verbose = on

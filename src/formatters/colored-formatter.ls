@@ -67,7 +67,7 @@ class ColoredFormatter
   error: (message, line = @documentation-file-line) ->
     text = ''
     if @documentation-file-path
-      text += "#{yellow figures.pointer} #{@documentation-file-path}"
+      text += "#{red figures.cross} #{@documentation-file-path}"
     if line > -1
       text += ":#{line}"
     if text.length > 0 and @activity-text

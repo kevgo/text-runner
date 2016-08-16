@@ -3,43 +3,43 @@ actions:
   - ALL:
 
       - match:
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-api && cuc-cli'
+        command: 'bin/spec'
 
       - match:
           filename: '\.feature$'
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}} && cuc-cli {{filename}}'
+        command: 'bin/cuc-api {{filename}} && bin/cuc-cli {{filename}}'
 
       - match:
           filename: '\.feature$'
           line: '\d+'
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}}:{{line}} && cuc-cli {{filename}}:{{line}}'
+        command: 'bin/cuc-api {{filename}}:{{line}} && bin/cuc-cli {{filename}}:{{line}}'
 
 
   - API:
 
       - match:
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-api'
+        command: 'bin/cuc-api'
 
       - match:
           filename: '\.feature$'
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}}'
+        command: 'bin/cuc-api {{filename}}'
 
       - match:
           filename: '\.feature$'
           line: '\d+'
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-api {{filename}}:{{line}}'
+        command: 'bin/cuc-api {{filename}}:{{line}}'
 
 
   - CLI:
 
       - match:
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-cli'
+        command: 'bin/cuc-cli'
 
       - match:
           filename: '\.feature$'
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-cli {{filename}}'
+        command: 'bin/cuc-cli {{filename}}'
 
       - match:
           filename: '\.feature$'
           line: '\d+'
-        command: 'node_modules/o-tools-livescript/bin/build && cuc-cli {{filename}}:{{line}}'
+        command: 'bin/cuc-cli {{filename}}:{{line}}'

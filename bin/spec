@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+set -e
 
 node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   node_modules/o-tools/bin/lint
-  bin/cuc-api && bin/cuc-cli
+  bin/cuc-api
+  bin/cuc-cli
 else
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-api "$@" && cuc-cli "$@"
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-api "$@"
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-cli "$@"
 fi

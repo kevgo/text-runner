@@ -13,6 +13,7 @@
     "indent-string": "3.0.0",
     "interpret": "1.0.1",
     "jsdiff-console": "2.2.1",
+    "liftoff": "2.3.0",
     "log-update": "1.0.2",
     "mkdirp": "0.5.1",
     "observable-process": "3.0.0",

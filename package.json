@@ -20,6 +20,7 @@
     "prelude-ls": "1.1.2",
     "rechoir": "0.6.2",
     "remarkable": "1.6.2",
+    "update-notifier": "1.0.2",
     "xmldoc": "0.5.1"
   },
   "description": "Executes tutorials written in MarkDown",

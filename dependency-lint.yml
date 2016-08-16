@@ -17,7 +17,8 @@ executedModules:
     root: 'bin/*'
 
 ignoreErrors:
-  missing: []
+  missing:
+    - rc
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:

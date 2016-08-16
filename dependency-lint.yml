@@ -23,6 +23,7 @@ ignoreErrors:
   shouldBeDevDependency: []
   unused:
     - cucumber-snippets-livescript
+    - livescript
     - o-tools
     - o-tools-livescript
     - tertestrial

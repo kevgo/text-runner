@@ -34,6 +34,13 @@ The actions are configured via the content of your document,
 so you are actually executing what the document says.
 
 
+## Installation
+
+- install [Node.JS](https://nodejs.org) version 4, 5, or 6
+- run `npm i -g tutorial-runner`
+- in the root directory of your code base, run `tut-run setup`
+
+
 ## Terminology
 
 A _tutorial_ is the set of MarkDown files that we want to test here.
@@ -113,13 +120,6 @@ Stop the current process by hitting Ctrl-C
 
 </a>
 ```
-
-## Installation
-
-- install [Node.JS](https://nodejs.org) version 4, 5, or 6
-- run `npm i -g tutorial-runner`
-- in the root directory of your code base, run `tut-run setup`
-
 
 ## Related Work
 

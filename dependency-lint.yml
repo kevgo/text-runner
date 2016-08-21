@@ -10,9 +10,11 @@ executedModules:
       - version
   shellScripts:
     dev:
-      - bin/spec
       - bin/cuc-api
       - bin/cuc-cli
+      - bin/docs
+      - bin/features
+      - bin/spec
     ignore: []
     root: 'bin/*'
 

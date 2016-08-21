@@ -25,7 +25,7 @@ CliWorld = !->
 
   @execute-tutorial = (done) ->
     args =
-      cwd: 'tmp'
+      cwd: 'test-dir'
       stdout: off
       stderr: off
       env: {}

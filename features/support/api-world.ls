@@ -18,7 +18,7 @@ class TestFormatter
     @lines = []
 
   start-file: (file-path) ->
-    @file-paths.push file-path.replace 'tmp/', ''
+    @file-paths.push file-path.replace 'test-dir/', ''
 
   start-activity: (activity) ->
     @activities.push strip-color activity
@@ -27,10 +27,10 @@ class TestFormatter
   activity-success: ->
 
   activity-error: (error-message = '') ->
-    @error-messages.push strip-color(error-message).replace 'tmp/', ''
+    @error-messages.push strip-color(error-message).replace 'test-dir/', ''
 
   error: (error-message) !->
-    @error-messages.push strip-color(error-message).replace 'tmp/', ''
+    @error-messages.push strip-color(error-message).replace 'test-dir/', ''
     @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
 
   refine-activity: (activity) ->
@@ -55,7 +55,7 @@ ApiWorld = !->
 
 
   @execute-tutorial = (done) ->
-    process.chdir 'tmp'
+    process.chdir 'test-dir'
     @formatter = new TestFormatter
     @runner = new TutorialRunner {@formatter}
       ..run (@error) ~>

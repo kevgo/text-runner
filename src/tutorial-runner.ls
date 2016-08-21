@@ -44,7 +44,7 @@ class TutorialRunner
 
   # Creates the temp directory to run the tests in
   _create-working-dir: ->
-    global.working-dir = path.join process.cwd!, 'tmp', 'tut-run'
+    global.working-dir = path.join process.cwd!, 'tmp'
     mkdirp.sync global.working-dir
 
 

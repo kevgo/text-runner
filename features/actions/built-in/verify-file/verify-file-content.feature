@@ -6,7 +6,7 @@ Feature: verifying file content
 
 
   Background:
-    Given my workspace contains the file "file-content-verifier.md" with the content:
+    Given my workspace contains the file "02.md" with the content:
       """
       Our workspace contains the file:
 
@@ -21,16 +21,23 @@ Feature: verifying file content
       """
 
 
+      @verbose
   Scenario: file content matches
-    Given the test directory contains the file "one.txt" with the content:
+    Given my workspace contains the file "01.md" with the content:
       """
+      <a class="tutorialRunner_createFile">
+      __one.txt__
+
+      ```
       Hello world!
+      ```
+      </a>
       """
     When executing the tutorial
     Then it signals:
-      | FILENAME | file-content-verifier.md |
-      | LINE     | 3-10                     |
-      | MESSAGE  | verifying file one.txt   |
+      | FILENAME | 02.md                  |
+      | LINE     | 3-10                   |
+      | MESSAGE  | verifying file one.txt |
     And the test passes
     And the test directory still contains a file "one.txt" with content:
       """
@@ -39,13 +46,19 @@ Feature: verifying file content
 
 
   Scenario: file content mismatch
-    Given the test directory contains the file "one.txt" with the content:
+    Given my workspace contains the file "01.md" with the content:
       """
+      <a class="tutorialRunner_createFile">
+      __one.txt__
+
+      ```
       Unexpected content here
+      ```
+      </a>
       """
     When executing the tutorial
     Then the test fails with:
-      | FILENAME      | file-content-verifier.md                                                                     |
+      | FILENAME      | 02.md                                                                                        |
       | LINE          | 3-10                                                                                         |
       | MESSAGE       | verifying file one.txt                                                                       |
       | ERROR MESSAGE | mismatching content in one.txt:\nmismatching records:\n\nHello world!Unexpected content here |
@@ -59,8 +72,8 @@ Feature: verifying file content
   Scenario: file is missing
     When executing the tutorial
     Then the test fails with:
-      | FILENAME      | file-content-verifier.md |
-      | LINE          | 3-10                     |
-      | MESSAGE       | verifying file one.txt   |
-      | ERROR MESSAGE | file one.txt not found   |
-      | EXIT CODE     | 1                        |
+      | FILENAME      | 02.md                  |
+      | LINE          | 3-10                   |
+      | MESSAGE       | verifying file one.txt |
+      | ERROR MESSAGE | file one.txt not found |
+      | EXIT CODE     | 1                      |

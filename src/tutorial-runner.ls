@@ -11,6 +11,7 @@ require! {
   'prelude-ls' : {flatten, sum}
   'require-new'
   'require-yaml'
+  'rimraf'
 }
 
 
@@ -45,6 +46,7 @@ class TutorialRunner
   # Creates the temp directory to run the tests in
   _create-working-dir: ->
     global.working-dir = path.join process.cwd!, 'tmp'
+    rimraf.sync global.working-dir
     mkdirp.sync global.working-dir
 
 

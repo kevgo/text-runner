@@ -33,6 +33,7 @@
     "o-tools": "0.5.1",
     "o-tools-livescript": "1.1.2",
     "rimraf": "2.5.4",
+    "shelljs": "0.7.3",
     "tertestrial": "0.1.0",
     "touch": "1.0.0",
     "wait": "0.1.0"

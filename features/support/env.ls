@@ -1,7 +1,9 @@
 require! {
   'fs'
+  'glob'
   'path'
   'rimraf'
+  'shelljs/global'
   'touch'
 }
 
@@ -32,3 +34,11 @@ module.exports = ->
 
   @After tags: ['@debug'], ->
     @debug = off
+
+  @register-handler 'AfterFeatures', (features) ->
+    delete-all-tmp-folders!
+
+
+function delete-all-tmp-folders
+  for tmp-dir in glob.sync '*/**/tmp/', ignore: ['tmp/**', '**/node_modules/**']
+    rm '-rf' tmp-dir

@@ -19,6 +19,8 @@
     "prelude-ls": "1.1.2",
     "rechoir": "0.6.2",
     "remarkable": "1.6.2",
+    "require-new": "1.1.0",
+    "require-yaml": "0.0.1",
     "update-notifier": "1.0.2"
   },
   "description": "Executes tutorials written in MarkDown",
@@ -32,6 +34,7 @@
     "o-tools-livescript": "1.1.2",
     "rimraf": "2.5.4",
     "tertestrial": "0.1.0",
+    "touch": "1.0.0",
     "wait": "0.1.0"
   },
   "homepage": "https://github.com/Originate/tutorial-runner",

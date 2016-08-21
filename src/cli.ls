@@ -1,5 +1,4 @@
 require! {
-  'liftoff' : Liftoff
   '../package.json' : pkg
   './tutorial-runner' : TutorialRunner
   'update-notifier'
@@ -7,6 +6,4 @@ require! {
 
 update-notifier({pkg}).notify!
 
-new Liftoff name: 'tut-run'
-  ..launch {}, (env) ->
-    new TutorialRunner!.run!
+new TutorialRunner!.run!

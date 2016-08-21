@@ -11,28 +11,31 @@ require! {
 
 class TestFormatter
   ->
-    @console =
-      log: ->
+    @activities = []
+    @console = log: ->
+    @error-messages = []
+    @file-paths = []
+    @lines = []
 
   start-file: (file-path) ->
-    (@file-paths or= []).push file-path.replace 'tmp/', ''
+    @file-paths.push file-path.replace 'tmp/', ''
 
   start-activity: (activity) ->
-    (@activities or= []).push strip-color activity
-    (@lines or= []).push if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
+    @activities.push strip-color activity
+    @lines.push if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
 
   activity-success: ->
 
   activity-error: (error-message = '') ->
-    (@error-messages or= []).push strip-color(error-message).replace 'tmp/', ''
+    @error-messages.push strip-color(error-message).replace 'tmp/', ''
 
   error: (error-message) !->
-    (@error-messages or= []).push strip-color(error-message).replace 'tmp/', ''
-    (@lines or= []).push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
+    @error-messages.push strip-color(error-message).replace 'tmp/', ''
+    @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
 
   refine-activity: (activity) ->
-    (@activities or= [])[*-1] = strip-color activity
-    (@lines or= [])[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
+    @activities[*-1] = strip-color activity
+    @lines[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
 
   set-lines: (@start-line, @end-line) ->
 
@@ -45,7 +48,7 @@ ApiWorld = !->
   @execute-example = (example-name, done) ->
     process.chdir path.join('examples', example-name)
     @formatter = new TestFormatter
-    @runner = new TutorialRunner @formatter
+    @runner = new TutorialRunner {@formatter}
       ..run (@error) ~>
         process.chdir path.join('..', '..')
         done!
@@ -54,7 +57,7 @@ ApiWorld = !->
   @execute-tutorial = (done) ->
     process.chdir 'tmp'
     @formatter = new TestFormatter
-    @runner = new TutorialRunner @formatter
+    @runner = new TutorialRunner {@formatter}
       ..run (@error) ~>
         process.chdir '..'
         done!

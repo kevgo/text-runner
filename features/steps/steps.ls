@@ -22,6 +22,10 @@ module.exports = ->
       """
 
 
+  @Given /^the configuration file:$/ (content) ->
+    fs.write-file-sync path.join('tmp', 'tut-run.yml'), content
+
+
   @Given /^my workspace contains the file "([^"]*)" with the content:$/ (file-name, content) ->
     fs.write-file-sync path.join('tmp', file-name), content
 

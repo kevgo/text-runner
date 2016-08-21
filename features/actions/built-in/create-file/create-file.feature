@@ -23,7 +23,7 @@ Feature: creating files with content
     When executing the tutorial
     Then it signals:
       | FILENAME | creator.md            |
-      | LINE     | 1                     |
+      | LINE     | 1-7                   |
       | MESSAGE  | creating file one.txt |
     And the test passes
     And the test directory now contains a file "one.txt" with content:
@@ -45,7 +45,7 @@ Feature: creating files with content
     Then the test fails with:
       | ERROR MESSAGE | no path given for file to create |
       | FILENAME      | creator.md                       |
-      | LINE          | 5                                |
+      | LINE          | 1-5                              |
       | EXIT CODE     | 1                                |
 
 
@@ -80,7 +80,7 @@ Feature: creating files with content
     Then the test fails with:
       | ERROR MESSAGE | several file paths found: one.txt and two.txt |
       | FILENAME      | creator.md                                    |
-      | LINE          | 1                                             |
+      | LINE          | 1-8                                           |
       | EXIT CODE     | 1                                             |
 
 
@@ -102,7 +102,7 @@ Feature: creating files with content
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | found second content block for file to create, please provide only one |
+      | ERROR MESSAGE | found multiple content blocks for file to create, please provide only one |
       | FILENAME      | creator.md                                                             |
-      | LINE          | 8                                                                      |
+      | LINE          | 1-12                                                                   |
       | EXIT CODE     | 1                                                                      |

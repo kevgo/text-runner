@@ -1,56 +1,30 @@
 require! {
   'chalk' : {cyan, red}
-  'dim-console'
   'observable-process' : ObservableProcess
-  'prelude-ls' : {capitalize, compact}
-  'xmldoc' : {XmlDocument}
+  'prelude-ls' : {compact, find, map}
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
-# Runs console command defined in a code block,
-# where each line starts with "$ "
-class ConsoleCommandRunner
+module.exports  = ({nodes,formatter, searcher}, done) ->
+  commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
+    | nodes.length is 0  =>  'no code blocks found'
+    | !content  =>  'the block that defines console commands to run is empty')
+  |> (.split '\n')
+  |> map (.trim!)
+  |> compact
+  |> map trim-dollar
+  |> (.join ' && ')
 
-  (@markdown-line, @formatter) ->
-    @commands-to-run = ''
-
-    # the line of the node that is currently being parsed
-    @currently-loaded-node-line = 1
-
-
-  load: (node) ->
-    @currently-loaded-node-line = node.lines[0] + 1 if node.lines
-    @["_load#{capitalize node.type}"]? node
-
-
-  # Runs all commands given in the current block
-  run: (done) ->
-    if !@commands-to-run then @formatter.error 'no console commands to run found', @currently-loaded-node-line
-    @formatter.start-activity "running console command: #{cyan @commands-to-run}", @markdown-line
-    new ObservableProcess ['bash', '-c', @commands-to-run], cwd: global.working-dir, stdout: @formatter.stdout, stderr: @formatter.stderr
-      ..on 'ended', (err) ~>
-        | err  =>  @formatter.activity-error err
-        | _    =>  @formatter.activity-success!
-        done err, 1
+  formatter.start-activity "running console command: #{cyan commands-to-run}"
+  new ObservableProcess(['bash', '-c', commands-to-run],
+                        cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
+    ..on 'ended', (err) ~>
+      | err  =>  formatter.activity-error err
+      | _    =>  formatter.activity-success!
+      done err, 1
 
 
-  # Loads the commands to be executed from the given code block node
-  _load-fence: (node) ->
-    | node.content.trim! is ''  =>  @formatter.error 'the block that defines console commands to run is empty', @currently-loaded-node-line
-    @commands-to-run = ([@_trim-dollar(command.trim!) for command in node.content.split '\n'] |> compact).join ' && '
-
-
-  # Trims the leading dollar from the given command
-  _trim-dollar: (text) ->
-    | !text  =>  return
-    regex = /^(\$\s*)?(.+)$/
-    matches = text.match(regex)
-    if matches.length is 1
-      matches[0]
-    else
-      matches[2]
-
-
-
-module.exports = ConsoleCommandRunner
+# trims the leading dollar from the given command
+function trim-dollar text
+  text.replace /^\$?\s*/, ''

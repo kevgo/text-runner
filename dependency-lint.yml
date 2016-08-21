@@ -33,6 +33,7 @@ requiredModules:
     dev:
       - '{features,spec,test}/**/*'
       - '**/*{.,_,-}{spec,test}.ls'
+      - 'examples/**'
     ignore:
       - 'node_modules/**/*'
     root: '**/*.ls'

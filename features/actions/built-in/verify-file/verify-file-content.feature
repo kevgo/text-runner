@@ -29,7 +29,7 @@ Feature: verifying file content
     When executing the tutorial
     Then it signals:
       | FILENAME | file-content-verifier.md |
-      | LINE     | 3                        |
+      | LINE     | 3-10                     |
       | MESSAGE  | verifying file one.txt   |
     And the test passes
     And the test directory still contains a file "one.txt" with content:
@@ -47,7 +47,7 @@ Feature: verifying file content
     Then the test fails with:
       | ERROR MESSAGE | mismatching content in one.txt:\nmismatching records:\n\nHello world!Unexpected content here |
       | FILENAME      | file-content-verifier.md                                                                     |
-      | LINE          | 3                                                                                            |
+      | LINE          | 3-10                                                                                         |
       | EXIT CODE     | 1                                                                                            |
     And the test directory still contains a file "one.txt" with content:
       """
@@ -60,5 +60,5 @@ Feature: verifying file content
     Then the test fails with:
       | ERROR MESSAGE | file one.txt not found   |
       | FILENAME      | file-content-verifier.md |
-      | LINE          | 3                        |
+      | LINE          | 3-10                     |
       | EXIT CODE     | 1                        |

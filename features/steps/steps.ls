@@ -36,11 +36,12 @@ module.exports = ->
     fs.write-file-sync path.join(base-dir, file-name), content
 
 
+
   @When /^executing the tutorial(?: runner in an empty workspace)?$/ (done) ->
     @execute-tutorial done
 
 
-  @When /^executing the "([^"]*)" example/ (example-name, done) ->
+  @When /^executing the "([^"]*)" example/, timeout: 3000, (example-name, done) ->
     @execute-example example-name, done
 
 
@@ -64,7 +65,7 @@ module.exports = ->
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
     # The first "tmp" folder is for Cucumber (it creates the Markdown test files in there.
     # The second "tmp" folder is created by Tutorial Runner
-    expect(fs.read-file-sync path.join('tmp', 'tmp', 'tut-run', file-name), 'utf8').to.equal expected-content
+    expect(fs.read-file-sync(path.join('tmp', 'tmp', 'tut-run', file-name), 'utf8').trim!).to.equal expected-content.trim!
 
 
   @Then /^the test fails with:$/ (table) ->

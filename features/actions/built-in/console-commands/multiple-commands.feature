@@ -20,6 +20,6 @@ Feature: running multiple console commands
     When executing the tutorial
     Then it signals:
       | FILENAME | running-multiple-commands.md            |
-      | LINE     | 1                                       |
+      | LINE     | 1-6                                     |
       | MESSAGE  | running console command: ls -a && ls -a |
     And the test passes

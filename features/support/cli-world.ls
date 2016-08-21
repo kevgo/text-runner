@@ -53,7 +53,7 @@ CliWorld = !->
 
 
   @verify-ran-console-command = (command) ->
-    expect(@process.full-output!).to.include "running.md:1 -- running console command: #{command}"
+    expect(@process.full-output!).to.include "running.md:1-5 -- running console command: #{command}"
 
 
   @verify-success = ->

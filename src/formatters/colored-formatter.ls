@@ -3,6 +3,7 @@ require! {
   'figures'
   'indent-string'
   'log-update'
+  'prelude-ls' : {compact, unique}
 }
 
 
@@ -15,7 +16,8 @@ class ColoredFormatter
     @documentation-file-path = ''
 
     # the line within the documentation file at which the currently processed block starts
-    @documentation-file-line = -1
+    @start-line = null
+    @end-line = null
 
     # the header for the current activity, which will be printed differently later
     @activity-header = ''
@@ -32,6 +34,10 @@ class ColoredFormatter
     @stderr =
       write: @_output
 
+    @console =
+      log: (text) ~>
+        @_output "#{text}\n"
+
 
 
   # called when we start processing a markdown file
@@ -39,37 +45,35 @@ class ColoredFormatter
 
 
   # Called when we start performing an activity that was defined in a block
-  start-activity: (@activity-text, @documentation-file-line) ->
-    @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{@documentation-file-line} -- #{@activity-text}"
+  start-activity: (@activity-text) ->
+    @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
     @activity-console = ''
     @_print!
 
 
+  # called when the last started activity failed
+  activity-error: (message) ->
+    log-update "#{red figures.cross} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
+    log-update "\n\n#{red "Error: #{message}"}"
+    process.exit 1
+
+
   # called when the last started activity finished successful
   activity-success: ->
-    text = "#{green figures.tick} #{@documentation-file-path}:#{@documentation-file-line} -- #{@activity-text}"
-    if @activity-console
-      text += "\n#{@activity-console.trim! |> indent-string _, 2 |> dim}"
+    text = "#{green figures.tick} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
     log-update text
     log-update.done!
     @activity-header = ''
     @activity-console = ''
 
 
-  # called when the last started activity failed
-  activity-error: (message) ->
-    log-update "#{red figures.cross} #{@documentation-file-path}:#{@documentation-file-line} -- #{@activity-text}\n"
-    log-update "\n\n#{red "Error: #{message}"}"
-    process.exit 1
-
-
   # Called on general errors
-  error: (message, line = @documentation-file-line) ->
+  error: (message) ->
     text = ''
     if @documentation-file-path
       text += "#{red figures.cross} #{@documentation-file-path}"
-    if line > -1
-      text += ":#{line}"
+    if @start-line > -1
+      text += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
     if text.length > 0 and @activity-text
       text += ' -- '
     if @activity-text
@@ -79,6 +83,9 @@ class ColoredFormatter
     text += "\n#{red "Error: #{message}"}\n"
     log-update text
     process.exit 1
+
+
+  set-lines: (@start-line, @end-line) ->
 
 
   # called when the whole test suite passed

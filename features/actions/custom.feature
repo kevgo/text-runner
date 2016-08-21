@@ -11,7 +11,7 @@ Feature: custom runners
   Scenario: using a valid built-in action
     When executing the "custom-action" example
     Then it signals:
-      | FILENAME | custom-action.md |
-      | LINE     | 3                |
-      | MESSAGE  | echoing          |
+      | FILENAME | custom-action.md   |
+      | LINE     | 3                  |
+      | MESSAGE  | greeting the world |
     And the test passes

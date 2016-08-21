@@ -1,23 +1,13 @@
 require! {
   'prelude-ls' : {capitalize}
+  'wait' : {wait}
 }
 
 
-class HelloWorldAction
-
-
-  (@markdown-line, @formatter) ->
-
-
-  load: (node) ->
-
-
-  run: (done) ->
-    @formatter.start-activity 'echoing', @markdown-line
-    console.log "Hello World!"
-    @formatter.activity-success!
-    done!
-
-
-
-module.exports = HelloWorldAction
+module.exports  = ({filename, start-line, end-line, nodes, formatter}, done) ->
+  formatter.start-activity 'greeting the world'
+  wait 1000, ->
+    formatter.console.log "Hello World!"
+    wait 1000, ->
+      formatter.activity-success!
+      done!

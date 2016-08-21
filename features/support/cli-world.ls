@@ -43,7 +43,10 @@ CliWorld = !->
     expected-header = switch
       | table.FILENAME and table.LINE  =>  "#{table.FILENAME}:#{table.LINE}"
       | table.FILENAME                 =>  "#{table.FILENAME}"
-    expect(output).to.include expected-header if expected-header
+      | _                              =>  ''
+    if table['MESSAGE']
+      expected-header += " -- #{table['MESSAGE']}"
+    expect(output).to.include expected-header
     expect(output).to.include "Error: #{table['ERROR MESSAGE']}"
     expect(@exit-code).to.equal +table['EXIT CODE']
 

@@ -30,6 +30,10 @@ class TestFormatter
     (@error-messages or= []).push strip-color(error-message).replace 'tmp/', ''
     (@lines or= []).push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
 
+  refine-activity: (activity) ->
+    (@activities or= [])[*-1] = strip-color activity
+    (@lines or= [])[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
+
   set-lines: (@start-line, @end-line) ->
 
   suite-success: (@steps-count) ->

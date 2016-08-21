@@ -7,6 +7,8 @@ debug = require('debug')('console-with-dollar-prompt-runner')
 
 
 module.exports  = ({nodes,formatter, searcher}, done) ->
+  formatter.start-activity 'running console command'
+
   commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
     | nodes.length is 0  =>  'no code blocks found'
     | !content  =>  'the block that defines console commands to run is empty')
@@ -16,7 +18,7 @@ module.exports  = ({nodes,formatter, searcher}, done) ->
   |> map trim-dollar
   |> (.join ' && ')
 
-  formatter.start-activity "running console command: #{cyan commands-to-run}"
+  formatter.refine-activity "running console command: #{cyan commands-to-run}"
   new ObservableProcess(['bash', '-c', commands-to-run],
                         cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
     ..on 'ended', (err) ~>

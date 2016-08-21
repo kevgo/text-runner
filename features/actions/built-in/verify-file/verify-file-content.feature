@@ -45,9 +45,10 @@ Feature: verifying file content
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | mismatching content in one.txt:\nmismatching records:\n\nHello world!Unexpected content here |
       | FILENAME      | file-content-verifier.md                                                                     |
       | LINE          | 3-10                                                                                         |
+      | MESSAGE       | verifying file one.txt                                                                       |
+      | ERROR MESSAGE | mismatching content in one.txt:\nmismatching records:\n\nHello world!Unexpected content here |
       | EXIT CODE     | 1                                                                                            |
     And the test directory still contains a file "one.txt" with content:
       """
@@ -58,7 +59,8 @@ Feature: verifying file content
   Scenario: file is missing
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | file one.txt not found   |
       | FILENAME      | file-content-verifier.md |
       | LINE          | 3-10                     |
+      | MESSAGE       | verifying file one.txt   |
+      | ERROR MESSAGE | file one.txt not found   |
       | EXIT CODE     | 1                        |

@@ -58,7 +58,6 @@ class MarkdownFileRunner
     start-line = 0
     result = []
     for node in tree
-
       switch
 
         case block-type = @_is-start-tag node

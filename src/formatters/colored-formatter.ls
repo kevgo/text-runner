@@ -85,6 +85,12 @@ class ColoredFormatter
     process.exit 1
 
 
+  # Called when we start performing an activity that was defined in a block
+  refine-activity: (@activity-text) ->
+    @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
+    @_print!
+
+
   set-lines: (@start-line, @end-line) ->
 
 

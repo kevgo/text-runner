@@ -33,10 +33,11 @@ Feature: running console commands
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | no code blocks found |
-      | FILENAME      | running.md           |
-      | LINE          | 1                    |
-      | EXIT CODE     | 1                    |
+      | FILENAME      | running.md              |
+      | LINE          | 1                       |
+      | MESSAGE       | running console command |
+      | ERROR MESSAGE | no code blocks found    |
+      | EXIT CODE     | 1                       |
 
 
   Scenario: empty console command
@@ -49,7 +50,8 @@ Feature: running console commands
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | the block that defines console commands to run is empty |
       | FILENAME      | running.md                                              |
       | LINE          | 1-4                                                     |
+      | MESSAGE       | running console command                                 |
+      | ERROR MESSAGE | the block that defines console commands to run is empty |
       | EXIT CODE     | 1                                                       |

@@ -43,9 +43,10 @@ Feature: creating files with content
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | no path given for file to create |
       | FILENAME      | creator.md                       |
       | LINE          | 1-5                              |
+      | MESSAGE       | creating file                    |
+      | ERROR MESSAGE | no path given for file to create |
       | EXIT CODE     | 1                                |
 
 
@@ -58,9 +59,10 @@ Feature: creating files with content
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | no content given for file to create |
       | FILENAME      | creator.md                          |
       | LINE          | 1                                   |
+      | MESSAGE       | creating file                       |
+      | ERROR MESSAGE | no content given for file to create |
       | EXIT CODE     | 1                                   |
 
 
@@ -78,9 +80,10 @@ Feature: creating files with content
       """
     When executing the tutorial
     Then the test fails with:
-      | ERROR MESSAGE | several file paths found: one.txt and two.txt |
       | FILENAME      | creator.md                                    |
       | LINE          | 1-8                                           |
+      | MESSAGE       | creating file                                 |
+      | ERROR MESSAGE | several file paths found: one.txt and two.txt |
       | EXIT CODE     | 1                                             |
 
 
@@ -102,7 +105,8 @@ Feature: creating files with content
       """
     When executing the tutorial
     Then the test fails with:
+      | FILENAME      | creator.md                                                                |
+      | LINE          | 1-12                                                                      |
+      | MESSAGE       | creating file                                                             |
       | ERROR MESSAGE | found multiple content blocks for file to create, please provide only one |
-      | FILENAME      | creator.md                                                             |
-      | LINE          | 1-12                                                                   |
-      | EXIT CODE     | 1                                                                      |
+      | EXIT CODE     | 1                                                                         |

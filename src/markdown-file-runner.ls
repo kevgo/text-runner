@@ -29,7 +29,11 @@ class MarkdownFileRunner
 
   _run-block: (block, done) ->
     try
-      block.runner block, -> done null, 1
+      if block.runner.length is 1
+        block.runner block
+        done null, 1
+      else
+        block.runner block, -> done null, 1
     catch
       block.formatter.error e.message or e
       done 1

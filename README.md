@@ -142,11 +142,10 @@ The handler for it lives in the file:
 __tut-run/hello-world-action.js__
 
 ```javascript
-module.exports = ({formatter}, done) => {
+module.exports = ({formatter}) => {
   formatter.startActivity('greeting the world')
   console.log('Hello World!')
   formatter.activitySuccess()
-  done()
 }
 ```
 

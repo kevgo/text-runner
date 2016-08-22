@@ -7,8 +7,7 @@
 [![pnpm](https://img.shields.io/badge/pnpm-compatible-brightgreen.svg)](https://github.com/rstacruz/pnpm)
 
 
-
-Runs the activities described in tutorials programmatically.
+_Runs the activities described in tutorials programmatically._
 
 
 ## What is it

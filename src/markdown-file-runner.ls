@@ -29,6 +29,7 @@ class MarkdownFileRunner
 
   _run-block: (block, done) ->
     try
+      block.formatter.set-lines block.start-line, block.end-line
       if block.runner.length is 1
         block.runner block
         done null, 1
@@ -74,7 +75,6 @@ class MarkdownFileRunner
 
         case @_is-end-tag node
           if current-runner-type
-            @formatter.set-lines start-line, node.line
             result.push do
               filename: @file-path
               start-line: start-line
@@ -83,6 +83,7 @@ class MarkdownFileRunner
               nodes: nodes-for-current-runner
               formatter: @formatter
               searcher: new Searcher {@file-path, start-line, end-line: node.line, nodes: nodes-for-current-runner, @formatter}
+          current-runner-type = null
           nodes-for-current-runner = null
 
         case current-runner-type

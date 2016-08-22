@@ -62,20 +62,23 @@ It is also possible to define your own custom block types and actions.
 * the name of the file is provided as bold text within the anchor tag
 * the content of the file is provided as a multi-line code block within the anchor tag
 
+<a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
-<a class="tutorialRunner_createFileWithContent">
+<a class="tutorialRunner_createFile">
 
 __test.txt__
 
-```txt
+`​``txt
 The file content goes here
 `​``
 </a>
 ```
+</a>
 
 
 ### run a command on the console and wait until it ends
 
+<a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_consoleCommand">
 
@@ -84,47 +87,52 @@ $ ls -a
 `​``
 </a>
 ```
-
-
-### a command, enter text, and wait until it ends
-
-```markdown
-<a class="tutorialRunner_consoleCommandWithInput">
-
-```bash
-$ ls -a
-`​``
 </a>
-```
 
 
-### run a bash script and wait until it outputs a certain string
-
-```markdown
-<a class="tutorialRunner_consoleCommandWaitForOutput">
-
-`​``
-$ ls -a
-`​``
-
-and wait until we see:
-
-`​``
-3 files
-`​``
-
-</a>
-```
+<!-- ### a command, enter text, and wait until it ends -->
+<!--  -->
+<!-- <a class="tutorialRunner_runMarkdownInTutrun"> -->
+<!-- ```markdown -->
+<!-- <a class="tutorialRunner_consoleCommandWithInput"> -->
+<!--  -->
+<!-- ```bash -->
+<!-- $ ls -a -->
+<!-- `​`` -->
+<!-- </a> -->
+<!-- ``` -->
+<!-- </a> -->
 
 
-### stop the currenly running Bash script
+<!-- ### run a bash script and wait until it outputs a certain string -->
+<!--  -->
+<!-- <a class="tutorialRunner_runMarkdownInTutrun"> -->
+<!-- ```markdown -->
+<!-- <a class="tutorialRunner_consoleCommandWaitForOutput"> -->
+<!--  -->
+<!-- `​`` -->
+<!-- $ echo 'hello world' -->
+<!-- `​`` -->
+<!--  -->
+<!-- and wait until we see: -->
+<!--  -->
+<!-- `​`` -->
+<!-- world -->
+<!-- `​`` -->
+<!--  -->
+<!-- </a> -->
+<!-- ``` -->
+<!-- </a> -->
 
-```markdown
-<a class="tutorialRunner_stopCurrentProcess">
-Stop the current process by hitting Ctrl-C
 
-</a>
-```
+<!-- ### stop the currenly running Bash script -->
+<!--  -->
+<!-- ```markdown -->
+<!-- <a class="tutorialRunner_stopCurrentProcess"> -->
+<!-- Stop the current process by hitting Ctrl-C -->
+<!--  -->
+<!-- </a> -->
+<!-- ``` -->
 
 
 ## Create your own actions

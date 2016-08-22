@@ -29,14 +29,14 @@ class ColoredFormatter
     #       since doing so at the class level
     #       binds them to the class scope for some reason
     @stdout =
-      write: @_output
+      write: @output
 
     @stderr =
-      write: @_output
+      write: @output
 
     @console =
       log: (text) ~>
-        @_output "#{text}\n"
+        @output "#{text}\n"
 
 
 
@@ -53,18 +53,19 @@ class ColoredFormatter
 
   # called when the last started activity failed
   activity-error: (message) ->
-    log-update "#{red figures.cross} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
-    log-update "\n\n#{red "Error: #{message}"}"
+    @activity-header = "#{red figures.cross} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
+    @activity-console += "\n\n#{red "Error: #{message}"}"
+    @_print!
     process.exit 1
 
 
   # called when the last started activity finished successful
   activity-success: ->
-    text = "#{green figures.tick} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
-    log-update text
+    @activity-header = "#{green figures.tick} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}"
+    @activity-console = ''
+    @_print!
     log-update.done!
     @activity-header = ''
-    @activity-console = ''
 
 
   # Called on general errors
@@ -103,7 +104,7 @@ class ColoredFormatter
     log-update @activity-header + @activity-console
 
 
-  _output: (text) ~>
+  output: (text) ~>
     @activity-console += dim text
     @_print!
 

@@ -21,6 +21,6 @@ module.exports  = ({formatter, searcher}, done) ->
 
   formatter.refine-activity "creating file #{cyan file-path}"
   fs.write-file path.join(global.working-dir, file-path), content, (err) ~>
-    | err  =>  formatter.activity-error!
-    formatter.activity-success!
+    | err  =>  formatter.activity-error err
+    | _    =>  formatter.activity-success!
     done null, 1

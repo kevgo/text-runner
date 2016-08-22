@@ -36,6 +36,7 @@ requiredModules:
       - '{features,spec,test}/**/*'
       - '**/*{.,_,-}{spec,test}.ls'
       - 'examples/**'
+      - 'tut-run/**'
     ignore:
       - 'node_modules/**/*'
     root: '**/*.ls'

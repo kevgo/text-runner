@@ -61,7 +61,7 @@ class MarkdownFileRunner
         case node.type is 'strong_close'
           modifiers.splice modifiers.index-of('strong'), 1
 
-        case <[ htmltag fence text ]>.includes node.type
+        case <[ htmltag fence text ]>.index-of(node.type) > -1
           result.push line: node-line, type: "#{modifiers.sort!.join!}#{node.type}", content: node.content
         if node.children
           @_standardize-ast node.children, node-line, result

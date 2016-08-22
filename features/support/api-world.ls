@@ -20,20 +20,17 @@ class TestFormatter
   start-file: (file-path) ->
     @file-paths.push file-path.replace 'test-dir/', ''
 
-  start-activity: (activity) ->
+  start: (activity) ->
     @activities.push strip-color activity
     @lines.push if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
 
-  activity-success: ->
-
-  activity-error: (error-message = '') ->
-    @error-messages.push strip-color(error-message).replace 'test-dir/', ''
+  success: ->
 
   error: (error-message) !->
     @error-messages.push strip-color(error-message).replace 'test-dir/', ''
     @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
 
-  refine-activity: (activity) ->
+  refine: (activity) ->
     @activities[*-1] = strip-color activity
     @lines[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
 

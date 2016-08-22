@@ -21,18 +21,12 @@ class SimpleFormatter
 
 
   # Called when we start performing an activity that was defined in a block
-  start-activity: (text, @documentation-file-line) ->
+  start: (text, @documentation-file-line) ->
     console.log "#{bold @documentation-file-path}:#{bold @documentation-file-line} -- #{text}"
 
 
   # called when the last started activity finished successful
-  activity-success: ->
-
-
-  # called when the last started activity failed
-  activity-error: (message) ->
-    console.log red "#{bold @documentation-file-path}:#{bold @documentation-file-line} -- Error: #{message}"
-    process.exit 1
+  success: ->
 
 
   # Called on general errors

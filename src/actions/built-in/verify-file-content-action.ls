@@ -18,16 +18,16 @@ module.exports  = ({formatter, searcher}, done) ->
     | nodes.length is 0  =>  'no text given to compare file content against'
     | nodes.length > 1   =>  'found multiple content blocks for file to verify, please provide only one'
 
-  formatter.start-activity "verifying file #{cyan file-path}"
+  formatter.start "verifying file #{cyan file-path}"
   try
     actual-content = fs.read-file-sync path.join(global.working-dir, file-path), 'utf8'
   catch
     if e.code is 'ENOENT'
-      formatter.activity-error "file #{file-path} not found"
+      formatter.error "file #{file-path} not found"
       return done 1
     else throw e
   jsdiff-console actual-content.trim!, expected-content.trim!, (err) ~>
     if err
-      formatter.activity-error "mismatching content in #{cyan file-path}:\n#{err.message}"
-    formatter.activity-success!
+      formatter.error "mismatching content in #{cyan file-path}:\n#{err.message}"
+    formatter.success!
     done null, 1

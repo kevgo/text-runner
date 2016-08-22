@@ -5,6 +5,6 @@ require! {
 
 
 module.exports  = ({formatter}) ->
-  formatter.start-activity 'greeting the world'
+  formatter.start 'greeting the world'
   formatter.console.log "Hello World!"
-  formatter.activity-success!
+  formatter.success!

@@ -45,22 +45,14 @@ class ColoredFormatter
 
 
   # Called when we start performing an activity that was defined in a block
-  start-activity: (@activity-text) ->
+  start: (@activity-text) ->
     @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
     @activity-console = ''
     @_print!
 
 
-  # called when the last started activity failed
-  activity-error: (message) ->
-    @activity-header = "#{red figures.cross} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
-    @activity-console += "\n\n#{red "Error: #{message}"}"
-    @_print!
-    process.exit 1
-
-
   # called when the last started activity finished successful
-  activity-success: ->
+  success: ->
     @activity-header = "#{green figures.tick} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}"
     @activity-console = ''
     @_print!
@@ -87,7 +79,7 @@ class ColoredFormatter
 
 
   # Called when we start performing an activity that was defined in a block
-  refine-activity: (@activity-text) ->
+  refine: (@activity-text) ->
     @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
     @_print!
 

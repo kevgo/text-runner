@@ -10,7 +10,7 @@ require! {
 
 
 module.exports  = ({formatter, searcher}, done) ->
-  formatter.start-activity 'verify that markdown works in tut-run'
+  formatter.start 'verify that markdown works in tut-run'
 
   markdown = searcher.node-content type: 'fence', ({content, nodes}) ->
     | nodes.length is 0  =>  'no fenced block found'
@@ -23,6 +23,6 @@ module.exports  = ({formatter, searcher}, done) ->
     ..stdout.on 'data', (data) -> formatter.output strip-color data.to-string!
     ..stderr.on 'data', (data) -> formatter.output strip-color data.to-string!
     ..on 'close', (exit-code) ~>
-      | exit-code is 0  =>  formatter.activity-success!
-      | otherwise       =>  formatter.activity-error "tut-run exited with code #{exit-code} when processing this markdown block"
+      | exit-code is 0  =>  formatter.success!
+      | otherwise       =>  formatter.error "tut-run exited with code #{exit-code} when processing this markdown block"
       done exit-code, 1

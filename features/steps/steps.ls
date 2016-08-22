@@ -45,7 +45,7 @@ module.exports = ->
     @execute-tutorial done
 
 
-  @When /^executing the "([^"]*)" example/, timeout: 3000, (example-name, done) ->
+  @When /^executing the "([^"]*)" example/, timeout: 4000, (example-name, done) ->
     @execute-example example-name, done
 
 

@@ -9,7 +9,7 @@ require! {
 module.exports  = ({formatter, searcher}, done) ->
   formatter.start-activity "creating file"
 
-  file-path = searcher.node-content type: 'text', ({nodes, content}) ->
+  file-path = searcher.node-content type: 'strongtext', ({nodes, content}) ->
     | nodes.length is 0  =>  'no path given for file to create'
     | nodes.length > 1   =>  "several file paths found: #{nodes |> map (.content) |> map ((a) -> cyan a) |> (.join ' and ')}"
     | !content           =>  'no path given for file to create'

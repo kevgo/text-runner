@@ -3,6 +3,7 @@ require! {
   'chalk' : {cyan}
   'fs'
   'path'
+  'prelude-ls' : {reject}
   'remarkable' : Remarkable
   './searcher' : Searcher
 }
@@ -49,12 +50,21 @@ class MarkdownFileRunner
   #     ...
   # ]
   _standardize-ast: (ast, line = 0, result = []) ->
+    modifiers = []
     for node in ast
       node-line = if node.lines?.length > 0 then node.lines[0] + 1 else line
-      if <[ htmltag fence text strong_open strong_close ]>.includes node.type
-        result.push line: node-line, type: node.type, content: node.content
-      if node.children
-        @_standardize-ast node.children, node-line, result
+      switch
+
+        case node.type is 'strong_open'
+          modifiers.push 'strong'
+
+        case node.type is 'strong_close'
+          modifiers.splice modifiers.index-of('strong'), 1
+
+        case <[ htmltag fence text ]>.includes node.type
+          result.push line: node-line, type: "#{modifiers.sort!.join!}#{node.type}", content: node.content
+        if node.children
+          @_standardize-ast node.children, node-line, result
     result
 
 

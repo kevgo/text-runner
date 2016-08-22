@@ -13,7 +13,7 @@ Feature: creating files with content
     Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tutorialRunner_createFile">
-      __one.txt__
+      creating a file with name __one.txt__ and content:
 
       ```
       Hello world!

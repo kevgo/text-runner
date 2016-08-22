@@ -164,7 +164,9 @@ The handler for it lives in the file:
 __tut-run/hello-world-action.js__
 
 ```javascript
-module.exports = ({formatter}) => {
+module.exports = function(env) {
+  formatter = env.formatter
+
   formatter.start('greeting the world')
   formatter.output('Hello World!')
   formatter.success()
@@ -230,18 +232,20 @@ __tut-run/console-command.js__
 ```javascript
 child_process = require('child_process')
 
-module.exports = ({formatter, nodes, searcher}) => {
-  // nodes isn't used here, just included to show you how to get it
+module.exports = function(env) {
+  var formatter = env.formatter
+  var getNode = env.searcher.nodeContent
+  // you can also read env.nodes directly here also if you want
 
-  formatter.start(`running console command`)
+  formatter.start('running console command')
 
-  const commandToRun = searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'this active tag must contain a code block with the command to run'
-    if (nodes.length > 1) return 'please provide only one code block'
-    if (!content) return 'you provided a code block but it has no content'
+  var commandToRun = getNode({type: 'fence'}, function(match) {
+    if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
+    if (match.nodes.length > 1) return 'please provide only one code block'
+    if (!match.content) return 'you provided a code block but it has no content'
   })
 
-  formatter.refine(`running console command: ${commandToRun}`)
+  formatter.refine('running console command: ' + commandToRun)
   formatter.output(child_process.execSync(commandToRun))
   formatter.success()
 }

@@ -1,14 +1,11 @@
 require! {
   'async'
-  'chalk' : {cyan, red}
+  'chalk' : {cyan}
   'fs'
   'path'
-  'prelude-ls' : {capitalize}
+  'prelude-ls' : {reject}
   'remarkable' : Remarkable
-  './runners/console-command-runner' : ConsoleCommandRunner
-  './runners/console-with-input-from-table-runner' : ConsoleWithInputFromTableRunner
-  './runners/create-file-with-content-runner' : CreateFileWithContentRunner
-  './runners/verify-file-content-runner' : VerifyFileContentRunner
+  './searcher' : Searcher
 }
 debug = require('debug')('markdown-file-runner')
 
@@ -16,50 +13,105 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  (@file-path) ->
+  ({@file-path, @formatter, @actions}) ->
     @markdown-parser = new Remarkable 'full', html: on
-
-    # the current block runner instance
-    @current-runner = null
-
-    # the current line in the current markdown file
-    @current-line = 0
-
-    # all runners
-    @runners = []
 
 
   run: (done) ->
-    debug "checking file #{@file-path}"
+    @formatter.start-file path.relative(process.cwd!, @file-path)
     markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0
-      console.log red "Error: found empty file #{cyan(path.relative process.cwd!, @file-path)}"
-      process.exit 1
-    markdown-ast = @markdown-parser.parse markdown-text, {}
-    @_check-nodes markdown-ast
-    async.map-series @runners,
-                      ((runner, cb) -> runner.run cb),
-                      done
+      @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
+    run-data = @markdown-parser.parse markdown-text, {}
+      |> @_standardize-ast
+      |> @_iterate-nodes
+    async.map-series run-data, @_run-block, done
 
 
-  _check-nodes: (tree) ->
+  _run-block: (block, done) ->
+    try
+      block.formatter.set-lines block.start-line, block.end-line
+      if block.runner.length is 1
+        block.runner block
+        done null, 1
+      else
+        block.runner block, -> done null, 1
+    catch
+      block.formatter.error e.message or e
+      done 1
+
+
+  # standardizes the given AST into a flat array with this format:
+  # [
+  #   * line
+  #     type
+  #     content
+  #   * line
+  #     ...
+  # ]
+  _standardize-ast: (ast, line = 0, result = []) ->
+    modifiers = []
+    for node in ast
+      node-line = if node.lines?.length > 0 then node.lines[0] + 1 else line
+      switch
+
+        case node.type is 'strong_open'
+          modifiers.push 'strong'
+
+        case node.type is 'strong_close'
+          modifiers.splice modifiers.index-of('strong'), 1
+
+        case <[ htmltag fence text ]>.index-of(node.type) > -1
+          result.push line: node-line, type: "#{modifiers.sort!.join!}#{node.type}", content: node.content
+        if node.children
+          @_standardize-ast node.children, node-line, result
+    result
+
+
+  _iterate-nodes: (tree) ->
+    nodes-for-current-runner = null
+    start-line = 0
+    result = []
     for node in tree
-      @current-line = node.lines[0] + 1 if node.lines
-      if node.type is 'htmltag'
+      switch
 
-        if matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
-          throw new Error 'Found a nested <a class="tutorialRunner_*"> block' if @running
-          class-name = "#{capitalize matches[1]}Runner"
-          debug "instantiating '#{class-name}'"
-          clazz = eval class-name
-          @current-runner = new clazz path.relative(process.cwd!, @file-path), @current-line
+        case block-type = @_is-start-tag node
+          start-line = node.line
+          if current-runner-type then
+            @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
+            return null
+          if current-runner-type = @actions.action-for block-type
+            nodes-for-current-runner = []
 
-        if node.content is '</a>'
-          @runners.push @current-runner if @current-runner
-          @current-runner = null
+        case @_is-end-tag node
+          if current-runner-type
+            result.push do
+              filename: @file-path
+              start-line: start-line
+              end-line: node.line
+              runner: current-runner-type
+              nodes: nodes-for-current-runner
+              formatter: @formatter
+              searcher: new Searcher {@file-path, start-line, end-line: node.line, nodes: nodes-for-current-runner, @formatter}
+          current-runner-type = null
+          nodes-for-current-runner = null
 
-      @current-runner?.load node
-      @_check-nodes node.children if node.children
+        case current-runner-type
+          nodes-for-current-runner.push node if nodes-for-current-runner
+
+    result
+
+
+  # Indicates whether the given node is a start tag of an active block
+  # by returning the type of the block, or falsy.
+  _is-start-tag: (node) ->
+    if node.type is 'htmltag' and matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
+      matches[1]
+
+
+  # Returns whether the given node is the end of an active block
+  _is-end-tag: (node) ->
+    node.type is 'htmltag' and node.content is '</a>'
 
 
 module.exports = MarkdownFileRunner

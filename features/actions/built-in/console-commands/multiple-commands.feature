@@ -8,22 +8,18 @@ Feature: running multiple console commands
 
 
   Scenario: running multiple console commands
-    Given I am in a directory containing a file "running-multiple-commands.md" with the content:
+    Given my workspace contains the file "running-multiple-commands.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
-      ls -1
+      ls -a
       ls -a
       ```
       </a>
       """
-    When running "tut-run"
-    Then it prints:
-      """
-      running-multiple-commands.md:1 -- running console commands: ls -1 && ls -a
-      running-multiple-commands.md
-      .
-      ..
-      running-multiple-commands.md
-      """
+    When executing the tutorial
+    Then it signals:
+      | FILENAME | running-multiple-commands.md            |
+      | LINE     | 1-6                                     |
+      | MESSAGE  | running console command: ls -a && ls -a |
     And the test passes

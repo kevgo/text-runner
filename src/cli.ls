@@ -1,7 +1,9 @@
 require! {
-  'chalk' : {red}
+  '../package.json' : pkg
   './tutorial-runner' : TutorialRunner
+  'update-notifier'
 }
 
+update-notifier({pkg}).notify!
 
-new TutorialRunner!run process.cwd!
+new TutorialRunner!.run!

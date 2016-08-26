@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - "4"
+  - "5"
+  - "6"
+  - "node"
+
+
+before_script:
+  - node_modules/o-tools-livescript/bin/build
+
+notifications:
+  email: false

@@ -1,38 +1,65 @@
 require! {
+  './actions/action-manager' : ActionManager
   'async'
-  'chalk' : {green, red}
+  './formatters/colored-formatter' : ColoredFormatter
   './markdown-file-runner' : MarkdownFileRunner
   'glob'
+  'interpret'
+  'liftoff' : Liftoff
+  'mkdirp'
+  'path'
   'prelude-ls' : {flatten, sum}
+  'require-new'
+  'require-yaml'
+  'rimraf'
 }
 
 
 # Runs the tutorial in the given directory
 class TutorialRunner
 
+  ({@formatter = new ColoredFormatter} = {}) ->
+    @actions = new ActionManager @formatter
+
 
   # Runs the given tutorial
-  run: (dir) ->
-    async.map-series @_runners(dir), ((runner, cb) -> runner.run cb), (err, results) ~>
-      | err  =>  process.exit 1
-      if (steps-count = results |> flatten |> sum) is 0
-        console.log red 'Error: no activities found'
-        process.exit 1
-      console.log green "Success! #{steps-count} tests passed"
+  run: (done) ->
+    new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
+      ..launch {}, ({config-path}) ~>
+
+        @configuration = require-new config-path
+
+        # The glob expression used to find markdown files to execute
+        @files-glob = @configuration?.files or "**/*.md"
+
+        @_create-working-dir!
+        async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
+          | err  =>  return done err
+          if (steps-count = results |> flatten |> sum) is 0
+            @formatter.error 'no activities found'
+            done? 'no activities found'
+          else
+            @formatter.suite-success steps-count
+            done?!
+
+
+  # Creates the temp directory to run the tests in
+  _create-working-dir: ->
+    global.working-dir = path.join process.cwd!, 'tmp'
+    rimraf.sync global.working-dir
+    mkdirp.sync global.working-dir
 
 
   # Returns all the markdown files for this tutorial
-  _markdown-files: (dir) ->
-    if (files = glob.sync "#{dir}/*.md").length is 0
-      console.log red 'no Markdown files found'
-      process.exit 1
+  _markdown-files: ->
+    if (files = glob.sync @files-glob).length is 0
+      @formatter.error 'no Markdown files found'
     files
 
 
-
   # Returns an array of FileRunners for this tutorial
-  _runners: (dir) ->
-    [new MarkdownFileRunner(file) for file in @_markdown-files(dir)]
+  _runners: ->
+    [new MarkdownFileRunner({file-path, @formatter, @actions}) for file-path in @_markdown-files!]
 
 
 

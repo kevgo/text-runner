@@ -1,56 +1,78 @@
- require! {
-   'chai' : {expect}
-   'dim-console'
-   'fs'
-   'observable-process' : ObservableProcess
-   'path'
- }
+require! {
+  'chai' : {expect}
+  'fs'
+  'mkdirp'
+  'path'
+}
 
 
 module.exports = ->
 
-  @Given /^I am in the directory of the tutorial "([^"]*)"$/ (name) ->
-     @app-dir = path.join process.cwd!, 'features', 'example-tutorials', name
+
+  @Given /^a runnable file "([^"]*)"$/ (file-path) ->
+    fs.mkdir-sync path.join 'test-dir', subdir if (subdir = path.dirname file-path) isnt '.'
+    fs.write-file-sync path.join('test-dir', file-path), """
+      <a class="tutorialRunner_createFile">
+      __one.txt__
+
+      ```
+      Hello world!
+      ```
+      </a>
+      """
 
 
-  @Given /^I am in a directory containing a file "([^"]*)" with the content:$/ (file-name, content) ->
-    fs.write-file-sync path.join('tmp', file-name), content
+  @Given /^the configuration file:$/ (content) ->
+    fs.write-file-sync path.join('test-dir', 'tut-run.yml'), content
 
 
-  @Given /^I am in a directory containing an empty file "([^"]*)"$/ (file-name) ->
-    fs.write-file-sync path.join('tmp', file-name), ''
+  @Given /^my workspace contains the file "([^"]*)" with the content:$/ (file-name, content) ->
+    fs.write-file-sync path.join('test-dir', file-name), content
 
 
-  @Given /^the file "([^"]*)" with the content:$/ (file-name, content) ->
-    fs.write-file-sync path.join('tmp', file-name), content
+  @Given /^my workspace contains an empty file "([^"]*)"$/ (file-name) ->
+    fs.write-file-sync path.join('test-dir', file-name), ''
 
 
-
-  @When /^running "([^"]*)"(?: in an empty directory)?$/ (command, done) ->
-    args =
-      cwd: 'tmp'
-      console: off
-      env: {}
-    if @verbose
-      args.console = dim-console.console
-    if @debug
-      args.env['DEBUG'] = '*'
-    @process = new ObservableProcess path.join(process.cwd!, 'bin', command), args
-      ..on 'ended', (@exit-code) ~> done!
+  @Given /^the test directory contains the file "([^"]*)" with the content:$/ (file-name, content) ->
+    base-dir = path.join 'test-dir', 'tmp'
+    mkdirp.sync base-dir
+    fs.write-file-sync path.join(base-dir, file-name), content
 
 
 
-  @Then /^it prints:$/ (expected-text) ->
-    expect(@process.full-output!).to.include expected-text
+  @When /^executing the tutorial(?: runner in an empty workspace)?$/ (done) ->
+    @execute-tutorial done
 
 
-  @Then /^the directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
-    expect(fs.read-file-sync path.join('tmp', file-name), 'utf8').to.equal expected-content
+  @When /^executing the "([^"]*)" example/, timeout: 4000, (example-name, done) ->
+    @execute-example example-name, done
 
 
-  @Then /^the test fails with exit code (\d+) and the error:$/ (+expected-exit-code, expected-text) ->
-    expect(@process.full-output!).to.include expected-text
-    expect(@exit-code).to.equal expected-exit-code
+
+  @Then /^it creates a directory "([^"]*)"$/ (directory-path) ->
+    fs.stat-sync path.join 'test-dir', directory-path
+
+
+  @Then /^it runs (\d+) test$/ (count) ->
+    @verify-tests-run count
+
+
+  @Then /^it runs the console command "([^"]*)"$/ (command) ->
+    @verify-ran-console-command command
+
+
+  @Then /^it signals:$/ (table) ->
+    @verify-output table.rows-hash!
+
+
+  @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
+    expect(fs.read-file-sync(path.join('test-dir', 'tmp', file-name), 'utf8').trim!).to.equal expected-content.trim!
+
+
+  @Then /^the test fails with:$/ (table) ->
+    @verify-failure table.rows-hash!
+
 
   @Then /^the test passes$/ ->
-    expect(@exit-code).to.equal 0
+    @verify-success!

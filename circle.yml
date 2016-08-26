@@ -11,7 +11,8 @@ test:
 
   override:
     - node_modules/o-tools/bin/lint
-    - NODE_ENV='test' cucumber-js --tags ~@todo --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
+    - NODE_ENV='test' bin/cuc-api --tags ~@todo --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
+    - NODE_ENV='test' bin/cuc-cli --tags ~@todo --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
 
 
 deployment:

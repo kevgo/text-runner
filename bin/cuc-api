@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -e
+
+node_modules/o-tools-livescript/bin/build
+if [ "$#" != "1" ]; then
+  EXOSERVICE_TEST_DEPTH=API cucumber-js --tags ~@todo "$@"
+else
+  EXOSERVICE_TEST_DEPTH=API DEBUG='*,-express:*,-body-parser:*,-finalhandler,-text-stream-search,-rails-delegate' cucumber-js --tags ~@todo "$@"
+fi

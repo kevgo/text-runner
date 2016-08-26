@@ -9,22 +9,18 @@ Feature: marking console commands with preceding dollar signs
 
 
   Scenario: running console commands with dollar signs
-    Given I am in a directory containing a file "running-with-dollar-sign.md" with the content:
+    Given my workspace contains the file "running-with-dollar-sign.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
-      $ ls -1
+      $ ls -a
       $ ls -a
       ```
       </a>
       """
-    When running "tut-run"
-    Then it prints:
-      """
-      running-with-dollar-sign.md:1 -- running console commands: ls -1 && ls -a
-      running-with-dollar-sign.md
-      .
-      ..
-      running-with-dollar-sign.md
-      """
+    When executing the tutorial
+    Then it signals:
+      | FILENAME | running-with-dollar-sign.md             |
+      | LINE     | 1-6                                     |
+      | MESSAGE  | running console command: ls -a && ls -a |
     And the test passes

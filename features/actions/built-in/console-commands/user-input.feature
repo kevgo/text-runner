@@ -6,7 +6,7 @@ Feature: running console commands
 
   - optionally there can be an HTML table that defines input into the commands
   - if the table has exactly one column, it contains the input to enter
-  - the ENTER key is pressed automatically for the user
+  - the ENTER key is pressed automatically for the user at the end of each input field
   - Only content in TD cells is used.
     TH cells are considered labels and ignored.
   - if the table has more than one column,
@@ -17,31 +17,26 @@ Feature: running console commands
 
   @verbose
   Scenario: entering text into the console
-    Given I am in a directory containing a file "enter-input.md" with the content:
+    Given my workspace contains the file "enter-input.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
       $ read foo
       $ echo $foo
       ```
-
       <table>
         <tr>
           <td>123</td>
         </tr>
       </table>
-      ```
+
       </a>
       """
-    When running "tut-run"
-    Then it prints:
-      """
-      enter-input.md:1 -- running console commands: ls -1 && ls -a
-      running.md
-      .
-      ..
-      running.md
-      """
+    When executing the tutorial
+    Then it signals:
+      | FILENAME | enter-input.md                                 |
+      | LINE     | 1-6                                            |
+      | MESSAGE  | running console command: read foo && echo $foo |
     And the test passes
 
   Scenario: entering text into the console

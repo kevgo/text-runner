@@ -2,11 +2,12 @@ require! {
   'chalk' : {cyan, red}
   'observable-process' : ObservableProcess
   'prelude-ls' : {compact, find, map}
+  'xml2js' : {parse-string}
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
-module.exports  = ({nodes,formatter, searcher}, done) ->
+module.exports  = ({formatter, searcher}, done) ->
   formatter.start 'running console command'
 
   commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
@@ -18,13 +19,26 @@ module.exports  = ({nodes,formatter, searcher}, done) ->
   |> map trim-dollar
   |> (.join ' && ')
 
-  formatter.refine "running console command: #{cyan commands-to-run}"
-  new ObservableProcess(['bash', '-c', commands-to-run],
-                        cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
-    ..on 'ended', (err) ~>
-      | err  =>  formatter.error err
-      | _    =>  formatter.success!
-      done err, 1
+  input-text = searcher.node-content type: 'htmlblock'
+  parse-xml input-text, formatter, (input) ->
+
+    formatter.refine "running console command: #{cyan commands-to-run}"
+    new ObservableProcess(['bash', '-c', commands-to-run],
+                          cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
+      ..on 'ended', (err) ~>
+        | err  =>  formatter.error err
+        | _    =>  formatter.success!
+        done err, 1
+
+    console.log input
+
+
+function parse-xml text, formatter, done
+  if !text then return done ''
+  parse-string text, (err, result) ->
+    | err  =>  formatter.error err
+    done result
+
 
 
 # trims the leading dollar from the given command

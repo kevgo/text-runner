@@ -1,4 +1,5 @@
 require! {
+  'cli-cursor'
   '../package.json' : pkg
   './tutorial-runner' : TutorialRunner
   'update-notifier'
@@ -6,4 +7,5 @@ require! {
 
 update-notifier({pkg}).notify!
 
+cli-cursor.hide!
 new TutorialRunner!.run!

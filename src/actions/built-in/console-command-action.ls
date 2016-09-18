@@ -21,7 +21,6 @@ module.exports  = ({formatter, searcher}, done) ->
 
   input-text = searcher.node-content type: 'htmlblock'
   get-input input-text, formatter, (input) ->
-
     formatter.refine "running console command: #{cyan commands-to-run}"
     process = new ObservableProcess(['bash', '-c', commands-to-run],
                                     cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
@@ -44,7 +43,11 @@ function get-input text, formatter, done
   parse-string text, (err, xml) ->
     | err  =>  return formatter.error err
     result = for tr in xml.table.tr
-      text-to-wait: null, input: tr.td[0]
+      if tr.td
+        if tr.td.length is 1
+          text-to-wait: null, input: tr.td[0]
+        else
+          text-to-wait: tr.td[0], input: tr.td[*-1]
     done result
 
 

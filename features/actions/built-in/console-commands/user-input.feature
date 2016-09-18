@@ -15,7 +15,6 @@ Feature: running console commands
     Other columns are ignored.
 
 
-  @verbose
   Scenario: entering text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
@@ -39,19 +38,21 @@ Feature: running console commands
       | MESSAGE  | running console command: read foo && echo $foo |
     And the test passes
 
+
   Scenario: entering text into the console
-    Given I am in a directory containing a file "enter-input.md" with the content:
+    Given my workspace contains the file "enter-input.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
       ```
-      $ read foo
-      $ echo $foo
+      $ echo Name of the service to add
+      $ read service_name
+      $ echo Description
+      $ read description
       ```
-
       <table>
         <tr>
-          <th>123</th>
-          <th>text you enter</th>
+          <th>When you see this</th>
+          <th>then you enter</th>
         </tr>
         <tr>
           <td>Name of the service to add</td>
@@ -61,25 +62,13 @@ Feature: running console commands
           <td>Description</td>
           <td>serves the HTML UI of the Todo app</td>
         </tr>
-        <tr>
-          <td>type</td>
-          <td>htmlserver-express-es6</td>
-        </tr>
-        <tr>
-          <td>Initial version</td>
-          <td>(press [Enter] to accept the default value of 0.0.1)</td>
-        </tr>
       </table>
-      ```
+
       </a>
       """
-    When running "tut-run"
-    Then it prints:
-      """
-      running.md:1 -- running console commands: ls -1 && ls -a
-      running.md
-      .
-      ..
-      running.md
-      """
+    When executing the tutorial
+    Then it signals:
+      | FILENAME | enter-input.md                                                                                                        |
+      | LINE     | 1-23                                                                                                                  |
+      | MESSAGE  | running console command: echo Name of the service to add && read service_name && echo Description && read description |
     And the test passes

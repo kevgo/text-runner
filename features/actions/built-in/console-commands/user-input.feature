@@ -20,7 +20,7 @@ Feature: running console commands
       <a class="tutorialRunner_consoleCommand">
       ```
       $ read foo
-      $ echo $foo
+      $ echo You entered: $foo
       ```
       <table>
         <tr>
@@ -35,6 +35,10 @@ Feature: running console commands
       | FILENAME | enter-input.md                                 |
       | LINE     | 1-12                                           |
       | MESSAGE  | running console command: read foo && echo $foo |
+    And I see:
+      """
+      You entered: 123
+      """
     And the test passes
 
 

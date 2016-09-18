@@ -60,6 +60,12 @@ ApiWorld = !->
         done!
 
 
+  @verify-prints = (expected-text) ->
+    # No way to capture console output here.
+    # This is tested in the CLI world.
+    return
+
+
   @verify-failure = (table) ->
     expect(@formatter.error-messages).to.include table['ERROR MESSAGE']
     expect(@formatter.file-paths).to.include table.FILENAME if table.FILENAME

@@ -1,12 +1,13 @@
 require! {
   'chalk' : {cyan, red}
   'observable-process' : ObservableProcess
-  'prelude-ls' : {compact, find, map}
+  'prelude-ls' : {compact, find, map, values}
+  'xml2js' : {parse-string}
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
-module.exports  = ({nodes,formatter, searcher}, done) ->
+module.exports  = ({formatter, searcher}, done) ->
   formatter.start 'running console command'
 
   commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
@@ -18,13 +19,37 @@ module.exports  = ({nodes,formatter, searcher}, done) ->
   |> map trim-dollar
   |> (.join ' && ')
 
-  formatter.refine "running console command: #{cyan commands-to-run}"
-  new ObservableProcess(['bash', '-c', commands-to-run],
-                        cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
-    ..on 'ended', (err) ~>
-      | err  =>  formatter.error err
-      | _    =>  formatter.success!
-      done err, 1
+  input-text = searcher.node-content type: 'htmlblock'
+  get-input input-text, formatter, (input) ->
+    formatter.refine "running console command: #{cyan commands-to-run}"
+    process = new ObservableProcess(['bash', '-c', commands-to-run],
+                                    cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
+      ..on 'ended', (err) ~>
+        | err  =>  formatter.error err
+        | _    =>  formatter.success!
+        done err, 1
+
+    for input-line in input
+      enter process, input-line
+
+
+function enter process, {text-to-wait = '', input}
+  process.wait text-to-wait, ->
+    process.enter input
+
+
+function get-input text, formatter, done
+  if !text then return done ''
+  parse-string text, (err, xml) ->
+    | err  =>  return formatter.error err
+    result = for tr in xml.table.tr
+      if tr.td
+        if tr.td.length is 1
+          text-to-wait: null, input: tr.td[0]
+        else
+          text-to-wait: tr.td[0], input: tr.td[*-1]
+    done result
+
 
 
 # trims the leading dollar from the given command

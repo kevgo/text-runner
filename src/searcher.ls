@@ -11,7 +11,7 @@ class Searcher
   node-content: (query, error-checker) ~>
     nodes = @nodes |> filter (.type is query.type)
     content = nodes[0]?.content
-    if error = error-checker {nodes, content}
+    if error = error-checker? {nodes, content}
       throw new Error error
     content
 

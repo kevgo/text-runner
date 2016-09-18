@@ -61,6 +61,8 @@ ApiWorld = !->
 
 
   @verify-prints = (expected-text) ->
+    # No way to capture console output here.
+    # This is tested in the CLI world.
     return
 
 

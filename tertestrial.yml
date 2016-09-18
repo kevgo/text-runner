@@ -1,45 +1,45 @@
 actions:
 
-  - ALL:
+  ALL:
 
-      - match:
-        command: 'bin/spec'
+    - match:
+      command: 'bin/spec'
 
-      - match:
-          filename: '\.feature$'
-        command: 'bin/cuc-api {{filename}} && bin/cuc-cli {{filename}}'
+    - match:
+        filename: '\.feature$'
+      command: 'bin/cuc-api {{filename}} && bin/cuc-cli {{filename}}'
 
-      - match:
-          filename: '\.feature$'
-          line: '\d+'
-        command: 'bin/cuc-api {{filename}}:{{line}} && bin/cuc-cli {{filename}}:{{line}}'
-
-
-  - API:
-
-      - match:
-        command: 'bin/cuc-api'
-
-      - match:
-          filename: '\.feature$'
-        command: 'bin/cuc-api {{filename}}'
-
-      - match:
-          filename: '\.feature$'
-          line: '\d+'
-        command: 'bin/cuc-api {{filename}}:{{line}}'
+    - match:
+        filename: '\.feature$'
+        line: '\d+'
+      command: 'bin/cuc-api {{filename}}:{{line}} && bin/cuc-cli {{filename}}:{{line}}'
 
 
-  - CLI:
+  API:
 
-      - match:
-        command: 'bin/cuc-cli'
+    - match:
+      command: 'bin/cuc-api'
 
-      - match:
-          filename: '\.feature$'
-        command: 'bin/cuc-cli {{filename}}'
+    - match:
+        filename: '\.feature$'
+      command: 'bin/cuc-api {{filename}}'
 
-      - match:
-          filename: '\.feature$'
-          line: '\d+'
-        command: 'bin/cuc-cli {{filename}}:{{line}}'
+    - match:
+        filename: '\.feature$'
+        line: '\d+'
+      command: 'bin/cuc-api {{filename}}:{{line}}'
+
+
+  CLI:
+
+    - match:
+      command: 'bin/cuc-cli'
+
+    - match:
+        filename: '\.feature$'
+      command: 'bin/cuc-cli {{filename}}'
+
+    - match:
+        filename: '\.feature$'
+        line: '\d+'
+      command: 'bin/cuc-cli {{filename}}:{{line}}'

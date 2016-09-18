@@ -35,7 +35,7 @@ Feature: running console commands
       | FILENAME | enter-input.md                                              |
       | LINE     | 1-12                                                        |
       | MESSAGE  | running console command: read foo && echo You entered: $foo |
-    And I see:
+    And it prints:
       """
       You entered: 123
       """
@@ -75,7 +75,7 @@ Feature: running console commands
       | FILENAME | enter-input.md                                                                                                                                                                     |
       | LINE     | 1-24                                                                                                                                                                               |
       | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, desciption: $description" |
-    And I see:
+    And it prints:
       """
       service: html-server, desciption: serves the HTML UI
       """

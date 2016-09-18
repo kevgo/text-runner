@@ -50,8 +50,8 @@ module.exports = ->
 
 
 
-  @Then /^I see:$/ (expected-text) ->
-    expect(@process.full-output!).to.include expected-text
+  @Then /^it prints:$/ (expected-text) ->
+    @verify-prints expected-text
 
 
   @Then /^it creates a directory "([^"]*)"$/ (directory-path) ->

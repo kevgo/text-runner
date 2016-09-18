@@ -6,11 +6,11 @@ Feature: running console commands
 
   - Optionally there can be an HTML table within the "consoleCommand" block
     that defines input into the commands.
-  - If the table has exactly one column, it contains the input to enter
+  - If the table has exactly one column, it contains the input to enter.
   - If the table has more than one column, the first column contains
     console output to wait for, and the last column contains the text to enter.
     All other columns are ignored.
-  - The ENTER key is pressed automatically for the user at the end of each input field
+  - The ENTER key is pressed automatically for the user at the end of each input field.
   - Only content in TD cells is used. TH cells are considered labels and ignored.
 
 

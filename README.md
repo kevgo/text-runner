@@ -7,13 +7,13 @@
 [![pnpm](https://img.shields.io/badge/pnpm-compatible-brightgreen.svg)](https://github.com/rstacruz/pnpm)
 
 
-_Runs the activities described in tutorials programmatically._
+_Test framework for documentation_
 
 
 ## What is it
 
 Tutorial Runner is a command-line tool that executes activities described in Markdown (and soon HTML) files programmatically.
-An example such is the readme document you are reading right now,
+An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.
 
 

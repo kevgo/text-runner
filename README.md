@@ -12,17 +12,33 @@ _Runs the activities described in tutorials programmatically._
 
 ## What is it
 
-A command-line tool that runs tutorials written in Markdown programmatically.
-This can for example be used to verify that your tutorials work correctly
-as part of your test suite.
-An example is this readme file here,
+Tutorial Runner is a command-line tool that executes activities described in Markdown (and soon HTML) files programmatically.
+An example such is the readme document you are reading right now,
 which is verified for correctness by Tutorial Runner.
+
+
+## Why you need it
+
+* __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
+  Before coding functionality, describe it via a readme or tutorial and get early feedback on your ideas.
+  Tutorial Runner makes this documentation actionable, a part of your test suite,
+  and thereby a driver for your [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) cycle.
+
+* __evergreen tutorials:__
+  Broken tutorials suck.
+  Tutorial Runner enforces that they always work,
+  every time you change anything in either your product or its documentation.
+
+* __change management and [semantic versioning](http://semver.org):__
+  Tutorial Runner tells you whether a pull request changes documented behavior of your solution.
+  Knowing that before shipping the change allows you to either implement it in a more backwards-compatible way
+  or update the documentation and announce the breaking change to your users.
 
 
 ## How it works
 
-Tutorial Runner recognizes invisible tags in your markdown
-that mark parts of the text as actionable.
+Tutorial Runner recognizes invisible tags in your markdown,
+which mark parts of the text as actionable.
 Let's say a tutorial tells the reader to create a file `config.yml`
 with the content `foo: bar`.
 The markdown code of this tutorial might look like this:
@@ -36,7 +52,7 @@ foo: bar
 `​``
 ```
 
-To make this part actionable, we surround it with an anchor tag:
+To make this part of the documentation actionable/testable, surround it with an `<a>` tag:
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 
@@ -44,7 +60,7 @@ To make this part actionable, we surround it with an anchor tag:
 ## Creating a configuration file
 
 <a class="tutorialRunner_createFile">
-Please create a configuration file with the name __config.yml__ and the content:
+Please create a file with the name __config.yml__ and the content:
 `​``
 foo: bar
 `​``
@@ -53,22 +69,26 @@ foo: bar
 
 </a>
 
-When running this Markdown file,
-Tutorial Runner will understand that it is supposed to create a file on your machine,
-and will do exactly that!
+When running this Markdown file via `tut-run`,
+everything inside `<a>` tags with the class `tutorialRunner_*` is executed by Tutorial Runner.
+The class also defines the action that this block describes.
+In this example it is `createFile`,
+meaning Tutorial Runner is supposed to create a file on your machine.
 It takes the filename out of the bold section (the part surrounded with "\_\_"),
-and the content out of the fenced code block (the part surrounded with _\`\`\`_).
+and the content out of the fenced code block (the part surrounded with _\`\`\`_),
+and creates the file on your hard drive.
 
 
 ## Built-in Actions
 
-Tutorial Runner provides a number of built-in block types
+Tutorial Runner provides a number of built-in actions
 for things typically done in tutorials.
 
 
 ### create a file with name and content
 * the name of the file is provided as bold text within the anchor tag
 * the content of the file is provided as a multi-line code block within the anchor tag
+* Tutorial Runner creates the file in a `tmp` directory in the current working directory
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
@@ -289,14 +309,28 @@ files: '**/*.md'
 
 ## Related Work
 
-* [markdown-doctest](https://github.com/Widdershin/markdown-doctest):
-  runs all the code in your markdown, but only actual code in fenced blocks
+There are many other good testing tools out there.
+They can either be combined with Tutorial Runner
+or could be viable alternatives to it, depending on your use case:
 
-* [tests-ex-markdown](https://github.com/anko/tests-ex-markdown):
-  test runner that runs code blocks embedded in MarkDown
+* [Cucumber](https://cucumber.io):
+  Runs tests via a specialized DSL that is optimized for describing features
+  via user stories, acceptance criteria, and example scenarias.
+  Tutorial Runner and Cucumber complement each other,
+  i.e. you would use Tutorial Runner for the end-user facing documentation on your web site
+  and Cucumber for agile, collaborative, behavior-driven day-to-day development,
+  driven by Tutorial Runner.
 
-* [mocha.md](https://github.com/sidorares/mocha.md)
+* [Gauge](http://getgauge.io):
+  a "Cucumber for Markdown".
+  With Tutorial Runner there are no restrictions on how the Markdown has to look like;
+  it can be 100% human-friendly prose.
 
-* [doctest.py](https://docs.python.org/2/library/doctest.html#simple-usage-checking-examples-in-a-text-file)
+* [doctest](https://docs.python.org/3/library/doctest.html):
+  executes only actual code blocks in your documentation,
+  and verifies only that it runs without errors.
+  Tutorial Runner can run anything that can be described textually,
+  and verify it in arbitrary ways.
 
-* [mockdown](https://github.com/pjeby/mockdown)
+* [mockdown](https://github.com/pjeby/mockdown):
+  like doctest, with verification of the output.

@@ -9,5 +9,11 @@ node_js:
 before_script:
   - node_modules/o-tools-livescript/bin/build
 
+
+branches:
+  except:
+  - release
+
+
 notifications:
   email: false

@@ -32,9 +32,9 @@ Feature: running console commands
       """
     When executing the tutorial
     Then it signals:
-      | FILENAME | enter-input.md                                 |
-      | LINE     | 1-12                                           |
-      | MESSAGE  | running console command: read foo && echo $foo |
+      | FILENAME | enter-input.md                                              |
+      | LINE     | 1-12                                                        |
+      | MESSAGE  | running console command: read foo && echo You entered: $foo |
     And I see:
       """
       You entered: 123
@@ -47,10 +47,11 @@ Feature: running console commands
       """
       <a class="tutorialRunner_consoleCommand">
       ```
-      $ echo Name of the service to add
+      $ echo "Name of the service to add"
       $ read service_name
       $ echo Description
       $ read description
+      $ echo "service: $service_name, desciption: $description"
       ```
       <table>
         <tr>
@@ -63,7 +64,7 @@ Feature: running console commands
         </tr>
         <tr>
           <td>Description</td>
-          <td>serves the HTML UI of the Todo app</td>
+          <td>serves the HTML UI</td>
         </tr>
       </table>
 
@@ -71,7 +72,11 @@ Feature: running console commands
       """
     When executing the tutorial
     Then it signals:
-      | FILENAME | enter-input.md                                                                                                        |
-      | LINE     | 1-23                                                                                                                  |
-      | MESSAGE  | running console command: echo Name of the service to add && read service_name && echo Description && read description |
+      | FILENAME | enter-input.md                                                                                                                                                                     |
+      | LINE     | 1-24                                                                                                                                                                               |
+      | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, desciption: $description" |
+    And I see:
+      """
+      service: html-server, desciption: serves the HTML UI
+      """
     And the test passes

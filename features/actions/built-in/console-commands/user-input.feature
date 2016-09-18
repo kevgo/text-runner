@@ -35,7 +35,7 @@ Feature: running console commands
     When executing the tutorial
     Then it signals:
       | FILENAME | enter-input.md                                 |
-      | LINE     | 1-6                                            |
+      | LINE     | 1-12                                           |
       | MESSAGE  | running console command: read foo && echo $foo |
     And the test passes
 

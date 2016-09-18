@@ -4,17 +4,17 @@ Feature: running console commands
   I want my users to be able to enter text into the console
   So that they can interact with the commands they run.
 
-  - optionally there can be an HTML table that defines input into the commands
-  - if the table has exactly one column, it contains the input to enter
-  - the ENTER key is pressed automatically for the user at the end of each input field
+  - Optionally there can be an HTML table within the "consoleCommand" block
+    that defines input into the commands.
+  - If the table has exactly one column, it contains the input to enter
+  - If the table has more than one column, the first column contains
+    console output to wait for, and the last column contains the text to enter.
+    All other columns are ignored.
+  - The ENTER key is pressed automatically for the user at the end of each input field
   - Only content in TD cells is used. TH cells are considered labels and ignored.
-  - if the table has more than one column,
-    the first column contains console output to wait for,
-    and the last column contains the text to enter.
-    Other columns are ignored.
 
 
-  Scenario: entering text into the console
+  Scenario: entering simple text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">
@@ -38,7 +38,7 @@ Feature: running console commands
     And the test passes
 
 
-  Scenario: entering text into the console
+  Scenario: entering complex text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
       <a class="tutorialRunner_consoleCommand">

@@ -23,7 +23,8 @@
     "require-new": "1.1.0",
     "require-yaml": "0.0.1",
     "rimraf": "2.5.4",
-    "update-notifier": "1.0.2"
+    "update-notifier": "1.0.2",
+    "xml2js": "0.4.17"
   },
   "description": "Executes tutorials written in MarkDown",
   "devDependencies": {

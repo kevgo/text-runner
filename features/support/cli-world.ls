@@ -55,6 +55,10 @@ CliWorld = !->
     expect(@process.full-output!).to.include "#{table.FILENAME}:#{table.LINE} -- #{table.MESSAGE}"
 
 
+  @verify-prints = (expected-text) ->
+    expect(@process.full-output!).to.include expected-text
+
+
   @verify-ran-console-command = (command) ->
     expect(@process.full-output!).to.include "running.md:1-5 -- running console command: #{command}"
 

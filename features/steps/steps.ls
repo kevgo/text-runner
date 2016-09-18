@@ -50,6 +50,10 @@ module.exports = ->
 
 
 
+  @Then /^it prints:$/ (expected-text) ->
+    @verify-prints expected-text
+
+
   @Then /^it creates a directory "([^"]*)"$/ (directory-path) ->
     fs.stat-sync path.join 'test-dir', directory-path
 

@@ -62,19 +62,8 @@ class ColoredFormatter
 
   # Called on general errors
   error: (message) ->
-    text = ''
-    if @documentation-file-path
-      text += "#{red figures.cross} #{@documentation-file-path}"
-    if @start-line > -1
-      text += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
-    if text.length > 0 and @activity-text
-      text += ' -- '
-    if @activity-text
-      text += @activity-text
-    if text
-      text += '\n'
-    text += "\n#{red "Error: #{message}"}\n"
-    log-update text
+    @activity-header = "#{red figures.cross} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n#{red "Error: #{message}"}\n"
+    @_print!
     process.exit 1
 
 

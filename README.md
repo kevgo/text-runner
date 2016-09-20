@@ -12,27 +12,36 @@ _Test framework for documentation_
 
 ## What is it
 
-Tutorial Runner is a command-line tool that executes activities described in Markdown (and soon HTML) files programmatically.
+Tutorial Runner is a command-line tool that executes documents written in Markdown (and soon HTML) files programmatically,
+similar to how a human reader would execute them if they were reading and following it.
+What sets Tutorial Runner apart from [related technologies](#related-work) is that there are absolutely
+no limitations on how the documents it runs look like as long as it is textual.
+Tutorial Runner can execute human-friendly prose, tables, or bullet point lists, in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.
 
 
 ## Why you need it
 
-* __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
-  Before coding functionality, describe it via a readme or tutorial and get early feedback on your ideas.
-  Tutorial Runner makes this documentation actionable, a part of your test suite,
-  and thereby a driver for your [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) cycle.
-
 * __evergreen tutorials:__
   Broken tutorials suck.
-  Tutorial Runner enforces that they always work,
-  every time you change anything in either your product or its documentation.
+  Tutorial Runner enforces that your tutorials always work,
+  every time you change anything in either the described product or its documentation.
 
 * __change management and [semantic versioning](http://semver.org):__
   Tutorial Runner tells you whether a pull request changes documented behavior of your solution.
   Knowing that before shipping the change allows you to either implement it in a more backwards-compatible way
   or update the documentation and announce the breaking change to your users.
+
+* __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
+  Before spending time and budget building or even prototyping functionality,
+  describe it via a readme or tutorial and get early feedback on your ideas from potential users.
+  Tutorial Runner makes this human-friendly documentation executable by machines.
+  Making it the outermost layer of your automated test suite allows it to drive
+  your [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) cycle:
+  1. documentation via Tutorial Runner for smoke testing of the full stack
+  2. feature specs (for example via [Cucumber]()) for detailed black-box testing of each feature in isolation
+  3. unit tests (for example via [XUnit]()) for white-box testing of individual code components
 
 
 ## How it works
@@ -74,21 +83,26 @@ everything inside `<a>` tags with the class `tutorialRunner_*` is executed by Tu
 The class also defines the action that this block describes.
 In this example it is `createFile`,
 meaning Tutorial Runner is supposed to create a file on your machine.
-It takes the filename out of the bold section (the part surrounded with "\_\_"),
+The convention for this built-in action is that it takes the filename out of the
+bold section (the part surrounded with "\_\_"),
 and the content out of the fenced code block (the part surrounded with _\`\`\`_),
 and creates the file on your hard drive.
+You can also create your own custom actions.
 
 
 ## Built-in Actions
 
 Tutorial Runner provides a number of built-in actions
 for things typically done in tutorials.
+To prevent interference with the code being tested,
+all these actions don't run in the current working directory,
+but inside a `tmp` directory inside it.
 
 
 ### create a file with name and content
 * the name of the file is provided as bold text within the anchor tag
-* the content of the file is provided as a multi-line code block within the anchor tag
-* Tutorial Runner creates the file in a `tmp` directory in the current working directory
+* the content of the file is provided as a multi-line code block (surrounded with \`\`\`) within the anchor tag
+* Tutorial Runner creates the file in the workspace
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
@@ -106,12 +120,13 @@ The file content goes here
 
 ### run a command on the console
 
-- runs the command given in the code block
+- runs the command given in the code block in the workspace
 - continues the tutorial when the command is finished running
+- a `$` at the beginning of the line is ignored
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
-<a class="tutorialRunner_consoleCommand">
+<a class="tutorialRunner_runCommand">
 `​``
 $ ls -a
 `​``
@@ -119,50 +134,94 @@ $ ls -a
 ```
 </a>
 
+You can enter text into the running command by providing an HTML table
+with the content to enter:
 
-<!-- ### a command, enter text, and wait until it ends -->
-<!--  -->
-<!-- <a class="tutorialRunner_runMarkdownInTutrun"> -->
-<!-- ```markdown -->
-<!-- <a class="tutorialRunner_consoleCommandWithInput"> -->
-<!--  -->
-<!-- ```bash -->
-<!-- $ ls -a -->
-<!-- `​`` -->
-<!-- </a> -->
-<!-- ``` -->
-<!-- </a> -->
+<a class="tutorialRunner_runMarkdownInTutrun">
+```markdown
+<a class="tutorialRunner_runCommand">
+`​``
+$ read name
+$ read purpose
+`​``
+<table>
+  <tr>
+    <td>Tutorial Runner</td>
+  </tr>
+  <tr>
+    <td>Test framework for documentation</td>
+  </tr>
+</table>
+
+</a>
+```
+</a>
+
+If the table contains multiple columns,
+the first column contains output to wait for for,
+and the last one text to enter once the output from the first column has appeared.
+Also, `<th>` elements are considered descriptions and are ignored.
+
+<a class="tutorialRunner_runMarkdownInTutrun">
+```markdown
+<a class="tutorialRunner_runCommand">
+`​``
+$ echo "Product name:"
+$ read name
+$ echo "What does it do:"
+$ read purpose
+`​``
+<table>
+  <tr>
+    <th>question</th>
+    <th>description</th>
+    <th>you enter</th>
+  </tr>
+  <tr>
+    <td>Product name</td>
+    <td>the name of the product</td>
+    <td>Tutorial Runner</td>
+  </tr>
+  <tr>
+    <td>What does it do</td>
+    <td>product tagline</td>
+    <td>Test framework for documentation</td>
+  </tr>
+</table>
+
+</a>
+```
+</a>
 
 
-<!-- ### run a bash script and wait until it outputs a certain string -->
-<!--  -->
-<!-- <a class="tutorialRunner_runMarkdownInTutrun"> -->
-<!-- ```markdown -->
-<!-- <a class="tutorialRunner_consoleCommandWaitForOutput"> -->
-<!--  -->
-<!-- `​`` -->
-<!-- $ echo 'hello world' -->
-<!-- `​`` -->
-<!--  -->
-<!-- and wait until we see: -->
-<!--  -->
-<!-- `​`` -->
-<!-- world -->
-<!-- `​`` -->
-<!--  -->
-<!-- </a> -->
-<!-- ``` -->
-<!-- </a> -->
+
+### long-running processes
+
+To start long-running process, use the `startCommand` action.
+You can provide the output to wait for before continuing the test script.
+The started process keeps running in the background while the test script continues,
+and you can run any other actions while the process runs.
+
+To stop the long-running process, use the `stopCommand` action.
 
 
-<!-- ### stop the currenly running Bash script -->
-<!--  -->
-<!-- ```markdown -->
-<!-- <a class="tutorialRunner_stopCurrentProcess"> -->
-<!-- Stop the current process by hitting Ctrl-C -->
-<!--  -->
-<!-- </a> -->
-<!-- ``` -->
+<a class="tutorialRunner_runMarkdownInTutrun">
+```markdown
+<a class="tutorialRunner_startCommand">
+
+`​``
+$ node ../../examples/long-running/server.js
+`​``
+
+and wait until we see `long-running service running at port 4000`
+</a>
+
+<a class="tutorialRunner_stopCommand">
+Stop the current process by hitting Ctrl-C
+
+</a>
+```
+</a>
 
 
 ## Custom actions

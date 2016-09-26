@@ -202,7 +202,8 @@ You can provide the output to wait for before continuing the test script.
 The started process keeps running in the background while the test script continues,
 and you can run any other actions while the process runs.
 
-To stop the long-running process, use the `stopCommand` action.
+You can wait for output of the process with the `waitForOutput` action,
+and stop the long-running process using `stopCommand`.
 
 
 <a class="tutorialRunner_runMarkdownInTutrun">
@@ -212,8 +213,14 @@ To stop the long-running process, use the `stopCommand` action.
 `​``
 $ node ../../examples/long-running/server.js
 `​``
+</a>
 
-and wait until we see `long-running service running at port 4000`
+<a class="tutorialRunner_waitForOutput">
+wait until you see
+`​``
+running at port 4000
+`​``
+
 </a>
 
 <a class="tutorialRunner_stopCommand">

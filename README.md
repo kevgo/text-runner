@@ -220,12 +220,10 @@ wait until you see
 `​``
 running at port 4000
 `​``
-
 </a>
 
 <a class="tutorialRunner_stopCommand">
 Stop the current process by hitting Ctrl-C
-
 </a>
 ```
 </a>

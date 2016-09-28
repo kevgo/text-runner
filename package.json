@@ -1,6 +1,6 @@
 {
   "name": "tutorial-runner",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "Kevin Goslar",
   "bin": {
     "tut-run": "bin/tut-run"

@@ -1,6 +1,6 @@
 {
   "name": "tutorial-runner",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Kevin Goslar",
   "dependencies": {
     "async": "2.0.1",

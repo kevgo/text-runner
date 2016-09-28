@@ -2,6 +2,9 @@
   "name": "tutorial-runner",
   "version": "0.0.4",
   "author": "Kevin Goslar",
+  "bin": {
+    "tut-run": "bin/tut-run"
+  },
   "dependencies": {
     "async": "2.0.1",
     "camelcase": "3.0.0",
@@ -41,6 +44,10 @@
     "touch": "1.0.0",
     "wait": "0.1.0"
   },
+  "files": [
+    "bin/tut-run",
+    "dist"
+  ],
   "homepage": "https://github.com/Originate/tutorial-runner",
   "main": "dist/tutorial-runner.js",
   "license": "ISC",

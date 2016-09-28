@@ -32,7 +32,7 @@ echo "Hello $1!"
 
 We have to make it executable:
 
-<a class="tutorialRunner_consoleCommand">
+<a class="tutorialRunner_runCommand">
 
 ```
 $ chmod +x ./greeter.sh
@@ -42,7 +42,7 @@ $ chmod +x ./greeter.sh
 
 When we can call it with our name:
 
-<a class="tutorialRunner_consoleCommand">
+<a class="tutorialRunner_runCommand">
 
 ```
 $ ./greeter.sh world
@@ -61,7 +61,7 @@ Hello world!
 
 Copy a file using `cp`, for example:
 
-<a class="tutorialRunner_consoleCommand">
+<a class="tutorialRunner_runCommand">
 
 ```
 $ cp greeter.sh another_greeter.sh

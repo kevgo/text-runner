@@ -19,7 +19,7 @@
     "observable-process": "3.2.0",
     "prelude-ls": "1.1.2",
     "rechoir": "0.6.2",
-    "remarkable": "1.6.2",
+    "remarkable": "1.7.0",
     "require-new": "1.1.0",
     "require-yaml": "0.0.1",
     "rimraf": "2.5.4",

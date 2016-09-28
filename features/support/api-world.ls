@@ -6,6 +6,7 @@ require! {
   'jsdiff-console'
   'path'
   'prelude-ls' : {compact, unique}
+  'wait' : {wait-until}
 }
 
 
@@ -78,8 +79,8 @@ ApiWorld = !->
     expect(@formatter.activities).to.include table.MESSAGE
 
 
-  @verify-ran-console-command = (command) ->
-    expect(@formatter.activities).to.include "running console command: #{command}"
+  @verify-ran-console-command = (command, done) ->
+    wait-until (~> @formatter.activities.index-of  "running console command: #{command}" > -1), done
 
 
   @verify-success = ->

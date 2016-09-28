@@ -62,8 +62,8 @@ module.exports = ->
     @verify-tests-run count
 
 
-  @Then /^it runs the console command "([^"]*)"$/ (command) ->
-    @verify-ran-console-command command
+  @Then /^it runs the console command "([^"]*)"$/ (command, done) ->
+    @verify-ran-console-command command, done
 
 
   @Then /^it signals:$/ (table) ->

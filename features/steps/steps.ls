@@ -41,7 +41,7 @@ module.exports = ->
 
 
 
-  @When /^executing the tutorial(?: runner in an empty workspace)?$/ (done) ->
+  @When /^executing the tutorial(?: runner in an empty workspace)?$/, timeout: 4000, (done) ->
     @execute-tutorial done
 
 

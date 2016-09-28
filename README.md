@@ -300,7 +300,7 @@ It runs the command given in the code block in the terminal.
 
 <a class="tutorialRunner_createMarkdownFile">
 ```
-<a class="tutorialRunner_consoleCommand">
+<a class="tutorialRunner_runCommand">
 `​``
 ls -la
 `​``

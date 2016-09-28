@@ -4,7 +4,7 @@ Feature: running console commands
   I want my users to be able to enter text into the console
   So that they can interact with the commands they run.
 
-  - Optionally there can be an HTML table within the "consoleCommand" block
+  - Optionally there can be an HTML table within the "runCommand" block
     that defines input into the commands.
   - If the table has exactly one column, it contains the input to enter.
   - If the table has more than one column, the first column contains
@@ -17,7 +17,7 @@ Feature: running console commands
   Scenario: entering simple text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
-      <a class="tutorialRunner_consoleCommand">
+      <a class="tutorialRunner_runCommand">
       ```
       $ read foo
       $ echo You entered: $foo
@@ -45,7 +45,7 @@ Feature: running console commands
   Scenario: entering complex text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
-      <a class="tutorialRunner_consoleCommand">
+      <a class="tutorialRunner_runCommand">
       ```
       $ echo "Name of the service to add"
       $ read service_name

@@ -43,22 +43,22 @@ class TestFormatter
 
 ApiWorld = !->
 
-  @execute-example = (example-name, done) ->
-    process.chdir path.join('examples', example-name)
+  @execute = ({cwd}, done) ->
+    existing-dir = process.cwd!
+    process.chdir cwd
     @formatter = new TestFormatter
     @runner = new TutorialRunner {@formatter}
       ..run (@error) ~>
-        process.chdir path.join('..', '..')
+        process.chdir existing-dir
         done!
+
+
+  @execute-example = (example-name, done) ->
+    @execute cwd: path.join('examples', example-name), done
 
 
   @execute-tutorial = (done) ->
-    process.chdir 'test-dir'
-    @formatter = new TestFormatter
-    @runner = new TutorialRunner {@formatter}
-      ..run (@error) ~>
-        process.chdir '..'
-        done!
+    @execute cwd: 'test-dir', done
 
 
   @verify-prints = (expected-text) ->

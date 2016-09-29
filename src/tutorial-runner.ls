@@ -27,7 +27,8 @@ class TutorialRunner
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
       ..launch {}, ({config-path}) ~>
 
-        @configuration = require-new config-path
+        if config-path
+          @configuration = require-new config-path
 
         # The glob expression used to find markdown files to execute
         @files-glob = @configuration?.files or "**/*.md"

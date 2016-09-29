@@ -1,8 +1,9 @@
 require! {
   'chai' : {expect}
-  'fs'
+  'fs-extra' : fs
   'mkdirp'
   'path'
+  'tmp'
 }
 
 
@@ -20,6 +21,12 @@ module.exports = ->
       ```
       </a>
       """
+
+
+  @Given /^I am in a directory that contains the "([^"]*)" example without a configuration file$/ (example-name) ->
+    @root-dir = tmp.dir-sync unsafe-cleanup: yes
+    fs.copy-sync path.join('examples' example-name),
+                 @root-dir.name
 
 
   @Given /^the configuration file:$/ (content) ->
@@ -47,6 +54,10 @@ module.exports = ->
 
   @When /^executing the "([^"]+)" example$/, timeout: 4000, (example-name, done) ->
     @execute-example example-name, done
+
+
+  @When /^running "([^"]+)"$/, (command, done) ->
+    @execute cwd: @root-dir.name, done
 
 
 

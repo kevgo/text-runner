@@ -23,7 +23,13 @@ module.exports = ->
 
 
   @After ->
-    process.chdir path.join __dirname, '..', '..'
+    if @root-dir
+      # we ran the test in an outside temp dir
+      @root-dir?.remove-callback!
+    else
+      # we ran the test in './tmp'
+      process.chdir path.join __dirname, '..', '..'
+
 
 
   @Before tags: ['@verbose'], ->

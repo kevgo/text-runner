@@ -8,9 +8,9 @@ require! {
 
 CliWorld = !->
 
-  @execute-example = (example-name, done) ->
+  @execute = ({cwd}, done) ->
     args =
-      cwd: "examples/#{example-name}"
+      cwd: cwd
       stdout: off
       stderr: off
       env: {}
@@ -21,21 +21,14 @@ CliWorld = !->
       args.env['DEBUG'] = '*'
     @process = new ObservableProcess path.join(process.cwd!, 'bin', 'tut-run'), args
       ..on 'ended', (@exit-code) ~> done!
+
+
+  @execute-example = (example-name, done) ->
+    @execute cwd: "examples/#{example-name}", done
 
 
   @execute-tutorial = (done) ->
-    args =
-      cwd: 'test-dir'
-      stdout: off
-      stderr: off
-      env: {}
-    if @verbose
-      args.stdout = dim-console.process.stdout
-      args.stderr = dim-console.process.stderr
-    if @debug
-      args.env['DEBUG'] = '*'
-    @process = new ObservableProcess path.join(process.cwd!, 'bin', 'tut-run'), args
-      ..on 'ended', (@exit-code) ~> done!
+    @execute cwd: 'test-dir', done
 
 
   @verify-failure = (table) ->

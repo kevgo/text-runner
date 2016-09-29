@@ -1,16 +1,15 @@
 require! {
   './actions/action-manager' : ActionManager
   'async'
+  './configuration' : Configuration
   './formatters/colored-formatter' : ColoredFormatter
-  './markdown-file-runner' : MarkdownFileRunner
   'glob'
   'interpret'
   'liftoff' : Liftoff
+  './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
   'path'
   'prelude-ls' : {flatten, sum}
-  'require-new'
-  'require-yaml'
   'rimraf'
 }
 
@@ -27,11 +26,7 @@ class TutorialRunner
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
       ..launch {}, ({config-path}) ~>
 
-        if config-path
-          @configuration = require-new config-path
-
-        # The glob expression used to find markdown files to execute
-        @files-glob = @configuration?.files or "**/*.md"
+        @configuration = new Configuration config-path
 
         @_create-working-dir!
         async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
@@ -53,7 +48,7 @@ class TutorialRunner
 
   # Returns all the markdown files for this tutorial
   _markdown-files: ->
-    if (files = glob.sync @files-glob).length is 0
+    if (files = glob.sync @configuration.get 'files').length is 0
       @formatter.error 'no Markdown files found'
     files
 

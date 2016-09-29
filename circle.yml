@@ -13,6 +13,7 @@ test:
     - node_modules/o-tools/bin/lint
     - bin/cuc-api --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
     - bin/cuc-cli --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
+    - bin/docs
 
 
 deployment:

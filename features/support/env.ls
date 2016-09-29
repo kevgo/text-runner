@@ -12,6 +12,7 @@ module.exports = ->
 
   @set-default-timeout 2000
 
+
   @Before ->
     rimraf.sync 'test-dir'
     fs.mkdir-sync 'test-dir'
@@ -20,23 +21,30 @@ module.exports = ->
     # otherwise we might find other ones in a parent directory on the machine
     touch.sync 'test-dir/tut-run.yml'
 
+
   @After ->
     process.chdir path.join __dirname, '..', '..'
+
 
   @Before tags: ['@verbose'], ->
     @verbose = on
 
+
   @After tags: ['@verbose'], ->
     @verbose = off
+
 
   @Before tags: ['@debug'], ->
     @debug = on
 
+
   @After tags: ['@debug'], ->
     @debug = off
 
+
   @register-handler 'AfterFeatures', (features) ->
     delete-all-tmp-folders!
+
 
 
 function delete-all-tmp-folders

@@ -1,61 +1,45 @@
 require! {
   './actions/action-manager' : ActionManager
-  'async'
   './configuration' : Configuration
   './formatters/colored-formatter' : ColoredFormatter
-  'glob'
+  'fs'
   'interpret'
   'liftoff' : Liftoff
-  './markdown-file-runner' : MarkdownFileRunner
-  'mkdirp'
   'path'
-  'prelude-ls' : {flatten, sum}
-  'rimraf'
 }
 
 
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  ({@formatter = new ColoredFormatter} = {}) ->
+  ({@command = 'run', @formatter = new ColoredFormatter} = {}) ->
     @actions = new ActionManager @formatter
 
 
   # Runs the given tutorial
   run: (done) ->
+
+    # Note: Liftoff runs here and not in the constructor
+    #       because the constructor cannot run async operations
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
       ..launch {}, ({config-path}) ~>
+        | !@has-command!  =>  return error-unknown-command!
 
         @configuration = new Configuration config-path
-
-        @_create-working-dir!
-        async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
-          | err  =>  return done err
-          if (steps-count = results |> flatten |> sum) is 0
-            @formatter.error 'no activities found'
-            done? 'no activities found'
-          else
-            @formatter.suite-success steps-count
-            done?!
+        @run-command done
 
 
-  # Creates the temp directory to run the tests in
-  _create-working-dir: ->
-    global.working-dir = path.join process.cwd!, 'tmp'
-    rimraf.sync global.working-dir
-    mkdirp.sync global.working-dir
+  command-path: ->
+    path.join __dirname, '..' 'dist' 'commands', @command, "#{@command}-command.js"
 
 
-  # Returns all the markdown files for this tutorial
-  _markdown-files: ->
-    if (files = glob.sync @configuration.get 'files').length is 0
-      @formatter.error 'no Markdown files found'
-    files
+  has-command: ->
+    fs.stat-sync @command-path!
 
 
-  # Returns an array of FileRunners for this tutorial
-  _runners: ->
-    [new MarkdownFileRunner({file-path, @formatter, @actions}) for file-path in @_markdown-files!]
+  run-command: (done) ->
+    Command = require @command-path!
+    new Command({@configuration, @formatter, @actions}).run done
 
 
 

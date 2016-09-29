@@ -38,6 +38,7 @@
     "dim-console": "0.4.4",
     "fs-extra": "0.30.0",
     "livescript": "1.5.0",
+    "mycha": "3.0.0",
     "o-tools": "0.6.1",
     "o-tools-livescript": "1.2.3",
     "shelljs": "0.7.4",

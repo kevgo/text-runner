@@ -5,6 +5,7 @@ node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   node_modules/o-tools/bin/lint
+  node_modules/.bin/mycha
   bin/cuc-api
   bin/cuc-cli
 else

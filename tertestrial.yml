@@ -14,6 +14,10 @@ actions:
         line: '\d+'
       command: 'bin/cuc-api {{filename}}:{{line}} && bin/cuc-cli {{filename}}:{{line}}'
 
+    - match:
+        filename: '-spec\.ls'
+      command: 'mycha {{filename}}'
+
 
   API:
 
@@ -29,6 +33,11 @@ actions:
         line: '\d+'
       command: 'bin/cuc-api {{filename}}:{{line}}'
 
+    - match:
+        filename: '-spec\.ls'
+      command: 'mycha {{filename}}'
+
+
 
   CLI:
 
@@ -43,3 +52,9 @@ actions:
         filename: '\.feature$'
         line: '\d+'
       command: 'bin/cuc-cli {{filename}}:{{line}}'
+
+    - match:
+        filename: '-spec\.ls'
+      command: 'mycha {{filename}}'
+
+

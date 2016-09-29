@@ -11,6 +11,7 @@ test:
 
   override:
     - node_modules/o-tools/bin/lint
+    - node_modules/.bin/mycha
     - bin/cuc-api --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
     - bin/cuc-cli --format json:$CIRCLE_TEST_REPORTS/cucumber/tests.cucumber --format pretty
     - bin/docs

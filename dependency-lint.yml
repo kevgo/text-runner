@@ -15,6 +15,7 @@ executedModules:
       - bin/docs
       - bin/features
       - bin/spec
+      - bin/tests
     ignore: []
     root: 'bin/*'
 

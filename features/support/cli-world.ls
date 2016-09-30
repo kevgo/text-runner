@@ -8,7 +8,7 @@ require! {
 
 CliWorld = !->
 
-  @execute = ({cwd}, done) ->
+  @execute = ({command = 'tut-run', cwd}, done) ->
     args =
       cwd: cwd
       stdout: off
@@ -19,7 +19,9 @@ CliWorld = !->
       args.stderr = dim-console.process.stderr
     if @debug
       args.env['DEBUG'] = '*'
-    @process = new ObservableProcess path.join(process.cwd!, 'bin', 'tut-run'), args
+    proc = command.split ' '
+    proc[0] = path.join(process.cwd!, 'bin', proc[0])
+    @process = new ObservableProcess proc, args
       ..on 'ended', (@exit-code) ~> done!
 
 

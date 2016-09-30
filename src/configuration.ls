@@ -1,6 +1,8 @@
 require! {
+  'fs'
   'require-new'
   'require-yaml'
+  'yamljs' : YAML
 }
 
 
@@ -20,6 +22,11 @@ class Configuration
   # Returns the value of the attribute with the given name
   get: (attribute-name) ->
     @file-data?[attribute-name] ? Configuration.default-values[attribute-name]
+
+
+  # Creates a config file with default values
+  create-default: ->
+    fs.write-file-sync (@config-file-path or './tut-run.yml'), YAML.stringify(Configuration.default-values)
 
 
 

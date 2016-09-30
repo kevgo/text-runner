@@ -8,4 +8,4 @@ require! {
 update-notifier({pkg}).notify!
 
 cli-cursor.hide!
-new TutorialRunner!.run!
+new TutorialRunner(command: process.argv[2]).run!

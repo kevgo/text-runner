@@ -46,14 +46,14 @@ class ColoredFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
+    @activity-header = "#{@_format yellow figures.pointer}\n"
     @activity-console = ''
     @_print!
 
 
   # called when the last started activity finished successful
   success: ->
-    @activity-header = "#{green figures.tick} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}"
+    @activity-header = @_format green figures.tick
     @activity-console = ''
     @_print!
     log-update.done!
@@ -62,14 +62,14 @@ class ColoredFormatter
 
   # Called on general errors
   error: (message) ->
-    @activity-header = "#{red figures.cross} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n#{red "Error: #{message}"}\n"
+    @activity-header = "#{@_format red figures.cross}\n#{red "Error: #{message}"}\n"
     @_print!
     process.exit 1
 
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @activity-header = "#{yellow figures.pointer} #{@documentation-file-path}:#{[@start-line, @end-line] |> compact |> unique |> (.join '-')} -- #{@activity-text}\n"
+    @activity-header = "#{@_format yellow figures.pointer}\n"
     @_print!
 
 
@@ -79,6 +79,17 @@ class ColoredFormatter
   # called when the whole test suite passed
   suite-success: (steps-count) ->
     log-update green "\nSuccess! #{steps-count} steps passed"
+
+
+  _format: (figure) ->
+    result = "#{figure} "
+    if @documentation-file-path
+      result += "#{@documentation-file-path}"
+      if @start-line
+        result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
+      result += " -- "
+    result += "#{@activity-text}"
+    result
 
 
   _print: ->

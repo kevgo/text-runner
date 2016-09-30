@@ -53,14 +53,6 @@ ApiWorld = !->
         done!
 
 
-  @execute-example = (example-name, done) ->
-    @execute cwd: path.join('examples', example-name), done
-
-
-  @execute-tutorial = (done) ->
-    @execute cwd: 'test-dir', done
-
-
   @verify-prints = (expected-text) ->
     # No way to capture console output here.
     # This is tested in the CLI world.

@@ -25,14 +25,6 @@ CliWorld = !->
       ..on 'ended', (@exit-code) ~> done!
 
 
-  @execute-example = (example-name, done) ->
-    @execute cwd: "examples/#{example-name}", done
-
-
-  @execute-tutorial = (done) ->
-    @execute cwd: 'test-dir', done
-
-
   @verify-failure = (table) ->
     output = @process.full-output!
     expected-header = switch

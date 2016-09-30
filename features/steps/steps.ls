@@ -49,11 +49,11 @@ module.exports = ->
 
 
   @When /^executing the tutorial(?: runner in an empty workspace)?$/, timeout: 4000, (done) ->
-    @execute-tutorial done
+    @execute cwd: 'test-dir', done
 
 
   @When /^executing the "([^"]+)" example$/, timeout: 4000, (example-name, done) ->
-    @execute-example example-name, done
+    @execute cwd: path.join('examples', example-name), done
 
 
   @When /^running "([^"]+)"$/, (command, done) ->

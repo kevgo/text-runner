@@ -12,12 +12,12 @@ require! {
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  ({@command = 'run', @formatter = new ColoredFormatter} = {}) ->
+  ({@formatter = new ColoredFormatter} = {}) ->
     @actions = new ActionManager @formatter
 
 
   # Runs the given tutorial
-  run: (done) ->
+  run: (@command, done) ->
 
     # Note: Liftoff runs here and not in the constructor
     #       because the constructor cannot run async operations
@@ -26,7 +26,9 @@ class TutorialRunner
         | !@has-command!  =>  return error-unknown-command!
 
         @configuration = new Configuration config-path
-        @run-command done
+
+        CommandClass = require @command-path!
+        new CommandClass({@configuration, @formatter, @actions}).run done
 
 
   command-path: ->
@@ -35,11 +37,6 @@ class TutorialRunner
 
   has-command: ->
     fs.stat-sync @command-path!
-
-
-  run-command: (done) ->
-    Command = require @command-path!
-    new Command({@configuration, @formatter, @actions}).run done
 
 
 

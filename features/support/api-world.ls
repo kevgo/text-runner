@@ -48,7 +48,7 @@ ApiWorld = !->
     process.chdir cwd
     @formatter = new TestFormatter
     @runner = new TutorialRunner {@formatter}
-      ..run (@error) ~>
+      ..run 'run', (@error) ~>
         process.chdir existing-dir
         done!
 

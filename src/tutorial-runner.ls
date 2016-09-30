@@ -17,7 +17,7 @@ class TutorialRunner
 
 
   # Runs the given tutorial
-  run: (@command, done) ->
+  execute: (@command, done) ->
 
     # Note: Liftoff runs here and not in the constructor
     #       because the constructor cannot run async operations

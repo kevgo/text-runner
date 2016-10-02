@@ -83,6 +83,10 @@ ApiWorld = !->
     expect(@formatter.activities).to.have.length count
 
 
+  @verify-unknown-command = (command) ->
+    expect(@error).to.equal "unknown command: #{command}"
+
+
 
 module.exports = ->
   @World = ApiWorld if process.env.EXOSERVICE_TEST_DEPTH is 'API'

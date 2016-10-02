@@ -1,5 +1,5 @@
 require! {
-  'fs'
+  'fs-extra' : fs
   'glob'
   'path'
   'rimraf'
@@ -20,6 +20,8 @@ module.exports = ->
     # we need to make sure there is at least an empty config file here,
     # otherwise we might find other ones in a parent directory on the machine
     touch.sync 'test-dir/tut-run.yml'
+
+    fs.empty-dir-sync 'tmp'
 
 
   @After ->

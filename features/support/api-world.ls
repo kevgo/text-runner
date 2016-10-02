@@ -43,12 +43,12 @@ class TestFormatter
 
 ApiWorld = !->
 
-  @execute = ({cwd}, done) ->
+  @execute = ({command = 'run', cwd}, done) ->
     existing-dir = process.cwd!
     process.chdir cwd
     @formatter = new TestFormatter
     @runner = new TutorialRunner {@formatter}
-      ..execute 'run', (@error) ~>
+      ..execute command, (@error) ~>
         process.chdir existing-dir
         done!
 

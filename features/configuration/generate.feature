@@ -10,7 +10,7 @@ Feature: generating a configuration file
   @clionly
   Scenario: running in a directory without configuration file
     Given I am in a directory that contains the "simple" example without a configuration file
-    When running "tut-run setup"
+    When running the "setup" command
     Then it prints:
       """
       Create configuration file tut-run.yml with default values

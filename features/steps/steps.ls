@@ -56,9 +56,12 @@ module.exports = ->
     @execute cwd: path.join('examples', example-name), done
 
 
-  @When /^running "([^"]+)"$/, (command, done) ->
-    @execute {command, cwd: @root-dir.name}, done
+  @When /^running the "([^"]*)" command$/, (command, done) ->
+    @execute {command, cwd: (@root-dir?.name or 'tmp')}, done
 
+
+  @When /^running tut\-run$/ (done) ->
+    @execute {cwd: (@root-dir?.name or 'tmp')}, done
 
 
   @Then /^it prints:$/ (expected-text) ->

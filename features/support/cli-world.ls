@@ -56,6 +56,8 @@ CliWorld = !->
   @verify-tests-run = (count) ->
     expect(@process.full-output!).to.include " #{count} steps"
 
+  @verify-unknown-command = (command) ->
+    expect(@process.full-output!).to.include "unknown command: #{command}"
 
 
 module.exports = ->

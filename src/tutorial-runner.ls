@@ -23,7 +23,7 @@ class TutorialRunner
     #       because the constructor cannot run async operations
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
       ..launch {}, ({config-path}) ~>
-        | !@has-command!  =>  return error-unknown-command!
+        | !@has-command!  =>  return done "unknown command: #{@command}"
 
         @configuration = new Configuration config-path
 
@@ -36,7 +36,11 @@ class TutorialRunner
 
 
   has-command: ->
-    fs.stat-sync @command-path!
+    try
+      fs.stat-sync @command-path!
+      yes
+    catch
+      no
 
 
 

@@ -90,6 +90,10 @@ module.exports = ->
     @verify-output table.rows-hash!
 
 
+  @Then /^it signals that "([^"]*)" is an unknown command$/ (command) ->
+    @verify-unknown-command command
+
+
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
     expect(fs.read-file-sync(path.join('test-dir', 'tmp', file-name), 'utf8').trim!).to.equal expected-content.trim!
 

@@ -40,6 +40,10 @@ CliWorld = !->
     expect(@process.full-output!).to.include "#{table.FILENAME}:#{table.LINE} -- #{table.MESSAGE}"
 
 
+  @verify-printed-usage-instructions = ->
+    expect(@process.full-output!).to.include 'COMMANDS'
+
+
   @verify-prints = (expected-text) ->
     expect(@process.full-output!).to.include expected-text
 

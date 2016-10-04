@@ -64,6 +64,11 @@ module.exports = ->
     @execute {cwd: (@root-dir?.name or 'tmp')}, done
 
 
+
+  @Then /^I see usage instructions$/ ->
+    @verify-printed-usage-instructions!
+
+
   @Then /^it prints:$/ (expected-text) ->
     @verify-prints expected-text
 

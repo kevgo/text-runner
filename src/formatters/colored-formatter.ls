@@ -62,7 +62,7 @@ class ColoredFormatter
 
   # Called on general errors
   error: (message) ->
-    @activity-header = "#{@_format red figures.cross}\n#{red "Error: #{message}"}\n"
+    @activity-header = "#{@_format red figures.cross}\n\n#{red "Error: #{message}"}\n"
     @_print!
     process.exit 1
 

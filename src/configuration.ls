@@ -17,6 +17,7 @@ class Configuration
 
   @default-values =
     files: '**/*.md'
+    globals: []
 
 
   # Returns the value of the attribute with the given name
@@ -26,7 +27,7 @@ class Configuration
 
   # Creates a config file with default values
   create-default: ->
-    fs.write-file-sync (@config-file-path or './tut-run.yml'), YAML.stringify(Configuration.default-values)
+    fs.write-file-sync './tut-run.yml', YAML.stringify(Configuration.default-values)
 
 
 

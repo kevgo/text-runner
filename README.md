@@ -123,6 +123,7 @@ The file content goes here
 - runs the command given in the code block in the workspace
 - continues the tutorial when the command is finished running
 - a `$` at the beginning of the line is ignored
+- you can [configure](#configuration) path to global binaries that you your code base exports
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
@@ -361,13 +362,35 @@ This helps produce better terminal output.
 ## Configuration
 
 You can configure Tutorial Runner via a configuration file.
-Here is one showing the default values used:
+To create one, run:
 
+<a class="tutorialRunner_runCommand">
+```
+$ tut-run setup
+```
+</a>
+
+The created configuration looks like this:
+
+<a class="tutorialRunner_verifyFileContent">
 __tut-run.yml__
 
 ```yml
 files: '**/*.md'
+globals: []
 ```
+</a>
+
+- the `files` key describes which files are executed by Tutorial Runner.
+
+- the `globals` key describes which binaries are available as global commands once your code base is installed
+  For example, when your tool installs a global command `tool`, which when executed runs `bin/tool` in your code base,
+  your `tut-run.yml` file would contain this section:
+
+  ```yml
+  globals:
+    tool: './bin/tool'
+  ```
 
 
 ## Related Work

@@ -1,1 +1,3 @@
 files: '*.md'
+globals:
+  'tut-run': 'bin/tut-run'

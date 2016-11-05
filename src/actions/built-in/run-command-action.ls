@@ -1,13 +1,14 @@
 require! {
   'chalk' : {cyan, red}
   'observable-process' : ObservableProcess
-  'prelude-ls' : {compact, find, map, values}
+  'path'
+  'prelude-ls' : {compact, find, head, map, tail, values}
   'xml2js' : {parse-string}
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
-module.exports  = ({formatter, searcher}, done) ->
+module.exports  = ({formatter, searcher, configuration}, done) ->
   formatter.start 'running console command'
 
   commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
@@ -17,6 +18,7 @@ module.exports  = ({formatter, searcher}, done) ->
   |> map (.trim!)
   |> compact
   |> map trim-dollar
+  |> map make-global(configuration?.file-data?.globals)
   |> (.join ' && ')
 
   input-text = searcher.node-content type: 'htmlblock'
@@ -49,6 +51,15 @@ function get-input text, formatter, done
         else
           text-to-wait: tr.td[0], input: tr.td[*-1]
     done result
+
+
+function make-global globals = {}
+  (command) ->
+    command-parts = command.split ' '
+    if replacement = globals[head command-parts]
+      "#{path.join '..', replacement} #{tail(command-parts).join ' '}"
+    else
+      command
 
 
 

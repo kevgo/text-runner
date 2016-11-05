@@ -41,7 +41,7 @@ class RunCommand
 
   # Returns an array of FileRunners for this tutorial
   _runners: ->
-    [new MarkdownFileRunner({file-path, @formatter, @actions}) for file-path in @_markdown-files!]
+    [new MarkdownFileRunner({file-path, @formatter, @actions, @configuration}) for file-path in @_markdown-files!]
 
 
 

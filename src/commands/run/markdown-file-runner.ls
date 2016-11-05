@@ -13,7 +13,7 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  ({@file-path, @formatter, @actions}) ->
+  ({@file-path, @formatter, @actions, @configuration}) ->
     @markdown-parser = new Remarkable 'full', html: on
 
 
@@ -92,6 +92,7 @@ class MarkdownFileRunner
               runner: current-runner-type
               nodes: nodes-for-current-runner
               formatter: @formatter
+              configuration: @configuration
               searcher: new Searcher {@file-path, start-line, end-line: node.line, nodes: nodes-for-current-runner, @formatter}
           current-runner-type = null
           nodes-for-current-runner = null

@@ -205,7 +205,6 @@ and you can run any other actions while the process runs.
 You can wait for output of the process with the `waitForOutput` action,
 and stop the long-running process using `stopCommand`.
 
-
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_startCommand">

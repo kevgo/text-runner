@@ -26,6 +26,7 @@ Feature: selecting formatter via the command-line
   Scenario: selecting an unknown formatter
     Given I am in a directory that contains the "simple" example without a configuration file
     When trying to run tut-run with the "zonk" formatter
-    Then the test fails with:
-      | ERROR MESSAGE | Unknown formatter: 'zonk' |
-      | EXIT CODE     | 1                         |
+    Then the call fails with the error:
+      """
+      Unknown formatter: 'zonk'
+      """

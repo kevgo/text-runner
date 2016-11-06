@@ -8,5 +8,5 @@ Feature: unknown command
 
 
   Scenario: running an unknown command
-    When running the "zonk" command
+    When trying to run the "zonk" command
     Then it signals that "zonk" is an unknown command

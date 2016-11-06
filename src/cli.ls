@@ -15,3 +15,4 @@ command = argv._[0] or 'run'
 new TutorialRunner({formatter: argv.format}).execute command, (err) ->
   if err
     new HelpCommand({err}).run!
+    process.exit 1

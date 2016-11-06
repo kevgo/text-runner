@@ -20,4 +20,4 @@ Feature: selecting formatter via the command-line
       | FORMATTER | OUTPUT      |
       | robust    | Hello world |
       | colored   | bash.md     |
-      | icons     | ✔ bash.md   |
+      | iconic    | ✔ bash.md   |

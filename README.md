@@ -378,7 +378,7 @@ This helps produce better terminal output.
 
 Tutorial Runner supports a variety of formatters:
 
-* __icons formatter:__
+* __iconic formatter:__
   the most modern formatter.
   Indicates test status using pretty icons.
   Shows test output only when steps run,
@@ -422,6 +422,7 @@ __tut-run.yml__
 ```yml
 files: '**/*.md'
 globals: []
+formatter: iconic
 ```
 </a>
 

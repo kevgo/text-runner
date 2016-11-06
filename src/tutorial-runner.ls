@@ -1,7 +1,7 @@
 require! {
   './actions/action-manager' : ActionManager
   './configuration' : Configuration
-  './formatters/iconic-formatter' : IconicFormatter
+  './formatters/formatter-manager' : FormatterManager
   'fs'
   'interpret'
   'liftoff' : Liftoff
@@ -25,14 +25,8 @@ class TutorialRunner
         | !@has-command!  =>  return done "unknown command: #{@command}"
 
         @configuration = new Configuration config-path, @args
-        @formatter = @configuration.get 'formatter'
-        if typeof @formatter is 'string'
-          try
-            FormatterClass = require("./formatters/#{@formatter}-formatter")
-            @formatter = new FormatterClass
-          catch
-            console.log "Error: Unknown formatter: '#{@formatter}'"
-            process.exit 1
+        [@formatter, err] = (new FormatterManager).get-formatter @configuration.get('formatter')
+        if err then return done err
         @actions = new ActionManager(@formatter)
         CommandClass = require @command-path!
         new CommandClass({@configuration, @formatter, @actions}).run done

@@ -73,7 +73,6 @@ module.exports = ->
 
 
 
-
   @Then /^I see usage instructions$/ ->
     @verify-printed-usage-instructions!
 

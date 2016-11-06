@@ -12,8 +12,7 @@ require! {
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  ({@formatter = new IconsFormatter} = {}) ->
-    @actions = new ActionManager @formatter
+  (@args) ->
 
 
   # Runs the given tutorial
@@ -25,8 +24,12 @@ class TutorialRunner
       ..launch {}, ({config-path}) ~>
         | !@has-command!  =>  return done "unknown command: #{@command}"
 
-        @configuration = new Configuration config-path
-
+        @configuration = new Configuration config-path, @args
+        @formatter = @configuration.get 'formatter'
+        if typeof @formatter is 'string'
+          FormatterClass = require("./formatters/#{@formatter}-formatter")
+          @formatter = new FormatterClass
+        @actions = new ActionManager(@formatter)
         CommandClass = require @command-path!
         new CommandClass({@configuration, @formatter, @actions}).run done
 

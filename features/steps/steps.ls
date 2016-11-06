@@ -68,13 +68,14 @@ module.exports = ->
       done if @exit-code then "failed with exit code #{@exit-code}"
 
 
-  @When /^running tut\-run$/ (done) ->
-    @execute {cwd: (@root-dir?.name or 'tmp')}, done
+  @When /^(trying to run|running) tut\-run$/ (trying, done) ->
+    @execute {cwd: (@root-dir?.name or 'tmp')}, ~>
+      done if trying is 'running' and @exit-code then "tut-run failed with exit code #{@exit-code}"
 
 
-  @When /^running tut\-run with the "([^"]*)" formatter$/ (formatter-name, done) ->
+  @When /^(trying to run|running) tut\-run with the "([^"]*)" formatter$/ (trying, formatter-name, done) ->
     @execute {cwd: (@root-dir?.name or 'tmp'), formatter: formatter-name}, ~>
-      done if @exit-code then "tut-run failed with exit code #{@exit-code}"
+      done if trying is 'running' and @exit-code then "tut-run failed with exit code #{@exit-code}"
 
 
 

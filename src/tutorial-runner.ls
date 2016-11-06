@@ -27,8 +27,12 @@ class TutorialRunner
         @configuration = new Configuration config-path, @args
         @formatter = @configuration.get 'formatter'
         if typeof @formatter is 'string'
-          FormatterClass = require("./formatters/#{@formatter}-formatter")
-          @formatter = new FormatterClass
+          try
+            FormatterClass = require("./formatters/#{@formatter}-formatter")
+            @formatter = new FormatterClass
+          catch
+            console.log "Error: Unknown formatter: '#{@formatter}'"
+            process.exit 1
         @actions = new ActionManager(@formatter)
         CommandClass = require @command-path!
         new CommandClass({@configuration, @formatter, @actions}).run done

@@ -11,7 +11,7 @@ describe 'Configuration', ->
   context 'no config file given', ->
 
     before ->
-      @config = new Configuration null
+      @config = new Configuration
 
     describe 'files attribute', (...) ->
 

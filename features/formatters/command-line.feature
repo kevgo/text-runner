@@ -29,4 +29,6 @@ Feature: selecting formatter via the command-line
     Then the call fails with the error:
       """
       Unknown formatter: 'zonk'
+
+      Available formatters are colored, iconic, robust
       """

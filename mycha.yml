@@ -5,7 +5,7 @@ mochaEnv: {}
 mochaOptions:
   colors: true
   compilers: ls:livescript
-  reporter: dot
+  reporter: spec
 
 # Path patten used for finding tests (see https://github.com/isaacs/minimatch)
 testFilePattern: '**/*-spec.ls'

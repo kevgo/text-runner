@@ -31,8 +31,7 @@ module.exports = ->
 
   @Given /^I am in a directory that contains the "([^"]*)" example without a configuration file$/ (example-name) ->
     @root-dir = tmp.dir-sync unsafe-cleanup: yes
-    fs.copy-sync path.join('examples' example-name),
-                 @root-dir.name
+    fs.copy-sync path.join('examples' example-name), @root-dir.name
 
 
   @Given /^the configuration file:$/ (content) ->

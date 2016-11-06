@@ -31,7 +31,7 @@ Feature: running console commands
       foo
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | running.md              |
       | LINE          | 1                       |
@@ -48,7 +48,7 @@ Feature: running console commands
       ```
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | running.md                                              |
       | LINE          | 1-4                                                     |

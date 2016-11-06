@@ -41,7 +41,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | creator.md                       |
       | LINE          | 1-5                              |
@@ -57,7 +57,7 @@ Feature: creating files with content
       __one.txt__
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | creator.md                          |
       | LINE          | 1                                   |
@@ -78,7 +78,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | creator.md                                    |
       | LINE          | 1-8                                           |
@@ -103,7 +103,7 @@ Feature: creating files with content
 
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | creator.md                                                                |
       | LINE          | 1-12                                                                      |

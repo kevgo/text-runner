@@ -56,7 +56,7 @@ Feature: verifying file content
       ```
       </a>
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | 02.md                                                                                        |
       | LINE          | 3-10                                                                                         |
@@ -70,7 +70,7 @@ Feature: verifying file content
 
 
   Scenario: file is missing
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | FILENAME      | 02.md                  |
       | LINE          | 3-10                   |

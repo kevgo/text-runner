@@ -13,7 +13,7 @@ Feature: finding files in certain directories only
       files: '*.md'
       """
     And a runnable file "foo/bar.md"
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | ERROR MESSAGE | no Markdown files found |
       | EXIT CODE     | 1                       |

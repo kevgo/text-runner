@@ -9,7 +9,7 @@ Feature: running empty files
 
   Scenario: a tutorial consisting of an empty file
     Given my workspace contains an empty file "empty.md"
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | ERROR MESSAGE | found empty file empty.md |
       | FILENAME      | empty.md                  |

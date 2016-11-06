@@ -23,6 +23,12 @@ module.exports = ->
       """
 
 
+  @Given /^I am in a directory that contains the "([^"]*)" example with the configuration file:$/ (example-name, config-file-content) ->
+    @root-dir = tmp.dir-sync unsafe-cleanup: yes
+    fs.copy-sync path.join('examples' example-name), @root-dir.name
+    fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), config-file-content
+
+
   @Given /^I am in a directory that contains the "([^"]*)" example without a configuration file$/ (example-name) ->
     @root-dir = tmp.dir-sync unsafe-cleanup: yes
     fs.copy-sync path.join('examples' example-name),

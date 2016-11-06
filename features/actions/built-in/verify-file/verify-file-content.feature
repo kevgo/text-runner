@@ -21,7 +21,6 @@ Feature: verifying file content
       """
 
 
-      @verbose
   Scenario: file content matches
     Given my workspace contains the file "01.md" with the content:
       """

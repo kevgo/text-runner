@@ -1,23 +1,14 @@
-Feature: Formatter types
+Feature: selecting formatter via the command-line
 
   As a tutorial writer
-  I want to be able to configure TutorialRunner to use different formatters
-  So that I can use it with my preferred output format.
+  I want to be able to configure TutorialRunner to use different formatters via command-line parameters
+  So that I can try different formatters out easily.
 
-  - the default formatter is the "colored" formatter
   - you can chose a formatter using the `--format <[formatter name]>` command-line parameter
     or the `formatter` key in `tut-run.yml`
 
 
-  Scenario: default formatter
-    When executing the "simple" example
-    Then it prints:
-      """
-      ✔ bash.md
-      """
-
-
-  Scenario Outline: formatter types
+  Scenario Outline: selecting formatters via command-line parameter
     Given I am in a directory that contains the "simple" example without a configuration file
     When running tut-run with the "<FORMATTER>" formatter
     Then it prints:

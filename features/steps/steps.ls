@@ -63,9 +63,9 @@ module.exports = ->
       done if trying is 'executing' and @exit-code then "failed with exit code #{@exit-code}"
 
 
-  @When /^running the "([^"]*)" command$/, (command, done) ->
+  @When /^(trying to run|running) the "([^"]*)" command$/, (trying, command, done) ->
     @execute {command, cwd: (@root-dir?.name or 'tmp')}, ~>
-      done if @exit-code then "failed with exit code #{@exit-code}"
+      done if trying is 'running' and @exit-code then "failed with exit code #{@exit-code}"
 
 
   @When /^(trying to run|running) tut\-run$/ (trying, done) ->
@@ -111,6 +111,10 @@ module.exports = ->
 
   @Then /^it signals that "([^"]*)" is an unknown command$/ (command) ->
     @verify-unknown-command command
+
+
+  @Then /^the call fails with the error:$/ (expected-error) ->
+    @verify-call-error expected-error
 
 
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->

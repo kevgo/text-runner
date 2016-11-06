@@ -31,6 +31,7 @@ Feature: selecting formatter via the config file
       formatter: zonk
       """
     When trying to run tut-run
-    Then the test fails with:
-      | ERROR MESSAGE | Unknown formatter: 'zonk' |
-      | EXIT CODE     | 1                         |
+    Then the call fails with the error:
+      """
+      Unknown formatter: 'zonk'
+      """

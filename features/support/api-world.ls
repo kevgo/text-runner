@@ -53,6 +53,10 @@ ApiWorld = !->
         done!
 
 
+  @verify-call-error = (expected-error) ->
+    jsdiff-console @error, expected-error
+
+
   @verify-prints = (expected-text) ->
     # No way to capture console output here.
     # This is tested in the CLI world.

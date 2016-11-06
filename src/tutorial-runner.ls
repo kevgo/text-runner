@@ -1,7 +1,7 @@
 require! {
   './actions/action-manager' : ActionManager
   './configuration' : Configuration
-  './formatters/colored-formatter' : ColoredFormatter
+  './formatters/icons-formatter' : IconsFormatter
   'fs'
   'interpret'
   'liftoff' : Liftoff
@@ -12,7 +12,7 @@ require! {
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  ({@formatter = new ColoredFormatter} = {}) ->
+  ({@formatter = new IconsFormatter} = {}) ->
     @actions = new ActionManager @formatter
 
 

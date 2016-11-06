@@ -8,7 +8,7 @@ require! {
 
 
 # The standard formatter, uses green, yellow, and red icons
-class ColoredFormatter
+class IconsFormatter
 
   ->
 
@@ -46,14 +46,14 @@ class ColoredFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @activity-header = "#{@_format yellow}\n"
+    @activity-header = "#{@_format yellow figures.pointer}\n"
     @activity-console = ''
     @_print!
 
 
   # called when the last started activity finished successful
   success: ->
-    @activity-header = @_format green
+    @activity-header = @_format green figures.tick
     @activity-console = ''
     @_print!
     log-update.done!
@@ -62,14 +62,14 @@ class ColoredFormatter
 
   # Called on general errors
   error: (message) ->
-    @activity-header = "#{@_format red}\n\n#{red "Error: #{message}"}\n"
+    @activity-header = "#{@_format red figures.cross}\n\n#{red "Error: #{message}"}\n"
     @_print!
     process.exit 1
 
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @activity-header = "#{@_format yellow}\n"
+    @activity-header = "#{@_format yellow figures.pointer}\n"
     @_print!
 
 
@@ -81,15 +81,15 @@ class ColoredFormatter
     log-update bold green "\nSuccess! #{steps-count} steps passed"
 
 
-  _format: (color) ->
-    result = ""
+  _format: (figure) ->
+    result = "#{figure} "
     if @documentation-file-path
       result += "#{@documentation-file-path}"
       if @start-line
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
     result += "#{@activity-text}"
-    color result
+    result
 
 
   _print: ->
@@ -102,4 +102,4 @@ class ColoredFormatter
 
 
 
-module.exports = ColoredFormatter
+module.exports = IconsFormatter

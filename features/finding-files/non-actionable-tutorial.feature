@@ -12,7 +12,7 @@ Feature: Fail on non-actionable Markdown
       """
       Just text here, nothing to do!
       """
-    When executing the tutorial
+    When trying to execute the tutorial
     Then the test fails with:
       | ERROR MESSAGE | no activities found |
       | EXIT CODE     | 1                   |

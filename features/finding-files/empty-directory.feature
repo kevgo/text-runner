@@ -8,7 +8,7 @@ Feature: failing on empty directory
 
 
   Scenario: running inside an empty directory
-    When executing the tutorial runner in an empty workspace
+    When trying to execute the tutorial runner in an empty workspace
     Then the test fails with:
       | ERROR MESSAGE | no Markdown files found |
       | EXIT CODE     | 1                       |

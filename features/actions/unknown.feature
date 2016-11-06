@@ -8,7 +8,7 @@ Feature: unknown actions
 
 
   Scenario: using an unknown action
-    When executing the "unknown-action" example
+    When trying to execute the "unknown-action" example
     Then the test fails with:
       | ERROR MESSAGE | unknown action: 'unknownAction' |
       | FILENAME      | unknown-action.md               |

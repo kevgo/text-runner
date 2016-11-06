@@ -48,16 +48,19 @@ module.exports = ->
 
 
 
-  @When /^executing the tutorial(?: runner in an empty workspace)?$/, timeout: 4000, (done) ->
-    @execute cwd: 'test-dir', done
+  @When /^(trying to execute|executing) the tutorial(?: runner in an empty workspace)?$/, timeout: 4000, (trying, done) ->
+    @execute cwd: 'test-dir', ~>
+      done if trying is 'executing' and @exit-code then "tut-run failed with exit code #{@exit-code}"
 
 
-  @When /^executing the "([^"]+)" example$/, timeout: 4000, (example-name, done) ->
-    @execute cwd: path.join('examples', example-name), done
+  @When /^(trying to execute|executing) the "([^"]+)" example$/, timeout: 4000, (trying, example-name, done) ->
+    @execute cwd: path.join('examples', example-name), ~>
+      done if trying is 'executing' and @exit-code then "failed with exit code #{@exit-code}"
 
 
   @When /^running the "([^"]*)" command$/, (command, done) ->
-    @execute {command, cwd: (@root-dir?.name or 'tmp')}, done
+    @execute {command, cwd: (@root-dir?.name or 'tmp')}, ~>
+      done if @exit-code then "failed with exit code #{@exit-code}"
 
 
   @When /^running tut\-run$/ (done) ->

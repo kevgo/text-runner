@@ -8,7 +8,7 @@ require! {
 
 
 # The standard formatter, uses green, yellow, and red icons
-class IconsFormatter
+class IconicFormatter
 
   ->
 
@@ -102,4 +102,4 @@ class IconsFormatter
 
 
 
-module.exports = IconsFormatter
+module.exports = IconicFormatter

@@ -1,7 +1,7 @@
 require! {
   './actions/action-manager' : ActionManager
   './configuration' : Configuration
-  './formatters/icons-formatter' : IconsFormatter
+  './formatters/iconic-formatter' : IconicFormatter
   'fs'
   'interpret'
   'liftoff' : Liftoff

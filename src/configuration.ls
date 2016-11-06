@@ -19,7 +19,7 @@ class Configuration
   @default-values =
     files: '**/*.md'
     globals: []
-    formatter: 'icons'
+    formatter: 'iconic'
 
 
   # Returns the value of the attribute with the given name

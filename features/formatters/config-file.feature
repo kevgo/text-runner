@@ -22,4 +22,4 @@ Feature: selecting formatter via the config file
       | FORMATTER | OUTPUT      |
       | robust    | Hello world |
       | colored   | bash.md     |
-      | icons     | ✔ bash.md   |
+      | iconic    | ✔ bash.md   |

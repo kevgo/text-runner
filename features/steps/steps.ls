@@ -64,6 +64,12 @@ module.exports = ->
     @execute {cwd: (@root-dir?.name or 'tmp')}, done
 
 
+  @When /^running tut\-run with the "([^"]*)" formatter$/ (formatter-name, done) ->
+    @execute {cwd: (@root-dir?.name or 'tmp'), formatter: formatter-name}, ~>
+      done if @exit-code then "tut-run failed with exit code #{@exit-code}"
+
+
+
 
   @Then /^I see usage instructions$/ ->
     @verify-printed-usage-instructions!

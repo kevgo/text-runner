@@ -8,7 +8,7 @@ require! {
 
 CliWorld = !->
 
-  @execute = ({command = 'run', cwd}, done) ->
+  @execute = ({command = 'run', cwd, formatter}, done) ->
     args =
       cwd: cwd
       stdout: off
@@ -19,7 +19,13 @@ CliWorld = !->
       args.stderr = dim-console.process.stderr
     if @debug
       args.env['DEBUG'] = '*'
-    @process = new ObservableProcess [path.join(process.cwd!, 'bin', 'tut-run'), command], args
+    path-segments = [path.join(process.cwd!, 'bin', 'tut-run')]
+    if formatter
+      path-segments
+        ..push '--format'
+        ..push formatter
+    path-segments.push command
+    @process = new ObservableProcess path-segments, args
       ..on 'ended', (@exit-code) ~> done!
 
 

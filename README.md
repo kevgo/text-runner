@@ -374,6 +374,28 @@ more details about the currently running activity as they become known.
 This helps produce better terminal output.
 
 
+## Formatters
+
+Tutorial Runner supports a variety of formatters:
+
+* __icons formatter:__
+  the most modern formatter.
+  Indicates test status using pretty icons.
+  Shows test output only when steps run,
+  and cleans it out when done to show a clean summary of the test.
+  This is the default formatter.
+
+* __colored formatter:__
+  Indicades test status using colored test names.
+  Shows test output only when steps run,
+  and cleans it out when done to show a clean summary of the test.
+
+* __robust formatter:__
+  The most robust formatter, similar to the one [Cucumber]() uses.
+  Shows test output before the steps.
+  Use this formatter if the other ones don't work for you.
+
+
 ## Installation
 
 - install [Node.JS](https://nodejs.org) version 4, 5, or 6

@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {bold, green, red}
+  'chalk' : {bold, dim, green, red}
   'prelude-ls' : {compact, unique}
 }
 
@@ -15,6 +15,9 @@ class RobustFormatter
     # the line within the documentation file at which the currently processed block starts
     @documentation-file-line = -1
 
+
+  output: (text) ~>
+    console.log dim text.trim!
 
 
   refine: (@activity-text) ->

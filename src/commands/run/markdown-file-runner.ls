@@ -32,8 +32,12 @@ class MarkdownFileRunner
     try
       block.formatter.set-lines block.start-line, block.end-line
       if block.runner.length is 1
-        block.runner block
-        done null, 1
+        try
+          block.runner block
+          done null, 1
+        catch
+          console.log e
+          throw e
       else
         block.runner block, -> done null, 1
     catch

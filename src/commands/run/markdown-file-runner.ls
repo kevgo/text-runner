@@ -6,6 +6,7 @@ require! {
   'prelude-ls' : {reject}
   'remarkable' : Remarkable
   './searcher' : Searcher
+  'wait' : {wait}
 }
 debug = require('debug')('markdown-file-runner')
 
@@ -29,20 +30,22 @@ class MarkdownFileRunner
 
 
   _run-block: (block, done) ->
-    try
-      block.formatter.set-lines block.start-line, block.end-line
-      if block.runner.length is 1
-        try
-          block.runner block
-          done null, 1
-        catch
-          console.log e
-          throw e
-      else
-        block.runner block, -> done null, 1
-    catch
-      block.formatter.error e.message or e
-      done 1
+    # waiting 1 ms here to give Node a chance to run queued up logic from previous steps
+    wait 1, ->
+      try
+        block.formatter.set-lines block.start-line, block.end-line
+        if block.runner.length is 1
+          try
+            block.runner block
+            done null, 1
+          catch
+            console.log e
+            throw e
+        else
+          block.runner block, -> done null, 1
+      catch
+        block.formatter.error e.message or e
+        done 1
 
 
   # standardizes the given AST into a flat array with this format:

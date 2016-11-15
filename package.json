@@ -28,6 +28,7 @@
     "require-yaml": "0.0.1",
     "rimraf": "2.5.4",
     "update-notifier": "1.0.2",
+    "wait": "0.1.0",
     "xml2js": "0.4.17",
     "yamljs": "0.2.8"
   },
@@ -46,8 +47,7 @@
     "shelljs": "0.7.5",
     "tertestrial": "0.3.2",
     "tmp": "0.0.30",
-    "touch": "1.0.0",
-    "wait": "0.1.0"
+    "touch": "1.0.0"
   },
   "files": [
     "bin/tut-run",

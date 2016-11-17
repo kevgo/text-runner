@@ -100,191 +100,21 @@ You execute TutorialRunner by by calling `tut-run` on the command line.
 Tutorial Runner provides a number of built-in actions
 for activities typically performed in software programming tutorials.
 
+#### Filesystem
 
-### create a file with name and content
-
-* the name of the file is provided as bold text within the anchor tag
-* the content of the file is provided as a multi-line code block (surrounded with \`\`\`) within the anchor tag
-* Tutorial Runner creates the file in the workspace
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_createFile">
-
-__test.txt__
-
-`​``txt
-The file content goes here
-`​``
-</a>
-```
-</a>
+* [create a file](documentation/actions/create_file.md)
+* [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
+* [change the current working directory](documentation/actions/cd.md)
 
 
-### run a command on the console
-
-- runs the command given in the code block in the workspace
-- waits for the command to finish before continuing the tutorial
-- a `$` at the beginning of the line is ignored
-- you can [configure](#configuration) global binaries that you your code base exports
-  so that your tutorial can call them directly
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_runCommand">
-`​``
-$ ls -a
-`​``
-</a>
-```
-</a>
-
-You can enter text into the running command by providing an HTML table
-with the content to enter:
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_runCommand">
-`​``
-$ read name
-$ read purpose
-`​``
-<table>
-  <tr>
-    <td>Tutorial Runner</td>
-  </tr>
-  <tr>
-    <td>Test framework for documentation</td>
-  </tr>
-</table>
-
-</a>
-```
-</a>
-
-If the table contains multiple columns,
-the first column contains output to wait for for,
-and the last one text to enter once the output from the first column has appeared.
-Middle columns are ignored.
-`<th>` elements are considered descriptions and are also ignored.
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_runCommand">
-`​``
-$ echo "Product name:"
-$ read name
-$ echo "What does it do:"
-$ read purpose
-`​``
-<table>
-  <tr>
-    <th>question</th>
-    <th>description</th>
-    <th>you enter</th>
-  </tr>
-  <tr>
-    <td>Product name</td>
-    <td>the name of the product</td>
-    <td>Tutorial Runner</td>
-  </tr>
-  <tr>
-    <td>What does it do</td>
-    <td>product tagline</td>
-    <td>Test framework for documentation</td>
-  </tr>
-</table>
-
-</a>
-```
-</a>
-
-This code waits until the called program prints "Product name",
-and enters "Tutorial Runner&lt;enter&gt;".
-Then it waits for "What does it do"
-and enters "Test framework for documentation&lt;enter&gt;".
+#### Console commands
+* [run a console command](documentation/actions/run_console_command.md)
+* [start and stop long-running console commands](documentation/actions/start_console_command.md)
 
 
-### long-running processes
+#### Source code
 
-To start a long-running process, use the `startCommand` action.
-The test script continues while the started process keeps running in the background.
-This can be used to start servers and then interact with them later.
-
-You can wait until the process prints a given string with a `waitForOutput` block,
-and stop the long-running process using a `stopCommand` block.
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_startCommand">
-
-`​``
-$ node ../../examples/long-running/server.js
-`​``
-</a>
-
-<a class="tutorialRunner_waitForOutput">
-wait until you see
-`​``
-running at port 4000
-`​``
-</a>
-
-... interact with the server here ...
-
-<a class="tutorialRunner_stopCommand">
-Stop the current process by hitting Ctrl-C
-</a>
-```
-</a>
-
-
-### running JavaScript code
-
-To run JavaScript code:
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_runJavascript">
-`​``
-console.log('This is getting executed by TutorialRunner!')
-`​``
-</a>
-```
-</a>
-
-
-### verify that a linked directory exists
-
-You can verify that folders in your repo that your documentation references
-exist using the `verifyLinkedDirectoryExists` action:
-
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_verifyLinkedDirectoryExists">
-Check out the [examples](examples) directory to see this in action.
-</a>
-```
-</a>
-
-
-### changing the current working directory
-
-Tutorial Runner runs by default in the `tmp` directory.
-To change it, use the `cd` action.
-It changes into the directory that the link in its block points to.
-The directory path should be a link
-because your documentation wants to point to it.
-
-<a class="tutorialRunner_runMarkdownInTutrun">
-```markdown
-<a class="tutorialRunner_cd">
-Let's change into the [foo](.) directory to see what's in there.
-</a>
-```
-</a>
-
+* [run Javascript code](documentation/actions/run_javascript.md)
 
 
 ## Custom actions
@@ -368,7 +198,7 @@ It runs the command given in the code block in the terminal.
 
 <a class="tutorialRunner_createMarkdownFile">
 ```
-<a class="tutorialRunner_runCommand">
+<a class="tutorialRunner_runConsoleCommand">
 `​``
 ls -la
 `​``
@@ -460,7 +290,7 @@ produce more concise output when running as part of a larger test suite.
 You can configure Tutorial Runner via a configuration file.
 To create one, run:
 
-<a class="tutorialRunner_runCommand">
+<a class="tutorialRunner_runConsoleCommand">
 ```
 $ tut-run setup
 ```

@@ -8,6 +8,8 @@ require! {
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
+# Runs the given commands on the console.
+# Waits until the command is finished.
 module.exports  = ({formatter, searcher, configuration}, done) ->
   formatter.start 'running console command'
 

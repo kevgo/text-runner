@@ -1,6 +1,7 @@
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
+# Waits until the currently running console command produces the given output
 module.exports  = ({formatter, searcher}, done) ->
   formatter.start 'starting a long-running process'
 

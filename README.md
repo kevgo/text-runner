@@ -395,6 +395,10 @@ Tutorial Runner supports a variety of formatters:
   Shows test output before the steps.
   Use this formatter if the other ones don't work for you.
 
+The `robust` formatter is best for development,
+the `colored` or `iconic` formatters
+produce more concise output when running as part of a larger test suite.
+
 
 ## Installation
 

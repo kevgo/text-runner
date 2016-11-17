@@ -40,7 +40,7 @@ class RobustFormatter
 
 
   # Called on general errors
-  error: (message) ->
+  error: (@error-message) ->
     console.log bold red @_format!
     process.exit 1
 
@@ -58,7 +58,8 @@ class RobustFormatter
       if @start-line
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
-    result += "#{@activity-text}"
+    result += "#{@activity-text}" if @activity-text
+    result += "#{@error-message}" if @error-message
     result
 
 

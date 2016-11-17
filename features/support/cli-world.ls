@@ -44,7 +44,7 @@ CliWorld = !->
     if table['MESSAGE']
       expected-header += " -- #{table['MESSAGE']}"
     expect(output).to.include expected-header
-    expect(output).to.include "Error: #{table['ERROR MESSAGE']}"
+    expect(output).to.include table['ERROR MESSAGE']
     expect(@exit-code).to.equal +table['EXIT CODE']
 
 

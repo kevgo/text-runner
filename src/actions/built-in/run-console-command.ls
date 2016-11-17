@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {cyan, red}
+  'chalk' : {bold, cyan, red}
   'observable-process' : ObservableProcess
   'path'
   'prelude-ls' : {compact, find, head, map, tail, values}
@@ -25,7 +25,7 @@ module.exports  = ({formatter, searcher, configuration}, done) ->
 
   input-text = searcher.node-content type: 'htmlblock'
   get-input input-text, formatter, (input) ->
-    formatter.refine "running console command: #{cyan commands-to-run}"
+    formatter.refine "running console command: #{bold cyan commands-to-run}"
     process = new ObservableProcess(['bash', '-c', commands-to-run],
                                     cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
       ..on 'ended', (err) ~>

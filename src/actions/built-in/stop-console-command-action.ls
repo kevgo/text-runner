@@ -5,6 +5,7 @@ require! {
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
+# Stops the currently running console command.
 module.exports  = ({formatter, searcher}, done) ->
   formatter.start 'stopping the long-process'
 

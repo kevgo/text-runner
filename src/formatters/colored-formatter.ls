@@ -88,7 +88,7 @@ class ColoredFormatter
       if @start-line
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
-    result += "#{@activity-text}" if @activity-text
+    result += @activity-text if @activity-text
     result += "\n#{@error-message}" if @error-message
     color result
 

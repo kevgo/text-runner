@@ -1,4 +1,4 @@
-files: '*.md'
+files: '{*.md,documentation/**/*.md}'
 globals:
   'tut-run': 'bin/tut-run'
 formatter: iconic

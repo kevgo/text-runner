@@ -61,8 +61,8 @@ class IconicFormatter
 
 
   # Called on general errors
-  error: (message) ->
-    @activity-header = "#{@_format red figures.cross}\n\n#{red "Error: #{message}"}\n"
+  error: (@error-message) ->
+    @activity-header = @_format red figures.cross
     @_print!
     process.exit 1
 
@@ -88,7 +88,8 @@ class IconicFormatter
       if @start-line
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
-    result += "#{@activity-text}"
+    result += "#{@activity-text}" if @activity-text
+    result += "#{@error-message}" if @error-message
     result
 
 

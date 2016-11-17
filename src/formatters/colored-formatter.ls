@@ -61,8 +61,8 @@ class ColoredFormatter
 
 
   # Called on general errors
-  error: (message) ->
-    @activity-header = "#{@_format red}\n\n#{red "Error: #{message}"}\n"
+  error: (@error-message) ->
+    @activity-header = @_format red
     @_print!
     process.exit 1
 
@@ -88,7 +88,8 @@ class ColoredFormatter
       if @start-line
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
-    result += "#{@activity-text}"
+    result += "#{@activity-text}" if @activity-text
+    result += "#{@error-message}" if @error-message
     color result
 
 

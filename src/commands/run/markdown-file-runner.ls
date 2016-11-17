@@ -39,6 +39,7 @@ class MarkdownFileRunner
           block.runner block
           done null, 1
         else
+          # asynchronous action method
           block.runner block, -> done null, 1
       catch
         console.log e

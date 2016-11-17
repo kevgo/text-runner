@@ -6,8 +6,11 @@ set -e
 if [ "$#" == "0" ]; then
   node_modules/o-tools/bin/lint
   node_modules/.bin/mycha
+  echo
   bin/cuc-api
   bin/cuc-cli
+  echo
+  echo
   bin/docs
 else
   DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-api "$@"

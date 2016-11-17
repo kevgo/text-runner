@@ -89,7 +89,7 @@ class IconicFormatter
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
     result += "#{@activity-text}" if @activity-text
-    result += "#{@error-message}" if @error-message
+    result += "\n#{@error-message}" if @error-message
     result
 
 

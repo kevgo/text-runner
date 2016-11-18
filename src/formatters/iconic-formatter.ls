@@ -4,6 +4,7 @@ require! {
   'indent-string'
   'log-update'
   'prelude-ls' : {compact, unique}
+  'strip-ansi'
 }
 
 
@@ -98,7 +99,7 @@ class IconicFormatter
 
 
   output: (text) ~>
-    @activity-console += dim text
+    @activity-console += dim strip-ansi text
     @_print!
 
 

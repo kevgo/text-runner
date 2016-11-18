@@ -31,6 +31,8 @@ class TestFormatter
     @error-messages.push strip-color(error-message).replace 'test-dir/', ''
     @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
 
+  output: (text) ->
+
   refine: (activity) ->
     @activities[*-1] = strip-color activity
     @lines[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!

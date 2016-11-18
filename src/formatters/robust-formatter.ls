@@ -15,6 +15,19 @@ class RobustFormatter
     # the line within the documentation file at which the currently processed block starts
     @documentation-file-line = -1
 
+    # Note: I have to define these attributes here,
+    #       since doing so at the class level
+    #       binds them to the class scope for some reason
+    @stdout =
+      write: @output
+
+    @stderr =
+      write: @output
+
+    @console =
+      log: (text) ~>
+        @output "#{text}\n"
+
 
   output: (text) ~>
     console.log dim text.trim!

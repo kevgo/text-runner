@@ -88,8 +88,7 @@ foo: bar
 The class `createFile` tells TutorialRunner that this block is supposed to create a file.
 It takes the filename and content to create from the text inside this block
 (not metadata, but the same text the user sees),
-and creates the file in the working directory
-(by default `tmp` in the current directory).
+and creates the file in the current working directory.
 Text outside of `<a>` tags is ignored.
 
 You execute TutorialRunner by by calling `tut-run` on the command line.
@@ -179,6 +178,10 @@ You can write the handler in any language that transpiles to JavaScript,
 for example [CoffeeScript](http://coffeescript.org),
 [LiveScript](http://livescript.net),
 or [BabelJS](https://babeljs.io).
+Just make sure that your project contains a local installation of your transpiler,
+since Tutorial Runner does not find globally installed transpilers.
+This means your project should have a `package.json` file listing the transpiler
+you want to use (in addition to any other NPM modules you want to use).
 
 
 ### Using the searcher helper
@@ -304,7 +307,8 @@ __tut-run.yml__
 ```yml
 files: '**/*.md'
 globals: []
-formatter: iconic
+formatter: robust
+useTempDirectory: false
 ```
 </a>
 

@@ -3,14 +3,14 @@ require! {
   'observable-process' : ObservableProcess
   'path'
   'prelude-ls' : {compact, find, head, map, tail, values}
-  'xml2js' : {parse-string}
+  'xml2js'
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
 
 
 # Runs the given commands on the console.
 # Waits until the command is finished.
-module.exports  = ({formatter, searcher, configuration}, done) ->
+module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start 'running console command'
 
   commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
@@ -27,7 +27,7 @@ module.exports  = ({formatter, searcher, configuration}, done) ->
   get-input input-text, formatter, (input) ->
     formatter.refine "running console command: #{bold cyan commands-to-run}"
     process = new ObservableProcess(['bash', '-c', commands-to-run],
-                                    cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
+                                    cwd: configuration.test-dir, stdout: formatter.stdout, stderr: formatter.stderr)
       ..on 'ended', (err) ~>
         | err  =>  formatter.error err
         | _    =>  formatter.success!
@@ -44,7 +44,7 @@ function enter process, {text-to-wait = '', input}
 
 function get-input text, formatter, done
   if !text then return done ''
-  parse-string text, (err, xml) ->
+  xml2js.parse-string text, (err, xml) ->
     | err  =>  return formatter.error err
     result = for tr in xml.table.tr
       if tr.td
@@ -59,10 +59,9 @@ function make-global globals = {}
   (command) ->
     command-parts = command.split ' '
     if replacement = globals[head command-parts]
-      "#{path.join '..', replacement} #{tail(command-parts).join ' '}"
+      "#{path.join process.cwd!, replacement} #{tail(command-parts).join ' '}"
     else
       command
-
 
 
 # trims the leading dollar from the given command

@@ -7,7 +7,7 @@ require! {
 }
 
 
-module.exports  = ({formatter, searcher}, done) ->
+module.exports  = ({configuration, formatter, searcher}, done) ->
 
   file-path = searcher.node-content type: 'strongtext', ({nodes, content}) ->
     | nodes.length is 0    =>  'no file path found'
@@ -20,7 +20,7 @@ module.exports  = ({formatter, searcher}, done) ->
 
   formatter.start "verifying file #{cyan file-path}"
   try
-    actual-content = fs.read-file-sync path.join(global.working-dir, file-path), 'utf8'
+    actual-content = fs.read-file-sync path.join(configuration.test-dir, file-path), 'utf8'
   catch
     if e.code is 'ENOENT'
       formatter.error "file #{file-path} not found"

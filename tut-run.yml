@@ -1,4 +1,5 @@
 files: '{*.md,documentation/**/*.md}'
 globals:
   'tut-run': 'bin/tut-run'
-formatter: colored
+formatter: robust
+useTempDirectory: true

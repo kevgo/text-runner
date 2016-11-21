@@ -42,9 +42,8 @@ class MarkdownFileRunner
           # asynchronous action method
           block.runner block, -> done null, 1
       catch
-        console.log e
-        block.formatter.error(e.message or e)
-        done 1
+        block.formatter.error e
+        done e
 
 
   # standardizes the given AST into a flat array with this format:

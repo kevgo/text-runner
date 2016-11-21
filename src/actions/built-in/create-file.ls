@@ -7,7 +7,7 @@ require! {
 }
 
 
-module.exports  = ({formatter, searcher}, done) ->
+module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start "creating file"
 
   file-path = searcher.node-content type: 'strongtext', ({nodes, content}) ->
@@ -21,7 +21,7 @@ module.exports  = ({formatter, searcher}, done) ->
     | !content           =>  'no content given for file to create'
 
   formatter.refine "creating file #{cyan file-path}"
-  full-path = path.join(global.working-dir, file-path)
+  full-path = path.join(configuration.test-dir, file-path)
   mkdirp path.dirname(full-path)
   fs.write-file full-path, content, (err) ~>
     | err  =>  formatter.error err

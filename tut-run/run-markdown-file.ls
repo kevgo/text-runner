@@ -6,10 +6,10 @@ require! {
 }
 
 
-module.exports  = ({formatter, searcher}, done) ->
+module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start 'running the created Markdown file'
 
-  process = child_process.spawn '../bin/tut-run', cwd: 'tmp', encoding: 'utf8'
+  process = child_process.spawn path.join(__dirname, '..' 'bin' 'tut-run'), cwd: configuration.test-dir, encoding: 'utf8'
     ..stdout.on 'data', (data) -> formatter.output strip-color data.to-string!
     ..stderr.on 'data', (data) -> formatter.output strip-color data.to-string!
     ..on 'close', (exit-code) ~>

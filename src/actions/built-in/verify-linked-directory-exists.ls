@@ -11,7 +11,7 @@ module.exports = function {formatter, searcher}
     | nodes.length is 0  =>  'no link found'
     | nodes.length > 1   =>  'too many links found'
 
-  full-path = path.resolve(directory)
+  full-path = path.resolve directory
   formatter.start "verifying the #{bold cyan directory} directory exists"
   try
     stats = fs.lstat-sync full-path

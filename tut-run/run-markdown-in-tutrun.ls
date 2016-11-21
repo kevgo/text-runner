@@ -9,7 +9,7 @@ require! {
 }
 
 
-module.exports  = ({formatter, searcher}, done) ->
+module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start 'verify that markdown works in tut-run'
 
   markdown = searcher.node-content type: 'fence', ({content, nodes}) ->
@@ -17,9 +17,9 @@ module.exports  = ({formatter, searcher}, done) ->
     | nodes.length is 0  =>  'You must provide the Markdown to run via tut-run as a fenced code block. No such fenced block found.'
     | !content  =>  'A fenced code block containing the Markdown to run was found, but it is empty, so I cannot run anything here.'
 
-  fs.write-file-sync path.join('tmp', '1.md'), markdown.replace /​/g, ''
+  fs.write-file-sync path.join(configuration.test-dir, '1.md'), markdown.replace /​/g, ''
 
-  process = child_process.spawn '../bin/tut-run', cwd: 'tmp', encoding: 'utf8'
+  process = child_process.spawn path.join(__dirname, '..' 'bin' 'tut-run'), cwd: configuration.test-dir, encoding: 'utf8'
     ..stdout.on 'data', (data) -> formatter.output strip-color data.to-string!
     ..stderr.on 'data', (data) -> formatter.output strip-color data.to-string!
     ..on 'close', (exit-code) ~>

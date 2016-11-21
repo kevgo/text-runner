@@ -2,10 +2,6 @@ require! {
   'wait' : {wait, wait-until}
 }
 
-finished-method = (formatter, code, cb) ->
-  formatter.success!
-  cb null, 1
-
 
 # Runs the JavaScript code given in the code block
 module.exports = ({formatter, searcher, configuration}, done) ->
@@ -18,7 +14,11 @@ module.exports = ({formatter, searcher, configuration}, done) ->
   |> replace-require-local-module
   |> replace-variable-declarations
 
-  finished = finished-method.bind(null, formatter, code, done)
+  finished-method = (err) ->
+    | err  =>  formatter.error err
+    | _    =>  formatter.success!
+    done err, 1
+
   if has-callback code
     # the code is asynchronous
     code = replace-async-callbacks code

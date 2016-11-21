@@ -9,20 +9,57 @@ Feature: running inline blocks of Javascript
   - local variable declarations persist across different code block calls
 
 
-  Scenario: running Javascript
+  Scenario: running synchronous Javascript
     Given my workspace contains the file "1.md" with the content:
       """
       <a class="tutorialRunner_runJavascript">
       ```
-      console.log('foobar')
+      const foo = 'bar'
+      console.log('A foo walks into a ' + foo)
       ```
       </a>
       """
     When running tut-run
     Then it prints:
       """
-      foobar
+      A foo walks into a bar
       """
+
+
+  Scenario: running asynchronous Javascript using the "// ..." keyword
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tutorialRunner_runJavascript">
+      ```
+      const wait = require('wait')
+      const foo = 'bar'
+      wait(1, function() {
+        console.log('A foo walks into a ' + foo)
+        // ...
+      })
+      ```
+      </a>
+      """
+    When running tut-run
+    Then it prints:
+      """
+      A foo walks into a bar
+      """
+
+
+  Scenario: running asynchronous Javascript using the "<CALLBACK>" keyword
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tutorialRunner_runJavascript">
+      ```
+      const wait = require('wait')
+      const foo = 'bar'
+      wait(1, <CALLBACK>)
+      ```
+      </a>
+      """
+    When running tut-run
+    Then the test passes
 
 
   Scenario: persisting variables across blocks
@@ -33,6 +70,7 @@ Feature: running inline blocks of Javascript
       const name = "Jean-Luc Picard"
       ```
       </a>
+
       <a class="tutorialRunner_runJavascript">
       ```
       console.log("my name is " + name)

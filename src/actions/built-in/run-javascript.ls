@@ -14,27 +14,29 @@ module.exports = ({formatter, searcher, configuration}, done) ->
   |> replace-require-local-module
   |> replace-variable-declarations
 
-  finished-method = (err) ->
+  __finished = (err) ->
     | err  =>  formatter.error err
     | _    =>  formatter.success!
     done err, 1
 
-  if has-callback code
-    # the code is asynchronous
-    code = replace-async-callbacks code
-    formatter.output code
-    eval code
+  code = if has-callback code
+    replace-async-callbacks code
   else
-    # the code is synchronous
-    formatter.output code
-    eval code
-    formatter.success!
-    done null, 1
+    append-async-callback code
+  formatter.output code
+  eval code
+
+
+function append-async-callback code
+  """
+  #{code.trim!};
+  __finished()
+  """
 
 
 function replace-async-callbacks code
-  code = code.replace '<CALLBACK>', 'finished'
-  code = code.replace '// ...', 'finished()'
+  code.replace '<CALLBACK>', '__finished'
+      .replace /\/\/\s*\.\.\./g, '__finished()'
 
 
 function replace-substitutions-in-configuration code, configuration

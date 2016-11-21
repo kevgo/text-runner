@@ -19,7 +19,9 @@ class Configuration
   @default-values =
     files: '**/*.md'
     globals: []
-    formatter: 'iconic'
+    formatter: 'robust'
+    useTempDirectory: false
+
 
 
   # Returns the value of the attribute with the given name

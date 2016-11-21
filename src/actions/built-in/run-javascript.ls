@@ -8,17 +8,15 @@ finished-method = (formatter, code, cb) ->
 
 
 # Runs the JavaScript code given in the code block
-module.exports = ({formatter, searcher}, done) ->
+module.exports = ({formatter, searcher, configuration}, done) ->
   code = searcher.node-content type: 'fence', ({nodes}) ->
     | nodes.length is 0  =>  'no code to run found'
     | nodes.length > 1   =>  'too many code blocks found'
 
   formatter.start("running JavaScript code")
-  formatter.output code
 
-  # make sure the code requires this library and not the published version
-  if (matches = /require\(['"]exocom-mock['"]\)/.exec code)
-    code = code.replace matches[0], "require('..')"
+  code = replace-substitutions-in-configuration code, configuration
+  code = replace-require-local-module code
 
   # allow different JS blocks to share the "this" object
   code = code.replace /\bthis\./g, 'global.'
@@ -26,18 +24,28 @@ module.exports = ({formatter, searcher}, done) ->
   code = code.replace /\bvar /g, 'global.'
 
   finished = finished-method.bind(null, formatter, code, done)
-  # eval "wait(100, finished)"
-  # return
   if has-callback code
     # the code is asynchronous
     code = code.replace '<CALLBACK>', 'finished'
     code = code.replace '// ...', 'finished()'
+    formatter.output code
     eval code
   else
     # the code is synchronous
+    formatter.output code
     eval code
     formatter.success!
     done null, 1
+
+
+function replace-substitutions-in-configuration code, configuration
+  for search, replace of configuration?.file-data?.actions?.run-javascript?.replace
+    code .= replace search, replace
+  code
+
+
+function replace-require-local-module code
+  code.replace /require\(['"].['"]\)/, 'require(process.cwd())'
 
 
 function has-callback code

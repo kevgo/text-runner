@@ -11,15 +11,19 @@ require! {
 
 
 class TestFormatter
+
   ->
     @activities = []
-    @console = log: ->
     @error-messages = []
     @file-paths = []
     @lines = []
+    @text = ''
+    @console = log: (text) ~> @text += "#{text}\n"
+    @stdout = write: (text) ~> @text += text
+    @stderr = write: (text) ~> @text += text
 
   start-file: (file-path) ->
-    @file-paths.push file-path.replace 'test-dir/', ''
+    @file-paths.push file-path
 
   start: (activity) ->
     @activities.push strip-color activity
@@ -27,8 +31,8 @@ class TestFormatter
 
   success: ->
 
-  error: (error-message) !->
-    @error-messages.push strip-color(error-message).replace 'test-dir/', ''
+  error: (error) !->
+    @error-messages.push strip-color(error.message or error.to-string!)
     @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
 
   output: (text) ->
@@ -45,13 +49,14 @@ class TestFormatter
 
 ApiWorld = !->
 
-  @execute = ({command = 'run', cwd, formatter}, done) ->
+  @execute = ({command, formatter}, done) ->
     existing-dir = process.cwd!
-    process.chdir cwd
-    @formatter = formatter or new TestFormatter
+    process.chdir @root-dir.name
+    @formatter = new TestFormatter
     @runner = new TutorialRunner {@formatter}
       ..execute command, (@error) ~>
         process.chdir existing-dir
+        @output = @formatter.text
         done!
 
 

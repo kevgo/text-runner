@@ -8,15 +8,18 @@ require! {
 
 CliWorld = !->
 
-  @execute = ({command = 'run', cwd, formatter}, done) ->
+  @execute = ({command, formatter}, done) ->
     args =
-      cwd: cwd
+      cwd: @root-dir.name
       stdout: off
       stderr: off
       env: {}
     if @verbose
       args.stdout = dim-console.process.stdout
       args.stderr = dim-console.process.stderr
+    else
+      args.stdout = write: (text) ~> @output += text
+      args.stderr = write: (text) ~> @output += text
     if @debug
       args.env['DEBUG'] = '*'
     path-segments = [path.join(process.cwd!, 'bin', 'tut-run')]
@@ -26,7 +29,9 @@ CliWorld = !->
         ..push formatter
     path-segments.push command
     @process = new ObservableProcess path-segments, args
-      ..on 'ended', (@exit-code) ~> done!
+      ..on 'ended', (@exit-code) ~>
+        @output = dim-console.output if @verbose
+        done!
 
 
   @verify-call-error = (expected-error) ->

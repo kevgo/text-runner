@@ -35,5 +35,5 @@ This method is called the _action_ for the block _type_.
 
 ## Architecture
 
-- tests use 'tmp' as the workspace for creating files
-- the feature tests run inside the `test-dir` directory
+- tests run inside a global temp directory
+- the feature tests run inside a global temp directory

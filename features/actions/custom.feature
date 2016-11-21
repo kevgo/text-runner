@@ -1,3 +1,4 @@
+@verbose
 Feature: custom runners
 
   As a tutorial writer

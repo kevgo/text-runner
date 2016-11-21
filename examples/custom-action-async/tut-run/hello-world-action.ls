@@ -1,5 +1,4 @@
 require! {
-  'prelude-ls' : {capitalize}
   'wait' : {wait}
 }
 

@@ -6,6 +6,7 @@ require! {
   'path'
   'prelude-ls' : {flatten, sum}
   'rimraf'
+  'tmp'
 }
 
 
@@ -27,9 +28,11 @@ class RunCommand
 
   # Creates the temp directory to run the tests in
   _create-working-dir: ->
-    global.working-dir = path.join process.cwd!, 'tmp'
-    rimraf.sync global.working-dir
-    mkdirp.sync global.working-dir
+    @configuration.test-dir = if @configuration.get('useTempDirectory')
+      tmp.dir-sync!name
+    else
+      '.'
+
 
 
   # Returns all the markdown files for this tutorial

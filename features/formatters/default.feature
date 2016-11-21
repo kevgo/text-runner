@@ -11,5 +11,5 @@ Feature: default formatter
     When executing the "simple" example
     Then it prints:
       """
-      ✔ bash.md
+      bash.md
       """

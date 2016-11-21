@@ -4,6 +4,7 @@ require! {
   'path'
   'rimraf'
   'shelljs/global'
+  'tmp'
   'touch'
 }
 
@@ -14,24 +15,14 @@ module.exports = ->
 
 
   @Before ->
-    rimraf.sync 'test-dir'
-    fs.mkdir-sync 'test-dir'
-
-    # we need to make sure there is at least an empty config file here,
-    # otherwise we might find other ones in a parent directory on the machine
-    touch.sync 'test-dir/tut-run.yml'
-
-    fs.empty-dir-sync 'tmp'
+    @root-dir = tmp.dir-sync unsafe-cleanup: yes
 
 
-  @After ->
-    if @root-dir
-      # we ran the test in an outside temp dir
-      @root-dir?.remove-callback!
+  @After (scenario) ->
+    if scenario.is-failed!
+      console.log "\ntest artifacts are located in #{@root-dir.name}"
     else
-      # we ran the test in './tmp'
-      process.chdir path.join __dirname, '..', '..'
-
+      @root-dir.remove-callback!
 
 
   @Before tags: ['@verbose'], ->
@@ -48,13 +39,3 @@ module.exports = ->
 
   @After tags: ['@debug'], ->
     @debug = off
-
-
-  @register-handler 'AfterFeatures', (features) ->
-    delete-all-tmp-folders!
-
-
-
-function delete-all-tmp-folders
-  for tmp-dir in glob.sync '*/**/test-dir/', ignore: ['test-dir/**', '**/node_modules/**']
-    rm '-rf' tmp-dir

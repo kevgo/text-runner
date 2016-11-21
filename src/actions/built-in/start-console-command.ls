@@ -7,7 +7,7 @@ debug = require('debug')('console-with-dollar-prompt-runner')
 
 # Runs the given commands on the console.
 # Leaves the command running.
-module.exports  = ({formatter, searcher}, done) ->
+module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start 'starting a long-running process'
 
   [commands-to-run, expected-output] = searcher.node-content(type: 'fence', ({content, nodes}) ->
@@ -23,7 +23,7 @@ module.exports  = ({formatter, searcher}, done) ->
     |> (.join ' && ')
 
   global.running-process = new ObservableProcess(['bash', '-c', commands-to-run],
-                                                 cwd: global.working-dir, stdout: formatter.stdout, stderr: formatter.stderr)
+                                                 cwd: configuration.test-dir, stdout: formatter.stdout, stderr: formatter.stderr)
     ..on 'ended', (err) ~>
       global.running-process-ended = yes
       global.running-process-error = err

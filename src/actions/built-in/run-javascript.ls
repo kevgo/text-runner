@@ -21,8 +21,7 @@ module.exports = ({formatter, searcher, configuration}, done) ->
   finished = finished-method.bind(null, formatter, code, done)
   if has-callback code
     # the code is asynchronous
-    code = code.replace '<CALLBACK>', 'finished'
-    code = code.replace '// ...', 'finished()'
+    code = replace-async-callbacks code
     formatter.output code
     eval code
   else
@@ -31,6 +30,11 @@ module.exports = ({formatter, searcher, configuration}, done) ->
     eval code
     formatter.success!
     done null, 1
+
+
+function replace-async-callbacks code
+  code = code.replace '<CALLBACK>', 'finished'
+  code = code.replace '// ...', 'finished()'
 
 
 function replace-substitutions-in-configuration code, configuration

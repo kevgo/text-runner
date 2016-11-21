@@ -67,20 +67,20 @@ Feature: running inline blocks of Javascript
       """
       <a class="tutorialRunner_runJavascript">
       ```
-      const name = "Jean-Luc Picard"
+      const foo = 'bar'
       ```
       </a>
 
       <a class="tutorialRunner_runJavascript">
       ```
-      console.log("my name is " + name)
+      console.log('A foo walks into a ' + foo)
       ```
       </a>
       """
     When running tut-run
     Then it prints:
       """
-      my name is Jean-Luc Picard
+      A foo walks into a bar
       """
 
 
@@ -104,17 +104,18 @@ Feature: running inline blocks of Javascript
       """
       <a class="tutorialRunner_runJavascript">
       ```
-      console.log(name)
+      console.log('one')
       ```
+
       ```
-      console.log(name)
+      console.log('two')
       ```
       </a>
       """
     When trying to run tut-run
     Then it signals:
       | FILENAME      | 1.md                       |
-      | LINE          | 1-8                        |
+      | LINE          | 1-9                        |
       | MESSAGE       | running JavaScript code    |
       | ERROR MESSAGE | too many code blocks found |
       | EXIT CODE     | 1                          |

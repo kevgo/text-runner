@@ -1,4 +1,3 @@
-@verbose
 Feature: running inline blocks of Javascript
 
   As a tutorial writer describing a Javascript tool
@@ -20,7 +19,11 @@ Feature: running inline blocks of Javascript
       </a>
       """
     When running tut-run
-    Then it prints:
+    Then it signals:
+      | FILENAME | 1.md                    |
+      | LINE     | 1-6                     |
+      | MESSAGE  | running JavaScript code |
+    And it prints:
       """
       A foo walks into a bar
       """
@@ -41,7 +44,11 @@ Feature: running inline blocks of Javascript
       </a>
       """
     When running tut-run
-    Then it prints:
+    Then it signals:
+      | FILENAME | 1.md                    |
+      | LINE     | 1-10                    |
+      | MESSAGE  | running JavaScript code |
+    And it prints:
       """
       A foo walks into a bar
       """
@@ -59,6 +66,10 @@ Feature: running inline blocks of Javascript
       </a>
       """
     When running tut-run
+    Then it signals:
+      | FILENAME | 1.md                    |
+      | LINE     | 1-7                     |
+      | MESSAGE  | running JavaScript code |
     Then the test passes
 
 
@@ -78,6 +89,14 @@ Feature: running inline blocks of Javascript
       </a>
       """
     When running tut-run
+    Then it signals:
+      | FILENAME | 1.md                    |
+      | LINE     | 1-5                     |
+      | MESSAGE  | running JavaScript code |
+    And it signals:
+      | FILENAME | 1.md                    |
+      | LINE     | 7-11                    |
+      | MESSAGE  | running JavaScript code |
     Then it prints:
       """
       A foo walks into a bar

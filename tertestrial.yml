@@ -3,6 +3,10 @@ actions:
   ALL:
 
     - match:
+        filename: '\.md$'
+      command: 'bin/tut-run'
+
+    - match:
       command: 'bin/spec'
 
     - match:
@@ -20,6 +24,10 @@ actions:
 
 
   API:
+
+    - match:
+        filename: '\.md$'
+      command: 'bin/tut-run'
 
     - match:
       command: 'bin/cuc-api'
@@ -40,6 +48,10 @@ actions:
 
 
   CLI:
+
+    - match:
+        filename: '\.md$'
+      command: 'bin/tut-run'
 
     - match:
       command: 'bin/cuc-cli'

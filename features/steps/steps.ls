@@ -35,6 +35,16 @@ module.exports = ->
     fs.copy-sync path.join('examples' example-name), @root-dir.name
 
 
+  @Given /^my tutorial is starting the "([^"]*)" example$/ (example) ->
+    fs.write-file-sync path.join(@root-dir.name, '0.md'), """
+      <a class="tutorialRunner_startConsoleCommand">
+      ```
+      node #{path.join __dirname, '..' '..' 'examples' 'long-running' 'server.js'}
+      ```
+      </a>
+      """
+
+
   @Given /^my workspace contains a directory "([^"]*)"$/ (dir) ->
     fs.mkdir-sync path.join(@root-dir.name, dir)
 

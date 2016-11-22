@@ -12,14 +12,7 @@ and stop the long-running process using a `stopCommand` block.
 <a class="tutorialRunner_startConsoleCommand">
 
 `​``
-$ node ../../examples/long-running/server.js
-`​``
-</a>
-
-<a class="tutorialRunner_waitForOutput">
-wait until you see
-`​``
-running at port 4000
+$ read foo
 `​``
 </a>
 

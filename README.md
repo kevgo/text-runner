@@ -145,6 +145,7 @@ module.exports = function(env) {
 ```
 </a>
 
+Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
 <a class="tutorialRunner_runMarkdownFile">
 The formatter displays test progress on the console as the test runs.
 </a>

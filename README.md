@@ -217,13 +217,13 @@ __tut-run/console-command.js__
 child_process = require('child_process')
 
 module.exports = function(env) {
-  var formatter = env.formatter
-  var getNode = env.searcher.nodeContent
+  const formatter = env.formatter
+  const getNode = env.searcher.nodeContent
   // you can also work with env.nodes directly here if you want
 
   formatter.start('running console command')
 
-  var commandToRun = getNode({type: 'fence'}, function(match) {
+  const commandToRun = getNode({type: 'fence'}, function(match) {
     if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
     if (match.nodes.length > 1) return 'please provide only one code block'
     if (!match.content) return 'you provided a code block but it has no content'

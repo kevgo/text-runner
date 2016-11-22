@@ -1,4 +1,3 @@
-@verbose
 Feature: long-running processes
 
   As a tutorial writer

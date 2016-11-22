@@ -68,6 +68,6 @@ in `tut-run.yml`:
 actions:
 
   runJavascript:
-    replacements:
+    replace:
       "regex to find": "text to replace it with"
 ```

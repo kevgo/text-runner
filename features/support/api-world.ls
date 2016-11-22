@@ -55,6 +55,7 @@ ApiWorld = !->
     @formatter = new TestFormatter
     @runner = new TutorialRunner {@formatter}
       ..execute command, (@error) ~>
+        @cwd-after-run = process.cwd!
         process.chdir existing-dir
         @output = @formatter.text
         done!

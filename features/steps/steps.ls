@@ -35,6 +35,10 @@ module.exports = ->
     fs.copy-sync path.join('examples' example-name), @root-dir.name
 
 
+  @Given /^my workspace contains a directory "([^"]*)"$/ (dir) ->
+    fs.mkdir-sync path.join(@root-dir.name, dir)
+
+
   @Given /^the configuration file:$/ (content) ->
     fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), content
 
@@ -138,6 +142,10 @@ module.exports = ->
 
   @Then /^the call fails with the error:$/ (expected-error) ->
     @verify-call-error expected-error
+
+
+  @Then /^the current working directory is now "([^"]*)"$/ (expected-cwd) ->
+    expect(path.basename @cwd-after-run).to.equal expected-cwd
 
 
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->

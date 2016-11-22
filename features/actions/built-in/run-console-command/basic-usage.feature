@@ -21,7 +21,6 @@ Feature: running console commands
       """
     When executing the tutorial
     Then it runs the console command "ls -1"
-    And the test passes
 
 
   Scenario: missing console command block

@@ -23,7 +23,6 @@ Feature: changing the working directory
       | FILENAME | directory_changer.md            |
       | LINE     | 1                               |
       | MESSAGE  | changing into the foo directory |
-    And the test passes
     And the current working directory is now "foo"
 
 

@@ -11,4 +11,3 @@ Feature: Configuration file
   Scenario: running without a configuration file
     Given I am in a directory that contains the "simple" example without a configuration file
     When running tut-run
-    Then the test passes

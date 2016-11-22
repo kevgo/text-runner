@@ -25,7 +25,6 @@ Feature: creating files with content
       | FILENAME | creator.md            |
       | LINE     | 1-7                   |
       | MESSAGE  | creating file one.txt |
-    And the test passes
     And the test directory now contains a file "one.txt" with content:
       """
       Hello world!

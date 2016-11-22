@@ -1,4 +1,5 @@
 require! {
+  'end-child-processes'
   'fs-extra' : fs
   'glob'
   'path'
@@ -18,11 +19,12 @@ module.exports = ->
     @root-dir = tmp.dir-sync unsafe-cleanup: yes
 
 
-  @After (scenario) ->
+  @After (scenario, done) ->
     if scenario.is-failed!
       console.log "\ntest artifacts are located in #{@root-dir.name}"
     else
       @root-dir.remove-callback!
+    end-child-processes done
 
 
   @Before tags: ['@verbose'], ->

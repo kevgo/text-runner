@@ -11,7 +11,7 @@
     "chalk": "1.1.3",
     "cli-cursor": "1.0.2",
     "debug": "2.3.2",
-    "end-child-processes": "0.0.5",
+    "end-child-processes": "0.0.6",
     "figures": "2.0.0",
     "glob": "7.1.1",
     "indent-string": "3.0.0",

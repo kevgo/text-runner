@@ -13,9 +13,10 @@ debug = require('debug')('console-with-dollar-prompt-runner')
 module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start 'running console command'
 
-  commands-to-run = searcher.node-content(type: 'fence', ({content, nodes}) ->
+  commands-to-run = searcher.node-content type: 'fence', ({content, nodes}) ->
     | nodes.length is 0  =>  'no code blocks found'
-    | !content  =>  'the block that defines console commands to run is empty')
+    | nodes.length > 1   =>  "found #{nodes.length} fenced code blocks. Expecting only one."
+    | !content  =>  'the block that defines console commands to run is empty'
   |> (.split '\n')
   |> map (.trim!)
   |> compact
@@ -27,7 +28,9 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   get-input input-text, formatter, (input) ->
     formatter.refine "running console command: #{bold cyan commands-to-run}"
     process = new ObservableProcess(['bash', '-c', commands-to-run],
-                                    cwd: configuration.test-dir, stdout: formatter.stdout, stderr: formatter.stderr)
+                                    cwd: configuration.test-dir,
+                                    stdout: formatter.stdout,
+                                    stderr: formatter.stderr)
       ..on 'ended', (err) ~>
         | err  =>  formatter.error err
         | _    =>  formatter.success!

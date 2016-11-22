@@ -7,9 +7,10 @@ require! {
 module.exports = ({formatter, searcher, configuration}, done) ->
   formatter.start("running JavaScript code")
 
-  code = searcher.node-content type: 'fence', ({nodes}) ->
+  code = searcher.node-content type: 'fence', ({nodes, content}) ->
     | nodes.length is 0  =>  'no code to run found'
     | nodes.length > 1   =>  'too many code blocks found'
+    | !content           =>  'no JavaScript code found in the fenced block'
   |> replace-substitutions-in-configuration _, configuration
   |> replace-require-local-module
   |> replace-variable-declarations

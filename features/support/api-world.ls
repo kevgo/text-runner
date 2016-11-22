@@ -12,7 +12,7 @@ require! {
 
 class TestFormatter
 
-  ->
+  ({@verbose}) ->
     @activities = []
     @error-messages = []
     @file-paths = []
@@ -28,18 +28,23 @@ class TestFormatter
   start: (activity) ->
     @activities.push strip-color activity
     @lines.push if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
+    console.log activity if @verbose
 
   success: ->
+    console.log 'success' if @verbose
 
   error: (error) !->
     @error-messages.push strip-color(error.message or error.to-string!)
     @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
+    console.log error if @verbose
 
   output: (text) ->
+    console.log text if @verbose
 
   refine: (activity) ->
     @activities[*-1] = strip-color activity
     @lines[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
+    console.log activity if @verbose
 
   set-lines: (@start-line, @end-line) ->
 
@@ -52,7 +57,7 @@ ApiWorld = !->
   @execute = ({command, formatter}, done) ->
     existing-dir = process.cwd!
     process.chdir @root-dir.name
-    @formatter = new TestFormatter
+    @formatter = new TestFormatter {@verbose}
     @runner = new TutorialRunner {@formatter}
       ..execute command, (@error) ~>
         @cwd-after-run = process.cwd!

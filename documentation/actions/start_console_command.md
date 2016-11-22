@@ -1,6 +1,6 @@
 # Long-running console commands
 
-To start a long-running process, use the `startCommand` action.
+To start a long-running process, use the `startConsoleCommand` action.
 The test script continues while the started process keeps running in the background.
 This can be used to start servers and then interact with them later.
 

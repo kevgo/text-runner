@@ -31,7 +31,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
       global.running-process-error = err
 
   formatter.success!
-  done null, 1
+  done!
 
 
 

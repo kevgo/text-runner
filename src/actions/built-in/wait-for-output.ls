@@ -18,4 +18,4 @@ module.exports  = ({formatter, searcher}, done) ->
 
   global.running-process.wait expected-output, ->
     formatter.success!
-    done null, 1
+    done!

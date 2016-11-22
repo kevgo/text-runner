@@ -26,7 +26,8 @@ class MarkdownFileRunner
     run-data = @markdown-parser.parse markdown-text, {}
       |> @_standardize-ast
       |> @_iterate-nodes
-    async.map-series run-data, @_run-block, done
+    async.map-series run-data, @_run-block, (err) ->
+      done err, run-data.length
 
 
   _run-block: (block, done) ->
@@ -37,10 +38,10 @@ class MarkdownFileRunner
         if block.runner.length is 1
           # synchronous action method
           block.runner block
-          done null, 1
+          done!
         else
           # asynchronous action method
-          block.runner block, -> done null, 1
+          block.runner block, done
       catch
         block.formatter.error e
         done e

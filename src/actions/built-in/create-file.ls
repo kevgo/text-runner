@@ -26,4 +26,4 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   fs.write-file full-path, content, (err) ~>
     | err  =>  formatter.error err
     | _    =>  formatter.success!
-    done null, 1
+    done!

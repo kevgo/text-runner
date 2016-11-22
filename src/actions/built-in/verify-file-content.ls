@@ -23,11 +23,12 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     actual-content = fs.read-file-sync path.join(configuration.test-dir, file-path), 'utf8'
   catch
     if e.code is 'ENOENT'
-      formatter.error "file #{file-path} not found"
-      return done 1
+      error = "file #{file-path} not found"
+      formatter.error error
+      return done error
     else throw e
   jsdiff-console actual-content.trim!, expected-content.trim!, (err) ~>
     if err
       formatter.error "mismatching content in #{cyan bold file-path}:\n#{err.message}"
     formatter.success!
-    done null, 1
+    done!

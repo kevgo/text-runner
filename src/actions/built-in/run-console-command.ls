@@ -34,7 +34,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
       ..on 'ended', (err) ~>
         | err  =>  formatter.error err
         | _    =>  formatter.success!
-        done err, 1
+        done err
 
     for input-line in input
       enter process, input-line

@@ -4,7 +4,7 @@ require! {
   './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
   'path'
-  'prelude-ls' : {flatten, sum}
+  'prelude-ls' : {sum}
   'rimraf'
   'tmp'
 }
@@ -18,7 +18,7 @@ class RunCommand
     @_create-working-dir!
     async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
       | err  =>  return done err
-      if (steps-count = results |> flatten |> sum) is 0
+      if (steps-count = results |> sum) is 0
         @formatter.error 'no activities found'
         done? 'no activities found'
       else

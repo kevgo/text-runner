@@ -18,7 +18,7 @@ module.exports = ({formatter, searcher, configuration}, done) ->
   __finished = (err) ->
     | err  =>  formatter.error err
     | _    =>  formatter.success!
-    done err, 1
+    done err
 
   code = if has-callback-placeholder code
     # async code

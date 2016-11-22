@@ -9,4 +9,3 @@ Feature: defining global binaries
 
   Scenario: calling a local tool as if it were installed globally
     When executing the "global-tool" example
-    Then the test passes

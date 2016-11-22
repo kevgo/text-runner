@@ -92,10 +92,6 @@ ApiWorld = !->
     wait-until (~> @formatter.activities.index-of  "running console command: #{command}" > -1), done
 
 
-  @verify-success = ->
-    expect(@error).to.not.exist
-
-
   @verify-tests-run = (count) ->
     expect(@formatter.activities).to.have.length count
 

@@ -70,10 +70,6 @@ CliWorld = !->
     done!
 
 
-  @verify-success = ->
-    expect(@exit-code).to.equal 0
-
-
   @verify-tests-run = (count) ->
     expect(@process.full-output!).to.include " #{count} steps"
 

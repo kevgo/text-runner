@@ -14,7 +14,6 @@ Feature: custom runners
       | FILENAME | custom-action.md   |
       | LINE     | 3                  |
       | MESSAGE  | greeting the world |
-    And the test passes
 
 
   Scenario: using a valid built-in sync action
@@ -23,4 +22,3 @@ Feature: custom runners
       | FILENAME | custom-action.md   |
       | LINE     | 3                  |
       | MESSAGE  | greeting the world |
-    And the test passes

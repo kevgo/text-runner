@@ -70,7 +70,6 @@ Feature: running inline blocks of Javascript
       | FILENAME | 1.md                    |
       | LINE     | 1-7                     |
       | MESSAGE  | running JavaScript code |
-    Then the test passes
 
 
   Scenario: persisting variables across blocks

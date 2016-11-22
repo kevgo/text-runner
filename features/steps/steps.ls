@@ -82,7 +82,7 @@ module.exports = ->
 
   @When /^(trying to execute|executing) the tutorial(?: runner in an empty workspace)?$/, timeout: 4000, (trying, done) ->
     @execute command: 'run', ~>
-      done if trying is 'executing' and @error then @error
+      done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
 
 
   @When /^(trying to execute|executing) the "([^"]+)" example$/, timeout: 100_000, (trying, example-name, done) ->
@@ -94,17 +94,17 @@ module.exports = ->
 
   @When /^(trying to run|running) the "([^"]*)" command$/, (trying, command, done) ->
     @execute {command, cwd: @root-dir.name}, ~>
-      done if trying is 'running' and @error then @error
+      done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
 
 
   @When /^(trying to run|running) tut\-run$/ (trying, done) ->
     @execute command: 'run', cwd: @root-dir.name, ~>
-      done if trying is 'running' and @error then @error
+      done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
 
 
   @When /^(trying to run|running) tut\-run with the "([^"]*)" formatter$/ (trying, formatter-name, done) ->
     @execute command: 'run', cwd: @root-dir.name, formatter: formatter-name, ~>
-      done if trying is 'running' and @error then @error
+      done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
 
 
 
@@ -164,7 +164,3 @@ module.exports = ->
 
   @Then /^the test fails with:$/ (table) ->
     @verify-failure table.rows-hash!
-
-
-  @Then /^the test passes$/ ->
-    @verify-success!

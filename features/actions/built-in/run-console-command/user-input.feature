@@ -39,7 +39,6 @@ Feature: running console commands
       """
       You entered: 123
       """
-    And the test passes
 
 
   Scenario: entering complex text into the console
@@ -79,4 +78,3 @@ Feature: running console commands
       """
       service: html-server, desciption: serves the HTML UI
       """
-    And the test passes

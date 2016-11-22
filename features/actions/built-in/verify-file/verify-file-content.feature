@@ -37,7 +37,6 @@ Feature: verifying file content
       | FILENAME | 02.md                  |
       | LINE     | 3-10                   |
       | MESSAGE  | verifying file one.txt |
-    And the test passes
     And the test directory still contains a file "one.txt" with content:
       """
       Hello world!

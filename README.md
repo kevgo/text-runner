@@ -1,27 +1,21 @@
-<div align="center">
+<img src="documentation/logo.png" width="768" height="100" alt="Tutorial Runner - a test framework for documentation">
+<hr>
 
-  <img src="documentation/logo.png" width="768" height="109" alt="Tutorial Runner - a test framework for documentation">
-  <br>
-  <br>
-
-  <a href="https://travis-ci.org/Originate/tutorial-runner">
-    <img src="https://travis-ci.org/Originate/tutorial-runner.svg?branch=master">
-  </a>
-  <a href="https://circleci.com/gh/Originate/tutorial-runner">
-    <img src="https://circleci.com/gh/Originate/tutorial-runner.svg?style=shield&circle-token=9ce35ed1cb30eb92c08211015f019fde2a0973a1">
-  </a>
-  <a href="https://david-dm.org/originate/tutorial-runner">
-    <img src="https://david-dm.org/originate/tutorial-runner.svg">
-  </a>
-  <a href="https://david-dm.org/originate/tutorial-runner#info=devDependencies">
-    <img src="https://david-dm.org/originate/tutorial-runner/dev-status.svg">
-  </a>
-  <a href="https://github.com/rstacruz/pnpm">
-    <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
-  </a>
-</div>
-
-<br>
+<a href="https://travis-ci.org/Originate/tutorial-runner">
+  <img src="https://travis-ci.org/Originate/tutorial-runner.svg?branch=master">
+</a>
+<a href="https://circleci.com/gh/Originate/tutorial-runner">
+  <img src="https://circleci.com/gh/Originate/tutorial-runner.svg?style=shield&circle-token=9ce35ed1cb30eb92c08211015f019fde2a0973a1">
+</a>
+<a href="https://david-dm.org/originate/tutorial-runner">
+  <img src="https://david-dm.org/originate/tutorial-runner.svg">
+</a>
+<a href="https://david-dm.org/originate/tutorial-runner#info=devDependencies">
+  <img src="https://david-dm.org/originate/tutorial-runner/dev-status.svg">
+</a>
+<a href="https://github.com/rstacruz/pnpm">
+  <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
+</a>
 
 Tutorial Runner is a command-line tool
 that executes documentation written in Markdown (and soon HTML) programmatically,

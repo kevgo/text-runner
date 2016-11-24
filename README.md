@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="documentation/logo.png" width="768" height="109" alt="Tutorial Runner">
+  <img src="documentation/logo.png" width="768" height="109" alt="Tutorial Runner - a test framework for documentation">
   <br>
   <br>
 
@@ -22,8 +22,6 @@
 </div>
 
 <br>
-
-> Test framework for documentation
 
 Tutorial Runner is a command-line tool
 that executes documentation written in Markdown (and soon HTML) programmatically,

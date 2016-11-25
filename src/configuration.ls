@@ -1,6 +1,6 @@
 require! {
   'fs'
-  'require-new'
+  'require-uncached'
   'require-yaml'
   'yamljs' : YAML
 }
@@ -11,7 +11,7 @@ class Configuration
 
   (@config-file-path, @command-line-args) ->
     @file-data = if @config-file-path
-      require-new @config-file-path
+      require-uncached @config-file-path
     else
       {}
 

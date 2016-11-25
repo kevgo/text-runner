@@ -4,9 +4,6 @@
 <a href="https://travis-ci.org/Originate/tutorial-runner">
   <img src="https://travis-ci.org/Originate/tutorial-runner.svg?branch=master">
 </a>
-<a href="https://circleci.com/gh/Originate/tutorial-runner">
-  <img src="https://circleci.com/gh/Originate/tutorial-runner.svg?style=shield&circle-token=9ce35ed1cb30eb92c08211015f019fde2a0973a1">
-</a>
 <a href="https://david-dm.org/originate/tutorial-runner">
   <img src="https://david-dm.org/originate/tutorial-runner.svg">
 </a>

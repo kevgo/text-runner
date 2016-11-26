@@ -1,3 +1,4 @@
+@clionly
 Feature: selecting formatter via the config file
 
   As a tutorial writer
@@ -10,7 +11,7 @@ Feature: selecting formatter via the config file
   Scenario Outline: formatter types in config file
     Given I am in a directory that contains the "simple" example with the configuration file:
       """
-      formatter: <FORMATTER>
+      format: <FORMATTER>
       """
     When running tut-run
     Then it prints:
@@ -28,7 +29,7 @@ Feature: selecting formatter via the config file
   Scenario: selecting an unknown formatter
     Given I am in a directory that contains the "simple" example with the configuration file:
       """
-      formatter: zonk
+      format: zonk
       """
     When trying to run tut-run
     Then the call fails with the error:

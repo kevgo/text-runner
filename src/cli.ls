@@ -10,10 +10,12 @@ require! {
 
 update-notifier({pkg}).notify!
 cli-cursor.hide!
-argv = minimist process.argv.slice(2)
 
-command = argv._[0] or 'run'
-new TutorialRunner({formatter: argv.format}).execute command, (err) ->
+argv = minimist process.argv.slice(2)
+commands = delete argv._
+tutorial-runner = new TutorialRunner argv
+
+tutorial-runner.execute (commands[0] or 'run'), (err) ->
   if err
     new HelpCommand({err}).run!
     process.exit 1

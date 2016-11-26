@@ -12,7 +12,7 @@ require! {
 # Runs the tutorial in the given directory
 class TutorialRunner
 
-  (@args) ->
+  (@constructor-args) ->
 
 
   # Runs the given tutorial
@@ -24,12 +24,12 @@ class TutorialRunner
       ..launch {}, ({config-path}) ~>
         | !@has-command!  =>  return done "unknown command: #{@command}"
 
-        @configuration = new Configuration config-path, @args
-        [@formatter, err] = (new FormatterManager).get-formatter @configuration.get('formatter')
-        if err then return done err
-        @actions = new ActionManager(@formatter)
-        CommandClass = require @command-path!
-        new CommandClass({@configuration, @formatter, @actions}).run done
+        @configuration = new Configuration config-path, @constructor-args
+        (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
+          | !@formatter  =>  return done err
+          @actions = new ActionManager(@formatter)
+          CommandClass = require @command-path!
+          new CommandClass({@configuration, @formatter, @actions}).run done
 
 
   command-path: ->

@@ -19,6 +19,6 @@ Feature: generating a configuration file
       """
       files: '**/*.md'
       globals: []
-      formatter: robust
+      format: robust
       useTempDirectory: false
       """

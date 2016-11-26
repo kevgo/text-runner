@@ -22,8 +22,8 @@ describe 'FormatterManager', ->
 
     context 'with correct formatter name', (...) ->
 
-      before ->
-        [@result, @err] = @formatter-manager.get-formatter 'iconic'
+      before (done) ->
+        @formatter-manager.get-formatter 'iconic', (@err, @result) ~> done!
 
       it 'returns the formatter with the given name', ->
         expect(typeof @result).to.equal 'object'
@@ -34,11 +34,11 @@ describe 'FormatterManager', ->
 
     context 'with unknown formatter name', (...) ->
 
-      before ->
-        [@result, @err] = @formatter-manager.get-formatter 'zonk'
+      before (done) ->
+        @formatter-manager.get-formatter 'zonk', (@err, @result) ~> done!
 
       it 'returns no formatter', ->
-        expect(@result).to.be.null
+        expect(@result).to.be.undefined
 
       it 'returns an error' ->
         jsdiff-console @err, """Unknown formatter: 'zonk'

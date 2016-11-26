@@ -310,7 +310,7 @@ __tut-run.yml__
 ```yml
 files: '**/*.md'
 globals: []
-formatter: robust
+format: robust
 useTempDirectory: false
 ```
 </a>

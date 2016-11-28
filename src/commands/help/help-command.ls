@@ -8,7 +8,7 @@ class HelpCommand
 
   ({@err}) ->
 
-  run: (done) ->
+  run: (_, done) ->
     error = if @err
       "\n#{red bold "Error: #{@err}"}\n\n"
     else
@@ -20,9 +20,9 @@ class HelpCommand
       USAGE: #{bold 'tut-run <command>'}
 
       COMMANDS:
-      - #{bold 'run'}     runs the tutorial
-      - #{bold 'setup'}   creates an example configuration file
-      - #{bold 'help'}    shows this help screen
+      - #{bold 'run'} <filename>  runs the whole tutorial, or only the given file
+      - #{bold 'setup'}           creates an example configuration file
+      - #{bold 'help'}            shows this help screen
 
       """
     done?!

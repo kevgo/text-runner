@@ -59,7 +59,7 @@ ApiWorld = !->
     process.chdir @root-dir.name
     @formatter = new TestFormatter {@verbose}
     @runner = new TutorialRunner format: @formatter
-      ..execute command, (@error) ~>
+      ..execute command, null, (@error) ~>
         @cwd-after-run = process.cwd!
         process.chdir existing-dir
         @output = @formatter.text

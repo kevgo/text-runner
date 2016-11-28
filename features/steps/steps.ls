@@ -6,6 +6,7 @@ require! {
   'ncp'
   'nitroglycerin' : N
   'path'
+  'prelude-ls' : {reject}
   'tmp'
 }
 
@@ -31,7 +32,11 @@ module.exports = ->
     fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), config-file-content
 
 
-  @Given /^I am in a directory that contains the "([^"]*)" example without a configuration file$/ (example-name) ->
+  @Given /^I am in a directory that contains the "([^"]*)" example(?: without a configuration file)$/ (example-name) ->
+    fs.copy-sync path.join('examples' example-name), @root-dir.name
+
+
+  @Given /^I am in a directory that contains the "([^"]*)" example$/ (example-name) ->
     fs.copy-sync path.join('examples' example-name), @root-dir.name
 
 
@@ -97,6 +102,11 @@ module.exports = ->
       done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
 
 
+  @When /^(trying to run|running) "([^"]*)"$/ (trying, command, done) ->
+    @execute {command, cwd: @root-dir.name}, ~>
+      done if trying is 'running' and (@error or @exit-code) then (@error or @exit-code)
+
+
   @When /^(trying to run|running) tut\-run$/ (trying, done) ->
     @execute command: 'run', cwd: @root-dir.name, ~>
       done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
@@ -136,6 +146,14 @@ module.exports = ->
 
   @Then /^it runs in the current working directory$/ ->
     expect(@output).to.include @root-dir.name
+
+
+  @Then /^it runs only the tests in "([^"]*)"$/ (filename) ->
+    all-files = fs.readdir-sync @root-dir.name, encoding: 'utf8'
+    files-shouldnt-run = all-files |> reject -> it is filename
+    for file-shouldnt-run in files-shouldnt-run
+      expect(@output).to.not.include file-shouldnt-run
+    expect(@output).to.include filename
 
 
   @Then /^it runs the console command "([^"]*)"$/ (command, done) ->

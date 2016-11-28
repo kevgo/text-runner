@@ -16,20 +16,22 @@ class TutorialRunner
 
 
   # Runs the given tutorial
-  execute: (@command, done) ->
+  execute: (@command, @args, done) ->
 
     # Note: Liftoff runs here and not in the constructor
     #       because the constructor cannot run async operations
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
       ..launch {}, ({config-path}) ~>
-        | !@has-command!  =>  return done "unknown command: #{@command}"
+        | !@has-command! and !@has-markdown-file(@command)  =>  return done "unknown command: #{@command}"
+        | !@has-command! and @has-markdown-file(@command)   =>  [@command, @args] = ['run', @command]
+        | @has-command                                      =>  @args = @args?[0]
 
         @configuration = new Configuration config-path, @constructor-args
         (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
-          | !@formatter  =>  return done err
-          @actions = new ActionManager(@formatter)
+          | err  =>  return done err
+          @actions = new ActionManager @formatter
           CommandClass = require @command-path!
-          new CommandClass({@configuration, @formatter, @actions}).run done
+          new CommandClass({@configuration, @formatter, @actions}).run @args, done
 
 
   command-path: ->
@@ -39,6 +41,15 @@ class TutorialRunner
   has-command: ->
     try
       fs.stat-sync @command-path!
+      yes
+    catch
+      no
+
+
+  has-markdown-file: (filename) ->
+    console.log filename
+    try
+      fs.stat-sync filename
       yes
     catch
       no

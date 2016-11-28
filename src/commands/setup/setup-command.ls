@@ -7,7 +7,7 @@ class SetupCommand
 
   ({@configuration, @formatter, @actions}) ->
 
-  run: (done) ->
+  run: (_, done) ->
     @formatter.start "Create configuration file #{cyan 'tut-run.yml'} with default values"
     @configuration.create-default!
     @formatter.success!

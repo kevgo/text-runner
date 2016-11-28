@@ -4,7 +4,7 @@ require! {
   './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
   'path'
-  'prelude-ls' : {sum}
+  'prelude-ls' : {head, filter, sum}
   'rimraf'
   'tmp'
 }
@@ -14,7 +14,7 @@ class RunCommand
 
   ({@configuration, @formatter, @actions}) ->
 
-  run: (done) ->
+  run: (@filename, done) ->
     @_create-working-dir!
     async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
       | err  =>  return done err
@@ -39,7 +39,10 @@ class RunCommand
   _markdown-files: ->
     if (files = glob.sync @configuration.get 'files').length is 0
       @formatter.error 'no Markdown files found'
-    files
+    if @filename
+      files |> filter ~> it is @filename
+    else
+      files
 
 
   # Returns an array of FileRunners for this tutorial

@@ -6,7 +6,7 @@
     "tut-run": "bin/tut-run"
   },
   "dependencies": {
-    "async": "2.1.2",
+    "async": "2.1.4",
     "camelcase": "4.0.0",
     "chalk": "1.1.3",
     "cli-cursor": "1.0.2",

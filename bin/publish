@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -e
+
+# check parameters
+tag=$1
+if [ -z "$tag" ]; then
+  echo
+  echo "Usage: publish <version>"
+  echo
+  exit 1
+fi
+
+tput bold
+echo "SYNCING BRANCH"
+tput sgr0
+git pull
+
+echo
+echo
+tput bold
+echo "RUNNING TESTS"
+tput sgr0
+bin/spec
+
+echo
+echo
+tput bold
+echo "PUBLISHING VERSION $tag"
+tput sgr0
+git tag -a "$tag" -m "$tag"
+git push
+git push --tags
+
+echo
+echo
+tput bold
+echo ALL DONE!
+tput sgr0

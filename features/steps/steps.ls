@@ -2,6 +2,7 @@ require! {
   'chai' : {expect}
   'child_process'
   'fs-extra' : fs
+  'jsdiff-console'
   'mkdirp'
   'ncp'
   'nitroglycerin' : N
@@ -133,7 +134,7 @@ module.exports = ->
   @Then /^it creates the file "([^"]*)" with the content:$/ (filename, expected-content) ->
     actual-content = fs.read-file-sync path.join(@root-dir.name, filename),
                                        encoding: 'utf8'
-    expect(actual-content.trim!).to.equal expected-content.trim!
+    jsdiff-console actual-content.trim!, expected-content.trim!
 
 
   @Then /^it runs (\d+) test$/ (count) ->

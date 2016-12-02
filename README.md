@@ -104,6 +104,7 @@ for activities typically performed in software programming tutorials.
 #### Filesystem
 
 * [create a file](documentation/actions/create_file.md)
+* [verifyFileContent](documentation/actions/verify-file-content.ls)
 * [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
 * [change the current working directory](documentation/actions/cd.md)
 

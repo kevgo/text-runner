@@ -21,7 +21,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   |> map (.trim!)
   |> compact
   |> map trim-dollar
-  |> map make-global(configuration?.file-data?.globals)
+  |> map make-global(configuration?.file-data?.actions?.run-console-command?.globals)
   |> (.join ' && ')
 
   input-text = searcher.node-content type: 'htmlblock'

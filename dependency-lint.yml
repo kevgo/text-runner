@@ -14,6 +14,7 @@ executedModules:
       - bin/cuc-cli
       - bin/docs
       - bin/features
+      - bin/publish
       - bin/spec
       - bin/tests
     ignore: []

@@ -323,16 +323,8 @@ actions:
 
 - the `files` key describes which files are executed by Tutorial Runner.
 
-- the `globals` key describes which binaries are available as global commands
-  once your code base is installed.
-  For example, when your tool installs a global command `tool`,
-  which when executed runs `bin/tool` in your code base,
-  your `tut-run.yml` file would contain this section:
-
-  ```yml
-  globals:
-    tool: './bin/tool'
-  ```
+- the `actions` section contains configuration information specific to actions.
+  Please see the documentation for the respective action for more details.
 
 
 ## Related Work

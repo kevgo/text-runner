@@ -107,6 +107,7 @@ for activities typically performed in software programming tutorials.
 * [create a file](documentation/actions/create_file.md)
 * [verifyFileContent](documentation/actions/verify-file-content.ls)
 * [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
+* [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)
 
 
 #### Console commands

@@ -18,7 +18,11 @@ Feature: generating a configuration file
     And it creates the file "tut-run.yml" with the content:
       """
       files: '**/*.md'
-      globals: []
       format: robust
       useTempDirectory: false
+
+      actions:
+
+        runConsoleCommand:
+          globals: []
       """

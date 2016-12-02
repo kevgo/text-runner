@@ -82,3 +82,25 @@ Then it waits for "What does it do"
 and enters "Test framework for documentation&lt;enter&gt;".
 
 
+
+## Calling Global Commands
+
+If you want to call a command provided by your code base,
+you have to tell Tutorial Runner the path to it.
+As an example, if your code provides an executable called `tool`,
+and it is stored as `public/tool` in your source code,
+<a class="tutorialRunner_verifyMatchesSourceCodeFile">
+your __tut-run.yml__ needs to contains this section:
+
+```
+actions:
+
+  runConsoleCommand:
+    globals:
+      tool: 'public/tool'
+```
+
+The
+[global-tool](examples/global-tool)
+folder contains a working version of this configuration.
+</a>

@@ -1,2 +1,5 @@
-globals:
-  tool: 'bin/tool'
+actions:
+
+  runConsoleCommand:
+    globals:
+      tool: 'public/tool'

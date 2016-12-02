@@ -311,9 +311,13 @@ __tut-run.yml__
 
 ```yml
 files: '**/*.md'
-globals: []
 format: robust
 useTempDirectory: false
+
+actions:
+
+  runConsoleCommand:
+    globals: []
 ```
 </a>
 

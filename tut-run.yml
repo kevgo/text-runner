@@ -1,5 +1,10 @@
 files: '{*.md,documentation/**/*.md}'
-globals:
-  'tut-run': 'bin/tut-run'
 formatter: robust
 useTempDirectory: true
+
+
+actions:
+
+  runConsoleCommand:
+    globals:
+      'tut-run': 'bin/tut-run'

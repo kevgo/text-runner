@@ -20,9 +20,11 @@ class Configuration
 
   @default-values =
     files: '**/*.md'
-    globals: []
     format: 'robust'
     useTempDirectory: false
+    actions:
+      run-console-command:
+        globals: []
 
 
 
@@ -33,7 +35,16 @@ class Configuration
 
   # Creates a config file with default values
   create-default: ->
-    fs.write-file-sync './tut-run.yml', YAML.stringify(Configuration.default-values)
+    fs.write-file-sync './tut-run.yml', """
+      files: '**/*.md'
+      format: robust
+      useTempDirectory: false
+
+      actions:
+
+        runConsoleCommand:
+          globals: []
+      """
 
 
 

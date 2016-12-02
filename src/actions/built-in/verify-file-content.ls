@@ -23,7 +23,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     actual-content = fs.read-file-sync path.join(configuration.test-dir, file-path), 'utf8'
   catch
     if e.code is 'ENOENT'
-      error = "file #{file-path} not found"
+      error = "file #{cyan file-path} not found"
       formatter.error error
       return done error
     else throw e

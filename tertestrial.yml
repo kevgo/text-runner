@@ -4,7 +4,7 @@ actions:
 
     - match:
         filename: '\.md$'
-      command: 'bin/tut-run'
+      command: 'bin/docs'
 
     - match:
       command: 'bin/spec'

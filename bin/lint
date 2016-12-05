@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -e
+
+node_modules/o-tools-livescript/bin/build
+node_modules/o-tools/bin/lint
+remark .

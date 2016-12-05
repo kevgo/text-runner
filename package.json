@@ -49,6 +49,9 @@
     "nitroglycerin": "1.1.2",
     "o-tools": "0.7.0",
     "o-tools-livescript": "1.2.3",
+    "remark-cli": "2.1.0",
+    "remark-lint": "5.2.0",
+    "remark-preset-lint-recommended": "1.0.0",
     "shelljs": "0.7.5",
     "tertestrial": "0.3.2",
     "touch": "1.0.0"
@@ -60,6 +63,16 @@
   "homepage": "https://github.com/Originate/tutorial-runner",
   "main": "dist/tutorial-runner.js",
   "license": "ISC",
+  "remarkConfig": {
+    "presets": [
+      "lint-recommended"
+    ],
+    "plugins": {
+      "lint": {
+        "list-item-indent": "space"
+      }
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Originate/tutorial-runner.git"

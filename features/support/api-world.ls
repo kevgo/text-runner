@@ -21,6 +21,7 @@ class TestFormatter
     @console = log: (text) ~> @text += "#{text}\n"
     @stdout = write: (text) ~> @text += text
     @stderr = write: (text) ~> @text += text
+    @warnings = []
 
   start-file: (file-path) ->
     @file-paths.push file-path
@@ -49,6 +50,9 @@ class TestFormatter
   set-lines: (@start-line, @end-line) ->
 
   suite-success: (@steps-count) ->
+
+  warning: (warning) !->
+    @warnings.push strip-color(warning)
 
 
 
@@ -84,9 +88,10 @@ ApiWorld = !->
 
 
   @verify-output = (table) ->
-    expect(@formatter.file-paths).to.include table.FILENAME
-    expect(@formatter.lines).to.include table.LINE
-    expect(@formatter.activities).to.include table.MESSAGE
+    expect(@formatter.file-paths).to.include table.FILENAME if table.FILENAME
+    expect(@formatter.lines).to.include table.LINE if table.LINE
+    expect(@formatter.activities).to.include table.MESSAGE if table.MESSAGE
+    expect(@formatter.warnings).to.include table.WARNING if table.WARNING
 
 
   @verify-ran-console-command = (command, done) ->

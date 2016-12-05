@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {bold, dim, green, red}
+  'chalk' : {bold, dim, green, magenta, red}
   'prelude-ls' : {compact, unique}
 }
 
@@ -63,6 +63,9 @@ class RobustFormatter
     console.log bold green "\nSuccess! #{steps-count} steps passed"
 
 
+  warning: (@warning-message) ->
+    console.log bold magenta @_format!
+
 
   _format: ->
     result = ''
@@ -73,6 +76,7 @@ class RobustFormatter
       result += " -- "
     result += @activity-text if @activity-text
     result += "\n#{@error-message}" if @error-message
+    result += "\nwarning: #{@warning-message}" if @warning-message
     result
 
 

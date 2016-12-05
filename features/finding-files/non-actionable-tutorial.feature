@@ -8,11 +8,6 @@ Feature: Fail on non-actionable Markdown
 
 
   Scenario: tutorial with no actions
-    Given my workspace contains the file "just-text.md" with the content:
-      """
-      Just text here, nothing to do!
-      """
-    When trying to execute the tutorial
-    Then the test fails with:
-      | ERROR MESSAGE | no activities found |
-      | EXIT CODE     | 1                   |
+    When executing the "no-steps" example
+    Then it signals:
+      | WARNING | no activities found |

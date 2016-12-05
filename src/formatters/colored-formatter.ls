@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {bold, dim, green, red, yellow}
+  'chalk' : {bold, dim, green, magenta, red, yellow}
   'figures'
   'indent-string'
   'log-update'
@@ -82,6 +82,16 @@ class ColoredFormatter
     log-update bold green "\nSuccess! #{steps-count} steps passed"
 
 
+  # Called on general warnings
+  warning: (@warning-message) ->
+    @activity-header = @_format magenta
+    old-console = @activity-console
+    @activity-console = ''
+    @_print!
+    log-update.done!
+    @activity-console = old-console
+
+
   _format: (color) ->
     result = ""
     if @documentation-file-path
@@ -90,7 +100,8 @@ class ColoredFormatter
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
     result += @activity-text if @activity-text
-    result += "\n#{@error-message}" if @error-message
+    result += "\n#{red @error-message}" if @error-message
+    result += "\n#{magenta @warning-message}" if @warning-message
     color result
 
 

@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {bold, dim, green, red, yellow}
+  'chalk' : {bold, dim, green, magenta, red, yellow}
   'figures'
   'indent-string'
   'log-update'
@@ -77,6 +77,16 @@ class IconicFormatter
   set-lines: (@start-line, @end-line) ->
 
 
+  # Called on general warnings
+  warning: (@warning-message) ->
+    @activity-header = @_format magenta '!'
+    old-console = @activity-console
+    @activity-console = ''
+    @_print!
+    log-update.done!
+    @activity-console = old-console
+
+
   # called when the whole test suite passed
   suite-success: (steps-count) ->
     log-update bold green "\nSuccess! #{steps-count} steps passed"
@@ -90,7 +100,8 @@ class IconicFormatter
         result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += " -- "
     result += bold(@activity-text) if @activity-text
-    result += "\n#{@error-message}" if @error-message
+    result += "\n#{@red error-message}" if @error-message
+    result += "\n#{magenta @warning-message}" if @warning-message
     result
 
 

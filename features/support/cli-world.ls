@@ -54,7 +54,13 @@ CliWorld = !->
 
 
   @verify-output = (table) ->
-    expect(@process.full-output!).to.include "#{table.FILENAME}:#{table.LINE} -- #{table.MESSAGE}"
+    expected-text = ""
+    expected-text += table.FILENAME if table.FILENAME
+    expected-text += ":#{table.LINE}" if table.FILENAME and table.LINE
+    expected-text += ' -- ' if table.FILENAME and table.MESSAGE
+    expected-text += table.MESSAGE if table.MESSAGE
+    expected-text += table.WARNING if table.WARNING
+    expect(@process.full-output!).to.include expected-text
 
 
   @verify-printed-usage-instructions = ->

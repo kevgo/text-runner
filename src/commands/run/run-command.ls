@@ -15,15 +15,18 @@ class RunCommand
   ({@configuration, @formatter, @actions}) ->
 
   run: (@filename, done) ->
-    @_create-working-dir!
-    async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
-      | err  =>  return done err
-      if (steps-count = results |> sum) is 0
-        @formatter.error 'no activities found'
-        done? 'no activities found'
-      else
-        @formatter.suite-success steps-count
-        done?!
+    try
+      @_create-working-dir!
+      async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
+        | err  =>  return done err
+        if (steps-count = results |> sum) is 0
+          @formatter.warning 'no activities found'
+          done?!
+        else
+          @formatter.suite-success steps-count
+          done?!
+    catch
+      console.log e
 
 
   # Creates the temp directory to run the tests in

@@ -154,7 +154,7 @@ Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
 The formatter displays test progress on the console as the test runs.
 </a>
 
-[[animated gif here]]
+<img src="documentation/async.gif" width="460" height="134" alt="output demonstration">
 
 Definitions of custom blocks live in the directory `tut-run`.
 Each block lives in its own file, whose name is the block name in kebab-case.

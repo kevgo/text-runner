@@ -14,9 +14,9 @@ Feature: verifying that links point to something useful
     Given I am in a directory that contains the "links" example
     When running "tut-run working_links.md"
     Then it signals:
-      | FILENAME | working_links.md                                        |
-      | LINE     | 1                                                       |
-      | MESSAGE  | link internal link points to existing directory tut-run |
+      | FILENAME | working_links.md                  |
+      | LINE     | 1                                 |
+      | MESSAGE  | checking link to working_links.md |
 
 
   Scenario: dead local link

@@ -17,9 +17,7 @@ class RunCommand
   run: (@filename, done) ->
     try
       @_create-working-dir!
-      @_execute-link-checkers (err) ~>
-        | err  =>  return done
-        @_execute-runners done
+      @_execute-runners done
     catch
       console.log e
 
@@ -40,13 +38,6 @@ class RunCommand
       files |> filter ~> it is @filename
     else
       files
-
-
-  _execute-link-checkers: (done) ->
-    async.map-series @_link-checkers!, ((link-checker, cb) -> link-checker.run cb), (err, results) ~>
-      | err  =>  return done err
-      @formatter.suite-success steps-count
-      done?!
 
 
   _execute-runners: (done) ->

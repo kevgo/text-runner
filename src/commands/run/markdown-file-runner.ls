@@ -79,7 +79,6 @@ class MarkdownFileRunner
     start-line = 0
     result = []
     for node in tree
-      console.log node
       switch
 
         case block-type = @_is-start-tag node
@@ -107,7 +106,22 @@ class MarkdownFileRunner
         case current-runner-type
           nodes-for-current-runner.push node if nodes-for-current-runner
 
+        case @_is-link node
+          result.push do
+            filename: @file-path
+            start-line: node.line
+            end-line: node.line
+            nodes: [node]
+            runner: @actions.action-for 'checkLink'
+            formatter: @formatter
+            configuration: @configuration
+
     result
+
+
+  # Returns whether the given node is a normal hyperlink
+  _is-link: (node) ->
+    node.type is 'link_open'
 
 
   # Indicates whether the given node is a start tag of an active block

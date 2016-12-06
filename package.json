@@ -25,6 +25,7 @@
     "prelude-ls": "1.1.2",
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
+    "request": "2.79.0",
     "require-uncached": "1.0.3",
     "require-yaml": "0.0.1",
     "rimraf": "2.5.4",

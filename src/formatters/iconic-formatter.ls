@@ -79,7 +79,8 @@ class IconicFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
-    @_set-activity-header magenta '!'
+    @activity-text = ''
+    @_set-activity-header magenta figures.warning
     @activity-console = ''
     @_print!
     log-update.done!
@@ -99,8 +100,8 @@ class IconicFormatter
         @activity-header += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       @activity-header += " -- "
     @activity-header += bold(@activity-text) if @activity-text
+    @activity-header += bold(@warning-message) if @warning-message
     @activity-header += "\n#{@red error-message}" if @error-message
-    @activity-header += "\n#{magenta @warning-message}" if @warning-message
     @activity-header += "\n" if newline
 
 

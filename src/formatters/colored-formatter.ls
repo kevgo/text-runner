@@ -84,12 +84,11 @@ class ColoredFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
-    @_set-activity-header magenta
-    old-console = @activity-console
+    @activity-text = ''
     @activity-console = ''
+    @_set-activity-header magenta
     @_print!
     log-update.done!
-    @activity-console = old-console
 
 
   _set-activity-header: (color, newline) ->
@@ -100,8 +99,8 @@ class ColoredFormatter
         @activity-header += color ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       @activity-header += color " -- "
     @activity-header += color @activity-text if @activity-text
+    @activity-header += color @warning-message if @warning-message
     @activity-header += "\n#{red @error-message}" if @error-message
-    @activity-header += "\n#{magenta @warning-message}" if @warning-message
     @activity-header += "\n" if newline
 
 

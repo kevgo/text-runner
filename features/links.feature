@@ -35,4 +35,4 @@ Feature: verifying that links point to something useful
     Then it signals:
       | FILENAME | broken-external-link.md                                     |
       | LINE     | 1                                                           |
-      | MESSAGE  | external website http://natoehunatoeuhaoentuh.com not found |
+      | WARNING  | external website http://natoehunatoeuhaoentuh.com not found |

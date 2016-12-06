@@ -79,7 +79,6 @@ class MarkdownFileLinter
     start-line = 0
     result = []
     for node in tree
-      console.log node
       switch
 
         case block-type = @_is-start-tag node

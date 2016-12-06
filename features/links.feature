@@ -12,16 +12,27 @@ Feature: verifying that links point to something useful
 
   Scenario: all links work
     Given I am in a directory that contains the "links" example
-    When running "tut-run working_links.md"
+    When running "tut-run working-links.md"
     Then it signals:
-      | FILENAME | working_links.md                  |
+      | FILENAME | working-links.md                  |
       | LINE     | 1                                 |
-      | MESSAGE  | checking link to working_links.md |
+      | MESSAGE  | checking link to working-links.md |
 
 
   Scenario: dead local link
+    Given I am in a directory that contains the "links" example
+    When trying to run "tut-run broken-local-link.md"
+    Then the test fails with:
+      | FILENAME      | broken-local-link.md                |
+      | LINE          | 1                                   |
+      | ERROR MESSAGE | link points to non-existing zonk.md |
+      | EXIT CODE     | 1                                   |
 
 
   Scenario: dead external link
-
-
+    Given I am in a directory that contains the "links" example
+    When running "tut-run broken-external-link.md"
+    Then it signals:
+      | FILENAME | broken-external-link.md                                     |
+      | LINE     | 1                                                           |
+      | MESSAGE  | external website http://natoehunatoeuhaoentuh.com not found |

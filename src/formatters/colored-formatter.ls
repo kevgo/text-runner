@@ -47,14 +47,14 @@ class ColoredFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @activity-header = "#{@_format yellow}\n"
+    @_set-activity-header yellow, yes
     @activity-console = ''
     @_print!
 
 
   # called when the last started activity finished successful
   success: ->
-    @activity-header = @_format green
+    @_set-activity-header green
     @activity-console = ''
     @_print!
     log-update.done!
@@ -63,14 +63,14 @@ class ColoredFormatter
 
   # Called on general errors
   error: (@error-message) ->
-    @activity-header = @_format red
+    @_set-activity-header red
     @_print!
     process.exit 1
 
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @activity-header = "#{@_format yellow}\n"
+    @_set-activity-header yellow, yes
     @_print!
 
 
@@ -84,7 +84,7 @@ class ColoredFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
-    @activity-header = @_format magenta
+    @_set-activity-header magenta
     old-console = @activity-console
     @activity-console = ''
     @_print!
@@ -92,17 +92,17 @@ class ColoredFormatter
     @activity-console = old-console
 
 
-  _format: (color) ->
-    result = ""
+  _set-activity-header: (color, newline) ->
+    @activity-header = ""
     if @documentation-file-path
-      result += "#{@documentation-file-path}"
+      @activity-header += color "#{@documentation-file-path}"
       if @start-line
-        result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
-      result += " -- "
-    result += @activity-text if @activity-text
-    result += "\n#{red @error-message}" if @error-message
-    result += "\n#{magenta @warning-message}" if @warning-message
-    color result
+        @activity-header += color ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
+      @activity-header += color " -- "
+    @activity-header += color @activity-text if @activity-text
+    @activity-header += "\n#{red @error-message}" if @error-message
+    @activity-header += "\n#{magenta @warning-message}" if @warning-message
+    @activity-header += "\n" if newline
 
 
   _print: ->

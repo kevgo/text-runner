@@ -1,4 +1,3 @@
-@verbose
 Feature: verifying that links point to something useful
 
   As a tutorial writer

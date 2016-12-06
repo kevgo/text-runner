@@ -47,14 +47,14 @@ class IconicFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @activity-header = "#{@_format yellow figures.pointer}\n"
+    @_set-activity-header yellow figures.pointer, yes
     @activity-console = ''
     @_print!
 
 
   # called when the last started activity finished successful
   success: ->
-    @activity-header = @_format green figures.tick
+    @_set-activity-header green figures.tick
     @activity-console = ''
     @_print!
     log-update.done!
@@ -63,14 +63,14 @@ class IconicFormatter
 
   # Called on general errors
   error: (@error-message) ->
-    @activity-header = @_format red figures.cross
+    @_set-activity-header red figures.cross
     @_print!
     process.exit 1
 
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @activity-header = "#{@_format yellow figures.pointer}\n"
+    @_set-activity-header yellow figures.pointer, yes
     @_print!
 
 
@@ -79,12 +79,11 @@ class IconicFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
-    @activity-header = @_format magenta '!'
-    old-console = @activity-console
+    @_set-activity-header magenta '!'
     @activity-console = ''
     @_print!
     log-update.done!
-    @activity-console = old-console
+    @activity-header = ''
 
 
   # called when the whole test suite passed
@@ -92,17 +91,17 @@ class IconicFormatter
     log-update bold green "\nSuccess! #{steps-count} steps passed"
 
 
-  _format: (figure) ->
-    result = "#{figure} "
+  _set-activity-header: (figure, newline) ->
+    @activity-header = "#{figure} "
     if @documentation-file-path
-      result += "#{@documentation-file-path}"
+      @activity-header += "#{@documentation-file-path}"
       if @start-line
-        result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
-      result += " -- "
-    result += bold(@activity-text) if @activity-text
-    result += "\n#{@red error-message}" if @error-message
-    result += "\n#{magenta @warning-message}" if @warning-message
-    result
+        @activity-header += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
+      @activity-header += " -- "
+    @activity-header += bold(@activity-text) if @activity-text
+    @activity-header += "\n#{@red error-message}" if @error-message
+    @activity-header += "\n#{magenta @warning-message}" if @warning-message
+    @activity-header += "\n" if newline
 
 
   _print: ->

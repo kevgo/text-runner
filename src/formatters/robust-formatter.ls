@@ -49,12 +49,12 @@ class RobustFormatter
 
   # called when the last started activity finished successful
   success: ->
-    console.log green @_format!
+    @_print-activity-header green
 
 
   # Called on general errors
   error: (@error-message) ->
-    console.log bold red @_format!
+    @_print-activity-header bold . red
     process.exit 1
 
 
@@ -64,20 +64,20 @@ class RobustFormatter
 
 
   warning: (@warning-message) ->
-    console.log bold magenta @_format!
+    @_print-activity-header bold . magenta
 
 
-  _format: ->
-    result = ''
+  _print-activity-header: (color) ->
+    text = ''
     if @documentation-file-path
-      result += "#{@documentation-file-path}"
+      text += @documentation-file-path
       if @start-line
-        result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
-      result += " -- "
-    result += @activity-text if @activity-text
-    result += "\n#{@error-message}" if @error-message
-    result += "\nwarning: #{@warning-message}" if @warning-message
-    result
+        text += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
+      text += ' -- '
+    text += @activity-text if @activity-text
+    text += "\n#{@error-message}" if @error-message
+    text += "\nwarning: #{@warning-message}" if @warning-message
+    console.log color text
 
 
 

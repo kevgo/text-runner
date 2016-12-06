@@ -12,7 +12,7 @@ debug = require('debug')('markdown-file-runner')
 
 
 # Runs the given Markdown file
-class MarkdownFileRunner
+class MarkdownFileLinter
 
   ({@file-path, @formatter, @actions, @configuration}) ->
     @markdown-parser = new Remarkable 'full', html: on

@@ -17,14 +17,9 @@ class RunCommand
   run: (@filename, done) ->
     try
       @_create-working-dir!
-      async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
-        | err  =>  return done err
-        if (steps-count = results |> sum) is 0
-          @formatter.warning 'no activities found'
-          done?!
-        else
-          @formatter.suite-success steps-count
-          done?!
+      @_execute-link-checkers (err) ~>
+        | err  =>  return done
+        @_execute-runners done
     catch
       console.log e
 
@@ -37,7 +32,6 @@ class RunCommand
       '.'
 
 
-
   # Returns all the markdown files for this tutorial
   _markdown-files: ->
     if (files = glob.sync @configuration.get 'files').length is 0
@@ -46,6 +40,24 @@ class RunCommand
       files |> filter ~> it is @filename
     else
       files
+
+
+  _execute-link-checkers: (done) ->
+    async.map-series @_link-checkers!, ((link-checker, cb) -> link-checker.run cb), (err, results) ~>
+      | err  =>  return done err
+      @formatter.suite-success steps-count
+      done?!
+
+
+  _execute-runners: (done) ->
+    async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
+      | err  =>  return done err
+      if (steps-count = results |> sum) is 0
+        @formatter.warning 'no activities found'
+        done?!
+      else
+        @formatter.suite-success steps-count
+        done?!
 
 
   # Returns an array of FileRunners for this tutorial

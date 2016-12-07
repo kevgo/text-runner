@@ -47,7 +47,7 @@ class IconicFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @_set-activity-header yellow figures.pointer, yes
+    @_set-activity-header yellow(figures.pointer), yes
     @activity-console = ''
     @_print!
 
@@ -70,7 +70,7 @@ class IconicFormatter
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @_set-activity-header yellow figures.pointer, yes
+    @_set-activity-header yellow(figures.pointer), yes
     @_print!
 
 

@@ -8,7 +8,7 @@ Feature: verifying links to external websites
   - dead links pointing to external websites cause a warning
 
 
-  Scenario: correct external link
+  Scenario: link to existing external website
     Given my workspace contains the file "1.md" with the content:
       """
       A [working external link](http://google.com)
@@ -17,7 +17,7 @@ Feature: verifying links to external websites
     Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
-      | WARNING  | working external link to http://google.com |
+      | WARNING  | link to external website http://google.com |
 
 
   Scenario: broken external link
@@ -27,7 +27,7 @@ Feature: verifying links to external websites
       """
     When running "tut-run 1.md"
     Then it signals:
-      | FILENAME | 1.md                                                     |
-      | LINE     | 1                                                        |
-      | WARNING  | external website http://oeanuthaoenuthoaeu.com not found |
+      | FILENAME | 1.md                                                                |
+      | LINE     | 1                                                                   |
+      | WARNING  | link to non-existing external website http://oeanuthaoenuthoaeu.com |
 

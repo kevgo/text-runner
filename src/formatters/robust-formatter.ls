@@ -48,7 +48,8 @@ class RobustFormatter
 
 
   # called when the last started activity finished successful
-  success: ->
+  # optionally allows to define the final text to be displayed
+  success: (@activity-text = @activity-text)->
     @_print-activity-header green
 
 

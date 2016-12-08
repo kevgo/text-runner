@@ -53,7 +53,8 @@ class ColoredFormatter
 
 
   # called when the last started activity finished successful
-  success: ->
+  # optionally allows to define the final text to be displayed
+  success: (@activity-text = @activity-text)->
     @_set-activity-header green
     @activity-console = ''
     @_print!

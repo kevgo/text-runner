@@ -31,7 +31,9 @@ class TestFormatter
     @lines.push if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
     console.log activity if @verbose
 
-  success: ->
+  success: (activity) ->
+    if activity
+      @activities[*-1] = strip-color activity
     console.log 'success' if @verbose
 
   error: (error) !->

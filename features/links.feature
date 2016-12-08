@@ -10,8 +10,11 @@ Feature: verifying that links point to something useful
   - dead links pointing to external websites cause a warning
 
 
-  Scenario: all links work
+  Background:
     Given I am in a directory that contains the "links" example
+
+
+  Scenario: all links work
     When running "tut-run working-links.md"
     Then it signals:
       | FILENAME | working-links.md                  |
@@ -19,8 +22,7 @@ Feature: verifying that links point to something useful
       | MESSAGE  | checking link to working-links.md |
 
 
-  Scenario: dead local link
-    Given I am in a directory that contains the "links" example
+  Scenario: dead link to filesystem
     When trying to run "tut-run broken-local-link.md"
     Then the test fails with:
       | FILENAME      | broken-local-link.md                |
@@ -30,7 +32,6 @@ Feature: verifying that links point to something useful
 
 
   Scenario: dead external link
-    Given I am in a directory that contains the "links" example
     When running "tut-run broken-external-link.md"
     Then it signals:
       | FILENAME | broken-external-link.md                                     |

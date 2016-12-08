@@ -21,14 +21,14 @@ module.exports  = ({configuration, formatter, nodes}, done) ->
 function check-external-link target, formatter, done
   request target, (err) ->
     | err  =>  formatter.warning "external website #{cyan target} not found"
-    | _    =>  formatter.success!
+    | _    =>  formatter.success "working external link to #{cyan target}"
     done!
 
 
 function check-internal-link target, formatter, done
   fs.stat target, (err) ->
-    | err  =>  formatter.error "link points to non-existing #{cyan target}"
-    | _    =>  formatter.success!
+    | err  =>  formatter.error "broken internal link to #{cyan target}"
+    | _    =>  formatter.success "working internal link to #{cyan target}"
     done!
 
 

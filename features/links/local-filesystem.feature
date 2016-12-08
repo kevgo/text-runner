@@ -1,0 +1,45 @@
+@clionly
+Feature: verifying links to the local filesystem
+
+  As a tutorial writer
+  I want to know whether links to local files in my code base work
+  So that I can point my readers to example code that is part of my tutorial.
+
+  - dead links pointing to local files or directories cause the test to fail
+
+
+  Scenario: correct link to local file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A working [link to a file](1.md)
+      """
+    When running "tut-run 1.md"
+    Then it signals:
+      | FILENAME | 1.md                          |
+      | LINE     | 1                             |
+      | MESSAGE  | working internal link to 1.md |
+
+
+  Scenario: correct link to local directory
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A working [link to a directory](.)
+      """
+    When running "tut-run 1.md"
+    Then it signals:
+      | FILENAME | 1.md                       |
+      | LINE     | 1                          |
+      | MESSAGE  | working internal link to . |
+
+
+  Scenario: broken link to the local filesystem
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A broken [link to the local filesystem](zonk.md)
+      """
+    When trying to run "tut-run 1.md"
+    Then the test fails with:
+      | FILENAME      | 1.md                            |
+      | LINE          | 1                               |
+      | ERROR MESSAGE | broken internal link to zonk.md |
+      | EXIT CODE     | 1                               |

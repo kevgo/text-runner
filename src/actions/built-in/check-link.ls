@@ -46,7 +46,7 @@ function check-link-to-anchor-in-other-file filename, target, link-targets, form
   if link-targets[target-filename].index-of(target-anchor) > -1
     formatter.success "link to #{cyan target-filename}##{green target-anchor}"
   else
-    formatter.error "link to non-existing #{cyan target-filename}#{red target-anchor}"
+    formatter.error "link to non-existing anchor ##{red target-anchor} in #{cyan target-filename}"
 
 
 function is-external-link target

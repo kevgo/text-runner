@@ -17,6 +17,9 @@ class MarkdownFileRunner
   ({@file-path, @formatter, @actions, @configuration}) ->
     @markdown-parser = new Remarkable 'full', html: on
 
+    # lists which files contain which HTML anchors
+    @link-targets = {}
+
 
   run: (done) ->
     @formatter.start-file path.relative(process.cwd!, @file-path)
@@ -25,6 +28,7 @@ class MarkdownFileRunner
       @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
     run-data = @markdown-parser.parse markdown-text, {}
       |> @_standardize-ast
+      |> @_build-link-targets
       |> @_iterate-nodes
     async.map-series run-data, @_run-block, (err) ->
       done err, run-data.length
@@ -76,6 +80,14 @@ class MarkdownFileRunner
     result
 
 
+  _build-link-targets: (tree) ->
+    for node in tree
+      if node.type is 'htmltag'
+        if (matches = node.content.match /<a name="([^"]*)">/)
+          (@link-targets[@file-path] or= []).push matches[1]
+    tree
+
+
   _iterate-nodes: (tree) ->
     nodes-for-current-runner = null
     start-line = 0
@@ -117,6 +129,7 @@ class MarkdownFileRunner
             runner: @actions.action-for 'checkLink'
             formatter: @formatter
             configuration: @configuration
+            link-targets: @link-targets
 
     result
 

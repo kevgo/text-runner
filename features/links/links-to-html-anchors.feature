@@ -10,6 +10,17 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in the same file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [working link to an anchor](#hello)
+      text
+      <a name="hello">hi</a>
+      """
+    When running "tut-run 1.md"
+    Then it signals:
+      | FILENAME | 1.md               |
+      | LINE     | 1                  |
+      | WARNING  | link to 1.md#hello |
 
 
   Scenario: link to an existing anchor in another file

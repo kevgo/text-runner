@@ -69,8 +69,10 @@ class MarkdownFileRunner
 
         case <[ fence htmlblock htmltag link_open text ]>.index-of(node.type) > -1
           result.push line: node-line, type: "#{modifiers.sort!.join!}#{node.type}", content: (node.content or node.href)
-        if node.children
-          @_standardize-ast node.children, node-line, result
+
+      if node.children
+        @_standardize-ast node.children, node-line, result
+
     result
 
 

@@ -84,10 +84,11 @@ class MarkdownFileRunner
 
 
   _build-link-targets: (tree) ->
+    @link-targets[@file-path] or= []
     for node in tree
       if node.type is 'htmltag'
         if (matches = node.content.match /<a name="([^"]*)">/)
-          (@link-targets[@file-path] or= []).push matches[1]
+          @link-targets[@file-path].push matches[1]
     tree
 
 

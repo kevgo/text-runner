@@ -63,10 +63,10 @@ Feature: links to HTML anchors
       """
     When trying to run "tut-run"
     Then the test fails with:
-      | FILENAME      | 1.md                                         |
-      | LINE          | 1                                            |
+      | FILENAME      | 1.md                                      |
+      | LINE          | 1                                         |
       | ERROR MESSAGE | link to non-existing anchor #zonk in 2.md |
-      | EXIT CODE     | 1                                            |
+      | EXIT CODE     | 1                                         |
 
 
   Scenario: link to anchor in non-existing file
@@ -79,6 +79,23 @@ Feature: links to HTML anchors
       | FILENAME      | 1.md                                             |
       | LINE          | 1                                                |
       | ERROR MESSAGE | link to anchor #target in non-existing file 2.md |
+      | EXIT CODE     | 1                                                |
+
+
+  Scenario: link to anchor in file without anchors
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [link to non-existing anchor in other file](2.md#zonk)
+      """
+    And my workspace contains the file "2.md" with the content:
+      """
+      no link targets here
+      """
+    When trying to run "tut-run"
+    Then the test fails with:
+      | FILENAME      | 1.md                                             |
+      | LINE          | 1                                                |
+      | ERROR MESSAGE | link to non-existing anchor #zonk in 2.md |
       | EXIT CODE     | 1                                                |
 
 

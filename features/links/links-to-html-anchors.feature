@@ -69,5 +69,18 @@ Feature: links to HTML anchors
       | EXIT CODE     | 1                                            |
 
 
+  Scenario: link to anchor in non-existing file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [link to non-existing anchor in other file](2.md#target)
+      """
+    When trying to run "tut-run"
+    Then the test fails with:
+      | FILENAME      | 1.md                                             |
+      | LINE          | 1                                                |
+      | ERROR MESSAGE | link to anchor #target in non-existing file 2.md |
+      | EXIT CODE     | 1                                                |
+
+
 
 

@@ -26,9 +26,10 @@ function check-external-link target, formatter, done
 
 
 function check-internal-link target, formatter, done
-  fs.stat target, (err) ->
-    | err  =>  formatter.error "link to local file #{cyan target}"
-    | _    =>  formatter.success "link to non-existing local file #{cyan target}"
+  fs.stat target, (err, stats) ->
+    | err                  =>  formatter.error "link to non-existing local file #{cyan target}"
+    | stats.is-directory!  =>  formatter.success "link to local directory #{cyan target}"
+    | _                    =>  formatter.success "link to local file #{cyan target}"
     done!
 
 

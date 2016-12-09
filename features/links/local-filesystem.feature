@@ -28,9 +28,9 @@ Feature: verifying links to the local filesystem
       """
     When running "tut-run 1.md"
     Then it signals:
-      | FILENAME | 1.md                 |
-      | LINE     | 1                    |
-      | MESSAGE  | to local directory . |
+      | FILENAME | 1.md                      |
+      | LINE     | 1                         |
+      | MESSAGE  | link to local directory . |
 
 
   Scenario: link to non-existing local file

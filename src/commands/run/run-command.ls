@@ -17,9 +17,16 @@ class RunCommand
   run: (@filename, done) ->
     try
       @_create-working-dir!
+      @_create-runners!
+      @_prepare-runners!
       @_execute-runners done
     catch
       console.log e
+
+
+  _create-runners: ->
+    @runners = for file-path in @_markdown-files!
+      new MarkdownFileRunner {file-path, @formatter, @actions, @configuration}
 
 
   # Creates the temp directory to run the tests in
@@ -40,8 +47,15 @@ class RunCommand
       files
 
 
+  _execute-runner: (runner, done) ->
+    try
+      runner.run done
+    catch
+      console.log e
+
+
   _execute-runners: (done) ->
-    async.map-series @_runners!, ((runner, cb) -> runner.run cb), (err, results) ~>
+    async.map-series @runners, @_execute-runner, (err, results) ~>
       | err  =>  return done err
       if (steps-count = results |> sum) is 0
         @formatter.warning 'no activities found'
@@ -51,9 +65,12 @@ class RunCommand
         done?!
 
 
-  # Returns an array of FileRunners for this tutorial
-  _runners: ->
-    [new MarkdownFileRunner({file-path, @formatter, @actions, @configuration}) for file-path in @_markdown-files!]
+  _prepare-runners: ->
+    try
+      for runner in @runners
+        runner.prepare!
+    catch e
+      console.log e
 
 
 

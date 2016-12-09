@@ -21,17 +21,23 @@ class MarkdownFileRunner
     @link-targets = {}
 
 
-  run: (done) ->
-    @formatter.start-file path.relative(process.cwd!, @file-path)
+
+  # Prepares this runner
+  prepare: ->
     markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0
       @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
-    run-data = @markdown-parser.parse markdown-text, {}
+    @run-data = @markdown-parser.parse markdown-text, {}
       |> @_standardize-ast
       |> @_build-link-targets
       |> @_iterate-nodes
-    async.map-series run-data, @_run-block, (err) ->
-      done err, run-data.length
+
+
+  # Runs this runner
+  # It must be prepared first
+  run: (done) ->
+    @formatter.start-file path.relative(process.cwd!, @file-path)
+      done err, @run-data.length
 
 
   _run-block: (block, done) ->

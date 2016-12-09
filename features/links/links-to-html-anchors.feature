@@ -16,7 +16,7 @@ Feature: links to HTML anchors
       text
       <a name="hello">hi</a>
       """
-    When running "tut-run 1.md"
+    When running "tut-run"
     Then it signals:
       | FILENAME | 1.md               |
       | LINE     | 1                  |
@@ -24,6 +24,21 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in another file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [working link to an anchor](2.md#hello)
+      """
+    And my workspace contains the file "2.md" with the content:
+      """
+      <a name="hello">hi</a>
+      """
+    When running "tut-run"
+    Then it signals:
+      | FILENAME | 1.md               |
+      | LINE     | 1                  |
+      | WARNING  | link to 2.md#hello |
+
+
 
 
   Scenario: link to a non-existing anchor in the same file

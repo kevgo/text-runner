@@ -14,6 +14,10 @@ class RunCommand
 
   ({@configuration, @formatter, @actions}) ->
 
+    # lists which files contain which HTML anchors
+    @link-targets = {}
+
+
   run: (@filename, done) ->
     try
       @_create-working-dir!
@@ -26,7 +30,7 @@ class RunCommand
 
   _create-runners: ->
     @runners = for file-path in @_markdown-files!
-      new MarkdownFileRunner {file-path, @formatter, @actions, @configuration}
+      new MarkdownFileRunner {file-path, @formatter, @actions, @configuration, @link-targets}
 
 
   # Creates the temp directory to run the tests in

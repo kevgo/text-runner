@@ -14,12 +14,8 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  ({@file-path, @formatter, @actions, @configuration}) ->
+  ({@file-path, @formatter, @actions, @configuration, @link-targets}) ->
     @markdown-parser = new Remarkable 'full', html: on
-
-    # lists which files contain which HTML anchors
-    @link-targets = {}
-
 
 
   # Prepares this runner
@@ -37,6 +33,7 @@ class MarkdownFileRunner
   # It must be prepared first
   run: (done) ->
     @formatter.start-file path.relative(process.cwd!, @file-path)
+    async.map-series @run-data, @_run-block, (err) ~>
       done err, @run-data.length
 
 

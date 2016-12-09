@@ -35,10 +35,10 @@ function check-internal-link target, formatter, done
 
 
 function check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done
-  if link-targets[filename].index-of(target.substr 1) > -1
+  if link-targets[filename]?.index-of(target.substr 1) > -1
     formatter.success "link to #{cyan filename}#{green target}"
   else
-    formatter.error "link to non-existing #{cyan filename}#{red target}"
+    formatter.error "link to non-existing local anchor #{red target}"
 
 
 function check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done

@@ -39,6 +39,17 @@ Feature: links to HTML anchors
       | WARNING  | link to 2.md#hello |
 
 
+  Scenario: link to a non-existing anchor in the same file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [link to non-existing anchor](#zonk)
+      """
+    When trying to run "tut-run"
+    Then the test fails with:
+      | FILENAME      | 1.md                                    |
+      | LINE          | 1                                       |
+      | ERROR MESSAGE | link to non-existing local anchor #zonk |
+      | EXIT CODE     | 1                                       |
 
 
   Scenario: link to a non-existing anchor in the same file

@@ -20,9 +20,6 @@ class IconicFormatter
     @start-line = null
     @end-line = null
 
-    # the header for the current activity, which will be printed differently later
-    @activity-header = ''
-
     # the console output created by the current activity
     @activity-console = ''
 
@@ -47,32 +44,28 @@ class IconicFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @_set-activity-header yellow(figures.pointer), yes
+    @_print-header yellow(figures.pointer), yes
     @activity-console = ''
-    @_print!
+    @error-message = ''
+    @warning-message = ''
 
 
   # called when the last started activity finished successful
   # optionally allows to define the final text to be displayed
   success: (@activity-text = @activity-text)->
-    @_set-activity-header green figures.tick
-    @activity-console = ''
-    @_print!
+    @_print-header green figures.tick
     log-update.done!
-    @activity-header = ''
 
 
   # Called on general errors
   error: (@error-message) ->
-    @_set-activity-header red figures.cross
-    @_print!
+    @_print-header-and-console red figures.cross
     process.exit 1
 
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @_set-activity-header yellow(figures.pointer), yes
-    @_print!
+    @_print-header yellow(figures.pointer), yes
 
 
   set-lines: (@start-line, @end-line) ->
@@ -80,12 +73,8 @@ class IconicFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
-    @activity-text = ''
-    @_set-activity-header magenta figures.warning
-    @activity-console = ''
-    @_print!
+    @_print-header-and-console magenta figures.warning
     log-update.done!
-    @activity-header = ''
 
 
   # called when the whole test suite passed
@@ -93,29 +82,33 @@ class IconicFormatter
     log-update bold green "\nSuccess! #{steps-count} steps passed"
 
 
-  _set-activity-header: (figure, newline) ->
-    @activity-header = "#{figure} "
+  _activity-header: (figure, newline) ->
+    result = "#{figure} "
     if @documentation-file-path
-      @activity-header += "#{@documentation-file-path}"
+      result += "#{@documentation-file-path}"
       if @start-line
-        @activity-header += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
-      @activity-header += " -- "
+        result += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
+      result += " -- "
     if @error-message
-      @activity-header += bold(@error-message)
+      result += bold(@error-message)
     else if @warning-message
-      @activity-header += bold(@warning-message)
+      result += bold(@warning-message)
     else
-      @activity-header += bold(@activity-text) if @activity-text
-    @activity-header += "\n" if newline
+      result += bold(@activity-text) if @activity-text
+    result += "\n" if newline
+    result
 
 
-  _print: ->
-    log-update @activity-header + @activity-console
+  _print-header: (figure, newline) ->
+    log-update @_activity-header figure, newline
+
+
+  _print-header-and-console: (figure, newline) ->
+    log-update @_activity-header(figure, newline) + @activity-console
 
 
   output: (text) ~>
     @activity-console += dim strip-ansi text
-    @_print!
 
 
 

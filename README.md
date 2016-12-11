@@ -14,8 +14,8 @@
   <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
 </a>
 
-A command-line tool
-that executes documentation written in Markdown programmatically.
+_A command-line tool
+that executes documentation written in Markdown programmatically._
 Similar to how a human reader would execute it if they were reading and following it.
 
 There are absolutely no limitations on how the documents it runs look like.

@@ -45,12 +45,7 @@ which is verified for correctness by Tutorial Runner.
   describe it via a readme file or tutorial
   and get early feedback on your ideas from potential users.
   Tutorial Runner makes this end-user facing documentation executable,
-  and for example run it as part of your test suite.
-  This allows adding end-user documentation as the outer-most layer
-  to your [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) cycle:
-  1. documentation via Tutorial Runner for smoke testing of the full stack
-  2. feature specs (for example via [Cucumber](http://cucumber.io)) for detailed black-box testing of each feature in isolation
-  3. unit tests for white-box testing of individual code components
+  and runs it as part of your test suite.
 
 
 ## How it works

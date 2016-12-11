@@ -22,7 +22,7 @@ Feature: verifying links to external websites
   Scenario: broken external link
     Given my workspace contains the file "1.md" with the content:
       """
-      A [broken external link](http://oeanuthaoenuthoaeu.com)
+      A [broken external link](http://oeanuthaoenuthoaeuzonk.com)
       """
     When running tut-run
     Then it signals:

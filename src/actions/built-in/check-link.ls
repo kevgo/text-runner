@@ -10,8 +10,7 @@ require! {
 
 # Checks for broken hyperlinks
 module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
-  node = nodes[0]
-  target = node.content
+  target = nodes[0].content
   formatter.start "checking link to #{cyan target}"
   switch
   | is-link-without-target target           =>  formatter.error "link without target" ; done!

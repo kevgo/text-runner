@@ -63,10 +63,10 @@ class RunCommand
       | err  =>  return done err
       if (steps-count = results |> sum) is 0
         @formatter.warning 'no activities found'
-        done?!
+        done!
       else
         @formatter.suite-success steps-count
-        done?!
+        done!
 
 
   _prepare-runners: ->

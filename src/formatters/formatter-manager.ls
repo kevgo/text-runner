@@ -32,7 +32,9 @@ class FormatterManager
       FormatterClass = require("./#{name}-formatter")
       done null, new FormatterClass
     catch
-      done "Unknown formatter: '#{name}'\n\nAvailable formatters are #{@available-formatter-names!.join ', '}"
+      switch
+      | e.code is 'MODULE_NOT_FOUND'  =>  done "Unknown formatter: '#{name}'\n\nAvailable formatters are #{@available-formatter-names!.join ', '}"
+      | otherwise                     =>  console.log e ; done e
 
 
 

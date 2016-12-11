@@ -16,6 +16,7 @@
 
 Tutorial Runner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
+
 There are no requirements how the executable documentation must look like:
 You can execute embedded source code in any programming language
 (that is available on your computer),

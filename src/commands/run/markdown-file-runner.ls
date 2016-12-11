@@ -21,6 +21,7 @@ class MarkdownFileRunner
 
   # Prepares this runner
   prepare: ->
+    @formatter.start-file @file-path
     markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0
       @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"

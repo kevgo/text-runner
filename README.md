@@ -31,7 +31,7 @@ which is verified for correctness by Tutorial Runner.
 
 * __evergreen tutorials:__
   Your documentation always describes how the product works,
-  every time you change it or its documentation.
+  every time you change either of them.
 
 * __[semantic versioning](http://semver.org):__
   Know whether a change affects documented behavior.

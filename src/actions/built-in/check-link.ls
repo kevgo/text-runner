@@ -3,7 +3,7 @@ require! {
   'fs'
   'mkdirp'
   'path'
-  'prelude-ls' : {capitalize, filter, map}
+  'prelude-ls' : {capitalize, filter, first, map}
   'request'
 }
 
@@ -35,20 +35,25 @@ function check-internal-link target, formatter, done
 
 
 function check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done
-  if link-targets[filename]?.index-of(target.substr 1) > -1
-    formatter.success "link to #{cyan filename}#{green target}"
-  else
+  target-entry = link-targets[filename] |> filter (.name is target.substr 1) |> first
+  if !target-entry
     formatter.error "link to non-existing local anchor #{red target}"
+  else if target-entry.type is 'heading'
+    formatter.success "link to local heading #{green target-entry.text}"
+  else if target-entry.type is 'anchor'
+    formatter.success "link to ##{green target-entry.name}"
 
 
 function check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
   [target-filename, target-anchor] = target.split '#'
   if !link-targets[target-filename]
     formatter.error "link to anchor ##{cyan target-anchor} in non-existing file #{red target-filename}"
-  if link-targets[target-filename].index-of(target-anchor) > -1
-    formatter.success "link to #{cyan target-filename}##{green target-anchor}"
-  else
+
+  target = (link-targets[target-filename] or []) |> filter (.name is target-anchor) |> first
+  if !target
     formatter.error "link to non-existing anchor ##{red target-anchor} in #{cyan target-filename}"
+
+  formatter.success "link to #{cyan target-filename}##{green target-anchor}"
 
 
 function is-external-link target

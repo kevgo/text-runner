@@ -18,9 +18,9 @@ Feature: links to HTML anchors
       """
     When running "tut-run"
     Then it signals:
-      | FILENAME | 1.md               |
-      | LINE     | 1                  |
-      | WARNING  | link to 1.md#hello |
+      | FILENAME | 1.md           |
+      | LINE     | 1              |
+      | WARNING  | link to #hello |
 
 
   Scenario: link to an existing anchor in another file
@@ -95,9 +95,21 @@ Feature: links to HTML anchors
     Then the test fails with:
       | FILENAME      | 1.md                                             |
       | LINE          | 1                                                |
+      | FILENAME      | 1.md                                      |
+      | LINE          | 1                                         |
       | ERROR MESSAGE | link to non-existing anchor #zonk in 2.md |
-      | EXIT CODE     | 1                                                |
+      | EXIT CODE     | 1                                         |
 
 
-
-
+  Scenario: link to an existing caption in the same file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [working link to an anchor](#hello)
+      text
+      ## Hello
+      """
+    When running "tut-run"
+    Then it signals:
+      | FILENAME | 1.md                        |
+      | LINE     | 1                           |
+      | WARNING  | link to local heading Hello |

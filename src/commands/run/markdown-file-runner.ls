@@ -1,6 +1,7 @@
 require! {
   'async'
   'chalk' : {cyan}
+  'dashify'
   'fs'
   'path'
   'prelude-ls' : {reject}
@@ -62,7 +63,7 @@ class MarkdownFileRunner
   #   * line
   #     ...
   # ]
-  _standardize-ast: (ast, line = 0, result = []) ->
+  _standardize-ast: (ast, line = 0, result = [], heading = null) ->
     modifiers = []
     for node in ast
       node-line = if node.lines?.length > 0 then node.lines[0] + 1 else line
@@ -74,11 +75,23 @@ class MarkdownFileRunner
         case node.type is 'strong_close'
           modifiers.splice modifiers.index-of('strong'), 1
 
+        case node.type is 'heading_open'
+          heading =
+            lines: node.lines
+            text: ''
+
+        case node.type is 'heading_close'
+          result.push line: heading.lines[*-1], type: 'heading', content: heading.text, level: node.h-level
+          heading = null
+
+        case heading and node.type is 'text'
+          heading.text += node.content
+
         case <[ fence htmlblock htmltag link_open text ]>.index-of(node.type) > -1
           result.push line: node-line, type: "#{modifiers.sort!.join!}#{node.type}", content: (node.content or node.href)
 
       if node.children
-        @_standardize-ast node.children, node-line, result
+        @_standardize-ast node.children, node-line, result, heading
 
     result
 
@@ -86,9 +99,13 @@ class MarkdownFileRunner
   _build-link-targets: (tree) ->
     @link-targets[@file-path] or= []
     for node in tree
+
       if node.type is 'htmltag'
         if (matches = node.content.match /<a name="([^"]*)">/)
-          @link-targets[@file-path].push matches[1]
+          @link-targets[@file-path].push type: 'anchor', name: matches[1]
+
+      if node.type is 'heading'
+        @link-targets[@file-path].push type: 'heading', name: dashify(node.content), text: node.content, level: node.level
     tree
 
 

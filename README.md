@@ -30,8 +30,8 @@ which is verified for correctness by Tutorial Runner.
 ## Why you need it
 
 * __evergreen tutorials:__
-  Your documentation always describes how the product works,
-  every time you change either of them.
+  Your documentation is always correct,
+  whether you change it or the product.
 
 * __[semantic versioning](http://semver.org):__
   Know whether a change affects documented behavior.

@@ -42,6 +42,7 @@ function check-link-to-anchor-in-same-file filename, target, link-targets, forma
     formatter.success "link to local heading #{green target-entry.text}"
   else
     formatter.success "link to ##{green target-entry.name}"
+  done!
 
 
 function check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
@@ -57,6 +58,7 @@ function check-link-to-anchor-in-other-file filename, target, link-targets, form
     formatter.success "link to caption #{green target-entry.text} in #{cyan target-filename}"
   else
     formatter.success "link to #{cyan target-filename}##{green target-anchor}"
+  done!
 
 
 function is-external-link target

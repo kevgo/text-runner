@@ -1,4 +1,3 @@
-@clionly
 Feature: links to HTML anchors
 
   As a tutorial writer
@@ -16,11 +15,11 @@ Feature: links to HTML anchors
       text
       <a name="hello">hi</a>
       """
-    When running "tut-run"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md           |
       | LINE     | 1              |
-      | WARNING  | link to #hello |
+      | MESSAGE  | link to #hello |
 
 
   Scenario: link to an existing anchor in another file
@@ -32,11 +31,11 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When running "tut-run"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md               |
       | LINE     | 1                  |
-      | WARNING  | link to 2.md#hello |
+      | MESSAGE  | link to 2.md#hello |
 
 
   Scenario: link to a non-existing anchor in the same file
@@ -44,7 +43,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor](#zonk)
       """
-    When trying to run "tut-run"
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | 1.md                                    |
       | LINE          | 1                                       |
@@ -61,7 +60,7 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When trying to run "tut-run"
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
@@ -74,7 +73,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor in other file](2.md#target)
       """
-    When trying to run "tut-run"
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | 1.md                                             |
       | LINE          | 1                                                |
@@ -91,7 +90,7 @@ Feature: links to HTML anchors
       """
       no link targets here
       """
-    When trying to run "tut-run"
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
@@ -106,11 +105,11 @@ Feature: links to HTML anchors
       text
       ## Hello
       """
-    When running "tut-run"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
-      | WARNING  | link to local heading Hello |
+      | MESSAGE  | link to local heading Hello |
 
 
   Scenario: link to an existing caption in another file
@@ -122,9 +121,9 @@ Feature: links to HTML anchors
       """
       ## Hello
       """
-    When running "tut-run"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                          |
       | LINE     | 1                             |
-      | WARNING  | link to caption Hello in 2.md |
+      | MESSAGE  | link to caption Hello in 2.md |
 

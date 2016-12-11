@@ -19,7 +19,7 @@ that executes documentation written in Markdown programmatically._
 Similar to how a human reader would execute it if they were reading and following it.
 
 There are absolutely no limitations on how the documents it runs look like.
-Tutorial Runner can execute human-friendly prose, tables, or bullet point lists,
+Tutorial Runner can execute prose, tables, bullet point lists,
 in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.

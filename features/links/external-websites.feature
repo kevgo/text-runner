@@ -26,7 +26,6 @@ Feature: verifying links to external websites
       """
     When running tut-run
     Then it signals:
-      | FILENAME | 1.md                                                                |
-      | LINE     | 1                                                                   |
-      | WARNING  | link to non-existing external website http://oeanuthaoenuthoaeu.com |
-
+      | FILENAME | 1.md                                                                    |
+      | LINE     | 1                                                                       |
+      | WARNING  | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |

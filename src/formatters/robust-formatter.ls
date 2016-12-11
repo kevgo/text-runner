@@ -15,6 +15,8 @@ class RobustFormatter
     # the line within the documentation file at which the currently processed block starts
     @documentation-file-line = -1
 
+    @steps-count = 0
+
     # Note: I have to define these attributes here,
     #       since doing so at the class level
     #       binds them to the class scope for some reason
@@ -45,6 +47,7 @@ class RobustFormatter
 
   # Called when we start performing an activity
   start: (@activity-text) ->
+    @steps-count += 1
 
 
   # called when the last started activity finished successful
@@ -61,7 +64,7 @@ class RobustFormatter
 
   # called when the whole test suite passed
   suite-success: (steps-count) ->
-    console.log bold green "\nSuccess! #{steps-count} steps passed"
+    console.log bold green "\nSuccess! #{@steps-count} steps passed"
 
 
   warning: (@warning-message) ->

@@ -20,6 +20,8 @@ class ColoredFormatter
     @start-line = null
     @end-line = null
 
+    @steps-count = 0
+
     # the console output created by the current activity
     @activity-console = ''
 
@@ -48,6 +50,7 @@ class ColoredFormatter
     @console = ''
     @error-message = ''
     @warning-message = ''
+    @steps-count += 1
 
 
   # called when the last started activity finished successful
@@ -72,8 +75,8 @@ class ColoredFormatter
 
 
   # called when the whole test suite passed
-  suite-success: (steps-count) ->
-    log-update bold green "\nSuccess! #{steps-count} steps passed"
+  suite-success: ->
+    log-update bold green "\nSuccess! #{@steps-count} steps passed"
 
 
   # Called on general warnings

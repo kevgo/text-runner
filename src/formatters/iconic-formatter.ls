@@ -23,6 +23,8 @@ class IconicFormatter
     # the console output created by the current activity
     @console = ''
 
+    @steps-count = 0
+
     # Note: I have to define these attributes here,
     #       since doing so at the class level
     #       binds them to the class scope for some reason
@@ -48,6 +50,7 @@ class IconicFormatter
     @console = ''
     @error-message = ''
     @warning-message = ''
+    @steps-count += 1
 
 
   # called when the last started activity finished successful
@@ -78,8 +81,8 @@ class IconicFormatter
 
 
   # called when the whole test suite passed
-  suite-success: (steps-count) ->
-    log-update bold green "\nSuccess! #{steps-count} steps passed"
+  suite-success: ->
+    log-update bold green "\nSuccess! #{@steps-count} steps passed"
 
 
   _activity-header: (figure, newline) ->

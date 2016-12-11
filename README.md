@@ -31,7 +31,7 @@ which is verified for correctness by Tutorial Runner.
 
 * __evergreen tutorials:__
   Broken tutorials suck.
-  Tutorial Runner enforces that your tutorials always work,
+  Tutorial Runner enforces that your tutorials always describe how the product works,
   every time you change anything in either the described product or its documentation.
 
 * __change management and [semantic versioning](http://semver.org):__

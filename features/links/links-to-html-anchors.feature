@@ -4,7 +4,7 @@ Feature: links to HTML anchors
   I want to know whether links to other parts of the tutorial work
   So that I can reference releated sections.
 
-  - dead links pointing to other parts of the same page or parts of other pages
+  - links pointing to non-existing parts of the same page or other pages
     cause the test to fail
 
 

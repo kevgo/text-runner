@@ -4,7 +4,8 @@ Feature: verifying links to the local filesystem
   I want to know whether links to local files in my code base work
   So that I can point my readers to example code that is part of my tutorial.
 
-  - dead links pointing to local files or directories cause the test to fail
+  - links pointing to non-existing local files or directories
+    cause the test to fail
 
 
   Scenario: link to existing local file

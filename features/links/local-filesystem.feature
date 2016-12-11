@@ -1,4 +1,3 @@
-@clionly
 Feature: verifying links to the local filesystem
 
   As a tutorial writer
@@ -13,7 +12,7 @@ Feature: verifying links to the local filesystem
       """
       [link to existing local file](1.md)
       """
-    When running "tut-run 1.md"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1                       |
@@ -26,7 +25,7 @@ Feature: verifying links to the local filesystem
       """
       [link to local directory](.)
       """
-    When running "tut-run 1.md"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                      |
       | LINE     | 1                         |
@@ -38,7 +37,7 @@ Feature: verifying links to the local filesystem
       """
       [link to non-existing local file](zonk.md)
       """
-    When trying to run "tut-run 1.md"
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | 1.md                                    |
       | LINE          | 1                                       |

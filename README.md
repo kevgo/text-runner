@@ -32,10 +32,8 @@ which is verified for correctness by Tutorial Runner.
 * __evergreen tutorials:__
   Your documentation is always correct,
   whether you change it or the product.
-
 * __[semantic versioning](http://semver.org):__
   Know whether a change affects documented behavior.
-
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
   Let executable documentation of your product drive its implementation.
 

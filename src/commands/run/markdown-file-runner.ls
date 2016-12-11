@@ -35,7 +35,7 @@ class MarkdownFileRunner
 
 
   # Runs this runner
-  # It must be prepared first
+  # (after it has been prepared)
   run: (done) ->
     @formatter.start-file path.relative(process.cwd!, @file-path)
     async.map-series @run-data, @_run-block, (err) ~>

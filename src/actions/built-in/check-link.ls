@@ -13,6 +13,7 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
   target = node.content
   formatter.start "checking link to #{cyan target}"
   switch
+  | is-link-without-target target           =>  formatter.error "link without target" ; done!
   | is-link-to-anchor-in-same-file target   =>  check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done
   | is-link-to-anchor-in-other-file target  =>  check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
   | is-external-link target                 =>  check-external-link target, formatter, done
@@ -74,3 +75,7 @@ function is-link-to-anchor-in-other-file target
 
 function is-link-to-anchor-in-same-file target
   target.starts-with '#'
+
+
+function is-link-without-target target
+  !target.trim!

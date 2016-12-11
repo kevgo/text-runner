@@ -30,9 +30,8 @@ which is verified for correctness by Tutorial Runner.
 ## Why you need it
 
 * __evergreen tutorials:__
-  Broken tutorials suck.
-  Tutorial Runner enforces that your tutorials always describe how the product works,
-  every time you change the product or its documentation.
+  Enforce that your tutorials always describe how the product works,
+  every time you change it or its documentation.
 
 * __[semantic versioning](http://semver.org):__
   Know whether a change affects documented behavior.

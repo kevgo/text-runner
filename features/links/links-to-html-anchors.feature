@@ -98,7 +98,7 @@ Feature: links to HTML anchors
       | EXIT CODE     | 1                                         |
 
 
-  Scenario: link to an existing caption in the same file
+  Scenario: link to an existing heading in the same file
     Given my workspace contains the file "1.md" with the content:
       """
       A [working link to an anchor](#hello)
@@ -112,10 +112,10 @@ Feature: links to HTML anchors
       | MESSAGE  | link to local heading Hello |
 
 
-  Scenario: link to an existing caption in another file
+  Scenario: link to an existing heading in another file
     Given my workspace contains the file "1.md" with the content:
       """
-      A [working link to a caption](2.md#hello)
+      A [working link to a heading](2.md#hello)
       """
     And my workspace contains the file "2.md" with the content:
       """
@@ -125,5 +125,5 @@ Feature: links to HTML anchors
     Then it signals:
       | FILENAME | 1.md                          |
       | LINE     | 1                             |
-      | MESSAGE  | link to caption Hello in 2.md |
+      | MESSAGE  | link to heading Hello in 2.md |
 

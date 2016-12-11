@@ -56,7 +56,7 @@ function check-link-to-anchor-in-other-file filename, target, link-targets, form
     formatter.error "link to non-existing anchor ##{red target-anchor} in #{cyan target-filename}"
 
   if target-entry.type is 'heading'
-    formatter.success "link to caption #{green target-entry.text} in #{cyan target-filename}"
+    formatter.success "link to heading #{green target-entry.text} in #{cyan target-filename}"
   else
     formatter.success "link to #{cyan target-filename}##{green target-anchor}"
   done!

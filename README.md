@@ -14,13 +14,15 @@
   <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
 </a>
 
-Tutorial Runner is a command-line tool
-that executes documentation written in Markdown (and soon HTML) programmatically,
+Tutorial Runner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
-What sets Tutorial Runner apart from [related technologies](#related-work)
-is that there are absolutely no limitations on how the documents it runs look like.
-Tutorial Runner can execute human-friendly prose, tables, or bullet point lists,
-in any human language.
+It also checks for broken links.
+
+There are no requirements how the executable documentation must look like:
+You can execute embedded source code in any programming language
+(that is available on your computer),
+tables, bullet point lists,
+as well as plain text in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.
 
@@ -28,27 +30,12 @@ which is verified for correctness by Tutorial Runner.
 ## Why you need it
 
 * __evergreen tutorials:__
-  Broken tutorials suck.
-  Tutorial Runner enforces that your tutorials always work,
-  every time you change anything in either the described product or its documentation.
-
-* __change management and [semantic versioning](http://semver.org):__
-  Tutorial Runner tells you whether a change breaks documented behavior.
-  Knowing this before shipping the respective change allows you to either
-  implement it in a more backwards-compatible way or
-  update the documentation and announce the breaking change to your users.
-
+  Your documentation is always correct,
+  whether you change it or the product.
+* __[semantic versioning](http://semver.org):__
+  Know whether a change affects documented behavior.
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
-  Before spending time and budget building or even prototyping functionality,
-  describe it via a readme file or tutorial
-  and get early feedback on your ideas from potential users.
-  Tutorial Runner makes this end-user facing documentation executable,
-  and for example run it as part of your test suite.
-  This allows adding end-user documentation as the outer-most layer
-  to your [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) cycle:
-  1. documentation via Tutorial Runner for smoke testing of the full stack
-  2. feature specs (for example via [Cucumber]()) for detailed black-box testing of each feature in isolation
-  3. unit tests for white-box testing of individual code components
+  Let executable documentation of your product drive its implementation.
 
 
 ## How it works
@@ -105,7 +92,7 @@ for activities typically performed in software programming tutorials.
 
 * [change the current working directory](documentation/actions/cd.md)
 * [create a file](documentation/actions/create_file.md)
-* [verifyFileContent](documentation/actions/verify-file-content.ls)
+* [verifyFileContent](documentation/actions/verify_file_content.md)
 * [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
 * [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)
 
@@ -277,7 +264,7 @@ Tutorial Runner supports a variety of formatters:
   and cleans it out when done to show a clean summary of the test.
 
 * __robust formatter:__
-  The most robust formatter, similar to the one [Cucumber]() uses.
+  The most robust formatter, similar to the one [Cucumber](http://cucumber.io) uses.
   Shows test output before the steps.
   Use this formatter if the other ones don't work for you.
 

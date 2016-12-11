@@ -3,7 +3,7 @@
 - runs the command given in the code block in the workspace
 - waits for the command to finish before continuing the tutorial
 - a `$` at the beginning of the line is ignored
-- you can [configure](#configuration) global binaries that you your code base exports
+- you can [configure](#calling-global-commands) global binaries that you your code base exports
   so that your tutorial can call them directly
 
 <a class="tutorialRunner_runMarkdownInTutrun">

@@ -18,10 +18,11 @@ _Programmatic verification of documentation._
 
 Tutorial Runner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
-There are absolutely no requirements for the executable documentation must look like.
-Tutorial Runner can execute embedded source code in any language,
-prose, tables, bullet point lists,
-written in any human language.
+There are no requirements how the executable documentation must look like.
+Tutorial Runner can execute embedded source code in any programming language
+(that is available on your computer),
+tables, bullet point lists,
+as well as prose written in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.
 

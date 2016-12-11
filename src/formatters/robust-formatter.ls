@@ -16,6 +16,7 @@ class RobustFormatter
     @documentation-file-line = -1
 
     @steps-count = 0
+    @warnings-count = 0
 
     # Note: I have to define these attributes here,
     #       since doing so at the class level
@@ -64,10 +65,15 @@ class RobustFormatter
 
   # called when the whole test suite passed
   suite-success: (steps-count) ->
-    console.log bold green "\nSuccess! #{@steps-count} steps passed"
+    text = green "\nSuccess! #{@steps-count} steps passed"
+    if @warnings-count > 0
+      text += green ", "
+      text += magenta "#{@warnings-count} warnings"
+    console.log bold text
 
 
   warning: (@warning-message) ->
+    @warnings-count += 1
     @activity-text = ''
     @_print-activity-header bold . magenta
 

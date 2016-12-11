@@ -21,6 +21,7 @@ class ColoredFormatter
     @end-line = null
 
     @steps-count = 0
+    @warnings-count = 0
 
     # the console output created by the current activity
     @activity-console = ''
@@ -76,11 +77,16 @@ class ColoredFormatter
 
   # called when the whole test suite passed
   suite-success: ->
-    log-update bold green "\nSuccess! #{@steps-count} steps passed"
+    text = green "\nSuccess! #{@steps-count} steps passed"
+    if @warnings-count > 0
+      text += green ", "
+      text += magenta "#{@warnings-count} warnings"
+    console.log bold text
 
 
   # Called on general warnings
   warning: (@warning-message) ->
+    @warnings-count += 1
     @_print-header-and-console magenta
     log-update.done!
 

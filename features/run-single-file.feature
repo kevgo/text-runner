@@ -11,13 +11,16 @@ Feature: running a single MarkDown file
   Background:
     Given I am in a directory that contains the "multiple-files" example
 
+
   Scenario: testing a single file via "tut-run run"
     When running "tut-run run 2.md"
     Then it runs only the tests in "2.md"
 
+
   Scenario: testing a single file via "tut-run"
     When running "tut-run 2.md"
     Then it runs only the tests in "2.md"
+
 
   Scenario: testing a non-existing file
     When trying to run "tut-run zonk.md"

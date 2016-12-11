@@ -18,7 +18,7 @@ _A command-line tool
 that executes documentation written in Markdown programmatically._
 Similar to how a human reader would execute it if they were reading and following it.
 
-There are absolutely no limitations on how the documents it runs look like.
+There are absolutely no requirements for how the documents it runs must look like.
 Tutorial Runner can execute prose, tables, bullet point lists,
 in any human language.
 An example is the document you are reading right now,

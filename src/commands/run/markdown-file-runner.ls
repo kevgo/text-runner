@@ -80,9 +80,7 @@ class MarkdownFileRunner
           modifiers.splice modifiers.index-of('strong'), 1
 
         case node.type is 'heading_open'
-          heading =
-            lines: node.lines
-            text: ''
+          heading = lines: node.lines, text: ''
 
         case node.type is 'heading_close'
           result.push line: heading.lines[*-1], type: 'heading', content: heading.text, level: node.h-level

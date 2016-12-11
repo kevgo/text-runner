@@ -21,6 +21,9 @@ class MarkdownFileRunner
 
   # Prepares this runner
   prepare: ->
+    # Need to start the file here
+    # so that the formatter has the filename
+    # in case there are errors preparing.
     @formatter.start-file @file-path
     markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
     if markdown-text.length is 0

@@ -21,7 +21,7 @@ class IconicFormatter
     @end-line = null
 
     # the console output created by the current activity
-    @activity-console = ''
+    @console = ''
 
     # Note: I have to define these attributes here,
     #       since doing so at the class level
@@ -45,7 +45,7 @@ class IconicFormatter
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
     @_print-header yellow(figures.pointer), yes
-    @activity-console = ''
+    @console = ''
     @error-message = ''
     @warning-message = ''
 
@@ -104,11 +104,11 @@ class IconicFormatter
 
 
   _print-header-and-console: (figure, newline) ->
-    log-update @_activity-header(figure, newline) + @activity-console
+    log-update @_activity-header(figure, newline) + @console
 
 
   output: (text) ~>
-    @activity-console += dim strip-ansi text
+    @console += dim strip-ansi text
 
 
 

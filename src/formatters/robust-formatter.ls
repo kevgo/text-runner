@@ -65,6 +65,7 @@ class RobustFormatter
 
 
   warning: (@warning-message) ->
+    @activity-text = ''
     @_print-activity-header bold . magenta
 
 
@@ -76,8 +77,8 @@ class RobustFormatter
         text += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       text += ' -- '
     text += @activity-text if @activity-text
+    text += @warning-message if @warning-message
     text += "\n#{@error-message}" if @error-message
-    text += "\nwarning: #{@warning-message}" if @warning-message
     console.log color text
 
 

@@ -47,7 +47,6 @@ class TutorialRunner
 
 
   has-markdown-file: (filename) ->
-    console.log filename
     try
       fs.stat-sync filename
       yes

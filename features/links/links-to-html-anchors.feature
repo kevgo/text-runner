@@ -111,3 +111,20 @@ Feature: links to HTML anchors
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
       | WARNING  | link to local heading Hello |
+
+
+  Scenario: link to an existing caption in another file
+    Given my workspace contains the file "1.md" with the content:
+      """
+      A [working link to a caption](2.md#hello)
+      """
+    And my workspace contains the file "2.md" with the content:
+      """
+      ## Hello
+      """
+    When running "tut-run"
+    Then it signals:
+      | FILENAME | 1.md                          |
+      | LINE     | 1                             |
+      | WARNING  | link to caption Hello in 2.md |
+

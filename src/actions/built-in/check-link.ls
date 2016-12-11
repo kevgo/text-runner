@@ -40,7 +40,7 @@ function check-link-to-anchor-in-same-file filename, target, link-targets, forma
     formatter.error "link to non-existing local anchor #{red target}"
   else if target-entry.type is 'heading'
     formatter.success "link to local heading #{green target-entry.text}"
-  else if target-entry.type is 'anchor'
+  else
     formatter.success "link to ##{green target-entry.name}"
 
 
@@ -49,11 +49,14 @@ function check-link-to-anchor-in-other-file filename, target, link-targets, form
   if !link-targets[target-filename]
     formatter.error "link to anchor ##{cyan target-anchor} in non-existing file #{red target-filename}"
 
-  target = (link-targets[target-filename] or []) |> filter (.name is target-anchor) |> first
-  if !target
+  target-entry = (link-targets[target-filename] or []) |> filter (.name is target-anchor) |> first
+  if !target-entry
     formatter.error "link to non-existing anchor ##{red target-anchor} in #{cyan target-filename}"
 
-  formatter.success "link to #{cyan target-filename}##{green target-anchor}"
+  if target-entry.type is 'heading'
+    formatter.success "link to caption #{green target-entry.text} in #{cyan target-filename}"
+  else
+    formatter.success "link to #{cyan target-filename}##{green target-anchor}"
 
 
 function is-external-link target

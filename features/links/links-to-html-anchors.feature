@@ -93,8 +93,6 @@ Feature: links to HTML anchors
       """
     When trying to run "tut-run"
     Then the test fails with:
-      | FILENAME      | 1.md                                             |
-      | LINE          | 1                                                |
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
       | ERROR MESSAGE | link to non-existing anchor #zonk in 2.md |

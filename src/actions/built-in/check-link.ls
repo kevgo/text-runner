@@ -78,4 +78,4 @@ function is-link-to-anchor-in-same-file target
 
 
 function is-link-without-target target
-  !target.trim!
+  !target

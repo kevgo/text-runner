@@ -14,15 +14,16 @@
   <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
 </a>
 
-Tutorial Runner is a command-line tool
-that executes documentation written in Markdown (and soon HTML) programmatically,
-similar to how a human reader would execute it if they were reading and following it.
+A command-line tool
+that executes documentation written in Markdown programmatically.
+Similar to how a human reader would execute it if they were reading and following it.
 
 There are absolutely no limitations on how the documents it runs look like.
 Tutorial Runner can execute human-friendly prose, tables, or bullet point lists,
 in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.
+It also checks for broken links.
 
 
 ## Why you need it

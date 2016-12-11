@@ -17,7 +17,7 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
   | is-link-to-anchor-in-same-file target   =>  check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done
   | is-link-to-anchor-in-other-file target  =>  check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
   | is-external-link target                 =>  check-external-link target, formatter, done
-  | otherwise                               =>  check-internal-link target, formatter, done
+  | otherwise                               =>  check-link-to-filesystem target, formatter, done
 
 
 function check-external-link target, formatter, done
@@ -27,7 +27,7 @@ function check-external-link target, formatter, done
     done!
 
 
-function check-internal-link target, formatter, done
+function check-link-to-filesystem target, formatter, done
   fs.stat target, (err, stats) ->
     | err                  =>  formatter.error "link to non-existing local file #{red target}"
     | stats.is-directory!  =>  formatter.success "link to local directory #{green target}"

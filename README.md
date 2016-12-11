@@ -47,7 +47,7 @@ which is verified for correctness by Tutorial Runner.
   This allows adding end-user documentation as the outer-most layer
   to your [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) cycle:
   1. documentation via Tutorial Runner for smoke testing of the full stack
-  2. feature specs (for example via [Cucumber]()) for detailed black-box testing of each feature in isolation
+  2. feature specs (for example via [Cucumber](http://cucumber.io)) for detailed black-box testing of each feature in isolation
   3. unit tests for white-box testing of individual code components
 
 
@@ -105,7 +105,7 @@ for activities typically performed in software programming tutorials.
 
 * [change the current working directory](documentation/actions/cd.md)
 * [create a file](documentation/actions/create_file.md)
-* [verifyFileContent](documentation/actions/verify-file-content.ls)
+* [verifyFileContent](documentation/actions/verify_file_content.md)
 * [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
 * [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)
 
@@ -277,7 +277,7 @@ Tutorial Runner supports a variety of formatters:
   and cleans it out when done to show a clean summary of the test.
 
 * __robust formatter:__
-  The most robust formatter, similar to the one [Cucumber]() uses.
+  The most robust formatter, similar to the one [Cucumber](http://cucumber.io) uses.
   Shows test output before the steps.
   Use this formatter if the other ones don't work for you.
 

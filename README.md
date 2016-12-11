@@ -38,9 +38,7 @@ which is verified for correctness by Tutorial Runner.
   Know whether a change affects documented behavior.
 
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
-  Describe an idea via a readme file
-  and get early feedback on it before building it.
-  Make this documentation executable to let it drive the implementation.
+  Let executable documentation of your product drive its implementation.
 
 
 ## How it works

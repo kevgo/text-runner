@@ -32,10 +32,10 @@ which is verified for correctness by Tutorial Runner.
 * __evergreen tutorials:__
   Broken tutorials suck.
   Tutorial Runner enforces that your tutorials always describe how the product works,
-  every time you change anything in either the described product or its documentation.
+  every time you change the product or its documentation.
 
-* __change management and [semantic versioning](http://semver.org):__
-  Know whether a change breaks documented behavior.
+* __[semantic versioning](http://semver.org):__
+  Know whether a change affects documented behavior.
 
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
   Describe an idea via a readme file or tutorial

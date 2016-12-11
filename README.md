@@ -35,9 +35,8 @@ which is verified for correctness by Tutorial Runner.
   every time you change anything in either the described product or its documentation.
 
 * __change management and [semantic versioning](http://semver.org):__
-  Tutorial Runner tells you whether a change breaks documented behavior.
-  Knowing this before shipping the respective change allows you to either
-  implement it in a more backwards-compatible way or
+  Know whether a change breaks documented behavior and
+  make your implementation more backwards-compatible or
   update the documentation and announce the breaking change to your users.
 
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__

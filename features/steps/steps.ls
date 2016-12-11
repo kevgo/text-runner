@@ -164,10 +164,6 @@ module.exports = ->
     @verify-output table.rows-hash!
 
 
-  @Then /^it signals that "([^"]*)" is an unknown command$/ (command) ->
-    @verify-unknown-command command
-
-
   @Then /^the call fails with the error:$/ (expected-error) ->
     @verify-call-error expected-error
 

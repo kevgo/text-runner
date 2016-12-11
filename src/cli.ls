@@ -1,6 +1,5 @@
 require! {
   'cli-cursor'
-  './commands/help/help-command' : HelpCommand
   'end-child-processes'
   'minimist'
   '../package.json' : pkg
@@ -20,6 +19,5 @@ tutorial-runner = new TutorialRunner argv
 
 tutorial-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
   if err
-    new HelpCommand({err}).run!
     process.exit 1
   end-child-processes!

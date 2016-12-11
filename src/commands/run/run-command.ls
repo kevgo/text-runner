@@ -26,6 +26,7 @@ class RunCommand
       @_execute-runners done
     catch
       console.log e
+      throw e
 
 
   _create-runners: ->

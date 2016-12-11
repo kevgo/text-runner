@@ -9,4 +9,6 @@ Feature: unknown command
 
   Scenario: running an unknown command
     When trying to run the "zonk" command
-    Then it signals that "zonk" is an unknown command
+    Then the test fails with:
+      | ERROR MESSAGE | unknown command: zonk |
+      | EXIT CODE     | 1                     |

@@ -22,16 +22,16 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
 
 function check-external-link target, formatter, done
   request target, (err) ->
-    | err  =>  formatter.warning "link to non-existing external website #{cyan target}"
-    | _    =>  formatter.success "link to external website #{cyan target}"
+    | err  =>  formatter.warning "link to non-existing external website #{red target}"
+    | _    =>  formatter.success "link to external website #{green target}"
     done!
 
 
 function check-internal-link target, formatter, done
   fs.stat target, (err, stats) ->
-    | err                  =>  formatter.error "link to non-existing local file #{cyan target}"
-    | stats.is-directory!  =>  formatter.success "link to local directory #{cyan target}"
-    | _                    =>  formatter.success "link to local file #{cyan target}"
+    | err                  =>  formatter.error "link to non-existing local file #{red target}"
+    | stats.is-directory!  =>  formatter.success "link to local directory #{green target}"
+    | _                    =>  formatter.success "link to local file #{green target}"
     done!
 
 

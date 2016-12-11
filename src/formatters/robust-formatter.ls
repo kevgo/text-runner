@@ -9,6 +9,12 @@ require! {
 class RobustFormatter extends Formatter
 
 
+  # Called on general errors
+  error: (@error-message) ->
+    @_print-activity-header bold . red
+    process.exit 1
+
+
   output: (text) ~>
     console.log dim text.trim!
 
@@ -19,16 +25,11 @@ class RobustFormatter extends Formatter
     @_print-activity-header green
 
 
-  # Called on general errors
-  error: (@error-message) ->
-    @_print-activity-header bold . red
-    process.exit 1
-
-
   warning: (@warning-message) ->
     super ...
     @activity-text = ''
     @_print-activity-header bold . magenta
+
 
 
   _print-activity-header: (color) ->

@@ -13,8 +13,19 @@ require! {
 class ColoredFormatter extends Formatter
 
 
+  # Called on general errors
+  error: (@error-message) ->
+    @_print-header red
+    process.exit 1
+
+
   output: (text) ~>
     @console += dim strip-ansi text
+
+
+  # Called when we start performing an activity that was defined in a block
+  refine: (@activity-text) ->
+    @_print-header yellow, yes
 
 
   # Called when we start performing an activity that was defined in a block
@@ -30,22 +41,12 @@ class ColoredFormatter extends Formatter
     log-update.done!
 
 
-  # Called on general errors
-  error: (@error-message) ->
-    @_print-header red
-    process.exit 1
-
-
-  # Called when we start performing an activity that was defined in a block
-  refine: (@activity-text) ->
-    @_print-header yellow, yes
-
-
   # Called on general warnings
   warning: (@warning-message) ->
     super!
     @_print-header-and-console magenta
     log-update.done!
+
 
 
   _activity-header: (color, newline) ->

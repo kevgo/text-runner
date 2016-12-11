@@ -4,7 +4,7 @@ Feature: verifying links to external websites
   I want to know whether links to external websites work
   So that I can point my readers to further reading.
 
-  - dead links pointing to external websites cause a warning
+  - links pointing to non-existing external websites cause a warning
 
 
   Scenario: link to existing external website

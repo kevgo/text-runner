@@ -35,9 +35,7 @@ which is verified for correctness by Tutorial Runner.
   every time you change anything in either the described product or its documentation.
 
 * __change management and [semantic versioning](http://semver.org):__
-  Know whether a change breaks documented behavior and
-  make your implementation more backwards-compatible or
-  update the documentation and announce the breaking change to your users.
+  Know whether a change breaks documented behavior.
 
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
   Before spending time and budget building or even prototyping functionality,

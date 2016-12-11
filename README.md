@@ -17,8 +17,8 @@
 Tutorial Runner is a command-line tool
 that executes documentation written in Markdown (and soon HTML) programmatically,
 similar to how a human reader would execute it if they were reading and following it.
-What sets Tutorial Runner apart from [related technologies](#related-work)
-is that there are absolutely no limitations on how the documents it runs look like.
+
+There are absolutely no limitations on how the documents it runs look like.
 Tutorial Runner can execute human-friendly prose, tables, or bullet point lists,
 in any human language.
 An example is the document you are reading right now,

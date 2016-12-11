@@ -8,6 +8,7 @@ require! {
 }
 
 
+# Checks for broken hyperlinks
 module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
   node = nodes[0]
   target = node.content

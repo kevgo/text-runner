@@ -38,10 +38,10 @@ which is verified for correctness by Tutorial Runner.
   Know whether a change affects documented behavior.
 
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
-  Describe an idea via a readme file or tutorial
+  Describe an idea via a readme file
   and get early feedback on it from potential users.
-  Making this end-user facing documentation executable
-  allows it to drive the implementation as part of your BDD cycle.
+  Let this readme drive the implementation
+  by making it executable.
 
 
 ## How it works

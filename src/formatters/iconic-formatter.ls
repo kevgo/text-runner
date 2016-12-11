@@ -100,9 +100,12 @@ class IconicFormatter
       if @start-line
         @activity-header += ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       @activity-header += " -- "
-    @activity-header += bold(@activity-text) if @activity-text
-    @activity-header += bold(@warning-message) if @warning-message
-    @activity-header += "\n#{@red error-message}" if @error-message
+    if @error-message
+      @activity-header += bold(@error-message)
+    else if @warning-message
+      @activity-header += bold(@warning-message)
+    else
+      @activity-header += bold(@activity-text) if @activity-text
     @activity-header += "\n" if newline
 
 

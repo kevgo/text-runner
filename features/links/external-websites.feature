@@ -1,4 +1,3 @@
-@clionly
 Feature: verifying links to external websites
 
   As a tutorial writer
@@ -13,11 +12,11 @@ Feature: verifying links to external websites
       """
       A [working external link](http://google.com)
       """
-    When running "tut-run 1.md"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
-      | WARNING  | link to external website http://google.com |
+      | MESSAGE  | link to external website http://google.com |
 
 
   Scenario: broken external link
@@ -25,7 +24,7 @@ Feature: verifying links to external websites
       """
       A [broken external link](http://oeanuthaoenuthoaeu.com)
       """
-    When running "tut-run 1.md"
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                                                                |
       | LINE     | 1                                                                   |

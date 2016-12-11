@@ -38,11 +38,10 @@ which is verified for correctness by Tutorial Runner.
   Know whether a change breaks documented behavior.
 
 * __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
-  Before spending time and budget building or even prototyping functionality,
-  describe it via a readme file or tutorial
-  and get early feedback on your ideas from potential users.
-  Tutorial Runner makes this end-user facing documentation executable,
-  and runs it as part of your test suite.
+  Describe an idea via a readme file or tutorial
+  and get early feedback on it from potential users.
+  Making this end-user facing documentation executable
+  allows it to drive the implementation as part of your BDD cycle.
 
 
 ## How it works

@@ -1,7 +1,7 @@
 Feature: verifying links to external websites
 
   As a tutorial writer
-  I want to know whether links to external websites still work
+  I want to know whether links to external websites work
   So that I can point my readers to further reading.
 
   - dead links pointing to external websites cause a warning

@@ -47,6 +47,7 @@ class IconicFormatter extends Formatter
     log-update.done!
 
 
+
   # Returns the activity header to be printed
   _activity-header: (figure, newline) ->
     result = "#{figure} "

@@ -14,8 +14,6 @@
   <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
 </a>
 
-_Programmatic verification of documentation._
-
 Tutorial Runner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
 There are no requirements how the executable documentation must look like.

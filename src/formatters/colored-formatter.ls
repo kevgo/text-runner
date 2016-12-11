@@ -1,6 +1,7 @@
 require! {
   'chalk' : {bold, dim, green, magenta, red, yellow}
   'figures'
+  './formatter' : Formatter
   'indent-string'
   'log-update'
   'prelude-ls' : {compact, unique}
@@ -9,55 +10,23 @@ require! {
 
 
 # The standard formatter, uses green, yellow, and red icons
-class ColoredFormatter
-
-  ->
-
-    # the path of the documentation file that is currently processed
-    @documentation-file-path = ''
-
-    # the line within the documentation file at which the currently processed block starts
-    @start-line = null
-    @end-line = null
-
-    @steps-count = 0
-    @warnings-count = 0
-
-    # the console output created by the current activity
-    @activity-console = ''
-
-    # Note: I have to define these attributes here,
-    #       since doing so at the class level
-    #       binds them to the class scope for some reason
-    @stdout =
-      write: @output
-
-    @stderr =
-      write: @output
-
-    @console =
-      log: (text) ~>
-        @output "#{text}\n"
+class ColoredFormatter extends Formatter
 
 
-
-  # called when we start processing a markdown file
-  start-file: (@documentation-file-path) ->
+  output: (text) ~>
+    @console += dim strip-ansi text
 
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
+    super ...
     @_print-header yellow, yes
-    @console = ''
-    @error-message = ''
-    @warning-message = ''
-    @steps-count += 1
 
 
   # called when the last started activity finished successful
   # optionally allows to define the final text to be displayed
   success: (@activity-text = @activity-text)->
-    @_print-header-and-console green
+    @_print-header green
     log-update.done!
 
 
@@ -72,29 +41,17 @@ class ColoredFormatter
     @_print-header yellow, yes
 
 
-  set-lines: (@start-line, @end-line) ->
-
-
-  # called when the whole test suite passed
-  suite-success: ->
-    text = green "\nSuccess! #{@steps-count} steps passed"
-    if @warnings-count > 0
-      text += green ", "
-      text += magenta "#{@warnings-count} warnings"
-    console.log bold text
-
-
   # Called on general warnings
   warning: (@warning-message) ->
-    @warnings-count += 1
+    super!
     @_print-header-and-console magenta
     log-update.done!
 
 
   _activity-header: (color, newline) ->
     result = ""
-    if @documentation-file-path
-      result += color "#{@documentation-file-path}"
+    if @file-path
+      result += color "#{@file-path}"
       if @start-line
         result += color ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += color " -- "
@@ -111,10 +68,6 @@ class ColoredFormatter
 
   _print-header-and-console: (figure, newline) ->
     log-update @_activity-header(figure, newline) + @console
-
-
-  output: (text) ~>
-    @activity-console += dim strip-ansi text
 
 
 

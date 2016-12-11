@@ -16,7 +16,7 @@
 
 _Programmatic verification of documentation._
 
-Tutorial Runner executes documentation written in Markdown
+Tutorial Runner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
 There are absolutely no requirements for the executable documentation must look like.
 Tutorial Runner can execute embedded source code in any language,

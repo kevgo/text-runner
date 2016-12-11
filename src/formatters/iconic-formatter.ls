@@ -24,6 +24,7 @@ class IconicFormatter
     @console = ''
 
     @steps-count = 0
+    @warnings-count = 0
 
     # Note: I have to define these attributes here,
     #       since doing so at the class level
@@ -76,13 +77,18 @@ class IconicFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
+    @warnings-count += 1
     @_print-header-and-console magenta figures.warning
     log-update.done!
 
 
   # called when the whole test suite passed
   suite-success: ->
-    log-update bold green "\nSuccess! #{@steps-count} steps passed"
+    text = green "\nSuccess! #{@steps-count} steps passed"
+    if @warnings-count > 0
+      text += green ", "
+      text += magenta "#{@warnings-count} warnings"
+    console.log bold text
 
 
   _activity-header: (figure, newline) ->

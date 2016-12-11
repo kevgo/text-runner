@@ -101,13 +101,15 @@ class MarkdownFileRunner
   _build-link-targets: (tree) ->
     @link-targets[@file-path] or= []
     for node in tree
+      switch node.type
 
-      if node.type is 'htmltag'
-        if (matches = node.content.match /<a name="([^"]*)">/)
-          @link-targets[@file-path].push type: 'anchor', name: matches[1]
+        case 'htmltag'
+          if (matches = node.content.match /<a name="([^"]*)">/)
+            @link-targets[@file-path].push type: 'anchor', name: matches[1]
 
-      if node.type is 'heading'
-        @link-targets[@file-path].push type: 'heading', name: dashify(node.content), text: node.content, level: node.level
+        case 'heading'
+          @link-targets[@file-path].push type: 'heading', name: dashify(node.content), text: node.content, level: node.level
+
     tree
 
 

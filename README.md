@@ -16,6 +16,7 @@
 
 Tutorial Runner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
+It also checks for broken hyperlinks.
 
 There are no requirements how the executable documentation must look like:
 You can execute embedded source code in any programming language
@@ -24,8 +25,6 @@ tables, bullet point lists,
 as well as plain text in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by Tutorial Runner.
-
-It also checks for broken hyperlinks.
 
 
 ## Why you need it

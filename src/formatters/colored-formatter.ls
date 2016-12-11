@@ -20,9 +20,6 @@ class ColoredFormatter
     @start-line = null
     @end-line = null
 
-    # the header for the current activity, which will be printed differently later
-    @activity-header = ''
-
     # the console output created by the current activity
     @activity-console = ''
 
@@ -47,32 +44,28 @@ class ColoredFormatter
 
   # Called when we start performing an activity that was defined in a block
   start: (@activity-text) ->
-    @_set-activity-header yellow, yes
-    @activity-console = ''
-    @_print!
+    @_print-header yellow, yes
+    @console = ''
+    @error-message = ''
+    @warning-message = ''
 
 
   # called when the last started activity finished successful
   # optionally allows to define the final text to be displayed
   success: (@activity-text = @activity-text)->
-    @_set-activity-header green
-    @activity-console = ''
-    @_print!
+    @_print-header-and-console green
     log-update.done!
-    @activity-header = ''
 
 
   # Called on general errors
   error: (@error-message) ->
-    @_set-activity-header red
-    @_print!
+    @_print-header red
     process.exit 1
 
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
-    @_set-activity-header yellow, yes
-    @_print!
+    @_print-header yellow, yes
 
 
   set-lines: (@start-line, @end-line) ->
@@ -85,33 +78,34 @@ class ColoredFormatter
 
   # Called on general warnings
   warning: (@warning-message) ->
-    @activity-text = ''
-    @activity-console = ''
-    @_set-activity-header magenta
-    @_print!
+    @_print-header-and-console magenta
     log-update.done!
 
 
-  _set-activity-header: (color, newline) ->
-    @activity-header = ""
+  _activity-header: (color, newline) ->
+    result = ""
     if @documentation-file-path
-      @activity-header += color "#{@documentation-file-path}"
+      result += color "#{@documentation-file-path}"
       if @start-line
-        @activity-header += color ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
-      @activity-header += color " -- "
-    @activity-header += color @activity-text if @activity-text
-    @activity-header += color @warning-message if @warning-message
-    @activity-header += "\n#{red @error-message}" if @error-message
-    @activity-header += "\n" if newline
+        result += color ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
+      result += color " -- "
+    result += color @activity-text if @activity-text
+    result += color @warning-message if @warning-message
+    result += "\n#{red @error-message}" if @error-message
+    result += "\n" if newline
+    result
 
 
-  _print: ->
-    log-update @activity-header + @activity-console
+  _print-header: (figure, newline) ->
+    log-update @_activity-header figure, newline
+
+
+  _print-header-and-console: (figure, newline) ->
+    log-update @_activity-header(figure, newline) + @console
 
 
   output: (text) ~>
     @activity-console += dim strip-ansi text
-    @_print!
 
 
 

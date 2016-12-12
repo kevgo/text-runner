@@ -94,6 +94,12 @@ class MarkdownFileRunner
           result.push line: heading.lines[*-1], type: 'heading', content: heading.text, level: node.h-level
           heading = null
 
+        case @_is-html-image-tag node
+          result.push line: node-line, type: 'image', src: @_html-image-tag-src node
+
+        case node.type is 'image'
+          result.push line: node-line, type: 'image', src: node.src
+
         case heading and node.type is 'text'
           heading.text += node.content
 
@@ -119,6 +125,16 @@ class MarkdownFileRunner
           @link-targets[@file-path].push type: 'heading', name: dashify(node.content), text: node.content, level: node.level
 
     tree
+
+
+  _html-image-tag-src: (node) ->
+    matches = node.content.match /<img.*src="([^"]*)".*>/
+    matches[1]
+
+
+  # Returns whether this AST node represents an HTML tag
+  _is-html-image-tag: (node) ->
+    node.type is 'htmltag' and /<img [^>]*src=".*?".*?>/.test node.content
 
 
   _iterate-nodes: (tree) ->
@@ -152,6 +168,16 @@ class MarkdownFileRunner
 
         case current-runner-type
           nodes-for-current-runner.push node if nodes-for-current-runner
+
+        case node.type is 'image'
+          result.push do
+            filename: @file-path
+            start-line: node.line
+            end-line: node.line
+            nodes: [node]
+            runner: @actions.action-for 'checkImage'
+            formatter: @formatter
+            configuration: @configuration
 
         case @_is-link node
           result.push do

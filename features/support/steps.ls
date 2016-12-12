@@ -55,6 +55,10 @@ module.exports = ->
     fs.mkdir-sync path.join(@root-dir.name, dir)
 
 
+  @Given /^my workspace contains an image "([^"]*)"$/ (image-name) ->
+    cp path.join(__dirname, image-name), path.join(@root-dir.name, image-name)
+
+
   @Given /^the configuration file:$/ (content) ->
     fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), content
 

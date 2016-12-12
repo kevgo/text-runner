@@ -27,15 +27,18 @@ class MarkdownFileRunner
     @formatter.start-file @file-path
     fs.read-file @file-path, encoding: 'utf8', (err, markdown-text) ~>
       | err  =>  return done err
-      markdown-text .= trim!
-      if markdown-text.length is 0
-        @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
-        return done 1
-      @run-data = @markdown-parser.parse markdown-text, {}
-        |> @_standardize-ast
-        |> @_build-link-targets
-        |> @_iterate-nodes
-      done!
+      try
+        markdown-text .= trim!
+        if markdown-text.length is 0
+          @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
+          return done 1
+        @run-data = @markdown-parser.parse markdown-text, {}
+          |> @_standardize-ast
+          |> @_build-link-targets
+          |> @_iterate-nodes
+        done!
+      catch
+        done e
 
 
   # Runs this runner

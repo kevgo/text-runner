@@ -1,5 +1,6 @@
 require! {
   'camelcase'
+  'chalk' : {red}
   'glob'
   'interpret'
   'path'
@@ -19,7 +20,10 @@ class ActionManager
 
   # Provides the action for the block with the given name
   action-for: (block-name) ->
-    @actions[block-name.to-lower-case!] or @formatter.error "unknown action: '#{block-name}'"
+    if !result = @actions[block-name.to-lower-case!]
+      @formatter.error "unknown action: #{red block-name}"
+      throw new Error
+    result
 
 
   # Returns all possible filename extensions that actions can have

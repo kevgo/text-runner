@@ -22,8 +22,9 @@ class RunCommand
     try
       @_create-working-dir!
       @_create-runners!
-      @_prepare-runners!
-      @_execute-runners done
+      @_prepare-runners (err) ~>
+        | err  =>  return done err
+        @_execute-runners done
     catch
       console.log e
       throw e
@@ -70,12 +71,12 @@ class RunCommand
         done!
 
 
-  _prepare-runners: ->
-    try
-      for runner in @runners
-        runner.prepare!
-    catch e
-      console.log e
+  _prepare-runner: (runner, done) ->
+    runner.prepare done
+
+
+  _prepare-runners: (done) ->
+    async.each @runners, @_prepare-runner, done
 
 
 

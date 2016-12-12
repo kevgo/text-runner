@@ -1,3 +1,4 @@
+@clionly
 Feature: running inline blocks of Javascript
 
   As a tutorial writer describing a Javascript tool

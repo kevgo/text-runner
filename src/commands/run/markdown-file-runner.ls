@@ -20,18 +20,22 @@ class MarkdownFileRunner
 
 
   # Prepares this runner
-  prepare: ->
+  prepare: (done) ->
     # Need to start the file here
     # so that the formatter has the filename
     # in case there are errors preparing.
     @formatter.start-file @file-path
-    markdown-text = fs.read-file-sync(@file-path, 'utf8').trim!
-    if markdown-text.length is 0
-      @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
-    @run-data = @markdown-parser.parse markdown-text, {}
-      |> @_standardize-ast
-      |> @_build-link-targets
-      |> @_iterate-nodes
+    fs.read-file @file-path, encoding: 'utf8', (err, markdown-text) ~>
+      | err  =>  return done err
+      markdown-text .= trim!
+      if markdown-text.length is 0
+        @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
+        return done 1
+      @run-data = @markdown-parser.parse markdown-text, {}
+        |> @_standardize-ast
+        |> @_build-link-targets
+        |> @_iterate-nodes
+      done!
 
 
   # Runs this runner

@@ -2,8 +2,8 @@ require! {
   './activity-list-builder' : ActivityListBuilder
   'async'
   'chalk' : {cyan}
-  'dashify'
   'fs'
+  './link-target-builder' : LinkTargetBuilder
   './markdown-parser' : MarkdownParser
   'path'
   'prelude-ls' : {reject}
@@ -16,9 +16,10 @@ debug = require('debug')('markdown-file-runner')
 # Runs the given Markdown file
 class MarkdownFileRunner
 
-  ({@file-path, @formatter, actions, @configuration, @link-targets}) ->
+  ({@file-path, @formatter, actions, @configuration, link-targets}) ->
     @parser = new MarkdownParser
-    @activity-list-builder = new ActivityListBuilder {actions, @file-path, @formatter, @configuration, @link-targets}
+    @activity-list-builder = new ActivityListBuilder {actions, @file-path, @formatter, @configuration, link-targets}
+    @link-target-builder = new LinkTargetBuilder {link-targets}
 
 
   # Prepares this runner
@@ -35,7 +36,7 @@ class MarkdownFileRunner
           @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
           return done 1
         @run-data = @parser.parse markdown-text
-          |> @_build-link-targets
+          |> @link-target-builder.build-link-targets @file-path, _
           |> @activity-list-builder.build
         done!
       catch
@@ -66,21 +67,6 @@ class MarkdownFileRunner
       catch
         block.formatter.error e
         done e
-
-
-  _build-link-targets: (tree) ->
-    @link-targets[@file-path] or= []
-    for node in tree
-      switch node.type
-
-        case 'htmltag'
-          if (matches = node.content.match /<a name="([^"]*)">/)
-            @link-targets[@file-path].push type: 'anchor', name: matches[1]
-
-        case 'heading'
-          @link-targets[@file-path].push type: 'heading', name: dashify(node.content), text: node.content, level: node.level
-
-    tree
 
 
 module.exports = MarkdownFileRunner

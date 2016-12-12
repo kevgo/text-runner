@@ -1,9 +1,0 @@
-{
-  "name": "custom-action-async",
-  "version": "0.0.1",
-  "license": "ISC",
-  "devDependencies": {
-    "livescript": "1.5.0",
-    "wait": "0.1.0"
-  }
-}

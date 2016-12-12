@@ -5,10 +5,10 @@ node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   bin/lint
-  node_modules/.bin/mycha
+  node_modules/.bin/mycha --reporter=dot
   echo
-  bin/cuc-api
-  bin/cuc-cli
+  bin/cuc-api --format progress
+  bin/cuc-cli --format progress
   echo
   echo
   bin/docs --format colored

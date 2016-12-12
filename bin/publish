@@ -5,7 +5,7 @@ set -e
 tag=$1
 if [ -z "$tag" ]; then
   echo
-  echo "Usage: publish <version>"
+  echo "Usage: publish [patch|minor|major]"
   echo
   exit 1
 fi
@@ -27,7 +27,7 @@ echo
 tput bold
 echo "PUBLISHING VERSION $tag"
 tput sgr0
-git tag -a "$tag" -m "$tag"
+npm version "$tag"
 git push
 git push --tags
 

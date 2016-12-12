@@ -8,8 +8,13 @@ Feature: unknown actions
 
 
   Scenario: using an unknown action
-    When trying to execute the "unknown-action" example
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tutorialRunner_unknownAction">
+      </a>
+      """
+    When trying to run tut-run
     Then the test fails with:
       | ERROR MESSAGE | unknown action: unknownAction |
-      | FILENAME      | unknown-action.md             |
+      | FILENAME      | 1.md                          |
       | EXIT CODE     | 1                             |

@@ -9,7 +9,12 @@ Feature: waiting for output of long-running processes
 
 
   Scenario: waiting for output
-    Given my tutorial is starting the "long-running" example
+    Given my workspace contains the file "long-running.md" with the content:
+      """
+      http = require('http')
+      http.createServer(function(req, res) { res.end('long-running server') })
+          .listen(4000, '127.0.0.1', function() { console.log('running at port 4000') })
+      """
     And my workspace contains the file "wait.md" with the content:
       """
       <a class="tutorialRunner_waitForOutput">

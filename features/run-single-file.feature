@@ -9,7 +9,22 @@ Feature: running a single MarkDown file
 
 
   Background:
-    Given I am in a directory that contains the "multiple-files" example
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tutorialRunner_runJavascript">
+      ```
+      console.log("file 1.md")
+      ```
+      </a>
+      """
+    Given my workspace contains the file "2.md" with the content:
+      """
+      <a class="tutorialRunner_runJavascript">
+      ```
+      console.log("file 2.md")
+      ```
+      </a>
+      """
 
 
   Scenario: testing a single file via "tut-run run"

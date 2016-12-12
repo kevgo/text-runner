@@ -16,8 +16,7 @@ commands-text = delete argv._
 commands = (commands-text[0] or '') |> split ' '
                                     |> filter -> it isnt 'tut-run'
 tutorial-runner = new TutorialRunner argv
-
 tutorial-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
+  end-child-processes!
   if err
     process.exit 1
-  end-child-processes!

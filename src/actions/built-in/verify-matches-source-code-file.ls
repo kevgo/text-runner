@@ -36,5 +36,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   jsdiff-console actual-content.trim!, expected-content.trim!, (err) ~>
     if err
       formatter.error "mismatching content in #{cyan bold file-path}:\n#{err.message}"
-    formatter.success!
-    done!
+      done 1
+    else
+      formatter.success!
+      done!

@@ -40,8 +40,9 @@ class IconicFormatter extends Formatter
 
 
   # Called on general warnings
-  warning: (@warning-message) ->
+  warning: (warning-message) ->
     super!
+    @warning-message = warning-message  # calling super changes the this object somehow
     @_print-header-and-console magenta figures.warning
     log-update.done!
 
@@ -59,8 +60,8 @@ class IconicFormatter extends Formatter
       result += bold(@error-message)
     else if @warning-message
       result += bold(@warning-message)
-    else
-      result += bold(@activity-text) if @activity-text
+    else if @activity-text
+      result += bold(@activity-text)
     result += "\n" if newline
     result
 

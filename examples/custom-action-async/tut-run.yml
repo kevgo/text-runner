@@ -1,8 +1,0 @@
-files: '**/*.md'
-format: iconic
-useTempDirectory: false
-
-actions:
-
-  runConsoleCommand:
-    globals: []

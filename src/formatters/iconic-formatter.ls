@@ -15,7 +15,6 @@ class IconicFormatter extends Formatter
   # Called on general errors
   error: (@error-message) ->
     @_print-header-and-console red figures.cross
-    process.exit 1
 
 
   output: (text) ~>

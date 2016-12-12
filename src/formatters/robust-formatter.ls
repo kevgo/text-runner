@@ -12,7 +12,6 @@ class RobustFormatter extends Formatter
   # Called on general errors
   error: (@error-message) ->
     @_print-activity-header bold . red
-    process.exit 1
 
 
   output: (text) ~>

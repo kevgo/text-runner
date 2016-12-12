@@ -13,7 +13,7 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
   target = nodes[0].content
   formatter.start "checking link to #{cyan target}"
   switch
-  | is-link-without-target target           =>  formatter.error "link without target" ; done!
+  | is-link-without-target target           =>  formatter.error "link without target" ; return done 1
   | is-link-to-anchor-in-same-file target   =>  check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done
   | is-link-to-anchor-in-other-file target  =>  check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
   | is-external-link target                 =>  check-external-link target, formatter, done
@@ -29,7 +29,7 @@ function check-external-link target, formatter, done
 
 function check-link-to-filesystem target, formatter, done
   fs.stat target, (err, stats) ->
-    | err                  =>  formatter.error "link to non-existing local file #{red target}"
+    | err                  =>  formatter.error "link to non-existing local file #{red target}" ; return done 1
     | stats.is-directory!  =>  formatter.success "link to local directory #{green target}"
     | _                    =>  formatter.success "link to local file #{green target}"
     done!
@@ -39,7 +39,8 @@ function check-link-to-anchor-in-same-file filename, target, link-targets, forma
   target-entry = link-targets[filename] |> filter (.name is target.substr 1) |> first
   if !target-entry
     formatter.error "link to non-existing local anchor #{red target}"
-  else if target-entry.type is 'heading'
+    return done 1
+  if target-entry.type is 'heading'
     formatter.success "link to local heading #{green target-entry.text}"
   else
     formatter.success "link to ##{green target-entry.name}"

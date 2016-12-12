@@ -10,6 +10,6 @@ Feature: unknown actions
   Scenario: using an unknown action
     When trying to execute the "unknown-action" example
     Then the test fails with:
-      | ERROR MESSAGE | unknown action: 'unknownAction' |
-      | FILENAME      | unknown-action.md               |
-      | EXIT CODE     | 1                               |
+      | ERROR MESSAGE | unknown action: unknownAction |
+      | FILENAME      | unknown-action.md             |
+      | EXIT CODE     | 1                             |

@@ -24,13 +24,13 @@ class TutorialRunner
     #       because the constructor cannot run async operations
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
       ..launch {}, ({config-path}) ~>
-        | !@has-command! and !@has-markdown-file(@command)  =>  return @_unknown-command done
-        | !@has-command! and @has-markdown-file(@command)   =>  [@command, @args] = ['run', @command]
-        | @has-command                                      =>  @args = @args?[0]
-
         @configuration = new Configuration config-path, @constructor-args
         (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
           | err  =>  new HelpCommand({err}).run! ; return done err
+          | !@has-command! and !@has-markdown-file(@command)  =>  return @_unknown-command done
+          | !@has-command! and @has-markdown-file(@command)   =>  [@command, @args] = ['run', @command]
+          | @has-command                                      =>  @args = @args?[0]
+
           @actions = new ActionManager @formatter
           try
             CommandClass = require @command-path!
@@ -61,7 +61,7 @@ class TutorialRunner
 
 
   _unknown-command: (done) ->
-    console.log "unknown command: #{red @command}"
+    @formatter.error "unknown command: #{red @command}"
     done new Error "unknown command: #{@command}"
 
 

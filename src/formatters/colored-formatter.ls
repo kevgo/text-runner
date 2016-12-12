@@ -41,8 +41,9 @@ class ColoredFormatter extends Formatter
 
 
   # Called on general warnings
-  warning: (@warning-message) ->
+  warning: (warning-message) ->
     super!
+    @warning-message = warning-message  # calling super changes the this object somehow
     @_print-header-and-console magenta
     log-update.done!
 
@@ -55,9 +56,12 @@ class ColoredFormatter extends Formatter
       if @start-line
         result += color ":#{[@start-line, @end-line] |> compact |> unique |> (.join '-')}"
       result += color " -- "
-    result += color @activity-text if @activity-text
-    result += color @warning-message if @warning-message
-    result += "\n#{red @error-message}" if @error-message
+    if @error-message
+      result += "\n#{red @error-message}"
+    else if @warning-message
+      result += color @warning-message
+    else if @activity-text
+      result += color @activity-text
     result += "\n" if newline
     result
 

@@ -86,11 +86,6 @@ module.exports = ->
 
 
 
-  @When /^(trying to execute|executing) the tutorial(?: runner in an empty workspace)?$/, timeout: 4000, (trying, done) ->
-    @execute command: 'run', ~>
-      done if trying is 'executing' and (@error or @exit-code) then (@error or @exit-code)
-
-
   @When /^(trying to execute|executing) the "([^"]+)" example$/, timeout: 100_000, (trying, example-name, done) ->
     ncp "examples/#{example-name}" @root-dir.name, N ~>
       @execute command: 'run', ~>

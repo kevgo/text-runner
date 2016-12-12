@@ -18,7 +18,7 @@ Feature: marking console commands with preceding dollar signs
       ```
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | running-with-dollar-sign.md             |
       | LINE     | 1-6                                     |

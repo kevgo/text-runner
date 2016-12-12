@@ -20,7 +20,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | creator.md            |
       | LINE     | 1-7                   |
@@ -40,7 +40,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | creator.md                       |
       | LINE          | 1-5                              |
@@ -56,7 +56,7 @@ Feature: creating files with content
       __one.txt__
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | creator.md                          |
       | LINE          | 1                                   |
@@ -77,7 +77,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | creator.md                                    |
       | LINE          | 1-8                                           |
@@ -102,7 +102,7 @@ Feature: creating files with content
 
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | creator.md                                                                |
       | LINE          | 1-12                                                                      |

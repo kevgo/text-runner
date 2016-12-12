@@ -18,7 +18,7 @@ Feature: changing the working directory
         [foo](foo)
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | directory_changer.md            |
       | LINE     | 1                               |
@@ -33,7 +33,7 @@ Feature: changing the working directory
         [foo](foo)
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | directory_changer.md            |
       | LINE          | 1                               |

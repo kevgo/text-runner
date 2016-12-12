@@ -17,7 +17,7 @@ Feature: running multiple console commands
       ```
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | running-multiple-commands.md            |
       | LINE     | 1-6                                     |

@@ -179,7 +179,7 @@ class MarkdownFileRunner
             formatter: @formatter
             configuration: @configuration
 
-        case @_is-link node
+        case @_is-markdown-link node
           result.push do
             filename: @file-path
             start-line: node.line
@@ -190,11 +190,27 @@ class MarkdownFileRunner
             configuration: @configuration
             link-targets: @link-targets
 
+        case target = @_is-html-link node
+          result.push do
+            filename: @file-path
+            start-line: node.line
+            end-line: node.line
+            nodes: [content: target]
+            runner: @actions.action-for 'checkLink'
+            formatter: @formatter
+            configuration: @configuration
+            link-targets: @link-targets
+
     result
 
 
+  _is-html-link: (node) ->
+    if node.type is 'htmltag' and matches = node.content.match /<a[^>]*href="([^"]*)".*?>/
+      matches[1]
+
+
   # Returns whether the given node is a normal hyperlink
-  _is-link: (node) ->
+  _is-markdown-link: (node) ->
     node.type is 'link_open'
 
 

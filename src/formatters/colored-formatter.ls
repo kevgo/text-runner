@@ -16,7 +16,6 @@ class ColoredFormatter extends Formatter
   # Called on general errors
   error: (@error-message) ->
     @_print-header red
-    process.exit 1
 
 
   output: (text) ~>

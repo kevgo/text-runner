@@ -46,7 +46,7 @@ class RunCommand
   # Returns all the markdown files for this tutorial
   _markdown-files: ->
     if (files = glob.sync @configuration.get 'files').length is 0
-      @formatter.error 'no Markdown files found'
+      @formatter.warning 'no Markdown files found'
     if @filename
       files |> filter ~> it is @filename
     else

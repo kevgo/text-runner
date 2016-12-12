@@ -13,10 +13,9 @@ Feature: finding files in certain directories only
       files: '*.md'
       """
     And a runnable file "foo/bar.md"
-    When trying to execute the tutorial
-    Then the test fails with:
-      | ERROR MESSAGE | no Markdown files found |
-      | EXIT CODE     | 1                       |
+    When executing the tutorial
+    Then it signals:
+      | WARNING | no Markdown files found |
 
 
   Scenario: the config file contains no "files" key

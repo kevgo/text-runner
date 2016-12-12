@@ -3,9 +3,9 @@ require! {
   'chalk' : {cyan}
   'dashify'
   'fs'
+  './markdown-parser' : MarkdownParser
   'path'
   'prelude-ls' : {reject}
-  'remarkable' : Remarkable
   './searcher' : Searcher
   'wait' : {wait}
 }
@@ -16,7 +16,7 @@ debug = require('debug')('markdown-file-runner')
 class MarkdownFileRunner
 
   ({@file-path, @formatter, @actions, @configuration, @link-targets}) ->
-    @markdown-parser = new Remarkable 'full', html: on
+    @parser = new MarkdownParser
 
 
   # Prepares this runner
@@ -32,8 +32,7 @@ class MarkdownFileRunner
         if markdown-text.length is 0
           @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"
           return done 1
-        @run-data = @markdown-parser.parse markdown-text, {}
-          |> @_standardize-ast
+        @run-data = @parser.parse markdown-text
           |> @_build-link-targets
           |> @_iterate-nodes
         done!
@@ -67,51 +66,6 @@ class MarkdownFileRunner
         done e
 
 
-  # standardizes the given AST into a flat array with this format:
-  # [
-  #   * line
-  #     type
-  #     content
-  #   * line
-  #     ...
-  # ]
-  _standardize-ast: (ast, line = 0, result = [], heading = null) ->
-    modifiers = []
-    for node in ast
-      node-line = if node.lines?.length > 0 then node.lines[0] + 1 else line
-      switch
-
-        case node.type is 'strong_open'
-          modifiers.push 'strong'
-
-        case node.type is 'strong_close'
-          modifiers.splice modifiers.index-of('strong'), 1
-
-        case node.type is 'heading_open'
-          heading = lines: node.lines, text: ''
-
-        case node.type is 'heading_close'
-          result.push line: heading.lines[*-1], type: 'heading', content: heading.text, level: node.h-level
-          heading = null
-
-        case @_is-html-image-tag node
-          result.push line: node-line, type: 'image', src: @_html-image-tag-src node
-
-        case node.type is 'image'
-          result.push line: node-line, type: 'image', src: node.src
-
-        case heading and node.type is 'text'
-          heading.text += node.content
-
-        case <[ fence htmlblock htmltag link_open text ]>.index-of(node.type) > -1
-          result.push line: node-line, type: "#{modifiers.sort!.join!}#{node.type}", content: (node.content or node.href)
-
-      if node.children
-        @_standardize-ast node.children, node-line, result, heading
-
-    result
-
-
   _build-link-targets: (tree) ->
     @link-targets[@file-path] or= []
     for node in tree
@@ -125,16 +79,6 @@ class MarkdownFileRunner
           @link-targets[@file-path].push type: 'heading', name: dashify(node.content), text: node.content, level: node.level
 
     tree
-
-
-  _html-image-tag-src: (node) ->
-    matches = node.content.match /<img.*src="([^"]*)".*>/
-    matches[1]
-
-
-  # Returns whether this AST node represents an HTML tag
-  _is-html-image-tag: (node) ->
-    node.type is 'htmltag' and /<img [^>]*src=".*?".*?>/.test node.content
 
 
   _iterate-nodes: (tree) ->

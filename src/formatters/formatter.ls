@@ -20,6 +20,7 @@ class Formatter
 
     @steps-count = 0
     @warnings-count = 0
+    @files-count = 0
 
     # Note: I have to define these attributes here,
     #       since doing so at the class level
@@ -51,11 +52,12 @@ class Formatter
 
   # called when we start processing a markdown file
   start-file: (@file-path) ->
+    @files-count += 1
 
 
   # called when the whole test suite passed
   suite-success: ->
-    text = green "\nSuccess! #{@steps-count} steps passed"
+    text = green "\nSuccess! #{@steps-count} steps in #{@files-count} files passed"
     if @warnings-count > 0
       text += green ", "
       text += magenta "#{@warnings-count} warnings"

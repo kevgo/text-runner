@@ -38,6 +38,7 @@ class MarkdownFileRunner
           |> @_iterate-nodes
         done!
       catch
+        console.log e if e.message isnt '1'
         done e
 
 

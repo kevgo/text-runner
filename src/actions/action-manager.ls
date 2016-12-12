@@ -22,7 +22,7 @@ class ActionManager
   action-for: (block-name) ->
     if !result = @actions[block-name.to-lower-case!]
       @formatter.error "unknown action: #{red block-name}"
-      throw new Error
+      throw new Error 1
     result
 
 

@@ -8,6 +8,6 @@ Feature: failing on empty directory
 
 
   Scenario: running inside an empty directory
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | WARNING | no Markdown files found |

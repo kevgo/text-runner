@@ -28,7 +28,7 @@ Feature: verifying that documentation matches a file in the source code
       </a>
       allows you to ...
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | 1.md                                                            |
       | LINE     | 1-11                                                            |
@@ -46,7 +46,7 @@ Feature: verifying that documentation matches a file in the source code
       ```
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | 1.md                                                            |
       | LINE          | 1-7                                                             |

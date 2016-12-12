@@ -14,7 +14,7 @@ Feature: separate working directory
 
 
   Scenario: default configuration
-    When executing the tutorial
+    When running tut-run
     Then it runs in the current working directory
 
 
@@ -23,6 +23,6 @@ Feature: separate working directory
       """
       useTempDirectory: true
       """
-    When executing the tutorial
+    When running tut-run
     Then it runs in a global temp directory
 

@@ -30,7 +30,7 @@ Feature: running console commands
 
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | enter-input.md                                              |
       | LINE     | 1-12                                                        |
@@ -69,7 +69,7 @@ Feature: running console commands
 
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | enter-input.md                                                                                                                                                                     |
       | LINE     | 1-24                                                                                                                                                                               |

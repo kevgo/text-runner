@@ -18,7 +18,7 @@ Feature: waiting for output of long-running processes
       ```
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | FILENAME | wait.md                             |
       | LINE     | 1-5                                 |

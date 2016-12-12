@@ -13,7 +13,7 @@ Feature: finding files in certain directories only
       files: '*.md'
       """
     And a runnable file "foo/bar.md"
-    When executing the tutorial
+    When running tut-run
     Then it signals:
       | WARNING | no Markdown files found |
 
@@ -24,5 +24,5 @@ Feature: finding files in certain directories only
       foo: bar
       """
     And a runnable file "foo/bar.md"
-    When executing the tutorial
+    When running tut-run
     Then it runs 1 test

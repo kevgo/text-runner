@@ -19,7 +19,7 @@ Feature: running console commands
       ```
       </a>
       """
-    When executing the tutorial
+    When running tut-run
     Then it runs the console command "ls -1"
 
 
@@ -30,7 +30,7 @@ Feature: running console commands
       foo
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | running.md              |
       | LINE          | 1                       |
@@ -47,7 +47,7 @@ Feature: running console commands
       ```
       </a>
       """
-    When trying to execute the tutorial
+    When trying to run tut-run
     Then the test fails with:
       | FILENAME      | running.md                                              |
       | LINE          | 1-4                                                     |

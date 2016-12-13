@@ -5,7 +5,7 @@ node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   bin/lint
-  node_modules/.bin/mycha --reporter=dot
+  bin/tests --reporter=dot
   echo
   bin/cuc-api --format progress
   bin/cuc-cli --format progress

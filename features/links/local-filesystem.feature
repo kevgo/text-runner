@@ -44,3 +44,19 @@ Feature: verifying links to the local filesystem
       | LINE          | 1                                       |
       | ERROR MESSAGE | link to non-existing local file zonk.md |
       | EXIT CODE     | 1                                       |
+
+
+  Scenario: link to existing local file in higher directory
+    Given my workspace contains the file "readme.md" with the content:
+      """
+      Hello
+      """
+    And my workspace contains the file "documentation/1.md" with the content:
+      """
+      [link to existing local file](../readme.md)
+      """
+    When running tut-run
+    Then it signals:
+      | FILENAME | documentation/1.md           |
+      | LINE     | 1                            |
+      | MESSAGE  | link to local file readme.md |

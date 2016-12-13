@@ -10,8 +10,8 @@
 <a href="https://david-dm.org/originate/tutorial-runner#info=devDependencies">
   <img src="https://david-dm.org/originate/tutorial-runner/dev-status.svg">
 </a>
-<a href="https://github.com/rstacruz/pnpm">
-  <img src="https://img.shields.io/badge/pnpm-compatible-brightgreen.svg">
+<a href="https://yarnpkg.com">
+  <img src="https://img.shields.io/badge/yarn-compatible-brightgreen.svg">
 </a>
 
 Tutorial Runner executes documentation written in Markdown,

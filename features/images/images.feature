@@ -22,6 +22,19 @@ Feature: checking embedded images
       | MESSAGE  | image images/watermelon.gif exists |
 
 
+  Scenario: existing local HTML image on page in subfolder
+    Given my workspace contains the file "documentation/1.md" with the content:
+      """
+      <img src="watermelon.gif">
+      """
+    And my workspace contains an image "documentation/watermelon.gif"
+    When running tut-run
+    Then it signals:
+      | FILENAME | documentation/1.md                        |
+      | LINE     | 1                                         |
+      | MESSAGE  | image documentation/watermelon.gif exists |
+
+
   Scenario: existing local Markdown image
     Given my workspace contains the file "1.md" with the content:
       """

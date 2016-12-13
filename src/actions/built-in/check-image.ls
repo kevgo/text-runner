@@ -1,24 +1,26 @@
 require! {
   'chalk' : {cyan, green, magenta, red}
   'fs'
+  'path'
   'request'
 }
 
 
 # Checks for broken hyperlinks
-module.exports  = ({formatter, nodes, link-targets}, done) ->
+module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
   node = nodes[0]
-  formatter.start "checking image #{cyan node.src}"
+  image-path = path.join path.dirname(filename), node.src
+  formatter.start "checking image #{cyan image-path}"
   switch
   | is-image-without-src node  =>  formatter.error "image tag without source" ; done 1
   | is-remote-image node       =>  check-remote-image node, formatter, done
-  | otherwise                  =>  check-local-image node, formatter, done
+  | otherwise                  =>  check-local-image image-path, formatter, done
 
 
-function check-local-image node, formatter, done
-  fs.stat node.src, (err, stats) ->
-    | err  =>  formatter.error "image #{red node.src} does not exist" ; done 1
-    | _    =>  formatter.success "image #{cyan node.src} exists"; done!
+function check-local-image image-path, formatter, done
+  fs.stat path.join(process.cwd!, image-path), (err, stats) ->
+    | err  =>  formatter.error "image #{red image-path} does not exist" ; done 1
+    | _    =>  formatter.success "image #{cyan image-path} exists"; done!
 
 
 function check-remote-image node, formatter, done

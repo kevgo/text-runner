@@ -66,8 +66,10 @@ module.exports = ->
     fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), content
 
 
-  @Given /^my workspace contains the file "([^"]*)" with the content:$/ (file-name, content) ->
-    fs.write-file-sync path.join(@root-dir.name, file-name), content
+  @Given /^my workspace contains the file "([^"]*)" with the content:$/ (file-name, content, done) ->
+    fs.mkdir path.join(@root-dir.name, path.dirname(file-name)), (err) ~>
+      fs.write-file-sync path.join(@root-dir.name, file-name), content
+      done!
 
 
   @Given /^my workspace contains a tutorial$/ ->

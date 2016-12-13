@@ -55,8 +55,11 @@ module.exports = ->
     fs.mkdir-sync path.join(@root-dir.name, dir)
 
 
-  @Given /^my workspace contains an image "([^"]*)"$/ (image-name) ->
-    cp path.join(__dirname, image-name), path.join(@root-dir.name, image-name)
+  @Given /^my workspace contains an image "([^"]*)"$/ (image-name, done) ->
+    fs.mkdir path.join(@root-dir.name, path.dirname(image-name)), (err) ~>
+      cp path.join(__dirname, path.basename(image-name)),
+         path.join(@root-dir.name, image-name)
+      done!
 
 
   @Given /^the configuration file:$/ (content) ->

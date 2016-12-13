@@ -12,14 +12,14 @@ Feature: checking embedded images
   Scenario: existing local HTML image
     Given my workspace contains the file "1.md" with the content:
       """
-      <img src="watermelon.gif">
+      <img src="images/watermelon.gif">
       """
-    And my workspace contains an image "watermelon.gif"
+    And my workspace contains an image "images/watermelon.gif"
     When running tut-run
     Then it signals:
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
-      | MESSAGE  | image watermelon.gif exists |
+      | MESSAGE  | image images/watermelon.gif exists |
 
 
   Scenario: existing local Markdown image

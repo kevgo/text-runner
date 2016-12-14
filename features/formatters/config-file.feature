@@ -9,7 +9,8 @@ Feature: selecting formatter via the config file
 
 
   Scenario Outline: formatter types in config file
-    Given I am in a directory that contains the "simple" example with the configuration file:
+    Given my workspace contains a tutorial
+    And the configuration file:
       """
       format: <FORMATTER>
       """
@@ -22,12 +23,13 @@ Feature: selecting formatter via the config file
     Examples:
       | FORMATTER | OUTPUT      |
       | robust    | Hello world |
-      | colored   | bash.md     |
-      | iconic    | ✔ bash.md   |
+      | colored   | 1.md        |
+      | iconic    | 1.md        |
 
 
   Scenario: selecting an unknown formatter
-    Given I am in a directory that contains the "simple" example with the configuration file:
+    Given my workspace contains a tutorial
+    And the configuration file:
       """
       format: zonk
       """

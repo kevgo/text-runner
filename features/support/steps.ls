@@ -76,7 +76,7 @@ module.exports = ->
     fs.write-file-sync path.join(@root-dir.name, '1.md'), '''
       <a class="tutorialRunner_runConsoleCommand">
       ```
-      pwd
+      echo "Hello world"
       ```
       </a>
     '''

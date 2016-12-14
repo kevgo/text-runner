@@ -10,7 +10,7 @@
 ```markdown
 <a class="tutorialRunner_runConsoleCommand">
 `​``
-$ ls -a
+$ echo "hello world"
 `​``
 </a>
 ```

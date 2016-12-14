@@ -221,7 +221,7 @@ module.exports = function(env) {
   })
 
   formatter.refine('running console command: ' + commandToRun)
-  formatter.output(child_process.execSync(commandToRun, 'utf8'))
+  formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
   formatter.success()
 }
 ```

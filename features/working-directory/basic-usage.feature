@@ -10,7 +10,14 @@ Feature: separate working directory
 
 
   Background:
-    Given my workspace contains a tutorial
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tutorialRunner_runConsoleCommand">
+      ```
+      pwd
+      ```
+      </a>
+      """
 
 
   Scenario: default configuration

@@ -188,14 +188,13 @@ via the the `nodes` field of the first argument.
 You can access this data directly
 or use a helper that is provided to you via the `searcher` field of the first parameter.
 To demonstrate how this works,
-here is a simplified implementation of the built-in `console-command` action.
-It runs the command given in the code block in the terminal.
+here is a simple implementation of an action that runs a code block in the terminal.
 
 <a class="tutorialRunner_createMarkdownFile">
 ```
-<a class="tutorialRunner_runConsoleCommand">
+<a class="tutorialRunner_consoleCommand">
 `​``
-ls -la
+echo "Hello world"
 `​``
 </a>
 ```

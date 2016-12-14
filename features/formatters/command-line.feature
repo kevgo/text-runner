@@ -9,8 +9,18 @@ Feature: selecting formatter via the command-line
     or the `formatter` key in `tut-run.yml`
 
 
+  Background:
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tutorialRunner_runConsoleCommand">
+      ```
+      echo "Hello world"
+      ```
+      </a>
+      """
+
+
   Scenario Outline: selecting formatters via command-line parameter
-    Given I am in a directory that contains the "simple" example without a configuration file
     When running tut-run with the "<FORMATTER>" formatter
     Then it prints:
       """
@@ -20,12 +30,11 @@ Feature: selecting formatter via the command-line
     Examples:
       | FORMATTER | OUTPUT      |
       | robust    | Hello world |
-      | colored   | bash.md     |
-      | iconic    | ✔ bash.md   |
+      | colored   | 1.md        |
+      | iconic    | 1.md        |
 
 
   Scenario: selecting an unknown formatter
-    Given I am in a directory that contains the "simple" example without a configuration file
     When trying to run tut-run with the "zonk" formatter
     Then the call fails with the error:
       """

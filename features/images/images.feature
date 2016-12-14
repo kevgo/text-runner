@@ -17,8 +17,8 @@ Feature: checking embedded images
     And my workspace contains an image "images/watermelon.gif"
     When running tut-run
     Then it signals:
-      | FILENAME | 1.md                        |
-      | LINE     | 1                           |
+      | FILENAME | 1.md                               |
+      | LINE     | 1                                  |
       | MESSAGE  | image images/watermelon.gif exists |
 
 

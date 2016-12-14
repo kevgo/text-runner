@@ -4,6 +4,10 @@
 <a href="https://travis-ci.org/Originate/tutorial-runner">
   <img src="https://travis-ci.org/Originate/tutorial-runner.svg?branch=master">
 </a>
+<a href="https://ci.appveyor.com/project/kevgo/tutorial-runner/branch/master">
+  <img src="https://ci.appveyor.com/api/projects/status/oxpbyxpm05ffmf2c/branch/master?svg=true" alt="Windows build status">
+</a>
+
 <a href="https://david-dm.org/originate/tutorial-runner">
   <img src="https://david-dm.org/originate/tutorial-runner.svg">
 </a>

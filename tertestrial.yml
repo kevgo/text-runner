@@ -3,11 +3,11 @@ actions:
   ALL:
 
     - match:
-        filename: '\.md$'
-      command: 'bin/docs'
+      command: 'bin/spec'
 
     - match:
-      command: 'bin/spec'
+        filename: '\.md$'
+      command: 'bin/docs {{filename}}'
 
     - match:
         filename: '\.feature$'
@@ -27,7 +27,7 @@ actions:
 
     - match:
         filename: '\.md$'
-      command: 'bin/tut-run'
+      command: 'bin/docs {{filename}}'
 
     - match:
       command: 'bin/cuc-api'
@@ -51,7 +51,7 @@ actions:
 
     - match:
         filename: '\.md$'
-      command: 'bin/tut-run'
+      command: 'bin/docs {{filename}}'
 
     - match:
       command: 'bin/cuc-cli'
@@ -68,5 +68,3 @@ actions:
     - match:
         filename: '-spec\.ls'
       command: 'mycha {{filename}}'
-
-

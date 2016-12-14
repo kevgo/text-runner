@@ -25,10 +25,11 @@ function check-local-image image-path, formatter, done
 
 function check-remote-image node, formatter, done
   request url: node.src, timeout: 2000, (err, response) ->
-    | err?.message is 'ESOCKETTIMEDOUT'  =>  formatter.warning "image #{magenta node.src} timed out"; done!
-    | err                                =>  done err
-    | response.status-code is 404        =>  formatter.warning "image #{magenta node.src} does not exist"; done!
-    | otherwise                          =>  formatter.success "image #{green node.src} exists"; done!
+    | err?.code is 'ENOTFOUND'            =>  formatter.warning "image #{magenta node.src} does not exist"; done!
+    | response?.status-code is 404        =>  formatter.warning "image #{magenta node.src} does not exist"; done!
+    | err?.message is 'ESOCKETTIMEDOUT'   =>  formatter.warning "image #{magenta node.src} timed out"; done!
+    | err                                 =>  done err
+    | otherwise                           =>  formatter.success "image #{green node.src} exists"; done!
 
 
 function is-remote-image node

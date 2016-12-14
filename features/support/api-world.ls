@@ -5,7 +5,7 @@ require! {
   'dim-console'
   'jsdiff-console'
   'path'
-  'prelude-ls' : {any, compact, unique}
+  'prelude-ls' : {any, compact, map, unique}
   'wait' : {wait-until}
 }
 
@@ -91,10 +91,10 @@ ApiWorld = !->
 
 
   @verify-output = (table) ->
-    expect(@formatter.file-paths).to.include(table.FILENAME, "#{@formatter.file-paths}") if table.FILENAME
+    expect(standardize-paths @formatter.file-paths).to.include(table.FILENAME, "#{@formatter.file-paths}") if table.FILENAME
     expect(@formatter.lines).to.include table.LINE if table.LINE
-    expect(@formatter.activities).to.include table.MESSAGE if table.MESSAGE
-    expect(@formatter.warnings).to.include table.WARNING if table.WARNING
+    expect(standardize-paths @formatter.activities).to.include table.MESSAGE if table.MESSAGE
+    expect(standardize-paths @formatter.warnings).to.include table.WARNING if table.WARNING
 
 
   @verify-ran-console-command = (command, done) ->
@@ -107,6 +107,10 @@ ApiWorld = !->
 
   @verify-unknown-command = (command) ->
     expect(@error).to.equal "unknown command: #{command}"
+
+
+function standardize-paths paths
+  paths |> map (.replace /\\/g, '/')
 
 
 

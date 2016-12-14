@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {cyan, green, red}
+  'chalk' : {cyan, green, magenta, red}
   'fs'
   'mkdirp'
   'path'
@@ -21,19 +21,21 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
 
 
 function check-external-link target, formatter, done
-  request target, (err) ->
-    | err  =>  formatter.warning "link to non-existing external website #{red target}"
-    | _    =>  formatter.success "link to external website #{green target}"
-    done!
+  request url: target, timeout: 2000, (err, response) ->
+    | err?.code is 'ENOTFOUND'            =>  formatter.warning "link to non-existing external website #{red target}"; done!
+    | response?.status-code is 404        =>  formatter.warning "link to non-existing external website #{red target}"; done!
+    | err?.message is 'ESOCKETTIMEDOUT'   =>  formatter.warning "link to #{magenta target} timed out"; done!
+    | err                                 =>  done err
+    | otherwise                           =>  formatter.success "link to external website #{green target}"; done!
 
 
 function check-link-to-filesystem filename, target, formatter, done
   target = path.join path.dirname(filename), target
   fs.stat target, (err, stats) ->
-    | err                  =>  formatter.error "link to non-existing local file #{red target}" ; return done 1
+    | err                  =>  formatter.error "link to non-existing local file #{red target}"
     | stats.is-directory!  =>  formatter.success "link to local directory #{green target}"
     | _                    =>  formatter.success "link to local file #{green target}"
-    done!
+    done err
 
 
 function check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done

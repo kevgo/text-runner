@@ -34,6 +34,7 @@ class TestFormatter
   success: (activity) ->
     if activity
       @activities[*-1] = strip-color activity
+      console.log activity if @verbose
     console.log 'success' if @verbose
 
   error: (error) !->

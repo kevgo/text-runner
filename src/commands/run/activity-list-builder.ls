@@ -28,6 +28,7 @@ class ActivityListBuilder
           catch
             if e.message isnt '1'
               console.log e
+            throw e
 
         case @_is-end-tag node
           if current-runner-type

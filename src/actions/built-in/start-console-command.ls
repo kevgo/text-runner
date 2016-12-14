@@ -1,4 +1,5 @@
 require! {
+  '../../helpers/call-args'
   'chalk' : {bold, cyan}
   'observable-process' : ObservableProcess
   'prelude-ls' : {compact, map}
@@ -22,7 +23,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   |> (.join ' && ')
 
   formatter.refine "starting a long-running process: #{bold cyan commands-to-run}"
-  global.running-process = new ObservableProcess(['bash', '-c', commands-to-run],
+  global.running-process = new ObservableProcess(call-args(commands-to-run),
                                                  cwd: configuration.test-dir,
                                                  stdout: formatter.stdout,
                                                  stderr: formatter.stderr)

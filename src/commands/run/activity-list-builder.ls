@@ -22,8 +22,12 @@ class ActivityListBuilder
           if current-runner-type then
             @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
             return null
-          if current-runner-type = @actions.action-for block-type
-            nodes-for-current-runner = []
+          try
+            if current-runner-type = @actions.action-for block-type
+              nodes-for-current-runner = []
+          catch
+            if e.message isnt '1'
+              console.log e
 
         case @_is-end-tag node
           if current-runner-type

@@ -1,3 +1,4 @@
+@skipWindows
 Feature: separate working directory
 
   As a tutorial writer

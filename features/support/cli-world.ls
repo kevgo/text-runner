@@ -23,6 +23,8 @@ CliWorld = !->
     if @debug
       args.env['DEBUG'] = '*'
     path-segments = [path.join(process.cwd!, 'bin', 'tut-run')]
+    if process.platform is 'win32'
+      path-segments[0] += '.cmd'
     if formatter
       path-segments
         ..push '--format'
@@ -60,7 +62,7 @@ CliWorld = !->
     expected-text += ' -- ' if table.FILENAME and (table.MESSAGE or table.WARNING)
     expected-text += table.MESSAGE if table.MESSAGE
     expected-text += table.WARNING if table.WARNING
-    expect(@process.full-output!).to.include expected-text
+    expect(@process.full-output! |> standardize-path).to.include expected-text
 
 
   @verify-printed-usage-instructions = ->
@@ -81,6 +83,11 @@ CliWorld = !->
 
   @verify-unknown-command = (command) ->
     expect(@process.full-output!).to.include "unknown command: #{command}"
+
+
+function standardize-path path
+  path.replace /\\/g, '/'
+
 
 
 module.exports = ->

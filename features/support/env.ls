@@ -7,6 +7,7 @@ require! {
   'shelljs/global'
   'tmp'
   'touch'
+  'wait' : {wait}
 }
 
 
@@ -20,11 +21,14 @@ module.exports = ->
 
 
   @After (scenario, done) ->
-    if scenario.is-failed!
-      console.log "\ntest artifacts are located in #{@root-dir.name}"
-    else
-      @root-dir.remove-callback!
-    end-child-processes done
+    end-child-processes ~>
+      if scenario.is-failed!
+        console.log "\ntest artifacts are located in #{@root-dir.name}"
+        done!
+      else
+        wait 1, ~>
+          @root-dir.remove-callback!
+          done!
 
 
   @Before tags: ['@verbose'], ->

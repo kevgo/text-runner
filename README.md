@@ -278,6 +278,7 @@ produce more concise output when running as part of a larger test suite.
 
 ## Installation
 
+- runs on macOS, Linux, Windows
 - install [Node.JS](https://nodejs.org) version 4, 5, or 6
 - run `npm i -g tutorial-runner`
 - in the root directory of your code base, run `tut-run`

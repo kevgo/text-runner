@@ -1,3 +1,4 @@
+@skipWindows
 Feature: running console commands
 
   As a tutorial writer

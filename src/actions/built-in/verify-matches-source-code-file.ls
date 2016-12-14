@@ -1,5 +1,6 @@
 require! {
   'chalk' : {bold, cyan}
+  'eol'
   'fs'
   'jsdiff-console'
   'path'
@@ -33,7 +34,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
       formatter.error error
       return done error
     else throw e
-  jsdiff-console actual-content.trim!, expected-content.trim!, (err) ~>
+  jsdiff-console (actual-content |> (.trim!) |> eol.lf), (expected-content |> (.trim!) |> eol.lf), (err) ~>
     if err
       formatter.error "mismatching content in #{cyan bold file-path}:\n#{err.message}"
       done 1

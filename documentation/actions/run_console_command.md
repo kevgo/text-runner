@@ -17,21 +17,35 @@ $ echo "hello world"
 </a>
 
 You can enter text into the running command by providing an HTML table
-with the content to enter:
+with the content to enter.
+Assuming we have a little application called
+<a class="tutorialRunner_createFile">
+__greeter.js__
+```js
+const readline = require('readline');
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+
+rl.question('Your name?', (name) => {
+  rl.question('Current day of the week?', (weekday) => {
+    console.log(`Hello ${name}, happy ${weekday}!`)
+    process.exit()
+  })
+})
+```
+</a>
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_runConsoleCommand">
 `​``
-$ read name
-$ read purpose
+$ node greeter.js
 `​``
 <table>
   <tr>
-    <td>Tutorial Runner</td>
+    <td>Mortimer</td>
   </tr>
   <tr>
-    <td>Test framework for documentation</td>
+    <td>Tuesday</td>
   </tr>
 </table>
 
@@ -49,10 +63,7 @@ Middle columns are ignored.
 ```markdown
 <a class="tutorialRunner_runConsoleCommand">
 `​``
-$ echo "Product name:"
-$ read name
-$ echo "What does it do:"
-$ read purpose
+$ node greeter.js
 `​``
 <table>
   <tr>
@@ -61,14 +72,14 @@ $ read purpose
     <th>you enter</th>
   </tr>
   <tr>
-    <td>Product name</td>
-    <td>the name of the product</td>
-    <td>Tutorial Runner</td>
+    <td>Your name?</td>
+    <td>the name of the person being greeted</td>
+    <td>Mortimer</td>
   </tr>
   <tr>
-    <td>What does it do</td>
-    <td>product tagline</td>
-    <td>Test framework for documentation</td>
+    <td>Current day of the week?</td>
+    <td>enter any day name here</td>
+    <td>Tuesday</td>
   </tr>
 </table>
 

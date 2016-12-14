@@ -1,0 +1,26 @@
+environment:
+  nodejs_version: "7"
+
+cache:
+  - node_modules
+
+init:
+  - git config --global core.autocrlf true
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - node --version
+  - npm --version
+  - npm install --loglevel error --depth 0
+  - set PATH=%APPDATA%\npm;%PATH%
+
+test_script:
+  - node_modules\o-tools-livescript\bin\build.cmd
+  - node_modules\.bin\mocha --compilers ls:livescript spec\*.ls
+  - set EXOSERVICE_TEST_DEPTH=API
+  - node_modules\.bin\cucumber-js --tags ~@clionly --tags ~@todo --tags ~@skipWindows --format progress
+  - set EXOSERVICE_TEST_DEPTH=CLI
+  - node_modules\.bin\cucumber-js --tags ~@apionly --tags ~@todo --tags ~@skipWindows --format progress
+  - bin\tut-run --format robust
+
+build: off

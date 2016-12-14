@@ -1,3 +1,4 @@
+@skipWindows
 Feature: default formatter
 
   As a tutorial writer new to TutorialRunner

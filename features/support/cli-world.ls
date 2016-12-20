@@ -70,7 +70,7 @@ CliWorld = !->
 
 
   @verify-prints = (expected-text) ->
-    expect(@process.full-output!).to.include expected-text
+    expect(new RegExp(expected-text).test @process.full-output!).to.be.true
 
 
   @verify-ran-console-command = (command, done) ->

@@ -20,9 +20,10 @@ class HelpCommand
       USAGE: #{bold 'tut-run <command>'}
 
       COMMANDS:
-      - #{bold 'run'} <filename>  runs the whole tutorial, or only the given file
-      - #{bold 'setup'}           creates an example configuration file
-      - #{bold 'help'}            shows this help screen
+      - #{bold 'run'} [<filename>]  runs the whole tutorial, or only the given file
+      - #{bold 'setup'}             creates an example configuration file
+      - #{bold 'help'}              shows this help screen
+      - #{bold 'version'}           shows the currently installed version of the tool
 
       """
     done?!

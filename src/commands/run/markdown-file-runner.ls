@@ -27,10 +27,10 @@ class MarkdownFileRunner
     # Need to start the file here
     # so that the formatter has the filename
     # in case there are errors preparing.
-    @formatter.start-file @file-path
     fs.read-file @file-path, encoding: 'utf8', (err, markdown-text) ~>
       | err  =>  return done err
       try
+        @formatter.start-file @file-path
         markdown-text .= trim!
         if markdown-text.length is 0
           @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"

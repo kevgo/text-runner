@@ -311,7 +311,8 @@ actions:
 ```
 </a>
 
-- the `files` key describes which files are executed by Tutorial Runner.
+- the `files` key describes via a glob function which files are executed by Tutorial Runner.
+  It automatically ignores hidden folders as well as `node_modules`.
 
 - the `actions` section contains configuration information specific to actions.
   Please see the documentation for the respective action for more details.

@@ -15,6 +15,15 @@ require! {
 module.exports = ->
 
 
+  @Given /^a broken file "([^"]*)"$/ (file-path) ->
+    if (subdir = path.dirname file-path) isnt '.'
+      mkdirp.sync path.join(@root-dir.name, subdir)
+    fs.write-file-sync path.join(@root-dir.name, file-path), """
+      <a href="missing">
+      </a>
+      """
+
+
   @Given /^a runnable file "([^"]*)"$/ (file-path) ->
     fs.mkdir-sync path.join @root-dir.name, subdir if (subdir = path.dirname file-path) isnt '.'
     fs.write-file-sync path.join(@root-dir.name, file-path), """

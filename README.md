@@ -110,6 +110,11 @@ for activities typically performed in software programming tutorials.
 * [run Javascript code](documentation/actions/run_javascript.md)
 
 
+#### Tools and frameworks
+
+* [required NodeJS version](documentation/actions/minimum-node-version.md)
+
+
 ## Custom actions
 
 Let's create a custom block.

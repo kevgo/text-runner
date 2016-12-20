@@ -22,8 +22,9 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
   formatter.refine "creating file #{cyan file-path}"
   full-path = path.join(configuration.test-dir, file-path)
-  mkdirp path.dirname(full-path)
-  fs.write-file full-path, content, (err) ~>
-    | err  =>  formatter.error err
-    | _    =>  formatter.success!
-    done!
+  mkdirp path.dirname(full-path), (err) ->
+    | err  =>  return done err
+    fs.write-file full-path, content, (err) ~>
+      | err  =>  formatter.error err
+      | _    =>  formatter.success!
+      done!

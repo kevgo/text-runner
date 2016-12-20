@@ -13,7 +13,7 @@ require! {
 
 module.exports = ->
 
-  @set-default-timeout 2000
+  @set-default-timeout 3000
 
 
   @Before ->

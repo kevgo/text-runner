@@ -312,7 +312,7 @@ actions:
 </a>
 
 - the `files` key describes via a glob function which files are executed by Tutorial Runner.
-  The `node_modules` directory is excluded.
+  It automatically ignores hidden folders as well as `node_modules`.
 
 - the `actions` section contains configuration information specific to actions.
   Please see the documentation for the respective action for more details.

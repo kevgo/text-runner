@@ -4,7 +4,7 @@ require! {
   './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
   'path'
-  'prelude-ls' : {head, filter, sum}
+  'prelude-ls' : {head, filter, reject, sum}
   'rimraf'
   'tmp'
 }
@@ -47,6 +47,7 @@ class RunCommand
   _markdown-files: ->
     if (files = glob.sync @configuration.get 'files').length is 0
       @formatter.warning 'no Markdown files found'
+    files = files |> reject (.includes 'node_modules')
     if @filename
       files |> filter ~> it is @filename
     else

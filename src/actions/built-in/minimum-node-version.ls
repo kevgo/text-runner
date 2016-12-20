@@ -16,9 +16,9 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.refine "determining whether minimum supported NodeJS version is #{cyan documented-version}"
 
   get-supported-version (err, supported-version) ->
-    | err                                      =>  formatter.error err ; return done err
-    | supported-version is documented-version  =>  formatter.success "requires at least Node #{cyan supported-version}" ; return done!
-    | supported-version > documented-version   =>  formatter.error "documented minimum Node version is #{cyan documented-version}, should be #{cyan supported-version}" ; return done 1
+    | err                                        =>  formatter.error err ; return done err
+    | supported-version is documented-version    =>  formatter.success "requires at least Node #{cyan supported-version}" ; return done!
+    | supported-version isnt documented-version  =>  formatter.error "documented minimum Node version is #{cyan documented-version}, should be #{cyan supported-version}" ; return done 1
 
 
 function get-supported-version done

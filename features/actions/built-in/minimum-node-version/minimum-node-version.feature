@@ -43,3 +43,17 @@ Feature: minimum NodeJS version
       | MESSAGE       | determining whether minimum supported NodeJS version is 3 |
       | ERROR MESSAGE | documented minimum Node version is 3, should be 4         |
       | EXIT CODE     | 1                                                         |
+
+
+  Scenario: documented minimum Node version is too high
+    Given my workspace contains the file "README.md" with the content:
+      """
+      Requires Node version <a class="tutorialRunner_minimumNodeVersion">5</a> or above
+      """
+    When running tut-run
+    Then the test fails with:
+      | FILENAME      | README.md                                                 |
+      | LINE          | 1                                                         |
+      | MESSAGE       | determining whether minimum supported NodeJS version is 5 |
+      | ERROR MESSAGE | documented minimum Node version is 5, should be 4         |
+      | EXIT CODE     | 1                                                         |

@@ -9,16 +9,16 @@ require! {
 module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start "determining minimum supported NodeJS version"
 
-  expected-version = searcher.node-content type: 'text', ({nodes, content}) ->
+  documented-version = searcher.node-content type: 'text', ({nodes, content}) ->
     | !content         =>  'no text given'
     | +content is NaN  =>  'given Node version is not a number'
   |> parse-int
-  formatter.refine "determining minimum supported NodeJS version is #{cyan expected-version}"
+  formatter.refine "determining whether minimum supported NodeJS version is #{cyan documented-version}"
 
   get-supported-version (err, supported-version) ->
-    | err                                    =>  formatter.error err
-    | supported-version is expected-version  =>  formatter.success "requires at least Node #{cyan supported-version}"
-    done err
+    | err                                      =>  formatter.error err ; return done err
+    | supported-version is documented-version  =>  formatter.success "requires at least Node #{cyan supported-version}" ; return done!
+    | supported-version > documented-version   =>  formatter.error "documented minimum Node version is #{cyan documented-version}, should be #{cyan supported-version}" ; return done 1
 
 
 function get-supported-version done

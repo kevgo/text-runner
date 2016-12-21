@@ -28,5 +28,5 @@ $ npm i -g my_enormous_package
 </a>
 
 
-More info by looking at the [feature specs](../../features/actions/built-in/verify-npm-install/verify-npm-install.feature)
+More info is in the [feature specs](../../features/actions/built-in/verify-npm-install/verify-npm-install.feature)
 or the [source code](../../src/actions/built-in/verify-npm-install.ls).

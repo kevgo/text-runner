@@ -242,6 +242,8 @@ module.exports = function(env) {
 that satisfies the given query.
 In this case we are looking for a fenced code block,
 hence the query is `{type: 'fence'}`.
+Providing an array for the type (e.g. `{type: ['code', 'fence']}`)
+retrieves all nodes that have any of the given types.
 The second parameter is an optional validation method.
 Its purpose is to make it easy and readable to provide specific error messages
 that make your custom block definition user-friendly and easy to debug.

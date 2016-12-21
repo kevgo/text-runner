@@ -53,3 +53,20 @@ Feature: verifying the NPM package name
       | EXIT CODE     | 1                                          |
 
 
+  Scenario: missing installation instructions
+    Given my workspace contains the file "1.md" with the content:
+      """
+      To install, run:
+
+      <a class="tutorialRunner_verifyNpmInstall">
+      </a>
+      """
+    When trying to run tut-run
+    Then the test fails with:
+      | FILENAME      | 1.md                                    |
+      | LINE          | 3                                       |
+      | MESSAGE       | verifying NPM installation instructions |
+      | ERROR MESSAGE | missing code block                      |
+      | EXIT CODE     | 1                                       |
+
+

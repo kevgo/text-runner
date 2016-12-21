@@ -16,7 +16,7 @@ Feature: verifying the NPM package name
       """
 
 
-  Scenario: correct package name
+  Scenario: correct package name with triple-fenced code block
     Given my workspace contains the file "1.md" with the content:
       """
       To install, run:
@@ -29,9 +29,21 @@ Feature: verifying the NPM package name
       """
     When running tut-run
     Then it signals:
-      | FILENAME | 1.md                                       |
-      | LINE     | 3-7                                        |
-      | MESSAGE  | verifying NPM installs my_enormous_package |
+      | FILENAME | 1.md                         |
+      | LINE     | 3-7                          |
+      | MESSAGE  | installs my_enormous_package |
+
+
+  Scenario: correct package name with single-fenced code block
+    Given my workspace contains the file "1.md" with the content:
+      """
+      installation: <a class="tutorialRunner_verifyNpmInstall">`npm i -g my_enormous_package`</a>
+      """
+    When running tut-run
+    Then it signals:
+      | FILENAME | 1.md                         |
+      | LINE     | 1                            |
+      | MESSAGE  | installs my_enormous_package |
 
 
   Scenario: mismatching package name

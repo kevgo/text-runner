@@ -1,7 +1,7 @@
 require! {
-  'chalk' : {cyan}
+  'chalk' : {cyan, green}
   'path'
-  'prelude-ls' : {empty, filter}
+  'prelude-ls' : {empty, filter, map}
   '../../helpers/trim-dollar'
 }
 
@@ -9,7 +9,7 @@ require! {
 module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start "verifying NPM installation instructions"
 
-  install-text = searcher.node-content type: 'fence', ({nodes}) ->
+  install-text = searcher.node-content type: ['fence', 'code'], ({nodes}) ->
     | nodes.length is 0  =>  'missing code block'
     | nodes.length > 1   =>  'found multiple code blocks'
   |> trim-dollar
@@ -26,5 +26,6 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
 function misses-package-name install-text, package-name
   install-text |> (.split ' ')
+               |> map (.trim!)
                |> filter (is package-name)
                |> empty

@@ -26,3 +26,7 @@ $ npm i -g my_enormous_package
 </a>
 ```
 </a>
+
+
+- [source code](../../src/actions/built-in/verify-npm-install.ls)
+- [feature specs](../../features/actions/built-in/verify-npm-install/verify-npm-install.feature)

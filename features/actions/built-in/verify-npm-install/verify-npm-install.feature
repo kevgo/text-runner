@@ -1,4 +1,4 @@
-Feature: verifying the NPM package name
+Feature: verifying NPM installation instructions
 
   As the developer of an NPM module
   I want to be able to verify that installation instructions for my module are correct

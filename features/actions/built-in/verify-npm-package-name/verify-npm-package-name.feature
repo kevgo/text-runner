@@ -70,3 +70,20 @@ Feature: verifying the NPM package name
       | EXIT CODE     | 1                                       |
 
 
+  Scenario: missing package name
+    Given my workspace contains the file "1.md" with the content:
+      """
+      To install, run:
+
+      <a class="tutorialRunner_verifyNpmInstall">
+      ```
+      npm i
+      ```
+      </a>
+      """
+    When trying to run tut-run
+    Then the test fails with:
+      | FILENAME      | 1.md                                       |
+      | LINE          | 3-7                                        |
+      | ERROR MESSAGE | verifying NPM installs my_enormous_package |
+      | EXIT CODE     | 1                                          |

@@ -25,6 +25,9 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
 
 function misses-package-name install-text, package-name
+  # Note: cannot use minimist here
+  #       because it is too stupid to understand
+  #       that NPM uses '-g' by itself, and not as a switch for the argument after it
   install-text |> (.split ' ')
                |> map (.trim!)
                |> filter (is package-name)

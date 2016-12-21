@@ -4,6 +4,7 @@ require! {
   'observable-process' : ObservableProcess
   'path'
   'prelude-ls' : {compact, find, head, map, tail, values}
+  '../../helpers/trim-dollar'
   'xml2js'
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
@@ -66,8 +67,3 @@ function make-global globals = {}
       "#{path.join process.cwd!, replacement} #{tail(command-parts).join ' '}"
     else
       command
-
-
-# trims the leading dollar from the given command
-function trim-dollar text
-  text.replace /^\$?\s*/, ''

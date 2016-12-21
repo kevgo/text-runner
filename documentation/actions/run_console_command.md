@@ -115,3 +115,9 @@ The
 [global-tool](examples/global-tool)
 folder contains a working version of this configuration.
 </a>
+
+
+#### More info
+
+- [feature specs](../../features/actions/built-in/run-console-command/run-console-command.feature)
+- [source code](../../src/actions/built-in/run-console-command.ls)

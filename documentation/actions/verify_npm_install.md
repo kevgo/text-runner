@@ -15,7 +15,7 @@ Assuming our __package.json__ file looks like this:
 ```
 </a>
 
-then we can verify that it gets installed correctly:
+then the action below verifies that the instructions use the correct NPM package name:
 
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown

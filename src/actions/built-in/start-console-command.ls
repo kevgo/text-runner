@@ -3,6 +3,7 @@ require! {
   'chalk' : {bold, cyan}
   'observable-process' : ObservableProcess
   'prelude-ls' : {compact, map}
+  '../../helpers/trim-dollar'
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
 
@@ -33,9 +34,3 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
   formatter.success!
   done!
-
-
-
-# trims the leading dollar from the given command
-function trim-dollar text
-  text.replace /^\$?\s*/, ''

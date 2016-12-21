@@ -9,7 +9,7 @@ class Searcher
 
 
   node-content: (query, error-checker) ~>
-    nodes = @nodes |> filter (.type is query.type or query.type.includes it.type)
+    nodes = @nodes |> filter (.type is query.type or query.types?.includes it.type)
     content = nodes[0]?.content
     if error = error-checker? {nodes, content}
       throw new Error error

@@ -9,7 +9,7 @@ require! {
 module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start "verifying NPM installation instructions"
 
-  install-text = searcher.node-content type: ['fence', 'code'], ({nodes}) ->
+  install-text = searcher.node-content types: ['fence', 'code'], ({nodes}) ->
     | nodes.length is 0  =>  'missing code block'
     | nodes.length > 1   =>  'found multiple code blocks'
   |> trim-dollar

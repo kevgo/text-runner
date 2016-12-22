@@ -4,6 +4,9 @@
 * the content of the file is provided as a multi-line code block (surrounded with \`\`\`) within the anchor tag
 * Tutorial Runner creates the file in the workspace
 
+
+#### Example
+
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_createFile">
@@ -18,4 +21,7 @@ The file content goes here
 </a>
 
 
+#### More info
 
+- [feature specs](../../features/actions/built-in/create-file/create-file.feature)
+- [source code](../../src/actions/built-in/create-file.ls)

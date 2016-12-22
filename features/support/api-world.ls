@@ -93,7 +93,7 @@ ApiWorld = !->
   @verify-output = (table) ->
     expect(standardize-paths @formatter.file-paths).to.include(table.FILENAME, "#{@formatter.file-paths}") if table.FILENAME
     expect(@formatter.lines).to.include table.LINE if table.LINE
-    expect(standardize-paths @formatter.activities).to.include table.MESSAGE if table.MESSAGE
+    expect(standardize-paths @formatter.activities).to.include(table.MESSAGE, @formatter.activities) if table.MESSAGE
     expect(standardize-paths @formatter.warnings).to.include table.WARNING if table.WARNING
 
 

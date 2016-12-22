@@ -7,6 +7,9 @@ This can be used to start servers and then interact with them later.
 You can wait until the process prints a given string with a `waitForOutput` block,
 and stop the long-running process using a `stopCommand` block.
 
+
+
+#### Example
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_startConsoleCommand">
@@ -23,3 +26,9 @@ Stop the current process by hitting Ctrl-C
 </a>
 ```
 </a>
+
+
+#### More info
+
+- [feature specs](../../features/actions/built-in/start-stop-console-command/basic.feature)
+- [source code](../../src/actions/built-in/start-console-command.ls)

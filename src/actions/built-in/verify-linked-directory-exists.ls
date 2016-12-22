@@ -18,4 +18,5 @@ module.exports = function {formatter, searcher}
     if stats.is-directory!
       formatter.success!
   catch
-    formatter.error "directory #{cyan bold full-path} does not exist"
+    formatter.error "directory #{cyan bold directory} does not exist"
+    throw new Error 1

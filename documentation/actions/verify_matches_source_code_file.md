@@ -4,6 +4,9 @@ Sometimes you want to just display a file from the source code of your app in th
 For example to give your readers an idea how something works
 without having them do it as part of the tutorial.
 
+
+#### Example
+
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_verifyMatchesSourceCodeFile">
@@ -23,3 +26,9 @@ folder contains a working version.
 </a>
 ```
 </a>
+
+
+#### More info
+
+- [feature specs](../../features/actions/built-in/verify-matches-source-code-file/verify-matches-source-code-file.feature)
+- [source code](../../src/actions/built-in/verify-matches-source-code-file.ls)

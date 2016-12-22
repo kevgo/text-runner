@@ -18,10 +18,26 @@ class RunCommand
     @link-targets = {}
 
 
-  run: (@filename, done) ->
+  # Tests all files
+  run-all: (done) ->
+    @_run @_all-markdown-files!, done
+
+
+  # Tests all files in the given directory
+  run-directory: (dirname, done) ->
+    @_run @_markdown-files-in-dir(dirname), done
+
+
+  # Tests the given file
+  run-file: (filename, done) ->
+    @_run [filename], done
+
+
+  # Runs the currently set up runners.
+  _run: (filenames, done) ->
     try
       @_create-working-dir!
-      @_create-runners!
+      @_create-runners filenames
       @_prepare-runners (err) ~>
         | err  =>  return done err
         @_execute-runners done
@@ -30,8 +46,9 @@ class RunCommand
       throw e
 
 
-  _create-runners: ->
-    @runners = for file-path in @_markdown-files!
+
+  _create-runners: (filenames) ->
+    @runners = for file-path in filenames
       new MarkdownFileRunner {file-path, @formatter, @actions, @configuration, @link-targets}
 
 
@@ -44,7 +61,15 @@ class RunCommand
 
 
   # Returns all the markdown files for this tutorial
-  _markdown-files: ->
+  _markdown-files-in-dir: (dir-name) ->
+    if (files = glob.sync "#{dir-name}/*.md").length is 0
+      @formatter.warning 'no Markdown files found'
+    files = files |> reject (.includes 'node_modules')
+    files
+
+
+  # Returns all the markdown files for this tutorial
+  _all-markdown-files: ->
     if (files = glob.sync @configuration.get 'files').length is 0
       @formatter.warning 'no Markdown files found'
     files = files |> reject (.includes 'node_modules')

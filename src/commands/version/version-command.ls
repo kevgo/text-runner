@@ -7,7 +7,7 @@ class VersionCommand
 
   ->
 
-  run: (_, done) ->
+  run: (done) ->
     console.log "Tutorial Runner v#{version}"
     done!
 

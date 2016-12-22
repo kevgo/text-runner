@@ -18,51 +18,64 @@ class TutorialRunner
 
 
   # Runs the given tutorial
-  execute: (@command, @args, done) ->
+  execute: (command, args, done) ->
+    @_init (err) ~>
+      | err                                                       =>  new HelpCommand({err}).run! ; done err
+      | !@_has-command(command) and @_has-directory(command)      =>  @_command('run').run-directory command, done
+      | !@_has-command(command) and @_has-markdown-file(command)  =>  @_command('run').run-file command, done
+      | command is 'run' and @_has-markdown-file(args?[0])        =>  @_command('run').run-file args[0], done
+      | command is 'run' and (args or []).length is 0             =>  @_command('run').run-all done
+      | @_has-command(command)                                    =>  @_command(command).run done
+      | otherwise                                                 =>  @_unknown-command command, done
 
-    # Note: Liftoff runs here and not in the constructor
-    #       because the constructor cannot run async operations
+
+  # Asynchronous initializer for this class
+  # we need this because Lift is asyncronous
+  _init: (done) ->
     new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
-      ..launch {}, ({config-path}) ~>
-        @configuration = new Configuration config-path, @constructor-args
+      ..launch {}, ({@config-path}) ~>
+        @configuration = new Configuration @config-path, @constructor-args
         (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
-          | err  =>  new HelpCommand({err}).run! ; return done err
-          | !@has-command! and !@has-markdown-file(@command)  =>  return @_unknown-command done
-          | !@has-command! and @has-markdown-file(@command)   =>  [@command, @args] = ['run', @command]
-          | @has-command                                      =>  @args = @args?[0]
-
           @actions = new ActionManager @formatter
-          try
-            CommandClass = require @command-path!
-            new CommandClass({@configuration, @formatter, @actions}).run @args, done
-          catch
-            console.log e
-            done e
+          done err
 
 
-  command-path: ->
-    path.join __dirname, '..' 'dist' 'commands', @command, "#{@command}-command.js"
+  _command: (command) ->
+    CommandClass = require @_command-path command
+    new CommandClass({@configuration, @formatter, @actions})
 
 
-  has-command: ->
+  _command-path: (command) ->
+    path.join __dirname, '..' 'dist' 'commands', command, "#{command}-command.js"
+
+
+  _has-command: (command) ->
     try
-      fs.stat-sync @command-path!
+      fs.stat-sync @_command-path command
       yes
     catch
       no
 
 
-  has-markdown-file: (filename) ->
+  _has-directory: (dirname) ->
     try
-      fs.stat-sync filename
-      yes
+      info = fs.stat-sync dirname
+      info.is-directory!
     catch
       no
 
 
-  _unknown-command: (done) ->
-    @formatter.error "unknown command: #{red @command}"
-    done new Error "unknown command: #{@command}"
+  _has-markdown-file: (filename) ->
+    try
+      info = fs.stat-sync filename
+      info.is-file! and filename.ends-with '.md'
+    catch
+      no
+
+
+  _unknown-command: (command, done) ->
+    @formatter.error "unknown command: #{red command}"
+    done new Error "unknown command: #{command}"
 
 
 module.exports = TutorialRunner

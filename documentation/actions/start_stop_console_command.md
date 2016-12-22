@@ -30,5 +30,5 @@ Stop the current process by hitting Ctrl-C
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/start-console-command/start-console-command.feature)
+- [feature specs](../../features/actions/built-in/start-stop-console-command/basic.feature)
 - [source code](../../src/actions/built-in/start-console-command.ls)

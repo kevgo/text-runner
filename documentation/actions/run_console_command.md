@@ -119,5 +119,5 @@ folder contains a working version of this configuration.
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/run-console-command/run-console-command.feature)
+- [feature specs](../../features/actions/built-in/run-console-command/)
 - [source code](../../src/actions/built-in/run-console-command.ls)

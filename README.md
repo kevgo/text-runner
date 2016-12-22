@@ -102,7 +102,7 @@ for activities typically performed in software programming tutorials.
 
 #### Console commands
 * [run a console command](documentation/actions/run_console_command.md)
-* [start and stop long-running console commands](documentation/actions/start_console_command.md)
+* [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
 
 
 #### Source code

@@ -3,6 +3,9 @@
 The `minimumNodeVersion` action verifies that the documented minimum Node version actually
 matches what CI servers test against.
 
+
+#### Example
+
 Assuming you have a file
 <a class="tutorialRunner_createFile">
 __.travis.yml__ with content:
@@ -24,3 +27,9 @@ Runs on Node <a class="tutorialRunner_minimumNodeVersion">4</a> or above.
 </a>
 
 lists the correct version number.
+
+
+#### More info
+
+- [feature specs](../../features/actions/built-in/minimum-node-version/minimum-node-version.feature)
+- [source code](../../src/actions/built-in/minimum-node-version.ls)

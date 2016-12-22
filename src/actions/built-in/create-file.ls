@@ -15,7 +15,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     | nodes.length > 1   =>  "several file paths found: #{nodes |> map (.content) |> map ((a) -> cyan a) |> (.join ' and ')}"
     | !content           =>  'no path given for file to create'
 
-  content = searcher.node-content type: 'fence', ({nodes, content}) ->
+  content = searcher.node-content types: ['fence', 'code'], ({nodes, content}) ->
     | nodes.length is 0  =>  'no content given for file to create'
     | nodes.length > 1   =>  'found multiple content blocks for file to create, please provide only one'
     | !content           =>  'no content given for file to create'

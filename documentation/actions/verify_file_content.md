@@ -3,6 +3,15 @@
 Verifies that a file with the given name exists,
 and has the given content.
 
+
+#### Example
+
+<a class="tutorialRunner_createFile">
+Assuming we have a file __hello.txt__ with content `hello world`,
+</a>
+we can verify it via this block:
+
+
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_verifyFileContent">
@@ -15,3 +24,9 @@ hello world
 </a>
 ```
 </a>
+
+
+#### More info
+
+- [feature specs](../../features/actions/built-in/verify-file-content/verify-file-content.feature)
+- [source code](../../src/actions/built-in/verify-file-content.ls)

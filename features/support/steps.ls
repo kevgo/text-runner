@@ -2,12 +2,13 @@ require! {
   'chai' : {expect}
   'child_process'
   'fs-extra' : fs
+  'glob'
   'jsdiff-console'
   'mkdirp'
   'ncp'
   'nitroglycerin' : N
   'path'
-  'prelude-ls' : {reject}
+  'prelude-ls' : {compact, filter, map, reject}
   'tmp'
 }
 
@@ -162,11 +163,15 @@ module.exports = ->
 
 
   @Then /^it runs only the tests in "([^"]*)"$/ (filename) ->
-    all-files = fs.readdir-sync @root-dir.name, encoding: 'utf8'
-    files-shouldnt-run = all-files |> reject -> it is filename
+    expect(@output).to.include filename
+
+    # verify that all other files have not run
+    all-files = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
+                                                 |> map ~> path.relative @root-dir.name, it
+                                                 |> compact
+    files-shouldnt-run = all-files |> reject (is filename)
     for file-shouldnt-run in files-shouldnt-run
       expect(@output).to.not.include file-shouldnt-run
-    expect(@output).to.include filename
 
 
   @Then /^it runs the console command "([^"]*)"$/ (command, done) ->

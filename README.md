@@ -113,6 +113,7 @@ for activities typically performed in software programming tutorials.
 #### Tools and frameworks
 
 * [required NodeJS version](documentation/actions/minimum-node-version.md)
+* [verify NPM installation instructions](documentation/actions/verify_npm_install.md)
 
 
 ## Custom actions

@@ -17,7 +17,10 @@ module.exports = ->
 
 
   @Given /^a runnable file "([^"]*)"$/ (file-path) ->
-    fs.mkdir-sync path.join @root-dir.name, subdir if (subdir = path.dirname file-path) isnt '.'
+    if (subdir = path.dirname file-path) isnt '.'
+      subdir-path = path.join @root-dir.name, subdir
+      if not fs.exists-sync subdir-path
+        fs.mkdir-sync subdir-path
     fs.write-file-sync path.join(@root-dir.name, file-path), """
       <a class="tutorialRunner_createFile">
       __one.txt__

@@ -20,13 +20,13 @@ class TutorialRunner
   # Runs the given tutorial
   execute: (command, args, done) ->
     @_init (err) ~>
-      | err                                                       =>  new HelpCommand({err}).run! ; done err
-      | !@_has-command(command) and @_has-directory(command)      =>  @_command('run').run-directory command, done
-      | !@_has-command(command) and @_has-markdown-file(command)  =>  @_command('run').run-file command, done
-      | command is 'run' and @_has-markdown-file(args?[0])        =>  @_command('run').run-file args[0], done
-      | command is 'run' and (args or []).length is 0             =>  @_command('run').run-all done
-      | @_has-command(command)                                    =>  @_command(command).run done
-      | otherwise                                                 =>  @_unknown-command command, done
+      | err                                                      =>  new HelpCommand({err}).run! ; done err
+      | !@_has-command(command) and @_has-directory(command)     =>  @_command('run').run-directory command, done
+      | !@_has-command(command) and @_is-markdown-file(command)  =>  @_command('run').run-file command, done
+      | command is 'run' and @_is-markdown-file(args?[0])        =>  @_command('run').run-file args[0], done
+      | command is 'run' and (args or []).length is 0            =>  @_command('run').run-all done
+      | @_has-command(command)                                   =>  @_command(command).run done
+      | otherwise                                                =>  @_unknown-command command, done
 
 
   # Asynchronous initializer for this class
@@ -65,10 +65,9 @@ class TutorialRunner
       no
 
 
-  _has-markdown-file: (filename) ->
+  _is-markdown-file: (filename) ->
     try
-      info = fs.stat-sync filename
-      info.is-file! and filename.ends-with '.md'
+      filename.ends-with '.md' and fs.stat-sync(filename).is-file!
     catch
       no
 

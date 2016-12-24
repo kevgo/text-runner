@@ -41,13 +41,13 @@ module.exports = ->
 
 
   @Then /^it runs only the tests in "([^"]*)"$/ (filename) ->
-    expect(@output).to.include filename
+    expect(@output.replace /\\/g, '/').to.include filename
 
     # verify that all other files have not run
     all-files = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
                                                  |> map ~> path.relative @root-dir.name, it
                                                  |> compact
-    files-shouldnt-run = all-files |> reject (is filename)
+    files-shouldnt-run = all-files |> reject (.replace(/\\/g, '/') is filename)
     for file-shouldnt-run in files-shouldnt-run
       expect(@output).to.not.include file-shouldnt-run
 

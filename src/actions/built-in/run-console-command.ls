@@ -1,6 +1,6 @@
 require! {
   '../../helpers/call-args'
-  'chalk' : {bold, cyan, red}
+  'chalk' : {cyan, red}
   'observable-process' : ObservableProcess
   'path'
   'prelude-ls' : {compact, find, head, map, tail, values}
@@ -28,7 +28,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
   input-text = searcher.node-content type: 'htmlblock'
   get-input input-text, formatter, (input) ->
-    formatter.refine "running console command: #{bold cyan commands-to-run}"
+    formatter.refine "running console command: #{cyan commands-to-run}"
     process = new ObservableProcess(call-args(commands-to-run),
                                     cwd: configuration.test-dir,
                                     stdout: formatter.stdout,

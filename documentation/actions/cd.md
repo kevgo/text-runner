@@ -1,6 +1,7 @@
 ### changing the current working directory
 
-The `cd` action changes into the directory that the link in its block points to.
+The `cd` action changes into the directory
+that its embedded link or code block points to.
 
 
 #### Example
@@ -8,7 +9,11 @@ The `cd` action changes into the directory that the link in its block points to.
 <a class="tutorialRunner_runMarkdownInTutrun">
 ```markdown
 <a class="tutorialRunner_cd">
-Let's change into the [foo](.) directory to see what's in there.
+Let's change into the [foo](.) directory.
+</a>
+
+<a class="tutorialRunner_cd">
+Let's change into the `..` directory.
 </a>
 ```
 </a>

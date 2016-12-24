@@ -97,7 +97,8 @@ for activities typically performed in software programming tutorials.
 * [create a file](documentation/actions/create_file.md)
 * [create a directory](documentation/actions/create_directory.md)
 * [verifyFileContent](documentation/actions/verify_file_content.md)
-* [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
+* [verify the source code contains a directory](documentation/actions/verify_source_contains_directory.md)
+* [verify the test workspace contains a directory](documentation/actions/verify_workspace_contains_directory.md)
 * [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)
 
 

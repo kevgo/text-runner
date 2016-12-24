@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {cyan, green, magenta, red}
+  'chalk' : {cyan, magenta, red}
   'fs'
   'mkdirp'
   'path'
@@ -26,15 +26,15 @@ function check-external-link target, formatter, done
     | response?.status-code is 404        =>  formatter.warning "link to non-existing external website #{red target}"; done!
     | err?.message is 'ESOCKETTIMEDOUT'   =>  formatter.warning "link to #{magenta target} timed out"; done!
     | err                                 =>  done err
-    | otherwise                           =>  formatter.success "link to external website #{green target}"; done!
+    | otherwise                           =>  formatter.success "link to external website #{cyan target}"; done!
 
 
 function check-link-to-filesystem filename, target, formatter, done
   target = path.join path.dirname(filename), target
   fs.stat target, (err, stats) ->
     | err                  =>  formatter.error "link to non-existing local file #{red target}"
-    | stats.is-directory!  =>  formatter.success "link to local directory #{green target}"
-    | _                    =>  formatter.success "link to local file #{green target}"
+    | stats.is-directory!  =>  formatter.success "link to local directory #{cyan target}"
+    | _                    =>  formatter.success "link to local file #{cyan target}"
     done err
 
 
@@ -44,9 +44,9 @@ function check-link-to-anchor-in-same-file filename, target, link-targets, forma
     formatter.error "link to non-existing local anchor #{red target}"
     return done 1
   if target-entry.type is 'heading'
-    formatter.success "link to local heading #{green target-entry.text}"
+    formatter.success "link to local heading #{cyan target-entry.text}"
   else
-    formatter.success "link to ##{green target-entry.name}"
+    formatter.success "link to #{cyan "##{target-entry.name}"}"
   done!
 
 
@@ -60,9 +60,9 @@ function check-link-to-anchor-in-other-file filename, target, link-targets, form
     formatter.error "link to non-existing anchor ##{red target-anchor} in #{cyan target-filename}"
 
   if target-entry.type is 'heading'
-    formatter.success "link to heading #{green target-entry.text} in #{cyan target-filename}"
+    formatter.success "link to heading #{cyan target-entry.text} in #{cyan target-filename}"
   else
-    formatter.success "link to #{cyan target-filename}##{green target-anchor}"
+    formatter.success "link to #{cyan target-filename}##{cyan target-anchor}"
   done!
 
 

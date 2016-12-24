@@ -1,5 +1,5 @@
 require! {
-  'chalk' : {cyan, green, magenta, red}
+  'chalk' : {cyan, magenta, red}
   'fs'
   'path'
   'request'
@@ -29,7 +29,7 @@ function check-remote-image node, formatter, done
     | response?.status-code is 404        =>  formatter.warning "image #{magenta node.src} does not exist"; done!
     | err?.message is 'ESOCKETTIMEDOUT'   =>  formatter.warning "image #{magenta node.src} timed out"; done!
     | err                                 =>  done err
-    | otherwise                           =>  formatter.success "image #{green node.src} exists"; done!
+    | otherwise                           =>  formatter.success "image #{cyan node.src} exists"; done!
 
 
 function is-remote-image node

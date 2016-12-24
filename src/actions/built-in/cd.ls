@@ -15,7 +15,7 @@ module.exports = function {formatter, searcher}
   formatter.refine "changing into the #{bold cyan directory} directory"
   formatter.output "cd #{directory}"
   try
-    process.chdir directory
+    process.chdir path.join(process.cwd!, directory)
   catch
     switch
     | e.code is 'ENOENT' =>  formatter.error "directory #{directory} not found"

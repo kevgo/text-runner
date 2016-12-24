@@ -20,7 +20,7 @@ test_script:
   - set EXOSERVICE_TEST_DEPTH=API
   - node_modules\.bin\cucumber-js --tags ~@clionly --tags ~@todo --tags ~@skipWindows --format progress
   - set EXOSERVICE_TEST_DEPTH=CLI
-  - node_modules\.bin\cucumber-js --tags ~@apionly --tags ~@todo --tags ~@skipWindows --format progress
+  - node_modules\.bin\cucumber-js --tags ~@apionly --tags ~@todo --tags ~@skipWindows
   - bin\tut-run --format robust
 
 build: off

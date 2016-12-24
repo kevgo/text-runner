@@ -95,6 +95,7 @@ for activities typically performed in software programming tutorials.
 
 * [change the current working directory](documentation/actions/cd.md)
 * [create a file](documentation/actions/create_file.md)
+* [create a directory](documentation/actions/create_directory.md)
 * [verifyFileContent](documentation/actions/verify_file_content.md)
 * [verify that a linked directory exists](documentation/actions/verify_linked_directory_exists.md)
 * [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)

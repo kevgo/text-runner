@@ -72,5 +72,10 @@ module.exports = ->
     expect(fs.read-file-sync(path.join(@root-dir.name, file-name), 'utf8').trim!).to.equal expected-content.trim!
 
 
+  @Then /^the test workspace now contains a directory "([^"]*)"$/ (file-name) ->
+    stat = fs.stat-sync path.join(@root-dir.name, file-name)
+    expect(stat.is-directory!).to.be.true
+
+
   @Then /^the test fails with:$/ (table) ->
     @verify-failure table.rows-hash!

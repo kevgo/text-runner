@@ -1,5 +1,6 @@
 require! {
   'chalk' : {bold, dim, green, magenta}
+  'time-diff' : Time
 }
 
 # Base class for formatters
@@ -35,6 +36,10 @@ class Formatter
       log: (text) ~>
         @output "#{text}\n"
 
+    @time = new Time
+      ..start 'formatter'
+
+
 
   # Called when we start performing an activity that was defined in a block
   refine: (@activity-text) ->
@@ -57,10 +62,11 @@ class Formatter
 
   # called when the whole test suite passed
   suite-success: ->
-    text = green "\nSuccess! #{@steps-count} steps in #{@files-count} files passed"
+    text = green "\nSuccess! #{@steps-count} steps in #{@files-count} files"
     if @warnings-count > 0
       text += green ", "
       text += magenta "#{@warnings-count} warnings"
+    text += green ", #{@time.end 'formatter'}"
     console.log bold text
 
 

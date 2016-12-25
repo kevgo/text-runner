@@ -9,7 +9,7 @@ Feature: default formatter
 
 
   Scenario: default formatter
-    When executing the "simple" example
+    When executing the "bash" example
     Then it prints:
       """
       bash.md

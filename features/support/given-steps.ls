@@ -32,6 +32,14 @@ module.exports = ->
       """
 
 
+  @Given /^I am in a directory that contains a tutorial without a configuration file$/ ->
+    fs.write-file-sync path.join(@root-dir.name, '1.md'), """
+      <a class="tutorialRunner_verifySourceContainsDirectory">
+        `.`
+      </a>
+      """
+
+
   @Given /^I am in a directory that contains the "([^"]*)" example with the configuration file:$/ (example-name, config-file-content) ->
     fs.copy-sync path.join('examples' example-name), @root-dir.name
     fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), config-file-content

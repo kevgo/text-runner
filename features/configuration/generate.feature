@@ -9,7 +9,6 @@ Feature: generating a configuration file
 
   @clionly
   Scenario: running in a directory without configuration file
-    Given I am in a directory that contains the "simple" example without a configuration file
     When running the "setup" command
     Then it prints:
       """

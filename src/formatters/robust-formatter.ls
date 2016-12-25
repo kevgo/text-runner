@@ -8,7 +8,6 @@ require! {
 # A very robust formatter, prints output before the step name
 class RobustFormatter extends Formatter
 
-
   # Called on general errors
   error: (@error-message) ->
     @_print-activity-header bold . red

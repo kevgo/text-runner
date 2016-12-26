@@ -6,6 +6,7 @@ require! {
   './formatters/formatter-manager' : FormatterManager
   'fs'
   'interpret'
+  'is-glob'
   'liftoff' : Liftoff
   'path'
 }
@@ -24,6 +25,7 @@ class TutorialRunner
       | !@_has-command(command) and @_has-directory(command)     =>  @_command('run').run-directory command, done
       | !@_has-command(command) and @_is-markdown-file(command)  =>  @_command('run').run-file command, done
       | command is 'run' and @_is-markdown-file(args?[0])        =>  @_command('run').run-file args[0], done
+      | !@_has-command(command) and is-glob(command)             =>  @_command('run').run-glob command, done
       | command is 'run' and (args or []).length is 0            =>  @_command('run').run-all done
       | @_has-command(command)                                   =>  @_command(command).run done
       | otherwise                                                =>  @_unknown-command command, done
@@ -68,6 +70,14 @@ class TutorialRunner
   _is-markdown-file: (filename) ->
     try
       filename.ends-with '.md' and fs.stat-sync(filename).is-file!
+    catch
+      no
+
+
+  _has-markdown-files: (glob-expression) ->
+    try
+      files = glob.sync glob-expression
+      files.any -> it.ends-with '.md' and fs.stat-sync(it).is-file!
     catch
       no
 

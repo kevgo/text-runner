@@ -33,6 +33,11 @@ class RunCommand
     @_run [filename], done
 
 
+  run-glob: (file-expression, done) ->
+    @_run glob.sync(file-expression), done
+
+
+
   # Runs the currently set up runners.
   _run: (filenames, done) ->
     try

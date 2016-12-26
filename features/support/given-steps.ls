@@ -22,12 +22,8 @@ module.exports = ->
       if not fs.exists-sync subdir-path
         fs.mkdir-sync subdir-path
     fs.write-file-sync path.join(@root-dir.name, file-path), """
-      <a class="tutorialRunner_createFile">
-      __one.txt__
-
-      ```
-      Hello world!
-      ```
+      <a class="tutorialRunner_verifyWorkspaceContainsDirectory">
+        `.`
       </a>
       """
 

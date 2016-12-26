@@ -9,21 +9,7 @@ Feature: testing all docs in a subfolder
 
 
   Scenario: testing all files in a subfolder
-    Given my workspace contains the file "commands/foo.md" with the content:
-      """
-      <a class="tutorialRunner_runJavascript">
-      ```
-      console.log('foo')
-      ```
-      </a>
-      """
-    And my workspace contains the file "readme.md" with the content:
-      """
-      <a class="tutorialRunner_runJavascript">
-      ```
-      console.log('readme')
-      ```
-      </a>
-      """
+    Given a runnable file "commands/foo.md"
+    And a runnable file "readme.md"
     When running "tut-run commands"
     Then it runs only the tests in "commands/foo.md"

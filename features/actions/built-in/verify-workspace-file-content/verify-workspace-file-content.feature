@@ -4,7 +4,7 @@ Feature: verifying file content
   I want to be able to write actions that verify created files
   So that I am sure my tools performs the correct actions on the hard drive.
 
-  - the "verifyFileContent" action verifies files in the current workspace
+  - the "verifyWorkspaceFileContent" action verifies files in the current workspace
   - the filename is provided as strong text or italic text
   - the expected content is provided as a code or fenced block
 
@@ -19,7 +19,7 @@ Feature: verifying file content
   Scenario: specify file name via emphasized text and content via code block
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tr_verifyFileContent">
+      <a class="tr_verifyWorkspaceFileContent">
       _hello.txt_ with content `Hello world!`
       </a>
       """
@@ -33,7 +33,7 @@ Feature: verifying file content
   Scenario: specify file name via strong text and content via fenced block
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tr_verifyFileContent">
+      <a class="tr_verifyWorkspaceFileContent">
       __hello.txt__
 
       ```
@@ -51,7 +51,7 @@ Feature: verifying file content
   Scenario: file content mismatch
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tr_verifyFileContent">
+      <a class="tr_verifyWorkspaceFileContent">
       __hello.txt__
 
       ```
@@ -71,7 +71,7 @@ Feature: verifying file content
   Scenario: file is missing
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tr_verifyFileContent">
+      <a class="tr_verifyWorkspaceFileContent">
       __zonk.txt__
 
       `Hello world!`

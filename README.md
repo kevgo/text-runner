@@ -44,7 +44,7 @@ which is verified for correctness by TextRunner.
 ## How it works
 
 To make a part of a Markdown file actionable by TextRunner,
-wrap it in `<a>` tags with class `tr_*`.
+wrap it in an `<a>` tag with class `tr_[action name]`.
 As an example,
 let's say a tutorial tells the reader to create a file `config.yml`
 with the content `foo: bar`.
@@ -83,13 +83,16 @@ It takes the filename and content to create from the text inside this block
 and creates the file in the current working directory.
 Text outside of `<a>` tags is ignored.
 
-You execute TextRunner by by calling `text-run` on the command line.
+Now run `text-run` on the command line to test this document.
+TextRunner creates a file <a class="tr_verifyFileContent">_config.yml_
+with the content `foo: bar`</a> on your hard drive.
 
 
 ## Built-in Actions
 
 TextRunner provides built-in actions
 for activities typically performed in software documentation.
+
 
 #### Filesystem
 
@@ -103,6 +106,7 @@ for activities typically performed in software documentation.
 
 
 #### Console commands
+
 * [run a console command](documentation/actions/run_console_command.md)
 * [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
 

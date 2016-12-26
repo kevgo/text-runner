@@ -22,6 +22,7 @@ class Configuration
     files: '**/*.md'
     format: 'robust'
     useTempDirectory: false
+    classPrefix: 'tr_'
     actions:
       run-console-command:
         globals: []

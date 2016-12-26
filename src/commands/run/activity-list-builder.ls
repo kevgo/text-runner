@@ -95,7 +95,8 @@ class ActivityListBuilder
   # Indicates whether the given node is a start tag of an active block
   # by returning the type of the block, or falsy.
   _is-start-tag: (node) ->
-    if node.type is 'htmltag' and matches = node.content.match /<a class="tr_([^"]+)">/
+    regex = new RegExp("""<a class="#{@configuration.get 'classPrefix'}([^"]+)">""")
+    if node.type is 'htmltag' and matches = node.content.match regex
       matches[1]
 
 

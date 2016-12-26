@@ -41,6 +41,12 @@ class MarkdownParser
       node-line = if node.lines?.length > 0 then node.lines[0] + 1 else line
       switch
 
+        case node.type is 'em_open'
+          modifiers.push 'emphasized'
+
+        case node.type is 'em_close'
+          modifiers.splice modifiers.index-of('emphasized'), 1
+
         case node.type is 'strong_open'
           modifiers.push 'strong'
 

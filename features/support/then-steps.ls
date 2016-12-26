@@ -40,32 +40,12 @@ module.exports = ->
     expect(@output).to.include @root-dir.name
 
 
-  @Then /^it runs only the tests in "([^"]*)"$/ (filename) ->
-    expect(@output.replace /\\/g, '/').to.include filename
-
-    # verify that all other files have not run
-    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
-                                                          |> map ~> path.relative @root-dir.name, it
-                                                          |> compact
-                                                          |> map (.replace /\\/g, '/')
-                                                          |> reject (is filename)
-    for file-shouldnt-run in files-shouldnt-run
-      expect(@output).to.not.include file-shouldnt-run
+  @Then /^it runs(?: only)? the tests in "([^"]*)"$/ (filename) ->
+    @verify-ran-only-tests [filename]
 
 
   @Then /^it runs only the tests in:$/ (table) ->
-    filenames = table.raw!
-    for filename in filenames
-      expect(@output.replace /\\/g, '/').to.include filename
-
-    # verify that all other files have not run
-    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
-                                                          |> map ~> path.relative @root-dir.name, it
-                                                          |> compact
-                                                          |> map (.replace /\\/g, '/')
-                                                          |> reject -> filenames.index-of it > -1
-    for file-shouldnt-run in files-shouldnt-run
-      expect(@output).to.not.include file-shouldnt-run
+    @verify-ran-only-tests table.raw![0]
 
 
   @Then /^it runs the console command "([^"]*)"$/ (command, done) ->

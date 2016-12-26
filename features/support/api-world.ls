@@ -101,6 +101,20 @@ ApiWorld = !->
     wait-until (~> @formatter.activities.index-of  "running console command: #{command}" > -1), done
 
 
+  @verify-ran-only-tests = (files) ->
+    for file in files
+      expect(@formatter.file-paths).to.include file, @formatter.file-paths
+
+    # verify all other tests have not run
+    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
+                                                          |> map ~> path.relative @root-dir.name, it
+                                                          |> compact
+                                                          |> map (.replace /\\/g, '/')
+                                                          |> reject -> filenames.index-of it > -1
+    for file-shouldnt-run in files-shouldnt-run
+      expect(@formatter.file-paths).to.not.include file-shouldnt-run
+
+
   @verify-tests-run = (count) ->
     expect(@formatter.activities).to.have.length count
 

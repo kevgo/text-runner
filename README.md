@@ -84,8 +84,8 @@ and creates the file in the current working directory.
 Text outside of `<a>` tags is ignored.
 
 Now run `text-run` on the command line to test this document.
-TextRunner creates a file <a class="tr_verifyWorkspaceContainsFile">__config.yml__
-with the content `foo: bar` on your hard drive.
+TextRunner creates a file <a class="tr_verifyFileContent">__config.yml__
+with the content `foo: bar` </a> on your hard drive.
 
 
 ## Built-in Actions

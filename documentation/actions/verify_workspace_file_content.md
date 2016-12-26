@@ -17,7 +17,7 @@ we can verify it via this block:
 
 <a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifyFileContent">
+<a class="tr_verifyWorkspaceFileContent">
 
 _hello.txt_
 

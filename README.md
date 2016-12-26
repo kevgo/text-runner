@@ -310,7 +310,7 @@ $ text-run setup
 
 The created configuration looks like this:
 
-<a class="tr_verifyFileContent">
+<a class="tr_verifyWorkspaceFileContent">
 __text-run.yml__
 
 ```yml

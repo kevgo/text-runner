@@ -18,6 +18,7 @@ Feature: generating a configuration file
       """
       files: '**/*.md'
       format: robust
+      classPrefix: 'tr_'
       useTempDirectory: false
 
       actions:

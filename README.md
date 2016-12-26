@@ -84,7 +84,7 @@ and creates the file in the current working directory.
 Text outside of `<a>` tags is ignored.
 
 Now run `text-run` on the command line to test this document.
-TextRunner creates a file <a class="tr_verifyFileContent">_config.yml_
+TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
 with the content `foo: bar`</a> on your hard drive.
 
 
@@ -99,8 +99,8 @@ for activities typically performed in software documentation.
 * [change the current working directory](documentation/actions/cd.md)
 * [create a file](documentation/actions/create_file.md)
 * [create a directory](documentation/actions/create_directory.md)
-* [verifyFileContent](documentation/actions/verify_file_content.md)
 * [verify the source code contains a directory](documentation/actions/verify_source_contains_directory.md)
+* [verify the test workspace contains a file with content](documentation/actions/verify_workspace_file_content.md)
 * [verify the test workspace contains a directory](documentation/actions/verify_workspace_contains_directory.md)
 * [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)
 
@@ -310,7 +310,7 @@ $ text-run setup
 
 The created configuration looks like this:
 
-<a class="tr_verifyFileContent">
+<a class="tr_verifyWorkspaceFileContent">
 __text-run.yml__
 
 ```yml

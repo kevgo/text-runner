@@ -44,7 +44,7 @@ which is verified for correctness by TextRunner.
 ## How it works
 
 To make a part of a Markdown file actionable by TextRunner,
-wrap it in `<a>` tags with class `textRunner_*`.
+wrap it in `<a>` tags with class `tr_*`.
 As an example,
 let's say a tutorial tells the reader to create a file `config.yml`
 with the content `foo: bar`.
@@ -62,12 +62,12 @@ foo: bar
 To make this part of the documentation executable,
 surround it with an `<a>` tag that specifies that we want to create a file:
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 
 ```
 ## Creating a configuration file
 
-<a class="textRunner_createFile">
+<a class="tr_createFile">
 Please create a file with the name __config.yml__ and the content:
 `​``
 foo: bar
@@ -124,16 +124,16 @@ Let's create a custom block.
 All it does is print "hello world" when running.
 It will be triggered via this piece of Markdown:
 
-<a class="textRunner_createMarkdownFile">
+<a class="tr_createMarkdownFile">
 ```markdown
-<a class="textRunner_helloWorld">
+<a class="tr_helloWorld">
 </a>
 ```
 </a>
 
 The definition for this block lives in the file:
 
-<a class="textRunner_createFile">
+<a class="tr_createFile">
 __text-run/hello-world-action.js__
 
 ```javascript
@@ -148,7 +148,7 @@ module.exports = function(env) {
 </a>
 
 Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
-<a class="textRunner_runMarkdownFile">
+<a class="tr_runMarkdownFile">
 The formatter displays test progress on the console as the test runs.
 </a>
 
@@ -201,9 +201,9 @@ or use a helper that is provided to you via the `searcher` field of the first pa
 To demonstrate how this works,
 here is a simple implementation of an action that runs a code block in the terminal.
 
-<a class="textRunner_createMarkdownFile">
+<a class="tr_createMarkdownFile">
 ```
-<a class="textRunner_consoleCommand">
+<a class="tr_consoleCommand">
 `​``
 echo "Hello world"
 `​``
@@ -213,7 +213,7 @@ echo "Hello world"
 
 Here is the block definition implemented using the `searcher` helper.
 
-<a class="textRunner_createFile">
+<a class="tr_createFile">
 __text-run/console-command.js__
 ```javascript
 child_process = require('child_process')
@@ -238,7 +238,7 @@ module.exports = function(env) {
 ```
 </a>
 
-<a class="textRunner_runMarkdownFile">
+<a class="tr_runMarkdownFile">
 </a>
 
 - The `searcher.nodeContent` method returns the content of the DOM node
@@ -298,7 +298,7 @@ produce more concise output when running as part of a larger test suite.
 You can configure TextRunner via a configuration file.
 To create one, run:
 
-<a class="textRunner_runConsoleCommand">
+<a class="tr_runConsoleCommand">
 ```
 $ text-run setup
 ```
@@ -306,7 +306,7 @@ $ text-run setup
 
 The created configuration looks like this:
 
-<a class="textRunner_verifyFileContent">
+<a class="tr_verifyFileContent">
 __text-run.yml__
 
 ```yml

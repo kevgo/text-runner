@@ -6,9 +6,9 @@
 - you can [configure](#calling-global-commands) global binaries that you your code base exports
   so that your test can call them directly
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_runConsoleCommand">
+<a class="tr_runConsoleCommand">
 `​``
 $ echo "hello world"
 `​``
@@ -19,7 +19,7 @@ $ echo "hello world"
 You can enter text into the running command by providing an HTML table
 with the content to enter.
 Assuming we have a little application called
-<a class="textRunner_createFile">
+<a class="tr_createFile">
 __greeter.js__
 ```js
 const readline = require('readline');
@@ -34,9 +34,9 @@ rl.question('Your name?', (name) => {
 ```
 </a>
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_runConsoleCommand">
+<a class="tr_runConsoleCommand">
 `​``
 $ node greeter.js
 `​``
@@ -59,9 +59,9 @@ and the last one text to enter once the output from the first column has appeare
 Middle columns are ignored.
 `<th>` elements are considered descriptions and are also ignored.
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_runConsoleCommand">
+<a class="tr_runConsoleCommand">
 `​``
 $ node greeter.js
 `​``
@@ -100,7 +100,7 @@ If you want to call a command provided by your code base,
 you have to tell TextRunner the path to it.
 As an example, if your code provides an executable called `tool`,
 and it is stored as `public/tool` in your source code,
-<a class="textRunner_verifyMatchesSourceCodeFile">
+<a class="tr_verifyMatchesSourceCodeFile">
 your __text-run.yml__ needs to contains this section:
 
 ```

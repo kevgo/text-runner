@@ -22,7 +22,7 @@ module.exports = ->
       if not fs.exists-sync subdir-path
         fs.mkdir-sync subdir-path
     fs.write-file-sync path.join(@root-dir.name, file-path), """
-      <a class="textRunner_verifyWorkspaceContainsDirectory">
+      <a class="tr_verifyWorkspaceContainsDirectory">
         `.`
       </a>
       """
@@ -30,7 +30,7 @@ module.exports = ->
 
   @Given /^I am in a directory that contains documentation without a configuration file$/ ->
     fs.write-file-sync path.join(@root-dir.name, '1.md'), """
-      <a class="textRunner_verifySourceContainsDirectory">
+      <a class="tr_verifySourceContainsDirectory">
         `.`
       </a>
       """
@@ -51,7 +51,7 @@ module.exports = ->
 
   @Given /^my documentation is starting the "([^"]*)" example$/ (example) ->
     fs.write-file-sync path.join(@root-dir.name, '0.md'), """
-      <a class="textRunner_startConsoleCommand">
+      <a class="tr_startConsoleCommand">
       ```
       node #{path.join __dirname, '..' '..' 'examples' 'long-running' 'server.js'}
       ```
@@ -82,7 +82,7 @@ module.exports = ->
 
   @Given /^my workspace contains testable documentation$/ ->
     fs.write-file-sync path.join(@root-dir.name, '1.md'), '''
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       echo "Hello world"
       ```

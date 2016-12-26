@@ -22,20 +22,20 @@ Feature: long-running processes
       """
     And my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_startConsoleCommand">
+      <a class="tr_startConsoleCommand">
 
       ```
       node server.js
       ```
       </a>
 
-      <a class="textRunner_waitForOutput">
+      <a class="tr_waitForOutput">
       ```
       running at port 4000
       ```
       </a>
 
-      <a class="textRunner_stopConsoleCommand">
+      <a class="tr_stopConsoleCommand">
       Stop the current process by hitting Ctrl-C
       </a>
       """

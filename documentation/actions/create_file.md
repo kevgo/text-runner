@@ -7,9 +7,9 @@
 
 #### Example
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_createFile">
+<a class="tr_createFile">
 
 __test.txt__
 

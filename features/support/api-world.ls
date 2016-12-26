@@ -3,9 +3,11 @@ require! {
   'chai' : {expect}
   'chalk' : {cyan, strip-color}
   'dim-console'
+  'fs-extra' : fs
+  'glob'
   'jsdiff-console'
   'path'
-  'prelude-ls' : {any, compact, map, unique}
+  'prelude-ls' : {any, compact, filter, map, reject, unique}
   'wait' : {wait-until}
 }
 
@@ -24,7 +26,7 @@ class TestFormatter
     @warnings = []
 
   start-file: (file-path) ->
-    @file-paths.push file-path
+    @file-paths.push file-path unless @file-paths.includes file-path
 
   start: (activity) ->
     @activities.push strip-color activity
@@ -61,12 +63,12 @@ class TestFormatter
 
 ApiWorld = !->
 
-  @execute = ({command, formatter}, done) ->
+  @execute = ({command, args, formatter}, done) ->
     existing-dir = process.cwd!
     process.chdir @root-dir.name
     @formatter = new TestFormatter {@verbose}
     @runner = new TextRunner format: @formatter
-      ..execute command, null, (@error) ~>
+      ..execute command, args, (@error) ~>
         @cwd-after-run = process.cwd!
         process.chdir existing-dir
         @output = @formatter.text
@@ -99,6 +101,20 @@ ApiWorld = !->
 
   @verify-ran-console-command = (command, done) ->
     wait-until (~> @formatter.activities.index-of  "running console command: #{command}" > -1), done
+
+
+  @verify-ran-only-tests = (files) ->
+    for file in files
+      expect(@formatter.file-paths).to.include file, @formatter.file-paths
+
+    # verify all other tests have not run
+    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
+                                                          |> map ~> path.relative @root-dir.name, it
+                                                          |> compact
+                                                          |> map (.replace /\\/g, '/')
+                                                          |> reject -> files.index-of it > -1
+    for file-shouldnt-run in files-shouldnt-run
+      expect(@formatter.file-paths).to.not.include file-shouldnt-run
 
 
   @verify-tests-run = (count) ->

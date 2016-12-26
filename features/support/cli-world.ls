@@ -1,8 +1,11 @@
 require! {
   'chai' : {expect}
   'dim-console'
+  'fs-extra' : fs
+  'glob'
   'observable-process' : ObservableProcess
   'path'
+  'prelude-ls' : {compact, filter, map, reject}
 }
 
 
@@ -76,6 +79,23 @@ CliWorld = !->
   @verify-ran-console-command = (command, done) ->
     expect(@process.full-output!).to.include "running.md:1-5 -- running console command: #{command}"
     done!
+
+
+  @verify-ran-only-tests = (filenames) ->
+    standardized-output = @output.replace /\\/g, '/'
+
+    # verify the given tests have run
+    for filename in filenames
+      expect(standardized-output).to.include filename
+
+    # verify all other tests have not run
+    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
+                                                          |> map ~> path.relative @root-dir.name, it
+                                                          |> compact
+                                                          |> map (.replace /\\/g, '/')
+                                                          |> reject -> filenames.index-of it > -1
+    for file-shouldnt-run in files-shouldnt-run
+      expect(standardized-output).to.not.include file-shouldnt-run
 
 
   @verify-tests-run = (count) ->

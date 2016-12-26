@@ -15,7 +15,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file content matches
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_verifyMatchesSourceCodeFile">
+      <a class="tr_verifyMatchesSourceCodeFile">
       [global-tool](examples/global-tool)
       __text-run.yml__
       ```
@@ -38,7 +38,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file content mismatch
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_verifyMatchesSourceCodeFile">
+      <a class="tr_verifyMatchesSourceCodeFile">
       [global-tool](examples/global-tool)
       __text-run.yml__
       ```

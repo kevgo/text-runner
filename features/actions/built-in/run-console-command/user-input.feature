@@ -18,7 +18,7 @@ Feature: running console commands
   Scenario: entering simple text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       $ read foo
       $ echo You entered: $foo
@@ -45,7 +45,7 @@ Feature: running console commands
   Scenario: entering complex text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       $ echo "Name of the service to add"
       $ read service_name

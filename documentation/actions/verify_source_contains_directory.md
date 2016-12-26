@@ -6,9 +6,9 @@ The `verifySourceContainsDirectory` action checks links to folders in your sourc
 #### Example
 
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_verifySourceContainsDirectory">
+<a class="tr_verifySourceContainsDirectory">
   Check out the [examples](..) directory to see this in action.
 </a>
 ```

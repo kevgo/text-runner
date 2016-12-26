@@ -4,7 +4,7 @@ Feature: creating files with content
   I want to be able to create files with content
   So that my test suite has files to work with.
 
-  - to create a file, wrap the code in an A tag with class "textRunner_createFile"
+  - to create a file, wrap the code in an A tag with class "tr_createFile"
   - the file name is provided in bold
   - content is provided as a triple-fenced code block
 
@@ -12,7 +12,7 @@ Feature: creating files with content
   Scenario: running a tutorial that creates files
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       creating a file with name __one.txt__ and content:
 
       ```
@@ -34,7 +34,7 @@ Feature: creating files with content
   Scenario: no file path given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       ```
       Hello world!
       ```
@@ -52,7 +52,7 @@ Feature: creating files with content
   Scenario: no content block given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       __one.txt__
       </a>
       """
@@ -68,7 +68,7 @@ Feature: creating files with content
   Scenario: two file paths given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       __one.txt__
       __two.txt__
 
@@ -89,7 +89,7 @@ Feature: creating files with content
   Scenario: two content blocks given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       __one.txt__
 
       ```

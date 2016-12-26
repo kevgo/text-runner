@@ -5,7 +5,7 @@ Feature: running console commands
   So that they can execute the tool I am describing.
 
   - to run a console command, wrap the code in an A tag with class
-    "textRunner_runConsoleCommand"
+    "tr_runConsoleCommand"
   - the commands to run are provided in a triple-fenced code block
   - all commands run in a Bash shell, concatenated via " && "
 
@@ -13,7 +13,7 @@ Feature: running console commands
   Scenario: running console commands
     Given my workspace contains the file "running.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       ls -1
       ```
@@ -26,7 +26,7 @@ Feature: running console commands
   Scenario: missing console command block
     Given my workspace contains the file "running.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       foo
       </a>
       """
@@ -42,7 +42,7 @@ Feature: running console commands
   Scenario: empty console command
     Given my workspace contains the file "running.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       ```
       </a>

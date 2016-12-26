@@ -4,8 +4,7 @@ Feature: configuring the class prefix
   I want to be able to be able to define a different prefix for tag classes
   So that I can avoid conflicts with existing CSS classes.
 
-  - the configuration option "classPrefix" allows to override the default class prefix
-    with a custom one
+  - the configuration option "classPrefix" allows to provide a custom class prefix
 
 
   Scenario: no configuration option

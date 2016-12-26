@@ -44,10 +44,26 @@ module.exports = ->
     expect(@output.replace /\\/g, '/').to.include filename
 
     # verify that all other files have not run
-    all-files = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
-                                                 |> map ~> path.relative @root-dir.name, it
-                                                 |> compact
-    files-shouldnt-run = all-files |> reject (.replace(/\\/g, '/') is filename)
+    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
+                                                          |> map ~> path.relative @root-dir.name, it
+                                                          |> compact
+                                                          |> map (.replace /\\/g, '/')
+                                                          |> reject (is filename)
+    for file-shouldnt-run in files-shouldnt-run
+      expect(@output).to.not.include file-shouldnt-run
+
+
+  @Then /^it runs only the tests in:$/ (table) ->
+    filenames = table.raw!
+    for filename in filenames
+      expect(@output.replace /\\/g, '/').to.include filename
+
+    # verify that all other files have not run
+    files-shouldnt-run = glob.sync "#{@root-dir.name}/**" |> filter -> fs.stat-sync(it).is-file!
+                                                          |> map ~> path.relative @root-dir.name, it
+                                                          |> compact
+                                                          |> map (.replace /\\/g, '/')
+                                                          |> reject -> filenames.index-of it > -1
     for file-shouldnt-run in files-shouldnt-run
       expect(@output).to.not.include file-shouldnt-run
 

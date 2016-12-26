@@ -18,6 +18,7 @@
     "glob": "7.1.1",
     "indent-string": "3.0.0",
     "interpret": "1.0.1",
+    "is-glob": "3.1.0",
     "js-yaml": "3.7.0",
     "jsdiff-console": "2.2.1",
     "liftoff": "2.3.0",

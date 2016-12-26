@@ -10,7 +10,7 @@ Feature: unknown actions
   Scenario: using an unknown action
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_unknownAction">
+      <a class="tr_unknownAction">
       </a>
       """
     When trying to run text-run

@@ -10,9 +10,9 @@ and stop the long-running process using a `stopCommand` block.
 
 
 #### Example
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_startConsoleCommand">
+<a class="tr_startConsoleCommand">
 
 `​``
 $ read foo
@@ -21,7 +21,7 @@ $ read foo
 
 ... interact with the server here ...
 
-<a class="textRunner_stopConsoleCommand">
+<a class="tr_stopConsoleCommand">
 Stop the current process by hitting Ctrl-C
 </a>
 ```

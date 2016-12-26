@@ -10,7 +10,7 @@ Feature: verifying file content
       """
       Our workspace contains the file:
 
-      <a class="textRunner_verifyFileContent">
+      <a class="tr_verifyFileContent">
       __one.txt__
 
       ```
@@ -24,7 +24,7 @@ Feature: verifying file content
   Scenario: file content matches
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       __one.txt__
 
       ```
@@ -46,7 +46,7 @@ Feature: verifying file content
   Scenario: file content mismatch
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="textRunner_createFile">
+      <a class="tr_createFile">
       __one.txt__
 
       ```

@@ -11,7 +11,7 @@ Feature: verifying the source code contains a directory
   Scenario: linked directory exists
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_verifySourceContainsDirectory">
+      <a class="tr_verifySourceContainsDirectory">
         See the [examples](examples) for more details
       </a>
       """
@@ -25,7 +25,7 @@ Feature: verifying the source code contains a directory
   Scenario: linked directory does not exists
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_verifySourceContainsDirectory">
+      <a class="tr_verifySourceContainsDirectory">
         [zonk](zonk)
       </a>
       """

@@ -12,7 +12,7 @@ Feature: selecting formatter via the command-line
   Background:
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       echo "Hello world"
       ```

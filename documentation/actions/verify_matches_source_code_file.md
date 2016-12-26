@@ -7,9 +7,9 @@ without having them do it as part of the tutorial.
 
 #### Example
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_verifyMatchesSourceCodeFile">
+<a class="tr_verifyMatchesSourceCodeFile">
 Your __text-run.yml__ needs to contains this section:
 
 `​``

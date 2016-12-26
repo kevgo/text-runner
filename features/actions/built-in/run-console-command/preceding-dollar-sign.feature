@@ -11,7 +11,7 @@ Feature: marking console commands with preceding dollar signs
   Scenario: running console commands with dollar signs
     Given my workspace contains the file "running-with-dollar-sign.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       $ ls -a
       $ ls -a

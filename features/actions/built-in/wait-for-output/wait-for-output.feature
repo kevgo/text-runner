@@ -17,7 +17,7 @@ Feature: waiting for output of long-running processes
       """
     And my workspace contains the file "wait.md" with the content:
       """
-      <a class="textRunner_waitForOutput">
+      <a class="tr_waitForOutput">
       ```
       running at port
       ```

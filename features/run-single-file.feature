@@ -11,7 +11,7 @@ Feature: running a single MarkDown file
   Background:
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       console.log("file 1.md")
       ```
@@ -19,7 +19,7 @@ Feature: running a single MarkDown file
       """
     Given my workspace contains the file "2.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       console.log("file 2.md")
       ```

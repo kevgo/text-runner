@@ -10,7 +10,7 @@ Feature: running multiple console commands
   Scenario: running multiple console commands
     Given my workspace contains the file "running-multiple-commands.md" with the content:
       """
-      <a class="textRunner_runConsoleCommand">
+      <a class="tr_runConsoleCommand">
       ```
       ls -a
       ls -a

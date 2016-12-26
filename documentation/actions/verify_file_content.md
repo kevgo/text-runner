@@ -6,15 +6,15 @@ and has the given content.
 
 #### Example
 
-<a class="textRunner_createFile">
+<a class="tr_createFile">
 Assuming we have a file __hello.txt__ with content `hello world`,
 </a>
 we can verify it via this block:
 
 
-<a class="textRunner_runMarkdownInTextrun">
+<a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="textRunner_verifyFileContent">
+<a class="tr_verifyFileContent">
 
 __hello.txt__
 

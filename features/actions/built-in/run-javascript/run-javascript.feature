@@ -12,7 +12,7 @@ Feature: running inline blocks of Javascript
   Scenario: running synchronous Javascript
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       const foo = 'bar'
       console.log('A foo walks into a ' + foo)
@@ -33,7 +33,7 @@ Feature: running inline blocks of Javascript
   Scenario: running asynchronous Javascript using the "// ..." keyword
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       const wait = require('wait')
       const foo = 'bar'
@@ -58,7 +58,7 @@ Feature: running inline blocks of Javascript
   Scenario: running asynchronous Javascript using the "<CALLBACK>" keyword
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       const wait = require('wait')
       const foo = 'bar'
@@ -76,13 +76,13 @@ Feature: running inline blocks of Javascript
   Scenario: persisting variables across blocks
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       const foo = 'bar'
       ```
       </a>
 
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       console.log('A foo walks into a ' + foo)
       ```
@@ -106,7 +106,7 @@ Feature: running inline blocks of Javascript
   Scenario: missing code block
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       </a>
       """
     When trying to run text-run
@@ -121,7 +121,7 @@ Feature: running inline blocks of Javascript
   Scenario: multiple code blocks
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="textRunner_runJavascript">
+      <a class="tr_runJavascript">
       ```
       console.log('one')
       ```

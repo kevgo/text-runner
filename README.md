@@ -83,10 +83,11 @@ It takes the filename and content to create from the text inside this block
 and creates the file in the current working directory.
 Text outside of `<a>` tags is ignored.
 
+Now run `text-run` on the command line to test this document.
+TextRunner creates a file `config.yml` with the given content on your drive.
 You can customize the class name used by TextRunner
 in the [configuration file](#configuration).
 
-You execute TextRunner by by calling `text-run` on the command line.
 
 
 ## Built-in Actions

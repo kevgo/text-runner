@@ -16,6 +16,7 @@ Feature: verifying file content
       """
 
 
+  @verbose
   Scenario: specify file name via emphasized text and content via code block
     Given my workspace contains the file "01.md" with the content:
       """

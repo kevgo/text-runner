@@ -3,11 +3,14 @@
 Verifies that a file with the given name exists,
 and has the given content.
 
+- the file name is provided as _emphasized_ or __strong__ text
+- the file content is provided as a code block with single or triple backticks
+
 
 #### Example
 
 <a class="tr_createFile">
-Assuming we have a file __hello.txt__ with content `hello world`,
+Assuming we have a file _hello.txt_ with content `hello world`,
 </a>
 we can verify it via this block:
 
@@ -16,7 +19,7 @@ we can verify it via this block:
 ```markdown
 <a class="tr_verifyFileContent">
 
-__hello.txt__
+_hello.txt_
 
 `​``
 hello world

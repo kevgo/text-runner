@@ -1,11 +1,21 @@
 # Creating a file
 
-* the name of the file is provided as bold text within the anchor tag
-* the content of the file is provided as a multi-line code block (surrounded with \`\`\`) within the anchor tag
+* the name of the file is provided as _emphasized_ or __bold__ text within the anchor tag
+* the content of the file is provided as a code block with one or three backticks
 * TextRunner creates the file in the workspace
 
 
 #### Example
+
+<a class="tr_runMarkdownInTextrun">
+```markdown
+<a class="tr_createFile">
+_test.txt_ with content `foo`
+</a>
+```
+</a>
+
+- or -
 
 <a class="tr_runMarkdownInTextrun">
 ```markdown

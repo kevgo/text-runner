@@ -5,11 +5,29 @@ Feature: creating files with content
   So that my test suite has files to work with.
 
   - to create a file, wrap the code in an A tag with class "tr_createFile"
-  - the file name is provided in bold
+  - the file name is provided as emphasized or bold text
   - content is provided as a triple-fenced code block
 
 
-  Scenario: running a tutorial that creates files
+  Scenario: providing the filename as emphasized text and the content single-quoted
+    Given my workspace contains the file "creator.md" with the content:
+      """
+      <a class="tr_createFile">
+      creating a file with name _one.txt_ and content `Hello world!`
+      </a>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | creator.md            |
+      | LINE     | 1                     |
+      | MESSAGE  | creating file one.txt |
+    And the test directory now contains a file "one.txt" with content:
+      """
+      Hello world!
+      """
+
+
+  Scenario: providing the filename as bold text and the content triple-quoted
     Given my workspace contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">

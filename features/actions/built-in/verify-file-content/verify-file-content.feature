@@ -5,7 +5,7 @@ Feature: verifying file content
   So that I am sure my tools performs the correct actions on the hard drive.
 
   - the "verifyFileContent" action verifies files in the current workspace
-  - the filename is provided as strong text
+  - the filename is provided as strong text or italic text
   - the expected content is provided as a code or fenced block
 
 
@@ -16,7 +16,21 @@ Feature: verifying file content
       """
 
 
-  Scenario: specify file content via a fenced block
+  Scenario: specify file name via emphasized text and content via code block
+    Given my workspace contains the file "01.md" with the content:
+      """
+      <a class="tr_verifyFileContent">
+      _hello.txt_ with content `Hello world!`
+      </a>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 01.md                    |
+      | LINE     | 1                        |
+      | MESSAGE  | verifying file hello.txt |
+
+
+  Scenario: specify file name via strong text and content via fenced block
     Given my workspace contains the file "01.md" with the content:
       """
       <a class="tr_verifyFileContent">
@@ -31,22 +45,6 @@ Feature: verifying file content
     Then it signals:
       | FILENAME | 01.md                    |
       | LINE     | 1-7                      |
-      | MESSAGE  | verifying file hello.txt |
-
-
-  Scenario: specify file content via a code block
-    Given my workspace contains the file "01.md" with the content:
-      """
-      <a class="tr_verifyFileContent">
-      __hello.txt__
-
-      `Hello world!`
-      </a>
-      """
-    When running text-run
-    Then it signals:
-      | FILENAME | 01.md                    |
-      | LINE     | 1-4                      |
       | MESSAGE  | verifying file hello.txt |
 
 

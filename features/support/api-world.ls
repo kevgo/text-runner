@@ -3,9 +3,11 @@ require! {
   'chai' : {expect}
   'chalk' : {cyan, strip-color}
   'dim-console'
+  'fs-extra' : fs
+  'glob'
   'jsdiff-console'
   'path'
-  'prelude-ls' : {any, compact, map, unique}
+  'prelude-ls' : {any, compact, filter, map, reject, unique}
   'wait' : {wait-until}
 }
 
@@ -110,7 +112,7 @@ ApiWorld = !->
                                                           |> map ~> path.relative @root-dir.name, it
                                                           |> compact
                                                           |> map (.replace /\\/g, '/')
-                                                          |> reject -> filenames.index-of it > -1
+                                                          |> reject -> files.index-of it > -1
     for file-shouldnt-run in files-shouldnt-run
       expect(@formatter.file-paths).to.not.include file-shouldnt-run
 

@@ -314,13 +314,21 @@ The created configuration looks like this:
 __text-run.yml__
 
 ```yml
+# white-list for files to test
 files: '**/*.md'
+
+# the formatter to use
 format: robust
+
+# prefix that makes anchor tags active regions
 classPrefix: 'tr_'
+
+# whether to run the tests in an external temp directory,
+# uses ./tmp if false
 useTempDirectory: false
 
+# action-specific configuration
 actions:
-
   runConsoleCommand:
     globals: []
 ```

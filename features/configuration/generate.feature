@@ -16,13 +16,21 @@ Feature: generating a configuration file
       """
     And it creates the file "text-run.yml" with the content:
       """
+      # white-list for files to test
       files: '**/*.md'
+
+      # the formatter to use
       format: robust
+
+      # prefix that makes anchor tags active regions
       classPrefix: 'tr_'
+
+      # whether to run the tests in an external temp directory,
+      # uses ./tmp if false
       useTempDirectory: false
 
+      # action-specific configuration
       actions:
-
         runConsoleCommand:
           globals: []
       """

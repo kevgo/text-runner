@@ -67,7 +67,7 @@ class RunCommand
 
   # Returns all the markdown files for this tutorial
   _markdown-files-in-dir: (dir-name) ->
-    if (files = glob.sync "#{dir-name}/*.md").length is 0
+    if (files = glob.sync "#{dir-name}/**/*.md").length is 0
       @formatter.warning 'no Markdown files found'
     files = files |> reject (.includes 'node_modules')
     files

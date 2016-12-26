@@ -10,6 +10,9 @@ Feature: testing all docs in a subfolder
 
   Scenario: testing all files in a subfolder
     Given a runnable file "commands/foo.md"
+    Given a runnable file "commands/bar/baz.md"
     And a runnable file "readme.md"
     When running "tut-run commands"
-    Then it runs only the tests in "commands/foo.md"
+    Then it runs only the tests in:
+      | commands/foo.md     |
+      | commands/bar/baz.md |

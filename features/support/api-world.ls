@@ -3,9 +3,11 @@ require! {
   'chai' : {expect}
   'chalk' : {cyan, strip-color}
   'dim-console'
+  'fs-extra' : fs
+  'glob'
   'jsdiff-console'
   'path'
-  'prelude-ls' : {any, compact, map, unique}
+  'prelude-ls' : {any, compact, filter, map, reject, unique}
   'wait' : {wait-until}
 }
 
@@ -61,12 +63,12 @@ class TestFormatter
 
 ApiWorld = !->
 
-  @execute = ({command, formatter}, done) ->
+  @execute = ({command, args, formatter}, done) ->
     existing-dir = process.cwd!
     process.chdir @root-dir.name
     @formatter = new TestFormatter {@verbose}
     @runner = new TextRunner format: @formatter
-      ..execute command, null, (@error) ~>
+      ..execute command, args, (@error) ~>
         @cwd-after-run = process.cwd!
         process.chdir existing-dir
         @output = @formatter.text
@@ -110,7 +112,7 @@ ApiWorld = !->
                                                           |> map ~> path.relative @root-dir.name, it
                                                           |> compact
                                                           |> map (.replace /\\/g, '/')
-                                                          |> reject -> filenames.index-of it > -1
+                                                          |> reject -> files.index-of it > -1
     for file-shouldnt-run in files-shouldnt-run
       expect(@formatter.file-paths).to.not.include file-shouldnt-run
 

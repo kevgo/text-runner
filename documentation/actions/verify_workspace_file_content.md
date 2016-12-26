@@ -17,7 +17,7 @@ we can verify it via this block:
 
 <a class="tr_runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifyFileContent">
+<a class="tr_verifyWorkspaceFileContent">
 
 _hello.txt_
 
@@ -31,5 +31,5 @@ hello world
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/verify-file-content/verify-file-content.feature)
-- [source code](../../src/actions/built-in/verify-file-content.ls)
+- [feature specs](../../features/actions/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
+- [source code](../../src/actions/built-in/verify-workspace-file-content.ls)

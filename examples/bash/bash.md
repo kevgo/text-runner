@@ -72,7 +72,7 @@ $ cp greeter.sh another_greeter.sh
 Now we have this new file in our workspace:
 
 
-<a class="tr_verifyFileContent">
+<a class="tr_verifyWorkspaceFileContent">
 
 __another_greeter.sh__
 

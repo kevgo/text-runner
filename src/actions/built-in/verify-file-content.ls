@@ -9,7 +9,7 @@ require! {
 
 module.exports  = ({configuration, formatter, searcher}, done) ->
 
-  file-path = searcher.node-content type: 'strongtext', ({nodes, content}) ->
+  file-path = searcher.node-content types: ['strongtext', 'emphasizedtext'], ({nodes, content}) ->
     | nodes.length is 0    =>  'no file path found'
     | nodes.length > 1     =>  "multiple file paths found: #{nodes |> map (.content) |> map ((a) -> cyan a) |> (.join ' and ')}"
     | content.length is 0  =>  'no path given for file to verify'

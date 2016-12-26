@@ -22,7 +22,7 @@ CliWorld = !->
       args.stderr = write: (text) ~> @output += text
     if @debug
       args.env['DEBUG'] = '*'
-    path-segments = [path.join(process.cwd!, 'bin', 'tut-run')]
+    path-segments = [path.join(process.cwd!, 'bin', 'text-run')]
     if process.platform is 'win32'
       path-segments[0] += '.cmd'
     if formatter

@@ -1,7 +1,7 @@
 @skipWindows
 Feature: default formatter
 
-  As a tutorial writer new to TutorialRunner
+  As a documentation writer new to TextRunner
   I want that it uses a good formatter out of the box
   So that I can use this tool without extensive configuration.
 

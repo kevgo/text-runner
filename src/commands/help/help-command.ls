@@ -15,12 +15,12 @@ class HelpCommand
       ''
 
     console.log """
-      #{dim "Tutorial Runner #{pkg.version}"}
+      #{dim "TextRunner #{pkg.version}"}
       #{error}
-      USAGE: #{bold 'tut-run <command>'}
+      USAGE: #{bold 'text-run <command>'}
 
       COMMANDS:
-      - #{bold 'run'} [<filename>]  runs the whole tutorial, or only the given file
+      - #{bold 'run'} [<filename>]  tests the entire documentation, or only the given file
       - #{bold 'setup'}             creates an example configuration file
       - #{bold 'help'}              shows this help screen
       - #{bold 'version'}           shows the currently installed version of the tool

@@ -35,7 +35,7 @@ class Configuration
 
   # Creates a config file with default values
   create-default: ->
-    fs.write-file-sync './tut-run.yml', """
+    fs.write-file-sync './text-run.yml', """
       files: '**/*.md'
       format: robust
       useTempDirectory: false

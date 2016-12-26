@@ -6,13 +6,13 @@ that its embedded link or code block points to.
 
 #### Example
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_cd">
+<a class="textRunner_cd">
 Let's change into the [foo](.) directory.
 </a>
 
-<a class="tutorialRunner_cd">
+<a class="textRunner_cd">
 Let's change into the `..` directory.
 </a>
 ```

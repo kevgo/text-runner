@@ -4,7 +4,7 @@ require! {
   'minimist'
   '../package.json' : pkg
   'prelude-ls' : {filter, split, tail}
-  './tutorial-runner' : TutorialRunner
+  './text-runner' : TextRunner
   'update-notifier'
 }
 
@@ -14,9 +14,9 @@ cli-cursor.hide!
 argv = minimist process.argv.slice(2)
 commands-text = delete argv._
 commands = (commands-text[0] or '') |> split ' '
-                                    |> filter -> it isnt 'tut-run'
-tutorial-runner = new TutorialRunner argv
-tutorial-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
+                                    |> filter -> it isnt 'text-run'
+text-runner = new TextRunner argv
+text-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
   end-child-processes!
   if err
     process.exit 1

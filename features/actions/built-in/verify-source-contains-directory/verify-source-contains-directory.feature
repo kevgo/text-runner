@@ -1,6 +1,6 @@
 Feature: verifying the source code contains a directory
 
-  As a tutorial writer
+  As a documentation writer
   I want to be able to point to directories in my source code
   So that my readers can see larger pieces of example code.
 
@@ -11,11 +11,11 @@ Feature: verifying the source code contains a directory
   Scenario: linked directory exists
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_verifySourceContainsDirectory">
+      <a class="textRunner_verifySourceContainsDirectory">
         See the [examples](examples) for more details
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                       |
       | LINE     | 1                                                          |
@@ -25,11 +25,11 @@ Feature: verifying the source code contains a directory
   Scenario: linked directory does not exists
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_verifySourceContainsDirectory">
+      <a class="textRunner_verifySourceContainsDirectory">
         [zonk](zonk)
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                             |
       | LINE          | 1                                                |

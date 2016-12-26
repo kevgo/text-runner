@@ -22,15 +22,15 @@ module.exports = ->
       if not fs.exists-sync subdir-path
         fs.mkdir-sync subdir-path
     fs.write-file-sync path.join(@root-dir.name, file-path), """
-      <a class="tutorialRunner_verifyWorkspaceContainsDirectory">
+      <a class="textRunner_verifyWorkspaceContainsDirectory">
         `.`
       </a>
       """
 
 
-  @Given /^I am in a directory that contains a tutorial without a configuration file$/ ->
+  @Given /^I am in a directory that contains documentation without a configuration file$/ ->
     fs.write-file-sync path.join(@root-dir.name, '1.md'), """
-      <a class="tutorialRunner_verifySourceContainsDirectory">
+      <a class="textRunner_verifySourceContainsDirectory">
         `.`
       </a>
       """
@@ -38,7 +38,7 @@ module.exports = ->
 
   @Given /^I am in a directory that contains the "([^"]*)" example with the configuration file:$/ (example-name, config-file-content) ->
     fs.copy-sync path.join('examples' example-name), @root-dir.name
-    fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), config-file-content
+    fs.write-file-sync path.join(@root-dir.name, 'text-run.yml'), config-file-content
 
 
   @Given /^I am in a directory that contains the "([^"]*)" example(?: without a configuration file)$/ (example-name) ->
@@ -49,9 +49,9 @@ module.exports = ->
     fs.copy-sync path.join('examples' example-name), @root-dir.name
 
 
-  @Given /^my tutorial is starting the "([^"]*)" example$/ (example) ->
+  @Given /^my documentation is starting the "([^"]*)" example$/ (example) ->
     fs.write-file-sync path.join(@root-dir.name, '0.md'), """
-      <a class="tutorialRunner_startConsoleCommand">
+      <a class="textRunner_startConsoleCommand">
       ```
       node #{path.join __dirname, '..' '..' 'examples' 'long-running' 'server.js'}
       ```
@@ -71,7 +71,7 @@ module.exports = ->
 
 
   @Given /^the configuration file:$/ (content) ->
-    fs.write-file-sync path.join(@root-dir.name, 'tut-run.yml'), content
+    fs.write-file-sync path.join(@root-dir.name, 'text-run.yml'), content
 
 
   @Given /^my workspace contains the file "([^"]*)" with the content:$/ (file-name, content, done) ->
@@ -80,9 +80,9 @@ module.exports = ->
       done!
 
 
-  @Given /^my workspace contains a tutorial$/ ->
+  @Given /^my workspace contains testable documentation$/ ->
     fs.write-file-sync path.join(@root-dir.name, '1.md'), '''
-      <a class="tutorialRunner_runConsoleCommand">
+      <a class="textRunner_runConsoleCommand">
       ```
       echo "Hello world"
       ```
@@ -90,8 +90,8 @@ module.exports = ->
     '''
 
 
-  @Given /^my tut\-run configuration contains:$/ (text) ->
-    fs.append-file-sync path.join(@root-dir.name, 'tut-run.yml'), "\n#{text}"
+  @Given /^my text\-run configuration contains:$/ (text) ->
+    fs.append-file-sync path.join(@root-dir.name, 'text-run.yml'), "\n#{text}"
 
 
   @Given /^my workspace contains an empty file "([^"]*)"$/ (file-name) ->

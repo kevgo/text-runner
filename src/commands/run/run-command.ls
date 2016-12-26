@@ -65,7 +65,7 @@ class RunCommand
       '.'
 
 
-  # Returns all the markdown files for this tutorial
+  # Returns all the markdown files in this directory and its children
   _markdown-files-in-dir: (dir-name) ->
     if (files = glob.sync "#{dir-name}/**/*.md").length is 0
       @formatter.warning 'no Markdown files found'
@@ -73,7 +73,7 @@ class RunCommand
     files
 
 
-  # Returns all the markdown files for this tutorial
+  # Returns all the markdown files in the current working directory
   _all-markdown-files: ->
     if (files = glob.sync @configuration.get 'files').length is 0
       @formatter.warning 'no Markdown files found'

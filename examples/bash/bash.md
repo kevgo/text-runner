@@ -1,6 +1,6 @@
 # Bash Tutorial
 
-This is a small tutorial that demonstrates Tutorial Runner by and teaches you
+This is a small tutorial that demonstrates TextRunner by and teaches you
 a bit of Bash along the way.
 
 
@@ -18,7 +18,7 @@ Bash makes command-line arguments available via `$` variables.
 
 Let's say we have this little Bash script that greets you by name:
 
-<a class="tutorialRunner_createFile">
+<a class="textRunner_createFile">
 
 __greeter.sh__
 
@@ -32,7 +32,7 @@ echo "Hello $1!"
 
 We have to make it executable:
 
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 
 ```
 $ chmod +x ./greeter.sh
@@ -42,7 +42,7 @@ $ chmod +x ./greeter.sh
 
 When we can call it with our name:
 
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 
 ```
 $ ./greeter.sh world
@@ -61,7 +61,7 @@ Hello world!
 
 Copy a file using `cp`, for example:
 
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 
 ```
 $ cp greeter.sh another_greeter.sh
@@ -72,7 +72,7 @@ $ cp greeter.sh another_greeter.sh
 Now we have this new file in our workspace:
 
 
-<a class="tutorialRunner_verifyFileContent">
+<a class="textRunner_verifyFileContent">
 
 __another_greeter.sh__
 

@@ -1,8 +1,8 @@
 Feature: unknown actions
 
-  As a tutorial developer
-  I want to be notified if my tutorial uses an action for which there is no handler
-  So that I can fix my tutorial.
+  As a documentation developer
+  I want to be notified if my documentation uses an action for which there is no handler
+  So that I can fix my documentation.
 
   - using an action for which there is no handler causes the test run to fail
 
@@ -10,10 +10,10 @@ Feature: unknown actions
   Scenario: using an unknown action
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_unknownAction">
+      <a class="textRunner_unknownAction">
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | ERROR MESSAGE | unknown action: unknownAction |
       | FILENAME      | 1.md                          |

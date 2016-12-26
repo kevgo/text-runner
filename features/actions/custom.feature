@@ -1,10 +1,10 @@
 Feature: custom runners
 
-  As a tutorial writer
+  As a documentation writer
   I want to be able to define my own block actions
-  So that my tutorial can perform things that go beyond the built-in actions.
+  So that my documentation can perform things that go beyond the built-in actions.
 
-  - put built-in actions into a file "tut-run/<action name>.js"
+  - put built-in actions into a file "text-run/<action name>.js"
   - the structure of these files should match the structure of the built-in actions
 
 

@@ -2,14 +2,14 @@
 
 * the name of the file is provided as bold text within the anchor tag
 * the content of the file is provided as a multi-line code block (surrounded with \`\`\`) within the anchor tag
-* Tutorial Runner creates the file in the workspace
+* TextRunner creates the file in the workspace
 
 
 #### Example
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_createFile">
+<a class="textRunner_createFile">
 
 __test.txt__
 

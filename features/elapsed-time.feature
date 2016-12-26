@@ -1,7 +1,7 @@
 @clionly
 Feature: display total test time
 
-  As a tutorial writer
+  As a documentation writer
   I want to know the total time my tests took
   So that I can track test speed optimizations accurately.
 
@@ -9,8 +9,8 @@ Feature: display total test time
 
 
   Scenario: displaying the elapsed test time
-    Given my workspace contains a tutorial
-    When running tut-run
+    Given my workspace contains testable documentation
+    When running text-run
     Then it prints:
       """
       \d steps in \d files, \d+ms

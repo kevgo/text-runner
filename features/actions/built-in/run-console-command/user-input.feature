@@ -1,7 +1,7 @@
 @skipWindows
 Feature: running console commands
 
-  As a tutorial writer
+  As a documentation writer
   I want my users to be able to enter text into the console
   So that they can interact with the commands they run.
 
@@ -18,7 +18,7 @@ Feature: running console commands
   Scenario: entering simple text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
-      <a class="tutorialRunner_runConsoleCommand">
+      <a class="textRunner_runConsoleCommand">
       ```
       $ read foo
       $ echo You entered: $foo
@@ -31,7 +31,7 @@ Feature: running console commands
 
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | enter-input.md                                              |
       | LINE     | 1-12                                                        |
@@ -45,7 +45,7 @@ Feature: running console commands
   Scenario: entering complex text into the console
     Given my workspace contains the file "enter-input.md" with the content:
       """
-      <a class="tutorialRunner_runConsoleCommand">
+      <a class="textRunner_runConsoleCommand">
       ```
       $ echo "Name of the service to add"
       $ read service_name
@@ -70,7 +70,7 @@ Feature: running console commands
 
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | enter-input.md                                                                                                                                                                     |
       | LINE     | 1-24                                                                                                                                                                               |

@@ -5,7 +5,7 @@ Feature: minimum NodeJS version
   So that my documentation gets updated when I change which Node versions I support.
 
   - to check the required Node version, wrap the minimum required Node version
-    in an A tag with class "tutorialRunner_minimumNodeVersion"
+    in an A tag with class "textRunner_minimumNodeVersion"
   - the action checks the Travis configuration file
 
 
@@ -22,9 +22,9 @@ Feature: minimum NodeJS version
   Scenario: matching minimum Node version
     Given my workspace contains the file "README.md" with the content:
       """
-      Requires Node version <a class="tutorialRunner_minimumNodeVersion">4</a> or above
+      Requires Node version <a class="textRunner_minimumNodeVersion">4</a> or above
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | README.md                |
       | LINE     | 1                        |
@@ -34,9 +34,9 @@ Feature: minimum NodeJS version
   Scenario: documented minimum Node version is too low
     Given my workspace contains the file "README.md" with the content:
       """
-      Requires Node version <a class="tutorialRunner_minimumNodeVersion">3</a> or above
+      Requires Node version <a class="textRunner_minimumNodeVersion">3</a> or above
       """
-    When running tut-run
+    When running text-run
     Then the test fails with:
       | FILENAME      | README.md                                                 |
       | LINE          | 1                                                         |
@@ -48,9 +48,9 @@ Feature: minimum NodeJS version
   Scenario: documented minimum Node version is too high
     Given my workspace contains the file "README.md" with the content:
       """
-      Requires Node version <a class="tutorialRunner_minimumNodeVersion">5</a> or above
+      Requires Node version <a class="textRunner_minimumNodeVersion">5</a> or above
       """
-    When running tut-run
+    When running text-run
     Then the test fails with:
       | FILENAME      | README.md                                                 |
       | LINE          | 1                                                         |

@@ -1,8 +1,8 @@
 Feature: recognize empty links
 
-  As a tutorial writer
+  As a documentation writer
   I want to be notified when I forgot to provide the target for a link
-  So that I can be sure all links are complete before shipping my tutorial.
+  So that I can be sure all links are complete before shipping my documentation.
 
   - links without a target cause the test to fail
 
@@ -12,7 +12,7 @@ Feature: recognize empty links
       """
       An [empty link to an anchor]()
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                |
       | LINE          | 1                   |

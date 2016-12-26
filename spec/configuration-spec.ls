@@ -23,7 +23,7 @@ describe 'Configuration', ->
 
     before ->
       @config-dir = tmp.dir-sync!
-      @config-file-path = path.join @config-dir.name, 'tut-run.yml'
+      @config-file-path = path.join @config-dir.name, 'text-run.yml'
       fs.write-file-sync @config-file-path, "files: '*.md'"
       @config = new Configuration @config-file-path
 

@@ -1,7 +1,7 @@
 Feature: defining global binaries
 
   As a developer of a command-line utility that will be installed globally on users machines
-  I want TutorialRunner to run the local version under development when the documentation calls the global tool
+  I want TextRunner to run the local version under development when the documentation calls the global tool
   So that I can make sure changes to the source of my tool are properly documented.
 
   - the configuration setting "actions.runConsoleCommand.globals"

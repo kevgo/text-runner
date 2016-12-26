@@ -20,7 +20,7 @@ class ActivityListBuilder
         case block-type = @_is-start-tag node
           start-line = node.line
           if current-runner-type then
-            @formatter.error 'Found a nested <a class="tutorialRunner_*"> block'
+            @formatter.error 'Found a nested <a class="textRunner_*"> block'
             return null
           try
             if current-runner-type = @actions.action-for block-type
@@ -95,7 +95,7 @@ class ActivityListBuilder
   # Indicates whether the given node is a start tag of an active block
   # by returning the type of the block, or falsy.
   _is-start-tag: (node) ->
-    if node.type is 'htmltag' and matches = node.content.match /<a class="tutorialRunner_([^"]+)">/
+    if node.type is 'htmltag' and matches = node.content.match /<a class="textRunner_([^"]+)">/
       matches[1]
 
 

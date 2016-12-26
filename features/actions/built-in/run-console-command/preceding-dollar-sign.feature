@@ -1,7 +1,7 @@
 Feature: marking console commands with preceding dollar signs
 
-  As a tutorial writer
-  I want to visualize console commands in my tutorial via preceding dollar signs
+  As a documentation writer
+  I want to visualize console commands in my documentation via preceding dollar signs
   So that my readers can distinguish them from other code blocks.
 
   - the commands can be preceded by a dollar sign,
@@ -11,14 +11,14 @@ Feature: marking console commands with preceding dollar signs
   Scenario: running console commands with dollar signs
     Given my workspace contains the file "running-with-dollar-sign.md" with the content:
       """
-      <a class="tutorialRunner_runConsoleCommand">
+      <a class="textRunner_runConsoleCommand">
       ```
       $ ls -a
       $ ls -a
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | running-with-dollar-sign.md             |
       | LINE     | 1-6                                     |

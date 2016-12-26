@@ -1,14 +1,14 @@
 # Run a command on the console
 
 - runs the command given in the code block in the workspace
-- waits for the command to finish before continuing the tutorial
+- waits for the command to finish before continuing the test
 - a `$` at the beginning of the line is ignored
 - you can [configure](#calling-global-commands) global binaries that you your code base exports
-  so that your tutorial can call them directly
+  so that your test can call them directly
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 `​``
 $ echo "hello world"
 `​``
@@ -19,7 +19,7 @@ $ echo "hello world"
 You can enter text into the running command by providing an HTML table
 with the content to enter.
 Assuming we have a little application called
-<a class="tutorialRunner_createFile">
+<a class="textRunner_createFile">
 __greeter.js__
 ```js
 const readline = require('readline');
@@ -34,9 +34,9 @@ rl.question('Your name?', (name) => {
 ```
 </a>
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 `​``
 $ node greeter.js
 `​``
@@ -59,9 +59,9 @@ and the last one text to enter once the output from the first column has appeare
 Middle columns are ignored.
 `<th>` elements are considered descriptions and are also ignored.
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 `​``
 $ node greeter.js
 `​``
@@ -87,8 +87,8 @@ $ node greeter.js
 ```
 </a>
 
-This code waits until the called program prints "Product name",
-and enters "Tutorial Runner&lt;enter&gt;".
+This code waits until the called program prints "Your name?",
+and enters "Mortimer&lt;enter&gt;".
 Then it waits for "What does it do"
 and enters "Test framework for documentation&lt;enter&gt;".
 
@@ -97,11 +97,11 @@ and enters "Test framework for documentation&lt;enter&gt;".
 ## Calling Global Commands
 
 If you want to call a command provided by your code base,
-you have to tell Tutorial Runner the path to it.
+you have to tell TextRunner the path to it.
 As an example, if your code provides an executable called `tool`,
 and it is stored as `public/tool` in your source code,
-<a class="tutorialRunner_verifyMatchesSourceCodeFile">
-your __tut-run.yml__ needs to contains this section:
+<a class="textRunner_verifyMatchesSourceCodeFile">
+your __text-run.yml__ needs to contains this section:
 
 ```
 actions:

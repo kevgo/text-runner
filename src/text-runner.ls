@@ -12,13 +12,13 @@ require! {
 }
 
 
-# Runs the tutorial in the given directory
-class TutorialRunner
+# Tests the documentation in the given directory
+class TextRunner
 
   (@constructor-args) ->
 
 
-  # Runs the given tutorial
+  # Tests the documentation according to the given command and arguments
   execute: (command, args, done) ->
     @_init (err) ~>
       | err                                                      =>  new HelpCommand({err}).run! ; done err
@@ -34,7 +34,7 @@ class TutorialRunner
   # Asynchronous initializer for this class
   # we need this because Lift is asyncronous
   _init: (done) ->
-    new Liftoff name: 'tut-run', config-name: 'tut-run', extensions: interpret.extensions
+    new Liftoff name: 'text-run', config-name: 'text-run', extensions: interpret.extensions
       ..launch {}, ({@config-path}) ~>
         @configuration = new Configuration @config-path, @constructor-args
         (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
@@ -87,4 +87,4 @@ class TutorialRunner
     done new Error "unknown command: #{command}"
 
 
-module.exports = TutorialRunner
+module.exports = TextRunner

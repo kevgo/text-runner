@@ -1,10 +1,10 @@
 Feature: creating files with content
 
-  As a tutorial writer
+  As a documentation writer
   I want to be able to create files with content
   So that my test suite has files to work with.
 
-  - to create a file, wrap the code in an A tag with class "tutorialRunner_createFile"
+  - to create a file, wrap the code in an A tag with class "textRunner_createFile"
   - the file name is provided in bold
   - content is provided as a triple-fenced code block
 
@@ -12,7 +12,7 @@ Feature: creating files with content
   Scenario: running a tutorial that creates files
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       creating a file with name __one.txt__ and content:
 
       ```
@@ -20,7 +20,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | creator.md            |
       | LINE     | 1-7                   |
@@ -34,13 +34,13 @@ Feature: creating files with content
   Scenario: no file path given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       ```
       Hello world!
       ```
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                       |
       | LINE          | 1-5                              |
@@ -52,11 +52,11 @@ Feature: creating files with content
   Scenario: no content block given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       __one.txt__
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                          |
       | LINE          | 1                                   |
@@ -68,7 +68,7 @@ Feature: creating files with content
   Scenario: two file paths given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       __one.txt__
       __two.txt__
 
@@ -77,7 +77,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                                    |
       | LINE          | 1-8                                           |
@@ -89,7 +89,7 @@ Feature: creating files with content
   Scenario: two content blocks given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       __one.txt__
 
       ```
@@ -102,7 +102,7 @@ Feature: creating files with content
 
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                                                                |
       | LINE          | 1-12                                                                      |

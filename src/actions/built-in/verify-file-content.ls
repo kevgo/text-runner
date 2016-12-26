@@ -14,7 +14,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     | nodes.length > 1     =>  "multiple file paths found: #{nodes |> map (.content) |> map ((a) -> cyan a) |> (.join ' and ')}"
     | content.length is 0  =>  'no path given for file to verify'
 
-  expected-content = searcher.node-content type: 'fence', ({nodes}) ->
+  expected-content = searcher.node-content types: ['fence', 'code'], ({nodes}) ->
     | nodes.length is 0  =>  'no text given to compare file content against'
     | nodes.length > 1   =>  'found multiple content blocks for file to verify, please provide only one'
 

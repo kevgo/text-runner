@@ -4,28 +4,23 @@ Feature: verifying file content
   I want to be able to write actions that verify created files
   So that I am sure my tools performs the correct actions on the hard drive.
 
+  - the "verifyFileContent" action verifies files in the current workspace
+  - the filename is provided as strong text
+  - the expected content is provided as a code or fenced block
+
 
   Background:
-    Given my workspace contains the file "02.md" with the content:
+    Given my workspace contains the file "hello.txt" with the content:
       """
-      Our workspace contains the file:
-
-      <a class="tr_verifyFileContent">
-      __one.txt__
-
-      ```
       Hello world!
-      ```
-
-      </a>
       """
 
 
-  Scenario: file content matches
+  Scenario: specify file content via a fenced block
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tr_createFile">
-      __one.txt__
+      <a class="tr_verifyFileContent">
+      __hello.txt__
 
       ```
       Hello world!
@@ -34,44 +29,60 @@ Feature: verifying file content
       """
     When running text-run
     Then it signals:
-      | FILENAME | 02.md                  |
-      | LINE     | 3-10                   |
-      | MESSAGE  | verifying file one.txt |
-    And the test directory still contains a file "one.txt" with content:
+      | FILENAME | 01.md                    |
+      | LINE     | 1-7                      |
+      | MESSAGE  | verifying file hello.txt |
+
+
+  Scenario: specify file content via a code block
+    Given my workspace contains the file "01.md" with the content:
       """
-      Hello world!
+      <a class="tr_verifyFileContent">
+      __hello.txt__
+
+      `Hello world!`
+      </a>
       """
+    When running text-run
+    Then it signals:
+      | FILENAME | 01.md                    |
+      | LINE     | 1-4                      |
+      | MESSAGE  | verifying file hello.txt |
 
 
   Scenario: file content mismatch
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tr_createFile">
-      __one.txt__
+      <a class="tr_verifyFileContent">
+      __hello.txt__
 
       ```
-      Unexpected content here
+      mismatching expected content
       ```
       </a>
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 02.md                                                                                        |
-      | LINE          | 3-10                                                                                         |
-      | MESSAGE       | verifying file one.txt                                                                       |
-      | ERROR MESSAGE | mismatching content in one.txt:\nmismatching records:\n\nHello world!Unexpected content here |
-      | EXIT CODE     | 1                                                                                            |
-    And the test directory still contains a file "one.txt" with content:
-      """
-      Unexpected content here
-      """
+      | FILENAME      | 01.md                                                                                               |
+      | LINE          | 1-7                                                                                                 |
+      | MESSAGE       | verifying file hello.txt                                                                            |
+      | ERROR MESSAGE | mismatching content in hello.txt:\nmismatching records:\n\nmismatching expected contentHello world! |
+      | EXIT CODE     | 1                                                                                                   |
 
 
   Scenario: file is missing
+    Given my workspace contains the file "01.md" with the content:
+      """
+      <a class="tr_verifyFileContent">
+      __zonk.txt__
+
+      `Hello world!`
+      </a>
+      """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 02.md                  |
-      | LINE          | 3-10                   |
-      | MESSAGE       | verifying file one.txt |
-      | ERROR MESSAGE | file one.txt not found |
-      | EXIT CODE     | 1                      |
+      | FILENAME      | 01.md                   |
+      | LINE          | 1-4                     |
+      | MESSAGE       | verifying file zonk.txt |
+      | ERROR MESSAGE | file zonk.txt not found |
+      | EXIT CODE     | 1                       |

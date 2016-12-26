@@ -24,7 +24,7 @@ class TestFormatter
     @warnings = []
 
   start-file: (file-path) ->
-    @file-paths.push file-path
+    @file-paths.push file-path unless @file-paths.includes file-path
 
   start: (activity) ->
     @activities.push strip-color activity

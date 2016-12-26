@@ -316,6 +316,7 @@ __text-run.yml__
 ```yml
 files: '**/*.md'
 format: robust
+classPrefix: 'tr_'
 useTempDirectory: false
 
 actions:

@@ -39,6 +39,7 @@ class Configuration
     fs.write-file-sync './text-run.yml', """
       files: '**/*.md'
       format: robust
+      classPrefix: 'tr_'
       useTempDirectory: false
 
       actions:

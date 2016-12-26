@@ -1,7 +1,7 @@
 Feature: links to HTML anchors
 
-  As a tutorial writer
-  I want to know whether links to other parts of the tutorial work
+  As a documentation writer
+  I want to know whether links to other parts of the documentation work
   So that I can reference releated sections.
 
   - links pointing to non-existing parts of the same page or other pages
@@ -15,7 +15,7 @@ Feature: links to HTML anchors
       text
       <a name="hello">hi</a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md           |
       | LINE     | 1              |
@@ -31,7 +31,7 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md               |
       | LINE     | 1                  |
@@ -43,7 +43,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor](#zonk)
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                    |
       | LINE          | 1                                       |
@@ -60,7 +60,7 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
@@ -73,7 +73,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor in other file](2.md#target)
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                             |
       | LINE          | 1                                                |
@@ -90,7 +90,7 @@ Feature: links to HTML anchors
       """
       no link targets here
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
@@ -105,7 +105,7 @@ Feature: links to HTML anchors
       text
       ## Hello
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
@@ -121,7 +121,7 @@ Feature: links to HTML anchors
       """
       ## Hello
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                          |
       | LINE     | 1                             |

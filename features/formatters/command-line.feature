@@ -1,18 +1,18 @@
 @clionly
 Feature: selecting formatter via the command-line
 
-  As a tutorial writer
-  I want to be able to configure TutorialRunner to use different formatters via command-line parameters
+  As a documentation writer
+  I want to be able to configure TextRunner to use different formatters via command-line parameters
   So that I can try different formatters out easily.
 
   - you can chose a formatter using the `--format <[formatter name]>` command-line parameter
-    or the `formatter` key in `tut-run.yml`
+    or the `formatter` key in `text-run.yml`
 
 
   Background:
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runConsoleCommand">
+      <a class="textRunner_runConsoleCommand">
       ```
       echo "Hello world"
       ```
@@ -21,7 +21,7 @@ Feature: selecting formatter via the command-line
 
 
   Scenario Outline: selecting formatters via command-line parameter
-    When running tut-run with the "<FORMATTER>" formatter
+    When running text-run with the "<FORMATTER>" formatter
     Then it prints:
       """
       <OUTPUT>
@@ -35,7 +35,7 @@ Feature: selecting formatter via the command-line
 
 
   Scenario: selecting an unknown formatter
-    When trying to run tut-run with the "zonk" formatter
+    When trying to run text-run with the "zonk" formatter
     Then the call fails with the error:
       """
       Unknown formatter: 'zonk'

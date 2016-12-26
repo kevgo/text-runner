@@ -1,23 +1,23 @@
-<img src="documentation/logo.png" width="768" height="100" alt="Tutorial Runner - a test framework for documentation">
+<img src="documentation/logo.png" width="768" height="100" alt="TextRunner - test framework for documentation">
 <hr>
 
-<a href="https://travis-ci.org/Originate/tutorial-runner">
-  <img src="https://travis-ci.org/Originate/tutorial-runner.svg?branch=master">
+<a href="https://travis-ci.org/Originate/text-runner">
+  <img src="https://travis-ci.org/Originate/text-runner.svg?branch=master">
 </a>
-<a href="https://ci.appveyor.com/project/kevgo/tutorial-runner/branch/master">
+<a href="https://ci.appveyor.com/project/kevgo/text-runner/branch/master">
   <img src="https://ci.appveyor.com/api/projects/status/oxpbyxpm05ffmf2c/branch/master?svg=true" alt="Windows build status">
 </a>
-<a href="https://david-dm.org/originate/tutorial-runner">
-  <img src="https://david-dm.org/originate/tutorial-runner.svg">
+<a href="https://david-dm.org/originate/text-runner">
+  <img src="https://david-dm.org/originate/text-runner.svg">
 </a>
-<a href="https://david-dm.org/originate/tutorial-runner#info=devDependencies">
-  <img src="https://david-dm.org/originate/tutorial-runner/dev-status.svg">
+<a href="https://david-dm.org/originate/text-runner#info=devDependencies">
+  <img src="https://david-dm.org/originate/text-runner/dev-status.svg">
 </a>
 <a href="https://yarnpkg.com">
   <img src="https://img.shields.io/badge/yarn-compatible-brightgreen.svg">
 </a>
 
-Tutorial Runner executes documentation written in Markdown,
+TextRunner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
 It also ensures that links and images in your documentation point to existing targets.
 
@@ -27,7 +27,7 @@ You can execute embedded source code in any programming language
 tables, bullet point lists,
 as well as plain text in any human language.
 An example is the document you are reading right now,
-which is verified for correctness by Tutorial Runner.
+which is verified for correctness by TextRunner.
 
 
 ## Why you need it
@@ -43,8 +43,8 @@ which is verified for correctness by Tutorial Runner.
 
 ## How it works
 
-To make a part of a Markdown file actionable by Tutorial Runner,
-wrap it in `<a>` tags with class `tutorialRunner_*`.
+To make a part of a Markdown file actionable by TextRunner,
+wrap it in `<a>` tags with class `textRunner_*`.
 As an example,
 let's say a tutorial tells the reader to create a file `config.yml`
 with the content `foo: bar`.
@@ -62,12 +62,12 @@ foo: bar
 To make this part of the documentation executable,
 surround it with an `<a>` tag that specifies that we want to create a file:
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 
 ```
 ## Creating a configuration file
 
-<a class="tutorialRunner_createFile">
+<a class="textRunner_createFile">
 Please create a file with the name __config.yml__ and the content:
 `​``
 foo: bar
@@ -77,19 +77,19 @@ foo: bar
 
 </a>
 
-The class `createFile` tells TutorialRunner that this block is supposed to create a file.
+The class `createFile` tells TextRunner that this block is supposed to create a file.
 It takes the filename and content to create from the text inside this block
 (not metadata, but the same text the user sees),
 and creates the file in the current working directory.
 Text outside of `<a>` tags is ignored.
 
-You execute TutorialRunner by by calling `tut-run` on the command line.
+You execute TextRunner by by calling `text-run` on the command line.
 
 
 ## Built-in Actions
 
-Tutorial Runner provides a number of built-in actions
-for activities typically performed in software programming tutorials.
+TextRunner provides built-in actions
+for activities typically performed in software documentation.
 
 #### Filesystem
 
@@ -124,17 +124,17 @@ Let's create a custom block.
 All it does is print "hello world" when running.
 It will be triggered via this piece of Markdown:
 
-<a class="tutorialRunner_createMarkdownFile">
+<a class="textRunner_createMarkdownFile">
 ```markdown
-<a class="tutorialRunner_helloWorld">
+<a class="textRunner_helloWorld">
 </a>
 ```
 </a>
 
 The definition for this block lives in the file:
 
-<a class="tutorialRunner_createFile">
-__tut-run/hello-world-action.js__
+<a class="textRunner_createFile">
+__text-run/hello-world-action.js__
 
 ```javascript
 module.exports = function(env) {
@@ -148,13 +148,13 @@ module.exports = function(env) {
 </a>
 
 Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
-<a class="tutorialRunner_runMarkdownFile">
+<a class="textRunner_runMarkdownFile">
 The formatter displays test progress on the console as the test runs.
 </a>
 
 <img src="documentation/async.gif" width="460" height="134" alt="output demonstration">
 
-Definitions of custom blocks live in the directory `tut-run`.
+Definitions of custom blocks live in the directory `text-run`.
 Each block lives in its own file, whose name is the block name in kebab-case.
 The file must export a function that executes the block.
 It is given a hash of named arguments.
@@ -171,7 +171,7 @@ to print this activity using a green checkmark
 and remove all of its console output.
 If it fails, call `formatter.error()` with the error message.
 Please don't use `console.log` to avoid interfering with the formatter's UI management.
-If you cannot avoid this, use a simpler and more robust formatter via the `--format=simple` parameter to `tut-run`.
+If you cannot avoid this, use a simpler and more robust formatter via the `--format=simple` parameter to `text-run`.
 
 The handler method can accept a callback in the second parameter
 in order to perform asynchronous operations.
@@ -182,14 +182,14 @@ for example [CoffeeScript](http://coffeescript.org),
 [LiveScript](http://livescript.net),
 or [BabelJS](https://babeljs.io).
 Just make sure that your project contains a local installation of your transpiler,
-since Tutorial Runner does not find globally installed transpilers.
+since TextRunner does not find globally installed transpilers.
 This means your project should have a `package.json` file listing the transpiler
 you want to use (in addition to any other NPM modules you want to use).
 
 
 ### Using the searcher helper
 
-More realistic tests for your Markdown tutorial
+More realistic tests for your documentation tests
 will need to access document content
 in order to use it in tests.
 The DOM nodes of the active block
@@ -201,9 +201,9 @@ or use a helper that is provided to you via the `searcher` field of the first pa
 To demonstrate how this works,
 here is a simple implementation of an action that runs a code block in the terminal.
 
-<a class="tutorialRunner_createMarkdownFile">
+<a class="textRunner_createMarkdownFile">
 ```
-<a class="tutorialRunner_consoleCommand">
+<a class="textRunner_consoleCommand">
 `​``
 echo "Hello world"
 `​``
@@ -213,8 +213,8 @@ echo "Hello world"
 
 Here is the block definition implemented using the `searcher` helper.
 
-<a class="tutorialRunner_createFile">
-__tut-run/console-command.js__
+<a class="textRunner_createFile">
+__text-run/console-command.js__
 ```javascript
 child_process = require('child_process')
 
@@ -238,7 +238,7 @@ module.exports = function(env) {
 ```
 </a>
 
-<a class="tutorialRunner_runMarkdownFile">
+<a class="textRunner_runMarkdownFile">
 </a>
 
 - The `searcher.nodeContent` method returns the content of the DOM node
@@ -261,7 +261,7 @@ This helps produce better terminal output.
 
 ## Formatters
 
-Tutorial Runner supports a variety of formatters:
+TextRunner supports a variety of formatters:
 
 * __iconic formatter:__
   the most modern formatter.
@@ -289,25 +289,25 @@ produce more concise output when running as part of a larger test suite.
 
 - runs on macOS, Linux, Windows
 - install [Node.JS](https://nodejs.org) version 4, 5, or 6
-- run `npm i -g tutorial-runner`
-- in the root directory of your code base, run `tut-run`
+- run `npm i -g text-runner`
+- in the root directory of your code base, run `text-run`
 
 
 ## Configuration
 
-You can configure Tutorial Runner via a configuration file.
+You can configure TextRunner via a configuration file.
 To create one, run:
 
-<a class="tutorialRunner_runConsoleCommand">
+<a class="textRunner_runConsoleCommand">
 ```
-$ tut-run setup
+$ text-run setup
 ```
 </a>
 
 The created configuration looks like this:
 
-<a class="tutorialRunner_verifyFileContent">
-__tut-run.yml__
+<a class="textRunner_verifyFileContent">
+__text-run.yml__
 
 ```yml
 files: '**/*.md'
@@ -321,7 +321,7 @@ actions:
 ```
 </a>
 
-- the `files` key describes via a glob function which files are executed by Tutorial Runner.
+- the `files` key describes via a glob function which files are executed by TextRunner.
   It automatically ignores hidden folders as well as `node_modules`.
 
 - the `actions` section contains configuration information specific to actions.
@@ -331,26 +331,26 @@ actions:
 ## Related Work
 
 There are many other good testing tools out there.
-They can either be combined with Tutorial Runner
+They can either be combined with TextRunner
 or could be viable alternatives to it, depending on your use case:
 
 * [Cucumber](https://cucumber.io):
   Runs tests via a specialized DSL that is optimized for describing features
   via user stories, acceptance criteria, and example scenarias.
-  Tutorial Runner and Cucumber complement each other,
-  i.e. you would use Tutorial Runner for the end-user facing documentation on your web site
+  TextRunner and Cucumber complement each other,
+  i.e. you would use TextRunner for the end-user facing documentation on your web site
   and Cucumber for agile, collaborative, behavior-driven day-to-day development,
-  driven by Tutorial Runner.
+  driven by TextRunner.
 
 * [Gauge](http://getgauge.io):
   a "Cucumber for Markdown".
-  With Tutorial Runner there are no restrictions on how the Markdown has to look like;
+  With TextRunner there are no restrictions on how the Markdown has to look like;
   it can be 100% human-friendly prose.
 
 * [doctest](https://docs.python.org/3/library/doctest.html):
   executes only actual code blocks in your documentation,
   and verifies only that it runs without errors.
-  Tutorial Runner can run anything that can be described textually,
+  TextRunner can run anything that can be described textually,
   and verify it in arbitrary ways.
 
 * [mockdown](https://github.com/pjeby/mockdown):

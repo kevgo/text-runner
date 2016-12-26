@@ -1,6 +1,6 @@
 Feature: verifying file content
 
-  As a tutorial writer
+  As a documentation writer
   I want to be able to write actions that verify created files
   So that I am sure my tools performs the correct actions on the hard drive.
 
@@ -10,7 +10,7 @@ Feature: verifying file content
       """
       Our workspace contains the file:
 
-      <a class="tutorialRunner_verifyFileContent">
+      <a class="textRunner_verifyFileContent">
       __one.txt__
 
       ```
@@ -24,7 +24,7 @@ Feature: verifying file content
   Scenario: file content matches
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       __one.txt__
 
       ```
@@ -32,7 +32,7 @@ Feature: verifying file content
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 02.md                  |
       | LINE     | 3-10                   |
@@ -46,7 +46,7 @@ Feature: verifying file content
   Scenario: file content mismatch
     Given my workspace contains the file "01.md" with the content:
       """
-      <a class="tutorialRunner_createFile">
+      <a class="textRunner_createFile">
       __one.txt__
 
       ```
@@ -54,7 +54,7 @@ Feature: verifying file content
       ```
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 02.md                                                                                        |
       | LINE          | 3-10                                                                                         |
@@ -68,7 +68,7 @@ Feature: verifying file content
 
 
   Scenario: file is missing
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 02.md                  |
       | LINE          | 3-10                   |

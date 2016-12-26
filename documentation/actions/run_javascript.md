@@ -2,11 +2,11 @@
 
 To run JavaScript code:
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```html
-<a class="tutorialRunner_runJavascript">
+<a class="textRunner_runJavascript">
 `​``
-console.log('This is getting executed by Tutorial Runner!')
+console.log('This is getting executed by TextRunner!')
 `​``
 </a>
 ```
@@ -15,14 +15,14 @@ console.log('This is getting executed by Tutorial Runner!')
 
 ## Asynchronous code
 
-Tutorial Runner waits for the code block to finish before continuing with the tutorial.
+TextRunner waits for the code block to finish before continuing with the test.
 To make it wait for asynchronous code,
 add the placeholder `<CALLBACK>` where your code would call the callback when its done.
 Example:
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```html
-<a class="tutorialRunner_runJavascript">
+<a class="textRunner_runJavascript">
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
@@ -33,9 +33,9 @@ fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 
 
 Alternatively you can also use the placeholder `// ...`
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```html
-<a class="tutorialRunner_runJavascript">
+<a class="textRunner_runJavascript">
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', function(err) {
@@ -62,7 +62,7 @@ thereby making `foo` accessible in all code blocks.
 
 You can create your own replacements by adding a `replacements` block
 for this action
-in `tut-run.yml`:
+in `text-run.yml`:
 
 ```yml
 actions:

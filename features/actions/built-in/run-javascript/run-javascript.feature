@@ -1,9 +1,9 @@
 @clionly
 Feature: running inline blocks of Javascript
 
-  As a tutorial writer describing a Javascript tool
+  As a documentation writer describing a Javascript tool
   I want to be able to run pieces of inline Javascript code
-  So that my tutorial can explain how to use that tool.
+  So that my documentation can explain how to use that tool.
 
   - fenced code blocks wrapped in a "runJavascript" block are executed
   - local variable declarations persist across different code block calls
@@ -12,14 +12,14 @@ Feature: running inline blocks of Javascript
   Scenario: running synchronous Javascript
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       ```
       const foo = 'bar'
       console.log('A foo walks into a ' + foo)
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1-6                     |
@@ -33,7 +33,7 @@ Feature: running inline blocks of Javascript
   Scenario: running asynchronous Javascript using the "// ..." keyword
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       ```
       const wait = require('wait')
       const foo = 'bar'
@@ -44,7 +44,7 @@ Feature: running inline blocks of Javascript
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1-10                    |
@@ -58,7 +58,7 @@ Feature: running inline blocks of Javascript
   Scenario: running asynchronous Javascript using the "<CALLBACK>" keyword
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       ```
       const wait = require('wait')
       const foo = 'bar'
@@ -66,7 +66,7 @@ Feature: running inline blocks of Javascript
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1-7                     |
@@ -76,19 +76,19 @@ Feature: running inline blocks of Javascript
   Scenario: persisting variables across blocks
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       ```
       const foo = 'bar'
       ```
       </a>
 
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       ```
       console.log('A foo walks into a ' + foo)
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1-5                     |
@@ -106,10 +106,10 @@ Feature: running inline blocks of Javascript
   Scenario: missing code block
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then it signals:
       | FILENAME      | 1.md                    |
       | LINE          | 1                       |
@@ -121,7 +121,7 @@ Feature: running inline blocks of Javascript
   Scenario: multiple code blocks
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_runJavascript">
+      <a class="textRunner_runJavascript">
       ```
       console.log('one')
       ```
@@ -131,7 +131,7 @@ Feature: running inline blocks of Javascript
       ```
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then it signals:
       | FILENAME      | 1.md                       |
       | LINE          | 1-9                        |

@@ -38,7 +38,7 @@ class ActionManager
 
 
   custom-action-filenames: ->
-    pattern = path.join(process.cwd!, 'tut-run', "*.@(#{@javascript-extensions!.join '|'})")
+    pattern = path.join(process.cwd!, 'text-run', "*.@(#{@javascript-extensions!.join '|'})")
     glob.sync pattern
 
 

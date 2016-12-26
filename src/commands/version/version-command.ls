@@ -8,7 +8,7 @@ class VersionCommand
   ->
 
   run: (done) ->
-    console.log "Tutorial Runner v#{version}"
+    console.log "TextRunner v#{version}"
     done!
 
 

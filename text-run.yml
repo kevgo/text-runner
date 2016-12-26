@@ -7,4 +7,4 @@ actions:
 
   runConsoleCommand:
     globals:
-      'tut-run': 'bin/tut-run'
+      'text-run': 'bin/text-run'

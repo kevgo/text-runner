@@ -6,9 +6,9 @@
 
 #### Example
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_createDirectory">
+<a class="textRunner_createDirectory">
 `directory_name`
 </a>
 ```

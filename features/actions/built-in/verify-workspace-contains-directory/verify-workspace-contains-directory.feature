@@ -1,6 +1,6 @@
 Feature: verify that the workspace contains a directory
 
-  As a tutorial writer
+  As a documentation writer
   I want to verify that the workspace in which the tests run contains a given directory
   So that I can be sure an action my reader took was successful.
 
@@ -11,7 +11,7 @@ Feature: verify that the workspace contains a directory
   Background:
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_verifyWorkspaceContainsDirectory">
+      <a class="textRunner_verifyWorkspaceContainsDirectory">
         `foo`
       </a>
       """
@@ -19,7 +19,7 @@ Feature: verify that the workspace contains a directory
 
   Scenario: the workspace contains the directory
     Given my workspace contains a directory "foo"
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
@@ -27,7 +27,7 @@ Feature: verify that the workspace contains a directory
 
 
   Scenario: the workspace does not contain the directory
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                               |
       | LINE          | 1                                                  |

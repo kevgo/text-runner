@@ -1,9 +1,9 @@
 @skipWindows
 Feature: long-running processes
 
-  As a tutorial writer
+  As a documentation writer
   I want my readers to be able to start and stop long-running processes
-  So that tutorials can work with long-running server processes.
+  So that documentation can work with long-running server processes.
 
   - use the "startConsoleCommand" action to start a command
   - the command to start is provided as a code block
@@ -22,24 +22,24 @@ Feature: long-running processes
       """
     And my workspace contains the file "1.md" with the content:
       """
-      <a class="tutorialRunner_startConsoleCommand">
+      <a class="textRunner_startConsoleCommand">
 
       ```
       node server.js
       ```
       </a>
 
-      <a class="tutorialRunner_waitForOutput">
+      <a class="textRunner_waitForOutput">
       ```
       running at port 4000
       ```
       </a>
 
-      <a class="tutorialRunner_stopConsoleCommand">
+      <a class="textRunner_stopConsoleCommand">
       Stop the current process by hitting Ctrl-C
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                            |
       | LINE     | 1-6                                             |

@@ -42,7 +42,7 @@ requiredModules:
       - '{features,spec,test}/**/*'
       - '**/*{.,_,-}{spec,test}.ls'
       - 'examples/**'
-      - 'tut-run/**'
+      - 'text-run/**'
     ignore:
       - 'node_modules/**/*'
     root: '**/*.ls'

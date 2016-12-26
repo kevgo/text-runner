@@ -1,6 +1,6 @@
 Feature: verifying links to websites
 
-  As a tutorial writer
+  As a documentation writer
   I want to know whether links to websites work
   So that I can point my readers to further reading.
 
@@ -12,7 +12,7 @@ Feature: verifying links to websites
       """
       A [working external link](http://google.com)
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
@@ -24,7 +24,7 @@ Feature: verifying links to websites
       """
       A <a href="http://google.com">working external link</a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
@@ -36,7 +36,7 @@ Feature: verifying links to websites
       """
       A [broken external link](http://oeanuthaoenuthoaeuzonk.com)
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                                    |
       | LINE     | 1                                                                       |
@@ -48,7 +48,7 @@ Feature: verifying links to websites
       """
       A <a href="http://oeanuthaoenuthoaeuzonk.com">broken external link</a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                                    |
       | LINE     | 1                                                                       |

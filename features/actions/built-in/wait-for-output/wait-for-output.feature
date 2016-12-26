@@ -1,6 +1,6 @@
 Feature: waiting for output of long-running processes
 
-  As a tutorial writer
+  As a documentation writer
   I want my users to wait until a long-running process has finished a certain task
   So that their next actions run inside the proper environment.
 
@@ -17,13 +17,13 @@ Feature: waiting for output of long-running processes
       """
     And my workspace contains the file "wait.md" with the content:
       """
-      <a class="tutorialRunner_waitForOutput">
+      <a class="textRunner_waitForOutput">
       ```
       running at port
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | wait.md                             |
       | LINE     | 1-5                                 |

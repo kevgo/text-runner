@@ -1,11 +1,11 @@
 @apionly
 Feature: changing the working directory
 
-  As a tutorial writer
+  As a documentation writer
   I want to be able to let my users run commands from different directories
   So that they can use my tool appropriately.
 
-  - to change the working directory, wrap a hyperlink into an A tag with class `tutorialRunner_cd`
+  - to change the working directory, wrap a hyperlink into an A tag with class `textRunner_cd`
   - the link must point to a local directory
   - the directory pointed to must exist
 
@@ -14,11 +14,11 @@ Feature: changing the working directory
     Given my workspace contains a directory "foo"
     And my workspace contains the file "directory_changer.md" with the content:
       """
-      <a class="tutorialRunner_cd">
+      <a class="textRunner_cd">
         [foo](foo)
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | directory_changer.md            |
       | LINE     | 1                               |
@@ -30,11 +30,11 @@ Feature: changing the working directory
     Given my workspace contains a directory "foo"
     And my workspace contains the file "directory_changer.md" with the content:
       """
-      <a class="tutorialRunner_cd">
+      <a class="textRunner_cd">
         `foo`
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | directory_changer.md            |
       | LINE     | 1                               |
@@ -45,11 +45,11 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given my workspace contains the file "directory_changer.md" with the content:
       """
-      <a class="tutorialRunner_cd">
+      <a class="textRunner_cd">
         [foo](foo)
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | directory_changer.md            |
       | LINE          | 1                               |
@@ -61,11 +61,11 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given my workspace contains the file "directory_changer.md" with the content:
       """
-      <a class="tutorialRunner_cd">
+      <a class="textRunner_cd">
         `foo`
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | directory_changer.md            |
       | LINE          | 1                               |

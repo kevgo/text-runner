@@ -21,13 +21,13 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a class="tutorialRunner_verifyNpmInstall">
+      <a class="textRunner_verifyNpmInstall">
       ```
       $ npm i -g my_enormous_package
       ```
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                         |
       | LINE     | 3-7                          |
@@ -37,9 +37,9 @@ Feature: verifying NPM installation instructions
   Scenario: correct package name with single-fenced code block
     Given my workspace contains the file "1.md" with the content:
       """
-      installation: <a class="tutorialRunner_verifyNpmInstall">`npm i -g my_enormous_package`</a>
+      installation: <a class="textRunner_verifyNpmInstall">`npm i -g my_enormous_package`</a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                         |
       | LINE     | 1                            |
@@ -51,13 +51,13 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a class="tutorialRunner_verifyNpmInstall">
+      <a class="textRunner_verifyNpmInstall">
       ```
       npm i -g zonk
       ```
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                       |
       | LINE          | 3-7                                        |
@@ -70,10 +70,10 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a class="tutorialRunner_verifyNpmInstall">
+      <a class="textRunner_verifyNpmInstall">
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                    |
       | LINE          | 3                                       |
@@ -87,13 +87,13 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a class="tutorialRunner_verifyNpmInstall">
+      <a class="textRunner_verifyNpmInstall">
       ```
       npm i
       ```
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                       |
       | LINE          | 3-7                                        |

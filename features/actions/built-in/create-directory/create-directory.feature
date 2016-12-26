@@ -1,21 +1,21 @@
 Feature: creating directories
 
-  As a tutorial writer
+  As a documentation writer
   I want to be able to create directories in the test workspace
   So that my test suite has the folder structure to work.
 
   - to create a directory, write the directory name as a code tag
-    and wrap it in an A tag with class "tutorialRunner_createDirectory"
+    and wrap it in an A tag with class "textRunner_createDirectory"
 
 
   Scenario: creating a directory
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createDirectory">
+      <a class="textRunner_createDirectory">
       `directory_name`
       </a>
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | creator.md                        |
       | LINE     | 1                                 |
@@ -26,10 +26,10 @@ Feature: creating directories
   Scenario: no name given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createDirectory">
+      <a class="textRunner_createDirectory">
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                            |
       | LINE          | 1                                     |
@@ -41,11 +41,11 @@ Feature: creating directories
   Scenario: empty name given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createDirectory">
+      <a class="textRunner_createDirectory">
       ` `
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md         |
       | LINE          | 1                  |
@@ -57,11 +57,11 @@ Feature: creating directories
   Scenario: two names given
     Given my workspace contains the file "creator.md" with the content:
       """
-      <a class="tutorialRunner_createDirectory">
+      <a class="textRunner_createDirectory">
       `one` and `two`
       </a>
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                       |
       | LINE          | 1                                |

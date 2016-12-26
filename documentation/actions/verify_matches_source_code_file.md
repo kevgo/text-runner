@@ -1,16 +1,16 @@
-### Displaying a file from the source code tree in the tutorial
+### Displaying a file from the source code tree in the test
 
-Sometimes you want to just display a file from the source code of your app in the tutorial.
+Sometimes you want to just display a file from the source code of your app in the documentation.
 For example to give your readers an idea how something works
 without having them do it as part of the tutorial.
 
 
 #### Example
 
-<a class="tutorialRunner_runMarkdownInTutrun">
+<a class="textRunner_runMarkdownInTextrun">
 ```markdown
-<a class="tutorialRunner_verifyMatchesSourceCodeFile">
-Your __tut-run.yml__ needs to contains this section:
+<a class="textRunner_verifyMatchesSourceCodeFile">
+Your __text-run.yml__ needs to contains this section:
 
 `​``
 actions:

@@ -42,7 +42,7 @@ function replace-async-callbacks code
       .replace /\/\/\s*\.\.\./g, '__finished()'
 
 
-# substitutes replacements configured in tut-run.yml
+# substitutes replacements configured in text-run.yml
 function replace-substitutions-in-configuration code, configuration
   for search, replace of configuration?.file-data?.actions?.run-javascript?.replace
     code .= replace search, replace

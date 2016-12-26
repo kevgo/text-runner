@@ -1,6 +1,6 @@
 Feature: finding files in certain directories only
 
-  As a Tutorial Runner user
+  As a TextRunner user
   I want to be able to specify in which directories it should look for Markdown files
   So that it doesn't run in directories that I don't want to test right now.
 
@@ -15,7 +15,7 @@ Feature: finding files in certain directories only
       files: '*.md'
       """
     And a runnable file "foo/bar.md"
-    When running tut-run
+    When running text-run
     Then it signals:
       | WARNING | no Markdown files found |
 
@@ -29,7 +29,7 @@ Feature: finding files in certain directories only
     And a runnable file "readme.md"
     And a runnable file "foo/1.md"
     And a runnable file "foo/2.md"
-    When running "tut-run foo/*.md"
+    When running "text-run foo/*.md"
     Then it runs only the tests in:
       | foo/1.md |
       | foo/2.md |
@@ -41,5 +41,5 @@ Feature: finding files in certain directories only
       foo: bar
       """
     And a runnable file "foo/bar.md"
-    When running tut-run
+    When running text-run
     Then it runs 1 test

@@ -1,8 +1,8 @@
 Feature: checking embedded images
 
-  As a tutorial writer
+  As a documentation writer
   I want to know whether embedded images work
-  So that I can add images to the text of my tutorial.
+  So that I can add images to the text of my documentation.
 
   - embedded images must point to an existing image file
   - local images must exist
@@ -15,7 +15,7 @@ Feature: checking embedded images
       <img src="images/watermelon.gif">
       """
     And my workspace contains an image "images/watermelon.gif"
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                               |
       | LINE     | 1                                  |
@@ -28,7 +28,7 @@ Feature: checking embedded images
       <img src="watermelon.gif">
       """
     And my workspace contains an image "documentation/watermelon.gif"
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | documentation/1.md                        |
       | LINE     | 1                                         |
@@ -41,7 +41,7 @@ Feature: checking embedded images
       ![Alt text](watermelon.gif "watermelon")
       """
     And my workspace contains an image "watermelon.gif"
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
@@ -53,7 +53,7 @@ Feature: checking embedded images
       """
       <img src="zonk.gif">
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                          |
       | LINE          | 1                             |
@@ -66,7 +66,7 @@ Feature: checking embedded images
       """
       ![Alt text](zonk.gif "watermelon")
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                          |
       | LINE          | 1                             |
@@ -79,7 +79,7 @@ Feature: checking embedded images
       """
       <img src="http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                                                           |
       | LINE     | 1                                                                                              |
@@ -91,7 +91,7 @@ Feature: checking embedded images
       """
       ![Alt text](http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png "google logo")
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                                                           |
       | LINE     | 1                                                                                              |
@@ -103,7 +103,7 @@ Feature: checking embedded images
       """
       <img src="http://google.com/onetuhoenzonk.png">
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
@@ -115,7 +115,7 @@ Feature: checking embedded images
       """
       ![Alt text](http://google.com/onetuhoenzonk.png "zonk")
       """
-    When running tut-run
+    When running text-run
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
@@ -127,7 +127,7 @@ Feature: checking embedded images
       """
       <img src="">
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |
@@ -139,7 +139,7 @@ Feature: checking embedded images
       """
       ![Alt text]()
       """
-    When trying to run tut-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |

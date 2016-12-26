@@ -10,18 +10,14 @@ Feature: running a single MarkDown file
   Background:
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tr_runJavascript">
-      ```
-      console.log("file 1.md")
-      ```
+      <a class="tr_verifyWorkspaceContainsDirectory">
+      `.`
       </a>
       """
     Given my workspace contains the file "2.md" with the content:
       """
-      <a class="tr_runJavascript">
-      ```
-      console.log("file 2.md")
-      ```
+      <a class="tr_verifyWorkspaceContainsDirectory">
+      `.`
       </a>
       """
 

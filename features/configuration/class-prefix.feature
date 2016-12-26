@@ -7,13 +7,16 @@ Feature: configuring the class prefix
   - the configuration option "classPrefix" allows to provide a custom class prefix
 
 
-  Scenario: no configuration option
+  Background:
     Given my workspace contains the file "1.md" with the content:
       """
       <a class="tr_verifyWorkspaceContainsDirectory">
         `.`
       </a>
       """
+
+
+  Scenario: no configuration option
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                                   |
@@ -26,17 +29,11 @@ Feature: configuring the class prefix
       """
       classPrefix: 'custom_'
       """
-    And my workspace contains the file "old.md" with the content:
-      """
-      <a class="tr_verifyWorkspaceContainsDirectory">
-        `.`
-      </a>
-      """
-    And my workspace contains the file "new.md" with the content:
+    And my workspace contains the file "custom-prefix.md" with the content:
       """
       <a class="custom_verifyWorkspaceContainsDirectory">
         `.`
       </a>
       """
     When running text-run
-    Then it runs only the tests in "new.md"
+    Then it runs only the tests in "custom-prefix.md"

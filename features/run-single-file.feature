@@ -1,4 +1,3 @@
-@clionly
 Feature: running a single MarkDown file
 
   As a documentation writer
@@ -28,17 +27,17 @@ Feature: running a single MarkDown file
 
 
   Scenario: testing a single file via "text-run run"
-    When running "text-run run 2.md"
+    When running text-run with the argument "run 2.md"
     Then it runs only the tests in "2.md"
 
 
   Scenario: testing a single file via "text-run"
-    When running "text-run 2.md"
+    When running text-run with the argument "2.md"
     Then it runs only the tests in "2.md"
 
 
   Scenario: testing a non-existing file
-    When trying to run "text-run zonk.md"
+    When trying to run text-run with the argument "zonk.md"
     Then the test fails with:
       | ERROR MESSAGE | unknown command: zonk.md |
       | EXIT CODE     | 1                        |

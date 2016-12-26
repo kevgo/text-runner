@@ -20,7 +20,6 @@ Feature: finding files in certain directories only
       | WARNING | no Markdown files found |
 
 
-  @clionly
   Scenario: glob expression provided on the command line
     Given the configuration file:
       """
@@ -29,7 +28,7 @@ Feature: finding files in certain directories only
     And a runnable file "readme.md"
     And a runnable file "foo/1.md"
     And a runnable file "foo/2.md"
-    When running "text-run foo/*.md"
+    When running text-run with the arguments "foo/*.md"
     Then it runs only the tests in:
       | foo/1.md |
       | foo/2.md |

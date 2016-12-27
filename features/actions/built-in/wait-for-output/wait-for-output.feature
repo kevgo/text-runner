@@ -1,4 +1,3 @@
-@verbose
 Feature: waiting for output of long-running processes
 
   As a documentation writer
@@ -15,7 +14,7 @@ Feature: waiting for output of long-running processes
       setTimeout(function() { console.log('running') },
                  100)
       """
-    Given my workspace contains the file "long-running.md" with the content:
+    And my workspace contains the file "long-running.md" with the content:
       """
       <a class="tr_startConsoleCommand">
       ```

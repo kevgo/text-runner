@@ -14,9 +14,9 @@ Feature: waiting for output of long-running processes
       """
       <a class="tr_startConsoleCommand">
       ```
-      http = require('http')
-      http.createServer(function(req, res) { res.end('long-running server') })
-          .listen(4000, '127.0.0.1', function() { console.log('running at port 4000') })
+      setTimeout(function() {
+        console.log('running')
+      }, 100)
       ```
       </a>
       """
@@ -24,15 +24,15 @@ Feature: waiting for output of long-running processes
       """
       <a class="tr_waitForOutput">
       ```
-      running at port
+      running
       ```
       </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | wait.md                             |
-      | LINE     | 1-5                                 |
-      | MESSAGE  | waiting for output: running at port |
+      | FILENAME | wait.md                     |
+      | LINE     | 1-5                         |
+      | MESSAGE  | waiting for output: running |
 
 
   Scenario: waiting if no long-running process is executing

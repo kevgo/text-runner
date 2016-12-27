@@ -102,7 +102,7 @@ for activities typically performed in software documentation.
 * [verify the source code contains a directory](documentation/actions/verify_source_contains_directory.md)
 * [verify the test workspace contains a file with content](documentation/actions/verify_workspace_file_content.md)
 * [verify the test workspace contains a directory](documentation/actions/verify_workspace_contains_directory.md)
-* [display the content of a source code file](documentation/actions/verify_matches_source_code_file.md)
+* [display the content of a source code file](documentation/actions/verify_source_file_content.md)
 
 
 #### Console commands

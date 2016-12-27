@@ -100,7 +100,7 @@ If you want to call a command provided by your code base,
 you have to tell TextRunner the path to it.
 As an example, if your code provides an executable called `tool`,
 and it is stored as `public/tool` in your source code,
-<a class="tr_verifyMatchesSourceCodeFile">
+<a class="tr_verifySourceFileContent">
 your __text-run.yml__ needs to contains this section:
 
 ```

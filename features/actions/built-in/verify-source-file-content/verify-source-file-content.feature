@@ -5,7 +5,7 @@ Feature: verifying that documentation matches a file in the source code
   So that my readers can see how things work without having to do steps manually.
 
   - to show the content of a source code file in the documentation,
-    use the "verifyMatchesSourceCodeFile" action
+    use the "verifySourceFileContent" action
   - provide the filename as bold text
   - provide the expected content as a fenced code block
   - optionally provide a base directory in which the source code file is located
@@ -15,7 +15,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file content matches
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tr_verifyMatchesSourceCodeFile">
+      <a class="tr_verifySourceFileContent">
       [global-tool](examples/global-tool)
       __text-run.yml__
       ```
@@ -38,7 +38,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file content mismatch
     Given my workspace contains the file "1.md" with the content:
       """
-      <a class="tr_verifyMatchesSourceCodeFile">
+      <a class="tr_verifySourceFileContent">
       [global-tool](examples/global-tool)
       __text-run.yml__
       ```

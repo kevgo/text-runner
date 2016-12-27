@@ -12,14 +12,15 @@ Feature: verifying the source code contains a directory
     Given my workspace contains the file "1.md" with the content:
       """
       <a class="tr_verifySourceContainsDirectory">
-        See the [examples](examples) for more details
+        See the [stuff](stuff) folder for more details
       </a>
       """
+    And my workspace contains a directory "stuff"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                                       |
       | LINE     | 1                                                          |
-      | MESSAGE  | verifying the examples directory exists in the source code |
+      | MESSAGE  | verifying the stuff directory exists in the source code |
 
 
   Scenario: linked directory does not exists

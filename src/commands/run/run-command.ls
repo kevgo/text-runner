@@ -4,7 +4,7 @@ require! {
   './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
   'path'
-  'prelude-ls' : {head, filter, reject, sum}
+  'prelude-ls' : {head, filter, reject, sort, sum}
   'rimraf'
   'tmp'
 }
@@ -34,7 +34,9 @@ class RunCommand
 
 
   run-glob: (file-expression, done) ->
-    @_run glob.sync(file-expression), done
+    @_files-matching-glob file-expression, (err, files) ~>
+      | err  =>  done err
+      | _    =>  @_run files, done
 
 
 
@@ -65,12 +67,18 @@ class RunCommand
       '.'
 
 
+  _files-matching-glob: (expression, done) ->
+    glob expression, (err, files) ->
+      | err  =>  done err
+      | _    =>  done null, (files |> sort)
+
+
   # Returns all the markdown files in this directory and its children
   _markdown-files-in-dir: (dir-name) ->
     if (files = glob.sync "#{dir-name}/**/*.md").length is 0
       @formatter.warning 'no Markdown files found'
-    files = files |> reject (.includes 'node_modules')
-    files
+    files |> reject (.includes 'node_modules')
+          |> sort
 
 
   # Returns all the markdown files in the current working directory
@@ -78,6 +86,7 @@ class RunCommand
     if (files = glob.sync @configuration.get 'files').length is 0
       @formatter.warning 'no Markdown files found'
     files = files |> reject (.includes 'node_modules')
+                  |> sort
     if @filename
       files |> filter ~> it is @filename
     else

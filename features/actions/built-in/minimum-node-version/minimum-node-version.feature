@@ -36,7 +36,7 @@ Feature: minimum NodeJS version
       """
       Requires Node version <a class="tr_minimumNodeVersion">3</a> or above
       """
-    When running text-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | README.md                                                 |
       | LINE          | 1                                                         |
@@ -50,7 +50,7 @@ Feature: minimum NodeJS version
       """
       Requires Node version <a class="tr_minimumNodeVersion">5</a> or above
       """
-    When running text-run
+    When trying to run text-run
     Then the test fails with:
       | FILENAME      | README.md                                                 |
       | LINE          | 1                                                         |

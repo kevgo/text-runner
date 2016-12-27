@@ -31,7 +31,7 @@ module.exports = ->
   @Given /^I am in a directory that contains documentation without a configuration file$/ ->
     fs.write-file-sync path.join(@root-dir.name, '1.md'), """
       <a class="tr_verifySourceContainsDirectory">
-        `.`
+        [.](.)
       </a>
       """
 

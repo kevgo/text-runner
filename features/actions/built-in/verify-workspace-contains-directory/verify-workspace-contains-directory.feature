@@ -33,3 +33,13 @@ Feature: verify that the workspace contains a directory
       | LINE          | 1                                                  |
       | ERROR MESSAGE | directory foo does not exist in the test workspace |
       | EXIT CODE     | 1                                                  |
+
+
+  Scenario: the given directory name points to a file
+    Given my workspace contains the file "foo"
+    When trying to run text-run
+    Then the test fails with:
+      | FILENAME      | 1.md                              |
+      | LINE          | 1                                 |
+      | ERROR MESSAGE | foo exists but is not a directory |
+      | EXIT CODE     | 1                                 |

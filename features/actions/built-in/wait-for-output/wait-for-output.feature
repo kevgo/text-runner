@@ -10,11 +10,16 @@ Feature: waiting for output of long-running processes
 
 
   Scenario: waiting for output
+    Given my workspace contains the file "server.js" with the content:
+      """
+      setTimeout(function() { console.log('running') },
+                 100)
+      """
     Given my workspace contains the file "long-running.md" with the content:
       """
       <a class="tr_startConsoleCommand">
       ```
-      setTimeout(function() { console.log('running') }, 100)
+      $ node server.js
       ```
       </a>
       """

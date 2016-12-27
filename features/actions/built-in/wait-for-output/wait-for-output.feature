@@ -1,3 +1,4 @@
+@verbose
 Feature: waiting for output of long-running processes
 
   As a documentation writer

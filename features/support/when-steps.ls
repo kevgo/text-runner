@@ -22,7 +22,7 @@ module.exports = ->
       done if trying is 'running' and (@error or @exit-code) then (@error or @exit-code)
 
 
-  @When /^(trying to run|running) text\-run$/ (trying, done) ->
+  @When /^(trying to run|running) text\-run$/, (trying, done) ->
     @execute command: 'run', cwd: @root-dir.name, ~>
       done if trying is 'running' and (@error or @exit-code) then (@error or @exit-code)
 

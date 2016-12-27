@@ -1,4 +1,5 @@
 @clionly
+@verbose
 Feature: selecting formatter via the command-line
 
   As a documentation writer

@@ -14,9 +14,7 @@ Feature: waiting for output of long-running processes
       """
       <a class="tr_startConsoleCommand">
       ```
-      setTimeout(function() {
-        console.log('running')
-      }, 100)
+      setTimeout(function() { console.log('running') }, 100)
       ```
       </a>
       """

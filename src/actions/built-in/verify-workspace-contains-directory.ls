@@ -17,3 +17,4 @@ module.exports = function {configuration, formatter, searcher}, done
   fs.lstat full-path, (err, stats) ->
     | err                  =>  formatter.error "directory #{cyan bold directory} does not exist in the test workspace" ; done new Error 1
     | stats.is-directory!  =>  formatter.success! ; done!
+    | otherwise            =>  formatter.error "#{cyan bold directory} exists but is not a directory" ; done new Error 1

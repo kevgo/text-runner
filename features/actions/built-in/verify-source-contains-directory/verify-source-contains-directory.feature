@@ -36,3 +36,19 @@ Feature: verifying the source code contains a directory
       | LINE          | 1                                                |
       | ERROR MESSAGE | directory zonk does not exist in the source code |
       | EXIT CODE     | 1                                                |
+
+
+  Scenario: linked element is not a directory
+    Given my workspace contains the file "1.md" with the content:
+      """
+      <a class="tr_verifySourceContainsDirectory">
+        The [README.md](README.md) is not a directory
+      </a>
+      """
+    And my workspace contains the file "README.md"
+    When trying to run text-run
+    Then the test fails with:
+      | FILENAME      | 1.md                                                       |
+      | LINE          | 1                                                          |
+      | ERROR MESSAGE | README.md exists in the source code but is not a directory |
+      | EXIT CODE     | 1                                                          |

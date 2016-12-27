@@ -15,3 +15,4 @@ module.exports = function {formatter, searcher}, done
   fs.lstat path.join(process.cwd!, directory), (err, stats) ->
     | err                  =>  formatter.error "directory #{cyan bold directory} does not exist in the source code" ; done new Error 1
     | stats.is-directory!  =>  formatter.success "directory #{cyan bold directory} exists in the source code" ; done!
+    | otherwise            =>  formatter.error "#{cyan bold directory} exists in the source code but is not a directory" ; done new Error 1

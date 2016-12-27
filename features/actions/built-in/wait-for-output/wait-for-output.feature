@@ -11,9 +11,13 @@ Feature: waiting for output of long-running processes
   Scenario: waiting for output
     Given my workspace contains the file "long-running.md" with the content:
       """
+      <a class="tr_startConsoleCommand">
+      ```
       http = require('http')
       http.createServer(function(req, res) { res.end('long-running server') })
           .listen(4000, '127.0.0.1', function() { console.log('running at port 4000') })
+      ```
+      </a>
       """
     And my workspace contains the file "wait.md" with the content:
       """

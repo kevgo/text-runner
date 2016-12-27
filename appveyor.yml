@@ -23,4 +23,8 @@ test_script:
   - node_modules\.bin\cucumber-js --tags ~@apionly --tags ~@todo --tags ~@skipWindows
   - bin\text-run --format robust
 
+
+# Don't double-build PRs
+skip_branch_with_pr: true
+
 build: off

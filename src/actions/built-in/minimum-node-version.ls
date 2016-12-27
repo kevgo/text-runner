@@ -30,7 +30,9 @@ function get-supported-version done
 
 
 function load-yml-file filename, done
-  try
-    done null, js-yaml.safe-load(fs.read-file-sync filename, encoding: 'utf8')
-  catch
-    done e
+  fs.read-file filename, encoding: 'utf8', (err, file-content) ->
+    | err  =>  done err
+    try
+      done null, js-yaml.safe-load(file-content)
+    catch
+      done e

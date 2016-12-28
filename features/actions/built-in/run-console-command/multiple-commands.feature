@@ -12,13 +12,14 @@ Feature: running multiple console commands
       """
       <a class="tr_runConsoleCommand">
       ```
-      ls -a
-      ls -a
+      echo "hello"
+      echo "world"
       ```
       </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | running-multiple-commands.md            |
-      | LINE     | 1-6                                     |
-      | MESSAGE  | running console command: ls -a && ls -a |
+      | FILENAME | running-multiple-commands.md                          |
+      | LINE     | 1-6                                                   |
+      | MESSAGE  | running console command: echo "hello" && echo "world" |
+

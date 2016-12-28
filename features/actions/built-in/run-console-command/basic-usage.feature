@@ -11,20 +11,20 @@ Feature: running console commands
 
 
   Scenario: running console commands
-    Given my workspace contains the file "running.md" with the content:
+    Given my source code contains the file "running.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       ```
-      ls -1
+      echo hello
       ```
       </a>
       """
     When running text-run
-    Then it runs the console command "ls -1"
+    Then it runs the console command "echo hello"
 
 
   Scenario: missing console command block
-    Given my workspace contains the file "running.md" with the content:
+    Given my source code contains the file "running.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       foo
@@ -40,7 +40,7 @@ Feature: running console commands
 
 
   Scenario: empty console command
-    Given my workspace contains the file "running.md" with the content:
+    Given my source code contains the file "running.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       ```

@@ -8,7 +8,7 @@ Feature: configuring the class prefix
 
 
   Background:
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <a class="tr_verifyWorkspaceContainsDirectory">
         `.`
@@ -29,7 +29,7 @@ Feature: configuring the class prefix
       """
       classPrefix: 'custom_'
       """
-    And my workspace contains the file "custom-prefix.md" with the content:
+    And my source code contains the file "custom-prefix.md" with the content:
       """
       <a class="custom_verifyWorkspaceContainsDirectory">
         `.`

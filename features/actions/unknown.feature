@@ -8,7 +8,7 @@ Feature: unknown actions
 
 
   Scenario: using an unknown action
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <a class="tr_unknownAction">
       </a>

@@ -20,6 +20,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     | !content  =>  'A fenced code block containing the Markdown to run was found, but it is empty, so I cannot run anything here.'
 
   fs.write-file-sync path.join(configuration.test-dir, '1.md'), markdown.replace /​/g, ''
+  fs.write-file-sync path.join(configuration.test-dir, 'text-run.yml'), ""
 
   text-run-path = path.join __dirname, '..' 'bin' 'text-run'
   if process.platform is 'win32' then text-run-path += '.cmd'

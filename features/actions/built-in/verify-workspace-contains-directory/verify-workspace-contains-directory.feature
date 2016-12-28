@@ -9,7 +9,7 @@ Feature: verify that the workspace contains a directory
 
 
   Background:
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <a class="tr_verifyWorkspaceContainsDirectory">
         `foo`

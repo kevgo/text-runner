@@ -10,7 +10,7 @@ Feature: minimum NodeJS version
 
 
   Background:
-    Given my workspace contains the file ".travis.yml" with the content:
+    Given my source code contains the file ".travis.yml" with the content:
       """
       node_js:
         - '4'
@@ -20,7 +20,7 @@ Feature: minimum NodeJS version
 
 
   Scenario: matching minimum Node version
-    Given my workspace contains the file "README.md" with the content:
+    Given my source code contains the file "README.md" with the content:
       """
       Requires Node version <a class="tr_minimumNodeVersion">4</a> or above
       """
@@ -32,7 +32,7 @@ Feature: minimum NodeJS version
 
 
   Scenario: documented minimum Node version is too low
-    Given my workspace contains the file "README.md" with the content:
+    Given my source code contains the file "README.md" with the content:
       """
       Requires Node version <a class="tr_minimumNodeVersion">3</a> or above
       """
@@ -46,7 +46,7 @@ Feature: minimum NodeJS version
 
 
   Scenario: documented minimum Node version is too high
-    Given my workspace contains the file "README.md" with the content:
+    Given my source code contains the file "README.md" with the content:
       """
       Requires Node version <a class="tr_minimumNodeVersion">5</a> or above
       """

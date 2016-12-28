@@ -9,7 +9,7 @@ Feature: marking console commands with preceding dollar signs
 
 
   Scenario: running console commands with dollar signs
-    Given my workspace contains the file "running-with-dollar-sign.md" with the content:
+    Given my source code contains the file "running-with-dollar-sign.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       ```

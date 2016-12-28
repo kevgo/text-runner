@@ -21,6 +21,11 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
   fs.write-file-sync path.join(configuration.test-dir, '1.md'), markdown.replace /​/g, ''
 
+  # we need to configure the TextRunner instance called by our own Markdown to run its tests in its current directory,
+  # because in README.md we call it to run Markdown that verifies Markdown we ran manually.
+  # So TextRunner that verifies Markdown in README.md must run in the same directory as the other Markdown in README.md.
+  fs.write-file-sync path.join(configuration.test-dir, 'text-run.yml'), "useTempDirectory: '.'"
+
   text-run-path = path.join __dirname, '..' 'bin' 'text-run'
   if process.platform is 'win32' then text-run-path += '.cmd'
   new ObservableProcess call-args(text-run-path), cwd: configuration.test-dir, stdout: {write: formatter.output}, stderr: {write: formatter.output}

@@ -1,5 +1,6 @@
 require! {
   'async'
+  'fs'
   'glob'
   './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
@@ -64,7 +65,7 @@ class RunCommand
     setting = @configuration.get 'useTempDirectory'
     @configuration.test-dir = switch
       | typeof setting is 'string'  =>  setting
-      | setting is false            =>  path.join(process.cwd!, '.')
+      | setting is false            =>  path.join(process.cwd!, 'tmp')
       | setting is true             =>  tmp.dir-sync!name
       | otherwise                   =>  throw new Error "unknown 'useTempDirectory' setting: #{setting}"
     try

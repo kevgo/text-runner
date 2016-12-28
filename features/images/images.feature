@@ -10,7 +10,7 @@ Feature: checking embedded images
 
 
   Scenario: existing local HTML image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <img src="images/watermelon.gif">
       """
@@ -23,7 +23,7 @@ Feature: checking embedded images
 
 
   Scenario: existing local HTML image on page in subfolder
-    Given my workspace contains the file "documentation/1.md" with the content:
+    Given my source code contains the file "documentation/1.md" with the content:
       """
       <img src="watermelon.gif">
       """
@@ -36,7 +36,7 @@ Feature: checking embedded images
 
 
   Scenario: existing local Markdown image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       ![Alt text](watermelon.gif "watermelon")
       """
@@ -49,7 +49,7 @@ Feature: checking embedded images
 
 
   Scenario: non-existing local HTML image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <img src="zonk.gif">
       """
@@ -62,7 +62,7 @@ Feature: checking embedded images
 
 
   Scenario: non-existing local Markdown image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       ![Alt text](zonk.gif "watermelon")
       """
@@ -75,7 +75,7 @@ Feature: checking embedded images
 
 
   Scenario: existing remote HTML image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <img src="http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
       """
@@ -87,7 +87,7 @@ Feature: checking embedded images
 
 
   Scenario: existing remote Markdown image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       ![Alt text](http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png "google logo")
       """
@@ -99,7 +99,7 @@ Feature: checking embedded images
 
 
   Scenario: non-existing remote HTML image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <img src="http://google.com/onetuhoenzonk.png">
       """
@@ -111,7 +111,7 @@ Feature: checking embedded images
 
 
   Scenario: non-existing remote Markdown image
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       ![Alt text](http://google.com/onetuhoenzonk.png "zonk")
       """
@@ -123,7 +123,7 @@ Feature: checking embedded images
 
 
   Scenario: HTML image tag without source
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       <img src="">
       """
@@ -135,7 +135,7 @@ Feature: checking embedded images
       | EXIT CODE     | 1                        |
 
   Scenario: Markdown image tag without source
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       ![Alt text]()
       """

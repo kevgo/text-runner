@@ -15,12 +15,12 @@ Feature: running console commands
       """
       <a class="tr_runConsoleCommand">
       ```
-      ls -1
+      echo hello
       ```
       </a>
       """
     When running text-run
-    Then it runs the console command "ls -1"
+    Then it runs the console command "echo hello"
 
 
   Scenario: missing console command block

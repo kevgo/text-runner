@@ -14,11 +14,9 @@ Feature: long-running processes
 
 
   Scenario: starting and stopping a long-running process
-    Given my source code contains the file "server.js" with the content:
+    Given my workspace contains the file "server.js" with the content:
       """
-      http = require('http')
-      http.createServer(function(req, res) { res.end('long-running server') })
-          .listen(4000, '127.0.0.1', function() { console.log('running at port 4000') })
+      console.log('start'); setTimeout(function() { console.log('running'); setTimeout(function() {}, 10000) }, 100)
       """
     And my source code contains the file "1.md" with the content:
       """
@@ -31,7 +29,7 @@ Feature: long-running processes
 
       <a class="tr_waitForOutput">
       ```
-      running at port 4000
+      running
       ```
       </a>
 
@@ -45,9 +43,9 @@ Feature: long-running processes
       | LINE     | 1-6                                             |
       | MESSAGE  | starting a long-running process: node server.js |
     And it signals:
-      | FILENAME | 1.md                                     |
-      | LINE     | 8-12                                     |
-      | MESSAGE  | waiting for output: running at port 4000 |
+      | FILENAME | 1.md                        |
+      | LINE     | 8-12                        |
+      | MESSAGE  | waiting for output: running |
     And it signals:
       | FILENAME | 1.md                              |
       | LINE     | 14                                |

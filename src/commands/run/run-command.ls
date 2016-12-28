@@ -1,5 +1,6 @@
 require! {
   'async'
+  'fs'
   'glob'
   './markdown-file-runner' : MarkdownFileRunner
   'mkdirp'
@@ -64,7 +65,12 @@ class RunCommand
     @configuration.test-dir = if @configuration.get('useTempDirectory')
       tmp.dir-sync!name
     else
-      '.'
+      dir-path = path.join process.cwd!, 'tmp'
+      try
+        fs.mkdir-sync dir-path
+        dir-path
+      catch
+        dir-path
 
 
   _files-matching-glob: (expression, done) ->

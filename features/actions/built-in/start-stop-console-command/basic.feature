@@ -14,13 +14,13 @@ Feature: long-running processes
 
 
   Scenario: starting and stopping a long-running process
-    Given my workspace contains the file "server.js" with the content:
+    Given my source code contains the file "server.js" with the content:
       """
       http = require('http')
       http.createServer(function(req, res) { res.end('long-running server') })
           .listen(4000, '127.0.0.1', function() { console.log('running at port 4000') })
       """
-    And my workspace contains the file "1.md" with the content:
+    And my source code contains the file "1.md" with the content:
       """
       <a class="tr_startConsoleCommand">
 

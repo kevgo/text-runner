@@ -8,7 +8,7 @@ Feature: running multiple console commands
 
 
   Scenario: running multiple console commands
-    Given my workspace contains the file "running-multiple-commands.md" with the content:
+    Given my source code contains the file "running-multiple-commands.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       ```

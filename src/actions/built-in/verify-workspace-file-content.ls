@@ -19,9 +19,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     | nodes.length > 1   =>  'found multiple content blocks for file to verify, please provide only one'
 
   formatter.start "verifying file #{cyan file-path}"
-  console.log 'testdir' configuration.test-dir
   full-path = path.join(configuration.test-dir, file-path)
-  console.log full-path
   fs.read-file full-path, 'utf8', (err, actual-content) ->
     | err?.code is 'ENOENT'  =>  formatter.error "file #{red file-path} not found" ; return done new Error 1
     | err                    =>  return done err

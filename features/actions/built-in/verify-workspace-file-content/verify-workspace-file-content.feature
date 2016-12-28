@@ -1,4 +1,3 @@
-@verbose
 Feature: verifying file content
 
   As a documentation writer

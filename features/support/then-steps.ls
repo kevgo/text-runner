@@ -69,11 +69,11 @@ module.exports = ->
 
 
   @Then /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/ (file-name, expected-content) ->
-    expect(fs.read-file-sync(path.join(@root-dir.name, file-name), 'utf8').trim!).to.equal expected-content.trim!
+    expect(fs.read-file-sync(path.join(@root-dir.name, 'tmp', file-name), 'utf8').trim!).to.equal expected-content.trim!
 
 
   @Then /^the test workspace now contains a directory "([^"]*)"$/ (file-name) ->
-    stat = fs.stat-sync path.join(@root-dir.name, file-name)
+    stat = fs.stat-sync path.join(@root-dir.name, 'tmp', file-name)
     expect(stat.is-directory!).to.be.true
 
 

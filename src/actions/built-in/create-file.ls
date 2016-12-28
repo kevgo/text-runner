@@ -21,10 +21,11 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     | !content           =>  'no content given for file to create'
 
   formatter.refine "creating file #{cyan file-path}"
+  console.log 'testdir' configuration.test-dir
   full-path = path.join(configuration.test-dir, file-path)
   mkdirp path.dirname(full-path), (err) ->
     | err  =>  return done err
+    console.log full-path
     fs.write-file full-path, content, (err) ~>
-      | err  =>  formatter.error err
-      | _    =>  formatter.success!
-      done!
+      | err  =>  formatter.error err ; done new Error 1
+      | _    =>  formatter.success! ; done!

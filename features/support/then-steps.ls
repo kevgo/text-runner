@@ -37,7 +37,11 @@ module.exports = ->
 
 
   @Then /^it runs in the current working directory$/ ->
-    expect(@output).to.include @root-dir.name
+    expect(@output).to.match new RegExp("#{@root-dir.name}\\b")
+
+
+  @Then /^it runs in the "([^"]+)" directory$/ (dir-name) ->
+    expect(@output).to.match new RegExp("#{dir-name}\\b")
 
 
   @Then /^it runs(?: only)? the tests in "([^"]*)"$/ (filename) ->

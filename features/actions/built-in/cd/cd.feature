@@ -15,7 +15,7 @@ Feature: changing the working directory
     And my source code contains the file "directory_changer.md" with the content:
       """
       <a class="tr_cd">
-        [foo](foo)
+        `foo`
       </a>
       """
     When running text-run

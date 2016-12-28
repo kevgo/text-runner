@@ -30,7 +30,7 @@ class MarkdownFileRunner
     fs.read-file @file-path, encoding: 'utf8', (err, markdown-text) ~>
       | err  =>  return done err
       try
-        @formatter.start-file @file-path
+        @formatter.start-file path.relative(@configuration.test-dir, @file-path)
         markdown-text .= trim!
         if markdown-text.length is 0
           @formatter.error "found empty file #{cyan(path.relative process.cwd!, @file-path)}"

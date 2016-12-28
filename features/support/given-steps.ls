@@ -60,7 +60,7 @@ module.exports = ->
 
 
   @Given /^my workspace contains a directory "([^"]*)"$/ (dir) ->
-    fs.mkdir-sync path.join(@root-dir.name, dir)
+    mkdirp.sync path.join(@root-dir.name, 'tmp', dir)
 
 
   @Given /^my workspace contains an image "([^"]*)"$/ (image-name, done) ->
@@ -72,6 +72,10 @@ module.exports = ->
 
   @Given /^the configuration file:$/ (content) ->
     fs.write-file-sync path.join(@root-dir.name, 'text-run.yml'), content
+
+
+  @Given /^my source code contains the directory "([^"]*)"$/ (dir-name) ->
+    mkdirp.sync path.join(@root-dir.name, dir-name)
 
 
   @Given /^my source code contains the file "([^"]*)"$/ (file-name, done) ->

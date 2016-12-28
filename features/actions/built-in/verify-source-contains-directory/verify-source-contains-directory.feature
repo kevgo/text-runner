@@ -15,7 +15,7 @@ Feature: verifying the source code contains a directory
         See the [stuff](stuff) folder for more details
       </a>
       """
-    And my workspace contains a directory "stuff"
+    And my source code contains the directory "stuff"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                      |

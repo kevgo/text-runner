@@ -26,7 +26,8 @@ Feature: generating a configuration file
       classPrefix: 'tr_'
 
       # whether to run the tests in an external temp directory,
-      # uses ./tmp if false
+      # uses ./tmp if false,
+      # you can also provide a custom directory path here
       useTempDirectory: false
 
       # action-specific configuration

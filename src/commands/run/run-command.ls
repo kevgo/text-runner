@@ -61,10 +61,16 @@ class RunCommand
 
   # Creates the temp directory to run the tests in
   _create-working-dir: ->
-    @configuration.test-dir = if @configuration.get('useTempDirectory')
-      tmp.dir-sync!name
-    else
-      '.'
+    setting = @configuration.get 'useTempDirectory'
+    @configuration.test-dir = switch
+      | typeof setting is 'string'  =>  setting
+      | setting is false            =>  path.join(process.cwd!, '.')
+      | setting is true             =>  tmp.dir-sync!name
+      | otherwise                   =>  throw new Error "unknown 'useTempDirectory' setting: #{setting}"
+    try
+      mkdirp.sync @configuration.test-dir
+    catch
+      null
 
 
   _files-matching-glob: (expression, done) ->

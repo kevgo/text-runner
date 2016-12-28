@@ -23,7 +23,16 @@ Feature: separate working directory
 
   Scenario: default configuration
     When running text-run
-    Then it runs in the current working directory
+    Then it runs in the "tmp" directory
+
+
+  Scenario: running in a local temp directory
+    Given my text-run configuration contains:
+      """
+      useTempDirectory: false
+      """
+    When running text-run
+    Then it runs in the "tmp" directory
 
 
   Scenario: running in a global temp directory
@@ -34,3 +43,11 @@ Feature: separate working directory
     When running text-run
     Then it runs in a global temp directory
 
+
+  Scenario: running in a custom directory
+    Given my text-run configuration contains:
+      """
+      useTempDirectory: '.'
+      """
+    When running text-run
+    Then it runs in the current working directory

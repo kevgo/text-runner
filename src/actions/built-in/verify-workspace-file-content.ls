@@ -19,18 +19,9 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
     | nodes.length > 1   =>  'found multiple content blocks for file to verify, please provide only one'
 
   formatter.start "verifying file #{cyan file-path}"
-  try
-    actual-content = fs.read-file-sync path.join(configuration.test-dir, file-path), 'utf8'
-  catch
-    if e.code is 'ENOENT'
-      error = "file #{cyan file-path} not found"
-      formatter.error error
-      return done error
-    else throw e
-  jsdiff-console actual-content.trim!, expected-content.trim!, (err) ~>
-    if err
-      formatter.error "mismatching content in #{cyan bold file-path}:\n#{err.message}"
-      done 1
-    else
-      formatter.success!
-      done!
+  fs.read-file path.join(configuration.test-dir, file-path), 'utf8', (err, actual-content) ->
+    | err and err.code is 'ENOENT'  =>  formatter.error "file #{cyan file-path} not found" ; return done new Error 1
+    | err                           =>  return done err
+    jsdiff-console actual-content.trim!, expected-content.trim!, (err) ~>
+      | err  =>  formatter.error "mismatching content in #{cyan bold file-path}:\n#{err.message}" ; done 1
+      | _    =>  formatter.success! ; done!

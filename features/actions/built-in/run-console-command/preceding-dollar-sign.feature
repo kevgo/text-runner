@@ -13,13 +13,13 @@ Feature: marking console commands with preceding dollar signs
       """
       <a class="tr_runConsoleCommand">
       ```
-      $ ls -a
-      $ ls -a
+      $ echo "hello"
+      $ echo "world"
       ```
       </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | running-with-dollar-sign.md             |
-      | LINE     | 1-6                                     |
-      | MESSAGE  | running console command: ls -a && ls -a |
+      | FILENAME | running-with-dollar-sign.md                           |
+      | LINE     | 1-6                                                   |
+      | MESSAGE  | running console command: echo "hello" && echo "world" |

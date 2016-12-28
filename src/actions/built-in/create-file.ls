@@ -25,6 +25,5 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   mkdirp path.dirname(full-path), (err) ->
     | err  =>  return done err
     fs.write-file full-path, content, (err) ~>
-      | err  =>  formatter.error err
-      | _    =>  formatter.success!
-      done!
+      | err  =>  formatter.error err ; done new Error 1
+      | _    =>  formatter.success! ; done!

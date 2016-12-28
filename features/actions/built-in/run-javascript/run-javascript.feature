@@ -14,15 +14,14 @@ Feature: running inline blocks of Javascript
       """
       <a class="tr_runJavascript">
       ```
-      const foo = 'bar'
-      console.log('A foo walks into a ' + foo)
+      console.log('A foo walks into a bar')
       ```
       </a>
       """
     When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
-      | LINE     | 1-6                     |
+      | LINE     | 1-5                     |
       | MESSAGE  | running JavaScript code |
     And it prints:
       """
@@ -35,19 +34,17 @@ Feature: running inline blocks of Javascript
       """
       <a class="tr_runJavascript">
       ```
-      const wait = require('wait')
-      const foo = 'bar'
-      wait(1, function() {
-        console.log('A foo walks into a ' + foo)
+      setTimeout(function() {
+        console.log('A foo walks into a bar')
         // ...
-      })
+      }, 1)
       ```
       </a>
       """
     When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
-      | LINE     | 1-10                    |
+      | LINE     | 1-8                     |
       | MESSAGE  | running JavaScript code |
     And it prints:
       """
@@ -60,16 +57,14 @@ Feature: running inline blocks of Javascript
       """
       <a class="tr_runJavascript">
       ```
-      const wait = require('wait')
-      const foo = 'bar'
-      wait(1, <CALLBACK>)
+      setTimeout(<CALLBACK>, 1)
       ```
       </a>
       """
     When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
-      | LINE     | 1-7                     |
+      | LINE     | 1-5                     |
       | MESSAGE  | running JavaScript code |
 
 

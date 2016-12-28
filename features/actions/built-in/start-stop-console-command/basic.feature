@@ -21,7 +21,7 @@ Feature: long-running processes
         setTimeout(function() {}, 10000)
       }, 100)
       """
-    And my workspace contains the file "1.md" with the content:
+    And my source code contains the file "1.md" with the content:
       """
       <a class="tr_startConsoleCommand">
 

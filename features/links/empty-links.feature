@@ -8,7 +8,7 @@ Feature: recognize empty links
 
 
   Scenario: empty link
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       An [empty link to an anchor]()
       """

@@ -10,7 +10,7 @@ Feature: creating files with content
 
 
   Scenario: providing the filename as emphasized text and the content single-quoted
-    Given my workspace contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">
       creating a file with name _one.txt_ and content `Hello world!`
@@ -28,7 +28,7 @@ Feature: creating files with content
 
 
   Scenario: providing the filename as bold text and the content triple-quoted
-    Given my workspace contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">
       creating a file with name __one.txt__ and content:
@@ -50,7 +50,7 @@ Feature: creating files with content
 
 
   Scenario: no file path given
-    Given my workspace contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">
       ```
@@ -68,7 +68,7 @@ Feature: creating files with content
 
 
   Scenario: no content block given
-    Given my workspace contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">
       __one.txt__
@@ -84,7 +84,7 @@ Feature: creating files with content
 
 
   Scenario: two file paths given
-    Given my workspace contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">
       __one.txt__
@@ -105,7 +105,7 @@ Feature: creating files with content
 
 
   Scenario: two content blocks given
-    Given my workspace contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with the content:
       """
       <a class="tr_createFile">
       __one.txt__

@@ -9,7 +9,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in the same file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [working link to an anchor](#hello)
       text
@@ -23,11 +23,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in another file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [working link to an anchor](2.md#hello)
       """
-    And my workspace contains the file "2.md" with the content:
+    And my source code contains the file "2.md" with the content:
       """
       <a name="hello">hi</a>
       """
@@ -39,7 +39,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to a non-existing anchor in the same file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [link to non-existing anchor](#zonk)
       """
@@ -52,11 +52,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to a non-existing anchor in another file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [link to non-existing anchor in other file](2.md#zonk)
       """
-    And my workspace contains the file "2.md" with the content:
+    And my source code contains the file "2.md" with the content:
       """
       <a name="hello">hi</a>
       """
@@ -69,7 +69,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to anchor in non-existing file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [link to non-existing anchor in other file](2.md#target)
       """
@@ -82,7 +82,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to anchor in file without anchors
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [link to non-existing anchor in other file](2.md#zonk)
       """
@@ -99,7 +99,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing heading in the same file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [working link to an anchor](#hello)
       text
@@ -113,11 +113,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing heading in another file
-    Given my workspace contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with the content:
       """
       A [working link to a heading](2.md#hello)
       """
-    And my workspace contains the file "2.md" with the content:
+    And my source code contains the file "2.md" with the content:
       """
       ## Hello
       """
@@ -126,4 +126,3 @@ Feature: links to HTML anchors
       | FILENAME | 1.md                          |
       | LINE     | 1                             |
       | MESSAGE  | link to heading Hello in 2.md |
-

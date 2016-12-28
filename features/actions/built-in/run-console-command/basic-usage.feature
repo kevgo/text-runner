@@ -11,7 +11,7 @@ Feature: running console commands
 
 
   Scenario: running console commands
-    Given my workspace contains the file "running.md" with the content:
+    Given my source code contains the file "running.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       ```
@@ -24,7 +24,7 @@ Feature: running console commands
 
 
   Scenario: missing console command block
-    Given my workspace contains the file "running.md" with the content:
+    Given my source code contains the file "running.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       foo
@@ -40,7 +40,7 @@ Feature: running console commands
 
 
   Scenario: empty console command
-    Given my workspace contains the file "running.md" with the content:
+    Given my source code contains the file "running.md" with the content:
       """
       <a class="tr_runConsoleCommand">
       ```

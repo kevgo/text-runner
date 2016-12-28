@@ -17,7 +17,7 @@ Feature: verifying file content
 
 
   Scenario: specify file name via emphasized text and content via code block
-    Given my workspace contains the file "01.md" with the content:
+    Given my source code contains the file "01.md" with the content:
       """
       <a class="tr_verifyWorkspaceFileContent">
       _hello.txt_ with content `Hello world!`
@@ -31,7 +31,7 @@ Feature: verifying file content
 
 
   Scenario: specify file name via strong text and content via fenced block
-    Given my workspace contains the file "01.md" with the content:
+    Given my source code contains the file "01.md" with the content:
       """
       <a class="tr_verifyWorkspaceFileContent">
       __hello.txt__
@@ -49,7 +49,7 @@ Feature: verifying file content
 
 
   Scenario: file content mismatch
-    Given my workspace contains the file "01.md" with the content:
+    Given my source code contains the file "01.md" with the content:
       """
       <a class="tr_verifyWorkspaceFileContent">
       __hello.txt__
@@ -69,7 +69,7 @@ Feature: verifying file content
 
 
   Scenario: file is missing
-    Given my workspace contains the file "01.md" with the content:
+    Given my source code contains the file "01.md" with the content:
       """
       <a class="tr_verifyWorkspaceFileContent">
       __zonk.txt__

@@ -14,7 +14,7 @@ Feature: waiting for output of long-running processes
       setTimeout(function() { console.log('running') },
                  100)
       """
-    And my workspace contains the file "long-running.md" with the content:
+    And my source code contains the file "long-running.md" with the content:
       """
       <a class="tr_startConsoleCommand">
       ```
@@ -22,7 +22,7 @@ Feature: waiting for output of long-running processes
       ```
       </a>
       """
-    And my workspace contains the file "wait.md" with the content:
+    And my source code contains the file "wait.md" with the content:
       """
       <a class="tr_waitForOutput">
       ```

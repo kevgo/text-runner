@@ -78,8 +78,8 @@ class TextRunner
 
   _has-markdown-files: (glob-expression) ->
     try
-      files = glob.sync glob-expression
-      files.any -> it.ends-with '.md' and fs.stat-sync(it).is-file!
+      glob.sync glob-expression
+          .any -> it.ends-with '.md' and fs.stat-sync(it).is-file!
     catch
       no
 

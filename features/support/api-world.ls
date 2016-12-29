@@ -86,7 +86,7 @@ ApiWorld = !->
 
 
   @verify-failure = (table) ->
-    if !@formatter.error-messages |> any (.includes table['ERROR MESSAGE'])
+    if !(@formatter.error-messages |> any (.includes table['ERROR MESSAGE']))
       throw new Error "Expected\n\n#{cyan @formatter.error-messages[0]}\n\nto contain\n\n#{cyan table['ERROR MESSAGE']}\n"
     expect(@formatter.file-paths).to.include table.FILENAME if table.FILENAME
     expect(@formatter.lines).to.include table.LINE if table.LINE

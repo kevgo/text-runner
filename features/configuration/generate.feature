@@ -33,5 +33,5 @@ Feature: generating a configuration file
       # action-specific configuration
       actions:
         runConsoleCommand:
-          globals: []
+          globals: {}
       """

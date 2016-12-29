@@ -25,7 +25,7 @@ class Configuration
     classPrefix: 'tr_'
     actions:
       run-console-command:
-        globals: []
+        globals: {}
 
 
 
@@ -54,7 +54,7 @@ class Configuration
       # action-specific configuration
       actions:
         runConsoleCommand:
-          globals: []
+          globals: {}
       """
 
 

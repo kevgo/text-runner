@@ -63,11 +63,10 @@ module.exports = ->
     mkdirp.sync path.join(@root-dir.name, 'tmp', dir)
 
 
-  @Given /^my workspace contains an image "([^"]*)"$/ (image-name, done) ->
-    fs.mkdir path.join(@root-dir.name, path.dirname(image-name)), (err) ~>
-      cp path.join(__dirname, path.basename(image-name)),
-         path.join(@root-dir.name, image-name)
-      done!
+  @Given /^my workspace contains an image "([^"]*)"$/ (image-name) ->
+    mkdirp.sync path.join(@root-dir.name, path.dirname(image-name))
+    cp path.join(__dirname, path.basename(image-name)),
+       path.join(@root-dir.name, image-name)
 
 
   @Given /^the configuration file:$/ (content) ->
@@ -78,28 +77,24 @@ module.exports = ->
     mkdirp.sync path.join(@root-dir.name, dir-name)
 
 
-  @Given /^my source code contains the file "([^"]*)"$/ (file-name, done) ->
-    fs.mkdir path.join(@root-dir.name, path.dirname(file-name)), (err) ~>
-      fs.write-file-sync path.join(@root-dir.name, file-name), 'content'
-      done!
+  @Given /^my source code contains the file "([^"]*)"$/ (file-name) ->
+    mkdirp.sync path.join(@root-dir.name, path.dirname(file-name))
+    fs.write-file-sync path.join(@root-dir.name, file-name), 'content'
 
 
-  @Given /^my workspace contains the file "([^"]*)"$/ (file-name, done) ->
-    mkdirp path.join(@root-dir.name, 'tmp', path.dirname(file-name)), (err) ~>
-      fs.write-file-sync path.join(@root-dir.name, 'tmp', file-name), 'content'
-      done!
+  @Given /^my workspace contains the file "([^"]*)"$/ (file-name) ->
+    mkdirp.sync path.join(@root-dir.name, 'tmp', path.dirname(file-name)), (err) ~>
+    fs.write-file-sync path.join(@root-dir.name, 'tmp', file-name), 'content'
 
 
-  @Given /^my source code contains the file "([^"]*)" with content:$/ (file-name, content, done) ->
-    fs.mkdir path.join(@root-dir.name, path.dirname(file-name)), (err) ~>
-      fs.write-file-sync path.join(@root-dir.name, file-name), content
-      done!
+  @Given /^my source code contains the file "([^"]*)" with content:$/ (file-name, content) ->
+    mkdirp.sync path.join(@root-dir.name, path.dirname(file-name))
+    fs.write-file-sync path.join(@root-dir.name, file-name), content
 
 
-  @Given /^my workspace contains the file "([^"]*)" with content:$/ (file-name, content, done) ->
-    mkdirp path.join(@root-dir.name, 'tmp', path.dirname(file-name)), (err) ~>
-      fs.write-file-sync path.join(@root-dir.name, 'tmp', file-name), content
-      done!
+  @Given /^my workspace contains the file "([^"]*)" with content:$/ (file-name, content) ->
+    mkdirp.sync path.join(@root-dir.name, 'tmp', path.dirname(file-name))
+    fs.write-file-sync path.join(@root-dir.name, 'tmp', file-name), content
 
 
   @Given /^my workspace contains testable documentation$/ ->

@@ -61,7 +61,7 @@ function get-input text, formatter, done
 
 
 function make-global globals = {}
-  debug "searching for global command in #{globals}"
+  debug "globals: #{JSON.stringify globals}"
   (command-text) ->
     command-parts = command-text.split ' '
     command = head command-parts

@@ -10,7 +10,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: running synchronous Javascript
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_runJavascript">
       ```
@@ -30,7 +30,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: running asynchronous Javascript using the "// ..." keyword
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_runJavascript">
       ```
@@ -53,7 +53,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: running asynchronous Javascript using the "<CALLBACK>" keyword
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_runJavascript">
       ```
@@ -69,7 +69,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: persisting variables across blocks
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_runJavascript">
       ```
@@ -99,7 +99,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: missing code block
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_runJavascript">
       </a>
@@ -114,7 +114,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: multiple code blocks
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_runJavascript">
       ```

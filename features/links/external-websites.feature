@@ -8,7 +8,7 @@ Feature: verifying links to websites
 
 
   Scenario: markdown link to existing website
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       A [working external link](http://google.com)
       """
@@ -20,7 +20,7 @@ Feature: verifying links to websites
 
 
   Scenario: html link to existing website
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       A <a href="http://google.com">working external link</a>
       """
@@ -32,7 +32,7 @@ Feature: verifying links to websites
 
 
   Scenario: markdown link to non-existing website
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       A [broken external link](http://oeanuthaoenuthoaeuzonk.com)
       """
@@ -44,7 +44,7 @@ Feature: verifying links to websites
 
 
   Scenario: markdown link to non-existing website
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       A <a href="http://oeanuthaoenuthoaeuzonk.com">broken external link</a>
       """

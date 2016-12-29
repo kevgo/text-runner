@@ -14,7 +14,7 @@ Feature: generating a configuration file
       """
       Create configuration file text-run.yml with default values
       """
-    And it creates the file "text-run.yml" with the content:
+    And it creates the file "text-run.yml" with content:
       """
       # white-list for files to test
       files: '**/*.md'

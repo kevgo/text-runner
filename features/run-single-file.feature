@@ -8,13 +8,13 @@ Feature: running a single MarkDown file
 
 
   Background:
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifyWorkspaceContainsDirectory">
       `.`
       </a>
       """
-    Given my source code contains the file "2.md" with the content:
+    Given my source code contains the file "2.md" with content:
       """
       <a class="tr_verifyWorkspaceContainsDirectory">
       `.`

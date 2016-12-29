@@ -8,7 +8,7 @@ Feature: verifying NPM installation instructions
 
 
   Background:
-    Given my source code contains the file "package.json" with the content:
+    Given my source code contains the file "package.json" with content:
       """
       {
         "name": "my_enormous_package"
@@ -17,7 +17,7 @@ Feature: verifying NPM installation instructions
 
 
   Scenario: correct package name with triple-fenced code block
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       To install, run:
 
@@ -35,7 +35,7 @@ Feature: verifying NPM installation instructions
 
 
   Scenario: correct package name with single-fenced code block
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       installation: <a class="tr_verifyNpmInstall">`npm i -g my_enormous_package`</a>
       """
@@ -47,7 +47,7 @@ Feature: verifying NPM installation instructions
 
 
   Scenario: mismatching package name
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       To install, run:
 
@@ -66,7 +66,7 @@ Feature: verifying NPM installation instructions
 
 
   Scenario: missing installation instructions
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       To install, run:
 
@@ -83,7 +83,7 @@ Feature: verifying NPM installation instructions
 
 
   Scenario: missing package name
-    Given my source code contains the file "1.md" with the content:
+    Given my source code contains the file "1.md" with content:
       """
       To install, run:
 

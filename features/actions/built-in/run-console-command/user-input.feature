@@ -16,7 +16,7 @@ Feature: running console commands
 
 
   Scenario: entering simple text into the console
-    Given my source code contains the file "enter-input.md" with the content:
+    Given my source code contains the file "enter-input.md" with content:
       """
       <a class="tr_runConsoleCommand">
       ```
@@ -43,7 +43,7 @@ Feature: running console commands
 
 
   Scenario: entering complex text into the console
-    Given my source code contains the file "enter-input.md" with the content:
+    Given my source code contains the file "enter-input.md" with content:
       """
       <a class="tr_runConsoleCommand">
       ```

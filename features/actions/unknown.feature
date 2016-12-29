@@ -31,8 +31,6 @@ Feature: unknown actions
       * tr_runjavascript
       * tr_startconsolecommand
       * tr_stopconsolecommand
-      * tr_verifyfilecontent
-      * tr_verifymatchessourcecodefile
       * tr_verifynpminstall
       * tr_verifysourcecontainsdirectory
       * tr_verifysourcefilecontent

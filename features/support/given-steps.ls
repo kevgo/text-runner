@@ -118,7 +118,3 @@ module.exports = ->
 
   @Given /^my workspace contains an empty file "([^"]*)"$/ (file-name) ->
     fs.write-file-sync path.join(@root-dir.name, file-name), ''
-
-
-  @Given /^the test directory contains the file "([^"]*)" with the content:$/ (file-name, content) ->
-    fs.write-file-sync path.join(@root-dir, file-name), content

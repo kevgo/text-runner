@@ -1,4 +1,4 @@
-<img src="documentation/logo.png" width="768" height="100" alt="TextRunner - test framework for documentation">
+<img src="documentation/logo.png" width="651" height="100" alt="TextRunner - test framework for documentation">
 <hr>
 
 <a href="https://travis-ci.org/Originate/text-runner">

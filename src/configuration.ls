@@ -20,6 +20,9 @@ class Configuration
       {}
     debug "configuration file data: #{JSON.stringify @file-data}"
 
+    # the directory containing the source code
+    @source-dir = process.cwd!
+
 
   @default-values =
     files: '**/*.md'

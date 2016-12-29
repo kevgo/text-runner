@@ -22,7 +22,7 @@ module.exports = ->
     fs.stat-sync path.join @root-dir.name, directory-path
 
 
-  @Then /^it creates the file "([^"]*)" with the content:$/ (filename, expected-content) ->
+  @Then /^it creates the file "([^"]*)" with content:$/ (filename, expected-content) ->
     actual-content = fs.read-file-sync path.join(@root-dir.name, filename),
                                        encoding: 'utf8'
     jsdiff-console actual-content.trim!, expected-content.trim!

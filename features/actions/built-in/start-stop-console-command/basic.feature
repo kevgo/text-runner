@@ -14,14 +14,14 @@ Feature: long-running processes
 
 
   Scenario: starting and stopping a long-running process
-    Given my workspace contains the file "server.js" with the content:
+    Given my workspace contains the file "server.js" with content:
       """
       setTimeout(function() {
         console.log('running');
         setTimeout(function() {}, 10000)
       }, 100)
       """
-    And my source code contains the file "1.md" with the content:
+    And my source code contains the file "1.md" with content:
       """
       <a class="tr_startConsoleCommand">
 

@@ -12,7 +12,7 @@ Feature: changing the working directory
 
   Scenario: pointing to an existing directory via hyperlink
     Given my workspace contains a directory "foo"
-    And my source code contains the file "directory_changer.md" with the content:
+    And my source code contains the file "directory_changer.md" with content:
       """
       <a class="tr_cd">
         `foo`
@@ -28,7 +28,7 @@ Feature: changing the working directory
 
   Scenario: pointing to an existing directory via code block
     Given my workspace contains a directory "foo"
-    And my source code contains the file "directory_changer.md" with the content:
+    And my source code contains the file "directory_changer.md" with content:
       """
       <a class="tr_cd">
         `foo`
@@ -43,7 +43,7 @@ Feature: changing the working directory
 
 
   Scenario: pointing to a non-existing directory
-    Given my source code contains the file "directory_changer.md" with the content:
+    Given my source code contains the file "directory_changer.md" with content:
       """
       <a class="tr_cd">
         [foo](foo)
@@ -59,7 +59,7 @@ Feature: changing the working directory
 
 
   Scenario: pointing to a non-existing directory
-    Given my source code contains the file "directory_changer.md" with the content:
+    Given my source code contains the file "directory_changer.md" with content:
       """
       <a class="tr_cd">
         `foo`

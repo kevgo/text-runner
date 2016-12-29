@@ -9,7 +9,7 @@ Feature: creating directories
 
 
   Scenario: creating a directory
-    Given my source code contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with content:
       """
       <a class="tr_createDirectory">
       `directory_name`
@@ -24,7 +24,7 @@ Feature: creating directories
 
 
   Scenario: no name given
-    Given my source code contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with content:
       """
       <a class="tr_createDirectory">
       </a>
@@ -39,7 +39,7 @@ Feature: creating directories
 
 
   Scenario: empty name given
-    Given my source code contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with content:
       """
       <a class="tr_createDirectory">
       ` `
@@ -55,7 +55,7 @@ Feature: creating directories
 
 
   Scenario: two names given
-    Given my source code contains the file "creator.md" with the content:
+    Given my source code contains the file "creator.md" with content:
       """
       <a class="tr_createDirectory">
       `one` and `two`

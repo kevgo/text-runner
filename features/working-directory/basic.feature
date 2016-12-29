@@ -11,7 +11,7 @@ Feature: separate working directory
 
 
   Background:
-    Given my workspace contains the file "1.md" with the content:
+    Given my workspace contains the file "1.md" with content:
       """
       <a class="tr_runConsoleCommand">
       ```

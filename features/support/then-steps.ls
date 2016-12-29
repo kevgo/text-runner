@@ -14,10 +14,6 @@ module.exports = ->
     @verify-printed-usage-instructions!
 
 
-  @Then /^it prints:$/ (expected-text) ->
-    @verify-prints expected-text
-
-
   @Then /^it creates a directory "([^"]*)"$/ (directory-path) ->
     fs.stat-sync path.join @root-dir.name, directory-path
 
@@ -28,6 +24,10 @@ module.exports = ->
     jsdiff-console actual-content.trim!, expected-content.trim!
 
 
+  @Then /^it prints:$/ (expected-text) ->
+    @verify-prints expected-text
+
+
   @Then /^it runs (\d+) test$/ (count) ->
     @verify-tests-run count
 
@@ -36,12 +36,12 @@ module.exports = ->
     expect(@output).to.not.include @root-dir.name
 
 
-  @Then /^it runs in the current working directory$/ ->
-    expect(@output).to.match new RegExp("#{@root-dir.name}\\b")
-
-
   @Then /^it runs in the "([^"]+)" directory$/ (dir-name) ->
     expect(@output).to.match new RegExp("#{dir-name}\\b")
+
+
+  @Then /^it runs in the current working directory$/ ->
+    expect(@output).to.match new RegExp("#{@root-dir.name}\\b")
 
 
   @Then /^it runs(?: only)? the tests in "([^"]*)"$/ (filename) ->

@@ -18,7 +18,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   formatter.start "verifying NPM installs #{cyan pkg.name}"
 
   if misses-package-name install-text, pkg.name
-    formatter.error!
+    formatter.error "could not find #{cyan pkg.name} in installation instructions"
     return done 1
   formatter.success "installs #{green pkg.name}"
   done!

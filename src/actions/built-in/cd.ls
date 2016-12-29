@@ -20,10 +20,10 @@ module.exports = function {configuration, formatter, searcher}
     full-path = path.join(configuration.test-dir, directory)
     debug full-path
     process.chdir full-path
+    formatter.success!
   catch
     debug e
     switch
     | e.code is 'ENOENT' =>  formatter.error "directory #{directory} not found"
     | otherwise          =>  formatter.error e.message
     throw e
-  formatter.success!

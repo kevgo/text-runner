@@ -14,7 +14,7 @@ deploy:
   on:
     tags: true
     node: '6'
-    repo: Originate/tutorial-runner
+    repo: Originate/text-runner
 
 notifications:
   email: false

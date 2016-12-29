@@ -152,7 +152,7 @@ module.exports = function(env) {
 </a>
 
 Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
-<a class="tr_runMarkdownFile">
+<a class="tr_runTextrun">
 The formatter displays test progress on the console as the test runs.
 </a>
 
@@ -242,7 +242,7 @@ module.exports = function(env) {
 ```
 </a>
 
-<a class="tr_runMarkdownFile">
+<a class="tr_runTextrun">
 </a>
 
 - The `searcher.nodeContent` method returns the content of the DOM node

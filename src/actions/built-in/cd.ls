@@ -2,6 +2,8 @@ require! {
   chalk : {bold, cyan}
   path
 }
+debug = require('debug')('textrun:actions:cd')
+
 
 
 # Changes the current working directory to the one given in the hyperlink or code block
@@ -15,8 +17,11 @@ module.exports = function {configuration, formatter, searcher}
   formatter.refine "changing into the #{bold cyan directory} directory"
   formatter.output "cd #{directory}"
   try
-    process.chdir path.join(configuration.test-dir, directory)
+    full-path = path.join(configuration.test-dir, directory)
+    debug full-path
+    process.chdir full-path
   catch
+    debug e
     switch
     | e.code is 'ENOENT' =>  formatter.error "directory #{directory} not found"
     | otherwise          =>  formatter.error e.message

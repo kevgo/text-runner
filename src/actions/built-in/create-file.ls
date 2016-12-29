@@ -5,6 +5,7 @@ require! {
   'path'
   'prelude-ls' : {capitalize, filter, map}
 }
+debug = require('debug')('textrun:actions:cd')
 
 
 module.exports  = ({configuration, formatter, searcher}, done) ->
@@ -22,6 +23,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
   formatter.refine "creating file #{cyan file-path}"
   full-path = path.join(configuration.test-dir, file-path)
+  debug full-path
   mkdirp path.dirname(full-path), (err) ->
     | err  =>  return done err
     fs.write-file full-path, content, (err) ~>

@@ -79,6 +79,11 @@ ApiWorld = !->
     jsdiff-console @error, expected-error
 
 
+  @verify-errormessage = (expected-text) ->
+    if !(@formatter.error-messages |> any (.includes expected-text))
+      throw new Error "Expected\n\n#{cyan @formatter.error-messages[0]}\n\nto contain\n\n#{cyan expected-text}\n"
+
+
   @verify-prints = (expected-text) ->
     # No way to capture console output here.
     # This is tested in the CLI world.

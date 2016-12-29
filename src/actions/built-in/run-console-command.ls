@@ -7,7 +7,7 @@ require! {
   '../../helpers/trim-dollar'
   'xml2js'
 }
-debug = require('debug')('console-with-dollar-prompt-runner')
+debug = require('debug')('textrun:actions:run-console-command')
 
 
 # Runs the given commands on the console.
@@ -61,9 +61,13 @@ function get-input text, formatter, done
 
 
 function make-global globals = {}
-  (command) ->
-    command-parts = command.split ' '
-    if replacement = globals[head command-parts]
+  debug "searching for global command in #{globals}"
+  (command-text) ->
+    command-parts = command-text.split ' '
+    command = head command-parts
+    debug "searching for global replacement for #{command}"
+    if replacement = globals[command]
+      debug "found replacement: #{replacement}"
       "#{path.join process.cwd!, replacement} #{tail(command-parts).join ' '}"
     else
-      command
+      command-text

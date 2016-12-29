@@ -331,7 +331,7 @@ useTempDirectory: false
 # action-specific configuration
 actions:
   runConsoleCommand:
-    globals: []
+    globals: {}
 ```
 </a>
 

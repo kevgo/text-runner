@@ -40,7 +40,7 @@ class TextRunner
       ..launch {}, ({@config-path}) ~>
         @configuration = new Configuration @config-path, @constructor-args
         (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
-          @actions = new ActionManager @formatter
+          @actions = new ActionManager {@formatter, @configuration}
           done err
 
 

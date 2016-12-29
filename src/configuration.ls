@@ -4,6 +4,7 @@ require! {
   'require-yaml'
   'yamljs' : YAML
 }
+debug = require('debug')('textrun:configuration')
 
 
 # Encapsulates logic around the configuration
@@ -13,9 +14,11 @@ class Configuration
   #                   or the command-line args when using the CLI
   (@config-file-path, @constructor-args) ->
     @file-data = if @config-file-path
+      debug "loading configuration file: #{@config-file-path}"
       require-uncached @config-file-path
     else
       {}
+    debug "configuration file data: #{JSON.stringify @file-data}"
 
 
   @default-values =

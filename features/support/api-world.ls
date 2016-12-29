@@ -80,7 +80,7 @@ ApiWorld = !->
 
 
   @verify-errormessage = (expected-text) ->
-    if !(@formatter.error-messages |> any (.includes (expected-text.trim! |> strip-color)))
+    if !(@formatter.error-messages |> any -> strip-color(it).includes strip-color(expected-text))
       throw new Error "Expected\n\n#{cyan @formatter.error-messages[0]}\n\nto contain\n\n#{cyan expected-text}\n"
 
 

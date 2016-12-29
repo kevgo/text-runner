@@ -23,7 +23,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   |> map (.trim!)
   |> compact
   |> map trim-dollar
-  |> map make-global(configuration?.file-data?.actions?.run-console-command?.globals)
+  |> map make-global(configuration)
   |> (.join ' && ')
 
   input-text = searcher.node-content type: 'htmlblock'
@@ -60,7 +60,8 @@ function get-input text, formatter, done
     done result
 
 
-function make-global globals = {}
+function make-global configuration = {}
+  globals = configuration.file-data?.actions?.run-console-command?.globals or {}
   debug "globals: #{JSON.stringify globals}"
   (command-text) ->
     command-parts = command-text.split ' '
@@ -68,6 +69,6 @@ function make-global globals = {}
     debug "searching for global replacement for #{command}"
     if replacement = globals[command]
       debug "found replacement: #{replacement}"
-      "#{path.join process.cwd!, replacement} #{tail(command-parts).join ' '}"
+      "#{path.join configuration.source-dir, replacement} #{tail(command-parts).join ' '}"
     else
       command-text

@@ -45,6 +45,10 @@ CliWorld = !->
     expect(@exit-code).to.equal 1
 
 
+  @verify-errormessage = (expected-text) ->
+    expect(@process.full-output!).to.include expected-text
+
+
   @verify-failure = (table) ->
     output = @process.full-output!
     expected-header = switch

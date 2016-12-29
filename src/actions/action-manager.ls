@@ -4,7 +4,7 @@ require! {
   'glob'
   'interpret'
   'path'
-  'prelude-ls' : {map}
+  'prelude-ls' : {map, sort}
   'rechoir'
 }
 
@@ -12,7 +12,7 @@ require! {
 # Loads and provides built-in and custom actions
 class ActionManager
 
-  (@formatter) ->
+  ({@formatter, @configuration}) ->
     @actions = {}
     @load-builtin-actions!
     @load-custom-actions!
@@ -21,7 +21,11 @@ class ActionManager
   # Provides the action for the block with the given name
   action-for: (block-name) ->
     if !result = @actions[block-name.to-lower-case!]
-      @formatter.error "unknown action: #{red block-name}"
+      error-text = "unknown action: #{red block-name}\nAvailable actions:\n"
+      prefix = @configuration.get 'classPrefix'
+      for action-name in (Object.keys(@actions) |> sort)
+        error-text += "* #{prefix}#{action-name}\n"
+      @formatter.error error-text
       throw new Error 1
     result
 

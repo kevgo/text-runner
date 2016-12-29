@@ -28,6 +28,10 @@ module.exports = ->
     @verify-prints expected-text
 
 
+  @Then /^it prints the error message:$/ (expected-text) ->
+    @verify-errormessage expected-text
+
+
   @Then /^it runs (\d+) test$/ (count) ->
     @verify-tests-run count
 

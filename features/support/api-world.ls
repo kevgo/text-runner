@@ -79,6 +79,13 @@ ApiWorld = !->
     jsdiff-console @error, expected-error
 
 
+  @verify-errormessage = (expected-text) ->
+    actual = strip-color(@formatter.error-messages.join!)
+    expected = strip-color(expected-text)
+    if !actual.includes expected
+      throw new Error "Expected\n\n#{cyan actual}\n\nto contain\n\n#{cyan expected}\n"
+
+
   @verify-prints = (expected-text) ->
     # No way to capture console output here.
     # This is tested in the CLI world.

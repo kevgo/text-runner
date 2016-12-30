@@ -35,6 +35,7 @@ Feature: unknown actions
       * tr_verifyrunconsolecommandoutput
       * tr_verifysourcecontainsdirectory
       * tr_verifysourcefilecontent
+      * tr_verifystartconsolecommandoutput
       * tr_verifyworkspacecontainsdirectory
       * tr_verifyworkspacefilecontent
       * tr_waitforoutput

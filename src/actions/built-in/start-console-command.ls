@@ -24,9 +24,10 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   |> (.join ' && ')
 
   formatter.refine "starting a long-running process: #{bold cyan commands-to-run}"
+  global.start-console-command-output = ''
   global.running-process = new ObservableProcess(call-args(commands-to-run),
                                                  cwd: configuration.test-dir,
-                                                 stdout: formatter.stdout,
+                                                 stdout: log(formatter.stdout),
                                                  stderr: formatter.stderr)
     ..on 'ended', (err) ~>
       global.running-process-ended = yes
@@ -34,3 +35,9 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
 
   formatter.success!
   done!
+
+
+function log stdout
+  write: (text) ->
+    global.start-console-command-output += text
+    stdout.write text

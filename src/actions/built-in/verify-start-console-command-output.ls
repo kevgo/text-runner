@@ -3,13 +3,13 @@ require! {
   'prelude-ls' : {compact, filter, map, reject}
   'jsdiff-console'
 }
-debug = require('debug')('textrun:actions:verify-run-console-command-output')
+debug = require('debug')('textrun:actions:verify-start-console-command')
 
 
 # Runs the given commands on the console.
 # Waits until the command is finished.
 module.exports  = ({configuration, formatter, searcher}) ->
-  formatter.start 'verifying the output of the last run console command'
+  formatter.start 'verifying the output of the last started console command'
 
   expected-lines = searcher.node-content type: 'fence', ({content, nodes}) ->
     | nodes.length is 0  =>  'no fenced blocks found'
@@ -19,7 +19,7 @@ module.exports  = ({configuration, formatter, searcher}) ->
   |> map (.trim!)
   |> compact
 
-  actual-lines = global.run-console-command-output.split '\n'
+  actual-lines = global.start-console-command-output.split '\n'
   |> map (.trim!)
   |> compact
 

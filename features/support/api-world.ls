@@ -102,7 +102,11 @@ ApiWorld = !->
   @verify-output = (table) ->
     expect(standardize-paths @formatter.file-paths).to.include(table.FILENAME, "#{@formatter.file-paths}") if table.FILENAME
     expect(@formatter.lines).to.include table.LINE if table.LINE
-    expect(standardize-paths @formatter.activities).to.include(table.MESSAGE, @formatter.activities) if table.MESSAGE
+
+    if table.MESSAGE
+      activities =  @formatter.activities |> standardize-paths
+      unless activities |> any (.includes table.MESSAGE)
+        throw new Error "activity #{cyan table.MESSAGE} not found in #{activities}"
     expect(standardize-paths @formatter.warnings).to.include table.WARNING if table.WARNING
 
 

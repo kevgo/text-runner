@@ -10,6 +10,10 @@ require! {
 debug = require('debug')('textrun:actions:run-console-command')
 
 
+# the accumulated output
+global.run-console-command-output = ''
+
+
 # Runs the given commands on the console.
 # Waits until the command is finished.
 module.exports  = ({configuration, formatter, searcher}, done) ->
@@ -29,9 +33,10 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   input-text = searcher.node-content type: 'htmlblock'
   get-input input-text, formatter, (input) ->
     formatter.refine "running console command: #{cyan commands-to-run}"
+    global.run-console-command-output = ''
     process = new ObservableProcess(call-args(commands-to-run),
                                     cwd: configuration.test-dir,
-                                    stdout: formatter.stdout,
+                                    stdout: log(formatter.stdout),
                                     stderr: formatter.stderr)
       ..on 'ended', (err) ~>
         | err  =>  formatter.error err
@@ -72,3 +77,9 @@ function make-global configuration = {}
       "#{path.join configuration.source-dir, replacement} #{tail(command-parts).join ' '}"
     else
       command-text
+
+
+function log stdout
+  write: (text) ->
+    global.run-console-command-output += text
+    stdout.write text

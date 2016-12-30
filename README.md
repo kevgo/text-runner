@@ -109,6 +109,7 @@ for activities typically performed in software documentation.
 
 * [run a console command](documentation/actions/run_console_command.md)
 * [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
+* [verify the output of the last console command](documentation/actions/verify_run_console_command_output.md)
 
 
 #### Source code

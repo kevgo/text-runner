@@ -3,7 +3,6 @@ require! {
   'prelude-ls' : {compact, filter, map, reject}
   'jsdiff-console'
 }
-debug = require('debug')('textrun:actions:verify-start-console-command')
 
 
 # Runs the given commands on the console.

@@ -32,6 +32,7 @@ Feature: unknown actions
       * tr_startconsolecommand
       * tr_stopconsolecommand
       * tr_verifynpminstall
+      * tr_verifyrunconsolecommandoutput
       * tr_verifysourcecontainsdirectory
       * tr_verifysourcefilecontent
       * tr_verifyworkspacecontainsdirectory

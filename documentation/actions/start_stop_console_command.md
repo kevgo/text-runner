@@ -15,11 +15,20 @@ and stop the long-running process using a `stopCommand` block.
 <a class="tr_startConsoleCommand">
 
 `​``
+$ echo Enter your name:
 $ read foo
 `​``
 </a>
 
-... interact with the server here ...
+Wait until it is fully booted up ...
+
+<a class="tr_waitForOutput">
+`​``
+Enter your name
+`​``
+</a>
+
+Interact with the server here ...
 
 <a class="tr_stopConsoleCommand">
 Stop the current process by hitting Ctrl-C

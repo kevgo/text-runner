@@ -30,6 +30,7 @@ Feature: verifying the output of the last console command
 
       <a class="tr_waitForOutput">
       ```
+      one
       three
       ```
       </a>
@@ -47,6 +48,6 @@ Feature: verifying the output of the last console command
       """
     And running text-run
     Then it signals:
-      | FILENAME | verify-output.md                                 |
-      | LINE     | 14-19                                            |
+      | FILENAME | verify-output.md                                         |
+      | LINE     | 15-20                                                    |
       | MESSAGE  | verifying the output of the last started console command |

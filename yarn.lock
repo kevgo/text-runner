@@ -742,6 +742,12 @@ debug@2.3.3, debug@^2.2.0:
   dependencies:
     ms "0.7.2"
 
+debug@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
+  dependencies:
+    ms "0.7.2"
+
 debuglog@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/debuglog/-/debuglog-1.0.1.tgz#aa24ffb9ac3df9a2351837cfb2d279360cd78492"
@@ -2058,6 +2064,12 @@ merge-stream@1.0.0:
   dependencies:
     readable-stream "^2.0.1"
 
+merge-stream@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-1.0.1.tgz#4041202d508a342ba00174008df0c251b8c135e1"
+  dependencies:
+    readable-stream "^2.0.1"
+
 micromatch@^2.1.5, micromatch@^2.3.7:
   version "2.3.11"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-2.3.11.tgz#86677c97d1720b363431d04d0d15293bd38c1565"
@@ -2419,6 +2431,17 @@ observable-process@3.2.0:
     string-argv "0.0.2"
     text-stream-search "1.1.0"
 
+observable-process@3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-3.2.2.tgz#0283a8966a044178195bae929407643ddbaa8502"
+  dependencies:
+    debug "2.6.0"
+    extend "3.0.0"
+    merge-stream "1.0.1"
+    request "2.79.0"
+    string-argv "0.0.2"
+    text-stream-search "1.2.3"
+
 once@^1.3.0, once@^1.3.3, once@~1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
@@ -2686,9 +2709,9 @@ read@1, read@~1.0.1, read@~1.0.7:
   dependencies:
     mute-stream "~0.0.4"
 
-"readable-stream@1 || 2", readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.2.tgz#a9e6fec3c7dda85f8bb1b3ba7028604556fc825e"
+"readable-stream@1 || 2", readable-stream@^2.0.0, "readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@~2.1.4, readable-stream@~2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.1.5.tgz#66fa8b720e1438b364681f2ad1a63c618448c9d0"
   dependencies:
     buffer-shims "^1.0.0"
     core-util-is "~1.0.0"
@@ -2702,18 +2725,6 @@ readable-stream@~2.0.0, readable-stream@~2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e"
   dependencies:
-    core-util-is "~1.0.0"
-    inherits "~2.0.1"
-    isarray "~1.0.0"
-    process-nextick-args "~1.0.6"
-    string_decoder "~0.10.x"
-    util-deprecate "~1.0.1"
-
-readable-stream@~2.1.4, readable-stream@~2.1.5:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.1.5.tgz#66fa8b720e1438b364681f2ad1a63c618448c9d0"
-  dependencies:
-    buffer-shims "^1.0.0"
     core-util-is "~1.0.0"
     inherits "~2.0.1"
     isarray "~1.0.0"
@@ -3304,12 +3315,25 @@ text-stream-accumulator@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/text-stream-accumulator/-/text-stream-accumulator-0.3.0.tgz#20c8be637488c2b01f8a2f9837e4e9e867eb9549"
 
+text-stream-accumulator@0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/text-stream-accumulator/-/text-stream-accumulator-0.3.3.tgz#bdfd14084c5cb4f21dd2315489a508c2b0f0f966"
+  dependencies:
+    debug "2.6.0"
+
 text-stream-search@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/text-stream-search/-/text-stream-search-1.1.0.tgz#c618ba5b8e812d117c9b676d25fbb80f543f535e"
   dependencies:
     debug "2.2.0"
     text-stream-accumulator "0.3.0"
+
+text-stream-search@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/text-stream-search/-/text-stream-search-1.2.3.tgz#0f5e5722854e517887aa5423aa84fef8264939ad"
+  dependencies:
+    debug "2.6.0"
+    text-stream-accumulator "0.3.3"
 
 text-table@^0.2.0, text-table@~0.2.0:
   version "0.2.0"

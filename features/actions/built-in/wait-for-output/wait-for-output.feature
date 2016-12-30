@@ -11,8 +11,11 @@ Feature: waiting for output of long-running processes
   Scenario: waiting for output
     Given my workspace contains the file "server.js" with content:
       """
-      setTimeout(function() { console.log('running') },
-                 100)
+      setTimeout(function() {
+        console.log('one')
+        console.log('two')
+        console.log('three')
+      }, 100)
       """
     And my source code contains the file "long-running.md" with content:
       """
@@ -26,15 +29,16 @@ Feature: waiting for output of long-running processes
       """
       <a class="tr_waitForOutput">
       ```
-      running
+      one
+      three
       ```
       </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | wait.md                     |
-      | LINE     | 1-5                         |
-      | MESSAGE  | waiting for output: running |
+      | FILENAME | wait.md                                           |
+      | LINE     | 1-6                                               |
+      | MESSAGE  | waiting for output of the running console process |
 
 
   Scenario: waiting if no long-running process is executing

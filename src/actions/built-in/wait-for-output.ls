@@ -1,21 +1,29 @@
 require! {
+  'async'
   'chalk' : {bold, cyan}
+  'prelude-ls' : {compact, map, split}
 }
-debug = require('debug')('console-with-dollar-prompt-runner')
 
 
 # Waits until the currently running console command produces the given output
 module.exports  = ({formatter, searcher}, done) ->
-  formatter.start 'waiting for output'
+  formatter.start 'waiting for output of the running console process'
 
   expected-output = searcher.node-content(type: 'fence', ({content, nodes}) ->
     | nodes.length is 0  =>  'no code blocks found'
     | nodes.length > 1   =>  "found #{nodes.length} fenced code blocks. Expecting a maximum of 1."
     | !content  =>  'the block that defines console commands to run is empty')
-  |> (.trim!)
 
-  formatter.refine "waiting for output: #{bold cyan expected-output}"
+  expected-lines = expected-output  |>  (.split '\n')
+                                    |>  map (.trim!)
+                                    |>  compact
 
-  global.running-process.wait expected-output, ->
-    formatter.success!
-    done!
+  async.each-series expected-lines, wait-function(formatter), (err) ->
+    | err  =>  formatter.error! ; done err
+    | _    =>  formatter.success! ; done!
+
+
+function wait-function formatter
+  (line, done) ->
+    formatter.output "waiting for #{line}"
+    global.running-process.wait line, done

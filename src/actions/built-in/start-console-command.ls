@@ -2,7 +2,7 @@ require! {
   '../../helpers/call-args'
   'chalk' : {bold, cyan}
   'observable-process' : ObservableProcess
-  'prelude-ls' : {compact, map}
+  'prelude-ls' : {compact, head, map}
   '../../helpers/trim-dollar'
 }
 debug = require('debug')('console-with-dollar-prompt-runner')
@@ -21,6 +21,7 @@ module.exports  = ({configuration, formatter, searcher}, done) ->
   |> map (.trim!)
   |> compact
   |> map trim-dollar
+  |> map make-global(configuration)
   |> (.join ' && ')
 
   formatter.refine "starting a long-running process: #{bold cyan commands-to-run}"
@@ -41,3 +42,17 @@ function log stdout
   write: (text) ->
     global.start-console-command-output += text
     stdout.write text
+
+
+function make-global configuration = {}
+  globals = configuration.file-data?.actions?.run-console-command?.globals or {}
+  debug "globals: #{JSON.stringify globals}"
+  (command-text) ->
+    command-parts = command-text.split ' '
+    command = head command-parts
+    debug "searching for global replacement for #{command}"
+    if replacement = globals[command]
+      debug "found replacement: #{replacement}"
+      "#{path.join configuration.source-dir, replacement} #{tail(command-parts).join ' '}"
+    else
+      command-text

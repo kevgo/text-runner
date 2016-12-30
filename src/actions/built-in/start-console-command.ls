@@ -2,7 +2,8 @@ require! {
   '../../helpers/call-args'
   'chalk' : {bold, cyan}
   'observable-process' : ObservableProcess
-  'prelude-ls' : {compact, head, map}
+  'path'
+  'prelude-ls' : {compact, head, map, tail}
   '../../helpers/trim-dollar'
 }
 debug = require('debug')('console-with-dollar-prompt-runner')

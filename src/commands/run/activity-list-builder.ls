@@ -1,6 +1,7 @@
 require! {
   './searcher' : Searcher
 }
+debug = require('debug')('text-runner:markdown-parser')
 
 
 
@@ -15,6 +16,7 @@ class ActivityListBuilder
     start-line = 0
     result = []
     for node in tree
+      debug "found node: #{node}"
       switch
 
         case block-type = @_is-start-tag node
@@ -32,6 +34,7 @@ class ActivityListBuilder
 
         case @_is-end-tag node
           if current-runner-type
+            debug "adding runner: #{current-runner-type} with nodes #{nodes-for-current-runner}"
             result.push do
               filename: @file-path
               start-line: start-line

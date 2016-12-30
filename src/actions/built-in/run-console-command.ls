@@ -10,10 +10,6 @@ require! {
 debug = require('debug')('textrun:actions:run-console-command')
 
 
-# the accumulated output
-global.run-console-command-output = ''
-
-
 # Runs the given commands on the console.
 # Waits until the command is finished.
 module.exports  = ({configuration, formatter, searcher}, done) ->

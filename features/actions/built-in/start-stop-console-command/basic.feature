@@ -46,9 +46,9 @@ Feature: long-running processes
       | LINE     | 1-6                                             |
       | MESSAGE  | starting a long-running process: node server.js |
     And it signals:
-      | FILENAME | 1.md                        |
-      | LINE     | 8-12                        |
-      | MESSAGE  | waiting for output: running |
+      | FILENAME | 1.md                                          |
+      | LINE     | 8-12                                          |
+      | MESSAGE  | waiting for output of the running console process |
     And it signals:
       | FILENAME | 1.md                              |
       | LINE     | 14                                |

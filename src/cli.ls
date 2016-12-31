@@ -1,4 +1,5 @@
 require! {
+  'chalk' : {red}
   'cli-cursor'
   'end-child-processes'
   'minimist'

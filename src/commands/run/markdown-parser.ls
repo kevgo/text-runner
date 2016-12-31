@@ -1,7 +1,6 @@
 require! {
   'remarkable' : Remarkable
 }
-debug = require('debug')('text-runner:markdown-parser')
 
 
 
@@ -34,12 +33,9 @@ class MarkdownParser
     node.type is 'htmltag' and /<img [^>]*src=".*?".*?>/.test node.content
 
 
-
-
   _standardize-ast: (ast, line = 0, result = [], heading = null) ->
     modifiers = []
     for node in ast
-      debug "found node: #{node}"
       node-line = if node.lines?.length > 0 then node.lines[0] + 1 else line
       switch
 

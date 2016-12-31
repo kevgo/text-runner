@@ -46,7 +46,7 @@ class RunCommand
   _run: (filenames, done) ->
     debug 'testing files:'
     for filename in filenames
-      debug "- #{filename}"
+      debug "  * #{filename}"
     try
       @_create-working-dir!
       @_create-runners filenames

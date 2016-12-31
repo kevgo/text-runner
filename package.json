@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "author": "Kevin Goslar",
   "bin": {
     "text-run": "bin/text-run"

@@ -110,6 +110,7 @@ class RunCommand
       runner.run done
     catch
       console.log e
+      done e
 
 
   _execute-runners: (done) ->

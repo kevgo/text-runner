@@ -22,24 +22,20 @@ class RunCommand
 
   # Tests all files
   run-all: (done) ->
-    debug 'testing all files'
     @_run @_all-markdown-files!, done
 
 
   # Tests all files in the given directory
   run-directory: (dirname, done) ->
-    debug "testing directory #{dirname}"
     @_run @_markdown-files-in-dir(dirname), done
 
 
   # Tests the given file
   run-file: (filename, done) ->
-    debug "testing file #{filename}"
     @_run [filename], done
 
 
   run-glob: (file-expression, done) ->
-    debug "testing #{file-expression}"
     @_files-matching-glob file-expression, (err, files) ~>
       | err  =>  done err
       | _    =>  @_run files, done
@@ -50,7 +46,7 @@ class RunCommand
   _run: (filenames, done) ->
     debug 'testing files:'
     for filename in filenames
-      debug filename
+      debug "- #{filename}"
     try
       @_create-working-dir!
       @_create-runners filenames

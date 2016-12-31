@@ -9,7 +9,6 @@ require! {
   'prelude-ls' : {reject}
   'wait' : {wait}
 }
-debug = require('debug')('markdown-file-runner')
 
 
 

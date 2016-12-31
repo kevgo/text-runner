@@ -18,8 +18,7 @@ commands = (commands-text[0] or '') |> split ' '
                                     |> filter -> it isnt 'text-run'
 text-runner = new TextRunner argv
 text-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
-  | err  =>  debug "finished with error: #{err}"
-  | _    =>  debug 'finished successfully'
+  | err and err.message isnt 1  =>  console.log red err
 
   end-child-processes!
   if err

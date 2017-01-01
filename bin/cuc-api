@@ -5,5 +5,5 @@ node_modules/o-tools-livescript/bin/build
 if [ "$#" != "1" ]; then
   NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags ~@clionly --tags ~@todo --format progress "$@"
 else
-  NODE_ENV=test EXOSERVICE_TEST_DEPTH=API DEBUG='*,-express:*,-body-parser:*,-finalhandler,-text-stream-search,-rails-delegate' cucumber-js --tags ~@clionly --tags ~@todo "$@"
+  NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags ~@clionly --tags ~@todo "$@"
 fi

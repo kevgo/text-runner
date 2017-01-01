@@ -15,7 +15,7 @@
 
 To debug a single test:
 * enable console output: add the `@verbose` tag
-* enable debugging output: add the `@debug` tag
+* enable debugging statements and verbose output: add the `@debug` tag
 
 
 ## Terminology

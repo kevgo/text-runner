@@ -41,7 +41,9 @@ module.exports = ->
 
   @Before tags: ['@debug'], ->
     @debug = on
+    @verbose = on
 
 
   @After tags: ['@debug'], ->
     @debug = off
+    @verbose = off

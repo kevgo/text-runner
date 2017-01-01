@@ -5,5 +5,5 @@ node_modules/o-tools-livescript/bin/build
 if [ "$#" != "1" ]; then
   EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags ~@apionly --tags ~@todo --format progress "$@"
 else
-  EXOSERVICE_TEST_DEPTH=CLI DEBUG='*,-express:*,-body-parser:*,-finalhandler,-text-stream-search,-rails-delegate,-exocom-mock' node_modules/.bin/cucumber-js --tags ~@apionly --tags ~@todo "$@"
+  EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags ~@apionly --tags ~@todo "$@"
 fi

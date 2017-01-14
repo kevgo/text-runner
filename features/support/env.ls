@@ -27,8 +27,12 @@ module.exports = ->
         done!
       else
         wait 1, ~>
-          @root-dir.remove-callback!
-          done!
+          try
+            @root-dir.remove-callback!
+          catch
+            console.log e
+          finally
+            done!
 
 
   @Before tags: ['@verbose'], ->

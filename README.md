@@ -96,13 +96,20 @@ for activities typically performed in software documentation.
 
 #### Filesystem
 
+All file system actions happen inside a special directory called the _test workspace_.
+This directory is located in `./tmp` unless [configured otherwise](#configuration).
+
 * [change the current working directory](documentation/actions/cd.md)
-* [create a file](documentation/actions/create_file.md)
 * [create a directory](documentation/actions/create_directory.md)
-* [verify the source code contains a directory](documentation/actions/verify_source_contains_directory.md)
-* [verify the test workspace contains a file with content](documentation/actions/verify_workspace_file_content.md)
-* [verify the test workspace contains a directory](documentation/actions/verify_workspace_contains_directory.md)
-* [display the content of a source code file](documentation/actions/verify_source_file_content.md)
+* [create a file](documentation/actions/create_file.md)
+* [verify a directory exists](documentation/actions/verify_workspace_contains_directory.md)
+* [verify a file with given name and content exist](documentation/actions/verify_workspace_file_content.md)
+
+
+#### Verify the Git repo that contains the documentation
+
+* [display the content of a file in the Git repo](documentation/actions/verify_source_file_content.md)
+* [link to a directory in the Git repo](documentation/actions/verify_source_contains_directory.md)
 
 
 #### Console commands
@@ -112,7 +119,7 @@ for activities typically performed in software documentation.
 * [verify the output of the last console command](documentation/actions/verify_run_console_command_output.md)
 
 
-#### Source code
+#### Running source code
 
 * [run Javascript code](documentation/actions/run_javascript.md)
 
@@ -143,9 +150,7 @@ The definition for this block lives in the file:
 __text-run/hello-world-action.js__
 
 ```javascript
-module.exports = function(env) {
-  formatter = env.formatter
-
+module.exports = function({formatter}) {
   formatter.start('greeting the world')
   formatter.output('Hello world!')
   formatter.success()
@@ -224,14 +229,12 @@ __text-run/console-command.js__
 ```javascript
 child_process = require('child_process')
 
-module.exports = function(env) {
-  const formatter = env.formatter
-  const getNode = env.searcher.nodeContent
-  // you can also work with env.nodes directly here if you want
+module.exports = function({formatter, searcher, nodes}) {
+  // you can also iterate nodes directly here if you want
 
   formatter.start('running console command')
 
-  const commandToRun = getNode({type: 'fence'}, function(match) {
+  const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
     if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
     if (match.nodes.length > 1) return 'please provide only one code block'
     if (!match.content) return 'you provided a code block but it has no content'
@@ -294,9 +297,9 @@ produce more concise output when running as part of a larger test suite.
 ## Installation
 
 - runs on macOS, Linux, Windows
-- install [Node.JS](https://nodejs.org) version 4, 5, or 6
-- run `npm i -g text-runner`
-- in the root directory of your code base, run `text-run`
+- requires [Node.JS](https://nodejs.org) version <a class="tr_minimumNodeVersion">6 or 7</a>
+- run <a class="tr_verifyNpmInstall">`npm i -g text-runner`</a>
+- in the root directory of your code base, run <a class="tr_verifyNpmGlobalCommand">`text-run`</a>
 
 
 ## Configuration

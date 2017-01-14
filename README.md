@@ -121,6 +121,7 @@ for activities typically performed in software documentation.
 
 * [required NodeJS version](documentation/actions/minimum-node-version.md)
 * [verify NPM installation instructions](documentation/actions/verify_npm_install.md)
+* [verify global command provided by NPM module](documentation/actions/verify_npm_global_command.md)
 
 
 ## Custom actions

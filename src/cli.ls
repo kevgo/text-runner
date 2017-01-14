@@ -22,5 +22,4 @@ text-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
   | err and err.message isnt 1  =>  console.log red err
 
   end-child-processes!
-  if err
-    process.exit 1
+  process.exit if err then 1 else 0

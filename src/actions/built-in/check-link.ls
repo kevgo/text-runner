@@ -21,10 +21,11 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
 
 
 function check-external-link target, formatter, done
-  request url: target, timeout: 4000, reject-unauthorized: no, (err, response) ->
+  request url: target, timeout: 4000, (err, response) ->
     | err?.code is 'ENOTFOUND'            =>  formatter.warning "link to non-existing external website #{red target}"; done!
     | response?.status-code is 404        =>  formatter.warning "link to non-existing external website #{red target}"; done!
     | err?.message is 'ESOCKETTIMEDOUT'   =>  formatter.warning "link to #{magenta target} timed out"; done!
+    | err?.message.starts-with "Hostname/IP doesn't match certificate's altnames"  =>  formatter.warning "Link to #{magenta target} has error: #{err.message}"; done!
     | err                                 =>  done err
     | otherwise                           =>  formatter.success "link to external website #{cyan target}"; done!
 

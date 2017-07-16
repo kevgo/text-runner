@@ -21,7 +21,7 @@ module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
 
 
 function check-external-link target, formatter, done
-  request url: target, timeout: 2000, (err, response) ->
+  request url: target, timeout: 4000, reject-unauthorized: no, (err, response) ->
     | err?.code is 'ENOTFOUND'            =>  formatter.warning "link to non-existing external website #{red target}"; done!
     | response?.status-code is 404        =>  formatter.warning "link to non-existing external website #{red target}"; done!
     | err?.message is 'ESOCKETTIMEDOUT'   =>  formatter.warning "link to #{magenta target} timed out"; done!

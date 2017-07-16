@@ -14,5 +14,5 @@ if [ "$#" == "0" ]; then
   bin/docs --format colored
 else
   DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-api "$@"
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-cli "$@"
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-text-stream-accumulator,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-cli "$@"
 fi

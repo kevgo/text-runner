@@ -10,17 +10,17 @@ if [ -z "$tag" ]; then
   exit 1
 fi
 
-tput bold
-echo "SYNCING BRANCH"
-tput sgr0
-git pull
+# tput bold
+# echo "SYNCING BRANCH"
+# tput sgr0
+# git pull
 
-echo
-echo
-tput bold
-echo "RUNNING TESTS"
-tput sgr0
-bin/spec
+# echo
+# echo
+# tput bold
+# echo "RUNNING TESTS"
+# tput sgr0
+# bin/spec
 
 echo
 echo

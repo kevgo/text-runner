@@ -52,6 +52,7 @@ function check-link-to-anchor-in-same-file filename, target, link-targets, forma
 
 function check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
   [target-filename, target-anchor] = target.split '#'
+  target-filename = decodeURI target-filename
   if !link-targets[target-filename]
     formatter.error "link to anchor ##{cyan target-anchor} in non-existing file #{red target-filename}"
 

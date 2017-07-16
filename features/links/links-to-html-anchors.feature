@@ -131,15 +131,14 @@ Feature: links to HTML anchors
   Scenario: link to an existing anchor in a file with spaces
     Given my source code contains the file "1.md" with content:
       """
-      A [working link to a heading](foo%20bar.md#hello)
+      A [working link to a heading](foo/bar%20baz.md#hello)
       """
-    And my source code contains the file "foo bar.md" with content:
+    And my source code contains the file "foo/bar baz.md" with content:
       """
       ## Hello
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                |
-      | LINE     | 1                                   |
-      | MESSAGE  | link to heading Hello in foo bar.md |
-
+      | FILENAME | 1.md                                    |
+      | LINE     | 1                                       |
+      | MESSAGE  | link to heading Hello in foo/bar baz.md |

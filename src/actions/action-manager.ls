@@ -20,7 +20,7 @@ class ActionManager
 
   # Provides the action for the block with the given name
   action-for: (block-name) ->
-    if !result = @actions[block-name.to-lower-case!]
+    unless result = @actions[block-name.to-lower-case!]
       error-text = "unknown action: #{red block-name}\nAvailable actions:\n"
       prefix = @configuration.get 'classPrefix'
       for action-name in (Object.keys(@actions) |> sort)

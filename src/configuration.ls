@@ -27,7 +27,7 @@ class Configuration
   @default-values =
     files: '**/*.md'
     format: 'robust'
-    useTempDirectory: false
+    useTempDirectory: no
     classPrefix: 'tr_'
     actions:
       run-console-command:

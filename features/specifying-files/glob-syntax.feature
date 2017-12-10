@@ -9,18 +9,7 @@ Feature: finding files in certain directories only
   - the command-line overrides the config file
 
 
-  Scenario: the config file specifies a custom glob expression
-    Given the configuration file:
-      """
-      files: '*.md'
-      """
-    And a runnable file "foo/bar.md"
-    When running text-run
-    Then it signals:
-      | WARNING | no Markdown files found |
-
-
-  Scenario: glob expression provided on the command line
+  Scenario: different glob on command line and config file
     Given the configuration file:
       """
       files: '*.md'

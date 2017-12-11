@@ -4,8 +4,7 @@ set -e
 function copyFile {
   srcPath=$1
   targetPath=$(echo $srcPath | sed 's/^src\///')
-  targetDir=$(dirname $targetPath)
-  mkdir -p dist/$targetDir
+  mkdir -p "dist/$(dirname $targetPath)"
   cp $srcPath dist/$targetPath
 }
 

@@ -10,6 +10,7 @@ executedModules:
       - version
   shellScripts:
     dev:
+      - bin/build
       - bin/cuc-api
       - bin/cuc-cli
       - bin/docs

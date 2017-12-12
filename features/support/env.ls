@@ -6,7 +6,6 @@ require! {
   'rimraf'
   'shelljs/global'
   'tmp'
-  'touch'
   'wait' : {wait}
 }
 

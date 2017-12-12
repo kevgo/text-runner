@@ -13,9 +13,6 @@
 <a href="https://david-dm.org/originate/text-runner#info=devDependencies">
   <img src="https://david-dm.org/originate/text-runner/dev-status.svg">
 </a>
-<a href="https://yarnpkg.com">
-  <img src="https://img.shields.io/badge/yarn-compatible-brightgreen.svg">
-</a>
 
 TextRunner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.

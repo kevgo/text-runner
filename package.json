@@ -36,7 +36,7 @@
     "strip-ansi": "3.0.1",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",
-    "update-notifier": "1.0.3",
+    "update-notifier": "2.3.0",
     "wait": "0.1.0",
     "xml2js": "0.4.19",
     "yamljs": "0.3.0"

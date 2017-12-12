@@ -15,7 +15,7 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
 
 test_script:
-  - node_modules\o-tools-livescript\bin\build.cmd
+  - bin\build.cmd
   - node_modules\.bin\mocha --compilers ls:livescript spec\*.ls
   - bin\cuc-api
   - bin\cuc-cli

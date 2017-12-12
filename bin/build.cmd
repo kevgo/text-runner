@@ -1,2 +1,5 @@
-set EXOSERVICE_TEST_DEPTH=API
-node_modules\.bin\cucumber-js --tags ~@clionly --tags ~@todo --tags ~@skipWindows --format progress
+#!/usr/bin/env bash
+set -e
+
+node_modules\o-tools-livescript\bin\build
+node_modules\.bin\babel src -d dist

@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-function copyFile {
-  srcPath=$1
-  targetPath=$(echo $srcPath | sed 's/^src\///')
-  mkdir -p "dist/$(dirname $targetPath)"
-  cp $srcPath dist/$targetPath
-}
-
 rm -rf dist
 node_modules/o-tools-livescript/bin/build
-find src -name '*.js'| while read jsfile ; do
-  copyFile $jsfile
-done
+node_modules/.bin/babel src/ -d dist/

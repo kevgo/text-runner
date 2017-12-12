@@ -4,3 +4,4 @@ set -e
 bin/build
 # node_modules/o-tools/bin/lint
 remark .
+node_modules/.bin/flow check

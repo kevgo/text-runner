@@ -6,7 +6,6 @@ require! {
   'fs'
   'observable-process' : ObservableProcess
   'path'
-  'touch'
   '../src/text-runner' : TextRunner
 }
 

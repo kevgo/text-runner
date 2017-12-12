@@ -16,6 +16,7 @@ install:
 
 test_script:
   - bin\build.cmd
+  - dir dist
   - node_modules\.bin\mocha --compilers ls:livescript spec\*.ls
   - bin\cuc-api
   - bin\cuc-cli

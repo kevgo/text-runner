@@ -832,9 +832,9 @@ delegates@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/delegates/-/delegates-1.0.0.tgz#84c6e159b81904fdca59a0ef44cd870d31250f9a"
 
-dependency-lint@4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/dependency-lint/-/dependency-lint-4.3.0.tgz#a863631fa047357763fa13aea7e15c6de001dafc"
+dependency-lint@4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/dependency-lint/-/dependency-lint-4.3.1.tgz#4846f61629560719795359a80fc7826f30a3d377"
   dependencies:
     bluebird "^3.4.3"
     builtin-modules "^1.1.1"
@@ -850,9 +850,9 @@ dependency-lint@4.3.0:
     semver "^5.1.0"
     sorted-object "^2.0.0"
 
-dependency-lint@4.3.1:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/dependency-lint/-/dependency-lint-4.3.1.tgz#4846f61629560719795359a80fc7826f30a3d377"
+dependency-lint@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/dependency-lint/-/dependency-lint-5.0.1.tgz#2ef759a87bd5608b6bdd2af772c9d6a15b1e89ab"
   dependencies:
     bluebird "^3.4.3"
     builtin-modules "^1.1.1"

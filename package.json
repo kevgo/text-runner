@@ -50,7 +50,7 @@
     "dim-console": "0.4.4",
     "fs-extra": "1.0.0",
     "livescript": "1.5.0",
-    "mocha": "3.2.0",
+    "mocha": "4.0.1",
     "ncp": "2.0.0",
     "nitroglycerin": "1.1.2",
     "o-tools": "0.8.47",

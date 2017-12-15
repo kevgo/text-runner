@@ -22,6 +22,8 @@ module.exports = ->
   @After (scenario, done) ->
     end-child-processes ~>
       if scenario.is-failed!
+        console.log "\n"
+        console.log scenario.get-exception!
         console.log "\ntest artifacts are located in #{@root-dir.name}"
         done!
       else

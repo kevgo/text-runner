@@ -1,6 +1,5 @@
 require! {
   '../dist/helpers/call-args'
-  'chalk' : {strip-color}
   'observable-process' : ObservableProcess
   'fs'
   'path'

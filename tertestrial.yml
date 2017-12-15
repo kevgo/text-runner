@@ -11,12 +11,12 @@ actions:
 
     - match:
         filename: '\.feature$'
-      command: 'bin/cuc-api {{filename}} && bin/cuc-cli {{filename}}'
+      command: 'bin/cuke-api {{filename}} && bin/cuke-cli {{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'bin/cuc-api {{filename}}:{{line}} && bin/cuc-cli {{filename}}:{{line}}'
+      command: 'bin/cuke-api {{filename}}:{{line}} && bin/cuke-cli {{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.ls'
@@ -30,16 +30,16 @@ actions:
       command: 'bin/docs {{filename}}'
 
     - match:
-      command: 'bin/cuc-api'
+      command: 'bin/cuke-api'
 
     - match:
         filename: '\.feature$'
-      command: 'bin/cuc-api {{filename}}'
+      command: 'bin/cuke-api {{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'bin/cuc-api {{filename}}:{{line}}'
+      command: 'bin/cuke-api {{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.ls'
@@ -54,16 +54,16 @@ actions:
       command: 'bin/docs {{filename}}'
 
     - match:
-      command: 'bin/cuc-cli'
+      command: 'bin/cuke-cli'
 
     - match:
         filename: '\.feature$'
-      command: 'bin/cuc-cli {{filename}}'
+      command: 'bin/cuke-cli {{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'bin/cuc-cli {{filename}}:{{line}}'
+      command: 'bin/cuke-cli {{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.ls'

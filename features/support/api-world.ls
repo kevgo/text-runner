@@ -1,13 +1,14 @@
 require! {
   '../..' : TextRunner
   'chai' : {expect}
-  'chalk' : {cyan, strip-color}
+  'chalk' : {cyan}
   'dim-console'
   'fs-extra' : fs
   'glob'
   'jsdiff-console'
   'path'
   'prelude-ls' : {any, compact, filter, map, reject, unique}
+  'strip-ansi'
   'wait' : {wait-until}
 }
 
@@ -29,18 +30,18 @@ class TestFormatter
     @file-paths.push file-path unless @file-paths.includes file-path
 
   start: (activity) ->
-    @activities.push strip-color activity
+    @activities.push strip-ansi activity
     @lines.push if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
     console.log activity if @verbose
 
   success: (activity) ->
     if activity
-      @activities[*-1] = strip-color activity
+      @activities[*-1] = strip-ansi activity
       console.log activity if @verbose
     console.log 'success' if @verbose
 
   error: (error) !->
-    @error-messages.push strip-color(error.message or error.to-string!)
+    @error-messages.push strip-ansi(error.message or error.to-string!)
     @lines.push([@start-line, @end-line] |> unique |> compact |> (.join '-'))
     console.log error if @verbose
 
@@ -48,7 +49,7 @@ class TestFormatter
     console.log text if @verbose
 
   refine: (activity) ->
-    @activities[*-1] = strip-color activity
+    @activities[*-1] = strip-ansi activity
     @lines[*-1] = if @start-line isnt @end-line then "#{@start-line}-#{@end-line}" else @start-line.to-string!
     console.log activity if @verbose
 
@@ -57,7 +58,7 @@ class TestFormatter
   suite-success: (@steps-count) ->
 
   warning: (warning) !->
-    @warnings.push strip-color(warning)
+    @warnings.push strip-ansi(warning)
 
 
 
@@ -80,8 +81,8 @@ ApiWorld = !->
 
 
   @verify-errormessage = (expected-text) ->
-    actual = strip-color(@formatter.error-messages.join!)
-    expected = strip-color(expected-text)
+    actual = strip-ansi(@formatter.error-messages.join!)
+    expected = strip-ansi(expected-text)
     if !actual.includes expected
       throw new Error "Expected\n\n#{cyan actual}\n\nto contain\n\n#{cyan expected}\n"
 

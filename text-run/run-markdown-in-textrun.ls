@@ -1,6 +1,5 @@
 require! {
   '../dist/helpers/call-args'
-  'chalk' : {strip-color}
   'dim-console'
   '../dist/helpers/call-args'
   'fs'

@@ -4,9 +4,9 @@ set -e
 node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
-  bin/cuc-api
-  bin/cuc-cli
+  bin/cuke-api
+  bin/cuke-cli
 else
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-api "$@"
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuc-cli "$@"
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuke-api "$@"
+  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuke-cli "$@"
 fi

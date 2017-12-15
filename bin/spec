@@ -11,7 +11,7 @@ if [ "$#" == "0" ]; then
   bin/cuke-cli --format progress
   echo
   echo
-  bin/docs --format colored
+  bin/docs
 else
   DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuke-api "$@"
   DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-text-stream-accumulator,-rails-delegate,-exorelay:*,-stylus:*' bin/cuke-cli "$@"

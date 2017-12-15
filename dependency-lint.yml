@@ -11,8 +11,8 @@ executedModules:
   shellScripts:
     dev:
       - bin/build
-      - bin/cuc-api
-      - bin/cuc-cli
+      - bin/cuke-api
+      - bin/cuke-cli
       - bin/docs
       - bin/features
       - bin/lint

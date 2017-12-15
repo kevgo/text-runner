@@ -1,12 +1,10 @@
 require! {
   '../dist/helpers/call-args'
-  'chalk' : {strip-color}
   'dim-console'
   '../dist/helpers/call-args'
   'fs'
   'observable-process' : ObservableProcess
   'path'
-  'touch'
   '../src/text-runner' : TextRunner
 }
 

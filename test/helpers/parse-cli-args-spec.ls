@@ -28,7 +28,6 @@ describe 'parse-cli-args' ->
       ]
 
     it 'returns the "run" command' ->
-      console.log @result
       expect(@result.command).to.equal 'run'
 
     it 'returns empty files' ->

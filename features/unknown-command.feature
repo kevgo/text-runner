@@ -7,8 +7,9 @@ Feature: unknown command
   - running an unknown command prints the help screen
 
 
+  @apionly
   Scenario: running an unknown command
     When trying to run the "zonk" command
     Then the test fails with:
-      | ERROR MESSAGE | file or directory does not exist: zonk |
+      | ERROR MESSAGE | unknown command: zonk |
       | EXIT CODE     | 1                                      |

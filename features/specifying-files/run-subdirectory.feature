@@ -7,6 +7,7 @@ Feature: testing all docs in a subfolder
   - run "text-run [folder-to-test]" to test all docs in the given folder
 
 
+  @clionly
   Scenario: testing all files in a subfolder
     Given a runnable file "commands/foo.md"
     Given a runnable file "commands/bar/baz.md"

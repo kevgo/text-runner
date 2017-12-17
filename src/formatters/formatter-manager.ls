@@ -14,7 +14,7 @@ class FormatterManager
     |> map (.replace /-formatter/, '')
 
 
-  get-formatter: (name, done) ->
+  get-formatter: (name) ->
     if @is-formatter-name name
       @load-formatter name
     else

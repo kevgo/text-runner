@@ -9,7 +9,7 @@ module.exports = ->
   @When /^(trying to execute|executing) the "([^"]+)" example$/, timeout: 100_000, (trying-text, example-name, done) ->
     expect-error = determine-expect-error trying-text
     ncp "examples/#{example-name}" @root-dir.name, N ~>
-      @execute {command: 'run', expect-error}, ~>
+      @execute {command: 'text-run run', expect-error}, ~>
         finish expect-error, (@error or @exit-code), done
 
 
@@ -21,7 +21,7 @@ module.exports = ->
 
   @When /^(trying to run|running) text\-run$/, (trying-text, done) ->
     expect-error = determine-expect-error trying-text
-    @execute {command: 'run', cwd: @root-dir.name, expect-error}, ~>
+    @execute {command: 'text-run run', cwd: @root-dir.name, expect-error}, ~>
       finish expect-error, (@error or @exit-code), done
 
 

@@ -20,7 +20,6 @@ Feature: selecting formatter via the command-line
       """
 
 
-  @clionly
   Scenario Outline: selecting formatters via command-line parameter
     When running "text-run --format <FORMATTER>"
     Then it runs without errors
@@ -32,7 +31,6 @@ Feature: selecting formatter via the command-line
       | iconic    |
 
 
-  @clionly
   Scenario: selecting an unknown formatter
     When trying to run "text-run --format zonk"
     Then the call fails with the error:

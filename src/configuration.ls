@@ -25,6 +25,7 @@ class Configuration
 
 
   @default-values =
+    fast: no
     files: '**/*.md'
     format: 'robust'
     useTempDirectory: no

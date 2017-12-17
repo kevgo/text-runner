@@ -22,14 +22,20 @@ module.exports = ->
       finish trying is 'trying to run', (@error or @exit-code), done
 
 
-  @When /^(trying to run|running) text\-run with the arguments? "([^"]*)"$/ (trying, args, done) ->
-    [command, ...args] = args.split ' '
-    @execute {command, args, cwd: @root-dir.name}, ~>
+  @When /^(trying to run|running) text\-run with the arguments? "([^"]*)"$/ (trying, options-text, done) ->
+    [command, ...options] = options-text.split ' '
+    @execute {command, options, cwd: @root-dir.name}, ~>
+      finish trying is 'trying to run', (@error or @exit-code), done
+
+
+  @When /^(trying to run|running) text\-run with the options? {([^}]*)}$/ (trying, options-text, done) ->
+    options = JSON.parse("{#{options-text}}")
+    @execute {command: 'run', options, cwd: @root-dir.name}, ~>
       finish trying is 'trying to run', (@error or @exit-code), done
 
 
   @When /^(trying to run|running) text\-run with the "([^"]*)" formatter$/ (trying, formatter-name, done) ->
-    @execute command: 'run', cwd: @root-dir.name, formatter: formatter-name, ~>
+    @execute command: 'run', cwd: @root-dir.name, options: {formatter: formatter-name}, ~>
       finish trying is 'trying to run', (@error or @exit-code), done
 
 

@@ -11,8 +11,8 @@ require! {
 update-notifier({pkg}).notify!
 cli-cursor.hide!
 
-{command, file, options} = parse-cli-args process.argv
-text-runner {command, file, options}, (err) ->
+options = parse-cli-args process.argv
+text-runner options, (err) ->
   | err and err.message isnt 1  =>  console.log red err
 
   end-child-processes!

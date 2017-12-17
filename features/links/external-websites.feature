@@ -5,7 +5,7 @@ Feature: verifying links to websites
   So that I can point my readers to further reading.
 
   - links pointing to non-existing external websites cause a warning
-  - if the parameter "skip-external-links" is given, don't check external links
+  - if the parameter "fast" is given, don't check external links
 
 
   Scenario: markdown link to existing website

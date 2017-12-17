@@ -1,5 +1,5 @@
 require! {
-  '../..' : TextRunner
+  '../..' : text-runner
   'chai' : {expect}
   'chalk' : {cyan}
   'dim-console'
@@ -65,17 +65,16 @@ class TestFormatter
 
 ApiWorld = !->
 
-  @execute = ({command, file, options}, done) ->
+  @execute = ({command, file, fast, format}, done) ->
     existing-dir = process.cwd!
     process.chdir @root-dir.name
     @formatter = new TestFormatter {@verbose}
-    (options ?= {}).format = @formatter
-    @runner = new TextRunner options
-      ..execute command, file, (@error) ~>
-        @cwd-after-run = process.cwd!
-        process.chdir existing-dir
-        @output = @formatter.text
-        done!
+    format ?= @formatter
+    text-runner {command, file, fast, format}, (@error) ~>
+      @cwd-after-run = process.cwd!
+      process.chdir existing-dir
+      @output = @formatter.text
+      done!
 
 
   @verify-call-error = (expected-error) ->

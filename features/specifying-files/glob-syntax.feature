@@ -9,8 +9,7 @@ Feature: finding files in certain directories only
   - the command-line overrides the config file
 
 
-  @clionly
-  Scenario: different glob on command line and config file
+  Background:
     Given the configuration file:
       """
       files: '*.md'
@@ -18,17 +17,19 @@ Feature: finding files in certain directories only
     And a runnable file "readme.md"
     And a runnable file "foo/1.md"
     And a runnable file "foo/2.md"
-    When running text-run with the arguments "foo/*.md"
+
+
+  @apionly
+  Scenario: different glob via API than given in config file
+    When running text-run with the arguments {"file": "foo/*.md"}
     Then it runs only the tests in:
       | foo/1.md |
       | foo/2.md |
 
 
-  Scenario: no config file glob key and no command-line parameter
-    Given the configuration file:
-      """
-      foo: bar
-      """
-    And a runnable file "foo/bar.md"
-    When running text-run
-    Then it runs 1 test
+  @clionly
+  Scenario: different glob on command line and config file
+    When running "text-run foo/*.md"
+    Then it runs only the tests in:
+      | foo/1.md |
+      | foo/2.md |

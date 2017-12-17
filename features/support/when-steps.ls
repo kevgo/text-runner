@@ -32,10 +32,13 @@ module.exports = ->
       finish expect-error, (@error or @exit-code), done
 
 
-  @When /^(trying to run|running) text\-run with the options? {([^}]*)}$/ (trying-text, options-text, done) ->
+  @When /^(trying to run|running) text\-run with the arguments? {([^}]*)}$/ (trying-text, args-text, done) ->
     expect-error = determine-expect-error trying-text
-    options = JSON.parse("{#{options-text}}")
-    @execute {command: 'run', options, cwd: @root-dir.name, expect-error}, ~>
+    args = JSON.parse("{#{args-text}}")
+    args.command = 'run'
+    args.cwd = @root-dir.name
+    args.expect-error = expect-error
+    @execute args, ~>
       finish expect-error, (@error or @exit-code), done
 
 

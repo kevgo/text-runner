@@ -25,20 +25,26 @@ CliWorld = !->
       args.stderr = write: (text) ~> @output += text
     if @debug
       args.env['DEBUG'] = '*'
-    path-segments = [path.join(process.cwd!, 'bin', 'text-run')]
-    if process.platform is 'win32'
-      path-segments[0] += '.cmd'
-    if options?.formatter
-      path-segments
-        ..push '--format'
-        ..push options.formatter
-    path-segments.push command
-    @process = new ObservableProcess path-segments, args
+    @process = new ObservableProcess @make-full-path(command), args
       ..on 'ended', (@exit-code) ~>
         @output = dim-console.output if @verbose
         if @exit-code and not expect-error
           console.log @output
         done!
+
+
+  @make-full-path = (command) ->
+    if /^text-run/.test command
+      command.replace /^text-run/, @full-text-run-path!
+    else
+      "#{@full-text-run-path!} #{command}"
+
+
+  @full-text-run-path = ->
+    result = path.join(process.cwd!, 'bin', 'text-run')
+    if process.platform is 'win32'
+      result += '.cmd'
+    result
 
 
   @verify-call-error = (expected-error) ->

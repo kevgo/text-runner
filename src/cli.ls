@@ -18,5 +18,3 @@ text-runner.execute command, options, (err) ->
 
   end-child-processes!
   process.exit if err then 1 else 0
-
-

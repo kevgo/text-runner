@@ -7,4 +7,3 @@ describe 'available-commands' (...) ->
 
   it 'returns the available commands' ->
     expect(@result).to.eql ['help', 'run', 'setup', 'version']
-

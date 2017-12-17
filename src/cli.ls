@@ -2,23 +2,18 @@ require! {
   'chalk' : {red}
   'cli-cursor'
   'end-child-processes'
-  'minimist'
   '../package.json' : pkg
-  'prelude-ls' : {filter, split, tail}
+  './helpers/parse-cli-args'
   './text-runner' : TextRunner
   'update-notifier'
 }
-debug = require('debug')('text-runner:cli')
 
 update-notifier({pkg}).notify!
 cli-cursor.hide!
 
-argv = minimist process.argv.slice(2)
-commands-text = delete argv._
-commands = (commands-text[0] or '') |> split ' '
-                                    |> filter -> it isnt 'text-run'
-text-runner = new TextRunner argv
-text-runner.execute (commands[0] or 'run'), tail(commands), (err) ->
+{command, file, options} = parse-cli-args process.argv
+text-runner = new TextRunner options
+text-runner.execute command, file, (err) ->
   | err and err.message isnt 1  =>  console.log red err
 
   end-child-processes!

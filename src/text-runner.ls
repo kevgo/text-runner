@@ -25,6 +25,7 @@ class TextRunner
       | command is 'run' and @_has-directory(file)     =>  @_command('run').run-directory file, done
       | command is 'run' and @_is-markdown-file(file)  =>  @_command('run').run-file file, done
       | command is 'run' and is-glob(file)             =>  @_command('run').run-glob file, done
+      | command is 'run' and file                      =>  @_missing-file file, done
       | command is 'run'                               =>  @_command('run').run-all done
       | @_has-command(command)                         =>  @_command(command).run done
       | otherwise                                      =>  @_unknown-command command, done
@@ -79,6 +80,12 @@ class TextRunner
           .any -> it.ends-with '.md' and fs.stat-sync(it).is-file!
     catch
       no
+
+
+  _missing-file: (filename, done) ->
+    error-message = "file or directory does not exist: #{red filename}"
+    @formatter.error error-message
+    done new Error error-message
 
 
   _unknown-command: (command, done) ->

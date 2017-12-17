@@ -21,7 +21,10 @@ require! {
 module.exports = ({command, file, fast, format}, done) ->
   new Liftoff name: 'text-run', config-name: 'text-run', extensions: interpret.extensions
     ..launch {}, ({config-path}) ~>
-      (new TextRunner {fast, format}, config-path).execute command, file, done
+      try
+        (new TextRunner {fast, format}, config-path).execute command, file, done
+      catch
+        done e
 
 
 class TextRunner

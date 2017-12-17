@@ -16,10 +16,10 @@ install:
 
 test_script:
   - node_modules\o-tools-livescript\bin\build.cmd
-  - bin\tests
-  - bin\cuke-api
-  - bin\cuke-cli
-  - bin\text-run --format robust
+  - bin\tests.cmd
+  - bin\cuke-api.cmd
+  - bin\cuke-cli.cmd
+  - bin\text-run.cmd
 
 
 # Don't double-build PRs

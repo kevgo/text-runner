@@ -14,7 +14,7 @@ Feature: running a single MarkDown file
       `.`
       </a>
       """
-    Given my source code contains the file "2.md" with content:
+    And my source code contains the file "2.md" with content:
       """
       <a class="tr_verifyWorkspaceContainsDirectory">
       `.`

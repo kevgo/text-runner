@@ -9,6 +9,7 @@ Feature: finding files in certain directories only
   - the command-line overrides the config file
 
 
+  @clionly
   Scenario: different glob on command line and config file
     Given the configuration file:
       """

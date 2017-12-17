@@ -55,7 +55,7 @@ describe 'parse-cli-args' ->
       expect(@result.command).to.equal 'run'
 
     it 'returns the "fast" switch', ->
-      expect(@result.options.fast).to.be.true
+      expect(@result.fast).to.be.true
 
     it 'returns the filename', ->
       expect(@result.file).to.equal 'documentation/actions/cd.md'
@@ -99,4 +99,4 @@ describe 'parse-cli-args' ->
       expect(@result.command).to.equal 'run'
 
     it 'returns the robust formatter option', ->
-      expect(@result.options.format).to.equal 'robust'
+      expect(@result.format).to.equal 'robust'

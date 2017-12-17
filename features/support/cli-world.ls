@@ -25,8 +25,7 @@ CliWorld = !->
       args.stderr = write: (text) ~> @output += text
     if @debug
       args.env['DEBUG'] = '*'
-    command = @make-full-path command
-    @process = new ObservableProcess command, args
+    @process = new ObservableProcess @make-full-path(command), args
       ..on 'ended', (@exit-code) ~>
         @output = dim-console.output if @verbose
         if @exit-code and not expect-error

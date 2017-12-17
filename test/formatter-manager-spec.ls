@@ -22,20 +22,20 @@ describe 'FormatterManager', ->
 
     context 'with correct formatter name', (...) ->
 
-      before (done) ->
-        @formatter-manager.get-formatter 'iconic', (@err, @result) ~> done!
+      before ->
+        @result = @formatter-manager.get-formatter 'iconic'
 
       it 'returns the formatter with the given name', ->
         expect(typeof @result).to.equal 'object'
 
-      it 'returns no error' ->
-        expect(@err).to.be.null
-
 
     context 'with unknown formatter name', (...) ->
 
-      before (done) ->
-        @formatter-manager.get-formatter 'zonk', (@err, @result) ~> done!
+      before ->
+        try
+          @formatter-manager.get-formatter 'zonk'
+        catch
+          @err = e.message
 
       it 'returns no formatter', ->
         expect(@result).to.be.undefined

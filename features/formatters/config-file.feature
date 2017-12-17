@@ -27,7 +27,7 @@ Feature: selecting formatter via the config file
       | iconic    | 1.md        |
 
 
-  Scenario: selecting an unknown formatter
+  Scenario: the config file specifies an unknown formatter
     Given my workspace contains testable documentation
     And the configuration file:
       """

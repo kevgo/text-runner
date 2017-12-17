@@ -17,8 +17,8 @@ module.exports = (argv) ->
   if path.basename(argv[0] or '') is 'text-run'
     argv.splice 0, 1
 
-  parsed-argv = minimist argv, boolean: ['fast']
-  commands = delete parsed-argv._ or []
+  result = minimist argv, boolean: 'fast'
+  commands = delete result._ or []
 
   # extract command
   if available-commands!.includes commands[0]
@@ -27,6 +27,6 @@ module.exports = (argv) ->
   else
     command = 'run'
 
-  parsed-argv.command = command
-  parsed-argv.file = commands[0]
-  parsed-argv
+  result.command = command
+  result.file = commands[0]
+  result

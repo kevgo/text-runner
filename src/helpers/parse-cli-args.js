@@ -1,8 +1,8 @@
 // @flow
 
-import availableCommands from './available-commands'
-import minimist from 'minimist'
-import path from 'path'
+const availableCommands = require('./available-commands')
+const minimist = require('minimist')
+const path = require('path')
 
 // Parses the command-line options received,
 // and returns them structured as the command to run and options

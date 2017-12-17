@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+go get node-prune
 yarn install
+node-prune

@@ -3,6 +3,19 @@ const requireUncached = require('require-uncached')
 require('require-yaml')
 const debug = require('debug')('textrun:configuration')
 
+const defaultValues = {
+  fast: false,
+  files: '**/*.md',
+  format: 'robust',
+  useTempDirectory: false,
+  classPrefix: 'tr_',
+  actions: {
+    runConsoleCommand: {
+      globals: {}
+    }
+  }
+}
+
 // Encapsulates logic around the configuration
 class Configuration {
   constructor (configFilePath, constructorArgs :string) {
@@ -21,24 +34,9 @@ class Configuration {
     this.sourceDir = process.cwd()
   }
 
-  static defaultValues () {
-    return {
-      fast: false,
-      files: '**/*.md',
-      format: 'robust',
-      useTempDirectory: false,
-      classPrefix: 'tr_',
-      actions: {
-        runConsoleCommand: {
-          globals: {}
-        }
-      }
-    }
-  }
-
   // Returns the value of the attribute with the given name
   get (attributeName :string) :string {
-    return this.constructorArgs[attributeName] || this.fileData[attributeName] || Configuration.defaultValues()[attributeName]
+    return this.constructorArgs[attributeName] || this.fileData[attributeName] || defaultValues[attributeName]
   }
 
   // Creates a config file with default values

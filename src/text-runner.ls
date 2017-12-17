@@ -29,27 +29,19 @@ class TextRunner
 
   (@constructor-args, config-path) ->
     @configuration = new Configuration config-path, @constructor-args
+    @formatter = (new FormatterManager).get-formatter @configuration.get('format')
+    @actions = new ActionManager {@formatter, @configuration}
 
 
   # Tests the documentation according to the given command and arguments
   execute: (command, file, done) ->
-    @_init (err) ~>
-      | err                                          =>  new HelpCommand({err}).run! ; done err
-      | command is 'run' and has-directory(file)     =>  @_command('run').run-directory file, done
-      | command is 'run' and is-markdown-file(file)  =>  @_command('run').run-file file, done
-      | command is 'run' and is-glob(file)           =>  @_command('run').run-glob file, done
-      | command is 'run' and file                    =>  @_missing-file file, done
-      | command is 'run'                             =>  @_command('run').run-all done
-      | has-command(command)                         =>  @_command(command).run done
-      | otherwise                                    =>  @_unknown-command command, done
-
-
-  # Asynchronous initializer for this class
-  # we need this because Lift is asyncronous
-  _init: (done) ->
-    @formatter = (new FormatterManager).get-formatter @configuration.get('format')
-    @actions = new ActionManager {@formatter, @configuration}
-    done!
+    | command is 'run' and has-directory(file)     =>  @_command('run').run-directory file, done
+    | command is 'run' and is-markdown-file(file)  =>  @_command('run').run-file file, done
+    | command is 'run' and is-glob(file)           =>  @_command('run').run-glob file, done
+    | command is 'run' and file                    =>  @_missing-file file, done
+    | command is 'run'                             =>  @_command('run').run-all done
+    | has-command(command)                         =>  @_command(command).run done
+    | otherwise                                    =>  @_unknown-command command, done
 
 
   _command: (command) ->

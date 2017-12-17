@@ -8,8 +8,18 @@ Feature: display the version
   - run "text-run version" to see the currently installed version of the tool
 
 
+  @apionly
   Scenario: displaying the version
     When running "version"
+    Then it prints:
+      """
+      TextRunner v\d+\.\d+\.\d+
+      """
+
+
+  @clionly
+  Scenario: displaying the version via the CLI
+    When running "text-run version"
     Then it prints:
       """
       TextRunner v\d+\.\d+\.\d+

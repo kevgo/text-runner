@@ -35,5 +35,5 @@ Feature: running a single MarkDown file
   Scenario: testing a non-existing file
     When trying to run text-run with the argument "zonk.md"
     Then the test fails with:
-      | ERROR MESSAGE | unknown command: zonk.md |
-      | EXIT CODE     | 1                        |
+      | ERROR MESSAGE | file or directory does not exist: zonk.md |
+      | EXIT CODE     | 1                                         |

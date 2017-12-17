@@ -12,8 +12,8 @@ update-notifier({pkg}).notify!
 cli-cursor.hide!
 
 {command, file, options} = parse-cli-args process.argv
-text-runner = new TextRunner
-text-runner.execute command, options, (err) ->
+text-runner = new TextRunner options
+text-runner.execute command, file, (err) ->
   | err and err.message isnt 1  =>  console.log red err
 
   end-child-processes!

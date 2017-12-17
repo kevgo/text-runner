@@ -5,54 +5,48 @@ require! {
 
 describe 'parse-cli-args' ->
 
-  context '<node> <text-run> run --fast <file>' (...) ->
+  context 'with <node> call' (...) ->
+
+    before ->
+      @result = parse-cli-args [
+        '/usr/local/Cellar/node/9.3.0_1/bin/node',
+        '/Users/kevlar/d/text-runner/bin/text-run',
+        'run'
+      ]
+
+    it 'returns the "run" command' ->
+      expect(@result.command).to.equal 'run'
+
+
+  context 'with <node> and <text-run> call' (...) ->
 
     before ->
       @result = parse-cli-args [
         '/usr/local/Cellar/node/9.3.0_1/bin/node',
         '/Users/kevlar/d/text-runner/bin/text-run',
         'run',
-        '--fast',
-        'documentation/actions/cd.md'
       ]
 
     it 'returns the "run" command' ->
       expect(@result.command).to.equal 'run'
 
-    it 'returns the "fast" switch', ->
-      expect(@result.options.fast).to.be.true
 
-    it 'returns the filename', ->
-      expect(@result.file).to.equal 'documentation/actions/cd.md'
-
-
-  context '<node> <text-run> --fast run <file>' (...) ->
+  context 'with <text-run> call' (...) ->
 
     before ->
       @result = parse-cli-args [
-        '/usr/local/Cellar/node/9.3.0_1/bin/node',
         '/Users/kevlar/d/text-runner/bin/text-run',
-        '--fast',
         'run',
-        'documentation/actions/cd.md'
       ]
 
     it 'returns the "run" command' ->
       expect(@result.command).to.equal 'run'
 
-    it 'returns the "fast" switch', ->
-      expect(@result.options.fast).to.be.true
 
-    it 'returns the filename', ->
-      expect(@result.file).to.equal 'documentation/actions/cd.md'
-
-
-  context '<node> <text-run> --fast <file>' (...) ->
+  context '--fast <file>' (...) ->
 
     before ->
       @result = parse-cli-args [
-        '/usr/local/Cellar/node/9.3.0_1/bin/node',
-        '/Users/kevlar/d/text-runner/bin/text-run',
         '--fast',
         'documentation/actions/cd.md'
       ]
@@ -67,13 +61,10 @@ describe 'parse-cli-args' ->
       expect(@result.file).to.equal 'documentation/actions/cd.md'
 
 
-  context '<node> <text-run> <file>' (...) ->
+  context '<file>' (...) ->
 
     before ->
       @result = parse-cli-args [
-        '/usr/local/Cellar/node/9.3.0_1/bin/node',
-        '/Users/kevlar/d/text-runner/bin/text-run',
-        '--fast',
         'documentation/actions/cd.md'
       ]
 
@@ -84,17 +75,28 @@ describe 'parse-cli-args' ->
       expect(@result.file).to.equal 'documentation/actions/cd.md'
 
 
-  context '<node> <text-run>' (...) ->
+  context '(no args)' (...) ->
 
     before ->
-      @result = parse-cli-args [
-        '/usr/local/Cellar/node/9.3.0_1/bin/node',
-        '/Users/kevlar/d/text-runner/bin/text-run',
-        '--fast'
-      ]
+      @result = parse-cli-args []
 
     it 'returns the "run" command' ->
       expect(@result.command).to.equal 'run'
 
     it 'returns undefined as the filename', ->
       expect(@result.file).to.be.undefined
+
+
+  context '--format robust' (...) ->
+
+    before ->
+      @result = parse-cli-args [
+        '--format',
+        'robust'
+      ]
+
+    it 'returns the "run" command' ->
+      expect(@result.command).to.equal 'run'
+
+    it 'returns the robust formatter option', ->
+      expect(@result.options.format).to.equal 'robust'

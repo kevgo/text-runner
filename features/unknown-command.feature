@@ -10,5 +10,5 @@ Feature: unknown command
   Scenario: running an unknown command
     When trying to run the "zonk" command
     Then the test fails with:
-      | ERROR MESSAGE | unknown command: zonk |
-      | EXIT CODE     | 1                     |
+      | ERROR MESSAGE | file or directory does not exist: zonk |
+      | EXIT CODE     | 1                                      |

@@ -2,7 +2,7 @@
 
 node_modules/o-tools-livescript/bin/build
 if [ $# == 0 ]; then
-  node_modules/.bin/mocha --reporter dot "test/*.ls"
+  node_modules/.bin/mocha --reporter dot "test/**/*.ls"
 else
   node_modules/.bin/mocha "$@"
 fi

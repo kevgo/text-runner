@@ -63,6 +63,7 @@
     "remark-lint": "5.2.0",
     "remark-preset-lint-recommended": "1.0.0",
     "shelljs": "0.7.8",
+    "standard": "10.0.3",
     "tertestrial": "0.3.2"
   },
   "files": [

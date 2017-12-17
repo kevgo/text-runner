@@ -11,13 +11,16 @@ executedModules:
   shellScripts:
     dev:
       - bin/cuke-api
+      - bin/cuke-api.cmd
       - bin/cuke-cli
+      - bin/cuke-cli.cmd
       - bin/docs
       - bin/features
       - bin/lint
       - bin/publish
       - bin/spec
       - bin/tests
+      - bin/tests.cmd
     ignore: []
     root: 'bin/*'
 

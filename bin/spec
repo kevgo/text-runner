@@ -5,10 +5,10 @@ node_modules/o-tools-livescript/bin/build
 set -e
 if [ "$#" == "0" ]; then
   bin/lint
-  bin/tests --reporter=dot
+  bin/tests
   echo
-  bin/cuke-api --format progress
-  bin/cuke-cli --format progress
+  bin/cuke-api
+  bin/cuke-cli
   echo
   echo
   bin/docs

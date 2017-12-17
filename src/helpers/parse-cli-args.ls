@@ -10,14 +10,14 @@ require!  {
 module.exports = (argv) ->
 
   # remove optional node call
-  if path.basename(argv[0]) is 'node'
+  if path.basename(argv[0] or '') is 'node'
     argv.splice 0, 1
 
   # remove optional text-run call
-  if path.basename(argv[0]) is 'text-run'
+  if path.basename(argv[0] or '') is 'text-run'
     argv.splice 0, 1
 
-  parsed-argv = minimist argv, boolean: yes
+  parsed-argv = minimist argv, boolean: 'fast'
   commands = delete parsed-argv._ or []
 
   # extract command

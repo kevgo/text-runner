@@ -54,4 +54,3 @@ Feature: running a single MarkDown file
     Then the test fails with:
       | ERROR MESSAGE | file or directory does not exist: zonk.md |
       | EXIT CODE     | 1                                         |
-

@@ -12,7 +12,7 @@ Feature: testing all docs in a subfolder
     Given a runnable file "commands/foo.md"
     Given a runnable file "commands/bar/baz.md"
     And a runnable file "readme.md"
-    When running text-run with the arguments "commands"
+    When running "text-run commands"
     Then it runs only the tests in:
       | commands/foo.md     |
       | commands/bar/baz.md |

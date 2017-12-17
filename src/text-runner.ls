@@ -1,12 +1,17 @@
 require! {
   './actions/action-manager' : ActionManager
   'chalk' : {red}
+  './helpers/command-path'
   './commands/help/help-command' : HelpCommand
   './configuration' : Configuration
   './formatters/formatter-manager' : FormatterManager
   'fs'
+  './helpers/has-command'
+  './helpers/has-directory'
+  './helpers/has-markdown-files'
   'interpret'
   'is-glob'
+  './helpers/is-markdown-file'
   'liftoff' : Liftoff
   'path'
 }
@@ -14,77 +19,36 @@ require! {
 
 # Tests the documentation in the given directory
 module.exports = ({command, file, fast, format}, done) ->
-  text-runner = new TextRunner {fast, format}
-  text-runner.execute command, file, done
+  new Liftoff name: 'text-run', config-name: 'text-run', extensions: interpret.extensions
+    ..launch {}, ({config-path}) ~>
+      try
+        (new TextRunner {fast, format}, config-path).execute command, file, done
+      catch
+        done e
 
 
 class TextRunner
 
-  (@constructor-args) ->
+  (@constructor-args, config-path) ->
+    @configuration = new Configuration config-path, @constructor-args
+    @formatter = (new FormatterManager).get-formatter @configuration.get('format')
+    @actions = new ActionManager {@formatter, @configuration}
 
 
   # Tests the documentation according to the given command and arguments
   execute: (command, file, done) ->
-    @_init (err) ~>
-      | err                                            =>  new HelpCommand({err}).run! ; done err
-      | command is 'run' and @_has-directory(file)     =>  @_command('run').run-directory file, done
-      | command is 'run' and @_is-markdown-file(file)  =>  @_command('run').run-file file, done
-      | command is 'run' and is-glob(file)             =>  @_command('run').run-glob file, done
-      | command is 'run' and file                      =>  @_missing-file file, done
-      | command is 'run'                               =>  @_command('run').run-all done
-      | @_has-command(command)                         =>  @_command(command).run done
-      | otherwise                                      =>  @_unknown-command command, done
-
-
-  # Asynchronous initializer for this class
-  # we need this because Lift is asyncronous
-  _init: (done) ->
-    new Liftoff name: 'text-run', config-name: 'text-run', extensions: interpret.extensions
-      ..launch {}, ({@config-path}) ~>
-        @configuration = new Configuration @config-path, @constructor-args
-        (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
-          @actions = new ActionManager {@formatter, @configuration}
-          done err
+    | command is 'run' and has-directory(file)     =>  @_command('run').run-directory file, done
+    | command is 'run' and is-markdown-file(file)  =>  @_command('run').run-file file, done
+    | command is 'run' and is-glob(file)           =>  @_command('run').run-glob file, done
+    | command is 'run' and file                    =>  @_missing-file file, done
+    | command is 'run'                             =>  @_command('run').run-all done
+    | has-command(command)                         =>  @_command(command).run done
+    | otherwise                                    =>  @_unknown-command command, done
 
 
   _command: (command) ->
-    CommandClass = require @_command-path command
+    CommandClass = require command-path command
     new CommandClass({@configuration, @formatter, @actions})
-
-
-  _command-path: (command) ->
-    path.join __dirname, '..' 'dist' 'commands', command, "#{command}-command.js"
-
-
-  _has-command: (command) ->
-    try
-      fs.stat-sync @_command-path command
-      yes
-    catch
-      no
-
-
-  _has-directory: (dirname) ->
-    try
-      info = fs.stat-sync dirname
-      info.is-directory!
-    catch
-      no
-
-
-  _is-markdown-file: (filename) ->
-    try
-      filename.ends-with '.md' and fs.stat-sync(filename).is-file!
-    catch
-      no
-
-
-  _has-markdown-files: (glob-expression) ->
-    try
-      glob.sync glob-expression
-          .any -> it.ends-with '.md' and fs.stat-sync(it).is-file!
-    catch
-      no
 
 
   _missing-file: (filename, done) ->

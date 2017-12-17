@@ -11,7 +11,7 @@ require! {
 
 CliWorld = !->
 
-  @execute = ({command, options}, done) ->
+  @execute = ({command, options, expect-error}, done) ->
     args =
       cwd: @root-dir.name
       stdout: off
@@ -36,6 +36,8 @@ CliWorld = !->
     @process = new ObservableProcess path-segments, args
       ..on 'ended', (@exit-code) ~>
         @output = dim-console.output if @verbose
+        if @exit-code and not expect-error
+          console.log @output
         done!
 
 

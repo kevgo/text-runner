@@ -23,7 +23,7 @@ Feature: running a single MarkDown file
 
 
   @clionly
-  Scenario: testing a single file via the long CLI form
+  Scenario: testing a single file via the complete CLI form
     When running "text-run run 2.md"
     Then it runs only the tests in "2.md"
 

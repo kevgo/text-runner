@@ -11,7 +11,7 @@ require! {
 
 CliWorld = !->
 
-  @execute = ({command, formatter}, done) ->
+  @execute = ({command, options}, done) ->
     args =
       cwd: @root-dir.name
       stdout: off
@@ -28,10 +28,10 @@ CliWorld = !->
     path-segments = [path.join(process.cwd!, 'bin', 'text-run')]
     if process.platform is 'win32'
       path-segments[0] += '.cmd'
-    if formatter
+    if options?.formatter
       path-segments
         ..push '--format'
-        ..push formatter
+        ..push options.formatter
     path-segments.push command
     @process = new ObservableProcess path-segments, args
       ..on 'ended', (@exit-code) ~>

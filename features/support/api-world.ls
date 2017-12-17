@@ -59,16 +59,18 @@ class TestFormatter
 
   warning: (warning) !->
     @warnings.push strip-ansi(warning)
+    @activities.push strip-ansi(warning)
 
 
 
 ApiWorld = !->
 
-  @execute = ({command, args, formatter}, done) ->
+  @execute = ({command, args, constructor-args, formatter}, done) ->
     existing-dir = process.cwd!
     process.chdir @root-dir.name
     @formatter = new TestFormatter {@verbose}
-    @runner = new TextRunner format: @formatter
+    (constructor-args ?= {}).format = @formatter
+    @runner = new TextRunner constructor-args
       ..execute command, args, (@error) ~>
         @cwd-after-run = process.cwd!
         process.chdir existing-dir

@@ -28,6 +28,12 @@ module.exports = ->
       finish trying is 'trying to run', (@error or @exit-code), done
 
 
+  @When /^(trying to run|running) text\-run with the arguments? {([^}]*)}$/ (trying, argsStr, done) ->
+    constructor-args = JSON.parse("{#{argsStr}}")
+    @execute {command: 'run', constructor-args, cwd: @root-dir.name}, ~>
+      finish trying is 'trying to run', (@error or @exit-code), done
+
+
   @When /^(trying to run|running) text\-run with the "([^"]*)" formatter$/ (trying, formatter-name, done) ->
     @execute command: 'run', cwd: @root-dir.name, formatter: formatter-name, ~>
       finish trying is 'trying to run', (@error or @exit-code), done

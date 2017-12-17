@@ -1,3 +1,14 @@
 #!/usr/bin/env bash
 
-node_modules/.bin/mocha --require livescript --reporter dot spec/*.ls "$@"
+# RUNS THE UNIT TESTS
+#
+# Usage: `bin/tests [test-file]
+
+node_modules/o-tools-livescript/bin/build
+
+# it also uses the mocha options in test/mocha.opts
+if [ $# == 0 ]; then
+  node_modules/.bin/mocha --reporter dot "test/**/*.ls"
+else
+  node_modules/.bin/mocha "$@"
+fi

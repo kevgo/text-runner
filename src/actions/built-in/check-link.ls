@@ -9,18 +9,23 @@ require! {
 
 
 # Checks for broken hyperlinks
-module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
+module.exports  = ({filename, formatter, nodes, link-targets, configuration}, done) ->
   target = nodes[0].content
   formatter.start "checking link to #{cyan target}"
   switch
   | is-link-without-target target           =>  formatter.error "link without target" ; return done 1
   | is-link-to-anchor-in-same-file target   =>  check-link-to-anchor-in-same-file filename, target, link-targets, formatter, done
   | is-link-to-anchor-in-other-file target  =>  check-link-to-anchor-in-other-file filename, target, link-targets, formatter, done
-  | is-external-link target                 =>  check-external-link target, formatter, done
+  | is-external-link target                 =>  check-external-link target, formatter, configuration, done
   | otherwise                               =>  check-link-to-filesystem filename, target, formatter, done
 
 
-function check-external-link target, formatter, done
+function check-external-link target, formatter, configuration, done
+  if configuration.get('fast')
+    formatter.warning "skipping link to external website #{target}"
+    done!
+    return
+
   request url: target, timeout: 4000, (err, response) ->
     | err?.code is 'ENOTFOUND'            =>  formatter.warning "link to non-existing external website #{red target}"
     | response?.status-code is 404        =>  formatter.warning "link to non-existing external website #{red target}"

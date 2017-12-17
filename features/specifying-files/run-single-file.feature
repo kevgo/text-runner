@@ -35,7 +35,7 @@ Feature: running a single MarkDown file
 
 
   @clionly
-  Scenario: testing a non-existing file
+  Scenario: testing a non-existing file via the CLI
     When trying to run "text-run zonk.md"
     Then the test fails with:
       | ERROR MESSAGE | file or directory does not exist: zonk.md |
@@ -49,7 +49,7 @@ Feature: running a single MarkDown file
 
 
   @apionly
-  Scenario: testing a non-existing file
+  Scenario: testing a non-existing file via the API
     When trying to run text-run with the arguments {"file": "zonk.md"}
     Then the test fails with:
       | ERROR MESSAGE | file or directory does not exist: zonk.md |

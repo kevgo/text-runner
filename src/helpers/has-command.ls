@@ -1,4 +1,7 @@
-require! './command-path'
+require! {
+  'fs'
+  './command-path'
+}
 
 module.exports = (command) ->
   try

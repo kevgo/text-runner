@@ -5,7 +5,7 @@ require! {
 
 describe 'parse-cli-args' ->
 
-  context 'with <node> call' (...) ->
+  context 'with unix <node> call' (...) ->
 
     before ->
       @result = parse-cli-args [
@@ -17,6 +17,21 @@ describe 'parse-cli-args' ->
     it 'returns the "run" command' ->
       expect(@result.command).to.equal 'run'
 
+
+  context 'with windows <node> call' (...) ->
+
+    before ->
+      @result = parse-cli-args [
+        'C:\\Program Files (x86)\\nodejs\\node.exe',
+        'C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli',
+        'run'
+      ]
+
+    it 'returns the "run" command' ->
+      expect(@result.command).to.equal 'run'
+
+    it 'returns empty files' ->
+      expect(@result.file).to.be.undefined
 
   context 'with <node> and <text-run> call' (...) ->
 

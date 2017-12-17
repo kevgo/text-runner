@@ -1,4 +1,3 @@
-@debug
 Feature: creating directories
 
   As a documentation writer

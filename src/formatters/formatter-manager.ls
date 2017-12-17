@@ -15,8 +15,10 @@ class FormatterManager
 
 
   get-formatter: (name, done) ->
-    | @.is-formatter-name name  =>  @.load-formatter name, done
-    | otherwise                 =>  done null, name
+    if @is-formatter-name name
+      @load-formatter name
+    else
+      name
 
 
   # Returns TRUE if the given object is the name of a formatter,
@@ -27,14 +29,14 @@ class FormatterManager
 
   # Loads the formatter with the given name.
   # Returns the formatter and an optional error.
-  load-formatter: (name, done) ->
+  load-formatter: (name) ->
     try
       FormatterClass = require("./#{name}-formatter")
+      return new FormatterClass
     catch
       switch
-      | e.code is 'MODULE_NOT_FOUND'  =>  done "Unknown formatter: '#{name}'\n\nAvailable formatters are #{@available-formatter-names!.join ', '}"
+      | e.code is 'MODULE_NOT_FOUND'  =>  throw new Error "Unknown formatter: '#{name}'\n\nAvailable formatters are #{@available-formatter-names!.join ', '}"
       | otherwise                     =>  throw e
-    done null, new FormatterClass
 
 
 

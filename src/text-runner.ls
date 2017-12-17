@@ -19,13 +19,16 @@ require! {
 
 # Tests the documentation in the given directory
 module.exports = ({command, file, fast, format}, done) ->
-  text-runner = new TextRunner {fast, format}
-  text-runner.execute command, file, done
+  new Liftoff name: 'text-run', config-name: 'text-run', extensions: interpret.extensions
+    ..launch {}, ({config-path}) ~>
+      text-runner = new TextRunner {fast, format}, config-path
+      text-runner.execute command, file, done
 
 
 class TextRunner
 
-  (@constructor-args) ->
+  (@constructor-args, config-path) ->
+    @configuration = new Configuration config-path, @constructor-args
 
 
   # Tests the documentation according to the given command and arguments
@@ -44,12 +47,9 @@ class TextRunner
   # Asynchronous initializer for this class
   # we need this because Lift is asyncronous
   _init: (done) ->
-    new Liftoff name: 'text-run', config-name: 'text-run', extensions: interpret.extensions
-      ..launch {}, ({@config-path}) ~>
-        @configuration = new Configuration @config-path, @constructor-args
-        (new FormatterManager).get-formatter @configuration.get('format'), (err, @formatter) ~>
-          @actions = new ActionManager {@formatter, @configuration}
-          done err
+    @formatter = (new FormatterManager).get-formatter @configuration.get('format')
+    @actions = new ActionManager {@formatter, @configuration}
+    done!
 
 
   _command: (command) ->

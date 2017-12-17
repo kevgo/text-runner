@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const path = require('path')
-const process = require('process')
 
 module.exports = function (filename :string) :boolean {
   try {

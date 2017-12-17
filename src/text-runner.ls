@@ -28,7 +28,7 @@ class TextRunner
       | command is 'run' and @_is-markdown-file(args?[0])        =>  @_command('run').run-file args[0], done
       | !@_has-command(command) and is-glob(command)             =>  @_command('run').run-glob command, done
       | command is 'run' and is-glob(args?[0])                   =>  @_command('run').run-glob args[0], done
-      | command is 'run' and (args or []).length is 0            =>  @_command('run').run-all done
+      | command is 'run' and Object.keys(args or {}).length is 0 =>  @_command('run').run-all done
       | @_has-command(command)                                   =>  @_command(command).run done
       | otherwise                                                =>  @_unknown-command command, done
 
@@ -46,7 +46,9 @@ class TextRunner
 
   _command: (command) ->
     CommandClass = require @_command-path command
-    new CommandClass({@configuration, @formatter, @actions})
+    result = new CommandClass({@configuration, @formatter, @actions})
+    console.log result
+    result
 
 
   _command-path: (command) ->

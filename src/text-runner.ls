@@ -46,9 +46,7 @@ class TextRunner
 
   _command: (command) ->
     CommandClass = require @_command-path command
-    result = new CommandClass({@configuration, @formatter, @actions})
-    console.log result
-    result
+    new CommandClass({@configuration, @formatter, @actions})
 
 
   _command-path: (command) ->

@@ -31,7 +31,7 @@ Feature: selecting formatter via the command-line
       | iconic    |
 
 
-  Scenario: selecting an unknown formatter
+  Scenario: selecting an unknown formatter via the command line
     When trying to run "text-run --format zonk"
     Then the call fails with the error:
       """

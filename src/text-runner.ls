@@ -13,6 +13,11 @@ require! {
 
 
 # Tests the documentation in the given directory
+module.exports = ({command, file, fast, format}, done) ->
+  text-runner = new TextRunner {fast, format}
+  text-runner.execute command, file, done
+
+
 class TextRunner
 
   (@constructor-args) ->
@@ -91,6 +96,3 @@ class TextRunner
   _unknown-command: (command, done) ->
     @formatter.error "unknown command: #{red command}"
     done new Error "unknown command: #{command}"
-
-
-module.exports = TextRunner

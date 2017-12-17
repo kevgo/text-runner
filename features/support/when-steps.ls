@@ -9,7 +9,7 @@ module.exports = ->
   @When /^(trying to execute|executing) the "([^"]+)" example$/, timeout: 100_000, (trying-text, example-name, done) ->
     expect-error = determine-expect-error trying-text
     ncp "examples/#{example-name}" @root-dir.name, N ~>
-      @execute {command: 'text-run run', expect-error}, ~>
+      @execute {command: 'run', expect-error}, ~>
         finish expect-error, (@error or @exit-code), done
 
 
@@ -21,7 +21,7 @@ module.exports = ->
 
   @When /^(trying to run|running) text\-run$/, (trying-text, done) ->
     expect-error = determine-expect-error trying-text
-    @execute {command: 'text-run run', cwd: @root-dir.name, expect-error}, ~>
+    @execute {command: 'run', cwd: @root-dir.name, expect-error}, ~>
       finish expect-error, (@error or @exit-code), done
 
 
@@ -32,10 +32,13 @@ module.exports = ->
       finish expect-error, (@error or @exit-code), done
 
 
-  @When /^(trying to run|running) text\-run with the options? {([^}]*)}$/ (trying-text, options-text, done) ->
+  @When /^(trying to run|running) text\-run with the arguments? {([^}]*)}$/ (trying-text, args-text, done) ->
     expect-error = determine-expect-error trying-text
-    options = JSON.parse("{#{options-text}}")
-    @execute {command: 'run', options, cwd: @root-dir.name, expect-error}, ~>
+    args = JSON.parse("{#{args-text}}")
+    args.command = 'run'
+    args.cwd = @root-dir.name
+    args.expect-error = expect-error
+    @execute args, ~>
       finish expect-error, (@error or @exit-code), done
 
 

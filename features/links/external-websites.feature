@@ -75,7 +75,7 @@ Feature: verifying links to websites
       """
       A <a href="http://google.com">external link</a>
       """
-    When running text-run with the option {"fast": true}
+    When running text-run with the arguments {"fast": true}
     Then it signals:
       | FILENAME | 1.md                                                |
       | LINE     | 1                                                   |

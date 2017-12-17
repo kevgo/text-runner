@@ -16,7 +16,7 @@ Feature: unknown command
 
 
   @clionly
-  Scenario: running an unknown command
+  Scenario: running an unknown command via the CLI
     When trying to run "text-run zonk"
     Then the test fails with:
       | ERROR MESSAGE | file or directory does not exist: zonk |

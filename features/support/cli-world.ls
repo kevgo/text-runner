@@ -35,7 +35,10 @@ CliWorld = !->
 
 
   @make-full-path = (command) ->
-    command.replace /^text-run/, @full-text-run-path!
+    if /^text-run/.test command
+      command.replace /^text-run/, @full-text-run-path!
+    else
+      "#{@full-text-run-path!} #{command}"
 
 
   @full-text-run-path = ->

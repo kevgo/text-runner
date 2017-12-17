@@ -20,22 +20,21 @@ Feature: selecting formatter via the command-line
       """
 
 
+  @clionly
   Scenario Outline: selecting formatters via command-line parameter
-    When running text-run with the "<FORMATTER>" formatter
-    Then it prints:
-      """
-      <OUTPUT>
-      """
+    When running "text-run --format <FORMATTER>"
+    Then it runs without errors
 
     Examples:
-      | FORMATTER | OUTPUT      |
-      | robust    | Hello world |
-      | colored   | 1.md        |
-      | iconic    | 1.md        |
+      | FORMATTER |
+      | robust    |
+      | colored   |
+      | iconic    |
 
 
+  @clionly
   Scenario: selecting an unknown formatter
-    When trying to run text-run with the "zonk" formatter
+    When trying to run "text-run --format zonk"
     Then the call fails with the error:
       """
       Unknown formatter: 'zonk'

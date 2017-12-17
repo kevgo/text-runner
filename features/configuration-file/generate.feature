@@ -9,7 +9,7 @@ Feature: generating a configuration file
 
   @clionly
   Scenario: running in a directory without configuration file
-    When running the "setup" command
+    When running "text-run setup"
     Then it prints:
       """
       Create configuration file text-run.yml with default values

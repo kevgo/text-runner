@@ -22,18 +22,21 @@ Feature: running a single MarkDown file
       """
 
 
+  @clionly
   Scenario: testing a single file via "text-run run"
     When running text-run with the argument "run 2.md"
     Then it runs only the tests in "2.md"
 
 
+  @clionly
   Scenario: testing a single file via "text-run"
     When running text-run with the argument "2.md"
     Then it runs only the tests in "2.md"
 
 
+  @clionly
   Scenario: testing a non-existing file
     When trying to run text-run with the argument "zonk.md"
     Then the test fails with:
-      | ERROR MESSAGE | unknown command: zonk.md |
-      | EXIT CODE     | 1                        |
+      | ERROR MESSAGE | file or directory does not exist: zonk.md |
+      | EXIT CODE     | 1                                         |

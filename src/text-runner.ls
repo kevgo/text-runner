@@ -19,18 +19,16 @@ class TextRunner
 
 
   # Tests the documentation according to the given command and arguments
-  execute: (command, args, done) ->
+  execute: (command, file, done) ->
     @_init (err) ~>
-      | err                                                      =>  new HelpCommand({err}).run! ; done err
-      | !@_has-command(command) and @_has-directory(command)     =>  @_command('run').run-directory command, done
-      | !@_has-command(command) and @_is-markdown-file(command)  =>  @_command('run').run-file command, done
-      | command is 'run' and @_has-directory(args?[0])           =>  @_command('run').run-directory args[0], done
-      | command is 'run' and @_is-markdown-file(args?[0])        =>  @_command('run').run-file args[0], done
-      | !@_has-command(command) and is-glob(command)             =>  @_command('run').run-glob command, done
-      | command is 'run' and is-glob(args?[0])                   =>  @_command('run').run-glob args[0], done
-      | command is 'run' and (args or []).length is 0            =>  @_command('run').run-all done
-      | @_has-command(command)                                   =>  @_command(command).run done
-      | otherwise                                                =>  @_unknown-command command, done
+      | err                                            =>  new HelpCommand({err}).run! ; done err
+      | command is 'run' and @_has-directory(file)     =>  @_command('run').run-directory file, done
+      | command is 'run' and @_is-markdown-file(file)  =>  @_command('run').run-file file, done
+      | command is 'run' and is-glob(file)             =>  @_command('run').run-glob file, done
+      | command is 'run' and file                      =>  @_missing-file file, done
+      | command is 'run'                               =>  @_command('run').run-all done
+      | @_has-command(command)                         =>  @_command(command).run done
+      | otherwise                                      =>  @_unknown-command command, done
 
 
   # Asynchronous initializer for this class
@@ -82,6 +80,12 @@ class TextRunner
           .any -> it.ends-with '.md' and fs.stat-sync(it).is-file!
     catch
       no
+
+
+  _missing-file: (filename, done) ->
+    error-message = "file or directory does not exist: #{red filename}"
+    @formatter.error error-message
+    done new Error error-message
 
 
   _unknown-command: (command, done) ->

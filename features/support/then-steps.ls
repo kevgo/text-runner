@@ -60,6 +60,9 @@ module.exports = ->
     @verify-ran-console-command command, done
 
 
+  @Then /^it runs without errors$/ ->
+
+
   @Then /^it signals:$/ (table) ->
     @verify-output table.rows-hash!
 

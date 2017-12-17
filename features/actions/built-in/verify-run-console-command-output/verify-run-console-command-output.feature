@@ -27,7 +27,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
       """
-    And running text-run
+    When running text-run
     Then it signals:
       | FILENAME | verify-output.md                                     |
       | LINE     | 9-14                                                 |

@@ -7,13 +7,13 @@ require! {
 
 
 # Checks for broken hyperlinks
-module.exports  = ({filename, formatter, nodes, link-targets}, done) ->
+module.exports  = ({filename, formatter, nodes, link-targets, configuration}, done) ->
   node = nodes[0]
   image-path = path.join path.dirname(filename), node.src
   formatter.start "checking image #{cyan image-path}"
   switch
   | is-image-without-src node  =>  formatter.error "image tag without source" ; done 1
-  | is-remote-image node       =>  check-remote-image node, formatter, done
+  | is-remote-image node       =>  check-remote-image node, formatter, configuration, done
   | otherwise                  =>  check-local-image image-path, formatter, done
 
 
@@ -23,7 +23,12 @@ function check-local-image image-path, formatter, done
     | _    =>  formatter.success "image #{cyan image-path} exists"; done!
 
 
-function check-remote-image node, formatter, done
+function check-remote-image node, formatter, configuration, done
+  if configuration.get('fast')
+    formatter.warning "skipping external image #{node.src}"
+    done!
+    return
+
   request url: node.src, timeout: 2000, (err, response) ->
     | err?.code is 'ENOTFOUND'            =>  formatter.warning "image #{magenta node.src} does not exist"; done!
     | response?.status-code is 404        =>  formatter.warning "image #{magenta node.src} does not exist"; done!

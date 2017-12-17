@@ -46,7 +46,7 @@ Feature: verifying the output of the last console command
       Stop the current process by hitting Ctrl-C
       </a>
       """
-    And running text-run
+    When running text-run
     Then it signals:
       | FILENAME | verify-output.md                                         |
       | LINE     | 15-20                                                    |

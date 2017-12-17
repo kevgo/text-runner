@@ -20,7 +20,7 @@ actions:
 
     - match:
         filename: '-spec\.ls'
-      command: 'mycha {{filename}}'
+      command: 'bin/tests {{filename}}'
 
 
   API:
@@ -43,7 +43,7 @@ actions:
 
     - match:
         filename: '-spec\.ls'
-      command: 'mycha {{filename}}'
+      command: 'bin/tests {{filename}}'
 
 
 
@@ -67,4 +67,4 @@ actions:
 
     - match:
         filename: '-spec\.ls'
-      command: 'mycha {{filename}}'
+      command: 'bin/tests {{filename}}'

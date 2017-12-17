@@ -17,10 +17,10 @@ install:
 test_script:
   - bin\build.cmd
   - dir dist
-  - node_modules\.bin\mocha --compilers ls:livescript spec\*.ls
-  - bin\cuc-api
-  - bin\cuc-cli
-  - bin\text-run --format robust
+  - bin\tests.cmd
+  - bin\cuke-api.cmd
+  - bin\cuke-cli.cmd
+  - bin\text-run.cmd --format robust
 
 
 # Don't double-build PRs

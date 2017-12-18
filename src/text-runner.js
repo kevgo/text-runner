@@ -29,7 +29,7 @@ class TextRunner {
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()
     this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
-    this.actions = new ActionManager({formatter: this.formatter, configuration: this.configuration})
+    this.actions = new ActionManager(this.formatter, this.configuration)
   }
 
   // Tests the documentation according to the given command and arguments

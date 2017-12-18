@@ -1,10 +1,9 @@
 const {red} = require('chalk')
 const cliCursor = require('cli-cursor')
 const endChildProcesses = require('end-child-processes')
-const minimist = require('minimist')
 const parseCliArgs = require('./helpers/parse-cli-args')
 const pkg = require('../package.json')
-const TextRunner = require('./text-runner')
+const textRunner = require('./text-runner')
 const updateNotifier = require('update-notifier')
 
 updateNotifier({pkg}).notify()

@@ -41,26 +41,25 @@ class Configuration {
 
   // Creates a config file with default values
   createDefault () {
-    fs.writeFileSync('./text-run.yml', `
-      # white-list for files to test
-      files: '**/*.md'
+    fs.writeFileSync('./text-run.yml',
+`# white-list for files to test
+files: '**/*.md'
 
-      # the formatter to use
-      format: robust
+# the formatter to use
+format: robust
 
-      # prefix that makes anchor tags active regions
-      classPrefix: 'tr_'
+# prefix that makes anchor tags active regions
+classPrefix: 'tr_'
 
-      # whether to run the tests in an external temp directory,
-      # uses ./tmp if false,
-      # you can also provide a custom directory path here
-      useTempDirectory: false
+# whether to run the tests in an external temp directory,
+# uses ./tmp if false,
+# you can also provide a custom directory path here
+useTempDirectory: false
 
-      # action-specific configuration
-      actions:
-        runConsoleCommand:
-          globals: {}
-      `)
+# action-specific configuration
+actions:
+  runConsoleCommand:
+    globals: {}`)
   }
 }
 

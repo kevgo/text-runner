@@ -2,15 +2,6 @@
 
 const dashify = require('dashify')
 
-type LinkTarget = {
-  type: string,
-  name: string,
-  text?: string,
-  level?: number
-}
-
-type LinkTargetList = { [string]: Array<LinkTarget> }
-
 class LinkTargetBuilder {
   // determines which files contain which link targets (anchors)
 

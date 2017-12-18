@@ -1,3 +1,2 @@
 --colors
---require livescript
-test/test-helper.ls
+--require babel-core/register

@@ -1,4 +1,4 @@
-const availableCommands = require('../../src/helpers/available-commands')
+const availableCommands = require('../../dist/helpers/available-commands')
 
 describe('available-commands', function () {
   it('returns the available commands', function () {

@@ -29,7 +29,7 @@ class MarkdownParser {
     return this._standardizeAst(this.markdownParser.parse(markdownText, {}))
   }
 
-  _standardizeAst (ast, line: number = 0, result: AstNode[] = [], heading: ?Heading = undefined): Array<AstNode> {
+  _standardizeAst (ast, line: number = 0, result: AstNode[] = [], heading: ?Heading = undefined): AstNode[] {
     const modifiers = []
     for (let node of ast) {
       const nodeLine = (node.lines && node.lines.length > 0) ? node.lines[0] + 1 : line

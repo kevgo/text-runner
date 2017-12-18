@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
 yarn upgrade --latest
+flow-typed install --overwrite

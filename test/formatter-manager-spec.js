@@ -1,5 +1,6 @@
 const FormatterManager = require('../dist/formatters/formatter-manager')
 const jsdiffConsole = require('jsdiff-console')
+const {expect} = require('chai')
 
 describe('FormatterManager', function () {
   before(function () {
@@ -12,14 +13,14 @@ describe('FormatterManager', function () {
     })
 
     it('returns the names of the available formatters', function () {
-      expect(this.formatterNames).to.eql(['colored', 'iconic', 'robust'])
+      expect(this.formatterNames).to.eql(['robust'])
     })
   })
 
   describe('getFormatter', function () {
     context('with correct formatter name', function () {
       before(function () {
-        this.result = this.formatterManager.getFormatter('iconic')
+        this.result = this.formatterManager.getFormatter('robust')
       })
 
       it('returns the formatter with the given name', function () {
@@ -44,7 +45,7 @@ describe('FormatterManager', function () {
         jsdiffConsole(this.err,
 `Unknown formatter: 'zonk'
 
-Available formatters are colored, iconic, robust`)
+Available formatters are robust`)
       })
     })
   })

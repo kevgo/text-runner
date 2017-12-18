@@ -4,6 +4,9 @@ const {bold, dim, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
 const {compact, unique} = require('prelude-ls')
 
+// colorFunction is a better name for functions that add colors to strings
+type colorFunction = (text: string) => string
+
 // A very robust formatter, prints output before the step name
 class RobustFormatter extends Formatter {
   error (errorMessage: string) {
@@ -26,7 +29,7 @@ class RobustFormatter extends Formatter {
     this._printActivityHeader(bold, magenta)
   }
 
-  _printActivityHeader (...colors: Array<any>) {
+  _printActivityHeader (...colorFunctions: Array<colorFunction>) {
     var text = ''
     if (this.filePath) {
       text += this.filePath
@@ -39,10 +42,14 @@ class RobustFormatter extends Formatter {
     if (this.activityText) text += this.activityText
     if (this.warningMessage) text += this.warningMessage
     if (this.errorMessage) text += `\n${this.errorMessage}`
-    for (let color of colors) {
-      text = color(text)
+    console.log(this._applyColorFunctions(text, ...colorFunctions))
+  }
+
+  _applyColorFunctions (text: string, ...colorFunctions: Array<colorFunction>): string {
+    for (let colorFunction of colorFunctions) {
+      text = colorFunction(text)
     }
-    console.log(text)
+    return text
   }
 }
 

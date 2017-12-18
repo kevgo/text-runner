@@ -1,10 +1,12 @@
+// @flow
+
 const dashify = require('dashify')
 
 type LinkTarget = {
   type: string,
   name: string,
-  text: string,
-  level: string
+  text?: string,
+  level?: number
 }
 
 type LinkTargetList = { [string]: Array<LinkTarget> }
@@ -19,14 +21,16 @@ class LinkTargetBuilder {
     this.linkTargets = value.linkTargets
   }
 
-  buildLinkTargets (filePath: string, tree) {
+  buildLinkTargets (filePath: string, tree: AstNodeList) {
     this.linkTargets[filePath] = this.linkTargets[filePath] || []
     for (let node of tree) {
       switch (node.type) {
         case 'htmltag':
-          const matches = node.content.match(/<a name="([^"]*)">/)
-          if (matches) {
-            this.linkTargets[filePath].push({type: 'anchor', name: matches[1]})
+          if (node.content != null) {
+            const matches = node.content.match(/<a name="([^"]*)">/)
+            if (matches != null) {
+              this.linkTargets[filePath].push({type: 'anchor', name: matches[1]})
+            }
           }
           break
 

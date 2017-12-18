@@ -3,14 +3,6 @@
 // $FlowFixMe
 const Remarkable = require('remarkable')
 
-type AstNode = {
-  line: number,       // the line in the file at which this AST node occurs
-  type: string,       // type of AST node
-  content?: string,   // textual content of this AST node
-  src?: string,       //
-  level?: number      // nesting level of this AST node
-}
-
 type Heading = {
   lines: Array<number>,
   text: string
@@ -25,11 +17,11 @@ class MarkdownParser {
     this.markdownParser = new Remarkable('full', {html: true})
   }
 
-  parse (markdownText: string): AstNode[] {
+  parse (markdownText: string): AstNodeList {
     return this._standardizeAst(this.markdownParser.parse(markdownText, {}))
   }
 
-  _standardizeAst (ast, line: number = 0, result: AstNode[] = [], heading: ?Heading = undefined): AstNode[] {
+  _standardizeAst (ast, line: number = 0, result: AstNodeList = [], heading: ?Heading = undefined): AstNodeList {
     const modifiers = []
     for (let node of ast) {
       const nodeLine = (node.lines && node.lines.length > 0) ? node.lines[0] + 1 : line

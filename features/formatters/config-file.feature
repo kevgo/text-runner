@@ -23,8 +23,6 @@ Feature: selecting formatter via the config file
     Examples:
       | FORMATTER | OUTPUT      |
       | robust    | Hello world |
-      | colored   | 1.md        |
-      | iconic    | 1.md        |
 
 
   Scenario: the config file specifies an unknown formatter
@@ -38,5 +36,5 @@ Feature: selecting formatter via the config file
       """
       Unknown formatter: 'zonk'
 
-      Available formatters are colored, iconic, robust
+      Available formatters are robust
       """

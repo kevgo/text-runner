@@ -4,19 +4,16 @@ const {bold, dim, red} = require('chalk')
 // $FlowFixMe: flow doesn't like requiring such an untyped file
 const version: number = require('../../../package.json').version
 
-// doneFunc is the type signature for async callback functions
-type doneFunc = (err?: Error) => void
-
-class HelpCommand {
+class HelpCommand implements Command {
   error: string
 
   constructor (value: {error: string}) {
     this.error = value.error
   }
 
-  run (_: string, done: doneFunc) {
+  run (done: DoneFunction) {
     console.log(this._template(this.error))
-    done && done()
+    done()
   }
 
   _template (error: string) {

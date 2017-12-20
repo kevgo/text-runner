@@ -12,7 +12,7 @@ require! {
 debug = require('debug')('text-runner:run-command')
 
 
-class RunCommand
+class RunCommand implements Command
 
   ({@configuration, @formatter, @actions}) ->
 
@@ -21,7 +21,7 @@ class RunCommand
 
 
   # Tests all files
-  run-all: (done) ->
+  run: (done) ->
     @_run @_all-markdown-files!, done
 
 

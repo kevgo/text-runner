@@ -50,10 +50,6 @@ class TextRunner {
       return this._missingFile(file, done)
     }
 
-    if (command === 'run') {
-      return this._command('run').runAll(done)
-    }
-
     if (hasCommand(command)) {
       return this._command(command).run(done)
     }

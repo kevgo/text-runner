@@ -1,3 +1,4 @@
+@online
 Feature: verifying links to websites
 
   As a documentation writer

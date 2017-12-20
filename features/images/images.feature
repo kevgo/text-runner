@@ -74,6 +74,7 @@ Feature: checking embedded images
       | EXIT CODE     | 1                             |
 
 
+  @online
   Scenario: existing remote HTML image
     Given my source code contains the file "1.md" with content:
       """
@@ -86,6 +87,7 @@ Feature: checking embedded images
       | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png exists |
 
 
+  @online
   Scenario: existing remote Markdown image
     Given my source code contains the file "1.md" with content:
       """
@@ -98,6 +100,7 @@ Feature: checking embedded images
       | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png exists |
 
 
+  @online
   Scenario: non-existing remote HTML image
     Given my source code contains the file "1.md" with content:
       """
@@ -110,6 +113,7 @@ Feature: checking embedded images
       | WARNING  | image http://google.com/onetuhoenzonk.png does not exist |
 
 
+  @online
   Scenario: non-existing remote Markdown image
     Given my source code contains the file "1.md" with content:
       """

@@ -11,6 +11,9 @@
 * run all tests: `bin/spec`
 * run linter: `bin/lint`
 * run feature specs: `bin/features`
+* run feature specs against the JS API: `bin/cuke-api`
+* run feature specs against the CLI: `bin/cuke-cli`
+* run feature specs against the CLI in offline mode: `bin/cuke-cli --tags '~@online'`
 * run text-run: `bin/docs`
 
 To debug a single test:

@@ -24,7 +24,7 @@ module.exports = function ({command, file, fast, format}, done) {
 }
 
 class TextRunner {
-  constructor (constructorArgs, configPath) {
+  constructor (constructorArgs: TextRunnerConfig, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()

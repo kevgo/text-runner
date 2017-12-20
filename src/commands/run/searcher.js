@@ -1,7 +1,17 @@
+// @flow
+
 const Formatter = require('../../formatters/formatter.js')
 
+type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?string
+
 class Searcher {
-  constructor (value: {filePath: string, startLine: number, endLine: number, nodes: any, formatter: Formatter}) {
+  filePath: string
+  startLine: number
+  endLine: number
+  nodes: ?AstNodeList
+  formatter: Formatter
+
+  constructor (value: {filePath: string, startLine: number, endLine: number, nodes: ?AstNodeList, formatter: Formatter}) {
     this.filePath = value.filePath
     this.startLine = value.startLine
     this.endLine = value.endLine
@@ -9,14 +19,16 @@ class Searcher {
     this.formatter = value.formatter
   }
 
-  nodeContent (query, errorChecker) {
+  nodeContent (query: {type: ?string, types: ?string[]}, errorChecker: ErrorCheckerFunc): string {
+    if (this.nodes == null) return ''
     const nodes = this.nodes.filter((node) => {
       return (node.type === query.type) ||
              (query.types && query.types.includes(node.type))
     })
-    const content = nodes[0] && nodes[0].content
-    const error = errorChecker && errorChecker({nodes, content})
-    if (error) {
+    var content = nodes[0] ? nodes[0].content : null
+    if (content == null) content = ''
+    const error = errorChecker ? errorChecker({nodes, content}) : null
+    if (error != null) {
       throw new Error(error)
     }
     return content

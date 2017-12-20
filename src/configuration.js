@@ -1,3 +1,5 @@
+// @flow
+
 const fs = require('fs')
 const requireUncached = require('require-uncached')
 require('require-yaml')
@@ -18,7 +20,12 @@ const defaultValues = {
 
 // Encapsulates logic around the configuration
 class Configuration {
-  constructor (configFilePath, constructorArgs :string) {
+  configFilePath: string
+  constructorArgs: TextRunnerConfig
+  fileData: ConfigFileStructure
+  sourceDir: string
+
+  constructor (configFilePath: string, constructorArgs: TextRunnerConfig) {
     this.configFilePath = configFilePath
     this.constructorArgs = constructorArgs || {}
 

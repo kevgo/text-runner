@@ -104,7 +104,7 @@ class RunCommand implements Command {
     }
   }
 
-  _filesMatchingGlob (expression: string, done: (err: ?Error, files?: string[]) => void) {
+  _filesMatchingGlob (expression: string, done: (err: ?ErrnoError, files?: string[]) => void) {
     glob(expression, (err, files) => {
       if (err) {
         return done(err)
@@ -115,7 +115,7 @@ class RunCommand implements Command {
 
   // Returns all the markdown files in this directory and its children
   _markdownFilesInDir (dirName) {
-    const files = glob.sync('#{dirName}/**/*.md')
+    const files = glob.sync(`${dirName}/**/*.md`)
     if (files.length === 0) {
       this.formatter.warning('no Markdown files found')
     }

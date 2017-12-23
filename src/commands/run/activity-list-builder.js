@@ -22,10 +22,10 @@ class ActivityListBuilder {
     this.linkTargets = value.linkTargets
   }
 
-  build (tree: AstNodeList) {
+  build (tree: AstNodeList): ActivityList {
     var nodesForCurrentRunner: ?AstNodeList
     var startLine = 0
-    var result = []
+    var result: ActivityList = []
     var currentRunnerType: ?Action
     for (let node: AstNode of tree) {
       // link start tag
@@ -34,7 +34,7 @@ class ActivityListBuilder {
         startLine = node.line
         if (currentRunnerType) {
           this.formatter.error('Found a nested <a class="tr_*"> block')
-          return null
+          return []
         }
         try {
           currentRunnerType = this.actions.actionFor(blockType)

@@ -12,7 +12,7 @@ require! {
 debug = require('debug')('text-runner:run-command')
 
 
-class RunCommand implements Command
+class RunCommand
 
   ({@configuration, @formatter, @actions}) ->
 

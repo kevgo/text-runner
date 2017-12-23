@@ -1,3 +1,5 @@
+// @flow
+
 const ActionManager = require('./actions/action-manager')
 const {red} = require('chalk')
 const commandPath = require('./helpers/command-path')
@@ -11,12 +13,12 @@ const isMarkdownFile = require('./helpers/is-markdown-file')
 const Liftoff = require('liftoff')
 
 // Tests the documentation in the given directory
-module.exports = function ({command, file, fast, format}, done) {
+module.exports = function (value: {command: string, file: string, fast: boolean, format: Formatter}, done: DoneFunction) {
   const liftoff = new Liftoff({name: 'text-run', configName: 'text-run', extensions: interpret.extensions})
   liftoff.launch({}, ({configPath}) => {
     try {
-      const textRunner = new TextRunner({fast, format}, configPath)
-      textRunner.execute(command, file, done)
+      const textRunner = new TextRunner({fast: value.fast, format: value.format}, configPath)
+      textRunner.execute(value.command, value.file, done)
     } catch (e) {
       done(e)
     }
@@ -24,6 +26,11 @@ module.exports = function ({command, file, fast, format}, done) {
 }
 
 class TextRunner {
+  constructorArgs: TextRunnerConfig
+  configuration: Configuration
+  formatter: Formatter
+  actions: ActionManager
+
   constructor (constructorArgs: TextRunnerConfig, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)

@@ -15,7 +15,7 @@ class ActionManager {
   configuration: Configuration
   actions: { [string]: Action }
 
-  constructor (formatter: FormatterManager, configuration: Configuration) {
+  constructor (formatter: Formatter, configuration: Configuration) {
     this.formatter = formatter
     this.configuration = configuration
     this.actions = {}

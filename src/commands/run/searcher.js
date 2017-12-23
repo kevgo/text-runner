@@ -6,12 +6,12 @@ type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?strin
 
 class Searcher {
   filePath: string
-  startLine: number
-  endLine: number
+  startLine: ?number
+  endLine: ?number
   nodes: ?AstNodeList
   formatter: Formatter
 
-  constructor (value: {filePath: string, startLine: number, endLine: number, nodes: ?AstNodeList, formatter: Formatter}) {
+  constructor (value: {filePath: string, startLine: ?number, endLine: ?number, nodes: ?AstNodeList, formatter: Formatter}) {
     this.filePath = value.filePath
     this.startLine = value.startLine
     this.endLine = value.endLine

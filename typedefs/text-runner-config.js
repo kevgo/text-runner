@@ -1,6 +1,6 @@
 // @flow
 
 declare type TextRunnerConfig = {
-  fast: boolean,
-  format: ?Formatter
+  fast?: boolean,
+  format?: Formatter
 }

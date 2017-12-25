@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -e
 
-node_modules/o-tools-livescript/bin/build
-set -e
 if [ "$#" == "0" ]; then
   bin/lint
   bin/tests

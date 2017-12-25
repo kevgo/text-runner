@@ -6,7 +6,7 @@ require! {
   'prelude-ls' : {compact, head, map, tail}
   '../../helpers/trim-dollar'
 }
-debug = require('debug')('console-with-dollar-prompt-runner')
+debug = require('debug')('start-console-command')
 
 
 # Runs the given commands on the console.

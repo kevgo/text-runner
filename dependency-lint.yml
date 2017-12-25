@@ -10,6 +10,7 @@ executedModules:
       - version
   shellScripts:
     dev:
+      - bin/build
       - bin/cuke-api
       - bin/cuke-api.cmd
       - bin/cuke-cli

@@ -27,8 +27,6 @@ Feature: selecting formatter via the command-line
     Examples:
       | FORMATTER |
       | robust    |
-      | colored   |
-      | iconic    |
 
 
   Scenario: selecting an unknown formatter via the command line
@@ -37,5 +35,5 @@ Feature: selecting formatter via the command-line
       """
       Unknown formatter: 'zonk'
 
-      Available formatters are colored, iconic, robust
+      Available formatters are robust
       """

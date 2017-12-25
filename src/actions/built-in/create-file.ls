@@ -5,7 +5,7 @@ require! {
   'path'
   'prelude-ls' : {capitalize, filter, map}
 }
-debug = require('debug')('textrun:actions:cd')
+debug = require('debug')('textrun:actions:create-file')
 
 
 module.exports  = ({configuration, formatter, searcher}, done) ->

@@ -2,7 +2,7 @@ require! {
   'observable-process' : ObservableProcess
   'prelude-ls' : {compact, map}
 }
-debug = require('debug')('console-with-dollar-prompt-runner')
+debug = require('debug')('stop-console-command')
 
 
 # Stops the currently running console command.

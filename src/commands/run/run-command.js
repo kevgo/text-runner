@@ -41,15 +41,14 @@ class RunCommand implements Command {
     this._run([filename], done)
   }
 
-  // TODO: make this synchronous
+  // Tests the files described by the given glob expression
   runGlob (fileExpression: string, done: DoneFunction) {
-    this._filesMatchingGlob(fileExpression, (err: ?Error, files?: string[]) => {
-      if (err) {
-        done(err)
-      } else if (files != null) {
-        this._run(files, done)
-      }
-    })
+    const files = this._filesMatchingGlob(fileExpression)
+    if (files != null) {
+      this._run(files, done)
+    } else {
+      done()
+    }
   }
 
   // Runs the currently set up runners.
@@ -104,13 +103,8 @@ class RunCommand implements Command {
     }
   }
 
-  _filesMatchingGlob (expression: string, done: (err: ?ErrnoError, files?: string[]) => void) {
-    glob(expression, (err, files) => {
-      if (err) {
-        return done(err)
-      }
-      done(null, sort(files))
-    })
+  _filesMatchingGlob (expression: string): string[] {
+    return sort(glob.sync(expression))
   }
 
   // Returns all the markdown files in this directory and its children

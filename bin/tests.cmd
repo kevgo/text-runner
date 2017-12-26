@@ -1,2 +1,2 @@
-node_modules\o-tools-livescript\bin\build
-node_modules/.bin/mocha --reporter dot "test/**/*.ls"
+call bin/build
+call node_modules/.bin/mocha --reporter dot "test/**/*.js"

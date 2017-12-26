@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-node_modules/o-tools-livescript/bin/build
+bin/build
 if [ "$#" != "1" ]; then
   EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags ~@apionly --tags ~@todo --format progress "$@"
 else

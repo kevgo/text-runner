@@ -19,7 +19,7 @@ actions:
       command: 'bin/cuke-api {{filename}}:{{line}} && bin/cuke-cli {{filename}}:{{line}}'
 
     - match:
-        filename: '-spec\.ls'
+        filename: '-spec\.js'
       command: 'bin/tests {{filename}}'
 
 
@@ -42,7 +42,7 @@ actions:
       command: 'bin/cuke-api {{filename}}:{{line}}'
 
     - match:
-        filename: '-spec\.ls'
+        filename: '-spec\.js'
       command: 'bin/tests {{filename}}'
 
 
@@ -66,5 +66,5 @@ actions:
       command: 'bin/cuke-cli {{filename}}:{{line}}'
 
     - match:
-        filename: '-spec\.ls'
+        filename: '-spec\.js'
       command: 'bin/tests {{filename}}'

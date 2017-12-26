@@ -32,4 +32,4 @@ lists the correct version number.
 #### More info
 
 - [feature specs](../../features/actions/built-in/minimum-node-version/minimum-node-version.feature)
-- [source code](../../src/actions/built-in/minimum-node-version.ls)
+- [source code](../../src/actions/built-in/minimum-node-version.js)

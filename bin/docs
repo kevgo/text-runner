@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -e
 
-node_modules/o-tools-livescript/bin/build
+bin/build
 bin/text-run "$@"

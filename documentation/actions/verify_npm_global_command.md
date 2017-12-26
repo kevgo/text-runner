@@ -38,4 +38,4 @@ $ foo
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-npm-global-command/verify-npm-global-command.feature)
-- [source code](../../src/actions/built-in/verify-npm-global-command.ls)
+- [source code](../../src/actions/built-in/verify-npm-global-command.js)

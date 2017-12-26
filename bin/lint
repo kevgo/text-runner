@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-node_modules/o-tools-livescript/bin/build
-node_modules/o-tools/bin/lint
+bin/build
+# node_modules/o-tools/bin/lint
 remark .
+node_modules/.bin/flow check

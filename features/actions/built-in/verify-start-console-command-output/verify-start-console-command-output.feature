@@ -19,7 +19,7 @@ Feature: verifying the output of the last console command
         setTimeout(function() {}, 10000)
       }, 100)
       """
-    Given my source code contains the file "verify-output.md" with content:
+    And my source code contains the file "verify-output.md" with content:
       """
       <a class="tr_startConsoleCommand">
 

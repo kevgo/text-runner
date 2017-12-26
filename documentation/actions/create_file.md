@@ -34,4 +34,4 @@ The file content goes here
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)
-- [source code](../../src/actions/built-in/create-file.ls)
+- [source code](../../src/actions/built-in/create-file.js)

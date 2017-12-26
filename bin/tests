@@ -4,11 +4,11 @@
 #
 # Usage: `bin/tests [test-file]
 
-node_modules/o-tools-livescript/bin/build
+bin/build
 
 # it also uses the mocha options in test/mocha.opts
 if [ $# == 0 ]; then
-  node_modules/.bin/mocha --reporter dot "test/**/*.ls"
+  node_modules/.bin/mocha --reporter dot "test/**/*.js"
 else
   node_modules/.bin/mocha "$@"
 fi

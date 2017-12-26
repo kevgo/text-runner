@@ -22,4 +22,4 @@ you can use this code to verify that it exists:
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-source-contains-directory/verify-source-contains-directory.feature)
-- [source code](../../src/actions/built-in/verify-source-contains-directory.ls)
+- [source code](../../src/actions/built-in/verify-source-contains-directory.js)

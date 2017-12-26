@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-node_modules/o-tools-livescript/bin/build
+bin/build
 if [ "$#" != "1" ]; then
   NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags ~@clionly --tags ~@todo --format progress "$@"
 else

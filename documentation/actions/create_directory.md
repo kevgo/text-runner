@@ -18,4 +18,4 @@
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-directory/create-directory.feature)
-- [source code](../../src/actions/built-in/create-directory.ls)
+- [source code](../../src/actions/built-in/create-directory.js)

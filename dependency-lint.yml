@@ -10,6 +10,7 @@ executedModules:
       - version
   shellScripts:
     dev:
+      - bin/build
       - bin/cuke-api
       - bin/cuke-api.cmd
       - bin/cuke-cli
@@ -31,10 +32,7 @@ ignoreErrors:
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:
-    - cucumber-snippets-livescript
-    - livescript
     - o-tools
-    - o-tools-livescript
     - remark-lint
     - remark-preset-lint-recommended
     - tertestrial
@@ -43,13 +41,13 @@ requiredModules:
   files:
     dev:
       - '{features,spec,test}/**/*'
-      - '**/*{.,_,-}{spec,test}.ls'
+      - '**/*{.,_,-}{spec,test}.js'
       - 'examples/**'
       - 'text-run/**'
     ignore:
       - 'node_modules/**/*'
-    root: '**/*.ls'
+    root: '**/*.js'
   stripLoaders: false
   transpilers:
-    - extension: .ls
-      module: livescript
+    - extension: .js
+      module: babel-core/require

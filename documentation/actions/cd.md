@@ -28,4 +28,4 @@ so that readers of your documentation can click to see it.
 #### More info
 
 - [feature specs](../../features/actions/built-in/cd/cd.feature)
-- [source code](../../src/actions/built-in/cd.ls)
+- [source code](../../src/actions/built-in/cd.js)

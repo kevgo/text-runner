@@ -1,3 +1,3 @@
 module.exports = {
-  "default": "--compiler ls:livescript -r features --fail-fast --strict --snippet-syntax node_modules/cucumber-snippets-livescript"
+  'default': '--compiler js:babel-core/register -r features --fail-fast --strict'
 }

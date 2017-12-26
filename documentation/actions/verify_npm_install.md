@@ -34,4 +34,4 @@ $ npm i -g my_enormous_package
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-npm-install/verify-npm-install.feature)
-- [source code](../../src/actions/built-in/verify-npm-install.ls)
+- [source code](../../src/actions/built-in/verify-npm-install.js)

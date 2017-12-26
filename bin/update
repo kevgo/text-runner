@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
 yarn upgrade --latest
+flow-typed install --overwrite
+
+# TODO: figure out how to use this file without flow issues
+rm flow-typed/npm/remarkable_v1.x.x.js

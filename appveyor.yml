@@ -15,11 +15,12 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
 
 test_script:
-  - node_modules\o-tools-livescript\bin\build.cmd
+  - bin\build.cmd
+  - dir dist
   - bin\tests.cmd
   - bin\cuke-api.cmd
   - bin\cuke-cli.cmd
-  - bin\text-run.cmd
+  - bin\text-run.cmd --format robust
 
 
 # Don't double-build PRs

@@ -7,4 +7,4 @@
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-run-console-command-output/verify-run-console-command-output.feature)
-- [source code](../../src/actions/built-in/verify-run-console-command-output.ls)
+- [source code](../../src/actions/built-in/verify-run-console-command-output.js)

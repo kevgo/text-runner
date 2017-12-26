@@ -31,4 +31,4 @@ folder contains a working version.
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
-- [source code](../../src/actions/built-in/verify-source-file-content.ls)
+- [source code](../../src/actions/built-in/verify-source-file-content.js)

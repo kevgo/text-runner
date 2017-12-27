@@ -76,11 +76,11 @@ class MarkdownFileRunner {
         block.formatter.startFile(block.filename)
         block.formatter.setLines(block.startLine, block.endLine)
         if (block.runner.length === 1) {
-          // synchronous action method
-          block.runner(block)
-          done()
+          // synchronous action method or returns a promise
+          const outcome = block.runner(block)
+          Promise.resolve(outcome).then(done)
         } else {
-          // asynchronous action method
+          // action method takes a callback
           block.runner(block, done)
         }
       } catch (e) {

@@ -45,11 +45,7 @@ describe('FormatterManager', function () {
         jsdiffConsole(this.err,
 `Unknown formatter: 'zonk'
 
-<<<<<<< HEAD
 Available formatters are detailed, dot`)
-=======
-Available formatters are dot, robust`)
->>>>>>> master
       })
     })
   })

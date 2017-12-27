@@ -2,7 +2,7 @@
 
 const {bold, dim, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
-const {unique} = require('prelude-ls')
+const unique = require('array-unique')
 
 // colorFunction is a better name for functions that add colors to strings
 type colorFunction = (text: string) => string

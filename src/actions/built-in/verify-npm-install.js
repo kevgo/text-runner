@@ -4,7 +4,7 @@ const {cyan, green} = require('chalk')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying NPM installation instructions')
 
   const installText = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {
@@ -17,10 +17,9 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
 
   if (missesPackageName(installText, pkg.name)) {
     args.formatter.error(`could not find ${cyan(pkg.name)} in installation instructions`)
-    return done(new Error('1'))
+    throw new Error('1')
   }
   args.formatter.success(`installs ${green(pkg.name)}`)
-  done()
 }
 
 function missesPackageName (installText: string, packageName: string): boolean {

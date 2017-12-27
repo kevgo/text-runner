@@ -67,6 +67,10 @@ class Formatter {
     this.endLine = endLine
   }
 
+  skip (activityText: string) {
+    if (activityText) this.activityText = activityText
+  }
+
   // Called when we start performing an activity that was defined in a block
   start (activityText :string) {
     this.activityText = activityText

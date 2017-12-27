@@ -1,8 +1,7 @@
 // @flow
 
-const {bold, dim, green, magenta, red} = require('chalk')
+const {cyan, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
-const {compact, unique} = require('prelude-ls')
 
 // colorFunction is a better name for functions that add colors to strings
 type colorFunction = (text: string) => string
@@ -24,6 +23,10 @@ class DotFormatter extends Formatter {
   warning (warningMessage: string) {
     super.warning(warningMessage)
     process.stdout.write(magenta('.'))
+  }
+
+  skip (activity: string) {
+    process.stdout.write(cyan('.'))
   }
 }
 

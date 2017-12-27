@@ -4,8 +4,8 @@ const {cyan, magenta, red} = require('chalk')
 const fs = require('fs')
 const mkdirp = require('mkdirp')
 const path = require('path')
-const {capitalize, filter, first, map} = require('prelude-ls')
 const request = require('request')
+
 
 // Checks for broken hyperlinks
 module.exports = function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}, done: DoneFunction) {
@@ -29,7 +29,7 @@ module.exports = function (params: {filename: string, formatter: Formatter, node
 
 function checkExternalLink (target: string, formatter: Formatter, configuration: Configuration, done: DoneFunction) {
   if (configuration.get('fast')) {
-    formatter.warning(`skipping link to external website ${target}`)
+    formatter.skip(`skipping link to external website ${target}`)
     done()
     return
   }

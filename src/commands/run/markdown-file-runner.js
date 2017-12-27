@@ -8,7 +8,6 @@ const fs = require('fs')
 const LinkTargetBuilder = require('./link-target-builder')
 const MarkdownParser = require('./markdown-parser')
 const path = require('path')
-const {reject} = require('prelude-ls')
 const {wait} = require('wait')
 
 // Runs the given Markdown file

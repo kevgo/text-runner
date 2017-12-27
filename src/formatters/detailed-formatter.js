@@ -1,8 +1,8 @@
 // @flow
 
-const {bold, dim, green, magenta, red} = require('chalk')
+const {bold, cyan, dim, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
-const {compact, unique} = require('prelude-ls')
+const unique = require('array-unique')
 
 // colorFunction is a better name for functions that add colors to strings
 type colorFunction = (text: string) => string
@@ -16,6 +16,11 @@ class DetailedFormatter extends Formatter {
 
   output (text: string) {
     console.log(dim(text.trim()))
+  }
+
+  skip (activityText: string) {
+    super.skip(activityText)
+    this._printActivityHeader(cyan)
   }
 
   success (activityText: string) {
@@ -35,7 +40,7 @@ class DetailedFormatter extends Formatter {
       text += this.filePath
       if (this.startLine) {
         text += `:`
-        text += unique(compact([this.startLine, this.endLine])).join('-')
+        text += unique([this.startLine, this.endLine]).filter((a) => a).join('-')
       }
       text += ' -- '
     }

@@ -81,6 +81,10 @@ class TestFormatter {
     this.endLine = endLine
   }
 
+  skip (message: string) {
+
+  }
+
   suiteSuccess (stepsCount: number) {
     this.stepsCount = stepsCount
   }

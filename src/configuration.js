@@ -8,7 +8,7 @@ const debug = require('debug')('textrun:configuration')
 const defaultValues = {
   fast: false,
   files: '**/*.md',
-  format: 'robust',
+  format: 'detailed',
   useTempDirectory: false,
   classPrefix: 'tr_',
   actions: {
@@ -53,7 +53,7 @@ class Configuration {
 files: '**/*.md'
 
 # the formatter to use
-format: robust
+format: detailed
 
 # prefix that makes anchor tags active regions
 classPrefix: 'tr_'

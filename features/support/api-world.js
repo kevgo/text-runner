@@ -9,8 +9,8 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const {unique} = require('prelude-ls')
 const stripAnsi = require('strip-ansi')
+const unique = require('array-unique')
 const {waitUntil} = require('wait')
 
 class TestFormatter {

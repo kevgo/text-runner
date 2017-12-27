@@ -5,7 +5,6 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const {compact, filter, map, reject} = require('prelude-ls')
 
 module.exports = function () {
   this.Then(/^I see usage instructions$/, function () {

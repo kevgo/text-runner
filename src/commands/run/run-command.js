@@ -7,7 +7,7 @@ const glob = require('glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
 const mkdirp = require('mkdirp')
 const path = require('path')
-const {head, filter, reject, sort, sum} = require('prelude-ls')
+const {sum} = require('prelude-ls')
 const rimraf = require('rimraf')
 const tmp = require('tmp')
 const debug = require('debug')('text-runner:run-command')
@@ -104,7 +104,7 @@ class RunCommand implements Command {
   }
 
   _filesMatchingGlob (expression: string): string[] {
-    return sort(glob.sync(expression))
+    return glob.sync(expression).sort()
   }
 
   // Returns all the markdown files in this directory and its children

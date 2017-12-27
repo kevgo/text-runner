@@ -8,7 +8,7 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const {any, compact, filter, flatten, map, reject, unique} = require('prelude-ls')
+const {flatten, unique} = require('prelude-ls')
 const stripAnsi = require('strip-ansi')
 const {waitUntil} = require('wait')
 

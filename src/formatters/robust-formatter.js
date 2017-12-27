@@ -2,7 +2,7 @@
 
 const {bold, dim, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
-const {compact, unique} = require('prelude-ls')
+const {unique} = require('prelude-ls')
 
 // colorFunction is a better name for functions that add colors to strings
 type colorFunction = (text: string) => string
@@ -35,7 +35,7 @@ class RobustFormatter extends Formatter {
       text += this.filePath
       if (this.startLine) {
         text += `:`
-        text += unique(compact([this.startLine, this.endLine])).join('-')
+        text += unique([this.startLine, this.endLine]).filter((a) => a).join('-')
       }
       text += ' -- '
     }

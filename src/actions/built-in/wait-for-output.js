@@ -2,7 +2,6 @@
 
 const async = require('async')
 const {bold, cyan} = require('chalk')
-const {compact, map, split} = require('prelude-ls')
 
 // Waits until the currently running console command produces the given output
 module.exports = function (args: {formatter: Formatter, searcher: Searcher}, done: DoneFunction) {

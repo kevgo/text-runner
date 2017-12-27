@@ -7,7 +7,7 @@ const path = require('path')
 const {capitalize, filter, map} = require('prelude-ls')
 const debug = require('debug')('textrun:actions:create-file')
 
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   params.formatter.start('creating file')
 
   const filePath = params.searcher.nodeContent({types: ['emphasizedtext', 'strongtext']}, ({nodes, content}) => {
@@ -25,19 +25,12 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   params.formatter.refine(`creating file ${cyan(filePath)}`)
   const fullPath = path.join(params.configuration.testDir, filePath)
   debug(fullPath)
-  mkdirp(path.dirname(fullPath), (err) => {
-    if (err) {
-      done(err)
-      return
-    }
-    fs.writeFile(fullPath, content, (err) => {
-      if (err) {
-        params.formatter.error(err)
-        done(new Error('1'))
-      } else {
-        params.formatter.success()
-        done()
-      }
-    })
-  })
+  try {
+    mkdirp.sync(path.dirname(fullPath))
+    fs.writeFileSync(fullPath, content)
+    params.formatter.success()
+  } catch (err) {
+    params.formatter.error(err)
+    throw new Error('1')
+  }
 }

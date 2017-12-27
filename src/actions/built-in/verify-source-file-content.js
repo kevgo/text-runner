@@ -33,16 +33,16 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   } catch (err) {
     if (err.code === 'ENOENT') {
       args.formatter.error(`file ${cyan(filePath)} not found`)
-      return new Error('1')
+      throw new Error('1')
     } else {
-      return err
+      throw err
     }
   }
   try {
     jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
     args.formatter.error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
-    return new Error('1')
+    throw new Error('1')
   }
 
   args.formatter.success()

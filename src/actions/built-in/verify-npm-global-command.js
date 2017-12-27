@@ -5,7 +5,7 @@ const path = require('path')
 const {any} = require('prelude-ls')
 const trimDollar = require('../../helpers/trim-dollar')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying exported global command')
 
   const commandName = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {
@@ -18,10 +18,9 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
 
   if (!hasCommandName(commandName, pkg.bin)) {
     args.formatter.error(`${cyan('package.json')} does not export a ${red(commandName)} command`)
-    return done(new Error('1'))
+    throw new Error('1')
   }
   args.formatter.success(`provides a global ${green(commandName)} command`)
-  done()
 }
 
 function hasCommandName (commandName: string, exportedCommands: { [string]: string}): boolean {

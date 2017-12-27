@@ -5,7 +5,6 @@ const eol = require('eol')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const {capitalize, filter} = require('prelude-ls')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   const fileName = args.searcher.nodeContent({type: 'strongtext'}, ({nodes, content}) => {

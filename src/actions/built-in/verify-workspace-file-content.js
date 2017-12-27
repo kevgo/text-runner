@@ -6,7 +6,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const {capitalize, filter} = require('prelude-ls')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   const filePath = args.searcher.nodeContent({ types: ['strongtext', 'emphasizedtext']}, ({nodes, content}) => {
     if (nodes.length === 0) return 'no file path found'
     if (nodes.length > 1) return "multiple file paths found: #{nodes |> map (.content) |> map ((a) -> cyan a) |> (.join ' and ')}"
@@ -20,23 +20,22 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
 
   args.formatter.start(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(args.configuration.testDir, filePath)
-  fs.readFile(fullPath, 'utf8', (err, actualContent) => {
-    if (err && err.code === 'ENOENT') {
+  var actualContent
+  try {
+    actualContent = fs.readFileSync(fullPath, 'utf8')
+  } catch (err) {
+    if (err.code === 'ENOENT') {
       args.formatter.error(`file ${red(filePath)} not found`)
-      done(new Error('1'))
-      return
-    } else if (err) {
-      done(err)
-      return
+      throw new Error('1')
+    } else {
+      throw err
     }
-    jsdiffConsole(actualContent.trim(), expectedContent.trim(), (err) => {
-      if (err) {
-        args.formatter.error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
-        done(new Error('1'))
-      } else {
-        args.formatter.success()
-        done()
-      }
-    })
-  })
+  }
+  try {
+    jsdiffConsole(actualContent.trim(), expectedContent.trim())
+    args.formatter.success()
+  } catch (err) {
+    args.formatter.error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
+    throw new Error('1')
+  }
 }

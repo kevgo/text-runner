@@ -1,7 +1,6 @@
 // @flow
 
 const ObservableProcess = require('observable-process')
-const {compact, map} = require('prelude-ls')
 const debug = require('debug')('stop-console-command')
 
 // Stops the currently running console command.

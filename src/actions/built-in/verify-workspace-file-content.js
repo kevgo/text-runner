@@ -4,7 +4,6 @@ const {bold, cyan, red} = require('chalk')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const {capitalize, filter} = require('prelude-ls')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   const filePath = args.searcher.nodeContent({ types: ['strongtext', 'emphasizedtext']}, ({nodes, content}) => {

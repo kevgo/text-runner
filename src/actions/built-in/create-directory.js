@@ -3,7 +3,6 @@
 const {cyan} = require('chalk')
 const mkdirp = require('mkdirp')
 const path = require('path')
-const {capitalize, filter, map} = require('prelude-ls')
 const debug = require('debug')('textrun:actions:create-directory')
 
 module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {

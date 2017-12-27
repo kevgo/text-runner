@@ -1,7 +1,6 @@
 // @flow
 
 const {cyan, red} = require('chalk')
-const {compact, filter, map, reject} = require('prelude-ls')
 const jsdiffConsole = require('jsdiff-console')
 
 // Runs the given commands on the console.

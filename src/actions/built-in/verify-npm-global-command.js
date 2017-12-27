@@ -2,7 +2,6 @@
 
 const {cyan, green, red} = require('chalk')
 const path = require('path')
-const {any} = require('prelude-ls')
 const trimDollar = require('../../helpers/trim-dollar')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {

@@ -3,7 +3,7 @@
 const {cyan} = require('chalk')
 const fs = require('fs')
 const jsYaml = require('js-yaml')
-const {minimum} = require('prelude-ls')
+const minimum = require('../../helpers/minimum.js')
 
 module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   params.formatter.start('determining minimum supported NodeJS version')

@@ -2,11 +2,11 @@
 
 const {expect} = require('chai')
 const dimConsole = require('dim-console')
+const flatten = require('array-flatten')
 const fs = require('fs-extra')
 const glob = require('glob')
 const ObservableProcess = require('observable-process')
 const path = require('path')
-const {compact, filter, flatten, map, reject} = require('prelude-ls')
 
 const CliWorld = function () {
   this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {

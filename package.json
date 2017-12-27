@@ -26,7 +26,6 @@
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "observable-process": "3.3.0",
-    "prelude-ls": "1.1.2",
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
     "request": "2.83.0",
@@ -42,6 +41,8 @@
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
+    "array-flatten": "2.1.1",
+    "array-unique": "0.3.2",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.0.3",
     "babel-preset-flow": "6.23.0",

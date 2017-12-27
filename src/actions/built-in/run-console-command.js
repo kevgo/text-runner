@@ -4,7 +4,6 @@ const callArgs = require('../../helpers/call-args')
 const {cyan, red} = require('chalk')
 const ObservableProcess = require('observable-process')
 const path = require('path')
-const {compact, find, head, map, tail, values} = require('prelude-ls')
 const trimDollar = require('../../helpers/trim-dollar')
 const xml2js = require('xml2js')
 const debug = require('debug')('textrun:actions:run-console-command')
@@ -98,12 +97,12 @@ function makeGlobal (configuration: Configuration) {
   debug(`globals: ${JSON.stringify(globals)}`)
   return function (commandText) {
     const commandParts = commandText.split(' ')
-    const command = head(commandParts)
+    const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
     const replacement = globals[command]
     if (replacement) {
       debug(`found replacement: ${replacement}`)
-      return path.join(configuration.sourceDir, replacement) + ' ' + tail(commandParts).join(' ')
+      return path.join(configuration.sourceDir, replacement) + ' ' + commandParts.splice(1).join(' ')
     } else {
       return commandText
     }

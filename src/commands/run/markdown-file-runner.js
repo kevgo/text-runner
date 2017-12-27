@@ -77,7 +77,9 @@ class MarkdownFileRunner {
         if (block.runner.length === 1) {
           // synchronous action method or returns a promise
           const outcome = block.runner(block)
-          Promise.resolve(outcome).then(done)
+          Promise.resolve(outcome).then(done).catch(function (err) {
+            throw err
+          })
         } else {
           // asynchronous action method
           block.runner(block, done)

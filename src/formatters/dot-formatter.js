@@ -1,6 +1,6 @@
 // @flow
 
-const {bold, dim, green, magenta, red} = require('chalk')
+const {cyan, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
 const {compact, unique} = require('prelude-ls')
 
@@ -24,6 +24,10 @@ class DotFormatter extends Formatter {
   warning (warningMessage: string) {
     super.warning(warningMessage)
     process.stdout.write(magenta('.'))
+  }
+
+  skip (activity: string) {
+    process.stdout.write(cyan('.'))
   }
 }
 

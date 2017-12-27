@@ -39,7 +39,7 @@ function checkLocalImage (imagePath: string, formatter: Formatter, done: DoneFun
 function checkRemoteImage (node: AstNode, formatter: Formatter, configuration: Configuration, done: DoneFunction) {
   if (configuration.get('fast')) {
     // $FlowFixMe
-    formatter.warning(`skipping external image ${node.src}`)
+    formatter.skip(`skipping external image ${node.src}`)
     done()
     return
   }

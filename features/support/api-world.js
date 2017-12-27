@@ -81,8 +81,8 @@ class TestFormatter {
     this.endLine = endLine
   }
 
-  skip (message: string) {
-
+  skip (activity: string) {
+    this.activities.push(stripAnsi(activity))
   }
 
   suiteSuccess (stepsCount: number) {

@@ -1,5 +1,5 @@
 files: '{*.md,documentation/**/*.md}'
-formatter: dot
+format: dot
 useTempDirectory: true
 
 

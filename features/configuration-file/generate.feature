@@ -20,7 +20,7 @@ Feature: generating a configuration file
       files: '**/*.md'
 
       # the formatter to use
-      format: robust
+      format: detailed
 
       # prefix that makes anchor tags active regions
       classPrefix: 'tr_'

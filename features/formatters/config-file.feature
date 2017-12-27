@@ -22,7 +22,7 @@ Feature: selecting formatter via the config file
 
     Examples:
       | FORMATTER | OUTPUT      |
-      | robust    | Hello world |
+      | detailed  | Hello world |
       | dot       | .           |
 
 
@@ -37,5 +37,5 @@ Feature: selecting formatter via the config file
       """
       Unknown formatter: 'zonk'
 
-      Available formatters are dot, robust
+      Available formatters are detailed, dot
       """

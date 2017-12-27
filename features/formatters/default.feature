@@ -5,7 +5,7 @@ Feature: default formatter
   I want that it uses a good formatter out of the box
   So that I can use this tool without extensive configuration.
 
-  - the default formatter is the "robust" formatter
+  - the default formatter is the "detailed" formatter
 
 
   Scenario: default formatter

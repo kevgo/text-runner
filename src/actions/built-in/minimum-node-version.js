@@ -33,13 +33,9 @@ module.exports = function (params: {configuration: Configuration, formatter: For
 
 function getSupportedVersion () {
   const content = loadYmlFile('.travis.yml')
-  if (content == null) {
-    throw new Error('.travis.yml is empty')
-  }
+  if (!content) throw new Error('.travis.yml is empty')
   const minimumVersion = parseInt(minimum(content.node_js))
-  if (minimumVersion + 0 === NaN) {
-    throw new Error('listed version is not a number')
-  }
+  if (minimumVersion === NaN) throw new Error('listed version is not a number')
   return minimumVersion
 }
 

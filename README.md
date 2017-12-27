@@ -28,6 +28,8 @@ which is verified for correctness by TextRunner.
 
 ## Why you need it
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Originate/text-runner.svg)](https://greenkeeper.io/)
+
 * **evergreen tutorials:**
   Your documentation is always correct,
   whether you change it or the product.

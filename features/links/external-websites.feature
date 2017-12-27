@@ -45,7 +45,7 @@ Feature: verifying links to websites
       | WARNING  | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
 
 
-  Scenario: markdown link to non-existing website
+  Scenario: HTML link to non-existing website
     Given my source code contains the file "1.md" with content:
       """
       A <a href="http://oeanuthaoenuthoaeuzonk.com">broken external link</a>

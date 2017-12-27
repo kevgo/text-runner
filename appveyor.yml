@@ -20,7 +20,7 @@ test_script:
   - bin\tests.cmd
   - bin\cuke-api.cmd
   - bin\cuke-cli.cmd
-  - bin\text-run.cmd --format robust
+  - bin\text-run.cmd --format dot
 
 
 # Don't double-build PRs

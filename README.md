@@ -26,17 +26,15 @@ as well as plain text in any human language.
 An example is the document you are reading right now,
 which is verified for correctness by TextRunner.
 
-
 ## Why you need it
 
-* __evergreen tutorials:__
+* **evergreen tutorials:**
   Your documentation is always correct,
   whether you change it or the product.
-* __[semantic versioning](http://semver.org):__
+* **[semantic versioning](http://semver.org):**
   Know whether a change affects documented behavior.
-* __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
+* **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
   Let executable documentation of your product drive its implementation.
-
 
 ## How it works
 
@@ -84,12 +82,10 @@ Now run `text-run` on the command line to test this document.
 TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
 with the content `foo: bar`</a> on your hard drive.
 
-
 ## Built-in Actions
 
 TextRunner provides built-in actions
 for activities typically performed in software documentation.
-
 
 #### Filesystem
 
@@ -102,12 +98,10 @@ This directory is located in `./tmp` unless [configured otherwise](#configuratio
 * [verify a directory exists](documentation/actions/verify_workspace_contains_directory.md)
 * [verify a file with given name and content exist](documentation/actions/verify_workspace_file_content.md)
 
-
 #### Verify the Git repo that contains the documentation
 
 * [display the content of a file in the Git repo](documentation/actions/verify_source_file_content.md)
 * [link to a directory in the Git repo](documentation/actions/verify_source_contains_directory.md)
-
 
 #### Console commands
 
@@ -115,11 +109,9 @@ This directory is located in `./tmp` unless [configured otherwise](#configuratio
 * [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
 * [verify the output of the last console command](documentation/actions/verify_run_console_command_output.md)
 
-
 #### Running source code
 
 * [run Javascript code](documentation/actions/run_javascript.md)
-
 
 #### Tools and frameworks
 
@@ -148,12 +140,13 @@ The definition for this block lives in the file:
 __text-run/hello-world-action.js__
 
 ```javascript
-module.exports = function({formatter}) {
-  formatter.start('greeting the world')
-  formatter.output('Hello world!')
-  formatter.success()
-}
+module.exports = function({ formatter }) {
+  formatter.start("greeting the world");
+  formatter.output("Hello world!");
+  formatter.success();
+};
 ```
+
 </a>
 
 Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
@@ -195,20 +188,20 @@ since TextRunner does not find globally installed transpilers.
 This means your project should have a `package.json` file listing the transpiler
 you want to use (in addition to any other NPM modules you want to use).
 
-
 ### Using the searcher helper
 
 More realistic tests for your documentation tests
 will need to access document content
 in order to use it in tests.
 The DOM nodes of the active block
-- including their type, content, and line number -
-are provided to your handler function
-via the the `nodes` field of the first argument.
-You can access this data directly
-or use a helper that is provided to you via the `searcher` field of the first parameter.
-To demonstrate how this works,
-here is a simple implementation of an action that runs a code block in the terminal.
+
+* including their type, content, and line number -
+  are provided to your handler function
+  via the the `nodes` field of the first argument.
+  You can access this data directly
+  or use a helper that is provided to you via the `searcher` field of the first parameter.
+  To demonstrate how this works,
+  here is a simple implementation of an action that runs a code block in the terminal.
 
 <a class="tr_createMarkdownFile">
 ```
@@ -228,20 +221,21 @@ __text-run/console-command.js__
 child_process = require('child_process')
 
 module.exports = function({formatter, searcher, nodes}) {
-  // you can also iterate nodes directly here if you want
+// you can also iterate nodes directly here if you want
 
-  formatter.start('running console command')
+formatter.start('running console command')
 
-  const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
-    if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
-    if (match.nodes.length > 1) return 'please provide only one code block'
-    if (!match.content) return 'you provided a code block but it has no content'
-  })
+const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
+if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
+if (match.nodes.length > 1) return 'please provide only one code block'
+if (!match.content) return 'you provided a code block but it has no content'
+})
 
-  formatter.refine('running console command: ' + commandToRun)
-  formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
-  formatter.success()
+formatter.refine('running console command: ' + commandToRun)
+formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
+formatter.success()
 }
+
 ```
 </a>
 
@@ -270,26 +264,11 @@ This helps produce better terminal output.
 
 TextRunner supports a variety of formatters:
 
-* __iconic formatter:__
-  the most modern formatter.
-  Indicates test status using pretty icons.
-  Shows test output only when steps run,
-  and cleans it out when done to show a clean summary of the test.
-  This is the default formatter.
-
-* __colored formatter:__
-  Indicades test status using colored test names.
-  Shows test output only when steps run,
-  and cleans it out when done to show a clean summary of the test.
+* __dot formatter:__
+  A minimalistic formatter, showing dots for each test performed.
 
 * __robust formatter:__
-  The most robust formatter, similar to the one [Cucumber](http://cucumber.io) uses.
-  Shows test output before the steps.
-  Use this formatter if the other ones don't work for you.
-
-The `robust` formatter is best for development,
-the `colored` or `iconic` formatters
-produce more concise output when running as part of a larger test suite.
+  A more detailed formatter, printing each test performed including output.
 
 
 ## Installation
@@ -307,8 +286,10 @@ To create one, run:
 
 <a class="tr_runConsoleCommand">
 ```
+
 $ text-run setup
-```
+
+````
 </a>
 
 The created configuration looks like this:
@@ -335,15 +316,15 @@ useTempDirectory: false
 actions:
   runConsoleCommand:
     globals: {}
-```
+````
+
 </a>
 
-- the `files` key describes via a glob function which files are executed by TextRunner.
+* the `files` key describes via a glob function which files are executed by TextRunner.
   It automatically ignores hidden folders as well as `node_modules`.
 
-- the `actions` section contains configuration information specific to actions.
+* the `actions` section contains configuration information specific to actions.
   Please see the documentation for the respective action for more details.
-
 
 ## Related Work
 

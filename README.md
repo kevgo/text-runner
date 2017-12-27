@@ -172,8 +172,6 @@ When the test succeeds, call `formatter.success()`
 to print this activity using a green checkmark
 and remove all of its console output.
 If it fails, call `formatter.error()` with the error message.
-Please don't use `console.log` to avoid interfering with the formatter's UI management.
-If you cannot avoid this, use a simpler and more robust formatter via the `--format=simple` parameter to `text-run`.
 
 The handler method can accept a callback in the second parameter
 in order to perform asynchronous operations.
@@ -264,11 +262,11 @@ This helps produce better terminal output.
 
 TextRunner supports a variety of formatters:
 
-* __dot formatter:__
-  A minimalistic formatter, showing dots for each test performed.
+* __detailed formatter:__
+  Prints each test performed, including test output.
 
-* __robust formatter:__
-  A more detailed formatter, printing each test performed including output.
+* __dot formatter:__
+  A minimalistic formatter, shows only dots for each test performed.
 
 
 ## Installation
@@ -302,7 +300,7 @@ __text-run.yml__
 files: '**/*.md'
 
 # the formatter to use
-format: robust
+format: detailed
 
 # prefix that makes anchor tags active regions
 classPrefix: 'tr_'

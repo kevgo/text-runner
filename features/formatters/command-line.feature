@@ -26,7 +26,7 @@ Feature: selecting formatter via the command-line
 
     Examples:
       | FORMATTER |
-      | robust    |
+      | detailed  |
       | dot       |
 
 
@@ -36,5 +36,5 @@ Feature: selecting formatter via the command-line
       """
       Unknown formatter: 'zonk'
 
-      Available formatters are dot, robust
+      Available formatters are detailed, dot
       """

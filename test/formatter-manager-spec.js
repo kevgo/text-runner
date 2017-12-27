@@ -13,14 +13,14 @@ describe('FormatterManager', function () {
     })
 
     it('returns the names of the available formatters', function () {
-      expect(this.formatterNames).to.eql(['dot', 'robust'])
+      expect(this.formatterNames).to.eql(['detailed', 'dot'])
     })
   })
 
   describe('getFormatter', function () {
     context('with correct formatter name', function () {
       before(function () {
-        this.result = this.formatterManager.getFormatter('robust')
+        this.result = this.formatterManager.getFormatter('dot')
       })
 
       it('returns the formatter with the given name', function () {
@@ -45,7 +45,7 @@ describe('FormatterManager', function () {
         jsdiffConsole(this.err,
 `Unknown formatter: 'zonk'
 
-Available formatters are dot, robust`)
+Available formatters are detailed, dot`)
       })
     })
   })

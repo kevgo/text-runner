@@ -11,6 +11,6 @@ if [ "$#" == "0" ]; then
   echo
   bin/docs
 else
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-rails-delegate,-exorelay:*,-stylus:*' bin/cuke-api "$@"
-  DEBUG='*,-express:*,-body-parser:*,-observable-process,-text-stream-search,-text-stream-accumulator,-rails-delegate,-exorelay:*,-stylus:*' bin/cuke-cli "$@"
+  bin/cuke-api "$@"
+  bin/cuke-cli "$@"
 fi

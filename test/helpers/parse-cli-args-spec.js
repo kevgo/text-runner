@@ -111,11 +111,11 @@ describe('parse-cli-args', function () {
     })
   })
 
-  context('--format robust', function () {
+  context('--format dot', function () {
     before(function () {
       this.result = parseCliArgs([
         '--format',
-        'robust'
+        'dot'
       ])
     })
 
@@ -123,8 +123,8 @@ describe('parse-cli-args', function () {
       expect(this.result.command).to.equal('run')
     })
 
-    it('returns the robust formatter option', function () {
-      expect(this.result.format).to.equal('robust')
+    it('returns the dot formatter option', function () {
+      expect(this.result.format).to.equal('dot')
     })
   })
 })

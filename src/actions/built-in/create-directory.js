@@ -5,7 +5,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const debug = require('debug')('textrun:actions:create-directory')
 
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   params.formatter.start('creating directory')
 
   const directoryName = params.searcher.nodeContent({type: 'code'}, ({nodes, content}) => {
@@ -17,12 +17,11 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   params.formatter.refine(`creating directory ${cyan(directoryName)}`)
   const fullPath = path.join(params.configuration.testDir, directoryName)
   debug(fullPath)
-  mkdirp(fullPath, (err) => {
-    if (err) {
-      params.formatter.error(err)
-    } else {
-      params.formatter.success()
-    }
-    done(err)
-  })
+  try {
+    mkdirp.sync(fullPath)
+    params.formatter.success()
+  } catch (err) {
+    params.formatter.error(err)
+    throw new Error('1')
+  }
 }

@@ -79,7 +79,7 @@ class MarkdownFileRunner {
           const outcome = block.runner(block)
           Promise.resolve(outcome).then(done)
         } else {
-          // action method takes a callback
+          // asynchronous action method
           block.runner(block, done)
         }
       } catch (e) {

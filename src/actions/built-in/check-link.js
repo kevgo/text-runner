@@ -29,7 +29,7 @@ module.exports = function (params: {filename: string, formatter: Formatter, node
 
 function checkExternalLink (target: string, formatter: Formatter, configuration: Configuration, done: DoneFunction) {
   if (configuration.get('fast')) {
-    formatter.warning(`skipping link to external website ${target}`)
+    formatter.skip(`skipping link to external website ${target}`)
     done()
     return
   }

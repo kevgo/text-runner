@@ -1,6 +1,6 @@
 // @flow
 
-const {bold, dim, green, magenta, red} = require('chalk')
+const {bold, cyan, dim, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
 const {compact, unique} = require('prelude-ls')
 
@@ -16,6 +16,11 @@ class DetailedFormatter extends Formatter {
 
   output (text: string) {
     console.log(dim(text.trim()))
+  }
+
+  skip (activityText: string) {
+    super.skip(activityText)
+    this._printActivityHeader(cyan)
   }
 
   success (activityText: string) {

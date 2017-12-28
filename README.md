@@ -77,7 +77,7 @@ which makes it create a file in its working directory.
 It takes the filename and content to create from the text inside this block
 (not invisible metadata, but the document's content which the user sees),
 and creates the specified file.
-Text outside of `<a>` tags is ignored.
+Text outside of `<a>` tags is ignored by TextRunner.
 
 Now run `text-run` on the command line to test this document.
 TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_

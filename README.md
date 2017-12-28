@@ -20,11 +20,14 @@ TextRunner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
 It also ensures that links and images in your documentation point to existing targets.
 
-There are no requirements how the executable documentation must look like:
-You can execute embedded source code in any programming language
-(that is available on your computer),
-tables, bullet point lists,
-as well as plain text in any human language.
+There are no limitations on how the Markdown must look like,
+TextRunner can read and understand (with your help)
+any Markdown file and for example:
+- execute source code in your documentation
+- diff images in the documentation against screen output
+- gather complex data from tables, bullet point lists,
+  as well as plain text in any human language.
+
 An example is the document you are reading right now,
 which is verified for correctness by TextRunner.
 

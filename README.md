@@ -1,5 +1,4 @@
 <img src="documentation/logo.png" width="651" height="100" alt="TextRunner - test framework for documentation">
-<hr>
 
 <a href="https://travis-ci.org/Originate/text-runner">
   <img src="https://travis-ci.org/Originate/text-runner.svg?branch=master">
@@ -13,6 +12,8 @@
 <a href="https://david-dm.org/originate/text-runner#info=devDependencies">
   <img src="https://david-dm.org/originate/text-runner/dev-status.svg">
 </a>
+
+<hr>
 
 TextRunner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
@@ -72,7 +73,7 @@ foo: bar
 
 </a>
 
-The class `tr_createFile` tells TextRunner to run the `createFile` action here, 
+The class `tr_createFile` tells TextRunner to run the `createFile` action here,
 which makes it create a file in its working directory.
 It takes the filename and content to create from the text inside this block
 (not invisible metadata, but the document's content which the user sees),
@@ -161,7 +162,7 @@ The handler function for our action is given an object containing various inform
 
 <!-- TODO: check this by creating a custom action that lists the arguments given to it -->
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
-* __nodes:__ the document content inside the `<a>` tag for this action, 
+* __nodes:__ the document content inside the `<a>` tag for this action,
   as an array of [AST nodes](#ast-nodes)
 * __searcher:__ a utility that makes it easier to get content out of those AST nodes ([documentation](#the-searcher-helper))
 * __formatter:__ the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
@@ -170,13 +171,13 @@ The handler function for our action is given an object containing various inform
 
 TextRunner supports all forms of synchronous and asynchronous operations:
 * just do something synchronous ([example](examples/custom-action-sync)) -
-  don't worry that synchronous operations prevent concurrency by blocking Node's event loop, 
+  don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
   all TextRunner steps are run strictly sequentially anyways
 * return a Promise  <!-- TODO: example -->
-* implement the action as a modern 
+* implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
   <!-- TODO: example -->
-* take a callback function as a second parameter to your handler function and call it when you are done 
+* take a callback function as a second parameter to your handler function and call it when you are done
   ([example](examples/custom-action-async))
 
 You can write the handler in any language that transpiles to JavaScript,
@@ -185,7 +186,7 @@ for example [BabelJS](https://babeljs.io),
 or [LiveScript](http://livescript.net).
 Just make sure that your project contains a local installation of your transpiler,
 since TextRunner does not find globally installed transpilers.
-This means your project should have a `package.json` file listing the transpiler you want TextRunner to call, 
+This means your project should have a `package.json` file listing the transpiler you want TextRunner to call,
 in addition to any other NPM modules that your handler method uses.
 
 
@@ -259,7 +260,7 @@ child_process = require('child_process')
 module.exports = function({formatter, searcher, nodes}) {
 
   // step 1: provide a first rough description of what this action does,
-  // so that TextRunner can print a somewhat helpful error message 
+  // so that TextRunner can print a somewhat helpful error message
   // if loading more specific data below fails somehow
   formatter.start('running console command')
 

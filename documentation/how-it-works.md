@@ -41,10 +41,11 @@ foo: bar
 </a>
 
 The class `tr_createFile` tells TextRunner to run the `createFile` action here,
-which makes it create a file in its working directory.
-It takes the filename and content to create from the text inside this block
-(not invisible metadata, but the document's content which the user sees),
-and creates the specified file.
+which creates a file in TextRunner's working directory.
+The built-in implementation of the `createFile` action
+takes the name of the file to create
+from the bold or italic section inside the `<a>` tag,
+and the content to write into the file from the code block.
 Text outside of `<a>` tags is ignored by TextRunner.
 
 If you run `text-run` on the command line to test this document,

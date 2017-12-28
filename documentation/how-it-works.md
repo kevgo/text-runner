@@ -51,4 +51,7 @@ If you run `text-run` on the command line to test this document,
 TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
 with the content `foo: bar`</a> in the `tmp` subfolder of your current directory.
 
-Read more about the other [built-in actions](documentation/built-in-actions.md)
+Further reading:
+- the other [built-in actions](built-in-actions.md)
+- writing your own [user-defined actions](user-defined-actions.md)
+- [configuring](configuration.md) TextRunner

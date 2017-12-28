@@ -1,4 +1,4 @@
-## Custom actions
+# User-defined actions
 
 Let's create a custom action aka type of block that we can use in our documentation.
 All it does is print "hello world" in the test runner's console output when running.
@@ -64,7 +64,7 @@ This means your project should have a `package.json` file listing the transpiler
 in addition to any other NPM modules that your handler method uses.
 
 
-### AST Nodes
+## AST Nodes
 
 Document content is provided as [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) nodes.
 Each node is an object that has these attributes:
@@ -75,7 +75,7 @@ Each node is an object that has these attributes:
 * __level:__ if this AST node was nested in another one, the nesting level
 
 
-### Formatter
+## Formatter
 
 One of the utilities availabe to actions is the formatter instance.
 It allows to signal test progress to TextRunner and print test output to the console.
@@ -98,7 +98,7 @@ TextRunner supports a variety of formatters:
   A minimalistic formatter, shows only dots for each test performed.
 
 
-### the "searcher" helper
+## the "searcher" helper
 
 More realistic tests for your documentation
 will need to access document content

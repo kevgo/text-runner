@@ -159,9 +159,32 @@ The formatter displays test progress on the console as the test runs.
 Custom block definitions live in the directory `text-run`.
 Each block lives in its own file, whose name is the block name in kebab-case.
 The file must export a function that executes the block.
-It is given an object containing utility functions.
+It is given an object containing information and utility functions:
 
-One of the named arguments is `formatter`,
+<!-- TODO: check this by creating a custom action that lists the arguments given to it -->
+* `filename`, `startLine`, `endLine`: where in the documentation the currently executed block is
+* `nodes`: the document content inside the `<a>` tag for this action, 
+  as an array of [AST nodes](#ast-nodes).
+* `formatter`: the [Formatter](#formatter) instance, to signal test progress and console output to TextRunner
+* `configuration`: object providing TextRunner configuration data (which TextRunner options are enabled etc)
+* `searcher`: a utility that makes it easier to get content out of the `nodes` array of AST nodes
+* `runner`: the handler function for the current action, i.e. the function that is currently executed
+
+
+### AST Nodes
+
+Document content is provided as [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) nodes.
+Each node is an object that has these attributes:
+* `line`: the line in the file at which this AST node begins
+* `type`: the type of the AST node
+* `content`: textual content of the AST node
+* `src`: if this AST node is a link or image, the content of the `src` attribute
+* `level`: nesting level of the AST node
+
+
+### Formatter
+
+One of the utilities availabe to actions is `formatter`,
 it provides an object that allows to print test output to the console.
 Call `formatter.start(<activity name>)` before you run an activity.
 This prints the given activity as _currently running_ (using a yellow pointer)

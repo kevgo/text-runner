@@ -323,11 +323,8 @@ $ text-run setup
 ````
 </a>
 
-The created configuration looks like this:
-
-<a class="tr_verifyWorkspaceFileContent">
-
-__text-run.yml__
+The created configuration looks is named <a class="tr_verifyWorkspaceFileContent">
+__text-run.yml__ and looks like this:
 
 ```yml
 # white-list for files to test

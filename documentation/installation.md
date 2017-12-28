@@ -8,17 +8,17 @@ To get started:
   <a class="tr_cdIntoInstallExample">cd into the folder in which you want to use TextRunner</a>
 - create a __package.json__ file, for example by running: <a class="tr_runConsoleCommand">
   ```
-  npm init -y
+  $ npm init -y
   ```
   </a>
 - install TextRunner: <a class="tr_verifyNpmInstall"><a class="tr_runConsoleCommand">
   ```
-  npm install --dev text-runner
+  $ npm install --dev text-runner
   ```
   </a></a>
 - make sure it works by running: <a class="tr_verifyNpmGlobalCommand">
   ```
-  text-run
+  $ text-run
   ```
   </a>
 

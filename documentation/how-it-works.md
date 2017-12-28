@@ -1,15 +1,15 @@
 # How TextRunner works
 
-There are no limitations on the Markdown structure TextRunner can use.
+There are no limitations on the structure of the Markdown files TextRunner uses.
 It can read and understand (with your help)
 complex data in tables, bullet point lists, embedded images,
-as well as plain text in any human language.
+as well as simple plain text in any human language.
 
 To make a part of any Markdown file actionable by TextRunner,
 wrap it in an `<a>` tag with class `tr_[action name]`.
 As an example,
-let's say a tutorial tells the reader to create a file `config.yml`
-with the content `foo: bar`.
+let's say a tutorial tells its reader to create a file `config.yml`
+with the content `foo: bar` on their machine.
 The markdown code of this tutorial might look something like this:
 
 ```markdown
@@ -50,3 +50,5 @@ Text outside of `<a>` tags is ignored by TextRunner.
 If you run `text-run` on the command line to test this document,
 TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
 with the content `foo: bar`</a> in a subfolder of your current directory called `tmp`.
+
+Next read about the [built-in actions](documentation/built-in-actions.md)

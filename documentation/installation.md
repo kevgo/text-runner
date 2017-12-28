@@ -16,8 +16,11 @@ To get started:
   npm install --dev text-runner
   ```
   </a></a>
-- in the root directory of your code base,
-  run <a class="tr_verifyNpmGlobalCommand">`text-run`</a>
+- make sure it works by running: <a class="tr_verifyNpmGlobalCommand">
+  ```
+  text-run
+  ```
+  </a>
 
 This gives you an out-of-the-box installation of TextRunner
 which checks that all links and images point to something.

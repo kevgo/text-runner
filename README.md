@@ -45,7 +45,7 @@ let's say a tutorial tells the reader to create a file `config.yml`
 with the content `foo: bar`.
 The markdown code of this tutorial might look something like this:
 
-```
+```markdown
 ## Creating a configuration file
 
 Please create a file with the name __config.yml__ and the content:
@@ -59,7 +59,7 @@ surround it with an `<a>` tag that specifies that we want to create a file:
 
 <a class="tr_runMarkdownInTextrun">
 
-```
+```markdown
 ## Creating a configuration file
 
 <a class="tr_createFile">

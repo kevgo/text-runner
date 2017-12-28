@@ -20,7 +20,8 @@ It will be triggered via this piece of Markdown:
 
 When TextRunner encounters this block type,
 it runs the method that the file <a class="tr_createFile">__text-run/hello-world-action.js__ exports.
-Notice that the file name matches the action name,
+All user-defined actions are in the `text-run` folder,
+with the file name matching the action name
 but is in [kebab-case](http://wiki.c2.com/?KebabCase).
 Let's create this file with the content:
 

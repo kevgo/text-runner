@@ -2881,9 +2881,9 @@ observable-process@3.2.2:
     string-argv "0.0.2"
     text-stream-search "1.2.3"
 
-observable-process@3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-3.3.0.tgz#ff655c2e96e9e85c139588e781775ad113a5632e"
+observable-process@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-3.4.1.tgz#f5f8e728b781437c2a24d8d003fc3e108d973a66"
   dependencies:
     debug "3.1.0"
     extend "3.0.1"

@@ -1,8 +1,8 @@
 environment:
-  nodejs_version: "7"
+  nodejs_version: "8"
 
 cache:
-  - node_modules
+  # - node_modules
 
 init:
   - git config --global core.autocrlf true

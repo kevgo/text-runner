@@ -2,9 +2,10 @@
 
 const async = require('async')
 const {bold, cyan} = require('chalk')
+const util = require('util')
 
 // Waits until the currently running console command produces the given output
-module.exports = function (args: {formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = async function (args: {formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('waiting for output of the running console process')
 
   const expectedOutput = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
@@ -17,20 +18,10 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}, don
                                       .map((line) => line.trim())
                                       .filter((line) => line)
 
-  async.eachSeries(expectedLines, waitFunction(args.formatter), (err) => {
-    if (err) {
-      args.formatter.error()
-      done(err)
-    } else {
-      args.formatter.success()
-      done()
-    }
-  })
-}
-
-function waitFunction (formatter: Formatter) {
-  return (line, done) => {
-    formatter.output(`waiting for ${line}`)
-    global.runningProcess.wait(line, done)
+  const waitForInput = util.promisify(global.runningProcess.wait)
+  for (let line of expectedLines) {
+    args.formatter.output(`waiting for ${line}`)
+    await waitForInput(line)
   }
+  args.formatter.success()
 }

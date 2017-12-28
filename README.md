@@ -272,7 +272,7 @@ TextRunner supports a variety of formatters:
 ## Installation
 
 - runs on macOS, Linux, Windows
-- requires [Node.JS](https://nodejs.org) version <a class="tr_minimumNodeVersion">6 or 7</a>
+- requires [Node.JS](https://nodejs.org) version <a class="tr_minimumNodeVersion">8</a>
 - run <a class="tr_verifyNpmInstall">`npm i -g text-runner`</a>
 - in the root directory of your code base, run <a class="tr_verifyNpmGlobalCommand">`text-run`</a>
 

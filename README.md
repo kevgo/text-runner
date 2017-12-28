@@ -29,12 +29,12 @@ which is verified for correctness by TextRunner.
 ## Why you need it
 
 * **evergreen tutorials:**
-  Your documentation is always correct,
-  whether you change it or the product.
+  your documentation is always correct,
+  whether you change it or the product
 * **[semantic versioning](http://semver.org):**
-  Know whether a product change affects documented behavior.
+  know whether a product change affects documented behavior
 * **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
-  Documentation is your product prototype and drives the production implementation.
+  documentation is your product prototype and drives the production implementation
 
 ## How it works
 

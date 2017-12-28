@@ -1,7 +1,14 @@
 # User-defined actions
 
-Let's create a custom action aka type of block that we can use in our documentation.
-All it does is print "hello world" in the test runner's console output when running.
+It is possible to extend the set of [built-in actions](built-in-actions.md)
+with your custom-built ones written in JavaScript.
+Let's start by building the simplest possible action first.
+
+
+## Hello-world example
+
+All the "hello-world" action does is print "hello world"
+in the test runner's console output when running.
 It will be triggered via this piece of Markdown:
 
 <a class="tr_createMarkdownFile">

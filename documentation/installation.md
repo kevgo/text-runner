@@ -9,7 +9,8 @@ To get started:
 - create a `package.json` file, for example by running: <a class="tr_runConsoleCommand">
   ```
   npm init -y
-  ```</a>
+  ```
+  </a>
 - install TextRunner by running
   <a class="tr_verifyNpmInstall"><a class="tr_runConsoleCommand">`npm install --dev text-runner`</a></a>
 - in the root directory of your code base,

@@ -30,7 +30,7 @@ which is verified for correctness by TextRunner.
 
 * **evergreen tutorials:**
   your documentation is always correct,
-  whether you change it or the product
+  whether you change it or the product it describes
 * **[semantic versioning](http://semver.org):**
   know whether a product change affects documented behavior
 * **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**

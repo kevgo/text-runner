@@ -32,9 +32,9 @@ which is verified for correctness by TextRunner.
   Your documentation is always correct,
   whether you change it or the product.
 * **[semantic versioning](http://semver.org):**
-  Know whether a change affects documented behavior.
+  Know whether a product change affects documented behavior.
 * **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
-  Let executable documentation of your product drive its implementation.
+  Documentation is your product prototype and drives the production implementation.
 
 ## How it works
 

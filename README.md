@@ -73,10 +73,10 @@ foo: bar
 </a>
 
 The class `tr_createFile` tells TextRunner to run the `createFile` action here, 
-which makes it create a file.
+which makes it create a file in its working directory.
 It takes the filename and content to create from the text inside this block
-(not metadata, but the same text the user sees),
-and creates the file in the current working directory.
+(not invisible metadata, but the document's content which the user sees),
+and creates the specified file.
 Text outside of `<a>` tags is ignored.
 
 Now run `text-run` on the command line to test this document.

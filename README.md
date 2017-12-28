@@ -22,6 +22,7 @@ It also ensures that links and images in your documentation point to existing ta
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
+
 #### Use cases
 
 - __evergreen tutorials:__
@@ -30,7 +31,8 @@ which is verified for correctness by TextRunner.
 - __[semantic versioning](http://semver.org):__
   know whether a product change affects documented behavior
 - __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
-  documentation is your product prototype and drives the production implementation
+  documentation is your product prototype and drives its implementation
+
 
 #### More info
 

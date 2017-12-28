@@ -9,7 +9,7 @@ any Markdown file and for example:
 - gather complex data from tables, bullet point lists,
   as well as plain text in any human language and use it in tests
 
-To make a part of a Markdown file actionable by TextRunner,
+To make a part of any Markdown file actionable by TextRunner,
 wrap it in an `<a>` tag with class `tr_[action name]`.
 As an example,
 let's say a tutorial tells the reader to create a file `config.yml`
@@ -50,7 +50,6 @@ It takes the filename and content to create from the text inside this block
 and creates the specified file.
 Text outside of `<a>` tags is ignored by TextRunner.
 
-Now run `text-run` on the command line to test this document.
+If you run `text-run` on the command line to test this document,
 TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
 with the content `foo: bar`</a> in a subfolder of your current directory called `tmp`.
-

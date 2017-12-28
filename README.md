@@ -259,7 +259,8 @@ child_process = require('child_process')
 module.exports = function({formatter, searcher, nodes}) {
 
   // step 1: provide a first rough description of what this action does,
-  // to provide helpful output if loading more specific data fails somehow
+  // so that TextRunner can print a somewhat helpful error message 
+  // if loading more specific data below fails somehow
   formatter.start('running console command')
 
   // step 2: determine which command to run using the searcher utility.

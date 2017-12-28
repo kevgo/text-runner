@@ -115,7 +115,7 @@ Console commands also happen in TextRunner's [workspace directory](#filesystem).
 
 * [run Javascript code](documentation/actions/run_javascript.md)
 
-#### Tools and frameworks
+#### Other actions
 
 * [required NodeJS version](documentation/actions/minimum-node-version.md)
 * [verify NPM installation instructions](documentation/actions/verify_npm_install.md)
@@ -125,11 +125,12 @@ With the option `--fast` given, text-run does not check outgoing links to other 
 
 ## Custom actions
 
-Let's create a custom block.
-All it does is print "hello world" when running.
+Let's create a custom block type.
+All it does is print "hello world" in the test runner's console output when running.
 It will be triggered via this piece of Markdown:
 
 <a class="tr_createMarkdownFile">
+
 ```markdown
 <a class="tr_helloWorld">
 </a>

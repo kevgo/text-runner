@@ -11,8 +11,11 @@ To get started:
   npm init -y
   ```
   </a>
-- install TextRunner by running
-  <a class="tr_verifyNpmInstall"><a class="tr_runConsoleCommand">`npm install --dev text-runner`</a></a>
+- install TextRunner: <a class="tr_verifyNpmInstall"><a class="tr_runConsoleCommand">
+  ```
+  npm install --dev text-runner
+  ```
+  </a></a>
 - in the root directory of your code base,
   run <a class="tr_verifyNpmGlobalCommand">`text-run`</a>
 

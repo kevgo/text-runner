@@ -176,18 +176,17 @@ TextRunner supports all forms of synchronous and asynchronous operations:
 * implement the action as a modern 
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
   <!-- TODO: example -->
-* take a callback function as a second parameter and call it when you are done 
+* take a callback function as a second parameter to your handler function and call it when you are done 
   ([example](examples/custom-action-async))
 
 You can write the handler in any language that transpiles to JavaScript,
-for example [CoffeeScript](http://coffeescript.org),
-[LiveScript](http://livescript.net),
-or [BabelJS](https://babeljs.io).
+for example [BabelJS](https://babeljs.io),
+[CoffeeScript](http://coffeescript.org),
+or [LiveScript](http://livescript.net).
 Just make sure that your project contains a local installation of your transpiler,
 since TextRunner does not find globally installed transpilers.
-This means your project should have a `package.json` file listing the transpiler
-you want to use, in addition to any other NPM modules you want to use in your actions.
-
+This means your project should have a `package.json` file listing the transpileryou want to use, 
+in addition to any other NPM modules needed in your actions.
 
 
 ### AST Nodes

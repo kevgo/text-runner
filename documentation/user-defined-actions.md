@@ -30,7 +30,7 @@ module.exports = function({ formatter }) {
 The formatter displays test progress on the console as the test runs:
 </a>
 
-<img src="documentation/async.gif" width="460" height="134" alt="output demonstration">
+<img src="async.gif" width="460" height="134" alt="output demonstration">
 
 The handler function for our action is given an object containing various information and utility functions:
 

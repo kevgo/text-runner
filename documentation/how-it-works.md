@@ -1,9 +1,8 @@
 # How TextRunner works
 
-There are no limitations on how the Markdown must look like.
-TextRunner can read and understand (with your help)
-any Markdown structure including code blocks,
-embedded images, complex data in tables or bullet point lists,
+There are no limitations on the Markdown structure TextRunner can use.
+It can read and understand (with your help)
+complex data in tables, bullet point lists, embedded images,
 as well as plain text in any human language.
 
 To make a part of any Markdown file actionable by TextRunner,

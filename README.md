@@ -20,6 +20,14 @@ TextRunner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.
 It also ensures that links and images in your documentation point to existing targets.
 
+* [how it works](documentation/how-it-works.md)
+* [what you can do with it](documentation/why-you-need-it.md)
+* [installation](documentation/installation.md)
+* [configuration](documentation/configuration.md)
+* [built-in actions](documentation/built-in-actions.md)
+* [user-defined actions](documentation/user-defined-actions.md)
+* [related work](documentation/related-work.md)
+
 There are no limitations on how the Markdown must look like,
 TextRunner can read and understand (with your help)
 any Markdown file and for example:
@@ -28,8 +36,9 @@ any Markdown file and for example:
 - gather complex data from tables, bullet point lists,
   as well as plain text in any human language.
 
-An example is the document you are reading right now,
+An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
+
 
 ## Why you need it
 

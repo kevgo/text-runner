@@ -1,7 +1,7 @@
 ### verify that the source code contains a directory
 
-The `verifySourceContainsDirectory` action checks links to folders in your source code.
-
+The `verifySourceContainsDirectory` action checks links to folders
+in your source code.
 
 #### Example
 

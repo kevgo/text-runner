@@ -12,8 +12,9 @@ $ text-run setup
 ````
 </a>
 
-The created configuration file <a class="tr_verifyWorkspaceFileContent">
-__text-run.yml__ looks like this:
+This creates a configuration file called
+<a class="tr_verifyWorkspaceFileContent">
+__text-run.yml__ that looks like this:
 
 ```yml
 # white-list for files to test
@@ -43,5 +44,3 @@ actions:
 
 * the `actions` section contains configuration information specific to actions.
   Please see the documentation for the respective action for more details.
-
-

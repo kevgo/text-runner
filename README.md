@@ -271,13 +271,13 @@ module.exports = function({formatter, searcher, nodes}) {
     if (!match.content) return 'you provided a code block but it has no content'
   })
 
-  // step 3: provide TextRunner a specific description of what this action does
+  // step 3: provide TextRunner a specific description of this action
   formatter.refine('running console command: ' + commandToRun)
 
   // step 4: perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
 
-  // step 5: signal success
+  // step 5: tell TextRunner that this action worked and we are done here
   formatter.success()
 }
 ```
@@ -291,6 +291,7 @@ In this case we are looking for a fenced code block,
 hence the query is `{type: 'fence'}`.
 Providing an array for the type (e.g. `{type: ['code', 'fence']}`)
 retrieves all nodes that have any of the given types.
+
 The second parameter is an optional validation method.
 Its purpose is to make it easy and readable to provide specific error messages
 that make your custom block definition user-friendly and easy to debug.

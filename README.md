@@ -16,12 +16,12 @@
 <br>
 <br>
 
-TextRunner executes documentation written in Markdown,
+TextRunner executes documentation written in unstructured Markdown,
 similar to how a human reader would execute it if they were reading and following it.
 It also ensures that links and images in your documentation point to existing targets.
 
-* [how it works](documentation/how-it-works.md)
 * [what you can do with it](documentation/why-you-need-it.md)
+* [how it works](documentation/how-it-works.md)
 * [installation](documentation/installation.md)
 * [configuration](documentation/configuration.md)
 * [built-in actions](documentation/built-in-actions.md)
@@ -39,16 +39,6 @@ any Markdown file and for example:
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
-
-## Why you need it
-
-* **evergreen tutorials:**
-  your documentation is always correct,
-  whether you change it or the product it describes
-* **[semantic versioning](http://semver.org):**
-  know whether a product change affects documented behavior
-* **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
-  documentation is your product prototype and drives the production implementation
 
 ## How it works
 

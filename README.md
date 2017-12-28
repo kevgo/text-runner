@@ -171,6 +171,27 @@ It is given an object containing information and utility functions:
 * __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
 * __runner:__ the currently running handler function
 
+TextRunner supports all forms of synchronous and asynchronous operations.
+* just do something synchronous and return ([example](examples/custom-action-sync)).
+  Don't worry about blocking Node's event loop, 
+  all TextRunner steps are run strictly sequentially anyways.
+* return a Promise  <!-- TODO: example -->
+* implement the action as a modern 
+  [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+  <!-- TODO: example -->
+* take a callback function as a second parameter and call it when you are done 
+  ([example](examples/custom-action-async))
+
+You can write the handler in any language that transpiles to JavaScript,
+for example [CoffeeScript](http://coffeescript.org),
+[LiveScript](http://livescript.net),
+or [BabelJS](https://babeljs.io).
+Just make sure that your project contains a local installation of your transpiler,
+since TextRunner does not find globally installed transpilers.
+This means your project should have a `package.json` file listing the transpiler
+you want to use, in addition to any other NPM modules you want to use in your actions.
+
+
 
 ### AST Nodes
 
@@ -187,28 +208,16 @@ Each node is an object that has these attributes:
 
 One of the utilities availabe to actions is the formatter instance.
 It allows to signal test progress to TextRunner and print test output to the console.
+
 Call `formatter.start(<activity name>)` before you run an activity.
-This prints the given activity as _currently running_ (using a yellow pointer)
-and prepares the formatter to dump console output below it.
+This tells TextRunner that whatever happens next (output, success, failure) is part of that activity.
+
 `formatter.output(text)` allows to print output of the currently running action
-on the console. This output is removed when the action succeeds.
-When the test succeeds, call `formatter.success()`
-to print this activity using a green checkmark
-and remove all of its console output.
+on the console. Depending on the type of formatter, this output is printed or not.
+
+When the test succeeds, call `formatter.success()`.
 If it fails, call `formatter.error()` with the error message.
 
-The handler method can accept a callback in the second parameter
-in order to perform asynchronous operations.
-See [here](examples/custom-action-sync) for a synchronous working example,
-and [here](examples/custom-action-async) for the asynchronous version.
-You can write the handler in any language that transpiles to JavaScript,
-for example [CoffeeScript](http://coffeescript.org),
-[LiveScript](http://livescript.net),
-or [BabelJS](https://babeljs.io).
-Just make sure that your project contains a local installation of your transpiler,
-since TextRunner does not find globally installed transpilers.
-This means your project should have a `package.json` file listing the transpiler
-you want to use (in addition to any other NPM modules you want to use).
 
 ### Using the searcher helper
 

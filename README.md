@@ -141,9 +141,9 @@ The definition for this block lives in the file <a class="tr_createFile">__text-
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.start("greeting the world");  // start the "greeting the world" activity type
-  formatter.output("Hello world!");       // print something on the console
-  formatter.success();                    // finish the started activity
+  formatter.start("greeting the world");   // start the "greeting the world" activity type
+  formatter.output("Hello world!");        // print something on the console
+  formatter.success();                     // finish the started activity
 };
 ```
 

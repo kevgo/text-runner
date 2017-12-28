@@ -214,6 +214,14 @@ on the console. Depending on the type of formatter, this output is printed or no
 When the test succeeds, call `formatter.success()`.
 If it fails, call `formatter.error()` with the error message.
 
+TextRunner supports a variety of formatters:
+
+* __detailed formatter:__
+  Prints each test performed, including test output.
+
+* __dot formatter:__
+  A minimalistic formatter, shows only dots for each test performed.
+
 
 ### the "searcher" helper
 
@@ -286,17 +294,6 @@ falsy return values indicate that the validation has passed,
 - The `formatter.refine` method allows to tell the formatter
 more details about the currently running activity as they become known.
 This helps produce better terminal output.
-
-
-## Formatters
-
-TextRunner supports a variety of formatters:
-
-* __detailed formatter:__
-  Prints each test performed, including test output.
-
-* __dot formatter:__
-  A minimalistic formatter, shows only dots for each test performed.
 
 
 ## Installation

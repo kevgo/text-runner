@@ -229,14 +229,13 @@ More realistic tests for your documentation
 will need to access document content
 in order to use it in tests.
 The DOM nodes of the active block
-
-* including their type, content, and line number -
-  are provided to your handler function
-  via the the `nodes` field of the first argument.
-  You can access this data directly
-  or use a helper that is provided to you via the `searcher` field of the first parameter.
-  To demonstrate how this works,
-  here is a simple implementation of an action that runs a code block in the terminal.
+including their type, content, and line number -
+are provided to your handler function
+via the the `nodes` field of the first argument.
+You can access this data directly
+or use a helper that is provided to you via the `searcher` field of the first parameter.
+To demonstrate how this works,
+here is a simple implementation of an action that runs a code block in the terminal.
 
 <a class="tr_createMarkdownFile">
 
@@ -252,6 +251,7 @@ echo "Hello world"
 Here is the block definition implemented using the `searcher` helper.
 
 <a class="tr_createFile">
+
 __text-run/console-command.js__
 ```javascript
 child_process = require('child_process')

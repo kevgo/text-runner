@@ -20,7 +20,7 @@ It will be triggered via this piece of Markdown:
 
 When TextRunner encounters this block type,
 it runs the method that the file <a class="tr_createFile">__text-run/hello-world-action.js__ exports.
-All user-defined actions are in the `text-run` folder,
+All user-defined actions are in the "text-run" folder,
 with the file name matching the action name
 but in [kebab-case](http://wiki.c2.com/?KebabCase).
 Let's create this file with the content:
@@ -53,7 +53,7 @@ The handler function for our action is given an object containing various inform
 * __runner:__ the currently running handler function
 
 TextRunner supports all forms of synchronous and asynchronous operations:
-* just do something synchronous ([example](examples/custom-action-sync)) -
+* just do something synchronous ([example](../examples/custom-action-sync)) -
   don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
   all TextRunner steps are run strictly sequentially anyways
 * return a Promise  <!-- TODO: example -->
@@ -61,7 +61,7 @@ TextRunner supports all forms of synchronous and asynchronous operations:
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
   <!-- TODO: example -->
 * take a callback function as a second parameter to your handler function and call it when you are done
-  ([example](examples/custom-action-async))
+  ([example](../examples/custom-action-async))
 
 You can write the handler in any language that transpiles to JavaScript,
 for example [BabelJS](https://babeljs.io),
@@ -188,3 +188,4 @@ falsy return values indicate that the validation has passed,
 
 Read more about:
 - the [built-in actions](built-in-actions.md)
+- [configure](configuration.md) TextRunner

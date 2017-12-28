@@ -36,9 +36,9 @@ which is verified for correctness by TextRunner.
 
 #### More info
 
-* [how it works](documentation/how-it-works.md)
-* [installation](documentation/installation.md)
-* [configuration](documentation/configuration.md)
-* [built-in actions](documentation/built-in-actions.md)
-* [user-defined actions](documentation/user-defined-actions.md)
-* [related tools](documentation/related-tools.md)
+- [how it works](documentation/how-it-works.md)
+- [installation](documentation/installation.md)
+- [configuration](documentation/configuration.md)
+- [built-in actions](documentation/built-in-actions.md)
+- [user-defined actions](documentation/user-defined-actions.md)
+- [related tools](documentation/related-tools.md)

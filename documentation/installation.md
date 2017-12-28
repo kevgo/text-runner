@@ -5,7 +5,7 @@ including macOS, Windows, and Linux.
 To get started:
 - install [Node.JS](https://nodejs.org) version <a class="tr_minimumNodeVersion">8</a> or newer
 - in the terminal,
-  <a class="tr_cdIntoInstallExample">cd into the folder in which you want to use TextRunner</a>
+  <!-- TODO <a class="tr_cdIntoInstallExample"> -->cd into the folder in which you want to use TextRunner<!-- </a> -->
 - create a __package.json__ file, for example by running: <a class="tr_runConsoleCommand">
   ```
   npm init -y

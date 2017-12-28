@@ -7,39 +7,39 @@ for activities typically performed in software documentation.
 ## Filesystem
 
 All file system actions happen inside a special directory called the _workspace_.
-This directory is located in `./tmp` unless [configured otherwise](#configuration).
+This directory is located in `./tmp` unless [configured otherwise](configuration.md).
 
-* [change the current working directory](documentation/actions/cd.md)
-* [create a directory](documentation/actions/create_directory.md)
-* [create a file](documentation/actions/create_file.md)
-* [verify a directory exists](documentation/actions/verify_workspace_contains_directory.md)
-* [verify a file with given name and content exists](documentation/actions/verify_workspace_file_content.md)
+* [change the current working directory](actions/cd.md)
+* [create a directory](actions/create_directory.md)
+* [create a file](actions/create_file.md)
+* [verify a directory exists](actions/verify_workspace_contains_directory.md)
+* [verify a file with given name and content exists](actions/verify_workspace_file_content.md)
 
 
 ## Verify the Git repo that contains the documentation
 
-* [display the content of a file in the Git repo](documentation/actions/verify_source_file_content.md)
-* [link to a directory in the Git repo](documentation/actions/verify_source_contains_directory.md)
+* [display the content of a file in the Git repo](actions/verify_source_file_content.md)
+* [link to a directory in the Git repo](actions/verify_source_contains_directory.md)
 
 
 ## Console commands
 
 Console commands also happen in TextRunner's [workspace directory](#filesystem).
-* [run a console command](documentation/actions/run_console_command.md)
-* [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
-* [verify the output of the last console command](documentation/actions/verify_run_console_command_output.md)
+* [run a console command](actions/run_console_command.md)
+* [start and stop long-running console commands](actions/start_stop_console_command.md)
+* [verify the output of the last console command](actions/verify_run_console_command_output.md)
 
 
 ## Running source code
 
-* [run Javascript code](documentation/actions/run_javascript.md)
+* [run Javascript code](actions/run_javascript.md)
 
 
 ## Other actions
 
-* [required NodeJS version](documentation/actions/minimum-node-version.md)
-* [verify NPM installation instructions](documentation/actions/verify_npm_install.md)
-* [verify global command provided by NPM module](documentation/actions/verify_npm_global_command.md)
+* [required NodeJS version](actions/minimum-node-version.md)
+* [verify NPM installation instructions](actions/verify_npm_install.md)
+* [verify global command provided by NPM module](actions/verify_npm_global_command.md)
 
 With the option `--fast` given, text-run does not check outgoing links to other websites.
 

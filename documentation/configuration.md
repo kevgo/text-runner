@@ -2,7 +2,7 @@
 
 You can configure TextRunner via a configuration file.
 To create one, open a terminal,
-<a class="tr_cdIntoSetupExample">go to the folder</a>
+<!-- TODO <a class="tr_cdIntoSetupExample">-->go to the folder<!-- </a> -->
 where you want to configure TextRunner, and run:
 
 <a class="tr_runConsoleCommand">

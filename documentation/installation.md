@@ -22,10 +22,10 @@ To get started:
   ```
   </a>
 
-This gives you an out-of-the-box installation of TextRunner
+This gives you an out-of-the-box installation of TextRunner,
 which checks that all links and images point to something.
 
-Read more about:
+Your next steps are:
 - [configuring](configuration.md) TextRunner
 - using some of the [built-in actions](built-in-actions.md)
 - writing your own [user-defined actions](user-defined-actions.md)

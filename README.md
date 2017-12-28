@@ -215,7 +215,7 @@ When the test succeeds, call `formatter.success()`.
 If it fails, call `formatter.error()` with the error message.
 
 
-### Using the searcher helper
+### the "searcher" helper
 
 More realistic tests for your documentation tests
 will need to access document content

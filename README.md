@@ -257,18 +257,26 @@ __text-run/console-command.js__
 child_process = require('child_process')
 
 module.exports = function({formatter, searcher, nodes}) {
-// you can also iterate nodes directly here if you want
 
-formatter.start('running console command')
+  // step 1: provide a first rough description of what this action does,
+  // to provide helpful output if loading more specific data fails somehow
+  formatter.start('running console command')
 
+  // step 2: determine which command to run using the searcher utility.
+  // You can also iterate nodes directly here if you want.
   const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
     if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
     if (match.nodes.length > 1) return 'please provide only one code block'
     if (!match.content) return 'you provided a code block but it has no content'
   })
 
+  // step 3: provide TextRunner a specific description of what this action does
   formatter.refine('running console command: ' + commandToRun)
+
+  // step 4: perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
+
+  // step 5: signal success
   formatter.success()
 }
 ```

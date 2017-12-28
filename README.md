@@ -217,7 +217,7 @@ If it fails, call `formatter.error()` with the error message.
 
 ### the "searcher" helper
 
-More realistic tests for your documentation tests
+More realistic tests for your documentation
 will need to access document content
 in order to use it in tests.
 The DOM nodes of the active block
@@ -231,6 +231,7 @@ The DOM nodes of the active block
   here is a simple implementation of an action that runs a code block in the terminal.
 
 <a class="tr_createMarkdownFile">
+
 ```
 <a class="tr_consoleCommand">
 `​``

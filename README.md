@@ -153,15 +153,11 @@ module.exports = function({ formatter }) {
 
 <a class="tr_runTextrun">
 The formatter displays test progress on the console as the test runs:
-
 </a>
 
 <img src="documentation/async.gif" width="460" height="134" alt="output demonstration">
 
-Custom block definitions live in the directory `text-run`.
-Each block lives in its own file, whose name is the block name in kebab-case.
-The file must export a function that executes the block.
-It is given an object containing information and utility functions:
+The handler function for our action is given an object containing various information and utility functions:
 
 <!-- TODO: check this by creating a custom action that lists the arguments given to it -->
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation

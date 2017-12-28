@@ -90,7 +90,7 @@ for activities typically performed in software documentation.
 
 #### Filesystem
 
-All file system actions happen inside a special directory called the _test workspace_.
+All file system actions happen inside a special directory called the _workspace_.
 This directory is located in `./tmp` unless [configured otherwise](#configuration).
 
 * [change the current working directory](documentation/actions/cd.md)
@@ -106,7 +106,7 @@ This directory is located in `./tmp` unless [configured otherwise](#configuratio
 
 #### Console commands
 
-Console commands also happen in the [test workspace](#filesystem).
+Console commands also happen in TextRunner's [workspace directory](#filesystem).
 * [run a console command](documentation/actions/run_console_command.md)
 * [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
 * [verify the output of the last console command](documentation/actions/verify_run_console_command_output.md)

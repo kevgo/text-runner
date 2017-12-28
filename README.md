@@ -319,9 +319,7 @@ To create one, run:
 <a class="tr_runConsoleCommand">
 
 ```
-
 $ text-run setup
-
 ````
 </a>
 

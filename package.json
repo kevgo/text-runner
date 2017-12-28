@@ -25,7 +25,7 @@
     "log-update": "2.3.0",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
-    "observable-process": "3.3.0",
+    "observable-process": "3.4.1",
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
     "request": "2.83.0",

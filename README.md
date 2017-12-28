@@ -358,7 +358,7 @@ actions:
 ## Related Work
 
 There are many other good testing tools out there.
-They can either be combined with TextRunner
+They can be combined with TextRunner
 or could be viable alternatives to it, depending on your use case:
 
 * [Cucumber](https://cucumber.io):

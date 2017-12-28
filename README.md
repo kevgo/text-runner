@@ -96,8 +96,8 @@ This directory is located in `./tmp` unless [configured otherwise](#configuratio
 * [change the current working directory](documentation/actions/cd.md)
 * [create a directory](documentation/actions/create_directory.md)
 * [create a file](documentation/actions/create_file.md)
-* [verify a directory exists in the workspace](documentation/actions/verify_workspace_contains_directory.md)
-* [verify a file with given name and content exists in the workspace](documentation/actions/verify_workspace_file_content.md)
+* [verify a directory exists](documentation/actions/verify_workspace_contains_directory.md)
+* [verify a file with given name and content exists](documentation/actions/verify_workspace_file_content.md)
 
 #### Verify the Git repo that contains the documentation
 
@@ -106,6 +106,7 @@ This directory is located in `./tmp` unless [configured otherwise](#configuratio
 
 #### Console commands
 
+Console commands also happen in the [test workspace](#filesystem).
 * [run a console command](documentation/actions/run_console_command.md)
 * [start and stop long-running console commands](documentation/actions/start_stop_console_command.md)
 * [verify the output of the last console command](documentation/actions/verify_run_console_command_output.md)

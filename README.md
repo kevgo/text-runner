@@ -165,9 +165,9 @@ It is given an object containing information and utility functions:
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action, 
   as an array of [AST nodes](#ast-nodes).
-* __formatter:__ the [Formatter](#formatter) instance, to signal test progress and console output to TextRunner
-* __configuration:__ object providing TextRunner configuration data (which TextRunner options are enabled etc)
 * __searcher:__ a utility that makes it easier to get content out of the `nodes` array of AST nodes
+* __formatter:__ the [Formatter](#formatter) instance, to signal test progress and console output to TextRunner
+* __configuration:__ object providing TextRunner configuration data (which TextRunner options are enabled)
 * __runner:__ the handler function for the current action, i.e. the function that is currently executed
 
 

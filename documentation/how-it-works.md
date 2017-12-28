@@ -2,12 +2,11 @@
 
 There are no limitations on how the Markdown must look like,
 TextRunner can read and understand (with your help)
-any Markdown file and for example:
-- execute source code in your documentation
-- execute shell commands
-- diff images in the documentation against actual screen output
-- gather complex data from tables, bullet point lists,
-  as well as plain text in any human language and use it in tests
+any Markdown structure including
+- fenced code blocks
+- embedded images
+- complex data in tables, bullet point lists,
+  as well as plain text in any human language
 
 To make a part of any Markdown file actionable by TextRunner,
 wrap it in an `<a>` tag with class `tr_[action name]`.

@@ -167,8 +167,8 @@ It is given an object containing information and utility functions:
   as an array of [AST nodes](#ast-nodes).
 * __searcher:__ a utility that makes it easier to get content out of the `nodes` array of AST nodes
 * __formatter:__ the [Formatter](#formatter) instance, to signal test progress and console output to TextRunner
-* __configuration:__ object providing TextRunner configuration data (which TextRunner options are enabled)
-* __runner:__ the handler function for the current action, i.e. the function that is currently executed
+* __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
+* __runner:__ the currently running handler function
 
 
 ### AST Nodes

@@ -39,8 +39,15 @@ actions:
 
 </a>
 
-* the `files` key describes via a glob function which files are executed by TextRunner.
-  It automatically ignores hidden folders as well as `node_modules`.
+The `files` key describes via a glob function
+which files are executed by TextRunner.
+It automatically ignores hidden folders as well as `node_modules`.
 
-* the `actions` section contains configuration information specific to actions.
-  Please see the documentation for the respective action for more details.
+The `actions` section contains configuration information specific to actions.
+Please see the documentation for the respective action for more details.
+
+Read more about:
+- the [built-in actions](built-in-actions.md)
+- writing your own [user-defined actions](user-defined-actions.md)
+- [installing](installation.md) TextRunner
+

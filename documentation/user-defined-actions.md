@@ -98,7 +98,7 @@ TextRunner supports a variety of formatters:
   A minimalistic formatter, shows only dots for each test performed.
 
 
-## the "searcher" helper
+## The "searcher" helper
 
 More realistic tests for your documentation
 will need to access document content
@@ -123,11 +123,11 @@ echo "Hello world"
 ```
 </a>
 
-Here is the block definition implemented using the `searcher` helper.
-
+Here is the block definition implemented using the `searcher` helper,
+as always implemented in a file called
 <a class="tr_createFile">
+__text-run/console-command.js__:
 
-__text-run/console-command.js__
 ```javascript
 child_process = require('child_process')
 

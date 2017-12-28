@@ -125,7 +125,7 @@ With the option `--fast` given, text-run does not check outgoing links to other 
 
 ## Custom actions
 
-Let's create a custom block type.
+Let's create a custom action aka type of block that we can use in our documentation.
 All it does is print "hello world" in the test runner's console output when running.
 It will be triggered via this piece of Markdown:
 
@@ -137,8 +137,9 @@ It will be triggered via this piece of Markdown:
 ```
 </a>
 
-Actions are written in JavaScript.
-The definition for this block lives in the file <a class="tr_createFile">__text-run/hello-world-action.js__:
+When TextRunner encounters this block type,
+it runs the method that the file <a class="tr_createFile">__text-run/hello-world-action.js__ exports.
+Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
@@ -151,6 +152,7 @@ module.exports = function({ formatter }) {
 </a>
 
 Notice that the file name must use [kebab-case](http://wiki.c2.com/?KebabCase).
+
 <a class="tr_runTextrun">
 The formatter displays test progress on the console as the test runs.
 </a>

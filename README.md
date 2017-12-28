@@ -22,7 +22,8 @@ It also ensures that links and images in your documentation point to existing ta
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
-TextRunner enables:
+#### Use cases
+
 - __evergreen tutorials:__
   your documentation is always correct,
   whether you change it or the product it describes
@@ -31,7 +32,8 @@ TextRunner enables:
 - __[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):__
   documentation is your product prototype and drives the production implementation
 
-More info:
+#### More info
+
 * [how it works](documentation/how-it-works.md)
 * [installation](documentation/installation.md)
 * [configuration](documentation/configuration.md)

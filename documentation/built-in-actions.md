@@ -44,6 +44,7 @@ Console commands also happen in TextRunner's [workspace directory](#filesystem).
 With the option `--fast` given, text-run does not check outgoing links to other websites.
 
 
-## Further reading
+<hr>
 
+Read more about:
 - writing your own [user-defined actions](user-defined-actions.md)

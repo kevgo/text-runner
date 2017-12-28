@@ -7,7 +7,7 @@ Let's start by building the simplest possible action first.
 
 ## Hello-world example
 
-All the "hello-world" action does is print "hello world"
+The "hello-world" action prints the text "hello world"
 in the test runner's console output when running.
 It will be triggered via this piece of Markdown:
 

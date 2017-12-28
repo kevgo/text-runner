@@ -72,7 +72,7 @@ foo: bar
 
 </a>
 
-The class `createFile` tells TextRunner that this block is supposed to create a file.
+The class `tr_createFile` tells TextRunner that this block is supposed to create a file.
 It takes the filename and content to create from the text inside this block
 (not metadata, but the same text the user sees),
 and creates the file in the current working directory.

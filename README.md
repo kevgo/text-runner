@@ -152,7 +152,8 @@ module.exports = function({ formatter }) {
 </a>
 
 <a class="tr_runTextrun">
-The formatter displays test progress on the console as the test runs.
+The formatter displays test progress on the console as the test runs:
+
 </a>
 
 <img src="documentation/async.gif" width="460" height="134" alt="output demonstration">

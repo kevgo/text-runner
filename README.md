@@ -16,8 +16,8 @@
 <br>
 <br>
 
-TextRunner executes unstructured documentation.
-Similar to what a human reader would do if they were reading and following it.
+TextRunner executes unstructured documentation,
+similar to what a human reader would do if they were reading and following it.
 There are no restrictions on how your Markdown must look like.
 It also ensures that links and images in your documentation point to existing targets.
 An example is the documentation you are reading right now,

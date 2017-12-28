@@ -185,8 +185,8 @@ for example [BabelJS](https://babeljs.io),
 or [LiveScript](http://livescript.net).
 Just make sure that your project contains a local installation of your transpiler,
 since TextRunner does not find globally installed transpilers.
-This means your project should have a `package.json` file listing the transpiler you want to use, 
-in addition to any other NPM modules needed in your actions.
+This means your project should have a `package.json` file listing the transpiler you want TextRunner to call, 
+in addition to any other NPM modules that your handler method uses.
 
 
 ### AST Nodes

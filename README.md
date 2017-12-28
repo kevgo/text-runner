@@ -261,24 +261,22 @@ module.exports = function({formatter, searcher, nodes}) {
 
 formatter.start('running console command')
 
-const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
-if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
-if (match.nodes.length > 1) return 'please provide only one code block'
-if (!match.content) return 'you provided a code block but it has no content'
-})
+  const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
+    if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
+    if (match.nodes.length > 1) return 'please provide only one code block'
+    if (!match.content) return 'you provided a code block but it has no content'
+  })
 
-formatter.refine('running console command: ' + commandToRun)
-formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
-formatter.success()
+  formatter.refine('running console command: ' + commandToRun)
+  formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
+  formatter.success()
 }
-
 ```
 </a>
 
-<a class="tr_runTextrun">
-</a>
+<a class="tr_runTextrun"></a>
 
-- The `searcher.nodeContent` method returns the content of the DOM node
+The `searcher.nodeContent` method returns the content of the DOM node
 that satisfies the given query.
 In this case we are looking for a fenced code block,
 hence the query is `{type: 'fence'}`.

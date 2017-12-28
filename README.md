@@ -317,6 +317,7 @@ You can configure TextRunner via a configuration file.
 To create one, run:
 
 <a class="tr_runConsoleCommand">
+
 ```
 
 $ text-run setup
@@ -327,6 +328,7 @@ $ text-run setup
 The created configuration looks like this:
 
 <a class="tr_verifyWorkspaceFileContent">
+
 __text-run.yml__
 
 ```yml

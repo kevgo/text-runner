@@ -184,8 +184,8 @@ Each node is an object that has these attributes:
 
 ### Formatter
 
-One of the utilities availabe to actions is `formatter`,
-it provides an object that allows to print test output to the console.
+One of the utilities availabe to actions is the formatter instance.
+It allows to signal test progress to TextRunner and print test output to the console.
 Call `formatter.start(<activity name>)` before you run an activity.
 This prints the given activity as _currently running_ (using a yellow pointer)
 and prepares the formatter to dump console output below it.

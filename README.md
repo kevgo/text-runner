@@ -162,8 +162,8 @@ The file must export a function that executes the block.
 It is given an object containing information and utility functions:
 
 <!-- TODO: check this by creating a custom action that lists the arguments given to it -->
-* `filename`, `startLine`, `endLine`: location of the currently executed block in the documentation
-* `nodes`: the document content inside the `<a>` tag for this action, 
+* __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
+* __nodes:__ the document content inside the `<a>` tag for this action, 
   as an array of [AST nodes](#ast-nodes).
 * `formatter`: the [Formatter](#formatter) instance, to signal test progress and console output to TextRunner
 * `configuration`: object providing TextRunner configuration data (which TextRunner options are enabled etc)

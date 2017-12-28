@@ -16,11 +16,10 @@ install:
 
 test_script:
   - bin\build.cmd
-  - dir dist
   - bin\tests.cmd
   - bin\cuke-api.cmd
   - bin\cuke-cli.cmd
-  - bin\text-run.cmd --format dot
+  - bin\text-run.cmd
 
 
 # Don't double-build PRs

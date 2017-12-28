@@ -175,11 +175,11 @@ It is given an object containing information and utility functions:
 
 Document content is provided as [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) nodes.
 Each node is an object that has these attributes:
-* line: the line in the file at which this AST node begins
-* `type`: the type of the AST node
-* `content`: textual content of the AST node
-* `src`: if this AST node is a link or image, the content of the `src` attribute
-* `level`: nesting level of the AST node
+* __line:__ the line in the file at which this AST node begins
+* __type:__ the type of the AST node
+* __content:__ textual content of the AST node
+* __src:__ if this AST node is a link or image, the content of the `src` attribute
+* __level:__ nesting level of the AST node
 
 
 ### Formatter

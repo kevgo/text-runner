@@ -299,9 +299,6 @@ Its parameter is an object containing the content of the determined node
 as well as an array of all the nodes that match the given query.
 Strings returned by this method get printed as errors to the user and cause the test to fail,
 falsy return values indicate that the validation has passed,
-- The `formatter.refine` method allows to tell the formatter
-more details about the currently running activity as they become known.
-This helps produce better terminal output.
 
 
 ## Installation

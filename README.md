@@ -163,7 +163,7 @@ The handler function for our action is given an object containing various inform
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action, 
   as an array of [AST nodes](#ast-nodes)
-* __searcher:__ a utility that makes it easier to get content out of those AST nodes
+* __searcher:__ a utility that makes it easier to get content out of those AST nodes ([documentation](#the-searcher-helper))
 * __formatter:__ the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
 * __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
 * __runner:__ the currently running handler function

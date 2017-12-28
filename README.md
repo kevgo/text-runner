@@ -13,6 +13,7 @@
   <img src="https://david-dm.org/originate/text-runner/dev-status.svg">
 </a>
 
+<br>
 
 TextRunner executes documentation written in Markdown,
 similar to how a human reader would execute it if they were reading and following it.

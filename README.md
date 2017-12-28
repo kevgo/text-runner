@@ -131,7 +131,7 @@ It will be triggered via this piece of Markdown:
 
 <a class="tr_createMarkdownFile">
 
-```markdown
+```html
 <a class="tr_helloWorld">
 </a>
 ```

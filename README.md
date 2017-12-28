@@ -169,9 +169,9 @@ The handler function for our action is given an object containing various inform
 * __runner:__ the currently running handler function
 
 TextRunner supports all forms of synchronous and asynchronous operations:
-* just do something synchronous and return ([example](examples/custom-action-sync)).
-  Don't worry that synchronous operations prevent concurrency by blocking Node's event loop, 
-  all TextRunner steps are run strictly sequentially anyways.
+* just do something synchronous ([example](examples/custom-action-sync)) -
+  don't worry that synchronous operations prevent concurrency by blocking Node's event loop, 
+  all TextRunner steps are run strictly sequentially anyways
 * return a Promise  <!-- TODO: example -->
 * implement the action as a modern 
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)

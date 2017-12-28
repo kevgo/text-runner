@@ -81,7 +81,7 @@ Text outside of `<a>` tags is ignored by TextRunner.
 
 Now run `text-run` on the command line to test this document.
 TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
-with the content `foo: bar`</a> in the `tmp` subfolder of your current directory.
+with the content `foo: bar`</a> in a subfolder of your current directory called `tmp`.
 
 ## Built-in Actions
 

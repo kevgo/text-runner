@@ -264,7 +264,7 @@ module.exports = function({formatter, searcher, nodes}) {
   formatter.start('running console command')
 
   // step 2: determine which command to run using the searcher utility
-  // (you can also iterate nodes directly here if you want but that's more cumbersome)
+  // (you can also iterate the "nodes" array directly here if you want but that's more cumbersome)
   const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
     if (match.nodes.length === 0) return 'this active tag must contain a code block with the command to run'
     if (match.nodes.length > 1) return 'please provide only one code block'

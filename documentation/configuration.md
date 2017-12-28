@@ -39,6 +39,8 @@ actions:
 
 </a>
 
+<hr>
+
 Read more about:
 - the [built-in actions](built-in-actions.md)
 - writing your own [user-defined actions](user-defined-actions.md)

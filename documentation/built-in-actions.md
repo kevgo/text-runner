@@ -42,3 +42,8 @@ Console commands also happen in TextRunner's [workspace directory](#filesystem).
 * [verify global command provided by NPM module](documentation/actions/verify_npm_global_command.md)
 
 With the option `--fast` given, text-run does not check outgoing links to other websites.
+
+
+## Further reading
+
+- writing your own [user-defined actions](user-defined-actions.md)

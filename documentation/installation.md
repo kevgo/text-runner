@@ -1,7 +1,7 @@
 # Installation
 
 TextRunner works on all platforms supported by Node.JS,
-including macOS, Windows, Linux.
+including macOS, Windows, and Linux.
 To get started:
 - install [Node.JS](https://nodejs.org) version <a class="tr_minimumNodeVersion">8</a> or newer
 - in the terminal,

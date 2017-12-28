@@ -159,7 +159,7 @@ The formatter displays test progress on the console as the test runs.
 Custom block definitions live in the directory `text-run`.
 Each block lives in its own file, whose name is the block name in kebab-case.
 The file must export a function that executes the block.
-It is given an object containing useful utility functions.
+It is given an object containing utility functions.
 
 One of the named arguments is `formatter`,
 it provides an object that allows to print test output to the console.

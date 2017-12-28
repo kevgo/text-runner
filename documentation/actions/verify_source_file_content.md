@@ -1,4 +1,4 @@
-### Displaying a file from the source code tree in the test
+### Displaying a file from the source code tree in the documentation
 
 Sometimes you want to just display a file from the source code of your app in the documentation.
 For example to give your readers an idea how something works

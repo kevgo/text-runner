@@ -137,6 +137,7 @@ It will be triggered via this piece of Markdown:
 ```
 </a>
 
+Actions are written in JavaScript.
 The definition for this block lives in the file <a class="tr_createFile">__text-run/hello-world-action.js__:
 
 ```javascript
@@ -178,8 +179,8 @@ Each node is an object that has these attributes:
 * __line:__ the line in the file at which this AST node begins
 * __type:__ the type of the AST node
 * __content:__ textual content of the AST node
-* __src:__ if this AST node is a link or image, the content of the `src` attribute
-* __level:__ nesting level of the AST node
+* __src:__ the content of the `src` attribute if this AST node is a link or image
+* __level:__ if this AST node was nested in another one, the nesting level
 
 
 ### Formatter

@@ -85,7 +85,7 @@ with the content `foo: bar`</a> in a subfolder of your current directory called 
 
 ## Built-in Actions
 
-TextRunner provides built-in actions
+TextRunner provides a number of built-in actions
 for activities typically performed in software documentation.
 
 #### Filesystem
@@ -96,8 +96,8 @@ This directory is located in `./tmp` unless [configured otherwise](#configuratio
 * [change the current working directory](documentation/actions/cd.md)
 * [create a directory](documentation/actions/create_directory.md)
 * [create a file](documentation/actions/create_file.md)
-* [verify a directory exists](documentation/actions/verify_workspace_contains_directory.md)
-* [verify a file with given name and content exist](documentation/actions/verify_workspace_file_content.md)
+* [verify a directory exists in the workspace](documentation/actions/verify_workspace_contains_directory.md)
+* [verify a file with given name and content exists in the workspace](documentation/actions/verify_workspace_file_content.md)
 
 #### Verify the Git repo that contains the documentation
 

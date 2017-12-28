@@ -15,7 +15,7 @@ The markdown code of this tutorial might look something like this:
 ```markdown
 ## Creating a configuration file
 
-Please create a file with the name __config.yml__ and the content:
+Please create a file with the name _config.yml_ and the content:
 `​``
 foo: bar
 `​``
@@ -30,7 +30,7 @@ surround it with an `<a>` tag that specifies that we want to create a file:
 ## Creating a configuration file
 
 <a class="tr_createFile">
-Please create a file with the name __config.yml__ and the content:
+Please create a file with the name _config.yml_ and the content:
 `​``
 foo: bar
 `​``

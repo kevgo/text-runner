@@ -6,6 +6,7 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
+    "array-unique": "0.3.2",
     "async": "2.6.0",
     "camelcase": "4.1.0",
     "chalk": "2.3.0",
@@ -37,7 +38,6 @@
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
     "array-flatten": "2.1.1",
-    "array-unique": "0.3.2",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.1.2",
     "babel-plugin-istanbul": "4.1.5",

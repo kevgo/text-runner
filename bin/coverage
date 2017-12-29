@@ -7,7 +7,7 @@ set -e
 # prepare
 rm -rf dist
 rm -rf .nyc_output*
-BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist
+BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 
 # test coverage for unit tests
 BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "test/**/*.js" --reporter dot

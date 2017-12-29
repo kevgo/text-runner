@@ -12,7 +12,7 @@ const {wait} = require('wait')
 
 defineSupportCode(function ({After, Before, setDefaultTimeout}) {
   // need such a high timeout because test coverage puts pressure on the GC
-  setDefaultTimeout(10000)
+  setDefaultTimeout(20000)
 
   Before(function () {
     this.rootDir = tmp.dirSync({unsafeCleanup: true})

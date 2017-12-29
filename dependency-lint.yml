@@ -46,8 +46,11 @@ requiredModules:
       - 'text-run/**'
     ignore:
       - 'node_modules/**/*'
+      - 'flow-typed/**/*'
     root: '**/*.js'
   stripLoaders: false
   transpilers:
     - extension: .js
-      module: babel-core/require
+      fnName: transform
+      module: babel-core # 6.17.0
+      resultKey: code

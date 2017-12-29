@@ -4,7 +4,9 @@ node_js: 8
 
 cache: yarn
 
+before_script: node_modules/.bin/greenkeeper-lockfile-update
 script: "bin/coverage"
+after_script: node_modules/.bin/greenkeeper-lockfile-upload
 
 after_success: "nyc report --reporter=text-lcov | coveralls"
 

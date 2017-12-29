@@ -20,6 +20,8 @@ To debug a single test:
 * enable console output: add the `@verbose` tag
 * enable debugging statements and verbose output: add the `@debug` tag
 
+To determine test coverage:
+* run `bin/coverage`
 
 ## Terminology
 

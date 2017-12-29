@@ -1,3 +1,11 @@
 {
-  "presets": ["flow"]
+  "env": {
+    "test_coverage": {
+          "plugins": [
+            ["istanbul", {"exclude": ["test/*.js"]}]
+          ]
+    },
+  },
+  "presets": ["flow"],
+  "sourceMaps": "inline"
 }

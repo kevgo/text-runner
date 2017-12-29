@@ -1,1 +1,4 @@
 --colors
+--compilers js:babel-register
+--fullTrace
+--recursive

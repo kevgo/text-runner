@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# DETERMINES TEST COVERAGE
+
+set -e
+
+# prepare
+rm -rf dist
+rm -rf .nyc_output*
+BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
+
+# test coverage for unit tests
+BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "test/**/*.js" --reporter dot
+mv .nyc_output .nyc_output_tests
+
+# test coverage for API specs
+BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc cucumber-js --tags '(not @clionly) and (not @todo)' "$@"
+mv .nyc_output .nyc_output_api
+
+# Join coverage
+mkdir .nyc_output
+cp -a .nyc_output_tests/* .nyc_output
+cp -a .nyc_output_api/* .nyc_output
+nyc report --reporter=lcov
+echo "Open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"

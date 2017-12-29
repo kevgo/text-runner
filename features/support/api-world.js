@@ -1,7 +1,8 @@
 // @flow
 
 const {defineSupportCode} = require('cucumber')
-const textRunner = require('../../src/text-runner.js')
+// $FlowFixMe: we need to test the 'dist' folder for test coverage
+const textRunner = require('../../dist/text-runner.js')
 const {expect} = require('chai')
 const {cyan} = require('chalk')
 const dimConsole = require('dim-console')

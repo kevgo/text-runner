@@ -57,9 +57,9 @@
     "ncp": "2.0.0",
     "nitroglycerin": "1.1.2",
     "o-tools": "0.8.47",
-    "remark-cli": "2.1.0",
-    "remark-lint": "5.2.0",
-    "remark-preset-lint-recommended": "1.0.0",
+    "remark-cli": "4.0.0",
+    "remark-lint": "6.0.1",
+    "remark-preset-lint-recommended": "3.0.1",
     "shelljs": "0.7.8",
     "standard": "10.0.3",
     "tertestrial": "0.3.2"

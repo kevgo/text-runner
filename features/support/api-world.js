@@ -1,5 +1,6 @@
 // @flow
 
+const {defineSupportCode} = require('cucumber')
 const textRunner = require('../../src/text-runner.js')
 const {expect} = require('chai')
 const {cyan} = require('chalk')
@@ -184,8 +185,8 @@ function standardizePaths (paths: string[]) {
   return paths.map((path) => path.replace(/\\/g, '/'))
 }
 
-module.exports = function () {
+defineSupportCode(function ({setWorldConstructor}) {
   if (process.env.EXOSERVICE_TEST_DEPTH === 'API') {
-    this.World = ApiWorld
+    setWorldConstructor(ApiWorld)
   }
-}
+})

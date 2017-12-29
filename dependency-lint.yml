@@ -11,6 +11,8 @@ executedModules:
   shellScripts:
     dev:
       - bin/build
+      - bin/build.cmd
+      - bin/coverage
       - bin/cuke-api
       - bin/cuke-api.cmd
       - bin/cuke-cli
@@ -22,6 +24,7 @@ executedModules:
       - bin/spec
       - bin/tests
       - bin/tests.cmd
+      - bin/update
     ignore: []
     root: 'bin/*'
 
@@ -32,9 +35,16 @@ ignoreErrors:
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:
+    - babel-eslint
+    - babel-plugin-istanbul
+    - babel-preset-flow
+    - coveralls
+    - eslint-plugin-flowtype
+    - greenkeeper-lockfile
     - o-tools
     - remark-lint
     - remark-preset-lint-recommended
+    - standard
     - tertestrial
 
 requiredModules:
@@ -46,8 +56,12 @@ requiredModules:
       - 'text-run/**'
     ignore:
       - 'node_modules/**/*'
+      - 'flow-typed/**/*'
+      - 'dist/**/*'
     root: '**/*.js'
   stripLoaders: false
   transpilers:
     - extension: .js
-      module: babel-core/require
+      fnName: transform
+      module: babel-core # 6.17.0
+      resultKey: code

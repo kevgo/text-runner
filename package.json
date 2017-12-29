@@ -6,6 +6,7 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
+    "array-unique": "0.3.2",
     "async": "2.6.0",
     "camelcase": "4.1.0",
     "chalk": "2.3.0",
@@ -14,15 +15,12 @@
     "debug": "3.1.0",
     "end-child-processes": "0.0.6",
     "eol": "0.9.1",
-    "figures": "2.0.0",
     "glob": "7.1.2",
-    "indent-string": "3.2.0",
     "interpret": "1.1.0",
     "is-glob": "4.0.0",
     "js-yaml": "3.10.0",
     "jsdiff-console": "2.2.1",
     "liftoff": "2.5.0",
-    "log-update": "2.3.0",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "observable-process": "3.4.2",
@@ -32,17 +30,14 @@
     "require-uncached": "1.0.3",
     "require-yaml": "0.0.1",
     "rimraf": "2.6.2",
-    "strip-ansi": "4.0.0",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",
     "wait": "0.1.0",
-    "xml2js": "0.4.19",
-    "yamljs": "0.3.0"
+    "xml2js": "0.4.19"
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
     "array-flatten": "2.1.1",
-    "array-unique": "0.3.2",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.1.2",
     "babel-plugin-istanbul": "4.1.5",
@@ -66,6 +61,7 @@
     "remark-preset-lint-recommended": "3.0.1",
     "shelljs": "0.7.8",
     "standard": "10.0.3",
+    "strip-ansi": "4.0.0",
     "tertestrial": "0.3.2"
   },
   "files": [

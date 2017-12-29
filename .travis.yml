@@ -1,6 +1,12 @@
 language: node_js
 
+node_js: "8"
+
 cache: yarn
+
+script: "bin/coverage"
+
+after_success: "nyc report --reporter=text-lcov | coveralls"
 
 deploy:
   provider: npm
@@ -14,9 +20,3 @@ deploy:
 
 notifications:
   email: false
-
-matrix:
-  include:
-    - node_js: "8"
-      script: "bin/coverage"
-      after_success: "nyc report --reporter=text-lcov | coveralls"

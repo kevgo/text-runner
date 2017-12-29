@@ -15,9 +15,6 @@
 <a href="https://david-dm.org/originate/text-runner#info=devDependencies">
   <img src="https://david-dm.org/originate/text-runner/dev-status.svg">
 </a>
-<a href="https://greenkeeper.io">
-  <img src="https://badges.greenkeeper.io/Originate/text-runner.svg">
-</a>
 <a href="https://snyk.io/test/github/Originate/text-runner">
   <img src="https://snyk.io/test/github/Originate/text-runner/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/Originate/text-runner" style="max-width:100%;"/>
 </a>

@@ -28,6 +28,8 @@ which is verified for correctness by TextRunner.
 
 #### Use cases
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Originate/text-runner.svg)](https://greenkeeper.io/)
+
 - __evergreen tutorials:__
   your documentation is always correct,
   whether you change it or the product it describes

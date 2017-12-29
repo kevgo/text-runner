@@ -1,10 +1,11 @@
 // @flow
 
+const {defineSupportCode} = require('cucumber')
 const ncp = require('ncp')
 const N = require('nitroglycerin')
 
-module.exports = function () {
-  this.When(/^(trying to execute|executing) the "([^"]+)" example$/, {timeout: 100000}, function (tryingText, exampleName, done) {
+defineSupportCode(function ({When}) {
+  When(/^(trying to execute|executing) the "([^"]+)" example$/, {timeout: 100000}, function (tryingText, exampleName, done) {
     const expectError = determineExpectError(tryingText)
     ncp(`examples/${exampleName}`, this.rootDir.name, N(() => {
       this.execute({command: 'run', expectError}, () => {
@@ -13,21 +14,21 @@ module.exports = function () {
     }))
   })
 
-  this.When(/^(trying to run|running) "([^"]*)"$/, function (tryingText, command, done) {
+  When(/^(trying to run|running) "([^"]*)"$/, function (tryingText, command, done) {
     const expectError = determineExpectError(tryingText)
     this.execute({command, cwd: this.rootDir.name, expectError}, () => {
       finish(expectError, (this.error || this.exitCode), done)
     })
   })
 
-  this.When(/^(trying to run|running) text\-run$/, function (tryingText, done) {
+  When(/^(trying to run|running) text\-run$/, function (tryingText, done) {
     const expectError = determineExpectError(tryingText)
     this.execute({command: 'run', cwd: this.rootDir.name, expectError}, () => {
       finish(expectError, (this.error || this.exitCode), done)
     })
   })
 
-  this.When(/^(trying to run|running) text\-run with the arguments? "([^"]*)"$/, function (tryingText, optionsText, done) {
+  When(/^(trying to run|running) text\-run with the arguments? "([^"]*)"$/, function (tryingText, optionsText, done) {
     const expectError = determineExpectError(tryingText)
     const splitted = optionsText.split(' ')
     const command = splitted[0]
@@ -37,7 +38,7 @@ module.exports = function () {
     })
   })
 
-  this.When(/^(trying to run|running) text\-run with the arguments? {([^}]*)}$/, function (tryingText, argsText, done) {
+  When(/^(trying to run|running) text\-run with the arguments? {([^}]*)}$/, function (tryingText, argsText, done) {
     const expectError = determineExpectError(tryingText)
     const args = JSON.parse(`{${argsText}}`)
     args.command = 'run'
@@ -48,20 +49,20 @@ module.exports = function () {
     })
   })
 
-  this.When(/^(trying to run|running) text\-run with the "([^"]*)" formatter$/, function (tryingText, formatterName, done) {
+  When(/^(trying to run|running) text\-run with the "([^"]*)" formatter$/, function (tryingText, formatterName, done) {
     const expectError = determineExpectError(tryingText)
     this.execute({command: 'run', cwd: this.rootDir.name, options: {formatter: formatterName}, expectError}, () => {
       finish(expectError, (this.error || this.exitCode), done)
     })
   })
 
-  this.When(/^(trying to run|running) the "([^"]*)" command$/, function (tryingText, command, done) {
+  When(/^(trying to run|running) the "([^"]*)" command$/, function (tryingText, command, done) {
     const expectError = determineExpectError(tryingText)
     this.execute({command, cwd: this.rootDir.name, expectError}, () => {
       finish(expectError, (this.error || this.exitCode), done)
     })
   })
-}
+})
 
 function determineExpectError (tryingText) {
   if (tryingText === 'running') {

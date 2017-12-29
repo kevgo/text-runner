@@ -1,6 +1,7 @@
 // @flow
 
 const {expect} = require('chai')
+const {defineSupportCode} = require('cucumber')
 const dimConsole = require('dim-console')
 const flatten = require('array-flatten')
 const fs = require('fs-extra')
@@ -136,8 +137,8 @@ function standardizePath (path: string): string {
   return path.replace(/\\/g, '/')
 }
 
-module.exports = function () {
+defineSupportCode(function ({setWorldConstructor}) {
   if (process.env.EXOSERVICE_TEST_DEPTH === 'CLI') {
-    this.World = CliWorld
+    setWorldConstructor(CliWorld)
   }
-}
+})

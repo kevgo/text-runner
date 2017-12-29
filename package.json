@@ -29,12 +29,10 @@
     "require-uncached": "1.0.3",
     "require-yaml": "0.0.1",
     "rimraf": "2.6.2",
-    "strip-ansi": "4.0.0",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",
     "wait": "0.1.0",
-    "xml2js": "0.4.19",
-    "yamljs": "0.3.0"
+    "xml2js": "0.4.19"
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
@@ -63,6 +61,7 @@
     "remark-preset-lint-recommended": "3.0.1",
     "shelljs": "0.7.8",
     "standard": "10.0.3",
+    "strip-ansi": "4.0.0",
     "tertestrial": "0.3.2"
   },
   "files": [

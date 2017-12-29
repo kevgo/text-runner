@@ -47,6 +47,7 @@ requiredModules:
     ignore:
       - 'node_modules/**/*'
       - 'flow-typed/**/*'
+      - 'dist/**/*'
     root: '**/*.js'
   stripLoaders: false
   transpilers:

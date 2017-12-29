@@ -2,7 +2,7 @@
   "env": {
     "test_coverage": {
           "plugins": [
-            ["istanbul", {"exclude": ["test/*.js"]}]
+            ["istanbul", {"exclude": ["test/*.js", "features/**/*.js"]}]
           ]
     },
   },

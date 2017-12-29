@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-# DETERMINES test coverage for the unit tests
-
-rm -rf .nyc_output_tests
-BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "test/**/*.js"
-mv .nyc_output .nyc_output_tests

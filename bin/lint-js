@@ -2,6 +2,8 @@
 
 # LINTS THE JAVASCRIPT FILES
 
+# NOTE: cannot dry this code up because the details are different in each block
+
 # run the 'standard-js' linter on the source code
 errors=$(standard -v 'src/**/*.js' | grep -v no-undef | wc -l | tr -d ' ')
 if [ $errors -gt 0 ]; then

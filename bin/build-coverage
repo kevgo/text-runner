@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -e
+
+# Builds the code base with embedded test coverage tracking data
+
+rm -rf dist
+BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q

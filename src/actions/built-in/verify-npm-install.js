@@ -1,6 +1,7 @@
 // @flow
 
 const {cyan, green} = require('chalk')
+const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
@@ -12,7 +13,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     if (nodes.length > 1) return 'found multiple code blocks'
   }))
 
-  const pkg = require(path.join(process.cwd(), 'package.json'))
+  const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
   args.formatter.start(`verifying NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {

@@ -7,7 +7,7 @@
   <img src="https://ci.appveyor.com/api/projects/status/4qasl63vrmcu06e6/branch/master?svg=true" alt="Windows build status">
 </a>
 <a href="https://coveralls.io/github/Originate/text-runner?branch=master">
-  <img src="https://coveralls.io/repos/github/Originate/text-runner/badge.svg?branch=master">
+  <img src="https://coveralls.io/repos/github/Originate/text-runner/badge.svg?branch=master" alt='Coverage Status' />
 </a>
 <a href="https://david-dm.org/originate/text-runner">
   <img src="https://david-dm.org/originate/text-runner.svg">

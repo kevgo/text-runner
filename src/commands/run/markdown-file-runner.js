@@ -85,7 +85,7 @@ class MarkdownFileRunner {
           block.runner(block, done)
         }
       } catch (e) {
-        block.formatter.error(e)
+        block.formatter.error(e.message || e)
         done(e)
       }
     })

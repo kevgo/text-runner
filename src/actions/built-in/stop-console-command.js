@@ -1,17 +1,14 @@
 // @flow
 
 // Stops the currently running console command.
-module.exports = function (args: {formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('stopping the long-running process')
 
   if (!global.runningProcess) {
-    const error = 'No running process found'
-    args.formatter.error(error)
-    done(new Error(error))
-    return
+    throw new Error('No running process found')
   }
 
   global.runningProcess.kill()
+  global.runningProcess = null
   args.formatter.success()
-  done()
 }

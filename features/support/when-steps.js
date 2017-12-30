@@ -75,8 +75,10 @@ function determineExpectError (tryingText) {
 }
 
 function finish (trying, error, done) {
-  if (trying) {
-    done(!error)
+  if (trying && !error) {
+    done(new Error('Expected failure but test succeeded'))
+  } else if (trying && error) {
+    done()
   } else {
     done(error)
   }

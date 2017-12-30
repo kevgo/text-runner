@@ -57,7 +57,7 @@ class RunCommand implements Command {
     try {
       this._createWorkingDir()
       this._createRunners(filenames)
-      this._prepareRunners((err: Error) => {
+      this._prepareRunners((err: ErrnoError) => {
         if (err) return done(err)
         this._executeRunners(done)
       })
@@ -132,14 +132,16 @@ class RunCommand implements Command {
     try {
       runner.run(done)
     } catch (e) {
-      console.log(e)
       done(e)
     }
   }
 
   _executeRunners (done) {
     async.mapSeries(this.runners, this._executeRunner, (err, results) => {
-      if (err) return done(err)
+      if (err) {
+        done(err)
+        return
+      }
       const stepsCount = results.reduce((result, sum) => sum + result, 0)
       if (stepsCount === 0) {
         this.formatter.warning('no activities found')

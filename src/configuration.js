@@ -1,9 +1,8 @@
 // @flow
 
 const fs = require('fs')
-const requireUncached = require('require-uncached')
-require('require-yaml')
 const debug = require('debug')('textrun:configuration')
+const YAML = require('yamljs')
 
 const defaultValues = {
   fast: false,
@@ -31,7 +30,8 @@ class Configuration {
 
     if (this.configFilePath) {
       debug(`loading configuration file: ${this.configFilePath}`)
-      this.fileData = requireUncached(this.configFilePath) || {}
+      // $FlowFixMe: flow-type defs seems to be wrong here
+      this.fileData = YAML.load(configFilePath) || {}
     } else {
       this.fileData = {}
     }

@@ -2,14 +2,29 @@
 
 # LINTS THE JAVASCRIPT FILES
 
-# run the 'standard-js' linter
-errors=$(standard -v | grep -v no-undef | grep -v no-unused-expressions | grep -v no-eval | grep -v no-new-func | grep -v no-irregular-whitespace)
-errorcount=$(echo $errors | wc -l | tr -d ' ')
-if [ $errorcount -gt 1 ]; then
-  echo Found $errorcount standardJS errors:
-  echo $errors
+# run the 'standard-js' linter on the source code
+errors=$(standard -v 'src/**/*.js' | grep -v no-undef | wc -l | tr -d ' ')
+if [ $errors -gt 0 ]; then
+  echo Found standardJS errors in the source code:
+  standard -v 'src/**/*.js' | grep -v no-undef
   exit 1
 fi
 
-# run the flow linter
+# run the 'standard-js' linter on the test code
+errors=$(standard -v 'test/**/*.js' | grep -v no-undef | grep -v no-unused-expressions | wc -l | tr -d ' ')
+if [ $errors -gt 0 ]; then
+  echo Found standardJS errors in the test code:
+  standard -v 'test/**/*.js' | grep -v no-undef
+  exit 1
+fi
+
+# run the 'standard-js' linter on the feature code
+errors=$(standard -v 'features/**/*.js' | grep -v no-undef | grep -v no-unused-expressions | wc -l | tr -d ' ')
+if [ $errors -gt 0 ]; then
+  echo Found standardJS errors in the feature code:
+  standard -v 'features/**/*.js' | grep -v no-undef
+  exit 1
+fi
+
+# run the Flow linter
 node_modules/.bin/flow check

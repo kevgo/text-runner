@@ -2,7 +2,6 @@
 
 const glob = require('glob')
 const path = require('path')
-const Formatter = require('./formatter')
 
 class FormatterManager {
   // Returns a list of all available formatter names

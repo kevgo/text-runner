@@ -69,7 +69,3 @@ function isRemoteImage (node: AstNode): boolean {
     return false
   }
 }
-
-function isImageWithoutSrc (node: AstNode): boolean {
-  return !node.src
-}

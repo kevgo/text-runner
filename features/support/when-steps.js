@@ -21,14 +21,14 @@ defineSupportCode(function ({When}) {
     })
   })
 
-  When(/^(trying to run|running) text\-run$/, function (tryingText, done) {
+  When(/^(trying to run|running) text-run$/, function (tryingText, done) {
     const expectError = determineExpectError(tryingText)
     this.execute({command: 'run', cwd: this.rootDir, expectError}, () => {
       finish(expectError, (this.error || this.exitCode), done)
     })
   })
 
-  When(/^(trying to run|running) text\-run with the arguments? "([^"]*)"$/, function (tryingText, optionsText, done) {
+  When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, function (tryingText, optionsText, done) {
     const expectError = determineExpectError(tryingText)
     const splitted = optionsText.split(' ')
     const command = splitted[0]
@@ -38,7 +38,7 @@ defineSupportCode(function ({When}) {
     })
   })
 
-  When(/^(trying to run|running) text\-run with the arguments? {([^}]*)}$/, function (tryingText, argsText, done) {
+  When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, function (tryingText, argsText, done) {
     const expectError = determineExpectError(tryingText)
     const args = JSON.parse(`{${argsText}}`)
     args.command = 'run'
@@ -49,7 +49,7 @@ defineSupportCode(function ({When}) {
     })
   })
 
-  When(/^(trying to run|running) text\-run with the "([^"]*)" formatter$/, function (tryingText, formatterName, done) {
+  When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, function (tryingText, formatterName, done) {
     const expectError = determineExpectError(tryingText)
     this.execute({command: 'run', cwd: this.rootDir, options: {formatter: formatterName}, expectError}, () => {
       finish(expectError, (this.error || this.exitCode), done)

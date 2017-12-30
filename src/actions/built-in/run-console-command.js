@@ -1,7 +1,7 @@
 // @flow
 
 const callArgs = require('../../helpers/call-args')
-const {cyan, red} = require('chalk')
+const {cyan} = require('chalk')
 const ObservableProcess = require('observable-process')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
@@ -78,7 +78,7 @@ function getInput (text: string, formatter: Formatter, done: (input: ProcessInpu
     for (let tr of xml.table.tr) {
       if (tr.td) {
         if (tr.td.length === 1) {
-          result.push({ textToWait: null, input: tr.td[0]})
+          result.push({ textToWait: null, input: tr.td[0] })
         } else {
           result.push({textToWait: tr.td[0], input: tr.td[tr.td.length - 1]})
         }

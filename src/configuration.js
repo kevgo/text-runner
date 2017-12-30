@@ -30,6 +30,7 @@ class Configuration {
 
     if (this.configFilePath) {
       debug(`loading configuration file: ${this.configFilePath}`)
+      // $FlowFixMe
       this.fileData = YAML.load(configFilePath) || {}
     } else {
       this.fileData = {}

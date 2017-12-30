@@ -36,6 +36,10 @@ mv .nyc_output .nyc_output_api
 # test coverage for CLI specs
 NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' "$@"
 
+# test coverage for the self-check
+./node_modules/.bin/nyc bin/text-run --fast
+mv .nyc_output .nyc_output_text_run
+
 # merge coverage data
 mkdir .nyc_output
 mergeAndCleanseDir .nyc_output_tests
@@ -43,6 +47,7 @@ mergeAndCleanseDir .nyc_output_api
 for dirPath in .nyc_output_cli/*; do
   mergeAndCleanseDir $dirPath
 done
+mergeAndCleanseDir .nyc_output_text_run
 
 # generate coverage report
 nyc report --reporter=lcov

@@ -7,7 +7,7 @@ const Formatter = require('./formatter')
 class DotFormatter extends Formatter {
   error (errorMessage: string) {
     super.error(errorMessage)
-    console.log(red(errorMessage))
+    console.log(`${this.filePath} -- ${red(errorMessage)}`)
   }
 
   output (text: string) {}

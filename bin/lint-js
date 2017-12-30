@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
+set -e
 
 # LINTS THE JAVASCRIPT FILES
 
 # NOTE: cannot dry this code up because the details are different in each block
 
+
 # run the 'standard-js' linter on the source code
-errors=$(standard -v 'src/**/*.js' | grep -v no-undef | wc -l | tr -d ' ')
+errors=$(standard -v 'src/**/*.js' | wc -l | tr -d ' ')
 if [ $errors -gt 0 ]; then
   echo Found standardJS errors in the source code:
   standard -v 'src/**/*.js' | grep -v no-undef
@@ -13,7 +15,7 @@ if [ $errors -gt 0 ]; then
 fi
 
 # run the 'standard-js' linter on the test code
-errors=$(standard -v 'test/**/*.js' | grep -v no-undef | grep -v no-unused-expressions | wc -l | tr -d ' ')
+errors=$(standard -v 'test/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
 if [ $errors -gt 0 ]; then
   echo Found standardJS errors in the test code:
   standard -v 'test/**/*.js' | grep -v no-undef
@@ -21,12 +23,12 @@ if [ $errors -gt 0 ]; then
 fi
 
 # run the 'standard-js' linter on the feature code
-errors=$(standard -v 'features/**/*.js' | grep -v no-undef | grep -v no-unused-expressions | wc -l | tr -d ' ')
+errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
 if [ $errors -gt 0 ]; then
   echo Found standardJS errors in the feature code:
-  standard -v 'features/**/*.js' | grep -v no-undef
+  standard -v 'features/*.js' | grep -v no-undef
   exit 1
 fi
 
 # run the Flow linter
-node_modules/.bin/flow check
+node_modules/.bin/flow

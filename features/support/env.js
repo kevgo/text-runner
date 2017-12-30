@@ -9,7 +9,7 @@ require('shelljs/global')
 const {wait} = require('wait')
 
 defineSupportCode(function ({After, Before, setDefaultTimeout}) {
-  // need such a high timeout because test coverage puts pressure on the GC
+  // need such a high timeout because test coverage takes time to start up
   setDefaultTimeout(30000)
 
   Before(function () {
@@ -25,7 +25,7 @@ defineSupportCode(function ({After, Before, setDefaultTimeout}) {
         done()
       } else {
         wait(1, () => {
-          rimraf(this.rootDir, done)
+          rimraf(this.rootDir, {}, done)
         })
       }
     })

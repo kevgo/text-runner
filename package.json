@@ -66,7 +66,8 @@
     "shelljs": "0.7.8",
     "standard": "10.0.3",
     "strip-ansi": "4.0.0",
-    "tertestrial": "0.3.2"
+    "tertestrial": "0.3.2",
+    "uuid": "3.1.0"
   },
   "files": [
     "bin/text-run",

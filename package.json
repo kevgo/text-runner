@@ -26,7 +26,6 @@
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
     "request": "2.83.0",
-    "rimraf": "2.6.2",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",
     "wait": "0.1.0",
@@ -45,9 +44,11 @@
     "cucumber": "3.2.0",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
-    "eslint-config-standard": "11.0.0-beta.0",
+    "eslint": "^2.0.0",
+    "eslint-config-standard": "10.2.1",
     "eslint-config-standard-flow": "1.0.1",
     "eslint-plugin-flowtype": "2.40.1",
+    "eslint-plugin-import": "2.8.0",
     "eslint-plugin-standard": "3.0.1",
     "flow-bin": "0.62.0",
     "fs-extra": "5.0.0",
@@ -96,6 +97,13 @@
     "parser": "babel-eslint",
     "plugins": [
       "flowtype"
+    ],
+    "globals": [
+      "before",
+      "context",
+      "describe",
+      "expect",
+      "it"
     ]
   }
 }

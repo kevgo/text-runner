@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+# LINTS THE JAVASCRIPT FILES
+
+# run the 'standard-js' linter
+errors=$(standard -v | grep -v no-undef | grep -v no-unused-expressions | grep -v no-eval | grep -v no-new-func | grep -v no-irregular-whitespace)
+errorcount=$(echo $errors | wc -l | tr -d ' ')
+if [ $errorcount -gt 1 ]; then
+  echo Found $errorcount standardJS errors:
+  echo $errors
+  exit 1
+fi
+
+# run the flow linter
+node_modules/.bin/flow check

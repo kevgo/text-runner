@@ -6,7 +6,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  const filePath = args.searcher.nodeContent({ types: ['strongtext', 'emphasizedtext']}, ({nodes, content}) => {
+  const filePath = args.searcher.nodeContent({ types: ['strongtext', 'emphasizedtext'] }, ({nodes, content}) => {
     if (nodes.length === 0) return 'no file path found'
     if (nodes.length > 1) return "multiple file paths found: #{nodes |> map (.content) |> map ((a) -> cyan a) |> (.join ' and ')}"
     if (content.length === 0) return 'no path given for file to verify'

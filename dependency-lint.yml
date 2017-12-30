@@ -20,6 +20,8 @@ executedModules:
       - bin/docs
       - bin/features
       - bin/lint
+      - bin/lint-js
+      - bin/lint-md
       - bin/publish
       - bin/spec
       - bin/tests
@@ -39,7 +41,9 @@ ignoreErrors:
     - babel-plugin-istanbul
     - babel-preset-flow
     - coveralls
+    - eslint
     - eslint-plugin-flowtype
+    - eslint-plugin-import
     - greenkeeper-lockfile
     - o-tools
     - remark-lint

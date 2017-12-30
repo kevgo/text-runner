@@ -101,7 +101,7 @@ class TestFormatter {
 const ApiWorld = function () {
   this.execute = function (args: {command: string, file: string, fast: boolean, format: Formatter}, done: DoneFunction) {
     const existingDir = process.cwd()
-    process.chdir(this.rootDir.name)
+    process.chdir(this.rootDir)
     this.formatter = new TestFormatter({verbose: this.verbose})
     const formatter: Formatter = args.format || this.formatter
     textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter}, (error) => {
@@ -162,9 +162,9 @@ const ApiWorld = function () {
     }
 
     // verify all other tests have not run
-    const filesShouldntRun = glob.sync(`${this.rootDir.name}/**`)
+    const filesShouldntRun = glob.sync(`${this.rootDir}/**`)
                                  .filter((filename) => fs.statSync(filename).isFile())
-                                 .map((filename) => path.relative(this.rootDir.name, filename))
+                                 .map((filename) => path.relative(this.rootDir, filename))
                                  .filter((filename) => filename)
                                  .map((filename) => filename.replace(/\\/g, '/'))
                                  .filter((filename) => files.indexOf(filename) === -1)

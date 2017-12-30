@@ -8,11 +8,12 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const ObservableProcess = require('observable-process')
 const path = require('path')
+const uuid = require('uuid/v4')
 
 const CliWorld = function () {
   this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {
     var args = {}
-    args.cwd = this.rootDir.name,
+    args.cwd = this.rootDir,
     args.env = {}
     if (this.verbose) {
       args.stdout = dimConsole.process.stdout
@@ -22,11 +23,21 @@ const CliWorld = function () {
       args.stderr = {write: (text) => this.output += text}
     }
     if (this.debug) {
-      args.env['DEBUG'] = '*'
+      args.env['DEBUG'] = '*,-babel'
     }
 
-    this.process = new ObservableProcess(this.makeFullPath(params.command), args)
+    var fullPath = this.makeFullPath(params.command)
+    if (process.env.NODE_ENV === 'coverage') {
+      fullPath = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + fullPath
+    }
+    this.process = new ObservableProcess(fullPath, args)
     this.process.on('ended', (exitCode) => {
+      if (process.env.NODE_ENV === 'coverage') {
+        const outputPath = path.join(process.cwd(), '.nyc_output')
+        if (fs.existsSync(outputPath)) {
+          fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+        }
+      }
       this.exitCode = exitCode
       if (this.verbose) this.output = dimConsole.output
       if (this.exitCode && !params.expectError) {
@@ -113,9 +124,9 @@ const CliWorld = function () {
     }
 
     // verify all other tests have not run
-    const filesShouldntRun = glob.sync(`${this.rootDir.name}/**`)
+    const filesShouldntRun = glob.sync(`${this.rootDir}/**`)
                                  .filter((file) => fs.statSync(file).isFile())
-                                 .map((file) => path.relative(this.rootDir.name, file))
+                                 .map((file) => path.relative(this.rootDir, file))
                                  .filter((file) => file)
                                  .map((file) => file.replace(/\\/g, '/'))
                                  .filter((file) => filenames.indexOf(file) === -1)

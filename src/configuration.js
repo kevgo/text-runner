@@ -30,7 +30,7 @@ class Configuration {
 
     if (this.configFilePath) {
       debug(`loading configuration file: ${this.configFilePath}`)
-      // $FlowFixMe
+      // $FlowFixMe: flow-type defs seems to be wrong here
       this.fileData = YAML.load(configFilePath) || {}
     } else {
       this.fileData = {}

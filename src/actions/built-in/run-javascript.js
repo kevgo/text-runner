@@ -17,6 +17,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
 
+  /* eslint-disable no-unused-vars */  // This is used in an eval'ed string below
   const __finished = (err) => {
     if (err) {
       args.formatter.error(err)
@@ -34,6 +35,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
     code = appendAsyncCallback(code)
   }
   args.formatter.output(code)
+  /* eslint-disable no-eval */
   eval(code)
 }
 
@@ -52,9 +54,10 @@ function replaceSubstitutionsInConfiguration (code: string, configuration: Confi
     for (let replaceData of configuration.fileData.actions.runJavascript.replace) {
       code = code.replace(replaceData.search, replaceData.replace)
     }
-  } finally {
-    return code
+  } catch (e) {
+    // ignoring type errors here since `code` has a default value
   }
+  return code
 }
 
 // makes sure "require('.') works as expected even if running in a temp workspace

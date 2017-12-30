@@ -3,9 +3,6 @@
 const {cyan, green, magenta, red} = require('chalk')
 const Formatter = require('./formatter')
 
-// colorFunction is a better name for functions that add colors to strings
-type colorFunction = (text: string) => string
-
 // A minimalistic formatter, prints dots for each check
 class DotFormatter extends Formatter {
   error (errorMessage: string) {

@@ -1,8 +1,8 @@
-module.exports  = ({formatter}, done) => {
+module.exports = ({formatter}, done) => {
   formatter.start('greeting the world')
-  setTimeout(function() {
+  setTimeout(function () {
     formatter.output('Hello World!')
-    setTimeout(function() {
+    setTimeout(function () {
       formatter.success()
       done()
     }, 1)

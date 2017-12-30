@@ -20,6 +20,7 @@
     "is-glob": "4.0.0",
     "js-yaml": "3.10.0",
     "jsdiff-console": "2.2.1",
+    "jsonfile": "4.0.0",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "observable-process": "3.4.2",

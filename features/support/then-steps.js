@@ -13,11 +13,11 @@ defineSupportCode(function ({Then, When}) {
   })
 
   Then(/^it creates a directory "([^"]*)"$/, function (directoryPath) {
-    fs.statSync(path.join(this.rootDir.name, directoryPath))
+    fs.statSync(path.join(this.rootDir, directoryPath))
   })
 
   Then(/^it creates the file "([^"]*)" with content:$/, function (filename, expectedContent) {
-    const actualContent = fs.readFileSync(path.join(this.rootDir.name, filename),
+    const actualContent = fs.readFileSync(path.join(this.rootDir, filename),
                                           {encoding: 'utf8'})
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
   })
@@ -35,7 +35,7 @@ defineSupportCode(function ({Then, When}) {
   })
 
   Then(/^it runs in a global temp directory$/, function () {
-    expect(this.output).to.not.include(this.rootDir.name)
+    expect(this.output).to.not.include(this.rootDir)
   })
 
   Then(/^it runs in the "([^"]+)" directory$/, function (dirName) {
@@ -43,7 +43,7 @@ defineSupportCode(function ({Then, When}) {
   })
 
   Then(/^it runs in the current working directory$/, function () {
-    expect(this.output).to.match(new RegExp(`${this.rootDir.name}\\b`))
+    expect(this.output).to.match(new RegExp(`${this.rootDir}\\b`))
   })
 
   Then(/^it runs(?: only)? the tests in "([^"]*)"$/, function (filename) {
@@ -74,11 +74,11 @@ defineSupportCode(function ({Then, When}) {
   })
 
   Then(/^the test directory (?:now |still )contains a file "([^"]*)" with content:$/, function (fileName, expectedContent) {
-    expect(fs.readFileSync(path.join(this.rootDir.name, 'tmp', fileName), 'utf8').trim()).to.equal(expectedContent.trim())
+    expect(fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()).to.equal(expectedContent.trim())
   })
 
   Then(/^the test workspace now contains a directory "([^"]*)"$/, function (fileName) {
-    const stat = fs.statSync(path.join(this.rootDir.name, 'tmp', fileName))
+    const stat = fs.statSync(path.join(this.rootDir, 'tmp', fileName))
     expect(stat.isDirectory()).to.be.true
   })
 

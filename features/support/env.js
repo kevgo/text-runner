@@ -3,11 +3,9 @@
 const {defineSupportCode} = require('cucumber')
 const endChildProcesses = require('end-child-processes')
 const fs = require('fs-extra')
-const glob = require('glob')
 const path = require('path')
 const rimraf = require('rimraf')
 require('shelljs/global')
-const tmp = require('tmp')
 const {wait} = require('wait')
 
 defineSupportCode(function ({After, Before, setDefaultTimeout}) {
@@ -15,23 +13,19 @@ defineSupportCode(function ({After, Before, setDefaultTimeout}) {
   setDefaultTimeout(30000)
 
   Before(function () {
-    this.rootDir = tmp.dirSync({unsafeCleanup: true})
+    this.rootDir = path.join(process.cwd(), 'tmp')
+    if (fs.existsSync(this.rootDir)) rimraf.sync(this.rootDir)
+    fs.mkdirSync(this.rootDir)
   })
 
   After(function (scenario, done: DoneFunction) {
     endChildProcesses(() => {
       if (scenario.result.status === 'failed') {
-        console.log('\ntest artifacts are located in', this.rootDir.name)
+        console.log('\ntest artifacts are located in', this.rootDir)
         done()
       } else {
         wait(1, () => {
-          try {
-            this.rootDir.removeCallback()
-          } catch (e) {
-            console.log(e)
-          } finally {
-            done()
-          }
+          rimraf(this.rootDir, done)
         })
       }
     })

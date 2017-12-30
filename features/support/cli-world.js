@@ -12,7 +12,7 @@ const path = require('path')
 const CliWorld = function () {
   this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {
     var args = {}
-    args.cwd = this.rootDir.name,
+    args.cwd = this.rootDir,
     args.env = {}
     if (this.verbose) {
       args.stdout = dimConsole.process.stdout
@@ -113,9 +113,9 @@ const CliWorld = function () {
     }
 
     // verify all other tests have not run
-    const filesShouldntRun = glob.sync(`${this.rootDir.name}/**`)
+    const filesShouldntRun = glob.sync(`${this.rootDir}/**`)
                                  .filter((file) => fs.statSync(file).isFile())
-                                 .map((file) => path.relative(this.rootDir.name, file))
+                                 .map((file) => path.relative(this.rootDir, file))
                                  .filter((file) => file)
                                  .map((file) => file.replace(/\\/g, '/'))
                                  .filter((file) => filenames.indexOf(file) === -1)

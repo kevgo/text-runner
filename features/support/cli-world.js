@@ -8,6 +8,7 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const ObservableProcess = require('observable-process')
 const path = require('path')
+const uuid = require('uuid/v4')
 
 const CliWorld = function () {
   this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {
@@ -22,11 +23,21 @@ const CliWorld = function () {
       args.stderr = {write: (text) => this.output += text}
     }
     if (this.debug) {
-      args.env['DEBUG'] = '*'
+      args.env['DEBUG'] = '*,-babel'
     }
 
-    this.process = new ObservableProcess(this.makeFullPath(params.command), args)
+    var fullPath = this.makeFullPath(params.command)
+    if (process.env.NODE_ENV === 'coverage') {
+      fullPath = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + fullPath
+    }
+    this.process = new ObservableProcess(fullPath, args)
     this.process.on('ended', (exitCode) => {
+      if (process.env.NODE_ENV === 'coverage') {
+        const outputPath = path.join(process.cwd(), '.nyc_output')
+        if (fs.existsSync(outputPath)) {
+          fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+        }
+      }
       this.exitCode = exitCode
       if (this.verbose) this.output = dimConsole.output
       if (this.exitCode && !params.expectError) {

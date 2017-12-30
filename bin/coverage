@@ -5,8 +5,8 @@
 set -e
 
 # copies the given directory into .nyc_output,
-# while removing irrelevant entries that trip up Istanbul
-copyAndCleanseDir() {
+# while removing irrelevant entries that trip up nyc
+mergeAndCleanseDir() {
   srcDir=$1
   for srcPath in $srcDir/*.json; do
     fileName=$(basename $srcPath)
@@ -23,7 +23,7 @@ copyAndCleanseDir() {
 # prepare
 rm -rf dist
 rm -rf .nyc_output*
-BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
+bin/build-coverage
 
 # test coverage for unit tests
 BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "test/**/*.js" --reporter dot
@@ -34,19 +34,16 @@ BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc cucumber-js 
 mv .nyc_output .nyc_output_api
 
 # test coverage for CLI specs
-rm -rf tmp
-mkdir tmp
-cd tmp
-BABEL_ENV=test_coverage NODE_ENV=test ../node_modules/.bin/nyc node ../dist/cli.js version
-BABEL_ENV=test_coverage NODE_ENV=test ../node_modules/.bin/nyc node ../dist/cli.js help
-cd ..
-mv .nyc_output .nyc_output_cli
+NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' "$@"
 
-# Join coverage
+# merge coverage data
 mkdir .nyc_output
-copyAndCleanseDir .nyc_output_tests
-# copyAndCleanseDir .nyc_output_api
-copyAndCleanseDir .nyc_output_cli
+mergeAndCleanseDir .nyc_output_tests
+mergeAndCleanseDir .nyc_output_api
+for dirPath in .nyc_output_cli/*; do
+  mergeAndCleanseDir $dirPath
+done
 
+# generate coverage report
 nyc report --reporter=lcov
-# echo "Open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
+echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"

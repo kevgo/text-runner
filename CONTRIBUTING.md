@@ -9,7 +9,6 @@
 ## Testing
 
 * run all tests: `bin/spec`
-* run linter: `bin/lint`
 * run feature specs: `bin/features`
 * run feature specs against the JS API: `bin/cuke-api`
 * run feature specs against the CLI: `bin/cuke-cli`
@@ -22,6 +21,19 @@ To debug a single test:
 
 To determine test coverage:
 * run `bin/coverage`
+
+
+## Linting
+
+* run all linters: `bin/lint`
+* run JavaScript linters: `bin/lint-js`
+* run Markdown linters: `bin/lint-md`
+
+The JavaScript Standard linter does not properly handle Flow types at this point,
+hence it is recommended to only show flow lint messages in your editor,
+not the error messages from "standard".
+Use the `bin/lint-js` script instead.
+
 
 ## Terminology
 

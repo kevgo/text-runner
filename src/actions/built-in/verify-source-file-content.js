@@ -13,7 +13,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     if (content.length === 0) return 'no path given for file to verify'
   })
 
-  var baseDir = args.searcher.nodeContent({ type: 'link_open'}, ({nodes, content}) => {
+  var baseDir = args.searcher.nodeContent({ type: 'link_open' }, ({nodes, content}) => {
     if (nodes.length > 1) return 'too many links found'
     if (content.trim().length === 0) return 'empty link found'
   })

@@ -3,5 +3,5 @@ set -e
 
 bin/build
 node_modules/o-tools/bin/lint
-remark .
-node_modules/.bin/flow check
+bin/lint-md
+bin/lint-js

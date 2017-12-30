@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# LINTS MARKDOWN FILES
+
+set -e
+remark .

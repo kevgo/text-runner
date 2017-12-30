@@ -2,7 +2,6 @@
 
 const camelcase = require('camelcase')
 const {red} = require('chalk')
-const FormatterManager = require('../formatters/formatter-manager')
 const glob = require('glob')
 const interpret = require('interpret')
 const path = require('path')

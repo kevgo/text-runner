@@ -3,7 +3,6 @@
 const {defineSupportCode} = require('cucumber')
 const {expect} = require('chai')
 const fs = require('fs-extra')
-const glob = require('glob')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 

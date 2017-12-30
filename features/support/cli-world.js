@@ -13,14 +13,14 @@ const uuid = require('uuid/v4')
 const CliWorld = function () {
   this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {
     var args = {}
-    args.cwd = this.rootDir,
+    args.cwd = this.rootDir
     args.env = {}
     if (this.verbose) {
       args.stdout = dimConsole.process.stdout
       args.stderr = dimConsole.process.stderr
     } else {
-      args.stdout = {write: (text) => this.output += text}
-      args.stderr = {write: (text) => this.output += text}
+      args.stdout = {write: (text) => { this.output += text }}
+      args.stderr = {write: (text) => { this.output += text }}
     }
     if (this.debug) {
       args.env['DEBUG'] = '*,-babel'

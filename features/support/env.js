@@ -5,7 +5,6 @@ const endChildProcesses = require('end-child-processes')
 const fs = require('fs-extra')
 const path = require('path')
 const rimraf = require('rimraf')
-require('shelljs/global')
 const {wait} = require('wait')
 
 defineSupportCode(function ({After, Before, setDefaultTimeout}) {

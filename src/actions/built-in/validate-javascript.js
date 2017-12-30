@@ -13,6 +13,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
   args.formatter.output(code)
 
   try {
+    /* eslint-disable no-new, no-new-func */
     new Function(code)
     args.formatter.success('valid Javascript code')
   } catch (e) {

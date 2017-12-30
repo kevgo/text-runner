@@ -2,10 +2,8 @@
 
 const {cyan, magenta, red} = require('chalk')
 const fs = require('fs')
-const mkdirp = require('mkdirp')
 const path = require('path')
 const request = require('request')
-
 
 // Checks for broken hyperlinks
 module.exports = function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}, done: DoneFunction) {
@@ -114,8 +112,4 @@ function isLinkToAnchorInOtherFile (target: string): boolean {
 
 function isLinkToAnchorInSameFile (target: string): boolean {
   return target.startsWith('#')
-}
-
-function isLinkWithoutTarget (target): boolean {
-  return !target
 }

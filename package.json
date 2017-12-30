@@ -27,7 +27,6 @@
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
     "request": "2.83.0",
-    "rimraf": "2.6.2",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",
     "wait": "0.1.0",
@@ -38,7 +37,7 @@
   "devDependencies": {
     "array-flatten": "2.1.1",
     "babel-cli": "6.26.0",
-    "babel-eslint": "8.1.2",
+    "babel-eslint": "7.2.1",
     "babel-plugin-istanbul": "4.1.5",
     "babel-preset-flow": "6.23.0",
     "chai": "4.1.2",
@@ -47,7 +46,10 @@
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
     "eslint-plugin-flowtype": "2.40.1",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-standard": "3.0.1",
     "flow-bin": "0.62.0",
+    "flow-typed": "2.2.3",
     "fs-extra": "5.0.0",
     "greenkeeper-lockfile": "1.12.0",
     "mocha": "4.1.0",
@@ -58,10 +60,12 @@
     "remark-cli": "4.0.0",
     "remark-lint": "6.0.1",
     "remark-preset-lint-recommended": "3.0.1",
+    "rimraf": "2.6.2",
     "shelljs": "0.7.8",
     "standard": "10.0.3",
     "strip-ansi": "4.0.0",
-    "tertestrial": "0.3.2"
+    "tertestrial": "0.3.2",
+    "uuid": "3.1.0"
   },
   "files": [
     "bin/text-run",
@@ -88,9 +92,36 @@
     "test": "bin/spec"
   },
   "standard": {
+    "ignore": [
+      "flow-typed/"
+    ],
     "parser": "babel-eslint",
     "plugins": [
       "flowtype"
+    ],
+    "globals": [
+      "before",
+      "context",
+      "describe",
+      "expect",
+      "it",
+      "Action",
+      "Activity",
+      "ActivityList",
+      "AstNode",
+      "AstNodeList",
+      "Command",
+      "ConfigFileStructure",
+      "Configuration",
+      "Console",
+      "DoneFunction",
+      "ErrnoError",
+      "LinkTarget",
+      "LinkTargetList",
+      "Formatter",
+      "Searcher",
+      "StdStream",
+      "TextRunnerConfig"
     ]
   }
 }

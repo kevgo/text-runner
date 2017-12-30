@@ -95,7 +95,7 @@ echo "Hello world"
     fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), content)
   })
 
-  Given(/^my text\-run configuration contains:$/, function (text) {
+  Given(/^my text-run configuration contains:$/, function (text) {
     fs.appendFileSync(path.join(this.rootDir, 'text-run.yml'), `\n${text}`)
   })
 

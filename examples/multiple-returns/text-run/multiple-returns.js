@@ -1,4 +1,4 @@
-module.exports  = (_, done) => {
+module.exports = (_, done) => {
   done()
   done()
 }

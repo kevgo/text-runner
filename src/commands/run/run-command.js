@@ -2,12 +2,10 @@
 
 const ActionManager = require('../../actions/action-manager.js')
 const async = require('async')
-const fs = require('fs')
 const glob = require('glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
 const mkdirp = require('mkdirp')
 const path = require('path')
-const rimraf = require('rimraf')
 const tmp = require('tmp')
 const debug = require('debug')('text-runner:run-command')
 

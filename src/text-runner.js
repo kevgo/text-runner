@@ -12,7 +12,8 @@ const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
 
 // Tests the documentation in the given directory
-module.exports = function (value: {command: string, file: string, fast: boolean, format: Formatter}, done: DoneFunction) {
+module.exports = function (value: {command: string, file: string, fast: boolean, format: Formatter},
+                           done: DoneFunction) {
   try {
     const configFileName = fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
     const textRunner = new TextRunner({fast: value.fast, format: value.format}, configFileName)

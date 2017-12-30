@@ -10,7 +10,7 @@ module.exports = function (params: {configuration: Configuration, formatter: For
 
   const documentedVersion = parseInt(params.searcher.nodeContent({type: 'text'}, ({nodes, content}) => {
     if (!content) return 'no text given'
-    if (content + 0 === NaN) return 'given Node version is not a number'
+    if (isNaN(content)) return 'given Node version is not a number'
   }))
   params.formatter.refine(`determining whether minimum supported NodeJS version is ${cyan(documentedVersion)}`)
 
@@ -35,7 +35,7 @@ function getSupportedVersion () {
   const content = loadYmlFile('.travis.yml')
   if (!content) throw new Error('.travis.yml is empty')
   const minimumVersion = parseInt(minimum(content.node_js))
-  if (minimumVersion === NaN) throw new Error('listed version is not a number')
+  if (isNaN(minimumVersion)) throw new Error('listed version is not a number')
   return minimumVersion
 }
 

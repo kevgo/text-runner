@@ -1,7 +1,5 @@
 // @flow
 
-const async = require('async')
-const {bold, cyan} = require('chalk')
 const util = require('util')
 
 // Waits until the currently running console command produces the given output

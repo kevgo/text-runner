@@ -1,11 +1,9 @@
 
 // $FlowFixMe
 const callArgs = require('../dist/helpers/call-args')
-const dimConsole = require('dim-console')
 const fs = require('fs')
 const ObservableProcess = require('observable-process')
 const path = require('path')
-const TextRunner = require('../dist/text-runner')
 
 module.exports = function ({configuration, formatter, searcher}, done) {
   formatter.start('verify that markdown works in text-run')

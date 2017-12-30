@@ -1,6 +1,5 @@
 // @flow
 
-const {cyan, red} = require('chalk')
 const jsdiffConsole = require('jsdiff-console')
 
 // Runs the given commands on the console.

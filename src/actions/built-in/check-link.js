@@ -6,7 +6,6 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const request = require('request')
 
-
 // Checks for broken hyperlinks
 module.exports = function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}, done: DoneFunction) {
   const target = params.nodes[0].content

@@ -47,7 +47,10 @@
     "cucumber": "3.2.0",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
+    "eslint-config-standard": "11.0.0-beta.0",
+    "eslint-config-standard-flow": "1.0.1",
     "eslint-plugin-flowtype": "2.40.1",
+    "eslint-plugin-standard": "3.0.1",
     "flow-bin": "0.62.0",
     "fs-extra": "5.0.0",
     "greenkeeper-lockfile": "1.12.0",
@@ -89,6 +92,9 @@
     "test": "bin/spec"
   },
   "standard": {
+    "ignore": [
+      "flow-typed/"
+    ],
     "parser": "babel-eslint",
     "plugins": [
       "flowtype"

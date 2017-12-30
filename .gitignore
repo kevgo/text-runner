@@ -2,8 +2,6 @@ coverage/
 dist
 node_modules
 npm-debug.log
-.nyc_output_api
-.nyc_output_tests
-.nyc_output
+.nyc_output*
 test-dir
 tmp

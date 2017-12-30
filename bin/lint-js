@@ -32,3 +32,6 @@ fi
 
 # run the Flow linter
 node_modules/.bin/flow
+
+# lint package.json
+node_modules/.bin/dependency-lint

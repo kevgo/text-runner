@@ -2,11 +2,6 @@
 
 const {defineSupportCode} = require('cucumber')
 const endChildProcesses = require('end-child-processes')
-const fs = require('fs-extra')
-const glob = require('glob')
-const path = require('path')
-const rimraf = require('rimraf')
-require('shelljs/global')
 const tmp = require('tmp')
 const {wait} = require('wait')
 

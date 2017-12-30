@@ -2,7 +2,6 @@
 
 const {cyan, magenta, red} = require('chalk')
 const fs = require('fs')
-const mkdirp = require('mkdirp')
 const path = require('path')
 const request = require('request')
 
@@ -113,8 +112,4 @@ function isLinkToAnchorInOtherFile (target: string): boolean {
 
 function isLinkToAnchorInSameFile (target: string): boolean {
   return target.startsWith('#')
-}
-
-function isLinkWithoutTarget (target): boolean {
-  return !target
 }

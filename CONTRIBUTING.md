@@ -19,8 +19,10 @@ To debug a single test:
 * enable console output: add the `@verbose` tag
 * enable debugging statements and verbose output: add the `@debug` tag
 
-To determine test coverage:
-* run `bin/coverage`
+To determine test coverage, run `bin/coverage`.
+The coverage in relatively low because TextRunner contains copious amounts of
+defensive checks against invalid user input.
+Not all permutations of that are tested.
 
 
 ## Linting

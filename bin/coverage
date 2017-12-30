@@ -22,7 +22,6 @@ copyAndCleanseDir() {
 
 # prepare
 rm -rf dist
-rm -rf .nyc_output
 rm -rf .nyc_output*
 BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 
@@ -35,15 +34,18 @@ BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc cucumber-js 
 mv .nyc_output .nyc_output_api
 
 # test coverage for CLI specs
-BABEL_ENV=test_coverage NODE_ENV=test ./node_modules/.bin/nyc node dist/cli.js version
-BABEL_ENV=test_coverage NODE_ENV=test ./node_modules/.bin/nyc node dist/cli.js help
-BABEL_ENV=test_coverage NODE_ENV=test ./node_modules/.bin/nyc node dist/cli.js run --fast
+rm -rf tmp
+mkdir tmp
+cd tmp
+BABEL_ENV=test_coverage NODE_ENV=test ../node_modules/.bin/nyc node ../dist/cli.js version
+BABEL_ENV=test_coverage NODE_ENV=test ../node_modules/.bin/nyc node ../dist/cli.js help
+cd ..
 mv .nyc_output .nyc_output_cli
 
 # Join coverage
 mkdir .nyc_output
 copyAndCleanseDir .nyc_output_tests
-copyAndCleanseDir .nyc_output_api
+# copyAndCleanseDir .nyc_output_api
 copyAndCleanseDir .nyc_output_cli
 
 nyc report --reporter=lcov

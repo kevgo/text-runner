@@ -18,10 +18,9 @@
 <a href="https://snyk.io/test/github/Originate/text-runner">
   <img src="https://snyk.io/test/github/Originate/text-runner/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/Originate/text-runner" style="max-width:100%;"/>
 </a>
-
+<br>
 <a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/sticker.svg" alt="Standard JavaScript" width="100"></a>
 
-<br>
 <br>
 
 TextRunner executes unstructured documentation,

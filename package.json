@@ -93,7 +93,8 @@
   },
   "standard": {
     "ignore": [
-      "flow-typed/"
+      "flow-typed/",
+      "src/typedefs"
     ],
     "parser": "babel-eslint",
     "plugins": [

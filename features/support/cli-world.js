@@ -11,40 +11,43 @@ const path = require('path')
 const uuid = require('uuid/v4')
 
 const CliWorld = function () {
-  this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {
-    var args = {}
-    args.cwd = this.rootDir
-    args.env = {}
-    if (this.verbose) {
-      args.stdout = dimConsole.process.stdout
-      args.stderr = dimConsole.process.stderr
-    } else {
-      args.stdout = {write: (text) => { this.output += text }}
-      args.stderr = {write: (text) => { this.output += text }}
-    }
-    if (this.debug) {
-      args.env['DEBUG'] = '*,-babel'
-    }
+  this.execute = async function (params: {command: string, expectError: boolean}) {
+    const result = new Promise((resolve, reject) => {
+      var args = {}
+      args.cwd = this.rootDir
+      args.env = {}
+      if (this.verbose) {
+        args.stdout = dimConsole.process.stdout
+        args.stderr = dimConsole.process.stderr
+      } else {
+        args.stdout = {write: (text) => { this.output += text }}
+        args.stderr = {write: (text) => { this.output += text }}
+      }
+      if (this.debug) {
+        args.env['DEBUG'] = '*,-babel'
+      }
 
-    var fullPath = this.makeFullPath(params.command)
-    if (process.env.NODE_ENV === 'coverage') {
-      fullPath = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + fullPath
-    }
-    this.process = new ObservableProcess(fullPath, args)
-    this.process.on('ended', (exitCode) => {
+      var fullPath = this.makeFullPath(params.command)
       if (process.env.NODE_ENV === 'coverage') {
-        const outputPath = path.join(process.cwd(), '.nyc_output')
-        if (fs.existsSync(outputPath)) {
-          fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+        fullPath = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + fullPath
+      }
+      this.process = new ObservableProcess(fullPath, args)
+      this.process.on('ended', (exitCode) => {
+        if (process.env.NODE_ENV === 'coverage') {
+          const outputPath = path.join(process.cwd(), '.nyc_output')
+          if (fs.existsSync(outputPath)) {
+            fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+          }
         }
-      }
-      this.exitCode = exitCode
-      if (this.verbose) this.output = dimConsole.output
-      if (this.exitCode && !params.expectError) {
-        console.log(this.output)
-      }
-      done()
+        this.exitCode = exitCode
+        if (this.verbose) this.output = dimConsole.output
+        if (this.exitCode && !params.expectError) {
+          console.log(this.output)
+        }
+        resolve()
+      })
     })
+    return result
   }
 
   this.makeFullPath = (command: string): string => {
@@ -109,9 +112,8 @@ const CliWorld = function () {
     expect(new RegExp(expectedText).test(this.process.fullOutput())).to.be.true
   }
 
-  this.verifyRanConsoleCommand = (command: string, done: DoneFunction) => {
+  this.verifyRanConsoleCommand = async (command: string) => {
     expect(this.process.fullOutput()).to.include(`running.md:1-5 -- running console command: ${command}`)
-    done()
   }
 
   this.verifyRanOnlyTests = (filenames: string[]) => {

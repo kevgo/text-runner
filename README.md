@@ -22,7 +22,6 @@
 
 <a href="https://github.com/feross/standard"><img src="https://cdn.rawgit.com/feross/standard/master/sticker.svg" alt="Standard JavaScript" width="100"></a>
 
-<br>
 
 TextRunner executes unstructured documentation,
 similar to what a human reader would do if they were reading and following it.

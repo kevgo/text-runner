@@ -24,22 +24,22 @@ class RunCommand implements Command {
   }
 
   // Tests all files
-  async run (): Promise<?ErrnoError> {
+  async run () {
     await this._run(this._allMarkdownFiles())
   }
 
   // Tests all files in the given directory
-  async runDirectory (dirname: string): Promise<void> {
+  async runDirectory (dirname: string) {
     await this._run(this._markdownFilesInDir(dirname))
   }
 
   // Tests the given file
-  async runFile (filename: string): Promise<void> {
+  async runFile (filename: string) {
     await this._run([filename])
   }
 
   // Tests the files described by the given glob expression
-  async runGlob (fileExpression: string): Promise<void> {
+  async runGlob (fileExpression: string) {
     const files = this._filesMatchingGlob(fileExpression)
     if (files != null) {
       await this._run(files)
@@ -47,17 +47,15 @@ class RunCommand implements Command {
   }
 
   // Runs the currently set up runners.
-  async _run (filenames: string[]): Promise<void> {
+  async _run (filenames: string[]) {
     debug('testing files:')
     for (let filename of filenames) {
       debug(`  * ${filename}`)
     }
     this._createWorkingDir()
     this._createRunners(filenames)
-    var err = await this._prepareRunners()
-    if (err) return err
-    err = await this._executeRunners()
-    return err
+    await this._prepareRunners()
+    await this._executeRunners()
   }
 
   _createRunners (filenames: string[]) {
@@ -137,13 +135,9 @@ class RunCommand implements Command {
     }
   }
 
-  async _prepareRunner (runner): Promise<void> {
-    await runner.prepare()
-  }
-
   async _prepareRunners () {
     for (let runner of this.runners) {
-      await this._prepareRunner
+      await runner.prepare()
     }
   }
 }

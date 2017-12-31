@@ -19,3 +19,5 @@ async function main () {
   endChildProcesses()
   process.exit(err ? 1 : 0)
 }
+
+main()

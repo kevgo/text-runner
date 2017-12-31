@@ -71,18 +71,19 @@ The TextRunner class is the central part of TextRunner.
 It instantiates and runs the other components of the framework.
 Next, TextRunner determines the various configuration settings
 coming from command-line arguments and/or configuration files
-via the [configuration](src/configuration.js).
+via the [configuration](src/configuration.js) class.
 This class is passed to the various subsystems of TextRunner
 in case they need to know configuration settings.
-Based on the configuration, TextRunner determines the command to run.
+Using this configuration class, TextRunner determines the command to run.
 Commands are stored in the [commands](src/commands) folder.
 The most important command is [run](src/commands/run),
 there are others like [help](src/commands/help),
 [setup](src/commands/setup), or [version](src/commands/version).
 
-The `run` command determins the Markdown files to test (via the configuration object),
+The `run` command determines the Markdown files to test,
 and creates a [MarkdownFileRunner](src/commands/run/markdown-file-runner.js) instance for each file.
-Running the files happens in two phases.
+Running the files happens in two phases:
+
 In the first `prepare` phase, each MarkdownFileRunner parses the Markdown content,
 determines the active blocks and link targets in it,
 and creates a list of action instances (methods that execute the active blocks in the file).

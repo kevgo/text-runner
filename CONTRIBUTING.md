@@ -84,7 +84,7 @@ The `run` command determines the Markdown files to test,
 and creates a [MarkdownFileRunner](src/commands/run/markdown-file-runner.js) instance for each file.
 Running the files happens in two phases:
 
-In the first `prepare` phase, each MarkdownFileRunner parses the Markdown content,
+1. In the first `prepare` phase, each MarkdownFileRunner parses the Markdown content,
 determines the active blocks and link targets in it,
 and creates a list of action instances (methods that execute the active blocks in the file).
 It uses several helper classes like
@@ -95,7 +95,7 @@ TextRunner comes with built-in actions for common operations
 in the [actions](src/actions) folder.
 The code base using TextRunner can also add their own action types.
 
-In the second `run` phase the prepared actions are executed one by one.
+2. In the second `run` phase the prepared actions are executed one by one.
 They now have full access to all link targets in all other files.
 The actions signal their progress, success, and failures via
 [formatters](src/formatters).

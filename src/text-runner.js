@@ -12,15 +12,10 @@ const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
 
 // Tests the documentation in the given directory
-module.exports = function (value: {command: string, file: string, fast: boolean, format: Formatter},
-                           done: DoneFunction) {
-  try {
-    const configFileName = fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
-    const textRunner = new TextRunner({fast: value.fast, format: value.format}, configFileName)
-    textRunner.execute(value.command, value.file, done)
-  } catch (e) {
-    done(e)
-  }
+module.exports = async function (value: {command: string, file: string, fast: boolean, format: Formatter}) {
+  const configFileName = fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
+  const textRunner = new TextRunner({fast: value.fast, format: value.format}, configFileName)
+  await textRunner.execute(value.command, value.file)
 }
 
 class TextRunner {
@@ -38,28 +33,28 @@ class TextRunner {
   }
 
   // Tests the documentation according to the given command and arguments
-  execute (command, file, done) {
+  async execute (command, file): Promise<void> {
     if (command === 'run' && hasDirectory(file)) {
-      return this._command('run').runDirectory(file, done)
+      return await this._command('run').runDirectory(file)
     }
 
     if (command === 'run' && isMarkdownFile(file)) {
-      return this._command('run').runFile(file, done)
+      return await this._command('run').runFile(file)
     }
 
     if (command === 'run' && isGlob(file)) {
-      return this._command('run').runGlob(file, done)
+      return await this._command('run').runGlob(file)
     }
 
     if (command === 'run' && file) {
-      return this._missingFile(file, done)
+      return await this._missingFile(file)
     }
 
     if (hasCommand(command)) {
-      return this._command(command).run(done)
+      return await this._command(command).run()
     }
 
-    this._unknownCommand(command, done)
+    return await this._unknownCommand(command)
   }
 
   _command (command) {
@@ -68,14 +63,14 @@ class TextRunner {
     return commandInstance
   }
 
-  _missingFile (filename, done) {
+  async _missingFile (filename) {
     const errorMessage = `file or directory does not exist: ${red(filename)}`
     this.formatter.error(errorMessage)
-    done(new Error(errorMessage))
+    throw new Error('1')
   }
 
-  _unknownCommand (command, done) {
+  async _unknownCommand (command) {
     this.formatter.error(`unknown command: ${red(command)}`)
-    done(new Error(`unknown command: ${command}`))
+    throw new Error('1')
   }
 }

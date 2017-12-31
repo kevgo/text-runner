@@ -24,47 +24,40 @@ class RunCommand implements Command {
   }
 
   // Tests all files
-  run (done: DoneFunction) {
-    this._run(this._allMarkdownFiles(), done)
+  async run (): Promise<?ErrnoError> {
+    await this._run(this._allMarkdownFiles())
   }
 
   // Tests all files in the given directory
-  runDirectory (dirname: string, done: DoneFunction) {
-    this._run(this._markdownFilesInDir(dirname), done)
+  async runDirectory (dirname: string): Promise<void> {
+    await this._run(this._markdownFilesInDir(dirname))
   }
 
   // Tests the given file
-  runFile (filename: string, done: DoneFunction) {
-    this._run([filename], done)
+  async runFile (filename: string): Promise<void> {
+    await this._run([filename])
   }
 
   // Tests the files described by the given glob expression
-  runGlob (fileExpression: string, done: DoneFunction) {
+  async runGlob (fileExpression: string): Promise<void> {
     const files = this._filesMatchingGlob(fileExpression)
     if (files != null) {
-      this._run(files, done)
-    } else {
-      done()
+      await this._run(files)
     }
   }
 
   // Runs the currently set up runners.
-  _run (filenames: string[], done: DoneFunction) {
+  async _run (filenames: string[]): Promise<void> {
     debug('testing files:')
     for (let filename of filenames) {
       debug(`  * ${filename}`)
     }
-    try {
-      this._createWorkingDir()
-      this._createRunners(filenames)
-      this._prepareRunners((err: Error) => {
-        if (err) return done(err)
-        this._executeRunners(done)
-      })
-    } catch (e) {
-      console.log(e)
-      throw (e)
-    }
+    this._createWorkingDir()
+    this._createRunners(filenames)
+    var err = await this._prepareRunners()
+    if (err) return err
+    err = await this._executeRunners()
+    return err
   }
 
   _createRunners (filenames: string[]) {
@@ -128,35 +121,30 @@ class RunCommand implements Command {
     return files
   }
 
-  _executeRunner (runner, done) {
-    try {
-      runner.run(done)
-    } catch (e) {
-      console.log(e)
-      done(e)
+  async _executeRunner (runner): Promise<number> {
+    return await runner.run()
+  }
+
+  async _executeRunners (): Promise<void> {
+    var stepsCount = 0
+    for (let runner of this.runners) {
+      stepsCount += await this._executeRunner(runner)
+    }
+    if (stepsCount === 0) {
+      this.formatter.warning('no activities found')
+    } else {
+      this.formatter.suiteSuccess(stepsCount)
     }
   }
 
-  _executeRunners (done) {
-    async.mapSeries(this.runners, this._executeRunner, (err, results) => {
-      if (err) return done(err)
-      const stepsCount = results.reduce((result, sum) => sum + result, 0)
-      if (stepsCount === 0) {
-        this.formatter.warning('no activities found')
-        done()
-      } else {
-        this.formatter.suiteSuccess(stepsCount)
-        done()
-      }
-    })
+  async _prepareRunner (runner): Promise<void> {
+    await runner.prepare()
   }
 
-  _prepareRunner (runner, done) {
-    runner.prepare(done)
-  }
-
-  _prepareRunners (done) {
-    async.each(this.runners, this._prepareRunner, done)
+  async _prepareRunners () {
+    for (let runner of this.runners) {
+      await this._prepareRunner
+    }
   }
 }
 

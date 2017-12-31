@@ -9,7 +9,7 @@ const debug = require('debug')('start-console-command')
 
 // Runs the given commands on the console.
 // Leaves the command running.
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = async function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('starting a long-running process')
 
   const commandsToRun = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
@@ -35,7 +35,6 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   })
 
   args.formatter.success()
-  done()
 }
 
 function log (stdout) {

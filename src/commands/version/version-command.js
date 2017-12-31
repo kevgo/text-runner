@@ -4,9 +4,8 @@
 const {version} = require('../../../package.json')
 
 class VersionCommand implements Command {
-  run (done: DoneFunction) {
+  async run (): Promise<?ErrnoError> {
     console.log(`TextRunner v${version}`)
-    done()
   }
 }
 

@@ -8,8 +8,14 @@ const textRunner = require('./text-runner')
 
 cliCursor.hide()
 
-textRunner(parseCliArgs(process.argv), (err) => {
-  if (err && err.message !== 1) console.log(red(err))
+async function main () {
+  var err
+  try {
+    await textRunner(parseCliArgs(process.argv))
+  } catch (e) {
+    err = e
+    if (err.message !== '1') console.log(red(err))
+  }
   endChildProcesses()
   process.exit(err ? 1 : 0)
-})
+}

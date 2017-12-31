@@ -93,7 +93,7 @@ Running the files happens in two phases:
   An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
   processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).
   An action is an instantiated block handler function,
-  ready to process the information in one particular block of a document.
+  locked and loaded to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
   in the [actions](src/actions) folder.
   The code base using TextRunner can also add their own action types.
@@ -102,14 +102,14 @@ Running the files happens in two phases:
   via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
 
 2. In the `run` phase, the prepared actions are executed one by one.
-  They now have full access to all link targets in all other files.
+  They now have full access to all link targets in all files.
   The actions signal their progress, success, and failures via
   [formatters](src/formatters).
   TextRunner provides two formatters: a simple [dot formatter](src/formatters/dot-formatter.js)
   and a [detailed formatter](src/formatters/detailed-formatter.js),
   which prints more details as it runs.
   When using TextRunner via its JavaScript API,
-  you have to provide your own formatter to gain access to the stream of test run events.
+  you have to provide your own formatter to gain access to the stream of test outcomes.
   If an action signals test failure
   by throwing an exception or returning an error via callback or Promise,
   TextRunner stops the execution, displays the error via the formatter,

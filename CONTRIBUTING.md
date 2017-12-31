@@ -84,28 +84,34 @@ The `run` command determines the Markdown files to test,
 and creates a [MarkdownFileRunner](src/commands/run/markdown-file-runner.js) instance for each file.
 Running the files happens in two phases:
 
-1. In the first `prepare` phase, each MarkdownFileRunner parses the Markdown content,
-determines the active blocks and link targets in it,
-and creates a list of action instances (methods that execute the active blocks in the file).
-It uses several helper classes like
-[MarkdownParser](src/commands/run/markdown-parser.js) and
-[ActivityListBuilder](src/commands/run/activity-list-builder.js),
-and [LinkTargetBuilder](src/commands/run/link-target-builder.js) for that.
-TextRunner comes with built-in actions for common operations
-in the [actions](src/actions) folder.
-The code base using TextRunner can also add their own action types.
+1. In the `prepare` phase, each MarkdownFileRunner parses the Markdown content
+  using a [MarkdownParser](src/commands/run/markdown-parser.js) instance
+  which converts the complex and noisy Markdown AST
+  (and in the future HTML AST)
+  into a simplified and flattened list of TextRunner-specific [AstNodes](src/typedefs/ast-node.js)
+  that contain only relevant relevant information.
+  An [ActivityListBuilder](src/commands/run/activity-list-builder.js) instance
+  processes this TextRunner-AST into a list of [Activities](src/typedefs/activity.js).
+  An action is an instantiated handler function ready to process
+  the information in a block of a document.
+  TextRunner comes with built-in actions for common operations
+  in the [actions](src/actions) folder.
+  The code base using TextRunner can also add their own action types.
+  While processing the AST,
+  MarkdownFileRunner also builds up a list of [LinkTargets](src/typedefs/link-target.js)
+  via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
 
-2. In the second `run` phase the prepared actions are executed one by one.
-They now have full access to all link targets in all other files.
-The actions signal their progress, success, and failures via
-[formatters](src/formatters).
-TextRunner provides two formatters: a simple [dot formatter](src/formatters/dot-formatter.js)
-and a [detailed formatter](src/formatters/detailed-formatter.js),
-which prints more details as it runs.
-When using TextRunner via its JavaScript API,
-you have to provide your own formatter to gain access to the stream of test run events.
-If an action signals test failure
-by throwing an exception or returning an error via callback or Promise,
-TextRunner stops the execution, displays the error via the formatter,
-and stops with an exit code of 1.
-Otherwise it stops with an exit code of 0 when it reaches the end of its list of actions to perform.
+2. In the `run` phase, the prepared actions are executed one by one.
+  They now have full access to all link targets in all other files.
+  The actions signal their progress, success, and failures via
+  [formatters](src/formatters).
+  TextRunner provides two formatters: a simple [dot formatter](src/formatters/dot-formatter.js)
+  and a [detailed formatter](src/formatters/detailed-formatter.js),
+  which prints more details as it runs.
+  When using TextRunner via its JavaScript API,
+  you have to provide your own formatter to gain access to the stream of test run events.
+  If an action signals test failure
+  by throwing an exception or returning an error via callback or Promise,
+  TextRunner stops the execution, displays the error via the formatter,
+  and stops with an exit code of 1.
+  Otherwise it stops with an exit code of 0 when it reaches the end of its list of actions to perform.

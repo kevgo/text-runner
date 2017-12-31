@@ -69,7 +69,7 @@ and can be used by other tools.
 
 The TextRunner class is the central part of TextRunner.
 It instantiates and runs the other components of the framework.
-Next TextRunner determines the various configuration settings
+Next, TextRunner determines the various configuration settings
 coming from command-line arguments and/or configuration files
 via the [configuration](src/configuration.js).
 This class is passed to the various subsystems of TextRunner

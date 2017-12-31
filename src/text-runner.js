@@ -33,28 +33,20 @@ class TextRunner {
   }
 
   // Tests the documentation according to the given command and arguments
-  async execute (command, file): Promise<void> {
+  async execute (command, file) {
     if (command === 'run' && hasDirectory(file)) {
-      return await this._command('run').runDirectory(file)
+      await this._command('run').runDirectory(file)
+    } else if (command === 'run' && isMarkdownFile(file)) {
+      await this._command('run').runFile(file)
+    } else if (command === 'run' && isGlob(file)) {
+      await this._command('run').runGlob(file)
+    } else if (command === 'run' && file) {
+      await this._missingFile(file)
+    } else if (hasCommand(command)) {
+      await this._command(command).run()
+    } else {
+      await this._unknownCommand(command)
     }
-
-    if (command === 'run' && isMarkdownFile(file)) {
-      return await this._command('run').runFile(file)
-    }
-
-    if (command === 'run' && isGlob(file)) {
-      return await this._command('run').runGlob(file)
-    }
-
-    if (command === 'run' && file) {
-      return await this._missingFile(file)
-    }
-
-    if (hasCommand(command)) {
-      return await this._command(command).run()
-    }
-
-    return await this._unknownCommand(command)
   }
 
   _command (command) {

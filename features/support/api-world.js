@@ -98,18 +98,19 @@ class TestFormatter {
 }
 
 const ApiWorld = function () {
-  this.execute = function (args: {command: string, file: string, fast: boolean, format: Formatter}, done: DoneFunction) {
+  this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter}) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
     this.formatter = new TestFormatter({verbose: this.verbose})
     const formatter: Formatter = args.format || this.formatter
-    textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter}, (error) => {
-      this.error = error
+    try {
+      await textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter})
       this.cwdAfterRun = process.cwd()
       process.chdir(existingDir)
       this.output = this.formatter.text
-      done()
-    })
+    } catch (err) {
+      this.error = err
+    }
   }
 
   this.verifyCallError = (expectedError: ErrnoError) => {

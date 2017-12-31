@@ -22,11 +22,9 @@ module.exports = function (params: {configuration: Configuration, formatter: For
     process.chdir(fullPath)
     params.formatter.success()
   } catch (e) {
-    debug(e)
     if (e.code === 'ENOENT') {
       params.formatter.error(`directory ${directory} not found`)
-    } else {
-      params.formatter.error(e.message)
+      throw new Error('1')
     }
     throw e
   }

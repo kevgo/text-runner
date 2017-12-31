@@ -92,8 +92,8 @@ Running the files happens in two phases:
   that contain only relevant relevant information.
   An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
   processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).
-  An action is an instantiated handler function ready to process
-  the information in a block of a document.
+  An action is an instantiated block handler function,
+  ready to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
   in the [actions](src/actions) folder.
   The code base using TextRunner can also add their own action types.

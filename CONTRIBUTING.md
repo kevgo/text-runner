@@ -90,8 +90,8 @@ Running the files happens in two phases:
   (and in the future HTML AST)
   into a simplified and flattened list of TextRunner-specific [AstNodes](src/typedefs/ast-node.js)
   that contain only relevant relevant information.
-  An [ActivityListBuilder](src/commands/run/activity-list-builder.js) instance
-  processes this TextRunner-AST into a list of [Activities](src/typedefs/activity.js).
+  An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
+  processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).
   An action is an instantiated handler function ready to process
   the information in a block of a document.
   TextRunner comes with built-in actions for common operations

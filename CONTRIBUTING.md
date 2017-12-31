@@ -55,7 +55,8 @@ JavaScript method that TextRunner calls when it wants to execute a block of this
 
 ## Architecture
 
-The architecture is best understood by looking at how a document is tested.
+The architecture is best understood by looking at how a set of documents is tested.
+
 There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows

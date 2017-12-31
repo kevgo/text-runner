@@ -60,6 +60,7 @@ with how a set of documents is tested.
 There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
+
 These CLI executables call the [cli.js](src/cli.js) CLI handler.
 They parse the command-line arguments and call TextRunner's JavaScript API
 in the form of the [TextRunner](src/text-runner.js) class.

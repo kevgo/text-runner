@@ -62,7 +62,7 @@ defineSupportCode(function ({When}) {
 
   When(/^(trying to run|running) the "([^"]*)" command$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
-    this.execute({command, cwd: this.rootDir, expectError})
+    await this.execute({command, cwd: this.rootDir, expectError})
     finish(expectError, (this.error || this.exitCode))
   })
 })

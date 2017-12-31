@@ -105,12 +105,12 @@ const ApiWorld = function () {
     const formatter: Formatter = args.format || this.formatter
     try {
       await textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter})
-      this.cwdAfterRun = process.cwd()
-      process.chdir(existingDir)
-      this.output = this.formatter.text
     } catch (err) {
       this.error = err
     }
+    this.cwdAfterRun = process.cwd()
+    process.chdir(existingDir)
+    this.output = this.formatter.text
   }
 
   this.verifyCallError = (expectedError: ErrnoError) => {

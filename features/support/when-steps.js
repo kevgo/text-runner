@@ -2,65 +2,66 @@
 
 const {defineSupportCode} = require('cucumber')
 const ncp = require('ncp')
-const N = require('nitroglycerin')
+const util = require('util')
 
 defineSupportCode(function ({When}) {
-  When(/^(trying to execute|executing) the "([^"]+)" example$/, {timeout: 100000}, function (tryingText, exampleName, done) {
+  When(/^(trying to execute|executing) the "([^"]+)" example$/, {timeout: 100000}, async function (tryingText, exampleName) {
     const expectError = determineExpectError(tryingText)
-    ncp(`examples/${exampleName}`, this.rootDir, N(() => {
-      this.execute({command: 'run', expectError}, () => {
-        finish(expectError, (this.error || this.exitCode), done)
-      })
-    }))
+    const ncpp = util.promisify(ncp)
+    await ncpp(`examples/${exampleName}`, this.rootDir)
+    await this.execute({command: 'run', expectError})
+    finish(expectError, this.process && (this.process.error || this.process.exitCode))
   })
 
-  When(/^(trying to run|running) "([^"]*)"$/, function (tryingText, command, done) {
+  When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
-    this.execute({command, cwd: this.rootDir, expectError}, () => {
-      finish(expectError, (this.error || this.exitCode), done)
-    })
+    await this.execute({command, cwd: this.rootDir, expectError})
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 
-  When(/^(trying to run|running) text-run$/, function (tryingText, done) {
+  When(/^(trying to run|running) text-run$/, async function (tryingText) {
     const expectError = determineExpectError(tryingText)
-    this.execute({command: 'run', cwd: this.rootDir, expectError}, () => {
-      finish(expectError, (this.error || this.exitCode), done)
-    })
+    try {
+      await this.execute({command: 'run', cwd: this.rootDir, expectError})
+      finish(expectError, this.process && this.process.exitCode)
+    } catch (err) {
+      finish(expectError, err)
+    }
   })
 
-  When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, function (tryingText, optionsText, done) {
+  When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async function (tryingText, optionsText) {
     const expectError = determineExpectError(tryingText)
     const splitted = optionsText.split(' ')
     const command = splitted[0]
     const options = splitted.splice(1)
-    this.execute({command, options, cwd: this.rootDir, expectError}, () => {
-      finish(expectError, (this.error || this.exitCode), done)
-    })
+    await this.execute({command, options, cwd: this.rootDir, expectError})
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 
-  When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, function (tryingText, argsText, done) {
+  When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, async function (tryingText, argsText) {
     const expectError = determineExpectError(tryingText)
     const args = JSON.parse(`{${argsText}}`)
     args.command = 'run'
     args.cwd = this.rootDir
     args.expectError = expectError
-    this.execute(args, () => {
-      finish(expectError, (this.error || this.exitCode), done)
-    })
+    await this.execute(args)
+    finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
   })
 
-  When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, function (tryingText, formatterName, done) {
+  When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, async function (tryingText, formatterName) {
     const expectError = determineExpectError(tryingText)
-    this.execute({command: 'run', cwd: this.rootDir, options: {formatter: formatterName}, expectError}, () => {
-      finish(expectError, (this.error || this.exitCode), done)
-    })
+    try {
+      await this.execute({command: 'run', cwd: this.rootDir, options: {formatter: formatterName}, expectError})
+      finish(expectError, (this.process.exitCode))
+    } catch (err) {
+      finish(expectError, (err))
+    }
   })
 
-  When(/^(trying to run|running) the "([^"]*)" command$/, function (tryingText, command, done) {
+  When(/^(trying to run|running) the "([^"]*)" command$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
-    this.execute({command, cwd: this.rootDir, expectError}, () => {
-      finish(expectError, (this.error || this.exitCode), done)
-    })
+    await this.execute({command, cwd: this.rootDir, expectError})
+    finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
   })
 })
 
@@ -74,10 +75,10 @@ function determineExpectError (tryingText) {
   }
 }
 
-function finish (trying, error, done) {
-  if (trying) {
-    done(!error)
-  } else {
-    done(error)
+function finish (trying, error) {
+  if (trying && !error) {
+    throw new Error('expected error but test succeeded')
+  } else if (!trying && error) {
+    throw error
   }
 }

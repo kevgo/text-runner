@@ -11,9 +11,8 @@ class HelpCommand implements Command {
     this.error = value.error
   }
 
-  run (done: DoneFunction) {
+  async run (): Promise<?ErrnoError> {
     console.log(this._template(this.error))
-    done()
   }
 
   _template (error: string) {

@@ -11,20 +11,20 @@ defineSupportCode(function ({When}) {
     const ncpp = util.promisify(ncp)
     await ncpp(`examples/${exampleName}`, this.rootDir)
     await this.execute({command: 'run', expectError})
-    finish(expectError, (this.error || this.exitCode))
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 
   When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
     await this.execute({command, cwd: this.rootDir, expectError})
-    finish(expectError, (this.error || this.exitCode))
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 
   When(/^(trying to run|running) text-run$/, async function (tryingText) {
     const expectError = determineExpectError(tryingText)
     try {
       await this.execute({command: 'run', cwd: this.rootDir, expectError})
-      finish(expectError, (this.exitCode))
+      finish(expectError, (this.process.exitCode))
     } catch (err) {
       finish(expectError, err)
     }
@@ -36,7 +36,7 @@ defineSupportCode(function ({When}) {
     const command = splitted[0]
     const options = splitted.splice(1)
     await this.execute({command, options, cwd: this.rootDir, expectError})
-    finish(expectError, (this.error || this.exitCode))
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 
   When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, async function (tryingText, argsText) {
@@ -46,15 +46,14 @@ defineSupportCode(function ({When}) {
     args.cwd = this.rootDir
     args.expectError = expectError
     await this.execute(args)
-    finish(expectError, (this.error || this.exitCode))
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 
   When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, async function (tryingText, formatterName) {
     const expectError = determineExpectError(tryingText)
-    var error
     try {
       await this.execute({command: 'run', cwd: this.rootDir, options: {formatter: formatterName}, expectError})
-      finish(expectError, (this.exitCode))
+      finish(expectError, (this.process.exitCode))
     } catch (err) {
       finish(expectError, (err))
     }
@@ -63,7 +62,7 @@ defineSupportCode(function ({When}) {
   When(/^(trying to run|running) the "([^"]*)" command$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
     await this.execute({command, cwd: this.rootDir, expectError})
-    finish(expectError, (this.error || this.exitCode))
+    finish(expectError, (this.process.error || this.process.exitCode))
   })
 })
 

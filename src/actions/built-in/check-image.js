@@ -50,7 +50,6 @@ async function checkRemoteImage (node: AstNode, formatter: Formatter, configurat
     } else {
       throw err
     }
-    throw new Error('1')
   }
 }
 

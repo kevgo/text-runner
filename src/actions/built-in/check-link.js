@@ -43,7 +43,6 @@ async function checkExternalLink (target: string, formatter: Formatter, configur
     } else {
       formatter.warning(`error while checking link to ${magenta(target)}: ${err}`)
     }
-    throw new Error('1')
   }
 }
 

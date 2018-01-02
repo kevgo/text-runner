@@ -24,7 +24,7 @@ class DetailedFormatter extends Formatter {
     this._printActivityHeader(cyan)
   }
 
-  success (activityText: string) {
+  success (activityText?: string) {
     super.success(activityText)
     this._printActivityHeader(green)
   }

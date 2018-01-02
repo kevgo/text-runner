@@ -14,7 +14,7 @@ class DotFormatter extends Formatter {
     return false
   }
 
-  success (activityText: string) {
+  success (activityText?: string) {
     super.success(activityText)
     process.stdout.write(green('.'))
   }

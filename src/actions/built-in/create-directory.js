@@ -17,12 +17,7 @@ module.exports = function (params: {configuration: Configuration, formatter: For
 
   params.formatter.refine(`creating directory ${cyan(directoryName)}`)
   const fullPath = path.join(params.configuration.testDir, directoryName)
-  debug(fullPath)
-  try {
-    mkdirp.sync(fullPath)
-    params.formatter.success()
-  } catch (err) {
-    params.formatter.error(err)
-    throw new Error('1')
-  }
+  debug(`directory to create: ${fullPath}`)
+  mkdirp.sync(fullPath)
+  params.formatter.success()
 }

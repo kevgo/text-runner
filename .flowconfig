@@ -7,6 +7,7 @@ src/typedefs
 
 [lints]
 all=warn
+sketchy-null-string=off
 
 [options]
 include_warnings=true

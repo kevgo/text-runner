@@ -1,64 +1,56 @@
 // @flow
 
 const {cyan, magenta, red} = require('chalk')
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
-const request = require('request')
+const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, configuration: Configuration}, done: DoneFunction) {
+module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, configuration: Configuration}) {
   params.formatter.start(`checking image`)
   const node = params.nodes[0]
   if (node.src == null || node.src === '') {
     params.formatter.error('image tag without source')
-    done(new Error('1'))
-    return
+    throw new Error('1')
   }
   // $FlowFixMe
   const imagePath = path.join(path.dirname(params.filename), node.src)
   params.formatter.refine(`checking image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {
-    checkRemoteImage(node, params.formatter, params.configuration, done)
+    await checkRemoteImage(node, params.formatter, params.configuration)
   } else {
-    checkLocalImage(imagePath, params.formatter, done)
+    await checkLocalImage(imagePath, params.formatter)
   }
 }
 
-function checkLocalImage (imagePath: string, formatter: Formatter, done: DoneFunction) {
-  fs.stat(path.join(process.cwd(), imagePath), (err, stats) => {
-    if (err) {
-      formatter.error(`image ${red(imagePath)} does not exist`)
-      done(new Error(1))
-    } else {
-      formatter.success(`image ${cyan(imagePath)} exists`)
-      done()
-    }
-  })
+async function checkLocalImage (imagePath: string, formatter: Formatter) {
+  try {
+    await fs.stat(path.join(process.cwd(), imagePath))
+    formatter.success(`image ${cyan(imagePath)} exists`)
+  } catch (err) {
+    formatter.error(`image ${red(imagePath)} does not exist`)
+    throw new Error(1)
+  }
 }
 
-function checkRemoteImage (node: AstNode, formatter: Formatter, configuration: Configuration, done: DoneFunction) {
+async function checkRemoteImage (node: AstNode, formatter: Formatter, configuration: Configuration) {
   if (configuration.get('fast')) {
-    // $FlowFixMe
-    formatter.skip(`skipping external image ${node.src}`)
-    done()
+    formatter.skip(`skipping external image ${node.src || ''}`)
     return
   }
 
-  request({url: node.src, timeout: 2000}, (err, response) => {
-    var error: ?ErrnoError = null
-    if (err && err.code === 'ENOTFOUND') {
+  try {
+    await request({url: node.src, timeout: 2000})
+    formatter.success(`image ${cyan(node.src)} exists`)
+  } catch (err) {
+    if (err.statusCode === 404) {
       formatter.warning(`image ${magenta(node.src)} does not exist`)
-    } else if (response && response.statusCode === 404) {
-      formatter.warning(`image ${magenta(node.src)} does not exist`)
-    } else if (err && err.message === 'ESOCKETTIMEDOUT') {
+    } else if (err.message === 'ESOCKETTIMEDOUT') {
       formatter.warning(`image ${magenta(node.src)} timed out`)
-    } else if (err) {
-      error = err
     } else {
-      formatter.success(`image ${cyan(node.src)} exists`)
+      throw err
     }
-    done(error)
-  })
+  }
 }
 
 function isRemoteImage (node: AstNode): boolean {

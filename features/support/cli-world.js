@@ -11,7 +11,10 @@ const path = require('path')
 const uuid = require('uuid/v4')
 
 const CliWorld = function () {
-  this.execute = function (params: {command: string, expectError: boolean}, done: DoneFunction) {
+  // CliWorld provides step implementations that run and test TextRunner
+  // via its command-line interface
+
+  this.execute = async function (params: {command: string, expectError: boolean}) {
     var args = {}
     args.cwd = this.rootDir
     args.env = {}
@@ -19,32 +22,28 @@ const CliWorld = function () {
       args.stdout = dimConsole.process.stdout
       args.stderr = dimConsole.process.stderr
     } else {
-      args.stdout = {write: (text) => { this.output += text }}
-      args.stderr = {write: (text) => { this.output += text }}
+      args.stdout = {write: (text) => { this.output += text; return false }}
+      args.stderr = {write: (text) => { this.output += text; return false }}
     }
     if (this.debug) {
       args.env['DEBUG'] = '*,-babel'
     }
 
-    var fullPath = this.makeFullPath(params.command)
+    args.command = this.makeFullPath(params.command)
     if (process.env.NODE_ENV === 'coverage') {
-      fullPath = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + fullPath
+      args.command = runWithTestCoverage(args.command)
     }
-    this.process = new ObservableProcess(fullPath, args)
-    this.process.on('ended', (exitCode) => {
-      if (process.env.NODE_ENV === 'coverage') {
-        const outputPath = path.join(process.cwd(), '.nyc_output')
-        if (fs.existsSync(outputPath)) {
-          fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
-        }
-      }
-      this.exitCode = exitCode
-      if (this.verbose) this.output = dimConsole.output
-      if (this.exitCode && !params.expectError) {
-        console.log(this.output)
-      }
-      done()
-    })
+    this.process = new ObservableProcess(args)
+    await this.process.waitForEnd()
+    if (process.env.NODE_ENV === 'coverage') {
+      storeTestCoverage()
+    }
+    if (this.verbose) {
+      this.output = dimConsole.output
+    }
+    if (this.process.exitCode && !params.expectError) {
+      console.log(this.output)
+    }
   }
 
   this.makeFullPath = (command: string): string => {
@@ -66,7 +65,7 @@ const CliWorld = function () {
   this.verifyCallError = (expectedError: string) => {
     const output = this.process.fullOutput()
     expect(output).to.include(expectedError)
-    expect(this.exitCode).to.equal(1)
+    expect(this.process.exitCode).to.equal(1)
   }
 
   this.verifyErrormessage = (expectedText: string) => {
@@ -88,7 +87,7 @@ const CliWorld = function () {
     }
     expect(output).to.include(expectedHeader)
     expect(output).to.include(table['ERROR MESSAGE'])
-    expect(this.exitCode).to.equal(parseInt(table['EXIT CODE']))
+    expect(this.process.exitCode).to.equal(parseInt(table['EXIT CODE']))
   }
 
   this.verifyOutput = (table) => {
@@ -109,9 +108,8 @@ const CliWorld = function () {
     expect(new RegExp(expectedText).test(this.process.fullOutput())).to.be.true
   }
 
-  this.verifyRanConsoleCommand = (command: string, done: DoneFunction) => {
+  this.verifyRanConsoleCommand = (command: string) => {
     expect(this.process.fullOutput()).to.include(`running.md:1-5 -- running console command: ${command}`)
-    done()
   }
 
   this.verifyRanOnlyTests = (filenames: string[]) => {
@@ -153,3 +151,16 @@ defineSupportCode(function ({setWorldConstructor}) {
     setWorldConstructor(CliWorld)
   }
 })
+
+// Returns the command that runs the given command with test coverage
+function runWithTestCoverage (command: string): string {
+  return path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + command
+}
+
+// store the test coverage data before running the next test that would overwrite it
+function storeTestCoverage () {
+  const outputPath = path.join(process.cwd(), '.nyc_output')
+  if (fs.existsSync(outputPath)) {
+    fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+  }
+}

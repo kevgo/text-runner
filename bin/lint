@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 set -e
 
-bin/build
-node_modules/o-tools/bin/lint
-bin/lint-md
 bin/lint-js
+bin/lint-md

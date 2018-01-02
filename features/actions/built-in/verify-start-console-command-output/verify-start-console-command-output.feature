@@ -16,7 +16,7 @@ Feature: verifying the output of the last console command
         console.log('one');
         console.log('two');
         console.log('three');
-        setTimeout(function() {}, 10000)
+        setTimeout(function() {}, 1000)
       }, 100)
       """
     And my source code contains the file "verify-output.md" with content:

@@ -1,11 +1,9 @@
-
-// $FlowFixMe
 const callArgs = require('../dist/helpers/call-args')
 const fs = require('fs')
 const ObservableProcess = require('observable-process')
 const path = require('path')
 
-module.exports = function ({configuration, formatter, searcher}, done) {
+module.exports = async function ({configuration, formatter, searcher}) {
   formatter.start('verify that markdown works in text-run')
 
   const markdown = searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
@@ -23,13 +21,11 @@ module.exports = function ({configuration, formatter, searcher}, done) {
 
   var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
-  const processor = new ObservableProcess(callArgs(textRunPath), {cwd: configuration.testDir, stdout: {write: formatter.output}, stderr: {write: formatter.output}})
-  processor.on('ended', (exitCode) => {
-    if (exitCode === 0) {
-      formatter.success()
-    } else {
-      formatter.error(`text-run exited with code ${exitCode} when processing this markdown block`)
-    }
-    done(exitCode)
-  })
+  const processor = new ObservableProcess({commands: callArgs(textRunPath), cwd: configuration.testDir, stdout: {write: formatter.output}, stderr: {write: formatter.output}})
+  await processor.waitForEnd()
+  if (processor.exitCode === 0) {
+    formatter.success()
+  } else {
+    formatter.error(`text-run exited with code ${processor.exitCode} when processing this markdown block`)
+  }
 }

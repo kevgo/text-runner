@@ -16,18 +16,13 @@ module.exports = function (params: {configuration: Configuration, formatter: For
 
   params.formatter.refine(`changing into the ${bold(cyan(directory))} directory`)
   params.formatter.output(`cd ${directory}`)
+  const fullPath = path.join(params.configuration.testDir, directory)
+  debug(`changing into directory '${fullPath}`)
   try {
-    const fullPath = path.join(params.configuration.testDir, directory)
-    debug(fullPath)
     process.chdir(fullPath)
     params.formatter.success()
   } catch (e) {
-    debug(e)
-    if (e.code === 'ENOENT') {
-      params.formatter.error(`directory ${directory} not found`)
-    } else {
-      params.formatter.error(e.message)
-    }
+    if (e.code === 'ENOENT') throw new Error(`directory ${directory} not found`)
     throw e
   }
 }

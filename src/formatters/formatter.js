@@ -1,14 +1,12 @@
 // @flow
 
+import type {WriteStream} from 'observable-process'
+
 const {bold, green, magenta} = require('chalk')
 const Time = require('time-diff')
 
 type Console = {
   log(text :string): void
-}
-
-type Stream = {
-  write(text :string): void
 }
 
 // Base class for formatters
@@ -20,8 +18,8 @@ class Formatter {
   filePath: string       // the path of the documentation file that is currently processed
   filesCount: number
   startLine: number      // the line within the documentation file at which the currently processed block starts
-  stderr: Stream
-  stdout: Stream
+  stderr: WriteStream
+  stdout: WriteStream
   stepsCount: number
   time: Time
   warningMessage: string
@@ -53,7 +51,7 @@ class Formatter {
     this.errorMessage = errorMessage
   }
 
-  output (text: string) {
+  output (text: string | Buffer): boolean {
     throw new Error('Implement in subclass')
   }
 
@@ -87,7 +85,7 @@ class Formatter {
 
   // called when the last started activity finished successful
   // optionally allows to define the final text to be displayed
-  success (activityText: string) {
+  success (activityText?: string) {
     if (activityText) this.activityText = activityText
   }
 

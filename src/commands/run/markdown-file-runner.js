@@ -2,13 +2,13 @@
 
 const ActionManager = require('../../actions/action-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
-const async = require('async')
 const {cyan} = require('chalk')
-const fs = require('fs')
+const delay = require('delay')
+const fs = require('fs-extra')
 const LinkTargetBuilder = require('./link-target-builder')
 const MarkdownParser = require('./markdown-parser')
 const path = require('path')
-const {wait} = require('wait')
+const util = require('util')
 
 // Runs the given Markdown file
 class MarkdownFileRunner {
@@ -36,59 +36,51 @@ class MarkdownFileRunner {
   }
 
   // Prepares this runner
-  prepare (done: DoneFunction) {
+  async prepare (): Promise<void> {
     // Need to start the file here
     // so that the formatter has the filename
     // in case there are errors preparing.
-    fs.readFile(this.filePath, {encoding: 'utf8'}, (err: ?ErrnoError, markdownText: string) => {
-      if (err) return done(err)
-      try {
-        markdownText = markdownText.trim()
-        if (markdownText.length === 0) {
-          this.formatter.startFile(this.filePath)
-          this.formatter.error(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
-          return done(new Error(1))
-        }
-        const astNodeList = this.parser.parse(markdownText)
-        const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)
-        this.runData = this.activityListBuilder.build(linkTargets)
-        done()
-      } catch (e) {
-        if (e.message !== '1') console.log(e)
-        done(e)
-      }
-    })
+    var markdownText = await fs.readFile(this.filePath, {encoding: 'utf8'})
+    markdownText = markdownText.trim()
+    if (markdownText.length === 0) {
+      this.formatter.startFile(this.filePath)
+      this.formatter.error(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
+      throw new Error('1')
+    }
+    const astNodeList = this.parser.parse(markdownText)
+    const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)
+    this.runData = this.activityListBuilder.build(linkTargets)
   }
 
   // Runs this runner
   // (after it has been prepared)
-  run (done: (err: ?ErrnoError, count: number) => void) {
-    async.mapSeries(this.runData, this._runBlock, (err) => {
-      done(err, this.runData.length)
-    })
+  async run (): Promise<number> {
+    for (let block of this.runData) {
+      await this._runBlock(block)
+    }
+    return this.runData.length
   }
 
-  _runBlock (block, done) {
+  async _runBlock (block) {
     // waiting 1 ms here to give Node a chance to run queued up logic from previous steps
-    wait(1, () => {
-      try {
-        block.formatter.startFile(block.filename)
-        block.formatter.setLines(block.startLine, block.endLine)
-        if (block.runner.length === 1) {
-          // synchronous action method or returns a promise
-          const outcome = block.runner(block)
-          Promise.resolve(outcome).then(done).catch(function (err) {
-            throw err
-          })
-        } else {
-          // asynchronous action method
-          block.runner(block, done)
-        }
-      } catch (e) {
-        block.formatter.error(e)
-        done(e)
+    await delay(1)
+    block.formatter.startFile(block.filename)
+    block.formatter.setLines(block.startLine, block.endLine)
+    try {
+      if (block.runner.length === 1) {
+      // synchronous action method or returns a promise
+        await Promise.resolve(block.runner(block))
+      } else {
+      // asynchronous action method
+        const promisified = util.promisify(block.runner)
+        await promisified(block)
       }
-    })
+    } catch (err) {
+      if (err.message === '1') throw err
+      if (!err.message) throw err
+      block.formatter.error(err.message)
+      throw new Error('1')
+    }
   }
 }
 

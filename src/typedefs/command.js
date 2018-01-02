@@ -1,5 +1,5 @@
 // @flow
 
-interface Command {
-  run(done: DoneFunction): void
+declare interface Command {
+  run(): Promise<?ErrnoError>
 }

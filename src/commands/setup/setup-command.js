@@ -14,11 +14,10 @@ class SetupCommand implements Command {
     this.actions = value.actions
   }
 
-  run (done: DoneFunction) {
+  async run (): Promise<?ErrnoError> {
     this.formatter.start(`Create configuration file ${cyan('text-run.yml')} with default values`)
     this.configuration.createDefault()
     this.formatter.success()
-    done()
   }
 }
 

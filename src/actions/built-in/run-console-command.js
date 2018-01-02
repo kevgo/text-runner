@@ -1,23 +1,24 @@
 // @flow
 
+import type {WriteStream} from 'observable-process'
+
 const callArgs = require('../../helpers/call-args')
 const {cyan} = require('chalk')
+const debug = require('debug')('textrun:actions:run-console-command')
 const ObservableProcess = require('observable-process')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
+const util = require('util')
 const xml2js = require('xml2js')
-const debug = require('debug')('textrun:actions:run-console-command')
 
 type ProcessInput = {
   textToWait: ?string,
   input: string
 }
 
-type ProcessInputList = Array<ProcessInput>
-
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}, done: DoneFunction) {
+module.exports = async function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   params.formatter.start('running console command')
 
   const commandsToRun = params.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
@@ -32,60 +33,53 @@ module.exports = function (params: {configuration: Configuration, formatter: For
     .join(' && ')
 
   const inputText = params.searcher.nodeContent({type: 'htmlblock'})
-  getInput(inputText, params.formatter, (input) => {
-    params.formatter.refine(`running console command: ${cyan(commandsToRun)}`)
-    global.runConsoleCommandOutput = ''
-    const processor = new ObservableProcess(callArgs(commandsToRun), {
-      cwd: params.configuration.testDir,
-      stdout: log(params.formatter.stdout),
-      stderr: params.formatter.stderr})
-    processor.on('ended', (err) => {
-      if (err) {
-        params.formatter.error(err)
-      } else {
-        params.formatter.success()
-      }
-      done(err)
-    })
-
-    for (let inputLine of input) {
-      enter(processor, inputLine)
-    }
+  const input = await getInput(inputText, params.formatter)
+  params.formatter.refine(`running console command: ${cyan(commandsToRun)}`)
+  // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
+  global.runConsoleCommandOutput = ''
+  const processor = new ObservableProcess({
+    commands: callArgs(commandsToRun),
+    cwd: params.configuration.testDir,
+    stdout: log(params.formatter.stdout),
+    stderr: params.formatter.stderr
   })
+
+  for (let inputLine of input) {
+    enter(processor, inputLine)
+  }
+
+  try {
+    await processor.waitForEnd()
+    params.formatter.success()
+  } catch (err) {
+    params.formatter.error(err)
+  }
 }
 
-function enter (processor: ObservableProcess, input: ProcessInput) {
-  if (input.textToWait == null) {
+async function enter (processor: ObservableProcess, input: ProcessInput) {
+  if (!input.textToWait) {
     processor.enter(input.input)
   } else {
-    processor.wait(input.textToWait, function () {
-      processor.enter(input.input)
-    })
+    await processor.waitForText(input.textToWait)
+    processor.enter(input.input)
   }
 }
 
-function getInput (text: string, formatter: Formatter, done: (input: ProcessInputList) => void) {
-  if (!text) {
-    done([])
-    return
-  }
-  xml2js.parseString(text, (err, xml) => {
-    if (err) {
-      formatter.error(err)
-      return
-    }
-    var result = []
-    for (let tr of xml.table.tr) {
-      if (tr.td) {
-        if (tr.td.length === 1) {
-          result.push({ textToWait: null, input: tr.td[0] })
-        } else {
-          result.push({textToWait: tr.td[0], input: tr.td[tr.td.length - 1]})
-        }
+async function getInput (text: string, formatter: Formatter) {
+  if (!text) return []
+  const xml2jsp = util.promisify(xml2js.parseString)
+  const xml = await xml2jsp(text)
+  var result = []
+  for (let tr of xml.table.tr) {
+    if (tr.td) {
+      if (tr.td.length === 1) {
+        result.push({ textToWait: null, input: tr.td[0] })
+      } else {
+        result.push({textToWait: tr.td[0], input: tr.td[tr.td.length - 1]})
       }
     }
-    done(result)
-  })
+  }
+  return result
 }
 
 function makeGlobal (configuration: Configuration) {
@@ -109,11 +103,11 @@ function makeGlobal (configuration: Configuration) {
   }
 }
 
-function log (stdout) {
+function log (stdout): WriteStream {
   return {
     write: (text) => {
       global.runConsoleCommandOutput += text
-      stdout.write(text)
+      return stdout.write(text)
     }
   }
 }

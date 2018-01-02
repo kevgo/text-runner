@@ -10,7 +10,9 @@ class DotFormatter extends Formatter {
     console.log(red(errorMessage))
   }
 
-  output (text: string) {}
+  output (text: string | Buffer): boolean {
+    return false
+  }
 
   success (activityText: string) {
     super.success(activityText)

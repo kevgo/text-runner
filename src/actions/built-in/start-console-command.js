@@ -1,5 +1,7 @@
 // @flow
 
+import type {WriteStream} from 'observable-process'
+
 const callArgs = require('../../helpers/call-args')
 const {bold, cyan} = require('chalk')
 const ObservableProcess = require('observable-process')
@@ -25,23 +27,23 @@ module.exports = async function (args: {configuration: Configuration, formatter:
 
   args.formatter.refine(`starting a long-running process: ${bold(cyan(commandsToRun))}`)
   global.startConsoleCommandOutput = ''
-  global.runningProcess = new ObservableProcess(callArgs(commandsToRun), {
+  global.runningProcess = new ObservableProcess({
+    commands: callArgs(commandsToRun),
     cwd: args.configuration.testDir,
     stdout: log(args.formatter.stdout),
-    stderr: args.formatter.stderr})
-  global.runningProcess.on('ended', (err) => {
-    global.runningProcessEnded = true
-    global.runningProcessError = err
+    stderr: args.formatter.stderr
   })
+  await global.runningProcess.waitForEnd()
+  global.runningProcessEnded = true
 
   args.formatter.success()
 }
 
-function log (stdout) {
+function log (stdout): WriteStream {
   return {
     write: (text) => {
       global.startConsoleCommandOutput += text
-      stdout.write(text)
+      return stdout.write(text)
     }
   }
 }

@@ -1,5 +1,7 @@
 // @flow
 
+import type {WriteStream} from 'observable-process'
+
 const {bold, green, magenta} = require('chalk')
 const Time = require('time-diff')
 
@@ -20,8 +22,8 @@ class Formatter {
   filePath: string       // the path of the documentation file that is currently processed
   filesCount: number
   startLine: number      // the line within the documentation file at which the currently processed block starts
-  stderr: Stream
-  stdout: Stream
+  stderr: WriteStream
+  stdout: WriteStream
   stepsCount: number
   time: Time
   warningMessage: string
@@ -53,7 +55,7 @@ class Formatter {
     this.errorMessage = errorMessage
   }
 
-  output (text: string) {
+  output (text: string | Buffer): boolean {
     throw new Error('Implement in subclass')
   }
 

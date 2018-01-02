@@ -3351,9 +3351,9 @@ nyc@11.4.1:
     yargs "^10.0.3"
     yargs-parser "^8.0.0"
 
-o-tools@0.8.47:
-  version "0.8.47"
-  resolved "https://registry.yarnpkg.com/o-tools/-/o-tools-0.8.47.tgz#2132a311f57fc0e9f6448b60b2d4c9ee89929705"
+o-tools@0.10.2:
+  version "0.10.2"
+  resolved "https://registry.yarnpkg.com/o-tools/-/o-tools-0.10.2.tgz#5ae37c8cfd46c2370ad4adb2a49d1ca21a110f3e"
   dependencies:
     chalk "1.1.3"
     dependency-lint "4.3.1"
@@ -3419,15 +3419,15 @@ observable-process@3.2.2:
     string-argv "0.0.2"
     text-stream-search "1.2.3"
 
-observable-process@3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-3.4.2.tgz#384d23bb255555c5d42c6d90d42f92c06c23fa49"
+observable-process@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-4.0.0.tgz#c557761de0fffd392cf7421f35749d500c77fcd6"
   dependencies:
     debug "3.1.0"
     extend "3.0.1"
     merge-stream "1.0.1"
     string-argv "0.0.2"
-    text-stream-search "1.2.5"
+    text-stream-search "2.1.1"
 
 once@^1.3.0, once@^1.3.3:
   version "1.4.0"
@@ -4812,9 +4812,9 @@ text-stream-accumulator@0.3.3:
   dependencies:
     debug "2.6.0"
 
-text-stream-accumulator@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/text-stream-accumulator/-/text-stream-accumulator-1.0.0.tgz#e4529e0b4ee84e7f9bde3f9ed909bf8020b64a85"
+text-stream-accumulator@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/text-stream-accumulator/-/text-stream-accumulator-1.2.0.tgz#cd8bb4ae25eaac6bf8ece44678a14da6ee924d14"
   dependencies:
     debug "3.1.0"
 
@@ -4825,12 +4825,13 @@ text-stream-search@1.2.3:
     debug "2.6.0"
     text-stream-accumulator "0.3.3"
 
-text-stream-search@1.2.5:
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/text-stream-search/-/text-stream-search-1.2.5.tgz#9adad50f629685948f4ab17523341c8097302de0"
+text-stream-search@2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/text-stream-search/-/text-stream-search-2.1.1.tgz#ecbbe08e0e7eabccc03ddd72e729f6de5bb406be"
   dependencies:
     debug "3.1.0"
-    text-stream-accumulator "1.0.0"
+    delay "2.0.0"
+    text-stream-accumulator "1.2.0"
 
 text-table@^0.2.0, text-table@~0.2.0:
   version "0.2.0"

@@ -14,8 +14,9 @@ class DetailedFormatter extends Formatter {
     this._printActivityHeader(bold, red)
   }
 
-  output (text: string) {
-    console.log(dim(text.trim()))
+  output (text: string | Buffer): boolean {
+    console.log(dim(text.toString().trim()))
+    return false
   }
 
   skip (activityText: string) {

@@ -11,43 +11,37 @@ const path = require('path')
 const uuid = require('uuid/v4')
 
 const CliWorld = function () {
-  this.execute = async function (params: {command: string, expectError: boolean}) {
-    const result = new Promise((resolve, reject) => {
-      var args = {}
-      args.cwd = this.rootDir
-      args.env = {}
-      if (this.verbose) {
-        args.stdout = dimConsole.process.stdout
-        args.stderr = dimConsole.process.stderr
-      } else {
-        args.stdout = {write: (text) => { this.output += text }}
-        args.stderr = {write: (text) => { this.output += text }}
-      }
-      if (this.debug) {
-        args.env['DEBUG'] = '*,-babel'
-      }
+  // CliWorld provides step implementations that run and test TextRunner
+  // via its command-line CLI
 
-      var fullPath = this.makeFullPath(params.command)
-      if (process.env.NODE_ENV === 'coverage') {
-        fullPath = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + fullPath
-      }
-      this.process = new ObservableProcess(fullPath, args)
-      this.process.on('ended', (exitCode) => {
-        if (process.env.NODE_ENV === 'coverage') {
-          const outputPath = path.join(process.cwd(), '.nyc_output')
-          if (fs.existsSync(outputPath)) {
-            fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
-          }
-        }
-        this.exitCode = exitCode
-        if (this.verbose) this.output = dimConsole.output
-        if (this.exitCode && !params.expectError) {
-          console.log(this.output)
-        }
-        resolve()
-      })
-    })
-    return result
+  this.execute = async function (params: {command: string, expectError: boolean}) {
+    var args = {}
+    args.cwd = this.rootDir,
+    args.env = {}
+    if (this.verbose) {
+      args.stdout = dimConsole.process.stdout
+      args.stderr = dimConsole.process.stderr
+    } else {
+      args.stdout = {write: (text) => { this.output += text; return false }}
+      args.stderr = {write: (text) => { this.output += text; return false }}
+    }
+    if (this.debug) {
+      args.env['DEBUG'] = '*,-babel'
+    }
+
+    args.command = this.makeFullPath(params.command)
+    if (process.env.NODE_ENV === 'coverage') {
+      args.command = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + args.command
+    }
+    this.process = new ObservableProcess(args)
+    await this.process.waitForEnd()
+    if (process.env.NODE_ENV === 'coverage') {
+      storeTestCoverage()
+    }
+    if (this.verbose) this.output = dimConsole.output
+    if (this.process.exitCode && !params.expectError) {
+      console.log(this.output)
+    }
   }
 
   this.makeFullPath = (command: string): string => {
@@ -69,7 +63,7 @@ const CliWorld = function () {
   this.verifyCallError = (expectedError: string) => {
     const output = this.process.fullOutput()
     expect(output).to.include(expectedError)
-    expect(this.exitCode).to.equal(1)
+    expect(this.process.exitCode).to.equal(1)
   }
 
   this.verifyErrormessage = (expectedText: string) => {
@@ -91,7 +85,7 @@ const CliWorld = function () {
     }
     expect(output).to.include(expectedHeader)
     expect(output).to.include(table['ERROR MESSAGE'])
-    expect(this.exitCode).to.equal(parseInt(table['EXIT CODE']))
+    expect(this.process.exitCode).to.equal(parseInt(table['EXIT CODE']))
   }
 
   this.verifyOutput = (table) => {
@@ -155,3 +149,11 @@ defineSupportCode(function ({setWorldConstructor}) {
     setWorldConstructor(CliWorld)
   }
 })
+
+function storeTestCoverage () {
+  // store the test coverage data before running the next test that would overwrite it
+  const outputPath = path.join(process.cwd(), '.nyc_output')
+  if (fs.existsSync(outputPath)) {
+    fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+  }
+}

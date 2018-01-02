@@ -25,7 +25,7 @@ module.exports = async function (params: {filename: string, formatter: Formatter
 
 async function checkLocalImage (imagePath: string, formatter: Formatter) {
   try {
-    const stats = await fs.stat(path.join(process.cwd(), imagePath))
+    await fs.stat(path.join(process.cwd(), imagePath))
     formatter.success(`image ${cyan(imagePath)} exists`)
   } catch (err) {
     formatter.error(`image ${red(imagePath)} does not exist`)

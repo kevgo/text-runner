@@ -10,7 +10,7 @@ defineSupportCode(function ({When}) {
     const ncpp = util.promisify(ncp)
     await ncpp(`examples/${exampleName}`, this.rootDir)
     await this.execute({command: 'run', expectError})
-    finish(expectError, (this.process.error || this.process.exitCode))
+    finish(expectError, this.process && (this.process.error || this.process.exitCode))
   })
 
   When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command) {
@@ -23,7 +23,7 @@ defineSupportCode(function ({When}) {
     const expectError = determineExpectError(tryingText)
     try {
       await this.execute({command: 'run', cwd: this.rootDir, expectError})
-      finish(expectError, (this.process.exitCode))
+      finish(expectError, this.process && this.process.exitCode)
     } catch (err) {
       finish(expectError, err)
     }
@@ -45,7 +45,7 @@ defineSupportCode(function ({When}) {
     args.cwd = this.rootDir
     args.expectError = expectError
     await this.execute(args)
-    finish(expectError, (this.process.error || this.process.exitCode))
+    finish(expectError, this.error || this.process && (this.process.error || this.process.exitCode))
   })
 
   When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, async function (tryingText, formatterName) {
@@ -61,7 +61,7 @@ defineSupportCode(function ({When}) {
   When(/^(trying to run|running) the "([^"]*)" command$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
     await this.execute({command, cwd: this.rootDir, expectError})
-    finish(expectError, (this.process.error || this.process.exitCode))
+    finish(expectError, this.error || this.process && (this.process.error || this.process.exitCode))
   })
 })
 

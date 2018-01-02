@@ -12,7 +12,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
 const unique = require('array-unique')
-const {waitUntil} = require('wait')
+const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
   activities: string[]
@@ -98,6 +98,9 @@ class TestFormatter {
 }
 
 const ApiWorld = function () {
+  // ApiWorld provides step implementations that run and test TextRunner
+  // via its Javascript API
+
   this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter}) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
@@ -151,8 +154,8 @@ const ApiWorld = function () {
     if (table.WARNING) expect(standardizePaths(this.formatter.warnings)).to.include(table.WARNING)
   }
 
-  this.verifyRanConsoleCommand = (command: string, done: DoneFunction) => {
-    waitUntil(() => this.formatter.activities.includes(`running console command: ${command}`), done)
+  this.verifyRanConsoleCommand = async (command: string) => {
+    await waitUntil(() => this.formatter.activities.includes(`running console command: ${command}`))
   }
 
   this.verifyRanOnlyTests = (files: string[]) => {

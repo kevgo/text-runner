@@ -1,11 +1,12 @@
 // @flow
 
 const {defineSupportCode} = require('cucumber')
+const delay = require('delay')
 const endChildProcesses = require('end-child-processes')
 const fs = require('fs-extra')
 const path = require('path')
 const rimraf = require('rimraf')
-const {wait} = require('wait')
+const util = require('util')
 
 defineSupportCode(function ({After, Before, setDefaultTimeout}) {
   // need such a high timeout because test coverage takes time to start up
@@ -17,17 +18,14 @@ defineSupportCode(function ({After, Before, setDefaultTimeout}) {
     fs.mkdirSync(this.rootDir)
   })
 
-  After(function (scenario, done: DoneFunction) {
-    endChildProcesses(() => {
-      if (scenario.result.status === 'failed') {
-        console.log('\ntest artifacts are located in', this.rootDir)
-        done()
-      } else {
-        wait(1, () => {
-          rimraf(this.rootDir, {}, done)
-        })
-      }
-    })
+  After(async function (scenario) {
+    await util.promisify(endChildProcesses)
+    if (scenario.result.status === 'failed') {
+      console.log('\ntest artifacts are located in', this.rootDir)
+    } else {
+      await delay(1)
+      rimraf.sync(this.rootDir)
+    }
   })
 
   Before({tags: '@verbose'}, function () {

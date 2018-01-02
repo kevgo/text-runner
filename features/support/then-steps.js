@@ -53,7 +53,7 @@ defineSupportCode(function ({Then, When}) {
     this.verifyRanOnlyTests(table.raw())
   })
 
-  Then(/^it runs the console command "([^"]*)"$/, function (command) {
+  Then(/^it runs the console command "([^"]*)"$/, async function (command) {
     this.verifyRanConsoleCommand(command)
   })
 

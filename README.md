@@ -18,9 +18,7 @@
 <a href="https://snyk.io/test/github/Originate/text-runner">
   <img src="https://snyk.io/test/github/Originate/text-runner/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/Originate/text-runner" style="max-width:100%;"/>
 </a>
-
-<br>
-<br>
+<br><br>
 
 TextRunner executes unstructured documentation,
 similar to what a human reader would do if they were reading and following it.

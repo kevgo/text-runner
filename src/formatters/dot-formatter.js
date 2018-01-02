@@ -16,9 +16,11 @@ class DotFormatter extends Formatter {
     console.log(output)
   }
 
-  output (text: string) {}
+  output (text: string | Buffer): boolean {
+    return false
+  }
 
-  success (activityText: string) {
+  success (activityText?: string) {
     super.success(activityText)
     process.stdout.write(green('.'))
   }

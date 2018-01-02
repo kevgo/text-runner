@@ -13,6 +13,7 @@ module.exports = function (params: {configuration: Configuration, formatter: For
     if (nodes.length > 1) return `several names given: ${nodes.map((node) => node.content).map((a) => cyan(a)).join(' and ')}`
     if (!content) return 'empty name given for directory to create'
   })
+  debug(`directory to create: ${directoryName}`)
 
   params.formatter.refine(`creating directory ${cyan(directoryName)}`)
   const fullPath = path.join(params.configuration.testDir, directoryName)

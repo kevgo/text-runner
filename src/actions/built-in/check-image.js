@@ -35,20 +35,15 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
 
 async function checkRemoteImage (node: AstNode, formatter: Formatter, configuration: Configuration) {
   if (configuration.get('fast')) {
-    // $FlowFixMe
-    formatter.skip(`skipping external image ${node.src}`)
+    formatter.skip(`skipping external image ${node.src || ''}`)
     return
   }
 
   try {
-    const response = request({url: node.src, timeout: 2000})
-    if (response && response.statusCode === 404) {
-      formatter.warning(`image ${magenta(node.src)} does not exist`)
-    } else {
-      formatter.success(`image ${cyan(node.src)} exists`)
-    }
+    const response = await request({url: node.src, timeout: 2000})
+    formatter.success(`image ${cyan(node.src)} exists`)
   } catch (err) {
-    if (err.code === 'ENOTFOUND') {
+    if (err.statusCode === 404) {
       formatter.warning(`image ${magenta(node.src)} does not exist`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
       formatter.warning(`image ${magenta(node.src)} timed out`)

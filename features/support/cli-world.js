@@ -12,7 +12,7 @@ const uuid = require('uuid/v4')
 
 const CliWorld = function () {
   // CliWorld provides step implementations that run and test TextRunner
-  // via its command-line CLI
+  // via its command-line interface
 
   this.execute = async function (params: {command: string, expectError: boolean}) {
     var args = {}

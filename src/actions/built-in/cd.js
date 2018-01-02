@@ -17,7 +17,7 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   params.formatter.refine(`changing into the ${bold(cyan(directory))} directory`)
   params.formatter.output(`cd ${directory}`)
   const fullPath = path.join(params.configuration.testDir, directory)
-  debug(fullPath)
+  debug(`changing into directory '${fullPath}`)
   try {
     process.chdir(fullPath)
     params.formatter.success()

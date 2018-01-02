@@ -12,7 +12,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
 const unique = require('array-unique')
-const {waitUntil} = require('wait')
+const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
   activities: string[]
@@ -98,18 +98,22 @@ class TestFormatter {
 }
 
 const ApiWorld = function () {
-  this.execute = function (args: {command: string, file: string, fast: boolean, format: Formatter}, done: DoneFunction) {
+  // ApiWorld provides step implementations that run and test TextRunner
+  // via its Javascript API
+
+  this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter}) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
     this.formatter = new TestFormatter({verbose: this.verbose})
     const formatter: Formatter = args.format || this.formatter
-    textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter}, (error) => {
-      this.error = error
-      this.cwdAfterRun = process.cwd()
-      process.chdir(existingDir)
-      this.output = this.formatter.text
-      done()
-    })
+    try {
+      await textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter})
+    } catch (err) {
+      this.error = err
+    }
+    this.cwdAfterRun = process.cwd()
+    process.chdir(existingDir)
+    this.output = this.formatter.text
   }
 
   this.verifyCallError = (expectedError: ErrnoError) => {
@@ -150,8 +154,8 @@ const ApiWorld = function () {
     if (table.WARNING) expect(standardizePaths(this.formatter.warnings)).to.include(table.WARNING)
   }
 
-  this.verifyRanConsoleCommand = (command: string, done: DoneFunction) => {
-    waitUntil(() => this.formatter.activities.indexOf(`running console command: ${command}`) > -1, done)
+  this.verifyRanConsoleCommand = async (command: string) => {
+    await waitUntil(() => this.formatter.activities.includes(`running console command: ${command}`))
   }
 
   this.verifyRanOnlyTests = (files: string[]) => {

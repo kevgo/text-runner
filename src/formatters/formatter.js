@@ -85,7 +85,7 @@ class Formatter {
 
   // called when the last started activity finished successful
   // optionally allows to define the final text to be displayed
-  success (activityText: string) {
+  success (activityText?: string) {
     if (activityText) this.activityText = activityText
   }
 

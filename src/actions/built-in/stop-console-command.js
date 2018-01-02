@@ -5,7 +5,8 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('stopping the long-running process')
 
   if (!global.runningProcess) {
-    throw new Error('No running process found')
+    args.formatter.error('No running process found')
+    throw new Error('1')
   }
 
   global.runningProcess.kill()

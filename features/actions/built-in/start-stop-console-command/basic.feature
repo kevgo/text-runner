@@ -18,7 +18,7 @@ Feature: long-running processes
       """
       setTimeout(function() {
         console.log('running');
-        setTimeout(function() {}, 10000)
+        setTimeout(function() {}, 1000)
       }, 100)
       """
     And my source code contains the file "1.md" with content:

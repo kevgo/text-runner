@@ -1,7 +1,5 @@
 // @flow
 
-const util = require('util')
-
 // Waits until the currently running console command produces the given output
 module.exports = async function (args: {formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('waiting for output of the running console process')
@@ -16,10 +14,9 @@ module.exports = async function (args: {formatter: Formatter, searcher: Searcher
                                       .map((line) => line.trim())
                                       .filter((line) => line)
 
-  const waitForInput = util.promisify(global.runningProcess.wait)
   for (let line of expectedLines) {
     args.formatter.output(`waiting for ${line}`)
-    await waitForInput(line)
+    await global.runningProcess.waitForText(line)
   }
   args.formatter.success()
 }

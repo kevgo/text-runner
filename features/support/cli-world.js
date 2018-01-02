@@ -31,14 +31,16 @@ const CliWorld = function () {
 
     args.command = this.makeFullPath(params.command)
     if (process.env.NODE_ENV === 'coverage') {
-      args.command = path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + args.command
+      args.command = runWithTestCoverage(args.command)
     }
     this.process = new ObservableProcess(args)
     await this.process.waitForEnd()
     if (process.env.NODE_ENV === 'coverage') {
       storeTestCoverage()
     }
-    if (this.verbose) this.output = dimConsole.output
+    if (this.verbose) {
+      this.output = dimConsole.output
+    }
     if (this.process.exitCode && !params.expectError) {
       console.log(this.output)
     }
@@ -149,6 +151,10 @@ defineSupportCode(function ({setWorldConstructor}) {
     setWorldConstructor(CliWorld)
   }
 })
+
+function runWithTestCoverage (command: string): string {
+  return path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + command
+}
 
 function storeTestCoverage () {
   // store the test coverage data before running the next test that would overwrite it

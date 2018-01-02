@@ -9,10 +9,6 @@ type Console = {
   log(text :string): void
 }
 
-type Stream = {
-  write(text :string): void
-}
-
 // Base class for formatters
 class Formatter {
   activityText: string

@@ -2,7 +2,6 @@
 
 const ActionManager = require('../../actions/action-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
-const async = require('async')
 const {cyan} = require('chalk')
 const delay = require('delay')
 const fs = require('fs-extra')
@@ -10,7 +9,6 @@ const LinkTargetBuilder = require('./link-target-builder')
 const MarkdownParser = require('./markdown-parser')
 const path = require('path')
 const util = require('util')
-const {wait} = require('wait')
 
 // Runs the given Markdown file
 class MarkdownFileRunner {

@@ -2,7 +2,6 @@
 
 const {defineSupportCode} = require('cucumber')
 const ncp = require('ncp')
-const N = require('nitroglycerin')
 const util = require('util')
 
 defineSupportCode(function ({When}) {

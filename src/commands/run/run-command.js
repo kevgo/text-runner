@@ -1,7 +1,6 @@
 // @flow
 
 const ActionManager = require('../../actions/action-manager.js')
-const async = require('async')
 const glob = require('glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
 const mkdirp = require('mkdirp')
@@ -120,7 +119,8 @@ class RunCommand implements Command {
   }
 
   async _executeRunner (runner): Promise<number> {
-    return await runner.run()
+    const result = await runner.run()
+    return result
   }
 
   async _executeRunners (): Promise<void> {

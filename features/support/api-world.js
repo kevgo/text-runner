@@ -152,7 +152,7 @@ const ApiWorld = function () {
   }
 
   this.verifyRanConsoleCommand = (command: string, done: DoneFunction) => {
-    waitUntil(() => this.formatter.activities.indexOf(`running console command: ${command}`) > -1, done)
+    waitUntil(() => this.formatter.activities.includes(`running console command: ${command}`), done)
   }
 
   this.verifyRanOnlyTests = (files: string[]) => {

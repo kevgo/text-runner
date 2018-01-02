@@ -16,7 +16,7 @@ const CliWorld = function () {
 
   this.execute = async function (params: {command: string, expectError: boolean}) {
     var args = {}
-    args.cwd = this.rootDir,
+    args.cwd = this.rootDir
     args.env = {}
     if (this.verbose) {
       args.stdout = dimConsole.process.stdout

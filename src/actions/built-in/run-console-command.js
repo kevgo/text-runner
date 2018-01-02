@@ -16,7 +16,6 @@ type ProcessInput = {
   input: string
 }
 
-const runConsoleCommandOutput = ''
 // Runs the given commands on the console.
 // Waits until the command is finished.
 module.exports = async function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {

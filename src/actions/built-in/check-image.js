@@ -40,7 +40,7 @@ async function checkRemoteImage (node: AstNode, formatter: Formatter, configurat
   }
 
   try {
-    const response = await request({url: node.src, timeout: 2000})
+    await request({url: node.src, timeout: 2000})
     formatter.success(`image ${cyan(node.src)} exists`)
   } catch (err) {
     if (err.statusCode === 404) {

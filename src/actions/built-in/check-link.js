@@ -31,7 +31,7 @@ async function checkExternalLink (target: string, formatter: Formatter, configur
   }
 
   try {
-    const response = await request({url: target, timeout: 4000})
+    await request({url: target, timeout: 4000})
     formatter.success(`link to external website ${cyan(target)}`)
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {

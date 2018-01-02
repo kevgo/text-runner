@@ -106,7 +106,7 @@ const CliWorld = function () {
     expect(new RegExp(expectedText).test(this.process.fullOutput())).to.be.true
   }
 
-  this.verifyRanConsoleCommand = async (command: string) => {
+  this.verifyRanConsoleCommand = (command: string) => {
     expect(this.process.fullOutput()).to.include(`running.md:1-5 -- running console command: ${command}`)
   }
 

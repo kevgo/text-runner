@@ -152,12 +152,13 @@ defineSupportCode(function ({setWorldConstructor}) {
   }
 })
 
+// Returns the command that runs the given command with test coverage
 function runWithTestCoverage (command: string): string {
   return path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + command
 }
 
+// store the test coverage data before running the next test that would overwrite it
 function storeTestCoverage () {
-  // store the test coverage data before running the next test that would overwrite it
   const outputPath = path.join(process.cwd(), '.nyc_output')
   if (fs.existsSync(outputPath)) {
     fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))

@@ -33,7 +33,6 @@ module.exports = async function (args: {configuration: Configuration, formatter:
     stdout: log(args.formatter.stdout),
     stderr: args.formatter.stderr
   })
-  await global.runningProcess.waitForEnd()
   global.runningProcessEnded = true
 
   args.formatter.success()

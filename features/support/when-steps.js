@@ -45,7 +45,7 @@ defineSupportCode(function ({When}) {
     args.cwd = this.rootDir
     args.expectError = expectError
     await this.execute(args)
-    finish(expectError, this.error || this.process && (this.process.error || this.process.exitCode))
+    finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
   })
 
   When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, async function (tryingText, formatterName) {
@@ -61,7 +61,7 @@ defineSupportCode(function ({When}) {
   When(/^(trying to run|running) the "([^"]*)" command$/, async function (tryingText, command) {
     const expectError = determineExpectError(tryingText)
     await this.execute({command, cwd: this.rootDir, expectError})
-    finish(expectError, this.error || this.process && (this.process.error || this.process.exitCode))
+    finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
   })
 })
 

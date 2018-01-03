@@ -1,5 +1,7 @@
 // @flow
 
+import type {AstNodeList} from '../../typedefs/ast-node-list.js'
+
 const Formatter = require('../../formatters/formatter.js')
 
 type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?string
@@ -19,7 +21,7 @@ class Searcher {
     this.formatter = value.formatter
   }
 
-  nodeContent (query: {type: ?string, types: ?string[]}, errorChecker: ErrorCheckerFunc): string {
+  nodeContent (query: {type?: string, types?: string[]}, errorChecker?: ErrorCheckerFunc): string {
     if (this.nodes == null) return ''
     const nodes = this.nodes.filter((node) => {
       return (node.type === query.type) ||

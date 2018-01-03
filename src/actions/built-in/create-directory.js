@@ -1,5 +1,9 @@
 // @flow
 
+import Configuration from '../../configuration.js'
+import Formatter from '../../formatters/formatter.js'
+import Searcher from '../../commands/run/searcher.js'
+
 const {cyan} = require('chalk')
 const mkdirp = require('mkdirp')
 const path = require('path')

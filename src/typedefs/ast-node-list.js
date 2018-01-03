@@ -1,3 +1,3 @@
 // @flow
 
-declare type AstNodeList = Array<AstNode>
+export type AstNodeList = Array<AstNode>

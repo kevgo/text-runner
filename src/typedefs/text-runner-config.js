@@ -1,6 +1,6 @@
 // @flow
 
-declare type TextRunnerConfig = {
+export type TextRunnerConfig = {
   fast?: boolean,
   format?: Formatter
 }

@@ -1,5 +1,9 @@
 // @flow
 
+import type {Action} from '../typedefs/action.js'
+import type Configuration from '../configuration.js'
+import type Formatter from '../formatters/formatter.js'
+
 const camelcase = require('camelcase')
 const {red} = require('chalk')
 const glob = require('glob')

@@ -1,5 +1,9 @@
 // @flow
 
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+import type Searcher from '../../commands/run/searcher.js'
+
 const {cyan, green, red} = require('chalk')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')

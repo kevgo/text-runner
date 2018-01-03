@@ -1,5 +1,10 @@
 // @flow
 
+import type {AstNode} from '../../typedefs/ast-node.js'
+import type {AstNodeList} from '../../typedefs/ast-node-list.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+
 const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
@@ -13,7 +18,6 @@ module.exports = async function (params: {filename: string, formatter: Formatter
     params.formatter.error('image tag without source')
     throw new Error('1')
   }
-  // $FlowFixMe
   const imagePath = path.join(path.dirname(params.filename), node.src)
   params.formatter.refine(`checking image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {

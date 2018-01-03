@@ -1,6 +1,7 @@
 // @flow
 
-declare type ConfigFileStructure = {
+export type ConfigFileStructure = {
+  actions?: { [string]: Object },
   files?: string,
   formatter?: string,
   useTempDirectory?: boolean

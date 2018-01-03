@@ -1,5 +1,10 @@
 // @flow
 
+import type {AstNodeList} from '../../typedefs/ast-node-list.js'
+import Configuration from '../../configuration.js'
+import Formatter from '../../formatters/formatter.js'
+import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+
 const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')

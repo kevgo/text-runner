@@ -1,3 +1,3 @@
 // @flow
 
-declare type LinkTargetList = { [string]: Array<LinkTarget> }
+export type LinkTargetList = { [string]: Array<LinkTarget> }

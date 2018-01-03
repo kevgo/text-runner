@@ -1,5 +1,9 @@
 // @flow
 
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+import type Searcher from '../../commands/run/searcher.js'
+
 // Waits until the currently running console command produces the given output
 module.exports = async function (args: {formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('waiting for output of the running console process')

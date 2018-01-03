@@ -7,12 +7,7 @@ const trimDollar = require('../../helpers/trim-dollar')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying NPM installation instructions')
-
-  const installText = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {
-    if (nodes.length === 0) return 'missing code block'
-    if (nodes.length > 1) return 'found multiple code blocks'
-  }))
-
+  const installText = trimDollar(args.searcher.tagContent(['fence', 'code']))
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
   args.formatter.start(`verifying NPM installs ${cyan(pkg.name)}`)
 

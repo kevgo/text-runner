@@ -7,10 +7,7 @@ const trimDollar = require('../../helpers/trim-dollar')
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying exported global command')
 
-  const commandName = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {
-    if (nodes.length === 0) return 'missing code block'
-    if (nodes.length > 1) return 'found multiple code blocks'
-  })).trim()
+  const commandName = trimDollar(args.searcher.tagContent(['fence', 'code']))
 
   const pkg = require(path.join(process.cwd(), 'package.json'))
   args.formatter.refine(`looking for an exported ${cyan(commandName)} command`)

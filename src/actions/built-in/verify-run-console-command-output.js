@@ -7,11 +7,8 @@ const jsdiffConsole = require('jsdiff-console')
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying the output of the last run console command')
 
-  const expectedLines = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'no fenced blocks found'
-    if (nodes.length > 1) return `found ${nodes.length} fenced code blocks. Expecting only one.`
-    if (!content) return 'empty fenced block found'
-  }).split('\n')
+  const expectedLines = args.searcher.tagContent('fence')
+    .split('\n')
     .map((line) => line.trim())
     .filter((line) => line)
 

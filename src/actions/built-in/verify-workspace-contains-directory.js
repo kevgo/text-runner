@@ -6,11 +6,7 @@ const path = require('path')
 
 // Verifies that the test workspace contains the given directory
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  const directory = args.searcher.nodeContent({type: 'code'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'no code block found'
-    if (nodes.length > 1) return 'too many code blocks found'
-    if (content.trim().length === 0) return 'empty code block found'
-  })
+  const directory = args.searcher.tagContent('code')
 
   const fullPath = path.join(args.configuration.testDir, directory)
   args.formatter.start(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)

@@ -10,5 +10,5 @@ type Activity = {
   runner: Action,
   nodes: ?AstNodeList,
   configuration: Configuration,
-  searcher?: Searcher
+  searcher: Searcher
 }

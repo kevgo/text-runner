@@ -18,22 +18,18 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = async function (params: Activity) {
   params.formatter.start('running console command')
 
-  const commandsToRun = params.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'no code blocks found'
-    if (nodes.length > 1) return 'found #{nodes.length} fenced code blocks. Expecting only one.'
-    if (!content) return 'the block that defines console commands to run is empty'
-  }).split('\n')
+  const commandsToRun = params.searcher.tagContent('fence')
+    .split('\n')
     .map((command) => command.trim())
     .filter((e) => e)
     .map(trimDollar)
     .map(makeGlobal(params.configuration))
     .join(' && ')
 
-  const inputText = params.searcher.nodeContent({type: 'htmlblock'})
-  const input = await getInput(inputText, params.formatter)
+  const input = await getInput(params.searcher.tagContent('htmlblock', {default: ''}), params.formatter)
   params.formatter.refine(`running console command: ${cyan(commandsToRun)}`)
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''

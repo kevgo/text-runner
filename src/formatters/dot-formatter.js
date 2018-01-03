@@ -1,6 +1,6 @@
 // @flow
 
-const {cyan, green, magenta, red} = require('chalk')
+const {cyan, green, magenta} = require('chalk')
 const Formatter = require('./formatter')
 
 // A minimalistic formatter, prints dots for each check

@@ -76,11 +76,18 @@ class MarkdownFileRunner {
         await promisified(block)
       }
     } catch (err) {
-      if (err.message === '1') throw err
-      block.formatter.error(err.message || err)
-      throw new Error('1')
+      if (isProgrammerError(err)) {
+        throw err
+      } else {
+        block.formatter.error(err.message || err)
+        throw new Error('1')
+      }
     }
   }
+}
+
+function isProgrammerError (err: Error): boolean {
+  return err.name !== 'Error'
 }
 
 module.exports = MarkdownFileRunner

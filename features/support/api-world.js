@@ -112,7 +112,9 @@ const ApiWorld = function () {
       this.error = err
     }
     if (this.error && !args.expectError) {
-      console.log(this.error)
+      if (this.error.message === '1') {
+        throw new Error(formatter.errorMessages[0])
+      }
     }
     this.cwdAfterRun = process.cwd()
     process.chdir(existingDir)

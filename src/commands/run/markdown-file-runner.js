@@ -77,8 +77,8 @@ class MarkdownFileRunner {
       }
     } catch (err) {
       if (err.message === '1') throw err
-      block.formatter.error(err.message)
-      throw err
+      block.formatter.error(err.message || err)
+      throw new Error('1')
     }
   }
 }

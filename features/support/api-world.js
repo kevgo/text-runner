@@ -101,7 +101,7 @@ const ApiWorld = function () {
   // ApiWorld provides step implementations that run and test TextRunner
   // via its Javascript API
 
-  this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter}) {
+  this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter, expectError: boolean}) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
     this.formatter = new TestFormatter({verbose: this.verbose})
@@ -110,6 +110,9 @@ const ApiWorld = function () {
       await textRunner({command: args.command, file: args.file, fast: args.fast, format: formatter})
     } catch (err) {
       this.error = err
+    }
+    if (this.error && !args.expectError) {
+      console.log(this.error)
     }
     this.cwdAfterRun = process.cwd()
     process.chdir(existingDir)

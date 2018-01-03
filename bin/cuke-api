@@ -5,5 +5,5 @@ bin/build
 if [ "$#" != "1" ]; then
   NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' --format progress "$@"
 else
-  NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' "$@"
+  DEBUG='*,-babel' NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' "$@"
 fi

@@ -23,22 +23,24 @@ class ActivityListBuilder {
   }
 
   build (tree: AstNodeList): ActivityList {
-    var nodesForCurrentRunner: ?AstNodeList
+    var insideActiveBlock = false
+    var nodesForCurrentRunner: AstNodeList = []
     var startLine = 0
     var result: ActivityList = []
-    var currentRunnerType: ?Action
+    var currentRunnerType: Action = (value) => {}
     for (let node: AstNode of tree) {
-      // link start tag
-      const blockType : ?string = this._isStartTag(node)
+      // active block start tag
+      const blockType : ?string = this._isActiveBlockStartTag(node)
       if (blockType != null) {
         startLine = node.line
-        if (currentRunnerType) {
+        if (insideActiveBlock) {
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
         }
         try {
           currentRunnerType = this.actions.actionFor(blockType, this.filePath)
           if (currentRunnerType) {
+            insideActiveBlock = true
             nodesForCurrentRunner = []
           }
         } catch (e) {
@@ -74,14 +76,13 @@ class ActivityListBuilder {
         continue
       }
 
-      if (currentRunnerType) {
-        if (nodesForCurrentRunner) {
-          nodesForCurrentRunner.push(node)
-        }
+      if (insideActiveBlock) {
+        nodesForCurrentRunner.push(node)
         continue
       }
 
       if (node.type === 'image') {
+        // push 'check image' activity
         result.push({
           filename: this.filePath,
           startLine: node.line,
@@ -95,6 +96,7 @@ class ActivityListBuilder {
       }
 
       if (this._isMarkdownLink(node)) {
+        // push 'check link' activity for Markdown links
         result.push({
           filename: this.filePath,
           startLine: node.line,
@@ -110,6 +112,7 @@ class ActivityListBuilder {
 
       const target = this._htmlLinkTarget(node)
       if (target != null) {
+        // push 'check link' activity for HTML links
         result.push({
           filename: this.filePath,
           startLine: node.line,
@@ -142,7 +145,7 @@ class ActivityListBuilder {
 
   // Indicates whether the given node is a start tag of an active block
   // by returning the type of the block, or falsy.
-  _isStartTag (node): ?string {
+  _isActiveBlockStartTag (node): ?string {
     if (node.type !== 'htmltag') return null
     const regex = new RegExp(`<a class="${this.configuration.get('classPrefix')}([^"]+)">`)
     if (node.content == null) return null
@@ -152,7 +155,7 @@ class ActivityListBuilder {
   }
 
   // Returns whether the given node is the end of an active block
-  _isEndTag (node) {
+  _isActiveBlockEndTag (node) {
     return node.type === 'htmltag' && node.content === '</a>'
   }
 }

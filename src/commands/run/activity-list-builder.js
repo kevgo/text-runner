@@ -52,27 +52,19 @@ class ActivityListBuilder {
         continue
       }
 
-      if (this._isEndTag(node)) {
-        if (currentRunnerType) {
-          result.push({
-            filename: this.filePath,
-            startLine: startLine,
-            endLine: node.line,
-            runner: currentRunnerType,
-            nodes: nodesForCurrentRunner,
-            formatter: this.formatter,
-            configuration: this.configuration,
-            searcher: new Searcher({
-              filePath: this.filePath,
-              startLine: startLine,
-              endLine: node.line,
-              nodes: nodesForCurrentRunner,
-              formatter: this.formatter
-            })
-          })
-        }
-        currentRunnerType = null
-        nodesForCurrentRunner = null
+      if (this._isActiveBlockEndTag(node)) {
+        result.push({
+          filename: this.filePath,
+          startLine: startLine,
+          endLine: node.line,
+          runner: currentRunnerType,
+          nodes: nodesForCurrentRunner,
+          formatter: this.formatter,
+          configuration: this.configuration,
+          searcher: new Searcher(nodesForCurrentRunner)
+        })
+        insideActiveBlock = false
+        nodesForCurrentRunner = []
         continue
       }
 
@@ -90,7 +82,8 @@ class ActivityListBuilder {
           nodes: [node],
           runner: this.actions.actionFor('checkImage', this.filePath),
           formatter: this.formatter,
-          configuration: this.configuration
+          configuration: this.configuration,
+          searcher: new Searcher([node])
         })
         continue
       }
@@ -105,7 +98,8 @@ class ActivityListBuilder {
           runner: this.actions.actionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
-          linkTargets: this.linkTargets
+          linkTargets: this.linkTargets,
+          searcher: new Searcher([node])
         })
         continue
       }
@@ -121,7 +115,8 @@ class ActivityListBuilder {
           runner: this.actions.actionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
-          linkTargets: this.linkTargets
+          linkTargets: this.linkTargets,
+          searcher: new Searcher([node])
         })
         continue
       }

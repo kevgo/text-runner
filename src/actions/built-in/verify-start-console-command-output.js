@@ -7,7 +7,7 @@ const jsdiffConsole = require('jsdiff-console')
 module.exports = function (activity: Activity) {
   activity.formatter.action('verifying the output of the last started console command')
 
-  const expectedLines = args.searcher.tagContent('fence')
+  const expectedLines = activity.searcher.tagContent('fence')
     .split('\n')
     .map((line) => line.trim())
     .filter((line) => line)

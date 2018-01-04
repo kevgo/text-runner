@@ -129,3 +129,4 @@ are considered developer errors and passed through to the caller of TextRunner's
 The CLI wrapper catches all errors and prints them accordingly:
 User errors in an end-user friendly way,
 and developer errors with a stack trace.
+Actions can throw a normal `Error` instance, it will be treated as an `UnprintedUserError`.

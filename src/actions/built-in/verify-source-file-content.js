@@ -40,7 +40,6 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   try {
     jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    console.log(err)
     throw new UserError(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
   }
 

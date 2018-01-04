@@ -21,7 +21,7 @@ Feature: validating Javascript
     Then it signals:
       | FILENAME | 1.md                  |
       | LINE     | 1-5                   |
-      | MESSAGE  | valid Javascript code |
+      | MESSAGE  | validating JavaScript |
 
 
   Scenario: invalid Javascript

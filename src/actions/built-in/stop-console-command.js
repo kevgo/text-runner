@@ -9,5 +9,4 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
   }
 
   global.runningProcess.kill()
-  args.formatter.success()
 }

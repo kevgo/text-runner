@@ -11,16 +11,14 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
     if (nodes.length > 1) return 'too many links found'
   })
 
-  args.formatter.start(`verifying the ${bold(cyan(directory))} directory exists in the source code`)
+  args.formatter.start(`directory ${bold(cyan(directory))} exists in the source code`)
   var stats
   try {
     stats = fs.lstatSync(path.join(process.cwd(), directory))
   } catch (err) {
     throw new Error(`directory ${cyan(bold(directory))} does not exist in the source code`)
   }
-  if (stats.isDirectory()) {
-    args.formatter.success(`directory ${cyan(bold(directory))} exists in the source code`)
-  } else {
+  if (!stats.isDirectory()) {
     throw new Error(`${cyan(bold(directory))} exists in the source code but is not a directory`)
   }
 }

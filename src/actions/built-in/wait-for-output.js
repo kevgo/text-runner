@@ -18,5 +18,4 @@ module.exports = async function (args: {formatter: Formatter, searcher: Searcher
     args.formatter.output(`waiting for ${line}`)
     await global.runningProcess.waitForText(line)
   }
-  args.formatter.success()
 }

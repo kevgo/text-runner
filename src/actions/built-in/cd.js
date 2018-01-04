@@ -22,7 +22,7 @@ module.exports = function (params: {configuration: Configuration, formatter: For
     process.chdir(fullPath)
     params.formatter.success()
   } catch (e) {
-    if (e.code === 'ENOENT') throw new Error(`directory ${directory} not found`)
+    if (e.code === 'ENOENT') throw new UserError(`directory ${directory} not found`)
     throw e
   }
 }

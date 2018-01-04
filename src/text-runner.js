@@ -56,13 +56,10 @@ class TextRunner {
   }
 
   async _missingFile (filename) {
-    const errorMessage = `file or directory does not exist: ${red(filename)}`
-    this.formatter.error(errorMessage)
-    throw new Error('1')
+    throw new UserError(`file or directory does not exist: ${red(filename)}`)
   }
 
   async _unknownCommand (command) {
-    this.formatter.error(`unknown command: ${red(command)}`)
-    throw new Error('1')
+    throw new UserError(`unknown command: ${red(command)}`)
   }
 }

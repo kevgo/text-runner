@@ -26,7 +26,7 @@ class FormatterManager {
       return new FormatterClass()
     } catch (e) {
       if (e.code === 'MODULE_NOT_FOUND') {
-        throw new Error(`Unknown formatter: '${name}'\n\nAvailable formatters are ${this.availableFormatterNames().join(', ')}`)
+        throw new UserError(`Unknown formatter: '${name}'\n\nAvailable formatters are ${this.availableFormatterNames().join(', ')}`)
       } else {
         throw e
       }

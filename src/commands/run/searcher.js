@@ -29,7 +29,7 @@ class Searcher {
     if (content == null) content = ''
     const error = errorChecker ? errorChecker({nodes, content}) : null
     if (error != null) {
-      throw new Error(error)
+      throw new UserError(error)
     }
     return content
   }

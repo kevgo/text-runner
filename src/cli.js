@@ -1,5 +1,6 @@
 // @flow
 
+const UserError = require('./commands/run/user-error.js')
 const {red} = require('chalk')
 const cliCursor = require('cli-cursor')
 const endChildProcesses = require('end-child-processes')
@@ -14,7 +15,7 @@ async function main () {
     await textRunner(parseCliArgs(process.argv))
   } catch (err) {
     exitCode = 1
-    if (err.message !== '1') {
+    if (!(err instanceof UserError)) {
       console.log(red(err))
     }
   }

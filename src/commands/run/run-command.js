@@ -80,7 +80,7 @@ class RunCommand implements Command {
     } else if (setting === true) {
       this.configuration.testDir = tmp.dirSync().name
     } else {
-      throw new Error(`unknown 'useTempDirectory' setting: ${setting}`)
+      throw new UserError(`unknown 'useTempDirectory' setting: ${setting}`)
     }
     try {
       debug(`using test directory: ${this.configuration.testDir}`)

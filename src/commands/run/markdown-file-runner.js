@@ -2,6 +2,7 @@
 
 const ActionManager = require('../../actions/action-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
+const UserError = require('./user-error.js')
 const {cyan} = require('chalk')
 const delay = require('delay')
 const fs = require('fs-extra')
@@ -44,8 +45,7 @@ class MarkdownFileRunner {
     markdownText = markdownText.trim()
     if (markdownText.length === 0) {
       this.formatter.startFile(this.filePath)
-      this.formatter.error(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
-      throw new Error('1')
+      throw new UserError(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
     }
     const astNodeList = this.parser.parse(markdownText)
     const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)
@@ -80,7 +80,7 @@ class MarkdownFileRunner {
         throw err
       } else {
         block.formatter.error(err.message || err)
-        throw new Error('1')
+        throw new UserError(err)
       }
     }
   }

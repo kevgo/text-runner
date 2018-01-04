@@ -32,8 +32,7 @@ class ActionManager {
         errorText += `* ${prefix}${actionName}\n`
       }
       this.formatter.startFile(filePath)
-      this.formatter.error(errorText)
-      throw new Error(errorText)
+      throw new UserError(errorText)
     }
     return result
   }

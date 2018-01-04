@@ -1061,9 +1061,9 @@ cucumber-tag-expressions@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/cucumber-tag-expressions/-/cucumber-tag-expressions-1.1.1.tgz#7f5c7b70009bc2b666591bfe64854578bedee85a"
 
-cucumber@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/cucumber/-/cucumber-3.2.0.tgz#5fc4143f9a0c6c3017bb9610a941b2cbc714f493"
+cucumber@3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/cucumber/-/cucumber-3.2.1.tgz#7898509bf6f3fe4ef5fa30ba987bd53d88d53251"
   dependencies:
     assertion-error-formatter "^2.0.1"
     babel-runtime "^6.11.6"

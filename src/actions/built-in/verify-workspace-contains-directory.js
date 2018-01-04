@@ -18,13 +18,11 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   try {
     stats = fs.lstatSync(fullPath)
   } catch (err) {
-    args.formatter.error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
-    throw new Error('1')
+    throw new Error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
   }
   if (stats.isDirectory()) {
     args.formatter.success()
   } else {
-    args.formatter.error(`${cyan(bold(directory))} exists but is not a directory`)
-    throw new Error('1')
+    throw new Error(`${cyan(bold(directory))} exists but is not a directory`)
   }
 }

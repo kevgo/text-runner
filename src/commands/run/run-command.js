@@ -7,6 +7,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const tmp = require('tmp')
 const debug = require('debug')('text-runner:run-command')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 class RunCommand implements Command {
   configuration: Configuration
@@ -80,7 +81,7 @@ class RunCommand implements Command {
     } else if (setting === true) {
       this.configuration.testDir = tmp.dirSync().name
     } else {
-      throw new Error(`unknown 'useTempDirectory' setting: ${setting}`)
+      throw new UnprintedUserError(`unknown 'useTempDirectory' setting: ${setting}`)
     }
     try {
       debug(`using test directory: ${this.configuration.testDir}`)

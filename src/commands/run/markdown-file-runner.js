@@ -8,6 +8,7 @@ const fs = require('fs-extra')
 const LinkTargetBuilder = require('./link-target-builder')
 const MarkdownParser = require('./markdown-parser')
 const path = require('path')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 const util = require('util')
 
 // Runs the given Markdown file
@@ -44,8 +45,7 @@ class MarkdownFileRunner {
     markdownText = markdownText.trim()
     if (markdownText.length === 0) {
       this.formatter.startFile(this.filePath)
-      this.formatter.error(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
-      throw new Error('1')
+      throw new UnprintedUserError(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
     }
     const astNodeList = this.parser.parse(markdownText)
     const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)
@@ -68,20 +68,26 @@ class MarkdownFileRunner {
     block.formatter.setLines(block.startLine, block.endLine)
     try {
       if (block.runner.length === 1) {
-      // synchronous action method or returns a promise
+        // synchronous action method or returns a promise
         await Promise.resolve(block.runner(block))
       } else {
-      // asynchronous action method
+        // asynchronous action method
         const promisified = util.promisify(block.runner)
         await promisified(block)
       }
     } catch (err) {
-      if (err.message === '1') throw err
-      if (!err.message) throw err
-      block.formatter.error(err.message)
-      throw new Error('1')
+      if (isUserError(err)) {
+        throw new UnprintedUserError(err)
+      } else {
+        // here we have a developer error
+        throw err
+      }
     }
   }
+}
+
+function isUserError (err: Error): boolean {
+  return err.name === 'Error'
 }
 
 module.exports = MarkdownFileRunner

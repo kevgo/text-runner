@@ -24,8 +24,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     actualContent = fs.readFileSync(fullPath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      args.formatter.error(`file ${red(filePath)} not found`)
-      throw new Error('1')
+      throw new Error(`file ${red(filePath)} not found`)
     } else {
       throw err
     }
@@ -34,7 +33,6 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
     args.formatter.success()
   } catch (err) {
-    args.formatter.error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
-    throw new Error('1')
+    throw new Error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
   }
 }

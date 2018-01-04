@@ -16,13 +16,11 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
   try {
     stats = fs.lstatSync(path.join(process.cwd(), directory))
   } catch (err) {
-    args.formatter.error(`directory ${cyan(bold(directory))} does not exist in the source code`)
-    throw new Error('1')
+    throw new Error(`directory ${cyan(bold(directory))} does not exist in the source code`)
   }
   if (stats.isDirectory()) {
     args.formatter.success(`directory ${cyan(bold(directory))} exists in the source code`)
   } else {
-    args.formatter.error(`${cyan(bold(directory))} exists in the source code but is not a directory`)
-    throw new Error('1')
+    throw new Error(`${cyan(bold(directory))} exists in the source code but is not a directory`)
   }
 }

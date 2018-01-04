@@ -13,7 +13,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   })
 
   const fullPath = path.join(args.configuration.testDir, directory)
-  args.formatter.start(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)
+  args.formatter.action(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)
   var stats
   try {
     stats = fs.lstatSync(fullPath)

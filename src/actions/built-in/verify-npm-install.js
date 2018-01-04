@@ -6,7 +6,7 @@ const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  args.formatter.start('verifying NPM installation instructions')
+  args.formatter.action('verifying NPM installation instructions')
 
   const installText = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {
     if (nodes.length === 0) return 'missing code block'
@@ -14,7 +14,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   }))
 
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
-  args.formatter.start(`verify NPM installs ${cyan(pkg.name)}`)
+  args.formatter.action(`verify NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(`could not find ${cyan(pkg.name)} in installation instructions`)

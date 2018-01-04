@@ -7,14 +7,14 @@ const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
 module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, configuration: Configuration}) {
-  params.formatter.start(`checking image`)
+  params.formatter.action(`checking image`)
   const node = params.nodes[0]
   if (node.src == null || node.src === '') {
     throw new Error('image tag without source')
   }
   // $FlowFixMe
   const imagePath = path.join(path.dirname(params.filename), node.src)
-  params.formatter.refine(`image ${cyan(imagePath)}`)
+  params.formatter.action(`image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {
     await checkRemoteImage(node, params.formatter, params.configuration)
   } else {

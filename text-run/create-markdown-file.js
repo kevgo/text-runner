@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 module.exports = function ({formatter, configuration, searcher}) {
-  formatter.start('creating markdown file')
+  formatter.action('creating markdown file')
 
   const markdown = searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length === 0) return 'no fenced block found'

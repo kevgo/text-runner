@@ -17,12 +17,9 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   var supportedVersion
   try {
     supportedVersion = getSupportedVersion()
+    params.formatter.refine(`requires at least Node ${cyan(supportedVersion)}`)
   } catch (err) {
     throw new Error(err.message)
-  }
-  if (supportedVersion === documentedVersion) {
-    params.formatter.success(`requires at least Node ${cyan(supportedVersion)}`)
-    return
   }
   if (supportedVersion !== documentedVersion) {
     throw new Error(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)

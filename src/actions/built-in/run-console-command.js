@@ -47,13 +47,7 @@ module.exports = async function (params: {configuration: Configuration, formatte
   for (let inputLine of input) {
     enter(processor, inputLine)
   }
-
-  try {
-    await processor.waitForEnd()
-    params.formatter.success()
-  } catch (err) {
-    params.formatter.error(err)
-  }
+  await processor.waitForEnd()
 }
 
 async function enter (processor: ObservableProcess, input: ProcessInput) {

@@ -31,7 +31,7 @@ Feature: verifying NPM installation instructions
     Then it signals:
       | FILENAME | 1.md                         |
       | LINE     | 3-7                          |
-      | MESSAGE  | installs my_enormous_package |
+      | MESSAGE  | verify NPM installs my_enormous_package |
 
 
   Scenario: correct package name with single-fenced code block
@@ -43,7 +43,7 @@ Feature: verifying NPM installation instructions
     Then it signals:
       | FILENAME | 1.md                         |
       | LINE     | 1                            |
-      | MESSAGE  | installs my_enormous_package |
+      | MESSAGE  | verify NPM installs my_enormous_package |
 
 
   Scenario: mismatching package name

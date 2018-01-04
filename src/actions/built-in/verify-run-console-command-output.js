@@ -21,5 +21,4 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
 
   const commonLines = actualLines.filter((line) => expectedLines.includes(line))
   jsdiffConsole(expectedLines, commonLines)
-  args.formatter.success()
 }

@@ -35,18 +35,28 @@ class TextRunner {
 
   // Tests the documentation according to the given command and arguments
   async execute (command, file) {
-    if (command === 'run' && hasDirectory(file)) {
-      await this._command('run').runDirectory(file)
-    } else if (command === 'run' && isMarkdownFile(file)) {
-      await this._command('run').runFile(file)
-    } else if (command === 'run' && isGlob(file)) {
-      await this._command('run').runGlob(file)
-    } else if (command === 'run' && file) {
-      await this._missingFile(file)
-    } else if (hasCommand(command)) {
-      await this._command(command).run()
-    } else {
-      await this._unknownCommand(command)
+    try {
+      if (command === 'run' && hasDirectory(file)) {
+        await this._command('run').runDirectory(file)
+      } else if (command === 'run' && isMarkdownFile(file)) {
+        await this._command('run').runFile(file)
+      } else if (command === 'run' && isGlob(file)) {
+        await this._command('run').runGlob(file)
+      } else if (command === 'run' && file) {
+        await this._missingFile(file)
+      } else if (hasCommand(command)) {
+        await this._command(command).run()
+      } else {
+        await this._unknownCommand(command)
+      }
+    } catch (err) {
+      if (isProgrammerError(err)) {
+        throw err
+      } else {
+        // here we have a user error
+        this.formatter.error(err.message)
+        throw err
+      }
     }
   }
 
@@ -63,4 +73,8 @@ class TextRunner {
   async _unknownCommand (command) {
     throw new UserError(`unknown command: ${red(command)}`)
   }
+}
+
+function isProgrammerError (err: Error): boolean {
+  return err.name !== 'Error'
 }

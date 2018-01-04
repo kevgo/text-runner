@@ -49,7 +49,7 @@ class TestFormatter {
     }
   }
 
-  start (activity: string) {
+  action (activity: string) {
     this.activities.push(stripAnsi(activity))
     this.lines.push(this.startLine !== this.endLine ? `${this.startLine}-${this.endLine}` : this.startLine.toString())
     if (this.verbose) console.log(activity)
@@ -71,12 +71,6 @@ class TestFormatter {
 
   output (text: string) {
     if (this.verbose) console.log(text)
-  }
-
-  refine (activity: string) {
-    this.activities[this.activities.length - 1] = stripAnsi(activity)
-    this.lines[this.lines.length - 1] = (this.startLine !== this.endLine) ? `${this.startLine}-${this.endLine}` : this.startLine.toString()
-    if (this.verbose) console.log(activity)
   }
 
   setLines (startLine: number, endLine: number) {

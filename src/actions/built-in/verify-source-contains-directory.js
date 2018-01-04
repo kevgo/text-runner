@@ -11,7 +11,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
     if (nodes.length > 1) return 'too many links found'
   })
 
-  args.formatter.start(`directory ${bold(cyan(directory))} exists in the source code`)
+  args.formatter.action(`directory ${bold(cyan(directory))} exists in the source code`)
   var stats
   try {
     stats = fs.lstatSync(path.join(process.cwd(), directory))

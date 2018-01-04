@@ -2,7 +2,7 @@
 
 // Runs the JavaScript code given in the code block
 module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}) {
-  args.formatter.start('validating JavaScript')
+  args.formatter.action('validating JavaScript')
 
   const code = args.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {
     if (nodes.length === 0) return 'no code to run found'

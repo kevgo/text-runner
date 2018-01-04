@@ -11,7 +11,7 @@ module.exports = async function (params: {filename: string, formatter: Formatter
   if (target == null || target === '') {
     throw new Error('link without target')
   }
-  params.formatter.start(`link to ${cyan(target)}`)
+  params.formatter.action(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(params.filename, target, params.linkTargets, params.formatter)
   } else if (isLinkToAnchorInOtherFile(target)) {
@@ -30,7 +30,7 @@ async function checkExternalLink (target: string, formatter: Formatter, configur
   }
 
   try {
-    formatter.refine(`link to external website ${cyan(target)}`)
+    formatter.action(`link to external website ${cyan(target)}`)
     await request({url: target, timeout: 4000})
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
@@ -50,9 +50,9 @@ async function checkLinkToFilesystem (filename: string, target: string, formatte
   try {
     const stats = await fs.stat(target)
     if (stats.isDirectory()) {
-      formatter.refine(`link to local directory ${cyan(target)}`)
+      formatter.action(`link to local directory ${cyan(target)}`)
     } else {
-      formatter.refine(`link to local file ${cyan(target)}`)
+      formatter.action(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
     throw new Error(`link to non-existing local file ${red(target)}`)
@@ -65,9 +65,9 @@ async function checkLinkToAnchorInSameFile (filename: string, target: string, li
     throw new Error(`link to non-existing local anchor ${red(target)}`)
   }
   if (targetEntry.type === 'heading') {
-    formatter.refine(`link to local heading ${cyan(targetEntry.text)}`)
+    formatter.action(`link to local heading ${cyan(targetEntry.text)}`)
   } else {
-    formatter.refine(`link to #${cyan(targetEntry.name)}`)
+    formatter.action(`link to #${cyan(targetEntry.name)}`)
   }
 }
 
@@ -83,9 +83,9 @@ async function checkLinkToAnchorInOtherFile (filename: string, target: string, l
   }
 
   if (targetEntry.type === 'heading') {
-    formatter.refine(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
+    formatter.action(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
   } else {
-    formatter.refine(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
+    formatter.action(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }
 }
 

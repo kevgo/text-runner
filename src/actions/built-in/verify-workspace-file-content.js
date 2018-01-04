@@ -17,7 +17,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     if (nodes.length > 1) return 'found multiple content blocks for file to verify, please provide only one'
   })
 
-  args.formatter.start(`verifying file ${cyan(filePath)}`)
+  args.formatter.action(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(args.configuration.testDir, filePath)
   var actualContent
   try {

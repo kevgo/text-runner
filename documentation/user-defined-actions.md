@@ -27,7 +27,7 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.start('greeting the world')   // start the "greeting the world" activity type
+  formatter.action('greeting the world')   // start the "greeting the world" activity type
   formatter.output('Hello world!')        // print something on the console
 };
 ```
@@ -88,7 +88,7 @@ Each node is an object that has these attributes:
 One of the utilities availabe to actions is the formatter instance.
 It allows to signal test progress to TextRunner and print test output to the console.
 
-Call `formatter.start(<activity name>)` before you run an activity.
+Call `formatter.action(<activity name>)` before you run an activity.
 This tells TextRunner that whatever happens next (output, success, failure) is part of that activity.
 
 `formatter.output(text)` allows to print output of the currently running action
@@ -144,7 +144,7 @@ module.exports = function({formatter, searcher, nodes}) {
   // step 1: provide a first rough description of what this action does,
   // so that TextRunner can print a somewhat helpful error message
   // if loading more specific data below fails somehow
-  formatter.start('running console command')
+  formatter.action('running console command')
 
   // step 2: determine which command to run using the searcher utility
   // (you could also iterate the "nodes" array directly here but that's more cumbersome)
@@ -154,8 +154,8 @@ module.exports = function({formatter, searcher, nodes}) {
     if (!match.content) return 'you provided a code block but it has no content'
   })
 
-  // step 3: provide TextRunner a specific description of this action
-  formatter.refine('running console command: ' + commandToRun)
+  // step 3: provide TextRunner a more specific description of this action
+  formatter.action('running console command: ' + commandToRun)
 
   // step 4: perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))

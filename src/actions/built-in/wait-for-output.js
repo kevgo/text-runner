@@ -2,7 +2,7 @@
 
 // Waits until the currently running console command produces the given output
 module.exports = async function (args: {formatter: Formatter, searcher: Searcher}) {
-  args.formatter.start('waiting for output of the running console process')
+  args.formatter.action('waiting for output of the running console process')
 
   const expectedOutput = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length === 0) return 'no code blocks found'

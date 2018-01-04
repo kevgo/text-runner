@@ -4,7 +4,7 @@ const ObservableProcess = require('observable-process')
 const path = require('path')
 
 module.exports = async function ({configuration, formatter, searcher}) {
-  formatter.start('verify that markdown works in text-run')
+  formatter.action('verify that markdown works in text-run')
 
   const markdown = searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length > 1) return 'Found #{nodes.length} fenced code blocks. Only one is allowed.'

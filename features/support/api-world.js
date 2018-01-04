@@ -112,12 +112,13 @@ const ApiWorld = function () {
     } catch (err) {
       this.error = err
     }
-    if (this.error && !args.expectError) {
-      throw this.error
-    }
     this.cwdAfterRun = process.cwd()
     process.chdir(existingDir)
     this.output = this.formatter.text
+    if (this.error && !args.expectError) {
+      // Signal the error to the Cucumber runtime
+      throw this.error
+    }
   }
 
   this.verifyCallError = (expectedError: ErrnoError) => {

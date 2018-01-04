@@ -26,5 +26,4 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   debug(fullPath)
   mkdirp.sync(path.dirname(fullPath))
   fs.writeFileSync(fullPath, content)
-  params.formatter.success()
 }

@@ -14,7 +14,7 @@ module.exports = async function (params: {filename: string, formatter: Formatter
   }
   // $FlowFixMe
   const imagePath = path.join(path.dirname(params.filename), node.src)
-  params.formatter.refine(`checking image ${cyan(imagePath)}`)
+  params.formatter.refine(`image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {
     await checkRemoteImage(node, params.formatter, params.configuration)
   } else {
@@ -25,7 +25,6 @@ module.exports = async function (params: {filename: string, formatter: Formatter
 async function checkLocalImage (imagePath: string, formatter: Formatter) {
   try {
     await fs.stat(path.join(process.cwd(), imagePath))
-    formatter.success(`image ${cyan(imagePath)} exists`)
   } catch (err) {
     throw new Error(`image ${red(imagePath)} does not exist`)
   }
@@ -39,7 +38,6 @@ async function checkRemoteImage (node: AstNode, formatter: Formatter, configurat
 
   try {
     await request({url: node.src, timeout: 2000})
-    formatter.success(`image ${cyan(node.src)} exists`)
   } catch (err) {
     if (err.statusCode === 404) {
       formatter.warning(`image ${magenta(node.src)} does not exist`)

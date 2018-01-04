@@ -20,9 +20,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   } catch (err) {
     throw new Error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
   }
-  if (stats.isDirectory()) {
-    args.formatter.success()
-  } else {
+  if (!stats.isDirectory()) {
     throw new Error(`${cyan(bold(directory))} exists but is not a directory`)
   }
 }

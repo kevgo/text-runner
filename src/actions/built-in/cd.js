@@ -20,7 +20,6 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   debug(`changing into directory '${fullPath}`)
   try {
     process.chdir(fullPath)
-    params.formatter.success()
   } catch (e) {
     if (e.code === 'ENOENT') throw new Error(`directory ${directory} not found`)
     throw e

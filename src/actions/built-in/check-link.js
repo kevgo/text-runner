@@ -11,7 +11,7 @@ module.exports = async function (params: {filename: string, formatter: Formatter
   if (target == null || target === '') {
     throw new Error('link without target')
   }
-  params.formatter.start(`checking link to ${cyan(target)}`)
+  params.formatter.start(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(params.filename, target, params.linkTargets, params.formatter)
   } else if (isLinkToAnchorInOtherFile(target)) {
@@ -30,15 +30,15 @@ async function checkExternalLink (target: string, formatter: Formatter, configur
   }
 
   try {
+    formatter.refine(`link to external website ${cyan(target)}`)
     await request({url: target, timeout: 4000})
-    formatter.success(`link to external website ${cyan(target)}`)
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
       formatter.warning(`link to non-existing external website ${red(target)}`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
       formatter.warning(`link to ${magenta(target)} timed out`)
     } else if (err.message.startsWith("Hostname/IP doesn't match certificate's altnames")) {
-      formatter.warning(`Link to ${magenta(target)} has error: #{err.message}`)
+      formatter.warning(`link to ${magenta(target)} has error: #{err.message}`)
     } else {
       formatter.warning(`error while checking link to ${magenta(target)}: ${err}`)
     }
@@ -50,9 +50,9 @@ async function checkLinkToFilesystem (filename: string, target: string, formatte
   try {
     const stats = await fs.stat(target)
     if (stats.isDirectory()) {
-      formatter.success(`link to local directory ${cyan(target)}`)
+      formatter.refine(`link to local directory ${cyan(target)}`)
     } else {
-      formatter.success(`link to local file ${cyan(target)}`)
+      formatter.refine(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
     throw new Error(`link to non-existing local file ${red(target)}`)
@@ -65,9 +65,9 @@ async function checkLinkToAnchorInSameFile (filename: string, target: string, li
     throw new Error(`link to non-existing local anchor ${red(target)}`)
   }
   if (targetEntry.type === 'heading') {
-    formatter.success(`link to local heading ${cyan(targetEntry.text)}`)
+    formatter.refine(`link to local heading ${cyan(targetEntry.text)}`)
   } else {
-    formatter.success(`link to #${cyan(targetEntry.name)}`)
+    formatter.refine(`link to #${cyan(targetEntry.name)}`)
   }
 }
 
@@ -83,9 +83,9 @@ async function checkLinkToAnchorInOtherFile (filename: string, target: string, l
   }
 
   if (targetEntry.type === 'heading') {
-    formatter.success(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
+    formatter.refine(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
   } else {
-    formatter.success(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
+    formatter.refine(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }
 }
 

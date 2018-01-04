@@ -75,6 +75,7 @@ class MarkdownFileRunner {
         const promisified = util.promisify(block.runner)
         await promisified(block)
       }
+      block.formatter.success()
     } catch (err) {
       if (isUserError(err)) {
         throw new UnprintedUserError(err)

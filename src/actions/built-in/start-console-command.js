@@ -34,8 +34,6 @@ module.exports = async function (args: {configuration: Configuration, formatter:
     stderr: args.formatter.stderr
   })
   global.runningProcessEnded = true
-
-  args.formatter.success()
 }
 
 function log (stdout): WriteStream {

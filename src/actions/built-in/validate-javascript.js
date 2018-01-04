@@ -15,7 +15,6 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
   try {
     /* eslint-disable no-new, no-new-func */
     new Function(code)
-    args.formatter.success('valid Javascript code')
   } catch (e) {
     throw new Error(`invalid Javascript: ${e.message}`)
   }

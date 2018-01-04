@@ -19,12 +19,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
 
   /* eslint-disable no-unused-vars */  // This is used in an eval'ed string below
   const __finished = (err) => {
-    if (err) {
-      args.formatter.error(err)
-    } else {
-      args.formatter.success()
-      done(err)
-    }
+    done(err)
   }
 
   if (hasCallbackPlaceholder(code)) {

@@ -41,6 +41,4 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   } catch (err) {
     throw new Error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
   }
-
-  args.formatter.success()
 }

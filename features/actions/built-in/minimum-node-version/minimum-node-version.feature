@@ -40,7 +40,6 @@ Feature: minimum NodeJS version
     Then the test fails with:
       | FILENAME      | README.md                                                 |
       | LINE          | 1                                                         |
-      | MESSAGE       | determining whether minimum supported NodeJS version is 3 |
       | ERROR MESSAGE | documented minimum Node version is 3, should be 4         |
       | EXIT CODE     | 1                                                         |
 
@@ -54,6 +53,5 @@ Feature: minimum NodeJS version
     Then the test fails with:
       | FILENAME      | README.md                                                 |
       | LINE          | 1                                                         |
-      | MESSAGE       | determining whether minimum supported NodeJS version is 5 |
       | ERROR MESSAGE | documented minimum Node version is 5, should be 4         |
       | EXIT CODE     | 1                                                         |

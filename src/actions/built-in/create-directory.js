@@ -19,5 +19,4 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   const fullPath = path.join(params.configuration.testDir, directoryName)
   debug(`directory to create: ${fullPath}`)
   mkdirp.sync(fullPath)
-  params.formatter.success()
 }

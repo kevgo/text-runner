@@ -17,9 +17,9 @@ Feature: checking embedded images
     And my workspace contains an image "images/watermelon.gif"
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                               |
-      | LINE     | 1                                  |
-      | MESSAGE  | image images/watermelon.gif exists |
+      | FILENAME | 1.md                        |
+      | LINE     | 1                           |
+      | MESSAGE  | image images/watermelon.gif |
 
 
   Scenario: existing local HTML image on page in subfolder
@@ -30,9 +30,9 @@ Feature: checking embedded images
     And my workspace contains an image "documentation/watermelon.gif"
     When running text-run
     Then it signals:
-      | FILENAME | documentation/1.md                        |
-      | LINE     | 1                                         |
-      | MESSAGE  | image documentation/watermelon.gif exists |
+      | FILENAME | documentation/1.md                 |
+      | LINE     | 1                                  |
+      | MESSAGE  | image documentation/watermelon.gif |
 
 
   Scenario: existing local Markdown image
@@ -43,9 +43,9 @@ Feature: checking embedded images
     And my workspace contains an image "watermelon.gif"
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                        |
-      | LINE     | 1                           |
-      | MESSAGE  | image watermelon.gif exists |
+      | FILENAME | 1.md                 |
+      | LINE     | 1                    |
+      | MESSAGE  | image watermelon.gif |
 
 
   Scenario: non-existing local HTML image
@@ -82,9 +82,9 @@ Feature: checking embedded images
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                                                           |
-      | LINE     | 1                                                                                              |
-      | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png exists |
+      | FILENAME | 1.md                                                                                   |
+      | LINE     | 1                                                                                      |
+      | MESSAGE  | image http:/www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
 
   @online
@@ -95,9 +95,9 @@ Feature: checking embedded images
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                                                           |
-      | LINE     | 1                                                                                              |
-      | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png exists |
+      | FILENAME | 1.md                                                                                   |
+      | LINE     | 1                                                                                      |
+      | MESSAGE  | image http:/www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
 
   @online

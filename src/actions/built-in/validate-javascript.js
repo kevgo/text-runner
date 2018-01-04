@@ -2,7 +2,7 @@
 
 // Runs the JavaScript code given in the code block
 module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}) {
-  args.formatter.start('validating JavaScript')
+  args.formatter.action('validating JavaScript')
 
   const code = args.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {
     if (nodes.length === 0) return 'no code to run found'
@@ -15,9 +15,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
   try {
     /* eslint-disable no-new, no-new-func */
     new Function(code)
-    args.formatter.success('valid Javascript code')
   } catch (e) {
-    args.formatter.error(`invalid Javascript: ${e.message}`)
-    throw new Error('1')
+    throw new Error(`invalid Javascript: ${e.message}`)
   }
 }

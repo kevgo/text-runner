@@ -37,17 +37,10 @@ class ActivityListBuilder {
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
         }
-        try {
-          currentRunnerType = this.actions.actionFor(blockType, this.filePath)
-          if (currentRunnerType) {
-            insideActiveBlock = true
-            nodesForCurrentRunner = []
-          }
-        } catch (e) {
-          if (e.message !== '1') {
-            console.log(e)
-          }
-          throw (e)
+        currentRunnerType = this.actions.actionFor(blockType, this.filePath)
+        if (currentRunnerType) {
+          insideActiveBlock = true
+          nodesForCurrentRunner = []
         }
         continue
       }

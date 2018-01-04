@@ -1,6 +1,6 @@
 // @flow
 
-const Formatter = require('../../formatters/formatter.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?string
 
@@ -9,14 +9,9 @@ class Searcher {
   startLine: ?number
   endLine: ?number
   nodes: ?AstNodeList
-  formatter: Formatter
 
-  constructor (value: {filePath: string, startLine: ?number, endLine: ?number, nodes: ?AstNodeList, formatter: Formatter}) {
-    this.filePath = value.filePath
-    this.startLine = value.startLine
-    this.endLine = value.endLine
-    this.nodes = value.nodes
-    this.formatter = value.formatter
+  constructor (nodes: AstNodeList) {
+    this.nodes = nodes
   }
 
   nodeContent (query: {type: ?string, types: ?string[]}, errorChecker: ErrorCheckerFunc): string {
@@ -29,7 +24,7 @@ class Searcher {
     if (content == null) content = ''
     const error = errorChecker ? errorChecker({nodes, content}) : null
     if (error != null) {
-      throw new Error(error)
+      throw new UnprintedUserError(error)
     }
     return content
   }

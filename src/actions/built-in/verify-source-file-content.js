@@ -24,15 +24,14 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     if (nodes.length > 1) return 'found multiple content blocks for file to verify, please provide only one'
   })
 
-  args.formatter.start(`verifying document content matches source code file ${cyan(fileName)}`)
+  args.formatter.action(`verifying document content matches source code file ${cyan(fileName)}`)
   const filePath = path.join(__dirname, '..', '..', '..', baseDir, fileName)
   var actualContent
   try {
     actualContent = fs.readFileSync(filePath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      args.formatter.error(`file ${cyan(filePath)} not found`)
-      throw new Error('1')
+      throw new Error(`file ${cyan(filePath)} not found`)
     } else {
       throw err
     }
@@ -40,10 +39,6 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   try {
     jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    console.log(err)
-    args.formatter.error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
-    throw new Error('1')
+    throw new Error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
   }
-
-  args.formatter.success()
 }

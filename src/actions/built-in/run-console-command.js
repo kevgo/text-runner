@@ -19,7 +19,7 @@ type ProcessInput = {
 // Runs the given commands on the console.
 // Waits until the command is finished.
 module.exports = async function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  params.formatter.start('running console command')
+  params.formatter.action('running console command')
 
   const commandsToRun = params.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length === 0) return 'no code blocks found'
@@ -34,7 +34,7 @@ module.exports = async function (params: {configuration: Configuration, formatte
 
   const inputText = params.searcher.nodeContent({type: 'htmlblock'})
   const input = await getInput(inputText, params.formatter)
-  params.formatter.refine(`running console command: ${cyan(commandsToRun)}`)
+  params.formatter.action(`running console command: ${cyan(commandsToRun)}`)
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''
   const processor = new ObservableProcess({
@@ -47,13 +47,7 @@ module.exports = async function (params: {configuration: Configuration, formatte
   for (let inputLine of input) {
     enter(processor, inputLine)
   }
-
-  try {
-    await processor.waitForEnd()
-    params.formatter.success()
-  } catch (err) {
-    params.formatter.error(err)
-  }
+  await processor.waitForEnd()
 }
 
 async function enter (processor: ObservableProcess, input: ProcessInput) {

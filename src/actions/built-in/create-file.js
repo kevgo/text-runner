@@ -7,7 +7,7 @@ const path = require('path')
 const debug = require('debug')('textrun:actions:create-file')
 
 module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  params.formatter.start('creating file')
+  params.formatter.action('creating file')
 
   const filePath = params.searcher.nodeContent({types: ['emphasizedtext', 'strongtext']}, ({nodes, content}) => {
     if (nodes.length === 0) return 'no path given for file to create'
@@ -21,15 +21,9 @@ module.exports = function (params: {configuration: Configuration, formatter: For
     if (!content) return 'no content given for file to create'
   })
 
-  params.formatter.refine(`creating file ${cyan(filePath)}`)
+  params.formatter.action(`creating file ${cyan(filePath)}`)
   const fullPath = path.join(params.configuration.testDir, filePath)
   debug(fullPath)
-  try {
-    mkdirp.sync(path.dirname(fullPath))
-    fs.writeFileSync(fullPath, content)
-    params.formatter.success()
-  } catch (err) {
-    params.formatter.error(err)
-    throw new Error('1')
-  }
+  mkdirp.sync(path.dirname(fullPath))
+  fs.writeFileSync(fullPath, content)
 }

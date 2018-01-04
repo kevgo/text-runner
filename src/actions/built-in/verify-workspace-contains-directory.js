@@ -13,18 +13,14 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   })
 
   const fullPath = path.join(args.configuration.testDir, directory)
-  args.formatter.start(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)
+  args.formatter.action(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)
   var stats
   try {
     stats = fs.lstatSync(fullPath)
   } catch (err) {
-    args.formatter.error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
-    throw new Error('1')
+    throw new Error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
   }
-  if (stats.isDirectory()) {
-    args.formatter.success()
-  } else {
-    args.formatter.error(`${cyan(bold(directory))} exists but is not a directory`)
-    throw new Error('1')
+  if (!stats.isDirectory()) {
+    throw new Error(`${cyan(bold(directory))} exists but is not a directory`)
   }
 }

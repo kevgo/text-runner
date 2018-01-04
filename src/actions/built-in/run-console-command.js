@@ -18,10 +18,10 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  params.formatter.action('running console command')
+module.exports = async function (activity: Activity) {
+  activity.formatter.action('running console command')
 
-  const commandsToRun = params.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
+  const commandsToRun = activity.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length === 0) return 'no code blocks found'
     if (nodes.length > 1) return 'found #{nodes.length} fenced code blocks. Expecting only one.'
     if (!content) return 'the block that defines console commands to run is empty'
@@ -29,19 +29,19 @@ module.exports = async function (params: {configuration: Configuration, formatte
     .map((command) => command.trim())
     .filter((e) => e)
     .map(trimDollar)
-    .map(makeGlobal(params.configuration))
+    .map(makeGlobal(activity.configuration))
     .join(' && ')
 
-  const inputText = params.searcher.nodeContent({type: 'htmlblock'})
-  const input = await getInput(inputText, params.formatter)
-  params.formatter.action(`running console command: ${cyan(commandsToRun)}`)
+  const inputText = activity.searcher.nodeContent({type: 'htmlblock'})
+  const input = await getInput(inputText, activity.formatter)
+  activity.formatter.action(`running console command: ${cyan(commandsToRun)}`)
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: params.configuration.testDir,
-    stdout: log(params.formatter.stdout),
-    stderr: params.formatter.stderr
+    cwd: activity.configuration.testDir,
+    stdout: log(activity.formatter.stdout),
+    stderr: activity.formatter.stderr
   })
 
   for (let inputLine of input) {

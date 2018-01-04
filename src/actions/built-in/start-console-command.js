@@ -11,10 +11,10 @@ const debug = require('debug')('start-console-command')
 
 // Runs the given commands on the console.
 // Leaves the command running.
-module.exports = async function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  args.formatter.action('starting a long-running process')
+module.exports = async function (activity: Activity) {
+  activity.formatter.action('starting a long-running process')
 
-  const commandsToRun = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
+  const commandsToRun = activity.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length === 0) return 'no code blocks found'
     if (nodes.length > 2) return 'found #{nodes.length} fenced code blocks. Expecting a maximum of 2.'
     if (!content) return 'the block that defines console commands to run is empty'
@@ -22,16 +22,16 @@ module.exports = async function (args: {configuration: Configuration, formatter:
     .map((line) => line.trim())
     .filter((line) => line)
     .map(trimDollar)
-    .map(makeGlobal(args.configuration))
+    .map(makeGlobal(activity.configuration))
     .join(' && ')
 
-  args.formatter.action(`starting a long-running process: ${bold(cyan(commandsToRun))}`)
+  activity.formatter.action(`starting a long-running process: ${bold(cyan(commandsToRun))}`)
   global.startConsoleCommandOutput = ''
   global.runningProcess = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: args.configuration.testDir,
-    stdout: log(args.formatter.stdout),
-    stderr: args.formatter.stderr
+    cwd: activity.configuration.testDir,
+    stdout: log(activity.formatter.stdout),
+    stderr: activity.formatter.stderr
   })
   global.runningProcessEnded = true
 }

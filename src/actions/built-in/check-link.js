@@ -6,20 +6,20 @@ const path = require('path')
 const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}) {
-  const target = params.nodes[0].content
+module.exports = async function (activity: Activity) {
+  const target = activity.nodes[0].content
   if (target == null || target === '') {
     throw new Error('link without target')
   }
-  params.formatter.action(`link to ${cyan(target)}`)
+  activity.formatter.action(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
-    await checkLinkToAnchorInSameFile(params.filename, target, params.linkTargets, params.formatter)
+    await checkLinkToAnchorInSameFile(activity.filename, target, activity.linkTargets, activity.formatter)
   } else if (isLinkToAnchorInOtherFile(target)) {
-    await checkLinkToAnchorInOtherFile(params.filename, target, params.linkTargets, params.formatter)
+    await checkLinkToAnchorInOtherFile(activity.filename, target, activity.linkTargets, activity.formatter)
   } else if (isExternalLink(target)) {
-    await checkExternalLink(target, params.formatter, params.configuration)
+    await checkExternalLink(target, activity.formatter, activity.configuration)
   } else {
-    await checkLinkToFilesystem(params.filename, target, params.formatter)
+    await checkLinkToFilesystem(activity.filename, target, activity.formatter)
   }
 }
 

@@ -117,12 +117,12 @@ Running the files happens in two phases:
   Otherwise it stops with an exit code of 0 when it reaches the end of its list of actions to perform.
 
 If the runtime encounters a user error (wrong input data or a failing text-test),
-it throws a [src/errors/unprinted-user-error.js](UnprintedUserError),
+it throws a [UnprintedUserError](src/errors/unprinted-user-error.js),
 aborting the test and
 signaling that this error has not been printed to the user yet.
 This error type is caught by the TextRunner runtime.
 If a formatter is available at that time, it prints the error via the formatter
-and re-throws it as a [src/errors/printed-user-error.js](PrintedUserError),
+and re-throws it as a [PrintedUserError](src/errors/printed-user-error.js),
 signaling that it has been printed yet.
 Other error types (TypeErrors, ReferenceErrors, etc)
 are considered developer errors and passed through to the caller of TextRunner's JS API.

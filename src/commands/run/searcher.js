@@ -16,6 +16,7 @@ class Searcher {
 
   // Returns the textual content of the node matching the given query
   tagContent (query: NodeQuery, options: {default?: string}): string {
+    if (options == null) options = {}
     const matchingNode = this.findNode(query, options)
     if (matchingNode == null) {
       if (options.default != null) {
@@ -34,6 +35,7 @@ class Searcher {
 
   // findNode returns the AstNode matching the given query
   findNode (query: NodeQuery, options: {default?: string}): ?AstNode {
+    if (options == null) options = {}
     this.query = query
     const result = this.nodes.filter(this._getMatcher())
     if (result.length > 1) throw new Error(`found more than one ${this._queryName()}`)
@@ -41,7 +43,7 @@ class Searcher {
       if (options.default != null) {
         return null
       } else {
-        throw new Error(`no ${this._queryName()} found`)
+        throw new Error(`no ${this._queryName()} tag found in this active block`)
       }
     }
     return result[0]

@@ -6,7 +6,7 @@ const glob = require('glob')
 const interpret = require('interpret')
 const path = require('path')
 const rechoir = require('rechoir')
-const UserError = require('../errors/user-error.js')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 class ActionManager {
   // Loads and provides built-in and custom actions
@@ -33,7 +33,7 @@ class ActionManager {
         errorText += `* ${prefix}${actionName}\n`
       }
       this.formatter.startFile(filePath)
-      throw new UserError(errorText)
+      throw new UnprintedUserError(errorText)
     }
     return result
   }

@@ -3,7 +3,7 @@
 const {bold, cyan} = require('chalk')
 const fs = require('fs')
 const path = require('path')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 // Verifies that a local directory linked in MarkDown exists
 module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
@@ -17,11 +17,11 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
   try {
     stats = fs.lstatSync(path.join(process.cwd(), directory))
   } catch (err) {
-    throw new UserError(`directory ${cyan(bold(directory))} does not exist in the source code`)
+    throw new UnprintedUserError(`directory ${cyan(bold(directory))} does not exist in the source code`)
   }
   if (stats.isDirectory()) {
     args.formatter.success(`directory ${cyan(bold(directory))} exists in the source code`)
   } else {
-    throw new UserError(`${cyan(bold(directory))} exists in the source code but is not a directory`)
+    throw new UnprintedUserError(`${cyan(bold(directory))} exists in the source code but is not a directory`)
   }
 }

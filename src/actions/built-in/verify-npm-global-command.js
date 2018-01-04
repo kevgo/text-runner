@@ -3,7 +3,7 @@
 const {cyan, green, red} = require('chalk')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying exported global command')
@@ -17,7 +17,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   args.formatter.refine(`looking for an exported ${cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
-    throw new UserError(`${cyan('package.json')} does not export a ${red(commandName)} command`)
+    throw new UnprintedUserError(`${cyan('package.json')} does not export a ${red(commandName)} command`)
   }
   args.formatter.success(`provides a global ${green(commandName)} command`)
 }

@@ -4,7 +4,7 @@ const {cyan, green} = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying NPM installation instructions')
@@ -18,7 +18,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   args.formatter.start(`verifying NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    throw new UserError(`could not find ${cyan(pkg.name)} in installation instructions`)
+    throw new UnprintedUserError(`could not find ${cyan(pkg.name)} in installation instructions`)
   }
   args.formatter.success(`installs ${green(pkg.name)}`)
 }

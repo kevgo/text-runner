@@ -1,6 +1,6 @@
 // @flow
 
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 // Runs the JavaScript code given in the code block
 module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}) {
@@ -19,6 +19,6 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
     new Function(code)
     args.formatter.success('valid Javascript code')
   } catch (e) {
-    throw new UserError(`invalid Javascript: ${e.message}`)
+    throw new UnprintedUserError(`invalid Javascript: ${e.message}`)
   }
 }

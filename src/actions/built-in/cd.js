@@ -3,7 +3,7 @@
 const {bold, cyan} = require('chalk')
 const path = require('path')
 const debug = require('debug')('textrun:actions:cd')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 // Changes the current working directory to the one given in the hyperlink or code block
 module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
@@ -23,7 +23,7 @@ module.exports = function (params: {configuration: Configuration, formatter: For
     process.chdir(fullPath)
     params.formatter.success()
   } catch (e) {
-    if (e.code === 'ENOENT') throw new UserError(`directory ${directory} not found`)
+    if (e.code === 'ENOENT') throw new UnprintedUserError(`directory ${directory} not found`)
     throw e
   }
 }

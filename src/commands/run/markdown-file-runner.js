@@ -8,7 +8,7 @@ const fs = require('fs-extra')
 const LinkTargetBuilder = require('./link-target-builder')
 const MarkdownParser = require('./markdown-parser')
 const path = require('path')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 const util = require('util')
 
 // Runs the given Markdown file
@@ -45,7 +45,7 @@ class MarkdownFileRunner {
     markdownText = markdownText.trim()
     if (markdownText.length === 0) {
       this.formatter.startFile(this.filePath)
-      throw new UserError(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
+      throw new UnprintedUserError(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
     }
     const astNodeList = this.parser.parse(markdownText)
     const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)

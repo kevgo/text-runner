@@ -12,7 +12,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
 const unique = require('array-unique')
-const UserError = require('../../src/errors/user-error.js')
+const UnprintedUserError = require('../../src/errors/unprinted-user-error.js')
 const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
@@ -132,7 +132,7 @@ const ApiWorld = function () {
     }
     const expected = stripAnsi(expectedText)
     if (!actual.includes(expected)) {
-      throw new UserError(`Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`)
+      throw new UnprintedUserError(`Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`)
     }
   }
 
@@ -143,7 +143,7 @@ const ApiWorld = function () {
 
   this.verifyFailure = (table) => {
     if (this.formatter.errorMessages.some((message) => message.includes(table['ERROR MESSAGE']).length === 0)) {
-      throw new UserError(`Expected\n\n${cyan(this.formatter.errorMessages[0])}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`)
+      throw new UnprintedUserError(`Expected\n\n${cyan(this.formatter.errorMessages[0])}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`)
     }
     if (table.FILENAME) expect(this.formatter.filePaths).to.include(table.FILENAME)
     if (table.LINE) expect(this.formatter.lines).to.include(table.LINE)
@@ -156,7 +156,7 @@ const ApiWorld = function () {
     if (table.MESSAGE) {
       const activities = standardizePaths(this.formatter.activities)
       if (!activities.some((activity) => activity.includes(table.MESSAGE))) {
-        throw new UserError(`activity ${cyan(table.MESSAGE)} not found in ${activities.join(', ')}`)
+        throw new UnprintedUserError(`activity ${cyan(table.MESSAGE)} not found in ${activities.join(', ')}`)
       }
     }
     if (table.WARNING) expect(standardizePaths(this.formatter.warnings)).to.include(table.WARNING)

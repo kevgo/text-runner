@@ -10,7 +10,7 @@ const hasCommand = require('./helpers/has-command')
 const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
-const UserError = require('./errors/user-error.js')
+const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
@@ -28,14 +28,10 @@ class TextRunner {
 
   constructor (constructorArgs: TextRunnerConfig, configPath) {
     this.constructorArgs = constructorArgs
-    try {
-      this.configuration = new Configuration(configPath, this.constructorArgs)
-      const formatterManager = new FormatterManager()
-      this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
-      this.actions = new ActionManager(this.formatter, this.configuration)
-    } catch (err) {
-      throw new UnprintedUserError(err)
-    }
+    this.configuration = new Configuration(configPath, this.constructorArgs)
+    const formatterManager = new FormatterManager()
+    this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
+    this.actions = new ActionManager(this.formatter, this.configuration)
   }
 
   // Tests the documentation according to the given command and arguments
@@ -55,9 +51,9 @@ class TextRunner {
         await this._unknownCommand(command)
       }
     } catch (err) {
-      if (err instanceof UserError) {
+      if (err instanceof UnprintedUserError) {
         this.formatter.error(err.message)
-        throw err
+        throw new PrintedUserError(err)
       } else {
         throw err
       }
@@ -71,10 +67,10 @@ class TextRunner {
   }
 
   async _missingFile (filename) {
-    throw new UserError(`file or directory does not exist: ${red(filename)}`)
+    throw new UnprintedUserError(`file or directory does not exist: ${red(filename)}`)
   }
 
   async _unknownCommand (command) {
-    throw new UserError(`unknown command: ${red(command)}`)
+    throw new UnprintedUserError(`unknown command: ${red(command)}`)
   }
 }

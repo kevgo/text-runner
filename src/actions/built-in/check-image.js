@@ -4,14 +4,14 @@ const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const request = require('request-promise-native')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 // Checks for broken hyperlinks
 module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, configuration: Configuration}) {
   params.formatter.start(`checking image`)
   const node = params.nodes[0]
   if (node.src == null || node.src === '') {
-    throw new UserError('image tag without source')
+    throw new UnprintedUserError('image tag without source')
   }
   // $FlowFixMe
   const imagePath = path.join(path.dirname(params.filename), node.src)
@@ -28,7 +28,7 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
     await fs.stat(path.join(process.cwd(), imagePath))
     formatter.success(`image ${cyan(imagePath)} exists`)
   } catch (err) {
-    throw new UserError(`image ${red(imagePath)} does not exist`)
+    throw new UnprintedUserError(`image ${red(imagePath)} does not exist`)
   }
 }
 

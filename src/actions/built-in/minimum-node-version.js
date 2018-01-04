@@ -4,7 +4,7 @@ const {cyan} = require('chalk')
 const fs = require('fs')
 const jsYaml = require('js-yaml')
 const minimum = require('../../helpers/minimum.js')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   params.formatter.start('determining minimum supported NodeJS version')
@@ -19,22 +19,22 @@ module.exports = function (params: {configuration: Configuration, formatter: For
   try {
     supportedVersion = getSupportedVersion()
   } catch (err) {
-    throw new UserError(err.message)
+    throw new UnprintedUserError(err.message)
   }
   if (supportedVersion === documentedVersion) {
     params.formatter.success(`requires at least Node ${cyan(supportedVersion)}`)
     return
   }
   if (supportedVersion !== documentedVersion) {
-    throw new UserError(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)
+    throw new UnprintedUserError(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)
   }
 }
 
 function getSupportedVersion () {
   const content = loadYmlFile('.travis.yml')
-  if (!content) throw new UserError('.travis.yml is empty')
+  if (!content) throw new UnprintedUserError('.travis.yml is empty')
   const minimumVersion = parseInt(minimum(content.node_js))
-  if (isNaN(minimumVersion)) throw new UserError('listed version is not a number')
+  if (isNaN(minimumVersion)) throw new UnprintedUserError('listed version is not a number')
   return minimumVersion
 }
 

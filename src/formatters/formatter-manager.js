@@ -2,7 +2,7 @@
 
 const glob = require('glob')
 const path = require('path')
-const UserError = require('../errors/user-error.js')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 class FormatterManager {
   // Returns a list of all available formatter names
@@ -27,7 +27,7 @@ class FormatterManager {
       return new FormatterClass()
     } catch (e) {
       if (e.code === 'MODULE_NOT_FOUND') {
-        throw new UserError(`Unknown formatter: '${name}'\n\nAvailable formatters are ${this.availableFormatterNames().join(', ')}`)
+        throw new UnprintedUserError(`Unknown formatter: '${name}'\n\nAvailable formatters are ${this.availableFormatterNames().join(', ')}`)
       } else {
         throw e
       }

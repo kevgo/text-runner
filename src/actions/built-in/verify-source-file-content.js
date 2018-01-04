@@ -5,7 +5,7 @@ const eol = require('eol')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const UserError = require('../../errors/user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   const fileName = args.searcher.nodeContent({type: 'strongtext'}, ({nodes, content}) => {
@@ -32,7 +32,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     actualContent = fs.readFileSync(filePath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      throw new UserError(`file ${cyan(filePath)} not found`)
+      throw new UnprintedUserError(`file ${cyan(filePath)} not found`)
     } else {
       throw err
     }
@@ -40,7 +40,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   try {
     jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    throw new UserError(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
+    throw new UnprintedUserError(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
   }
 
   args.formatter.success()

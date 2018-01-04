@@ -1,6 +1,7 @@
 // @flow
 
 const Formatter = require('../../formatters/formatter.js')
+const UserError = require('../../commands/run/user-error.js')
 
 type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?string
 

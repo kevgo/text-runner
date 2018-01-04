@@ -12,6 +12,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
 const unique = require('array-unique')
+const UserError = require('../../src/commands/run/user-error.js')
 const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {

@@ -6,6 +6,7 @@ const glob = require('glob')
 const interpret = require('interpret')
 const path = require('path')
 const rechoir = require('rechoir')
+const UserError = require('../commands/run/user-error.js')
 
 class ActionManager {
   // Loads and provides built-in and custom actions

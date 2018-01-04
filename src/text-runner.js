@@ -10,6 +10,7 @@ const hasCommand = require('./helpers/has-command')
 const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
+const UserError = require('./commands/run/user-error.js')
 
 // Tests the documentation in the given directory
 module.exports = async function (value: {command: string, file: string, fast: boolean, format: Formatter}) {

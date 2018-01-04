@@ -4,6 +4,7 @@ const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const request = require('request-promise-native')
+const UserError = require('../../commands/run/user-error.js')
 
 // Checks for broken hyperlinks
 module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}) {

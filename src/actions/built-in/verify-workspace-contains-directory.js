@@ -3,6 +3,7 @@
 const {bold, cyan} = require('chalk')
 const fs = require('fs')
 const path = require('path')
+const UserError = require('../../commands/run/user-error.js')
 
 // Verifies that the test workspace contains the given directory
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {

@@ -125,7 +125,10 @@ const ApiWorld = function () {
   }
 
   this.verifyErrormessage = (expectedText: string) => {
-    const actual = stripAnsi(this.formatter.errorMessages.join())
+    var actual = stripAnsi(this.formatter.errorMessages.join())
+    if (this.error) {
+      actual += stripAnsi(this.error.message)
+    }
     const expected = stripAnsi(expectedText)
     if (!actual.includes(expected)) {
       throw new UserError(`Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`)

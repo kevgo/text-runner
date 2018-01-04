@@ -1,6 +1,8 @@
 // @flow
 
 type NodeQuery = string | string[]
+
+const quoteString = require('../../helpers/quote-string.js')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 class Searcher {
@@ -38,7 +40,7 @@ class Searcher {
     if (options == null) options = {}
     this.query = query
     const result = this.nodes.filter(this._getMatcher())
-    if (result.length > 1) throw new Error(`found more than one ${this._queryName()}`)
+    if (result.length > 1) throw new Error(`found more than one ${this._queryName()} tag in the active block`)
     if (result.length === 0) {
       if (options.default != null) {
         return null
@@ -72,9 +74,10 @@ class Searcher {
   // _queryName returns a textual representation of the current query
   _queryName (): string {
     if (typeof this.query === 'string') {
-      return this.query
+      return quoteString(this.query)
     } else {
-      return this.query.join('|')
+      return this.query.map(quoteString)
+                 .join(' or ')
     }
   }
 }

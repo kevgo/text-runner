@@ -1,10 +1,10 @@
 // @flow
 
 // Waits until the currently running console command produces the given output
-module.exports = async function (args: {formatter: Formatter, searcher: Searcher}) {
-  args.formatter.action('waiting for output of the running console process')
+module.exports = async function (activity: Activity) {
+  activity.formatter.action('waiting for output of the running console process')
 
-  const expectedOutput = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
+  const expectedOutput = activity.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
     if (nodes.length === 0) return 'no code blocks found'
     if (nodes.length > 1) return `found ${nodes.length} fenced code blocks. Expecting a maximum of 1.`
     if (!content) return 'the block that defines console commands to run is empty'
@@ -15,7 +15,7 @@ module.exports = async function (args: {formatter: Formatter, searcher: Searcher
                                       .filter((line) => line)
 
   for (let line of expectedLines) {
-    args.formatter.output(`waiting for ${line}`)
+    activity.formatter.output(`waiting for ${line}`)
     await global.runningProcess.waitForText(line)
   }
 }

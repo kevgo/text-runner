@@ -1,16 +1,16 @@
 // @flow
 
 // Runs the JavaScript code given in the code block
-module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}) {
-  args.formatter.action('validating JavaScript')
+module.exports = function (activity: Activity) {
+  activity.formatter.action('validating JavaScript')
 
-  const code = args.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {
+  const code = activity.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {
     if (nodes.length === 0) return 'no code to run found'
     if (nodes.length > 1) return 'too many code blocks found'
     if (!content) return 'no JavaScript code found in the fenced block'
   })
 
-  args.formatter.output(code)
+  activity.formatter.output(code)
 
   try {
     /* eslint-disable no-new, no-new-func */

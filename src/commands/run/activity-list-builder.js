@@ -54,6 +54,7 @@ class ActivityListBuilder {
             runner: currentRunnerType,
             nodes: nodesForCurrentRunner,
             formatter: this.formatter,
+            linkTargets: this.linkTargets,
             configuration: this.configuration,
             searcher: new Searcher(nodesForCurrentRunner)
           })
@@ -76,6 +77,7 @@ class ActivityListBuilder {
           endLine: node.line,
           nodes: [node],
           runner: this.actions.actionFor('checkImage', this.filePath),
+          linkTargets: this.linkTargets,
           formatter: this.formatter,
           configuration: this.configuration,
           searcher: new Searcher([node])

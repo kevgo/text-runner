@@ -10,7 +10,7 @@ describe('Searcher', function () {
       {type: 'link', content: 'two'},
       {type: 'link', content: 'three'}
     ]
-    this.searcher = Searcher(nodes)
+    this.searcher = new Searcher(nodes)
   })
 
   context('string query', function () {

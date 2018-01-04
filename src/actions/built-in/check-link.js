@@ -4,13 +4,12 @@ const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const request = require('request-promise-native')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 // Checks for broken hyperlinks
 module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}) {
   const target = params.nodes[0].content
   if (target == null || target === '') {
-    throw new UnprintedUserError('link without target')
+    throw new Error('link without target')
   }
   params.formatter.start(`checking link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
@@ -56,14 +55,14 @@ async function checkLinkToFilesystem (filename: string, target: string, formatte
       formatter.success(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
-    throw new UnprintedUserError(`link to non-existing local file ${red(target)}`)
+    throw new Error(`link to non-existing local file ${red(target)}`)
   }
 }
 
 async function checkLinkToAnchorInSameFile (filename: string, target: string, linkTargets: LinkTargetList, formatter: Formatter) {
   const targetEntry = linkTargets[filename].filter((linkTarget) => linkTarget.name === target.substr(1))[0]
   if (!targetEntry) {
-    throw new UnprintedUserError(`link to non-existing local anchor ${red(target)}`)
+    throw new Error(`link to non-existing local anchor ${red(target)}`)
   }
   if (targetEntry.type === 'heading') {
     formatter.success(`link to local heading ${cyan(targetEntry.text)}`)

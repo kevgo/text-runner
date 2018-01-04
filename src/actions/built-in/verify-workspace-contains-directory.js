@@ -3,7 +3,6 @@
 const {bold, cyan} = require('chalk')
 const fs = require('fs')
 const path = require('path')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 // Verifies that the test workspace contains the given directory
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
@@ -19,11 +18,11 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   try {
     stats = fs.lstatSync(fullPath)
   } catch (err) {
-    throw new UnprintedUserError(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
+    throw new Error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
   }
   if (stats.isDirectory()) {
     args.formatter.success()
   } else {
-    throw new UnprintedUserError(`${cyan(bold(directory))} exists but is not a directory`)
+    throw new Error(`${cyan(bold(directory))} exists but is not a directory`)
   }
 }

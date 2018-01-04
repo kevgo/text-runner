@@ -4,7 +4,6 @@ const {bold, cyan, red} = require('chalk')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   const filePath = args.searcher.nodeContent({ types: ['strongtext', 'emphasizedtext'] }, ({nodes, content}) => {
@@ -25,7 +24,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     actualContent = fs.readFileSync(fullPath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      throw new UnprintedUserError(`file ${red(filePath)} not found`)
+      throw new Error(`file ${red(filePath)} not found`)
     } else {
       throw err
     }
@@ -34,6 +33,6 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
     args.formatter.success()
   } catch (err) {
-    throw new UnprintedUserError(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
+    throw new Error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
   }
 }

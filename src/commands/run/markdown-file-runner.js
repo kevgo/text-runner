@@ -66,15 +66,28 @@ class MarkdownFileRunner {
     await delay(1)
     block.formatter.startFile(block.filename)
     block.formatter.setLines(block.startLine, block.endLine)
-    if (block.runner.length === 1) {
-      // synchronous action method or returns a promise
-      await Promise.resolve(block.runner(block))
-    } else {
-      // asynchronous action method
-      const promisified = util.promisify(block.runner)
-      await promisified(block)
+    try {
+      if (block.runner.length === 1) {
+        // synchronous action method or returns a promise
+        await Promise.resolve(block.runner(block))
+      } else {
+        // asynchronous action method
+        const promisified = util.promisify(block.runner)
+        await promisified(block)
+      }
+    } catch (err) {
+      if (isUserError(err)) {
+        throw new UnprintedUserError(err)
+      } else {
+        // here we have a developer error
+        throw err
+      }
     }
   }
+}
+
+function isUserError (err: Error): boolean {
+  return err.name === 'Error'
 }
 
 module.exports = MarkdownFileRunner

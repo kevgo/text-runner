@@ -1,6 +1,6 @@
 // @flow
 
-const {cyan, green} = require('chalk')
+const {cyan} = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')

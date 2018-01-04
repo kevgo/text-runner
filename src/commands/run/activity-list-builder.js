@@ -46,16 +46,18 @@ class ActivityListBuilder {
       }
 
       if (this._isActiveBlockEndTag(node)) {
-        result.push({
-          filename: this.filePath,
-          startLine: startLine,
-          endLine: node.line,
-          runner: currentRunnerType,
-          nodes: nodesForCurrentRunner,
-          formatter: this.formatter,
-          configuration: this.configuration,
-          searcher: new Searcher(nodesForCurrentRunner)
-        })
+        if (insideActiveBlock) {
+          result.push({
+            filename: this.filePath,
+            startLine: startLine,
+            endLine: node.line,
+            runner: currentRunnerType,
+            nodes: nodesForCurrentRunner,
+            formatter: this.formatter,
+            configuration: this.configuration,
+            searcher: new Searcher(nodesForCurrentRunner)
+          })
+        }
         insideActiveBlock = false
         nodesForCurrentRunner = []
         continue

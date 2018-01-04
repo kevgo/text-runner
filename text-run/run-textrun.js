@@ -3,7 +3,7 @@ const ObservableProcess = require('observable-process')
 const path = require('path')
 
 module.exports = async function ({configuration, formatter, searcher}) {
-  formatter.start('running the created Markdown file')
+  formatter.action('running the created Markdown file')
 
   var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'

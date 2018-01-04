@@ -1,21 +1,19 @@
 // @flow
 
-const {cyan, green} = require('chalk')
+const {cyan} = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  args.formatter.start('verifying NPM installation instructions')
+  args.formatter.action('verifying NPM installation instructions')
   const installText = trimDollar(args.searcher.tagContent(['fence', 'code']))
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
-  args.formatter.start(`verifying NPM installs ${cyan(pkg.name)}`)
+  args.formatter.action(`verify NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    args.formatter.error(`could not find ${cyan(pkg.name)} in installation instructions`)
-    throw new Error('1')
+    throw new Error(`could not find ${cyan(pkg.name)} in installation instructions`)
   }
-  args.formatter.success(`installs ${green(pkg.name)}`)
 }
 
 function missesPackageName (installText: string, packageName: string): boolean {

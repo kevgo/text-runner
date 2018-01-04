@@ -6,26 +6,21 @@ const jsYaml = require('js-yaml')
 const minimum = require('../../helpers/minimum.js')
 
 module.exports = function (params: Activity) {
-  params.formatter.start('determining minimum supported NodeJS version')
+  params.formatter.action('determining minimum supported NodeJS version')
 
   const documentedVersion = parseInt(params.searcher.tagContent('text'))
   if (isNaN(documentedVersion)) throw new Error('given Node version is not a number')
-  params.formatter.refine(`determining whether minimum supported NodeJS version is ${cyan(documentedVersion)}`)
+  params.formatter.action(`determining whether minimum supported NodeJS version is ${cyan(documentedVersion)}`)
 
   var supportedVersion
   try {
     supportedVersion = getSupportedVersion()
+    params.formatter.action(`requires at least Node ${cyan(supportedVersion)}`)
   } catch (err) {
-    params.formatter.error(err)
-    throw new Error('1')
-  }
-  if (supportedVersion === documentedVersion) {
-    params.formatter.success(`requires at least Node ${cyan(supportedVersion)}`)
-    return
+    throw new Error(err.message)
   }
   if (supportedVersion !== documentedVersion) {
-    params.formatter.error(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)
-    throw new Error('1')
+    throw new Error(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)
   }
 }
 

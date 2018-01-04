@@ -1,6 +1,8 @@
 // @flow
 
 type NodeQuery = string | string[]
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?string
 
 module.exports = class Searcher {
   // the AstNodes that belong to the active block that this Searcher is for
@@ -20,7 +22,7 @@ module.exports = class Searcher {
       if (options.default != null) {
         return options.default
       } else {
-        throw new Error(`no ${this._queryName()} found`)
+        throw new UnprintedUserError(`no ${this._queryName()} found`)
       }
     }
     var result = matchingNode.content || options.default || ''

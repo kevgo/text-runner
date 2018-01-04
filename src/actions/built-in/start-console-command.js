@@ -12,7 +12,7 @@ const debug = require('debug')('start-console-command')
 // Runs the given commands on the console.
 // Leaves the command running.
 module.exports = async function (args: Activity) {
-  args.formatter.start('starting a long-running process')
+  args.formatter.action('starting a long-running process')
 
   const commandsToRun = args.searcher.tagContent('fence')
     .split('\n')
@@ -22,7 +22,7 @@ module.exports = async function (args: Activity) {
     .map(makeGlobal(args.configuration))
     .join(' && ')
 
-  args.formatter.refine(`starting a long-running process: ${bold(cyan(commandsToRun))}`)
+  args.formatter.action(`starting a long-running process: ${bold(cyan(commandsToRun))}`)
   global.startConsoleCommandOutput = ''
   global.runningProcess = new ObservableProcess({
     commands: callArgs(commandsToRun),
@@ -31,8 +31,6 @@ module.exports = async function (args: Activity) {
     stderr: args.formatter.stderr
   })
   global.runningProcessEnded = true
-
-  args.formatter.success()
 }
 
 function log (stdout): WriteStream {

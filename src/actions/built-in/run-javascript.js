@@ -1,7 +1,7 @@
 // @flow
 
 // Runs the JavaScript code given in the code block
-module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}, done: DoneFunction) {
+module.exports = function (args: Activity, done: DoneFunction) {
   args.formatter.action('running JavaScript code')
 
   var code = args.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {

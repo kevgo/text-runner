@@ -1,7 +1,7 @@
 // @flow
 
 // Runs the JavaScript code given in the code block
-module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}) {
+module.exports = function (args: Activity) {
   args.formatter.action('validating JavaScript')
 
   const code = args.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {

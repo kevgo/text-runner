@@ -6,7 +6,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const debug = require('debug')('textrun:actions:create-file')
 
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = function (params: Activity) {
   params.formatter.action('creating file')
 
   const filePath = params.searcher.nodeContent({types: ['emphasizedtext', 'strongtext']}, ({nodes, content}) => {

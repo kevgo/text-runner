@@ -4,7 +4,7 @@ const jsdiffConsole = require('jsdiff-console')
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = function (args: Activity) {
   args.formatter.action('verifying the output of the last started console command')
 
   const expectedLines = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {

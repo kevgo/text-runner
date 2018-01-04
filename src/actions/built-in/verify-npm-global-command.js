@@ -4,7 +4,7 @@ const {cyan, red} = require('chalk')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = function (args: Activity) {
   args.formatter.action('NPM module exports the command')
 
   const commandName = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {

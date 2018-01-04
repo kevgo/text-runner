@@ -5,7 +5,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const debug = require('debug')('textrun:actions:create-directory')
 
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = function (params: Activity) {
   params.formatter.action('creating directory')
 
   const directoryName = params.searcher.nodeContent({type: 'code'}, ({nodes, content}) => {

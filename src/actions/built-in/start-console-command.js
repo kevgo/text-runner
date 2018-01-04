@@ -11,7 +11,7 @@ const debug = require('debug')('start-console-command')
 
 // Runs the given commands on the console.
 // Leaves the command running.
-module.exports = async function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = async function (args: Activity) {
   args.formatter.action('starting a long-running process')
 
   const commandsToRun = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {

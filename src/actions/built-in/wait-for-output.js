@@ -1,7 +1,7 @@
 // @flow
 
 // Waits until the currently running console command produces the given output
-module.exports = async function (args: {formatter: Formatter, searcher: Searcher}) {
+module.exports = async function (args: Activity) {
   args.formatter.action('waiting for output of the running console process')
 
   const expectedOutput = args.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {

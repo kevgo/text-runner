@@ -6,7 +6,7 @@ const path = require('path')
 const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, configuration: Configuration}) {
+module.exports = async function (params: Activity) {
   params.formatter.action(`checking image`)
   const node = params.nodes[0]
   if (node.src == null || node.src === '') {

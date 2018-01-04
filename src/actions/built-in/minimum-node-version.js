@@ -5,7 +5,7 @@ const fs = require('fs')
 const jsYaml = require('js-yaml')
 const minimum = require('../../helpers/minimum.js')
 
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = function (params: Activity) {
   params.formatter.action('determining minimum supported NodeJS version')
 
   const documentedVersion = parseInt(params.searcher.nodeContent({type: 'text'}, ({nodes, content}) => {

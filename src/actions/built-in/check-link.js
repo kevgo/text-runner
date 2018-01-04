@@ -6,7 +6,7 @@ const path = require('path')
 const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, linkTargets: LinkTargetList, configuration: Configuration}) {
+module.exports = async function (params: Activity) {
   const target = params.nodes[0].content
   if (target == null || target === '') {
     throw new Error('link without target')

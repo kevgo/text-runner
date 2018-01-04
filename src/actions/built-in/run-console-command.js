@@ -18,7 +18,7 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
+module.exports = async function (params: Activity) {
   params.formatter.action('running console command')
 
   const commandsToRun = params.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {

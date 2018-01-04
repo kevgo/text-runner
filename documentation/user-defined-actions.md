@@ -29,7 +29,6 @@ Let's create this file with the content:
 module.exports = function({ formatter }) {
   formatter.start('greeting the world')   // start the "greeting the world" activity type
   formatter.output('Hello world!')        // print something on the console
-  formatter.success()                     // finish the started activity
 };
 ```
 
@@ -160,9 +159,6 @@ module.exports = function({formatter, searcher, nodes}) {
 
   // step 4: perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
-
-  // step 5: tell TextRunner that this action worked and we are done here
-  formatter.success()
 }
 ```
 </a>

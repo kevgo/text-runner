@@ -17,8 +17,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   args.formatter.start(`verifying NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    args.formatter.error(`could not find ${cyan(pkg.name)} in installation instructions`)
-    throw new Error('1')
+    throw new Error(`could not find ${cyan(pkg.name)} in installation instructions`)
   }
   args.formatter.success(`installs ${green(pkg.name)}`)
 }

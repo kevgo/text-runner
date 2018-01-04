@@ -10,8 +10,7 @@ module.exports = async function (params: {filename: string, formatter: Formatter
   params.formatter.start(`checking image`)
   const node = params.nodes[0]
   if (node.src == null || node.src === '') {
-    params.formatter.error('image tag without source')
-    throw new Error('1')
+    throw new Error('image tag without source')
   }
   // $FlowFixMe
   const imagePath = path.join(path.dirname(params.filename), node.src)
@@ -28,8 +27,7 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
     await fs.stat(path.join(process.cwd(), imagePath))
     formatter.success(`image ${cyan(imagePath)} exists`)
   } catch (err) {
-    formatter.error(`image ${red(imagePath)} does not exist`)
-    throw new Error(1)
+    throw new Error(`image ${red(imagePath)} does not exist`)
   }
 }
 

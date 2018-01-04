@@ -16,8 +16,7 @@ module.exports = function (args: {configuration: Configuration, formatter: Forma
   args.formatter.refine(`looking for an exported ${cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
-    args.formatter.error(`${cyan('package.json')} does not export a ${red(commandName)} command`)
-    throw new Error('1')
+    throw new Error(`${cyan('package.json')} does not export a ${red(commandName)} command`)
   }
   args.formatter.success(`provides a global ${green(commandName)} command`)
 }

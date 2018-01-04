@@ -17,7 +17,6 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
     new Function(code)
     args.formatter.success('valid Javascript code')
   } catch (e) {
-    args.formatter.error(`invalid Javascript: ${e.message}`)
-    throw new Error('1')
+    throw new Error(`invalid Javascript: ${e.message}`)
   }
 }

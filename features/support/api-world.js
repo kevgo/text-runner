@@ -12,6 +12,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
 const unique = require('array-unique')
+const UnprintedUserError = require('../../src/errors/unprinted-user-error.js')
 const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
@@ -101,7 +102,7 @@ const ApiWorld = function () {
   // ApiWorld provides step implementations that run and test TextRunner
   // via its Javascript API
 
-  this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter}) {
+  this.execute = async function (args: {command: string, file: string, fast: boolean, format: Formatter, expectError: boolean}) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
     this.formatter = new TestFormatter({verbose: this.verbose})
@@ -114,6 +115,10 @@ const ApiWorld = function () {
     this.cwdAfterRun = process.cwd()
     process.chdir(existingDir)
     this.output = this.formatter.text
+    if (this.error && !args.expectError) {
+      // Signal the error to the Cucumber runtime
+      throw this.error
+    }
   }
 
   this.verifyCallError = (expectedError: ErrnoError) => {
@@ -121,10 +126,13 @@ const ApiWorld = function () {
   }
 
   this.verifyErrormessage = (expectedText: string) => {
-    const actual = stripAnsi(this.formatter.errorMessages.join())
+    var actual = stripAnsi(this.formatter.errorMessages.join())
+    if (this.error) {
+      actual += stripAnsi(this.error.message)
+    }
     const expected = stripAnsi(expectedText)
     if (!actual.includes(expected)) {
-      throw new Error(`Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`)
+      throw new UnprintedUserError(`Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`)
     }
   }
 
@@ -135,7 +143,7 @@ const ApiWorld = function () {
 
   this.verifyFailure = (table) => {
     if (this.formatter.errorMessages.some((message) => message.includes(table['ERROR MESSAGE']).length === 0)) {
-      throw new Error(`Expected\n\n${cyan(this.formatter.errorMessages[0])}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`)
+      throw new UnprintedUserError(`Expected\n\n${cyan(this.formatter.errorMessages[0])}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`)
     }
     if (table.FILENAME) expect(this.formatter.filePaths).to.include(table.FILENAME)
     if (table.LINE) expect(this.formatter.lines).to.include(table.LINE)
@@ -148,7 +156,7 @@ const ApiWorld = function () {
     if (table.MESSAGE) {
       const activities = standardizePaths(this.formatter.activities)
       if (!activities.some((activity) => activity.includes(table.MESSAGE))) {
-        throw new Error(`activity ${cyan(table.MESSAGE)} not found in ${activities.join(', ')}`)
+        throw new UnprintedUserError(`activity ${cyan(table.MESSAGE)} not found in ${activities.join(', ')}`)
       }
     }
     if (table.WARNING) expect(standardizePaths(this.formatter.warnings)).to.include(table.WARNING)

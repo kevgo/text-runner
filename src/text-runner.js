@@ -10,6 +10,8 @@ const hasCommand = require('./helpers/has-command')
 const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
+const PrintedUserError = require('./errors/printed-user-error.js')
+const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
 module.exports = async function (value: {command: string, file: string, fast: boolean, format: Formatter}) {
@@ -34,18 +36,27 @@ class TextRunner {
 
   // Tests the documentation according to the given command and arguments
   async execute (command, file) {
-    if (command === 'run' && hasDirectory(file)) {
-      await this._command('run').runDirectory(file)
-    } else if (command === 'run' && isMarkdownFile(file)) {
-      await this._command('run').runFile(file)
-    } else if (command === 'run' && isGlob(file)) {
-      await this._command('run').runGlob(file)
-    } else if (command === 'run' && file) {
-      await this._missingFile(file)
-    } else if (hasCommand(command)) {
-      await this._command(command).run()
-    } else {
-      await this._unknownCommand(command)
+    try {
+      if (command === 'run' && hasDirectory(file)) {
+        await this._command('run').runDirectory(file)
+      } else if (command === 'run' && isMarkdownFile(file)) {
+        await this._command('run').runFile(file)
+      } else if (command === 'run' && isGlob(file)) {
+        await this._command('run').runGlob(file)
+      } else if (command === 'run' && file) {
+        await this._missingFile(file)
+      } else if (hasCommand(command)) {
+        await this._command(command).run()
+      } else {
+        await this._unknownCommand(command)
+      }
+    } catch (err) {
+      if (err instanceof UnprintedUserError) {
+        this.formatter.error(err.message)
+        throw new PrintedUserError(err)
+      } else {
+        throw err
+      }
     }
   }
 
@@ -56,13 +67,10 @@ class TextRunner {
   }
 
   async _missingFile (filename) {
-    const errorMessage = `file or directory does not exist: ${red(filename)}`
-    this.formatter.error(errorMessage)
-    throw new Error('1')
+    throw new UnprintedUserError(`file or directory does not exist: ${red(filename)}`)
   }
 
   async _unknownCommand (command) {
-    this.formatter.error(`unknown command: ${red(command)}`)
-    throw new Error('1')
+    throw new UnprintedUserError(`unknown command: ${red(command)}`)
   }
 }

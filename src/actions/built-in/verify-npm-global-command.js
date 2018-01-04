@@ -4,13 +4,11 @@ const {cyan, red} = require('chalk')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  args.formatter.action('NPM module exports the command')
-
-  const commandName = trimDollar(args.searcher.tagContent(['fence', 'code']))
-
+module.exports = function (activity: Activity) {
+  activity.formatter.action('NPM module exports the command')
+  const commandName = trimDollar(activity.searcher.tagContent(['fence', 'code']))
   const pkg = require(path.join(process.cwd(), 'package.json'))
-  args.formatter.action(`NPM module exports the ${cyan(commandName)} command`)
+  activity.formatter.action(`NPM module exports the ${cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
     throw new Error(`${cyan('package.json')} does not export a ${red(commandName)} command`)

@@ -5,11 +5,11 @@ const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  const filePath = args.searcher.tagContent(['strongtext', 'emphasizedtext'])
-  const expectedContent = args.searcher.tagContent(['fence', 'code'])
-  args.formatter.action(`verifying file ${cyan(filePath)}`)
-  const fullPath = path.join(args.configuration.testDir, filePath)
+module.exports = function (activity: Activity) {
+  const filePath = activity.searcher.tagContent(['strongtext', 'emphasizedtext'])
+  const expectedContent = activity.searcher.tagContent(['fence', 'code'])
+  activity.formatter.action(`verifying file ${cyan(filePath)}`)
+  const fullPath = path.join(activity.configuration.testDir, filePath)
   var actualContent
   try {
     actualContent = fs.readFileSync(fullPath, 'utf8')

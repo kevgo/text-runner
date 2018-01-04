@@ -6,14 +6,14 @@ const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  const fileName = args.searcher.tagContent('strongtext')
-  var baseDir = args.searcher.tagContent('link_open')
+module.exports = function (activity: Activity) {
+  const fileName = activity.searcher.tagContent('strongtext')
+  var baseDir = activity.searcher.tagContent('link_open')
   baseDir = baseDir || '.'
 
-  const expectedContent = args.searcher.tagContent('fence')
+  const expectedContent = activity.searcher.tagContent('fence')
 
-  args.formatter.action(`verifying document content matches source code file ${cyan(fileName)}`)
+  activity.formatter.action(`verifying document content matches source code file ${cyan(fileName)}`)
   const filePath = path.join(__dirname, '..', '..', '..', baseDir, fileName)
   var actualContent
   try {

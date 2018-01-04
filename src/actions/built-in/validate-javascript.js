@@ -1,10 +1,10 @@
 // @flow
 
 // Runs the JavaScript code given in the code block
-module.exports = function (args: Activity) {
-  args.formatter.action('validating JavaScript')
-  const code = args.searcher.tagContent('fence')
-  args.formatter.output(code)
+module.exports = function (activity: Activity) {
+  activity.formatter.action('validating JavaScript')
+  const code = activity.searcher.tagContent('fence')
+  activity.formatter.output(code)
 
   try {
     /* eslint-disable no-new, no-new-func */

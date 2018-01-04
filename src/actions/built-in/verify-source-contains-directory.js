@@ -5,9 +5,10 @@ const fs = require('fs')
 const path = require('path')
 
 // Verifies that a local directory linked in MarkDown exists
-module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {
-  const directory = args.searcher.tagContent('link_open')
-  args.formatter.action(`directory ${bold(cyan(directory))} exists in the source code`)
+module.exports = function (activity: Activity) {
+  const directory = activity.searcher.tagContent('link_open')
+  activity.formatter.action(`directory ${bold(cyan(directory))} exists in the source code`)
+  activity.formatter.action(`directory ${bold(cyan(directory))} exists in the source code`)
   var stats
   try {
     stats = fs.lstatSync(path.join(process.cwd(), directory))

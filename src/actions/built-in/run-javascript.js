@@ -1,15 +1,15 @@
 // @flow
 
 // Runs the JavaScript code given in the code block
-module.exports = function (args: {formatter: Formatter, searcher: Searcher, configuration: Configuration}, done: DoneFunction) {
-  args.formatter.action('running JavaScript code')
+module.exports = function (activity: Activity, done: DoneFunction) {
+  activity.formatter.action('running JavaScript code')
 
-  var code = args.searcher.tagContent('fence')
+  var code = activity.searcher.tagContent('fence')
   if (code == null) {
-    args.formatter.error('no JavaScript code found in the fenced block')
+    activity.formatter.error('no JavaScript code found in the fenced block')
     return
   }
-  code = replaceSubstitutionsInConfiguration(code, args.configuration)
+  code = replaceSubstitutionsInConfiguration(code, activity.configuration)
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
 
@@ -25,7 +25,7 @@ module.exports = function (args: {formatter: Formatter, searcher: Searcher, conf
     // sync code
     code = appendAsyncCallback(code)
   }
-  args.formatter.output(code)
+  activity.formatter.output(code)
   /* eslint-disable no-eval */
   eval(code)
 }

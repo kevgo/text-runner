@@ -18,26 +18,26 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (params: Activity) {
-  params.formatter.action('running console command')
+module.exports = async function (activity: Activity) {
+  activity.formatter.action('running console command')
 
-  const commandsToRun = params.searcher.tagContent('fence')
+  const commandsToRun = activity.searcher.tagContent('fence')
     .split('\n')
     .map((command) => command.trim())
     .filter((e) => e)
     .map(trimDollar)
-    .map(makeGlobal(params.configuration))
+    .map(makeGlobal(activity.configuration))
     .join(' && ')
 
-  params.formatter.action(`running console command: ${cyan(commandsToRun)}`)
-  const input = await getInput(params.searcher.tagContent('htmlblock', {default: ''}), params.formatter)
+  activity.formatter.action(`running console command: ${cyan(commandsToRun)}`)
+  const input = await getInput(activity.searcher.tagContent('htmlblock', {default: ''}), activity.formatter)
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: params.configuration.testDir,
-    stdout: log(params.formatter.stdout),
-    stderr: params.formatter.stderr
+    cwd: activity.configuration.testDir,
+    stdout: log(activity.formatter.stdout),
+    stderr: activity.formatter.stderr
   })
 
   for (let inputLine of input) {

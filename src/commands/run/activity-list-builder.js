@@ -23,7 +23,7 @@ class ActivityListBuilder {
   }
 
   build (tree: AstNodeList): ActivityList {
-    var insideActiveBlock = false
+    var insideActiveBlock = false                    // whether we are currently processing nodes of an active block
     var nodesForCurrentRunner: AstNodeList = []
     var startLine = 0
     var result: ActivityList = []

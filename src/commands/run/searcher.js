@@ -2,7 +2,6 @@
 
 type NodeQuery = string | string[]
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
-type ErrorCheckerFunc = (value: {nodes: AstNodeList, content: string}) => ?string
 
 class Searcher {
   // the AstNodes that belong to the active block that this Searcher is for

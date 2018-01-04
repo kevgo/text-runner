@@ -6,19 +6,19 @@ const path = require('path')
 const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = async function (params: {filename: string, formatter: Formatter, nodes: AstNodeList, configuration: Configuration}) {
-  params.formatter.action(`checking image`)
-  const node = params.nodes[0]
+module.exports = async function (activity: Activity) {
+  activity.formatter.action(`checking image`)
+  const node = activity.nodes[0]
   if (node.src == null || node.src === '') {
     throw new Error('image tag without source')
   }
   // $FlowFixMe
-  const imagePath = path.join(path.dirname(params.filename), node.src)
-  params.formatter.action(`image ${cyan(imagePath)}`)
+  const imagePath = path.join(path.dirname(activity.filename), node.src)
+  activity.formatter.action(`image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {
-    await checkRemoteImage(node, params.formatter, params.configuration)
+    await checkRemoteImage(node, activity.formatter, activity.configuration)
   } else {
-    await checkLocalImage(imagePath, params.formatter)
+    await checkLocalImage(imagePath, activity.formatter)
   }
 }
 

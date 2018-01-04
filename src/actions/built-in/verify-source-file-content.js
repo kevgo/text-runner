@@ -5,7 +5,7 @@ const eol = require('eol')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
-const UserError = require('../../commands/run/user-error.js')
+const UserError = require('../../errors/user-error.js')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   const fileName = args.searcher.nodeContent({type: 'strongtext'}, ({nodes, content}) => {

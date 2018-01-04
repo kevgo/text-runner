@@ -7,7 +7,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const tmp = require('tmp')
 const debug = require('debug')('text-runner:run-command')
-const UserError = require('../../commands/run/user-error.js')
+const UserError = require('../../errors/user-error.js')
 
 class RunCommand implements Command {
   configuration: Configuration

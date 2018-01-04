@@ -2,7 +2,7 @@
 
 const glob = require('glob')
 const path = require('path')
-const UserError = require('../commands/run/user-error.js')
+const UserError = require('../errors/user-error.js')
 
 class FormatterManager {
   // Returns a list of all available formatter names

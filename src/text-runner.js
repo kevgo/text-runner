@@ -10,7 +10,8 @@ const hasCommand = require('./helpers/has-command')
 const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
-const UserError = require('./commands/run/user-error.js')
+const UserError = require('./errors/user-error.js')
+const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
 module.exports = async function (value: {command: string, file: string, fast: boolean, format: Formatter}) {
@@ -27,10 +28,14 @@ class TextRunner {
 
   constructor (constructorArgs: TextRunnerConfig, configPath) {
     this.constructorArgs = constructorArgs
-    this.configuration = new Configuration(configPath, this.constructorArgs)
-    const formatterManager = new FormatterManager()
-    this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
-    this.actions = new ActionManager(this.formatter, this.configuration)
+    try {
+      this.configuration = new Configuration(configPath, this.constructorArgs)
+      const formatterManager = new FormatterManager()
+      this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
+      this.actions = new ActionManager(this.formatter, this.configuration)
+    } catch (err) {
+      throw new UnprintedUserError(err)
+    }
   }
 
   // Tests the documentation according to the given command and arguments
@@ -50,11 +55,10 @@ class TextRunner {
         await this._unknownCommand(command)
       }
     } catch (err) {
-      if (isProgrammerError(err)) {
+      if (err instanceof UserError) {
+        this.formatter.error(err.message)
         throw err
       } else {
-        // here we have a user error
-        this.formatter.error(err.message)
         throw err
       }
     }
@@ -73,8 +77,4 @@ class TextRunner {
   async _unknownCommand (command) {
     throw new UserError(`unknown command: ${red(command)}`)
   }
-}
-
-function isProgrammerError (err: Error): boolean {
-  return err.name !== 'Error'
 }

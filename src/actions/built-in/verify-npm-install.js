@@ -4,7 +4,7 @@ const {cyan, green} = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
-const UserError = require('../../commands/run/user-error.js')
+const UserError = require('../../errors/user-error.js')
 
 module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
   args.formatter.start('verifying NPM installation instructions')

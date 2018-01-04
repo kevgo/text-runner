@@ -2,13 +2,13 @@
 
 const ActionManager = require('../../actions/action-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
-const UserError = require('./user-error.js')
 const {cyan} = require('chalk')
 const delay = require('delay')
 const fs = require('fs-extra')
 const LinkTargetBuilder = require('./link-target-builder')
 const MarkdownParser = require('./markdown-parser')
 const path = require('path')
+const UserError = require('../../errors/user-error.js')
 const util = require('util')
 
 // Runs the given Markdown file
@@ -67,10 +67,10 @@ class MarkdownFileRunner {
     block.formatter.startFile(block.filename)
     block.formatter.setLines(block.startLine, block.endLine)
     if (block.runner.length === 1) {
-    // synchronous action method or returns a promise
+      // synchronous action method or returns a promise
       await Promise.resolve(block.runner(block))
     } else {
-    // asynchronous action method
+      // asynchronous action method
       const promisified = util.promisify(block.runner)
       await promisified(block)
     }

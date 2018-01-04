@@ -3,7 +3,7 @@
 const {bold, cyan} = require('chalk')
 const path = require('path')
 const debug = require('debug')('textrun:actions:cd')
-const UserError = require('../../commands/run/user-error.js')
+const UserError = require('../../errors/user-error.js')
 
 // Changes the current working directory to the one given in the hyperlink or code block
 module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {

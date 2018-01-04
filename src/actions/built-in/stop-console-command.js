@@ -1,6 +1,6 @@
 // @flow
 
-const UserError = require('../../commands/run/user-error.js')
+const UserError = require('../../errors/user-error.js')
 
 // Stops the currently running console command.
 module.exports = function (args: {formatter: Formatter, searcher: Searcher}) {

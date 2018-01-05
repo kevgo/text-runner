@@ -1,6 +1,7 @@
 # User-defined actions
 
-It is possible to extend the set of [built-in actions](built-in-actions.md)
+It is possible to extend the set of
+[built-in activity types](built-in-activity-types.md)
 with your custom-built ones written in JavaScript.
 Let's start by building the simplest possible action first.
 
@@ -177,5 +178,5 @@ in case no matching tag is found, e.g. `{default: ''}`.
 <hr>
 
 Read more about:
-- the [built-in actions](built-in-actions.md)
+- the [built-in activity types](built-in-activity-types.md)
 - [configure](configuration.md) TextRunner

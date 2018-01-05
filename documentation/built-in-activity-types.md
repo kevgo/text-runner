@@ -47,4 +47,4 @@ With the option `--fast` given, text-run does not check outgoing links to other 
 <hr>
 
 Read more about:
-- writing your own [user-defined actions](user-defined-actions.md)
+- writing your own [user-defined activity types](user-defined-activity-types.md)

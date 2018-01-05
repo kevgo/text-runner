@@ -50,6 +50,6 @@ with the content `foo: bar`</a> in the `tmp` subfolder of your current directory
 <hr>
 
 Read more about:
-- the other [built-in actions](built-in-actions.md)
-- writing your own [user-defined actions](user-defined-actions.md)
+- the other [built-in activity types](built-in-activity-types.md)
+- writing your own [user-defined activity types](user-defined-activity-types.md)
 - [configuring](configuration.md) TextRunner

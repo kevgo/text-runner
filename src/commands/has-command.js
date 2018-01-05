@@ -1,13 +1,7 @@
 // @flow
 
-const fs = require('fs')
-const commandPath = require('./command-path')
+const availableCommands = require('./available-commands.js')
 
 module.exports = function (command :string) :boolean {
-  try {
-    fs.statSync(commandPath(command))
-    return true
-  } catch (e) {
-    return false
-  }
+  return availableCommands().includes(command)
 }

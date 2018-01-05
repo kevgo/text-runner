@@ -100,7 +100,7 @@ Running the files happens in two phases:
   An action is an instantiated block handler function,
   locked and loaded to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
-  in the [actions](src/actions) folder.
+  in the [actions](src/activity-types) folder.
   The code base using TextRunner can also add their own action types.
   While processing the AST,
   MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)

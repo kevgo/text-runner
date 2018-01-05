@@ -48,7 +48,7 @@ class ActionManager {
   }
 
   builtinActionFilenames (): string[] {
-    return glob.sync(path.join(__dirname, '..', '..', 'activity-types', 'built-in', '*.js'))
+    return glob.sync(path.join(__dirname, '..', '..', 'activity-types', '*.js'))
   }
 
   customActionFilenames (): string[] {

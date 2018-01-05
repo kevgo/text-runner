@@ -5,13 +5,7 @@ const path = require('path')
 
 module.exports = async function ({configuration, formatter, searcher}) {
   formatter.action('verify that markdown works in text-run')
-
-  const markdown = searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length > 1) return 'Found #{nodes.length} fenced code blocks. Only one is allowed.'
-    if (nodes.length === 0) return 'You must provide the Markdown to run via text-run as a fenced code block. No such fenced block found.'
-    if (!content) return 'A fenced code block containing the Markdown to run was found, but it is empty, so I cannot run anything here.'
-  })
-
+  const markdown = searcher.tagContent('fence')
   fs.writeFileSync(path.join(configuration.testDir, '1.md'), markdown.replace(/​/g, ''))
 
   // we need to configure the TextRunner instance called by our own Markdown to run its tests in its current directory,
@@ -23,9 +17,7 @@ module.exports = async function ({configuration, formatter, searcher}) {
   if (process.platform === 'win32') textRunPath += '.cmd'
   const processor = new ObservableProcess({commands: callArgs(textRunPath), cwd: configuration.testDir, stdout: {write: formatter.output}, stderr: {write: formatter.output}})
   await processor.waitForEnd()
-  if (processor.exitCode === 0) {
-    formatter.success()
-  } else {
+  if (processor.exitCode !== 0) {
     formatter.error(`text-run exited with code ${processor.exitCode} when processing this markdown block`)
   }
 }

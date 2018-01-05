@@ -147,12 +147,8 @@ module.exports = function({formatter, searcher, nodes}) {
   formatter.action('running console command')
 
   // step 2: determine which command to run using the searcher utility
-  // (you could also iterate the "nodes" array directly here but that's more cumbersome)
-  const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
-    if (match.nodes.length === 0) return 'this block must contain a code block with the command to run'
-    if (match.nodes.length > 1) return 'please provide only one code block'
-    if (!match.content) return 'you provided a code block but it has no content'
-  })
+  // (you could also iterate the "nodes" array directly here)
+  const commandToRun = searcher.tagContent('fence')
 
   // step 3: provide TextRunner a more specific description of this action
   formatter.action('running console command: ' + commandToRun)
@@ -165,7 +161,7 @@ module.exports = function({formatter, searcher, nodes}) {
 
 <a class="tr_runTextrun"></a>
 
-The `searcher.nodeContent` method returns the content of the DOM node
+The `searcher.tagContent` method returns the content of the DOM node
 that satisfies the given query.
 In this case we are looking for a fenced code block,
 hence the query is `{type: 'fence'}`.

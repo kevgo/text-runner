@@ -28,6 +28,7 @@ module.exports = async function (activity: Activity) {
     .map(trimDollar)
     .map(makeGlobal(activity.configuration))
     .join(' && ')
+  if (commandsToRun === '') throw new Error('the block that defines console commands to run is empty')
 
   activity.formatter.action(`running console command: ${cyan(commandsToRun)}`)
   const input = await getInput(activity.searcher.tagContent('htmlblock', {default: ''}), activity.formatter)

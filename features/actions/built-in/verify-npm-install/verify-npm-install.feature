@@ -29,8 +29,8 @@ Feature: verifying NPM installation instructions
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                         |
-      | LINE     | 3-7                          |
+      | FILENAME | 1.md                                    |
+      | LINE     | 3-7                                     |
       | MESSAGE  | verify NPM installs my_enormous_package |
 
 
@@ -41,8 +41,8 @@ Feature: verifying NPM installation instructions
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                         |
-      | LINE     | 1                            |
+      | FILENAME | 1.md                                    |
+      | LINE     | 1                                       |
       | MESSAGE  | verify NPM installs my_enormous_package |
 
 
@@ -75,11 +75,11 @@ Feature: verifying NPM installation instructions
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                    |
-      | LINE          | 3                                       |
-      | MESSAGE       | verifying NPM installation instructions |
-      | ERROR MESSAGE | missing code block                      |
-      | EXIT CODE     | 1                                       |
+      | FILENAME      | 1.md                                                |
+      | LINE          | 3                                                   |
+      | MESSAGE       | verifying NPM installation instructions             |
+      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
+      | EXIT CODE     | 1                                                   |
 
 
   Scenario: missing package name

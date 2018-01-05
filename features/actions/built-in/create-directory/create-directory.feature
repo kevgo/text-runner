@@ -34,7 +34,7 @@ Feature: creating directories
       | FILENAME      | creator.md                             |
       | LINE          | 1                                      |
       | MESSAGE       | creating directory                     |
-      | ERROR MESSAGE | no code tag found in this active block |
+      | ERROR MESSAGE | no 'code' tag found in this active block |
       | EXIT CODE     | 1                                      |
 
 

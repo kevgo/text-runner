@@ -2,7 +2,7 @@
 
 import type Formatter from '../formatters/formatter.js'
 
-const availableCommands = require('./available-commands')
+const availableCommands = require('../commands/available-commands')
 const minimist = require('minimist')
 const path = require('path')
 

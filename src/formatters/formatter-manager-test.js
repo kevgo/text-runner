@@ -1,14 +1,14 @@
-const FormatterManager = require('../dist/formatters/formatter-manager')
+const FormatterManager = require('../../dist/formatters/formatter-manager.js')
 const jsdiffConsole = require('jsdiff-console')
 const {expect} = require('chai')
 
 describe('FormatterManager', function () {
-  before(function () {
+  beforeEach(function () {
     this.formatterManager = new FormatterManager()
   })
 
   describe('availableFormatterNames', function () {
-    before(function () {
+    beforeEach(function () {
       this.formatterNames = this.formatterManager.availableFormatterNames()
     })
 
@@ -19,7 +19,7 @@ describe('FormatterManager', function () {
 
   describe('getFormatter', function () {
     context('with correct formatter name', function () {
-      before(function () {
+      beforeEach(function () {
         this.result = this.formatterManager.getFormatter('dot')
       })
 
@@ -29,7 +29,7 @@ describe('FormatterManager', function () {
     })
 
     context('with unknown formatter name', function () {
-      before(function () {
+      beforeEach(function () {
         try {
           this.formatterManager.getFormatter('zonk')
         } catch (e) {

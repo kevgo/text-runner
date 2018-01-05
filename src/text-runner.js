@@ -1,15 +1,15 @@
 // @flow
 
 import type Formatter from './formatters/formatter.js'
-import type {TextRunnerConfig} from './typedefs/text-runner-config.js'
+import type {CliArgTypes} from './cli/cli-arg-types.js'
 
 const ActionManager = require('./actions/action-manager')
 const {red} = require('chalk')
-const commandPath = require('./helpers/command-path')
-const Configuration = require('./configuration')
+const commandPath = require('./commands/command-path')
+const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
-const hasCommand = require('./helpers/has-command')
+const hasCommand = require('./commands/has-command')
 const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
@@ -24,12 +24,12 @@ module.exports = async function (value: {command: string, file: string, fast: bo
 }
 
 class TextRunner {
-  constructorArgs: TextRunnerConfig
+  constructorArgs: CliArgTypes
   configuration: Configuration
   formatter: Formatter
   actions: ActionManager
 
-  constructor (constructorArgs: TextRunnerConfig, configPath) {
+  constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()

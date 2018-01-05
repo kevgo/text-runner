@@ -100,7 +100,7 @@
       "flowtype"
     ],
     "globals": [
-      "before",
+      "beforeEach",
       "context",
       "describe",
       "expect",
@@ -121,7 +121,7 @@
       "Formatter",
       "Searcher",
       "StdStream",
-      "TextRunnerConfig"
+      "CliArgTypes"
     ]
   }
 }

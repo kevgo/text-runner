@@ -1,9 +1,9 @@
 // @flow
 
-import type {ActivityList} from '../../typedefs/activity-list.js'
-import type Configuration from '../../configuration.js'
+import type {ActivityList} from './activity-list.js'
+import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
-import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+import type {LinkTargetList} from './link-target-list.js'
 
 const ActionManager = require('../../actions/action-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
@@ -11,7 +11,7 @@ const {cyan} = require('chalk')
 const delay = require('delay')
 const fs = require('fs-extra')
 const LinkTargetBuilder = require('./link-target-builder')
-const MarkdownParser = require('./markdown-parser')
+const MarkdownParser = require('../../parsers/markdown/markdown-parser')
 const path = require('path')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 const util = require('util')

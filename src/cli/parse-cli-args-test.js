@@ -2,7 +2,7 @@ const parseCliArgs = require('../../dist/helpers/parse-cli-args')
 
 describe('parse-cli-args', function () {
   context('with unix <node> call', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         '/usr/local/Cellar/node/9.3.0_1/bin/node',
         '/Users/kevlar/d/text-runner/bin/text-run',
@@ -16,10 +16,10 @@ describe('parse-cli-args', function () {
   })
 
   context('with windows <node> call', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         'C:\\Program Files (x86)\\nodejs\\node.exe',
-        'C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli',
+        'C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli\\cli.js',
         'run'
       ])
     })
@@ -34,7 +34,7 @@ describe('parse-cli-args', function () {
   })
 
   context('with <node> and <text-run> call', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         '/usr/local/Cellar/node/9.3.0_1/bin/node',
         '/Users/kevlar/d/text-runner/bin/text-run',
@@ -48,7 +48,7 @@ describe('parse-cli-args', function () {
   })
 
   context('with <text-run> call', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         '/Users/kevlar/d/text-runner/bin/text-run',
         'run'
@@ -61,7 +61,7 @@ describe('parse-cli-args', function () {
   })
 
   context('--fast <file>', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         '--fast',
         'documentation/actions/cd.md'
@@ -82,7 +82,7 @@ describe('parse-cli-args', function () {
   })
 
   context('<file>', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         'documentation/actions/cd.md'
       ])
@@ -98,7 +98,7 @@ describe('parse-cli-args', function () {
   })
 
   context('(no args)', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([])
     })
 
@@ -112,7 +112,7 @@ describe('parse-cli-args', function () {
   })
 
   context('--format dot', function () {
-    before(function () {
+    beforeEach(function () {
       this.result = parseCliArgs([
         '--format',
         'dot'

@@ -1,8 +1,14 @@
 // @flow
 
-import type {Console} from '../../src/typedefs/console.js'
 import type Formatter from '../../src/formatters/formatter.js'
-import type {StdStream} from '../../src/typedefs/std-stream.js'
+
+type Console = {
+  log: (string) => void
+}
+
+type StdStream = {
+  write: (string) => void
+}
 
 const {defineSupportCode} = require('cucumber')
 // $FlowFixMe: we need to test the 'dist' folder for test coverage

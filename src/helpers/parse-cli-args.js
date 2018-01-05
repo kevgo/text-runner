@@ -2,7 +2,7 @@
 
 import type Formatter from '../formatters/formatter.js'
 
-const availableCommands = require('./available-commands')
+const availableCommands = require('../commands/available-commands')
 const minimist = require('minimist')
 const path = require('path')
 
@@ -25,7 +25,7 @@ module.exports = function (argv :string[]): {command: string, file: string, fast
   }
 
   // remove optional Windows CLI call
-  if (argv[0] && argv[0].endsWith('dist\\cli')) {
+  if (argv[0] && argv[0].endsWith('dist\\cli\\cli.js')) {
     argv.splice(0, 1)
   }
 

@@ -1,7 +1,7 @@
 // @flow
 
-import type {TextRunnerConfig} from './typedefs/text-runner-config.js'
-import type {ConfigFileStructure} from './typedefs/config-file-structure.js'
+import type {CliArgTypes} from '../cli/cli-arg-types.js'
+import type {ConfigFileStructure} from './config-file-structure.js'
 
 const fs = require('fs')
 const debug = require('debug')('textrun:configuration')
@@ -23,12 +23,12 @@ const defaultValues = {
 // Encapsulates logic around the configuration
 class Configuration {
   configFilePath: string
-  constructorArgs: TextRunnerConfig
+  constructorArgs: CliArgTypes
   fileData: ConfigFileStructure
   sourceDir: string
   testDir: string
 
-  constructor (configFilePath: string, constructorArgs: TextRunnerConfig) {
+  constructor (configFilePath: string, constructorArgs: CliArgTypes) {
     this.configFilePath = configFilePath
     this.constructorArgs = constructorArgs || {}
 

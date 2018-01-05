@@ -1,11 +1,11 @@
-const Configuration = require('../dist/configuration')
+const Configuration = require('../../dist/configuration/configuration')
 const fs = require('fs')
 const path = require('path')
 const tmp = require('tmp')
 
 describe('Configuration', function () {
   context('no config file given', function () {
-    before(function () {
+    beforeEach(function () {
       this.config = new Configuration()
     })
 
@@ -17,7 +17,7 @@ describe('Configuration', function () {
   })
 
   context('config file given', function () {
-    before(function () {
+    beforeEach(function () {
       this.configDir = tmp.dirSync()
       this.configFilePath = path.join(this.configDir.name, 'text-run.yml')
       fs.writeFileSync(this.configFilePath, "files: '*.md'")

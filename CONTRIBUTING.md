@@ -61,7 +61,7 @@ There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
-These CLI executables call the [cli.js](src/cli.js) CLI handler.
+These CLI executables call the [cli.js](src/cli/cli.js) CLI handler.
 They parse the command-line arguments and call TextRunner's JavaScript API
 in the form of the [TextRunner](src/text-runner.js) class.
 This API is also exported by the [TextRunner NPM module](https://www.npmjs.com/package/text-runner)
@@ -71,7 +71,7 @@ The TextRunner class is the central part of TextRunner.
 It instantiates and runs the other components of the framework.
 Next, TextRunner determines the various configuration settings
 coming from command-line arguments and/or configuration files
-via the [configuration](src/configuration.js) class.
+via the [configuration](src/configuration/configuration.js) class.
 This class is passed to the various subsystems of TextRunner
 in case they need to know configuration settings.
 Using this configuration class, TextRunner determines the command to run.
@@ -85,20 +85,20 @@ and creates a [MarkdownFileRunner](src/commands/run/markdown-file-runner.js) ins
 Running the files happens in two phases:
 
 1. In the `prepare` phase, each MarkdownFileRunner parses the Markdown content
-  using a [MarkdownParser](src/commands/run/markdown-parser.js) instance
+  using a [MarkdownParser](src/parsers/markdown/markdown-parser.js) instance
   which converts the complex and noisy Markdown AST
   (and in the future HTML AST)
-  into a simplified and flattened list of TextRunner-specific [AstNodes](src/typedefs/ast-node.js)
+  into a simplified and flattened list of TextRunner-specific [AstNodes](src/parsers/ast-node.js)
   that contain only relevant relevant information.
   An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
-  processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).
+  processes this TextRunner-AST into a list of [Actions](src/commands/run/activity.js).
   An action is an instantiated block handler function,
   locked and loaded to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
   in the [actions](src/actions) folder.
   The code base using TextRunner can also add their own action types.
   While processing the AST,
-  MarkdownFileRunner also builds up a list of [LinkTargets](src/typedefs/link-target.js)
+  MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)
   via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
 
 2. In the `run` phase, the prepared actions are executed one by one.

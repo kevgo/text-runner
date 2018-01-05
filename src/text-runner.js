@@ -10,7 +10,6 @@ const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
 const hasCommand = require('./commands/has-command')
-const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./helpers/is-markdown-file')
 const PrintedUserError = require('./errors/printed-user-error.js')
@@ -75,5 +74,13 @@ class TextRunner {
 
   async _unknownCommand (command) {
     throw new UnprintedUserError(`unknown command: ${red(command)}`)
+  }
+}
+
+function hasDirectory (dirname :string) :boolean {
+  try {
+    return fs.statSync(dirname).isDirectory()
+  } catch (e) {
+    return false
   }
 }

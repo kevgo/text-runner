@@ -17,7 +17,7 @@ class Searcher {
   }
 
   // Returns the textual content of the node matching the given query
-  tagContent (query: NodeQuery, options: {default?: string}): string {
+  tagContent (query: NodeQuery, options?: {default?: string}): string {
     if (options == null) options = {}
     const matchingNode = this.findNode(query, options)
     if (matchingNode == null) {

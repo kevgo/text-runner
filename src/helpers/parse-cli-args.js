@@ -25,7 +25,7 @@ module.exports = function (argv :string[]): {command: string, file: string, fast
   }
 
   // remove optional Windows CLI call
-  if (argv[0] && argv[0].endsWith('dist\\cli')) {
+  if (argv[0] && argv[0].endsWith('dist\\cli.js')) {
     argv.splice(0, 1)
   }
 

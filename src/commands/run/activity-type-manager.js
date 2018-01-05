@@ -12,28 +12,28 @@ const path = require('path')
 const rechoir = require('rechoir')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
-class ActionManager {
+class ActivityTypeManager {
   // Loads and provides built-in and custom handler functions
 
   formatter: Formatter
   configuration: Configuration
-  actions: { [string]: HandlerFunction }
+  handlerFunctions: { [string]: HandlerFunction }
 
   constructor (formatter: Formatter, configuration: Configuration) {
     this.formatter = formatter
     this.configuration = configuration
-    this.actions = {}
+    this.handlerFunctions = {}
     this.loadBuiltinActions()
     this.loadCustomActions()
   }
 
   // Provides the action for the block with the given name
   handlerFunctionFor (blockName: string, filePath: string): HandlerFunction {
-    const result = this.actions[blockName.toLowerCase()]
+    const result = this.handlerFunctions[blockName.toLowerCase()]
     if (!result) {
-      var errorText = `unknown action: ${red(blockName)}\nAvailable actions:\n`
+      var errorText = `unknown activity type: ${red(blockName)}\nAvailable activity types:\n`
       const prefix = this.configuration.get('classPrefix')
-      for (let actionName of Object.keys(this.actions).sort()) {
+      for (let actionName of Object.keys(this.handlerFunctions).sort()) {
         errorText += `* ${prefix}${actionName}\n`
       }
       this.formatter.startFile(filePath)
@@ -42,7 +42,7 @@ class ActionManager {
     return result
   }
 
-  // Returns all possible filename extensions that actions can have
+  // Returns all possible filename extensions that handler functions can have
   javascriptExtensions (): string[] {
     return Object.keys(interpret.jsVariants).map((it) => it.slice(1))
   }
@@ -59,7 +59,7 @@ class ActionManager {
   loadBuiltinActions () {
     for (let filename of this.builtinActionFilenames()) {
       const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.actions[actionName.toLowerCase()] = require(filename)
+      this.handlerFunctions[actionName.toLowerCase()] = require(filename)
     }
   }
 
@@ -67,9 +67,9 @@ class ActionManager {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
       const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.actions[actionName.toLowerCase()] = require(filename)
+      this.handlerFunctions[actionName.toLowerCase()] = require(filename)
     }
   }
 }
 
-module.exports = ActionManager
+module.exports = ActivityTypeManager

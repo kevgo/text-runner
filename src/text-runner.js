@@ -3,7 +3,7 @@
 import type Formatter from './formatters/formatter.js'
 import type {CliArgTypes} from './cli/cli-arg-types.js'
 
-const ActionManager = require('./commands/run/action-manager.js')
+const ActivityTypeManager = require('./commands/run/activity-type-manager.js')
 const {red} = require('chalk')
 const commandPath = require('./commands/command-path')
 const Configuration = require('./configuration/configuration.js')
@@ -27,14 +27,14 @@ class TextRunner {
   constructorArgs: CliArgTypes
   configuration: Configuration
   formatter: Formatter
-  actions: ActionManager
+  actions: ActivityTypeManager
 
   constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()
     this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
-    this.actions = new ActionManager(this.formatter, this.configuration)
+    this.actions = new ActivityTypeManager(this.formatter, this.configuration)
   }
 
   // Tests the documentation according to the given command and arguments

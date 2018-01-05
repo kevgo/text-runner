@@ -5,7 +5,7 @@ import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from './link-target-list.js'
 
-const ActionManager = require('./action-manager.js')
+const ActivityTypeManager = require('./activity-type-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
 const {cyan} = require('chalk')
 const delay = require('delay')
@@ -20,14 +20,14 @@ const util = require('util')
 class MarkdownFileRunner {
   filePath: string
   formatter: Formatter
-  actions: ActionManager
+  actions: ActivityTypeManager
   configuration: Configuration
   parser: MarkdownParser
   activityListBuilder: ActivityListBuilder
   linkTargetBuilder: LinkTargetBuilder
   runData: ActivityList
 
-  constructor (value: {filePath: string, formatter: Formatter, actions: ActionManager, configuration: Configuration, linkTargets: LinkTargetList}) {
+  constructor (value: {filePath: string, formatter: Formatter, actions: ActivityTypeManager, configuration: Configuration, linkTargets: LinkTargetList}) {
     this.filePath = value.filePath
     this.formatter = value.formatter
     this.configuration = value.configuration

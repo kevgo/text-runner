@@ -5,7 +5,7 @@ import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from './link-target-list.js'
 
-const ActionManager = require('./action-manager.js')
+const ActivityTypeManager = require('./activity-type-manager.js')
 const glob = require('glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
 const mkdirp = require('mkdirp')
@@ -17,11 +17,11 @@ const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 class RunCommand implements Command {
   configuration: Configuration
   formatter: Formatter
-  actions: ActionManager
+  actions: ActivityTypeManager
   linkTargets: LinkTargetList     // lists which files contain which HTML anchors
   runners: MarkdownFileRunner[]
 
-  constructor (value: {configuration: Configuration, formatter: Formatter, actions: ActionManager}) {
+  constructor (value: {configuration: Configuration, formatter: Formatter, actions: ActivityTypeManager}) {
     this.configuration = value.configuration
     this.formatter = value.formatter
     this.actions = value.actions

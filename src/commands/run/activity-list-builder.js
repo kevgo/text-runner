@@ -6,7 +6,7 @@ import type {AstNode} from '../../parsers/ast-node.js'
 import type {AstNodeList} from '../../parsers/ast-node-list.js'
 import type {LinkTargetList} from '../../commands/run/link-target-list.js'
 
-const ActionManager = require('./action-manager.js')
+const ActivityTypeManager = require('./activity-type-manager.js')
 const Configuration = require('../../configuration/configuration.js')
 const Formatter = require('../../formatters/formatter.js')
 const Searcher = require('./searcher')
@@ -14,13 +14,13 @@ const Searcher = require('./searcher')
 class ActivityListBuilder {
   // Returns a list of activities to do with the given AST
 
-  actions: ActionManager
+  actions: ActivityTypeManager
   configuration: Configuration
   filePath: string
   formatter: Formatter
   linkTargets: LinkTargetList
 
-  constructor (value: {actions: ActionManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
+  constructor (value: {actions: ActivityTypeManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
     this.actions = value.actions
     this.configuration = value.configuration
     this.filePath = value.filePath

@@ -1,6 +1,6 @@
 // @flow
 
-import type {Activity} from '../../typedefs/activity.js'
+import type {Activity} from '../../commands/run/activity.js'
 import type Configuration from '../../configuration/configuration.js'
 import type {DoneFunction} from '../../typedefs/done-func.js'
 

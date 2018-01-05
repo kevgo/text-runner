@@ -91,14 +91,14 @@ Running the files happens in two phases:
   into a simplified and flattened list of TextRunner-specific [AstNodes](src/parsers/ast-node.js)
   that contain only relevant relevant information.
   An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
-  processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).
+  processes this TextRunner-AST into a list of [Actions](src/commands/run/activity.js).
   An action is an instantiated block handler function,
   locked and loaded to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
   in the [actions](src/actions) folder.
   The code base using TextRunner can also add their own action types.
   While processing the AST,
-  MarkdownFileRunner also builds up a list of [LinkTargets](src/typedefs/link-target.js)
+  MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)
   via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
 
 2. In the `run` phase, the prepared actions are executed one by one.

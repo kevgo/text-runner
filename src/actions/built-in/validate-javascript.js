@@ -1,6 +1,6 @@
 // @flow
 
-import type {Activity} from '../../typedefs/activity.js'
+import type {Activity} from '../../commands/run/activity.js'
 
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity) {

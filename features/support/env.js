@@ -24,7 +24,8 @@ defineSupportCode(function ({After, Before, setDefaultTimeout}) {
       console.log('\ntest artifacts are located in', this.rootDir)
     } else {
       await delay(1)
-      rimraf.sync(this.rootDir)
+      const rimrafp = util.promisify(rimraf)
+      await rimrafp(this.rootDir, { maxBusyTries: 20 })
     }
   })
 

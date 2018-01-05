@@ -53,3 +53,23 @@ Feature: verifying that documentation matches a file in the source code
       | MESSAGE       | verifying document content matches source code file text-run.yml |
       | ERROR MESSAGE | mismatching content in                                          |
       | EXIT CODE     | 1                                                               |
+
+
+  Scenario: file does not exist
+    Given my source code contains the file "1.md" with content:
+      """
+      <a class="tr_verifySourceFileContent">
+      [global-tool](not-existing.txt)
+      __text-run.yml__
+      ```
+      zonk
+      ```
+      </a>
+      """
+    When trying to run text-run
+    Then the test fails with:
+      | FILENAME      | 1.md                                                             |
+      | LINE          | 1-7                                                              |
+      | MESSAGE       | verifying document content matches source code file text-run.yml |
+      | ERROR MESSAGE | file .* not found                                  |
+      | EXIT CODE     | 1                                                                |

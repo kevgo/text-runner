@@ -86,7 +86,7 @@ const CliWorld = function () {
       expectedHeader += ` -- ${table['MESSAGE']}`
     }
     expect(output).to.include(expectedHeader)
-    expect(output).to.include(table['ERROR MESSAGE'])
+    expect(output).to.match(new RegExp(table['ERROR MESSAGE']))
     expect(this.process.exitCode).to.equal(parseInt(table['EXIT CODE']))
   }
 

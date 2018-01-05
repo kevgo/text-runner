@@ -27,14 +27,14 @@ class TextRunner {
   constructorArgs: CliArgTypes
   configuration: Configuration
   formatter: Formatter
-  actions: ActivityTypeManager
+  activityTypesManager: ActivityTypeManager
 
   constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()
     this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
-    this.actions = new ActivityTypeManager(this.formatter, this.configuration)
+    this.activityTypesManager = new ActivityTypeManager(this.formatter, this.configuration)
   }
 
   // Tests the documentation according to the given command and arguments
@@ -65,7 +65,7 @@ class TextRunner {
 
   _command (command) {
     const CommandClass = require(commandPath(command))
-    const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, actions: this.actions})
+    const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, activityTypesManager: this.activityTypesManager})
     return commandInstance
   }
 

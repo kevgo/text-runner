@@ -20,20 +20,20 @@ const util = require('util')
 class MarkdownFileRunner {
   filePath: string
   formatter: Formatter
-  actions: ActivityTypeManager
+  activityTypesManager: ActivityTypeManager
   configuration: Configuration
   parser: MarkdownParser
   activityListBuilder: ActivityListBuilder
   linkTargetBuilder: LinkTargetBuilder
   runData: ActivityList
 
-  constructor (value: {filePath: string, formatter: Formatter, actions: ActivityTypeManager, configuration: Configuration, linkTargets: LinkTargetList}) {
+  constructor (value: {filePath: string, formatter: Formatter, activityTypesManager: ActivityTypeManager, configuration: Configuration, linkTargets: LinkTargetList}) {
     this.filePath = value.filePath
     this.formatter = value.formatter
     this.configuration = value.configuration
     this.parser = new MarkdownParser()
     this.activityListBuilder = new ActivityListBuilder({
-      actions: value.actions,
+      activityTypesManager: value.activityTypesManager,
       filePath: this.filePath,
       formatter: this.formatter,
       configuration: this.configuration,
@@ -75,10 +75,10 @@ class MarkdownFileRunner {
     }
     try {
       if (block.runner.length === 1) {
-        // synchronous action method or returns a promise
+        // synchronous activity or returns a promise
         await Promise.resolve(block.runner(block))
       } else {
-        // asynchronous action method
+        // asynchronous activity
         const promisified = util.promisify(block.runner)
         await promisified(block)
       }

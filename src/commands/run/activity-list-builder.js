@@ -14,14 +14,14 @@ const Searcher = require('./searcher')
 class ActivityListBuilder {
   // Returns a list of activities to do with the given AST
 
-  actions: ActivityTypeManager
+  activityTypesManager: ActivityTypeManager
   configuration: Configuration
   filePath: string
   formatter: Formatter
   linkTargets: LinkTargetList
 
-  constructor (value: {actions: ActivityTypeManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
-    this.actions = value.actions
+  constructor (value: {activityTypesManager: ActivityTypeManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
+    this.activityTypesManager = value.activityTypesManager
     this.configuration = value.configuration
     this.filePath = value.filePath
     this.formatter = value.formatter
@@ -43,7 +43,7 @@ class ActivityListBuilder {
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
         }
-        currentRunnerType = this.actions.handlerFunctionFor(blockType, this.filePath)
+        currentRunnerType = this.activityTypesManager.handlerFunctionFor(blockType, this.filePath)
         if (currentRunnerType) {
           insideActiveBlock = true
           nodesForCurrentRunner = []
@@ -82,7 +82,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [node],
-          runner: this.actions.handlerFunctionFor('checkImage', this.filePath),
+          runner: this.activityTypesManager.handlerFunctionFor('checkImage', this.filePath),
           linkTargets: this.linkTargets,
           formatter: this.formatter,
           configuration: this.configuration,
@@ -98,7 +98,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [node],
-          runner: this.actions.handlerFunctionFor('checkLink', this.filePath),
+          runner: this.activityTypesManager.handlerFunctionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
           linkTargets: this.linkTargets,
@@ -115,7 +115,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [{content: target}],
-          runner: this.actions.handlerFunctionFor('checkLink', this.filePath),
+          runner: this.activityTypesManager.handlerFunctionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
           linkTargets: this.linkTargets,

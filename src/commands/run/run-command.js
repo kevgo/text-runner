@@ -17,14 +17,14 @@ const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 class RunCommand implements Command {
   configuration: Configuration
   formatter: Formatter
-  actions: ActivityTypeManager
+  activityTypesManager: ActivityTypeManager
   linkTargets: LinkTargetList     // lists which files contain which HTML anchors
   runners: MarkdownFileRunner[]
 
-  constructor (value: {configuration: Configuration, formatter: Formatter, actions: ActivityTypeManager}) {
+  constructor (value: {configuration: Configuration, formatter: Formatter, activityTypesManager: ActivityTypeManager}) {
     this.configuration = value.configuration
     this.formatter = value.formatter
-    this.actions = value.actions
+    this.activityTypesManager = value.activityTypesManager
     this.linkTargets = {}
   }
 
@@ -69,7 +69,7 @@ class RunCommand implements Command {
       const runner = new MarkdownFileRunner({
         filePath,
         formatter: this.formatter,
-        actions: this.actions,
+        activityTypesManager: this.activityTypesManager,
         configuration: this.configuration,
         linkTargets: this.linkTargets})
       this.runners.push(runner)

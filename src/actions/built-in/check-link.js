@@ -1,8 +1,8 @@
 // @flow
 
 import type {Activity} from '../../typedefs/activity.js'
-import Configuration from '../../configuration.js'
-import Formatter from '../../formatters/formatter.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from '../../typedefs/link-target-list.js'
 
 const {cyan, magenta, red} = require('chalk')

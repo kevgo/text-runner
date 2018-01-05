@@ -16,18 +16,25 @@ console.log('5555555555555')
 cliCursor.hide()
 
 async function main () {
+  console.log('666666666666')
   var exitCode = 0
   try {
     await textRunner(parseCliArgs(process.argv))
+    console.log('777777777777')
   } catch (err) {
+    console.log('88888888888')
     exitCode = 1
     if (err instanceof UnprintedUserError) {
+      console.log('99999999999')
       console.log(red(err))
     } else if (!(err instanceof UserError)) {
+      console.log('AAAAAAAAAAA')
       console.log(err.stack)
     }
   }
+  console.log('BBBBBBBBB')
   endChildProcesses()
+  console.log('CCCCCCCCCC')
   process.exit(exitCode)
 }
 

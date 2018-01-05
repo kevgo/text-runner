@@ -1,5 +1,9 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+import type Configuration from '../../configuration.js'
+import type {DoneFunction} from '../../typedefs/done-func.js'
+
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity, done: DoneFunction) {
   activity.formatter.action('running JavaScript code')
@@ -42,6 +46,7 @@ function replaceAsyncCallbacks (code: string): string {
 // substitutes replacements configured in text-run.yml
 function replaceSubstitutionsInConfiguration (code: string, configuration: Configuration): string {
   try {
+    // $FlowFixMe: we can ignore undefined values here since `code` has a default value
     for (let replaceData of configuration.fileData.actions.runJavascript.replace) {
       code = code.replace(replaceData.search, replaceData.replace)
     }

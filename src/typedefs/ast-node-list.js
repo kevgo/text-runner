@@ -1,3 +1,5 @@
 // @flow
 
-declare type AstNodeList = Array<AstNode>
+import type {AstNode} from './ast-node.js'
+
+export type AstNodeList = Array<AstNode>

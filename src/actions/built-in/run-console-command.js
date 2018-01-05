@@ -21,20 +21,17 @@ type ProcessInput = {
 module.exports = async function (activity: Activity) {
   activity.formatter.action('running console command')
 
-  const commandsToRun = activity.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'no code blocks found'
-    if (nodes.length > 1) return 'found #{nodes.length} fenced code blocks. Expecting only one.'
-    if (!content) return 'the block that defines console commands to run is empty'
-  }).split('\n')
+  const commandsToRun = activity.searcher.tagContent('fence')
+    .split('\n')
     .map((command) => command.trim())
     .filter((e) => e)
     .map(trimDollar)
     .map(makeGlobal(activity.configuration))
     .join(' && ')
+  if (commandsToRun === '') throw new Error('the block that defines console commands to run is empty')
 
-  const inputText = activity.searcher.nodeContent({type: 'htmlblock'})
-  const input = await getInput(inputText, activity.formatter)
   activity.formatter.action(`running console command: ${cyan(commandsToRun)}`)
+  const input = await getInput(activity.searcher.tagContent('htmlblock', {default: ''}), activity.formatter)
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''
   const processor = new ObservableProcess({

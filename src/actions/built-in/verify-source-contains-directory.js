@@ -6,11 +6,8 @@ const path = require('path')
 
 // Verifies that a local directory linked in MarkDown exists
 module.exports = function (activity: Activity) {
-  const directory = activity.searcher.nodeContent({type: 'link_open'}, ({nodes}) => {
-    if (nodes.length === 0) return 'no link found'
-    if (nodes.length > 1) return 'too many links found'
-  })
-
+  const directory = activity.searcher.tagContent('link_open')
+  activity.formatter.action(`directory ${bold(cyan(directory))} exists in the source code`)
   activity.formatter.action(`directory ${bold(cyan(directory))} exists in the source code`)
   var stats
   try {

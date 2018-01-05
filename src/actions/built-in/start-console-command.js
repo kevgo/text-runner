@@ -13,12 +13,8 @@ const debug = require('debug')('start-console-command')
 // Leaves the command running.
 module.exports = async function (activity: Activity) {
   activity.formatter.action('starting a long-running process')
-
-  const commandsToRun = activity.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'no code blocks found'
-    if (nodes.length > 2) return 'found #{nodes.length} fenced code blocks. Expecting a maximum of 2.'
-    if (!content) return 'the block that defines console commands to run is empty'
-  }).split('\n')
+  const commandsToRun = activity.searcher.tagContent('fence')
+    .split('\n')
     .map((line) => line.trim())
     .filter((line) => line)
     .map(trimDollar)

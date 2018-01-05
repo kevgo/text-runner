@@ -27,7 +27,7 @@ defineSupportCode(function ({When}) {
       finish(expectError, err)
       return
     }
-    finish(expectError, this.error || (this.process && this.process.exitCode))
+    finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
   })
 
   When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async function (tryingText, optionsText) {
@@ -81,7 +81,7 @@ function finish (trying, error) {
     throw new Error('expected error but test succeeded')
   } else if (trying && error) {
     // nothing to do here, we expected the error
-  } else if (error != null) {
+  } else if (error) {
     throw error
   }
 }

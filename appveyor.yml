@@ -15,7 +15,8 @@ test_script:
   - dir
   - cd
   - "bin\\build.cmd"
-  - "bin\\cuke-api.cmd"
+  - "bin\\tests.cmd"
+  - node_modules\.bin\cucumber-js --tags '(not @clionly) and (not @todo) and (not @skipWindows)' --format progress
   - "bin\\cuke-cli.cmd"
   - "bin\\text-run.cmd"
 

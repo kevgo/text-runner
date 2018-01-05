@@ -18,6 +18,7 @@ module.exports = async function (activity: Activity) {
   if (node.src == null || node.src === '') {
     throw new Error('image tag without source')
   }
+  // $FlowFixMe: Flow bug, we proved 3 lines above that node.src has a value
   const imagePath = path.join(path.dirname(activity.filename), node.src)
   activity.formatter.action(`image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {

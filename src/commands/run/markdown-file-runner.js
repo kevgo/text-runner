@@ -70,7 +70,7 @@ class MarkdownFileRunner {
     // waiting 1 ms here to give Node a chance to run queued up logic from previous steps
     await delay(1)
     block.formatter.startFile(block.filename)
-    if (block.startLine && block.endLine) {
+    if (block.startLine != null && block.endLine != null) {
       block.formatter.setLines(block.startLine, block.endLine)
     }
     try {

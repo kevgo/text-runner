@@ -1,6 +1,6 @@
 // @flow
 
-import type {Command} from '../../typedefs/command.js'
+import type {Command} from '../command.js'
 import type Configuration from '../../configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from '../../typedefs/link-target-list.js'

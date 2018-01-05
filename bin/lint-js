@@ -21,7 +21,7 @@ fi
 errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
 if [ $errors -gt 0 ]; then
   echo Found standardJS errors in the feature code:
-  standard -v 'features/**/*.js' | grep -v no-undef
+  standard -v 'features/**/*.js' | grep -v no-unused-expressions
   exit 1
 fi
 

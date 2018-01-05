@@ -32,11 +32,11 @@ Feature: running console commands
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | running.md              |
-      | LINE          | 1                       |
-      | MESSAGE       | running console command |
-      | ERROR MESSAGE | no code blocks found    |
-      | EXIT CODE     | 1                       |
+      | FILENAME      | running.md                                |
+      | LINE          | 1                                         |
+      | MESSAGE       | running console command                   |
+      | ERROR MESSAGE | no 'fence' tag found in this active block |
+      | EXIT CODE     | 1                                         |
 
 
   Scenario: empty console command

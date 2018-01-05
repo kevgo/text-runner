@@ -3,8 +3,9 @@
 const {cyan, green, magenta} = require('chalk')
 const Formatter = require('./formatter')
 
-// A minimalistic formatter, prints dots for each check
 class DotFormatter extends Formatter {
+  // A minimalistic formatter, prints dots for each check
+
   error (errorMessage: string) {
     super.error(errorMessage)
     var output = ''
@@ -31,6 +32,7 @@ class DotFormatter extends Formatter {
   }
 
   skip (activity: string) {
+    super.skip(activity)
     process.stdout.write(cyan('.'))
   }
 }

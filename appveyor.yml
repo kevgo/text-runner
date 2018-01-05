@@ -18,7 +18,7 @@ test_script:
   - bin\build.cmd
   - bin\tests.cmd
   - bin\cuke-api.cmd
-  # - bin\cuke-cli.cmd
+  - bin\cuke-cli.cmd
   - bin\text-run.cmd
 
 

@@ -5,7 +5,7 @@ import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from './link-target-list.js'
 
-const ActionManager = require('../../actions/action-manager.js')
+const ActionManager = require('../../activity-types/action-manager.js')
 const glob = require('glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
 const mkdirp = require('mkdirp')

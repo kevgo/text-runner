@@ -1,8 +1,9 @@
 // @flow
 
-import type {Activity} from '../../typedefs/activity.js'
-import type Configuration from '../../configuration.js'
-import type {DoneFunction} from '../../typedefs/done-func.js'
+import type {Activity} from '../../commands/run/activity.js'
+import type Configuration from '../../configuration/configuration.js'
+
+type DoneFunction = (err?: ?ErrnoError) => void
 
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity, done: DoneFunction) {

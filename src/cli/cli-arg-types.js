@@ -2,7 +2,7 @@
 
 import Formatter from '../formatters/formatter.js'
 
-export type TextRunnerConfig = {
+export type CliArgTypes = {
   fast?: boolean,
   format?: Formatter
 }

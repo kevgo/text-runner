@@ -1,13 +1,13 @@
 // @flow
 
-import type {Action} from '../../typedefs/action.js'
-import type {ActivityList} from '../../typedefs/activity-list.js'
-import type {AstNode} from '../../typedefs/ast-node.js'
-import type {AstNodeList} from '../../typedefs/ast-node-list.js'
-import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+import type {Action} from '../../actions/action.js'
+import type {ActivityList} from '../../commands/run/activity-list.js'
+import type {AstNode} from '../../parsers/ast-node.js'
+import type {AstNodeList} from '../../parsers/ast-node-list.js'
+import type {LinkTargetList} from '../../commands/run/link-target-list.js'
 
 const ActionManager = require('../../actions/action-manager.js')
-const Configuration = require('../../configuration.js')
+const Configuration = require('../../configuration/configuration.js')
 const Formatter = require('../../formatters/formatter.js')
 const Searcher = require('./searcher')
 

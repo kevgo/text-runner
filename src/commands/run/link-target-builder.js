@@ -1,7 +1,7 @@
 // @flow
 
-import type {AstNodeList} from '../../typedefs/ast-node-list.js'
-import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+import type {AstNodeList} from '../../parsers/ast-node-list.js'
+import type {LinkTargetList} from './link-target-list.js'
 
 const dashify = require('dashify')
 

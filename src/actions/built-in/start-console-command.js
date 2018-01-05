@@ -1,7 +1,7 @@
 // @flow
 
-import type {Activity} from '../../typedefs/activity.js'
-import type Configuration from '../../configuration.js'
+import type {Activity} from '../../commands/run/activity.js'
+import type Configuration from '../../configuration/configuration.js'
 import type {WriteStream} from 'observable-process'
 
 const callArgs = require('../../helpers/call-args')

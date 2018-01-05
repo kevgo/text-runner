@@ -1,6 +1,6 @@
 // @flow
 
-import type {Activity} from '../../typedefs/activity.js'
+import type {Activity} from '../../commands/run/activity.js'
 
 // Stops the currently running console command.
 module.exports = function (activity: Activity) {

@@ -2,7 +2,8 @@
 
 import type {Activity} from '../../commands/run/activity.js'
 import type Configuration from '../../configuration/configuration.js'
-import type {DoneFunction} from '../../typedefs/done-func.js'
+
+type DoneFunction = (err?: ?ErrnoError) => void
 
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity, done: DoneFunction) {

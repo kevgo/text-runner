@@ -1,5 +1,5 @@
 // @flow
 
-declare interface Command {
+export interface Command {
   run(): Promise<?ErrnoError>
 }

@@ -1,5 +1,5 @@
 // @flow
 
-declare type StdStream = {
+export type StdStream = {
   write: (string) => void
 }

@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 const {bold, cyan} = require('chalk')
 const path = require('path')
 const debug = require('debug')('textrun:actions:cd')

@@ -1,5 +1,8 @@
 // @flow
 
+import type Formatter from './formatters/formatter.js'
+import type {TextRunnerConfig} from './typedefs/text-runner-config.js'
+
 const ActionManager = require('./actions/action-manager')
 const {red} = require('chalk')
 const commandPath = require('./helpers/command-path')

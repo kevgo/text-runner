@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 const {cyan} = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')

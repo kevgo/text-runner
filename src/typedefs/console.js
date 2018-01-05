@@ -1,5 +1,5 @@
 // @flow
 
-declare type Console = {
+export type Console = {
   log: (string) => void
 }

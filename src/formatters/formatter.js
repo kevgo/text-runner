@@ -94,6 +94,10 @@ class Formatter {
 
   // called when the whole test suite passed
   suiteSuccess () {
+    if (this.stepsCount === 0) {
+      this.warning('no activities found')
+      return
+    }
     var text = green(`\nSuccess! ${this.stepsCount} steps in ${this.filesCount} files`)
     if (this.warningsCount > 0) {
       text += green(', ')

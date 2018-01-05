@@ -6,32 +6,31 @@ const Searcher = require('./searcher.js')
 const {expect} = require('chai')
 
 describe('Searcher', function () {
-  before(function () {
+  beforeEach(function () {
     const nodes: AstNodeList = [
-      {type: 'image', content: 'one'},
-      {type: 'link', content: 'two'},
-      {type: 'link', content: 'three'}
+      {type: 'image', content: 'image content'},
+      {type: 'link', content: 'link content'}
     ]
     this.searcher = new Searcher(nodes)
   })
 
   context('string query', function () {
-    before(function () {
-      this.result = this.searcher('link')
+    beforeEach(function () {
+      this.result = this.searcher.tagContent('link')
     })
 
-    it('returns the content of the first matching node', function () {
-      expect(this.result).to.equal('two')
+    it('returns the content of the matching node', function () {
+      expect(this.result).to.equal('link content')
     })
   })
 
   context('array query', function () {
-    before(function () {
-      this.result = this.searcher(['link', 'image'])
+    beforeEach(function () {
+      this.result = this.searcher.tagContent(['heading', 'link'])
     })
 
-    it('returns the content of the first matching node', function () {
-      expect(this.result).to.equal('one')
+    it('returns the content of the matching node', function () {
+      expect(this.result).to.equal('link content')
     })
   })
 })

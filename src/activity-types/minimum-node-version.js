@@ -5,7 +5,6 @@ import type {Activity} from '../commands/run/activity.js'
 const {cyan} = require('chalk')
 const fs = require('fs')
 const jsYaml = require('js-yaml')
-const minimum = require('../helpers/minimum.js')
 
 module.exports = function (activity: Activity) {
   activity.formatter.action('determining minimum supported NodeJS version')
@@ -37,4 +36,13 @@ function getSupportedVersion () {
 function loadYmlFile (filename: string) {
   const fileContent = fs.readFileSync(filename, {encoding: 'utf8'})
   return jsYaml.safeLoad(fileContent)
+}
+
+// Minimum returns the smallest of the given numbers
+function minimum (numbers: number[] | number): number {
+  if (Array.isArray(numbers)) {
+    return numbers.reduce((n, sum) => n < sum ? n : sum, 10000)
+  } else {
+    return numbers
+  }
 }

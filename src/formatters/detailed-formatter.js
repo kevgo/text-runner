@@ -7,8 +7,9 @@ const unique = require('array-unique')
 // colorFunction is a better name for functions that add colors to strings
 type colorFunction = (text: string) => string
 
-// A detailed formatter, prints output before the step name
 class DetailedFormatter extends Formatter {
+  // A detailed formatter, prints output before the step name
+
   error (errorMessage: string) {
     super.error(errorMessage)
     this._printActivityHeader(bold, red)

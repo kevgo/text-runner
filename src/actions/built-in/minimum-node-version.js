@@ -5,29 +5,22 @@ const fs = require('fs')
 const jsYaml = require('js-yaml')
 const minimum = require('../../helpers/minimum.js')
 
-module.exports = function (params: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  params.formatter.start('determining minimum supported NodeJS version')
+module.exports = function (activity: Activity) {
+  activity.formatter.action('determining minimum supported NodeJS version')
 
-  const documentedVersion = parseInt(params.searcher.nodeContent({type: 'text'}, ({nodes, content}) => {
-    if (!content) return 'no text given'
-    if (isNaN(content)) return 'given Node version is not a number'
-  }))
-  params.formatter.refine(`determining whether minimum supported NodeJS version is ${cyan(documentedVersion)}`)
+  const documentedVersion = parseInt(activity.searcher.tagContent('text'))
+  if (isNaN(documentedVersion)) throw new Error('given Node version is not a number')
+  activity.formatter.action(`determining whether minimum supported NodeJS version is ${cyan(documentedVersion)}`)
 
   var supportedVersion
   try {
     supportedVersion = getSupportedVersion()
+    activity.formatter.action(`requires at least Node ${cyan(supportedVersion)}`)
   } catch (err) {
-    params.formatter.error(err)
-    throw new Error('1')
-  }
-  if (supportedVersion === documentedVersion) {
-    params.formatter.success(`requires at least Node ${cyan(supportedVersion)}`)
-    return
+    throw new Error(err.message)
   }
   if (supportedVersion !== documentedVersion) {
-    params.formatter.error(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)
-    throw new Error('1')
+    throw new Error(`documented minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`)
   }
 }
 

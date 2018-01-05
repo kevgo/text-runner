@@ -60,11 +60,11 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                       |
-      | LINE          | 1-5                              |
-      | MESSAGE       | creating file                    |
-      | ERROR MESSAGE | no path given for file to create |
-      | EXIT CODE     | 1                                |
+      | FILENAME      | creator.md                                                     |
+      | LINE          | 1-5                                                            |
+      | MESSAGE       | creating file                                                  |
+      | ERROR MESSAGE | no 'emphasizedtext' or 'strongtext' tag found in this active block |
+      | EXIT CODE     | 1                                                              |
 
 
   Scenario: no content block given
@@ -76,11 +76,11 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                          |
-      | LINE          | 1                                   |
-      | MESSAGE       | creating file                       |
-      | ERROR MESSAGE | no content given for file to create |
-      | EXIT CODE     | 1                                   |
+      | FILENAME      | creator.md                                      |
+      | LINE          | 1                                               |
+      | MESSAGE       | creating file                                   |
+      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
+      | EXIT CODE     | 1                                               |
 
 
   Scenario: two file paths given
@@ -97,11 +97,11 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                    |
-      | LINE          | 1-8                                           |
-      | MESSAGE       | creating file                                 |
-      | ERROR MESSAGE | several file paths found: one.txt and two.txt |
-      | EXIT CODE     | 1                                             |
+      | FILENAME      | creator.md                                                                   |
+      | LINE          | 1-8                                                                          |
+      | MESSAGE       | creating file                                                                |
+      | ERROR MESSAGE | found more than one 'emphasizedtext' or 'strongtext' tag in the active block |
+      | EXIT CODE     | 1                                                                            |
 
 
   Scenario: two content blocks given
@@ -122,8 +122,8 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                                                |
-      | LINE          | 1-12                                                                      |
-      | MESSAGE       | creating file                                                             |
-      | ERROR MESSAGE | found multiple content blocks for file to create, please provide only one |
-      | EXIT CODE     | 1                                                                         |
+      | FILENAME      | creator.md                                                    |
+      | LINE          | 1-12                                                          |
+      | MESSAGE       | creating file                                                 |
+      | ERROR MESSAGE | found more than one 'fence' or 'code' tag in the active block |
+      | EXIT CODE     | 1                                                             |

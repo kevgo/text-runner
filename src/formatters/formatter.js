@@ -17,6 +17,7 @@ class Formatter {
   errorMessage: string
   filePath: string       // the path of the documentation file that is currently processed
   filesCount: number
+  inAction: boolean      // whether this formatter is currently processing an action
   startLine: number      // the line within the documentation file at which the currently processed block starts
   stderr: WriteStream
   stdout: WriteStream
@@ -32,6 +33,7 @@ class Formatter {
     this.activityText = ''
     this.errorMessage = ''
     this.filesCount = 0
+    this.inAction = false
     this.stepsCount = 0
     this.warningsCount = 0
     this.stdout = { write: this.output }
@@ -49,15 +51,11 @@ class Formatter {
   // Called on general errors
   error (errorMessage: string) {
     this.errorMessage = errorMessage
+    this.inAction = false
   }
 
   output (text: string | Buffer): boolean {
     throw new Error('Implement in subclass')
-  }
-
-  // Called when we start performing an activity that was defined in a block
-  refine (activityText :string) {
-    this.activityText = activityText
   }
 
   setLines (startLine :number, endLine :number) {
@@ -67,14 +65,18 @@ class Formatter {
 
   skip (activityText: string) {
     if (activityText) this.activityText = activityText
+    this.inAction = false
   }
 
   // Called when we start performing an activity that was defined in a block
-  start (activityText :string) {
+  action (activityText :string) {
     this.activityText = activityText
-    this.errorMessage = ''
-    this.warningMessage = ''
-    this.stepsCount += 1
+    if (!this.inAction) {
+      this.errorMessage = ''
+      this.warningMessage = ''
+      this.stepsCount += 1
+      this.inAction = true
+    }
   }
 
   // called when we start processing a markdown file
@@ -87,6 +89,7 @@ class Formatter {
   // optionally allows to define the final text to be displayed
   success (activityText?: string) {
     if (activityText) this.activityText = activityText
+    this.inAction = false
   }
 
   // called when the whole test suite passed
@@ -104,6 +107,7 @@ class Formatter {
   warning (warningMessage :string) {
     this.warningMessage = warningMessage
     this.warningsCount += 1
+    this.inAction = false
   }
 }
 

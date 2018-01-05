@@ -27,9 +27,8 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.start('greeting the world')   // start the "greeting the world" activity type
+  formatter.action('greeting the world')   // start the "greeting the world" activity type
   formatter.output('Hello world!')        // print something on the console
-  formatter.success()                     // finish the started activity
 };
 ```
 
@@ -89,7 +88,7 @@ Each node is an object that has these attributes:
 One of the utilities availabe to actions is the formatter instance.
 It allows to signal test progress to TextRunner and print test output to the console.
 
-Call `formatter.start(<activity name>)` before you run an activity.
+Call `formatter.action(<activity name>)` before you run an activity.
 This tells TextRunner that whatever happens next (output, success, failure) is part of that activity.
 
 `formatter.output(text)` allows to print output of the currently running action
@@ -145,44 +144,35 @@ module.exports = function({formatter, searcher, nodes}) {
   // step 1: provide a first rough description of what this action does,
   // so that TextRunner can print a somewhat helpful error message
   // if loading more specific data below fails somehow
-  formatter.start('running console command')
+  formatter.action('running console command')
 
   // step 2: determine which command to run using the searcher utility
-  // (you could also iterate the "nodes" array directly here but that's more cumbersome)
-  const commandToRun = searcher.nodeContent({type: 'fence'}, function(match) {
-    if (match.nodes.length === 0) return 'this block must contain a code block with the command to run'
-    if (match.nodes.length > 1) return 'please provide only one code block'
-    if (!match.content) return 'you provided a code block but it has no content'
-  })
+  // (you could also iterate the "nodes" array directly here)
+  const commandToRun = searcher.tagContent('fence')
 
-  // step 3: provide TextRunner a specific description of this action
-  formatter.refine('running console command: ' + commandToRun)
+  // step 3: provide TextRunner a more specific description of this action
+  formatter.action('running console command: ' + commandToRun)
 
   // step 4: perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
-
-  // step 5: tell TextRunner that this action worked and we are done here
-  formatter.success()
 }
 ```
 </a>
 
 <a class="tr_runTextrun"></a>
 
-The `searcher.nodeContent` method returns the content of the DOM node
+The `searcher.tagContent` method returns the content of the DOM node
 that satisfies the given query.
 In this case we are looking for a fenced code block,
-hence the query is `{type: 'fence'}`.
-Providing an array for the type (e.g. `{type: ['code', 'fence']}`)
+hence the query is `'fence'`.
+Providing an array for the type (e.g. `['code', 'fence']}`)
 retrieves all nodes that have any of the given types.
 
-The second parameter is an optional validation method.
-Its purpose is to make it easy and readable to provide specific error messages
-that make your custom block definition user-friendly and easy to debug.
-Its parameter is an object containing the content of the determined node
-as well as an array of all the nodes that match the given query.
-Strings returned by this method get printed as errors to the user and cause the test to fail,
-falsy return values indicate that the validation has passed,
+This method throws if it finds more or less than one tag of the given type
+in the active block. Other tag types are ignored.
+
+The optional second argument allows you to provide a default value
+in case no matching tag is found, e.g. `{default: ''}`.
 
 <hr>
 

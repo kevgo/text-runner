@@ -124,14 +124,9 @@ class RunCommand implements Command {
     return files
   }
 
-  async _executeRunner (runner): Promise<number> {
-    const result = await runner.run()
-    return result
-  }
-
   async _executeRunners (): Promise<void> {
     for (let runner of this.runners) {
-      await this._executeRunner(runner)
+      await runner.run()
     }
     this.formatter.suiteSuccess()
   }

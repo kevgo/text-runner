@@ -53,3 +53,18 @@ Feature: long-running processes
       | FILENAME | 1.md                              |
       | LINE     | 14                                |
       | MESSAGE  | stopping the long-running process |
+
+
+  Scenario: no running process
+    Given my source code contains the file "1.md" with content:
+      """
+      <a class="tr_stopConsoleCommand">
+      There is no process running here
+      </a>
+      """
+    When trying to run text-run
+    Then the test fails with:
+      | FILENAME      | 1.md                     |
+      | LINE          | 1                        |
+      | ERROR MESSAGE | No running process found |
+      | EXIT CODE     | 1                        |

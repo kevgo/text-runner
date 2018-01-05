@@ -11,4 +11,5 @@ module.exports = function (activity: Activity) {
   }
 
   global.runningProcess.kill()
+  global.runningProcess = null
 }

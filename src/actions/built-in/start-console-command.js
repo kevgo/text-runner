@@ -2,8 +2,6 @@
 
 import type {Activity} from '../../typedefs/activity.js'
 import type Configuration from '../../configuration.js'
-import type Formatter from '../../formatters/formatter.js'
-import type Searcher from '../../commands/run/searcher.js'
 import type {WriteStream} from 'observable-process'
 
 const callArgs = require('../../helpers/call-args')

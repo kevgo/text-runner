@@ -3,7 +3,6 @@
 import type {AstNode} from '../../typedefs/ast-node.js'
 import type {AstNodeList} from '../../typedefs/ast-node-list.js'
 
-const Formatter = require('../../formatters/formatter.js')
 const quoteString = require('../../helpers/quote-string.js')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 

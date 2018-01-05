@@ -2,7 +2,6 @@
 
 import type {Activity} from '../../typedefs/activity.js'
 import type {AstNode} from '../../typedefs/ast-node.js'
-import type {AstNodeList} from '../../typedefs/ast-node-list.js'
 import type Configuration from '../../configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 

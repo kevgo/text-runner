@@ -1,9 +1,6 @@
 // @flow
 
 import type {Activity} from '../../typedefs/activity.js'
-import Configuration from '../../configuration.js'
-import Formatter from '../../formatters/formatter.js'
-import Searcher from '../../commands/run/searcher.js'
 
 const {cyan} = require('chalk')
 const mkdirp = require('mkdirp')

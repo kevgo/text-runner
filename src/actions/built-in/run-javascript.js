@@ -3,8 +3,6 @@
 import type {Activity} from '../../typedefs/activity.js'
 import type Configuration from '../../configuration.js'
 import type {DoneFunction} from '../../typedefs/done-func.js'
-import type Formatter from '../../formatters/formatter.js'
-import type Searcher from '../../commands/run/searcher.js'
 
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity, done: DoneFunction) {

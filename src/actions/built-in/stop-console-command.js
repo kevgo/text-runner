@@ -1,9 +1,6 @@
 // @flow
 
 import type {Activity} from '../../typedefs/activity.js'
-import type Configuration from '../../configuration.js'
-import type Formatter from '../../formatters/formatter.js'
-import type Searcher from '../../commands/run/searcher.js'
 
 // Stops the currently running console command.
 module.exports = function (activity: Activity) {

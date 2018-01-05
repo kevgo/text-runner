@@ -1,4 +1,4 @@
-const Configuration = require('../dist/configuration')
+const Configuration = require('../../dist/configuration/configuration')
 const fs = require('fs')
 const path = require('path')
 const tmp = require('tmp')

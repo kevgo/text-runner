@@ -3,10 +3,10 @@
 const {red} = require('chalk')
 const cliCursor = require('cli-cursor')
 const endChildProcesses = require('end-child-processes')
-const parseCliArgs = require('./helpers/parse-cli-args')
-const textRunner = require('./text-runner')
-const UnprintedUserError = require('./errors/unprinted-user-error.js')
-const UserError = require('./errors/user-error.js')
+const parseCliArgs = require('../helpers/parse-cli-args')
+const textRunner = require('../text-runner')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
+const UserError = require('../errors/user-error.js')
 
 cliCursor.hide()
 

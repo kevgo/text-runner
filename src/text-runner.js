@@ -1,12 +1,12 @@
 // @flow
 
 import type Formatter from './formatters/formatter.js'
-import type {CliArgTypes} from './cli-arg-types.js'
+import type {CliArgTypes} from './cli/cli-arg-types.js'
 
 const ActionManager = require('./actions/action-manager')
 const {red} = require('chalk')
 const commandPath = require('./helpers/command-path')
-const Configuration = require('./configuration')
+const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
 const hasCommand = require('./helpers/has-command')

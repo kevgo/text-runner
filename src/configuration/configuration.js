@@ -1,6 +1,6 @@
 // @flow
 
-import type {CliArgTypes} from './cli-arg-types.js'
+import type {CliArgTypes} from '../cli/cli-arg-types.js'
 import type {ConfigFileStructure} from './config-file-structure.js'
 
 const fs = require('fs')

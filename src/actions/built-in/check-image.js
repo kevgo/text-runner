@@ -1,7 +1,7 @@
 // @flow
 
 import type {Activity} from '../../typedefs/activity.js'
-import type {AstNode} from '../../typedefs/ast-node.js'
+import type {AstNode} from '../../parsers/ast-node.js'
 import type Configuration from '../../configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 

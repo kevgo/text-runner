@@ -88,7 +88,7 @@ Running the files happens in two phases:
   using a [MarkdownParser](src/commands/run/markdown-parser.js) instance
   which converts the complex and noisy Markdown AST
   (and in the future HTML AST)
-  into a simplified and flattened list of TextRunner-specific [AstNodes](src/typedefs/ast-node.js)
+  into a simplified and flattened list of TextRunner-specific [AstNodes](src/parsers/ast-node.js)
   that contain only relevant relevant information.
   An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
   processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).

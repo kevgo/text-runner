@@ -1,5 +1,10 @@
 // @flow
 
+import type {ActivityList} from '../../typedefs/activity-list.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+
 const ActionManager = require('../../actions/action-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
 const {cyan} = require('chalk')
@@ -65,7 +70,9 @@ class MarkdownFileRunner {
     // waiting 1 ms here to give Node a chance to run queued up logic from previous steps
     await delay(1)
     block.formatter.startFile(block.filename)
-    block.formatter.setLines(block.startLine, block.endLine)
+    if (block.startLine != null && block.endLine != null) {
+      block.formatter.setLines(block.startLine, block.endLine)
+    }
     try {
       if (block.runner.length === 1) {
         // synchronous action method or returns a promise

@@ -1,9 +1,12 @@
 // @flow
 
-type NodeQuery = string | string[]
+import type {AstNode} from '../../typedefs/ast-node.js'
+import type {AstNodeList} from '../../typedefs/ast-node-list.js'
 
 const quoteString = require('../../helpers/quote-string.js')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+
+type NodeQuery = string | string[]
 
 class Searcher {
   // the AstNodes that belong to the active block that this Searcher is for

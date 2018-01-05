@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 const {cyan, red} = require('chalk')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')

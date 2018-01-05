@@ -1,5 +1,7 @@
 // @flow
 
+import type {AstNodeList} from '../../typedefs/ast-node-list.js'
+
 const Searcher = require('./searcher.js')
 const {expect} = require('chai')
 

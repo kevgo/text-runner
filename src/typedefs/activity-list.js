@@ -1,3 +1,5 @@
 // @flow
 
-type ActivityList = Array<Activity>
+import type {Activity} from './activity.js'
+
+export type ActivityList = Array<Activity>

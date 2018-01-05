@@ -1,5 +1,10 @@
 // @flow
 
+import type {Command} from '../../typedefs/command.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+
 const ActionManager = require('../../actions/action-manager.js')
 const glob = require('glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
@@ -125,15 +130,10 @@ class RunCommand implements Command {
   }
 
   async _executeRunners (): Promise<void> {
-    var stepsCount = 0
     for (let runner of this.runners) {
-      stepsCount += await this._executeRunner(runner)
+      await this._executeRunner(runner)
     }
-    if (stepsCount === 0) {
-      this.formatter.warning('no activities found')
-    } else {
-      this.formatter.suiteSuccess(stepsCount)
-    }
+    this.formatter.suiteSuccess()
   }
 
   async _prepareRunners () {

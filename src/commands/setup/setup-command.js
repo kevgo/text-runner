@@ -1,5 +1,9 @@
 // @flow
 
+import type {Command} from '../../typedefs/command.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+
 const ActionManager = require('../../actions/action-manager.js')
 const {cyan} = require('chalk')
 

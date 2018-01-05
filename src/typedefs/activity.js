@@ -1,8 +1,15 @@
 // @flow
 
+import type {Action} from '../typedefs/action.js'
+import type {AstNodeList} from '../typedefs/ast-node-list.js'
+import type Configuration from '../configuration.js'
+import type Formatter from '../formatters/formatter.js'
+import type {LinkTargetList} from './link-target-list.js'
+import type Searcher from '../commands/run/searcher.js'
+
 // Activity is an action instance, i.e. a particular activity that we are going to do
 // on a particular place in a particular document, defined by an action
-type Activity = {
+export type Activity = {
   filename: string,
   startLine: ?number,
   endLine?: number,

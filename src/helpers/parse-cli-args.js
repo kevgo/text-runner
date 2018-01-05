@@ -1,5 +1,7 @@
 // @flow
 
+import type Formatter from '../formatters/formatter.js'
+
 const availableCommands = require('./available-commands')
 const minimist = require('minimist')
 const path = require('path')

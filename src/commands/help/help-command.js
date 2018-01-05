@@ -1,5 +1,7 @@
 // @flow
 
+import type {Command} from '../../typedefs/command.js'
+
 const {bold, dim, red} = require('chalk')
 // $FlowFixMe: flow doesn't like requiring such an untyped file
 const version: number = require('../../../package.json').version

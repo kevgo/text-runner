@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 const jsdiffConsole = require('jsdiff-console')
 
 // Runs the given commands on the console.

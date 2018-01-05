@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 const {bold, cyan, red} = require('chalk')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')

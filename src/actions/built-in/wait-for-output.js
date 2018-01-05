@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 // Waits until the currently running console command produces the given output
 module.exports = async function (activity: Activity) {
   activity.formatter.action('waiting for output of the running console process')

@@ -1,5 +1,7 @@
 // @flow
 
+import type {AstNodeList} from '../../typedefs/ast-node-list.js'
+
 // $FlowFixMe
 const Remarkable = require('remarkable')
 

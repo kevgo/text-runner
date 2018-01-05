@@ -1,3 +1,3 @@
 // @flow
 
-declare type DoneFunction = (err?: ?ErrnoError) => void
+export type DoneFunction = (err?: ?ErrnoError) => void

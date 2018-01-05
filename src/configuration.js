@@ -1,5 +1,8 @@
 // @flow
 
+import type {TextRunnerConfig} from './typedefs/text-runner-config.js'
+import type {ConfigFileStructure} from './typedefs/config-file-structure.js'
+
 const fs = require('fs')
 const debug = require('debug')('textrun:configuration')
 const YAML = require('yamljs')
@@ -23,6 +26,7 @@ class Configuration {
   constructorArgs: TextRunnerConfig
   fileData: ConfigFileStructure
   sourceDir: string
+  testDir: string
 
   constructor (configFilePath: string, constructorArgs: TextRunnerConfig) {
     this.configFilePath = configFilePath

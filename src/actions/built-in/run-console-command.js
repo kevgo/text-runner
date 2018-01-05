@@ -1,5 +1,8 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
 import type {WriteStream} from 'observable-process'
 
 const callArgs = require('../../helpers/call-args')
@@ -77,8 +80,9 @@ function makeGlobal (configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
+    // $FlowFixMe: Ignore null-pointer exceptions here since we have a default value
     globals = configuration.fileData.actions.runConsoleCommand.globals
-  } catch (e) {} // Ignore null-pointer exceptions here since we have a default value
+  } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function (commandText) {
     const commandParts = commandText.split(' ')

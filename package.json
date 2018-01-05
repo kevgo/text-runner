@@ -54,7 +54,7 @@
     "mocha": "4.1.0",
     "ncp": "2.0.0",
     "nyc": "11.4.1",
-    "o-tools": "0.10.2",
+    "o-tools": "0.10.3",
     "remark-cli": "4.0.0",
     "remark-lint": "6.0.1",
     "remark-preset-lint-recommended": "3.0.1",

@@ -1,7 +1,7 @@
 // @flow
 
 import type Formatter from './formatters/formatter.js'
-import type {TextRunnerConfig} from './typedefs/text-runner-config.js'
+import type {CliArgTypes} from './cli-arg-types.js'
 
 const ActionManager = require('./actions/action-manager')
 const {red} = require('chalk')
@@ -24,12 +24,12 @@ module.exports = async function (value: {command: string, file: string, fast: bo
 }
 
 class TextRunner {
-  constructorArgs: TextRunnerConfig
+  constructorArgs: CliArgTypes
   configuration: Configuration
   formatter: Formatter
   actions: ActionManager
 
-  constructor (constructorArgs: TextRunnerConfig, configPath) {
+  constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()

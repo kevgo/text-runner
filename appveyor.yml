@@ -13,14 +13,10 @@ install:
 
 test_script:
   - bin\build.cmd
-  - dir dist /s
   - bin\tests.cmd
   - bin\cuke-api.cmd
   # - bin\cuke-cli.cmd
-  - dir C:\projects\text-runner\dist\cli
-  - dir dist\cli\cli.js
-  - node dist\cli\cli.js
-  # - bin\text-run.cmd
+  - bin\text-run.cmd
 
 
 # Don't double-build PRs

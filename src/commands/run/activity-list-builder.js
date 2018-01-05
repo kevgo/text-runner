@@ -43,7 +43,7 @@ class ActivityListBuilder {
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
         }
-        currentRunnerType = this.actions.actionFor(blockType, this.filePath)
+        currentRunnerType = this.actions.handlerFunctionFor(blockType, this.filePath)
         if (currentRunnerType) {
           insideActiveBlock = true
           nodesForCurrentRunner = []
@@ -82,7 +82,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [node],
-          runner: this.actions.actionFor('checkImage', this.filePath),
+          runner: this.actions.handlerFunctionFor('checkImage', this.filePath),
           linkTargets: this.linkTargets,
           formatter: this.formatter,
           configuration: this.configuration,
@@ -98,7 +98,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [node],
-          runner: this.actions.actionFor('checkLink', this.filePath),
+          runner: this.actions.handlerFunctionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
           linkTargets: this.linkTargets,
@@ -115,7 +115,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [{content: target}],
-          runner: this.actions.actionFor('checkLink', this.filePath),
+          runner: this.actions.handlerFunctionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
           linkTargets: this.linkTargets,

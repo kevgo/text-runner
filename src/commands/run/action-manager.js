@@ -13,7 +13,7 @@ const rechoir = require('rechoir')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 class ActionManager {
-  // Loads and provides built-in and custom actions
+  // Loads and provides built-in and custom handler functions
 
   formatter: Formatter
   configuration: Configuration
@@ -28,7 +28,7 @@ class ActionManager {
   }
 
   // Provides the action for the block with the given name
-  actionFor (blockName: string, filePath: string): HandlerFunction {
+  handlerFunctionFor (blockName: string, filePath: string): HandlerFunction {
     const result = this.actions[blockName.toLowerCase()]
     if (!result) {
       var errorText = `unknown action: ${red(blockName)}\nAvailable actions:\n`

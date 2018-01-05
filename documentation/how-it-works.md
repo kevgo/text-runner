@@ -1,10 +1,5 @@
 # How TextRunner works
 
-There are no limitations on the structure of the Markdown files TextRunner uses.
-It can read and understand (with your help)
-complex data in tables, bullet point lists, embedded images,
-as well as simple plain text in any human language.
-
 To make a part of any Markdown file actionable by TextRunner,
 wrap it in an `<a>` tag with class `tr_[action name]`.
 As an example,

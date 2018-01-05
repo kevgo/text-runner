@@ -23,10 +23,11 @@ defineSupportCode(function ({When}) {
     const expectError = determineExpectError(tryingText)
     try {
       await this.execute({command: 'run', cwd: this.rootDir, expectError})
-      finish(expectError, this.error || (this.process && this.process.exitCode))
     } catch (err) {
       finish(expectError, err)
+      return
     }
+    finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
   })
 
   When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async function (tryingText, optionsText) {
@@ -78,7 +79,9 @@ function determineExpectError (tryingText) {
 function finish (trying, error) {
   if (trying && !error) {
     throw new Error('expected error but test succeeded')
-  } else if (!trying && error) {
+  } else if (trying && error) {
+    // nothing to do here, we expected the error
+  } else if (error) {
     throw error
   }
 }

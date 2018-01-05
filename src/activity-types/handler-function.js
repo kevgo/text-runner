@@ -6,4 +6,4 @@ import type Formatter from '../formatters/formatter.js'
 import type Searcher from '../commands/run/searcher.js'
 
 // A user-defined or built-in handler for a code block
-export type Action = (value: Activity) => void
+export type HandlerFunction = (value: Activity) => void

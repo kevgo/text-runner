@@ -1,6 +1,6 @@
 // @flow
 
-import type {Action} from '../../activity-types/action.js'
+import type {HandlerFunction} from '../../activity-types/handler-function.js'
 import type {AstNodeList} from '../../parsers/ast-node-list.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
@@ -14,7 +14,7 @@ export type Activity = {
   startLine: ?number,
   endLine?: number,
   formatter: Formatter,
-  runner: Action,
+  runner: HandlerFunction,
   nodes: AstNodeList,
   linkTargets: LinkTargetList,
   configuration: Configuration,

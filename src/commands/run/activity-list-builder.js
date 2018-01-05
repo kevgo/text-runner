@@ -1,6 +1,6 @@
 // @flow
 
-import type {Action} from '../../activity-types/action.js'
+import type {HandlerFunction} from '../../activity-types/handler-function.js'
 import type {ActivityList} from '../../commands/run/activity-list.js'
 import type {AstNode} from '../../parsers/ast-node.js'
 import type {AstNodeList} from '../../parsers/ast-node-list.js'
@@ -33,7 +33,7 @@ class ActivityListBuilder {
     var nodesForCurrentRunner: AstNodeList = []
     var startLine = 0
     var result: ActivityList = []
-    var currentRunnerType: Action = (value) => {}
+    var currentRunnerType: HandlerFunction = (value) => {}
     for (let node: AstNode of tree) {
       // active block start tag
       const blockType : ?string = this._isActiveBlockStartTag(node)

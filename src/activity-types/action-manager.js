@@ -1,6 +1,6 @@
 // @flow
 
-import type {Action} from './action.js'
+import type {HandlerFunction} from '../activity-types/handler-function.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
 
@@ -17,7 +17,7 @@ class ActionManager {
 
   formatter: Formatter
   configuration: Configuration
-  actions: { [string]: Action }
+  actions: { [string]: HandlerFunction }
 
   constructor (formatter: Formatter, configuration: Configuration) {
     this.formatter = formatter
@@ -28,7 +28,7 @@ class ActionManager {
   }
 
   // Provides the action for the block with the given name
-  actionFor (blockName: string, filePath: string): Action {
+  actionFor (blockName: string, filePath: string): HandlerFunction {
     const result = this.actions[blockName.toLowerCase()]
     if (!result) {
       var errorText = `unknown action: ${red(blockName)}\nAvailable actions:\n`

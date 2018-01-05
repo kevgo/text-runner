@@ -12,7 +12,7 @@ import type Searcher from './searcher.js'
 // on a particular place in a particular document, defined by an activity type
 export type Activity = {
   filename: string,
-  startLine: ?number,
+  startLine?: number,
   endLine?: number,
   formatter: Formatter,
   runner: HandlerFunction,

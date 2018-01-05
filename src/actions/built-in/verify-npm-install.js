@@ -1,30 +1,24 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
 import type Configuration from '../../configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type Searcher from '../../commands/run/searcher.js'
 
-const {cyan, green} = require('chalk')
+const {cyan} = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../../helpers/trim-dollar')
 
-module.exports = function (args: {configuration: Configuration, formatter: Formatter, searcher: Searcher}) {
-  args.formatter.start('verifying NPM installation instructions')
-
-  const installText = trimDollar(args.searcher.nodeContent({types: ['fence', 'code']}, ({nodes}) => {
-    if (nodes.length === 0) return 'missing code block'
-    if (nodes.length > 1) return 'found multiple code blocks'
-  }))
-
+module.exports = function (activity: Activity) {
+  activity.formatter.action('verifying NPM installation instructions')
+  const installText = trimDollar(activity.searcher.tagContent(['fence', 'code']))
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
-  args.formatter.start(`verifying NPM installs ${cyan(pkg.name)}`)
+  activity.formatter.action(`verify NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    args.formatter.error(`could not find ${cyan(pkg.name)} in installation instructions`)
-    throw new Error('1')
+    throw new Error(`could not find ${cyan(pkg.name)} in installation instructions`)
   }
-  args.formatter.success(`installs ${green(pkg.name)}`)
 }
 
 function missesPackageName (installText: string, packageName: string): boolean {

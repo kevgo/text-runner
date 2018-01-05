@@ -31,9 +31,9 @@ Feature: verifying global commands provided by NPM modules
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                          |
-      | LINE     | 3-7                           |
-      | MESSAGE  | provides a global foo command |
+      | FILENAME | 1.md                               |
+      | LINE     | 3-7                                |
+      | MESSAGE  | NPM module exports the foo command |
 
 
   Scenario: correct command name with single-fenced code block
@@ -43,9 +43,9 @@ Feature: verifying global commands provided by NPM modules
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                          |
-      | LINE     | 1                             |
-      | MESSAGE  | provides a global foo command |
+      | FILENAME | 1.md                               |
+      | LINE     | 1                                  |
+      | MESSAGE  | NPM module exports the foo command |
 
 
   Scenario: mismatching command name
@@ -77,8 +77,7 @@ Feature: verifying global commands provided by NPM modules
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                              |
-      | LINE          | 3                                 |
-      | MESSAGE       | verifying exported global command |
-      | ERROR MESSAGE | missing code block                |
-      | EXIT CODE     | 1                                 |
+      | FILENAME      | 1.md                                                |
+      | LINE          | 3                                                   |
+      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
+      | EXIT CODE     | 1                                                   |

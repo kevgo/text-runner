@@ -23,7 +23,7 @@ defineSupportCode(function ({When}) {
     const expectError = determineExpectError(tryingText)
     try {
       await this.execute({command: 'run', cwd: this.rootDir, expectError})
-      finish(expectError, this.process && this.process.exitCode)
+      finish(expectError, this.error || (this.process && this.process.exitCode))
     } catch (err) {
       finish(expectError, err)
     }

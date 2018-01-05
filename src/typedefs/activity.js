@@ -14,7 +14,8 @@ export type Activity = {
   endLine?: number,
   formatter: Formatter,
   runner: Action,
-  nodes: ?AstNodeList,
+  nodes: AstNodeList,
+  linkTargets: LinkTargetList,
   configuration: Configuration,
-  searcher?: Searcher
+  searcher: Searcher
 }

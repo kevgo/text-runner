@@ -17,8 +17,8 @@ test_script:
   - bin\tests.cmd
   - bin\cuke-api.cmd
   # - bin\cuke-cli.cmd
-  - dir dist /s
   - dir C:\projects\text-runner\dist\cli
+  - dir dist\cli\cli.js
   - node dist\cli\cli.js
   # - bin\text-run.cmd
 

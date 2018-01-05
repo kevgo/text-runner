@@ -11,7 +11,7 @@ const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
 const hasCommand = require('./commands/has-command')
 const isGlob = require('is-glob')
-const isMarkdownFile = require('./helpers/is-markdown-file')
+const path = require('path')
 const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
@@ -80,6 +80,15 @@ class TextRunner {
 function hasDirectory (dirname :string) :boolean {
   try {
     return fs.statSync(dirname).isDirectory()
+  } catch (e) {
+    return false
+  }
+}
+
+function isMarkdownFile (filename :string) :boolean {
+  try {
+    const filepath = path.join(process.cwd(), filename)
+    return filename.endsWith('.md') && fs.statSync(filepath).isFile()
   } catch (e) {
     return false
   }

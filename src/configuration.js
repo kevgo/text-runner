@@ -1,7 +1,7 @@
 // @flow
 
 import type {CliArgTypes} from './cli-arg-types.js'
-import type {ConfigFileStructure} from './typedefs/config-file-structure.js'
+import type {ConfigFileStructure} from './config-file-structure.js'
 
 const fs = require('fs')
 const debug = require('debug')('textrun:configuration')

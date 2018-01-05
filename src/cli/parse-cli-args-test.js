@@ -19,7 +19,7 @@ describe('parse-cli-args', function () {
     beforeEach(function () {
       this.result = parseCliArgs([
         'C:\\Program Files (x86)\\nodejs\\node.exe',
-        'C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli',
+        'C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli.js',
         'run'
       ])
     })

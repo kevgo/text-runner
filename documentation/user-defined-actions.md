@@ -164,17 +164,15 @@ module.exports = function({formatter, searcher, nodes}) {
 The `searcher.tagContent` method returns the content of the DOM node
 that satisfies the given query.
 In this case we are looking for a fenced code block,
-hence the query is `{type: 'fence'}`.
-Providing an array for the type (e.g. `{type: ['code', 'fence']}`)
+hence the query is `'fence'`.
+Providing an array for the type (e.g. `['code', 'fence']}`)
 retrieves all nodes that have any of the given types.
 
-The second parameter is an optional validation method.
-Its purpose is to make it easy and readable to provide specific error messages
-that make your custom block definition user-friendly and easy to debug.
-Its parameter is an object containing the content of the determined node
-as well as an array of all the nodes that match the given query.
-Strings returned by this method get printed as errors to the user and cause the test to fail,
-falsy return values indicate that the validation has passed,
+This method throws if it finds more or less than one tag of the given type
+in the active block. Other tag types are ignored.
+
+The optional second argument allows you to provide a default value
+in case no matching tag is found, e.g. `{default: ''}`.
 
 <hr>
 

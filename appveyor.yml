@@ -13,11 +13,11 @@ install:
 
 test_script:
   - bin\build.cmd
-  - dir /s
+  - dir dist /s
   - bin\tests.cmd
   - bin\cuke-api.cmd
   # - bin\cuke-cli.cmd
-  - dir /s
+  - dir dist /s
   - bin\text-run.cmd
 
 

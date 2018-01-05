@@ -1,5 +1,10 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+import type {LinkTargetList} from '../../typedefs/link-target-list.js'
+
 const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')

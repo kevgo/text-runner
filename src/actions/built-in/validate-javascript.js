@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity) {
   activity.formatter.action('validating JavaScript')

@@ -1,5 +1,7 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+
 const {cyan} = require('chalk')
 const mkdirp = require('mkdirp')
 const path = require('path')

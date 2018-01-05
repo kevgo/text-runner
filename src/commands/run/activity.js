@@ -1,6 +1,6 @@
 // @flow
 
-import type {HandlerFunction} from '../../activity-types/handler-function.js'
+import type {HandlerFunction} from './handler-function.js'
 import type {AstNodeList} from '../../parsers/ast-node-list.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'

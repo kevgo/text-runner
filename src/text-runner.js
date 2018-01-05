@@ -3,7 +3,7 @@
 import type Formatter from './formatters/formatter.js'
 import type {CliArgTypes} from './cli/cli-arg-types.js'
 
-const ActionManager = require('./activity-types/action-manager')
+const ActionManager = require('./commands/run/action-manager.js')
 const {red} = require('chalk')
 const commandPath = require('./commands/command-path')
 const Configuration = require('./configuration/configuration.js')

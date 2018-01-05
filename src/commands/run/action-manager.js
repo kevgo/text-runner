@@ -1,8 +1,8 @@
 // @flow
 
-import type {HandlerFunction} from '../activity-types/handler-function.js'
-import type Configuration from '../configuration/configuration.js'
-import type Formatter from '../formatters/formatter.js'
+import type {HandlerFunction} from './handler-function.js'
+import type Configuration from '../../configuration/configuration.js'
+import type Formatter from '../../formatters/formatter.js'
 
 const camelcase = require('camelcase')
 const {red} = require('chalk')
@@ -10,7 +10,7 @@ const glob = require('glob')
 const interpret = require('interpret')
 const path = require('path')
 const rechoir = require('rechoir')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 class ActionManager {
   // Loads and provides built-in and custom actions
@@ -48,7 +48,7 @@ class ActionManager {
   }
 
   builtinActionFilenames (): string[] {
-    return glob.sync(path.join(__dirname, 'built-in', '*.js'))
+    return glob.sync(path.join(__dirname, '..', '..', 'activity-types', 'built-in', '*.js'))
   }
 
   customActionFilenames (): string[] {

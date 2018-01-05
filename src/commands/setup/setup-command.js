@@ -4,7 +4,7 @@ import type {Command} from '../command.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 
-const ActionManager = require('../../activity-types/action-manager.js')
+const ActionManager = require('../run/action-manager.js')
 const {cyan} = require('chalk')
 
 class SetupCommand implements Command {

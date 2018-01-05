@@ -1,5 +1,10 @@
 // @flow
 
+import type {Activity} from '../../typedefs/activity.js'
+import type {AstNode} from '../../typedefs/ast-node.js'
+import type Configuration from '../../configuration.js'
+import type Formatter from '../../formatters/formatter.js'
+
 const {cyan, magenta, red} = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
@@ -12,7 +17,7 @@ module.exports = async function (activity: Activity) {
   if (node.src == null || node.src === '') {
     throw new Error('image tag without source')
   }
-  // $FlowFixMe
+  // $FlowFixMe: Flow bug, we proved 3 lines above that node.src has a value
   const imagePath = path.join(path.dirname(activity.filename), node.src)
   activity.formatter.action(`image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {

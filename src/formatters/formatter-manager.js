@@ -1,5 +1,7 @@
 // @flow
 
+import type Formatter from '../formatters/formatter.js'
+
 const glob = require('glob')
 const path = require('path')
 const UnprintedUserError = require('../errors/unprinted-user-error.js')

@@ -1,6 +1,7 @@
 // @flow
 
 import type {Activity} from '../../typedefs/activity.js'
+import type {Activity} from '../../typedefs/activity.js'
 import type Configuration from '../../configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type Searcher from '../../commands/run/searcher.js'

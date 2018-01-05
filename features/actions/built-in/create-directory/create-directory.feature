@@ -31,11 +31,11 @@ Feature: creating directories
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                            |
-      | LINE          | 1                                     |
-      | MESSAGE       | creating directory                    |
-      | ERROR MESSAGE | no name given for directory to create |
-      | EXIT CODE     | 1                                     |
+      | FILENAME      | creator.md                             |
+      | LINE          | 1                                      |
+      | MESSAGE       | creating directory                     |
+      | ERROR MESSAGE | no 'code' tag found in this active block |
+      | EXIT CODE     | 1                                      |
 
 
   Scenario: empty name given
@@ -47,11 +47,11 @@ Feature: creating directories
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md         |
-      | LINE          | 1                  |
-      | MESSAGE       | creating directory |
-      | ERROR MESSAGE | empty name given   |
-      | EXIT CODE     | 1                  |
+      | FILENAME      | creator.md                 |
+      | LINE          | 1                          |
+      | MESSAGE       | creating directory         |
+      | ERROR MESSAGE | empty directory name given |
+      | EXIT CODE     | 1                          |
 
 
   Scenario: two names given
@@ -63,8 +63,8 @@ Feature: creating directories
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                       |
-      | LINE          | 1                                |
-      | MESSAGE       | creating directory               |
-      | ERROR MESSAGE | several names given: one and two |
-      | EXIT CODE     | 1                                |
+      | FILENAME      | creator.md                                         |
+      | LINE          | 1                                                  |
+      | MESSAGE       | creating directory                                 |
+      | ERROR MESSAGE | found more than one 'code' tag in the active block |
+      | EXIT CODE     | 1                                                  |

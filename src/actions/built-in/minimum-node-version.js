@@ -8,10 +8,8 @@ const minimum = require('../../helpers/minimum.js')
 module.exports = function (activity: Activity) {
   activity.formatter.action('determining minimum supported NodeJS version')
 
-  const documentedVersion = parseInt(activity.searcher.nodeContent({type: 'text'}, ({nodes, content}) => {
-    if (!content) return 'no text given'
-    if (isNaN(content)) return 'given Node version is not a number'
-  }))
+  const documentedVersion = parseInt(activity.searcher.tagContent('text'))
+  if (isNaN(documentedVersion)) throw new Error('given Node version is not a number')
   activity.formatter.action(`determining whether minimum supported NodeJS version is ${cyan(documentedVersion)}`)
 
   var supportedVersion

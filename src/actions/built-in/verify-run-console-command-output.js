@@ -7,11 +7,8 @@ const jsdiffConsole = require('jsdiff-console')
 module.exports = function (activity: Activity) {
   activity.formatter.action('verifying the output of the last run console command')
 
-  const expectedLines = activity.searcher.nodeContent({type: 'fence'}, ({content, nodes}) => {
-    if (nodes.length === 0) return 'no fenced blocks found'
-    if (nodes.length > 1) return `found ${nodes.length} fenced code blocks. Expecting only one.`
-    if (!content) return 'empty fenced block found'
-  }).split('\n')
+  const expectedLines = activity.searcher.tagContent('fence')
+    .split('\n')
     .map((line) => line.trim())
     .filter((line) => line)
 

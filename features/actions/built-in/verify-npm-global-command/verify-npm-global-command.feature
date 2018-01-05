@@ -77,7 +77,7 @@ Feature: verifying global commands provided by NPM modules
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                              |
-      | LINE          | 3                                 |
-      | ERROR MESSAGE | missing code block                |
-      | EXIT CODE     | 1                                 |
+      | FILENAME      | 1.md                                                |
+      | LINE          | 3                                                   |
+      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
+      | EXIT CODE     | 1                                                   |

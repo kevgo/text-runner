@@ -7,13 +7,7 @@ const debug = require('debug')('textrun:actions:cd')
 // Changes the current working directory to the one given in the hyperlink or code block
 module.exports = function (activity: Activity) {
   activity.formatter.action('changing the current working directory')
-  const directory = activity.searcher.nodeContent({types: ['link_open', 'code']}, (v: {nodes: AstNodeList, content: string}): ?string => {
-    if (v.nodes.length === 0) return 'no link found'
-    if (v.nodes.length > 1) return 'too many links found'
-    if (v.content.trim().length === 0) return 'empty link found'
-    return null
-  })
-
+  const directory = activity.searcher.tagContent(['link_open', 'code'])
   activity.formatter.action(`changing into the ${bold(cyan(directory))} directory`)
   activity.formatter.output(`cd ${directory}`)
   const fullPath = path.join(activity.configuration.testDir, directory)

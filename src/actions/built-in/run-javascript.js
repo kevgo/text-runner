@@ -4,11 +4,7 @@
 module.exports = function (activity: Activity, done: DoneFunction) {
   activity.formatter.action('running JavaScript code')
 
-  var code = activity.searcher.nodeContent({type: 'fence'}, ({nodes, content}) => {
-    if (nodes.length === 0) return 'no code to run found'
-    if (nodes.length > 1) return 'too many code blocks found'
-    if (!content) return 'no JavaScript code found in the fenced block'
-  })
+  var code = activity.searcher.tagContent('fence')
   if (code == null) {
     activity.formatter.error('no JavaScript code found in the fenced block')
     return

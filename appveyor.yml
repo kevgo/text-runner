@@ -18,7 +18,8 @@ test_script:
   - bin\cuke-api.cmd
   # - bin\cuke-cli.cmd
   - dir dist /s
-  - bin\text-run.cmd
+  - node C:\projects\text-runner\dist\cli\cli.js
+  # - bin\text-run.cmd
 
 
 # Don't double-build PRs

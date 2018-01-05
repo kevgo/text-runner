@@ -1,6 +1,6 @@
 // @flow
 
-const {cyan, green, magenta, red} = require('chalk')
+const {cyan, green, magenta} = require('chalk')
 const Formatter = require('./formatter')
 
 class DotFormatter extends Formatter {
@@ -8,7 +8,13 @@ class DotFormatter extends Formatter {
 
   error (errorMessage: string) {
     super.error(errorMessage)
-    console.log(red(errorMessage))
+    var output = ''
+    if (this.filePath) output += this.filePath
+    if (this.startLine) output += `:${this.startLine}`
+    if (this.endLine && this.endLine !== this.startLine) output += `-${this.endLine}`
+    if (this.filePath) output += ' -- '
+    output += errorMessage
+    console.log(output)
   }
 
   output (text: string | Buffer): boolean {

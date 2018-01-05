@@ -100,7 +100,7 @@
       "flowtype"
     ],
     "globals": [
-      "before",
+      "beforeEach",
       "context",
       "describe",
       "expect",

@@ -2,3 +2,4 @@
 --require babel-core/register
 --fullTrace
 --recursive
+test/test-helper.js

@@ -23,6 +23,7 @@ async function main () {
     console.log('777777777777')
   } catch (err) {
     console.log('88888888888')
+    console.log(err.stack)
     exitCode = 1
     if (err instanceof UnprintedUserError) {
       console.log('99999999999')

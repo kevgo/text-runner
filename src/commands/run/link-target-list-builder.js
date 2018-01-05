@@ -5,7 +5,7 @@ import type {LinkTargetList} from './link-target-list.js'
 
 const dashify = require('dashify')
 
-class LinkTargetBuilder {
+class LinkTargetListBuilder {
   // determines which files contain which link targets (anchors)
 
   // the LinkTarget list that this builder is supposed to populate
@@ -41,4 +41,4 @@ class LinkTargetBuilder {
   }
 }
 
-module.exports = LinkTargetBuilder
+module.exports = LinkTargetListBuilder

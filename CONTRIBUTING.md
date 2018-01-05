@@ -104,7 +104,7 @@ Running the files happens in two phases:
   The code base using TextRunner can also add their own action types.
   While processing the AST,
   MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)
-  via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
+  via a [LinkTargetListBuilder](src/commands/run/link-target-list-builder.js) instance.
 
 2. In the `run` phase, the prepared actions are executed one by one.
   They now have full access to all link targets in all files.

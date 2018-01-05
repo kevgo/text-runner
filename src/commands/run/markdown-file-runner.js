@@ -10,7 +10,7 @@ const ActivityListBuilder = require('./activity-list-builder')
 const {cyan} = require('chalk')
 const delay = require('delay')
 const fs = require('fs-extra')
-const LinkTargetBuilder = require('./link-target-builder')
+const LinkTargetListBuilder = require('./link-target-list-builder.js')
 const MarkdownParser = require('../../parsers/markdown/markdown-parser')
 const path = require('path')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
@@ -24,7 +24,7 @@ class MarkdownFileRunner {
   configuration: Configuration
   parser: MarkdownParser
   activityListBuilder: ActivityListBuilder
-  linkTargetBuilder: LinkTargetBuilder
+  linkTargetBuilder: LinkTargetListBuilder
   runData: ActivityList
 
   constructor (value: {filePath: string, formatter: Formatter, activityTypesManager: ActivityTypeManager, configuration: Configuration, linkTargets: LinkTargetList}) {
@@ -38,7 +38,7 @@ class MarkdownFileRunner {
       formatter: this.formatter,
       configuration: this.configuration,
       linkTargets: value.linkTargets})
-    this.linkTargetBuilder = new LinkTargetBuilder({linkTargets: value.linkTargets})
+    this.linkTargetBuilder = new LinkTargetListBuilder({linkTargets: value.linkTargets})
   }
 
   // Prepares this runner

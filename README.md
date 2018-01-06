@@ -26,6 +26,11 @@ It also ensures that links and images in your documentation point to existing ta
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
+There are no limitations on the structure of the Markdown files TextRunner uses.
+It can read and understand (with your help)
+complex data in tables, bullet point lists, embedded images,
+as well as simple plain text in any human language.
+
 
 #### Use cases
 
@@ -43,6 +48,6 @@ which is verified for correctness by TextRunner.
 - [how it works](documentation/how-it-works.md)
 - [installation](documentation/installation.md)
 - [configuration](documentation/configuration.md)
-- [built-in actions](documentation/built-in-actions.md)
-- [user-defined actions](documentation/user-defined-actions.md)
+- [built-in activity types](documentation/built-in-activity-types.md)
+- [user-defined activity types](documentation/user-defined-activity-types.md)
 - [related tools](documentation/related-tools.md)

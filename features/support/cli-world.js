@@ -105,7 +105,10 @@ const CliWorld = function () {
   }
 
   this.verifyPrints = (expectedText: string) => {
-    expect(new RegExp(expectedText).test(this.process.fullOutput())).to.be.true
+    const output = this.process.fullOutput()
+    if (!new RegExp(expectedText).test(output)) {
+      throw new Error(`expected to find regex '${expectedText}' in '${output}'`)
+    }
   }
 
   this.verifyRanConsoleCommand = (command: string) => {

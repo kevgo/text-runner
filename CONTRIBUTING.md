@@ -39,18 +39,23 @@ Use the `bin/lint-js` script instead.
 
 ## Terminology
 
-TextRunner is a framework that allows to execute _actions_ defined by _blocks_
-in Markdown documents.
-Each MarkDown file consists of plain text (that is not executable),
-and a number of _blocks_ (which are executable).
-Blocks are specially marked up regions of MarkDown.
-The markup for a block contains a decription of the _type_ of the block.
-comes with built-in block types,
+TextRunner runs _active documentation_, i.e. documentation that can be executed.
+Active documentation consists of of plain text that is not executable
+but contains a number of _active blocks_
+(regions of Markdown wrapped in an _activation tag_
+which are executable.
+The default activation tag is `<a class="tr_{{activity type}}">...</a>` tags).
+Activation tags specify the _activity type_ that should be executed inside the
+respective active block.
+TextRunner comes with built-in activity types,
 for example to create files or directories, verify file contents,
 or start external processes.
-You can also create your own _custom block types_
-by providing the corresponding action in the form of a
-JavaScript method that TextRunner calls when it wants to execute a block of this type.
+You can also create your own _custom activity types_
+by providing a file with the activity type name in the `text-run` directory
+of your code base, which exports a function that runs the activity.
+
+Inside TextRunner, an _activity_ means an instance of a activity type
+that executes a particular active block.
 
 
 ## Architecture
@@ -61,7 +66,7 @@ There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
-These CLI executables call the [cli.js](src/cli.js) CLI handler.
+These CLI executables call the [cli.js](src/cli/cli.js) CLI handler.
 They parse the command-line arguments and call TextRunner's JavaScript API
 in the form of the [TextRunner](src/text-runner.js) class.
 This API is also exported by the [TextRunner NPM module](https://www.npmjs.com/package/text-runner)
@@ -71,7 +76,7 @@ The TextRunner class is the central part of TextRunner.
 It instantiates and runs the other components of the framework.
 Next, TextRunner determines the various configuration settings
 coming from command-line arguments and/or configuration files
-via the [configuration](src/configuration.js) class.
+via the [configuration](src/configuration/configuration.js) class.
 This class is passed to the various subsystems of TextRunner
 in case they need to know configuration settings.
 Using this configuration class, TextRunner determines the command to run.
@@ -85,21 +90,21 @@ and creates a [MarkdownFileRunner](src/commands/run/markdown-file-runner.js) ins
 Running the files happens in two phases:
 
 1. In the `prepare` phase, each MarkdownFileRunner parses the Markdown content
-  using a [MarkdownParser](src/commands/run/markdown-parser.js) instance
+  using a [MarkdownParser](src/parsers/markdown/markdown-parser.js) instance
   which converts the complex and noisy Markdown AST
   (and in the future HTML AST)
-  into a simplified and flattened list of TextRunner-specific [AstNodes](src/typedefs/ast-node.js)
+  into a simplified and flattened list of TextRunner-specific [AstNodes](src/parsers/ast-node.js)
   that contain only relevant relevant information.
   An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
-  processes this TextRunner-AST into a list of [Actions](src/typedefs/activity.js).
+  processes this TextRunner-AST into a list of [Actions](src/commands/run/activity.js).
   An action is an instantiated block handler function,
   locked and loaded to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
-  in the [actions](src/actions) folder.
+  in the [actions](src/activity-types) folder.
   The code base using TextRunner can also add their own action types.
   While processing the AST,
-  MarkdownFileRunner also builds up a list of [LinkTargets](src/typedefs/link-target.js)
-  via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
+  MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)
+  via a [LinkTargetListBuilder](src/commands/run/link-target-list-builder.js) instance.
 
 2. In the `run` phase, the prepared actions are executed one by one.
   They now have full access to all link targets in all files.

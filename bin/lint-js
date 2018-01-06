@@ -7,19 +7,16 @@ set -e
 
 
 # run the 'standard-js' linter on the source code
-standard -v 'src/**/*.js'
-
-# run the 'standard-js' linter on the test code
-errors=$(standard -v 'test/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
-if [ $errors -gt 0 ]; then
-  echo Found standardJS errors in the test code:
-  standard -v 'test/**/*.js' | grep -v no-undef
+errors=$(standard -v 'src/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
+if [ "$errors" -gt 0 ]; then
+  echo Found standardJS errors in the source code:
+  standard -v 'src/**/*.js' | grep -v no-unused-expressions
   exit 1
 fi
 
 # run the 'standard-js' linter on the feature code
 errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
-if [ $errors -gt 0 ]; then
+if [ "$errors" -gt 0 ]; then
   echo Found standardJS errors in the feature code:
   standard -v 'features/**/*.js' | grep -v no-unused-expressions
   exit 1

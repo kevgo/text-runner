@@ -30,8 +30,8 @@ Feature: generating a configuration file
       # you can also provide a custom directory path here
       useTempDirectory: false
 
-      # action-specific configuration
-      actions:
+      # activity-type specific configuration
+      activityTypes:
         runConsoleCommand:
           globals: {}
       """

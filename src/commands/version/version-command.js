@@ -1,6 +1,6 @@
 // @flow
 
-import type {Command} from '../../typedefs/command.js'
+import type {Command} from '../command.js'
 
 // $FlowFixMe: flow doesn't like requiring such an untyped file
 const {version} = require('../../../package.json')

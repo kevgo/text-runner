@@ -15,7 +15,7 @@ module.exports = function (activity: Activity) {
 
   const expectedContent = activity.searcher.tagContent('fence')
 
-  activity.formatter.action(`verifying document content matches source code file ${cyan(fileName)}`)
+  activity.formatter.setTitle(`verifying document content matches source code file ${cyan(fileName)}`)
   const filePath = path.join(__dirname, '..', '..', baseDir, fileName)
   var actualContent
   try {

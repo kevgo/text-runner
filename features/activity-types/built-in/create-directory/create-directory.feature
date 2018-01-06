@@ -17,9 +17,9 @@ Feature: creating directories
       """
     When running text-run
     Then it signals:
-      | FILENAME | creator.md                        |
-      | LINE     | 1                                 |
-      | MESSAGE  | creating directory directory_name |
+      | FILENAME | creator.md                      |
+      | LINE     | 1                               |
+      | MESSAGE  | create directory directory_name |
     And the test workspace now contains a directory "directory_name"
 
 
@@ -31,11 +31,11 @@ Feature: creating directories
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                             |
-      | LINE          | 1                                      |
-      | MESSAGE       | creating directory                     |
+      | FILENAME      | creator.md                               |
+      | LINE          | 1                                        |
+      | MESSAGE       | create directory                         |
       | ERROR MESSAGE | no 'code' tag found in this active block |
-      | EXIT CODE     | 1                                      |
+      | EXIT CODE     | 1                                        |
 
 
   Scenario: empty name given
@@ -49,7 +49,7 @@ Feature: creating directories
     Then the test fails with:
       | FILENAME      | creator.md                 |
       | LINE          | 1                          |
-      | MESSAGE       | creating directory         |
+      | MESSAGE       | create directory           |
       | ERROR MESSAGE | empty directory name given |
       | EXIT CODE     | 1                          |
 
@@ -65,6 +65,6 @@ Feature: creating directories
     Then the test fails with:
       | FILENAME      | creator.md                                         |
       | LINE          | 1                                                  |
-      | MESSAGE       | creating directory                                 |
+      | MESSAGE       | create directory                                   |
       | ERROR MESSAGE | found more than one 'code' tag in the active block |
       | EXIT CODE     | 1                                                  |

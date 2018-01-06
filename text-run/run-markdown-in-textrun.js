@@ -4,7 +4,7 @@ const ObservableProcess = require('observable-process')
 const path = require('path')
 
 module.exports = async function ({configuration, formatter, searcher}) {
-  formatter.action('verify that markdown works in text-run')
+  formatter.setTitle('verify the inline markdown works in TextRunner')
   const markdown = searcher.tagContent('fence')
   fs.writeFileSync(path.join(configuration.testDir, '1.md'), markdown.replace(/​/g, ''))
 

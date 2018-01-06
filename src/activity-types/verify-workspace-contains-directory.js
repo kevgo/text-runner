@@ -10,7 +10,7 @@ const path = require('path')
 module.exports = function (activity: Activity) {
   const directory = activity.searcher.tagContent('code')
   const fullPath = path.join(activity.configuration.testDir, directory)
-  activity.formatter.action(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)
+  activity.formatter.setTitle(`verifying the ${bold(cyan(directory))} directory exists in the test workspace`)
   var stats
   try {
     stats = fs.lstatSync(fullPath)

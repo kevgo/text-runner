@@ -19,9 +19,9 @@ Feature: validating Javascript
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                  |
-      | LINE     | 1-5                   |
-      | MESSAGE  | validating JavaScript |
+      | FILENAME | 1.md                |
+      | LINE     | 1-5                 |
+      | MESSAGE  | validate javascript |
 
 
   Scenario: invalid Javascript

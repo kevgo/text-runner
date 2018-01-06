@@ -26,9 +26,9 @@ Feature: minimum NodeJS version
       """
     When running text-run
     Then it signals:
-      | FILENAME | README.md                |
-      | LINE     | 1                        |
-      | MESSAGE  | requires at least Node 4 |
+      | FILENAME | README.md                            |
+      | LINE     | 1                                    |
+      | MESSAGE  | supported NodeJS version should be 4 |
 
 
   Scenario: documented minimum Node version is too low
@@ -38,10 +38,10 @@ Feature: minimum NodeJS version
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | README.md                                                 |
-      | LINE          | 1                                                         |
-      | ERROR MESSAGE | documented minimum Node version is 3, should be 4         |
-      | EXIT CODE     | 1                                                         |
+      | FILENAME      | README.md                              |
+      | LINE          | 1                                      |
+      | ERROR MESSAGE | minimum Node version is 3, should be 4 |
+      | EXIT CODE     | 1                                      |
 
 
   Scenario: documented minimum Node version is too high
@@ -51,7 +51,7 @@ Feature: minimum NodeJS version
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | README.md                                                 |
-      | LINE          | 1                                                         |
-      | ERROR MESSAGE | documented minimum Node version is 5, should be 4         |
-      | EXIT CODE     | 1                                                         |
+      | FILENAME      | README.md                              |
+      | LINE          | 1                                      |
+      | ERROR MESSAGE | minimum Node version is 5, should be 4 |
+      | EXIT CODE     | 1                                      |

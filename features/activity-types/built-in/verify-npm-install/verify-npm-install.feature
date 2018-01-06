@@ -77,7 +77,7 @@ Feature: verifying NPM installation instructions
     Then the test fails with:
       | FILENAME      | 1.md                                                |
       | LINE          | 3                                                   |
-      | MESSAGE       | verifying NPM installation instructions             |
+      | MESSAGE       | verify npm install                                  |
       | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
       | EXIT CODE     | 1                                                   |
 

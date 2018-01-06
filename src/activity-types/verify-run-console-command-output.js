@@ -7,7 +7,7 @@ const jsdiffConsole = require('jsdiff-console')
 // Runs the given commands on the console.
 // Waits until the command is finished.
 module.exports = function (activity: Activity) {
-  activity.formatter.action('verifying the output of the last run console command')
+  activity.formatter.setTitle('verifying the output of the last run console command')
 
   const expectedLines = activity.searcher.tagContent('fence')
     .split('\n')

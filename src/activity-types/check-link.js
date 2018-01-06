@@ -16,7 +16,7 @@ module.exports = async function (activity: Activity) {
   if (target == null || target === '') {
     throw new Error('link without target')
   }
-  activity.formatter.action(`link to ${cyan(target)}`)
+  activity.formatter.setTitle(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(activity.filename, target, activity.linkTargets, activity.formatter)
   } else if (isLinkToAnchorInOtherFile(target)) {
@@ -35,7 +35,7 @@ async function checkExternalLink (target: string, formatter: Formatter, configur
   }
 
   try {
-    formatter.action(`link to external website ${cyan(target)}`)
+    formatter.setTitle(`link to external website ${cyan(target)}`)
     await request({url: target, timeout: 4000})
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
@@ -55,9 +55,9 @@ async function checkLinkToFilesystem (filename: string, target: string, formatte
   try {
     const stats = await fs.stat(target)
     if (stats.isDirectory()) {
-      formatter.action(`link to local directory ${cyan(target)}`)
+      formatter.setTitle(`link to local directory ${cyan(target)}`)
     } else {
-      formatter.action(`link to local file ${cyan(target)}`)
+      formatter.setTitle(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
     throw new Error(`link to non-existing local file ${red(target)}`)
@@ -70,9 +70,9 @@ async function checkLinkToAnchorInSameFile (filename: string, target: string, li
     throw new Error(`link to non-existing local anchor ${red(target)}`)
   }
   if (targetEntry.type === 'heading') {
-    formatter.action(`link to local heading ${cyan(targetEntry.text)}`)
+    formatter.setTitle(`link to local heading ${cyan(targetEntry.text)}`)
   } else {
-    formatter.action(`link to #${cyan(targetEntry.name)}`)
+    formatter.setTitle(`link to #${cyan(targetEntry.name)}`)
   }
 }
 
@@ -88,9 +88,9 @@ async function checkLinkToAnchorInOtherFile (filename: string, target: string, l
   }
 
   if (targetEntry.type === 'heading') {
-    formatter.action(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
+    formatter.setTitle(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
   } else {
-    formatter.action(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
+    formatter.setTitle(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }
 }
 

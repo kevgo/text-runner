@@ -69,14 +69,19 @@ class Formatter {
   }
 
   // Called when we start performing an activity that was defined in a block
-  action (activityText :string) {
+  setTitle (activityText :string) {
     this.activityText = activityText
-    if (!this.inAction) {
-      this.errorMessage = ''
-      this.warningMessage = ''
-      this.stepsCount += 1
-      this.inAction = true
+  }
+
+  startActivity (activityTypeName: string) {
+    if (this.inAction) {
+      throw new Error('already in a started block')
     }
+    this.setTitle(activityTypeName)
+    this.errorMessage = ''
+    this.warningMessage = ''
+    this.stepsCount += 1
+    this.inAction = true
   }
 
   // called when we start processing a markdown file

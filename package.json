@@ -29,6 +29,7 @@
     "request-promise-native": "1.0.5",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",
+    "to-space-case": "1.0.0",
     "xml2js": "0.4.19",
     "yamljs": "0.3.0"
   },

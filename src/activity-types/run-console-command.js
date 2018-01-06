@@ -22,8 +22,6 @@ type ProcessInput = {
 // Runs the given commands on the console.
 // Waits until the command is finished.
 module.exports = async function (activity: Activity) {
-  activity.formatter.action('running console command')
-
   const commandsToRun = activity.searcher.tagContent('fence')
     .split('\n')
     .map((command) => command.trim())
@@ -33,7 +31,7 @@ module.exports = async function (activity: Activity) {
     .join(' && ')
   if (commandsToRun === '') throw new Error('the block that defines console commands to run is empty')
 
-  activity.formatter.action(`running console command: ${cyan(commandsToRun)}`)
+  activity.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
   const input = await getInput(activity.searcher.tagContent('htmlblock', {default: ''}), activity.formatter)
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''

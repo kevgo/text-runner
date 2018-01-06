@@ -13,6 +13,8 @@ const path = require('path')
 const tmp = require('tmp')
 const debug = require('debug')('text-runner:run-command')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+const rimraf = require('rimraf')
+const util = require('util')
 
 class RunCommand implements Command {
   configuration: Configuration
@@ -57,7 +59,7 @@ class RunCommand implements Command {
     for (let filename of filenames) {
       debug(`  * ${filename}`)
     }
-    this._createWorkingDir()
+    await this._createWorkingDir()
     this._createRunners(filenames)
     await this._prepareRunners()
     await this._executeRunners()
@@ -77,7 +79,7 @@ class RunCommand implements Command {
   }
 
   // Creates the temp directory to run the tests in
-  _createWorkingDir () {
+  async _createWorkingDir () {
     const setting = this.configuration.get('useTempDirectory')
     if (typeof setting === 'string') {
       this.configuration.testDir = setting
@@ -88,12 +90,10 @@ class RunCommand implements Command {
     } else {
       throw new UnprintedUserError(`unknown 'useTempDirectory' setting: ${setting}`)
     }
-    try {
-      debug(`using test directory: ${this.configuration.testDir}`)
-      mkdirp.sync(this.configuration.testDir)
-    } catch (e) {
-      // TODO: ignore error here?
-    }
+    debug(`using test directory: ${this.configuration.testDir}`)
+    const rimrafp = util.promisify(rimraf)
+    await rimrafp(this.configuration.testDir, {maxBusyTries: 10})
+    mkdirp.sync(this.configuration.testDir)
   }
 
   _filesMatchingGlob (expression: string): string[] {

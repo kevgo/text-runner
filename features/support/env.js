@@ -1,7 +1,6 @@
 // @flow
 
 const {defineSupportCode} = require('cucumber')
-const delay = require('delay')
 const endChildProcesses = require('end-child-processes')
 const fs = require('fs-extra')
 const path = require('path')
@@ -23,7 +22,6 @@ defineSupportCode(function ({After, Before, setDefaultTimeout}) {
     if (scenario.result.status === 'failed') {
       console.log('\ntest artifacts are located in', this.rootDir)
     } else {
-      await delay(1)
       const rimrafp = util.promisify(rimraf)
       await rimrafp(this.rootDir, { maxBusyTries: 20 })
     }

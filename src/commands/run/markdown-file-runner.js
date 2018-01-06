@@ -60,29 +60,25 @@ class MarkdownFileRunner {
   // (after it has been prepared)
   async run (): Promise<number> {
     this.formatter.startFile(this.filePath)
-    for (let block of this.runData) {
-      await this._runBlock(block)
+    for (let activity of this.runData) {
+      await this._runActivity(activity)
     }
     return this.runData.length
   }
 
-  // TODO: rename "block" to "activity"
-  async _runBlock (block) {
-    // TODO: remove the if here, block.startLine is always there now
-    if (block.startLine != null && block.endLine != null) {
-      this.formatter.setLines(block.startLine, block.endLine)
-    }
-    this.formatter.startActivity(block.activityTypeName)
+  async _runActivity (activity) {
+    this.formatter.setLines(activity.startLine, activity.endLine != null ? activity.endLine : activity.startLine)
+    this.formatter.startActivity(activity.activityTypeName)
     try {
-      if (block.runner.length === 1) {
+      if (activity.runner.length === 1) {
         // synchronous activity or returns a promise
-        await Promise.resolve(block.runner(block))
+        await Promise.resolve(activity.runner(activity))
       } else {
         // asynchronous activity
-        const promisified = util.promisify(block.runner)
-        await promisified(block)
+        const promisified = util.promisify(activity.runner)
+        await promisified(activity)
       }
-      block.formatter.success()
+      activity.formatter.success()
     } catch (err) {
       if (isUserError(err)) {
         throw new UnprintedUserError(err)

@@ -111,6 +111,13 @@ const CliWorld = function () {
     }
   }
 
+  this.verifyPrintsNot = (text: string) => {
+    const output = this.process.fullOutput()
+    if (new RegExp(text).test(output)) {
+      throw new Error(`expected to not find regex '${text}' in '${output}'`)
+    }
+  }
+
   this.verifyRanConsoleCommand = (command: string) => {
     expect(this.process.fullOutput()).to.include(`running.md:1-5 -- running console command: ${command}`)
   }

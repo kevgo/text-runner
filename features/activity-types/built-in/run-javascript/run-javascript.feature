@@ -20,9 +20,9 @@ Feature: running inline blocks of Javascript
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                    |
-      | LINE     | 1-5                     |
-      | MESSAGE  | running JavaScript code |
+      | FILENAME | 1.md           |
+      | LINE     | 1-5            |
+      | MESSAGE  | run javascript |
     And it prints:
       """
       A foo walks into a bar
@@ -43,9 +43,9 @@ Feature: running inline blocks of Javascript
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                    |
-      | LINE     | 1-8                     |
-      | MESSAGE  | running JavaScript code |
+      | FILENAME | 1.md           |
+      | LINE     | 1-8            |
+      | MESSAGE  | run javascript |
     And it prints:
       """
       A foo walks into a bar
@@ -63,9 +63,9 @@ Feature: running inline blocks of Javascript
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                    |
-      | LINE     | 1-5                     |
-      | MESSAGE  | running JavaScript code |
+      | FILENAME | 1.md           |
+      | LINE     | 1-5            |
+      | MESSAGE  | run javascript |
 
 
   Scenario: persisting variables across blocks
@@ -85,13 +85,13 @@ Feature: running inline blocks of Javascript
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                    |
-      | LINE     | 1-5                     |
-      | MESSAGE  | running JavaScript code |
+      | FILENAME | 1.md           |
+      | LINE     | 1-5            |
+      | MESSAGE  | run javascript |
     And it signals:
-      | FILENAME | 1.md                    |
-      | LINE     | 7-11                    |
-      | MESSAGE  | running JavaScript code |
+      | FILENAME | 1.md           |
+      | LINE     | 7-11           |
+      | MESSAGE  | run javascript |
     Then it prints:
       """
       A foo walks into a bar
@@ -106,11 +106,11 @@ Feature: running inline blocks of Javascript
       """
     When trying to run text-run
     Then it signals:
-      | FILENAME      | 1.md                    |
-      | LINE          | 1                       |
-      | MESSAGE       | running JavaScript code |
-      | ERROR MESSAGE | no code to run found    |
-      | EXIT CODE     | 1                       |
+      | FILENAME      | 1.md                 |
+      | LINE          | 1                    |
+      | MESSAGE       | run javascript       |
+      | ERROR MESSAGE | no code to run found |
+      | EXIT CODE     | 1                    |
 
 
   Scenario: multiple code blocks
@@ -130,6 +130,6 @@ Feature: running inline blocks of Javascript
     Then it signals:
       | FILENAME      | 1.md                       |
       | LINE          | 1-9                        |
-      | MESSAGE       | running JavaScript code    |
+      | MESSAGE       | run javascript             |
       | ERROR MESSAGE | too many code blocks found |
       | EXIT CODE     | 1                          |

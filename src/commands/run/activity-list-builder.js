@@ -10,6 +10,7 @@ const ActivityTypeManager = require('./activity-type-manager.js')
 const Configuration = require('../../configuration/configuration.js')
 const Formatter = require('../../formatters/formatter.js')
 const Searcher = require('./searcher')
+const toSpaceCase = require('to-space-case')
 
 class ActivityListBuilder {
   // Returns a list of activities to do with the given AST
@@ -34,24 +35,24 @@ class ActivityListBuilder {
 
     // contains the most recent line in the file that we are aware of
     var startLine = 1
+    var blockType = ''
     var result: ActivityList = []
     var currentRunnerType: HandlerFunction = (value) => {}
     for (let node: AstNode of tree) {
-      // active block start tag
-      const blockType : ?string = this._isActiveBlockStartTag(node)
-      if (blockType != null) {
-        if (node.line != null) {
-          startLine = node.line
-        }
+      const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
+      if (isActiveBlockStartTag) {
         if (insideActiveBlock) {
+          // TODO: throw an error here
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
         }
-        currentRunnerType = this.activityTypesManager.handlerFunctionFor(blockType, this.filePath)
-        if (currentRunnerType) {
-          insideActiveBlock = true
-          nodesForCurrentRunner = []
+        insideActiveBlock = true
+        if (node.line != null) {
+          startLine = node.line
         }
+        blockType = this._getBlockType(node)
+        currentRunnerType = this.activityTypesManager.handlerFunctionFor(blockType, this.filePath)
+        nodesForCurrentRunner = []
         continue
       }
 
@@ -59,6 +60,7 @@ class ActivityListBuilder {
         if (insideActiveBlock) {
           result.push({
             filename: this.filePath,
+            activityTypeName: convertIntoActivityTypeName(blockType),
             startLine: startLine,
             endLine: node.line,
             runner: currentRunnerType,
@@ -83,6 +85,7 @@ class ActivityListBuilder {
         // push 'check image' activity
         result.push({
           filename: this.filePath,
+          activityTypeName: convertIntoActivityTypeName(blockType),
           startLine: startLine,
           endLine: node.line,
           nodes: [node],
@@ -99,6 +102,7 @@ class ActivityListBuilder {
         // push 'check link' activity for Markdown links
         result.push({
           filename: this.filePath,
+          activityTypeName: convertIntoActivityTypeName(blockType),
           startLine: startLine,
           endLine: node.line,
           nodes: [node],
@@ -116,6 +120,7 @@ class ActivityListBuilder {
         // push 'check link' activity for HTML links
         result.push({
           filename: this.filePath,
+          activityTypeName: convertIntoActivityTypeName(blockType),
           startLine: startLine,
           endLine: node.line,
           nodes: [{content: target}],
@@ -145,14 +150,20 @@ class ActivityListBuilder {
     return node.type === 'link_open'
   }
 
-  // Indicates whether the given node is a start tag of an active block
-  // by returning the type of the block, or falsy.
-  _isActiveBlockStartTag (node): ?string {
-    if (node.type !== 'htmltag') return null
+  // _determineIsActiveBlockStartTag returns whether the given AstNode is the start of an active block
+  _determineIsActiveBlockStartTag (node: AstNode): boolean {
+    if (node.type !== 'htmltag') return false
     const regex = new RegExp(`<a class="${this.configuration.get('classPrefix')}([^"]+)">`)
-    if (node.content == null) return null
+    if (!node.content) return false
+    return regex.test(node.content)
+  }
+
+  // _getBlockType returns the activity type started by the given AstNode that starts an active block
+  _getBlockType (node: AstNode): string {
+    const regex = new RegExp(`<a class="${this.configuration.get('classPrefix')}([^"]+)">`)
+    if (node.content == null) throw new Error("this shouldn't happen")
     const matches = node.content.match(regex)
-    if (!matches) return null
+    if (!matches) throw new Error("this shouldn't happen")
     return matches[1]
   }
 
@@ -160,6 +171,10 @@ class ActivityListBuilder {
   _isActiveBlockEndTag (node) {
     return node.type === 'htmltag' && node.content === '</a>'
   }
+}
+
+function convertIntoActivityTypeName (blockType): string {
+  return toSpaceCase(blockType || '')
 }
 
 module.exports = ActivityListBuilder

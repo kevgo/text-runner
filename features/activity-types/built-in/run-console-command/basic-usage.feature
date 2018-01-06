@@ -34,7 +34,7 @@ Feature: running console commands
     Then the test fails with:
       | FILENAME      | running.md                                |
       | LINE          | 1                                         |
-      | MESSAGE       | running console command                   |
+      | MESSAGE       | run console command                       |
       | ERROR MESSAGE | no 'fence' tag found in this active block |
       | EXIT CODE     | 1                                         |
 
@@ -51,6 +51,6 @@ Feature: running console commands
     Then the test fails with:
       | FILENAME      | running.md                                              |
       | LINE          | 1-4                                                     |
-      | MESSAGE       | running console command                                 |
+      | MESSAGE       | run console command                                     |
       | ERROR MESSAGE | the block that defines console commands to run is empty |
       | EXIT CODE     | 1                                                       |

@@ -53,16 +53,20 @@ class TestFormatter {
     this.warnings = []
   }
 
+  startActivity (activityTypeName: string) {
+    this.activities.push(stripAnsi(activityTypeName))
+    this.lines.push(this.startLine !== this.endLine ? `${this.startLine}-${this.endLine}` : this.startLine.toString())
+    if (this.verbose) console.log(activityTypeName)
+  }
+
   startFile (filePath: string) {
     if (!this.filePaths.includes(filePath)) {
       this.filePaths.push(filePath)
     }
   }
 
-  action (activity: string) {
-    this.activities.push(stripAnsi(activity))
-    this.lines.push(this.startLine !== this.endLine ? `${this.startLine}-${this.endLine}` : this.startLine.toString())
-    if (this.verbose) console.log(activity)
+  setTitle (activity: string) {
+    this.activities[this.activities.length - 1] = stripAnsi(activity)
   }
 
   success (activity: string) {

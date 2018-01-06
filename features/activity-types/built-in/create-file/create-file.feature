@@ -18,9 +18,9 @@ Feature: creating files with content
       """
     When running text-run
     Then it signals:
-      | FILENAME | creator.md            |
-      | LINE     | 1                     |
-      | MESSAGE  | creating file one.txt |
+      | FILENAME | creator.md          |
+      | LINE     | 1                   |
+      | MESSAGE  | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
       """
       Hello world!
@@ -40,9 +40,9 @@ Feature: creating files with content
       """
     When running text-run
     Then it signals:
-      | FILENAME | creator.md            |
-      | LINE     | 1-7                   |
-      | MESSAGE  | creating file one.txt |
+      | FILENAME | creator.md          |
+      | LINE     | 1-7                 |
+      | MESSAGE  | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
       """
       Hello world!
@@ -60,11 +60,11 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                                     |
-      | LINE          | 1-5                                                            |
-      | MESSAGE       | creating file                                                  |
+      | FILENAME      | creator.md                                                         |
+      | LINE          | 1-5                                                                |
+      | MESSAGE       | create file                                                        |
       | ERROR MESSAGE | no 'emphasizedtext' or 'strongtext' tag found in this active block |
-      | EXIT CODE     | 1                                                              |
+      | EXIT CODE     | 1                                                                  |
 
 
   Scenario: no content block given
@@ -76,11 +76,11 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                      |
-      | LINE          | 1                                               |
-      | MESSAGE       | creating file                                   |
+      | FILENAME      | creator.md                                          |
+      | LINE          | 1                                                   |
+      | MESSAGE       | create file                                         |
       | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
-      | EXIT CODE     | 1                                               |
+      | EXIT CODE     | 1                                                   |
 
 
   Scenario: two file paths given
@@ -99,7 +99,7 @@ Feature: creating files with content
     Then the test fails with:
       | FILENAME      | creator.md                                                                   |
       | LINE          | 1-8                                                                          |
-      | MESSAGE       | creating file                                                                |
+      | MESSAGE       | create file                                                                  |
       | ERROR MESSAGE | found more than one 'emphasizedtext' or 'strongtext' tag in the active block |
       | EXIT CODE     | 1                                                                            |
 
@@ -124,6 +124,6 @@ Feature: creating files with content
     Then the test fails with:
       | FILENAME      | creator.md                                                    |
       | LINE          | 1-12                                                          |
-      | MESSAGE       | creating file                                                 |
+      | MESSAGE       | create file                                                   |
       | ERROR MESSAGE | found more than one 'fence' or 'code' tag in the active block |
       | EXIT CODE     | 1                                                             |

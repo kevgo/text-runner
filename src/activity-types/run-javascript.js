@@ -7,8 +7,6 @@ type DoneFunction = (err?: ?ErrnoError) => void
 
 // Runs the JavaScript code given in the code block
 module.exports = function (activity: Activity, done: DoneFunction) {
-  activity.formatter.action('running JavaScript code')
-
   var code = activity.searcher.tagContent('fence')
   if (code == null) {
     done(new Error('no JavaScript code found in the fenced block'))

@@ -45,10 +45,10 @@ class MarkdownFileRunner {
     // Need to start the file here
     // so that the formatter has the filename
     // in case there are errors preparing.
+    this.formatter.startFile(this.filePath)
     var markdownText = await fs.readFile(this.filePath, {encoding: 'utf8'})
     markdownText = markdownText.trim()
     if (markdownText.length === 0) {
-      this.formatter.startFile(this.filePath)
       throw new UnprintedUserError(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
     }
     const astNodeList = this.parser.parse(markdownText)

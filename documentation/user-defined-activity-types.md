@@ -55,7 +55,7 @@ The handler function for our action is given an object containing various inform
 TextRunner supports all forms of synchronous and asynchronous operations:
 * just do something synchronous ([example](../examples/custom-action-sync)) -
   don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
-  all TextRunner steps are run strictly sequentially anyways
+  all TextRunner blocks are tested strictly sequentially anyways
 * return a Promise  <!-- TODO: example -->
 * implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)

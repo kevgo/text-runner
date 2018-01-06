@@ -16,7 +16,7 @@ class Formatter {
   endLine: number
   errorMessage: string
   filePath: string       // the path of the documentation file that is currently processed
-  filesCount: number
+  filePaths: string[]        // the files encountered so far
   inAction: boolean      // whether this formatter is currently processing an action
   startLine: number      // the line within the documentation file at which the currently processed block starts
   stderr: WriteStream
@@ -32,7 +32,7 @@ class Formatter {
     //       binds them to the class scope for some reason
     this.activityText = ''
     this.errorMessage = ''
-    this.filesCount = 0
+    this.filePaths = []
     this.inAction = false
     this.stepsCount = 0
     this.warningsCount = 0
@@ -82,7 +82,9 @@ class Formatter {
   // called when we start processing a markdown file
   startFile (filePath :string) {
     this.filePath = filePath
-    this.filesCount += 1
+    if (!this.filePaths.includes(filePath)) {
+      this.filePaths.push(filePath)
+    }
   }
 
   // called when the last started activity finished successful
@@ -98,7 +100,7 @@ class Formatter {
       this.warning('no activities found')
       return
     }
-    var text = green(`\nSuccess! ${this.stepsCount} steps in ${this.filesCount} files`)
+    var text = green(`\nSuccess! ${this.stepsCount} blocks in ${this.filePaths.length} files`)
     if (this.warningsCount > 0) {
       text += green(', ')
       text += magenta(`${this.warningsCount} warnings`)

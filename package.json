@@ -48,7 +48,7 @@
     "eslint-plugin-flowtype": "2.40.1",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-standard": "3.0.1",
-    "flow-bin": "0.62.0",
+    "flow-bin": "0.63.0",
     "flow-typed": "2.2.3",
     "greenkeeper-lockfile": "1.12.0",
     "mocha": "4.1.0",

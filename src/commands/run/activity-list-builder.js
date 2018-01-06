@@ -60,7 +60,7 @@ class ActivityListBuilder {
         if (insideActiveBlock) {
           result.push({
             filename: this.filePath,
-            activityTypeName: convertIntoActivityTypeName(blockType),
+            activityTypeName: this._convertIntoActivityTypeName(blockType),
             startLine: startLine,
             endLine: node.line,
             runner: currentRunnerType,
@@ -85,7 +85,7 @@ class ActivityListBuilder {
         // push 'check image' activity
         result.push({
           filename: this.filePath,
-          activityTypeName: convertIntoActivityTypeName(blockType),
+          activityTypeName: this._convertIntoActivityTypeName(blockType),
           startLine: startLine,
           endLine: node.line,
           nodes: [node],
@@ -102,7 +102,7 @@ class ActivityListBuilder {
         // push 'check link' activity for Markdown links
         result.push({
           filename: this.filePath,
-          activityTypeName: convertIntoActivityTypeName(blockType),
+          activityTypeName: this._convertIntoActivityTypeName(blockType),
           startLine: startLine,
           endLine: node.line,
           nodes: [node],
@@ -120,7 +120,7 @@ class ActivityListBuilder {
         // push 'check link' activity for HTML links
         result.push({
           filename: this.filePath,
-          activityTypeName: convertIntoActivityTypeName(blockType),
+          activityTypeName: this._convertIntoActivityTypeName(blockType),
           startLine: startLine,
           endLine: node.line,
           nodes: [{content: target}],
@@ -143,6 +143,10 @@ class ActivityListBuilder {
     if (node.type === 'htmltag' && matches) {
       return matches[1]
     }
+  }
+
+  _convertIntoActivityTypeName (blockType): string {
+    return toSpaceCase(blockType || '')
   }
 
   // Returns whether the given node is a normal hyperlink
@@ -171,10 +175,6 @@ class ActivityListBuilder {
   _isActiveBlockEndTag (node) {
     return node.type === 'htmltag' && node.content === '</a>'
   }
-}
-
-function convertIntoActivityTypeName (blockType): string {
-  return toSpaceCase(blockType || '')
 }
 
 module.exports = ActivityListBuilder

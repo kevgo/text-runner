@@ -31,14 +31,18 @@ class ActivityListBuilder {
   build (tree: AstNodeList): ActivityList {
     var insideActiveBlock = false                    // whether we are currently processing nodes of an active block
     var nodesForCurrentRunner: AstNodeList = []
-    var startLine = 0
+
+    // contains the most recent line in the file that we are aware of
+    var startLine = 1
     var result: ActivityList = []
     var currentRunnerType: HandlerFunction = (value) => {}
     for (let node: AstNode of tree) {
       // active block start tag
       const blockType : ?string = this._isActiveBlockStartTag(node)
       if (blockType != null) {
-        startLine = node.line
+        if (node.line != null) {
+          startLine = node.line
+        }
         if (insideActiveBlock) {
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
@@ -79,7 +83,7 @@ class ActivityListBuilder {
         // push 'check image' activity
         result.push({
           filename: this.filePath,
-          startLine: node.line,
+          startLine: startLine,
           endLine: node.line,
           nodes: [node],
           runner: this.activityTypesManager.handlerFunctionFor('checkImage', this.filePath),
@@ -95,7 +99,7 @@ class ActivityListBuilder {
         // push 'check link' activity for Markdown links
         result.push({
           filename: this.filePath,
-          startLine: node.line,
+          startLine: startLine,
           endLine: node.line,
           nodes: [node],
           runner: this.activityTypesManager.handlerFunctionFor('checkLink', this.filePath),
@@ -112,7 +116,7 @@ class ActivityListBuilder {
         // push 'check link' activity for HTML links
         result.push({
           filename: this.filePath,
-          startLine: node.line,
+          startLine: startLine,
           endLine: node.line,
           nodes: [{content: target}],
           runner: this.activityTypesManager.handlerFunctionFor('checkLink', this.filePath),

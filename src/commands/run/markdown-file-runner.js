@@ -8,7 +8,6 @@ import type {LinkTargetList} from './link-target-list.js'
 const ActivityTypeManager = require('./activity-type-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
 const {cyan} = require('chalk')
-const delay = require('delay')
 const fs = require('fs-extra')
 const LinkTargetListBuilder = require('./link-target-list-builder.js')
 const MarkdownParser = require('../../parsers/markdown/markdown-parser')
@@ -68,7 +67,6 @@ class MarkdownFileRunner {
 
   async _runBlock (block) {
     // waiting 1 ms here to give Node a chance to run queued up logic from previous steps
-    await delay(1)
     block.formatter.startFile(block.filename)
     if (block.startLine != null && block.endLine != null) {
       block.formatter.setLines(block.startLine, block.endLine)

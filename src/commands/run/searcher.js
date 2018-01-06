@@ -3,7 +3,6 @@
 import type {AstNode} from '../../parsers/ast-node.js'
 import type {AstNodeList} from '../../parsers/ast-node-list.js'
 
-const quoteString = require('../../helpers/quote-string.js')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 type NodeQuery = string | string[]
@@ -83,6 +82,10 @@ class Searcher {
                  .join(' or ')
     }
   }
+}
+
+function quoteString (text: string): string {
+  return `'${text}'`
 }
 
 module.exports = Searcher

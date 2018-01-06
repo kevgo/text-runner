@@ -1,4 +1,4 @@
-const parseCliArgs = require('../../dist/helpers/parse-cli-args')
+const parseCliArgs = require('../../dist/cli/parse-cli-args')
 
 describe('parse-cli-args', function () {
   context('with unix <node> call', function () {

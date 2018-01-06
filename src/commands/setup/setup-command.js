@@ -4,15 +4,15 @@ import type {Command} from '../command.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 
-const ActionManager = require('../../actions/action-manager.js')
+const ActivityTypeManager = require('../run/activity-type-manager.js')
 const {cyan} = require('chalk')
 
 class SetupCommand implements Command {
   configuration: Configuration
   formatter: Formatter
-  actions: ActionManager
+  actions: ActivityTypeManager
 
-  constructor (value: {configuration: Configuration, formatter: Formatter, actions: ActionManager}) {
+  constructor (value: {configuration: Configuration, formatter: Formatter, actions: ActivityTypeManager}) {
     this.configuration = value.configuration
     this.formatter = value.formatter
     this.actions = value.actions

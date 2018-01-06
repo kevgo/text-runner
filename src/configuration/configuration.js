@@ -13,7 +13,7 @@ const defaultValues = {
   format: 'detailed',
   useTempDirectory: false,
   classPrefix: 'tr_',
-  actions: {
+  activityTypes: {
     runConsoleCommand: {
       globals: {}
     }
@@ -67,8 +67,8 @@ classPrefix: 'tr_'
 # you can also provide a custom directory path here
 useTempDirectory: false
 
-# action-specific configuration
-actions:
+# activity-type specific configuration
+activityTypes:
   runConsoleCommand:
     globals: {}`)
   }

@@ -31,8 +31,8 @@ classPrefix: 'tr_'
 # you can also provide a custom directory path here
 useTempDirectory: false
 
-# action-specific configuration
-actions:
+# activity-type specific configuration
+activityTypes:
   runConsoleCommand:
     globals: {}
 ````
@@ -42,7 +42,7 @@ actions:
 <hr>
 
 Read more about:
-- the [built-in actions](built-in-actions.md)
-- writing your own [user-defined actions](user-defined-actions.md)
+- the [built-in activity types](built-in-activity-types.md)
+- writing your own [user-defined activity types](user-defined-activity-types.md)
 - [installing](installation.md) TextRunner
 

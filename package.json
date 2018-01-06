@@ -44,7 +44,7 @@
     "cucumber": "3.2.1",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
-    "eslint-plugin-flowtype": "2.40.1",
+    "eslint-plugin-flowtype": "2.41.0",
     "eslint-plugin-import": "2.8.0",
     "eslint-plugin-standard": "3.0.1",
     "flow-bin": "0.62.0",

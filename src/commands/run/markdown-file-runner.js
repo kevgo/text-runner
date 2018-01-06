@@ -68,10 +68,7 @@ class MarkdownFileRunner {
 
   // TODO: rename "block" to "activity"
   async _runBlock (block) {
-    // TODO: remove the if here, block.startLine is always there now
-    if (block.startLine != null && block.endLine != null) {
-      this.formatter.setLines(block.startLine, block.endLine)
-    }
+    this.formatter.setLines(block.startLine, block.endLine != null ? block.endLine : block.startLine)
     this.formatter.startActivity(block.activityTypeName)
     try {
       if (block.runner.length === 1) {

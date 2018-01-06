@@ -1,12 +1,12 @@
 // @flow
 
-import type {Action} from '../../actions/action.js'
+import type {HandlerFunction} from './handler-function.js'
 import type {ActivityList} from '../../commands/run/activity-list.js'
 import type {AstNode} from '../../parsers/ast-node.js'
 import type {AstNodeList} from '../../parsers/ast-node-list.js'
 import type {LinkTargetList} from '../../commands/run/link-target-list.js'
 
-const ActionManager = require('../../actions/action-manager.js')
+const ActivityTypeManager = require('./activity-type-manager.js')
 const Configuration = require('../../configuration/configuration.js')
 const Formatter = require('../../formatters/formatter.js')
 const Searcher = require('./searcher')
@@ -14,14 +14,14 @@ const Searcher = require('./searcher')
 class ActivityListBuilder {
   // Returns a list of activities to do with the given AST
 
-  actions: ActionManager
+  activityTypesManager: ActivityTypeManager
   configuration: Configuration
   filePath: string
   formatter: Formatter
   linkTargets: LinkTargetList
 
-  constructor (value: {actions: ActionManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
-    this.actions = value.actions
+  constructor (value: {activityTypesManager: ActivityTypeManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
+    this.activityTypesManager = value.activityTypesManager
     this.configuration = value.configuration
     this.filePath = value.filePath
     this.formatter = value.formatter
@@ -33,7 +33,7 @@ class ActivityListBuilder {
     var nodesForCurrentRunner: AstNodeList = []
     var startLine = 0
     var result: ActivityList = []
-    var currentRunnerType: Action = (value) => {}
+    var currentRunnerType: HandlerFunction = (value) => {}
     for (let node: AstNode of tree) {
       // active block start tag
       const blockType : ?string = this._isActiveBlockStartTag(node)
@@ -43,7 +43,7 @@ class ActivityListBuilder {
           this.formatter.error('Found a nested <a class="tr_*"> block')
           return []
         }
-        currentRunnerType = this.actions.actionFor(blockType, this.filePath)
+        currentRunnerType = this.activityTypesManager.handlerFunctionFor(blockType, this.filePath)
         if (currentRunnerType) {
           insideActiveBlock = true
           nodesForCurrentRunner = []
@@ -82,7 +82,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [node],
-          runner: this.actions.actionFor('checkImage', this.filePath),
+          runner: this.activityTypesManager.handlerFunctionFor('checkImage', this.filePath),
           linkTargets: this.linkTargets,
           formatter: this.formatter,
           configuration: this.configuration,
@@ -98,7 +98,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [node],
-          runner: this.actions.actionFor('checkLink', this.filePath),
+          runner: this.activityTypesManager.handlerFunctionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
           linkTargets: this.linkTargets,
@@ -115,7 +115,7 @@ class ActivityListBuilder {
           startLine: node.line,
           endLine: node.line,
           nodes: [{content: target}],
-          runner: this.actions.actionFor('checkLink', this.filePath),
+          runner: this.activityTypesManager.handlerFunctionFor('checkLink', this.filePath),
           formatter: this.formatter,
           configuration: this.configuration,
           linkTargets: this.linkTargets,

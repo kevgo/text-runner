@@ -19,7 +19,7 @@ test_script:
   - bin\tests.cmd
   - bin\cuke-api.cmd
   - bin\cuke-cli.cmd
-  - bin\text-run.cmd
+  - bin\text-run.cmd --fast
 
 
 # Don't double-build PRs

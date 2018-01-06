@@ -5,12 +5,12 @@ import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from './link-target-list.js'
 
-const ActionManager = require('../../actions/action-manager.js')
+const ActivityTypeManager = require('./activity-type-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
 const {cyan} = require('chalk')
 const delay = require('delay')
 const fs = require('fs-extra')
-const LinkTargetBuilder = require('./link-target-builder')
+const LinkTargetListBuilder = require('./link-target-list-builder.js')
 const MarkdownParser = require('../../parsers/markdown/markdown-parser')
 const path = require('path')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
@@ -20,25 +20,25 @@ const util = require('util')
 class MarkdownFileRunner {
   filePath: string
   formatter: Formatter
-  actions: ActionManager
+  activityTypesManager: ActivityTypeManager
   configuration: Configuration
   parser: MarkdownParser
   activityListBuilder: ActivityListBuilder
-  linkTargetBuilder: LinkTargetBuilder
+  linkTargetBuilder: LinkTargetListBuilder
   runData: ActivityList
 
-  constructor (value: {filePath: string, formatter: Formatter, actions: ActionManager, configuration: Configuration, linkTargets: LinkTargetList}) {
+  constructor (value: {filePath: string, formatter: Formatter, activityTypesManager: ActivityTypeManager, configuration: Configuration, linkTargets: LinkTargetList}) {
     this.filePath = value.filePath
     this.formatter = value.formatter
     this.configuration = value.configuration
     this.parser = new MarkdownParser()
     this.activityListBuilder = new ActivityListBuilder({
-      actions: value.actions,
+      activityTypesManager: value.activityTypesManager,
       filePath: this.filePath,
       formatter: this.formatter,
       configuration: this.configuration,
       linkTargets: value.linkTargets})
-    this.linkTargetBuilder = new LinkTargetBuilder({linkTargets: value.linkTargets})
+    this.linkTargetBuilder = new LinkTargetListBuilder({linkTargets: value.linkTargets})
   }
 
   // Prepares this runner
@@ -75,10 +75,10 @@ class MarkdownFileRunner {
     }
     try {
       if (block.runner.length === 1) {
-        // synchronous action method or returns a promise
+        // synchronous activity or returns a promise
         await Promise.resolve(block.runner(block))
       } else {
-        // asynchronous action method
+        // asynchronous activity
         const promisified = util.promisify(block.runner)
         await promisified(block)
       }

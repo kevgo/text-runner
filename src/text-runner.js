@@ -3,16 +3,15 @@
 import type Formatter from './formatters/formatter.js'
 import type {CliArgTypes} from './cli/cli-arg-types.js'
 
-const ActionManager = require('./actions/action-manager')
+const ActivityTypeManager = require('./commands/run/activity-type-manager.js')
 const {red} = require('chalk')
 const commandPath = require('./commands/command-path')
 const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
 const hasCommand = require('./commands/has-command')
-const hasDirectory = require('./helpers/has-directory')
 const isGlob = require('is-glob')
-const isMarkdownFile = require('./helpers/is-markdown-file')
+const path = require('path')
 const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
@@ -27,14 +26,14 @@ class TextRunner {
   constructorArgs: CliArgTypes
   configuration: Configuration
   formatter: Formatter
-  actions: ActionManager
+  activityTypesManager: ActivityTypeManager
 
   constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()
     this.formatter = formatterManager.getFormatter(this.configuration.get('format'))
-    this.actions = new ActionManager(this.formatter, this.configuration)
+    this.activityTypesManager = new ActivityTypeManager(this.formatter, this.configuration)
   }
 
   // Tests the documentation according to the given command and arguments
@@ -65,7 +64,7 @@ class TextRunner {
 
   _command (command) {
     const CommandClass = require(commandPath(command))
-    const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, actions: this.actions})
+    const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, activityTypesManager: this.activityTypesManager})
     return commandInstance
   }
 
@@ -75,5 +74,22 @@ class TextRunner {
 
   async _unknownCommand (command) {
     throw new UnprintedUserError(`unknown command: ${red(command)}`)
+  }
+}
+
+function hasDirectory (dirname :string) :boolean {
+  try {
+    return fs.statSync(dirname).isDirectory()
+  } catch (e) {
+    return false
+  }
+}
+
+function isMarkdownFile (filename :string) :boolean {
+  try {
+    const filepath = path.join(process.cwd(), filename)
+    return filename.endsWith('.md') && fs.statSync(filepath).isFile()
+  } catch (e) {
+    return false
   }
 }

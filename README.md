@@ -48,6 +48,6 @@ as well as simple plain text in any human language.
 - [how it works](documentation/how-it-works.md)
 - [installation](documentation/installation.md)
 - [configuration](documentation/configuration.md)
-- [built-in actions](documentation/built-in-actions.md)
-- [user-defined actions](documentation/user-defined-actions.md)
+- [built-in activity types](documentation/built-in-activity-types.md)
+- [user-defined activity types](documentation/user-defined-activity-types.md)
 - [related tools](documentation/related-tools.md)

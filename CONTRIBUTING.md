@@ -39,18 +39,23 @@ Use the `bin/lint-js` script instead.
 
 ## Terminology
 
-TextRunner is a framework that allows to execute _actions_ defined by _blocks_
-in Markdown documents.
-Each MarkDown file consists of plain text (that is not executable),
-and a number of _blocks_ (which are executable).
-Blocks are specially marked up regions of MarkDown.
-The markup for a block contains a decription of the _type_ of the block.
-comes with built-in block types,
+TextRunner runs _active documentation_, i.e. documentation that can be executed.
+Active documentation consists of of plain text that is not executable
+but contains a number of _active blocks_
+(regions of Markdown wrapped in an _activation tag_
+which are executable.
+The default activation tag is `<a class="tr_{{activity type}}">...</a>` tags).
+Activation tags specify the _activity type_ that should be executed inside the
+respective active block.
+TextRunner comes with built-in activity types,
 for example to create files or directories, verify file contents,
 or start external processes.
-You can also create your own _custom block types_
-by providing the corresponding action in the form of a
-JavaScript method that TextRunner calls when it wants to execute a block of this type.
+You can also create your own _custom activity types_
+by providing a file with the activity type name in the `text-run` directory
+of your code base, which exports a function that runs the activity.
+
+Inside TextRunner, an _activity_ means an instance of a activity type
+that executes a particular active block.
 
 
 ## Architecture
@@ -95,11 +100,11 @@ Running the files happens in two phases:
   An action is an instantiated block handler function,
   locked and loaded to process the information in one particular block of a document.
   TextRunner comes with built-in actions for common operations
-  in the [actions](src/actions) folder.
+  in the [actions](src/activity-types) folder.
   The code base using TextRunner can also add their own action types.
   While processing the AST,
   MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)
-  via a [LinkTargetBuilder](src/commands/run/link-target-builder.js) instance.
+  via a [LinkTargetListBuilder](src/commands/run/link-target-list-builder.js) instance.
 
 2. In the `run` phase, the prepared actions are executed one by one.
   They now have full access to all link targets in all files.

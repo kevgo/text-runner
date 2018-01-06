@@ -59,18 +59,20 @@ class MarkdownFileRunner {
   // Runs this runner
   // (after it has been prepared)
   async run (): Promise<number> {
+    this.formatter.startFile(this.filePath)
     for (let block of this.runData) {
       await this._runBlock(block)
     }
     return this.runData.length
   }
 
+  // TODO: rename "block" to "activity"
   async _runBlock (block) {
-    // waiting 1 ms here to give Node a chance to run queued up logic from previous steps
-    block.formatter.startFile(block.filename)
+    // TODO: remove the if here, block.startLine is always there now
     if (block.startLine != null && block.endLine != null) {
-      block.formatter.setLines(block.startLine, block.endLine)
+      this.formatter.setLines(block.startLine, block.endLine)
     }
+    this.formatter.startActivity(block.activityTypeName)
     try {
       if (block.runner.length === 1) {
         // synchronous activity or returns a promise

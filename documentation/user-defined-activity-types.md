@@ -28,7 +28,6 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.action('greeting the world')   // start the "greeting the world" activity type
   formatter.output('Hello world!')        // print something on the console
 };
 ```
@@ -87,16 +86,21 @@ Each node is an object that has these attributes:
 ## Formatter
 
 One of the utilities availabe to actions is the formatter instance.
-It allows to signal test progress to TextRunner and print test output to the console.
+It allows to signal test progress to TextRunner and print test output to the console
+and provides the following methods:
 
-Call `formatter.action(<activity name>)` before you run an activity.
-This tells TextRunner that whatever happens next (output, success, failure) is part of that activity.
+* __output(text):__
+  allows to print output of the currently running action to the console -
+  depending on the type of formatter, this output is printed or not
+* __stdout__ and __stderr:__
+  streams that you can pipe output of commands you run into
+* __console:__
+  a console object that you should use instead of the built-in console
+  to generate output that fits into the formatter output
+* __warn:__ to signal a warning to the user (but keep the test passing)
+* __skip:__ to skip the current test
+* __setTitle:__ overrides how the current activity is called in the test output
 
-`formatter.output(text)` allows to print output of the currently running action
-on the console. Depending on the type of formatter, this output is printed or not.
-
-When the test succeeds, call `formatter.success()`.
-If it fails, call `formatter.error()` with the error message.
 
 TextRunner supports a variety of formatters:
 
@@ -142,19 +146,14 @@ child_process = require('child_process')
 
 module.exports = function({formatter, searcher, nodes}) {
 
-  // step 1: provide a first rough description of what this action does,
-  // so that TextRunner can print a somewhat helpful error message
-  // if loading more specific data below fails somehow
-  formatter.action('running console command')
-
-  // step 2: determine which command to run using the searcher utility
+  // step 1: determine which command to run using the searcher utility
   // (you could also iterate the "nodes" array directly here)
   const commandToRun = searcher.tagContent('fence')
 
-  // step 3: provide TextRunner a more specific description of this action
-  formatter.action('running console command: ' + commandToRun)
+  // step 2: provide TextRunner a more specific description of this action
+  formatter.setTitle('running console command: ' + commandToRun)
 
-  // step 4: perform the action
+  // step 3: perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
 }
 ```

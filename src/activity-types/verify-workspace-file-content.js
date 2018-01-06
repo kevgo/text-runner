@@ -10,7 +10,7 @@ const path = require('path')
 module.exports = function (activity: Activity) {
   const filePath = activity.searcher.tagContent(['strongtext', 'emphasizedtext'])
   const expectedContent = activity.searcher.tagContent(['fence', 'code'])
-  activity.formatter.action(`verifying file ${cyan(filePath)}`)
+  activity.formatter.setTitle(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(activity.configuration.testDir, filePath)
   var actualContent
   try {

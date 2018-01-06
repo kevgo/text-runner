@@ -88,12 +88,8 @@ class RunCommand implements Command {
     } else {
       throw new UnprintedUserError(`unknown 'useTempDirectory' setting: ${setting}`)
     }
-    try {
-      debug(`using test directory: ${this.configuration.testDir}`)
-      mkdirp.sync(this.configuration.testDir)
-    } catch (e) {
-      // TODO: ignore error here?
-    }
+    debug(`using test directory: ${this.configuration.testDir}`)
+    mkdirp.sync(this.configuration.testDir)
   }
 
   _filesMatchingGlob (expression: string): string[] {

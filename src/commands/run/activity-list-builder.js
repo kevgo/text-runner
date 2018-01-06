@@ -41,11 +41,7 @@ class ActivityListBuilder {
     for (let node: AstNode of tree) {
       const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
       if (isActiveBlockStartTag) {
-        if (insideActiveBlock) {
-          // TODO: throw an error here
-          this.formatter.error('Found a nested <a class="tr_*"> block')
-          return []
-        }
+        if (insideActiveBlock) throw new Error('Found a nested <a class="tr_*"> block')
         insideActiveBlock = true
         if (node.line != null) {
           startLine = node.line

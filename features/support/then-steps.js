@@ -21,6 +21,10 @@ defineSupportCode(function ({Then, When}) {
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
   })
 
+  Then(/^it doesn't print:$/, function (expectedText) {
+    this.verifyPrintsNot(expectedText)
+  })
+
   Then(/^it prints:$/, function (expectedText) {
     this.verifyPrints(expectedText)
   })

@@ -1,3 +1,4 @@
+@clionly
 Feature: configuring the class prefix
 
   As a documentation writer
@@ -8,20 +9,34 @@ Feature: configuring the class prefix
 
 
   Background:
-    Given my source code contains the file "1.md" with content:
+    Given my source code contains the file "tr.md" with content:
       """
-      <a class="tr_verifyWorkspaceContainsDirectory">
-        `.`
+      <a class="tr_runJavascript">
+        ```
+        console.log('running block with default class prefix')
+        ```
+      </a>
+      """
+    And my source code contains the file "custom-prefix.md" with content:
+      """
+      <a class="custom_runJavascript">
+        ```
+        console.log('running block with custom class prefix')
+        ```
       </a>
       """
 
 
-  Scenario: no configuration option
+  Scenario: default behavior
     When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                                   |
-      | LINE     | 1                                                      |
-      | MESSAGE  | verifying the . directory exists in the test workspace |
+    Then it prints:
+      """
+      running block with default class prefix
+      """
+    And it doesn't print:
+      """
+      running block with custom class prefix
+      """
 
 
   Scenario: configuration option given
@@ -29,11 +44,12 @@ Feature: configuring the class prefix
       """
       classPrefix: 'custom_'
       """
-    And my source code contains the file "custom-prefix.md" with content:
-      """
-      <a class="custom_verifyWorkspaceContainsDirectory">
-        `.`
-      </a>
-      """
     When running text-run
-    Then it runs only the tests in "custom-prefix.md"
+    Then it prints:
+      """
+      running block with custom class prefix
+      """
+    And it doesn't print:
+      """
+      running block with default class prefix
+      """

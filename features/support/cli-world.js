@@ -111,6 +111,13 @@ const CliWorld = function () {
     }
   }
 
+  this.verifyPrintsNot = (text: string) => {
+    const output = this.process.fullOutput()
+    if (new RegExp(text).test(output)) {
+      throw new Error(`expected to not find regex '${text}' in '${output}'`)
+    }
+  }
+
   this.verifyRanConsoleCommand = (command: string) => {
     expect(this.process.fullOutput()).to.include(`running.md:1-5 -- running console command: ${command}`)
   }
@@ -137,7 +144,7 @@ const CliWorld = function () {
   }
 
   this.verifyTestsRun = (count) => {
-    expect(this.process.fullOutput()).to.include(` ${count} steps`)
+    expect(this.process.fullOutput()).to.include(` ${count} blocks`)
   }
 
   this.verifyUnknownCommand = (command) => {

@@ -48,7 +48,7 @@ class DetailedFormatter extends Formatter {
     }
     if (this.activityText) text += this.activityText
     if (this.warningMessage) text += this.warningMessage
-    if (this.errorMessage) text += `\n${this.errorMessage}`
+    if (this.errorMessage) text += this.errorMessage
     console.log(this._applyColorFunctions(text, ...colorFunctions))
   }
 

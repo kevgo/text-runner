@@ -19,6 +19,7 @@ Feature: Formatter signals
       | detailed  |
       | dot       |
 
+
   Scenario Outline: checking output of various formatters
     Given my source code contains the file "error.md" with content:
       """

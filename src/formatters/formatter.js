@@ -17,7 +17,7 @@ class Formatter {
   errorMessage: string
   filePath: string       // the path of the documentation file that is currently processed
   filePaths: string[]        // the files encountered so far
-  inAction: boolean      // whether this formatter is currently processing an action
+  inActivity: boolean      // whether this formatter is currently processing an action
   startLine: number      // the line within the documentation file at which the currently processed block starts
   stderr: WriteStream
   stdout: WriteStream
@@ -33,7 +33,7 @@ class Formatter {
     this.activityText = ''
     this.errorMessage = ''
     this.filePaths = []
-    this.inAction = false
+    this.inActivity = false
     this.stepsCount = 0
     this.warningsCount = 0
     this.stdout = { write: this.output }
@@ -51,7 +51,7 @@ class Formatter {
   // Called on general errors
   error (errorMessage: string) {
     this.errorMessage = errorMessage
-    this.inAction = false
+    this.inActivity = false
   }
 
   output (text: string | Buffer): boolean {
@@ -65,7 +65,7 @@ class Formatter {
 
   skip (activityText: string) {
     if (activityText) this.activityText = activityText
-    this.inAction = false
+    this.inActivity = false
   }
 
   // Called when we start performing an activity that was defined in a block
@@ -74,14 +74,14 @@ class Formatter {
   }
 
   startActivity (activityTypeName: string) {
-    if (this.inAction) {
+    if (this.inActivity) {
       throw new Error('already in a started block')
     }
     this.setTitle(activityTypeName)
     this.errorMessage = ''
     this.warningMessage = ''
     this.stepsCount += 1
-    this.inAction = true
+    this.inActivity = true
   }
 
   // called when we start processing a markdown file
@@ -96,7 +96,7 @@ class Formatter {
   // optionally allows to define the final text to be displayed
   success (activityText?: string) {
     if (activityText) this.activityText = activityText
-    this.inAction = false
+    this.inActivity = false
   }
 
   // called when the whole test suite passed
@@ -118,7 +118,7 @@ class Formatter {
   warning (warningMessage :string) {
     this.warningMessage = warningMessage
     this.warningsCount += 1
-    this.inAction = false
+    this.inActivity = false
   }
 }
 

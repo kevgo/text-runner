@@ -137,7 +137,7 @@ const CliWorld = function () {
   }
 
   this.verifyTestsRun = (count) => {
-    expect(this.process.fullOutput()).to.include(` ${count} steps`)
+    expect(this.process.fullOutput()).to.include(` ${count} blocks`)
   }
 
   this.verifyUnknownCommand = (command) => {

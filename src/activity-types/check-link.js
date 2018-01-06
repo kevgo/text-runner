@@ -79,12 +79,12 @@ async function checkLinkToAnchorInSameFile (filename: string, target: string, li
 async function checkLinkToAnchorInOtherFile (filename: string, target: string, linkTargets: LinkTargetList, formatter: Formatter) {
   var [targetFilename, targetAnchor] = target.split('#')
   targetFilename = decodeURI(targetFilename)
-  if (!linkTargets[targetFilename]) {
-    formatter.error(`link to anchor #${cyan(targetAnchor)} in non-existing file ${red(targetFilename)}`)
+  if (linkTargets[targetFilename] == null) {
+    throw new Error(`link to anchor #${cyan(targetAnchor)} in non-existing file ${red(targetFilename)}`)
   }
   const targetEntry = (linkTargets[targetFilename] || []).filter((linkTarget) => linkTarget.name === targetAnchor)[0]
   if (!targetEntry) {
-    formatter.error(`link to non-existing anchor #${red(targetAnchor)} in ${cyan(targetFilename)}`)
+    throw new Error(`link to non-existing anchor #${red(targetAnchor)} in ${cyan(targetFilename)}`)
   }
 
   if (targetEntry.type === 'heading') {

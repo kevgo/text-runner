@@ -11,7 +11,7 @@ module.exports = function (activity: Activity, done: DoneFunction) {
 
   var code = activity.searcher.tagContent('fence')
   if (code == null) {
-    activity.formatter.error('no JavaScript code found in the fenced block')
+    done(new Error('no JavaScript code found in the fenced block'))
     return
   }
   code = replaceSubstitutionsInConfiguration(code, activity.configuration)

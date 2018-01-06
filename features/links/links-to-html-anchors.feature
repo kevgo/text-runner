@@ -86,7 +86,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor in other file](2.md#zonk)
       """
-    And my workspace contains the file "2.md" with content:
+    And my source code contains the file "2.md" with content:
       """
       no link targets here
       """

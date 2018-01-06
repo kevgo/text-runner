@@ -50,4 +50,5 @@ as well as simple plain text in any human language.
 - [configuration](documentation/configuration.md)
 - [built-in activity types](documentation/built-in-activity-types.md)
 - [user-defined activity types](documentation/user-defined-activity-types.md)
+- [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)

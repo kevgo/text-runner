@@ -18,7 +18,7 @@ class SetupCommand implements Command {
     this.actions = value.actions
   }
 
-  async run (): Promise<?ErrnoError> {
+  async run () {
     this.formatter.startActivity(`Create configuration file ${cyan('text-run.yml')} with default values`)
     this.configuration.createDefault()
     this.formatter.success()

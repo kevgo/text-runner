@@ -16,6 +16,10 @@ module.exports = async function (activity: Activity) {
   if (target == null || target === '') {
     throw new Error('link without target')
   }
+  if (isMailtoLink(target)) {
+    activity.formatter.skip(`skipping link to ${cyan(target)}`)
+    return
+  }
   activity.formatter.setTitle(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(activity.filename, target, activity.linkTargets, activity.formatter)
@@ -110,4 +114,8 @@ function isLinkToAnchorInOtherFile (target: string): boolean {
 
 function isLinkToAnchorInSameFile (target: string): boolean {
   return target.startsWith('#')
+}
+
+function isMailtoLink (target: string): boolean {
+  return target.startsWith('mailto:')
 }

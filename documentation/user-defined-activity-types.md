@@ -53,10 +53,10 @@ TextRunner supports all forms of synchronous and asynchronous operations:
 * just do something synchronous ([example](../examples/custom-action-sync)) -
   don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
   all TextRunner blocks are tested strictly sequentially anyways
-* return a Promise  <!-- TODO: example -->
+* return a Promise ([example](examples/custom-action-promise))
 * implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-  <!-- TODO: example -->
+  ([example](examples/custom-action-async))
 * take a callback function as a second parameter to your handler function and call it when you are done
   ([example](../examples/custom-action-callback))
 

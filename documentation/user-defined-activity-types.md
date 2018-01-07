@@ -58,7 +58,7 @@ TextRunner supports all forms of synchronous and asynchronous operations:
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
   <!-- TODO: example -->
 * take a callback function as a second parameter to your handler function and call it when you are done
-  ([example](../examples/custom-action-async))
+  ([example](../examples/custom-action-callback))
 
 You can write the handler in any language that transpiles to JavaScript,
 for example [BabelJS](https://babeljs.io),

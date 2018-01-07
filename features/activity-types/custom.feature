@@ -8,8 +8,8 @@ Feature: custom runners
   - the structure of these files should match the structure of the built-in actions
 
 
-  Scenario: using a valid built-in async action
-    When executing the "custom-action-async" example
+  Scenario: using a valid built-in action with callback
+    When executing the "custom-action-callback" example
     Then it signals:
       | FILENAME | custom-action.md |
       | LINE     | 3                |

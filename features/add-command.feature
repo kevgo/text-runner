@@ -20,4 +20,5 @@ Feature: adding new handler functions
         // do something with the content
         formatter.output(content)
       }
+
       """

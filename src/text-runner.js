@@ -47,6 +47,8 @@ class TextRunner {
         await this._command('run').runGlob(file)
       } else if (command === 'run' && file) {
         await this._missingFile(file)
+      } else if (command === 'add') {
+        this._command('add').runFile(file)
       } else if (hasCommand(command)) {
         await this._command(command).run()
       } else {

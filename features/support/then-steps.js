@@ -25,6 +25,11 @@ defineSupportCode(function ({Then, When}) {
     this.verifyPrintsNot(expectedText)
   })
 
+  Then('it generates the file {string} with content:', function (filename, expectedContent) {
+    const actualContent = fs.readFileSync(path.join(this.rootDir, filename), 'utf8')
+    jsdiffConsole(actualContent, expectedContent)
+  })
+
   Then(/^it prints:$/, function (expectedText) {
     this.verifyPrints(expectedText)
   })

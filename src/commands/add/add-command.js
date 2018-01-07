@@ -10,7 +10,9 @@ class AddCommand implements Command {
   }
 
   runFile (filename: string) {
-    fs.mkdirSync('text-run')
+    if (!fs.existsSync('text-run')) {
+      fs.mkdirSync('text-run')
+    }
     fs.writeFileSync(path.join('text-run', filename + '.js'), this._template(), 'utf8')
   }
 
@@ -22,7 +24,8 @@ class AddCommand implements Command {
 
   // do something with the content
   formatter.output(content)
-}`
+}
+`
   }
 }
 

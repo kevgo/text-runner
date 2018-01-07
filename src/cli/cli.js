@@ -13,7 +13,8 @@ cliCursor.hide()
 async function main () {
   var exitCode = 0
   try {
-    await textRunner(parseCliArgs(process.argv))
+    const cliArgs = parseCliArgs(process.argv)
+    await textRunner(cliArgs)
   } catch (err) {
     exitCode = 1
     if (err instanceof UnprintedUserError) {

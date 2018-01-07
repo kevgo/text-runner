@@ -16,9 +16,9 @@ const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
-module.exports = async function (value: {command: string, file: string, fast: boolean, format: Formatter}) {
+module.exports = async function (value: {command: string, file: string, offline: boolean, format: Formatter}) {
   const configFileName = fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
-  const textRunner = new TextRunner({fast: value.fast, format: value.format}, configFileName)
+  const textRunner = new TextRunner({offline: value.offline, format: value.format}, configFileName)
   await textRunner.execute(value.command, value.file)
 }
 

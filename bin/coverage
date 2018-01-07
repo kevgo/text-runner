@@ -37,7 +37,7 @@ mv .nyc_output .nyc_output_api
 NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' "$@"
 
 # test coverage for the self-check
-./node_modules/.bin/nyc bin/text-run --fast
+./node_modules/.bin/nyc bin/text-run --offline
 mv .nyc_output .nyc_output_text_run
 
 # merge coverage data

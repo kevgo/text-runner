@@ -33,7 +33,7 @@ module.exports = async function (activity: Activity) {
 }
 
 async function checkExternalLink (target: string, formatter: Formatter, configuration: Configuration) {
-  if (configuration.get('fast')) {
+  if (configuration.get('offline')) {
     formatter.skip(`skipping link to external website ${target}`)
     return
   }

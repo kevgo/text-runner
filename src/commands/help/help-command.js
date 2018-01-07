@@ -32,7 +32,7 @@ COMMANDS:
   ${bold('version')}           shows the currently installed version of the tool
 
 OPTIONS:
-  ${bold('--fast')}            don't check external links
+  ${bold('--offline')}         don't check external links
 `
   }
 }

@@ -35,7 +35,7 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
 }
 
 async function checkRemoteImage (node: AstNode, formatter: Formatter, configuration: Configuration) {
-  if (configuration.get('fast')) {
+  if (configuration.get('offline')) {
     formatter.skip(`skipping external image ${node.src || ''}`)
     return
   }

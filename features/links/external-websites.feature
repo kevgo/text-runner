@@ -6,7 +6,6 @@ Feature: verifying links to websites
   So that I can point my readers to further reading.
 
   - links pointing to non-existing external websites cause a warning
-  - if the parameter "fast" is given, don't check external links
 
 
   Scenario: markdown link to existing website
@@ -55,29 +54,3 @@ Feature: verifying links to websites
       | FILENAME | 1.md                                                                    |
       | LINE     | 1                                                                       |
       | WARNING  | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
-
-
-  @clionly
-  Scenario: ignoring external links via the command line
-    Given my source code contains the file "1.md" with content:
-      """
-      A <a href="http://google.com">external link</a>
-      """
-    When running text-run with the arguments "--fast"
-    Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 1                                                   |
-      | MESSAGE  | skipping link to external website http://google.com |
-
-
-  @apionly
-  Scenario: ignoring external links via the API
-    Given my source code contains the file "1.md" with content:
-      """
-      A <a href="http://google.com">external link</a>
-      """
-    When running text-run with the arguments {"fast": true}
-    Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 1                                                   |
-      | MESSAGE  | skipping link to external website http://google.com |

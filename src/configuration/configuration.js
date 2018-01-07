@@ -54,6 +54,9 @@ class Configuration {
   createDefault () {
     fs.writeFileSync('./text-run.yml',
 `# white-list for files to test
+# This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
+# The folder "node_modules" is already excluded.
+# To exclude the "vendor" folder: '{,!(vendor)/**/}*.md'
 files: '**/*.md'
 
 # the formatter to use

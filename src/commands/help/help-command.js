@@ -13,7 +13,7 @@ class HelpCommand implements Command {
     this.error = value.error
   }
 
-  async run (): Promise<?ErrnoError> {
+  async run () {
     console.log(this._template(this.error))
   }
 

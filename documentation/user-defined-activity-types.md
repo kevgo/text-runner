@@ -40,7 +40,7 @@ The formatter displays test progress on the console as the test runs:
 
 The handler function for our action is given an object containing various information and utility functions:
 
-<!-- TODO: check this by creating a custom action that lists the arguments given to it -->
+<a class="tr_verifyHandlerArgs">
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action,
   as an array of [AST nodes](#ast-nodes)
@@ -48,6 +48,7 @@ The handler function for our action is given an object containing various inform
 * __formatter:__ the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
 * __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
 * __runner:__ the currently running handler function
+</a>
 
 TextRunner supports all forms of synchronous and asynchronous operations:
 * just do something synchronous ([example](../examples/custom-action-sync)) -

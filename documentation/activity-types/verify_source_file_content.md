@@ -21,7 +21,7 @@ actions:
 `​``
 
 The
-[global-tool](examples/global-tool)
+[global-tool](../examples/global-tool)
 folder contains a working version.
 </a>
 ```

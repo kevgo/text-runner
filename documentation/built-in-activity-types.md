@@ -41,7 +41,7 @@ Console commands also happen in TextRunner's [workspace directory](#filesystem).
 * [verify NPM installation instructions](activity-types/verify_npm_install.md)
 * [verify global command provided by NPM module](activity-types/verify_npm_global_command.md)
 
-With the option `--fast` given, text-run does not check outgoing links to other websites.
+With the option `--offline` given, text-run does not check outgoing links to other websites.
 
 
 <hr>

@@ -3,6 +3,6 @@
 import Formatter from '../formatters/formatter.js'
 
 export type CliArgTypes = {
-  fast?: boolean,
+  offline?: boolean,
   format?: Formatter
 }

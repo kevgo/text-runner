@@ -8,7 +8,7 @@ const path = require('path')
 
 // Parses the command-line options received,
 // and returns them structured as the command to run and options
-module.exports = function (argv :string[]): {command: string, file: string, fast: boolean, format: Formatter} {
+module.exports = function (argv :string[]): {command: string, file: string, offline: boolean, format: Formatter} {
   // remove optional unix node call
   if (path.basename(argv[0] || '') === 'node') {
     argv.splice(0, 1)
@@ -29,7 +29,7 @@ module.exports = function (argv :string[]): {command: string, file: string, fast
     argv.splice(0, 1)
   }
 
-  const result = minimist(argv, {'boolean': 'fast'})
+  const result = minimist(argv, {'boolean': 'offline'})
   const commands = result._ || []
   delete result._
 

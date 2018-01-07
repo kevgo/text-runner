@@ -12,7 +12,7 @@ Feature: Formatter signals
       """
       <a href="http://external-link.com"></a>
       """
-    When running "text-run --format <FORMATTER> --fast"
+    When running "text-run --format <FORMATTER> --offline"
 
     Examples:
       | FORMATTER |
@@ -29,7 +29,7 @@ Feature: Formatter signals
       ```
       </a>
       """
-    When trying to run "text-run --format <FORMATTER> --fast"
+    When trying to run "text-run --format <FORMATTER> --offline"
     Then it signals:
       | FILENAME | error.md |
       | ERROR    | BOOM!    |

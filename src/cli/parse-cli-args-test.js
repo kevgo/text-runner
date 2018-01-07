@@ -60,10 +60,10 @@ describe('parse-cli-args', function () {
     })
   })
 
-  context('--fast <file>', function () {
+  context('--offline <file>', function () {
     beforeEach(function () {
       this.result = parseCliArgs([
-        '--fast',
+        '--offline',
         'documentation/actions/cd.md'
       ])
     })
@@ -72,8 +72,8 @@ describe('parse-cli-args', function () {
       expect(this.result.command).to.equal('run')
     })
 
-    it('returns the "fast" switch', function () {
-      expect(this.result.fast).to.be.true
+    it('returns the "offline" switch', function () {
+      expect(this.result.offline).to.be.true
     })
 
     it('returns the filename', function () {

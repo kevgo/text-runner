@@ -37,7 +37,7 @@ Feature: excluding files
 
   @clionly
   Scenario: excluding via CLI
-    When running "text-run --exclude bar"
+    When running "text-run --exclude foo"
     Then it runs only the tests in:
       | readme.md |
       | bar/2.md  |

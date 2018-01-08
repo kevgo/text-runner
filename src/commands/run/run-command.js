@@ -70,6 +70,7 @@ class RunCommand implements Command {
 
   // Runs the currently set up runners.
   async _run (filenames: string[]) {
+    filenames = this._removeExcludedFiles(filenames)
     debug('testing files:')
     for (let filename of filenames) {
       debug(`  * ${filename}`)
@@ -111,6 +112,23 @@ class RunCommand implements Command {
 
   _filesMatchingGlob (expression: string): string[] {
     return glob.sync(expression).sort()
+  }
+
+  _removeExcludedFiles (files: string[]): string[] {
+    var excludedFiles = this.configuration.get('exclude')
+    if (!excludedFiles) return files
+    var excludedFilesArray = []
+    if (Array.isArray(excludedFiles)) {
+      excludedFilesArray = excludedFiles
+    } else {
+      excludedFilesArray = [excludedFiles]
+    }
+    return files.filter((file) => {
+      for (let excludedFile of excludedFilesArray) {
+        const regex = new RegExp(excludedFile)
+        return !regex.test(file)
+      }
+    })
   }
 
   // Returns all the markdown files in this directory and its children

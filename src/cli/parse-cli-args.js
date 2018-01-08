@@ -8,7 +8,7 @@ const path = require('path')
 
 // Parses the command-line options received,
 // and returns them structured as the command to run and options
-module.exports = function (argv :string[]): {command: string, file: string, offline: boolean, format: Formatter} {
+module.exports = function (argv :string[]): {command: string, file?: string, offline?: boolean, exclude?: string, format?: Formatter} {
   // remove optional unix node call
   if (path.basename(argv[0] || '') === 'node') {
     argv.splice(0, 1)
@@ -41,9 +41,9 @@ module.exports = function (argv :string[]): {command: string, file: string, offl
   } else {
     command = 'run'
   }
-
   result.command = command
   result.file = commands[0]
+
   // $FlowFixMe
   return result
 }

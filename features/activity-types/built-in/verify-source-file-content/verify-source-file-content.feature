@@ -16,7 +16,7 @@ Feature: verifying that documentation matches a file in the source code
     Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifySourceFileContent">
-      [global-tool](examples/global-tool)
+      [global-tool](documentation/examples/global-tool)
       __text-run.yml__
       ```
       actions:
@@ -39,7 +39,7 @@ Feature: verifying that documentation matches a file in the source code
     Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifySourceFileContent">
-      [global-tool](examples/global-tool)
+      [global-tool](documentation/examples/global-tool)
       __text-run.yml__
       ```
       zonk

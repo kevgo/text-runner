@@ -10,8 +10,6 @@ const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
 const hasCommand = require('./commands/has-command')
-const isGlob = require('is-glob')
-const path = require('path')
 const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
@@ -37,23 +35,13 @@ class TextRunner {
   }
 
   // Tests the documentation according to the given command and arguments
-  async execute (command, file) {
+  async execute (command: string, file: string) {
     try {
-      if (command === 'run' && hasDirectory(file)) {
-        await this._command('run').runDirectory(file)
-      } else if (command === 'run' && isMarkdownFile(file)) {
-        await this._command('run').runFile(file)
-      } else if (command === 'run' && isGlob(file)) {
-        await this._command('run').runGlob(file)
-      } else if (command === 'run' && file) {
-        await this._missingFile(file)
-      } else if (command === 'add') {
-        this._command('add').runFile(file)
-      } else if (hasCommand(command)) {
-        await this._command(command).run()
-      } else {
-        await this._unknownCommand(command)
-      }
+      if (!hasCommand(command)) throw new UnprintedUserError(`unknown command: ${red(command)}`)
+      const CommandClass = require(commandPath(command))
+      // TODO: just provide 'this' as the parameter here
+      const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, activityTypesManager: this.activityTypesManager})
+      await commandInstance.run(file)
     } catch (err) {
       if (err instanceof UnprintedUserError) {
         this.formatter.error(err.message)
@@ -62,36 +50,5 @@ class TextRunner {
         throw err
       }
     }
-  }
-
-  _command (command) {
-    const CommandClass = require(commandPath(command))
-    const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, activityTypesManager: this.activityTypesManager})
-    return commandInstance
-  }
-
-  async _missingFile (filename) {
-    throw new UnprintedUserError(`file or directory does not exist: ${red(filename)}`)
-  }
-
-  async _unknownCommand (command) {
-    throw new UnprintedUserError(`unknown command: ${red(command)}`)
-  }
-}
-
-function hasDirectory (dirname :string) :boolean {
-  try {
-    return fs.statSync(dirname).isDirectory()
-  } catch (e) {
-    return false
-  }
-}
-
-function isMarkdownFile (filename :string) :boolean {
-  try {
-    const filepath = path.join(process.cwd(), filename)
-    return filename.endsWith('.md') && fs.statSync(filepath).isFile()
-  } catch (e) {
-    return false
   }
 }

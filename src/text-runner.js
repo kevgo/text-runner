@@ -39,9 +39,7 @@ class TextRunner {
     try {
       if (!hasCommand(command)) throw new UnprintedUserError(`unknown command: ${red(command)}`)
       const CommandClass = require(commandPath(command))
-      // TODO: just provide 'this' as the parameter here
-      const commandInstance = new CommandClass({configuration: this.configuration, formatter: this.formatter, activityTypesManager: this.activityTypesManager})
-      await commandInstance.run(file)
+      await new CommandClass(this).run(file)
     } catch (err) {
       if (err instanceof UnprintedUserError) {
         this.formatter.error(err.message)

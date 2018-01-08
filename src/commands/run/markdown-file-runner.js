@@ -41,7 +41,7 @@ class MarkdownFileRunner {
   }
 
   // Prepares this runner
-  async prepare (): Promise<void> {
+  async prepare () {
     // Need to start the file here
     // so that the formatter has the filename
     // in case there are errors preparing.

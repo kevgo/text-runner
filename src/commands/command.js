@@ -1,5 +1,5 @@
 // @flow
 
 export interface Command {
-  run(): Promise<?ErrnoError>
+  run(file: string): Promise<?ErrnoError>
 }

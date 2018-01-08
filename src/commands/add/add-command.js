@@ -6,10 +6,7 @@ const fs = require('fs')
 const path = require('path')
 
 class AddCommand implements Command {
-  async run () {
-  }
-
-  runFile (filename: string) {
+  async run (filename: string) {
     if (!fs.existsSync('text-run')) {
       fs.mkdirSync('text-run')
     }

@@ -6,7 +6,10 @@ import type Formatter from '../../formatters/formatter.js'
 import type {LinkTargetList} from './link-target-list.js'
 
 const ActivityTypeManager = require('./activity-type-manager.js')
+const {red} = require('chalk')
+const fs = require('fs')
 const glob = require('glob')
+const isGlob = require('is-glob')
 const MarkdownFileRunner = require('./markdown-file-runner')
 const mkdirp = require('mkdirp')
 const path = require('path')
@@ -29,7 +32,21 @@ class RunCommand implements Command {
   }
 
   // Tests all files
-  async run () {
+  async run (filename: string) {
+    if (hasDirectory(filename)) {
+      await this.runDirectory(filename)
+    } else if (isMarkdownFile(filename)) {
+      await this.runFile(filename)
+    } else if (isGlob(filename)) {
+      await this.runGlob(filename)
+    } else if (filename) {
+      throw new UnprintedUserError(`file or directory does not exist: ${red(filename)}`)
+    } else {
+      await this.runAll()
+    }
+  }
+
+  async runAll () {
     await this._run(this._allMarkdownFiles())
   }
 
@@ -53,6 +70,7 @@ class RunCommand implements Command {
 
   // Runs the currently set up runners.
   async _run (filenames: string[]) {
+    filenames = this._removeExcludedFiles(filenames)
     debug('testing files:')
     for (let filename of filenames) {
       debug(`  * ${filename}`)
@@ -96,6 +114,23 @@ class RunCommand implements Command {
     return glob.sync(expression).sort()
   }
 
+  _removeExcludedFiles (files: string[]): string[] {
+    var excludedFiles = this.configuration.get('exclude')
+    if (!excludedFiles) return files
+    var excludedFilesArray = []
+    if (Array.isArray(excludedFiles)) {
+      excludedFilesArray = excludedFiles
+    } else {
+      excludedFilesArray = [excludedFiles]
+    }
+    return files.filter((file) => {
+      for (let excludedFile of excludedFilesArray) {
+        const regex = new RegExp(excludedFile)
+        return !regex.test(file)
+      }
+    })
+  }
+
   // Returns all the markdown files in this directory and its children
   _markdownFilesInDir (dirName) {
     const files = glob.sync(`${dirName}/**/*.md`)
@@ -131,6 +166,24 @@ class RunCommand implements Command {
     for (let runner of this.runners) {
       await runner.prepare()
     }
+  }
+}
+
+// TODO: extract into helper dir
+function hasDirectory (dirname :string) :boolean {
+  try {
+    return fs.statSync(dirname).isDirectory()
+  } catch (e) {
+    return false
+  }
+}
+
+function isMarkdownFile (filename :string) :boolean {
+  try {
+    const filepath = path.join(process.cwd(), filename)
+    return filename.endsWith('.md') && fs.statSync(filepath).isFile()
+  } catch (e) {
+    return false
   }
 }
 

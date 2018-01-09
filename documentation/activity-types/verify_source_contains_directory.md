@@ -5,11 +5,14 @@ in your source code.
 
 #### Example
 
-
+<a class="tr_createDirectory">
+Say your source code contains a folder `foo`.
+</a>
+You can reference this folder in your documentation via this active block:
 <a class="tr_runMarkdownInTextrun">
 ```markdown
 <a class="tr_verifySourceContainsDirectory">
-  Check out the [examples](..) directory to see this in action.
+  Check out the [foo](foo) directory for a working example.
 </a>
 ```
 </a>

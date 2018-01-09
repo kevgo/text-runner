@@ -2,13 +2,14 @@
 
 const {defineSupportCode} = require('cucumber')
 const ncp = require('ncp')
+const path = require('path')
 const util = require('util')
 
 defineSupportCode(function ({When}) {
   When(/^(trying to execute|executing) the "([^"]+)" example$/, {timeout: 100000}, async function (tryingText, exampleName) {
     const expectError = determineExpectError(tryingText)
     const ncpp = util.promisify(ncp)
-    await ncpp(`examples/${exampleName}`, this.rootDir)
+    await ncpp(path.join('documentation', 'examples', exampleName), this.rootDir)
     await this.execute({command: 'run', expectError})
     finish(expectError, this.process && (this.process.error || this.process.exitCode))
   })

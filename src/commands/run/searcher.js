@@ -37,6 +37,12 @@ class Searcher {
     return result
   }
 
+  // Returns the textual content of the nodes matching the given query
+  tagsContents (query: NodeQuery): string[] {
+    const matchingNodes = this.findNodes(query)
+    return matchingNodes.map((node) => (node.content || '').trim())
+  }
+
   // findNode returns the AstNode matching the given query
   findNode (query: NodeQuery, options: {default?: string}): ?AstNode {
     if (options == null) options = {}
@@ -51,6 +57,12 @@ class Searcher {
       }
     }
     return result[0]
+  }
+
+  // findNode returns the AstNode matching the given query
+  findNodes (query: NodeQuery): AstNode[] {
+    this.query = query
+    return this.nodes.filter(this._getMatcher())
   }
 
   // _arrayMatcher is the matcher function for Array-type queries

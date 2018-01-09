@@ -40,7 +40,7 @@ The formatter displays test progress on the console as the test runs:
 
 The handler function for our action is given an object containing various information and utility functions:
 
-<!-- TODO: check this by creating a custom action that lists the arguments given to it -->
+<a class="tr_verifyHandlerArgs">
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action,
   as an array of [AST nodes](#ast-nodes)
@@ -48,6 +48,7 @@ The handler function for our action is given an object containing various inform
 * __formatter:__ the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
 * __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
 * __runner:__ the currently running handler function
+</a>
 
 TextRunner supports all forms of synchronous and asynchronous operations:
 * just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world-action.js)) -
@@ -144,14 +145,11 @@ child_process = require('child_process')
 
 module.exports = function({formatter, searcher, nodes}) {
 
-  // step 1: determine which command to run using the searcher utility
+  // determine which command to run using the searcher utility
   // (you could also iterate the "nodes" array directly here)
   const commandToRun = searcher.tagContent('fence')
 
-  // step 2: provide TextRunner a more specific description of this action
-  formatter.setTitle('running console command: ' + commandToRun)
-
-  // step 3: perform the action
+  // perform the action
   formatter.output(child_process.execSync(commandToRun, {encoding: 'utf8'}))
 }
 ```
@@ -159,18 +157,26 @@ module.exports = function({formatter, searcher, nodes}) {
 
 <a class="tr_runTextrun"></a>
 
-The `searcher.tagContent` method returns the content of the DOM node
-that satisfies the given query.
-In this case we are looking for a fenced code block,
-hence the query is `'fence'`.
-Providing an array for the type (e.g. `['code', 'fence']}`)
-retrieves all nodes that have any of the given types.
+<a class="tr_verifySearcherMethods">
+The `searcher` tool provides the following properties and methods:
+* __tagContent:__ returns the textual content of the DOM node
+  that satisfies the given query.
+  In the example above we are looking for a fenced code block,
+  hence the query is `'fence'`.
+  Providing an array for the type (e.g. `['code', 'fence']}`)
+  retrieves all nodes that have any of the given types.
 
-This method throws if it finds more or less than one tag of the given type
-in the active block. Other tag types are ignored.
+  This method throws if it finds more or less than one tag of the given type
+  in the active block. Other tag types are ignored.
 
-The optional second argument allows you to provide a default value
-in case no matching tag is found, e.g. `{default: ''}`.
+  The optional second argument allows you to provide a default value
+  in case no matching tag is found, e.g. `{default: ''}`.
+* __tagsContents:__ returns the textual content of multiple DOM nodes
+* __findNode:__ returns the DOM node matching the query,
+  throws if more than one node is found
+* __findNodes:__ returns the DOM nodes matching the query
+* __nodes:__ property containing the DOM nodes for this active block
+</a>
 
 <hr>
 

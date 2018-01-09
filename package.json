@@ -43,6 +43,7 @@
     "chai": "4.1.2",
     "coveralls": "3.0.0",
     "cucumber": "3.2.1",
+    "delay": "2.0.0",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
     "eslint-plugin-flowtype": "2.40.1",

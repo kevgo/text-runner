@@ -74,16 +74,3 @@ Feature: verifying that documentation matches a file in the source code
       | MESSAGE       | verifying document content matches source code file text-run.yml |
       | ERROR MESSAGE | file .* not found                                  |
       | EXIT CODE     | 1                                                                |
-
-
-  Scenario: link from a file in a subdirectory
-    Given my source code contains the file "foo/bar/1.md" with content:
-      """
-      <a class="tr_verifySourceFileContent">
-      [global-tool](not-existing.txt)
-      __text-run.yml__
-      ```
-      zonk
-      ```
-      </a>
-      """

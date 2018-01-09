@@ -12,7 +12,7 @@ You can reference this folder in your documentation via this active block:
 <a class="tr_runMarkdownInTextrun">
 ```markdown
 <a class="tr_verifySourceContainsDirectory">
-  Check out the [foo](foo) directory for a working example.
+Check out the [foo](foo) directory for a working example.
 </a>
 ```
 </a>

@@ -21,6 +21,36 @@ Your __hello.txt__ file needs to contains this section:
 `​``
 hello world
 `​``
+</a>
+```
+</a>
+
+- extracts the filename from the bold section
+- extracts the expected file content from the fenced code block
+
+
+#### Providing a base directory
+
+The filename of the source code file is relative to the documentation file.
+You can also provide a directory in which your file is located
+via a link in the active block.
+
+<a class="tr_createFile">
+Let's say you have a file __foo/bar/hello2.txt__ in your code base
+with the content `hello again`.
+</a>
+You can display its content in your documentation via this active block:
+
+<a class="tr_runMarkdownInTextrun">
+```markdown
+<a class="tr_verifySourceFileContent">
+Your __hello2.txt__ file in the [bar folder](foo/bar)
+needs to contains this section:
+
+`​``
+hello again
+`​``
+</a>
 ```
 </a>
 

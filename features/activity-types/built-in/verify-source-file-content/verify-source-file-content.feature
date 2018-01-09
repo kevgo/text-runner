@@ -9,14 +9,15 @@ Feature: verifying that documentation matches a file in the source code
   - provide the filename as bold text
   - provide the expected content as a fenced code block
   - optionally provide a base directory in which the source code file is located
-    as a hyperlink to that directory
+    as a hyperlink to that directory.
+    This link is relative to the file in which it occurs.
 
 
   Scenario: file content matches
     Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifySourceFileContent">
-      [global-tool](examples/global-tool)
+      [global-tool](../documentation/examples/global-tool)
       __text-run.yml__
       ```
       actions:
@@ -30,8 +31,8 @@ Feature: verifying that documentation matches a file in the source code
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                            |
-      | LINE     | 1-11                                                            |
+      | FILENAME | 1.md                                                             |
+      | LINE     | 1-11                                                             |
       | MESSAGE  | verifying document content matches source code file text-run.yml |
 
 
@@ -39,7 +40,7 @@ Feature: verifying that documentation matches a file in the source code
     Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifySourceFileContent">
-      [global-tool](examples/global-tool)
+      [global-tool](../documentation/examples/global-tool)
       __text-run.yml__
       ```
       zonk
@@ -48,11 +49,11 @@ Feature: verifying that documentation matches a file in the source code
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                            |
-      | LINE          | 1-7                                                             |
+      | FILENAME      | 1.md                                                             |
+      | LINE          | 1-7                                                              |
       | MESSAGE       | verifying document content matches source code file text-run.yml |
-      | ERROR MESSAGE | mismatching content in                                          |
-      | EXIT CODE     | 1                                                               |
+      | ERROR MESSAGE | mismatching content in                                           |
+      | EXIT CODE     | 1                                                                |
 
 
   Scenario: file does not exist
@@ -71,5 +72,5 @@ Feature: verifying that documentation matches a file in the source code
       | FILENAME      | 1.md                                                             |
       | LINE          | 1-7                                                              |
       | MESSAGE       | verifying document content matches source code file text-run.yml |
-      | ERROR MESSAGE | file .* not found                                  |
+      | ERROR MESSAGE | file .* not found                                                |
       | EXIT CODE     | 1                                                                |

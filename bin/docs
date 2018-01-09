@@ -3,7 +3,7 @@ set -e
 
 bin/build
 if [ "$#" == "0" ]; then
-  bin/text-run --exclude documentation/examples
+  bin/text-run --offline
 else
   DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed "$@"
 fi

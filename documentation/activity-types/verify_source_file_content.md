@@ -5,24 +5,51 @@ For example to give your readers an idea how something works
 without having them do it as part of the tutorial.
 
 
-#### Example
+#### Simple Example
+
+<a class="tr_createFile">
+Let's say you have a file __hello.txt__ in your code base
+with the content `hello world`.
+</a>
+You can display its content in your documentation via this active block:
 
 <a class="tr_runMarkdownInTextrun">
 ```markdown
 <a class="tr_verifySourceFileContent">
-Your __text-run.yml__ needs to contains this section:
+Your __hello.txt__ file needs to contains this section:
 
 `​``
-actions:
-
-  runConsoleCommand:
-    globals:
-      tool: 'public/tool'
+hello world
 `​``
+</a>
+```
+</a>
 
-The
-[global-tool](examples/global-tool)
-folder contains a working version.
+- extracts the filename from the bold section
+- extracts the expected file content from the fenced code block
+
+
+#### Providing a base directory
+
+The filename of the source code file is relative to the documentation file.
+You can also provide a directory in which your file is located
+via a link in the active block.
+
+<a class="tr_createFile">
+Let's say you have a file __foo/bar/hello2.txt__ in your code base
+with the content `hello again`.
+</a>
+You can display its content in your documentation via this active block:
+
+<a class="tr_runMarkdownInTextrun">
+```markdown
+<a class="tr_verifySourceFileContent">
+Your __hello2.txt__ file in the [bar folder](foo/bar)
+needs to contains this section:
+
+`​``
+hello again
+`​``
 </a>
 ```
 </a>

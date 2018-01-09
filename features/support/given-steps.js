@@ -39,23 +39,23 @@ defineSupportCode(function ({Given}) {
   })
 
   Given(/^I am in a directory that contains the "([^"]*)" example$/, function (exampleName) {
-    fs.copySync(path.join('examples', exampleName), this.rootDir)
+    fs.copySync(path.join('documentation', 'examples', exampleName), this.rootDir)
   })
 
   Given(/^I am in a directory that contains the "([^"]*)" example with the configuration file:$/, function (exampleName, configFileContent) {
-    fs.copySync(path.join('examples', exampleName), this.rootDir)
+    fs.copySync(path.join('documentation', 'examples', exampleName), this.rootDir)
     fs.writeFileSync(path.join(this.rootDir, 'text-run.yml'), configFileContent)
   })
 
   Given(/^I am in a directory that contains the "([^"]*)" example(?: without a configuration file)$/, function (exampleName) {
-    fs.copySync(path.join('examples', exampleName), this.rootDir)
+    fs.copySync(path.join('documentation', 'examples', exampleName), this.rootDir)
   })
 
   Given(/^my documentation is starting the "([^"]*)" example$/, function (example) {
     fs.writeFileSync(path.join(this.rootDir, '0.md'), `
       <a class="tr_startConsoleCommand">
       \`\`\`
-      node ${path.join(__dirname, '..', '..', 'examples', 'long-running', 'server.js')}
+      node ${path.join(__dirname, '..', '..', 'documentation', 'examples', 'long-running', 'server.js')}
       \`\`\`
       </a>
       `)

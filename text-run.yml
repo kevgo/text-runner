@@ -1,4 +1,5 @@
 files: '{*.md,documentation/**/*.md}'
+exclude: 'documentation/examples'
 format: dot
 useTempDirectory: true
 

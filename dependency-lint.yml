@@ -58,7 +58,7 @@ requiredModules:
     dev:
       - '{features,spec,test}/**/*'
       - '**/*{.,_,-}{spec,test}.js'
-      - 'examples/**'
+      - 'documentation/examples/**'
       - 'text-run/**'
     ignore:
       - 'node_modules/**/*'

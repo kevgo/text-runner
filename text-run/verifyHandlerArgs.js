@@ -1,4 +1,5 @@
 const jsdiffConsole = require('jsdiff-console')
+const removeTrailingColon = require('../dist/helpers/remove-trailing-colon.js')
 const removeValue = require('remove-value')
 
 module.exports = function (args) {
@@ -9,12 +10,4 @@ module.exports = function (args) {
   removeValue(actualTools, 'activityTypeName')
   removeValue(actualTools, 'linkTargets')
   jsdiffConsole(actualTools, expectedTools)
-}
-
-function removeTrailingColon (text) {
-  if (text.endsWith(':')) {
-    return text.substring(0, text.length - 1)
-  } else {
-    return text
-  }
 }

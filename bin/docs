@@ -2,4 +2,8 @@
 set -e
 
 bin/build
-bin/text-run "$@"
+if [ "$#" == "0" ]; then
+  bin/text-run
+else
+  DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed "$@"
+fi

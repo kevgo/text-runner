@@ -31,8 +31,8 @@ Feature: verifying that documentation matches a file in the source code
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                            |
-      | LINE     | 1-11                                                            |
+      | FILENAME | 1.md                                                             |
+      | LINE     | 1-11                                                             |
       | MESSAGE  | verifying document content matches source code file text-run.yml |
 
 
@@ -49,11 +49,11 @@ Feature: verifying that documentation matches a file in the source code
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                            |
-      | LINE          | 1-7                                                             |
+      | FILENAME      | 1.md                                                             |
+      | LINE          | 1-7                                                              |
       | MESSAGE       | verifying document content matches source code file text-run.yml |
-      | ERROR MESSAGE | mismatching content in                                          |
-      | EXIT CODE     | 1                                                               |
+      | ERROR MESSAGE | mismatching content in                                           |
+      | EXIT CODE     | 1                                                                |
 
 
   Scenario: file does not exist
@@ -72,7 +72,7 @@ Feature: verifying that documentation matches a file in the source code
       | FILENAME      | 1.md                                                             |
       | LINE          | 1-7                                                              |
       | MESSAGE       | verifying document content matches source code file text-run.yml |
-      | ERROR MESSAGE | file .* not found                                  |
+      | ERROR MESSAGE | file .* not found                                                |
       | EXIT CODE     | 1                                                                |
 
 

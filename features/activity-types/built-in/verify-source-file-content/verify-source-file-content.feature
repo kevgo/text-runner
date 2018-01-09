@@ -9,14 +9,15 @@ Feature: verifying that documentation matches a file in the source code
   - provide the filename as bold text
   - provide the expected content as a fenced code block
   - optionally provide a base directory in which the source code file is located
-    as a hyperlink to that directory
+    as a hyperlink to that directory.
+    This link is relative to the file in which it occurs.
 
 
   Scenario: file content matches
     Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifySourceFileContent">
-      [global-tool](examples/global-tool)
+      [global-tool](../examples/global-tool)
       __text-run.yml__
       ```
       actions:
@@ -39,7 +40,7 @@ Feature: verifying that documentation matches a file in the source code
     Given my source code contains the file "1.md" with content:
       """
       <a class="tr_verifySourceFileContent">
-      [global-tool](examples/global-tool)
+      [global-tool](../examples/global-tool)
       __text-run.yml__
       ```
       zonk
@@ -73,3 +74,16 @@ Feature: verifying that documentation matches a file in the source code
       | MESSAGE       | verifying document content matches source code file text-run.yml |
       | ERROR MESSAGE | file .* not found                                  |
       | EXIT CODE     | 1                                                                |
+
+
+  Scenario: link from a file in a subdirectory
+    Given my source code contains the file "foo/bar/1.md" with content:
+      """
+      <a class="tr_verifySourceFileContent">
+      [global-tool](not-existing.txt)
+      __text-run.yml__
+      ```
+      zonk
+      ```
+      </a>
+      """

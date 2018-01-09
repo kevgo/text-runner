@@ -50,15 +50,15 @@ The handler function for our action is given an object containing various inform
 * __runner:__ the currently running handler function
 
 TextRunner supports all forms of synchronous and asynchronous operations:
-* just do something synchronous ([example](examples/custom-action-sync)) -
+* just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world-action.js)) -
   don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
   all TextRunner blocks are tested strictly sequentially anyways
-* return a Promise  <!-- TODO: example -->
+* return a Promise ([example](examples/custom-action-promise/text-run/hello-world-action.js))
 * implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-  <!-- TODO: example -->
+  ([example](examples/custom-action-async/text-run/hello-world-action.js))
 * take a callback function as a second parameter to your handler function and call it when you are done
-  ([example](examples/custom-action-async))
+  ([example](examples/custom-action-callback/text-run/hello-world-action.js))
 
 You can write the handler in any language that transpiles to JavaScript,
 for example [BabelJS](https://babeljs.io),

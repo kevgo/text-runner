@@ -41,4 +41,7 @@ Feature: unknown activity types
       * tr_verifyworkspacecontainsdirectory
       * tr_verifyworkspacefilecontent
       * tr_waitforoutput
+
+      To create a new "unknownAction" activity type,
+      run "text-run add unknownAction
       """

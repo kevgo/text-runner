@@ -29,7 +29,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory
     Given my text-run configuration contains:
       """
-      useTempDirectory: false
+      useSystemTempDirectory: false
       """
     When running text-run
     Then it runs in the "tmp" directory
@@ -38,7 +38,7 @@ Feature: separate working directory
   Scenario: running in a global temp directory
     Given my text-run configuration contains:
       """
-      useTempDirectory: true
+      useSystemTempDirectory: true
       """
     When running text-run
     Then it runs in a global temp directory
@@ -47,7 +47,7 @@ Feature: separate working directory
   Scenario: running in a custom directory
     Given my text-run configuration contains:
       """
-      useTempDirectory: '.'
+      useSystemTempDirectory: '.'
       """
     When running text-run
     Then it runs in the current working directory

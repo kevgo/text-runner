@@ -11,7 +11,7 @@ const defaultValues = {
   fast: false,
   files: '**/*.md',
   format: 'detailed',
-  useTempDirectory: false,
+  useSystemTempDirectory: false,
   classPrefix: 'tr_',
   activityTypes: {
     runConsoleCommand: {
@@ -68,7 +68,7 @@ classPrefix: 'tr_'
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,
 # you can also provide a custom directory path here
-useTempDirectory: false
+useSystemTempDirectory: false
 
 # activity-type specific configuration
 activityTypes:

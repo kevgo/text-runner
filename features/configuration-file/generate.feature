@@ -31,7 +31,7 @@ Feature: generating a configuration file
       # whether to run the tests in an external temp directory,
       # uses ./tmp if false,
       # you can also provide a custom directory path here
-      useTempDirectory: false
+      useSystemTempDirectory: false
 
       # activity-type specific configuration
       activityTypes:

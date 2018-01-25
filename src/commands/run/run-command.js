@@ -96,7 +96,7 @@ class RunCommand implements Command {
 
   // Creates the temp directory to run the tests in
   _createWorkingDir () {
-    const setting = this.configuration.get('useTempDirectory')
+    const setting = this.configuration.get('useSystemTempDirectory')
     if (typeof setting === 'string') {
       this.configuration.testDir = setting
     } else if (setting === false) {
@@ -104,7 +104,7 @@ class RunCommand implements Command {
     } else if (setting === true) {
       this.configuration.testDir = tmp.dirSync().name
     } else {
-      throw new UnprintedUserError(`unknown 'useTempDirectory' setting: ${setting}`)
+      throw new UnprintedUserError(`unknown 'useSystemTempDirectory' setting: ${setting}`)
     }
     debug(`using test directory: ${this.configuration.testDir}`)
     mkdirp.sync(this.configuration.testDir)

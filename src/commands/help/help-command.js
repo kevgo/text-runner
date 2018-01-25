@@ -20,18 +20,18 @@ class HelpCommand implements Command {
   _template (error: string) {
     if (this.error) error = `${red(bold('Error: ' + error))}`
     return `
-
 ${dim('TextRunner ' + version)}
-${error}
+${error || ''}
 USAGE: ${bold('text-run [<options>] <command>')}
 
-COMMANDS:
-  ${bold('run')} [<filename>]  tests the entire documentation, or only the given file
+COMMANDS
+  ${bold('run')} [<filename>]  tests the entire documentation, or only the given file/folder
+  ${bold('add')} <filename>    scaffolds a new block type handler
   ${bold('setup')}             creates an example configuration file
+  ${bold('version')}           shows the currently installed version
   ${bold('help')}              shows this help screen
-  ${bold('version')}           shows the currently installed version of the tool
 
-OPTIONS:
+OPTIONS
   ${bold('--offline')}         don't check external links
 `
   }

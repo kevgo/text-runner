@@ -5,5 +5,5 @@ export type ConfigFileStructure = {
   activityTypes?: { [string]: Object },
   files?: string,
   formatter?: string,
-  useTempDirectory?: boolean
+  useSystemTempDirectory?: boolean
 }

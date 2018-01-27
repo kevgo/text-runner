@@ -5,5 +5,5 @@ set -e
 rm -rf dist
 mkdir dist
 cd src
-find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/
+find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
 cd ..

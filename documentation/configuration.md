@@ -4,7 +4,7 @@ You can configure TextRunner via a configuration file.
 To create one, open a terminal,
 go to the folder where you want to configure TextRunner, and run:
 
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 
 ```
 $ text-run setup
@@ -12,7 +12,7 @@ $ text-run setup
 </a>
 
 This creates a configuration file called
-<a class="tr_verifyWorkspaceFileContent">
+<a textrun="verifyWorkspaceFileContent">
 __text-run.yml__ that looks like this:
 
 ```yml
@@ -26,7 +26,7 @@ files: '**/*.md'
 format: detailed
 
 # prefix that makes anchor tags active regions
-classPrefix: 'tr_'
+classPrefix: 'textrun'
 
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,

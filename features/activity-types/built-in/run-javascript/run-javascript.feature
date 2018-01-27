@@ -12,7 +12,7 @@ Feature: running inline blocks of Javascript
   Scenario: running synchronous Javascript
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       console.log('A foo walks into a bar')
       ```
@@ -32,7 +32,7 @@ Feature: running inline blocks of Javascript
   Scenario: running asynchronous Javascript using the "// ..." keyword
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       setTimeout(function() {
         console.log('A foo walks into a bar')
@@ -55,7 +55,7 @@ Feature: running inline blocks of Javascript
   Scenario: running asynchronous Javascript using the "<CALLBACK>" keyword
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       setTimeout(<CALLBACK>, 1)
       ```
@@ -71,13 +71,13 @@ Feature: running inline blocks of Javascript
   Scenario: persisting variables across blocks
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       const foo = 'bar'
       ```
       </a>
 
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       console.log('A foo walks into a ' + foo)
       ```
@@ -101,7 +101,7 @@ Feature: running inline blocks of Javascript
   Scenario: missing code block
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       </a>
       """
     When trying to run text-run
@@ -116,7 +116,7 @@ Feature: running inline blocks of Javascript
   Scenario: multiple code blocks
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       console.log('one')
       ```

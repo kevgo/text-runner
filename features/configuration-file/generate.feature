@@ -26,7 +26,7 @@ Feature: generating a configuration file
       format: detailed
 
       # prefix that makes anchor tags active regions
-      classPrefix: 'tr_'
+      classPrefix: 'textrun'
 
       # whether to run the tests in an external temp directory,
       # uses ./tmp if false,

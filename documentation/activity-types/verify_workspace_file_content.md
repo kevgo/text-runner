@@ -9,15 +9,15 @@ and has the given content.
 
 #### Example
 
-<a class="tr_createFile">
+<a textrun="createFile">
 Assuming we have a file _hello.txt_ with content `hello world`,
 </a>
 we can verify it via this block:
 
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifyWorkspaceFileContent">
+<a textrun="verifyWorkspaceFileContent">
 
 _hello.txt_
 

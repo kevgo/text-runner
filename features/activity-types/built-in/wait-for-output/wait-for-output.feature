@@ -19,7 +19,7 @@ Feature: waiting for output of long-running processes
       """
     And my source code contains the file "long-running.md" with content:
       """
-      <a class="tr_startConsoleCommand">
+      <a textrun="startConsoleCommand">
       ```
       $ node server.js
       ```
@@ -27,7 +27,7 @@ Feature: waiting for output of long-running processes
       """
     And my source code contains the file "wait.md" with content:
       """
-      <a class="tr_waitForOutput">
+      <a textrun="waitForOutput">
       ```
       one
       three

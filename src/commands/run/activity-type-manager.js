@@ -32,9 +32,8 @@ class ActivityTypeManager {
     const result = this.handlerFunctions[activityType.toLowerCase()]
     if (!result) {
       var errorText = `unknown activity type: ${red(activityType)}\nAvailable activity types:\n`
-      const prefix = this.configuration.get('classPrefix')
       for (let actionName of Object.keys(this.handlerFunctions).sort()) {
-        errorText += `* ${prefix}${actionName}\n`
+        errorText += `* ${actionName}\n`
       }
       errorText += `\nTo create a new "${activityType}" activity type,\n`
       errorText += `run "text-run add ${activityType}\n"`

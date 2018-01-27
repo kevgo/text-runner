@@ -23,7 +23,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a class="tr_verifyNpmGlobalCommand">
+      <a textrun="verifyNpmGlobalCommand">
       ```
       $ foo
       ```
@@ -39,7 +39,7 @@ Feature: verifying global commands provided by NPM modules
   Scenario: correct command name with single-fenced code block
     Given my source code contains the file "1.md" with content:
       """
-      To run this app, call <a class="tr_verifyNpmGlobalCommand">`foo`</a> on the command line
+      To run this app, call <a textrun="verifyNpmGlobalCommand">`foo`</a> on the command line
       """
     When running text-run
     Then it signals:
@@ -53,7 +53,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a class="tr_verifyNpmGlobalCommand">
+      <a textrun="verifyNpmGlobalCommand">
       ```
       $ zonk
       ```
@@ -72,7 +72,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a class="tr_verifyNpmGlobalCommand">
+      <a textrun="verifyNpmGlobalCommand">
       </a>
       """
     When trying to run text-run

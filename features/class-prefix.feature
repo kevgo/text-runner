@@ -11,7 +11,7 @@ Feature: configuring the class prefix
   Background:
     Given my source code contains the file "tr.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
         ```
         console.log('running block with default class prefix')
         ```

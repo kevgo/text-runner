@@ -19,7 +19,7 @@ Feature: verifying file content
   Scenario: specify file name via emphasized text and content via code block
     Given my source code contains the file "01.md" with content:
       """
-      <a class="tr_verifyWorkspaceFileContent">
+      <a textrun="verifyWorkspaceFileContent">
       _hello.txt_ with content `Hello world!`
       </a>
       """
@@ -33,7 +33,7 @@ Feature: verifying file content
   Scenario: specify file name via strong text and content via fenced block
     Given my source code contains the file "01.md" with content:
       """
-      <a class="tr_verifyWorkspaceFileContent">
+      <a textrun="verifyWorkspaceFileContent">
       __hello.txt__
 
       ```
@@ -51,7 +51,7 @@ Feature: verifying file content
   Scenario: file content mismatch
     Given my source code contains the file "01.md" with content:
       """
-      <a class="tr_verifyWorkspaceFileContent">
+      <a textrun="verifyWorkspaceFileContent">
       __hello.txt__
 
       ```
@@ -71,7 +71,7 @@ Feature: verifying file content
   Scenario: file is missing
     Given my source code contains the file "01.md" with content:
       """
-      <a class="tr_verifyWorkspaceFileContent">
+      <a textrun="verifyWorkspaceFileContent">
       __zonk.txt__
 
       `Hello world!`

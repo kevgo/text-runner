@@ -7,15 +7,15 @@ without having them do it as part of the tutorial.
 
 #### Simple Example
 
-<a class="tr_createFile">
+<a textrun="createFile">
 Let's say you have a file __hello.txt__ in your code base
 with the content `hello world`.
 </a>
 You can display its content in your documentation via this active block:
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifySourceFileContent">
+<a textrun="verifySourceFileContent">
 Your __hello.txt__ file needs to contains this section:
 
 `​``
@@ -35,15 +35,15 @@ The filename of the source code file is relative to the documentation file.
 You can also provide a directory in which your file is located
 via a link in the active block.
 
-<a class="tr_createFile">
+<a textrun="createFile">
 Let's say you have a file __foo/bar/hello2.txt__ in your code base
 with the content `hello again`.
 </a>
 You can display its content in your documentation via this active block:
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifySourceFileContent">
+<a textrun="verifySourceFileContent">
 Your __hello2.txt__ file in the [bar folder](foo/bar)
 needs to contains this section:
 

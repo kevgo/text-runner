@@ -6,9 +6,9 @@
 
 #### Example
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_createDirectory">
+<a textrun="createDirectory">
 `directory_name`
 </a>
 ```

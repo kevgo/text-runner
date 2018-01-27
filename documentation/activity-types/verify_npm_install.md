@@ -8,7 +8,7 @@ that is listed in `package.json`.
 
 #### Example
 
-<a class="tr_createFile">
+<a textrun="createFile">
 Assuming our __package.json__ file looks like this:
 
 ```json
@@ -20,9 +20,9 @@ Assuming our __package.json__ file looks like this:
 
 then the action below verifies that the instructions use the correct NPM package name:
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifyNpmInstall">
+<a textrun="verifyNpmInstall">
 `​``
 $ npm i -g my_enormous_package
 `​``

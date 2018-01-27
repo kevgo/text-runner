@@ -16,7 +16,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file content matches
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_verifySourceFileContent">
+      <a textrun="verifySourceFileContent">
       [global-tool](../documentation/examples/global-tool)
       __text-run.yml__
       ```
@@ -39,7 +39,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file content mismatch
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_verifySourceFileContent">
+      <a textrun="verifySourceFileContent">
       [global-tool](../documentation/examples/global-tool)
       __text-run.yml__
       ```
@@ -59,7 +59,7 @@ Feature: verifying that documentation matches a file in the source code
   Scenario: file does not exist
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_verifySourceFileContent">
+      <a textrun="verifySourceFileContent">
       [global-tool](not-existing.txt)
       __text-run.yml__
       ```

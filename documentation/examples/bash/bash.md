@@ -18,7 +18,7 @@ Bash makes command-line arguments available via `$` variables.
 
 Let's say we have this little Bash script that greets you by name:
 
-<a class="tr_createFile">
+<a textrun="createFile">
 
 __greeter.sh__
 
@@ -32,7 +32,7 @@ echo "Hello $1!"
 
 We have to make it executable:
 
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 
 ```
 $ chmod +x ./greeter.sh
@@ -42,7 +42,7 @@ $ chmod +x ./greeter.sh
 
 When we can call it with our name:
 
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 
 ```
 $ ./greeter.sh world
@@ -61,7 +61,7 @@ Hello world!
 
 Copy a file using `cp`, for example:
 
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 
 ```
 $ cp greeter.sh another_greeter.sh
@@ -72,7 +72,7 @@ $ cp greeter.sh another_greeter.sh
 Now we have this new file in our workspace:
 
 
-<a class="tr_verifyWorkspaceFileContent">
+<a textrun="verifyWorkspaceFileContent">
 
 __another_greeter.sh__
 

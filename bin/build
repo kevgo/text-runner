@@ -3,4 +3,7 @@ set -e
 
 # Builds the code base
 rm -rf dist
-node_modules/.bin/babel src -d dist -q
+mkdir dist
+cd src
+find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
+cd ..

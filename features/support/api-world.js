@@ -10,7 +10,7 @@ type StdStream = {
   write: (string) => void
 }
 
-const {defineSupportCode} = require('cucumber')
+const {setWorldConstructor} = require('cucumber')
 // $FlowFixMe: we need to test the 'dist' folder for test coverage
 const textRunner = require('../../dist/text-runner.js')
 const {expect} = require('chai')
@@ -205,8 +205,6 @@ function standardizePaths (paths: string[]) {
   return paths.map((path) => path.replace(/\\/g, '/'))
 }
 
-defineSupportCode(function ({setWorldConstructor}) {
-  if (process.env.EXOSERVICE_TEST_DEPTH === 'API') {
-    setWorldConstructor(ApiWorld)
-  }
-})
+if (process.env.EXOSERVICE_TEST_DEPTH === 'API') {
+  setWorldConstructor(ApiWorld)
+}

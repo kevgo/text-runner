@@ -43,7 +43,7 @@
     "chai": "4.1.2",
     "class-methods": "1.0.10",
     "coveralls": "3.0.0",
-    "cucumber": "3.2.1",
+    "cucumber": "4.0.0",
     "delay": "2.0.0",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",

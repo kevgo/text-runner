@@ -1,7 +1,7 @@
 // @flow
 
 const {expect} = require('chai')
-const {defineSupportCode} = require('cucumber')
+const {setWorldConstructor} = require('cucumber')
 const dimConsole = require('dim-console')
 const flatten = require('array-flatten')
 const fs = require('fs-extra')
@@ -156,11 +156,9 @@ function standardizePath (path: string): string {
   return path.replace(/\\/g, '/')
 }
 
-defineSupportCode(function ({setWorldConstructor}) {
-  if (process.env.EXOSERVICE_TEST_DEPTH === 'CLI') {
-    setWorldConstructor(CliWorld)
-  }
-})
+if (process.env.EXOSERVICE_TEST_DEPTH === 'CLI') {
+  setWorldConstructor(CliWorld)
+}
 
 // Returns the command that runs the given command with test coverage
 function runWithTestCoverage (command: string): string {

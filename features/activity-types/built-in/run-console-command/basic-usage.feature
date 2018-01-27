@@ -4,8 +4,8 @@ Feature: running console commands
   I want my users to run console commands
   So that they can execute the tool I am describing.
 
-  - to run a console command, wrap the code in an A tag with class
-    "tr_runConsoleCommand"
+  - to run a console command, wrap the code in a tag with attribute
+    textrun="runConsoleCommand"
   - the commands to run are provided in a triple-fenced code block
   - all commands run in a Bash shell, concatenated via " && "
 
@@ -13,7 +13,7 @@ Feature: running console commands
   Scenario: running console commands
     Given my source code contains the file "running.md" with content:
       """
-      <a class="tr_runConsoleCommand">
+      <a textrun="runConsoleCommand">
       ```
       echo hello
       ```
@@ -26,7 +26,7 @@ Feature: running console commands
   Scenario: missing console command block
     Given my source code contains the file "running.md" with content:
       """
-      <a class="tr_runConsoleCommand">
+      <a textrun="runConsoleCommand">
       foo
       </a>
       """
@@ -42,7 +42,7 @@ Feature: running console commands
   Scenario: empty console command
     Given my source code contains the file "running.md" with content:
       """
-      <a class="tr_runConsoleCommand">
+      <a textrun="runConsoleCommand">
       ```
       ```
       </a>

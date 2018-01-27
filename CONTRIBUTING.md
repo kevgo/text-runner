@@ -44,7 +44,7 @@ Active documentation consists of of plain text that is not executable
 but contains a number of _active blocks_
 (regions of Markdown wrapped in an _activation tag_
 which are executable.
-The default activation tag is `<a class="tr_{{activity type}}">...</a>` tags).
+The default activation tag is `<a textrun="{{activity type}}">...</a>` tags).
 Activation tags specify the _activity type_ that should be executed inside the
 respective active block.
 TextRunner comes with built-in activity types,

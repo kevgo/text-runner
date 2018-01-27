@@ -11,7 +11,7 @@ Feature: Counting files
   Scenario: a test suite with multiple files
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_validateJavascript">
+      <a textrun="validateJavascript">
       ```
       foo()
       ```
@@ -19,7 +19,7 @@ Feature: Counting files
       """
     And my source code contains the file "2.md" with content:
       """
-      <a class="tr_validateJavascript">
+      <a textrun="validateJavascript">
       ```
       bar()
       ```
@@ -38,7 +38,7 @@ Feature: Counting files
       """
     And my source code contains the file "2.md" with content:
       """
-      <a class="tr_validateJavascript">
+      <a textrun="validateJavascript">
       ```
       bar()
       ```

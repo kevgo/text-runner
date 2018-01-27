@@ -11,7 +11,7 @@ Feature: verifying the source code contains a directory
   Scenario: linked directory exists
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_verifySourceContainsDirectory">
+      <a textrun="verifySourceContainsDirectory">
         See the [stuff](stuff) folder for more details
       </a>
       """
@@ -26,7 +26,7 @@ Feature: verifying the source code contains a directory
   Scenario: linked directory does not exists
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_verifySourceContainsDirectory">
+      <a textrun="verifySourceContainsDirectory">
         [zonk](zonk)
       </a>
       """
@@ -41,7 +41,7 @@ Feature: verifying the source code contains a directory
   Scenario: linked element is not a directory
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_verifySourceContainsDirectory">
+      <a textrun="verifySourceContainsDirectory">
         The [README.md](README.md) is not a directory
       </a>
       """

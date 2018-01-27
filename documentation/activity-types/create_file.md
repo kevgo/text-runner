@@ -7,9 +7,9 @@
 
 #### Example
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_createFile">
+<a textrun="createFile">
 _test.txt_ with content `foo`
 </a>
 ```
@@ -17,9 +17,9 @@ _test.txt_ with content `foo`
 
 - or -
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_createFile">
+<a textrun="createFile">
 
 __test.txt__
 

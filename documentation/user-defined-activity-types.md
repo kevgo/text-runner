@@ -12,15 +12,15 @@ The "hello-world" action prints the text "hello world"
 in the test runner's console output when running.
 It will be triggered via this piece of Markdown:
 
-<a class="tr_createMarkdownFile">
+<a textrun="createMarkdownFile">
 
 ```html
-<a class="tr_helloWorld"></a>
+<a textrun="helloWorld"></a>
 ```
 </a>
 
 When TextRunner encounters this block type,
-it runs the method that the file <a class="tr_createFile">__text-run/hello-world.js__ exports.
+it runs the method that the file <a textrun="createFile">__text-run/hello-world.js__ exports.
 All user-defined actions are in the "text-run" folder,
 with the file name matching the action name
 but in [kebab-case](http://wiki.c2.com/?KebabCase).
@@ -34,13 +34,13 @@ module.exports = function({ formatter }) {
 
 </a>
 
-<a class="tr_runTextrun">
+<a textrun="runTextrun">
 The formatter displays test progress on the console as the test runs:
 </a>
 
 The handler function for our action is given an object containing various information and utility functions:
 
-<a class="tr_verifyHandlerArgs">
+<a textrun="verifyHandlerArgs">
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action,
   as an array of [AST nodes](#ast-nodes)
@@ -124,10 +124,10 @@ or use a helper that is provided to you via the `searcher` field of the first pa
 To demonstrate how this works,
 here is a simple implementation of an action that runs a code block in the terminal.
 
-<a class="tr_createMarkdownFile">
+<a textrun="createMarkdownFile">
 
 ```
-<a class="tr_consoleCommand">
+<a textrun="consoleCommand">
 `​``
 echo "Hello world"
 `​``
@@ -137,7 +137,7 @@ echo "Hello world"
 
 Here is the block definition implemented using the `searcher` helper,
 as always implemented in a file called
-<a class="tr_createFile">
+<a textrun="createFile">
 __text-run/console-command.js__:
 
 ```javascript
@@ -155,9 +155,9 @@ module.exports = function({formatter, searcher, nodes}) {
 ```
 </a>
 
-<a class="tr_runTextrun"></a>
+<a textrun="runTextrun"></a>
 
-<a class="tr_verifySearcherMethods">
+<a textrun="verifySearcherMethods">
 The `searcher` tool provides the following properties and methods:
 * __tagContent:__ returns the textual content of the DOM node
   that satisfies the given query.

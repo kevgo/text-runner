@@ -41,7 +41,7 @@ class ActivityListBuilder {
     for (let node: AstNode of tree) {
       const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
       if (isActiveBlockStartTag) {
-        if (insideActiveBlock) throw new Error('Found a nested <a class="tr_*"> block')
+        if (insideActiveBlock) throw new Error('Found a nested <a textrun="*"> block')
         insideActiveBlock = true
         if (node.line != null) {
           startLine = node.line
@@ -153,14 +153,14 @@ class ActivityListBuilder {
   // _determineIsActiveBlockStartTag returns whether the given AstNode is the start of an active block
   _determineIsActiveBlockStartTag (node: AstNode): boolean {
     if (node.type !== 'htmltag') return false
-    const regex = new RegExp(`<a class="${this.configuration.get('classPrefix')}([^"]+)">`)
+    const regex = new RegExp(` ${this.configuration.get('classPrefix')}="([^"]+)"`)
     if (!node.content) return false
     return regex.test(node.content)
   }
 
   // _getBlockType returns the activity type started by the given AstNode that starts an active block
   _getBlockType (node: AstNode): string {
-    const regex = new RegExp(`<a class="${this.configuration.get('classPrefix')}([^"]+)">`)
+    const regex = new RegExp(` ${this.configuration.get('classPrefix')}="([^"]+)"`)
     if (node.content == null) throw new Error("this shouldn't happen")
     const matches = node.content.match(regex)
     if (!matches) throw new Error("this shouldn't happen")

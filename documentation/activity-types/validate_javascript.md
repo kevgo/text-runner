@@ -4,9 +4,9 @@ This action just checks that JavaScript code contains no syntax errors.
 It is for code blocks that aren't runnable in the context of the tutorial.
 To run Javascript code use the [runJavascript](run_javascript.md) action.
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```html
-<a class="tr_runJavascript">
+<a textrun="runJavascript">
 `​``
 console.log('This is getting executed by TextRunner!')
 `​``

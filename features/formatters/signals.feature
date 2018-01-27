@@ -23,7 +23,7 @@ Feature: Formatter signals
   Scenario Outline: checking output of various formatters
     Given my source code contains the file "error.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
       ```
       throw new Error('BOOM!')
       ```

@@ -12,7 +12,7 @@ const defaultValues = {
   files: '**/*.md',
   format: 'detailed',
   useSystemTempDirectory: false,
-  classPrefix: 'tr_',
+  classPrefix: 'textrun',
   activityTypes: {
     runConsoleCommand: {
       globals: {}
@@ -63,7 +63,7 @@ files: '**/*.md'
 format: detailed
 
 # prefix that makes anchor tags active regions
-classPrefix: 'tr_'
+classPrefix: 'textrun'
 
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,

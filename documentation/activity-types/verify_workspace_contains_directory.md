@@ -6,13 +6,13 @@ The `verifyWorkspaceContainsDirectory` action checks links to folders in your so
 #### Example
 
 Assuming your test workspace contains a
-<a class="tr_createDirectory">`foo`</a>
+<a textrun="createDirectory">`foo`</a>
 directory,
 you can use this code to verify that it exists:
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_verifyWorkspaceContainsDirectory">
+<a textrun="verifyWorkspaceContainsDirectory">
   Now your workspace has a `foo` directory.
 </a>
 ```

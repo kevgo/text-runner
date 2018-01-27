@@ -10,7 +10,7 @@ Feature: unknown activity types
   Scenario: using an unknown activity type
     Given my source code contains the file "1.md" with content:
       """
-      <a class="tr_unknownAction">
+      <a textrun="unknownAction">
       </a>
       """
     When trying to run text-run
@@ -21,26 +21,26 @@ Feature: unknown activity types
     And it prints the error message:
       """
       Available activity types:
-      * tr_cd
-      * tr_checkimage
-      * tr_checklink
-      * tr_createdirectory
-      * tr_createfile
-      * tr_minimumnodeversion
-      * tr_runconsolecommand
-      * tr_runjavascript
-      * tr_startconsolecommand
-      * tr_stopconsolecommand
-      * tr_validatejavascript
-      * tr_verifynpmglobalcommand
-      * tr_verifynpminstall
-      * tr_verifyrunconsolecommandoutput
-      * tr_verifysourcecontainsdirectory
-      * tr_verifysourcefilecontent
-      * tr_verifystartconsolecommandoutput
-      * tr_verifyworkspacecontainsdirectory
-      * tr_verifyworkspacefilecontent
-      * tr_waitforoutput
+      * cd
+      * checkimage
+      * checklink
+      * createdirectory
+      * createfile
+      * minimumnodeversion
+      * runconsolecommand
+      * runjavascript
+      * startconsolecommand
+      * stopconsolecommand
+      * validatejavascript
+      * verifynpmglobalcommand
+      * verifynpminstall
+      * verifyrunconsolecommandoutput
+      * verifysourcecontainsdirectory
+      * verifysourcefilecontent
+      * verifystartconsolecommandoutput
+      * verifyworkspacecontainsdirectory
+      * verifyworkspacefilecontent
+      * waitforoutput
 
       To create a new "unknownAction" activity type,
       run "text-run add unknownAction

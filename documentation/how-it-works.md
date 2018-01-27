@@ -1,7 +1,7 @@
 # How TextRunner works
 
 To make a part of any Markdown file actionable by TextRunner,
-wrap it in an `<a>` tag with class `tr_[action name]`.
+wrap it in an HTML tag with the attribute `textrun="[action name]"`.
 As an example,
 let's say a tutorial tells its reader to create a file `config.yml`
 with the content `foo: bar` on their machine.
@@ -19,12 +19,12 @@ foo: bar
 To make this part of the documentation executable,
 surround it with an `<a>` tag that specifies that we want to create a file:
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 
 ```markdown
 ## Creating a configuration file
 
-<a class="tr_createFile">
+<a textrun="createFile">
 Please create a file with the name _config.yml_ and the content:
 `​``
 foo: bar
@@ -35,7 +35,7 @@ foo: bar
 </a>
 
 TextRunner calls parts of text documents that are marked up like this _active blocks_.
-The class `tr_createFile` tells TextRunner to run the `createFile` activity type here,
+The attribute `textrun="createFile"` tells TextRunner to run the `createFile` activity type here,
 which creates a file in TextRunner's working directory.
 The built-in implementation of the `createFile` activity type
 takes the name of the file to create
@@ -44,7 +44,7 @@ and the content to write into the file from a code block.
 Text outside of `<a>` tags is ignored by TextRunner.
 
 If you run `text-run` on the command line to test this document,
-TextRunner creates a file <a class="tr_verifyWorkspaceFileContent">_config.yml_
+TextRunner creates a file <a textrun="verifyWorkspaceFileContent">_config.yml_
 with the content `foo: bar`</a> in the `tmp` subfolder of your current directory.
 
 <hr>

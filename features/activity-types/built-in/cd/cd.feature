@@ -5,7 +5,7 @@ Feature: changing the working directory
   I want to be able to let my users run commands from different directories
   So that they can use my tool appropriately.
 
-  - to change the working directory, wrap a hyperlink into an A tag with class `tr_cd`
+  - to change the working directory, wrap a hyperlink into a tag with class textrun=`cd`
   - the link must point to a local directory
   - the directory pointed to must exist
 
@@ -14,7 +14,7 @@ Feature: changing the working directory
     Given my workspace contains a directory "foo"
     And my source code contains the file "directory_changer.md" with content:
       """
-      <a class="tr_cd">
+      <a textrun="cd">
         `foo`
       </a>
       """
@@ -30,7 +30,7 @@ Feature: changing the working directory
     Given my workspace contains a directory "foo"
     And my source code contains the file "directory_changer.md" with content:
       """
-      <a class="tr_cd">
+      <a textrun="cd">
         `foo`
       </a>
       """
@@ -45,7 +45,7 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given my source code contains the file "directory_changer.md" with content:
       """
-      <a class="tr_cd">
+      <a textrun="cd">
         [foo](foo)
       </a>
       """
@@ -61,7 +61,7 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given my source code contains the file "directory_changer.md" with content:
       """
-      <a class="tr_cd">
+      <a textrun="cd">
         `foo`
       </a>
       """

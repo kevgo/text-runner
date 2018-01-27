@@ -11,7 +11,7 @@ Feature: configuring the class prefix
   Background:
     Given my source code contains the file "tr.md" with content:
       """
-      <a class="tr_runJavascript">
+      <a textrun="runJavascript">
         ```
         console.log('running block with default class prefix')
         ```
@@ -19,7 +19,7 @@ Feature: configuring the class prefix
       """
     And my source code contains the file "custom-prefix.md" with content:
       """
-      <a class="custom_runJavascript">
+      <a custom="runJavascript">
         ```
         console.log('running block with custom class prefix')
         ```
@@ -42,7 +42,7 @@ Feature: configuring the class prefix
   Scenario: configuration option given
     Given the configuration file:
       """
-      classPrefix: 'custom_'
+      classPrefix: 'custom'
       """
     When running text-run
     Then it prints:

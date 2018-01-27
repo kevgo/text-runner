@@ -8,9 +8,9 @@
 - if you just want to verify that your Javascript has no syntax errors,
   use the [validateJavascript](validate_javascript.md) action instead
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 `​``
 $ echo "hello world"
 `​``
@@ -21,7 +21,7 @@ $ echo "hello world"
 You can enter text into the running command by providing an HTML table
 with the content to enter.
 Assuming we have a little application called
-<a class="tr_createFile">
+<a textrun="createFile">
 __greeter.js__
 ```js
 const readline = require('readline');
@@ -36,9 +36,9 @@ rl.question('Your name?', (name) => {
 ```
 </a>
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 `​``
 $ node greeter.js
 `​``
@@ -61,9 +61,9 @@ and the last one text to enter once the output from the first column has appeare
 Middle columns are ignored.
 `<th>` elements are considered descriptions and are also ignored.
 
-<a class="tr_runMarkdownInTextrun">
+<a textrun="runMarkdownInTextrun">
 ```markdown
-<a class="tr_runConsoleCommand">
+<a textrun="runConsoleCommand">
 `​``
 $ node greeter.js
 `​``
@@ -102,7 +102,7 @@ If you want to call a command provided by your code base,
 you have to tell TextRunner the path to it.
 As an example, if your code provides an executable called `tool`,
 and it is stored as `public/tool` in your source code,
-<a class="tr_verifySourceFileContent">
+<a textrun="verifySourceFileContent">
 your __text-run.yml__ needs to contains this section:
 
 ```

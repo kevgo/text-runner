@@ -36,6 +36,8 @@ class ActivityTypeManager {
       for (let actionName of Object.keys(this.handlerFunctions).sort()) {
         errorText += `* ${prefix}${actionName}\n`
       }
+      errorText += `\nTo create a new "${activityType}" activity type,\n`
+      errorText += `run "text-run add ${activityType}\n"`
       this.formatter.startFile(filePath)
       throw new UnprintedUserError(errorText)
     }

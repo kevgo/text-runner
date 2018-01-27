@@ -20,7 +20,7 @@ It will be triggered via this piece of Markdown:
 </a>
 
 When TextRunner encounters this block type,
-it runs the method that the file <a class="tr_createFile">__text-run/hello-world-action.js__ exports.
+it runs the method that the file <a class="tr_createFile">__text-run/hello-world.js__ exports.
 All user-defined actions are in the "text-run" folder,
 with the file name matching the action name
 but in [kebab-case](http://wiki.c2.com/?KebabCase).
@@ -51,15 +51,15 @@ The handler function for our action is given an object containing various inform
 </a>
 
 TextRunner supports all forms of synchronous and asynchronous operations:
-* just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world-action.js)) -
+* just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world.js)) -
   don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
   all TextRunner blocks are tested strictly sequentially anyways
-* return a Promise ([example](examples/custom-action-promise/text-run/hello-world-action.js))
+* return a Promise ([example](examples/custom-action-promise/text-run/hello-world.js))
 * implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-  ([example](examples/custom-action-async/text-run/hello-world-action.js))
+  ([example](examples/custom-action-async/text-run/hello-world.js))
 * take a callback function as a second parameter to your handler function and call it when you are done
-  ([example](examples/custom-action-callback/text-run/hello-world-action.js))
+  ([example](examples/custom-action-callback/text-run/hello-world.js))
 
 You can write the handler in any language that transpiles to JavaScript,
 for example [BabelJS](https://babeljs.io),

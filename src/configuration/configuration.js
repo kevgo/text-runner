@@ -12,7 +12,7 @@ const defaultValues = {
   files: '**/*.md',
   format: 'detailed',
   useSystemTempDirectory: false,
-  classPrefix: 'tr_',
+  classPrefix: 'textrun',
   activityTypes: {
     runConsoleCommand: {
       globals: {}

@@ -1,3 +1,3 @@
 module.exports = {
-  'default': '--compiler js:babel-core/register -r features --fail-fast'
+  'default': '--require-module flow-remove-types/register -r features --fail-fast'
 }

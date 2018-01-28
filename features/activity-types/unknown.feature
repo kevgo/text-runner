@@ -22,26 +22,26 @@ Feature: unknown activity types
       """
       Available activity types:
       * cd
-      * checkimage
-      * checklink
-      * createdirectory
-      * createfile
-      * minimumnodeversion
-      * runconsolecommand
-      * runjavascript
-      * startconsolecommand
-      * stopconsolecommand
-      * validatejavascript
-      * verifynpmglobalcommand
-      * verifynpminstall
-      * verifyrunconsolecommandoutput
-      * verifysourcecontainsdirectory
-      * verifysourcefilecontent
-      * verifystartconsolecommandoutput
-      * verifyworkspacecontainsdirectory
-      * verifyworkspacefilecontent
-      * waitforoutput
+      * check-image
+      * check-link
+      * create-directory
+      * create-file
+      * minimum-node-version
+      * run-console-command
+      * run-javascript
+      * start-console-command
+      * stop-console-command
+      * validate-javascript
+      * verify-npm-global-command
+      * verify-npm-install
+      * verify-run-console-command-output
+      * verify-source-contains-directory
+      * verify-source-file-content
+      * verify-start-console-command-output
+      * verify-workspace-contains-directory
+      * verify-workspace-file-content
+      * wait-for-output
 
-      To create a new "unknownAction" activity type,
-      run "text-run add unknownAction
+      To create a new "unknown-action" activity type,
+      run "text-run add unknown-action"
       """

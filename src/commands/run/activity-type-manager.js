@@ -37,7 +37,7 @@ class ActivityTypeManager {
         errorText += `* ${actionName}\n`
       }
       errorText += `\nTo create a new "${activityType}" activity type,\n`
-      errorText += `run "text-run add ${activityType}\n"`
+      errorText += `run "text-run add ${activityType}"\n`
       this.formatter.startFile(filePath)
       throw new UnprintedUserError(errorText)
     }

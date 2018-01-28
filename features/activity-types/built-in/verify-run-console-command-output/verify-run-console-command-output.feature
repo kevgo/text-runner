@@ -12,7 +12,7 @@ Feature: verifying the output of the last console command
   Scenario: verifying the output of a console command
     Given my source code contains the file "verify-output.md" with content:
       """
-      <a textrun="runConsoleCommand">
+      <a textrun="run-console-command">
       ```
       echo one
       echo two
@@ -20,7 +20,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
 
-      <a textrun="verifyRunConsoleCommandOutput">
+      <a textrun="verify-run-console-command-output">
       ```
       one
       three

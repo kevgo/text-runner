@@ -26,12 +26,12 @@ Given(/^a runnable file "([^"]*)"$/, function (filePath) {
     }
   }
   fs.writeFileSync(path.join(this.rootDir, filePath),
-                   '<a textrun="verifyWorkspaceContainsDirectory">`.`</a>')
+                   '<a textrun="verify-workspace-contains-directory">`.`</a>')
 })
 
 Given(/^I am in a directory that contains documentation without a configuration file$/, function () {
   fs.writeFileSync(path.join(this.rootDir, '1.md'), `
-    <a textrun="verifySourceContainsDirectory">
+    <a textrun="verify-source-contains-directory">
         [.](.)
       </a>
       `)
@@ -52,7 +52,7 @@ Given(/^I am in a directory that contains the "([^"]*)" example(?: without a con
 
 Given(/^my documentation is starting the "([^"]*)" example$/, function (example) {
   fs.writeFileSync(path.join(this.rootDir, '0.md'), `
-    <a textrun="startConsoleCommand">
+    <a textrun="start-console-command">
       \`\`\`
       node ${path.join(__dirname, '..', '..', 'documentation', 'examples', 'long-running', 'server.js')}
       \`\`\`
@@ -81,12 +81,18 @@ Given(/^my source code contains the file "([^"]*)" with content:$/, function (fi
 
 Given(/^my workspace contains testable documentation$/, function () {
   fs.writeFileSync(path.join(this.rootDir, '1.md'), `
-<a textrun="runConsoleCommand">
+<a textrun="run-console-command">
 \`\`\`
 echo "Hello world"
 \`\`\`
 </a>
     `)
+})
+
+Given('my workspace contains the HelloWorld activity', function () {
+  mkdirp.sync(path.join(this.rootDir, 'text-run'))
+  fs.writeFileSync(path.join(this.rootDir, 'text-run', 'hello-world.js'), `
+    module.exports = function ({formatter}) { formatter.output('Hello World!') }`)
 })
 
 Given(/^my workspace contains the file "([^"]*)" with content:$/, function (fileName, content) {

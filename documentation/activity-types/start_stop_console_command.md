@@ -10,9 +10,9 @@ and stop the long-running process using a `stopCommand` block.
 
 
 #### Example
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="startConsoleCommand">
+<a textrun="start-console-command">
 
 `​``
 $ echo Enter your name:
@@ -22,7 +22,7 @@ $ read foo
 
 Wait until it is fully booted up ...
 
-<a textrun="waitForOutput">
+<a textrun="wait-for-output">
 `​``
 Enter your name
 `​``
@@ -30,7 +30,7 @@ Enter your name
 
 Interact with the server here ...
 
-<a textrun="stopConsoleCommand">
+<a textrun="stop-console-command">
 Stop the current process by hitting Ctrl-C
 </a>
 ```

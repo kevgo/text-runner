@@ -23,20 +23,20 @@ Feature: long-running processes
       """
     And my source code contains the file "1.md" with content:
       """
-      <a textrun="startConsoleCommand">
+      <a textrun="start-console-command">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="waitForOutput">
+      <a textrun="wait-for-output">
       ```
       running
       ```
       </a>
 
-      <a textrun="stopConsoleCommand">
+      <a textrun="stop-console-command">
       Stop the current process by hitting Ctrl-C
       </a>
       """
@@ -58,7 +58,7 @@ Feature: long-running processes
   Scenario: no running process
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="stopConsoleCommand">
+      <a textrun="stop-console-command">
       There is no process running here
       </a>
       """

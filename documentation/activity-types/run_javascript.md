@@ -2,9 +2,9 @@
 
 To run JavaScript code:
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```html
-<a textrun="runJavascript">
+<a textrun="run-javascript">
 `​``
 console.log('This is getting executed by TextRunner!')
 `​``
@@ -20,9 +20,9 @@ To make it wait for asynchronous code,
 add the placeholder `<CALLBACK>` where your code would call the callback when its done.
 Example:
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```html
-<a textrun="runJavascript">
+<a textrun="run-javascript">
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
@@ -33,9 +33,9 @@ fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 
 
 Alternatively you can also use the placeholder `// ...`
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```html
-<a textrun="runJavascript">
+<a textrun="run-javascript">
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', function(err) {

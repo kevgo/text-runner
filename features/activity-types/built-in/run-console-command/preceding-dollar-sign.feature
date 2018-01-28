@@ -11,7 +11,7 @@ Feature: marking console commands with preceding dollar signs
   Scenario: running console commands with dollar signs
     Given my source code contains the file "running-with-dollar-sign.md" with content:
       """
-      <a textrun="runConsoleCommand">
+      <a textrun="run-console-command">
       ```
       $ echo "hello"
       $ echo "world"

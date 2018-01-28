@@ -10,7 +10,7 @@ Feature: running multiple console commands
   Scenario: running multiple console commands
     Given my source code contains the file "running-multiple-commands.md" with content:
       """
-      <a textrun="runConsoleCommand">
+      <a textrun="run-console-command">
       ```
       echo "hello"
       echo "world"

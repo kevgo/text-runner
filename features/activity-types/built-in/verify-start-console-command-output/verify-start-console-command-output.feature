@@ -21,28 +21,28 @@ Feature: verifying the output of the last console command
       """
     And my source code contains the file "verify-output.md" with content:
       """
-      <a textrun="startConsoleCommand">
+      <a textrun="start-console-command">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="waitForOutput">
+      <a textrun="wait-for-output">
       ```
       one
       three
       ```
       </a>
 
-      <a textrun="verifyStartConsoleCommandOutput">
+      <a textrun="verify-start-console-command-output">
       ```
       one
       three
       ```
       </a>
 
-      <a textrun="stopConsoleCommand">
+      <a textrun="stop-console-command">
       Stop the current process by hitting Ctrl-C
       </a>
       """

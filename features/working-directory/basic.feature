@@ -13,7 +13,7 @@ Feature: separate working directory
   Background:
     Given my workspace contains the file "1.md" with content:
       """
-      <a textrun="runConsoleCommand">
+      <a textrun="run-console-command">
       ```
       pwd
       ```

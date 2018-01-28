@@ -4,7 +4,7 @@ You can configure TextRunner via a configuration file.
 To create one, open a terminal,
 go to the folder where you want to configure TextRunner, and run:
 
-<a textrun="runConsoleCommand">
+<a textrun="run-console-command">
 
 ```
 $ text-run setup
@@ -12,7 +12,7 @@ $ text-run setup
 </a>
 
 This creates a configuration file called
-<a textrun="verifyWorkspaceFileContent">
+<a textrun="verify-workspace-file-content">
 __text-run.yml__ that looks like this:
 
 ```yml

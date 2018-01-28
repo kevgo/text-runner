@@ -6,9 +6,9 @@
 
 #### Example
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="createDirectory">
+<a textrun="create-directory">
 `directory_name`
 </a>
 ```

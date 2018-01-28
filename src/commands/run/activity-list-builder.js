@@ -20,6 +20,7 @@ class ActivityListBuilder {
   filePath: string
   formatter: Formatter
   linkTargets: LinkTargetList
+  regex: RegExp
 
   constructor (value: {activityTypesManager: ActivityTypeManager, configuration: Configuration, filePath: string, formatter: Formatter, linkTargets: LinkTargetList}) {
     this.activityTypesManager = value.activityTypesManager
@@ -27,6 +28,7 @@ class ActivityListBuilder {
     this.filePath = value.filePath
     this.formatter = value.formatter
     this.linkTargets = value.linkTargets
+    this.regex = new RegExp(` ${this.configuration.get('classPrefix')}="([^"]+)"`)
   }
 
   build (tree: AstNodeList): ActivityList {
@@ -153,16 +155,14 @@ class ActivityListBuilder {
   // _determineIsActiveBlockStartTag returns whether the given AstNode is the start of an active block
   _determineIsActiveBlockStartTag (node: AstNode): boolean {
     if (node.type !== 'htmltag') return false
-    const regex = new RegExp(` ${this.configuration.get('classPrefix')}="([^"]+)"`)
     if (!node.content) return false
-    return regex.test(node.content)
+    return this.regex.test(node.content)
   }
 
   // _getBlockType returns the activity type started by the given AstNode that starts an active block
   _getBlockType (node: AstNode): string {
-    const regex = new RegExp(` ${this.configuration.get('classPrefix')}="([^"]+)"`)
     if (node.content == null) throw new Error("this shouldn't happen")
-    const matches = node.content.match(regex)
+    const matches = node.content.match(this.regex)
     if (!matches) throw new Error("this shouldn't happen")
     return matches[1]
   }

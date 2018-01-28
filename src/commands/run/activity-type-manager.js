@@ -4,7 +4,7 @@ import type {HandlerFunction} from './handler-function.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 
-const camelcase = require('camelcase')
+const kebabcase = require('just-kebab-case')
 const {red} = require('chalk')
 const glob = require('glob')
 const interpret = require('interpret')
@@ -29,7 +29,7 @@ class ActivityTypeManager {
 
   // Provides the action for the block with the given name
   handlerFunctionFor (activityType: string, filePath: string): HandlerFunction {
-    activityType = camelcase(activityType)
+    activityType = kebabcase(activityType)
     const result = this.handlerFunctions[activityType]
     if (!result) {
       var errorText = `unknown activity type: ${red(activityType)}\nAvailable activity types:\n`
@@ -60,16 +60,16 @@ class ActivityTypeManager {
 
   loadBuiltinActions () {
     for (let filename of this.builtinActionFilenames()) {
-      const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.handlerFunctions[camelcase(actionName)] = require(filename)
+      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
+      this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }
 
   loadCustomActions () {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
-      const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.handlerFunctions[camelcase(actionName)] = require(filename)
+      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
+      this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }
 }

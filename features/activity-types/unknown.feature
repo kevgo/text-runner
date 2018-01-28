@@ -10,7 +10,7 @@ Feature: unknown activity types
   Scenario: using an unknown activity type
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="unknownAction">
+      <a textrun="unknown-action">
       </a>
       """
     When trying to run text-run

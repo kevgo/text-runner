@@ -8,7 +8,7 @@ that is listed in `package.json`.
 
 #### Example
 
-<a textrun="createFile">
+<a textrun="create-file">
 Assuming our __package.json__ file looks like this:
 
 ```json
@@ -20,9 +20,9 @@ Assuming our __package.json__ file looks like this:
 
 then the action below verifies that the instructions use the correct NPM package name:
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="verifyNpmInstall">
+<a textrun="verify-npm-install">
 `​``
 $ npm i -g my_enormous_package
 `​``

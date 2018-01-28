@@ -10,13 +10,13 @@ Feature: running a single MarkDown file
   Background:
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="verifyWorkspaceContainsDirectory">
+      <a textrun="verify-workspace-contains-directory">
       `.`
       </a>
       """
     And my source code contains the file "2.md" with content:
       """
-      <a textrun="verifyWorkspaceContainsDirectory">
+      <a textrun="verify-workspace-contains-directory">
       `.`
       </a>
       """

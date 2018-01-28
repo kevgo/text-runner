@@ -21,7 +21,7 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a textrun="verifyNpmInstall">
+      <a textrun="verify-npm-install">
       ```
       $ npm i -g my_enormous_package
       ```
@@ -37,7 +37,7 @@ Feature: verifying NPM installation instructions
   Scenario: correct package name with single-fenced code block
     Given my source code contains the file "1.md" with content:
       """
-      installation: <a textrun="verifyNpmInstall">`npm i -g my_enormous_package`</a>
+      installation: <a textrun="verify-npm-install">`npm i -g my_enormous_package`</a>
       """
     When running text-run
     Then it signals:
@@ -51,7 +51,7 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a textrun="verifyNpmInstall">
+      <a textrun="verify-npm-install">
       ```
       npm i -g zonk
       ```
@@ -70,7 +70,7 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a textrun="verifyNpmInstall">
+      <a textrun="verify-npm-install">
       </a>
       """
     When trying to run text-run
@@ -87,7 +87,7 @@ Feature: verifying NPM installation instructions
       """
       To install, run:
 
-      <a textrun="verifyNpmInstall">
+      <a textrun="verify-npm-install">
       ```
       npm i
       ```

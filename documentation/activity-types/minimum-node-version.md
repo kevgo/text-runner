@@ -7,7 +7,7 @@ matches what CI servers test against.
 #### Example
 
 Assuming you have a file
-<a textrun="createFile">
+<a textrun="create-file">
 __.travis.yml__ with content:
 
 ```
@@ -19,9 +19,9 @@ node_js:
 
 then you can verify that documentation like:
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-Runs on Node <a textrun="minimumNodeVersion">4</a> or above.
+Runs on Node <a textrun="minimum-node-version">4</a> or above.
 </a>
 ```
 </a>

@@ -7,7 +7,7 @@ This action verifies those command names in documenation.
 
 #### Example
 
-<a textrun="createFile">
+<a textrun="create-file">
 Assuming our __package.json__ file looks like this:
 
 ```json
@@ -22,11 +22,11 @@ Assuming our __package.json__ file looks like this:
 then the action below verifies that the instructions describe
 the correct global command name exported by this NPM module.
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
 To run this app, call:
 
-<a textrun="verifyNpmGlobalCommand">
+<a textrun="verify-npm-global-command">
 `​``
 $ foo
 `​``

@@ -29,7 +29,8 @@ class ActivityTypeManager {
 
   // Provides the action for the block with the given name
   handlerFunctionFor (activityType: string, filePath: string): HandlerFunction {
-    const result = this.handlerFunctions[activityType.toLowerCase()]
+    activityType = camelcase(activityType)
+    const result = this.handlerFunctions[activityType]
     if (!result) {
       var errorText = `unknown activity type: ${red(activityType)}\nAvailable activity types:\n`
       for (let actionName of Object.keys(this.handlerFunctions).sort()) {
@@ -60,7 +61,7 @@ class ActivityTypeManager {
   loadBuiltinActions () {
     for (let filename of this.builtinActionFilenames()) {
       const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.handlerFunctions[actionName.toLowerCase()] = require(filename)
+      this.handlerFunctions[camelcase(actionName)] = require(filename)
     }
   }
 
@@ -68,7 +69,7 @@ class ActivityTypeManager {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
       const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.handlerFunctions[actionName.toLowerCase()] = require(filename)
+      this.handlerFunctions[camelcase(actionName)] = require(filename)
     }
   }
 }

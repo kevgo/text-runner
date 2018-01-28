@@ -89,6 +89,12 @@ echo "Hello world"
     `)
 })
 
+Given('my workspace contains the HelloWorld activity', function () {
+  mkdirp.sync(path.join(this.rootDir, 'text-run'))
+  fs.writeFileSync(path.join(this.rootDir, 'text-run', 'hello-world.js'), `
+    module.exports = function ({formatter}) { formatter.output('Hello World!') }`)
+})
+
 Given(/^my workspace contains the file "([^"]*)" with content:$/, function (fileName, content) {
   mkdirp.sync(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
   fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), content)

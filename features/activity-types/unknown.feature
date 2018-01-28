@@ -15,9 +15,9 @@ Feature: unknown activity types
       """
     When trying to run text-run
     Then the test fails with:
-      | ERROR MESSAGE | unknown activity type: unknownAction\nAvailable activity types: |
-      | FILENAME      | 1.md                                                            |
-      | EXIT CODE     | 1                                                               |
+      | ERROR MESSAGE | unknown activity type: unknown-action\nAvailable activity types: |
+      | FILENAME      | 1.md                                                             |
+      | EXIT CODE     | 1                                                                |
     And it prints the error message:
       """
       Available activity types:

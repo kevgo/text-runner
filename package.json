@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "array-unique": "0.3.2",
-    "camelcase": "4.1.0",
     "chalk": "2.3.0",
     "cli-cursor": "2.1.0",
     "dashify": "1.0.0",
@@ -21,6 +20,7 @@
     "js-yaml": "3.10.0",
     "jsdiff-console": "2.2.1",
     "jsonfile": "4.0.0",
+    "just-kebab-case": "1.0.0",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "observable-process": "4.0.0",

@@ -4,7 +4,7 @@ Feature: creating files with content
   I want to be able to create files with content
   So that my test suite has files to work with.
 
-  - to create a file, wrap the code in a tag with class textrun="createFile"
+  - to create a file, wrap the code in a tag with class textrun="create-file"
   - the file name is provided as emphasized or bold text
   - content is provided as a triple-fenced code block
 
@@ -12,7 +12,7 @@ Feature: creating files with content
   Scenario: providing the filename as emphasized text and the content single-quoted
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createFile">
+      <a textrun="create-file">
       creating a file with name _one.txt_ and content `Hello world!`
       </a>
       """
@@ -30,7 +30,7 @@ Feature: creating files with content
   Scenario: providing the filename as bold text and the content triple-quoted
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createFile">
+      <a textrun="create-file">
       creating a file with name __one.txt__ and content:
 
       ```
@@ -52,7 +52,7 @@ Feature: creating files with content
   Scenario: no file path given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createFile">
+      <a textrun="create-file">
       ```
       Hello world!
       ```
@@ -70,7 +70,7 @@ Feature: creating files with content
   Scenario: no content block given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createFile">
+      <a textrun="create-file">
       __one.txt__
       </a>
       """
@@ -86,7 +86,7 @@ Feature: creating files with content
   Scenario: two file paths given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createFile">
+      <a textrun="create-file">
       __one.txt__
       __two.txt__
 
@@ -107,7 +107,7 @@ Feature: creating files with content
   Scenario: two content blocks given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createFile">
+      <a textrun="create-file">
       __one.txt__
 
       ```

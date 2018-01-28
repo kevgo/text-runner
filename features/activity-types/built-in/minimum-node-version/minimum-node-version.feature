@@ -5,7 +5,7 @@ Feature: minimum NodeJS version
   So that my documentation gets updated when I change which Node versions I support.
 
   - to check the required Node version, wrap the minimum required Node version
-    in a tag with class textrun="minimumNodeVersion"
+    in a tag with class textrun="minimum-node-version"
   - the action checks the Travis configuration file
 
 
@@ -22,7 +22,7 @@ Feature: minimum NodeJS version
   Scenario: matching minimum Node version
     Given my source code contains the file "README.md" with content:
       """
-      Requires Node version <a textrun="minimumNodeVersion">4</a> or above
+      Requires Node version <a textrun="minimum-node-version">4</a> or above
       """
     When running text-run
     Then it signals:
@@ -34,7 +34,7 @@ Feature: minimum NodeJS version
   Scenario: documented minimum Node version is too low
     Given my source code contains the file "README.md" with content:
       """
-      Requires Node version <a textrun="minimumNodeVersion">3</a> or above
+      Requires Node version <a textrun="minimum-node-version">3</a> or above
       """
     When trying to run text-run
     Then the test fails with:
@@ -47,7 +47,7 @@ Feature: minimum NodeJS version
   Scenario: documented minimum Node version is too high
     Given my source code contains the file "README.md" with content:
       """
-      Requires Node version <a textrun="minimumNodeVersion">5</a> or above
+      Requires Node version <a textrun="minimum-node-version">5</a> or above
       """
     When trying to run text-run
     Then the test fails with:

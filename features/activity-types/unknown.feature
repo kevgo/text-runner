@@ -10,38 +10,38 @@ Feature: unknown activity types
   Scenario: using an unknown activity type
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="unknownAction">
+      <a textrun="unknown-action">
       </a>
       """
     When trying to run text-run
     Then the test fails with:
-      | ERROR MESSAGE | unknown activity type: unknownAction\nAvailable activity types: |
-      | FILENAME      | 1.md                                                            |
-      | EXIT CODE     | 1                                                               |
+      | ERROR MESSAGE | unknown activity type: unknown-action\nAvailable activity types: |
+      | FILENAME      | 1.md                                                             |
+      | EXIT CODE     | 1                                                                |
     And it prints the error message:
       """
       Available activity types:
       * cd
-      * checkimage
-      * checklink
-      * createdirectory
-      * createfile
-      * minimumnodeversion
-      * runconsolecommand
-      * runjavascript
-      * startconsolecommand
-      * stopconsolecommand
-      * validatejavascript
-      * verifynpmglobalcommand
-      * verifynpminstall
-      * verifyrunconsolecommandoutput
-      * verifysourcecontainsdirectory
-      * verifysourcefilecontent
-      * verifystartconsolecommandoutput
-      * verifyworkspacecontainsdirectory
-      * verifyworkspacefilecontent
-      * waitforoutput
+      * check-image
+      * check-link
+      * create-directory
+      * create-file
+      * minimum-node-version
+      * run-console-command
+      * run-javascript
+      * start-console-command
+      * stop-console-command
+      * validate-javascript
+      * verify-npm-global-command
+      * verify-npm-install
+      * verify-run-console-command-output
+      * verify-source-contains-directory
+      * verify-source-file-content
+      * verify-start-console-command-output
+      * verify-workspace-contains-directory
+      * verify-workspace-file-content
+      * wait-for-output
 
-      To create a new "unknownAction" activity type,
-      run "text-run add unknownAction
+      To create a new "unknown-action" activity type,
+      run "text-run add unknown-action"
       """

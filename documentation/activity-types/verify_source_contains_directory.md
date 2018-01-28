@@ -5,13 +5,13 @@ in your source code.
 
 #### Example
 
-<a textrun="createDirectory">
+<a textrun="create-directory">
 Say your source code contains a folder `foo`.
 </a>
 You can reference this folder in your documentation via this active block:
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="verifySourceContainsDirectory">
+<a textrun="verify-source-contains-directory">
 Check out the [foo](foo) directory for a working example.
 </a>
 ```

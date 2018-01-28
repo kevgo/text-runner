@@ -11,7 +11,7 @@ Feature: validating Javascript
   Scenario: correct Javascript
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="validateJavascript">
+      <a textrun="validate-javascript">
       ```
       'working javascript'
       ```
@@ -27,7 +27,7 @@ Feature: validating Javascript
   Scenario: invalid Javascript
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="validateJavascript">
+      <a textrun="validate-javascript">
       ```
       'missing quotes at end
       ```

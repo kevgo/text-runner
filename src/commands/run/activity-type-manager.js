@@ -4,7 +4,7 @@ import type {HandlerFunction} from './handler-function.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 
-const camelcase = require('camelcase')
+const kebabcase = require('just-kebab-case')
 const {red} = require('chalk')
 const glob = require('glob')
 const interpret = require('interpret')
@@ -29,14 +29,15 @@ class ActivityTypeManager {
 
   // Provides the action for the block with the given name
   handlerFunctionFor (activityType: string, filePath: string): HandlerFunction {
-    const result = this.handlerFunctions[activityType.toLowerCase()]
+    activityType = kebabcase(activityType)
+    const result = this.handlerFunctions[activityType]
     if (!result) {
       var errorText = `unknown activity type: ${red(activityType)}\nAvailable activity types:\n`
       for (let actionName of Object.keys(this.handlerFunctions).sort()) {
         errorText += `* ${actionName}\n`
       }
       errorText += `\nTo create a new "${activityType}" activity type,\n`
-      errorText += `run "text-run add ${activityType}\n"`
+      errorText += `run "text-run add ${activityType}"\n`
       this.formatter.startFile(filePath)
       throw new UnprintedUserError(errorText)
     }
@@ -59,16 +60,16 @@ class ActivityTypeManager {
 
   loadBuiltinActions () {
     for (let filename of this.builtinActionFilenames()) {
-      const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.handlerFunctions[actionName.toLowerCase()] = require(filename)
+      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
+      this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }
 
   loadCustomActions () {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
-      const actionName = camelcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
-      this.handlerFunctions[actionName.toLowerCase()] = require(filename)
+      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
+      this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }
 }

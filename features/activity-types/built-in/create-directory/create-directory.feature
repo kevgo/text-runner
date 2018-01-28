@@ -5,13 +5,13 @@ Feature: creating directories
   So that my test suite has the folder structure to work.
 
   - to create a directory, write the directory name as a code tag
-    and wrap it in a tag with class textrun="createDirectory"
+    and wrap it in a tag with class textrun="create-directory"
 
 
   Scenario: creating a directory
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createDirectory">
+      <a textrun="create-directory">
       `directory_name`
       </a>
       """
@@ -26,7 +26,7 @@ Feature: creating directories
   Scenario: no name given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createDirectory">
+      <a textrun="create-directory">
       </a>
       """
     When trying to run text-run
@@ -41,7 +41,7 @@ Feature: creating directories
   Scenario: empty name given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createDirectory">
+      <a textrun="create-directory">
       ` `
       </a>
       """
@@ -57,7 +57,7 @@ Feature: creating directories
   Scenario: two names given
     Given my source code contains the file "creator.md" with content:
       """
-      <a textrun="createDirectory">
+      <a textrun="create-directory">
       `one` and `two`
       </a>
       """

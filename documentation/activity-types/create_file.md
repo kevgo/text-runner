@@ -7,9 +7,9 @@
 
 #### Example
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="createFile">
+<a textrun="create-file">
 _test.txt_ with content `foo`
 </a>
 ```
@@ -17,9 +17,9 @@ _test.txt_ with content `foo`
 
 - or -
 
-<a textrun="runMarkdownInTextrun">
+<a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="createFile">
+<a textrun="create-file">
 
 __test.txt__
 

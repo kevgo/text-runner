@@ -26,10 +26,10 @@ It also ensures that links and images in your documentation point to existing ta
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
-There are no limitations on the structure of the Markdown files TextRunner uses.
-It can read and understand (with your help)
-complex data in tables, bullet point lists, embedded images,
-as well as simple plain text in any human language.
+There are no limitations on the text that TextRunner executes.
+It can read and understand (if you tell it how)
+any form of plain text in any human language as well as
+complex data in tables, bullet point lists, and embedded images.
 
 
 #### Use cases

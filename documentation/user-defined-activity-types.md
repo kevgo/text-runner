@@ -41,6 +41,7 @@ The formatter displays test progress on the console as the test runs:
 The handler function for our action is given an object containing various information and utility functions:
 
 <a textrun="verify-handler-args">
+
 * __filename__, __startLine__, __endLine:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action,
   as an array of [AST nodes](#ast-nodes)
@@ -76,7 +77,13 @@ in addition to any other NPM modules that your handler method uses.
 Document content is provided as [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) nodes.
 Each node is an object that has these attributes:
 * __line:__ the line in the file at which this AST node begins
-* __type:__ the type of the AST node
+* __type:__ the type of the AST node. Examples are
+            `text` for normal text,
+            `code` for inline code blocks,
+            `fence` for multi-line code blocks,
+            `emphasizedtext` for italic text,
+            `strongtext` for bold text,
+            and `link_open` for links.
 * __content:__ textual content of the AST node
 * __src:__ the content of the `src` attribute if this AST node is a link or image
 * __level:__ if this AST node was nested in another one, the nesting level

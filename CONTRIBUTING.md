@@ -135,3 +135,9 @@ The CLI wrapper catches all errors and prints them accordingly:
 User errors in an end-user friendly way,
 and developer errors with a stack trace.
 Actions can throw a normal `Error` instance, it will be treated as an `UnprintedUserError`.
+
+
+## Deployment
+
+- create a new release on Github
+- the CI server makes the deploy to NPM

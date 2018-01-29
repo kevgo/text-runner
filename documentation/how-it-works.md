@@ -2,6 +2,8 @@
 
 To make a part of any Markdown file actionable by TextRunner,
 wrap it in an HTML tag with the attribute `textrun="[action name]"`.
+If you need an HTML tag that doesn't change the layout of your text,
+that's the `<a>` tag.
 As an example,
 let's say a tutorial tells its reader to create a file `config.yml`
 with the content `foo: bar` on their machine.

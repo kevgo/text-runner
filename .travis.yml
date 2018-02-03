@@ -8,7 +8,9 @@ before_script: node_modules/.bin/greenkeeper-lockfile-update
 script:
   - "bin/lint"
   - "bin/coverage"
-after_script: node_modules/.bin/greenkeeper-lockfile-upload
+after_script:
+  - "node_modules/.bin/greenkeeper-lockfile-upload"
+  - "bin/build"
 
 after_success: "nyc report --reporter=text-lcov | coveralls"
 

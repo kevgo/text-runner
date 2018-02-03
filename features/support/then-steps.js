@@ -37,7 +37,7 @@ Then('it prints the error message:', function (expectedText) {
   this.verifyErrormessage(expectedText)
 })
 
-Then(/^it runs (\d+) test$/, function (count) {
+Then('it runs {int} test', function (count) {
   this.verifyTestsRun(count)
 })
 

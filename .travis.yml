@@ -23,6 +23,7 @@ deploy:
     node: 8
     tags: true
     repo: Originate/text-runner
+  skip_cleanup: true
 
 notifications:
   email: false

@@ -21,6 +21,19 @@ Feature: checking embedded HTML images
       | MESSAGE  | image images/watermelon.gif |
 
 
+  Scenario: existing local HTML image with absolute path
+    Given my source code contains the file "1.md" with content:
+      """
+      <img src="/images/watermelon.gif">
+      """
+    And my workspace contains an image "images/watermelon.gif"
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md                        |
+      | LINE     | 1                           |
+      | MESSAGE  | image images/watermelon.gif |
+
+
   Scenario: existing local HTML image on page in subfolder
     Given my source code contains the file "documentation/1.md" with content:
       """

@@ -1,15 +1,14 @@
-Feature: checking embedded images
+Feature: checking embedded HTML images
 
-  As a documentation writer
-  I want to know whether embedded images work
-  So that I can add images to the text of my documentation.
+  When writing documentation
+  I want to be able to use HTML image tags
+  So that I can use extended HTML attributes to size and align images.
 
-  - embedded images must point to an existing image file
   - local images must exist
   - missing remote images cause a warning
 
 
-  Scenario: existing local HTML image
+  Scenario: existing local HTML image with relative path
     Given my source code contains the file "1.md" with content:
       """
       <img src="images/watermelon.gif">
@@ -35,36 +34,10 @@ Feature: checking embedded images
       | MESSAGE  | image documentation/watermelon.gif |
 
 
-  Scenario: existing local Markdown image
-    Given my source code contains the file "1.md" with content:
-      """
-      ![Alt text](watermelon.gif "watermelon")
-      """
-    And my workspace contains an image "watermelon.gif"
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                 |
-      | LINE     | 1                    |
-      | MESSAGE  | image watermelon.gif |
-
-
   Scenario: non-existing local HTML image
     Given my source code contains the file "1.md" with content:
       """
       <img src="zonk.gif">
-      """
-    When trying to run text-run
-    Then the test fails with:
-      | FILENAME      | 1.md                          |
-      | LINE          | 1                             |
-      | ERROR MESSAGE | image zonk.gif does not exist |
-      | EXIT CODE     | 1                             |
-
-
-  Scenario: non-existing local Markdown image
-    Given my source code contains the file "1.md" with content:
-      """
-      ![Alt text](zonk.gif "watermelon")
       """
     When trying to run text-run
     Then the test fails with:
@@ -88,19 +61,6 @@ Feature: checking embedded images
 
 
   @online
-  Scenario: existing remote Markdown image
-    Given my source code contains the file "1.md" with content:
-      """
-      ![Alt text](http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png "google logo")
-      """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                                                                   |
-      | LINE     | 1                                                                                      |
-      | MESSAGE  | image http:/www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
-
-
-  @online
   Scenario: non-existing remote HTML image
     Given my source code contains the file "1.md" with content:
       """
@@ -113,35 +73,10 @@ Feature: checking embedded images
       | WARNING  | image http://google.com/onetuhoenzonk.png does not exist |
 
 
-  @online
-  Scenario: non-existing remote Markdown image
-    Given my source code contains the file "1.md" with content:
-      """
-      ![Alt text](http://google.com/onetuhoenzonk.png "zonk")
-      """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                                     |
-      | LINE     | 1                                                        |
-      | WARNING  | image http://google.com/onetuhoenzonk.png does not exist |
-
-
   Scenario: HTML image tag without source
     Given my source code contains the file "1.md" with content:
       """
       <img src="">
-      """
-    When trying to run text-run
-    Then the test fails with:
-      | FILENAME      | 1.md                     |
-      | LINE          | 1                        |
-      | ERROR MESSAGE | image tag without source |
-      | EXIT CODE     | 1                        |
-
-  Scenario: Markdown image tag without source
-    Given my source code contains the file "1.md" with content:
-      """
-      ![Alt text]()
       """
     When trying to run text-run
     Then the test fails with:

@@ -1,13 +1,13 @@
 // @flow
 
-import type {Activity} from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/activity.js'
 
-const {bold, cyan} = require('chalk')
+const { bold, cyan } = require('chalk')
 const fs = require('fs')
 const path = require('path')
 
 // Verifies that a local directory linked in MarkDown exists
-module.exports = function (activity: Activity) {
+module.exports = function(activity: Activity) {
   const directory = activity.searcher.tagContent('link_open')
   activity.formatter.setTitle(`directory ${bold(cyan(directory))} exists in the source code`)
   var stats

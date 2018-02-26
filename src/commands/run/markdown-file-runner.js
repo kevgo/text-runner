@@ -1,13 +1,13 @@
 // @flow
 
-import type {ActivityList} from './activity-list.js'
+import type { ActivityList } from './activity-list.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
-import type {LinkTargetList} from './link-target-list.js'
+import type { LinkTargetList } from './link-target-list.js'
 
 const ActivityTypeManager = require('./activity-type-manager.js')
 const ActivityListBuilder = require('./activity-list-builder')
-const {cyan} = require('chalk')
+const { cyan } = require('chalk')
 const fs = require('fs-extra')
 const LinkTargetListBuilder = require('./link-target-list-builder.js')
 const MarkdownParser = require('../../parsers/markdown/markdown-parser')
@@ -26,7 +26,13 @@ class MarkdownFileRunner {
   linkTargetBuilder: LinkTargetListBuilder
   runData: ActivityList
 
-  constructor (value: {filePath: string, formatter: Formatter, activityTypesManager: ActivityTypeManager, configuration: Configuration, linkTargets: LinkTargetList}) {
+  constructor(value: {
+    filePath: string,
+    formatter: Formatter,
+    activityTypesManager: ActivityTypeManager,
+    configuration: Configuration,
+    linkTargets: LinkTargetList
+  }) {
     this.filePath = value.filePath
     this.formatter = value.formatter
     this.configuration = value.configuration
@@ -36,20 +42,23 @@ class MarkdownFileRunner {
       filePath: this.filePath,
       formatter: this.formatter,
       configuration: this.configuration,
-      linkTargets: value.linkTargets})
-    this.linkTargetBuilder = new LinkTargetListBuilder({linkTargets: value.linkTargets})
+      linkTargets: value.linkTargets
+    })
+    this.linkTargetBuilder = new LinkTargetListBuilder({ linkTargets: value.linkTargets })
   }
 
   // Prepares this runner
-  async prepare () {
+  async prepare() {
     // Need to start the file here
     // so that the formatter has the filename
     // in case there are errors preparing.
     this.formatter.startFile(this.filePath)
-    var markdownText = await fs.readFile(this.filePath, {encoding: 'utf8'})
+    var markdownText = await fs.readFile(this.filePath, { encoding: 'utf8' })
     markdownText = markdownText.trim()
     if (markdownText.length === 0) {
-      throw new UnprintedUserError(`found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`)
+      throw new UnprintedUserError(
+        `found empty file ${cyan(path.relative(process.cwd(), this.filePath))}`
+      )
     }
     const astNodeList = this.parser.parse(markdownText)
     const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)
@@ -58,7 +67,7 @@ class MarkdownFileRunner {
 
   // Runs this runner
   // (after it has been prepared)
-  async run (): Promise<number> {
+  async run(): Promise<number> {
     this.formatter.startFile(this.filePath)
     for (let activity of this.runData) {
       await this._runActivity(activity)
@@ -66,8 +75,11 @@ class MarkdownFileRunner {
     return this.runData.length
   }
 
-  async _runActivity (activity) {
-    this.formatter.setLines(activity.startLine, activity.endLine != null ? activity.endLine : activity.startLine)
+  async _runActivity(activity) {
+    this.formatter.setLines(
+      activity.startLine,
+      activity.endLine != null ? activity.endLine : activity.startLine
+    )
     this.formatter.startActivity(activity.activityTypeName)
     try {
       if (activity.runner.length === 1) {
@@ -90,7 +102,7 @@ class MarkdownFileRunner {
   }
 }
 
-function isUserError (err: Error): boolean {
+function isUserError(err: Error): boolean {
   return err.name === 'Error'
 }
 

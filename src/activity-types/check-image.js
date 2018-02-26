@@ -18,8 +18,7 @@ module.exports = async function (activity: Activity) {
   }
   var imagePath = node.src
   if (!node.src.startsWith("/")) {
-    // $FlowFixMe: Flow bug, we proved 5 lines above that node.src has a value
-    imagePath = path.join(path.dirname(activity.filename), node.src);
+    imagePath = path.join(path.dirname(activity.filename), imagePath);
   }
   activity.formatter.setTitle(`image ${cyan(imagePath)}`);
   if (isRemoteImage(node)) {

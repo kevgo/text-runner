@@ -48,7 +48,7 @@
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
     "eslint-plugin-flowtype": "2.46.0",
-    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-import": "2.9.0",
     "eslint-plugin-standard": "3.0.1",
     "flow-bin": "0.66.0",
     "flow-remove-types": "1.2.3",

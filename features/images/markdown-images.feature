@@ -22,16 +22,16 @@ Feature: checking embedded Markdown images
 
 
   Scenario: existing local Markdown image with absolute path
-    Given my source code contains the file "1.md" with content:
+    Given my source code contains the file "documentation/1.md" with content:
       """
-      ![Alt text](/watermelon.gif "watermelon")
+      ![Alt text](/documentation/images/watermelon.gif "watermelon")
       """
-    And my workspace contains an image "watermelon.gif"
+    And my workspace contains an image "documentation/images/watermelon.gif"
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                 |
-      | LINE     | 1                    |
-      | MESSAGE  | image watermelon.gif |
+      | FILENAME | documentation/1.md                         |
+      | LINE     | 1                                          |
+      | MESSAGE  | image /documentation/images/watermelon.gif |
 
 
   Scenario: non-existing local Markdown image

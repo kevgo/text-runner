@@ -92,7 +92,7 @@
     "url": "git+https://github.com/Originate/text-runner.git"
   },
   "scripts": {
-    "prepublish": "bin/build",
+    "prepublishOnly": "bin/build",
     "test": "bin/spec"
   },
   "standard": {

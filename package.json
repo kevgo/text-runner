@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "array-unique": "0.3.2",
-    "chalk": "2.3.1",
+    "chalk": "2.3.2",
     "cli-cursor": "2.1.0",
     "dashify": "1.0.0",
     "debug": "3.1.0",

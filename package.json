@@ -47,6 +47,7 @@
     "delay": "2.0.0",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
+    "escope": "3.6.0",
     "eslint-plugin-flowtype": "2.46.0",
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-standard": "3.0.1",

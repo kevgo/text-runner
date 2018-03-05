@@ -37,6 +37,24 @@ not the error messages from "standard".
 Use the `bin/lint-js` script instead.
 
 
+## Editor setup
+
+Set up your editor with the following configuration:
+- linters: `flow`, then `standard`
+- fixers: `prettier`, then `standard`
+
+Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
+```vim
+let g:ale_linters = {
+\   'javascript': ['flow', 'standard']
+\}
+let g:ale_fixers = {
+\   'javascript': ['prettier', 'standard']
+\}
+let g:ale_javascript_prettier_use_local_config = 1
+```
+
+
 ## Terminology
 
 TextRunner runs _active documentation_, i.e. documentation that can be executed.

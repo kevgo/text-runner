@@ -1,12 +1,12 @@
 // @flow
 
-const {cyan, green, magenta} = require('chalk')
+const { cyan, green, magenta } = require('chalk')
 const Formatter = require('./formatter')
 
 class DotFormatter extends Formatter {
   // A minimalistic formatter, prints dots for each check
 
-  error (errorMessage: string) {
+  error(errorMessage: string) {
     super.error(errorMessage)
     var output = ''
     if (this.filePath) output += this.filePath
@@ -17,21 +17,21 @@ class DotFormatter extends Formatter {
     console.log(output)
   }
 
-  output (text: string | Buffer): boolean {
+  output(text: string | Buffer): boolean {
     return false
   }
 
-  success (activityText?: string) {
+  success(activityText?: string) {
     super.success(activityText)
     process.stdout.write(green('.'))
   }
 
-  warning (warningMessage: string) {
+  warning(warningMessage: string) {
     super.warning(warningMessage)
     process.stdout.write(magenta('.'))
   }
 
-  skip (activity: string) {
+  skip(activity: string) {
     super.skip(activity)
     process.stdout.write(cyan('.'))
   }

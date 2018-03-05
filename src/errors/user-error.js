@@ -5,5 +5,4 @@
 //
 // User errors are supposed to be displayed in a user-friendly way,
 // programmer errors with a stack trace.
-module.exports = class UserError extends Error {
-}
+module.exports = class UserError extends Error {}

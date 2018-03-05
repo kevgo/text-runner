@@ -8,6 +8,7 @@ Feature: separate working directory
   - by default the tests run in the current directory
   - to run the tests in an external temporary directory,
     provide the "use-temp-directory: true" option in text-run.yml
+  - the temp folder is removed after the tests have run
 
 
   Background:
@@ -24,6 +25,7 @@ Feature: separate working directory
   Scenario: default configuration
     When running text-run
     Then it runs in the "tmp" directory
+    And the "tmp" directory is now deleted
 
 
   Scenario: running in a local temp directory
@@ -33,6 +35,7 @@ Feature: separate working directory
       """
     When running text-run
     Then it runs in the "tmp" directory
+    And the "tmp" directory is now deleted
 
 
   Scenario: running in a global temp directory

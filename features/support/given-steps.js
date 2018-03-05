@@ -6,7 +6,7 @@ const mkdirp = require('mkdirp')
 const {cp} = require('shelljs')
 const path = require('path')
 
-Given(/^a broken file "([^"]*)"$/, function (filePath) {
+Given('a broken file {string}', function (filePath) {
   const subdir = path.dirname(filePath)
   if (subdir !== '.') {
     mkdirp.sync(path.join(this.rootDir, subdir))
@@ -17,7 +17,7 @@ Given(/^a broken file "([^"]*)"$/, function (filePath) {
       `)
 })
 
-Given(/^a runnable file "([^"]*)"$/, function (filePath) {
+Given('a runnable file {string}', function (filePath) {
   const subdir = path.dirname(filePath)
   if (subdir !== '.') {
     const subdirPath = path.join(this.rootDir, subdir)
@@ -29,7 +29,7 @@ Given(/^a runnable file "([^"]*)"$/, function (filePath) {
                    '<a textrun="verify-workspace-contains-directory">`.`</a>')
 })
 
-Given(/^I am in a directory that contains documentation without a configuration file$/, function () {
+Given('I am in a directory that contains documentation without a configuration file', function () {
   fs.writeFileSync(path.join(this.rootDir, '1.md'), `
     <a textrun="verify-source-contains-directory">
         [.](.)
@@ -37,11 +37,11 @@ Given(/^I am in a directory that contains documentation without a configuration 
       `)
 })
 
-Given(/^I am in a directory that contains the "([^"]*)" example$/, function (exampleName) {
+Given('I am in a directory that contains the {string} example', function (exampleName) {
   fs.copySync(path.join('documentation', 'examples', exampleName), this.rootDir)
 })
 
-Given(/^I am in a directory that contains the "([^"]*)" example with the configuration file:$/, function (exampleName, configFileContent) {
+Given('I am in a directory that contains the {string} example with the configuration file:', function (exampleName, configFileContent) {
   fs.copySync(path.join('documentation', 'examples', exampleName), this.rootDir)
   fs.writeFileSync(path.join(this.rootDir, 'text-run.yml'), configFileContent)
 })
@@ -50,7 +50,7 @@ Given(/^I am in a directory that contains the "([^"]*)" example(?: without a con
   fs.copySync(path.join('documentation', 'examples', exampleName), this.rootDir)
 })
 
-Given(/^my documentation is starting the "([^"]*)" example$/, function (example) {
+Given('my documentation is starting the {string} example', function (example) {
   fs.writeFileSync(path.join(this.rootDir, '0.md'), `
     <a textrun="start-console-command">
       \`\`\`
@@ -60,26 +60,26 @@ Given(/^my documentation is starting the "([^"]*)" example$/, function (example)
       `)
 })
 
-Given(/^my source code contains the directory "([^"]*)"$/, function (dirName) {
+Given('my source code contains the directory {string}', function (dirName) {
   mkdirp.sync(path.join(this.rootDir, dirName))
 })
 
-Given(/^my source code contains the file "([^"]*)"$/, function (fileName) {
+Given('my source code contains the file {string}', function (fileName) {
   mkdirp.sync(path.join(this.rootDir, path.dirname(fileName)))
   fs.writeFileSync(path.join(this.rootDir, fileName), 'content')
 })
 
-Given(/^my workspace contains the file "([^"]*)"$/, function (fileName) {
+Given('my workspace contains the file {string}', function (fileName) {
   mkdirp.sync(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
   fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), 'content')
 })
 
-Given(/^my source code contains the file "([^"]*)" with content:$/, function (fileName, content) {
+Given('my source code contains the file {string} with content:', function (fileName, content) {
   mkdirp.sync(path.join(this.rootDir, path.dirname(fileName)))
   fs.writeFileSync(path.join(this.rootDir, fileName), content)
 })
 
-Given(/^my workspace contains testable documentation$/, function () {
+Given('my workspace contains testable documentation', function () {
   fs.writeFileSync(path.join(this.rootDir, '1.md'), `
 <a textrun="run-console-command">
 \`\`\`
@@ -95,29 +95,29 @@ Given('my workspace contains the HelloWorld activity', function () {
     module.exports = function ({formatter}) { formatter.output('Hello World!') }`)
 })
 
-Given(/^my workspace contains the file "([^"]*)" with content:$/, function (fileName, content) {
+Given('my workspace contains the file {string} with content:', function (fileName, content) {
   mkdirp.sync(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
   fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), content)
 })
 
-Given(/^my text-run configuration contains:$/, function (text) {
+Given('my text-run configuration contains:', function (text) {
   fs.appendFileSync(path.join(this.rootDir, 'text-run.yml'), `\n${text}`)
 })
 
-Given(/^my workspace contains a directory "([^"]*)"$/, function (dir) {
+Given('my workspace contains a directory {string}', function (dir) {
   mkdirp.sync(path.join(this.rootDir, 'tmp', dir))
 })
 
-Given(/^my workspace contains an empty file "([^"]*)"$/, function (fileName) {
+Given('my workspace contains an empty file {string}', function (fileName) {
   fs.writeFileSync(path.join(this.rootDir, fileName), '')
 })
 
-Given(/^my workspace contains an image "([^"]*)"$/, function (imageName) {
+Given('my workspace contains an image {string}', function (imageName) {
   mkdirp.sync(path.join(this.rootDir, path.dirname(imageName)))
   cp(path.join(__dirname, path.basename(imageName)),
        path.join(this.rootDir, imageName))
 })
 
-Given(/^the configuration file:$/, function (content) {
+Given('the configuration file:', function (content) {
   fs.writeFileSync(path.join(this.rootDir, 'text-run.yml'), content)
 })

@@ -4,16 +4,6 @@ set -e
 # LINTS THE JAVASCRIPT FILES
 
 
-# run the 'standard-js' linter
-errors=$(standard -v '{src/**/*.js,features/**/*.js}' | wc -l | tr -d ' ')
-if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors:
-  standard -v '{src/**/*.js,features/**/*.js}'
-  exit 1
-fi
-
-# run the Flow type checker
+standard -v
 node_modules/.bin/flow
-
-# lint package.json
 node_modules/.bin/dependency-lint

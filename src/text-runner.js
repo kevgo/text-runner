@@ -14,7 +14,7 @@ const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
-module.exports = async function(value: {
+module.exports = async function (value: {
   command: string,
   file?: string,
   offline?: boolean,
@@ -35,7 +35,7 @@ class TextRunner {
   formatter: Formatter
   activityTypesManager: ActivityTypeManager
 
-  constructor(constructorArgs: CliArgTypes, configPath) {
+  constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()
@@ -44,7 +44,7 @@ class TextRunner {
   }
 
   // Tests the documentation according to the given command and arguments
-  async execute(command: string, file?: string) {
+  async execute (command: string, file?: string) {
     try {
       if (!hasCommand(command)) throw new UnprintedUserError(`unknown command: ${red(command)}`)
       const CommandClass = require(commandPath(command))

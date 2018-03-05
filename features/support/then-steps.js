@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-unused-expressions: 0 */
 
 const { Then } = require('cucumber')
 const { expect } = require('chai')
@@ -14,10 +15,7 @@ Then('it creates a directory {string}', function (directoryPath) {
   fs.statSync(path.join(this.rootDir, directoryPath))
 })
 
-Then('it creates the file {string} with content:', function (
-  filename,
-  expectedContent
-) {
+Then('it creates the file {string} with content:', function (filename, expectedContent) {
   const actualContent = fs.readFileSync(path.join(this.rootDir, filename), {
     encoding: 'utf8'
   })
@@ -28,14 +26,8 @@ Then("it doesn't print:", function (expectedText) {
   this.verifyPrintsNot(expectedText)
 })
 
-Then('it generates the file {string} with content:', function (
-  filename,
-  expectedContent
-) {
-  const actualContent = fs.readFileSync(
-    path.join(this.rootDir, filename),
-    'utf8'
-  )
+Then('it generates the file {string} with content:', function (filename, expectedContent) {
+  const actualContent = fs.readFileSync(path.join(this.rootDir, filename), 'utf8')
   jsdiffConsole(actualContent, expectedContent)
 })
 
@@ -96,18 +88,16 @@ Then('the {string} directory is now deleted', function (directoryPath) {
   } catch (e) {}
 })
 
-Then(
-  /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/,
-  function (fileName, expectedContent) {
-    expect(
-      fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()
-    ).to.equal(expectedContent.trim())
-  }
-)
-
-Then('the test workspace now contains a directory {string}', function (
-  fileName
+Then(/^the test directory (?:now |still )contains a file "([^"]*)" with content:$/, function (
+  fileName,
+  expectedContent
 ) {
+  expect(fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()).to.equal(
+    expectedContent.trim()
+  )
+})
+
+Then('the test workspace now contains a directory {string}', function (fileName) {
   const stat = fs.statSync(path.join(this.rootDir, 'tmp', fileName))
   expect(stat.isDirectory()).to.be.true
 })

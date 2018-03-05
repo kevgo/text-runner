@@ -3,35 +3,7 @@ set -e
 
 # LINTS THE JAVASCRIPT FILES
 
-# NOTE: cannot dry this code up because the details are different in each block
 
-
-# run the 'standard-js' linter on the source code
-errors=$(standard -v 'src/**/!(*-test).js' | grep -v space-before-function-paren | wc -l | tr -d ' ')
-if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors in the source code:
-  standard -v 'src/**/!(*-test).js' | grep -v space-before-function-paren
-  exit 1
-fi
-
-# run the 'standard-js' linter on the unit tests
-errors=$(standard -v 'src/**/*-test.js' | grep -v no-unused-expressions | grep -v space-before-function-paren | wc -l | tr -d ' ')
-if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors in the source code:
-  standard -v 'src/**/*-test.js' | grep -v no-unused-expressions | grep -v space-before-function-paren
-  exit 1
-fi
-
-# run the 'standard-js' linter on the feature code
-errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | grep -v space-before-function-paren | wc -l | tr -d ' ')
-if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors in the feature code:
-  standard -v 'features/**/*.js' | grep -v no-unused-expressions | grep -v space-before-function-paren
-  exit 1
-fi
-
-# run the Flow type checker
+standard -v
 node_modules/.bin/flow
-
-# lint package.json
 node_modules/.bin/dependency-lint

@@ -19,7 +19,7 @@ class ActivityTypeManager {
   configuration: Configuration
   handlerFunctions: { [string]: HandlerFunction }
 
-  constructor(formatter: Formatter, configuration: Configuration) {
+  constructor (formatter: Formatter, configuration: Configuration) {
     this.formatter = formatter
     this.configuration = configuration
     this.handlerFunctions = {}
@@ -28,7 +28,7 @@ class ActivityTypeManager {
   }
 
   // Provides the action for the block with the given name
-  handlerFunctionFor(activityType: string, filePath: string): HandlerFunction {
+  handlerFunctionFor (activityType: string, filePath: string): HandlerFunction {
     activityType = kebabcase(activityType)
     const result = this.handlerFunctions[activityType]
     if (!result) {
@@ -45,15 +45,15 @@ class ActivityTypeManager {
   }
 
   // Returns all possible filename extensions that handler functions can have
-  javascriptExtensions(): string[] {
+  javascriptExtensions (): string[] {
     return Object.keys(interpret.jsVariants).map(it => it.slice(1))
   }
 
-  builtinActionFilenames(): string[] {
+  builtinActionFilenames (): string[] {
     return glob.sync(path.join(__dirname, '..', '..', 'activity-types', '*.js'))
   }
 
-  customActionFilenames(): string[] {
+  customActionFilenames (): string[] {
     const pattern = path.join(
       process.cwd(),
       'text-run',
@@ -62,7 +62,7 @@ class ActivityTypeManager {
     return glob.sync(pattern)
   }
 
-  loadBuiltinActions() {
+  loadBuiltinActions () {
     for (let filename of this.builtinActionFilenames()) {
       const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(
         /Action/,
@@ -72,7 +72,7 @@ class ActivityTypeManager {
     }
   }
 
-  loadCustomActions() {
+  loadCustomActions () {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
       const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(

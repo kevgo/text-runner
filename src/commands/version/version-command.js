@@ -6,7 +6,7 @@ import type { Command } from '../command.js'
 const { version } = require('../../../package.json')
 
 class VersionCommand implements Command {
-  async run() {
+  async run () {
     console.log(`TextRunner v${version}`)
   }
 }

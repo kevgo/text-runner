@@ -1,3 +1,5 @@
+/* eslint no-irregular-whitespace: 0 */
+
 const callArgs = require('../dist/helpers/call-args')
 const fs = require('fs')
 const ObservableProcess = require('observable-process')

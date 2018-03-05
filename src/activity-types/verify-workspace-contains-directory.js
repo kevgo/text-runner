@@ -7,7 +7,7 @@ const fs = require('fs')
 const path = require('path')
 
 // Verifies that the test workspace contains the given directory
-module.exports = function(activity: Activity) {
+module.exports = function (activity: Activity) {
   const directory = activity.searcher.tagContent('code')
   const fullPath = path.join(activity.configuration.testDir, directory)
   activity.formatter.setTitle(

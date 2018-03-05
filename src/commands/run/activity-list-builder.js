@@ -22,7 +22,7 @@ class ActivityListBuilder {
   linkTargets: LinkTargetList
   regex: RegExp
 
-  constructor(value: {
+  constructor (value: {
     activityTypesManager: ActivityTypeManager,
     configuration: Configuration,
     filePath: string,
@@ -37,7 +37,7 @@ class ActivityListBuilder {
     this.regex = new RegExp(` ${this.configuration.get('classPrefix')}="([^"]+)"`)
   }
 
-  build(tree: AstNodeList): ActivityList {
+  build (tree: AstNodeList): ActivityList {
     var insideActiveBlock = false // whether we are currently processing nodes of an active block
     var nodesForCurrentRunner: AstNodeList = []
 
@@ -141,7 +141,7 @@ class ActivityListBuilder {
     return result
   }
 
-  _htmlLinkTarget(node: AstNode): ?string {
+  _htmlLinkTarget (node: AstNode): ?string {
     if (node.content == null) return null
     const matches = node.content.match(/<a[^>]*href="([^"]*)".*?>/)
     if (node.type === 'htmltag' && matches) {
@@ -149,24 +149,24 @@ class ActivityListBuilder {
     }
   }
 
-  _convertIntoActivityTypeName(blockType): string {
+  _convertIntoActivityTypeName (blockType): string {
     return toSpaceCase(blockType || '')
   }
 
   // Returns whether the given node is a normal hyperlink
-  _isMarkdownLink(node) {
+  _isMarkdownLink (node) {
     return node.type === 'link_open'
   }
 
   // _determineIsActiveBlockStartTag returns whether the given AstNode is the start of an active block
-  _determineIsActiveBlockStartTag(node: AstNode): boolean {
+  _determineIsActiveBlockStartTag (node: AstNode): boolean {
     if (node.type !== 'htmltag') return false
     if (!node.content) return false
     return this.regex.test(node.content)
   }
 
   // _getBlockType returns the activity type started by the given AstNode that starts an active block
-  _getBlockType(node: AstNode): string {
+  _getBlockType (node: AstNode): string {
     if (node.content == null) throw new Error("this shouldn't happen")
     const matches = node.content.match(this.regex)
     if (!matches) throw new Error("this shouldn't happen")
@@ -174,7 +174,7 @@ class ActivityListBuilder {
   }
 
   // Returns whether the given node is the end of an active block
-  _isActiveBlockEndTag(node) {
+  _isActiveBlockEndTag (node) {
     return node.type === 'htmltag' && node.content === '</a>'
   }
 }

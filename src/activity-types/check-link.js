@@ -11,7 +11,7 @@ const path = require('path')
 const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = async function(act: Activity) {
+module.exports = async function (act: Activity) {
   const target = act.nodes[0].content
   if (target == null || target === '') {
     throw new Error('link without target')
@@ -32,7 +32,7 @@ module.exports = async function(act: Activity) {
   }
 }
 
-async function checkExternalLink(target: string, format: Formatter, config: Configuration) {
+async function checkExternalLink (target: string, format: Formatter, config: Configuration) {
   if (config.get('offline')) {
     format.skip(`skipping link to external website ${target}`)
     return
@@ -54,7 +54,7 @@ async function checkExternalLink(target: string, format: Formatter, config: Conf
   }
 }
 
-async function checkLinkToFilesystem(filename: string, target: string, format: Formatter) {
+async function checkLinkToFilesystem (filename: string, target: string, format: Formatter) {
   target = path.join(path.dirname(filename), target)
   try {
     const stats = await fs.stat(target)
@@ -68,7 +68,7 @@ async function checkLinkToFilesystem(filename: string, target: string, format: F
   }
 }
 
-async function checkLinkToAnchorInSameFile(
+async function checkLinkToAnchorInSameFile (
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
@@ -87,7 +87,7 @@ async function checkLinkToAnchorInSameFile(
   }
 }
 
-async function checkLinkToAnchorInOtherFile(
+async function checkLinkToAnchorInOtherFile (
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
@@ -114,11 +114,11 @@ async function checkLinkToAnchorInOtherFile(
   }
 }
 
-function isExternalLink(target: string): boolean {
+function isExternalLink (target: string): boolean {
   return target.startsWith('//') || target.startsWith('http://') || target.startsWith('https://')
 }
 
-function isLinkToAnchorInOtherFile(target: string): boolean {
+function isLinkToAnchorInOtherFile (target: string): boolean {
   if ((target.match(/#/g) || []).length !== 1) {
     return false
   } else if (/^https?:\/\//.test(target)) {
@@ -128,10 +128,10 @@ function isLinkToAnchorInOtherFile(target: string): boolean {
   }
 }
 
-function isLinkToAnchorInSameFile(target: string): boolean {
+function isLinkToAnchorInSameFile (target: string): boolean {
   return target.startsWith('#')
 }
 
-function isMailtoLink(target: string): boolean {
+function isMailtoLink (target: string): boolean {
   return target.startsWith('mailto:')
 }

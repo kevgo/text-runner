@@ -26,7 +26,7 @@ class Formatter {
   warningMessage: string
   warningsCount: number
 
-  constructor() {
+  constructor () {
     // Note: I have to define these attributes here,
     //       since doing so at the class level
     //       binds them to the class scope for some reason
@@ -49,31 +49,31 @@ class Formatter {
   }
 
   // Called on general errors
-  error(errorMessage: string) {
+  error (errorMessage: string) {
     this.errorMessage = errorMessage
     this.inActivity = false
   }
 
-  output(text: string | Buffer): boolean {
+  output (text: string | Buffer): boolean {
     throw new Error('Implement in subclass')
   }
 
-  setLines(startLine: number, endLine: number) {
+  setLines (startLine: number, endLine: number) {
     this.startLine = startLine
     this.endLine = endLine
   }
 
-  skip(activityText: string) {
+  skip (activityText: string) {
     if (activityText) this.activityText = activityText
     this.inActivity = false
   }
 
   // Called when we start performing an activity that was defined in a block
-  setTitle(activityText: string) {
+  setTitle (activityText: string) {
     this.activityText = activityText
   }
 
-  startActivity(activityTypeName: string) {
+  startActivity (activityTypeName: string) {
     if (this.inActivity) {
       throw new Error('already in a started block')
     }
@@ -85,7 +85,7 @@ class Formatter {
   }
 
   // called when we start processing a markdown file
-  startFile(filePath: string) {
+  startFile (filePath: string) {
     this.filePath = filePath
     if (!this.filePaths.includes(filePath)) {
       this.filePaths.push(filePath)
@@ -94,13 +94,13 @@ class Formatter {
 
   // called when the last started activity finished successful
   // optionally allows to define the final text to be displayed
-  success(activityText?: string) {
+  success (activityText?: string) {
     if (activityText) this.activityText = activityText
     this.inActivity = false
   }
 
   // called when the whole test suite passed
-  suiteSuccess() {
+  suiteSuccess () {
     if (this.stepsCount === 0) {
       this.warning('no activities found')
       return
@@ -115,7 +115,7 @@ class Formatter {
   }
 
   // Called on general warnings
-  warning(warningMessage: string) {
+  warning (warningMessage: string) {
     this.warningMessage = warningMessage
     this.warningsCount += 1
     this.inActivity = false

@@ -3,7 +3,7 @@
 import type { Activity } from '../commands/run/activity.js'
 
 // Runs the JavaScript code given in the code block
-module.exports = function(activity: Activity) {
+module.exports = function (activity: Activity) {
   const code = activity.searcher.tagContent('fence')
   activity.formatter.output(code)
   try {

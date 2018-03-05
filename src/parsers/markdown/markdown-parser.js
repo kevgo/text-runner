@@ -15,15 +15,15 @@ class MarkdownParser {
 
   markdownParser: typeof Remarkable
 
-  constructor() {
+  constructor () {
     this.markdownParser = new Remarkable('full', { html: true })
   }
 
-  parse(markdownText: string): AstNodeList {
+  parse (markdownText: string): AstNodeList {
     return this._standardizeAst(this.markdownParser.parse(markdownText, {}))
   }
 
-  _standardizeAst(
+  _standardizeAst (
     ast,
     line: number = 0,
     result: AstNodeList = [],
@@ -77,11 +77,11 @@ class MarkdownParser {
 }
 
 // Returns whether this AST node represents an HTML tag
-function isHtmlImageTag(node) {
+function isHtmlImageTag (node) {
   return node.type === 'htmltag' && /<img [^>]*src=".*?".*?>/.test(node.content)
 }
 
-function htmlImageTagSrc(node) {
+function htmlImageTagSrc (node) {
   const matches = node.content.match(/<img.*src="([^"]*)".*>/)
   return matches[1]
 }

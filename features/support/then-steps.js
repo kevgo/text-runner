@@ -80,6 +80,13 @@ Then(/^the current working directory is now "([^"]*)"$/, function (expectedCwd) 
   expect(path.basename(this.cwdAfterRun)).to.equal(expectedCwd)
 })
 
+Then('the {string} directory is now deleted', function(directoryPath) {
+  try {
+    fs.statSync(path.join(this.rootDir, directoryPath))
+    throw new Error(`file '${directoryPath}' still exists`)
+  } catch (e) {}
+})
+
 Then(/^the test directory (?:now |still )contains a file "([^"]*)" with content:$/, function (fileName, expectedContent) {
   expect(fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()).to.equal(expectedContent.trim())
 })

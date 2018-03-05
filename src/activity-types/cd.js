@@ -1,13 +1,13 @@
 // @flow
 
-import type {Activity} from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/activity.js'
 
-const {bold, cyan} = require('chalk')
+const { bold, cyan } = require('chalk')
 const path = require('path')
 const debug = require('debug')('textrun:actions:cd')
 
 // Changes the current working directory to the one given in the hyperlink or code block
-module.exports = function (activity: Activity) {
+module.exports = function(activity: Activity) {
   const directory = activity.searcher.tagContent(['link_open', 'code'])
   activity.formatter.setTitle(`changing into the ${bold(cyan(directory))} directory`)
   activity.formatter.output(`cd ${directory}`)

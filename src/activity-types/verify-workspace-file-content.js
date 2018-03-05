@@ -1,13 +1,13 @@
 // @flow
 
-import type {Activity} from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/activity.js'
 
-const {bold, cyan, red} = require('chalk')
+const { bold, cyan, red } = require('chalk')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
-module.exports = function (activity: Activity) {
+module.exports = function(activity: Activity) {
   const filePath = activity.searcher.tagContent(['strongtext', 'emphasizedtext'])
   const expectedContent = activity.searcher.tagContent(['fence', 'code'])
   activity.formatter.setTitle(`verifying file ${cyan(filePath)}`)

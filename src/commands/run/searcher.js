@@ -48,8 +48,9 @@ class Searcher {
     if (options == null) options = {}
     this.query = query
     const result = this.nodes.filter(this._getMatcher())
-    if (result.length > 1)
+    if (result.length > 1) {
       throw new Error(`found more than one ${this._queryName()} tag in the active block`)
+    }
     if (result.length === 0) {
       if (options.default != null) {
         return null

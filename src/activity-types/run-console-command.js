@@ -30,8 +30,9 @@ module.exports = async function(activity: Activity) {
     .map(trimDollar)
     .map(makeGlobal(activity.configuration))
     .join(' && ')
-  if (commandsToRun === '')
+  if (commandsToRun === '') {
     throw new Error('the block that defines console commands to run is empty')
+  }
 
   activity.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
   const input = await getInput(

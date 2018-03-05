@@ -1,12 +1,12 @@
 // @flow
 
-import type {Command} from '../command.js'
+import type { Command } from '../command.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
-import type {LinkTargetList} from './link-target-list.js'
+import type { LinkTargetList } from './link-target-list.js'
 
 const ActivityTypeManager = require('./activity-type-manager.js')
-const {red} = require('chalk')
+const { red } = require('chalk')
 const fs = require('fs')
 const glob = require('glob')
 const isGlob = require('is-glob')
@@ -21,10 +21,14 @@ class RunCommand implements Command {
   configuration: Configuration
   formatter: Formatter
   activityTypesManager: ActivityTypeManager
-  linkTargets: LinkTargetList     // lists which files contain which HTML anchors
+  linkTargets: LinkTargetList // lists which files contain which HTML anchors
   runners: MarkdownFileRunner[]
 
-  constructor (value: {configuration: Configuration, formatter: Formatter, activityTypesManager: ActivityTypeManager}) {
+  constructor(value: {
+    configuration: Configuration,
+    formatter: Formatter,
+    activityTypesManager: ActivityTypeManager
+  }) {
     this.configuration = value.configuration
     this.formatter = value.formatter
     this.activityTypesManager = value.activityTypesManager
@@ -32,7 +36,7 @@ class RunCommand implements Command {
   }
 
   // Tests all files
-  async run (filename: string) {
+  async run(filename: string) {
     if (hasDirectory(filename)) {
       await this.runDirectory(filename)
     } else if (isMarkdownFile(filename)) {
@@ -46,22 +50,22 @@ class RunCommand implements Command {
     }
   }
 
-  async runAll () {
+  async runAll() {
     await this._run(this._allMarkdownFiles())
   }
 
   // Tests all files in the given directory
-  async runDirectory (dirname: string) {
+  async runDirectory(dirname: string) {
     await this._run(this._markdownFilesInDir(dirname))
   }
 
   // Tests the given file
-  async runFile (filename: string) {
+  async runFile(filename: string) {
     await this._run([filename])
   }
 
   // Tests the files described by the given glob expression
-  async runGlob (fileExpression: string) {
+  async runGlob(fileExpression: string) {
     const files = this._filesMatchingGlob(fileExpression)
     if (files != null) {
       await this._run(files)
@@ -69,7 +73,7 @@ class RunCommand implements Command {
   }
 
   // Runs the currently set up runners.
-  async _run (filenames: string[]) {
+  async _run(filenames: string[]) {
     filenames = this._removeExcludedFiles(filenames)
     debug('testing files:')
     for (let filename of filenames) {
@@ -81,7 +85,7 @@ class RunCommand implements Command {
     await this._executeRunners()
   }
 
-  _createRunners (filenames: string[]) {
+  _createRunners(filenames: string[]) {
     this.runners = []
     for (let filePath of filenames) {
       const runner = new MarkdownFileRunner({
@@ -89,13 +93,14 @@ class RunCommand implements Command {
         formatter: this.formatter,
         activityTypesManager: this.activityTypesManager,
         configuration: this.configuration,
-        linkTargets: this.linkTargets})
+        linkTargets: this.linkTargets
+      })
       this.runners.push(runner)
     }
   }
 
   // Creates the temp directory to run the tests in
-  _createWorkingDir () {
+  _createWorkingDir() {
     const setting = this.configuration.get('useSystemTempDirectory')
     if (typeof setting === 'string') {
       this.configuration.testDir = setting
@@ -110,11 +115,11 @@ class RunCommand implements Command {
     mkdirp.sync(this.configuration.testDir)
   }
 
-  _filesMatchingGlob (expression: string): string[] {
+  _filesMatchingGlob(expression: string): string[] {
     return glob.sync(expression).sort()
   }
 
-  _removeExcludedFiles (files: string[]): string[] {
+  _removeExcludedFiles(files: string[]): string[] {
     var excludedFiles = this.configuration.get('exclude')
     if (!excludedFiles) return files
     var excludedFilesArray = []
@@ -123,7 +128,7 @@ class RunCommand implements Command {
     } else {
       excludedFilesArray = [excludedFiles]
     }
-    return files.filter((file) => {
+    return files.filter(file => {
       for (let excludedFile of excludedFilesArray) {
         const regex = new RegExp(excludedFile)
         return !regex.test(file)
@@ -132,37 +137,35 @@ class RunCommand implements Command {
   }
 
   // Returns all the markdown files in this directory and its children
-  _markdownFilesInDir (dirName) {
+  _markdownFilesInDir(dirName) {
     const files = glob.sync(`${dirName}/**/*.md`)
     if (files.length === 0) {
       this.formatter.warning('no Markdown files found')
     }
-    return files.filter(file => !file.includes('node_modules'))
-                .sort()
+    return files.filter(file => !file.includes('node_modules')).sort()
   }
 
   // Returns all the markdown files in the current working directory
-  _allMarkdownFiles () {
+  _allMarkdownFiles() {
     var files = glob.sync(this.configuration.get('files'))
     if (files.length === 0) {
       this.formatter.warning('no Markdown files found')
     }
-    files = files.filter(file => !file.includes('node_modules'))
-                 .sort()
+    files = files.filter(file => !file.includes('node_modules')).sort()
     // if (this.filename != null) {
     //   files = files.filter(file => !file === this.filename)
     // }
     return files
   }
 
-  async _executeRunners (): Promise<void> {
+  async _executeRunners(): Promise<void> {
     for (let runner of this.runners) {
       await runner.run()
     }
     this.formatter.suiteSuccess()
   }
 
-  async _prepareRunners () {
+  async _prepareRunners() {
     for (let runner of this.runners) {
       await runner.prepare()
     }
@@ -170,7 +173,7 @@ class RunCommand implements Command {
 }
 
 // TODO: extract into helper dir
-function hasDirectory (dirname :string) :boolean {
+function hasDirectory(dirname: string): boolean {
   try {
     return fs.statSync(dirname).isDirectory()
   } catch (e) {
@@ -178,7 +181,7 @@ function hasDirectory (dirname :string) :boolean {
   }
 }
 
-function isMarkdownFile (filename :string) :boolean {
+function isMarkdownFile(filename: string): boolean {
   try {
     const filepath = path.join(process.cwd(), filename)
     return filename.endsWith('.md') && fs.statSync(filepath).isFile()

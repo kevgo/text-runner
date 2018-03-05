@@ -1,7 +1,7 @@
 // @flow
 
-import type {CliArgTypes} from '../cli/cli-arg-types.js'
-import type {ConfigFileStructure} from './config-file-structure.js'
+import type { CliArgTypes } from '../cli/cli-arg-types.js'
+import type { ConfigFileStructure } from './config-file-structure.js'
 
 const fs = require('fs')
 const debug = require('debug')('textrun:configuration')
@@ -28,7 +28,7 @@ class Configuration {
   sourceDir: string
   testDir: string
 
-  constructor (configFilePath: string, constructorArgs: CliArgTypes) {
+  constructor(configFilePath: string, constructorArgs: CliArgTypes) {
     this.configFilePath = configFilePath
     this.constructorArgs = constructorArgs || {}
 
@@ -46,14 +46,19 @@ class Configuration {
   }
 
   // Returns the value of the attribute with the given name
-  get (attributeName :string) :string {
-    return this.constructorArgs[attributeName] || this.fileData[attributeName] || defaultValues[attributeName]
+  get(attributeName: string): string {
+    return (
+      this.constructorArgs[attributeName] ||
+      this.fileData[attributeName] ||
+      defaultValues[attributeName]
+    )
   }
 
   // Creates a config file with default values
-  createDefault () {
-    fs.writeFileSync('./text-run.yml',
-`# white-list for files to test
+  createDefault() {
+    fs.writeFileSync(
+      './text-run.yml',
+      `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.
 # To exclude the "vendor" folder: '{,!(vendor)/**/}*.md'
@@ -73,7 +78,8 @@ useSystemTempDirectory: false
 # activity-type specific configuration
 activityTypes:
   runConsoleCommand:
-    globals: {}`)
+    globals: {}`
+    )
   }
 }
 

@@ -1,12 +1,12 @@
 // @flow
 
-import type {Activity} from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/activity.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
-import type {WriteStream} from 'observable-process'
+import type { WriteStream } from 'observable-process'
 
 const callArgs = require('../helpers/call-args')
-const {cyan} = require('chalk')
+const { cyan } = require('chalk')
 const debug = require('debug')('textrun:actions:run-console-command')
 const ObservableProcess = require('observable-process')
 const path = require('path')
@@ -21,18 +21,24 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (activity: Activity) {
-  const commandsToRun = activity.searcher.tagContent('fence')
+module.exports = async function(activity: Activity) {
+  const commandsToRun = activity.searcher
+    .tagContent('fence')
     .split('\n')
-    .map((command) => command.trim())
-    .filter((e) => e)
+    .map(command => command.trim())
+    .filter(e => e)
     .map(trimDollar)
     .map(makeGlobal(activity.configuration))
     .join(' && ')
-  if (commandsToRun === '') throw new Error('the block that defines console commands to run is empty')
+  if (commandsToRun === '') {
+    throw new Error('the block that defines console commands to run is empty')
+  }
 
   activity.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
-  const input = await getInput(activity.searcher.tagContent('htmlblock', {default: ''}), activity.formatter)
+  const input = await getInput(
+    activity.searcher.tagContent('htmlblock', { default: '' }),
+    activity.formatter
+  )
   // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
   global.runConsoleCommandOutput = ''
   const processor = new ObservableProcess({
@@ -48,7 +54,7 @@ module.exports = async function (activity: Activity) {
   await processor.waitForEnd()
 }
 
-async function enter (processor: ObservableProcess, input: ProcessInput) {
+async function enter(processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {
     processor.enter(input.input)
   } else {
@@ -57,7 +63,7 @@ async function enter (processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-async function getInput (text: string, formatter: Formatter) {
+async function getInput(text: string, formatter: Formatter) {
   if (!text) return []
   const xml2jsp = util.promisify(xml2js.parseString)
   const xml = await xml2jsp(text)
@@ -67,14 +73,14 @@ async function getInput (text: string, formatter: Formatter) {
       if (tr.td.length === 1) {
         result.push({ textToWait: null, input: tr.td[0] })
       } else {
-        result.push({textToWait: tr.td[0], input: tr.td[tr.td.length - 1]})
+        result.push({ textToWait: tr.td[0], input: tr.td[tr.td.length - 1] })
       }
     }
   }
   return result
 }
 
-function makeGlobal (configuration: Configuration) {
+function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
@@ -82,23 +88,25 @@ function makeGlobal (configuration: Configuration) {
     globals = configuration.fileData.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function (commandText) {
+  return function(commandText) {
     const commandParts = commandText.split(' ')
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
     const replacement = globals[command]
     if (replacement) {
       debug(`found replacement: ${replacement}`)
-      return path.join(configuration.sourceDir, replacement) + ' ' + commandParts.splice(1).join(' ')
+      return (
+        path.join(configuration.sourceDir, replacement) + ' ' + commandParts.splice(1).join(' ')
+      )
     } else {
       return commandText
     }
   }
 }
 
-function log (stdout): WriteStream {
+function log(stdout): WriteStream {
   return {
-    write: (text) => {
+    write: text => {
       global.runConsoleCommandOutput += text
       return stdout.write(text)
     }

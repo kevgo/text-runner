@@ -1,11 +1,11 @@
 // @flow
 
-import type {HandlerFunction} from './handler-function.js'
+import type { HandlerFunction } from './handler-function.js'
 import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 
 const kebabcase = require('just-kebab-case')
-const {red} = require('chalk')
+const { red } = require('chalk')
 const glob = require('glob')
 const interpret = require('interpret')
 const path = require('path')
@@ -19,7 +19,7 @@ class ActivityTypeManager {
   configuration: Configuration
   handlerFunctions: { [string]: HandlerFunction }
 
-  constructor (formatter: Formatter, configuration: Configuration) {
+  constructor(formatter: Formatter, configuration: Configuration) {
     this.formatter = formatter
     this.configuration = configuration
     this.handlerFunctions = {}
@@ -28,7 +28,7 @@ class ActivityTypeManager {
   }
 
   // Provides the action for the block with the given name
-  handlerFunctionFor (activityType: string, filePath: string): HandlerFunction {
+  handlerFunctionFor(activityType: string, filePath: string): HandlerFunction {
     activityType = kebabcase(activityType)
     const result = this.handlerFunctions[activityType]
     if (!result) {
@@ -45,30 +45,40 @@ class ActivityTypeManager {
   }
 
   // Returns all possible filename extensions that handler functions can have
-  javascriptExtensions (): string[] {
-    return Object.keys(interpret.jsVariants).map((it) => it.slice(1))
+  javascriptExtensions(): string[] {
+    return Object.keys(interpret.jsVariants).map(it => it.slice(1))
   }
 
-  builtinActionFilenames (): string[] {
+  builtinActionFilenames(): string[] {
     return glob.sync(path.join(__dirname, '..', '..', 'activity-types', '*.js'))
   }
 
-  customActionFilenames (): string[] {
-    const pattern = path.join(process.cwd(), 'text-run', `*.@(${this.javascriptExtensions().join('|')})`)
+  customActionFilenames(): string[] {
+    const pattern = path.join(
+      process.cwd(),
+      'text-run',
+      `*.@(${this.javascriptExtensions().join('|')})`
+    )
     return glob.sync(pattern)
   }
 
-  loadBuiltinActions () {
+  loadBuiltinActions() {
     for (let filename of this.builtinActionFilenames()) {
-      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
+      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(
+        /Action/,
+        ''
+      )
       this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }
 
-  loadCustomActions () {
+  loadCustomActions() {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
-      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(/Action/, '')
+      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(
+        /Action/,
+        ''
+      )
       this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }

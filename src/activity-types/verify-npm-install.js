@@ -1,13 +1,13 @@
 // @flow
 
-import type {Activity} from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/activity.js'
 
-const {cyan} = require('chalk')
+const { cyan } = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
-module.exports = function (activity: Activity) {
+module.exports = function(activity: Activity) {
   const installText = trimDollar(activity.searcher.tagContent(['fence', 'code']))
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
   activity.formatter.setTitle(`verify NPM installs ${cyan(pkg.name)}`)
@@ -17,12 +17,14 @@ module.exports = function (activity: Activity) {
   }
 }
 
-function missesPackageName (installText: string, packageName: string): boolean {
+function missesPackageName(installText: string, packageName: string): boolean {
   // Note: cannot use minimist here
   //       because it is too stupid to understand
   //       that NPM uses '-g' by itself, and not as a switch for the argument after it
-  return installText.split(' ')
-                    .map((word) => word.trim())
-                    .filter((word) => word === packageName)
-                    .length === 0
+  return (
+    installText
+      .split(' ')
+      .map(word => word.trim())
+      .filter(word => word === packageName).length === 0
+  )
 }

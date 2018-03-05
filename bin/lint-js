@@ -7,18 +7,18 @@ set -e
 
 
 # run the 'standard-js' linter on the source code
-errors=$(standard -v 'src/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
+errors=$(standard -v 'src/**/*.js' | grep -v no-unused-expressions | grep -v space-before-function-paren | wc -l | tr -d ' ')
 if [ "$errors" -gt 0 ]; then
   echo Found standardJS errors in the source code:
-  standard -v 'src/**/*.js' | grep -v no-unused-expressions
+  standard -v 'src/**/*.js' | grep -v no-unused-expressions | grep -v space-before-function-paren
   exit 1
 fi
 
 # run the 'standard-js' linter on the feature code
-errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
+errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | grep -v space-before-function-paren | wc -l | tr -d ' ')
 if [ "$errors" -gt 0 ]; then
   echo Found standardJS errors in the feature code:
-  standard -v 'features/**/*.js' | grep -v no-unused-expressions
+  standard -v 'features/**/*.js' | grep -v no-unused-expressions | grep -v space-before-function-paren
   exit 1
 fi
 

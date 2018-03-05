@@ -1,12 +1,12 @@
 // @flow
 
-import type {Activity} from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/activity.js'
 
-const {cyan, red} = require('chalk')
+const { cyan, red } = require('chalk')
 const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
-module.exports = function (activity: Activity) {
+module.exports = function(activity: Activity) {
   activity.formatter.setTitle('NPM module exports the command')
   const commandName = trimDollar(activity.searcher.tagContent(['fence', 'code']))
   const pkg = require(path.join(process.cwd(), 'package.json'))
@@ -17,7 +17,6 @@ module.exports = function (activity: Activity) {
   }
 }
 
-function hasCommandName (commandName: string, exportedCommands: { [string]: string}): boolean {
-  return Object.keys(exportedCommands)
-               .some((command) => command === commandName)
+function hasCommandName(commandName: string, exportedCommands: { [string]: string }): boolean {
+  return Object.keys(exportedCommands).some(command => command === commandName)
 }

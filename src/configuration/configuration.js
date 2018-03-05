@@ -28,7 +28,7 @@ class Configuration {
   sourceDir: string
   testDir: string
 
-  constructor(configFilePath: string, constructorArgs: CliArgTypes) {
+  constructor (configFilePath: string, constructorArgs: CliArgTypes) {
     this.configFilePath = configFilePath
     this.constructorArgs = constructorArgs || {}
 
@@ -46,7 +46,7 @@ class Configuration {
   }
 
   // Returns the value of the attribute with the given name
-  get(attributeName: string): string {
+  get (attributeName: string): string {
     return (
       this.constructorArgs[attributeName] ||
       this.fileData[attributeName] ||
@@ -55,7 +55,7 @@ class Configuration {
   }
 
   // Creates a config file with default values
-  createDefault() {
+  createDefault () {
     fs.writeFileSync(
       './text-run.yml',
       `# white-list for files to test

@@ -6,7 +6,7 @@ const { cyan } = require('chalk')
 const fs = require('fs')
 const jsYaml = require('js-yaml')
 
-module.exports = function(activity: Activity) {
+module.exports = function (activity: Activity) {
   const documentedVersion = parseInt(activity.searcher.tagContent('text'))
   if (isNaN(documentedVersion)) throw new Error('given Node version is not a number')
   activity.formatter.setTitle(`supported NodeJS version should be ${cyan(documentedVersion)}`)
@@ -19,7 +19,7 @@ module.exports = function(activity: Activity) {
   }
 }
 
-function getSupportedVersion() {
+function getSupportedVersion () {
   const content = loadYmlFile('.travis.yml')
   if (!content) throw new Error('.travis.yml is empty')
   const minimumVersion = parseInt(minimum(content.node_js))
@@ -27,13 +27,13 @@ function getSupportedVersion() {
   return minimumVersion
 }
 
-function loadYmlFile(filename: string) {
+function loadYmlFile (filename: string) {
   const fileContent = fs.readFileSync(filename, { encoding: 'utf8' })
   return jsYaml.safeLoad(fileContent)
 }
 
 // Minimum returns the smallest of the given numbers
-function minimum(numbers: number[] | number): number {
+function minimum (numbers: number[] | number): number {
   if (Array.isArray(numbers)) {
     return numbers.reduce((n, sum) => (n < sum ? n : sum), 10000)
   } else {

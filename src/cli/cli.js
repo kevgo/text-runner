@@ -10,7 +10,7 @@ const UserError = require('../errors/user-error.js')
 
 cliCursor.hide()
 
-async function main() {
+async function main () {
   var exitCode = 0
   try {
     const cliArgs = parseCliArgs(process.argv)

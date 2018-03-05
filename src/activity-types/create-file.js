@@ -8,7 +8,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 const debug = require('debug')('textrun:actions:create-file')
 
-module.exports = function(activity: Activity) {
+module.exports = function (activity: Activity) {
   const filePath = activity.searcher.tagContent(['emphasizedtext', 'strongtext'])
   const content = activity.searcher.tagContent(['fence', 'code'])
   activity.formatter.setTitle(`create file ${cyan(filePath)}`)

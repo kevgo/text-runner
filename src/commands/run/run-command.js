@@ -24,7 +24,7 @@ class RunCommand implements Command {
   linkTargets: LinkTargetList // lists which files contain which HTML anchors
   runners: MarkdownFileRunner[]
 
-  constructor(value: {
+  constructor (value: {
     configuration: Configuration,
     formatter: Formatter,
     activityTypesManager: ActivityTypeManager
@@ -36,7 +36,7 @@ class RunCommand implements Command {
   }
 
   // Tests all files
-  async run(filename: string) {
+  async run (filename: string) {
     if (hasDirectory(filename)) {
       await this.runDirectory(filename)
     } else if (isMarkdownFile(filename)) {
@@ -50,22 +50,22 @@ class RunCommand implements Command {
     }
   }
 
-  async runAll() {
+  async runAll () {
     await this._run(this._allMarkdownFiles())
   }
 
   // Tests all files in the given directory
-  async runDirectory(dirname: string) {
+  async runDirectory (dirname: string) {
     await this._run(this._markdownFilesInDir(dirname))
   }
 
   // Tests the given file
-  async runFile(filename: string) {
+  async runFile (filename: string) {
     await this._run([filename])
   }
 
   // Tests the files described by the given glob expression
-  async runGlob(fileExpression: string) {
+  async runGlob (fileExpression: string) {
     const files = this._filesMatchingGlob(fileExpression)
     if (files != null) {
       await this._run(files)
@@ -73,7 +73,7 @@ class RunCommand implements Command {
   }
 
   // Runs the currently set up runners.
-  async _run(filenames: string[]) {
+  async _run (filenames: string[]) {
     filenames = this._removeExcludedFiles(filenames)
     debug('testing files:')
     for (let filename of filenames) {
@@ -85,7 +85,7 @@ class RunCommand implements Command {
     await this._executeRunners()
   }
 
-  _createRunners(filenames: string[]) {
+  _createRunners (filenames: string[]) {
     this.runners = []
     for (let filePath of filenames) {
       const runner = new MarkdownFileRunner({
@@ -100,7 +100,7 @@ class RunCommand implements Command {
   }
 
   // Creates the temp directory to run the tests in
-  _createWorkingDir() {
+  _createWorkingDir () {
     const setting = this.configuration.get('useSystemTempDirectory')
     if (typeof setting === 'string') {
       this.configuration.testDir = setting
@@ -115,11 +115,11 @@ class RunCommand implements Command {
     mkdirp.sync(this.configuration.testDir)
   }
 
-  _filesMatchingGlob(expression: string): string[] {
+  _filesMatchingGlob (expression: string): string[] {
     return glob.sync(expression).sort()
   }
 
-  _removeExcludedFiles(files: string[]): string[] {
+  _removeExcludedFiles (files: string[]): string[] {
     var excludedFiles = this.configuration.get('exclude')
     if (!excludedFiles) return files
     var excludedFilesArray = []
@@ -137,7 +137,7 @@ class RunCommand implements Command {
   }
 
   // Returns all the markdown files in this directory and its children
-  _markdownFilesInDir(dirName) {
+  _markdownFilesInDir (dirName) {
     const files = glob.sync(`${dirName}/**/*.md`)
     if (files.length === 0) {
       this.formatter.warning('no Markdown files found')
@@ -146,7 +146,7 @@ class RunCommand implements Command {
   }
 
   // Returns all the markdown files in the current working directory
-  _allMarkdownFiles() {
+  _allMarkdownFiles () {
     var files = glob.sync(this.configuration.get('files'))
     if (files.length === 0) {
       this.formatter.warning('no Markdown files found')
@@ -158,14 +158,14 @@ class RunCommand implements Command {
     return files
   }
 
-  async _executeRunners(): Promise<void> {
+  async _executeRunners (): Promise<void> {
     for (let runner of this.runners) {
       await runner.run()
     }
     this.formatter.suiteSuccess()
   }
 
-  async _prepareRunners() {
+  async _prepareRunners () {
     for (let runner of this.runners) {
       await runner.prepare()
     }
@@ -173,7 +173,7 @@ class RunCommand implements Command {
 }
 
 // TODO: extract into helper dir
-function hasDirectory(dirname: string): boolean {
+function hasDirectory (dirname: string): boolean {
   try {
     return fs.statSync(dirname).isDirectory()
   } catch (e) {
@@ -181,7 +181,7 @@ function hasDirectory(dirname: string): boolean {
   }
 }
 
-function isMarkdownFile(filename: string): boolean {
+function isMarkdownFile (filename: string): boolean {
   try {
     const filepath = path.join(process.cwd(), filename)
     return filename.endsWith('.md') && fs.statSync(filepath).isFile()

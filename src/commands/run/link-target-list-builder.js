@@ -11,11 +11,11 @@ class LinkTargetListBuilder {
   // the LinkTarget list that this builder is supposed to populate
   linkTargets: LinkTargetList
 
-  constructor(value: { linkTargets: LinkTargetList }) {
+  constructor (value: { linkTargets: LinkTargetList }) {
     this.linkTargets = value.linkTargets
   }
 
-  buildLinkTargets(filePath: string, tree: AstNodeList) {
+  buildLinkTargets (filePath: string, tree: AstNodeList) {
     this.linkTargets[filePath] = this.linkTargets[filePath] || []
     for (let node of tree) {
       switch (node.type) {

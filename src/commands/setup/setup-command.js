@@ -12,7 +12,7 @@ class SetupCommand implements Command {
   formatter: Formatter
   actions: ActivityTypeManager
 
-  constructor(value: {
+  constructor (value: {
     configuration: Configuration,
     formatter: Formatter,
     actions: ActivityTypeManager
@@ -22,7 +22,7 @@ class SetupCommand implements Command {
     this.actions = value.actions
   }
 
-  async run() {
+  async run () {
     this.formatter.startActivity(
       `Create configuration file ${cyan('text-run.yml')} with default values`
     )

@@ -1,7 +1,7 @@
 // @flow
 
-const {Then} = require('cucumber')
-const {expect} = require('chai')
+const { Then } = require('cucumber')
+const { expect } = require('chai')
 const fs = require('fs-extra')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
@@ -15,8 +15,7 @@ Then(/^it creates a directory "([^"]*)"$/, function (directoryPath) {
 })
 
 Then(/^it creates the file "([^"]*)" with content:$/, function (filename, expectedContent) {
-  const actualContent = fs.readFileSync(path.join(this.rootDir, filename),
-                                          {encoding: 'utf8'})
+  const actualContent = fs.readFileSync(path.join(this.rootDir, filename), { encoding: 'utf8' })
   jsdiffConsole(actualContent.trim(), expectedContent.trim())
 })
 
@@ -65,8 +64,7 @@ Then(/^it runs the console command "([^"]*)"$/, async function (command) {
   this.verifyRanConsoleCommand(command)
 })
 
-Then(/^it runs without errors$/, function () {
-})
+Then(/^it runs without errors$/, function () {})
 
 Then(/^it signals:$/, function (table) {
   this.verifyOutput(table.rowsHash())
@@ -80,15 +78,20 @@ Then(/^the current working directory is now "([^"]*)"$/, function (expectedCwd) 
   expect(path.basename(this.cwdAfterRun)).to.equal(expectedCwd)
 })
 
-Then('the {string} directory is now deleted', function(directoryPath) {
+Then('the {string} directory is now deleted', function (directoryPath) {
   try {
     fs.statSync(path.join(this.rootDir, directoryPath))
     throw new Error(`file '${directoryPath}' still exists`)
   } catch (e) {}
 })
 
-Then(/^the test directory (?:now |still )contains a file "([^"]*)" with content:$/, function (fileName, expectedContent) {
-  expect(fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()).to.equal(expectedContent.trim())
+Then(/^the test directory (?:now |still )contains a file "([^"]*)" with content:$/, function (
+  fileName,
+  expectedContent
+) {
+  expect(fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()).to.equal(
+    expectedContent.trim()
+  )
 })
 
 Then(/^the test workspace now contains a directory "([^"]*)"$/, function (fileName) {

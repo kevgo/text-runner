@@ -2,14 +2,21 @@ const callArgs = require('../dist/helpers/call-args')
 const ObservableProcess = require('observable-process')
 const path = require('path')
 
-module.exports = async function ({configuration, formatter, searcher}) {
+module.exports = async function ({ configuration, formatter, searcher }) {
   formatter.setTitle('running the created Markdown file in TextRunner')
 
   var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
-  const processor = new ObservableProcess({command: callArgs(textRunPath), cwd: configuration.testDir, stdout: {write: formatter.output}, stderr: {write: formatter.output}})
+  const processor = new ObservableProcess({
+    command: callArgs(textRunPath),
+    cwd: configuration.testDir,
+    stdout: { write: formatter.output },
+    stderr: { write: formatter.output }
+  })
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
-    formatter.error(`text-run exited with code ${processor.exitCode} when processing the created Markdown file`)
+    formatter.error(
+      `text-run exited with code ${processor.exitCode} when processing the created Markdown file`
+    )
   }
 }

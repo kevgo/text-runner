@@ -6,7 +6,7 @@ const ObservableProcess = require('observable-process')
 const path = require('path')
 const debug = require('debug')('text-runner:run-markdown-in-text-run')
 
-module.exports = async function ({configuration, formatter, searcher}) {
+module.exports = async function ({ configuration, formatter, searcher }) {
   formatter.setTitle('verify the inline markdown works in TextRunner')
   const markdown = searcher.tagContent('fence')
   const filename = path.join(configuration.testDir, '1.md')
@@ -22,10 +22,19 @@ module.exports = async function ({configuration, formatter, searcher}) {
 
   var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
-  const processor = new ObservableProcess({commands: callArgs(textRunPath), cwd: configuration.testDir, stdout: {write: formatter.output}, stderr: {write: formatter.output}})
+  const processor = new ObservableProcess({
+    commands: callArgs(textRunPath),
+    cwd: configuration.testDir,
+    stdout: { write: formatter.output },
+    stderr: { write: formatter.output }
+  })
   await processor.waitForEnd()
   debug(processor.fullOutput())
   if (processor.exitCode !== 0) {
-    throw new Error(`text-run exited with code ${processor.exitCode} when processing this markdown block.\nOutput:\n${processor.fullOutput()}`)
+    throw new Error(
+      `text-run exited with code ${
+        processor.exitCode
+      } when processing this markdown block.\nOutput:\n${processor.fullOutput()}`
+    )
   }
 }

@@ -4,7 +4,7 @@ const path = require('path')
 const uuid = require('uuid/v4')
 const debug = require('debug')('text-runner:cd-into-empty-tmp-folder')
 
-module.exports = async function ({formatter}) {
+module.exports = async function ({ formatter }) {
   const existingDir = process.cwd()
   debug('remembering existing dir: ' + existingDir)
   global.cdHistory = existingDir

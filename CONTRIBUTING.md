@@ -44,7 +44,7 @@ Set up your editor with the following configuration:
 - fixers: `prettier`, then `standard`
 
 Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
-```vim
+```viml
 let g:ale_linters = {
 \   'javascript': ['flow', 'standard']
 \}

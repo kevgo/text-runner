@@ -21,7 +21,7 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function(activity: Activity) {
+module.exports = async function (activity: Activity) {
   const commandsToRun = activity.searcher
     .tagContent('fence')
     .split('\n')
@@ -54,7 +54,7 @@ module.exports = async function(activity: Activity) {
   await processor.waitForEnd()
 }
 
-async function enter(processor: ObservableProcess, input: ProcessInput) {
+async function enter (processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {
     processor.enter(input.input)
   } else {
@@ -63,7 +63,7 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-async function getInput(text: string, formatter: Formatter) {
+async function getInput (text: string, formatter: Formatter) {
   if (!text) return []
   const xml2jsp = util.promisify(xml2js.parseString)
   const xml = await xml2jsp(text)
@@ -80,7 +80,7 @@ async function getInput(text: string, formatter: Formatter) {
   return result
 }
 
-function makeGlobal(configuration: Configuration) {
+function makeGlobal (configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
@@ -88,7 +88,7 @@ function makeGlobal(configuration: Configuration) {
     globals = configuration.fileData.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function(commandText) {
+  return function (commandText) {
     const commandParts = commandText.split(' ')
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
@@ -104,7 +104,7 @@ function makeGlobal(configuration: Configuration) {
   }
 }
 
-function log(stdout): WriteStream {
+function log (stdout): WriteStream {
   return {
     write: text => {
       global.runConsoleCommandOutput += text

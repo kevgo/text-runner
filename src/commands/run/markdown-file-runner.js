@@ -26,7 +26,7 @@ class MarkdownFileRunner {
   linkTargetBuilder: LinkTargetListBuilder
   runData: ActivityList
 
-  constructor(value: {
+  constructor (value: {
     filePath: string,
     formatter: Formatter,
     activityTypesManager: ActivityTypeManager,
@@ -48,7 +48,7 @@ class MarkdownFileRunner {
   }
 
   // Prepares this runner
-  async prepare() {
+  async prepare () {
     // Need to start the file here
     // so that the formatter has the filename
     // in case there are errors preparing.
@@ -67,7 +67,7 @@ class MarkdownFileRunner {
 
   // Runs this runner
   // (after it has been prepared)
-  async run(): Promise<number> {
+  async run (): Promise<number> {
     this.formatter.startFile(this.filePath)
     for (let activity of this.runData) {
       await this._runActivity(activity)
@@ -75,7 +75,7 @@ class MarkdownFileRunner {
     return this.runData.length
   }
 
-  async _runActivity(activity) {
+  async _runActivity (activity) {
     this.formatter.setLines(
       activity.startLine,
       activity.endLine != null ? activity.endLine : activity.startLine
@@ -102,7 +102,7 @@ class MarkdownFileRunner {
   }
 }
 
-function isUserError(err: Error): boolean {
+function isUserError (err: Error): boolean {
   return err.name === 'Error'
 }
 

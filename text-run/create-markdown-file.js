@@ -1,3 +1,5 @@
+/* eslint no-irregular-whitespace: 0 */
+
 const fs = require('fs')
 const path = require('path')
 

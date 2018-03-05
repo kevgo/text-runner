@@ -8,7 +8,7 @@ const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
-module.exports = function(activity: Activity) {
+module.exports = function (activity: Activity) {
   const fileName = activity.searcher.tagContent('strongtext')
   const relativeBaseDir = activity.searcher.tagContent('link_open', { default: '.' })
   const expectedContent = activity.searcher.tagContent('fence')

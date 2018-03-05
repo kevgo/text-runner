@@ -8,14 +8,14 @@ const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 class FormatterManager {
   // Returns a list of all available formatter names
-  availableFormatterNames(): string[] {
+  availableFormatterNames (): string[] {
     return glob
       .sync(path.join(__dirname, '*-formatter.js'))
       .map(filename => path.basename(filename, '.js'))
       .map(it => it.replace(/-formatter/, ''))
   }
 
-  getFormatter(name: string | Formatter): Formatter {
+  getFormatter (name: string | Formatter): Formatter {
     if (typeof name === 'string') {
       return this.loadFormatter(name)
     } else {
@@ -25,7 +25,7 @@ class FormatterManager {
 
   // Loads the formatter with the given name.
   // Returns the formatter and an optional error.
-  loadFormatter(name: string): Formatter {
+  loadFormatter (name: string): Formatter {
     try {
       const FormatterClass = require(`./${name}-formatter`)
       return new FormatterClass()

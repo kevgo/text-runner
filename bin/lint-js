@@ -3,30 +3,12 @@ set -e
 
 # LINTS THE JAVASCRIPT FILES
 
-# NOTE: cannot dry this code up because the details are different in each block
 
-
-# run the 'standard-js' linter on the source code
-errors=$(standard -v 'src/**/!(*-test).js' | wc -l | tr -d ' ')
+# run the 'standard-js' linter
+errors=$(standard -v '{src/**/*.js,features/**/*.js}' | wc -l | tr -d ' ')
 if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors in the source code:
-  standard -v 'src/**/!(*-test).js'
-  exit 1
-fi
-
-# run the 'standard-js' linter on the unit tests
-errors=$(standard -v 'src/**/*-test.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
-if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors in the source code:
-  standard -v 'src/**/*-test.js' | grep -v no-unused-expressions
-  exit 1
-fi
-
-# run the 'standard-js' linter on the feature code
-errors=$(standard -v 'features/support/**/*.js' | grep -v no-unused-expressions | wc -l | tr -d ' ')
-if [ "$errors" -gt 0 ]; then
-  echo Found standardJS errors in the feature code:
-  standard -v 'features/**/*.js' | grep -v no-unused-expressions
+  echo Found standardJS errors:
+  standard -v '{src/**/*.js,features/**/*.js}'
   exit 1
 fi
 

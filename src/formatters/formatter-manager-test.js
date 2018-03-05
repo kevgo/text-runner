@@ -1,3 +1,4 @@
+/* eslint no-unused-expressions: 0 */
 const FormatterManager = require('../../dist/formatters/formatter-manager.js')
 const jsdiffConsole = require('jsdiff-console')
 const { expect } = require('chai')

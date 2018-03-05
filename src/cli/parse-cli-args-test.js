@@ -1,3 +1,4 @@
+/* eslint no-unused-expressions: 0 */
 const parseCliArgs = require('../../dist/cli/parse-cli-args')
 
 describe('parse-cli-args', function () {

@@ -17,10 +17,10 @@ module.exports = async function (activity: Activity) {
     throw new Error('image tag without source')
   }
   var imagePath = node.src
-  if (!node.src.startsWith("/")) {
-    imagePath = path.join(path.dirname(activity.filename), imagePath);
+  if (!node.src.startsWith('/')) {
+    imagePath = path.join(path.dirname(activity.filename), imagePath)
   }
-  activity.formatter.setTitle(`image ${cyan(imagePath)}`);
+  activity.formatter.setTitle(`image ${cyan(imagePath)}`)
   if (isRemoteImage(node)) {
     await checkRemoteImage(node, activity.formatter, activity.configuration)
   } else {

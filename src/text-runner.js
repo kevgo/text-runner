@@ -1,10 +1,10 @@
 // @flow
 
 import type Formatter from './formatters/formatter.js'
-import type {CliArgTypes} from './cli/cli-arg-types.js'
+import type { CliArgTypes } from './cli/cli-arg-types.js'
 
 const ActivityTypeManager = require('./commands/run/activity-type-manager.js')
-const {red} = require('chalk')
+const { red } = require('chalk')
 const commandPath = require('./commands/command-path')
 const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
@@ -14,9 +14,18 @@ const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
-module.exports = async function (value: {command: string, file?: string, offline?: boolean, exclude?: string, format?: Formatter}) {
+module.exports = async function(value: {
+  command: string,
+  file?: string,
+  offline?: boolean,
+  exclude?: string,
+  format?: Formatter
+}) {
   const configFileName = fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
-  const textRunner = new TextRunner({offline: value.offline, exclude: value.exclude, format: value.format}, configFileName)
+  const textRunner = new TextRunner(
+    { offline: value.offline, exclude: value.exclude, format: value.format },
+    configFileName
+  )
   await textRunner.execute(value.command, value.file)
 }
 
@@ -26,7 +35,7 @@ class TextRunner {
   formatter: Formatter
   activityTypesManager: ActivityTypeManager
 
-  constructor (constructorArgs: CliArgTypes, configPath) {
+  constructor(constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
     const formatterManager = new FormatterManager()
@@ -35,7 +44,7 @@ class TextRunner {
   }
 
   // Tests the documentation according to the given command and arguments
-  async execute (command: string, file?: string) {
+  async execute(command: string, file?: string) {
     try {
       if (!hasCommand(command)) throw new UnprintedUserError(`unknown command: ${red(command)}`)
       const CommandClass = require(commandPath(command))

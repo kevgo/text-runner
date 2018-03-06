@@ -26,6 +26,8 @@ It also ensures that links and images in your documentation point to existing ta
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
+[Here](hello.md) is another file!
+
 There are no limitations on the text that TextRunner executes.
 It can read and understand (if you tell it how)
 any form of plain text in any human language as well as

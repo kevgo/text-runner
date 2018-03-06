@@ -55,7 +55,11 @@ async function checkExternalLink (target: string, format: Formatter, config: Con
 }
 
 async function checkLinkToFilesystem (filename: string, target: string, format: Formatter) {
-  target = path.join(path.dirname(filename), target)
+  if (target.startsWith('/')) {
+    target = target.substr(1)
+  } else {
+    target = path.join(path.dirname(filename), target)
+  }
   try {
     const stats = await fs.stat(target)
     if (stats.isDirectory()) {

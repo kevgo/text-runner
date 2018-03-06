@@ -8,7 +8,7 @@ Feature: verifying links to the local filesystem
     cause the test to fail
 
 
-  Scenario: link to existing local file
+  Scenario: relative link to existing local file
     Given my source code contains the file "1.md" with content:
       """
       [link to existing local file](1.md)
@@ -18,6 +18,19 @@ Feature: verifying links to the local filesystem
       | FILENAME | 1.md                    |
       | LINE     | 1                       |
       | MESSAGE  | link to local file 1.md |
+
+
+
+  Scenario: relative link to existing local file
+    Given my source code contains the file "docs/1.md" with content:
+      """
+      [link to existing local file](/docs/1.md)
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | docs/1.md                    |
+      | LINE     | 1                            |
+      | MESSAGE  | link to local file docs/1.md |
 
 
 

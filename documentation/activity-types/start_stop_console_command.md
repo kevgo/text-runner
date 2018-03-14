@@ -11,6 +11,7 @@ and stop the long-running process using a `stopCommand` block.
 
 #### Example
 <a textrun="run-markdown-in-textrun">
+  
 ```markdown
 <a textrun="start-console-command">
 
@@ -23,6 +24,7 @@ $ read foo
 Wait until it is fully booted up ...
 
 <a textrun="wait-for-output">
+  
 `​``
 Enter your name
 `​``

@@ -9,6 +9,7 @@
   use the [validateJavascript](validate_javascript.md) action instead
 
 <a textrun="run-markdown-in-textrun">
+  
 ```markdown
 <a textrun="run-console-command">
 `​``
@@ -37,6 +38,7 @@ rl.question('Your name?', (name) => {
 </a>
 
 <a textrun="run-markdown-in-textrun">
+
 ```markdown
 <a textrun="run-console-command">
 `​``
@@ -62,6 +64,7 @@ Middle columns are ignored.
 `<th>` elements are considered descriptions and are also ignored.
 
 <a textrun="run-markdown-in-textrun">
+  
 ```markdown
 <a textrun="run-console-command">
 `​``

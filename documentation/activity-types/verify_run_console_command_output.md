@@ -4,6 +4,14 @@
 - the output can contain more content in between lines
 
 
+#### Example
+
+```html
+<a textrun="verify-run-console-command-output">
+expected output
+</a>
+```
+
 #### More info
 
 - [feature specs](../../features/activity-types/built-in/verify-run-console-command-output/verify-run-console-command-output.feature)

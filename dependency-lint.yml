@@ -48,6 +48,7 @@ ignoreErrors:
     - eslint-plugin-import
     - greenkeeper-lockfile
     - o-tools
+    - request
     - remark-lint
     - remark-preset-lint-recommended
     - standard

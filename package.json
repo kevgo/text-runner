@@ -26,6 +26,7 @@
     "observable-process": "4.0.0",
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
+    "request": "2.85.0",
     "request-promise-native": "1.0.5",
     "time-diff": "0.3.1",
     "tmp": "0.0.33",

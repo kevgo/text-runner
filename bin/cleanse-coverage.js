@@ -7,13 +7,12 @@ const path = require('path')
 
 async function main () {
   const directories = ['.nyc_output_tests', '.nyc_output_api', '.nyc_output_text_run']
-  const cliDirs = await fs.readdir('.nyc_output_cli')
-  directories.concat(cliDirs)
-  const results = directories.map(mergeAndCleanseDir)
-  await Promise.all(results)
+  directories.concat(fs.readdirSync('.nyc_output_cli'))
+  await Promise.all(directories.map(mergeAndCleanseDir))
 }
 
 async function mergeAndCleanseDir (dir) {
+  console.log(dir)
   const filedata = await jsonfile.readFile(path.join(process.cwd(), dir))
   const filename = path.basename(dir)
   const result = {}
@@ -22,7 +21,7 @@ async function mergeAndCleanseDir (dir) {
     result[key] = filedata[key]
   }
 
-  await jsonfile.writeFile(filename, JSON.stringify(result))
+  await jsonfile.writeFile(path.join('.nyc_output', filename), JSON.stringify(result))
 }
 const re = /\/dist\//
 

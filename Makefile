@@ -11,42 +11,35 @@ clean:
 	rm -rf dist
 	rm -rf .nyc_output*
 
-coverage: coverage-prepare
+coverage: coverage-merge
 
 # builds with test coverage measurements
 coverage-prepare: clean
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 
 # test coverage for unit tests
-coverage-unit-tests: build-coverage
-	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "test/**/*.js" --reporter dot
+coverage-unit-tests: coverage-prepare
+	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
 	mv .nyc_output .nyc_output_tests
 
 # test coverage for API specs
-coverage-api-specs: build-coverage
+coverage-api-specs: coverage-prepare
 	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc cucumber-js --tags '(not @clionly) and (not @todo)' "$@"
 	mv .nyc_output .nyc_output_api
 
 # test coverage for CLI specs
-coverage-cli-specs: build-coverage
+coverage-cli-specs: coverage-prepare
 	NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' "$@"
 
 # test coverage for the self-check
-coverage-self-check: build-coverage
+coverage-self-check: coverage-prepare
 	./node_modules/.bin/nyc bin/text-run --offline
 	mv .nyc_output .nyc_output_text_run
 
-
-	# merge coverage data
+# merge coverage data
+coverage-merge: coverage-unit-tests coverage-api-specs coverage-cli-specs coverage-self-check
 	mkdir .nyc_output
-	$(call mergeAndCleanseDir, .nyc_output_tests)
-	$(call mergeAndCleanseDir .nyc_output_api)
-	for dirPath in .nyc_output_cli/*; do
-		$(call mergeAndCleanseDir $dirPath)
-	done
-	$(call mergeAndCleanseDir .nyc_output_text_run)
-
-	# generate coverage report
+	node bin/cleanse-coverage.js
 	nyc report --reporter=lcov
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
 

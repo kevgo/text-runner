@@ -6,13 +6,16 @@ const jsonfile = require('jsonfile')
 const path = require('path')
 
 async function main () {
-  const directories = ['.nyc_output_tests', '.nyc_output_api', '.nyc_output_text_run']
-  directories.concat(fs.readdirSync('.nyc_output_cli'))
+  const directories = ['.nyc_output_api']
+  // const directories = ['.nyc_output_tests', '.nyc_output_api', '.nyc_output_text_run']
+  // directories.concat(fs.readdirSync('.nyc_output_cli'))
   await Promise.all(directories.map(mergeAndCleanseDir))
 }
 
 async function mergeAndCleanseDir (dir) {
   console.log(dir)
+  const files = await fs.readdir(dir)
+  console.log(files)
   const filedata = await jsonfile.readFile(path.join(process.cwd(), dir))
   const filename = path.basename(dir)
   const result = {}

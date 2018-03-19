@@ -14,7 +14,7 @@ clean:
 coverage: coverage-merge
 
 # builds with test coverage measurements
-coverage-prepare: clean
+coverage-prepare:
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 
 # test coverage for unit tests
@@ -40,24 +40,9 @@ coverage-self-check: coverage-prepare
 	mv .nyc_output .nyc_output_text_run
 
 # merge coverage data
-coverage-merge: coverage-unit-tests coverage-api-specs coverage-cli-specs coverage-self-check
+# coverage-merge: coverage-unit-tests coverage-api-specs coverage-cli-specs coverage-self-check
+coverage-merge:
 	mkdir .nyc_output
 	node bin/cleanse-coverage.js
 	nyc report --reporter=lcov
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
-
-
-# copies the given directory into .nyc_output,
-# while removing irrelevant entries that trip up nyc
-define mergeAndCleanseDir
-	srcDir=$(1)
-	for srcPath in $srcDir/*.json; do
-		fileName=$(basename $srcPath)
-		content=$(cat $srcPath)
-		if [ "$content" != "{}" ]; then
-			echo Copying $srcPath
-			targetpath=".nyc_output/$fileName"
-			node bin/cleanse-coverage.js $srcPath > $targetpath
-		fi
-	done
-endef

@@ -9,9 +9,11 @@ const readjson = promisify(jsonfile.readFile)
 const writejson = promisify(jsonfile.writeFile)
 
 async function main () {
-  const directories = ['.nyc_output_api']
+  let directories = ['.nyc_output_api']
   // const directories = ['.nyc_output_tests', '.nyc_output_api', '.nyc_output_text_run']
-  // directories.concat(fs.readdirSync('.nyc_output_cli'))
+  let cliDirs = fs.readdirSync('.nyc_output_cli')
+  cliDirs = cliDirs.map(dir => path.join('.nyc_output_cli', dir))
+  directories = directories.concat(cliDirs)
   await Promise.all(directories.map(mergeAndCleanseDir))
 }
 
@@ -32,7 +34,7 @@ async function mergeAndCleanseFile (dir, filename) {
   }
 
   const writepath = path.join('.nyc_output', filename)
-  console.log(writepath)
+  console.log('wrote file:', writepath)
   await writejson(writepath, JSON.stringify(result))
 }
 

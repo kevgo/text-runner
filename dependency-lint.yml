@@ -46,6 +46,7 @@ ignoreErrors:
     - eslint
     - eslint-plugin-flowtype
     - eslint-plugin-import
+    - flow-remove-types
     - greenkeeper-lockfile
     - o-tools
     - request

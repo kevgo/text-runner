@@ -16,16 +16,15 @@ async function main () {
 }
 
 async function mergeAndCleanseDir (dir) {
-  console.log(dir)
   let files = await fs.readdir(dir)
-  files = files.map(file => path.join(dir, file))
-  console.log(files)
-  files.forEach(mergeAndCleanseFile)
+  const mergeFile = mergeAndCleanseFile.bind(this, dir)
+  files.forEach(mergeFile)
 }
 
-async function mergeAndCleanseFile (filename) {
-  const filepath = path.join(process.cwd(), filename)
+async function mergeAndCleanseFile (dir, filename) {
+  const filepath = path.join(process.cwd(), dir, filename)
   const filedata = await readjson(filepath)
+  if (Object.keys(filedata).length === 0) return
   const result = {}
   for (let key of Object.keys(filedata)) {
     if (re.test(key)) continue

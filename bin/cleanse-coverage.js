@@ -5,19 +5,26 @@ const fs = require('fs-extra')
 const jsonfile = require('jsonfile')
 const path = require('path')
 
-async function main () {
+async function main() {
   const directories = ['.nyc_output_api']
   // const directories = ['.nyc_output_tests', '.nyc_output_api', '.nyc_output_text_run']
   // directories.concat(fs.readdirSync('.nyc_output_cli'))
   await Promise.all(directories.map(mergeAndCleanseDir))
 }
 
-async function mergeAndCleanseDir (dir) {
+async function mergeAndCleanseDir(dir) {
   console.log(dir)
-  const files = await fs.readdir(dir)
+  let files = await fs.readdir(dir)
+  files = files.map(file => path.join(dir, file))
   console.log(files)
-  const filedata = await jsonfile.readFile(path.join(process.cwd(), dir))
-  const filename = path.basename(dir)
+  files.forEach(mergeAndCleanseFile)
+}
+
+async function mergeAndCleanseFile(filename) {
+  const filepath = path.join(process.cwd(), filename)
+  console.log('filepath:', filepath)
+  const filedata = await jsonfile.readFile(filepath)
+  console.log(filedata)
   const result = {}
   for (let key of Object.keys(filedata)) {
     if (re.test(key)) continue
@@ -26,6 +33,7 @@ async function mergeAndCleanseDir (dir) {
 
   await jsonfile.writeFile(path.join('.nyc_output', filename), JSON.stringify(result))
 }
+
 const re = /\/dist\//
 
 main()

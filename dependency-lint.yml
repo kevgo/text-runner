@@ -43,6 +43,7 @@ ignoreErrors:
     - babel-plugin-istanbul
     - babel-preset-flow
     - coveralls
+    - prettier
     - eslint
     - eslint-plugin-flowtype
     - eslint-plugin-import

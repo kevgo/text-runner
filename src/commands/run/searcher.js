@@ -49,13 +49,17 @@ class Searcher {
     this.query = query
     const result = this.nodes.filter(this._getMatcher())
     if (result.length > 1) {
-      throw new Error(`found more than one ${this._queryName()} tag in the active block`)
+      throw new Error(
+        `found more than one ${this._queryName()} tag in the active block`
+      )
     }
     if (result.length === 0) {
       if (options.default != null) {
         return null
       } else {
-        throw new Error(`no ${this._queryName()} tag found in this active block`)
+        throw new Error(
+          `no ${this._queryName()} tag found in this active block`
+        )
       }
     }
     return result[0]

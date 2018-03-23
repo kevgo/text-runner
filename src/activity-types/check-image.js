@@ -36,7 +36,11 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
   }
 }
 
-async function checkRemoteImage (node: AstNode, formatter: Formatter, configuration: Configuration) {
+async function checkRemoteImage (
+  node: AstNode,
+  formatter: Formatter,
+  configuration: Configuration
+) {
   if (configuration.get('offline')) {
     formatter.skip(`skipping external image ${node.src || ''}`)
     return
@@ -58,8 +62,11 @@ async function checkRemoteImage (node: AstNode, formatter: Formatter, configurat
 function isRemoteImage (node: AstNode): boolean {
   if (node.src != null) {
     return (
+      node.src.startsWith('//') ||
       // $FlowFixMe
-      node.src.startsWith('//') || node.src.startsWith('http://') || node.src.startsWith('https://')
+      node.src.startsWith('http://') ||
+      // $FlowFixMe
+      node.src.startsWith('https://')
     )
   } else {
     return false

@@ -22,9 +22,19 @@ module.exports = async function (act: Activity) {
   }
   act.formatter.setTitle(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
-    await checkLinkToAnchorInSameFile(act.filename, target, act.linkTargets, act.formatter)
+    await checkLinkToAnchorInSameFile(
+      act.filename,
+      target,
+      act.linkTargets,
+      act.formatter
+    )
   } else if (isLinkToAnchorInOtherFile(target)) {
-    await checkLinkToAnchorInOtherFile(act.filename, target, act.linkTargets, act.formatter)
+    await checkLinkToAnchorInOtherFile(
+      act.filename,
+      target,
+      act.linkTargets,
+      act.formatter
+    )
   } else if (isExternalLink(target)) {
     await checkExternalLink(target, act.formatter, act.configuration)
   } else {
@@ -32,7 +42,11 @@ module.exports = async function (act: Activity) {
   }
 }
 
-async function checkExternalLink (target: string, format: Formatter, config: Configuration) {
+async function checkExternalLink (
+  target: string,
+  format: Formatter,
+  config: Configuration
+) {
   if (config.get('offline')) {
     format.skip(`skipping link to external website ${target}`)
     return
@@ -46,7 +60,9 @@ async function checkExternalLink (target: string, format: Formatter, config: Con
       format.warning(`link to non-existing external website ${red(target)}`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
       format.warning(`link to ${magenta(target)} timed out`)
-    } else if (err.message.startsWith("Hostname/IP doesn't match certificate's altnames")) {
+    } else if (
+      err.message.startsWith("Hostname/IP doesn't match certificate's altnames")
+    ) {
       format.warning(`link to ${magenta(target)} has error: #{err.message}`)
     } else {
       format.warning(`error while checking link to ${magenta(target)}: ${err}`)
@@ -54,7 +70,11 @@ async function checkExternalLink (target: string, format: Formatter, config: Con
   }
 }
 
-async function checkLinkToFilesystem (filename: string, target: string, format: Formatter) {
+async function checkLinkToFilesystem (
+  filename: string,
+  target: string,
+  format: Formatter
+) {
   if (target.startsWith('/')) {
     target = target.substr(1)
   } else {
@@ -101,25 +121,37 @@ async function checkLinkToAnchorInOtherFile (
   targetFilename = decodeURI(targetFilename)
   if (linkTargets[targetFilename] == null) {
     throw new Error(
-      `link to anchor #${cyan(targetAnchor)} in non-existing file ${red(targetFilename)}`
+      `link to anchor #${cyan(targetAnchor)} in non-existing file ${red(
+        targetFilename
+      )}`
     )
   }
   const targetEntry = (linkTargets[targetFilename] || []).filter(
     linkTarget => linkTarget.name === targetAnchor
   )[0]
   if (!targetEntry) {
-    throw new Error(`link to non-existing anchor #${red(targetAnchor)} in ${cyan(targetFilename)}`)
+    throw new Error(
+      `link to non-existing anchor #${red(targetAnchor)} in ${cyan(
+        targetFilename
+      )}`
+    )
   }
 
   if (targetEntry.type === 'heading') {
-    format.setTitle(`link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`)
+    format.setTitle(
+      `link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`
+    )
   } else {
     format.setTitle(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }
 }
 
 function isExternalLink (target: string): boolean {
-  return target.startsWith('//') || target.startsWith('http://') || target.startsWith('https://')
+  return (
+    target.startsWith('//') ||
+    target.startsWith('http://') ||
+    target.startsWith('https://')
+  )
 }
 
 function isLinkToAnchorInOtherFile (target: string): boolean {

@@ -49,7 +49,8 @@ class ActivityListBuilder {
     for (let node: AstNode of tree) {
       const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
       if (isActiveBlockStartTag) {
-        if (insideActiveBlock) throw new Error('Found a nested <a textrun="*"> block')
+        if (insideActiveBlock)
+          throw new Error(`${this.filePath}: Found a nested ${node.content || ''} block`)
         insideActiveBlock = true
         if (node.line != null) {
           startLine = node.line

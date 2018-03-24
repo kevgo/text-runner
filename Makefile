@@ -59,3 +59,12 @@ ifndef FILE
 else
 	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif
+
+features: build
+ifndef FILE
+	make cuke-api
+	make cuke-cli
+else
+	make cuke-api $(FILE)
+	make cuke-cli $(FILE)
+endif

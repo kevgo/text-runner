@@ -39,10 +39,16 @@ coverage:
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
 .PHONY: coverage
 
-cuke-api:
+cuke-api: build
 ifndef FILE
 	NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' --format progress
 else
 	DEBUG='*,-babel' NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' $(FILE)
 endif
 
+cuke-cli: build
+ifndef FILE
+	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' --format progress
+else
+	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' $(FILE)
+endif

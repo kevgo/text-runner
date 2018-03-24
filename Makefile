@@ -89,18 +89,7 @@ setup:
 	yarn install
 	node-prune
 
-spec:
-ifndef FILE
-	make lint
-	make tests
-	echo
-	make cuke-api
-	make cuke-cli
-	echo
-	echo
-	make docs
-else
-	make cuke-api $(FILE)
-	make cuke-cli $(FILE)
-endif
+spec: lint tests cuke-api cuke-cli docs
 
+tests: build
+	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"

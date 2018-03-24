@@ -68,3 +68,17 @@ else
 	make cuke-api $(FILE)
 	make cuke-cli $(FILE)
 endif
+
+# lints all files
+lint: lint-js lint-md
+
+# lints the javascript files
+lint-js:
+	standard -v
+	node_modules/.bin/flow
+	node_modules/.bin/dependency-lint
+
+# lints markdown files
+lint-md:
+	remark .
+

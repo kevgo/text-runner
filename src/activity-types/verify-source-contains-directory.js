@@ -6,7 +6,7 @@ const { bold, cyan } = require('chalk')
 const fs = require('fs')
 const path = require('path')
 
-// Verifies that a local directory linked in MarkDown exists
+// Verifies that a local directory linked in Markdown exists
 module.exports = function (activity: Activity) {
   const directory = activity.searcher.tagContent('link_open')
   activity.formatter.setTitle(

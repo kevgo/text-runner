@@ -3,18 +3,18 @@
 import type Formatter from '../../src/formatters/formatter.js'
 
 type Console = {
-  log: (string) => void
+  log: string => void
 }
 
 type StdStream = {
-  write: (string) => void
+  write: string => void
 }
 
-const {setWorldConstructor} = require('cucumber')
+const { setWorldConstructor } = require('cucumber')
 // $FlowFixMe: we need to test the 'dist' folder for test coverage
 const textRunner = require('../../dist/text-runner.js')
-const {expect} = require('chai')
-const {cyan} = require('chalk')
+const { expect } = require('chai')
+const { cyan } = require('chalk')
 const flatten = require('array-flatten')
 const fs = require('fs-extra')
 const glob = require('glob')
@@ -40,22 +40,38 @@ class TestFormatter {
   verbose: boolean
   warnings: string[]
 
-  constructor ({verbose}) {
+  constructor ({ verbose }) {
     this.verbose = verbose
     this.activities = []
     this.errorMessages = []
     this.filePaths = []
     this.lines = []
     this.text = ''
-    this.console = {log: (text: string) => { this.text += `${text}\n` }}
-    this.stdout = {write: (text) => { this.text += text }}
-    this.stderr = {write: (text) => { this.text += text }}
+    this.console = {
+      log: (text: string) => {
+        this.text += `${text}\n`
+      }
+    }
+    this.stdout = {
+      write: text => {
+        this.text += text
+      }
+    }
+    this.stderr = {
+      write: text => {
+        this.text += text
+      }
+    }
     this.warnings = []
   }
 
   startActivity (activityTypeName: string) {
     this.activities.push(stripAnsi(activityTypeName))
-    this.lines.push(this.startLine !== this.endLine ? `${this.startLine}-${this.endLine}` : this.startLine.toString())
+    this.lines.push(
+      this.startLine !== this.endLine
+        ? `${this.startLine}-${this.endLine}`
+        : this.startLine.toString()
+    )
     if (this.verbose) console.log(activityTypeName)
   }
 
@@ -79,7 +95,11 @@ class TestFormatter {
 
   error (error: ErrnoError) {
     this.errorMessages.push(stripAnsi(error.message || error.toString()))
-    this.lines.push(unique([this.startLine, this.endLine]).filter((e) => e).join('-'))
+    this.lines.push(
+      unique([this.startLine, this.endLine])
+        .filter(e => e)
+        .join('-')
+    )
     if (this.verbose) console.log(error)
   }
 
@@ -110,13 +130,26 @@ const ApiWorld = function () {
   // ApiWorld provides step implementations that run and test TextRunner
   // via its Javascript API
 
-  this.execute = async function (args: {command: string, file: string, offline?: boolean, exclude?: string[], format: Formatter, expectError: boolean}) {
+  this.execute = async function (args: {
+    command: string,
+    file: string,
+    offline?: boolean,
+    exclude?: string[],
+    format: Formatter,
+    expectError: boolean
+  }) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
-    this.formatter = new TestFormatter({verbose: this.verbose})
+    this.formatter = new TestFormatter({ verbose: this.verbose })
     const formatter: Formatter = args.format || this.formatter
     try {
-      await textRunner({command: args.command, file: args.file, offline: args.offline, exclude: args.exclude, format: formatter})
+      await textRunner({
+        command: args.command,
+        file: args.file,
+        offline: args.offline,
+        exclude: args.exclude,
+        format: formatter
+      })
     } catch (err) {
       this.error = err
     }
@@ -140,7 +173,9 @@ const ApiWorld = function () {
     }
     const expected = stripAnsi(expectedText)
     if (!actual.includes(expected)) {
-      throw new UnprintedUserError(`Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`)
+      throw new UnprintedUserError(
+        `Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`
+      )
     }
   }
 
@@ -149,44 +184,71 @@ const ApiWorld = function () {
     // This is tested in the CLI world.
   }
 
-  this.verifyFailure = (table) => {
-    if (this.formatter.errorMessages.some((message) => message.includes(table['ERROR MESSAGE']).length === 0)) {
-      throw new UnprintedUserError(`Expected\n\n${cyan(this.formatter.errorMessages[0])}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`)
+  this.verifyFailure = table => {
+    if (
+      this.formatter.errorMessages.some(
+        message => message.includes(table['ERROR MESSAGE']).length === 0
+      )
+    ) {
+      throw new UnprintedUserError(
+        `Expected\n\n${cyan(
+          this.formatter.errorMessages[0]
+        )}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`
+      )
     }
-    if (table.FILENAME) expect(this.formatter.filePaths).to.include(table.FILENAME)
+    if (table.FILENAME) { expect(this.formatter.filePaths).to.include(table.FILENAME) }
     if (table.LINE) expect(this.formatter.lines).to.include(table.LINE)
   }
 
-  this.verifyOutput = (table) => {
-    if (table.FILENAME) expect(standardizePaths(this.formatter.filePaths)).to.include(table.FILENAME, `${this.formatter.filePaths}`)
+  this.verifyOutput = table => {
+    if (table.FILENAME) {
+      expect(standardizePaths(this.formatter.filePaths)).to.include(
+        table.FILENAME,
+        `${this.formatter.filePaths}`
+      )
+    }
     if (table.LINE) expect(this.formatter.lines).to.include(table.LINE)
 
     if (table.MESSAGE) {
       const activities = standardizePaths(this.formatter.activities)
-      if (!activities.some((activity) => activity.includes(table.MESSAGE))) {
-        throw new UnprintedUserError(`activity ${cyan(table.MESSAGE)} not found in ${activities.join(', ')}`)
+      if (!activities.some(activity => activity.includes(table.MESSAGE))) {
+        throw new UnprintedUserError(
+          `activity ${cyan(table.MESSAGE)} not found in ${activities.join(
+            ', '
+          )}`
+        )
       }
     }
-    if (table.WARNING) expect(standardizePaths(this.formatter.warnings)).to.include(table.WARNING)
+    if (table.WARNING) {
+      expect(standardizePaths(this.formatter.warnings)).to.include(
+        table.WARNING
+      )
+    }
   }
 
   this.verifyRanConsoleCommand = async (command: string) => {
-    await waitUntil(() => this.formatter.activities.includes(`running console command: ${command}`))
+    await waitUntil(() =>
+      this.formatter.activities.includes(`running console command: ${command}`)
+    )
   }
 
   this.verifyRanOnlyTests = (files: string[]) => {
     files = flatten(files)
     for (let file of files) {
-      expect(this.formatter.filePaths).to.include(file, this.formatter.filePaths)
+      expect(this.formatter.filePaths).to.include(
+        file,
+        this.formatter.filePaths
+      )
     }
 
     // verify all other tests have not run
-    const filesShouldntRun = glob.sync(`${this.rootDir}/**`)
-                                 .filter((filename) => fs.statSync(filename).isFile())
-                                 .map((filename) => path.relative(this.rootDir, filename))
-                                 .filter((filename) => filename)
-                                 .map((filename) => filename.replace(/\\/g, '/'))
-                                 .filter((filename) => files.indexOf(filename) === -1)
+    const filesShouldntRun = glob
+      .sync(`${this.rootDir}/**`)
+      .filter(filename => fs.statSync(filename).isFile())
+      .map(filename => path.relative(this.rootDir, filename))
+      .filter(filename => filename)
+      .map(filename => filename.replace(/\\/g, '/'))
+      .filter(filename => files.indexOf(filename) === -1)
     for (let fileShouldntRun of filesShouldntRun) {
       expect(this.formatter.filePaths).to.not.include(fileShouldntRun)
     }
@@ -202,7 +264,7 @@ const ApiWorld = function () {
 }
 
 function standardizePaths (paths: string[]) {
-  return paths.map((path) => path.replace(/\\/g, '/'))
+  return paths.map(path => path.replace(/\\/g, '/'))
 }
 
 if (process.env.EXOSERVICE_TEST_DEPTH === 'API') {

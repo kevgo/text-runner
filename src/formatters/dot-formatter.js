@@ -11,7 +11,7 @@ class DotFormatter extends Formatter {
     var output = ''
     if (this.filePath) output += this.filePath
     if (this.startLine) output += `:${this.startLine}`
-    if (this.endLine && this.endLine !== this.startLine) output += `-${this.endLine}`
+    if (this.endLine && this.endLine !== this.startLine) { output += `-${this.endLine}` }
     if (this.filePath) output += ' -- '
     output += errorMessage
     console.log(output)

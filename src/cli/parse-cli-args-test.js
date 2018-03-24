@@ -50,7 +50,10 @@ describe('parse-cli-args', function () {
 
   context('with <text-run> call', function () {
     beforeEach(function () {
-      this.result = parseCliArgs(['/Users/kevlar/d/text-runner/bin/text-run', 'run'])
+      this.result = parseCliArgs([
+        '/Users/kevlar/d/text-runner/bin/text-run',
+        'run'
+      ])
     })
 
     it('returns the "run" command', function () {

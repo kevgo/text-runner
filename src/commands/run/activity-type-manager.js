@@ -32,7 +32,9 @@ class ActivityTypeManager {
     activityType = kebabcase(activityType)
     const result = this.handlerFunctions[activityType]
     if (!result) {
-      var errorText = `unknown activity type: ${red(activityType)}\nAvailable activity types:\n`
+      var errorText = `unknown activity type: ${red(
+        activityType
+      )}\nAvailable activity types:\n`
       for (let actionName of Object.keys(this.handlerFunctions).sort()) {
         errorText += `* ${actionName}\n`
       }
@@ -64,10 +66,9 @@ class ActivityTypeManager {
 
   loadBuiltinActions () {
     for (let filename of this.builtinActionFilenames()) {
-      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(
-        /Action/,
-        ''
-      )
+      const actionName = kebabcase(
+        path.basename(filename, path.extname(filename))
+      ).replace(/Action/, '')
       this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }
@@ -75,10 +76,9 @@ class ActivityTypeManager {
   loadCustomActions () {
     for (let filename of this.customActionFilenames()) {
       rechoir.prepare(interpret.jsVariants, filename)
-      const actionName = kebabcase(path.basename(filename, path.extname(filename))).replace(
-        /Action/,
-        ''
-      )
+      const actionName = kebabcase(
+        path.basename(filename, path.extname(filename))
+      ).replace(/Action/, '')
       this.handlerFunctions[kebabcase(actionName)] = require(filename)
     }
   }

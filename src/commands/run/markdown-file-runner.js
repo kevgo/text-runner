@@ -44,7 +44,9 @@ class MarkdownFileRunner {
       configuration: this.configuration,
       linkTargets: value.linkTargets
     })
-    this.linkTargetBuilder = new LinkTargetListBuilder({ linkTargets: value.linkTargets })
+    this.linkTargetBuilder = new LinkTargetListBuilder({
+      linkTargets: value.linkTargets
+    })
   }
 
   // Prepares this runner
@@ -61,7 +63,10 @@ class MarkdownFileRunner {
       )
     }
     const astNodeList = this.parser.parse(markdownText)
-    const linkTargets = this.linkTargetBuilder.buildLinkTargets(this.filePath, astNodeList)
+    const linkTargets = this.linkTargetBuilder.buildLinkTargets(
+      this.filePath,
+      astNodeList
+    )
     this.runData = this.activityListBuilder.build(linkTargets)
   }
 

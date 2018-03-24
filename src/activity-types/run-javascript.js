@@ -12,7 +12,7 @@ module.exports = function (activity: Activity, done: DoneFunction) {
     done(new Error('no JavaScript code found in the fenced block'))
     return
   }
-  code = replaceSubstitutionsInConfiguration(code, activity.configuration)
+  code = replaceSubstitutions(code, activity.configuration)
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
 
@@ -39,14 +39,16 @@ function appendAsyncCallback (code: string): string {
 }
 
 function replaceAsyncCallbacks (code: string): string {
-  return code.replace('<CALLBACK>', '__finished').replace(/\/\/\s*\.\.\./g, '__finished()')
+  return code
+    .replace('<CALLBACK>', '__finished')
+    .replace(/\/\/\s*\.\.\./g, '__finished()')
 }
 
 // substitutes replacements configured in text-run.yml
-function replaceSubstitutionsInConfiguration (code: string, configuration: Configuration): string {
+function replaceSubstitutions (code: string, c: Configuration): string {
   try {
     // $FlowFixMe: we can ignore undefined values here since `code` has a default value
-    for (let replaceData of configuration.fileData.actions.runJavascript.replace) {
+    for (let replaceData of c.fileData.actions.runJavascript.replace) {
       code = code.replace(replaceData.search, replaceData.replace)
     }
   } catch (e) {

@@ -10,7 +10,13 @@ const path = require('path')
 // and returns them structured as the command to run and options
 module.exports = function (
   argv: string[]
-): { command: string, file?: string, offline?: boolean, exclude?: string, format?: Formatter } {
+): {
+  command: string,
+  file?: string,
+  offline?: boolean,
+  exclude?: string,
+  format?: Formatter
+} {
   // remove optional unix node call
   if (path.basename(argv[0] || '') === 'node') {
     argv.splice(0, 1)

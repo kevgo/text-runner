@@ -8,12 +8,16 @@ const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
 module.exports = function (activity: Activity) {
-  const installText = trimDollar(activity.searcher.tagContent(['fence', 'code']))
+  const installText = trimDollar(
+    activity.searcher.tagContent(['fence', 'code'])
+  )
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
   activity.formatter.setTitle(`verify NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    throw new Error(`could not find ${cyan(pkg.name)} in installation instructions`)
+    throw new Error(
+      `could not find ${cyan(pkg.name)} in installation instructions`
+    )
   }
 }
 

@@ -8,7 +8,10 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
 module.exports = function (activity: Activity) {
-  const filePath = activity.searcher.tagContent(['strongtext', 'emphasizedtext'])
+  const filePath = activity.searcher.tagContent([
+    'strongtext',
+    'emphasizedtext'
+  ])
   const expectedContent = activity.searcher.tagContent(['fence', 'code'])
   activity.formatter.setTitle(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(activity.configuration.testDir, filePath)
@@ -25,6 +28,8 @@ module.exports = function (activity: Activity) {
   try {
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
   } catch (err) {
-    throw new Error(`mismatching content in ${cyan(bold(filePath))}:\n${err.message}`)
+    throw new Error(
+      `mismatching content in ${cyan(bold(filePath))}:\n${err.message}`
+    )
   }
 }

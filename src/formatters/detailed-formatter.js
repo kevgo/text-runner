@@ -54,7 +54,10 @@ class DetailedFormatter extends Formatter {
     console.log(this._applyColorFunctions(text, ...colorFunctions))
   }
 
-  _applyColorFunctions (text: string, ...colorFunctions: Array<colorFunction>): string {
+  _applyColorFunctions (
+    text: string,
+    ...colorFunctions: Array<colorFunction>
+  ): string {
     for (let colorFunction of colorFunctions) {
       text = colorFunction(text)
     }

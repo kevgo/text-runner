@@ -31,7 +31,8 @@ class MarkdownParser {
   ): AstNodeList {
     const modifiers = []
     for (let node of ast) {
-      const nodeLine = node.lines && node.lines.length > 0 ? node.lines[0] + 1 : line
+      const nodeLine =
+        node.lines && node.lines.length > 0 ? node.lines[0] + 1 : line
 
       if (node.type === 'em_open') {
         modifiers.push('emphasized')
@@ -52,13 +53,19 @@ class MarkdownParser {
         })
         heading = null
       } else if (isHtmlImageTag(node)) {
-        result.push({ line: nodeLine, type: 'image', src: htmlImageTagSrc(node) })
+        result.push({
+          line: nodeLine,
+          type: 'image',
+          src: htmlImageTagSrc(node)
+        })
       } else if (node.type === 'image') {
         result.push({ line: nodeLine, type: 'image', src: node.src })
       } else if (heading && node.type === 'text') {
         heading.text += node.content
       } else if (
-        ['code', 'fence', 'htmlblock', 'htmltag', 'link_open', 'text'].indexOf(node.type) > -1
+        ['code', 'fence', 'htmlblock', 'htmltag', 'link_open', 'text'].indexOf(
+          node.type
+        ) > -1
       ) {
         result.push({
           line: nodeLine,

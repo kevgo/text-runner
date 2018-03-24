@@ -23,7 +23,10 @@ class LinkTargetListBuilder {
           if (node.content != null) {
             const matches = node.content.match(/<a name="([^"]*)">/)
             if (matches != null) {
-              this.linkTargets[filePath].push({ type: 'anchor', name: matches[1] })
+              this.linkTargets[filePath].push({
+                type: 'anchor',
+                name: matches[1]
+              })
             }
           }
           break

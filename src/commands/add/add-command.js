@@ -10,7 +10,11 @@ class AddCommand implements Command {
     if (!fs.existsSync('text-run')) {
       fs.mkdirSync('text-run')
     }
-    fs.writeFileSync(path.join('text-run', filename + '.js'), this._template(), 'utf8')
+    fs.writeFileSync(
+      path.join('text-run', filename + '.js'),
+      this._template(),
+      'utf8'
+    )
   }
 
   _template () {

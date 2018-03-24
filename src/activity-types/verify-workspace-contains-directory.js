@@ -11,13 +11,17 @@ module.exports = function (activity: Activity) {
   const directory = activity.searcher.tagContent('code')
   const fullPath = path.join(activity.configuration.testDir, directory)
   activity.formatter.setTitle(
-    `verifying the ${bold(cyan(directory))} directory exists in the test workspace`
+    `verifying the ${bold(
+      cyan(directory)
+    )} directory exists in the test workspace`
   )
   var stats
   try {
     stats = fs.lstatSync(fullPath)
   } catch (err) {
-    throw new Error(`directory ${cyan(bold(directory))} does not exist in the test workspace`)
+    throw new Error(
+      `directory ${cyan(bold(directory))} does not exist in the test workspace`
+    )
   }
   if (!stats.isDirectory()) {
     throw new Error(`${cyan(bold(directory))} exists but is not a directory`)

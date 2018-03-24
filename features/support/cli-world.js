@@ -1,7 +1,7 @@
 // @flow
 
-const {expect} = require('chai')
-const {setWorldConstructor} = require('cucumber')
+const { expect } = require('chai')
+const { setWorldConstructor } = require('cucumber')
 const dimConsole = require('dim-console')
 const flatten = require('array-flatten')
 const fs = require('fs-extra')
@@ -14,7 +14,10 @@ const CliWorld = function () {
   // CliWorld provides step implementations that run and test TextRunner
   // via its command-line interface
 
-  this.execute = async function (params: {command: string, expectError: boolean}) {
+  this.execute = async function (params: {
+    command: string,
+    expectError: boolean
+  }) {
     var args = {}
     args.cwd = this.rootDir
     args.env = {}
@@ -22,8 +25,18 @@ const CliWorld = function () {
       args.stdout = dimConsole.process.stdout
       args.stderr = dimConsole.process.stderr
     } else {
-      args.stdout = {write: (text) => { this.output += text; return false }}
-      args.stderr = {write: (text) => { this.output += text; return false }}
+      args.stdout = {
+        write: text => {
+          this.output += text
+          return false
+        }
+      }
+      args.stderr = {
+        write: text => {
+          this.output += text
+          return false
+        }
+      }
     }
     if (this.debug) {
       args.env['DEBUG'] = '*,-babel'
@@ -72,7 +85,7 @@ const CliWorld = function () {
     expect(this.process.fullOutput()).to.include(expectedText)
   }
 
-  this.verifyFailure = (table) => {
+  this.verifyFailure = table => {
     const output = this.process.fullOutput()
     var expectedHeader
     if (table.FILENAME && table.LINE) {
@@ -90,11 +103,11 @@ const CliWorld = function () {
     expect(this.process.exitCode).to.equal(parseInt(table['EXIT CODE']))
   }
 
-  this.verifyOutput = (table) => {
+  this.verifyOutput = table => {
     var expectedText = ''
     if (table.FILENAME) expectedText += table.FILENAME
     if (table.FILENAME && table.LINE) expectedText += `:${table.LINE}`
-    if (table.FILENAME && (table.MESSAGE || table.WARNING)) expectedText += ' -- '
+    if (table.FILENAME && (table.MESSAGE || table.WARNING)) { expectedText += ' -- ' }
     if (table.MESSAGE) expectedText += table.MESSAGE
     if (table.WARNING) expectedText += table.WARNING
     expect(standardizePath(this.process.fullOutput())).to.include(expectedText)
@@ -119,7 +132,9 @@ const CliWorld = function () {
   }
 
   this.verifyRanConsoleCommand = (command: string) => {
-    expect(this.process.fullOutput()).to.include(`running.md:1-5 -- running console command: ${command}`)
+    expect(this.process.fullOutput()).to.include(
+      `running.md:1-5 -- running console command: ${command}`
+    )
   }
 
   this.verifyRanOnlyTests = (filenames: string[]) => {
@@ -132,22 +147,23 @@ const CliWorld = function () {
     }
 
     // verify all other tests have not run
-    const filesShouldntRun = glob.sync(`${this.rootDir}/**`)
-                                 .filter((file) => fs.statSync(file).isFile())
-                                 .map((file) => path.relative(this.rootDir, file))
-                                 .filter((file) => file)
-                                 .map((file) => file.replace(/\\/g, '/'))
-                                 .filter((file) => filenames.indexOf(file) === -1)
+    const filesShouldntRun = glob
+      .sync(`${this.rootDir}/**`)
+      .filter(file => fs.statSync(file).isFile())
+      .map(file => path.relative(this.rootDir, file))
+      .filter(file => file)
+      .map(file => file.replace(/\\/g, '/'))
+      .filter(file => filenames.indexOf(file) === -1)
     for (let fileShouldntRun of filesShouldntRun) {
       expect(standardizedOutput).to.not.include(fileShouldntRun)
     }
   }
 
-  this.verifyTestsRun = (count) => {
+  this.verifyTestsRun = count => {
     expect(this.process.fullOutput()).to.include(` ${count} blocks`)
   }
 
-  this.verifyUnknownCommand = (command) => {
+  this.verifyUnknownCommand = command => {
     expect(this.process.fullOutput()).to.include(`unknown command: ${command}`)
   }
 }

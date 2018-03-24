@@ -105,7 +105,9 @@ class Formatter {
       this.warning('no activities found')
       return
     }
-    var text = green(`\nSuccess! ${this.stepsCount} blocks in ${this.filePaths.length} files`)
+    var text = green(
+      `\nSuccess! ${this.stepsCount} blocks in ${this.filePaths.length} files`
+    )
     if (this.warningsCount > 0) {
       text += green(', ')
       text += magenta(`${this.warningsCount} warnings`)

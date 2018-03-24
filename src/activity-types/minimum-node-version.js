@@ -8,13 +8,17 @@ const jsYaml = require('js-yaml')
 
 module.exports = function (activity: Activity) {
   const documentedVersion = parseInt(activity.searcher.tagContent('text'))
-  if (isNaN(documentedVersion)) throw new Error('given Node version is not a number')
-  activity.formatter.setTitle(`supported NodeJS version should be ${cyan(documentedVersion)}`)
+  if (isNaN(documentedVersion)) { throw new Error('given Node version is not a number') }
+  activity.formatter.setTitle(
+    `supported NodeJS version should be ${cyan(documentedVersion)}`
+  )
 
   const supportedVersion = getSupportedVersion()
   if (supportedVersion !== documentedVersion) {
     throw new Error(
-      `minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(supportedVersion)}`
+      `minimum Node version is ${cyan(documentedVersion)}, should be ${cyan(
+        supportedVersion
+      )}`
     )
   }
 }

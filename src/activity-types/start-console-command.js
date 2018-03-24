@@ -23,7 +23,9 @@ module.exports = async function (activity: Activity) {
     .map(makeGlobal(activity.configuration))
     .join(' && ')
 
-  activity.formatter.setTitle(`starting a long-running process: ${bold(cyan(commandsToRun))}`)
+  activity.formatter.setTitle(
+    `starting a long-running process: ${bold(cyan(commandsToRun))}`
+  )
   global.startConsoleCommandOutput = ''
   global.runningProcess = new ObservableProcess({
     commands: callArgs(commandsToRun),
@@ -59,7 +61,9 @@ function makeGlobal (configuration: Configuration) {
     if (replacement) {
       debug(`found replacement: ${replacement}`)
       return (
-        path.join(configuration.sourceDir, replacement) + ' ' + commandParts.splice(1).join(' ')
+        path.join(configuration.sourceDir, replacement) +
+        ' ' +
+        commandParts.splice(1).join(' ')
       )
     } else {
       return commandText

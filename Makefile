@@ -42,7 +42,7 @@ coverage-api: coverage-prepare
 coverage-cli: coverage-prepare
 	rm -rf .nyc_output
 	rm -rf .nyc_output_cli
-	BABEL_ENV=test_coverage NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI nyc node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)'
+	NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)'
 
 # test coverage for the self-check
 coverage-textrun: coverage-prepare

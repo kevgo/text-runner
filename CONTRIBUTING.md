@@ -8,18 +8,18 @@
 
 ## Testing
 
-* run all tests: <a textrun="does-command-exist">`make spec`</a>
-* run feature specs: <a textrun="does-command-exist">`make features`</a>
-* run feature specs against the JS API: <a textrun="does-command-exist">`make cuke-api`</a>
-* run feature specs against the CLI: <a textrun="does-command-exist">`make cuke-cli`</a>
+* run all tests: <a textrun="does-make-target-exist">`make spec`</a>
+* run feature specs: <a textrun="does-make-target-exist">`make features`</a>
+* run feature specs against the JS API: <a textrun="does-make-target-exist">`make cuke-api`</a>
+* run feature specs against the CLI: <a textrun="does-make-target-exist">`make cuke-cli`</a>
 * run feature specs against the CLI in offline mode: `make cuke-cli --tags '~@online'`
-* run text-run: <a textrun="does-command-exist">`make docs`</a>
+* run text-run: <a textrun="does-make-target-exist">`make docs`</a>
 
 To debug a single test:
 * enable console output: add the `@verbose` tag
 * enable debugging statements and verbose output: add the `@debug` tag
 
-To determine test coverage, run <a textrun="does-command-exist">`make coverage`</a>.
+To determine test coverage, run <a textrun="does-make-target-exist">`make coverage`</a>.
 The coverage in relatively low because TextRunner contains copious amounts of
 defensive checks against invalid user input.
 Not all permutations of that are tested.
@@ -27,9 +27,9 @@ Not all permutations of that are tested.
 
 ## Linting
 
-* run all linters: <a textrun="does-command-exist">`make lint`</a>
-* run JavaScript linters: <a textrun="does-command-exist">`make lint-js`</a>
-* run Markdown linters: <a textrun="does-command-exist">`make lint-md`</a>
+* run all linters: <a textrun="does-make-target-exist">`make lint`</a>
+* run JavaScript linters: <a textrun="does-make-target-exist">`make lint-js`</a>
+* run Markdown linters: <a textrun="does-make-target-exist">`make lint-md`</a>
 
 The JavaScript Standard linter does not properly handle Flow types at this point,
 hence it is recommended to only show flow lint messages in your editor,

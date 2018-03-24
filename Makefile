@@ -82,3 +82,9 @@ lint-js:
 lint-md:
 	remark .
 
+# sets up the installation on this machine
+setup:
+	go get github.com/tj/node-prune
+	rm -rf node_modules
+	yarn install
+	node-prune

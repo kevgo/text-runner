@@ -192,11 +192,13 @@ const ApiWorld = function () {
     ) {
       throw new UnprintedUserError(
         `Expected\n\n${cyan(
-          this.formatter.errorMessages[0]
+          JSON.stringify(this.formatter.errorMessages)
         )}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`
       )
     }
-    if (table.FILENAME) { expect(this.formatter.filePaths).to.include(table.FILENAME) }
+    if (table.FILENAME) {
+      expect(this.formatter.filePaths).to.include(table.FILENAME)
+    }
     if (table.LINE) expect(this.formatter.lines).to.include(table.LINE)
   }
 

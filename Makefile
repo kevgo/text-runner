@@ -11,7 +11,7 @@ clean:
 	rm -rf dist
 	rm -rf .nyc_output*
 
-coverage: coverage-unit-tests coverage-api-specs coverage-cli-specs coverage-self-check
+coverage: coverage-unit-tests coverage-api coverage-cli coverage-textrun
 	rm -rf .nyc_output
 	mkdir .nyc_output
 	node bin/cleanse-coverage.js
@@ -32,21 +32,20 @@ coverage-unit-tests: coverage-prepare
 	mkdir .nyc_output_tests
 
 # test coverage for API specs
-coverage-api-specs: coverage-prepare
+coverage-api: coverage-prepare
 	rm -rf .nyc_output
 	rm -rf .nyc_output_api
-	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc cucumber-js --tags '(not @clionly) and (not @todo)'
+	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)'
 	mv .nyc_output .nyc_output_api
 
 # test coverage for CLI specs
-coverage-cli-specs: coverage-prepare
+coverage-cli: coverage-prepare
 	rm -rf .nyc_output
 	rm -rf .nyc_output_cli
-	NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)'
-	mv .nyc_output .nyc_output_cli
+	BABEL_ENV=test_coverage NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI nyc node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)'
 
 # test coverage for the self-check
-coverage-self-check: coverage-prepare
+coverage-textrun: coverage-prepare
 	rm -rf .nyc_output
 	rm -rf .nyc_output_text_run
 	./node_modules/.bin/nyc bin/text-run --offline

@@ -88,3 +88,19 @@ setup:
 	rm -rf node_modules
 	yarn install
 	node-prune
+
+spec:
+ifndef FILE
+	make lint
+	make tests
+	echo
+	make cuke-api
+	make cuke-cli
+	echo
+	echo
+	make docs
+else
+	make cuke-api $(FILE)
+	make cuke-cli $(FILE)
+endif
+

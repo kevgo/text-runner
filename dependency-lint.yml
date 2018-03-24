@@ -10,25 +10,6 @@ executedModules:
       - version
   shellScripts:
     dev:
-      - bin/build
-      - bin/build.cmd
-      - bin/build-coverage
-      - bin/cleanse-coverage.js
-      - bin/coverage
-      - bin/cuke-api
-      - bin/cuke-api.cmd
-      - bin/cuke-cli
-      - bin/cuke-cli.cmd
-      - bin/docs
-      - bin/features
-      - bin/lint
-      - bin/lint-js
-      - bin/lint-md
-      - bin/publish
-      - bin/spec
-      - bin/tests
-      - bin/tests.cmd
-      - bin/update
     ignore: []
     root: 'bin/*'
 

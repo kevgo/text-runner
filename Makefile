@@ -41,9 +41,9 @@ coverage:
 
 cuke-api: build
 ifndef FILE
-	NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' --format progress
+	NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)' --format progress
 else
-	DEBUG='*,-babel' NODE_ENV=test EXOSERVICE_TEST_DEPTH=API cucumber-js --tags '(not @clionly) and (not @todo)' $(FILE)
+	DEBUG='*,-babel' NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)' $(FILE)
 endif
 
 cuke-cli: build
@@ -51,4 +51,11 @@ ifndef FILE
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' --format progress
 else
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' $(FILE)
+endif
+
+docs: build
+ifndef FILE
+	bin/text-run --offline
+else
+	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif

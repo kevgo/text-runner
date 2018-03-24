@@ -93,3 +93,8 @@ spec: lint tests cuke-api cuke-cli docs
 
 tests: build
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"
+
+upgrade:
+	yarn upgrade-interactive
+	flow-typed install --overwrite
+	rm flow-typed/npm/remarkable_v1.x.x.js

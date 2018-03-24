@@ -1,7 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
-module.exports = async function ({formatter, searcher}) {
+module.exports = async function ({ formatter, searcher }) {
   const filename = searcher.tagContent('code')
   try {
     fs.lstatSync(path.join(process.cwd(), filename))

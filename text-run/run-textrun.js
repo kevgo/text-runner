@@ -16,7 +16,9 @@ module.exports = async function ({ configuration, formatter, searcher }) {
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
     formatter.error(
-      `text-run exited with code ${processor.exitCode} when processing the created Markdown file`
+      `text-run exited with code ${
+        processor.exitCode
+      } when processing the created Markdown file`
     )
   }
 }

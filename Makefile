@@ -11,6 +11,7 @@ clean:
 	rm -rf dist
 	rm -rf .nyc_output*
 
+# measures code coverage
 coverage:
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 	# test coverage for unit tests
@@ -39,6 +40,7 @@ coverage:
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
 .PHONY: coverage
 
+# runs the API tests
 cuke-api: build
 ifndef FILE
 	NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)' --format progress
@@ -46,6 +48,7 @@ else
 	DEBUG='*,-babel' NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)' $(FILE)
 endif
 
+# runs the CLI tests
 cuke-cli: build
 ifndef FILE
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' --format progress
@@ -53,6 +56,7 @@ else
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' $(FILE)
 endif
 
+# runs the documentation tests
 docs: build
 ifndef FILE
 	bin/text-run --offline
@@ -60,6 +64,7 @@ else
 	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif
 
+# runs the feature specs
 features: build
 ifndef FILE
 	make cuke-api
@@ -68,6 +73,10 @@ else
 	make cuke-api $(FILE)
 	make cuke-cli $(FILE)
 endif
+
+# prints all make targets
+help:
+	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*//'
 
 # lints all files
 lint: lint-js lint-md
@@ -89,11 +98,14 @@ setup:
 	yarn install
 	node-prune
 
+# runs all tests
 spec: lint tests cuke-api cuke-cli docs
 
+# runs the unit tests
 tests: build
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"
 
+# updates the dependencies to their latest versions
 upgrade:
 	yarn upgrade-interactive
 	flow-typed install --overwrite

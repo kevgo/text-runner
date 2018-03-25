@@ -1,6 +1,7 @@
 // @flow
 
 import type { Activity } from '../commands/run/activity.js'
+const endChildProcesses = require('end-child-processes')
 
 // Stops the currently running console command.
 module.exports = function (activity: Activity) {

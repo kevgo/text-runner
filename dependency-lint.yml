@@ -9,7 +9,7 @@ executedModules:
       - test
       - version
   shellScripts:
-    dev:
+    dev: []
     ignore: []
     root: 'bin/*'
 

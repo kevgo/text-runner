@@ -9,26 +9,7 @@ executedModules:
       - test
       - version
   shellScripts:
-    dev:
-      - bin/build
-      - bin/build.cmd
-      - bin/build-coverage
-      - bin/cleanse-coverage.js
-      - bin/coverage
-      - bin/cuke-api
-      - bin/cuke-api.cmd
-      - bin/cuke-cli
-      - bin/cuke-cli.cmd
-      - bin/docs
-      - bin/features
-      - bin/lint
-      - bin/lint-js
-      - bin/lint-md
-      - bin/publish
-      - bin/spec
-      - bin/tests
-      - bin/tests.cmd
-      - bin/update
+    dev: []
     ignore: []
     root: 'bin/*'
 
@@ -39,6 +20,7 @@ ignoreErrors:
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:
+    - babel-cli
     - babel-eslint
     - babel-plugin-istanbul
     - babel-preset-flow
@@ -46,9 +28,15 @@ ignoreErrors:
     - eslint
     - eslint-plugin-flowtype
     - eslint-plugin-import
+    - flow-bin
+    - flow-remove-types
+    - flow-typed
     - greenkeeper-lockfile
+    - mocha
+    - nyc
     - o-tools
     - request
+    - remark-cli
     - remark-lint
     - remark-preset-lint-recommended
     - standard

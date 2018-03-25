@@ -44,7 +44,9 @@ class RunCommand implements Command {
     } else if (isGlob(filename)) {
       await this.runGlob(filename)
     } else if (filename) {
-      throw new UnprintedUserError(`file or directory does not exist: ${red(filename)}`)
+      throw new UnprintedUserError(
+        `file or directory does not exist: ${red(filename)}`
+      )
     } else {
       await this.runAll()
     }
@@ -109,7 +111,9 @@ class RunCommand implements Command {
     } else if (setting === true) {
       this.configuration.testDir = tmp.dirSync().name
     } else {
-      throw new UnprintedUserError(`unknown 'useSystemTempDirectory' setting: ${setting}`)
+      throw new UnprintedUserError(
+        `unknown 'useSystemTempDirectory' setting: ${setting}`
+      )
     }
     debug(`using test directory: ${this.configuration.testDir}`)
     mkdirp.sync(this.configuration.testDir)

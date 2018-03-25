@@ -2,7 +2,8 @@
 
 ## Installation for development
 
-* `npm install`
+* you need to have Gnu Make installed - running `make` should work on your machine
+* run `make setup` to install all needed software and libraries on your computer
 * add `./bin` and `./node_modules/.bin` to your PATH
 
 

@@ -3,47 +3,47 @@ actions:
   ALL:
 
     - match:
-      command: 'bin/spec'
+      command: 'make spec'
 
     - match:
         filename: '\.md$'
-      command: 'bin/docs {{filename}}'
+      command: 'make docs FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
-      command: 'bin/cuke-api {{filename}} && bin/cuke-cli {{filename}}'
+      command: 'make cuke-api FILE={{filename}} && make cuke-cli FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'bin/cuke-api {{filename}}:{{line}} && bin/cuke-cli {{filename}}:{{line}}'
+      command: 'make cuke-api FILE={{filename}}:{{line}} && make cuke-cli FILE={{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.js'
-      command: 'bin/tests {{filename}}'
+      command: 'make tests {{filename}}'
 
 
   API:
 
     - match:
         filename: '\.md$'
-      command: 'bin/docs {{filename}}'
+      command: 'make docs FILE={{filename}}'
 
     - match:
-      command: 'bin/cuke-api'
+      command: 'make cuke-api'
 
     - match:
         filename: '\.feature$'
-      command: 'bin/cuke-api {{filename}}'
+      command: 'make cuke-api FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'bin/cuke-api {{filename}}:{{line}}'
+      command: 'make cuke-api FILE={{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.js'
-      command: 'bin/tests {{filename}}'
+      command: 'make tests FILE={{filename}}'
 
 
 
@@ -51,20 +51,20 @@ actions:
 
     - match:
         filename: '\.md$'
-      command: 'bin/docs {{filename}}'
+      command: 'make docs FILE={{filename}}'
 
     - match:
-      command: 'bin/cuke-cli'
+      command: 'make cuke-cli'
 
     - match:
         filename: '\.feature$'
-      command: 'bin/cuke-cli {{filename}}'
+      command: 'make cuke-cli FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'bin/cuke-cli {{filename}}:{{line}}'
+      command: 'make cuke-cli FILE={{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.js'
-      command: 'bin/tests {{filename}}'
+      command: 'make tests FILE={{filename}}'

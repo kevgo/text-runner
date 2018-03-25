@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-go get node-prune
-rm -rf node_modules
-yarn install
-node-prune

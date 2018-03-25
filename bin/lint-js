@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-# LINTS THE JAVASCRIPT FILES
-
-
-standard -v
-node_modules/.bin/flow
-node_modules/.bin/dependency-lint

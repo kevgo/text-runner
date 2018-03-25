@@ -14,7 +14,7 @@ install:
   - node --version
   - npm --version
   - npm install --loglevel error --depth 0
-  - set PATH=%APPDATA%\npm;%PATH%
+  - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:
   - make tests

@@ -35,7 +35,7 @@ coverage:
 	# post-process
 	rm -rf .nyc_output
 	mkdir .nyc_output
-	node bin/cleanse-coverage.js
+	node scripts/cleanse-coverage.js
 	nyc report --reporter=lcov
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
 .PHONY: coverage

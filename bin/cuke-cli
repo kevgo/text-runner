@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-set -e
-
-bin/build
-if [ "$#" != "1" ]; then
-  EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' --format progress "$@"
-else
-  EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' "$@"
-fi

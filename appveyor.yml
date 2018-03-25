@@ -15,11 +15,10 @@ install:
   - set PATH=%APPDATA%\npm;%PATH%
 
 test_script:
-  - bin\build.cmd
-  - bin\tests.cmd
-  - bin\cuke-api.cmd
-  - bin\cuke-cli.cmd
-  - bin\text-run.cmd --offline
+  - make tests
+  - make cuke-api
+  - make cuke-cli
+  - make docs
 
 
 # Don't double-build PRs

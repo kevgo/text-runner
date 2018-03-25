@@ -20,6 +20,7 @@ ignoreErrors:
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:
+    - babel-cli
     - babel-eslint
     - babel-plugin-istanbul
     - babel-preset-flow
@@ -27,10 +28,15 @@ ignoreErrors:
     - eslint
     - eslint-plugin-flowtype
     - eslint-plugin-import
+    - flow-bin
     - flow-remove-types
+    - flow-typed
     - greenkeeper-lockfile
+    - mocha
+    - nyc
     - o-tools
     - request
+    - remark-cli
     - remark-lint
     - remark-preset-lint-recommended
     - standard

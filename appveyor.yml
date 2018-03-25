@@ -7,7 +7,6 @@ environment:
 init:
   - git config --global core.autocrlf true
   - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
-  - dir c:\MinGW\bin
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -17,10 +16,11 @@ install:
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:
-  - make tests
-  - make cuke-api
-  - make cuke-cli
-  - make docs
+  - node_modules\.bin\babel src -d dist -q
+  - node_modules\.bin\mocha --reporter dot "src/**/*-test.js"
+  - NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules\.bin\cucumber-js --tags '(not @clionly) and (not @todo)' --format progress
+  - EXOSERVICE_TEST_DEPTH=CLI node_modules\.bin\cucumber-js --tags '(not @apionly) and (not @todo)' --format progress
+  - bin\text-run --offline
 
 
 # Don't double-build PRs

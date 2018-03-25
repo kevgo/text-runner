@@ -6,6 +6,7 @@ environment:
 
 init:
   - git config --global core.autocrlf true
+  - copy c:\MinGW\bin\mingw32-make.exe c:\MinGW\bin\make.exe
 
 install:
   - ps: Install-Product node $env:nodejs_version

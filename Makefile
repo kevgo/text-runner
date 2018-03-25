@@ -105,6 +105,9 @@ spec: lint tests cuke-api cuke-cli docs
 tests: build
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"
 
+# the set of tests running on Travis-CI
+travis-ci: lint coverage
+
 # updates the dependencies to their latest versions
 upgrade:
 	yarn upgrade-interactive

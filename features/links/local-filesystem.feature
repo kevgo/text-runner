@@ -11,13 +11,17 @@ Feature: verifying links to the local filesystem
   Scenario: relative link to existing local file
     Given my source code contains the file "1.md" with content:
       """
-      [link to existing local file](1.md)
+      [link to existing local file](2.md)
+      """
+    And my source code contains the file "2.md" with content:
+      """
+      foo
       """
     When running text-run
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1                       |
-      | MESSAGE  | link to local file 1.md |
+      | MESSAGE  | link to local file 2.md |
 
 
 

@@ -1,15 +1,16 @@
 // @flow
 
 import type { Activity } from '../commands/run/activity.js'
-// const endChildProcesses = require('end-child-processes')
+const util = require('util')
+const endChildProcesses = util.promisify(require('end-child-processes'))
 
 // Stops the currently running console command.
-module.exports = function (activity: Activity) {
+module.exports = async function (activity: Activity) {
   activity.formatter.setTitle('stopping the long-running process')
   if (!global.runningProcess) {
     throw new Error('No running process found')
   }
-  global.runningProcess.kill()
-  // endChildProcesses()
+  // global.runningProcess.kill()
+  await endChildProcesses()
   global.runningProcess = null
 }

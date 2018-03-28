@@ -11,7 +11,7 @@ and stop the long-running process using a `stopCommand` block.
 
 #### Example
 <a textrun="run-markdown-in-textrun">
-  
+
 ```markdown
 <a textrun="start-console-command">
 
@@ -24,7 +24,7 @@ $ read foo
 Wait until it is fully booted up ...
 
 <a textrun="wait-for-output">
-  
+
 `​``
 Enter your name
 `​``
@@ -41,5 +41,5 @@ Stop the current process by hitting Ctrl-C
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/start-stop-console-command/basic.feature)
-- [source code](../../src/activity-types/start-console-command.js)
+- [feature specs](../../features/activity-types/built-in/start-stop-process/basic.feature)
+- [source code](../../src/activity-types/start-process.js)

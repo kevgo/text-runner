@@ -1,7 +1,7 @@
 # User-defined actions
 
 It is possible to extend the set of
-[built-in activity types](built-in-activity-types.md)
+[built-in activity types](built-in-activity-types)
 with your custom-built ones written in JavaScript.
 Let's start by building the simplest possible action first.
 
@@ -188,5 +188,5 @@ The `searcher` tool provides the following properties and methods:
 <hr>
 
 Read more about:
-- the [built-in activity types](built-in-activity-types.md)
+- the [built-in activity types](built-in-activity-types)
 - [configure](configuration.md) TextRunner

@@ -29,9 +29,10 @@ module.exports = async function (act: Activity) {
       act.formatter
     )
   } else if (isLinkToAnchorInOtherFile(target)) {
+    const targetFullPath = path.join(path.dirname(act.filename), target)
     await checkLinkToAnchorInOtherFile(
       act.filename,
-      target,
+      targetFullPath,
       act.linkTargets,
       act.formatter
     )

@@ -24,6 +24,21 @@ Feature: verifying links to the local filesystem
       | MESSAGE  | link to local file 2.md |
 
 
+  Scenario: relative link to subfolder in subfolder
+    Given my source code contains the file "partners/foo/bar.md" with content:
+      """
+      [link to existing local file](people/readme.md#carsten)
+      """
+    And my source code contains the file "partners/foo/people/readme.md" with content:
+      """
+      # Carsten
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | partners/foo/bar.md                         |
+      | LINE     | 1                                           |
+      | MESSAGE  | link to heading Carsten in partners/foo/people/readme.md |
+
 
   Scenario: absolute link to existing local file
     Given my source code contains the file "docs/1.md" with content:

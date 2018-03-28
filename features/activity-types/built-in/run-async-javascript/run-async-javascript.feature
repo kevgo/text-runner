@@ -24,7 +24,7 @@ Feature: running inline blocks of asynchronous Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md                 |
-      | LINE     | 1-7                  |
+      | LINE     | 1-8                  |
       | MESSAGE  | run async javascript |
     And it prints:
       """

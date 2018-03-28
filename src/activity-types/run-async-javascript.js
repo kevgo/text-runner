@@ -3,29 +3,26 @@
 import type { Activity } from '../commands/run/activity.js'
 import type Configuration from '../configuration/configuration.js'
 
-type DoneFunction = (err?: ?ErrnoError) => void
-
 // Runs the async-await JavaScript code given in the code block
-module.exports = function (activity: Activity, done: DoneFunction) {
+module.exports = function (activity: Activity) {
+  activity.formatter.setTitle('run async javascript')
   var code = activity.searcher.tagContent('fence')
   if (code == null) {
-    done(new Error('no JavaScript code found in the fenced block'))
-    return
+    throw new Error('no JavaScript code found in the fenced block')
   }
   code = replaceSubstitutions(code, activity.configuration)
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
   code = wrapInAsyncFunction(code)
-
   activity.formatter.output(code)
   /* eslint-disable no-eval */
   eval(code)
 }
 
 function wrapInAsyncFunction (code) {
-  return `async function() {
-    ${code}
-  }()`
+  return `(async function() {
+  ${code}
+})()`
 }
 
 // substitutes replacements configured in text-run.yml

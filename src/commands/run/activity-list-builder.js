@@ -11,6 +11,7 @@ const Configuration = require('../../configuration/configuration.js')
 const Formatter = require('../../formatters/formatter.js')
 const Searcher = require('./searcher')
 const toSpaceCase = require('to-space-case')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 
 class ActivityListBuilder {
   // Returns a list of activities to do with the given AST
@@ -52,8 +53,9 @@ class ActivityListBuilder {
       const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
       if (isActiveBlockStartTag) {
         if (insideActiveBlock) {
-          throw new Error(
-            `${this.filePath}: Found a nested ${node.content || ''} block`
+          throw new UnprintedUserError(
+            `${this.filePath}: Block ${node.content ||
+              ''} is nested in another 'textrun' block.`
           )
         }
         insideActiveBlock = true

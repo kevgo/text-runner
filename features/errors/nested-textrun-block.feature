@@ -13,6 +13,6 @@ Feature: handle nested "textrun" block
       """
     When trying to run text-run
     Then the test fails with:
-      | ERROR MESSAGE | Found a nested <a textrun="foo"> block |
-      | FILENAME      | 1.md                                   |
-      | EXIT CODE     | 1                                      |
+      | ERROR MESSAGE | Block <a textrun="foo"> is nested in another 'textrun' block |
+      | FILENAME      | 1.md                                                         |
+      | EXIT CODE     | 1                                                            |

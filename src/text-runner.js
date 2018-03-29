@@ -38,8 +38,7 @@ class TextRunner {
   constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
-    const formatterManager = new FormatterManager()
-    this.formatter = formatterManager.getFormatter(
+    this.formatter = new FormatterManager().getFormatter(
       this.configuration.get('format')
     )
     this.activityTypesManager = new ActivityTypeManager(

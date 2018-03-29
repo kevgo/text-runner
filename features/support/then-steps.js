@@ -6,6 +6,8 @@ const { expect } = require('chai')
 const fs = require('fs-extra')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
+const util = require('util')
+const psTree = util.promisify(require('ps-tree'))
 
 Then('I see usage instructions', function () {
   this.verifyPrintedUsageInstructions()
@@ -115,4 +117,9 @@ Then('the test workspace now contains a directory {string}', function (
 
 Then('the test fails with:', function (table) {
   this.verifyFailure(table.rowsHash())
+})
+
+Then('there are no child processes running', async function () {
+  const children = await psTree(process.pid)
+  expect(children).to.have.length(1) // 1 is okay, it's the `ps` process used to determine the child processes
 })

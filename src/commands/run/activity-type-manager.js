@@ -69,7 +69,7 @@ class ActivityTypeManager {
       const actionName = kebabcase(
         path.basename(filename, path.extname(filename))
       ).replace(/Action/, '')
-      this.handlerFunctions[kebabcase(actionName)] = require(filename)
+      this.handlerFunctions[actionName] = require(filename)
     }
   }
 
@@ -79,7 +79,13 @@ class ActivityTypeManager {
       const actionName = kebabcase(
         path.basename(filename, path.extname(filename))
       ).replace(/Action/, '')
-      this.handlerFunctions[kebabcase(actionName)] = require(filename)
+      if (this.handlerFunctions[actionName]) {
+        throw new UnprintedUserError(
+          `redefining internal action '${actionName}'`
+        )
+      }
+
+      this.handlerFunctions[actionName] = require(filename)
     }
   }
 }

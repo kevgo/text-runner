@@ -23,7 +23,7 @@ $ read foo
 
 Wait until it is fully booted up ...
 
-<a textrun="wait-for-process-output">
+<a textrun="verify-process-output">
 
 `​``
 Enter your name

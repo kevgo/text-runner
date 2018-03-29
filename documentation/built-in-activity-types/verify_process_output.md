@@ -6,7 +6,7 @@
 - waits for the first occurrence of the output -
   if the application printed the output already, this step passes right away
 - if you want to wait for a new occurrence of the output,
-  use [wait-for-process-output](wait_for_process_output.md)
+  use [verify-process-output](verify_process_output.md)
 
 
 #### Example

@@ -52,6 +52,6 @@ with the content `foo: bar`</a> in the `tmp` subfolder of your current directory
 <hr>
 
 Read more about:
-- the other [built-in activity types](built-in-activity-types.md)
+- the other [built-in activity types](built-in-activity-types)
 - writing your own [user-defined activity types](user-defined-activity-types.md)
 - [configuring](configuration.md) TextRunner

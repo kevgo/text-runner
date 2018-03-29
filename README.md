@@ -48,7 +48,7 @@ complex data in tables, bullet point lists, and embedded images.
 - [how it works](documentation/how-it-works.md)
 - [installation](documentation/installation.md)
 - [configuration](documentation/configuration.md)
-- [built-in activity types](documentation/built-in-activity-types.md)
+- [built-in activity types](documentation/built-in-activity-types)
 - [user-defined activity types](documentation/user-defined-activity-types.md)
 - [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)

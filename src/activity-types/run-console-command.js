@@ -39,8 +39,8 @@ module.exports = async function (activity: Activity) {
     activity.searcher.tagContent('htmlblock', { default: '' }),
     activity.formatter
   )
-  // NOTE: this needs to be global because it is used in the "verify-run-console-output" step
-  global.runConsoleCommandOutput = ''
+  // this needs to be global because it is used in the "verify-run-console-output" step
+  global.consoleCommandOutput = ''
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
     cwd: activity.configuration.testDir,
@@ -96,7 +96,9 @@ function makeGlobal (configuration: Configuration) {
     if (replacement) {
       debug(`found replacement: ${replacement}`)
       return (
-        path.join(configuration.sourceDir, replacement) + ' ' + commandParts.splice(1).join(' ')
+        path.join(configuration.sourceDir, replacement) +
+        ' ' +
+        commandParts.splice(1).join(' ')
       )
     } else {
       return commandText
@@ -107,7 +109,7 @@ function makeGlobal (configuration: Configuration) {
 function log (stdout): WriteStream {
   return {
     write: text => {
-      global.runConsoleCommandOutput += text
+      global.consoleCommandOutput += text
       return stdout.write(text)
     }
   }

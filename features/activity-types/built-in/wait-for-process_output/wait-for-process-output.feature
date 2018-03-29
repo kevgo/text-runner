@@ -19,7 +19,7 @@ Feature: waiting for output of long-running processes
       """
     And my source code contains the file "long-running.md" with content:
       """
-      <a textrun="start-console-command">
+      <a textrun="start-process">
       ```
       $ node server.js
       ```
@@ -27,7 +27,7 @@ Feature: waiting for output of long-running processes
       """
     And my source code contains the file "wait.md" with content:
       """
-      <a textrun="wait-for-output">
+      <a textrun="verify-process-output">
       ```
       one
       three
@@ -36,9 +36,9 @@ Feature: waiting for output of long-running processes
       """
     When running text-run
     Then it signals:
-      | FILENAME | wait.md                                           |
-      | LINE     | 1-6                                               |
-      | MESSAGE  | waiting for output of the running console process |
+      | FILENAME | wait.md                                          |
+      | LINE     | 1-6                                              |
+      | MESSAGE  | verifying the output of the long-running process |
 
 
   Scenario: waiting if no long-running process is executing

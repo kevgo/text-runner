@@ -6,7 +6,7 @@ cache: yarn
 
 before_script: node_modules/.bin/greenkeeper-lockfile-update
 script:
-  - "make travis-ci"
+  - "make travis"
 after_script:
   - "node_modules/.bin/greenkeeper-lockfile-upload"
   - "make build"

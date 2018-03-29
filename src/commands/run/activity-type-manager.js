@@ -79,6 +79,12 @@ class ActivityTypeManager {
       const actionName = kebabcase(
         path.basename(filename, path.extname(filename))
       ).replace(/Action/, '')
+      if (this.handlerFunctions[actionName]) {
+        throw new UnprintedUserError(
+          `redefining internal action '${actionName}'`
+        )
+      }
+
       this.handlerFunctions[actionName] = require(filename)
     }
   }

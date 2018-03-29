@@ -25,7 +25,7 @@ Feature: verifying links to the local filesystem
 
 
 
-  Scenario: relative link to existing local file
+  Scenario: absolute link to existing local file
     Given my source code contains the file "docs/1.md" with content:
       """
       [link to existing local file](/docs/1.md)

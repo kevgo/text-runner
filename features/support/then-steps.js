@@ -121,6 +121,5 @@ Then('the test fails with:', function (table) {
 
 Then('there are no child processes running', async function () {
   const children = await psTree(process.pid)
-  console.log(children)
   expect(children).to.have.length(1) // 1 is okay, it's the `ps` process used to determine the child processes
 })

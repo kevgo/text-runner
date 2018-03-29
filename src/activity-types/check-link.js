@@ -29,7 +29,9 @@ module.exports = async function (act: Activity) {
       act.formatter
     )
   } else if (isLinkToAnchorInOtherFile(target)) {
-    const targetFullPath = path.join(path.dirname(act.filename), target)
+    const targetFullPath = path
+      .join(path.dirname(act.filename), target)
+      .replace(/\\/g, '/')
     console.log('TARGET:', target)
     console.log('TARGET FULL PATH:', targetFullPath)
     await checkLinkToAnchorInOtherFile(

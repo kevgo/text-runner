@@ -50,7 +50,9 @@ class TextRunner {
   // Tests the documentation according to the given command and arguments
   async execute (command: string, file?: string) {
     try {
-      if (!hasCommand(command)) { throw new UnprintedUserError(`unknown command: ${red(command)}`) }
+      if (!hasCommand(command)) {
+        throw new UnprintedUserError(`unknown command: ${red(command)}`)
+      }
       const CommandClass = require(commandPath(command))
       await new CommandClass(this).run(file)
     } catch (err) {

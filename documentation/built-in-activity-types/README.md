@@ -35,7 +35,6 @@ Text-Runner also allows running one long-running console command
 for example a server.
 * [start and stop the long-running process](start_stop_process.md)
 * [document parts of the process' output](verify_process_output.md)
-* [wait until the process is printing something again](wait_for_process_output.md)
 
 Console commands execute in TextRunner's
 [workspace directory](#interacting-with-the-local-filesystem).

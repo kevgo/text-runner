@@ -3,13 +3,13 @@
 
 # builds for the current platform
 build: clean
-	mkdir dist
-	cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
+	@mkdir dist
+	@cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
 
 # Removes all build artifacts
 clean:
-	rm -rf dist
-	rm -rf .nyc_output*
+	@rm -rf dist
+	@rm -rf .nyc_output*
 
 # measures code coverage
 coverage:

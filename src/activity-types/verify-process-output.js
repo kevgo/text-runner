@@ -5,7 +5,7 @@ import type { Activity } from '../commands/run/activity.js'
 // Waits until the currently running console command produces the given output
 module.exports = async function (activity: Activity) {
   activity.formatter.setTitle(
-    'waiting for output of the running console process'
+    'verifying the output of the long-running process'
   )
   const expectedOutput = activity.searcher.tagContent('fence')
   const expectedLines = expectedOutput

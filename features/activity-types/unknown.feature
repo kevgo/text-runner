@@ -29,18 +29,17 @@ Feature: unknown activity types
       * minimum-node-version
       * run-console-command
       * run-javascript
-      * start-console-command
-      * stop-console-command
+      * start-process
+      * stop-process
       * validate-javascript
+      * verify-console-command-output
       * verify-npm-global-command
       * verify-npm-install
-      * verify-run-console-command-output
+      * verify-process-output
       * verify-source-contains-directory
       * verify-source-file-content
-      * verify-start-console-command-output
       * verify-workspace-contains-directory
       * verify-workspace-file-content
-      * wait-for-output
 
       To create a new "unknown-action" activity type,
       run "text-run add unknown-action"

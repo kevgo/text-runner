@@ -17,7 +17,7 @@ echo Hello world!
 </a>
 
 Now that it's finished, let's verify its output:
-<a textrun="verify-run-console-command-output">
+<a textrun="verify-console-command-output">
 `​``
 Hello world!
 `​``

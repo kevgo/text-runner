@@ -21,33 +21,26 @@ Feature: verifying the output of the last console command
       """
     And my source code contains the file "verify-output.md" with content:
       """
-      <a textrun="start-console-command">
+      <a textrun="start-process">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="wait-for-output">
+      <a textrun="verify-process-output">
       ```
       one
       three
       ```
       </a>
 
-      <a textrun="verify-start-console-command-output">
-      ```
-      one
-      three
-      ```
-      </a>
-
-      <a textrun="stop-console-command">
+      <a textrun="stop-process">
       Stop the current process by hitting Ctrl-C
       </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | verify-output.md                                         |
-      | LINE     | 15-20                                                    |
-      | MESSAGE  | verifying the output of the last started console command |
+      | FILENAME | verify-output.md                                 |
+      | LINE     | 8-13                                             |
+      | MESSAGE  | verifying the output of the long-running process |

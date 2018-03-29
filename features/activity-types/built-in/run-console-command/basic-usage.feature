@@ -4,8 +4,6 @@ Feature: running console commands
   I want my users to run console commands
   So that they can execute the tool I am describing.
 
-  - to run a console command, wrap the code in a tag with attribute
-    textrun="run-console-command"
   - the commands to run are provided in a triple-fenced code block
   - all commands run in a Bash shell, concatenated via " && "
 

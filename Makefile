@@ -1,18 +1,14 @@
 .DEFAULT_GOAL := spec
 
-
-# builds for the current platform
-build: clean
+build: clean    # builds for the current platform
 	@mkdir dist
 	@cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
 
-# Removes all build artifacts
-clean:
+clean:   # Removes all build artifacts
 	@rm -rf dist
 	@rm -rf .nyc_output*
 
-# measures code coverage
-coverage:
+coverage:   # measures code coverage
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 	# test coverage for unit tests
 	# TODO: fix this
@@ -40,32 +36,28 @@ coverage:
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
 .PHONY: coverage
 
-# runs the API tests
-cuke-api: build
+cukeapi: build   # runs the API tests
 ifndef FILE
 	NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)' --format progress
 else
 	DEBUG='*,-babel' NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)' $(FILE)
 endif
 
-# runs the CLI tests
-cuke-cli: build
+cukecli: build   # runs the CLI tests
 ifndef FILE
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' --format progress
 else
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)' $(FILE)
 endif
 
-# runs the documentation tests
-docs: build
+docs: build   # runs the documentation tests
 ifndef FILE
 	bin/text-run --offline
 else
 	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif
 
-# runs the feature specs
-features: build
+features: build   # runs the feature specs
 ifndef FILE
 	make cuke-api
 	make cuke-cli
@@ -74,42 +66,33 @@ else
 	make cuke-cli $(FILE)
 endif
 
-# prints all make targets
-help:
-	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*//'
+help:   # prints all make targets
+	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#//' | sed -r 's/^([[:alnum:]]+)/\1:/'
 
-# lints all files
-lint: lint-js lint-md
+lint: lintjs lintmd   # lints all files
 
-# lints the javascript files
-lint-js:
+lintjs:   # lints the javascript files
 	standard -v
 	node_modules/.bin/flow
 	node_modules/.bin/dependency-lint
 
-# lints markdown files
-lint-md:
+lintmd:   # lints markdown files
 	remark .
 
-# sets up the installation on this machine
-setup:
+setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune
 	rm -rf node_modules
 	yarn install
 	node-prune
 
-# runs all tests
-spec: lint tests cuke-api cuke-cli docs
+spec: lint tests cukeapi cukecli docs   # runs all tests
 
-# runs the unit tests
-tests: build
+tests: build  # runs the unit tests
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"
 
-# the set of tests running on Travis-CI
-travis-ci: lint coverage
+travis: lint coverage   # the set of tests running on Travis-CI
 
-# updates the dependencies to their latest versions
-upgrade:
+upgrade:   # updates the dependencies to their latest versions
 	yarn upgrade-interactive
 	flow-typed install --overwrite
 	rm flow-typed/npm/remarkable_v1.x.x.js

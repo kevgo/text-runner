@@ -8,7 +8,7 @@ module.exports = async function ({ formatter, searcher }) {
   if (stderr.length > 0) {
     throw new Error(`Error running 'make help': ${stderr}`)
   }
-  const actuals = stdout.split('\n')
+  const actuals = stdout.split('\n').map(actual => actual.split(':')[0])
   if (!actuals.includes(expected)) {
     throw new Error(`binary '${expected}' does not exist`)
   }

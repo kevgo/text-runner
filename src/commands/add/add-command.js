@@ -12,19 +12,21 @@ class AddCommand implements Command {
     }
     fs.writeFileSync(
       path.join('text-run', filename + '.js'),
-      this._template(),
+      this._template(filename),
       'utf8'
     )
   }
 
-  _template () {
-    return `module.exports = async function ({formatter, searcher}) {
+  _template (filename: string) {
+    return `module.exports = async function (activity) {
+  console.log('This code runs inside the "${filename}" block implementation.')
+  console.log('I found these elements in your document:')
+  console.log(activity.nodes)
 
   // capture content from the document
-  const content = searcher.tagContent('boldtext')
-
+  // const content = searcher.tagContent('boldtext')
   // do something with the content
-  formatter.output(content)
+  // formatter.output(content)
 }
 `
   }

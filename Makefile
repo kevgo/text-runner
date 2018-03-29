@@ -1,13 +1,12 @@
 .DEFAULT_GOAL := spec
 
-
 build: clean    # builds for the current platform
-	mkdir dist
-	cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
+	@mkdir dist
+	@cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
 
 clean:   # Removes all build artifacts
-	rm -rf dist
-	rm -rf .nyc_output*
+	@rm -rf dist
+	@rm -rf .nyc_output*
 
 coverage:   # measures code coverage
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q

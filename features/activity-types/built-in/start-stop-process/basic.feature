@@ -53,6 +53,7 @@ Feature: long-running processes
       | FILENAME | 1.md                              |
       | LINE     | 14                                |
       | MESSAGE  | stopping the long-running process |
+    And there are no child processes running
 
 
   Scenario: no running process

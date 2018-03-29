@@ -20,7 +20,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
 
-      <a textrun="verify-run-console-command-output">
+      <a textrun="verify-console-command-output">
       ```
       one
       three

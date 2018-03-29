@@ -26,7 +26,7 @@ module.exports = async function (activity: Activity) {
   activity.formatter.setTitle(
     `starting a long-running process: ${bold(cyan(commandsToRun))}`
   )
-  global.startConsoleCommandOutput = ''
+  global.startConsoleProcessOutput = ''
   global.runningProcess = new ObservableProcess({
     commands: callArgs(commandsToRun),
     cwd: activity.configuration.testDir,
@@ -39,7 +39,7 @@ module.exports = async function (activity: Activity) {
 function log (stdout): WriteStream {
   return {
     write: text => {
-      global.startConsoleCommandOutput += text
+      global.startConsoleProcessOutput += text
       return stdout.write(text)
     }
   }

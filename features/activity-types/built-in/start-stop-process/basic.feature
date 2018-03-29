@@ -23,20 +23,20 @@ Feature: long-running processes
       """
     And my source code contains the file "1.md" with content:
       """
-      <a textrun="start-console-command">
+      <a textrun="start-process">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="wait-for-output">
+      <a textrun="verify-process-output">
       ```
       running
       ```
       </a>
 
-      <a textrun="stop-console-command">
+      <a textrun="stop-process">
       Stop the current process by hitting Ctrl-C
       </a>
       """
@@ -46,9 +46,9 @@ Feature: long-running processes
       | LINE     | 1-6                                             |
       | MESSAGE  | starting a long-running process: node server.js |
     And it signals:
-      | FILENAME | 1.md                                          |
-      | LINE     | 8-12                                          |
-      | MESSAGE  | waiting for output of the running console process |
+      | FILENAME | 1.md                                             |
+      | LINE     | 8-12                                             |
+      | MESSAGE  | verifying the output of the long-running process |
     And it signals:
       | FILENAME | 1.md                              |
       | LINE     | 14                                |
@@ -58,7 +58,7 @@ Feature: long-running processes
   Scenario: no running process
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="stop-console-command">
+      <a textrun="stop-process">
       There is no process running here
       </a>
       """

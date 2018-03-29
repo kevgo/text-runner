@@ -38,8 +38,7 @@ class TextRunner {
   constructor (constructorArgs: CliArgTypes, configPath) {
     this.constructorArgs = constructorArgs
     this.configuration = new Configuration(configPath, this.constructorArgs)
-    const formatterManager = new FormatterManager()
-    this.formatter = formatterManager.getFormatter(
+    this.formatter = new FormatterManager().getFormatter(
       this.configuration.get('format')
     )
     this.activityTypesManager = new ActivityTypeManager(
@@ -51,7 +50,9 @@ class TextRunner {
   // Tests the documentation according to the given command and arguments
   async execute (command: string, file?: string) {
     try {
-      if (!hasCommand(command)) { throw new UnprintedUserError(`unknown command: ${red(command)}`) }
+      if (!hasCommand(command)) {
+        throw new UnprintedUserError(`unknown command: ${red(command)}`)
+      }
       const CommandClass = require(commandPath(command))
       await new CommandClass(this).run(file)
     } catch (err) {

@@ -10,6 +10,7 @@ module.exports = async function (activity: Activity) {
   if (!global.runningProcess) {
     throw new Error('No running process found')
   }
+  global.runningProcess.kill()
   await endChildProcesses()
   global.runningProcess = null
 }

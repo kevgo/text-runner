@@ -50,7 +50,7 @@ let g:ale_linters = {
 \   'javascript': ['flow', 'standard']
 \}
 let g:ale_fixers = {
-\   'javascript': ['prettier', 'standard']
+\   'javascript': ['prettier_standard']
 \}
 let g:ale_javascript_prettier_use_local_config = 1
 ```

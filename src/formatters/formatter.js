@@ -4,6 +4,7 @@ import type { WriteStream } from 'observable-process'
 
 const { bold, green, magenta } = require('chalk')
 const Time = require('time-diff')
+const UnprintedUserError = require('../errors/unprinted-user-error')
 
 type Console = {
   log(text: string): void
@@ -75,7 +76,7 @@ class Formatter {
 
   startActivity (activityTypeName: string) {
     if (this.inActivity) {
-      throw new Error('already in a started block')
+      throw new UnprintedUserError('already in a started block')
     }
     this.setTitle(activityTypeName)
     this.errorMessage = ''

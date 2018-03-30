@@ -1,4 +1,4 @@
-@skipWindows
+@skipWindows @clionly
 Feature: long-running processes
 
   As a documentation writer

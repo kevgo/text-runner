@@ -41,8 +41,10 @@ Use the `make lintjs` script instead.
 ## Editor setup
 
 Set up your editor with the following configuration:
-- linters: `flow`, then `standard`
-- fixers: `prettier`, then `standard`
+- linters: run `flow`, then `standard`
+- fixers: run `prettier_standard`
+  (which runs [Prettier](https://github.com/prettier/prettier),
+  then [StandardJS](https://standardjs.com)
 
 Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
 ```vim

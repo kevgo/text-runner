@@ -52,3 +52,4 @@ complex data in tables, bullet point lists, and embedded images.
 - [user-defined activity types](documentation/user-defined-activity-types.md)
 - [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)
+- [developer documentation](CONTRIBUTING.md)

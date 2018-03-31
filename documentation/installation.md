@@ -3,7 +3,7 @@
 TextRunner works on all platforms supported by [Node.JS](https://nodejs.org),
 including macOS, Windows, and Linux.
 To get started:
-- install [Node.JS](https://nodejs.org) version <a textrun="minimum-node-version">8</a> or newer
+- install [Node.JS](https://nodejs.org) version 8 or newer
 - in the terminal,
   <a textrun="cd-into-empty-tmp-folder"> cd into the folder in which you want to use TextRunner
   </a>

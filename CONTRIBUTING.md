@@ -160,6 +160,6 @@ Actions can throw a normal `Error` instance, it will be treated as an `Unprinted
 
 ## Deployment
 
-- bump the version number in a PR and ship it
-- when shipped, create a new release on Github
-- the CI server makes the deploy to NPM
+```
+make deploy
+```

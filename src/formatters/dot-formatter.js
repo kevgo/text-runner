@@ -23,7 +23,9 @@ class DotFormatter extends Formatter {
 
   success (activityText?: string) {
     super.success(activityText)
-    process.stdout.write(green('.'))
+    if (!this.skipping) {
+      process.stdout.write(green('.'))
+    }
   }
 
   warning (warningMessage: string) {

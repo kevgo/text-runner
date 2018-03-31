@@ -5,7 +5,6 @@ defaults: &defaults
   docker:
     - image: circleci/node:9
 
-
 jobs:
 
   checkout_code:
@@ -26,7 +25,7 @@ jobs:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
      - run: make lint
 
-  cukeapi:
+  api-tests:
     <<: *defaults
     steps:
      - restore_cache:
@@ -37,7 +36,7 @@ jobs:
          paths:
            - ~/repo/.nyc_output_api
 
-  cukecli:
+  cli-tests:
     <<: *defaults
     steps:
      - restore_cache:
@@ -48,7 +47,7 @@ jobs:
          paths:
            - ~/repo/.nyc_output_cli
 
-  docs:
+  doc-tests:
     <<: *defaults
     steps:
       - restore_cache:
@@ -59,7 +58,7 @@ jobs:
           paths:
             - ~/repo/.nyc_output_text_run
 
-  mergecoverage:
+  merge-coverage:
     <<: *defaults
     steps:
       - restore_cache:
@@ -68,21 +67,14 @@ jobs:
           key: cukecli-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: docs-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make docs
+      - run: make coverage-merge
 
   deploy:
     <<: *defaults
     steps:
-      - checkout
-      - persist_to_workspace:
-          root: ~/repo
-          paths: .
-
-  deploy:
-    <<: *defaults
-    steps:
-      - attach_workspace:
-          at: ~/repo
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make build
       - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
       - run: npm publish
 
@@ -91,13 +83,28 @@ workflows:
 
   test-deploy:
     jobs:
-      - test:
-          filters:
-            tags:
-              only: /^v.*/
+      - checkout_code
+      - lint:
+          requires:
+            - checkout_code
+      - api-tests:
+          requires:
+            - checkout_code
+      - cli-tests:
+          requires:
+            - checkout_code
+      - doc-tests:
+          requires:
+            - checkout_code
+      - merge-coverage:
+          requires:
+            - lint
+            - api-tests
+            - cli-tests
+            - doc-tests
       - deploy:
           requires:
-            - test
+            - merge-coverage
           filters:
             tags:
               only: /^v.*/

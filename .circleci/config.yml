@@ -1,0 +1,137 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:9
+
+jobs:
+
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          name: restore Yarn cache
+          keys:
+            - yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-{{ .Branch }}
+            - yarn-master
+            - yarn-
+      - run: yarn
+      - run: make coverage-build
+      - save_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo
+      - save_cache:
+          name: save Yarn cache
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
+
+  lint:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make lint
+
+  api-tests:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make coverage-api
+     - save_cache:
+         key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_api
+
+  cli-tests:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make coverage-cli
+     - save_cache:
+         key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_cli
+
+  doc-tests:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make coverage-docs
+      - save_cache:
+          key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo/.nyc_output_text_run
+
+  send-coverage:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make coverage-merge
+      - run: make coverage-send
+
+  deploy:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make build
+      - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
+      - run: npm publish
+
+
+workflows:
+  version: 2
+
+  testing:
+    jobs:
+      - checkout_code
+      - lint:
+          requires:
+            - checkout_code
+      - api-tests:
+          requires:
+            - checkout_code
+      - cli-tests:
+          requires:
+            - checkout_code
+      - doc-tests:
+          requires:
+            - checkout_code
+      # - send-coverage:
+      #     requires:
+      #       - lint
+      #       - api-tests
+      #       - cli-tests
+      #       - doc-tests
+
+  deploying:
+    jobs:
+      - checkout_code:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - checkout_code
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master

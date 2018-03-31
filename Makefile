@@ -8,32 +8,42 @@ clean:   # Removes all build artifacts
 	@rm -rf dist
 	@rm -rf .nyc_output*
 
-coverage:   # measures code coverage
+coverage-build:   # builds the code base with code coverage measurements baked in
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
-	# test coverage for unit tests
+
+coverage-tests: coverage-build # test coverage for unit tests
 	# TODO: fix this
 	# BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
 	# mv .nyc_output .nyc_output_tests
 	# test coverage for API specs
-	rm -rf .nyc_output
+
+coverage-api:  # determines test coverage for API tests
 	rm -rf .nyc_output_api
-	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)'
+	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/nyc node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)'
 	mv .nyc_output .nyc_output_api
-	# test coverage for CLI specs
-	rm -rf .nyc_output
+
+coverage-cli:  # test coverage for CLI specs
 	rm -rf .nyc_output_cli
 	NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)'
-	# test coverage for the self-check
-	rm -rf .nyc_output
+
+coverage-docs:  # test coverage for the self-check
 	rm -rf .nyc_output_text_run
 	./node_modules/.bin/nyc bin/text-run --offline
 	mv .nyc_output .nyc_output_text_run
-	# post-process
+
+coverage-merge: # merge all coverage results together
 	rm -rf .nyc_output
 	mkdir .nyc_output
 	node scripts/cleanse-coverage.js
-	nyc report --reporter=lcov
-	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
+
+coverage-html:  # render test coverage as a HTML report
+	node_modules/.bin/nyc report --reporter=lcov
+	@echo "open 'file://$(shell pwd)/coverage/lcov-report/index.html' in your browser"
+
+coverage-send:  # sends the coverage to coveralls.io
+	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
+
+coverage: coverage-build coverage-tests coverage-api coverage-cli coverage-html   # measures code coverage
 .PHONY: coverage
 
 cukeapi: build   # runs the API tests
@@ -72,12 +82,12 @@ help:   # prints all make targets
 lint: lintjs lintmd   # lints all files
 
 lintjs: build   # lints the javascript files
-	standard -v
+	node_modules/.bin/standard -v
 	node_modules/.bin/flow
 	node_modules/.bin/dependency-lint
 
 lintmd:   # lints markdown files
-	remark .
+	node_modules/.bin/remark .
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

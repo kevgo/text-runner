@@ -19,6 +19,7 @@ class Formatter {
   filePath: string // the path of the documentation file that is currently processed
   filePaths: string[] // the files encountered so far
   inActivity: boolean // whether this formatter is currently processing an action
+  skipping: boolean   // whether the current step is being skipped
   startLine: number // the line within the documentation file at which the currently processed block starts
   stderr: WriteStream
   stdout: WriteStream
@@ -36,6 +37,7 @@ class Formatter {
     this.filePaths = []
     this.inActivity = false
     this.stepsCount = 0
+    this.skipping = false
     this.warningsCount = 0
     this.stdout = { write: this.output }
     this.stderr = { write: this.output }
@@ -67,6 +69,7 @@ class Formatter {
   skip (activityText: string) {
     if (activityText) this.activityText = activityText
     this.inActivity = false
+    this.skipping = true
   }
 
   // Called when we start performing an activity that was defined in a block
@@ -83,6 +86,7 @@ class Formatter {
     this.warningMessage = ''
     this.stepsCount += 1
     this.inActivity = true
+    this.skipping = false
   }
 
   // called when we start processing a markdown file

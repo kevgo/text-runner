@@ -27,7 +27,9 @@ class DetailedFormatter extends Formatter {
 
   success (activityText?: string) {
     super.success(activityText)
-    this._printActivityHeader(green)
+    if (!this.skipping) {
+      this._printActivityHeader(green)
+    }
   }
 
   warning (warningMessage: string) {

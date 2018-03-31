@@ -34,7 +34,7 @@ class LinkTargetListBuilder {
         case 'heading':
           this.linkTargets[filePath].push({
             type: 'heading',
-            name: dashify(node.content),
+            name: dashify((node.content || '').toLowerCase()),
             text: node.content,
             level: node.level
           })

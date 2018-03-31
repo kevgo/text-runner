@@ -12,7 +12,6 @@ jobs:
     steps:
       - checkout
       - run: uname -a
-      - run: "echo foo | /usr/bin/column"
       - run: 'sudo find / -name "column" 2> /dev/null'
       - run: sudo apt-get -y -qq install column
       - run: yarn

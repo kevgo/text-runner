@@ -64,6 +64,8 @@ jobs:
     <<: *defaults
     steps:
       - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
           key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}

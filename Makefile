@@ -79,12 +79,12 @@ help:   # prints all make targets
 lint: lintjs lintmd   # lints all files
 
 lintjs:   # lints the javascript files
-	standard -v
+	node_modules/.bin/standard -v
 	node_modules/.bin/flow
 	node_modules/.bin/dependency-lint
 
 lintmd:   # lints markdown files
-	remark .
+	node_modules/.bin/remark .
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

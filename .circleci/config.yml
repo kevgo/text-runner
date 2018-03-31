@@ -82,10 +82,11 @@ jobs:
       - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
       - run: npm publish
 
+
 workflows:
   version: 2
 
-  test-deploy:
+  testing:
     jobs:
       - checkout_code
       - lint:
@@ -106,9 +107,13 @@ workflows:
             - api-tests
             - cli-tests
             - doc-tests
+
+  deploying:
+    jobs:
+      - checkout_code
       - deploy:
           requires:
-            - merge-coverage
+            - checkout_code
           filters:
             tags:
               only: /^v.*/

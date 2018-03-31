@@ -1,0 +1,105 @@
+version: 2
+
+defaults: &defaults
+  working_directory: ~/repo
+  docker:
+    - image: circleci/node:9
+
+
+jobs:
+
+  checkout_code:
+    <<: *defaults
+    steps:
+      - checkout
+      - run: yarn
+      - run: make coverage-build
+      - save_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo
+
+  lint:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make lint
+
+  cukeapi:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make coverage-api
+     - save_cache:
+         key: cukeapi-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_api
+
+  cukecli:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make coverage-cli
+     - save_cache:
+         key: cukecli-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_cli
+
+  docs:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make coverage-docs
+      - save_cache:
+          key: docs-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo/.nyc_output_text_run
+
+  mergecoverage:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: cukeapi-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: cukecli-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: docs-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make docs
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths: .
+
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
+      - run: npm publish
+
+workflows:
+  version: 2
+
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master

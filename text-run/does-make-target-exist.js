@@ -5,7 +5,7 @@ module.exports = async function ({ formatter, searcher }) {
   const makeExpression = searcher.tagContent('code')
   const expected = makeExpression.split(' ')[1]
   const { stdout, stderr } = await exec(
-    "cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/'"
+    "cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#//'"
   )
   if (stderr.length > 0) {
     throw new Error(`Error running 'make help': ${stderr}`)

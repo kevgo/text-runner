@@ -54,6 +54,7 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: uname -a
       - run: sudo apt-get -y -qq install column
       - run: make coverage-docs
       - save_cache:

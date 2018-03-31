@@ -110,7 +110,7 @@ workflows:
 
   deploying:
     jobs:
-      - checkout_code
+      - checkout_code:
           filters:
             tags:
               only: /^v.*/

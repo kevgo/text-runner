@@ -26,7 +26,6 @@ Feature: unknown activity types
       * check-link
       * create-directory
       * create-file
-      * minimum-node-version
       * run-async-javascript
       * run-console-command
       * run-javascript

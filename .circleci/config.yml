@@ -58,7 +58,7 @@ jobs:
           paths:
             - ~/repo/.nyc_output_text_run
 
-  merge-coverage:
+  send-coverage:
     <<: *defaults
     steps:
       - restore_cache:
@@ -70,6 +70,7 @@ jobs:
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-merge
+      - run: make coverage-send
 
   deploy:
     <<: *defaults
@@ -99,7 +100,7 @@ workflows:
       - doc-tests:
           requires:
             - checkout_code
-      - merge-coverage:
+      - send-coverage:
           requires:
             - lint
             - api-tests

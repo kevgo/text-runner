@@ -30,6 +30,8 @@ jobs:
     steps:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: pwd
+     - run: ls -la
      - run: make coverage-api
      - save_cache:
          key: cukeapi-{{ .Environment.CIRCLE_SHA1 }}

@@ -37,7 +37,7 @@ coverage-merge: # merge all coverage results together
 	rm -rf .nyc_output
 	mkdir .nyc_output
 	node scripts/cleanse-coverage.js
-	nyc report --reporter=lcov
+	node_modules/.bin/nyc report --reporter=lcov
 	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
 
 coverage: coverage-build coverage-tests coverage-api coverage-cli coverage-merge   # measures code coverage

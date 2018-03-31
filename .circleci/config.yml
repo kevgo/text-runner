@@ -34,7 +34,7 @@ jobs:
      - run: ls -la
      - run: make coverage-api
      - save_cache:
-         key: cukeapi-{{ .Environment.CIRCLE_SHA1 }}
+         key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
          paths:
            - ~/repo/.nyc_output_api
 
@@ -45,7 +45,7 @@ jobs:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
      - run: make coverage-cli
      - save_cache:
-         key: cukecli-{{ .Environment.CIRCLE_SHA1 }}
+         key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
          paths:
            - ~/repo/.nyc_output_cli
 
@@ -56,7 +56,7 @@ jobs:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-docs
       - save_cache:
-          key: docs-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/repo/.nyc_output_text_run
 
@@ -64,11 +64,11 @@ jobs:
     <<: *defaults
     steps:
       - restore_cache:
-          key: cukeapi-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: cukecli-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: docs-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-merge
 
   deploy:

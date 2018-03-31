@@ -71,7 +71,7 @@ help:   # prints all make targets
 
 lint: lintjs lintmd   # lints all files
 
-lintjs:   # lints the javascript files
+lintjs: build   # lints the javascript files
 	standard -v
 	node_modules/.bin/flow
 	node_modules/.bin/dependency-lint

@@ -11,12 +11,24 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - restore_cache:
+          name: restore Yarn package cache
+          keys:
+            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-{{ .Branch }}
+            - yarn-packages-master
+            - yarn-packages-
       - run: yarn
       - run: make coverage-build
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
           paths:
             - ~/repo
+      - save_cache:
+          name: save Yarn package cache
+          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules/
 
   lint:
     <<: *defaults

@@ -67,7 +67,7 @@ else
 endif
 
 help:   # prints all make targets
-	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#//' | sed -r 's/^([[:alnum:]]+)/\1:/'
+	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint: lintjs lintmd   # lints all files
 

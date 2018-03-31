@@ -14,10 +14,10 @@ jobs:
       - restore_cache:
           name: restore Yarn package cache
           keys:
-            - yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-{{ .Branch }}
-            - yarn-packages-master
-            - yarn-packages-
+            - yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-{{ .Branch }}
+            - yarn-master
+            - yarn-
       - run: yarn
       - run: make coverage-build
       - save_cache:
@@ -26,7 +26,7 @@ jobs:
             - ~/repo
       - save_cache:
           name: save Yarn package cache
-          key: yarn-packages-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/
 

@@ -55,6 +55,8 @@ jobs:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - run: uname -a
+      - run: "echo foo | /usr/bin/column"
+      - run: 'sudo find / -name "column" 2> /dev/null'
       - run: sudo apt-get -y -qq install column
       - run: make coverage-docs
       - save_cache:

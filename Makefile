@@ -19,7 +19,7 @@ coverage-tests: coverage-build # test coverage for unit tests
 
 coverage-api:  # determines test coverage for API tests
 	rm -rf .nyc_output_api
-	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API nyc node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)'
+	BABEL_ENV=test_coverage NODE_ENV=test EXOSERVICE_TEST_DEPTH=API node_modules/.bin/nyc node_modules/.bin/cucumber-js --tags '(not @clionly) and (not @todo)'
 	mv .nyc_output .nyc_output_api
 
 coverage-cli:  # test coverage for CLI specs

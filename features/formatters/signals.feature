@@ -5,6 +5,7 @@ Feature: Formatter signals
   - success
   - error
   - warning
+  - skip
 
 
   Scenario Outline: signaling warnings

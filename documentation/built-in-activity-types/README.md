@@ -47,7 +47,6 @@ Console commands execute in TextRunner's
 
 ## Other actions
 
-* [required NodeJS version](minimum-node-version.md)
 * [verify NPM installation instructions](verify_npm_install.md)
 * [verify global command provided by NPM module](verify_npm_global_command.md)
 

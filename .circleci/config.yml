@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - run: uname -a
-      - run: 'sudo find / -name "column" 2> /dev/null'
+      - run: sudo find / -name "column"
       - run: sudo apt-get -y -qq install column
       - run: yarn
       - run: make coverage-build

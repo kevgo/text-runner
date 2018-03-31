@@ -38,7 +38,7 @@ coverage-merge: # merge all coverage results together
 
 coverage-html:  # render test coverage as a HTML report
 	node_modules/.bin/nyc report --reporter=lcov
-	echo "open 'file://$(pwd)/coverage/lcov-report/index.html' in your browser"
+	@echo "open 'file://$(shell pwd)/coverage/lcov-report/index.html' in your browser"
 
 coverage-send:  # sends the coverage to coveralls.io
 	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls

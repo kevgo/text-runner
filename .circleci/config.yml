@@ -11,6 +11,10 @@ jobs:
     <<: *defaults
     steps:
       - checkout
+      - run: uname -a
+      - run: "echo foo | /usr/bin/column"
+      - run: 'sudo find / -name "column" 2> /dev/null'
+      - run: sudo apt-get -y -qq install column
       - run: yarn
       - run: make coverage-build
       - save_cache:
@@ -54,10 +58,6 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: uname -a
-      - run: "echo foo | /usr/bin/column"
-      - run: 'sudo find / -name "column" 2> /dev/null'
-      - run: sudo apt-get -y -qq install column
       - run: make coverage-docs
       - save_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}

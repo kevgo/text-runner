@@ -128,6 +128,22 @@ Feature: links to HTML anchors
       | MESSAGE  | link to heading Hello in 2.md |
 
 
+  Scenario: link to heading in PascalCase in another file
+    Given my source code contains the file "1.md" with content:
+      """
+      A [working link to a heading](2.md#github)
+      """
+    And my source code contains the file "2.md" with content:
+      """
+      ## GitHub
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md                           |
+      | LINE     | 1                              |
+      | MESSAGE  | link to heading GitHub in 2.md |
+
+
   Scenario: link to an existing anchor in a file with spaces
     Given my source code contains the file "1.md" with content:
       """

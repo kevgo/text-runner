@@ -11,12 +11,12 @@ actions:
 
     - match:
         filename: '\.feature$'
-      command: 'make cuke-api FILE={{filename}} && make cuke-cli FILE={{filename}}'
+      command: 'make cukeapi FILE={{filename}} && make cukecli FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'make cuke-api FILE={{filename}}:{{line}} && make cuke-cli FILE={{filename}}:{{line}}'
+      command: 'make cukeapi FILE={{filename}}:{{line}} && make cukecli FILE={{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.js'
@@ -30,16 +30,16 @@ actions:
       command: 'make docs FILE={{filename}}'
 
     - match:
-      command: 'make cuke-api'
+      command: 'make cukeapi'
 
     - match:
         filename: '\.feature$'
-      command: 'make cuke-api FILE={{filename}}'
+      command: 'make cukeapi FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'make cuke-api FILE={{filename}}:{{line}}'
+      command: 'make cukeapi FILE={{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.js'
@@ -54,16 +54,16 @@ actions:
       command: 'make docs FILE={{filename}}'
 
     - match:
-      command: 'make cuke-cli'
+      command: 'make cukecli'
 
     - match:
         filename: '\.feature$'
-      command: 'make cuke-cli FILE={{filename}}'
+      command: 'make cukecli FILE={{filename}}'
 
     - match:
         filename: '\.feature$'
         line: '\d+'
-      command: 'make cuke-cli FILE={{filename}}:{{line}}'
+      command: 'make cukecli FILE={{filename}}:{{line}}'
 
     - match:
         filename: '-spec\.js'

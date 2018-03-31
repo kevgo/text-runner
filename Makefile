@@ -23,12 +23,10 @@ coverage-api:  # determines test coverage for API tests
 	mv .nyc_output .nyc_output_api
 
 coverage-cli:  # test coverage for CLI specs
-	rm -rf .nyc_output
 	rm -rf .nyc_output_cli
 	NODE_ENV=coverage EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @apionly) and (not @todo)'
 
 coverage-docs:  # test coverage for the self-check
-	rm -rf .nyc_output
 	rm -rf .nyc_output_text_run
 	./node_modules/.bin/nyc bin/text-run --offline
 	mv .nyc_output .nyc_output_text_run
@@ -45,7 +43,7 @@ coverage-html:  # render test coverage as a HTML report
 coverage-send:  # sends the coverage to coveralls.io
 	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
 
-coverage: coverage-build coverage-tests coverage-api coverage-cli coverage-merge   # measures code coverage
+coverage: coverage-build coverage-tests coverage-api coverage-cli coverage-html   # measures code coverage
 .PHONY: coverage
 
 cukeapi: build   # runs the API tests

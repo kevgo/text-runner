@@ -111,6 +111,11 @@ workflows:
   deploying:
     jobs:
       - checkout_code
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              only: master
       - deploy:
           requires:
             - checkout_code

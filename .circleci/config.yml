@@ -12,7 +12,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          name: restore Yarn package cache
+          name: restore Yarn cache
           keys:
             - yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - yarn-{{ .Branch }}
@@ -25,7 +25,7 @@ jobs:
           paths:
             - ~/repo
       - save_cache:
-          name: save Yarn package cache
+          name: save Yarn cache
           key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/

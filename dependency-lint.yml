@@ -49,14 +49,7 @@ requiredModules:
       - '**/*{.,_,-}{spec,test}.js'
       - 'documentation/examples/**'
       - 'text-run/**'
-    ignore:
-      - 'node_modules/**/*'
-      - 'flow-typed/**/*'
-      - 'dist/**/*'
-    root: '**/*.js'
+    ignore: []
+    root: '{dist,documentation,features,text-run}/**/*.js'
   stripLoaders: false
-  transpilers:
-    - extension: .js
-      fnName: transform
-      module: babel-core # 6.17.0
-      resultKey: code
+  transpilers: []

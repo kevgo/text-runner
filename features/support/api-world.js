@@ -1,17 +1,4 @@
-// @flow
-
-import type Formatter from '../../src/formatters/formatter.js'
-
-type Console = {
-  log: string => void
-}
-
-type StdStream = {
-  write: string => void
-}
-
 const { setWorldConstructor } = require('cucumber')
-// $FlowFixMe: we need to test the 'dist' folder for test coverage
 const textRunner = require('../../dist/text-runner.js')
 const { expect } = require('chai')
 const { cyan } = require('chalk')
@@ -26,20 +13,6 @@ const UnprintedUserError = require('../../src/errors/unprinted-user-error.js')
 const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
-  activities: string[]
-  console: Console
-  endLine: number
-  errorMessages: string[]
-  filePaths: string[]
-  lines: string[]
-  startLine: number
-  stderr: StdStream
-  stdout: StdStream
-  stepsCount: number
-  text: string
-  verbose: boolean
-  warnings: string[]
-
   constructor ({ verbose }) {
     this.verbose = verbose
     this.activities = []
@@ -48,7 +21,7 @@ class TestFormatter {
     this.lines = []
     this.text = ''
     this.console = {
-      log: (text: string) => {
+      log: text => {
         this.text += `${text}\n`
       }
     }
@@ -65,7 +38,7 @@ class TestFormatter {
     this.warnings = []
   }
 
-  startActivity (activityTypeName: string) {
+  startActivity (activityTypeName) {
     this.activities.push(stripAnsi(activityTypeName))
     this.lines.push(
       this.startLine !== this.endLine
@@ -75,17 +48,17 @@ class TestFormatter {
     if (this.verbose) console.log(activityTypeName)
   }
 
-  startFile (filePath: string) {
+  startFile (filePath) {
     if (!this.filePaths.includes(filePath)) {
       this.filePaths.push(filePath)
     }
   }
 
-  setTitle (activity: string) {
+  setTitle (activity) {
     this.activities[this.activities.length - 1] = stripAnsi(activity)
   }
 
-  success (activity: string) {
+  success (activity) {
     if (activity) {
       this.activities[this.activities.length - 1] = stripAnsi(activity)
       if (this.verbose) console.log(activity)
@@ -93,7 +66,7 @@ class TestFormatter {
     if (this.verbose) console.log('success')
   }
 
-  error (error: ErrnoError) {
+  error (error) {
     this.errorMessages.push(stripAnsi(error.message || error.toString()))
     this.lines.push(
       unique([this.startLine, this.endLine])
@@ -103,24 +76,24 @@ class TestFormatter {
     if (this.verbose) console.log(error)
   }
 
-  output (text: string) {
+  output (text) {
     if (this.verbose) console.log(text)
   }
 
-  setLines (startLine: number, endLine: number) {
+  setLines (startLine, endLine) {
     this.startLine = startLine
     this.endLine = endLine
   }
 
-  skip (activity: string) {
+  skip (activity) {
     this.activities.push(stripAnsi(activity))
   }
 
-  suiteSuccess (stepsCount: number) {
+  suiteSuccess (stepsCount) {
     this.stepsCount = stepsCount
   }
 
-  warning (warning: string) {
+  warning (warning) {
     this.warnings.push(stripAnsi(warning))
     this.activities.push(stripAnsi(warning))
   }
@@ -130,18 +103,11 @@ const ApiWorld = function () {
   // ApiWorld provides step implementations that run and test TextRunner
   // via its Javascript API
 
-  this.execute = async function (args: {
-    command: string,
-    file: string,
-    offline?: boolean,
-    exclude?: string[],
-    format: Formatter,
-    expectError: boolean
-  }) {
+  this.execute = async function (args) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
     this.formatter = new TestFormatter({ verbose: this.verbose })
-    const formatter: Formatter = args.format || this.formatter
+    const formatter = args.format || this.formatter
     try {
       await textRunner({
         command: args.command,
@@ -162,11 +128,11 @@ const ApiWorld = function () {
     }
   }
 
-  this.verifyCallError = (expectedError: ErrnoError) => {
+  this.verifyCallError = expectedError => {
     jsdiffConsole(this.error, expectedError)
   }
 
-  this.verifyErrormessage = (expectedText: string) => {
+  this.verifyErrormessage = expectedText => {
     var actual = stripAnsi(this.formatter.errorMessages.join())
     if (this.error) {
       actual += stripAnsi(this.error.message)
@@ -179,7 +145,7 @@ const ApiWorld = function () {
     }
   }
 
-  this.verifyPrints = (expectedText: string) => {
+  this.verifyPrints = expectedText => {
     // No way to capture console output here.
     // This is tested in the CLI world.
   }
@@ -228,13 +194,13 @@ const ApiWorld = function () {
     }
   }
 
-  this.verifyRanConsoleCommand = async (command: string) => {
+  this.verifyRanConsoleCommand = async command => {
     await waitUntil(() =>
       this.formatter.activities.includes(`running console command: ${command}`)
     )
   }
 
-  this.verifyRanOnlyTests = (files: string[]) => {
+  this.verifyRanOnlyTests = files => {
     files = flatten(files)
     for (let file of files) {
       expect(this.formatter.filePaths).to.include(
@@ -256,16 +222,16 @@ const ApiWorld = function () {
     }
   }
 
-  this.verifyTestsRun = (count: number) => {
+  this.verifyTestsRun = count => {
     expect(this.formatter.activities).to.have.length(count)
   }
 
-  this.verifyUnknownCommand = (command: string) => {
+  this.verifyUnknownCommand = command => {
     expect(this.error).to.equal(`unknown command: ${command}`)
   }
 }
 
-function standardizePaths (paths: string[]) {
+function standardizePaths (paths) {
   return paths.map(path => path.replace(/\\/g, '/'))
 }
 

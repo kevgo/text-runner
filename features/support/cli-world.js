@@ -1,5 +1,3 @@
-// @flow
-
 const { expect } = require('chai')
 const { setWorldConstructor } = require('cucumber')
 const dimConsole = require('dim-console')
@@ -14,10 +12,7 @@ const CliWorld = function () {
   // CliWorld provides step implementations that run and test TextRunner
   // via its command-line interface
 
-  this.execute = async function (params: {
-    command: string,
-    expectError: boolean
-  }) {
+  this.execute = async function (params) {
     var args = {}
     args.cwd = this.rootDir
     args.env = {}
@@ -59,7 +54,7 @@ const CliWorld = function () {
     }
   }
 
-  this.makeFullPath = (command: string): string => {
+  this.makeFullPath = command => {
     if (/^text-run/.test(command)) {
       return command.replace(/^text-run/, this.fullTextRunPath())
     } else {
@@ -67,7 +62,7 @@ const CliWorld = function () {
     }
   }
 
-  this.fullTextRunPath = function (): string {
+  this.fullTextRunPath = function () {
     var result = path.join(process.cwd(), 'bin', 'text-run')
     if (process.platform === 'win32') {
       result += '.cmd'
@@ -75,13 +70,13 @@ const CliWorld = function () {
     return result
   }
 
-  this.verifyCallError = (expectedError: string) => {
+  this.verifyCallError = expectedError => {
     const output = this.process.fullOutput()
     expect(output).to.include(expectedError)
     expect(this.process.exitCode).to.equal(1)
   }
 
-  this.verifyErrormessage = (expectedText: string) => {
+  this.verifyErrormessage = expectedText => {
     expect(this.process.fullOutput()).to.include(expectedText)
   }
 
@@ -117,27 +112,27 @@ const CliWorld = function () {
     expect(this.process.fullOutput()).to.include('COMMANDS')
   }
 
-  this.verifyPrints = (expectedText: string) => {
+  this.verifyPrints = expectedText => {
     const output = this.process.fullOutput()
     if (!new RegExp(expectedText).test(output)) {
       throw new Error(`expected to find regex '${expectedText}' in '${output}'`)
     }
   }
 
-  this.verifyPrintsNot = (text: string) => {
+  this.verifyPrintsNot = text => {
     const output = this.process.fullOutput()
     if (new RegExp(text).test(output)) {
       throw new Error(`expected to not find regex '${text}' in '${output}'`)
     }
   }
 
-  this.verifyRanConsoleCommand = (command: string) => {
+  this.verifyRanConsoleCommand = command => {
     expect(this.process.fullOutput()).to.include(
       `running.md:1-5 -- running console command: ${command}`
     )
   }
 
-  this.verifyRanOnlyTests = (filenames: string[]) => {
+  this.verifyRanOnlyTests = filenames => {
     filenames = flatten(filenames)
     const standardizedOutput = this.output.replace(/\\/g, '/')
 
@@ -168,7 +163,7 @@ const CliWorld = function () {
   }
 }
 
-function standardizePath (path: string): string {
+function standardizePath (path) {
   return path.replace(/\\/g, '/')
 }
 
@@ -177,7 +172,7 @@ if (process.env.EXOSERVICE_TEST_DEPTH === 'CLI') {
 }
 
 // Returns the command that runs the given command with test coverage
-function runWithTestCoverage (command: string): string {
+function runWithTestCoverage (command) {
   return path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + command
 }
 

@@ -98,7 +98,11 @@ class MarkdownFileRunner {
       activity.formatter.success()
     } catch (err) {
       if (isUserError(err)) {
-        throw new UnprintedUserError(err)
+        throw new UnprintedUserError(
+          err.message,
+          activity.filename,
+          activity.endLine !== null ? activity.endLine : activity.startLine
+        )
       } else {
         // here we have a developer error
         throw err

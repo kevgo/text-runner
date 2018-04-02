@@ -8,7 +8,6 @@ const { red } = require('chalk')
 const commandPath = require('./commands/command-path')
 const Configuration = require('./configuration/configuration.js')
 const FormatterManager = require('./formatters/formatter-manager')
-const { codeFrameColumns } = require('@babel/code-frame')
 const fs = require('fs')
 const hasCommand = require('./commands/has-command')
 const PrintedUserError = require('./errors/printed-user-error.js')
@@ -58,15 +57,7 @@ class TextRunner {
       await new CommandClass(this).run(file)
     } catch (err) {
       if (err instanceof UnprintedUserError) {
-        this.formatter.error(err.message)
-        if (err.line) {
-          const frame = codeFrameColumns(
-            err.filename,
-            { start: { line: err.line } },
-            { forceColor: true }
-          )
-          this.formatter.output(frame)
-        }
+        this.formatter.error(err.message, err.filename, err.line)
         throw new PrintedUserError(err)
       } else {
         throw err

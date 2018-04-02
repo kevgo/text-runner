@@ -9,7 +9,6 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
 const unique = require('array-unique')
-const UnprintedUserError = require('../../src/errors/unprinted-user-error.js')
 const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
@@ -139,7 +138,7 @@ const ApiWorld = function () {
     }
     const expected = stripAnsi(expectedText)
     if (!actual.includes(expected)) {
-      throw new UnprintedUserError(
+      throw new Error(
         `Expected\n\n${cyan(actual)}\n\nto contain\n\n${cyan(expected)}\n`
       )
     }
@@ -156,7 +155,7 @@ const ApiWorld = function () {
         message => message.includes(table['ERROR MESSAGE']).length === 0
       )
     ) {
-      throw new UnprintedUserError(
+      throw new Error(
         `Expected\n\n${cyan(
           JSON.stringify(this.formatter.errorMessages)
         )}\n\nto contain\n\n${cyan(table['ERROR MESSAGE'])}\n`
@@ -180,7 +179,7 @@ const ApiWorld = function () {
     if (table.MESSAGE) {
       const activities = standardizePaths(this.formatter.activities)
       if (!activities.some(activity => activity.includes(table.MESSAGE))) {
-        throw new UnprintedUserError(
+        throw new Error(
           `activity ${cyan(table.MESSAGE)} not found in ${activities.join(
             ', '
           )}`

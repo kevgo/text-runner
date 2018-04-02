@@ -6,7 +6,7 @@ const { codeFrameColumns } = require('@babel/code-frame')
 type PrintFunc = string => void | boolean
 
 module.exports = function (output: PrintFunc, filename: ?string, line: ?number) {
-  if (filename == null || line == null) return
+  if (!filename || line == null) return
 
   const fileContent = fs.readFileSync(filename)
   output(

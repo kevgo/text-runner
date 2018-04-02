@@ -48,7 +48,7 @@ Feature: running console commands
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | running.md                                              |
-      | LINE          | 1-4                                                     |
+      | LINE          | 4                                                       |
       | MESSAGE       | run console command                                     |
       | ERROR MESSAGE | the block that defines console commands to run is empty |
       | EXIT CODE     | 1                                                       |

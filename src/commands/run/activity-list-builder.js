@@ -45,7 +45,7 @@ class ActivityListBuilder {
     var nodesForCurrentRunner: AstNodeList = []
 
     // contains the most recent line in the file that we are aware of
-    var startLine = 1
+    var line = 1
     var blockType = ''
     var result: ActivityList = []
     var currentRunnerType: HandlerFunction = value => {}
@@ -56,12 +56,12 @@ class ActivityListBuilder {
           throw new UnprintedUserError(
             `Block ${node.content || ''} is nested in another 'textrun' block.`,
             this.filePath,
-            startLine
+            line
           )
         }
         insideActiveBlock = true
         if (node.line != null) {
-          startLine = node.line
+          line = node.line
         }
         blockType = this._getBlockType(node)
         currentRunnerType = this.activityTypesManager.handlerFunctionFor(
@@ -77,8 +77,7 @@ class ActivityListBuilder {
           result.push({
             filename: this.filePath,
             activityTypeName: this._convertIntoActivityTypeName(blockType),
-            startLine: startLine,
-            endLine: node.line,
+            line: node.line,
             runner: currentRunnerType,
             nodes: nodesForCurrentRunner,
             formatter: this.formatter,
@@ -102,8 +101,7 @@ class ActivityListBuilder {
         result.push({
           filename: this.filePath,
           activityTypeName: this._convertIntoActivityTypeName(blockType),
-          startLine: startLine,
-          endLine: node.line,
+          line: node.line,
           nodes: [node],
           runner: this.activityTypesManager.handlerFunctionFor(
             'checkImage',
@@ -123,8 +121,7 @@ class ActivityListBuilder {
         result.push({
           filename: this.filePath,
           activityTypeName: this._convertIntoActivityTypeName(blockType),
-          startLine: startLine,
-          endLine: node.line,
+          line: node.line,
           nodes: [node],
           runner: this.activityTypesManager.handlerFunctionFor(
             'checkLink',
@@ -144,8 +141,7 @@ class ActivityListBuilder {
         result.push({
           filename: this.filePath,
           activityTypeName: this._convertIntoActivityTypeName(blockType),
-          startLine: startLine,
-          endLine: node.line,
+          line: node.line,
           nodes: [{ content: target }],
           runner: this.activityTypesManager.handlerFunctionFor(
             'checkLink',

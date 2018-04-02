@@ -41,7 +41,7 @@ Feature: creating files with content
     When running text-run
     Then it signals:
       | FILENAME | creator.md          |
-      | LINE     | 1-7                 |
+      | LINE     | 7                   |
       | MESSAGE  | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
       """
@@ -61,7 +61,7 @@ Feature: creating files with content
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                                                         |
-      | LINE          | 1-5                                                                |
+      | LINE          | 5                                                                  |
       | MESSAGE       | create file                                                        |
       | ERROR MESSAGE | no 'emphasizedtext' or 'strongtext' tag found in this active block |
       | EXIT CODE     | 1                                                                  |
@@ -98,7 +98,7 @@ Feature: creating files with content
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                                                                   |
-      | LINE          | 1-8                                                                          |
+      | LINE          | 8                                                                            |
       | MESSAGE       | create file                                                                  |
       | ERROR MESSAGE | found more than one 'emphasizedtext' or 'strongtext' tag in the active block |
       | EXIT CODE     | 1                                                                            |
@@ -123,7 +123,7 @@ Feature: creating files with content
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | creator.md                                                    |
-      | LINE          | 1-12                                                          |
+      | LINE          | 12                                                            |
       | MESSAGE       | create file                                                   |
       | ERROR MESSAGE | found more than one 'fence' or 'code' tag in the active block |
       | EXIT CODE     | 1                                                             |

@@ -1,5 +1,6 @@
 // @flow
 
+const { red } = require('chalk')
 const cliCursor = require('cli-cursor')
 const endChildProcesses = require('end-child-processes')
 const parseCliArgs = require('./parse-cli-args')
@@ -18,6 +19,7 @@ async function main () {
   } catch (err) {
     exitCode = 1
     if (err instanceof UnprintedUserError) {
+      console.log(red(err))
       printCodeFrame(console.log, err.filePath, err.line)
     } else if (!(err instanceof UserError)) {
       console.log(err.stack)

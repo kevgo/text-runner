@@ -1,3 +1,3 @@
-module.exports = ({formatter}) => {
+module.exports = ({ formatter }) => {
   formatter.output('Hello World!')
 }

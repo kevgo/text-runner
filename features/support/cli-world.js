@@ -102,7 +102,9 @@ const CliWorld = function () {
     var expectedText = ''
     if (table.FILENAME) expectedText += table.FILENAME
     if (table.FILENAME && table.LINE) expectedText += `:${table.LINE}`
-    if (table.FILENAME && (table.MESSAGE || table.WARNING)) { expectedText += ' -- ' }
+    if (table.FILENAME && (table.MESSAGE || table.WARNING)) {
+      expectedText += ' -- '
+    }
     if (table.MESSAGE) expectedText += table.MESSAGE
     if (table.WARNING) expectedText += table.WARNING
     expect(standardizePath(this.process.fullOutput())).to.include(expectedText)

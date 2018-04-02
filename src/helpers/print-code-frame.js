@@ -8,7 +8,7 @@ type PrintFunc = string => void | boolean
 module.exports = function (output: PrintFunc, filename: ?string, line: ?number) {
   if (!filename || line == null) return
 
-  const fileContent = fs.readFileSync(filename)
+  const fileContent = fs.readFileSync(filename, 'utf8')
   output(
     codeFrameColumns(
       fileContent,

@@ -28,10 +28,15 @@ class ActivityTypeManager {
   }
 
   // Provides the action for the block with the given name
-  handlerFunctionFor (activityType: string, filePath: string): HandlerFunction {
+  handlerFunctionFor (
+    activityType: string,
+    filePath: string,
+    line: ?number
+  ): HandlerFunction {
     activityType = kebabcase(activityType)
     const result = this.handlerFunctions[activityType]
     if (!result) {
+      this.formatter.startFile(filePath)
       var errorText = `unknown activity type: ${red(
         activityType
       )}\nAvailable activity types:\n`
@@ -40,8 +45,7 @@ class ActivityTypeManager {
       }
       errorText += `\nTo create a new "${activityType}" activity type,\n`
       errorText += `run "text-run add ${activityType}"\n`
-      this.formatter.startFile(filePath)
-      throw new UnprintedUserError(errorText)
+      throw new UnprintedUserError(errorText, filePath, line)
     }
     return result
   }
@@ -81,7 +85,9 @@ class ActivityTypeManager {
       ).replace(/Action/, '')
       if (this.handlerFunctions[actionName]) {
         throw new UnprintedUserError(
-          `redefining internal action '${actionName}'`
+          `redefining internal action '${actionName}'`,
+          filename,
+          1
         )
       }
 

@@ -52,7 +52,7 @@ class Formatter {
   }
 
   // Called on general errors
-  error (errorMessage: string) {
+  error (errorMessage: string, filename?: string, line?: number) {
     this.errorMessage = errorMessage
     this.inActivity = false
   }
@@ -79,7 +79,11 @@ class Formatter {
 
   startActivity (activityTypeName: string) {
     if (this.inActivity) {
-      throw new UnprintedUserError('already in a started block')
+      throw new UnprintedUserError(
+        'already in a started block',
+        this.filePath,
+        this.endLine || this.startLine
+      )
     }
     this.setTitle(activityTypeName)
     this.errorMessage = ''

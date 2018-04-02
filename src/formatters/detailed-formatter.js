@@ -50,9 +50,14 @@ class DetailedFormatter extends Formatter {
       }
       text += ' -- '
     }
-    if (this.activityText) text += this.activityText
-    if (this.warningMessage) text += this.warningMessage
-    if (this.errorMessage) text += this.errorMessage
+
+    if (this.errorMessage) {
+      text += this.errorMessage
+    } else if (this.warningMessage) {
+      text += this.warningMessage
+    } else if (this.activityText) {
+      text += this.activityText
+    }
     console.log(this._applyColorFunctions(text, ...colorFunctions))
   }
 

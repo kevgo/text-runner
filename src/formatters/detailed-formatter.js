@@ -52,9 +52,9 @@ class DetailedFormatter extends Formatter {
       }
       text += ' -- '
     }
-    if (this.activityText) text += this.activityText
-    if (this.warningMessage) text += this.warningMessage
-    if (this.errorMessage) text += this.errorMessage
+    text += [this.activityText, this.warningMessage, this.errorMessage]
+      .filter(msg => msg)
+      .join(' - ')
     console.log(this._applyColorFunctions(text, ...colorFunctions))
   }
 

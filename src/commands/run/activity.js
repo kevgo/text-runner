@@ -12,8 +12,7 @@ import type Searcher from './searcher.js'
 export type Activity = {
   filename: string,
   activityTypeName: string,
-  startLine: number,
-  endLine?: number,
+  line: ?number,
   formatter: Formatter,
   runner: HandlerFunction,
   nodes: AstNodeList,

@@ -24,7 +24,7 @@ Feature: running inline blocks of asynchronous Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md                 |
-      | LINE     | 1-8                  |
+      | LINE     | 8                    |
       | MESSAGE  | run async javascript |
     And it prints:
       """
@@ -63,7 +63,7 @@ Feature: running inline blocks of asynchronous Javascript
     When trying to run text-run
     Then it signals:
       | FILENAME      | 1.md                       |
-      | LINE          | 1-9                        |
+      | LINE          | 9                          |
       | MESSAGE       | run async javascript       |
       | ERROR MESSAGE | too many code blocks found |
       | EXIT CODE     | 1                          |

@@ -21,7 +21,7 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 1-5            |
+      | LINE     | 5              |
       | MESSAGE  | run javascript |
     And it prints:
       """
@@ -44,7 +44,7 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 1-8            |
+      | LINE     | 8              |
       | MESSAGE  | run javascript |
     And it prints:
       """
@@ -64,7 +64,7 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 1-5            |
+      | LINE     | 5              |
       | MESSAGE  | run javascript |
 
 
@@ -86,11 +86,11 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 1-5            |
+      | LINE     | 5              |
       | MESSAGE  | run javascript |
     And it signals:
       | FILENAME | 1.md           |
-      | LINE     | 7-11           |
+      | LINE     | 11             |
       | MESSAGE  | run javascript |
     Then it prints:
       """
@@ -129,7 +129,7 @@ Feature: running inline blocks of Javascript
     When trying to run text-run
     Then it signals:
       | FILENAME      | 1.md                       |
-      | LINE          | 1-9                        |
+      | LINE          | 9                          |
       | MESSAGE       | run javascript             |
       | ERROR MESSAGE | too many code blocks found |
       | EXIT CODE     | 1                          |

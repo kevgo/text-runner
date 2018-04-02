@@ -3,7 +3,6 @@
 const { bold, cyan, dim, green, magenta, red } = require('chalk')
 const Formatter = require('./formatter')
 const printCodeFrame = require('../helpers/print-code-frame')
-const unique = require('array-unique')
 
 // colorFunction is a better name for functions that add colors to strings
 type colorFunction = (text: string) => string
@@ -44,11 +43,9 @@ class DetailedFormatter extends Formatter {
     var text = ''
     if (this.filePath) {
       text += this.filePath
-      if (this.startLine) {
+      if (this.line) {
         text += `:`
-        text += unique([this.startLine, this.endLine])
-          .filter(a => a)
-          .join('-')
+        text += this.line
       }
       text += ' -- '
     }

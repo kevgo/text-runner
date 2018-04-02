@@ -43,11 +43,11 @@ Feature: long-running processes
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                            |
-      | LINE     | 1-6                                             |
+      | LINE     | 6                                               |
       | MESSAGE  | starting a long-running process: node server.js |
     And it signals:
       | FILENAME | 1.md                                             |
-      | LINE     | 8-12                                             |
+      | LINE     | 12                                               |
       | MESSAGE  | verifying the output of the long-running process |
     And it signals:
       | FILENAME | 1.md                              |

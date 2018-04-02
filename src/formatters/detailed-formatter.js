@@ -2,6 +2,7 @@
 
 const { bold, cyan, dim, green, magenta, red } = require('chalk')
 const Formatter = require('./formatter')
+const printCodeFrame = require('../helpers/print-code-frame')
 const unique = require('array-unique')
 
 // colorFunction is a better name for functions that add colors to strings
@@ -10,9 +11,10 @@ type colorFunction = (text: string) => string
 class DetailedFormatter extends Formatter {
   // A detailed formatter, prints output before the step name
 
-  error (errorMessage: string) {
+  error (errorMessage: string, filename?: string, line?: number) {
     super.error(errorMessage)
     this._printActivityHeader(bold, red)
+    printCodeFrame(console.log, filename, line)
   }
 
   output (text: string | Buffer): boolean {

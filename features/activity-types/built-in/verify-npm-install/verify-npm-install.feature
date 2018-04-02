@@ -30,7 +30,7 @@ Feature: verifying NPM installation instructions
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                    |
-      | LINE     | 3-7                                     |
+      | LINE     | 7                                       |
       | MESSAGE  | verify NPM installs my_enormous_package |
 
 
@@ -60,7 +60,7 @@ Feature: verifying NPM installation instructions
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                                            |
-      | LINE          | 3-7                                                             |
+      | LINE          | 7                                                               |
       | ERROR MESSAGE | could not find my_enormous_package in installation instructions |
       | EXIT CODE     | 1                                                               |
 
@@ -96,6 +96,6 @@ Feature: verifying NPM installation instructions
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                                            |
-      | LINE          | 3-7                                                             |
+      | LINE          | 7                                                               |
       | ERROR MESSAGE | could not find my_enormous_package in installation instructions |
       | EXIT CODE     | 1                                                               |

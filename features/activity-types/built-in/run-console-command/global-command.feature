@@ -12,5 +12,5 @@ Feature: defining global binaries
     When executing the "global-tool" example
     Then it signals:
       | FILENAME | 1.md                    |
-      | LINE     | 1-5                     |
+      | LINE     | 5                       |
       | MESSAGE  | running console command |

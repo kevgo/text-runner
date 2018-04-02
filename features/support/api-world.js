@@ -8,7 +8,6 @@ const glob = require('glob')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 const stripAnsi = require('strip-ansi')
-const unique = require('array-unique')
 const waitUntil = require('wait-until-promise').default
 
 class TestFormatter {
@@ -39,11 +38,7 @@ class TestFormatter {
 
   startActivity (activityTypeName) {
     this.activities.push(stripAnsi(activityTypeName))
-    this.lines.push(
-      this.startLine !== this.endLine
-        ? `${this.startLine}-${this.endLine}`
-        : this.startLine.toString()
-    )
+    this.lines.push(this.line.toString())
     if (this.verbose) console.log(activityTypeName)
   }
 
@@ -67,11 +62,7 @@ class TestFormatter {
 
   error (error) {
     this.errorMessages.push(stripAnsi(error.message || error.toString()))
-    this.lines.push(
-      unique([this.startLine, this.endLine])
-        .filter(e => e)
-        .join('-')
-    )
+    this.lines.push(this.line)
     if (this.verbose) console.log(error)
   }
 
@@ -79,9 +70,8 @@ class TestFormatter {
     if (this.verbose) console.log(text)
   }
 
-  setLines (startLine, endLine) {
-    this.startLine = startLine
-    this.endLine = endLine
+  setLines (line) {
+    this.line = line
   }
 
   skip (activity) {

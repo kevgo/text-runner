@@ -30,5 +30,5 @@ Feature: verifying the output of the last console command
     When running text-run
     Then it signals:
       | FILENAME | verify-output.md                                     |
-      | LINE     | 9-14                                                 |
+      | LINE     | 14                                                   |
       | MESSAGE  | verifying the output of the last run console command |

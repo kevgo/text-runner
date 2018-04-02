@@ -5,7 +5,7 @@ import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
 import type { LinkTargetList } from '../commands/run/link-target-list.js'
 
-const { cyan, magenta, red } = require('chalk')
+const { cyan, magenta } = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const request = require('request-promise-native')
@@ -60,7 +60,7 @@ async function checkExternalLink (
     await request({ url: target, timeout: 4000 })
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
-      f.warning(`link to non-existing external website ${red(target)}`)
+      f.warning(`link to non-existing external website ${cyan(target)}`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
       f.warning(`link to ${magenta(target)} timed out`)
     } else if (
@@ -91,7 +91,7 @@ async function checkLinkToFilesystem (
       f.setTitle(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
-    throw new Error(`link to non-existing local file ${red(target)}`)
+    throw new Error(`link to non-existing local file ${cyan(target)}`)
   }
 }
 
@@ -105,7 +105,7 @@ async function checkLinkToAnchorInSameFile (
     linkTarget => linkTarget.name === target.substr(1)
   )[0]
   if (!targetEntry) {
-    throw new Error(`link to non-existing local anchor ${red(target)}`)
+    throw new Error(`link to non-existing local anchor ${cyan(target)}`)
   }
   if (targetEntry.type === 'heading') {
     f.setTitle(`link to local heading ${cyan(targetEntry.text)}`)
@@ -124,7 +124,7 @@ async function checkLinkToAnchorInOtherFile (
   targetFilename = decodeURI(targetFilename)
   if (linkTargets[targetFilename] == null) {
     throw new Error(
-      `link to anchor #${cyan(targetAnchor)} in non-existing file ${red(
+      `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
         targetFilename
       )}`
     )
@@ -134,7 +134,7 @@ async function checkLinkToAnchorInOtherFile (
   )[0]
   if (!targetEntry) {
     throw new Error(
-      `link to non-existing anchor #${red(targetAnchor)} in ${cyan(
+      `link to non-existing anchor #${cyan(targetAnchor)} in ${cyan(
         targetFilename
       )}`
     )

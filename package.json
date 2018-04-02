@@ -6,6 +6,7 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
+    "@babel/code-frame": "7.0.0-beta.42",
     "array-unique": "0.3.2",
     "chalk": "2.3.2",
     "cli-cursor": "2.1.0",

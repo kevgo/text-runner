@@ -57,7 +57,7 @@ class TextRunner {
       await new CommandClass(this).run(file)
     } catch (err) {
       if (err instanceof UnprintedUserError) {
-        this.formatter.error(err.message)
+        this.formatter.error(err.message, err.filePath, err.line)
         throw new PrintedUserError(err)
       } else {
         throw err

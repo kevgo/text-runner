@@ -54,8 +54,9 @@ class ActivityListBuilder {
       if (isActiveBlockStartTag) {
         if (insideActiveBlock) {
           throw new UnprintedUserError(
-            `${this.filePath}: Block ${node.content ||
-              ''} is nested in another 'textrun' block.`
+            `Block ${node.content || ''} is nested in another 'textrun' block.`,
+            this.filePath,
+            startLine
           )
         }
         insideActiveBlock = true
@@ -106,7 +107,8 @@ class ActivityListBuilder {
           nodes: [node],
           runner: this.activityTypesManager.handlerFunctionFor(
             'checkImage',
-            this.filePath
+            this.filePath,
+            node.line
           ),
           linkTargets: this.linkTargets,
           formatter: this.formatter,

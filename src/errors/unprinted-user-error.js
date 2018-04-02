@@ -1,8 +1,5 @@
 // @flow
 
-const { codeFrameColumns } = require('@babel/code-frame')
-const fs = require('fs')
-const { red } = require('chalk')
 const UserError = require('./user-error.js')
 
 // Represents a UserError that has not been printed via the formatter.
@@ -15,19 +12,5 @@ module.exports = class UnprintedUserError extends UserError {
     super(message)
     this.filePath = filePath
     this.line = line
-  }
-
-  print (output: string => void) {
-    output(red(this.message))
-    if (this.filePath != null && this.line != null) {
-      const fileContent = fs.readFileSync(this.filePath)
-      output(
-        codeFrameColumns(
-          fileContent,
-          { start: this.line },
-          { forceColor: true }
-        )
-      )
-    }
   }
 }

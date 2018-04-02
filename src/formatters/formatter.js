@@ -19,7 +19,7 @@ class Formatter {
   filePath: string // the path of the documentation file that is currently processed
   filePaths: string[] // the files encountered so far
   inActivity: boolean // whether this formatter is currently processing an action
-  skipping: boolean   // whether the current step is being skipped
+  skipping: boolean // whether the current step is being skipped
   startLine: number // the line within the documentation file at which the currently processed block starts
   stderr: WriteStream
   stdout: WriteStream

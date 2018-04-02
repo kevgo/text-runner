@@ -25,7 +25,9 @@ ${error || ''}
 USAGE: ${bold('text-run [<options>] <command>')}
 
 COMMANDS
-  ${bold('run')} [<filename>]  tests the entire documentation, or only the given file/folder
+  ${bold(
+    'run'
+  )} [<filename>]  tests the entire documentation, or only the given file/folder
   ${bold('add')} <filename>    scaffolds a new block type handler
   ${bold('setup')}             creates an example configuration file
   ${bold('version')}           shows the currently installed version

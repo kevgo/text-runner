@@ -1,9 +1,8 @@
 // @flow
 
 const { bold, cyan, dim, green, magenta, red } = require('chalk')
-const { codeFrameColumns } = require('@babel/code-frame')
 const Formatter = require('./formatter')
-const fs = require('fs')
+const printCodeFrame = require('../helpers/print-code-frame')
 const unique = require('array-unique')
 
 // colorFunction is a better name for functions that add colors to strings
@@ -15,15 +14,7 @@ class DetailedFormatter extends Formatter {
   error (errorMessage: string, filename?: string, line?: number) {
     super.error(errorMessage)
     this._printActivityHeader(bold, red)
-    if (filename && line != null) {
-      const fileContent = fs.readFileSync(filename)
-      const frame = codeFrameColumns(
-        fileContent,
-        { start: { line: line } },
-        { forceColor: true }
-      )
-      this.output(frame)
-    }
+    printCodeFrame(this.output, filename, line)
   }
 
   output (text: string | Buffer): boolean {

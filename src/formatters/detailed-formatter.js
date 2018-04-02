@@ -14,7 +14,7 @@ class DetailedFormatter extends Formatter {
   error (errorMessage: string, filename?: string, line?: number) {
     super.error(errorMessage)
     this._printActivityHeader(bold, red)
-    printCodeFrame(this.output, filename, line)
+    printCodeFrame(console.log, filename, line)
   }
 
   output (text: string | Buffer): boolean {

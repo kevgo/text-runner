@@ -86,7 +86,8 @@ class ActivityTypeManager {
       if (this.handlerFunctions[actionName]) {
         throw new UnprintedUserError(
           `redefining internal action '${actionName}'`,
-          filename
+          filename,
+          1
         )
       }
 

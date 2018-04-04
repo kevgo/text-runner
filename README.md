@@ -20,6 +20,9 @@
 </a>
 <br><br>
 
+<!-- logo is from: https://icons8.com/icon/40886/test -->
+<img src="documentation/logo2.png">
+
 TextRunner executes unstructured documentation,
 similar to what a human reader would do if they were reading and following it.
 It also ensures that links and images in your documentation point to existing targets.

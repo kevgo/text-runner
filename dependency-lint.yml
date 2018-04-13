@@ -9,7 +9,8 @@ executedModules:
       - test
       - version
   shellScripts:
-    dev: []
+    dev:
+      - Makefile
     ignore: []
     root: 'bin/*'
 
@@ -29,7 +30,6 @@ ignoreErrors:
     - eslint-plugin-flowtype
     - eslint-plugin-import
     - flow-bin
-    - flow-remove-types
     - flow-typed
     - greenkeeper-lockfile
     - mocha

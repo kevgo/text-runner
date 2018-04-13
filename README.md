@@ -25,15 +25,13 @@
 
 TextRunner is an agile documentation tool.
 It makes documentation executable.
-An example is the documentation you are reading right now,
+An example is the text you are reading right now,
 which is verified for correctness by TextRunner.
 
-There are no limitations on the text that TextRunner executes.
+There are no limitations on the text that TextRunner executes/verifies.
 It can read and understand (if you tell it how)
 any form of plain text in any human language as well as
 complex data in tables, bullet point lists, and embedded images.
-
-It also ensures that links and images in your documentation point to existing targets.
 
 
 #### Use cases

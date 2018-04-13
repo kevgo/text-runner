@@ -23,7 +23,8 @@
 <!-- logo is from: https://icons8.com/icon/40886/test -->
 <img src="documentation/logo2.png">
 
-TextRunner makes documentation executable.
+TextRunner is an agile documentation tool.
+It makes documentation executable.
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 

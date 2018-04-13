@@ -23,10 +23,7 @@
 <!-- logo is from: https://icons8.com/icon/40886/test -->
 <img src="documentation/logo2.png">
 
-TextRunner is an agile documentation tool. 
-It executes unstructured documentation,
-similar to what a human reader would do if they were reading and following it.
-It also ensures that links and images in your documentation point to existing targets.
+TextRunner makes documentation executable.
 An example is the documentation you are reading right now,
 which is verified for correctness by TextRunner.
 
@@ -34,6 +31,8 @@ There are no limitations on the text that TextRunner executes.
 It can read and understand (if you tell it how)
 any form of plain text in any human language as well as
 complex data in tables, bullet point lists, and embedded images.
+
+It also ensures that links and images in your documentation point to existing targets.
 
 
 #### Use cases

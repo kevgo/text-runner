@@ -2396,14 +2396,6 @@ graceful-fs@~3.0.2:
   dependencies:
     natives "^1.1.0"
 
-greenkeeper-lockfile@1.13.3:
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/greenkeeper-lockfile/-/greenkeeper-lockfile-1.13.3.tgz#4401f45669649c9ecf5213f2e8934accef5c6dd2"
-  dependencies:
-    lodash "^4.17.4"
-    require-relative "^0.8.7"
-    semver "^5.3.0"
-
 growl@1.10.3:
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.10.3.tgz#1926ba90cf3edfe2adb4927f5880bc22c66c790f"

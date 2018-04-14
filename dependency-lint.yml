@@ -12,7 +12,7 @@ executedModules:
     dev:
       - Makefile
     ignore: []
-    root: 'bin/*'
+    root: 'Makefile'
 
 ignoreErrors:
   missing:
@@ -21,22 +21,10 @@ ignoreErrors:
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:
-    - babel-cli
-    - babel-eslint
     - babel-plugin-istanbul
     - babel-preset-flow
-    - coveralls
     - eslint
-    - eslint-plugin-flowtype
-    - eslint-plugin-import
-    - flow-bin
-    - flow-typed
-    - greenkeeper-lockfile
-    - mocha
-    - nyc
-    - o-tools
     - request
-    - remark-cli
     - remark-lint
     - remark-preset-lint-recommended
     - standard

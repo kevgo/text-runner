@@ -15,9 +15,7 @@ executedModules:
     root: 'Makefile'
 
 ignoreErrors:
-  missing:
-    - rc
-    - remark
+  missing: []
   shouldBeDependency: []
   shouldBeDevDependency: []
   unused:

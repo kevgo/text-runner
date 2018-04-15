@@ -3,7 +3,6 @@
 build: clean    # builds for the current platform
 	@mkdir dist
 	@cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
-	flow-remove-types
 
 clean:   # Removes all build artifacts
 	@rm -rf dist

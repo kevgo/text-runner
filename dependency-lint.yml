@@ -9,8 +9,7 @@ executedModules:
       - test
       - version
   shellScripts:
-    dev:
-      - Makefile
+    dev: Makefile
     ignore: []
     root: 'Makefile'
 

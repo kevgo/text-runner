@@ -11,7 +11,7 @@ executedModules:
   shellScripts:
     dev: Makefile
     ignore: []
-    root: 'Makefile'
+    root: Makefile
 
 ignoreErrors:
   missing: []

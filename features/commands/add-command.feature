@@ -18,7 +18,7 @@ Feature: adding new handler functions
         console.log(activity.nodes)
 
         // capture content from the document
-        // const content = searcher.tagContent('boldtext')
+        // const content = activity.searcher.tagContent('boldtext')
         // do something with the content
         // formatter.output(content)
       }

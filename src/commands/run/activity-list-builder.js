@@ -22,6 +22,8 @@ class ActivityListBuilder {
   formatter: Formatter
   linkTargets: LinkTargetList
   regex: RegExp
+  activeTagType: string
+  tagTypeRegex: RegExp
 
   constructor (value: {
     activityTypesManager: ActivityTypeManager,
@@ -38,10 +40,11 @@ class ActivityListBuilder {
     this.regex = new RegExp(
       ` ${this.configuration.get('classPrefix')}="([^"]+)"`
     )
+    this.tagTypeRegex = /<(\w+).*>/
   }
 
   build (tree: AstNodeList): ActivityList {
-    var insideActiveBlock = false // whether we are currently processing nodes of an active block
+    this.activeTagType = '' // whether we are currently processing nodes of an active block
     var nodesForCurrentRunner: AstNodeList = []
 
     // contains the most recent line in the file that we are aware of
@@ -52,14 +55,14 @@ class ActivityListBuilder {
     for (let node: AstNode of tree) {
       const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
       if (isActiveBlockStartTag) {
-        if (insideActiveBlock) {
+        if (this.activeTagType !== '') {
           throw new UnprintedUserError(
             `Block ${node.content || ''} is nested in another 'textrun' block.`,
             this.filePath,
             line
           )
         }
-        insideActiveBlock = true
+        this.activeTagType = this._getTagType(node)
         if (node.line != null) {
           line = node.line
         }
@@ -73,7 +76,7 @@ class ActivityListBuilder {
       }
 
       if (this._isActiveBlockEndTag(node)) {
-        if (insideActiveBlock) {
+        if (this.activeTagType !== '') {
           result.push({
             filename: this.filePath,
             activityTypeName: this._convertIntoActivityTypeName(blockType),
@@ -86,12 +89,12 @@ class ActivityListBuilder {
             searcher: new Searcher(nodesForCurrentRunner)
           })
         }
-        insideActiveBlock = false
+        this.activeTagType = ''
         nodesForCurrentRunner = []
         continue
       }
 
-      if (insideActiveBlock) {
+      if (this.activeTagType !== '') {
         nodesForCurrentRunner.push(node)
         continue
       }
@@ -159,6 +162,14 @@ class ActivityListBuilder {
     return result
   }
 
+  _getTagType (node: AstNode): string {
+    const matches = node.content && node.content.match(this.tagTypeRegex)
+    if (!matches) {
+      return ''
+    }
+    return matches[1]
+  }
+
   _htmlLinkTarget (node: AstNode): ?string {
     if (node.content == null) return null
     const matches = node.content.match(/<a[^>]*href="([^"]*)".*?>/)
@@ -192,8 +203,10 @@ class ActivityListBuilder {
   }
 
   // Returns whether the given node is the end of an active block
-  _isActiveBlockEndTag (node) {
-    return node.type === 'htmltag' && node.content === '</a>'
+  _isActiveBlockEndTag (node: AstNode) {
+    return (
+      node.type === 'htmltag' && node.content === `</${this.activeTagType}>`
+    )
   }
 }
 

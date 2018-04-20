@@ -160,6 +160,6 @@ Actions can throw a normal `Error` instance, it will be treated as an `Unprinted
 
 ## Deployment
 
-```
-make deploy
-```
+- update `package.json` in a branch and ship it
+- create a new release on Github
+- run `make deploy`

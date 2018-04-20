@@ -61,9 +61,6 @@ else
 endif
 
 deploy: build  # deploys a new version to npmjs.org
-	yarn version
-	git push
-	git push --tags
 	npm publish
 
 docs: build   # runs the documentation tests

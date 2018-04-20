@@ -9,7 +9,6 @@ Feature: support for more HTML tags
     Given my workspace contains the HelloWorld activity
 
 
-    @debug
   Scenario: H1 tag
     Given my source code contains the file "1.md" with content:
       """

@@ -41,7 +41,7 @@ class ActivityListBuilder {
   }
 
   build (tree: AstNodeList): ActivityList {
-    var insideActiveBlock = false // whether we are currently processing nodes of an active block
+    var activeBlockType = '' // whether we are currently processing nodes of an active block
     var nodesForCurrentRunner: AstNodeList = []
 
     // contains the most recent line in the file that we are aware of
@@ -52,14 +52,14 @@ class ActivityListBuilder {
     for (let node: AstNode of tree) {
       const isActiveBlockStartTag = this._determineIsActiveBlockStartTag(node)
       if (isActiveBlockStartTag) {
-        if (insideActiveBlock) {
+        if (activeBlockType !== '') {
           throw new UnprintedUserError(
             `Block ${node.content || ''} is nested in another 'textrun' block.`,
             this.filePath,
             line
           )
         }
-        insideActiveBlock = true
+        activeBlockType = this._getTagType(node)
         if (node.line != null) {
           line = node.line
         }
@@ -73,7 +73,7 @@ class ActivityListBuilder {
       }
 
       if (this._isActiveBlockEndTag(node)) {
-        if (insideActiveBlock) {
+        if (activeBlockType !== '') {
           result.push({
             filename: this.filePath,
             activityTypeName: this._convertIntoActivityTypeName(blockType),
@@ -86,12 +86,12 @@ class ActivityListBuilder {
             searcher: new Searcher(nodesForCurrentRunner)
           })
         }
-        insideActiveBlock = false
+        activeBlockType = ''
         nodesForCurrentRunner = []
         continue
       }
 
-      if (insideActiveBlock) {
+      if (activeBlockType !== '') {
         nodesForCurrentRunner.push(node)
         continue
       }
@@ -157,6 +157,10 @@ class ActivityListBuilder {
     }
 
     return result
+  }
+
+  _getTagType (node: AstNode): string {
+    return 'a'
   }
 
   _htmlLinkTarget (node: AstNode): ?string {

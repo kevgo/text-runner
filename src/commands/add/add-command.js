@@ -1,24 +1,22 @@
 // @flow
 
-import type { Command } from '../command.js'
-
 const fs = require('fs')
 const path = require('path')
 
-class AddCommand implements Command {
-  async run (filename: string) {
-    if (!fs.existsSync('text-run')) {
-      fs.mkdirSync('text-run')
-    }
-    fs.writeFileSync(
-      path.join('text-run', filename + '.js'),
-      this._template(filename),
-      'utf8'
-    )
+module.exports = async function addCommand (blockName: ?string) {
+  if (!blockName) throw new Error('no block name given')
+  if (!fs.existsSync('text-run')) {
+    fs.mkdirSync('text-run')
   }
+  fs.writeFileSync(
+    path.join('text-run', blockName + '.js'),
+    template(blockName),
+    'utf8'
+  )
+}
 
-  _template (filename: string) {
-    return `module.exports = async function (activity) {
+function template (filename: string) {
+  return `module.exports = async function (activity) {
   console.log('This code runs inside the "${filename}" block implementation.')
   console.log('I found these elements in your document:')
   console.log(activity.nodes)
@@ -29,7 +27,4 @@ class AddCommand implements Command {
   // formatter.output(content)
 }
 `
-  }
 }
-
-module.exports = AddCommand

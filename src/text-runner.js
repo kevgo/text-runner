@@ -14,54 +14,58 @@ const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 // Tests the documentation in the given directory
-module.exports = async function (value: {
+module.exports = async function (cmdLineArgs: {
   command: string,
   file?: string,
   offline?: boolean,
   exclude?: string,
   format?: Formatter
 }) {
-  const configFileName = fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
-  const textRunner = new TextRunner(
-    { offline: value.offline, exclude: value.exclude, format: value.format },
-    configFileName
-  )
-  await textRunner.execute(value.command, value.file)
-}
-
-class TextRunner {
-  constructorArgs: CliArgTypes
-  configuration: Configuration
-  formatter: Formatter
-  activityTypesManager: ActivityTypeManager
-
-  constructor (constructorArgs: CliArgTypes, configPath) {
-    this.constructorArgs = constructorArgs
-    this.configuration = new Configuration(configPath, this.constructorArgs)
-    this.formatter = new FormatterManager().getFormatter(
-      this.configuration.get('format')
-    )
-    this.activityTypesManager = new ActivityTypeManager(
-      this.formatter,
-      this.configuration
-    )
+  const constructorArgs = {
+    offline: cmdLineArgs.offline,
+    exclude: cmdLineArgs.exclude,
+    format: cmdLineArgs.format
   }
-
-  // Tests the documentation according to the given command and arguments
-  async execute (command: string, file?: string) {
-    try {
-      if (!hasCommand(command)) {
-        throw new UnprintedUserError(`unknown command: ${red(command)}`)
-      }
-      const CommandClass = require(commandPath(command))
-      await new CommandClass(this).run(file)
-    } catch (err) {
-      if (err instanceof UnprintedUserError) {
-        this.formatter.error(err.message, err.filePath, err.line)
-        throw new PrintedUserError(err)
-      } else {
-        throw err
-      }
+  const configuration = new Configuration(configFileName(), constructorArgs)
+  // TODO: make getting a formatter a function
+  const formatter = new FormatterManager().getFormatter(
+    configuration.get('format')
+  )
+  const activityTypesManager = new ActivityTypeManager(formatter, configuration)
+  const commandName = cmdLineArgs.command
+  if (!hasCommand(commandName)) {
+    formatter.error(`unknown command: ${red(commandName)}`)
+  }
+  const file = cmdLineArgs.file
+  try {
+    const command = require(commandPath(commandName))
+    switch (commandName) {
+      case 'add':
+        await command(file)
+        break
+      case 'help':
+        await command()
+        break
+      case 'run':
+        await command({ formatter, activityTypesManager, file })
+        break
+      case 'setup':
+        await command()
+        break
+      case 'version':
+        await command()
+        break
+    }
+  } catch (err) {
+    if (err instanceof UnprintedUserError) {
+      formatter.error(err.message, err.filePath, err.line)
+      throw new PrintedUserError(err)
+    } else {
+      throw err
     }
   }
+}
+
+function configFileName (): string {
+  return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
 }

@@ -1,6 +1,6 @@
 // @flow
 
-import type Formatter from '../formatters/formatter.js'
+import type { CliArgTypes } from './cli-arg-types.js'
 
 const availableCommands = require('../commands/available-commands')
 const minimist = require('minimist')
@@ -8,15 +8,7 @@ const path = require('path')
 
 // Parses the command-line options received,
 // and returns them structured as the command to run and options
-module.exports = function (
-  argv: string[]
-): {
-  command: string,
-  file?: string,
-  offline?: boolean,
-  exclude?: string,
-  format?: Formatter
-} {
+module.exports = function (argv: string[]): CliArgTypes {
   // remove optional unix node call
   if (path.basename(argv[0] || '') === 'node') {
     argv.splice(0, 1)

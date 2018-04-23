@@ -5,6 +5,7 @@ import type Formatter from '../../formatters/formatter.js'
 
 // const ActivityTypeManager = require('./activity-type-manager.js')
 const extractActivities = require('./4-activities/extract-activities.js')
+const extractImagesAndLinks = require('./4-activities/extract-images-and-links.js')
 const findLinkTargets = require('./3-link-targets/find-link-targets.js')
 const rimraf = require('rimraf')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
@@ -33,14 +34,18 @@ module.exports = async function runCommand (
 
   // step 3: find link targets
   const linkTargets = findLinkTargets(ASTs)
-  console.log(linkTargets)
 
   // step 4: extract activities
-  const activities = extractActivities(ASTs, config, format)
+  const activities = extractActivities(ASTs, config)
+  const links = extractImagesAndLinks(ASTs)
+  console.log(11111111)
+  console.log(activities)
+  console.log(22222222)
+  console.log(links)
 
   // step 5: execute the ActivityList
 
   // step 6: cleanup
   rimraf.sync(workingDir)
-  this.formatter.suiteSuccess()
+  format.suiteSuccess()
 }

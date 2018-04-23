@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 import type Configuration from '../configuration/configuration.js'
 
 // Runs the async-await JavaScript code given in the code block

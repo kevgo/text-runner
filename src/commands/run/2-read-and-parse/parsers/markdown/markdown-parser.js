@@ -1,7 +1,10 @@
 // @flow
 
-import type { AstNodeList } from '../../parsers/ast-node-list.js'
+import type { AstNodeList } from '../../ast-node-list.js'
 
+const isHtmlImageTag = require('./is-html-image-tag.js')
+const htmlImageTagSrc = require('./html-image-tag-src.js')
+const parseAttributes = require('./parse-attributes.js')
 // $FlowFixMe
 const Remarkable = require('remarkable')
 
@@ -19,12 +22,16 @@ class MarkdownParser {
     this.markdownParser = new Remarkable('full', { html: true })
   }
 
-  parse (markdownText: string): AstNodeList {
-    return this._standardizeAst(this.markdownParser.parse(markdownText, {}))
+  parse (markdownText: string, filepath: string): AstNodeList {
+    return this._standardizeAst(
+      this.markdownParser.parse(markdownText, {}),
+      filepath
+    )
   }
 
   _standardizeAst (
     ast,
+    filepath: string,
     line: number = 0,
     result: AstNodeList = [],
     heading: ?Heading = undefined
@@ -46,51 +53,52 @@ class MarkdownParser {
         heading = { lines: node.lines, text: '' }
       } else if (node.type === 'heading_close' && heading) {
         result.push({
+          type: `h${node.hLevel}`,
+          filepath: filepath,
           line: heading.lines[heading.lines.length - 1],
-          type: 'heading',
-          content: heading.text,
-          level: node.hLevel
+          content: heading.text || ''
         })
         heading = null
       } else if (isHtmlImageTag(node)) {
         result.push({
-          line: nodeLine,
           type: 'image',
-          src: htmlImageTagSrc(node)
+          filepath: filepath,
+          line: nodeLine,
+          content: '',
+          attributes: parseAttributes(node.content, filepath, nodeLine), // TODO
+          html: node.content
         })
       } else if (node.type === 'image') {
-        result.push({ line: nodeLine, type: 'image', src: node.src })
+        result.push({
+          type: 'image',
+          filepath: filepath,
+          line: nodeLine,
+          src: node.src,
+          content: '', // TODO
+          attributes: {} // TODO
+        })
       } else if (heading && node.type === 'text') {
         heading.text += node.content
       } else if (
-        ['code', 'fence', 'htmlblock', 'htmltag', 'link_open', 'text'].indexOf(
+        ['code', 'fence', 'htmlblock', 'htmltag', 'link_open', 'text'].includes(
           node.type
-        ) > -1
+        )
       ) {
         result.push({
-          line: nodeLine,
           type: `${modifiers.sort().join()}${node.type}`,
+          filepath: filepath,
+          line: nodeLine,
           content: node.content || node.href
         })
       }
 
       if (node.children) {
-        this._standardizeAst(node.children, nodeLine, result, heading)
+        this._standardizeAst(node.children, filepath, nodeLine, result, heading)
       }
     }
 
     return result
   }
-}
-
-// Returns whether this AST node represents an HTML tag
-function isHtmlImageTag (node) {
-  return node.type === 'htmltag' && /<img [^>]*src=".*?".*?>/.test(node.content)
-}
-
-function htmlImageTagSrc (node) {
-  const matches = node.content.match(/<img.*src="([^"]*)".*>/)
-  return matches[1]
 }
 
 module.exports = MarkdownParser

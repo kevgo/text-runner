@@ -1,9 +1,9 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
-import type { LinkTargetList } from '../commands/run/link-target-list.js'
+import type { LinkTargetList } from '../commands/run/3-link-targets/link-target-list.js'
 
 const { cyan, magenta } = require('chalk')
 const fs = require('fs-extra')

@@ -1,6 +1,7 @@
 // @flow
 
-import type { AstNodeList } from '../../parsers/ast-node-list.js'
+import type { AstNode } from '../2-read-and-parse/ast-node.js'
+import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
 
 const Searcher = require('./searcher.js')
 const { expect } = require('chai')
@@ -8,8 +9,8 @@ const { expect } = require('chai')
 describe('Searcher', function () {
   beforeEach(function () {
     const nodes: AstNodeList = [
-      { type: 'image', content: 'image content' },
-      { type: 'link', content: 'link content' }
+      makeNode({ type: 'image', content: 'image content' }),
+      makeNode({ type: 'link', content: 'link content' })
     ]
     this.searcher = new Searcher(nodes)
   })
@@ -34,3 +35,14 @@ describe('Searcher', function () {
     })
   })
 })
+
+function makeNode (attrs): AstNode {
+  return {
+    type: attrs.type || '',
+    content: attrs.content || '',
+    filepath: '',
+    line: -1,
+    html: '',
+    attributes: {}
+  }
+}

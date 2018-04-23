@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 
 const { bold, cyan } = require('chalk')
 const path = require('path')

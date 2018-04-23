@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 
 // Waits until the currently running console command produces the given output
 module.exports = async function (activity: Activity) {

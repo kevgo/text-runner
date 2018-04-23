@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 import type Configuration from '../configuration/configuration.js'
 import type { WriteStream } from 'observable-process'
 

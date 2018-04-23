@@ -11,37 +11,43 @@ class LinkTargetListBuilder {
   // the LinkTarget list that this builder is supposed to populate
   linkTargets: LinkTargetList
 
-  constructor (value: { linkTargets: LinkTargetList }) {
-    this.linkTargets = value.linkTargets
+  constructor () {
+    this.linkTargets = {}
   }
 
-  buildLinkTargets (filePath: string, tree: AstNodeList) {
-    this.linkTargets[filePath] = this.linkTargets[filePath] || []
+  addLinkTargets (tree: AstNodeList) {
     for (let node of tree) {
       switch (node.type) {
         case 'htmltag':
-          if (node.content != null) {
-            const matches = node.content.match(/<a name="([^"]*)">/)
-            if (matches != null) {
-              this.linkTargets[filePath].push({
-                type: 'anchor',
-                name: matches[1]
-              })
-            }
-          }
+          this._addAnchorTag(node.filepath, node.content)
           break
 
-        case 'heading':
-          this.linkTargets[filePath].push({
-            type: node.type,
-            name: dashify((node.content || '').toLowerCase()),
-            text: node.content
-          })
+        case 'h1':
+        case 'h2':
+        case 'h3':
+        case 'h4':
+        case 'h5':
+        case 'h6':
+          this._addHeading(node.filepath, node.content)
           break
       }
     }
+  }
 
-    return tree
+  _addAnchorTag (filepath: string, html: string) {
+    const matches = html.match(/<a name="([^"]*)">/)
+    if (!matches) return
+    this._addLinkTarget(filepath, 'anchor', matches[1])
+  }
+
+  _addHeading (filepath: string, text: string) {
+    const content = dashify(text).toLowerCase()
+    this._addLinkTarget(filepath, 'heading', content)
+  }
+
+  _addLinkTarget (filepath: string, type: string, name: string) {
+    this.linkTargets[filepath] = this.linkTargets[filepath] || []
+    this.linkTargets[filepath].push({ type, name })
   }
 }
 

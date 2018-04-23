@@ -3,11 +3,12 @@
 import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
 import type { LinkTargetList } from './link-target-list.js'
 
-module.exports = function (ASTs: AstNodeList[]): LinkTargetList {
-  ASTs.map(ast => targetsInFile(ast))
-  return {}
-}
+const LinkTargetListBuilder = require('./link-target-list-builder.js')
 
-function targetsInFile (ast: AstNodeList): LinkTargetList {
-  return {}
+module.exports = function (ASTs: AstNodeList[]): LinkTargetList {
+  const builder = new LinkTargetListBuilder()
+  for (let ast of ASTs) {
+    builder.addLinkTargets(ast)
+  }
+  return builder.linkTargets
 }

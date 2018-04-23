@@ -1,9 +1,9 @@
 // @flow
 
-import type { AstNode } from '../../parsers/ast-node.js'
-import type { AstNodeList } from '../../parsers/ast-node-list.js'
+import type { AstNode } from '../2-read-and-parse/ast-node.js'
+import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
 
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 type NodeQuery = string | string[]
 

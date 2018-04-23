@@ -2,7 +2,7 @@ const classMethods = require('class-methods')
 const jsdiffConsole = require('jsdiff-console')
 const removeTrailingColon = require('../dist/helpers/remove-trailing-colon.js')
 const removeValue = require('remove-value')
-const Searcher = require('../dist/commands/run/searcher.js')
+const Searcher = require('../dist/commands/run/5-execute/searcher.js')
 
 module.exports = function ({ searcher }) {
   const expectedTools = searcher

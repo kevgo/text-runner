@@ -1,8 +1,8 @@
 // @flow
 
-import type { HandlerFunction } from './handler-function.js'
-import type Configuration from '../../configuration/configuration.js'
-import type Formatter from '../../formatters/formatter.js'
+import type { HandlerFunction } from '../5-execute/handler-function.js'
+import type Configuration from '../../../configuration/configuration.js'
+import type Formatter from '../../../formatters/formatter.js'
 
 const kebabcase = require('just-kebab-case')
 const { red } = require('chalk')
@@ -10,7 +10,7 @@ const glob = require('glob')
 const interpret = require('interpret')
 const path = require('path')
 const rechoir = require('rechoir')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 class ActivityTypeManager {
   // Loads and provides built-in and custom handler functions

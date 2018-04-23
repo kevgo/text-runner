@@ -1,6 +1,6 @@
 // @flow
 
-import type { AstNodeList } from '../../parsers/ast-node-list.js'
+import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
 import type { LinkTargetList } from './link-target-list.js'
 
 const dashify = require('dashify')
@@ -33,10 +33,9 @@ class LinkTargetListBuilder {
 
         case 'heading':
           this.linkTargets[filePath].push({
-            type: 'heading',
+            type: node.type,
             name: dashify((node.content || '').toLowerCase()),
-            text: node.content,
-            level: node.level
+            text: node.content
           })
           break
       }

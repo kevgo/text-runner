@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 const util = require('util')
 const endChildProcesses = util.promisify(require('end-child-processes'))
 

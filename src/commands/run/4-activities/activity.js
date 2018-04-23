@@ -1,11 +1,11 @@
 // @flow
 
-import type { HandlerFunction } from './handler-function.js'
-import type { AstNodeList } from '../../parsers/ast-node-list.js'
-import type Configuration from '../../configuration/configuration.js'
-import type Formatter from '../../formatters/formatter.js'
-import type { LinkTargetList } from './link-target-list.js'
-import type Searcher from './searcher.js'
+import type { HandlerFunction } from '../5-execute/handler-function.js'
+import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
+import type Configuration from '../../../configuration/configuration.js'
+import type Formatter from '../../../formatters/formatter.js'
+import type { LinkTargetList } from '../3-link-targets/link-target-list.js'
+import type Searcher from '../5-execute/searcher.js'
 
 // Activity is an action instance, i.e. a particular activity that we are going to do
 // on a particular place in a particular document, defined by an action

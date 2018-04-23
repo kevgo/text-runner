@@ -1,7 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/activity.js'
-import type { AstNode } from '../parsers/ast-node.js'
+import type { Activity } from '../commands/run/4-activities/activity.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
 
@@ -13,16 +12,20 @@ const request = require('request-promise-native')
 // Checks for broken hyperlinks
 module.exports = async function (activity: Activity) {
   const node = activity.nodes[0]
-  if (node.src == null || node.src === '') {
+  var imagePath = node.attributes ? node.attributes.src : null
+  if (!imagePath) {
     throw new Error('image tag without source')
   }
-  var imagePath = node.src
-  if (!node.src.startsWith('/')) {
+  if (!imagePath.startsWith('/')) {
     imagePath = path.join(path.dirname(activity.filename), imagePath)
   }
   activity.formatter.setTitle(`image ${cyan(imagePath)}`)
-  if (isRemoteImage(node)) {
-    await checkRemoteImage(node, activity.formatter, activity.configuration)
+  if (isRemoteImage(imagePath)) {
+    await checkRemoteImage(
+      imagePath,
+      activity.formatter,
+      activity.configuration
+    )
   } else {
     await checkLocalImage(imagePath, activity.formatter)
   }
@@ -36,33 +39,30 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
   }
 }
 
-async function checkRemoteImage (node: AstNode, f: Formatter, c: Configuration) {
+async function checkRemoteImage (url: string, f: Formatter, c: Configuration) {
   if (c.get('offline')) {
-    f.skip(`skipping external image ${node.src || ''}`)
+    f.skip(`skipping external image: ${magenta(url)}`)
     return
   }
-
   try {
-    await request({ url: node.src, timeout: 2000 })
+    await request({ url: url, timeout: 2000 })
   } catch (err) {
     if (err.statusCode === 404) {
-      f.warning(`image ${magenta(node.src)} does not exist`)
+      f.warning(`image ${magenta(url)} does not exist`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
-      f.warning(`image ${magenta(node.src)} timed out`)
+      f.warning(`image ${magenta(url)} timed out`)
     } else {
       throw err
     }
   }
 }
 
-function isRemoteImage (node: AstNode): boolean {
-  if (node.src != null) {
+function isRemoteImage (imagePath: string): boolean {
+  if (imagePath != null) {
     return (
-      node.src.startsWith('//') ||
-      // $FlowFixMe
-      node.src.startsWith('http://') ||
-      // $FlowFixMe
-      node.src.startsWith('https://')
+      imagePath.startsWith('//') ||
+      imagePath.startsWith('http://') ||
+      imagePath.startsWith('https://')
     )
   } else {
     return false

@@ -1,17 +1,17 @@
 // @flow
 
-import type { HandlerFunction } from './handler-function.js'
-import type { ActivityList } from '../../commands/run/activity-list.js'
-import type { AstNode } from '../../parsers/ast-node.js'
-import type { AstNodeList } from '../../parsers/ast-node-list.js'
-import type { LinkTargetList } from '../../commands/run/link-target-list.js'
+import type { HandlerFunction } from '../5-execute/handler-function.js'
+import type { ActivityList } from '../4-activities/activity-list.js'
+import type { AstNode } from '../2-read-and-parse/ast-node.js'
+import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
+import type { LinkTargetList } from '../3-link-targets/link-target-list.js'
 
 const ActivityTypeManager = require('./activity-type-manager.js')
-const Configuration = require('../../configuration/configuration.js')
-const Formatter = require('../../formatters/formatter.js')
-const Searcher = require('./searcher')
+const Configuration = require('../../../configuration/configuration.js')
+const Formatter = require('../../../formatters/formatter.js')
+const Searcher = require('../5-execute/searcher')
 const toSpaceCase = require('to-space-case')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 class ActivityListBuilder {
   // Returns a list of activities to do with the given AST
@@ -25,18 +25,9 @@ class ActivityListBuilder {
   activeTagType: string
   tagTypeRegex: RegExp
 
-  constructor (value: {
-    activityTypesManager: ActivityTypeManager,
-    configuration: Configuration,
-    filePath: string,
-    formatter: Formatter,
-    linkTargets: LinkTargetList
-  }) {
-    this.activityTypesManager = value.activityTypesManager
-    this.configuration = value.configuration
-    this.filePath = value.filePath
-    this.formatter = value.formatter
-    this.linkTargets = value.linkTargets
+  constructor (configuration: Configuration, formatter: Formatter) {
+    this.configuration = configuration
+    this.formatter = formatter
     this.regex = new RegExp(
       ` ${this.configuration.get('classPrefix')}="([^"]+)"`
     )
@@ -145,7 +136,16 @@ class ActivityListBuilder {
           filename: this.filePath,
           activityTypeName: this._convertIntoActivityTypeName(blockType),
           line: node.line,
-          nodes: [{ content: target }],
+          nodes: [
+            {
+              filepath: node.filepath,
+              line: node.line,
+              type: node.type,
+              html: node.html,
+              content: target,
+              attributes: node.attributes
+            }
+          ],
           runner: this.activityTypesManager.handlerFunctionFor(
             'checkLink',
             this.filePath

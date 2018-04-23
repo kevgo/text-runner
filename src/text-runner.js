@@ -3,7 +3,6 @@
 import type Formatter from './formatters/formatter.js'
 import type { CliArgTypes } from './cli/cli-arg-types.js'
 
-const ActivityTypeManager = require('./commands/run/activity-type-manager.js')
 const { red } = require('chalk')
 const commandPath = require('./commands/command-path')
 const Configuration = require('./configuration/configuration.js')
@@ -12,6 +11,12 @@ const fs = require('fs')
 const hasCommand = require('./commands/has-command')
 const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
+
+const addCommand = require('./commands/add/add-command')
+const helpCommand = require('./commands/help/help-command')
+const runCommand = require('./commands/run/run-command')
+const setupCommand = require('./commands/setup/setup-command')
+const versionCommand = require('./commands/version/version-command')
 
 // Tests the documentation in the given directory
 module.exports = async function (cmdLineArgs: {
@@ -31,29 +36,27 @@ module.exports = async function (cmdLineArgs: {
   const formatter = new FormatterManager().getFormatter(
     configuration.get('format')
   )
-  const activityTypesManager = new ActivityTypeManager(formatter, configuration)
   const commandName = cmdLineArgs.command
   if (!hasCommand(commandName)) {
     formatter.error(`unknown command: ${red(commandName)}`)
   }
   const file = cmdLineArgs.file
   try {
-    const command = require(commandPath(commandName))
     switch (commandName) {
       case 'add':
-        await command(file)
+        await addCommand(file)
         break
       case 'help':
-        await command()
+        await helpCommand()
         break
       case 'run':
-        await command({ formatter, activityTypesManager, file })
+        await runCommand(file, configuration, formatter)
         break
       case 'setup':
-        await command()
+        await setupCommand(configuration, formatter)
         break
       case 'version':
-        await command()
+        await versionCommand()
         break
     }
   } catch (err) {

@@ -4,8 +4,8 @@ import type Configuration from '../../../configuration/configuration.js'
 
 const allMarkdownFiles = require('./all-markdown-files.js')
 const debug = require('debug')('text-runner:run-command')
-const filesMatchingGlob = require('./files-matching-glob.js')
-const hasDirectory = require('./has-directory.js')
+const filesMatchingGlob = require('../../../helpers/files-matching-glob.js')
+const hasDirectory = require('../../../helpers/has-directory.js')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./is-markdown-file.js')
 const markdownFilesInDir = require('./markdown-files-in-dir.js')

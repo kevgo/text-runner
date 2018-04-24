@@ -1,0 +1,13 @@
+// @flow
+
+const FormattingTracker = require('./formatting-tracker.js')
+const { expect } = require('chai')
+
+describe('FormattingTracker', function () {
+  it('serializes tracked formatting', function () {
+    const tracker = new FormattingTracker()
+    tracker.open('strong')
+    tracker.open('emphasised')
+    expect(tracker.toString()).to.equal('emphasizedstrong')
+  })
+})

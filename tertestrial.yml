@@ -19,6 +19,10 @@ actions:
       command: 'make cukeapi FILE={{filename}}:{{line}} && make cukecli FILE={{filename}}:{{line}}'
 
     - match:
+        filename: '-test\.js'
+      command: 'make build && mocha {{filename}}'
+
+    - match:
         filename: '-spec\.js'
       command: 'make tests {{filename}}'
 

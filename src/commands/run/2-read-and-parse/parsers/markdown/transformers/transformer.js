@@ -1,8 +1,7 @@
 // @flow
 
-import type { AstNode } from '../ast-node.js'
+import type { AstNode } from '../../../ast-node.js'
 
-export interface Transformer {
-  matches(node: Object): boolean;
-  apply(node: Object, filepath: string, line: number): AstNode;
-}
+const OpenTagTracker = require('../helpers/open-tag-tracker.js')
+
+export type Transformer = (Object, OpenTagTracker, string, number) => ?AstNode

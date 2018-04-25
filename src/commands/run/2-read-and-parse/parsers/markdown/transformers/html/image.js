@@ -1,8 +1,8 @@
 // @flow
 
-import type { AstNode } from '../ast-node.js'
+import type { AstNode } from '../../../../ast-node.js'
 
-const parseAttributes = require('../helpers/parse-attributes.js')
+const parseAttributes = require('../../helpers/parse-attributes.js')
 
 // returns the TR-AST for the given R-AST markdown image tag
 module.exports = function transformMarkdownImage (

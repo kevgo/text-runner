@@ -1,6 +1,6 @@
 // @flow
 
-const UnprintedUserError = require('../../../../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../../../../../../errors/unprinted-user-error.js')
 
 const attrRE = /<(\w+)\s+(.*)>/
 const tupleRE = /([^=]+="[^"]*")/g

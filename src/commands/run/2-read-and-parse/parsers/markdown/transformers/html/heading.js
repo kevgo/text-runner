@@ -1,9 +1,9 @@
 // @flow
 
-import type { AstNode } from '../ast-node.js'
-import type { Transformer } from './transformer.js'
+import type { AstNode } from '../../../../ast-node.js'
+import type { Transformer } from '../transformer.js'
 
-const parseAttributes = require('../helpers/parse-attributes.js')
+const parseAttributes = require('../../helpers/parse-attributes.js')
 
 const obj: Transformer = {
   matches: function (node): boolean {

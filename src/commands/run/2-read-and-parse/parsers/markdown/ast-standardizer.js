@@ -29,7 +29,7 @@ module.exports = class AstStandardizer {
     this.result = []
   }
 
-  standardize (ast: Object, line: number = 0): AstNodeList {
+  standardize (ast: Object, line: number = 1): AstNodeList {
     for (let node of ast) {
       const nodeLine = node.lines ? node.lines[0] + 1 : line
       this.processFormattingNode(node) ||

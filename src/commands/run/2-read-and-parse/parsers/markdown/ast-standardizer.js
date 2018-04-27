@@ -12,7 +12,6 @@ const OpenTagTracker = require('./helpers/open-tag-tracker.js')
 const UnprintedUserError = require('../../../../../errors/unprinted-user-error.js')
 const parseHtmlTag = require('../../../../../helpers/parse-html-tag.js')
 
-// var htmlTransformers: TransformerList = loadTransformers('html')
 var mdTransformers: TransformerList = loadTransformers('md')
 
 // AstStandardizer converts the AST created by Remarkable
@@ -71,12 +70,6 @@ module.exports = class AstStandardizer {
       astNode.attributes = openingNode.attributes
     }
     this.result.push(astNode)
-    // const transformer = htmlTransformers[tagName]
-    // if (!transformer) {
-    //   alertUnknownNodeType(tagName, this.filepath, line)
-    // }
-    // const transformed = transformer(node, this.openTags, this.filepath, line)
-    // if (transformed) this.result.push(transformed)
     return true
   }
 

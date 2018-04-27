@@ -1,0 +1,43 @@
+[
+  {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
+    "content": "This is a ",
+    "attributes": {}
+  },
+  {
+    "type": "code",
+    "tag": "code",
+    "file": "input.md",
+    "line": 1,
+    "content": "code block",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
+    "content": "!",
+    "attributes": {}
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "/p",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  }
+
+]

@@ -8,4 +8,4 @@ module.exports = function getTagType (html: string): string {
   return matches[1]
 }
 
-const tagTypeRegex = /<(\w+).*>/
+const tagTypeRegex = /<(\/?\w+).*>/

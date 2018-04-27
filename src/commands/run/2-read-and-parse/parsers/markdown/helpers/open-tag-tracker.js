@@ -1,47 +1,39 @@
 // @flow
 
-type TagData = {
-  node: Object,
-  line: number,
-  text: string // textual content of the tag
-}
+import type { AstNode } from '../../../ast-node.js'
 
 const UnprintedUserError = require('../../../../../../errors/unprinted-user-error.js')
 
 module.exports = class OpenTagTracker {
-  openTags: { [string]: TagData }
+  nodes: { [string]: AstNode }
 
   constructor () {
-    this.openTags = {}
+    this.nodes = {}
   }
 
-  add (node: Object, filepath: string, line: number) {
-    if (this.hasNode(node)) {
-      throw new UnprintedUserError(`nested tag: ${node.type}`, filepath, line)
+  add (node: AstNode) {
+    if (this.has(node.type)) {
+      throw new UnprintedUserError(
+        `nested node: ${node.type}`,
+        node.file,
+        node.line
+      )
     }
-    this.openTags[node.type] = {
-      node,
-      line,
-      text: ''
-    }
+    this.nodes[node.type] = node
   }
 
-  addText (text: string) {
-    for (let type in this.openTags) {
-      this.openTags[type].text += text
-    }
+  has (nodeType: string): boolean {
+    return !!this.nodes[nodeType]
   }
 
-  hasNode (node: Object): boolean {
-    return !!this.openTags[node.type]
-  }
-
-  popOpenTagFor (nodeType: string): TagData {
-    const result = this.openTags[nodeType]
+  pop (nodeType: string): AstNode {
+    const result = this.nodes[nodeType]
     if (!result) {
-      throw new UnprintedUserError(`cannot find open tag ${nodeType}`)
+      throw new UnprintedUserError(
+        `OpenTagTracker does not have node '${nodeType}'`
+      )
     }
-    delete this.openTags[nodeType]
+    delete this.nodes[nodeType]
     return result
   }
 }

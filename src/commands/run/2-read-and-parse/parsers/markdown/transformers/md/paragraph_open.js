@@ -7,9 +7,17 @@ const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 module.exports = function (
   node: Object,
   openTags: OpenTagTracker,
-  filepath: string,
+  file: string,
   line: number
 ): ?AstNode {
-  console.log(11111111111)
-  console.log(node)
+  const result: AstNode = {
+    type: node.type,
+    tag: 'p',
+    file,
+    line,
+    content: '',
+    attributes: {}
+  }
+  openTags.add(result)
+  return result
 }

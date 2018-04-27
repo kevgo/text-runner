@@ -11,14 +11,11 @@ module.exports = function (
   line: number
 ): ?AstNode {
   return {
-    type: 'image',
-    tag: 'img',
-    file: file,
+    type: node.type,
+    tag: '',
+    file,
     line,
-    content: '',
-    attributes: {
-      src: node.src,
-      alt: node.alt
-    }
+    content: node.content,
+    attributes: {}
   }
 }

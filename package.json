@@ -20,6 +20,7 @@
     "jsdiff-console": "2.2.1",
     "jsonfile": "4.0.0",
     "just-kebab-case": "1.0.0",
+    "markdown-it": "8.4.1",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
     "observable-process": "4.0.0",

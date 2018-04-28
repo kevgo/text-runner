@@ -1,0 +1,46 @@
+[
+  {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "code_open",
+    "tag": "code",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
+    "content": "code block",
+    "attributes": {}
+  },
+  {
+    "type": "code_close",
+    "tag": "/code",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "/p",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  }
+]

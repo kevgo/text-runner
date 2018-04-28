@@ -1,6 +1,6 @@
 // @flow
 
-import type { AstNode } from '../../../../ast-node.js'
+import type { AstNode } from '../../../ast-node.js'
 
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
@@ -9,4 +9,6 @@ module.exports = function (
   openTags: OpenTagTracker,
   filepath: string,
   line: number
-): ?AstNode {}
+): Array<AstNode> {
+  return []
+}

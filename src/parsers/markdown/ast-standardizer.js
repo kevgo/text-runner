@@ -1,6 +1,6 @@
 // @flow
 
-import type { AstNodeList } from '../../ast-node-list.js'
+import type { AstNodeList } from '../ast-node-list.js'
 import type { Transformer } from './transformers/transformer.js'
 import type { TransformerList } from './transformers/transformer-list.js'
 
@@ -9,8 +9,8 @@ const isOpeningHtmlTagType = require('./helpers/is-opening-html-tag-type.js')
 const loadTransformers = require('./transformers/load.js')
 const openingTagFor = require('./helpers/opening-tag-for.js')
 const OpenTagTracker = require('./helpers/open-tag-tracker.js')
-const UnprintedUserError = require('../../../../../errors/unprinted-user-error.js')
-const parseHtmlTag = require('../../../../../helpers/parse-html-tag.js')
+const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+const parseHtmlTag = require('../../helpers/parse-html-tag.js')
 
 var mdTransformers: TransformerList = loadTransformers('md')
 
@@ -30,17 +30,17 @@ module.exports = class AstStandardizer {
     this.line = 1
   }
 
-  standardize (ast: Object, line: number = 1): AstNodeList {
+  standardize (ast: Object): AstNodeList {
     for (let node of ast) {
       if (node.lines) this.line = Math.max(node.lines[0] + 1, this.line)
       this.processSoftBreak(node) ||
         this.processMdNode(node) ||
         this.processHtmlNode(node) ||
-        alertUnknownNodeType(node, this.filepath, line)
+        alertUnknownNodeType(node, this.filepath, this.line)
 
       if (node.children) {
         for (let child of node.children) child.lines = node.lines
-        this.standardize(node.children, this.line)
+        this.standardize(node.children)
       }
     }
     return this.result
@@ -82,7 +82,7 @@ module.exports = class AstStandardizer {
       this.filepath,
       this.line
     )
-    if (transformed) this.result.push(transformed)
+    this.result = this.result.concat(transformed)
     return true
   }
 
@@ -98,7 +98,9 @@ const types = {
   '/h1': 'heading_close',
   img: 'image',
   code: 'code_open',
-  '/code': 'code_close'
+  '/code': 'code_close',
+  a: 'anchor_open',
+  '/a': 'anchor_close'
 }
 function getType (tag: string): string {
   const result = types[tag]

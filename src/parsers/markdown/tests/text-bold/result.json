@@ -1,0 +1,58 @@
+[
+  {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
+    "content": "Hello ",
+    "attributes": {}
+  },
+  {
+    "type": "strong_open",
+    "tag": "strong",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
+    "content": "world",
+    "attributes": {}
+  },
+  {
+    "type": "strong_close",
+    "tag": "/strong",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
+    "content": "!",
+    "attributes": {}
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "/p",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  }
+]

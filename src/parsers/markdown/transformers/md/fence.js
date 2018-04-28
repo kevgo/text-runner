@@ -12,8 +12,16 @@ module.exports = function (
 ): Array<AstNode> {
   return [
     {
-      type: 'code_open',
-      tag: 'code',
+      type: 'paragraph_open',
+      tag: 'p',
+      file: file,
+      line,
+      content: '',
+      attributes: {}
+    },
+    {
+      type: 'fence_open',
+      tag: 'pre',
       file: file,
       line,
       content: '',
@@ -28,8 +36,16 @@ module.exports = function (
       attributes: {}
     },
     {
-      type: 'code_close',
-      tag: '/code',
+      type: 'fence_close',
+      tag: '/pre',
+      file: file,
+      line,
+      content: '',
+      attributes: {}
+    },
+    {
+      type: 'paragraph_close',
+      tag: '/p',
       file: file,
       line,
       content: '',

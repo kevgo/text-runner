@@ -16,11 +16,27 @@
     "attributes": {}
   },
   {
-    "type": "code",
+    "type": "code_open",
     "tag": "code",
     "file": "input.md",
     "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "input.md",
+    "line": 1,
     "content": "code block",
+    "attributes": {}
+  },
+  {
+    "type": "code_close",
+    "tag": "/code",
+    "file": "input.md",
+    "line": 1,
+    "content": "",
     "attributes": {}
   },
   {
@@ -39,5 +55,4 @@
     "content": "",
     "attributes": {}
   }
-
 ]

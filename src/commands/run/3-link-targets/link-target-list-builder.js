@@ -1,6 +1,7 @@
 // @flow
 
-import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
+import type { AstNode } from '../../../parsers/ast-node.js'
+import type { AstNodeList } from '../../../parsers/ast-node-list.js'
 import type { LinkTargetList } from './link-target-list.js'
 
 const dashify = require('dashify')
@@ -16,33 +17,25 @@ class LinkTargetListBuilder {
   }
 
   addLinkTargets (tree: AstNodeList) {
+    const searcher = new AstNodeListSearcher(tree)
     for (let node of tree) {
-      switch (node.type) {
-        case 'htmltag':
-          this._addAnchorTag(node.filepath, node.content)
-          break
-
-        case 'h1':
-        case 'h2':
-        case 'h3':
-        case 'h4':
-        case 'h5':
-        case 'h6':
-          this._addHeading(node.filepath, node.content)
-          break
+      if (node.type === 'anchor_open') {
+        this._addAnchor(node)
+      } else if (node.type === 'heading_open') {
+        this._addHeading(node)
       }
     }
   }
 
-  _addAnchorTag (filepath: string, html: string) {
-    const matches = html.match(/<a name="([^"]*)">/)
-    if (!matches) return
-    this._addLinkTarget(filepath, 'anchor', matches[1])
+  _addAnchor (node: AstNode) {
+    if (node.attributes['href'] !== undefined) return
+    if (!node.attributes['name']) return
+    this._addLinkTarget(node.file, 'anchor', node.attributes.name)
   }
 
-  _addHeading (filepath: string, text: string) {
-    const content = dashify(text).toLowerCase()
-    this._addLinkTarget(filepath, 'heading', content)
+  _addHeading (node: AstNode, searcher: Searcher) {
+    const content = dashify(searcher.getTextFor(node)).toLowerCase()
+    this._addLinkTarget(node.file, 'heading', content)
   }
 
   _addLinkTarget (filepath: string, type: string, name: string) {

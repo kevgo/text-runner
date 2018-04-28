@@ -1,6 +1,6 @@
 // @flow
 
-import type { AstNodeList } from '../../ast-node-list.js'
+import type { AstNodeList } from '../ast-node-list.js'
 
 const AstStandardizer = require('./ast-standardizer.js')
 // $FlowFixMe

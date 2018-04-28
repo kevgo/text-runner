@@ -8,21 +8,13 @@
     "attributes": {}
   },
   {
-    "type": "text",
-    "tag": "",
-    "file": "input.md",
-    "line": 1,
-    "content": "This is a ",
-    "attributes": {}
-  },
-  {
-    "type": "code_open",
-    "tag": "code",
+    "type": "anchor_open",
+    "tag": "a",
     "file": "input.md",
     "line": 1,
     "content": "",
     "attributes": {
-      "textrun": "foo"
+      "name": "foo"
     }
   },
   {
@@ -30,26 +22,18 @@
     "tag": "",
     "file": "input.md",
     "line": 1,
-    "content": "code block",
+    "content": "A foo walks into a bar",
     "attributes": {}
   },
   {
-    "type": "code_close",
-    "tag": "/code",
+    "type": "anchor_close",
+    "tag": "/a",
     "file": "input.md",
     "line": 1,
     "content": "",
     "attributes": {
-      "textrun": "foo"
+      "name": "foo"
     }
-  },
-  {
-    "type": "text",
-    "tag": "",
-    "file": "input.md",
-    "line": 1,
-    "content": "!",
-    "attributes": {}
   },
   {
     "type": "paragraph_close",

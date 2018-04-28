@@ -102,7 +102,9 @@ const types = {
   a: 'anchor_open',
   '/a': 'anchor_close',
   strong: 'strong_open',
-  '/strong': 'strong_close'
+  '/strong': 'strong_close',
+  em: 'em_open',
+  '/em': 'em_close'
 }
 function getType (tag: string): string {
   const result = types[tag]

@@ -22,29 +22,5 @@
     "line": 1,
     "content": "",
     "attributes": {}
-  },
-  {
-    "type": "paragraph_open",
-    "tag": "p",
-    "file": "input.md",
-    "line": 2,
-    "content": "",
-    "attributes": {}
-  },
-  {
-    "type": "text",
-    "tag": "",
-    "file": "input.md",
-    "line": 2,
-    "content": "This is text.",
-    "attributes": {}
-  },
-  {
-    "type": "paragraph_close",
-    "tag": "/p",
-    "file": "input.md",
-    "line": 2,
-    "content": "",
-    "attributes": {}
   }
 ]

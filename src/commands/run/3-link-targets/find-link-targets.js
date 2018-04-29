@@ -1,14 +1,12 @@
 // @flow
 
-import type { AstNodeList } from '../2-read-and-parse/ast-node-list.js'
-import type { LinkTargetList } from './link-target-list.js'
+const AstNodeList = require('../../../parsers/ast-node-list.js')
+const LinkTargetList = require('./link-target-list.js')
 
-const LinkTargetListBuilder = require('./link-target-list-builder.js')
-
-module.exports = function (ASTs: AstNodeList[]): LinkTargetList {
-  const builder = new LinkTargetListBuilder()
-  for (let ast of ASTs) {
-    builder.addLinkTargets(ast)
+module.exports = function (nodeLists: AstNodeList[]): LinkTargetList {
+  const linkTargetList = new LinkTargetList()
+  for (let nodeList of nodeLists) {
+    linkTargetList.addNodeList(nodeList)
   }
-  return builder.linkTargets
+  return linkTargetList
 }

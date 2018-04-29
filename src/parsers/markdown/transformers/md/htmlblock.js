@@ -1,7 +1,6 @@
 // @flow
 
-import type { AstNode } from '../../../ast-node.js'
-
+const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
 const parseHtmlAttributes = require('../../../../helpers/parse-html-attributes.js')
@@ -12,33 +11,33 @@ module.exports = function (
   openTags: OpenTagTracker,
   file: string,
   line: number
-): Array<AstNode> {
+): AstNodeList {
   const match = node.content.match(preRegex)
-  if (!match) return []
-  return [
-    {
-      type: 'fence_open',
-      tag: 'pre',
-      file: file,
-      line,
-      content: '',
-      attributes: parseHtmlAttributes(match[1])
-    },
-    {
-      type: 'text',
-      tag: '',
-      file: file,
-      line,
-      content: match[2],
-      attributes: {}
-    },
-    {
-      type: 'fence_close',
-      tag: '/pre',
-      file: file,
-      line,
-      content: '',
-      attributes: {}
-    }
-  ]
+  const result = new AstNodeList()
+  if (!match) return result
+  result.pushData({
+    type: 'fence_open',
+    tag: 'pre',
+    file: file,
+    line,
+    content: '',
+    attributes: parseHtmlAttributes(match[1])
+  })
+  result.pushData({
+    type: 'text',
+    tag: '',
+    file: file,
+    line,
+    content: match[2],
+    attributes: {}
+  })
+  result.pushData({
+    type: 'fence_close',
+    tag: '/pre',
+    file: file,
+    line,
+    content: '',
+    attributes: {}
+  })
+  return result
 }

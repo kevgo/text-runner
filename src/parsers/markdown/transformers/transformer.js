@@ -1,7 +1,6 @@
 // @flow
 
-import type { AstNode } from '../../ast-node.js'
-
+const AstNodeList = require('../../ast-node-list.js')
 const OpenTagTracker = require('../helpers/open-tag-tracker.js')
 
 export type Transformer = (
@@ -9,4 +8,4 @@ export type Transformer = (
   OpenTagTracker,
   string,
   number
-) => Array<AstNode>
+) => AstNodeList

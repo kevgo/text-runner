@@ -1,9 +1,10 @@
 // @flow
 
-import type { AstNodeList } from '../ast-node-list.js'
 import type { Transformer } from './transformers/transformer.js'
 import type { TransformerList } from './transformers/transformer-list.js'
 
+const AstNode = require('../ast-node.js')
+const AstNodeList = require('../ast-node-list.js')
 const FormattingTracker = require('./helpers/formatting-tracker.js')
 const isOpeningHtmlTagType = require('./helpers/is-opening-html-tag-type.js')
 const loadTransformers = require('./transformers/load.js')
@@ -26,7 +27,7 @@ module.exports = class AstStandardizer {
   constructor (filepath: string) {
     this.filepath = filepath
     this.openTags = new OpenTagTracker()
-    this.result = []
+    this.result = new AstNodeList()
     this.line = 1
   }
 
@@ -55,14 +56,14 @@ module.exports = class AstStandardizer {
       this.line
     )
     const type = getType(tag)
-    const astNode = {
+    const astNode = new AstNode({
       type,
       tag,
       content: '',
       line: this.line,
       file: this.filepath,
       attributes
-    }
+    })
     if (isOpeningHtmlTagType(tag)) {
       this.openTags.add(astNode)
     } else {
@@ -82,7 +83,7 @@ module.exports = class AstStandardizer {
       this.filepath,
       this.line
     )
-    this.result = this.result.concat(transformed)
+    this.result.concat(transformed)
     return true
   }
 

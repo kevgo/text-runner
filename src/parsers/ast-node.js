@@ -25,6 +25,12 @@ module.exports = class AstNode {
     this.attributes = data.attributes
   }
 
+  // Returns the type of the corresponding ending node
+  endType (): string {
+    if (!this.isOpeningNode()) throw new Error('not an opening node')
+    return this.type.replace('open', '') + 'close'
+  }
+
   isOpeningNode (): boolean {
     return this.type.endsWith('_open')
   }

@@ -20,7 +20,7 @@ actions:
 
     - match:
         filename: '-test\.js'
-      command: 'make build && mocha {{filename}}'
+      command: 'mocha {{filename}}'
 
     - match:
         filename: '-spec\.js'

@@ -9,6 +9,7 @@ const { cyan, magenta } = require('chalk')
 const fs = require('fs-extra')
 const path = require('path')
 const request = require('request-promise-native')
+const url = require('url')
 
 // Checks for broken hyperlinks
 module.exports = async function (act: Activity) {
@@ -152,8 +153,7 @@ async function checkLinkToAnchorInOtherFile (
 function isExternalLink (target: string): boolean {
   return (
     target.startsWith('//') ||
-    target.startsWith('http://') ||
-    target.startsWith('https://')
+    !!url.parse(target).protocol
   )
 }
 

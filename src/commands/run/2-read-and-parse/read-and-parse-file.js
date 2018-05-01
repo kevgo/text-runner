@@ -1,7 +1,6 @@
 // @flow
 
-import type { AstNodeList } from '../../../parsers/ast-node-list.js'
-
+const AstNodeList = require('../../../parsers/ast-node-list.js')
 const fs = require('fs-extra')
 const parseMarkdown = require('../../../parsers/markdown/parse-markdown.js')
 

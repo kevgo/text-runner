@@ -1,4 +1,7 @@
+// @flow
+
 const AstNode = require('./ast-node.js')
+const { expect } = require('chai')
 
 describe('AstNode', function () {
   describe('scaffold', function () {
@@ -7,6 +10,7 @@ describe('AstNode', function () {
       expect(node.type).to.eql('heading_open')
     })
   })
+
   describe('endTypeFor', function () {
     it('returns the closing tag', function () {
       const data = {
@@ -14,9 +18,30 @@ describe('AstNode', function () {
         anchor_open: 'anchor_close'
       }
       for (const input in data) {
-        const node = new AstNode({ type: input })
+        const node = AstNode.scaffold({ type: input })
         expect(node.endType()).to.eql(data[input])
       }
+    })
+  })
+
+  describe('htmlLinkTarget', function () {
+    it('returns the href content of link tags', function () {
+      const node = AstNode.scaffold({
+        type: 'htmltag',
+        content: '<a href="http://foo.com">'
+      })
+      expect(node.htmlLinkTarget()).to.equal('http://foo.com')
+    })
+    it('returns null for non-link tags', function () {
+      const node = AstNode.scaffold({ type: 'htmltag', content: 'hello' })
+      expect(node.htmlLinkTarget()).to.be.null
+    })
+    it('returns null for anchor tags', function () {
+      const node = AstNode.scaffold({
+        type: 'htmltag',
+        content: '<a name="foo">'
+      })
+      expect(node.htmlLinkTarget()).to.be.null
     })
   })
 })

@@ -30,6 +30,6 @@ module.exports = class FormattingTracker {
   }
 
   toString (): string {
-    return this.tags.sort().join()
+    return this.tags.sort().join('')
   }
 }

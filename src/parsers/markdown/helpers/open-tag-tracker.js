@@ -1,7 +1,6 @@
 // @flow
 
-import type { AstNode } from '../../ast-node.js'
-
+const AstNode = require('../../ast-node.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 module.exports = class OpenTagTracker {

@@ -7,7 +7,7 @@ describe('FormattingTracker', function () {
   it('serializes tracked formatting', function () {
     const tracker = new FormattingTracker()
     tracker.open('strong')
-    tracker.open('emphasised')
+    tracker.open('emphasized')
     expect(tracker.toString()).to.equal('emphasizedstrong')
   })
 })

@@ -18,11 +18,13 @@ module.exports = function (tree: AstNodeList): ActivityList {
         break
 
       case 'image':
+        const nodes = new AstNodeList()
+        nodes.push(node)
         result.push({
           type: 'check-image',
           file: node.file,
           line: node.line,
-          nodes: new AstNodeList([node])
+          nodes
         })
         break
     }

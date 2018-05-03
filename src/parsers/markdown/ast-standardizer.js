@@ -83,7 +83,9 @@ module.exports = class AstStandardizer {
       this.filepath,
       this.line
     )
-    this.result.concat(transformed)
+    for (const node of transformed) {
+      this.result.push(node)
+    }
     return true
   }
 

@@ -4,15 +4,6 @@ const AstNode = require('./ast-node.js')
 const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 module.exports = class AstNodeList extends Array<AstNode> {
-  constructor (nodes?: AstNode[]) {
-    super()
-    if (nodes) {
-      for (const node of nodes) {
-        this.push(node)
-      }
-    }
-  }
-
   getNodesFor (openingNode: AstNode): AstNodeList {
     if (!openingNode.isOpeningNode()) {
       throw new Error('openingNode must be an opening node')

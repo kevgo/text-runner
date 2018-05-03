@@ -6,30 +6,25 @@ const AstNode = require('../../../parsers/ast-node.js')
 const AstNodeList = require('../../../parsers/ast-node-list.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
-type ActiveBlockInfo = {
-  node: AstNode,
-  endType: string
-}
-
-module.exports = function extractActivitiesFromASTs (
-  ASTs: AstNodeList[],
-  classPrefix: string
-): ActivityList {
+// Returns all activities contained in the given collection of AstNodeLists
+module.exports = function (ASTs: AstNodeList[], prefix: string): ActivityList {
   var result: ActivityList = []
   for (let AST of ASTs) {
-    result = result.concat(extractActivities(AST, classPrefix))
+    result = result.concat(extractActivities(AST, prefix))
   }
   return result
 }
 
-function extractActivities (AST: AstNodeList, classPrefix: string) {
+// Returns the activities contained in the given AstNodeList
+function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
   const result: ActivityList = []
-  var activeBlockInfo: ?ActiveBlockInfo = null // the currently active block
+  var activeNode: ?AstNode = null
   for (let node of AST) {
-    if (isActiveBlockStartTag(node, classPrefix)) {
-      ensureNoNestedActiveNode(node, activeBlockInfo)
+    if (isActiveBlockStartTag(node, prefix)) {
+      ensureNoNestedActiveNode(node, activeNode)
+      activeNode = node
       result.push({
-        type: node.attributes[classPrefix],
+        type: node.attributes[prefix],
         file: node.file,
         line: node.line,
         nodes: AST.getNodesFor(node)
@@ -39,12 +34,11 @@ function extractActivities (AST: AstNodeList, classPrefix: string) {
   return result
 }
 
-function ensureNoNestedActiveNode (node: AstNode, active: ?ActiveBlockInfo) {
-  if (active) {
+function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
+  if (activeNode) {
     throw new UnprintedUserError(
-      `Block ${node.type || ''} at is nested in block ${
-        active.node.type
-      } on line ${active.node.line}.`,
+      `Block ${node.type || ''} is nested in block ${activeNode.type}
+on line ${activeNode.line}.`,
       node.file,
       node.line
     )

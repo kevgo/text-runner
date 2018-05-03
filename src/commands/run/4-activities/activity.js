@@ -6,7 +6,7 @@ const AstNodeList = require('../../../parsers/ast-node-list.js')
 // on a particular place in a particular document, defined by an action
 export type Activity = {
   type: string,
-  filename: string,
-  line: ?number,
+  file: string,
+  line: number,
   nodes: AstNodeList
 }

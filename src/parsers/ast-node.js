@@ -31,6 +31,13 @@ module.exports = class AstNode {
     return this.type.replace('open', '') + 'close'
   }
 
+  htmlLinkTarget (): ?string {
+    if (this.content == null) return null
+    if (this.type !== 'htmltag') return null
+    const matches = this.content.match(/<a[^>]*href="([^"]*)".*?>/)
+    return matches ? matches[1] : null
+  }
+
   isOpeningNode (): boolean {
     return this.type.endsWith('_open')
   }

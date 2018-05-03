@@ -1,36 +1,25 @@
 // @flow
 
-import type { ActivityList } from '../4-activities/activity-list.js'
-
 const AstNodeList = require('../../../parsers/ast-node-list.js')
 const extractActivities = require('./extract-activities.js')
 const { expect } = require('chai')
 
 describe('extract-activities', function () {
-  it('extracts active A tags', function () {
+  it('extracts activities', function () {
     const AST = new AstNodeList()
     AST.scaffold({
-      type: 'htmltag',
-      filepath: 'README.md',
+      type: 'anchor_open',
+      file: 'README.md',
       line: 3,
-      content: '<a textrun="verify-foo">'
+      attributes: { textrun: 'verify-foo' }
     })
-    AST.scaffold({
-      type: 'htmltag',
-      filepath: 'README.md',
-      line: 4,
-      content: '</a>'
-    })
-    const result: ActivityList = extractActivities([AST], 'textrun')
-    expect(result).to.eql([
-      {
-        filename: 'README.md',
-        line: 4,
-        nodes: [],
-        type: 'verify-foo'
-      }
-    ])
+    AST.scaffold({ type: 'text' })
+    AST.scaffold({ type: 'anchor_close' })
+    const result = extractActivities([AST], 'textrun')
+    expect(result).to.have.length(1)
+    expect(result[0].type).to.equal('verify-foo')
+    expect(result[0].file).to.equal('README.md')
+    expect(result[0].line).to.equal(3)
+    expect(result[0].nodes).to.eql(AST)
   })
-
-  it('extracts active CODE tags', function () {})
 })

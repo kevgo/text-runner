@@ -22,4 +22,17 @@ describe('extract-activities', function () {
     expect(result[0].line).to.equal(3)
     expect(result[0].nodes).to.eql(AST)
   })
+
+  it('normalizes the activity name', function () {
+    const AST = new AstNodeList()
+    AST.scaffold({
+      type: 'anchor_open',
+      file: 'README.md',
+      line: 3,
+      attributes: { textrun: 'verifyFoo' }
+    })
+    AST.scaffold({ type: 'anchor_close' })
+    const result = extractActivities([AST], 'textrun')
+    expect(result[0].type).to.equal('verify-foo')
+  })
 })

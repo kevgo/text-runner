@@ -4,6 +4,8 @@ import type Configuration from '../../configuration/configuration.js'
 import type Formatter from '../../formatters/formatter.js'
 
 // const ActivityTypeManager = require('./activity-type-manager.js')
+const executeParallel = require('./5-execute/execute-parallel.js')
+const executeSequential = require('./5-execute/execute-sequential.js')
 const extractActivities = require('./4-activities/extract-activities.js')
 const extractImagesAndLinks = require('./4-activities/extract-images-and-links.js')
 const findLinkTargets = require('./3-link-targets/find-link-targets.js')
@@ -38,12 +40,12 @@ module.exports = async function runCommand (
   // step 4: extract activities
   const activities = extractActivities(ASTs, config)
   const links = extractImagesAndLinks(ASTs)
-  console.log(11111111)
-  console.log(activities)
-  console.log(22222222)
-  console.log(links)
 
   // step 5: execute the ActivityList
+  await Promise.all(
+    executeParallel(links, linkTargets),
+    executeSequential(activities)
+  )
 
   // step 6: cleanup
   rimraf.sync(workingDir)

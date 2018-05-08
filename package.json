@@ -24,7 +24,7 @@
     "markdown-it": "8.4.1",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",
-    "observable-process": "4.0.0",
+    "observable-process": "4.1.2",
     "rechoir": "0.6.2",
     "remarkable": "1.7.1",
     "request": "2.85.0",

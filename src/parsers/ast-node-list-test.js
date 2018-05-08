@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-unused-expressions: 0 */
 
 const AstNode = require('./ast-node.js')
 const AstNodeList = require('./ast-node-list.js')
@@ -20,7 +21,7 @@ describe('AstNodeList', function () {
   })
 
   describe('getNodesFor', function () {
-    it('returns the nodes until the given node is closed', function () {
+    it('returns the nodes until the given opening node is closed', function () {
       const list = new AstNodeList()
       list.scaffold({ type: 'paragraph_open' })
       list.scaffold({ type: 'heading_open' })
@@ -31,24 +32,53 @@ describe('AstNodeList', function () {
       const types = result.map(node => node.type)
       expect(types).to.eql(['heading_open', 'text', 'heading_close'])
     })
-  })
-
-  describe('hasNode', function () {
-    it('returns true if the list contains the given node type', function () {
+    it('returns the given non-opening node', function () {
       const list = new AstNodeList()
       list.scaffold({ type: 'paragraph_open' })
+      list.scaffold({ type: 'strongtext', content: 'foo' })
       list.scaffold({ type: 'paragraph_close' })
-      expect(list.hasNode('paragraph')).to.be.true
-    })
-    it('returns false if the list does not contain the given node type', function () {
-      const list = new AstNodeList()
-      list.scaffold({ type: 'paragraph_open' })
-      list.scaffold({ type: 'paragraph_close' })
-      expect(list.hasNode('code')).to.be.false
+      const result = list.getNodesFor(list[1])
+      const types = result.map(node => node.type)
+      expect(types).to.eql(['strongtext'])
     })
   })
 
-  describe('getTextFor', function () {
+  describe('getNodeOfTypes', function () {
+    it('returns the node matching any of the given type', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'one' })
+      list.scaffold({ type: 'two' })
+      list.scaffold({ type: 'three' })
+      const result = list.getNodeOfTypes('two', 'four')
+      expect(result.type).to.equal('two')
+    })
+    it('throws for multiple matches', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'one' })
+      list.scaffold({ type: 'two' })
+      expect(() => list.getNodeOfTypes('one', 'two')).to.throw(
+        UnprintedUserError
+      )
+    })
+    it('throws for zero matches', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'one' })
+      expect(() => list.getNodeOfTypes('two')).to.throw(UnprintedUserError)
+    })
+  })
+
+  describe('getNodesOfTypes', function () {
+    it('returns all nodes matching any of the given types', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'one' })
+      list.scaffold({ type: 'two' })
+      list.scaffold({ type: 'three' })
+      const result = list.getNodesOfTypes('one', 'three')
+      expect(result.map(node => node.type)).to.eql(['one', 'three'])
+    })
+  })
+
+  describe('textInNode', function () {
     it('returns the textual content until the given node is closed', function () {
       const list = new AstNodeList()
       list.scaffold({ type: 'paragraph_open' })
@@ -57,8 +87,23 @@ describe('AstNodeList', function () {
       list.scaffold({ type: 'text', content: 'bar' })
       list.scaffold({ type: 'heading_close' })
       list.scaffold({ type: 'paragraph_close' })
-      const result = list.getTextFor(list[1])
+      const result = list.textInNode(list[1])
       expect(result).to.equal('foobar')
+    })
+  })
+
+  describe('hasNodeOfType', function () {
+    it('returns true if the list contains the given node type', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'paragraph_open' })
+      list.scaffold({ type: 'paragraph_close' })
+      expect(list.hasNodeOfType('paragraph')).to.be.true
+    })
+    it('returns false if the list does not contain the given node type', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'paragraph_open' })
+      list.scaffold({ type: 'paragraph_close' })
+      expect(list.hasNodeOfType('code')).to.be.false
     })
   })
 
@@ -107,13 +152,21 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('textInNode', function () {
-    it('returns the text of single matching node types', function () {
+  describe('textInNodeOfType', function () {
+    it('works with the type name', function () {
       const list = new AstNodeList()
       list.scaffold({ type: 'code_open' })
       list.scaffold({ type: 'text', content: 'hello' })
       list.scaffold({ type: 'code_close' })
-      const result = list.textInNode('code')
+      const result = list.textInNodeOfType('code')
+      expect(result).to.equal('hello')
+    })
+    it('works with the opening type name', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'code_open' })
+      list.scaffold({ type: 'text', content: 'hello' })
+      list.scaffold({ type: 'code_close' })
+      const result = list.textInNodeOfType('code_open')
       expect(result).to.equal('hello')
     })
     it('allows to provide multiple possible matching nodes', function () {
@@ -121,7 +174,7 @@ describe('AstNodeList', function () {
       list.scaffold({ type: 'code_open' })
       list.scaffold({ type: 'text', content: 'hello' })
       list.scaffold({ type: 'code_close' })
-      const result = list.textInNode('code', 'fence')
+      const result = list.textInNodeOfType('code', 'fence')
       expect(result).to.equal('hello')
     })
     it('throws if multiple matching nodes exist', function () {
@@ -132,7 +185,7 @@ describe('AstNodeList', function () {
       list.scaffold({ type: 'fence_open' })
       list.scaffold({ type: 'text', content: 'world' })
       list.scaffold({ type: 'fence_close' })
-      expect(() => list.textInNode('code', 'fence')).to.throw(
+      expect(() => list.textInNodeOfType('code', 'fence')).to.throw(
         UnprintedUserError
       )
     })
@@ -141,7 +194,17 @@ describe('AstNodeList', function () {
       list.scaffold({ type: 'code_open' })
       list.scaffold({ type: 'text', content: 'hello' })
       list.scaffold({ type: 'code_close' })
-      expect(() => list.textInNode('fence')).to.throw(UnprintedUserError)
+      expect(() => list.textInNodeOfType('fence')).to.throw(UnprintedUserError)
+    })
+  })
+
+  describe('textInNodesOfType', function () {
+    it('returns the text of all matching nodes', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'strongtext', content: 'foo' })
+      list.scaffold({ type: 'strongtext', content: 'bar' })
+      const result = list.textInNodesOfType('strongtext')
+      expect(result).to.eql(['foo', 'bar'])
     })
   })
 })

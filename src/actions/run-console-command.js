@@ -23,7 +23,7 @@ type ProcessInput = {
 // Waits until the command is finished.
 module.exports = async function (args: ActionArgs) {
   const commandsToRun = args.nodes
-    .textInNode('fence')
+    .textInNodeOfType('fence')
     .split('\n')
     .map(command => command.trim())
     .filter(e => e)
@@ -36,8 +36,11 @@ module.exports = async function (args: ActionArgs) {
 
   args.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
   var input = []
-  if (args.nodes.hasNode('htmlblock')) {
-    input = await getInput(args.nodes.textInNode('htmlblock'), args.formatter)
+  if (args.nodes.hasNodeOfType('htmlblock')) {
+    input = await getInput(
+      args.nodes.textInNodeOfType('htmlblock'),
+      args.formatter
+    )
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   global.consoleCommandOutput = ''

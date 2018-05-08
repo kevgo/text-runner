@@ -15,7 +15,7 @@ const debug = require('debug')('start-console-command')
 // Leaves the command running.
 module.exports = async function (args: ActionArgs) {
   const commandsToRun = args.nodes
-    .textInNode('fence')
+    .textInNodeOfType('fence')
     .split('\n')
     .map(line => line.trim())
     .filter(line => line)

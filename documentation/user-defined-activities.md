@@ -1,4 +1,4 @@
-# User-defined actions
+# User-defined activities
 
 It is possible to extend the set of
 [built-in activity types](built-in-activity-types)

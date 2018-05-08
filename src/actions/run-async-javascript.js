@@ -1,20 +1,20 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 import type Configuration from '../configuration/configuration.js'
 
 // Runs the async-await JavaScript code given in the code block
-module.exports = function (activity: Activity) {
-  activity.formatter.setTitle('run async javascript')
-  var code = activity.searcher.tagContent('fence')
+module.exports = function (args: ActionArgs) {
+  args.formatter.setTitle('run async javascript')
+  var code = args.nodes.textInNode('fence')
   if (code == null) {
     throw new Error('no JavaScript code found in the fenced block')
   }
-  code = replaceSubstitutions(code, activity.configuration)
+  code = replaceSubstitutions(code, args.configuration)
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
   code = wrapInAsyncFunction(code)
-  activity.formatter.output(code)
+  args.formatter.output(code)
   /* eslint-disable no-eval */
   eval(code)
 }

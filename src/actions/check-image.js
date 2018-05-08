@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
 
@@ -10,24 +10,20 @@ const path = require('path')
 const request = require('request-promise-native')
 
 // Checks for broken hyperlinks
-module.exports = async function (activity: Activity) {
-  const node = activity.nodes[0]
+module.exports = async function (args: ActionArgs) {
+  const node = args.nodes[0]
   var imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
     throw new Error('image tag without source')
   }
   if (!imagePath.startsWith('/')) {
-    imagePath = path.join(path.dirname(activity.filename), imagePath)
+    imagePath = path.join(path.dirname(node.file), imagePath)
   }
-  activity.formatter.setTitle(`image ${cyan(imagePath)}`)
+  args.formatter.setTitle(`image ${cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
-    await checkRemoteImage(
-      imagePath,
-      activity.formatter,
-      activity.configuration
-    )
+    await checkRemoteImage(imagePath, args.formatter, args.configuration)
   } else {
-    await checkLocalImage(imagePath, activity.formatter)
+    await checkLocalImage(imagePath, args.formatter)
   }
 }
 

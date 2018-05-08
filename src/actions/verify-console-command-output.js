@@ -1,16 +1,16 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const jsdiffConsole = require('jsdiff-console')
 
-module.exports = function (activity: Activity) {
-  activity.formatter.setTitle(
+module.exports = function (args: ActionArgs) {
+  args.formatter.setTitle(
     'verifying the output of the last run console command'
   )
 
-  const expectedLines = activity.searcher
-    .tagContent('fence')
+  const expectedLines = args.nodes
+    .textInNode('fence')
     .split('\n')
     .map(line => line.trim())
     .filter(line => line)

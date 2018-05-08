@@ -1,20 +1,17 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const { bold, cyan, red } = require('chalk')
 const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
-module.exports = function (activity: Activity) {
-  const filePath = activity.searcher.tagContent([
-    'strongtext',
-    'emphasizedtext'
-  ])
-  const expectedContent = activity.searcher.tagContent(['fence', 'code'])
-  activity.formatter.setTitle(`verifying file ${cyan(filePath)}`)
-  const fullPath = path.join(activity.configuration.testDir, filePath)
+module.exports = function (args: ActionArgs) {
+  const filePath = args.nodes.textInNode('strongtext', 'emphasizedtext')
+  const expectedContent = args.nodes.textInNode('fence', 'code')
+  args.formatter.setTitle(`verifying file ${cyan(filePath)}`)
+  const fullPath = path.join(args.configuration.testDir, filePath)
   var actualContent
   try {
     actualContent = fs.readFileSync(fullPath, 'utf8')

@@ -1,21 +1,24 @@
 // @flow
 
 import type { ActivityList } from '../4-activities/activity-list.js'
-const ActivityTypeManager = require('./activity-type-manager.js')
+
+const Configuration = require('../../../configuration/configuration.js')
+const Formatter = require('../../../formatters/formatter.js')
 const LinkTargetList = require('../3-link-targets/link-target-list.js')
+const runActivity = require('./run-activity.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 // Executes the given activities in parallel.
 // Returns the errors they produce.
 module.exports = async function executeParallel (
   activities: ActivityList,
-  activityTypeManager: ActivityTypeManager,
-  linkTargets: LinkTargetList
+  linkTargets: LinkTargetList,
+  formatter: Formatter,
+  configuration: Configuration
 ): Promise<Array<Promise<?UnprintedUserError>>> {
   const result = []
   for (const activity of activities) {
-    const func = activityTypeManager.handlerFunctionFor(activity)
-    result.push(func(activity))
+    result.push(runActivity(activity, formatter, configuration, linkTargets))
   }
   return result
 }

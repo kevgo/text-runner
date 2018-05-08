@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 import type Configuration from '../configuration/configuration.js'
 import type { WriteStream } from 'observable-process'
 
@@ -13,25 +13,25 @@ const debug = require('debug')('start-console-command')
 
 // Runs the given commands on the console.
 // Leaves the command running.
-module.exports = async function (activity: Activity) {
-  const commandsToRun = activity.searcher
-    .tagContent('fence')
+module.exports = async function (args: ActionArgs) {
+  const commandsToRun = args.nodes
+    .textInNode('fence')
     .split('\n')
     .map(line => line.trim())
     .filter(line => line)
     .map(trimDollar)
-    .map(makeGlobal(activity.configuration))
+    .map(makeGlobal(args.configuration))
     .join(' && ')
 
-  activity.formatter.setTitle(
+  args.formatter.setTitle(
     `starting a long-running process: ${bold(cyan(commandsToRun))}`
   )
   global.startConsoleProcessOutput = ''
   global.runningProcess = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: activity.configuration.testDir,
-    stdout: log(activity.formatter.stdout),
-    stderr: activity.formatter.stderr
+    cwd: args.configuration.testDir,
+    stdout: log(args.formatter.stdout),
+    stderr: args.formatter.stderr
   })
   global.runningProcessEnded = true
 }

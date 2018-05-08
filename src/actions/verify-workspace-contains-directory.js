@@ -1,16 +1,16 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const { bold, cyan } = require('chalk')
 const fs = require('fs')
 const path = require('path')
 
 // Verifies that the test workspace contains the given directory
-module.exports = function (activity: Activity) {
-  const directory = activity.searcher.tagContent('code')
-  const fullPath = path.join(activity.configuration.testDir, directory)
-  activity.formatter.setTitle(
+module.exports = function (args: ActionArgs) {
+  const directory = args.nodes.textInNode('code')
+  const fullPath = path.join(args.configuration.testDir, directory)
+  args.formatter.setTitle(
     `verifying the ${bold(
       cyan(directory)
     )} directory exists in the test workspace`

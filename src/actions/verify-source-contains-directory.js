@@ -1,15 +1,15 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const { bold, cyan } = require('chalk')
 const fs = require('fs')
 const path = require('path')
 
 // Verifies that a local directory linked in Markdown exists
-module.exports = function (activity: Activity) {
-  const directory = activity.searcher.tagContent('link_open')
-  activity.formatter.setTitle(
+module.exports = function (args: ActionArgs) {
+  const directory = args.nodes.textInNode('link_open')
+  args.formatter.setTitle(
     `directory ${bold(cyan(directory))} exists in the source code`
   )
   var stats

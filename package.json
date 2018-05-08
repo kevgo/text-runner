@@ -42,6 +42,7 @@
     "babel-eslint": "7.2.1",
     "babel-plugin-istanbul": "4.1.5",
     "babel-preset-flow": "6.23.0",
+    "babel-register": "6.26.0",
     "chai": "4.1.2",
     "class-methods": "1.0.10",
     "coveralls": "3.0.0",

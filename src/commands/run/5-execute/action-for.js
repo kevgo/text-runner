@@ -55,6 +55,7 @@ function loadBuiltinActions (): FunctionRepo {
 
 function loadCustomActions (): FunctionRepo {
   const result = {}
+  require('babel-register')
   for (const filename of customActionFilePaths()) {
     rechoir.prepare(interpret.jsVariants, filename)
     const actionName = getActionName(filename)

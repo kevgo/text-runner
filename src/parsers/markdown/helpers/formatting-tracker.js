@@ -1,6 +1,6 @@
 // @flow
 
-import type { AstNode } from '../../ast-node.js'
+const AstNode = require('../../ast-node.js')
 
 // FormattingTracker tracks formatting nodes
 // like 'em' and 'strong'

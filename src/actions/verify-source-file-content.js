@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const { bold, cyan } = require('chalk')
 const eol = require('eol')
@@ -8,20 +8,17 @@ const fs = require('fs')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
-module.exports = function (activity: Activity) {
-  const fileName = activity.searcher.tagContent('strongtext')
-  const relativeBaseDir = activity.searcher.tagContent('link_open', {
-    default: '.'
-  })
-  const expectedContent = activity.searcher.tagContent('fence')
-  activity.formatter.setTitle(
+module.exports = function (args: ActionArgs) {
+  const fileName = args.nodes.textInNode('strongtext')
+  var relativeBaseDir = '.'
+  if (args.nodes.hasNode('link')) {
+    relativeBaseDir = args.nodes.textInNode('link_open')
+  }
+  const expectedContent = args.nodes.textInNode('fence')
+  args.formatter.setTitle(
     `verifying document content matches source code file ${cyan(fileName)}`
   )
-  const filePath = path.join(
-    path.dirname(activity.filename),
-    relativeBaseDir,
-    fileName
-  )
+  const filePath = path.join(path.dirname(args.file), relativeBaseDir, fileName)
   var actualContent
   try {
     actualContent = fs.readFileSync(filePath, 'utf8')

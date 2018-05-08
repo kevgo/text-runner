@@ -1,18 +1,18 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 import type Configuration from '../configuration/configuration.js'
 
 type DoneFunction = (err?: ?ErrnoError) => void
 
 // Runs the JavaScript code given in the code block
-module.exports = function (activity: Activity, done: DoneFunction) {
-  var code = activity.searcher.tagContent('fence')
+module.exports = function (args: ActionArgs, done: DoneFunction) {
+  var code = args.nodes.textInNode('fence')
   if (code == null) {
     done(new Error('no JavaScript code found in the fenced block'))
     return
   }
-  code = replaceSubstitutions(code, activity.configuration)
+  code = replaceSubstitutions(code, args.configuration)
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
 
@@ -29,7 +29,7 @@ module.exports = function (activity: Activity, done: DoneFunction) {
     // sync code
     code = appendAsyncCallback(code)
   }
-  activity.formatter.output(code)
+  args.formatter.output(code)
   /* eslint-disable no-eval */
   eval(code)
 }

@@ -1,18 +1,16 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const { cyan } = require('chalk')
 const jsonfile = require('jsonfile')
 const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
-module.exports = function (activity: Activity) {
-  const installText = trimDollar(
-    activity.searcher.tagContent(['fence', 'code'])
-  )
+module.exports = function (args: ActionArgs) {
+  const installText = trimDollar(args.nodes.textInNode('fence', 'code'))
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
-  activity.formatter.setTitle(`verify NPM installs ${cyan(pkg.name)}`)
+  args.formatter.setTitle(`verify NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(

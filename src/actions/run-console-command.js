@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
 import type { WriteStream } from 'observable-process'
@@ -21,31 +21,31 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (activity: Activity) {
-  const commandsToRun = activity.searcher
-    .tagContent('fence')
+module.exports = async function (args: ActionArgs) {
+  const commandsToRun = args.nodes
+    .textInNode('fence')
     .split('\n')
     .map(command => command.trim())
     .filter(e => e)
     .map(trimDollar)
-    .map(makeGlobal(activity.configuration))
+    .map(makeGlobal(args.configuration))
     .join(' && ')
   if (commandsToRun === '') {
     throw new Error('the block that defines console commands to run is empty')
   }
 
-  activity.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
-  const input = await getInput(
-    activity.searcher.tagContent('htmlblock', { default: '' }),
-    activity.formatter
-  )
+  args.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
+  var input = []
+  if (args.nodes.hasNode('htmlblock')) {
+    input = await getInput(args.nodes.textInNode('htmlblock'), args.formatter)
+  }
   // this needs to be global because it is used in the "verify-run-console-output" step
   global.consoleCommandOutput = ''
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: activity.configuration.testDir,
-    stdout: log(activity.formatter.stdout),
-    stderr: activity.formatter.stderr
+    cwd: args.configuration.testDir,
+    stdout: log(args.formatter.stdout),
+    stderr: args.formatter.stderr
   })
 
   for (let inputLine of input) {
@@ -63,7 +63,10 @@ async function enter (processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-async function getInput (text: string, formatter: Formatter) {
+async function getInput (
+  text: string,
+  formatter: Formatter
+): Promise<Array<ProcessInput>> {
   if (!text) return []
   const xml2jsp = util.promisify(xml2js.parseString)
   const xml = await xml2jsp(text)

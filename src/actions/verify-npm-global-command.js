@@ -1,20 +1,16 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 
 const { cyan, red } = require('chalk')
 const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
-module.exports = function (activity: Activity) {
-  activity.formatter.setTitle('NPM module exports the command')
-  const commandName = trimDollar(
-    activity.searcher.tagContent(['fence', 'code'])
-  )
+module.exports = function (args: ActionArgs) {
+  args.formatter.setTitle('NPM module exports the command')
+  const commandName = trimDollar(args.nodes.textInNode('fence', 'code'))
   const pkg = require(path.join(process.cwd(), 'package.json'))
-  activity.formatter.setTitle(
-    `NPM module exports the ${cyan(commandName)} command`
-  )
+  args.formatter.setTitle(`NPM module exports the ${cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
     throw new Error(

@@ -1,7 +1,6 @@
 // @flow
 
-import type { AstNodeList } from '../ast-node-list.js'
-
+const AstNodeList = require('../ast-node-list.js')
 const AstStandardizer = require('./ast-standardizer.js')
 // $FlowFixMe
 const Remarkable = require('remarkable')

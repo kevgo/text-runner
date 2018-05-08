@@ -1,48 +1,48 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 import type Configuration from '../configuration/configuration.js'
 import type Formatter from '../formatters/formatter.js'
-import type { LinkTargetList } from '../commands/run/3-link-targets/link-target-list.js'
 
 const { cyan, magenta } = require('chalk')
 const fs = require('fs-extra')
+const LinkTargetList = require('../commands/run/3-link-targets/link-target-list.js')
 const path = require('path')
 const request = require('request-promise-native')
 const url = require('url')
 
 // Checks for broken hyperlinks
-module.exports = async function (act: Activity) {
-  const target = act.nodes[0].content
+module.exports = async function (args: ActionArgs) {
+  const target = args.nodes[0].content
   if (target == null || target === '') {
     throw new Error('link without target')
   }
   if (isMailtoLink(target)) {
-    act.formatter.skip(`skipping link to ${cyan(target)}`)
+    args.formatter.skip(`skipping link to ${cyan(target)}`)
     return
   }
-  act.formatter.setTitle(`link to ${cyan(target)}`)
+  args.formatter.setTitle(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(
-      act.filename,
+      args.file,
       target,
-      act.linkTargets,
-      act.formatter
+      args.linkTargets,
+      args.formatter
     )
   } else if (isLinkToAnchorInOtherFile(target)) {
     const targetFullPath = path
-      .join(path.dirname(act.filename), target)
+      .join(path.dirname(args.file), target)
       .replace(/\\/g, '/') // this line is necessary to make this work on Windows
     await checkLinkToAnchorInOtherFile(
-      act.filename,
+      args.file,
       targetFullPath,
-      act.linkTargets,
-      act.formatter
+      args.linkTargets,
+      args.formatter
     )
   } else if (isExternalLink(target)) {
-    await checkExternalLink(target, act.formatter, act.configuration)
+    await checkExternalLink(target, args.formatter, args.configuration)
   } else {
-    await checkLinkToFilesystem(act.filename, target, act.formatter)
+    await checkLinkToFilesystem(args.file, target, args.formatter)
   }
 }
 
@@ -102,7 +102,7 @@ async function checkLinkToAnchorInSameFile (
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
-  const targetEntry = linkTargets[filename].filter(
+  const targetEntry = linkTargets.targets[filename].filter(
     linkTarget => linkTarget.name === target.substr(1)
   )[0]
   if (!targetEntry) {
@@ -123,14 +123,14 @@ async function checkLinkToAnchorInOtherFile (
 ) {
   var [targetFilename, targetAnchor] = target.split('#')
   targetFilename = decodeURI(targetFilename)
-  if (linkTargets[targetFilename] == null) {
+  if (linkTargets.targets[targetFilename] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
         targetFilename
       )}`
     )
   }
-  const targetEntry = (linkTargets[targetFilename] || []).filter(
+  const targetEntry = (linkTargets.targets[targetFilename] || []).filter(
     linkTarget => linkTarget.name === targetAnchor
   )[0]
   if (!targetEntry) {

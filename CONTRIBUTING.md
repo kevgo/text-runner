@@ -61,23 +61,22 @@ let g:ale_javascript_prettier_use_local_config = 1
 ## Terminology
 
 TextRunner runs _active documentation_, i.e. documentation that can be executed.
-Active documentation consists of of plain text that is not executable
-but contains a number of _active blocks_
-(regions of Markdown wrapped in an _activation tag_
-which are executable.
-The default activation tag is `<a textrun="{{activity type}}">...</a>` tags).
-Activation tags specify the _activity type_ that should be executed inside the
+Active documentation is normal documentation
+that contains _active blocks_.
+Active blocks are regions of text wrapped in an _activation expression_.
+The default activation expression is a `textrun` attribute on any HTML tag,
+defining the _activity_ that should be executed using the content inside the
 respective active block.
-TextRunner comes with built-in activity types,
+TextRunner comes with built-in activities,
 for example to create files or directories, verify file contents,
 or start external processes.
-You can also create your own _custom activity types_
-by providing a file with the activity type name in the `text-run` directory
+You can also create your own _custom activities_
+by providing a file with the activity name in the `text-run` directory
 of your code base, which exports a function that runs the activity.
+This function is called the `action` of the activity.
 
-Inside TextRunner, an _activity_ means an instance of a activity type
-that executes a particular active block.
-
+Said another way, writers can perform activities through active documenation.
+Each activity has a name, an action, and a bunch of associated nodes from the document.
 
 ## Architecture
 

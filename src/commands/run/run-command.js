@@ -38,14 +38,20 @@ module.exports = async function runCommand (
   const linkTargets = findLinkTargets(ASTs)
 
   // step 4: extract activities
-  const activities = extractActivities(ASTs, config)
+  const activities = extractActivities(ASTs, config.get('classPrefix'))
   const links = extractImagesAndLinks(ASTs)
 
   // step 5: execute the ActivityList
-  await Promise.all(
-    executeParallel(links, linkTargets),
-    executeSequential(activities)
+  const parallelResults = await executeParallel(
+    links,
+    linkTargets,
+    format,
+    config
   )
+  await Promise.all([
+    parallelResults,
+    executeSequential(activities, format, config, linkTargets)
+  ])
 
   // step 6: cleanup
   rimraf.sync(workingDir)

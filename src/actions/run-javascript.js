@@ -7,7 +7,7 @@ type DoneFunction = (err?: ?ErrnoError) => void
 
 // Runs the JavaScript code given in the code block
 module.exports = function (args: ActionArgs, done: DoneFunction) {
-  var code = args.nodes.textInNode('fence')
+  var code = args.nodes.textInNodeOfType('fence')
   if (code == null) {
     done(new Error('no JavaScript code found in the fenced block'))
     return

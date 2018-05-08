@@ -52,7 +52,7 @@ module.exports = class AstNode {
       tag: data.tag || 'tag',
       file: data.file || 'file',
       line: data.line || 1,
-      content: data.content || 'content',
+      content: data.content || '',
       attributes: data.attributes || {}
     })
   }

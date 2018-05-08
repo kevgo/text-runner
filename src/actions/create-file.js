@@ -9,8 +9,8 @@ const path = require('path')
 const debug = require('debug')('textrun:actions:create-file')
 
 module.exports = function (args: ActionArgs) {
-  const filePath = args.nodes.textInNode('emphasizedtext', 'strongtext')
-  const content = args.nodes.textInNode('fence', 'code')
+  const filePath = args.nodes.textInNodeOfType('emphasizedtext', 'strongtext')
+  const content = args.nodes.textInNodeOfType('fence', 'code')
   args.formatter.setTitle(`create file ${cyan(filePath)}`)
   const fullPath = path.join(args.configuration.testDir, filePath)
   debug(fullPath)

@@ -8,7 +8,7 @@ const path = require('path')
 
 // Verifies that the test workspace contains the given directory
 module.exports = function (args: ActionArgs) {
-  const directory = args.nodes.textInNode('code')
+  const directory = args.nodes.textInNodeOfType('code')
   const fullPath = path.join(args.configuration.testDir, directory)
   args.formatter.setTitle(
     `verifying the ${bold(

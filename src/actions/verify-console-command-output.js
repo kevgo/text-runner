@@ -10,7 +10,7 @@ module.exports = function (args: ActionArgs) {
   )
 
   const expectedLines = args.nodes
-    .textInNode('fence')
+    .textInNodeOfType('fence')
     .split('\n')
     .map(line => line.trim())
     .filter(line => line)

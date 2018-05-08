@@ -8,7 +8,7 @@ const trimDollar = require('../helpers/trim-dollar')
 
 module.exports = function (args: ActionArgs) {
   args.formatter.setTitle('NPM module exports the command')
-  const commandName = trimDollar(args.nodes.textInNode('fence', 'code'))
+  const commandName = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
   const pkg = require(path.join(process.cwd(), 'package.json'))
   args.formatter.setTitle(`NPM module exports the ${cyan(commandName)} command`)
 

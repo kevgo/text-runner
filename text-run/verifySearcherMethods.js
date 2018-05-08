@@ -1,21 +1,20 @@
-const classMethods = require('class-methods')
-const jsdiffConsole = require('jsdiff-console')
-const removeTrailingColon = require('../dist/helpers/remove-trailing-colon.js')
-const removeValue = require('remove-value')
-const Searcher = require('../dist/commands/run/5-execute/searcher.js')
+// @flow
 
-module.exports = function ({ searcher }) {
-  const expectedTools = searcher
-    .tagsContents('strongtext')
+import type { ActionArgs } from '../src/commands/run/5-execute/action-args.js'
+
+// const classMethods = require('class-methods')
+const jsdiffConsole = require('jsdiff-console')
+const removeTrailingColon = require('../src/helpers/remove-trailing-colon.js')
+const removeValue = require('remove-value')
+
+module.exports = function (args: ActionArgs) {
+  const expectedTools = args.nodes
+    .textInNodesOfType('strongtext')
     .sort()
     .map(removeTrailingColon)
-  var actualTools = classMethods(Searcher).filter(isPublicMethod)
-  actualTools = actualTools.concat(Object.getOwnPropertyNames(searcher))
+  // var actualTools = classMethods(Searcher).filter(isPublicMethod)
+  const actualTools = Object.getOwnPropertyNames(args.nodes)
   actualTools.sort()
   removeValue(actualTools, 'query')
   jsdiffConsole(actualTools, expectedTools)
-}
-
-function isPublicMethod (methodName) {
-  return !methodName.startsWith('_')
 }

@@ -30,7 +30,7 @@ module.exports = class LinkTargetList {
   }
 
   addHeading (node: AstNode, nodeList: AstNodeList) {
-    const content = nodeList.getTextFor(node)
+    const content = nodeList.textInNode(node)
     if (!content) return
     this.addLinkTarget(node.file, 'heading', content)
   }

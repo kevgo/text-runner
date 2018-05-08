@@ -8,7 +8,7 @@ const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
 module.exports = function (args: ActionArgs) {
-  const installText = trimDollar(args.nodes.textInNode('fence', 'code'))
+  const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
   const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
   args.formatter.setTitle(`verify NPM installs ${cyan(pkg.name)}`)
 

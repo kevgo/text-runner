@@ -7,8 +7,8 @@ import type { ActionArgs } from '../5-execute/action-args.js'
 const actionFor = require('./action-for.js')
 const Configuration = require('../../../configuration/configuration.js')
 const Formatter = require('../../../formatters/formatter.js')
-const humanize = require('humanize-string')
 const LinkTargetList = require('../3-link-targets/link-target-list.js')
+const StatsCounter = require('../stats-counter.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 const util = require('util')
 
@@ -16,7 +16,8 @@ module.exports = async function runActivity (
   activity: Activity,
   formatter: Formatter,
   configuration: Configuration,
-  linkTargets: LinkTargetList
+  linkTargets: LinkTargetList,
+  statsCounter: StatsCounter
 ) {
   const args: ActionArgs = {
     nodes: activity.nodes,
@@ -27,8 +28,8 @@ module.exports = async function runActivity (
     linkTargets
   }
   try {
+    const formatter = new configuration.FormatterClass(activity, statsCounter)
     const action = actionFor(activity)
-    formatter.setTitle(humanize(activity.type))
     if (action.length === 1) {
       runSyncOrPromiseFunc(action, args)
     } else {

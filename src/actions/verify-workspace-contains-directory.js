@@ -10,7 +10,7 @@ const path = require('path')
 module.exports = function (args: ActionArgs) {
   const directory = args.nodes.textInNodeOfType('code')
   const fullPath = path.join(args.configuration.testDir, directory)
-  args.formatter.setTitle(
+  args.formatter.name(
     `verifying the ${bold(
       cyan(directory)
     )} directory exists in the test workspace`

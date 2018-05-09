@@ -10,7 +10,7 @@ const path = require('path')
 module.exports = function (args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('strongtext', 'emphasizedtext')
   const expectedContent = args.nodes.textInNodeOfType('fence', 'code')
-  args.formatter.setTitle(`verifying file ${cyan(filePath)}`)
+  args.formatter.name(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(args.configuration.testDir, filePath)
   var actualContent
   try {

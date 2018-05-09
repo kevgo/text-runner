@@ -11,7 +11,7 @@ module.exports = function (args: ActionArgs) {
   if (!directoryName) {
     throw new Error('empty directory name given')
   }
-  args.formatter.setTitle(`create directory ${cyan(directoryName)}`)
+  args.formatter.name(`create directory ${cyan(directoryName)}`)
   const fullPath = path.join(args.configuration.testDir, directoryName)
   mkdirp.sync(fullPath)
 }

@@ -21,7 +21,7 @@ module.exports = async function (args: ActionArgs) {
     args.formatter.skip(`skipping link to ${cyan(target)}`)
     return
   }
-  args.formatter.setTitle(`link to ${cyan(target)}`)
+  args.formatter.name(`link to ${cyan(target)}`)
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(
       args.file,
@@ -57,7 +57,7 @@ async function checkExternalLink (
   }
 
   try {
-    f.setTitle(`link to external website ${cyan(target)}`)
+    f.name(`link to external website ${cyan(target)}`)
     await request({ url: target, timeout: 4000 })
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
@@ -87,9 +87,9 @@ async function checkLinkToFilesystem (
   try {
     const stats = await fs.stat(target)
     if (stats.isDirectory()) {
-      f.setTitle(`link to local directory ${cyan(target)}`)
+      f.name(`link to local directory ${cyan(target)}`)
     } else {
-      f.setTitle(`link to local file ${cyan(target)}`)
+      f.name(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
     throw new Error(`link to non-existing local file ${cyan(target)}`)
@@ -109,9 +109,9 @@ async function checkLinkToAnchorInSameFile (
     throw new Error(`link to non-existing local anchor ${cyan(target)}`)
   }
   if (targetEntry.type === 'heading') {
-    f.setTitle(`link to local heading ${cyan(targetEntry.text)}`)
+    f.name(`link to local heading ${cyan(targetEntry.text)}`)
   } else {
-    f.setTitle(`link to #${cyan(targetEntry.name)}`)
+    f.name(`link to #${cyan(targetEntry.name)}`)
   }
 }
 
@@ -142,11 +142,11 @@ async function checkLinkToAnchorInOtherFile (
   }
 
   if (targetEntry.type === 'heading') {
-    f.setTitle(
+    f.name(
       `link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`
     )
   } else {
-    f.setTitle(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
+    f.name(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }
 }
 

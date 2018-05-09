@@ -7,10 +7,10 @@ const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
 
 module.exports = function (args: ActionArgs) {
-  args.formatter.setTitle('NPM module exports the command')
+  args.formatter.name('NPM module exports the command')
   const commandName = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
   const pkg = require(path.join(process.cwd(), 'package.json'))
-  args.formatter.setTitle(`NPM module exports the ${cyan(commandName)} command`)
+  args.formatter.name(`NPM module exports the ${cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
     throw new Error(

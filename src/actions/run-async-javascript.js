@@ -5,7 +5,7 @@ import type Configuration from '../configuration/configuration.js'
 
 // Runs the async-await JavaScript code given in the code block
 module.exports = function (args: ActionArgs) {
-  args.formatter.setTitle('run async javascript')
+  args.formatter.name('run async javascript')
   var code = args.nodes.textInNodeOfType('fence')
   if (code == null) {
     throw new Error('no JavaScript code found in the fenced block')
@@ -14,7 +14,7 @@ module.exports = function (args: ActionArgs) {
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
   code = wrapInAsyncFunction(code)
-  args.formatter.output(code)
+  args.formatter.log(code)
   /* eslint-disable no-eval */
   eval(code)
 }

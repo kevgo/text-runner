@@ -15,7 +15,7 @@ module.exports = function (args: ActionArgs) {
     relativeBaseDir = args.nodes.textInNodeOfType('link_open')
   }
   const expectedContent = args.nodes.textInNodeOfType('fence')
-  args.formatter.setTitle(
+  args.formatter.name(
     `verifying document content matches source code file ${cyan(fileName)}`
   )
   const filePath = path.join(path.dirname(args.file), relativeBaseDir, fileName)

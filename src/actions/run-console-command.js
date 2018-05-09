@@ -34,7 +34,7 @@ module.exports = async function (args: ActionArgs) {
     throw new Error('the block that defines console commands to run is empty')
   }
 
-  args.formatter.setTitle(`running console command: ${cyan(commandsToRun)}`)
+  args.formatter.name(`running console command: ${cyan(commandsToRun)}`)
   var input = []
   if (args.nodes.hasNodeOfType('htmlblock')) {
     input = await getInput(

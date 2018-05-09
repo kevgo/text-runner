@@ -82,7 +82,7 @@ endif
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-install-types:
+flow-types:   # installs/updates the Flow type definitions
 	flow-typed install
 
 lint: lintjs lintmd   # lints all files

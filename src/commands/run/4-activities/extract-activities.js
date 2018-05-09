@@ -4,7 +4,7 @@ import type { ActivityList } from '../4-activities/activity-list.js'
 
 const AstNode = require('../../../parsers/ast-node.js')
 const AstNodeList = require('../../../parsers/ast-node-list.js')
-const kebabcase = require('just-kebab-case')
+const dashify = require('dashify')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 // Returns all activities contained in the given collection of AstNodeLists
@@ -25,7 +25,7 @@ function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
       result.push({
-        type: kebabcase(node.attributes[prefix]),
+        type: dashify(node.attributes[prefix]),
         file: node.file,
         line: node.line,
         nodes: AST.getNodesFor(node)
@@ -48,5 +48,5 @@ function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
 }
 
 function isActiveBlockStartTag (node: AstNode, classPrefix: string): boolean {
-  return !!node.attributes[classPrefix]
+  return !!node.attributes[classPrefix] && node.type.endsWith('_open')
 }

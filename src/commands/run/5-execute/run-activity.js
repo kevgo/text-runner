@@ -7,6 +7,7 @@ import type { ActionArgs } from '../5-execute/action-args.js'
 const actionFor = require('./action-for.js')
 const Configuration = require('../../../configuration/configuration.js')
 const Formatter = require('../../../formatters/formatter.js')
+const humanize = require('humanize-string')
 const LinkTargetList = require('../3-link-targets/link-target-list.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 const util = require('util')
@@ -27,6 +28,7 @@ module.exports = async function runActivity (
   }
   try {
     const action = actionFor(activity)
+    formatter.setTitle(humanize(activity.type))
     if (action.length === 1) {
       runSyncOrPromiseFunc(action, args)
     } else {

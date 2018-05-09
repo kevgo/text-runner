@@ -14,13 +14,14 @@ const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 const createWorkingDir = require('./0-working-dir/create-working-dir.js')
 const readAndParseFile = require('./2-read-and-parse/read-and-parse-file.js')
 const getFileNames = require('./1-find-files/get-filenames.js')
+const StatsCounter = require('./stats-counter.js')
 
 module.exports = async function runCommand (
   glob: ?string,
   config: Configuration,
   format: Formatter
 ) {
-  // const activityTypesManager = new ActivityTypeManager(format, config)
+  const statsCounter = new StatsCounter()
 
   // step 0: create working dir
   const workingDir = createWorkingDir(config.get('useSystemTempDirectory'))
@@ -40,20 +41,32 @@ module.exports = async function runCommand (
   // step 4: extract activities
   const activities = extractActivities(ASTs, config.get('classPrefix'))
   const links = extractImagesAndLinks(ASTs)
+  if (activities.length === 0 && links.length === 0) {
+    throw new UnprintedUserError('no activities found')
+  }
 
   // step 5: execute the ActivityList
   const parallelResults = await executeParallel(
     links,
     linkTargets,
     format,
-    config
+    config,
+    statsCounter
   )
   await Promise.all([
     parallelResults,
-    executeSequential(activities, format, config, linkTargets)
+    executeSequential(activities, format, config, linkTargets, statsCounter)
   ])
 
   // step 6: cleanup
   rimraf.sync(workingDir)
-  format.suiteSuccess()
+
+  green(
+    `\nSuccess! ${this.stepsCount} blocks in ${this.filePaths.length} files`
+  )
+  if (statsCounter.warningsCount > 0) {
+    text += green(', ')
+    text += magenta(`${this.warningsCount} warnings`)
+  }
+  console.log(bold(text))
 }

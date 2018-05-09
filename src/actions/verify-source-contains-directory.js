@@ -9,7 +9,7 @@ const path = require('path')
 // Verifies that a local directory linked in Markdown exists
 module.exports = function (args: ActionArgs) {
   const directory = args.nodes.textInNodeOfType('link_open')
-  args.formatter.setTitle(
+  args.formatter.name(
     `directory ${bold(cyan(directory))} exists in the source code`
   )
   var stats

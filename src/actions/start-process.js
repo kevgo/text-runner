@@ -23,7 +23,7 @@ module.exports = async function (args: ActionArgs) {
     .map(makeGlobal(args.configuration))
     .join(' && ')
 
-  args.formatter.setTitle(
+  args.formatter.name(
     `starting a long-running process: ${bold(cyan(commandsToRun))}`
   )
   global.startConsoleProcessOutput = ''

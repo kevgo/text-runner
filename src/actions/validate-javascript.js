@@ -5,7 +5,7 @@ import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
 // Runs the JavaScript code given in the code block
 module.exports = function (args: ActionArgs) {
   const code = args.nodes.textInNodeOfType('fence')
-  args.formatter.output(code)
+  args.formatter.log(code)
   try {
     /* eslint-disable no-new, no-new-func */
     new Function(code)

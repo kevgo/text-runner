@@ -19,7 +19,7 @@ module.exports = async function (args: ActionArgs) {
   if (!imagePath.startsWith('/')) {
     imagePath = path.join(path.dirname(node.file), imagePath)
   }
-  args.formatter.setTitle(`image ${cyan(imagePath)}`)
+  args.formatter.name(`image ${cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
     await checkRemoteImage(imagePath, args.formatter, args.configuration)
   } else {

@@ -1,42 +1,39 @@
 // @flow
 
-const { cyan, green, magenta } = require('chalk')
+const { dim, cyan, green, magenta, red } = require('chalk')
 const Formatter = require('./formatter')
 const printCodeFrame = require('../helpers/print-code-frame')
 
 class DotFormatter extends Formatter {
   // A minimalistic formatter, prints dots for each check
 
-  error (errorMessage: string, filename?: string, line?: number) {
+  error (errorMessage: string) {
     super.error(errorMessage)
-    var output = ''
-    if (this.filePath) output += this.filePath
-    if (this.line) output += `:${this.line}`
-    if (this.filePath) output += ' -- '
-    output += errorMessage
-    console.log(output)
-    printCodeFrame(this.output, filename, line)
+    console.log()
+    console.log(dim(this.output))
+    console.log(
+      red(
+        `${this.activity.file}:${this.activity.line} ${
+          this.title
+        } -- ${errorMessage}`
+      )
+    )
+    printCodeFrame(console.log, this.activity.file, this.activity.line)
   }
 
-  output (text: string | Buffer): boolean {
-    return false
+  skip (message: string) {
+    super.skip(message)
+    console.log(cyan('.'))
   }
 
-  success (activityText?: string) {
-    super.success(activityText)
-    if (!this.skipping) {
-      process.stdout.write(green('.'))
-    }
+  success () {
+    super.success()
+    console.log(green('.'))
   }
 
   warning (warningMessage: string) {
     super.warning(warningMessage)
-    process.stdout.write(magenta('.'))
-  }
-
-  skip (activity: string) {
-    super.skip(activity)
-    process.stdout.write(cyan('.'))
+    console.log(magenta('.'))
   }
 }
 

@@ -47,9 +47,14 @@ module.exports = function loadConfiguration (
     useSystemTempDirectory: get('useSystemTempDirectory') === true,
     classPrefix: get('classPrefix'),
     exclude: get('exclude'),
-    workspace: get('workspace'),
+    workspace: '', // going to be populated later
     sourceDir: get('sourceDir'),
-    activityTypes: JSON.parse(get('activityTypes')),
-    FormatterClass: getFormatterClass(get('format'))
+    activityTypes: fileData['activityTypes']
+      ? JSON.parse(fileData['activityTypes'])
+      : defaultValues['activityTypes'],
+    FormatterClass: getFormatterClass(
+      get('format'),
+      defaultValues.FormatterClass
+    )
   }
 }

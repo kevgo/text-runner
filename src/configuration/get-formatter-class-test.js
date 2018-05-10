@@ -7,9 +7,14 @@ const getFormatterClass = require('./get-formatter-class.js')
 
 describe('getFormatterClass', function () {
   it('returns the dot formatter if requested', function () {
-    expect(getFormatterClass('dot')).to.equal(DotFormatter)
+    expect(getFormatterClass('dot', DetailedFormatter)).to.equal(DotFormatter)
   })
   it('returns the detailed formatter if requested', function () {
-    expect(getFormatterClass('detailed')).to.equal(DetailedFormatter)
+    expect(getFormatterClass('detailed', DotFormatter)).to.equal(
+      DetailedFormatter
+    )
+  })
+  it('returns the default formatter if no name is given', function () {
+    expect(getFormatterClass('', DotFormatter)).to.equal(DotFormatter)
   })
 })

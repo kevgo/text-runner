@@ -1,13 +1,13 @@
 // @flow
 
 import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
-import type Configuration from '../configuration/configuration.js'
-import type Formatter from '../formatters/formatter.js'
+import type { Configuration } from '../configuration/configuration.js'
 import type { WriteStream } from 'observable-process'
 
 const callArgs = require('../helpers/call-args')
 const { cyan } = require('chalk')
 const debug = require('debug')('textrun:actions:run-console-command')
+const Formatter = require('../formatters/formatter.js')
 const ObservableProcess = require('observable-process')
 const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
@@ -46,7 +46,7 @@ module.exports = async function (args: ActionArgs) {
   global.consoleCommandOutput = ''
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: args.configuration.testDir,
+    cwd: args.configuration.workspace,
     stdout: log(args.formatter.stdout),
     stderr: args.formatter.stderr
   })

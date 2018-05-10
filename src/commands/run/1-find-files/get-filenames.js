@@ -1,6 +1,6 @@
 // @flow
 
-import type Configuration from '../../../configuration/configuration.js'
+import type { Configuration } from '../../../configuration/configuration.js'
 
 const allMarkdownFiles = require('./all-markdown-files.js')
 const debug = require('debug')('text-runner:run-command')
@@ -16,14 +16,14 @@ const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 // Returns the name of all files/directories that match the given glob
 module.exports = function (glob: ?string, config: Configuration): string[] {
   var filenames = getFiles(glob, config)
-  filenames = removeExcludedFiles(filenames, config.get('exclude'))
+  filenames = removeExcludedFiles(filenames, config.exclude)
   debugFilenames(filenames)
   return filenames
 }
 
 function getFiles (glob: ?string, config: Configuration): string[] {
   if (!glob) {
-    return allMarkdownFiles(config.get('files'))
+    return allMarkdownFiles(config.files)
   } else if (hasDirectory(glob)) {
     return markdownFilesInDir(glob)
   } else if (isMarkdownFile(glob)) {

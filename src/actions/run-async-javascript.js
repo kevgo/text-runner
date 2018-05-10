@@ -1,7 +1,7 @@
 // @flow
 
 import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
-import type Configuration from '../configuration/configuration.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 // Runs the async-await JavaScript code given in the code block
 module.exports = function (args: ActionArgs) {

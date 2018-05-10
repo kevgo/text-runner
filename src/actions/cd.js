@@ -11,7 +11,7 @@ module.exports = function (args: ActionArgs) {
   const directory = args.nodes.textInNodeOfType('link', 'code')
   args.formatter.name(`changing into the ${bold(cyan(directory))} directory`)
   args.formatter.log(`cd ${directory}`)
-  const fullPath = path.join(args.configuration.testDir, directory)
+  const fullPath = path.join(args.configuration.workspace, directory)
   debug(`changing into directory '${fullPath}`)
   try {
     process.chdir(fullPath)

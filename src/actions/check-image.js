@@ -1,10 +1,10 @@
 // @flow
 
 import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
-import type Configuration from '../configuration/configuration.js'
-import type Formatter from '../formatters/formatter.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 const { cyan, magenta, red } = require('chalk')
+const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const path = require('path')
 const request = require('request-promise-native')
@@ -36,7 +36,7 @@ async function checkLocalImage (imagePath: string, formatter: Formatter) {
 }
 
 async function checkRemoteImage (url: string, f: Formatter, c: Configuration) {
-  if (c.get('offline')) {
+  if (c.offline) {
     f.skip(`skipping external image: ${magenta(url)}`)
     return
   }

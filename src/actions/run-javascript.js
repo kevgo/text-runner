@@ -1,7 +1,7 @@
 // @flow
 
 import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
-import type Configuration from '../configuration/configuration.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 type DoneFunction = (err?: ?ErrnoError) => void
 

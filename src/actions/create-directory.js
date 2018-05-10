@@ -12,6 +12,6 @@ module.exports = function (args: ActionArgs) {
     throw new Error('empty directory name given')
   }
   args.formatter.name(`create directory ${cyan(directoryName)}`)
-  const fullPath = path.join(args.configuration.testDir, directoryName)
+  const fullPath = path.join(args.configuration.workspace, directoryName)
   mkdirp.sync(fullPath)
 }

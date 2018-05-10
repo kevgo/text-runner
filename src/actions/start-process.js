@@ -1,7 +1,7 @@
 // @flow
 
 import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
-import type Configuration from '../configuration/configuration.js'
+import type { Configuration } from '../configuration/configuration.js'
 import type { WriteStream } from 'observable-process'
 
 const callArgs = require('../helpers/call-args')
@@ -29,7 +29,7 @@ module.exports = async function (args: ActionArgs) {
   global.startConsoleProcessOutput = ''
   global.runningProcess = new ObservableProcess({
     commands: callArgs(commandsToRun),
-    cwd: args.configuration.testDir,
+    cwd: args.configuration.workspace,
     stdout: log(args.formatter.stdout),
     stderr: args.formatter.stderr
   })

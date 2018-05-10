@@ -1,10 +1,10 @@
 // @flow
 
 import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
-import type Configuration from '../configuration/configuration.js'
-import type Formatter from '../formatters/formatter.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 const { cyan, magenta } = require('chalk')
+const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../commands/run/3-link-targets/link-target-list.js')
 const path = require('path')
@@ -51,7 +51,7 @@ async function checkExternalLink (
   f: Formatter,
   c: Configuration
 ) {
-  if (c.get('offline')) {
+  if (c.offline) {
     f.skip(`skipping link to external website ${target}`)
     return
   }
@@ -151,10 +151,7 @@ async function checkLinkToAnchorInOtherFile (
 }
 
 function isExternalLink (target: string): boolean {
-  return (
-    target.startsWith('//') ||
-    !!url.parse(target).protocol
-  )
+  return target.startsWith('//') || !!url.parse(target).protocol
 }
 
 function isLinkToAnchorInOtherFile (target: string): boolean {

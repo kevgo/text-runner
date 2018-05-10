@@ -3,9 +3,9 @@
 import type { CliArgTypes } from './cli/cli-arg-types.js'
 
 const { red } = require('chalk')
-const Configuration = require('./configuration/configuration.js')
-const FormatterManager = require('./formatters/formatter-manager')
 const fs = require('fs')
+const loadConfiguration = require('./configuration/load-configuration.js')
+const printCodeFrame = require('./helpers/print-code-frame')
 const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
@@ -17,11 +17,7 @@ const versionCommand = require('./commands/version/version-command')
 
 // Tests the documentation in the given directory
 module.exports = async function (cmdLineArgs: CliArgTypes) {
-  const configuration = new Configuration(configFileName(), cmdLineArgs)
-  // TODO: make getting a formatter a function
-  const formatter = new FormatterManager().getFormatter(
-    configuration.get('format')
-  )
+  const configuration = loadConfiguration(configFileName(), cmdLineArgs)
   const commandName = cmdLineArgs.command
   const file = cmdLineArgs.file
   try {
@@ -33,20 +29,21 @@ module.exports = async function (cmdLineArgs: CliArgTypes) {
         await helpCommand()
         break
       case 'run':
-        await runCommand(file, configuration, formatter)
+        await runCommand(configuration)
         break
       case 'setup':
-        await setupCommand(configuration, formatter)
+        await setupCommand()
         break
       case 'version':
         await versionCommand()
         break
       default:
-        formatter.error(`unknown command: ${red(commandName)}`)
+        console.log(red(`unknown command: ${red(commandName)}`))
     }
   } catch (err) {
     if (err instanceof UnprintedUserError) {
-      formatter.error(err.message, err.filePath, err.line)
+      console.log(red(err.message))
+      printCodeFrame(console.log, err.file, err.line)
       throw new PrintedUserError(err)
     } else {
       throw err

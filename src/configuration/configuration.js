@@ -1,86 +1,16 @@
 // @flow
 
-import type { CliArgTypes } from '../cli/cli-arg-types.js'
-import type { ConfigFileStructure } from './config-file-structure.js'
+const Formatter = require('../formatters/formatter.js')
 
-const fs = require('fs')
-const debug = require('debug')('textrun:configuration')
-const YAML = require('yamljs')
-
-const defaultValues = {
-  fast: false,
-  files: '**/*.md',
-  format: 'detailed',
-  useSystemTempDirectory: false,
-  classPrefix: 'textrun',
-  activityTypes: {
-    runConsoleCommand: {
-      globals: {}
-    }
-  }
-}
-
-// Encapsulates logic around the configuration
-class Configuration {
-  configFilePath: string
-  constructorArgs: CliArgTypes
-  fileData: ConfigFileStructure
-  sourceDir: string
-  testDir: string
-
-  constructor (configFilePath: string, constructorArgs: CliArgTypes) {
-    this.configFilePath = configFilePath
-    this.constructorArgs = constructorArgs || {}
-
-    if (this.configFilePath) {
-      debug(`loading configuration file: ${this.configFilePath}`)
-      // $FlowFixMe: flow-type defs seems to be wrong here
-      this.fileData = YAML.load(configFilePath) || {}
-    } else {
-      this.fileData = {}
-    }
-    debug(`configuration file data: ${JSON.stringify(this.fileData)}`)
-
-    // the directory containing the source code
-    this.sourceDir = process.cwd()
-  }
-
-  // Returns the value of the attribute with the given name
-  get (attributeName: string): string {
-    return (
-      this.constructorArgs[attributeName] ||
-      this.fileData[attributeName] ||
-      defaultValues[attributeName]
-    )
-  }
-
-  // Creates a config file with default values
-  createDefault () {
-    fs.writeFileSync(
-      './text-run.yml',
-      `# white-list for files to test
-# This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
-# The folder "node_modules" is already excluded.
-# To exclude the "vendor" folder: '{,!(vendor)/**/}*.md'
-files: '**/*.md'
-
-# the formatter to use
-format: detailed
-
-# prefix that makes anchor tags active regions
-classPrefix: 'textrun'
-
-# whether to run the tests in an external temp directory,
-# uses ./tmp if false,
-# you can also provide a custom directory path here
-useSystemTempDirectory: false
-
-# activity-type specific configuration
-activityTypes:
-  runConsoleCommand:
-    globals: {}`
-    )
-  }
-}
-
-module.exports = Configuration
+// Data structure for configuration values
+export type Configuration = {|
+  offline: boolean, // whether to skip built-in tests that require a network connection
+  files: string, // glob of the files to test
+  exclude: string | string[], // list of names or regexes of files to exclude
+  FormatterClass: typeof Formatter, // type of the Formatter class to use
+  sourceDir: string, // the root directory of the source code to test
+  useSystemTempDirectory: boolean, // whether to create the workspace in the system temp directory or locally
+  workspace: string, // the root directory of the workspace
+  classPrefix: string, // the name of the attribute that denotes active blocks
+  activityTypes: Object // activity-specific configuration
+|}

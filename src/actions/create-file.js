@@ -12,7 +12,7 @@ module.exports = function (args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('emphasizedtext', 'strongtext')
   const content = args.nodes.textInNodeOfType('fence', 'code')
   args.formatter.name(`create file ${cyan(filePath)}`)
-  const fullPath = path.join(args.configuration.testDir, filePath)
+  const fullPath = path.join(args.configuration.workspace, filePath)
   debug(fullPath)
   mkdirp.sync(path.dirname(fullPath))
   fs.writeFileSync(fullPath, content)

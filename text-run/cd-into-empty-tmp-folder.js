@@ -14,6 +14,6 @@ module.exports = async function (args: ActionArgs) {
   global.cdHistory = existingDir
   const newFolder = path.join(os.tmpdir(), uuid())
   fs.mkdirSync(newFolder)
-  args.formatter.output('cd ' + newFolder)
+  args.formatter.log('cd ' + newFolder)
   process.chdir(newFolder)
 }

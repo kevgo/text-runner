@@ -1,7 +1,8 @@
 // @flow
 
+import type { Configuration } from '../../../configuration/configuration.js'
+
 const AstNodeList = require('../../../parsers/ast-node-list.js')
-const Configuration = require('../../../configuration/configuration.js')
 const Formatter = require('../../../formatters/formatter.js')
 const LinkTargetList = require('../3-link-targets/link-target-list.js')
 

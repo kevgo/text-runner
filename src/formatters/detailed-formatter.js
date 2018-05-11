@@ -24,11 +24,7 @@ class DetailedFormatter extends Formatter {
     super.skip(message)
     console.log(dim(this.output))
     console.log(
-      cyan(
-        `${this.activity.file}:${this.activity.line} ${
-          this.title
-        } -- ${message}`
-      )
+      magenta(`${this.activity.file}:${this.activity.line} -- ${message}`)
     )
   }
 

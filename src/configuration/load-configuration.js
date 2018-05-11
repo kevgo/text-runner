@@ -42,9 +42,9 @@ module.exports = function loadConfiguration (
   }
 
   return {
-    offline: get('offline') === 'true',
+    offline: String(get('offline')) === 'true',
     fileGlob: get('files') || defaultValues.fileGlob,
-    useSystemTempDirectory: get('useSystemTempDirectory') === true,
+    useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
     classPrefix: get('classPrefix'),
     exclude: get('exclude'),
     workspace: '', // going to be populated later

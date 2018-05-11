@@ -13,7 +13,7 @@ const url = require('url')
 
 // Checks for broken hyperlinks
 module.exports = async function (args: ActionArgs) {
-  const target = args.nodes[0].content
+  const target = args.nodes[0].attributes['href']
   if (target == null || target === '') {
     throw new Error('link without target')
   }
@@ -52,7 +52,7 @@ async function checkExternalLink (
   c: Configuration
 ) {
   if (c.offline) {
-    f.skip(`skipping link to external website ${target}`)
+    f.skip(`skipping external link: ${target}`)
     return
   }
 

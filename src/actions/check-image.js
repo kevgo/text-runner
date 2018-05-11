@@ -16,13 +16,13 @@ module.exports = async function (args: ActionArgs) {
   if (!imagePath) {
     throw new Error('image tag without source')
   }
-  if (!imagePath.startsWith('/')) {
-    imagePath = path.join(path.dirname(node.file), imagePath)
-  }
   args.formatter.name(`image ${cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
     await checkRemoteImage(imagePath, args.formatter, args.configuration)
   } else {
+    if (!imagePath.startsWith('/')) {
+      imagePath = path.join(path.dirname(node.file), imagePath)
+    }
     await checkLocalImage(imagePath, args.formatter)
   }
 }

@@ -23,13 +23,39 @@ describe('extract-activities', function () {
     expect(result[0].nodes).to.eql(AST)
   })
 
-  it('normalizes the activity name', function () {
+  it('normalizes activity names in CamelCase', function () {
     const AST = new AstNodeList()
     AST.scaffold({
       type: 'anchor_open',
       file: 'README.md',
       line: 3,
       attributes: { textrun: 'verifyFoo' }
+    })
+    AST.scaffold({ type: 'anchor_close' })
+    const result = extractActivities([AST], 'textrun')
+    expect(result[0].type).to.equal('verify-foo')
+  })
+
+  it('normalizes activity names in kebab-case', function () {
+    const AST = new AstNodeList()
+    AST.scaffold({
+      type: 'anchor_open',
+      file: 'README.md',
+      line: 3,
+      attributes: { textrun: 'verify-foo' }
+    })
+    AST.scaffold({ type: 'anchor_close' })
+    const result = extractActivities([AST], 'textrun')
+    expect(result[0].type).to.equal('verify-foo')
+  })
+
+  it('normalizes activity names in snake_case', function () {
+    const AST = new AstNodeList()
+    AST.scaffold({
+      type: 'anchor_open',
+      file: 'README.md',
+      line: 3,
+      attributes: { textrun: 'verify_foo' }
     })
     AST.scaffold({ type: 'anchor_close' })
     const result = extractActivities([AST], 'textrun')

@@ -6,6 +6,7 @@ import type { TransformerList } from './transformers/transformer-list.js'
 const AstNode = require('../ast-node.js')
 const AstNodeList = require('../ast-node-list.js')
 const FormattingTracker = require('./helpers/formatting-tracker.js')
+const isClosingHtmlTagType = require('./helpers/is-closing-html-tag-type.js')
 const isOpeningHtmlTagType = require('./helpers/is-opening-html-tag-type.js')
 const loadTransformers = require('./transformers/load.js')
 const openingTagFor = require('./helpers/opening-tag-for.js')
@@ -55,7 +56,7 @@ module.exports = class AstStandardizer {
       this.filepath,
       this.line
     )
-    const type = getType(tag)
+    const type = this.getType(tag, attributes)
     const astNode = new AstNode({
       type,
       tag,
@@ -66,7 +67,7 @@ module.exports = class AstStandardizer {
     })
     if (isOpeningHtmlTagType(tag)) {
       this.openTags.add(astNode)
-    } else {
+    } else if (isClosingHtmlTagType(tag)) {
       const openingNode = this.openTags.pop(openingTagFor(astNode.type))
       astNode.attributes = openingNode.attributes
     }
@@ -94,6 +95,20 @@ module.exports = class AstStandardizer {
     this.line += 1
     return true
   }
+
+  getType (tag: string, attributes: { [string]: string }): string {
+    if (tag === 'a' && attributes['href']) return 'link_open'
+    if (tag === '/a' && this.openTags.peek().attributes['href']) {
+      return 'link_close'
+    }
+    const result = types[tag]
+    if (!result) {
+      throw new UnprintedUserError(
+        `AstStandardizer: unknown tag type: '${tag}'`
+      )
+    }
+    return result
+  }
 }
 
 const types = {
@@ -108,13 +123,6 @@ const types = {
   '/strong': 'strong_close',
   em: 'em_open',
   '/em': 'em_close'
-}
-function getType (tag: string): string {
-  const result = types[tag]
-  if (!result) {
-    throw new UnprintedUserError(`AstStandardizer: unknown tag type: '${tag}'`)
-  }
-  return result
 }
 
 function alertUnknownNodeType (node, filepath: string, line: number) {

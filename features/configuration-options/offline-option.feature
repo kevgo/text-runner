@@ -12,13 +12,13 @@ Feature: "offline" option
     Given my source code contains the file "1.md" with content:
       """
       <a href="http://google.com">Google</a>
-      <img src="http://google.com/foo.png"></img>
+      <img src="http://google.com/foo.png">
       """
     When running "text-run --offline"
     Then it signals:
-      | MESSAGE | skipping link to external website http://google.com |
+      | MESSAGE | skipping external link: http://google.com |
     And it signals:
-      | MESSAGE | skipping external image http://google.com/foo.png |
+      | MESSAGE | skipping external image: http://google.com/foo.png |
 
   @apionly
   Scenario: offline option via API
@@ -29,7 +29,7 @@ Feature: "offline" option
       """
     When running text-run with the arguments {"offline": true}
     Then it signals:
-      | MESSAGE | skipping link to external website http://google.com |
+      | MESSAGE | skipping external link: http://google.com |
     And it signals:
-      | MESSAGE | skipping external image http://google.com/foo.png |
+      | MESSAGE | skipping external image: http://google.com/foo.png |
 

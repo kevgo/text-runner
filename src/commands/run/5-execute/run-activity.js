@@ -33,7 +33,7 @@ module.exports = async function runActivity (
     } else {
       runCallbackFunc(action, args)
     }
-    formatter.success()
+    if (!formatter.skipped && !formatter.warned) formatter.success()
   } catch (err) {
     if (isUserError(err)) {
       formatter.error(err.message)

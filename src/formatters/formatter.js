@@ -20,6 +20,8 @@ class Formatter {
   output: string
   title: string
   warningMessage: string
+  skipped: boolean
+  warned: boolean
 
   constructor (activity: Activity, statsCounter: StatsCounter) {
     this.activity = activity
@@ -28,6 +30,8 @@ class Formatter {
     this.stderr = { write: this.log }
     this.output = ''
     this.title = humanize(activity.type)
+    this.skipped = false
+    this.warned = false
   }
 
   error (errorMessage: string) {
@@ -40,6 +44,7 @@ class Formatter {
   }
 
   skip (message: string) {
+    this.skipped = true
     this.statsCounter.skip()
   }
 
@@ -53,6 +58,7 @@ class Formatter {
   }
 
   warning (warningMessage: string) {
+    this.warned = true
     this.statsCounter.warning()
   }
 }

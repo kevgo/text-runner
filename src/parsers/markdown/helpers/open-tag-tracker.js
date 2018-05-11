@@ -4,10 +4,10 @@ const AstNode = require('../../ast-node.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 module.exports = class OpenTagTracker {
-  nodes: { [string]: AstNode }
+  nodes: AstNode[]
 
   constructor () {
-    this.nodes = {}
+    this.nodes = []
   }
 
   add (node: AstNode) {
@@ -18,21 +18,29 @@ module.exports = class OpenTagTracker {
         node.line
       )
     }
-    this.nodes[node.type] = node
+    this.nodes.push(node)
   }
 
   has (nodeType: string): boolean {
-    return !!this.nodes[nodeType]
+    return this.nodes.some(node => node.type === nodeType)
   }
 
-  pop (nodeType: string): AstNode {
-    const result = this.nodes[nodeType]
+  peek (): AstNode {
+    return this.nodes[this.nodes.length - 1]
+  }
+
+  pop (expectedNodeType: string): AstNode {
+    const result = this.nodes.pop()
     if (!result) {
       throw new UnprintedUserError(
-        `OpenTagTracker does not have node '${nodeType}'`
+        `OpenTagTracker is empty while trying to pop '${expectedNodeType}'`
       )
     }
-    delete this.nodes[nodeType]
+    if (result.type !== expectedNodeType) {
+      throw new UnprintedUserError(
+        `OpenTagTracker does not have node '${expectedNodeType}'`
+      )
+    }
     return result
   }
 }

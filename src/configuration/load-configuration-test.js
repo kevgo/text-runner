@@ -15,12 +15,7 @@ describe('loadConfiguration', function () {
       this.configFilePath = path.join(this.configDir.name, 'text-run.yml')
       fs.writeFileSync(this.configFilePath, "files: '*.md'")
       const result = loadConfiguration('', {})
-    })
-
-    describe('files attribute', function () {
-      it('returns the value from the file', function () {
-        expect(this.config.get('files')).to.equal('*.md')
-      })
+      expect(result.files).to.equal('*.md')
     })
   })
 })

@@ -1,8 +1,8 @@
 // @flow
 
-const dashify = require('dashify')
+const kebabCase = require('just-kebab-case')
 const path = require('path')
 
 module.exports = function actionName (filepath: string): string {
-  return dashify(path.basename(filepath, path.extname(filepath)))
+  return kebabCase(path.basename(filepath, path.extname(filepath)))
 }

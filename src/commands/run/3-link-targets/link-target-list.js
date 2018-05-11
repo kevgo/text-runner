@@ -4,7 +4,7 @@ import type { LinkTarget } from './link-target.js'
 
 const AstNode = require('../../../parsers/ast-node.js')
 const AstNodeList = require('../../../parsers/ast-node-list.js')
-const dashify = require('dashify')
+const kebabCase = require('just-kebab-case')
 
 module.exports = class LinkTargetList {
   targets: { [string]: Array<LinkTarget> }
@@ -37,6 +37,6 @@ module.exports = class LinkTargetList {
 
   addLinkTarget (filepath: string, type: string, name: string) {
     this.targets[filepath] = this.targets[filepath] || []
-    this.targets[filepath].push({ type, name: dashify(name).toLowerCase() })
+    this.targets[filepath].push({ type, name: kebabCase(name).toLowerCase() })
   }
 }

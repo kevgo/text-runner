@@ -6,7 +6,7 @@ const tmp = require('tmp')
 describe('loadConfiguration', function () {
   it('returns default values if no config file is given', function () {
     const result = loadConfiguration('', {})
-    expect(result.files).to.equal('**/*.md')
+    expect(result.fileGlob).to.equal('**/*.md')
   })
 
   context('config file given', function () {
@@ -15,7 +15,7 @@ describe('loadConfiguration', function () {
       this.configFilePath = path.join(this.configDir.name, 'text-run.yml')
       fs.writeFileSync(this.configFilePath, "files: '*.md'")
       const result = loadConfiguration('', {})
-      expect(result.files).to.equal('*.md')
+      expect(result.fileGlob).to.equal('*.md')
     })
   })
 })

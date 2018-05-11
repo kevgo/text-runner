@@ -18,7 +18,6 @@ const versionCommand = require('./commands/version/version-command')
 // Tests the documentation in the given directory
 module.exports = async function (cmdLineArgs: CliArgTypes) {
   const configuration = loadConfiguration(configFileName(), cmdLineArgs)
-  console.log(configuration)
   const commandName = cmdLineArgs.command
   const file = cmdLineArgs.file
   try {

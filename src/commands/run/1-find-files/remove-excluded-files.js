@@ -5,6 +5,7 @@ module.exports = function removeExcludedFiles (
   fileList: string[],
   excluded: string | string[]
 ): string[] {
+  if (excluded.length === 0) return fileList
   const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
   const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
   return fileList.filter(file => {

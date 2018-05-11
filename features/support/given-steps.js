@@ -82,14 +82,14 @@ Given('my documentation is starting the {string} example', function (example) {
     <a textrun="start-console-command">
       \`\`\`
       node ${path.join(
-        __dirname,
-        '..',
-        '..',
-        'documentation',
-        'examples',
-        'long-running',
-        'server.js'
-      )}
+    __dirname,
+    '..',
+    '..',
+    'documentation',
+    'examples',
+    'long-running',
+    'server.js'
+  )}
       \`\`\`
       </a>
       `
@@ -136,7 +136,7 @@ Given('my workspace contains the HelloWorld activity', function () {
   fs.writeFileSync(
     path.join(this.rootDir, 'text-run', 'hello-world.js'),
     `
-    module.exports = function ({formatter}) { formatter.output('Hello World!') }`
+    module.exports = function ({formatter}) { formatter.log('Hello World!') }`
   )
 })
 

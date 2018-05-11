@@ -21,7 +21,7 @@ Feature: flexible block syntax
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
-      | MESSAGE  | hello world |
+      | MESSAGE  | Hello world |
 
 
   Scenario: the blocktype is provided in camelCase
@@ -34,7 +34,7 @@ Feature: flexible block syntax
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
-      | MESSAGE  | hello world |
+      | MESSAGE  | Hello world |
 
 
   Scenario: the blocktype is provided in snake_case
@@ -47,7 +47,7 @@ Feature: flexible block syntax
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
-      | MESSAGE  | hello world |
+      | MESSAGE  | Hello world |
 
 
   Scenario: the blocktype is provided in kebab-case
@@ -60,4 +60,4 @@ Feature: flexible block syntax
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
-      | MESSAGE  | hello world |
+      | MESSAGE  | Hello world |

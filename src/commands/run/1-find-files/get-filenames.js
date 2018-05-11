@@ -14,25 +14,27 @@ const removeExcludedFiles = require('./remove-excluded-files.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 // Returns the name of all files/directories that match the given glob
-module.exports = function (glob: ?string, config: Configuration): string[] {
-  var filenames = getFiles(glob, config)
+module.exports = function (config: Configuration): string[] {
+  var filenames = getFiles(config)
+  console.log(filenames)
   filenames = removeExcludedFiles(filenames, config.exclude)
+  console.log(filenames)
   debugFilenames(filenames)
   return filenames
 }
 
-function getFiles (glob: ?string, config: Configuration): string[] {
-  if (!glob) {
-    return allMarkdownFiles(config.files)
-  } else if (hasDirectory(glob)) {
-    return markdownFilesInDir(glob)
-  } else if (isMarkdownFile(glob)) {
-    return [glob]
-  } else if (isGlob(glob)) {
-    return filesMatchingGlob(glob)
+function getFiles (config: Configuration): string[] {
+  if (config.fileGlob === '') {
+    return allMarkdownFiles(config.fileGlob)
+  } else if (hasDirectory(config.fileGlob)) {
+    return markdownFilesInDir(config.fileGlob)
+  } else if (isMarkdownFile(config.fileGlob)) {
+    return [config.fileGlob]
+  } else if (isGlob(config.fileGlob)) {
+    return filesMatchingGlob(config.fileGlob)
   } else {
     throw new UnprintedUserError(
-      `file or directory does not exist: ${red(glob)}`
+      `file or directory does not exist: ${red(config.fileGlob)}`
     )
   }
 }

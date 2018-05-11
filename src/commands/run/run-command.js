@@ -22,7 +22,7 @@ async function runCommand (config: Configuration) {
   const workingDir = createWorkingDir(config.useSystemTempDirectory)
 
   // step 1: find files
-  var filenames = getFileNames(config.files, config)
+  var filenames = getFileNames(config)
   if (filenames.length === 0) {
     throw new UnprintedUserError('no Markdown files found')
   }

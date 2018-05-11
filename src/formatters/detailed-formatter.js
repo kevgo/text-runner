@@ -36,7 +36,7 @@ class DetailedFormatter extends Formatter {
     super.success()
     console.log(dim(this.output))
     console.log(
-      green(`${this.activity.file}:${this.activity.line} ${this.title}`)
+      green(`${this.activity.file}:${this.activity.line} -- ${this.title}`)
     )
   }
 

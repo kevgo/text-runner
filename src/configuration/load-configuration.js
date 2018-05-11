@@ -10,7 +10,7 @@ const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
   offline: false,
-  files: '**/*.md',
+  fileGlob: '**/*.md',
   exclude: [],
   FormatterClass: DetailedFormatter,
   useSystemTempDirectory: false,
@@ -43,7 +43,7 @@ module.exports = function loadConfiguration (
 
   return {
     offline: get('offline') === 'true',
-    files: get('files'),
+    fileGlob: get('files') || defaultValues.fileGlob,
     useSystemTempDirectory: get('useSystemTempDirectory') === true,
     classPrefix: get('classPrefix'),
     exclude: get('exclude'),

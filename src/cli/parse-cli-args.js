@@ -42,7 +42,7 @@ module.exports = function (argv: string[]): CliArgTypes {
     command = 'run'
   }
   result.command = command
-  result.file = commands[0]
+  result.files = commands[0]
 
   // $FlowFixMe
   return result

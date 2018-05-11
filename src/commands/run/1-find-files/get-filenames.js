@@ -16,9 +16,7 @@ const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 // Returns the name of all files/directories that match the given glob
 module.exports = function (config: Configuration): string[] {
   var filenames = getFiles(config)
-  console.log(filenames)
   filenames = removeExcludedFiles(filenames, config.exclude)
-  console.log(filenames)
   debugFilenames(filenames)
   return filenames
 }

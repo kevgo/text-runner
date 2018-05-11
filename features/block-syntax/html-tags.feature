@@ -18,4 +18,4 @@ Feature: support for more HTML tags
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
-      | MESSAGE  | hello world |
+      | MESSAGE  | Hello world |

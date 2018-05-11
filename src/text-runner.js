@@ -19,11 +19,10 @@ const versionCommand = require('./commands/version/version-command')
 module.exports = async function (cmdLineArgs: CliArgTypes) {
   const configuration = loadConfiguration(configFileName(), cmdLineArgs)
   const commandName = cmdLineArgs.command
-  const file = cmdLineArgs.file
   try {
     switch (commandName) {
       case 'add':
-        await addCommand(file)
+        await addCommand(cmdLineArgs.files)
         break
       case 'help':
         await helpCommand()

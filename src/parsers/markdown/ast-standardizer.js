@@ -8,6 +8,7 @@ const AstNodeList = require('../ast-node-list.js')
 const FormattingTracker = require('./helpers/formatting-tracker.js')
 const isClosingHtmlTagType = require('./helpers/is-closing-html-tag-type.js')
 const isOpeningHtmlTagType = require('./helpers/is-opening-html-tag-type.js')
+const isSingleHtmlTagType = require('./helpers/is-single-html-tag-type.js')
 const loadTransformers = require('./transformers/load.js')
 const openingTagFor = require('./helpers/opening-tag-for.js')
 const OpenTagTracker = require('./helpers/open-tag-tracker.js')
@@ -65,7 +66,9 @@ module.exports = class AstStandardizer {
       file: this.filepath,
       attributes
     })
-    if (isOpeningHtmlTagType(tag)) {
+    if (isSingleHtmlTagType(tag)) {
+      // nothing to do here
+    } else if (isOpeningHtmlTagType(tag)) {
       this.openTags.add(astNode)
     } else if (isClosingHtmlTagType(tag)) {
       const openingNode = this.openTags.pop(openingTagFor(astNode.type))

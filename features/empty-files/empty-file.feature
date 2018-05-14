@@ -9,8 +9,8 @@ Feature: running empty files
 
   Scenario: a documentation consisting of an empty file
     Given my workspace contains an empty file "empty.md"
-    When trying to run text-run
-    Then the test fails with:
-      | ERROR MESSAGE | found empty file empty.md |
-      | FILENAME      | empty.md                  |
-      | EXIT CODE     | 1                         |
+    When running text-run
+    Then it signals:
+      | WARNING | found empty file empty.md |
+    And it signals:
+      | WARNING | no activities found |

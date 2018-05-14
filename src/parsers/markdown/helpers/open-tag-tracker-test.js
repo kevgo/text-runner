@@ -36,16 +36,27 @@ describe('OpenTagTracker', function () {
   })
 
   describe('pop', function () {
-    it('returns the given open tag', function () {
+    it('returns the given open tag from the end', function () {
       const node = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node)
       const result = this.openTags.pop('foo')
       expect(result).to.equal(node)
     })
+    it('returns the given open tag from close to the end', function () {
+      const node1 = AstNode.scaffold({ type: 'foo', line: 3 })
+      this.openTags.add(node1)
+      const node2 = AstNode.scaffold({ type: 'bar', line: 3 })
+      this.openTags.add(node2)
+      const result = this.openTags.pop('foo')
+      expect(result).to.equal(node1)
+      expect(this.openTags.nodes).to.have.length(1)
+      const types = this.openTags.nodes.map(node => node.type)
+      expect(types).to.eql(['bar'])
+    })
     it('throws if the tag is not the expected type', function () {
       const node = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node)
-      expect(() => this.openTags.pop('other')).to.throw(UnprintedUserError)
+      expect(() => this.openTags.pop('other')).to.throw(Error)
     })
   })
 })

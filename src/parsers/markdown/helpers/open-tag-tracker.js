@@ -30,17 +30,17 @@ module.exports = class OpenTagTracker {
   }
 
   pop (expectedNodeType: string): AstNode {
-    const result = this.nodes.pop()
-    if (!result) {
-      throw new UnprintedUserError(
+    if (this.nodes.length === 0) {
+      throw new Error(
         `OpenTagTracker is empty while trying to pop '${expectedNodeType}'`
       )
     }
-    if (result.type !== expectedNodeType) {
-      throw new UnprintedUserError(
-        `OpenTagTracker does not have node '${expectedNodeType}'`
-      )
+    for (let i = this.nodes.length - 1; i >= 0; i--) {
+      const result = this.nodes[i]
+      if (result.type !== expectedNodeType) continue
+      this.nodes.splice(i, 1)
+      return result
     }
-    return result
+    throw new Error(`OpenTagTracker does not have node '${expectedNodeType}'`)
   }
 }

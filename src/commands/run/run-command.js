@@ -9,7 +9,6 @@ const extractActivities = require('./4-activities/extract-activities.js')
 const extractImagesAndLinks = require('./4-activities/extract-images-and-links.js')
 const findLinkTargets = require('./3-link-targets/find-link-targets.js')
 const rimraf = require('rimraf')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
 const createWorkingDir = require('./0-working-dir/create-working-dir.js')
 const readAndParseFile = require('./2-read-and-parse/read-and-parse-file.js')
 const getFileNames = require('./1-find-files/get-filenames.js')
@@ -24,7 +23,8 @@ async function runCommand (config: Configuration) {
   // step 1: find files
   var filenames = getFileNames(config)
   if (filenames.length === 0) {
-    throw new UnprintedUserError('no Markdown files found')
+    console.log(magenta('no Markdown files found'))
+    return
   }
 
   // step 2: read and parse files
@@ -37,7 +37,8 @@ async function runCommand (config: Configuration) {
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
-    throw new UnprintedUserError('no activities found')
+    console.log(magenta('no activities found'))
+    return
   }
 
   // step 5: execute the ActivityList

@@ -5,6 +5,7 @@ const cliCursor = require('cli-cursor')
 const endChildProcesses = require('end-child-processes')
 const parseCliArgs = require('./parse-cli-args')
 const textRunner = require('../text-runner')
+const path = require('path')
 const printCodeFrame = require('../helpers/print-code-frame')
 const UnprintedUserError = require('../errors/unprinted-user-error.js')
 const UserError = require('../errors/user-error.js')
@@ -20,7 +21,8 @@ async function main () {
     exitCode = 1
     if (err instanceof UnprintedUserError) {
       console.log(red(err))
-      printCodeFrame(console.log, err.filePath, err.line)
+      const filePath = path.join(process.cwd(), err.filePath)
+      printCodeFrame(console.log, filePath, err.line)
     } else if (!(err instanceof UserError)) {
       console.log(err.stack)
     }

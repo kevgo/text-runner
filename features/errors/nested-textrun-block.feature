@@ -8,11 +8,13 @@ Feature: handle nested "textrun" block
   Scenario: nested "textrun" block
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="validate-javascript">
+      <p textrun="validate-javascript">
+
       <a textrun="foo">
       """
     When trying to run text-run
     Then the test fails with:
-      | ERROR MESSAGE | Block <a textrun="foo"> is nested in another 'textrun' block |
-      | FILENAME      | 1.md                                                         |
-      | EXIT CODE     | 1                                                            |
+      | ERROR MESSAGE | this active block is nested inside another active block of type validate-javascript around line 1 |
+      | FILENAME      | 1.md                                                                                              |
+      | LINE          | 2                                                                                                 |
+      | EXIT CODE     | 1                                                                                                 |

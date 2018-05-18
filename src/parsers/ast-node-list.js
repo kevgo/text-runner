@@ -38,7 +38,7 @@ module.exports = class AstNodeList extends Array<AstNode> {
       var node = this[index]
       result.push(node)
       index += 1
-    } while (node.type !== endType)
+    } while (node.type !== endType && index < this.length)
     return result
   }
 
@@ -62,12 +62,12 @@ module.exports = class AstNodeList extends Array<AstNode> {
   }
 
   pushData (data: {
-    type: string,
-    tag: string,
-    file: string,
-    line: number,
-    content: string,
-    attributes: { [string]: string }
+  type: string,
+  tag: string,
+  file: string,
+  line: number,
+  content: string,
+  attributes: { [string]: string }
   }) {
     this.push(new AstNode(data))
   }

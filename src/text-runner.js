@@ -5,6 +5,7 @@ import type { CliArgTypes } from './cli/cli-arg-types.js'
 const { red } = require('chalk')
 const fs = require('fs')
 const loadConfiguration = require('./configuration/load-configuration.js')
+const path = require('path')
 const printCodeFrame = require('./helpers/print-code-frame')
 const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
@@ -41,8 +42,9 @@ module.exports = async function (cmdLineArgs: CliArgTypes) {
     }
   } catch (err) {
     if (err instanceof UnprintedUserError) {
-      console.log(red(err.message))
-      printCodeFrame(console.log, err.file, err.line)
+      console.log(red(`${err.filePath}:${err.line} -- ${err.message}`))
+      const filePath = path.join(process.cwd(), err.filePath)
+      printCodeFrame(console.log, filePath, err.line)
       throw new PrintedUserError(err)
     } else {
       throw err

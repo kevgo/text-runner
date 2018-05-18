@@ -12,8 +12,11 @@ module.exports = class OpenTagTracker {
 
   add (node: AstNode) {
     if (this.has(node.type)) {
+      const existingNode = this.pop(node.type)
       throw new UnprintedUserError(
-        `nested node: ${node.type}`,
+        `this active block is nested inside another active block ${
+          existingNode.attributes['text-run']
+        }`,
         node.file,
         node.line
       )

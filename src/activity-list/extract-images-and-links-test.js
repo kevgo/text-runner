@@ -1,6 +1,7 @@
-// $flow
+// @flow
 
-const AstNodeList = require('../../../parsers/ast-node-list.js')
+const AstNodeList = require('../parsers/ast-node-list.js')
+const { expect } = require('chai')
 const extractImagesAndLinks = require('./extract-images-and-links.js')
 
 describe('extractImagesAndLinks', function () {

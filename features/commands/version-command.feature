@@ -1,4 +1,3 @@
-@clionly
 Feature: display the version
 
   As a TextRunner user

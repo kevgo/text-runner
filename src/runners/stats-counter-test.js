@@ -32,6 +32,6 @@ describe('StatsCounter', function () {
   it('counts the time', async function () {
     const counter = new StatsCounter()
     await delay(1)
-    expect(counter.duration()).to.match(/\d+ms/)
+    expect(counter.duration()).to.match(/\d+.s/)
   })
 })

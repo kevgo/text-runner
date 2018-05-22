@@ -1,6 +1,7 @@
 // @flow
 
 const AstNode = require('../../ast-node.js')
+const { cyan } = require('chalk')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 module.exports = class OpenTagTracker {
@@ -14,9 +15,9 @@ module.exports = class OpenTagTracker {
     if (this.has(node.type)) {
       const existingNode = this.pop(node.type)
       throw new UnprintedUserError(
-        `this active block is nested inside another active block ${
-          existingNode.attributes['text-run']
-        }`,
+        `this active block is nested inside another active block of type ${cyan(
+          existingNode.attributes['textrun']
+        )} on line ${cyan(existingNode.line)}`,
         node.file,
         node.line
       )

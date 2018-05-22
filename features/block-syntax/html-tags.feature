@@ -21,19 +21,17 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
-  Scenario: P tag
-    Given my source code contains the file "1.md" with content:
-      """
-      <p textrun="HelloWorld">
-
-      hello
-
-      </p>
-      """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
-
-
+  # Scenario: P tag
+  #   Given my source code contains the file "1.md" with content:
+  #     """
+  #     <p textrun="HelloWorld">
+  #
+  #     hello
+  #
+  #     </p>
+  #     """
+  #   When running text-run
+  #   Then it signals:
+  #     | FILENAME | 1.md        |
+  #     | LINE     | 1           |
+  #     | MESSAGE  | Hello world |

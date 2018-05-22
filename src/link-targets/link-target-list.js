@@ -2,8 +2,8 @@
 
 import type { LinkTarget } from './link-target.js'
 
-const AstNode = require('../../../parsers/ast-node.js')
-const AstNodeList = require('../../../parsers/ast-node-list.js')
+const AstNode = require('../parsers/ast-node.js')
+const AstNodeList = require('../parsers/ast-node-list.js')
 const kebabCase = require('just-kebab-case')
 
 module.exports = class LinkTargetList {

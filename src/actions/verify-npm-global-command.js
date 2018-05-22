@@ -1,6 +1,6 @@
 // @flow
 
-import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
+import type { ActionArgs } from '../runners/action-args.js'
 
 const { cyan, red } = require('chalk')
 const path = require('path')

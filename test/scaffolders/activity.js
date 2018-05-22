@@ -1,6 +1,6 @@
 // @flow
 
-import type { Activity } from '../../src/commands/run/4-activities/activity.js'
+import type { Activity } from '../../src/activity-list/activity.js'
 
 const AstNodeList = require('../../src/parsers/ast-node-list.js')
 

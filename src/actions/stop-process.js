@@ -1,6 +1,7 @@
 // @flow
 
-import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
+import type { ActionArgs } from '../runners/action-args.js'
+
 const util = require('util')
 const endChildProcesses = util.promisify(require('end-child-processes'))
 

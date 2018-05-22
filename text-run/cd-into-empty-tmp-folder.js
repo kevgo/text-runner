@@ -1,6 +1,6 @@
 // @flow
 
-import type { ActionArgs } from '../src/commands/run/5-execute/action-args.js'
+import type { ActionArgs } from '../src/runners/action-args.js'
 
 const fs = require('fs')
 const os = require('os')

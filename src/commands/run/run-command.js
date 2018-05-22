@@ -3,16 +3,16 @@
 import type { Configuration } from '../../configuration/configuration.js'
 
 const { bold, green, magenta } = require('chalk')
-const executeParallel = require('./5-execute/execute-parallel.js')
-const executeSequential = require('./5-execute/execute-sequential.js')
-const extractActivities = require('./4-activities/extract-activities.js')
-const extractImagesAndLinks = require('./4-activities/extract-images-and-links.js')
-const findLinkTargets = require('./3-link-targets/find-link-targets.js')
+const executeParallel = require('../../runners/execute-parallel.js')
+const executeSequential = require('../../runners/execute-sequential.js')
+const extractActivities = require('../../activity-list/extract-activities.js')
+const extractImagesAndLinks = require('../../activity-list/extract-images-and-links.js')
+const findLinkTargets = require('../../link-targets/find-link-targets.js')
 const rimraf = require('rimraf')
 const createWorkingDir = require('./0-working-dir/create-working-dir.js')
-const readAndParseFile = require('./2-read-and-parse/read-and-parse-file.js')
-const getFileNames = require('./1-find-files/get-filenames.js')
-const StatsCounter = require('./stats-counter.js')
+const readAndParseFile = require('../../parsers/read-and-parse-file.js')
+const getFileNames = require('../../finding-files/get-filenames.js')
+const StatsCounter = require('../../runners/stats-counter.js')
 
 async function runCommand (config: Configuration) {
   const statsCounter = new StatsCounter()
@@ -21,7 +21,7 @@ async function runCommand (config: Configuration) {
   const workingDir = createWorkingDir(config.useSystemTempDirectory)
 
   // step 1: find files
-  var filenames = getFileNames(config)
+  const filenames = getFileNames(config)
   if (filenames.length === 0) {
     console.log(magenta('no Markdown files found'))
     return

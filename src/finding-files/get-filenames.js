@@ -1,17 +1,17 @@
 // @flow
 
-import type { Configuration } from '../../../configuration/configuration.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 const allMarkdownFiles = require('./all-markdown-files.js')
 const debug = require('debug')('text-runner:run-command')
-const filesMatchingGlob = require('../../../helpers/files-matching-glob.js')
-const hasDirectory = require('../../../helpers/has-directory.js')
+const filesMatchingGlob = require('../helpers/files-matching-glob.js')
+const hasDirectory = require('../helpers/has-directory.js')
 const isGlob = require('is-glob')
 const isMarkdownFile = require('./is-markdown-file.js')
 const markdownFilesInDir = require('./markdown-files-in-dir.js')
 const { red } = require('chalk')
 const removeExcludedFiles = require('./remove-excluded-files.js')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 // Returns the name of all files/directories that match the given glob
 module.exports = function (config: Configuration): string[] {

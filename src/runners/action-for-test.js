@@ -2,7 +2,7 @@
 
 const actionFor = require('./action-for.js')
 const { expect } = require('chai')
-const scaffoldActivity = require('../../../../test/scaffolders/activity.js')
+const scaffoldActivity = require('../../test/scaffolders/activity.js')
 
 describe('actionFor', function () {
   context('built-in block name given', function () {

@@ -1,6 +1,6 @@
 // @flow
 
-import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
+import type { ActionArgs } from '../runners/action-args.js'
 
 // Runs the JavaScript code given in the code block
 module.exports = function (args: ActionArgs) {

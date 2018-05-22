@@ -1,11 +1,11 @@
 // @flow
 
-import type { ActivityList } from '../4-activities/activity-list.js'
+import type { ActivityList } from './activity-list.js'
 
-const AstNode = require('../../../parsers/ast-node.js')
-const AstNodeList = require('../../../parsers/ast-node-list.js')
+const AstNode = require('../parsers/ast-node.js')
+const AstNodeList = require('../parsers/ast-node-list.js')
 const kebabCase = require('just-kebab-case')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 // Returns all activities contained in the given collection of AstNodeLists
 module.exports = function (ASTs: AstNodeList[], prefix: string): ActivityList {

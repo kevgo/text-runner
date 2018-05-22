@@ -1,10 +1,10 @@
 // @flow
 
-import type { Activity } from '../commands/run/4-activities/activity.js'
+import type { Activity } from '../activity-list/activity.js'
 import type { WriteStream } from 'observable-process'
 
 const humanize = require('humanize-string')
-const StatsCounter = require('../commands/run/stats-counter.js')
+const StatsCounter = require('../runners/stats-counter.js')
 
 type Console = {
   log(text: string): void

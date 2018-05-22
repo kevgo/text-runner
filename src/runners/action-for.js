@@ -1,15 +1,15 @@
 // @flow
 
-import type { Activity } from '../4-activities/activity.js'
-import type { Action } from '../5-execute/action.js'
+import type { Activity } from '../activity-list/activity.js'
+import type { Action } from '../runners/action.js'
 
-const builtinActionFilePaths = require('../../../helpers/builtin-action-filepaths.js')
-const customActionFilePaths = require('../../../helpers/custom-action-filepaths.js')
-const getActionName = require('../../../helpers/action-name.js')
+const builtinActionFilePaths = require('../helpers/builtin-action-filepaths.js')
+const customActionFilePaths = require('../helpers/custom-action-filepaths.js')
+const getActionName = require('../helpers/action-name.js')
 const interpret = require('interpret')
 const { red } = require('chalk')
 const rechoir = require('rechoir')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 type FunctionRepo = { [string]: Action }
 

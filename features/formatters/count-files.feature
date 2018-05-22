@@ -28,7 +28,7 @@ Feature: Counting files
     When running text-run
     Then it prints:
       """
-      2 blocks in 2 files
+      2 activities in 2 files
       """
 
   Scenario: a test suite where some files don't contain active blocks
@@ -47,5 +47,5 @@ Feature: Counting files
     When running text-run
     Then it prints:
       """
-      1 blocks in 2 files
+      1 activities in 2 files
       """

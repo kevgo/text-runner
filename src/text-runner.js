@@ -11,6 +11,7 @@ const PrintedUserError = require('./errors/printed-user-error.js')
 const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 const addCommand = require('./commands/add/add-command')
+const debugCommand = require('./commands/debug/debug-command')
 const helpCommand = require('./commands/help/help-command')
 const runCommand = require('./commands/run/run-command')
 const setupCommand = require('./commands/setup/setup-command')
@@ -24,6 +25,9 @@ module.exports = async function (cmdLineArgs: CliArgTypes) {
     switch (commandName) {
       case 'add':
         await addCommand(cmdLineArgs.files)
+        break
+      case 'debug':
+        await debugCommand(configuration)
         break
       case 'help':
         await helpCommand()

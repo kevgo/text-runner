@@ -1,6 +1,6 @@
 // @flow
 
-const AstNodeList = require('../../../parsers/ast-node-list.js')
+const AstNodeList = require('../parsers/ast-node-list.js')
 const extractActivities = require('./extract-activities.js')
 const { expect } = require('chai')
 

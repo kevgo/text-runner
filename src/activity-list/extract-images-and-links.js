@@ -1,8 +1,8 @@
 // @flow
 
-import type { ActivityList } from '../4-activities/activity-list.js'
+import type { ActivityList } from './activity-list.js'
 
-const AstNodeList = require('../../../parsers/ast-node-list.js')
+const AstNodeList = require('../parsers/ast-node-list.js')
 
 module.exports = function (ASTs: AstNodeList[]): ActivityList {
   const result: ActivityList = []

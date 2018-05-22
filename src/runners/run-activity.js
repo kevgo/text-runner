@@ -1,14 +1,14 @@
 // @flow
 
-import type { Activity } from '../4-activities/activity.js'
-import type { Action } from '../5-execute/action.js'
-import type { ActionArgs } from '../5-execute/action-args.js'
-import type { Configuration } from '../../../configuration/configuration.js'
+import type { Activity } from '../activity-list/activity.js'
+import type { Action } from './action.js'
+import type { ActionArgs } from './action-args.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 const actionFor = require('./action-for.js')
-const LinkTargetList = require('../3-link-targets/link-target-list.js')
-const StatsCounter = require('../stats-counter.js')
-const PrintedUserError = require('../../../errors/printed-user-error.js')
+const LinkTargetList = require('../link-targets/link-target-list.js')
+const StatsCounter = require('./stats-counter.js')
+const PrintedUserError = require('../errors/printed-user-error.js')
 const util = require('util')
 
 module.exports = async function runActivity (

@@ -1,12 +1,12 @@
 // @flow
 
-import type { ActionArgs } from '../commands/run/5-execute/action-args.js'
+import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const { cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
-const LinkTargetList = require('../commands/run/3-link-targets/link-target-list.js')
+const LinkTargetList = require('../link-targets/link-target-list.js')
 const path = require('path')
 const request = require('request-promise-native')
 const url = require('url')

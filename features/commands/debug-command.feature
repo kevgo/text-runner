@@ -18,7 +18,5 @@ Feature: display the version
     When running "debug"
     Then it prints:
       """
-      Active Blocks:
-      1.md:1 - anchor-open/validate-javascript
-      1.md:5 - anchor-close/validate-javascript
+      AST NODES
       """

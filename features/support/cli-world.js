@@ -115,9 +115,11 @@ const CliWorld = function () {
   }
 
   this.verifyPrints = expectedText => {
-    const output = this.process.fullOutput()
-    if (!new RegExp(expectedText).test(output)) {
-      throw new Error(`expected to find regex '${expectedText}' in '${output}'`)
+    const output = this.process.fullOutput().trim()
+    if (!new RegExp(expectedText.trim()).test(output)) {
+      throw new Error(
+        `expected to find regex '${expectedText.trim()}' in '${output}'`
+      )
     }
   }
 

@@ -29,9 +29,9 @@ module.exports = async function runActivity (
   try {
     const action = actionFor(activity)
     if (action.length === 1) {
-      runSyncOrPromiseFunc(action, args)
+      await runSyncOrPromiseFunc(action, args)
     } else {
-      runCallbackFunc(action, args)
+      await runCallbackFunc(action, args)
     }
     if (!formatter.skipped && !formatter.warned) formatter.success()
   } catch (err) {

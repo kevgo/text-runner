@@ -15,12 +15,12 @@ Feature: unknown activity types
       """
     When trying to run text-run
     Then the test fails with:
-      | ERROR MESSAGE | unknown activity type: unknown-action\nAvailable activity types: |
-      | FILENAME      | 1.md                                                             |
-      | EXIT CODE     | 1                                                                |
+      | ERROR MESSAGE | unknown activity type: unknown-action |
+      | FILENAME      | 1.md                                  |
+      | EXIT CODE     | 1                                     |
     And it prints the error message:
       """
-      Available activity types:
+      Available built-in activity types:
       * cd
       * check-image
       * check-link
@@ -40,6 +40,8 @@ Feature: unknown activity types
       * verify-source-file-content
       * verify-workspace-contains-directory
       * verify-workspace-file-content
+
+      No custom actions defined.
 
       To create a new "unknown-action" activity type,
       run "text-run add unknown-action"

@@ -46,6 +46,7 @@ module.exports = async function (cmdLineArgs: CliArgTypes) {
     }
   } catch (err) {
     if (err instanceof UnprintedUserError) {
+      process.chdir(configuration.sourceDir)
       console.log(red(`${err.filePath}:${err.line} -- ${err.message}`))
       const filePath = path.join(process.cwd(), err.filePath)
       printCodeFrame(console.log, filePath, err.line)

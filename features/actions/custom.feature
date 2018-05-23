@@ -13,7 +13,7 @@ Feature: custom runners
     Then it signals:
       | FILENAME | custom-action.md |
       | LINE     | 3                |
-      | MESSAGE  | hello world      |
+      | MESSAGE  | Hello world      |
 
     Examples:
       | TYPE     |

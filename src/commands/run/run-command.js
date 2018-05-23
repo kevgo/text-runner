@@ -42,6 +42,7 @@ async function runCommand (config: Configuration) {
   }
 
   // step 5: execute the ActivityList
+  process.chdir(workingDir)
   const parallelResults = await executeParallel(
     links,
     linkTargets,
@@ -54,6 +55,7 @@ async function runCommand (config: Configuration) {
   ])
 
   // step 6: cleanup
+  process.chdir(config.sourceDir)
   rimraf.sync(workingDir)
 
   // step 7: write stats

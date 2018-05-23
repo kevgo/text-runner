@@ -30,11 +30,10 @@ Feature: creating directories
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                               |
-      | LINE          | 1                                        |
-      | MESSAGE       | create directory                         |
-      | ERROR MESSAGE | no 'code' tag found in this active block |
-      | EXIT CODE     | 1                                        |
+      | FILENAME      | creator.md                              |
+      | LINE          | 1                                       |
+      | ERROR MESSAGE | Found no nodes of type 'code/code_open' |
+      | EXIT CODE     | 1                                       |
 
 
   Scenario: empty name given
@@ -48,7 +47,6 @@ Feature: creating directories
     Then the test fails with:
       | FILENAME      | creator.md                 |
       | LINE          | 1                          |
-      | MESSAGE       | create directory           |
       | ERROR MESSAGE | empty directory name given |
       | EXIT CODE     | 1                          |
 
@@ -62,8 +60,7 @@ Feature: creating directories
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                         |
-      | LINE          | 1                                                  |
-      | MESSAGE       | create directory                                   |
-      | ERROR MESSAGE | found more than one 'code' tag in the active block |
-      | EXIT CODE     | 1                                                  |
+      | FILENAME      | creator.md                             |
+      | LINE          | 1                                      |
+      | ERROR MESSAGE | Found 2 nodes of type 'code/code_open' |
+      | EXIT CODE     | 1                                      |

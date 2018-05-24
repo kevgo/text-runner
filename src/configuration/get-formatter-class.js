@@ -14,7 +14,9 @@ module.exports = function getFormatterClass (
   } else if (name === 'detailed') {
     return DetailedFormatter
   } else if (name) {
-    throw new UnprintedUserError('Unknown formatter: ' + name)
+    throw new UnprintedUserError(`Unknown formatter: ${name}
+
+Available formatters are: detailed, dot`)
   } else {
     return def
   }

@@ -31,6 +31,9 @@ function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
         nodes: AST.getNodesFor(node)
       })
     }
+    if (isActiveBlockEndTag(node, activeNode, prefix)) {
+      activeNode = null
+    }
   }
   return result
 }
@@ -49,4 +52,13 @@ function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
 
 function isActiveBlockStartTag (node: AstNode, classPrefix: string): boolean {
   return !!node.attributes[classPrefix] && node.type.endsWith('_open')
+}
+
+function isActiveBlockEndTag (
+  node: AstNode,
+  activeNode: ?AstNode,
+  prefix: string
+): boolean {
+  if (!activeNode) return false
+  return node.attributes[prefix] === activeNode.attributes[prefix]
 }

@@ -21,8 +21,10 @@ async function main () {
     exitCode = 1
     if (err instanceof UnprintedUserError) {
       console.log(red(err))
-      const filePath = path.join(process.cwd(), err.filePath)
-      printCodeFrame(console.log, filePath, err.line)
+      if (err.filePath) {
+        const filePath = path.join(process.cwd(), err.filePath)
+        printCodeFrame(console.log, filePath, err.line)
+      }
     } else if (!(err instanceof UserError)) {
       console.log(err.stack)
     }

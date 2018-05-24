@@ -81,8 +81,8 @@ Each node is an object that has these attributes:
             `text` for normal text,
             `code` for inline code blocks,
             `fence` for multi-line code blocks,
-            `emphasizedtext` for italic text,
-            `strongtext` for bold text,
+            `emphasized` for italic text,
+            `strong` for bold text,
             and `link_open` for links.
 * __content:__ textual content of the AST node
 * __src:__ the content of the `src` attribute if this AST node is a link or image

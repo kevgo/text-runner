@@ -34,7 +34,7 @@ Feature: selecting formatter via the command-line
     When trying to run "text-run --format zonk"
     Then the call fails with the error:
       """
-      Unknown formatter: 'zonk'
+      Unknown formatter: zonk
 
-      Available formatters are detailed, dot
+      Available formatters are: detailed, dot
       """

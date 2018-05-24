@@ -66,8 +66,9 @@ async function runCommand (config: Configuration) {
   )
   if (statsCounter.warnings() > 0) {
     text += green(', ')
-    text += magenta(`${this.warningsCount} warnings`)
+    text += magenta(`${statsCounter.warnings()} warnings`)
   }
+  text += green(`, ${statsCounter.duration()}`)
   console.log(bold(text))
 }
 

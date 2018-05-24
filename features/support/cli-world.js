@@ -160,7 +160,7 @@ const CliWorld = function () {
   }
 
   this.verifyTestsRun = count => {
-    expect(this.process.fullOutput()).to.include(` ${count} blocks`)
+    expect(this.process.fullOutput()).to.include(` ${count} activities`)
   }
 
   this.verifyUnknownCommand = command => {

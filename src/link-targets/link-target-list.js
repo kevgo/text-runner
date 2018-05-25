@@ -15,6 +15,7 @@ module.exports = class LinkTargetList {
 
   addNodeList (nodeList: AstNodeList) {
     for (const node of nodeList) {
+      this.targets[node.file] = this.targets[node.file] || []
       if (node.type === 'anchor_open') {
         this.addAnchor(node)
       } else if (node.type === 'heading_open') {
@@ -36,7 +37,6 @@ module.exports = class LinkTargetList {
   }
 
   addLinkTarget (filepath: string, type: string, name: string) {
-    this.targets[filepath] = this.targets[filepath] || []
     this.targets[filepath].push({ type, name: kebabCase(name).toLowerCase() })
   }
 }

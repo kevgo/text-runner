@@ -20,6 +20,19 @@ describe('LinkTargetList', function () {
       })
     })
 
+    it('registers files even if they do not contain link targets', function () {
+      const nodeList = new AstNodeList()
+      nodeList.scaffold({
+        file: 'file.md',
+        type: 'text'
+      })
+      const targetList = new LinkTargetList()
+      targetList.addNodeList(nodeList)
+      expect(targetList.targets).to.eql({
+        'file.md': []
+      })
+    })
+
     it('adds the headings in the given AstNodeList', function () {
       const nodeList = new AstNodeList()
       nodeList.scaffold({
@@ -28,10 +41,12 @@ describe('LinkTargetList', function () {
         attributes: {}
       })
       nodeList.scaffold({
+        file: 'file.md',
         type: 'text',
         content: 'foo bar'
       })
       nodeList.scaffold({
+        file: 'file.md',
         type: 'heading_close'
       })
       const targetList = new LinkTargetList()

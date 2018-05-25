@@ -102,7 +102,11 @@ async function checkLinkToAnchorInSameFile (
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
-  const targetEntry = linkTargets.targets[filename].filter(
+  const targetsInFile = linkTargets.targets[filename]
+  if (!targetsInFile) {
+    throw new Error(`link to non-existing local anchor ${cyan(target)}`)
+  }
+  const targetEntry = targetsInFile.filter(
     linkTarget => linkTarget.name === target.substr(1)
   )[0]
   if (!targetEntry) {

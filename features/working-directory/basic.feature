@@ -45,12 +45,3 @@ Feature: separate working directory
       """
     When running text-run
     Then it runs in a global temp directory
-
-
-  Scenario: running in a custom directory
-    Given my text-run configuration contains:
-      """
-      useSystemTempDirectory: '.'
-      """
-    When running text-run
-    Then it runs in the current working directory

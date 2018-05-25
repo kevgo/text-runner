@@ -17,7 +17,10 @@ module.exports = function (
     file,
     line,
     content: '',
-    attributes: {}
+    attributes: {
+      href: node.href,
+      title: node.title
+    }
   })
   openTags.add(resultNode)
   result.push(resultNode)

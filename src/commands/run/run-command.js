@@ -2,7 +2,7 @@
 
 import type { Configuration } from '../../configuration/configuration.js'
 
-const { bold, green, magenta } = require('chalk')
+const { bold, green, magenta, red } = require('chalk')
 const executeParallel = require('../../runners/execute-parallel.js')
 const executeSequential = require('../../runners/execute-sequential.js')
 const extractActivities = require('../../activity-list/extract-activities.js')
@@ -14,8 +14,8 @@ const readAndParseFile = require('../../parsers/read-and-parse-file.js')
 const getFileNames = require('../../finding-files/get-filenames.js')
 const StatsCounter = require('../../runners/stats-counter.js')
 
-async function runCommand (config: Configuration) {
-  const statsCounter = new StatsCounter()
+async function runCommand (config: Configuration): Promise<Array<Error>> {
+  const stats = new StatsCounter()
 
   // step 0: create working dir
   const workingDir = createWorkingDir(config.useSystemTempDirectory)
@@ -24,7 +24,7 @@ async function runCommand (config: Configuration) {
   const filenames = getFileNames(config)
   if (filenames.length === 0) {
     console.log(magenta('no Markdown files found'))
-    return
+    return []
   }
 
   // step 2: read and parse files
@@ -38,38 +38,42 @@ async function runCommand (config: Configuration) {
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
     console.log(magenta('no activities found'))
-    return
+    return []
   }
 
   // step 5: execute the ActivityList
   process.chdir(workingDir)
-  const parallelResults = await executeParallel(
-    links,
-    linkTargets,
-    config,
-    statsCounter
-  )
-  await Promise.all([
-    parallelResults,
-    executeSequential(activities, config, linkTargets, statsCounter)
-  ])
+  const jobs = executeParallel(links, linkTargets, config, stats)
+  jobs.push(executeSequential(activities, config, linkTargets, stats))
+  var results = await Promise.all(jobs)
+  results = results.filter(r => r)
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  rimraf.sync(workingDir)
+  if (results.length === 0) rimraf.sync(workingDir)
 
   // step 7: write stats
-  var text = green(
-    `\nSuccess! ${activities.length + links.length} activities in ${
+  var text = '\n'
+  var color
+  if (results.length === 0) {
+    color = green
+    text += green('Success!')
+  } else {
+    color = red
+    text += red(`${results.length} errors, `)
+  }
+  text += color(
+    `${activities.length + links.length} activities in ${
       filenames.length
     } files`
   )
-  if (statsCounter.warnings() > 0) {
-    text += green(', ')
-    text += magenta(`${statsCounter.warnings()} warnings`)
+  if (stats.warnings() > 0) {
+    text += color(', ')
+    text += magenta(`${stats.warnings()} warnings`)
   }
-  text += green(`, ${statsCounter.duration()}`)
+  text += color(`, ${stats.duration()}`)
   console.log(bold(text))
+  return results
 }
 
 module.exports = runCommand

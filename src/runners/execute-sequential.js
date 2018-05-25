@@ -6,14 +6,13 @@ import type { Configuration } from '../configuration/configuration.js'
 const LinkTargetList = require('../link-targets/link-target-list.js')
 const runActivity = require('./run-activity.js')
 const StatsCounter = require('./stats-counter.js')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 module.exports = async function executeSequential (
   activities: ActivityList,
   configuration: Configuration,
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter
-): Promise<?UnprintedUserError> {
+): Promise<?Error> {
   for (const activity of activities) {
     const error = await runActivity(
       activity,
@@ -21,7 +20,7 @@ module.exports = async function executeSequential (
       linkTargets,
       statsCounter
     )
-    if (error) return error
+    return error
   }
   return null
 }

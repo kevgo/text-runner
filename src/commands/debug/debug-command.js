@@ -9,9 +9,9 @@ const extractImagesAndLinks = require('../../activity-list/extract-images-and-li
 const getFileNames = require('../../finding-files/get-filenames.js')
 const readAndParseFile = require('../../parsers/read-and-parse-file.js')
 
-async function debugCommand (config: Configuration) {
+async function debugCommand (config: Configuration): Promise<Array<Error>> {
   const filenames = getFileNames(config)
-  if (filenames.length === 0) return
+  if (filenames.length === 0) return []
 
   console.log('AST NODES:')
   const ASTs = await Promise.all(filenames.map(readAndParseFile))
@@ -40,6 +40,7 @@ async function debugCommand (config: Configuration) {
       console.log(`${activity.file}:${activity.line}  ${activity.type}`)
     }
   }
+  return []
 }
 
 function showAttr (node: AstNode): string {

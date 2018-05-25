@@ -1,7 +1,8 @@
 // @flow
 
-const { cyan, dim, green, magenta, red } = require('chalk')
+const { dim, green, magenta, red } = require('chalk')
 const Formatter = require('./formatter')
+const path = require('path')
 const printCodeFrame = require('../helpers/print-code-frame')
 
 class DetailedFormatter extends Formatter {
@@ -17,7 +18,8 @@ class DetailedFormatter extends Formatter {
         } -- ${errorMessage}`
       )
     )
-    printCodeFrame(console.log, this.activity.file, this.activity.line)
+    const filePath = path.join(this.configuration.sourceDir, this.activity.file)
+    printCodeFrame(console.log, filePath, this.activity.line)
   }
 
   skip (message: string) {

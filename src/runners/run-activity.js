@@ -16,8 +16,12 @@ module.exports = async function runActivity (
   configuration: Configuration,
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter
-) {
-  const formatter = new configuration.FormatterClass(activity, statsCounter)
+): Promise<?Error> {
+  const formatter = new configuration.FormatterClass(
+    activity,
+    configuration,
+    statsCounter
+  )
   const args: ActionArgs = {
     nodes: activity.nodes,
     file: activity.file,
@@ -37,12 +41,13 @@ module.exports = async function runActivity (
   } catch (err) {
     if (isUserError(err)) {
       formatter.error(err.message)
-      throw new PrintedUserError(err)
+      return new PrintedUserError(err)
     } else {
-      // here we have a developer error
-      throw err
+      // here we have a developer error like for example TypeError
+      return err
     }
   }
+  return null
 }
 
 async function runCallbackFunc (func: Action, args: ActionArgs) {

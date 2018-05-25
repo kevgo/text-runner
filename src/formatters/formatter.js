@@ -1,6 +1,7 @@
 // @flow
 
 import type { Activity } from '../activity-list/activity.js'
+import type { Configuration } from '../configuration/configuration.js'
 import type { WriteStream } from 'observable-process'
 
 const humanize = require('humanize-string')
@@ -13,18 +14,23 @@ type Console = {
 // Base class for formatters
 class Formatter {
   activity: Activity
+  configuration: Configuration
   console: Console
   statsCounter: StatsCounter
   stderr: WriteStream
   stdout: WriteStream
   output: string
   title: string
-  warningMessage: string
   skipped: boolean
   warned: boolean
 
-  constructor (activity: Activity, statsCounter: StatsCounter) {
+  constructor (
+    activity: Activity,
+    config: Configuration,
+    statsCounter: StatsCounter
+  ) {
     this.activity = activity
+    this.configuration = config
     this.statsCounter = statsCounter
     this.stdout = { write: this.log }
     this.stderr = { write: this.log }

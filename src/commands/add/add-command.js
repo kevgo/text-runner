@@ -3,7 +3,9 @@
 const fs = require('fs')
 const path = require('path')
 
-module.exports = async function addCommand (blockName: ?string) {
+module.exports = async function addCommand (
+  blockName: ?string
+): Promise<Array<Error>> {
   if (!blockName) throw new Error('no block name given')
   if (!fs.existsSync('text-run')) {
     fs.mkdirSync('text-run')
@@ -13,6 +15,7 @@ module.exports = async function addCommand (blockName: ?string) {
     template(blockName),
     'utf8'
   )
+  return []
 }
 
 function template (filename: string) {

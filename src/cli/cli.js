@@ -16,7 +16,8 @@ async function main () {
   var exitCode = 0
   try {
     const cliArgs = parseCliArgs(process.argv)
-    await textRunner(cliArgs)
+    const errors = await textRunner(cliArgs)
+    exitCode = errors.length
   } catch (err) {
     exitCode = 1
     if (err instanceof UnprintedUserError) {

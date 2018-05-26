@@ -42,7 +42,12 @@ module.exports = async function (args: ActionArgs) {
   } else if (isExternalLink(target)) {
     await checkExternalLink(target, args.formatter, args.configuration)
   } else {
-    await checkLinkToFilesystem(args.file, target, args.formatter)
+    await checkLinkToFilesystem(
+      args.file,
+      target,
+      args.formatter,
+      args.configuration
+    )
   }
 }
 
@@ -77,7 +82,8 @@ async function checkExternalLink (
 async function checkLinkToFilesystem (
   filename: string,
   target: string,
-  f: Formatter
+  f: Formatter,
+  c: Configuration
 ) {
   if (target.startsWith('/')) {
     target = target.substr(1)
@@ -85,7 +91,7 @@ async function checkLinkToFilesystem (
     target = path.join(path.dirname(filename), target)
   }
   try {
-    const stats = await fs.stat(target)
+    const stats = await fs.stat(path.join(c.sourceDir, target))
     if (stats.isDirectory()) {
       f.name(`link to local directory ${cyan(target)}`)
     } else {

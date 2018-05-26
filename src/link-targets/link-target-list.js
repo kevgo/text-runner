@@ -37,6 +37,6 @@ module.exports = class LinkTargetList {
   }
 
   addLinkTarget (filepath: string, type: string, name: string) {
-    this.targets[filepath].push({ type, name: kebabCase(name).toLowerCase() })
+    this.targets[filepath].push({ type, name: kebabCase(name.toLowerCase()) })
   }
 }

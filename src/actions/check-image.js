@@ -23,13 +23,17 @@ module.exports = async function (args: ActionArgs) {
     if (!imagePath.startsWith('/')) {
       imagePath = path.join(path.dirname(node.file), imagePath)
     }
-    await checkLocalImage(imagePath, args.formatter)
+    await checkLocalImage(imagePath, args.formatter, args.configuration)
   }
 }
 
-async function checkLocalImage (imagePath: string, formatter: Formatter) {
+async function checkLocalImage (
+  imagePath: string,
+  formatter: Formatter,
+  c: Configuration
+) {
   try {
-    await fs.stat(path.join(process.cwd(), imagePath))
+    await fs.stat(path.join(c.sourceDir, imagePath))
   } catch (err) {
     throw new Error(`image ${red(imagePath)} does not exist`)
   }

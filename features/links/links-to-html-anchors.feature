@@ -107,9 +107,9 @@ Feature: links to HTML anchors
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                        |
-      | LINE     | 1                           |
-      | MESSAGE  | link to local heading Hello |
+      | FILENAME | 1.md                         |
+      | LINE     | 1                            |
+      | MESSAGE  | link to local heading #hello |
 
 
   Scenario: link to an existing heading in another file
@@ -123,9 +123,9 @@ Feature: links to HTML anchors
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                          |
-      | LINE     | 1                             |
-      | MESSAGE  | link to heading Hello in 2.md |
+      | FILENAME | 1.md                       |
+      | LINE     | 1                          |
+      | MESSAGE  | link to heading 2.md#hello |
 
 
   Scenario: link to heading in PascalCase in another file
@@ -139,9 +139,9 @@ Feature: links to HTML anchors
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                           |
-      | LINE     | 1                              |
-      | MESSAGE  | link to heading GitHub in 2.md |
+      | FILENAME | 1.md                        |
+      | LINE     | 1                           |
+      | MESSAGE  | link to heading 2.md#github |
 
 
   Scenario: link to an existing anchor in a file with spaces

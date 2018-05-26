@@ -109,7 +109,7 @@ async function checkLinkToAnchorInSameFile (
     throw new Error(`link to non-existing local anchor ${cyan(target)}`)
   }
   if (targetEntry.type === 'heading') {
-    f.name(`link to local heading ${cyan(targetEntry.text)}`)
+    f.name(`link to local heading ${cyan(target)}`)
   } else {
     f.name(`link to #${cyan(targetEntry.name)}`)
   }
@@ -142,9 +142,7 @@ async function checkLinkToAnchorInOtherFile (
   }
 
   if (targetEntry.type === 'heading') {
-    f.name(
-      `link to heading ${cyan(targetEntry.text)} in ${cyan(targetFilename)}`
-    )
+    f.name(`link to heading ${cyan(target)}`)
   } else {
     f.name(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }

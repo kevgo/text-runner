@@ -55,9 +55,9 @@ Feature: checking embedded Markdown images
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                                                   |
-      | LINE     | 1                                                                                      |
-      | MESSAGE  | image http:/www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
+      | FILENAME | 1.md                                                                                    |
+      | LINE     | 1                                                                                       |
+      | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
 
   @online

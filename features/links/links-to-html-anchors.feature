@@ -155,6 +155,6 @@ Feature: links to HTML anchors
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                    |
-      | LINE     | 1                                       |
-      | MESSAGE  | link to heading Hello in foo/bar baz.md |
+      | FILENAME | 1.md                                   |
+      | LINE     | 1                                      |
+      | MESSAGE  | link to heading foo/bar%20baz.md#hello |

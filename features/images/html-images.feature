@@ -42,9 +42,9 @@ Feature: checking embedded HTML images
     And my workspace contains an image "documentation/watermelon.gif"
     When running text-run
     Then it signals:
-      | FILENAME | documentation/1.md                 |
-      | LINE     | 1                                  |
-      | MESSAGE  | image documentation/watermelon.gif |
+      | FILENAME | documentation/1.md   |
+      | LINE     | 1                    |
+      | MESSAGE  | image watermelon.gif |
 
 
   Scenario: non-existing local HTML image
@@ -68,9 +68,9 @@ Feature: checking embedded HTML images
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                                                   |
-      | LINE     | 1                                                                                      |
-      | MESSAGE  | image http:/www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
+      | FILENAME | 1.md                                                                                    |
+      | LINE     | 1                                                                                       |
+      | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
 
   @online

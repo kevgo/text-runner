@@ -43,9 +43,7 @@ class DetailedFormatter extends Formatter {
     console.log(dim(this.output))
     console.log(
       magenta(
-        `${this.activity.file}:${this.activity.line} ${
-          this.title
-        } -- ${warningMessage}`
+        `${this.activity.file}:${this.activity.line} -- ${warningMessage}`
       )
     )
   }

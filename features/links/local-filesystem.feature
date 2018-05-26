@@ -35,9 +35,9 @@ Feature: verifying links to the local filesystem
       """
     When running text-run
     Then it signals:
-      | FILENAME | partners/foo/bar.md                         |
-      | LINE     | 1                                           |
-      | MESSAGE  | link to heading Carsten in partners/foo/people/readme.md |
+      | FILENAME | partners/foo/bar.md                                   |
+      | LINE     | 1                                                     |
+      | MESSAGE  | link to heading partners/foo/people/readme.md#carsten |
 
 
   Scenario: absolute link to existing local file

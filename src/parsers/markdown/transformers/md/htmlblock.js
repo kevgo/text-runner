@@ -3,8 +3,9 @@
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
-const parseHtmlAttributes = require('../../../../helpers/parse-html-attributes.js')
+const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
+const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/
 
 module.exports = function (
   node: Object,
@@ -12,32 +13,44 @@ module.exports = function (
   file: string,
   line: number
 ): AstNodeList {
-  const match = node.content.match(preRegex)
   const result = new AstNodeList()
-  if (!match) return result
-  result.pushData({
-    type: 'fence_open',
-    tag: 'pre',
-    file: file,
-    line,
-    content: '',
-    attributes: parseHtmlAttributes(match[1])
-  })
-  result.pushData({
-    type: 'text',
-    tag: '',
-    file: file,
-    line,
-    content: match[2],
-    attributes: {}
-  })
-  result.pushData({
-    type: 'fence_close',
-    tag: '/pre',
-    file: file,
-    line,
-    content: '',
-    attributes: {}
-  })
+  const preMatch = node.content.match(preRegex)
+  if (preMatch) {
+    result.pushData({
+      type: 'fence_open',
+      tag: 'pre',
+      file: file,
+      line,
+      content: '',
+      attributes: parseHtmlAttributes(preMatch[1])
+    })
+    result.pushData({
+      type: 'text',
+      tag: '',
+      file: file,
+      line,
+      content: preMatch[2],
+      attributes: {}
+    })
+    result.pushData({
+      type: 'fence_close',
+      tag: '/pre',
+      file: file,
+      line,
+      content: '',
+      attributes: {}
+    })
+  }
+  const tableMatch = node.content.trim().match(tableRegex)
+  if (tableMatch) {
+    result.pushData({
+      type: 'table',
+      tag: 'table',
+      file: file,
+      line,
+      content: node.content.trim(),
+      attributes: parseHtmlAttributes(tableMatch[1])
+    })
+  }
   return result
 }

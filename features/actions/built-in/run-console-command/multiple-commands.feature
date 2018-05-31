@@ -20,6 +20,6 @@ Feature: running multiple console commands
     When running text-run
     Then it signals:
       | FILENAME | running-multiple-commands.md                          |
-      | LINE     | 6                                                     |
+      | LINE     | 1                                                     |
       | MESSAGE  | running console command: echo "hello" && echo "world" |
 

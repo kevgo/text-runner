@@ -21,5 +21,5 @@ Feature: marking console commands with preceding dollar signs
     When running text-run
     Then it signals:
       | FILENAME | running-with-dollar-sign.md                           |
-      | LINE     | 6                                                     |
+      | LINE     | 1                                                     |
       | MESSAGE  | running console command: echo "hello" && echo "world" |

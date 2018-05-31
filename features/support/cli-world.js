@@ -133,7 +133,7 @@ const CliWorld = function () {
 
   this.verifyRanConsoleCommand = command => {
     expect(this.process.fullOutput()).to.include(
-      `running.md:5 -- running console command: ${command}`
+      `running console command: ${command}`
     )
   }
 

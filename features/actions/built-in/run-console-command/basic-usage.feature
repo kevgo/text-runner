@@ -32,8 +32,7 @@ Feature: running console commands
     Then the test fails with:
       | FILENAME      | running.md                                |
       | LINE          | 1                                         |
-      | MESSAGE       | run console command                       |
-      | ERROR MESSAGE | no 'fence' tag found in this active block |
+      | ERROR MESSAGE | Found no nodes of type 'fence/fence_open' |
       | EXIT CODE     | 1                                         |
 
 
@@ -48,7 +47,6 @@ Feature: running console commands
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | running.md                                              |
-      | LINE          | 4                                                       |
-      | MESSAGE       | run console command                                     |
+      | LINE          | 1                                                       |
       | ERROR MESSAGE | the block that defines console commands to run is empty |
       | EXIT CODE     | 1                                                       |

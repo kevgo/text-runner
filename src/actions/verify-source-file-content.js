@@ -9,16 +9,21 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
 module.exports = function (args: ActionArgs) {
-  const fileName = args.nodes.textInNodeOfType('strongtext')
+  const fileName = args.nodes.textInNodeOfType('strong_open')
   var relativeBaseDir = '.'
-  if (args.nodes.hasNodeOfType('link')) {
-    relativeBaseDir = args.nodes.textInNodeOfType('link_open')
+  if (args.nodes.hasNodeOfType('link_open')) {
+    const linkNode = args.nodes.getNodeOfTypes('link_open')
+    relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = args.nodes.textInNodeOfType('fence')
   args.formatter.name(
     `verifying document content matches source code file ${cyan(fileName)}`
   )
-  const filePath = path.join(path.dirname(args.file), relativeBaseDir, fileName)
+  const filePath = path.join(
+    args.configuration.sourceDir,
+    relativeBaseDir,
+    fileName
+  )
   var actualContent
   try {
     actualContent = fs.readFileSync(filePath, 'utf8')

@@ -21,8 +21,8 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 5              |
-      | MESSAGE  | run javascript |
+      | LINE     | 1              |
+      | MESSAGE  | Run javascript |
     And it prints:
       """
       A foo walks into a bar
@@ -44,8 +44,8 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 8              |
-      | MESSAGE  | run javascript |
+      | LINE     | 1              |
+      | MESSAGE  | Run javascript |
     And it prints:
       """
       A foo walks into a bar
@@ -64,8 +64,8 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 5              |
-      | MESSAGE  | run javascript |
+      | LINE     | 1              |
+      | MESSAGE  | Run javascript |
 
 
   Scenario: persisting variables across blocks
@@ -86,12 +86,12 @@ Feature: running inline blocks of Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md           |
-      | LINE     | 5              |
-      | MESSAGE  | run javascript |
+      | LINE     | 1              |
+      | MESSAGE  | Run javascript |
     And it signals:
       | FILENAME | 1.md           |
-      | LINE     | 11             |
-      | MESSAGE  | run javascript |
+      | LINE     | 1              |
+      | MESSAGE  | Run javascript |
     Then it prints:
       """
       A foo walks into a bar
@@ -108,7 +108,7 @@ Feature: running inline blocks of Javascript
     Then it signals:
       | FILENAME      | 1.md                 |
       | LINE          | 1                    |
-      | MESSAGE       | run javascript       |
+      | MESSAGE       | Run javascript       |
       | ERROR MESSAGE | no code to run found |
       | EXIT CODE     | 1                    |
 
@@ -129,7 +129,7 @@ Feature: running inline blocks of Javascript
     When trying to run text-run
     Then it signals:
       | FILENAME      | 1.md                       |
-      | LINE          | 9                          |
-      | MESSAGE       | run javascript             |
+      | LINE          | 1                          |
+      | MESSAGE       | Run javascript             |
       | ERROR MESSAGE | too many code blocks found |
       | EXIT CODE     | 1                          |

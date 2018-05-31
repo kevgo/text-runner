@@ -8,8 +8,10 @@ const trimDollar = require('../helpers/trim-dollar')
 
 module.exports = function (args: ActionArgs) {
   args.formatter.name('NPM module exports the command')
-  const commandName = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
-  const pkg = require(path.join(process.cwd(), 'package.json'))
+  const commandName = trimDollar(
+    args.nodes.textInNodeOfType('fence', 'code').trim()
+  )
+  const pkg = require(path.join(args.configuration.sourceDir, 'package.json'))
   args.formatter.name(`NPM module exports the ${cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
@@ -23,5 +25,5 @@ function hasCommandName (
   commandName: string,
   exportedCommands: { [string]: string }
 ): boolean {
-  return Object.keys(exportedCommands).some(command => command === commandName)
+  return Object.keys(exportedCommands).includes(commandName)
 }

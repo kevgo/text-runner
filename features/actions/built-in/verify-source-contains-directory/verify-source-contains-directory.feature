@@ -8,11 +8,11 @@ Feature: verifying the source code contains a directory
     to verify they exist in the source code
 
 
-  Scenario: linked directory exists
+  Scenario: directory exists
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-contains-directory">
-        See the [stuff](stuff) folder for more details
+        See the `stuff` folder for more details
       </a>
       """
     And my source code contains the directory "stuff"
@@ -23,11 +23,11 @@ Feature: verifying the source code contains a directory
       | MESSAGE  | directory stuff exists in the source code |
 
 
-  Scenario: linked directory does not exists
+  Scenario: directory does not exist
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-contains-directory">
-        [zonk](zonk)
+        `zonk`
       </a>
       """
     When trying to run text-run
@@ -38,11 +38,11 @@ Feature: verifying the source code contains a directory
       | EXIT CODE     | 1                                                |
 
 
-  Scenario: linked element is not a directory
+  Scenario: element is not a directory
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-contains-directory">
-        The [README.md](README.md) is not a directory
+        `README.md`
       </a>
       """
     And my source code contains the file "README.md"

@@ -41,7 +41,7 @@ Given(
       path.join(this.rootDir, '1.md'),
       `
 <a textrun="verify-source-contains-directory">
-  [.](.)
+  \`.\`
 </a>`
     )
   }

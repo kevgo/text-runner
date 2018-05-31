@@ -8,13 +8,13 @@ const path = require('path')
 
 // Verifies that a local directory linked in Markdown exists
 module.exports = function (args: ActionArgs) {
-  const directory = args.nodes.textInNodeOfType('link_open')
+  const directory = args.nodes.textInNodeOfType('code')
   args.formatter.name(
     `directory ${bold(cyan(directory))} exists in the source code`
   )
   var stats
   try {
-    stats = fs.lstatSync(path.join(process.cwd(), directory))
+    stats = fs.lstatSync(path.join(args.configuration.sourceDir, directory))
   } catch (err) {
     throw new Error(
       `directory ${cyan(bold(directory))} does not exist in the source code`

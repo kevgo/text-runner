@@ -30,7 +30,7 @@ Feature: verifying NPM installation instructions
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                    |
-      | LINE     | 7                                       |
+      | LINE     | 3                                       |
       | MESSAGE  | verify NPM installs my_enormous_package |
 
 
@@ -60,7 +60,7 @@ Feature: verifying NPM installation instructions
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                                            |
-      | LINE          | 7                                                               |
+      | LINE          | 3                                                               |
       | ERROR MESSAGE | could not find my_enormous_package in installation instructions |
       | EXIT CODE     | 1                                                               |
 
@@ -75,11 +75,10 @@ Feature: verifying NPM installation instructions
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                |
-      | LINE          | 3                                                   |
-      | MESSAGE       | verify npm install                                  |
-      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
-      | EXIT CODE     | 1                                                   |
+      | FILENAME      | 1.md                                                     |
+      | LINE          | 3                                                        |
+      | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
+      | EXIT CODE     | 1                                                        |
 
 
   Scenario: missing package name
@@ -96,6 +95,6 @@ Feature: verifying NPM installation instructions
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                                            |
-      | LINE          | 7                                                               |
+      | LINE          | 3                                                               |
       | ERROR MESSAGE | could not find my_enormous_package in installation instructions |
       | EXIT CODE     | 1                                                               |

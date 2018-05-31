@@ -9,7 +9,9 @@ const trimDollar = require('../helpers/trim-dollar')
 
 module.exports = function (args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
-  const pkg = jsonfile.readFileSync(path.join(process.cwd(), 'package.json'))
+  const pkg = jsonfile.readFileSync(
+    path.join(args.configuration.sourceDir, 'package.json')
+  )
   args.formatter.name(`verify NPM installs ${cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {

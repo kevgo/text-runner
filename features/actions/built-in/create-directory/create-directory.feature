@@ -15,11 +15,12 @@ Feature: creating directories
       `directory_name`
       </a>
       """
-    When running text-run
+    When running "text-run --keep-tmp"
     Then it signals:
       | FILENAME | creator.md                      |
       | LINE     | 1                               |
       | MESSAGE  | create directory directory_name |
+    And the test workspace now contains a directory "directory_name"
 
 
   Scenario: no name given

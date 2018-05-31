@@ -8,6 +8,7 @@ export type Configuration = {|
   classPrefix: string, // the name of the attribute that denotes active blocks
   exclude: string | string[], // list of names or regexes of files to exclude
   fileGlob: string, // glob of the files to test
+  keepTmp: boolean, // whether to keep the tmp dir if tests successful
   FormatterClass: typeof Formatter, // type of the Formatter class to use
   offline: boolean, // whether to skip built-in tests that require a network connection
   sourceDir: string, // the root directory of the source code to test

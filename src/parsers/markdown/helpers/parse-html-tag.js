@@ -1,7 +1,7 @@
 // @flow
 
 const parseHtmlAttributes = require('./parse-html-attributes.js')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 const attrRE = /<(\/?\w+)\s*(.*)>/
 

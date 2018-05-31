@@ -32,7 +32,7 @@ Feature: verifying global commands provided by NPM modules
     When running text-run
     Then it signals:
       | FILENAME | 1.md                               |
-      | LINE     | 7                                  |
+      | LINE     | 3                                  |
       | MESSAGE  | NPM module exports the foo command |
 
 
@@ -62,7 +62,7 @@ Feature: verifying global commands provided by NPM modules
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                        |
-      | LINE          | 7                                           |
+      | LINE          | 3                                           |
       | ERROR MESSAGE | package.json does not export a zonk command |
       | EXIT CODE     | 1                                           |
 
@@ -77,7 +77,7 @@ Feature: verifying global commands provided by NPM modules
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                |
-      | LINE          | 3                                                   |
-      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
-      | EXIT CODE     | 1                                                   |
+      | FILENAME      | 1.md                                                     |
+      | LINE          | 3                                                        |
+      | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
+      | EXIT CODE     | 1                                                        |

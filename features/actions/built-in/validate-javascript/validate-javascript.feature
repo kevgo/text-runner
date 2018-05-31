@@ -20,8 +20,8 @@ Feature: validating Javascript
     When running text-run
     Then it signals:
       | FILENAME | 1.md                |
-      | LINE     | 5                   |
-      | MESSAGE  | validate javascript |
+      | LINE     | 1                   |
+      | MESSAGE  | Validate javascript |
 
 
   Scenario: invalid Javascript
@@ -36,6 +36,6 @@ Feature: validating Javascript
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                                            |
-      | LINE          | 5                                               |
+      | LINE          | 1                                               |
       | ERROR MESSAGE | invalid Javascript: Invalid or unexpected token |
       | EXIT CODE     | 1                                               |

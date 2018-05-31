@@ -51,7 +51,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0) rimraf.sync(workingDir)
+  if (results.length === 0 && !config.keepTmp) rimraf.sync(workingDir)
 
   // step 7: write stats
   var text = '\n'

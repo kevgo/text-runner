@@ -108,10 +108,8 @@ Then(
   }
 )
 
-Then('the test workspace now contains a directory {string}', function (
-  fileName
-) {
-  const stat = fs.statSync(path.join(this.rootDir, 'tmp', fileName))
+Then('the test workspace now contains a directory {string}', function (name) {
+  const stat = fs.statSync(path.join(this.rootDir, 'tmp', name))
   expect(stat.isDirectory()).to.be.true
 })
 
@@ -122,4 +120,10 @@ Then('the test fails with:', function (table) {
 Then('there are no child processes running', async function () {
   const children = await psTree(process.pid)
   expect(children).to.have.length(1) // 1 is okay, it's the `ps` process used to determine the child processes
+})
+
+Then('there is no {string} folder', function (name) {
+  if (fs.existsSync(path.join(this.rootDir, name))) {
+    throw new Error(`Expected folder ${name} to not be there, but it is`)
+  }
 })

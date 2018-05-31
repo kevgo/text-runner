@@ -9,15 +9,16 @@ const debug = require('debug')('textrun:configuration')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
-  offline: false,
-  fileGlob: '**/*.md',
-  exclude: [],
-  FormatterClass: DetailedFormatter,
-  useSystemTempDirectory: false,
-  sourceDir: process.cwd(),
-  workspace: '', // will be populated later
+  activityTypes: {},
   classPrefix: 'textrun',
-  activityTypes: {}
+  exclude: [],
+  fileGlob: '**/*.md',
+  keepTmp: false,
+  FormatterClass: DetailedFormatter,
+  offline: false,
+  sourceDir: process.cwd(),
+  useSystemTempDirectory: false,
+  workspace: '' // will be populated later
 }
 
 // Reads documentation and
@@ -42,19 +43,20 @@ module.exports = function loadConfiguration (
   }
 
   return {
-    offline: String(get('offline')) === 'true',
-    fileGlob: get('files') || defaultValues.fileGlob,
-    useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
-    classPrefix: get('classPrefix'),
-    exclude: get('exclude'),
-    workspace: '', // going to be populated later
-    sourceDir: get('sourceDir'),
     activityTypes: fileData['activityTypes']
       ? JSON.parse(fileData['activityTypes'])
       : defaultValues['activityTypes'],
+    classPrefix: get('classPrefix'),
+    exclude: get('exclude'),
+    fileGlob: get('files') || defaultValues.fileGlob,
+    keepTmp: String(get('keep-tmp')) === 'true',
     FormatterClass: getFormatterClass(
       get('format'),
       defaultValues.FormatterClass
-    )
+    ),
+    offline: String(get('offline')) === 'true',
+    sourceDir: get('sourceDir'),
+    useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
+    workspace: '' // going to be populated later
   }
 }

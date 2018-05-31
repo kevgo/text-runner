@@ -90,7 +90,7 @@ Feature: running inline blocks of Javascript
       | MESSAGE  | Run javascript |
     And it signals:
       | FILENAME | 1.md           |
-      | LINE     | 1              |
+      | LINE     | 7              |
       | MESSAGE  | Run javascript |
     Then it prints:
       """
@@ -108,7 +108,6 @@ Feature: running inline blocks of Javascript
     Then it signals:
       | FILENAME      | 1.md                 |
       | LINE          | 1                    |
-      | MESSAGE       | Run javascript       |
       | ERROR MESSAGE | no code to run found |
       | EXIT CODE     | 1                    |
 
@@ -130,6 +129,5 @@ Feature: running inline blocks of Javascript
     Then it signals:
       | FILENAME      | 1.md                       |
       | LINE          | 1                          |
-      | MESSAGE       | Run javascript             |
       | ERROR MESSAGE | too many code blocks found |
       | EXIT CODE     | 1                          |

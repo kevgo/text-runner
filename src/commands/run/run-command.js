@@ -58,7 +58,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   var color
   if (results.length === 0) {
     color = green
-    text += green('Success!')
+    text += green('Success! ')
   } else {
     color = red
     text += red(`${results.length} errors, `)

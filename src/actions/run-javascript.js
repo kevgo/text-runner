@@ -29,7 +29,6 @@ module.exports = function (args: ActionArgs, done: DoneFunction) {
     // sync code
     code = appendAsyncCallback(code)
   }
-  args.formatter.log(code)
   /* eslint-disable no-eval */
   eval(code)
 }

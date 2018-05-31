@@ -20,7 +20,7 @@ module.exports = async function executeSequential (
       linkTargets,
       statsCounter
     )
-    return error
+    if (error) return error
   }
   return null
 }

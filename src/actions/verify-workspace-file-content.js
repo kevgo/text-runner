@@ -8,7 +8,7 @@ const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
 
 module.exports = function (args: ActionArgs) {
-  const filePath = args.nodes.textInNodeOfType('strong', 'emphasized')
+  const filePath = args.nodes.textInNodeOfType('strong', 'em')
   const expectedContent = args.nodes.textInNodeOfType('fence', 'code')
   args.formatter.name(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(args.configuration.workspace, filePath)

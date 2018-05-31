@@ -44,7 +44,7 @@ Feature: verifying file content
     When running text-run
     Then it signals:
       | FILENAME | 01.md                    |
-      | LINE     | 7                        |
+      | LINE     | 1                        |
       | MESSAGE  | verifying file hello.txt |
 
 
@@ -62,8 +62,7 @@ Feature: verifying file content
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 01.md                                                                                                      |
-      | LINE          | 7                                                                                                          |
-      | MESSAGE       | verifying file hello.txt                                                                                   |
+      | LINE          | 1                                                                                                          |
       | ERROR MESSAGE | mismatching content in hello.txt:\nError: mismatching records:\n\nmismatching expected contentHello world! |
       | EXIT CODE     | 1                                                                                                          |
 
@@ -80,7 +79,6 @@ Feature: verifying file content
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 01.md                   |
-      | LINE          | 4                       |
-      | MESSAGE       | verifying file zonk.txt |
+      | LINE          | 1                       |
       | ERROR MESSAGE | file zonk.txt not found |
       | EXIT CODE     | 1                       |

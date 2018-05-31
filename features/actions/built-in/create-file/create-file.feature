@@ -16,7 +16,7 @@ Feature: creating files with content
       creating a file with name _one.txt_ and content `Hello world!`
       </a>
       """
-    When running text-run
+    When running "text-run --keep-tmp"
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |
@@ -38,10 +38,10 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running text-run
+    When running "text-run --keep-tmp"
     Then it signals:
       | FILENAME | creator.md          |
-      | LINE     | 7                   |
+      | LINE     | 1                   |
       | MESSAGE  | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
       """
@@ -60,11 +60,10 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                                         |
-      | LINE          | 5                                                                  |
-      | MESSAGE       | create file                                                        |
-      | ERROR MESSAGE | no 'emphasizedtext' or 'strongtext' tag found in this active block |
-      | EXIT CODE     | 1                                                                  |
+      | FILENAME      | creator.md                                             |
+      | LINE          | 1                                                      |
+      | ERROR MESSAGE | Found no nodes of type 'em/strong/em_open/strong_open' |
+      | EXIT CODE     | 1                                                      |
 
 
   Scenario: no content block given
@@ -76,11 +75,10 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                          |
-      | LINE          | 1                                                   |
-      | MESSAGE       | create file                                         |
-      | ERROR MESSAGE | no 'fence' or 'code' tag found in this active block |
-      | EXIT CODE     | 1                                                   |
+      | FILENAME      | creator.md                                               |
+      | LINE          | 1                                                        |
+      | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
+      | EXIT CODE     | 1                                                        |
 
 
   Scenario: two file paths given
@@ -97,11 +95,10 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                                                   |
-      | LINE          | 8                                                                            |
-      | MESSAGE       | create file                                                                  |
-      | ERROR MESSAGE | found more than one 'emphasizedtext' or 'strongtext' tag in the active block |
-      | EXIT CODE     | 1                                                                            |
+      | FILENAME      | creator.md                                            |
+      | LINE          | 1                                                     |
+      | ERROR MESSAGE | Found 2 nodes of type 'em/strong/em_open/strong_open' |
+      | EXIT CODE     | 1                                                     |
 
 
   Scenario: two content blocks given
@@ -122,8 +119,7 @@ Feature: creating files with content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | creator.md                                                    |
-      | LINE          | 12                                                            |
-      | MESSAGE       | create file                                                   |
-      | ERROR MESSAGE | found more than one 'fence' or 'code' tag in the active block |
-      | EXIT CODE     | 1                                                             |
+      | FILENAME      | creator.md                                             |
+      | LINE          | 1                                                      |
+      | ERROR MESSAGE | Found 2 nodes of type 'fence/code/fence_open/code_open |
+      | EXIT CODE     | 1                                                      |

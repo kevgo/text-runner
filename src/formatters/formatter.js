@@ -32,8 +32,8 @@ class Formatter {
     this.activity = activity
     this.configuration = config
     this.statsCounter = statsCounter
-    this.stdout = { write: this.log }
-    this.stderr = { write: this.log }
+    this.stdout = { write: this.log.bind(this) }
+    this.stderr = { write: this.log.bind(this) }
     this.output = ''
     this.title = humanize(activity.type)
     this.skipped = false

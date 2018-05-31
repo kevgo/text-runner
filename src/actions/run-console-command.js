@@ -36,11 +36,8 @@ module.exports = async function (args: ActionArgs) {
 
   args.formatter.name(`running console command: ${cyan(commandsToRun)}`)
   var input = []
-  if (args.nodes.hasNodeOfType('htmlblock')) {
-    input = await getInput(
-      args.nodes.textInNodeOfType('htmlblock'),
-      args.formatter
-    )
+  if (args.nodes.hasNodeOfType('table')) {
+    input = await getInput(args.nodes.textInNodeOfType('table'), args.formatter)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   global.consoleCommandOutput = ''

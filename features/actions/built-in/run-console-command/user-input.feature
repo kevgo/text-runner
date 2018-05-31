@@ -34,7 +34,7 @@ Feature: running console commands
     When running text-run
     Then it signals:
       | FILENAME | enter-input.md                                              |
-      | LINE     | 12                                                          |
+      | LINE     | 1                                                           |
       | MESSAGE  | running console command: read foo && echo You entered: $foo |
     And it prints:
       """
@@ -73,7 +73,7 @@ Feature: running console commands
     When running text-run
     Then it signals:
       | FILENAME | enter-input.md                                                                                                                                                                     |
-      | LINE     | 24                                                                                                                                                                                 |
+      | LINE     | 1                                                                                                                                                                                  |
       | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, desciption: $description" |
     And it prints:
       """

@@ -13,7 +13,7 @@ const loadTransformers = require('./transformers/load.js')
 const openingTagFor = require('./helpers/opening-tag-for.js')
 const OpenTagTracker = require('./helpers/open-tag-tracker.js')
 const UnprintedUserError = require('../../errors/unprinted-user-error.js')
-const parseHtmlTag = require('../../helpers/parse-html-tag.js')
+const parseHtmlTag = require('./helpers/parse-html-tag.js')
 
 var mdTransformers: TransformerList = loadTransformers('md')
 
@@ -50,8 +50,7 @@ module.exports = class AstStandardizer {
   }
 
   processHtmlNode (node: Object): boolean {
-    if (node.type !== 'htmltag') return false
-    if (node.type === 'softbreak') this.line += 1
+    if (node.type !== 'htmltag' && node.type !== 'htmlblock') return false
     const [tag, attributes] = parseHtmlTag(
       node.content,
       this.filepath,

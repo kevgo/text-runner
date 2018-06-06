@@ -19,7 +19,7 @@ module.exports = async function runActivity (
 ): Promise<?Error> {
   const formatter = new configuration.FormatterClass(
     activity,
-    configuration,
+    configuration.sourceDir,
     statsCounter
   )
   const args: ActionArgs = {

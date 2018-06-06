@@ -1,90 +1,50 @@
+// @flow
+
+import type { ExecuteArgs } from './execute-args.js'
+import type { Activity } from '../../src/activity-list/activity.js'
+
+const AstNodeList = require('../../src/parsers/ast-node-list.js')
 const { setWorldConstructor } = require('cucumber')
-const textRunner = require('../../dist/text-runner.js')
+const textRunner = require('../../src/text-runner.js')
 const { expect } = require('chai')
 const { cyan } = require('chalk')
 const flatten = require('array-flatten')
+const Formatter = require('../../src/formatters/formatter.js')
 const fs = require('fs-extra')
 const glob = require('glob')
 const jsdiffConsole = require('jsdiff-console')
 const path = require('path')
+const StatsCounter = require('../../src/runners/stats-counter.js')
 const stripAnsi = require('strip-ansi')
 const waitUntil = require('wait-until-promise').default
 
-class TestFormatter {
-  constructor ({ verbose }) {
+class TestFormatter extends Formatter {
+  verbose: boolean
+  successMessage: string
+  errorMessage: string
+  warningMessage: string
+
+  constructor (
+    activity: Activity,
+    statsCounter: StatsCounter,
+    verbose: boolean
+  ) {
+    super(activity, '', statsCounter)
     this.verbose = verbose
-    this.activities = []
-    this.errorMessages = []
-    this.filePaths = []
-    this.lines = []
-    this.text = ''
-    this.console = {
-      log: text => {
-        this.text += `${text}\n`
-      }
-    }
-    this.stdout = {
-      write: text => {
-        this.text += text
-      }
-    }
-    this.stderr = {
-      write: text => {
-        this.text += text
-      }
-    }
-    this.warnings = []
+    this.successMessage = ''
+    this.errorMessage = ''
+    this.warningMessage = ''
   }
 
-  startActivity (activityTypeName) {
-    this.activities.push(stripAnsi(activityTypeName))
-    this.lines.push(this.line.toString())
-    if (this.verbose) console.log(activityTypeName)
+  error (message: string) {
+    super.error(message)
+    this.errorMessage = message
+    if (this.verbose) console.log(message)
   }
 
-  startFile (filePath) {
-    if (!this.filePaths.includes(filePath)) {
-      this.filePaths.push(filePath)
-    }
-  }
-
-  setTitle (activity) {
-    this.activities[this.activities.length - 1] = stripAnsi(activity)
-  }
-
-  success (activity) {
-    if (activity) {
-      this.activities[this.activities.length - 1] = stripAnsi(activity)
-      if (this.verbose) console.log(activity)
-    }
-    if (this.verbose) console.log('success')
-  }
-
-  error (error) {
-    this.errorMessages.push(stripAnsi(error.message || error.toString()))
-    this.lines.push(this.line)
-    if (this.verbose) console.log(error)
-  }
-
-  output (text) {
-    if (this.verbose) console.log(text)
-  }
-
-  setLines (line) {
-    this.line = line
-  }
-
-  skip (activity) {
-    this.activities.push(stripAnsi(activity))
-  }
-
-  suiteSuccess (stepsCount) {
-    this.stepsCount = stepsCount
-  }
-
-  warning (warning) {
-    this.warnings.push(stripAnsi(warning))
-    this.activities.push(stripAnsi(warning))
+  warning (message: string) {
+    super.warning(message)
+    this.warningMessage = message
   }
 }
 
@@ -92,28 +52,23 @@ const ApiWorld = function () {
   // ApiWorld provides step implementations that run and test TextRunner
   // via its Javascript API
 
-  this.execute = async function (args) {
+  this.execute = async function (args: ExecuteArgs) {
     const existingDir = process.cwd()
     process.chdir(this.rootDir)
-    this.formatter = new TestFormatter({ verbose: this.verbose })
-    const formatter = args.format || this.formatter
-    try {
-      await textRunner({
-        command: args.command,
-        file: args.file,
-        offline: args.offline,
-        exclude: args.exclude,
-        format: formatter
-      })
-    } catch (err) {
-      this.error = err
+    const activity = {
+      type: args.command,
+      file: args.file,
+      line: 0,
+      nodes: new AstNodeList()
     }
-    this.cwdAfterRun = process.cwd()
+    const statsCounter = new StatsCounter()
+    this.formatter = new TestFormatter(activity, statsCounter, this.verbose)
+    const error = await textRunner({ command: args.command })
     process.chdir(existingDir)
     this.output = this.formatter.text
     if (this.error && !args.expectError) {
       // Signal the error to the Cucumber runtime
-      throw this.error
+      throw error
     }
   }
 
@@ -135,8 +90,13 @@ const ApiWorld = function () {
   }
 
   this.verifyPrints = expectedText => {
-    // No way to capture console output here.
-    // This is tested in the CLI world.
+    if (!this.output.includes(expectedText)) {
+      throw new Error(
+        `Expected\n\n${cyan(this.output)}\n\nto contain\n\n${cyan(
+          expectedText
+        )}\n`
+      )
+    }
   }
 
   this.verifyFailure = table => {

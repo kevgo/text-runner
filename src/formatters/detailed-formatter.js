@@ -18,7 +18,7 @@ class DetailedFormatter extends Formatter {
         } -- ${errorMessage}`
       )
     )
-    const filePath = path.join(this.configuration.sourceDir, this.activity.file)
+    const filePath = path.join(this.sourceDir, this.activity.file)
     printCodeFrame(console.log, filePath, this.activity.line)
   }
 

@@ -27,15 +27,6 @@ Feature: excluding files
       | bar/2.md  |
 
 
-  @apionly
-  Scenario: excluding via JS API
-    When running text-run with the arguments {"exclude": "foo"}
-    Then it runs only the tests in:
-      | readme.md |
-      | bar/2.md  |
-
-
-  @clionly
   Scenario: excluding via CLI
     When running "text-run --exclude foo"
     Then it runs only the tests in:

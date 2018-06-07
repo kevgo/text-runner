@@ -7,7 +7,6 @@ Feature: help command
   - run "text-run help" or "text-run -h" to see the help page
 
 
-  @clionly
   Scenario:
     When running the "help" command
     Then I see usage instructions

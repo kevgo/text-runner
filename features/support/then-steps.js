@@ -88,10 +88,6 @@ Then('the call fails with the error:', function (expectedError) {
   this.verifyCallError(expectedError)
 })
 
-Then('the current working directory is now {string}', function (expectedCwd) {
-  expect(path.basename(this.cwdAfterRun)).to.equal(expectedCwd)
-})
-
 Then('the {string} directory is now deleted', function (directoryPath) {
   try {
     fs.statSync(path.join(this.rootDir, directoryPath))

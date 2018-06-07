@@ -18,10 +18,7 @@ install:
 test_script:
   - node_modules\.bin\babel src -d dist -q
   - node_modules\.bin\mocha --reporter dot "src/**/*-test.js"
-  - set EXOSERVICE_TEST_DEPTH=API
-  - node_modules\.bin\cucumber-js --tags "(not @clionly) and (not @todo) and (not @skipWindows)" --format progress
-  - set EXOSERVICE_TEST_DEPTH=CLI
-  - node_modules\.bin\cucumber-js --tags "(not @apionly) and (not @todo) and (not @skipWindows)" --format progress
+  - node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" --format progress
   - bin\text-run --offline
 
 

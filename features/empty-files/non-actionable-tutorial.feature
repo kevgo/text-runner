@@ -7,7 +7,6 @@ Feature: Fail on non-actionable Markdown
   - documentation with no actions whatsoever causes the test to fail
 
 
-  @clionly
   Scenario: documentation with no actions
     Given my source code contains the file "1.md" with content:
       """

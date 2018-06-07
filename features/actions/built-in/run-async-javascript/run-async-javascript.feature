@@ -1,4 +1,3 @@
-@clionly
 Feature: running inline blocks of asynchronous Javascript
 
   As a documentation writer describing a Javascript tool

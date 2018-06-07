@@ -5,7 +5,6 @@ Feature: display the version
   So that I can triangulate the issue.
 
 
-  @clionly
   Scenario: debugging
     Given my source code contains the file "1.md" with content:
       """

@@ -1,4 +1,3 @@
-@clionly
 Feature: Formatter signals
 
   Formatters signal the following methods:

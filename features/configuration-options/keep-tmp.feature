@@ -1,4 +1,3 @@
-@clionly
 Feature: keeping the tmp directory
 
   When debugging custom actions

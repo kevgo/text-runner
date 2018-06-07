@@ -1,4 +1,3 @@
-@clionly
 Feature: configuring the class prefix
 
   As a documentation writer

@@ -1,4 +1,3 @@
-@clionly
 Feature: Counting files
 
   When testing documentation

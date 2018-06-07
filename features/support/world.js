@@ -8,8 +8,8 @@ const ObservableProcess = require('observable-process')
 const path = require('path')
 const uuid = require('uuid/v4')
 
-const CliWorld = function () {
-  // CliWorld provides step implementations that run and test TextRunner
+const World = function () {
+  // World provides step implementations that run and test TextRunner
   // via its command-line interface
 
   this.execute = async function (params) {
@@ -96,7 +96,10 @@ const CliWorld = function () {
     }
     expect(output).to.include(expectedHeader)
     expect(output).to.match(new RegExp(table['ERROR MESSAGE']))
-    expect(this.process.exitCode).to.equal(parseInt(table['EXIT CODE']))
+    expect(this.process.exitCode).to.equal(
+      parseInt(table['EXIT CODE']),
+      'exit code'
+    )
   }
 
   this.verifyOutput = table => {
@@ -168,12 +171,10 @@ const CliWorld = function () {
   }
 }
 
+setWorldConstructor(World)
+
 function standardizePath (path) {
   return path.replace(/\\/g, '/')
-}
-
-if (process.env.EXOSERVICE_TEST_DEPTH === 'CLI') {
-  setWorldConstructor(CliWorld)
 }
 
 // Returns the command that runs the given command with test coverage

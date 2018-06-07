@@ -1,4 +1,3 @@
-@clionly
 Feature: selecting formatter via the config file
 
   As a documentation writer

@@ -7,7 +7,6 @@ Feature: generating a configuration file
   - call "text-run setup" to generate a configuration file
 
 
-  @clionly
   Scenario: running in a directory without configuration file
     When running "text-run setup"
     Then it prints:

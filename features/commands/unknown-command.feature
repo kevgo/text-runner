@@ -7,15 +7,6 @@ Feature: unknown command
   - running an unknown command prints the help screen
 
 
-  @apionly
-  Scenario: running an unknown command via the API
-    When trying to run the "zonk" command
-    Then the test fails with:
-      | ERROR MESSAGE | unknown command: zonk |
-      | EXIT CODE     | 1                                      |
-
-
-  @clionly
   Scenario: running an unknown command via the CLI
     When trying to run "text-run zonk"
     Then the test fails with:

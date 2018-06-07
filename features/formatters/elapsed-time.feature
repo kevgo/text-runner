@@ -1,4 +1,3 @@
-@clionly
 Feature: display total test time
 
   As a documentation writer

@@ -13,17 +13,8 @@ Feature: testing all docs in a subfolder
     And a runnable file "readme.md"
 
 
-  @clionly
-  Scenario: testing all files in a subfolder via the CLI
+  Scenario: testing all files in a subfolder
     When running "text-run commands"
-    Then it runs only the tests in:
-      | commands/foo.md     |
-      | commands/bar/baz.md |
-
-
-  @apionly
-  Scenario: testing all files in a subfolder via the API
-    When running text-run with the arguments {"file": "commands"}
     Then it runs only the tests in:
       | commands/foo.md     |
       | commands/bar/baz.md |

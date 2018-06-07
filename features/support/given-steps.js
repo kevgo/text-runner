@@ -104,17 +104,25 @@ Given('my source code contains the file {string}', function (fileName) {
   fs.writeFileSync(path.join(this.rootDir, fileName), 'content')
 })
 
-Given('my workspace contains the file {string}', function (fileName) {
-  mkdirp.sync(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
-  fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), 'content')
-})
-
 Given('my source code contains the file {string} with content:', function (
   fileName,
   content
 ) {
   mkdirp.sync(path.join(this.rootDir, path.dirname(fileName)))
   fs.writeFileSync(path.join(this.rootDir, fileName), content)
+})
+
+Given('my workspace contains the file {string}', function (fileName) {
+  mkdirp.sync(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
+  fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), 'content')
+})
+
+Given('my workspace contains a file {string} with content {string}', function (
+  fileName,
+  content
+) {
+  mkdirp.sync(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
+  fs.writeFileSync(path.join(this.rootDir, 'tmp', fileName), content)
 })
 
 Given('my workspace contains testable documentation', function () {

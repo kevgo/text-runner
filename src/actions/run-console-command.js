@@ -4,6 +4,7 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 import type { WriteStream } from 'observable-process'
 
+const AstNodeList = require('../parsers/ast-node-list.js')
 const callArgs = require('../helpers/call-args')
 const { cyan } = require('chalk')
 const debug = require('debug')('textrun:actions:run-console-command')
@@ -11,8 +12,6 @@ const Formatter = require('../formatters/formatter.js')
 const ObservableProcess = require('observable-process')
 const path = require('path')
 const trimDollar = require('../helpers/trim-dollar')
-const util = require('util')
-const xml2js = require('xml2js')
 
 type ProcessInput = {
   textToWait: ?string,
@@ -37,7 +36,7 @@ module.exports = async function (args: ActionArgs) {
   args.formatter.name(`running console command: ${cyan(commandsToRun)}`)
   var input = []
   if (args.nodes.hasNodeOfType('table')) {
-    input = await getInput(args.nodes.textInNodeOfType('table'), args.formatter)
+    input = getInput(args.nodes, args.formatter)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   global.consoleCommandOutput = ''
@@ -63,20 +62,23 @@ async function enter (processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-async function getInput (
-  text: string,
+function getInput (
+  nodes: AstNodeList,
   formatter: Formatter
-): Promise<Array<ProcessInput>> {
-  if (!text) return []
-  const xml2jsp = util.promisify(xml2js.parseString)
-  const xml = await xml2jsp(text)
-  var result = []
-  for (let tr of xml.table.tr) {
-    if (tr.td) {
-      if (tr.td.length === 1) {
-        result.push({ textToWait: null, input: tr.td[0] })
+): Array<ProcessInput> {
+  if (!nodes) return []
+  const result = []
+  for (const node of nodes) {
+    if (node.type === 'table_row_open') {
+      const cells = nodes.getNodesFor(node)
+      if (cells.length === 3) {
+        // 3 cells = 1 td (<tr>, <td>, </tr>)
+        result.push({ textToWait: null, input: cells[1].content })
       } else {
-        result.push({ textToWait: tr.td[0], input: tr.td[tr.td.length - 1] })
+        result.push({
+          textToWait: cells[1].content,
+          input: cells[cells.length - 2].content
+        })
       }
     }
   }

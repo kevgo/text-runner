@@ -150,6 +150,8 @@ const types = {
   '/h1': 'heading_close',
   h2: 'heading_open',
   '/h2': 'heading_close',
+  h3: 'heading_open',
+  '/h3': 'heading_close',
   img: 'image',
   code: 'code_open',
   '/code': 'code_close',

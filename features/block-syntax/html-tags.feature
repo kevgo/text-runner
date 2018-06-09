@@ -97,6 +97,18 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: H3 tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <h3 textrun="HelloWorld">hello</h2>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   # Scenario: P tag
   #   Given my source code contains the file "1.md" with content:
   #     """

@@ -21,7 +21,7 @@ function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
   const result: ActivityList = []
   var activeNode: ?AstNode = null
   for (let node of AST) {
-    if (isActiveBlockStartTag(node, prefix)) {
+    if (isActiveBlockTag(node, prefix)) {
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
       result.push({
@@ -50,8 +50,8 @@ function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
   }
 }
 
-function isActiveBlockStartTag (node: AstNode, classPrefix: string): boolean {
-  return !!node.attributes[classPrefix] && node.type.endsWith('_open')
+function isActiveBlockTag (node: AstNode, classPrefix: string): boolean {
+  return !!node.attributes[classPrefix] && !node.type.endsWith('_close')
 }
 
 function isActiveBlockEndTag (

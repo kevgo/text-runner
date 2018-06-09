@@ -145,6 +145,19 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: image tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <img textrun="HelloWorld" src="watermelon.gif">
+      """
+    And my workspace contains an image "watermelon.gif"
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   # Scenario: P tag
   #   Given my source code contains the file "1.md" with content:
   #     """

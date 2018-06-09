@@ -36,28 +36,29 @@ module.exports = class AstStandardizer {
     this.line = 1
   }
 
-  standardize (ast: Object): AstNodeList {
+  async standardize (ast: Object): Promise<AstNodeList> {
     for (let node of ast) {
-      console.log(node)
       if (node.lines) this.line = Math.max(node.lines[0] + 1, this.line)
-      this.processSoftBreak(node) ||
-        this.processHtmlBlock(node) ||
-        this.processHtmlTag(node) ||
-        this.processMdNode(node) ||
-        alertUnknownNodeType(node, this.filepath, this.line)
 
       if (node.children) {
         for (let child of node.children) child.lines = node.lines
         this.standardize(node.children)
+        continue
       }
+
+      if (this.processSoftBreak(node)) continue
+      const processed = await this.processHtmlBlock(node)
+      if (processed) continue
+      if (this.processHtmlTag(node)) continue
+      if (this.processMdNode(node)) continue
+      alertUnknownNodeType(node, this.filepath, this.line)
     }
     return this.result
   }
 
-  processHtmlBlock (node: Object): boolean {
+  async processHtmlBlock (node: Object): Promise<boolean> {
     if (node.type !== 'htmlblock') return false
     const tag = getHtmlBlockTag(node.content, this.filepath, this.line)
-    console.log(htmlBlockTransformers)
     const transformer: Transformer = htmlBlockTransformers[tag]
     if (!transformer) {
       throw new UnprintedUserError(
@@ -66,7 +67,7 @@ module.exports = class AstStandardizer {
         this.line
       )
     }
-    const transformed = transformer(
+    const transformed = await transformer(
       node,
       this.openTags,
       this.filepath,

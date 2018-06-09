@@ -7,12 +7,12 @@ const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 
-module.exports = function transformPre (
+module.exports = async function transformPre (
   node: Object,
   openTags: OpenTagTracker,
   file: string,
   line: number
-): AstNodeList {
+): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(preRegex)
   const resultNode = new AstNode({

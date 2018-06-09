@@ -38,6 +38,16 @@ module.exports = async function transformUl (
       content: tr._ || '',
       attributes: tr.$ || {}
     })
+    for (const th of tr.th || []) {
+      result.pushData({
+        type: 'table_heading',
+        tag: 'th',
+        file,
+        line,
+        content: th._ || th,
+        attributes: th.$ || {}
+      })
+    }
     for (const td of tr.td || []) {
       result.pushData({
         type: 'table_cell',
@@ -46,16 +56,6 @@ module.exports = async function transformUl (
         line,
         content: td._ || td,
         attributes: td.$ || {}
-      })
-    }
-    for (const th of tr.th || []) {
-      result.pushData({
-        type: 'table_heading',
-        tag: 'th',
-        file,
-        line,
-        content: th._ || '',
-        attributes: th.$ || {}
       })
     }
     result.pushData({

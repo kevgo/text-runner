@@ -51,7 +51,7 @@ Feature: running console commands
       $ read service_name
       $ echo Description
       $ read description
-      $ echo "service: $service_name, desciption: $description"
+      $ echo "service: $service_name, description: $description"
       ```
       <table>
         <tr>
@@ -72,10 +72,10 @@ Feature: running console commands
       """
     When running text-run
     Then it signals:
-      | FILENAME | enter-input.md                                                                                                                                                                     |
-      | LINE     | 1                                                                                                                                                                                  |
-      | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, desciption: $description" |
+      | FILENAME | enter-input.md                                                                                                                                                                      |
+      | LINE     | 1                                                                                                                                                                                   |
+      | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, description: $description" |
     And it prints:
       """
-      service: html-server, desciption: serves the HTML UI
+      service: html-server, description: serves the HTML UI
       """

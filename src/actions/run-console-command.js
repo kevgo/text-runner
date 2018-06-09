@@ -68,18 +68,19 @@ function getInput (
 ): Array<ProcessInput> {
   if (!nodes) return []
   const result = []
-  for (const node of nodes) {
-    if (node.type === 'table_row_open') {
-      const cells = nodes.getNodesFor(node)
-      if (cells.length === 3) {
-        // 3 cells = 1 td (<tr>, <td>, </tr>)
-        result.push({ textToWait: null, input: cells[1].content })
-      } else {
-        result.push({
-          textToWait: cells[1].content,
-          input: cells[cells.length - 2].content
-        })
-      }
+  const rows = nodes.getNodesOfTypes('table_row_open')
+  for (const row of rows) {
+    const cellsN = nodes.getNodesFor(row)
+    const cells = cellsN.getNodesOfTypes('table_cell')
+    if (cells.length === 0) continue
+    if (cells.length === 1) {
+      // 3 cells = 1 td (<tr>, <td>, </tr>)
+      result.push({ textToWait: null, input: cells[0].content })
+    } else {
+      result.push({
+        textToWait: cells[0].content,
+        input: cells[cells.length - 1].content
+      })
     }
   }
   return result

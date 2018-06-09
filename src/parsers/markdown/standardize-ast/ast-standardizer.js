@@ -146,6 +146,8 @@ module.exports = class AstStandardizer {
 }
 
 const types = {
+  b: 'bold_open',
+  '/b': 'bold_close',
   br: 'linebreak',
   h1: 'heading_open',
   '/h1': 'heading_close',

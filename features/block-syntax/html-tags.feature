@@ -21,6 +21,18 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: bold tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <b textrun="HelloWorld">hello</b>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   Scenario: blockquote tag
     Given my source code contains the file "1.md" with content:
       """

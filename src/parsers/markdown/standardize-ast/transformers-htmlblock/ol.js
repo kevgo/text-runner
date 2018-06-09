@@ -19,7 +19,6 @@ module.exports = async function transformOl (
   const result = new AstNodeList()
   const match = node.content.match(olRegex)
   const xml = await xml2jsp(node.content)
-  console.log(xml)
   const olNode = new AstNode({
     type: 'ordered_list_open',
     tag: 'ol',
@@ -31,7 +30,6 @@ module.exports = async function transformOl (
   result.pushData(olNode)
   openTags.add(olNode)
   for (const li of xml.ol.li) {
-    console.log(li)
     result.pushData({
       type: 'list_item_open',
       tag: 'li',

@@ -42,7 +42,7 @@ module.exports = class AstStandardizer {
 
       if (node.children) {
         for (let child of node.children) child.lines = node.lines
-        this.standardize(node.children)
+        await this.standardize(node.children)
         continue
       }
 

@@ -133,6 +133,18 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: H6 tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <h6 textrun="HelloWorld">hello</h6>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   # Scenario: P tag
   #   Given my source code contains the file "1.md" with content:
   #     """

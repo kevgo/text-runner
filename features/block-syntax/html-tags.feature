@@ -21,6 +21,20 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: bullet list tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <ul textrun="HelloWorld">
+        <li>one</li>
+      </ul>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   Scenario: H1 tag
     Given my source code contains the file "1.md" with content:
       """

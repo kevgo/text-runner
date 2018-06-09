@@ -6,16 +6,19 @@ import type { TransformerList } from '../standardize-ast/transformer-list.js'
 const AstNode = require('../../ast-node.js')
 const AstNodeList = require('../../ast-node-list.js')
 const FormattingTracker = require('../helpers/formatting-tracker.js')
+const getHtmlBlockTag = require('../helpers/get-html-block-tag.js')
 const isClosingHtmlTagType = require('../helpers/is-closing-html-tag-type.js')
 const isOpeningHtmlTagType = require('../helpers/is-opening-html-tag-type.js')
 const isSingleHtmlTagType = require('../helpers/is-single-html-tag-type.js')
-const loadTransformers = require('../standardize-ast/load-transformers.js')
+const loadMdTransformers = require('../standardize-ast/load-md-transformers.js')
+const loadHtmlBlockTransformers = require('../standardize-ast/load-htmlblock-transformers.js')
 const openingTagFor = require('../helpers/opening-tag-for.js')
 const OpenTagTracker = require('../helpers/open-tag-tracker.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 const parseHtmlTag = require('../helpers/parse-html-tag.js')
 
-var mdTransformers: TransformerList = loadTransformers()
+var mdTransformers: TransformerList = loadMdTransformers()
+var htmlBlockTransformers: TransformerList = loadHtmlBlockTransformers()
 
 // AstStandardizer converts the AST created by Remarkable
 // into the standardized AST used by TextRunner
@@ -35,10 +38,12 @@ module.exports = class AstStandardizer {
 
   standardize (ast: Object): AstNodeList {
     for (let node of ast) {
+      console.log(node)
       if (node.lines) this.line = Math.max(node.lines[0] + 1, this.line)
       this.processSoftBreak(node) ||
+        this.processHtmlBlock(node) ||
+        this.processHtmlTag(node) ||
         this.processMdNode(node) ||
-        this.processHtmlNode(node) ||
         alertUnknownNodeType(node, this.filepath, this.line)
 
       if (node.children) {
@@ -49,8 +54,32 @@ module.exports = class AstStandardizer {
     return this.result
   }
 
-  processHtmlNode (node: Object): boolean {
-    if (node.type !== 'htmltag' && node.type !== 'htmlblock') return false
+  processHtmlBlock (node: Object): boolean {
+    if (node.type !== 'htmlblock') return false
+    const tag = getHtmlBlockTag(node.content, this.filepath, this.line)
+    console.log(htmlBlockTransformers)
+    const transformer: Transformer = htmlBlockTransformers[tag]
+    if (!transformer) {
+      throw new UnprintedUserError(
+        `Unknown HTML block: '${tag}'`,
+        this.filepath,
+        this.line
+      )
+    }
+    const transformed = transformer(
+      node,
+      this.openTags,
+      this.filepath,
+      this.line
+    )
+    for (const node of transformed) {
+      this.result.push(node)
+    }
+    return true
+  }
+
+  processHtmlTag (node: Object): boolean {
+    if (node.type !== 'htmltag') return false
     const [tag, attributes] = parseHtmlTag(
       node.content,
       this.filepath,

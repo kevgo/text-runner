@@ -2,7 +2,10 @@
 
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
+const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
+
+const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 
 module.exports = function (
   node: Object,
@@ -11,13 +14,15 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
+  console.log(11111111111)
+  const blockquoteMatch = node.content.match(blockquoteRegex)
   const resultNode = new AstNode({
     type: node.type,
     tag: 'blockquote',
     file,
     line,
     content: '',
-    attributes: {}
+    attributes: parseHtmlAttributes(blockquoteMatch[1])
   })
   openTags.add(resultNode)
   result.pushData(resultNode)

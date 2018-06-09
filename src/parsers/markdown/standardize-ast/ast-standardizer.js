@@ -1,19 +1,19 @@
 // @flow
 
-import type { Transformer } from './standardize-ast/transformer.js'
-import type { TransformerList } from './standardize-ast/transformer-list.js'
+import type { Transformer } from '../standardize-ast/transformer.js'
+import type { TransformerList } from '../standardize-ast/transformer-list.js'
 
-const AstNode = require('../ast-node.js')
-const AstNodeList = require('../ast-node-list.js')
-const FormattingTracker = require('./helpers/formatting-tracker.js')
-const isClosingHtmlTagType = require('./helpers/is-closing-html-tag-type.js')
-const isOpeningHtmlTagType = require('./helpers/is-opening-html-tag-type.js')
-const isSingleHtmlTagType = require('./helpers/is-single-html-tag-type.js')
-const loadTransformers = require('./standardize-ast/load.js')
-const openingTagFor = require('./helpers/opening-tag-for.js')
-const OpenTagTracker = require('./helpers/open-tag-tracker.js')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
-const parseHtmlTag = require('./helpers/parse-html-tag.js')
+const AstNode = require('../../ast-node.js')
+const AstNodeList = require('../../ast-node-list.js')
+const FormattingTracker = require('../helpers/formatting-tracker.js')
+const isClosingHtmlTagType = require('../helpers/is-closing-html-tag-type.js')
+const isOpeningHtmlTagType = require('../helpers/is-opening-html-tag-type.js')
+const isSingleHtmlTagType = require('../helpers/is-single-html-tag-type.js')
+const loadTransformers = require('../standardize-ast/load.js')
+const openingTagFor = require('../helpers/opening-tag-for.js')
+const OpenTagTracker = require('../helpers/open-tag-tracker.js')
+const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
+const parseHtmlTag = require('../helpers/parse-html-tag.js')
 
 var mdTransformers: TransformerList = loadTransformers()
 

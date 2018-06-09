@@ -148,6 +148,8 @@ const types = {
   br: 'linebreak',
   h1: 'heading_open',
   '/h1': 'heading_close',
+  h2: 'heading_open',
+  '/h2': 'heading_close',
   img: 'image',
   code: 'code_open',
   '/code': 'code_close',

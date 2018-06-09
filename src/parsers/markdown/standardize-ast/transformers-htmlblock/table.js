@@ -20,7 +20,7 @@ module.exports = async function transformUl (
   const match = node.content.match(tableRegex)
   const xml = await xml2jsp(node.content)
   const tableNode = new AstNode({
-    type: 'table_list_open',
+    type: 'table_open',
     tag: 'table',
     file,
     line,
@@ -41,17 +41,17 @@ module.exports = async function transformUl (
     for (const td of tr.td || []) {
       result.pushData({
         type: 'table_cell',
-        tag: 'tr',
+        tag: 'td',
         file,
         line,
-        content: td._ || '',
+        content: td._ || td,
         attributes: td.$ || {}
       })
     }
     for (const th of tr.th || []) {
       result.pushData({
-        type: 'table_cell',
-        tag: 'tr',
+        type: 'table_heading',
+        tag: 'th',
         file,
         line,
         content: th._ || '',
@@ -60,7 +60,7 @@ module.exports = async function transformUl (
     }
     result.pushData({
       type: 'table_row_close',
-      tag: 'tr',
+      tag: '/tr',
       file,
       line,
       content: tr._ || '',
@@ -68,8 +68,8 @@ module.exports = async function transformUl (
     })
   }
   result.pushData({
-    type: 'bullet_list_close',
-    tag: '/ul',
+    type: 'table_close',
+    tag: '/table',
     file,
     line,
     content: '',

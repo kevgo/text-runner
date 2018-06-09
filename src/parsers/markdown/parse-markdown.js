@@ -8,7 +8,10 @@ const Remarkable = require('remarkable')
 const markdownParser = new Remarkable('full', { html: true })
 
 // Parses Markdown files into an AstNode[]
-function parseMarkdown (markdownText: string, filepath: string): AstNodeList {
+async function parseMarkdown (
+  markdownText: string,
+  filepath: string
+): Promise<AstNodeList> {
   const raw = markdownParser.parse(markdownText, {})
   const astStandardizer = new AstStandardizer(filepath)
   return astStandardizer.standardize(raw)

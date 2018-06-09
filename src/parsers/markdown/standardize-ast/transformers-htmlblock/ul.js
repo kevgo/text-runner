@@ -4,26 +4,50 @@ const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
+const util = require('util')
+const xml2js = require('xml2js')
+const xml2jsp = util.promisify(xml2js.parseString)
 
-const ulRegex = /<ul([^>]*)>([\s\S]*)<\/ul>/m
+const ulRegex = /<ul([^>]*)>[\s\S]*<\/ul>/m
 
-module.exports = function transformUl (
+module.exports = async function transformUl (
   node: Object,
   openTags: OpenTagTracker,
   file: string,
   line: number
-): AstNodeList {
+): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(ulRegex)
-  const resultNode = new AstNode({
-    type: 'bullet_list',
+  const xml = await xml2jsp(node.content)
+  console.log(xml)
+  const ulNode = new AstNode({
+    type: 'bullet_list_open',
     tag: 'ul',
     file,
     line,
-    content: match[2],
+    content: '',
     attributes: parseHtmlAttributes(match[1])
   })
-  openTags.add(resultNode)
-  result.pushData(resultNode)
+  result.pushData(ulNode)
+  openTags.add(ulNode)
+  for (const li of xml.ul.li) {
+    console.log(li)
+    result.pushData({
+      type: 'list_item_open',
+      tag: 'li',
+      file,
+      line,
+      content: li._,
+      attributes: li.$ || {}
+    })
+  }
+  result.pushData({
+    type: 'bullet_list_close',
+    tag: '/ul',
+    file,
+    line,
+    content: '',
+    attributes: ulNode.attributes
+  })
   return result
 }

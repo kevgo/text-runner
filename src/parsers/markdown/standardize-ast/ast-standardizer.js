@@ -161,6 +161,8 @@ const types = {
   '/h5': 'heading_close',
   h6: 'heading_open',
   '/h6': 'heading_close',
+  i: 'italic_open',
+  '/i': 'italic_close',
   img: 'image',
   code: 'code_open',
   '/code': 'code_close',

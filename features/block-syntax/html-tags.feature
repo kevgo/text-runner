@@ -170,6 +170,18 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: link tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <a textrun="HelloWorld" href=".">
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   # Scenario: P tag
   #   Given my source code contains the file "1.md" with content:
   #     """

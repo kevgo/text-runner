@@ -210,6 +210,20 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: ordered list tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <ol textrun="HelloWorld">
+      <li>one</li>
+      </ol>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   Scenario: strong tag
     Given my source code contains the file "1.md" with content:
       """

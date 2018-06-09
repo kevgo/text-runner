@@ -7,31 +7,30 @@ const parseCliArgs = require('./parse-cli-args')
 const textRunner = require('../text-runner')
 const path = require('path')
 const printCodeFrame = require('../helpers/print-code-frame')
+const PrintedUserError = require('../errors/printed-user-error.js')
 const UnprintedUserError = require('../errors/unprinted-user-error.js')
-const UserError = require('../errors/user-error.js')
 
 cliCursor.hide()
 
 async function main () {
-  var exitCode = 0
-  try {
-    const cliArgs = parseCliArgs(process.argv)
-    const errors = await textRunner(cliArgs)
-    exitCode = errors.length
-  } catch (err) {
-    exitCode = 1
+  const cliArgs = parseCliArgs(process.argv)
+  const errors: Array<Error> = await textRunner(cliArgs)
+  for (const err of errors) {
     if (err instanceof UnprintedUserError) {
-      console.log(red(err))
-      if (err.filePath) {
-        const filePath = path.join(process.cwd(), err.filePath)
-        printCodeFrame(console.log, filePath, err.line)
-      }
-    } else if (!(err instanceof UserError)) {
+      const uErr = (err: UnprintedUserError)
+      console.log(
+        red(`${uErr.filePath || ''}:${uErr.line || 0} -- ${uErr.message || ''}`)
+      )
+      const filePath = path.join(process.cwd(), err.filePath || '')
+      printCodeFrame(console.log, filePath, err.line)
+    } else if (err instanceof PrintedUserError) {
+      // nothing to do
+    } else {
       console.log(err.stack)
     }
   }
   endChildProcesses()
-  process.exit(exitCode)
+  process.exit(errors.length)
 }
 
 main()

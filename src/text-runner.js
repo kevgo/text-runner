@@ -5,10 +5,6 @@ import type { CliArgTypes } from './cli/cli-arg-types.js'
 const { red } = require('chalk')
 const fs = require('fs')
 const loadConfiguration = require('./configuration/load-configuration.js')
-const path = require('path')
-const printCodeFrame = require('./helpers/print-code-frame')
-const PrintedUserError = require('./errors/printed-user-error.js')
-const UnprintedUserError = require('./errors/unprinted-user-error.js')
 
 const addCommand = require('./commands/add/add-command')
 const debugCommand = require('./commands/debug/debug-command')
@@ -49,15 +45,8 @@ module.exports = async function (
         return []
     }
   } catch (err) {
-    if (err instanceof UnprintedUserError) {
-      process.chdir(configuration.sourceDir)
-      console.log(red(`${err.filePath}:${err.line} -- ${err.message}`))
-      const filePath = path.join(process.cwd(), err.filePath)
-      printCodeFrame(console.log, filePath, err.line)
-      return [new PrintedUserError(err)]
-    } else {
-      return [err]
-    }
+    process.chdir(configuration.sourceDir)
+    return [err]
   }
 }
 

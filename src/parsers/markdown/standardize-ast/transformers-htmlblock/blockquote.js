@@ -23,7 +23,6 @@ module.exports = function transformBlockquote (
     content: blockquoteMatch[2],
     attributes: parseHtmlAttributes(blockquoteMatch[1])
   })
-  console.log(resultNode)
   openTags.add(resultNode)
   result.pushData(resultNode)
   return result

@@ -1,6 +1,6 @@
 // @flow
 
-const loadTransformers = require('./load.js')
+const loadTransformers = require('./load-transformers.js')
 const { expect } = require('chai')
 
 describe('loadTransformers', function () {

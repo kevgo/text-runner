@@ -19,7 +19,6 @@ module.exports = async function transformUl (
   const result = new AstNodeList()
   const match = node.content.match(ulRegex)
   const xml = await xml2jsp(node.content)
-  console.log(xml)
   const ulNode = new AstNode({
     type: 'bullet_list_open',
     tag: 'ul',
@@ -31,7 +30,6 @@ module.exports = async function transformUl (
   result.pushData(ulNode)
   openTags.add(ulNode)
   for (const li of xml.ul.li) {
-    console.log(li)
     result.pushData({
       type: 'list_item_open',
       tag: 'li',

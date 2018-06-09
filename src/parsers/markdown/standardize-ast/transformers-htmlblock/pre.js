@@ -23,7 +23,6 @@ module.exports = async function transformPre (
     content: match[2],
     attributes: parseHtmlAttributes(match[1])
   })
-  console.log(resultNode)
   openTags.add(resultNode)
   result.pushData(resultNode)
   return result

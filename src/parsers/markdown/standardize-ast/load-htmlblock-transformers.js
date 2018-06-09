@@ -7,7 +7,7 @@ const path = require('path')
 
 module.exports = function loadMdTransformers (): TransformerList {
   const result = {}
-  const dir = path.join(__dirname, 'transformers')
+  const dir = path.join(__dirname, 'transformers-htmlblock')
   const files = fs.readdirSync(dir)
   for (let file of files) {
     const transformer = require(path.join(dir, file))

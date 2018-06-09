@@ -2,6 +2,7 @@
 
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
+const UnprintedUserError = require('../../../../errors/unprinted-user-error.js')
 
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
@@ -40,6 +41,7 @@ module.exports = function (
       content: '',
       attributes: {}
     })
+    return result
   }
   const tableMatch = node.content.trim().match(tableRegex)
   if (tableMatch) {
@@ -51,6 +53,11 @@ module.exports = function (
       content: node.content.trim(),
       attributes: parseHtmlAttributes(tableMatch[1])
     })
+    return result
   }
-  return result
+  throw new UnprintedUserError(
+    `Unknown 'htmlblock' encountered: ${node.content}`,
+    file,
+    line
+  )
 }

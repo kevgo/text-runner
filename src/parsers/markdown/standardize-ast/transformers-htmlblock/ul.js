@@ -13,7 +13,6 @@ module.exports = function transformUl (
   file: string,
   line: number
 ): AstNodeList {
-  console.log(3333333333333)
   const result = new AstNodeList()
   const match = node.content.match(ulRegex)
   const resultNode = new AstNode({
@@ -24,7 +23,6 @@ module.exports = function transformUl (
     content: match[2],
     attributes: parseHtmlAttributes(match[1])
   })
-  console.log(resultNode)
   openTags.add(resultNode)
   result.pushData(resultNode)
   return result

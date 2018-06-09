@@ -35,6 +35,30 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: code tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <code textrun="HelloWorld">foo</code>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
+  Scenario: em tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <em textrun="HelloWorld">foo</em>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   Scenario: H1 tag
     Given my source code contains the file "1.md" with content:
       """

@@ -182,6 +182,20 @@ Feature: support for more HTML tags
       | MESSAGE  | Hello world |
 
 
+  Scenario: ordered list item tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <ol>
+      <li textrun="HelloWorld">one</li>
+      </ol>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
   Scenario: unordered list item tag
     Given my source code contains the file "1.md" with content:
       """

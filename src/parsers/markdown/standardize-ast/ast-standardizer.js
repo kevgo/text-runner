@@ -106,7 +106,7 @@ module.exports = class AstStandardizer {
     const result = types[tag]
     if (!result) {
       throw new UnprintedUserError(
-        `unknown tag type: '${tag}'`,
+        `unknown HTML tag type: '${tag}'`,
         this.filepath,
         this.line
       )

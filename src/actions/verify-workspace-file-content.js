@@ -12,6 +12,7 @@ module.exports = function (args: ActionArgs) {
   const expectedContent = args.nodes.textInNodeOfType('fence', 'code')
   args.formatter.name(`verifying file ${cyan(filePath)}`)
   const fullPath = path.join(args.configuration.workspace, filePath)
+  args.formatter.log(`verify file ${fullPath}`)
   var actualContent
   try {
     actualContent = fs.readFileSync(fullPath, 'utf8')

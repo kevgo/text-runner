@@ -15,6 +15,7 @@ module.exports = function (args: ActionArgs) {
       cyan(directory)
     )} directory exists in the test workspace`
   )
+  args.formatter.log(`ls ${fullPath}`)
   var stats
   try {
     stats = fs.lstatSync(fullPath)

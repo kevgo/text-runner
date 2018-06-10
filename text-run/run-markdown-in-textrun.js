@@ -41,7 +41,7 @@ module.exports = async function (args: ActionArgs) {
     throw new Error(
       `text-run exited with code ${
         processor.exitCode
-      } when processing this markdown block.\nOutput:\n${processor.fullOutput()}`
+      } when processing this markdown block.`
     )
   }
 }

@@ -17,10 +17,11 @@ const versionCommand = require('./commands/version/version-command')
 module.exports = async function (
   cmdLineArgs: CliArgTypes
 ): Promise<Array<Error>> {
-  const configuration = loadConfiguration(configFileName(), cmdLineArgs)
-  const commandName = cmdLineArgs.command
-  var errors
+  var configuration
   try {
+    configuration = loadConfiguration(configFileName(), cmdLineArgs)
+    const commandName = cmdLineArgs.command
+    var errors
     switch (commandName) {
       case 'add':
         errors = await addCommand(cmdLineArgs.files)
@@ -45,7 +46,9 @@ module.exports = async function (
         return []
     }
   } catch (err) {
-    process.chdir(configuration.sourceDir)
+    if (configuration && configuration.sourceDir) {
+      process.chdir(configuration.sourceDir)
+    }
     return [err]
   }
 }

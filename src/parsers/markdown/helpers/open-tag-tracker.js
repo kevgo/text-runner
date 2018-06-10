@@ -12,8 +12,8 @@ module.exports = class OpenTagTracker {
   }
 
   add (node: AstNode) {
-    if (this.has(node.type)) {
-      const existingNode = this.popType(node.type)
+    const existingNode = this.peekType(node.type)
+    if (existingNode && existingNode.attributes['textrun']) {
       throw new UnprintedUserError(
         `this active block is nested inside another active block of type ${cyan(
           existingNode.attributes['textrun']
@@ -31,6 +31,14 @@ module.exports = class OpenTagTracker {
 
   peek (): AstNode {
     return this.nodes[this.nodes.length - 1]
+  }
+
+  peekType (expectedType: string): ?AstNode {
+    for (let i = this.nodes.length - 1; i >= 0; i--) {
+      const node = this.nodes[i]
+      if (node.type === expectedType) return node
+    }
+    return null
   }
 
   popTag (expectedNodeTag: string): AstNode {

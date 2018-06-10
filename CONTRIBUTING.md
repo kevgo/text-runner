@@ -86,79 +86,53 @@ There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
-These CLI executables call the [cli.js](src/cli/cli.js) CLI handler.
-They parse the command-line arguments and call TextRunner's JavaScript API
-in the form of the [TextRunner](src/text-runner.js) class.
-This API is also exported by the [TextRunner NPM module](https://www.npmjs.com/package/text-runner)
-and can be used by other tools.
+These CLI executables call the [cli.js](src/cli/cli.js) CLI module.
+The CLI subsystem parses the command-line arguments
+and calls TextRunner's [JavaScript API](src/text-runner.js).
+This API is located in the file [src/text-runner.js](src/text-runner.js)
+and also Text-Runner's core.
 
-The TextRunner class is the central part of TextRunner.
-It instantiates and runs the other components of the framework.
-Next, TextRunner determines the various configuration settings
-coming from command-line arguments and/or configuration files
-via the [configuration](src/configuration/configuration.js) class.
-This class is passed to the various subsystems of TextRunner
-in case they need to know configuration settings.
-Using this configuration class, TextRunner determines the command to run.
+The core asks the [configuration](src/configuration)
+module for the current [configuration](src/configuration/configuration.js)
+settings coming from command-line arguments and/or configuration files.
+The configuration structure tells TextRunner the command to run.
 Commands are stored in the [commands](src/commands) folder.
 The most important command is [run](src/commands/run),
 there are others like [help](src/commands/help),
 [setup](src/commands/setup), or [version](src/commands/version).
 
-The `run` command determines the Markdown files to test,
-and creates a [MarkdownFileRunner](src/commands/run/markdown-file-runner.js) instance for each file.
-Running the files happens in two phases:
+The [run command](src/commands/run/run-command.js) has a functional architecture
+that converts the configuration into test results over several steps:
 
-1. In the `prepare` phase, each MarkdownFileRunner parses the Markdown content
-  using a [MarkdownParser](src/parsers/markdown/markdown-parser.js) instance
-  which converts the complex and noisy Markdown AST
-  (and in the future HTML AST)
-  into a simplified and flattened list of TextRunner-specific [AstNodes](src/parsers/ast-node.js)
-  that contain only relevant relevant information.
-  An [ActionListBuilder](src/commands/run/activity-list-builder.js) instance
-  processes this TextRunner-AST into a list of [Actions](src/commands/run/activity.js).
-  An action is an instantiated block handler function,
-  locked and loaded to process the information in one particular block of a document.
-  TextRunner comes with built-in actions for common operations
-  in the [actions](src/activity-types) folder.
-  The code base using TextRunner can also add their own action types.
-  While processing the AST,
-  MarkdownFileRunner also builds up a list of [LinkTargets](src/commands/run/link-target.js)
-  via a [LinkTargetListBuilder](src/commands/run/link-target-list-builder.js) instance.
-
-2. In the `run` phase, the prepared actions are executed one by one.
-  They now have full access to all link targets in all files.
-  The actions signal their progress, success, and failures via
-  [formatters](src/formatters).
-  TextRunner provides two formatters: a simple [dot formatter](src/formatters/dot-formatter.js)
-  and a [detailed formatter](src/formatters/detailed-formatter.js),
-  which prints more details as it runs.
-  When using TextRunner via its JavaScript API,
-  you have to provide your own formatter to gain access to the stream of test outcomes.
-  If an action signals test failure
-  by throwing an exception or returning an error via callback or Promise,
-  TextRunner stops the execution, displays the error via the formatter,
-  and stops with an exit code of 1.
-  Otherwise it stops with an exit code of 0 when it reaches the end of its list of actions to perform.
-
-If the runtime encounters a user error (wrong input data or a failing text-test),
-it throws a [UnprintedUserError](src/errors/unprinted-user-error.js),
-aborting the test and
-signaling that this error has not been printed to the user yet.
-This error type is caught by the TextRunner runtime.
-If a formatter is available at that time, it prints the error via the formatter
-and re-throws it as a [PrintedUserError](src/errors/printed-user-error.js),
-signaling that it has been printed yet.
-Other error types (TypeErrors, ReferenceErrors, etc)
-are considered developer errors and passed through to the caller of TextRunner's JS API.
-The CLI wrapper catches all errors and prints them accordingly:
-User errors in an end-user friendly way,
-and developer errors with a stack trace.
-Actions can throw a normal `Error` instance, it will be treated as an `UnprintedUserError`.
+1. **configuration --> list of Markdown files to test:**
+   this is done by the [finding files module](src/finding-files)
+1. **list of filenames --> list of file ASTs:**
+   the [parse module](src/parsers) reads and parses each file
+   and [transforms](src/parsers/markdown/standardize-ast)
+   the parser output into a standardized AST format
+   that is similar whether the input is Markdown or HTML
+   and optimized for analyzing and testing.
+1. **list of ASTs --> list of tests steps to execute:**
+   the [activities module](src/activity-list)
+   finds _active blocks_ in the ASTs and gathers all the related information.
+   The output of this step is several lists:
+   parallelizable tests like checking static file and image links
+   and sequential tests that have to run one after the other.
+1. **list of test steps --> list of test results:**
+   the [runner module](src/runners) executes the test steps given to it
+   and writes test progress to the console
+   via the configured [formatter](src/formatters).
+   Each test step gets their own formatter instance,
+   this ensures concurrency:
+   the formatter collects all the output of that test step
+   then prints it as a block when the test step is done.
+1. **test results --> test statistics:**
+   finally, we write a summary of the test to the console
+   and terminate with the corresponding exit code.
 
 
 ## Deployment
 
-- update `package.json` in a branch and ship it
+- update the version in [package.json](package.json) in a branch and ship it
 - create a new release on Github
 - run `make deploy`

@@ -14,14 +14,21 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const blockquoteMatch = node.content.match(blockquoteRegex)
+  var attributes = {}
+  if (node.content) {
+    const match = node.content.match(blockquoteRegex)
+    if (!match) {
+      throw new Error(`cannot parse blockquote content: ${node.content}`)
+    }
+    attributes = parseHtmlAttributes(match[1])
+  }
   const resultNode = new AstNode({
     type: node.type,
     tag: 'blockquote',
     file,
     line,
     content: '',
-    attributes: parseHtmlAttributes(blockquoteMatch[1])
+    attributes
   })
   openTags.add(resultNode)
   result.pushData(resultNode)

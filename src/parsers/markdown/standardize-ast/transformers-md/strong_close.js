@@ -10,7 +10,7 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openNode = openTags.pop('strong_open')
+  const openNode = openTags.popType('strong_open')
   result.pushData({
     type: node.type,
     tag: '/strong',

@@ -4,7 +4,6 @@
 const AstNode = require('../../ast-node.js')
 const OpenTagTracker = require('./open-tag-tracker.js')
 const { expect } = require('chai')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 describe('OpenTagTracker', function () {
   beforeEach(function () {
@@ -35,11 +34,11 @@ describe('OpenTagTracker', function () {
     })
   })
 
-  describe('pop', function () {
+  describe('popType', function () {
     it('returns the given open tag from the end', function () {
       const node = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node)
-      const result = this.openTags.pop('foo')
+      const result = this.openTags.popType('foo')
       expect(result).to.equal(node)
     })
     it('returns the given open tag from close to the end', function () {
@@ -47,7 +46,7 @@ describe('OpenTagTracker', function () {
       this.openTags.add(node1)
       const node2 = AstNode.scaffold({ type: 'bar', line: 3 })
       this.openTags.add(node2)
-      const result = this.openTags.pop('foo')
+      const result = this.openTags.popType('foo')
       expect(result).to.equal(node1)
       expect(this.openTags.nodes).to.have.length(1)
       const types = this.openTags.nodes.map(node => node.type)
@@ -56,7 +55,7 @@ describe('OpenTagTracker', function () {
     it('throws if the tag is not the expected type', function () {
       const node = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node)
-      expect(() => this.openTags.pop('other')).to.throw(Error)
+      expect(() => this.openTags.popType('other')).to.throw(Error)
     })
   })
 })

@@ -1,9 +1,8 @@
 // @flow
 
-const parseHtmlAttributes = require('./parse-html-attributes.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
-const tagNameRE = /^<(\w+).*>/
+const tagNameRE = /^<(\/?\w+).*>/
 
 module.exports = function (html: string, file: string, line: number): string {
   var matches = html.match(tagNameRE)

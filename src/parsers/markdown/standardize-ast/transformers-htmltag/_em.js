@@ -1,23 +1,25 @@
 // @flow
 
+const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
-module.exports = function (
+module.exports = function transformATag (
   node: Object,
   openTags: OpenTagTracker,
   file: string,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  result.pushData({
-    type: node.type,
+  const openingTag = openTags.popType('em_open')
+  const resultNode = new AstNode({
+    type: 'em_close',
     tag: '/em',
     file,
     line,
     content: '',
-    attributes: {}
+    attributes: openingTag.attributes
   })
-  openTags.popType('em_open')
+  result.pushData(resultNode)
   return result
 }

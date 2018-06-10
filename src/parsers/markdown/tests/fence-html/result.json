@@ -1,26 +1,10 @@
 [
   {
-    "type": "fence_open",
+    "type": "fence",
     "tag": "pre",
-    "file": "input.md",
-    "line": 1,
-    "content": "",
-    "attributes": {}
-  },
-  {
-    "type": "text",
-    "tag": "",
     "file": "input.md",
     "line": 1,
     "content": "\nmy code\n",
     "attributes": {}
-  },
-  {
-    "type": "fence_close",
-    "tag": "/pre",
-    "file": "input.md",
-    "line": 1,
-    "content": "",
-    "attributes": { }
   }
 ]

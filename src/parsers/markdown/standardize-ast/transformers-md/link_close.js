@@ -10,7 +10,7 @@ module.exports = function (
   line: number
 ): AstNodeList {
   // TODO: remove openTags, since MD nodes never have attributes
-  const openNode = openTags.pop('link_open')
+  const openNode = openTags.popType('link_open')
   const result = new AstNodeList()
   result.pushData({
     type: node.type,

@@ -4,7 +4,7 @@ const debug = require('debug')('text-runner:working-dir')
 const mkdirp = require('mkdirp')
 const path = require('path')
 const tmp = require('tmp')
-const UnprintedUserError = require('../../errors/unprinted-user-error.js')
+const UnprintedUserError = require('../errors/unprinted-user-error.js')
 
 type workingDirSetting = string | boolean
 

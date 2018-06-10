@@ -152,6 +152,17 @@ describe('AstNodeList', function () {
     })
   })
 
+  describe('text', function () {
+    it('returns all the textual content of the list', function () {
+      const list = new AstNodeList()
+      list.scaffold({ type: 'code_open' })
+      list.scaffold({ type: 'text', content: 'hello' })
+      list.scaffold({ type: 'code_close' })
+      const result = list.text()
+      expect(result).to.equal('hello')
+    })
+  })
+
   describe('textInNodeOfType', function () {
     it('works with the type name', function () {
       const list = new AstNodeList()

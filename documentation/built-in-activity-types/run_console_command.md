@@ -9,7 +9,7 @@
   use the [validateJavascript](validate_javascript.md) action instead
 
 <a textrun="run-markdown-in-textrun">
-  
+
 ```markdown
 <a textrun="run-console-command">
 `​``
@@ -64,7 +64,7 @@ Middle columns are ignored.
 `<th>` elements are considered descriptions and are also ignored.
 
 <a textrun="run-markdown-in-textrun">
-  
+
 ```markdown
 <a textrun="run-console-command">
 `​``
@@ -124,5 +124,5 @@ folder contains a working version of this configuration.
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/run-console-command/)
-- [source code](../../src/activity-types/run-console-command.js)
+- [feature specs](../../features/actions/built-in/run-console-command/)
+- [source code](../../src/actions/run-console-command.js)

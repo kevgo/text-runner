@@ -77,6 +77,10 @@ module.exports = class AstNodeList extends Array<AstNode> {
     this.push(AstNode.scaffold(data))
   }
 
+  text (): string {
+    return this.reduce((acc, node) => acc + node.content, '')
+  }
+
   // returns the textual content for the given node
   textInNode (node: AstNode): string {
     return this.getNodesFor(node).reduce((acc, node) => acc + node.content, '')

@@ -31,5 +31,5 @@ hello world
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
-- [source code](../../src/activity-types/verify-workspace-file-content.js)
+- [feature specs](../../features/actions/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
+- [source code](../../src/actions/verify-workspace-file-content.js)

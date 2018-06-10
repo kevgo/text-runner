@@ -37,5 +37,5 @@ $ foo
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/verify-npm-global-command/verify-npm-global-command.feature)
-- [source code](../../src/activity-types/verify-npm-global-command.js)
+- [feature specs](../../features/actions/built-in/verify-npm-global-command/verify-npm-global-command.feature)
+- [source code](../../src/actions/verify-npm-global-command.js)

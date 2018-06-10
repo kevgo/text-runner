@@ -51,7 +51,7 @@ complex data in tables, bullet point lists, and embedded images.
 - [installation](documentation/installation.md)
 - [configuration](documentation/configuration.md)
 - [built-in activity types](documentation/built-in-activity-types)
-- [user-defined activity types](documentation/user-defined-activity-types.md)
+- [user-defined activities](documentation/user-defined-activities.md)
 - [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)
 - [developer documentation](CONTRIBUTING.md)

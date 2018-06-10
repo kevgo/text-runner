@@ -20,5 +20,5 @@ Check out the [foo](foo) directory for a working example.
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/verify-source-contains-directory/verify-source-contains-directory.feature)
-- [source code](../../src/activity-types/verify-source-contains-directory.js)
+- [feature specs](../../features/actions/built-in/verify-source-contains-directory/verify-source-contains-directory.feature)
+- [source code](../../src/actions/verify-source-contains-directory.js)

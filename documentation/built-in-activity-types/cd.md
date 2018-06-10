@@ -27,5 +27,5 @@ so that readers of your documentation can click to see it.
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/cd/cd.feature)
-- [source code](../../src/activity-types/cd.js)
+- [feature specs](../../features/actions/built-in/cd/cd.feature)
+- [source code](../../src/actions/cd.js)

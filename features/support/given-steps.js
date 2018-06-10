@@ -39,10 +39,7 @@ Given(
   function () {
     fs.writeFileSync(
       path.join(this.rootDir, '1.md'),
-      `
-<a textrun="verify-source-contains-directory">
-  \`.\`
-</a>`
+      `<code textrun="cd">.</code>`
     )
   }
 )

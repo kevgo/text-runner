@@ -36,7 +36,6 @@ Feature: unknown activity types
       * verify-npm-global-command
       * verify-npm-install
       * verify-process-output
-      * verify-source-contains-directory
       * verify-source-file-content
       * verify-workspace-contains-directory
       * verify-workspace-file-content

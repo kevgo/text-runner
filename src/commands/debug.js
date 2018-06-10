@@ -1,14 +1,14 @@
 // @flow
 
-import type { Configuration } from '../../configuration/configuration.js'
+import type { Configuration } from '../configuration/configuration.js'
 
-const AstNode = require('../../parsers/ast-node.js')
+const AstNode = require('../parsers/ast-node.js')
 
-const extractActivities = require('../../activity-list/extract-activities.js')
-const extractImagesAndLinks = require('../../activity-list/extract-images-and-links.js')
-const findLinkTargets = require('../../link-targets/find-link-targets.js')
-const getFileNames = require('../../finding-files/get-filenames.js')
-const readAndParseFile = require('../../parsers/read-and-parse-file.js')
+const extractActivities = require('../activity-list/extract-activities.js')
+const extractImagesAndLinks = require('../activity-list/extract-images-and-links.js')
+const findLinkTargets = require('../link-targets/find-link-targets.js')
+const getFileNames = require('../finding-files/get-filenames.js')
+const readAndParseFile = require('../parsers/read-and-parse-file.js')
 
 async function debugCommand (config: Configuration): Promise<Array<Error>> {
   const filenames = getFileNames(config)

@@ -96,11 +96,11 @@ module for the current [configuration](src/configuration/configuration.js)
 settings coming from command-line arguments and/or configuration files.
 The configuration structure tells TextRunner the command to run.
 Commands are stored in the [commands](src/commands) folder.
-The most important command is [run](src/commands/run),
-there are others like [help](src/commands/help),
-[setup](src/commands/setup), or [version](src/commands/version).
+The most important command is [run](src/commands/run.js),
+there are others like [help](src/commands/help.js),
+[setup](src/commands/setup.js), or [version](src/commands/version.js).
 
-The [run command](src/commands/run/run-command.js) has a functional architecture
+The [run command](src/commands/run.js) has a functional architecture
 that converts the configuration into test results over several steps:
 
 1. **configuration --> list of Markdown files to test:**

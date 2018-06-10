@@ -23,17 +23,17 @@ class DotFormatter extends Formatter {
 
   skip (message: string) {
     super.skip(message)
-    console.log(cyan('.'))
+    process.stdout.write(cyan('.'))
   }
 
   success () {
     super.success()
-    console.log(green('.'))
+    process.stdout.write(green('.'))
   }
 
   warning (warningMessage: string) {
     super.warning(warningMessage)
-    console.log(magenta('.'))
+    process.stdout.write(magenta('.'))
   }
 }
 

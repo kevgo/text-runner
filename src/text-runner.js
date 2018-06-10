@@ -6,13 +6,14 @@ const { red } = require('chalk')
 const fs = require('fs')
 const loadConfiguration = require('./configuration/load-configuration.js')
 
-const addCommand = require('./commands/add')
-const debugCommand = require('./commands/debug')
-const helpCommand = require('./commands/help')
-const runCommand = require('./commands/run')
-const setupCommand = require('./commands/setup')
-const staticCommand = require('./commands/static')
-const versionCommand = require('./commands/version')
+const addCommand = require('./commands/add.js')
+const debugCommand = require('./commands/debug.js')
+const dynamicCommand = require('./commands/dynamic.js')
+const helpCommand = require('./commands/help.js')
+const runCommand = require('./commands/run.js')
+const setupCommand = require('./commands/setup.js')
+const staticCommand = require('./commands/static.js')
+const versionCommand = require('./commands/version.js')
 
 // Tests the documentation in the given directory
 module.exports = async function (
@@ -29,6 +30,9 @@ module.exports = async function (
         return errors
       case 'debug':
         errors = await debugCommand(configuration)
+        return errors
+      case 'dynamic':
+        errors = await dynamicCommand(configuration)
         return errors
       case 'help':
         await helpCommand()

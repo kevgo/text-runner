@@ -17,7 +17,7 @@ async function dynamicCommand (config: Configuration): Promise<Array<Error>> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
-  const workingDir = createWorkingDir(config.useSystemTempDirectory)
+  config.workspace = createWorkingDir(config.useSystemTempDirectory)
 
   // step 1: find files
   const filenames = getFileNames(config)
@@ -41,12 +41,12 @@ async function dynamicCommand (config: Configuration): Promise<Array<Error>> {
   }
 
   // step 5: execute the ActivityList
-  process.chdir(workingDir)
+  process.chdir(config.workspace)
   var error = await executeSequential(activities, config, linkTargets, stats)
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (error && !config.keepTmp) rimraf.sync(workingDir)
+  if (error && !config.keepTmp) rimraf.sync(config.workspace)
 
   // step 7: write stats
   var text = '\n'

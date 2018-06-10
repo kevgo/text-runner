@@ -13,16 +13,15 @@ describe('parseMarkdown', function () {
       .readdirSync(testCaseDir)
       .filter(file => file.endsWith('.md'))
     for (let inputFile of inputs) {
-      var name = ''
+      var name = testCase
       if (inputFile !== 'input.md') {
-        name = `: ${path.basename(inputFile, '.md')}`
+        name += `-${path.basename(inputFile, '.md')}`
       }
-      it(`${testCase}-${name}`, function () {
+      it(name, async function () {
         const input = fs.readFileSync(path.join(testCaseDir, inputFile))
-        const result = require(path.join(testCaseDir, 'result.json'))
-        expect(parseMarkdown(input.toString().trim(), 'input.md')).to.eql(
-          result
-        )
+        const expected = require(path.join(testCaseDir, 'result.json'))
+        const actual = await parseMarkdown(input.toString().trim(), 'input.md')
+        expect(actual).to.eql(expected)
       })
     }
   }

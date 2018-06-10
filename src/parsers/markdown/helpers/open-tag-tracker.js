@@ -13,7 +13,7 @@ module.exports = class OpenTagTracker {
 
   add (node: AstNode) {
     if (this.has(node.type)) {
-      const existingNode = this.pop(node.type)
+      const existingNode = this.popType(node.type)
       throw new UnprintedUserError(
         `this active block is nested inside another active block of type ${cyan(
           existingNode.attributes['textrun']
@@ -33,10 +33,25 @@ module.exports = class OpenTagTracker {
     return this.nodes[this.nodes.length - 1]
   }
 
-  pop (expectedNodeType: string): AstNode {
+  popTag (expectedNodeTag: string): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
-        `OpenTagTracker is empty while trying to pop '${expectedNodeType}'`
+        `OpenTagTracker is empty while trying to pop tag '${expectedNodeTag}'`
+      )
+    }
+    for (let i = this.nodes.length - 1; i >= 0; i--) {
+      const result = this.nodes[i]
+      if (result.tag !== expectedNodeTag) continue
+      this.nodes.splice(i, 1)
+      return result
+    }
+    throw new Error(`OpenTagTracker does not have node '${expectedNodeTag}'`)
+  }
+
+  popType (expectedNodeType: string): AstNode {
+    if (this.nodes.length === 0) {
+      throw new Error(
+        `OpenTagTracker is empty while trying to pop type '${expectedNodeType}'`
       )
     }
     for (let i = this.nodes.length - 1; i >= 0; i--) {

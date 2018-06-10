@@ -3,22 +3,16 @@
 import type { Transformer } from '../standardize-ast/transformer.js'
 import type { TransformerList } from '../standardize-ast/transformer-list.js'
 
-const AstNode = require('../../ast-node.js')
 const AstNodeList = require('../../ast-node-list.js')
 const FormattingTracker = require('../helpers/formatting-tracker.js')
 const getHtmlBlockTag = require('../helpers/get-html-block-tag.js')
-const isClosingHtmlTagType = require('../helpers/is-closing-html-tag-type.js')
-const isOpeningHtmlTagType = require('../helpers/is-opening-html-tag-type.js')
-const isSingleHtmlTagType = require('../helpers/is-single-html-tag-type.js')
-const loadMdTransformers = require('../standardize-ast/load-md-transformers.js')
-const loadHtmlBlockTransformers = require('../standardize-ast/load-htmlblock-transformers.js')
-const openingTagFor = require('../helpers/opening-tag-for.js')
+const loadTransformers = require('../standardize-ast/load-transformers.js')
 const OpenTagTracker = require('../helpers/open-tag-tracker.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
-const parseHtmlTag = require('../helpers/parse-html-tag.js')
 
-var mdTransformers: TransformerList = loadMdTransformers()
-var htmlBlockTransformers: TransformerList = loadHtmlBlockTransformers()
+var mdTransformers: TransformerList = loadTransformers('md')
+var htmlBlockTransformers: TransformerList = loadTransformers('htmlblock')
+var htmlTagTransformers: TransformerList = loadTransformers('htmltag')
 
 // AstStandardizer converts the AST created by Remarkable
 // into the standardized AST used by TextRunner
@@ -38,6 +32,7 @@ module.exports = class AstStandardizer {
 
   async standardize (ast: Object): Promise<AstNodeList> {
     for (let node of ast) {
+      // console.log(node)
       if (node.lines) this.line = Math.max(node.lines[0] + 1, this.line)
 
       if (node.children) {
@@ -58,11 +53,11 @@ module.exports = class AstStandardizer {
 
   async processHtmlBlock (node: Object): Promise<boolean> {
     if (node.type !== 'htmlblock') return false
-    const tag = getHtmlBlockTag(node.content, this.filepath, this.line)
-    const transformer: Transformer = htmlBlockTransformers[tag]
+    const tagName = getHtmlBlockTag(node.content, this.filepath, this.line)
+    const transformer: Transformer = htmlBlockTransformers[tagName]
     if (!transformer) {
       throw new UnprintedUserError(
-        `Unknown HTML block: '${tag}'`,
+        `Unknown HTML block: '${tagName}'`,
         this.filepath,
         this.line
       )
@@ -81,29 +76,25 @@ module.exports = class AstStandardizer {
 
   processHtmlTag (node: Object): boolean {
     if (node.type !== 'htmltag') return false
-    const [tag, attributes] = parseHtmlTag(
-      node.content,
+    const tagName = getHtmlBlockTag(node.content, this.filepath, this.line)
+    const transformer: Transformer =
+      htmlTagTransformers[tagName.replace('/', '_')]
+    if (!transformer) {
+      throw new UnprintedUserError(
+        `Unknown HTML tag: '${tagName}'`,
+        this.filepath,
+        this.line
+      )
+    }
+    const transformed = transformer(
+      node,
+      this.openTags,
       this.filepath,
       this.line
     )
-    const type = this.getType(tag, attributes)
-    const astNode = new AstNode({
-      type,
-      tag,
-      content: '',
-      line: this.line,
-      file: this.filepath,
-      attributes
-    })
-    if (isSingleHtmlTagType(tag)) {
-      // nothing to do here
-    } else if (isOpeningHtmlTagType(tag)) {
-      this.openTags.add(astNode)
-    } else if (isClosingHtmlTagType(tag)) {
-      const openingNode = this.openTags.pop(openingTagFor(astNode.type))
-      astNode.attributes = openingNode.attributes
+    for (const node of transformed) {
+      this.result.push(node)
     }
-    this.result.push(astNode)
     return true
   }
 
@@ -127,51 +118,6 @@ module.exports = class AstStandardizer {
     this.line += 1
     return true
   }
-
-  getType (tag: string, attributes: { [string]: string }): string {
-    if (tag === 'a' && attributes['href']) return 'link_open'
-    if (tag === '/a' && this.openTags.peek().attributes['href']) {
-      return 'link_close'
-    }
-    const result = types[tag]
-    if (!result) {
-      throw new UnprintedUserError(
-        `unknown HTML tag type: '${tag}'`,
-        this.filepath,
-        this.line
-      )
-    }
-    return result
-  }
-}
-
-const types = {
-  b: 'bold_open',
-  '/b': 'bold_close',
-  br: 'linebreak',
-  h1: 'heading_open',
-  '/h1': 'heading_close',
-  h2: 'heading_open',
-  '/h2': 'heading_close',
-  h3: 'heading_open',
-  '/h3': 'heading_close',
-  h4: 'heading_open',
-  '/h4': 'heading_close',
-  h5: 'heading_open',
-  '/h5': 'heading_close',
-  h6: 'heading_open',
-  '/h6': 'heading_close',
-  i: 'italic_open',
-  '/i': 'italic_close',
-  img: 'image',
-  code: 'code_open',
-  '/code': 'code_close',
-  a: 'anchor_open',
-  '/a': 'anchor_close',
-  strong: 'strong_open',
-  '/strong': 'strong_close',
-  em: 'em_open',
-  '/em': 'em_close'
 }
 
 function alertUnknownNodeType (node, filepath: string, line: number) {

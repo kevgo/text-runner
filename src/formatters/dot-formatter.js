@@ -13,11 +13,7 @@ class DotFormatter extends Formatter {
     console.log()
     console.log(dim(this.output))
     console.log(
-      red(
-        `${this.activity.file}:${this.activity.line} ${
-          this.title
-        } -- ${errorMessage}`
-      )
+      red(`${this.activity.file}:${this.activity.line} -- ${errorMessage}`)
     )
     printCodeFrame(
       console.log,

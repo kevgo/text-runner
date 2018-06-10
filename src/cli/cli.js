@@ -18,9 +18,13 @@ async function main () {
   for (const err of errors) {
     if (err instanceof UnprintedUserError) {
       const uErr = (err: UnprintedUserError)
-      console.log(
-        red(`${uErr.filePath || ''}:${uErr.line || 0} -- ${uErr.message || ''}`)
-      )
+      if (uErr.filePath && uErr.line != null) {
+        console.log(
+          red(`${uErr.filePath}:${uErr.line} -- ${uErr.message || ''}`)
+        )
+      } else {
+        console.log(red(uErr.message))
+      }
       const filePath = path.join(process.cwd(), err.filePath || '')
       printCodeFrame(console.log, filePath, err.line)
     } else if (err instanceof PrintedUserError) {

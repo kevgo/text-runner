@@ -14,7 +14,6 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  console.log(11111111111)
   const blockquoteMatch = node.content.match(blockquoteRegex)
   const resultNode = new AstNode({
     type: node.type,

@@ -37,4 +37,8 @@ requiredModules:
     ignore: []
     root: '{dist,documentation,features,text-run}/**/*.js'
   stripLoaders: false
-  transpilers: []
+  transpilers:
+    - extension: .js
+      fnName: transform
+      module: babel-core # 6.17.0
+      resultKey: code

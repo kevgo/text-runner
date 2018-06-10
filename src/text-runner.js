@@ -11,6 +11,7 @@ const debugCommand = require('./commands/debug/debug-command')
 const helpCommand = require('./commands/help/help-command')
 const runCommand = require('./commands/run/run-command')
 const setupCommand = require('./commands/setup/setup-command')
+const staticCommand = require('./commands/static/static-command')
 const versionCommand = require('./commands/version/version-command')
 
 // Tests the documentation in the given directory
@@ -38,6 +39,9 @@ module.exports = async function (
       case 'setup':
         await setupCommand()
         return []
+      case 'static':
+        errors = await staticCommand(configuration)
+        return errors
       case 'version':
         await versionCommand()
         return []

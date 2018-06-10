@@ -7,14 +7,19 @@ Feature: recognize empty links
   - links without a target cause the test to fail
 
 
-  Scenario: empty link
+  Scenario Outline: empty link
     Given my source code contains the file "1.md" with content:
       """
       An [empty link to an anchor]()
       """
-    When trying to run text-run
+    When trying to run <COMMAND>
     Then the test fails with:
       | FILENAME      | 1.md                |
       | LINE          | 1                   |
       | ERROR MESSAGE | link without target |
       | EXIT CODE     | 1                   |
+
+    Examples:
+      | COMMAND           |
+      | text-run          |
+      | "text-run static" |

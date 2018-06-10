@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-unused-expressions: 0 */
 
 const AstNode = require('./ast-node.js')
 const { expect } = require('chai')

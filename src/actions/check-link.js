@@ -3,7 +3,7 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
-const { cyan, magenta } = require('chalk')
+const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
@@ -66,7 +66,7 @@ async function checkExternalLink (
     await request({ url: target, timeout: 4000 })
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
-      f.warning(`link to non-existing external website ${cyan(target)}`)
+      f.warning(`link to non-existing external website ${bold(target)}`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
       f.warning(`link to ${magenta(target)} timed out`)
     } else if (
@@ -98,7 +98,7 @@ async function checkLinkToFilesystem (
       f.name(`link to local file ${cyan(target)}`)
     }
   } catch (err) {
-    throw new Error(`link to non-existing local file ${cyan(target)}`)
+    throw new Error(`link to non-existing local file ${bold(target)}`)
   }
 }
 
@@ -112,7 +112,7 @@ async function checkLinkToAnchorInSameFile (
     linkTarget => linkTarget.name === target.substr(1)
   )[0]
   if (!targetEntry) {
-    throw new Error(`link to non-existing local anchor ${cyan(target)}`)
+    throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }
   if (targetEntry.type === 'heading') {
     f.name(`link to local heading ${cyan(target)}`)
@@ -141,7 +141,7 @@ async function checkLinkToAnchorInOtherFile (
   )[0]
   if (!targetEntry) {
     throw new Error(
-      `link to non-existing anchor ${cyan('#' + targetAnchor)} in ${cyan(
+      `link to non-existing anchor ${bold('#' + targetAnchor)} in ${bold(
         targetFilename
       )}`
     )

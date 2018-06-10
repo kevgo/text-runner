@@ -8,6 +8,7 @@ const FormattingTracker = require('../helpers/formatting-tracker.js')
 const getHtmlBlockTag = require('../helpers/get-html-block-tag.js')
 const loadTransformers = require('../standardize-ast/load-transformers.js')
 const OpenTagTracker = require('../helpers/open-tag-tracker.js')
+const removeHtmlComments = require('../helpers/remove-html-comments.js')
 const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
 
 var mdTransformers: TransformerList = loadTransformers('md')
@@ -53,7 +54,11 @@ module.exports = class AstStandardizer {
 
   async processHtmlBlock (node: Object): Promise<boolean> {
     if (node.type !== 'htmlblock') return false
-    const tagName = getHtmlBlockTag(node.content, this.filepath, this.line)
+    const tagName = getHtmlBlockTag(
+      removeHtmlComments(node.content),
+      this.filepath,
+      this.line
+    )
     const transformer: Transformer = htmlBlockTransformers[tagName]
     if (!transformer) {
       throw new UnprintedUserError(
@@ -76,7 +81,11 @@ module.exports = class AstStandardizer {
 
   processHtmlTag (node: Object): boolean {
     if (node.type !== 'htmltag') return false
-    const tagName = getHtmlBlockTag(node.content, this.filepath, this.line)
+    const tagName = getHtmlBlockTag(
+      removeHtmlComments(node.content),
+      this.filepath,
+      this.line
+    )
     const transformer: Transformer =
       htmlTagTransformers[tagName.replace('/', '_')]
     if (!transformer) {

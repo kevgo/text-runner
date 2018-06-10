@@ -6,7 +6,7 @@ that its embedded link or code block points to.
 
 #### Example
 
-Assuming the workspace contains a <a textrun="create-directory">`foo`</a> directory,
+Assuming the workspace contains a <code textrun="create-directory">foo</code> directory,
 you can change into it via this Markdown code:
 
 <a textrun="run-markdown-in-textrun">

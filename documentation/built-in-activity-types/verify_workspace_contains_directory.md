@@ -5,21 +5,19 @@ The `verifyWorkspaceContainsDirectory` action checks links to folders in your so
 
 #### Example
 
-Assuming your test workspace contains a
-<a textrun="create-directory">`foo`</a>
-directory,
-you can use this code to verify that it exists:
 
 <a textrun="run-markdown-in-textrun">
 ```markdown
-<a textrun="verify-workspace-contains-directory">
-  Now your workspace has a `foo` directory.
-</a>
+Assuming your test workspace contains a
+<code textrun="create-directory">foo</code>
+directory,
+you can use this code to verify that it exists:
+<code textrun="verify-workspace-contains-directory">foo</code>
 ```
 </a>
 
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/verify-source-contains-directory/verify-source-contains-directory.feature)
-- [source code](../../src/actions/verify-source-contains-directory.js)
+- [feature specs](../../features/actions/built-in/verify-workspace-contains-directory/verify-workspace-contains-directory.feature)
+- [source code](../../src/actions/verify-workspace-contains-directory.js)

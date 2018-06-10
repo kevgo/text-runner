@@ -10,7 +10,7 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openNode = openTags.popType('bullet_list_open')
+  const openNode = openTags.popType('blockquote_open')
   result.pushData({
     type: node.type,
     tag: '/blockquote',

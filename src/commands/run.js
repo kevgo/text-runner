@@ -18,7 +18,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
-  const workingDir = createWorkingDir(config.useSystemTempDirectory)
+  config.workspace = createWorkingDir(config.useSystemTempDirectory)
 
   // step 1: find files
   const filenames = getFileNames(config)
@@ -42,7 +42,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   }
 
   // step 5: execute the ActivityList
-  process.chdir(workingDir)
+  process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats)
   jobs.push(executeSequential(activities, config, linkTargets, stats))
   var results = await Promise.all(jobs)
@@ -51,7 +51,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepTmp) rimraf.sync(workingDir)
+  if (results.length === 0 && !config.keepTmp) rimraf.sync(config.workspace)
 
   // step 7: write stats
   var text = '\n'

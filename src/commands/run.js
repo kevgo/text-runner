@@ -1,18 +1,18 @@
 // @flow
 
-import type { Configuration } from '../../configuration/configuration.js'
+import type { Configuration } from '../configuration/configuration.js'
 
 const { bold, green, magenta, red } = require('chalk')
-const executeParallel = require('../../runners/execute-parallel.js')
-const executeSequential = require('../../runners/execute-sequential.js')
-const extractActivities = require('../../activity-list/extract-activities.js')
-const extractImagesAndLinks = require('../../activity-list/extract-images-and-links.js')
-const findLinkTargets = require('../../link-targets/find-link-targets.js')
+const executeParallel = require('../runners/execute-parallel.js')
+const executeSequential = require('../runners/execute-sequential.js')
+const extractActivities = require('../activity-list/extract-activities.js')
+const extractImagesAndLinks = require('../activity-list/extract-images-and-links.js')
+const findLinkTargets = require('../link-targets/find-link-targets.js')
 const rimraf = require('rimraf')
-const createWorkingDir = require('../../working-dir/create-working-dir.js')
-const readAndParseFile = require('../../parsers/read-and-parse-file.js')
-const getFileNames = require('../../finding-files/get-filenames.js')
-const StatsCounter = require('../../runners/stats-counter.js')
+const createWorkingDir = require('../working-dir/create-working-dir.js')
+const readAndParseFile = require('../parsers/read-and-parse-file.js')
+const getFileNames = require('../finding-files/get-filenames.js')
+const StatsCounter = require('../runners/stats-counter.js')
 
 async function runCommand (config: Configuration): Promise<Array<Error>> {
   const stats = new StatsCounter()

@@ -1,7 +1,7 @@
 // @flow
 
 const { cyan, green } = require('chalk')
-const createConfiguration = require('../../configuration/create-configuration.js')
+const createConfiguration = require('../configuration/create-configuration.js')
 
 module.exports = async function () {
   createConfiguration()

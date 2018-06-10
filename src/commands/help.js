@@ -2,7 +2,7 @@
 
 const { bold, dim, red } = require('chalk')
 // $FlowFixMe: flow doesn't like requiring such an untyped file
-const version: number = require('../../../package.json').version
+const version: number = require('../../package.json').version
 
 module.exports = async function helpCommand (error: ?string) {
   console.log(template(error))

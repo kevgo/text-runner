@@ -4,15 +4,13 @@ import type { ActionArgs } from '../runners/action-args.js'
 
 const { bold, cyan } = require('chalk')
 const path = require('path')
-const debug = require('debug')('textrun:actions:cd')
 
 // Changes the current working directory to the one given in the hyperlink or code block
 module.exports = function (args: ActionArgs) {
-  const directory = args.nodes.textInNodeOfType('link', 'code')
+  const directory = args.nodes.text()
   args.formatter.name(`changing into the ${bold(cyan(directory))} directory`)
-  args.formatter.log(`cd ${directory}`)
   const fullPath = path.join(args.configuration.workspace, directory)
-  debug(`changing into directory '${fullPath}`)
+  args.formatter.log(`cd ${fullPath}`)
   try {
     process.chdir(fullPath)
   } catch (e) {

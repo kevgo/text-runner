@@ -9,12 +9,11 @@
 
 ## Testing
 
-* run all tests: <a textrun="does-make-target-exist">`make spec`</a>
-* run feature specs: <a textrun="does-make-target-exist">`make features`</a>
-* run feature specs against the JS API: <a textrun="does-make-target-exist">`make cukeapi`</a>
-* run feature specs against the CLI: <a textrun="does-make-target-exist">`make cukecli`</a>
-* run feature specs against the CLI in offline mode: `make cukecli --tags '~@online'`
-* run text-run: <a textrun="does-make-target-exist">`make docs`</a>
+* run all tests: <code textrun="does-make-target-exist">make spec</code>
+* run feature specs: <code textrun="does-make-target-exist">make features</code>
+* run feature specs: <code textrun="does-make-target-exist">make cuke</code>
+* run feature specs in offline mode: `make cuke --tags '~@online'`
+* run text-run: <code textrun="does-make-target-exist">make docs</code>
 
 To debug a single test:
 * enable console output: add the `@verbose` tag

@@ -57,5 +57,5 @@ hello again
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/verify-source-file-content/verify-source-file-content.feature)
-- [source code](../../src/activity-types/verify-source-file-content.js)
+- [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
+- [source code](../../src/actions/verify-source-file-content.js)

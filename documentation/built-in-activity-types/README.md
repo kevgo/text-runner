@@ -56,4 +56,4 @@ With the option `--offline` given, text-run does not check outgoing links to oth
 <hr>
 
 Read more about:
-- writing your own [user-defined activity types](../user-defined-activity-types.md)
+- writing your own [user-defined activities](../user-defined-activities.md)

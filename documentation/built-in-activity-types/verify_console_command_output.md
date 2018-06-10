@@ -27,5 +27,5 @@ Hello world!
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/verify-console-command-output/verify-console-command-output.feature)
-- [source code](../../src/activity-types/verify-console-command-output.js)
+- [feature specs](../../features/actions/built-in/verify-console-command-output/verify-console-command-output.feature)
+- [source code](../../src/actions/verify-console-command-output.js)

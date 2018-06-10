@@ -18,5 +18,5 @@ console.log('This is getting executed by TextRunner!')
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/run-javascript/run-javascript.feature)
-- [source code](../../src/activity-types/run-javascript.js)
+- [feature specs](../../features/actions/built-in/run-javascript/run-javascript.feature)
+- [source code](../../src/actions/run-javascript.js)

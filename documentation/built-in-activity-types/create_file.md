@@ -33,5 +33,5 @@ The file content goes here
 
 #### More info
 
-- [feature specs](../../features/activity-types/built-in/create-file/create-file.feature)
-- [source code](../../src/activity-types/create-file.js)
+- [feature specs](../../features/actions/built-in/create-file/create-file.feature)
+- [source code](../../src/actions/create-file.js)

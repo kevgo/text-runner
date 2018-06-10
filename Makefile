@@ -15,7 +15,6 @@ coverage-tests: coverage-build # test coverage for unit tests
 	# TODO: fix this
 	# BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
 	# mv .nyc_output .nyc_output_tests
-	# test coverage for API specs
 
 coverage-cli:  # test coverage for CLI specs
 	rm -rf .nyc_output_cli
@@ -38,10 +37,10 @@ coverage-html:  # render test coverage as a HTML report
 coverage-send:  # sends the coverage to coveralls.io
 	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
 
-coverage: coverage-build coverage-tests coverage-api coverage-cli coverage-html   # measures code coverage
+coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures code coverage
 .PHONY: coverage
 
-cukecli: build   # runs the CLI tests
+cuke-cli: build   # runs the CLI tests
 ifndef FILE
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
 else
@@ -60,10 +59,8 @@ endif
 
 features: build   # runs the feature specs
 ifndef FILE
-	make cuke-api
 	make cuke-cli
 else
-	make cuke-api $(FILE)
 	make cuke-cli $(FILE)
 endif
 
@@ -90,7 +87,7 @@ setup:   # sets up the installation on this machine
 	yarn install
 	node-prune
 
-spec: lint tests cukeapi cukecli docs   # runs all tests
+spec: lint tests cukecli docs   # runs all tests
 
 tests:   # runs the unit tests
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"

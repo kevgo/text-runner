@@ -2,6 +2,7 @@
 
 const { dim, cyan, green, magenta, red } = require('chalk')
 const Formatter = require('./formatter')
+const path = require('path')
 const printCodeFrame = require('../helpers/print-code-frame')
 
 class DotFormatter extends Formatter {
@@ -18,7 +19,11 @@ class DotFormatter extends Formatter {
         } -- ${errorMessage}`
       )
     )
-    printCodeFrame(console.log, this.activity.file, this.activity.line)
+    printCodeFrame(
+      console.log,
+      path.join(this.sourceDir, this.activity.file),
+      this.activity.line
+    )
   }
 
   skip (message: string) {

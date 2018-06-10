@@ -21,15 +21,17 @@ module.exports = function (args: ActionArgs) {
   )
   const filePath = path.join(
     args.configuration.sourceDir,
+    path.dirname(args.file),
     relativeBaseDir,
     fileName
   )
+  args.formatter.log(`ls ${filePath}`)
   var actualContent
   try {
     actualContent = fs.readFileSync(filePath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      throw new Error(`file ${cyan(filePath)} not found`)
+      throw new Error(`file ${cyan(fileName)} not found`)
     } else {
       throw err
     }

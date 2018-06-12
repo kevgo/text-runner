@@ -37,10 +37,9 @@ const World = function () {
       args.env['DEBUG'] = '*,-babel'
     }
 
+    args.command = this.makeFullPath(params.command)
     if (process.env.NODE_ENV === 'coverage') {
       args.command = runWithTestCoverage(args.command)
-    } else {
-      args.command = this.makeFullPath(params.command)
     }
     this.process = new ObservableProcess(args)
     await this.process.waitForEnd()

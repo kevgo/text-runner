@@ -19,14 +19,6 @@ module.exports = async function (args: ActionArgs) {
   debug(filecontent)
   fs.writeFileSync(filename, filecontent)
 
-  // we need to configure the TextRunner instance called by our own Markdown to run its tests in its current directory,
-  // because in README.md we call it to run Markdown that verifies Markdown we ran manually.
-  // So TextRunner that verifies Markdown in README.md must run in the same directory as the other Markdown in README.md.
-  fs.writeFileSync(
-    path.join(args.configuration.workspace, 'text-run.yml'),
-    "useSystemTempDirectory: '.'"
-  )
-
   var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
   const trArgs = callArgs(textRunPath)

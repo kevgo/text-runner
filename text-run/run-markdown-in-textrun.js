@@ -12,12 +12,12 @@ const debug = require('debug')('text-runner:run-markdown-in-text-run')
 
 module.exports = async function (args: ActionArgs) {
   args.formatter.name('verify the inline markdown works in TextRunner')
+  const filePath = path.join(args.configuration.workspace, '1.md')
   const markdown = args.nodes.textInNodeOfType('fence')
-  const filename = path.join(args.configuration.workspace, '1.md')
-  const filecontent = markdown.replace(/​/g, '')
-  debug(`writing file '${filename}' with content:`)
-  debug(filecontent)
-  fs.writeFileSync(filename, filecontent)
+  const fileContent = markdown.replace(/​/g, '')
+  debug(`writing file '${filePath}' with content:`)
+  debug(fileContent)
+  fs.writeFileSync(filePath, fileContent)
 
   var textRunPath = path.join(args.configuration.sourceDir, 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'

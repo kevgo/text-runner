@@ -28,7 +28,7 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.output('Hello world!')        // print something on the console
+  formatter.log('Hello world!')        // print something on the console
 };
 ```
 

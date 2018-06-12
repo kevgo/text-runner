@@ -7,7 +7,7 @@ const mkdirp = require('mkdirp')
 const path = require('path')
 
 module.exports = function (args: ActionArgs) {
-  const directoryName = args.nodes.text()
+  const directoryName = args.nodes.text().trim()
   if (!directoryName) {
     throw new Error('empty directory name given')
   }

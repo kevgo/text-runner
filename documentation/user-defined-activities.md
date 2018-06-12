@@ -54,8 +54,7 @@ The handler function for our action is given an object containing various inform
 <a textrun="verify-handler-args">
 
 * __file__, __line:__ location of the currently executed block in the documentation
-* __nodes:__ the document content inside the `<a>` tag for this action,
-  as a list of [AST nodes](#ast-nodes)
+* __nodes:__ the [document content](#accessing-document-content) inside the active block for this action,
 * __formatter:__ the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
 * __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
 </a>
@@ -82,8 +81,8 @@ in addition to any other NPM modules that your handler method uses.
 ## Accessing document content
 
 Document content is provided in the `nodes` attribute.
-It contains an [AstNodeList](src/parsers/ast-node-list.js).
-This is an Array subclass containing [AstNodes](src/parsers/ast-node.js)
+It contains an [AstNodeList](/src/parsers/ast-node-list.js).
+This is an Array subclass containing [AstNodes](/src/parsers/ast-node.js)
 from the current active block in the document
 with additional helper methods to extract document content:
 

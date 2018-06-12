@@ -57,6 +57,6 @@ module.exports = function loadConfiguration (
     offline: String(get('offline')) === 'true',
     sourceDir: get('sourceDir'),
     useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
-    workspace: '' // going to be populated later
+    workspace: get('workspace') || ''
   }
 }

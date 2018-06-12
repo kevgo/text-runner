@@ -123,4 +123,18 @@ describe('parse-cli-args', function () {
       expect(this.result.format).to.equal('dot')
     })
   })
+
+  context('--workspace foo/bar', function () {
+    beforeEach(function () {
+      this.result = parseCliArgs(['--workspace', 'foo/bar'])
+    })
+
+    it('returns the "run" command', function () {
+      expect(this.result.command).to.equal('run')
+    })
+
+    it('returns the dot formatter option', function () {
+      expect(this.result.workspace).to.equal('foo/bar')
+    })
+  })
 })

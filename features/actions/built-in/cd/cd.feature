@@ -14,9 +14,7 @@ Feature: changing the working directory
     And my workspace contains a file "foo/bar" with content "hello"
     And my source code contains the file "directory_changer.md" with content:
       """
-      <a textrun="cd">
-        `foo`
-      </a>
+      <code textrun="cd">foo</code>
       <a textrun="verify-workspace-file-content">
         __bar__ `hello`
       </a>
@@ -33,9 +31,7 @@ Feature: changing the working directory
     And my workspace contains a file "foo/bar" with content "hello"
     And my source code contains the file "directory_changer.md" with content:
       """
-      <a textrun="cd">
-        `foo`
-      </a>
+      <code textrun="cd">foo</code>
       <a textrun="verify-workspace-file-content">
         __bar__ `hello`
       </a>
@@ -50,24 +46,7 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given my source code contains the file "directory_changer.md" with content:
       """
-      <a textrun="cd">
-        [foo](foo)
-      </a>
-      """
-    When trying to run text-run
-    Then the test fails with:
-      | FILENAME      | directory_changer.md            |
-      | LINE          | 1                               |
-      | ERROR MESSAGE | directory foo not found         |
-      | EXIT CODE     | 2                               |
-
-
-  Scenario: pointing to a non-existing directory
-    Given my source code contains the file "directory_changer.md" with content:
-      """
-      <a textrun="cd">
-        `foo`
-      </a>
+      <code textrun="cd">foo</code>
       """
     When trying to run text-run
     Then the test fails with:
@@ -75,4 +54,3 @@ Feature: changing the working directory
       | LINE          | 1                               |
       | ERROR MESSAGE | directory foo not found         |
       | EXIT CODE     | 1                               |
-

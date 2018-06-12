@@ -47,21 +47,21 @@ hello.md:1 -- Hello world
 </pre>
 
 
+## Handler functions
+
 The handler function for our action is given an object containing various information and utility functions:
 
 <a textrun="verify-handler-args">
 
 * __file__, __line:__ location of the currently executed block in the documentation
 * __nodes:__ the document content inside the `<a>` tag for this action,
-  as an array of [AST nodes](#ast-nodes)
+  as a list of [AST nodes](#ast-nodes)
 * __formatter:__ the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
 * __configuration:__ TextRunner configuration data (which TextRunner options are enabled)
 </a>
 
 TextRunner supports all forms of synchronous and asynchronous operations:
-* just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world.js)) -
-  don't worry that synchronous operations prevent concurrency by blocking Node's event loop,
-  all TextRunner blocks are tested strictly sequentially anyways
+* just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world.js))
 * return a Promise ([example](examples/custom-action-promise/text-run/hello-world.js))
 * implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
@@ -79,11 +79,27 @@ This means your project should have a `package.json` file listing the transpiler
 in addition to any other NPM modules that your handler method uses.
 
 
-## AST Nodes
+## Accessing document content
 
-Document content is provided as [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree) nodes.
-Each node is an object that has these attributes:
-* __line:__ the line in the file at which this AST node begins
+Document content is provided in the `nodes` attribute.
+It contains an [AstNodeList](src/parsers/ast-node-list.js).
+This is an Array subclass containing [AstNodes](src/parsers/ast-node.js)
+from the current active block in the document
+with additional helper methods to extract document content:
+
+* __text():__ returns the entire textual content in the current active block
+* __textInNodeOfType(type1, type2, ...):__
+    returns the text in the AST node of the given types.
+    You can provide multiple alternative node types.
+    Verifies that only one matching AST node exists.
+* __textInNodeOfTypes(type1, type2, ...):__
+    returns the text in the AST nodes of the given types.
+    You can provide multiple alternative node types.
+
+You cant also iterate `nodes` manually.
+Each node has these attributes:
+<a textrun="verify-ast-node-attributes">
+* __file__, __line:__ the file and line in the file at which this AST node begins
 * __type:__ the type of the AST node. Examples are
             `text` for normal text,
             `code` for inline code blocks,
@@ -91,77 +107,34 @@ Each node is an object that has these attributes:
             `emphasized` for italic text,
             `strong` for bold text,
             and `link_open` for links.
+* __tag:__ corresponding HTML tag
 * __content:__ textual content of the AST node
-* __src:__ the content of the `src` attribute if this AST node is a link or image
-* __level:__ if this AST node was nested in another one, the nesting level
+* __attributes:__ list of HTML attributes of the node
+</a>
 
-
-## Formatter
-
-One of the utilities availabe to actions is the formatter instance.
-It allows to signal test progress to TextRunner and print test output to the console
-and provides the following methods:
-
-* __output(text):__
-  allows to print output of the currently running action to the console -
-  depending on the type of formatter, this output is printed or not
-* __stdout__ and __stderr:__
-  streams that you can pipe output of commands you run into
-* __console:__
-  a console object that you should use instead of the built-in console
-  to generate output that fits into the formatter output
-* __warn:__ to signal a warning to the user (but keep the test passing)
-* __skip:__ to skip the current test
-* __setTitle:__ overrides how the current activity is called in the test output
-
-
-TextRunner supports a variety of formatters:
-
-* __detailed formatter:__
-  Prints each test performed, including test output.
-
-* __dot formatter:__
-  A minimalistic formatter, shows only dots for each test performed.
-
-
-## The "searcher" helper
-
-More realistic tests for your documentation
-will need to access document content
-in order to use it in tests.
-The DOM nodes of the active block
-including their type, content, and line number -
-are provided to your handler function
-via the the `nodes` field of the first argument.
-You can access this data directly
-or use a helper that is provided to you via the `searcher` field of the first parameter.
-To demonstrate how this works,
-here is a simple implementation of an action that runs a code block in the terminal.
-
-<a textrun="create-markdown-file">
+Here is an example for an action that runs a code block in the terminal.
+<a textrun="create-file">
+Create a file __execute.md__ with the content:
 
 ```
-<a textrun="console-command">
-`​``
+<pre textrun="console-command">
 echo "Hello world"
-`​``
-</a>
+</pre>
 ```
 </a>
 
-Here is the block definition implemented using the `searcher` helper,
-as always implemented in a file called
+Here is the corresponding action, implemented in
 <a textrun="create-file">
 __text-run/console-command.js__:
 
 ```javascript
 child_process = require('child_process')
 
-module.exports = function({formatter, searcher, nodes}) {
+module.exports = function({formatter, nodes}) {
 
-  // determine which command to run using the searcher utility
+  // determine which command to run
   // (you could also iterate the "nodes" array directly here)
-  const commandToRun = searcher.tagContent('fence')
+  const commandToRun = nodes.text()
 
   // perform the action
   formatter.log(child_process.execSync(commandToRun, {encoding: 'utf8'}))
@@ -171,26 +144,34 @@ module.exports = function({formatter, searcher, nodes}) {
 
 <a textrun="run-textrun"></a>
 
-<a textrun="verify-searcher-methods">
-The `searcher` tool provides the following properties and methods:
-* __tagContent:__ returns the textual content of the DOM node
-  that satisfies the given query.
-  In the example above we are looking for a fenced code block,
-  hence the query is `'fence'`.
-  Providing an array for the type (e.g. `['code', 'fence']}`)
-  retrieves all nodes that have any of the given types.
 
-  This method throws if it finds more or less than one tag of the given type
-  in the active block. Other tag types are ignored.
+## Formatter
 
-  The optional second argument allows you to provide a default value
-  in case no matching tag is found, e.g. `{default: ''}`.
-* __tagsContents:__ returns the textual content of multiple DOM nodes
-* __findNode:__ returns the DOM node matching the query,
-  throws if more than one node is found
-* __findNodes:__ returns the DOM nodes matching the query
-* __nodes:__ property containing the DOM nodes for this active block
-</a>
+One of the utilities availabe to actions is the formatter instance.
+It allows to signal test progress to TextRunner and print test output to the console.
+It provides the following methods:
+
+* __log(text):__
+  allows to print output of the currently running action to the console -
+  depending on the type of formatter, this output is printed or not
+* __warn:__ to signal a warning to the user (but keep the test passing)
+* __skip:__ call this to skip the current test
+* __name:__ overrides how the current activity is called in the test output
+* __stdout__ and __stderr:__
+  streams that you can pipe output of commands you run into
+* __console:__
+  a console object that you should use instead of the built-in console
+  to generate output that fits into the formatter output
+
+To fail a test, throw an `Error` with the corresponding error message.
+TextRunner supports a variety of formatters:
+
+* __detailed formatter:__
+  Prints each test performed, including test output.
+
+* __dot formatter:__
+  A minimalistic formatter, shows only dots for each test performed.
+
 
 <hr>
 

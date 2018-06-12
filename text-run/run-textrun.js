@@ -25,4 +25,5 @@ module.exports = async function (args: ActionArgs) {
       } when processing the created Markdown file`
     )
   }
+  global.consoleCommandOutput = processor.fullOutput()
 }

@@ -29,8 +29,12 @@ module.exports = async function (args: ActionArgs) {
 
   var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
+  const trArgs = callArgs(textRunPath)
+  trArgs[trArgs.length - 1] += ` --keep-tmp --workspace ${
+    args.configuration.workspace
+  }`
   const processor = new ObservableProcess({
-    commands: callArgs(textRunPath),
+    commands: trArgs,
     cwd: args.configuration.workspace,
     stdout: args.formatter.stdout,
     stderr: args.formatter.stderr

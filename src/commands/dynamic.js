@@ -17,7 +17,9 @@ async function dynamicCommand (config: Configuration): Promise<Array<Error>> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
-  config.workspace = createWorkingDir(config.useSystemTempDirectory)
+  if (!config.workspace) {
+    config.workspace = createWorkingDir(config.useSystemTempDirectory)
+  }
 
   // step 1: find files
   const filenames = getFileNames(config)

@@ -11,9 +11,8 @@ class DetailedFormatter extends Formatter {
   error (errorMessage: string) {
     super.error(errorMessage)
     console.log(dim(this.output))
-    console.log(
-      red(`${this.activity.file}:${this.activity.line} -- ${errorMessage}`)
-    )
+    process.stdout.write(red(`${this.activity.file}:${this.activity.line} -- `))
+    console.log(errorMessage)
     const filePath = path.join(this.sourceDir, this.activity.file)
     printCodeFrame(console.log, filePath, this.activity.line)
   }

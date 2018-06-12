@@ -3,23 +3,26 @@
 It is possible to extend the set of
 [built-in activity types](built-in-activity-types)
 with your custom-built ones written in JavaScript.
-Let's start by building the simplest possible action first.
 
 
 ## Hello-world example
 
-The "hello-world" action prints the text "hello world"
+Let's start by building the simplest possible action first:
+A "hello-world" action that prints the text "hello world"
 in the test runner's console output when running.
 It will be triggered via this piece of Markdown:
 
-<a textrun="create-markdown-file">
+<a textrun="create-file">
 
 ```html
 <a textrun="hello-world"></a>
 ```
+
+Create a file **hello.md** with this content to test it.
+
 </a>
 
-When TextRunner encounters this block type,
+When TextRunner encounters this `hello-world` block type,
 it runs the method that the file <a textrun="create-file">__text-run/hello-world.js__ exports.
 All user-defined actions are in the "text-run" folder,
 with the file name matching the action name
@@ -28,7 +31,7 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.log('Hello world!')        // print something on the console
+  formatter.log('Hello world!')
 };
 ```
 
@@ -37,6 +40,12 @@ module.exports = function({ formatter }) {
 <a textrun="run-textrun">
 The formatter displays test progress on the console as the test runs:
 </a>
+
+<pre textrun="verify-console-command-output">
+Hello world!
+hello.md:1 -- Hello world
+</pre>
+
 
 The handler function for our action is given an object containing various information and utility functions:
 

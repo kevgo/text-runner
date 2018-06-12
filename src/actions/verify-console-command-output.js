@@ -8,7 +8,7 @@ module.exports = function (args: ActionArgs) {
   args.formatter.name('verifying the output of the last run console command')
 
   const expectedLines = args.nodes
-    .textInNodeOfType('fence')
+    .text()
     .split('\n')
     .map(line => line.trim())
     .filter(line => line)

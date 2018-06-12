@@ -37,17 +37,6 @@ jobs:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
      - run: make lint
 
-  api-tests:
-    <<: *defaults
-    steps:
-     - restore_cache:
-         key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: make coverage-api
-     - save_cache:
-         key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
-         paths:
-           - ~/repo/.nyc_output_api
-
   cli-tests:
     <<: *defaults
     steps:
@@ -76,8 +65,6 @@ jobs:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: coverage-api-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
@@ -103,9 +90,6 @@ workflows:
       - lint:
           requires:
             - checkout_code
-      - api-tests:
-          requires:
-            - checkout_code
       - cli-tests:
           requires:
             - checkout_code
@@ -115,6 +99,5 @@ workflows:
       # - send-coverage:
       #     requires:
       #       - lint
-      #       - api-tests
       #       - cli-tests
       #       - doc-tests

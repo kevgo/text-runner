@@ -27,7 +27,7 @@ function template (filename: string) {
   // capture content from the document
   // const content = activity.searcher.tagContent('boldtext')
   // do something with the content
-  // formatter.output(content)
+  // formatter.log(content)
 }
 `
 }

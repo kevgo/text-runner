@@ -19,7 +19,7 @@ module.exports = async function (args: ActionArgs) {
   debug(filecontent)
   fs.writeFileSync(filename, filecontent)
 
-  var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
+  var textRunPath = path.join(args.configuration.sourceDir, 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
   const trArgs = callArgs(textRunPath)
   trArgs[trArgs.length - 1] += ` --keep-tmp --workspace ${

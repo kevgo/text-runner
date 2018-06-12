@@ -8,7 +8,7 @@ const removeValue = require('remove-value')
 
 module.exports = function (args: ActionArgs) {
   const expectedTools = args.nodes
-    .textInNodesOfType('strongtext')
+    .textInNodesOfType('strong')
     .sort()
     .map(removeTrailingColon)
   const actualTools = Object.keys(args).sort()

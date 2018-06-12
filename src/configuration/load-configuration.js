@@ -44,7 +44,7 @@ module.exports = function loadConfiguration (
 
   return {
     activityTypes: fileData['activityTypes']
-      ? JSON.parse(fileData['activityTypes'])
+      ? fileData['activityTypes']
       : defaultValues['activityTypes'],
     classPrefix: get('classPrefix'),
     exclude: get('exclude'),

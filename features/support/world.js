@@ -6,6 +6,7 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const ObservableProcess = require('observable-process')
 const path = require('path')
+const stripAnsi = require('strip-ansi');
 const uuid = require('uuid/v4')
 
 const World = function () {
@@ -110,7 +111,7 @@ const World = function () {
     }
     if (table.MESSAGE) expectedText += table.MESSAGE
     if (table.WARNING) expectedText += table.WARNING
-    expect(standardizePath(this.process.fullOutput())).to.include(expectedText)
+    expect(standardizePath(stripAnsi(this.process.fullOutput()))).to.include(expectedText)
   }
 
   this.verifyPrintedUsageInstructions = () => {

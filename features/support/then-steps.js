@@ -1,4 +1,3 @@
-// @flow
 /* eslint no-unused-expressions: 0 */
 
 const { Then } = require('cucumber')

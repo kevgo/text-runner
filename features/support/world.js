@@ -73,17 +73,17 @@ const World = function () {
   }
 
   this.verifyCallError = expectedError => {
-    const output = this.process.fullOutput()
+    const output = stripAnsi(this.process.fullOutput())
     expect(output).to.include(expectedError)
     expect(this.process.exitCode).to.equal(1)
   }
 
   this.verifyErrormessage = expectedText => {
-    expect(this.process.fullOutput()).to.include(expectedText)
+    expect(stripAnsi(this.process.fullOutput())).to.include(expectedText)
   }
 
   this.verifyFailure = table => {
-    const output = this.process.fullOutput()
+    const output = stripAnsi(this.process.fullOutput())
     var expectedHeader
     if (table.FILENAME && table.LINE) {
       expectedHeader = `${table.FILENAME}:${table.LINE}`
@@ -116,11 +116,11 @@ const World = function () {
   }
 
   this.verifyPrintedUsageInstructions = () => {
-    expect(this.process.fullOutput()).to.include('COMMANDS')
+    expect(stripAnsi(this.process.fullOutput())).to.include('COMMANDS')
   }
 
   this.verifyPrints = expectedText => {
-    const output = this.process.fullOutput().trim()
+    const output = stripAnsi(this.process.fullOutput().trim())
     if (!new RegExp(expectedText.trim()).test(output)) {
       throw new Error(
         `expected to find regex '${expectedText.trim()}' in '${output}'`
@@ -129,14 +129,14 @@ const World = function () {
   }
 
   this.verifyPrintsNot = text => {
-    const output = this.process.fullOutput()
+    const output = stripAnsi(this.process.fullOutput())
     if (new RegExp(text).test(output)) {
       throw new Error(`expected to not find regex '${text}' in '${output}'`)
     }
   }
 
   this.verifyRanConsoleCommand = command => {
-    expect(this.process.fullOutput()).to.include(
+    expect(stripAnsi(this.process.fullOutput())).to.include(
       `running console command: ${command}`
     )
   }
@@ -164,11 +164,11 @@ const World = function () {
   }
 
   this.verifyTestsRun = count => {
-    expect(this.process.fullOutput()).to.include(` ${count} activities`)
+    expect(stripAnsi(this.process.fullOutput())).to.include(` ${count} activities`)
   }
 
   this.verifyUnknownCommand = command => {
-    expect(this.process.fullOutput()).to.include(`unknown command: ${command}`)
+    expect(stripAnsi(this.process.fullOutput())).to.include(`unknown command: ${command}`)
   }
 }
 

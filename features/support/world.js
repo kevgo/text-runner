@@ -6,7 +6,7 @@ const fs = require('fs-extra')
 const glob = require('glob')
 const ObservableProcess = require('observable-process')
 const path = require('path')
-const stripAnsi = require('strip-ansi');
+const stripAnsi = require('strip-ansi')
 const uuid = require('uuid/v4')
 
 const World = function () {

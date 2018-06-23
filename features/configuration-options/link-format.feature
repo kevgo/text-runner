@@ -37,7 +37,7 @@ Feature: Link formats
       """
     And my source code contains the file "text-run.yml" with content:
       """
-      linkFormat: <LINK>
+      linkFormat: <OPTION>
       """
     When running text-run
     Then it signals:

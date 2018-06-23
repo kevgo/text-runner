@@ -1,3 +1,6 @@
+<!-- logo is from: https://icons8.com/icon/40886/test -->
+<img src="documentation/logo2.png" align="right">
+
 <img src="documentation/logo.png" width="651" height="100" alt="TextRunner - test framework for documentation">
 
 <a href="https://circleci.com/gh/Originate/text-runner">
@@ -19,9 +22,6 @@
   <img src="https://snyk.io/test/github/Originate/text-runner/badge.svg" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/Originate/text-runner" style="max-width:100%;" />
 </a>
 <br><br>
-
-<!-- logo is from: https://icons8.com/icon/40886/test -->
-<img src="documentation/logo2.png">
 
 TextRunner is an agile documentation tool.
 It makes documentation executable.

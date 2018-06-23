@@ -42,9 +42,9 @@ coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures 
 
 cuke: build   # runs the CLI tests
 ifndef FILE
-	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
+	node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
 else
-	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
+	node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
 cuke-offline: build   # runs the CLI tests

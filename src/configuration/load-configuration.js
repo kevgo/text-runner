@@ -3,11 +3,11 @@
 import type { CliArgTypes } from '../cli/cli-arg-types.js'
 import type { Configuration } from './configuration.js'
 
-const camel = require('just-camel-case')
+const camelCase = require('just-camel-case')
 const DetailedFormatter = require('../formatters/detailed-formatter.js')
 const getFormatterClass = require('./get-formatter-class.js')
 const debug = require('debug')('textrun:configuration')
-const kebab = require('just-kebab-case')
+const kebabCase = require('just-kebab-case')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
@@ -38,9 +38,9 @@ module.exports = function loadConfiguration (
 
   function get (attributeName: string): string {
     return (
-      constructorArgs[kebab(attributeName)] ||
-      fileData[camel(attributeName)] ||
-      defaultValues[camel(attributeName)]
+      constructorArgs[kebabCase(attributeName)] ||
+      fileData[camelCase(attributeName)] ||
+      defaultValues[camelCase(attributeName)]
     )
   }
 

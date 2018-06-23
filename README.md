@@ -23,7 +23,7 @@
 </a>
 <br><br>
 
-TextRunner is an agile documentation tool.
+TextRunner is an agile documentation tool, in particular a semantic documentation checker.
 It makes documentation executable.
 An example is the text you are reading right now,
 which is verified for correctness by TextRunner.

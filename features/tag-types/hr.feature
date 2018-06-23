@@ -1,4 +1,4 @@
-Feature: active HR tags
+Feature: HR tags
 
   When writing active blocks in a Markdown document
   I want to be able to make HR tags active
@@ -9,7 +9,7 @@ Feature: active HR tags
     Given my workspace contains the HelloWorld activity
 
 
-  Scenario: hr tag
+  Scenario: active HR tag
     Given my source code contains the file "1.md" with content:
       """
       <hr textrun="HelloWorld">
@@ -19,3 +19,17 @@ Feature: active HR tags
       | FILENAME | 1.md        |
       | LINE     | 1           |
       | MESSAGE  | Hello world |
+
+  Scenario: inactive HR tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <hr>
+      """
+    When running text-run
+
+  Scenario: inactive HR Markdown tag
+    Given my source code contains the file "1.md" with content:
+      """
+      ---
+      """
+    When running text-run

@@ -81,9 +81,11 @@
   "main": "dist/text-runner.js",
   "nyc": {
     "exclude": [
-      "/dist/",
+      "coverage/**",
+      "dist/**",
       "**/*-test.js",
-      "text-run/"
+      "text-run/**",
+      "node_modules/**"
     ]
   },
   "license": "ISC",

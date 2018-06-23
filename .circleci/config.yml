@@ -96,8 +96,8 @@ workflows:
       - doc-tests:
           requires:
             - checkout_code
-      # - send-coverage:
-      #     requires:
-      #       - lint
-      #       - cli-tests
-      #       - doc-tests
+      - send-coverage:
+          requires:
+            - lint
+            - cli-tests
+            - doc-tests

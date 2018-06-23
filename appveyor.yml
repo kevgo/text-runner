@@ -11,8 +11,8 @@ init:
 install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
-  - npm --version
-  - npm install --loglevel error --depth 0
+  - yarn -v
+  - yarn
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:

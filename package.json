@@ -67,6 +67,7 @@
     "remove-value": "1.0.0",
     "shelljs": "0.8.1",
     "standard": "10.0.3",
+    "strip-ansi": "4.0.0",
     "tertestrial": "0.3.2",
     "uuid": "3.2.0"
   },

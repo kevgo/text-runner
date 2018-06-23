@@ -58,7 +58,7 @@ module.exports = function loadConfiguration (
     ),
     offline: String(get('offline')) === 'true',
     sourceDir: get('source-dir'),
-    useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
+    useSystemTempDirectory: String(get('use-system-temp-directory')) === 'true',
     workspace: get('workspace') || ''
   }
 }

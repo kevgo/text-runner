@@ -42,11 +42,35 @@ jobs:
     steps:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: make coverage-cli
+     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)/**'
      - save_cache:
          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
          paths:
            - ~/repo/.nyc_output_cli
+
+  cli-actions-tests:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' features/actions
+     - run: mv .nyc_output_cli .nyc_output_cli_actions
+     - save_cache:
+         key: coverage-cli-actions-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_cli_actions
+
+  cli-tagtypes-tests:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' features/tag-types
+     - run: mv .nyc_output_cli .nyc_output_cli_tagtypes
+     - save_cache:
+         key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_cli_tagtypes
 
   doc-tests:
     <<: *defaults
@@ -66,6 +90,10 @@ jobs:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-cli-actions-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-merge

@@ -46,7 +46,7 @@ jobs:
      - run: pwd
      - run: ls -la
      - save_cache:
-         key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+         key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
          paths:
            - ~/repo/.nyc_output_tests
 
@@ -81,6 +81,8 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:

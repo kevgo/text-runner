@@ -16,7 +16,7 @@ coverage-tests: coverage-build # test coverage for unit tests
 	# BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
 	# mv .nyc_output .nyc_output_tests
 
-coverage-cli:  # test coverage for CLI specs
+coverage-cli: coverage-build  # test coverage for CLI specs
 	rm -rf .nyc_output_cli
 	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)'
 

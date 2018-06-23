@@ -38,10 +38,9 @@ const World = function () {
       args.env['DEBUG'] = '*,-babel'
     }
 
+    args.command = this.makeFullPath(params.command)
     if (process.env.NODE_ENV === 'coverage') {
       args.command = runWithTestCoverage(args.command)
-    } else {
-      args.command = this.makeFullPath(params.command)
     }
     this.process = new ObservableProcess(args)
     await this.process.waitForEnd()
@@ -112,7 +111,9 @@ const World = function () {
     }
     if (table.MESSAGE) expectedText += table.MESSAGE
     if (table.WARNING) expectedText += table.WARNING
-    expect(standardizePath(stripAnsi(this.process.fullOutput()))).to.include(expectedText)
+    expect(standardizePath(stripAnsi(this.process.fullOutput()))).to.include(
+      expectedText
+    )
   }
 
   this.verifyPrintedUsageInstructions = () => {
@@ -164,11 +165,15 @@ const World = function () {
   }
 
   this.verifyTestsRun = count => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(` ${count} activities`)
+    expect(stripAnsi(this.process.fullOutput())).to.include(
+      ` ${count} activities`
+    )
   }
 
   this.verifyUnknownCommand = command => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(`unknown command: ${command}`)
+    expect(stripAnsi(this.process.fullOutput())).to.include(
+      `unknown command: ${command}`
+    )
   }
 }
 

@@ -42,7 +42,7 @@ jobs:
     steps:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)/**'
+     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)'
      - save_cache:
          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
          paths:

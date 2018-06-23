@@ -42,29 +42,29 @@ coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures 
 
 cuke: build   # runs the feature specs
 ifndef FILE
-	node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
+	@node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
 else
-	node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
+	@node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
-	node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
+	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
-	node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
+	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
 endif
 
 cuke-offline: build   # runs the feature specs that don't need an online connection
-	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
+	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
 
 deploy: build  # deploys a new version to npmjs.org
 	npm publish
 
 docs: build   # runs the documentation tests
 ifndef FILE
-	bin/text-run --offline
+	@bin/text-run --offline
 else
-	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
+	@DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif
 
 help:   # prints all make targets
@@ -77,12 +77,12 @@ flow-types:   # installs/updates the Flow type definitions
 lint: lintjs lintmd   # lints all files
 
 lintjs: build   # lints the javascript files
-	node_modules/.bin/standard -v
-	node_modules/.bin/flow
-	node_modules/.bin/dependency-lint
+	@node_modules/.bin/standard -v
+	@node_modules/.bin/flow
+	@node_modules/.bin/dependency-lint
 
 lintmd:   # lints markdown files
-	node_modules/.bin/remark .
+	@node_modules/.bin/remark .
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune
@@ -93,7 +93,7 @@ setup:   # sets up the installation on this machine
 spec: lint tests cuke docs   # runs all tests
 
 tests:   # runs the unit tests
-	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"
+	@node_modules/.bin/mocha --reporter dot "src/**/*-test.js"
 
 travis: lint coverage   # the set of tests running on Travis-CI
 

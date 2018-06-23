@@ -47,6 +47,7 @@ Feature: Link formats
       | html         | 2.html#hello |
       | url-friendly | 2#hello      |
 
+
   Scenario Outline: the setting is enabled via the configuration file
     Given my source code contains the file "1.md" with content:
       """
@@ -67,4 +68,3 @@ Feature: Link formats
       | direct       | 2.md   |
       | html         | 2.html |
       | url-friendly | 2      |
-

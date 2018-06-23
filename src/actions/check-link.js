@@ -3,6 +3,7 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
+const adjustLinkToFormat = require('../helpers/adjust-link-to-format.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
@@ -37,7 +38,8 @@ module.exports = async function (args: ActionArgs) {
       args.file,
       targetFullPath,
       args.linkTargets,
-      args.formatter
+      args.formatter,
+      args.configuration
     )
   } else if (isExternalLink(target)) {
     await checkExternalLink(target, args.formatter, args.configuration)
@@ -90,6 +92,7 @@ async function checkLinkToFilesystem (
   } else {
     target = path.join(path.dirname(filename), target)
   }
+  target = adjustLinkToFormat(target, c.linkFormat)
   try {
     const stats = await fs.stat(path.join(c.sourceDir, target))
     if (stats.isDirectory()) {
@@ -125,10 +128,12 @@ async function checkLinkToAnchorInOtherFile (
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
-  f: Formatter
+  f: Formatter,
+  c: Configuration
 ) {
   var [targetFilename, targetAnchor] = target.split('#')
   targetFilename = decodeURI(targetFilename)
+  targetFilename = adjustLinkToFormat(targetFilename, c.linkFormat)
   if (linkTargets.targets[targetFilename] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
@@ -148,7 +153,7 @@ async function checkLinkToAnchorInOtherFile (
   }
 
   if (targetEntry.type === 'heading') {
-    f.name(`link to heading ${cyan(target)}`)
+    f.name(`link to heading ${cyan(targetFilename + '#' + targetAnchor)}`)
   } else {
     f.name(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
   }

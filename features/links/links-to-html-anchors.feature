@@ -157,4 +157,4 @@ Feature: links to HTML anchors
     Then it signals:
       | FILENAME | 1.md                                   |
       | LINE     | 1                                      |
-      | MESSAGE  | link to heading foo/bar%20baz.md#hello |
+      | MESSAGE  | link to heading foo/bar baz.md#hello |

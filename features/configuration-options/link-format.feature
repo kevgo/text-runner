@@ -12,7 +12,7 @@ Feature: Link formats
       """
 
 
-  Scenario Outline: command-line switch
+  Scenario Outline: simple links
     Given my source code contains the file "1.md" with content:
       """
       [link to 2.md](<LINK>)
@@ -30,7 +30,24 @@ Feature: Link formats
       | url-friendly | 2      |
 
 
-  Scenario Outline: configuration file setting
+  Scenario Outline: links to anchors
+    Given my source code contains the file "1.md" with content:
+      """
+      [link to 2.md#hello](<LINK>)
+      """
+    When running "text-run --link-format <OPTION>"
+    Then it signals:
+      | FILENAME | 1.md                       |
+      | LINE     | 1                          |
+      | MESSAGE  | link to heading 2.md#hello |
+
+    Examples:
+      | OPTION       | LINK         |
+      | direct       | 2.md#hello   |
+      | html         | 2.html#hello |
+      | url-friendly | 2#hello      |
+
+  Scenario Outline: the setting is enabled via the configuration file
     Given my source code contains the file "1.md" with content:
       """
       [link to 2.md](<LINK>)

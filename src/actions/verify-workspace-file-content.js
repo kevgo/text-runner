@@ -26,11 +26,6 @@ module.exports = function (args: ActionArgs) {
   try {
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
   } catch (err) {
-    console.log(111111111)
-    console.log(expectedContent)
-    console.log(222222222)
-    console.log(actualContent)
-    console.log(333333333)
     throw new Error(
       `mismatching content in ${cyan(bold(filePath))}:\n${err.message}`
     )

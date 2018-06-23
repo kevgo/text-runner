@@ -20,6 +20,7 @@ ignoreErrors:
   unused:
     - babel-plugin-istanbul
     - babel-preset-flow
+    - escope  # seems to be a peer dependency of something
     - eslint
     - request
     - remark-lint

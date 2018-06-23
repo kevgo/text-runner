@@ -79,17 +79,6 @@
   ],
   "homepage": "https://github.com/Originate/text-runner",
   "main": "dist/text-runner.js",
-  "nyc": {
-    "exclude": [
-      "coverage/**",
-      "dist/**",
-      "documentation/**",
-      "node_modules/**",
-      "**/*-test.js",
-      "test/**",
-      "text-run/**"
-    ]
-  },
   "license": "ISC",
   "remarkConfig": {
     "presets": [

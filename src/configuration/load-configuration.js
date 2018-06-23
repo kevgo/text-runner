@@ -3,6 +3,7 @@
 import type { CliArgTypes } from '../cli/cli-arg-types.js'
 import type { Configuration } from './configuration.js'
 
+const camelCase = require('just-camel-case')
 const DetailedFormatter = require('../formatters/detailed-formatter.js')
 const getFormatterClass = require('./get-formatter-class.js')
 const debug = require('debug')('textrun:configuration')
@@ -35,10 +36,11 @@ module.exports = function loadConfiguration (
   debug(`configuration file data: ${JSON.stringify(this.fileData)}`)
 
   function get (attributeName: string): string {
+    const camelized = camelCase(attributeName)
     return (
       constructorArgs[attributeName] ||
-      fileData[attributeName] ||
-      defaultValues[attributeName]
+      fileData[camelized] ||
+      defaultValues[camelized]
     )
   }
 
@@ -46,7 +48,7 @@ module.exports = function loadConfiguration (
     actions: fileData['actions']
       ? fileData['actions']
       : defaultValues['actions'],
-    classPrefix: get('classPrefix'),
+    classPrefix: get('class-prefix'),
     exclude: get('exclude'),
     fileGlob: get('files') || defaultValues.fileGlob,
     keepTmp: String(get('keep-tmp')) === 'true',
@@ -55,8 +57,8 @@ module.exports = function loadConfiguration (
       defaultValues.FormatterClass
     ),
     offline: String(get('offline')) === 'true',
-    sourceDir: get('sourceDir'),
-    useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
+    sourceDir: get('source-dir'),
+    useSystemTempDirectory: String(get('use-system-temp-directory')) === 'true',
     workspace: get('workspace') || ''
   }
 }

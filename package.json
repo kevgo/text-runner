@@ -20,6 +20,7 @@
     "is-glob": "4.0.0",
     "jsdiff-console": "2.2.1",
     "jsonfile": "4.0.0",
+    "just-camel-case": "3.0.0",
     "just-kebab-case": "1.0.0",
     "minimist": "1.2.0",
     "mkdirp": "0.5.1",

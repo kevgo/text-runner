@@ -7,7 +7,6 @@ const camelCase = require('just-camel-case')
 const DetailedFormatter = require('../formatters/detailed-formatter.js')
 const getFormatterClass = require('./get-formatter-class.js')
 const debug = require('debug')('textrun:configuration')
-const kebabCase = require('just-kebab-case')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
@@ -37,10 +36,11 @@ module.exports = function loadConfiguration (
   debug(`configuration file data: ${JSON.stringify(this.fileData)}`)
 
   function get (attributeName: string): string {
+    const camelized = camelCase(attributeName)
     return (
-      constructorArgs[kebabCase(attributeName)] ||
-      fileData[camelCase(attributeName)] ||
-      defaultValues[camelCase(attributeName)]
+      constructorArgs[attributeName] ||
+      fileData[camelized] ||
+      defaultValues[camelized]
     )
   }
 

@@ -3,9 +3,11 @@
 import type { CliArgTypes } from '../cli/cli-arg-types.js'
 import type { Configuration } from './configuration.js'
 
+const camel = require('just-camel-case')
 const DetailedFormatter = require('../formatters/detailed-formatter.js')
 const getFormatterClass = require('./get-formatter-class.js')
 const debug = require('debug')('textrun:configuration')
+const kebab = require('just-kebab-case')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
@@ -36,9 +38,9 @@ module.exports = function loadConfiguration (
 
   function get (attributeName: string): string {
     return (
-      constructorArgs[attributeName] ||
-      fileData[attributeName] ||
-      defaultValues[attributeName]
+      constructorArgs[kebab(attributeName)] ||
+      fileData[camel(attributeName)] ||
+      defaultValues[camel(attributeName)]
     )
   }
 
@@ -46,7 +48,7 @@ module.exports = function loadConfiguration (
     actions: fileData['actions']
       ? fileData['actions']
       : defaultValues['actions'],
-    classPrefix: get('classPrefix'),
+    classPrefix: get('class-prefix'),
     exclude: get('exclude'),
     fileGlob: get('files') || defaultValues.fileGlob,
     keepTmp: String(get('keep-tmp')) === 'true',
@@ -55,7 +57,7 @@ module.exports = function loadConfiguration (
       defaultValues.FormatterClass
     ),
     offline: String(get('offline')) === 'true',
-    sourceDir: get('sourceDir'),
+    sourceDir: get('source-dir'),
     useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',
     workspace: get('workspace') || ''
   }

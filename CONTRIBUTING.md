@@ -10,7 +10,6 @@
 ## Testing
 
 * run all tests: <code textrun="does-make-target-exist">make spec</code>
-* run feature specs: <code textrun="does-make-target-exist">make features</code>
 * run feature specs: <code textrun="does-make-target-exist">make cuke</code>
 * run feature specs in offline mode: `make cuke --tags '~@online'`
 * run text-run: <code textrun="does-make-target-exist">make docs</code>

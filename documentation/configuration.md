@@ -33,6 +33,9 @@ classPrefix: 'textrun'
 # you can also provide a custom directory path here
 useSystemTempDirectory: false
 
+# whether to skip tests that require an online connection
+offline: false
+
 # activity-type specific configuration
 activityTypes:
   runConsoleCommand:

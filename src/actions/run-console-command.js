@@ -90,8 +90,7 @@ function makeGlobal (configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
-    // $FlowFixMe: Ignore null-pointer exceptions here since we have a default value
-    globals = configuration.fileData.actions.runConsoleCommand.globals
+    globals = configuration.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function (commandText) {

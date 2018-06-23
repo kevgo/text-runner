@@ -16,7 +16,7 @@ coverage-tests: coverage-build # test coverage for unit tests
 	# BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
 	# mv .nyc_output .nyc_output_tests
 
-coverage-cli:  # test coverage for CLI specs
+coverage-cli: coverage-build  # test coverage for CLI specs
 	rm -rf .nyc_output_cli
 	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)'
 
@@ -40,14 +40,21 @@ coverage-send:  # sends the coverage to coveralls.io
 coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures code coverage
 .PHONY: coverage
 
-cuke: build   # runs the CLI tests
+cuke: build   # runs the feature specs
 ifndef FILE
-	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
+	node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
 else
-	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
+	node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
-cuke-offline: build   # runs the CLI tests
+cuke-win:     # runs the feature specs on Windows
+ifndef FILE
+	node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
+else
+	node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
+endif
+
+cuke-offline: build   # runs the feature specs that don't need an online connection
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
 
 deploy: build  # deploys a new version to npmjs.org
@@ -58,13 +65,6 @@ ifndef FILE
 	bin/text-run --offline
 else
 	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
-endif
-
-features: build   # runs the feature specs
-ifndef FILE
-	make cuke-cli
-else
-	make cuke-cli $(FILE)
 endif
 
 help:   # prints all make targets
@@ -90,7 +90,7 @@ setup:   # sets up the installation on this machine
 	yarn install
 	node-prune
 
-spec: lint tests cuke-cli docs   # runs all tests
+spec: lint tests cuke docs   # runs all tests
 
 tests:   # runs the unit tests
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"

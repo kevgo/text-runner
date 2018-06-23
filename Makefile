@@ -27,9 +27,9 @@ coverage-docs:  # test coverage for the self-check
 coverage-merge: # merge all coverage results together
 	rm -rf .nyc_output
 	mkdir .nyc_output
-	bash -c 'ls -1 .nyc_output_tests | cat -n | while read n f; do cp ".nyc_output_tests/$$f" ".nyc_output/tests_$$n.json"; done'
-	bash -c 'ls -1 .nyc_output_text_run | cat -n | while read n f; do cp ".nyc_output_text_run/$$f" ".nyc_output/textrun_$$n.json"; done'
-	bash -c 'find .nyc_output_cli -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_$$n.json"; done'
+	ls -1 .nyc_output_tests | cat -n | while read n f; do cp ".nyc_output_tests/$$f" ".nyc_output/tests_$$n.json"; done
+	ls -1 .nyc_output_text_run | cat -n | while read n f; do cp ".nyc_output_text_run/$$f" ".nyc_output/textrun_$$n.json"; done
+	find .nyc_output_cli -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_$$n.json"; done
 
 coverage-html:  # render test coverage as a HTML report
 	node_modules/.bin/nyc report --reporter=lcov

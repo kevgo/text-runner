@@ -47,11 +47,11 @@ else
 	node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
-cuke-win: build   # runs the feature specs on Windows
+cuke-win:     # runs the feature specs on Windows
 ifndef FILE
-	node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
+	node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
-	node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
+	node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
 endif
 
 cuke-offline: build   # runs the feature specs that don't need an online connection
@@ -65,13 +65,6 @@ ifndef FILE
 	bin/text-run --offline
 else
 	DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
-endif
-
-features: build   # runs the feature specs
-ifndef FILE
-	make cuke-cli
-else
-	make cuke-cli $(FILE)
 endif
 
 help:   # prints all make targets

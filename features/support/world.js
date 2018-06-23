@@ -17,6 +17,7 @@ const World = function () {
     var args = {}
     args.cwd = this.rootDir
     args.env = {}
+    this.output = ''
     if (this.verbose) {
       args.stdout = dimConsole.process.stdout
       args.stderr = dimConsole.process.stderr

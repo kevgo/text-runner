@@ -11,10 +11,9 @@ clean:   # Removes all build artifacts
 coverage-build:   # builds the code base with code coverage measurements baked in
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 
-coverage-tests: coverage-build # test coverage for unit tests
-	# TODO: fix this
-	# BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
-	# mv .nyc_output .nyc_output_tests
+coverage-tests:  # test coverage for unit tests
+	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
+	mv .nyc_output .nyc_output_tests
 
 coverage-cli:   # test coverage for CLI specs
 	rm -rf .nyc_output_cli
@@ -39,7 +38,7 @@ coverage-send:  # sends the coverage to coveralls.io
 	cat cov
 	node_modules/.bin/coveralls < cov
 
-coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures code coverage
+coverage: coverage-build coverage-tests coverage-cli coverage-docs   # measures code coverage
 .PHONY: coverage
 
 cuke: build   # runs the feature specs

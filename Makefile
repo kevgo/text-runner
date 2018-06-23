@@ -40,21 +40,21 @@ coverage-send:  # sends the coverage to coveralls.io
 coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures code coverage
 .PHONY: coverage
 
-cuke: build   # runs the CLI tests
+cuke: build   # runs the feature specs
 ifndef FILE
 	node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
 else
 	node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
-cuke-win: build   # runs the CLI tests on Windows
+cuke-win: build   # runs the feature specs on Windows
 ifndef FILE
 	node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
 	node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
 endif
 
-cuke-offline: build   # runs the CLI tests
+cuke-offline: build   # runs the feature specs that don't need an online connection
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
 
 deploy: build  # deploys a new version to npmjs.org

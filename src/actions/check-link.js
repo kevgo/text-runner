@@ -3,6 +3,7 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
+const adjustLinkToFormat = require('../helpers/adjust-link-to-format.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
@@ -90,6 +91,7 @@ async function checkLinkToFilesystem (
   } else {
     target = path.join(path.dirname(filename), target)
   }
+  target = adjustLinkToFormat(target, c.linkFormat)
   try {
     const stats = await fs.stat(path.join(c.sourceDir, target))
     if (stats.isDirectory()) {

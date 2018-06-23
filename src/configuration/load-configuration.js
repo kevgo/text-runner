@@ -14,6 +14,7 @@ const defaultValues: Configuration = {
   exclude: [],
   fileGlob: '**/*.md',
   keepTmp: false,
+  linkFormat: 'direct',
   FormatterClass: DetailedFormatter,
   offline: false,
   sourceDir: process.cwd(),
@@ -54,6 +55,7 @@ module.exports = function loadConfiguration (
       get('format'),
       defaultValues.FormatterClass
     ),
+    linkFormat: get('link-format'),
     offline: String(get('offline')) === 'true',
     sourceDir: get('sourceDir'),
     useSystemTempDirectory: String(get('useSystemTempDirectory')) === 'true',

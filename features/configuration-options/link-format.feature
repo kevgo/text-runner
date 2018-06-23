@@ -1,15 +1,8 @@
 Feature: Link formats
 
   When compiling Markdown to public HTML
-  I want that URLs to Markdown files are valid without their extension
-  So that my public URLs can follow the URL friendly format.
-
-  - when the "link-format" option is set to "direct",
-    links to ".md" files must have the ".md" extension
-  - when the "link-format" option is set to "url-friendly",
-    links to ".md" files must omit the ".md" extension
-  - when the "link-format" option is set to "html",
-    links to ".md" files must have the ".html" extension
+  I want that URLs to local Markdown files are in web formats instead of Markdown
+  So that the public can consume my documentation like a normal web page.
 
 
   Background:
@@ -31,6 +24,6 @@ Feature: Link formats
       | MESSAGE  | link to local file 2.md |
 
     Examples:
-      | OPTION | LINK |
-      | direct | 2.md |
-
+      | OPTION | LINK   |
+      | direct | 2.md   |
+      | html   | 2.html |

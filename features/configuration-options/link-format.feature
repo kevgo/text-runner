@@ -24,6 +24,7 @@ Feature: Link formats
       | MESSAGE  | link to local file 2.md |
 
     Examples:
-      | OPTION | LINK   |
-      | direct | 2.md   |
-      | html   | 2.html |
+      | OPTION       | LINK   |
+      | direct       | 2.md   |
+      | html         | 2.html |
+      | url-friendly | 2      |

@@ -35,7 +35,9 @@ coverage-html:  # render test coverage as a HTML report
 	@echo "open 'file://$(shell pwd)/coverage/lcov-report/index.html' in your browser"
 
 coverage-send:  # sends the coverage to coveralls.io
-	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
+	node_modules/.bin/nyc report --reporter=text-lcov > cov
+	cat cov
+	node_modules/.bin/coveralls < cov
 
 coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures code coverage
 .PHONY: coverage

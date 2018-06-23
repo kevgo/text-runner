@@ -4,7 +4,7 @@ const Formatter = require('../formatters/formatter.js')
 
 // Data structure for configuration values
 export type Configuration = {|
-  activityTypes: Object, // configuration for activities
+  actions: Object, // configuration for actions
   classPrefix: string, // the name of the attribute that denotes active blocks
   exclude: string | string[], // list of names or regexes of files to exclude
   fileGlob: string, // glob of the files to test

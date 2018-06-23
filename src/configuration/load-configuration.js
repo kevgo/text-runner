@@ -9,7 +9,7 @@ const debug = require('debug')('textrun:configuration')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
-  activityTypes: {},
+  actions: {},
   classPrefix: 'textrun',
   exclude: [],
   fileGlob: '**/*.md',
@@ -43,9 +43,9 @@ module.exports = function loadConfiguration (
   }
 
   return {
-    activityTypes: fileData['activityTypes']
-      ? fileData['activityTypes']
-      : defaultValues['activityTypes'],
+    actions: fileData['actions']
+      ? fileData['actions']
+      : defaultValues['actions'],
     classPrefix: get('classPrefix'),
     exclude: get('exclude'),
     fileGlob: get('files') || defaultValues.fileGlob,

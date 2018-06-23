@@ -90,7 +90,7 @@ setup:   # sets up the installation on this machine
 	yarn install
 	node-prune
 
-spec: lint tests cuke-cli docs   # runs all tests
+spec: lint tests cuke docs   # runs all tests
 
 tests:   # runs the unit tests
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.js"

@@ -43,8 +43,6 @@ jobs:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
      - run: make coverage-tests
-     - run: pwd
-     - run: ls -la
      - save_cache:
          key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
          paths:
@@ -56,8 +54,6 @@ jobs:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-cli
-      - run: pwd
-      - run: ls -la
       - save_cache:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -69,8 +65,6 @@ jobs:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-docs
-      - run: pwd
-      - run: ls -la
       - save_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -87,7 +81,6 @@ jobs:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
-      - run: pwd
       - run: ls -la
       - run: make coverage-merge
       - run: make coverage-send

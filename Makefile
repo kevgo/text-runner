@@ -47,6 +47,13 @@ else
 	node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
+cuke-win: build   # runs the CLI tests on Windows
+ifndef FILE
+	node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
+else
+	node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
+endif
+
 cuke-offline: build   # runs the CLI tests
 	EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
 

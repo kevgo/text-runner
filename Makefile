@@ -27,7 +27,9 @@ coverage-docs:  # test coverage for the self-check
 coverage-merge: # merge all coverage results together
 	rm -rf .nyc_output
 	mkdir .nyc_output
-	node scripts/cleanse-coverage.js
+	cp -r .nyc_output_tests .nyc_output
+	cp -r .nyc_output_text_run .nyc_output
+	find .nyc_output_cli -type f -exec cp "{}" .nyc_output/ \;
 
 coverage-html:  # render test coverage as a HTML report
 	node_modules/.bin/nyc report --reporter=lcov

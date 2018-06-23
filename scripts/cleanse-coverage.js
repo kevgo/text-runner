@@ -9,7 +9,7 @@ const readjson = promisify(jsonfile.readFile)
 const writejson = promisify(jsonfile.writeFile)
 
 async function main () {
-  const directories = ['.nyc_output_tests', '.nyc_output_text_run']
+  var directories = ['.nyc_output_tests', '.nyc_output_text_run']
   let cliDirs = fs.readdirSync('.nyc_output_cli')
   cliDirs = cliDirs.map(dir => path.join('.nyc_output_cli', dir))
   directories = directories.concat(cliDirs)

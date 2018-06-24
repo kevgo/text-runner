@@ -3,7 +3,6 @@
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
-const parseHtmlTag = require('../../helpers/parse-html-tag.js')
 
 module.exports = function transformATag (
   node: Object,
@@ -12,14 +11,14 @@ module.exports = function transformATag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const [tag, attributes] = parseHtmlTag(node.content, file, line)
+  const openingTag = openTags.popType('abbr_open')
   const resultNode = new AstNode({
-    type: 'linebreak',
-    tag,
+    type: 'abbr_close',
+    tag: '/abbr',
     file,
     line,
     content: '',
-    attributes
+    attributes: openingTag.attributes
   })
   result.pushData(resultNode)
   return result

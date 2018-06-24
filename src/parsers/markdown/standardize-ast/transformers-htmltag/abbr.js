@@ -14,13 +14,14 @@ module.exports = function transformATag (
   const result = new AstNodeList()
   const [tag, attributes] = parseHtmlTag(node.content, file, line)
   const resultNode = new AstNode({
-    type: 'linebreak',
+    type: 'abbr_open',
     tag,
     file,
     line,
     content: '',
     attributes
   })
+  openTags.add(resultNode)
   result.pushData(resultNode)
   return result
 }

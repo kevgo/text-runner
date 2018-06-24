@@ -91,11 +91,10 @@ async function checkLinkToFilesystem (
   var fullPath = ''
   if (target.startsWith('/')) {
     relativePath = target.substr(1)
-    fullPath = path.join(c.sourceDir, relativePath)
   } else {
     relativePath = path.join(path.dirname(filename), target)
-    fullPath = path.join(c.sourceDir, relativePath)
   }
+  fullPath = path.join(c.sourceDir, relativePath)
   try {
     // see if a directory exists
     const stats = await fs.stat(fullPath)

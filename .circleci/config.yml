@@ -77,7 +77,7 @@ jobs:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
      - run: make coverage-cuke-tagtypes
      - save_cache:
-         key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
+         key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
          paths:
            - ~/repo/.nyc_output_cuke_tagtypes
 

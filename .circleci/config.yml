@@ -37,16 +37,27 @@ jobs:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
      - run: make lint
 
-  cli-tests:
+  unit-tests:
     <<: *defaults
     steps:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)'
+     - run: make coverage-tests
      - save_cache:
-         key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+         key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
          paths:
-           - ~/repo/.nyc_output_cli
+           - ~/repo/.nyc_output_tests
+
+  cli-tests:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)'
+      - save_cache:
+          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+          paths:
+            - ~/repo/.nyc_output_cli
 
   cli-actions-tests:
     <<: *defaults
@@ -89,6 +100,8 @@ jobs:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
+          key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
           key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-cli-actions-{{ .Environment.CIRCLE_SHA1 }}
@@ -96,6 +109,7 @@ jobs:
           key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
+      - run: ls -la
       - run: make coverage-merge
       - run: make coverage-send
 
@@ -118,14 +132,18 @@ workflows:
       - lint:
           requires:
             - checkout_code
+      - unit-tests:
+          requires:
+            - checkout_code
       - cli-tests:
           requires:
             - checkout_code
       - doc-tests:
           requires:
             - checkout_code
-      # - send-coverage:
-      #     requires:
-      #       - lint
-      #       - cli-tests
-      #       - doc-tests
+      - send-coverage:
+          requires:
+            - lint
+            - unit-tests
+            - cli-tests
+            - doc-tests

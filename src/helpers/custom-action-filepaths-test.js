@@ -6,6 +6,6 @@ const { expect } = require('chai')
 describe('customActionFilePaths', function () {
   it('returns the full paths to the custom actions', function () {
     const result = customActionFilePaths()
-    expect(result[0]).to.match(/\/text-runner\/text-run\/cd-back.js/)
+    expect(result[0]).to.match(/\/text-run\/cd-back.js/)
   })
 })

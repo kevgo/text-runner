@@ -17,17 +17,17 @@ coverage-tests:  # test coverage for unit tests
 
 coverage-cuke-other:   # test coverage for CLI specs
 	rm -rf .nyc_output_cli_other
-	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)'
+	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|commands|images|formatters|links|tag-types)'
 	mv .nyc_output_cli .nyc_output_cuke_other
 
 coverage-cuke-actions:   # test coverage for CLI specs
 	rm -rf .nyc_output_cli
-	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)' features/actions
+	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/+(actions|images|links)'
 	mv .nyc_output_cli .nyc_output_cuke_actions
 
 coverage-cuke-tagtypes:   # test coverage for CLI specs
 	rm -rf .nyc_output_cli
-	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)' features/tag-types
+	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/+(tag-types|commands|formatters)'
 	mv .nyc_output_cli .nyc_output_cuke_tagtypes
 
 coverage-docs:  # test coverage for the self-check

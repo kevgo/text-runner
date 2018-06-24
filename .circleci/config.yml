@@ -48,36 +48,35 @@ jobs:
          paths:
            - ~/repo/.nyc_output_tests
 
-  cli-tests:
+  cuke-other:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|tag-types)'
+      - run: make coverage-cuke-other
+      - run: mv .nyc_output_cli .nyc_output_cli_other
       - save_cache:
-          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/repo/.nyc_output_cli
+            - ~/repo/.nyc_output_cli_other
 
-  cli-actions-tests:
+  cuke-actions:
     <<: *defaults
     steps:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' features/actions
-     - run: mv .nyc_output_cli .nyc_output_cli_actions
+     - run: make coverage-cuke-actions
      - save_cache:
-         key: coverage-cli-actions-{{ .Environment.CIRCLE_SHA1 }}
+         key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
          paths:
            - ~/repo/.nyc_output_cli_actions
 
-  cli-tagtypes-tests:
+  cuke-tagtypes:
     <<: *defaults
     steps:
      - restore_cache:
          key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: node_modules/.bin/cucumber-js --tags '(not @todo)' features/tag-types
-     - run: mv .nyc_output_cli .nyc_output_cli_tagtypes
+     - run: make coverage-cuke-tagtypes
      - save_cache:
          key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
          paths:
@@ -102,11 +101,11 @@ jobs:
       - restore_cache:
           key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: coverage-cli-actions-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
       - run: ls -la
@@ -135,7 +134,13 @@ workflows:
       - unit-tests:
           requires:
             - checkout_code
-      - cli-tests:
+      - cuke-other:
+          requires:
+            - checkout_code
+      - cuke-actions:
+          requires:
+            - checkout_code
+      - cuke-tagtypes:
           requires:
             - checkout_code
       - doc-tests:
@@ -145,5 +150,7 @@ workflows:
           requires:
             - lint
             - unit-tests
-            - cli-tests
+            - cuke-other
+            - cuke-actions
+            - cuke-tagtypes
             - doc-tests

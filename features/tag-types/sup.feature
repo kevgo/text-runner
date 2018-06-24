@@ -9,7 +9,7 @@ Feature: active SUP tags
     Given my workspace contains the HelloWorld activity
 
 
-  Scenario: strong tag
+  Scenario: active tag
     Given my source code contains the file "1.md" with content:
       """
       <sup textrun="HelloWorld">foo</sup>
@@ -19,3 +19,10 @@ Feature: active SUP tags
       | FILENAME | 1.md        |
       | LINE     | 1           |
       | MESSAGE  | Hello world |
+
+  Scenario: passive tag
+    Given my source code contains the file "1.md" with content:
+      """
+      <sup>foo</sup>
+      """
+    When running text-run

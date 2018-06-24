@@ -4,6 +4,7 @@ const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
+const UnprintedUserError = require('../../../../errors/unprinted-user-error.js')
 const util = require('util')
 const xml2js = require('xml2js')
 const xml2jsp = util.promisify(xml2js.parseString)
@@ -18,7 +19,16 @@ module.exports = async function transformUl (
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(tableRegex)
-  const xml = await xml2jsp(node.content)
+  var xml = {}
+  try {
+    xml = await xml2jsp(node.content)
+  } catch (e) {
+    const lineMatch = e.message.match(/Line: (\d+)/)
+    var errorLine = line
+    if (lineMatch) errorLine += parseInt(lineMatch[1])
+    const message = e.message.split('\n')[0]
+    throw new UnprintedUserError(message, file, errorLine)
+  }
   const tableNode = new AstNode({
     type: 'table_open',
     tag: 'table',

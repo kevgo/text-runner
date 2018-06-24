@@ -48,6 +48,25 @@ Feature: Link formats
       | url-friendly | 2#hello      |
 
 
+  Scenario Outline: links to folders
+    Given my source code contains the file "1.md" with content:
+      """
+      [link to folder foo](<LINK>)
+      """
+    And my source code contains the directory "foo"
+    When running "text-run --link-format <OPTION>"
+    Then it signals:
+      | FILENAME | 1.md                        |
+      | LINE     | 1                           |
+      | MESSAGE  | link to local directory foo |
+
+    Examples:
+      | OPTION       | LINK |
+      | direct       | foo  |
+      | html         | foo  |
+      | url-friendly | foo  |
+
+
   Scenario Outline: the setting is enabled via the configuration file
     Given my source code contains the file "1.md" with content:
       """

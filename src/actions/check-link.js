@@ -87,21 +87,28 @@ async function checkLinkToFilesystem (
   f: Formatter,
   c: Configuration
 ) {
+  var localTarget = ''
   if (target.startsWith('/')) {
-    target = target.substr(1)
+    localTarget = target.substr(1)
   } else {
-    target = path.join(path.dirname(filename), target)
+    localTarget = path.join(path.dirname(filename), target)
   }
-  target = adjustLinkToFormat(target, c.linkFormat)
   try {
-    const stats = await fs.stat(path.join(c.sourceDir, target))
+    // see if a directory exists
+    const stats = await fs.stat(path.join(c.sourceDir, localTarget))
     if (stats.isDirectory()) {
-      f.name(`link to local directory ${cyan(target)}`)
-    } else {
-      f.name(`link to local file ${cyan(target)}`)
+      f.name(`link to local directory ${cyan(localTarget)}`)
+      return
     }
+  } catch (e) {
+    // we can ignore errors here since we keep checking the file below
+  }
+  try {
+    localTarget = adjustLinkToFormat(localTarget, c.linkFormat)
+    f.name(`link to local file ${cyan(localTarget)}`)
+    await fs.stat(path.join(c.sourceDir, localTarget))
   } catch (err) {
-    throw new Error(`link to non-existing local file ${bold(target)}`)
+    throw new Error(`link to non-existing local file ${bold(localTarget)}`)
   }
 }
 

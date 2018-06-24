@@ -15,15 +15,20 @@ coverage-tests:  # test coverage for unit tests
 	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
 	mv .nyc_output .nyc_output_tests
 
-coverage-cuke-actions:   # test coverage for CLI specs
-	rm -rf .nyc_output_cli
-	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)'
-	mv .nyc_output_cli .nyc_output_cli_actions
-
 coverage-cuke-other:   # test coverage for CLI specs
 	rm -rf .nyc_output_cli_other
 	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)'
-	mv .nyc_output_cli .nyc_output_cli_other
+	mv .nyc_output_cli .nyc_output_cuke_other
+
+coverage-cuke-actions:   # test coverage for CLI specs
+	rm -rf .nyc_output_cli
+	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)'
+	mv .nyc_output_cli .nyc_output_cuke_actions
+
+coverage-cuke-tagtypes:   # test coverage for CLI specs
+	rm -rf .nyc_output_cli
+	NODE_ENV=coverage node_modules/.bin/cucumber-js --tags '(not @todo)'
+	mv .nyc_output_cli .nyc_output_cuke_tagtypes
 
 coverage-docs:  # test coverage for the self-check
 	rm -rf .nyc_output_text_run
@@ -35,9 +40,9 @@ coverage-merge: # merge all coverage results together
 	mkdir .nyc_output
 	ls -1 .nyc_output_tests | cat -n | while read n f; do cp ".nyc_output_tests/$$f" ".nyc_output/tests_$$n.json"; done
 	ls -1 .nyc_output_text_run | cat -n | while read n f; do cp ".nyc_output_text_run/$$f" ".nyc_output/textrun_$$n.json"; done
-	find .nyc_output_cli_other -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_other_$$n.json"; done
-	find .nyc_output_cli_actions -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_actions_$$n.json"; done
-	find .nyc_output_cli_tagtypes -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_tagtypes_$$n.json"; done
+	find .nyc_output_cuke_other -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_other_$$n.json"; done
+	find .nyc_output_cuke_actions -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_actions_$$n.json"; done
+	find .nyc_output_cuke_tagtypes -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_tagtypes_$$n.json"; done
 
 coverage-html:  # render test coverage as a HTML report
 	node_modules/.bin/nyc report --reporter=lcov

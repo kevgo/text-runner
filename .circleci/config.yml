@@ -54,11 +54,10 @@ jobs:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - run: make coverage-cuke-other
-      - run: mv .nyc_output_cli .nyc_output_cli_other
       - save_cache:
           key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/repo/.nyc_output_cli_other
+            - ~/repo/.nyc_output_cuke_other
 
   cuke-actions:
     <<: *defaults
@@ -69,7 +68,7 @@ jobs:
      - save_cache:
          key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
          paths:
-           - ~/repo/.nyc_output_cli_actions
+           - ~/repo/.nyc_output_cuke_actions
 
   cuke-tagtypes:
     <<: *defaults
@@ -80,7 +79,7 @@ jobs:
      - save_cache:
          key: coverage-cli-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
          paths:
-           - ~/repo/.nyc_output_cli_tagtypes
+           - ~/repo/.nyc_output_cuke_tagtypes
 
   doc-tests:
     <<: *defaults

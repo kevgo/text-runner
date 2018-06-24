@@ -9,7 +9,7 @@ Feature: active table tags
     Given my workspace contains the HelloWorld activity
 
 
-  Scenario: table tag
+  Scenario: HTML table
     Given my source code contains the file "1.md" with content:
       """
       <table textrun="HelloWorld">
@@ -23,7 +23,7 @@ Feature: active table tags
       | MESSAGE  | Hello world |
 
 
-  Scenario: table row tag
+  Scenario: HTML table row tag
     Given my source code contains the file "1.md" with content:
       """
       <table>
@@ -39,7 +39,7 @@ Feature: active table tags
       | MESSAGE  | Hello world |
 
 
-  Scenario: table cell tag
+  Scenario: HTML table cell tag
     Given my source code contains the file "1.md" with content:
       """
       <table>
@@ -55,7 +55,7 @@ Feature: active table tags
       | MESSAGE  | Hello world |
 
 
-  Scenario: table header tag
+  Scenario: HTML table header tag
     Given my source code contains the file "1.md" with content:
       """
       <table>
@@ -69,3 +69,15 @@ Feature: active table tags
       | FILENAME | 1.md        |
       | LINE     | 1           |
       | MESSAGE  | Hello world |
+
+
+  Scenario: Markdown table
+    Given my source code contains the file "1.md" with content:
+      """
+     | Keyboard shortcut                                  | Action                      |
+     |----------------------------------------------------|-----------------------------|
+     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd> | Toggle between .h/.m file   |
+     | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>   | Open Quickly (fuzzy find)   |
+
+      """
+    When running text-run

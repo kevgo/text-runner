@@ -9,7 +9,7 @@ Feature: active table tags
     Given my workspace contains the HelloWorld activity
 
 
-  Scenario: HTML table
+  Scenario: simple HTML table
     Given my source code contains the file "1.md" with content:
       """
       <table textrun="HelloWorld">
@@ -23,13 +23,66 @@ Feature: active table tags
       | MESSAGE  | Hello world |
 
 
-  Scenario: HTML table row tag
+  Scenario: HTML table with THEAD and TBODY
+    Given my source code contains the file "1.md" with content:
+      """
+      <table textrun="HelloWorld">
+        <thead>
+          <tr> <td></td> </tr>
+        </thead>
+        <tbody>
+          <tr> <td></td> </tr>
+        </tbody>
+      </table>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
+  Scenario: active TR tag in THEAD
     Given my source code contains the file "1.md" with content:
       """
       <table>
-        <tr textrun="HelloWorld">
-          <td></td>
-        </tr>
+        <thead>
+          <tr textrun="HelloWorld"> <th></th> </tr>
+          <tr> <td></td> </tr>
+        </thead>
+      </table>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
+  Scenario: active TR tag in TBODY
+    Given my source code contains the file "1.md" with content:
+      """
+      <table>
+        <thead>
+          <tr> <th></th> </tr>
+        </thead>
+        <tbody>
+          <tr textrun="HelloWorld"> <td></td> </tr>
+        </tbody>
+      </table>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | MESSAGE  | Hello world |
+
+
+  Scenario: row tag in simple HTML table
+    Given my source code contains the file "1.md" with content:
+      """
+      <table>
+        <tr textrun="HelloWorld"> <td></td> </tr>
       </table>
       """
     When running text-run

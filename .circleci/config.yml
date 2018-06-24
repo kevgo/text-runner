@@ -48,16 +48,38 @@ jobs:
          paths:
            - ~/repo/.nyc_output_tests
 
-  cli-tests:
+  cuke-other:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make coverage-cli
+      - run: make coverage-cuke-other
       - save_cache:
-          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
           paths:
-            - ~/repo/.nyc_output_cli
+            - ~/repo/.nyc_output_cuke_other
+
+  cuke-actions:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make coverage-cuke-actions
+     - save_cache:
+         key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_cuke_actions
+
+  cuke-tagtypes:
+    <<: *defaults
+    steps:
+     - restore_cache:
+         key: code-{{ .Environment.CIRCLE_SHA1 }}
+     - run: make coverage-cuke-tagtypes
+     - save_cache:
+         key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
+         paths:
+           - ~/repo/.nyc_output_cuke_tagtypes
 
   doc-tests:
     <<: *defaults
@@ -78,7 +100,11 @@ jobs:
       - restore_cache:
           key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
-          key: coverage-cli-{{ .Environment.CIRCLE_SHA1 }}
+          key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
+      - restore_cache:
+          key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
       - restore_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
       - run: ls -la
@@ -107,7 +133,13 @@ workflows:
       - unit-tests:
           requires:
             - checkout_code
-      - cli-tests:
+      - cuke-other:
+          requires:
+            - checkout_code
+      - cuke-actions:
+          requires:
+            - checkout_code
+      - cuke-tagtypes:
           requires:
             - checkout_code
       - doc-tests:
@@ -117,5 +149,7 @@ workflows:
           requires:
             - lint
             - unit-tests
-            - cli-tests
+            - cuke-other
+            - cuke-actions
+            - cuke-tagtypes
             - doc-tests

@@ -21,7 +21,6 @@ module.exports = function transformATag (
     content: '',
     attributes
   })
-  openTags.add(resultNode)
   result.pushData(resultNode)
   return result
 }

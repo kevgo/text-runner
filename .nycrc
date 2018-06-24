@@ -1,4 +1,13 @@
 {
+  "exclude": [
+    "coverage/**",
+    "dist/**",
+    "documentation/**",
+    "node_modules/**",
+    "**/*-test.js",
+    "test/**",
+    "text-run/**"
+  ],
   "sourceMap": false,
   "instrument": false
 }

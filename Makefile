@@ -11,10 +11,9 @@ clean:   # Removes all build artifacts
 coverage-build:   # builds the code base with code coverage measurements baked in
 	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
 
-coverage-tests: coverage-build # test coverage for unit tests
-	# TODO: fix this
-	# BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
-	# mv .nyc_output .nyc_output_tests
+coverage-tests:  # test coverage for unit tests
+	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
+	mv .nyc_output .nyc_output_tests
 
 coverage-cli:   # test coverage for CLI specs
 	rm -rf .nyc_output_cli
@@ -28,7 +27,9 @@ coverage-docs:  # test coverage for the self-check
 coverage-merge: # merge all coverage results together
 	rm -rf .nyc_output
 	mkdir .nyc_output
-	node scripts/cleanse-coverage.js
+	ls -1 .nyc_output_tests | cat -n | while read n f; do cp ".nyc_output_tests/$$f" ".nyc_output/tests_$$n.json"; done
+	ls -1 .nyc_output_text_run | cat -n | while read n f; do cp ".nyc_output_text_run/$$f" ".nyc_output/textrun_$$n.json"; done
+	find .nyc_output_cli -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_$$n.json"; done
 
 coverage-html:  # render test coverage as a HTML report
 	node_modules/.bin/nyc report --reporter=lcov
@@ -37,7 +38,7 @@ coverage-html:  # render test coverage as a HTML report
 coverage-send:  # sends the coverage to coveralls.io
 	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
 
-coverage: coverage-build coverage-tests coverage-cli coverage-html   # measures code coverage
+coverage: coverage-build coverage-tests coverage-cli coverage-docs   # measures code coverage
 .PHONY: coverage
 
 cuke: build   # runs the feature specs

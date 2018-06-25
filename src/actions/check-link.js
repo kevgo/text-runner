@@ -10,6 +10,7 @@ const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
 const path = require('path')
+const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
 const stripLeadingSlash = require('../helpers/strip-leading-slash.js')
 const url = require('url')
@@ -109,7 +110,11 @@ async function checkLinkToFilesystem (
     f.name(`link to local file ${cyan(stripLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {
-    throw new Error(`link to non-existing local file ${bold(relativePath)}`)
+    throw new Error(
+      `link to non-existing local file ${bold(
+        removeLeadingSlash(relativePath)
+      )}`
+    )
   }
 }
 
@@ -145,7 +150,7 @@ async function checkLinkToAnchorInOtherFile (
   if (linkTargets.targets[targetFilename] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
-        targetFilename
+        removeLeadingSlash(targetFilename)
       )}`
     )
   }
@@ -155,15 +160,23 @@ async function checkLinkToAnchorInOtherFile (
   if (!targetEntry) {
     throw new Error(
       `link to non-existing anchor ${bold('#' + targetAnchor)} in ${bold(
-        targetFilename
+        removeLeadingSlash(targetFilename)
       )}`
     )
   }
 
   if (targetEntry.type === 'heading') {
-    f.name(`link to heading ${cyan(targetFilename + '#' + targetAnchor)}`)
+    f.name(
+      `link to heading ${cyan(
+        removeLeadingSlash(targetFilename) + '#' + targetAnchor
+      )}`
+    )
   } else {
-    f.name(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
+    f.name(
+      `link to ${cyan(removeLeadingSlash(targetFilename))}#${cyan(
+        targetAnchor
+      )}`
+    )
   }
 }
 

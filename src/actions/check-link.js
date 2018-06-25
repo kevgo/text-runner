@@ -3,8 +3,7 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
-const adjustLinkToFormat = require('../helpers/adjust-link-to-format.js')
-const applyMapping = require('../helpers/apply-mapping.js')
+const reversePublication = require('../helpers/reverse-publication.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
@@ -104,8 +103,7 @@ async function checkLinkToFilesystem (
     // we can ignore errors here since we keep checking the file below
   }
   try {
-    relativePath = adjustLinkToFormat(relativePath, c.linkFormat)
-    relativePath = applyMapping(relativePath, c.mappings)
+    relativePath = reversePublication(relativePath, c.publications)
     fullPath = path.join(c.sourceDir, relativePath)
     f.name(`link to local file ${cyan(stripLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
@@ -142,7 +140,7 @@ async function checkLinkToAnchorInOtherFile (
 ) {
   var [targetFilename, targetAnchor] = target.split('#')
   targetFilename = decodeURI(targetFilename)
-  targetFilename = adjustLinkToFormat(targetFilename, c.linkFormat)
+  targetFilename = reversePublication(targetFilename, c.publications)
   if (linkTargets.targets[targetFilename] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(

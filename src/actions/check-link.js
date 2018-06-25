@@ -4,6 +4,7 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const adjustLinkToFormat = require('../helpers/adjust-link-to-format.js')
+const applyMapping = require('../helpers/apply-mapping.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
@@ -107,6 +108,7 @@ async function checkLinkToFilesystem (
   }
   try {
     relativePath = adjustLinkToFormat(relativePath, c.linkFormat)
+    relativePath = applyMapping(relativePath, c.mappings)
     fullPath = path.join(c.sourceDir, relativePath)
     f.name(`link to local file ${cyan(relativePath)}`)
     await fs.stat(fullPath)

@@ -98,7 +98,9 @@ async function checkLinkToFilesystem (
     // see if a directory exists
     const stats = await fs.stat(fullPath)
     if (stats.isDirectory()) {
-      f.name(`link to local directory ${cyan(relativePath)}`)
+      f.name(
+        `link to local directory ${cyan(removeLeadingSlash(relativePath))}`
+      )
       return
     }
   } catch (e) {

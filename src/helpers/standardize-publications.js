@@ -7,6 +7,7 @@ const addLeadingSlash = require('./add-leading-slash.js')
 const addTrailingSlash = require('./add-trailing-slash.js')
 
 module.exports = function (publications: any): Publications {
+  if (!publications) return publications
   return publications.map(function (publication) {
     return {
       localPath: addLeadingSlash(addTrailingSlash(publication.localPath)),

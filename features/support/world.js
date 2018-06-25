@@ -112,9 +112,14 @@ const World = function () {
     }
     if (table.MESSAGE) expectedText += table.MESSAGE
     if (table.WARNING) expectedText += table.WARNING
-    expect(standardizePath(stripAnsi(this.process.fullOutput()))).to.include(
-      expectedText
-    )
+    const actual = standardizePath(stripAnsi(this.process.fullOutput()))
+    if (!actual.includes(expectedText)) {
+      throw new Error(`Mismatching output!
+Looking for: ${expectedText}
+Actual content:
+${actual}
+`)
+    }
   }
 
   this.verifyPrintedUsageInstructions = () => {

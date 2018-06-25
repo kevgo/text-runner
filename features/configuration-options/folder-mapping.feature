@@ -15,7 +15,7 @@ Feature: Folder Mapping
   Scenario: mapping a folder to a different URL
     Given my source code contains the file "1.md" with content:
       """
-      [link to 2.md](/2.md)
+      [link to 2.md](2.md)
       """
     And my source code contains the file "text-run.yml" with content:
       """
@@ -24,8 +24,8 @@ Feature: Folder Mapping
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                             |
-      | LINE     | 1                                |
+      | FILENAME | 1.md                            |
+      | LINE     | 1                               |
       | MESSAGE  | link to local file content/2.md |
 
 

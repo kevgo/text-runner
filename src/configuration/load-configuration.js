@@ -55,10 +55,6 @@ module.exports = function loadConfiguration (
   mappings = mappings.sort(function (a, b) {
     return a[1] > b[1] ? -1 : 1
   })
-  mappings.forEach(function (mapping) {
-    mapping[0] = stripLeadingSlash(mapping[0])
-    mapping[1] = stripLeadingSlash(mapping[1])
-  })
 
   return {
     actions: fileData['actions']

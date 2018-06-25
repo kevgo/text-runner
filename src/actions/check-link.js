@@ -11,6 +11,7 @@ const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
 const path = require('path')
 const request = require('request-promise-native')
+const stripLeadingSlash = require('../helpers/strip-leading-slash.js')
 const url = require('url')
 
 // Checks for broken hyperlinks
@@ -88,14 +89,10 @@ async function checkLinkToFilesystem (
   f: Formatter,
   c: Configuration
 ) {
-  var relativePath = ''
-  var fullPath = ''
-  if (target.startsWith('/')) {
-    relativePath = target.substr(1)
-  } else {
-    relativePath = path.join(path.dirname(filename), target)
-  }
-  fullPath = path.join(c.sourceDir, relativePath)
+  var relativePath = target.startsWith('/')
+    ? target
+    : path.sep + path.join(path.dirname(filename), target)
+  var fullPath = path.join(c.sourceDir, relativePath)
   try {
     // see if a directory exists
     const stats = await fs.stat(fullPath)
@@ -110,7 +107,7 @@ async function checkLinkToFilesystem (
     relativePath = adjustLinkToFormat(relativePath, c.linkFormat)
     relativePath = applyMapping(relativePath, c.mappings)
     fullPath = path.join(c.sourceDir, relativePath)
-    f.name(`link to local file ${cyan(relativePath)}`)
+    f.name(`link to local file ${cyan(stripLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {
     throw new Error(`link to non-existing local file ${bold(relativePath)}`)

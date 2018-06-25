@@ -53,9 +53,9 @@ Feature: Folder Mapping
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                |
-      | LINE     | 1                                   |
-      | MESSAGE  | link to heading /content/2.md#hello |
+      | FILENAME | 1.md                               |
+      | LINE     | 1                                  |
+      | MESSAGE  | link to heading content/2.md#hello |
     And it signals:
       | FILENAME | 1.md                                  |
       | LINE     | 2                                     |

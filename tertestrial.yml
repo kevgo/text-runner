@@ -1,74 +1,21 @@
 actions:
 
-  ALL:
+  - match:
+    command: 'make spec'
 
-    - match:
-      command: 'make spec'
+  - match:
+      filename: '\.md$'
+    command: 'make docs FILE={{filename}}'
 
-    - match:
-        filename: '\.md$'
-      command: 'make docs FILE={{filename}}'
+  - match:
+      filename: '\.feature$'
+    command: 'make cuke FILE={{filename}}'
 
-    - match:
-        filename: '\.feature$'
-      command: 'make cukeapi FILE={{filename}} && make cukecli FILE={{filename}}'
+  - match:
+      filename: '\.feature$'
+      line: '\d+'
+    command: 'make cuke FILE={{filename}}:{{line}}'
 
-    - match:
-        filename: '\.feature$'
-        line: '\d+'
-      command: 'make cukeapi FILE={{filename}}:{{line}} && make cukecli FILE={{filename}}:{{line}}'
-
-    - match:
-        filename: '-test\.js'
-      command: 'mocha {{filename}}'
-
-    - match:
-        filename: '-spec\.js'
-      command: 'make tests {{filename}}'
-
-
-  API:
-
-    - match:
-        filename: '\.md$'
-      command: 'make docs FILE={{filename}}'
-
-    - match:
-      command: 'make cukeapi'
-
-    - match:
-        filename: '\.feature$'
-      command: 'make cukeapi FILE={{filename}}'
-
-    - match:
-        filename: '\.feature$'
-        line: '\d+'
-      command: 'make cukeapi FILE={{filename}}:{{line}}'
-
-    - match:
-        filename: '-spec\.js'
-      command: 'make tests FILE={{filename}}'
-
-
-
-  CLI:
-
-    - match:
-        filename: '\.md$'
-      command: 'make docs FILE={{filename}}'
-
-    - match:
-      command: 'make cukecli'
-
-    - match:
-        filename: '\.feature$'
-      command: 'make cukecli FILE={{filename}}'
-
-    - match:
-        filename: '\.feature$'
-        line: '\d+'
-      command: 'make cukecli FILE={{filename}}:{{line}}'
-
-    - match:
-        filename: '-spec\.js'
-      command: 'make tests FILE={{filename}}'
+  - match:
+      filename: '-test\.js'
+    command: 'mocha {{filename}}'

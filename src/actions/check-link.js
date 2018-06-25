@@ -3,6 +3,7 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
+const addLeadingSlash = require('../helpers/add-leading-slash.js')
 const reversePublication = require('../helpers/reverse-publication.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
@@ -118,9 +119,9 @@ async function checkLinkToAnchorInSameFile (
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
-  const targetEntry = (linkTargets.targets[filename] || []).filter(
-    linkTarget => linkTarget.name === target.substr(1)
-  )[0]
+  const targetEntry = (
+    linkTargets.targets[addLeadingSlash(filename)] || []
+  ).filter(linkTarget => linkTarget.name === target.substr(1))[0]
   if (!targetEntry) {
     throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }

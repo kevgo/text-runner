@@ -23,7 +23,13 @@ Then('it creates the file {string} with content:', function (
   const actualContent = fs.readFileSync(path.join(this.rootDir, filename), {
     encoding: 'utf8'
   })
-  jsdiffConsole(actualContent.trim(), expectedContent.trim())
+  try {
+    jsdiffConsole(actualContent.trim(), expectedContent.trim())
+  } catch (e) {
+    console.log('MISMATCHING FILE CONTENT!')
+    console.log(e)
+    throw new Error()
+  }
 })
 
 Then("it doesn't print:", function (expectedText) {

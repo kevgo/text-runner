@@ -12,7 +12,6 @@ const LinkTargetList = require('../link-targets/link-target-list.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
-const stripLeadingSlash = require('../helpers/strip-leading-slash.js')
 const url = require('url')
 
 // Checks for broken hyperlinks
@@ -109,7 +108,7 @@ async function checkLinkToFilesystem (
   try {
     relativePath = reversePublication(relativePath, c.publications)
     fullPath = path.join(c.sourceDir, relativePath)
-    f.name(`link to local file ${cyan(stripLeadingSlash(relativePath))}`)
+    f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {
     throw new Error(

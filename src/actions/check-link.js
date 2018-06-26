@@ -91,7 +91,7 @@ async function checkLinkToFilesystem (
 ) {
   var relativePath = target.startsWith('/')
     ? target
-    : path.sep + path.join(path.dirname(filename), target)
+    : '/' + path.join(path.dirname(filename), target)
   var fullPath = path.join(c.sourceDir, relativePath)
   try {
     // see if a directory exists

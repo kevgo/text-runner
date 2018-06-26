@@ -25,12 +25,11 @@ files: '**/*.md'
 # the formatter to use
 format: detailed
 
-# If you compile Markdown to HTML,
-# this option specifies how links to local Markdown files look like
-# in your transpiled HTML.
-# - direct: link "1.md" points to file 1.md
-# - html: link "1.html" points to file 1.md
-# - url-friendly: link "1" points to file 1.md
+# If you compile Markdown to HTML, this option specifies
+# how links to local Markdown files look like in your transpiled HTML.
+# - direct: link "1.md" points to file "1.md"
+# - html: link "1.html" points to file "1.md"
+# - url-friendly: link "1" points to file "1.md"
 linkFormat: direct
 
 # prefix that makes anchor tags active regions

@@ -92,7 +92,7 @@ async function checkLinkToFilesystem (
   var relativePath = target.startsWith('/')
     ? target
     : '/' + path.join(path.dirname(filename), target)
-  var fullPath = path.join(c.sourceDir, relativePath)
+  var fullPath = path.normalize(path.join(c.sourceDir, relativePath))
   try {
     // see if a directory exists
     const stats = await fs.stat(fullPath)
@@ -107,7 +107,7 @@ async function checkLinkToFilesystem (
   }
   try {
     relativePath = reversePublication(relativePath, c.publications)
-    fullPath = path.join(c.sourceDir, relativePath)
+    fullPath = path.normalize(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {

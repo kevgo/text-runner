@@ -109,7 +109,7 @@ async function checkLinkToFilesystem (
     relativePath = reversePublication(relativePath, c.publications)
     fullPath = path.normalize(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
-    await fs.stat(fullPath)
+    await fs.stat(path.normalize(fullPath))
   } catch (err) {
     throw new Error(
       `link to non-existing local file ${bold(

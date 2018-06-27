@@ -9,6 +9,7 @@ const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
+const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
@@ -92,7 +93,7 @@ async function checkLinkToFilesystem (
   var relativePath = target.startsWith('/')
     ? target
     : '/' + path.join(path.dirname(filename), target)
-  var fullPath = path.normalize(path.join(c.sourceDir, relativePath))
+  var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
   try {
     // see if a directory exists
     const stats = await fs.stat(fullPath)
@@ -107,9 +108,9 @@ async function checkLinkToFilesystem (
   }
   try {
     relativePath = reversePublication(relativePath, c.publications)
-    fullPath = path.normalize(path.join(c.sourceDir, relativePath))
+    fullPath = normalizePath(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
-    await fs.stat(path.normalize(fullPath))
+    await fs.stat(normalizePath(fullPath))
   } catch (err) {
     throw new Error(
       `link to non-existing local file ${bold(

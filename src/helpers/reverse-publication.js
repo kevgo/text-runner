@@ -10,6 +10,7 @@ module.exports = function (
   publications: Publications
 ): string {
   var result = addLeadingSlash(filepath)
+  console.log(publications)
   for (const publication of publications) {
     const publicPathRE = new RegExp(`^${publication.publicPath}`)
     const match = result.match(publicPathRE)

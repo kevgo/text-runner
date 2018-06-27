@@ -112,6 +112,7 @@ async function checkLinkToFilesystem (
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {
+    console.log(c.publications)
     console.log(fullPath)
     throw new Error(
       `link to non-existing local file ${bold(

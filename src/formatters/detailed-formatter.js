@@ -1,6 +1,6 @@
 // @flow
 
-const { dim, green, magenta, red } = require('chalk')
+const { cyan, dim, green, magenta, red } = require('chalk')
 const Formatter = require('./formatter')
 const path = require('path')
 const printCodeFrame = require('../helpers/print-code-frame')
@@ -19,9 +19,9 @@ class DetailedFormatter extends Formatter {
 
   skip (message: string) {
     super.skip(message)
-    console.log(dim(this.output))
+    if (this.output) console.log(dim(this.output))
     console.log(
-      magenta(`${this.activity.file}:${this.activity.line} -- ${message}`)
+      cyan(`${this.activity.file}:${this.activity.line} -- ${message}`)
     )
   }
 
@@ -35,7 +35,7 @@ class DetailedFormatter extends Formatter {
 
   warning (warningMessage: string) {
     super.warning(warningMessage)
-    console.log(dim(this.output))
+    if (this.output.trim() !== '') console.log(dim(this.output))
     console.log(
       magenta(
         `${this.activity.file}:${this.activity.line} -- ${warningMessage}`

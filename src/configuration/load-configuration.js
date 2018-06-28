@@ -1,13 +1,14 @@
 // @flow
 
 import type { CliArgTypes } from '../cli/cli-arg-types.js'
-import type { Configuration, Mapping } from './configuration.js'
+import type { Configuration } from './configuration.js'
 
 const camelCase = require('just-camel-case')
 const DetailedFormatter = require('../formatters/detailed-formatter.js')
 const getFormatterClass = require('./get-formatter-class.js')
 const debug = require('debug')('textrun:configuration')
-const stripLeadingSlash = require('../helpers/strip-leading-slash.js')
+const sortPublications = require('../helpers/sort-publications.js')
+const standardizePublications = require('../helpers/standardize-publications.js')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
@@ -16,8 +17,7 @@ const defaultValues: Configuration = {
   exclude: [],
   fileGlob: '**/*.md',
   keepTmp: false,
-  linkFormat: 'direct',
-  mappings: [],
+  publications: [],
   FormatterClass: DetailedFormatter,
   offline: false,
   sourceDir: process.cwd(),
@@ -47,19 +47,6 @@ module.exports = function loadConfiguration (
     )
   }
 
-  var mappings: Array<Mapping> = defaultValues.mappings
-  if (fileData.mappings) {
-    // $FlowFixMe: flow is too stupid to infer the proper return value from Object.entries
-    mappings = Object.entries(fileData['mappings'])
-  }
-  mappings = mappings.sort(function (a, b) {
-    return a[1] > b[1] ? -1 : 1
-  })
-  mappings.forEach(function (mapping) {
-    mapping[0] = stripLeadingSlash(mapping[0])
-    mapping[1] = stripLeadingSlash(mapping[1])
-  })
-
   return {
     actions: fileData['actions']
       ? fileData['actions']
@@ -72,8 +59,9 @@ module.exports = function loadConfiguration (
       get('format'),
       defaultValues.FormatterClass
     ),
-    linkFormat: get('link-format'),
-    mappings,
+    publications:
+      standardizePublications(sortPublications(fileData.publications)) ||
+      defaultValues.publications,
     offline: String(get('offline')) === 'true',
     sourceDir: get('source-dir'),
     useSystemTempDirectory: String(get('use-system-temp-directory')) === 'true',

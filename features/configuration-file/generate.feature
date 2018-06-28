@@ -21,6 +21,10 @@ Feature: generating a configuration file
       # To exclude the "vendor" folder: '{,!(vendor)/**/}*.md'
       files: '**/*.md'
 
+      # black-list of files not to test
+      # This is applied after the white-list above.
+      exclude:
+
       # the formatter to use
       format: detailed
 

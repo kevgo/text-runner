@@ -3,13 +3,15 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
-const adjustLinkToFormat = require('../helpers/adjust-link-to-format.js')
-const applyMapping = require('../helpers/apply-mapping.js')
+const addLeadingSlash = require('../helpers/add-leading-slash.js')
+const reversePublication = require('../helpers/reverse-publication.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
+const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
+const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
 const url = require('url')
 
@@ -88,32 +90,35 @@ async function checkLinkToFilesystem (
   f: Formatter,
   c: Configuration
 ) {
-  var relativePath = ''
-  var fullPath = ''
-  if (target.startsWith('/')) {
-    relativePath = target.substr(1)
-  } else {
-    relativePath = path.join(path.dirname(filename), target)
-  }
-  fullPath = path.join(c.sourceDir, relativePath)
+  var relativePath = target.startsWith('/')
+    ? target
+    : '/' + path.join(path.dirname(filename), target)
+  var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
   try {
     // see if a directory exists
     const stats = await fs.stat(fullPath)
     if (stats.isDirectory()) {
-      f.name(`link to local directory ${cyan(relativePath)}`)
+      f.name(
+        `link to local directory ${cyan(removeLeadingSlash(relativePath))}`
+      )
       return
     }
   } catch (e) {
     // we can ignore errors here since we keep checking the file below
   }
   try {
-    relativePath = adjustLinkToFormat(relativePath, c.linkFormat)
-    relativePath = applyMapping(relativePath, c.mappings)
-    fullPath = path.join(c.sourceDir, relativePath)
-    f.name(`link to local file ${cyan(relativePath)}`)
+    relativePath = reversePublication(relativePath, c.publications)
+    fullPath = normalizePath(path.join(c.sourceDir, relativePath))
+    f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {
-    throw new Error(`link to non-existing local file ${bold(relativePath)}`)
+    console.log(c.publications)
+    console.log(fullPath)
+    throw new Error(
+      `link to non-existing local file ${bold(
+        removeLeadingSlash(relativePath)
+      )}`
+    )
   }
 }
 
@@ -123,9 +128,9 @@ async function checkLinkToAnchorInSameFile (
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
-  const targetEntry = (linkTargets.targets[filename] || []).filter(
-    linkTarget => linkTarget.name === target.substr(1)
-  )[0]
+  const targetEntry = (
+    linkTargets.targets[addLeadingSlash(filename)] || []
+  ).filter(linkTarget => linkTarget.name === target.substr(1))[0]
   if (!targetEntry) {
     throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }
@@ -145,11 +150,11 @@ async function checkLinkToAnchorInOtherFile (
 ) {
   var [targetFilename, targetAnchor] = target.split('#')
   targetFilename = decodeURI(targetFilename)
-  targetFilename = adjustLinkToFormat(targetFilename, c.linkFormat)
+  targetFilename = reversePublication(targetFilename, c.publications)
   if (linkTargets.targets[targetFilename] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
-        targetFilename
+        removeLeadingSlash(targetFilename)
       )}`
     )
   }
@@ -159,15 +164,23 @@ async function checkLinkToAnchorInOtherFile (
   if (!targetEntry) {
     throw new Error(
       `link to non-existing anchor ${bold('#' + targetAnchor)} in ${bold(
-        targetFilename
+        removeLeadingSlash(targetFilename)
       )}`
     )
   }
 
   if (targetEntry.type === 'heading') {
-    f.name(`link to heading ${cyan(targetFilename + '#' + targetAnchor)}`)
+    f.name(
+      `link to heading ${cyan(
+        removeLeadingSlash(targetFilename) + '#' + targetAnchor
+      )}`
+    )
   } else {
-    f.name(`link to ${cyan(targetFilename)}#${cyan(targetAnchor)}`)
+    f.name(
+      `link to ${cyan(removeLeadingSlash(targetFilename))}#${cyan(
+        targetAnchor
+      )}`
+    )
   }
 }
 

@@ -2,6 +2,7 @@
 
 import type { LinkTarget } from './link-target.js'
 
+const addLeadingSlash = require('../helpers/add-leading-slash.js')
 const AstNode = require('../parsers/ast-node.js')
 const AstNodeList = require('../parsers/ast-node-list.js')
 const kebabCase = require('just-kebab-case')
@@ -15,7 +16,8 @@ module.exports = class LinkTargetList {
 
   addNodeList (nodeList: AstNodeList) {
     for (const node of nodeList) {
-      this.targets[node.file] = this.targets[node.file] || []
+      const slashedFile = addLeadingSlash(node.file)
+      this.targets[slashedFile] = this.targets[slashedFile] || []
       if (node.type === 'anchor_open') {
         this.addAnchor(node)
       } else if (node.type === 'heading_open') {
@@ -37,6 +39,9 @@ module.exports = class LinkTargetList {
   }
 
   addLinkTarget (filepath: string, type: string, name: string) {
-    this.targets[filepath].push({ type, name: kebabCase(name.toLowerCase()) })
+    this.targets[addLeadingSlash(filepath)].push({
+      type,
+      name: kebabCase(name.toLowerCase())
+    })
   }
 }

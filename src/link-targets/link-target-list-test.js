@@ -16,7 +16,7 @@ describe('LinkTargetList', function () {
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
       expect(targetList.targets).to.eql({
-        'file.md': [{ type: 'anchor', name: 'foo-bar' }]
+        '/file.md': [{ type: 'anchor', name: 'foo-bar' }]
       })
     })
 
@@ -29,7 +29,7 @@ describe('LinkTargetList', function () {
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
       expect(targetList.targets).to.eql({
-        'file.md': []
+        '/file.md': []
       })
     })
 
@@ -52,7 +52,7 @@ describe('LinkTargetList', function () {
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
       expect(targetList.targets).to.eql({
-        'file.md': [{ type: 'heading', name: 'foo-bar' }]
+        '/file.md': [{ type: 'heading', name: 'foo-bar' }]
       })
     })
   })

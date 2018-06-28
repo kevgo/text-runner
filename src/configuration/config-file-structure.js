@@ -5,6 +5,6 @@ export type ConfigFileStructure = {
   actions?: { [string]: Object },
   files?: string,
   formatter?: string,
-  mappings: { [string]: string },
+  publications: Object,
   useSystemTempDirectory?: boolean
 }

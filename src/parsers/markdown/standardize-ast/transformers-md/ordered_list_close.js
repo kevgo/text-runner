@@ -10,7 +10,7 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openNode = openTags.popType('ordered_list_open')
+  const openNode = openTags.popType('ordered_list_open', file, line)
   result.pushData({
     type: node.type,
     tag: '/ol',

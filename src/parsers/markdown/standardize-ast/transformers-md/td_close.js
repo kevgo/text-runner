@@ -18,6 +18,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('td_open')
+  openTags.popType('td_open', file, line)
   return result
 }

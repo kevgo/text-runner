@@ -11,7 +11,7 @@ module.exports = function transformATag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popType('center_open')
+  const openingTag = openTags.popType('center_open', file, line)
   const resultNode = new AstNode({
     type: 'center_close',
     tag: '/center',

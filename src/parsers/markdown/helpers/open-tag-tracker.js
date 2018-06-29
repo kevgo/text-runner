@@ -41,7 +41,7 @@ module.exports = class OpenTagTracker {
     return null
   }
 
-  popTag (expectedNodeTag: string): AstNode {
+  popTag (expectedNodeTag: string, file: string, line: number): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop tag '${expectedNodeTag}'`
@@ -53,10 +53,14 @@ module.exports = class OpenTagTracker {
       this.nodes.splice(i, 1)
       return result
     }
-    throw new Error(`OpenTagTracker does not have node '${expectedNodeTag}'`)
+    throw new UnprintedUserError(
+      `OpenTagTracker does not have node <${expectedNodeTag}>`,
+      file,
+      line
+    )
   }
 
-  popType (expectedNodeType: string): AstNode {
+  popType (expectedNodeType: string, file: string, line: number): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop type '${expectedNodeType}'`
@@ -68,6 +72,6 @@ module.exports = class OpenTagTracker {
       this.nodes.splice(i, 1)
       return result
     }
-    throw new Error(`OpenTagTracker does not have node '${expectedNodeType}'`)
+    throw new Error(`OpenTagTracker does not have node <${expectedNodeType}>`)
   }
 }

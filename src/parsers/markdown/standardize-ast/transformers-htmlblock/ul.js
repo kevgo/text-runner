@@ -28,7 +28,6 @@ module.exports = async function transformUl (
     attributes: parseHtmlAttributes(match[1])
   })
   result.pushData(ulNode)
-  openTags.add(ulNode)
   for (const li of xml.ul.li) {
     result.pushData({
       type: 'list_item_open',

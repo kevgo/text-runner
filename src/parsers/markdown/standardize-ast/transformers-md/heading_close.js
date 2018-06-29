@@ -9,7 +9,7 @@ module.exports = function (
   file: string,
   line: number
 ): AstNodeList {
-  const openNode = openTags.popType('heading_open')
+  const openNode = openTags.popType('heading_open', file, line)
   const result = new AstNodeList()
   result.pushData({
     type: node.type,

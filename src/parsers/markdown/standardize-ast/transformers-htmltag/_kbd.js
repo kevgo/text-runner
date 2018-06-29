@@ -11,7 +11,7 @@ module.exports = function transformATag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popType('kbd_open')
+  const openingTag = openTags.popType('kbd_open', file, line)
   const resultNode = new AstNode({
     type: 'kbd_close',
     tag: '/kbd',

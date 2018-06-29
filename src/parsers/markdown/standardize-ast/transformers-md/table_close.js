@@ -18,6 +18,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('table_open')
+  openTags.popType('table_open', file, line)
   return result
 }

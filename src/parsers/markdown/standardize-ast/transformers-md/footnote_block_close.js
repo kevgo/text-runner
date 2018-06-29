@@ -18,6 +18,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('footnote_block_open')
+  openTags.popType('footnote_block_open', file, line)
   return result
 }

@@ -39,7 +39,6 @@ format: detailed
 #     publicPath: /blog
 #     publicExtension: ''
 
-
 # prefix that makes anchor tags active regions
 classPrefix: 'textrun'
 

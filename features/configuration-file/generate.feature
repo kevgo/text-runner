@@ -38,12 +38,6 @@ Feature: generating a configuration file
       #     publicPath: /blog
       #     publicExtension: ''
 
-      # Define which folders of your Markdown source get compiled to HTML
-      # and published under a different URL path.
-      # Example:
-      #   /content/posts: /blog   # folder "content/posts" shows up under "/blog" in the compiled HTML
-      folderMapping:
-
       # prefix that makes anchor tags active regions
       classPrefix: 'textrun'
 

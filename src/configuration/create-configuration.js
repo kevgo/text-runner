@@ -18,18 +18,15 @@ exclude:
 # the formatter to use
 format: detailed
 
-# If you compile Markdown to HTML, this option specifies
-# how links to local Markdown files look like in your transpiled HTML.
-# - direct: link "1.md" points to file "1.md"
-# - html: link "1.html" points to file "1.md"
-# - url-friendly: link "1" points to file "1.md"
-linkFormat: direct
-
 # Define which folders of your Markdown source get compiled to HTML
 # and published under a different URL path.
-# Example:
-#   /content/posts: /blog   # folder "content/posts" shows up under "/blog" in the compiled HTML
-folderMapping:
+#
+# In this example, the public URL "/blog/foo"
+# is hosted as "post/foo.md":
+# publications:
+#   - localPath: /posts/
+#     publicPath: /blog
+#     publicExtension: ''
 
 # prefix that makes anchor tags active regions
 classPrefix: 'textrun'

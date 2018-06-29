@@ -54,3 +54,4 @@ Feature: changing the working directory
       | LINE          | 1                               |
       | ERROR MESSAGE | directory foo not found         |
       | EXIT CODE     | 1                               |
+

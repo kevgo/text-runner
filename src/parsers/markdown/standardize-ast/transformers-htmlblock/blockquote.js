@@ -23,7 +23,6 @@ module.exports = async function transformBlockquote (
     content: blockquoteMatch[2],
     attributes: parseHtmlAttributes(blockquoteMatch[1])
   })
-  openTags.add(resultNode)
   result.pushData(resultNode)
   return result
 }

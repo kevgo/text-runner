@@ -34,7 +34,6 @@ module.exports = async function transformUl (
     attributes: xml.table.$ || {}
   })
   result.pushData(tableNode)
-  openTags.add(tableNode)
   if (xml.table.tr) parseRows(xml.table.tr, result, file, line)
   if (xml.table.thead) {
     result.pushData({

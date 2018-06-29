@@ -28,7 +28,6 @@ module.exports = async function transformOl (
     attributes: parseHtmlAttributes(match[1])
   })
   result.pushData(olNode)
-  openTags.add(olNode)
   for (const li of xml.ol.li) {
     result.pushData({
       type: 'list_item_open',

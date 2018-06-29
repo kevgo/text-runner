@@ -25,7 +25,7 @@ Feature: generating a configuration file
       # This is applied after the white-list above.
       exclude:
 
-      # the formatter to use
+      # the formatter to use (detailed, dot)
       format: detailed
 
       # Define which folders of your Markdown source get compiled to HTML

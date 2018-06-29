@@ -54,7 +54,7 @@ module.exports = class OpenTagTracker {
       return result
     }
     throw new UnprintedUserError(
-      `OpenTagTracker does not have node '${expectedNodeTag}'`,
+      `OpenTagTracker does not have node <${expectedNodeTag}>`,
       file,
       line
     )
@@ -72,6 +72,6 @@ module.exports = class OpenTagTracker {
       this.nodes.splice(i, 1)
       return result
     }
-    throw new Error(`OpenTagTracker does not have node '${expectedNodeType}'`)
+    throw new Error(`OpenTagTracker does not have node <${expectedNodeType}>`)
   }
 }

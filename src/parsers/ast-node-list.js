@@ -26,8 +26,15 @@ module.exports = class AstNodeList extends Array<AstNode> {
   }
 
   getNodesFor (openingNode: AstNode): AstNodeList {
+    if (openingNode == null) throw new UnprintedUserError('null Node given')
     var index = this.indexOf(openingNode)
-    if (index === -1) throw new UnprintedUserError('node not found in list')
+    if (index === -1) {
+      throw new UnprintedUserError(
+        `node '${openingNode.type}' not found in list`,
+        openingNode.file,
+        openingNode.line
+      )
+    }
     const result = new AstNodeList()
     if (!openingNode.isOpeningNode()) {
       result.push(openingNode)

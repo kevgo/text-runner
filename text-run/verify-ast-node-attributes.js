@@ -12,5 +12,5 @@ module.exports = async function (args: ActionArgs) {
     .sort()
     .map(removeTrailingColon)
   const actual = Object.keys(AstNode.scaffold()).sort()
-  jsdiffConsole(actual, expected)
+  jsdiffConsole(expected, actual)
 }

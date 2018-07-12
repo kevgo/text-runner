@@ -6,7 +6,7 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
-    "@babel/code-frame": "7.0.0-beta.51",
+    "@babel/code-frame": "7.0.0-beta.53",
     "babel-register": "6.26.0",
     "chalk": "2.4.1",
     "cli-cursor": "2.1.0",
@@ -44,19 +44,19 @@
     "babel-plugin-istanbul": "4.1.6",
     "babel-preset-flow": "6.23.0",
     "chai": "4.1.2",
-    "coveralls": "3.0.1",
+    "coveralls": "3.0.2",
     "cucumber": "4.2.1",
     "delay": "3.0.0",
     "dependency-lint": "5.0.1",
     "dim-console": "0.4.4",
     "escope": "3.6.0",
     "eslint": "<5.0.0",
-    "eslint-plugin-flowtype": "2.49.3",
-    "eslint-plugin-import": "2.12.0",
+    "eslint-plugin-flowtype": "2.50.0",
+    "eslint-plugin-import": "2.13.0",
     "eslint-plugin-standard": "3.1.0",
-    "flow-bin": "0.75.0",
+    "flow-bin": "0.76.0",
     "flow-remove-types": "1.2.3",
-    "flow-typed": "2.4.0",
+    "flow-typed": "2.5.1",
     "mocha": "5.2.0",
     "ncp": "2.0.0",
     "nyc": "12.0.2",
@@ -71,7 +71,7 @@
     "standard": "10.0.3",
     "strip-ansi": "4.0.0",
     "tertestrial": "0.3.2",
-    "uuid": "3.2.1"
+    "uuid": "3.3.2"
   },
   "files": [
     "bin/text-run",

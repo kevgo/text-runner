@@ -13,5 +13,5 @@ module.exports = function (args: ActionArgs) {
     .map(removeTrailingColon)
   const actualTools = Object.keys(args).sort()
   removeValue(actualTools, 'linkTargets')
-  jsdiffConsole(actualTools, expectedTools)
+  jsdiffConsole(expectedTools, actualTools)
 }

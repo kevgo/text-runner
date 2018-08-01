@@ -13,8 +13,7 @@ module.exports = function (
   var result = addLeadingSlash(unixifyPath(filepath))
   for (const publication of publications) {
     const publicPathRE = new RegExp('^' + publication.publicPath)
-    const match = result.match(publicPathRE)
-    if (!match) continue
+    if (!result.match(publicPathRE)) continue
     result = result.replace(publicPathRE, publication.localPath)
     if (path.extname(result) === publication.publicExtension) {
       const extRE = new RegExp(publication.publicExtension + '$')

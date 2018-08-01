@@ -16,16 +16,14 @@ module.exports = function (
     const publicPathRE = new RegExp('^' + publication.publicPath)
     if (!result.match(publicPathRE)) continue
     result = result.replace(publicPathRE, publication.localPath)
-    const resultExt = path.extname(result)
-    if (resultExt === publication.publicExtension && !defaultFile) {
+    if (path.extname(result) === publication.publicExtension && !defaultFile) {
       const extRE = new RegExp(publication.publicExtension + '$')
       result = result.replace(extRE, '.md')
     }
     break
   }
 
-  const resultExt = path.extname(result)
-  if (resultExt === '' && defaultFile) {
+  if (path.extname(result) === '' && defaultFile) {
     result = unixifyPath(path.join(result, defaultFile))
   }
   return result

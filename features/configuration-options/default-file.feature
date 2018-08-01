@@ -22,9 +22,9 @@ Feature: Default file
       """
     When running text-run
     Then it signals:
-      | FILENAME | root.md                               |
-      | LINE     | 1                                     |
-      | MESSAGE  | link to local default file guide/index.md |
+      | FILENAME | root.md                           |
+      | LINE     | 1                                 |
+      | MESSAGE  | link to local file guide/index.md |
 
 
   Scenario: default behavior

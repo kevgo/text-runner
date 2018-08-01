@@ -99,7 +99,9 @@ async function checkLinkToFilesystem (
   if (c.defaultFile) {
     try {
       relativePath = reversePublication(relativePath, c.publications)
+      // $FlowFixMe: flow is too stupid to understand this file is not undefined here
       fullPath = normalizePath(path.join(c.sourceDir, relativePath, c.defaultFile))
+      // $FlowFixMe: flow is too stupid to understand this file is not undefined here
       f.name(`link to local default file ${cyan(removeLeadingSlash(path.join(relativePath, c.defaultFile)))}`)
       await fs.stat(fullPath)
       return

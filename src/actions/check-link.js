@@ -95,7 +95,7 @@ async function checkLinkToFilesystem (
     : '/' + path.join(path.dirname(filename), target)
   var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
 
-  // see if a directory exists
+  // we only check for directories if no defaultFile is set - otherwise links to folders point to the default file
   if (!c.defaultFile) {
     try {
       const stats = await fs.stat(fullPath)

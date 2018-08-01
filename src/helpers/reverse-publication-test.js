@@ -12,14 +12,6 @@ describe('reversePublication', function () {
     expect(actual).to.equal('/content/1.md')
   })
 
-  it('applies the given path mapping', function () {
-    const publications = [
-      { localPath: '/content/', publicPath: '/', publicExtension: '' }
-    ]
-    const actual = reversePublication('/1.md', publications)
-    expect(actual).to.equal('/content/1.md')
-  })
-
   it('adds leading slashes to the link', function () {
     const publications = [
       { localPath: '/content/', publicPath: '/', publicExtension: '' }

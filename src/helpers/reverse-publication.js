@@ -20,10 +20,13 @@ module.exports = function (
     if (resultExt === publication.publicExtension && !defaultFile) {
       const extRE = new RegExp(publication.publicExtension + '$')
       result = result.replace(extRE, '.md')
-    } else if (resultExt === '' && defaultFile) {
-      result = unixifyPath(path.join(result, defaultFile))
     }
     break
+  }
+
+  const resultExt = path.extname(result)
+  if (resultExt === '' && defaultFile) {
+    result = unixifyPath(path.join(result, defaultFile))
   }
   return result
 }

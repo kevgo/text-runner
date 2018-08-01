@@ -9,7 +9,7 @@ Feature: adding new handler functions
 
   Scenario: adding a new step
     When running "text-run add new-step"
-    Then it generates the file "text-run/new-step.js" with content:
+    Then it creates the file "text-run/new-step.js" with content:
       """
       module.exports = async function (activity) {
         console.log('This code runs inside the "new-step" block implementation.')

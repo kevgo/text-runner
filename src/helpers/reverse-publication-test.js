@@ -8,7 +8,7 @@ describe('reversePublication', function () {
     const publications = [
       { localPath: '/content/', publicPath: '/', publicExtension: '' }
     ]
-    const actual = reversePublication('/1', publications, '')
+    const actual = reversePublication('/1.md', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 

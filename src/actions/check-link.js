@@ -95,21 +95,23 @@ async function checkLinkToFilesystem (
     : '/' + path.join(path.dirname(filename), target)
   var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
 
-  // see if a directory exists
-  try {
-    const stats = await fs.stat(fullPath)
-    if (stats.isDirectory()) {
-      f.name(
-        `link to local directory ${cyan(removeLeadingSlash(relativePath))}`
-      )
-      return
+  // we only check for directories if no defaultFile is set - otherwise links to folders point to the default file
+  if (!c.defaultFile) {
+    try {
+      const stats = await fs.stat(fullPath)
+      if (stats.isDirectory()) {
+        f.name(
+          `link to local directory ${cyan(removeLeadingSlash(relativePath))}`
+        )
+        return
+      }
+    } catch (e) {
+      // we can ignore errors here since we keep checking the file below
     }
-  } catch (e) {
-    // we can ignore errors here since we keep checking the file below
   }
 
   try {
-    relativePath = reversePublication(relativePath, c.publications)
+    relativePath = reversePublication(relativePath, c.publications, c.defaultFile)
     fullPath = normalizePath(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
@@ -150,7 +152,7 @@ async function checkLinkToAnchorInOtherFile (
 ) {
   var [targetFilename, targetAnchor] = target.split('#')
   targetFilename = decodeURI(targetFilename)
-  targetFilename = reversePublication(targetFilename, c.publications)
+  targetFilename = reversePublication(targetFilename, c.publications, c.defaultFile)
   if (linkTargets.targets[targetFilename] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(

@@ -14,6 +14,7 @@ const YAML = require('yamljs')
 const defaultValues: Configuration = {
   actions: {},
   classPrefix: 'textrun',
+  defaultFile: '',
   exclude: [],
   fileGlob: '**/*.md',
   keepTmp: false,
@@ -52,6 +53,7 @@ module.exports = function loadConfiguration (
       ? fileData['actions']
       : defaultValues['actions'],
     classPrefix: get('class-prefix'),
+    defaultFile: get('default-file'),
     exclude: get('exclude'),
     fileGlob: get('files') || defaultValues.fileGlob,
     keepTmp: String(get('keep-tmp')) === 'true',

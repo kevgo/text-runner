@@ -14,6 +14,7 @@ const YAML = require('yamljs')
 const defaultValues: Configuration = {
   actions: {},
   classPrefix: 'textrun',
+  defaultFile: '',
   exclude: [],
   fileGlob: '**/*.md',
   keepTmp: false,

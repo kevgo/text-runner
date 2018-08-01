@@ -8,15 +8,7 @@ describe('reversePublication', function () {
     const publications = [
       { localPath: '/content/', publicPath: '/', publicExtension: '' }
     ]
-    const actual = reversePublication('/1.md', publications)
-    expect(actual).to.equal('/content/1.md')
-  })
-
-  it('applies the given path mapping', function () {
-    const publications = [
-      { localPath: '/content/', publicPath: '/', publicExtension: '' }
-    ]
-    const actual = reversePublication('/1.md', publications)
+    const actual = reversePublication('/1', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -24,7 +16,7 @@ describe('reversePublication', function () {
     const publications = [
       { localPath: '/content/', publicPath: '/', publicExtension: '' }
     ]
-    const actual = reversePublication('1.md', publications)
+    const actual = reversePublication('1.md', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -36,7 +28,7 @@ describe('reversePublication', function () {
         publicExtension: ''
       }
     ]
-    const actual = reversePublication('1', publications)
+    const actual = reversePublication('1', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -48,11 +40,23 @@ describe('reversePublication', function () {
         publicExtension: '.html'
       }
     ]
-    const actual = reversePublication('1.html', publications)
+    const actual = reversePublication('1.html', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
   it('works with empty publications', function () {
-    expect(reversePublication('1.md', [])).to.equal('/1.md')
+    expect(reversePublication('1.md', [], '')).to.equal('/1.md')
+  })
+
+  it('uses the given default filename', function () {
+    const publications = [
+      {
+        localPath: '/content/',
+        publicPath: '/posts',
+        publicExtension: ''
+      }
+    ]
+    const actual = reversePublication('/posts/', publications, 'index.md')
+    expect(actual).to.equal('/content/index.md')
   })
 })

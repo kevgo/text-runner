@@ -39,6 +39,11 @@ format: detailed
 #     publicPath: /blog
 #     publicExtension: ''
 
+# Name of the default filename in folders.
+# If this setting is given, and a link points to a folder,
+# the link is assumed to point to the default file in that folder.
+# defaultFile: 'index'
+
 # prefix that makes anchor tags active regions
 classPrefix: 'textrun'
 

@@ -48,6 +48,11 @@ describe('reversePublication', function () {
     expect(reversePublication('1.md', [], '')).to.equal('/1.md')
   })
 
+  it('uses the given default filename without publications', function () {
+    const actual = reversePublication('/posts/', [], 'index.md')
+    expect(actual).to.equal('/posts/index.md')
+  })
+
   it('uses the given default filename together with publications', function () {
     const publications = [
       {
@@ -58,10 +63,5 @@ describe('reversePublication', function () {
     ]
     const actual = reversePublication('/posts/', publications, 'index.md')
     expect(actual).to.equal('/content/index.md')
-  })
-
-  it('uses the given default filename without publications', function () {
-    const actual = reversePublication('/posts/', [], 'index.md')
-    expect(actual).to.equal('/posts/index.md')
   })
 })

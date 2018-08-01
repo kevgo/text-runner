@@ -64,4 +64,3 @@ Read more about:
 - the [built-in activity types](built-in-activity-types)
 - writing your own [user-defined activities](user-defined-activities.md)
 - [installing](installation.md) TextRunner
-

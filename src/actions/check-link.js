@@ -94,8 +94,32 @@ async function checkLinkToFilesystem (
     ? target
     : '/' + path.join(path.dirname(filename), target)
   var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
+
+  // see if a default file exists
+  console.log(22222222222)
+  console.log(c)
+  if (c.defaultFile) {
+    try {
+      relativePath = reversePublication(relativePath, c.publications)
+      fullPath = normalizePath(path.join(c.sourceDir, relativePath, c.defaultFile))
+      console.log(33333333333)
+      console.log(fullPath)
+      f.name(`link to local default file ${cyan(removeLeadingSlash(path.join(relativePath, c.defaultFile)))}`)
+      await fs.stat(fullPath)
+      return
+    } catch (err) {
+      console.log(c.publications)
+      console.log(fullPath)
+      throw new Error(
+        `link to non-existing local file ${bold(
+          removeLeadingSlash(relativePath)
+        )}`
+      )
+    }
+  }
+
+  // see if a directory exists
   try {
-    // see if a directory exists
     const stats = await fs.stat(fullPath)
     if (stats.isDirectory()) {
       f.name(
@@ -106,6 +130,7 @@ async function checkLinkToFilesystem (
   } catch (e) {
     // we can ignore errors here since we keep checking the file below
   }
+
   try {
     relativePath = reversePublication(relativePath, c.publications)
     fullPath = normalizePath(path.join(c.sourceDir, relativePath))

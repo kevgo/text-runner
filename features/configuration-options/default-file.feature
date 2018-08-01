@@ -22,14 +22,13 @@ Feature: Default file
       """
     When running text-run
     Then it signals:
-      | FILENAME | root.md                       |
-      | LINE     | 1                             |
-      | MESSAGE  | link to local file 2/index.md |
+      | FILENAME | root.md                               |
+      | LINE     | 1                                     |
+      | MESSAGE  | link to local default file 2/index.md |
 
   Scenario: default behavior
-    When trying to run text-run
-    Then the test fails with:
-      | FILENAME      | root.md            |
-      | LINE          | 1                               |
-      | ERROR MESSAGE | directory foo not found         |
-      | EXIT CODE     | 1                               |
+      When running text-run
+      Then it signals:
+      | FILENAME | root.md                   |
+      | LINE     | 1                         |
+      | MESSAGE  | link to local directory 2 |

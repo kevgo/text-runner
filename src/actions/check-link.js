@@ -94,8 +94,9 @@ async function checkLinkToFilesystem (
     ? target
     : '/' + path.join(path.dirname(filename), target)
   var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
+
+  // see if a directory exists
   try {
-    // see if a directory exists
     const stats = await fs.stat(fullPath)
     if (stats.isDirectory()) {
       f.name(
@@ -106,6 +107,7 @@ async function checkLinkToFilesystem (
   } catch (e) {
     // we can ignore errors here since we keep checking the file below
   }
+
   try {
     relativePath = reversePublication(relativePath, c.publications)
     fullPath = normalizePath(path.join(c.sourceDir, relativePath))

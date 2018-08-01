@@ -24,7 +24,7 @@ Then('it creates the file {string} with content:', function (
     encoding: 'utf8'
   })
   try {
-    jsdiffConsole(actualContent.trim(), expectedContent.trim())
+    jsdiffConsole(expectedContent.trim(), actualContent.trim())
   } catch (e) {
     console.log('MISMATCHING FILE CONTENT!')
     console.log(e)

@@ -42,10 +42,10 @@ format: detailed
 # Name of the default filename in folders.
 # If this setting is given, and a link points to a folder,
 # the link is assumed to point to the default file in that folder.
-# defaultFile: 'index'
+# defaultFile: index.md
 
 # prefix that makes anchor tags active regions
-classPrefix: 'textrun'
+classPrefix: textrun
 
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,

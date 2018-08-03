@@ -28,6 +28,7 @@ module.exports = async function (args: ActionArgs) {
   }
 
   args.formatter.name(`link to ${cyan(target)}`)
+
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(
       args.file,

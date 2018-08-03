@@ -21,11 +21,14 @@ module.exports = async function (args: ActionArgs) {
   if (target == null || target === '') {
     throw new Error('link without target')
   }
+
   if (isMailtoLink(target)) {
     args.formatter.skip(`skipping link to ${cyan(target)}`)
     return
   }
+
   args.formatter.name(`link to ${cyan(target)}`)
+
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(
       args.file,
@@ -33,7 +36,10 @@ module.exports = async function (args: ActionArgs) {
       args.linkTargets,
       args.formatter
     )
-  } else if (isLinkToAnchorInOtherFile(target)) {
+    return
+  }
+
+  if (isLinkToAnchorInOtherFile(target)) {
     const targetFullPath = path
       .join(path.dirname(args.file), target)
       .replace(/\\/g, '/') // this line is necessary to make this work on Windows
@@ -44,16 +50,20 @@ module.exports = async function (args: ActionArgs) {
       args.formatter,
       args.configuration
     )
-  } else if (isExternalLink(target)) {
-    await checkExternalLink(target, args.formatter, args.configuration)
-  } else {
-    await checkLinkToFilesystem(
-      args.file,
-      target,
-      args.formatter,
-      args.configuration
-    )
+    return
   }
+
+  if (isExternalLink(target)) {
+    await checkExternalLink(target, args.formatter, args.configuration)
+    return
+  }
+
+  await checkLinkToFilesystem(
+    args.file,
+    target,
+    args.formatter,
+    args.configuration
+  )
 }
 
 async function checkExternalLink (

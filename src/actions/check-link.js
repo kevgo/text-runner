@@ -14,7 +14,6 @@ const LinkTargetList = require('../link-targets/link-target-list.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
-const reversePublication = require('../helpers/reverse-publication.js')
 const request = require('request-promise-native')
 const url = require('url')
 
@@ -172,14 +171,14 @@ async function checkLinkToAnchorInOtherFile (
   console.log(publicLinkPath)
 
   // determine the full public path of the link
-  let publicLinkPath = linkPath
-  if (isRelativePath(linkPath)) {
-    publicLinkPath = getPublicPath(filename) + '/' + linkPath
+  let publicAbsoluteLinkPath = publicLinkPath
+  if (isRelativePath(publicLinkPath)) {
+    publicAbsoluteLinkPath = getPublicPath(filename) + '/' + publicLinkPath
   }
 
   // determine the local path of the linked file
-  const localLinkPath = publicToLocalPath(publicLinkPath, c.publications, c.defaultFile)
-  console.log('full filename:', localLinkPath)
+  const localLinkPath = publicToLocalPath(publicAbsoluteLinkPath, c.publications, c.defaultFile)
+  console.log('full filename:', localAbsoluteLinkPath)
 
   // ensure the local file exists
   if (linkTargets.targets[localLinkPath] == null) {

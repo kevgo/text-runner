@@ -60,3 +60,25 @@ Feature: Folder Mapping
       | FILENAME | 1.md                                  |
       | LINE     | 2                                     |
       | MESSAGE  | link to local file content/posts/3.md |
+
+  Scenario: relative links within a publicized folder
+    Given my source code contains the file "posts/1.md" with content:
+      """
+      [link to hello in 2.md](2#hello)
+      """
+    And my source code contains the file "posts/2.md" with content:
+      """
+      # Hello
+      """
+    And my source code contains the file "text-run.yml" with content:
+      """
+      publications:
+        - localPath: /posts/
+          publicPath: /blog
+          publicExtension: ''
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | posts/1.md                       |
+      | LINE     | 1                                |
+      | MESSAGE  | link to heading posts/2.md#hello |

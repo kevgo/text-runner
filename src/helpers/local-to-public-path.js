@@ -8,5 +8,5 @@ module.exports = function localToPublicPath(localPath: string, publications: Pub
     if (!localPath.startsWith(publication.localPath)) continue
     return localPath.replace(new RegExp('^' + publication.localPath), publication.publicPath)
   }
-  return localPath
+  throw new Error(`Could not find a publication that maps local path '${localPath}' to a public path`)
 }

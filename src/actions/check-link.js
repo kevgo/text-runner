@@ -9,8 +9,8 @@ const { bold, cyan, magenta } = require('chalk')
 const isRelativePath = require('../helpers/is-relative-path.js')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
-const getPublicPath = require('../helpers/get-public-path.js')
 const LinkTargetList = require('../link-targets/link-target-list.js')
+const localToPublicPath = require('../helpers/local-to-public-path.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
@@ -173,7 +173,7 @@ async function checkLinkToAnchorInOtherFile (
   // determine the full public path of the link
   let publicAbsoluteLinkPath = publicLinkPath
   if (isRelativePath(publicLinkPath)) {
-    publicAbsoluteLinkPath = getPublicPath(filename) + '/' + publicLinkPath
+    publicAbsoluteLinkPath = localToPublicPath(filename) + '/' + publicLinkPath
   }
 
   // determine the local path of the linked file

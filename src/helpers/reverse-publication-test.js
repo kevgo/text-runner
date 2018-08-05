@@ -33,6 +33,18 @@ describe('reversePublication', function () {
     expect(actual).to.equal('/content/1.md')
   })
 
+  it('applies the extension mapping in subfolders', function () {
+    const publications = [
+      {
+        localPath: '/content',
+        publicPath: '/posts',
+        publicExtension: ''
+      }
+    ]
+    const actual = reversePublication('/posts/1', publications, '')
+    expect(actual).to.equal('/content/1.md')
+  })
+
   it('applies the extension mapping in HTML cases', function () {
     const publications = [
       {

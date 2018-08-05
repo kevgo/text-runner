@@ -173,12 +173,12 @@ async function checkLinkToAnchorInOtherFile (
   // determine the full public path of the link
   let publicAbsoluteLinkPath = publicLinkPath
   if (isRelativePath(publicLinkPath)) {
-    publicAbsoluteLinkPath = localToPublicPath(filename) + '/' + publicLinkPath
+    publicAbsoluteLinkPath = localToPublicPath(filename, c.publications) + '/' + publicLinkPath
   }
 
   // determine the local path of the linked file
   const localLinkPath = publicToLocalPath(publicAbsoluteLinkPath, c.publications, c.defaultFile)
-  console.log('full filename:', localAbsoluteLinkPath)
+  console.log('full filename:', localLinkPath)
 
   // ensure the local file exists
   if (linkTargets.targets[localLinkPath] == null) {

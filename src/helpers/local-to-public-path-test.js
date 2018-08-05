@@ -1,6 +1,7 @@
 // @flow
 
-const getPublicPath = require('./get-public-path.js')
+const getPublicPath = require('./local-to-public-path.js')
+const { expect } = require('chai')
 
 describe('getPublicPath', function () {
   it('returns the public path for the given local path', function () {

@@ -125,7 +125,7 @@ async function checkLinkToFilesystem (
   }
 
   try {
-    relativePath = reversePublication(relativePath, c.publications, c.defaultFile)
+    relativePath = publicToLocalPath(relativePath, c.publications, c.defaultFile)
     console.log('relative path after reversePublication: ' + relativePath)
     fullPath = normalizePath(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
@@ -178,7 +178,7 @@ async function checkLinkToAnchorInOtherFile (
   }
 
   // determine the local path of the linked file
-  const localLinkPath = reversePublication(publicLinkPath, c.publications, c.defaultFile)
+  const localLinkPath = publicToLocalPath(publicLinkPath, c.publications, c.defaultFile)
   console.log('full filename:', localLinkPath)
 
   // ensure the local file exists

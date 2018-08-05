@@ -166,9 +166,9 @@ async function checkLinkToAnchorInOtherFile (
 ) {
 
   // parse the link
-  var [linkPath, targetAnchor] = target.split('#')
-  linkPath = decodeURI(linkPath)
-  console.log(linkPath)
+  let [publicLinkPath, targetAnchor] = target.split('#')
+  publicLinkPath = decodeURI(publicLinkPath)
+  console.log(publicLinkPath)
 
   // determine the full public path of the link
   let publicLinkPath = linkPath

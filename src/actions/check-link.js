@@ -162,8 +162,8 @@ async function checkLinkToAnchorInOtherFile (
 ) {
 
   // parse the link
-  var [linkPath, targetAnchor] = target.split('#')
-  linkPath = decodeURI(linkPath)
+  let [publicLinkPath, targetAnchor] = target.split('#')
+  publicLinkPath = decodeURI(publicLinkPath)
 
   // determine the local path of the linked file
   const localLinkPath = reversePublication(publicLinkPath, c.publications, c.defaultFile)

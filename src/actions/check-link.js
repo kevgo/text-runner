@@ -4,14 +4,16 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
-const reversePublication = require('../helpers/reverse-publication.js')
 const { bold, cyan, magenta } = require('chalk')
+const isRelativePath = require('../helpers/is-relative-path.js')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
+const getPublicPath = require('../helpers/get-public-path.js')
 const LinkTargetList = require('../link-targets/link-target-list.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
+const reversePublication = require('../helpers/reverse-publication.js')
 const request = require('request-promise-native')
 const url = require('url')
 
@@ -104,6 +106,7 @@ async function checkLinkToFilesystem (
     ? target
     : '/' + path.join(path.dirname(filename), target)
   var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
+  console.log('relative path before reversePublication: ' + relativePath)
 
   // we only check for directories if no defaultFile is set - otherwise links to folders point to the default file
   if (!c.defaultFile) {
@@ -122,6 +125,7 @@ async function checkLinkToFilesystem (
 
   try {
     relativePath = reversePublication(relativePath, c.publications, c.defaultFile)
+    console.log('relative path after reversePublication: ' + relativePath)
     fullPath = normalizePath(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
@@ -164,9 +168,17 @@ async function checkLinkToAnchorInOtherFile (
   // parse the link
   var [linkPath, targetAnchor] = target.split('#')
   linkPath = decodeURI(linkPath)
+  console.log(linkPath)
+
+  // determine the full public path of the link
+  let publicLinkPath = linkPath
+  if (isRelativePath(linkPath)) {
+    publicLinkPath = getPublicPath(filename) + '/' + linkPath
+  }
 
   // determine the local path of the linked file
   const localLinkPath = reversePublication(publicLinkPath, c.publications, c.defaultFile)
+  console.log('full filename:', localLinkPath)
 
   // ensure the local file exists
   if (linkTargets.targets[localLinkPath] == null) {

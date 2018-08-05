@@ -2,6 +2,7 @@
 
 const reversePublication = require('./reverse-publication.js')
 const { expect } = require('chai')
+const unixifyPath = require('./unixify-path.js')
 
 describe('reversePublication', function () {
   it('applies the given path mapping', function () {
@@ -50,7 +51,7 @@ describe('reversePublication', function () {
 
   it('uses the given default filename without publications', function () {
     const actual = reversePublication('/posts/', [], 'index.md')
-    expect(actual).to.equal('/posts/index.md')
+    expect(unixifyPath(actual)).to.equal('/posts/index.md')
   })
 
   it('uses the given default filename together with publications', function () {
@@ -62,6 +63,6 @@ describe('reversePublication', function () {
       }
     ]
     const actual = reversePublication('/posts/', publications, 'index.md')
-    expect(actual).to.equal('/content/index.md')
+    expect(unixifyPath(actual)).to.equal('/content/index.md')
   })
 })

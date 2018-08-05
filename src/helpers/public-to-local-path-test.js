@@ -1,15 +1,15 @@
 // @flow
 
-const reversePublication = require('./reverse-publication.js')
+const publicToLocalPath = require('./public-to-local-path.js')
 const { expect } = require('chai')
 const unixifyPath = require('./unixify-path.js')
 
-describe('reversePublication', function () {
+describe('publicToLocalPath', function () {
   it('applies the given path mapping', function () {
     const publications = [
       { localPath: '/content/', publicPath: '/', publicExtension: '' }
     ]
-    const actual = reversePublication('/1.md', publications, '')
+    const actual = publicToLocalPath('/1.md', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -17,7 +17,7 @@ describe('reversePublication', function () {
     const publications = [
       { localPath: '/content/', publicPath: '/', publicExtension: '' }
     ]
-    const actual = reversePublication('1.md', publications, '')
+    const actual = publicToLocalPath('1.md', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -29,7 +29,7 @@ describe('reversePublication', function () {
         publicExtension: ''
       }
     ]
-    const actual = reversePublication('1', publications, '')
+    const actual = publicToLocalPath('1', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -41,7 +41,7 @@ describe('reversePublication', function () {
         publicExtension: ''
       }
     ]
-    const actual = reversePublication('/posts/1', publications, '')
+    const actual = publicToLocalPath('/posts/1', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
@@ -53,16 +53,16 @@ describe('reversePublication', function () {
         publicExtension: '.html'
       }
     ]
-    const actual = reversePublication('1.html', publications, '')
+    const actual = publicToLocalPath('1.html', publications, '')
     expect(actual).to.equal('/content/1.md')
   })
 
   it('works with empty publications', function () {
-    expect(reversePublication('1.md', [], '')).to.equal('/1.md')
+    expect(publicToLocalPath('1.md', [], '')).to.equal('/1.md')
   })
 
   it('uses the given default filename without publications', function () {
-    const actual = reversePublication('/posts/', [], 'index.md')
+    const actual = publicToLocalPath('/posts/', [], 'index.md')
     expect(unixifyPath(actual)).to.equal('/posts/index.md')
   })
 
@@ -74,7 +74,7 @@ describe('reversePublication', function () {
         publicExtension: ''
       }
     ]
-    const actual = reversePublication('/posts/', publications, 'index.md')
+    const actual = publicToLocalPath('/posts/', publications, 'index.md')
     expect(unixifyPath(actual)).to.equal('/content/index.md')
   })
 })

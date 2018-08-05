@@ -4,6 +4,7 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
+const publicToLocalPath = require('../helpers/public-to-local-path.js')
 const { bold, cyan, magenta } = require('chalk')
 const isRelativePath = require('../helpers/is-relative-path.js')
 const Formatter = require('../formatters/formatter.js')

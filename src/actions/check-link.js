@@ -160,8 +160,8 @@ async function checkLinkToAnchorInOtherFile (
   f: Formatter,
   c: Configuration
 ) {
-  var [linkPath, targetAnchor] = target.split('#')
-  linkPath = decodeURI(linkPath)
+  let [publicLinkPath, targetAnchor] = target.split('#')
+  publicLinkPath = decodeURI(publicLinkPath)
   const localLinkPath = reversePublication(publicLinkPath, c.publications, c.defaultFile)
   if (linkTargets.targets[localLinkPath] == null) {
     throw new Error(

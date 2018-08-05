@@ -4,7 +4,7 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
-const reversePublication = require('../helpers/reverse-publication.js')
+const publicToLocalPath = require('../helpers/public-to-local-path.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')

@@ -1,6 +1,7 @@
 // @flow
 
 const relativeToAbsoluteLink = require('./relative-to-absolute-link.js')
+const { expect } = require('chai')
 
 describe('relativeToAbsoluteLink', function () {
   it('converts the given link relative to the given file into an absolute link', function () {

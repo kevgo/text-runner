@@ -7,7 +7,7 @@ const localToPublicFilePath = require('./local-to-public-file-path.js')
 const path = require('path')
 const unixifyPath = require('./unixify-path.js')
 
-module.exports = function relativeToAbsoluteLink(
+module.exports = function relativeToAbsoluteLink (
   link: string,
   filePath: string,
   publications: Publications,

@@ -6,7 +6,7 @@ const path = require('path')
 
 // returns the public path for the given local path,
 // based on the given publication mappings
-module.exports = function localToPublicFilePath(
+module.exports = function localToPublicFilePath (
   localPath: string,
   publications: Publications,
   defaultFile: string

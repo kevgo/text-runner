@@ -2,8 +2,8 @@
 
 const relativeToAbsoluteLink = require('./relative-to-absolute-link.js')
 
-describe('relativeToAbsoluteLink', function() {
-  it('converts the given link relative to the given file into an absolute link', function() {
+describe('relativeToAbsoluteLink', function () {
+  it('converts the given link relative to the given file into an absolute link', function () {
     const publications = [
       { localPath: '/content', publicPath: '/', publicExtension: '' }
     ]
@@ -16,7 +16,7 @@ describe('relativeToAbsoluteLink', function() {
     expect(actual).to.equal('/2')
   })
 
-  it('can go upwards', function() {
+  it('can go upwards', function () {
     const publications = [
       { localPath: '/content', publicPath: '/', publicExtension: '' }
     ]
@@ -29,7 +29,7 @@ describe('relativeToAbsoluteLink', function() {
     expect(actual).to.equal('/foo/2')
   })
 
-  it('works with subdirectories', function() {
+  it('works with subdirectories', function () {
     const publications = [
       { localPath: '/posts', publicPath: '/blog', publicExtension: '' }
     ]

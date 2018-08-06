@@ -19,7 +19,7 @@ const request = require('request-promise-native')
 const url = require('url')
 
 // Checks for broken hyperlinks
-module.exports = async function(args: ActionArgs) {
+module.exports = async function (args: ActionArgs) {
   const target = args.nodes[0].attributes['href']
   if (target == null || target === '') {
     throw new Error('link without target')
@@ -66,7 +66,7 @@ module.exports = async function(args: ActionArgs) {
   )
 }
 
-async function checkExternalLink(
+async function checkExternalLink (
   target: string,
   f: Formatter,
   c: Configuration
@@ -94,7 +94,7 @@ async function checkExternalLink(
   }
 }
 
-async function checkLinkToFilesystem(
+async function checkLinkToFilesystem (
   filename: string,
   target: string,
   f: Formatter,
@@ -147,7 +147,7 @@ async function checkLinkToFilesystem(
   }
 }
 
-async function checkLinkToAnchorInSameFile(
+async function checkLinkToAnchorInSameFile (
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
@@ -166,7 +166,7 @@ async function checkLinkToAnchorInSameFile(
   }
 }
 
-async function checkLinkToAnchorInOtherFile(
+async function checkLinkToAnchorInOtherFile (
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
@@ -228,7 +228,7 @@ async function checkLinkToAnchorInOtherFile(
   }
 }
 
-function determineAbsoluteUrl(
+function determineAbsoluteUrl (
   relativeUrl: string,
   filename: string,
   c: Configuration
@@ -242,11 +242,11 @@ function determineAbsoluteUrl(
   )
 }
 
-function isExternalLink(target: string): boolean {
+function isExternalLink (target: string): boolean {
   return target.startsWith('//') || !!url.parse(target).protocol
 }
 
-function isLinkToAnchorInOtherFile(target: string): boolean {
+function isLinkToAnchorInOtherFile (target: string): boolean {
   if ((target.match(/#/g) || []).length !== 1) {
     return false
   } else if (/^https?:\/\//.test(target)) {
@@ -256,10 +256,10 @@ function isLinkToAnchorInOtherFile(target: string): boolean {
   }
 }
 
-function isLinkToAnchorInSameFile(target: string): boolean {
+function isLinkToAnchorInSameFile (target: string): boolean {
   return target.startsWith('#')
 }
 
-function isMailtoLink(target: string): boolean {
+function isMailtoLink (target: string): boolean {
   return target.startsWith('mailto:')
 }

@@ -20,7 +20,7 @@ Feature: Folder Mapping
     And my source code contains the file "text-run.yml" with content:
       """
       publications:
-        - localPath: /content/
+        - localPath: /content
           publicPath: /
           publicExtension: ''
       """
@@ -34,16 +34,16 @@ Feature: Folder Mapping
   Scenario: multiple mappings
     Given my source code contains the file "1.md" with content:
       """
-      [link to hello in 2.md](/2#hello)
-      [link to blog post 3.md](blog/3.html)
+      [absolute link to hello in 2.md](/2#hello)
+      [relative link to blog post 3.md](/blog/3.html)
       """
     And my source code contains the file "text-run.yml" with content:
       """
       publications:
-        - localPath: /content/
+        - localPath: /content
           publicPath: /
           publicExtension: ''
-        - localPath: /content/posts/
+        - localPath: /content/posts
           publicPath: /blog
           publicExtension: .html
       """

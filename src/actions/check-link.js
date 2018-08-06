@@ -13,12 +13,13 @@ const LinkTargetList = require('../link-targets/link-target-list.js')
 const localToPublicFilePath = require('../helpers/local-to-public-file-path.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
+const relativeToAbsoluteLink = require('../helpers/relative-to-absolute-link.js')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
 const url = require('url')
 
 // Checks for broken hyperlinks
-module.exports = async function (args: ActionArgs) {
+module.exports = async function(args: ActionArgs) {
   const target = args.nodes[0].attributes['href']
   if (target == null || target === '') {
     throw new Error('link without target')
@@ -65,7 +66,7 @@ module.exports = async function (args: ActionArgs) {
   )
 }
 
-async function checkExternalLink (
+async function checkExternalLink(
   target: string,
   f: Formatter,
   c: Configuration
@@ -93,7 +94,7 @@ async function checkExternalLink (
   }
 }
 
-async function checkLinkToFilesystem (
+async function checkLinkToFilesystem(
   filename: string,
   target: string,
   f: Formatter,
@@ -121,7 +122,11 @@ async function checkLinkToFilesystem (
   }
 
   try {
-    relativePath = publicToLocalFilePath(relativePath, c.publications, c.defaultFile)
+    relativePath = publicToLocalFilePath(
+      relativePath,
+      c.publications,
+      c.defaultFile
+    )
     console.log('relative path after reversePublication: ' + relativePath)
     fullPath = normalizePath(path.join(c.sourceDir, relativePath))
     f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
@@ -135,7 +140,7 @@ async function checkLinkToFilesystem (
   }
 }
 
-async function checkLinkToAnchorInSameFile (
+async function checkLinkToAnchorInSameFile(
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
@@ -154,27 +159,39 @@ async function checkLinkToAnchorInSameFile (
   }
 }
 
-async function checkLinkToAnchorInOtherFile (
+async function checkLinkToAnchorInOtherFile(
   filename: string,
   target: string,
   linkTargets: LinkTargetList,
   f: Formatter,
   c: Configuration
 ) {
-  // parse the link
-  console.log('target', target)
-  let [relativeLinkPath, anchor] = target.split('#')
-  relativeLinkPath = decodeURI(relativeLinkPath)
-  console.log('relativeLinkPath', relativeLinkPath)
+  console.log('filename', filename)
 
-  // determine the absolute public filepath of the linked file
-  const absolutePublicLinkFilePath = isRelativePath(relativeLinkPath) ?
-    path.dirname(localToPublicFilePath(filename, c.publications, c.defaultFile)) + '/' + relativeLinkPath :
-    relativeLinkPath
-  console.log('absolutePublicLinkFilePath', absolutePublicLinkFilePath)
+  // parse the link into the relative url
+  console.log('target', target)
+  let [relativeUrl, anchor] = target.split('#')
+  relativeUrl = decodeURI(relativeUrl)
+  console.log('relativeUrl', relativeUrl)
+
+  // determine the absolute url
+  let absoluteUrl = relativeUrl
+  if (isRelativePath(relativeUrl)) {
+    absoluteUrl = relativeToAbsoluteLink(
+      relativeUrl,
+      filename,
+      c.publications,
+      c.defaultFile
+    )
+  }
+  console.log('absoluteUrl', absoluteUrl)
 
   // determine the local file path of the linked file
-  const localLinkFilePath = publicToLocalFilePath(absolutePublicLinkFilePath, c.publications, c.defaultFile)
+  const localLinkFilePath = publicToLocalFilePath(
+    absoluteUrl,
+    c.publications,
+    c.defaultFile
+  )
   console.log('localLinkFilePath', localLinkFilePath)
 
   // ensure the local file exists
@@ -183,7 +200,7 @@ async function checkLinkToAnchorInOtherFile (
       `link to anchor #${cyan(anchor)} in non-existing file ${cyan(
         removeLeadingSlash(localLinkFilePath)
 
-  // ensure the local file exists
+        // ensure the local file exists
       )}`
     )
   }
@@ -209,18 +226,16 @@ async function checkLinkToAnchorInOtherFile (
     )
   } else {
     f.name(
-      `link to ${cyan(removeLeadingSlash(localLinkFilePath))}#${cyan(
-        anchor
-      )}`
+      `link to ${cyan(removeLeadingSlash(localLinkFilePath))}#${cyan(anchor)}`
     )
   }
 }
 
-function isExternalLink (target: string): boolean {
+function isExternalLink(target: string): boolean {
   return target.startsWith('//') || !!url.parse(target).protocol
 }
 
-function isLinkToAnchorInOtherFile (target: string): boolean {
+function isLinkToAnchorInOtherFile(target: string): boolean {
   if ((target.match(/#/g) || []).length !== 1) {
     return false
   } else if (/^https?:\/\//.test(target)) {
@@ -230,10 +245,10 @@ function isLinkToAnchorInOtherFile (target: string): boolean {
   }
 }
 
-function isLinkToAnchorInSameFile (target: string): boolean {
+function isLinkToAnchorInSameFile(target: string): boolean {
   return target.startsWith('#')
 }
 
-function isMailtoLink (target: string): boolean {
+function isMailtoLink(target: string): boolean {
   return target.startsWith('mailto:')
 }

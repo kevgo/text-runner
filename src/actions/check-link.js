@@ -160,7 +160,6 @@ async function checkLinkToAnchorInOtherFile (
   f: Formatter,
   c: Configuration
 ) {
-
   // parse the link
   let [publicLinkPath, targetAnchor] = target.split('#')
   publicLinkPath = decodeURI(publicLinkPath)

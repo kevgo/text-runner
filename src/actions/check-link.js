@@ -115,11 +115,13 @@ async function checkLinkToFilesystem (
   )
   console.log('localLinkFilePath', localLinkFilePath)
 
+  const fullPath = normalizePath(path.join(c.sourceDir, localLinkFilePath))
+
   // We only check for directories if no defaultFile is set.
   // Otherwise links to folders point to the default file.
   if (!c.defaultFile) {
     try {
-      const stats = await fs.stat(localLinkFilePath)
+      const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
         f.name(
           `link to local directory ${cyan(
@@ -133,7 +135,6 @@ async function checkLinkToFilesystem (
     }
   }
 
-  const fullPath = normalizePath(path.join(c.sourceDir, localLinkFilePath))
   f.name(`link to local file ${cyan(removeLeadingSlash(localLinkFilePath))}`)
   try {
     await fs.stat(fullPath)

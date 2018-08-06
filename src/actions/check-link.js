@@ -166,10 +166,11 @@ async function checkLinkToAnchorInOtherFile (
   console.log('target', target)
   let [publicLinkFilePath, targetAnchor] = target.split('#')
   publicLinkFilePath = decodeURI(publicLinkFilePath)
+  console.log('publicLinkFilePath', publicLinkFilePath)
 
-  // determine the full public filepath of the linked file
-  const absolutePublicLinkFilePath = isRelativePath(path.dirname(publicLinkFilePath)) ?
-    localToPublicFilePath(path.dirname(filename), c.publications, c.defaultFile) + '/' + publicLinkFilePath :
+  // determine the absolute public filepath of the linked file
+  const absolutePublicLinkFilePath = isRelativePath(publicLinkFilePath) ?
+    path.dirname(localToPublicFilePath(filename, c.publications, c.defaultFile)) + '/' + publicLinkFilePath :
     publicLinkFilePath
   console.log('absolutePublicLinkFilePath', absolutePublicLinkFilePath)
 

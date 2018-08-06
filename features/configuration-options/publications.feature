@@ -73,7 +73,7 @@ Feature: Folder Mapping
     And my source code contains the file "text-run.yml" with content:
       """
       publications:
-        - localPath: /posts/
+        - localPath: /posts
           publicPath: /blog
           publicExtension: ''
       """

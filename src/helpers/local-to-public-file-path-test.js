@@ -7,7 +7,7 @@ describe('localToPublicFilePath', function () {
   it('returns the public filepath for the given local filepath', function () {
     const publications = [
       {
-        localPath: '/content/',
+        localPath: '/content',
         publicPath: '/',
         publicExtension: '.html'
       }

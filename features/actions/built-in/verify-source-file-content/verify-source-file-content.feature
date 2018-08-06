@@ -36,13 +36,17 @@ Feature: verifying that documentation matches a file in the source code
 
 
   Scenario: file content mismatch
-    Given my source code contains the file "1.md" with content:
+    Given my source code contains the file "docs/greeting.md" with content:
+      """
+      Hello!
+      """
+    And my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
-      [global-tool](../documentation/examples/global-tool)
-      __text-run.yml__
+      [documentation](docs)
+      __greeting.md__
       ```
-      zonk
+      Zonk
       ```
       </a>
       """

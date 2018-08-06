@@ -4,14 +4,13 @@ import type { Publications } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('./add-leading-slash.js')
 const path = require('path')
-const unixifyPath = require('./unixify-path.js')
 
-module.exports = function (
+module.exports = function publicToLocalFilePath (
   filepath: string,
   publications: Publications,
   defaultFile: string
 ): string {
-  var result = addLeadingSlash(unixifyPath(filepath))
+  var result = addLeadingSlash(filepath)
   for (const publication of publications) {
     const publicPathRE = new RegExp('^' + publication.publicPath)
     if (!result.match(publicPathRE)) continue
@@ -24,7 +23,7 @@ module.exports = function (
   }
 
   if (path.extname(result) === '' && defaultFile) {
-    result = unixifyPath(path.join(result, defaultFile))
+    result = path.join(result, defaultFile)
   }
   return result
 }

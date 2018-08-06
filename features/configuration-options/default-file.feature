@@ -5,7 +5,7 @@ Feature: Default file
   So that I can support URL-friendly links.
 
 
-  Background:
+  Scenario: a default filename is set
     Given my source code contains the file "root.md" with content:
       """
       link to [our guides](guide)
@@ -14,9 +14,7 @@ Feature: Default file
       """
       Subfolder content
       """
-
-  Scenario: a default filename is set
-    Given the configuration file:
+    And the configuration file:
       """
       defaultFile: 'index.md'
       """
@@ -28,6 +26,14 @@ Feature: Default file
 
 
   Scenario: default behavior
+    Given my source code contains the file "root.md" with content:
+      """
+      link to [our guides](guide)
+      """
+    And my source code contains the file "guide/index.md" with content:
+      """
+      Subfolder content
+      """
       When running text-run
       Then it signals:
       | FILENAME | root.md                       |
@@ -35,6 +41,14 @@ Feature: Default file
       | MESSAGE  | link to local directory guide |
 
   Scenario: combination with publication settings
+    Given my source code contains the file "root.md" with content:
+      """
+      link to [our guides](guide)
+      """
+    And my source code contains the file "guide/index.md" with content:
+      """
+      Subfolder content
+      """
     Given my source code contains the file "root.md" with content:
       """
       link to [posts](/blog/)
@@ -52,3 +66,26 @@ Feature: Default file
       | FILENAME | root.md                           |
       | LINE     | 1                                 |
       | MESSAGE  | link to local file guide/index.md |
+
+  Scenario: relative link from default file to other file in same folder
+    Given my source code contains the file "content/guides/index.md" with content:
+      """
+      [relative link to Go guide](go.md)
+      """
+    And my source code contains the file "content/guides/go.md" with content:
+      """
+      Go guide
+      """
+    And my source code contains the file "text-run.yml" with content:
+      """
+      publications:
+        - localPath: /content
+          publicPath: /
+          publicExtension: ''
+      defaultFile: index.md
+      """
+    When running text-run
+    And it signals:
+      | FILENAME | content/guides/index.md                 |
+      | LINE     | 1                                       |
+      | MESSAGE  | link to local file content/guides/go.md |

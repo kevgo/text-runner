@@ -4,13 +4,13 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
-const publicToLocalPath = require('../helpers/public-to-local-path.js')
+const publicToLocalFilePath = require('../helpers/public-to-local-file-path.js')
 const { bold, cyan, magenta } = require('chalk')
 const isRelativePath = require('../helpers/is-relative-path.js')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
-const localToPublicPath = require('../helpers/local-to-public-path.js')
+const localToPublicFilePath = require('../helpers/local-to-public-file-path.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
@@ -42,12 +42,9 @@ module.exports = async function (args: ActionArgs) {
   }
 
   if (isLinkToAnchorInOtherFile(target)) {
-    const targetFullPath = path
-      .join(path.dirname(args.file), target)
-      .replace(/\\/g, '/') // this line is necessary to make this work on Windows
     await checkLinkToAnchorInOtherFile(
       args.file,
-      targetFullPath,
+      target,
       args.linkTargets,
       args.formatter,
       args.configuration
@@ -166,25 +163,25 @@ async function checkLinkToAnchorInOtherFile (
 ) {
 
   // parse the link
-  let [publicLinkPath, targetAnchor] = target.split('#')
-  publicLinkPath = decodeURI(publicLinkPath)
-  console.log(publicLinkPath)
+  console.log('target', target)
+  let [publicLinkFilePath, targetAnchor] = target.split('#')
+  publicLinkFilePath = decodeURI(publicLinkFilePath)
 
-  // determine the full public path of the link
-  let publicAbsoluteLinkPath = publicLinkPath
-  if (isRelativePath(publicLinkPath)) {
-    publicAbsoluteLinkPath = localToPublicPath(filename, c.publications) + '/' + publicLinkPath
-  }
+  // determine the full public filepath of the linked file
+  const absolutePublicLinkFilePath = isRelativePath(path.dirname(publicLinkFilePath)) ?
+    localToPublicFilePath(path.dirname(filename), c.publications) + '/' + publicLinkFilePath :
+    publicLinkFilePath
+  console.log('absolutePublicLinkFilePath', absolutePublicLinkFilePath)
 
-  // determine the local path of the linked file
-  const localLinkPath = publicToLocalPath(publicAbsoluteLinkPath, c.publications, c.defaultFile)
-  console.log('full filename:', localLinkPath)
+  // determine the local file path of the linked file
+  const localLinkFilePath = publicToLocalFilePath(absolutePublicLinkFilePath, c.publications, c.defaultFile)
+  console.log('localLinkFilePath', localLinkPath)
 
   // ensure the local file exists
-  if (linkTargets.targets[localLinkPath] == null) {
+  if (linkTargets.targets[localLinkFilePath] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
-        removeLeadingSlash(localLinkPath)
+        removeLeadingSlash(localLinkFilePath)
       )}`
     )
   }

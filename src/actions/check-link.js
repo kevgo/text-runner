@@ -164,14 +164,14 @@ async function checkLinkToAnchorInOtherFile (
 
   // parse the link
   console.log('target', target)
-  let [publicLinkFilePath, targetAnchor] = target.split('#')
-  publicLinkFilePath = decodeURI(publicLinkFilePath)
-  console.log('publicLinkFilePath', publicLinkFilePath)
+  let [relativeLinkPath, anchor] = target.split('#')
+  relativeLinkPath = decodeURI(relativeLinkPath)
+  console.log('relativeLinkPath', relativeLinkPath)
 
   // determine the absolute public filepath of the linked file
-  const absolutePublicLinkFilePath = isRelativePath(publicLinkFilePath) ?
-    path.dirname(localToPublicFilePath(filename, c.publications, c.defaultFile)) + '/' + publicLinkFilePath :
-    publicLinkFilePath
+  const absolutePublicLinkFilePath = isRelativePath(relativeLinkPath) ?
+    path.dirname(localToPublicFilePath(filename, c.publications, c.defaultFile)) + '/' + relativeLinkPath :
+    relativeLinkPath
   console.log('absolutePublicLinkFilePath', absolutePublicLinkFilePath)
 
   // determine the local file path of the linked file
@@ -181,19 +181,21 @@ async function checkLinkToAnchorInOtherFile (
   // ensure the local file exists
   if (linkTargets.targets[localLinkFilePath] == null) {
     throw new Error(
-      `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
+      `link to anchor #${cyan(anchor)} in non-existing file ${cyan(
         removeLeadingSlash(localLinkFilePath)
+
+  // ensure the local file exists
       )}`
     )
   }
 
   // ensure the anchor exists in the file
   const anchorEntry = (linkTargets.targets[localLinkFilePath] || []).filter(
-    linkTarget => linkTarget.name === targetAnchor
+    linkTarget => linkTarget.name === anchor
   )[0]
   if (!anchorEntry) {
     throw new Error(
-      `link to non-existing anchor ${bold('#' + targetAnchor)} in ${bold(
+      `link to non-existing anchor ${bold('#' + anchor)} in ${bold(
         removeLeadingSlash(localLinkFilePath)
       )}`
     )
@@ -203,13 +205,13 @@ async function checkLinkToAnchorInOtherFile (
   if (anchorEntry.type === 'heading') {
     f.name(
       `link to heading ${cyan(
-        removeLeadingSlash(localLinkFilePath) + '#' + targetAnchor
+        removeLeadingSlash(localLinkFilePath) + '#' + anchor
       )}`
     )
   } else {
     f.name(
       `link to ${cyan(removeLeadingSlash(localLinkFilePath))}#${cyan(
-        targetAnchor
+        anchor
       )}`
     )
   }

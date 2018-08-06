@@ -162,29 +162,29 @@ async function checkLinkToAnchorInOtherFile (
 ) {
 
   // parse the link
-  let [publicLinkPath, targetAnchor] = target.split('#')
-  publicLinkPath = decodeURI(publicLinkPath)
+  let [relativeLinkPath, anchor] = target.split('#')
+  relativeLinkPath = decodeURI(relativeLinkPath)
 
-  // determine the local path of the linked file
-  const localLinkPath = publicToLocalPath(publicLinkPath, c.publications, c.defaultFile)
+  // determine the filepath of the linked file
+  const filePath = publicToLocalPath(relativeLinkPath, c.publications, c.defaultFile)
 
   // ensure the local file exists
-  if (linkTargets.targets[localLinkPath] == null) {
+  if (linkTargets.targets[filePath] == null) {
     throw new Error(
-      `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
-        removeLeadingSlash(localLinkPath)
+      `link to anchor #${cyan(anchor)} in non-existing file ${cyan(
+        removeLeadingSlash(filePath)
       )}`
     )
   }
 
   // ensure the anchor exists in the file
-  const anchorEntry = (linkTargets.targets[localLinkPath] || []).filter(
-    linkTarget => linkTarget.name === targetAnchor
+  const anchorEntry = (linkTargets.targets[filePath] || []).filter(
+    linkTarget => linkTarget.name === anchor
   )[0]
   if (!anchorEntry) {
     throw new Error(
-      `link to non-existing anchor ${bold('#' + targetAnchor)} in ${bold(
-        removeLeadingSlash(localLinkPath)
+      `link to non-existing anchor ${bold('#' + anchor)} in ${bold(
+        removeLeadingSlash(filePath)
       )}`
     )
   }
@@ -193,12 +193,12 @@ async function checkLinkToAnchorInOtherFile (
   if (anchorEntry.type === 'heading') {
     f.name(
       `link to heading ${cyan(
-        removeLeadingSlash(localLinkPath) + '#' + targetAnchor
+        removeLeadingSlash(filePath) + '#' + targetAnchor
       )}`
     )
   } else {
     f.name(
-      `link to ${cyan(removeLeadingSlash(localLinkPath))}#${cyan(
+      `link to ${cyan(removeLeadingSlash(filePath))}#${cyan(
         targetAnchor
       )}`
     )

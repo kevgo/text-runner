@@ -20,7 +20,7 @@ module.exports = function localToPublicFilePath (
       publication.publicPath
     )
     result = result.replace(/\/+/g, '/')
-    if (path.basename(result) === defaultFile) return path.dirname(result)
+    // if (path.basename(result) === defaultFile) return path.dirname(result)
     return result.replace(
       new RegExp(path.extname(result) + '$'),
       publication.publicExtension

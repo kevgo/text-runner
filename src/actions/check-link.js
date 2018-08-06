@@ -193,13 +193,13 @@ async function checkLinkToAnchorInOtherFile (
   if (anchorEntry.type === 'heading') {
     f.name(
       `link to heading ${cyan(
-        removeLeadingSlash(filePath) + '#' + targetAnchor
+        removeLeadingSlash(filePath) + '#' + anchor
       )}`
     )
   } else {
     f.name(
       `link to ${cyan(removeLeadingSlash(filePath))}#${cyan(
-        targetAnchor
+        anchor
       )}`
     )
   }

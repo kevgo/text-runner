@@ -161,7 +161,6 @@ async function checkLinkToAnchorInOtherFile (
   f: Formatter,
   c: Configuration
 ) {
-
   // parse the link
   console.log('target', target)
   let [relativeLinkPath, anchor] = target.split('#')

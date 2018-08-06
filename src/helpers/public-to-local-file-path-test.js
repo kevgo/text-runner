@@ -1,6 +1,6 @@
 // @flow
 
-const publicToLocalFilePath = require('./public-to-local-path.js')
+const publicToLocalFilePath = require('./public-to-local-file-path.js')
 const { expect } = require('chai')
 const unixifyPath = require('./unixify-path.js')
 

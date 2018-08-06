@@ -2,11 +2,15 @@
 
 import type { Publications } from '../configuration/configuration.js'
 
-// getPublicPath returns the public path for the given local path, based on the given publication mappings.
-module.exports = function localToPublicFilePath(localPath: string, publications: Publications): string {
+const path = require('path')
+
+// Returns the public path for the given local path, based on the given publication mappings
+module.exports = function localToPublicFilePath(localPath: string, publications: Publications, defaultFile: string): string {
   for (const publication of publications) {
     if (!localPath.startsWith(publication.localPath)) continue
-    return localPath.replace(new RegExp('^' + publication.localPath), publication.publicPath)
+    const result = localPath.replace(new RegExp('^' + publication.localPath), publication.publicPath)
+    if (path.basename(result) === defaultFile) return path.dirname(result)
+    return result.replace(new RegExp(path.extname(result) + '$'), publication.publicExtension)
   }
   return localPath
 }

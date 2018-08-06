@@ -160,9 +160,15 @@ async function checkLinkToAnchorInOtherFile (
   f: Formatter,
   c: Configuration
 ) {
+
+  // parse the link
   let [publicLinkPath, targetAnchor] = target.split('#')
   publicLinkPath = decodeURI(publicLinkPath)
+
+  // determine the local path of the linked file
   const localLinkPath = reversePublication(publicLinkPath, c.publications, c.defaultFile)
+
+  // ensure the local file exists
   if (linkTargets.targets[localLinkPath] == null) {
     throw new Error(
       `link to anchor #${cyan(targetAnchor)} in non-existing file ${cyan(
@@ -170,6 +176,8 @@ async function checkLinkToAnchorInOtherFile (
       )}`
     )
   }
+
+  // ensure the anchor exists in the file
   const anchorEntry = (linkTargets.targets[localLinkPath] || []).filter(
     linkTarget => linkTarget.name === targetAnchor
   )[0]
@@ -181,6 +189,7 @@ async function checkLinkToAnchorInOtherFile (
     )
   }
 
+  // Signal anchor type to user
   if (anchorEntry.type === 'heading') {
     f.name(
       `link to heading ${cyan(

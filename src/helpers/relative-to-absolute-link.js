@@ -17,10 +17,7 @@ module.exports = function relativeToAbsoluteLink (
     localToPublicFilePath(addLeadingSlash(filePath), publications, defaultFile)
   )
   const full = absoluteDir + '/' + link
-  // console.log('full', full)
   const dried = full.replace(/\/+/g, '/').replace(/\\+/g, '\\')
-  // console.log('dried', dried)
   const normalized = path.normalize(dried)
-  // console.log('normalized', normalized)
   return unixifyPath(normalized)
 }

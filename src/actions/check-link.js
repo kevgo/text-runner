@@ -101,11 +101,9 @@ async function checkLinkToFilesystem (
 ) {
   // parse the link into the relative url
   const relativeTargetUrl = decodeURI(target)
-  console.log('relativeTargetUrl', relativeTargetUrl)
 
   // determine the absolute url
   const absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
-  console.log('absoluteTargetUrl', absoluteTargetUrl)
 
   // determine the local file path of the target
   const localLinkFilePath = publicToLocalFilePath(
@@ -113,7 +111,6 @@ async function checkLinkToFilesystem (
     c.publications,
     c.defaultFile
   )
-  console.log('localLinkFilePath', localLinkFilePath)
 
   const fullPath = normalizePath(path.join(c.sourceDir, localLinkFilePath))
 
@@ -174,14 +171,11 @@ async function checkLinkToAnchorInOtherFile (
   c: Configuration
 ) {
   // parse the link into the relative url
-  console.log('target', target)
   let [relativeTargetUrl, anchor] = target.split('#')
   relativeTargetUrl = decodeURI(relativeTargetUrl)
-  console.log('relativeTargetUrl', relativeTargetUrl)
 
   // determine the absolute url
   let absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
-  console.log('absoluteTargetUrl', absoluteTargetUrl)
 
   // determine the local file path of the target
   const localLinkFilePath = publicToLocalFilePath(
@@ -189,7 +183,6 @@ async function checkLinkToAnchorInOtherFile (
     c.publications,
     c.defaultFile
   )
-  console.log('localLinkFilePath', localLinkFilePath)
 
   // ensure the local file exists
   if (linkTargets.targets[localLinkFilePath] == null) {

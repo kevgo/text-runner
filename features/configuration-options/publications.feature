@@ -31,7 +31,7 @@ Feature: Folder Mapping
       | MESSAGE  | link to local file content/2.md |
 
 
-  Scenario: relative links to remapped folder
+  Scenario: relative link to remapped folder
     Given my source code contains the file "1.md" with content:
       """
       [relative link to blog post 3](blog/3.html)

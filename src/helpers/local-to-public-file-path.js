@@ -13,10 +13,11 @@ module.exports = function localToPublicFilePath (
 ): string {
   for (const publication of publications) {
     if (!localPath.startsWith(publication.localPath)) continue
-    const result = localPath.replace(
+    let result = localPath.replace(
       new RegExp('^' + publication.localPath),
       publication.publicPath
     )
+    result = result.replace(/\/+/g, '/')
     if (path.basename(result) === defaultFile) return path.dirname(result)
     return result.replace(
       new RegExp(path.extname(result) + '$'),

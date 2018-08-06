@@ -54,15 +54,18 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: link to existing local directory
-    Given my source code contains the file "1.md" with content:
+    Given my source code contains the file "docs/1.md" with content:
       """
-      [link to local directory](.)
+      """
+    And my source code contains the file "1.md" with content:
+      """
+      [link to local directory](docs)
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                      |
-      | LINE     | 1                         |
-      | MESSAGE  | link to local directory . |
+      | FILENAME | 1.md                         |
+      | LINE     | 1                            |
+      | MESSAGE  | link to local directory docs |
 
 
   Scenario: link to non-existing local file

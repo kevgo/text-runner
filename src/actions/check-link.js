@@ -6,7 +6,7 @@ import type { Configuration } from '../configuration/configuration.js'
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
 const publicToLocalFilePath = require('../helpers/public-to-local-file-path.js')
 const { bold, cyan, magenta } = require('chalk')
-const isRelativePath = require('../helpers/is-relative-path.js')
+const isAbsolutePath = require('../helpers/is-absolute-path.js')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
@@ -100,19 +100,32 @@ async function checkLinkToFilesystem(
   f: Formatter,
   c: Configuration
 ) {
-  var relativePath = target.startsWith('/')
-    ? target
-    : '/' + path.join(path.dirname(filename), target)
-  var fullPath = normalizePath(path.join(c.sourceDir, relativePath))
-  console.log('relative path before reversePublication: ' + relativePath)
+  // parse the link into the relative url
+  relativeTargetUrl = decodeURI(target)
+  console.log('relativeTargetUrl', relativeTargetUrl)
 
-  // we only check for directories if no defaultFile is set - otherwise links to folders point to the default file
+  // determine the absolute url
+  const absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
+  console.log('absoluteTargetUrl', absoluteTargetUrl)
+
+  // determine the local file path of the target
+  const localLinkFilePath = publicToLocalFilePath(
+    absoluteTargetUrl,
+    c.publications,
+    c.defaultFile
+  )
+  console.log('localLinkFilePath', localLinkFilePath)
+
+  // We only check for directories if no defaultFile is set.
+  // Otherwise links to folders point to the default file.
   if (!c.defaultFile) {
     try {
-      const stats = await fs.stat(fullPath)
+      const stats = await fs.stat(localLinkFilePath)
       if (stats.isDirectory()) {
         f.name(
-          `link to local directory ${cyan(removeLeadingSlash(relativePath))}`
+          `link to local directory ${cyan(
+            removeLeadingSlash(localLinkFilePath)
+          )}`
         )
         return
       }
@@ -121,20 +134,14 @@ async function checkLinkToFilesystem(
     }
   }
 
+  const fullPath = normalizePath(path.join(c.sourceDir, localLinkFilePath))
+  f.name(`link to local file ${cyan(removeLeadingSlash(localLinkFilePath))}`)
   try {
-    relativePath = publicToLocalFilePath(
-      relativePath,
-      c.publications,
-      c.defaultFile
-    )
-    console.log('relative path after reversePublication: ' + relativePath)
-    fullPath = normalizePath(path.join(c.sourceDir, relativePath))
-    f.name(`link to local file ${cyan(removeLeadingSlash(relativePath))}`)
     await fs.stat(fullPath)
   } catch (err) {
     throw new Error(
       `link to non-existing local file ${bold(
-        removeLeadingSlash(relativePath)
+        removeLeadingSlash(localLinkFilePath)
       )}`
     )
   }
@@ -166,29 +173,19 @@ async function checkLinkToAnchorInOtherFile(
   f: Formatter,
   c: Configuration
 ) {
-  console.log('filename', filename)
-
   // parse the link into the relative url
   console.log('target', target)
-  let [relativeUrl, anchor] = target.split('#')
-  relativeUrl = decodeURI(relativeUrl)
-  console.log('relativeUrl', relativeUrl)
+  let [relativeTargetUrl, anchor] = target.split('#')
+  relativeTargetUrl = decodeURI(relativeTargetUrl)
+  console.log('relativeTargetUrl', relativeTargetUrl)
 
   // determine the absolute url
-  let absoluteUrl = relativeUrl
-  if (isRelativePath(relativeUrl)) {
-    absoluteUrl = relativeToAbsoluteLink(
-      relativeUrl,
-      filename,
-      c.publications,
-      c.defaultFile
-    )
-  }
-  console.log('absoluteUrl', absoluteUrl)
+  let absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
+  console.log('absoluteTargetUrl', absoluteTargetUrl)
 
-  // determine the local file path of the linked file
+  // determine the local file path of the target
   const localLinkFilePath = publicToLocalFilePath(
-    absoluteUrl,
+    absoluteTargetUrl,
     c.publications,
     c.defaultFile
   )
@@ -229,6 +226,20 @@ async function checkLinkToAnchorInOtherFile(
       `link to ${cyan(removeLeadingSlash(localLinkFilePath))}#${cyan(anchor)}`
     )
   }
+}
+
+function determineAbsoluteUrl(
+  relativeUrl: string,
+  filename: string,
+  c: Configuration
+): string {
+  if (isAbsolutePath(relativeUrl)) return relativeUrl
+  return relativeToAbsoluteLink(
+    relativeUrl,
+    filename,
+    c.publications,
+    c.defaultFile
+  )
 }
 
 function isExternalLink(target: string): boolean {

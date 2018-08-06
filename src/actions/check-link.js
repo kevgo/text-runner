@@ -189,8 +189,6 @@ async function checkLinkToAnchorInOtherFile (
     throw new Error(
       `link to anchor #${cyan(anchor)} in non-existing file ${cyan(
         removeLeadingSlash(localLinkFilePath)
-
-        // ensure the local file exists
       )}`
     )
   }

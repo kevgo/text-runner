@@ -1,6 +1,6 @@
 // @flow
 
-import type { Configuration } from '../configuration/configuration.js'
+import type { Publications } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('./add-leading-slash.js')
 const localToPublicFilePath = require('./local-to-public-file-path.js')

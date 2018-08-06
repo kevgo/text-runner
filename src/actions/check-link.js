@@ -10,7 +10,6 @@ const isAbsolutePath = require('../helpers/is-absolute-path.js')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
-const localToPublicFilePath = require('../helpers/local-to-public-file-path.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const relativeToAbsoluteLink = require('../helpers/relative-to-absolute-link.js')
@@ -101,7 +100,7 @@ async function checkLinkToFilesystem (
   c: Configuration
 ) {
   // parse the link into the relative url
-  relativeTargetUrl = decodeURI(target)
+  const relativeTargetUrl = decodeURI(target)
   console.log('relativeTargetUrl', relativeTargetUrl)
 
   // determine the absolute url

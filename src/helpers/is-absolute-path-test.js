@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 // @flow
 
 const isAbsolutePath = require('./is-absolute-path.js')

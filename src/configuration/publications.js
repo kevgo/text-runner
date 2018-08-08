@@ -1,9 +1,12 @@
 // @flow
 
-class Publications extends Array<Publication> {
+const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
+const Publication = require('./publication.js')
 
-  static scaffold(publicationsData: Object): Publications {
-    const result = new Array<Publication>()
+class Publications extends Array<Publication> {
+  // Creates a new Publications instance based on the given JSON data
+  static fromJSON (publicationsData: Array<Object>): Publications {
+    const result = new Publications()
     for (const p of publicationsData) {
       result.push(new Publication(p.filePath, p.urlPath, p.urlExtension))
     }
@@ -11,10 +14,9 @@ class Publications extends Array<Publication> {
   }
 
   // Returns the publication that matches the given filepath
-  forFilePath(filePath: AbsoluteFilePath): ?Publication {
-    return this.find(publication => this.isPublishedIn(publication))
+  forFilePath (filePath: AbsoluteFilePath): ?Publication {
+    return this.find(publication => publication.publishes(filePath))
   }
-
 }
 
-export type Publications
+module.exports = Publications

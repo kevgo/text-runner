@@ -1,42 +1,53 @@
 // @flow
 
-const relativeLink = require('./relative-link.js')
+const AbsoluteFilePath = require('./absolute-file-path.js')
+const DefaultFile = require('../configuration/default-file.js')
+const Publications = require('../configuration/publications.js')
+const RelativeLink = require('./relative-link.js')
 const { expect } = require('chai')
 
-describe('relativeLink', function() {
-  describe('toAbsoluteLink', function() {
-    it('converts the relative link an absolute link', function() {
-      const publications = [
+describe('RelativeLink', function () {
+  describe('absolutify', function () {
+    it('converts the relative link an absolute link', function () {
+      const publications = Publications.fromJSON([
         { localPath: '/content', publicPath: '/', publicExtension: '' }
-      ]
-      const actual = relativeToAbsoluteLink(
-        '2',
-        '/content/1.md',
+      ])
+      const link = new RelativeLink('foo.md')
+      const containingFile = new AbsoluteFilePath('/one/two.md')
+      const actual = link.absolutify(
+        containingFile,
         publications,
-        ''
+        new DefaultFile('')
       )
-      expect(actual).to.equal('/2')
+      expect(actual.value).to.equal('/one/foo.md')
     })
 
-    it('can go upwards', function() {
-      const publications = [
+    it('can go upwards', function () {
+      const publications = Publications.fromJSON([
         { localPath: '/content', publicPath: '/', publicExtension: '' }
-      ]
-      const actual = relativeToAbsoluteLink(
-        '../2',
-        '/content/foo/bar/1.md',
+      ])
+      const link = new RelativeLink('../foo.md')
+      const containingFile = new AbsoluteFilePath('/one/two.md')
+      const actual = link.absolutify(
+        containingFile,
         publications,
-        ''
+        new DefaultFile('')
       )
-      expect(actual).to.equal('/foo/2')
+      expect(actual.value).to.equal('/foo.md')
     })
 
-    it('works with subdirectories', function() {
-      const publications = [
+    it('works with subdirectories', function () {
+      const publications = Publications.fromJSON([
         { localPath: '/posts', publicPath: '/blog', publicExtension: '' }
-      ]
-      const actual = relativeToAbsoluteLink('2', 'posts/1.md', publications, '')
-      expect(actual).to.equal('/blog/2')
+      ])
+      const link = new RelativeLink('foo/bar.md')
+      const containingFile = new AbsoluteFilePath('/one/two.md')
+      const actual = link.absolutify(
+        containingFile,
+        publications,
+        new DefaultFile('')
+      )
+      expect(actual.value).to.equal('/one/foo/bar.md')
     })
   })
 })

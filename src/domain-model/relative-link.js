@@ -1,32 +1,31 @@
 // @flow
 
+const AbsoluteFilePath = require('./absolute-file-path.js')
+const AbsoluteLink = require('./absolute-link.js')
+const DefaultFile = require('../configuration/default-file.js')
+const Publications = require('../configuration/publications.js')
+
 // A link relative to the current location,
 // i.e. a link not starting with '/'
 class RelativeLink {
-  constructor(urlPath: string) {
+  value: string
+
+  constructor (urlPath: string) {
     this.value = urlPath
   }
 
-  toAbsoluteLink(
-    containingFilePath: AbsoluteFilePath,
+  // Assuming this relative link is in the given file,
+  // returns the absolute links that point to the same target as this relative link.
+  absolutify (
+    containingFile: AbsoluteFilePath,
     publications: Publications,
     defaultFile: DefaultFile
   ): AbsoluteLink {
-    // calculate the UrlPath of the directory that the link originates from
-    const urlOfDir = path.dirname(
-      localToPublicFilePath(
-        addLeadingSlash(containingFilePath),
-        publications,
-        defaultFile
-      )
-    )
-
-    // concatenate the link
-    const full = urlOfDir + '/' + link
-
-    // normalize
-    const dried = full.replace(/\/+/g, '/').replace(/\\+/g, '\\')
-    const normalized = path.normalize(dried)
-    return unixifyPath(normalized)
+    const urlOfDir = containingFile
+      .directory()
+      .urlPath(publications, defaultFile)
+    return urlOfDir.add(this)
   }
 }
+
+module.exports = RelativeLink

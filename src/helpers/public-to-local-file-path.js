@@ -5,7 +5,7 @@ import type { Publications } from '../configuration/configuration.js'
 const addLeadingSlash = require('./add-leading-slash.js')
 const path = require('path')
 
-module.exports = function publicToLocalFilePaths(
+module.exports = function publicToLocalFilePaths (
   filepath: string,
   publications: Publications,
   defaultFile: string

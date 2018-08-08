@@ -2,11 +2,15 @@
 
 // Represents the configuration setting
 class DefaultFile {
-  constructor(value: string) {
+  value: string
+
+  constructor (value: string) {
     this.value = value
   }
 
-  isSet(): boolean {
+  isSet (): boolean {
     return !!this.value
   }
 }
+
+module.exports = DefaultFile

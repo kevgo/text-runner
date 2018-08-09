@@ -36,4 +36,40 @@ describe('Publications', function () {
       expect(actual).to.undefined
     })
   })
+
+  describe('sortPathMappings', function () {
+    it('returns the given publications sorted descending by publicPath', function () {
+      const original = Publications.fromJSON([
+        {
+          filePath: '/content/',
+          urlPath: '/',
+          urlExtension: ''
+        },
+        {
+          filePath: '/content/posts',
+          urlPath: '/blog',
+          urlExtension: 'html'
+        }
+      ])
+      const actual = original.sorted()
+      const expected = Publications.fromJSON([
+        {
+          filePath: '/content/posts',
+          urlPath: '/blog',
+          urlExtension: 'html'
+        },
+        {
+          filePath: '/content/',
+          urlPath: '/',
+          urlExtension: ''
+        }
+      ])
+      expect(actual).to.eql(expected)
+    })
+
+    it('works with empty mappings', function () {
+      const publications = new Publications()
+      expect(publications.sort()).to.eql([])
+    })
+  })
 })

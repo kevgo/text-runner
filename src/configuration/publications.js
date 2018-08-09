@@ -20,7 +20,7 @@ class Publications extends Array<Publication> {
   }
 
   // Returns the publication that applies for the given link
-  publicationForLink (link: AbsoluteLink): Publication {
+  publicationForLink (link: AbsoluteLink): ?Publication {
     return this.find(publication => publication.resolves(link))
   }
 

@@ -52,7 +52,7 @@ class AbsoluteFilePath {
   urlPath (publications: Publications, defaultFile: DefaultFile): AbsoluteLink {
     const publication = publications.forFilePath(this)
     if (publication == null) return new AbsoluteLink(this.unixified())
-    return publication.publicPathFor(this)
+    return publication.publish(this)
   }
 }
 

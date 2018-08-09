@@ -29,7 +29,7 @@ module.exports = class AbsoluteLink {
   localize (publications: Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)
     let result = publication
-      ? publication.resolve(this)
+      ? publication.resolve(this, defaultFile)
       : new AbsoluteFilePath(this.value)
 
     // append the default file

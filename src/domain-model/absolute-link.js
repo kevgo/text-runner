@@ -26,9 +26,17 @@ module.exports = class AbsoluteLink {
   }
 
   // Returns the file path that this link has on the local filesystem
-  localize (publications: Publications): AbsoluteFilePath {
+  localize (publications: Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)
-    return publication.filePathFor(this)
+    let result = publication
+      ? publication.resolve(this)
+      : new AbsoluteFilePath(this.value)
+
+    // append the default file
+    if (result.extName() === '' && defaultFile) {
+      result = result.append(defaultFile)
+    }
+    return result
   }
 
   // Returns another AbsoluteLink instance that uses the given file extension

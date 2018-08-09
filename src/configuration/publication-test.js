@@ -8,6 +8,45 @@ const { expect } = require('chai')
 
 describe('Publication', function () {
   describe('resolve', function () {
+    it('applies the given path mapping', function () {
+      const publication = new Publication('/content', '/', '')
+      const link = new AbsoluteLink('/1.md')
+      const actual = publication.resolve(link, '')
+      expect(actual).to.equal('/content/1.md')
+    })
+
+    it('applies the extension mapping for empty public extensions', function () {
+      const publication = new Publication('/content', '/', '')
+      const link = new AbsoluteLink('/1')
+      const actual = publication.resolve(link, '')
+      expect(actual).to.equal('/content/1.md')
+    })
+
+    it('applies the extension mapping for custom public extensions', function () {
+      const publication = new Publication('/content/', '/', '.html')
+      const link = new AbsoluteLink('1.html')
+      const actual = publication.resolve(link, '')
+      expect(actual).to.equal('/content/1.md')
+    })
+
+    it('adds the given default filename if the link has no filename and an anchor', function () {
+      const actual = publication.resolve('/posts/', 'index.md')
+      expect(unixifyPath(actual)).to.equal('/posts/index.md')
+    })
+
+    it('uses the given default filename together with publications', function () {
+      const publications = [
+        {
+          localPath: '/content/',
+          publicPath: '/posts',
+          publicExtension: ''
+        }
+      ]
+      const actual = publicToLocalFilePath('/posts/', publications, 'index.md')
+      expect(unixifyPath(actual)).to.equal('/content/index.md')
+    })
+  })
+  describe('resolve', function () {
     it('returns the filePath for the given link')
     it('returns the filePath+defaultFile for links to folders with anchor')
   })

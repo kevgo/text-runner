@@ -6,6 +6,14 @@ const Publications = require('../configuration/publications.js')
 const { expect } = require('chai')
 
 describe('AbsoluteFilePath', function () {
+  describe('append', function () {
+    it('appends the given filename to the current path', function () {
+      const filePath = new AbsoluteFilePath('/one')
+      const appended = filePath.append('two')
+      expect(appended.unixified()).to.equal('/one/two')
+    })
+  })
+
   describe('directory', function () {
     const testData = {
       'Windows file path': ['\\foo\\bar\\baz.md', '/foo/bar/'],
@@ -20,6 +28,17 @@ describe('AbsoluteFilePath', function () {
         expect(file.directory().value).to.equal(output)
       })
     }
+  })
+
+  describe('extName', function () {
+    it('returns the file extension including dot', function () {
+      const filePath = new AbsoluteFilePath('/one.md')
+      expect(filePath.extName()).to.equal('.md')
+    })
+    it('returns an empty string for no file extensions', function () {
+      const filePath = new AbsoluteFilePath('/one')
+      expect(filePath.extName()).to.equal('')
+    })
   })
 
   describe('isDirectory', function () {
@@ -69,7 +88,5 @@ describe('AbsoluteFilePath', function () {
       const actual = filePath.urlPath(publications, new DefaultFile(''))
       expect(actual.value).to.equal('/1.md')
     })
-
-    it('
   })
 })

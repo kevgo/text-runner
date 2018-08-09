@@ -43,15 +43,9 @@ class Publication {
     result = result.replace(urlPathRE, this.filePath)
 
     // replace the extension
-    const extName = path.extname(result)
-    if (extName === this.urlExtension) {
+    if (path.extname(result) === this.urlExtension) {
       const extRE = new RegExp(this.urlExtension + '$')
       result = result.replace(extRE, '.md')
-    }
-
-    // append the default file
-    if (extName === '' && defaultFile) {
-      result = path.join(result, defaultFile)
     }
     return new AbsoluteFilePath(result)
   }

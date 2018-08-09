@@ -4,7 +4,6 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
-const publicToLocalFilePath = require('../helpers/public-to-local-file-path.js')
 const { bold, cyan, magenta } = require('chalk')
 const isAbsolutePath = require('../helpers/is-absolute-path.js')
 const Formatter = require('../formatters/formatter.js')
@@ -12,7 +11,6 @@ const fs = require('fs-extra')
 const LinkTargetList = require('../link-targets/link-target-list.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
-const relativeToAbsoluteLink = require('../helpers/relative-to-absolute-link.js')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
 const url = require('url')

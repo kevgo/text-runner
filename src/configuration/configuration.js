@@ -1,6 +1,6 @@
 // @flow
 
-import type { Publications } from './publications.js'
+const Publications = require('./publications.js')
 
 const Formatter = require('../formatters/formatter.js')
 

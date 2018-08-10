@@ -221,17 +221,3 @@ async function checkLinkToAnchorInOtherFile (
     )
   }
 }
-
-function isLinkToAnchorInOtherFile (target: string): boolean {
-  if ((target.match(/#/g) || []).length !== 1) {
-    return false
-  } else if (/^https?:\/\//.test(target)) {
-    return false
-  } else {
-    return true
-  }
-}
-
-function isMailtoLink (target: string): boolean {
-  return target.startsWith('mailto:')
-}

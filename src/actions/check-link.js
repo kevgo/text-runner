@@ -12,7 +12,6 @@ const isLinkToAnchorInOtherFile = require('../helpers/is-link-to-anchor-in-other
 const isLinkToAnchorInSameFile = require('../helpers/is-link-to-anchor-in-same-file.js')
 const isMailtoLink = require('../helpers/is-mailto-link.js')
 const LinkTargetList = require('../link-targets/link-target-list.js')
-const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
@@ -96,26 +95,19 @@ async function checkExternalLink (
 }
 
 async function checkLinkToFilesystem (
-  filename: AbsoluteFilePath,
+  containingFile: AbsoluteFilePath,
   target: string,
   f: Formatter,
   c: Configuration
 ) {
-  // parse the link into the relative url
-
-  const unknownFilePath = new UnknownFilePath(decodeURI(target))
-
-  // determine the absolute url
-  const absoluteTargetUrl = determineAbsoluteUrl(targetUrl, filename, c)
-
-  // determine the local file path of the target
-  const localLinkFilePath = publicToLocalFilePaths(
-    absoluteTargetUrl,
+  const unknownLink = new UnknownLink(decodeURI(target))
+  const absoluteLink = unknownLink.absolutify(
+    containingFile,
     c.publications,
     c.defaultFile
   )
-
-  const fullPath = normalizePath(path.join(c.sourceDir, localLinkFilePath))
+  const linkedFile = absoluteLink.localize(c.publications, c.defaultFile)
+  const fullPath = path.join(c.sourceDir, linkedFile.platformified())
 
   // We only check for directories if no defaultFile is set.
   // Otherwise links to folders point to the default file.
@@ -123,11 +115,7 @@ async function checkLinkToFilesystem (
     try {
       const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
-        f.name(
-          `link to local directory ${cyan(
-            removeLeadingSlash(localLinkFilePath)
-          )}`
-        )
+        f.name(`link to local directory ${cyan(linkedFile.platformified())}`)
         return
       }
     } catch (e) {
@@ -135,29 +123,27 @@ async function checkLinkToFilesystem (
     }
   }
 
-  f.name(`link to local file ${cyan(removeLeadingSlash(localLinkFilePath))}`)
+  f.name(`link to local file ${cyan(linkedFile.platformified())}`)
   try {
     await fs.stat(fullPath)
   } catch (err) {
     throw new Error(
-      `link to non-existing local file ${bold(
-        removeLeadingSlash(localLinkFilePath)
-      )}`
+      `link to non-existing local file ${bold(linkedFile.platformified())}`
     )
   }
 }
 
 async function checkLinkToAnchorInSameFile (
-  filePath: AbsoluteFilePath,
+  containingFile: AbsoluteFilePath,
   target: string,
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
   const anchorName = target.substr(1)
-  if (!linkTargets.hasAnchor(filePath, target)) {
+  if (!linkTargets.hasAnchor(containingFile, target)) {
     throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }
-  if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
+  if (linkTargets.anchorType(containingFile, anchorName) === 'heading') {
     f.name(`link to local heading ${cyan(target)}`)
   } else {
     f.name(`link to #${cyan(anchorName)}`)
@@ -165,14 +151,18 @@ async function checkLinkToAnchorInSameFile (
 }
 
 async function checkLinkToAnchorInOtherFile (
-  filename: AbsoluteFilePath,
+  containingFile: AbsoluteFilePath,
   target: string,
   linkTargets: LinkTargetList,
   f: Formatter,
   c: Configuration
 ) {
   const link = new UnknownLink(target)
-  const absoluteLink = link.absolutify(filename, c.publications, c.defaultFile)
+  const absoluteLink = link.absolutify(
+    containingFile,
+    c.publications,
+    c.defaultFile
+  )
   const filePath = absoluteLink.localize(c.publications, c.defaultFile)
   const anchorName = link.anchor()
 

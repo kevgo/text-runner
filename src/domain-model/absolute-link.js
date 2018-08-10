@@ -15,8 +15,8 @@ const unixify = require('../helpers/unifixy.js')
 module.exports = class AbsoluteLink {
   value: string
 
-  constructor (value: string) {
-    this.value = addLeadingSlash(removeDoubleSlash(unixify(value)))
+  constructor (urlPath: string) {
+    this.value = addLeadingSlash(removeDoubleSlash(unixify(urlPath)))
   }
 
   // Returns a new link that consists of this link

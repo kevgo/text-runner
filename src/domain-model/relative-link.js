@@ -2,7 +2,6 @@
 
 const AbsoluteFilePath = require('./absolute-file-path.js')
 const AbsoluteLink = require('./absolute-link.js')
-const DefaultFile = require('../configuration/default-file.js')
 const Publications = require('../configuration/publications.js')
 
 // A link relative to the current location,
@@ -19,7 +18,7 @@ class RelativeLink {
   absolutify (
     containingFile: AbsoluteFilePath,
     publications: Publications,
-    defaultFile: DefaultFile
+    defaultFile: string
   ): AbsoluteLink {
     const urlOfDir = containingFile
       .directory()

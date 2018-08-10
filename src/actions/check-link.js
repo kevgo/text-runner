@@ -4,17 +4,19 @@ import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
 const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
-const addLeadingSlash = require('../helpers/add-leading-slash.js')
 const { bold, cyan, magenta } = require('chalk')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
+const isExternalLink = require('../helpers/is-external-link.js')
+const isLinkToAnchorInOtherFile = require('../helpers/is-link-to-anchor-in-other-file.js')
+const isLinkToAnchorInSameFile = require('../helpers/is-link-to-anchor-in-same-file.js')
+const isMailtoLink = require('../helpers/is-mailto-link.js')
 const LinkTargetList = require('../link-targets/link-target-list.js')
 const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
 const UnknownLink = require('../domain-model/unknown-link.js')
-const url = require('url')
 
 // Checks for broken hyperlinks
 module.exports = async function (args: ActionArgs) {
@@ -22,8 +24,6 @@ module.exports = async function (args: ActionArgs) {
   if (target == null || target === '') {
     throw new Error('link without target')
   }
-
-  const link = new UnknownLink(target)
 
   if (isMailtoLink(target)) {
     args.formatter.skip(`skipping link to ${cyan(target)}`)
@@ -36,7 +36,7 @@ module.exports = async function (args: ActionArgs) {
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(
       filePath,
-      link,
+      target,
       args.linkTargets,
       args.formatter
     )
@@ -46,7 +46,7 @@ module.exports = async function (args: ActionArgs) {
   if (isLinkToAnchorInOtherFile(target)) {
     await checkLinkToAnchorInOtherFile(
       filePath,
-      link,
+      target,
       args.linkTargets,
       args.formatter,
       args.configuration
@@ -55,20 +55,20 @@ module.exports = async function (args: ActionArgs) {
   }
 
   if (isExternalLink(target)) {
-    await checkExternalLink(link, args.formatter, args.configuration)
+    await checkExternalLink(target, args.formatter, args.configuration)
     return
   }
 
   await checkLinkToFilesystem(
     filePath,
-    link,
+    target,
     args.formatter,
     args.configuration
   )
 }
 
 async function checkExternalLink (
-  link: UnknownLink,
+  target: string,
   f: Formatter,
   c: Configuration
 ) {
@@ -97,15 +97,16 @@ async function checkExternalLink (
 
 async function checkLinkToFilesystem (
   filename: AbsoluteFilePath,
-  link: UnknownLink,
+  target: string,
   f: Formatter,
   c: Configuration
 ) {
   // parse the link into the relative url
-  const relativeTargetUrl = decodeURI(target)
+
+  const unknownFilePath = new UnknownFilePath(decodeURI(target))
 
   // determine the absolute url
-  const absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
+  const absoluteTargetUrl = determineAbsoluteUrl(targetUrl, filename, c)
 
   // determine the local file path of the target
   const localLinkFilePath = publicToLocalFilePaths(
@@ -147,77 +148,55 @@ async function checkLinkToFilesystem (
 }
 
 async function checkLinkToAnchorInSameFile (
-  filename: string,
-  link: UnknownLink,
+  filePath: AbsoluteFilePath,
+  target: string,
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
-  const anchorEntry = (
-    linkTargets.targets[addLeadingSlash(filename)] || []
-  ).filter(linkTarget => linkTarget.name === target.substr(1))[0]
-  if (!anchorEntry) {
+  const anchorName = target.substr(1)
+  if (!linkTargets.hasAnchor(filePath, target)) {
     throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }
-  if (anchorEntry.type === 'heading') {
+  if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
     f.name(`link to local heading ${cyan(target)}`)
   } else {
-    f.name(`link to #${cyan(anchorEntry.name)}`)
+    f.name(`link to #${cyan(anchorName)}`)
   }
 }
 
 async function checkLinkToAnchorInOtherFile (
   filename: AbsoluteFilePath,
-  link: UnknownLink,
+  target: string,
   linkTargets: LinkTargetList,
   f: Formatter,
   c: Configuration
 ) {
-  // parse the link into the relative url
-  let [relativeTargetUrl, anchor] = target.split('#')
-  relativeTargetUrl = decodeURI(relativeTargetUrl)
-  const absoluteLink = isLi
+  const link = new UnknownLink(target)
+  const absoluteLink = link.absolutify(filename, c.publications, c.defaultFile)
+  const filePath = absoluteLink.localize(c.publications, c.defaultFile)
+  const anchorName = link.anchor()
 
-  // determine the absolute url
-  let absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
-
-  // determine the local file path of the target
-  const localLinkFilePath = publicToLocalFilePath(
-    absoluteTargetUrl,
-    c.publications,
-    c.defaultFile
-  )
-
-  // ensure the local file exists
-  if (linkTargets.targets[localLinkFilePath] == null) {
+  if (linkTargets.hasFile(filePath)) {
     throw new Error(
-      `link to anchor #${cyan(anchor)} in non-existing file ${cyan(
-        removeLeadingSlash(localLinkFilePath)
+      `link to anchor #${cyan(anchorName)} in non-existing file ${cyan(
+        removeLeadingSlash(filePath.platformified())
       )}`
     )
   }
 
-  // ensure the anchor exists in the file
-  const anchorEntry = (linkTargets.targets[localLinkFilePath] || []).filter(
-    linkTarget => linkTarget.name === anchor
-  )[0]
-  if (!anchorEntry) {
+  if (!linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
-      `link to non-existing anchor ${bold('#' + anchor)} in ${bold(
-        removeLeadingSlash(localLinkFilePath)
+      `link to non-existing anchor ${bold('#' + anchorName)} in ${bold(
+        filePath.platformified()
       )}`
     )
   }
 
-  // Signal anchor type to user
-  if (anchorEntry.type === 'heading') {
+  if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
     f.name(
-      `link to heading ${cyan(
-        removeLeadingSlash(localLinkFilePath) + '#' + anchor
-      )}`
+      `link to heading ${cyan(filePath.platformified() + '#' + anchorName)}`
     )
   } else {
-    f.name(
-      `link to ${cyan(removeLeadingSlash(localLinkFilePath))}#${cyan(anchor)}`
-    )
+    f.name(`link to ${cyan(filePath.platformified())}#${cyan(anchorName)}`)
   }
 }

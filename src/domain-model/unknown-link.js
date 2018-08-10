@@ -30,6 +30,11 @@ class UnknownLink {
     }
   }
 
+  // returns the anchor of the link
+  anchor (): string {
+    return this.value.split('#')[1] || ''
+  }
+
   isAbsolute (): boolean {
     return this.value.startsWith('/')
   }

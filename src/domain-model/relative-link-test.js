@@ -1,7 +1,6 @@
 // @flow
 
 const AbsoluteFilePath = require('./absolute-file-path.js')
-const DefaultFile = require('../configuration/default-file.js')
 const Publications = require('../configuration/publications.js')
 const RelativeLink = require('./relative-link.js')
 const { expect } = require('chai')
@@ -14,11 +13,7 @@ describe('RelativeLink', function () {
       ])
       const link = new RelativeLink('foo.md')
       const containingFile = new AbsoluteFilePath('/one/two.md')
-      const actual = link.absolutify(
-        containingFile,
-        publications,
-        new DefaultFile('')
-      )
+      const actual = link.absolutify(containingFile, publications, '')
       expect(actual.value).to.equal('/one/foo.md')
     })
 
@@ -28,11 +23,7 @@ describe('RelativeLink', function () {
       ])
       const link = new RelativeLink('../foo.md')
       const containingFile = new AbsoluteFilePath('/one/two.md')
-      const actual = link.absolutify(
-        containingFile,
-        publications,
-        new DefaultFile('')
-      )
+      const actual = link.absolutify(containingFile, publications, '')
       expect(actual.value).to.equal('/foo.md')
     })
 
@@ -42,11 +33,7 @@ describe('RelativeLink', function () {
       ])
       const link = new RelativeLink('foo/bar.md')
       const containingFile = new AbsoluteFilePath('/one/two.md')
-      const actual = link.absolutify(
-        containingFile,
-        publications,
-        new DefaultFile('')
-      )
+      const actual = link.absolutify(containingFile, publications, '')
       expect(actual.value).to.equal('/one/foo/bar.md')
     })
   })

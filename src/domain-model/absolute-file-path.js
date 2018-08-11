@@ -1,7 +1,6 @@
 // @flow
 
 const AbsoluteLink = require('./absolute-link.js')
-const DefaultFile = require('../configuration/default-file.js')
 const path = require('path')
 const Publications = require('../configuration/publications.js')
 const unixify = require('../helpers/unifixy.js')
@@ -49,7 +48,7 @@ class AbsoluteFilePath {
   }
 
   // Returns the public link under which this file path is published
-  urlPath (publications: Publications, defaultFile: DefaultFile): AbsoluteLink {
+  urlPath (publications: Publications, defaultFile: string): AbsoluteLink {
     const publication = publications.forFilePath(this)
     if (publication == null) return new AbsoluteLink(this.unixified())
     return publication.publish(this)

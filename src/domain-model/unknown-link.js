@@ -5,36 +5,30 @@ const AbsoluteLink = require('./absolute-link.js')
 const Publications = require('../configuration/publications.js')
 const RelativeLink = require('./relative-link.js')
 const removeDoubleSlash = require('../helpers/remove-double-slash.js')
+const unixify = require('../helpers/unifixy.js')
 
-// A link where it's not known if it is absolute or relative
+// A link that isn't known yet whether it is relative or absolute
 class UnknownLink {
   value: string
 
   constructor (urlPath: string) {
-    this.value = removeDoubleSlash(urlPath)
+    this.value = removeDoubleSlash(unixify(urlPath))
   }
 
   absolutify (
     containingFile: AbsoluteFilePath,
     publications: Publications,
-    defaultFile: string
+    defaultFile: ''
   ): AbsoluteLink {
-    if (this.isAbsolute()) {
-      return new AbsoluteLink(this.value)
-    } else {
-      return new RelativeLink(this.value).absolutify(
-        containingFile,
-        publications,
-        defaultFile
-      )
-    }
+    if (this.isAbsolute()) return new AbsoluteLink(this.value)
+    return new RelativeLink(this.value).absolutify(
+      containingFile,
+      publications,
+      defaultFile
+    )
   }
 
-  // returns the anchor of the link
-  anchor (): string {
-    return this.value.split('#')[1] || ''
-  }
-
+  // Returns whether this link is an absolute link
   isAbsolute (): boolean {
     return this.value.startsWith('/')
   }

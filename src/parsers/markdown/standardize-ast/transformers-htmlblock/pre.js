@@ -12,7 +12,7 @@ const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 module.exports = async function transformPre (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()

@@ -12,7 +12,7 @@ const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/
 module.exports = function (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()

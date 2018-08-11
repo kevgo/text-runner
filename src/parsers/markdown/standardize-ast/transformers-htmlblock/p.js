@@ -12,7 +12,7 @@ const pRegex = /<p([^>]*)>([\s\S]*)<\/p>/m
 module.exports = async function transformPBlock (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()

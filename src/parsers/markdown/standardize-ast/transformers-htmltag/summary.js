@@ -9,7 +9,7 @@ const parseHtmlTag = require('../../helpers/parse-html-tag.js')
 module.exports = function transformSummaryTag (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()

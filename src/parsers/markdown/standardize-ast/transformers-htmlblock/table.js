@@ -88,7 +88,7 @@ module.exports = async function transformTable (
 function parseRows (
   block: Object,
   result: AstNodeList,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ) {
   for (const row of block) {

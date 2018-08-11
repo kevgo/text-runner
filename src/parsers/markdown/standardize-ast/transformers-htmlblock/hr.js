@@ -11,7 +11,7 @@ const olRegex = /<hr([^>]*)>/
 module.exports = async function transformOl (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()

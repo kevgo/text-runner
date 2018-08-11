@@ -14,7 +14,7 @@ const ulRegex = /<ul([^>]*)>[\s\S]*<\/ul>/m
 module.exports = async function transformUl (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()

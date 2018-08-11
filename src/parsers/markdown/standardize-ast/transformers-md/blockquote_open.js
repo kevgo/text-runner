@@ -11,7 +11,7 @@ const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 module.exports = function (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()

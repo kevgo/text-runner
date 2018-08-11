@@ -7,7 +7,7 @@ const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 module.exports = function (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   // TODO: remove openTags, since MD nodes never have attributes

@@ -8,7 +8,7 @@ const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 module.exports = function transformDetailsTag (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()

@@ -18,7 +18,7 @@ class UnknownLink {
   absolutify (
     containingFile: AbsoluteFilePath,
     publications: Publications,
-    defaultFile: ''
+    defaultFile: string
   ): AbsoluteLink {
     if (this.isAbsolute()) return new AbsoluteLink(this.value)
     return new RelativeLink(this.value).absolutify(

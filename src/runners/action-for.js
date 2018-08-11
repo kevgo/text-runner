@@ -42,7 +42,11 @@ function errorUnknownActivityType (activity: Activity) {
   }
   errorText += `\nTo create a new "${activity.type}" activity type,\n`
   errorText += `run "text-run add ${activity.type}"\n`
-  throw new UnprintedUserError(errorText, activity.file, activity.line)
+  throw new UnprintedUserError(
+    errorText,
+    activity.file.platformified(),
+    activity.line
+  )
 }
 
 function loadBuiltinActions (): FunctionRepo {

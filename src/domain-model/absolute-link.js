@@ -25,6 +25,11 @@ module.exports = class AbsoluteLink {
     return new AbsoluteLink(this.value + '/' + segment.value)
   }
 
+  // Returns the anchor part of this link
+  anchor (): string {
+    return this.value.split('#')[1] || ''
+  }
+
   // Returns the file path that this link has on the local filesystem
   localize (publications: Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)

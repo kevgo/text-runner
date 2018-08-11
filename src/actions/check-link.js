@@ -164,7 +164,7 @@ async function checkLinkToAnchorInOtherFile (
     c.defaultFile
   )
   const filePath = absoluteLink.localize(c.publications, c.defaultFile)
-  const anchorName = link.anchor()
+  const anchorName = absoluteLink.anchor()
 
   if (linkTargets.hasFile(filePath)) {
     throw new Error(

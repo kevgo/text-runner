@@ -14,6 +14,19 @@ describe('AbsoluteLink', function () {
     expect(link.value).to.equal('/foo/bar')
   })
 
+  describe('anchor', function () {
+    const tests = [
+      ['link with anchor', '/foo.md#hello', 'hello'],
+      ['link without anchor', '/foo.md', '']
+    ]
+    for (const [description, link, expected] of tests) {
+      it(description, function () {
+        const absoluteLinklink = new AbsoluteLink(link)
+        expect(absoluteLinklink.anchor()).to.equal(expected)
+      })
+    }
+  })
+
   describe('add', function () {
     it('adds the given link to the given directory link')
   })

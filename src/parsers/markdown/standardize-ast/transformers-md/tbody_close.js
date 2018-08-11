@@ -19,6 +19,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('tbody_open', file, line)
+  openTags.popType('tbody_open', file.platformified(), line)
   return result
 }

@@ -19,6 +19,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('footnote_open', file, line)
+  openTags.popType('footnote_open', file.platformified(), line)
   return result
 }

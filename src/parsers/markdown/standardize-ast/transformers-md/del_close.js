@@ -19,6 +19,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('del_open', file, line)
+  openTags.popType('del_open', file.platformified(), line)
   return result
 }

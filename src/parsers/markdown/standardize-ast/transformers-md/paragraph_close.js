@@ -10,7 +10,7 @@ module.exports = function (
   file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
-  const openNode = openTags.popType('paragraph_open', file, line)
+  const openNode = openTags.popType('paragraph_open', file.platformified(), line)
   const result = new AstNodeList()
   result.pushNode({
     type: node.type,

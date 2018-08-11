@@ -20,6 +20,6 @@ module.exports = function (
     attributes: {}
   })
   openTags.add(resultNode)
-  result.pushData(resultNode)
+  result.pushNode(resultNode)
   return result
 }

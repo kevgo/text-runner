@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 const UnprintedUserError = require('../../../../errors/unprinted-user-error.js')
@@ -17,7 +18,7 @@ module.exports = function (
   const result = new AstNodeList()
   const preMatch = node.content.match(preRegex)
   if (preMatch) {
-    result.pushData({
+    result.pushNode({
       type: 'fence_open',
       tag: 'pre',
       file: file,
@@ -25,7 +26,7 @@ module.exports = function (
       content: '',
       attributes: parseHtmlAttributes(preMatch[1])
     })
-    result.pushData({
+    result.pushNode({
       type: 'text',
       tag: '',
       file: file,
@@ -33,7 +34,7 @@ module.exports = function (
       content: preMatch[2],
       attributes: {}
     })
-    result.pushData({
+    result.pushNode({
       type: 'fence_close',
       tag: '/pre',
       file: file,
@@ -45,7 +46,7 @@ module.exports = function (
   }
   const tableMatch = node.content.trim().match(tableRegex)
   if (tableMatch) {
-    result.pushData({
+    result.pushNode({
       type: 'table',
       tag: 'table',
       file: file,

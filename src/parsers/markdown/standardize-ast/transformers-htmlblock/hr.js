@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
@@ -23,6 +24,6 @@ module.exports = async function transformOl (
     content: '',
     attributes: parseHtmlAttributes(match[1])
   })
-  result.pushData(hrNode)
+  result.pushNode(hrNode)
   return result
 }

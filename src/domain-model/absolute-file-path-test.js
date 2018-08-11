@@ -1,7 +1,6 @@
 // @flow
 
 const AbsoluteFilePath = require('./absolute-file-path.js')
-const DefaultFile = require('../configuration/default-file.js')
 const Publications = require('../configuration/publications.js')
 const { expect } = require('chai')
 
@@ -73,7 +72,7 @@ describe('AbsoluteFilePath', function () {
   describe('urlPath', function () {
     it('returns the unixified path if there are no publications', function () {
       const filePath = new AbsoluteFilePath('content\\1.md')
-      const actual = filePath.urlPath(new Publications(), new DefaultFile(''))
+      const actual = filePath.urlPath(new Publications(), '')
       expect(actual.value).to.equal('/content/1.md')
     })
 
@@ -85,7 +84,7 @@ describe('AbsoluteFilePath', function () {
         }
       ])
       const filePath = new AbsoluteFilePath('/content/1.md')
-      const actual = filePath.urlPath(publications, new DefaultFile(''))
+      const actual = filePath.urlPath(publications, '')
       expect(actual.value).to.equal('/1.md')
     })
   })

@@ -13,7 +13,7 @@ module.exports = function transformATag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const [tag, attributes] = parseHtmlTag(node.content, file, line)
+  const [tag, attributes] = parseHtmlTag(node.content, file.platformified(), line)
   const resultNode = new AstNode({
     type: 'sup_open',
     tag,

@@ -18,7 +18,7 @@ describe('extract-activities', function () {
     const result = extractActivities([AST], 'textrun')
     expect(result).to.have.length(1)
     expect(result[0].type).to.equal('verify-foo')
-    expect(result[0].file).to.equal('README.md')
+    expect(result[0].file.unixified()).to.equal('README.md')
     expect(result[0].line).to.equal(3)
     expect(result[0].nodes).to.eql(AST)
   })

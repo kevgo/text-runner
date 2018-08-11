@@ -12,7 +12,7 @@ module.exports = function transformATag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popTag('a', file, line)
+  const openingTag = openTags.popTag('a', file.platformified(), line)
   const resultNode = new AstNode({
     type: openingTag.type.replace('_open', '_close'),
     tag: '/a',

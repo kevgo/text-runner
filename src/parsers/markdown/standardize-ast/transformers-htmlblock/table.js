@@ -35,7 +35,7 @@ module.exports = async function transformTable (
     attributes: xml.table.$ || {}
   })
   result.pushNode(tableNode)
-  if (xml.table.tr) parseRows(xml.table.tr, result, file.platformified(), line)
+  if (xml.table.tr) parseRows(xml.table.tr, result, file, line)
   if (xml.table.thead) {
     result.pushNode({
       type: 'thead_open',
@@ -45,7 +45,7 @@ module.exports = async function transformTable (
       content: '',
       attributes: xml.table.thead.$ || {}
     })
-    parseRows(xml.table.thead[0].tr, result, file.platformified(), line)
+    parseRows(xml.table.thead[0].tr, result, file, line)
     result.pushNode({
       type: 'thead_close',
       tag: '/thead',
@@ -64,7 +64,7 @@ module.exports = async function transformTable (
       content: '',
       attributes: xml.table.tbody.$ || {}
     })
-    parseRows(xml.table.tbody[0].tr, result, file.platformified(), line)
+    parseRows(xml.table.tbody[0].tr, result, file, line)
     result.pushNode({
       type: 'tbody_close',
       tag: '/tbody',

@@ -17,7 +17,13 @@ module.exports = async function transformPBlock (
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(pRegex)
-  if (!match) throw new UnprintedUserError('cannot match <p> tag', file, line)
+  if (!match) {
+    throw new UnprintedUserError(
+      'cannot match <p> tag',
+      file.platformified(),
+      line
+    )
+  }
   const resultNode = new AstNode({
     type: 'paragraph',
     tag: 'p',

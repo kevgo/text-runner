@@ -17,7 +17,13 @@ module.exports = async function transformPre (
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(preRegex)
-  if (!match) throw new UnprintedUserError('cannot match <pre> tag', file, line)
+  if (!match) {
+    throw new UnprintedUserError(
+      'cannot match <pre> tag',
+      file.platformified(),
+      line
+    )
+  }
   const resultNode = new AstNode({
     type: 'fence',
     tag: 'pre',

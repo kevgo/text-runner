@@ -58,7 +58,7 @@ module.exports = function (
   }
   throw new UnprintedUserError(
     `Unknown 'htmlblock' encountered: ${node.content}`,
-    file,
+    file.platformified(),
     line
   )
 }

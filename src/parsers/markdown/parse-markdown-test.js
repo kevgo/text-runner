@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../domain-model/absolute-file-path.js')
 const parseMarkdown = require('./parse-markdown.js')
 const { expect } = require('chai')
 const fs = require('fs')
@@ -20,7 +21,10 @@ describe('parseMarkdown', function () {
       it(name, async function () {
         const input = fs.readFileSync(path.join(testCaseDir, inputFile))
         const expected = require(path.join(testCaseDir, 'result.json'))
-        const actual = await parseMarkdown(input.toString().trim(), 'input.md')
+        const actual = await parseMarkdown(
+          input.toString().trim(),
+          new AbsoluteFilePath('input.md')
+        )
         expect(actual).to.eql(expected)
       })
     }

@@ -1,7 +1,8 @@
 // @flow
 
+const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
 const glob = require('glob')
 
-module.exports = function filesMatchingGlob (expression: string): string[] {
+module.exports = function (expression: string): AbsoluteFilePath[] {
   return glob.sync(expression).sort()
 }

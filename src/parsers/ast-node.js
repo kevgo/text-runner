@@ -49,10 +49,13 @@ module.exports = class AstNode {
   }
 
   static scaffold (data: Object = {}): AstNode {
+    if (typeof data.file === 'string') {
+      data.file = new AbsoluteFilePath(data.file)
+    }
     return new AstNode({
       type: data.type || 'type',
       tag: data.tag || 'tag',
-      file: new AbsoluteFilePath(data.file || 'file'),
+      file: data.file || new AbsoluteFilePath('file'),
       line: data.line || 1,
       content: data.content || '',
       attributes: data.attributes || {}

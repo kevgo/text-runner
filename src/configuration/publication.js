@@ -1,10 +1,11 @@
 // @flow
 
-const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
 const AbsoluteLink = require('../domain-model/absolute-link.js')
 const addLeadingDot = require('../helpers/add-leading-dot-unless-empty.js')
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
+const addTrailingSlash = require('../helpers/add-trailing-slash.js')
 const path = require('path')
+const RelativeLink = require('../domain-model/relative-link.js')
 
 // Defines the publication of a local file path to a public URL
 class Publication {
@@ -13,7 +14,7 @@ class Publication {
   urlExtension: string
 
   constructor (filePath: string, urlPath: string, urlExtension: string) {
-    this.filePath = addLeadingSlash(filePath)
+    this.filePath = addLeadingSlash(addTrailingSlash(filePath))
     this.urlPath = addLeadingSlash(urlPath)
     this.urlExtension = urlExtension ? addLeadingDot(urlExtension) : '.md'
   }
@@ -36,18 +37,16 @@ class Publication {
   // returns the filePath for the given link,
   // mapped according to the rules of this publication
   resolve (link: AbsoluteLink, defaultFile: string): AbsoluteFilePath {
-    let result = link.value
+    let result = link.rebase(this.urlPath, this.filePath)
 
-    // replace the path
-    const urlPathRE = new RegExp('^' + this.urlPath)
-    result = result.replace(urlPathRE, this.filePath)
+    // add the default file
+    if (result.isLinkToDirectory()) {
+      result = result.add(new RelativeLink(defaultFile))
+    }
 
     // replace the extension
-    if (path.extname(result) === this.urlExtension) {
-      const extRE = new RegExp(this.urlExtension + '$')
-      result = result.replace(extRE, '.md')
-    }
-    return new AbsoluteFilePath(result)
+    const extRE = new RegExp(path.extname(result) + '$')
+    result = result.replace(extRE, '.md')
   }
 
   // Returns whether this publication maps the given link
@@ -57,3 +56,5 @@ class Publication {
 }
 
 module.exports = Publication
+const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
+console.log(AbsoluteFilePath)

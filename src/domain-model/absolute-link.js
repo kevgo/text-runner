@@ -44,6 +44,11 @@ module.exports = class AbsoluteLink {
     return result
   }
 
+  rebase (oldPath: string, newPath: string): AbsoluteLink {
+    const re = new RegExp('^' + oldPath)
+    return new AbsoluteLink(this.value.replace(re, newPath))
+  }
+
   // Returns another AbsoluteLink instance that uses the given file extension
   withExtension (newExtension: string): AbsoluteLink {
     const extRE = new RegExp(path.extname(this.value) + '$')

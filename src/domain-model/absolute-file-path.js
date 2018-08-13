@@ -1,13 +1,11 @@
 // @flow
 
-const AbsoluteLink = require('./absolute-link.js')
-const path = require('path')
-const Publications = require('../configuration/publications.js')
-const unixify = require('../helpers/unifixy.js')
+// NOTE: have to load the exports at the bottom of the file
+//       to avoid a circular dependency issue here
 
 // AbsoluteFilePath represents the full path
 // to a markdown file on the local file system.
-class AbsoluteFilePath {
+module.exports = class AbsoluteFilePath {
   value: string
 
   constructor (value: string) {
@@ -55,4 +53,7 @@ class AbsoluteFilePath {
   }
 }
 
-module.exports = AbsoluteFilePath
+const Publications = require('../configuration/publications.js')
+const AbsoluteLink = require('./absolute-link.js')
+const path = require('path')
+const unixify = require('../helpers/unifixy.js')

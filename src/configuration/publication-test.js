@@ -12,28 +12,28 @@ describe('Publication', function () {
       const publication = new Publication('/content', '/', '')
       const link = new AbsoluteLink('/1.md')
       const actual = publication.resolve(link, '')
-      expect(actual).to.equal('/content/1.md')
+      expect(actual.value).to.equal('/content/1.md')
     })
 
     it('applies the extension mapping for empty public extensions', function () {
       const publication = new Publication('/content', '/', '')
       const link = new AbsoluteLink('/1')
       const actual = publication.resolve(link, '')
-      expect(actual).to.equal('/content/1.md')
+      expect(actual.value).to.equal('/content/1.md')
     })
 
     it('applies the extension mapping for custom public extensions', function () {
       const publication = new Publication('/content/', '/', '.html')
       const link = new AbsoluteLink('1.html')
       const actual = publication.resolve(link, '')
-      expect(actual).to.equal('/content/1.md')
+      expect(actual.value).to.equal('/content/1.md')
     })
 
     it('adds the given default filename if the link has no filename and an anchor', function () {
-      const publication = new Publication('/content/', '/', '.html')
-      const link = new AbsoluteLink('/')
+      const publication = new Publication('/content/', '/', '')
+      const link = new AbsoluteLink('/#hello')
       const actual = publication.resolve(link, 'index.md')
-      expect(actual.unixified()).to.equal('/content/index.md')
+      expect(actual.unixified()).to.equal('/content/index.md#hello')
     })
 
     it('uses the given default filename together with publications', function () {

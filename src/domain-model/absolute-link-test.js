@@ -2,6 +2,7 @@
 
 const AbsoluteLink = require('./absolute-link.js')
 const { expect } = require('chai')
+const RelativeLink = require('./relative-link.js')
 
 describe('AbsoluteLink', function () {
   it('prepends a forward slash', function () {
@@ -12,6 +13,15 @@ describe('AbsoluteLink', function () {
   it('converts Windows paths to forward slashes', function () {
     const link = new AbsoluteLink('\\foo\\bar')
     expect(link.value).to.equal('/foo/bar')
+  })
+
+  describe('add', function () {
+    it('adds the given link to the given directory link', function () {
+      const link = new AbsoluteLink('/one/two/')
+      const relativeLink = new RelativeLink('new.md')
+      const actual = link.add(relativeLink)
+      expect(actual).to.equal('/one/two/new')
+    })
   })
 
   describe('anchor', function () {
@@ -27,8 +37,12 @@ describe('AbsoluteLink', function () {
     }
   })
 
-  describe('add', function () {
-    it('adds the given link to the given directory link')
+  describe('rebase', function () {
+    it('replaces the old base with the new', function () {
+      const link = new AbsoluteLink('/one/two/three.md')
+      const actual = link.rebase('/one', '/foo')
+      expect(actual.value).to.equal('/foo/two/three.md')
+    })
   })
 
   describe('withExtension', function () {

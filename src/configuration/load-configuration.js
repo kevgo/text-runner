@@ -61,7 +61,7 @@ module.exports = function loadConfiguration (
       defaultValues.FormatterClass
     ),
     publications:
-      Publications.fromJSON(fileData.publications).sorted() ||
+      Publications.fromJSON(fileData.publications || []).sorted() ||
       defaultValues.publications,
     offline: String(get('offline')) === 'true',
     sourceDir: get('source-dir'),

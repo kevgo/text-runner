@@ -19,15 +19,15 @@ module.exports = class AbsoluteLink {
     this.value = addLeadingSlash(removeDoubleSlash(unixify(urlPath)))
   }
 
-  // Returns a new link that consists of this link
-  // with the given relative link appended
-  add (segment: RelativeLink): AbsoluteLink {
-    return new AbsoluteLink(this.value + '/' + segment.value)
-  }
-
   // Returns the anchor part of this link
   anchor (): string {
     return this.value.split('#')[1] || ''
+  }
+
+  // Returns a new link that consists of this link
+  // with the given relative link appended
+  append (segment: RelativeLink): AbsoluteLink {
+    return new AbsoluteLink(this.value + '/' + segment.value)
   }
 
   // Returns the file path that this link has on the local filesystem

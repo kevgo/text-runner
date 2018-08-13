@@ -15,15 +15,6 @@ describe('AbsoluteLink', function () {
     expect(link.value).to.equal('/foo/bar')
   })
 
-  describe('add', function () {
-    it('adds the given link to the given directory link', function () {
-      const link = new AbsoluteLink('/one/two/')
-      const relativeLink = new RelativeLink('new.md')
-      const actual = link.add(relativeLink)
-      expect(actual).to.equal('/one/two/new')
-    })
-  })
-
   describe('anchor', function () {
     const tests = [
       ['link with anchor', '/foo.md#hello', 'hello'],
@@ -35,6 +26,15 @@ describe('AbsoluteLink', function () {
         expect(absoluteLinklink.anchor()).to.equal(expected)
       })
     }
+  })
+
+  describe('append', function () {
+    it('adds the given link to the given directory link', function () {
+      const link = new AbsoluteLink('/one/two/')
+      const relativeLink = new RelativeLink('new.md')
+      const actual = link.append(relativeLink)
+      expect(actual).to.equal('/one/two/new')
+    })
   })
 
   describe('rebase', function () {

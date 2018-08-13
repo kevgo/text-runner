@@ -41,7 +41,7 @@ class Publication {
 
     // add the default file
     if (result.isLinkToDirectory()) {
-      result = result.add(new RelativeLink(defaultFile))
+      result = result.append(new RelativeLink(defaultFile))
     }
 
     // replace the extension

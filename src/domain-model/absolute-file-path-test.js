@@ -80,12 +80,13 @@ describe('AbsoluteFilePath', function () {
       const publications = Publications.fromJSON([
         {
           filePath: '/content',
-          urlPath: '/'
+          urlPath: '/',
+          urlExtension: 'html'
         }
       ])
       const filePath = new AbsoluteFilePath('/content/1.md')
       const actual = filePath.urlPath(publications, '')
-      expect(actual.value).to.equal('/1.md')
+      expect(actual.value).to.equal('/1.html')
     })
   })
 })

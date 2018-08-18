@@ -30,7 +30,9 @@ class Publication {
 
   // Returns whether this publication applies to the given file path
   publishes (filePath: AbsoluteFilePath): boolean {
-    return (filePath.unixified() + '/').startsWith(this.filePath)
+    return addLeadingSlash(addTrailingSlash(filePath.unixified())).startsWith(
+      this.filePath
+    )
   }
 
   // returns the filePath for the given link,

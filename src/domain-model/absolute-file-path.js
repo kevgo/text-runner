@@ -9,7 +9,7 @@ module.exports = class AbsoluteFilePath {
   value: string
 
   constructor (value: string) {
-    this.value = addLeadingSlash(unixify(value))
+    this.value = unixify(value)
   }
 
   // Returns a new file path
@@ -53,7 +53,6 @@ module.exports = class AbsoluteFilePath {
   }
 }
 
-const addLeadingSlash = require('../helpers/add-leading-slash.js')
 const Publications = require('../configuration/publications.js')
 const AbsoluteLink = require('./absolute-link.js')
 const path = require('path')

@@ -33,7 +33,7 @@ describe('AbsoluteLink', function () {
       const link = new AbsoluteLink('/one/two/')
       const relativeLink = new RelativeLink('new.md')
       const actual = link.append(relativeLink)
-      expect(actual).to.equal('/one/two/new')
+      expect(actual.value).to.equal('/one/two/new.md')
     })
   })
 

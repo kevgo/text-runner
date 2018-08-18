@@ -11,24 +11,27 @@ describe('Publications', function () {
       const publications = Publications.fromJSON([
         {
           filePath: 'foo',
-          urlPath: ''
+          urlPath: '',
+          urlExtension: ''
         },
         {
           filePath: 'bar',
-          urlPath: ''
+          urlPath: '',
+          urlExtension: ''
         }
       ])
       const filePath = new AbsoluteFilePath('bar')
       const actual = publications.forFilePath(filePath)
-      // $FlowFixMe: flow is stupid
-      expect(actual.filePath).to.equal('bar')
+      // $FlowFixMe: no type checking needed here
+      expect(actual.filePath).to.equal('/bar/')
     })
 
     it('returns NULL if no publication matches', function () {
       const publications = Publications.fromJSON([
         {
           filePath: 'foo',
-          urlPath: ''
+          urlPath: '',
+          urlExtension: ''
         }
       ])
       const filePath = new AbsoluteFilePath('bar')

@@ -23,7 +23,7 @@ class RelativeLink {
     const urlOfDir = containingFile
       .directory()
       .urlPath(publications, defaultFile)
-    return urlOfDir.add(this)
+    return urlOfDir.append(this)
   }
 }
 

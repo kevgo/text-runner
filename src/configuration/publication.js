@@ -1,10 +1,9 @@
 // @flow
 
 const AbsoluteLink = require('../domain-model/absolute-link.js')
-const addLeadingDot = require('../helpers/add-leading-dot-unless-empty.js')
+const addLeadingDotUnlessEmpty = require('../helpers/add-leading-dot-unless-empty.js')
 const addLeadingSlash = require('../helpers/add-leading-slash.js')
 const addTrailingSlash = require('../helpers/add-trailing-slash.js')
-const path = require('path')
 const RelativeLink = require('../domain-model/relative-link.js')
 
 // Defines the publication of a local file path to a public URL
@@ -16,7 +15,7 @@ class Publication {
   constructor (filePath: string, urlPath: string, urlExtension: string) {
     this.filePath = addLeadingSlash(addTrailingSlash(filePath))
     this.urlPath = addLeadingSlash(urlPath)
-    this.urlExtension = urlExtension ? addLeadingDot(urlExtension) : '.md'
+    this.urlExtension = addLeadingDotUnlessEmpty(urlExtension)
   }
 
   // Returns the public link under which the given file path would be published
@@ -31,7 +30,7 @@ class Publication {
 
   // Returns whether this publication applies to the given file path
   publishes (filePath: AbsoluteFilePath): boolean {
-    return filePath.unixified().startsWith(this.filePath)
+    return (filePath.unixified() + '/').startsWith(this.filePath)
   }
 
   // returns the filePath for the given link,
@@ -39,14 +38,21 @@ class Publication {
   resolve (link: AbsoluteLink, defaultFile: string): AbsoluteFilePath {
     let result = link.rebase(this.urlPath, this.filePath)
 
-    // add the default file
-    if (result.isLinkToDirectory()) {
+    if (result.isLinkToDirectory() && !result.hasAnchor()) {
       result = result.append(new RelativeLink(defaultFile))
+    } else if (
+      result.withoutAnchor().isLinkToDirectory() &&
+      result.hasAnchor()
+    ) {
+      result = result
+        .directory()
+        .append(new RelativeLink(defaultFile))
+        .withAnchor(result.anchor())
+    } else if (result.hasExtension(this.urlExtension)) {
+      result = result.withExtension('md')
     }
 
-    // replace the extension
-    const extRE = new RegExp(path.extname(result) + '$')
-    result = result.replace(extRE, '.md')
+    return new AbsoluteFilePath(result.value)
   }
 
   // Returns whether this publication maps the given link
@@ -57,4 +63,3 @@ class Publication {
 
 module.exports = Publication
 const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
-console.log(AbsoluteFilePath)

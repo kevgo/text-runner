@@ -30,6 +30,29 @@ module.exports = class AbsoluteLink {
     return new AbsoluteLink(this.value + '/' + segment.value)
   }
 
+  // Returns a link to the containing directory
+  directory (): AbsoluteLink {
+    const withoutAnchor = this.withoutAnchor()
+    if (withoutAnchor.isLinkToDirectory()) return withoutAnchor
+    return new AbsoluteLink(
+      withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf('/') + 1)
+    )
+  }
+
+  hasAnchor (): boolean {
+    return this.anchor() !== ''
+  }
+
+  // Returns whether this link has the given extension
+  hasExtension (extension: string): boolean {
+    return path.extname(this.value) === addLeadingDotUnlessEmpty(extension)
+  }
+
+  // Returns whether this link points to a directory
+  isLinkToDirectory (): boolean {
+    return this.value.endsWith('/')
+  }
+
   // Returns the file path that this link has on the local filesystem
   localize (publications: Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)
@@ -44,9 +67,16 @@ module.exports = class AbsoluteLink {
     return result
   }
 
+  // Returns a link where the old enclosing directory is replaced
+  // with the new enclosing directory
   rebase (oldPath: string, newPath: string): AbsoluteLink {
     const re = new RegExp('^' + oldPath)
     return new AbsoluteLink(this.value.replace(re, newPath))
+  }
+
+  // Returns a link that contains the given anchor
+  withAnchor (anchor: string): AbsoluteLink {
+    return new AbsoluteLink(this.withoutAnchor().value + '#' + anchor)
   }
 
   // Returns another AbsoluteLink instance that uses the given file extension
@@ -55,5 +85,10 @@ module.exports = class AbsoluteLink {
     return new AbsoluteLink(
       this.value.replace(extRE, addLeadingDotUnlessEmpty(newExtension))
     )
+  }
+
+  // Returns a link that is this link without the anchor
+  withoutAnchor (): AbsoluteLink {
+    return new AbsoluteLink(this.value.split('#')[0])
   }
 }

@@ -9,8 +9,8 @@ const { expect } = require('chai')
 describe('Publication', function () {
   describe('resolve', function () {
     it('applies the given path mapping', function () {
-      const publication = new Publication('/content', '/', '')
-      const link = new AbsoluteLink('/1.md')
+      const publication = new Publication('/content', '/', 'html')
+      const link = new AbsoluteLink('/1.html')
       const actual = publication.resolve(link, '')
       expect(actual.value).to.equal('/content/1.md')
     })

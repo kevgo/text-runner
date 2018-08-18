@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-unused-expressions: 0 */
 
 const AbsoluteLink = require('./absolute-link.js')
 const { expect } = require('chai')
@@ -37,12 +38,91 @@ describe('AbsoluteLink', function () {
     })
   })
 
+  describe('directory', function () {
+    const testData = [
+      ['returns the directory of the given filename', '/dir/file.md', '/dir/'],
+      ['returns the given directory', '/dir/', '/dir/']
+    ]
+    for (const [description, url, expected] of testData) {
+      it(description, function () {
+        const link = new AbsoluteLink(url)
+        expect(link.directory().value).to.equal(expected)
+      })
+    }
+  })
+
+  describe('hasAnchor', function () {
+    it('returns TRUE if the link points to a file with anchor', function () {
+      const link = new AbsoluteLink('/one.md#hello')
+      expect(link.hasAnchor()).to.be.true
+    })
+    it('returns TRUE if the link points to a directory with anchor', function () {
+      const link = new AbsoluteLink('/#hello')
+      expect(link.hasAnchor()).to.be.true
+    })
+    it('returns FALSE if the link points to a file without anchor', function () {
+      const link = new AbsoluteLink('/one.md')
+      expect(link.hasAnchor()).to.be.false
+    })
+    it('returns FALSE if the link points to a directory without anchor', function () {
+      const link = new AbsoluteLink('/')
+      expect(link.hasAnchor()).to.be.false
+    })
+  })
+
+  describe('hasExtension', function () {
+    it('returns TRUE if the link has the given extension with period', function () {
+      const link = new AbsoluteLink('/foo.md')
+      expect(link.hasExtension('.md')).to.be.true
+    })
+    it('returns TRUE if the link has the given extension without period', function () {
+      const link = new AbsoluteLink('/foo.md')
+      expect(link.hasExtension('md')).to.be.true
+    })
+    it('returns TRUE for matches with empty extension', function () {
+      const link = new AbsoluteLink('/foo')
+      expect(link.hasExtension('')).to.be.true
+    })
+    it('returns FALSE if the link has a different extension', function () {
+      const link = new AbsoluteLink('/foo/bar.html')
+      expect(link.hasExtension('md')).to.be.false
+    })
+    it('returns FALSE if the link has no extension', function () {
+      const link = new AbsoluteLink('/foo/bar')
+      expect(link.hasExtension('md')).to.be.false
+    })
+  })
+
+  describe('isLinkToDirectory', function () {
+    it('returns TRUE if the link points to a directory', function () {
+      const link = new AbsoluteLink('/foo/')
+      expect(link.isLinkToDirectory()).to.be.true
+    })
+    it('returns FALSE if the link does not point to a directory', function () {
+      const link = new AbsoluteLink('/foo/bar.md')
+      expect(link.isLinkToDirectory()).to.be.false
+    })
+  })
+
   describe('rebase', function () {
     it('replaces the old base with the new', function () {
       const link = new AbsoluteLink('/one/two/three.md')
       const actual = link.rebase('/one', '/foo')
       expect(actual.value).to.equal('/foo/two/three.md')
     })
+  })
+
+  describe('withAnchor', function () {
+    const tests = [
+      ['link with anchor', '/foo.md#hello', 'new', '/foo.md#new'],
+      ['link without anchor', '/foo.md', 'new', '/foo.md#new']
+    ]
+    for (const [description, url, anchor, expected] of tests) {
+      it(description, function () {
+        const link = new AbsoluteLink(url)
+        expect(link.withAnchor(anchor).value).to.equal(expected)
+      })
+    }
   })
 
   describe('withExtension', function () {
@@ -57,5 +137,18 @@ describe('AbsoluteLink', function () {
       const actual = link.withExtension('.md')
       expect(actual.value).to.equal('/foo.md')
     })
+  })
+
+  describe('withoutAnchor', function () {
+    const tests = [
+      ['link with anchor', '/foo.md#hello', '/foo.md'],
+      ['link without anchor', '/foo.md', '/foo.md']
+    ]
+    for (const [description, url, expected] of tests) {
+      it(description, function () {
+        const link = new AbsoluteLink(url)
+        expect(link.withoutAnchor().value).to.equal(expected)
+      })
+    }
   })
 })

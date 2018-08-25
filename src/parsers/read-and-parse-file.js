@@ -9,7 +9,11 @@ const parseMarkdown = require('../parsers/markdown/parse-markdown.js')
 module.exports = async function (
   filename: AbsoluteFilePath
 ): Promise<AstNodeList> {
-  const content = (await fs.readFile(filename, { encoding: 'utf8' })).trim()
-  if (content.length === 0) { console.log(magenta('found empty file ' + filename.platformified())) }
+  const content = (await fs.readFile(filename.value, {
+    encoding: 'utf8'
+  })).trim()
+  if (content.length === 0) {
+    console.log(magenta('found empty file ' + filename.platformified()))
+  }
   return parseMarkdown(content, filename)
 }

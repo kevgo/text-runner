@@ -140,7 +140,7 @@ async function checkLinkToAnchorInSameFile (
   f: Formatter
 ) {
   const anchorName = target.substr(1)
-  if (!linkTargets.hasAnchor(containingFile, target)) {
+  if (!linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }
   if (linkTargets.anchorType(containingFile, anchorName) === 'heading') {

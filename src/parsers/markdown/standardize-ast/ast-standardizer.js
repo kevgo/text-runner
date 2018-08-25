@@ -34,7 +34,6 @@ module.exports = class AstStandardizer {
 
   async standardize (ast: Object): Promise<AstNodeList> {
     for (let node of ast) {
-      // console.log(node)
       if (node.lines) this.line = Math.max(node.lines[0] + 1, this.line)
 
       if (node.children) {

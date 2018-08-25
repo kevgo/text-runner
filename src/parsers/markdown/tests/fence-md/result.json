@@ -2,7 +2,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "fence_open",
     "tag": "pre",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}
@@ -18,7 +18,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "my code\n",
     "attributes": {}
@@ -26,7 +26,7 @@
   {
     "type": "fence_close",
     "tag": "/pre",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": { }
@@ -34,7 +34,7 @@
   {
     "type": "paragraph_close",
     "tag": "/p",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}

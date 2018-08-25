@@ -36,6 +36,11 @@ describe('AbsoluteLink', function () {
       const actual = link.append(relativeLink)
       expect(actual.value).to.equal('/one/two/new.md')
     })
+    it('straightens out the path', function () {
+      const link = new AbsoluteLink('/one/two')
+      const appended = link.append(new RelativeLink('../new'))
+      expect(appended.value).to.equal('/one/new')
+    })
   })
 
   describe('directory', function () {

@@ -7,6 +7,7 @@ const path = require('path')
 const Publications = require('../configuration/publications.js')
 const RelativeLink = require('./relative-link.js')
 const removeDoubleSlash = require('../helpers/remove-double-slash.js')
+const straightenLink = require('../helpers/straighten-link.js')
 const unixify = require('../helpers/unifixy.js')
 
 // Represents a link to another Markdown file,
@@ -27,7 +28,7 @@ module.exports = class AbsoluteLink {
   // Returns a new link that consists of this link
   // with the given relative link appended
   append (segment: RelativeLink): AbsoluteLink {
-    return new AbsoluteLink(this.value + '/' + segment.value)
+    return new AbsoluteLink(straightenLink(this.value + '/' + segment.value))
   }
 
   // Returns a link to the containing directory

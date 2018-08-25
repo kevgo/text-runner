@@ -10,7 +10,7 @@ describe('removeExcludedFiles', function () {
       [new AbsoluteFilePath('one'), new AbsoluteFilePath('two')],
       'one'
     )
-    expect(result).to.eql(['two'])
+    expect(result).to.eql([{ value: 'two' }])
   })
   it('removes the given filenames', function () {
     const result = removeExcludedFiles(
@@ -21,14 +21,14 @@ describe('removeExcludedFiles', function () {
       ],
       ['one', 'three']
     )
-    expect(result).to.eql(['two'])
+    expect(result).to.eql([{ value: 'two' }])
   })
   it('removes the given regex', function () {
     const result = removeExcludedFiles(
       [new AbsoluteFilePath('one'), new AbsoluteFilePath('two')],
       'on.'
     )
-    expect(result).to.eql(['two'])
+    expect(result).to.eql([{ value: 'two' }])
   })
   it('removes the given regexes', function () {
     const result = removeExcludedFiles(
@@ -39,11 +39,11 @@ describe('removeExcludedFiles', function () {
       ],
       ['on.', 'thr*']
     )
-    expect(result).to.eql(['two'])
+    expect(result).to.eql([{ value: 'two' }])
   })
   it('does not remove things if no excludes are given', function () {
     const result = removeExcludedFiles([new AbsoluteFilePath('one')], [])
-    expect(result).to.eql(['one'])
+    expect(result).to.eql([{ value: 'one' }])
   })
   it('automatically ignores node_modules', function () {
     const result = removeExcludedFiles(

@@ -11,10 +11,9 @@ describe('AstNodeList', function () {
     it('adds the nodes in the given list', function () {
       const list1 = AstNodeList.scaffold({ type: 'node1' })
       const list2 = AstNodeList.scaffold({ type: 'node2' })
-      list1.concat(list2)
-      expect(list1).to.have.length(2)
-      expect(list1[0].type).to.equal('node1')
-      expect(list1[1].type).to.equal('node2')
+      // $FlowFixMe
+      const result = list1.concat(list2)
+      expect(result.map(node => node.type)).to.eql(['node1', 'node2'])
     })
   })
 

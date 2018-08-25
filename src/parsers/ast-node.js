@@ -54,7 +54,7 @@ module.exports = class AstNode {
     }
     return new AstNode({
       type: data.type || 'type',
-      tag: data.tag || 'tag',
+      tag: data.tag != null ? data.tag : 'tag',
       file: data.file || new AbsoluteFilePath('file'),
       line: data.line || 1,
       content: data.content || '',

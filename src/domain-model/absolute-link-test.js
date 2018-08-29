@@ -3,6 +3,7 @@
 
 const AbsoluteLink = require('./absolute-link.js')
 const { expect } = require('chai')
+const Publications = require('../configuration/publications.js')
 const RelativeLink = require('./relative-link.js')
 
 describe('AbsoluteLink', function () {
@@ -106,6 +107,60 @@ describe('AbsoluteLink', function () {
     it('returns FALSE if the link does not point to a directory', function () {
       const link = new AbsoluteLink('/foo/bar.md')
       expect(link.isLinkToDirectory()).to.be.false
+    })
+  })
+
+  describe('localize', function () {
+    it('returns the local file path of this link', function () {
+      const link = new AbsoluteLink('/one/two.png')
+      const publications = new Publications()
+      const actual = link.localize(publications, '')
+      expect(actual.value).to.equal('one/two.png')
+    })
+    it('url-decodes the file path', function () {
+      const link = new AbsoluteLink('/one%20two.png')
+      const publications = new Publications()
+      const actual = link.localize(publications, '')
+      expect(actual.value).to.equal('one two.png')
+    })
+    it('applies the publication', function () {
+      const link = new AbsoluteLink('/blog/two.html')
+      const publications = Publications.fromJSON([
+        {
+          localPath: '/content/posts',
+          publicPath: '/blog',
+          publicExtension: 'html'
+        }
+      ])
+      const actual = link.localize(publications, '')
+      expect(actual.value).to.equal('content/posts/two.md')
+    })
+    it('removes the anchor in publications', function () {
+      const link = new AbsoluteLink('/blog/two.html#hello')
+      const publications = Publications.fromJSON([
+        {
+          localPath: '/content/posts',
+          publicPath: '/blog',
+          publicExtension: 'html'
+        }
+      ])
+      const actual = link.localize(publications, '')
+      expect(actual.value).to.equal('content/posts/two.md')
+    })
+    it('removes the anchor in non-published links', function () {
+      const link = new AbsoluteLink('/one/two.md#hello')
+      const publications = new Publications()
+      const actual = link.localize(publications, '')
+      expect(actual.value).to.equal('one/two.md')
+    })
+  })
+
+  describe('urlDecoded', function () {
+    it('returns the link url decoded', function () {
+      const link = new AbsoluteLink('/one%20two.png')
+      const publications = new Publications()
+      const actual = link.localize(publications, '')
+      expect(actual.value).to.equal('one two.png')
     })
   })
 

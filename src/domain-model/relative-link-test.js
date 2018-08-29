@@ -17,7 +17,7 @@ describe('RelativeLink', function () {
 
     it('converts the relative link an absolute link with publications', function () {
       const publications = Publications.fromJSON([
-        { filePath: '/content', urlPath: '/', urlExtension: '' }
+        { localPath: '/content', publicPath: '/', publicExtension: '' }
       ])
       const link = new RelativeLink('new.md')
       const containingFile = new AbsoluteFilePath('/content/one/two.md')

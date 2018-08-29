@@ -11,8 +11,8 @@ const unixify = require('../helpers/unifixy.js')
 class UnknownLink {
   value: string
 
-  constructor (urlPath: string) {
-    this.value = removeDoubleSlash(unixify(urlPath))
+  constructor (publicPath: string) {
+    this.value = removeDoubleSlash(unixify(publicPath))
   }
 
   absolutify (

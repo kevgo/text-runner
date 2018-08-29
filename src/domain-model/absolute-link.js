@@ -16,8 +16,8 @@ const unixify = require('../helpers/unifixy.js')
 module.exports = class AbsoluteLink {
   value: string
 
-  constructor (urlPath: string) {
-    this.value = addLeadingSlash(removeDoubleSlash(unixify(urlPath)))
+  constructor (publicPath: string) {
+    this.value = addLeadingSlash(removeDoubleSlash(unixify(publicPath)))
   }
 
   // Returns the anchor part of this link
@@ -58,8 +58,8 @@ module.exports = class AbsoluteLink {
   localize (publications: Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)
     let result = publication
-      ? publication.resolve(this, defaultFile)
-      : new AbsoluteFilePath(this.value)
+      ? publication.resolve(this.urlDecoded(), defaultFile)
+      : new AbsoluteFilePath(this.urlDecoded().withoutAnchor().value)
 
     // append the default file
     if (result.extName() === '' && defaultFile) {
@@ -73,6 +73,10 @@ module.exports = class AbsoluteLink {
   rebase (oldPath: string, newPath: string): AbsoluteLink {
     const re = new RegExp('^' + oldPath)
     return new AbsoluteLink(this.value.replace(re, newPath))
+  }
+
+  urlDecoded (): AbsoluteLink {
+    return new AbsoluteLink(decodeURI(this.value))
   }
 
   // Returns a link that contains the given anchor

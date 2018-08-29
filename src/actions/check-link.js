@@ -166,7 +166,7 @@ async function checkLinkToAnchorInOtherFile (
   const filePath = absoluteLink.localize(c.publications, c.defaultFile)
   const anchorName = absoluteLink.anchor()
 
-  if (linkTargets.hasFile(filePath)) {
+  if (!linkTargets.hasFile(filePath)) {
     throw new Error(
       `link to anchor #${cyan(anchorName)} in non-existing file ${cyan(
         removeLeadingSlash(filePath.platformified())

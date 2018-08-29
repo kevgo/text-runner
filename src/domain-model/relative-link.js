@@ -9,8 +9,8 @@ const Publications = require('../configuration/publications.js')
 class RelativeLink {
   value: string
 
-  constructor (urlPath: string) {
-    this.value = urlPath
+  constructor (publicPath: string) {
+    this.value = publicPath
   }
 
   // Assuming this relative link is in the given file,
@@ -22,7 +22,7 @@ class RelativeLink {
   ): AbsoluteLink {
     const urlOfDir = containingFile
       .directory()
-      .urlPath(publications, defaultFile)
+      .publicPath(publications, defaultFile)
     return urlOfDir.append(this)
   }
 }

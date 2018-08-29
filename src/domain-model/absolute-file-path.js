@@ -3,13 +3,13 @@
 // NOTE: have to load the exports at the bottom of the file
 //       to avoid a circular dependency issue here
 
-// AbsoluteFilePath represents the full path
+// AbsoluteFilePath represents a complete path from the root directory
 // to a markdown file on the local file system.
 module.exports = class AbsoluteFilePath {
   value: string
 
   constructor (value: string) {
-    this.value = unixify(value)
+    this.value = removeLeadingSlash(unixify(value))
   }
 
   // Returns a new file path
@@ -46,7 +46,7 @@ module.exports = class AbsoluteFilePath {
   }
 
   // Returns the public link under which this file path is published
-  urlPath (publications: Publications, defaultFile: string): AbsoluteLink {
+  publicPath (publications: Publications, defaultFile: string): AbsoluteLink {
     const publication = publications.forFilePath(this)
     if (publication == null) return new AbsoluteLink(this.unixified())
     return publication.publish(this)
@@ -56,4 +56,5 @@ module.exports = class AbsoluteFilePath {
 const Publications = require('../configuration/publications.js')
 const AbsoluteLink = require('./absolute-link.js')
 const path = require('path')
+const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const unixify = require('../helpers/unifixy.js')

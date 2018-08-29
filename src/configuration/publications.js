@@ -9,7 +9,7 @@ class Publications extends Array<Publication> {
   static fromJSON (publicationsData: Array<Object>): Publications {
     const result = new Publications()
     for (const p of publicationsData) {
-      result.push(new Publication(p.filePath, p.urlPath, p.urlExtension))
+      result.push(new Publication(p.localPath, p.publicPath, p.publicExtension))
     }
     return result
   }
@@ -26,7 +26,7 @@ class Publications extends Array<Publication> {
 
   // Returns these publications, sorted by public path
   sorted (): Publications {
-    const sorted = this.sort((a, b) => (a.urlPath > b.urlPath ? -1 : 1))
+    const sorted = this.sort((a, b) => (a.publicPath > b.publicPath ? -1 : 1))
     return Publications.fromJSON(sorted)
   }
 }

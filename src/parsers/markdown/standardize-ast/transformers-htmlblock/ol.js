@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
@@ -13,7 +14,7 @@ const olRegex = /<ol([^>]*)>[\s\S]*<\/ol>/m
 module.exports = async function transformOl (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
@@ -27,9 +28,9 @@ module.exports = async function transformOl (
     content: '',
     attributes: parseHtmlAttributes(match[1])
   })
-  result.pushData(olNode)
+  result.pushNode(olNode)
   for (const li of xml.ol.li) {
-    result.pushData({
+    result.pushNode({
       type: 'list_item_open',
       tag: 'li',
       file,
@@ -38,7 +39,7 @@ module.exports = async function transformOl (
       attributes: li.$ || {}
     })
   }
-  result.pushData({
+  result.pushNode({
     type: 'ordered_list_close',
     tag: '/ol',
     file,

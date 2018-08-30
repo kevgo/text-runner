@@ -2,7 +2,7 @@
   {
     "type": "heading_open",
     "tag": "h2",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "Hello",
     "attributes": {}
@@ -18,7 +18,7 @@
   {
     "type": "heading_close",
     "tag": "/h2",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}

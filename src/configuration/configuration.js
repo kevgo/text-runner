@@ -1,20 +1,14 @@
 // @flow
 
+const Publications = require('./publications.js')
+
 const Formatter = require('../formatters/formatter.js')
-
-export type Mapping = {
-  localPath: string,
-  publicPath: string,
-  publicExtension: string
-}
-
-export type Publications = Array<Mapping>
 
 // Data structure for configuration values
 export type Configuration = {|
   actions: Object, // configuration for actions
   classPrefix: string, // the name of the attribute that denotes active blocks
-  defaultFile: string,  // the name of the default filename, set to '' if none is given
+  defaultFile: string, // the name of the default filename, set to '' if none is given
   exclude: string | string[], // list of names or regexes of files to exclude
   fileGlob: string, // glob of the files to test
   FormatterClass: typeof Formatter, // type of the Formatter class to use

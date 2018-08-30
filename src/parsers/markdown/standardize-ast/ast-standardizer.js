@@ -3,6 +3,7 @@
 import type { Transformer } from '../standardize-ast/transformer.js'
 import type { TransformerList } from '../standardize-ast/transformer-list.js'
 
+const AbsoluteFilePath = require('../../../domain-model/absolute-file-path.js')
 const AstNodeList = require('../../ast-node-list.js')
 const FormattingTracker = require('../helpers/formatting-tracker.js')
 const getHtmlBlockTag = require('../helpers/get-html-block-tag.js')
@@ -18,13 +19,13 @@ var htmlTagTransformers: TransformerList = loadTransformers('htmltag')
 // AstStandardizer converts the AST created by Remarkable
 // into the standardized AST used by TextRunner
 module.exports = class AstStandardizer {
-  filepath: string
+  filepath: AbsoluteFilePath
   formattingTracker: FormattingTracker
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
 
-  constructor (filepath: string) {
+  constructor (filepath: AbsoluteFilePath) {
     this.filepath = filepath
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
@@ -33,7 +34,6 @@ module.exports = class AstStandardizer {
 
   async standardize (ast: Object): Promise<AstNodeList> {
     for (let node of ast) {
-      // console.log(node)
       if (node.lines) this.line = Math.max(node.lines[0] + 1, this.line)
 
       if (node.children) {
@@ -47,7 +47,7 @@ module.exports = class AstStandardizer {
       if (processed) continue
       if (this.processHtmlTag(node)) continue
       if (this.processMdNode(node)) continue
-      alertUnknownNodeType(node, this.filepath, this.line)
+      alertUnknownNodeType(node, this.filepath.platformified(), this.line)
     }
     return this.result
   }
@@ -63,7 +63,7 @@ module.exports = class AstStandardizer {
     if (!transformer) {
       throw new UnprintedUserError(
         `Unknown HTML block: '${tagName}'`,
-        this.filepath,
+        this.filepath.platformified(),
         this.line
       )
     }
@@ -91,7 +91,7 @@ module.exports = class AstStandardizer {
     if (!transformer) {
       throw new UnprintedUserError(
         `Unknown HTML tag: '${tagName}'`,
-        this.filepath,
+        this.filepath.platformified(),
         this.line
       )
     }

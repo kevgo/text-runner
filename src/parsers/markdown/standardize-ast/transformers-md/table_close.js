@@ -1,16 +1,17 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
 module.exports = function (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  result.pushData({
+  result.pushNode({
     type: node.type,
     tag: '/table',
     file,
@@ -18,6 +19,6 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  openTags.popType('table_open', file, line)
+  openTags.popType('table_open', file.platformified(), line)
   return result
 }

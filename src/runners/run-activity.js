@@ -24,7 +24,7 @@ module.exports = async function runActivity (
   )
   const args: ActionArgs = {
     nodes: activity.nodes,
-    file: activity.file,
+    file: activity.file.platformified(),
     line: activity.line,
     configuration,
     formatter,

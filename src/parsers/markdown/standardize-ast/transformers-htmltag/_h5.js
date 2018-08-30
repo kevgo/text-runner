@@ -12,7 +12,11 @@ module.exports = function transformATag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popType('heading_open', file.platformified(), line)
+  const openingTag = openTags.popType(
+    'heading_open',
+    file.platformified(),
+    line
+  )
   const resultNode = new AstNode({
     type: 'heading_close',
     tag: '/h5',

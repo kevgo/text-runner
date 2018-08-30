@@ -12,7 +12,11 @@ module.exports = function transformSummaryTag (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popType('summary_open', file.platformified(), line)
+  const openingTag = openTags.popType(
+    'summary_open',
+    file.platformified(),
+    line
+  )
   const resultNode = new AstNode({
     type: 'summary_close',
     tag: '/summary',

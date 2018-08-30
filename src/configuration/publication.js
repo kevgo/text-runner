@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-use-before-define: 0 */
 
 const AbsoluteLink = require('../domain-model/absolute-link.js')
 const addLeadingDotUnlessEmpty = require('../helpers/add-leading-dot-unless-empty.js')

@@ -25,6 +25,7 @@ COMMANDS
   ${bold('help')}              shows this help screen
 
 OPTIONS
+  ${bold('--config')}          provide a custom configuration filename
   ${bold('--offline')}         don't check external links
 `
 }

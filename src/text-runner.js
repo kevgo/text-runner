@@ -2,9 +2,10 @@
 
 import type { CliArgTypes } from './cli/cli-arg-types.js'
 
-const { red } = require('chalk')
+const { cyan, red } = require('chalk')
 const fs = require('fs')
 const loadConfiguration = require('./configuration/load-configuration.js')
+const PrintedUserError = require('./errors/printed-user-error.js')
 
 const addCommand = require('./commands/add.js')
 const debugCommand = require('./commands/debug.js')
@@ -21,7 +22,10 @@ module.exports = async function (
 ): Promise<Array<Error>> {
   var configuration
   try {
-    configuration = loadConfiguration(configFileName(), cmdLineArgs)
+    configuration = loadConfiguration(
+      determineConfigFileName(cmdLineArgs.config),
+      cmdLineArgs
+    )
     const commandName = cmdLineArgs.command
     var errors
     switch (commandName) {
@@ -61,6 +65,13 @@ module.exports = async function (
   }
 }
 
-function configFileName (): string {
-  return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
+function determineConfigFileName (configFileName: ?string): string {
+  if (configFileName == null) {
+    return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
+  }
+  if (!fs.existsSync(configFileName)) {
+    console.log(red(`configuration file ${cyan(configFileName)} not found`))
+    throw new PrintedUserError()
+  }
+  return configFileName
 }

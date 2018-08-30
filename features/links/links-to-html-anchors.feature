@@ -159,17 +159,3 @@ Feature: links to HTML anchors
       | LINE     | 1                                      |
       | MESSAGE  | link to heading foo/bar baz.md#hello |
 
-  Scenario: link to an existing anchor in a file with spaces
-    Given my source code contains the file "1.md" with content:
-      """
-      A [working link to a heading](foo/bar baz.md#hello)
-      """
-    And my source code contains the file "foo/bar baz.md" with content:
-      """
-      ## Hello
-      """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                   |
-      | LINE     | 1                                      |
-      | MESSAGE  | link to heading foo/bar baz.md#hello |

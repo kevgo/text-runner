@@ -1,7 +1,11 @@
 # Configuration
 
-You can configure TextRunner via a configuration file.
-To create one, open a terminal,
+You can configure TextRunner via command-line options or a configuration file.
+
+
+## Creating a configuration file
+
+To scaffold a config file, open a terminal,
 go to the folder where you want to configure TextRunner, and run:
 
 <a textrun="run-console-command">
@@ -62,6 +66,16 @@ activityTypes:
 ````
 
 </a>
+
+
+## Using a custom configuration file
+
+By default Text-Runner uses a file `text-run.yml` as the configuration file.
+You can tell it to use another configuration file with the `--config` command-line switch:
+
+```
+$ text-run --config my-config.yml
+```
 
 <hr>
 

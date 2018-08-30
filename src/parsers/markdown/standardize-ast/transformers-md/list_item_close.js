@@ -11,7 +11,11 @@ module.exports = function (
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openNode = openTags.popType('list_item_open', file.platformified(), line)
+  const openNode = openTags.popType(
+    'list_item_open',
+    file.platformified(),
+    line
+  )
   result.pushNode({
     type: node.type,
     tag: '/li',

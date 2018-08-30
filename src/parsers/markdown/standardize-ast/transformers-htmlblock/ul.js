@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
@@ -13,7 +14,7 @@ const ulRegex = /<ul([^>]*)>[\s\S]*<\/ul>/m
 module.exports = async function transformUl (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
@@ -27,9 +28,9 @@ module.exports = async function transformUl (
     content: '',
     attributes: parseHtmlAttributes(match[1])
   })
-  result.pushData(ulNode)
+  result.pushNode(ulNode)
   for (const li of xml.ul.li) {
-    result.pushData({
+    result.pushNode({
       type: 'list_item_open',
       tag: 'li',
       file,
@@ -38,7 +39,7 @@ module.exports = async function transformUl (
       attributes: li.$ || {}
     })
   }
-  result.pushData({
+  result.pushNode({
     type: 'bullet_list_close',
     tag: '/ul',
     file,

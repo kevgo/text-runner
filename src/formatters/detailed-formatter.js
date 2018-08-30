@@ -11,9 +11,14 @@ class DetailedFormatter extends Formatter {
   error (errorMessage: string) {
     super.error(errorMessage)
     console.log(dim(this.output))
-    process.stdout.write(red(`${this.activity.file}:${this.activity.line} -- `))
+    process.stdout.write(
+      red(`${this.activity.file.platformified()}:${this.activity.line} -- `)
+    )
     console.log(errorMessage)
-    const filePath = path.join(this.sourceDir, this.activity.file)
+    const filePath = path.join(
+      this.sourceDir,
+      this.activity.file.platformified()
+    )
     printCodeFrame(console.log, filePath, this.activity.line)
   }
 
@@ -21,7 +26,11 @@ class DetailedFormatter extends Formatter {
     super.skip(message)
     if (this.output) console.log(dim(this.output))
     console.log(
-      cyan(`${this.activity.file}:${this.activity.line} -- ${message}`)
+      cyan(
+        `${this.activity.file.platformified()}:${
+          this.activity.line
+        } -- ${message}`
+      )
     )
   }
 
@@ -29,7 +38,11 @@ class DetailedFormatter extends Formatter {
     super.success()
     if (this.output) console.log(dim(this.output))
     console.log(
-      green(`${this.activity.file}:${this.activity.line} -- ${this.title}`)
+      green(
+        `${this.activity.file.platformified()}:${this.activity.line} -- ${
+          this.title
+        }`
+      )
     )
   }
 
@@ -38,7 +51,9 @@ class DetailedFormatter extends Formatter {
     if (this.output.trim() !== '') console.log(dim(this.output))
     console.log(
       magenta(
-        `${this.activity.file}:${this.activity.line} -- ${warningMessage}`
+        `${this.activity.file.platformified()}:${
+          this.activity.line
+        } -- ${warningMessage}`
       )
     )
   }

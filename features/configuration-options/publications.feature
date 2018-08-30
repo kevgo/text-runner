@@ -48,7 +48,7 @@ Feature: Folder Mapping
       Yo!
       """
     When running text-run
-    And it signals:
+    Then it signals:
       | FILENAME | 1.md                                  |
       | LINE     | 1                                     |
       | MESSAGE  | link to local file content/posts/3.md |
@@ -70,7 +70,7 @@ Feature: Folder Mapping
       # Welcome
       """
     When running text-run
-    And it signals:
+    Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
       | MESSAGE  | link to heading content/posts/3.md#welcome |
@@ -92,7 +92,7 @@ Feature: Folder Mapping
       Yo!
       """
     When running text-run
-    And it signals:
+    Then it signals:
       | FILENAME | 1.md                                  |
       | LINE     | 1                                     |
       | MESSAGE  | link to local file content/posts/3.md |
@@ -114,7 +114,7 @@ Feature: Folder Mapping
       # Welcome
       """
     When running text-run
-    And it signals:
+    Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
       | MESSAGE  | link to heading content/posts/3.md#welcome |

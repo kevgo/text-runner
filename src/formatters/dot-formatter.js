@@ -12,11 +12,13 @@ class DotFormatter extends Formatter {
     super.error(errorMessage)
     console.log()
     console.log(dim(this.output))
-    process.stdout.write(red(`${this.activity.file}:${this.activity.line} -- `))
+    process.stdout.write(
+      red(`${this.activity.file.platformified()}:${this.activity.line} -- `)
+    )
     console.log(errorMessage)
     printCodeFrame(
       console.log,
-      path.join(this.sourceDir, this.activity.file),
+      path.join(this.sourceDir, this.activity.file.platformified()),
       this.activity.line
     )
   }

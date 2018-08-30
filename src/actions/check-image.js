@@ -21,7 +21,7 @@ module.exports = async function (args: ActionArgs) {
     await checkRemoteImage(imagePath, args.formatter, args.configuration)
   } else {
     if (!imagePath.startsWith('/')) {
-      imagePath = path.join(path.dirname(node.file), imagePath)
+      imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
     }
     await checkLocalImage(imagePath, args.formatter, args.configuration)
   }

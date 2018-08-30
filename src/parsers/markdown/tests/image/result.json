@@ -2,7 +2,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "image",
     "tag": "img",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {
@@ -21,7 +21,7 @@
   {
     "type": "paragraph_close",
     "tag": "/p",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}

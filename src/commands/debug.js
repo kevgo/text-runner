@@ -3,7 +3,7 @@
 import type { Configuration } from '../configuration/configuration.js'
 
 const AstNode = require('../parsers/ast-node.js')
-
+const AstNodeList = require('../parsers/ast-node-list.js')
 const extractActivities = require('../activity-list/extract-activities.js')
 const extractImagesAndLinks = require('../activity-list/extract-images-and-links.js')
 const findLinkTargets = require('../link-targets/find-link-targets.js')
@@ -15,10 +15,16 @@ async function debugCommand (config: Configuration): Promise<Array<Error>> {
   if (filenames.length === 0) return []
 
   console.log('AST NODES:')
-  const ASTs = await Promise.all(filenames.map(readAndParseFile))
+  const ASTs: Array<AstNodeList> = await Promise.all(
+    filenames.map(readAndParseFile)
+  )
   for (const AST of ASTs) {
     for (const node of AST) {
-      console.log(`${node.file}:${node.line}  ${node.type} ${showAttr(node)}`)
+      console.log(
+        `${node.file.platformified()}:${node.line}  ${node.type} ${showAttr(
+          node
+        )}`
+      )
     }
   }
 
@@ -38,7 +44,9 @@ async function debugCommand (config: Configuration): Promise<Array<Error>> {
     console.log('(none)')
   } else {
     for (const activity of activities) {
-      console.log(`${activity.file}:${activity.line}  ${activity.type}`)
+      console.log(
+        `${activity.file.platformified()}:${activity.line}  ${activity.type}`
+      )
     }
   }
 

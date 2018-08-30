@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
@@ -10,7 +11,7 @@ const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 module.exports = async function transformBlockquote (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
@@ -23,6 +24,6 @@ module.exports = async function transformBlockquote (
     content: blockquoteMatch[2],
     attributes: parseHtmlAttributes(blockquoteMatch[1])
   })
-  result.pushData(resultNode)
+  result.pushNode(resultNode)
   return result
 }

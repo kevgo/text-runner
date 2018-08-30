@@ -7,8 +7,7 @@ const camelCase = require('just-camel-case')
 const DetailedFormatter = require('../formatters/detailed-formatter.js')
 const getFormatterClass = require('./get-formatter-class.js')
 const debug = require('debug')('textrun:configuration')
-const sortPublications = require('../helpers/sort-publications.js')
-const standardizePublications = require('../helpers/standardize-publications.js')
+const Publications = require('./publications.js')
 const YAML = require('yamljs')
 
 const defaultValues: Configuration = {
@@ -18,7 +17,7 @@ const defaultValues: Configuration = {
   exclude: [],
   fileGlob: '**/*.md',
   keepTmp: false,
-  publications: [],
+  publications: new Publications(),
   FormatterClass: DetailedFormatter,
   offline: false,
   sourceDir: process.cwd(),
@@ -62,7 +61,7 @@ module.exports = function loadConfiguration (
       defaultValues.FormatterClass
     ),
     publications:
-      standardizePublications(sortPublications(fileData.publications)) ||
+      Publications.fromJSON(fileData.publications || []).sorted() ||
       defaultValues.publications,
     offline: String(get('offline')) === 'true',
     sourceDir: get('source-dir'),

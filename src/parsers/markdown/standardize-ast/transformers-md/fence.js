@@ -1,16 +1,17 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
 
 module.exports = function (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  result.pushData({
+  result.pushNode({
     type: 'paragraph_open',
     tag: 'p',
     file: file,
@@ -18,7 +19,7 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  result.pushData({
+  result.pushNode({
     type: 'fence_open',
     tag: 'pre',
     file: file,
@@ -26,7 +27,7 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  result.pushData({
+  result.pushNode({
     type: 'text',
     tag: '',
     file: file,
@@ -34,7 +35,7 @@ module.exports = function (
     content: node.content,
     attributes: {}
   })
-  result.pushData({
+  result.pushNode({
     type: 'fence_close',
     tag: '/pre',
     file: file,
@@ -42,7 +43,7 @@ module.exports = function (
     content: '',
     attributes: {}
   })
-  result.pushData({
+  result.pushNode({
     type: 'paragraph_close',
     tag: '/p',
     file: file,

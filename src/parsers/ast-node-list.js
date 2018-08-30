@@ -12,7 +12,7 @@ module.exports = class AstNodeList extends Array<AstNode> {
     if (nodes.length > 1) {
       throw new UnprintedUserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join('/')}'`,
-        nodes[0].file,
+        nodes[0].file.platformified(),
         nodes[0].line
       )
     }
@@ -20,7 +20,11 @@ module.exports = class AstNodeList extends Array<AstNode> {
       var msg = `Found no nodes of type '${nodeTypes.join('/')}'. `
       msg += 'The node types in this list are: '
       msg += this.nodeTypes().join(', ')
-      throw new UnprintedUserError(msg, this[0].file, this[0].line)
+      throw new UnprintedUserError(
+        msg,
+        this[0].file.platformified(),
+        this[0].line
+      )
     }
     return nodes[0]
   }
@@ -31,7 +35,7 @@ module.exports = class AstNodeList extends Array<AstNode> {
     if (index === -1) {
       throw new UnprintedUserError(
         `node '${openingNode.type}' not found in list`,
-        openingNode.file,
+        openingNode.file.platformified(),
         openingNode.line
       )
     }
@@ -68,20 +72,16 @@ module.exports = class AstNodeList extends Array<AstNode> {
     return this.map(node => node.type)
   }
 
-  pushData (data: {
-  type: string,
-  tag: string,
-  file: string,
-  line: number,
-  content: string,
-  attributes: { [string]: string }
-  }) {
-    this.push(new AstNode(data))
+  // Adds a new AstNode with the given data to this list
+  pushNode (data: Object) {
+    this.push(AstNode.scaffold(data))
   }
 
-  // Adds a new AstNode containing the given data to this list
-  scaffold (data: Object = {}) {
-    this.push(AstNode.scaffold(data))
+  // Creates a new AstNodeList containing the given data
+  static scaffold (data: Object = {}): AstNodeList {
+    const result = new AstNodeList()
+    result.push(AstNode.scaffold(data))
+    return result
   }
 
   text (): string {

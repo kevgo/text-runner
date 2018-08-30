@@ -18,7 +18,7 @@ module.exports = class OpenTagTracker {
         `this active block is nested inside another active block of type ${cyan(
           existingNode.attributes['textrun']
         )} on line ${cyan(existingNode.line.toString())}`,
-        node.file,
+        node.file.platformified(),
         node.line
       )
     }

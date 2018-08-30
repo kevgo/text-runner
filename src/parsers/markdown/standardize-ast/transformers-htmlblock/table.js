@@ -1,5 +1,6 @@
 // @flow
 
+const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
 const AstNode = require('../../../ast-node.js')
 const AstNodeList = require('../../../ast-node-list.js')
 const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
@@ -8,10 +9,10 @@ const util = require('util')
 const xml2js = require('xml2js')
 const xml2jsp = util.promisify(xml2js.parseString)
 
-module.exports = async function transformUl (
+module.exports = async function transformTable (
   node: Object,
   openTags: OpenTagTracker,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
@@ -23,7 +24,7 @@ module.exports = async function transformUl (
     var errorLine = line
     if (lineMatch) errorLine += parseInt(lineMatch[1])
     const message = e.message.split('\n')[0]
-    throw new UnprintedUserError(message, file, errorLine)
+    throw new UnprintedUserError(message, file.platformified(), errorLine)
   }
   const tableNode = new AstNode({
     type: 'table_open',
@@ -33,10 +34,10 @@ module.exports = async function transformUl (
     content: '',
     attributes: xml.table.$ || {}
   })
-  result.pushData(tableNode)
+  result.pushNode(tableNode)
   if (xml.table.tr) parseRows(xml.table.tr, result, file, line)
   if (xml.table.thead) {
-    result.pushData({
+    result.pushNode({
       type: 'thead_open',
       tag: 'thead',
       file,
@@ -45,7 +46,7 @@ module.exports = async function transformUl (
       attributes: xml.table.thead.$ || {}
     })
     parseRows(xml.table.thead[0].tr, result, file, line)
-    result.pushData({
+    result.pushNode({
       type: 'thead_close',
       tag: '/thead',
       file,
@@ -55,7 +56,7 @@ module.exports = async function transformUl (
     })
   }
   if (xml.table.tbody) {
-    result.pushData({
+    result.pushNode({
       type: 'tbody_open',
       tag: 'tbody',
       file,
@@ -64,7 +65,7 @@ module.exports = async function transformUl (
       attributes: xml.table.tbody.$ || {}
     })
     parseRows(xml.table.tbody[0].tr, result, file, line)
-    result.pushData({
+    result.pushNode({
       type: 'tbody_close',
       tag: '/tbody',
       file,
@@ -73,7 +74,7 @@ module.exports = async function transformUl (
       attributes: xml.table.tbody.$ || {}
     })
   }
-  result.pushData({
+  result.pushNode({
     type: 'table_close',
     tag: '/table',
     file,
@@ -87,11 +88,11 @@ module.exports = async function transformUl (
 function parseRows (
   block: Object,
   result: AstNodeList,
-  file: string,
+  file: AbsoluteFilePath,
   line: number
 ) {
   for (const row of block) {
-    result.pushData({
+    result.pushNode({
       type: 'table_row_open',
       tag: 'tr',
       file,
@@ -101,7 +102,7 @@ function parseRows (
     })
 
     for (const th of row.th || []) {
-      result.pushData({
+      result.pushNode({
         type: 'table_heading',
         tag: 'th',
         file,
@@ -111,7 +112,7 @@ function parseRows (
       })
     }
     for (const td of row.td || []) {
-      result.pushData({
+      result.pushNode({
         type: 'table_cell',
         tag: 'td',
         file,
@@ -120,7 +121,7 @@ function parseRows (
         attributes: td.$ || {}
       })
     }
-    result.pushData({
+    result.pushNode({
       type: 'table_row_close',
       tag: '/tr',
       file,

@@ -2,7 +2,7 @@
 
 import type { LinkTarget } from './link-target.js'
 
-const addLeadingSlash = require('../helpers/add-leading-slash.js')
+const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
 const AstNode = require('../parsers/ast-node.js')
 const AstNodeList = require('../parsers/ast-node-list.js')
 const kebabCase = require('just-kebab-case')
@@ -16,8 +16,8 @@ module.exports = class LinkTargetList {
 
   addNodeList (nodeList: AstNodeList) {
     for (const node of nodeList) {
-      const slashedFile = addLeadingSlash(node.file)
-      this.targets[slashedFile] = this.targets[slashedFile] || []
+      const key = node.file.platformified()
+      this.targets[key] = this.targets[key] || []
       if (node.type === 'anchor_open') {
         this.addAnchor(node)
       } else if (node.type === 'heading_open') {
@@ -38,10 +38,39 @@ module.exports = class LinkTargetList {
     this.addLinkTarget(node.file, 'heading', content)
   }
 
-  addLinkTarget (filepath: string, type: string, name: string) {
-    this.targets[addLeadingSlash(filepath)].push({
+  addLinkTarget (filePath: AbsoluteFilePath, type: string, name: string) {
+    const key = filePath.platformified()
+    this.targets[key] = this.targets[key] || []
+    this.targets[key].push({
       type,
       name: kebabCase(name.toLowerCase())
     })
+  }
+
+  // Returns the type of the given anchor
+  // with the given name in the given file
+  anchorType (filePath: AbsoluteFilePath, name: string): string {
+    const anchorsForFile = this.targets[filePath.platformified()]
+    if (!anchorsForFile) {
+      throw new Error(`no anchors in file ${filePath.platformified()}`)
+    }
+    const anchor = anchorsForFile.find(linkTarget => linkTarget.name === name)
+    if (!anchor) {
+      throw new Error(
+        `no anchor '${name}' in file '${filePath.platformified()}'`
+      )
+    }
+    return anchor.type
+  }
+
+  hasAnchor (filePath: AbsoluteFilePath, name: string): boolean {
+    const fileList = this.targets[filePath.platformified()]
+    if (!fileList) return false
+    return fileList.some(linkTarget => linkTarget.name === name)
+  }
+
+  // Returns whether this link target list knows about the given file
+  hasFile (filePath: AbsoluteFilePath): boolean {
+    return this.targets[filePath.platformified()] != null
   }
 }

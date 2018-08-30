@@ -2,7 +2,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "heading_open",
     "tag": "h1",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {
@@ -20,7 +20,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "Hello",
     "attributes": {}
@@ -28,7 +28,7 @@
   {
     "type": "heading_close",
     "tag": "/h1",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {
@@ -38,7 +38,7 @@
   {
     "type": "paragraph_close",
     "tag": "/p",
-    "file": "input.md",
+    "file": {"value": "input.md"},
     "line": 1,
     "content": "",
     "attributes": {}

@@ -3,19 +3,19 @@
 import type { ActionArgs } from '../runners/action-args.js'
 import type { Configuration } from '../configuration/configuration.js'
 
-const addLeadingSlash = require('../helpers/add-leading-slash.js')
-const publicToLocalFilePath = require('../helpers/public-to-local-file-path.js')
+const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
 const { bold, cyan, magenta } = require('chalk')
-const isAbsolutePath = require('../helpers/is-absolute-path.js')
 const Formatter = require('../formatters/formatter.js')
 const fs = require('fs-extra')
+const isExternalLink = require('../helpers/is-external-link.js')
+const isLinkToAnchorInOtherFile = require('../helpers/is-link-to-anchor-in-other-file.js')
+const isLinkToAnchorInSameFile = require('../helpers/is-link-to-anchor-in-same-file.js')
+const isMailtoLink = require('../helpers/is-mailto-link.js')
 const LinkTargetList = require('../link-targets/link-target-list.js')
-const normalizePath = require('../helpers/normalize-path.js')
 const path = require('path')
-const relativeToAbsoluteLink = require('../helpers/relative-to-absolute-link.js')
 const removeLeadingSlash = require('../helpers/remove-leading-slash.js')
 const request = require('request-promise-native')
-const url = require('url')
+const UnknownLink = require('../domain-model/unknown-link.js')
 
 // Checks for broken hyperlinks
 module.exports = async function (args: ActionArgs) {
@@ -30,10 +30,11 @@ module.exports = async function (args: ActionArgs) {
   }
 
   args.formatter.name(`link to ${cyan(target)}`)
+  const filePath = new AbsoluteFilePath(args.file)
 
   if (isLinkToAnchorInSameFile(target)) {
     await checkLinkToAnchorInSameFile(
-      args.file,
+      filePath,
       target,
       args.linkTargets,
       args.formatter
@@ -43,7 +44,7 @@ module.exports = async function (args: ActionArgs) {
 
   if (isLinkToAnchorInOtherFile(target)) {
     await checkLinkToAnchorInOtherFile(
-      args.file,
+      filePath,
       target,
       args.linkTargets,
       args.formatter,
@@ -58,7 +59,7 @@ module.exports = async function (args: ActionArgs) {
   }
 
   await checkLinkToFilesystem(
-    args.file,
+    filePath,
     target,
     args.formatter,
     args.configuration
@@ -94,25 +95,19 @@ async function checkExternalLink (
 }
 
 async function checkLinkToFilesystem (
-  filename: string,
+  containingFile: AbsoluteFilePath,
   target: string,
   f: Formatter,
   c: Configuration
 ) {
-  // parse the link into the relative url
-  const relativeTargetUrl = decodeURI(target)
-
-  // determine the absolute url
-  const absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
-
-  // determine the local file path of the target
-  const localLinkFilePath = publicToLocalFilePath(
-    absoluteTargetUrl,
+  const unknownLink = new UnknownLink(decodeURI(target))
+  const absoluteLink = unknownLink.absolutify(
+    containingFile,
     c.publications,
     c.defaultFile
   )
-
-  const fullPath = normalizePath(path.join(c.sourceDir, localLinkFilePath))
+  const linkedFile = absoluteLink.localize(c.publications, c.defaultFile)
+  const fullPath = path.join(c.sourceDir, linkedFile.platformified())
 
   // We only check for directories if no defaultFile is set.
   // Otherwise links to folders point to the default file.
@@ -120,11 +115,7 @@ async function checkLinkToFilesystem (
     try {
       const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
-        f.name(
-          `link to local directory ${cyan(
-            removeLeadingSlash(localLinkFilePath)
-          )}`
-        )
+        f.name(`link to local directory ${cyan(linkedFile.platformified())}`)
         return
       }
     } catch (e) {
@@ -132,125 +123,70 @@ async function checkLinkToFilesystem (
     }
   }
 
-  f.name(`link to local file ${cyan(removeLeadingSlash(localLinkFilePath))}`)
+  f.name(`link to local file ${cyan(linkedFile.platformified())}`)
   try {
     await fs.stat(fullPath)
   } catch (err) {
     throw new Error(
-      `link to non-existing local file ${bold(
-        removeLeadingSlash(localLinkFilePath)
-      )}`
+      `link to non-existing local file ${bold(linkedFile.platformified())}`
     )
   }
 }
 
 async function checkLinkToAnchorInSameFile (
-  filename: string,
+  containingFile: AbsoluteFilePath,
   target: string,
   linkTargets: LinkTargetList,
   f: Formatter
 ) {
-  const anchorEntry = (
-    linkTargets.targets[addLeadingSlash(filename)] || []
-  ).filter(linkTarget => linkTarget.name === target.substr(1))[0]
-  if (!anchorEntry) {
+  const anchorName = target.substr(1)
+  if (!linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${bold(target)}`)
   }
-  if (anchorEntry.type === 'heading') {
+  if (linkTargets.anchorType(containingFile, anchorName) === 'heading') {
     f.name(`link to local heading ${cyan(target)}`)
   } else {
-    f.name(`link to #${cyan(anchorEntry.name)}`)
+    f.name(`link to #${cyan(anchorName)}`)
   }
 }
 
 async function checkLinkToAnchorInOtherFile (
-  filename: string,
+  containingFile: AbsoluteFilePath,
   target: string,
   linkTargets: LinkTargetList,
   f: Formatter,
   c: Configuration
 ) {
-  // parse the link into the relative url
-  let [relativeTargetUrl, anchor] = target.split('#')
-  relativeTargetUrl = decodeURI(relativeTargetUrl)
-
-  // determine the absolute url
-  let absoluteTargetUrl = determineAbsoluteUrl(relativeTargetUrl, filename, c)
-
-  // determine the local file path of the target
-  const localLinkFilePath = publicToLocalFilePath(
-    absoluteTargetUrl,
+  const link = new UnknownLink(target)
+  const absoluteLink = link.absolutify(
+    containingFile,
     c.publications,
     c.defaultFile
   )
+  const filePath = absoluteLink.localize(c.publications, c.defaultFile)
+  const anchorName = absoluteLink.anchor()
 
-  // ensure the local file exists
-  if (linkTargets.targets[localLinkFilePath] == null) {
+  if (!linkTargets.hasFile(filePath)) {
     throw new Error(
-      `link to anchor #${cyan(anchor)} in non-existing file ${cyan(
-        removeLeadingSlash(localLinkFilePath)
+      `link to anchor #${cyan(anchorName)} in non-existing file ${cyan(
+        removeLeadingSlash(filePath.platformified())
       )}`
     )
   }
 
-  // ensure the anchor exists in the file
-  const anchorEntry = (linkTargets.targets[localLinkFilePath] || []).filter(
-    linkTarget => linkTarget.name === anchor
-  )[0]
-  if (!anchorEntry) {
+  if (!linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
-      `link to non-existing anchor ${bold('#' + anchor)} in ${bold(
-        removeLeadingSlash(localLinkFilePath)
+      `link to non-existing anchor ${bold('#' + anchorName)} in ${bold(
+        filePath.platformified()
       )}`
     )
   }
 
-  // Signal anchor type to user
-  if (anchorEntry.type === 'heading') {
+  if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
     f.name(
-      `link to heading ${cyan(
-        removeLeadingSlash(localLinkFilePath) + '#' + anchor
-      )}`
+      `link to heading ${cyan(filePath.platformified() + '#' + anchorName)}`
     )
   } else {
-    f.name(
-      `link to ${cyan(removeLeadingSlash(localLinkFilePath))}#${cyan(anchor)}`
-    )
+    f.name(`link to ${cyan(filePath.platformified())}#${cyan(anchorName)}`)
   }
-}
-
-function determineAbsoluteUrl (
-  relativeUrl: string,
-  filename: string,
-  c: Configuration
-): string {
-  if (isAbsolutePath(relativeUrl)) return relativeUrl
-  return relativeToAbsoluteLink(
-    relativeUrl,
-    filename,
-    c.publications,
-    c.defaultFile
-  )
-}
-
-function isExternalLink (target: string): boolean {
-  return target.startsWith('//') || !!url.parse(target).protocol
-}
-
-function isLinkToAnchorInOtherFile (target: string): boolean {
-  if ((target.match(/#/g) || []).length !== 1) {
-    return false
-  } else if (/^https?:\/\//.test(target)) {
-    return false
-  } else {
-    return true
-  }
-}
-
-function isLinkToAnchorInSameFile (target: string): boolean {
-  return target.startsWith('#')
-}
-
-function isMailtoLink (target: string): boolean {
-  return target.startsWith('mailto:')
 }

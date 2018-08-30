@@ -1,21 +1,23 @@
 // @flow
 
+const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
+
 // A node in the standardized Markdown/HTML AST
 module.exports = class AstNode {
   type: string // markdown type of AST node
   tag: string // HTML type of AST node
-  file: string // the file in which this AstNode occurs
+  file: AbsoluteFilePath // the file in which this AstNode occurs
   line: number // the line in the file at which this AST node occurs
   content: string // textual content of this AST node
   attributes: { [string]: string } // the attributes of the node
 
   constructor (data: {
-    type: string,
-    tag: string,
-    file: string,
-    line: number,
-    content: string,
-    attributes: { [string]: string }
+  type: string,
+  tag: string,
+  file: AbsoluteFilePath,
+  line: number,
+  content: string,
+  attributes: { [string]: string }
   }) {
     this.type = data.type
     this.tag = data.tag
@@ -47,10 +49,13 @@ module.exports = class AstNode {
   }
 
   static scaffold (data: Object = {}): AstNode {
+    if (typeof data.file === 'string') {
+      data.file = new AbsoluteFilePath(data.file)
+    }
     return new AstNode({
       type: data.type || 'type',
-      tag: data.tag || 'tag',
-      file: data.file || 'file',
+      tag: data.tag != null ? data.tag : 'tag',
+      file: data.file || new AbsoluteFilePath('file'),
       line: data.line || 1,
       content: data.content || '',
       attributes: data.attributes || {}

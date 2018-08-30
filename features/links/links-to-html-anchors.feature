@@ -144,7 +144,7 @@ Feature: links to HTML anchors
       | MESSAGE  | link to heading 2.md#github |
 
 
-  Scenario: link to an existing anchor in a file with spaces
+  Scenario: link to an existing anchor in a file with URL-encoded spaces
     Given my source code contains the file "1.md" with content:
       """
       A [working link to a heading](foo/bar%20baz.md#hello)
@@ -158,3 +158,4 @@ Feature: links to HTML anchors
       | FILENAME | 1.md                                   |
       | LINE     | 1                                      |
       | MESSAGE  | link to heading foo/bar baz.md#hello |
+

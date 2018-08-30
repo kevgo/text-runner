@@ -41,10 +41,10 @@ function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
 function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
   if (activeNode) {
     throw new UnprintedUserError(
-      `${node.file}: block ${node.type || ''} (line ${
+      `${node.file.platformified()}: block ${node.type || ''} (line ${
         node.line
       }) is nested in block ${activeNode.type} (line ${activeNode.line})`,
-      node.file,
+      node.file.platformified(),
       node.line
     )
   }

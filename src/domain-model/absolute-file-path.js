@@ -1,4 +1,5 @@
 // @flow
+/* eslint no-use-before-define: 0 */
 
 // NOTE: have to load the exports at the bottom of the file
 //       to avoid a circular dependency issue here

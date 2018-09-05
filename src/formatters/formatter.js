@@ -24,7 +24,7 @@ class Formatter {
   // TODO: remove this?
   warned: boolean
 
-  constructor (
+  constructor(
     activity: Activity,
     sourceDir: string,
     statsCounter: StatsCounter
@@ -40,30 +40,30 @@ class Formatter {
     this.warned = false
   }
 
-  error (errorMessage: string) {
+  error(errorMessage: string) {
     this.statsCounter.error()
   }
 
-  log (text: string | Buffer): boolean {
+  log(text: string | Buffer): boolean {
     this.output += text.toString()
     return false
   }
 
-  skip (message: string) {
+  skip(message: string) {
     this.skipped = true
     this.statsCounter.skip()
   }
 
-  success () {
+  success() {
     this.statsCounter.success()
   }
 
   // allows the user to set a new name for this step
-  name (newTitle: string) {
+  name(newTitle: string) {
     this.title = newTitle
   }
 
-  warning (warningMessage: string) {
+  warning(warningMessage: string) {
     this.warned = true
     this.statsCounter.warning()
   }

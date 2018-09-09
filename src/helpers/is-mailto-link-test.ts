@@ -1,0 +1,14 @@
+import isMailtoLink from './is-mailto-link.js'
+import { expect } from 'chai'
+
+describe('isMailtoLink', function() {
+  const testData = [
+    ['mailto:jean-luc.picard@starfleet.gov', true],
+    ['foo', false]
+  ]
+  for (const [link, expected] of testData) {
+    it(link, function() {
+      expect(isMailtoLink(link)).to.equal(expected)
+    })
+  }
+})

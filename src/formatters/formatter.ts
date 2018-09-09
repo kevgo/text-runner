@@ -1,17 +1,15 @@
-// @flow
+import Activity from '../activity-list/activity'
+import WriteStream from 'observable-process'
 
-import type { Activity } from '../activity-list/activity.js'
-import type { WriteStream } from 'observable-process'
-
-const humanize = require('humanize-string')
-const StatsCounter = require('../runners/stats-counter.js')
+import humanize from 'humanize-string'
+import StatsCounter from '../runners/stats-counter'
 
 type Console = {
   log(text: string): void
 }
 
 // Base class for formatters
-class Formatter {
+export default class Formatter {
   activity: Activity
   console: Console
   sourceDir: string
@@ -24,7 +22,7 @@ class Formatter {
   // TODO: remove this?
   warned: boolean
 
-  constructor (
+  constructor(
     activity: Activity,
     sourceDir: string,
     statsCounter: StatsCounter
@@ -40,33 +38,31 @@ class Formatter {
     this.warned = false
   }
 
-  error (errorMessage: string) {
+  error(errorMessage: string) {
     this.statsCounter.error()
   }
 
-  log (text: string | Buffer): boolean {
+  log(text: string | Buffer): boolean {
     this.output += text.toString()
     return false
   }
 
-  skip (message: string) {
+  skip(message: string) {
     this.skipped = true
     this.statsCounter.skip()
   }
 
-  success () {
+  success() {
     this.statsCounter.success()
   }
 
   // allows the user to set a new name for this step
-  name (newTitle: string) {
+  name(newTitle: string) {
     this.title = newTitle
   }
 
-  warning (warningMessage: string) {
+  warning(warningMessage: string) {
     this.warned = true
     this.statsCounter.warning()
   }
 }
-
-module.exports = Formatter

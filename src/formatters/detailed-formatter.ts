@@ -1,18 +1,18 @@
-// @flow
+import chalk from 'chalk'
+import Formatter from './formatter'
+import path from 'path'
+import printCodeFrame from '../helpers/print-code-frame'
 
-const { cyan, dim, green, magenta, red } = require('chalk')
-const Formatter = require('./formatter')
-const path = require('path')
-const printCodeFrame = require('../helpers/print-code-frame')
-
-class DetailedFormatter extends Formatter {
+export default class DetailedFormatter extends Formatter {
   // A detailed formatter, prints output before the step name
 
-  error (errorMessage: string) {
+  error(errorMessage: string) {
     super.error(errorMessage)
-    console.log(dim(this.output))
+    console.log(chalk.dim(this.output))
     process.stdout.write(
-      red(`${this.activity.file.platformified()}:${this.activity.line} -- `)
+      chalk.red(
+        `${this.activity.file.platformified()}:${this.activity.line} -- `
+      )
     )
     console.log(errorMessage)
     const filePath = path.join(
@@ -22,11 +22,11 @@ class DetailedFormatter extends Formatter {
     printCodeFrame(console.log, filePath, this.activity.line)
   }
 
-  skip (message: string) {
+  skip(message: string) {
     super.skip(message)
-    if (this.output) console.log(dim(this.output))
+    if (this.output) console.log(chalk.dim(this.output))
     console.log(
-      cyan(
+      chalk.cyan(
         `${this.activity.file.platformified()}:${
           this.activity.line
         } -- ${message}`
@@ -34,11 +34,11 @@ class DetailedFormatter extends Formatter {
     )
   }
 
-  success () {
+  success() {
     super.success()
-    if (this.output) console.log(dim(this.output))
+    if (this.output) console.log(chalk.dim(this.output))
     console.log(
-      green(
+      chalk.green(
         `${this.activity.file.platformified()}:${this.activity.line} -- ${
           this.title
         }`
@@ -46,11 +46,11 @@ class DetailedFormatter extends Formatter {
     )
   }
 
-  warning (warningMessage: string) {
+  warning(warningMessage: string) {
     super.warning(warningMessage)
-    if (this.output.trim() !== '') console.log(dim(this.output))
+    if (this.output.trim() !== '') console.log(chalk.dim(this.output))
     console.log(
-      magenta(
+      chalk.magenta(
         `${this.activity.file.platformified()}:${
           this.activity.line
         } -- ${warningMessage}`
@@ -58,5 +58,3 @@ class DetailedFormatter extends Formatter {
     )
   }
 }
-
-module.exports = DetailedFormatter

@@ -1,14 +1,12 @@
-// @flow
+import { ActivityList } from './activity-list.js'
 
-import type { ActivityList } from './activity-list.js'
-
-const AstNode = require('../parsers/ast-node.js')
-const AstNodeList = require('../parsers/ast-node-list.js')
-const kebabCase = require('just-kebab-case')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
+import AstNode from '../parsers/ast-node.js'
+import AstNodeList from '../parsers/ast-node-list.js'
+import kebabCase from 'just-kebab-case'
+import UnprintedUserError from '../errors/unprinted-user-error.js'
 
 // Returns all activities contained in the given collection of AstNodeLists
-module.exports = function (ASTs: AstNodeList[], prefix: string): ActivityList {
+export default function(ASTs: AstNodeList[], prefix: string): ActivityList {
   var result: ActivityList = []
   for (let AST of ASTs) {
     result = result.concat(extractActivities(AST, prefix))
@@ -17,9 +15,9 @@ module.exports = function (ASTs: AstNodeList[], prefix: string): ActivityList {
 }
 
 // Returns the activities contained in the given AstNodeList
-function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
+function extractActivities(AST: AstNodeList, prefix: string): ActivityList {
   const result: ActivityList = []
-  var activeNode: ?AstNode = null
+  var activeNode: AstNode | null = null
   for (let node of AST) {
     if (isActiveBlockTag(node, prefix)) {
       ensureNoNestedActiveNode(node, activeNode)
@@ -38,7 +36,7 @@ function extractActivities (AST: AstNodeList, prefix: string): ActivityList {
   return result
 }
 
-function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
+function ensureNoNestedActiveNode(node: AstNode, activeNode: AstNode | null) {
   if (activeNode) {
     throw new UnprintedUserError(
       `${node.file.platformified()}: block ${node.type || ''} (line ${
@@ -50,13 +48,13 @@ function ensureNoNestedActiveNode (node: AstNode, activeNode: ?AstNode) {
   }
 }
 
-function isActiveBlockTag (node: AstNode, classPrefix: string): boolean {
+function isActiveBlockTag(node: AstNode, classPrefix: string): boolean {
   return !!node.attributes[classPrefix] && !node.type.endsWith('_close')
 }
 
-function isActiveBlockEndTag (
+function isActiveBlockEndTag(
   node: AstNode,
-  activeNode: ?AstNode,
+  activeNode: AstNode | null,
   prefix: string
 ): boolean {
   if (!activeNode) return false

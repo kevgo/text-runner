@@ -1,11 +1,9 @@
-// @flow
+import AstNodeList from '../parsers/ast-node-list.js'
+import { expect } from 'chai'
+import extractImagesAndLinks from './extract-images-and-links.js'
 
-const AstNodeList = require('../parsers/ast-node-list.js')
-const { expect } = require('chai')
-const extractImagesAndLinks = require('./extract-images-and-links.js')
-
-describe('extractImagesAndLinks', function () {
-  it('extracts images', function () {
+describe('extractImagesAndLinks', function() {
+  it('extracts images', function() {
     const nodes = AstNodeList.scaffold({
       type: 'image',
       file: 'filename',
@@ -20,7 +18,7 @@ describe('extractImagesAndLinks', function () {
     expect(result[0].nodes[0]).to.equal(nodes[0])
   })
 
-  it('extracts links', function () {
+  it('extracts links', function() {
     const nodes = new AstNodeList()
     nodes.pushNode({ type: 'link_open', file: 'filename', line: 3 })
     nodes.pushNode({ type: 'text', file: 'filename', line: 3, content: 'foo' })

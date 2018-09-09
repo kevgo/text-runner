@@ -6,7 +6,7 @@ export default class UnprintedUserError extends UserError {
   filePath: string | null
   line: number | null
 
-  constructor(message: string, filePath: string | null, line: number | null) {
+  constructor(message: string, filePath?: string, line?: number) {
     super(message)
     this.filePath = filePath
     this.line = line

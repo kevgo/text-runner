@@ -1,11 +1,9 @@
-// @flow
+import DetailedFormatter from '../formatters/detailed-formatter.js'
+import DotFormatter from '../formatters/dot-formatter.js'
+import Formatter from '../formatters/formatter.js'
+import UnprintedUserError from '../errors/unprinted-user-error.js'
 
-const DetailedFormatter = require('../formatters/detailed-formatter.js')
-const DotFormatter = require('../formatters/dot-formatter.js')
-const Formatter = require('../formatters/formatter.js')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
-
-module.exports = function getFormatterClass (
+export default function getFormatterClass(
   name: string,
   def: typeof Formatter
 ): typeof Formatter {

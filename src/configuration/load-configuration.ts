@@ -1,14 +1,12 @@
-// @flow
+import  CliArgTypes  from '../cli/cli-arg-types.js'
+import  Configuration  from './configuration.js'
 
-import type { CliArgTypes } from '../cli/cli-arg-types.js'
-import type { Configuration } from './configuration.js'
-
-const camelCase = require('just-camel-case')
-const DetailedFormatter = require('../formatters/detailed-formatter.js')
-const getFormatterClass = require('./get-formatter-class.js')
-const debug = require('debug')('textrun:configuration')
-const Publications = require('./publications.js')
-const YAML = require('yamljs')
+import camelCase from 'just-camel-case'
+import DetailedFormatter from '../formatters/detailed-formatter.js'
+import getFormatterClass from './get-formatter-class.js'
+import debug from 'debug'('textrun:configuration')
+import Publications from './publications.js'
+import YAML from 'yamljs'
 
 const defaultValues: Configuration = {
   actions: {},
@@ -26,7 +24,7 @@ const defaultValues: Configuration = {
 }
 
 // Reads documentation and
-module.exports = function loadConfiguration (
+export default function loadConfiguration(
   configFilePath: string,
   constructorArgs: CliArgTypes
 ): Configuration {
@@ -38,7 +36,7 @@ module.exports = function loadConfiguration (
   }
   debug(`configuration file data: ${JSON.stringify(this.fileData)}`)
 
-  function get (attributeName: string): string {
+  function get(attributeName: string): string {
     const camelized = camelCase(attributeName)
     return (
       constructorArgs[attributeName] ||

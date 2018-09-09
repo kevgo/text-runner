@@ -1,8 +1,6 @@
-// @flow
+import fs from 'fs'
 
-const fs = require('fs')
-
-module.exports = function createConfiguration () {
+export default function createConfiguration() {
   fs.writeFileSync(
     './text-run.yml',
     `# white-list for files to test

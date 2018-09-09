@@ -1,11 +1,8 @@
-// @flow
-
-const Publications = require('./publications.js')
-
-const Formatter = require('../formatters/formatter.js')
+import Publications from './publications.js'
+import Formatter from '../formatters/formatter.js'
 
 // Data structure for configuration values
-export type Configuration = {|
+export type Configuration = {
   actions: Object, // configuration for actions
   classPrefix: string, // the name of the attribute that denotes active blocks
   defaultFile: string, // the name of the default filename, set to '' if none is given
@@ -18,4 +15,4 @@ export type Configuration = {|
   sourceDir: string, // the root directory of the source code to test
   useSystemTempDirectory: boolean, // whether to create the workspace in the system temp directory or locally
   workspace: string // the root directory of the workspace
-|}
+}

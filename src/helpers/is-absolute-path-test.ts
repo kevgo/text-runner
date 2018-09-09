@@ -1,4 +1,4 @@
-import isAbsolutePath from './is-absolute-path.js'
+import isAbsolutePath from './is-absolute-path'
 import { expect } from 'chai'
 
 describe('isAbsolutePath', function() {

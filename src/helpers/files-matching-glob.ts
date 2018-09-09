@@ -1,7 +1,7 @@
-import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
+import AbsoluteFilePath from '../domain-model/absolute-file-path'
 import glob from 'glob'
 
-module.exports = function(expression: string): AbsoluteFilePath[] {
+export default function(expression: string): AbsoluteFilePath[] {
   return glob
     .sync(expression)
     .sort()

@@ -1,4 +1,4 @@
-import isLinkToAnchorInOtherFile from './is-link-to-anchor-in-other-file.js'
+import isLinkToAnchorInOtherFile from './is-link-to-anchor-in-other-file'
 import { expect } from 'chai'
 
 describe('isLinkToAnchorInOtherFile', function() {

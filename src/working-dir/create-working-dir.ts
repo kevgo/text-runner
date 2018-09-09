@@ -1,22 +1,22 @@
-// @flow
+import debug from 'debug'
+import mkdirp from 'mkdirp'
+import path from 'path'
+import tmp from 'tmp'
+import UnprintedUserError from '../errors/unprinted-user-error.js'
 
-const debug = require('debug')('text-runner:working-dir')
-const mkdirp = require('mkdirp')
-const path = require('path')
-const tmp = require('tmp')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
+const d = debug('text-runner:working-dir')
 
 type workingDirSetting = string | boolean
 
 // Creates the temp directory to run the tests in
-module.exports = function createWorkingDir (configSetting: workingDirSetting) {
+export default function createWorkingDir(configSetting: workingDirSetting) {
   const workingDir = getWorkingDirPath(configSetting)
   debug(`using test directory: ${workingDir}`)
   mkdirp.sync(workingDir)
   return workingDir
 }
 
-function getWorkingDirPath (setting): string {
+function getWorkingDirPath(setting): string {
   if (typeof setting === 'string') {
     return setting
   } else if (setting === false) {

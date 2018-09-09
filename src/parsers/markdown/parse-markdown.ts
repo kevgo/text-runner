@@ -1,21 +1,16 @@
-// @flow
-
-const AbsoluteFilePath = require('../../domain-model/absolute-file-path.js')
-const AstNodeList = require('../ast-node-list.js')
-const AstStandardizer = require('./standardize-ast/ast-standardizer.js')
-// $FlowFixMe
-const Remarkable = require('remarkable')
+import AbsoluteFilePath from '../../domain-model/absolute-file-path'
+import AstNodeList from '../ast-node-list'
+import AstStandardizer from './standardize-ast/ast-standardizer'
+import Remarkable from 'remarkable'
 
 const markdownParser = new Remarkable('full', { html: true })
 
 // Parses Markdown files into an AstNode[]
-async function parseMarkdown (
+export default (async function parseMarkdown(
   markdownText: string,
   filepath: AbsoluteFilePath
 ): Promise<AstNodeList> {
   const raw = markdownParser.parse(markdownText, {})
   const astStandardizer = new AstStandardizer(filepath)
   return astStandardizer.standardize(raw)
-}
-
-module.exports = parseMarkdown
+})

@@ -1,12 +1,10 @@
-// @flow
+import AbsoluteFilePath from '../../domain-model/absolute-file-path'
+import parseMarkdown from './parse-markdown'
+import { expect } from 'chai'
+import fs from 'fs'
+import path from 'path'
 
-const AbsoluteFilePath = require('../../domain-model/absolute-file-path.js')
-const parseMarkdown = require('./parse-markdown.js')
-const { expect } = require('chai')
-const fs = require('fs')
-const path = require('path')
-
-describe('parseMarkdown', function () {
+describe('parseMarkdown', function() {
   const testCases = fs.readdirSync(path.join(__dirname, 'tests'))
   for (let testCase of testCases) {
     const testCaseDir = path.join(__dirname, 'tests', testCase)
@@ -18,7 +16,7 @@ describe('parseMarkdown', function () {
       if (inputFile !== 'input.md') {
         name += `-${path.basename(inputFile, '.md')}`
       }
-      it(name, async function () {
+      it(name, async function() {
         const input = fs.readFileSync(path.join(testCaseDir, inputFile))
         const expected = require(path.join(testCaseDir, 'result.json'))
         const actual = await parseMarkdown(

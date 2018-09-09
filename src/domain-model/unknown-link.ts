@@ -1,21 +1,19 @@
-// @flow
-
-const AbsoluteFilePath = require('./absolute-file-path.js')
-const AbsoluteLink = require('./absolute-link.js')
-const Publications = require('../configuration/publications.js')
-const RelativeLink = require('./relative-link.js')
-const removeDoubleSlash = require('../helpers/remove-double-slash.js')
-const unixify = require('../helpers/unifixy.js')
+import AbsoluteFilePath from './absolute-file-path'
+import AbsoluteLink from './absolute-link'
+import Publications from '../configuration/publications'
+import RelativeLink from './relative-link'
+import removeDoubleSlash from '../helpers/remove-double-slash'
+import unixify from '../helpers/unifixy'
 
 // A link that isn't known yet whether it is relative or absolute
-class UnknownLink {
+export default class UnknownLink {
   value: string
 
-  constructor (publicPath: string) {
+  constructor(publicPath: string) {
     this.value = removeDoubleSlash(unixify(publicPath))
   }
 
-  absolutify (
+  absolutify(
     containingFile: AbsoluteFilePath,
     publications: Publications,
     defaultFile: string
@@ -29,9 +27,7 @@ class UnknownLink {
   }
 
   // Returns whether this link is an absolute link
-  isAbsolute (): boolean {
+  isAbsolute(): boolean {
     return this.value.startsWith('/')
   }
 }
-
-module.exports = UnknownLink

@@ -1,14 +1,11 @@
-// @flow
-/* eslint no-unused-expressions: 0 */
+import AbsoluteFilePath from './absolute-file-path.js'
+import Publications from '../configuration/publications.js'
+import UnknownLink from './unknown-link.js'
+import { expect } from 'chai'
 
-const AbsoluteFilePath = require('./absolute-file-path.js')
-const Publications = require('../configuration/publications.js')
-const UnknownLink = require('./unknown-link.js')
-const { expect } = require('chai')
-
-describe('UnknownLink', function () {
-  describe('absolutify', function () {
-    it('returns the absolute version of the current relative link', function () {
+describe('UnknownLink', function() {
+  describe('absolutify', function() {
+    it('returns the absolute version of the current relative link', function() {
       const link = new UnknownLink('foo/bar.md')
       const containingFile = new AbsoluteFilePath('/dir/file.md')
       const publications = new Publications()
@@ -16,7 +13,7 @@ describe('UnknownLink', function () {
         '/dir/foo/bar.md'
       )
     })
-    it('returns the current absolute link', function () {
+    it('returns the current absolute link', function() {
       const link = new UnknownLink('/foo/bar.md')
       const containingFile = new AbsoluteFilePath('/dir/file.md')
       const publications = new Publications()
@@ -26,16 +23,16 @@ describe('UnknownLink', function () {
     })
   })
 
-  describe('isAbsoluteLink', function () {
-    it('returns TRUE if the link is absolute', function () {
+  describe('isAbsoluteLink', function() {
+    it('returns TRUE if the link is absolute', function() {
       const link = new UnknownLink('/foo/bar')
       expect(link.isAbsolute()).to.be.true
     })
-    it('returns FALSE if the link is relative', function () {
+    it('returns FALSE if the link is relative', function() {
       const link = new UnknownLink('foo/bar')
       expect(link.isAbsolute()).to.be.false
     })
-    it('returns FALSE if the link goes up', function () {
+    it('returns FALSE if the link goes up', function() {
       const link = new UnknownLink('../foo/bar')
       expect(link.isAbsolute()).to.be.false
     })

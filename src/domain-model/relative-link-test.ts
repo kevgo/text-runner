@@ -1,13 +1,11 @@
-// @flow
+import AbsoluteFilePath from './absolute-file-path.js'
+import Publications from '../configuration/publications.js'
+import RelativeLink from './relative-link.js'
+import { expect } from 'chai'
 
-const AbsoluteFilePath = require('./absolute-file-path.js')
-const Publications = require('../configuration/publications.js')
-const RelativeLink = require('./relative-link.js')
-const { expect } = require('chai')
-
-describe('RelativeLink', function () {
-  describe('absolutify', function () {
-    it('converts the relative link an absolute link without publications', function () {
+describe('RelativeLink', function() {
+  describe('absolutify', function() {
+    it('converts the relative link an absolute link without publications', function() {
       const publications = new Publications()
       const link = new RelativeLink('new.md')
       const containingFile = new AbsoluteFilePath('/one/two.md')
@@ -15,7 +13,7 @@ describe('RelativeLink', function () {
       expect(actual.value).to.equal('/one/new.md')
     })
 
-    it('converts the relative link an absolute link with publications', function () {
+    it('converts the relative link an absolute link with publications', function() {
       const publications = Publications.fromJSON([
         { localPath: '/content', publicPath: '/', publicExtension: '' }
       ])
@@ -25,7 +23,7 @@ describe('RelativeLink', function () {
       expect(actual.value).to.equal('/one/new.md')
     })
 
-    it('can go upwards', function () {
+    it('can go upwards', function() {
       const publications = new Publications()
       const link = new RelativeLink('../new.md')
       const containingFile = new AbsoluteFilePath('/one/two.md')

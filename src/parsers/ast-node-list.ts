@@ -1,13 +1,11 @@
-// @flow
+import AstNode from './ast-node'
+import UnprintedUserError from '../errors/unprinted-user-error'
 
-const AstNode = require('./ast-node.js')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
-
-module.exports = class AstNodeList extends Array<AstNode> {
+export default class AstNodeList extends Array<AstNode> {
   // Returns the AstNode matching any of the given types.
   // Only one result is expected,
   // multiple or zero matches cause an exception.
-  getNodeOfTypes (...nodeTypes: string[]): AstNode {
+  getNodeOfTypes(...nodeTypes: string[]): AstNode {
     const nodes = this.getNodesOfTypes(...nodeTypes)
     if (nodes.length > 1) {
       throw new UnprintedUserError(
@@ -29,7 +27,7 @@ module.exports = class AstNodeList extends Array<AstNode> {
     return nodes[0]
   }
 
-  getNodesFor (openingNode: AstNode): AstNodeList {
+  getNodesFor(openingNode: AstNode): AstNodeList {
     if (openingNode == null) throw new UnprintedUserError('null Node given')
     var index = this.indexOf(openingNode)
     if (index === -1) {
@@ -53,7 +51,7 @@ module.exports = class AstNodeList extends Array<AstNode> {
     return result
   }
 
-  getNodesOfTypes (...nodeTypes: string[]): AstNodeList {
+  getNodesOfTypes(...nodeTypes: string[]): AstNodeList {
     const result = new AstNodeList()
     for (const node of this.filter(node => nodeTypes.includes(node.type))) {
       result.push(node)
@@ -61,49 +59,49 @@ module.exports = class AstNodeList extends Array<AstNode> {
     return result
   }
 
-  hasNodeOfType (nodeType: string): boolean {
+  hasNodeOfType(nodeType: string): boolean {
     const types = [nodeType]
     types.push(nodeType + '_open')
     return this.some(node => types.includes(node.type))
   }
 
   // returns all node types encountered in this list
-  nodeTypes (): string[] {
+  nodeTypes(): string[] {
     return this.map(node => node.type)
   }
 
   // Adds a new AstNode with the given data to this list
-  pushNode (data: Object) {
+  pushNode(data: Object) {
     this.push(AstNode.scaffold(data))
   }
 
   // Creates a new AstNodeList containing the given data
-  static scaffold (data: Object = {}): AstNodeList {
+  static scaffold(data: Object = {}): AstNodeList {
     const result = new AstNodeList()
     result.push(AstNode.scaffold(data))
     return result
   }
 
-  text (): string {
+  text(): string {
     return this.reduce((acc, node) => acc + node.content, '')
   }
 
   // returns the textual content for the given node
-  textInNode (node: AstNode): string {
+  textInNode(node: AstNode): string {
     return this.getNodesFor(node).reduce((acc, node) => acc + node.content, '')
   }
 
   // Returns the text in the nodes of the given types.
   // Expects that exactly one matching node exists,
   // throws otherwise.
-  textInNodeOfType (...nodeTypes: string[]): string {
+  textInNodeOfType(...nodeTypes: string[]): string {
     for (const nodeType of nodeTypes) {
       if (!nodeType.endsWith('_open')) nodeTypes.push(nodeType + '_open')
     }
     return this.textInNode(this.getNodeOfTypes(...nodeTypes))
   }
 
-  textInNodesOfType (...nodeTypes: string[]): string[] {
+  textInNodesOfType(...nodeTypes: string[]): string[] {
     for (const nodeType of nodeTypes) {
       if (!nodeType.endsWith('_open')) nodeTypes.push(nodeType + '_open')
     }

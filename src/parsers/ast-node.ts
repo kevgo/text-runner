@@ -1,23 +1,21 @@
-// @flow
-
-const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
+import AbsoluteFilePath from '../domain-model/absolute-file-path'
 
 // A node in the standardized Markdown/HTML AST
-module.exports = class AstNode {
+export default class AstNode {
   type: string // markdown type of AST node
   tag: string // HTML type of AST node
   file: AbsoluteFilePath // the file in which this AstNode occurs
   line: number // the line in the file at which this AST node occurs
   content: string // textual content of this AST node
-  attributes: { [string]: string } // the attributes of the node
+  attributes: { [key: string]: string } // the attributes of the node
 
-  constructor (data: {
-  type: string,
-  tag: string,
-  file: AbsoluteFilePath,
-  line: number,
-  content: string,
-  attributes: { [string]: string }
+  constructor(data: {
+    type: string,
+    tag: string,
+    file: AbsoluteFilePath,
+    line: number,
+    content: string,
+    attributes: { [key: string]: string }
   }) {
     this.type = data.type
     this.tag = data.tag
@@ -28,27 +26,27 @@ module.exports = class AstNode {
   }
 
   // Returns the type of the corresponding ending node
-  endType (): string {
+  endType(): string {
     if (!this.isOpeningNode()) throw new Error('not an opening node')
     return this.type.replace('open', '') + 'close'
   }
 
-  htmlLinkTarget (): ?string {
+  htmlLinkTarget(): string | null {
     if (this.content == null) return null
     if (this.type !== 'htmltag') return null
     const matches = this.content.match(/<a[^>]*href="([^"]*)".*?>/)
     return matches ? matches[1] : null
   }
 
-  isOpeningNode (): boolean {
+  isOpeningNode(): boolean {
     return this.type.endsWith('_open')
   }
 
-  isClosingNode (): boolean {
+  isClosingNode(): boolean {
     return this.type.endsWith('_close')
   }
 
-  static scaffold (data: Object = {}): AstNode {
+  static scaffold(data: Object = {}): AstNode {
     if (typeof data.file === 'string') {
       data.file = new AbsoluteFilePath(data.file)
     }

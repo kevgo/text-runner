@@ -1,14 +1,11 @@
-// @flow
-/* eslint no-unused-expressions: 0 */
+import AstNode from './ast-node'
+import AstNodeList from './ast-node-list'
+import { expect } from 'chai'
+import UnprintedUserError from '../errors/unprinted-user-error'
 
-const AstNode = require('./ast-node.js')
-const AstNodeList = require('./ast-node-list.js')
-const { expect } = require('chai')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
-
-describe('AstNodeList', function () {
-  describe('concat', function () {
-    it('adds the nodes in the given list', function () {
+describe('AstNodeList', function() {
+  describe('concat', function() {
+    it('adds the nodes in the given list', function() {
       const list1 = AstNodeList.scaffold({ type: 'node1' })
       const list2 = AstNodeList.scaffold({ type: 'node2' })
       // $FlowFixMe
@@ -17,8 +14,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('getNodesFor', function () {
-    it('returns the nodes until the given opening node is closed', function () {
+  describe('getNodesFor', function() {
+    it('returns the nodes until the given opening node is closed', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'paragraph_open' })
       list.pushNode({ type: 'heading_open' })
@@ -29,7 +26,7 @@ describe('AstNodeList', function () {
       const types = result.map(node => node.type)
       expect(types).to.eql(['heading_open', 'text', 'heading_close'])
     })
-    it('returns the given non-opening node', function () {
+    it('returns the given non-opening node', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'paragraph_open' })
       list.pushNode({ type: 'strongtext', content: 'foo' })
@@ -40,8 +37,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('getNodeOfTypes', function () {
-    it('returns the node matching any of the given type', function () {
+  describe('getNodeOfTypes', function() {
+    it('returns the node matching any of the given type', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'one' })
       list.pushNode({ type: 'two' })
@@ -49,7 +46,7 @@ describe('AstNodeList', function () {
       const result = list.getNodeOfTypes('two', 'four')
       expect(result.type).to.equal('two')
     })
-    it('throws for multiple matches', function () {
+    it('throws for multiple matches', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'one' })
       list.pushNode({ type: 'two' })
@@ -57,15 +54,15 @@ describe('AstNodeList', function () {
         UnprintedUserError
       )
     })
-    it('throws for zero matches', function () {
+    it('throws for zero matches', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'one' })
       expect(() => list.getNodeOfTypes('two')).to.throw(UnprintedUserError)
     })
   })
 
-  describe('getNodesOfTypes', function () {
-    it('returns all nodes matching any of the given types', function () {
+  describe('getNodesOfTypes', function() {
+    it('returns all nodes matching any of the given types', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'one' })
       list.pushNode({ type: 'two' })
@@ -75,8 +72,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('textInNode', function () {
-    it('returns the textual content until the given node is closed', function () {
+  describe('textInNode', function() {
+    it('returns the textual content until the given node is closed', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'paragraph_open' })
       list.pushNode({ type: 'heading_open' })
@@ -89,14 +86,14 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('hasNodeOfType', function () {
-    it('returns true if the list contains the given node type', function () {
+  describe('hasNodeOfType', function() {
+    it('returns true if the list contains the given node type', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'paragraph_open' })
       list.pushNode({ type: 'paragraph_close' })
       expect(list.hasNodeOfType('paragraph')).to.be.true
     })
-    it('returns false if the list does not contain the given node type', function () {
+    it('returns false if the list does not contain the given node type', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'paragraph_open' })
       list.pushNode({ type: 'paragraph_close' })
@@ -104,8 +101,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('iterator', function () {
-    it('iterates the nodes', function () {
+  describe('iterator', function() {
+    it('iterates the nodes', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'node1' })
       list.pushNode({ type: 'node2' })
@@ -119,8 +116,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('nodeTypes', function () {
-    it('returns the node types in this list', function () {
+  describe('nodeTypes', function() {
+    it('returns the node types in this list', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'type1' })
       list.pushNode({ type: 'type2' })
@@ -128,8 +125,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('push', function () {
-    it('adds the given node to the internal list', function () {
+  describe('push', function() {
+    it('adds the given node to the internal list', function() {
       const list = new AstNodeList()
       const node = AstNode.scaffold()
       list.push(node)
@@ -138,8 +135,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('scaffold', function () {
-    it('adds a new node with the given attributes', function () {
+  describe('scaffold', function() {
+    it('adds a new node with the given attributes', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'heading_open' })
       list.pushNode({ type: 'text' })
@@ -149,8 +146,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('text', function () {
-    it('returns all the textual content of the list', function () {
+  describe('text', function() {
+    it('returns all the textual content of the list', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'code_open' })
       list.pushNode({ type: 'text', content: 'hello' })
@@ -160,8 +157,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('textInNodeOfType', function () {
-    it('works with the type name', function () {
+  describe('textInNodeOfType', function() {
+    it('works with the type name', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'code_open' })
       list.pushNode({ type: 'text', content: 'hello' })
@@ -169,7 +166,7 @@ describe('AstNodeList', function () {
       const result = list.textInNodeOfType('code')
       expect(result).to.equal('hello')
     })
-    it('works with the opening type name', function () {
+    it('works with the opening type name', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'code_open' })
       list.pushNode({ type: 'text', content: 'hello' })
@@ -177,7 +174,7 @@ describe('AstNodeList', function () {
       const result = list.textInNodeOfType('code_open')
       expect(result).to.equal('hello')
     })
-    it('allows to provide multiple possible matching nodes', function () {
+    it('allows to provide multiple possible matching nodes', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'code_open' })
       list.pushNode({ type: 'text', content: 'hello' })
@@ -185,7 +182,7 @@ describe('AstNodeList', function () {
       const result = list.textInNodeOfType('code', 'fence')
       expect(result).to.equal('hello')
     })
-    it('throws if multiple matching nodes exist', function () {
+    it('throws if multiple matching nodes exist', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'code_open' })
       list.pushNode({ type: 'text', content: 'hello' })
@@ -197,7 +194,7 @@ describe('AstNodeList', function () {
         UnprintedUserError
       )
     })
-    it('throws if no matching node exists', function () {
+    it('throws if no matching node exists', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'code_open' })
       list.pushNode({ type: 'text', content: 'hello' })
@@ -206,8 +203,8 @@ describe('AstNodeList', function () {
     })
   })
 
-  describe('textInNodesOfType', function () {
-    it('returns the text of all matching nodes', function () {
+  describe('textInNodesOfType', function() {
+    it('returns the text of all matching nodes', function() {
       const list = new AstNodeList()
       list.pushNode({ type: 'strongtext', content: 'foo' })
       list.pushNode({ type: 'strongtext', content: 'bar' })

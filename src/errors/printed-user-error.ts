@@ -1,7 +1,5 @@
-// @flow
-
-const UserError = require('./user-error.js')
+import UserError from './user-error.js'
 
 // Represents a UserError that has already been printed via the formatter.
 // When receiving it, it should not be printed again.
-module.exports = class PrintedUserError extends UserError {}
+export default class PrintedUserError extends UserError {}

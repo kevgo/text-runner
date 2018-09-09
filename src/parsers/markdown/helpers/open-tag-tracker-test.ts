@@ -1,21 +1,18 @@
-// @flow
-/* eslint no-unused-expressions: 0 */
+import AstNode from '../../ast-node'
+import OpenTagTracker from './open-tag-tracker'
+import { expect } from 'chai'
 
-const AstNode = require('../../ast-node.js')
-const OpenTagTracker = require('./open-tag-tracker.js')
-const { expect } = require('chai')
-
-describe('OpenTagTracker', function () {
-  beforeEach(function () {
+describe('OpenTagTracker', function() {
+  beforeEach(function() {
     this.openTags = new OpenTagTracker()
   })
 
-  describe('add', function () {
-    it('adds new tag types', function () {
+  describe('add', function() {
+    it('adds new tag types', function() {
       this.openTags.add(AstNode.scaffold())
     })
 
-    it('does not allow to add existing tag types', function () {
+    it('does not allow to add existing tag types', function() {
       const add = () => {
         this.openTags.add(AstNode.scaffold({ type: 'foo' }))
       }
@@ -23,8 +20,8 @@ describe('OpenTagTracker', function () {
     })
   })
 
-  describe('peek', function () {
-    it('returns the latest open tag', function () {
+  describe('peek', function() {
+    it('returns the latest open tag', function() {
       const node1 = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node1)
       const node2 = AstNode.scaffold({ type: 'bar', line: 3 })
@@ -34,14 +31,14 @@ describe('OpenTagTracker', function () {
     })
   })
 
-  describe('popType', function () {
-    it('returns the given open tag from the end', function () {
+  describe('popType', function() {
+    it('returns the given open tag from the end', function() {
       const node = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node)
       const result = this.openTags.popType('foo')
       expect(result).to.equal(node)
     })
-    it('returns the given open tag from close to the end', function () {
+    it('returns the given open tag from close to the end', function() {
       const node1 = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node1)
       const node2 = AstNode.scaffold({ type: 'bar', line: 3 })
@@ -52,7 +49,7 @@ describe('OpenTagTracker', function () {
       const types = this.openTags.nodes.map(node => node.type)
       expect(types).to.eql(['bar'])
     })
-    it('throws if the tag is not the expected type', function () {
+    it('throws if the tag is not the expected type', function() {
       const node = AstNode.scaffold({ type: 'foo', line: 3 })
       this.openTags.add(node)
       expect(() => this.openTags.popType('other')).to.throw(Error)

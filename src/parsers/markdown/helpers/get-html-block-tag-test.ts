@@ -1,11 +1,9 @@
-// @flow
+import AbsoluteFilePath from '../../../domain-model/absolute-file-path'
+import getHtmlBlockTag from './get-html-block-tag'
+import { expect } from 'chai'
 
-const AbsoluteFilePath = require('../../../domain-model/absolute-file-path.js')
-const getHtmlBlockTag = require('./get-html-block-tag.js')
-const { expect } = require('chai')
-
-describe('parseHtmlBlock', function () {
-  it('parses opening tags', function () {
+describe('parseHtmlBlock', function() {
+  it('parses opening tags', function() {
     const result = getHtmlBlockTag(
       '<blockquote textrun="HelloWorld">hello</blockquote>',
       new AbsoluteFilePath('file'),
@@ -14,7 +12,7 @@ describe('parseHtmlBlock', function () {
     expect(result).to.eql('blockquote')
   })
 
-  it('parses closing tags', function () {
+  it('parses closing tags', function() {
     const result = getHtmlBlockTag('</a>', new AbsoluteFilePath('file'), 0)
     expect(result).to.eql('/a')
   })

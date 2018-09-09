@@ -1,17 +1,15 @@
-// @flow
-
-const AstNode = require('../../ast-node.js')
+import AstNode from '../../ast-node'
 
 // FormattingTracker tracks formatting nodes
 // like 'em' and 'strong'
-module.exports = class FormattingTracker {
+export default class FormattingTracker {
   tags: string[]
 
-  constructor () {
+  constructor() {
     this.tags = []
   }
 
-  register (node: AstNode): boolean {
+  register(node: AstNode): boolean {
     var result = true
     if (node.type === 'em_open') this.open('emphasized')
     else if (node.type === 'em_close') this.close('emphasized')
@@ -21,15 +19,15 @@ module.exports = class FormattingTracker {
     return result
   }
 
-  open (tagName: string) {
+  open(tagName: string) {
     this.tags.push(tagName)
   }
 
-  close (tagName: string) {
+  close(tagName: string) {
     this.tags.splice(this.tags.indexOf('emphasized'), 1)
   }
 
-  toString (): string {
+  toString(): string {
     return this.tags.sort().join('')
   }
 }

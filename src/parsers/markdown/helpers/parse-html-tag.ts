@@ -1,15 +1,13 @@
-// @flow
-
-const parseHtmlAttributes = require('./parse-html-attributes.js')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
+import parseHtmlAttributes from './parse-html-attributes'
+import UnprintedUserError from '../../../errors/unprinted-user-error'
 
 const attrRE = /<(\/?\w+)\s*(.*)>/
 
-module.exports = function (
+export default function(
   html: string,
   filepath: string,
   line: number
-): [string, { [string]: string }] {
+): [string, { [key: string]: string }] {
   var matches = html.match(attrRE)
   if (!matches) {
     throw new UnprintedUserError(

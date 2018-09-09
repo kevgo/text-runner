@@ -1,11 +1,9 @@
-// @flow
-
-const AbsoluteFilePath = require('../../../domain-model/absolute-file-path.js')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
+import AbsoluteFilePath from '../../../domain-model/absolute-file-path'
+import UnprintedUserError from '../../../errors/unprinted-user-error'
 
 const tagNameRE = /^<(\/?\w+).*>/
 
-module.exports = function (
+export default function getHtmlBlockTag(
   html: string,
   file: AbsoluteFilePath,
   line: number

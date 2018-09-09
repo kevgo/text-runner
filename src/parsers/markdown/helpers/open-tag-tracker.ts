@@ -1,17 +1,15 @@
-// @flow
+import AstNode from '../../ast-node'
+import { cyan } from 'chalk'
+import UnprintedUserError from '../../../errors/unprinted-user-error'
 
-const AstNode = require('../../ast-node.js')
-const { cyan } = require('chalk')
-const UnprintedUserError = require('../../../errors/unprinted-user-error.js')
-
-module.exports = class OpenTagTracker {
+export default class OpenTagTracker {
   nodes: AstNode[]
 
-  constructor () {
+  constructor() {
     this.nodes = []
   }
 
-  add (node: AstNode) {
+  add(node: AstNode) {
     const existingNode = this.peekType(node.type)
     if (existingNode && existingNode.attributes['textrun']) {
       throw new UnprintedUserError(
@@ -25,15 +23,15 @@ module.exports = class OpenTagTracker {
     this.nodes.push(node)
   }
 
-  has (nodeType: string): boolean {
+  has(nodeType: string): boolean {
     return this.nodes.some(node => node.type === nodeType)
   }
 
-  peek (): AstNode {
+  peek(): AstNode {
     return this.nodes[this.nodes.length - 1]
   }
 
-  peekType (expectedType: string): ?AstNode {
+  peekType(expectedType: string): AstNode | null {
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const node = this.nodes[i]
       if (node.type === expectedType) return node
@@ -41,7 +39,7 @@ module.exports = class OpenTagTracker {
     return null
   }
 
-  popTag (expectedNodeTag: string, file: string, line: number): AstNode {
+  popTag(expectedNodeTag: string, file: string, line: number): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop tag '${expectedNodeTag}'`
@@ -60,7 +58,7 @@ module.exports = class OpenTagTracker {
     )
   }
 
-  popType (expectedNodeType: string, file: string, line: number): AstNode {
+  popType(expectedNodeType: string, file: string, line: number): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop type '${expectedNodeType}'`

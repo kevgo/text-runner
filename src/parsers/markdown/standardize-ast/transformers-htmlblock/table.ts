@@ -1,22 +1,21 @@
-// @flow
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
+import AstNode from '../../../ast-node.js'
+import AstNodeList from '../../../ast-node-list.js'
+import OpenTagTracker from '../../helpers/open-tag-tracker.js'
+import UnprintedUserError from '../../../../errors/unprinted-user-error.js'
+import util from 'util'
+import xml2js from 'xml2js'
 
-const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
-const AstNode = require('../../../ast-node.js')
-const AstNodeList = require('../../../ast-node-list.js')
-const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
-const UnprintedUserError = require('../../../../errors/unprinted-user-error.js')
-const util = require('util')
-const xml2js = require('xml2js')
 const xml2jsp = util.promisify(xml2js.parseString)
 
-module.exports = async function transformTable (
-  node: Object,
+module.exports = async function transformTable(
+  node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
-  var xml = {}
+  let xml: any = {}
   try {
     xml = await xml2jsp(node.content)
   } catch (e) {
@@ -85,8 +84,8 @@ module.exports = async function transformTable (
   return result
 }
 
-function parseRows (
-  block: Object,
+function parseRows(
+  block: any,
   result: AstNodeList,
   file: AbsoluteFilePath,
   line: number

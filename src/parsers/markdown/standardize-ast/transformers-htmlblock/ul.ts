@@ -1,18 +1,16 @@
-// @flow
-
-const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
-const AstNode = require('../../../ast-node.js')
-const AstNodeList = require('../../../ast-node-list.js')
-const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
-const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
-const util = require('util')
-const xml2js = require('xml2js')
-const xml2jsp = util.promisify(xml2js.parseString)
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
+import AstNode from '../../../ast-node.js'
+import AstNodeList from '../../../ast-node-list.js'
+import parseHtmlAttributes from '../../helpers/parse-html-attributes.js'
+import OpenTagTracker from '../../helpers/open-tag-tracker.js'
+import util from 'util'
+import xml2js from 'xml2js'
+import xml2jsp = util.promisify(xml2js.parseString)
 
 const ulRegex = /<ul([^>]*)>[\s\S]*<\/ul>/m
 
-module.exports = async function transformUl (
-  node: Object,
+module.exports = async function transformUl(
+  node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

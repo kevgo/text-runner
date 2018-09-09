@@ -1,15 +1,13 @@
-// @flow
-
-const AbsoluteFilePath = require('../../../../domain-model/absolute-file-path.js')
-const AstNode = require('../../../ast-node.js')
-const AstNodeList = require('../../../ast-node-list.js')
-const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
-const OpenTagTracker = require('../../helpers/open-tag-tracker.js')
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
+import AstNode from '../../../ast-node.js'
+import AstNodeList from '../../../ast-node-list.js'
+import parseHtmlAttributes from '../../helpers/parse-html-attributes.js'
+import OpenTagTracker from '../../helpers/open-tag-tracker.js'
 
 const olRegex = /<hr([^>]*)>/
 
-module.exports = async function transformOl (
-  node: Object,
+module.exports = async function transformOl(
+  node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

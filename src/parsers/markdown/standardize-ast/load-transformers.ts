@@ -1,11 +1,9 @@
-// @flow
+import TransformerList from '../standardize-ast/transformer-list.js'
 
-import type { TransformerList } from '../standardize-ast/transformer-list.js'
+import fs from 'fs-extra'
+import path from 'path'
 
-const fs = require('fs-extra')
-const path = require('path')
-
-module.exports = function loadTransformers (type: string): TransformerList {
+export default function loadTransformers(type: string): TransformerList {
   const result = {}
   const dir = path.join(__dirname, `transformers-${type}`)
   const files = fs.readdirSync(dir)

@@ -1,6 +1,4 @@
-// @flow
-
-export type LinkTarget = {
+export default LinkTarget = {
   type: string,
   name: string,
   text?: string,

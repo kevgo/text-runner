@@ -1,18 +1,16 @@
-// @flow
+import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
+import { expect } from 'chai'
+import removeExcludedFiles from './remove-excluded-files.js'
 
-const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
-const { expect } = require('chai')
-const removeExcludedFiles = require('./remove-excluded-files.js')
-
-describe('removeExcludedFiles', function () {
-  it('removes the given filename', function () {
+describe('removeExcludedFiles', function() {
+  it('removes the given filename', function() {
     const result = removeExcludedFiles(
       [new AbsoluteFilePath('one'), new AbsoluteFilePath('two')],
       'one'
     )
     expect(result).to.eql([{ value: 'two' }])
   })
-  it('removes the given filenames', function () {
+  it('removes the given filenames', function() {
     const result = removeExcludedFiles(
       [
         new AbsoluteFilePath('one'),
@@ -23,14 +21,14 @@ describe('removeExcludedFiles', function () {
     )
     expect(result).to.eql([{ value: 'two' }])
   })
-  it('removes the given regex', function () {
+  it('removes the given regex', function() {
     const result = removeExcludedFiles(
       [new AbsoluteFilePath('one'), new AbsoluteFilePath('two')],
       'on.'
     )
     expect(result).to.eql([{ value: 'two' }])
   })
-  it('removes the given regexes', function () {
+  it('removes the given regexes', function() {
     const result = removeExcludedFiles(
       [
         new AbsoluteFilePath('one'),
@@ -41,11 +39,11 @@ describe('removeExcludedFiles', function () {
     )
     expect(result).to.eql([{ value: 'two' }])
   })
-  it('does not remove things if no excludes are given', function () {
+  it('does not remove things if no excludes are given', function() {
     const result = removeExcludedFiles([new AbsoluteFilePath('one')], [])
     expect(result).to.eql([{ value: 'one' }])
   })
-  it('automatically ignores node_modules', function () {
+  it('automatically ignores node_modules', function() {
     const result = removeExcludedFiles(
       [
         new AbsoluteFilePath('one'),

@@ -1,10 +1,8 @@
-// @flow
-
-const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
-const glob = require('glob')
+import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
+import glob from 'glob'
 
 // Returns all the markdown files in this directory and its children
-module.exports = function markdownFilesInDir (
+export default function markdownFilesInDir(
   dirName: string
 ): AbsoluteFilePath[] {
   const files = glob.sync(`${dirName}/**/*.md`)

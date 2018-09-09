@@ -1,9 +1,7 @@
-// @flow
-
-const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
+import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
 
 // Removes the given excluded files from the given list of filenames
-module.exports = function removeExcludedFiles (
+export default function removeExcludedFiles(
   fileList: AbsoluteFilePath[],
   excluded: string | string[]
 ): AbsoluteFilePath[] {

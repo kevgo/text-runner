@@ -1,9 +1,7 @@
-// @flow
+import fs from 'fs'
+import path from 'path'
 
-const fs = require('fs')
-const path = require('path')
-
-module.exports = function isMarkdownFile (filename: string): boolean {
+export default function isMarkdownFile(filename: string): boolean {
   try {
     const filepath = path.join(process.cwd(), filename)
     return filename.endsWith('.md') && fs.statSync(filepath).isFile()

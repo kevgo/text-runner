@@ -1,10 +1,8 @@
-// @flow
-
-const AbsoluteFilePath = require('../domain-model/absolute-file-path.js')
-const glob = require('glob')
+import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
+import glob from 'glob'
 
 // Returns all the markdown files in the current working directory
-module.exports = function (configuredFiles: string): AbsoluteFilePath[] {
+export default function(configuredFiles: string): AbsoluteFilePath[] {
   return glob
     .sync(configuredFiles)
     .filter(file => !file.includes('node_modules'))

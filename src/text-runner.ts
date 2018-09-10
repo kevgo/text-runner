@@ -1,23 +1,21 @@
-// @flow
+import { CliArgTypes } from './cli/cli-arg-types.js'
 
-import type { CliArgTypes } from './cli/cli-arg-types.js'
+import chalk from 'chalk'
+import fs from 'fs'
+import loadConfiguration from './configuration/load-configuration.js'
+import PrintedUserError from './errors/printed-user-error.js'
 
-const { cyan, red } = require('chalk')
-const fs = require('fs')
-const loadConfiguration = require('./configuration/load-configuration.js')
-const PrintedUserError = require('./errors/printed-user-error.js')
-
-const addCommand = require('./commands/add.js')
-const debugCommand = require('./commands/debug.js')
-const dynamicCommand = require('./commands/dynamic.js')
-const helpCommand = require('./commands/help.js')
-const runCommand = require('./commands/run.js')
-const setupCommand = require('./commands/setup.js')
-const staticCommand = require('./commands/static.js')
-const versionCommand = require('./commands/version.js')
+import addCommand from './commands/add.js'
+import debugCommand from './commands/debug.js'
+import dynamicCommand from './commands/dynamic.js'
+import helpCommand from './commands/help.js'
+import runCommand from './commands/run.js'
+import setupCommand from './commands/setup.js'
+import staticCommand from './commands/static.js'
+import versionCommand from './commands/version.js'
 
 // Tests the documentation in the given directory
-module.exports = async function (
+module.exports = async function(
   cmdLineArgs: CliArgTypes
 ): Promise<Array<Error>> {
   var configuration
@@ -54,7 +52,7 @@ module.exports = async function (
         await versionCommand()
         return []
       default:
-        console.log(red(`unknown command: ${red(commandName)}`))
+        console.log(chalk.red(`unknown command: ${chalk.red(commandName)}`))
         return []
     }
   } catch (err) {
@@ -65,12 +63,14 @@ module.exports = async function (
   }
 }
 
-function determineConfigFileName (configFileName: ?string): string {
+function determineConfigFileName(configFileName: string | null): string {
   if (configFileName == null) {
     return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
   }
   if (!fs.existsSync(configFileName)) {
-    console.log(red(`configuration file ${cyan(configFileName)} not found`))
+    console.log(
+      chalk.red(`configuration file ${chalk.cyan(configFileName)} not found`)
+    )
     throw new PrintedUserError()
   }
   return configFileName

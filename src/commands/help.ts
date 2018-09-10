@@ -2,7 +2,7 @@ import chalk from 'chalk'
 
 const { version } = require('../../package.json')
 
-export default (async function helpCommand(error: string | null) {
+export default (async function helpCommand(error?: string) {
   console.log(template(error))
 })
 

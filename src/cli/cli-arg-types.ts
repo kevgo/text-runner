@@ -1,5 +1,3 @@
-// @flow
-
 export type CliArgTypes = {
   command: string,
   config?: string,

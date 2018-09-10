@@ -1,14 +1,12 @@
-// @flow
+import { CliArgTypes } from './cli-arg-types.js'
 
-import type { CliArgTypes } from './cli-arg-types.js'
-
-const availableCommands = require('../commands/available-commands')
-const minimist = require('minimist')
-const path = require('path')
+import availableCommands from '../commands/available-commands'
+import minimist from 'minimist'
+import path from 'path'
 
 // Parses the command-line options received,
 // and returns them structured as the command to run and options
-module.exports = function (argv: string[]): CliArgTypes {
+export default function(argv: string[]): CliArgTypes {
   // remove optional unix node call
   if (path.basename(argv[0] || '') === 'node') {
     argv.splice(0, 1)

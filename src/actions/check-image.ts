@@ -1,22 +1,20 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
+import { Configuration } from '../configuration/configuration.js'
 
-import type { ActionArgs } from '../runners/action-args.js'
-import type { Configuration } from '../configuration/configuration.js'
-
-const { cyan, magenta, red } = require('chalk')
-const Formatter = require('../formatters/formatter.js')
-const fs = require('fs-extra')
-const path = require('path')
-const request = require('request-promise-native')
+import chalk from 'chalk'
+import Formatter from '../formatters/formatter.js'
+import fs from 'fs-extra'
+import path from 'path'
+import request from 'request-promise-native'
 
 // Checks for broken hyperlinks
-module.exports = async function (args: ActionArgs) {
+export default (async function(args: ActionArgs) {
   const node = args.nodes[0]
   var imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
     throw new Error('image tag without source')
   }
-  args.formatter.name(`image ${cyan(imagePath)}`)
+  args.formatter.name(`image ${chalk.cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
     await checkRemoteImage(imagePath, args.formatter, args.configuration)
   } else {
@@ -25,9 +23,9 @@ module.exports = async function (args: ActionArgs) {
     }
     await checkLocalImage(imagePath, args.formatter, args.configuration)
   }
-}
+})
 
-async function checkLocalImage (
+async function checkLocalImage(
   imagePath: string,
   formatter: Formatter,
   c: Configuration
@@ -35,29 +33,29 @@ async function checkLocalImage (
   try {
     await fs.stat(path.join(c.sourceDir, imagePath))
   } catch (err) {
-    throw new Error(`image ${red(imagePath)} does not exist`)
+    throw new Error(`image ${chalk.red(imagePath)} does not exist`)
   }
 }
 
-async function checkRemoteImage (url: string, f: Formatter, c: Configuration) {
+async function checkRemoteImage(url: string, f: Formatter, c: Configuration) {
   if (c.offline) {
-    f.skip(`skipping external image: ${magenta(url)}`)
+    f.skip(`skipping external image: ${chalk.magenta(url)}`)
     return
   }
   try {
     await request({ url: url, timeout: 2000 })
   } catch (err) {
     if (err.statusCode === 404) {
-      f.warning(`image ${magenta(url)} does not exist`)
+      f.warning(`image ${chalk.magenta(url)} does not exist`)
     } else if (err.message === 'ESOCKETTIMEDOUT') {
-      f.warning(`image ${magenta(url)} timed out`)
+      f.warning(`image ${chalk.magenta(url)} timed out`)
     } else {
       throw err
     }
   }
 }
 
-function isRemoteImage (imagePath: string): boolean {
+function isRemoteImage(imagePath: string): boolean {
   if (imagePath != null) {
     return (
       imagePath.startsWith('//') ||

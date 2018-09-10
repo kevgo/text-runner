@@ -1,10 +1,8 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
 
-import type { ActionArgs } from '../runners/action-args.js'
+import jsdiffConsole from 'jsdiff-console'
 
-const jsdiffConsole = require('jsdiff-console')
-
-module.exports = function (args: ActionArgs) {
+export default function(args: ActionArgs) {
   args.formatter.name('verifying the output of the last run console command')
 
   const expectedLines = args.nodes

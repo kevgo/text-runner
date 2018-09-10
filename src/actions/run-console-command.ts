@@ -1,17 +1,15 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
+import { Configuration } from '../configuration/configuration.js'
+import { WriteStream } from 'observable-process'
 
-import type { ActionArgs } from '../runners/action-args.js'
-import type { Configuration } from '../configuration/configuration.js'
-import type { WriteStream } from 'observable-process'
-
-const AstNodeList = require('../parsers/ast-node-list.js')
-const callArgs = require('../helpers/call-args')
-const { cyan } = require('chalk')
-const debug = require('debug')('textrun:actions:run-console-command')
-const Formatter = require('../formatters/formatter.js')
-const ObservableProcess = require('observable-process')
-const path = require('path')
-const trimDollar = require('../helpers/trim-dollar')
+import AstNodeList from '../parsers/ast-node-list.js'
+import callArgs from '../helpers/call-args'
+import chalk from 'chalk'
+import debug from 'debug'('textrun:actions:run-console-command')
+import Formatter from '../formatters/formatter.js'
+import ObservableProcess from 'observable-process'
+import path from 'path'
+import trimDollar from '../helpers/trim-dollar'
 
 type ProcessInput = {
   textToWait: ?string,
@@ -20,7 +18,7 @@ type ProcessInput = {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-module.exports = async function (args: ActionArgs) {
+export default async function(args: ActionArgs) {
   const commandsToRun = args.nodes
     .textInNodeOfType('fence')
     .split('\n')
@@ -33,7 +31,7 @@ module.exports = async function (args: ActionArgs) {
     throw new Error('the block that defines console commands to run is empty')
   }
 
-  args.formatter.name(`running console command: ${cyan(commandsToRun)}`)
+  args.formatter.name(`running console command: ${chalk.cyan(commandsToRun)}`)
   var input = []
   if (args.nodes.hasNodeOfType('table')) {
     input = getInput(args.nodes, args.formatter)
@@ -53,7 +51,7 @@ module.exports = async function (args: ActionArgs) {
   await processor.waitForEnd()
 }
 
-async function enter (processor: ObservableProcess, input: ProcessInput) {
+async function enter(processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {
     processor.enter(input.input)
   } else {
@@ -62,7 +60,7 @@ async function enter (processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-function getInput (
+function getInput(
   nodes: AstNodeList,
   formatter: Formatter
 ): Array<ProcessInput> {
@@ -86,14 +84,14 @@ function getInput (
   return result
 }
 
-function makeGlobal (configuration: Configuration) {
+function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
     globals = configuration.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function (commandText) {
+  return function(commandText) {
     const commandParts = commandText.split(' ')
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
@@ -111,7 +109,7 @@ function makeGlobal (configuration: Configuration) {
   }
 }
 
-function log (stdout): WriteStream {
+function log(stdout): WriteStream {
   return {
     write: text => {
       global.consoleCommandOutput += text

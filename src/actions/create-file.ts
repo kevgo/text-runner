@@ -1,16 +1,14 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
 
-import type { ActionArgs } from '../runners/action-args.js'
+import chalk from 'chalk'
+import fs from 'fs'
+import mkdirp from 'mkdirp'
+import path from 'path'
 
-const { cyan } = require('chalk')
-const fs = require('fs')
-const mkdirp = require('mkdirp')
-const path = require('path')
-
-module.exports = function (args: ActionArgs) {
+export default function(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('em', 'strong')
   const content = args.nodes.textInNodeOfType('fence', 'code')
-  args.formatter.name(`create file ${cyan(filePath)}`)
+  args.formatter.name(`create file ${chalk.cyan(filePath)}`)
   const fullPath = path.join(args.configuration.workspace, filePath)
   args.formatter.log(`create file ${fullPath}`)
   mkdirp.sync(path.dirname(fullPath))

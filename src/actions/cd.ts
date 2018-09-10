@@ -1,14 +1,14 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
 
-import type { ActionArgs } from '../runners/action-args.js'
-
-const { bold, cyan } = require('chalk')
-const path = require('path')
+import chalk from 'chalk'
+import path from 'path'
 
 // Changes the current working directory to the one given in the hyperlink or code block
-module.exports = function (args: ActionArgs) {
+export default function(args: ActionArgs) {
   const directory = args.nodes.text()
-  args.formatter.name(`changing into the ${bold(cyan(directory))} directory`)
+  args.formatter.name(
+    `changing into the ${chalk.bold(chalk.cyan(directory))} directory`
+  )
   const fullPath = path.join(args.configuration.workspace, directory)
   args.formatter.log(`cd ${fullPath}`)
   try {

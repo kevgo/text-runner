@@ -1,19 +1,19 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
+import { Configuration } from '../configuration/configuration.js'
+import { WriteStream } from 'observable-process'
 
-import type { ActionArgs } from '../runners/action-args.js'
-import type { Configuration } from '../configuration/configuration.js'
-import type { WriteStream } from 'observable-process'
+import callArgs from '../helpers/call-args'
+import chalk from 'chalk'
+import ObservableProcess from 'observable-process'
+import path from 'path'
+import trimDollar from '../helpers/trim-dollar'
+import deb from 'debug'
 
-const callArgs = require('../helpers/call-args')
-const { bold, cyan } = require('chalk')
-const ObservableProcess = require('observable-process')
-const path = require('path')
-const trimDollar = require('../helpers/trim-dollar')
-const debug = require('debug')('start-console-command')
+const debug = deb('start-console-command')
 
 // Runs the given commands on the console.
 // Leaves the command running.
-module.exports = async function (args: ActionArgs) {
+export default (async function(args: ActionArgs) {
   const commandsToRun = args.nodes
     .textInNodeOfType('fence')
     .split('\n')
@@ -24,7 +24,7 @@ module.exports = async function (args: ActionArgs) {
     .join(' && ')
 
   args.formatter.name(
-    `starting a long-running process: ${bold(cyan(commandsToRun))}`
+    `starting a long-running process: ${chalk.bold(chalk.cyan(commandsToRun))}`
   )
   global.startConsoleProcessOutput = ''
   global.runningProcess = new ObservableProcess({
@@ -34,9 +34,9 @@ module.exports = async function (args: ActionArgs) {
     stderr: args.formatter.stderr
   })
   global.runningProcessEnded = true
-}
+})
 
-function log (stdout): WriteStream {
+function log(stdout): WriteStream {
   return {
     write: text => {
       global.startConsoleProcessOutput += text
@@ -45,7 +45,7 @@ function log (stdout): WriteStream {
   }
 }
 
-function makeGlobal (configuration: Configuration) {
+function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
@@ -53,7 +53,7 @@ function makeGlobal (configuration: Configuration) {
     globals = configuration.fileData.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function (commandText) {
+  return function(commandText) {
     const commandParts = commandText.split(' ')
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)

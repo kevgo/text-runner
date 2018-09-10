@@ -1,14 +1,12 @@
-// @flow
+import { ActionArgs } from '../runners/action-args.js'
 
-import type { ActionArgs } from '../runners/action-args.js'
+import chalk from 'chalk'
+import eol from 'eol'
+import fs from 'fs'
+import jsdiffConsole from 'jsdiff-console'
+import path from 'path'
 
-const { bold, cyan } = require('chalk')
-const eol = require('eol')
-const fs = require('fs')
-const jsdiffConsole = require('jsdiff-console')
-const path = require('path')
-
-module.exports = function (args: ActionArgs) {
+export default function(args: ActionArgs) {
   const fileName = args.nodes.textInNodeOfType('strong_open')
   var relativeBaseDir = '.'
   if (args.nodes.hasNodeOfType('link_open')) {
@@ -17,7 +15,9 @@ module.exports = function (args: ActionArgs) {
   }
   const expectedContent = args.nodes.textInNodeOfType('fence')
   args.formatter.name(
-    `verifying document content matches source code file ${cyan(fileName)}`
+    `verifying document content matches source code file ${chalk.cyan(
+      fileName
+    )}`
   )
   const filePath = path.join(
     args.configuration.sourceDir,
@@ -31,7 +31,7 @@ module.exports = function (args: ActionArgs) {
     actualContent = fs.readFileSync(filePath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      throw new Error(`file ${cyan(fileName)} not found`)
+      throw new Error(`file ${chalk.cyan(fileName)} not found`)
     } else {
       throw err
     }
@@ -40,7 +40,9 @@ module.exports = function (args: ActionArgs) {
     jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
     throw new Error(
-      `mismatching content in ${cyan(bold(filePath))}:\n${err.message}`
+      `mismatching content in ${chalk.cyan(chalk.bold(filePath))}:\n${
+        err.message
+      }`
     )
   }
 }

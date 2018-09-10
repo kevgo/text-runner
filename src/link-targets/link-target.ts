@@ -1,4 +1,4 @@
-export default LinkTarget = {
+export type LinkTarget = {
   type: string,
   name: string,
   text?: string,

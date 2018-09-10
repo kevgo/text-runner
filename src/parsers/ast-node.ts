@@ -46,7 +46,7 @@ export default class AstNode {
     return this.type.endsWith('_close')
   }
 
-  static scaffold(data: Object = {}): AstNode {
+  static scaffold(data: any = {}): AstNode {
     if (typeof data.file === 'string') {
       data.file = new AbsoluteFilePath(data.file)
     }

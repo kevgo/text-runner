@@ -12,7 +12,7 @@ describe('isExternalLink', function() {
   ]
   for (const [description, link, expected] of testData) {
     it(description, function() {
-      expect(isExternalLink(link)).to.equal(expected)
+      expect(isExternalLink(link as string)).to.equal(expected)
     })
   }
 })

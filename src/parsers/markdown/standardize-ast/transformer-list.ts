@@ -1,3 +1,3 @@
-import  Transformer  from './transformer'
+import { Transformer } from './transformer'
 
-export default TransformerList = { [key: string]: Transformer }
+export type TransformerList = { [key: string]: Transformer }

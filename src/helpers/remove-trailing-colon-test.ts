@@ -1,4 +1,5 @@
 import removeTrailingColon from './remove-trailing-colon.js'
+import { expect } from 'chai'
 import { describe, context, it } from 'mocha'
 
 describe('removeTrailingColon', function() {

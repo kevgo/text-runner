@@ -5,7 +5,8 @@ import parseHtmlAttributes from '../../helpers/parse-html-attributes.js'
 import OpenTagTracker from '../../helpers/open-tag-tracker.js'
 import util from 'util'
 import xml2js from 'xml2js'
-import xml2jsp = util.promisify(xml2js.parseString)
+
+const xml2jsp = util.promisify(xml2js.parseString)
 
 const ulRegex = /<ul([^>]*)>[\s\S]*<\/ul>/m
 

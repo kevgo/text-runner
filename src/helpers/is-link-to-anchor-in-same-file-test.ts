@@ -10,7 +10,7 @@ describe('isLinkToAnchorInSameFile', function() {
   ]
   for (const [description, link, expected] of testData) {
     it(description, function() {
-      expect(isLinkToAnchorInSameFile(link)).to.equal(expected)
+      expect(isLinkToAnchorInSameFile(link as string)).to.equal(expected)
     })
   }
 })

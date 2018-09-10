@@ -12,7 +12,7 @@ describe('isLinkToAnchorInOtherFile', function() {
   ]
   for (const [description, link, expected] of testData) {
     it(description, function() {
-      expect(isLinkToAnchorInOtherFile(link)).to.equal(expected)
+      expect(isLinkToAnchorInOtherFile(link as string)).to.equal(expected)
     })
   }
 })

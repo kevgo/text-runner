@@ -1,4 +1,4 @@
-import LinkTarget from './link-target'
+import { LinkTarget } from './link-target'
 
 import AbsoluteFilePath from '../domain-model/absolute-file-path'
 import AstNode from '../parsers/ast-node'

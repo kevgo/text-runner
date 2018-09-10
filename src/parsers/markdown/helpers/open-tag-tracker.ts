@@ -1,5 +1,5 @@
 import AstNode from '../../ast-node'
-import { cyan } from 'chalk'
+import chalk from 'chalk'
 import UnprintedUserError from '../../../errors/unprinted-user-error'
 
 export default class OpenTagTracker {
@@ -13,9 +13,9 @@ export default class OpenTagTracker {
     const existingNode = this.peekType(node.type)
     if (existingNode && existingNode.attributes['textrun']) {
       throw new UnprintedUserError(
-        `this active block is nested inside another active block of type ${cyan(
+        `this active block is nested inside another active block of type ${chalk.cyan(
           existingNode.attributes['textrun']
-        )} on line ${cyan(existingNode.line.toString())}`,
+        )} on line ${chalk.cyan(existingNode.line.toString())}`,
         node.file.platformified(),
         node.line
       )

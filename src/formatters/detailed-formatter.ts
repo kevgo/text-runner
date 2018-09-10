@@ -7,7 +7,7 @@ export default class DetailedFormatter extends Formatter {
   // A detailed formatter, prints output before the step name
 
   error(errorMessage: string) {
-    super.error(errorMessage)
+    this.registerError()
     console.log(chalk.dim(this.output))
     process.stdout.write(
       chalk.red(
@@ -23,7 +23,7 @@ export default class DetailedFormatter extends Formatter {
   }
 
   skip(message: string) {
-    super.skip(message)
+    this.registerSkip()
     if (this.output) console.log(chalk.dim(this.output))
     console.log(
       chalk.cyan(
@@ -47,7 +47,7 @@ export default class DetailedFormatter extends Formatter {
   }
 
   warning(warningMessage: string) {
-    super.warning(warningMessage)
+    this.registerWarning()
     if (this.output.trim() !== "") console.log(chalk.dim(this.output))
     console.log(
       chalk.magenta(

@@ -15,12 +15,9 @@ export default class RelativeLink {
   // returns the absolute links that point to the same target as this relative link.
   absolutify(
     containingFile: AbsoluteFilePath,
-    publications: Publications,
-    defaultFile: string
+    publications: Publications
   ): AbsoluteLink {
-    const urlOfDir = containingFile
-      .directory()
-      .publicPath(publications, defaultFile)
+    const urlOfDir = containingFile.directory().publicPath(publications)
     return urlOfDir.append(this)
   }
 }

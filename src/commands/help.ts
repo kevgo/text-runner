@@ -6,7 +6,7 @@ export default (async function helpCommand(error?: string) {
   console.log(template(error))
 })
 
-function template(error: string | null) {
+function template(error: string | undefined) {
   if (error) error = `${chalk.red(chalk.bold("Error: " + error))}`
   return `
 ${chalk.dim("TextRunner " + version)}

@@ -1,9 +1,5 @@
-import Transformer from "../standardize-ast/transformer.js"
-import TransformerList from "../standardize-ast/transformer-list.js"
-
 import AbsoluteFilePath from "../../../domain-model/absolute-file-path"
 import AstNodeList from "../../ast-node-list"
-import FormattingTracker from "../helpers/formatting-tracker"
 import getHtmlBlockTag from "../helpers/get-html-block-tag"
 import loadTransformers from "../standardize-ast/load-transformers"
 import OpenTagTracker from "../helpers/open-tag-tracker"
@@ -18,7 +14,6 @@ const htmlTagTransformers = loadTransformers("htmltag")
 // into the standardized AST used by TextRunner
 export default class AstStandardizer {
   filepath: AbsoluteFilePath
-  formattingTracker: FormattingTracker
   openTags: OpenTagTracker
   result: AstNodeList
   line: number

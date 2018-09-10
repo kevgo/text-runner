@@ -63,7 +63,7 @@ module.exports = async function(
   }
 }
 
-function determineConfigFileName(configFileName: string | null): string {
+function determineConfigFileName(configFileName: string | undefined): string {
   if (configFileName == null) {
     return fs.existsSync("text-run.yml") ? "text-run.yml" : ""
   }

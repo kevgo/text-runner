@@ -1,8 +1,15 @@
 .DEFAULT_GOAL := spec
 
+# platform-specificity
+ifdef ComSpec
+	/ := $(strip \)
+else
+	/ := /
+endif
+
 build: clean    # builds for the current platform
 	@mkdir dist
-	@cd src ; find . -name "*.js" | sed 's/^.\///' | xargs ../node_modules/.bin/flow-remove-types -d ../dist/ -q
+	@node_modules$/.bin$/tsc -p .
 
 clean:   # Removes all build artifacts
 	@rm -rf dist

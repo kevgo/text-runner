@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 
 export default (async function addCommand(
-  blockName: string | null
+  blockName: string | undefined
 ): Promise<Array<Error>> {
   if (!blockName) throw new Error("no block name given")
   if (!fs.existsSync("text-run")) {

@@ -11,7 +11,9 @@ import readAndParseFile from "../parsers/read-and-parse-file.js"
 import getFileNames from "../finding-files/get-filenames.js"
 import StatsCounter from "../runners/stats-counter.js"
 
-async function staticCommand(config: Configuration): Promise<Array<Error>> {
+async function staticCommand(
+  config: Configuration
+): Promise<Array<Error | null>> {
   const stats = new StatsCounter()
 
   // step 0: create working dir

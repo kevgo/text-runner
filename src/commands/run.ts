@@ -12,7 +12,7 @@ import readAndParseFile from "../parsers/read-and-parse-file.js"
 import getFileNames from "../finding-files/get-filenames.js"
 import StatsCounter from "../runners/stats-counter.js"
 
-async function runCommand(config: Configuration): Promise<Array<Error>> {
+async function runCommand(config: Configuration): Promise<Array<Error | null>> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
@@ -45,7 +45,7 @@ async function runCommand(config: Configuration): Promise<Array<Error>> {
   process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats)
   jobs.push(executeSequential(activities, config, linkTargets, stats))
-  var results = await Promise.all(jobs)
+  let results = await Promise.all(jobs)
   // $FlowFixMe: flow doesn't understand this works here
   results = results.filter(r => r)
 

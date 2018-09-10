@@ -1,10 +1,10 @@
-import debug from "debug"
+import deb from "debug"
 import mkdirp from "mkdirp"
 import path from "path"
 import tmp from "tmp"
 import UnprintedUserError from "../errors/unprinted-user-error.js"
 
-const d = debug("text-runner:working-dir")
+const debug = deb("text-runner:working-dir")
 
 type workingDirSetting = string | boolean
 

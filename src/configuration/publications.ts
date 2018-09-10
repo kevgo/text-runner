@@ -13,12 +13,12 @@ export default class Publications extends Array<Publication> {
   }
 
   // Returns the publication that matches the given filepath
-  forFilePath(filePath: AbsoluteFilePath): Publication | null {
+  forFilePath(filePath: AbsoluteFilePath): Publication | undefined {
     return this.find(publication => publication.publishes(filePath))
   }
 
   // Returns the publication that applies for the given link
-  publicationForLink(link: AbsoluteLink): Publication | null {
+  publicationForLink(link: AbsoluteLink): Publication | undefined {
     return this.find(publication => publication.resolves(link))
   }
 

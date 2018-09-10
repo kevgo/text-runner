@@ -58,7 +58,7 @@ export default class OpenTagTracker {
     )
   }
 
-  popType(expectedNodeType: string, file: string, line: number): AstNode {
+  popType(expectedNodeType: string): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop type '${expectedNodeType}'`

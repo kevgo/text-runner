@@ -9,7 +9,7 @@ type Console = {
 }
 
 // Base class for formatters
-export default class Formatter {
+export default abstract class Formatter {
   activity: Activity
   console: Console
   sourceDir: string
@@ -36,9 +36,14 @@ export default class Formatter {
     this.sourceDir = sourceDir
     this.skipped = false
     this.warned = false
+    this.console = {
+      log: text => this.stdout.write(text + "\n")
+    }
   }
 
-  error(errorMessage: string) {
+  abstract error(errorMessage: string)
+
+  registerError() {
     this.statsCounter.error()
   }
 
@@ -47,7 +52,9 @@ export default class Formatter {
     return false
   }
 
-  skip(message: string) {
+  abstract skip(message: string)
+
+  registerSkip() {
     this.skipped = true
     this.statsCounter.skip()
   }
@@ -61,7 +68,9 @@ export default class Formatter {
     this.title = newTitle
   }
 
-  warning(warningMessage: string) {
+  abstract warning(warningMessage: string)
+
+  registerWarning() {
     this.warned = true
     this.statsCounter.warning()
   }

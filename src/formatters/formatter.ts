@@ -1,4 +1,4 @@
-import Activity from '../activity-list/activity'
+import { Activity } from '../activity-list/activity'
 import WriteStream from 'observable-process'
 
 import humanize from 'humanize-string'

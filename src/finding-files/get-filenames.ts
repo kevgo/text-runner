@@ -1,4 +1,4 @@
-import Configuration from '../configuration/configuration.js'
+import { Configuration } from '../configuration/configuration.js'
 
 import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
 import allMarkdownFiles from './all-markdown-files.js'

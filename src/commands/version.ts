@@ -1,8 +1,6 @@
-// @flow
-
 // $FlowFixMe: flow doesn't like requiring such an untyped file
 const { version } = require('../../package.json')
 
-module.exports = async function run () {
+export default (async function versionCommand() {
   console.log(`TextRunner v${version}`)
-}
+})

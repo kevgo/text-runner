@@ -1,10 +1,8 @@
-// @flow
+import fs from 'fs'
+import path from 'path'
 
-const fs = require('fs')
-const path = require('path')
-
-module.exports = async function addCommand (
-  blockName: ?string
+export default (async function addCommand(
+  blockName: string | null
 ): Promise<Array<Error>> {
   if (!blockName) throw new Error('no block name given')
   if (!fs.existsSync('text-run')) {
@@ -16,9 +14,9 @@ module.exports = async function addCommand (
     'utf8'
   )
   return []
-}
+})
 
-function template (filename: string) {
+function template(filename: string) {
   return `module.exports = async function (activity) {
   console.log('This code runs inside the "${filename}" block implementation.')
   console.log('I found these elements in your document:')

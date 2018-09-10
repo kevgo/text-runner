@@ -1,7 +1,5 @@
-// @flow
-
 // returns a list of all available commands
-module.exports = function (): string[] {
+export default function(): string[] {
   return [
     'add',
     'debug',

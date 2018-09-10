@@ -1,16 +1,14 @@
-// @flow
+import { Configuration } from '../configuration/configuration.js'
 
-import type { Configuration } from '../configuration/configuration.js'
+import AstNode from '../parsers/ast-node.js'
+import AstNodeList from '../parsers/ast-node-list.js'
+import extractActivities from '../activity-list/extract-activities.js'
+import extractImagesAndLinks from '../activity-list/extract-images-and-links.js'
+import findLinkTargets from '../link-targets/find-link-targets.js'
+import getFileNames from '../finding-files/get-filenames.js'
+import readAndParseFile from '../parsers/read-and-parse-file.js'
 
-const AstNode = require('../parsers/ast-node.js')
-const AstNodeList = require('../parsers/ast-node-list.js')
-const extractActivities = require('../activity-list/extract-activities.js')
-const extractImagesAndLinks = require('../activity-list/extract-images-and-links.js')
-const findLinkTargets = require('../link-targets/find-link-targets.js')
-const getFileNames = require('../finding-files/get-filenames.js')
-const readAndParseFile = require('../parsers/read-and-parse-file.js')
-
-async function debugCommand (config: Configuration): Promise<Array<Error>> {
+async function debugCommand(config: Configuration): Promise<Array<Error>> {
   const filenames = getFileNames(config)
   if (filenames.length === 0) return []
 
@@ -59,11 +57,11 @@ async function debugCommand (config: Configuration): Promise<Array<Error>> {
   return []
 }
 
-function showAttr (node: AstNode): string {
+function showAttr(node: AstNode): string {
   if (node.type === 'text') return `("${node.content.trim()}")`
   const keys = Object.keys(node.attributes)
   if (keys.length === 0) return ''
   return `(${node.attributes['textrun']})`
 }
 
-module.exports = debugCommand
+export default debugCommand

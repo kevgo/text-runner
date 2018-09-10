@@ -1,20 +1,18 @@
-// @flow
+import { Configuration } from '../configuration/configuration.js'
 
-import type { Configuration } from '../configuration/configuration.js'
+import chalk from 'chalk'
+import executeParallel from '../runners/execute-parallel.js'
+import executeSequential from '../runners/execute-sequential.js'
+import extractActivities from '../activity-list/extract-activities.js'
+import extractImagesAndLinks from '../activity-list/extract-images-and-links.js'
+import findLinkTargets from '../link-targets/find-link-targets.js'
+import rimraf from 'rimraf'
+import createWorkingDir from '../working-dir/create-working-dir.js'
+import readAndParseFile from '../parsers/read-and-parse-file.js'
+import getFileNames from '../finding-files/get-filenames.js'
+import StatsCounter from '../runners/stats-counter.js'
 
-const { bold, green, magenta, red } = require('chalk')
-const executeParallel = require('../runners/execute-parallel.js')
-const executeSequential = require('../runners/execute-sequential.js')
-const extractActivities = require('../activity-list/extract-activities.js')
-const extractImagesAndLinks = require('../activity-list/extract-images-and-links.js')
-const findLinkTargets = require('../link-targets/find-link-targets.js')
-const rimraf = require('rimraf')
-const createWorkingDir = require('../working-dir/create-working-dir.js')
-const readAndParseFile = require('../parsers/read-and-parse-file.js')
-const getFileNames = require('../finding-files/get-filenames.js')
-const StatsCounter = require('../runners/stats-counter.js')
-
-async function runCommand (config: Configuration): Promise<Array<Error>> {
+async function runCommand(config: Configuration): Promise<Array<Error>> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
@@ -25,7 +23,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   // step 1: find files
   const filenames = getFileNames(config)
   if (filenames.length === 0) {
-    console.log(magenta('no Markdown files found'))
+    console.log(chalk.magenta('no Markdown files found'))
     return []
   }
 
@@ -39,7 +37,7 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
-    console.log(magenta('no activities found'))
+    console.log(chalk.magenta('no activities found'))
     return []
   }
 
@@ -59,11 +57,11 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   var text = '\n'
   var color
   if (results.length === 0) {
-    color = green
-    text += green('Success! ')
+    color = chalk.green
+    text += chalk.green('Success! ')
   } else {
-    color = red
-    text += red(`${results.length} errors, `)
+    color = chalk.red
+    text += chalk.red(`${results.length} errors, `)
   }
   text += color(
     `${activities.length + links.length} activities in ${
@@ -72,11 +70,11 @@ async function runCommand (config: Configuration): Promise<Array<Error>> {
   )
   if (stats.warnings() > 0) {
     text += color(', ')
-    text += magenta(`${stats.warnings()} warnings`)
+    text += chalk.magenta(`${stats.warnings()} warnings`)
   }
   text += color(`, ${stats.duration()}`)
-  console.log(bold(text))
+  console.log(chalk.bold(text))
   return results
 }
 
-module.exports = runCommand
+export default runCommand

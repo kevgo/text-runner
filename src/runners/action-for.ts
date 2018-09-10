@@ -1,23 +1,21 @@
-// @flow
+import { Activity } from '../activity-list/activity.js'
+import { Action } from '../runners/action.js'
 
-import type { Activity } from '../activity-list/activity.js'
-import type { Action } from '../runners/action.js'
+import builtinActionFilePaths from '../helpers/builtin-action-filepaths.js'
+import customActionFilePaths from '../helpers/custom-action-filepaths.js'
+import getActionName from '../helpers/action-name.js'
+import interpret from 'interpret'
+import chalk from 'chalk'
+import rechoir from 'rechoir'
+import UnprintedUserError from '../errors/unprinted-user-error.js'
 
-const builtinActionFilePaths = require('../helpers/builtin-action-filepaths.js')
-const customActionFilePaths = require('../helpers/custom-action-filepaths.js')
-const getActionName = require('../helpers/action-name.js')
-const interpret = require('interpret')
-const { red } = require('chalk')
-const rechoir = require('rechoir')
-const UnprintedUserError = require('../errors/unprinted-user-error.js')
-
-type FunctionRepo = { [string]: Action }
+type FunctionRepo = { [key: string]: Action }
 
 const builtinActions = loadBuiltinActions()
 const customActions = loadCustomActions()
 
 // Provides the action for the block with the given name
-function actionFor (activity: Activity): Action {
+export default function actionFor(activity: Activity): Action {
   return (
     builtinActions[activity.type] ||
     customActions[activity.type] ||
@@ -25,8 +23,10 @@ function actionFor (activity: Activity): Action {
   )
 }
 
-function errorUnknownActivityType (activity: Activity) {
-  var errorText = `unknown activity type: ${red(
+// Note: need to define the return type as Action to satisfy the type checker
+//       who doesn't understand that this is an error check
+function errorUnknownActivityType(activity: Activity): Action {
+  var errorText = `unknown activity type: ${chalk.red(
     activity.type
   )}\nAvailable built-in activity types:\n`
   for (let actionName of Object.keys(builtinActions).sort()) {
@@ -49,7 +49,7 @@ function errorUnknownActivityType (activity: Activity) {
   )
 }
 
-function loadBuiltinActions (): FunctionRepo {
+function loadBuiltinActions(): FunctionRepo {
   const result = {}
   for (const filename of builtinActionFilePaths()) {
     result[getActionName(filename)] = require(filename)
@@ -57,7 +57,7 @@ function loadBuiltinActions (): FunctionRepo {
   return result
 }
 
-function loadCustomActions (): FunctionRepo {
+function loadCustomActions(): FunctionRepo {
   const result = {}
   require('babel-register')
   for (const filename of customActionFilePaths()) {
@@ -74,5 +74,3 @@ function loadCustomActions (): FunctionRepo {
   }
   return result
 }
-
-module.exports = actionFor

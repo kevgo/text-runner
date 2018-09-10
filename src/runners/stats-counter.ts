@@ -1,15 +1,13 @@
-// @flow
+import Time from 'time-diff'
 
-const Time = require('time-diff')
-
-module.exports = class StatsCounter {
+export default class StatsCounter {
   errorCount: number
   skipCount: number
   successCount: number
   warningCount: number
   time: Time
 
-  constructor () {
+  constructor() {
     this.errorCount = 0
     this.skipCount = 0
     this.successCount = 0
@@ -18,39 +16,39 @@ module.exports = class StatsCounter {
     this.time.start('formatter')
   }
 
-  duration () {
+  duration() {
     return this.time.end('formatter')
   }
 
-  error () {
+  error() {
     this.errorCount += 1
   }
 
-  errors (): number {
+  errors(): number {
     return this.errorCount
   }
 
-  skip () {
+  skip() {
     this.skipCount += 1
   }
 
-  skips (): number {
+  skips(): number {
     return this.skipCount
   }
 
-  success () {
+  success() {
     this.successCount += 1
   }
 
-  successes (): number {
+  successes(): number {
     return this.successCount
   }
 
-  warning () {
+  warning() {
     this.warningCount += 1
   }
 
-  warnings (): number {
+  warnings(): number {
     return this.warningCount
   }
 }

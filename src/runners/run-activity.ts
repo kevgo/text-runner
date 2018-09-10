@@ -1,22 +1,20 @@
-// @flow
+import { Activity } from '../activity-list/activity.js'
+import { Action } from './action.js'
+import { ActionArgs } from './action-args.js'
+import { Configuration } from '../configuration/configuration.js'
 
-import type { Activity } from '../activity-list/activity.js'
-import type { Action } from './action.js'
-import type { ActionArgs } from './action-args.js'
-import type { Configuration } from '../configuration/configuration.js'
+import actionFor from './action-for.js'
+import LinkTargetList from '../link-targets/link-target-list.js'
+import StatsCounter from './stats-counter.js'
+import PrintedUserError from '../errors/printed-user-error.js'
+import util from 'util'
 
-const actionFor = require('./action-for.js')
-const LinkTargetList = require('../link-targets/link-target-list.js')
-const StatsCounter = require('./stats-counter.js')
-const PrintedUserError = require('../errors/printed-user-error.js')
-const util = require('util')
-
-module.exports = async function runActivity (
+export default (async function runActivity(
   activity: Activity,
   configuration: Configuration,
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter
-): Promise<?Error> {
+): Promise<Error | null> {
   const formatter = new configuration.FormatterClass(
     activity,
     configuration.sourceDir,
@@ -48,17 +46,17 @@ module.exports = async function runActivity (
     }
   }
   return null
-}
+})
 
-async function runCallbackFunc (func: Action, args: ActionArgs) {
+async function runCallbackFunc(func: Action, args: ActionArgs) {
   const promisified = util.promisify(func)
   await promisified(args)
 }
 
-async function runSyncOrPromiseFunc (func: Action, args: ActionArgs) {
+async function runSyncOrPromiseFunc(func: Action, args: ActionArgs) {
   await Promise.resolve(func(args))
 }
 
-function isUserError (err: Error): boolean {
+function isUserError(err: Error): boolean {
   return err.name === 'Error'
 }

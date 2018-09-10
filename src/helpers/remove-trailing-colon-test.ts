@@ -1,4 +1,5 @@
 import removeTrailingColon from './remove-trailing-colon.js'
+import { describe, context, it } from 'mocha'
 
 describe('removeTrailingColon', function() {
   context('with trailing colon', function() {

@@ -1,6 +1,7 @@
 import delay from 'delay'
 import StatsCounter from './stats-counter.js'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('StatsCounter', function() {
   it('counts the number of errors', function() {

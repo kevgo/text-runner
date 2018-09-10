@@ -1,4 +1,5 @@
 import javascriptExtensions from './javascript-extensions.js'
+import { describe, it } from 'mocha'
 import { expect } from 'chai'
 
 describe('javascriptExtensions', function() {

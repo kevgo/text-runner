@@ -1,6 +1,7 @@
 import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
 import AstNodeList from '../parsers/ast-node-list.js'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 import LinkTargetList from './link-target-list.js'
 
 describe('LinkTargetList', function() {

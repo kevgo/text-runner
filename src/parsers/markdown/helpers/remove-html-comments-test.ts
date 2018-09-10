@@ -1,5 +1,6 @@
 import removeHtmlComments from './remove-html-comments'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('removeHtmlComments', function() {
   it('removes HTML comments', function() {

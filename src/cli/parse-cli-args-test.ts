@@ -1,5 +1,6 @@
 import parseCliArgs from '../../src/cli/parse-cli-args'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('parse-cli-args', function() {
   context('with unix <node> call', function() {

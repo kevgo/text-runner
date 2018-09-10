@@ -1,4 +1,5 @@
 import straightenLink from './straighten-link.js'
+import { describe, it } from 'mocha'
 import { expect } from 'chai'
 
 describe('straightenPath', function() {

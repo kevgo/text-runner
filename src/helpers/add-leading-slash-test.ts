@@ -1,5 +1,6 @@
 import addLeadingSlash from './add-leading-slash.js'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('addLeadingSlash', function() {
   it('adds a leading slash if missing', function() {

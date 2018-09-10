@@ -1,6 +1,7 @@
 import AstNode from '../../ast-node'
 import OpenTagTracker from './open-tag-tracker'
 import { expect } from 'chai'
+import { beforeEach, describe, it } from 'mocha'
 
 describe('OpenTagTracker', function() {
   beforeEach(function() {

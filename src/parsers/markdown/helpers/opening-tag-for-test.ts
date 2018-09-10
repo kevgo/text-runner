@@ -1,5 +1,6 @@
 import openingTagFor from './opening-tag-for'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('openingTagFor', function() {
   it('returns the opening tag for closing tags', function() {

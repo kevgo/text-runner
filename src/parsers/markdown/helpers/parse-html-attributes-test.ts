@@ -1,5 +1,6 @@
 import parseAttributes from './parse-html-attributes'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('parseAttributes', function() {
   it('parses attributes', function() {

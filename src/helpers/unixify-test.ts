@@ -1,4 +1,5 @@
 import unifixy from './unifixy.js'
+import { describe, it } from 'mocha'
 import { expect } from 'chai'
 
 describe('unifixy', function() {

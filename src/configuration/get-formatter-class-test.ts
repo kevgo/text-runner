@@ -2,6 +2,7 @@ import DetailedFormatter from '../formatters/detailed-formatter.js'
 import DotFormatter from '../formatters/dot-formatter.js'
 import { expect } from 'chai'
 import getFormatterClass from './get-formatter-class.js'
+import { describe, it } from 'mocha'
 
 describe('getFormatterClass', function() {
   it('returns the dot formatter if requested', function() {

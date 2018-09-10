@@ -1,5 +1,6 @@
 import parseHtmlTag from './parse-html-tag'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('parseAttributes', function() {
   it('parses opening HTML tags', function() {

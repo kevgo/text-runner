@@ -1,4 +1,5 @@
 import isMailtoLink from './is-mailto-link.js'
+import { describe, it } from 'mocha'
 import { expect } from 'chai'
 
 describe('isMailtoLink', function() {

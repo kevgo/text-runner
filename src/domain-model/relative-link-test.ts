@@ -2,6 +2,7 @@ import AbsoluteFilePath from './absolute-file-path.js'
 import Publications from '../configuration/publications.js'
 import RelativeLink from './relative-link.js'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('RelativeLink', function() {
   describe('absolutify', function() {

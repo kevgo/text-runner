@@ -1,5 +1,6 @@
 import addTrailingSlash from './add-trailing-slash.js'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('addTrailingSlash', function() {
   it('appends a slash if there is not one', function() {

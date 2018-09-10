@@ -1,6 +1,7 @@
 import AbsoluteFilePath from './absolute-file-path.js'
 import Publications from '../configuration/publications.js'
 import { expect } from 'chai'
+import { describe, it } from 'mocha'
 
 describe('AbsoluteFilePath', function() {
   describe('append', function() {

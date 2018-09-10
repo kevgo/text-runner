@@ -1,9 +1,9 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import parseHtmlAttributes from '../../helpers/parse-html-attributes.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
-import UnprintedUserError from '../../../../errors/unprinted-user-error.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 
@@ -17,14 +17,14 @@ module.exports = async function transformPre(
   const match = node.content.match(preRegex)
   if (!match) {
     throw new UnprintedUserError(
-      'cannot match <pre> tag',
+      "cannot match <pre> tag",
       file.platformified(),
       line
     )
   }
   const resultNode = new AstNode({
-    type: 'fence',
-    tag: 'pre',
+    type: "fence",
+    tag: "pre",
     file,
     line,
     content: match[2],

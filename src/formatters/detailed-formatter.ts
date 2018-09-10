@@ -1,7 +1,7 @@
-import chalk from 'chalk'
-import Formatter from './formatter'
-import path from 'path'
-import printCodeFrame from '../helpers/print-code-frame'
+import chalk from "chalk"
+import Formatter from "./formatter"
+import path from "path"
+import printCodeFrame from "../helpers/print-code-frame"
 
 export default class DetailedFormatter extends Formatter {
   // A detailed formatter, prints output before the step name
@@ -48,7 +48,7 @@ export default class DetailedFormatter extends Formatter {
 
   warning(warningMessage: string) {
     super.warning(warningMessage)
-    if (this.output.trim() !== '') console.log(chalk.dim(this.output))
+    if (this.output.trim() !== "") console.log(chalk.dim(this.output))
     console.log(
       chalk.magenta(
         `${this.activity.file.platformified()}:${

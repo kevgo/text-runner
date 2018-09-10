@@ -1,16 +1,16 @@
-import { Configuration } from '../configuration/configuration.js'
+import { Configuration } from "../configuration/configuration.js"
 
-import chalk from 'chalk'
-import executeParallel from '../runners/execute-parallel.js'
-import executeSequential from '../runners/execute-sequential.js'
-import extractActivities from '../activity-list/extract-activities.js'
-import extractImagesAndLinks from '../activity-list/extract-images-and-links.js'
-import findLinkTargets from '../link-targets/find-link-targets.js'
-import rimraf from 'rimraf'
-import createWorkingDir from '../working-dir/create-working-dir.js'
-import readAndParseFile from '../parsers/read-and-parse-file.js'
-import getFileNames from '../finding-files/get-filenames.js'
-import StatsCounter from '../runners/stats-counter.js'
+import chalk from "chalk"
+import executeParallel from "../runners/execute-parallel.js"
+import executeSequential from "../runners/execute-sequential.js"
+import extractActivities from "../activity-list/extract-activities.js"
+import extractImagesAndLinks from "../activity-list/extract-images-and-links.js"
+import findLinkTargets from "../link-targets/find-link-targets.js"
+import rimraf from "rimraf"
+import createWorkingDir from "../working-dir/create-working-dir.js"
+import readAndParseFile from "../parsers/read-and-parse-file.js"
+import getFileNames from "../finding-files/get-filenames.js"
+import StatsCounter from "../runners/stats-counter.js"
 
 async function runCommand(config: Configuration): Promise<Array<Error>> {
   const stats = new StatsCounter()
@@ -23,7 +23,7 @@ async function runCommand(config: Configuration): Promise<Array<Error>> {
   // step 1: find files
   const filenames = getFileNames(config)
   if (filenames.length === 0) {
-    console.log(chalk.magenta('no Markdown files found'))
+    console.log(chalk.magenta("no Markdown files found"))
     return []
   }
 
@@ -37,7 +37,7 @@ async function runCommand(config: Configuration): Promise<Array<Error>> {
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
-    console.log(chalk.magenta('no activities found'))
+    console.log(chalk.magenta("no activities found"))
     return []
   }
 
@@ -54,11 +54,11 @@ async function runCommand(config: Configuration): Promise<Array<Error>> {
   if (results.length === 0 && !config.keepTmp) rimraf.sync(config.workspace)
 
   // step 7: write stats
-  var text = '\n'
+  var text = "\n"
   var color
   if (results.length === 0) {
     color = chalk.green
-    text += chalk.green('Success! ')
+    text += chalk.green("Success! ")
   } else {
     color = chalk.red
     text += chalk.red(`${results.length} errors, `)
@@ -69,7 +69,7 @@ async function runCommand(config: Configuration): Promise<Array<Error>> {
     } files`
   )
   if (stats.warnings() > 0) {
-    text += color(', ')
+    text += color(", ")
     text += chalk.magenta(`${stats.warnings()} warnings`)
   }
   text += color(`, ${stats.duration()}`)

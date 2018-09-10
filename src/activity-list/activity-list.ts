@@ -1,3 +1,3 @@
-import { Activity } from './activity.js'
+import { Activity } from "./activity.js"
 
 export type ActivityList = Array<Activity>

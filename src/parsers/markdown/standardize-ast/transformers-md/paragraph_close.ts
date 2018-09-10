@@ -1,6 +1,6 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
-import AstNodeList from '../../../ast-node-list'
-import OpenTagTracker from '../../helpers/open-tag-tracker'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
+import AstNodeList from "../../../ast-node-list"
+import OpenTagTracker from "../../helpers/open-tag-tracker"
 
 export default function(
   node: any,
@@ -9,17 +9,17 @@ export default function(
   line: number
 ): AstNodeList {
   const openNode = openTags.popType(
-    'paragraph_open',
+    "paragraph_open",
     file.platformified(),
     line
   )
   const result = new AstNodeList()
   result.pushNode({
     type: node.type,
-    tag: '/p',
+    tag: "/p",
     file,
     line,
-    content: '',
+    content: "",
     attributes: openNode.attributes
   })
   return result

@@ -1,7 +1,7 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 
 module.exports = function transformDetailsTag(
   node: any,
@@ -11,16 +11,16 @@ module.exports = function transformDetailsTag(
 ): AstNodeList {
   const result = new AstNodeList()
   const openingTag = openTags.popType(
-    'details_open',
+    "details_open",
     file.platformified(),
     line
   )
   const resultNode = new AstNode({
-    type: 'details_close',
-    tag: '/details',
+    type: "details_close",
+    tag: "/details",
     file,
     line,
-    content: '',
+    content: "",
     attributes: openingTag.attributes
   })
   result.pushNode(resultNode)

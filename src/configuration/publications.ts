@@ -1,6 +1,6 @@
-import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
-import AbsoluteLink from '../domain-model/absolute-link.js'
-import Publication from './publication.js'
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import AbsoluteLink from "../domain-model/absolute-link.js"
+import Publication from "./publication.js"
 
 export default class Publications extends Array<Publication> {
   // Creates a new Publications instance based on the given JSON data

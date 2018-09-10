@@ -1,4 +1,4 @@
-import AbsoluteFilePath from '../domain-model/absolute-file-path'
+import AbsoluteFilePath from "../domain-model/absolute-file-path"
 
 // A node in the standardized Markdown/HTML AST
 export default class AstNode {
@@ -10,11 +10,11 @@ export default class AstNode {
   attributes: { [key: string]: string } // the attributes of the node
 
   constructor(data: {
-    type: string,
-    tag: string,
-    file: AbsoluteFilePath,
-    line: number,
-    content: string,
+    type: string
+    tag: string
+    file: AbsoluteFilePath
+    line: number
+    content: string
     attributes: { [key: string]: string }
   }) {
     this.type = data.type
@@ -27,35 +27,35 @@ export default class AstNode {
 
   // Returns the type of the corresponding ending node
   endType(): string {
-    if (!this.isOpeningNode()) throw new Error('not an opening node')
-    return this.type.replace('open', '') + 'close'
+    if (!this.isOpeningNode()) throw new Error("not an opening node")
+    return this.type.replace("open", "") + "close"
   }
 
   htmlLinkTarget(): string | null {
     if (this.content == null) return null
-    if (this.type !== 'htmltag') return null
+    if (this.type !== "htmltag") return null
     const matches = this.content.match(/<a[^>]*href="([^"]*)".*?>/)
     return matches ? matches[1] : null
   }
 
   isOpeningNode(): boolean {
-    return this.type.endsWith('_open')
+    return this.type.endsWith("_open")
   }
 
   isClosingNode(): boolean {
-    return this.type.endsWith('_close')
+    return this.type.endsWith("_close")
   }
 
   static scaffold(data: any = {}): AstNode {
-    if (typeof data.file === 'string') {
+    if (typeof data.file === "string") {
       data.file = new AbsoluteFilePath(data.file)
     }
     return new AstNode({
-      type: data.type || 'type',
-      tag: data.tag != null ? data.tag : 'tag',
-      file: data.file || new AbsoluteFilePath('file'),
+      type: data.type || "type",
+      tag: data.tag != null ? data.tag : "tag",
+      file: data.file || new AbsoluteFilePath("file"),
       line: data.line || 1,
-      content: data.content || '',
+      content: data.content || "",
       attributes: data.attributes || {}
     })
   }

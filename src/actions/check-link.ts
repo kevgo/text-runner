@@ -1,25 +1,25 @@
-import { ActionArgs } from '../runners/action-args.js'
-import { Configuration } from '../configuration/configuration.js'
+import { ActionArgs } from "../runners/action-args.js"
+import { Configuration } from "../configuration/configuration.js"
 
-import AbsoluteFilePath from '../domain-model/absolute-file-path.js'
-import chalk from 'chalk'
-import Formatter from '../formatters/formatter.js'
-import fs from 'fs-extra'
-import isExternalLink from '../helpers/is-external-link.js'
-import isLinkToAnchorInOtherFile from '../helpers/is-link-to-anchor-in-other-file.js'
-import isLinkToAnchorInSameFile from '../helpers/is-link-to-anchor-in-same-file.js'
-import isMailtoLink from '../helpers/is-mailto-link.js'
-import LinkTargetList from '../link-targets/link-target-list.js'
-import path from 'path'
-import removeLeadingSlash from '../helpers/remove-leading-slash.js'
-import request from 'request-promise-native'
-import UnknownLink from '../domain-model/unknown-link.js'
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import chalk from "chalk"
+import Formatter from "../formatters/formatter.js"
+import fs from "fs-extra"
+import isExternalLink from "../helpers/is-external-link.js"
+import isLinkToAnchorInOtherFile from "../helpers/is-link-to-anchor-in-other-file.js"
+import isLinkToAnchorInSameFile from "../helpers/is-link-to-anchor-in-same-file.js"
+import isMailtoLink from "../helpers/is-mailto-link.js"
+import LinkTargetList from "../link-targets/link-target-list.js"
+import path from "path"
+import removeLeadingSlash from "../helpers/remove-leading-slash.js"
+import request from "request-promise-native"
+import UnknownLink from "../domain-model/unknown-link.js"
 
 // Checks for broken hyperlinks
 export default (async function(args: ActionArgs) {
-  const target = args.nodes[0].attributes['href']
-  if (target == null || target === '') {
-    throw new Error('link without target')
+  const target = args.nodes[0].attributes["href"]
+  if (target == null || target === "") {
+    throw new Error("link without target")
   }
 
   if (isMailtoLink(target)) {
@@ -78,9 +78,9 @@ async function checkExternalLink(
     f.name(`link to external website ${chalk.cyan(target)}`)
     await request({ url: target, timeout: 4000 })
   } catch (err) {
-    if (err.statusCode === 404 || err.error.code === 'ENOTFOUND') {
+    if (err.statusCode === 404 || err.error.code === "ENOTFOUND") {
       f.warning(`link to non-existing external website ${chalk.bold(target)}`)
-    } else if (err.message === 'ESOCKETTIMEDOUT') {
+    } else if (err.message === "ESOCKETTIMEDOUT") {
       f.warning(`link to ${chalk.magenta(target)} timed out`)
     } else if (
       err.message.startsWith("Hostname/IP doesn't match certificate's altnames")
@@ -145,7 +145,7 @@ async function checkLinkToAnchorInSameFile(
   if (!linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${chalk.bold(target)}`)
   }
-  if (linkTargets.anchorType(containingFile, anchorName) === 'heading') {
+  if (linkTargets.anchorType(containingFile, anchorName) === "heading") {
     f.name(`link to local heading ${chalk.cyan(target)}`)
   } else {
     f.name(`link to #${chalk.cyan(anchorName)}`)
@@ -181,15 +181,15 @@ async function checkLinkToAnchorInOtherFile(
   if (!linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
       `link to non-existing anchor ${chalk.bold(
-        '#' + anchorName
+        "#" + anchorName
       )} in ${chalk.bold(filePath.platformified())}`
     )
   }
 
-  if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
+  if (linkTargets.anchorType(filePath, anchorName) === "heading") {
     f.name(
       `link to heading ${chalk.cyan(
-        filePath.platformified() + '#' + anchorName
+        filePath.platformified() + "#" + anchorName
       )}`
     )
   } else {

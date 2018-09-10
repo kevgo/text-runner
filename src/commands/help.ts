@@ -1,29 +1,29 @@
-import chalk from 'chalk'
+import chalk from "chalk"
 
-const { version } = require('../../package.json')
+const { version } = require("../../package.json")
 
 export default (async function helpCommand(error?: string) {
   console.log(template(error))
 })
 
 function template(error: string | null) {
-  if (error) error = `${chalk.red(chalk.bold('Error: ' + error))}`
+  if (error) error = `${chalk.red(chalk.bold("Error: " + error))}`
   return `
-${chalk.dim('TextRunner ' + version)}
-${error || ''}
-USAGE: ${chalk.bold('text-run [<options>] <command>')}
+${chalk.dim("TextRunner " + version)}
+${error || ""}
+USAGE: ${chalk.bold("text-run [<options>] <command>")}
 
 COMMANDS
   ${chalk.bold(
-    'run'
+    "run"
   )} [<filename>]  tests the entire documentation, or only the given file/folder
-  ${chalk.bold('add')} <filename>    scaffolds a new block type handler
-  ${chalk.bold('setup')}             creates an example configuration file
-  ${chalk.bold('version')}           shows the currently installed version
-  ${chalk.bold('help')}              shows this help screen
+  ${chalk.bold("add")} <filename>    scaffolds a new block type handler
+  ${chalk.bold("setup")}             creates an example configuration file
+  ${chalk.bold("version")}           shows the currently installed version
+  ${chalk.bold("help")}              shows this help screen
 
 OPTIONS
-  ${chalk.bold('--config')}          provide a custom configuration filename
-  ${chalk.bold('--offline')}         don't check external links
+  ${chalk.bold("--config")}          provide a custom configuration filename
+  ${chalk.bold("--offline")}         don't check external links
 `
 }

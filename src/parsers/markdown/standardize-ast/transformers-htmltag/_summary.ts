@@ -1,7 +1,7 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 
 module.exports = function transformSummaryTag(
   node: any,
@@ -11,16 +11,16 @@ module.exports = function transformSummaryTag(
 ): AstNodeList {
   const result = new AstNodeList()
   const openingTag = openTags.popType(
-    'summary_open',
+    "summary_open",
     file.platformified(),
     line
   )
   const resultNode = new AstNode({
-    type: 'summary_close',
-    tag: '/summary',
+    type: "summary_close",
+    tag: "/summary",
     file,
     line,
-    content: '',
+    content: "",
     attributes: openingTag.attributes
   })
   result.pushNode(resultNode)

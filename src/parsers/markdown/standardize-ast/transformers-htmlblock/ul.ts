@@ -1,10 +1,10 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import parseHtmlAttributes from '../../helpers/parse-html-attributes.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
-import util from 'util'
-import xml2js from 'xml2js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import util from "util"
+import xml2js from "xml2js"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
@@ -20,18 +20,18 @@ module.exports = async function transformUl(
   const match = node.content.match(ulRegex)
   const xml = await xml2jsp(node.content)
   const ulNode = new AstNode({
-    type: 'bullet_list_open',
-    tag: 'ul',
+    type: "bullet_list_open",
+    tag: "ul",
     file,
     line,
-    content: '',
+    content: "",
     attributes: parseHtmlAttributes(match[1])
   })
   result.pushNode(ulNode)
   for (const li of xml.ul.li) {
     result.pushNode({
-      type: 'list_item_open',
-      tag: 'li',
+      type: "list_item_open",
+      tag: "li",
       file,
       line,
       content: li._,
@@ -39,11 +39,11 @@ module.exports = async function transformUl(
     })
   }
   result.pushNode({
-    type: 'bullet_list_close',
-    tag: '/ul',
+    type: "bullet_list_close",
+    tag: "/ul",
     file,
     line,
-    content: '',
+    content: "",
     attributes: ulNode.attributes
   })
   return result

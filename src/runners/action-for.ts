@@ -1,13 +1,13 @@
-import { Activity } from '../activity-list/activity.js'
-import { Action } from '../runners/action.js'
+import { Activity } from "../activity-list/activity.js"
+import { Action } from "../runners/action.js"
 
-import builtinActionFilePaths from '../helpers/builtin-action-filepaths.js'
-import customActionFilePaths from '../helpers/custom-action-filepaths.js'
-import getActionName from '../helpers/action-name.js'
-import interpret from 'interpret'
-import chalk from 'chalk'
-import rechoir from 'rechoir'
-import UnprintedUserError from '../errors/unprinted-user-error.js'
+import builtinActionFilePaths from "../helpers/builtin-action-filepaths.js"
+import customActionFilePaths from "../helpers/custom-action-filepaths.js"
+import getActionName from "../helpers/action-name.js"
+import interpret from "interpret"
+import chalk from "chalk"
+import rechoir from "rechoir"
+import UnprintedUserError from "../errors/unprinted-user-error.js"
 
 type FunctionRepo = { [key: string]: Action }
 
@@ -33,12 +33,12 @@ function errorUnknownActivityType(activity: Activity): Action {
     errorText += `* ${actionName}\n`
   }
   if (Object.keys(customActions).length > 0) {
-    errorText += '\nYou defined these custom activity types:\n'
+    errorText += "\nYou defined these custom activity types:\n"
     for (let actionName of Object.keys(customActions).sort()) {
       errorText += `* ${actionName}\n`
     }
   } else {
-    errorText += '\nNo custom actions defined.\n'
+    errorText += "\nNo custom actions defined.\n"
   }
   errorText += `\nTo create a new "${activity.type}" activity type,\n`
   errorText += `run "text-run add ${activity.type}"\n`
@@ -59,7 +59,7 @@ function loadBuiltinActions(): FunctionRepo {
 
 function loadCustomActions(): FunctionRepo {
   const result = {}
-  require('babel-register')
+  require("babel-register")
   for (const filename of customActionFilePaths()) {
     rechoir.prepare(interpret.jsVariants, filename)
     const actionName = getActionName(filename)

@@ -1,13 +1,13 @@
-import { Activity } from '../activity-list/activity.js'
-import { Action } from './action.js'
-import { ActionArgs } from './action-args.js'
-import { Configuration } from '../configuration/configuration.js'
+import { Activity } from "../activity-list/activity.js"
+import { Action } from "./action.js"
+import { ActionArgs } from "./action-args.js"
+import { Configuration } from "../configuration/configuration.js"
 
-import actionFor from './action-for.js'
-import LinkTargetList from '../link-targets/link-target-list.js'
-import StatsCounter from './stats-counter.js'
-import PrintedUserError from '../errors/printed-user-error.js'
-import util from 'util'
+import actionFor from "./action-for.js"
+import LinkTargetList from "../link-targets/link-target-list.js"
+import StatsCounter from "./stats-counter.js"
+import PrintedUserError from "../errors/printed-user-error.js"
+import util from "util"
 
 export default (async function runActivity(
   activity: Activity,
@@ -58,5 +58,5 @@ async function runSyncOrPromiseFunc(func: Action, args: ActionArgs) {
 }
 
 function isUserError(err: Error): boolean {
-  return err.name === 'Error'
+  return err.name === "Error"
 }

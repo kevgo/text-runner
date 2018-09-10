@@ -1,5 +1,5 @@
-import AstNode from './ast-node'
-import UnprintedUserError from '../errors/unprinted-user-error'
+import AstNode from "./ast-node"
+import UnprintedUserError from "../errors/unprinted-user-error"
 
 export default class AstNodeList extends Array<AstNode> {
   // Returns the AstNode matching any of the given types.
@@ -9,15 +9,15 @@ export default class AstNodeList extends Array<AstNode> {
     const nodes = this.getNodesOfTypes(...nodeTypes)
     if (nodes.length > 1) {
       throw new UnprintedUserError(
-        `Found ${nodes.length} nodes of type '${nodeTypes.join('/')}'`,
+        `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
         nodes[0].file.platformified(),
         nodes[0].line
       )
     }
     if (nodes.length === 0) {
-      var msg = `Found no nodes of type '${nodeTypes.join('/')}'. `
-      msg += 'The node types in this list are: '
-      msg += this.nodeTypes().join(', ')
+      var msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
+      msg += "The node types in this list are: "
+      msg += this.nodeTypes().join(", ")
       throw new UnprintedUserError(
         msg,
         this[0].file.platformified(),
@@ -28,7 +28,7 @@ export default class AstNodeList extends Array<AstNode> {
   }
 
   getNodesFor(openingNode: AstNode): AstNodeList {
-    if (openingNode == null) throw new UnprintedUserError('null Node given')
+    if (openingNode == null) throw new UnprintedUserError("null Node given")
     var index = this.indexOf(openingNode)
     if (index === -1) {
       throw new UnprintedUserError(
@@ -61,7 +61,7 @@ export default class AstNodeList extends Array<AstNode> {
 
   hasNodeOfType(nodeType: string): boolean {
     const types = [nodeType]
-    types.push(nodeType + '_open')
+    types.push(nodeType + "_open")
     return this.some(node => types.includes(node.type))
   }
 
@@ -83,12 +83,12 @@ export default class AstNodeList extends Array<AstNode> {
   }
 
   text(): string {
-    return this.reduce((acc, node) => acc + node.content, '')
+    return this.reduce((acc, node) => acc + node.content, "")
   }
 
   // returns the textual content for the given node
   textInNode(node: AstNode): string {
-    return this.getNodesFor(node).reduce((acc, node) => acc + node.content, '')
+    return this.getNodesFor(node).reduce((acc, node) => acc + node.content, "")
   }
 
   // Returns the text in the nodes of the given types.
@@ -96,14 +96,14 @@ export default class AstNodeList extends Array<AstNode> {
   // throws otherwise.
   textInNodeOfType(...nodeTypes: string[]): string {
     for (const nodeType of nodeTypes) {
-      if (!nodeType.endsWith('_open')) nodeTypes.push(nodeType + '_open')
+      if (!nodeType.endsWith("_open")) nodeTypes.push(nodeType + "_open")
     }
     return this.textInNode(this.getNodeOfTypes(...nodeTypes))
   }
 
   textInNodesOfType(...nodeTypes: string[]): string[] {
     for (const nodeType of nodeTypes) {
-      if (!nodeType.endsWith('_open')) nodeTypes.push(nodeType + '_open')
+      if (!nodeType.endsWith("_open")) nodeTypes.push(nodeType + "_open")
     }
     return this.getNodesOfTypes(...nodeTypes).map(node => this.textInNode(node))
   }

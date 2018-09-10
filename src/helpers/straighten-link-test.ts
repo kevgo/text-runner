@@ -1,15 +1,15 @@
-import straightenLink from './straighten-link.js'
-import { describe, it } from 'mocha'
-import { expect } from 'chai'
+import straightenLink from "./straighten-link.js"
+import { describe, it } from "mocha"
+import { expect } from "chai"
 
-describe('straightenPath', function() {
+describe("straightenPath", function() {
   const tests = {
-    'returns normal paths': { '/foo': '/foo' },
-    'with current dir': { '/one/./././two/./': '/one/two/' },
-    'goes upward': { '/one/../two': '/two' },
-    'goes upward with double slash': { '/one//../two': '/two' },
-    'several upwards together': { '/one/two/three/../../four': '/one/four' },
-    'several individual upwards': { '/one/two/../three/../four': '/one/four' }
+    "returns normal paths": { "/foo": "/foo" },
+    "with current dir": { "/one/./././two/./": "/one/two/" },
+    "goes upward": { "/one/../two": "/two" },
+    "goes upward with double slash": { "/one//../two": "/two" },
+    "several upwards together": { "/one/two/three/../../four": "/one/four" },
+    "several individual upwards": { "/one/two/../three/../four": "/one/four" }
   }
   for (const [description, testData] of Object.entries(tests)) {
     const [input, expected] = Object.entries(testData)[0]

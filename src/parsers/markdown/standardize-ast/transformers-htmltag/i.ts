@@ -1,8 +1,8 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
-import parseHtmlTag from '../../helpers/parse-html-tag.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import parseHtmlTag from "../../helpers/parse-html-tag.js"
 
 module.exports = function transformATag(
   node: any,
@@ -17,11 +17,11 @@ module.exports = function transformATag(
     line
   )
   const resultNode = new AstNode({
-    type: 'italic_open',
+    type: "italic_open",
     tag,
     file,
     line,
-    content: '',
+    content: "",
     attributes
   })
   openTags.add(resultNode)

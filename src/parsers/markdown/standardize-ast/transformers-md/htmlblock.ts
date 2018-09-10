@@ -1,9 +1,9 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
-import UnprintedUserError from '../../../../errors/unprinted-user-error.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
 
-const parseHtmlAttributes = require('../../helpers/parse-html-attributes.js')
+const parseHtmlAttributes = require("../../helpers/parse-html-attributes.js")
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/
 
@@ -17,27 +17,27 @@ export default function(
   const preMatch = node.content.match(preRegex)
   if (preMatch) {
     result.pushNode({
-      type: 'fence_open',
-      tag: 'pre',
+      type: "fence_open",
+      tag: "pre",
       file: file,
       line,
-      content: '',
+      content: "",
       attributes: parseHtmlAttributes(preMatch[1])
     })
     result.pushNode({
-      type: 'text',
-      tag: '',
+      type: "text",
+      tag: "",
       file: file,
       line,
       content: preMatch[2],
       attributes: {}
     })
     result.pushNode({
-      type: 'fence_close',
-      tag: '/pre',
+      type: "fence_close",
+      tag: "/pre",
       file: file,
       line,
-      content: '',
+      content: "",
       attributes: {}
     })
     return result
@@ -45,8 +45,8 @@ export default function(
   const tableMatch = node.content.trim().match(tableRegex)
   if (tableMatch) {
     result.pushNode({
-      type: 'table',
-      tag: 'table',
+      type: "table",
+      tag: "table",
       file: file,
       line,
       content: node.content.trim(),

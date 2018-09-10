@@ -1,17 +1,17 @@
-import fs from 'fs'
-import path from 'path'
+import fs from "fs"
+import path from "path"
 
 export default (async function addCommand(
   blockName: string | null
 ): Promise<Array<Error>> {
-  if (!blockName) throw new Error('no block name given')
-  if (!fs.existsSync('text-run')) {
-    fs.mkdirSync('text-run')
+  if (!blockName) throw new Error("no block name given")
+  if (!fs.existsSync("text-run")) {
+    fs.mkdirSync("text-run")
   }
   fs.writeFileSync(
-    path.join('text-run', blockName + '.js'),
+    path.join("text-run", blockName + ".js"),
     template(blockName),
-    'utf8'
+    "utf8"
   )
   return []
 })

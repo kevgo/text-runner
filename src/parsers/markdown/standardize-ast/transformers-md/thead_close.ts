@@ -1,6 +1,6 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 
 export default function(
   node: any,
@@ -11,12 +11,12 @@ export default function(
   const result = new AstNodeList()
   result.pushNode({
     type: node.type,
-    tag: '/thead',
+    tag: "/thead",
     file,
     line,
-    content: '',
+    content: "",
     attributes: {}
   })
-  openTags.popType('thead_open', file.platformified(), line)
+  openTags.popType("thead_open", file.platformified(), line)
   return result
 }

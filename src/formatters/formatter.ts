@@ -1,8 +1,8 @@
-import { Activity } from '../activity-list/activity'
-import WriteStream from 'observable-process'
+import { Activity } from "../activity-list/activity"
+import WriteStream from "observable-process"
 
-import humanize from 'humanize-string'
-import StatsCounter from '../runners/stats-counter'
+import humanize from "humanize-string"
+import StatsCounter from "../runners/stats-counter"
 
 type Console = {
   log(text: string): void
@@ -31,7 +31,7 @@ export default class Formatter {
     this.statsCounter = statsCounter
     this.stdout = { write: this.log.bind(this) }
     this.stderr = { write: this.log.bind(this) }
-    this.output = ''
+    this.output = ""
     this.title = humanize(activity.type)
     this.sourceDir = sourceDir
     this.skipped = false

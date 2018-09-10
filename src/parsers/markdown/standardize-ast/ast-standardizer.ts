@@ -1,18 +1,18 @@
-import Transformer from '../standardize-ast/transformer.js'
-import TransformerList from '../standardize-ast/transformer-list.js'
+import Transformer from "../standardize-ast/transformer.js"
+import TransformerList from "../standardize-ast/transformer-list.js"
 
-import AbsoluteFilePath from '../../../domain-model/absolute-file-path'
-import AstNodeList from '../../ast-node-list'
-import FormattingTracker from '../helpers/formatting-tracker'
-import getHtmlBlockTag from '../helpers/get-html-block-tag'
-import loadTransformers from '../standardize-ast/load-transformers'
-import OpenTagTracker from '../helpers/open-tag-tracker'
-import removeHtmlComments from '../helpers/remove-html-comments'
-import UnprintedUserError from '../../../errors/unprinted-user-error'
+import AbsoluteFilePath from "../../../domain-model/absolute-file-path"
+import AstNodeList from "../../ast-node-list"
+import FormattingTracker from "../helpers/formatting-tracker"
+import getHtmlBlockTag from "../helpers/get-html-block-tag"
+import loadTransformers from "../standardize-ast/load-transformers"
+import OpenTagTracker from "../helpers/open-tag-tracker"
+import removeHtmlComments from "../helpers/remove-html-comments"
+import UnprintedUserError from "../../../errors/unprinted-user-error"
 
-const mdTransformers = loadTransformers('md')
-const htmlBlockTransformers = loadTransformers('htmlblock')
-const htmlTagTransformers = loadTransformers('htmltag')
+const mdTransformers = loadTransformers("md")
+const htmlBlockTransformers = loadTransformers("htmlblock")
+const htmlTagTransformers = loadTransformers("htmltag")
 
 // AstStandardizer converts the AST created by Remarkable
 // into the standardized AST used by TextRunner
@@ -51,7 +51,7 @@ export default class AstStandardizer {
   }
 
   async processHtmlBlock(node: any): Promise<boolean> {
-    if (node.type !== 'htmlblock') return false
+    if (node.type !== "htmlblock") return false
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
       this.filepath,
@@ -78,13 +78,13 @@ export default class AstStandardizer {
   }
 
   processHtmlTag(node: any): boolean {
-    if (node.type !== 'htmltag') return false
+    if (node.type !== "htmltag") return false
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
       this.filepath,
       this.line
     )
-    const transformer = htmlTagTransformers[tagName.replace('/', '_')]
+    const transformer = htmlTagTransformers[tagName.replace("/", "_")]
     if (!transformer) {
       throw new UnprintedUserError(
         `Unknown HTML tag: '${tagName}'`,
@@ -120,7 +120,7 @@ export default class AstStandardizer {
   }
 
   processSoftBreak(node: any): boolean {
-    if (node.type !== 'softbreak') return false
+    if (node.type !== "softbreak") return false
     this.line += 1
     return true
   }

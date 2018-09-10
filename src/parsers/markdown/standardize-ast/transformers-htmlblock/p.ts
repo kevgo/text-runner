@@ -1,9 +1,9 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import parseHtmlAttributes from '../../helpers/parse-html-attributes.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
-import UnprintedUserError from '../../../../errors/unprinted-user-error.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
 
 const pRegex = /<p([^>]*)>([\s\S]*)<\/p>/m
 
@@ -17,14 +17,14 @@ module.exports = async function transformPBlock(
   const match = node.content.match(pRegex)
   if (!match) {
     throw new UnprintedUserError(
-      'cannot match <p> tag',
+      "cannot match <p> tag",
       file.platformified(),
       line
     )
   }
   const resultNode = new AstNode({
-    type: 'paragraph',
-    tag: 'p',
+    type: "paragraph",
+    tag: "p",
     file,
     line,
     content: match[2],

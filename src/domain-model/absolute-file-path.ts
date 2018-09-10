@@ -19,7 +19,7 @@ export default class AbsoluteFilePath {
   // Returns the directory that contains this file path
   directory(): AbsoluteFilePath {
     if (this.isDirectory()) return this
-    return new AbsoluteFilePath(path.dirname(this.value) + '/')
+    return new AbsoluteFilePath(path.dirname(this.value) + "/")
   }
 
   // Returns the file extension of this path
@@ -29,7 +29,7 @@ export default class AbsoluteFilePath {
 
   // Returns whether this file path points to a directory
   isDirectory(): boolean {
-    return this.value.endsWith('/')
+    return this.value.endsWith("/")
   }
 
   // Returns the path in the platform-specific format,
@@ -51,8 +51,8 @@ export default class AbsoluteFilePath {
   }
 }
 
-import Publications from '../configuration/publications.js'
-import AbsoluteLink from './absolute-link.js'
-import path from 'path'
-import removeLeadingSlash from '../helpers/remove-leading-slash.js'
-import unixify from '../helpers/unifixy.js'
+import Publications from "../configuration/publications.js"
+import AbsoluteLink from "./absolute-link.js"
+import path from "path"
+import removeLeadingSlash from "../helpers/remove-leading-slash.js"
+import unixify from "../helpers/unifixy.js"

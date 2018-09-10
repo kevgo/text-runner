@@ -1,20 +1,20 @@
-import { ActionArgs } from '../runners/action-args.js'
-import { Configuration } from '../configuration/configuration.js'
-import { WriteStream } from 'observable-process'
+import { ActionArgs } from "../runners/action-args.js"
+import { Configuration } from "../configuration/configuration.js"
+import { WriteStream } from "observable-process"
 
-import AstNodeList from '../parsers/ast-node-list.js'
-import callArgs from '../helpers/call-args'
-import chalk from 'chalk'
-import deb from 'debug'
-import Formatter from '../formatters/formatter.js'
-import ObservableProcess from 'observable-process'
-import path from 'path'
-import trimDollar from '../helpers/trim-dollar'
+import AstNodeList from "../parsers/ast-node-list.js"
+import callArgs from "../helpers/call-args"
+import chalk from "chalk"
+import deb from "debug"
+import Formatter from "../formatters/formatter.js"
+import ObservableProcess from "observable-process"
+import path from "path"
+import trimDollar from "../helpers/trim-dollar"
 
-const debug = deb('textrun:actions:run-console-command')
+const debug = deb("textrun:actions:run-console-command")
 
 type ProcessInput = {
-  textToWait: string | null,
+  textToWait: string | null
   input: string
 }
 
@@ -22,24 +22,24 @@ type ProcessInput = {
 // Waits until the command is finished.
 export default (async function(args: ActionArgs) {
   const commandsToRun = args.nodes
-    .textInNodeOfType('fence')
-    .split('\n')
+    .textInNodeOfType("fence")
+    .split("\n")
     .map(command => command.trim())
     .filter(e => e)
     .map(trimDollar)
     .map(makeGlobal(args.configuration))
-    .join(' && ')
-  if (commandsToRun === '') {
-    throw new Error('the block that defines console commands to run is empty')
+    .join(" && ")
+  if (commandsToRun === "") {
+    throw new Error("the block that defines console commands to run is empty")
   }
 
   args.formatter.name(`running console command: ${chalk.cyan(commandsToRun)}`)
   var input = []
-  if (args.nodes.hasNodeOfType('table')) {
+  if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes, args.formatter)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
-  global.consoleCommandOutput = ''
+  global.consoleCommandOutput = ""
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
     cwd: args.configuration.workspace,
@@ -68,10 +68,10 @@ function getInput(
 ): Array<ProcessInput> {
   if (!nodes) return []
   const result = []
-  const rows = nodes.getNodesOfTypes('table_row_open')
+  const rows = nodes.getNodesOfTypes("table_row_open")
   for (const row of rows) {
     const cellsN = nodes.getNodesFor(row)
-    const cells = cellsN.getNodesOfTypes('table_cell')
+    const cells = cellsN.getNodesOfTypes("table_cell")
     if (cells.length === 0) continue
     if (cells.length === 1) {
       // 3 cells = 1 td (<tr>, <td>, </tr>)
@@ -94,7 +94,7 @@ function makeGlobal(configuration: Configuration) {
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {
-    const commandParts = commandText.split(' ')
+    const commandParts = commandText.split(" ")
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
     const replacement = globals[command]
@@ -102,8 +102,8 @@ function makeGlobal(configuration: Configuration) {
       debug(`found replacement: ${replacement}`)
       return (
         path.join(configuration.sourceDir, replacement) +
-        ' ' +
-        commandParts.splice(1).join(' ')
+        " " +
+        commandParts.splice(1).join(" ")
       )
     } else {
       return commandText

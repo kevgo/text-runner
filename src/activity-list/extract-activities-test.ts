@@ -1,63 +1,63 @@
-import AstNodeList from '../parsers/ast-node-list.js'
-import extractActivities from './extract-activities.js'
-import { expect } from 'chai'
-import { describe, it } from 'mocha'
+import AstNodeList from "../parsers/ast-node-list.js"
+import extractActivities from "./extract-activities.js"
+import { expect } from "chai"
+import { describe, it } from "mocha"
 
-describe('extract-activities', function() {
-  it('extracts activities', function() {
+describe("extract-activities", function() {
+  it("extracts activities", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: 'anchor_open',
-      file: 'README.md',
+      type: "anchor_open",
+      file: "README.md",
       line: 3,
-      attributes: { textrun: 'verify-foo' }
+      attributes: { textrun: "verify-foo" }
     })
-    AST.pushNode({ type: 'text' })
-    AST.pushNode({ type: 'anchor_close' })
-    const result = extractActivities([AST], 'textrun')
+    AST.pushNode({ type: "text" })
+    AST.pushNode({ type: "anchor_close" })
+    const result = extractActivities([AST], "textrun")
     expect(result).to.have.length(1)
-    expect(result[0].type).to.equal('verify-foo')
-    expect(result[0].file.unixified()).to.equal('README.md')
+    expect(result[0].type).to.equal("verify-foo")
+    expect(result[0].file.unixified()).to.equal("README.md")
     expect(result[0].line).to.equal(3)
     expect(result[0].nodes).to.eql(AST)
   })
 
-  it('normalizes activity names in CamelCase', function() {
+  it("normalizes activity names in CamelCase", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: 'anchor_open',
-      file: 'README.md',
+      type: "anchor_open",
+      file: "README.md",
       line: 3,
-      attributes: { textrun: 'verifyFoo' }
+      attributes: { textrun: "verifyFoo" }
     })
-    AST.pushNode({ type: 'anchor_close' })
-    const result = extractActivities([AST], 'textrun')
-    expect(result[0].type).to.equal('verify-foo')
+    AST.pushNode({ type: "anchor_close" })
+    const result = extractActivities([AST], "textrun")
+    expect(result[0].type).to.equal("verify-foo")
   })
 
-  it('normalizes activity names in kebab-case', function() {
+  it("normalizes activity names in kebab-case", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: 'anchor_open',
-      file: 'README.md',
+      type: "anchor_open",
+      file: "README.md",
       line: 3,
-      attributes: { textrun: 'verify-foo' }
+      attributes: { textrun: "verify-foo" }
     })
-    AST.pushNode({ type: 'anchor_close' })
-    const result = extractActivities([AST], 'textrun')
-    expect(result[0].type).to.equal('verify-foo')
+    AST.pushNode({ type: "anchor_close" })
+    const result = extractActivities([AST], "textrun")
+    expect(result[0].type).to.equal("verify-foo")
   })
 
-  it('normalizes activity names in snake_case', function() {
+  it("normalizes activity names in snake_case", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: 'anchor_open',
-      file: 'README.md',
+      type: "anchor_open",
+      file: "README.md",
       line: 3,
-      attributes: { textrun: 'verify_foo' }
+      attributes: { textrun: "verify_foo" }
     })
-    AST.pushNode({ type: 'anchor_close' })
-    const result = extractActivities([AST], 'textrun')
-    expect(result[0].type).to.equal('verify-foo')
+    AST.pushNode({ type: "anchor_close" })
+    const result = extractActivities([AST], "textrun")
+    expect(result[0].type).to.equal("verify-foo")
   })
 })

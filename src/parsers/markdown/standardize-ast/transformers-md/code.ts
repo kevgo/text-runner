@@ -1,6 +1,6 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 
 export default function(
   node: any,
@@ -10,27 +10,27 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: 'code_open',
-    tag: 'code',
+    type: "code_open",
+    tag: "code",
     file: file,
     line,
-    content: '',
+    content: "",
     attributes: {}
   })
   result.pushNode({
-    type: 'text',
-    tag: '',
+    type: "text",
+    tag: "",
     file: file,
     line,
     content: node.content,
     attributes: {}
   })
   result.pushNode({
-    type: 'code_close',
-    tag: '/code',
+    type: "code_close",
+    tag: "/code",
     file: file,
     line,
-    content: '',
+    content: "",
     attributes: {}
   })
   return result

@@ -1,10 +1,10 @@
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path.js'
-import AstNode from '../../../ast-node.js'
-import AstNodeList from '../../../ast-node-list.js'
-import OpenTagTracker from '../../helpers/open-tag-tracker.js'
-import UnprintedUserError from '../../../../errors/unprinted-user-error.js'
-import util from 'util'
-import xml2js from 'xml2js'
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import AstNode from "../../../ast-node.js"
+import AstNodeList from "../../../ast-node-list.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
+import util from "util"
+import xml2js from "xml2js"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
@@ -22,63 +22,63 @@ module.exports = async function transformTable(
     const lineMatch = e.message.match(/Line: (\d+)/)
     var errorLine = line
     if (lineMatch) errorLine += parseInt(lineMatch[1])
-    const message = e.message.split('\n')[0]
+    const message = e.message.split("\n")[0]
     throw new UnprintedUserError(message, file.platformified(), errorLine)
   }
   const tableNode = new AstNode({
-    type: 'table_open',
-    tag: 'table',
+    type: "table_open",
+    tag: "table",
     file,
     line,
-    content: '',
+    content: "",
     attributes: xml.table.$ || {}
   })
   result.pushNode(tableNode)
   if (xml.table.tr) parseRows(xml.table.tr, result, file, line)
   if (xml.table.thead) {
     result.pushNode({
-      type: 'thead_open',
-      tag: 'thead',
+      type: "thead_open",
+      tag: "thead",
       file,
       line,
-      content: '',
+      content: "",
       attributes: xml.table.thead.$ || {}
     })
     parseRows(xml.table.thead[0].tr, result, file, line)
     result.pushNode({
-      type: 'thead_close',
-      tag: '/thead',
+      type: "thead_close",
+      tag: "/thead",
       file,
       line,
-      content: '',
+      content: "",
       attributes: xml.table.thead.$ || {}
     })
   }
   if (xml.table.tbody) {
     result.pushNode({
-      type: 'tbody_open',
-      tag: 'tbody',
+      type: "tbody_open",
+      tag: "tbody",
       file,
       line,
-      content: '',
+      content: "",
       attributes: xml.table.tbody.$ || {}
     })
     parseRows(xml.table.tbody[0].tr, result, file, line)
     result.pushNode({
-      type: 'tbody_close',
-      tag: '/tbody',
+      type: "tbody_close",
+      tag: "/tbody",
       file,
       line,
-      content: '',
+      content: "",
       attributes: xml.table.tbody.$ || {}
     })
   }
   result.pushNode({
-    type: 'table_close',
-    tag: '/table',
+    type: "table_close",
+    tag: "/table",
     file,
     line,
-    content: '',
+    content: "",
     attributes: tableNode.attributes
   })
   return result
@@ -92,18 +92,18 @@ function parseRows(
 ) {
   for (const row of block) {
     result.pushNode({
-      type: 'table_row_open',
-      tag: 'tr',
+      type: "table_row_open",
+      tag: "tr",
       file,
       line,
-      content: row._ || '',
+      content: row._ || "",
       attributes: row.$ || {}
     })
 
     for (const th of row.th || []) {
       result.pushNode({
-        type: 'table_heading',
-        tag: 'th',
+        type: "table_heading",
+        tag: "th",
         file,
         line,
         content: th._ || th,
@@ -112,8 +112,8 @@ function parseRows(
     }
     for (const td of row.td || []) {
       result.pushNode({
-        type: 'table_cell',
-        tag: 'td',
+        type: "table_cell",
+        tag: "td",
         file,
         line,
         content: td._ || td,
@@ -121,11 +121,11 @@ function parseRows(
       })
     }
     result.pushNode({
-      type: 'table_row_close',
-      tag: '/tr',
+      type: "table_row_close",
+      tag: "/tr",
       file,
       line,
-      content: row._ || '',
+      content: row._ || "",
       attributes: row.$ || {}
     })
   }

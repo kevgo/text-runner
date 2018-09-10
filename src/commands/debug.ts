@@ -1,18 +1,18 @@
-import { Configuration } from '../configuration/configuration.js'
+import { Configuration } from "../configuration/configuration.js"
 
-import AstNode from '../parsers/ast-node.js'
-import AstNodeList from '../parsers/ast-node-list.js'
-import extractActivities from '../activity-list/extract-activities.js'
-import extractImagesAndLinks from '../activity-list/extract-images-and-links.js'
-import findLinkTargets from '../link-targets/find-link-targets.js'
-import getFileNames from '../finding-files/get-filenames.js'
-import readAndParseFile from '../parsers/read-and-parse-file.js'
+import AstNode from "../parsers/ast-node.js"
+import AstNodeList from "../parsers/ast-node-list.js"
+import extractActivities from "../activity-list/extract-activities.js"
+import extractImagesAndLinks from "../activity-list/extract-images-and-links.js"
+import findLinkTargets from "../link-targets/find-link-targets.js"
+import getFileNames from "../finding-files/get-filenames.js"
+import readAndParseFile from "../parsers/read-and-parse-file.js"
 
 async function debugCommand(config: Configuration): Promise<Array<Error>> {
   const filenames = getFileNames(config)
   if (filenames.length === 0) return []
 
-  console.log('AST NODES:')
+  console.log("AST NODES:")
   const ASTs: Array<AstNodeList> = await Promise.all(
     filenames.map(readAndParseFile)
   )
@@ -26,20 +26,20 @@ async function debugCommand(config: Configuration): Promise<Array<Error>> {
     }
   }
 
-  console.log('\nIMAGES AND LINKS:')
+  console.log("\nIMAGES AND LINKS:")
   const links = extractImagesAndLinks(ASTs)
   if (links.length === 0) {
-    console.log('(none)')
+    console.log("(none)")
   } else {
     for (const link of links) {
       console.log(link)
     }
   }
 
-  console.log('\nACTIVITIES:')
+  console.log("\nACTIVITIES:")
   const activities = extractActivities(ASTs, config.classPrefix)
   if (activities.length === 0) {
-    console.log('(none)')
+    console.log("(none)")
   } else {
     for (const activity of activities) {
       console.log(
@@ -48,7 +48,7 @@ async function debugCommand(config: Configuration): Promise<Array<Error>> {
     }
   }
 
-  console.log('\nLINK TARGETS:')
+  console.log("\nLINK TARGETS:")
   const linkTargets = findLinkTargets(ASTs)
   for (const key of Object.keys(linkTargets.targets)) {
     console.log(key, linkTargets.targets[key])
@@ -58,10 +58,10 @@ async function debugCommand(config: Configuration): Promise<Array<Error>> {
 }
 
 function showAttr(node: AstNode): string {
-  if (node.type === 'text') return `("${node.content.trim()}")`
+  if (node.type === "text") return `("${node.content.trim()}")`
   const keys = Object.keys(node.attributes)
-  if (keys.length === 0) return ''
-  return `(${node.attributes['textrun']})`
+  if (keys.length === 0) return ""
+  return `(${node.attributes["textrun"]})`
 }
 
 export default debugCommand

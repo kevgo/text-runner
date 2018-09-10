@@ -5,20 +5,22 @@ import { WriteStream } from 'observable-process'
 import AstNodeList from '../parsers/ast-node-list.js'
 import callArgs from '../helpers/call-args'
 import chalk from 'chalk'
-import debug from 'debug'('textrun:actions:run-console-command')
+import deb from 'debug'
 import Formatter from '../formatters/formatter.js'
 import ObservableProcess from 'observable-process'
 import path from 'path'
 import trimDollar from '../helpers/trim-dollar'
 
+const debug = deb('textrun:actions:run-console-command')
+
 type ProcessInput = {
-  textToWait: ?string,
+  textToWait: string | null,
   input: string
 }
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-export default async function(args: ActionArgs) {
+export default (async function(args: ActionArgs) {
   const commandsToRun = args.nodes
     .textInNodeOfType('fence')
     .split('\n')
@@ -49,7 +51,7 @@ export default async function(args: ActionArgs) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
-}
+})
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {

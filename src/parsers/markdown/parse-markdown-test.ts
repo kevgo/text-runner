@@ -1,6 +1,5 @@
 import { expect } from "chai"
 import fs from "fs"
-import { describe, it } from "mocha"
 import path from "path"
 import AbsoluteFilePath from "../../domain-model/absolute-file-path"
 import parseMarkdown from "./parse-markdown"

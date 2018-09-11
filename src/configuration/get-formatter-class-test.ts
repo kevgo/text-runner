@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import DetailedFormatter from "../formatters/detailed-formatter"
 import DotFormatter from "../formatters/dot-formatter"
 import getFormatterClass from "./get-formatter-class"

@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import AstNode from "./ast-node"
 
 describe("AstNode", function() {

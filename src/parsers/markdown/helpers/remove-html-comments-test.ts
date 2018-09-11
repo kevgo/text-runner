@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import removeHtmlComments from "./remove-html-comments"
 
 describe("removeHtmlComments", function() {

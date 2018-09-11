@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { context, describe, it } from "mocha"
 import removeTrailingColon from "./remove-trailing-colon"
 
 describe("removeTrailingColon", function() {

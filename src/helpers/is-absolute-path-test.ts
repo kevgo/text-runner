@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import isAbsolutePath from "./is-absolute-path"
 
 describe("isAbsolutePath", function() {

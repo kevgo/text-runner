@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import AstNodeList from "../parsers/ast-node-list"
 import extractImagesAndLinks from "./extract-images-and-links"
 

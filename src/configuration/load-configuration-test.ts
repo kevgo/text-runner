@@ -1,6 +1,5 @@
 import { expect } from "chai"
 import fs from "fs"
-import { beforeEach, context, describe, it } from "mocha"
 import path from "path"
 import tmp from "tmp"
 import loadConfiguration from "./load-configuration"

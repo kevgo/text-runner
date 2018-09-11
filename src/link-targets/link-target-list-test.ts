@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import AbsoluteFilePath from "../domain-model/absolute-file-path"
 import AstNodeList from "../parsers/ast-node-list"
 import LinkTargetList from "./link-target-list"

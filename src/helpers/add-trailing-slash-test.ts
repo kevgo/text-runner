@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import addTrailingSlash from "./add-trailing-slash"
 
 describe("addTrailingSlash", function() {

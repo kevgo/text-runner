@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import parseHtmlTag from "./parse-html-tag"
 
 describe("parseAttributes", function() {

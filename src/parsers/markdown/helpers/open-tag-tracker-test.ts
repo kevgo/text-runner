@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { beforeEach, describe, it } from "mocha"
 import AstNode from "../../ast-node"
 import OpenTagTracker from "./open-tag-tracker"
 

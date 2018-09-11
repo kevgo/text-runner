@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import customActionFilePaths from "./custom-action-filepaths"
 
 describe("customActionFilePaths", function() {

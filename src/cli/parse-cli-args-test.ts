@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { beforeEach, context, describe, it } from "mocha"
 import parseCliArgs from "../../src/cli/parse-cli-args"
 
 describe("parse-cli-args", function() {

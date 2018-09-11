@@ -1,5 +1,4 @@
 import { expect } from "chai"
-import { describe, it } from "mocha"
 import actionName from "./action-name"
 
 describe("actionName", function() {

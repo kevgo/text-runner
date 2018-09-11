@@ -111,7 +111,7 @@ lintjs: build   # lints the javascript files
 
 lintmd:   # lints markdown files
 	node_modules/.bin/prettier -l "*.md"
-	node_modules/.bin/prettier -l "src/**/*.md"
+	node_modules/.bin/prettier -l "documentation/**/*.md"
 	node_modules/.bin/remark .
 
 setup:   # sets up the installation on this machine

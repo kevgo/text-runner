@@ -4,7 +4,6 @@ Authors of [NPM](https://www.npmjs.com) modules
 want to describe global commands provided by their modules.
 This action verifies those command names in documenation.
 
-
 #### Example
 
 <a textrun="create-file">
@@ -17,6 +16,7 @@ Assuming our __package.json__ file looks like this:
   }
 }
 ```
+
 </a>
 
 then the action below verifies that the instructions describe
@@ -33,7 +33,6 @@ $ foo
 </a>
 ```
 </a>
-
 
 #### More info
 

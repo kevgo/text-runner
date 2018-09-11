@@ -1,8 +1,7 @@
 # Creating a directory
 
-* creates a directory in the test workspace
-* the name of the directory is provided as a code block
-
+- creates a directory in the test workspace
+- the name of the directory is provided as a code block
 
 #### Example
 
@@ -13,7 +12,6 @@
 </a>
 ```
 </a>
-
 
 #### More info
 

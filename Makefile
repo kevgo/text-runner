@@ -91,7 +91,7 @@ endif
 fix:  # runs the fixers
 	tslint --project tsconfig.json --fix
 	node_modules/.bin/prettier --write 'src/**/*.ts'
-	node_modules/.bin/prettier --write '**/*.md'
+	node_modules/.bin/prettier --write 'documentation/**/*.md'
 
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t

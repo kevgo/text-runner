@@ -1,7 +1,7 @@
 import { Activity } from "../activity-list/activity"
 import { Configuration } from "../configuration/configuration"
-import { ActionArgs } from "./action-args"
 import { Action } from "./action"
+import { ActionArgs } from "./action-args"
 
 import util from "util"
 import PrintedUserError from "../errors/printed-user-error"

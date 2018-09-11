@@ -141,7 +141,7 @@ export default class AstStandardizer {
   }
 }
 
-function alertUnknownNodeType(node, filepath: string, line: number) {
+function alertUnknownNodeType(node, filepath: string, line: number): never {
   throw new UnprintedUserError(
     `AstStandardizer: unknown node type: ${node.type}`,
     filepath,

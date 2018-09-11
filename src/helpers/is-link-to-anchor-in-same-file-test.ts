@@ -8,7 +8,7 @@ describe("isLinkToAnchorInSameFile", function() {
     ["link to other file", "foo.md", false]
   ]
   for (const [description, link, expected] of testData) {
-    it(description, function() {
+    it(description as string, function() {
       expect(isLinkToAnchorInSameFile(link as string)).to.equal(expected)
     })
   }

@@ -42,6 +42,5 @@ export default function(argv: string[]): CliArgTypes {
   result.command = command
   result.files = commands[0]
 
-  // $FlowFixMe
   return result
 }

@@ -46,7 +46,6 @@ async function runCommand(config: Configuration): Promise<Array<Error | null>> {
   const jobs = executeParallel(links, linkTargets, config, stats)
   jobs.push(executeSequential(activities, config, linkTargets, stats))
   let results = await Promise.all(jobs)
-  // $FlowFixMe: flow doesn't understand this works here
   results = results.filter(r => r)
 
   // step 6: cleanup

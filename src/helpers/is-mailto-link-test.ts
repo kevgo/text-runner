@@ -7,7 +7,7 @@ describe("isMailtoLink", function() {
     ["foo", false]
   ]
   for (const [link, expected] of testData) {
-    it(link, function() {
+    it(link as string, function() {
       expect(isMailtoLink(link as string)).to.equal(expected)
     })
   }

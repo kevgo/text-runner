@@ -38,6 +38,7 @@
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
+    "@types/chai": "4.1.4",
     "@types/glob": "5.0.35",
     "@types/mocha": "5.2.5",
     "@types/node": "10.9.4",

@@ -3,7 +3,7 @@ import { Configuration } from "./configuration"
 
 import deb from "debug"
 import camelCase from "just-camel-case"
-import YAML from "yam"
+import YAML from "yamljs"
 import DetailedFormatter from "../formatters/detailed-formatter"
 import getFormatterClass from "./get-formatter-class"
 import Publications from "./publications"
@@ -33,7 +33,6 @@ export default function loadConfiguration(
   let fileData: any = {}
   if (configFilePath) {
     debug(`loading configuration file: ${configFilePath}`)
-    // $FlowFixMe: flow-type defs seems to be wrong here
     fileData = YAML.load(configFilePath) || {}
   }
   debug(`configuration file data: ${JSON.stringify(this.fileData)}`)

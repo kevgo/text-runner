@@ -46,7 +46,6 @@ async function staticCommand(
   process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats)
   let results = await Promise.all(jobs)
-  // $FlowFixMe: flow doesn't understand this works here
   results = results.filter(r => r)
 
   // step 6: cleanup

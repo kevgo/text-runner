@@ -8,7 +8,6 @@ describe("AstNodeList", function() {
     it("adds the nodes in the given list", function() {
       const list1 = AstNodeList.scaffold({ type: "node1" })
       const list2 = AstNodeList.scaffold({ type: "node2" })
-      // $FlowFixMe
       const result = list1.concat(list2)
       expect(result.map(node => node.type)).to.eql(["node1", "node2"])
     })

@@ -1,16 +1,12 @@
-// @flow
+const callArgs = require("../src/helpers/call-args")
+const ObservableProcess = require("observable-process")
+const path = require("path")
 
-import type { ActionArgs } from '../src/runners/action-args.js'
+module.exports = async function(args) {
+  args.formatter.name("running the created Markdown file in TextRunner")
 
-const callArgs = require('../src/helpers/call-args')
-const ObservableProcess = require('observable-process')
-const path = require('path')
-
-module.exports = async function (args: ActionArgs) {
-  args.formatter.name('running the created Markdown file in TextRunner')
-
-  var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
-  if (process.platform === 'win32') textRunPath += '.cmd'
+  var textRunPath = path.join(__dirname, "..", "bin", "text-run")
+  if (process.platform === "win32") textRunPath += ".cmd"
   const processor = new ObservableProcess({
     commands: callArgs(textRunPath),
     cwd: args.configuration.workspace,

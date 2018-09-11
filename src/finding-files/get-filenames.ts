@@ -1,8 +1,7 @@
-import { Configuration } from "../configuration/configuration"
-
 import chalk from "chalk"
 import deb from "debug"
 import isGlob from "is-glob"
+import { Configuration } from "../configuration/configuration"
 import AbsoluteFilePath from "../domain-model/absolute-file-path"
 import UnprintedUserError from "../errors/unprinted-user-error"
 import filesMatchingGlob from "../helpers/files-matching-glob"

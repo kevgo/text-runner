@@ -1,9 +1,8 @@
-import { ActivityList } from "./activity-list"
-
 import kebabCase from "just-kebab-case"
 import UnprintedUserError from "../errors/unprinted-user-error"
-import AstNodeList from "../parsers/ast-node-list"
 import AstNode from "../parsers/ast-node"
+import AstNodeList from "../parsers/ast-node-list"
+import { ActivityList } from "./activity-list"
 
 // Returns all activities contained in the given collection of AstNodeLists
 export default function(ASTs: AstNodeList[], prefix: string): ActivityList {

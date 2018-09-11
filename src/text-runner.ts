@@ -1,18 +1,18 @@
-import { CliArgTypes } from "./cli/cli-arg-types.js"
+import { CliArgTypes } from "./cli/cli-arg-types"
 
 import chalk from "chalk"
 import fs from "fs"
-import loadConfiguration from "./configuration/load-configuration.js"
-import PrintedUserError from "./errors/printed-user-error.js"
+import loadConfiguration from "./configuration/load-configuration"
+import PrintedUserError from "./errors/printed-user-error"
 
-import addCommand from "./commands/add.js"
-import debugCommand from "./commands/debug.js"
-import dynamicCommand from "./commands/dynamic.js"
-import helpCommand from "./commands/help.js"
-import runCommand from "./commands/run.js"
-import setupCommand from "./commands/setup.js"
-import staticCommand from "./commands/static.js"
-import versionCommand from "./commands/version.js"
+import addCommand from "./commands/add"
+import debugCommand from "./commands/debug"
+import dynamicCommand from "./commands/dynamic"
+import helpCommand from "./commands/help"
+import runCommand from "./commands/run"
+import setupCommand from "./commands/setup"
+import staticCommand from "./commands/static"
+import versionCommand from "./commands/version"
 
 // Tests the documentation in the given directory
 export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {

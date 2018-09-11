@@ -1,7 +1,7 @@
-import { ActionArgs } from "../runners/action-args.js"
+import { ActionArgs } from "../runners/action-args"
 
 import jsdiffConsole from "jsdiff-console"
-import RunConsoleCommandOutput from "./helpers/run-console-command-output.js"
+import RunConsoleCommandOutput from "./helpers/run-console-command-output"
 
 export default function(args: ActionArgs) {
   args.formatter.name("verifying the output of the last run console command")

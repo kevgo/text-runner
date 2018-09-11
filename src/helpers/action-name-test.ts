@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import actionName from "./action-name.js"
+import actionName from "./action-name"
 
 describe("actionName", function() {
   it("returns the name of the action corresponding to the given filename", function() {

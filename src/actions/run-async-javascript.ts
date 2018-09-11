@@ -1,5 +1,5 @@
-import { Configuration } from "../configuration/configuration.js"
-import { ActionArgs } from "../runners/action-args.js"
+import { Configuration } from "../configuration/configuration"
+import { ActionArgs } from "../runners/action-args"
 
 // Runs the async-await JavaScript code given in the code block
 export default function(args: ActionArgs) {

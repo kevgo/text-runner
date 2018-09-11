@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import addLeadingDot from "./add-leading-dot-unless-empty.js"
+import addLeadingDot from "./add-leading-dot-unless-empty"
 
 describe("addLeadingDotUnlessEmpty", function() {
   it("adds a leading dot if there isnt one", function() {

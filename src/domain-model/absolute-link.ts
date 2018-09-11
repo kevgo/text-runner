@@ -1,12 +1,12 @@
 import path from "path"
-import Publications from "../configuration/publications.js"
-import addLeadingDotUnlessEmpty from "../helpers/add-leading-dot-unless-empty.js"
-import addLeadingSlash from "../helpers/add-leading-slash.js"
-import removeDoubleSlash from "../helpers/remove-double-slash.js"
-import straightenLink from "../helpers/straighten-link.js"
-import unixify from "../helpers/unifixy.js"
-import AbsoluteFilePath from "./absolute-file-path.js"
-import RelativeLink from "./relative-link.js"
+import Publications from "../configuration/publications"
+import addLeadingDotUnlessEmpty from "../helpers/add-leading-dot-unless-empty"
+import addLeadingSlash from "../helpers/add-leading-slash"
+import removeDoubleSlash from "../helpers/remove-double-slash"
+import straightenLink from "../helpers/straighten-link"
+import unixify from "../helpers/unifixy"
+import AbsoluteFilePath from "./absolute-file-path"
+import RelativeLink from "./relative-link"
 
 // Represents a link to another Markdown file,
 // all the way from the root directory

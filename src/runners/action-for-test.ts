@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { context, describe, it } from "mocha"
-import scaffoldActivity from "../../test/scaffolders/activity.js"
-import actionFor from "./action-for.js"
+import scaffoldActivity from "../../test/scaffolders/activity"
+import actionFor from "./action-for"
 
 describe("actionFor", function() {
   context("built-in block name given", function() {

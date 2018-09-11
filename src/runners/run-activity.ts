@@ -1,13 +1,13 @@
-import { Activity } from "../activity-list/activity.js"
-import { Configuration } from "../configuration/configuration.js"
-import { ActionArgs } from "./action-args.js"
-import { Action } from "./action.js"
+import { Activity } from "../activity-list/activity"
+import { Configuration } from "../configuration/configuration"
+import { ActionArgs } from "./action-args"
+import { Action } from "./action"
 
 import util from "util"
-import PrintedUserError from "../errors/printed-user-error.js"
-import LinkTargetList from "../link-targets/link-target-list.js"
-import actionFor from "./action-for.js"
-import StatsCounter from "./stats-counter.js"
+import PrintedUserError from "../errors/printed-user-error"
+import LinkTargetList from "../link-targets/link-target-list"
+import actionFor from "./action-for"
+import StatsCounter from "./stats-counter"
 
 export default (async function runActivity(
   activity: Activity,

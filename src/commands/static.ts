@@ -1,15 +1,15 @@
-import { Configuration } from "../configuration/configuration.js"
+import { Configuration } from "../configuration/configuration"
 
 import chalk from "chalk"
 import rimraf from "rimraf"
-import extractActivities from "../activity-list/extract-activities.js"
-import extractImagesAndLinks from "../activity-list/extract-images-and-links.js"
-import getFileNames from "../finding-files/get-filenames.js"
-import findLinkTargets from "../link-targets/find-link-targets.js"
-import readAndParseFile from "../parsers/read-and-parse-file.js"
-import executeParallel from "../runners/execute-parallel.js"
-import StatsCounter from "../runners/stats-counter.js"
-import createWorkingDir from "../working-dir/create-working-dir.js"
+import extractActivities from "../activity-list/extract-activities"
+import extractImagesAndLinks from "../activity-list/extract-images-and-links"
+import getFileNames from "../finding-files/get-filenames"
+import findLinkTargets from "../link-targets/find-link-targets"
+import readAndParseFile from "../parsers/read-and-parse-file"
+import executeParallel from "../runners/execute-parallel"
+import StatsCounter from "../runners/stats-counter"
+import createWorkingDir from "../working-dir/create-working-dir"
 
 async function staticCommand(
   config: Configuration

@@ -1,13 +1,13 @@
-import { Activity } from "../activity-list/activity.js"
-import { Action } from "../runners/action.js"
+import { Activity } from "../activity-list/activity"
+import { Action } from "../runners/action"
 
 import chalk from "chalk"
 import interpret from "interpret"
 import rechoir from "rechoir"
-import UnprintedUserError from "../errors/unprinted-user-error.js"
-import getActionName from "../helpers/action-name.js"
-import builtinActionFilePaths from "../helpers/builtin-action-filepaths.js"
-import customActionFilePaths from "../helpers/custom-action-filepaths.js"
+import UnprintedUserError from "../errors/unprinted-user-error"
+import getActionName from "../helpers/action-name"
+import builtinActionFilePaths from "../helpers/builtin-action-filepaths"
+import customActionFilePaths from "../helpers/custom-action-filepaths"
 
 interface FunctionRepo {
   [key: string]: Action

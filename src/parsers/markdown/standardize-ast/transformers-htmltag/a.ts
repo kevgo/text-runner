@@ -1,8 +1,8 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
-import AstNodeList from "../../../ast-node-list.js"
-import AstNode from "../../../ast-node.js"
-import OpenTagTracker from "../../helpers/open-tag-tracker.js"
-import parseHtmlTag from "../../helpers/parse-html-tag.js"
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
+import AstNodeList from "../../../ast-node-list"
+import AstNode from "../../../ast-node"
+import OpenTagTracker from "../../helpers/open-tag-tracker"
+import parseHtmlTag from "../../helpers/parse-html-tag"
 
 module.exports = function transformATag(
   node: any,

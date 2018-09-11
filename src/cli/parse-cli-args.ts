@@ -1,4 +1,4 @@
-import { CliArgTypes } from "./cli-arg-types.js"
+import { CliArgTypes } from "./cli-arg-types"
 
 import minimist from "minimist"
 import path from "path"

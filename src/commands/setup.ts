@@ -1,5 +1,5 @@
 import chalk from "chalk"
-import createConfiguration from "../configuration/create-configuration.js"
+import createConfiguration from "../configuration/create-configuration"
 
 async function setupCommand() {
   createConfiguration()

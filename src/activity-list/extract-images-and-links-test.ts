@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import AstNodeList from "../parsers/ast-node-list.js"
-import extractImagesAndLinks from "./extract-images-and-links.js"
+import AstNodeList from "../parsers/ast-node-list"
+import extractImagesAndLinks from "./extract-images-and-links"
 
 describe("extractImagesAndLinks", function() {
   it("extracts images", function() {

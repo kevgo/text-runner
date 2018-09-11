@@ -1,6 +1,6 @@
-import Publications from "../configuration/publications.js"
-import AbsoluteFilePath from "./absolute-file-path.js"
-import AbsoluteLink from "./absolute-link.js"
+import Publications from "../configuration/publications"
+import AbsoluteFilePath from "./absolute-file-path"
+import AbsoluteLink from "./absolute-link"
 
 // A link relative to the current location,
 // i.e. a link not starting with '/'

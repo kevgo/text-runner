@@ -56,7 +56,7 @@ export default class AbsoluteFilePath {
 }
 
 import path from "path"
-import Publications from "../configuration/publications.js"
-import removeLeadingSlash from "../helpers/remove-leading-slash.js"
-import unixify from "../helpers/unifixy.js"
-import AbsoluteLink from "./absolute-link.js"
+import Publications from "../configuration/publications"
+import removeLeadingSlash from "../helpers/remove-leading-slash"
+import unixify from "../helpers/unifixy"
+import AbsoluteLink from "./absolute-link"

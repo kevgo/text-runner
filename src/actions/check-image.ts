@@ -1,11 +1,11 @@
-import { Configuration } from "../configuration/configuration.js"
-import { ActionArgs } from "../runners/action-args.js"
+import { Configuration } from "../configuration/configuration"
+import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import fs from "fs-extra"
 import path from "path"
 import request from "request-promise-native"
-import Formatter from "../formatters/formatter.js"
+import Formatter from "../formatters/formatter"
 
 // Checks for broken hyperlinks
 export default (async function(args: ActionArgs) {

@@ -1,8 +1,8 @@
-import { Configuration } from "../configuration/configuration.js"
+import { Configuration } from "../configuration/configuration"
 
-import Formatter from "../formatters/formatter.js"
-import LinkTargetList from "../link-targets/link-target-list.js"
-import AstNodeList from "../parsers/ast-node-list.js"
+import Formatter from "../formatters/formatter"
+import LinkTargetList from "../link-targets/link-target-list"
+import AstNodeList from "../parsers/ast-node-list"
 
 export interface ActionArgs {
   nodes: AstNodeList

@@ -1,4 +1,4 @@
-import { ActionArgs } from "../runners/action-args.js"
+import { ActionArgs } from "../runners/action-args"
 import RunningProcess from "./helpers/running-process"
 
 // Waits until the currently running console command produces the given output

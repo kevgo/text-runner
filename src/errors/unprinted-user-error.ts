@@ -1,4 +1,4 @@
-import UserError from "./user-error.js"
+import UserError from "./user-error"
 
 // Represents a UserError that has not been printed via the formatter.
 // This happens for user errors before the formatter could be instantiated

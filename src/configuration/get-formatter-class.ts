@@ -1,7 +1,7 @@
-import UnprintedUserError from "../errors/unprinted-user-error.js"
-import DetailedFormatter from "../formatters/detailed-formatter.js"
-import DotFormatter from "../formatters/dot-formatter.js"
-import Formatter from "../formatters/formatter.js"
+import UnprintedUserError from "../errors/unprinted-user-error"
+import DetailedFormatter from "../formatters/detailed-formatter"
+import DotFormatter from "../formatters/dot-formatter"
+import Formatter from "../formatters/formatter"
 
 export default function getFormatterClass(
   name: string,

@@ -1,5 +1,5 @@
-import AstNodeList from "../parsers/ast-node-list.js"
-import LinkTargetList from "./link-target-list.js"
+import AstNodeList from "../parsers/ast-node-list"
+import LinkTargetList from "./link-target-list"
 
 export default function(nodeLists: AstNodeList[]): LinkTargetList {
   const linkTargetList = new LinkTargetList()

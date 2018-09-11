@@ -1,5 +1,5 @@
-import Formatter from "../formatters/formatter.js"
-import Publications from "./publications.js"
+import Formatter from "../formatters/formatter"
+import Publications from "./publications"
 
 // Data structure for configuration values
 export interface Configuration {

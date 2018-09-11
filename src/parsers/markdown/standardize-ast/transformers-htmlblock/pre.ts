@@ -1,10 +1,10 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
-import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
-import pretendToUse from "../../../../helpers/pretend-to-use.js"
-import AstNodeList from "../../../ast-node-list.js"
-import AstNode from "../../../ast-node.js"
-import OpenTagTracker from "../../helpers/open-tag-tracker.js"
-import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
+import UnprintedUserError from "../../../../errors/unprinted-user-error"
+import pretendToUse from "../../../../helpers/pretend-to-use"
+import AstNodeList from "../../../ast-node-list"
+import AstNode from "../../../ast-node"
+import OpenTagTracker from "../../helpers/open-tag-tracker"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 

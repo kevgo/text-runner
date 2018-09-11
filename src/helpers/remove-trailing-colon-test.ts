@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { context, describe, it } from "mocha"
-import removeTrailingColon from "./remove-trailing-colon.js"
+import removeTrailingColon from "./remove-trailing-colon"
 
 describe("removeTrailingColon", function() {
   context("with trailing colon", function() {

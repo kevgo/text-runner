@@ -1,9 +1,9 @@
-import { ActivityList } from "../activity-list/activity-list.js"
-import { Configuration } from "../configuration/configuration.js"
+import { ActivityList } from "../activity-list/activity-list"
+import { Configuration } from "../configuration/configuration"
 
-import LinkTargetList from "../link-targets/link-target-list.js"
-import runActivity from "./run-activity.js"
-import StatsCounter from "./stats-counter.js"
+import LinkTargetList from "../link-targets/link-target-list"
+import runActivity from "./run-activity"
+import StatsCounter from "./stats-counter"
 
 export default (async function executeSequential(
   activities: ActivityList,

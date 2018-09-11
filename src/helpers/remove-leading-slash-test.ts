@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import removeLeadingSlash from "./remove-leading-slash.js"
+import removeLeadingSlash from "./remove-leading-slash"
 
 describe("removeLeadingSlash", function() {
   it("removes the leading slash if one exists", function() {

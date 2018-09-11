@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import removeDoubleSlash from "./remove-double-slash.js"
+import removeDoubleSlash from "./remove-double-slash"
 
 describe("removeDoubleSlash", function() {
   it("removes double slashes", function() {

@@ -1,4 +1,4 @@
-import { ActionArgs } from "../runners/action-args.js"
+import { ActionArgs } from "../runners/action-args"
 
 import endChildProcessesI from "end-child-processes"
 import util from "util"

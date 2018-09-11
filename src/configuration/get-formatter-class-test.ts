@@ -1,8 +1,8 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import DetailedFormatter from "../formatters/detailed-formatter.js"
-import DotFormatter from "../formatters/dot-formatter.js"
-import getFormatterClass from "./get-formatter-class.js"
+import DetailedFormatter from "../formatters/detailed-formatter"
+import DotFormatter from "../formatters/dot-formatter"
+import getFormatterClass from "./get-formatter-class"
 
 describe("getFormatterClass", function() {
   it("returns the dot formatter if requested", function() {

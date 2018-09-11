@@ -1,6 +1,6 @@
 import glob from "glob"
 import path from "path"
-import javascriptExtensions from "./javascript-extensions.js"
+import javascriptExtensions from "./javascript-extensions"
 
 export default function customActionFilePaths(): string[] {
   const pattern = path.join(

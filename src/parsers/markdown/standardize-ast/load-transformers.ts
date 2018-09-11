@@ -1,4 +1,4 @@
-import { TransformerList } from "../standardize-ast/transformer-list.js"
+import { TransformerList } from "../standardize-ast/transformer-list"
 
 import fs from "fs-extra"
 import path from "path"

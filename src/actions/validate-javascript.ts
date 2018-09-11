@@ -1,5 +1,5 @@
-import pretendToUse from "../helpers/pretend-to-use.js"
-import { ActionArgs } from "../runners/action-args.js"
+import pretendToUse from "../helpers/pretend-to-use"
+import { ActionArgs } from "../runners/action-args"
 
 // Runs the JavaScript code given in the code block
 export default function(args: ActionArgs) {

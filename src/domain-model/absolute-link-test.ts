@@ -1,8 +1,8 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import Publications from "../configuration/publications.js"
-import AbsoluteLink from "./absolute-link.js"
-import RelativeLink from "./relative-link.js"
+import Publications from "../configuration/publications"
+import AbsoluteLink from "./absolute-link"
+import RelativeLink from "./relative-link"
 
 describe("AbsoluteLink", function() {
   it("prepends a forward slash", function() {

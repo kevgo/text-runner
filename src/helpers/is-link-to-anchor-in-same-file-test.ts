@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import isLinkToAnchorInSameFile from "./is-link-to-anchor-in-same-file.js"
+import isLinkToAnchorInSameFile from "./is-link-to-anchor-in-same-file"
 
 describe("isLinkToAnchorInSameFile", function() {
   const testData = [

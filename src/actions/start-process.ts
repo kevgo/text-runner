@@ -1,5 +1,5 @@
-import { Configuration } from "../configuration/configuration.js"
-import { ActionArgs } from "../runners/action-args.js"
+import { Configuration } from "../configuration/configuration"
+import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import deb from "debug"

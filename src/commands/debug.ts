@@ -1,12 +1,12 @@
-import { Configuration } from "../configuration/configuration.js"
+import { Configuration } from "../configuration/configuration"
 
-import extractActivities from "../activity-list/extract-activities.js"
-import extractImagesAndLinks from "../activity-list/extract-images-and-links.js"
-import getFileNames from "../finding-files/get-filenames.js"
-import findLinkTargets from "../link-targets/find-link-targets.js"
-import AstNodeList from "../parsers/ast-node-list.js"
-import AstNode from "../parsers/ast-node.js"
-import readAndParseFile from "../parsers/read-and-parse-file.js"
+import extractActivities from "../activity-list/extract-activities"
+import extractImagesAndLinks from "../activity-list/extract-images-and-links"
+import getFileNames from "../finding-files/get-filenames"
+import findLinkTargets from "../link-targets/find-link-targets"
+import AstNodeList from "../parsers/ast-node-list"
+import AstNode from "../parsers/ast-node"
+import readAndParseFile from "../parsers/read-and-parse-file"
 
 async function debugCommand(config: Configuration): Promise<Error[]> {
   const filenames = getFileNames(config)

@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import addLeadingSlash from "./add-leading-slash.js"
+import addLeadingSlash from "./add-leading-slash"
 
 describe("addLeadingSlash", function() {
   it("adds a leading slash if missing", function() {

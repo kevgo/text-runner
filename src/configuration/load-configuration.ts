@@ -1,12 +1,12 @@
-import { CliArgTypes } from "../cli/cli-arg-types.js"
-import { Configuration } from "./configuration.js"
+import { CliArgTypes } from "../cli/cli-arg-types"
+import { Configuration } from "./configuration"
 
 import deb from "debug"
 import camelCase from "just-camel-case"
-import YAML from "yamljs"
-import DetailedFormatter from "../formatters/detailed-formatter.js"
-import getFormatterClass from "./get-formatter-class.js"
-import Publications from "./publications.js"
+import YAML from "yam"
+import DetailedFormatter from "../formatters/detailed-formatter"
+import getFormatterClass from "./get-formatter-class"
+import Publications from "./publications"
 
 const debug = deb("textrun:configuration")
 

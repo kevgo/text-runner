@@ -3,7 +3,7 @@ import fs from "fs"
 import { beforeEach, context, describe, it } from "mocha"
 import path from "path"
 import tmp from "tmp"
-import loadConfiguration from "./load-configuration.js"
+import loadConfiguration from "./load-configuration"
 
 describe("loadConfiguration", function() {
   it("returns default values if no config file is given", function() {

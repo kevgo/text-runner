@@ -1,4 +1,4 @@
-import { ActionArgs } from "../runners/action-args.js"
+import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import path from "path"

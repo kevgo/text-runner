@@ -1,5 +1,5 @@
-import { Configuration } from "../configuration/configuration.js"
-import { ActionArgs } from "../runners/action-args.js"
+import { Configuration } from "../configuration/configuration"
+import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import deb from "debug"
@@ -7,8 +7,8 @@ import ObservableProcess, { WriteStream } from "observable-process"
 import path from "path"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
-import AstNodeList from "../parsers/ast-node-list.js"
-import RunConsoleCommandOutput from "./helpers/run-console-command-output.js"
+import AstNodeList from "../parsers/ast-node-list"
+import RunConsoleCommandOutput from "./helpers/run-console-command-output"
 
 const debug = deb("textrun:actions:run-console-command")
 

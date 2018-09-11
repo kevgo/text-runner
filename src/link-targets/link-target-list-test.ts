@@ -1,8 +1,8 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
-import AstNodeList from "../parsers/ast-node-list.js"
-import LinkTargetList from "./link-target-list.js"
+import AbsoluteFilePath from "../domain-model/absolute-file-path"
+import AstNodeList from "../parsers/ast-node-list"
+import LinkTargetList from "./link-target-list"
 
 describe("LinkTargetList", function() {
   describe("addNodeList", function() {

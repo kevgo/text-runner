@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { describe, it } from "mocha"
-import unifixy from "./unifixy.js"
+import unifixy from "./unifixy"
 
 describe("unifixy", function() {
   it("converts Windows paths to Unix paths", function() {

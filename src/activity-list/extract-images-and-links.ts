@@ -1,6 +1,6 @@
-import { ActivityList } from "./activity-list.js"
+import { ActivityList } from "./activity-list"
 
-import AstNodeList from "../parsers/ast-node-list.js"
+import AstNodeList from "../parsers/ast-node-list"
 
 export default function(ASTs: AstNodeList[]): ActivityList {
   const result: ActivityList = []

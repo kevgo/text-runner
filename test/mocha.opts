@@ -1,5 +1,5 @@
 --colors
---require babel-core/register
+--compilers ts:ts-node/register
 --fullTrace
 --recursive
 test/test-helper.js

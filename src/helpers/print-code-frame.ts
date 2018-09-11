@@ -5,8 +5,8 @@ type PrintFunc = (arg: string) => void | boolean
 
 export default function(
   output: PrintFunc,
-  filename: string | null,
-  line: number | null
+  filename: string | undefined,
+  line: number | undefined
 ) {
   if (!filename || line == null) return
 

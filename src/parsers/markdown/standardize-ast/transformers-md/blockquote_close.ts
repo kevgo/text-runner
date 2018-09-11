@@ -9,11 +9,7 @@ export default function(
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openNode = openTags.popType(
-    "blockquote_open",
-    file.platformified(),
-    line
-  )
+  const openNode = openTags.popType("blockquote_open")
   result.pushNode({
     type: node.type,
     tag: "/blockquote",

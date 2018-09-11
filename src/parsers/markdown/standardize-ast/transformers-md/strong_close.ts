@@ -9,7 +9,7 @@ export default function(
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openNode = openTags.popType("strong_open", file.platformified(), line)
+  const openNode = openTags.popType("strong_open")
   result.pushNode({
     type: node.type,
     tag: "/strong",

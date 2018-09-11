@@ -71,7 +71,7 @@ describe("AbsoluteFilePath", function() {
   describe("publicPath", function() {
     it("returns the unixified path if there are no publications", function() {
       const filePath = new AbsoluteFilePath("content\\1.md")
-      const actual = filePath.publicPath(new Publications(), "")
+      const actual = filePath.publicPath(new Publications())
       expect(actual.value).to.equal("/content/1.md")
     })
 
@@ -84,7 +84,7 @@ describe("AbsoluteFilePath", function() {
         }
       ])
       const filePath = new AbsoluteFilePath("/content/1.md")
-      const actual = filePath.publicPath(publications, "")
+      const actual = filePath.publicPath(publications)
       expect(actual.value).to.equal("/1.html")
     })
   })

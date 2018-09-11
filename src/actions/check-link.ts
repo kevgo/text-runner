@@ -99,11 +99,7 @@ async function checkLinkToFilesystem(
   c: Configuration
 ) {
   const unknownLink = new UnknownLink(decodeURI(target))
-  const absoluteLink = unknownLink.absolutify(
-    containingFile,
-    c.publications,
-    c.defaultFile
-  )
+  const absoluteLink = unknownLink.absolutify(containingFile, c.publications)
   const linkedFile = absoluteLink.localize(c.publications, c.defaultFile)
   const fullPath = path.join(c.sourceDir, linkedFile.platformified())
 
@@ -160,11 +156,7 @@ async function checkLinkToAnchorInOtherFile(
   c: Configuration
 ) {
   const link = new UnknownLink(target)
-  const absoluteLink = link.absolutify(
-    containingFile,
-    c.publications,
-    c.defaultFile
-  )
+  const absoluteLink = link.absolutify(containingFile, c.publications)
   const filePath = absoluteLink.localize(c.publications, c.defaultFile)
   const anchorName = absoluteLink.anchor()
 

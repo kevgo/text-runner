@@ -17,6 +17,6 @@ export default function(
     content: "",
     attributes: {}
   })
-  openTags.popType("del_open", file.platformified(), line)
+  openTags.popType("del_open")
   return result
 }

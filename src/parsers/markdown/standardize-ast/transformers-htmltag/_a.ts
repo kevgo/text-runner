@@ -2,6 +2,7 @@ import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
 import AstNode from "../../../ast-node.js"
 import AstNodeList from "../../../ast-node-list.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 module.exports = function transformATag(
   node: Object,
@@ -20,5 +21,6 @@ module.exports = function transformATag(
     attributes: openingTag.attributes
   })
   result.pushNode(resultNode)
+  pretendToUse(node)
   return result
 }

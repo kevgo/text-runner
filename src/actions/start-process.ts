@@ -8,6 +8,8 @@ import ObservableProcess from "observable-process"
 import path from "path"
 import trimDollar from "../helpers/trim-dollar"
 import deb from "debug"
+import StartProcessCommandOutput from "./helpers/start-process-command-output"
+import RunningProcess from "./helpers/running-process"
 
 const debug = deb("start-console-command")
 
@@ -26,20 +28,22 @@ export default (async function(args: ActionArgs) {
   args.formatter.name(
     `starting a long-running process: ${chalk.bold(chalk.cyan(commandsToRun))}`
   )
-  global.startConsoleProcessOutput = ""
-  global.runningProcess = new ObservableProcess({
-    commands: callArgs(commandsToRun),
-    cwd: args.configuration.workspace,
-    stdout: log(args.formatter.stdout),
-    stderr: args.formatter.stderr
-  })
-  global.runningProcessEnded = true
+  StartProcessCommandOutput.instance().reset()
+  RunningProcess.instance().set(
+    new ObservableProcess({
+      commands: callArgs(commandsToRun),
+      cwd: args.configuration.workspace,
+      stdout: log(args.formatter.stdout),
+      stderr: args.formatter.stderr
+    })
+  )
+  // RunningProcess.ended = true
 })
 
 function log(stdout): WriteStream {
   return {
     write: text => {
-      global.startConsoleProcessOutput += text
+      StartProcessCommandOutput.instance().append(text)
       return stdout.write(text)
     }
   }
@@ -50,7 +54,7 @@ function makeGlobal(configuration: Configuration) {
   var globals = {}
   try {
     // $FlowFixMe: we can ignore null-pointer exceptions here since we have a default value
-    globals = configuration.fileData.actions.runConsoleCommand.globals
+    globals = configuration.actions["runConsoleCommand"].globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {

@@ -10,7 +10,7 @@ describe("UnknownLink", function() {
       const link = new UnknownLink("foo/bar.md")
       const containingFile = new AbsoluteFilePath("/dir/file.md")
       const publications = new Publications()
-      expect(link.absolutify(containingFile, publications, "").value).to.equal(
+      expect(link.absolutify(containingFile, publications).value).to.equal(
         "/dir/foo/bar.md"
       )
     })
@@ -18,7 +18,7 @@ describe("UnknownLink", function() {
       const link = new UnknownLink("/foo/bar.md")
       const containingFile = new AbsoluteFilePath("/dir/file.md")
       const publications = new Publications()
-      expect(link.absolutify(containingFile, publications, "").value).to.equal(
+      expect(link.absolutify(containingFile, publications).value).to.equal(
         "/foo/bar.md"
       )
     })

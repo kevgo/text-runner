@@ -1,5 +1,6 @@
 import { ActionArgs } from "../runners/action-args.js"
 import { Configuration } from "../configuration/configuration.js"
+import pretendToUse from "../helpers/pretend-to-use"
 
 type DoneFunction = (err?: Error) => void
 
@@ -15,10 +16,10 @@ export default function(args: ActionArgs, done: DoneFunction) {
   code = replaceVariableDeclarations(code)
 
   // This is used in an eval'ed string below
-  /* eslint-disable no-unused-vars */
   const __finished = err => {
     done(err)
   }
+  pretendToUse(__finished.toString())
 
   if (hasCallbackPlaceholder(code)) {
     // async code
@@ -45,7 +46,7 @@ function replaceAsyncCallbacks(code: string): string {
 function replaceSubstitutions(code: string, c: Configuration): string {
   try {
     // $FlowFixMe: we can ignore undefined values here since `code` has a default value
-    for (let replaceData of c.fileData.actions.runJavascript.replace) {
+    for (let replaceData of c.actions["runJavascript"].replace) {
       code = code.replace(replaceData.search, replaceData.replace)
     }
   } catch (e) {

@@ -4,6 +4,7 @@ import AstNodeList from "../../../ast-node-list.js"
 import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import removeHtmlComments from "../../helpers/remove-html-comments.js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 const olRegex = /<img([^>]*)>/
 
@@ -25,5 +26,6 @@ module.exports = async function transformOl(
     attributes: parseHtmlAttributes(match[1])
   })
   result.pushNode(hrNode)
+  pretendToUse(openTags)
   return result
 }

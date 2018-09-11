@@ -5,6 +5,7 @@ import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
 import util from "util"
 import xml2js from "xml2js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
@@ -81,6 +82,7 @@ module.exports = async function transformTable(
     content: "",
     attributes: tableNode.attributes
   })
+  pretendToUse(openTags)
   return result
 }
 

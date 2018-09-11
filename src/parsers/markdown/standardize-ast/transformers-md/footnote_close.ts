@@ -17,6 +17,6 @@ export default function(
     content: "",
     attributes: {}
   })
-  openTags.popType("footnote_open", file.platformified(), line)
+  openTags.popType("footnote_open")
   return result
 }

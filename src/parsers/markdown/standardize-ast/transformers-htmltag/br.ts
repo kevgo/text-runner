@@ -3,6 +3,7 @@ import AstNode from "../../../ast-node.js"
 import AstNodeList from "../../../ast-node-list.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import parseHtmlTag from "../../helpers/parse-html-tag.js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 module.exports = function transformATag(
   node: any,
@@ -25,5 +26,6 @@ module.exports = function transformATag(
     attributes
   })
   result.pushNode(resultNode)
+  pretendToUse(openTags)
   return result
 }

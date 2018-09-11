@@ -2,6 +2,7 @@ import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
 import AstNodeList from "../../../ast-node-list.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 const parseHtmlAttributes = require("../../helpers/parse-html-attributes.js")
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
@@ -40,6 +41,7 @@ export default function(
       content: "",
       attributes: {}
     })
+    pretendToUse(openTags)
     return result
   }
   const tableMatch = node.content.trim().match(tableRegex)

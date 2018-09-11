@@ -10,7 +10,7 @@ describe("RelativeLink", function() {
       const publications = new Publications()
       const link = new RelativeLink("new.md")
       const containingFile = new AbsoluteFilePath("/one/two.md")
-      const actual = link.absolutify(containingFile, publications, "")
+      const actual = link.absolutify(containingFile, publications)
       expect(actual.value).to.equal("/one/new.md")
     })
 
@@ -20,7 +20,7 @@ describe("RelativeLink", function() {
       ])
       const link = new RelativeLink("new.md")
       const containingFile = new AbsoluteFilePath("/content/one/two.md")
-      const actual = link.absolutify(containingFile, publications, "")
+      const actual = link.absolutify(containingFile, publications)
       expect(actual.value).to.equal("/one/new.md")
     })
 
@@ -28,7 +28,7 @@ describe("RelativeLink", function() {
       const publications = new Publications()
       const link = new RelativeLink("../new.md")
       const containingFile = new AbsoluteFilePath("/one/two.md")
-      const actual = link.absolutify(containingFile, publications, "")
+      const actual = link.absolutify(containingFile, publications)
       expect(actual.value).to.equal("/new.md")
     })
   })

@@ -5,6 +5,7 @@ import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import util from "util"
 import xml2js from "xml2js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
@@ -46,5 +47,6 @@ module.exports = async function transformOl(
     content: "",
     attributes: olNode.attributes
   })
+  pretendToUse(openTags)
   return result
 }

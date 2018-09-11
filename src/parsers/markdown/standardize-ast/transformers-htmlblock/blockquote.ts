@@ -1,8 +1,9 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
-import AstNode from "../../../ast-node.js"
-import AstNodeList from "../../../ast-node-list.js"
-import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
-import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
+import AstNode from "../../../ast-node"
+import AstNodeList from "../../../ast-node-list"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes"
+import OpenTagTracker from "../../helpers/open-tag-tracker"
+import pretendToUse from "../../../../helpers/pretend-to-use"
 
 const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 
@@ -23,5 +24,6 @@ module.exports = async function transformBlockquote(
     attributes: parseHtmlAttributes(blockquoteMatch[1])
   })
   result.pushNode(resultNode)
+  pretendToUse(openTags)
   return result
 }

@@ -17,6 +17,6 @@ export default function(
     content: "",
     attributes: {}
   })
-  openTags.popType("thead_open", file.platformified(), line)
+  openTags.popType("thead_open")
   return result
 }

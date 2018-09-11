@@ -15,9 +15,7 @@ import staticCommand from "./commands/static.js"
 import versionCommand from "./commands/version.js"
 
 // Tests the documentation in the given directory
-module.exports = async function(
-  cmdLineArgs: CliArgTypes
-): Promise<Array<Error>> {
+export default async function(cmdLineArgs: CliArgTypes): Promise<Array<Error>> {
   var configuration
   try {
     configuration = loadConfiguration(

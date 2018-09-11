@@ -4,6 +4,7 @@ import AstNodeList from "../../../ast-node-list.js"
 import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 
@@ -31,5 +32,6 @@ module.exports = async function transformPre(
     attributes: parseHtmlAttributes(match[1])
   })
   result.pushNode(resultNode)
+  pretendToUse(openTags)
   return result
 }

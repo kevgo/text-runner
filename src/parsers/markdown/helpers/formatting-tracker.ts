@@ -24,7 +24,7 @@ export default class FormattingTracker {
   }
 
   close(tagName: string) {
-    this.tags.splice(this.tags.indexOf("emphasized"), 1)
+    this.tags.splice(this.tags.indexOf(tagName), 1)
   }
 
   toString(): string {

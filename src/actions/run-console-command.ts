@@ -6,10 +6,10 @@ import AstNodeList from "../parsers/ast-node-list.js"
 import callArgs from "../helpers/call-args"
 import chalk from "chalk"
 import deb from "debug"
-import Formatter from "../formatters/formatter.js"
 import ObservableProcess from "observable-process"
 import path from "path"
 import trimDollar from "../helpers/trim-dollar"
+import RunConsoleCommandOutput from "./helpers/run-console-command-output.js"
 
 const debug = deb("textrun:actions:run-console-command")
 
@@ -36,10 +36,10 @@ export default (async function(args: ActionArgs) {
   args.formatter.name(`running console command: ${chalk.cyan(commandsToRun)}`)
   let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType("table")) {
-    input = getInput(args.nodes, args.formatter)
+    input = getInput(args.nodes)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
-  global.consoleCommandOutput = ""
+  RunConsoleCommandOutput.instance().reset()
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
     cwd: args.configuration.workspace,
@@ -62,12 +62,9 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-function getInput(
-  nodes: AstNodeList,
-  formatter: Formatter
-): Array<ProcessInput> {
+function getInput(nodes: AstNodeList): Array<ProcessInput> {
   if (!nodes) return []
-  const result = []
+  const result: Array<ProcessInput> = []
   const rows = nodes.getNodesOfTypes("table_row_open")
   for (const row of rows) {
     const cellsN = nodes.getNodesFor(row)
@@ -90,7 +87,7 @@ function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
   var globals = {}
   try {
-    globals = configuration.actions.runConsoleCommand.globals
+    globals = configuration.actions["runConsoleCommand"].globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {
@@ -114,7 +111,7 @@ function makeGlobal(configuration: Configuration) {
 function log(stdout): WriteStream {
   return {
     write: text => {
-      global.consoleCommandOutput += text
+      RunConsoleCommandOutput.instance().append(text)
       return stdout.write(text)
     }
   }

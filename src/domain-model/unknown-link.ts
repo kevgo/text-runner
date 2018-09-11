@@ -15,15 +15,10 @@ export default class UnknownLink {
 
   absolutify(
     containingFile: AbsoluteFilePath,
-    publications: Publications,
-    defaultFile: string
+    publications: Publications
   ): AbsoluteLink {
     if (this.isAbsolute()) return new AbsoluteLink(this.value)
-    return new RelativeLink(this.value).absolutify(
-      containingFile,
-      publications,
-      defaultFile
-    )
+    return new RelativeLink(this.value).absolutify(containingFile, publications)
   }
 
   // Returns whether this link is an absolute link

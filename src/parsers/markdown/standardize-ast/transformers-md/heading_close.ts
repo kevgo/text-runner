@@ -8,7 +8,7 @@ export default function(
   file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
-  const openNode = openTags.popType("heading_open", file.platformified(), line)
+  const openNode = openTags.popType("heading_open")
   const result = new AstNodeList()
   result.pushNode({
     type: node.type,

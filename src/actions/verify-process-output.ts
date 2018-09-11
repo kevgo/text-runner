@@ -1,4 +1,5 @@
 import { ActionArgs } from "../runners/action-args.js"
+import RunningProcess from "./helpers/running-process"
 
 // Waits until the currently running console command produces the given output
 export default (async function(args: ActionArgs) {
@@ -10,6 +11,6 @@ export default (async function(args: ActionArgs) {
     .filter(line => line)
   for (let line of expectedLines) {
     args.formatter.log(`waiting for ${line}`)
-    await global.runningProcess.waitForText(line)
+    await RunningProcess.instance().process.waitForText(line)
   }
 })

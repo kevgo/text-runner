@@ -19,8 +19,7 @@ describe("Publications", function() {
         }
       ])
       const filePath = new AbsoluteFilePath("bar")
-      const actual = publications.forFilePath(filePath)
-      // $FlowFixMe: no type checking needed here
+      const actual: any = publications.forFilePath(filePath) || {}
       expect(actual.localPath).to.equal("/bar/")
     })
 

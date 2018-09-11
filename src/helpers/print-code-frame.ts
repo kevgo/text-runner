@@ -8,14 +8,12 @@ export default function(
   filename: string | undefined,
   line: number | undefined
 ) {
-  if (!filename || line == null) { return }
+  if (!filename || line == null) {
+    return
+  }
 
   const fileContent = fs.readFileSync(filename, "utf8")
   output(
-    codeFrameColumns(
-      fileContent,
-      { start: { line } },
-      { forceColor: true }
-    )
+    codeFrameColumns(fileContent, { start: { line } }, { forceColor: true })
   )
 }

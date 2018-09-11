@@ -34,7 +34,9 @@ export default class OpenTagTracker {
   peekType(expectedType: string): AstNode | null {
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const node = this.nodes[i]
-      if (node.type === expectedType) { return node }
+      if (node.type === expectedType) {
+        return node
+      }
     }
     return null
   }
@@ -47,7 +49,9 @@ export default class OpenTagTracker {
     }
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const result = this.nodes[i]
-      if (result.tag !== expectedNodeTag) { continue }
+      if (result.tag !== expectedNodeTag) {
+        continue
+      }
       this.nodes.splice(i, 1)
       return result
     }
@@ -66,7 +70,9 @@ export default class OpenTagTracker {
     }
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const result = this.nodes[i]
-      if (result.type !== expectedNodeType) { continue }
+      if (result.type !== expectedNodeType) {
+        continue
+      }
       this.nodes.splice(i, 1)
       return result
     }

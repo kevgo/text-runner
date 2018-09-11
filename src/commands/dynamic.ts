@@ -46,7 +46,9 @@ async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (error && !config.keepTmp) { rimraf.sync(config.workspace) }
+  if (error && !config.keepTmp) {
+    rimraf.sync(config.workspace)
+  }
 
   // step 7: write stats
   let text = "\n"

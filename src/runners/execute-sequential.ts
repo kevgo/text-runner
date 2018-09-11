@@ -18,7 +18,9 @@ export default (async function executeSequential(
       linkTargets,
       statsCounter
     )
-    if (error) { return error }
+    if (error) {
+      return error
+    }
   }
   return null
 })

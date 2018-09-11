@@ -1,5 +1,4 @@
 class StartProcessCommandOutput {
-
   static instance(): StartProcessCommandOutput {
     return instance
   }

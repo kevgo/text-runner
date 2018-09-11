@@ -14,7 +14,9 @@ export default function(args: ActionArgs) {
   try {
     process.chdir(fullPath)
   } catch (e) {
-    if (e.code === "ENOENT") { throw new Error(`directory ${directory} not found`) }
+    if (e.code === "ENOENT") {
+      throw new Error(`directory ${directory} not found`)
+    }
     throw e
   }
 }

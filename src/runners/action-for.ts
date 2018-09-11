@@ -9,7 +9,9 @@ import getActionName from "../helpers/action-name.js"
 import builtinActionFilePaths from "../helpers/builtin-action-filepaths.js"
 import customActionFilePaths from "../helpers/custom-action-filepaths.js"
 
-interface FunctionRepo { [key: string]: Action }
+interface FunctionRepo {
+  [key: string]: Action
+}
 
 const builtinActions = loadBuiltinActions()
 const customActions = loadCustomActions()

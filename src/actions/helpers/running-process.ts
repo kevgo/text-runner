@@ -1,7 +1,6 @@
 import ObservableProcess from "observable-process"
 
 export default class RunningProcess {
-
   static instance(): RunningProcess {
     return instance
   }

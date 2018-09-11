@@ -1,5 +1,4 @@
 class RunConsoleCommandOutput {
-
   static instance(): RunConsoleCommandOutput {
     return instance
   }

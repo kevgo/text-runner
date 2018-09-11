@@ -25,7 +25,9 @@ export default class Publication {
       this.publicPath
     )
     const result = new AbsoluteLink(linkPath)
-    if (this.publicExtension == null) { return result }
+    if (this.publicExtension == null) {
+      return result
+    }
     return result.withExtension(this.publicExtension)
   }
 

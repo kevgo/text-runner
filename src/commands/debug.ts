@@ -10,12 +10,12 @@ import readAndParseFile from "../parsers/read-and-parse-file.js"
 
 async function debugCommand(config: Configuration): Promise<Error[]> {
   const filenames = getFileNames(config)
-  if (filenames.length === 0) { return [] }
+  if (filenames.length === 0) {
+    return []
+  }
 
   console.log("AST NODES:")
-  const ASTs: AstNodeList[] = await Promise.all(
-    filenames.map(readAndParseFile)
-  )
+  const ASTs: AstNodeList[] = await Promise.all(filenames.map(readAndParseFile))
   for (const AST of ASTs) {
     for (const node of AST) {
       console.log(
@@ -58,9 +58,13 @@ async function debugCommand(config: Configuration): Promise<Error[]> {
 }
 
 function showAttr(node: AstNode): string {
-  if (node.type === "text") { return `("${node.content.trim()}")` }
+  if (node.type === "text") {
+    return `("${node.content.trim()}")`
+  }
   const keys = Object.keys(node.attributes)
-  if (keys.length === 0) { return "" }
+  if (keys.length === 0) {
+    return ""
+  }
   return `(${node.attributes.textrun})`
 }
 

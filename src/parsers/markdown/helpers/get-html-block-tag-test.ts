@@ -6,7 +6,7 @@ import getHtmlBlockTag from "./get-html-block-tag"
 describe("parseHtmlBlock", function() {
   it("parses opening tags", function() {
     const result = getHtmlBlockTag(
-      "<blockquote textrun=\"HelloWorld\">hello</blockquote>",
+      '<blockquote textrun="HelloWorld">hello</blockquote>',
       new AbsoluteFilePath("file"),
       0
     )

@@ -17,7 +17,9 @@ describe("AstNode", function() {
         heading_open: "heading_close"
       }
       for (const input in data) {
-        if (!data.hasOwnProperty(input)) { continue }
+        if (!data.hasOwnProperty(input)) {
+          continue
+        }
         const node = AstNode.scaffold({ type: input })
         expect(node.endType()).to.eql(data[input])
       }

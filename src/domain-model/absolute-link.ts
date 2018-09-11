@@ -32,7 +32,9 @@ export default class AbsoluteLink {
   // Returns a link to the containing directory
   directory(): AbsoluteLink {
     const withoutAnchor = this.withoutAnchor()
-    if (withoutAnchor.isLinkToDirectory()) { return withoutAnchor }
+    if (withoutAnchor.isLinkToDirectory()) {
+      return withoutAnchor
+    }
     return new AbsoluteLink(
       withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1)
     )

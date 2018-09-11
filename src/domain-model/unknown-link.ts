@@ -17,7 +17,9 @@ export default class UnknownLink {
     containingFile: AbsoluteFilePath,
     publications: Publications
   ): AbsoluteLink {
-    if (this.isAbsolute()) { return new AbsoluteLink(this.value) }
+    if (this.isAbsolute()) {
+      return new AbsoluteLink(this.value)
+    }
     return new RelativeLink(this.value).absolutify(containingFile, publications)
   }
 

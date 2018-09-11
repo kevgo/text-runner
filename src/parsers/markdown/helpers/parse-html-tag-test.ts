@@ -15,7 +15,7 @@ describe("parseAttributes", function() {
 
   it("parses the attributes", function() {
     const result = parseHtmlTag(
-      "<img src=\"1.png\" width=\"100\" height=\"100\">",
+      '<img src="1.png" width="100" height="100">',
       "file",
       0
     )
@@ -26,7 +26,7 @@ describe("parseAttributes", function() {
   })
 
   it("can handle spaces in attributes", function() {
-    const result = parseHtmlTag("<img alt=\"foo bar\">", "filename", 0)
+    const result = parseHtmlTag('<img alt="foo bar">', "filename", 0)
     expect(result).to.eql(["img", { alt: "foo bar" }])
   })
 })

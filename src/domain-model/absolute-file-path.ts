@@ -18,7 +18,9 @@ export default class AbsoluteFilePath {
 
   // Returns the directory that contains this file path
   directory(): AbsoluteFilePath {
-    if (this.isDirectory()) { return this }
+    if (this.isDirectory()) {
+      return this
+    }
     return new AbsoluteFilePath(path.dirname(this.value) + "/")
   }
 
@@ -46,7 +48,9 @@ export default class AbsoluteFilePath {
   // Returns the public link under which this file path is published
   publicPath(publications: Publications): AbsoluteLink {
     const publication = publications.forFilePath(this)
-    if (publication == null) { return new AbsoluteLink(this.unixified()) }
+    if (publication == null) {
+      return new AbsoluteLink(this.unixified())
+    }
     return publication.publish(this)
   }
 }

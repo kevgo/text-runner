@@ -4,7 +4,9 @@ import path from "path"
 export default (async function addCommand(
   blockName: string | undefined
 ): Promise<Error[]> {
-  if (!blockName) { throw new Error("no block name given") }
+  if (!blockName) {
+    throw new Error("no block name given")
+  }
   if (!fs.existsSync("text-run")) {
     fs.mkdirSync("text-run")
   }

@@ -51,7 +51,9 @@ async function staticCommand(
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepTmp) { rimraf.sync(config.workspace) }
+  if (results.length === 0 && !config.keepTmp) {
+    rimraf.sync(config.workspace)
+  }
 
   // step 7: write stats
   let text = "\n"

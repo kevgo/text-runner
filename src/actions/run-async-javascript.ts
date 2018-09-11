@@ -1,10 +1,10 @@
-import { ActionArgs } from "../runners/action-args.js"
 import { Configuration } from "../configuration/configuration.js"
+import { ActionArgs } from "../runners/action-args.js"
 
 // Runs the async-await JavaScript code given in the code block
 export default function(args: ActionArgs) {
   args.formatter.name("run async javascript")
-  var code = args.nodes.textInNodeOfType("fence")
+  let code = args.nodes.textInNodeOfType("fence")
   if (code == null) {
     throw new Error("no JavaScript code found in the fenced block")
   }
@@ -27,7 +27,7 @@ function wrapInAsyncFunction(code) {
 function replaceSubstitutions(code: string, c: Configuration): string {
   try {
     // Note: we can ignore undefined values here since `code` has a default value
-    for (let replaceData of c.actions["runJavascript"].replace) {
+    for (const replaceData of c.actions.runJavascript.replace) {
       code = code.replace(replaceData.search, replaceData.replace)
     }
   } catch (e) {

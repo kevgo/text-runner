@@ -1,6 +1,6 @@
-import isLinkToAnchorInOtherFile from "./is-link-to-anchor-in-other-file"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import isLinkToAnchorInOtherFile from "./is-link-to-anchor-in-other-file"
 
 describe("isLinkToAnchorInOtherFile", function() {
   const testData = [

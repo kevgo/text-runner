@@ -1,14 +1,14 @@
 import { ActivityList } from "./activity-list.js"
 
-import AstNode from "../parsers/ast-node.js"
-import AstNodeList from "../parsers/ast-node-list.js"
 import kebabCase from "just-kebab-case"
 import UnprintedUserError from "../errors/unprinted-user-error.js"
+import AstNodeList from "../parsers/ast-node-list.js"
+import AstNode from "../parsers/ast-node.js"
 
 // Returns all activities contained in the given collection of AstNodeLists
 export default function(ASTs: AstNodeList[], prefix: string): ActivityList {
-  var result: ActivityList = []
-  for (let AST of ASTs) {
+  let result: ActivityList = []
+  for (const AST of ASTs) {
     result = result.concat(extractActivities(AST, prefix))
   }
   return result
@@ -17,8 +17,8 @@ export default function(ASTs: AstNodeList[], prefix: string): ActivityList {
 // Returns the activities contained in the given AstNodeList
 function extractActivities(AST: AstNodeList, prefix: string): ActivityList {
   const result: ActivityList = []
-  var activeNode: AstNode | null = null
-  for (let node of AST) {
+  let activeNode: AstNode | null = null
+  for (const node of AST) {
     if (isActiveBlockTag(node, prefix)) {
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
@@ -57,6 +57,6 @@ function isActiveBlockEndTag(
   activeNode: AstNode | null,
   prefix: string
 ): boolean {
-  if (!activeNode) return false
+  if (!activeNode) { return false }
   return node.attributes[prefix] === activeNode.attributes[prefix]
 }

@@ -1,8 +1,8 @@
 import AbsoluteLink from "../domain-model/absolute-link.js"
+import RelativeLink from "../domain-model/relative-link.js"
 import addLeadingDotUnlessEmpty from "../helpers/add-leading-dot-unless-empty.js"
 import addLeadingSlash from "../helpers/add-leading-slash.js"
 import addTrailingSlash from "../helpers/add-trailing-slash.js"
-import RelativeLink from "../domain-model/relative-link.js"
 
 // Defines the publication of a local file path to a public URL
 export default class Publication {
@@ -25,7 +25,7 @@ export default class Publication {
       this.publicPath
     )
     const result = new AbsoluteLink(linkPath)
-    if (this.publicExtension == null) return result
+    if (this.publicExtension == null) { return result }
     return result.withExtension(this.publicExtension)
   }
 

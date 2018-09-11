@@ -1,13 +1,13 @@
 import { Activity } from "../activity-list/activity.js"
-import { Action } from "./action.js"
-import { ActionArgs } from "./action-args.js"
 import { Configuration } from "../configuration/configuration.js"
+import { ActionArgs } from "./action-args.js"
+import { Action } from "./action.js"
 
-import actionFor from "./action-for.js"
-import LinkTargetList from "../link-targets/link-target-list.js"
-import StatsCounter from "./stats-counter.js"
-import PrintedUserError from "../errors/printed-user-error.js"
 import util from "util"
+import PrintedUserError from "../errors/printed-user-error.js"
+import LinkTargetList from "../link-targets/link-target-list.js"
+import actionFor from "./action-for.js"
+import StatsCounter from "./stats-counter.js"
 
 export default (async function runActivity(
   activity: Activity,
@@ -35,7 +35,7 @@ export default (async function runActivity(
     } else {
       await runCallbackFunc(action, args)
     }
-    if (!formatter.skipped && !formatter.warned) formatter.success()
+    if (!formatter.skipped && !formatter.warned) { formatter.success() }
   } catch (err) {
     if (isUserError(err)) {
       formatter.error(err.message)

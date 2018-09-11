@@ -1,6 +1,6 @@
-import isMailtoLink from "./is-mailto-link.js"
-import { describe, it } from "mocha"
 import { expect } from "chai"
+import { describe, it } from "mocha"
+import isMailtoLink from "./is-mailto-link.js"
 
 describe("isMailtoLink", function() {
   const testData = [

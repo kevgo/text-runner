@@ -1,7 +1,7 @@
 import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import pretendToUse from "../../../../helpers/pretend-to-use.js"
 import AstNodeList from "../../../ast-node-list.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
-import pretendToUse from "../../../../helpers/pretend-to-use.js"
 
 export default function(
   node: any,
@@ -13,7 +13,7 @@ export default function(
   result.pushNode({
     type: "code_open",
     tag: "code",
-    file: file,
+    file,
     line,
     content: "",
     attributes: {}
@@ -21,7 +21,7 @@ export default function(
   result.pushNode({
     type: "text",
     tag: "",
-    file: file,
+    file,
     line,
     content: node.content,
     attributes: {}
@@ -29,7 +29,7 @@ export default function(
   result.pushNode({
     type: "code_close",
     tag: "/code",
-    file: file,
+    file,
     line,
     content: "",
     attributes: {}

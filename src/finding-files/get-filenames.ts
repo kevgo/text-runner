@@ -1,22 +1,22 @@
 import { Configuration } from "../configuration/configuration.js"
 
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
-import allMarkdownFiles from "./all-markdown-files.js"
+import chalk from "chalk"
 import deb from "debug"
+import isGlob from "is-glob"
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import UnprintedUserError from "../errors/unprinted-user-error.js"
 import filesMatchingGlob from "../helpers/files-matching-glob.js"
 import hasDirectory from "../helpers/has-directory.js"
-import isGlob from "is-glob"
+import allMarkdownFiles from "./all-markdown-files.js"
 import isMarkdownFile from "./is-markdown-file.js"
 import markdownFilesInDir from "./markdown-files-in-dir.js"
-import chalk from "chalk"
 import removeExcludedFiles from "./remove-excluded-files.js"
-import UnprintedUserError from "../errors/unprinted-user-error.js"
 
 const debug = deb("text-runner:run-command")
 
 // Returns the name of all files/directories that match the given glob
 export default function(config: Configuration): AbsoluteFilePath[] {
-  var filenames = getFiles(config)
+  let filenames = getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   debugFilenames(filenames)
   return filenames
@@ -40,7 +40,7 @@ function getFiles(config: Configuration): AbsoluteFilePath[] {
 
 function debugFilenames(filenames: AbsoluteFilePath[]) {
   debug("testing files:")
-  for (let filename of filenames) {
+  for (const filename of filenames) {
     debug(`  * ${filename.platformified()}`)
   }
 }

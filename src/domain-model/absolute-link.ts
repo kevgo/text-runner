@@ -1,12 +1,12 @@
-import AbsoluteFilePath from "./absolute-file-path.js"
-import addLeadingDotUnlessEmpty from "../helpers/add-leading-dot-unless-empty.js"
-import addLeadingSlash from "../helpers/add-leading-slash.js"
 import path from "path"
 import Publications from "../configuration/publications.js"
-import RelativeLink from "./relative-link.js"
+import addLeadingDotUnlessEmpty from "../helpers/add-leading-dot-unless-empty.js"
+import addLeadingSlash from "../helpers/add-leading-slash.js"
 import removeDoubleSlash from "../helpers/remove-double-slash.js"
 import straightenLink from "../helpers/straighten-link.js"
 import unixify from "../helpers/unifixy.js"
+import AbsoluteFilePath from "./absolute-file-path.js"
+import RelativeLink from "./relative-link.js"
 
 // Represents a link to another Markdown file,
 // all the way from the root directory
@@ -32,7 +32,7 @@ export default class AbsoluteLink {
   // Returns a link to the containing directory
   directory(): AbsoluteLink {
     const withoutAnchor = this.withoutAnchor()
-    if (withoutAnchor.isLinkToDirectory()) return withoutAnchor
+    if (withoutAnchor.isLinkToDirectory()) { return withoutAnchor }
     return new AbsoluteLink(
       withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1)
     )

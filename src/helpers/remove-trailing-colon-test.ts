@@ -1,6 +1,6 @@
-import removeTrailingColon from "./remove-trailing-colon.js"
 import { expect } from "chai"
-import { describe, context, it } from "mocha"
+import { context, describe, it } from "mocha"
+import removeTrailingColon from "./remove-trailing-colon.js"
 
 describe("removeTrailingColon", function() {
   context("with trailing colon", function() {

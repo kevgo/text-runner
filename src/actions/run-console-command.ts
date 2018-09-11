@@ -1,19 +1,19 @@
-import { ActionArgs } from "../runners/action-args.js"
-import { Configuration } from "../configuration/configuration.js"
 import { WriteStream } from "observable-process"
+import { Configuration } from "../configuration/configuration.js"
+import { ActionArgs } from "../runners/action-args.js"
 
-import AstNodeList from "../parsers/ast-node-list.js"
-import callArgs from "../helpers/call-args"
 import chalk from "chalk"
 import deb from "debug"
 import ObservableProcess from "observable-process"
 import path from "path"
+import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
+import AstNodeList from "../parsers/ast-node-list.js"
 import RunConsoleCommandOutput from "./helpers/run-console-command-output.js"
 
 const debug = deb("textrun:actions:run-console-command")
 
-type ProcessInput = {
+interface ProcessInput {
   textToWait: string | null
   input: string
 }
@@ -47,7 +47,7 @@ export default (async function(args: ActionArgs) {
     stderr: args.formatter.stderr
   })
 
-  for (let inputLine of input) {
+  for (const inputLine of input) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
@@ -62,14 +62,14 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-function getInput(nodes: AstNodeList): Array<ProcessInput> {
-  if (!nodes) return []
-  const result: Array<ProcessInput> = []
+function getInput(nodes: AstNodeList): ProcessInput[] {
+  if (!nodes) { return [] }
+  const result: ProcessInput[] = []
   const rows = nodes.getNodesOfTypes("table_row_open")
   for (const row of rows) {
     const cellsN = nodes.getNodesFor(row)
     const cells = cellsN.getNodesOfTypes("table_cell")
-    if (cells.length === 0) continue
+    if (cells.length === 0) { continue }
     if (cells.length === 1) {
       // 3 cells = 1 td (<tr>, <td>, </tr>)
       result.push({ textToWait: null, input: cells[0].content })
@@ -85,9 +85,9 @@ function getInput(nodes: AstNodeList): Array<ProcessInput> {
 
 function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
-  var globals = {}
+  let globals = {}
   try {
-    globals = configuration.actions["runConsoleCommand"].globals
+    globals = configuration.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {

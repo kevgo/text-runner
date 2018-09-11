@@ -1,6 +1,6 @@
-import isAbsolutePath from "./is-absolute-path"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import isAbsolutePath from "./is-absolute-path"
 
 describe("isAbsolutePath", function() {
   it("returns true for paths beginning with /", function() {

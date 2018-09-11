@@ -1,9 +1,9 @@
 import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
+import pretendToUse from "../../../../helpers/pretend-to-use"
 import AstNode from "../../../ast-node"
 import AstNodeList from "../../../ast-node-list"
-import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 import OpenTagTracker from "../../helpers/open-tag-tracker"
-import pretendToUse from "../../../../helpers/pretend-to-use"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 
 const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 

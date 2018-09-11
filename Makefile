@@ -104,6 +104,7 @@ lint: lintjs lintmd   # lints all files
 
 lintjs: build   # lints the javascript files
 	node_modules$/.bin$/tsc --noEmit
+	tslint --project tsconfig.json
 	node_modules/.bin/prettier -l "src/**/*.ts"
 	# node_modules/.bin/prettier -l "features/**/*.ts"
 

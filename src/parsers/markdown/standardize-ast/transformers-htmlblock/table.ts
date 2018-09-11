@@ -1,11 +1,11 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
-import AstNode from "../../../ast-node.js"
-import AstNodeList from "../../../ast-node-list.js"
-import OpenTagTracker from "../../helpers/open-tag-tracker.js"
-import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
 import util from "util"
 import xml2js from "xml2js"
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
+import UnprintedUserError from "../../../../errors/unprinted-user-error.js"
 import pretendToUse from "../../../../helpers/pretend-to-use.js"
+import AstNodeList from "../../../ast-node-list.js"
+import AstNode from "../../../ast-node.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
@@ -21,8 +21,8 @@ module.exports = async function transformTable(
     xml = await xml2jsp(node.content)
   } catch (e) {
     const lineMatch = e.message.match(/Line: (\d+)/)
-    var errorLine = line
-    if (lineMatch) errorLine += parseInt(lineMatch[1])
+    let errorLine = line
+    if (lineMatch) { errorLine += parseInt(lineMatch[1]) }
     const message = e.message.split("\n")[0]
     throw new UnprintedUserError(message, file.platformified(), errorLine)
   }
@@ -35,7 +35,7 @@ module.exports = async function transformTable(
     attributes: xml.table.$ || {}
   })
   result.pushNode(tableNode)
-  if (xml.table.tr) parseRows(xml.table.tr, result, file, line)
+  if (xml.table.tr) { parseRows(xml.table.tr, result, file, line) }
   if (xml.table.thead) {
     result.pushNode({
       type: "thead_open",

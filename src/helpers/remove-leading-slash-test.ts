@@ -1,6 +1,6 @@
-import removeLeadingSlash from "./remove-leading-slash.js"
-import { describe, it } from "mocha"
 import { expect } from "chai"
+import { describe, it } from "mocha"
+import removeLeadingSlash from "./remove-leading-slash.js"
 
 describe("removeLeadingSlash", function() {
   it("removes the leading slash if one exists", function() {

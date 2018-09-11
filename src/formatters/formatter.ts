@@ -1,13 +1,13 @@
-import { Activity } from "../activity-list/activity"
 import WriteStream from "observable-process"
+import { Activity } from "../activity-list/activity"
 
+import deb from "debug"
 import humanize from "humanize-string"
 import StatsCounter from "../runners/stats-counter"
-import deb from "debug"
 
 const debug = deb("formatter")
 
-type Console = {
+interface Console {
   log(text: string): void
 }
 

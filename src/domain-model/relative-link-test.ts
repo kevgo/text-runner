@@ -1,8 +1,8 @@
-import AbsoluteFilePath from "./absolute-file-path.js"
-import Publications from "../configuration/publications.js"
-import RelativeLink from "./relative-link.js"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import Publications from "../configuration/publications.js"
+import AbsoluteFilePath from "./absolute-file-path.js"
+import RelativeLink from "./relative-link.js"
 
 describe("RelativeLink", function() {
   describe("absolutify", function() {

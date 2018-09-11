@@ -1,12 +1,12 @@
 class StartProcessCommandOutput {
+
+  static instance(): StartProcessCommandOutput {
+    return instance
+  }
   content: string
 
   constructor() {
     this.content = ""
-  }
-
-  static instance(): StartProcessCommandOutput {
-    return instance
   }
 
   append(text: string) {

@@ -5,7 +5,7 @@ import AstNodeList from "../parsers/ast-node-list.js"
 export default function(ASTs: AstNodeList[]): ActivityList {
   const result: ActivityList = []
   for (const AST of ASTs) {
-    for (let node of AST) {
+    for (const node of AST) {
       switch (node.type) {
         case "link_open":
           result.push({

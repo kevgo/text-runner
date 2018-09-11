@@ -15,15 +15,15 @@ import staticCommand from "./commands/static.js"
 import versionCommand from "./commands/version.js"
 
 // Tests the documentation in the given directory
-export default async function(cmdLineArgs: CliArgTypes): Promise<Array<Error>> {
-  var configuration
+export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
+  let configuration
   try {
     configuration = loadConfiguration(
       determineConfigFileName(cmdLineArgs.config),
       cmdLineArgs
     )
     const commandName = cmdLineArgs.command
-    var errors
+    let errors
     switch (commandName) {
       case "add":
         errors = await addCommand(cmdLineArgs.files)

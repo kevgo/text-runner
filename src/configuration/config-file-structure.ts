@@ -1,4 +1,4 @@
-export type ConfigFileStructure = {
+export interface ConfigFileStructure {
   // $FlowFixMe: the structure of the activityTypes block is user-defined and cannot be statically typed
   actions?: { [key: string]: Object }
   defaultFile?: string

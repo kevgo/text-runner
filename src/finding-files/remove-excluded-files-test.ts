@@ -1,7 +1,7 @@
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
 import { expect } from "chai"
-import removeExcludedFiles from "./remove-excluded-files.js"
 import { describe, it } from "mocha"
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import removeExcludedFiles from "./remove-excluded-files.js"
 
 describe("removeExcludedFiles", function() {
   it("removes the given filename", function() {

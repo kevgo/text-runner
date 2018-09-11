@@ -1,7 +1,7 @@
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
-import Publications from "./publications.js"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import Publications from "./publications.js"
 
 describe("Publications", function() {
   describe("forFilePath", function() {

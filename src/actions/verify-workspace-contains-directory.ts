@@ -14,7 +14,7 @@ export default function(args: ActionArgs) {
     )} directory exists in the test workspace`
   )
   args.formatter.log(`ls ${fullPath}`)
-  var stats
+  let stats
   try {
     stats = fs.lstatSync(fullPath)
   } catch (err) {

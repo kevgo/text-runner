@@ -3,8 +3,8 @@ import path from "path"
 
 export default (async function addCommand(
   blockName: string | undefined
-): Promise<Array<Error>> {
-  if (!blockName) throw new Error("no block name given")
+): Promise<Error[]> {
+  if (!blockName) { throw new Error("no block name given") }
   if (!fs.existsSync("text-run")) {
     fs.mkdirSync("text-run")
   }

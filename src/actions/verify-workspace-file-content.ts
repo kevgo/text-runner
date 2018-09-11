@@ -11,7 +11,7 @@ export default function(args: ActionArgs) {
   args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)
   const fullPath = path.join(process.cwd(), filePath)
   args.formatter.log(`verify file ${fullPath}`)
-  var actualContent
+  let actualContent
   try {
     actualContent = fs.readFileSync(fullPath, "utf8")
   } catch (err) {

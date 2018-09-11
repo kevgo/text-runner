@@ -7,7 +7,7 @@ export default (async function helpCommand(error?: string) {
 })
 
 function template(error: string | undefined) {
-  if (error) error = `${chalk.red(chalk.bold("Error: " + error))}`
+  if (error) { error = `${chalk.red(chalk.bold("Error: " + error))}` }
   return `
 ${chalk.dim("TextRunner " + version)}
 ${error || ""}

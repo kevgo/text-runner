@@ -1,4 +1,4 @@
-export type CliArgTypes = {
+export interface CliArgTypes {
   command: string
   config?: string
   exclude?: string

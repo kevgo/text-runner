@@ -1,6 +1,6 @@
-import AstNode from "./ast-node"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import AstNode from "./ast-node"
 
 describe("AstNode", function() {
   describe("scaffold", function() {
@@ -27,7 +27,7 @@ describe("AstNode", function() {
     it("returns the href content of link tags", function() {
       const node = AstNode.scaffold({
         type: "htmltag",
-        content: '<a href="http://foo.com">'
+        content: "<a href=\"http://foo.com\">"
       })
       expect(node.htmlLinkTarget()).to.equal("http://foo.com")
     })
@@ -38,7 +38,7 @@ describe("AstNode", function() {
     it("returns null for anchor tags", function() {
       const node = AstNode.scaffold({
         type: "htmltag",
-        content: '<a name="foo">'
+        content: "<a name=\"foo\">"
       })
       expect(node.htmlLinkTarget()).to.be.null
     })

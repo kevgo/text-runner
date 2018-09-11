@@ -1,6 +1,6 @@
-import isExternalLink from "./is-external-link.js"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import isExternalLink from "./is-external-link.js"
 
 describe("isExternalLink", function() {
   const testData = [

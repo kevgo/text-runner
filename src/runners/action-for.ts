@@ -1,15 +1,15 @@
 import { Activity } from "../activity-list/activity.js"
 import { Action } from "../runners/action.js"
 
-import builtinActionFilePaths from "../helpers/builtin-action-filepaths.js"
-import customActionFilePaths from "../helpers/custom-action-filepaths.js"
-import getActionName from "../helpers/action-name.js"
-import interpret from "interpret"
 import chalk from "chalk"
+import interpret from "interpret"
 import rechoir from "rechoir"
 import UnprintedUserError from "../errors/unprinted-user-error.js"
+import getActionName from "../helpers/action-name.js"
+import builtinActionFilePaths from "../helpers/builtin-action-filepaths.js"
+import customActionFilePaths from "../helpers/custom-action-filepaths.js"
 
-type FunctionRepo = { [key: string]: Action }
+interface FunctionRepo { [key: string]: Action }
 
 const builtinActions = loadBuiltinActions()
 const customActions = loadCustomActions()
@@ -26,15 +26,15 @@ export default function actionFor(activity: Activity): Action {
 // Note: need to define the return type as Action to satisfy the type checker
 //       who doesn't understand that this is an error check
 function errorUnknownActivityType(activity: Activity): Action {
-  var errorText = `unknown activity type: ${chalk.red(
+  let errorText = `unknown activity type: ${chalk.red(
     activity.type
   )}\nAvailable built-in activity types:\n`
-  for (let actionName of Object.keys(builtinActions).sort()) {
+  for (const actionName of Object.keys(builtinActions).sort()) {
     errorText += `* ${actionName}\n`
   }
   if (Object.keys(customActions).length > 0) {
     errorText += "\nYou defined these custom activity types:\n"
-    for (let actionName of Object.keys(customActions).sort()) {
+    for (const actionName of Object.keys(customActions).sort()) {
       errorText += `* ${actionName}\n`
     }
   } else {

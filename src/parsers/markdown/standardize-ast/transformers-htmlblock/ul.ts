@@ -1,11 +1,11 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
-import AstNode from "../../../ast-node.js"
-import AstNodeList from "../../../ast-node-list.js"
-import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
-import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 import util from "util"
 import xml2js from "xml2js"
+import AbsoluteFilePath from "../../../../domain-model/absolute-file-path.js"
 import pretendToUse from "../../../../helpers/pretend-to-use.js"
+import AstNodeList from "../../../ast-node-list.js"
+import AstNode from "../../../ast-node.js"
+import OpenTagTracker from "../../helpers/open-tag-tracker.js"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes.js"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 

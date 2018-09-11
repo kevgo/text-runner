@@ -1,9 +1,9 @@
-import Publications from "./publications.js"
 import Formatter from "../formatters/formatter.js"
+import Publications from "./publications.js"
 
 // Data structure for configuration values
-export type Configuration = {
-  actions: Object // configuration for actions
+export interface Configuration {
+  actions: any // configuration for actions
   classPrefix: string // the name of the attribute that denotes active blocks
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude

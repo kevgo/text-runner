@@ -9,7 +9,7 @@ export default (async function(args: ActionArgs) {
     .split("\n")
     .map(line => line.trim())
     .filter(line => line)
-  for (let line of expectedLines) {
+  for (const line of expectedLines) {
     args.formatter.log(`waiting for ${line}`)
     await RunningProcess.instance().process.waitForText(line)
   }

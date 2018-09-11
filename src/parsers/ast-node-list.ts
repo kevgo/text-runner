@@ -1,7 +1,13 @@
-import AstNode from "./ast-node"
 import UnprintedUserError from "../errors/unprinted-user-error"
+import AstNode from "./ast-node"
 
 export default class AstNodeList extends Array<AstNode> {
+  // Creates a new AstNodeList containing the given data
+  static scaffold(data: Object = {}): AstNodeList {
+    const result = new AstNodeList()
+    result.push(AstNode.scaffold(data))
+    return result
+  }
   // Returns the AstNode matching any of the given types.
   // Only one result is expected,
   // multiple or zero matches cause an exception.
@@ -15,7 +21,7 @@ export default class AstNodeList extends Array<AstNode> {
       )
     }
     if (nodes.length === 0) {
-      var msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
+      let msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
       msg += "The node types in this list are: "
       msg += this.nodeTypes().join(", ")
       throw new UnprintedUserError(
@@ -28,8 +34,10 @@ export default class AstNodeList extends Array<AstNode> {
   }
 
   getNodesFor(openingNode: AstNode): AstNodeList {
-    if (openingNode == null) throw new UnprintedUserError("null Node given")
-    var index = this.indexOf(openingNode)
+    if (openingNode == null) {
+      throw new UnprintedUserError("null Node given")
+    }
+    let index = this.indexOf(openingNode)
     if (index === -1) {
       throw new UnprintedUserError(
         `node '${openingNode.type}' not found in list`,
@@ -43,8 +51,9 @@ export default class AstNodeList extends Array<AstNode> {
       return result
     }
     const endType = openingNode.endType()
+    let node: AstNode
     do {
-      var node = this[index]
+      node = this[index]
       result.push(node)
       index += 1
     } while (node.type !== endType && index < this.length)
@@ -75,13 +84,6 @@ export default class AstNodeList extends Array<AstNode> {
     this.push(AstNode.scaffold(data))
   }
 
-  // Creates a new AstNodeList containing the given data
-  static scaffold(data: Object = {}): AstNodeList {
-    const result = new AstNodeList()
-    result.push(AstNode.scaffold(data))
-    return result
-  }
-
   text(): string {
     return this.reduce((acc, node) => acc + node.content, "")
   }
@@ -96,14 +98,18 @@ export default class AstNodeList extends Array<AstNode> {
   // throws otherwise.
   textInNodeOfType(...nodeTypes: string[]): string {
     for (const nodeType of nodeTypes) {
-      if (!nodeType.endsWith("_open")) nodeTypes.push(nodeType + "_open")
+      if (!nodeType.endsWith("_open")) {
+        nodeTypes.push(nodeType + "_open")
+      }
     }
     return this.textInNode(this.getNodeOfTypes(...nodeTypes))
   }
 
   textInNodesOfType(...nodeTypes: string[]): string[] {
     for (const nodeType of nodeTypes) {
-      if (!nodeType.endsWith("_open")) nodeTypes.push(nodeType + "_open")
+      if (!nodeType.endsWith("_open")) {
+        nodeTypes.push(nodeType + "_open")
+      }
     }
     return this.getNodesOfTypes(...nodeTypes).map(node => this.textInNode(node))
   }

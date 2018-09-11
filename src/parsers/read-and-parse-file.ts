@@ -1,7 +1,7 @@
-import AbsoluteFilePath from "../domain-model/absolute-file-path"
-import AstNodeList from "../parsers/ast-node-list"
 import chalk from "chalk"
 import fs from "fs-extra"
+import AbsoluteFilePath from "../domain-model/absolute-file-path"
+import AstNodeList from "../parsers/ast-node-list"
 import parseMarkdown from "../parsers/markdown/parse-markdown"
 
 export default (async function(

@@ -1,12 +1,12 @@
-import { ActionArgs } from "../runners/action-args.js"
 import { Configuration } from "../configuration/configuration.js"
 import pretendToUse from "../helpers/pretend-to-use"
+import { ActionArgs } from "../runners/action-args.js"
 
 type DoneFunction = (err?: Error) => void
 
 // Runs the JavaScript code given in the code block
 export default function(args: ActionArgs, done: DoneFunction) {
-  var code = args.nodes.textInNodeOfType("fence")
+  let code = args.nodes.textInNodeOfType("fence")
   if (code == null) {
     done(new Error("no JavaScript code found in the fenced block"))
     return
@@ -46,7 +46,7 @@ function replaceAsyncCallbacks(code: string): string {
 function replaceSubstitutions(code: string, c: Configuration): string {
   try {
     // $FlowFixMe: we can ignore undefined values here since `code` has a default value
-    for (let replaceData of c.actions["runJavascript"].replace) {
+    for (const replaceData of c.actions.runJavascript.replace) {
       code = code.replace(replaceData.search, replaceData.replace)
     }
   } catch (e) {

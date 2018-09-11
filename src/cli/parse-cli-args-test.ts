@@ -1,6 +1,6 @@
-import parseCliArgs from "../../src/cli/parse-cli-args"
 import { expect } from "chai"
 import { beforeEach, context, describe, it } from "mocha"
+import parseCliArgs from "../../src/cli/parse-cli-args"
 
 describe("parse-cli-args", function() {
   context("with unix <node> call", function() {
@@ -12,7 +12,7 @@ describe("parse-cli-args", function() {
       ])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
   })
@@ -26,7 +26,7 @@ describe("parse-cli-args", function() {
       ])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
 
@@ -44,7 +44,7 @@ describe("parse-cli-args", function() {
       ])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
   })
@@ -57,7 +57,7 @@ describe("parse-cli-args", function() {
       ])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
   })
@@ -67,11 +67,11 @@ describe("parse-cli-args", function() {
       this.result = parseCliArgs(["--offline", "documentation/actions/cd.md"])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
 
-    it('returns the "offline" switch', function() {
+    it("returns the \"offline\" switch", function() {
       expect(this.result.offline).to.be.true
     })
 
@@ -85,7 +85,7 @@ describe("parse-cli-args", function() {
       this.result = parseCliArgs(["documentation/actions/cd.md"])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
 
@@ -99,7 +99,7 @@ describe("parse-cli-args", function() {
       this.result = parseCliArgs([])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
 
@@ -113,7 +113,7 @@ describe("parse-cli-args", function() {
       this.result = parseCliArgs(["--format", "dot"])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
 
@@ -127,7 +127,7 @@ describe("parse-cli-args", function() {
       this.result = parseCliArgs(["--workspace", "foo/bar"])
     })
 
-    it('returns the "run" command', function() {
+    it("returns the \"run\" command", function() {
       expect(this.result.command).to.equal("run")
     })
 

@@ -1,4 +1,4 @@
 export default function(text: string): string {
-  if (text.endsWith("/")) return text
+  if (text.endsWith("/")) { return text }
   return text + "/"
 }

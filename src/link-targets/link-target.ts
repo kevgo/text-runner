@@ -1,4 +1,4 @@
-export type LinkTarget = {
+export interface LinkTarget {
   type: string
   name: string
   text?: string

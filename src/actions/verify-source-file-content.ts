@@ -8,7 +8,7 @@ import path from "path"
 
 export default function(args: ActionArgs) {
   const fileName = args.nodes.textInNodeOfType("strong_open")
-  var relativeBaseDir = "."
+  let relativeBaseDir = "."
   if (args.nodes.hasNodeOfType("link_open")) {
     const linkNode = args.nodes.getNodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
@@ -26,7 +26,7 @@ export default function(args: ActionArgs) {
     fileName
   )
   args.formatter.log(`ls ${filePath}`)
-  var actualContent
+  let actualContent
   try {
     actualContent = fs.readFileSync(filePath, "utf8")
   } catch (err) {

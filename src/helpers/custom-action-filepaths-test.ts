@@ -1,6 +1,6 @@
-import customActionFilePaths from "./custom-action-filepaths.js"
-import { describe, it } from "mocha"
 import { expect } from "chai"
+import { describe, it } from "mocha"
+import customActionFilePaths from "./custom-action-filepaths.js"
 
 describe("customActionFilePaths", function() {
   it("returns the full paths to the custom actions", function() {

@@ -1,16 +1,16 @@
 import { Configuration } from "../configuration/configuration.js"
 
 import chalk from "chalk"
-import executeParallel from "../runners/execute-parallel.js"
-import executeSequential from "../runners/execute-sequential.js"
+import rimraf from "rimraf"
 import extractActivities from "../activity-list/extract-activities.js"
 import extractImagesAndLinks from "../activity-list/extract-images-and-links.js"
-import findLinkTargets from "../link-targets/find-link-targets.js"
-import rimraf from "rimraf"
-import createWorkingDir from "../working-dir/create-working-dir.js"
-import readAndParseFile from "../parsers/read-and-parse-file.js"
 import getFileNames from "../finding-files/get-filenames.js"
+import findLinkTargets from "../link-targets/find-link-targets.js"
+import readAndParseFile from "../parsers/read-and-parse-file.js"
+import executeParallel from "../runners/execute-parallel.js"
+import executeSequential from "../runners/execute-sequential.js"
 import StatsCounter from "../runners/stats-counter.js"
+import createWorkingDir from "../working-dir/create-working-dir.js"
 
 async function runCommand(config: Configuration): Promise<Array<Error | null>> {
   const stats = new StatsCounter()
@@ -51,11 +51,11 @@ async function runCommand(config: Configuration): Promise<Array<Error | null>> {
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepTmp) rimraf.sync(config.workspace)
+  if (results.length === 0 && !config.keepTmp) { rimraf.sync(config.workspace) }
 
   // step 7: write stats
-  var text = "\n"
-  var color
+  let text = "\n"
+  let color
   if (results.length === 0) {
     color = chalk.green
     text += chalk.green("Success! ")

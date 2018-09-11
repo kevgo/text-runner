@@ -1,7 +1,7 @@
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
-import AstNodeList from "../parsers/ast-node-list.js"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import AstNodeList from "../parsers/ast-node-list.js"
 import LinkTargetList from "./link-target-list.js"
 
 describe("LinkTargetList", function() {
@@ -52,7 +52,7 @@ describe("LinkTargetList", function() {
   })
 
   describe("anchorType", function() {
-    it('returns "heading" for headings', function() {
+    it("returns \"heading\" for headings", function() {
       const nodeList = new AstNodeList()
       nodeList.pushNode({
         file: "file.md",
@@ -73,7 +73,7 @@ describe("LinkTargetList", function() {
       const filePath = new AbsoluteFilePath("file.md")
       expect(list.anchorType(filePath, "foo-bar")).to.equal("heading")
     })
-    it('returns "anchor" for HTML anchors', function() {
+    it("returns \"anchor\" for HTML anchors", function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
       list.addLinkTarget(filePath, "anchor", "hello")

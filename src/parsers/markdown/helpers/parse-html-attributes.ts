@@ -2,7 +2,7 @@ const tupleRE = /([^=]+="[^"]*")/g
 
 export default function(attributes: string): { [key: string]: string } {
   const attrMatch = attributes.match(tupleRE)
-  if (!attrMatch) return {}
+  if (!attrMatch) { return {} }
   return attrMatch.map(attr => attr.split("=", 2)).reduce(reducer, {}) || {}
 }
 

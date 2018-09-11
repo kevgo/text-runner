@@ -1,17 +1,17 @@
 import { Configuration } from "../configuration/configuration.js"
 
 import chalk from "chalk"
-import executeSequential from "../runners/execute-sequential.js"
+import rimraf from "rimraf"
 import extractActivities from "../activity-list/extract-activities.js"
 import extractImagesAndLinks from "../activity-list/extract-images-and-links.js"
-import findLinkTargets from "../link-targets/find-link-targets.js"
-import rimraf from "rimraf"
-import createWorkingDir from "../working-dir/create-working-dir.js"
-import readAndParseFile from "../parsers/read-and-parse-file.js"
 import getFileNames from "../finding-files/get-filenames.js"
+import findLinkTargets from "../link-targets/find-link-targets.js"
+import readAndParseFile from "../parsers/read-and-parse-file.js"
+import executeSequential from "../runners/execute-sequential.js"
 import StatsCounter from "../runners/stats-counter.js"
+import createWorkingDir from "../working-dir/create-working-dir.js"
 
-async function dynamicCommand(config: Configuration): Promise<Array<Error>> {
+async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
@@ -42,18 +42,18 @@ async function dynamicCommand(config: Configuration): Promise<Array<Error>> {
 
   // step 5: execute the ActivityList
   process.chdir(config.workspace)
-  var error = await executeSequential(activities, config, linkTargets, stats)
+  const error = await executeSequential(activities, config, linkTargets, stats)
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
-  if (error && !config.keepTmp) rimraf.sync(config.workspace)
+  if (error && !config.keepTmp) { rimraf.sync(config.workspace) }
 
   // step 7: write stats
-  var text = "\n"
-  var color
+  let text = "\n"
+  let color
   if (error) {
     color = chalk.red
-    text += chalk.red(`1 error, `)
+    text += chalk.red("1 error, ")
   } else {
     color = chalk.green
     text += chalk.green("Success! ")

@@ -1,15 +1,15 @@
-import { ActionArgs } from "../runners/action-args.js"
-import { Configuration } from "../configuration/configuration.js"
 import { WriteStream } from "observable-process"
+import { Configuration } from "../configuration/configuration.js"
+import { ActionArgs } from "../runners/action-args.js"
 
-import callArgs from "../helpers/call-args"
 import chalk from "chalk"
+import deb from "debug"
 import ObservableProcess from "observable-process"
 import path from "path"
+import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
-import deb from "debug"
-import StartProcessCommandOutput from "./helpers/start-process-command-output"
 import RunningProcess from "./helpers/running-process"
+import StartProcessCommandOutput from "./helpers/start-process-command-output"
 
 const debug = deb("start-console-command")
 
@@ -51,10 +51,10 @@ function log(stdout): WriteStream {
 
 function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
-  var globals = {}
+  let globals = {}
   try {
     // $FlowFixMe: we can ignore null-pointer exceptions here since we have a default value
-    globals = configuration.actions["runConsoleCommand"].globals
+    globals = configuration.actions.runConsoleCommand.globals
   } catch (e) {}
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {

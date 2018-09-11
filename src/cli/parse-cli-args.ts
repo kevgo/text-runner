@@ -1,8 +1,8 @@
 import { CliArgTypes } from "./cli-arg-types.js"
 
-import availableCommands from "../commands/available-commands"
 import minimist from "minimist"
 import path from "path"
+import availableCommands from "../commands/available-commands"
 
 // Parses the command-line options received,
 // and returns them structured as the command to run and options

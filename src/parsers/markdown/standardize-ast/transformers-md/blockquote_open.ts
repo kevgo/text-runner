@@ -1,8 +1,8 @@
 import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
 import AstNode from "../../../ast-node"
 import AstNodeList from "../../../ast-node-list"
-import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 import OpenTagTracker from "../../helpers/open-tag-tracker"
+import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 
 const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 
@@ -13,7 +13,7 @@ export default function(
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  var attributes = {}
+  let attributes = {}
   if (node.content) {
     const match = node.content.match(blockquoteRegex)
     if (!match) {

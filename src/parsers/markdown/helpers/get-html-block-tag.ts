@@ -8,7 +8,7 @@ export default function getHtmlBlockTag(
   file: AbsoluteFilePath,
   line: number
 ): string {
-  var matches = html.match(tagNameRE)
+  const matches = html.match(tagNameRE)
   if (!matches) {
     throw new UnprintedUserError(
       `cannot find tagname in HTML block: '${html}'`,

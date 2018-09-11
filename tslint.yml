@@ -1,0 +1,9 @@
+extends: "tslint:latest"
+rules:
+  arrow-parens: [true, "ban-single-arg-parens"]
+  interface-name: [false]
+  member-access: [true, "no-public"]
+  semicolon: [true, "never"]
+  quotemark: [true, "double", "avoid-escape", "avoid-template"]
+  no-implicit-dependencies: [true, "dev"]
+  trailing-comma: [false]

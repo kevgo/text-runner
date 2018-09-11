@@ -1,7 +1,7 @@
-import AstNodeList from "../parsers/ast-node-list.js"
-import extractActivities from "./extract-activities.js"
 import { expect } from "chai"
 import { describe, it } from "mocha"
+import AstNodeList from "../parsers/ast-node-list.js"
+import extractActivities from "./extract-activities.js"
 
 describe("extract-activities", function() {
   it("extracts activities", function() {

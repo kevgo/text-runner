@@ -1,3 +1,3 @@
 import { Transformer } from "./transformer"
 
-export type TransformerList = { [key: string]: Transformer }
+export interface TransformerList { [key: string]: Transformer }

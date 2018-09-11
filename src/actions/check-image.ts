@@ -1,16 +1,16 @@
-import { ActionArgs } from "../runners/action-args.js"
 import { Configuration } from "../configuration/configuration.js"
+import { ActionArgs } from "../runners/action-args.js"
 
 import chalk from "chalk"
-import Formatter from "../formatters/formatter.js"
 import fs from "fs-extra"
 import path from "path"
 import request from "request-promise-native"
+import Formatter from "../formatters/formatter.js"
 
 // Checks for broken hyperlinks
 export default (async function(args: ActionArgs) {
   const node = args.nodes[0]
-  var imagePath = node.attributes ? node.attributes.src : null
+  let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
     throw new Error("image tag without source")
   }
@@ -39,7 +39,7 @@ async function checkRemoteImage(url: string, f: Formatter, c: Configuration) {
     return
   }
   try {
-    await request({ url: url, timeout: 2000 })
+    await request({ url, timeout: 2000 })
   } catch (err) {
     if (err.statusCode === 404) {
       f.warning(`image ${chalk.magenta(url)} does not exist`)

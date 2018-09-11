@@ -1,5 +1,5 @@
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
 import glob from "glob"
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
 
 // Returns all the markdown files in this directory and its children
 export default function markdownFilesInDir(

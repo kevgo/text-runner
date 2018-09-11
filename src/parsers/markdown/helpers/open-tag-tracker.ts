@@ -1,6 +1,6 @@
-import AstNode from "../../ast-node"
 import chalk from "chalk"
 import UnprintedUserError from "../../../errors/unprinted-user-error"
+import AstNode from "../../ast-node"
 
 export default class OpenTagTracker {
   nodes: AstNode[]
@@ -11,10 +11,10 @@ export default class OpenTagTracker {
 
   add(node: AstNode) {
     const existingNode = this.peekType(node.type)
-    if (existingNode && existingNode.attributes["textrun"]) {
+    if (existingNode && existingNode.attributes.textrun) {
       throw new UnprintedUserError(
         `this active block is nested inside another active block of type ${chalk.cyan(
-          existingNode.attributes["textrun"]
+          existingNode.attributes.textrun
         )} on line ${chalk.cyan(existingNode.line.toString())}`,
         node.file.platformified(),
         node.line
@@ -34,7 +34,7 @@ export default class OpenTagTracker {
   peekType(expectedType: string): AstNode | null {
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const node = this.nodes[i]
-      if (node.type === expectedType) return node
+      if (node.type === expectedType) { return node }
     }
     return null
   }
@@ -47,7 +47,7 @@ export default class OpenTagTracker {
     }
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const result = this.nodes[i]
-      if (result.tag !== expectedNodeTag) continue
+      if (result.tag !== expectedNodeTag) { continue }
       this.nodes.splice(i, 1)
       return result
     }
@@ -66,7 +66,7 @@ export default class OpenTagTracker {
     }
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const result = this.nodes[i]
-      if (result.type !== expectedNodeType) continue
+      if (result.type !== expectedNodeType) { continue }
       this.nodes.splice(i, 1)
       return result
     }

@@ -1,9 +1,9 @@
 import { expect } from "chai"
 import fs from "fs"
-import loadConfiguration from "./load-configuration.js"
+import { beforeEach, context, describe, it } from "mocha"
 import path from "path"
 import tmp from "tmp"
-import { beforeEach, describe, context, it } from "mocha"
+import loadConfiguration from "./load-configuration.js"
 
 describe("loadConfiguration", function() {
   it("returns default values if no config file is given", function() {

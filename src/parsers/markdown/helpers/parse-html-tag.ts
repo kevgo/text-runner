@@ -1,5 +1,5 @@
-import parseHtmlAttributes from "./parse-html-attributes"
 import UnprintedUserError from "../../../errors/unprinted-user-error"
+import parseHtmlAttributes from "./parse-html-attributes"
 
 const attrRE = /<(\/?\w+)\s*(.*)>/
 
@@ -8,7 +8,7 @@ export default function(
   filepath: string,
   line: number
 ): [string, { [key: string]: string }] {
-  var matches = html.match(attrRE)
+  const matches = html.match(attrRE)
   if (!matches) {
     throw new UnprintedUserError(
       `cannot parse HTML tag: '${html}'`,

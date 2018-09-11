@@ -1,12 +1,12 @@
 class RunConsoleCommandOutput {
+
+  static instance(): RunConsoleCommandOutput {
+    return instance
+  }
   content: string
 
   constructor() {
     this.content = ""
-  }
-
-  static instance(): RunConsoleCommandOutput {
-    return instance
   }
 
   append(text: string) {
@@ -22,6 +22,6 @@ class RunConsoleCommandOutput {
   }
 }
 
-let instance = new RunConsoleCommandOutput()
+const instance = new RunConsoleCommandOutput()
 
 export default RunConsoleCommandOutput

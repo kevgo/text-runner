@@ -1,8 +1,8 @@
+import { expect } from "chai"
+import { describe, it } from "mocha"
 import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
 import AbsoluteLink from "../domain-model/absolute-link.js"
 import Publication from "./publication.js"
-import { expect } from "chai"
-import { describe, it } from "mocha"
 
 describe("Publication", function() {
   describe("resolve", function() {

@@ -1,9 +1,9 @@
-import AbsoluteFilePath from "./absolute-file-path"
-import AbsoluteLink from "./absolute-link"
 import Publications from "../configuration/publications"
-import RelativeLink from "./relative-link"
 import removeDoubleSlash from "../helpers/remove-double-slash"
 import unixify from "../helpers/unifixy"
+import AbsoluteFilePath from "./absolute-file-path"
+import AbsoluteLink from "./absolute-link"
+import RelativeLink from "./relative-link"
 
 // A link that isn't known yet whether it is relative or absolute
 export default class UnknownLink {
@@ -17,7 +17,7 @@ export default class UnknownLink {
     containingFile: AbsoluteFilePath,
     publications: Publications
   ): AbsoluteLink {
-    if (this.isAbsolute()) return new AbsoluteLink(this.value)
+    if (this.isAbsolute()) { return new AbsoluteLink(this.value) }
     return new RelativeLink(this.value).absolutify(containingFile, publications)
   }
 

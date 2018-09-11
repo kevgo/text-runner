@@ -1,23 +1,23 @@
-import { ActionArgs } from "../runners/action-args.js"
 import { Configuration } from "../configuration/configuration.js"
+import { ActionArgs } from "../runners/action-args.js"
 
-import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
 import chalk from "chalk"
-import Formatter from "../formatters/formatter.js"
 import fs from "fs-extra"
+import path from "path"
+import request from "request-promise-native"
+import AbsoluteFilePath from "../domain-model/absolute-file-path.js"
+import UnknownLink from "../domain-model/unknown-link.js"
+import Formatter from "../formatters/formatter.js"
 import isExternalLink from "../helpers/is-external-link.js"
 import isLinkToAnchorInOtherFile from "../helpers/is-link-to-anchor-in-other-file.js"
 import isLinkToAnchorInSameFile from "../helpers/is-link-to-anchor-in-same-file.js"
 import isMailtoLink from "../helpers/is-mailto-link.js"
-import LinkTargetList from "../link-targets/link-target-list.js"
-import path from "path"
 import removeLeadingSlash from "../helpers/remove-leading-slash.js"
-import request from "request-promise-native"
-import UnknownLink from "../domain-model/unknown-link.js"
+import LinkTargetList from "../link-targets/link-target-list.js"
 
 // Checks for broken hyperlinks
 export default (async function(args: ActionArgs) {
-  const target = args.nodes[0].attributes["href"]
+  const target = args.nodes[0].attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")
   }

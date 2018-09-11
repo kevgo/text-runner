@@ -1,8 +1,8 @@
-import AstNode from "./ast-node"
-import AstNodeList from "./ast-node-list"
 import { expect } from "chai"
 import { describe, it } from "mocha"
 import UnprintedUserError from "../errors/unprinted-user-error"
+import AstNode from "./ast-node"
+import AstNodeList from "./ast-node-list"
 
 describe("AstNodeList", function() {
   describe("concat", function() {

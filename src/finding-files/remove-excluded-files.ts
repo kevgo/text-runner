@@ -12,7 +12,7 @@ export default function removeExcludedFiles(
   const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
   return fileList.filter(file => {
     for (const excludedRegex of excludedRegexes) {
-      if (excludedRegex.test(file.unixified())) return false
+      if (excludedRegex.test(file.unixified())) { return false }
     }
     return true
   })

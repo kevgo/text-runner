@@ -10,12 +10,8 @@ export default class FormattingTracker {
   }
 
   register(node: AstNode): boolean {
-    var result = true
-    if (node.type === "em_open") this.open("emphasized")
-    else if (node.type === "em_close") this.close("emphasized")
-    else if (node.type === "strong_open") this.open("strong")
-    else if (node.type === "strong_close") this.close("strong")
-    else result = false
+    let result = true
+    if (node.type === "em_open") { this.open("emphasized") } else if (node.type === "em_close") { this.close("emphasized") } else if (node.type === "strong_open") { this.open("strong") } else if (node.type === "strong_close") { this.close("strong") } else { result = false }
     return result
   }
 

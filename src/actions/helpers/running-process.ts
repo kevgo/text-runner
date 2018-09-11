@@ -1,14 +1,14 @@
 import ObservableProcess from "observable-process"
 
 export default class RunningProcess {
+
+  static instance(): RunningProcess {
+    return instance
+  }
   process: ObservableProcess | null
 
   constructor() {
     this.process = null
-  }
-
-  static instance(): RunningProcess {
-    return instance
   }
 
   hasProcess(): boolean {

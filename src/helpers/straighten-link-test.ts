@@ -1,6 +1,6 @@
-import straightenLink from "./straighten-link.js"
-import { describe, it } from "mocha"
 import { expect } from "chai"
+import { describe, it } from "mocha"
+import straightenLink from "./straighten-link.js"
 
 describe("straightenPath", function() {
   const tests = {

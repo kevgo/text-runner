@@ -1,12 +1,12 @@
 import { CliArgTypes } from "../cli/cli-arg-types.js"
 import { Configuration } from "./configuration.js"
 
+import deb from "debug"
 import camelCase from "just-camel-case"
+import YAML from "yamljs"
 import DetailedFormatter from "../formatters/detailed-formatter.js"
 import getFormatterClass from "./get-formatter-class.js"
-import deb from "debug"
 import Publications from "./publications.js"
-import YAML from "yamljs"
 
 const debug = deb("textrun:configuration")
 
@@ -30,7 +30,7 @@ export default function loadConfiguration(
   configFilePath: string,
   constructorArgs: CliArgTypes
 ): Configuration {
-  let fileData = {}
+  let fileData: any = {}
   if (configFilePath) {
     debug(`loading configuration file: ${configFilePath}`)
     // $FlowFixMe: flow-type defs seems to be wrong here
@@ -48,9 +48,7 @@ export default function loadConfiguration(
   }
 
   return {
-    actions: fileData["actions"]
-      ? fileData["actions"]
-      : defaultValues["actions"],
+    actions: fileData.actions ? fileData.actions : defaultValues.actions,
     classPrefix: get("class-prefix"),
     defaultFile: get("default-file"),
     exclude: get("exclude"),
@@ -61,7 +59,7 @@ export default function loadConfiguration(
       defaultValues.FormatterClass
     ),
     publications:
-      Publications.fromJSON(fileData["publications"] || []).sorted() ||
+      Publications.fromJSON(fileData.publications || []).sorted() ||
       defaultValues.publications,
     offline: String(get("offline")) === "true",
     sourceDir: get("source-dir"),

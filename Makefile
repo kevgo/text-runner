@@ -97,10 +97,6 @@ fix:  # runs the fixers
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-flow-types:   # installs/updates the Flow type definitions
-	flow-typed install --overwrite
-	rm flow-typed/npm/remarkable_v1.x.x.js
-
 lint: lintjs lintmd   # lints all files
 
 lintjs: build   # lints the javascript files
@@ -129,5 +125,3 @@ travis: lint coverage   # the set of tests running on Travis-CI
 
 upgrade:   # updates the dependencies to their latest versions
 	yarn upgrade-interactive
-	flow-typed install --overwrite
-	rm flow-typed/npm/remarkable_v1.x.x.js

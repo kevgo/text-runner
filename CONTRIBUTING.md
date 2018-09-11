@@ -2,49 +2,49 @@
 
 ## Installation for development
 
-* you need to have Gnu Make installed - running `make` should work on your machine
-* run `make setup` to install all needed software and libraries on your computer
-* add `./bin` and `./node_modules/.bin` to your PATH
-
+- you need to have Gnu Make installed - running `make` should work on your machine
+- run `make setup` to install all needed software and libraries on your computer
+- add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Testing
 
-* run all tests: <code textrun="does-make-target-exist">make spec</code>
-* run feature specs: <code textrun="does-make-target-exist">make cuke</code>
-* run feature specs in offline mode: `make cuke --tags '~@online'`
-* run text-run: <code textrun="does-make-target-exist">make docs</code>
+- run all tests: <code textrun="does-make-target-exist">make spec</code>
+- run feature specs: <code textrun="does-make-target-exist">make cuke</code>
+- run feature specs in offline mode: `make cuke --tags '~@online'`
+- run text-run: <code textrun="does-make-target-exist">make docs</code>
 
 To debug a single test:
-* enable console output: add the `@verbose` tag
-* enable debugging statements and verbose output: add the `@debug` tag
+
+- enable console output: add the `@verbose` tag
+- enable debugging statements and verbose output: add the `@debug` tag
 
 To determine test coverage, run <a textrun="does-make-target-exist">`make coverage`</a>.
 The coverage in relatively low because TextRunner contains copious amounts of
 defensive checks against invalid user input.
 Not all permutations of that are tested.
 
-
 ## Linting
 
-* run all linters: <a textrun="does-make-target-exist">`make lint`</a>
-* run JavaScript linters: <a textrun="does-make-target-exist">`make lintjs`</a>
-* run Markdown linters: <a textrun="does-make-target-exist">`make lintmd`</a>
+- run all linters: <a textrun="does-make-target-exist">`make lint`</a>
+- run JavaScript linters: <a textrun="does-make-target-exist">`make lintjs`</a>
+- run Markdown linters: <a textrun="does-make-target-exist">`make lintmd`</a>
 
 The JavaScript Standard linter does not properly handle Flow types at this point,
 hence it is recommended to only show flow lint messages in your editor,
 not the error messages from "standard".
 Use the `make lintjs` script instead.
 
-
 ## Editor setup
 
 Set up your editor with the following configuration:
+
 - linters: run `flow`, then `standard`
 - fixers: run `prettier_standard`
   (which runs [Prettier](https://github.com/prettier/prettier),
   then [StandardJS](https://standardjs.com)
 
 Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
+
 ```vim
 let g:ale_linters = {
 \   'javascript': ['flow', 'standard']
@@ -54,7 +54,6 @@ let g:ale_fixers = {
 \}
 let g:ale_javascript_prettier_use_local_config = 1
 ```
-
 
 ## Terminology
 
@@ -81,6 +80,7 @@ Each activity has a name, an action, and a bunch of associated nodes from the do
 The architecture is best understood by following along
 with how a set of documents is tested.
 There are several CLI executables to start TextRunner:
+
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
@@ -127,7 +127,6 @@ that converts the configuration into test results over several steps:
 1. **test results --> test statistics:**
    finally, we write a summary of the test to the console
    and terminate with the corresponding exit code.
-
 
 ## Deployment
 

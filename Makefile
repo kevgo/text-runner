@@ -91,6 +91,7 @@ endif
 fix:  # runs the fixers
 	tslint --project tsconfig.json --fix
 	node_modules/.bin/prettier --write 'src/**/*.ts'
+	node_modules/.bin/prettier --write '*.md'
 	node_modules/.bin/prettier --write 'documentation/**/*.md'
 
 help:   # prints all make targets
@@ -109,6 +110,7 @@ lintjs: build   # lints the javascript files
 	# node_modules/.bin/prettier -l "features/**/*.ts"
 
 lintmd:   # lints markdown files
+	node_modules/.bin/prettier -l "*.md"
 	node_modules/.bin/prettier -l "src/**/*.md"
 	node_modules/.bin/remark .
 

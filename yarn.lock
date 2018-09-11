@@ -1178,24 +1178,6 @@ dependency-lint@4.3.1:
     semver "^5.1.0"
     sorted-object "^2.0.0"
 
-dependency-lint@5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/dependency-lint/-/dependency-lint-5.0.1.tgz#2ef759a87bd5608b6bdd2af772c9d6a15b1e89ab"
-  dependencies:
-    bluebird "^3.4.3"
-    builtin-modules "^1.1.1"
-    camel-case "^3.0.0"
-    colors "^1.0.3"
-    detective "^4.0.0"
-    docopt "^0.6.0"
-    fs-extra "^1.0.0"
-    glob "^7.0.0"
-    js-yaml "^3.3.1"
-    lodash "^4.2.1"
-    minimatch "^3.0.2"
-    semver "^5.1.0"
-    sorted-object "^2.0.0"
-
 detect-file@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/detect-file/-/detect-file-0.1.0.tgz#4935dedfd9488648e006b0129566e9386711ea63"

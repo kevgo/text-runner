@@ -34,7 +34,7 @@ export default (async function(args: ActionArgs) {
   }
 
   args.formatter.name(`running console command: ${chalk.cyan(commandsToRun)}`)
-  var input = []
+  let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes, args.formatter)
   }

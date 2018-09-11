@@ -39,6 +39,7 @@
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
     "@types/glob": "5.0.35",
+    "@types/node": "10.9.4",
     "array-flatten": "2.1.1",
     "babel-cli": "6.26.0",
     "babel-plugin-istanbul": "5.0.1",

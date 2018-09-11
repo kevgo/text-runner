@@ -1,7 +1,7 @@
 import { ActionArgs } from "../runners/action-args.js"
 import { Configuration } from "../configuration/configuration.js"
 
-type DoneFunction = (err?: ErrnoError) => void
+type DoneFunction = (err?: Error) => void
 
 // Runs the JavaScript code given in the code block
 export default function(args: ActionArgs, done: DoneFunction) {

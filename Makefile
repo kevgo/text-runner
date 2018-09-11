@@ -90,8 +90,8 @@ endif
 
 fix:  # runs the fixers
 	tslint --project tsconfig.json --fix
-	prettier --write src/*.ts
-	prettier --write **/*.md
+	node_modues/.bin/prettier --write **/*.ts
+	node_modues/.bin/prettier --write **/*.md
 
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -105,11 +105,12 @@ lint: lintjs lintmd   # lints all files
 lintjs: build   # lints the javascript files
 	node_modules$/.bin$/tsc --noEmit
 	node_modules/.bin/prettier -l "src/**/*.ts"
-	node_modules/.bin/prettier -l "**/*.md"
+	node_modules/.bin/prettier -l "features/**/*.ts"
 	node_modules/.bin/dependency-lint
 
 lintmd:   # lints markdown files
-	@node_modules/.bin/remark .
+	node_modules/.bin/prettier -l "src/**/*.md"
+	node_modules/.bin/remark .
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

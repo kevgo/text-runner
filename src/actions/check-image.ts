@@ -21,15 +21,11 @@ export default (async function(args: ActionArgs) {
     if (!imagePath.startsWith("/")) {
       imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
     }
-    await checkLocalImage(imagePath, args.formatter, args.configuration)
+    await checkLocalImage(imagePath, args.configuration)
   }
 })
 
-async function checkLocalImage(
-  imagePath: string,
-  formatter: Formatter,
-  c: Configuration
-) {
+async function checkLocalImage(imagePath: string, c: Configuration) {
   try {
     await fs.stat(path.join(c.sourceDir, imagePath))
   } catch (err) {

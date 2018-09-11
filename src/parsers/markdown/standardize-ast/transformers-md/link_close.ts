@@ -12,12 +12,12 @@ export default function(
   const openNode = openTags.popType("link_open")
   const result = new AstNodeList()
   result.pushNode({
-    type: node.type,
-    tag: "/a",
+    attributes: openNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openNode.attributes
+    tag: "/a",
+    type: node.type
   })
   return result
 }

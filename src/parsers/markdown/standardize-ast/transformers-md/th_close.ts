@@ -10,12 +10,12 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: node.type,
-    tag: "/th",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "/th",
+    type: node.type
   })
   openTags.popType("th_open")
   return result

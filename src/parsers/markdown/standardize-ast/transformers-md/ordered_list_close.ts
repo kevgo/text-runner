@@ -11,12 +11,12 @@ export default function(
   const result = new AstNodeList()
   const openNode = openTags.popType("ordered_list_open")
   result.pushNode({
-    type: node.type,
-    tag: "/ol",
+    attributes: openNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openNode.attributes
+    tag: "/ol",
+    type: node.type
   })
   return result
 }

@@ -22,12 +22,12 @@ export default function(
     attributes = parseHtmlAttributes(match[1])
   }
   const resultNode = new AstNode({
-    type: node.type,
-    tag: "blockquote",
+    attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes
+    tag: "blockquote",
+    type: node.type
   })
   openTags.add(resultNode)
   result.pushNode(resultNode)

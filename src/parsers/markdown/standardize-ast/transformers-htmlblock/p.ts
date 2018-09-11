@@ -24,12 +24,12 @@ module.exports = async function transformPBlock(
     )
   }
   const resultNode = new AstNode({
-    type: "paragraph",
-    tag: "p",
+    attributes: parseHtmlAttributes(match[1]),
+    content: match[2],
     file,
     line,
-    content: match[2],
-    attributes: parseHtmlAttributes(match[1])
+    tag: "p",
+    type: "paragraph"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

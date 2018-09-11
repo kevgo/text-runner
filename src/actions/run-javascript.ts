@@ -21,14 +21,9 @@ export default function(args: ActionArgs, done: DoneFunction) {
   }
   pretendToUse(__finished.toString())
 
-  if (hasCallbackPlaceholder(code)) {
-    // async code
-    code = replaceAsyncCallbacks(code)
-  } else {
-    // sync code
-    code = appendAsyncCallback(code)
-  }
-  /* eslint-disable no-eval */
+  code = hasCallbackPlaceholder(code)
+    ? (code = replaceAsyncCallbacks(code)) // async code
+    : (code = appendAsyncCallback(code)) // sync code
   eval(code)
 }
 

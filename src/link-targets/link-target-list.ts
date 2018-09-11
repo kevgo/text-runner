@@ -25,14 +25,20 @@ export default class LinkTargetList {
   }
 
   addAnchor(node: AstNode) {
-    if (node.attributes.href !== undefined) { return }
-    if (!node.attributes.name) { return }
+    if (node.attributes.href !== undefined) {
+      return
+    }
+    if (!node.attributes.name) {
+      return
+    }
     this.addLinkTarget(node.file, "anchor", node.attributes.name)
   }
 
   addHeading(node: AstNode, nodeList: AstNodeList) {
     const content = nodeList.textInNode(node)
-    if (!content) { return }
+    if (!content) {
+      return
+    }
     this.addLinkTarget(node.file, "heading", content)
   }
 
@@ -40,8 +46,8 @@ export default class LinkTargetList {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({
-      type,
-      name: kebabCase(name.toLowerCase())
+      name: kebabCase(name.toLowerCase()),
+      type
     })
   }
 
@@ -63,7 +69,9 @@ export default class LinkTargetList {
 
   hasAnchor(filePath: AbsoluteFilePath, name: string): boolean {
     const fileList = this.targets[filePath.platformified()]
-    if (!fileList) { return false }
+    if (!fileList) {
+      return false
+    }
     return fileList.some(linkTarget => linkTarget.name === name)
   }
 

@@ -13,12 +13,12 @@ module.exports = function transformATag(
   const result = new AstNodeList()
   const openingTag = openTags.popType("code_open")
   const resultNode = new AstNode({
-    type: "code_close",
-    tag: "/code",
+    attributes: openingTag.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openingTag.attributes
+    tag: "/code",
+    type: "code_close"
   })
   result.pushNode(resultNode)
   pretendToUse(node)

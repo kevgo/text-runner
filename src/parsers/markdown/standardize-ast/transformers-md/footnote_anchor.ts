@@ -12,12 +12,12 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   const resultNode = new AstNode({
-    type: node.type,
-    tag: "footnote_anchor",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "footnote_anchor",
+    type: node.type
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

@@ -7,10 +7,10 @@ describe("extract-activities", function() {
   it("extracts activities", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: "anchor_open",
+      attributes: { textrun: "verify-foo" },
       file: "README.md",
       line: 3,
-      attributes: { textrun: "verify-foo" }
+      type: "anchor_open"
     })
     AST.pushNode({ type: "text" })
     AST.pushNode({ type: "anchor_close" })
@@ -25,10 +25,10 @@ describe("extract-activities", function() {
   it("normalizes activity names in CamelCase", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: "anchor_open",
+      attributes: { textrun: "verifyFoo" },
       file: "README.md",
       line: 3,
-      attributes: { textrun: "verifyFoo" }
+      type: "anchor_open"
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")
@@ -38,10 +38,10 @@ describe("extract-activities", function() {
   it("normalizes activity names in kebab-case", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: "anchor_open",
+      attributes: { textrun: "verify-foo" },
       file: "README.md",
       line: 3,
-      attributes: { textrun: "verify-foo" }
+      type: "anchor_open"
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")
@@ -51,10 +51,10 @@ describe("extract-activities", function() {
   it("normalizes activity names in snake_case", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      type: "anchor_open",
+      attributes: { textrun: "verify_foo" },
       file: "README.md",
       line: 3,
-      attributes: { textrun: "verify_foo" }
+      type: "anchor_open"
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")

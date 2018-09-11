@@ -126,8 +126,8 @@ describe("AbsoluteLink", function() {
       const publications = Publications.fromJSON([
         {
           localPath: "/content/posts",
-          publicPath: "/blog",
-          publicExtension: "html"
+          publicExtension: "html",
+          publicPath: "/blog"
         }
       ])
       const actual = link.localize(publications, "")
@@ -138,8 +138,8 @@ describe("AbsoluteLink", function() {
       const publications = Publications.fromJSON([
         {
           localPath: "/content/posts",
-          publicPath: "/blog",
-          publicExtension: "html"
+          publicExtension: "html",
+          publicPath: "/blog"
         }
       ])
       const actual = link.localize(publications, "")

@@ -11,15 +11,15 @@ import Publications from "./publications.js"
 const debug = deb("textrun:configuration")
 
 const defaultValues: Configuration = {
+  FormatterClass: DetailedFormatter,
   actions: {},
   classPrefix: "textrun",
   defaultFile: "",
   exclude: [],
   fileGlob: "**/*.md",
   keepTmp: false,
-  publications: new Publications(),
-  FormatterClass: DetailedFormatter,
   offline: false,
+  publications: new Publications(),
   sourceDir: process.cwd(),
   useSystemTempDirectory: false,
   workspace: "" // will be populated later
@@ -48,20 +48,20 @@ export default function loadConfiguration(
   }
 
   return {
+    FormatterClass: getFormatterClass(
+      get("format"),
+      defaultValues.FormatterClass
+    ),
     actions: fileData.actions ? fileData.actions : defaultValues.actions,
     classPrefix: get("class-prefix"),
     defaultFile: get("default-file"),
     exclude: get("exclude"),
     fileGlob: get("files") || defaultValues.fileGlob,
     keepTmp: String(get("keep-tmp")) === "true",
-    FormatterClass: getFormatterClass(
-      get("format"),
-      defaultValues.FormatterClass
-    ),
+    offline: String(get("offline")) === "true",
     publications:
       Publications.fromJSON(fileData.publications || []).sorted() ||
       defaultValues.publications,
-    offline: String(get("offline")) === "true",
     sourceDir: get("source-dir"),
     useSystemTempDirectory: String(get("use-system-temp-directory")) === "true",
     workspace: get("workspace") || ""

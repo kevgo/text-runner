@@ -9,10 +9,10 @@ export default function(ASTs: AstNodeList[]): ActivityList {
       switch (node.type) {
         case "link_open":
           result.push({
-            type: "check-link",
             file: node.file,
             line: node.line,
-            nodes: AST.getNodesFor(node)
+            nodes: AST.getNodesFor(node),
+            type: "check-link"
           })
           break
 
@@ -20,10 +20,10 @@ export default function(ASTs: AstNodeList[]): ActivityList {
           const nodes = new AstNodeList()
           nodes.push(node)
           result.push({
-            type: "check-image",
             file: node.file,
             line: node.line,
-            nodes
+            nodes,
+            type: "check-image"
           })
           break
       }

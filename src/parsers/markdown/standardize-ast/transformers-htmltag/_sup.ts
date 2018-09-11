@@ -13,12 +13,12 @@ module.exports = function transformATag(
   const result = new AstNodeList()
   const openingTag = openTags.popType("sup_open")
   const resultNode = new AstNode({
-    type: "sup_close",
-    tag: "/sup",
+    attributes: openingTag.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openingTag.attributes
+    tag: "/sup",
+    type: "sup_close"
   })
   result.pushNode(resultNode)
   pretendToUse(node)

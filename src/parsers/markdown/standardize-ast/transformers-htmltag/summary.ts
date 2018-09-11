@@ -17,12 +17,12 @@ module.exports = function transformSummaryTag(
     line
   )
   const resultNode = new AstNode({
-    type: "summary_open",
-    tag,
+    attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes
+    tag,
+    type: "summary_open"
   })
   openTags.add(resultNode)
   result.pushNode(resultNode)

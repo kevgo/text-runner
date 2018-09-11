@@ -10,12 +10,12 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: node.type,
-    tag: "/del",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "/del",
+    type: node.type
   })
   openTags.popType("del_open")
   return result

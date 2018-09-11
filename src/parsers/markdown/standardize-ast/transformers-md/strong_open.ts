@@ -11,12 +11,12 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   const resultNode = new AstNode({
-    type: node.type,
-    tag: "strong",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "strong",
+    type: node.type
   })
   openTags.add(resultNode)
   result.push(resultNode)

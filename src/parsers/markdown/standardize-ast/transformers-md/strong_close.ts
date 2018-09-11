@@ -11,12 +11,12 @@ export default function(
   const result = new AstNodeList()
   const openNode = openTags.popType("strong_open")
   result.pushNode({
-    type: node.type,
-    tag: "/strong",
+    attributes: openNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openNode.attributes
+    tag: "/strong",
+    type: node.type
   })
   return result
 }

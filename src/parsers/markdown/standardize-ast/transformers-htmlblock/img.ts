@@ -16,14 +16,16 @@ module.exports = async function transformOl(
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = removeHtmlComments(node.content).match(olRegex)
-  if (!match) { throw new Error("cannot parse tag") }
+  if (!match) {
+    throw new Error("cannot parse tag")
+  }
   const hrNode = new AstNode({
-    type: "image",
-    tag: "img",
+    attributes: parseHtmlAttributes(match[1]),
+    content: "",
     file,
     line,
-    content: "",
-    attributes: parseHtmlAttributes(match[1])
+    tag: "img",
+    type: "image"
   })
   result.pushNode(hrNode)
   pretendToUse(openTags)

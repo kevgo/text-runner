@@ -18,12 +18,12 @@ module.exports = function transformATag(
     line
   )
   const resultNode = new AstNode({
-    type: "linebreak",
-    tag,
+    attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes
+    tag,
+    type: "linebreak"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

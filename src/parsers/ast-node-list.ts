@@ -3,7 +3,7 @@ import AstNode from "./ast-node"
 
 export default class AstNodeList extends Array<AstNode> {
   // Creates a new AstNodeList containing the given data
-  static scaffold(data: Object = {}): AstNodeList {
+  static scaffold(data: any = {}): AstNodeList {
     const result = new AstNodeList()
     result.push(AstNode.scaffold(data))
     return result
@@ -62,7 +62,8 @@ export default class AstNodeList extends Array<AstNode> {
 
   getNodesOfTypes(...nodeTypes: string[]): AstNodeList {
     const result = new AstNodeList()
-    for (const node of this.filter(node => nodeTypes.includes(node.type))) {
+    const matchingNodes = this.filter(node => nodeTypes.includes(node.type))
+    for (const node of matchingNodes) {
       result.push(node)
     }
     return result
@@ -80,7 +81,7 @@ export default class AstNodeList extends Array<AstNode> {
   }
 
   // Adds a new AstNode with the given data to this list
-  pushNode(data: Object) {
+  pushNode(data: any) {
     this.push(AstNode.scaffold(data))
   }
 
@@ -89,8 +90,11 @@ export default class AstNodeList extends Array<AstNode> {
   }
 
   // returns the textual content for the given node
-  textInNode(node: AstNode): string {
-    return this.getNodesFor(node).reduce((acc, node) => acc + node.content, "")
+  textInNode(astNode: AstNode): string {
+    return this.getNodesFor(astNode).reduce(
+      (acc, node) => acc + node.content,
+      ""
+    )
   }
 
   // Returns the text in the nodes of the given types.

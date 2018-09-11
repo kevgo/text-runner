@@ -11,15 +11,15 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: "image",
-    tag: "img",
+    attributes: {
+      alt: node.alt,
+      src: node.src
+    },
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {
-      src: node.src,
-      alt: node.alt
-    }
+    tag: "img",
+    type: "image"
   })
   pretendToUse(openTags)
   return result

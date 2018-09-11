@@ -11,12 +11,12 @@ export default function(
   const result = new AstNodeList()
   const openNode = openTags.popType("blockquote_open")
   result.pushNode({
-    type: node.type,
-    tag: "/blockquote",
+    attributes: openNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openNode.attributes
+    tag: "/blockquote",
+    type: node.type
   })
   return result
 }

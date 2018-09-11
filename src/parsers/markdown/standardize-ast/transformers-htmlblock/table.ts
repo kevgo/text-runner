@@ -22,65 +22,69 @@ module.exports = async function transformTable(
   } catch (e) {
     const lineMatch = e.message.match(/Line: (\d+)/)
     let errorLine = line
-    if (lineMatch) { errorLine += parseInt(lineMatch[1]) }
+    if (lineMatch) {
+      errorLine += parseInt(lineMatch[1], 10)
+    }
     const message = e.message.split("\n")[0]
     throw new UnprintedUserError(message, file.platformified(), errorLine)
   }
   const tableNode = new AstNode({
-    type: "table_open",
-    tag: "table",
+    attributes: xml.table.$ || {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: xml.table.$ || {}
+    tag: "table",
+    type: "table_open"
   })
   result.pushNode(tableNode)
-  if (xml.table.tr) { parseRows(xml.table.tr, result, file, line) }
+  if (xml.table.tr) {
+    parseRows(xml.table.tr, result, file, line)
+  }
   if (xml.table.thead) {
     result.pushNode({
-      type: "thead_open",
-      tag: "thead",
+      attributes: xml.table.thead.$ || {},
+      content: "",
       file,
       line,
-      content: "",
-      attributes: xml.table.thead.$ || {}
+      tag: "thead",
+      type: "thead_open"
     })
     parseRows(xml.table.thead[0].tr, result, file, line)
     result.pushNode({
-      type: "thead_close",
-      tag: "/thead",
+      attributes: xml.table.thead.$ || {},
+      content: "",
       file,
       line,
-      content: "",
-      attributes: xml.table.thead.$ || {}
+      tag: "/thead",
+      type: "thead_close"
     })
   }
   if (xml.table.tbody) {
     result.pushNode({
-      type: "tbody_open",
-      tag: "tbody",
+      attributes: xml.table.tbody.$ || {},
+      content: "",
       file,
       line,
-      content: "",
-      attributes: xml.table.tbody.$ || {}
+      tag: "tbody",
+      type: "tbody_open"
     })
     parseRows(xml.table.tbody[0].tr, result, file, line)
     result.pushNode({
-      type: "tbody_close",
-      tag: "/tbody",
+      attributes: xml.table.tbody.$ || {},
+      content: "",
       file,
       line,
-      content: "",
-      attributes: xml.table.tbody.$ || {}
+      tag: "/tbody",
+      type: "tbody_close"
     })
   }
   result.pushNode({
-    type: "table_close",
-    tag: "/table",
+    attributes: tableNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: tableNode.attributes
+    tag: "/table",
+    type: "table_close"
   })
   pretendToUse(openTags)
   return result
@@ -94,41 +98,41 @@ function parseRows(
 ) {
   for (const row of block) {
     result.pushNode({
-      type: "table_row_open",
-      tag: "tr",
+      attributes: row.$ || {},
+      content: row._ || "",
       file,
       line,
-      content: row._ || "",
-      attributes: row.$ || {}
+      tag: "tr",
+      type: "table_row_open"
     })
 
     for (const th of row.th || []) {
       result.pushNode({
-        type: "table_heading",
-        tag: "th",
+        attributes: th.$ || {},
+        content: th._ || th,
         file,
         line,
-        content: th._ || th,
-        attributes: th.$ || {}
+        tag: "th",
+        type: "table_heading"
       })
     }
     for (const td of row.td || []) {
       result.pushNode({
-        type: "table_cell",
-        tag: "td",
+        attributes: td.$ || {},
+        content: td._ || td,
         file,
         line,
-        content: td._ || td,
-        attributes: td.$ || {}
+        tag: "td",
+        type: "table_cell"
       })
     }
     result.pushNode({
-      type: "table_row_close",
-      tag: "/tr",
+      attributes: row.$ || {},
+      content: row._ || "",
       file,
       line,
-      content: row._ || "",
-      attributes: row.$ || {}
+      tag: "/tr",
+      type: "table_row_close"
     })
   }
 }

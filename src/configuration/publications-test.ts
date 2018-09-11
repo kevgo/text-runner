@@ -9,13 +9,13 @@ describe("Publications", function() {
       const publications = Publications.fromJSON([
         {
           localPath: "foo",
-          publicPath: "",
-          publicExtension: ""
+          publicExtension: "",
+          publicPath: ""
         },
         {
           localPath: "bar",
-          publicPath: "",
-          publicExtension: ""
+          publicExtension: "",
+          publicPath: ""
         }
       ])
       const filePath = new AbsoluteFilePath("bar")
@@ -27,8 +27,8 @@ describe("Publications", function() {
       const publications = Publications.fromJSON([
         {
           localPath: "foo",
-          publicPath: "",
-          publicExtension: ""
+          publicExtension: "",
+          publicPath: ""
         }
       ])
       const filePath = new AbsoluteFilePath("bar")
@@ -42,26 +42,26 @@ describe("Publications", function() {
       const original = Publications.fromJSON([
         {
           localPath: "/content/",
-          publicPath: "/",
-          publicExtension: ""
+          publicExtension: "",
+          publicPath: "/"
         },
         {
           localPath: "/content/posts",
-          publicPath: "/blog",
-          publicExtension: "html"
+          publicExtension: "html",
+          publicPath: "/blog"
         }
       ])
       const actual = original.sorted()
       const expected = Publications.fromJSON([
         {
           localPath: "/content/posts",
-          publicPath: "/blog",
-          publicExtension: "html"
+          publicExtension: "html",
+          publicPath: "/blog"
         },
         {
           localPath: "/content/",
-          publicPath: "/",
-          publicExtension: ""
+          publicExtension: "",
+          publicPath: "/"
         }
       ])
       expect(actual).to.eql(expected)

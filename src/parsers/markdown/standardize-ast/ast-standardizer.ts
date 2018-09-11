@@ -27,26 +27,40 @@ export default class AstStandardizer {
 
   async standardize(ast: any): Promise<AstNodeList> {
     for (const node of ast) {
-      if (node.lines) { this.line = Math.max(node.lines[0] + 1, this.line) }
+      if (node.lines) {
+        this.line = Math.max(node.lines[0] + 1, this.line)
+      }
 
       if (node.children) {
-        for (const child of node.children) { child.lines = node.lines }
+        for (const child of node.children) {
+          child.lines = node.lines
+        }
         await this.standardize(node.children)
         continue
       }
 
-      if (this.processSoftBreak(node)) { continue }
+      if (this.processSoftBreak(node)) {
+        continue
+      }
       const processed = await this.processHtmlBlock(node)
-      if (processed) { continue }
-      if (this.processHtmlTag(node)) { continue }
-      if (this.processMdNode(node)) { continue }
+      if (processed) {
+        continue
+      }
+      if (this.processHtmlTag(node)) {
+        continue
+      }
+      if (this.processMdNode(node)) {
+        continue
+      }
       alertUnknownNodeType(node, this.filepath.platformified(), this.line)
     }
     return this.result
   }
 
   async processHtmlBlock(node: any): Promise<boolean> {
-    if (node.type !== "htmlblock") { return false }
+    if (node.type !== "htmlblock") {
+      return false
+    }
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
       this.filepath,
@@ -66,14 +80,16 @@ export default class AstStandardizer {
       this.filepath,
       this.line
     )
-    for (const node of transformed) {
-      this.result.push(node)
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
     }
     return true
   }
 
   processHtmlTag(node: any): boolean {
-    if (node.type !== "htmltag") { return false }
+    if (node.type !== "htmltag") {
+      return false
+    }
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
       this.filepath,
@@ -93,29 +109,33 @@ export default class AstStandardizer {
       this.filepath,
       this.line
     )
-    for (const node of transformed) {
-      this.result.push(node)
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
     }
     return true
   }
 
   processMdNode(node: any): boolean {
     const transformer = mdTransformers[node.type]
-    if (!transformer) { return false }
+    if (!transformer) {
+      return false
+    }
     const transformed = transformer(
       node,
       this.openTags,
       this.filepath,
       this.line
     )
-    for (const node of transformed) {
-      this.result.push(node)
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
     }
     return true
   }
 
   processSoftBreak(node: any): boolean {
-    if (node.type !== "softbreak") { return false }
+    if (node.type !== "softbreak") {
+      return false
+    }
     this.line += 1
     return true
   }

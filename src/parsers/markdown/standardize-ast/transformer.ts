@@ -3,7 +3,7 @@ import AstNodeList from "../../ast-node-list.js"
 import OpenTagTracker from "../helpers/open-tag-tracker.js"
 
 export type Transformer = (
-  obj: Object,
+  obj: any,
   ott: OpenTagTracker,
   afp: AbsoluteFilePath,
   n: number

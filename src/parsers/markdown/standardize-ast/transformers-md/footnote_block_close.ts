@@ -10,12 +10,12 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: node.type,
-    tag: "/footnote_block",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "/footnote_block",
+    type: node.type
   })
   openTags.popType("footnote_block_open")
   return result

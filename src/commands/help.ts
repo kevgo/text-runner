@@ -1,13 +1,15 @@
 import chalk from "chalk"
 
-const { version } = require("../../package.json")
-
 export default (async function helpCommand(error?: string) {
   console.log(template(error))
 })
 
 function template(error: string | undefined) {
-  if (error) { error = `${chalk.red(chalk.bold("Error: " + error))}` }
+  if (error) {
+    error = `${chalk.red(chalk.bold("Error: " + error))}`
+  }
+  const { version } = require("../../package.json")
+
   return `
 ${chalk.dim("TextRunner " + version)}
 ${error || ""}

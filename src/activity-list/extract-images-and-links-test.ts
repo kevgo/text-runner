@@ -6,9 +6,9 @@ import extractImagesAndLinks from "./extract-images-and-links.js"
 describe("extractImagesAndLinks", function() {
   it("extracts images", function() {
     const nodes = AstNodeList.scaffold({
-      type: "image",
       file: "filename",
-      line: 3
+      line: 3,
+      type: "image"
     })
     const result = extractImagesAndLinks([nodes])
     expect(result).to.have.length(1)

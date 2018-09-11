@@ -17,12 +17,12 @@ module.exports = function transformATag(
     line
   )
   const resultNode = new AstNode({
-    type: "marquee",
-    tag,
+    attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes
+    tag,
+    type: "marquee"
   })
   openTags.add(resultNode)
   result.pushNode(resultNode)

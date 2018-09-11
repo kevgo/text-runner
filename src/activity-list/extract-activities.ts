@@ -23,10 +23,10 @@ function extractActivities(AST: AstNodeList, prefix: string): ActivityList {
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
       result.push({
-        type: kebabCase(node.attributes[prefix]),
         file: node.file,
         line: node.line,
-        nodes: AST.getNodesFor(node)
+        nodes: AST.getNodesFor(node),
+        type: kebabCase(node.attributes[prefix])
       })
     }
     if (isActiveBlockEndTag(node, activeNode, prefix)) {
@@ -57,6 +57,8 @@ function isActiveBlockEndTag(
   activeNode: AstNode | null,
   prefix: string
 ): boolean {
-  if (!activeNode) { return false }
+  if (!activeNode) {
+    return false
+  }
   return node.attributes[prefix] === activeNode.attributes[prefix]
 }

@@ -11,12 +11,12 @@ export default function(
   const openNode = openTags.popType("paragraph_open")
   const result = new AstNodeList()
   result.pushNode({
-    type: node.type,
-    tag: "/p",
+    attributes: openNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openNode.attributes
+    tag: "/p",
+    type: node.type
   })
   return result
 }

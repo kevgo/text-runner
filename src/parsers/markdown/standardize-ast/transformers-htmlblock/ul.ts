@@ -21,31 +21,31 @@ module.exports = async function transformUl(
   const match = node.content.match(ulRegex)
   const xml = await xml2jsp(node.content)
   const ulNode = new AstNode({
-    type: "bullet_list_open",
-    tag: "ul",
+    attributes: parseHtmlAttributes(match[1]),
+    content: "",
     file,
     line,
-    content: "",
-    attributes: parseHtmlAttributes(match[1])
+    tag: "ul",
+    type: "bullet_list_open"
   })
   result.pushNode(ulNode)
   for (const li of xml.ul.li) {
     result.pushNode({
-      type: "list_item_open",
-      tag: "li",
+      attributes: li.$ || {},
+      content: li._,
       file,
       line,
-      content: li._,
-      attributes: li.$ || {}
+      tag: "li",
+      type: "list_item_open"
     })
   }
   result.pushNode({
-    type: "bullet_list_close",
-    tag: "/ul",
+    attributes: ulNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: ulNode.attributes
+    tag: "/ul",
+    type: "bullet_list_close"
   })
   pretendToUse(openTags)
   return result

@@ -13,12 +13,12 @@ module.exports = function transformSummaryTag(
   const result = new AstNodeList()
   const openingTag = openTags.popType("summary_open")
   const resultNode = new AstNode({
-    type: "summary_close",
-    tag: "/summary",
+    attributes: openingTag.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openingTag.attributes
+    tag: "/summary",
+    type: "summary_close"
   })
   result.pushNode(resultNode)
   pretendToUse(node)

@@ -11,12 +11,12 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: "hr",
-    tag: "hr",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "hr",
+    type: "hr"
   })
   pretendToUse(node, openTags)
   return result

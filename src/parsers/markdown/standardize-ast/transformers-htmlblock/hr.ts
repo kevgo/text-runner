@@ -16,12 +16,12 @@ module.exports = async function transformOl(
   const result = new AstNodeList()
   const match = node.content.match(olRegex)
   const hrNode = new AstNode({
-    type: "horizontal_row",
-    tag: "hr",
+    attributes: parseHtmlAttributes(match[1]),
+    content: "",
     file,
     line,
-    content: "",
-    attributes: parseHtmlAttributes(match[1])
+    tag: "hr",
+    type: "horizontal_row"
   })
   result.pushNode(hrNode)
   pretendToUse(openTags)

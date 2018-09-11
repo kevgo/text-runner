@@ -13,10 +13,11 @@ describe("AstNode", function() {
   describe("endTypeFor", function() {
     it("returns the closing tag", function() {
       const data = {
-        heading_open: "heading_close",
-        anchor_open: "anchor_close"
+        anchor_open: "anchor_close",
+        heading_open: "heading_close"
       }
       for (const input in data) {
+        if (!data.hasOwnProperty(input)) { continue }
         const node = AstNode.scaffold({ type: input })
         expect(node.endType()).to.eql(data[input])
       }
@@ -26,8 +27,8 @@ describe("AstNode", function() {
   describe("htmlLinkTarget", function() {
     it("returns the href content of link tags", function() {
       const node = AstNode.scaffold({
-        type: "htmltag",
-        content: "<a href=\"http://foo.com\">"
+        content: '<a href="http://foo.com">',
+        type: "htmltag"
       })
       expect(node.htmlLinkTarget()).to.equal("http://foo.com")
     })
@@ -37,8 +38,8 @@ describe("AstNode", function() {
     })
     it("returns null for anchor tags", function() {
       const node = AstNode.scaffold({
-        type: "htmltag",
-        content: "<a name=\"foo\">"
+        content: '<a name="foo">',
+        type: "htmltag"
       })
       expect(node.htmlLinkTarget()).to.be.null
     })

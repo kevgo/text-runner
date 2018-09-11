@@ -8,9 +8,9 @@ describe("LinkTargetList", function() {
   describe("addNodeList", function() {
     it("adds the anchors in the given AstNodeList", function() {
       const nodeList = AstNodeList.scaffold({
+        attributes: { name: "foo bar" },
         file: "file.md",
-        type: "anchor_open",
-        attributes: { name: "foo bar" }
+        type: "anchor_open"
       })
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
@@ -31,14 +31,14 @@ describe("LinkTargetList", function() {
     it("adds the headings in the given AstNodeList", function() {
       const nodeList = new AstNodeList()
       nodeList.pushNode({
+        attributes: {},
         file: "file.md",
-        type: "heading_open",
-        attributes: {}
+        type: "heading_open"
       })
       nodeList.pushNode({
+        content: "foo bar",
         file: "file.md",
-        type: "text",
-        content: "foo bar"
+        type: "text"
       })
       nodeList.pushNode({
         file: "file.md",
@@ -52,17 +52,17 @@ describe("LinkTargetList", function() {
   })
 
   describe("anchorType", function() {
-    it("returns \"heading\" for headings", function() {
+    it('returns "heading" for headings', function() {
       const nodeList = new AstNodeList()
       nodeList.pushNode({
+        attributes: {},
         file: "file.md",
-        type: "heading_open",
-        attributes: {}
+        type: "heading_open"
       })
       nodeList.pushNode({
+        content: "foo bar",
         file: "file.md",
-        type: "text",
-        content: "foo bar"
+        type: "text"
       })
       nodeList.pushNode({
         file: "file.md",
@@ -73,7 +73,7 @@ describe("LinkTargetList", function() {
       const filePath = new AbsoluteFilePath("file.md")
       expect(list.anchorType(filePath, "foo-bar")).to.equal("heading")
     })
-    it("returns \"anchor\" for HTML anchors", function() {
+    it('returns "anchor" for HTML anchors', function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
       list.addLinkTarget(filePath, "anchor", "hello")

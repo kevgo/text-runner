@@ -11,44 +11,44 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: "paragraph_open",
+    attributes: {},
+    content: "",
+    file,
+    line,
     tag: "p",
-    file,
-    line,
-    content: "",
-    attributes: {}
+    type: "paragraph_open"
   })
   result.pushNode({
-    type: "fence_open",
+    attributes: {},
+    content: "",
+    file,
+    line,
     tag: "pre",
-    file,
-    line,
-    content: "",
-    attributes: {}
+    type: "fence_open"
   })
   result.pushNode({
-    type: "text",
-    tag: "",
-    file,
-    line,
+    attributes: {},
     content: node.content,
-    attributes: {}
+    file,
+    line,
+    tag: "",
+    type: "text"
   })
   result.pushNode({
-    type: "fence_close",
+    attributes: {},
+    content: "",
+    file,
+    line,
     tag: "/pre",
-    file,
-    line,
-    content: "",
-    attributes: {}
+    type: "fence_close"
   })
   result.pushNode({
-    type: "paragraph_close",
-    tag: "/p",
+    attributes: {},
+    content: "",
     file,
     line,
-    content: "",
-    attributes: {}
+    tag: "/p",
+    type: "paragraph_close"
   })
   pretendToUse(openTags)
   return result

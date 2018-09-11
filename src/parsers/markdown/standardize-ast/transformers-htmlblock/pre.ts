@@ -24,12 +24,12 @@ module.exports = async function transformPre(
     )
   }
   const resultNode = new AstNode({
-    type: "fence",
-    tag: "pre",
+    attributes: parseHtmlAttributes(match[1]),
+    content: match[2],
     file,
     line,
-    content: match[2],
-    attributes: parseHtmlAttributes(match[1])
+    tag: "pre",
+    type: "fence"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

@@ -13,12 +13,12 @@ module.exports = function transformATag(
   const result = new AstNodeList()
   const openingTag = openTags.popType("kbd_open")
   const resultNode = new AstNode({
-    type: "kbd_close",
-    tag: "/kbd",
+    attributes: openingTag.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openingTag.attributes
+    tag: "/kbd",
+    type: "kbd_close"
   })
   result.pushNode(resultNode)
   pretendToUse(node)

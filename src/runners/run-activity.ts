@@ -21,12 +21,12 @@ export default (async function runActivity(
     statsCounter
   )
   const args: ActionArgs = {
-    nodes: activity.nodes,
-    file: activity.file.platformified(),
-    line: activity.line,
     configuration,
+    file: activity.file.platformified(),
     formatter,
-    linkTargets
+    line: activity.line,
+    linkTargets,
+    nodes: activity.nodes
   }
   try {
     const action = actionFor(activity)
@@ -35,7 +35,9 @@ export default (async function runActivity(
     } else {
       await runCallbackFunc(action, args)
     }
-    if (!formatter.skipped && !formatter.warned) { formatter.success() }
+    if (!formatter.skipped && !formatter.warned) {
+      formatter.success()
+    }
   } catch (err) {
     if (isUserError(err)) {
       formatter.error(err.message)

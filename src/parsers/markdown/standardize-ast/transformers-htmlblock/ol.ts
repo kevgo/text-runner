@@ -21,31 +21,31 @@ module.exports = async function transformOl(
   const match = node.content.match(olRegex)
   const xml = await xml2jsp(node.content)
   const olNode = new AstNode({
-    type: "ordered_list_open",
-    tag: "ol",
+    attributes: parseHtmlAttributes(match[1]),
+    content: "",
     file,
     line,
-    content: "",
-    attributes: parseHtmlAttributes(match[1])
+    tag: "ol",
+    type: "ordered_list_open"
   })
   result.pushNode(olNode)
   for (const li of xml.ol.li) {
     result.pushNode({
-      type: "list_item_open",
-      tag: "li",
+      attributes: li.$ || {},
+      content: li._,
       file,
       line,
-      content: li._,
-      attributes: li.$ || {}
+      tag: "li",
+      type: "list_item_open"
     })
   }
   result.pushNode({
-    type: "ordered_list_close",
-    tag: "/ol",
+    attributes: olNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: olNode.attributes
+    tag: "/ol",
+    type: "ordered_list_close"
   })
   pretendToUse(openTags)
   return result

@@ -17,12 +17,12 @@ module.exports = function transformATag(
     line
   )
   const resultNode = new AstNode({
-    type: "italic_open",
-    tag,
+    attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes
+    tag,
+    type: "italic_open"
   })
   openTags.add(resultNode)
   result.pushNode(resultNode)

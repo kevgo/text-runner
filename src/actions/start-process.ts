@@ -1,10 +1,9 @@
-import { WriteStream } from "observable-process"
 import { Configuration } from "../configuration/configuration.js"
 import { ActionArgs } from "../runners/action-args.js"
 
 import chalk from "chalk"
 import deb from "debug"
-import ObservableProcess from "observable-process"
+import ObservableProcess, { WriteStream } from "observable-process"
 import path from "path"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
@@ -33,8 +32,8 @@ export default (async function(args: ActionArgs) {
     new ObservableProcess({
       commands: callArgs(commandsToRun),
       cwd: args.configuration.workspace,
-      stdout: log(args.formatter.stdout),
-      stderr: args.formatter.stderr
+      stderr: args.formatter.stderr,
+      stdout: log(args.formatter.stdout)
     })
   )
   // RunningProcess.ended = true
@@ -53,9 +52,10 @@ function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
   let globals = {}
   try {
-    // $FlowFixMe: we can ignore null-pointer exceptions here since we have a default value
     globals = configuration.actions.runConsoleCommand.globals
-  } catch (e) {}
+  } catch (e) {
+    // we can ignore null-pointer exceptions here since we have a default value
+  }
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {
     const commandParts = commandText.split(" ")

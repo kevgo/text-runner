@@ -11,12 +11,12 @@ export default function(
   const result = new AstNodeList()
   const openNode = openTags.popType("bullet_list_open")
   result.pushNode({
-    type: node.type,
-    tag: "/ul",
+    attributes: openNode.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openNode.attributes
+    tag: "/ul",
+    type: node.type
   })
   return result
 }

@@ -11,28 +11,28 @@ export default function(
 ): AstNodeList {
   const result = new AstNodeList()
   result.pushNode({
-    type: "code_open",
+    attributes: {},
+    content: "",
+    file,
+    line,
     tag: "code",
-    file,
-    line,
-    content: "",
-    attributes: {}
+    type: "code_open"
   })
   result.pushNode({
-    type: "text",
-    tag: "",
-    file,
-    line,
+    attributes: {},
     content: node.content,
-    attributes: {}
-  })
-  result.pushNode({
-    type: "code_close",
-    tag: "/code",
     file,
     line,
+    tag: "",
+    type: "text"
+  })
+  result.pushNode({
+    attributes: {},
     content: "",
-    attributes: {}
+    file,
+    line,
+    tag: "/code",
+    type: "code_close"
   })
   pretendToUse(openTags)
   return result

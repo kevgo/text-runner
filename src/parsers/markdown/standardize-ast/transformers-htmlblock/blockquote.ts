@@ -16,12 +16,12 @@ module.exports = async function transformBlockquote(
   const result = new AstNodeList()
   const blockquoteMatch = node.content.match(blockquoteRegex)
   const resultNode = new AstNode({
-    type: "blockquote",
-    tag: "blockquote",
+    attributes: parseHtmlAttributes(blockquoteMatch[1]),
+    content: blockquoteMatch[2],
     file,
     line,
-    content: blockquoteMatch[2],
-    attributes: parseHtmlAttributes(blockquoteMatch[1])
+    tag: "blockquote",
+    type: "blockquote"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

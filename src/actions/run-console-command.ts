@@ -1,10 +1,9 @@
-import { WriteStream } from "observable-process"
 import { Configuration } from "../configuration/configuration.js"
 import { ActionArgs } from "../runners/action-args.js"
 
 import chalk from "chalk"
 import deb from "debug"
-import ObservableProcess from "observable-process"
+import ObservableProcess, { WriteStream } from "observable-process"
 import path from "path"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
@@ -43,8 +42,8 @@ export default (async function(args: ActionArgs) {
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
     cwd: args.configuration.workspace,
-    stdout: log(args.formatter.stdout),
-    stderr: args.formatter.stderr
+    stderr: args.formatter.stderr,
+    stdout: log(args.formatter.stdout)
   })
 
   for (const inputLine of input) {
@@ -63,20 +62,24 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
 }
 
 function getInput(nodes: AstNodeList): ProcessInput[] {
-  if (!nodes) { return [] }
+  if (!nodes) {
+    return []
+  }
   const result: ProcessInput[] = []
   const rows = nodes.getNodesOfTypes("table_row_open")
   for (const row of rows) {
     const cellsN = nodes.getNodesFor(row)
     const cells = cellsN.getNodesOfTypes("table_cell")
-    if (cells.length === 0) { continue }
+    if (cells.length === 0) {
+      continue
+    }
     if (cells.length === 1) {
       // 3 cells = 1 td (<tr>, <td>, </tr>)
       result.push({ textToWait: null, input: cells[0].content })
     } else {
       result.push({
-        textToWait: cells[0].content,
-        input: cells[cells.length - 1].content
+        input: cells[cells.length - 1].content,
+        textToWait: cells[0].content
       })
     }
   }
@@ -88,7 +91,9 @@ function makeGlobal(configuration: Configuration) {
   let globals = {}
   try {
     globals = configuration.actions.runConsoleCommand.globals
-  } catch (e) {}
+  } catch (e) {
+    // can ignore errors here
+  }
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {
     const commandParts = commandText.split(" ")

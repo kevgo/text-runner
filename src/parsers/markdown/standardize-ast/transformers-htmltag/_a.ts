@@ -5,7 +5,7 @@ import AstNode from "../../../ast-node.js"
 import OpenTagTracker from "../../helpers/open-tag-tracker.js"
 
 module.exports = function transformATag(
-  node: Object,
+  node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
@@ -13,12 +13,12 @@ module.exports = function transformATag(
   const result = new AstNodeList()
   const openingTag = openTags.popTag("a", file.platformified(), line)
   const resultNode = new AstNode({
-    type: openingTag.type.replace("_open", "_close"),
-    tag: "/a",
+    attributes: openingTag.attributes,
+    content: "",
     file,
     line,
-    content: "",
-    attributes: openingTag.attributes
+    tag: "/a",
+    type: openingTag.type.replace("_open", "_close")
   })
   result.pushNode(resultNode)
   pretendToUse(node)

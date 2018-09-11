@@ -3,13 +3,16 @@ import WriteStream from "observable-process"
 
 import humanize from "humanize-string"
 import StatsCounter from "../runners/stats-counter"
+import deb from "debug"
+
+const debug = deb("formatter")
 
 type Console = {
   log(text: string): void
 }
 
 // Base class for formatters
-export default abstract class Formatter {
+export default class Formatter {
   activity: Activity
   console: Console
   sourceDir: string
@@ -41,9 +44,8 @@ export default abstract class Formatter {
     }
   }
 
-  abstract error(errorMessage: string)
-
-  registerError() {
+  error(errorMessage: string) {
+    debug("error: " + errorMessage)
     this.statsCounter.error()
   }
 
@@ -52,9 +54,8 @@ export default abstract class Formatter {
     return false
   }
 
-  abstract skip(message: string)
-
-  registerSkip() {
+  skip(message: string) {
+    debug("message: " + message)
     this.skipped = true
     this.statsCounter.skip()
   }
@@ -68,9 +69,8 @@ export default abstract class Formatter {
     this.title = newTitle
   }
 
-  abstract warning(warningMessage: string)
-
-  registerWarning() {
+  warning(warningMessage: string) {
+    debug("warning: " + warningMessage)
     this.warned = true
     this.statsCounter.warning()
   }

@@ -7,7 +7,7 @@ export default class DotFormatter extends Formatter {
   // A minimalistic formatter, prints dots for each check
 
   error(errorMessage: string) {
-    this.registerError()
+    super.error(errorMessage)
     console.log()
     console.log(chalk.dim(this.output))
     process.stdout.write(
@@ -24,7 +24,7 @@ export default class DotFormatter extends Formatter {
   }
 
   skip(message: string) {
-    this.registerSkip()
+    super.skip(message)
     process.stdout.write(chalk.cyan("."))
   }
 
@@ -34,7 +34,7 @@ export default class DotFormatter extends Formatter {
   }
 
   warning(warningMessage: string) {
-    this.registerWarning()
+    super.warning(warningMessage)
     process.stdout.write(chalk.magenta("."))
   }
 }

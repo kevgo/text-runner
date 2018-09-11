@@ -88,6 +88,11 @@ else
 	@DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif
 
+fix:  # runs the fixers
+	tslint --project tsconfig.json --fix
+	prettier --write src/*.ts
+	prettier --write **/*.md
+
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
@@ -98,9 +103,10 @@ flow-types:   # installs/updates the Flow type definitions
 lint: lintjs lintmd   # lints all files
 
 lintjs: build   # lints the javascript files
-	@node_modules/.bin/standard -v
-	@node_modules/.bin/flow
-	@node_modules/.bin/dependency-lint
+	node_modules$/.bin$/tsc --noEmit
+	node_modules/.bin/prettier -l "src/**/*.ts"
+	node_modules/.bin/prettier -l "**/*.md"
+	node_modules/.bin/dependency-lint
 
 lintmd:   # lints markdown files
 	@node_modules/.bin/remark .

@@ -1,4 +1,4 @@
-const callArgs = require("../src/helpers/call-args")
+const callArgs = require("../dist/helpers/call-args")
 const fs = require("fs")
 const ObservableProcess = require("observable-process")
 const path = require("path")

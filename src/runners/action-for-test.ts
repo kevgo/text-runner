@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import scaffoldActivity from "../../test/scaffolders/activity"
+import { scaffoldActivity } from "../activity-list/activity"
 import actionFor from "./action-for"
 
 describe("actionFor", function() {

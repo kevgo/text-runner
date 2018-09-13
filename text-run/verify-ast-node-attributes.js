@@ -1,6 +1,6 @@
-const AstNode = require("../src/parsers/ast-node.js")
+const AstNode = require("../dist/parsers/ast-node.js")
 const jsdiffConsole = require("jsdiff-console")
-const removeTrailingColon = require("../src/helpers/remove-trailing-colon.js")
+const removeTrailingColon = require("../dist/helpers/remove-trailing-colon.js")
 
 module.exports = async function(args) {
   const expected = args.nodes

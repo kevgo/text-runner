@@ -9,3 +9,17 @@ export interface Activity {
   line: number
   nodes: AstNodeList
 }
+
+export function scaffoldActivity(data: {
+  type?: string
+  nodes?: AstNodeList
+  file?: string
+  line?: number
+}): Activity {
+  return {
+    file: new AbsoluteFilePath(data.file || "file"),
+    line: data.line || 0,
+    nodes: data.nodes || new AstNodeList(),
+    type: data.type || "foo"
+  }
+}

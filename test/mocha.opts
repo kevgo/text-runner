@@ -1,4 +1,6 @@
 --colors
 --require ts-node/register
---fullTrace
 --recursive
+--exclude text-run/**/*.js
+--reporter dot
+src/**/*-test.ts

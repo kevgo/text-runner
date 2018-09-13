@@ -118,8 +118,8 @@ setup:   # sets up the installation on this machine
 
 spec: lint tests cuke docs   # runs all tests
 
-tests: build  # runs the unit tests
-	@node_modules/.bin/mocha --reporter dot "src/**/*-test.ts"
+tests:   # runs the unit tests
+	@node_modules/.bin/mocha "src/**/*-test.ts"
 
 travis: lint coverage   # the set of tests running on Travis-CI
 

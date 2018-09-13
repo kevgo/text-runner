@@ -1,4 +1,4 @@
 --colors
---compilers ts:ts-node/register
+--require ts-node/register
 --fullTrace
 --recursive

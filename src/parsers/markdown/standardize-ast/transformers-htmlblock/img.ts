@@ -8,7 +8,7 @@ import removeHtmlComments from "../../helpers/remove-html-comments"
 
 const olRegex = /<img([^>]*)>/
 
-module.exports = async function transformOl(
+export default async function transformOl(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

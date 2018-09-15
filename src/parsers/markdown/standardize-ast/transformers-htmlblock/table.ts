@@ -9,7 +9,7 @@ import OpenTagTracker from "../../helpers/open-tag-tracker"
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
-module.exports = async function transformTable(
+export default async function transformTable(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

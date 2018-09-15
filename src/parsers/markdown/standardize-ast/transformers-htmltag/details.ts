@@ -4,7 +4,7 @@ import AstNodeList from "../../../ast-node-list"
 import OpenTagTracker from "../../helpers/open-tag-tracker"
 import parseHtmlTag from "../../helpers/parse-html-tag"
 
-module.exports = function transformDetailsTag(
+export default function transformDetailsTag(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

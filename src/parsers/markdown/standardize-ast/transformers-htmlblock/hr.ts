@@ -7,7 +7,7 @@ import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 
 const olRegex = /<hr([^>]*)>/
 
-module.exports = async function transformOl(
+export default async function transformOl(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

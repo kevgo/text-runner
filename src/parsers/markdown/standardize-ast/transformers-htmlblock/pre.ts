@@ -8,7 +8,7 @@ import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 
-module.exports = async function transformPre(
+export default async function transformPre(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

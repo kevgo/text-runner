@@ -8,7 +8,7 @@ import parseHtmlAttributes from "../../helpers/parse-html-attributes"
 
 const pRegex = /<p([^>]*)>([\s\S]*)<\/p>/m
 
-module.exports = async function transformPBlock(
+export default async function transformPBlock(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

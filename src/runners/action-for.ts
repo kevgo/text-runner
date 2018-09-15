@@ -54,7 +54,7 @@ function errorUnknownActivityType(activity: Activity): Action {
 function loadBuiltinActions(): FunctionRepo {
   const result = {}
   for (const filename of builtinActionFilePaths()) {
-    result[getActionName(filename)] = require(filename)
+    result[getActionName(filename)] = require(filename).default
   }
   return result
 }

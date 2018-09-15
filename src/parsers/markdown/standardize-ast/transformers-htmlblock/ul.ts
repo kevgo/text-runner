@@ -11,7 +11,7 @@ const xml2jsp = util.promisify(xml2js.parseString)
 
 const ulRegex = /<ul([^>]*)>[\s\S]*<\/ul>/m
 
-module.exports = async function transformUl(
+export default async function transformUl(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

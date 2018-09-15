@@ -4,7 +4,7 @@ import AstNode from "../../../ast-node"
 import AstNodeList from "../../../ast-node-list"
 import OpenTagTracker from "../../helpers/open-tag-tracker"
 
-module.exports = function transformSummaryTag(
+export default function transformSummaryTag(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

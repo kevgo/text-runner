@@ -11,7 +11,7 @@ const xml2jsp = util.promisify(xml2js.parseString)
 
 const olRegex = /<ol([^>]*)>[\s\S]*<\/ol>/m
 
-module.exports = async function transformOl(
+export default async function transformOl(
   node: any,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,

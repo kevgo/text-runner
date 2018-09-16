@@ -1,23 +1,23 @@
-const { expect } = require('chai')
-const { setWorldConstructor } = require('cucumber')
-const dimConsole = require('dim-console')
-const flatten = require('array-flatten')
-const fs = require('fs-extra')
-const glob = require('glob')
-const ObservableProcess = require('observable-process')
-const path = require('path')
-const stripAnsi = require('strip-ansi')
-const uuid = require('uuid/v4')
+import flatten from "array-flatten"
+import { expect } from "chai"
+import { setWorldConstructor } from "cucumber"
+import dimConsole from "dim-console"
+import fs from "fs-extra"
+import glob from "glob"
+import ObservableProcess from "observable-process"
+import path from "path"
+import stripAnsi from "strip-ansi"
+import { v4 as uuid } from "uuid"
 
-const World = function () {
+const World = function() {
   // World provides step implementations that run and test TextRunner
   // via its command-line interface
 
-  this.execute = async function (params) {
-    var args = {}
+  this.execute = async function(params) {
+    const args: any = {}
     args.cwd = this.rootDir
     args.env = {}
-    this.output = ''
+    this.output = ""
     if (this.verbose) {
       args.stdout = dimConsole.process.stdout
       args.stderr = dimConsole.process.stderr
@@ -36,16 +36,16 @@ const World = function () {
       }
     }
     if (this.debug) {
-      args.env['DEBUG'] = '*,-babel'
+      args.env["DEBUG"] = "*,-babel"
     }
 
     args.command = this.makeFullPath(params.command)
-    if (process.env.NODE_ENV === 'coverage') {
+    if (process.env.NODE_ENV === "coverage") {
       args.command = runWithTestCoverage(args.command)
     }
     this.process = new ObservableProcess(args)
     await this.process.waitForEnd()
-    if (process.env.NODE_ENV === 'coverage') {
+    if (process.env.NODE_ENV === "coverage") {
       storeTestCoverage()
     }
     if (this.verbose) {
@@ -64,10 +64,10 @@ const World = function () {
     }
   }
 
-  this.fullTextRunPath = function () {
-    var result = path.join(process.cwd(), 'bin', 'text-run')
-    if (process.platform === 'win32') {
-      result += '.cmd'
+  this.fullTextRunPath = function() {
+    var result = path.join(process.cwd(), "bin", "text-run")
+    if (process.platform === "win32") {
+      result += ".cmd"
     }
     return result
   }
@@ -90,25 +90,25 @@ const World = function () {
     } else if (table.FILENAME) {
       expectedHeader = `${table.FILENAME}`
     } else {
-      expectedHeader = ''
+      expectedHeader = ""
     }
-    if (table['MESSAGE']) {
-      expectedHeader += ` -- ${table['MESSAGE']}`
+    if (table["MESSAGE"]) {
+      expectedHeader += ` -- ${table["MESSAGE"]}`
     }
     expect(output).to.include(expectedHeader)
-    expect(output).to.match(new RegExp(table['ERROR MESSAGE']))
+    expect(output).to.match(new RegExp(table["ERROR MESSAGE"]))
     expect(this.process.exitCode).to.equal(
-      parseInt(table['EXIT CODE']),
-      'exit code'
+      parseInt(table["EXIT CODE"]),
+      "exit code"
     )
   }
 
   this.verifyOutput = table => {
-    var expectedText = ''
+    var expectedText = ""
     if (table.FILENAME) expectedText += table.FILENAME
     if (table.FILENAME && table.LINE) expectedText += `:${table.LINE}`
     if (table.FILENAME && (table.MESSAGE || table.WARNING)) {
-      expectedText += ' -- '
+      expectedText += " -- "
     }
     if (table.MESSAGE) expectedText += table.MESSAGE
     if (table.WARNING) expectedText += table.WARNING
@@ -123,7 +123,7 @@ ${actual}
   }
 
   this.verifyPrintedUsageInstructions = () => {
-    expect(stripAnsi(this.process.fullOutput())).to.include('COMMANDS')
+    expect(stripAnsi(this.process.fullOutput())).to.include("COMMANDS")
   }
 
   this.verifyPrints = expectedText => {
@@ -150,7 +150,7 @@ ${actual}
 
   this.verifyRanOnlyTests = filenames => {
     filenames = flatten(filenames)
-    const standardizedOutput = this.output.replace(/\\/g, '/')
+    const standardizedOutput = this.output.replace(/\\/g, "/")
 
     // verify the given tests have run
     for (let filename of filenames) {
@@ -163,7 +163,7 @@ ${actual}
       .filter(file => fs.statSync(file).isFile())
       .map(file => path.relative(this.rootDir, file))
       .filter(file => file)
-      .map(file => file.replace(/\\/g, '/'))
+      .map(file => file.replace(/\\/g, "/"))
       .filter(file => filenames.indexOf(file) === -1)
     for (let fileShouldntRun of filesShouldntRun) {
       expect(standardizedOutput).to.not.include(fileShouldntRun)
@@ -185,19 +185,19 @@ ${actual}
 
 setWorldConstructor(World)
 
-function standardizePath (path) {
-  return path.replace(/\\/g, '/')
+function standardizePath(path) {
+  return path.replace(/\\/g, "/")
 }
 
 // Returns the command that runs the given command with test coverage
-function runWithTestCoverage (command) {
-  return path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + command
+function runWithTestCoverage(command) {
+  return path.join(process.cwd(), "node_modules", ".bin", "nyc") + " " + command
 }
 
 // store the test coverage data before running the next test that would overwrite it
-function storeTestCoverage () {
-  const outputPath = path.join(process.cwd(), '.nyc_output')
+function storeTestCoverage() {
+  const outputPath = path.join(process.cwd(), ".nyc_output")
   if (fs.existsSync(outputPath)) {
-    fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+    fs.moveSync(outputPath, path.join(process.cwd(), ".nyc_output_cli", uuid()))
   }
 }

@@ -9,7 +9,7 @@ and has the given content.
 #### Example
 
 <a textrun="run-markdown-in-textrun">
-```markdown
+````markdown
 <a textrun="create-file">
 Assuming we have a file _hello.txt_ with content `hello world`,
 </a>
@@ -21,7 +21,7 @@ _hello.txt_
 ` ​`` hello world `​``
 </a>
 
-```
+````
 </a>
 
 
@@ -30,3 +30,4 @@ _hello.txt_
 - [feature specs](../../features/actions/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
 - [source code](../../src/actions/verify-workspace-file-content.js)
 ```
+````

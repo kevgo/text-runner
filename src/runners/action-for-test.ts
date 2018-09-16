@@ -1,6 +1,6 @@
 import { expect } from "chai"
+import actionFor from "../../dist/runners/action-for"
 import { scaffoldActivity } from "../activity-list/activity"
-import actionFor from "./action-for"
 
 describe("actionFor", function() {
   context("built-in block name given", function() {

@@ -8,7 +8,6 @@ else
 endif
 
 build: clean    # builds for the current platform
-	@mkdir dist
 	@node_modules$/.bin$/tsc -p .
 
 clean:   # Removes all build artifacts

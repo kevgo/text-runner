@@ -15,7 +15,7 @@ clean:   # Removes all build artifacts
 	@rm -rf .nyc_output*
 
 coverage-build:   # builds the code base with code coverage measurements baked in
-	BABEL_ENV=test_coverage ./node_modules/.bin/babel src -d dist -q
+	./node_modules/.bin/babel src -d dist --extensions ".ts"
 
 coverage-tests:  # test coverage for unit tests
 	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
@@ -67,15 +67,24 @@ else
 	@node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
 endif
 
+cuke-other:   # test coverage for CLI specs
+	node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|commands|images|formatters|tag-types)'
+
+cuke-actions:   # test coverage for CLI specs
+	node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/+(actions|images)'
+
+cuke-tagtypes:   # test coverage for CLI specs
+	node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/+(tag-types|commands|formatters)'
+
+cuke-offline: build   # runs the feature specs that don't need an online connection
+	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
+
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
 	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
 	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
 endif
-
-cuke-offline: build   # runs the feature specs that don't need an online connection
-	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
 
 deploy: build  # deploys a new version to npmjs.org
 	npm publish

@@ -32,5 +32,5 @@ _test.txt_ with content `foo`
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)
-- [source code](../../src/actions/create-file.js)
+- [source code](../../src/actions/create-file.ts)
 ```

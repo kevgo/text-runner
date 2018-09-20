@@ -84,22 +84,22 @@ There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
-These CLI executables call the [cli.js](src/cli/cli.js) CLI module.
+These CLI executables call the [cli.ts](src/cli/cli.ts) CLI module.
 The CLI subsystem parses the command-line arguments
-and calls TextRunner's [JavaScript API](src/text-runner.js).
-This API is located in the file [src/text-runner.js](src/text-runner.js)
+and calls TextRunner's [JavaScript API](src/text-runner.ts).
+This API is located in the file [src/text-runner.ts](src/text-runner.ts)
 and also Text-Runner's core.
 
 The core asks the [configuration](src/configuration)
-module for the current [configuration](src/configuration/configuration.js)
+module for the current [configuration](src/configuration/configuration.ts)
 settings coming from command-line arguments and/or configuration files.
 The configuration structure tells TextRunner the command to run.
 Commands are stored in the [commands](src/commands) folder.
-The most important command is [run](src/commands/run.js),
-there are others like [help](src/commands/help.js),
-[setup](src/commands/setup.js), or [version](src/commands/version.js).
+The most important command is [run](src/commands/run.ts),
+there are others like [help](src/commands/help.ts),
+[setup](src/commands/setup.ts), or [version](src/commands/version.ts).
 
-The [run command](src/commands/run.js) has a functional architecture
+The [run command](src/commands/run.ts) has a functional architecture
 that converts the configuration into test results over several steps:
 
 1. **configuration --> list of Markdown files to test:**

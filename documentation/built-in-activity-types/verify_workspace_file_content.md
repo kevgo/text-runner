@@ -28,6 +28,6 @@ _hello.txt_
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
-- [source code](../../src/actions/verify-workspace-file-content.js)
+- [source code](../../src/actions/verify-workspace-file-content.ts)
 ```
 ````

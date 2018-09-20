@@ -36,4 +36,4 @@ Stop the current process by hitting Ctrl-C
 #### More info
 
 - [feature specs](../../features/actions/built-in/start-stop-process/basic.feature)
-- [source code](../../src/actions/start-process.js)
+- [source code](../../src/actions/start-process.ts)

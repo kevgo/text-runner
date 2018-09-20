@@ -22,5 +22,5 @@ so that readers of your documentation can click to see it.
 #### More info
 
 - [feature specs](../../features/actions/built-in/cd/cd.feature)
-- [source code](../../src/actions/cd.js)
+- [source code](../../src/actions/cd.ts)
 ```

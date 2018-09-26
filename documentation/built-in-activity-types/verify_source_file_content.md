@@ -1,8 +1,9 @@
-### Displaying a file from the source code tree in the documentation
+﻿### Displaying a file from the source code tree in the documentation
 
 Sometimes you want to just display a file from the source code of your app in the documentation.
 For example to give your readers an idea how something works
 without having them do it as part of the tutorial.
+
 
 #### Simple Example
 
@@ -17,10 +18,11 @@ You can display its content in your documentation via this active block:
 <a textrun="verify-source-file-content">
 Your __hello.txt__ file needs to contains this section:
 
-` ​`` hello world `​``
+`​``
+hello world
+`​``
 </a>
-
-````
+```
 </a>
 
 - extracts the filename from the bold section
@@ -49,9 +51,9 @@ needs to contains this section:
 hello again
 `​``
 </a>
-````
-
+```
 </a>
+
 
 #### More info
 

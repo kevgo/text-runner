@@ -1,4 +1,4 @@
-# Verify the output of the last console command
+﻿# Verify the output of the last console command
 
 - checks that the last short-lived console command
   (run via [runConsoleCommand](run_console_command.md)
@@ -9,22 +9,20 @@
 
 First, let's runs a console command:
 <a textrun="run-markdown-in-textrun">
-
 ```markdown
 <a textrun="run-console-command">
-
 `​``
 echo Hello world!
 `​``
-
 </a>
 
 Now that it's finished, let's verify its output:
 <a textrun="verify-console-command-output">
-` ​`` Hello world! `​``
+`​``
+Hello world!
+`​``
 </a>
 ```
-
 </a>
 
 #### More info

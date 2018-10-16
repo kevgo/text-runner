@@ -1,5 +1,6 @@
 const jsdiffConsole = require("jsdiff-console")
 const removeTrailingColon = require("../dist/helpers/remove-trailing-colon.js")
+  .default
 const removeValue = require("remove-value")
 
 module.exports = function(args) {

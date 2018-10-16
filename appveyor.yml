@@ -2,7 +2,7 @@ environment:
   nodejs_version: "8"
 
 # cache:
-  # - node_modules
+# - node_modules
 
 init:
   - git config --global core.autocrlf true
@@ -16,11 +16,10 @@ install:
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:
-  - node_modules\.bin\babel src -d dist -q
-  - node_modules\.bin\mocha --reporter dot "src/**/*-test.js"
-  - node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" --format progress
-  - bin\text-run --offline
-
+  - make build
+  - make test
+  - make cuke-win
+  - make docs
 
 # Don't double-build PRs
 skip_branch_with_pr: true

@@ -1,17 +1,14 @@
-// @flow
+const jsdiffConsole = require("jsdiff-console")
+const removeTrailingColon = require("../dist/helpers/remove-trailing-colon.js")
+  .default
+const removeValue = require("remove-value")
 
-import type { ActionArgs } from '../src/runners/action-args.js'
-
-const jsdiffConsole = require('jsdiff-console')
-const removeTrailingColon = require('../src/helpers/remove-trailing-colon.js')
-const removeValue = require('remove-value')
-
-module.exports = function (args: ActionArgs) {
+module.exports = function(args) {
   const expectedTools = args.nodes
-    .textInNodesOfType('strong')
+    .textInNodesOfType("strong")
     .sort()
     .map(removeTrailingColon)
   const actualTools = Object.keys(args).sort()
-  removeValue(actualTools, 'linkTargets')
+  removeValue(actualTools, "linkTargets")
   jsdiffConsole(expectedTools, actualTools)
 }

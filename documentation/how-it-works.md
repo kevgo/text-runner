@@ -13,9 +13,7 @@ The markdown code of this tutorial might look something like this:
 ## Creating a configuration file
 
 Please create a file with the name _config.yml_ and the content:
-`​``
-foo: bar
-`​``
+` ​`` foo: bar `​``
 ```
 
 To make this part of the documentation executable,
@@ -52,6 +50,7 @@ with the content `foo: bar`</a> in the `tmp` subfolder of your current directory
 <hr>
 
 Read more about:
+
 - the other [built-in activity types](built-in-activity-types)
 - writing your own [user-defined activities](user-defined-activities.md)
 - [configuring](configuration.md) TextRunner

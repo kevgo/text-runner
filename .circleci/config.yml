@@ -6,7 +6,6 @@ defaults: &defaults
     - image: circleci/node:9
 
 jobs:
-
   checkout_code:
     <<: *defaults
     steps:
@@ -19,7 +18,8 @@ jobs:
             - yarn-master
             - yarn-
       - run: yarn
-      - run: make coverage-build
+      - run: make build
+      #   - run: make coverage-build
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -33,60 +33,65 @@ jobs:
   lint:
     <<: *defaults
     steps:
-     - restore_cache:
-         key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: make lint
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make lint
 
   unit-tests:
     <<: *defaults
     steps:
-     - restore_cache:
-         key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: make coverage-tests
-     - save_cache:
-         key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
-         paths:
-           - ~/repo/.nyc_output_tests
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make tests
+    #  - run: make coverage-tests
+    #  - save_cache:
+    #      key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
+    #      paths:
+    #        - ~/repo/.nyc_output_tests
 
   cuke-other:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make coverage-cuke-other
-      - save_cache:
-          key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/repo/.nyc_output_cuke_other
+      - run: make cuke-other
+    #   - run: make coverage-cuke-other
+    #   - save_cache:
+    #       key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
+    #       paths:
+    #         - ~/repo/.nyc_output_cuke_other
 
   cuke-actions:
     <<: *defaults
     steps:
-     - restore_cache:
-         key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: make coverage-cuke-actions
-     - save_cache:
-         key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
-         paths:
-           - ~/repo/.nyc_output_cuke_actions
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make cuke-actions
+    #   - run: make coverage-cuke-actions
+    #   - save_cache:
+    #       key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
+    #       paths:
+    #         - ~/repo/.nyc_output_cuke_actions
 
   cuke-tagtypes:
     <<: *defaults
     steps:
-     - restore_cache:
-         key: code-{{ .Environment.CIRCLE_SHA1 }}
-     - run: make coverage-cuke-tagtypes
-     - save_cache:
-         key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
-         paths:
-           - ~/repo/.nyc_output_cuke_tagtypes
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: make cuke-tagtypes
+    #   - run: make coverage-cuke-tagtypes
+    #   - save_cache:
+    #       key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
+    #       paths:
+    #         - ~/repo/.nyc_output_cuke_tagtypes
 
   doc-tests:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make coverage-docs
+      - run: make docs
+      #   - run: make coverage-docs
       - save_cache:
           key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -120,7 +125,6 @@ jobs:
       - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
       - run: npm publish
 
-
 workflows:
   version: 2
 
@@ -145,11 +149,11 @@ workflows:
       - doc-tests:
           requires:
             - checkout_code
-      - send-coverage:
-          requires:
-            - lint
-            - unit-tests
-            - cuke-other
-            - cuke-actions
-            - cuke-tagtypes
-            - doc-tests
+    #   - send-coverage:
+    #       requires:
+    #         - lint
+    #         - unit-tests
+    #         - cuke-other
+    #         - cuke-actions
+    #         - cuke-tagtypes
+    #         - doc-tests

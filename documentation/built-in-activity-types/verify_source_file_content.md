@@ -1,4 +1,4 @@
-### Displaying a file from the source code tree in the documentation
+﻿### Displaying a file from the source code tree in the documentation
 
 Sometimes you want to just display a file from the source code of your app in the documentation.
 For example to give your readers an idea how something works
@@ -58,4 +58,4 @@ hello again
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
-- [source code](../../src/actions/verify-source-file-content.js)
+- [source code](../../src/actions/verify-source-file-content.ts)

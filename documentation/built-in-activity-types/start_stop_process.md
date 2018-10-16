@@ -7,17 +7,15 @@ This can be used to start servers and then interact with them later.
 You can wait until the process prints a given string with a `waitForOutput` block,
 and stop the long-running process using a `stopCommand` block.
 
-
-
 #### Example
+
 <a textrun="run-markdown-in-textrun">
 
 ```markdown
 <a textrun="start-process">
 
 `​``
-$ echo Enter your name:
-$ read foo
+$ echo Enter your name: $ read foo
 `​``
 </a>
 
@@ -36,10 +34,10 @@ Interact with the server here ...
 Stop the current process by hitting Ctrl-C
 </a>
 ```
-</a>
 
+</a>
 
 #### More info
 
 - [feature specs](../../features/actions/built-in/start-stop-process/basic.feature)
-- [source code](../../src/actions/start-process.js)
+- [source code](../../src/actions/start-process.ts)

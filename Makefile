@@ -91,7 +91,7 @@ deploy: build  # deploys a new version to npmjs.org
 
 docs: build   # runs the documentation tests
 ifndef FILE
-	@bin/text-run --offline
+	@bin$/text-run --offline
 else
 	@DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
 endif

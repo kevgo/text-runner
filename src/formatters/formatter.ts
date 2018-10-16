@@ -45,6 +45,7 @@ export default class Formatter {
   }
 
   error(errorMessage: string) {
+    debug("error: " + errorMessage)
     this.statsCounter.error()
   }
 
@@ -54,6 +55,7 @@ export default class Formatter {
   }
 
   skip(message: string) {
+    debug("error: " + message)
     this.skipped = true
     this.statsCounter.skip()
   }
@@ -68,6 +70,7 @@ export default class Formatter {
   }
 
   warning(warningMessage: string) {
+    debug("error: " + warningMessage)
     this.warned = true
     this.statsCounter.warning()
   }

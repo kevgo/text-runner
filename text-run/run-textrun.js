@@ -1,6 +1,8 @@
 const callArgs = require("../dist/helpers/call-args").default
 const ObservableProcess = require("observable-process")
 const path = require("path")
+const RunningConsoleCommand = require("../dist/actions/helpers/running-console-command")
+  .default
 
 module.exports = async function(args) {
   args.formatter.name("running the created Markdown file in TextRunner")
@@ -13,6 +15,7 @@ module.exports = async function(args) {
     stdout: args.formatter.stdout,
     stderr: args.formatter.stderr
   })
+  RunningConsoleCommand.set(processor)
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
     args.formatter.error(

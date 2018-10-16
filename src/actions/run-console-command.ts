@@ -8,7 +8,7 @@ import path from "path"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
 import AstNodeList from "../parsers/ast-node-list"
-import RunConsoleCommandOutput from "./helpers/run-console-command-output"
+import RunningConsoleCommand from "./helpers/running-console-command"
 
 const debug = deb("textrun:actions:run-console-command")
 
@@ -38,13 +38,13 @@ export default (async function(args: ActionArgs) {
     input = getInput(args.nodes)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
-  RunConsoleCommandOutput.instance().reset()
   const processor = new ObservableProcess({
     commands: callArgs(commandsToRun),
     cwd: args.configuration.workspace,
     stderr: args.formatter.stderr,
     stdout: log(args.formatter.stdout)
   })
+  RunningConsoleCommand.set(processor)
 
   for (const inputLine of input) {
     enter(processor, inputLine)
@@ -116,7 +116,7 @@ function makeGlobal(configuration: Configuration) {
 function log(stdout): WriteStream {
   return {
     write: text => {
-      RunConsoleCommandOutput.instance().append(text)
+      RunningConsoleCommand.instance().append(text)
       return stdout.write(text)
     }
   }

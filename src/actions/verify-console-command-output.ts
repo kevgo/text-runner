@@ -1,7 +1,7 @@
 import { ActionArgs } from "../runners/action-args"
 
 import jsdiffConsole from "jsdiff-console"
-import RunConsoleCommandOutput from "./helpers/run-console-command-output"
+import RunningConsoleCommand from "./helpers/running-console-command"
 
 export default function(args: ActionArgs) {
   args.formatter.name("verifying the output of the last run console command")
@@ -12,8 +12,8 @@ export default function(args: ActionArgs) {
     .map(line => line.trim())
     .filter(line => line)
 
-  const actualLines = RunConsoleCommandOutput.instance()
-    .value()
+  const actualLines = RunningConsoleCommand.instance()
+    .fullOutput()
     .split("\n")
     .map(line => line.trim())
     .filter(line => line)

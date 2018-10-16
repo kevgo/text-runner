@@ -2,49 +2,50 @@
 
 ## Installation for development
 
-* you need to have Gnu Make installed - running `make` should work on your machine
-* run <code textrun="verify-make-command">make setup</code> to install all needed software and libraries on your computer
-* add `./bin` and `./node_modules/.bin` to your PATH
+<<<<<<< HEAD
 
+- you need to have Gnu Make installed - running `make` should work on your machine
+- run <code textrun="verify-make-command">make setup</code> to install all needed software and libraries on your computer
+- add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Testing
 
-* run all tests: <code textrun="verify-make-command">make spec</code>
-* run feature specs: <code textrun="verify-make-command">make cuke</code>
-* run feature specs in offline mode: <code textrun="verify-make-command">make cuke --tags '~@online'</code>
-* run text-run: <code textrun="verify-make-command">make docs</code>
+- run all tests: <code textrun="verify-make-command">make spec</code>
+- run feature specs: <code textrun="verify-make-command">make cuke</code>
+- run feature specs in offline mode: <code textrun="verify-make-command">make cuke --tags '~@online'</code>
+- run text-run: <code textrun="verify-make-command">make docs</code>
 
 To debug a single test:
-* enable console output: add the `@verbose` tag
-* enable debugging statements and verbose output: add the `@debug` tag
+
+- enable console output: add the `@verbose` tag
+- enable debugging statements and verbose output: add the `@debug` tag
 
 To determine test coverage, run <a textrun="verify-make-command">make coverage</code></a>.
 The coverage in relatively low because TextRunner contains copious amounts of
 defensive checks against invalid user input.
 Not all permutations of that are tested.
 
-
 ## Linting
 
-* run all linters: <a textrun="verify-make-command">make lint</code></a>
-* run JavaScript linters: <a textrun="verify-make-command">make lintjs</code></a>
-* run Markdown linters: <a textrun="verify-make-command">make lintmd</code></a>
+- run all linters: <a textrun="verify-make-command">make lint</code></a>
+- run JavaScript linters: <a textrun="verify-make-command">make lintjs</code></a>
+- run Markdown linters: <a textrun="verify-make-command">make lintmd</code></a>
 
-The JavaScript Standard linter does not properly handle Flow types at this point,
-hence it is recommended to only show flow lint messages in your editor,
-not the error messages from "standard".
-Use the <code textrun="verify-make-command">make lintjs</code> script instead.
-
+* run all linters: <a textrun="does-make-target-exist">`make lint`</a>
+* run JavaScript linters: <a textrun="does-make-target-exist">`make lintjs`</a>
+* run Markdown linters: <a textrun="does-make-target-exist">`make lintmd`</a>
 
 ## Editor setup
 
 Set up your editor with the following configuration:
+
 - linters: run `flow`, then `standard`
 - fixers: run `prettier_standard`
   (which runs [Prettier](https://github.com/prettier/prettier),
   then [StandardJS](https://standardjs.com)
 
 Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
+
 ```vim
 let g:ale_linters = {
 \   'javascript': ['flow', 'standard']
@@ -54,7 +55,6 @@ let g:ale_fixers = {
 \}
 let g:ale_javascript_prettier_use_local_config = 1
 ```
-
 
 ## Terminology
 
@@ -81,25 +81,26 @@ Each activity has a name, an action, and a bunch of associated nodes from the do
 The architecture is best understood by following along
 with how a set of documents is tested.
 There are several CLI executables to start TextRunner:
+
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
-These CLI executables call the [cli.js](src/cli/cli.js) CLI module.
+These CLI executables call the [cli.ts](src/cli/cli.ts) CLI module.
 The CLI subsystem parses the command-line arguments
-and calls TextRunner's [JavaScript API](src/text-runner.js).
-This API is located in the file [src/text-runner.js](src/text-runner.js)
+and calls TextRunner's [JavaScript API](src/text-runner.ts).
+This API is located in the file [src/text-runner.ts](src/text-runner.ts)
 and also Text-Runner's core.
 
 The core asks the [configuration](src/configuration)
-module for the current [configuration](src/configuration/configuration.js)
+module for the current [configuration](src/configuration/configuration.ts)
 settings coming from command-line arguments and/or configuration files.
 The configuration structure tells TextRunner the command to run.
 Commands are stored in the [commands](src/commands) folder.
-The most important command is [run](src/commands/run.js),
-there are others like [help](src/commands/help.js),
-[setup](src/commands/setup.js), or [version](src/commands/version.js).
+The most important command is [run](src/commands/run.ts),
+there are others like [help](src/commands/help.ts),
+[setup](src/commands/setup.ts), or [version](src/commands/version.ts).
 
-The [run command](src/commands/run.js) has a functional architecture
+The [run command](src/commands/run.ts) has a functional architecture
 that converts the configuration into test results over several steps:
 
 1. **configuration --> list of Markdown files to test:**
@@ -127,7 +128,6 @@ that converts the configuration into test results over several steps:
 1. **test results --> test statistics:**
    finally, we write a summary of the test to the console
    and terminate with the corresponding exit code.
-
 
 ## Deployment
 

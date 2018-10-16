@@ -17,24 +17,30 @@ $ echo "hello world"
 `​``
 </a>
 ```
+
 </a>
 
 You can enter text into the running command by providing an HTML table
 with the content to enter.
 Assuming we have a little application called
 <a textrun="create-file">
-__greeter.js__
-```js
-const readline = require('readline');
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+**greeter.js**
 
-rl.question('Your name?', (name) => {
-  rl.question('Current day of the week?', (weekday) => {
+```js
+const readline = require("readline")
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+rl.question("Your name?", name => {
+  rl.question("Current day of the week?", weekday => {
     console.log(`Hello ${name}, happy ${weekday}!`)
     process.exit()
   })
 })
 ```
+
 </a>
 
 <a textrun="run-markdown-in-textrun">
@@ -55,6 +61,7 @@ $ node greeter.js
 
 </a>
 ```
+
 </a>
 
 If the table contains multiple columns,
@@ -90,14 +97,13 @@ $ node greeter.js
 
 </a>
 ```
+
 </a>
 
 This code waits until the called program prints "Your name?",
 and enters "Mortimer&lt;enter&gt;".
 Then it waits for "What does it do"
 and enters "Test framework for documentation&lt;enter&gt;".
-
-
 
 ## Calling Global Commands
 
@@ -106,7 +112,7 @@ you have to tell TextRunner the path to it.
 As an example, if your code provides an executable called `tool`,
 and it is stored as `public/tool` in your source code,
 <a textrun="verify-source-file-content">
-your __text-run.yml__ needs to contains this section:
+your **text-run.yml** needs to contains this section:
 
 ```
 actions:
@@ -121,8 +127,7 @@ The
 folder contains a working version of this configuration.
 </a>
 
-
 #### More info
 
 - [feature specs](../../features/actions/built-in/run-console-command/)
-- [source code](../../src/actions/run-console-command.js)
+- [source code](../../src/actions/run-console-command.ts)

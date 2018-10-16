@@ -8,6 +8,4 @@
 - if you want to wait for a new occurrence of the output,
   use [verify-process-output](verify_process_output.md)
 
-
 #### Example
-

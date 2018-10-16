@@ -10,7 +10,6 @@ including documenting behavior in all edge cases
 while unit testing is to make sure the individual components
 from which you build your solution function correctly.
 
-
 > I don't want to add a `package.json` file to my root folder
 
 No problem, you can put it in the `text-run` folder

@@ -3,7 +3,7 @@ import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import deb from "debug"
-import ObservableProcess, { WriteStream } from "observable-process"
+import ObservableProcess from "observable-process"
 import path from "path"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
@@ -42,7 +42,7 @@ export default (async function(args: ActionArgs) {
     commands: callArgs(commandsToRun),
     cwd: args.configuration.workspace,
     stderr: args.formatter.stderr,
-    stdout: log(args.formatter.stdout)
+    stdout: args.formatter.stdout
   })
   RunningConsoleCommand.set(processor)
 
@@ -109,15 +109,6 @@ function makeGlobal(configuration: Configuration) {
       )
     } else {
       return commandText
-    }
-  }
-}
-
-function log(stdout): WriteStream {
-  return {
-    write: text => {
-      RunningConsoleCommand.instance().append(text)
-      return stdout.write(text)
     }
   }
 }

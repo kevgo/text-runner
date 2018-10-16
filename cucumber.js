@@ -1,3 +1,4 @@
 module.exports = {
-  'default': '--require-module flow-remove-types/register -r features --fail-fast'
+  default:
+    "--require-module ts-node/register --require 'features/**/*.ts' --fail-fast"
 }

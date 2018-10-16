@@ -3,10 +3,10 @@
 This is a small tutorial that demonstrates TextRunner by and teaches you
 a bit of Bash along the way.
 
-
 ## IO Streams
 
 There are 3 IO streams:
+
 - stdin: input into an application
 - stdout: normal program output
 - stderr: output for diagnostic error messages
@@ -20,7 +20,7 @@ Let's say we have this little Bash script that greets you by name:
 
 <a textrun="create-file">
 
-__greeter.sh__
+**greeter.sh**
 
 ```bash
 #!/usr/bin/env bash
@@ -56,7 +56,6 @@ Then we see the output:
 Hello world!
 ```
 
-
 ## Copying files
 
 Copy a file using `cp`, for example:
@@ -71,10 +70,9 @@ $ cp greeter.sh another_greeter.sh
 
 Now we have this new file in our workspace:
 
-
 <a textrun="verify-workspace-file-content">
 
-__another_greeter.sh__
+**another_greeter.sh**
 
 ```bash
 #!/usr/bin/env bash

@@ -1,9 +1,8 @@
 # Creating a file
 
-* the name of the file is provided as _emphasized_ or __bold__ text within the anchor tag
-* the content of the file is provided as a code block with one or three backticks
-* TextRunner creates the file in the workspace
-
+- the name of the file is provided as _emphasized_ or **bold** text within the anchor tag
+- the content of the file is provided as a code block with one or three backticks
+- TextRunner creates the file in the workspace
 
 #### Example
 
@@ -21,12 +20,13 @@ _test.txt_ with content `foo`
 ```markdown
 <a textrun="create-file">
 
-__test.txt__
+**test.txt**
 
 `​``txt
 The file content goes here
 `​``
 </a>
+
 ```
 </a>
 
@@ -34,4 +34,5 @@ The file content goes here
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)
-- [source code](../../src/actions/create-file.js)
+- [source code](../../src/actions/create-file.ts)
+```

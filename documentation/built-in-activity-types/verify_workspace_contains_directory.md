@@ -2,9 +2,7 @@
 
 The `verifyWorkspaceContainsDirectory` action checks links to folders in your source code.
 
-
 #### Example
-
 
 <a textrun="run-markdown-in-textrun">
 ```markdown
@@ -16,8 +14,7 @@ you can use this code to verify that it exists:
 ```
 </a>
 
-
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-workspace-contains-directory/verify-workspace-contains-directory.feature)
-- [source code](../../src/actions/verify-workspace-contains-directory.js)
+- [source code](../../src/actions/verify-workspace-contains-directory.ts)

@@ -81,8 +81,8 @@ in addition to any other NPM modules that your handler method uses.
 ## Accessing document content
 
 Document content is provided in the `nodes` attribute.
-It contains an [AstNodeList](/src/parsers/ast-node-list.js).
-This is an Array subclass containing [AstNodes](/src/parsers/ast-node.js)
+It contains an [AstNodeList](/src/parsers/ast-node-list.ts).
+This is an Array subclass containing [AstNodes](/src/parsers/ast-node.ts)
 from the current active block in the document
 with additional helper methods to extract document content:
 

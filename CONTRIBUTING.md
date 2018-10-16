@@ -29,10 +29,6 @@ Not all permutations of that are tested.
 - run JavaScript linters: <a textrun="verify-make-command">make lintjs</code></a>
 - run Markdown linters: <a textrun="verify-make-command">make lintmd</code></a>
 
-* run all linters: <a textrun="does-make-target-exist">`make lint`</a>
-* run JavaScript linters: <a textrun="does-make-target-exist">`make lintjs`</a>
-* run Markdown linters: <a textrun="does-make-target-exist">`make lintmd`</a>
-
 ## Editor setup
 
 Set up your editor with the following configuration:

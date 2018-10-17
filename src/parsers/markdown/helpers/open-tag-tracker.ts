@@ -70,7 +70,7 @@ export default class OpenTagTracker {
   ): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
-        `OpenTagTracker is empty while trying to pop type '${expectedNodeType}'`
+        `No opening tags found while looking for '${expectedNodeType}'`
       )
     }
     for (let i = this.nodes.length - 1; i >= 0; i--) {
@@ -82,7 +82,7 @@ export default class OpenTagTracker {
       return result
     }
     throw new UnprintedUserError(
-      `OpenTagTracker does not have node <${expectedNodeType}>`,
+      `Expected tag <${expectedNodeType}> but did not find it`,
       file.platformified(),
       line
     )

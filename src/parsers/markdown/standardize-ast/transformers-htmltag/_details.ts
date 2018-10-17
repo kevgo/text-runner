@@ -11,7 +11,7 @@ export default function transformDetailsTag(
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popType("details_open")
+  const openingTag = openTags.popType("details_open", file, line)
   const resultNode = new AstNode({
     attributes: openingTag.attributes,
     content: "",

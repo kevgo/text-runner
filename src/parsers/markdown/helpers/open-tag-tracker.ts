@@ -82,7 +82,7 @@ export default class OpenTagTracker {
       return result
     }
     throw new UnprintedUserError(
-      `Document should contain <${expectedNodeType}> but does not`,
+      `Expected tag <${expectedNodeType}> but did not find it`,
       file.platformified(),
       line
     )

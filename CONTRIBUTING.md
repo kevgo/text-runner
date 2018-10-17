@@ -3,36 +3,31 @@
 ## Installation for development
 
 - you need to have Gnu Make installed - running `make` should work on your machine
-- run `make setup` to install all needed software and libraries on your computer
+- run <code textrun="verify-make-command">make setup</code> to install all needed software and libraries on your computer
 - add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Testing
 
-- run all tests: <code textrun="does-make-target-exist">make spec</code>
-- run feature specs: <code textrun="does-make-target-exist">make cuke</code>
-- run feature specs in offline mode: `make cuke --tags '~@online'`
-- run text-run: <code textrun="does-make-target-exist">make docs</code>
+- run all tests: <code textrun="verify-make-command">make spec</code>
+- run feature specs: <code textrun="verify-make-command">make cuke</code>
+- run feature specs in offline mode: <code>make cuke-offline</code>
+- run text-run: <code textrun="verify-make-command">make docs</code>
 
 To debug a single test:
 
 - enable console output: add the `@verbose` tag
 - enable debugging statements and verbose output: add the `@debug` tag
 
-To determine test coverage, run <a textrun="does-make-target-exist">`make coverage`</a>.
+To determine test coverage, run <code textrun="verify-make-command">make coverage</code>.
 The coverage in relatively low because TextRunner contains copious amounts of
 defensive checks against invalid user input.
 Not all permutations of that are tested.
 
 ## Linting
 
-- run all linters: <a textrun="does-make-target-exist">`make lint`</a>
-- run JavaScript linters: <a textrun="does-make-target-exist">`make lintjs`</a>
-- run Markdown linters: <a textrun="does-make-target-exist">`make lintmd`</a>
-
-The JavaScript Standard linter does not properly handle Flow types at this point,
-hence it is recommended to only show flow lint messages in your editor,
-not the error messages from "standard".
-Use the `make lintjs` script instead.
+- run all linters: <code textrun="verify-make-command">make lint</code>
+- run JavaScript linters: <code textrun="verify-make-command">make lintjs</code>
+- run Markdown linters: <code textrun="verify-make-command">make lintmd</code>
 
 ## Editor setup
 
@@ -132,4 +127,4 @@ that converts the configuration into test results over several steps:
 
 - update the version in [package.json](package.json) in a branch and ship it
 - create a new release on Github
-- run `make deploy`
+- run <code textrun="verify-make-command">make deploy</code>

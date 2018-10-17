@@ -55,7 +55,7 @@ export default class Formatter {
   }
 
   skip(message: string) {
-    debug("message: " + message)
+    debug("skipping: " + message)
     this.skipped = true
     this.statsCounter.skip()
   }

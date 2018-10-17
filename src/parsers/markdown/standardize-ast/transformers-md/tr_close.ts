@@ -17,6 +17,6 @@ export default function(
     tag: "/tr",
     type: node.type
   })
-  openTags.popType("tr_open")
+  openTags.popType("tr_open", file, line)
   return result
 }

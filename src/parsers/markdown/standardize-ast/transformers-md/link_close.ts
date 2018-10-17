@@ -9,7 +9,7 @@ export default function(
   line: number
 ): AstNodeList {
   // TODO: remove openTags, since MD nodes never have attributes
-  const openNode = openTags.popType("link_open")
+  const openNode = openTags.popType("link_open", file, line)
   const result = new AstNodeList()
   result.pushNode({
     attributes: openNode.attributes,

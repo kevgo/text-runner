@@ -1,4 +1,5 @@
 import chalk from "chalk"
+import AbsoluteFilePath from "../../../domain-model/absolute-file-path"
 import UnprintedUserError from "../../../errors/unprinted-user-error"
 import AstNode from "../../ast-node"
 
@@ -62,7 +63,11 @@ export default class OpenTagTracker {
     )
   }
 
-  popType(expectedNodeType: string): AstNode {
+  popType(
+    expectedNodeType: string,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop type '${expectedNodeType}'`
@@ -76,6 +81,10 @@ export default class OpenTagTracker {
       this.nodes.splice(i, 1)
       return result
     }
-    throw new Error(`OpenTagTracker does not have node <${expectedNodeType}>`)
+    throw new UnprintedUserError(
+      `OpenTagTracker does not have node <${expectedNodeType}>`,
+      file.platformified(),
+      line
+    )
   }
 }

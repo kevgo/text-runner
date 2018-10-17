@@ -17,6 +17,6 @@ export default function(
     tag: "/footnote_block",
     type: node.type
   })
-  openTags.popType("footnote_block_open")
+  openTags.popType("footnote_block_open", file, line)
   return result
 }

@@ -17,6 +17,6 @@ export default function(
     tag: "/del",
     type: node.type
   })
-  openTags.popType("del_open")
+  openTags.popType("del_open", file, line)
   return result
 }

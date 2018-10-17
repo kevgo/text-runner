@@ -11,7 +11,7 @@ export default function transformSummaryTag(
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popType("summary_open")
+  const openingTag = openTags.popType("summary_open", file, line)
   const resultNode = new AstNode({
     attributes: openingTag.attributes,
     content: "",

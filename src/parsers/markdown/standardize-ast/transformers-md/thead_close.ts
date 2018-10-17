@@ -17,6 +17,6 @@ export default function(
     tag: "/thead",
     type: node.type
   })
-  openTags.popType("thead_open")
+  openTags.popType("thead_open", file, line)
   return result
 }

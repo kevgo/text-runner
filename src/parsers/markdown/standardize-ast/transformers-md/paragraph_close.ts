@@ -8,7 +8,7 @@ export default function(
   file: AbsoluteFilePath,
   line: number
 ): AstNodeList {
-  const openNode = openTags.popType("paragraph_open")
+  const openNode = openTags.popType("paragraph_open", file, line)
   const result = new AstNodeList()
   result.pushNode({
     attributes: openNode.attributes,

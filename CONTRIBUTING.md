@@ -10,7 +10,7 @@
 
 - run all tests: <code textrun="verify-make-command">make spec</code>
 - run feature specs: <code textrun="verify-make-command">make cuke</code>
-- run feature specs in offline mode: <code textrun="verify-make-command">make cuke --tags '~@online'</code>
+- run feature specs in offline mode: <code>make cuke-offline</code>
 - run text-run: <code textrun="verify-make-command">make docs</code>
 
 To debug a single test:
@@ -18,16 +18,16 @@ To debug a single test:
 - enable console output: add the `@verbose` tag
 - enable debugging statements and verbose output: add the `@debug` tag
 
-To determine test coverage, run <a textrun="verify-make-command">make coverage</code></a>.
+To determine test coverage, run <code textrun="verify-make-command">make coverage</code>.
 The coverage in relatively low because TextRunner contains copious amounts of
 defensive checks against invalid user input.
 Not all permutations of that are tested.
 
 ## Linting
 
-- run all linters: <a textrun="verify-make-command">make lint</code></a>
-- run JavaScript linters: <a textrun="verify-make-command">make lintjs</code></a>
-- run Markdown linters: <a textrun="verify-make-command">make lintmd</code></a>
+- run all linters: <code textrun="verify-make-command">make lint</code>
+- run JavaScript linters: <code textrun="verify-make-command">make lintjs</code>
+- run Markdown linters: <code textrun="verify-make-command">make lintmd</code>
 
 ## Editor setup
 

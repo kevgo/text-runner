@@ -1,7 +1,7 @@
 import chalk from "chalk"
+import AbsoluteFilePath from "../../../domain-model/absolute-file-path"
 import UnprintedUserError from "../../../errors/unprinted-user-error"
 import AstNode from "../../ast-node"
-import AbsoluteFilePath from "../../../domain-model/absolute-file-path"
 
 export default class OpenTagTracker {
   nodes: AstNode[]

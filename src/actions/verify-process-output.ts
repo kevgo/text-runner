@@ -1,5 +1,6 @@
 import { ActionArgs } from "../runners/action-args"
 import RunningProcess from "./helpers/running-process"
+import UnprintedUserError from "../errors/unprinted-user-error"
 
 // Waits until the currently running console command produces the given output
 export default (async function(args: ActionArgs) {
@@ -9,8 +10,16 @@ export default (async function(args: ActionArgs) {
     .split("\n")
     .map(line => line.trim())
     .filter(line => line)
+  const process = RunningProcess.instance().process
+  if (!process) {
+    throw new UnprintedUserError(
+      "Cannot verify process output since no process has been started",
+      args.file,
+      args.line
+    )
+  }
   for (const line of expectedLines) {
     args.formatter.log(`waiting for ${line}`)
-    await RunningProcess.instance().process.waitForText(line)
+    await process.waitForText(line)
   }
 })

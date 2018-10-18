@@ -17,7 +17,7 @@ install:
 
 test_script:
   - make build
-  - make test
+  - make tests
   - make cuke-win
   - make docs
 

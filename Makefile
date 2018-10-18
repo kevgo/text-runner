@@ -62,28 +62,28 @@ coverage: coverage-build coverage-tests coverage-cli coverage-docs   # measures 
 
 cuke: build   # runs the feature specs
 ifndef FILE
-	@node_modules/.bin/cucumber-js --tags '(not @todo)' --format progress
+	@node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress
 else
-	@node_modules/.bin/cucumber-js --tags '(not @todo)' $(FILE)
+	@node_modules/.bin/cucumber-js --tags "(not @todo)" $(FILE)
 endif
 
 cuke-other:   # test coverage for CLI specs
-	node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/!(actions|commands|images|formatters|tag-types)'
+	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/!(actions|commands|images|formatters|tag-types)"
 
 cuke-actions:   # test coverage for CLI specs
-	node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/+(actions|images)'
+	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(actions|images)"
 
 cuke-tagtypes:   # test coverage for CLI specs
-	node_modules/.bin/cucumber-js --tags '(not @todo)' 'features/+(tag-types|commands|formatters)'
+	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(tag-types|commands|formatters)"
 
 cuke-offline: build   # runs the feature specs that don't need an online connection
-	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags '(not @online) and (not @todo)' --format progress
+	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress
 
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
 	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
-	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' $(FILE)
+	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
 endif
 
 deploy: build  # deploys a new version to npmjs.org

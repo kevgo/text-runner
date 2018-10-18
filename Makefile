@@ -81,7 +81,7 @@ cuke-offline: build   # runs the feature specs that don't need an online connect
 
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
-	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" --format progress
+	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
 	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
 endif

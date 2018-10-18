@@ -14,7 +14,7 @@ export default class RunningProcess {
     return this.process != null
   }
   kill() {
-    this.process.kill()
+    this.process && this.process.kill()
   }
 
   reset() {

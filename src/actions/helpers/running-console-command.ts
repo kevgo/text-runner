@@ -4,6 +4,9 @@ import ObservableProcess from "observable-process"
 class RunningConsoleCommand {
   // Returns the currently running console command
   static instance(): ObservableProcess {
+    if (!instance) {
+      throw new Error()
+    }
     return instance
   }
 
@@ -12,6 +15,6 @@ class RunningConsoleCommand {
   }
 }
 
-let instance = null
+let instance: ObservableProcess | null = null
 
 export default RunningConsoleCommand

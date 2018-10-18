@@ -1,4 +1,4 @@
-import WriteStream from "observable-process"
+import { WriteStream } from "observable-process"
 import { Activity } from "../activity-list/activity"
 
 import deb from "debug"

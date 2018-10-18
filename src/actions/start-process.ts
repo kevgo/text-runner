@@ -27,26 +27,15 @@ export default (async function(args: ActionArgs) {
   args.formatter.name(
     `starting a long-running process: ${chalk.bold(chalk.cyan(commandsToRun))}`
   )
-  StartProcessCommandOutput.instance().reset()
   RunningProcess.instance().set(
     new ObservableProcess({
       commands: callArgs(commandsToRun),
       cwd: args.configuration.workspace,
       stderr: args.formatter.stderr,
-      stdout: log(args.formatter.stdout)
+      stdout: args.formatter.stdout
     })
   )
-  // RunningProcess.ended = true
 })
-
-function log(stdout): WriteStream {
-  return {
-    write: text => {
-      StartProcessCommandOutput.instance().append(text.toString())
-      return stdout.write(text)
-    }
-  }
-}
 
 function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}

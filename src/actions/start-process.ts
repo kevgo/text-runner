@@ -1,14 +1,12 @@
-import { Configuration } from "../configuration/configuration"
-import { ActionArgs } from "../runners/action-args"
-
 import chalk from "chalk"
 import deb from "debug"
-import ObservableProcess, { WriteStream } from "observable-process"
+import ObservableProcess from "observable-process"
 import path from "path"
+import { Configuration } from "../configuration/configuration"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"
+import { ActionArgs } from "../runners/action-args"
 import RunningProcess from "./helpers/running-process"
-import StartProcessCommandOutput from "./helpers/start-process-command-output"
 
 const debug = deb("start-console-command")
 
@@ -19,16 +17,14 @@ export default (async function(args: ActionArgs) {
   args.formatter.name(
     `starting a long-running process: ${chalk.bold(chalk.cyan(commandsToRun))}`
   )
-  StartProcessCommandOutput.instance().reset()
   RunningProcess.instance().set(
     new ObservableProcess({
       commands: callArgs(commandsToRun),
       cwd: args.configuration.workspace,
       stderr: args.formatter.stderr,
-      stdout: log(args.formatter.stdout)
+      stdout: args.formatter.stdout
     })
   )
-  // RunningProcess.ended = true
 })
 
 function getCommandsToRun(args: ActionArgs) {
@@ -40,15 +36,6 @@ function getCommandsToRun(args: ActionArgs) {
     .map(trimDollar)
     .map(makeGlobal(args.configuration))
     .join(" && ")
-}
-
-function log(stdout): WriteStream {
-  return {
-    write: text => {
-      StartProcessCommandOutput.instance().append(text.toString())
-      return stdout.write(text)
-    }
-  }
 }
 
 function makeGlobal(configuration: Configuration) {

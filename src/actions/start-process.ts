@@ -45,7 +45,7 @@ function getCommandsToRun(args: ActionArgs) {
 function log(stdout): WriteStream {
   return {
     write: text => {
-      StartProcessCommandOutput.instance().append(text)
+      StartProcessCommandOutput.instance().append(text.toString())
       return stdout.write(text)
     }
   }

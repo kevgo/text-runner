@@ -7,21 +7,12 @@ import path from "path"
 
 export default function(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType("strong", "em")
-  const expectedContent = args.nodes.textInNodeOfType("fence", "code")
   args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)
   const fullPath = path.join(process.cwd(), filePath)
   args.formatter.log(`verify file ${fullPath}`)
-  let actualContent
+  const actualContent = readFile(fullPath)
   try {
-    actualContent = fs.readFileSync(fullPath, "utf8")
-  } catch (err) {
-    if (err.code === "ENOENT") {
-      throw new Error(`file ${chalk.red(filePath)} not found`)
-    } else {
-      throw err
-    }
-  }
-  try {
+    const expectedContent = args.nodes.textInNodeOfType("fence", "code")
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
   } catch (err) {
     throw new Error(
@@ -29,5 +20,17 @@ export default function(args: ActionArgs) {
         err.message
       }`
     )
+  }
+}
+
+function readFile(fullPath: string): string {
+  try {
+    return fs.readFileSync(fullPath, "utf8")
+  } catch (err) {
+    if (err.code === "ENOENT") {
+      throw new Error(`file ${chalk.red(fullPath)} not found`)
+    } else {
+      throw err
+    }
   }
 }

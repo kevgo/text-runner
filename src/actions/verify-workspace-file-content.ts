@@ -7,12 +7,12 @@ import path from "path"
 
 export default function(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType("strong", "em")
-  args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)
   const fullPath = path.join(process.cwd(), filePath)
+  args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)
   args.formatter.log(`verify file ${fullPath}`)
   const actualContent = readFile(fullPath)
+  const expectedContent = args.nodes.textInNodeOfType("fence", "code")
   try {
-    const expectedContent = args.nodes.textInNodeOfType("fence", "code")
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
   } catch (err) {
     throw new Error(

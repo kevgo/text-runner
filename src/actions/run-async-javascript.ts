@@ -13,7 +13,6 @@ export default function(args: ActionArgs) {
   code = replaceVariableDeclarations(code)
   code = wrapInAsyncFunction(code)
   args.formatter.log(code)
-  /* eslint-disable no-eval */
   eval(code)
 }
 

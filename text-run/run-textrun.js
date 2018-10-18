@@ -1,5 +1,5 @@
 const callArgs = require("../dist/helpers/call-args").default
-const ObservableProcess = require("observable-process")
+const ObservableProcess = require("observable-process").default
 const path = require("path")
 const RunningConsoleCommand = require("../dist/actions/helpers/running-console-command")
   .default

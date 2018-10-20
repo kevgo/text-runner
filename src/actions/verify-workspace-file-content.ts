@@ -4,13 +4,16 @@ import chalk from "chalk"
 import fs from "fs"
 import jsdiffConsole from "jsdiff-console"
 import path from "path"
+import util from "util"
 
-export default function(args: ActionArgs) {
+const readFileP = util.promisify(fs.readFile)
+
+export default async function(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType("strong", "em")
   const fullPath = path.join(process.cwd(), filePath)
   args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)
   args.formatter.log(`verify file ${fullPath}`)
-  const actualContent = readFile(filePath, fullPath)
+  const actualContent = await readFile(filePath, fullPath)
   const expectedContent = args.nodes.textInNodeOfType("fence", "code")
   try {
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
@@ -23,9 +26,10 @@ export default function(args: ActionArgs) {
   }
 }
 
-function readFile(filePath: string, fullPath: string): string {
+async function readFile(filePath: string, fullPath: string): Promise<string> {
   try {
-    return fs.readFileSync(fullPath, "utf8")
+    const result = await readFileP(fullPath, "utf8")
+    return result
   } catch (err) {
     if (err.code === "ENOENT") {
       throw new Error(`file ${chalk.red(filePath)} not found`)

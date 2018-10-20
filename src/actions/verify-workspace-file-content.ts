@@ -10,7 +10,7 @@ export default function(args: ActionArgs) {
   const fullPath = path.join(process.cwd(), filePath)
   args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)
   args.formatter.log(`verify file ${fullPath}`)
-  const actualContent = readFile(fullPath)
+  const actualContent = readFile(filePath, fullPath)
   const expectedContent = args.nodes.textInNodeOfType("fence", "code")
   try {
     jsdiffConsole(actualContent.trim(), expectedContent.trim())
@@ -23,12 +23,12 @@ export default function(args: ActionArgs) {
   }
 }
 
-function readFile(fullPath: string): string {
+function readFile(filePath: string, fullPath: string): string {
   try {
     return fs.readFileSync(fullPath, "utf8")
   } catch (err) {
     if (err.code === "ENOENT") {
-      throw new Error(`file ${chalk.red(fullPath)} not found`)
+      throw new Error(`file ${chalk.red(filePath)} not found`)
     } else {
       throw err
     }

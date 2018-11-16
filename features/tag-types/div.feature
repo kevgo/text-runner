@@ -1,9 +1,8 @@
 Feature: div tags
 
-    When writing complex div tags in a Markdown document
+  When writing complex div tags in a Markdown document
   I want to be able to make div tags active
   So that I don't have to litter my document with <a> tags
-
 
   Background:
     Given my workspace contains the HelloWorld activity

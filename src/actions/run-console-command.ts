@@ -3,7 +3,7 @@ import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import deb from "debug"
-import ObservableProcess from "observable-process"
+import { ObservableProcess } from "observable-process"
 import path from "path"
 import callArgs from "../helpers/call-args"
 import trimDollar from "../helpers/trim-dollar"

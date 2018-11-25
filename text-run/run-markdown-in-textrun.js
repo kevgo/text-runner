@@ -1,6 +1,6 @@
 const callArgs = require("../dist/helpers/call-args").default
 const fs = require("fs")
-const ObservableProcess = require("observable-process").default
+const { ObservableProcess } = require("observable-process")
 const path = require("path")
 const debug = require("debug")("text-runner:run-markdown-in-text-run")
 

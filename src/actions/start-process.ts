@@ -1,6 +1,6 @@
 import chalk from "chalk"
 import deb from "debug"
-import ObservableProcess from "observable-process"
+import { ObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../configuration/configuration"
 import callArgs from "../helpers/call-args"

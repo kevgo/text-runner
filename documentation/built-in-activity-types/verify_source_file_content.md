@@ -4,7 +4,6 @@ Sometimes you want to just display a file from the source code of your app in th
 For example to give your readers an idea how something works
 without having them do it as part of the tutorial.
 
-
 #### Simple Example
 
 <a textrun="create-file">

@@ -9,6 +9,7 @@
 
 First, let's runs a console command:
 <a textrun="run-markdown-in-textrun">
+
 ```markdown
 <a textrun="run-console-command">
 `​``
@@ -23,6 +24,7 @@ Hello world!
 `​``
 </a>
 ```
+
 </a>
 
 #### More info

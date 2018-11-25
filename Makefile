@@ -101,11 +101,12 @@ fix:  # runs the fixers
 	node_modules$/.bin$/prettier --write 'src/**/*.ts'
 	node_modules$/.bin$/prettier --write '*.md'
 	node_modules$/.bin$/prettier --write 'documentation/**/*.md'
+	node_modules$/.bin$/prettier --write '*.yml'
 
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-lint: lintjs lintmd   # lints all files
+lint: lintjs lintmd lintyml   # lints all files
 
 lintjs: build   # lints the javascript files
 	node_modules$/.bin$/tsc --noEmit
@@ -117,6 +118,9 @@ lintmd:   # lints markdown files
 	node_modules/.bin/prettier -l "*.md"
 	# node_modules/.bin/prettier -l "documentation/**/*.md"
 	node_modules$/.bin$/remark .
+
+lintyml:   # lints yml files
+	node_modules/.bin/prettier -l "*.yml"
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

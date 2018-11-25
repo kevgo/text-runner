@@ -1,20 +1,20 @@
 actions:
   - match:
-    command: "make spec"
+    command: 'make spec'
 
   - match:
       filename: '\.md$'
-    command: "make docs FILE={{filename}}"
+    command: 'make docs FILE={{filename}}'
 
   - match:
       filename: '\.feature$'
-    command: "make cuke FILE={{filename}}"
+    command: 'make cuke FILE={{filename}}'
 
   - match:
       filename: '\.feature$'
       line: '\d+'
-    command: "make cuke FILE={{filename}}:{{line}}"
+    command: 'make cuke FILE={{filename}}:{{line}}'
 
   - match:
       filename: '-test\.js'
-    command: "mocha {{filename}}"
+    command: 'mocha {{filename}}'

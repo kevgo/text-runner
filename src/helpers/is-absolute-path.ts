@@ -1,3 +1,3 @@
 export default function isAbsolutePath(filepath: string): boolean {
-  return filepath.startsWith("/") || filepath.startsWith("\\")
+  return filepath.startsWith('/') || filepath.startsWith('\\')
 }

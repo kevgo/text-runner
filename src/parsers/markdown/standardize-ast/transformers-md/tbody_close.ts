@@ -1,6 +1,6 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
-import AstNodeList from "../../../ast-node-list"
-import OpenTagTracker from "../../helpers/open-tag-tracker"
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
+import AstNodeList from '../../../ast-node-list'
+import OpenTagTracker from '../../helpers/open-tag-tracker'
 
 export default function(
   node: any,
@@ -11,12 +11,12 @@ export default function(
   const result = new AstNodeList()
   result.pushNode({
     attributes: {},
-    content: "",
+    content: '',
     file,
     line,
-    tag: "/tbody",
+    tag: '/tbody',
     type: node.type
   })
-  openTags.popType("tbody_open", file, line)
+  openTags.popType('tbody_open', file, line)
   return result
 }

@@ -1,7 +1,7 @@
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from '../runners/action-args'
 
-import chalk from "chalk"
-import path from "path"
+import chalk from 'chalk'
+import path from 'path'
 
 // Changes the current working directory to the one given in the hyperlink or code block
 export default function(args: ActionArgs) {
@@ -14,7 +14,7 @@ export default function(args: ActionArgs) {
   try {
     process.chdir(fullPath)
   } catch (e) {
-    if (e.code === "ENOENT") {
+    if (e.code === 'ENOENT') {
       throw new Error(`directory ${directory} not found`)
     }
     throw e

@@ -1,8 +1,8 @@
-import fs from "fs"
+import fs from 'fs'
 
 export default function createConfiguration() {
   fs.writeFileSync(
-    "./text-run.yml",
+    './text-run.yml',
     `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.

@@ -112,7 +112,7 @@ lintjs: build   # lints the javascript files
 	node_modules$/.bin$/tsc --noEmit
 	node_modules$/.bin$/tslint --project tsconfig.json
 	node_modules/.bin/prettier -l "src/**/*.ts"
-	# node_modules/.bin/prettier -l "features/**/*.ts"
+	node_modules/.bin/prettier -l "features/**/*.ts"
 
 lintmd:   # lints markdown files
 	node_modules/.bin/prettier -l "*.md"

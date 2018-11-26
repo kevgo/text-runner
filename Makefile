@@ -99,6 +99,7 @@ endif
 fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix
 	node_modules$/.bin$/prettier --write 'src/**/*.ts'
+	node_modules$/.bin$/prettier --write 'features/**/*.ts'
 	node_modules$/.bin$/prettier --write '*.md'
 	node_modules$/.bin$/prettier --write 'documentation/**/*.md'
 	node_modules$/.bin$/prettier --write '*.yml'

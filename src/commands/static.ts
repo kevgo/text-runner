@@ -11,9 +11,7 @@ import executeParallel from "../runners/execute-parallel"
 import StatsCounter from "../runners/stats-counter"
 import createWorkingDir from "../working-dir/create-working-dir"
 
-async function staticCommand(
-  config: Configuration
-): Promise<Array<Error | null>> {
+async function staticCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
@@ -45,8 +43,7 @@ async function staticCommand(
   // step 5: execute the ActivityList
   process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats)
-  let results = await Promise.all(jobs)
-  results = results.filter(r => r)
+  const results = (await Promise.all(jobs)).filter(r => r) as Error[]
 
   // step 6: cleanup
   process.chdir(config.sourceDir)

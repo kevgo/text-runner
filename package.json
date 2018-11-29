@@ -60,7 +60,7 @@
     "ncp": "2.0.0",
     "nyc": "13.1.0",
     "prettier": "1.15.2",
-    "ps-tree": "1.1.0",
+    "ps-tree": "1.2.0",
     "remark-cli": "6.0.1",
     "remark-lint": "6.0.4",
     "remark-preset-lint-recommended": "3.0.2",

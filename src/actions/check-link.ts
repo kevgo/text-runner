@@ -4,7 +4,6 @@ import { ActionArgs } from "../runners/action-args"
 import chalk from "chalk"
 import fs from "fs-extra"
 import path from "path"
-import request from "request-promise-native"
 import AbsoluteFilePath from "../domain-model/absolute-file-path"
 import UnknownLink from "../domain-model/unknown-link"
 import Formatter from "../formatters/formatter"
@@ -14,6 +13,7 @@ import isLinkToAnchorInSameFile from "../helpers/is-link-to-anchor-in-same-file"
 import isMailtoLink from "../helpers/is-mailto-link"
 import removeLeadingSlash from "../helpers/remove-leading-slash"
 import LinkTargetList from "../link-targets/link-target-list"
+import got from "got"
 
 // Checks for broken hyperlinks
 export default (async function(args: ActionArgs) {
@@ -76,11 +76,11 @@ async function checkExternalLink(
 
   try {
     f.name(`link to external website ${chalk.cyan(target)}`)
-    await request({ url: target, timeout: 4000 })
+    await got(target, { timeout: 4000 })
   } catch (err) {
     if (err.statusCode === 404 || err.error.code === "ENOTFOUND") {
       f.warning(`link to non-existing external website ${chalk.bold(target)}`)
-    } else if (err.message === "ESOCKETTIMEDOUT") {
+    } else if (err instanceof got.TimeoutError) {
       f.warning(`link to ${chalk.magenta(target)} timed out`)
     } else if (
       err.message.startsWith("Hostname/IP doesn't match certificate's altnames")

@@ -43,7 +43,7 @@
     "@types/glob": "7.1.1",
     "@types/got": "9.2.1",
     "@types/mocha": "5.2.5",
-    "@types/node": "10.12.10",
+    "@types/node": "10.12.11",
     "@types/ps-tree": "1.1.0",
     "@types/strip-ansi": "3.0.0",
     "@types/uuid": "3.4.4",
@@ -59,7 +59,7 @@
     "mocha": "5.2.0",
     "ncp": "2.0.0",
     "nyc": "13.1.0",
-    "prettier": "1.15.2",
+    "prettier": "1.15.3",
     "ps-tree": "1.2.0",
     "remark-cli": "6.0.1",
     "remark-lint": "6.0.4",
@@ -70,7 +70,7 @@
     "tertestrial": "0.3.2",
     "ts-node": "7.0.1",
     "tslint": "5.11.0",
-    "typescript": "3.1.6",
+    "typescript": "3.2.1",
     "uuid": "3.3.2"
   },
   "files": [

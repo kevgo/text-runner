@@ -43,6 +43,8 @@ const World = function() {
     if (process.env.NODE_ENV === 'coverage') {
       args.command = runWithTestCoverage(args.command)
     }
+    console.log(11111111111)
+    console.log(args)
     this.process = new ObservableProcess(args)
     await this.process.waitForEnd()
     if (process.env.NODE_ENV === 'coverage') {

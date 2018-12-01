@@ -3,8 +3,8 @@ import { ActionArgs } from "../runners/action-args"
 
 import chalk from "chalk"
 import fs from "fs-extra"
+import got from "got"
 import path from "path"
-import request from "request-promise-native"
 import Formatter from "../formatters/formatter"
 
 // Checks for broken hyperlinks
@@ -39,11 +39,11 @@ async function checkRemoteImage(url: string, f: Formatter, c: Configuration) {
     return
   }
   try {
-    await request({ url, timeout: 2000 })
+    await got(url, { timeout: 2000 })
   } catch (err) {
     if (err.statusCode === 404) {
       f.warning(`image ${chalk.magenta(url)} does not exist`)
-    } else if (err.message === "ESOCKETTIMEDOUT") {
+    } else if (err instanceof got.TimeoutError) {
       f.warning(`image ${chalk.magenta(url)} timed out`)
     } else {
       throw err

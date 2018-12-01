@@ -1,12 +1,12 @@
-import chalk from "chalk"
-import createConfiguration from "../configuration/create-configuration"
+import chalk from 'chalk'
+import createConfiguration from '../configuration/create-configuration'
 
 async function setupCommand() {
   createConfiguration()
   console.log(
     chalk.green(
       `Created configuration file ${chalk.cyan(
-        "text-run.yml"
+        'text-run.yml'
       )} with default values`
     )
   )

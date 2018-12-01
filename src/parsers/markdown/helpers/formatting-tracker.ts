@@ -1,4 +1,4 @@
-import AstNode from "../../ast-node"
+import AstNode from '../../ast-node'
 
 // FormattingTracker tracks formatting nodes
 // like 'em' and 'strong'
@@ -11,14 +11,14 @@ export default class FormattingTracker {
 
   register(node: AstNode): boolean {
     let result = true
-    if (node.type === "em_open") {
-      this.open("emphasized")
-    } else if (node.type === "em_close") {
-      this.close("emphasized")
-    } else if (node.type === "strong_open") {
-      this.open("strong")
-    } else if (node.type === "strong_close") {
-      this.close("strong")
+    if (node.type === 'em_open') {
+      this.open('emphasized')
+    } else if (node.type === 'em_close') {
+      this.close('emphasized')
+    } else if (node.type === 'strong_open') {
+      this.open('strong')
+    } else if (node.type === 'strong_close') {
+      this.close('strong')
     } else {
       result = false
     }
@@ -34,6 +34,6 @@ export default class FormattingTracker {
   }
 
   toString(): string {
-    return this.tags.sort().join("")
+    return this.tags.sort().join('')
   }
 }

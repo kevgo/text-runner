@@ -1,8 +1,8 @@
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from '../runners/action-args'
 
-import chalk from "chalk"
-import fs from "fs"
-import path from "path"
+import chalk from 'chalk'
+import fs from 'fs'
+import path from 'path'
 
 // Verifies that the test workspace contains the given directory
 export default function(args: ActionArgs) {

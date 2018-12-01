@@ -24,11 +24,11 @@ This creates a configuration file called
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.
 # To exclude the "vendor" folder: '{,!(vendor)/**/}*.md'
-files: "**/*.md"
+files: '**/*.md'
 
 # black-list of files not to test
 # This is applied after the white-list above.
-exclude: ""
+exclude: ''
 
 # the formatter to use (detailed, dot)
 format: detailed

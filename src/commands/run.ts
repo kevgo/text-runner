@@ -1,16 +1,16 @@
-import { Configuration } from "../configuration/configuration"
+import { Configuration } from '../configuration/configuration'
 
-import chalk from "chalk"
-import rimraf from "rimraf"
-import extractActivities from "../activity-list/extract-activities"
-import extractImagesAndLinks from "../activity-list/extract-images-and-links"
-import getFileNames from "../finding-files/get-filenames"
-import findLinkTargets from "../link-targets/find-link-targets"
-import readAndParseFile from "../parsers/read-and-parse-file"
-import executeParallel from "../runners/execute-parallel"
-import executeSequential from "../runners/execute-sequential"
-import StatsCounter from "../runners/stats-counter"
-import createWorkingDir from "../working-dir/create-working-dir"
+import chalk from 'chalk'
+import rimraf from 'rimraf'
+import extractActivities from '../activity-list/extract-activities'
+import extractImagesAndLinks from '../activity-list/extract-images-and-links'
+import getFileNames from '../finding-files/get-filenames'
+import findLinkTargets from '../link-targets/find-link-targets'
+import readAndParseFile from '../parsers/read-and-parse-file'
+import executeParallel from '../runners/execute-parallel'
+import executeSequential from '../runners/execute-sequential'
+import StatsCounter from '../runners/stats-counter'
+import createWorkingDir from '../working-dir/create-working-dir'
 
 async function runCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
@@ -23,7 +23,7 @@ async function runCommand(config: Configuration): Promise<Error[]> {
   // step 1: find files
   const filenames = getFileNames(config)
   if (filenames.length === 0) {
-    console.log(chalk.magenta("no Markdown files found"))
+    console.log(chalk.magenta('no Markdown files found'))
     return []
   }
 
@@ -37,7 +37,7 @@ async function runCommand(config: Configuration): Promise<Error[]> {
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
-    console.log(chalk.magenta("no activities found"))
+    console.log(chalk.magenta('no activities found'))
     return []
   }
 
@@ -54,11 +54,11 @@ async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 7: write stats
-  let text = "\n"
+  let text = '\n'
   let color
   if (results.length === 0) {
     color = chalk.green
-    text += chalk.green("Success! ")
+    text += chalk.green('Success! ')
   } else {
     color = chalk.red
     text += chalk.red(`${results.length} errors, `)
@@ -69,7 +69,7 @@ async function runCommand(config: Configuration): Promise<Error[]> {
     } files`
   )
   if (stats.warnings() > 0) {
-    text += color(", ")
+    text += color(', ')
     text += chalk.magenta(`${stats.warnings()} warnings`)
   }
   text += color(`, ${stats.duration()}`)

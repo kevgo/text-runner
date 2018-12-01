@@ -21,7 +21,7 @@ export default class AbsoluteFilePath {
     if (this.isDirectory()) {
       return this
     }
-    return new AbsoluteFilePath(path.dirname(this.value) + "/")
+    return new AbsoluteFilePath(path.dirname(this.value) + '/')
   }
 
   // Returns the file extension of this path
@@ -31,7 +31,7 @@ export default class AbsoluteFilePath {
 
   // Returns whether this file path points to a directory
   isDirectory(): boolean {
-    return this.value.endsWith("/")
+    return this.value.endsWith('/')
   }
 
   // Returns the path in the platform-specific format,
@@ -55,8 +55,8 @@ export default class AbsoluteFilePath {
   }
 }
 
-import path from "path"
-import Publications from "../configuration/publications"
-import removeLeadingSlash from "../helpers/remove-leading-slash"
-import unixify from "../helpers/unifixy"
-import AbsoluteLink from "./absolute-link"
+import path from 'path'
+import Publications from '../configuration/publications'
+import removeLeadingSlash from '../helpers/remove-leading-slash'
+import unixify from '../helpers/unifixy'
+import AbsoluteLink from './absolute-link'

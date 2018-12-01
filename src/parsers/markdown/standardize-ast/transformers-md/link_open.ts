@@ -1,7 +1,7 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
-import AstNode from "../../../ast-node"
-import AstNodeList from "../../../ast-node-list"
-import OpenTagTracker from "../../helpers/open-tag-tracker"
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
+import AstNode from '../../../ast-node'
+import AstNodeList from '../../../ast-node-list'
+import OpenTagTracker from '../../helpers/open-tag-tracker'
 
 export default function(
   node: any,
@@ -15,10 +15,10 @@ export default function(
       href: node.href,
       title: node.title
     },
-    content: "",
+    content: '',
     file,
     line,
-    tag: "a",
+    tag: 'a',
     type: node.type
   })
   openTags.add(resultNode)

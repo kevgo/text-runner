@@ -30,7 +30,7 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function({ formatter }) {
-  formatter.log("Hello world!")
+  formatter.log('Hello world!')
 }
 ```
 
@@ -127,7 +127,7 @@ Here is the corresponding action, implemented in
 **text-run/console-command.js**:
 
 ```javascript
-child_process = require("child_process")
+child_process = require('child_process')
 
 module.exports = function({ formatter, nodes }) {
   // determine which command to run
@@ -135,7 +135,7 @@ module.exports = function({ formatter, nodes }) {
   const commandToRun = nodes.text()
 
   // perform the action
-  formatter.log(child_process.execSync(commandToRun, { encoding: "utf8" }))
+  formatter.log(child_process.execSync(commandToRun, { encoding: 'utf8' }))
 }
 ```
 

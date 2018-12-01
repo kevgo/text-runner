@@ -1,4 +1,4 @@
-import Time from "time-diff"
+import Time from 'time-diff'
 
 export default class StatsCounter {
   errorCount: number
@@ -13,11 +13,11 @@ export default class StatsCounter {
     this.successCount = 0
     this.warningCount = 0
     this.time = new Time()
-    this.time.start("formatter")
+    this.time.start('formatter')
   }
 
   duration() {
-    return this.time.end("formatter")
+    return this.time.end('formatter')
   }
 
   error() {

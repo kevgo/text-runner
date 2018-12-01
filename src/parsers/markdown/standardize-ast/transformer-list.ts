@@ -1,4 +1,4 @@
-import { Transformer } from "./transformer"
+import { Transformer } from './transformer'
 
 export interface TransformerList {
   [key: string]: Transformer

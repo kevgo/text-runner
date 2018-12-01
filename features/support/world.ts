@@ -36,7 +36,7 @@ const World = function() {
       }
     }
     if (this.debug) {
-      args.env["DEBUG"] = "*,-babel"
+      args.env.DEBUG = "*,-babel"
     }
 
     args.command = this.makeFullPath(params.command)
@@ -65,7 +65,7 @@ const World = function() {
   }
 
   this.fullTextRunPath = function() {
-    var result = path.join(process.cwd(), "bin", "text-run")
+    let result = path.join(process.cwd(), "bin", "text-run")
     if (process.platform === "win32") {
       result += ".cmd"
     }
@@ -84,7 +84,7 @@ const World = function() {
 
   this.verifyFailure = table => {
     const output = stripAnsi(this.process.fullOutput())
-    var expectedHeader
+    let expectedHeader
     if (table.FILENAME && table.LINE) {
       expectedHeader = `${table.FILENAME}:${table.LINE}`
     } else if (table.FILENAME) {
@@ -92,26 +92,34 @@ const World = function() {
     } else {
       expectedHeader = ""
     }
-    if (table["MESSAGE"]) {
-      expectedHeader += ` -- ${table["MESSAGE"]}`
+    if (table.MESSAGE) {
+      expectedHeader += ` -- ${table.MESSAGE}`
     }
     expect(output).to.include(expectedHeader)
     expect(output).to.match(new RegExp(table["ERROR MESSAGE"]))
     expect(this.process.exitCode).to.equal(
-      parseInt(table["EXIT CODE"]),
+      parseInt(table["EXIT CODE"], 10),
       "exit code"
     )
   }
 
   this.verifyOutput = table => {
-    var expectedText = ""
-    if (table.FILENAME) expectedText += table.FILENAME
-    if (table.FILENAME && table.LINE) expectedText += `:${table.LINE}`
+    let expectedText = ""
+    if (table.FILENAME) {
+      expectedText += table.FILENAME
+    }
+    if (table.FILENAME && table.LINE) {
+      expectedText += `:${table.LINE}`
+    }
     if (table.FILENAME && (table.MESSAGE || table.WARNING)) {
       expectedText += " -- "
     }
-    if (table.MESSAGE) expectedText += table.MESSAGE
-    if (table.WARNING) expectedText += table.WARNING
+    if (table.MESSAGE) {
+      expectedText += table.MESSAGE
+    }
+    if (table.WARNING) {
+      expectedText += table.WARNING
+    }
     const actual = standardizePath(stripAnsi(this.process.fullOutput()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!
@@ -126,7 +134,7 @@ ${actual}
     expect(stripAnsi(this.process.fullOutput())).to.include("COMMANDS")
   }
 
-  this.verifyPrints = expectedText => {
+  this.verifyPrints = (expectedText: string) => {
     const output = stripAnsi(this.process.fullOutput().trim())
     if (!new RegExp(expectedText.trim()).test(output)) {
       throw new Error(
@@ -135,14 +143,14 @@ ${actual}
     }
   }
 
-  this.verifyPrintsNot = text => {
+  this.verifyPrintsNot = (text: string) => {
     const output = stripAnsi(this.process.fullOutput())
     if (new RegExp(text).test(output)) {
       throw new Error(`expected to not find regex '${text}' in '${output}'`)
     }
   }
 
-  this.verifyRanConsoleCommand = command => {
+  this.verifyRanConsoleCommand = (command: string) => {
     expect(stripAnsi(this.process.fullOutput())).to.include(
       `running console command: ${command}`
     )
@@ -153,7 +161,7 @@ ${actual}
     const standardizedOutput = this.output.replace(/\\/g, "/")
 
     // verify the given tests have run
-    for (let filename of filenames) {
+    for (const filename of filenames) {
       expect(standardizedOutput).to.include(filename)
     }
 
@@ -165,18 +173,18 @@ ${actual}
       .filter(file => file)
       .map(file => file.replace(/\\/g, "/"))
       .filter(file => filenames.indexOf(file) === -1)
-    for (let fileShouldntRun of filesShouldntRun) {
+    for (const fileShouldntRun of filesShouldntRun) {
       expect(standardizedOutput).to.not.include(fileShouldntRun)
     }
   }
 
-  this.verifyTestsRun = count => {
+  this.verifyTestsRun = (count: number) => {
     expect(stripAnsi(this.process.fullOutput())).to.include(
       ` ${count} activities`
     )
   }
 
-  this.verifyUnknownCommand = command => {
+  this.verifyUnknownCommand = (command: string) => {
     expect(stripAnsi(this.process.fullOutput())).to.include(
       `unknown command: ${command}`
     )
@@ -185,12 +193,12 @@ ${actual}
 
 setWorldConstructor(World)
 
-function standardizePath(path) {
-  return path.replace(/\\/g, "/")
+function standardizePath(filePath: string): string {
+  return filePath.replace(/\\/g, "/")
 }
 
 // Returns the command that runs the given command with test coverage
-function runWithTestCoverage(command) {
+function runWithTestCoverage(command: string) {
   return path.join(process.cwd(), "node_modules", ".bin", "nyc") + " " + command
 }
 

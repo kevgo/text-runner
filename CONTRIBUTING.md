@@ -2,8 +2,15 @@
 
 ## Installation for development
 
-- you need to have Gnu Make installed - running `make` should work on your machine
-- run <code textrun="verify-make-command">make setup</code> to install all needed software and libraries on your computer
+You need to have installed:
+
+- [Node.js](https://nodejs.org) version 8 or later
+- [Yarn](https://yarnpkg.com)
+- Gnu Make - running `make` should work on your machine
+
+To setup the codebase:
+
+- run `yarn`
 - add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Testing

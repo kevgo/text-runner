@@ -1,9 +1,7 @@
 import { CliArgTypes } from './cli/cli-arg-types'
 
 import chalk from 'chalk'
-import fs from 'fs'
 import loadConfiguration from './configuration/load-configuration'
-import PrintedUserError from './errors/printed-user-error'
 
 import addCommand from './commands/add'
 import debugCommand from './commands/debug'
@@ -13,13 +11,14 @@ import runCommand from './commands/run'
 import setupCommand from './commands/setup'
 import staticCommand from './commands/static'
 import versionCommand from './commands/version'
+import determineConfigFilename from './configuration/determine-config-filename'
 
 // Tests the documentation in the given directory
 export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
   let configuration
   try {
     configuration = loadConfiguration(
-      determineConfigFileName(cmdLineArgs.config),
+      determineConfigFilename(cmdLineArgs),
       cmdLineArgs
     )
     const commandName = cmdLineArgs.command
@@ -59,17 +58,4 @@ export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
     }
     return [err]
   }
-}
-
-function determineConfigFileName(configFileName: string | undefined): string {
-  if (configFileName == null) {
-    return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
-  }
-  if (!fs.existsSync(configFileName)) {
-    console.log(
-      chalk.red(`configuration file ${chalk.cyan(configFileName)} not found`)
-    )
-    throw new PrintedUserError()
-  }
-  return configFileName
 }

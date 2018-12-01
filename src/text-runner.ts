@@ -22,11 +22,11 @@ export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
       determineConfigFileName(cmdLineArgs.config),
       cmdLineArgs
     )
-    const commandName = cmdLineArgs.command
+    const commandName = configuration.command
     let errors
     switch (commandName) {
       case 'add':
-        errors = await addCommand(cmdLineArgs.files)
+        errors = await addCommand(configuration.files)
         return errors
       case 'debug':
         errors = await debugCommand(configuration)

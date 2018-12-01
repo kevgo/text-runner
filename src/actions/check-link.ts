@@ -78,7 +78,6 @@ async function checkExternalLink(
     f.name(`link to external website ${chalk.cyan(target)}`)
     await got(target, { timeout: 4000 })
   } catch (err) {
-    console.log(err)
     if (err.statusCode === 404 || err.code === "ENOTFOUND") {
       f.warning(`link to non-existing external website ${chalk.bold(target)}`)
     } else if (err instanceof got.TimeoutError) {

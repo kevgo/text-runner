@@ -46,7 +46,9 @@ const World = function() {
     console.log(11111111111)
     console.log(args)
     this.process = new ObservableProcess(args)
+    console.log(2222222222)
     await this.process.waitForEnd()
+    console.log(3333333333)
     if (process.env.NODE_ENV === 'coverage') {
       storeTestCoverage()
     }

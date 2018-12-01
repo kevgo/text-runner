@@ -7,6 +7,7 @@ import YAML from 'yamljs'
 import DetailedFormatter from '../formatters/detailed-formatter'
 import getFormatterClass from './get-formatter-class'
 import Publications from './publications'
+import determineConfigFilename from './determine-config-filename'
 
 const debug = deb('textrun:configuration')
 
@@ -27,9 +28,9 @@ const defaultValues: Configuration = {
 
 // Reads documentation and
 export default function loadConfiguration(
-  configFilePath: string,
   constructorArgs: CliArgTypes
 ): Configuration {
+  const configFilePath = determineConfigFilename(constructorArgs)
   let fileData: any = {}
   if (configFilePath) {
     debug(`loading configuration file: ${configFilePath}`)

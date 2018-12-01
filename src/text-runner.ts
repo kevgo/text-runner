@@ -1,9 +1,7 @@
 import { CliArgTypes } from './cli/cli-arg-types'
 
 import chalk from 'chalk'
-import fs from 'fs'
 import loadConfiguration from './configuration/load-configuration'
-import PrintedUserError from './errors/printed-user-error'
 
 import addCommand from './commands/add'
 import debugCommand from './commands/debug'
@@ -18,10 +16,7 @@ import versionCommand from './commands/version'
 export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
   let configuration
   try {
-    configuration = loadConfiguration(
-      determineConfigFileName(cmdLineArgs.config),
-      cmdLineArgs
-    )
+    configuration = loadConfiguration(cmdLineArgs)
     const commandName = configuration.command
     let errors
     switch (commandName) {
@@ -59,17 +54,4 @@ export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
     }
     return [err]
   }
-}
-
-function determineConfigFileName(configFileName: string | undefined): string {
-  if (configFileName == null) {
-    return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
-  }
-  if (!fs.existsSync(configFileName)) {
-    console.log(
-      chalk.red(`configuration file ${chalk.cyan(configFileName)} not found`)
-    )
-    throw new PrintedUserError()
-  }
-  return configFileName
 }

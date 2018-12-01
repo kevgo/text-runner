@@ -1,14 +1,14 @@
-import AbsoluteFilePath from "../../../domain-model/absolute-file-path"
-import UnprintedUserError from "../../../errors/unprinted-user-error"
-import AstNodeList from "../../ast-node-list"
-import getHtmlBlockTag from "../helpers/get-html-block-tag"
-import OpenTagTracker from "../helpers/open-tag-tracker"
-import removeHtmlComments from "../helpers/remove-html-comments"
-import loadTransformers from "../standardize-ast/load-transformers"
+import AbsoluteFilePath from '../../../domain-model/absolute-file-path'
+import UnprintedUserError from '../../../errors/unprinted-user-error'
+import AstNodeList from '../../ast-node-list'
+import getHtmlBlockTag from '../helpers/get-html-block-tag'
+import OpenTagTracker from '../helpers/open-tag-tracker'
+import removeHtmlComments from '../helpers/remove-html-comments'
+import loadTransformers from '../standardize-ast/load-transformers'
 
-const mdTransformers = loadTransformers("md")
-const htmlBlockTransformers = loadTransformers("htmlblock")
-const htmlTagTransformers = loadTransformers("htmltag")
+const mdTransformers = loadTransformers('md')
+const htmlBlockTransformers = loadTransformers('htmlblock')
+const htmlTagTransformers = loadTransformers('htmltag')
 
 // AstStandardizer converts the AST created by Remarkable
 // into the standardized AST used by TextRunner
@@ -58,7 +58,7 @@ export default class AstStandardizer {
   }
 
   async processHtmlBlock(node: any): Promise<boolean> {
-    if (node.type !== "htmlblock") {
+    if (node.type !== 'htmlblock') {
       return false
     }
     const tagName = getHtmlBlockTag(
@@ -87,7 +87,7 @@ export default class AstStandardizer {
   }
 
   processHtmlTag(node: any): boolean {
-    if (node.type !== "htmltag") {
+    if (node.type !== 'htmltag') {
       return false
     }
     const tagName = getHtmlBlockTag(
@@ -95,7 +95,7 @@ export default class AstStandardizer {
       this.filepath,
       this.line
     )
-    const transformer = htmlTagTransformers[tagName.replace("/", "_")]
+    const transformer = htmlTagTransformers[tagName.replace('/', '_')]
     if (!transformer) {
       throw new UnprintedUserError(
         `Unknown HTML tag: '${tagName}'`,
@@ -133,7 +133,7 @@ export default class AstStandardizer {
   }
 
   processSoftBreak(node: any): boolean {
-    if (node.type !== "softbreak") {
+    if (node.type !== 'softbreak') {
       return false
     }
     this.line += 1

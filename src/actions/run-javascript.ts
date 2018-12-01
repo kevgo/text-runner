@@ -1,14 +1,14 @@
-import { Configuration } from "../configuration/configuration"
-import pretendToUse from "../helpers/pretend-to-use"
-import { ActionArgs } from "../runners/action-args"
+import { Configuration } from '../configuration/configuration'
+import pretendToUse from '../helpers/pretend-to-use'
+import { ActionArgs } from '../runners/action-args'
 
 type DoneFunction = (err?: Error) => void
 
 // Runs the JavaScript code given in the code block
 export default function(args: ActionArgs, done: DoneFunction) {
-  let code = args.nodes.textInNodeOfType("fence")
+  let code = args.nodes.textInNodeOfType('fence')
   if (code == null) {
-    done(new Error("no JavaScript code found in the fenced block"))
+    done(new Error('no JavaScript code found in the fenced block'))
     return
   }
   code = replaceSubstitutions(code, args.configuration)
@@ -33,8 +33,8 @@ function appendAsyncCallback(code: string): string {
 
 function replaceAsyncCallbacks(code: string): string {
   return code
-    .replace("<CALLBACK>", "__finished")
-    .replace(/\/\/\s*\.\.\./g, "__finished()")
+    .replace('<CALLBACK>', '__finished')
+    .replace(/\/\/\s*\.\.\./g, '__finished()')
 }
 
 // substitutes replacements configured in text-run.yml
@@ -51,18 +51,18 @@ function replaceSubstitutions(code: string, c: Configuration): string {
 
 // makes sure "require('.') works as expected even if running in a temp workspace
 function replaceRequireLocalModule(code: string): string {
-  return code.replace(/require\(['"].['"]\)/, "require(process.cwd())")
+  return code.replace(/require\(['"].['"]\)/, 'require(process.cwd())')
 }
 
 // make variable declarations persist across code blocks
 function replaceVariableDeclarations(code: string): string {
   return code
-    .replace(/\bconst /g, "global.")
-    .replace(/\bvar /g, "global.")
-    .replace(/\bthis\./g, "global.")
+    .replace(/\bconst /g, 'global.')
+    .replace(/\bvar /g, 'global.')
+    .replace(/\bthis\./g, 'global.')
 }
 
 // returns whether the given code block contains a callback placeholder
 function hasCallbackPlaceholder(code): boolean {
-  return code.indexOf("<CALLBACK>") > -1 || code.indexOf("// ...") > -1
+  return code.indexOf('<CALLBACK>') > -1 || code.indexOf('// ...') > -1
 }

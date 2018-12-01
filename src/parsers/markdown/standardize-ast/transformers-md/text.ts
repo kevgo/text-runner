@@ -1,7 +1,7 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
-import pretendToUse from "../../../../helpers/pretend-to-use"
-import AstNodeList from "../../../ast-node-list"
-import OpenTagTracker from "../../helpers/open-tag-tracker"
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
+import pretendToUse from '../../../../helpers/pretend-to-use'
+import AstNodeList from '../../../ast-node-list'
+import OpenTagTracker from '../../helpers/open-tag-tracker'
 
 export default function(
   node: any,
@@ -15,7 +15,7 @@ export default function(
     content: node.content,
     file,
     line,
-    tag: "",
+    tag: '',
     type: node.type
   })
   pretendToUse(openTags)

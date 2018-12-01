@@ -67,7 +67,7 @@ in `text-run.yml`:
 actions:
   runJavascript:
     replace:
-      "regex to find": "text to replace it with"
+      'regex to find': 'text to replace it with'
 ```
 
 #### More info

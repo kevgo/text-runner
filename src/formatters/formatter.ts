@@ -1,11 +1,11 @@
-import { WriteStream } from "observable-process"
-import { Activity } from "../activity-list/activity"
+import { WriteStream } from 'observable-process'
+import { Activity } from '../activity-list/activity'
 
-import deb from "debug"
-import humanize from "humanize-string"
-import StatsCounter from "../runners/stats-counter"
+import deb from 'debug'
+import humanize from 'humanize-string'
+import StatsCounter from '../runners/stats-counter'
 
-const debug = deb("formatter")
+const debug = deb('formatter')
 
 interface Console {
   log(text: string): void
@@ -34,18 +34,18 @@ export default class Formatter {
     this.statsCounter = statsCounter
     this.stdout = { write: this.log.bind(this) }
     this.stderr = { write: this.log.bind(this) }
-    this.output = ""
+    this.output = ''
     this.title = humanize(activity.type)
     this.sourceDir = sourceDir
     this.skipped = false
     this.warned = false
     this.console = {
-      log: text => this.stdout.write(text + "\n")
+      log: text => this.stdout.write(text + '\n')
     }
   }
 
   error(errorMessage: string) {
-    debug("error: " + errorMessage)
+    debug('error: ' + errorMessage)
     this.statsCounter.error()
   }
 
@@ -55,7 +55,7 @@ export default class Formatter {
   }
 
   skip(message: string) {
-    debug("skipping: " + message)
+    debug('skipping: ' + message)
     this.skipped = true
     this.statsCounter.skip()
   }
@@ -70,7 +70,7 @@ export default class Formatter {
   }
 
   warning(warningMessage: string) {
-    debug("warning: " + warningMessage)
+    debug('warning: ' + warningMessage)
     this.warned = true
     this.statsCounter.warning()
   }

@@ -1,4 +1,4 @@
-import interpret from "interpret"
+import interpret from 'interpret'
 
 // Returns all possible filename extensions that handler functions can have
 export default function javascriptExtensions(): string[] {

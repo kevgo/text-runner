@@ -1,5 +1,5 @@
-import UnprintedUserError from "../../../errors/unprinted-user-error"
-import parseHtmlAttributes from "./parse-html-attributes"
+import UnprintedUserError from '../../../errors/unprinted-user-error'
+import parseHtmlAttributes from './parse-html-attributes'
 
 const attrRE = /<(\/?\w+)\s*(.*)>/
 

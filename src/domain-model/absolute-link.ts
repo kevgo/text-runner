@@ -1,12 +1,12 @@
-import path from "path"
-import Publications from "../configuration/publications"
-import addLeadingDotUnlessEmpty from "../helpers/add-leading-dot-unless-empty"
-import addLeadingSlash from "../helpers/add-leading-slash"
-import removeDoubleSlash from "../helpers/remove-double-slash"
-import straightenLink from "../helpers/straighten-link"
-import unixify from "../helpers/unifixy"
-import AbsoluteFilePath from "./absolute-file-path"
-import RelativeLink from "./relative-link"
+import path from 'path'
+import Publications from '../configuration/publications'
+import addLeadingDotUnlessEmpty from '../helpers/add-leading-dot-unless-empty'
+import addLeadingSlash from '../helpers/add-leading-slash'
+import removeDoubleSlash from '../helpers/remove-double-slash'
+import straightenLink from '../helpers/straighten-link'
+import unixify from '../helpers/unifixy'
+import AbsoluteFilePath from './absolute-file-path'
+import RelativeLink from './relative-link'
 
 // Represents a link to another Markdown file,
 // all the way from the root directory
@@ -20,13 +20,13 @@ export default class AbsoluteLink {
 
   // Returns the anchor part of this link
   anchor(): string {
-    return this.value.split("#")[1] || ""
+    return this.value.split('#')[1] || ''
   }
 
   // Returns a new link that consists of this link
   // with the given relative link appended
   append(segment: RelativeLink): AbsoluteLink {
-    return new AbsoluteLink(straightenLink(this.value + "/" + segment.value))
+    return new AbsoluteLink(straightenLink(this.value + '/' + segment.value))
   }
 
   // Returns a link to the containing directory
@@ -36,12 +36,12 @@ export default class AbsoluteLink {
       return withoutAnchor
     }
     return new AbsoluteLink(
-      withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1)
+      withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf('/') + 1)
     )
   }
 
   hasAnchor(): boolean {
-    return this.anchor() !== ""
+    return this.anchor() !== ''
   }
 
   // Returns whether this link has the given extension
@@ -51,7 +51,7 @@ export default class AbsoluteLink {
 
   // Returns whether this link points to a directory
   isLinkToDirectory(): boolean {
-    return this.value.endsWith("/")
+    return this.value.endsWith('/')
   }
 
   // Returns the file path that this link has on the local filesystem
@@ -62,7 +62,7 @@ export default class AbsoluteLink {
       : new AbsoluteFilePath(this.urlDecoded().withoutAnchor().value)
 
     // append the default file
-    if (result.extName() === "" && defaultFile) {
+    if (result.extName() === '' && defaultFile) {
       result = result.append(defaultFile)
     }
     return result
@@ -71,7 +71,7 @@ export default class AbsoluteLink {
   // Returns a link where the old enclosing directory is replaced
   // with the new enclosing directory
   rebase(oldPath: string, newPath: string): AbsoluteLink {
-    const re = new RegExp("^" + oldPath)
+    const re = new RegExp('^' + oldPath)
     return new AbsoluteLink(this.value.replace(re, newPath))
   }
 
@@ -81,12 +81,12 @@ export default class AbsoluteLink {
 
   // Returns a link that contains the given anchor
   withAnchor(anchor: string): AbsoluteLink {
-    return new AbsoluteLink(this.withoutAnchor().value + "#" + anchor)
+    return new AbsoluteLink(this.withoutAnchor().value + '#' + anchor)
   }
 
   // Returns another AbsoluteLink instance that uses the given file extension
   withExtension(newExtension: string): AbsoluteLink {
-    const extRE = new RegExp(path.extname(this.value) + "$")
+    const extRE = new RegExp(path.extname(this.value) + '$')
     return new AbsoluteLink(
       this.value.replace(extRE, addLeadingDotUnlessEmpty(newExtension))
     )
@@ -94,6 +94,6 @@ export default class AbsoluteLink {
 
   // Returns a link that is this link without the anchor
   withoutAnchor(): AbsoluteLink {
-    return new AbsoluteLink(this.value.split("#")[0])
+    return new AbsoluteLink(this.value.split('#')[0])
   }
 }

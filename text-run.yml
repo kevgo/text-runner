@@ -1,9 +1,9 @@
-files: "{*.md,documentation/**/*.md}"
-exclude: "documentation/examples"
+files: '{*.md,documentation/**/*.md}'
+exclude: 'documentation/examples'
 format: dot
 useSystemTempDirectory: true
 
 actions:
   runConsoleCommand:
     globals:
-      "text-run": "bin/text-run"
+      'text-run': 'bin/text-run'

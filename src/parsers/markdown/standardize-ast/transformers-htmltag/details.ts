@@ -1,8 +1,8 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
-import AstNode from "../../../ast-node"
-import AstNodeList from "../../../ast-node-list"
-import OpenTagTracker from "../../helpers/open-tag-tracker"
-import parseHtmlTag from "../../helpers/parse-html-tag"
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
+import AstNode from '../../../ast-node'
+import AstNodeList from '../../../ast-node-list'
+import OpenTagTracker from '../../helpers/open-tag-tracker'
+import parseHtmlTag from '../../helpers/parse-html-tag'
 
 export default function transformDetailsTag(
   node: any,
@@ -18,11 +18,11 @@ export default function transformDetailsTag(
   )
   const resultNode = new AstNode({
     attributes,
-    content: "",
+    content: '',
     file,
     line,
     tag,
-    type: "details_open"
+    type: 'details_open'
   })
   openTags.add(resultNode)
   result.pushNode(resultNode)

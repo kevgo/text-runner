@@ -1,7 +1,7 @@
-import chalk from "chalk"
-import path from "path"
-import printCodeFrame from "../helpers/print-code-frame"
-import Formatter from "./formatter"
+import chalk from 'chalk'
+import path from 'path'
+import printCodeFrame from '../helpers/print-code-frame'
+import Formatter from './formatter'
 
 export default class DotFormatter extends Formatter {
   // A minimalistic formatter, prints dots for each check
@@ -25,16 +25,16 @@ export default class DotFormatter extends Formatter {
 
   skip(message: string) {
     super.skip(message)
-    process.stdout.write(chalk.cyan("."))
+    process.stdout.write(chalk.cyan('.'))
   }
 
   success() {
     super.success()
-    process.stdout.write(chalk.green("."))
+    process.stdout.write(chalk.green('.'))
   }
 
   warning(warningMessage: string) {
     super.warning(warningMessage)
-    process.stdout.write(chalk.magenta("."))
+    process.stdout.write(chalk.magenta('.'))
   }
 }

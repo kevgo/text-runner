@@ -1,10 +1,10 @@
-import deb from "debug"
-import mkdirp from "mkdirp"
-import path from "path"
-import tmp from "tmp"
-import UnprintedUserError from "../errors/unprinted-user-error"
+import deb from 'debug'
+import mkdirp from 'mkdirp'
+import path from 'path'
+import tmp from 'tmp'
+import UnprintedUserError from '../errors/unprinted-user-error'
 
-const debug = deb("text-runner:working-dir")
+const debug = deb('text-runner:working-dir')
 
 type workingDirSetting = string | boolean
 
@@ -17,10 +17,10 @@ export default function createWorkingDir(configSetting: workingDirSetting) {
 }
 
 function getWorkingDirPath(setting): string {
-  if (typeof setting === "string") {
+  if (typeof setting === 'string') {
     return setting
   } else if (setting === false) {
-    return path.join(process.cwd(), "tmp")
+    return path.join(process.cwd(), 'tmp')
   } else if (setting === true) {
     return tmp.dirSync().name
   } else {

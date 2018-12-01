@@ -1,9 +1,9 @@
-import AbsoluteFilePath from "../../../../domain-model/absolute-file-path"
-import pretendToUse from "../../../../helpers/pretend-to-use"
-import AstNode from "../../../ast-node"
-import AstNodeList from "../../../ast-node-list"
-import OpenTagTracker from "../../helpers/open-tag-tracker"
-import parseHtmlAttributes from "../../helpers/parse-html-attributes"
+import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
+import pretendToUse from '../../../../helpers/pretend-to-use'
+import AstNode from '../../../ast-node'
+import AstNodeList from '../../../ast-node-list'
+import OpenTagTracker from '../../helpers/open-tag-tracker'
+import parseHtmlAttributes from '../../helpers/parse-html-attributes'
 
 const divRegex = /<div([^>]*)>([\s\S]*)<\/div>/m
 
@@ -20,8 +20,8 @@ export default async function transformDiv(
     content: divMatch[2],
     file,
     line,
-    tag: "div",
-    type: "div"
+    tag: 'div',
+    type: 'div'
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

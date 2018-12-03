@@ -4,6 +4,7 @@ import { Configuration } from './configuration'
 import deb from 'debug'
 import camelCase from 'just-camel-case'
 import YAML from 'yamljs'
+import AbsoluteFilePath from '../domain-model/absolute-file-path'
 import DetailedFormatter from '../formatters/detailed-formatter'
 import getFormatterClass from './get-formatter-class'
 import Publications from './publications'
@@ -27,7 +28,7 @@ const defaultValues: Configuration = {
 
 // Reads documentation and
 export default function loadConfiguration(
-  configFilePath: string,
+  configFilePath: AbsoluteFilePath,
   constructorArgs: CliArgTypes
 ): Configuration {
   let fileData: any = {}

@@ -1,12 +1,15 @@
 import chalk from 'chalk'
 import fs from 'fs'
 import { CliArgTypes } from '../cli/cli-arg-types'
+import AbsoluteFilePath from '../domain-model/absolute-file-path'
 import PrintedUserError from './../errors/printed-user-error'
 
 // Returns the filename for the config file based on the given
-export default function(constructorArgs: CliArgTypes): string {
+export default function(constructorArgs: CliArgTypes): AbsoluteFilePath {
   if (constructorArgs.config == null) {
-    return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
+    return new AbsoluteFilePath(
+      fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
+    )
   }
   if (!fs.existsSync(constructorArgs.config)) {
     console.log(
@@ -16,5 +19,5 @@ export default function(constructorArgs: CliArgTypes): string {
     )
     throw new PrintedUserError()
   }
-  return constructorArgs.config
+  return new AbsoluteFilePath(constructorArgs.config)
 }

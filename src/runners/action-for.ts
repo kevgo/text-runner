@@ -39,7 +39,7 @@ function errorUnknownActivityType(activity: Activity): Action {
   for (const actionName of Object.keys(builtinActions()).sort()) {
     errorText += `* ${actionName}\n`
   }
-  if (Object.keys(customActions).length > 0) {
+  if (Object.keys(customActions()).length > 0) {
     errorText += '\nYou defined these custom activity types:\n'
     for (const actionName of Object.keys(customActions()).sort()) {
       errorText += `* ${actionName}\n`
@@ -70,7 +70,7 @@ function loadCustomActions(): FunctionRepo {
   for (const filename of customActionFilePaths()) {
     rechoir.prepare(interpret.jsVariants, filename)
     const actionName = getActionName(filename)
-    if (builtinActions[actionName]) {
+    if (builtinActions()[actionName]) {
       throw new UnprintedUserError(
         `redefining internal action '${actionName}'`,
         filename,

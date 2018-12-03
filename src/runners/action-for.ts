@@ -3,6 +3,7 @@ import { Action } from '../runners/action'
 
 import chalk from 'chalk'
 import interpret from 'interpret'
+import memoize from 'memoize-one'
 import rechoir from 'rechoir'
 import UnprintedUserError from '../errors/unprinted-user-error'
 import getActionName from '../helpers/action-name'
@@ -13,14 +14,18 @@ interface FunctionRepo {
   [key: string]: Action
 }
 
-const builtinActions = loadBuiltinActions()
-const customActions = loadCustomActions()
+const builtinActions = memoize(function() {
+  return loadBuiltinActions()
+})
+const customActions = memoize(function() {
+  return loadCustomActions()
+})
 
 // Provides the action for the block with the given name
 export default function actionFor(activity: Activity): Action {
   return (
-    builtinActions[activity.type] ||
-    customActions[activity.type] ||
+    builtinActions()[activity.type] ||
+    customActions()[activity.type] ||
     errorUnknownActivityType(activity)
   )
 }
@@ -31,12 +36,12 @@ function errorUnknownActivityType(activity: Activity): Action {
   let errorText = `unknown activity type: ${chalk.red(
     activity.type
   )}\nAvailable built-in activity types:\n`
-  for (const actionName of Object.keys(builtinActions).sort()) {
+  for (const actionName of Object.keys(builtinActions()).sort()) {
     errorText += `* ${actionName}\n`
   }
   if (Object.keys(customActions).length > 0) {
     errorText += '\nYou defined these custom activity types:\n'
-    for (const actionName of Object.keys(customActions).sort()) {
+    for (const actionName of Object.keys(customActions()).sort()) {
       errorText += `* ${actionName}\n`
     }
   } else {

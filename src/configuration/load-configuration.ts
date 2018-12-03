@@ -5,6 +5,7 @@ import deb from 'debug'
 import camelCase from 'just-camel-case'
 import YAML from 'yamljs'
 import DetailedFormatter from '../formatters/detailed-formatter'
+import { Nominal } from '../helpers/nominal'
 import getFormatterClass from './get-formatter-class'
 import Publications from './publications'
 
@@ -25,9 +26,11 @@ const defaultValues: Configuration = {
   workspace: '' // will be populated later
 }
 
-// Reads documentation and
+export type ConfigFilePath = Nominal<string, 'ConfigFilePath1'>
+
+// Reads the configuration file
 export default function loadConfiguration(
-  configFilePath: string,
+  configFilePath: ConfigFilePath,
   constructorArgs: CliArgTypes
 ): Configuration {
   let fileData: any = {}

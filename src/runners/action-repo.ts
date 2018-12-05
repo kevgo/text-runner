@@ -8,7 +8,6 @@ import UnprintedUserError from '../errors/unprinted-user-error'
 import getActionName from '../helpers/action-name'
 import builtinActionFilePaths from '../helpers/builtin-action-filepaths'
 import customActionFilePaths from '../helpers/custom-action-filepaths'
-import { setWorldConstructor } from 'cucumber'
 
 interface FunctionRepo {
   [key: string]: Action

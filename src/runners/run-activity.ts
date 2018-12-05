@@ -6,7 +6,7 @@ import { ActionArgs } from './action-args'
 import util from 'util'
 import PrintedUserError from '../errors/printed-user-error'
 import LinkTargetList from '../link-targets/link-target-list'
-import actionFor from './action-for'
+import actionRepo from './action-repo'
 import StatsCounter from './stats-counter'
 
 export default (async function runActivity(
@@ -29,7 +29,7 @@ export default (async function runActivity(
     nodes: activity.nodes
   }
   try {
-    const action = actionFor(activity)
+    const action = actionRepo.actionFor(activity)
     if (action.length === 1) {
       await runSyncOrPromiseFunc(action, args)
     } else {

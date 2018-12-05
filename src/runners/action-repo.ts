@@ -2,12 +2,14 @@ import { Activity } from '../activity-list/activity'
 import { Action } from './action'
 
 import chalk from 'chalk'
+import glob from 'glob'
 import interpret from 'interpret'
+import path from 'path'
 import rechoir from 'rechoir'
 import UnprintedUserError from '../errors/unprinted-user-error'
 import getActionName from '../helpers/action-name'
-import builtinActionFilePaths from '../helpers/builtin-action-filepaths'
-import customActionFilePaths from '../helpers/custom-action-filepaths'
+import javascriptExtensions from '../helpers/javascript-extensions'
+import trimExtension from '../helpers/trim-extension'
 
 interface FunctionRepo {
   [key: string]: Action
@@ -59,7 +61,7 @@ class ActionRepo {
 
   private loadBuiltinActions(): FunctionRepo {
     const result = {}
-    for (const filename of builtinActionFilePaths()) {
+    for (const filename of this.builtinActionFilePaths()) {
       result[getActionName(filename)] = require(filename).default
     }
     return result
@@ -68,7 +70,7 @@ class ActionRepo {
   private loadCustomActions(): FunctionRepo {
     const result = {}
     require('babel-register')
-    for (const filename of customActionFilePaths()) {
+    for (const filename of this.customActionFilePaths()) {
       rechoir.prepare(interpret.jsVariants, filename)
       const actionName = getActionName(filename)
       if (this.builtinActions[actionName]) {
@@ -81,6 +83,21 @@ class ActionRepo {
       result[actionName] = require(filename)
     }
     return result
+  }
+
+  private builtinActionFilePaths(): string[] {
+    return glob
+      .sync(path.join(__dirname, '..', 'actions', '*.js'))
+      .map(trimExtension)
+  }
+
+  private customActionFilePaths(): string[] {
+    const pattern = path.join(
+      process.cwd(),
+      'text-run',
+      `*.@(${javascriptExtensions().join('|')})`
+    )
+    return glob.sync(pattern)
   }
 }
 

@@ -65,7 +65,10 @@
     "remark-lint": "6.0.4",
     "remark-preset-lint-recommended": "3.0.2",
     "remove-value": "1.0.0",
+    "semantic-release": "15.12.4",
+    "semantic-release-cli": "4.0.12",
     "shelljs": "0.8.3",
+    "standard-version": "4.4.0",
     "strip-ansi": "5.0.0",
     "tertestrial": "0.3.2",
     "ts-node": "7.0.1",
@@ -92,7 +95,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Originate/text-runner.git"
+    "url": "https://github.com/Originate/text-runner.git"
   },
   "scripts": {
     "prepublishOnly": "make build",

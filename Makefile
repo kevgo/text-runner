@@ -86,8 +86,8 @@ else
 	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
 endif
 
-deploy: build  # deploys a new version to npmjs.org
-	npm publish
+deploy: build  # deploys a new version to npmjs.com
+	semantic-release
 
 docs: build   # runs the documentation tests
 ifndef FILE

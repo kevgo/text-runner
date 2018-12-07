@@ -1,5 +1,8 @@
 # TextRunner Developer Documentation
 
+Thanks for contributing to Text-Runner!
+All contributions, no matter how big or small, are welcome!
+
 ## Installation for development
 
 You need to have installed:
@@ -8,10 +11,29 @@ You need to have installed:
 - [Yarn](https://yarnpkg.com)
 - Gnu Make - running `make` should work on your machine
 
-To setup the codebase:
+To work on the codebase:
 
 - run `yarn`
 - add `./bin` and `./node_modules/.bin` to your PATH
+
+## Style
+
+Text-Runner is written in [TypeScript](https://www.typescriptlang.org)
+and formatted by [Prettier](https://prettier.io).
+
+Commit messages must follow the
+[Conventional Commits Specification](https://www.conventionalcommits.org).
+The following scopes are available for commit messages:
+
+- **actions:** the built-in actions
+- **CLI:** the CLI
+- **commands:** the available commands
+- **configuration:** the configuration
+- **ecosystem:** the developer ecosystem
+- **core:**: work on the Text-Runner engine
+- **devops:** for deployment and CI
+- **formatters:** work on formatters
+- **markdown:** work on input, like the Markdown parser
 
 ## Testing
 
@@ -111,6 +133,6 @@ that converts the configuration into test results over several steps:
 
 ## Deployment
 
-- update the version in [package.json](package.json) in a branch and ship it
-- create a new release on Github
-- run <code textrun="verify-make-command">make deploy</code>
+- for now experiment with `standard-version` until generating CHANGELOG.md fully works
+- then possibly use `semantic-release`
+- later fold this into the <code textrun="verify-make-command">make deploy</code> command

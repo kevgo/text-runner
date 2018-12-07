@@ -1,5 +1,8 @@
 # TextRunner Developer Documentation
 
+Thanks for contributing to Text-Runner!
+All contributions, no matter how big or small, are welcome!
+
 ## Installation for development
 
 You need to have installed:
@@ -8,10 +11,28 @@ You need to have installed:
 - [Yarn](https://yarnpkg.com)
 - Gnu Make - running `make` should work on your machine
 
-To setup the codebase:
+To work on the codebase:
 
 - run `yarn`
 - add `./bin` and `./node_modules/.bin` to your PATH
+
+## Style
+
+Text-Runner is written in [TypeScript](https://www.typescriptlang.org)
+and formatted by [Prettier](https://prettier.io).
+
+Commit messages must follow the
+[Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
+The following scopes are available for commit messages:
+
+- **actions**: the built-in actions
+- **API**: the API
+- **CLI**: the CLI
+- **commands**: the available commands
+- **core**: work on the Text-Runner engine
+- **devops**: for deployment and CI
+- **formatters**: work on formatters
+- **markdown**: work on input, like the Markdown parser
 
 ## Testing
 
@@ -35,27 +56,6 @@ Not all permutations of that are tested.
 - run all linters: <code textrun="verify-make-command">make lint</code>
 - run JavaScript linters: <code textrun="verify-make-command">make lintjs</code>
 - run Markdown linters: <code textrun="verify-make-command">make lintmd</code>
-
-## Editor setup
-
-Set up your editor with the following configuration:
-
-- linters: run `flow`, then `standard`
-- fixers: run `prettier_standard`
-  (which runs [Prettier](https://github.com/prettier/prettier),
-  then [StandardJS](https://standardjs.com)
-
-Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
-
-```vim
-let g:ale_linters = {
-\   'javascript': ['flow', 'standard']
-\}
-let g:ale_fixers = {
-\   'javascript': ['prettier_standard']
-\}
-let g:ale_javascript_prettier_use_local_config = 1
-```
 
 ## Terminology
 

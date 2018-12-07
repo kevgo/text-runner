@@ -15,16 +15,7 @@ async function main() {
   const errors: Error[] = await textRunner(cliArgs)
   for (const err of errors) {
     if (err instanceof UnprintedUserError) {
-      const uErr = err as UnprintedUserError
-      if (uErr.filePath && uErr.line != null) {
-        console.log(
-          chalk.red(`${uErr.filePath}:${uErr.line} -- ${uErr.message || ''}`)
-        )
-      } else {
-        console.log(chalk.red(uErr.message))
-      }
-      const filePath = path.join(process.cwd(), err.filePath || '')
-      printCodeFrame(console.log, filePath, err.line)
+      printUserError(err)
     } else if (err instanceof PrintedUserError) {
       // nothing to do
     } else {
@@ -34,5 +25,17 @@ async function main() {
   endChildProcesses()
   process.exit(errors.length)
 }
-
 main()
+
+function printUserError(err: UnprintedUserError) {
+  const uErr = err as UnprintedUserError
+  if (uErr.filePath && uErr.line != null) {
+    console.log(
+      chalk.red(`${uErr.filePath}:${uErr.line} -- ${uErr.message || ''}`)
+    )
+  } else {
+    console.log(chalk.red(uErr.message))
+  }
+  const filePath = path.join(process.cwd(), err.filePath || '')
+  printCodeFrame(console.log, filePath, err.line)
+}

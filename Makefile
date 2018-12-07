@@ -87,7 +87,7 @@ else
 endif
 
 deploy: build  # deploys a new version to npmjs.com
-  semantic-release
+	semantic-release
 
 docs: build   # runs the documentation tests
 ifndef FILE

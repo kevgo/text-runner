@@ -123,6 +123,9 @@ lintmd:   # lints markdown files
 lintyml:   # lints yml files
 	node_modules/.bin/prettier -l "*.yml"
 
+release:   # releases a new version to npmjs.com
+  semantic-release
+
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune
 	rm -rf node_modules

@@ -22,7 +22,7 @@ Text-Runner is written in [TypeScript](https://www.typescriptlang.org)
 and formatted by [Prettier](https://prettier.io).
 
 Commit messages must follow the
-[Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
+[Conventional Commits Specification](https://www.conventionalcommits.org).
 The following scopes are available for commit messages:
 
 - **actions:** the built-in actions

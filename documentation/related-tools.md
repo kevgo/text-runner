@@ -6,11 +6,10 @@ or could be viable alternatives to it, depending on your use case:
 
 - [Cucumber](https://cucumber.io):
   Runs tests via a specialized DSL that is optimized for describing features
-  via user stories, acceptance criteria, and example scenarias.
+  via user stories, acceptance criteria, and example scenarios.
   TextRunner and Cucumber complement each other,
   i.e. you would use TextRunner for the end-user facing documentation on your web site
-  and Cucumber for agile, collaborative, behavior-driven day-to-day development,
-  driven by TextRunner.
+  and Cucumber for agile, collaborative, behavior-driven day-to-day development.
 
 - [Gauge](http://getgauge.io):
   a "Cucumber for Markdown".

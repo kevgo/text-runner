@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import util from 'util'
 
 export default (async function addCommand(
   blockName: string | undefined
@@ -7,10 +8,11 @@ export default (async function addCommand(
   if (!blockName) {
     throw new Error('no block name given')
   }
-  if (!fs.existsSync('text-run')) {
-    fs.mkdirSync('text-run')
+  const fileExists = await util.promisify(fs.exists)('text-run')
+  if (!fileExists) {
+    await util.promisify(fs.mkdir)('text-run')
   }
-  fs.writeFileSync(
+  await util.promisify(fs.writeFile)(
     path.join('text-run', blockName + '.js'),
     template(blockName),
     'utf8'

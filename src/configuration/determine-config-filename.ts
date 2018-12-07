@@ -1,14 +1,18 @@
 import chalk from 'chalk'
 import fs from 'fs'
+import util from 'util'
 import { CliArgTypes } from '../cli/cli-arg-types'
 import PrintedUserError from './../errors/printed-user-error'
 
 // Returns the filename for the config file based on the given
-export default function(constructorArgs: CliArgTypes): string {
+export default async function(constructorArgs: CliArgTypes): string {
+  const exists = util.promisify(fs.exists)
   if (constructorArgs.config == null) {
-    return fs.existsSync('text-run.yml') ? 'text-run.yml' : ''
+    const textRunYmlExists = await exists('text-run.yml')
+    return textRunYmlExists ? 'text-run.yml' : ''
   }
-  if (!fs.existsSync(constructorArgs.config)) {
+  const customConfigFileExists = await exists(constructorArgs.config)
+  if (!customConfigFileExists) {
     console.log(
       chalk.red(
         `configuration file ${chalk.cyan(constructorArgs.config)} not found`

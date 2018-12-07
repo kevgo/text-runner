@@ -5,8 +5,9 @@ import eol from 'eol'
 import fs from 'fs'
 import jsdiffConsole from 'jsdiff-console'
 import path from 'path'
+import util from 'util'
 
-export default function(args: ActionArgs) {
+export default async function(args: ActionArgs) {
   const fileName = args.nodes.textInNodeOfType('strong_open')
   let relativeBaseDir = '.'
   if (args.nodes.hasNodeOfType('link_open')) {
@@ -28,7 +29,7 @@ export default function(args: ActionArgs) {
   args.formatter.log(`ls ${filePath}`)
   let actualContent
   try {
-    actualContent = fs.readFileSync(filePath, 'utf8')
+    actualContent = await util.promisify(fs.readFile)(filePath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
       throw new Error(`file ${chalk.cyan(fileName)} not found`)

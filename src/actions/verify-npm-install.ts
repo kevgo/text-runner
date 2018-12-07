@@ -3,11 +3,12 @@ import { ActionArgs } from '../runners/action-args'
 import chalk from 'chalk'
 import jsonfile from 'jsonfile'
 import path from 'path'
+import util from 'util'
 import trimDollar from '../helpers/trim-dollar'
 
-export default function(args: ActionArgs) {
+export default async function(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
-  const pkg = jsonfile.readFileSync(
+  const pkg = await util.promisify(jsonfile.readFile)(
     path.join(args.configuration.sourceDir, 'package.json')
   )
   args.formatter.name(`verify NPM installs ${chalk.cyan(pkg.name)}`)

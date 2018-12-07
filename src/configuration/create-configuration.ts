@@ -1,7 +1,8 @@
 import fs from 'fs'
+import util from 'util'
 
-export default function createConfiguration() {
-  fs.writeFileSync(
+export default async function createConfiguration() {
+  await util.promisify(fs.writeFile)(
     './text-run.yml',
     `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer

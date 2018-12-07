@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+# Unreleased
+
+- switch source code to single-quotes ([fb6d448](https://github.com/Originate/text-runner/commit/fb6d44801720cf3d7ec03f837e838016c283cfe8))
+- use got instead of request ([fb6d448](https://github.com/Originate/text-runner/commit/fb6d44801720cf3d7ec03f837e838016c283cfe8))
+- prettify YML files ([3ba8dd5](https://github.com/Originate/text-runner/commit/3ba8dd5edd83e82efe8fc7e16296c3461be9aa3f))
+
 # 3.6.0 (2018-11-16)
 
 - **core:** switch to TypeScript ([621e290](https://github.com/Originate/text-runner/commits/master?after=621e29099e73fa7bbc818088e003b5d3ade5b916+34))

@@ -25,14 +25,15 @@ Commit messages must follow the
 [Angular Commit Message Conventions](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines).
 The following scopes are available for commit messages:
 
-- **actions**: the built-in actions
-- **API**: the API
-- **CLI**: the CLI
-- **commands**: the available commands
-- **core**: work on the Text-Runner engine
-- **devops**: for deployment and CI
-- **formatters**: work on formatters
-- **markdown**: work on input, like the Markdown parser
+- **actions:** the built-in actions
+- **API:** the API
+- **CLI:** the CLI
+- **commands:** the available commands
+- **ecosystem:** the developer ecosystem
+- **core:**: work on the Text-Runner engine
+- **devops:** for deployment and CI
+- **formatters:** work on formatters
+- **markdown:** work on input, like the Markdown parser
 
 ## Testing
 

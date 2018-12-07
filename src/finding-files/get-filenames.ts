@@ -14,17 +14,19 @@ import removeExcludedFiles from './remove-excluded-files'
 const debug = deb('text-runner:run-command')
 
 // Returns the name of all files/directories that match the given glob
-export default function(config: Configuration): AbsoluteFilePath[] {
-  let filenames = getFiles(config)
+export default async function(
+  config: Configuration
+): Promise<AbsoluteFilePath[]> {
+  let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   debugFilenames(filenames)
   return filenames
 }
 
-function getFiles(config: Configuration): AbsoluteFilePath[] {
+async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
   if (config.fileGlob === '') {
     return allMarkdownFiles(config.fileGlob)
-  } else if (hasDirectory(config.fileGlob)) {
+  } else if (await hasDirectory(config.fileGlob)) {
     return markdownFilesInDir(config.fileGlob)
   } else if (isMarkdownFile(config.fileGlob)) {
     return [new AbsoluteFilePath(config.fileGlob)]

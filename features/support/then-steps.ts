@@ -12,15 +12,15 @@ Then('I see usage instructions', function() {
   this.verifyPrintedUsageInstructions()
 })
 
-Then('it creates a directory {string}', function(directoryPath) {
-  fs.statSync(path.join(this.rootDir, directoryPath))
+Then('it creates a directory {string}', async function(directoryPath) {
+  await fs.stat(path.join(this.rootDir, directoryPath))
 })
 
-Then('it creates the file {string} with content:', function(
+Then('it creates the file {string} with content:', async function(
   filename,
   expectedContent
 ) {
-  const actualContent = fs.readFileSync(path.join(this.rootDir, filename), {
+  const actualContent = await fs.readFile(path.join(this.rootDir, filename), {
     encoding: 'utf8'
   })
   try {
@@ -82,24 +82,26 @@ Then('the call fails with the error:', function(expectedError) {
   this.verifyCallError(expectedError)
 })
 
-Then('the {string} directory is now deleted', function(directoryPath) {
+Then('the {string} directory is now deleted', async function(directoryPath) {
   try {
-    fs.statSync(path.join(this.rootDir, directoryPath))
+    await fs.stat(path.join(this.rootDir, directoryPath))
     throw new Error(`file '${directoryPath}' still exists`)
   } catch (e) {}
 })
 
 Then(
   /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/,
-  function(fileName, expectedContent) {
+  async function(fileName, expectedContent) {
     expect(
-      fs.readFileSync(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()
+      await fs.readFile(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()
     ).to.equal(expectedContent.trim())
   }
 )
 
-Then('the test workspace now contains a directory {string}', function(name) {
-  const stat = fs.statSync(path.join(this.rootDir, 'tmp', name))
+Then('the test workspace now contains a directory {string}', async function(
+  name
+) {
+  const stat = await fs.stat(path.join(this.rootDir, 'tmp', name))
   expect(stat.isDirectory()).to.be.true
 })
 
@@ -112,8 +114,8 @@ Then('there are no child processes running', async function() {
   expect(children).to.have.length(1) // 1 is okay, it's the `ps` process used to determine the child processes
 })
 
-Then('there is no {string} folder', function(name) {
-  if (fs.existsSync(path.join(this.rootDir, name))) {
+Then('there is no {string} folder', async function(name) {
+  if (await fs.pathExists(path.join(this.rootDir, name))) {
     throw new Error(`Expected folder ${name} to not be there, but it is`)
   }
 })

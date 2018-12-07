@@ -1,8 +1,10 @@
 import fs from 'fs'
+import util from 'util'
 
-export default function hasDirectory(dirname: string): boolean {
+export default async function hasDirectory(dirname: string): boolean {
   try {
-    return fs.statSync(dirname).isDirectory()
+    const fileStat = await util.promisify(fs.stat)(dirname)
+    return fileStat.isDirectory()
   } catch (e) {
     return false
   }

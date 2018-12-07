@@ -156,7 +156,7 @@ ${actual}
     )
   }
 
-  this.verifyRanOnlyTests = filenames => {
+  this.verifyRanOnlyTests = async filenames => {
     filenames = flatten(filenames)
     const standardizedOutput = this.output.replace(/\\/g, '/')
 
@@ -168,7 +168,7 @@ ${actual}
     // verify all other tests have not run
     const filesShouldntRun = glob
       .sync(`${this.rootDir}/**`)
-      .filter(file => fs.statSync(file).isFile())
+      .filter(async file => (await fs.stat(file)).isFile())
       .map(file => path.relative(this.rootDir, file))
       .filter(file => file)
       .map(file => file.replace(/\\/g, '/'))
@@ -203,9 +203,10 @@ function runWithTestCoverage(command: string) {
 }
 
 // store the test coverage data before running the next test that would overwrite it
-function storeTestCoverage() {
+async function storeTestCoverage() {
   const outputPath = path.join(process.cwd(), '.nyc_output')
-  if (fs.existsSync(outputPath)) {
-    fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+  if (await fs.pathExists(outputPath)) {
+    const targetPath = path.join(process.cwd(), '.nyc_output_cli', uuid())
+    await fs.move(outputPath, targetPath)
   }
 }

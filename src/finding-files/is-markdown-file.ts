@@ -1,10 +1,12 @@
 import fs from 'fs'
 import path from 'path'
+import util from 'util'
 
-export default function isMarkdownFile(filename: string): boolean {
+export default async function(filename: string): Promise<boolean> {
   try {
     const filepath = path.join(process.cwd(), filename)
-    return filename.endsWith('.md') && fs.statSync(filepath).isFile()
+    const fileStat = await util.promisify(fs.stat)(filepath)
+    return filename.endsWith('.md') && fileStat.isFile()
   } catch (e) {
     return false
   }

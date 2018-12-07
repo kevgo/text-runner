@@ -132,6 +132,8 @@ that converts the configuration into test results over several steps:
 
 ## Deployment
 
-- update the version in [package.json](package.json) in a branch and ship it
+- run <code textrun="verify-make-command">make deploy</code> -->
+
+<!-- - update the version in [package.json](package.json) in a branch and ship it
 - create a new release on Github
-- run <code textrun="verify-make-command">make deploy</code>
+- run <code textrun="verify-make-command">make deploy</code> -->

@@ -86,8 +86,8 @@ else
 	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
 endif
 
-deploy: build  # deploys a new version to npmjs.org
-	npm publish
+deploy: build  # deploys a new version to npmjs.com
+  semantic-release
 
 docs: build   # runs the documentation tests
 ifndef FILE
@@ -122,9 +122,6 @@ lintmd:   # lints markdown files
 
 lintyml:   # lints yml files
 	node_modules/.bin/prettier -l "*.yml"
-
-release:   # releases a new version to npmjs.com
-  semantic-release
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

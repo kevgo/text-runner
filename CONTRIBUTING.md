@@ -36,27 +36,6 @@ Not all permutations of that are tested.
 - run JavaScript linters: <code textrun="verify-make-command">make lintjs</code>
 - run Markdown linters: <code textrun="verify-make-command">make lintmd</code>
 
-## Editor setup
-
-Set up your editor with the following configuration:
-
-- linters: run `flow`, then `standard`
-- fixers: run `prettier_standard`
-  (which runs [Prettier](https://github.com/prettier/prettier),
-  then [StandardJS](https://standardjs.com)
-
-Vim users can use this configuration option for [Ale](https://github.com/w0rp/ale):
-
-```vim
-let g:ale_linters = {
-\   'javascript': ['flow', 'standard']
-\}
-let g:ale_fixers = {
-\   'javascript': ['prettier_standard']
-\}
-let g:ale_javascript_prettier_use_local_config = 1
-```
-
 ## Terminology
 
 TextRunner runs _active documentation_, i.e. documentation that can be executed.

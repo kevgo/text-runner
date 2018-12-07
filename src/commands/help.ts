@@ -18,14 +18,23 @@ USAGE: ${chalk.bold('text-run [<options>] <command>')}
 COMMANDS
   ${chalk.bold(
     'run'
-  )} [<filename>]  tests the entire documentation, or only the given file/folder
-  ${chalk.bold('add')} <filename>    scaffolds a new block type handler
-  ${chalk.bold('setup')}             creates an example configuration file
-  ${chalk.bold('version')}           shows the currently installed version
-  ${chalk.bold('help')}              shows this help screen
+  )} [<filename>]      runs all tests on the given file/folder or entire documentation
+  ${chalk.bold(
+    'dynamic'
+  )} [<filename>]  runs only the programmatic tests, skips checking links
+  ${chalk.bold(
+    'static'
+  )} [<filename>]   checks only the links, skips programmatic tests
+
+  ${chalk.bold('setup')}                 creates an example configuration file
+  ${chalk.bold('add')} <filename>        scaffolds a new block type handler
+
+  ${chalk.bold('help')}                  shows this help screen
+  ${chalk.bold('version')}               shows the currently installed version
+  ${chalk.bold('debug')}                 shows debug data
 
 OPTIONS
-  ${chalk.bold('--config')}          provide a custom configuration filename
-  ${chalk.bold('--offline')}         don't check external links
+  ${chalk.bold('--config')}              provide a custom configuration filename
+  ${chalk.bold('--offline')}             don't check external links
 `
 }

@@ -26,9 +26,9 @@ Commit messages must follow the
 The following scopes are available for commit messages:
 
 - **actions:** the built-in actions
-- **API:** the API
 - **CLI:** the CLI
 - **commands:** the available commands
+- **configuration:** the configuration
 - **ecosystem:** the developer ecosystem
 - **core:**: work on the Text-Runner engine
 - **devops:** for deployment and CI

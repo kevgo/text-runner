@@ -18,14 +18,14 @@ export default async function createWorkingDir(
   return workingDir
 }
 
-async function getWorkingDirPath(setting): Promise<string> {
+async function getWorkingDirPath(setting: any): Promise<string> {
   if (typeof setting === 'string') {
     return setting
   } else if (setting === false) {
     return path.join(process.cwd(), 'tmp')
   } else if (setting === true) {
     const tmpDir = await tmp.dir()
-    return tmpDir.name
+    return tmpDir.path
   } else {
     throw new UnprintedUserError(
       `unknown 'useSystemTempDirectory' setting: ${setting}`

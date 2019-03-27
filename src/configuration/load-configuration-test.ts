@@ -13,9 +13,9 @@ describe('loadConfiguration', function() {
   context('config file given', function() {
     it('returns the value from the config file', async function() {
       this.configDir = await tmp.dir()
-      this.configFilePath = path.join(this.configDir.name, 'text-run.yml')
+      this.configFilePath = path.join(this.configDir.path, 'text-run.yml')
       await fs.writeFile(this.configFilePath, "files: '*.md'")
-      const result = loadConfiguration('', { command: '' })
+      const result = loadConfiguration(this.configFilePath, { command: '' })
       expect(result.fileGlob).to.equal('*.md')
     })
   })

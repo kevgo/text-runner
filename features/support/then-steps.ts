@@ -92,9 +92,11 @@ Then('the {string} directory is now deleted', async function(directoryPath) {
 Then(
   /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/,
   async function(fileName, expectedContent) {
-    expect(
-      await fs.readFile(path.join(this.rootDir, 'tmp', fileName), 'utf8').trim()
-    ).to.equal(expectedContent.trim())
+    const actualContent = await fs.readFile(
+      path.join(this.rootDir, 'tmp', fileName),
+      'utf8'
+    )
+    expect(actualContent.trim()).to.equal(expectedContent.trim())
   }
 )
 

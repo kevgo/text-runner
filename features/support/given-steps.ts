@@ -22,8 +22,7 @@ Given('a runnable file {string}', async function(filePath) {
   const subdir = path.dirname(filePath)
   if (subdir !== '.') {
     const subdirPath = path.join(this.rootDir, subdir)
-    const subDirExists = await fs.existsSync(subdirPath)
-    if (!subDirExists) {
+    if (!(await fs.existsSync(subdirPath))) {
       await fs.mkdir(subdirPath)
     }
   }

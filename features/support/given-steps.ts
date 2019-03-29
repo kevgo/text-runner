@@ -37,7 +37,7 @@ Given(
   function() {
     fs.writeFileSync(
       path.join(this.rootDir, '1.md'),
-      `<code textrun="cd">.</code>`
+      '<code textrun="cd">.</code>'
     )
   }
 )

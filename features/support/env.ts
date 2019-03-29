@@ -10,8 +10,7 @@ setDefaultTimeout(30000)
 
 Before(async function() {
   this.rootDir = path.join(process.cwd(), 'tmp')
-  const rootDirExists = await fs.existsSync(this.rootDir)
-  if (rootDirExists) {
+  if (await fs.existsSync(this.rootDir)) {
     rimraf.sync(this.rootDir)
   }
   await fs.mkdir(this.rootDir)

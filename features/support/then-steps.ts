@@ -85,8 +85,11 @@ Then('the call fails with the error:', function(expectedError) {
 Then('the {string} directory is now deleted', async function(directoryPath) {
   try {
     await fs.stat(path.join(this.rootDir, directoryPath))
-    throw new Error(`file '${directoryPath}' still exists`)
-  } catch (e) {}
+  } catch (e) {
+    // we expect an exception here since the directory shouldn't exist
+    return
+  }
+  throw new Error(`file '${directoryPath}' still exists`)
 })
 
 Then(

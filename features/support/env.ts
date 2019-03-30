@@ -8,10 +8,19 @@ import util from 'util'
 // need such a high timeout because test coverage takes time to start up
 setDefaultTimeout(30000)
 
-Before(function() {
+Before(async function() {
   this.rootDir = path.join(process.cwd(), 'tmp')
-  if (fs.existsSync(this.rootDir)) rimraf.sync(this.rootDir)
-  fs.mkdirSync(this.rootDir)
+  let rootDirExists = false
+  try {
+    await fs.stat(this.rootDir)
+    rootDirExists = true
+  } catch (e) {
+    // nothing to do here
+  }
+  if (rootDirExists) {
+    rimraf.sync(this.rootDir)
+  }
+  await fs.mkdir(this.rootDir)
 })
 
 After(async function(scenario) {

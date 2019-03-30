@@ -44,7 +44,7 @@ Given(
   async function() {
     await fs.writeFile(
       path.join(this.rootDir, '1.md'),
-      `<code textrun="cd">.</code>`
+      '<code textrun="cd">.</code>'
     )
   }
 )

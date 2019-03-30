@@ -69,27 +69,6 @@ Given(
   }
 )
 
-// Given("my documentation is starting the {string} example", function(example) {
-//   fs.writeFileSync(
-//     path.join(this.rootDir, "0.md"),
-//     `
-//     <a textrun="start-console-command">
-//       \`\`\`
-//       node ${path.join(
-//         __dirname,
-//         "..",
-//         "..",
-//         "documentation",
-//         "examples",
-//         "long-running",
-//         "server.js"
-//       )}
-//       \`\`\`
-//       </a>
-//       `
-//   )
-// })
-
 Given('my source code contains the directory {string}', function(dirName) {
   mkdirp.sync(path.join(this.rootDir, dirName))
 })

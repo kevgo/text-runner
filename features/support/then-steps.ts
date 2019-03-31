@@ -72,7 +72,9 @@ Then('it runs the console command {string}', async function(command) {
   this.verifyRanConsoleCommand(command)
 })
 
-Then('it runs without errors', function() {})
+Then('it runs without errors', function() {
+  // Nothing to do here
+})
 
 Then('it signals:', function(table) {
   this.verifyOutput(table.rowsHash())

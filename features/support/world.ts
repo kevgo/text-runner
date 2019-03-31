@@ -46,7 +46,7 @@ const World = function() {
     this.process = new ObservableProcess(args)
     await this.process.waitForEnd()
     if (process.env.NODE_ENV === 'coverage') {
-      storeTestCoverage()
+      await storeTestCoverage()
     }
     if (this.verbose) {
       this.output = dimConsole.output
@@ -203,9 +203,12 @@ function runWithTestCoverage(command: string) {
 }
 
 // store the test coverage data before running the next test that would overwrite it
-function storeTestCoverage() {
+async function storeTestCoverage() {
   const outputPath = path.join(process.cwd(), '.nyc_output')
-  if (fs.existsSync(outputPath)) {
-    fs.moveSync(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+  try {
+    await fs.stat(outputPath)
+  } catch (e) {
+    return
   }
+  await fs.move(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
 }

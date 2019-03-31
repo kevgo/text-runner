@@ -1,5 +1,5 @@
 const callArgs = require('../dist/helpers/call-args').default
-const fs = require('fs')
+const fs = require('fs-extra')
 const { ObservableProcess } = require('observable-process')
 const path = require('path')
 const debug = require('debug')('text-runner:run-markdown-in-text-run')
@@ -11,7 +11,7 @@ module.exports = async function(args) {
   const fileContent = markdown.replace(/​/g, '')
   debug(`writing file '${filePath}' with content:`)
   debug(fileContent)
-  fs.writeFileSync(filePath, fileContent)
+  await fs.writeFile(filePath, fileContent)
 
   var textRunPath = path.join(args.configuration.sourceDir, 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'

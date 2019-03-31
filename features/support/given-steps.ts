@@ -73,7 +73,7 @@ Given(
 )
 
 Given(
-  /^I am in a directory that contains the "([^"]*)" example(?: without a configuration file)$/,
+  'I am in a directory that contains the {string} example( without a configuration file)',
   async function(exampleName) {
     await fs.copy(
       path.join('documentation', 'examples', exampleName),

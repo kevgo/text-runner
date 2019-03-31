@@ -18,7 +18,7 @@ export default async function createWorkingDir(
   return workingDir
 }
 
-async function getWorkingDirPath(setting): string {
+async function getWorkingDirPath(setting): Promise<string> {
   if (typeof setting === 'string') {
     return setting
   } else if (setting === false) {

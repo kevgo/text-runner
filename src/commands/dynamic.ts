@@ -16,7 +16,7 @@ async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 0: create working dir
   if (!config.workspace) {
-    config.workspace = createWorkingDir(config.useSystemTempDirectory)
+    config.workspace = await createWorkingDir(config.useSystemTempDirectory)
   }
 
   // step 1: find files

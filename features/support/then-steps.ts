@@ -72,7 +72,9 @@ Then('it runs the console command {string}', async function(command) {
   this.verifyRanConsoleCommand(command)
 })
 
-Then('it runs without errors', function() {})
+Then('it runs without errors', function() {
+  // Nothing to do here
+})
 
 Then('it signals:', function(table) {
   this.verifyOutput(table.rowsHash())
@@ -93,7 +95,7 @@ Then('the {string} directory is now deleted', async function(directoryPath) {
 })
 
 Then(
-  /^the test directory (?:now |still )contains a file "([^"]*)" with content:$/,
+  'the test directory now/still contains a file {string} with content:',
   async function(fileName, expectedContent) {
     const actualContent = await fs.readFile(
       path.join(this.rootDir, 'tmp', fileName),

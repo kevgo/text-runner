@@ -19,7 +19,7 @@ interface ProcessInput {
 
 // Runs the given commands on the console.
 // Waits until the command is finished.
-export default (async function(args: ActionArgs) {
+export default async function(args: ActionArgs) {
   const commandsToRun = args.nodes
     .textInNodeOfType('fence')
     .split('\n')
@@ -50,7 +50,7 @@ export default (async function(args: ActionArgs) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
-})
+}
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {

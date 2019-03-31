@@ -60,7 +60,7 @@ Then('it runs in the current working directory', function() {
   expect(this.output.trim()).to.match(new RegExp(`${this.rootDir}\\b`))
 })
 
-Then(/^it runs(?: only)? the tests in "([^"]*)"$/, function(filename) {
+Then('it runs (only )the tests in {string}', function(filename) {
   this.verifyRanOnlyTests([filename])
 })
 

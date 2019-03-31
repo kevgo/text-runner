@@ -1,7 +1,7 @@
 import deb from 'debug'
 import mkdirp from 'mkdirp'
 import path from 'path'
-import { file } from 'tmp-promise'
+import tmp from 'tmp-promise'
 import UnprintedUserError from '../errors/unprinted-user-error'
 
 const debug = deb('text-runner:working-dir')
@@ -14,7 +14,7 @@ export default async function createWorkingDir(
 ) {
   const workingDir = await getWorkingDirPath(configSetting)
   debug(`using test directory: ${workingDir}`)
-  mkdirp.sync(workingDir)
+  await mkdirp(workingDir)
   return workingDir
 }
 
@@ -24,7 +24,7 @@ async function getWorkingDirPath(setting): Promise<string> {
   } else if (setting === false) {
     return path.join(process.cwd(), 'tmp')
   } else if (setting === true) {
-    const tmpDir = await file()
+    const tmpDir = await tmp.dir()
     return tmpDir.path
   } else {
     throw new UnprintedUserError(

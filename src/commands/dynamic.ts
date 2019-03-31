@@ -11,7 +11,7 @@ import executeSequential from '../runners/execute-sequential'
 import StatsCounter from '../runners/stats-counter'
 import createWorkingDir from '../working-dir/create-working-dir'
 
-async function dynamicCommand(config: Configuration): Promise<Error[]> {
+export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
 
   // step 0: create working dir
@@ -77,5 +77,3 @@ async function dynamicCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 }
-
-export default dynamicCommand

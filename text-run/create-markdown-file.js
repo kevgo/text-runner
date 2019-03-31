@@ -1,7 +1,7 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 
-module.exports = function(args) {
+module.exports = async function(args) {
   const markdown = args.nodes.textInNodeOfType('fence').replace(/​/g, '')
-  fs.writeFileSync(path.join(args.configuration.workspace, '1.md'), markdown)
+  await fs.writeFile(path.join(args.configuration.workspace, '1.md'), markdown)
 }

@@ -2,7 +2,7 @@ import chalk from 'chalk'
 import createConfiguration from '../configuration/create-configuration'
 
 async function setupCommand() {
-  createConfiguration()
+  await createConfiguration()
   console.log(
     chalk.green(
       `Created configuration file ${chalk.cyan(

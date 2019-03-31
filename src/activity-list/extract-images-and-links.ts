@@ -2,7 +2,7 @@ import { ActivityList } from './activity-list'
 
 import AstNodeList from '../parsers/ast-node-list'
 
-export default function(ASTs: AstNodeList[]): ActivityList {
+export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
   const result: ActivityList = []
   for (const AST of ASTs) {
     for (const node of AST) {

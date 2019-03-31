@@ -20,7 +20,7 @@ async function dynamicCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 1: find files
-  const filenames = getFileNames(config)
+  const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(chalk.magenta('no Markdown files found'))
     return []

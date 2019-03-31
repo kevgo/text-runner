@@ -8,7 +8,7 @@ import path from 'path'
 import Formatter from '../formatters/formatter'
 
 // Checks for broken hyperlinks
-export default (async function(args: ActionArgs) {
+export default async function(args: ActionArgs) {
   const node = args.nodes[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
@@ -23,7 +23,7 @@ export default (async function(args: ActionArgs) {
     }
     await checkLocalImage(imagePath, args.configuration)
   }
-})
+}
 
 async function checkLocalImage(imagePath: string, c: Configuration) {
   try {

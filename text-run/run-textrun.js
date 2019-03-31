@@ -1,14 +1,14 @@
-const callArgs = require("../dist/helpers/call-args").default
-const { ObservableProcess } = require("observable-process")
-const path = require("path")
-const RunningConsoleCommand = require("../dist/actions/helpers/running-console-command")
+const callArgs = require('../dist/helpers/call-args').default
+const { ObservableProcess } = require('observable-process')
+const path = require('path')
+const RunningConsoleCommand = require('../dist/actions/helpers/running-console-command')
   .default
 
 module.exports = async function(args) {
-  args.formatter.name("running the created Markdown file in TextRunner")
+  args.formatter.name('running the created Markdown file in TextRunner')
 
-  var textRunPath = path.join(__dirname, "..", "bin", "text-run")
-  if (process.platform === "win32") textRunPath += ".cmd"
+  var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
+  if (process.platform === 'win32') textRunPath += '.cmd'
   const processor = new ObservableProcess({
     commands: callArgs(textRunPath),
     cwd: args.configuration.workspace,

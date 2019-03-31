@@ -1,8 +1,9 @@
-import fs from 'fs'
+import fs from 'fs-extra'
 
-export default function hasDirectory(dirname: string): boolean {
+export default async function hasDirectory(dirname: string): Promise<boolean> {
   try {
-    return fs.statSync(dirname).isDirectory()
+    const stats = await fs.stat(dirname)
+    return stats.isDirectory()
   } catch (e) {
     return false
   }

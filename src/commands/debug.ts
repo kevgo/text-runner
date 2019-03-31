@@ -8,7 +8,7 @@ import AstNodeList from '../parsers/ast-node-list'
 import readAndParseFile from '../parsers/read-and-parse-file'
 
 async function debugCommand(config: Configuration): Promise<Error[]> {
-  const filenames = getFileNames(config)
+  const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     return []
   }

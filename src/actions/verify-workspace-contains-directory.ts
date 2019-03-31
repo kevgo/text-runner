@@ -1,11 +1,11 @@
 import { ActionArgs } from '../runners/action-args'
 
 import chalk from 'chalk'
-import fs from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
 
 // Verifies that the test workspace contains the given directory
-export default function(args: ActionArgs) {
+export default async function(args: ActionArgs) {
   const directory = args.nodes.text()
   const fullPath = path.join(args.configuration.workspace, directory)
   args.formatter.name(
@@ -16,7 +16,7 @@ export default function(args: ActionArgs) {
   args.formatter.log(`ls ${fullPath}`)
   let stats
   try {
-    stats = fs.lstatSync(fullPath)
+    stats = await fs.lstat(fullPath)
   } catch (err) {
     throw new Error(
       `directory ${chalk.cyan(

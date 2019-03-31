@@ -1,22 +1,28 @@
-import fs from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
 
-export default (async function addCommand(
+export default async function addCommand(
   blockName: string | undefined
 ): Promise<Error[]> {
   if (!blockName) {
     throw new Error('no block name given')
   }
-  if (!fs.existsSync('text-run')) {
-    fs.mkdirSync('text-run')
+  let textRunDirExists = true
+  try {
+    await fs.stat('text-run')
+  } catch (e) {
+    textRunDirExists = false
   }
-  fs.writeFileSync(
+  if (!textRunDirExists) {
+    await fs.mkdir('text-run')
+  }
+  await fs.writeFile(
     path.join('text-run', blockName + '.js'),
     template(blockName),
     'utf8'
   )
   return []
-})
+}
 
 function template(filename: string) {
   return `module.exports = async function (activity) {

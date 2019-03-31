@@ -2,7 +2,7 @@ import { ActionArgs } from '../runners/action-args'
 
 import endChildProcessesI from 'end-child-processes'
 import util from 'util'
-import RunningProcess from './helpers/running-process'
+import { RunningProcess } from './helpers/running-process'
 
 const endChildProcesses = util.promisify(endChildProcessesI)
 

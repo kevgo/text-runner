@@ -1,23 +1,22 @@
 import { expect } from 'chai'
-import fs from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
 import AbsoluteFilePath from '../../domain-model/absolute-file-path'
 import parseMarkdown from './parse-markdown'
 
-describe('parseMarkdown', function() {
-  const testCases = fs.readdirSync(path.join(__dirname, 'tests'))
+describe('parseMarkdown', async function() {
+  const testCases = await fs.readdir(path.join(__dirname, 'tests'))
   for (const testCase of testCases) {
     const testCaseDir = path.join(__dirname, 'tests', testCase)
-    const inputs = fs
-      .readdirSync(testCaseDir)
-      .filter(file => file.endsWith('.md'))
-    for (const inputFile of inputs) {
+    const files = await fs.readdir(testCaseDir)
+    const mdFiles = files.filter(file => file.endsWith('.md'))
+    for (const inputFile of mdFiles) {
       let name = testCase
       if (inputFile !== 'input.md') {
         name += `-${path.basename(inputFile, '.md')}`
       }
       it(name, async function() {
-        const input = fs.readFileSync(path.join(testCaseDir, inputFile))
+        const input = await fs.readFile(path.join(testCaseDir, inputFile))
         const expected = require(path.join(testCaseDir, 'result.json'))
         const actual = await parseMarkdown(
           input.toString().trim(),

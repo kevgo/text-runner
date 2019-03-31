@@ -1,7 +1,7 @@
 import deb from 'debug'
 import mkdirp from 'mkdirp'
 import path from 'path'
-import tmp from 'tmp'
+import { file } from 'tmp-promise'
 import UnprintedUserError from '../errors/unprinted-user-error'
 
 const debug = deb('text-runner:working-dir')
@@ -24,8 +24,8 @@ async function getWorkingDirPath(setting): Promise<string> {
   } else if (setting === false) {
     return path.join(process.cwd(), 'tmp')
   } else if (setting === true) {
-    const tmpDir = await tmp.dir()
-    return tmpDir.name
+    const tmpDir = await file()
+    return tmpDir.path
   } else {
     throw new UnprintedUserError(
       `unknown 'useSystemTempDirectory' setting: ${setting}`

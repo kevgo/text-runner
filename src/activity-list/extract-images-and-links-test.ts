@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import AstNodeList from '../parsers/ast-node-list'
-import extractImagesAndLinks from './extract-images-and-links'
+import { extractImagesAndLinks } from './extract-images-and-links'
 
 describe('extractImagesAndLinks', function() {
   it('extracts images', function() {

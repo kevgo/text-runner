@@ -17,10 +17,8 @@ import determineConfigFilename from './configuration/determine-config-filename'
 export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
   let configuration
   try {
-    configuration = loadConfiguration(
-      determineConfigFilename(cmdLineArgs),
-      cmdLineArgs
-    )
+    const configFilename = await determineConfigFilename(cmdLineArgs)
+    configuration = loadConfiguration(configFilename, cmdLineArgs)
     const commandName = cmdLineArgs.command
     let errors
     switch (commandName) {

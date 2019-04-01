@@ -3,7 +3,7 @@ import { Configuration } from '../configuration/configuration'
 import chalk from 'chalk'
 import rimraf from 'rimraf'
 import { extractActivities } from '../activity-list/extract-activities'
-import extractImagesAndLinks from '../activity-list/extract-images-and-links'
+import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
 import getFileNames from '../finding-files/get-filenames'
 import findLinkTargets from '../link-targets/find-link-targets'
 import readAndParseFile from '../parsers/read-and-parse-file'
@@ -17,11 +17,11 @@ async function runCommand(config: Configuration): Promise<Error[]> {
 
   // step 0: create working dir
   if (!config.workspace) {
-    config.workspace = createWorkingDir(config.useSystemTempDirectory)
+    config.workspace = await createWorkingDir(config.useSystemTempDirectory)
   }
 
   // step 1: find files
-  const filenames = getFileNames(config)
+  const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(chalk.magenta('no Markdown files found'))
     return []

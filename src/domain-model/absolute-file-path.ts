@@ -3,7 +3,7 @@
 
 // AbsoluteFilePath represents a complete path from the root directory
 // to a markdown file on the local file system.
-export default class AbsoluteFilePath {
+export class AbsoluteFilePath {
   value: string
 
   constructor(value: string) {

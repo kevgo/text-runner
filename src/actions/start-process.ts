@@ -6,7 +6,7 @@ import { Configuration } from '../configuration/configuration'
 import callArgs from '../helpers/call-args'
 import trimDollar from '../helpers/trim-dollar'
 import { ActionArgs } from '../runners/action-args'
-import RunningProcess from './helpers/running-process'
+import { RunningProcess } from './helpers/running-process'
 
 const debug = deb('start-console-command')
 

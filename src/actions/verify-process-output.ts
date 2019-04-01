@@ -1,6 +1,6 @@
 import UnprintedUserError from '../errors/unprinted-user-error'
 import { ActionArgs } from '../runners/action-args'
-import RunningProcess from './helpers/running-process'
+import { RunningProcess } from './helpers/running-process'
 
 // Waits until the currently running console command produces the given output
 export default async function(args: ActionArgs) {

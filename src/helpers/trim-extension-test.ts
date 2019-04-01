@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import trimExtension from './trim-extension'
+import { trimExtension } from './trim-extension'
 import unixify from './unifixy'
 
 describe('trimExtension', function() {

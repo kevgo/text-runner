@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import parseCliArgs from '../../src/cli/parse-cli-args'
+import { parseCliArgs } from '../../src/cli/parse-cli-args'
 
 describe('parse-cli-args', function() {
   context('with unix <node> call', function() {

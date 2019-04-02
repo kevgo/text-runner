@@ -5,7 +5,7 @@ import chalk from 'chalk'
 import fs from 'fs-extra'
 import got from 'got'
 import path from 'path'
-import Formatter from '../formatters/formatter'
+import { Formatter } from '../formatters/formatter'
 
 // Checks for broken hyperlinks
 export default async function(args: ActionArgs) {

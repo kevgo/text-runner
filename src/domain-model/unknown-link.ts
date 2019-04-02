@@ -6,7 +6,7 @@ import { AbsoluteLink } from './absolute-link'
 import RelativeLink from './relative-link'
 
 // A link that isn't known yet whether it is relative or absolute
-export default class UnknownLink {
+export class UnknownLink {
   value: string
 
   constructor(publicPath: string) {

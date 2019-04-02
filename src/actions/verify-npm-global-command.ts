@@ -2,7 +2,7 @@ import { ActionArgs } from '../runners/action-args'
 
 import chalk from 'chalk'
 import path from 'path'
-import trimDollar from '../helpers/trim-dollar'
+import { trimDollar } from '../helpers/trim-dollar'
 
 export default function(args: ActionArgs) {
   args.formatter.name('NPM module exports the command')

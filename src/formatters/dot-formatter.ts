@@ -1,9 +1,9 @@
 import chalk from 'chalk'
 import path from 'path'
-import printCodeFrame from '../helpers/print-code-frame'
+import { printCodeFrame } from '../helpers/print-code-frame'
 import Formatter from './formatter'
 
-export default class DotFormatter extends Formatter {
+export class DotFormatter extends Formatter {
   // A minimalistic formatter, prints dots for each check
 
   error(errorMessage: string) {

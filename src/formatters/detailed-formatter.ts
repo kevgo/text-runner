@@ -3,7 +3,7 @@ import path from 'path'
 import { printCodeFrame } from '../helpers/print-code-frame'
 import { Formatter } from './formatter'
 
-export default class DetailedFormatter extends Formatter {
+export class DetailedFormatter extends Formatter {
   // A detailed formatter, prints output before the step name
 
   error(errorMessage: string) {

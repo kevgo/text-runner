@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import DetailedFormatter from '../formatters/detailed-formatter'
+import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { DotFormatter } from '../formatters/dot-formatter'
 import getFormatterClass from './get-formatter-class'
 

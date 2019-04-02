@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
-import Publications from './publications'
+import { Publications } from './publications'
 
 describe('Publications', function() {
   describe('forFilePath', function() {

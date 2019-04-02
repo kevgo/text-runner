@@ -1,12 +1,12 @@
 import path from 'path'
-import Publications from '../configuration/publications'
+import { Publications } from '../configuration/publications'
 import { addLeadingDotUnlessEmpty } from '../helpers/add-leading-dot-unless-empty'
 import { addLeadingSlash } from '../helpers/add-leading-slash'
 import { removeDoubleSlash } from '../helpers/remove-double-slash'
 import { straightenLink } from '../helpers/straighten-link'
-import unixify from '../helpers/unifixy'
+import { unixify } from '../helpers/unixify'
 import { AbsoluteFilePath } from './absolute-file-path'
-import RelativeLink from './relative-link'
+import { RelativeLink } from './relative-link'
 
 // Represents a link to another Markdown file,
 // all the way from the root directory

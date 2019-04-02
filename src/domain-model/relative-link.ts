@@ -1,10 +1,10 @@
-import Publications from '../configuration/publications'
+import { Publications } from '../configuration/publications'
 import { AbsoluteFilePath } from './absolute-file-path'
 import { AbsoluteLink } from './absolute-link'
 
 // A link relative to the current location,
 // i.e. a link not starting with '/'
-export default class RelativeLink {
+export class RelativeLink {
   value: string
 
   constructor(publicPath: string) {

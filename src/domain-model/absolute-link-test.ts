@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { Publications } from '../configuration/publications'
 import { AbsoluteLink } from './absolute-link'
-import RelativeLink from './relative-link'
+import { RelativeLink } from './relative-link'
 
 describe('AbsoluteLink', function() {
   it('prepends a forward slash', function() {

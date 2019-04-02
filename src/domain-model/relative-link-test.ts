@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { Publications } from '../configuration/publications'
 import { AbsoluteFilePath } from './absolute-file-path'
-import RelativeLink from './relative-link'
+import { RelativeLink } from './relative-link'
 
 describe('RelativeLink', function() {
   describe('absolutify', function() {

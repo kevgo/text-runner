@@ -1,4 +1,4 @@
-import Formatter from '../formatters/formatter'
+import { Formatter } from '../formatters/formatter'
 import Publications from './publications'
 
 // Data structure for configuration values

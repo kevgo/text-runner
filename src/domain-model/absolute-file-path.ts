@@ -3,7 +3,7 @@
 
 // AbsoluteFilePath represents a complete path from the root directory
 // to a markdown file on the local file system.
-export default class AbsoluteFilePath {
+export class AbsoluteFilePath {
   value: string
 
   constructor(value: string) {
@@ -57,6 +57,6 @@ export default class AbsoluteFilePath {
 
 import path from 'path'
 import Publications from '../configuration/publications'
-import removeLeadingSlash from '../helpers/remove-leading-slash'
+import { removeLeadingSlash } from '../helpers/remove-leading-slash'
 import { unixify } from '../helpers/unixify'
 import { AbsoluteLink } from './absolute-link'

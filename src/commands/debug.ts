@@ -1,4 +1,4 @@
-import extractActivities from '../activity-list/extract-activities'
+import { extractActivities } from '../activity-list/extract-activities'
 import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
 import { Configuration } from '../configuration/configuration'
 import getFileNames from '../finding-files/get-filenames'

@@ -4,7 +4,7 @@ import { AbsoluteLink } from './absolute-link'
 
 // A link relative to the current location,
 // i.e. a link not starting with '/'
-export default class RelativeLink {
+export class RelativeLink {
   value: string
 
   constructor(publicPath: string) {

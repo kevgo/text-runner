@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import removeTrailingColon from './remove-trailing-colon'
+import { removeTrailingColon } from './remove-trailing-colon'
 
 describe('removeTrailingColon', function() {
   context('with trailing colon', function() {

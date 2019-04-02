@@ -11,7 +11,7 @@ import RelativeLink from './relative-link'
 // Represents a link to another Markdown file,
 // all the way from the root directory
 // (i.e. a link starting with '/')
-export default class AbsoluteLink {
+export class AbsoluteLink {
   value: string
 
   constructor(publicPath: string) {

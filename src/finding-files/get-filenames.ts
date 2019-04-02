@@ -2,10 +2,10 @@ import chalk from 'chalk'
 import deb from 'debug'
 import isGlob from 'is-glob'
 import { Configuration } from '../configuration/configuration'
-import AbsoluteFilePath from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import UnprintedUserError from '../errors/unprinted-user-error'
 import { filesMatchingGlob } from '../helpers/files-matching-glob'
-import hasDirectory from '../helpers/has-directory'
+import { hasDirectory } from '../helpers/has-directory'
 import { allMarkdownFiles } from './all-markdown-files'
 import { isMarkdownFile } from './is-markdown-file'
 import { markdownFilesInDir } from './markdown-files-in-dir'
@@ -28,7 +28,7 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
     return allMarkdownFiles(config.fileGlob)
   } else if (await hasDirectory(config.fileGlob)) {
     return markdownFilesInDir(config.fileGlob)
-  } else if (isMarkdownFile(config.fileGlob)) {
+  } else if (await isMarkdownFile(config.fileGlob)) {
     return [new AbsoluteFilePath(config.fileGlob)]
   } else if (isGlob(config.fileGlob)) {
     return filesMatchingGlob(config.fileGlob)

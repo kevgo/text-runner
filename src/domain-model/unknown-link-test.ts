@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import Publications from '../configuration/publications'
 import AbsoluteFilePath from './absolute-file-path'
-import UnknownLink from './unknown-link'
+import { UnknownLink } from './unknown-link'
 
 describe('UnknownLink', function() {
   describe('absolutify', function() {

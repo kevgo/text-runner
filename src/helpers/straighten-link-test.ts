@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import straightenLink from './straighten-link'
+import { straightenLink } from './straighten-link'
 
 describe('straightenPath', function() {
   const tests = {

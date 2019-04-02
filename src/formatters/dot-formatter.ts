@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import path from 'path'
-import printCodeFrame from '../helpers/print-code-frame'
+import { printCodeFrame } from '../helpers/print-code-frame'
 import Formatter from './formatter'
 
 export class DotFormatter extends Formatter {

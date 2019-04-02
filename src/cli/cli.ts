@@ -4,7 +4,7 @@ import endChildProcesses from 'end-child-processes'
 import path from 'path'
 import PrintedUserError from '../errors/printed-user-error'
 import UnprintedUserError from '../errors/unprinted-user-error'
-import printCodeFrame from '../helpers/print-code-frame'
+import { printCodeFrame } from '../helpers/print-code-frame'
 import textRunner from '../text-runner'
 import { parseCliArgs } from './parse-cli-args'
 

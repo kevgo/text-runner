@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import AstNodeList from '../parsers/ast-node-list'
-import extractActivities from './extract-activities'
+import { extractActivities } from './extract-activities'
 
 describe('extract-activities', function() {
   it('extracts activities', function() {

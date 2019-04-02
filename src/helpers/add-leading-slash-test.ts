@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import addLeadingSlash from './add-leading-slash'
+import { addLeadingSlash } from './add-leading-slash'
 
 describe('addLeadingSlash', function() {
   it('adds a leading slash if missing', function() {

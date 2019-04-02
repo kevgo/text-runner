@@ -5,7 +5,7 @@ import AbsoluteFilePath from '../domain-model/absolute-file-path'
 import AstNode from '../parsers/ast-node'
 import AstNodeList from '../parsers/ast-node-list'
 
-export default class LinkTargetList {
+export class LinkTargetList {
   targets: { [key: string]: LinkTarget[] }
 
   constructor() {

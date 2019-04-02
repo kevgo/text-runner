@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import isLinkToAnchorInSameFile from './is-link-to-anchor-in-same-file'
+import { isLinkToAnchorInSameFile } from './is-link-to-anchor-in-same-file'
 
 describe('isLinkToAnchorInSameFile', function() {
   const testData = [

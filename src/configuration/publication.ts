@@ -5,7 +5,7 @@ import { addLeadingSlash } from '../helpers/add-leading-slash'
 import addTrailingSlash from '../helpers/add-trailing-slash'
 
 // Defines the publication of a local file path to a public URL
-export default class Publication {
+export class Publication {
   localPath: string
   publicPath: string
   publicExtension: string

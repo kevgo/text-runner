@@ -28,7 +28,7 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
     return allMarkdownFiles(config.fileGlob)
   } else if (await hasDirectory(config.fileGlob)) {
     return markdownFilesInDir(config.fileGlob)
-  } else if (isMarkdownFile(config.fileGlob)) {
+  } else if (await isMarkdownFile(config.fileGlob)) {
     return [new AbsoluteFilePath(config.fileGlob)]
   } else if (isGlob(config.fileGlob)) {
     return filesMatchingGlob(config.fileGlob)

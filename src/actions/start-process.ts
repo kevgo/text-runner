@@ -4,7 +4,7 @@ import { ObservableProcess } from 'observable-process'
 import path from 'path'
 import { Configuration } from '../configuration/configuration'
 import callArgs from '../helpers/call-args'
-import trimDollar from '../helpers/trim-dollar'
+import { trimDollar } from '../helpers/trim-dollar'
 import { ActionArgs } from '../runners/action-args'
 import { RunningProcess } from './helpers/running-process'
 

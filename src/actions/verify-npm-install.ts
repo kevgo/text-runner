@@ -3,7 +3,7 @@ import { ActionArgs } from '../runners/action-args'
 import chalk from 'chalk'
 import jsonfile from 'jsonfile'
 import path from 'path'
-import trimDollar from '../helpers/trim-dollar'
+import { trimDollar } from '../helpers/trim-dollar'
 
 export default async function(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))

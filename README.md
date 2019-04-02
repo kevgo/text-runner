@@ -3,8 +3,8 @@
 
 <img src="documentation/logo.png" width="651" height="100" alt="TextRunner - test framework for documentation">
 
-<a href="https://circleci.com/gh/Originate/text-runner">
-  <img src="https://circleci.com/gh/Originate/text-runner.svg?style=shield" />
+<a href="https://circleci.com/gh/kevgo/text-runner">
+  <img src="https://circleci.com/gh/kevgo/text-runner.svg?style=shield" />
 </a>
 <a href="https://ci.appveyor.com/project/kevgo/text-runner/branch/master">
   <img src="https://ci.appveyor.com/api/projects/status/4qasl63vrmcu06e6/branch/master?svg=true" alt="Windows build status" />

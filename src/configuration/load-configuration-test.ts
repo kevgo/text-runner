@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import fs from 'fs'
+import fs from 'fs-extra'
 import path from 'path'
-import tmp from 'tmp'
+import tmp from 'tmp-promise'
 import loadConfiguration from './load-configuration'
 
 describe('loadConfiguration', function() {
@@ -11,10 +11,10 @@ describe('loadConfiguration', function() {
   })
 
   context('config file given', function() {
-    beforeEach(function() {
-      this.configDir = tmp.dirSync()
+    beforeEach(async function() {
+      this.configDir = await tmp.dir()
       this.configFilePath = path.join(this.configDir.name, 'text-run.yml')
-      fs.writeFileSync(this.configFilePath, "files: '*.md'")
+      await fs.writeFile(this.configFilePath, "files: '*.md'")
       const result = loadConfiguration('', { command: '' })
       expect(result.fileGlob).to.equal('*.md')
     })

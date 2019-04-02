@@ -5,7 +5,7 @@ import { ActionArgs } from './action-args'
 
 import util from 'util'
 import PrintedUserError from '../errors/printed-user-error'
-import LinkTargetList from '../link-targets/link-target-list'
+import { LinkTargetList } from '../link-targets/link-target-list'
 import actionRepo from './action-repo'
 import StatsCounter from './stats-counter'
 

@@ -3,7 +3,7 @@ import fs from 'fs'
 
 type PrintFunc = (arg: string) => void | boolean
 
-export default function(
+export function printCodeFrame(
   output: PrintFunc,
   filename: string | undefined,
   line: number | undefined

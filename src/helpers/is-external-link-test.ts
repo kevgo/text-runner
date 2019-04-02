@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import isExternalLink from './is-external-link'
+import { isExternalLink } from './is-external-link'
 
 describe('isExternalLink', function() {
   const testData = [

@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import Publications from '../configuration/publications'
-import AbsoluteFilePath from './absolute-file-path'
+import { AbsoluteFilePath } from './absolute-file-path'
 
 describe('AbsoluteFilePath', function() {
   describe('append', function() {

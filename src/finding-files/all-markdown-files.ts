@@ -1,5 +1,5 @@
 import glob from 'glob'
-import AbsoluteFilePath from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 
 // Returns all the markdown files in the current working directory
 export function allMarkdownFiles(configuredFiles: string): AbsoluteFilePath[] {

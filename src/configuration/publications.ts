@@ -2,7 +2,7 @@ import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import { AbsoluteLink } from '../domain-model/absolute-link'
 import { Publication } from './publication'
 
-export default class Publications extends Array<Publication> {
+export class Publications extends Array<Publication> {
   // Creates a new Publications instance based on the given JSON data
   static fromJSON(publicationsData: any[]): Publications {
     const result = new Publications()

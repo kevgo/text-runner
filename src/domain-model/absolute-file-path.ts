@@ -56,7 +56,7 @@ export class AbsoluteFilePath {
 }
 
 import path from 'path'
-import Publications from '../configuration/publications'
+import { Publications } from '../configuration/publications'
 import { removeLeadingSlash } from '../helpers/remove-leading-slash'
 import unixify from '../helpers/unifixy'
 import { AbsoluteLink } from './absolute-link'

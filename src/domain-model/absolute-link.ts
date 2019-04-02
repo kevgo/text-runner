@@ -4,7 +4,7 @@ import { addLeadingDotUnlessEmpty } from '../helpers/add-leading-dot-unless-empt
 import { addLeadingSlash } from '../helpers/add-leading-slash'
 import { removeDoubleSlash } from '../helpers/remove-double-slash'
 import { straightenLink } from '../helpers/straighten-link'
-import unixify from '../helpers/unifixy'
+import { unixify } from '../helpers/unixify'
 import { AbsoluteFilePath } from './absolute-file-path'
 import { RelativeLink } from './relative-link'
 

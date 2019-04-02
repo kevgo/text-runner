@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-export function isMarkdownFile(filename: string): boolean {
+export default function isMarkdownFile(filename: string): boolean {
   try {
     const filepath = path.join(process.cwd(), filename)
     return filename.endsWith('.md') && fs.statSync(filepath).isFile()

@@ -8,7 +8,7 @@ import { filesMatchingGlob } from '../helpers/files-matching-glob'
 import hasDirectory from '../helpers/has-directory'
 import { allMarkdownFiles } from './all-markdown-files'
 import isMarkdownFile from './is-markdown-file'
-import markdownFilesInDir from './markdown-files-in-dir'
+import { markdownFilesInDir } from './markdown-files-in-dir'
 import removeExcludedFiles from './remove-excluded-files'
 
 const debug = deb('text-runner:run-command')

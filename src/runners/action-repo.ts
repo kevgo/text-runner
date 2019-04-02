@@ -7,7 +7,7 @@ import interpret from 'interpret'
 import path from 'path'
 import rechoir from 'rechoir'
 import UnprintedUserError from '../errors/unprinted-user-error'
-import getActionName from '../helpers/action-name'
+import { getActionName } from '../helpers/get-action-name'
 import { javascriptExtensions } from '../helpers/javascript-extensions'
 import trimExtension from '../helpers/trim-extension'
 

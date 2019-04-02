@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import fs from 'fs-extra'
 import { CliArgTypes } from '../cli/cli-arg-types'
-import PrintedUserError from './../errors/printed-user-error'
+import { PrintedUserError } from './../errors/printed-user-error'
 
 // Returns the filename for the config file based on the given
 export default async function(constructorArgs: CliArgTypes): Promise<string> {

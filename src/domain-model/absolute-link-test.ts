@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import Publications from '../configuration/publications'
-import AbsoluteLink from './absolute-link'
+import { AbsoluteLink } from './absolute-link'
 import RelativeLink from './relative-link'
 
 describe('AbsoluteLink', function() {

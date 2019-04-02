@@ -1,4 +1,4 @@
-import pretendToUse from '../../../../helpers/pretend-to-use'
+import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import AstNodeList from '../../../ast-node-list'
 import OpenTagTracker from '../../helpers/open-tag-tracker'
 

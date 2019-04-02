@@ -1,7 +1,7 @@
 import { ObservableProcess } from 'observable-process'
 
 // Provides global access to the currently running console command
-class RunningConsoleCommand {
+export class RunningConsoleCommand {
   // Returns the currently running console command
   static instance(): ObservableProcess {
     if (!instance) {
@@ -16,5 +16,3 @@ class RunningConsoleCommand {
 }
 
 let instance: ObservableProcess | null = null
-
-export default RunningConsoleCommand

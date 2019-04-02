@@ -12,7 +12,7 @@ interface Console {
 }
 
 // Base class for formatters
-export default class Formatter {
+export class Formatter {
   activity: Activity
   console: Console
   sourceDir: string

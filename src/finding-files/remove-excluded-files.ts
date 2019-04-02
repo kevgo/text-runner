@@ -1,4 +1,4 @@
-import AbsoluteFilePath from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 
 // Removes the given excluded files from the given list of filenames
 export default function removeExcludedFiles(

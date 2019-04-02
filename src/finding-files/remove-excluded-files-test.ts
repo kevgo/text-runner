@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import AbsoluteFilePath from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import removeExcludedFiles from './remove-excluded-files'
 
 describe('removeExcludedFiles', function() {

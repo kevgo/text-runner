@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import AbsoluteFilePath from '../../../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
 import UnprintedUserError from '../../../errors/unprinted-user-error'
 import AstNode from '../../ast-node'
 

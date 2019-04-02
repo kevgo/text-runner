@@ -64,4 +64,4 @@ export default class Publication {
   }
 }
 
-import AbsoluteFilePath from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../domain-model/absolute-file-path'

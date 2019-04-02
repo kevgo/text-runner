@@ -1,6 +1,6 @@
 import util from 'util'
 import xml2js from 'xml2js'
-import AbsoluteFilePath from '../../../../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import UnprintedUserError from '../../../../errors/unprinted-user-error'
 import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import AstNode from '../../../ast-node'

@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import javascriptExtensions from './javascript-extensions'
+import { javascriptExtensions } from './javascript-extensions'
 
 describe('javascriptExtensions', function() {
   it('returns all supported JS extensions', function() {

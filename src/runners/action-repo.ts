@@ -8,7 +8,7 @@ import path from 'path'
 import rechoir from 'rechoir'
 import UnprintedUserError from '../errors/unprinted-user-error'
 import getActionName from '../helpers/action-name'
-import javascriptExtensions from '../helpers/javascript-extensions'
+import { javascriptExtensions } from '../helpers/javascript-extensions'
 import trimExtension from '../helpers/trim-extension'
 
 interface FunctionRepo {

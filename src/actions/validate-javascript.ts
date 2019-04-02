@@ -1,4 +1,4 @@
-import pretendToUse from '../helpers/pretend-to-use'
+import { pretendToUse } from '../helpers/pretend-to-use'
 import { ActionArgs } from '../runners/action-args'
 
 // Runs the JavaScript code given in the code block

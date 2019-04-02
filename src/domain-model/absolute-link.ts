@@ -1,6 +1,6 @@
 import path from 'path'
 import Publications from '../configuration/publications'
-import addLeadingDotUnlessEmpty from '../helpers/add-leading-dot-unless-empty'
+import { addLeadingDotUnlessEmpty } from '../helpers/add-leading-dot-unless-empty'
 import { addLeadingSlash } from '../helpers/add-leading-slash'
 import removeDoubleSlash from '../helpers/remove-double-slash'
 import { straightenLink } from '../helpers/straighten-link'

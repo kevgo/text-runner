@@ -1,7 +1,7 @@
 import { ActivityList } from '../activity-list/activity-list'
 import { Configuration } from '../configuration/configuration'
 
-import LinkTargetList from '../link-targets/link-target-list'
+import { LinkTargetList } from '../link-targets/link-target-list'
 import runActivity from './run-activity'
 import StatsCounter from './stats-counter'
 

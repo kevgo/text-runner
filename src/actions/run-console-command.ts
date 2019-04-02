@@ -6,7 +6,7 @@ import deb from 'debug'
 import { ObservableProcess } from 'observable-process'
 import path from 'path'
 import callArgs from '../helpers/call-args'
-import trimDollar from '../helpers/trim-dollar'
+import { trimDollar } from '../helpers/trim-dollar'
 import AstNodeList from '../parsers/ast-node-list'
 import RunningConsoleCommand from './helpers/running-console-command'
 

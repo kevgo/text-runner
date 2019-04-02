@@ -2,7 +2,7 @@ import { TransformerList } from '../standardize-ast/transformer-list'
 
 import fs from 'fs-extra'
 import path from 'path'
-import isJsFile from '../../../helpers/is-js-file'
+import { isJsFile } from '../../../helpers/is-js-file'
 
 export default function loadTransformers(type: string): TransformerList {
   const result = {}

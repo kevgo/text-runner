@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import AbsoluteFilePath from '../domain-model/absolute-file-path'
 import AstNodeList from '../parsers/ast-node-list'
-import LinkTargetList from './link-target-list'
+import { LinkTargetList } from './link-target-list'
 
 describe('LinkTargetList', function() {
   describe('addNodeList', function() {

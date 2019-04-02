@@ -1,9 +1,9 @@
 import path from 'path'
 import Publications from '../configuration/publications'
 import addLeadingDotUnlessEmpty from '../helpers/add-leading-dot-unless-empty'
-import addLeadingSlash from '../helpers/add-leading-slash'
+import { addLeadingSlash } from '../helpers/add-leading-slash'
 import removeDoubleSlash from '../helpers/remove-double-slash'
-import straightenLink from '../helpers/straighten-link'
+import { straightenLink } from '../helpers/straighten-link'
 import unixify from '../helpers/unifixy'
 import AbsoluteFilePath from './absolute-file-path'
 import RelativeLink from './relative-link'
@@ -11,7 +11,7 @@ import RelativeLink from './relative-link'
 // Represents a link to another Markdown file,
 // all the way from the root directory
 // (i.e. a link starting with '/')
-export default class AbsoluteLink {
+export class AbsoluteLink {
   value: string
 
   constructor(publicPath: string) {

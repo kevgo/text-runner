@@ -1,4 +1,4 @@
-export default function(filepath: string): string {
+export function addLeadingSlash(filepath: string): string {
   if (filepath[0] === '/') {
     return filepath
   } else {

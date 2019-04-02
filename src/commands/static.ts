@@ -2,7 +2,7 @@ import { Configuration } from '../configuration/configuration'
 
 import chalk from 'chalk'
 import rimraf from 'rimraf'
-import extractActivities from '../activity-list/extract-activities'
+import { extractActivities } from '../activity-list/extract-activities'
 import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
 import getFileNames from '../finding-files/get-filenames'
 import findLinkTargets from '../link-targets/find-link-targets'

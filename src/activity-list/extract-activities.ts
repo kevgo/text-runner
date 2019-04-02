@@ -5,16 +5,22 @@ import AstNodeList from '../parsers/ast-node-list'
 import { ActivityList } from './activity-list'
 
 // Returns all activities contained in the given collection of AstNodeLists
-export default function(ASTs: AstNodeList[], prefix: string): ActivityList {
+export function extractActivities(
+  ASTs: AstNodeList[],
+  prefix: string
+): ActivityList {
   let result: ActivityList = []
   for (const AST of ASTs) {
-    result = result.concat(extractActivities(AST, prefix))
+    result = result.concat(extractActivitiesFromNode(AST, prefix))
   }
   return result
 }
 
 // Returns the activities contained in the given AstNodeList
-function extractActivities(AST: AstNodeList, prefix: string): ActivityList {
+function extractActivitiesFromNode(
+  AST: AstNodeList,
+  prefix: string
+): ActivityList {
   const result: ActivityList = []
   let activeNode: AstNode | null = null
   for (const node of AST) {

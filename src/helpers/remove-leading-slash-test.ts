@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import removeLeadingSlash from './remove-leading-slash'
+import { removeLeadingSlash } from './remove-leading-slash'
 
 describe('removeLeadingSlash', function() {
   it('removes the leading slash if one exists', function() {

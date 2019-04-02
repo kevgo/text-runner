@@ -14,7 +14,7 @@ import removeExcludedFiles from './remove-excluded-files'
 const debug = deb('text-runner:run-command')
 
 // Returns the name of all files/directories that match the given glob
-export default async function(
+export async function getFileNames(
   config: Configuration
 ): Promise<AbsoluteFilePath[]> {
   let filenames = await getFiles(config)

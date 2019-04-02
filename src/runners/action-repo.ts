@@ -9,7 +9,7 @@ import rechoir from 'rechoir'
 import UnprintedUserError from '../errors/unprinted-user-error'
 import { getActionName } from '../helpers/get-action-name'
 import { javascriptExtensions } from '../helpers/javascript-extensions'
-import trimExtension from '../helpers/trim-extension'
+import { trimExtension } from '../helpers/trim-extension'
 
 interface FunctionRepo {
   [key: string]: Action

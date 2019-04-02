@@ -12,7 +12,7 @@ import { isExternalLink } from '../helpers/is-external-link'
 import isLinkToAnchorInOtherFile from '../helpers/is-link-to-anchor-in-other-file'
 import { isLinkToAnchorInSameFile } from '../helpers/is-link-to-anchor-in-same-file'
 import isMailtoLink from '../helpers/is-mailto-link'
-import removeLeadingSlash from '../helpers/remove-leading-slash'
+import { removeLeadingSlash } from '../helpers/remove-leading-slash'
 import { LinkTargetList } from '../link-targets/link-target-list'
 
 // Checks for broken hyperlinks

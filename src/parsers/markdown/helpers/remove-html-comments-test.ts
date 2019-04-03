@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import removeHtmlComments from './remove-html-comments'
+import { removeHtmlComments } from './remove-html-comments'
 
 describe('removeHtmlComments', function() {
   it('removes HTML comments', function() {

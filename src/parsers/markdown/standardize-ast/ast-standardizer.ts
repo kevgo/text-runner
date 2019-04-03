@@ -5,10 +5,7 @@ import getHtmlBlockTag from '../helpers/get-html-block-tag'
 import OpenTagTracker from '../helpers/open-tag-tracker'
 import removeHtmlComments from '../helpers/remove-html-comments'
 import loadTransformers from '../standardize-ast/load-transformers'
-
-const mdTransformers = loadTransformers('md')
-const htmlBlockTransformers = loadTransformers('htmlblock')
-const htmlTagTransformers = loadTransformers('htmltag')
+import { TransformerList } from './transformer-list'
 
 // AstStandardizer converts the AST created by Remarkable
 // into the standardized AST used by TextRunner
@@ -17,12 +14,24 @@ export default class AstStandardizer {
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
+  mdTransformers: TransformerList
+  htmlBlockTransformers: TransformerList
+  htmlTagTransformers: TransformerList
 
   constructor(filepath: AbsoluteFilePath) {
     this.filepath = filepath
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
     this.line = 1
+    this.mdTransformers = {}
+    this.htmlBlockTransformers = {}
+    this.htmlTagTransformers = {}
+  }
+
+  async loadTransformers() {
+    this.mdTransformers = await loadTransformers('md')
+    this.htmlBlockTransformers = await loadTransformers('htmlblock')
+    this.htmlTagTransformers = await loadTransformers('htmltag')
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
@@ -66,7 +75,7 @@ export default class AstStandardizer {
       this.filepath,
       this.line
     )
-    const transformer = htmlBlockTransformers[tagName]
+    const transformer = this.htmlBlockTransformers[tagName]
     if (!transformer) {
       throw new UnprintedUserError(
         `Unknown HTML block: '${tagName}'`,
@@ -95,7 +104,7 @@ export default class AstStandardizer {
       this.filepath,
       this.line
     )
-    const transformer = htmlTagTransformers[tagName.replace('/', '_')]
+    const transformer = this.htmlTagTransformers[tagName.replace('/', '_')]
     if (!transformer) {
       throw new UnprintedUserError(
         `Unknown HTML tag: '${tagName}'`,
@@ -116,7 +125,7 @@ export default class AstStandardizer {
   }
 
   processMdNode(node: any): boolean {
-    const transformer = mdTransformers[node.type]
+    const transformer = this.mdTransformers[node.type]
     if (!transformer) {
       return false
     }

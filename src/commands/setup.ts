@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import createConfiguration from '../configuration/create-configuration'
 
-async function setupCommand() {
+export async function setupCommand() {
   await createConfiguration()
   console.log(
     chalk.green(
@@ -11,5 +11,3 @@ async function setupCommand() {
     )
   )
 }
-
-export default setupCommand

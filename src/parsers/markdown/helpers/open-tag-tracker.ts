@@ -3,7 +3,7 @@ import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
 import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 import AstNode from '../../ast-node'
 
-export default class OpenTagTracker {
+export class OpenTagTracker {
   nodes: AstNode[]
 
   constructor() {

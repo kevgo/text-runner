@@ -5,7 +5,7 @@ import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
 import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import AstNode from '../../../ast-node'
 import AstNodeList from '../../../ast-node-list'
-import OpenTagTracker from '../../helpers/open-tag-tracker'
+import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 
 const xml2jsp = util.promisify(xml2js.parseString)
 

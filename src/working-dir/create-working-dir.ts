@@ -2,7 +2,7 @@ import deb from 'debug'
 import mkdirp from 'mkdirp'
 import path from 'path'
 import tmp from 'tmp-promise'
-import UnprintedUserError from '../errors/unprinted-user-error'
+import { UnprintedUserError } from '../errors/unprinted-user-error'
 
 const debug = deb('text-runner:working-dir')
 

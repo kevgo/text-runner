@@ -7,7 +7,7 @@ import AstNode from '../parsers/ast-node'
 import AstNodeList from '../parsers/ast-node-list'
 import readAndParseFile from '../parsers/read-and-parse-file'
 
-async function debugCommand(config: Configuration): Promise<Error[]> {
+export async function debugCommand(config: Configuration): Promise<Error[]> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     return []
@@ -66,5 +66,3 @@ function showAttr(node: AstNode): string {
   }
   return `(${node.attributes.textrun})`
 }
-
-export default debugCommand

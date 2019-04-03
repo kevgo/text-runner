@@ -1,7 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-export default async function addCommand(
+export async function addCommand(
   blockName: string | undefined
 ): Promise<Error[]> {
   if (!blockName) {

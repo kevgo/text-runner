@@ -1,4 +1,4 @@
-import UnprintedUserError from '../errors/unprinted-user-error'
+import { UnprintedUserError } from '../errors/unprinted-user-error'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { DotFormatter } from '../formatters/dot-formatter'
 import { Formatter } from '../formatters/formatter'

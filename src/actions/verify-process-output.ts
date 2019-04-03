@@ -1,4 +1,4 @@
-import UnprintedUserError from '../errors/unprinted-user-error'
+import { UnprintedUserError } from '../errors/unprinted-user-error'
 import { ActionArgs } from '../runners/action-args'
 import { RunningProcess } from './helpers/running-process'
 

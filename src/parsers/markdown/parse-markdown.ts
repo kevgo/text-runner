@@ -12,5 +12,6 @@ export async function parseMarkdown(
 ): Promise<AstNodeList> {
   const raw = markdownParser.parse(markdownText, {})
   const astStandardizer = new AstStandardizer(filepath)
+  await astStandardizer.loadTransformers()
   return astStandardizer.standardize(raw)
 }

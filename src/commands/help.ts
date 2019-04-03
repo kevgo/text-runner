@@ -1,8 +1,8 @@
 import chalk from 'chalk'
 
-export default (async function helpCommand(error?: string) {
+export async function helpCommand(error?: string) {
   console.log(template(error))
-})
+}
 
 function template(error: string | undefined) {
   if (error) {

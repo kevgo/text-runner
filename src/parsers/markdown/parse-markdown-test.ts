@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
 import { AbsoluteFilePath } from '../../domain-model/absolute-file-path'
-import parseMarkdown from './parse-markdown'
+import { parseMarkdown } from './parse-markdown'
 
 describe('parseMarkdown', async function() {
   const testCases = await fs.readdir(path.join(__dirname, 'tests'))

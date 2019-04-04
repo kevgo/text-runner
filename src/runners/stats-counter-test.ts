@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import delay from 'delay'
-import StatsCounter from './stats-counter'
+import { StatsCounter } from './stats-counter'
 
 describe('StatsCounter', function() {
   it('counts the number of errors', function() {

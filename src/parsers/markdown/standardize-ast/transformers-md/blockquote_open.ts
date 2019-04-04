@@ -2,7 +2,7 @@ import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import AstNode from '../../../ast-node'
 import AstNodeList from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import parseHtmlAttributes from '../../helpers/parse-html-attributes'
+import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
 
 const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 

@@ -2,7 +2,7 @@ import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import AstNode from '../../../ast-node'
 import AstNodeList from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import parseHtmlTag from '../../helpers/parse-html-tag'
+import { parseHtmlTag } from '../../helpers/parse-html-tag'
 
 export default function transformSummaryTag(
   node: any,

@@ -3,7 +3,7 @@ import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import AstNode from '../../../ast-node'
 import AstNodeList from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import parseHtmlAttributes from '../../helpers/parse-html-attributes'
+import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
 import removeHtmlComments from '../../helpers/remove-html-comments'
 
 const olRegex = /<img([^>]*)>/

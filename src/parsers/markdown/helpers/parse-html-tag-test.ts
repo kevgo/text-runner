@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import parseHtmlTag from './parse-html-tag'
+import { parseHtmlTag } from './parse-html-tag'
 
 describe('parseAttributes', function() {
   it('parses opening HTML tags', function() {

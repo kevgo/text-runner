@@ -1,9 +1,9 @@
 import { UnprintedUserError } from '../../../errors/unprinted-user-error'
-import parseHtmlAttributes from './parse-html-attributes'
+import { parseHtmlAttributes } from './parse-html-attributes'
 
 const attrRE = /<(\/?\w+)\s*(.*)>/
 
-export default function(
+export function parseHtmlTag(
   html: string,
   filepath: string,
   line: number

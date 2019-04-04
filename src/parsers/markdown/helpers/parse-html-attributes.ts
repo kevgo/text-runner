@@ -1,6 +1,8 @@
 const tupleRE = /([^=]+="[^"]*")/g
 
-export default function(attributes: string): { [key: string]: string } {
+export function parseHtmlAttributes(
+  attributes: string
+): { [key: string]: string } {
   const attrMatch = attributes.match(tupleRE)
   if (!attrMatch) {
     return {}

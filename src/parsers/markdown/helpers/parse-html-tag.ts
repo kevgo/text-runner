@@ -3,7 +3,7 @@ import { parseHtmlAttributes } from './parse-html-attributes'
 
 const attrRE = /<(\/?\w+)\s*(.*)>/
 
-export default function(
+export function parseHtmlTag(
   html: string,
   filepath: string,
   line: number

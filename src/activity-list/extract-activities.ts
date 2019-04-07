@@ -1,6 +1,6 @@
 import kebabCase from 'just-kebab-case'
 import { UnprintedUserError } from '../errors/unprinted-user-error'
-import AstNode from '../parsers/ast-node'
+import { AstNode } from '../parsers/ast-node'
 import { AstNodeList } from '../parsers/ast-node-list'
 import { ActivityList } from './activity-list'
 

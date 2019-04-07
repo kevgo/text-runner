@@ -1,7 +1,7 @@
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 
 // A node in the standardized Markdown/HTML AST
-export default class AstNode {
+export class AstNode {
   static scaffold(data: any = {}): AstNode {
     if (typeof data.file === 'string') {
       data.file = new AbsoluteFilePath(data.file)

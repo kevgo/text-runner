@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import AstNode from '../../ast-node'
+import { AstNode } from '../../ast-node'
 import { OpenTagTracker } from './open-tag-tracker'
 
 describe('OpenTagTracker', function() {

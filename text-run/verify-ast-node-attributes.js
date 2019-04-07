@@ -1,4 +1,4 @@
-const AstNode = require('../dist/parsers/ast-node.js').default
+const { AstNode } = require('../dist/parsers/ast-node.js')
 const jsdiffConsole = require('jsdiff-console')
 const {
   removeTrailingColon

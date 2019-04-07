@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { UnprintedUserError } from '../errors/unprinted-user-error'
 import AstNode from './ast-node'
-import AstNodeList from './ast-node-list'
+import { AstNodeList } from './ast-node-list'
 
 describe('AstNodeList', function() {
   describe('concat', function() {

@@ -4,7 +4,7 @@ import { AstNodeList } from '../../ast-node-list'
 import getHtmlBlockTag from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
-import loadTransformers from '../standardize-ast/load-transformers'
+import { loadTransformers } from '../standardize-ast/load-transformers'
 import { TransformerList } from './transformer-list'
 
 // AstStandardizer converts the AST created by Remarkable

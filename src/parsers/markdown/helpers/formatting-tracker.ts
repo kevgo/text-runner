@@ -1,4 +1,4 @@
-import AstNode from '../../ast-node'
+import { AstNode } from '../../ast-node'
 
 // FormattingTracker tracks formatting nodes
 // like 'em' and 'strong'

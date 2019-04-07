@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import AstNode from './ast-node'
+import { AstNode } from './ast-node'
 
 describe('AstNode', function() {
   describe('scaffold', function() {

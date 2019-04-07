@@ -1,5 +1,5 @@
 import { UnprintedUserError } from '../errors/unprinted-user-error'
-import AstNode from './ast-node'
+import { AstNode } from './ast-node'
 
 export class AstNodeList extends Array<AstNode> {
   // Creates a new AstNodeList containing the given data

@@ -3,6 +3,8 @@
 
 # Text-Runner
 
+> Test runner for text
+
 <a href="https://circleci.com/gh/kevgo/text-runner">
   <img src="https://circleci.com/gh/kevgo/text-runner.svg?style=shield" />
 </a>
@@ -19,8 +21,6 @@
   <img src="https://david-dm.org/originate/text-runner/dev-status.svg" />
 </a>
 <br><br>
-
-> Test runner for text
 
 TextRunner is an agile documentation tool, in particular a semantic documentation checker.
 It makes documentation executable.

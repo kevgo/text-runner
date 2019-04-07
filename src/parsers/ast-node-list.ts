@@ -1,7 +1,7 @@
 import { UnprintedUserError } from '../errors/unprinted-user-error'
 import AstNode from './ast-node'
 
-export default class AstNodeList extends Array<AstNode> {
+export class AstNodeList extends Array<AstNode> {
   // Creates a new AstNodeList containing the given data
   static scaffold(data: any = {}): AstNodeList {
     const result = new AstNodeList()

@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { DotFormatter } from '../formatters/dot-formatter'
-import getFormatterClass from './get-formatter-class'
+import { getFormatterClass } from './get-formatter-class'
 
 describe('getFormatterClass', function() {
   it('returns the dot formatter if requested', function() {

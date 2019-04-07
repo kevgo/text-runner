@@ -16,7 +16,7 @@ export default function(args: ActionArgs) {
   eval(code)
 }
 
-function wrapInAsyncFunction(code) {
+function wrapInAsyncFunction(code: string) {
   return `(async function() {
   ${code}
 })()`

@@ -95,11 +95,11 @@ function makeGlobal(configuration: Configuration) {
     // can ignore errors here
   }
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function(commandText) {
+  return function(commandText: string): string {
     const commandParts = commandText.split(' ')
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
-    const replacement = globals[command]
+    const replacement = globals[command] as string | undefined
     if (replacement) {
       debug(`found replacement: ${replacement}`)
       return (

@@ -12,7 +12,7 @@ import { setupCommand } from './commands/setup'
 import { staticCommand } from './commands/static'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
-import determineConfigFilename from './configuration/determine-config-filename'
+import { determineConfigFilename } from './configuration/determine-config-filename'
 
 // Tests the documentation in the given directory
 export async function textRunner(cmdLineArgs: CliArgTypes): Promise<Error[]> {

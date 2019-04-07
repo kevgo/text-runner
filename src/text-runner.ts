@@ -1,7 +1,7 @@
 import { CliArgTypes } from './cli/cli-arg-types'
 
 import chalk from 'chalk'
-import loadConfiguration from './configuration/load-configuration'
+import { loadConfiguration } from './configuration/load-configuration'
 
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'

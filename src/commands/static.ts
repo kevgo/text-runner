@@ -7,7 +7,7 @@ import { extractImagesAndLinks } from '../activity-list/extract-images-and-links
 import { getFileNames } from '../finding-files/get-filenames'
 import { findLinkTargets } from '../link-targets/find-link-targets'
 import { readAndParseFile } from '../parsers/read-and-parse-file'
-import executeParallel from '../runners/execute-parallel'
+import { executeParallel } from '../runners/execute-parallel'
 import StatsCounter from '../runners/stats-counter'
 import { createWorkingDir } from '../working-dir/create-working-dir'
 

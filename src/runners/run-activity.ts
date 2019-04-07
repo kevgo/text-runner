@@ -9,7 +9,7 @@ import { LinkTargetList } from '../link-targets/link-target-list'
 import { actionRepo } from './action-repo'
 import StatsCounter from './stats-counter'
 
-export default (async function runActivity(
+export async function runActivity(
   activity: Activity,
   configuration: Configuration,
   linkTargets: LinkTargetList,
@@ -48,7 +48,7 @@ export default (async function runActivity(
     }
   }
   return null
-})
+}
 
 async function runCallbackFunc(func: Action, args: ActionArgs) {
   const promisified = util.promisify(func)

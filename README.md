@@ -20,6 +20,8 @@
 </a>
 <br><br>
 
+> Test runner for text
+
 TextRunner is an agile documentation tool, in particular a semantic documentation checker.
 It makes documentation executable.
 An example is the text you are reading right now,

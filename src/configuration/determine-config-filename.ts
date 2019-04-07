@@ -4,7 +4,9 @@ import { CliArgTypes } from '../cli/cli-arg-types'
 import { PrintedUserError } from './../errors/printed-user-error'
 
 // Returns the filename for the config file based on the given
-export default async function(constructorArgs: CliArgTypes): Promise<string> {
+export async function determineConfigFilename(
+  constructorArgs: CliArgTypes
+): Promise<string> {
   if (constructorArgs.config == null) {
     try {
       await fs.stat('text-run.yml')

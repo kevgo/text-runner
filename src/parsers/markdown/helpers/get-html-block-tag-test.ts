@@ -1,6 +1,6 @@
 import { expect } from 'chai'
 import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import getHtmlBlockTag from './get-html-block-tag'
+import { getHtmlBlockTag } from './get-html-block-tag'
 
 describe('parseHtmlBlock', function() {
   it('parses opening tags', function() {

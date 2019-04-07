@@ -3,7 +3,7 @@ import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 
 const tagNameRE = /^<(\/?\w+).*>/
 
-export default function getHtmlBlockTag(
+export function getHtmlBlockTag(
   html: string,
   file: AbsoluteFilePath,
   line: number

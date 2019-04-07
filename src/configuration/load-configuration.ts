@@ -26,7 +26,7 @@ const defaultValues: Configuration = {
 }
 
 // Reads documentation and
-export default function loadConfiguration(
+export function loadConfiguration(
   configFilePath: string,
   constructorArgs: CliArgTypes
 ): Configuration {

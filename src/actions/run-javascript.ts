@@ -16,7 +16,7 @@ export default function(args: ActionArgs, done: DoneFunction) {
   code = replaceVariableDeclarations(code)
 
   // This is used in an eval'ed string below
-  const __finished = err => {
+  const __finished = (err: any) => {
     done(err)
   }
   pretendToUse(__finished.toString())

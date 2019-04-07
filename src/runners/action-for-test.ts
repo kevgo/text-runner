@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import actionRepo from '../../dist/runners/action-repo'
+import { actionRepo } from '../../dist/runners/action-repo'
 import { scaffoldActivity } from '../activity-list/activity'
 
 describe('actionFor', function() {

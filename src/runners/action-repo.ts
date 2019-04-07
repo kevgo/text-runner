@@ -101,5 +101,4 @@ class ActionRepo {
   }
 }
 
-const actionRepo = new ActionRepo()
-export default actionRepo
+export const actionRepo = new ActionRepo()

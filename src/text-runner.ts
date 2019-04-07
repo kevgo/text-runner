@@ -14,7 +14,7 @@ import { versionCommand } from './commands/version'
 import determineConfigFilename from './configuration/determine-config-filename'
 
 // Tests the documentation in the given directory
-export default async function(cmdLineArgs: CliArgTypes): Promise<Error[]> {
+export async function textRunner(cmdLineArgs: CliArgTypes): Promise<Error[]> {
   let configuration
   try {
     const configFilename = await determineConfigFilename(cmdLineArgs)

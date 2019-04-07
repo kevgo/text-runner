@@ -1,7 +1,7 @@
-# Text-Runner
-
 <!-- logo is from: https://icons8.com/icon/40886/test -->
 <img src="documentation/logo2.png" align="right">
+
+# Text-Runner
 
 <a href="https://circleci.com/gh/kevgo/text-runner">
   <img src="https://circleci.com/gh/kevgo/text-runner.svg?style=shield" />

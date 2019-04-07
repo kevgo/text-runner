@@ -1,6 +1,6 @@
 import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
 import { UnprintedUserError } from '../../../errors/unprinted-user-error'
-import AstNodeList from '../../ast-node-list'
+import { AstNodeList } from '../../ast-node-list'
 import getHtmlBlockTag from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'

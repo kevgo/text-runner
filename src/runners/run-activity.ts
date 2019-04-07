@@ -7,7 +7,7 @@ import util from 'util'
 import { PrintedUserError } from '../errors/printed-user-error'
 import { LinkTargetList } from '../link-targets/link-target-list'
 import { actionRepo } from './action-repo'
-import StatsCounter from './stats-counter'
+import { StatsCounter } from './stats-counter'
 
 export async function runActivity(
   activity: Activity,

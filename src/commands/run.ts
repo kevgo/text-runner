@@ -9,7 +9,7 @@ import { findLinkTargets } from '../link-targets/find-link-targets'
 import { readAndParseFile } from '../parsers/read-and-parse-file'
 import { executeParallel } from '../runners/execute-parallel'
 import { executeSequential } from '../runners/execute-sequential'
-import StatsCounter from '../runners/stats-counter'
+import { StatsCounter } from '../runners/stats-counter'
 import { createWorkingDir } from '../working-dir/create-working-dir'
 
 export async function runCommand(config: Configuration): Promise<Error[]> {

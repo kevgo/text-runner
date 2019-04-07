@@ -1,9 +1,7 @@
 import fs from 'fs-extra'
 import path from 'path'
 
-export default async function isMarkdownFile(
-  filename: string
-): Promise<boolean> {
+export async function isMarkdownFile(filename: string): Promise<boolean> {
   try {
     const filepath = path.join(process.cwd(), filename)
     const fileStats = await fs.stat(filepath)

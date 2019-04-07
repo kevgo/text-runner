@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import fs from 'fs-extra'
 import path from 'path'
 import tmp from 'tmp-promise'
-import loadConfiguration from './load-configuration'
+import { loadConfiguration } from './load-configuration'
 
 describe('loadConfiguration', function() {
   it('returns default values if no config file is given', function() {

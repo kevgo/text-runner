@@ -1,7 +1,7 @@
 import { CliArgTypes } from './cli/cli-arg-types'
 
 import chalk from 'chalk'
-import loadConfiguration from './configuration/load-configuration'
+import { loadConfiguration } from './configuration/load-configuration'
 
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
@@ -12,10 +12,11 @@ import { setupCommand } from './commands/setup'
 import { staticCommand } from './commands/static'
 import { versionCommand } from './commands/version'
 import { determineConfigFilename } from './configuration/determine-config-filename'
+import { Configuration } from './configuration/configuration'
 
 // Tests the documentation in the given directory
 export async function textRunner(cmdLineArgs: CliArgTypes): Promise<Error[]> {
-  let configuration
+  let configuration: Configuration | undefined
   try {
     const configFilename = await determineConfigFilename(cmdLineArgs)
     configuration = loadConfiguration(configFilename, cmdLineArgs)

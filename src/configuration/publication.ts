@@ -2,7 +2,7 @@ import { AbsoluteLink } from '../domain-model/absolute-link'
 import { RelativeLink } from '../domain-model/relative-link'
 import { addLeadingDotUnlessEmpty } from '../helpers/add-leading-dot-unless-empty'
 import { addLeadingSlash } from '../helpers/add-leading-slash'
-import addTrailingSlash from '../helpers/add-trailing-slash'
+import { addTrailingSlash } from '../helpers/add-trailing-slash'
 
 // Defines the publication of a local file path to a public URL
 export class Publication {

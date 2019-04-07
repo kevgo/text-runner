@@ -5,7 +5,7 @@ import deb from 'debug'
 import camelCase from 'just-camel-case'
 import YAML from 'yamljs'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
-import getFormatterClass from './get-formatter-class'
+import { getFormatterClass } from './get-formatter-class'
 import { Publications } from './publications'
 
 const debug = deb('textrun:configuration')

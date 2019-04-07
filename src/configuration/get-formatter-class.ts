@@ -3,7 +3,7 @@ import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { DotFormatter } from '../formatters/dot-formatter'
 import { Formatter } from '../formatters/formatter'
 
-export default function getFormatterClass(
+export function getFormatterClass(
   name: string,
   def: typeof Formatter
 ): typeof Formatter {

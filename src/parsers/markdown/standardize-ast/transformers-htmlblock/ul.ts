@@ -3,7 +3,7 @@ import xml2js from 'xml2js'
 import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import AstNode from '../../../ast-node'
-import AstNodeList from '../../../ast-node-list'
+import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
 

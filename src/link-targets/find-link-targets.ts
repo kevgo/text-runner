@@ -1,4 +1,4 @@
-import AstNodeList from '../parsers/ast-node-list'
+import { AstNodeList } from '../parsers/ast-node-list'
 import { LinkTargetList } from './link-target-list'
 
 export function findLinkTargets(nodeLists: AstNodeList[]): LinkTargetList {

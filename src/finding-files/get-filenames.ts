@@ -7,7 +7,7 @@ import { UnprintedUserError } from '../errors/unprinted-user-error'
 import { filesMatchingGlob } from '../helpers/files-matching-glob'
 import { hasDirectory } from '../helpers/has-directory'
 import { allMarkdownFiles } from './all-markdown-files'
-import isMarkdownFile from './is-markdown-file'
+import { isMarkdownFile } from './is-markdown-file'
 import { markdownFilesInDir } from './markdown-files-in-dir'
 import { removeExcludedFiles } from './remove-excluded-files'
 

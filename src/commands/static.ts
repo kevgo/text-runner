@@ -9,7 +9,7 @@ import { findLinkTargets } from '../link-targets/find-link-targets'
 import { readAndParseFile } from '../parsers/read-and-parse-file'
 import executeParallel from '../runners/execute-parallel'
 import StatsCounter from '../runners/stats-counter'
-import createWorkingDir from '../working-dir/create-working-dir'
+import { createWorkingDir } from '../working-dir/create-working-dir'
 
 export async function staticCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()

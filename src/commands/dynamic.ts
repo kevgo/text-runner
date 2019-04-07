@@ -8,7 +8,7 @@ import { getFileNames } from '../finding-files/get-filenames'
 import { findLinkTargets } from '../link-targets/find-link-targets'
 import { readAndParseFile } from '../parsers/read-and-parse-file'
 import { executeSequential } from '../runners/execute-sequential'
-import StatsCounter from '../runners/stats-counter'
+import { StatsCounter } from '../runners/stats-counter'
 import { createWorkingDir } from '../working-dir/create-working-dir'
 
 export async function dynamicCommand(config: Configuration): Promise<Error[]> {

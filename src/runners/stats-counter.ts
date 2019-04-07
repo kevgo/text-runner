@@ -1,6 +1,6 @@
 import Time from 'time-diff'
 
-export default class StatsCounter {
+export class StatsCounter {
   errorCount: number
   skipCount: number
   successCount: number

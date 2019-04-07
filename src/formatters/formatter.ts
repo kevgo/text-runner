@@ -3,7 +3,7 @@ import { Activity } from '../activity-list/activity'
 
 import deb from 'debug'
 import humanize from 'humanize-string'
-import StatsCounter from '../runners/stats-counter'
+import { StatsCounter } from '../runners/stats-counter'
 
 const debug = deb('formatter')
 

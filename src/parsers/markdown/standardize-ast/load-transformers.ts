@@ -4,9 +4,7 @@ import fs from 'fs-extra'
 import path from 'path'
 import { isJsFile } from '../../../helpers/is-js-file'
 
-export default async function loadTransformers(
-  type: string
-): Promise<TransformerList> {
+export async function loadTransformers(type: string): Promise<TransformerList> {
   const result = {}
   const dir = path.join(
     __dirname,

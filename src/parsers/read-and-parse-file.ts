@@ -4,7 +4,7 @@ import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import AstNodeList from '../parsers/ast-node-list'
 import { parseMarkdown } from '../parsers/markdown/parse-markdown'
 
-export default (async function(
+export async function readAndParseFile(
   filename: AbsoluteFilePath
 ): Promise<AstNodeList> {
   const content = (await fs.readFile(filename.value, {
@@ -14,4 +14,4 @@ export default (async function(
     console.log(chalk.magenta('found empty file ' + filename.platformified()))
   }
   return parseMarkdown(content, filename)
-})
+}

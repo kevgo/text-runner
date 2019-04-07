@@ -9,9 +9,7 @@ const debug = deb('text-runner:working-dir')
 type workingDirSetting = string | boolean
 
 // Creates the temp directory to run the tests in
-export default async function createWorkingDir(
-  configSetting: workingDirSetting
-) {
+export async function createWorkingDir(configSetting: workingDirSetting) {
   const workingDir = await getWorkingDirPath(configSetting)
   debug(`using test directory: ${workingDir}`)
   await mkdirp(workingDir)

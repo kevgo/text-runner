@@ -1,7 +1,9 @@
 <!-- logo is from: https://icons8.com/icon/40886/test -->
-<img src="documentation/logo2.png" align="right">
+<img src="documentation/logo2.png" align="right" valign="bottom">
 
-<img src="documentation/logo.png" width="651" height="100" alt="TextRunner - test framework for documentation">
+# Text-Runner
+
+> Test runner for text
 
 <a href="https://circleci.com/gh/kevgo/text-runner">
   <img src="https://circleci.com/gh/kevgo/text-runner.svg?style=shield" />

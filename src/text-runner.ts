@@ -14,7 +14,10 @@ import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { determineConfigFilename } from './configuration/determine-config-filename'
 
-// Tests the documentation in the given directory
+/**
+ * Tests the documentation in the given directory
+ * @param cmdLineArgs the arguments provided on the command line
+ */
 export async function textRunner(cmdLineArgs: CliArgTypes): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {

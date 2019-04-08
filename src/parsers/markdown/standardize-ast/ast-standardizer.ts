@@ -6,6 +6,7 @@ import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { TransformerList } from './transformer-list'
+import { MdTransformer } from './md-transformer'
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -16,6 +17,7 @@ export default class AstStandardizer {
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
+  mdTransformer: MdTransformer
   mdTransformers: TransformerList
   htmlBlockTransformers: TransformerList
   htmlTagTransformers: TransformerList
@@ -25,6 +27,7 @@ export default class AstStandardizer {
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
     this.line = 1
+    this.mdTransformer = new MdTransformer(this.openTags)
     this.mdTransformers = {}
     this.htmlBlockTransformers = {}
     this.htmlTagTransformers = {}
@@ -57,6 +60,9 @@ export default class AstStandardizer {
         continue
       }
       if (this.processHtmlTag(node)) {
+        continue
+      }
+      if (this.processMdTransformer(node)) {
         continue
       }
       if (this.processMdNode(node)) {
@@ -116,6 +122,21 @@ export default class AstStandardizer {
     const transformed = transformer(
       node,
       this.openTags,
+      this.filepath,
+      this.line
+    )
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
+    }
+    return true
+  }
+
+  processMdTransformer(node: any): boolean {
+    if (!this.mdTransformer.canTransform(node.type)) {
+      return false
+    }
+    const transformed = this.mdTransformer.transformSimpleOpeningTag(
+      node,
       this.filepath,
       this.line
     )

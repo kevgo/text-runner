@@ -53,8 +53,7 @@ export default class AstStandardizer {
       if (this.processSoftBreak(node)) {
         continue
       }
-      const processed = await this.processHtmlBlock(node)
-      if (processed) {
+      if (await this.processHtmlBlock(node)) {
         continue
       }
       if (this.processHtmlTag(node)) {

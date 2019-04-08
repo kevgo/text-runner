@@ -5,7 +5,9 @@ import fs from 'fs-extra'
 import path from 'path'
 
 // Verifies that the test workspace contains the given directory
-export default async function(args: ActionArgs) {
+export default async function verifyWorkspaceContainsDirectory(
+  args: ActionArgs
+) {
   const directory = args.nodes.text()
   const fullPath = path.join(args.configuration.workspace, directory)
   args.formatter.name(

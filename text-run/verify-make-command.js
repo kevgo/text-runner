@@ -5,7 +5,7 @@ const path = require('path')
 const util = require('util')
 const readFile = util.promisify(fs.readFile)
 
-module.exports = async function(args) {
+module.exports = async function verifyMakeCommand(args) {
   const expected = args.nodes
     .text()
     .replace(/make\s+/, '')

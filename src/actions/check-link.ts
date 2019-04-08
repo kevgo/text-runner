@@ -16,7 +16,7 @@ import { removeLeadingSlash } from '../helpers/remove-leading-slash'
 import { LinkTargetList } from '../link-targets/link-target-list'
 
 // Checks for broken hyperlinks
-export default async function(args: ActionArgs) {
+export default async function checkLink(args: ActionArgs) {
   const target = args.nodes[0].attributes.href
   if (target == null || target === '') {
     throw new Error('link without target')

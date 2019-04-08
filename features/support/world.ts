@@ -13,7 +13,7 @@ import { v4 as uuid } from 'uuid'
  * World provides step implementations that run and test TextRunner
  * via its command-line interface
  */
-const World = function() {
+function World() {
   this.execute = async function(params) {
     const args: any = {}
     args.cwd = this.rootDir

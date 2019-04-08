@@ -5,7 +5,7 @@ import jsonfile from 'jsonfile'
 import path from 'path'
 import { trimDollar } from '../helpers/trim-dollar'
 
-export default async function(args: ActionArgs) {
+export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
   const pkg = await jsonfile.readFile(
     path.join(args.configuration.sourceDir, 'package.json')

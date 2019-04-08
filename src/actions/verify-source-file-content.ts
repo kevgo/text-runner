@@ -6,7 +6,7 @@ import fs from 'fs-extra'
 import jsdiffConsole from 'jsdiff-console'
 import path from 'path'
 
-export default async function(args: ActionArgs) {
+export default async function verifySourceFileContent(args: ActionArgs) {
   const fileName = args.nodes.textInNodeOfType('strong_open')
   let relativeBaseDir = '.'
   if (args.nodes.hasNodeOfType('link_open')) {

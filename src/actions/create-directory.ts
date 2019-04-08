@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import mkdirp from 'mkdirp'
 import path from 'path'
 
-export default async function(args: ActionArgs) {
+export default async function createDirectory(args: ActionArgs) {
   const directoryName = args.nodes.text().trim()
   if (!directoryName) {
     throw new Error('empty directory name given')

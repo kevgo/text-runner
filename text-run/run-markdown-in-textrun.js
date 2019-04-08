@@ -4,7 +4,7 @@ const { ObservableProcess } = require('observable-process')
 const path = require('path')
 const debug = require('debug')('text-runner:run-markdown-in-text-run')
 
-module.exports = async function(args) {
+module.exports = async function runMarkdownInTextrun(args) {
   args.formatter.name('verify the inline markdown works in TextRunner')
   const filePath = path.join(args.configuration.workspace, '1.md')
   const markdown = args.nodes.textInNodeOfType('fence')

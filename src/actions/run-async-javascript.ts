@@ -2,7 +2,7 @@ import { Configuration } from '../configuration/configuration'
 import { ActionArgs } from '../runners/action-args'
 
 // Runs the async-await JavaScript code given in the code block
-export default function(args: ActionArgs) {
+export default function runAsyncJavascript(args: ActionArgs) {
   args.formatter.name('run async javascript')
   let code = args.nodes.textInNodeOfType('fence')
   if (code == null) {

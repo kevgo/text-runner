@@ -13,7 +13,9 @@ import { removeExcludedFiles } from './remove-excluded-files'
 
 const debug = deb('text-runner:run-command')
 
-// Returns the name of all files/directories that match the given glob
+/**
+ * Returns the name of all files/directories that match the given glob
+ */
 export async function getFileNames(
   config: Configuration
 ): Promise<AbsoluteFilePath[]> {

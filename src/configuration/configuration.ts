@@ -1,7 +1,9 @@
 import { Formatter } from '../formatters/formatter'
 import { Publications } from './publications'
 
-// Data structure for configuration values
+/**
+ * Data structure for configuration values
+ */
 export interface Configuration {
   actions: any // configuration for actions
   classPrefix: string // the name of the attribute that denotes active blocks

@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import path from 'path'
 import { trimDollar } from '../helpers/trim-dollar'
 
-export default function(args: ActionArgs) {
+export default function verifyNpmGlobalCommand(args: ActionArgs) {
   args.formatter.name('NPM module exports the command')
   const commandName = trimDollar(
     args.nodes.textInNodeOfType('fence', 'code').trim()

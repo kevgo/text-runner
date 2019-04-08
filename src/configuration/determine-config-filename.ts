@@ -3,11 +3,15 @@ import fs from 'fs-extra'
 import { CliArgTypes } from '../cli/cli-arg-types'
 import { PrintedUserError } from './../errors/printed-user-error'
 
-// Returns the filename for the config file based on the given
+/**
+ * Returns the filename for the config file
+ *
+ * @param cmdLineArgs
+ */
 export async function determineConfigFilename(
-  constructorArgs: CliArgTypes
+  cmdLineArgs: CliArgTypes
 ): Promise<string> {
-  if (constructorArgs.config == null) {
+  if (cmdLineArgs.config == null) {
     try {
       await fs.stat('text-run.yml')
       return 'text-run.yml'
@@ -16,13 +20,14 @@ export async function determineConfigFilename(
     }
   }
 
+  // TODO: move this to the top of the method
   try {
-    await fs.stat(constructorArgs.config)
-    return constructorArgs.config
+    await fs.stat(cmdLineArgs.config)
+    return cmdLineArgs.config
   } catch (e) {
     console.log(
       chalk.red(
-        `configuration file ${chalk.cyan(constructorArgs.config)} not found`
+        `configuration file ${chalk.cyan(cmdLineArgs.config)} not found`
       )
     )
     throw new PrintedUserError()

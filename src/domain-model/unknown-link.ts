@@ -5,7 +5,9 @@ import { AbsoluteFilePath } from './absolute-file-path'
 import { AbsoluteLink } from './absolute-link'
 import { RelativeLink } from './relative-link'
 
-// A link that isn't known yet whether it is relative or absolute
+/**
+ * A link that isn't known yet whether it is relative or absolute
+ */
 export class UnknownLink {
   value: string
 
@@ -23,7 +25,9 @@ export class UnknownLink {
     return new RelativeLink(this.value).absolutify(containingFile, publications)
   }
 
-  // Returns whether this link is an absolute link
+  /**
+   * Returns whether this link is an absolute link
+   */
   isAbsolute(): boolean {
     return this.value.startsWith('/')
   }

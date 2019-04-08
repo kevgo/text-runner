@@ -2,8 +2,10 @@ import { Publications } from '../configuration/publications'
 import { AbsoluteFilePath } from './absolute-file-path'
 import { AbsoluteLink } from './absolute-link'
 
-// A link relative to the current location,
-// i.e. a link not starting with '/'
+/**
+ * A link relative to the current location,
+ * i.e. a link not starting with '/'
+ */
 export class RelativeLink {
   value: string
 
@@ -11,8 +13,13 @@ export class RelativeLink {
     this.value = publicPath
   }
 
-  // Assuming this relative link is in the given file,
-  // returns the absolute links that point to the same target as this relative link.
+  /**
+   * Assuming this relative link is in the given file,
+   * returns the absolute links that point to the same target as this relative link.
+   *
+   * @param containingFile
+   * @param publications the publications of this TextRunner session
+   */
   absolutify(
     containingFile: AbsoluteFilePath,
     publications: Publications

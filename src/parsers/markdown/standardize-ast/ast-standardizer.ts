@@ -7,8 +7,10 @@ import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { TransformerList } from './transformer-list'
 
-// AstStandardizer converts the AST created by Remarkable
-// into the standardized AST used by TextRunner
+/**
+ * AstStandardizer converts the AST created by Remarkable
+ * into the standardized AST used by TextRunner
+ */
 export default class AstStandardizer {
   filepath: AbsoluteFilePath
   openTags: OpenTagTracker

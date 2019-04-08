@@ -1,6 +1,8 @@
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 
-// A node in the standardized Markdown/HTML AST
+/**
+ * A node in the standardized Markdown/HTML AST
+ */
 export class AstNode {
   static scaffold(data: any = {}): AstNode {
     if (typeof data.file === 'string') {
@@ -38,7 +40,9 @@ export class AstNode {
     this.attributes = data.attributes
   }
 
-  // Returns the type of the corresponding ending node
+  /**
+   * Returns the type of the corresponding ending node
+   */
   endType(): string {
     if (!this.isOpeningNode()) {
       throw new Error('not an opening node')

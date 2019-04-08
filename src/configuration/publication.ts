@@ -4,7 +4,9 @@ import { addLeadingDotUnlessEmpty } from '../helpers/add-leading-dot-unless-empt
 import { addLeadingSlash } from '../helpers/add-leading-slash'
 import { addTrailingSlash } from '../helpers/add-trailing-slash'
 
-// Defines the publication of a local file path to a public URL
+/**
+ * Defines the publication of a local file path to a public URL
+ */
 export class Publication {
   localPath: string
   publicPath: string
@@ -16,8 +18,10 @@ export class Publication {
     this.publicExtension = addLeadingDotUnlessEmpty(publicExtension)
   }
 
-  // Returns the public link under which the given file path would be published
-  // according to the rules of this publication
+  /**
+   * Returns the public link under which the given file path would be published
+   * according to the rules of this publication
+   */
   publish(localPath: AbsoluteFilePath): AbsoluteLink {
     const re = new RegExp('^' + this.localPath)
     const linkPath = addLeadingSlash(localPath.unixified()).replace(
@@ -31,15 +35,21 @@ export class Publication {
     return result.withExtension(this.publicExtension)
   }
 
-  // Returns whether this publication applies to the given file path
+  /**
+   * Returns whether this publication applies to the given file path
+   */
   publishes(localPath: AbsoluteFilePath): boolean {
     return addLeadingSlash(addTrailingSlash(localPath.unixified())).startsWith(
       this.localPath
     )
   }
 
-  // returns the localPath for the given link,
-  // mapped according to the rules of this publication
+  /**
+   * Returns the localPath for the given link
+   * mapped according to the rules of this publication.
+   * @param link the link to resolve
+   * @param defaultFile if the link points to a directory, append this filename
+   */
   resolve(link: AbsoluteLink, defaultFile: string): AbsoluteFilePath {
     let result = link.rebase(this.publicPath, this.localPath)
     result = result.withoutAnchor()
@@ -58,7 +68,9 @@ export class Publication {
     return new AbsoluteFilePath(result.value)
   }
 
-  // Returns whether this publication maps the given link
+  /**
+   * Returns whether this publication maps the given link
+   */
   resolves(link: AbsoluteLink): boolean {
     return link.value.startsWith(this.publicPath)
   }

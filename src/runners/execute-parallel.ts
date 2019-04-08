@@ -5,8 +5,10 @@ import { LinkTargetList } from '../link-targets/link-target-list'
 import { runActivity } from './run-activity'
 import { StatsCounter } from './stats-counter'
 
-// Executes the given activities in parallel.
-// Returns the errors they produce.
+/**
+ * Executes the given activities in parallel.
+ * Returns the errors they produce.
+ */
 export function executeParallel(
   activities: ActivityList,
   linkTargets: LinkTargetList,

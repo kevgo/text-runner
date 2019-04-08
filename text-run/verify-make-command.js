@@ -22,15 +22,19 @@ module.exports = async function(args) {
   }
 }
 
-// returns whether the given line from a Makefile
-// defines a Make command
+/**
+ * Returns whether the given line from a Makefile
+ * defines a Make command
+ */
 function lineDefinesMakeCommand(line) {
   return makeCommandRE.test(line)
 }
 const makeCommandRE = /^[^ ]+:/
 
-// returns the defined command name
-// from a Makefile line that defines a Make command
+/**
+ * returns the defined command name
+ * from a Makefile line that defines a Make command
+ */
 function extractMakeCommand(line) {
   return line.split(':')[0]
 }

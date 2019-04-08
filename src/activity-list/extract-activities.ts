@@ -4,37 +4,46 @@ import { AstNode } from '../parsers/ast-node'
 import { AstNodeList } from '../parsers/ast-node-list'
 import { ActivityList } from './activity-list'
 
-// Returns all activities contained in the given collection of AstNodeLists
+/**
+ * Returns all activities contained in the given collection of AstNodeLists.
+ *
+ * @param ASTs
+ * @param attributeName the name of the attribute that denotes active blocks
+ */
 export function extractActivities(
   ASTs: AstNodeList[],
-  prefix: string
+  attributeName: string
 ): ActivityList {
   let result: ActivityList = []
   for (const AST of ASTs) {
-    result = result.concat(extractActivitiesFromNode(AST, prefix))
+    result = result.concat(extractActivitiesFromNode(AST, attributeName))
   }
   return result
 }
 
-// Returns the activities contained in the given AstNodeList
+/**
+ * Returns the activities contained in the given AstNodeList
+ * @param AST
+ * @param attributeName the name of the attribute that denotes active blocks
+ */
 function extractActivitiesFromNode(
   AST: AstNodeList,
-  prefix: string
+  attributeName: string
 ): ActivityList {
   const result: ActivityList = []
   let activeNode: AstNode | null = null
   for (const node of AST) {
-    if (isActiveBlockTag(node, prefix)) {
+    if (isActiveBlockTag(node, attributeName)) {
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
       result.push({
         file: node.file,
         line: node.line,
         nodes: AST.getNodesFor(node),
-        type: kebabCase(node.attributes[prefix])
+        type: kebabCase(node.attributes[attributeName])
       })
     }
-    if (isActiveBlockEndTag(node, activeNode, prefix)) {
+    if (isActiveBlockEndTag(node, activeNode, attributeName)) {
       activeNode = null
     }
   }

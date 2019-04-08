@@ -25,10 +25,15 @@ const defaultValues: Configuration = {
   workspace: '' // will be populated later
 }
 
-// Reads documentation and
+/**
+ * Loads the configuration from disk and returns it.
+ *
+ * @param configFilePath path of the config file
+ * @param cmdlineArgs arguments received on the command line
+ */
 export function loadConfiguration(
   configFilePath: string,
-  constructorArgs: CliArgTypes
+  cmdlineArgs: CliArgTypes
 ): Configuration {
   let fileData: any = {}
   if (configFilePath) {
@@ -40,7 +45,7 @@ export function loadConfiguration(
   function get(attributeName: string): string {
     const camelized = camelCase(attributeName)
     return (
-      constructorArgs[attributeName] ||
+      cmdlineArgs[attributeName] ||
       fileData[camelized] ||
       defaultValues[camelized]
     )

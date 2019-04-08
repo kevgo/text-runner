@@ -4,8 +4,12 @@ import minimist from 'minimist'
 import path from 'path'
 import { availableCommands } from '../commands/available-commands'
 
-// Parses the command-line options received,
-// and returns them structured as the command to run and options
+/**
+ * Parses the command-line options received
+ * and returns them structured as the command to run and options.
+ *
+ * @param argv the command-line options received by the process
+ */
 export function parseCliArgs(argv: string[]): CliArgTypes {
   // remove optional unix node call
   if (path.basename(argv[0] || '') === 'node') {

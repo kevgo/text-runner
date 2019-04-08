@@ -8,7 +8,10 @@ const debug = deb('text-runner:working-dir')
 
 type workingDirSetting = string | boolean
 
-// Creates the temp directory to run the tests in
+/**
+ * Creates the temp directory to run the tests in
+ * @param configSetting TRUE: use system temp dir, FALSE: use local tmp dir, STRING: use given temp dir
+ */
 export async function createWorkingDir(configSetting: workingDirSetting) {
   const workingDir = await getWorkingDirPath(configSetting)
   debug(`using test directory: ${workingDir}`)
@@ -16,7 +19,7 @@ export async function createWorkingDir(configSetting: workingDirSetting) {
   return workingDir
 }
 
-async function getWorkingDirPath(setting: any): Promise<string> {
+async function getWorkingDirPath(setting: workingDirSetting): Promise<string> {
   if (typeof setting === 'string') {
     return setting
   } else if (setting === false) {

@@ -11,7 +11,9 @@ interface Console {
   log(text: string): void
 }
 
-// Base class for formatters
+/**
+ * Base class for formatters
+ */
 export class Formatter {
   activity: Activity
   console: Console
@@ -64,7 +66,9 @@ export class Formatter {
     this.statsCounter.success()
   }
 
-  // allows the user to set a new name for this step
+  /**
+   * allows the user to set a new name for this step
+   */
   name(newTitle: string) {
     this.title = newTitle
   }

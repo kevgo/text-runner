@@ -1,4 +1,6 @@
-// returns a list of all available commands
+/**
+ * returns a list of all available commands
+ */
 export function availableCommands(): string[] {
   return [
     'add',

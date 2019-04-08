@@ -8,9 +8,11 @@ import { unixify } from '../helpers/unixify'
 import { AbsoluteFilePath } from './absolute-file-path'
 import { RelativeLink } from './relative-link'
 
-// Represents a link to another Markdown file,
-// all the way from the root directory
-// (i.e. a link starting with '/')
+/**
+ * Represents a link to another Markdown file,
+ * all the way from the root directory
+ * (i.e. a link starting with '/')
+ */
 export class AbsoluteLink {
   value: string
 
@@ -18,18 +20,24 @@ export class AbsoluteLink {
     this.value = addLeadingSlash(removeDoubleSlash(unixify(publicPath)))
   }
 
-  // Returns the anchor part of this link
+  /**
+   * Returns the anchor part of this link
+   */
   anchor(): string {
     return this.value.split('#')[1] || ''
   }
 
-  // Returns a new link that consists of this link
-  // with the given relative link appended
+  /**
+   * Returns a new link that consists of this link
+   * with the given relative link appended
+   */
   append(segment: RelativeLink): AbsoluteLink {
     return new AbsoluteLink(straightenLink(this.value + '/' + segment.value))
   }
 
-  // Returns a link to the containing directory
+  /**
+   * Returns a link to the containing directory
+   */
   directory(): AbsoluteLink {
     const withoutAnchor = this.withoutAnchor()
     if (withoutAnchor.isLinkToDirectory()) {
@@ -44,17 +52,25 @@ export class AbsoluteLink {
     return this.anchor() !== ''
   }
 
-  // Returns whether this link has the given extension
+  /**
+   * Returns whether this link has the given extension
+   */
   hasExtension(extension: string): boolean {
     return path.extname(this.value) === addLeadingDotUnlessEmpty(extension)
   }
 
-  // Returns whether this link points to a directory
+  /**
+   * Returns whether this link points to a directory
+   */
   isLinkToDirectory(): boolean {
     return this.value.endsWith('/')
   }
 
-  // Returns the file path that this link has on the local filesystem
+  /**
+   * Returns the file path that this link has on the local filesystem
+   * @param publications the publications of this TextRunner session
+   * @param defaultFile the filename to use in case this link points to a directory
+   */
   localize(publications: Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)
     let result = publication
@@ -68,8 +84,10 @@ export class AbsoluteLink {
     return result
   }
 
-  // Returns a link where the old enclosing directory is replaced
-  // with the new enclosing directory
+  /**
+   * Returns a link where the old enclosing directory is replaced
+   * with the new enclosing directory
+   */
   rebase(oldPath: string, newPath: string): AbsoluteLink {
     const re = new RegExp('^' + oldPath)
     return new AbsoluteLink(this.value.replace(re, newPath))
@@ -79,12 +97,16 @@ export class AbsoluteLink {
     return new AbsoluteLink(decodeURI(this.value))
   }
 
-  // Returns a link that contains the given anchor
+  /**
+   * Returns a link that contains the given anchor
+   */
   withAnchor(anchor: string): AbsoluteLink {
     return new AbsoluteLink(this.withoutAnchor().value + '#' + anchor)
   }
 
-  // Returns another AbsoluteLink instance that uses the given file extension
+  /**
+   * Returns another AbsoluteLink instance that uses the given file extension
+   */
   withExtension(newExtension: string): AbsoluteLink {
     const extRE = new RegExp(path.extname(this.value) + '$')
     return new AbsoluteLink(
@@ -92,7 +114,9 @@ export class AbsoluteLink {
     )
   }
 
-  // Returns a link that is this link without the anchor
+  /**
+   * Returns a link that is this link without the anchor
+   */
   withoutAnchor(): AbsoluteLink {
     return new AbsoluteLink(this.value.split('#')[0])
   }

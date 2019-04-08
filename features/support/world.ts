@@ -9,7 +9,7 @@ import path from 'path'
 import stripAnsi from 'strip-ansi'
 import { v4 as uuid } from 'uuid'
 
-const World = function() {
+function World() {
   // World provides step implementations that run and test TextRunner
   // via its command-line interface
 

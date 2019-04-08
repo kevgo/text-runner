@@ -8,7 +8,7 @@ import util from 'util'
 
 const readFileP = util.promisify(fs.readFile)
 
-export default async function(args: ActionArgs) {
+export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('strong', 'em')
   const fullPath = path.join(process.cwd(), filePath)
   args.formatter.name(`verifying file ${chalk.cyan(filePath)}`)

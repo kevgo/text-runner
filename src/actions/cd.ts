@@ -4,7 +4,7 @@ import chalk from 'chalk'
 import path from 'path'
 
 // Changes the current working directory to the one given in the hyperlink or code block
-export default function(args: ActionArgs) {
+export default function cd(args: ActionArgs) {
   const directory = args.nodes.text()
   args.formatter.name(
     `changing into the ${chalk.bold(chalk.cyan(directory))} directory`

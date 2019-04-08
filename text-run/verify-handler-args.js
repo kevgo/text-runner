@@ -4,7 +4,7 @@ const {
 } = require('../dist/helpers/remove-trailing-colon.js')
 const removeValue = require('remove-value')
 
-module.exports = function(args) {
+module.exports = function verifyHandlerArgs(args) {
   const expectedTools = args.nodes
     .textInNodesOfType('strong')
     .sort()

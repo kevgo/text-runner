@@ -5,7 +5,7 @@ import { ActionArgs } from '../runners/action-args'
 type DoneFunction = (err?: Error) => void
 
 // Runs the JavaScript code given in the code block
-export default function(args: ActionArgs, done: DoneFunction) {
+export default function runJavascript(args: ActionArgs, done: DoneFunction) {
   let code = args.nodes.textInNodeOfType('fence')
   if (code == null) {
     done(new Error('no JavaScript code found in the fenced block'))

@@ -5,7 +5,7 @@ import fs from 'fs-extra'
 import mkdirp from 'mkdirp'
 import path from 'path'
 
-export default async function(args: ActionArgs) {
+export default async function createFile(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('em', 'strong')
   const content = args.nodes.textInNodeOfType('fence', 'code')
   args.formatter.name(`create file ${chalk.cyan(filePath)}`)

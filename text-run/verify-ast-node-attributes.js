@@ -4,7 +4,7 @@ const {
   removeTrailingColon
 } = require('../dist/helpers/remove-trailing-colon.js')
 
-module.exports = async function(args) {
+module.exports = async function verifyAstNodeAttributes(args) {
   const expected = args.nodes
     .textInNodesOfType('strong')
     .sort()

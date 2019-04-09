@@ -13,21 +13,13 @@ export class OpenCloseMdTransformer {
    * Remarkable node types that we can handle here
    */
   static readonly mappings = {
-    'bullet-list': 'ul'
+    bullet_list: 'ul'
   }
 
   openTags: OpenTagTracker
 
   constructor(openTagTracker: OpenTagTracker) {
     this.openTags = openTagTracker
-  }
-
-  /**
-   * Returns whether this class can transform the given Remarkable node type
-   */
-  canTransform(tagType: string): boolean {
-    const keys = Object.keys(OpenCloseMdTransformer.mappings)
-     return keys.includes(tagType+'_open') || keys.includes('tagType+'_close')
   }
 
   transform(node: any, file: AbsoluteFilePath, line: number): AstNodeList {
@@ -37,7 +29,8 @@ export class OpenCloseMdTransformer {
     if (this.isClosingType(node.type)) {
       return this.transformClosingNode(node, file, line)
     }
-    return this.transformStandaloneNode(node, file, line)
+    throw new Error(`Unknown node type: ${node.type}`)
+    // return this.transformStandaloneNode(node, file, line)
   }
 
   /**
@@ -82,7 +75,7 @@ export class OpenCloseMdTransformer {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    const openingNodeType = this.openingTypeFor(node.type, file, line)
+    const openingNodeType = this.openingTypeFor(node.type)
     const openNode = this.openTags.popType(openingNodeType, file, line)
     result.pushNode({
       attributes: openNode.attributes,
@@ -105,7 +98,7 @@ export class OpenCloseMdTransformer {
   ): string {
     if (nodeType.endsWith('_open')) {
       const genericNodeType = nodeType.replace('_open', '')
-      return MdTransformer.simpleOpeningClosingTags[genericNodeType]
+      return OpenCloseMdTransformer.mappings[genericNodeType]
     }
     throw new UnprintedUserError(
       `Cannot determine opening tag for ${nodeType}`,
@@ -114,12 +107,29 @@ export class OpenCloseMdTransformer {
     )
   }
 
-  openingTypeFor(nodeType: string, file: AbsoluteFilePath, line: number) {}
+  /**
+   * Returns the opening node type for the given Remarkable node type
+   */
+  openingTypeFor(nodeType: string): string {
+    if (!this.isClosingType(nodeType)) {
+      throw new Error(`Node type ${nodeType} is not a closing type`)
+    }
+    return nodeType.replace('_close', '_open')
+  }
 
   /**
-   * Returns the closing type for the given opening type
+   * Returns the closing HTML tag name for the given closing Remarkable type
    */
-  closingTypeFor(openingType: string): string {
-    return openingType.replace('_close', '_open')
+  closingTagFor(nodeType: string): string {
+    if (!this.isClosingType(nodeType)) {
+      throw new Error(`Not a closing type: ${nodeType}`)
+    }
+
+    const normalizedType = nodeType.replace('_close', '')
+    const mappedType = OpenCloseMdTransformer.mappings[normalizedType]
+    if (mappedType) {
+      return `/${mappedType}`
+    }
+    return `/${nodeType}`
   }
 }

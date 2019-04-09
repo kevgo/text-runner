@@ -5,8 +5,8 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
+import { OpenCloseMdTransformer } from './open-close-md-transformer'
 import { TransformerList } from './transformer-list'
-import { MdTransformer } from './md-transformer'
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -17,7 +17,7 @@ export default class AstStandardizer {
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
-  mdTransformer: MdTransformer
+  openCloseMdTransformer: OpenCloseMdTransformer
   mdTransformers: TransformerList
   htmlBlockTransformers: TransformerList
   htmlTagTransformers: TransformerList
@@ -27,7 +27,7 @@ export default class AstStandardizer {
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
     this.line = 1
-    this.mdTransformer = new MdTransformer(this.openTags)
+    this.openCloseMdTransformer = new OpenCloseMdTransformer(this.openTags)
     this.mdTransformers = {}
     this.htmlBlockTransformers = {}
     this.htmlTagTransformers = {}
@@ -62,13 +62,10 @@ export default class AstStandardizer {
       if (this.processHtmlTag(node)) {
         continue
       }
-      if (this.processMdTransformer(node)) {
-        continue
-      }
       if (this.processMdNode(node)) {
         continue
       }
-      alertUnknownNodeType(node, this.filepath.platformified(), this.line)
+      this.processOpenCloseMdNode(node)
     }
     return this.result
   }
@@ -131,11 +128,8 @@ export default class AstStandardizer {
     return true
   }
 
-  processMdTransformer(node: any): boolean {
-    if (!this.mdTransformer.canTransform(node.type)) {
-      return false
-    }
-    const transformed = this.mdTransformer.transformSimpleOpeningTag(
+  processOpenCloseMdNode(node: any): boolean {
+    const transformed = this.openCloseMdTransformer.transform(
       node,
       this.filepath,
       this.line
@@ -170,12 +164,4 @@ export default class AstStandardizer {
     this.line += 1
     return true
   }
-}
-
-function alertUnknownNodeType(node, filepath: string, line: number): never {
-  throw new UnprintedUserError(
-    `AstStandardizer: unknown node type: ${node.type}`,
-    filepath,
-    line
-  )
 }

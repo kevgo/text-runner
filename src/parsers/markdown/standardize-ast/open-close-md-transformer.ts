@@ -31,8 +31,7 @@ export class OpenCloseMdTransformer {
     if (this.isClosingType(node.type)) {
       return this.transformClosingNode(node, file, line)
     }
-    throw new Error(`Unknown node type: ${node.type}`)
-    // return this.transformStandaloneNode(node, file, line)
+    return this.transformStandaloneNode(node, file, line)
   }
 
   /**
@@ -85,6 +84,23 @@ export class OpenCloseMdTransformer {
       file,
       line,
       tag: `/${openNode.tag}`,
+      type: node.type
+    })
+    return result
+  }
+
+  transformStandaloneNode(
+    node: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.pushNode({
+      attributes: node.attributes || {},
+      content: '',
+      file,
+      line,
+      tag: this.openingTagFor(node.type),
       type: node.type
     })
     return result

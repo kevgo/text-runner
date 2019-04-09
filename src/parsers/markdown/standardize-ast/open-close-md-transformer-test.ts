@@ -35,31 +35,30 @@ describe('MdTransformer', function() {
     it('returns the opening HTML tag for known Remarkable tags', function() {
       expect(this.transformer.openingTagFor('bullet_list_open')).to.equal('ul')
     })
-    it('throws for unknown node types', function() {
-      function tester() {
-        this.transformer.openingTagFor('zonk')
-      }
-      expect(tester).to.throw
+    it('returns the same tag for unknown types', function() {
+      expect(this.transformer.openingTagFor('del')).to.equal('del')
     })
   })
 
   describe('.openingTypeFor()', function() {
-    it('returns the opening type for the given closing node type', function() {
+    it('returns the opening type for the given known closing node type', function() {
       const actual = this.transformer.openingTypeFor('bullet_list_close')
       expect(actual).to.equal('bullet_list_open')
     })
-    it('throws for opening node types', function() {
-      function tester() {
-        this.transformer.openingTagFor('bullet_list_open')
-      }
-      expect(tester).to.throw
+    it('returns the opening type for the given unknown closing node type', function() {
+      const actual = this.transformer.openingTypeFor('del_close')
+      expect(actual).to.equal('del_open')
     })
   })
 
   describe('.closingTagFor()', function() {
-    it('returns the closing HTML tag for the given closing Remarkable type', function() {
+    it('returns the closing HTML tag for the given known closing Remarkable type', function() {
       const actual = this.transformer.closingTagFor('bullet_list_close')
       expect(actual).to.equal('/ul')
+    })
+    it('returns the closing HTML tag for the given unknown closing Remarkable type', function() {
+      const actual = this.transformer.closingTagFor('del_close')
+      expect(actual).to.equal('/del')
     })
   })
 

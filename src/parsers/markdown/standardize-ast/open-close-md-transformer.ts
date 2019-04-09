@@ -1,5 +1,4 @@
 import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 import { AstNode } from '../../ast-node'
 import { AstNodeList } from '../../ast-node-list'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
@@ -61,7 +60,7 @@ export class OpenCloseMdTransformer {
       content: '',
       file,
       line,
-      tag: this.openingTagFor(node.type, file, line),
+      tag: this.openingTagFor(node.type),
       type: node.type
     })
     this.openTags.add(resultNode)
@@ -91,20 +90,16 @@ export class OpenCloseMdTransformer {
   /**
    * Returns the opening HTML tag name for the given Remarkable node type
    */
-  openingTagFor(
-    nodeType: string,
-    file: AbsoluteFilePath,
-    line: number
-  ): string {
-    if (nodeType.endsWith('_open')) {
+  openingTagFor(nodeType: string): string {
+    if (this.isOpeningType(nodeType)) {
       const genericNodeType = nodeType.replace('_open', '')
-      return OpenCloseMdTransformer.mappings[genericNodeType]
+      const mapped = OpenCloseMdTransformer.mappings[genericNodeType]
+      if (mapped) {
+        return mapped
+      }
+      return genericNodeType
     }
-    throw new UnprintedUserError(
-      `Cannot determine opening tag for ${nodeType}`,
-      file.platformified(),
-      line
-    )
+    return nodeType
   }
 
   /**
@@ -130,6 +125,6 @@ export class OpenCloseMdTransformer {
     if (mappedType) {
       return `/${mappedType}`
     }
-    return `/${nodeType}`
+    return `/${normalizedType}`
   }
 }

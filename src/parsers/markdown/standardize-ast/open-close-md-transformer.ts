@@ -14,7 +14,8 @@ export class OpenCloseMdTransformer {
   static readonly mappings = {
     bullet_list: 'ul',
     list_item: 'li',
-    ordered_list: 'ol'
+    ordered_list: 'ol',
+    paragraph: 'p'
   }
 
   openTags: OpenTagTracker

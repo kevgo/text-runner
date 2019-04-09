@@ -63,7 +63,12 @@ describe('MdTransformer', function() {
   })
 
   describe('.transform()', function() {
-    it('transforms bullet-list-open', function() {
+    it('stores attributes of the original node', function() {
+      const node = { type: 'bullet_list_open', attributes: { foo: 'bar' } }
+      const transformed = this.transformer.transform(node, 'file.js', 12)
+      expect(transformed[0].attributes).to.eql({ foo: 'bar' })
+    })
+    it('transforms bullet_list_open', function() {
       const node = { type: 'bullet_list_open' }
       const transformed = this.transformer.transform(node, 'file.js', 12)
       expect(transformed).to.have.length(1)
@@ -74,6 +79,24 @@ describe('MdTransformer', function() {
         line: 12,
         tag: 'ul',
         type: 'bullet_list_open'
+      })
+    })
+    it('transforms bullet_list_close', function() {
+      // we need an open node before we can transform the closing node
+      const openNode = { type: 'bullet_list_open' }
+      this.transformer.transform(openNode, 'file.js', 12)
+
+      // transform the closing node
+      const closeNode = { type: 'bullet_list_close' }
+      const transformed = this.transformer.transform(closeNode, 'file.js', 12)
+      expect(transformed).to.have.length(1)
+      expect(transformed[0]).to.eql({
+        attributes: {},
+        content: '',
+        file: { value: 'file.js' }, // this is an AbsoluteFilePath
+        line: 12,
+        tag: '/ul',
+        type: 'bullet_list_close'
       })
     })
   })

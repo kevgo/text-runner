@@ -13,10 +13,10 @@ export class OpenCloseMdTransformer {
    */
   static readonly mappings = {
     bullet_list: 'ul',
+    image: 'img',
     list_item: 'li',
     ordered_list: 'ol',
-    paragraph: 'p',
-    image: 'img'
+    paragraph: 'p'
   }
 
   openTags: OpenTagTracker

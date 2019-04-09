@@ -12,7 +12,8 @@ export class OpenCloseMdTransformer {
    * Remarkable node types that we can handle here
    */
   static readonly mappings = {
-    bullet_list: 'ul'
+    bullet_list: 'ul',
+    link: 'a'
   }
 
   openTags: OpenTagTracker
@@ -81,7 +82,7 @@ export class OpenCloseMdTransformer {
       content: '',
       file,
       line,
-      tag: this.closingTagFor(node.type),
+      tag: `/${openNode.tag}`,
       type: node.type
     })
     return result

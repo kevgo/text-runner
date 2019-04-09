@@ -99,18 +99,5 @@ describe('MdTransformer', function() {
         type: 'bullet_list_close'
       })
     })
-    it('transforms images', function() {
-      const closeNode = { type: 'bullet_list_close' }
-      const transformed = this.transformer.transform(closeNode, 'file.js', 12)
-      expect(transformed).to.have.length(1)
-      expect(transformed[0]).to.eql({
-        attributes: {},
-        content: '',
-        file: { value: 'file.js' }, // this is an AbsoluteFilePath
-        line: 12,
-        tag: '/ul',
-        type: 'bullet_list_close'
-      })
-    })
   })
 })

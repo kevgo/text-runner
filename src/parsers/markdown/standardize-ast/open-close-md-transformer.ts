@@ -15,7 +15,8 @@ export class OpenCloseMdTransformer {
     bullet_list: 'ul',
     list_item: 'li',
     ordered_list: 'ol',
-    paragraph: 'p'
+    paragraph: 'p',
+    image: 'img'
   }
 
   openTags: OpenTagTracker

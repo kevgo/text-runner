@@ -56,7 +56,7 @@ export class OpenCloseMdTransformer {
   ): AstNodeList {
     const result = new AstNodeList()
     const resultNode = new AstNode({
-      attributes: {},
+      attributes: node.attributes || {},
       content: '',
       file,
       line,

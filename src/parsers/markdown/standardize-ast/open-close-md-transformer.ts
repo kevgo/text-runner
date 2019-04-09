@@ -19,6 +19,11 @@ export class OpenCloseMdTransformer {
     paragraph: 'p'
   }
 
+  /**
+   * Tags to ignore
+   */
+  static readonly ignore = ['hardbreak', 'inline']
+
   openTags: OpenTagTracker
 
   constructor(openTagTracker: OpenTagTracker) {
@@ -32,7 +37,14 @@ export class OpenCloseMdTransformer {
     if (this.isClosingType(node.type)) {
       return this.transformClosingNode(node, file, line)
     }
+    if (this.isIgnoredType(node.type)) {
+      return new AstNodeList()
+    }
     return this.transformStandaloneNode(node, file, line)
+  }
+
+  isIgnoredType(nodeType: string): boolean {
+    return OpenCloseMdTransformer.ignore.includes(nodeType)
   }
 
   /**

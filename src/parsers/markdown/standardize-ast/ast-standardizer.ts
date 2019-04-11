@@ -5,6 +5,7 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
+import { OpenCloseMdTransformer } from './open-close-md-transformer'
 import { TransformerList } from './transformer-list'
 
 /**
@@ -16,6 +17,7 @@ export default class AstStandardizer {
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
+  openCloseMdTransformer: OpenCloseMdTransformer
   mdTransformers: TransformerList
   htmlBlockTransformers: TransformerList
   htmlTagTransformers: TransformerList
@@ -25,6 +27,7 @@ export default class AstStandardizer {
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
     this.line = 1
+    this.openCloseMdTransformer = new OpenCloseMdTransformer(this.openTags)
     this.mdTransformers = {}
     this.htmlBlockTransformers = {}
     this.htmlTagTransformers = {}
@@ -62,7 +65,7 @@ export default class AstStandardizer {
       if (this.processMdNode(node)) {
         continue
       }
-      alertUnknownNodeType(node, this.filepath.platformified(), this.line)
+      this.processOpenCloseMdNode(node)
     }
     return this.result
   }
@@ -125,6 +128,18 @@ export default class AstStandardizer {
     return true
   }
 
+  processOpenCloseMdNode(node: any): boolean {
+    const transformed = this.openCloseMdTransformer.transform(
+      node,
+      this.filepath,
+      this.line
+    )
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
+    }
+    return true
+  }
+
   processMdNode(node: any): boolean {
     const transformer = this.mdTransformers[node.type]
     if (!transformer) {
@@ -149,12 +164,4 @@ export default class AstStandardizer {
     this.line += 1
     return true
   }
-}
-
-function alertUnknownNodeType(node, filepath: string, line: number): never {
-  throw new UnprintedUserError(
-    `AstStandardizer: unknown node type: ${node.type}`,
-    filepath,
-    line
-  )
 }

@@ -65,7 +65,11 @@ export default class AstStandardizer {
       if (this.processCustomMdNode(node)) {
         continue
       }
-      this.processGenericMdNode(node)
+      if (this.genericMdTransformer.canTransform(node)) {
+        this.processGenericMdNode(node)
+        continue
+      }
+      throw new Error(`Unprocessable node: ${node.type}`)
     }
     return this.result
   }

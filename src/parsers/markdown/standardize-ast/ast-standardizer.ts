@@ -65,7 +65,7 @@ export default class AstStandardizer {
       if (this.processMdNode(node)) {
         continue
       }
-      this.processOpenCloseMdNode(node)
+      this.processGenericMdNode(node)
     }
     return this.result
   }
@@ -128,7 +128,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processOpenCloseMdNode(node: any): boolean {
+  processGenericMdNode(node: any): boolean {
     const transformed = this.openCloseMdTransformer.transform(
       node,
       this.filepath,

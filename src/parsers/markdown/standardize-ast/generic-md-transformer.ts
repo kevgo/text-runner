@@ -8,7 +8,7 @@ import { TagMapper } from './tag-mapper'
  * Transforms basic Remarkable nodes with opening and closing tags
  * to to standardized AST used by TextRunner
  */
-export class OpenCloseMdTransformer {
+export class GenericMdTransformer {
   /**
    * Tags to ignore
    */
@@ -36,7 +36,7 @@ export class OpenCloseMdTransformer {
   }
 
   isIgnoredType(nodeType: string): boolean {
-    return OpenCloseMdTransformer.ignore.includes(nodeType)
+    return GenericMdTransformer.ignore.includes(nodeType)
   }
 
   /**

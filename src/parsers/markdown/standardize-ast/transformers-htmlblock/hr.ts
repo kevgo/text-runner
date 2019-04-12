@@ -4,11 +4,12 @@ import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
+import { RemarkableNode } from '../remarkable-node'
 
 const olRegex = /<hr([^>]*)>/
 
 export default async function transformOl(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

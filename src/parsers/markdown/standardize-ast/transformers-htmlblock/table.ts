@@ -6,11 +6,12 @@ import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
+import { RemarkableNode } from '../remarkable-node'
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
 export default async function transformTable(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

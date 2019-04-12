@@ -7,6 +7,7 @@ import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { CustomHtmlTagTransformer } from './custom-html-tag-transformer'
 import { GenericMdTransformer } from './generic-md-transformer'
+import { RemarkableNode } from './remarkable-node'
 import { TransformerList } from './transformer-list'
 
 /**
@@ -41,7 +42,8 @@ export default class AstStandardizer {
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
-    for (const node of ast) {
+    for (const n of ast) {
+      const node = n as RemarkableNode
       if (node.lines) {
         this.line = Math.max(node.lines[0] + 1, this.line)
       }
@@ -78,7 +80,7 @@ export default class AstStandardizer {
     return this.result
   }
 
-  async processHtmlBlock(node: any): Promise<boolean> {
+  async processHtmlBlock(node: RemarkableNode): Promise<boolean> {
     if (node.type !== 'htmlblock') {
       return false
     }
@@ -107,7 +109,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processCustomHtmlTag(node: any) {
+  processCustomHtmlTag(node: RemarkableNode) {
     const transformed = this.customHtmlTagTransformer.transform(
       node,
       this.filepath,
@@ -118,7 +120,7 @@ export default class AstStandardizer {
     }
   }
 
-  processGenericMdNode(node: any): boolean {
+  processGenericMdNode(node: RemarkableNode): boolean {
     const transformed = this.genericMdTransformer.transform(
       node,
       this.filepath,
@@ -130,7 +132,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processCustomMdNode(node: any): boolean {
+  processCustomMdNode(node: RemarkableNode): boolean {
     const transformer = this.mdTransformers[node.type]
     if (!transformer) {
       return false
@@ -147,7 +149,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processSoftBreak(node: any): boolean {
+  processSoftBreak(node: RemarkableNode): boolean {
     if (node.type !== 'softbreak') {
       return false
     }

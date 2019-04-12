@@ -4,6 +4,7 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
+import { RemarkableNode } from './remarkable-node'
 import { TransformerList } from './transformer-list'
 
 export class CustomHtmlTagTransformer {
@@ -20,7 +21,7 @@ export class CustomHtmlTagTransformer {
   }
 
   /** Returns whether this transformer can transform the given Remarkable node */
-  canTransform(node: any, filepath, line): boolean {
+  canTransform(node: RemarkableNode, filepath, line): boolean {
     if (node.type !== 'htmltag') {
       return false
     }
@@ -34,7 +35,11 @@ export class CustomHtmlTagTransformer {
   }
 
   /** Transforms the given node into an AstNodeList and signals success */
-  transform(node: any, filepath: AbsoluteFilePath, line: number): AstNodeList {
+  transform(
+    node: RemarkableNode,
+    filepath: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
       filepath,

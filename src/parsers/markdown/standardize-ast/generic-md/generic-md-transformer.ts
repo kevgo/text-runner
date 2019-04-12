@@ -1,9 +1,9 @@
-import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { AstNode } from '../../ast-node'
-import { AstNodeList } from '../../ast-node-list'
-import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { RemarkableNode } from './remarkable-node'
-import { TagMapper } from './tag-mapper'
+import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
+import { AstNode } from '../../../ast-node'
+import { AstNodeList } from '../../../ast-node-list'
+import { OpenTagTracker } from '../../helpers/open-tag-tracker'
+import { RemarkableNode } from '../remarkable-node'
+import { TagMapper } from '../tag-mapper'
 
 /**
  * Transforms basic Remarkable nodes with opening and closing tags
@@ -19,6 +19,11 @@ export class GenericMdTransformer {
   constructor(openTagTracker: OpenTagTracker) {
     this.openTags = openTagTracker
     this.tagMapper = new TagMapper()
+  }
+
+  canTransform(node: RemarkableNode) {
+    // we can process any node
+    return !!node
   }
 
   transform(

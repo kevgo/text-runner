@@ -3,12 +3,10 @@ import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 import { AstNodeList } from '../../ast-node-list'
 import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { parseHtmlTag } from '../helpers/parse-html-tag'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { OpenCloseMdTransformer } from './open-close-md-transformer'
 import { TransformerList } from './transformer-list'
-import { AstNode } from '../../ast-node'
 
 /**
  * AstStandardizer converts the AST created by Remarkable

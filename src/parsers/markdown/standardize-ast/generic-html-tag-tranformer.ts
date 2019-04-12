@@ -1,31 +1,31 @@
-import { AstNodeList } from "../../ast-node-list";
+import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
+import { AstNodeList } from '../../ast-node-list'
+import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
+import { parseHtmlTag } from '../helpers/parse-html-tag'
+import { removeHtmlComments } from '../helpers/remove-html-comments'
 
-class GenericHtmlTagTransformer {
-
-  transform(node: any): AstNodeList {
-    const tagName = getHtmlBlockTag(
-      removeHtmlComments(node.content),
-      this.filepath,
-      this.line
-    )
-    let transformed: AstNodeList
+export class GenericHtmlTagTransformer {
+  transform(node: any, filepath: AbsoluteFilePath, line: number): AstNodeList {
+    const sanitizedContent = removeHtmlComments(node.content)
+    const tagName = getHtmlBlockTag(sanitizedContent, filepath, line)
     if (tagName.startsWith('/')) {
-      // process closing tag
-      transformed = this.transformClosingHtmlTag(node, tagName)
+      return this.transformClosingHtmlTag(node, filepath, line)
     } else {
-      // process opening tag
-      transformed = this.transformOpeningHtmlTag(node, tagName)
+      return this.transformOpeningHtmlTag(node, tagName)
     }
-
   }
-  transformOpeningHtmlTag(node: any, tagName: string): AstNodeList {
+
+  transformOpeningHtmlTag(
+    node: any,
+    filepath: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
     const result = new AstNodeList()
     const [tag, attributes] = parseHtmlTag(
       node.content,
-      this.filepath.platformified(),
-      this.line
+      filepath.platformified(),
+      line
     )
-    const type = AstStandardizer.
     const resultNode = new AstNode({
       attributes,
       content: '',
@@ -34,9 +34,8 @@ class GenericHtmlTagTransformer {
       tag,
       type: this.typeOfTag(tagName)
     })
-    this.openTags.add(resultNode)
+    openTags.add(resultNode)
     result.pushNode(resultNode)
     return result
   }
-
 }

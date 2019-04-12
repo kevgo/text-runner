@@ -13,8 +13,8 @@ export default function(
   const result = new AstNodeList()
   const resultNode = new AstNode({
     attributes: {
-      href: node.href,
-      title: node.title
+      href: node.href || '',
+      title: node.title || ''
     },
     content: '',
     file,

@@ -1,4 +1,5 @@
 import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
+import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
 import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
@@ -16,6 +17,13 @@ export default async function transformBlockquote(
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const blockquoteMatch = node.content.match(blockquoteRegex)
+  if (blockquoteMatch == null) {
+    throw new UnprintedUserError(
+      'Cannot parse blockquote expression',
+      file.platformified(),
+      line
+    )
+  }
   const resultNode = new AstNode({
     attributes: parseHtmlAttributes(blockquoteMatch[1]),
     content: blockquoteMatch[2],

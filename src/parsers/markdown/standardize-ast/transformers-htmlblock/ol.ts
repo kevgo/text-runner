@@ -20,6 +20,9 @@ export default async function transformOl(
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(olRegex)
+  if (match == null) {
+    throw new Error('Cannot parse <ol> expression: ' + node.content)
+  }
   const xml = await xml2jsp(node.content)
   const olNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),

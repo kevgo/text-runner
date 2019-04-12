@@ -1,4 +1,5 @@
 import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
+import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
 import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
@@ -16,6 +17,13 @@ export default async function transformOl(
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(olRegex)
+  if (match == null) {
+    throw new UnprintedUserError(
+      'Cannot parse ol expression',
+      file.platformified(),
+      line
+    )
+  }
   const hrNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),
     content: '',

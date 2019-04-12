@@ -7,6 +7,7 @@ import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
 import { RemarkableNode } from '../remarkable-node'
+import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
@@ -20,6 +21,13 @@ export default async function transformUl(
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(ulRegex)
+  if (match == null) {
+    throw new UnprintedUserError(
+      'Cannot parse ul expression',
+      file.platformified(),
+      line
+    )
+  }
   const xml = await xml2jsp(node.content)
   const ulNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),

@@ -1,4 +1,5 @@
 import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
+import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
 import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
@@ -16,6 +17,13 @@ export default async function transformDiv(
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const divMatch = node.content.match(divRegex)
+  if (divMatch == null) {
+    throw new UnprintedUserError(
+      'Cannot parse div expression',
+      file.platformified(),
+      line
+    )
+  }
   const resultNode = new AstNode({
     attributes: parseHtmlAttributes(divMatch[1]),
     content: divMatch[2],

@@ -1,12 +1,18 @@
 export class RemarkableNode {
   lines: any
-  children: any
-  type: any
-  content: any
+  children: RemarkableNode[]
+  type: string
+  content: string
   attributes: any
   hLevel: any
-  alt: any
-  src: any
-  href: any
-  title: any
+  alt: string | undefined
+  src: string | undefined
+  href: string | undefined
+  title: string | undefined
+
+  constructor() {
+    this.type = ''
+    this.content = ''
+    this.children = []
+  }
 }

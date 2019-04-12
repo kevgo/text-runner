@@ -20,12 +20,16 @@ export class CustomHtmlTagTransformer {
   }
 
   /** Returns whether this transformer can transform the given Remarkable node */
-  canTransform(node: any): boolean {
-    console.log('node', node)
+  canTransform(node: any, filepath, line): boolean {
     if (node.type !== 'htmltag') {
       return false
     }
-    const filename = this.transformerFileName(node.type)
+    const tagName = getHtmlBlockTag(
+      removeHtmlComments(node.content),
+      filepath,
+      line
+    )
+    const filename = this.transformerFileName(tagName)
     return this.htmlTagTransformers.hasOwnProperty(filename)
   }
 

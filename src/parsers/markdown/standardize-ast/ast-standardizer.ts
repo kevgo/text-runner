@@ -60,7 +60,13 @@ export default class AstStandardizer {
       if (await this.processHtmlBlock(node)) {
         continue
       }
-      if (this.customHtmlTagTransformer.canTransform(node)) {
+      if (
+        this.customHtmlTagTransformer.canTransform(
+          node,
+          this.filepath,
+          this.line
+        )
+      ) {
         this.processCustomHtmlTag(node)
         continue
       }

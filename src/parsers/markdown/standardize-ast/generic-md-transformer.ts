@@ -7,7 +7,7 @@ import { OpenTagTracker } from '../helpers/open-tag-tracker'
  * Transforms basic Remarkable nodes with opening and closing tags
  * to to standardized AST used by TextRunner
  */
-export class OpenCloseMdTransformer {
+export class GenericMdTransformer {
   /**
    * Remarkable node types that we can handle here
    */
@@ -44,7 +44,7 @@ export class OpenCloseMdTransformer {
   }
 
   isIgnoredType(nodeType: string): boolean {
-    return OpenCloseMdTransformer.ignore.includes(nodeType)
+    return GenericMdTransformer.ignore.includes(nodeType)
   }
 
   /**
@@ -125,7 +125,7 @@ export class OpenCloseMdTransformer {
   openingTagFor(nodeType: string): string {
     if (this.isOpeningType(nodeType)) {
       const genericNodeType = nodeType.replace('_open', '')
-      const mapped = OpenCloseMdTransformer.mappings[genericNodeType]
+      const mapped = GenericMdTransformer.mappings[genericNodeType]
       if (mapped) {
         return mapped
       }
@@ -153,7 +153,7 @@ export class OpenCloseMdTransformer {
     }
 
     const normalizedType = nodeType.replace('_close', '')
-    const mappedType = OpenCloseMdTransformer.mappings[normalizedType]
+    const mappedType = GenericMdTransformer.mappings[normalizedType]
     if (mappedType) {
       return `/${mappedType}`
     }

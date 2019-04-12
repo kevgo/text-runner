@@ -4,6 +4,9 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { parseHtmlTag } from '../helpers/parse-html-tag'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 
+/**
+ * Transforms generic HTML tags
+ */
 export class GenericHtmlTagTransformer {
   transform(node: any, filepath: AbsoluteFilePath, line: number): AstNodeList {
     const sanitizedContent = removeHtmlComments(node.content)

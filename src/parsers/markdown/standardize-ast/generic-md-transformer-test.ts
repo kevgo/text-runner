@@ -1,10 +1,10 @@
 import { expect } from 'chai'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { OpenCloseMdTransformer } from './open-close-md-transformer'
+import { GenericMdTransformer } from './generic-md-transformer'
 
 describe('MdTransformer', function() {
   beforeEach(function() {
-    this.transformer = new OpenCloseMdTransformer(new OpenTagTracker())
+    this.transformer = new GenericMdTransformer(new OpenTagTracker())
   })
 
   describe('.isOpeningType()', function() {

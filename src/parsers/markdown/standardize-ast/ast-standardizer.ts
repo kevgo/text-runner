@@ -5,7 +5,7 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
-import { OpenCloseMdTransformer } from './open-close-md-transformer'
+import { GenericMdTransformer } from './generic-md-transformer'
 import { TransformerList } from './transformer-list'
 
 /**
@@ -17,7 +17,7 @@ export default class AstStandardizer {
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
-  openCloseMdTransformer: OpenCloseMdTransformer
+  genericMdTransformer: GenericMdTransformer
   mdTransformers: TransformerList
   htmlBlockTransformers: TransformerList
   htmlTagTransformers: TransformerList
@@ -27,7 +27,7 @@ export default class AstStandardizer {
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
     this.line = 1
-    this.openCloseMdTransformer = new OpenCloseMdTransformer(this.openTags)
+    this.genericMdTransformer = new GenericMdTransformer(this.openTags)
     this.mdTransformers = {}
     this.htmlBlockTransformers = {}
     this.htmlTagTransformers = {}
@@ -62,10 +62,10 @@ export default class AstStandardizer {
       if (this.processHtmlTag(node)) {
         continue
       }
-      if (this.processMdNode(node)) {
+      if (this.processCustomMdNode(node)) {
         continue
       }
-      this.processOpenCloseMdNode(node)
+      this.processGenericMdNode(node)
     }
     return this.result
   }
@@ -128,8 +128,8 @@ export default class AstStandardizer {
     return true
   }
 
-  processOpenCloseMdNode(node: any): boolean {
-    const transformed = this.openCloseMdTransformer.transform(
+  processGenericMdNode(node: any): boolean {
+    const transformed = this.genericMdTransformer.transform(
       node,
       this.filepath,
       this.line
@@ -140,7 +140,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processMdNode(node: any): boolean {
+  processCustomMdNode(node: any): boolean {
     const transformer = this.mdTransformers[node.type]
     if (!transformer) {
       return false

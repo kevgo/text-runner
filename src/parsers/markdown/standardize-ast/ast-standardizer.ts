@@ -5,7 +5,7 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
-import { GenericMdTransformer } from './generic-md-transformer'
+import { GenericMdTransformer } from './generic-md/generic-md-transformer'
 import { TransformerList } from './transformer-list'
 
 /**

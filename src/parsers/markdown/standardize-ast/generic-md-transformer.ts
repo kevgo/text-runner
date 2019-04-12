@@ -51,14 +51,6 @@ export class GenericMdTransformer {
     return nodeType.endsWith('_close')
   }
 
-  /** Returns the opening type for the given closing type */
-  openingTypeFor(closingType: string): string {
-    if (closingType.endsWith('_close')) {
-      return closingType.substring(0, closingType.length - 6) + '_open'
-    }
-    return closingType
-  }
-
   /**
    * Transforms a simple opening Remarkable Node
    */
@@ -115,5 +107,13 @@ export class GenericMdTransformer {
       type: node.type
     })
     return result
+  }
+
+  /** Returns the opening type for the given closing type */
+  openingTypeFor(closingType: string): string {
+    if (closingType.endsWith('_close')) {
+      return closingType.substring(0, closingType.length - 6) + '_open'
+    }
+    return closingType
   }
 }

@@ -1,5 +1,5 @@
 export class RemarkableNode {
-  lines: any
+  lines: number[]
   children: RemarkableNode[]
   type: string
   content: string
@@ -14,5 +14,6 @@ export class RemarkableNode {
     this.type = ''
     this.content = ''
     this.children = []
+    this.lines = []
   }
 }

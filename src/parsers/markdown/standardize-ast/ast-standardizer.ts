@@ -62,7 +62,7 @@ export default class AstStandardizer {
       if (this.processHtmlTag(node)) {
         continue
       }
-      if (this.processMdNode(node)) {
+      if (this.processCustomMdNode(node)) {
         continue
       }
       this.processGenericMdNode(node)
@@ -140,7 +140,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processMdNode(node: any): boolean {
+  processCustomMdNode(node: any): boolean {
     const transformer = this.mdTransformers[node.type]
     if (!transformer) {
       return false

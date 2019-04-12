@@ -32,18 +32,26 @@ export class TagMapper {
 
   /** Returns the HTML tag for the given Remarkable type. */
   tagForType(type: string): string {
+    // handle explicitly mapped values
     if (this.typeTagMappings.hasOwnProperty(type)) {
       return this.typeTagMappings[type]
     }
+
+    // handle generic opening tag
     if (type.endsWith('_open')) {
       return type.substring(0, type.length - 5)
     }
+
+    // handle generic closing tag
     if (type.endsWith('_close')) {
       return '/' + type.substring(0, type.length - 6)
     }
+
+    // handle generic stand-alone tag
     return type
   }
 
+  /** Returns the Remarkable type for the given HTML tag. */
   typeForTag(tag: string): string {
     if (this.tagTypeMappings.hasOwnProperty(tag)) {
       return this.tagTypeMappings[tag]

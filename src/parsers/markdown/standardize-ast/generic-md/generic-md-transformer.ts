@@ -21,11 +21,6 @@ export class GenericMdTransformer {
     this.tagMapper = new TagMapper()
   }
 
-  canTransform(node: RemarkableNode) {
-    // we can process any node
-    return !!node
-  }
-
   transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,

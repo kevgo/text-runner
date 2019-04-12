@@ -3,10 +3,12 @@ import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 import { AstNodeList } from '../../ast-node-list'
 import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
+import { parseHtmlTag } from '../helpers/parse-html-tag'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { OpenCloseMdTransformer } from './open-close-md-transformer'
 import { TransformerList } from './transformer-list'
+import { AstNode } from '../../ast-node'
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -59,7 +61,7 @@ export default class AstStandardizer {
       if (await this.processHtmlBlock(node)) {
         continue
       }
-      if (this.processHtmlTag(node)) {
+      if (this.processCustomHtmlTag(node)) {
         continue
       }
       if (this.processGenericHtmlTag(node)) {
@@ -102,7 +104,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processHtmlTag(node: any): boolean {
+  processCustomHtmlTag(node: any): boolean {
     if (node.type !== 'htmltag') {
       return false
     }
@@ -122,6 +124,21 @@ export default class AstStandardizer {
     const transformed = transformer(
       node,
       this.openTags,
+      this.filepath,
+      this.line
+    )
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
+    }
+    return true
+  }
+
+  processGenericHtmlTag(node: any): boolean {
+    if (node.type !== 'htmltag') {
+      return false
+    }
+    const transformed = this.genericHtmlTagTransformer.transform(
+      node,
       this.filepath,
       this.line
     )

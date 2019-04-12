@@ -50,7 +50,7 @@ Feature: changing the working directory
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | directory_changer.md            |
-      | LINE          | 1                               |
-      | ERROR MESSAGE | directory foo not found         |
-      | EXIT CODE     | 1                               |
+      | FILENAME      | directory_changer.md    |
+      | LINE          | 1                       |
+      | ERROR MESSAGE | directory foo not found |
+      | EXIT CODE     | 1                       |

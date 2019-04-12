@@ -5,7 +5,7 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
-import { OpenCloseMdTransformer } from './open-close-md-transformer'
+import { GenericMdTransformer } from './generic-md-transformer'
 import { TransformerList } from './transformer-list'
 
 /**
@@ -17,7 +17,7 @@ export default class AstStandardizer {
   openTags: OpenTagTracker
   result: AstNodeList
   line: number
-  openCloseMdTransformer: OpenCloseMdTransformer
+  genericMdTransformer: GenericMdTransformer
   mdTransformers: TransformerList
   htmlBlockTransformers: TransformerList
   htmlTagTransformers: TransformerList
@@ -27,7 +27,7 @@ export default class AstStandardizer {
     this.openTags = new OpenTagTracker()
     this.result = new AstNodeList()
     this.line = 1
-    this.openCloseMdTransformer = new OpenCloseMdTransformer(this.openTags)
+    this.genericMdTransformer = new GenericMdTransformer(this.openTags)
     this.mdTransformers = {}
     this.htmlBlockTransformers = {}
     this.htmlTagTransformers = {}
@@ -129,7 +129,7 @@ export default class AstStandardizer {
   }
 
   processGenericMdNode(node: any): boolean {
-    const transformed = this.openCloseMdTransformer.transform(
+    const transformed = this.genericMdTransformer.transform(
       node,
       this.filepath,
       this.line

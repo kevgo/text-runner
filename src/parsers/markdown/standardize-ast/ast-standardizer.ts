@@ -5,6 +5,7 @@ import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
+import { CustomHtmlTagTransformer } from './custom-html-tag-transformer'
 import { GenericMdTransformer } from './generic-md-transformer'
 import { TransformerList } from './transformer-list'
 
@@ -20,7 +21,7 @@ export default class AstStandardizer {
   genericMdTransformer: GenericMdTransformer
   mdTransformers: TransformerList
   htmlBlockTransformers: TransformerList
-  htmlTagTransformers: TransformerList
+  customHtmlTagTransformer: CustomHtmlTagTransformer
 
   constructor(filepath: AbsoluteFilePath) {
     this.filepath = filepath
@@ -30,13 +31,13 @@ export default class AstStandardizer {
     this.genericMdTransformer = new GenericMdTransformer(this.openTags)
     this.mdTransformers = {}
     this.htmlBlockTransformers = {}
-    this.htmlTagTransformers = {}
+    this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
   }
 
   async loadTransformers() {
     this.mdTransformers = await loadTransformers('md')
     this.htmlBlockTransformers = await loadTransformers('htmlblock')
-    this.htmlTagTransformers = await loadTransformers('htmltag')
+    await this.customHtmlTagTransformer.loadTransformers()
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
@@ -59,7 +60,14 @@ export default class AstStandardizer {
       if (await this.processHtmlBlock(node)) {
         continue
       }
-      if (this.processHtmlTag(node)) {
+      if (
+        this.customHtmlTagTransformer.canTransform(
+          node,
+          this.filepath,
+          this.line
+        )
+      ) {
+        this.processCustomHtmlTag(node)
         continue
       }
       if (this.processCustomMdNode(node)) {
@@ -99,33 +107,15 @@ export default class AstStandardizer {
     return true
   }
 
-  processHtmlTag(node: any): boolean {
-    if (node.type !== 'htmltag') {
-      return false
-    }
-    const tagName = getHtmlBlockTag(
-      removeHtmlComments(node.content),
-      this.filepath,
-      this.line
-    )
-    const transformer = this.htmlTagTransformers[tagName.replace('/', '_')]
-    if (!transformer) {
-      throw new UnprintedUserError(
-        `Unknown HTML tag: '${tagName}'`,
-        this.filepath.platformified(),
-        this.line
-      )
-    }
-    const transformed = transformer(
+  processCustomHtmlTag(node: any) {
+    const transformed = this.customHtmlTagTransformer.transform(
       node,
-      this.openTags,
       this.filepath,
       this.line
     )
     for (const transformedNode of transformed) {
       this.result.push(transformedNode)
     }
-    return true
   }
 
   processGenericMdNode(node: any): boolean {

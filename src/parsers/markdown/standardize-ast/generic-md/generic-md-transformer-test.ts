@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { OpenTagTracker } from '../helpers/open-tag-tracker'
+import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
+import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { GenericMdTransformer } from './generic-md-transformer'
 
 describe('MdTransformer', function() {

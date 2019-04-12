@@ -20,6 +20,11 @@ export class GenericMdTransformer {
     this.tagMapper = new TagMapper()
   }
 
+  canTransform(node: any) {
+    // we can process any node
+    return !!node
+  }
+
   transform(node: any, file: AbsoluteFilePath, line: number): AstNodeList {
     if (this.isOpeningType(node.type)) {
       return this.transformOpeningNode(node, file, line)

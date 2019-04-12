@@ -9,9 +9,7 @@ import { TagMapper } from './tag-mapper'
  * to to standardized AST used by TextRunner
  */
 export class GenericMdTransformer {
-  /**
-   * Tags to ignore
-   */
+  /** Tags to ignore */
   static readonly ignore = ['hardbreak', 'inline']
 
   openTags: OpenTagTracker
@@ -53,6 +51,14 @@ export class GenericMdTransformer {
     return nodeType.endsWith('_close')
   }
 
+  /** Returns the opening type for the given closing type */
+  openingTypeFor(closingType: string): string {
+    if (closingType.endsWith('_close')) {
+      return closingType.substring(0, closingType.length - 6) + '_open'
+    }
+    return closingType
+  }
+
   /**
    * Transforms a simple opening Remarkable Node
    */
@@ -81,7 +87,7 @@ export class GenericMdTransformer {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    const openingNodeType = this.tagMapper.typeForTag(node.type)
+    const openingNodeType = this.openingTypeFor(node.type)
     const openNode = this.openTags.popType(openingNodeType, file, line)
     result.pushNode({
       attributes: openNode.attributes,

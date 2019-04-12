@@ -62,6 +62,9 @@ export default class AstStandardizer {
       if (this.processHtmlTag(node)) {
         continue
       }
+      if (this.processGenericHtmlTag(node)) {
+        continue
+      }
       if (this.processMdNode(node)) {
         continue
       }

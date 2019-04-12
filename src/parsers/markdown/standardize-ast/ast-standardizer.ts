@@ -6,6 +6,7 @@ import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { CustomHtmlTagTransformer } from './custom-html-tag-transformer'
+import { CustomMdTransformer } from './custom-md/custom-md-transformer'
 import { GenericMdTransformer } from './generic-md/generic-md-transformer'
 import { TransformerList } from './transformer-list'
 
@@ -19,7 +20,7 @@ export default class AstStandardizer {
   result: AstNodeList
   line: number
   genericMdTransformer: GenericMdTransformer
-  mdTransformers: TransformerList
+  customMdTransformer: CustomMdTransformer
   htmlBlockTransformers: TransformerList
   customHtmlTagTransformer: CustomHtmlTagTransformer
 
@@ -29,13 +30,13 @@ export default class AstStandardizer {
     this.result = new AstNodeList()
     this.line = 1
     this.genericMdTransformer = new GenericMdTransformer(this.openTags)
-    this.mdTransformers = {}
+    this.customMdTransformer = new CustomMdTransformer(this.openTags)
     this.htmlBlockTransformers = {}
     this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
   }
 
   async loadTransformers() {
-    this.mdTransformers = await loadTransformers('md')
+    await this.customMdTransformer.loadTransformers()
     this.htmlBlockTransformers = await loadTransformers('htmlblock')
     await this.customHtmlTagTransformer.loadTransformers()
   }
@@ -70,7 +71,8 @@ export default class AstStandardizer {
         this.processCustomHtmlTag(node)
         continue
       }
-      if (this.processCustomMdNode(node)) {
+      if (this.customMdTransformer.canTransform(node)) {
+        this.processCustomMdNode(node)
         continue
       }
       this.processGenericMdNode(node)
@@ -131,13 +133,8 @@ export default class AstStandardizer {
   }
 
   processCustomMdNode(node: any): boolean {
-    const transformer = this.mdTransformers[node.type]
-    if (!transformer) {
-      return false
-    }
-    const transformed = transformer(
+    const transformed = this.customMdTransformer.transform(
       node,
-      this.openTags,
       this.filepath,
       this.line
     )

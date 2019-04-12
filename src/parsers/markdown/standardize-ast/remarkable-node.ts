@@ -1,3 +1,4 @@
+/** A node in the output of the Remarkable parser */
 export class RemarkableNode {
   lines: number[]
   children: RemarkableNode[]
@@ -10,6 +11,7 @@ export class RemarkableNode {
   href: string | undefined
   title: string | undefined
 
+  // This constructor isn't used and just here to make the type checker happy
   constructor() {
     this.type = ''
     this.content = ''

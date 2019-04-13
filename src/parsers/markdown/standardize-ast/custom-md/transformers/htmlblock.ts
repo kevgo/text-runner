@@ -1,10 +1,10 @@
-import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../helpers/pretend-to-use'
-import { AstNodeList } from '../../../ast-node-list'
-import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../remarkable-node'
+import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
+import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
+import { pretendToUse } from '../../../../../helpers/pretend-to-use'
+import { AstNodeList } from '../../../../ast-node-list'
+import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
+import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
+import { RemarkableNode } from '../../remarkable-node'
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/

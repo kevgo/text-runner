@@ -1,15 +1,13 @@
 import { When } from 'cucumber'
-import ncp from 'ncp'
+import fs from 'fs-extra'
 import path from 'path'
-import util from 'util'
 
 When(
   /^(trying to execute|executing) the "([^"]+)" example$/,
   { timeout: 100000 },
   async function(tryingText, exampleName) {
     const expectError = determineExpectError(tryingText)
-    const ncpp = util.promisify(ncp)
-    await ncpp(
+    await fs.copy(
       path.join('documentation', 'examples', exampleName),
       this.rootDir
     )

@@ -1,10 +1,7 @@
 import { ActionArgs } from '../runners/action-args'
 
-import endChildProcessesI from 'end-child-processes'
-import util from 'util'
+import { endChildProcesses } from 'end-child-processes'
 import { RunningProcess } from './helpers/running-process'
-
-const endChildProcesses = util.promisify(endChildProcessesI)
 
 // Stops the currently running console command.
 export default async function stopProcess(args: ActionArgs) {

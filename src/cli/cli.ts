@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import cliCursor from 'cli-cursor'
-import endChildProcesses from 'end-child-processes'
+import { endChildProcesses } from 'end-child-processes'
 import path from 'path'
 import { PrintedUserError } from '../errors/printed-user-error'
 import { UnprintedUserError } from '../errors/unprinted-user-error'
@@ -22,7 +22,7 @@ async function main() {
       console.log(err.stack)
     }
   }
-  endChildProcesses()
+  await endChildProcesses()
   process.exit(errors.length)
 }
 main()

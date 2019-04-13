@@ -1,5 +1,5 @@
 import { After, Before, setDefaultTimeout } from 'cucumber'
-import endChildProcesses from 'end-child-processes'
+import { endChildProcesses } from 'end-child-processes'
 import fs from 'fs-extra'
 import path from 'path'
 import rimraf from 'rimraf'
@@ -24,7 +24,7 @@ Before(async function() {
 })
 
 After(async function(scenario) {
-  await util.promisify(endChildProcesses)
+  await endChildProcesses()
   if (scenario.result.status === 'failed') {
     console.log('\ntest artifacts are located in', this.rootDir)
   } else {

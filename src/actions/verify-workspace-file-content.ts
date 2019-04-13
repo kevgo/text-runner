@@ -1,12 +1,9 @@
 import { ActionArgs } from '../runners/action-args'
 
 import chalk from 'chalk'
-import fs from 'fs'
+import fs from 'fs-extra'
 import jsdiffConsole from 'jsdiff-console'
 import path from 'path'
-import util from 'util'
-
-const readFileP = util.promisify(fs.readFile)
 
 export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('strong', 'em')
@@ -28,7 +25,7 @@ export default async function verifyWorkspaceFileContent(args: ActionArgs) {
 
 async function readFile(filePath: string, fullPath: string): Promise<string> {
   try {
-    const result = await readFileP(fullPath, 'utf8')
+    const result = await fs.readFile(fullPath, 'utf8')
     return result
   } catch (err) {
     if (err.code === 'ENOENT') {

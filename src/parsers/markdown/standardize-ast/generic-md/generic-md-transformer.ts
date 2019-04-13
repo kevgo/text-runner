@@ -2,6 +2,7 @@ import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
+import { RemarkableNode } from '../remarkable-node'
 import { TagMapper } from '../tag-mapper'
 
 /**
@@ -20,7 +21,16 @@ export class GenericMdTransformer {
     this.tagMapper = new TagMapper()
   }
 
-  transform(node: any, file: AbsoluteFilePath, line: number): AstNodeList {
+  canTransform(node: any) {
+    // we can process any node
+    return !!node
+  }
+
+  transform(
+    node: RemarkableNode,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
     if (this.isOpeningType(node.type)) {
       return this.transformOpeningNode(node, file, line)
     }
@@ -55,7 +65,7 @@ export class GenericMdTransformer {
    * Transforms a simple opening Remarkable Node
    */
   transformOpeningNode(
-    node: any,
+    node: RemarkableNode,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {
@@ -74,7 +84,7 @@ export class GenericMdTransformer {
   }
 
   transformClosingNode(
-    node: any,
+    node: RemarkableNode,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {
@@ -93,7 +103,7 @@ export class GenericMdTransformer {
   }
 
   transformStandaloneNode(
-    node: any,
+    node: RemarkableNode,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {

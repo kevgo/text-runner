@@ -2,9 +2,10 @@ import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
+import { RemarkableNode } from '../remarkable-node'
 
 export default function(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
@@ -12,8 +13,8 @@ export default function(
   const result = new AstNodeList()
   const resultNode = new AstNode({
     attributes: {
-      href: node.href,
-      title: node.title
+      href: node.href || '',
+      title: node.title || ''
     },
     content: '',
     file,

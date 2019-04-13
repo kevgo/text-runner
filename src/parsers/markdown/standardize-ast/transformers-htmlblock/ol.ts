@@ -6,19 +6,23 @@ import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
+import { RemarkableNode } from '../remarkable-node'
 
 const xml2jsp = util.promisify(xml2js.parseString)
 
 const olRegex = /<ol([^>]*)>[\s\S]*<\/ol>/m
 
 export default async function transformOl(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
 ): Promise<AstNodeList> {
   const result = new AstNodeList()
   const match = node.content.match(olRegex)
+  if (match == null) {
+    throw new Error('Cannot parse <ol> expression: ' + node.content)
+  }
   const xml = await xml2jsp(node.content)
   const olNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),

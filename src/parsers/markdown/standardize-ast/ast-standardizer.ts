@@ -6,7 +6,9 @@ import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../helpers/remove-html-comments'
 import { loadTransformers } from '../standardize-ast/load-transformers'
 import { CustomHtmlTagTransformer } from './custom-html-tag-transformer'
+import { CustomMdTransformer } from './custom-md/custom-md-transformer'
 import { GenericMdTransformer } from './generic-md/generic-md-transformer'
+import { RemarkableNode } from './remarkable-node'
 import { TransformerList } from './transformer-list'
 
 /**
@@ -19,7 +21,7 @@ export default class AstStandardizer {
   result: AstNodeList
   line: number
   genericMdTransformer: GenericMdTransformer
-  mdTransformers: TransformerList
+  customMdTransformer: CustomMdTransformer
   htmlBlockTransformers: TransformerList
   customHtmlTagTransformer: CustomHtmlTagTransformer
 
@@ -29,19 +31,20 @@ export default class AstStandardizer {
     this.result = new AstNodeList()
     this.line = 1
     this.genericMdTransformer = new GenericMdTransformer(this.openTags)
-    this.mdTransformers = {}
+    this.customMdTransformer = new CustomMdTransformer(this.openTags)
     this.htmlBlockTransformers = {}
     this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
   }
 
   async loadTransformers() {
-    this.mdTransformers = await loadTransformers('md')
+    await this.customMdTransformer.loadTransformers()
     this.htmlBlockTransformers = await loadTransformers('htmlblock')
     await this.customHtmlTagTransformer.loadTransformers()
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
-    for (const node of ast) {
+    for (const n of ast) {
+      const node = n as RemarkableNode
       if (node.lines) {
         this.line = Math.max(node.lines[0] + 1, this.line)
       }
@@ -73,15 +76,20 @@ export default class AstStandardizer {
       if (this.processGenericHtmlTag(node)) {
         continue
       }
-      if (this.processCustomMdNode(node)) {
+      if (this.customMdTransformer.canTransform(node)) {
+        this.processCustomMdNode(node)
         continue
       }
-      this.processGenericMdNode(node)
+      if (this.genericMdTransformer.canTransform(node)) {
+        this.processGenericMdNode(node)
+        continue
+      }
+      throw new Error(`Unprocessable node: ${node.type}`)
     }
     return this.result
   }
 
-  async processHtmlBlock(node: any): Promise<boolean> {
+  async processHtmlBlock(node: RemarkableNode): Promise<boolean> {
     if (node.type !== 'htmlblock') {
       return false
     }
@@ -110,7 +118,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processCustomHtmlTag(node: any) {
+  processCustomHtmlTag(node: RemarkableNode) {
     const transformed = this.customHtmlTagTransformer.transform(
       node,
       this.filepath,
@@ -121,7 +129,7 @@ export default class AstStandardizer {
     }
   }
 
-  processGenericMdNode(node: any): boolean {
+  processGenericMdNode(node: RemarkableNode): boolean {
     const transformed = this.genericMdTransformer.transform(
       node,
       this.filepath,
@@ -134,13 +142,8 @@ export default class AstStandardizer {
   }
 
   processCustomMdNode(node: any): boolean {
-    const transformer = this.mdTransformers[node.type]
-    if (!transformer) {
-      return false
-    }
-    const transformed = transformer(
+    const transformed = this.customMdTransformer.transform(
       node,
-      this.openTags,
       this.filepath,
       this.line
     )
@@ -150,7 +153,7 @@ export default class AstStandardizer {
     return true
   }
 
-  processSoftBreak(node: any): boolean {
+  processSoftBreak(node: RemarkableNode): boolean {
     if (node.type !== 'softbreak') {
       return false
     }

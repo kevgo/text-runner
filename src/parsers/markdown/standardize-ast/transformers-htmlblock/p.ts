@@ -5,11 +5,12 @@ import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
+import { RemarkableNode } from '../remarkable-node'
 
 const pRegex = /<p([^>]*)>([\s\S]*)<\/p>/m
 
 export default async function transformPBlock(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

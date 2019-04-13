@@ -5,11 +5,12 @@ import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { parseHtmlAttributes } from '../../helpers/parse-html-attributes'
 import { removeHtmlComments } from '../../helpers/remove-html-comments'
+import { RemarkableNode } from '../remarkable-node'
 
 const olRegex = /<img([^>]*)>/
 
 export default async function transformOl(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

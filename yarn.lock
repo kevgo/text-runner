@@ -2834,10 +2834,10 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
-end-child-processes@1.0.0-rc1:
-  version "1.0.0-rc1"
-  resolved "https://registry.yarnpkg.com/end-child-processes/-/end-child-processes-1.0.0-rc1.tgz#01df53e5bee642e938e3113b65d2ab2e2bb7c9e8"
-  integrity sha512-+W4sS+RUzIASfEhq2oyaaaylLFeG7slNn7HTvBfTcBdO64c//rVf1n4XiEmmiBgu/NYL08Hey5q4f2tgLQff8w==
+end-child-processes@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/end-child-processes/-/end-child-processes-1.0.0.tgz#fc30a62c6900d797e04d38eb104dcd521a898c60"
+  integrity sha512-28FWZ95AJr3u+SCGAZsrgE66kj9e6v4VvxU12CWfOOS+3t8Mz5ZsJRz0Wid12jt60qO0VGycxy2Z+jqwF4CjBg==
   dependencies:
     debug "4.1.1"
     ps-tree "1.2.0"

@@ -1,11 +1,11 @@
-import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { AstNodeList } from '../../ast-node-list'
-import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
-import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { removeHtmlComments } from '../helpers/remove-html-comments'
-import { loadTransformers } from '../standardize-ast/load-transformers'
-import { RemarkableNode } from './remarkable-node'
-import { TransformerList } from './transformer-list'
+import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
+import { AstNodeList } from '../../../ast-node-list'
+import { getHtmlBlockTag } from '../../helpers/get-html-block-tag'
+import { OpenTagTracker } from '../../helpers/open-tag-tracker'
+import { removeHtmlComments } from '../../helpers/remove-html-comments'
+import { loadTransformers } from '../load-transformers'
+import { RemarkableNode } from '../remarkable-node'
+import { TransformerList } from '../transformer-list'
 
 export class CustomHtmlTagTransformer {
   htmlTagTransformers: TransformerList

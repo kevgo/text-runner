@@ -129,7 +129,7 @@ setup:   # sets up the installation on this machine
 	yarn install
 	node-prune
 
-test: lint tests cuke docs   # runs all tests
+test: lint unit cuke docs   # runs all tests
 .PHONY: test
 
 unit:   # runs the unit tests

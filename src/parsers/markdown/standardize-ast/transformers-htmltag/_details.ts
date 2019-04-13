@@ -3,9 +3,10 @@ import { pretendToUse } from '../../../../helpers/pretend-to-use'
 import { AstNode } from '../../../ast-node'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
+import { RemarkableNode } from '../remarkable-node'
 
 export default function transformDetailsTag(
-  node: any,
+  node: RemarkableNode,
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number

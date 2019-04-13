@@ -2,6 +2,7 @@ import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { loadTransformers } from '../load-transformers'
+import { RemarkableNode } from '../remarkable-node'
 import { TransformerList } from '../transformer-list'
 
 export class CustomMdTransformer {
@@ -17,11 +18,15 @@ export class CustomMdTransformer {
     this.mdTransformers = await loadTransformers('md')
   }
 
-  canTransform(node: any): boolean {
+  canTransform(node: RemarkableNode): boolean {
     return this.mdTransformers.hasOwnProperty(node.type)
   }
 
-  transform(node: any, file: AbsoluteFilePath, line: number): AstNodeList {
+  transform(
+    node: RemarkableNode,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
     const transformer = this.mdTransformers[node.type]
     return transformer(node, this.openTags, file, line)
   }

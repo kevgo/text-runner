@@ -42,7 +42,7 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make tests
+      - run: make unit
     #  - run: make coverage-tests
     #  - save_cache:
     #      key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}

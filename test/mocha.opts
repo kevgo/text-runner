@@ -2,4 +2,3 @@
 --require ts-node/register
 --recursive
 --exclude text-run/**/*.js
---reporter dot

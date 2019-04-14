@@ -133,7 +133,7 @@ test: lint unit cuke docs   # runs all tests
 .PHONY: test
 
 unit:   # runs the unit tests
-	@node_modules/.bin/mocha "src/**/*-test.ts"
+	@node_modules/.bin/mocha --reporter dot "src/**/*-test.ts"
 
 travis: lint coverage   # the set of tests running on Travis-CI
 

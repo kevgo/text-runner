@@ -18,6 +18,10 @@ export class GenericHtmlTagTransformer {
     this.tagMapper = tagMapper
   }
 
+  canTransform(node: RemarkableNode): boolean {
+    return node.type === 'htmltag'
+  }
+
   transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,

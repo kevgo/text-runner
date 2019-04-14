@@ -10,6 +10,8 @@ import { CustomMdTransformer } from './custom-md/custom-md-transformer'
 import { GenericMdTransformer } from './generic-md/generic-md-transformer'
 import { RemarkableNode } from './remarkable-node'
 import { TransformerList } from './transformer-list'
+import { GenericHtmlTagTransformer } from './generic-htmltag/generic-html-tag-transformer'
+import { TagMapper } from './tag-mapper'
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -24,16 +26,23 @@ export default class AstStandardizer {
   customMdTransformer: CustomMdTransformer
   htmlBlockTransformers: TransformerList
   customHtmlTagTransformer: CustomHtmlTagTransformer
+  genericHtmlTagTransformer: GenericHtmlTagTransformer
+  tagMapper: TagMapper
 
   constructor(filepath: AbsoluteFilePath) {
     this.filepath = filepath
     this.openTags = new OpenTagTracker()
+    this.tagMapper = new TagMapper()
     this.result = new AstNodeList()
     this.line = 1
     this.genericMdTransformer = new GenericMdTransformer(this.openTags)
     this.customMdTransformer = new CustomMdTransformer(this.openTags)
     this.htmlBlockTransformers = {}
     this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
+    this.genericHtmlTagTransformer = new GenericHtmlTagTransformer(
+      this.openTags,
+      this.tagMapper
+    )
   }
 
   async loadTransformers() {
@@ -73,7 +82,8 @@ export default class AstStandardizer {
         this.processCustomHtmlTag(node)
         continue
       }
-      if (this.processGenericHtmlTag(node)) {
+      if (this.genericHtmlTagTransformer.canTransform(node)) {
+        this.processGenericHtmlTag(node)
         continue
       }
       if (this.customMdTransformer.canTransform(node)) {
@@ -87,6 +97,17 @@ export default class AstStandardizer {
       throw new Error(`Unprocessable node: ${node.type}`)
     }
     return this.result
+  }
+
+  processGenericHtmlTag(node: RemarkableNode) {
+    const transformed = this.genericHtmlTagTransformer.transform(
+      node,
+      this.filepath,
+      this.line
+    )
+    for (const transformedNode of transformed) {
+      this.result.push(transformedNode)
+    }
   }
 
   async processHtmlBlock(node: RemarkableNode): Promise<boolean> {

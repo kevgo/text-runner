@@ -16,9 +16,9 @@ export class GenericMdTransformer {
   openTags: OpenTagTracker
   tagMapper: TagMapper
 
-  constructor(openTagTracker: OpenTagTracker) {
+  constructor(openTagTracker: OpenTagTracker, tagMapper: TagMapper) {
     this.openTags = openTagTracker
-    this.tagMapper = new TagMapper()
+    this.tagMapper = tagMapper
   }
 
   canTransform(node: any) {

@@ -44,7 +44,7 @@ export class GenericHtmlTagTransformer {
     const result = new AstNodeList()
     const openingTag = this.openTags.popTag(
       tagName.replace('/', ''),
-      file.platformified(),
+      file,
       line
     )
     const resultNode = new AstNode({

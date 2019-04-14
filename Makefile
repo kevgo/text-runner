@@ -129,9 +129,10 @@ setup:   # sets up the installation on this machine
 	yarn install
 	node-prune
 
-spec: lint tests cuke docs   # runs all tests
+test: lint unit cuke docs   # runs all tests
+.PHONY: test
 
-tests:   # runs the unit tests
+unit:   # runs the unit tests
 	@node_modules/.bin/mocha "src/**/*-test.ts"
 
 travis: lint coverage   # the set of tests running on Travis-CI

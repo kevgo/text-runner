@@ -1,11 +1,8 @@
 import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 import { AstNodeList } from '../../ast-node-list'
-import { getHtmlBlockTag } from '../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { removeHtmlComments } from '../helpers/remove-html-comments'
-import { loadTransformers } from '../standardize-ast/load-transformers'
 import { CustomHtmlTagTransformer } from './custom-html-tags/custom-html-tag-transformer'
+import { CustomHtmlBlockTransformer } from './custom-htmlblock/custom-html-block-transformer'
 import { CustomMdTransformer } from './custom-md/custom-md-transformer'
 import { GenericMdTransformer } from './generic-md/generic-md-transformer'
 import { RemarkableNode } from './remarkable-node'
@@ -24,6 +21,7 @@ export default class AstStandardizer {
   customMdTransformer: CustomMdTransformer
   htmlBlockTransformers: TransformerList
   customHtmlTagTransformer: CustomHtmlTagTransformer
+  customHtmlBlockTransformer: CustomHtmlBlockTransformer
 
   constructor(filepath: AbsoluteFilePath) {
     this.filepath = filepath
@@ -34,11 +32,14 @@ export default class AstStandardizer {
     this.customMdTransformer = new CustomMdTransformer(this.openTags)
     this.htmlBlockTransformers = {}
     this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
+    this.customHtmlBlockTransformer = new CustomHtmlBlockTransformer(
+      this.openTags
+    )
   }
 
   async loadTransformers() {
     await this.customMdTransformer.loadTransformers()
-    this.htmlBlockTransformers = await loadTransformers('htmlblock')
+    await this.customHtmlBlockTransformer.loadTransformers()
     await this.customHtmlTagTransformer.loadTransformers()
   }
 
@@ -60,7 +61,8 @@ export default class AstStandardizer {
       if (this.processSoftBreak(node)) {
         continue
       }
-      if (await this.processHtmlBlock(node)) {
+      if (this.customHtmlBlockTransformer.canTransform(node)) {
+        await this.processHtmlBlock(node)
         continue
       }
       if (
@@ -86,33 +88,15 @@ export default class AstStandardizer {
     return this.result
   }
 
-  async processHtmlBlock(node: RemarkableNode): Promise<boolean> {
-    if (node.type !== 'htmlblock') {
-      return false
-    }
-    const tagName = getHtmlBlockTag(
-      removeHtmlComments(node.content),
-      this.filepath,
-      this.line
-    )
-    const transformer = this.htmlBlockTransformers[tagName]
-    if (!transformer) {
-      throw new UnprintedUserError(
-        `Unknown HTML block: '${tagName}'`,
-        this.filepath.platformified(),
-        this.line
-      )
-    }
-    const transformed = await transformer(
+  async processHtmlBlock(node: RemarkableNode) {
+    const transformed = await this.customHtmlBlockTransformer.transform(
       node,
-      this.openTags,
       this.filepath,
       this.line
     )
     for (const transformedNode of transformed) {
       this.result.push(transformedNode)
     }
-    return true
   }
 
   processCustomHtmlTag(node: RemarkableNode) {

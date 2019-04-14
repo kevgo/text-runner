@@ -15,35 +15,35 @@ import { TransformerList } from './transformer-list'
  * into the standardized AST used by TextRunner
  */
 export default class AstStandardizer {
+  customHtmlBlockTransformer: CustomHtmlBlockTransformer
+  customHtmlTagTransformer: CustomHtmlTagTransformer
+  customMdTransformer: CustomMdTransformer
   filepath: AbsoluteFilePath
+  genericHtmlTagTransformer: GenericHtmlTagTransformer
+  genericMdTransformer: GenericMdTransformer
+  htmlBlockTransformers: TransformerList
+  line: number
   openTags: OpenTagTracker
   result: AstNodeList
-  line: number
-  genericMdTransformer: GenericMdTransformer
-  customMdTransformer: CustomMdTransformer
-  htmlBlockTransformers: TransformerList
-  customHtmlTagTransformer: CustomHtmlTagTransformer
-  genericHtmlTagTransformer: GenericHtmlTagTransformer
   tagMapper: TagMapper
-  customHtmlBlockTransformer: CustomHtmlBlockTransformer
 
   constructor(filepath: AbsoluteFilePath) {
-    this.filepath = filepath
     this.openTags = new OpenTagTracker()
     this.tagMapper = new TagMapper()
-    this.result = new AstNodeList()
-    this.line = 1
-    this.genericMdTransformer = new GenericMdTransformer(this.openTags)
-    this.customMdTransformer = new CustomMdTransformer(this.openTags)
-    this.htmlBlockTransformers = {}
+    this.customHtmlBlockTransformer = new CustomHtmlBlockTransformer(
+      this.openTags
+    )
     this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
+    this.customMdTransformer = new CustomMdTransformer(this.openTags)
+    this.filepath = filepath
     this.genericHtmlTagTransformer = new GenericHtmlTagTransformer(
       this.openTags,
       this.tagMapper
     )
-    this.customHtmlBlockTransformer = new CustomHtmlBlockTransformer(
-      this.openTags
-    )
+    this.genericMdTransformer = new GenericMdTransformer(this.openTags)
+    this.htmlBlockTransformers = {}
+    this.line = 1
+    this.result = new AstNodeList()
   }
 
   async loadTransformers() {

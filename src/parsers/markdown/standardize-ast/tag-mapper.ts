@@ -9,6 +9,7 @@ export class TagMapper {
   static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
     bold: 'b',
     bullet_list: 'ul',
+    linebreak: 'br',
     list_item: 'li',
     ordered_list: 'ol',
     paragraph: 'p'

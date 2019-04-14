@@ -1,4 +1,4 @@
-import { TransformerList } from '../standardize-ast/transformer-list'
+import { TransformerList } from './transformer-list'
 
 import fs from 'fs-extra'
 import path from 'path'
@@ -8,7 +8,7 @@ import { isJsFile } from '../../../helpers/is-js-file'
  * Loads the transformers in the local `transformers` directory
  * @param callerDir the directory in which the caller is
  */
-export async function loadLocalTransformers(
+export async function loadTransformers(
   callerDir: string
 ): Promise<TransformerList> {
   const result = {}

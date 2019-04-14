@@ -4,7 +4,7 @@ import { AstNodeList } from '../../../ast-node-list'
 import { getHtmlBlockTag } from '../../helpers/get-html-block-tag'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../../helpers/remove-html-comments'
-import { loadLocalTransformers } from '../load-local-transformers'
+import { loadLocalTransformers } from '../load-transformers'
 import { RemarkableNode } from '../remarkable-node'
 import { TransformerList } from '../transformer-list'
 

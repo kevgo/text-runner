@@ -36,7 +36,6 @@ export default class AstStandardizer {
       this.openTags,
       this.tagMapper
     )
-    this.customMdTransformer = new CustomMdTransformer(this.openTags)
     this.customHtmlBlockTransformer = new CustomHtmlBlockTransformer(
       this.openTags
     )

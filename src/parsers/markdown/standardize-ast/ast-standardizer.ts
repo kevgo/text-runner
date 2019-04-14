@@ -4,11 +4,11 @@ import { OpenTagTracker } from '../helpers/open-tag-tracker'
 import { CustomHtmlTagTransformer } from './custom-html-tags/custom-html-tag-transformer'
 import { CustomHtmlBlockTransformer } from './custom-htmlblock/custom-html-block-transformer'
 import { CustomMdTransformer } from './custom-md/custom-md-transformer'
+import { GenericHtmlTagTransformer } from './generic-htmltag/generic-html-tag-transformer'
 import { GenericMdTransformer } from './generic-md/generic-md-transformer'
 import { RemarkableNode } from './remarkable-node'
-import { TransformerList } from './transformer-list'
-import { GenericHtmlTagTransformer } from './generic-htmltag/generic-html-tag-transformer'
 import { TagMapper } from './tag-mapper'
+import { TransformerList } from './transformer-list'
 
 /**
  * AstStandardizer converts the AST created by Remarkable

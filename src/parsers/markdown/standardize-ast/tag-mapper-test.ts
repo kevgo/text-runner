@@ -4,6 +4,15 @@ import { TagMapper } from './tag-mapper'
 const tagMapper = new TagMapper()
 
 describe('TagMapper', () => {
+  describe('openingTypeForTag', function() {
+    it('returns opening types for opening HTML tags', function() {
+      expect(tagMapper.openingTypeForTag('b')).to.equal('bold_open')
+    })
+    it('returns opening types for closing HTML tags', () => {
+      expect(tagMapper.openingTypeForTag('/b')).to.equal('bold_open')
+    })
+  })
+
   describe('.tagForType()', () => {
     it('maps known opening tags', () => {
       expect(tagMapper.tagForType('bold_open')).to.equal('b')

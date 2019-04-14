@@ -3,12 +3,15 @@ interface Mappings {
   [key: string]: string
 }
 
-/** TagMapper maps Remarkable types to HTML tags and vice versa. */
+/** TagMapper maps Remarkable node types to HTML tags and vice versa. */
 export class TagMapper {
   /** Mappings of tags that have opening and closing varieties. */
   static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
     bold: 'b',
     bullet_list: 'ul',
+    italic: 'i',
+    linebreak: 'br',
+    link: 'a',
     list_item: 'li',
     ordered_list: 'ol',
     paragraph: 'p'
@@ -28,6 +31,14 @@ export class TagMapper {
   constructor() {
     this.typeTagMappings = this.createTypeTagMappings()
     this.tagTypeMappings = this.createTagTypeMappings()
+  }
+
+  /** Returns the opening Remarkable type for the given HTML tag. */
+  openingTypeForTag(tagName: string) {
+    if (tagName.startsWith('/')) {
+      tagName = tagName.substring(1)
+    }
+    return this.typeForTag(tagName)
   }
 
   /** Returns the HTML tag for the given Remarkable type. */

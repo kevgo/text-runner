@@ -1,7 +1,7 @@
 import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import { loadLocalTransformers } from '../load-local-transformers'
+import { loadTransformers } from '../load-transformers'
 import { RemarkableNode } from '../remarkable-node'
 import { TransformerList } from '../transformer-list'
 
@@ -15,7 +15,7 @@ export class CustomMdTransformer {
   }
 
   async loadTransformers() {
-    this.mdTransformers = await loadLocalTransformers(__dirname)
+    this.mdTransformers = await loadTransformers(__dirname)
   }
 
   canTransform(node: RemarkableNode): boolean {

@@ -42,15 +42,14 @@ export class GenericHtmlTagTransformer {
     line: number
   ) {
     const result = new AstNodeList()
-    const openingType = this.tagMapper.openingTypeForTag(tagName)
-    const openingTag = this.openTags.popType(openingType, file, line)
+    const openingTag = this.openTags.popTag(tagName, file.platformified(), line)
     const resultNode = new AstNode({
       attributes: openingTag.attributes,
       content: '',
       file,
       line,
       tag: tagName,
-      type: this.tagMapper.typeForTag(tagName)
+      type: openingTag.type.replace('_open', '_close')
     })
     result.pushNode(resultNode)
     return result

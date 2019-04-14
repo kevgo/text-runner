@@ -32,7 +32,7 @@ export class GenericHtmlTagTransformer {
     if (this.isClosingHtmlTag(tagName)) {
       return this.transformClosingHtmlTag(tagName, file, line)
     } else {
-      return this.transformOpeningHtmlTag(tagName, file, line)
+      return this.transformOpeningHtmlTag(node, file, line)
     }
   }
 
@@ -57,12 +57,16 @@ export class GenericHtmlTagTransformer {
   }
 
   transformOpeningHtmlTag(
-    tagName: string,
+    node: RemarkableNode,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    const [tag, attributes] = parseHtmlTag(tagName, file.platformified(), line)
+    const [tag, attributes] = parseHtmlTag(
+      node.content,
+      file.platformified(),
+      line
+    )
     const resultNode = new AstNode({
       attributes,
       content: '',

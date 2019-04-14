@@ -40,7 +40,10 @@ export default class AstStandardizer {
       this.openTags,
       this.tagMapper
     )
-    this.genericMdTransformer = new GenericMdTransformer(this.openTags)
+    this.genericMdTransformer = new GenericMdTransformer(
+      this.openTags,
+      this.tagMapper
+    )
     this.htmlBlockTransformers = {}
     this.line = 1
     this.result = new AstNodeList()

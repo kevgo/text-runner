@@ -42,7 +42,11 @@ export class OpenTagTracker {
     return null
   }
 
-  popTag(expectedNodeTag: string, file: string, line: number): AstNode {
+  popTag(
+    expectedNodeTag: string,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNode {
     if (this.nodes.length === 0) {
       throw new Error(
         `OpenTagTracker is empty while trying to pop tag '${expectedNodeTag}'`
@@ -58,7 +62,7 @@ export class OpenTagTracker {
     }
     throw new UnprintedUserError(
       `OpenTagTracker does not have node <${expectedNodeTag}>`,
-      file,
+      file.platformified(),
       line
     )
   }

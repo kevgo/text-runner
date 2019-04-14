@@ -30,12 +30,6 @@ export default class AstStandardizer {
   constructor(filepath: AbsoluteFilePath) {
     this.openTags = new OpenTagTracker()
     this.tagMapper = new TagMapper()
-    this.result = new AstNodeList()
-    this.line = 1
-    this.genericMdTransformer = new GenericMdTransformer(
-      this.openTags,
-      this.tagMapper
-    )
     this.customHtmlBlockTransformer = new CustomHtmlBlockTransformer(
       this.openTags
     )

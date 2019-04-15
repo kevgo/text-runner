@@ -1,11 +1,11 @@
 import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
 import { AstNodeList } from '../../ast-node-list'
 import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { CustomHtmlTagTransformer } from './custom-html-tags/custom-html-tag-transformer'
-import { CustomHtmlBlockTransformer } from './custom-htmlblocks/custom-html-block-transformer'
-import { CustomMdTransformer } from './custom-md/custom-md-transformer'
-import { GenericHtmlTagTransformer } from './generic-htmltags/generic-html-tag-transformer'
-import { GenericMdTransformer } from './generic-md/generic-md-transformer'
+import { CustomHtmlTagTransformerBlock } from './custom-html-tags/custom-html-tag-transformer-block'
+import { CustomHtmlBlockTransformerBlock } from './custom-htmlblocks/custom-html-block-transformer-block'
+import { CustomMdTransformerBlock } from './custom-md/custom-md-transformer-block'
+import { GenericHtmlTagTransformerBlock } from './generic-htmltags/generic-html-tag-transformer-block'
+import { GenericMdTransformerBlock } from './generic-md/generic-md-transformer-block'
 import { RemarkableNode } from './remarkable-node'
 import { TagMapper } from './tag-mapper'
 import { TransformerList } from './transformer-list'
@@ -15,44 +15,56 @@ import { TransformerList } from './transformer-list'
  * into the standardized AST used by TextRunner
  */
 export default class AstStandardizer {
-  customHtmlBlockTransformer: CustomHtmlBlockTransformer
-  customHtmlTagTransformer: CustomHtmlTagTransformer
-  customMdTransformer: CustomMdTransformer
+  // data about the current AST transformation operation
   filepath: AbsoluteFilePath
-  genericHtmlTagTransformer: GenericHtmlTagTransformer
-  genericMdTransformer: GenericMdTransformer
-  htmlBlockTransformers: TransformerList
   line: number
   openTags: OpenTagTracker
   result: AstNodeList
   tagMapper: TagMapper
 
+  // transformer blocks
+  customHtmlBlockTransformerBlock: CustomHtmlBlockTransformerBlock
+  customHtmlTagTransformerBlock: CustomHtmlTagTransformerBlock
+  customMdTransformerBlock: CustomMdTransformerBlock
+  genericHtmlTagTransformerBlock: GenericHtmlTagTransformerBlock
+  genericMdTransformerBlock: GenericMdTransformerBlock
+
+  // to be deleted
+  htmlBlockTransformers: TransformerList
+
   constructor(filepath: AbsoluteFilePath) {
+    // data about the current transformation operation
+    this.filepath = filepath
+    this.line = 1
     this.openTags = new OpenTagTracker()
     this.tagMapper = new TagMapper()
-    this.customHtmlBlockTransformer = new CustomHtmlBlockTransformer(
+    this.result = new AstNodeList()
+
+    // transformer blocks
+    this.customHtmlBlockTransformerBlock = new CustomHtmlBlockTransformerBlock(
       this.openTags
     )
-    this.customHtmlTagTransformer = new CustomHtmlTagTransformer(this.openTags)
-    this.customMdTransformer = new CustomMdTransformer(this.openTags)
-    this.filepath = filepath
-    this.genericHtmlTagTransformer = new GenericHtmlTagTransformer(
+    this.customHtmlTagTransformerBlock = new CustomHtmlTagTransformerBlock(
+      this.openTags
+    )
+    this.customMdTransformerBlock = new CustomMdTransformerBlock(this.openTags)
+    this.genericHtmlTagTransformerBlock = new GenericHtmlTagTransformerBlock(
       this.openTags,
       this.tagMapper
     )
-    this.genericMdTransformer = new GenericMdTransformer(
+    this.genericMdTransformerBlock = new GenericMdTransformerBlock(
       this.openTags,
       this.tagMapper
     )
+
+    // delete
     this.htmlBlockTransformers = {}
-    this.line = 1
-    this.result = new AstNodeList()
   }
 
   async loadTransformers() {
-    await this.customMdTransformer.loadTransformers()
-    await this.customHtmlBlockTransformer.loadTransformers()
-    await this.customHtmlTagTransformer.loadTransformers()
+    await this.customMdTransformerBlock.loadTransformers()
+    await this.customHtmlBlockTransformerBlock.loadTransformers()
+    await this.customHtmlTagTransformerBlock.loadTransformers()
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
@@ -73,12 +85,12 @@ export default class AstStandardizer {
       if (this.processSoftBreak(node)) {
         continue
       }
-      if (this.customHtmlBlockTransformer.canTransform(node)) {
+      if (this.customHtmlBlockTransformerBlock.canTransform(node)) {
         await this.processHtmlBlock(node)
         continue
       }
       if (
-        this.customHtmlTagTransformer.canTransform(
+        this.customHtmlTagTransformerBlock.canTransform(
           node,
           this.filepath,
           this.line
@@ -87,15 +99,15 @@ export default class AstStandardizer {
         this.processCustomHtmlTag(node)
         continue
       }
-      if (this.genericHtmlTagTransformer.canTransform(node)) {
+      if (this.genericHtmlTagTransformerBlock.canTransform(node)) {
         this.processGenericHtmlTag(node)
         continue
       }
-      if (this.customMdTransformer.canTransform(node)) {
+      if (this.customMdTransformerBlock.canTransform(node)) {
         this.processCustomMdNode(node)
         continue
       }
-      if (this.genericMdTransformer.canTransform(node)) {
+      if (this.genericMdTransformerBlock.canTransform(node)) {
         this.processGenericMdNode(node)
         continue
       }
@@ -105,7 +117,7 @@ export default class AstStandardizer {
   }
 
   processGenericHtmlTag(node: RemarkableNode) {
-    const transformed = this.genericHtmlTagTransformer.transform(
+    const transformed = this.genericHtmlTagTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -116,7 +128,7 @@ export default class AstStandardizer {
   }
 
   async processHtmlBlock(node: RemarkableNode) {
-    const transformed = await this.customHtmlBlockTransformer.transform(
+    const transformed = await this.customHtmlBlockTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -127,7 +139,7 @@ export default class AstStandardizer {
   }
 
   processCustomHtmlTag(node: RemarkableNode) {
-    const transformed = this.customHtmlTagTransformer.transform(
+    const transformed = this.customHtmlTagTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -138,7 +150,7 @@ export default class AstStandardizer {
   }
 
   processGenericMdNode(node: RemarkableNode): boolean {
-    const transformed = this.genericMdTransformer.transform(
+    const transformed = this.genericMdTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -150,7 +162,7 @@ export default class AstStandardizer {
   }
 
   processCustomMdNode(node: any): boolean {
-    const transformed = this.customMdTransformer.transform(
+    const transformed = this.customMdTransformerBlock.transform(
       node,
       this.filepath,
       this.line

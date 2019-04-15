@@ -3,9 +3,9 @@ import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { RemarkableNode } from '../remarkable-node'
 import { TagMapper } from '../tag-mapper'
-import { GenericHtmlTagTransformer } from './generic-html-tag-transformer'
+import { GenericHtmlTagTransformerBlock } from './generic-html-tag-transformer-block'
 
-const transformer = new GenericHtmlTagTransformer(
+const transformer = new GenericHtmlTagTransformerBlock(
   new OpenTagTracker(),
   new TagMapper()
 )

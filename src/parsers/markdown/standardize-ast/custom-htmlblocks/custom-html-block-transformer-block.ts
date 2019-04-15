@@ -8,7 +8,7 @@ import { loadTransformers } from '../load-transformers'
 import { RemarkableNode } from '../remarkable-node'
 import { TransformerList } from '../transformer-list'
 
-export class CustomHtmlBlockTransformer {
+export class CustomHtmlBlockTransformerBlock {
   openTags: OpenTagTracker
   transformers: TransformerList
 

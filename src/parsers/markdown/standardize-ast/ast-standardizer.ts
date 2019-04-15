@@ -8,7 +8,6 @@ import { GenericHtmlTagTransformerBlock } from './generic-htmltags/generic-html-
 import { GenericMdTransformerBlock } from './generic-md/generic-md-transformer-block'
 import { RemarkableNode } from './remarkable-node'
 import { TagMapper } from './tag-mapper'
-import { TransformerList } from './transformer-list'
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -28,9 +27,6 @@ export default class AstStandardizer {
   customMdTransformerBlock: CustomMdTransformerBlock
   genericHtmlTagTransformerBlock: GenericHtmlTagTransformerBlock
   genericMdTransformerBlock: GenericMdTransformerBlock
-
-  // to be deleted
-  htmlBlockTransformers: TransformerList
 
   constructor(filepath: AbsoluteFilePath) {
     // data about the current transformation operation
@@ -56,9 +52,6 @@ export default class AstStandardizer {
       this.openTags,
       this.tagMapper
     )
-
-    // delete
-    this.htmlBlockTransformers = {}
   }
 
   async loadTransformers() {

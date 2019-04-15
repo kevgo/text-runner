@@ -5,7 +5,7 @@ import { loadTransformers } from '../load-transformers'
 import { RemarkableNode } from '../remarkable-node'
 import { TransformerList } from '../transformer-list'
 
-export class CustomMdTransformer {
+export class CustomMdTransformerBlock {
   mdTransformers: TransformerList
   openTags: OpenTagTracker
 

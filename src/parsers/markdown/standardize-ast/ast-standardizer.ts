@@ -15,24 +15,19 @@ import { TransformerBlock } from './transformer-block'
  * into the standardized AST used by TextRunner
  */
 export default class AstStandardizer {
-  // data about the current AST transformation operation
   filepath: AbsoluteFilePath
   line: number
   openTags: OpenTagTracker
   result: AstNodeList
   tagMapper: TagMapper
-
   transformerBlocks: TransformerBlock[]
 
   constructor(filepath: AbsoluteFilePath) {
-    // data about the current transformation operation
     this.filepath = filepath
     this.line = 1
     this.openTags = new OpenTagTracker()
     this.tagMapper = new TagMapper()
     this.result = new AstNodeList()
-
-    // transformer blocks
     this.transformerBlocks = [
       new CustomHtmlBlockTransformerBlock(this.openTags),
       new CustomHtmlTagTransformerBlock(this.openTags),

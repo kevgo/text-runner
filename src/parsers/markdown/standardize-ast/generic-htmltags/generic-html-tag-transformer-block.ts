@@ -9,7 +9,7 @@ import { RemarkableNode } from '../remarkable-node'
 import { TagMapper } from '../tag-mapper'
 
 /** Transforms generic HTML tags */
-export class GenericHtmlTagTransformer {
+export class GenericHtmlTagTransformerBlock {
   openTags: OpenTagTracker
   tagMapper: TagMapper
 

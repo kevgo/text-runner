@@ -2,11 +2,11 @@ import { expect } from 'chai'
 import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { TagMapper } from '../tag-mapper'
-import { GenericMdTransformer } from './generic-md-transformer'
+import { GenericMdTransformerBlock } from './generic-md-transformer-block'
 
 describe('MdTransformer', function() {
   beforeEach(function() {
-    this.transformer = new GenericMdTransformer(
+    this.transformer = new GenericMdTransformerBlock(
       new OpenTagTracker(),
       new TagMapper()
     )

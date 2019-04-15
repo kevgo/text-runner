@@ -17,8 +17,8 @@ openingNode.content = '<foo class="myClass">'
 describe('GenericHtmlTagTransformer', function() {
   describe('.transform()', function() {
     describe('tranforming opening nodes', function() {
-      beforeEach(function() {
-        this.actual = transformer.transform(openingNode, file, 3)
+      beforeEach(async function() {
+        this.actual = await transformer.transform(openingNode, file, 3)
       })
       it('returns the corresponding AstNode', function() {
         expect(this.actual).to.have.length(1)

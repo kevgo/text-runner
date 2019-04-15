@@ -4,12 +4,13 @@ import { AstNodeList } from '../../../ast-node-list'
 import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { RemarkableNode } from '../remarkable-node'
 import { TagMapper } from '../tag-mapper'
+import { TransformerBlock } from '../transformer-block'
 
 /**
  * Transforms basic Remarkable nodes with opening and closing tags
  * to to standardized AST used by TextRunner
  */
-export class GenericMdTransformerBlock {
+export class GenericMdTransformerBlock implements TransformerBlock {
   /** Tags to ignore */
   static readonly ignore = ['hardbreak', 'inline']
 
@@ -26,11 +27,15 @@ export class GenericMdTransformerBlock {
     return !!node
   }
 
-  transform(
+  async loadTransformers() {
+    return
+  }
+
+  async transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,
     line: number
-  ): AstNodeList {
+  ): Promise<AstNodeList> {
     if (this.isOpeningType(node.type)) {
       return this.transformOpeningNode(node, file, line)
     }

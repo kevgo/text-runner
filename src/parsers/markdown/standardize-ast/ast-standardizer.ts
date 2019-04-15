@@ -89,19 +89,19 @@ export default class AstStandardizer {
           this.line
         )
       ) {
-        this.processCustomHtmlTag(node)
+        await this.processCustomHtmlTag(node)
         continue
       }
       if (this.genericHtmlTagTransformerBlock.canTransform(node)) {
-        this.processGenericHtmlTag(node)
+        await this.processGenericHtmlTag(node)
         continue
       }
       if (this.customMdTransformerBlock.canTransform(node)) {
-        this.processCustomMdNode(node)
+        await this.processCustomMdNode(node)
         continue
       }
       if (this.genericMdTransformerBlock.canTransform(node)) {
-        this.processGenericMdNode(node)
+        await this.processGenericMdNode(node)
         continue
       }
       throw new Error(`Unprocessable node: ${node.type}`)
@@ -109,8 +109,8 @@ export default class AstStandardizer {
     return this.result
   }
 
-  processGenericHtmlTag(node: RemarkableNode) {
-    const transformed = this.genericHtmlTagTransformerBlock.transform(
+  async processGenericHtmlTag(node: RemarkableNode) {
+    const transformed = await this.genericHtmlTagTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -131,8 +131,8 @@ export default class AstStandardizer {
     }
   }
 
-  processCustomHtmlTag(node: RemarkableNode) {
-    const transformed = this.customHtmlTagTransformerBlock.transform(
+  async processCustomHtmlTag(node: RemarkableNode) {
+    const transformed = await this.customHtmlTagTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -142,8 +142,8 @@ export default class AstStandardizer {
     }
   }
 
-  processGenericMdNode(node: RemarkableNode): boolean {
-    const transformed = this.genericMdTransformerBlock.transform(
+  async processGenericMdNode(node: RemarkableNode) {
+    const transformed = await this.genericMdTransformerBlock.transform(
       node,
       this.filepath,
       this.line
@@ -154,8 +154,8 @@ export default class AstStandardizer {
     return true
   }
 
-  processCustomMdNode(node: any): boolean {
-    const transformed = this.customMdTransformerBlock.transform(
+  async processCustomMdNode(node: any) {
+    const transformed = await this.customMdTransformerBlock.transform(
       node,
       this.filepath,
       this.line

@@ -6,9 +6,10 @@ import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../../helpers/remove-html-comments'
 import { loadTransformers } from '../load-transformers'
 import { RemarkableNode } from '../remarkable-node'
+import { TransformerBlock } from '../transformer-block'
 import { TransformerList } from '../transformer-list'
 
-export class CustomHtmlBlockTransformerBlock {
+export class CustomHtmlBlockTransformerBlock implements TransformerBlock {
   openTags: OpenTagTracker
   transformers: TransformerList
 

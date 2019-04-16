@@ -5,9 +5,10 @@ import { OpenTagTracker } from '../../helpers/open-tag-tracker'
 import { removeHtmlComments } from '../../helpers/remove-html-comments'
 import { loadTransformers } from '../load-transformers'
 import { RemarkableNode } from '../remarkable-node'
+import { TransformerBlock } from '../transformer-block'
 import { TransformerList } from '../transformer-list'
 
-export class CustomHtmlTagTransformerBlock {
+export class CustomHtmlTagTransformerBlock implements TransformerBlock {
   htmlTagTransformers: TransformerList
   openTags: OpenTagTracker
 
@@ -35,11 +36,11 @@ export class CustomHtmlTagTransformerBlock {
   }
 
   /** Transforms the given node into an AstNodeList and signals success */
-  transform(
+  async transform(
     node: RemarkableNode,
     filepath: AbsoluteFilePath,
     line: number
-  ): AstNodeList {
+  ): Promise<AstNodeList> {
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
       filepath,

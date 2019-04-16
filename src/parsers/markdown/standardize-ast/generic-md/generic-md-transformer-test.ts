@@ -48,15 +48,15 @@ describe('MdTransformer', function() {
   })
 
   describe('.transform()', function() {
-    it('stores attributes of the original node', function() {
+    it('stores attributes of the original node', async function() {
       const node = { type: 'bullet_list_open', attributes: { foo: 'bar' } }
-      const transformed = this.transformer.transform(node, 'file.js', 12)
+      const transformed = await this.transformer.transform(node, 'file.js', 12)
       expect(transformed[0].attributes).to.eql({ foo: 'bar' })
     })
 
-    it('transforms bullet_list_open', function() {
+    it('transforms bullet_list_open', async function() {
       const node = { type: 'bullet_list_open' }
-      const transformed = this.transformer.transform(node, 'file.js', 12)
+      const transformed = await this.transformer.transform(node, 'file.js', 12)
       expect(transformed).to.have.length(1)
       expect(transformed[0]).to.eql({
         attributes: {},
@@ -68,14 +68,18 @@ describe('MdTransformer', function() {
       })
     })
 
-    it('transforms bullet_list_close', function() {
+    it('transforms bullet_list_close', async function() {
       // we need an open node before we can transform the closing node
       const openNode = { type: 'bullet_list_open' }
-      this.transformer.transform(openNode, new AbsoluteFilePath('file.js'), 12)
+      await this.transformer.transform(
+        openNode,
+        new AbsoluteFilePath('file.js'),
+        12
+      )
 
       // transform the closing node
       const closeNode = { type: 'bullet_list_close' }
-      const transformed = this.transformer.transform(
+      const transformed = await this.transformer.transform(
         closeNode,
         new AbsoluteFilePath('file.js'),
         12

@@ -7,9 +7,9 @@ import { parseHtmlTag } from '../../helpers/parse-html-tag'
 import { removeHtmlComments } from '../../helpers/remove-html-comments'
 import { RemarkableNode } from '../remarkable-node'
 import { TagMapper } from '../tag-mapper'
+import { TransformerBlock } from '../transformer-block'
 
-/** Transforms generic HTML tags */
-export class GenericHtmlTagTransformerBlock {
+export class GenericHtmlTagTransformerBlock implements TransformerBlock {
   openTags: OpenTagTracker
   tagMapper: TagMapper
 
@@ -22,11 +22,15 @@ export class GenericHtmlTagTransformerBlock {
     return node.type === 'htmltag'
   }
 
-  transform(
+  async loadTransformers() {
+    return
+  }
+
+  async transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,
     line: number
-  ): AstNodeList {
+  ): Promise<AstNodeList> {
     const sanitizedContent = removeHtmlComments(node.content)
     const tagName = getHtmlBlockTag(sanitizedContent, file, line)
     if (this.isClosingHtmlTag(tagName)) {

@@ -8,56 +8,39 @@ import { GenericHtmlTagTransformerBlock } from './generic-htmltags/generic-html-
 import { GenericMdTransformerBlock } from './generic-md/generic-md-transformer-block'
 import { RemarkableNode } from './remarkable-node'
 import { TagMapper } from './tag-mapper'
+import { TransformerBlock } from './transformer-block'
 
 /**
  * AstStandardizer converts the AST created by Remarkable
  * into the standardized AST used by TextRunner
  */
 export default class AstStandardizer {
-  // data about the current AST transformation operation
   filepath: AbsoluteFilePath
   line: number
   openTags: OpenTagTracker
   result: AstNodeList
   tagMapper: TagMapper
-
-  // transformer blocks
-  customHtmlBlockTransformerBlock: CustomHtmlBlockTransformerBlock
-  customHtmlTagTransformerBlock: CustomHtmlTagTransformerBlock
-  customMdTransformerBlock: CustomMdTransformerBlock
-  genericHtmlTagTransformerBlock: GenericHtmlTagTransformerBlock
-  genericMdTransformerBlock: GenericMdTransformerBlock
+  transformerBlocks: TransformerBlock[]
 
   constructor(filepath: AbsoluteFilePath) {
-    // data about the current transformation operation
     this.filepath = filepath
     this.line = 1
     this.openTags = new OpenTagTracker()
     this.tagMapper = new TagMapper()
     this.result = new AstNodeList()
-
-    // transformer blocks
-    this.customHtmlBlockTransformerBlock = new CustomHtmlBlockTransformerBlock(
-      this.openTags
-    )
-    this.customHtmlTagTransformerBlock = new CustomHtmlTagTransformerBlock(
-      this.openTags
-    )
-    this.customMdTransformerBlock = new CustomMdTransformerBlock(this.openTags)
-    this.genericHtmlTagTransformerBlock = new GenericHtmlTagTransformerBlock(
-      this.openTags,
-      this.tagMapper
-    )
-    this.genericMdTransformerBlock = new GenericMdTransformerBlock(
-      this.openTags,
-      this.tagMapper
-    )
+    this.transformerBlocks = [
+      new CustomHtmlBlockTransformerBlock(this.openTags),
+      new CustomHtmlTagTransformerBlock(this.openTags),
+      new GenericHtmlTagTransformerBlock(this.openTags, this.tagMapper),
+      new CustomMdTransformerBlock(this.openTags),
+      new GenericMdTransformerBlock(this.openTags, this.tagMapper)
+    ]
   }
 
   async loadTransformers() {
-    await this.customMdTransformerBlock.loadTransformers()
-    await this.customHtmlBlockTransformerBlock.loadTransformers()
-    await this.customHtmlTagTransformerBlock.loadTransformers()
+    for (const transformerBlock of this.transformerBlocks) {
+      await transformerBlock.loadTransformers()
+    }
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
@@ -88,46 +71,10 @@ export default class AstStandardizer {
   }
 
   async transform(node: RemarkableNode): Promise<AstNodeList> {
-    if (this.customHtmlBlockTransformerBlock.canTransform(node)) {
-      return this.customHtmlBlockTransformerBlock.transform(
-        node,
-        this.filepath,
-        this.line
-      )
-    }
-    if (
-      this.customHtmlTagTransformerBlock.canTransform(
-        node,
-        this.filepath,
-        this.line
-      )
-    ) {
-      return this.customHtmlTagTransformerBlock.transform(
-        node,
-        this.filepath,
-        this.line
-      )
-    }
-    if (this.genericHtmlTagTransformerBlock.canTransform(node)) {
-      return this.genericHtmlTagTransformerBlock.transform(
-        node,
-        this.filepath,
-        this.line
-      )
-    }
-    if (this.customMdTransformerBlock.canTransform(node)) {
-      return this.customMdTransformerBlock.transform(
-        node,
-        this.filepath,
-        this.line
-      )
-    }
-    if (this.genericMdTransformerBlock.canTransform(node)) {
-      return this.genericMdTransformerBlock.transform(
-        node,
-        this.filepath,
-        this.line
-      )
+    for (const transformerBlock of this.transformerBlocks) {
+      if (transformerBlock.canTransform(node, this.filepath, this.line)) {
+        return transformerBlock.transform(node, this.filepath, this.line)
+      }
     }
     throw new Error(`Unprocessable node: ${node.type}`)
   }

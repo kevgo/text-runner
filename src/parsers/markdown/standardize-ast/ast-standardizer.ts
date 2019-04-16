@@ -38,9 +38,7 @@ export default class AstStandardizer {
   }
 
   async loadTransformers() {
-    for (const transformerBlock of this.transformerBlocks) {
-      await transformerBlock.loadTransformers()
-    }
+    return Promise.all(this.transformerBlocks.map(tb => tb.loadTransformers()))
   }
 
   async standardize(ast: any): Promise<AstNodeList> {

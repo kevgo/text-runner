@@ -78,92 +78,58 @@ export default class AstStandardizer {
       if (this.processSoftBreak(node)) {
         continue
       }
-      if (this.customHtmlBlockTransformerBlock.canTransform(node)) {
-        await this.processHtmlBlock(node)
-        continue
+
+      const transformed = await this.transform(node)
+      for (const transformedNode of transformed) {
+        this.result.push(transformedNode)
       }
-      if (
-        this.customHtmlTagTransformerBlock.canTransform(
-          node,
-          this.filepath,
-          this.line
-        )
-      ) {
-        await this.processCustomHtmlTag(node)
-        continue
-      }
-      if (this.genericHtmlTagTransformerBlock.canTransform(node)) {
-        await this.processGenericHtmlTag(node)
-        continue
-      }
-      if (this.customMdTransformerBlock.canTransform(node)) {
-        await this.processCustomMdNode(node)
-        continue
-      }
-      if (this.genericMdTransformerBlock.canTransform(node)) {
-        await this.processGenericMdNode(node)
-        continue
-      }
-      throw new Error(`Unprocessable node: ${node.type}`)
     }
     return this.result
   }
 
-  async processGenericHtmlTag(node: RemarkableNode) {
-    const transformed = await this.genericHtmlTagTransformerBlock.transform(
-      node,
-      this.filepath,
-      this.line
-    )
-    for (const transformedNode of transformed) {
-      this.result.push(transformedNode)
+  async transform(node: RemarkableNode): Promise<AstNodeList> {
+    if (this.customHtmlBlockTransformerBlock.canTransform(node)) {
+      return this.customHtmlBlockTransformerBlock.transform(
+        node,
+        this.filepath,
+        this.line
+      )
     }
-  }
-
-  async processHtmlBlock(node: RemarkableNode) {
-    const transformed = await this.customHtmlBlockTransformerBlock.transform(
-      node,
-      this.filepath,
-      this.line
-    )
-    for (const transformedNode of transformed) {
-      this.result.push(transformedNode)
+    if (
+      this.customHtmlTagTransformerBlock.canTransform(
+        node,
+        this.filepath,
+        this.line
+      )
+    ) {
+      return this.customHtmlTagTransformerBlock.transform(
+        node,
+        this.filepath,
+        this.line
+      )
     }
-  }
-
-  async processCustomHtmlTag(node: RemarkableNode) {
-    const transformed = await this.customHtmlTagTransformerBlock.transform(
-      node,
-      this.filepath,
-      this.line
-    )
-    for (const transformedNode of transformed) {
-      this.result.push(transformedNode)
+    if (this.genericHtmlTagTransformerBlock.canTransform(node)) {
+      return this.genericHtmlTagTransformerBlock.transform(
+        node,
+        this.filepath,
+        this.line
+      )
     }
-  }
-
-  async processGenericMdNode(node: RemarkableNode) {
-    const transformed = await this.genericMdTransformerBlock.transform(
-      node,
-      this.filepath,
-      this.line
-    )
-    for (const transformedNode of transformed) {
-      this.result.push(transformedNode)
+    if (this.customMdTransformerBlock.canTransform(node)) {
+      return this.customMdTransformerBlock.transform(
+        node,
+        this.filepath,
+        this.line
+      )
     }
-    return true
-  }
-
-  async processCustomMdNode(node: any) {
-    const transformed = await this.customMdTransformerBlock.transform(
-      node,
-      this.filepath,
-      this.line
-    )
-    for (const transformedNode of transformed) {
-      this.result.push(transformedNode)
+    if (this.genericMdTransformerBlock.canTransform(node)) {
+      return this.genericMdTransformerBlock.transform(
+        node,
+        this.filepath,
+        this.line
+      )
     }
-    return true
+    throw new Error(`Unprocessable node: ${node.type}`)
   }
 
   processSoftBreak(node: RemarkableNode): boolean {

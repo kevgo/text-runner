@@ -18,17 +18,17 @@ export async function unusedCommand(config: Configuration): Promise<Error[]> {
   const ASTs = await Promise.all(filenames.map(readAndParseFile))
 
   // step 3: extract activities
-  const usedActionNames = extractActivities(ASTs, config.classPrefix).map(
+  const usedActivityNames = extractActivities(ASTs, config.classPrefix).map(
     activity => activity.type
   )
 
   // step 4: find defined activities
-  const definedActionNames = actionRepo.customActionNames()
+  const definedActivityNames = actionRepo.customActionNames()
 
   // step 5: identify unused activities
-  const unusedActionNames = determineUnusedActions(
-    definedActionNames,
-    usedActionNames
+  const unusedActionNames = determineUnusedActivities(
+    definedActivityNames,
+    usedActivityNames
   )
 
   // step 6: write stats
@@ -40,7 +40,7 @@ export async function unusedCommand(config: Configuration): Promise<Error[]> {
   return []
 }
 
-function determineUnusedActions(
+function determineUnusedActivities(
   definedActionNames: string[],
   usedActionNames: string[]
 ): string[] {

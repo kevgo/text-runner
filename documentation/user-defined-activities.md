@@ -170,6 +170,14 @@ TextRunner supports a variety of formatters:
 - **dot formatter:**
   A minimalistic formatter, shows only dots for each test performed.
 
+## Finding unused activities
+
+To see all custom activities that aren't currenly used, run:
+
+```
+text-run unused
+```
+
 <hr>
 
 Read more about:

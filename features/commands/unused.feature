@@ -1,6 +1,6 @@
 Feature: show unused steps
 
-    When refactoring steps
+  When refactoring steps
   I want to see which steps are no longer used
   So that I can remove them.
 

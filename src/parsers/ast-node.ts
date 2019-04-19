@@ -1,8 +1,6 @@
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 
-/**
- * A node in the standardized Markdown/HTML AST
- */
+/** A node in the standardized Markdown/HTML AST */
 export class AstNode {
   static scaffold(data: any = {}): AstNode {
     if (typeof data.file === 'string') {
@@ -40,9 +38,7 @@ export class AstNode {
     this.attributes = data.attributes
   }
 
-  /**
-   * Returns the type of the corresponding ending node
-   */
+  /** Returns the type of the corresponding ending node. */
   endType(): string {
     if (!this.isOpeningNode()) {
       throw new Error('not an opening node')
@@ -50,6 +46,10 @@ export class AstNode {
     return this.type.replace('open', '') + 'close'
   }
 
+  /**
+   * Returns the content of the "href" attribute for link tags,
+   * null otherwise.
+   */
   htmlLinkTarget(): string | null {
     if (this.content == null) {
       return null
@@ -61,10 +61,12 @@ export class AstNode {
     return matches ? matches[1] : null
   }
 
+  /** Returns whether this AstNode is an opening node. */
   isOpeningNode(): boolean {
     return this.type.endsWith('_open')
   }
 
+  /** Returns whether this AstNode is a closing node. */
   isClosingNode(): boolean {
     return this.type.endsWith('_close')
   }

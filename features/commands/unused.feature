@@ -11,6 +11,6 @@ Feature: show unused steps
     When running "text-run unused"
     Then it prints:
       """
-      Unused actions:
+      Unused activities:
       - hello-world
       """

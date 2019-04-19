@@ -26,27 +26,13 @@ export async function unusedCommand(config: Configuration) {
   const definedActivityNames = actionRepo.customActionNames()
 
   // step 5: identify unused activities
-  const unusedActionNames = determineUnusedActivities(
-    definedActivityNames,
-    usedActivityNames
+  const unusedActivityNames = definedActivityNames.filter(
+    definedActivityName => !usedActivityNames.includes(definedActivityName)
   )
 
   // step 6: write results
-  console.log('Unused actions:')
-  for (const unusedActionName of unusedActionNames) {
-    console.log(`- ${unusedActionName}`)
+  console.log('Unused activities:')
+  for (const unusedActivityName of unusedActivityNames) {
+    console.log(`- ${unusedActivityName}`)
   }
-}
-
-function determineUnusedActivities(
-  definedActionNames: string[],
-  usedActionNames: string[]
-): string[] {
-  const result: string[] = []
-  for (const definedActionName of definedActionNames) {
-    if (!usedActionNames.includes(definedActionName)) {
-      result.push(definedActionName)
-    }
-  }
-  return result
 }

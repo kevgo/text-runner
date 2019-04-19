@@ -6,12 +6,12 @@ import { getFileNames } from '../finding-files/get-filenames'
 import { readAndParseFile } from '../parsers/read-and-parse-file'
 import { actionRepo } from '../runners/action-repo'
 
-export async function unusedCommand(config: Configuration): Promise<Error[]> {
+export async function unusedCommand(config: Configuration) {
   // step 1: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(chalk.magenta('no Markdown files found'))
-    return []
+    return
   }
 
   // step 2: read and parse files
@@ -31,13 +31,11 @@ export async function unusedCommand(config: Configuration): Promise<Error[]> {
     usedActivityNames
   )
 
-  // step 6: write stats
+  // step 6: write results
   console.log('Unused actions:')
   for (const unusedActionName of unusedActionNames) {
     console.log(`- ${unusedActionName}`)
   }
-
-  return []
 }
 
 function determineUnusedActivities(

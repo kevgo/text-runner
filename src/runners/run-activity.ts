@@ -1,6 +1,6 @@
 import { Activity } from '../activity-list/activity'
 import { Configuration } from '../configuration/configuration'
-import { Handler } from './handler'
+import { Action } from './action'
 import { ActionArgs } from './action-args'
 
 import util from 'util'
@@ -50,12 +50,12 @@ export async function runActivity(
   return null
 }
 
-async function runCallbackFunc(func: Handler, args: ActionArgs) {
+async function runCallbackFunc(func: Action, args: ActionArgs) {
   const promisified = util.promisify(func)
   await promisified(args)
 }
 
-async function runSyncOrPromiseFunc(func: Handler, args: ActionArgs) {
+async function runSyncOrPromiseFunc(func: Action, args: ActionArgs) {
   await Promise.resolve(func(args))
 }
 

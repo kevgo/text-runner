@@ -15,7 +15,7 @@ describe('extract-activities', function() {
     AST.pushNode({ type: 'anchor_close' })
     const result = extractActivities([AST], 'textrun')
     expect(result).to.have.length(1)
-    expect(result[0].type).to.equal('verify-foo')
+    expect(result[0].actionName).to.equal('verify-foo')
     expect(result[0].file.unixified()).to.equal('README.md')
     expect(result[0].line).to.equal(3)
     expect(result[0].nodes).to.eql(AST)
@@ -31,7 +31,7 @@ describe('extract-activities', function() {
     })
     AST.pushNode({ type: 'anchor_close' })
     const result = extractActivities([AST], 'textrun')
-    expect(result[0].type).to.equal('verify-foo')
+    expect(result[0].actionName).to.equal('verify-foo')
   })
 
   it('normalizes action names in kebab-case', function() {
@@ -44,7 +44,7 @@ describe('extract-activities', function() {
     })
     AST.pushNode({ type: 'anchor_close' })
     const result = extractActivities([AST], 'textrun')
-    expect(result[0].type).to.equal('verify-foo')
+    expect(result[0].actionName).to.equal('verify-foo')
   })
 
   it('normalizes action names in snake_case', function() {
@@ -57,6 +57,6 @@ describe('extract-activities', function() {
     })
     AST.pushNode({ type: 'anchor_close' })
     const result = extractActivities([AST], 'textrun')
-    expect(result[0].type).to.equal('verify-foo')
+    expect(result[0].actionName).to.equal('verify-foo')
   })
 })

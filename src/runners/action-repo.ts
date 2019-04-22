@@ -87,7 +87,7 @@ class ActionRepo {
 
   private builtinActionFilePaths(): string[] {
     return glob
-      .sync(path.join(__dirname, '..', 'actions', '*.js'))
+      .sync(path.join(__dirname, '..', 'built-in-actions', '*.js'))
       .map(trimExtension)
   }
 

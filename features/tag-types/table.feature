@@ -1,6 +1,6 @@
 Feature: active table tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make table tags active
   So that I don't have to litter my document with <a> tags
 
@@ -127,10 +127,10 @@ Feature: active table tags
   Scenario: Markdown table
     Given my source code contains the file "1.md" with content:
       """
-     | Keyboard shortcut                                  | Action                      |
-     |----------------------------------------------------|-----------------------------|
-     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd> | Toggle between .h/.m file   |
-     | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>   | Open Quickly (fuzzy find)   |
+     | Keyboard shortcut                                    | Effect                        |
+     | ---------------------------------------------------- | ----------------------------- |
+     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd>   | Toggle between .h/.m file     |
+     | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>     | Open Quickly (fuzzy find)     |
 
       """
     When running text-run

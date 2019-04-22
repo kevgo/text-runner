@@ -1,10 +1,10 @@
 Feature: unknown activity types
 
-  As a documentation developer
-  I want to be notified if my documentation uses an action for which there is no handler
-  So that I can fix my documentation.
+    When using an active block for which there is no action
+  I want to be notified
+  So that I can add the missing custom action.
 
-  - using an action for which there is no handler causes the test run to fail
+  - using an unknown action causes the test run to fail
 
 
   Scenario: using an unknown activity type
@@ -42,6 +42,6 @@ Feature: unknown activity types
 
       No custom actions defined.
 
-      To create a new "unknown-action" activity type,
+      To create a new "unknown-action" action,
       run "text-run add unknown-action"
       """

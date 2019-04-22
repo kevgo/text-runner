@@ -1,8 +1,7 @@
-# User-defined activities
+# User-defined actions
 
-It is possible to extend the set of
-[built-in activity types](built-in-activity-types)
-with your custom-built ones written in JavaScript.
+If the [built-in actions](built-in-actions) aren't enough,
+you can write custom actions in JavaScript.
 
 ## Hello-world example
 

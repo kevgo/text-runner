@@ -37,4 +37,4 @@ $ foo
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-npm-global-command/verify-npm-global-command.feature)
-- [source code](../../src/actions/verify-npm-global-command.ts)
+- [source code](../../src/built-in-actions/verify-npm-global-command.ts)

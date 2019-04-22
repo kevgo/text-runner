@@ -30,4 +30,4 @@ hello world
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
-- [source code](../../src/actions/verify-workspace-file-content.ts)
+- [source code](../../src/built-in-actions/verify-workspace-file-content.ts)

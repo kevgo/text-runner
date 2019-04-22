@@ -57,4 +57,4 @@ hello again
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
-- [source code](../../src/actions/verify-source-file-content.ts)
+- [source code](../../src/built-in-actions/verify-source-file-content.ts)

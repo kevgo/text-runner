@@ -73,4 +73,4 @@ actions:
 #### More info
 
 - [feature specs](../../features/actions/built-in/run-javascript/run-javascript.feature)
-- [source code](../../src/actions/run-javascript.ts)
+- [source code](../../src/built-in-actions/run-javascript.ts)

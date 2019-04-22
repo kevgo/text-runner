@@ -1,4 +1,8 @@
-# Creating a directory
+---
+id: create-directory
+title: "create directory" activity
+sidebar_label: create directory
+---
 
 - creates a directory in the test workspace
 - the name of the directory is provided as a code block

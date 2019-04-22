@@ -1,12 +1,12 @@
 Feature: active code tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make code tags active
   So that I don't have to litter my document with <a> tags
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: code tag

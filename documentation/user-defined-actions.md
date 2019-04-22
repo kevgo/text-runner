@@ -153,7 +153,7 @@ It provides the following methods:
   depending on the type of formatter, this output is printed or not
 - **warn:** to signal a warning to the user (but keep the test passing)
 - **skip:** call this to skip the current test
-- **name:** overrides how the current activity is called in the test output
+- **name:** overrides how the current action is called in the test output
 - **stdout** and **stderr:**
   streams that you can pipe output of commands you run into
 - **console:**
@@ -173,5 +173,5 @@ TextRunner supports a variety of formatters:
 
 Read more about:
 
-- the [built-in activity types](built-in-activity-types)
+- the [built-in actions](built-in-actions)
 - [configure](configuration.md) TextRunner

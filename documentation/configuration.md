@@ -59,8 +59,8 @@ useSystemTempDirectory: false
 # whether to skip tests that require an online connection
 offline: false
 
-# activity-type specific configuration
-activityTypes:
+# action-specific configuration
+actions:
   runConsoleCommand:
     globals: {}
 ```
@@ -80,6 +80,6 @@ $ text-run --config my-config.yml
 
 Read more about:
 
-- the [built-in activity types](built-in-activity-types)
-- writing your own [user-defined activities](user-defined-activities.md)
+- the [built-in actions](built-in-actions)
+- writing your own [user-defined actions](user-defined-actions.md)
 - [installing](installation.md) TextRunner

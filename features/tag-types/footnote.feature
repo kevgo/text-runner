@@ -1,12 +1,12 @@
 Feature: footnotes
 
-  When writing documentation
+    When writing documentation
   I want to be able to use and reference footnotes
   So that I don't have to litter my document with peripheral details.
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: code tag

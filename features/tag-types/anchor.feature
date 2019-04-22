@@ -1,12 +1,12 @@
 Feature: active anchor tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make anchor tags active
   So that I can make active tags invisible and linkable.
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: anchor tag

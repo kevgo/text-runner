@@ -1,12 +1,12 @@
 Feature: KBD tags
 
-  When testing Markdown documentation
+    When testing Markdown documentation
   I want to be able to use KBD tags
   So that I don't have to litter my document with <a> tags
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: code tag
@@ -26,4 +26,3 @@ Feature: KBD tags
       <kbd>foo</kbd>
       """
     When running text-run
-

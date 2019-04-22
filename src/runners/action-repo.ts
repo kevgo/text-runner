@@ -30,28 +30,28 @@ class ActionRepo {
     return (
       this.builtinActions[activity.actionName] ||
       this.customActions[activity.actionName] ||
-      this.errorUnknownActivityType(activity)
+      this.errorUnknownAction(activity)
     )
   }
 
   // Note: need to define the return type as Action to satisfy the type checker
   //       who doesn't understand that this is an error check
-  private errorUnknownActivityType(activity: Activity): Action {
-    let errorText = `unknown activity type: ${chalk.red(
+  private errorUnknownAction(activity: Activity): Action {
+    let errorText = `unknown action: ${chalk.red(
       activity.actionName
-    )}\nAvailable built-in activity types:\n`
+    )}\nAvailable built-in actions:\n`
     for (const actionName of Object.keys(this.builtinActions).sort()) {
       errorText += `* ${actionName}\n`
     }
     if (Object.keys(this.customActions).length > 0) {
-      errorText += '\nYou defined these custom activity types:\n'
+      errorText += '\nUser-defined actions:\n'
       for (const actionName of Object.keys(this.customActions).sort()) {
         errorText += `* ${actionName}\n`
       }
     } else {
       errorText += '\nNo custom actions defined.\n'
     }
-    errorText += `\nTo create a new "${activity.actionName}" activity type,\n`
+    errorText += `\nTo create a new "${activity.actionName}" action,\n`
     errorText += `run "text-run add ${activity.actionName}"\n`
     throw new UnprintedUserError(
       errorText,

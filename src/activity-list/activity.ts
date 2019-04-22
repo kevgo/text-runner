@@ -13,6 +13,7 @@ export interface Activity {
   nodes: AstNodeList
 }
 
+// scaffoldActivity creates a test Activity from the given data.
 export function scaffoldActivity(data: {
   actionName?: string
   nodes?: AstNodeList

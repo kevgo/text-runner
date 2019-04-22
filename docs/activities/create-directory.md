@@ -1,6 +1,6 @@
 ---
 id: create-directory
-title: "create directory" activity
+title: "create directory" action
 sidebar_label: create directory
 ---
 

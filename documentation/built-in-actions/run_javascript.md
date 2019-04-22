@@ -35,8 +35,12 @@ Alternatively you can also use the placeholder `// ...`
 
 ```html
 <a textrun="run-javascript">
-  `​`` const fs = require('fs') fs.writeFile('hello.txt', 'hello world',
-  function(err) { // ... }) `​``
+`​``
+const fs = require('fs') 
+fs.writeFile('hello.txt', 'hello world', function(err) { 
+  // ... 
+}) 
+`​``
 </a>
 ```
 

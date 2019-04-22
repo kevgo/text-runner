@@ -22,7 +22,9 @@ _test.txt_ with content `foo`
 
 **test.txt**
 
-` ​``txt The file content goes here `​``
+` ​``
+The file content goes here 
+` ​``
 </a>
 
 ```
@@ -33,4 +35,3 @@ _test.txt_ with content `foo`
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)
 - [source code](../../src/built-in-actions/create-file.ts)
-```

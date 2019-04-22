@@ -7,25 +7,29 @@ without having them do it as part of the tutorial.
 #### Simple Example
 
 <a textrun="create-file">
-Let's say you have a file __hello.txt__ in your code base
+
+Let's say you have a file **hello.txt** in your code base
 with the content `hello world`.
+
 </a>
+
 You can display its content in your documentation via this active block:
 
 <a textrun="run-markdown-in-textrun">
+
 ```markdown
 <a textrun="verify-source-file-content">
-Your __hello.txt__ file needs to contains this section:
+
+Your **hello.txt** file needs to contains this section:
 
 ` ​`` hello world `​``
 </a>
+```
 
-````
 </a>
 
 - extracts the filename from the bold section
 - extracts the expected file content from the fenced code block
-
 
 #### Providing a base directory
 
@@ -41,15 +45,15 @@ You can display its content in your documentation via this active block:
 
 <a textrun="run-markdown-in-textrun">
 ```markdown
+
 <a textrun="verify-source-file-content">
 Your __hello2.txt__ file in the [bar folder](foo/bar)
 needs to contains this section:
 
-`​``
-hello again
-`​``
+` ​`` hello again `​``
 </a>
-````
+
+```
 
 </a>
 
@@ -57,3 +61,4 @@ hello again
 
 - [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
 - [source code](../../src/built-in-actions/verify-source-file-content.ts)
+```

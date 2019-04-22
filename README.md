@@ -49,7 +49,7 @@ complex data in tables, bullet point lists, and embedded images.
 - [configuration](documentation/configuration.md)
 - [terminology](documentation/terminology.md)
 - [built-in actions](documentation/built-in-actions)
-- [user-defined activities](documentation/user-defined-activities.md)
+- [user-defined actions](documentation/user-defined-actions.md)
 - [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)
 - [developer documentation](CONTRIBUTING.md)

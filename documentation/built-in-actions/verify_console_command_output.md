@@ -12,14 +12,19 @@ First, let's runs a console command:
 
 ```markdown
 <a textrun="run-console-command">
-`​``
+
+` ​`` 
 echo Hello world!
 `​``
 </a>
 
 Now that it's finished, let's verify its output:
 <a textrun="verify-console-command-output">
-` ​`` Hello world! `​``
+
+` ​`` 
+Hello world! 
+`​``
+
 </a>
 ```
 

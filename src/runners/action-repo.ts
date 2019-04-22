@@ -27,8 +27,8 @@ class ActionRepo {
   // Provides the action for the block with the given name
   actionFor(activity: Activity): Action {
     return (
-      this.builtinActions[activity.type] ||
-      this.customActions[activity.type] ||
+      this.builtinActions[activity.actionName] ||
+      this.customActions[activity.actionName] ||
       this.errorUnknownActivityType(activity)
     )
   }
@@ -37,7 +37,7 @@ class ActionRepo {
   //       who doesn't understand that this is an error check
   private errorUnknownActivityType(activity: Activity): Action {
     let errorText = `unknown activity type: ${chalk.red(
-      activity.type
+      activity.actionName
     )}\nAvailable built-in activity types:\n`
     for (const actionName of Object.keys(this.builtinActions).sort()) {
       errorText += `* ${actionName}\n`
@@ -50,8 +50,8 @@ class ActionRepo {
     } else {
       errorText += '\nNo custom actions defined.\n'
     }
-    errorText += `\nTo create a new "${activity.type}" activity type,\n`
-    errorText += `run "text-run add ${activity.type}"\n`
+    errorText += `\nTo create a new "${activity.actionName}" activity type,\n`
+    errorText += `run "text-run add ${activity.actionName}"\n`
     throw new UnprintedUserError(
       errorText,
       activity.file.platformified(),

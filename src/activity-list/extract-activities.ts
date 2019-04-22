@@ -40,7 +40,7 @@ function extractActivitiesFromNode(
         file: node.file,
         line: node.line,
         nodes: AST.getNodesFor(node),
-        type: kebabCase(node.attributes[attributeName])
+        actionName: kebabCase(node.attributes[attributeName])
       })
     }
     if (isActiveBlockEndTag(node, activeNode, attributeName)) {

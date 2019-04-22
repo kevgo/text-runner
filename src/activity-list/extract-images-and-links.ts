@@ -9,10 +9,10 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
       switch (node.type) {
         case 'link_open':
           result.push({
+            actionName: 'check-link',
             file: node.file,
             line: node.line,
-            nodes: AST.getNodesFor(node),
-            actionName: 'check-link'
+            nodes: AST.getNodesFor(node)
           })
           break
 
@@ -20,10 +20,10 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
           const nodes = new AstNodeList()
           nodes.push(node)
           result.push({
+            actionName: 'check-image',
             file: node.file,
             line: node.line,
-            nodes,
-            actionName: 'check-image'
+            nodes
           })
           break
       }

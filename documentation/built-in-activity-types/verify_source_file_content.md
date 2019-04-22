@@ -17,11 +17,10 @@ You can display its content in your documentation via this active block:
 <a textrun="verify-source-file-content">
 Your __hello.txt__ file needs to contains this section:
 
-`​``
-hello world
-`​``
+` ​`` hello world `​``
 </a>
-```
+
+````
 </a>
 
 - extracts the filename from the bold section
@@ -50,9 +49,9 @@ needs to contains this section:
 hello again
 `​``
 </a>
-```
-</a>
+````
 
+</a>
 
 #### More info
 

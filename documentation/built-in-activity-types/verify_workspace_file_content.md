@@ -18,9 +18,7 @@ we can verify it via this block:
 
 _hello.txt_
 
-`​``
-hello world
-`​``
+` ​`` hello world `​``
 </a>
 
 ```
@@ -31,3 +29,4 @@ hello world
 
 - [feature specs](../../features/actions/built-in/verify-workspace-file-content/verify-workspace-file-content.feature)
 - [source code](../../src/built-in-actions/verify-workspace-file-content.ts)
+```

@@ -1,5 +1,5 @@
 import { Activity } from '../activity-list/activity'
-import { Action } from './action'
+import { Handler } from './handler'
 
 import chalk from 'chalk'
 import glob from 'glob'
@@ -12,9 +12,10 @@ import { javascriptExtensions } from '../helpers/javascript-extensions'
 import { trimExtension } from '../helpers/trim-extension'
 
 interface FunctionRepo {
-  [key: string]: Action
+  [key: string]: Handler
 }
 
+// ActionRepo provides runnable action instances for activities.
 class ActionRepo {
   private builtinActions: FunctionRepo
   private customActions: FunctionRepo
@@ -24,8 +25,8 @@ class ActionRepo {
     this.customActions = this.loadCustomActions()
   }
 
-  // Provides the action for the block with the given name
-  actionFor(activity: Activity): Action {
+  // Provides the action for the given Activity
+  actionFor(activity: Activity): Handler {
     return (
       this.builtinActions[activity.actionName] ||
       this.customActions[activity.actionName] ||
@@ -35,7 +36,7 @@ class ActionRepo {
 
   // Note: need to define the return type as Action to satisfy the type checker
   //       who doesn't understand that this is an error check
-  private errorUnknownActivityType(activity: Activity): Action {
+  private errorUnknownActivityType(activity: Activity): Handler {
     let errorText = `unknown activity type: ${chalk.red(
       activity.actionName
     )}\nAvailable built-in activity types:\n`

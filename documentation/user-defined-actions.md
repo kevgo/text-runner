@@ -1,8 +1,7 @@
-# User-defined activities
+# User-defined actions
 
-It is possible to extend the set of
-[built-in activity types](built-in-activity-types)
-with your custom-built ones written in JavaScript.
+If the [built-in actions](built-in-actions) aren't enough,
+you can write custom actions in JavaScript.
 
 ## Hello-world example
 
@@ -154,7 +153,7 @@ It provides the following methods:
   depending on the type of formatter, this output is printed or not
 - **warn:** to signal a warning to the user (but keep the test passing)
 - **skip:** call this to skip the current test
-- **name:** overrides how the current activity is called in the test output
+- **name:** overrides how the current action is called in the test output
 - **stdout** and **stderr:**
   streams that you can pipe output of commands you run into
 - **console:**
@@ -182,5 +181,5 @@ text-run unused
 
 Read more about:
 
-- the [built-in activity types](built-in-activity-types)
+- the [built-in actions](built-in-actions)
 - [configure](configuration.md) TextRunner

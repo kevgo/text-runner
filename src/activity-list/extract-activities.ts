@@ -37,10 +37,10 @@ function extractActivitiesFromNode(
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
       result.push({
+        actionName: kebabCase(node.attributes[attributeName]),
         file: node.file,
         line: node.line,
-        nodes: AST.getNodesFor(node),
-        type: kebabCase(node.attributes[attributeName])
+        nodes: AST.getNodesFor(node)
       })
     }
     if (isActiveBlockEndTag(node, activeNode, attributeName)) {

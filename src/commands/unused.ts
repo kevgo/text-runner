@@ -19,7 +19,7 @@ export async function unusedCommand(config: Configuration) {
 
   // step 3: extract activities
   const usedActivityNames = extractActivities(ASTs, config.classPrefix).map(
-    activity => activity.type
+    activity => activity.actionName
   )
 
   // step 4: find defined activities

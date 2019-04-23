@@ -34,5 +34,5 @@ which checks that all links and images point to something.
 Read more about:
 
 - [configuring](configuration.md) TextRunner
-- using some of the [built-in activity types](built-in-activity-types)
-- writing your own [user-defined activities](user-defined-activities.md)
+- using some of the [built-in actions](built-in-actions)
+- writing your own [user-defined actions](user-defined-actions.md)

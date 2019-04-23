@@ -6,7 +6,7 @@ Feature: active h1 tags
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: H1 tag

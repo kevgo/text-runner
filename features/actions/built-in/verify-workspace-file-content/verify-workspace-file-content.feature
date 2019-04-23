@@ -1,8 +1,8 @@
 Feature: verifying file content
 
   As a documentation writer
-  I want to be able to write actions that verify created files
-  So that I am sure my tools performs the correct actions on the hard drive.
+  I want to be able to verify created files
+  So that I am sure my tools performs the correct activities on the hard drive.
 
   - the "verifyWorkspaceFileContent" action verifies files in the current workspace
   - the filename is provided as strong text or italic text

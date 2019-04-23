@@ -6,7 +6,7 @@ Feature: HR tags
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: active HR tag

@@ -3,13 +3,15 @@
 To run JavaScript code:
 
 <a textrun="run-markdown-in-textrun">
-```html
+
+````html
 <a textrun="run-javascript">
-`​``
-console.log('This is getting executed by TextRunner!')
-`​``
-</a>
 ```
+console.log('This is getting executed by TextRunner!')
+```
+</a>
+````
+
 </a>
 
 ## Asynchronous code
@@ -20,20 +22,22 @@ add the placeholder `<CALLBACK>` where your code would call the callback when it
 Example:
 
 <a textrun="run-markdown-in-textrun">
-```html
+
+````html
 <a textrun="run-javascript">
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 `​``
 </a>
-```
+`````
+
 </a>
 
 Alternatively you can also use the placeholder `// ...`
 <a textrun="run-markdown-in-textrun">
 
-```html
+````html
 <a textrun="run-javascript">
 `​``
 const fs = require('fs')
@@ -42,7 +46,7 @@ fs.writeFile('hello.txt', 'hello world', function(err) {
 })
 `​``
 </a>
-```
+````
 
 </a>
 
@@ -73,4 +77,4 @@ actions:
 #### More info
 
 - [feature specs](../../features/actions/built-in/run-javascript/run-javascript.feature)
-- [source code](../../src/actions/run-javascript.ts)
+- [source code](../../src/built-in-actions/run-javascript.ts)

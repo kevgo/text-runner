@@ -1,11 +1,11 @@
 Feature: custom runners
 
   As a documentation writer
-  I want to be able to define my own block actions
-  So that my documentation can perform things that go beyond the built-in actions.
+  I want to be able to define my own actions
+  So that my documentation can perform things that go beyond the built-in functionality.
 
-  - put built-in actions into a file "text-run/<action name>.js"
-  - the structure of these files should match the structure of the built-in actions
+  - put custom actions into a file "text-run/<action name>.js"
+  - the file must export a Javascript function
 
 
   Scenario Outline: various forms of runners

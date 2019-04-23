@@ -15,6 +15,7 @@ interface FunctionRepo {
   [key: string]: Action
 }
 
+// ActionRepo provides runnable action instances for activities.
 class ActionRepo {
   private builtinActions: FunctionRepo
   private customActions: FunctionRepo
@@ -24,12 +25,12 @@ class ActionRepo {
     this.customActions = this.loadCustomActions()
   }
 
-  // Provides the action for the block with the given name
+  // Provides the action for the given Activity
   actionFor(activity: Activity): Action {
     return (
-      this.builtinActions[activity.type] ||
-      this.customActions[activity.type] ||
-      this.errorUnknownActivityType(activity)
+      this.builtinActions[activity.actionName] ||
+      this.customActions[activity.actionName] ||
+      this.errorUnknownAction(activity)
     )
   }
 
@@ -40,23 +41,23 @@ class ActionRepo {
 
   // Note: need to define the return type as Action to satisfy the type checker
   //       who doesn't understand that this is an error check
-  private errorUnknownActivityType(activity: Activity): Action {
-    let errorText = `unknown activity type: ${chalk.red(
-      activity.type
-    )}\nAvailable built-in activity types:\n`
+  private errorUnknownAction(activity: Activity): Action {
+    let errorText = `unknown action: ${chalk.red(
+      activity.actionName
+    )}\nAvailable built-in actions:\n`
     for (const actionName of Object.keys(this.builtinActions).sort()) {
       errorText += `* ${actionName}\n`
     }
     if (Object.keys(this.customActions).length > 0) {
-      errorText += '\nYou defined these custom activity types:\n'
+      errorText += '\nUser-defined actions:\n'
       for (const actionName of Object.keys(this.customActions).sort()) {
         errorText += `* ${actionName}\n`
       }
     } else {
       errorText += '\nNo custom actions defined.\n'
     }
-    errorText += `\nTo create a new "${activity.type}" activity type,\n`
-    errorText += `run "text-run add ${activity.type}"\n`
+    errorText += `\nTo create a new "${activity.actionName}" action,\n`
+    errorText += `run "text-run add ${activity.actionName}"\n`
     throw new UnprintedUserError(
       errorText,
       activity.file.platformified(),
@@ -92,7 +93,7 @@ class ActionRepo {
 
   private builtinActionFilePaths(): string[] {
     return glob
-      .sync(path.join(__dirname, '..', 'actions', '*.js'))
+      .sync(path.join(__dirname, '..', 'built-in-actions', '*.js'))
       .map(trimExtension)
   }
 

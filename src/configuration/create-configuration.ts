@@ -42,8 +42,8 @@ useSystemTempDirectory: false
 # whether to skip tests that require an online connection
 offline: false
 
-# activity-type specific configuration
-activityTypes:
+# action-specific configuration
+actions:
   runConsoleCommand:
     globals: {}`
   )

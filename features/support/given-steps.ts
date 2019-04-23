@@ -125,7 +125,7 @@ echo "Hello world"
   )
 })
 
-Given('my workspace contains the HelloWorld activity', async function() {
+Given('my source code contains the HelloWorld action', async function() {
   mkdirp.sync(path.join(this.rootDir, 'text-run'))
   await fs.writeFile(
     path.join(this.rootDir, 'text-run', 'hello-world.js'),

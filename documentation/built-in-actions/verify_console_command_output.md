@@ -10,7 +10,7 @@
 First, let's runs a console command:
 <a textrun="run-markdown-in-textrun">
 
-```markdown
+````html
 <a textrun="run-console-command">
 `​``
 echo Hello world!
@@ -23,11 +23,11 @@ Now that it's finished, let's verify its output:
 Hello world!
 `​``
 </a>
-```
+````
 
 </a>
 
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-console-command-output/verify-console-command-output.feature)
-- [source code](../../src/actions/verify-console-command-output.ts)
+- [source code](../../src/built-in-actions/verify-console-command-output.ts)

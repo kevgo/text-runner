@@ -33,6 +33,11 @@ class ActionRepo {
     )
   }
 
+  // Returns the names of all built-in actions
+  customActionNames(): string[] {
+    return Object.keys(this.customActions)
+  }
+
   // Note: need to define the return type as Action to satisfy the type checker
   //       who doesn't understand that this is an error check
   private errorUnknownActivityType(activity: Activity): Action {

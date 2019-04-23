@@ -28,6 +28,7 @@ COMMANDS
 
   ${chalk.bold('setup')}                 creates an example configuration file
   ${chalk.bold('add')} <filename>        scaffolds a new block type handler
+  ${chalk.bold('unused')} <filename>     shows unused custom activities
 
   ${chalk.bold('help')}                  shows this help screen
   ${chalk.bold('version')}               shows the currently installed version

@@ -10,6 +10,7 @@ import { helpCommand } from './commands/help'
 import { runCommand } from './commands/run'
 import { setupCommand } from './commands/setup'
 import { staticCommand } from './commands/static'
+import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { determineConfigFilename } from './configuration/determine-config-filename'
@@ -47,6 +48,9 @@ export async function textRunner(cmdLineArgs: CliArgTypes): Promise<Error[]> {
       case 'static':
         errors = await staticCommand(configuration)
         return errors
+      case 'unused':
+        await unusedCommand(configuration)
+        return []
       case 'version':
         await versionCommand()
         return []

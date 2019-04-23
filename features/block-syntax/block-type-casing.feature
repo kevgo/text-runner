@@ -1,6 +1,6 @@
 Feature: flexible block syntax
 
-    When writing active blocks in a Markdown document
+  When writing active blocks in a Markdown document
   I want to be able to define the action name in any syntax I want
   So that I don't have to memorize and follow unnecessarily strict syntax rules.
 

@@ -25,7 +25,6 @@ foo
 </a>
 ````
 
-
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)

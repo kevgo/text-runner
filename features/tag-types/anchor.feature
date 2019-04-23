@@ -1,6 +1,6 @@
 Feature: active anchor tags
 
-    When writing active blocks in a Markdown document
+  When writing active blocks in a Markdown document
   I want to be able to make anchor tags active
   So that I can make active tags invisible and linkable.
 

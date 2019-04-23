@@ -1,6 +1,6 @@
 Feature: HR tags
 
-    When writing active blocks in a Markdown document
+  When writing active blocks in a Markdown document
   I want to be able to make HR tags active
   So that I don't have to litter my document with <a> tags
 

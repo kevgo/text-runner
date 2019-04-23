@@ -1,6 +1,6 @@
 Feature: Strikethrough text
 
-    When writing active blocks in a Markdown document
+  When writing active blocks in a Markdown document
   I want to be able to strike through text
   So that I can visualize intentionally not intended phrasing.
 

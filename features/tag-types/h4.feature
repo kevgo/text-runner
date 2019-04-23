@@ -1,6 +1,6 @@
 Feature: active h4 tags
 
-    When writing active blocks in a Markdown document
+  When writing active blocks in a Markdown document
   I want to be able to make h4 tags active
   So that I don't have to litter my document with <a> tags
 

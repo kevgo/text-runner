@@ -1,6 +1,6 @@
 Feature: footnotes
 
-    When writing documentation
+  When writing documentation
   I want to be able to use and reference footnotes
   So that I don't have to litter my document with peripheral details.
 

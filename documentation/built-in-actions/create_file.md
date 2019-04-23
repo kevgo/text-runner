@@ -22,9 +22,7 @@ _test.txt_ with content `foo`
 
 **test.txt**
 
-`​``
-The file content goes here
-`​``
+` ​`` The file content goes here `​``
 
 </a>
 

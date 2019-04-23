@@ -12,7 +12,7 @@ _test.txt_ with content `foo`
 </a>
 ```
 
-- or -
+&ndash; or &ndash;
 
 ````markdown
 <a textrun="create-file">

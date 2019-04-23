@@ -1,14 +1,14 @@
 Feature: flexible block syntax
 
   When writing active blocks in a Markdown document
-  I want to be able to define the block type in any syntax I want
+  I want to be able to define the action name in any syntax I want
   So that I don't have to memorize and follow unnecessarily strict syntax rules.
 
-  - the activity type can be provided in PascalCase, camelCase, snake_case, and kebab-case
+  - the action name can be provided in PascalCase, camelCase, snake_case, or kebab-case
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: the blocktype is provided in PascalCase

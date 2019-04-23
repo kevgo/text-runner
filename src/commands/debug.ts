@@ -42,7 +42,9 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
   } else {
     for (const activity of activities) {
       console.log(
-        `${activity.file.platformified()}:${activity.line}  ${activity.type}`
+        `${activity.file.platformified()}:${activity.line}  ${
+          activity.actionName
+        }`
       )
     }
   }

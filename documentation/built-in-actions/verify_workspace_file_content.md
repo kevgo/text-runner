@@ -10,7 +10,7 @@ and has the given content.
 
 <a textrun="run-markdown-in-textrun">
 
-````markdown
+````html
 <a textrun="create-file">
 Assuming we have a file _hello.txt_ with content `hello world`,
 </a>

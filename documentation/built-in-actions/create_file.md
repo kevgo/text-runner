@@ -6,31 +6,13 @@
 
 #### Example
 
-<a textrun="run-markdown-in-textrun">
-```markdown
+````markdown
 <a textrun="create-file">
 _test.txt_ with content `foo`
 </a>
-```
-</a>
-
-- or -
-
-<a textrun="run-markdown-in-textrun">
-```markdown
-<a textrun="create-file">
-
-**test.txt**
-
-` ​`` The file content goes here `​``
-</a>
-
-```
-</a>
-
+````
 
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)
 - [source code](../../src/built-in-actions/create-file.ts)
-```

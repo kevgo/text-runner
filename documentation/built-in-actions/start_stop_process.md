@@ -22,7 +22,6 @@ $ read foo
 Wait until it is fully booted up ...
 
 <a textrun="verify-process-output">
-
 `​``
 Enter your name
 `​``
@@ -33,7 +32,7 @@ Interact with the server here ...
 <a textrun="stop-process">
 Stop the current process by hitting Ctrl-C
 </a>
-```
+````
 
 </a>
 

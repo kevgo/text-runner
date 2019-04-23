@@ -18,6 +18,8 @@ _test.txt_ with content `foo`
 
 &ndash; or &ndash;
 
+<a textrun="run-markdown-in-textrun">
+
 ````markdown
 <a textrun="create-file">
 **test.txt** with content
@@ -28,6 +30,8 @@ foo
 
 </a>
 ````
+
+</a>
 
 #### More info
 

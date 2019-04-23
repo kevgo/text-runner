@@ -17,14 +17,16 @@ You can display its content in your documentation via this active block:
 
 <a textrun="run-markdown-in-textrun">
 
-```markdown
+````markdown
 <a textrun="verify-source-file-content">
 
 Your **hello.txt** file needs to contains this section:
 
-` ​`` hello world `​``
+`​``
+hello world
+`​``
 </a>
-```
+````
 
 </a>
 
@@ -44,16 +46,18 @@ with the content `hello again`.
 You can display its content in your documentation via this active block:
 
 <a textrun="run-markdown-in-textrun">
-```markdown
+````markdown
 
 <a textrun="verify-source-file-content">
 Your __hello2.txt__ file in the [bar folder](foo/bar)
 needs to contains this section:
 
-` ​`` hello again `​``
+`​``
+hello again
+`​``
 </a>
 
-```
+````
 
 </a>
 
@@ -61,4 +65,3 @@ needs to contains this section:
 
 - [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
 - [source code](../../src/built-in-actions/verify-source-file-content.ts)
-```

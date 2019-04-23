@@ -11,17 +11,21 @@ and stop the long-running process using a `stopCommand` block.
 
 <a textrun="run-markdown-in-textrun">
 
-```markdown
+````html
 <a textrun="start-process">
-
-` ​`` $ echo Enter your name: $ read foo `​``
+`​``
+$ echo Enter your name:
+$ read foo
+`​``
 </a>
 
 Wait until it is fully booted up ...
 
 <a textrun="verify-process-output">
 
-` ​`` Enter your name `​``
+`​``
+Enter your name
+`​``
 </a>
 
 Interact with the server here ...

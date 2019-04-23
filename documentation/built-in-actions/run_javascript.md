@@ -4,15 +4,12 @@ To run JavaScript code:
 
 <a textrun="run-markdown-in-textrun">
 
-````html
+```html
 <a textrun="run-javascript">
-
-`​``
-console.log('This is getting executed by TextRunner!')
-`​``
+  `​`` console.log('This is getting executed by TextRunner!') `​``
 </a>
+```
 
-````
 </a>
 
 ## Asynchronous code

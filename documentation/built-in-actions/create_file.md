@@ -12,6 +12,20 @@ _test.txt_ with content `foo`
 </a>
 ````
 
+- or -
+
+````markdown
+<a textrun="create-file">
+**test.txt** with content
+
+```
+foo
+```
+
+</a>
+````
+
+
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)

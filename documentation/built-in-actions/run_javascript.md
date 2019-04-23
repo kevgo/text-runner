@@ -9,7 +9,6 @@ To run JavaScript code:
 ```
 console.log('This is getting executed by TextRunner!')
 ```
-
 </a>
 ````
 

@@ -25,7 +25,6 @@ _test.txt_ with content `foo`
 `​``
 The file content goes here
 `​``
-
 </a>
 
 ```

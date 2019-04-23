@@ -2,7 +2,7 @@ Feature: verify that the workspace contains a directory
 
   As a documentation writer
   I want to verify that the workspace in which the tests run contains a given directory
-  So that I can be sure an action my reader took was successful.
+  So that I can be sure an activity my reader made was successful.
 
   - use the "verifyWorkspaceContainsDirectory" action to verify whether the test workspace contains a directory
   - the directory is given as a code block

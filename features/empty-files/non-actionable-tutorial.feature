@@ -1,7 +1,7 @@
 Feature: Fail on non-actionable Markdown
 
-  As a documentation writer
-  I want to get warnings if my whole documentation doesn't perform a single action
+  When running Text-Runner
+  I want to know if my entire documentation doesn't perform a single action
   So that I know I am doing something wrong and can fix my mistake.
 
   - documentation with no actions whatsoever causes the test to fail

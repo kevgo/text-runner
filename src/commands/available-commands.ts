@@ -8,6 +8,7 @@ export function availableCommands(): string[] {
     'dynamic',
     'help',
     'run',
+    'unused',
     'setup',
     'static',
     'version'

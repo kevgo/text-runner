@@ -6,7 +6,7 @@ Feature: active table tags
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: simple HTML table
@@ -127,10 +127,10 @@ Feature: active table tags
   Scenario: Markdown table
     Given my source code contains the file "1.md" with content:
       """
-     | Keyboard shortcut                                  | Action                      |
-     |----------------------------------------------------|-----------------------------|
-     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd> | Toggle between .h/.m file   |
-     | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>   | Open Quickly (fuzzy find)   |
+     | Keyboard shortcut                                    | Effect                        |
+     | ---------------------------------------------------- | ----------------------------- |
+     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd>   | Toggle between .h/.m file     |
+     | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>     | Open Quickly (fuzzy find)     |
 
       """
     When running text-run

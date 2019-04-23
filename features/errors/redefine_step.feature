@@ -2,7 +2,7 @@ Feature: show error when defining a built-in step
 
   When creating my own steps
   I want to know whether I accidentally overwrite a built-in step
-  So that I don't accidentally change behavior.
+  So that I don't accidentally change behavior of Text-Runner.
 
   Scenario: re-defining a built-in step
     Given my source code contains the file "text-run/create-file.js" with content:
@@ -19,4 +19,3 @@ Feature: show error when defining a built-in step
     Then the test fails with:
       | ERROR MESSAGE | redefining internal action 'create-file' |
       | EXIT CODE     | 1                                        |
-

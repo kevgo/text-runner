@@ -130,4 +130,4 @@ folder contains a working version of this configuration.
 #### More info
 
 - [feature specs](../../features/actions/built-in/run-console-command/)
-- [source code](../../src/actions/run-console-command.ts)
+- [source code](../../src/built-in-actions/run-console-command.ts)

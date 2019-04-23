@@ -1,13 +1,13 @@
-Feature: unknown activity types
+Feature: unknown action types
 
-  As a documentation developer
-  I want to be notified if my documentation uses an action for which there is no handler
-  So that I can fix my documentation.
+  When using an active block for which there is no action
+  I want to be notified
+  So that I can add the missing custom action.
 
-  - using an action for which there is no handler causes the test run to fail
+  - using an unknown action causes the test run to fail
 
 
-  Scenario: using an unknown activity type
+  Scenario: using an unknown action type
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="unknown-action">
@@ -15,12 +15,12 @@ Feature: unknown activity types
       """
     When trying to run text-run
     Then the test fails with:
-      | ERROR MESSAGE | unknown activity type: unknown-action |
-      | FILENAME      | 1.md                                  |
-      | EXIT CODE     | 1                                     |
+      | ERROR MESSAGE | unknown action: unknown-action |
+      | FILENAME      | 1.md                           |
+      | EXIT CODE     | 1                              |
     And it prints the error message:
       """
-      Available built-in activity types:
+      Available built-in actions:
       * cd
       * check-image
       * check-link
@@ -42,6 +42,6 @@ Feature: unknown activity types
 
       No custom actions defined.
 
-      To create a new "unknown-action" activity type,
+      To create a new "unknown-action" action,
       run "text-run add unknown-action"
       """

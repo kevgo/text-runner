@@ -7,13 +7,11 @@
 #### Example
 
 <a textrun="run-markdown-in-textrun">
-
 ```markdown
 <a textrun="create-file">
 _test.txt_ with content `foo`
 </a>
 ```
-
 </a>
 
 &ndash; or &ndash;

@@ -5,10 +5,12 @@ To run JavaScript code:
 <a textrun="run-markdown-in-textrun">
 
 ```html
-<a textrun="run-javascript">
-````
+<a textrun="run-javascript"></a>
+```
+
 console.log('This is getting executed by TextRunner!')
-````
+
+`````
 
 </a>
 ```
@@ -30,7 +32,8 @@ const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 `​``
 </a>
-````
+`````
+
 </a>
 
 Alternatively you can also use the placeholder `// ...`

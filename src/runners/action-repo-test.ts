@@ -12,4 +12,20 @@ describe('actionRepo', function() {
       })
     })
   })
+  describe('customActionNames', function() {
+    it('returns the names of all built-in actions', function() {
+      const result = actionRepo.customActionNames()
+      expect(result).to.eql([
+        'cd-back',
+        'cd-into-empty-tmp-folder',
+        'create-markdown-file',
+        'run-markdown-in-textrun',
+        'run-textrun',
+        'verify-ast-node-attributes',
+        'verify-handler-args',
+        'verify-make-command',
+        'verify-searcher-methods'
+      ])
+    })
+  })
 })

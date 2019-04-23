@@ -30,7 +30,8 @@ const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 `​``
 </a>
-````
+`````
+
 </a>
 
 Alternatively you can also use the placeholder `// ...`

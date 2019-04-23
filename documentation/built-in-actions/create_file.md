@@ -6,11 +6,11 @@
 
 #### Example
 
-<pre>
+```markdown
 <a textrun="create-file">
 _test.txt_ with content `foo`
 </a>
-</pre>
+```
 
 &ndash; or &ndash;
 

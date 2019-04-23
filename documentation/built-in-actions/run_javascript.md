@@ -6,10 +6,7 @@ To run JavaScript code:
 
 ````html
 <a textrun="run-javascript">
-```
-console.log('This is getting executed by TextRunner!')
-```
-
+  ``` console.log('This is getting executed by TextRunner!') ```
 </a>
 ````
 

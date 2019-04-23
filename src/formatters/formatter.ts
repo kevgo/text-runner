@@ -37,7 +37,7 @@ export class Formatter {
     this.stdout = { write: this.log.bind(this) }
     this.stderr = { write: this.log.bind(this) }
     this.output = ''
-    this.title = humanize(activity.type)
+    this.title = humanize(activity.actionName)
     this.sourceDir = sourceDir
     this.skipped = false
     this.warned = false

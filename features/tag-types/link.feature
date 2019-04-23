@@ -6,7 +6,7 @@ Feature: active link tags
 
 
   Background:
-    Given my workspace contains the HelloWorld activity
+    Given my source code contains the HelloWorld action
 
 
   Scenario: link tag

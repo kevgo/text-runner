@@ -1,6 +1,5 @@
-import { ActionArgs } from '../runners/action-args'
-
 import jsdiffConsole from 'jsdiff-console'
+import { ActionArgs } from '../runners/action-args'
 import { RunningConsoleCommand } from './helpers/running-console-command'
 
 export default function verifyConsoleCommandOutput(args: ActionArgs) {

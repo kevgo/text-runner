@@ -112,16 +112,16 @@ lint: lintjs lintmd lintyml   # lints all files
 lintjs: build   # lints the javascript files
 	node_modules$/.bin$/tsc --noEmit
 	node_modules$/.bin$/tslint --project tsconfig.json
-	node_modules/.bin/prettier -l "src/**/*.ts"
-	node_modules/.bin/prettier -l "features/**/*.ts"
+	node_modules/.bin/prettier -c "src/**/*.ts"
+	node_modules/.bin/prettier -c "features/**/*.ts"
 
 lintmd:   # lints markdown files
-	node_modules/.bin/prettier -l "*.md"
-	# node_modules/.bin/prettier -l "documentation/**/*.md"
+	node_modules/.bin/prettier -c "*.md"
+	# node_modules/.bin/prettier -c "documentation/**/*.md"
 	node_modules$/.bin$/remark .
 
 lintyml:   # lints yml files
-	node_modules/.bin/prettier -l "*.yml"
+	node_modules/.bin/prettier -c "*.yml"
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

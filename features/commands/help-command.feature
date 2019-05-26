@@ -8,5 +8,5 @@ Feature: help command
 
 
   Scenario:
-    When running the "help" command
+    When running "text-run help"
     Then I see usage instructions

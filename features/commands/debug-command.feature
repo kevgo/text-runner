@@ -14,7 +14,7 @@ Feature: display the version
       ```
       </a>
       """
-    When running "debug"
+    When running "text-run debug"
     Then it prints:
       """
       AST NODES

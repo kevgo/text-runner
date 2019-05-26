@@ -89,19 +89,6 @@ When(
   }
 )
 
-When(/^(trying to run|running) the "([^"]*)" command$/, async function(
-  tryingText,
-  command
-) {
-  const expectError = determineExpectError(tryingText)
-  await this.execute({ command, cwd: this.rootDir, expectError })
-  finish(
-    expectError,
-    this.error ||
-      (this.process && (this.process.error || this.process.exitCode))
-  )
-})
-
 function determineExpectError(tryingText) {
   if (tryingText === 'running') {
     return false

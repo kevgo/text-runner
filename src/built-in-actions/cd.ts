@@ -1,7 +1,6 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import path from 'path'
+import { ActionArgs } from '../runners/action-args'
 
 // Changes the current working directory to the one given in the hyperlink or code block
 export default function cd(args: ActionArgs) {

@@ -1,11 +1,10 @@
+import util from 'util'
 import { Activity } from '../activity-list/activity'
 import { Configuration } from '../configuration/configuration'
-import { Action } from './action'
-import { ActionArgs } from './action-args'
-
-import util from 'util'
 import { PrintedUserError } from '../errors/printed-user-error'
 import { LinkTargetList } from '../link-targets/link-target-list'
+import { Action } from './action'
+import { ActionArgs } from './action-args'
 import { actionRepo } from './action-repo'
 import { StatsCounter } from './stats-counter'
 

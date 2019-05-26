@@ -1,8 +1,7 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import mkdirp from 'mkdirp'
 import path from 'path'
+import { ActionArgs } from '../runners/action-args'
 
 export default async function createDirectory(args: ActionArgs) {
   const directoryName = args.nodes.text().trim()

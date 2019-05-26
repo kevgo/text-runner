@@ -1,8 +1,7 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import path from 'path'
 import { trimDollar } from '../helpers/trim-dollar'
+import { ActionArgs } from '../runners/action-args'
 
 export default function verifyNpmGlobalCommand(args: ActionArgs) {
   args.formatter.name('NPM module exports the command')

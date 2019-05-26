@@ -1,8 +1,5 @@
-import { CliArgTypes } from './cli/cli-arg-types'
-
 import chalk from 'chalk'
-import { loadConfiguration } from './configuration/load-configuration'
-
+import { CliArgTypes } from './cli/cli-arg-types'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
 import { dynamicCommand } from './commands/dynamic'
@@ -14,6 +11,7 @@ import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { determineConfigFilename } from './configuration/determine-config-filename'
+import { loadConfiguration } from './configuration/load-configuration'
 
 /**
  * Tests the documentation in the given directory

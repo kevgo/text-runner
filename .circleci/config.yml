@@ -4,6 +4,7 @@ defaults: &defaults
   working_directory: ~/repo
   docker:
     - image: circleci/node:10
+
 jobs:
   checkout_code:
     <<: *defaults

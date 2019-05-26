@@ -1,10 +1,9 @@
-import { CliArgTypes } from '../cli/cli-arg-types'
-import { Configuration } from './configuration'
-
 import deb from 'debug'
 import camelCase from 'just-camel-case'
 import YAML from 'yamljs'
+import { CliArgTypes } from '../cli/cli-arg-types'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
+import { Configuration } from './configuration'
 import { getFormatterClass } from './get-formatter-class'
 import { Publications } from './publications'
 

@@ -1,9 +1,8 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import jsonfile from 'jsonfile'
 import path from 'path'
 import { trimDollar } from '../helpers/trim-dollar'
+import { ActionArgs } from '../runners/action-args'
 
 export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))

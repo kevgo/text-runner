@@ -1,9 +1,8 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import fs from 'fs-extra'
 import mkdirp from 'mkdirp'
 import path from 'path'
+import { ActionArgs } from '../runners/action-args'
 
 export default async function createFile(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('em', 'strong')

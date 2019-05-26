@@ -1,8 +1,7 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import fs from 'fs-extra'
 import path from 'path'
+import { ActionArgs } from '../runners/action-args'
 
 // Verifies that the test workspace contains the given directory
 export default async function verifyWorkspaceContainsDirectory(

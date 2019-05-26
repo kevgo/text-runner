@@ -1,7 +1,6 @@
-import { Configuration } from '../configuration/configuration'
-
 import chalk from 'chalk'
 import { extractActivities } from '../activity-list/extract-activities'
+import { Configuration } from '../configuration/configuration'
 import { getFileNames } from '../finding-files/get-filenames'
 import { readAndParseFile } from '../parsers/read-and-parse-file'
 import { actionRepo } from '../runners/action-repo'

@@ -1,9 +1,8 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import fs from 'fs-extra'
 import jsdiffConsole from 'jsdiff-console'
 import path from 'path'
+import { ActionArgs } from '../runners/action-args'
 
 export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType('strong', 'em')

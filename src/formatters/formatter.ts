@@ -1,8 +1,7 @@
-import { WriteStream } from 'observable-process'
-import { Activity } from '../activity-list/activity'
-
 import deb from 'debug'
 import humanize from 'humanize-string'
+import { WriteStream } from 'observable-process'
+import { Activity } from '../activity-list/activity'
 import { StatsCounter } from '../runners/stats-counter'
 
 const debug = deb('formatter')

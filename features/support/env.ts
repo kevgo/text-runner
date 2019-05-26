@@ -2,7 +2,6 @@ import { After, Before, setDefaultTimeout } from 'cucumber'
 import { endChildProcesses } from 'end-child-processes'
 import fs from 'fs-extra'
 import path from 'path'
-import util from 'util'
 
 // need such a high timeout because test coverage takes time to start up
 setDefaultTimeout(30000)

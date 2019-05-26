@@ -1,10 +1,9 @@
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import eol from 'eol'
 import fs from 'fs-extra'
 import jsdiffConsole from 'jsdiff-console'
 import path from 'path'
+import { ActionArgs } from '../runners/action-args'
 
 export default async function verifySourceFileContent(args: ActionArgs) {
   const fileName = args.nodes.textInNodeOfType('strong_open')

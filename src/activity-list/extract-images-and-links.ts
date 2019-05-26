@@ -1,6 +1,5 @@
-import { ActivityList } from './activity-list'
-
 import { AstNodeList } from '../parsers/ast-node-list'
+import { ActivityList } from './activity-list'
 
 export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
   const result: ActivityList = []

@@ -1,10 +1,8 @@
-import { Configuration } from '../configuration/configuration'
-import { ActionArgs } from '../runners/action-args'
-
 import chalk from 'chalk'
 import fs from 'fs-extra'
 import got from 'got'
 import path from 'path'
+import { Configuration } from '../configuration/configuration'
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import { UnknownLink } from '../domain-model/unknown-link'
 import { Formatter } from '../formatters/formatter'
@@ -14,6 +12,7 @@ import { isLinkToAnchorInSameFile } from '../helpers/is-link-to-anchor-in-same-f
 import { isMailtoLink } from '../helpers/is-mailto-link'
 import { removeLeadingSlash } from '../helpers/remove-leading-slash'
 import { LinkTargetList } from '../link-targets/link-target-list'
+import { ActionArgs } from '../runners/action-args'
 
 // Checks for broken hyperlinks
 export default async function checkLink(args: ActionArgs) {

@@ -1,9 +1,8 @@
-import { LinkTarget } from './link-target'
-
 import kebabCase from 'just-kebab-case'
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import { AstNode } from '../parsers/ast-node'
 import { AstNodeList } from '../parsers/ast-node-list'
+import { LinkTarget } from './link-target'
 
 export class LinkTargetList {
   targets: { [key: string]: LinkTarget[] }

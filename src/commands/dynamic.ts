@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import rimraf from 'rimraf'
+import fs from 'fs-extra'
 import { extractActivities } from '../activity-list/extract-activities'
 import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
 import { Configuration } from '../configuration/configuration'
@@ -46,7 +46,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   // step 6: cleanup
   process.chdir(config.sourceDir)
   if (error && !config.keepTmp) {
-    rimraf.sync(config.workspace)
+    await fs.remove(config.workspace)
   }
 
   // step 7: write stats

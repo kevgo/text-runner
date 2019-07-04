@@ -33,7 +33,8 @@
     "tmp-promise": "2.0.1",
     "to-space-case": "1.0.0",
     "xml2js": "0.4.19",
-    "yamljs": "0.3.0"
+    "yamljs": "0.3.0",
+    "snyk": "^1.189.0"
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
@@ -97,6 +98,9 @@
   },
   "scripts": {
     "prepublishOnly": "make build",
-    "test": "make spec"
-  }
+    "test": "make spec",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }

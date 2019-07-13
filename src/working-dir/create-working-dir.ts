@@ -1,5 +1,5 @@
 import deb from 'debug'
-import mkdirp from 'mkdirp'
+import fs from 'fs-extra'
 import path from 'path'
 import tmp from 'tmp-promise'
 import { UnprintedUserError } from '../errors/unprinted-user-error'
@@ -15,7 +15,7 @@ type workingDirSetting = string | boolean
 export async function createWorkingDir(configSetting: workingDirSetting) {
   const workingDir = await getWorkingDirPath(configSetting)
   debug(`using test directory: ${workingDir}`)
-  await mkdirp(workingDir)
+  await fs.ensureDir(workingDir)
   return workingDir
 }
 

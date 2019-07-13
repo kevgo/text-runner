@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import mkdirp from 'mkdirp'
+import fs from 'fs-extra'
 import path from 'path'
 import { ActionArgs } from '../runners/action-args'
 
@@ -10,5 +10,5 @@ export default async function createDirectory(args: ActionArgs) {
   }
   args.formatter.name(`create directory ${chalk.cyan(directoryName)}`)
   const fullPath = path.join(args.configuration.workspace, directoryName)
-  await mkdirp(fullPath)
+  await fs.ensureDir(fullPath)
 }

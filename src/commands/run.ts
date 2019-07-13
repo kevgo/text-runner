@@ -50,6 +50,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 6: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
+    // NOTE: calling fs.remove causes an exception on Windows here
     const rimrafp = util.promisify(rimraf)
     await rimrafp(config.workspace, { maxBusyTries: 20 })
   }

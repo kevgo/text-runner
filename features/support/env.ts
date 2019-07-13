@@ -18,7 +18,7 @@ Before(async function() {
     // nothing to do here
   }
   if (rootDirExists) {
-    rimraf.sync(this.rootDir)
+    await fs.remove(this.rootDir)
   }
   await fs.mkdir(this.rootDir)
 })
@@ -28,6 +28,7 @@ After(async function(scenario) {
   if (scenario.result.status === 'failed') {
     console.log('\ntest artifacts are located in', this.rootDir)
   } else {
+    // NOTE: need rimraf here because Windows requires to retry this for a few times
     const rimrafp = util.promisify(rimraf)
     await rimrafp(this.rootDir, { maxBusyTries: 20 })
   }

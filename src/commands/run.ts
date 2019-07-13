@@ -1,5 +1,6 @@
 import chalk from 'chalk'
 import rimraf from 'rimraf'
+import util from 'util'
 import { extractActivities } from '../activity-list/extract-activities'
 import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
 import { Configuration } from '../configuration/configuration'
@@ -49,7 +50,9 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 6: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
-    rimraf.sync(config.workspace)
+    // NOTE: calling fs.remove causes an exception on Windows here
+    const rimrafp = util.promisify(rimraf)
+    await rimrafp(config.workspace, { maxBusyTries: 20 })
   }
 
   // step 7: write stats

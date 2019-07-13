@@ -1,6 +1,5 @@
 import chalk from 'chalk'
 import fs from 'fs-extra'
-import mkdirp from 'mkdirp'
 import path from 'path'
 import { ActionArgs } from '../runners/action-args'
 
@@ -10,6 +9,6 @@ export default async function createFile(args: ActionArgs) {
   args.formatter.name(`create file ${chalk.cyan(filePath)}`)
   const fullPath = path.join(args.configuration.workspace, filePath)
   args.formatter.log(`create file ${fullPath}`)
-  mkdirp.sync(path.dirname(fullPath))
+  await fs.ensureDir(path.dirname(fullPath))
   await fs.writeFile(fullPath, content)
 }

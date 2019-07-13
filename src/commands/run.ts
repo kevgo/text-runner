@@ -52,7 +52,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   if (results.length === 0 && !config.keepTmp) {
     console.log(666666666)
     const rimrafp = util.promisify(rimraf)
-    await rimrafp(this.rootDir, { maxBusyTries: 20 })
+    await rimrafp(config.workspace, { maxBusyTries: 20 })
     console.log(777777777)
   }
 

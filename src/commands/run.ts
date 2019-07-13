@@ -1,5 +1,6 @@
 import chalk from 'chalk'
-import fs from 'fs-extra'
+import rimraf from 'rimraf'
+import util from 'util'
 import { extractActivities } from '../activity-list/extract-activities'
 import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
 import { Configuration } from '../configuration/configuration'
@@ -50,7 +51,8 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
     console.log(666666666)
-    await fs.remove(config.workspace)
+    const rimrafp = util.promisify(rimraf)
+    await rimrafp(this.rootDir, { maxBusyTries: 20 })
     console.log(777777777)
   }
 

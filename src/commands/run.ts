@@ -49,7 +49,9 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 6: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
+    console.log(666666666)
     await fs.remove(config.workspace)
+    console.log(777777777)
   }
 
   // step 7: write stats

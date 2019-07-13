@@ -18,7 +18,9 @@ Before(async function() {
     // nothing to do here
   }
   if (rootDirExists) {
+    console.log(11111111)
     await fs.remove(this.rootDir)
+    console.log(222222222)
   }
   await fs.mkdir(this.rootDir)
 })
@@ -30,7 +32,9 @@ After(async function(scenario) {
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     const rimrafp = util.promisify(rimraf)
+    console.log(333333333)
     await rimrafp(this.rootDir, { maxBusyTries: 20 })
+    console.log(444444444)
   }
 })
 

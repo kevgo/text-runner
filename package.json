@@ -45,6 +45,7 @@
     "@types/got": "9.6.0",
     "@types/interpret": "1.1.1",
     "@types/is-glob": "4.0.1",
+    "@types/jsonfile": "5.0.0",
     "@types/minimist": "1.2.0",
     "@types/mkdirp": "0.5.2",
     "@types/mocha": "5.2.7",

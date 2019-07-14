@@ -47,7 +47,7 @@ function makeGlobal(configuration: Configuration) {
     // we can ignore null-pointer exceptions here since we have a default value
   }
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function(commandText) {
+  return function(commandText: string) {
     const commandParts = commandText.split(' ')
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)

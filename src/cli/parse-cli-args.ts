@@ -30,20 +30,22 @@ export function parseCliArgs(argv: string[]): CliArgTypes {
     argv.splice(0, 1)
   }
 
-  const result = minimist(argv, { boolean: 'offline' })
-  const commands = result._ || []
-  delete result._
-
-  // extract command
-  let command = ''
-  if (availableCommands().includes(commands[0])) {
-    command = commands[0]
-    commands.splice(0, 1)
-  } else {
-    command = 'run'
+  // parse argv
+  const cliArgs = minimist(argv, { boolean: 'offline' })
+  const result: CliArgTypes = {
+    command: cliArgs._[0],
+    config: cliArgs.config,
+    exclude: cliArgs.exclude,
+    files: cliArgs._[1],
+    format: cliArgs.format,
+    offline: cliArgs.offline
   }
-  result.command = command
-  result.files = commands[0]
+
+  // if text-run is called without command, execute the "run" command
+  if (!availableCommands().includes(cliArgs._[0])) {
+    result.command = 'run'
+    result.files = cliArgs._[0]
+  }
 
   return result
 }

@@ -5,4 +5,5 @@ export interface CliArgTypes {
   files?: string
   format?: string
   offline?: boolean
+  workspace?: string
 }

@@ -30,18 +30,19 @@ export function parseCliArgs(argv: string[]): CliArgTypes {
     argv.splice(0, 1)
   }
 
-  // parse argv
+  // parse argv into the result
   const cliArgs = minimist(argv, { boolean: 'offline' })
   const result: CliArgTypes = {
-    command: cliArgs._[0],
+    command: cliArgs._[0], // the first argument is the command to run, as in "text-run debug"
     config: cliArgs.config,
     exclude: cliArgs.exclude,
-    files: cliArgs._[1],
+    files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
     format: cliArgs.format,
-    offline: cliArgs.offline
+    offline: cliArgs.offline,
+    workspace: cliArgs.workspace
   }
 
-  // if text-run is called without command, execute the "run" command
+  // handle special case where text-run is called without a command, as in "text-run foo.md"
   if (!availableCommands().includes(cliArgs._[0])) {
     result.command = 'run'
     result.files = cliArgs._[0]

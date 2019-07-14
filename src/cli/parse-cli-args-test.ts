@@ -130,7 +130,7 @@ describe('parse-cli-args', function() {
       expect(this.result.command).to.equal('run')
     })
 
-    it('returns the dot formatter option', function() {
+    it('returns the foo/bar workspace', function() {
       expect(this.result.workspace).to.equal('foo/bar')
     })
   })

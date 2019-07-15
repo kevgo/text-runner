@@ -23,7 +23,7 @@ export default async function transformOl(
   if (match == null) {
     throw new Error('Cannot parse <ol> expression: ' + node.content)
   }
-  const xml = await xml2jsp(node.content)
+  const xml: any = await xml2jsp(node.content)
   const olNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),
     content: '',

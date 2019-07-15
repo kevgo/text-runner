@@ -1,4 +1,4 @@
-import jsdiffConsole from 'jsdiff-console'
+import * as assertNoDiff from 'assert-no-diff'
 import { ActionArgs } from '../runners/action-args'
 import { RunningConsoleCommand } from './helpers/running-console-command'
 
@@ -18,5 +18,5 @@ export default function verifyConsoleCommandOutput(args: ActionArgs) {
     .filter(line => line)
 
   const commonLines = actualLines.filter(line => expectedLines.includes(line))
-  jsdiffConsole(expectedLines, commonLines)
+  assertNoDiff.trimmedLines(expectedLines.join('\n'), commonLines.join('\n'))
 }

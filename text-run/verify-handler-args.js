@@ -1,4 +1,4 @@
-const jsdiffConsole = require('jsdiff-console')
+const assertNoDiff = require('assert-no-diff')
 const {
   removeTrailingColon
 } = require('../dist/helpers/remove-trailing-colon.js')
@@ -11,5 +11,5 @@ module.exports = function verifyHandlerArgs(args) {
     .map(removeTrailingColon)
   const actualTools = Object.keys(args).sort()
   removeValue(actualTools, 'linkTargets')
-  jsdiffConsole(expectedTools, actualTools)
+  assertNoDiff.chars(expectedTools.join('\n'), actualTools.join('\n'))
 }

@@ -35,9 +35,11 @@ The following scopes are available for commit messages:
 ## Testing
 
 - run all tests: <code textrun="verify-make-command">make test</code>
-- run feature specs: <code textrun="verify-make-command">make cuke</code>
-- run feature specs in offline mode: <code>make cuke-offline</code>
-- run text-run: <code textrun="verify-make-command">make docs</code>
+- run all tests in offline mode: <code textrun="verify-make-command">make test-offline</code>
+- run end-to-end tests: <code textrun="verify-make-command">make cuke</code>
+- run end-to-end tests in offline mode: <code>make cuke-offline</code>
+- run unit tests: <code>make unit</code>
+- run documentation tests: <code textrun="verify-make-command">make docs</code>
 
 To debug a single test:
 

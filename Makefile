@@ -132,6 +132,8 @@ setup:   # sets up the installation on this machine
 test: lint unit cuke docs   # runs all tests
 .PHONY: test
 
+test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
+
 unit:   # runs the unit tests
 	@node_modules/.bin/mocha --reporter dot "src/**/*-test.ts"
 

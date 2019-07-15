@@ -169,6 +169,11 @@
     universal-user-agent "^3.0.0"
     url-template "^2.0.8"
 
+"@queso/kebab-case@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@queso/kebab-case/-/kebab-case-1.0.1.tgz#95bb06f572f8977c4f7512ed6d158f7393d1b1f2"
+  integrity sha512-Q6VNlhWfYMuYO5QZ6a8qJhLZww4QpTJdIdUBvhRTIrrDM523sRWQv3f01vG4BiQGBiXaVJ1sVFmKwRj9bU9rZA==
+
 "@semantic-release/commit-analyzer@^6.1.0":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@semantic-release/commit-analyzer/-/commit-analyzer-6.2.0.tgz#5cd25ce67ba9ba5b46e47457505e63629e186695"
@@ -263,6 +268,11 @@
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/@types/cucumber/-/cucumber-4.0.6.tgz#0228e6aa9f1e3d8e9b9e619fcbb570be0283e198"
   integrity sha512-erSh5h+vjq0A8KoWBnc2EfZEJVE4RrImaBuznoasBG6sor+oIm3NcuypBTc61L+ezETTq+j8zizZGoGG/A84vA==
+
+"@types/dashify@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/dashify/-/dashify-1.0.0.tgz#19ade107e1e330344a65ad65f0e7e1875483d2e9"
+  integrity sha512-uyYom3SM48jvowobcby+1z3r/sDX+5N8lAdPoNLKYMhF819pNjV6K5g8lAUGrwj80n+P7Qf10GcA9h7aIO2GJw==
 
 "@types/events@*":
   version "3.0.0"
@@ -5021,11 +5031,6 @@ just-camel-case@4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/just-camel-case/-/just-camel-case-4.0.2.tgz#dc1e9e19e4200bb91f482716726135c35e901ac3"
   integrity sha512-df6QI/EIq+6uHe/wtaa9Qq7/pp4wr4pJC/r1+7XhVL6m5j03G6h9u9/rIZr8rDASX7CxwDPQnZjffCo2e6PRLw==
-
-just-kebab-case@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/just-kebab-case/-/just-kebab-case-1.1.0.tgz#ebe854fde84b0afa4e597fcd870b12eb3c026755"
-  integrity sha512-QkuwuBMQ9BQHMUEkAtIA4INLrkmnnveqlFB1oFi09gbU0wBdZo6tTnyxNWMR84zHxBuwK7GLAwqN8nrvVxOLTA==
 
 keyv@^3.0.0:
   version "3.1.0"

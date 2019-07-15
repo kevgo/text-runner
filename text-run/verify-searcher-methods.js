@@ -1,4 +1,4 @@
-const jsdiffConsole = require('jsdiff-console')
+const assertNoDiff = require('assert-no-diff')
 const {
   removeTrailingColon
 } = require('../dist/helpers/remove-trailing-colon.js')
@@ -9,9 +9,8 @@ module.exports = function verifySearcherMethod(args) {
     .textInNodesOfType('strongtext')
     .sort()
     .map(removeTrailingColon)
-  // var actualTools = classMethods(Searcher).filter(isPublicMethod)
   const actualTools = Object.getOwnPropertyNames(args.nodes)
   actualTools.sort()
   removeValue(actualTools, 'query')
-  jsdiffConsole(actualTools, expectedTools)
+  assertNoDiff.chars(actualTools.join('\n'), expectedTools.join('\n'))
 }

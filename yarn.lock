@@ -880,6 +880,14 @@ asn1@~0.2.3:
   dependencies:
     safer-buffer "~2.1.0"
 
+assert-no-diff@3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/assert-no-diff/-/assert-no-diff-3.0.2.tgz#d796334a3f02b905e6dddfd31ca4ed7a8ed4c66c"
+  integrity sha512-N8m8pglZpyKX+AVDR6ETZ/ioyzaBZtblPXTaRGD65OWRdu43/z9XSar1lQYIhmtC3X9Zdc/3/GbJoA3T4GDQeA==
+  dependencies:
+    chalk "2.4.2"
+    diff "4.0.1"
+
 assert-plus@1.0.0, assert-plus@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assert-plus/-/assert-plus-1.0.0.tgz#f12e0f3c5d77b0b1cdd9146942e4e96c1e4dd525"
@@ -2854,12 +2862,7 @@ diff@3.5.0, diff@^3.0.0, diff@^3.2.0:
   resolved "https://registry.yarnpkg.com/diff/-/diff-3.5.0.tgz#800c0dd1e0a8bfbc95835c202ad220fe317e5a12"
   integrity sha512-A46qtFgd+g7pDZinpnwiRJtxbC1hpgf0uzP3iG89scHk0AUC7A1TGxf5OiiOUv/JMZR8GOt8hL900hV0bOy5xA==
 
-diff@^2.2.1:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/diff/-/diff-2.2.3.tgz#60eafd0d28ee906e4e8ff0a52c1229521033bf99"
-  integrity sha1-YOr9DSjukG5Oj/ClLBIpUhAzv5k=
-
-diff@^4.0.1:
+diff@4.0.1, diff@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.1.tgz#0c667cb467ebbb5cea7f14f135cc2dba7780a8ff"
   integrity sha512-s2+XdvhPCOF01LRQBC8hf4vhbVmI2CGS5aZnxLJlT5FtdhPCDFq80q++zK2KlrVorVDdL5BOGZ/VfLrVtYNF+Q==
@@ -4930,14 +4933,6 @@ jsbn@~0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
   integrity sha1-peZUwuWi3rXyAdls77yoDA7y9RM=
-
-jsdiff-console@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/jsdiff-console/-/jsdiff-console-2.2.1.tgz#66fc2ad77a22f34ebd099aaac2b95317c6bd49bf"
-  integrity sha1-Zvwq13oi8069CZqqwrlTF8a9Sb8=
-  dependencies:
-    chalk "^1.1.1"
-    diff "^2.2.1"
 
 jsesc@^1.3.0:
   version "1.3.0"

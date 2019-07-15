@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import { Then } from 'cucumber'
 import fs from 'fs-extra'
-import jsdiffConsole from 'jsdiff-console'
+import * as assertNoDiff from 'assert-no-diff'
 import path from 'path'
 import psTreeR from 'ps-tree'
 import util from 'util'
@@ -23,13 +23,11 @@ Then('it creates the file {string} with content:', async function(
   const actualContent = await fs.readFile(path.join(this.rootDir, filename), {
     encoding: 'utf8'
   })
-  try {
-    jsdiffConsole(expectedContent.trim(), actualContent.trim())
-  } catch (e) {
-    console.log('MISMATCHING FILE CONTENT!')
-    console.log(e)
-    throw new Error()
-  }
+  assertNoDiff.trimmedLines(
+    expectedContent,
+    actualContent,
+    'MISMATCHING FILE CONTENT!'
+  )
 })
 
 Then("it doesn't print:", function(expectedText) {

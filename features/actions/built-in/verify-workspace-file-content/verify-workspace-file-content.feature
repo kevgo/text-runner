@@ -61,10 +61,10 @@ Feature: verifying file content
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 01.md                                                                                                      |
-      | LINE          | 1                                                                                                          |
-      | ERROR MESSAGE | mismatching content in hello.txt:\nError: mismatching records:\n\nmismatching expected contentHello world! |
-      | EXIT CODE     | 1                                                                                                          |
+      | FILENAME      | 01.md                                                                                             |
+      | LINE          | 1                                                                                                 |
+      | ERROR MESSAGE | mismatching content in hello.txt:\nmismatching lines:\n\nmismatching expected contentHello world! |
+      | EXIT CODE     | 1                                                                                                 |
 
 
   Scenario: file is missing

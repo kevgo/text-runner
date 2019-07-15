@@ -28,7 +28,7 @@ export default async function transformUl(
       line
     )
   }
-  const xml = await xml2jsp(node.content)
+  const xml: any = await xml2jsp(node.content)
   const ulNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),
     content: '',

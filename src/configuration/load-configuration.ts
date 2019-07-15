@@ -1,5 +1,5 @@
+import camelCase from 'camelcase'
 import deb from 'debug'
-import camelCase from 'just-camel-case'
 import YAML from 'yamljs'
 import { CliArgTypes } from '../cli/cli-arg-types'
 import { DetailedFormatter } from '../formatters/detailed-formatter'

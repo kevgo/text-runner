@@ -1,4 +1,4 @@
-import kebabCase from 'just-kebab-case'
+import kebab from '@queso/kebab-case'
 import { UnprintedUserError } from '../errors/unprinted-user-error'
 import { AstNode } from '../parsers/ast-node'
 import { AstNodeList } from '../parsers/ast-node-list'
@@ -37,7 +37,7 @@ function extractActivitiesFromNode(
       ensureNoNestedActiveNode(node, activeNode)
       activeNode = node
       result.push({
-        actionName: kebabCase(node.attributes[attributeName]),
+        actionName: kebab(node.attributes[attributeName]),
         file: node.file,
         line: node.line,
         nodes: AST.getNodesFor(node)

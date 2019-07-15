@@ -1,4 +1,4 @@
-import kebabCase from 'just-kebab-case'
+import kebab from '@queso/kebab-case'
 import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import { AstNode } from '../parsers/ast-node'
 import { AstNodeList } from '../parsers/ast-node-list'
@@ -45,7 +45,7 @@ export class LinkTargetList {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({
-      name: kebabCase(name.toLowerCase()),
+      name: kebab(name.toLowerCase()),
       type
     })
   }

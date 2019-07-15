@@ -1,4 +1,4 @@
-const * as assertNoDiff = require('assert-no-diff')
+const assertNoDiff = require('assert-no-diff')
 const {
   removeTrailingColon
 } = require('../dist/helpers/remove-trailing-colon.js')

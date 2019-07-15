@@ -22,7 +22,6 @@
     "jsdiff-console": "2.2.1",
     "jsonfile": "5.0.0",
     "just-camel-case": "4.0.2",
-    "just-kebab-case": "1.1.0",
     "minimist": "1.2.0",
     "observable-process": "5.0.0",
     "rechoir": "0.7.0",
@@ -36,6 +35,7 @@
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
+    "@queso/kebab-case": "1.0.1",
     "@types/chai": "4.1.7",
     "@types/cucumber": "4.0.6",
     "@types/fs-extra": "8.0.0",

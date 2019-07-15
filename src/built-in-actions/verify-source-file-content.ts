@@ -1,7 +1,7 @@
+import * as assertNoDiff from 'assert-no-diff'
 import chalk from 'chalk'
 import eol from 'eol'
 import fs from 'fs-extra'
-import jsdiffConsole from 'jsdiff-console'
 import path from 'path'
 import { ActionArgs } from '../runners/action-args'
 
@@ -36,7 +36,10 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     }
   }
   try {
-    jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
+    assertNoDiff.trimmedLines(
+      eol.lf(actualContent.trim()),
+      eol.lf(expectedContent.trim())
+    )
   } catch (err) {
     throw new Error(
       `mismatching content in ${chalk.cyan(chalk.bold(filePath))}:\n${

@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 import fs from 'fs-extra'
-import { CliArgTypes } from '../cli/cli-arg-types'
+import { CmdlineArgs } from '../cli/cmdline-args'
 import { PrintedUserError } from './../errors/printed-user-error'
 
 /**
@@ -9,7 +9,7 @@ import { PrintedUserError } from './../errors/printed-user-error'
  * @param cmdLineArgs
  */
 export async function determineConfigFilename(
-  cmdLineArgs: CliArgTypes
+  cmdLineArgs: CmdlineArgs
 ): Promise<string> {
   if (cmdLineArgs.config == null) {
     try {

@@ -20,9 +20,7 @@ module.exports = async function runTextrun(args) {
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
     args.formatter.error(
-      `text-run exited with code ${
-        processor.exitCode
-      } when processing the created Markdown file`
+      `text-run exited with code ${processor.exitCode} when processing the created Markdown file`
     )
   }
   global.consoleCommandOutput = processor.fullOutput()

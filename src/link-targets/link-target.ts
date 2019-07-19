@@ -1,4 +1,4 @@
-import { LinkTargetTypes } from './link-target-types'
+import { LinkTargetTypes } from "./link-target-types"
 
 /**
  * LinkTarget is a position in a Markdown file that links can point to:

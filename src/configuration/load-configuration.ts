@@ -1,13 +1,9 @@
-import camelCase from 'camelcase'
-import deb from 'debug'
-import YAML from 'yamljs'
-import { CmdlineArgs } from '../cli/cmdline-args'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { Configuration } from './configuration'
 import { getFormatterClass } from './get-formatter-class'
+import { loadConfigFile } from './load-config-file'
 import { Publications } from './publications'
-
-const debug = deb('textrun:configuration')
+import { UserProvidedConfiguration } from './user-provided-configuration'
 
 const defaultValues: Configuration = {
   FormatterClass: DetailedFormatter,
@@ -32,41 +28,47 @@ const defaultValues: Configuration = {
  */
 export function loadConfiguration(
   configFilePath: string,
-  cmdlineArgs: CmdlineArgs
+  cmdlineArgs: UserProvidedConfiguration
 ): Configuration {
-  let fileData: any = {}
-  if (configFilePath) {
-    debug(`loading configuration file: ${configFilePath}`)
-    fileData = YAML.load(configFilePath) || {}
-  }
-  debug(`configuration file data: ${JSON.stringify(this.fileData)}`)
+  const fileData = loadConfigFile(configFilePath)
 
   function get(attributeName: string): string {
-    const camelized = camelCase(attributeName)
-    return (
-      cmdlineArgs[attributeName] ||
-      fileData[camelized] ||
-      defaultValues[camelized]
-    )
+    if (cmdlineArgs[attributeName] != null) {
+      return cmdlineArgs[attributeName]
+    }
+    if (fileData[attributeName] != null) {
+      return fileData[attributeName]
+    }
+    return defaultValues[attributeName]
+  }
+
+  function getB(attributeName: string): boolean {
+    if (cmdlineArgs[attributeName] != null) {
+      return cmdlineArgs[attributeName]
+    }
+    if (fileData[attributeName] != null) {
+      return fileData[attributeName]
+    }
+    return defaultValues[attributeName]
   }
 
   return {
     FormatterClass: getFormatterClass(
-      get('format'),
+      get('formatterName'),
       defaultValues.FormatterClass
     ),
-    actions: fileData.actions ? fileData.actions : defaultValues.actions,
-    classPrefix: get('class-prefix'),
-    defaultFile: get('default-file'),
+    actions: get('actions'),
+    classPrefix: get('classPrefix'),
+    defaultFile: get('defaultFile'),
     exclude: get('exclude'),
-    fileGlob: get('files') || defaultValues.fileGlob,
-    keepTmp: String(get('keep-tmp')) === 'true',
-    offline: String(get('offline')) === 'true',
+    fileGlob: get('fileGlob'),
+    keepTmp: getB('keepTmp'),
+    offline: getB('offline'),
     publications:
       Publications.fromJSON(fileData.publications || []).sorted() ||
       defaultValues.publications,
-    sourceDir: get('source-dir'),
-    useSystemTempDirectory: String(get('use-system-temp-directory')) === 'true',
-    workspace: get('workspace') || ''
+    sourceDir: get('sourceDir'),
+    useSystemTempDirectory: getB('useSystemTempDirectory'),
+    workspace: get('workspace')
   }
 }

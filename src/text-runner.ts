@@ -1,5 +1,4 @@
 import color from 'colorette'
-import { CmdlineArgs } from './cli/cmdline-args'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
 import { dynamicCommand } from './commands/dynamic'
@@ -12,21 +11,24 @@ import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { determineConfigFilename } from './configuration/determine-config-filename'
 import { loadConfiguration } from './configuration/load-configuration'
+import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
 
 /**
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
-export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
+export async function textRunner(
+  cmdlineArgs: UserProvidedConfiguration
+): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
-    const configFilename = await determineConfigFilename(cmdLineArgs)
-    configuration = loadConfiguration(configFilename, cmdLineArgs)
-    const commandName = cmdLineArgs.command
+    const configFilePath = await determineConfigFilename(cmdlineArgs)
+    configuration = loadConfiguration(configFilePath, cmdlineArgs)
+    const commandName = cmdlineArgs.command
     let errors: Error[]
     switch (commandName) {
       case 'add':
-        errors = await addCommand(cmdLineArgs.files)
+        errors = await addCommand(cmdlineArgs.fileGlob)
         return errors
       case 'debug':
         errors = await debugCommand(configuration)
@@ -53,7 +55,7 @@ export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
         await versionCommand()
         return []
       default:
-        console.log(color.red(`unknown command: ${color.red(commandName)}`))
+        console.log(color.red(`unknown command: ${commandName || ''}`))
         return []
     }
   } catch (err) {

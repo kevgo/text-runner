@@ -78,7 +78,7 @@ describe('parse-cmdline-args', function() {
     })
 
     it('returns the filename', function() {
-      expect(this.result.files).to.equal('documentation/actions/cd.md')
+      expect(this.result.fileGlob).to.equal('documentation/actions/cd.md')
     })
   })
 
@@ -92,7 +92,7 @@ describe('parse-cmdline-args', function() {
     })
 
     it('returns the filename', function() {
-      expect(this.result.files).to.equal('documentation/actions/cd.md')
+      expect(this.result.fileGlob).to.equal('documentation/actions/cd.md')
     })
   })
 
@@ -120,7 +120,7 @@ describe('parse-cmdline-args', function() {
     })
 
     it('returns the dot formatter option', function() {
-      expect(this.result.format).to.equal('dot')
+      expect(this.result.formatterName).to.equal('dot')
     })
   })
 
@@ -148,11 +148,11 @@ describe('parse-cmdline-args', function() {
     })
 
     it('sets the keep-tmp flag', function() {
-      expect(this.result['keep-tmp']).to.be.true
+      expect(this.result.keepTmp).to.be.true
     })
 
     it('returns "foo.md" as the filename', function() {
-      expect(this.result.files).to.equal('foo.md')
+      expect(this.result.fileGlob).to.equal('foo.md')
     })
   })
 })

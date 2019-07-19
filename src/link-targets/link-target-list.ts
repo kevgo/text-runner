@@ -3,6 +3,7 @@ import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
 import { AstNode } from "../parsers/ast-node"
 import { AstNodeList } from "../parsers/ast-node-list"
 import { LinkTarget } from "./link-target"
+import { LinkTargetTypes } from "./link-target-types"
 
 export class LinkTargetList {
   targets: { [key: string]: LinkTarget[] }
@@ -41,7 +42,11 @@ export class LinkTargetList {
     this.addLinkTarget(node.file, "heading", content)
   }
 
-  addLinkTarget(filePath: AbsoluteFilePath, type: string, name: string) {
+  addLinkTarget(
+    filePath: AbsoluteFilePath,
+    type: LinkTargetTypes,
+    name: string
+  ) {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({

@@ -1,7 +1,7 @@
 import minimist from 'minimist'
 import path from 'path'
 import { availableCommands } from '../commands/available-commands'
-import { UserProvidedConfiguration } from './cmdline-args'
+import { UserProvidedConfiguration } from '../configuration/user-provided-configuration'
 
 /**
  * Parses the command-line options received

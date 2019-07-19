@@ -1,5 +1,4 @@
 import chalk from 'chalk'
-import { UserProvidedConfiguration } from './cli/cmdline-args'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
 import { dynamicCommand } from './commands/dynamic'
@@ -11,6 +10,7 @@ import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { loadConfiguration } from './configuration/load-configuration'
+import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
 
 /**
  * Tests the documentation in the given directory

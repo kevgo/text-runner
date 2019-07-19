@@ -1,7 +1,7 @@
 import chalk from 'chalk'
 import fs from 'fs-extra'
-import { UserProvidedConfiguration } from '../cli/cmdline-args'
 import { PrintedUserError } from './../errors/printed-user-error'
+import { UserProvidedConfiguration } from './user-provided-configuration'
 
 /**
  * Returns the filename for the config file

@@ -1,7 +1,7 @@
 import camelCase from 'camelcase'
 import deb from 'debug'
 import YAML from 'yamljs'
-import { CliArgTypes } from '../cli/cli-arg-types'
+import { CmdlineArgs } from '../cli/cmdline-args'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { Configuration } from './configuration'
 import { getFormatterClass } from './get-formatter-class'
@@ -32,7 +32,7 @@ const defaultValues: Configuration = {
  */
 export function loadConfiguration(
   configFilePath: string,
-  cmdlineArgs: CliArgTypes
+  cmdlineArgs: CmdlineArgs
 ): Configuration {
   let fileData: any = {}
   if (configFilePath) {

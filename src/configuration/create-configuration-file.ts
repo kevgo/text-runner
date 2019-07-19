@@ -1,6 +1,6 @@
 import fs from 'fs-extra'
 
-export async function createConfiguration() {
+export async function createConfigurationFile() {
   await fs.writeFile(
     './text-run.yml',
     `# white-list for files to test

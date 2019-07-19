@@ -26,7 +26,7 @@ export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
     let errors
     switch (commandName) {
       case 'add':
-        errors = await addCommand(cmdLineArgs.files)
+        errors = await addCommand(cmdLineArgs.fileGlob)
         return errors
       case 'debug':
         errors = await debugCommand(configuration)

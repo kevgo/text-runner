@@ -35,10 +35,10 @@ export function parseCmdlineArgs(argv: string[]): CmdlineArgs {
   console.log(cliArgs)
   const result: CmdlineArgs = {
     command: cliArgs._[0], // the first argument is the command to run, as in "text-run debug"
-    config: cliArgs.config,
+    configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
-    files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
-    format: cliArgs.format,
+    fileGlob: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
+    formatterName: cliArgs.format,
     'keep-tmp': cliArgs['keep-tmp'],
     offline: cliArgs.offline,
     workspace: cliArgs.workspace
@@ -47,7 +47,7 @@ export function parseCmdlineArgs(argv: string[]): CmdlineArgs {
   // handle special case where text-run is called without a command, as in "text-run foo.md"
   if (!availableCommands().includes(cliArgs._[0])) {
     result.command = 'run'
-    result.files = cliArgs._[0]
+    result.fileGlob = cliArgs._[0]
   }
 
   console.log(result)

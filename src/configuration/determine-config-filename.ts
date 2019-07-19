@@ -11,7 +11,7 @@ import { PrintedUserError } from './../errors/printed-user-error'
 export async function determineConfigFilename(
   cmdLineArgs: CmdlineArgs
 ): Promise<string> {
-  if (cmdLineArgs.config == null) {
+  if (cmdLineArgs.configFileName == null) {
     try {
       await fs.stat('text-run.yml')
       return 'text-run.yml'
@@ -22,12 +22,12 @@ export async function determineConfigFilename(
 
   // TODO: move this to the top of the method
   try {
-    await fs.stat(cmdLineArgs.config)
-    return cmdLineArgs.config
+    await fs.stat(cmdLineArgs.configFileName)
+    return cmdLineArgs.configFileName
   } catch (e) {
     console.log(
       chalk.red(
-        `configuration file ${chalk.cyan(cmdLineArgs.config)} not found`
+        `configuration file ${chalk.cyan(cmdLineArgs.configFileName)} not found`
       )
     )
     throw new PrintedUserError()

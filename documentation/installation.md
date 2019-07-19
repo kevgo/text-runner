@@ -26,7 +26,7 @@ To get started:
 
 This gives you an out-of-the-box installation of TextRunner,
 which checks that all links and images point to something.
-<a textrun="cd-back">
+<a textrun="cd-workspace">
 </a>
 
 <hr>

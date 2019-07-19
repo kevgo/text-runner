@@ -32,8 +32,7 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
 
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: ['offline', 'keep-tmp'] })
-  console.log(cliArgs)
-  const result: UserProvidedConfiguration = {
+  const result: CmdlineArgs = {
     command: cliArgs._[0], // the first argument is the command to run, as in "text-run debug"
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
@@ -50,6 +49,5 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
     result.fileGlob = cliArgs._[0]
   }
 
-  console.log(result)
   return result
 }

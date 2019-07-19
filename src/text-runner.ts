@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
 import { dynamicCommand } from './commands/dynamic'
@@ -23,7 +23,7 @@ export async function textRunner(
   try {
     configuration = await loadConfiguration(cmdLineArgs)
     const commandName = cmdLineArgs.command
-    let errors
+    let errors: Error[]
     switch (commandName) {
       case 'add':
         errors = await addCommand(cmdLineArgs.fileGlob)
@@ -53,9 +53,7 @@ export async function textRunner(
         await versionCommand()
         return []
       default:
-        console.log(
-          chalk.red(`unknown command: ${chalk.red(commandName || '')}`)
-        )
+        console.log(color.red(`unknown command: ${commandName || ''}`))
         return []
     }
   } catch (err) {

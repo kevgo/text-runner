@@ -79,8 +79,8 @@ When(
       await this.execute({
         command: 'run',
         cwd: this.rootDir,
-        options: { formatter: formatterName },
-        expectError
+        expectError,
+        options: { formatter: formatterName }
       })
       finish(expectError, this.process.exitCode)
     } catch (err) {

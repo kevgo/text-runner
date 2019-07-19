@@ -2,7 +2,9 @@ import { Formatter } from '../formatters/formatter'
 import { Publications } from './publications'
 
 /**
- * Data structure for configuration values
+ * All configuration values that are provided to the application
+ * after analyzing the configuration provided by the user
+ * and determining other runtime variables.
  */
 export interface Configuration {
   actions: any // configuration for actions

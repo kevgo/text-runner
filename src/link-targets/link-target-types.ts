@@ -1,0 +1,1 @@
+type LinkTargetTypes = 'heading' | 'anchor'

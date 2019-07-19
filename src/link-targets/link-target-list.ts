@@ -41,7 +41,11 @@ export class LinkTargetList {
     this.addLinkTarget(node.file, 'heading', content)
   }
 
-  addLinkTarget(filePath: AbsoluteFilePath, type: string, name: string) {
+  addLinkTarget(
+    filePath: AbsoluteFilePath,
+    type: LinkTargetTypes,
+    name: string
+  ) {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({

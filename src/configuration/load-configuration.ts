@@ -29,43 +29,24 @@ export function loadConfiguration(
   configFileData: UserProvidedConfiguration,
   cmdlineArgs: UserProvidedConfiguration
 ): Configuration {
-  function get(attributeName: string): string {
-    if (cmdlineArgs[attributeName] != null) {
-      return cmdlineArgs[attributeName]
+  // merge the configs
+  const result = {}
+  for (const key of Object.keys(defaultValues)) {
+    if (cmdlineArgs[key] != null) {
+      result[key] = cmdlineArgs[key]
+    } else if (configFileData[key] != null) {
+      result[key] = configFileData[key]
+    } else {
+      result[key] = defaultValues[key]
     }
-    if (configFileData[attributeName] != null) {
-      return configFileData[attributeName]
-    }
-    return defaultValues[attributeName]
   }
-
-  function getB(attributeName: string): boolean {
-    if (cmdlineArgs[attributeName] != null) {
-      return cmdlineArgs[attributeName]
-    }
-    if (configFileData[attributeName] != null) {
-      return configFileData[attributeName]
-    }
-    return defaultValues[attributeName]
-  }
-
-  return {
-    FormatterClass: getFormatterClass(
-      get('formatterName'),
-      defaultValues.FormatterClass
-    ),
-    actions: get('actions'),
-    classPrefix: get('classPrefix'),
-    defaultFile: get('defaultFile'),
-    exclude: get('exclude'),
-    fileGlob: get('fileGlob'),
-    keepTmp: getB('keepTmp'),
-    offline: getB('offline'),
-    publications:
-      Publications.fromJSON(fileData.publications || []).sorted() ||
-      defaultValues.publications,
-    sourceDir: get('sourceDir'),
-    useSystemTempDirectory: getB('useSystemTempDirectory'),
-    workspace: get('workspace')
-  }
+  result['FormatterClass'] = getFormatterClass(
+    result['formatterName'],
+    defaultValues.FormatterClass
+  )
+  result['publications'] = Publications.fromJSON(
+    result['publications']
+  ).sorted()
+  delete result['formatterName']
+  return result as Configuration
 }

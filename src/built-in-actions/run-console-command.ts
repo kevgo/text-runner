@@ -46,6 +46,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
+  args.formatter.log(processor.output.fullText())
 }
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {

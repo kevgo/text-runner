@@ -1,5 +1,5 @@
-import { codeFrameColumns } from '@babel/code-frame'
-import fs from 'fs'
+import { codeFrameColumns } from "@babel/code-frame"
+import fs from "fs"
 
 type PrintFunc = (arg: string) => void | boolean
 
@@ -12,7 +12,7 @@ export function printCodeFrame(
     return
   }
 
-  const fileContent = fs.readFileSync(filename, 'utf8')
+  const fileContent = fs.readFileSync(filename, "utf8")
   output(
     codeFrameColumns(fileContent, { start: { line } }, { forceColor: true })
   )

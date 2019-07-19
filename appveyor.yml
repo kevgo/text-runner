@@ -1,8 +1,8 @@
 environment:
-  nodejs_version: '8'
+  nodejs_version: "10"
 
-# cache:
-# - node_modules
+cache:
+  - node_modules
 
 init:
   - git config --global core.autocrlf true
@@ -17,9 +17,7 @@ install:
 
 test_script:
   - make build
-  - make unit
-  - make cuke-win
-  - make docs
+  - make cuke-smoke-win
 
 # Don't double-build PRs
 skip_branch_with_pr: true

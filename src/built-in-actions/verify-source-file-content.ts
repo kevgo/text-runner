@@ -1,21 +1,20 @@
-import { ActionArgs } from '../runners/action-args'
-
-import chalk from 'chalk'
-import eol from 'eol'
-import fs from 'fs-extra'
-import jsdiffConsole from 'jsdiff-console'
-import path from 'path'
+import * as assertNoDiff from "assert-no-diff"
+import color from "colorette"
+import eol from "eol"
+import fs from "fs-extra"
+import path from "path"
+import { ActionArgs } from "../runners/action-args"
 
 export default async function verifySourceFileContent(args: ActionArgs) {
-  const fileName = args.nodes.textInNodeOfType('strong_open')
-  let relativeBaseDir = '.'
-  if (args.nodes.hasNodeOfType('link_open')) {
-    const linkNode = args.nodes.getNodeOfTypes('link_open')
+  const fileName = args.nodes.textInNodeOfType("strong_open")
+  let relativeBaseDir = "."
+  if (args.nodes.hasNodeOfType("link_open")) {
+    const linkNode = args.nodes.getNodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
-  const expectedContent = args.nodes.textInNodeOfType('fence')
+  const expectedContent = args.nodes.textInNodeOfType("fence")
   args.formatter.name(
-    `verifying document content matches source code file ${chalk.cyan(
+    `verifying document content matches source code file ${color.cyan(
       fileName
     )}`
   )
@@ -28,19 +27,22 @@ export default async function verifySourceFileContent(args: ActionArgs) {
   args.formatter.log(`ls ${filePath}`)
   let actualContent
   try {
-    actualContent = await fs.readFile(filePath, 'utf8')
+    actualContent = await fs.readFile(filePath, "utf8")
   } catch (err) {
-    if (err.code === 'ENOENT') {
-      throw new Error(`file ${chalk.cyan(fileName)} not found`)
+    if (err.code === "ENOENT") {
+      throw new Error(`file ${color.cyan(fileName)} not found`)
     } else {
       throw err
     }
   }
   try {
-    jsdiffConsole(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
+    assertNoDiff.trimmedLines(
+      eol.lf(actualContent.trim()),
+      eol.lf(expectedContent.trim())
+    )
   } catch (err) {
     throw new Error(
-      `mismatching content in ${chalk.cyan(chalk.bold(filePath))}:\n${
+      `mismatching content in ${color.cyan(color.bold(filePath))}:\n${
         err.message
       }`
     )

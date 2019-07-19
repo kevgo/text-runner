@@ -1,22 +1,23 @@
-const { cyan } = require('chalk')
-const fs = require('fs-extra')
-const path = require('path')
-const util = require('util')
+const color = require("colorette")
+const fs = require("fs-extra")
+const path = require("path")
 
 module.exports = async function verifyMakeCommand(args) {
   const expected = args.nodes
     .text()
-    .replace(/make\s+/, '')
+    .replace(/make\s+/, "")
     .trim()
-  args.formatter.name(`verify Make command ${cyan(expected)} exists`)
-  const makefilePath = path.join(args.configuration.sourceDir, 'Makefile')
-  const makefileContent = await fs.readFile(makefilePath, 'utf8')
+  args.formatter.name(`verify Make command ${color.cyan(expected)} exists`)
+  const makefilePath = path.join(args.configuration.sourceDir, "Makefile")
+  const makefileContent = await fs.readFile(makefilePath, "utf8")
   const commands = makefileContent
     .split(/\r?\n/)
     .filter(lineDefinesMakeCommand)
     .map(extractMakeCommand)
   if (!commands.includes(expected)) {
-    throw new Error(`Make command ${cyan(expected)} not found in ${commands}`)
+    throw new Error(
+      `Make command ${color.cyan(expected)} not found in ${commands}`
+    )
   }
 }
 
@@ -34,5 +35,5 @@ const makeCommandRE = /^[^ ]+:/
  * from a Makefile line that defines a Make command
  */
 function extractMakeCommand(line) {
-  return line.split(':')[0]
+  return line.split(":")[0]
 }

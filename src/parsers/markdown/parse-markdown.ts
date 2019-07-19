@@ -1,9 +1,9 @@
-import Remarkable from 'remarkable'
-import { AbsoluteFilePath } from '../../domain-model/absolute-file-path'
-import { AstNodeList } from '../ast-node-list'
-import AstStandardizer from './standardize-ast/ast-standardizer'
+import Remarkable from "remarkable"
+import { AbsoluteFilePath } from "../../domain-model/absolute-file-path"
+import { AstNodeList } from "../ast-node-list"
+import AstStandardizer from "./standardize-ast/ast-standardizer"
 
-const markdownParser = new Remarkable('full', { html: true })
+const markdownParser = new Remarkable("full", { html: true })
 
 /**
  * Parses Markdown files into an AstNode[]

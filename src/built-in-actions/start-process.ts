@@ -1,21 +1,21 @@
-import chalk from 'chalk'
-import deb from 'debug'
-import { ObservableProcess } from 'observable-process'
-import path from 'path'
-import { Configuration } from '../configuration/configuration'
-import { callArgs } from '../helpers/call-args'
-import { trimDollar } from '../helpers/trim-dollar'
-import { ActionArgs } from '../runners/action-args'
-import { RunningProcess } from './helpers/running-process'
+import color from "colorette"
+import deb from "debug"
+import { ObservableProcess } from "observable-process"
+import path from "path"
+import { Configuration } from "../configuration/configuration"
+import { callArgs } from "../helpers/call-args"
+import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "../runners/action-args"
+import { RunningProcess } from "./helpers/running-process"
 
-const debug = deb('start-console-command')
+const debug = deb("start-console-command")
 
 // Runs the given commands on the console.
 // Leaves the command running.
 export default async function startProcess(args: ActionArgs) {
   const commandsToRun = getCommandsToRun(args)
   args.formatter.name(
-    `starting a long-running process: ${chalk.bold(chalk.cyan(commandsToRun))}`
+    `starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`
   )
   RunningProcess.instance().set(
     new ObservableProcess({
@@ -29,13 +29,13 @@ export default async function startProcess(args: ActionArgs) {
 
 function getCommandsToRun(args: ActionArgs) {
   return args.nodes
-    .textInNodeOfType('fence')
-    .split('\n')
+    .textInNodeOfType("fence")
+    .split("\n")
     .map(line => line.trim())
     .filter(line => line)
     .map(trimDollar)
     .map(makeGlobal(args.configuration))
-    .join(' && ')
+    .join(" && ")
 }
 
 function makeGlobal(configuration: Configuration) {
@@ -48,7 +48,7 @@ function makeGlobal(configuration: Configuration) {
   }
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText) {
-    const commandParts = commandText.split(' ')
+    const commandParts = commandText.split(" ")
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
     const replacement = globals[command]
@@ -56,8 +56,8 @@ function makeGlobal(configuration: Configuration) {
       debug(`found replacement: ${replacement}`)
       return (
         path.join(configuration.sourceDir, replacement) +
-        ' ' +
-        commandParts.splice(1).join(' ')
+        " " +
+        commandParts.splice(1).join(" ")
       )
     } else {
       return commandText

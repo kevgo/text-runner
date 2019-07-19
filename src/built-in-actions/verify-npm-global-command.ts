@@ -1,22 +1,21 @@
-import { ActionArgs } from '../runners/action-args'
-
-import chalk from 'chalk'
-import path from 'path'
-import { trimDollar } from '../helpers/trim-dollar'
+import color from "colorette"
+import path from "path"
+import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "../runners/action-args"
 
 export default function verifyNpmGlobalCommand(args: ActionArgs) {
-  args.formatter.name('NPM module exports the command')
+  args.formatter.name("NPM module exports the command")
   const commandName = trimDollar(
-    args.nodes.textInNodeOfType('fence', 'code').trim()
+    args.nodes.textInNodeOfType("fence", "code").trim()
   )
-  const pkg = require(path.join(args.configuration.sourceDir, 'package.json'))
+  const pkg = require(path.join(args.configuration.sourceDir, "package.json"))
   args.formatter.name(
-    `NPM module exports the ${chalk.cyan(commandName)} command`
+    `NPM module exports the ${color.cyan(commandName)} command`
   )
 
   if (!hasCommandName(commandName, pkg.bin)) {
     throw new Error(
-      `${chalk.cyan('package.json')} does not export a ${chalk.red(
+      `${color.cyan("package.json")} does not export a ${color.red(
         commandName
       )} command`
     )

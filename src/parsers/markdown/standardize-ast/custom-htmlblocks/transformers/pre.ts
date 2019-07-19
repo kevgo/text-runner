@@ -1,11 +1,11 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 
@@ -19,7 +19,7 @@ export default async function transformPre(
   const match = node.content.match(preRegex)
   if (!match) {
     throw new UnprintedUserError(
-      'cannot match <pre> tag',
+      "cannot match <pre> tag",
       file.platformified(),
       line
     )
@@ -29,8 +29,8 @@ export default async function transformPre(
     content: match[2],
     file,
     line,
-    tag: 'pre',
-    type: 'fence'
+    tag: "pre",
+    type: "fence"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

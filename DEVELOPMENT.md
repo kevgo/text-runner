@@ -35,25 +35,22 @@ The following scopes are available for commit messages:
 ## Testing
 
 - run all tests: <code textrun="verify-make-command">make test</code>
-- run feature specs: <code textrun="verify-make-command">make cuke</code>
-- run feature specs in offline mode: <code>make cuke-offline</code>
-- run text-run: <code textrun="verify-make-command">make docs</code>
+- run all tests in offline mode: <code textrun="verify-make-command">make test-offline</code>
+- run end-to-end tests: <code textrun="verify-make-command">make cuke</code>
+- run end-to-end tests in offline mode: <code>make cuke-offline</code>
+- run unit tests: <code>make unit</code>
+- run documentation tests: <code textrun="verify-make-command">make docs</code>
+- run all linters: <code textrun="verify-make-command">make lint</code>
 
-To debug a single test:
+To debug a single end-to-end test:
 
-- enable console output: add the `@verbose` tag
-- enable debugging statements and verbose output: add the `@debug` tag
+- enable console output: add the `@verbose` Gherkin tag
+- enable debugging statements and verbose output: add the `@debug` Gherkin tag
 
 To determine test coverage, run <code textrun="verify-make-command">make coverage</code>.
 The coverage in relatively low because TextRunner contains copious amounts of
 defensive checks against invalid user input.
 Not all permutations of that are tested.
-
-## Linting
-
-- run all linters: <code textrun="verify-make-command">make lint</code>
-- run JavaScript linters: <code textrun="verify-make-command">make lintjs</code>
-- run Markdown linters: <code textrun="verify-make-command">make lintmd</code>
 
 ## Architecture
 

@@ -1,10 +1,10 @@
-import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
-import { AstNode } from '../../../ast-node'
-import { AstNodeList } from '../../../ast-node-list'
-import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import { RemarkableNode } from '../remarkable-node'
-import { TagMapper } from '../tag-mapper'
-import { TransformerBlock } from '../transformer-block'
+import { AbsoluteFilePath } from "../../../../domain-model/absolute-file-path"
+import { AstNode } from "../../../ast-node"
+import { AstNodeList } from "../../../ast-node-list"
+import { OpenTagTracker } from "../../helpers/open-tag-tracker"
+import { RemarkableNode } from "../remarkable-node"
+import { TagMapper } from "../tag-mapper"
+import { TransformerBlock } from "../transformer-block"
 
 /**
  * Transforms basic Remarkable nodes with opening and closing tags
@@ -12,7 +12,7 @@ import { TransformerBlock } from '../transformer-block'
  */
 export class GenericMdTransformerBlock implements TransformerBlock {
   /** Tags to ignore */
-  static readonly ignore = ['hardbreak', 'inline']
+  static readonly ignore = ["hardbreak", "inline"]
 
   openTags: OpenTagTracker
   tagMapper: TagMapper
@@ -56,14 +56,14 @@ export class GenericMdTransformerBlock implements TransformerBlock {
    * Returns whether the given Remarkable node type describes an opening tag
    */
   isOpeningType(nodeType: string): boolean {
-    return nodeType.endsWith('_open')
+    return nodeType.endsWith("_open")
   }
 
   /**
    * Returns whether the given Remarkable node type describes a closing tag
    */
   isClosingType(nodeType: string): boolean {
-    return nodeType.endsWith('_close')
+    return nodeType.endsWith("_close")
   }
 
   /**
@@ -77,7 +77,7 @@ export class GenericMdTransformerBlock implements TransformerBlock {
     const result = new AstNodeList()
     const resultNode = new AstNode({
       attributes: node.attributes || {},
-      content: '',
+      content: "",
       file,
       line,
       tag: this.tagMapper.tagForType(node.type),
@@ -98,7 +98,7 @@ export class GenericMdTransformerBlock implements TransformerBlock {
     const openNode = this.openTags.popType(openingNodeType, file, line)
     result.pushNode({
       attributes: openNode.attributes,
-      content: '',
+      content: "",
       file,
       line,
       tag: `/${openNode.tag}`,
@@ -115,7 +115,7 @@ export class GenericMdTransformerBlock implements TransformerBlock {
     const result = new AstNodeList()
     result.pushNode({
       attributes: node.attributes || {},
-      content: '',
+      content: "",
       file,
       line,
       tag: this.tagMapper.tagForType(node.type),
@@ -126,8 +126,8 @@ export class GenericMdTransformerBlock implements TransformerBlock {
 
   /** Returns the opening type for the given closing type */
   openingTypeFor(closingType: string): string {
-    if (closingType.endsWith('_close')) {
-      return closingType.substring(0, closingType.length - 6) + '_open'
+    if (closingType.endsWith("_close")) {
+      return closingType.substring(0, closingType.length - 6) + "_open"
     }
     return closingType
   }

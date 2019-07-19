@@ -1,18 +1,18 @@
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
 
 /** A node in the standardized Markdown/HTML AST */
 export class AstNode {
   static scaffold(data: any = {}): AstNode {
-    if (typeof data.file === 'string') {
+    if (typeof data.file === "string") {
       data.file = new AbsoluteFilePath(data.file)
     }
     return new AstNode({
       attributes: data.attributes || {},
-      content: data.content || '',
-      file: data.file || new AbsoluteFilePath('file'),
+      content: data.content || "",
+      file: data.file || new AbsoluteFilePath("file"),
       line: data.line || 1,
-      tag: data.tag != null ? data.tag : 'tag',
-      type: data.type || 'type'
+      tag: data.tag != null ? data.tag : "tag",
+      type: data.type || "type"
     })
   }
   type: string // markdown type of AST node
@@ -41,9 +41,9 @@ export class AstNode {
   /** Returns the type of the corresponding ending node. */
   endType(): string {
     if (!this.isOpeningNode()) {
-      throw new Error('not an opening node')
+      throw new Error("not an opening node")
     }
-    return this.type.replace('open', '') + 'close'
+    return this.type.replace("open", "") + "close"
   }
 
   /**
@@ -54,7 +54,7 @@ export class AstNode {
     if (this.content == null) {
       return null
     }
-    if (this.type !== 'htmltag') {
+    if (this.type !== "htmltag") {
       return null
     }
     const matches = this.content.match(/<a[^>]*href="([^"]*)".*?>/)
@@ -63,11 +63,11 @@ export class AstNode {
 
   /** Returns whether this AstNode is an opening node. */
   isOpeningNode(): boolean {
-    return this.type.endsWith('_open')
+    return this.type.endsWith("_open")
   }
 
   /** Returns whether this AstNode is a closing node. */
   isClosingNode(): boolean {
-    return this.type.endsWith('_close')
+    return this.type.endsWith("_close")
   }
 }

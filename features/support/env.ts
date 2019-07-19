@@ -1,15 +1,15 @@
-import { After, Before, setDefaultTimeout } from 'cucumber'
-import { endChildProcesses } from 'end-child-processes'
-import fs from 'fs-extra'
-import path from 'path'
-import rimraf from 'rimraf'
-import util from 'util'
+import { After, Before, setDefaultTimeout } from "cucumber"
+import { endChildProcesses } from "end-child-processes"
+import fs from "fs-extra"
+import path from "path"
+import rimraf from "rimraf"
+import util from "util"
 
 // need such a high timeout because test coverage takes time to start up
 setDefaultTimeout(30000)
 
 Before(async function() {
-  this.rootDir = path.join(process.cwd(), 'tmp')
+  this.rootDir = path.join(process.cwd(), "tmp")
   let rootDirExists = false
   try {
     await fs.stat(this.rootDir)
@@ -25,8 +25,8 @@ Before(async function() {
 
 After(async function(scenario) {
   await endChildProcesses()
-  if (scenario.result.status === 'failed') {
-    console.log('\ntest artifacts are located in', this.rootDir)
+  if (scenario.result.status === "failed") {
+    console.log("\ntest artifacts are located in", this.rootDir)
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     const rimrafp = util.promisify(rimraf)
@@ -34,20 +34,20 @@ After(async function(scenario) {
   }
 })
 
-Before({ tags: '@verbose' }, function() {
+Before({ tags: "@verbose" }, function() {
   this.verbose = true
 })
 
-After({ tags: '@verbose' }, function() {
+After({ tags: "@verbose" }, function() {
   this.verbose = false
 })
 
-Before({ tags: '@debug' }, function() {
+Before({ tags: "@debug" }, function() {
   this.debug = true
   this.verbose = true
 })
 
-After({ tags: '@debug' }, function() {
+After({ tags: "@debug" }, function() {
   this.debug = false
   this.verbose = false
 })

@@ -1,14 +1,14 @@
-import color from 'colorette'
-import glob from 'glob'
-import interpret from 'interpret'
-import path from 'path'
-import rechoir from 'rechoir'
-import { Activity } from '../activity-list/activity'
-import { UnprintedUserError } from '../errors/unprinted-user-error'
-import { getActionName } from '../helpers/get-action-name'
-import { javascriptExtensions } from '../helpers/javascript-extensions'
-import { trimExtension } from '../helpers/trim-extension'
-import { Action } from './action'
+import color from "colorette"
+import glob from "glob"
+import interpret from "interpret"
+import path from "path"
+import rechoir from "rechoir"
+import { Activity } from "../activity-list/activity"
+import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { getActionName } from "../helpers/get-action-name"
+import { javascriptExtensions } from "../helpers/javascript-extensions"
+import { trimExtension } from "../helpers/trim-extension"
+import { Action } from "./action"
 
 interface FunctionRepo {
   [key: string]: Action
@@ -48,12 +48,12 @@ class ActionRepo {
       errorText += `* ${actionName}\n`
     }
     if (Object.keys(this.customActions).length > 0) {
-      errorText += '\nUser-defined actions:\n'
+      errorText += "\nUser-defined actions:\n"
       for (const actionName of Object.keys(this.customActions).sort()) {
         errorText += `* ${actionName}\n`
       }
     } else {
-      errorText += '\nNo custom actions defined.\n'
+      errorText += "\nNo custom actions defined.\n"
     }
     errorText += `\nTo create a new "${activity.actionName}" action,\n`
     errorText += `run "text-run add ${activity.actionName}"\n`
@@ -74,7 +74,7 @@ class ActionRepo {
 
   private loadCustomActions(): FunctionRepo {
     const result = {}
-    require('babel-register')
+    require("babel-register")
     for (const filename of this.customActionFilePaths()) {
       rechoir.prepare(interpret.jsVariants, filename)
       const actionName = getActionName(filename)
@@ -92,16 +92,16 @@ class ActionRepo {
 
   private builtinActionFilePaths(): string[] {
     return glob
-      .sync(path.join(__dirname, '..', 'built-in-actions', '*.?s'))
-      .filter(name => !name.endsWith('.d.ts'))
+      .sync(path.join(__dirname, "..", "built-in-actions", "*.?s"))
+      .filter(name => !name.endsWith(".d.ts"))
       .map(trimExtension)
   }
 
   private customActionFilePaths(): string[] {
     const pattern = path.join(
       process.cwd(),
-      'text-run',
-      `*.@(${javascriptExtensions().join('|')})`
+      "text-run",
+      `*.@(${javascriptExtensions().join("|")})`
     )
     return glob.sync(pattern)
   }

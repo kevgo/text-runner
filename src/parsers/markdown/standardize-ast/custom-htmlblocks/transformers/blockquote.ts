@@ -1,11 +1,11 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 
@@ -19,7 +19,7 @@ export default async function transformBlockquote(
   const blockquoteMatch = node.content.match(blockquoteRegex)
   if (blockquoteMatch == null) {
     throw new UnprintedUserError(
-      'Cannot parse blockquote expression',
+      "Cannot parse blockquote expression",
       file.platformified(),
       line
     )
@@ -29,8 +29,8 @@ export default async function transformBlockquote(
     content: blockquoteMatch[2],
     file,
     line,
-    tag: 'blockquote',
-    type: 'blockquote'
+    tag: "blockquote",
+    type: "blockquote"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

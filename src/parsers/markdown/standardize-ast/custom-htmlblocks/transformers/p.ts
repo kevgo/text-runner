@@ -1,11 +1,11 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const pRegex = /<p([^>]*)>([\s\S]*)<\/p>/m
 
@@ -19,7 +19,7 @@ export default async function transformPBlock(
   const match = node.content.match(pRegex)
   if (!match) {
     throw new UnprintedUserError(
-      'cannot match <p> tag',
+      "cannot match <p> tag",
       file.platformified(),
       line
     )
@@ -29,8 +29,8 @@ export default async function transformPBlock(
     content: match[2],
     file,
     line,
-    tag: 'p',
-    type: 'paragraph'
+    tag: "p",
+    type: "paragraph"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

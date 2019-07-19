@@ -1,5 +1,5 @@
-import YAML from 'yamljs'
-import { UserProvidedConfiguration } from './user-provided-configuration'
+import YAML from "yamljs"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 /** provides the content of the config file in the standardized format */
 export function loadConfigFile(filename: string): UserProvidedConfiguration {

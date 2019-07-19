@@ -1,8 +1,8 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { RemarkableNode } from "../../remarkable-node"
 
 export default function(
   node: RemarkableNode,
@@ -13,13 +13,13 @@ export default function(
   const result = new AstNodeList()
   const resultNode = new AstNode({
     attributes: {
-      href: node.href || '',
-      title: node.title || ''
+      href: node.href || "",
+      title: node.title || ""
     },
-    content: '',
+    content: "",
     file,
     line,
-    tag: 'a',
+    tag: "a",
     type: node.type
   })
   openTags.add(resultNode)

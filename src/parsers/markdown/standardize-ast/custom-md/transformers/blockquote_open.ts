@@ -1,9 +1,9 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const blockquoteRegex = /<blockquote([^>]*)>([\s\S]*)<\/blockquote>/m
 
@@ -24,10 +24,10 @@ export default function(
   }
   const resultNode = new AstNode({
     attributes,
-    content: '',
+    content: "",
     file,
     line,
-    tag: 'blockquote',
+    tag: "blockquote",
     type: node.type
   })
   openTags.add(resultNode)

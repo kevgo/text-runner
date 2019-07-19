@@ -1,15 +1,15 @@
-const assertNoDiff = require('assert-no-diff')
+const assertNoDiff = require("assert-no-diff")
 const {
   removeTrailingColon
-} = require('../dist/helpers/remove-trailing-colon.js')
-const removeValue = require('remove-value')
+} = require("../dist/helpers/remove-trailing-colon.js")
+const removeValue = require("remove-value")
 
 module.exports = function verifyHandlerArgs(args) {
   const expectedTools = args.nodes
-    .textInNodesOfType('strong')
+    .textInNodesOfType("strong")
     .sort()
     .map(removeTrailingColon)
   const actualTools = Object.keys(args).sort()
-  removeValue(actualTools, 'linkTargets')
-  assertNoDiff.chars(expectedTools.join('\n'), actualTools.join('\n'))
+  removeValue(actualTools, "linkTargets")
+  assertNoDiff.chars(expectedTools.join("\n"), actualTools.join("\n"))
 }

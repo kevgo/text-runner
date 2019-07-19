@@ -1,9 +1,9 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlTag } from '../../../helpers/parse-html-tag'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlTag } from "../../../helpers/parse-html-tag"
+import { RemarkableNode } from "../../remarkable-node"
 
 export default function transformATag(
   node: RemarkableNode,
@@ -19,11 +19,11 @@ export default function transformATag(
   )
   const resultNode = new AstNode({
     attributes,
-    content: '',
+    content: "",
     file,
     line,
     tag,
-    type: 'heading_open'
+    type: "heading_open"
   })
   openTags.add(resultNode)
   result.pushNode(resultNode)

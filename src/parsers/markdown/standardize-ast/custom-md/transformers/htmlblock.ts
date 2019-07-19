@@ -1,10 +1,10 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/
@@ -20,27 +20,27 @@ export default function(
   if (preMatch) {
     result.pushNode({
       attributes: parseHtmlAttributes(preMatch[1]),
-      content: '',
+      content: "",
       file,
       line,
-      tag: 'pre',
-      type: 'fence_open'
+      tag: "pre",
+      type: "fence_open"
     })
     result.pushNode({
       attributes: {},
       content: preMatch[2],
       file,
       line,
-      tag: '',
-      type: 'text'
+      tag: "",
+      type: "text"
     })
     result.pushNode({
       attributes: {},
-      content: '',
+      content: "",
       file,
       line,
-      tag: '/pre',
-      type: 'fence_close'
+      tag: "/pre",
+      type: "fence_close"
     })
     pretendToUse(openTags)
     return result
@@ -52,8 +52,8 @@ export default function(
       content: node.content.trim(),
       file,
       line,
-      tag: 'table',
-      type: 'table'
+      tag: "table",
+      type: "table"
     })
     return result
   }

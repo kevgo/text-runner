@@ -1,25 +1,25 @@
-import fs from 'fs-extra'
-import path from 'path'
+import fs from "fs-extra"
+import path from "path"
 
 export async function addCommand(
   blockName: string | undefined
 ): Promise<Error[]> {
   if (!blockName) {
-    throw new Error('no block name given')
+    throw new Error("no block name given")
   }
   let textRunDirExists = true
   try {
-    await fs.stat('text-run')
+    await fs.stat("text-run")
   } catch (e) {
     textRunDirExists = false
   }
   if (!textRunDirExists) {
-    await fs.mkdir('text-run')
+    await fs.mkdir("text-run")
   }
   await fs.writeFile(
-    path.join('text-run', blockName + '.js'),
+    path.join("text-run", blockName + ".js"),
     template(blockName),
-    'utf8'
+    "utf8"
   )
   return []
 }

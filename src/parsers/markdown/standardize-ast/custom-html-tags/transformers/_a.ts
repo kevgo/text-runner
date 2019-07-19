@@ -1,9 +1,9 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { RemarkableNode } from "../../remarkable-node"
 
 export default function transformATag(
   node: RemarkableNode,
@@ -12,14 +12,14 @@ export default function transformATag(
   line: number
 ): AstNodeList {
   const result = new AstNodeList()
-  const openingTag = openTags.popTag('a', file, line)
+  const openingTag = openTags.popTag("a", file, line)
   const resultNode = new AstNode({
     attributes: openingTag.attributes,
-    content: '',
+    content: "",
     file,
     line,
-    tag: '/a',
-    type: openingTag.type.replace('_open', '_close')
+    tag: "/a",
+    type: openingTag.type.replace("_open", "_close")
   })
   result.pushNode(resultNode)
   pretendToUse(node)

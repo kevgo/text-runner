@@ -1,9 +1,9 @@
-import { Publications } from '../configuration/publications'
-import { removeDoubleSlash } from '../helpers/remove-double-slash'
-import { unixify } from '../helpers/unixify'
-import { AbsoluteFilePath } from './absolute-file-path'
-import { AbsoluteLink } from './absolute-link'
-import { RelativeLink } from './relative-link'
+import { Publications } from "../configuration/publications"
+import { removeDoubleSlash } from "../helpers/remove-double-slash"
+import { unixify } from "../helpers/unixify"
+import { AbsoluteFilePath } from "./absolute-file-path"
+import { AbsoluteLink } from "./absolute-link"
+import { RelativeLink } from "./relative-link"
 
 /**
  * A link that isn't known yet whether it is relative or absolute
@@ -29,6 +29,6 @@ export class UnknownLink {
    * Returns whether this link is an absolute link
    */
   isAbsolute(): boolean {
-    return this.value.startsWith('/')
+    return this.value.startsWith("/")
   }
 }

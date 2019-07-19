@@ -1,4 +1,4 @@
-import { ObservableProcess } from 'observable-process'
+import { ObservableProcess } from "observable-process"
 
 export class RunningProcess {
   static instance(): RunningProcess {

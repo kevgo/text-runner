@@ -13,8 +13,8 @@ export class RemarkableNode {
 
   // This constructor isn't used and just here to make the type checker happy
   constructor() {
-    this.type = ''
-    this.content = ''
+    this.type = ""
+    this.content = ""
     this.children = []
     this.lines = []
   }

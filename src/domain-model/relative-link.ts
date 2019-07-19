@@ -1,6 +1,6 @@
-import { Publications } from '../configuration/publications'
-import { AbsoluteFilePath } from './absolute-file-path'
-import { AbsoluteLink } from './absolute-link'
+import { Publications } from "../configuration/publications"
+import { AbsoluteFilePath } from "./absolute-file-path"
+import { AbsoluteLink } from "./absolute-link"
 
 /**
  * A link relative to the current location,

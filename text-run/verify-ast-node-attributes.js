@@ -1,17 +1,17 @@
-const { AstNode } = require('../dist/parsers/ast-node.js')
-const assertNoDiff = require('assert-no-diff')
+const { AstNode } = require("../dist/parsers/ast-node.js")
+const assertNoDiff = require("assert-no-diff")
 const {
   removeTrailingColon
-} = require('../dist/helpers/remove-trailing-colon.js')
+} = require("../dist/helpers/remove-trailing-colon.js")
 
 module.exports = async function verifyAstNodeAttributes(args) {
   const expected = args.nodes
-    .textInNodesOfType('strong')
+    .textInNodesOfType("strong")
     .sort()
     .map(removeTrailingColon)
-    .join('\n')
+    .join("\n")
   const actual = Object.keys(AstNode.scaffold())
     .sort()
-    .join('\n')
+    .join("\n")
   assertNoDiff.chars(expected, actual)
 }

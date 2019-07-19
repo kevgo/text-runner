@@ -1,11 +1,11 @@
-import { Given } from 'cucumber'
-import fs from 'fs-extra'
-import path from 'path'
-import { cp } from 'shelljs'
+import { Given } from "cucumber"
+import fs from "fs-extra"
+import path from "path"
+import { cp } from "shelljs"
 
-Given('a broken file {string}', async function(filePath) {
+Given("a broken file {string}", async function(filePath) {
   const subdir = path.dirname(filePath)
-  if (subdir !== '.') {
+  if (subdir !== ".") {
     await fs.ensureDir(path.join(this.rootDir, subdir))
   }
   await fs.writeFile(
@@ -17,9 +17,9 @@ Given('a broken file {string}', async function(filePath) {
   )
 })
 
-Given('a runnable file {string}', async function(filePath) {
+Given("a runnable file {string}", async function(filePath) {
   const subdir = path.dirname(filePath)
-  if (subdir !== '.') {
+  if (subdir !== ".") {
     const subdirPath = path.join(this.rootDir, subdir)
     let subdirExists = false
     try {
@@ -39,58 +39,58 @@ Given('a runnable file {string}', async function(filePath) {
 })
 
 Given(
-  'I am in a directory that contains documentation without a configuration file',
+  "I am in a directory that contains documentation without a configuration file",
   async function() {
     await fs.writeFile(
-      path.join(this.rootDir, '1.md'),
+      path.join(this.rootDir, "1.md"),
       '<code textrun="cd">.</code>'
     )
   }
 )
 
-Given('I am in a directory that contains the {string} example', async function(
+Given("I am in a directory that contains the {string} example", async function(
   exampleName
 ) {
   await fs.copy(
-    path.join('documentation', 'examples', exampleName),
+    path.join("documentation", "examples", exampleName),
     this.rootDir
   )
 })
 
 Given(
-  'I am in a directory that contains the {string} example with the configuration file:',
+  "I am in a directory that contains the {string} example with the configuration file:",
   async function(exampleName, configFileContent) {
     await fs.copy(
-      path.join('documentation', 'examples', exampleName),
+      path.join("documentation", "examples", exampleName),
       this.rootDir
     )
     await fs.writeFile(
-      path.join(this.rootDir, 'text-run.yml'),
+      path.join(this.rootDir, "text-run.yml"),
       configFileContent
     )
   }
 )
 
 Given(
-  'I am in a directory that contains the {string} example( without a configuration file)',
+  "I am in a directory that contains the {string} example( without a configuration file)",
   async function(exampleName) {
     await fs.copy(
-      path.join('documentation', 'examples', exampleName),
+      path.join("documentation", "examples", exampleName),
       this.rootDir
     )
   }
 )
 
-Given('my source code contains the directory {string}', function(dirName) {
+Given("my source code contains the directory {string}", function(dirName) {
   return fs.ensureDir(path.join(this.rootDir, dirName))
 })
 
-Given('my source code contains the file {string}', async function(fileName) {
+Given("my source code contains the file {string}", async function(fileName) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
-  await fs.writeFile(path.join(this.rootDir, fileName), 'content')
+  await fs.writeFile(path.join(this.rootDir, fileName), "content")
 })
 
-Given('my source code contains the file {string} with content:', async function(
+Given("my source code contains the file {string} with content:", async function(
   fileName,
   content
 ) {
@@ -98,22 +98,22 @@ Given('my source code contains the file {string} with content:', async function(
   await fs.writeFile(path.join(this.rootDir, fileName), content)
 })
 
-Given('my workspace contains the file {string}', async function(fileName) {
-  await fs.ensureDir(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
-  await fs.writeFile(path.join(this.rootDir, 'tmp', fileName), 'content')
+Given("my workspace contains the file {string}", async function(fileName) {
+  await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
+  await fs.writeFile(path.join(this.rootDir, "tmp", fileName), "content")
 })
 
 Given(
-  'my workspace contains a file {string} with content {string}',
+  "my workspace contains a file {string} with content {string}",
   async function(fileName, content) {
-    await fs.ensureDir(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
-    await fs.writeFile(path.join(this.rootDir, 'tmp', fileName), content)
+    await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
+    await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
   }
 )
 
-Given('my workspace contains testable documentation', async function() {
+Given("my workspace contains testable documentation", async function() {
   await fs.writeFile(
-    path.join(this.rootDir, '1.md'),
+    path.join(this.rootDir, "1.md"),
     `
 <a textrun="run-console-command">
 \`\`\`
@@ -124,36 +124,36 @@ echo "Hello world"
   )
 })
 
-Given('my source code contains the HelloWorld action', async function() {
-  await fs.ensureDir(path.join(this.rootDir, 'text-run'))
+Given("my source code contains the HelloWorld action", async function() {
+  await fs.ensureDir(path.join(this.rootDir, "text-run"))
   await fs.writeFile(
-    path.join(this.rootDir, 'text-run', 'hello-world.js'),
+    path.join(this.rootDir, "text-run", "hello-world.js"),
     `
     module.exports = function ({formatter}) { formatter.log('Hello World!') }`
   )
 })
 
-Given('my workspace contains the file {string} with content:', async function(
+Given("my workspace contains the file {string} with content:", async function(
   fileName,
   content
 ) {
-  await fs.ensureDir(path.join(this.rootDir, 'tmp', path.dirname(fileName)))
-  await fs.writeFile(path.join(this.rootDir, 'tmp', fileName), content)
+  await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
+  await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
 })
 
-Given('my text-run configuration contains:', async function(text) {
-  await fs.appendFile(path.join(this.rootDir, 'text-run.yml'), `\n${text}`)
+Given("my text-run configuration contains:", async function(text) {
+  await fs.appendFile(path.join(this.rootDir, "text-run.yml"), `\n${text}`)
 })
 
-Given('my workspace contains a directory {string}', async function(dir) {
-  await fs.ensureDir(path.join(this.rootDir, 'tmp', dir))
+Given("my workspace contains a directory {string}", async function(dir) {
+  await fs.ensureDir(path.join(this.rootDir, "tmp", dir))
 })
 
-Given('my workspace contains an empty file {string}', async function(fileName) {
-  await fs.writeFile(path.join(this.rootDir, fileName), '')
+Given("my workspace contains an empty file {string}", async function(fileName) {
+  await fs.writeFile(path.join(this.rootDir, fileName), "")
 })
 
-Given('my workspace contains an image {string}', async function(imageName) {
+Given("my workspace contains an image {string}", async function(imageName) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(imageName)))
   cp(
     path.join(__dirname, path.basename(imageName)),
@@ -161,6 +161,6 @@ Given('my workspace contains an image {string}', async function(imageName) {
   )
 })
 
-Given('the configuration file:', async function(content) {
-  await fs.writeFile(path.join(this.rootDir, 'text-run.yml'), content)
+Given("the configuration file:", async function(content) {
+  await fs.writeFile(path.join(this.rootDir, "text-run.yml"), content)
 })

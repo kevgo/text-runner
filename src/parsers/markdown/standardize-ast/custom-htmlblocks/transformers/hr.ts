@@ -1,11 +1,11 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const olRegex = /<hr([^>]*)>/
 
@@ -19,18 +19,18 @@ export default async function transformOl(
   const match = node.content.match(olRegex)
   if (match == null) {
     throw new UnprintedUserError(
-      'Cannot parse ol expression',
+      "Cannot parse ol expression",
       file.platformified(),
       line
     )
   }
   const hrNode = new AstNode({
     attributes: parseHtmlAttributes(match[1]),
-    content: '',
+    content: "",
     file,
     line,
-    tag: 'hr',
-    type: 'horizontal_row'
+    tag: "hr",
+    type: "horizontal_row"
   })
   result.pushNode(hrNode)
   pretendToUse(openTags)

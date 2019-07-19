@@ -1,16 +1,16 @@
-import color from 'colorette'
-import rimraf from 'rimraf'
-import util from 'util'
-import { extractActivities } from '../activity-list/extract-activities'
-import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
-import { Configuration } from '../configuration/configuration'
-import { getFileNames } from '../finding-files/get-filenames'
-import { findLinkTargets } from '../link-targets/find-link-targets'
-import { readAndParseFile } from '../parsers/read-and-parse-file'
-import { executeParallel } from '../runners/execute-parallel'
-import { executeSequential } from '../runners/execute-sequential'
-import { StatsCounter } from '../runners/stats-counter'
-import { createWorkingDir } from '../working-dir/create-working-dir'
+import color from "colorette"
+import rimraf from "rimraf"
+import util from "util"
+import { extractActivities } from "../activity-list/extract-activities"
+import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
+import { Configuration } from "../configuration/configuration"
+import { getFileNames } from "../finding-files/get-filenames"
+import { findLinkTargets } from "../link-targets/find-link-targets"
+import { readAndParseFile } from "../parsers/read-and-parse-file"
+import { executeParallel } from "../runners/execute-parallel"
+import { executeSequential } from "../runners/execute-sequential"
+import { StatsCounter } from "../runners/stats-counter"
+import { createWorkingDir } from "../working-dir/create-working-dir"
 
 export async function runCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
@@ -23,7 +23,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 1: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    console.log(color.magenta('no Markdown files found'))
+    console.log(color.magenta("no Markdown files found"))
     return []
   }
 
@@ -37,7 +37,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
-    console.log(color.magenta('no activities found'))
+    console.log(color.magenta("no activities found"))
     return []
   }
 
@@ -56,11 +56,11 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 7: write stats
-  let text = '\n'
+  let text = "\n"
   let colorFn
   if (results.length === 0) {
     colorFn = color.green
-    text += color.green('Success! ')
+    text += color.green("Success! ")
   } else {
     colorFn = color.red
     text += color.red(`${results.length} errors, `)
@@ -71,7 +71,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     } files`
   )
   if (stats.warnings() > 0) {
-    text += colorFn(', ')
+    text += colorFn(", ")
     text += color.magenta(`${stats.warnings()} warnings`)
   }
   text += colorFn(`, ${stats.duration()}`)

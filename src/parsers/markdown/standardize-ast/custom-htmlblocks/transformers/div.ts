@@ -1,11 +1,11 @@
-import { AbsoluteFilePath } from '../../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../../errors/unprinted-user-error'
-import { pretendToUse } from '../../../../../helpers/pretend-to-use'
-import { AstNode } from '../../../../ast-node'
-import { AstNodeList } from '../../../../ast-node-list'
-import { OpenTagTracker } from '../../../helpers/open-tag-tracker'
-import { parseHtmlAttributes } from '../../../helpers/parse-html-attributes'
-import { RemarkableNode } from '../../remarkable-node'
+import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { pretendToUse } from "../../../../../helpers/pretend-to-use"
+import { AstNode } from "../../../../ast-node"
+import { AstNodeList } from "../../../../ast-node-list"
+import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
+import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
+import { RemarkableNode } from "../../remarkable-node"
 
 const divRegex = /<div([^>]*)>([\s\S]*)<\/div>/m
 
@@ -19,7 +19,7 @@ export default async function transformDiv(
   const divMatch = node.content.match(divRegex)
   if (divMatch == null) {
     throw new UnprintedUserError(
-      'Cannot parse div expression',
+      "Cannot parse div expression",
       file.platformified(),
       line
     )
@@ -29,8 +29,8 @@ export default async function transformDiv(
     content: divMatch[2],
     file,
     line,
-    tag: 'div',
-    type: 'div'
+    tag: "div",
+    type: "div"
   })
   result.pushNode(resultNode)
   pretendToUse(openTags)

@@ -1,10 +1,10 @@
-import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
-import { AstNodeList } from '../../../ast-node-list'
-import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import { loadTransformers } from '../load-transformers'
-import { RemarkableNode } from '../remarkable-node'
-import { TransformerBlock } from '../transformer-block'
-import { TransformerList } from '../transformer-list'
+import { AbsoluteFilePath } from "../../../../domain-model/absolute-file-path"
+import { AstNodeList } from "../../../ast-node-list"
+import { OpenTagTracker } from "../../helpers/open-tag-tracker"
+import { loadTransformers } from "../load-transformers"
+import { RemarkableNode } from "../remarkable-node"
+import { TransformerBlock } from "../transformer-block"
+import { TransformerList } from "../transformer-list"
 
 export class CustomMdTransformerBlock implements TransformerBlock {
   mdTransformers: TransformerList

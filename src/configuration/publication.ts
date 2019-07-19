@@ -1,8 +1,8 @@
-import { AbsoluteLink } from '../domain-model/absolute-link'
-import { RelativeLink } from '../domain-model/relative-link'
-import { addLeadingDotUnlessEmpty } from '../helpers/add-leading-dot-unless-empty'
-import { addLeadingSlash } from '../helpers/add-leading-slash'
-import { addTrailingSlash } from '../helpers/add-trailing-slash'
+import { AbsoluteLink } from "../domain-model/absolute-link"
+import { RelativeLink } from "../domain-model/relative-link"
+import { addLeadingDotUnlessEmpty } from "../helpers/add-leading-dot-unless-empty"
+import { addLeadingSlash } from "../helpers/add-leading-slash"
+import { addTrailingSlash } from "../helpers/add-trailing-slash"
 
 /**
  * Defines the publication of a local file path to a public URL
@@ -23,7 +23,7 @@ export class Publication {
    * according to the rules of this publication
    */
   publish(localPath: AbsoluteFilePath): AbsoluteLink {
-    const re = new RegExp('^' + this.localPath)
+    const re = new RegExp("^" + this.localPath)
     const linkPath = addLeadingSlash(localPath.unixified()).replace(
       re,
       this.publicPath
@@ -62,7 +62,7 @@ export class Publication {
         .append(new RelativeLink(defaultFile))
         .withAnchor(result.anchor())
     } else if (result.hasExtension(this.publicExtension)) {
-      result = result.withExtension('md')
+      result = result.withExtension("md")
     }
 
     return new AbsoluteFilePath(result.value)
@@ -76,4 +76,4 @@ export class Publication {
   }
 }
 
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"

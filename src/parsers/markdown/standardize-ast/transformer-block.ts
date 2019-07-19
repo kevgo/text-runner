@@ -1,6 +1,6 @@
-import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { AstNodeList } from '../../ast-node-list'
-import { RemarkableNode } from './remarkable-node'
+import { AbsoluteFilePath } from "../../../domain-model/absolute-file-path"
+import { AstNodeList } from "../../ast-node-list"
+import { RemarkableNode } from "./remarkable-node"
 
 /**
  * TransformerBlock is a set of transformers that perform a typical group of transformations.

@@ -3,14 +3,14 @@
  */
 export function availableCommands(): string[] {
   return [
-    'add',
-    'debug',
-    'dynamic',
-    'help',
-    'run',
-    'unused',
-    'setup',
-    'static',
-    'version'
+    "add",
+    "debug",
+    "dynamic",
+    "help",
+    "run",
+    "unused",
+    "setup",
+    "static",
+    "version"
   ]
 }

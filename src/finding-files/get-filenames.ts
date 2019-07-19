@@ -1,17 +1,17 @@
-import color from 'colorette'
-import deb from 'debug'
-import isGlob from 'is-glob'
-import { Configuration } from '../configuration/configuration'
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../errors/unprinted-user-error'
-import { filesMatchingGlob } from '../helpers/files-matching-glob'
-import { hasDirectory } from '../helpers/has-directory'
-import { allMarkdownFiles } from './all-markdown-files'
-import { isMarkdownFile } from './is-markdown-file'
-import { markdownFilesInDir } from './markdown-files-in-dir'
-import { removeExcludedFiles } from './remove-excluded-files'
+import color from "colorette"
+import deb from "debug"
+import isGlob from "is-glob"
+import { Configuration } from "../configuration/configuration"
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { filesMatchingGlob } from "../helpers/files-matching-glob"
+import { hasDirectory } from "../helpers/has-directory"
+import { allMarkdownFiles } from "./all-markdown-files"
+import { isMarkdownFile } from "./is-markdown-file"
+import { markdownFilesInDir } from "./markdown-files-in-dir"
+import { removeExcludedFiles } from "./remove-excluded-files"
 
-const debug = deb('text-runner:run-command')
+const debug = deb("text-runner:run-command")
 
 /**
  * Returns the name of all files/directories that match the given glob
@@ -26,7 +26,7 @@ export async function getFileNames(
 }
 
 async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
-  if (config.fileGlob === '') {
+  if (config.fileGlob === "") {
     return allMarkdownFiles(config.fileGlob)
   } else if (await hasDirectory(config.fileGlob)) {
     return markdownFilesInDir(config.fileGlob)
@@ -42,7 +42,7 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
 }
 
 function debugFilenames(filenames: AbsoluteFilePath[]) {
-  debug('testing files:')
+  debug("testing files:")
   for (const filename of filenames) {
     debug(`  * ${filename.platformified()}`)
   }

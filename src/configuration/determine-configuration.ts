@@ -26,7 +26,7 @@ const defaultValues: Configuration = {
  * @param configFilePath path of the config file
  * @param cmdlineArgs arguments received on the command line
  */
-export function loadConfiguration(
+export function determineConfiguration(
   configFileData: UserProvidedConfiguration,
   cmdlineArgs: UserProvidedConfiguration
 ): Configuration {

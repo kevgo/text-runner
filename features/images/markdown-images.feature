@@ -1,3 +1,4 @@
+@smoke
 Feature: checking embedded Markdown images
 
   When writing documentation

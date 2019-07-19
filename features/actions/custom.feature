@@ -1,3 +1,4 @@
+@smoke
 Feature: custom runners
 
   As a documentation writer

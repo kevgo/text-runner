@@ -1,3 +1,4 @@
+@smoke
 Feature: unknown action types
 
   When using an active block for which there is no action

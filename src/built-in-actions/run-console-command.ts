@@ -1,15 +1,15 @@
-import color from 'colorette'
-import deb from 'debug'
-import { createObservableProcess, ObservableProcess } from 'observable-process'
-import path from 'path'
-import { Configuration } from '../configuration/configuration'
-import { callArgs } from '../helpers/call-args'
-import { trimDollar } from '../helpers/trim-dollar'
-import { AstNodeList } from '../parsers/ast-node-list'
-import { ActionArgs } from '../runners/action-args'
-import { RunningConsoleCommand } from './helpers/running-console-command'
+import color from "colorette"
+import deb from "debug"
+import { createObservableProcess, ObservableProcess } from "observable-process"
+import path from "path"
+import { Configuration } from "../configuration/configuration"
+import { callArgs } from "../helpers/call-args"
+import { trimDollar } from "../helpers/trim-dollar"
+import { AstNodeList } from "../parsers/ast-node-list"
+import { ActionArgs } from "../runners/action-args"
+import { RunningConsoleCommand } from "./helpers/running-console-command"
 
-const debug = deb('textrun:actions:run-console-command')
+const debug = deb("textrun:actions:run-console-command")
 
 interface ProcessInput {
   textToWait: string | null
@@ -20,20 +20,20 @@ interface ProcessInput {
 // Waits until the command is finished.
 export default async function runConsoleCommand(args: ActionArgs) {
   const commandsToRun = args.nodes
-    .textInNodeOfType('fence')
-    .split('\n')
+    .textInNodeOfType("fence")
+    .split("\n")
     .map(command => command.trim())
     .filter(e => e)
     .map(trimDollar)
     .map(makeGlobal(args.configuration))
-    .join(' && ')
-  if (commandsToRun === '') {
-    throw new Error('the block that defines console commands to run is empty')
+    .join(" && ")
+  if (commandsToRun === "") {
+    throw new Error("the block that defines console commands to run is empty")
   }
 
   args.formatter.name(`running console command: ${color.cyan(commandsToRun)}`)
   let input: ProcessInput[] = []
-  if (args.nodes.hasNodeOfType('table')) {
+  if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
@@ -51,10 +51,10 @@ export default async function runConsoleCommand(args: ActionArgs) {
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {
-    processor.stdin.write(input.input + '\n')
+    processor.stdin.write(input.input + "\n")
   } else {
     await processor.stdout.waitForText(input.textToWait)
-    processor.stdin.write(input.input + '\n')
+    processor.stdin.write(input.input + "\n")
   }
 }
 
@@ -63,10 +63,10 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
     return []
   }
   const result: ProcessInput[] = []
-  const rows = nodes.getNodesOfTypes('table_row_open')
+  const rows = nodes.getNodesOfTypes("table_row_open")
   for (const row of rows) {
     const cellsN = nodes.getNodesFor(row)
-    const cells = cellsN.getNodesOfTypes('table_cell')
+    const cells = cellsN.getNodesOfTypes("table_cell")
     if (cells.length === 0) {
       continue
     }
@@ -93,7 +93,7 @@ function makeGlobal(configuration: Configuration) {
   }
   debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText: string): string {
-    const commandParts = commandText.split(' ')
+    const commandParts = commandText.split(" ")
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)
     const replacement = globals[command] as string | undefined
@@ -101,8 +101,8 @@ function makeGlobal(configuration: Configuration) {
       debug(`found replacement: ${replacement}`)
       return (
         path.join(configuration.sourceDir, replacement) +
-        ' ' +
-        commandParts.splice(1).join(' ')
+        " " +
+        commandParts.splice(1).join(" ")
       )
     } else {
       return commandText

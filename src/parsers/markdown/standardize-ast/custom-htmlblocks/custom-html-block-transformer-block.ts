@@ -1,13 +1,13 @@
-import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
-import { UnprintedUserError } from '../../../../errors/unprinted-user-error'
-import { AstNodeList } from '../../../ast-node-list'
-import { getHtmlBlockTag } from '../../helpers/get-html-block-tag'
-import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import { removeHtmlComments } from '../../helpers/remove-html-comments'
-import { loadTransformers } from '../load-transformers'
-import { RemarkableNode } from '../remarkable-node'
-import { TransformerBlock } from '../transformer-block'
-import { TransformerList } from '../transformer-list'
+import { AbsoluteFilePath } from "../../../../domain-model/absolute-file-path"
+import { UnprintedUserError } from "../../../../errors/unprinted-user-error"
+import { AstNodeList } from "../../../ast-node-list"
+import { getHtmlBlockTag } from "../../helpers/get-html-block-tag"
+import { OpenTagTracker } from "../../helpers/open-tag-tracker"
+import { removeHtmlComments } from "../../helpers/remove-html-comments"
+import { loadTransformers } from "../load-transformers"
+import { RemarkableNode } from "../remarkable-node"
+import { TransformerBlock } from "../transformer-block"
+import { TransformerList } from "../transformer-list"
 
 export class CustomHtmlBlockTransformerBlock implements TransformerBlock {
   openTags: OpenTagTracker
@@ -19,7 +19,7 @@ export class CustomHtmlBlockTransformerBlock implements TransformerBlock {
   }
 
   canTransform(node: RemarkableNode): boolean {
-    return node.type === 'htmlblock'
+    return node.type === "htmlblock"
   }
 
   async loadTransformers() {

@@ -1,5 +1,5 @@
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
-import { AstNodeList } from '../parsers/ast-node-list'
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AstNodeList } from "../parsers/ast-node-list"
 
 /**
  * Activity is an action instance.

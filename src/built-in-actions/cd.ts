@@ -1,6 +1,6 @@
-import color from 'colorette'
-import path from 'path'
-import { ActionArgs } from '../runners/action-args'
+import color from "colorette"
+import path from "path"
+import { ActionArgs } from "../runners/action-args"
 
 // Changes the current working directory to the one given in the hyperlink or code block
 export default function cd(args: ActionArgs) {
@@ -13,7 +13,7 @@ export default function cd(args: ActionArgs) {
   try {
     process.chdir(fullPath)
   } catch (e) {
-    if (e.code === 'ENOENT') {
+    if (e.code === "ENOENT") {
       throw new Error(`directory ${directory} not found`)
     }
     throw e

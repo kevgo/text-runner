@@ -1,9 +1,9 @@
-import deb from 'debug'
-import humanize from 'humanize-string'
-import { Activity } from '../activity-list/activity'
-import { StatsCounter } from '../runners/stats-counter'
+import deb from "debug"
+import humanize from "humanize-string"
+import { Activity } from "../activity-list/activity"
+import { StatsCounter } from "../runners/stats-counter"
 
-const debug = deb('formatter')
+const debug = deb("formatter")
 
 /**
  * Base class for formatters
@@ -25,7 +25,7 @@ export class Formatter {
   ) {
     this.activity = activity
     this.statsCounter = statsCounter
-    this.output = ''
+    this.output = ""
     this.title = humanize(activity.actionName)
     this.sourceDir = sourceDir
     this.skipped = false
@@ -33,7 +33,7 @@ export class Formatter {
   }
 
   error(errorMessage: string) {
-    debug('error: ' + errorMessage)
+    debug("error: " + errorMessage)
     this.statsCounter.error()
   }
 
@@ -43,7 +43,7 @@ export class Formatter {
   }
 
   skip(message: string) {
-    debug('skipping: ' + message)
+    debug("skipping: " + message)
     this.skipped = true
     this.statsCounter.skip()
   }
@@ -60,7 +60,7 @@ export class Formatter {
   }
 
   warning(warningMessage: string) {
-    debug('warning: ' + warningMessage)
+    debug("warning: " + warningMessage)
     this.warned = true
     this.statsCounter.warning()
   }

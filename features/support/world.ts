@@ -1,12 +1,12 @@
-import flatten from 'array-flatten'
-import { expect } from 'chai'
-import { setWorldConstructor } from 'cucumber'
-import fs from 'fs-extra'
-import glob from 'glob'
-import { createObservableProcess } from 'observable-process'
-import path from 'path'
-import stripAnsi from 'strip-ansi'
-import { v4 as uuid } from 'uuid'
+import flatten from "array-flatten"
+import { expect } from "chai"
+import { setWorldConstructor } from "cucumber"
+import fs from "fs-extra"
+import glob from "glob"
+import { createObservableProcess } from "observable-process"
+import path from "path"
+import stripAnsi from "strip-ansi"
+import { v4 as uuid } from "uuid"
 
 /**
  * World provides step implementations that run and test TextRunner
@@ -18,16 +18,16 @@ function World() {
     args.cwd = this.rootDir
     args.env = {}
     if (this.debug) {
-      args.env.DEBUG = '*,-babel'
+      args.env.DEBUG = "*,-babel"
     }
 
     const command = this.makeFullPath(params.command)
-    if (process.env.NODE_ENV === 'coverage') {
+    if (process.env.NODE_ENV === "coverage") {
       args.command = runWithTestCoverage(args.command)
     }
     this.process = createObservableProcess(command, args)
     await this.process.waitForEnd()
-    if (process.env.NODE_ENV === 'coverage') {
+    if (process.env.NODE_ENV === "coverage") {
       await storeTestCoverage()
     }
     if (this.verbose) {
@@ -47,9 +47,9 @@ function World() {
   }
 
   this.fullTextRunPath = function() {
-    let result = path.join(process.cwd(), 'bin', 'text-run')
-    if (process.platform === 'win32') {
-      result += '.cmd'
+    let result = path.join(process.cwd(), "bin", "text-run")
+    if (process.platform === "win32") {
+      result += ".cmd"
     }
     return result
   }
@@ -72,21 +72,21 @@ function World() {
     } else if (table.FILENAME) {
       expectedHeader = `${table.FILENAME}`
     } else {
-      expectedHeader = ''
+      expectedHeader = ""
     }
     if (table.MESSAGE) {
       expectedHeader += ` -- ${table.MESSAGE}`
     }
     expect(output).to.include(expectedHeader)
-    expect(output).to.match(new RegExp(table['ERROR MESSAGE']))
+    expect(output).to.match(new RegExp(table["ERROR MESSAGE"]))
     expect(this.process.exitCode).to.equal(
-      parseInt(table['EXIT CODE'], 10),
-      'exit code'
+      parseInt(table["EXIT CODE"], 10),
+      "exit code"
     )
   }
 
   this.verifyOutput = table => {
-    let expectedText = ''
+    let expectedText = ""
     if (table.FILENAME) {
       expectedText += table.FILENAME
     }
@@ -94,7 +94,7 @@ function World() {
       expectedText += `:${table.LINE}`
     }
     if (table.FILENAME && (table.MESSAGE || table.WARNING)) {
-      expectedText += ' -- '
+      expectedText += " -- "
     }
     if (table.MESSAGE) {
       expectedText += table.MESSAGE
@@ -113,7 +113,7 @@ ${actual}
   }
 
   this.verifyPrintedUsageInstructions = () => {
-    expect(stripAnsi(this.process.output.fullText())).to.include('COMMANDS')
+    expect(stripAnsi(this.process.output.fullText())).to.include("COMMANDS")
   }
 
   this.verifyPrints = (expectedText: string) => {
@@ -142,7 +142,7 @@ ${actual}
     filenames = flatten(filenames)
     const standardizedOutput = this.process.output
       .fullText()
-      .replace(/\\/g, '/')
+      .replace(/\\/g, "/")
 
     // verify the given tests have run
     for (const filename of filenames) {
@@ -155,7 +155,7 @@ ${actual}
       .filter(file => fs.statSync(file).isFile())
       .map(file => path.relative(this.rootDir, file))
       .filter(file => file)
-      .map(file => file.replace(/\\/g, '/'))
+      .map(file => file.replace(/\\/g, "/"))
       .filter(file => filenames.indexOf(file) === -1)
     for (const fileShouldntRun of filesShouldntRun) {
       expect(standardizedOutput).to.not.include(fileShouldntRun)
@@ -178,25 +178,25 @@ ${actual}
 setWorldConstructor(World)
 
 function standardizePath(filePath: string): string {
-  return filePath.replace(/\\/g, '/')
+  return filePath.replace(/\\/g, "/")
 }
 
 /**
  * Returns the command that runs the given command with test coverage
  */
 function runWithTestCoverage(command: string) {
-  return path.join(process.cwd(), 'node_modules', '.bin', 'nyc') + ' ' + command
+  return path.join(process.cwd(), "node_modules", ".bin", "nyc") + " " + command
 }
 
 /**
  * Stores the test coverage data before running the next test that would overwrite it
  */
 async function storeTestCoverage() {
-  const outputPath = path.join(process.cwd(), '.nyc_output')
+  const outputPath = path.join(process.cwd(), ".nyc_output")
   try {
     await fs.stat(outputPath)
   } catch (e) {
     return
   }
-  await fs.move(outputPath, path.join(process.cwd(), '.nyc_output_cli', uuid()))
+  await fs.move(outputPath, path.join(process.cwd(), ".nyc_output_cli", uuid()))
 }

@@ -104,6 +104,7 @@ fix:  # runs the fixers
 	node_modules$/.bin$/prettier --write '*.md'
 	# node_modules$/.bin$/prettier --write 'documentation/**/*.md'
 	node_modules$/.bin$/prettier --write '*.yml'
+	node_modules/.bin/prettier --write "documentation/examples/**/*.js"
 
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -116,6 +117,7 @@ lintjs: build   # lints the javascript files
 	node_modules/.bin/prettier -c "src/**/*.ts"
 	node_modules/.bin/prettier -c "features/**/*.ts"
 	node_modules/.bin/prettier -c "text-run/*.js"
+	node_modules/.bin/prettier -c "documentation/examples/**/*.js"
 
 lintmd:   # lints markdown files
 	node_modules/.bin/prettier -c "*.md"

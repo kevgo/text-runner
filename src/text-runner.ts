@@ -23,7 +23,7 @@ export async function textRunner(
   let configuration: Configuration | undefined
   try {
     const configFilePath = await determineConfigFilename(cmdlineArgs)
-    configuration = await loadConfiguration(configFilePath, cmdlineArgs)
+    configuration = loadConfiguration(configFilePath, cmdlineArgs)
     const commandName = cmdlineArgs.command
     let errors: Error[]
     switch (commandName) {

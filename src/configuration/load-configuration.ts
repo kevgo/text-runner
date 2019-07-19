@@ -26,10 +26,10 @@ const defaultValues: Configuration = {
  * @param configFilePath path of the config file
  * @param cmdlineArgs arguments received on the command line
  */
-export async function loadConfiguration(
+export function loadConfiguration(
   configFilePath: string,
   cmdlineArgs: UserProvidedConfiguration
-): Promise<Configuration> {
+): Configuration {
   const fileData = loadConfigFile(configFilePath)
   const userProvided = { ...fileData, ...cmdlineArgs }
 

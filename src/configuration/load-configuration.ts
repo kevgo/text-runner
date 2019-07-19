@@ -54,7 +54,7 @@ export function loadConfiguration(
 
   return {
     FormatterClass: getFormatterClass(
-      get('format'),
+      get('formatterName'),
       defaultValues.FormatterClass
     ),
     actions: get('actions'),

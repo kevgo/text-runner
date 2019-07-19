@@ -16,5 +16,6 @@ export interface UserProvidedConfiguration {
   keepTmp?: boolean
   offline?: boolean
   publications?: Publications
+  useSystemTempDirectory?: boolean
   workspace?: string // path of the workspace to use
 }

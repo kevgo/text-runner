@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import jsonfile from 'jsonfile'
 import path from 'path'
 import { trimDollar } from '../helpers/trim-dollar'
@@ -9,11 +9,11 @@ export default async function verifyNpmInstall(args: ActionArgs) {
   const pkg = await jsonfile.readFile(
     path.join(args.configuration.sourceDir, 'package.json')
   )
-  args.formatter.name(`verify NPM installs ${chalk.cyan(pkg.name)}`)
+  args.formatter.name(`verify NPM installs ${color.cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(
-      `could not find ${chalk.cyan(pkg.name)} in installation instructions`
+      `could not find ${color.cyan(pkg.name)} in installation instructions`
     )
   }
 }

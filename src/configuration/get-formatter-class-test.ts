@@ -12,7 +12,10 @@ describe('getFormatterClass', function() {
       DetailedFormatter
     )
   })
-  it('returns the default formatter if no name is given', function() {
+  it('returns the default formatter if an empty name is given', function() {
     expect(getFormatterClass('', DotFormatter)).to.equal(DotFormatter)
+  })
+  it('returns the default formatter if no name is given', function() {
+    expect(getFormatterClass(undefined, DotFormatter)).to.equal(DotFormatter)
   })
 })

@@ -23,5 +23,5 @@ module.exports = async function runTextrun(args) {
       `text-run exited with code ${processor.exitCode} when processing the created Markdown file`
     )
   }
-  global.consoleCommandOutput = processor.output.fullText()
+  global['consoleCommandOutput'] = processor.output.fullText()
 }

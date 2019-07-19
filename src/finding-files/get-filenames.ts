@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import deb from 'debug'
 import isGlob from 'is-glob'
 import { Configuration } from '../configuration/configuration'
@@ -36,7 +36,7 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
     return filesMatchingGlob(config.fileGlob)
   } else {
     throw new UnprintedUserError(
-      `file or directory does not exist: ${chalk.red(config.fileGlob)}`
+      `file or directory does not exist: ${color.red(config.fileGlob)}`
     )
   }
 }

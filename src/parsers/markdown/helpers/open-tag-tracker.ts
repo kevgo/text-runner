@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
 import { UnprintedUserError } from '../../../errors/unprinted-user-error'
 import { AstNode } from '../../ast-node'
@@ -14,9 +14,9 @@ export class OpenTagTracker {
     const existingNode = this.peekType(node.type)
     if (existingNode && existingNode.attributes.textrun) {
       throw new UnprintedUserError(
-        `this active block is nested inside another active block of type ${chalk.cyan(
+        `this active block is nested inside another active block of type ${color.cyan(
           existingNode.attributes.textrun
-        )} on line ${chalk.cyan(existingNode.line.toString())}`,
+        )} on line ${color.cyan(existingNode.line.toString())}`,
         node.file.platformified(),
         node.line
       )

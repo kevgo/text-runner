@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
 
 /**
  * Removes the given excluded files from the given list of filenames
@@ -8,8 +8,8 @@ export function removeExcludedFiles(
   excluded: string | string[]
 ): AbsoluteFilePath[] {
   const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
-  if (!excludedFilesArray.includes('node_modules')) {
-    excludedFilesArray.push('node_modules')
+  if (!excludedFilesArray.includes("node_modules")) {
+    excludedFilesArray.push("node_modules")
   }
   const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
   return fileList.filter(file => {

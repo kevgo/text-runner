@@ -1,3 +1,3 @@
 module.exports = ({ formatter }) => {
-  formatter.log('Hello World!')
+  formatter.log("Hello World!")
 }

@@ -7,11 +7,11 @@ export function parseHtmlAttributes(
   if (!attrMatch) {
     return {}
   }
-  return attrMatch.map(attr => attr.split('=', 2)).reduce(reducer, {}) || {}
+  return attrMatch.map(attr => attr.split("=", 2)).reduce(reducer, {}) || {}
 }
 
 function reducer(acc: {}, attr: string[]): {} {
   const [key, value] = attr
-  acc[key.trim()] = value.trim().replace(/"/g, '')
+  acc[key.trim()] = value.trim().replace(/"/g, "")
   return acc
 }

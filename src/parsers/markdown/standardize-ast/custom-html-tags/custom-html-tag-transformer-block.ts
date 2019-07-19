@@ -1,12 +1,12 @@
-import { AbsoluteFilePath } from '../../../../domain-model/absolute-file-path'
-import { AstNodeList } from '../../../ast-node-list'
-import { getHtmlBlockTag } from '../../helpers/get-html-block-tag'
-import { OpenTagTracker } from '../../helpers/open-tag-tracker'
-import { removeHtmlComments } from '../../helpers/remove-html-comments'
-import { loadTransformers } from '../load-transformers'
-import { RemarkableNode } from '../remarkable-node'
-import { TransformerBlock } from '../transformer-block'
-import { TransformerList } from '../transformer-list'
+import { AbsoluteFilePath } from "../../../../domain-model/absolute-file-path"
+import { AstNodeList } from "../../../ast-node-list"
+import { getHtmlBlockTag } from "../../helpers/get-html-block-tag"
+import { OpenTagTracker } from "../../helpers/open-tag-tracker"
+import { removeHtmlComments } from "../../helpers/remove-html-comments"
+import { loadTransformers } from "../load-transformers"
+import { RemarkableNode } from "../remarkable-node"
+import { TransformerBlock } from "../transformer-block"
+import { TransformerList } from "../transformer-list"
 
 export class CustomHtmlTagTransformerBlock implements TransformerBlock {
   htmlTagTransformers: TransformerList
@@ -23,7 +23,7 @@ export class CustomHtmlTagTransformerBlock implements TransformerBlock {
 
   /** Returns whether this transformer can transform the given Remarkable node */
   canTransform(node: RemarkableNode, filepath, line): boolean {
-    if (node.type !== 'htmltag') {
+    if (node.type !== "htmltag") {
       return false
     }
     const tagName = getHtmlBlockTag(
@@ -46,12 +46,12 @@ export class CustomHtmlTagTransformerBlock implements TransformerBlock {
       filepath,
       line
     )
-    const transformer = this.htmlTagTransformers[tagName.replace('/', '_')]
+    const transformer = this.htmlTagTransformers[tagName.replace("/", "_")]
     return transformer(node, this.openTags, filepath, line)
   }
 
   /** Returns the filename that the transformer for the given RemarkableType can be found at */
   private transformerFileName(type: string): string {
-    return type.replace('/', '_')
+    return type.replace("/", "_")
   }
 }

@@ -100,8 +100,9 @@ fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix
 	node_modules$/.bin$/prettier --write 'src/**/*.ts'
 	node_modules$/.bin$/prettier --write 'features/**/*.ts'
+	node_modules$/.bin$/prettier --write 'text-run/*.js'
 	node_modules$/.bin$/prettier --write '*.md'
-	node_modules$/.bin$/prettier --write 'documentation/**/*.md'
+	# node_modules$/.bin$/prettier --write 'documentation/**/*.md'
 	node_modules$/.bin$/prettier --write '*.yml'
 
 help:   # prints all make targets
@@ -114,6 +115,7 @@ lintjs: build   # lints the javascript files
 	node_modules$/.bin$/tslint --project tsconfig.json
 	node_modules/.bin/prettier -c "src/**/*.ts"
 	node_modules/.bin/prettier -c "features/**/*.ts"
+	node_modules/.bin/prettier -c "text-run/*.js"
 
 lintmd:   # lints markdown files
 	node_modules/.bin/prettier -c "*.md"

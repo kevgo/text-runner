@@ -23,7 +23,7 @@ export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
     const configFilename = await determineConfigFilename(cmdLineArgs)
     configuration = loadConfiguration(configFilename, cmdLineArgs)
     const commandName = cmdLineArgs.command
-    let errors
+    let errors: Error[]
     switch (commandName) {
       case 'add':
         errors = await addCommand(cmdLineArgs.files)

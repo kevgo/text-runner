@@ -2,8 +2,6 @@
   "extends": "./tsconfig-build.json",
   "include": ["src/**/*", "features/support/*.ts"],
   "compilerOptions": {
-    // "allowJs": true /* Allow javascript files to be compiled. */,
-    // "checkJs": true /* Report errors in .js files. */,
     "noEmit": true /* Do not emit outputs. */
   }
 }

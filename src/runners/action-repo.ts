@@ -93,6 +93,7 @@ class ActionRepo {
   private builtinActionFilePaths(): string[] {
     return glob
       .sync(path.join(__dirname, '..', 'built-in-actions', '*.?s'))
+      .filter(name => !name.endsWith('.d.ts'))
       .map(trimExtension)
   }
 

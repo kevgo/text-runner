@@ -1,13 +1,13 @@
-import color from 'colorette'
-import jsonfile from 'jsonfile'
-import path from 'path'
-import { trimDollar } from '../helpers/trim-dollar'
-import { ActionArgs } from '../runners/action-args'
+import color from "colorette"
+import jsonfile from "jsonfile"
+import path from "path"
+import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "../runners/action-args"
 
 export default async function verifyNpmInstall(args: ActionArgs) {
-  const installText = trimDollar(args.nodes.textInNodeOfType('fence', 'code'))
+  const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
   const pkg = await jsonfile.readFile(
-    path.join(args.configuration.sourceDir, 'package.json')
+    path.join(args.configuration.sourceDir, "package.json")
   )
   args.formatter.name(`verify NPM installs ${color.cyan(pkg.name)}`)
 
@@ -24,7 +24,7 @@ function missesPackageName(installText: string, packageName: string): boolean {
   //       that NPM uses '-g' by itself, and not as a switch for the argument after it
   return (
     installText
-      .split(' ')
+      .split(" ")
       .map(word => word.trim())
       .filter(word => word === packageName).length === 0
   )

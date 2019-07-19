@@ -1,8 +1,8 @@
-import kebab from '@queso/kebab-case'
-import { UnprintedUserError } from '../errors/unprinted-user-error'
-import { AstNode } from '../parsers/ast-node'
-import { AstNodeList } from '../parsers/ast-node-list'
-import { ActivityList } from './activity-list'
+import kebab from "@queso/kebab-case"
+import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { AstNode } from "../parsers/ast-node"
+import { AstNodeList } from "../parsers/ast-node-list"
+import { ActivityList } from "./activity-list"
 
 /**
  * Returns all activities contained in the given collection of AstNodeLists.
@@ -53,7 +53,7 @@ function extractActivitiesFromNode(
 function ensureNoNestedActiveNode(node: AstNode, activeNode: AstNode | null) {
   if (activeNode) {
     throw new UnprintedUserError(
-      `${node.file.platformified()}: block ${node.type || ''} (line ${
+      `${node.file.platformified()}: block ${node.type || ""} (line ${
         node.line
       }) is nested in block ${activeNode.type} (line ${activeNode.line})`,
       node.file.platformified(),
@@ -63,7 +63,7 @@ function ensureNoNestedActiveNode(node: AstNode, activeNode: AstNode | null) {
 }
 
 function isActiveBlockTag(node: AstNode, classPrefix: string): boolean {
-  return !!node.attributes[classPrefix] && !node.type.endsWith('_close')
+  return !!node.attributes[classPrefix] && !node.type.endsWith("_close")
 }
 
 function isActiveBlockEndTag(

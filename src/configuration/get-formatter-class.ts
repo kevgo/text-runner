@@ -1,7 +1,7 @@
-import { UnprintedUserError } from '../errors/unprinted-user-error'
-import { DetailedFormatter } from '../formatters/detailed-formatter'
-import { DotFormatter } from '../formatters/dot-formatter'
-import { Formatter } from '../formatters/formatter'
+import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { DetailedFormatter } from "../formatters/detailed-formatter"
+import { DotFormatter } from "../formatters/dot-formatter"
+import { Formatter } from "../formatters/formatter"
 
 export function getFormatterClass(
   name: string | undefined,
@@ -10,10 +10,10 @@ export function getFormatterClass(
   if (!name) {
     return defaultClass
   }
-  if (name === 'dot') {
+  if (name === "dot") {
     return DotFormatter
   }
-  if (name === 'detailed') {
+  if (name === "detailed") {
     return DetailedFormatter
   }
   throw new UnprintedUserError(

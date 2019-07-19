@@ -113,23 +113,17 @@ fix:  # runs the fixers
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-lint: lintjs lintmd lintyml   # lints all files
-
-lintjs: build   # lints the javascript files
+lint: # lints all files
 	node_modules$/.bin$/tsc --noEmit
 	node_modules$/.bin$/tslint --project tsconfig.json
 	node_modules/.bin/prettier -c "src/**/*.ts"
 	node_modules/.bin/prettier -c "features/**/*.ts"
 	node_modules/.bin/prettier -c "text-run/*.js"
 	node_modules/.bin/prettier -c "documentation/examples/**/*.js"
-
-lintmd:   # lints markdown files
 	node_modules/.bin/prettier -c "*.md"
 	# node_modules/.bin/prettier -c "documentation/**/*.md"
-	node_modules$/.bin$/remark .
-
-lintyml:   # lints yml files
 	node_modules/.bin/prettier -c "*.yml"
+	node_modules$/.bin$/remark .
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

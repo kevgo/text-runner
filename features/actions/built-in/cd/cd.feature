@@ -1,3 +1,4 @@
+@debug
 Feature: changing the working directory
 
   As a documentation writer

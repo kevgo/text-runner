@@ -1,5 +1,5 @@
-import chalk from 'chalk'
 import cliCursor from 'cli-cursor'
+import color from 'colorette'
 import { endChildProcesses } from 'end-child-processes'
 import path from 'path'
 import { PrintedUserError } from '../errors/printed-user-error'
@@ -31,10 +31,10 @@ function printUserError(err: UnprintedUserError) {
   const uErr = err as UnprintedUserError
   if (uErr.filePath && uErr.line != null) {
     console.log(
-      chalk.red(`${uErr.filePath}:${uErr.line} -- ${uErr.message || ''}`)
+      color.red(`${uErr.filePath}:${uErr.line} -- ${uErr.message || ''}`)
     )
   } else {
-    console.log(chalk.red(uErr.message))
+    console.log(color.red(uErr.message))
   }
   const filePath = path.join(process.cwd(), err.filePath || '')
   printCodeFrame(console.log, filePath, err.line)

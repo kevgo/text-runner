@@ -65,7 +65,7 @@ function World() {
   }
 
   this.verifyFailure = table => {
-    const output = stripAnsi(this.process.fullOutput())
+    const output = stripAnsi(this.process.output.fullText())
     let expectedHeader
     if (table.FILENAME && table.LINE) {
       expectedHeader = `${table.FILENAME}:${table.LINE}`

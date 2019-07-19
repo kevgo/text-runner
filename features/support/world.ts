@@ -55,13 +55,13 @@ function World() {
   }
 
   this.verifyCallError = expectedError => {
-    const output = stripAnsi(this.process.fullOutput())
+    const output = stripAnsi(this.process.output.fullText())
     expect(output).to.include(expectedError)
     expect(this.process.exitCode).to.equal(1)
   }
 
   this.verifyErrormessage = expectedText => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(expectedText)
+    expect(stripAnsi(this.process.output.fullText())).to.include(expectedText)
   }
 
   this.verifyFailure = table => {
@@ -113,11 +113,11 @@ ${actual}
   }
 
   this.verifyPrintedUsageInstructions = () => {
-    expect(stripAnsi(this.process.fullOutput())).to.include('COMMANDS')
+    expect(stripAnsi(this.process.output.fullText())).to.include('COMMANDS')
   }
 
   this.verifyPrints = (expectedText: string) => {
-    const output = stripAnsi(this.process.fullOutput().trim())
+    const output = stripAnsi(this.process.output.fullText().trim())
     if (!new RegExp(expectedText.trim()).test(output)) {
       throw new Error(
         `expected to find regex '${expectedText.trim()}' in '${output}'`
@@ -126,14 +126,14 @@ ${actual}
   }
 
   this.verifyPrintsNot = (text: string) => {
-    const output = stripAnsi(this.process.fullOutput())
+    const output = stripAnsi(this.process.output.fullText())
     if (new RegExp(text).test(output)) {
       throw new Error(`expected to not find regex '${text}' in '${output}'`)
     }
   }
 
   this.verifyRanConsoleCommand = (command: string) => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(
+    expect(stripAnsi(this.process.output.fullText())).to.include(
       `running console command: ${command}`
     )
   }
@@ -161,13 +161,13 @@ ${actual}
   }
 
   this.verifyTestsRun = (count: number) => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(
+    expect(stripAnsi(this.process.output.fullText())).to.include(
       ` ${count} activities`
     )
   }
 
   this.verifyUnknownCommand = (command: string) => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(
+    expect(stripAnsi(this.process.output.fullText())).to.include(
       `unknown command: ${command}`
     )
   }

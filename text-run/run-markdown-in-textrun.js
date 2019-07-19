@@ -26,7 +26,7 @@ module.exports = async function runMarkdownInTextrun(args) {
     stderr: args.formatter.stderr
   })
   await processor.waitForEnd()
-  debug(processor.fullOutput())
+  debug(processor.output.fullText())
   if (processor.exitCode !== 0) {
     throw new Error(
       `text-run exited with code ${processor.exitCode} when processing this markdown block.`

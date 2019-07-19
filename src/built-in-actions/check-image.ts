@@ -1,23 +1,23 @@
-import color from 'colorette'
-import fs from 'fs-extra'
-import got from 'got'
-import path from 'path'
-import { Configuration } from '../configuration/configuration'
-import { Formatter } from '../formatters/formatter'
-import { ActionArgs } from '../runners/action-args'
+import color from "colorette"
+import fs from "fs-extra"
+import got from "got"
+import path from "path"
+import { Configuration } from "../configuration/configuration"
+import { Formatter } from "../formatters/formatter"
+import { ActionArgs } from "../runners/action-args"
 
 // Checks for broken hyperlinks
 export default async function checkImage(args: ActionArgs) {
   const node = args.nodes[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
-    throw new Error('image tag without source')
+    throw new Error("image tag without source")
   }
   args.formatter.name(`image ${color.cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
     await checkRemoteImage(imagePath, args.formatter, args.configuration)
   } else {
-    if (!imagePath.startsWith('/')) {
+    if (!imagePath.startsWith("/")) {
       imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
     }
     await checkLocalImage(imagePath, args.configuration)
@@ -53,9 +53,9 @@ async function checkRemoteImage(url: string, f: Formatter, c: Configuration) {
 function isRemoteImage(imagePath: string): boolean {
   if (imagePath != null) {
     return (
-      imagePath.startsWith('//') ||
-      imagePath.startsWith('http://') ||
-      imagePath.startsWith('https://')
+      imagePath.startsWith("//") ||
+      imagePath.startsWith("http://") ||
+      imagePath.startsWith("https://")
     )
   } else {
     return false

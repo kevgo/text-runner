@@ -1,17 +1,18 @@
-import color from 'colorette'
-import { addCommand } from './commands/add'
-import { debugCommand } from './commands/debug'
-import { dynamicCommand } from './commands/dynamic'
-import { helpCommand } from './commands/help'
-import { runCommand } from './commands/run'
-import { setupCommand } from './commands/setup'
-import { staticCommand } from './commands/static'
-import { unusedCommand } from './commands/unused'
-import { versionCommand } from './commands/version'
-import { Configuration } from './configuration/configuration'
-import { determineConfigFilename } from './configuration/determine-config-filename'
-import { loadConfiguration } from './configuration/load-configuration'
-import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
+import color from "colorette"
+import { addCommand } from "./commands/add"
+import { debugCommand } from "./commands/debug"
+import { dynamicCommand } from "./commands/dynamic"
+import { helpCommand } from "./commands/help"
+import { runCommand } from "./commands/run"
+import { setupCommand } from "./commands/setup"
+import { staticCommand } from "./commands/static"
+import { unusedCommand } from "./commands/unused"
+import { versionCommand } from "./commands/version"
+import { Configuration } from "./configuration/configuration"
+import { determineConfigFilename } from "./configuration/determine-config-filename"
+import { determineConfiguration } from "./configuration/determine-configuration"
+import { loadConfigFile } from "./configuration/load-config-file"
+import { UserProvidedConfiguration } from "./configuration/user-provided-configuration"
 
 /**
  * Tests the documentation in the given directory
@@ -23,39 +24,40 @@ export async function textRunner(
   let configuration: Configuration | undefined
   try {
     const configFilePath = await determineConfigFilename(cmdlineArgs)
-    configuration = loadConfiguration(configFilePath, cmdlineArgs)
+    const configFileData = loadConfigFile(configFilePath)
+    configuration = determineConfiguration(configFileData, cmdlineArgs)
     const commandName = cmdlineArgs.command
     let errors: Error[]
     switch (commandName) {
-      case 'add':
+      case "add":
         errors = await addCommand(cmdlineArgs.fileGlob)
         return errors
-      case 'debug':
+      case "debug":
         errors = await debugCommand(configuration)
         return errors
-      case 'dynamic':
+      case "dynamic":
         errors = await dynamicCommand(configuration)
         return errors
-      case 'help':
+      case "help":
         await helpCommand()
         return []
-      case 'run':
+      case "run":
         errors = await runCommand(configuration)
         return errors
-      case 'setup':
+      case "setup":
         await setupCommand()
         return []
-      case 'static':
+      case "static":
         errors = await staticCommand(configuration)
         return errors
-      case 'unused':
+      case "unused":
         await unusedCommand(configuration)
         return []
-      case 'version':
+      case "version":
         await versionCommand()
         return []
       default:
-        console.log(color.red(`unknown command: ${commandName || ''}`))
+        console.log(color.red(`unknown command: ${commandName || ""}`))
         return []
     }
   } catch (err) {

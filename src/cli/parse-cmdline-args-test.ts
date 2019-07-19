@@ -1,10 +1,10 @@
 import { expect } from 'chai'
-import { parseCliArgs } from '../../src/cli/parse-cli-args'
+import { parseCmdlineArgs } from '../../src/cli/parse-cmdline-args'
 
-describe('parse-cli-args', function() {
+describe('parse-cmdline-args', function() {
   context('with unix <node> call', function() {
     beforeEach(function() {
-      this.result = parseCliArgs([
+      this.result = parseCmdlineArgs([
         '/usr/local/Cellar/node/9.3.0_1/bin/node',
         '/Users/kevlar/d/text-runner/bin/text-run',
         'run'
@@ -18,7 +18,7 @@ describe('parse-cli-args', function() {
 
   context('with windows <node> call', function() {
     beforeEach(function() {
-      this.result = parseCliArgs([
+      this.result = parseCmdlineArgs([
         'C:\\Program Files (x86)\\nodejs\\node.exe',
         'C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli\\cli.js',
         'run'
@@ -36,7 +36,7 @@ describe('parse-cli-args', function() {
 
   context('with <node> and <text-run> call', function() {
     beforeEach(function() {
-      this.result = parseCliArgs([
+      this.result = parseCmdlineArgs([
         '/usr/local/Cellar/node/9.3.0_1/bin/node',
         '/Users/kevlar/d/text-runner/bin/text-run',
         'run'
@@ -50,7 +50,7 @@ describe('parse-cli-args', function() {
 
   context('with <text-run> call', function() {
     beforeEach(function() {
-      this.result = parseCliArgs([
+      this.result = parseCmdlineArgs([
         '/Users/kevlar/d/text-runner/bin/text-run',
         'run'
       ])
@@ -63,7 +63,10 @@ describe('parse-cli-args', function() {
 
   context('--offline <file>', function() {
     beforeEach(function() {
-      this.result = parseCliArgs(['--offline', 'documentation/actions/cd.md'])
+      this.result = parseCmdlineArgs([
+        '--offline',
+        'documentation/actions/cd.md'
+      ])
     })
 
     it('returns the "run" command', function() {
@@ -81,7 +84,7 @@ describe('parse-cli-args', function() {
 
   context('<file>', function() {
     beforeEach(function() {
-      this.result = parseCliArgs(['documentation/actions/cd.md'])
+      this.result = parseCmdlineArgs(['documentation/actions/cd.md'])
     })
 
     it('returns the "run" command', function() {
@@ -95,7 +98,7 @@ describe('parse-cli-args', function() {
 
   context('(no args)', function() {
     beforeEach(function() {
-      this.result = parseCliArgs([])
+      this.result = parseCmdlineArgs([])
     })
 
     it('returns the "run" command', function() {
@@ -109,7 +112,7 @@ describe('parse-cli-args', function() {
 
   context('--format dot', function() {
     beforeEach(function() {
-      this.result = parseCliArgs(['--format', 'dot'])
+      this.result = parseCmdlineArgs(['--format', 'dot'])
     })
 
     it('returns the "run" command', function() {
@@ -123,15 +126,33 @@ describe('parse-cli-args', function() {
 
   context('--workspace foo/bar', function() {
     beforeEach(function() {
-      this.result = parseCliArgs(['--workspace', 'foo/bar'])
+      this.result = parseCmdlineArgs(['--workspace', 'foo/bar'])
     })
 
     it('returns the "run" command', function() {
       expect(this.result.command).to.equal('run')
     })
 
-    it('returns the dot formatter option', function() {
+    it('returns the foo/bar workspace', function() {
       expect(this.result.workspace).to.equal('foo/bar')
+    })
+  })
+
+  context('--keep-tmp', function() {
+    beforeEach(function() {
+      this.result = parseCmdlineArgs(['--keep-tmp', 'foo.md'])
+    })
+
+    it('returns the "run" command', function() {
+      expect(this.result.command).to.equal('run')
+    })
+
+    it('sets the keep-tmp flag', function() {
+      expect(this.result['keep-tmp']).to.be.true
+    })
+
+    it('returns "foo.md" as the filename', function() {
+      expect(this.result.files).to.equal('foo.md')
     })
   })
 })

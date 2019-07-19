@@ -9,9 +9,9 @@ import { staticCommand } from './commands/static'
 import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
-import { determineConfigFilename } from './configuration/determine-config-filename'
+import { determineConfigFilename } from './configuration/config-file/determine-config-filename'
 import { determineConfiguration } from './configuration/determine-configuration'
-import { loadConfigFile } from './configuration/load-config-file'
+import { loadConfigFile } from './configuration/config-file/load-config-file'
 import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
 
 /**

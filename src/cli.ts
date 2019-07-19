@@ -2,11 +2,11 @@ import cliCursor from 'cli-cursor'
 import color from 'colorette'
 import { endChildProcesses } from 'end-child-processes'
 import path from 'path'
-import { PrintedUserError } from '../errors/printed-user-error'
-import { UnprintedUserError } from '../errors/unprinted-user-error'
-import { printCodeFrame } from '../helpers/print-code-frame'
-import { textRunner } from '../text-runner'
-import { parseCmdlineArgs } from './parse-cmdline-args'
+import { parseCmdlineArgs } from './configuration/cli/parse-cmdline-args'
+import { PrintedUserError } from './errors/printed-user-error'
+import { UnprintedUserError } from './errors/unprinted-user-error'
+import { printCodeFrame } from './helpers/print-code-frame'
+import { textRunner } from './text-runner'
 
 cliCursor.hide()
 

@@ -1,3 +1,4 @@
+@smoke
 Feature: unknown command
 
   As a user accidentally running a wrong command

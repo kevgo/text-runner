@@ -79,6 +79,10 @@ cuke-tagtypes:   # test coverage for CLI specs
 cuke-offline: build   # runs the feature specs that don't need an online connection
 	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress
 
+cuke-smoke-win:  # runs the smoke tests
+	@node_modules\.bin\cucumber-js --tags '@smoke' --format progress
+
+
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
 	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress

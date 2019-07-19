@@ -1,3 +1,4 @@
+@smoke
 Feature: specifying the configuration filename
 
   When working on a repo that contains public content and internal documentation for it
@@ -36,4 +37,3 @@ Feature: specifying the configuration filename
     Then the test fails with:
       | ERROR MESSAGE | configuration file zonk.yml not found |
       | EXIT CODE     | 1                                     |
-

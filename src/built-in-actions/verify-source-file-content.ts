@@ -1,5 +1,5 @@
 import * as assertNoDiff from 'assert-no-diff'
-import chalk from 'chalk'
+import color from 'colorette'
 import eol from 'eol'
 import fs from 'fs-extra'
 import path from 'path'
@@ -14,7 +14,7 @@ export default async function verifySourceFileContent(args: ActionArgs) {
   }
   const expectedContent = args.nodes.textInNodeOfType('fence')
   args.formatter.name(
-    `verifying document content matches source code file ${chalk.cyan(
+    `verifying document content matches source code file ${color.cyan(
       fileName
     )}`
   )
@@ -30,7 +30,7 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     actualContent = await fs.readFile(filePath, 'utf8')
   } catch (err) {
     if (err.code === 'ENOENT') {
-      throw new Error(`file ${chalk.cyan(fileName)} not found`)
+      throw new Error(`file ${color.cyan(fileName)} not found`)
     } else {
       throw err
     }
@@ -42,7 +42,7 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     )
   } catch (err) {
     throw new Error(
-      `mismatching content in ${chalk.cyan(chalk.bold(filePath))}:\n${
+      `mismatching content in ${color.cyan(color.bold(filePath))}:\n${
         err.message
       }`
     )

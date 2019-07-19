@@ -1,3 +1,4 @@
+@smoke
 Feature: verifying the output of the last console command
 
   As a documentation writer

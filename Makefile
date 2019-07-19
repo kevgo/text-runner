@@ -8,7 +8,7 @@ else
 endif
 
 build: clean    # builds for the current platform
-	@node_modules$/.bin$/tsc -p .
+	@node_modules$/.bin$/tsc -p tsconfig-build.json
 
 clean:   # Removes all build artifacts
 	@rm -rf dist
@@ -79,6 +79,10 @@ cuke-tagtypes:   # test coverage for CLI specs
 cuke-offline: build   # runs the feature specs that don't need an online connection
 	@EXOSERVICE_TEST_DEPTH=CLI node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress
 
+cuke-smoke-win:  # runs the smoke tests
+	@node_modules\.bin\cucumber-js --tags '@smoke' --format progress
+
+
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
 	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
@@ -104,26 +108,22 @@ fix:  # runs the fixers
 	node_modules$/.bin$/prettier --write '*.md'
 	# node_modules$/.bin$/prettier --write 'documentation/**/*.md'
 	node_modules$/.bin$/prettier --write '*.yml'
+	node_modules/.bin/prettier --write "documentation/examples/**/*.js"
 
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-lint: lintjs lintmd lintyml   # lints all files
-
-lintjs: build   # lints the javascript files
-	node_modules$/.bin$/tsc --noEmit
-	node_modules$/.bin$/tslint --project tsconfig.json
+lint: # lints all files
+	node_modules$/.bin$/tsc -p tsconfig.json
+	node_modules$/.bin$/tslint --project tsconfig-build.json
 	node_modules/.bin/prettier -c "src/**/*.ts"
 	node_modules/.bin/prettier -c "features/**/*.ts"
 	node_modules/.bin/prettier -c "text-run/*.js"
-
-lintmd:   # lints markdown files
+	node_modules/.bin/prettier -c "documentation/examples/**/*.js"
 	node_modules/.bin/prettier -c "*.md"
 	# node_modules/.bin/prettier -c "documentation/**/*.md"
-	node_modules$/.bin$/remark .
-
-lintyml:   # lints yml files
 	node_modules/.bin/prettier -c "*.yml"
+	node_modules$/.bin$/remark .
 
 setup:   # sets up the installation on this machine
 	go get github.com/tj/node-prune

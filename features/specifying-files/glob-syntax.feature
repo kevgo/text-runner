@@ -1,3 +1,4 @@
+@smoke
 Feature: finding files in certain directories only
 
   As a TextRunner user

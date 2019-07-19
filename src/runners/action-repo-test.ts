@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import { actionRepo } from '../../dist/runners/action-repo'
 import { scaffoldActivity } from '../activity-list/activity'
+import { actionRepo } from './action-repo'
 
 describe('actionRepo', function() {
   describe('actionFor', function() {
@@ -16,8 +16,8 @@ describe('actionRepo', function() {
     it('returns the names of all built-in actions', function() {
       const result = actionRepo.customActionNames()
       expect(result).to.eql([
-        'cd-back',
         'cd-into-empty-tmp-folder',
+        'cd-workspace',
         'create-markdown-file',
         'run-markdown-in-textrun',
         'run-textrun',

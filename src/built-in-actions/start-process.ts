@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import deb from 'debug'
 import { ObservableProcess } from 'observable-process'
 import path from 'path'
@@ -15,7 +15,7 @@ const debug = deb('start-console-command')
 export default async function startProcess(args: ActionArgs) {
   const commandsToRun = getCommandsToRun(args)
   args.formatter.name(
-    `starting a long-running process: ${chalk.bold(chalk.cyan(commandsToRun))}`
+    `starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`
   )
   RunningProcess.instance().set(
     new ObservableProcess({

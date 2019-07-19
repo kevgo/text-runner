@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 
 export async function helpCommand(error?: string) {
   console.log(template(error))
@@ -6,36 +6,36 @@ export async function helpCommand(error?: string) {
 
 function template(error: string | undefined) {
   if (error) {
-    error = `${chalk.red(chalk.bold('Error: ' + error))}`
+    error = `${color.red(color.bold('Error: ' + error))}`
   }
   const { version } = require('../../package.json')
 
   return `
-${chalk.dim('TextRunner ' + version)}
+${color.dim('TextRunner ' + version)}
 ${error || ''}
-USAGE: ${chalk.bold('text-run [<options>] <command>')}
+USAGE: ${color.bold('text-run [<options>] <command>')}
 
 COMMANDS
-  ${chalk.bold(
+  ${color.bold(
     'run'
   )} [<filename>]      runs all tests on the given file/folder or entire documentation
-  ${chalk.bold(
+  ${color.bold(
     'dynamic'
   )} [<filename>]  runs only the programmatic tests, skips checking links
-  ${chalk.bold(
+  ${color.bold(
     'static'
   )} [<filename>]   checks only the links, skips programmatic tests
 
-  ${chalk.bold('setup')}                 creates an example configuration file
-  ${chalk.bold('add')} <filename>        scaffolds a new block type handler
-  ${chalk.bold('unused')} <filename>     shows unused custom activities
+  ${color.bold('setup')}                 creates an example configuration file
+  ${color.bold('add')} <filename>        scaffolds a new block type handler
+  ${color.bold('unused')} <filename>     shows unused custom activities
 
-  ${chalk.bold('help')}                  shows this help screen
-  ${chalk.bold('version')}               shows the currently installed version
-  ${chalk.bold('debug')}                 shows debug data
+  ${color.bold('help')}                  shows this help screen
+  ${color.bold('version')}               shows the currently installed version
+  ${color.bold('debug')}                 shows debug data
 
 OPTIONS
-  ${chalk.bold('--config')}              provide a custom configuration filename
-  ${chalk.bold('--offline')}             don't check external links
+  ${color.bold('--config')}              provide a custom configuration filename
+  ${color.bold('--offline')}             don't check external links
 `
 }

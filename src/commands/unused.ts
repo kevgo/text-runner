@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import { extractActivities } from '../activity-list/extract-activities'
 import { Configuration } from '../configuration/configuration'
 import { getFileNames } from '../finding-files/get-filenames'
@@ -9,7 +9,7 @@ export async function unusedCommand(config: Configuration) {
   // step 1: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    console.log(chalk.magenta('no Markdown files found'))
+    console.log(color.magenta('no Markdown files found'))
     return
   }
 

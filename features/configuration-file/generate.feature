@@ -23,7 +23,7 @@ Feature: generating a configuration file
 
       # black-list of files not to test
       # This is applied after the white-list above.
-      exclude: ''
+      exclude: []
 
       # the formatter to use (detailed, dot)
       format: detailed

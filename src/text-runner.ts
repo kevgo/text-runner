@@ -11,6 +11,7 @@ import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { loadConfiguration } from './configuration/load-configuration'
 import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
+import { determineConfigFilename } from './determine-config-filename'
 
 /**
  * Tests the documentation in the given directory
@@ -21,7 +22,8 @@ export async function textRunner(
 ): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
-    configuration = await loadConfiguration(cmdLineArgs)
+    const configFilePath = await determineConfigFilename(cmdlineArgs)
+    configuration = await loadConfiguration(configFilePath, cmdLineArgs)
     const commandName = cmdLineArgs.command
     let errors: Error[]
     switch (commandName) {

@@ -1,6 +1,5 @@
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { Configuration } from './configuration'
-import { determineConfigFilename } from './determine-config-filename'
 import { getFormatterClass } from './get-formatter-class'
 import { loadConfigFile } from './load-config-file'
 import { Publications } from './publications'
@@ -28,9 +27,9 @@ const defaultValues: Configuration = {
  * @param cmdlineArgs arguments received on the command line
  */
 export async function loadConfiguration(
+  configFilePath: string,
   cmdlineArgs: UserProvidedConfiguration
 ): Promise<Configuration> {
-  const configFilePath = await determineConfigFilename(cmdlineArgs)
   const fileData = loadConfigFile(configFilePath)
   const userProvided = { ...fileData, ...cmdlineArgs }
 

@@ -1,13 +1,10 @@
-import camelCase from 'camelcase'
-import deb from 'debug'
-import YAML from 'yamljs'
-import { CmdlineArgs } from '../cli/cmdline-args'
+import { UserProvidedConfiguration } from '../cli/cmdline-args'
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { Configuration } from './configuration'
+import { determineConfigFilename } from './configuration/determine-config-filename'
 import { getFormatterClass } from './get-formatter-class'
+import { loadConfigFile } from './load-config-file'
 import { Publications } from './publications'
-
-const debug = deb('textrun:configuration')
 
 const defaultValues: Configuration = {
   FormatterClass: DetailedFormatter,
@@ -30,24 +27,25 @@ const defaultValues: Configuration = {
  * @param configFilePath path of the config file
  * @param cmdlineArgs arguments received on the command line
  */
-export function loadConfiguration(
-  configFilePath: string,
-  cmdlineArgs: CmdlineArgs
-): Configuration {
-  let fileData: any = {}
-  if (configFilePath) {
-    debug(`loading configuration file: ${configFilePath}`)
-    fileData = YAML.load(configFilePath) || {}
-  }
-  debug(`configuration file data: ${JSON.stringify(this.fileData)}`)
+export async function loadConfiguration(
+  cmdlineArgs: UserProvidedConfiguration
+): Promise<Configuration> {
+  const configFilePath = await determineConfigFilename(cmdlineArgs)
+  const fileData = loadConfigFile(configFilePath)
+  const userProvided = { ...fileData, ...cmdlineArgs }
 
   function get(attributeName: string): string {
-    const camelized = camelCase(attributeName)
-    return (
-      cmdlineArgs[attributeName] ||
-      fileData[camelized] ||
-      defaultValues[camelized]
-    )
+    if (userProvided[attributeName] != null) {
+      return userProvided[attributeName]
+    }
+    return defaultValues[attributeName]
+  }
+
+  function getB(attributeName: string): boolean {
+    if (userProvided[attributeName] != null) {
+      return userProvided[attributeName]
+    }
+    return defaultValues[attributeName]
   }
 
   return {
@@ -55,18 +53,18 @@ export function loadConfiguration(
       get('format'),
       defaultValues.FormatterClass
     ),
-    actions: fileData.actions ? fileData.actions : defaultValues.actions,
-    classPrefix: get('class-prefix'),
-    defaultFile: get('default-file'),
+    actions: get('actions'),
+    classPrefix: get('classPrefix'),
+    defaultFile: get('defaultFile'),
     exclude: get('exclude'),
-    fileGlob: get('files') || defaultValues.fileGlob,
-    keepTmp: String(get('keep-tmp')) === 'true',
-    offline: String(get('offline')) === 'true',
+    fileGlob: get('fileGlob'),
+    keepTmp: getB('keepTmp'),
+    offline: getB('offline'),
     publications:
       Publications.fromJSON(fileData.publications || []).sorted() ||
       defaultValues.publications,
-    sourceDir: get('source-dir'),
-    useSystemTempDirectory: String(get('use-system-temp-directory')) === 'true',
-    workspace: get('workspace') || ''
+    sourceDir: get('sourceDir'),
+    useSystemTempDirectory: getB('useSystemTempDirectory'),
+    workspace: get('workspace')
   }
 }

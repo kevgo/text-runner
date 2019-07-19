@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { CmdlineArgs } from './cli/cmdline-args'
+import { UserProvidedConfiguration } from './cli/cmdline-args'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
 import { dynamicCommand } from './commands/dynamic'
@@ -10,18 +10,18 @@ import { staticCommand } from './commands/static'
 import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
-import { determineConfigFilename } from './configuration/determine-config-filename'
 import { loadConfiguration } from './configuration/load-configuration'
 
 /**
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
-export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
+export async function textRunner(
+  cmdLineArgs: UserProvidedConfiguration
+): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
-    const configFilename = await determineConfigFilename(cmdLineArgs)
-    configuration = loadConfiguration(configFilename, cmdLineArgs)
+    configuration = await loadConfiguration(cmdLineArgs)
     const commandName = cmdLineArgs.command
     let errors
     switch (commandName) {

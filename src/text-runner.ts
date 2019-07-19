@@ -9,26 +9,26 @@ import { staticCommand } from './commands/static'
 import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
+import { determineConfigFilename } from './configuration/determine-config-filename'
 import { loadConfiguration } from './configuration/load-configuration'
 import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
-import { determineConfigFilename } from './determine-config-filename'
 
 /**
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
 export async function textRunner(
-  cmdLineArgs: UserProvidedConfiguration
+  cmdlineArgs: UserProvidedConfiguration
 ): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
     const configFilePath = await determineConfigFilename(cmdlineArgs)
-    configuration = await loadConfiguration(configFilePath, cmdLineArgs)
-    const commandName = cmdLineArgs.command
+    configuration = await loadConfiguration(configFilePath, cmdlineArgs)
+    const commandName = cmdlineArgs.command
     let errors: Error[]
     switch (commandName) {
       case 'add':
-        errors = await addCommand(cmdLineArgs.fileGlob)
+        errors = await addCommand(cmdlineArgs.fileGlob)
         return errors
       case 'debug':
         errors = await debugCommand(configuration)

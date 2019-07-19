@@ -1,5 +1,5 @@
 import chalk from 'chalk'
-import { CliArgTypes } from './cli/cli-arg-types'
+import { CmdlineArgs } from './cli/cmdline-args'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
 import { dynamicCommand } from './commands/dynamic'
@@ -17,7 +17,7 @@ import { loadConfiguration } from './configuration/load-configuration'
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
-export async function textRunner(cmdLineArgs: CliArgTypes): Promise<Error[]> {
+export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
     const configFilename = await determineConfigFilename(cmdLineArgs)

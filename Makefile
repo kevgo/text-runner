@@ -8,7 +8,7 @@ else
 endif
 
 build: clean    # builds for the current platform
-	@node_modules$/.bin$/tsc -p .
+	@node_modules$/.bin$/tsc -p tsconfig-build.json
 
 clean:   # Removes all build artifacts
 	@rm -rf dist
@@ -114,8 +114,8 @@ help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint: # lints all files
-	node_modules$/.bin$/tsc --noEmit
-	node_modules$/.bin$/tslint --project tsconfig.json
+	node_modules$/.bin$/tsc -p tsconfig.json
+	node_modules$/.bin$/tslint --project tsconfig-build.json
 	node_modules/.bin/prettier -c "src/**/*.ts"
 	node_modules/.bin/prettier -c "features/**/*.ts"
 	node_modules/.bin/prettier -c "text-run/*.js"

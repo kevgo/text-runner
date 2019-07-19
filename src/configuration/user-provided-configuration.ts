@@ -1,3 +1,5 @@
+import { Publications } from './publications'
+
 /**
  * data structure for arguments provided by the user,
  * either via command line or via config file
@@ -11,5 +13,6 @@ export interface UserProvidedConfiguration {
   formatterName?: string // name of the formatter to use
   keepTmp?: boolean
   offline?: boolean
+  publications?: Publications
   workspace?: string // path of the workspace to use
 }

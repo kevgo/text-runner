@@ -53,7 +53,9 @@ export async function textRunner(
         await versionCommand()
         return []
       default:
-        console.log(chalk.red(`unknown command: ${chalk.red(commandName)}`))
+        console.log(
+          chalk.red(`unknown command: ${chalk.red(commandName || '')}`)
+        )
         return []
     }
   } catch (err) {

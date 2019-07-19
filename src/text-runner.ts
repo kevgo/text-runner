@@ -8,10 +8,10 @@ import { setupCommand } from './commands/setup'
 import { staticCommand } from './commands/static'
 import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
-import { Configuration } from './configuration/configuration'
 import { determineConfigFilename } from './configuration/config-file/determine-config-filename'
-import { determineConfiguration } from './configuration/determine-configuration'
 import { loadConfigFile } from './configuration/config-file/load-config-file'
+import { Configuration } from './configuration/configuration'
+import { determineConfiguration } from './configuration/determine-configuration'
 import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
 
 /**

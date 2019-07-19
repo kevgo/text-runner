@@ -1,15 +1,15 @@
-const { callArgs } = require('../dist/helpers/call-args')
-const { ObservableProcess } = require('observable-process')
-const path = require('path')
+const { callArgs } = require("../dist/helpers/call-args")
+const { ObservableProcess } = require("observable-process")
+const path = require("path")
 const {
   RunningConsoleCommand
-} = require('../dist/built-in-actions/helpers/running-console-command')
+} = require("../dist/built-in-actions/helpers/running-console-command")
 
 module.exports = async function runTextrun(args) {
-  args.formatter.name('running the created Markdown file in TextRunner')
+  args.formatter.name("running the created Markdown file in TextRunner")
 
-  var textRunPath = path.join(__dirname, '..', 'bin', 'text-run')
-  if (process.platform === 'win32') textRunPath += '.cmd'
+  var textRunPath = path.join(__dirname, "..", "bin", "text-run")
+  if (process.platform === "win32") textRunPath += ".cmd"
   const processor = new ObservableProcess({
     commands: callArgs(textRunPath),
     cwd: args.configuration.workspace,
@@ -23,5 +23,5 @@ module.exports = async function runTextrun(args) {
       `text-run exited with code ${processor.exitCode} when processing the created Markdown file`
     )
   }
-  global['consoleCommandOutput'] = processor.fullOutput()
+  global["consoleCommandOutput"] = processor.fullOutput()
 }

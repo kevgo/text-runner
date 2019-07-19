@@ -1,23 +1,23 @@
-import { DetailedFormatter } from '../formatters/detailed-formatter'
-import { mergeConfigurations } from '../helpers/merge-configurations'
-import { Configuration } from './configuration'
-import { getFormatterClass } from './get-formatter-class'
-import { Publications } from './publications'
-import { UserProvidedConfiguration } from './user-provided-configuration'
+import { DetailedFormatter } from "../formatters/detailed-formatter"
+import { mergeConfigurations } from "../helpers/merge-configurations"
+import { Configuration } from "./configuration"
+import { getFormatterClass } from "./get-formatter-class"
+import { Publications } from "./publications"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 const defaultValues: Configuration = {
   FormatterClass: DetailedFormatter,
   actions: {},
-  classPrefix: 'textrun',
-  defaultFile: '',
+  classPrefix: "textrun",
+  defaultFile: "",
   exclude: [],
-  fileGlob: '**/*.md',
+  fileGlob: "**/*.md",
   keepTmp: false,
   offline: false,
   publications: new Publications(),
   sourceDir: process.cwd(),
   useSystemTempDirectory: false,
-  workspace: '' // will be populated later
+  workspace: "" // will be populated later
 }
 
 /**
@@ -32,13 +32,13 @@ export function determineConfiguration(
 ): Configuration {
   // merge the configs
   const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
-  result['FormatterClass'] = getFormatterClass(
-    result['formatterName'],
+  result["FormatterClass"] = getFormatterClass(
+    result["formatterName"],
     defaultValues.FormatterClass
   )
-  result['publications'] = Publications.fromJSON(
-    result['publications']
+  result["publications"] = Publications.fromJSON(
+    result["publications"]
   ).sorted()
-  delete result['formatterName']
+  delete result["formatterName"]
   return result as Configuration
 }

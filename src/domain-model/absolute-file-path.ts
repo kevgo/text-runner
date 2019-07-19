@@ -27,7 +27,7 @@ export class AbsoluteFilePath {
     if (this.isDirectory()) {
       return this
     }
-    return new AbsoluteFilePath(path.dirname(this.value) + '/')
+    return new AbsoluteFilePath(path.dirname(this.value) + "/")
   }
 
   /**
@@ -41,7 +41,7 @@ export class AbsoluteFilePath {
    * Returns whether this file path points to a directory
    */
   isDirectory(): boolean {
-    return this.value.endsWith('/')
+    return this.value.endsWith("/")
   }
 
   /**
@@ -72,8 +72,8 @@ export class AbsoluteFilePath {
   }
 }
 
-import path from 'path'
-import { Publications } from '../configuration/publications'
-import { removeLeadingSlash } from '../helpers/remove-leading-slash'
-import { unixify } from '../helpers/unixify'
-import { AbsoluteLink } from './absolute-link'
+import path from "path"
+import { Publications } from "../configuration/publications"
+import { removeLeadingSlash } from "../helpers/remove-leading-slash"
+import { unixify } from "../helpers/unixify"
+import { AbsoluteLink } from "./absolute-link"

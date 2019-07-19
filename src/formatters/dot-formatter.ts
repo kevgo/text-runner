@@ -1,7 +1,7 @@
-import color from 'colorette'
-import path from 'path'
-import { printCodeFrame } from '../helpers/print-code-frame'
-import { Formatter } from './formatter'
+import color from "colorette"
+import path from "path"
+import { printCodeFrame } from "../helpers/print-code-frame"
+import { Formatter } from "./formatter"
 
 export class DotFormatter extends Formatter {
   // A minimalistic formatter, prints dots for each check
@@ -25,16 +25,16 @@ export class DotFormatter extends Formatter {
 
   skip(message: string) {
     super.skip(message)
-    process.stdout.write(color.cyan('.'))
+    process.stdout.write(color.cyan("."))
   }
 
   success() {
     super.success()
-    process.stdout.write(color.green('.'))
+    process.stdout.write(color.green("."))
   }
 
   warning(warningMessage: string) {
     super.warning(warningMessage)
-    process.stdout.write(color.magenta('.'))
+    process.stdout.write(color.magenta("."))
   }
 }

@@ -1,9 +1,9 @@
-import kebab from '@queso/kebab-case'
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
-import { AstNode } from '../parsers/ast-node'
-import { AstNodeList } from '../parsers/ast-node-list'
-import { LinkTarget } from './link-target'
-import { LinkTargetTypes } from './link-target-types'
+import kebab from "@queso/kebab-case"
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AstNode } from "../parsers/ast-node"
+import { AstNodeList } from "../parsers/ast-node-list"
+import { LinkTarget } from "./link-target"
+import { LinkTargetTypes } from "./link-target-types"
 
 export class LinkTargetList {
   targets: { [key: string]: LinkTarget[] }
@@ -16,9 +16,9 @@ export class LinkTargetList {
     for (const node of nodeList) {
       const key = node.file.platformified()
       this.targets[key] = this.targets[key] || []
-      if (node.type === 'anchor_open') {
+      if (node.type === "anchor_open") {
         this.addAnchor(node)
-      } else if (node.type === 'heading_open') {
+      } else if (node.type === "heading_open") {
         this.addHeading(node, nodeList)
       }
     }
@@ -31,7 +31,7 @@ export class LinkTargetList {
     if (!node.attributes.name) {
       return
     }
-    this.addLinkTarget(node.file, 'anchor', node.attributes.name)
+    this.addLinkTarget(node.file, "anchor", node.attributes.name)
   }
 
   addHeading(node: AstNode, nodeList: AstNodeList) {
@@ -39,7 +39,7 @@ export class LinkTargetList {
     if (!content) {
       return
     }
-    this.addLinkTarget(node.file, 'heading', content)
+    this.addLinkTarget(node.file, "heading", content)
   }
 
   addLinkTarget(

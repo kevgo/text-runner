@@ -1,1 +1,1 @@
-type LinkTargetTypes = 'heading' | 'anchor'
+export type LinkTargetTypes = 'heading' | 'anchor'

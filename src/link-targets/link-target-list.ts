@@ -3,6 +3,7 @@ import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
 import { AstNode } from '../parsers/ast-node'
 import { AstNodeList } from '../parsers/ast-node-list'
 import { LinkTarget } from './link-target'
+import { LinkTargetTypes } from './link-target-types'
 
 export class LinkTargetList {
   targets: { [key: string]: LinkTarget[] }

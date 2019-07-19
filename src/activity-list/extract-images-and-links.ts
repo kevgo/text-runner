@@ -1,6 +1,7 @@
 import { AstNodeList } from '../parsers/ast-node-list'
 import { ActivityList } from './activity-list'
 
+/** extracts activities that check images and links from the given ActivityLists */
 export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
   const result: ActivityList = []
   for (const AST of ASTs) {

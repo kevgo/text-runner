@@ -1,7 +1,6 @@
 import { DetailedFormatter } from '../formatters/detailed-formatter'
 import { Configuration } from './configuration'
 import { getFormatterClass } from './get-formatter-class'
-import { loadConfigFile } from './load-config-file'
 import { Publications } from './publications'
 import { UserProvidedConfiguration } from './user-provided-configuration'
 
@@ -27,17 +26,15 @@ const defaultValues: Configuration = {
  * @param cmdlineArgs arguments received on the command line
  */
 export function loadConfiguration(
-  configFilePath: string,
+  configFileData: UserProvidedConfiguration,
   cmdlineArgs: UserProvidedConfiguration
 ): Configuration {
-  const fileData = loadConfigFile(configFilePath)
-
   function get(attributeName: string): string {
     if (cmdlineArgs[attributeName] != null) {
       return cmdlineArgs[attributeName]
     }
-    if (fileData[attributeName] != null) {
-      return fileData[attributeName]
+    if (configFileData[attributeName] != null) {
+      return configFileData[attributeName]
     }
     return defaultValues[attributeName]
   }
@@ -46,8 +43,8 @@ export function loadConfiguration(
     if (cmdlineArgs[attributeName] != null) {
       return cmdlineArgs[attributeName]
     }
-    if (fileData[attributeName] != null) {
-      return fileData[attributeName]
+    if (configFileData[attributeName] != null) {
+      return configFileData[attributeName]
     }
     return defaultValues[attributeName]
   }

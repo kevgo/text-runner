@@ -1,4 +1,5 @@
 import { DetailedFormatter } from '../formatters/detailed-formatter'
+import { mergeConfigurations } from '../helpers/merge-configurations'
 import { Configuration } from './configuration'
 import { getFormatterClass } from './get-formatter-class'
 import { Publications } from './publications'
@@ -30,16 +31,7 @@ export function loadConfiguration(
   cmdlineArgs: UserProvidedConfiguration
 ): Configuration {
   // merge the configs
-  const result = {}
-  for (const key of Object.keys(defaultValues)) {
-    if (cmdlineArgs[key] != null) {
-      result[key] = cmdlineArgs[key]
-    } else if (configFileData[key] != null) {
-      result[key] = configFileData[key]
-    } else {
-      result[key] = defaultValues[key]
-    }
-  }
+  const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
   result['FormatterClass'] = getFormatterClass(
     result['formatterName'],
     defaultValues.FormatterClass

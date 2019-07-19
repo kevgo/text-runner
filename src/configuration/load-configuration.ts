@@ -31,18 +31,23 @@ export function loadConfiguration(
   cmdlineArgs: UserProvidedConfiguration
 ): Configuration {
   const fileData = loadConfigFile(configFilePath)
-  const userProvided = { ...fileData, ...cmdlineArgs }
 
   function get(attributeName: string): string {
-    if (userProvided[attributeName] != null) {
-      return userProvided[attributeName]
+    if (cmdlineArgs[attributeName] != null) {
+      return cmdlineArgs[attributeName]
+    }
+    if (fileData[attributeName] != null) {
+      return fileData[attributeName]
     }
     return defaultValues[attributeName]
   }
 
   function getB(attributeName: string): boolean {
-    if (userProvided[attributeName] != null) {
-      return userProvided[attributeName]
+    if (cmdlineArgs[attributeName] != null) {
+      return cmdlineArgs[attributeName]
+    }
+    if (fileData[attributeName] != null) {
+      return fileData[attributeName]
     }
     return defaultValues[attributeName]
   }

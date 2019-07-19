@@ -140,7 +140,9 @@ ${actual}
 
   this.verifyRanOnlyTests = filenames => {
     filenames = flatten(filenames)
-    const standardizedOutput = this.output.replace(/\\/g, '/')
+    const standardizedOutput = this.process.output
+      .fullText()
+      .replace(/\\/g, '/')
 
     // verify the given tests have run
     for (const filename of filenames) {

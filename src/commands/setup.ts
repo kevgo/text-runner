@@ -1,11 +1,11 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import { createConfiguration } from '../configuration/create-configuration'
 
 export async function setupCommand() {
   await createConfiguration()
   console.log(
-    chalk.green(
-      `Created configuration file ${chalk.cyan(
+    color.green(
+      `Created configuration file ${color.cyan(
         'text-run.yml'
       )} with default values`
     )

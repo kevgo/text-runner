@@ -1,4 +1,4 @@
-const chalk = require('chalk')
+const color = require('colorette')
 const fs = require('fs-extra')
 const path = require('path')
 
@@ -7,7 +7,7 @@ module.exports = async function verifyMakeCommand(args) {
     .text()
     .replace(/make\s+/, '')
     .trim()
-  args.formatter.name(`verify Make command ${chalk.cyan(expected)} exists`)
+  args.formatter.name(`verify Make command ${color.cyan(expected)} exists`)
   const makefilePath = path.join(args.configuration.sourceDir, 'Makefile')
   const makefileContent = await fs.readFile(makefilePath, 'utf8')
   const commands = makefileContent
@@ -16,7 +16,7 @@ module.exports = async function verifyMakeCommand(args) {
     .map(extractMakeCommand)
   if (!commands.includes(expected)) {
     throw new Error(
-      `Make command ${chalk.cyan(expected)} not found in ${commands}`
+      `Make command ${color.cyan(expected)} not found in ${commands}`
     )
   }
 }

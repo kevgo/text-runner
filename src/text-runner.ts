@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import { CmdlineArgs } from './cli/cmdline-args'
 import { addCommand } from './commands/add'
 import { debugCommand } from './commands/debug'
@@ -53,7 +53,7 @@ export async function textRunner(cmdLineArgs: CmdlineArgs): Promise<Error[]> {
         await versionCommand()
         return []
       default:
-        console.log(chalk.red(`unknown command: ${chalk.red(commandName)}`))
+        console.log(color.red(`unknown command: ${color.red(commandName)}`))
         return []
     }
   } catch (err) {

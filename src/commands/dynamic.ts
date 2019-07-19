@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import fs from 'fs-extra'
 import { extractActivities } from '../activity-list/extract-activities'
 import { extractImagesAndLinks } from '../activity-list/extract-images-and-links'
@@ -21,7 +21,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   // step 1: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    console.log(chalk.magenta('no Markdown files found'))
+    console.log(color.magenta('no Markdown files found'))
     return []
   }
 
@@ -35,7 +35,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
-    console.log(chalk.magenta('no activities found'))
+    console.log(color.magenta('no activities found'))
     return []
   }
 
@@ -51,25 +51,25 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 7: write stats
   let text = '\n'
-  let color
+  let colorFn
   if (error) {
-    color = chalk.red
-    text += chalk.red('1 error, ')
+    colorFn = color.red
+    text += color.red('1 error, ')
   } else {
-    color = chalk.green
-    text += chalk.green('Success! ')
+    colorFn = color.green
+    text += color.green('Success! ')
   }
-  text += color(
+  text += colorFn(
     `${activities.length + links.length} activities in ${
       filenames.length
     } files`
   )
   if (stats.warnings() > 0) {
-    text += color(', ')
-    text += chalk.magenta(`${stats.warnings()} warnings`)
+    text += colorFn(', ')
+    text += color.magenta(`${stats.warnings()} warnings`)
   }
-  text += color(`, ${stats.duration()}`)
-  console.log(chalk.bold(text))
+  text += colorFn(`, ${stats.duration()}`)
+  console.log(color.bold(text))
   if (error) {
     return [error]
   } else {

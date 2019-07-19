@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import fs from 'fs-extra'
 import { CmdlineArgs } from '../cli/cmdline-args'
 import { PrintedUserError } from './../errors/printed-user-error'
@@ -26,8 +26,8 @@ export async function determineConfigFilename(
     return cmdLineArgs.config
   } catch (e) {
     console.log(
-      chalk.red(
-        `configuration file ${chalk.cyan(cmdLineArgs.config)} not found`
+      color.red(
+        `configuration file ${color.cyan(cmdLineArgs.config)} not found`
       )
     )
     throw new PrintedUserError()

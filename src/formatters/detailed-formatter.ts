@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import path from 'path'
 import { printCodeFrame } from '../helpers/print-code-frame'
 import { Formatter } from './formatter'
@@ -8,9 +8,9 @@ export class DetailedFormatter extends Formatter {
 
   error(errorMessage: string) {
     super.error(errorMessage)
-    console.log(chalk.dim(this.output))
+    console.log(color.dim(this.output))
     process.stdout.write(
-      chalk.red(
+      color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
       )
     )
@@ -25,10 +25,10 @@ export class DetailedFormatter extends Formatter {
   skip(message: string) {
     super.skip(message)
     if (this.output) {
-      console.log(chalk.dim(this.output))
+      console.log(color.dim(this.output))
     }
     console.log(
-      chalk.cyan(
+      color.cyan(
         `${this.activity.file.platformified()}:${
           this.activity.line
         } -- ${message}`
@@ -39,10 +39,10 @@ export class DetailedFormatter extends Formatter {
   success() {
     super.success()
     if (this.output) {
-      console.log(chalk.dim(this.output))
+      console.log(color.dim(this.output))
     }
     console.log(
-      chalk.green(
+      color.green(
         `${this.activity.file.platformified()}:${this.activity.line} -- ${
           this.title
         }`
@@ -53,10 +53,10 @@ export class DetailedFormatter extends Formatter {
   warning(warningMessage: string) {
     super.warning(warningMessage)
     if (this.output.trim() !== '') {
-      console.log(chalk.dim(this.output))
+      console.log(color.dim(this.output))
     }
     console.log(
-      chalk.magenta(
+      color.magenta(
         `${this.activity.file.platformified()}:${
           this.activity.line
         } -- ${warningMessage}`

@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import fs from 'fs-extra'
 import got from 'got'
 import path from 'path'
@@ -22,11 +22,11 @@ export default async function checkLink(args: ActionArgs) {
   }
 
   if (isMailtoLink(target)) {
-    args.formatter.skip(`skipping link to ${chalk.cyan(target)}`)
+    args.formatter.skip(`skipping link to ${color.cyan(target)}`)
     return
   }
 
-  args.formatter.name(`link to ${chalk.cyan(target)}`)
+  args.formatter.name(`link to ${color.cyan(target)}`)
   const filePath = new AbsoluteFilePath(args.file)
 
   if (isLinkToAnchorInSameFile(target)) {
@@ -74,19 +74,19 @@ async function checkExternalLink(
   }
 
   try {
-    f.name(`link to external website ${chalk.cyan(target)}`)
+    f.name(`link to external website ${color.cyan(target)}`)
     await got(target, { timeout: 4000 })
   } catch (err) {
     if (err.statusCode === 404 || err.code === 'ENOTFOUND') {
-      f.warning(`link to non-existing external website ${chalk.bold(target)}`)
+      f.warning(`link to non-existing external website ${color.bold(target)}`)
     } else if (err instanceof got.TimeoutError) {
-      f.warning(`link to ${chalk.magenta(target)} timed out`)
+      f.warning(`link to ${color.magenta(target)} timed out`)
     } else if (
       err.message.startsWith("Hostname/IP doesn't match certificate's altnames")
     ) {
-      f.warning(`link to ${chalk.magenta(target)} has error: #{err.message}`)
+      f.warning(`link to ${color.magenta(target)} has error: #{err.message}`)
     } else {
-      f.warning(`error while checking link to ${chalk.magenta(target)}: ${err}`)
+      f.warning(`error while checking link to ${color.magenta(target)}: ${err}`)
     }
   }
 }
@@ -109,7 +109,7 @@ async function checkLinkToFilesystem(
       const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
         f.name(
-          `link to local directory ${chalk.cyan(linkedFile.platformified())}`
+          `link to local directory ${color.cyan(linkedFile.platformified())}`
         )
         return
       }
@@ -118,12 +118,12 @@ async function checkLinkToFilesystem(
     }
   }
 
-  f.name(`link to local file ${chalk.cyan(linkedFile.platformified())}`)
+  f.name(`link to local file ${color.cyan(linkedFile.platformified())}`)
   try {
     await fs.stat(fullPath)
   } catch (err) {
     throw new Error(
-      `link to non-existing local file ${chalk.bold(
+      `link to non-existing local file ${color.bold(
         linkedFile.platformified()
       )}`
     )
@@ -138,12 +138,12 @@ async function checkLinkToAnchorInSameFile(
 ) {
   const anchorName = target.substr(1)
   if (!linkTargets.hasAnchor(containingFile, anchorName)) {
-    throw new Error(`link to non-existing local anchor ${chalk.bold(target)}`)
+    throw new Error(`link to non-existing local anchor ${color.bold(target)}`)
   }
   if (linkTargets.anchorType(containingFile, anchorName) === 'heading') {
-    f.name(`link to local heading ${chalk.cyan(target)}`)
+    f.name(`link to local heading ${color.cyan(target)}`)
   } else {
-    f.name(`link to #${chalk.cyan(anchorName)}`)
+    f.name(`link to #${color.cyan(anchorName)}`)
   }
 }
 
@@ -161,9 +161,9 @@ async function checkLinkToAnchorInOtherFile(
 
   if (!linkTargets.hasFile(filePath)) {
     throw new Error(
-      `link to anchor #${chalk.cyan(
+      `link to anchor #${color.cyan(
         anchorName
-      )} in non-existing file ${chalk.cyan(
+      )} in non-existing file ${color.cyan(
         removeLeadingSlash(filePath.platformified())
       )}`
     )
@@ -171,21 +171,21 @@ async function checkLinkToAnchorInOtherFile(
 
   if (!linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
-      `link to non-existing anchor ${chalk.bold(
+      `link to non-existing anchor ${color.bold(
         '#' + anchorName
-      )} in ${chalk.bold(filePath.platformified())}`
+      )} in ${color.bold(filePath.platformified())}`
     )
   }
 
   if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
     f.name(
-      `link to heading ${chalk.cyan(
+      `link to heading ${color.cyan(
         filePath.platformified() + '#' + anchorName
       )}`
     )
   } else {
     f.name(
-      `link to ${chalk.cyan(filePath.platformified())}#${chalk.cyan(
+      `link to ${color.cyan(filePath.platformified())}#${color.cyan(
         anchorName
       )}`
     )

@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import deb from 'debug'
 import { ObservableProcess } from 'observable-process'
 import path from 'path'
@@ -31,7 +31,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
     throw new Error('the block that defines console commands to run is empty')
   }
 
-  args.formatter.name(`running console command: ${chalk.cyan(commandsToRun)}`)
+  args.formatter.name(`running console command: ${color.cyan(commandsToRun)}`)
   let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType('table')) {
     input = getInput(args.nodes)

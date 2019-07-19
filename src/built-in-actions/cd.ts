@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import path from 'path'
 import { ActionArgs } from '../runners/action-args'
 
@@ -6,7 +6,7 @@ import { ActionArgs } from '../runners/action-args'
 export default function cd(args: ActionArgs) {
   const directory = args.nodes.text()
   args.formatter.name(
-    `changing into the ${chalk.bold(chalk.cyan(directory))} directory`
+    `changing into the ${color.bold(color.cyan(directory))} directory`
   )
   const fullPath = path.join(args.configuration.workspace, directory)
   args.formatter.log(`cd ${fullPath}`)

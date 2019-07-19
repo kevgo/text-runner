@@ -10,8 +10,8 @@ import { unusedCommand } from './commands/unused'
 import { versionCommand } from './commands/version'
 import { Configuration } from './configuration/configuration'
 import { determineConfigFilename } from './configuration/determine-config-filename'
+import { determineConfiguration } from './configuration/determine-configuration'
 import { loadConfigFile } from './configuration/load-config-file'
-import { loadConfiguration } from './configuration/load-configuration'
 import { UserProvidedConfiguration } from './configuration/user-provided-configuration'
 
 /**
@@ -25,7 +25,7 @@ export async function textRunner(
   try {
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
-    configuration = loadConfiguration(configFileData, cmdlineArgs)
+    configuration = determineConfiguration(configFileData, cmdlineArgs)
     const commandName = cmdlineArgs.command
     let errors: Error[]
     switch (commandName) {

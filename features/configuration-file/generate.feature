@@ -1,6 +1,6 @@
 Feature: generating a configuration file
 
-  When setting up TextRunner on a new project
+    When setting up TextRunner on a new project
   I want to be able to generate a configuration file with the default options set
   So that I can run the tool successfully after customizing the options to my project's situation.
 
@@ -23,7 +23,7 @@ Feature: generating a configuration file
 
       # black-list of files not to test
       # This is applied after the white-list above.
-      exclude: ''
+      exclude: []
 
       # the formatter to use (detailed, dot)
       format: detailed

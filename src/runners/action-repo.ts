@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import glob from 'glob'
 import interpret from 'interpret'
 import path from 'path'
@@ -41,7 +41,7 @@ class ActionRepo {
   // Note: need to define the return type as Action to satisfy the type checker
   //       who doesn't understand that this is an error check
   private errorUnknownAction(activity: Activity): Action {
-    let errorText = `unknown action: ${chalk.red(
+    let errorText = `unknown action: ${color.red(
       activity.actionName
     )}\nAvailable built-in actions:\n`
     for (const actionName of Object.keys(this.builtinActions).sort()) {

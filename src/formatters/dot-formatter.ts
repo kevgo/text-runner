@@ -1,4 +1,4 @@
-import chalk from 'chalk'
+import color from 'colorette'
 import path from 'path'
 import { printCodeFrame } from '../helpers/print-code-frame'
 import { Formatter } from './formatter'
@@ -9,9 +9,9 @@ export class DotFormatter extends Formatter {
   error(errorMessage: string) {
     super.error(errorMessage)
     console.log()
-    console.log(chalk.dim(this.output))
+    console.log(color.dim(this.output))
     process.stdout.write(
-      chalk.red(
+      color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
       )
     )
@@ -25,16 +25,16 @@ export class DotFormatter extends Formatter {
 
   skip(message: string) {
     super.skip(message)
-    process.stdout.write(chalk.cyan('.'))
+    process.stdout.write(color.cyan('.'))
   }
 
   success() {
     super.success()
-    process.stdout.write(chalk.green('.'))
+    process.stdout.write(color.green('.'))
   }
 
   warning(warningMessage: string) {
     super.warning(warningMessage)
-    process.stdout.write(chalk.magenta('.'))
+    process.stdout.write(color.magenta('.'))
   }
 }

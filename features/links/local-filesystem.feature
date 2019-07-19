@@ -1,3 +1,4 @@
+@smoke
 Feature: verifying links to the local filesystem
 
   As a documentation writer

@@ -17,9 +17,7 @@ install:
 
 test_script:
   - make build
-  - make unit
-  - make cuke-win
-  - make docs
+  - make cuke-smoke-win
 
 # Don't double-build PRs
 skip_branch_with_pr: true

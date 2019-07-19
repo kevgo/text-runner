@@ -1,8 +1,8 @@
 import { Publications } from './publications'
 
 /**
- * data structure for arguments provided by the user,
- * either via command line or via config file
+ * UserProvidedConfiguration describes arguments provided by the user,
+ * either via command line or via config file.
  */
 export interface UserProvidedConfiguration {
   actions?: any

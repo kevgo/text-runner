@@ -9,6 +9,7 @@ export function loadConfigFile(filename: string): UserProvidedConfiguration {
   const fileData = YAML.load(filename)
   const result: UserProvidedConfiguration = {
     actions: fileData.actions,
+    classPrefix: fileData.classPrefix,
     exclude: fileData.exclude,
     fileGlob: fileData.files,
     formatterName: fileData.formatter,

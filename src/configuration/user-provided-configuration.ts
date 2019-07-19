@@ -6,6 +6,7 @@ import { Publications } from './publications'
  */
 export interface UserProvidedConfiguration {
   actions?: any
+  classPrefix?: string
   command?: string // the text-runner command to run
   configFileName?: string // name of the config file to use
   exclude?: string

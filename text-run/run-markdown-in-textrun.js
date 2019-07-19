@@ -16,9 +16,9 @@ module.exports = async function runMarkdownInTextrun(args) {
   var textRunPath = path.join(args.configuration.sourceDir, 'bin', 'text-run')
   if (process.platform === 'win32') textRunPath += '.cmd'
   const trArgs = callArgs(textRunPath)
-  trArgs[trArgs.length - 1] += ` --keep-tmp --workspace ${
-    args.configuration.workspace
-  }`
+  trArgs[
+    trArgs.length - 1
+  ] += ` --keep-tmp --workspace ${args.configuration.workspace}`
   const processor = new ObservableProcess({
     commands: trArgs,
     cwd: args.configuration.workspace,
@@ -29,9 +29,7 @@ module.exports = async function runMarkdownInTextrun(args) {
   debug(processor.fullOutput())
   if (processor.exitCode !== 0) {
     throw new Error(
-      `text-run exited with code ${
-        processor.exitCode
-      } when processing this markdown block.`
+      `text-run exited with code ${processor.exitCode} when processing this markdown block.`
     )
   }
 }

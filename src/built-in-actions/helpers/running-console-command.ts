@@ -1,4 +1,4 @@
-import { ObservableProcess } from 'observable-process'
+import { ObservableProcess } from "observable-process"
 
 // Provides global access to the currently running console command
 export class RunningConsoleCommand {

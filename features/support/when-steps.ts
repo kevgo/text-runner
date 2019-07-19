@@ -1,6 +1,6 @@
-import { When } from 'cucumber'
-import fs from 'fs-extra'
-import path from 'path'
+import { When } from "cucumber"
+import fs from "fs-extra"
+import path from "path"
 
 When(
   /^(trying to execute|executing) the "([^"]+)" example$/,
@@ -8,10 +8,10 @@ When(
   async function(tryingText, exampleName) {
     const expectError = determineExpectError(tryingText)
     await fs.copy(
-      path.join('documentation', 'examples', exampleName),
+      path.join("documentation", "examples", exampleName),
       this.rootDir
     )
-    await this.execute({ command: 'run', expectError })
+    await this.execute({ command: "run", expectError })
     finish(
       expectError,
       this.process && (this.process.error || this.process.exitCode)
@@ -31,7 +31,7 @@ When(/^(trying to run|running) "([^"]*)"$/, async function(
 When(/^(trying to run|running) text-run$/, async function(tryingText) {
   const expectError = determineExpectError(tryingText)
   try {
-    await this.execute({ command: 'run', cwd: this.rootDir, expectError })
+    await this.execute({ command: "run", cwd: this.rootDir, expectError })
   } catch (err) {
     finish(expectError, err)
     return
@@ -46,7 +46,7 @@ When(
   /^(trying to run|running) text-run with the arguments? "([^"]*)"$/,
   async function(tryingText, optionsText) {
     const expectError = determineExpectError(tryingText)
-    const splitted = optionsText.split(' ')
+    const splitted = optionsText.split(" ")
     const command = splitted[0]
     const options = splitted.splice(1)
     await this.execute({ command, options, cwd: this.rootDir, expectError })
@@ -59,7 +59,7 @@ When(
   async function(tryingText, argsText) {
     const expectError = determineExpectError(tryingText)
     const args = JSON.parse(`{${argsText}}`)
-    args.command = 'run'
+    args.command = "run"
     args.cwd = this.rootDir
     args.expectError = expectError
     await this.execute(args)
@@ -77,7 +77,7 @@ When(
     const expectError = determineExpectError(tryingText)
     try {
       await this.execute({
-        command: 'run',
+        command: "run",
         cwd: this.rootDir,
         expectError,
         options: { formatter: formatterName }
@@ -90,9 +90,9 @@ When(
 )
 
 function determineExpectError(tryingText) {
-  if (tryingText === 'running') {
+  if (tryingText === "running") {
     return false
-  } else if (tryingText === 'executing') {
+  } else if (tryingText === "executing") {
     return false
   } else {
     return true
@@ -101,7 +101,7 @@ function determineExpectError(tryingText) {
 
 function finish(trying, error) {
   if (trying && !error) {
-    throw new Error('expected error but test succeeded')
+    throw new Error("expected error but test succeeded")
   } else if (trying && error) {
     // nothing to do here, we expected the error
   } else if (error) {

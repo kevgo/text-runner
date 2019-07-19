@@ -1,14 +1,14 @@
-import { AbsoluteFilePath } from '../../../domain-model/absolute-file-path'
-import { AstNodeList } from '../../ast-node-list'
-import { OpenTagTracker } from '../helpers/open-tag-tracker'
-import { CustomHtmlTagTransformerBlock } from './custom-html-tags/custom-html-tag-transformer-block'
-import { CustomHtmlBlockTransformerBlock } from './custom-htmlblocks/custom-html-block-transformer-block'
-import { CustomMdTransformerBlock } from './custom-md/custom-md-transformer-block'
-import { GenericHtmlTagTransformerBlock } from './generic-htmltags/generic-html-tag-transformer-block'
-import { GenericMdTransformerBlock } from './generic-md/generic-md-transformer-block'
-import { RemarkableNode } from './remarkable-node'
-import { TagMapper } from './tag-mapper'
-import { TransformerBlock } from './transformer-block'
+import { AbsoluteFilePath } from "../../../domain-model/absolute-file-path"
+import { AstNodeList } from "../../ast-node-list"
+import { OpenTagTracker } from "../helpers/open-tag-tracker"
+import { CustomHtmlTagTransformerBlock } from "./custom-html-tags/custom-html-tag-transformer-block"
+import { CustomHtmlBlockTransformerBlock } from "./custom-htmlblocks/custom-html-block-transformer-block"
+import { CustomMdTransformerBlock } from "./custom-md/custom-md-transformer-block"
+import { GenericHtmlTagTransformerBlock } from "./generic-htmltags/generic-html-tag-transformer-block"
+import { GenericMdTransformerBlock } from "./generic-md/generic-md-transformer-block"
+import { RemarkableNode } from "./remarkable-node"
+import { TagMapper } from "./tag-mapper"
+import { TransformerBlock } from "./transformer-block"
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -78,7 +78,7 @@ export default class AstStandardizer {
   }
 
   processSoftBreak(node: RemarkableNode): boolean {
-    if (node.type !== 'softbreak') {
+    if (node.type !== "softbreak") {
       return false
     }
     this.line += 1

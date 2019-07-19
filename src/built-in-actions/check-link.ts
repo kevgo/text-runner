@@ -1,24 +1,24 @@
-import color from 'colorette'
-import fs from 'fs-extra'
-import got from 'got'
-import path from 'path'
-import { Configuration } from '../configuration/configuration'
-import { AbsoluteFilePath } from '../domain-model/absolute-file-path'
-import { UnknownLink } from '../domain-model/unknown-link'
-import { Formatter } from '../formatters/formatter'
-import { isExternalLink } from '../helpers/is-external-link'
-import { isLinkToAnchorInOtherFile } from '../helpers/is-link-to-anchor-in-other-file'
-import { isLinkToAnchorInSameFile } from '../helpers/is-link-to-anchor-in-same-file'
-import { isMailtoLink } from '../helpers/is-mailto-link'
-import { removeLeadingSlash } from '../helpers/remove-leading-slash'
-import { LinkTargetList } from '../link-targets/link-target-list'
-import { ActionArgs } from '../runners/action-args'
+import color from "colorette"
+import fs from "fs-extra"
+import got from "got"
+import path from "path"
+import { Configuration } from "../configuration/configuration"
+import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { UnknownLink } from "../domain-model/unknown-link"
+import { Formatter } from "../formatters/formatter"
+import { isExternalLink } from "../helpers/is-external-link"
+import { isLinkToAnchorInOtherFile } from "../helpers/is-link-to-anchor-in-other-file"
+import { isLinkToAnchorInSameFile } from "../helpers/is-link-to-anchor-in-same-file"
+import { isMailtoLink } from "../helpers/is-mailto-link"
+import { removeLeadingSlash } from "../helpers/remove-leading-slash"
+import { LinkTargetList } from "../link-targets/link-target-list"
+import { ActionArgs } from "../runners/action-args"
 
 // Checks for broken hyperlinks
 export default async function checkLink(args: ActionArgs) {
   const target = args.nodes[0].attributes.href
-  if (target == null || target === '') {
-    throw new Error('link without target')
+  if (target == null || target === "") {
+    throw new Error("link without target")
   }
 
   if (isMailtoLink(target)) {
@@ -77,7 +77,7 @@ async function checkExternalLink(
     f.name(`link to external website ${color.cyan(target)}`)
     await got(target, { timeout: 4000 })
   } catch (err) {
-    if (err.statusCode === 404 || err.code === 'ENOTFOUND') {
+    if (err.statusCode === 404 || err.code === "ENOTFOUND") {
       f.warning(`link to non-existing external website ${color.bold(target)}`)
     } else if (err instanceof got.TimeoutError) {
       f.warning(`link to ${color.magenta(target)} timed out`)
@@ -140,7 +140,7 @@ async function checkLinkToAnchorInSameFile(
   if (!linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${color.bold(target)}`)
   }
-  if (linkTargets.anchorType(containingFile, anchorName) === 'heading') {
+  if (linkTargets.anchorType(containingFile, anchorName) === "heading") {
     f.name(`link to local heading ${color.cyan(target)}`)
   } else {
     f.name(`link to #${color.cyan(anchorName)}`)
@@ -172,15 +172,15 @@ async function checkLinkToAnchorInOtherFile(
   if (!linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
       `link to non-existing anchor ${color.bold(
-        '#' + anchorName
+        "#" + anchorName
       )} in ${color.bold(filePath.platformified())}`
     )
   }
 
-  if (linkTargets.anchorType(filePath, anchorName) === 'heading') {
+  if (linkTargets.anchorType(filePath, anchorName) === "heading") {
     f.name(
       `link to heading ${color.cyan(
-        filePath.platformified() + '#' + anchorName
+        filePath.platformified() + "#" + anchorName
       )}`
     )
   } else {

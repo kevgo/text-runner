@@ -1,7 +1,7 @@
-import color from 'colorette'
-import fs from 'fs-extra'
-import { PrintedUserError } from './../errors/printed-user-error'
-import { UserProvidedConfiguration } from './user-provided-configuration'
+import color from "colorette"
+import fs from "fs-extra"
+import { PrintedUserError } from "./../errors/printed-user-error"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 /**
  * Returns the filename for the config file
@@ -13,10 +13,10 @@ export async function determineConfigFilename(
 ): Promise<string> {
   if (cmdLineArgs.configFileName == null) {
     try {
-      await fs.stat('text-run.yml')
-      return 'text-run.yml'
+      await fs.stat("text-run.yml")
+      return "text-run.yml"
     } catch (e) {
-      return ''
+      return ""
     }
   }
 

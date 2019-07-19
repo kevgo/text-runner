@@ -1,12 +1,12 @@
-import util from 'util'
-import { Activity } from '../activity-list/activity'
-import { Configuration } from '../configuration/configuration'
-import { PrintedUserError } from '../errors/printed-user-error'
-import { LinkTargetList } from '../link-targets/link-target-list'
-import { Action } from './action'
-import { ActionArgs } from './action-args'
-import { actionRepo } from './action-repo'
-import { StatsCounter } from './stats-counter'
+import util from "util"
+import { Activity } from "../activity-list/activity"
+import { Configuration } from "../configuration/configuration"
+import { PrintedUserError } from "../errors/printed-user-error"
+import { LinkTargetList } from "../link-targets/link-target-list"
+import { Action } from "./action"
+import { ActionArgs } from "./action-args"
+import { actionRepo } from "./action-repo"
+import { StatsCounter } from "./stats-counter"
 
 export async function runActivity(
   activity: Activity,
@@ -59,5 +59,5 @@ async function runSyncOrPromiseFunc(func: Action, args: ActionArgs) {
 }
 
 function isUserError(err: Error): boolean {
-  return err.name === 'Error'
+  return err.name === "Error"
 }

@@ -1,80 +1,58 @@
-import deb from "debug"
-import humanize from "humanize-string"
-import { WriteStream } from "observable-process"
-import { Activity } from "../activity-list/activity"
-import { StatsCounter } from "../runners/stats-counter"
-
-const debug = deb("formatter")
-
-interface Console {
-  log(text: string): void
-}
-
 /**
- * Base class for formatters
+ * Formatter is the API that formatters have to implement
+ *
+ * In general, formatters can print whatever they want.
+ * They get information about the current test step through this API.
  */
-export class Formatter {
-  activity: Activity
-  console: Console
-  sourceDir: string
-  statsCounter: StatsCounter
-  stderr: WriteStream
-  stdout: WriteStream
-  output: string
-  title: string
-  skipped: boolean
-  // TODO: remove this?
-  warned: boolean
-
-  constructor(
-    activity: Activity,
-    sourceDir: string,
-    statsCounter: StatsCounter
-  ) {
-    this.activity = activity
-    this.statsCounter = statsCounter
-    this.stdout = { write: this.log.bind(this) }
-    this.stderr = { write: this.log.bind(this) }
-    this.output = ""
-    this.title = humanize(activity.actionName)
-    this.sourceDir = sourceDir
-    this.skipped = false
-    this.warned = false
-    this.console = {
-      log: text => this.stdout.write(text + "\n")
-    }
-  }
-
-  error(errorMessage: string) {
-    debug("error: " + errorMessage)
-    this.statsCounter.error()
-  }
-
-  log(text: string | Buffer): boolean {
-    this.output += text.toString()
-    return false
-  }
-
-  skip(message: string) {
-    debug("skipping: " + message)
-    this.skipped = true
-    this.statsCounter.skip()
-  }
-
-  success() {
-    this.statsCounter.success()
-  }
+export interface Formatter {
+  /**
+   * Error notifies the user of a test failure.
+   *
+   * This method is called by the test framework when the test step throws an error.
+   * The provided error is the one thrown by the test script.
+   */
+  error(e: Error): void
 
   /**
-   * allows the user to set a new name for this step
+   * Log allows to print random test output to the user,
+   * for example terminal output.
+   *
+   * This method is called by the test script (the developer of the test).
    */
-  name(newTitle: string) {
-    this.title = newTitle
-  }
+  log(text: string): void
 
-  warning(warningMessage: string) {
-    debug("warning: " + warningMessage)
-    this.warned = true
-    this.statsCounter.warning()
-  }
+  /**
+   * Title allows to refine the name of the current step,
+   * for example by providing more details.
+   *
+   * As an example, this method could be called to refine the step name `write file`
+   * to `write file "foo.yml"` once the name of the file to be written is known.
+   *
+   * This method is called by the test step.
+   */
+  title(text: string): void
+
+  /**
+   * Skip notifies the user that the test associated with this formatter
+   * is not going to be executed.
+   */
+  skip(message: string): void
+
+  /**
+   * Success notifies the user that the associated activity has been successful.
+   *
+   * This method is called by the test framework when the test step
+   * that is associated with this formatter instance finishes without throwing an exception.
+   */
+  success(): void
+
+  /**
+   * Warning allows to notify the user about an issue that occured and is noteworthy
+   * but didn't cause the test to fail.
+   *
+   * Example: a checker for external links receives a 500 error from the server
+   *
+   * This method is called by the test step.
+   */
+  warning(message: string): void
 }

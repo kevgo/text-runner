@@ -1,21 +1,50 @@
 import color from "colorette"
+import humanize from "humanize-string"
 import path from "path"
+import { Activity } from "../activity-list/activity"
 import { printCodeFrame } from "../helpers/print-code-frame"
+import { StatsCounter } from "../runners/stats-counter"
 import { Formatter } from "./formatter"
 
-export class DotFormatter extends Formatter {
-  // A minimalistic formatter, prints dots for each check
+/** A minimalistic formatter, prints dots for each check */
+export class DotFormatter implements Formatter {
+  /** the activity whose progess this formatter describes to the user */
+  activity: Activity
 
-  error(errorMessage: string) {
-    super.error(errorMessage)
+  /** the directory in which the sources are located */
+  // TODO: replace with configuration
+  sourceDir: string
+
+  /** the title of the current test step */
+  stepTitle: string
+
+  /** link to the global stats counter */
+  statsCounter: StatsCounter
+
+  /** the accumulated output from the test */
+  output: string[]
+
+  constructor(
+    activity: Activity,
+    sourceDir: string,
+    statsCounter: StatsCounter
+  ) {
+    this.activity = activity
+    this.sourceDir = sourceDir
+    this.stepTitle = humanize(activity.actionName)
+    this.statsCounter = statsCounter
+    this.output = []
+  }
+
+  error(err: Error) {
     console.log()
-    console.log(color.dim(this.output))
+    console.log(color.dim(this.output.join("")))
     process.stdout.write(
       color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
       )
     )
-    console.log(errorMessage)
+    console.log(err.message)
     printCodeFrame(
       console.log,
       path.join(this.sourceDir, this.activity.file.platformified()),
@@ -23,18 +52,25 @@ export class DotFormatter extends Formatter {
     )
   }
 
+  log(text: string) {
+    this.output.push(text)
+  }
+
+  // @ts-ignore: okay to not use the message here
   skip(message: string) {
-    super.skip(message)
     process.stdout.write(color.cyan("."))
   }
 
   success() {
-    super.success()
     process.stdout.write(color.green("."))
   }
 
+  title(text: string) {
+    this.stepTitle = text
+  }
+
+  // @ts-ignore: okay to not use the message here
   warning(warningMessage: string) {
-    super.warning(warningMessage)
     process.stdout.write(color.magenta("."))
   }
 }

@@ -1,32 +1,57 @@
 import color from "colorette"
+import humanize from "humanize-string"
 import path from "path"
+import { Activity } from "../activity-list/activity"
 import { printCodeFrame } from "../helpers/print-code-frame"
+import { StatsCounter } from "../runners/stats-counter"
 import { Formatter } from "./formatter"
 
-export class DetailedFormatter extends Formatter {
-  // A detailed formatter, prints output before the step name
+/** A formatter that prints output and step names */
+export class DetailedFormatter implements Formatter {
+  /** the activity whose progess this formatter describes to the user */
+  activity: Activity
 
-  error(errorMessage: string) {
-    super.error(errorMessage)
-    console.log(color.dim(this.output))
+  /** the directory in which the sources are located */
+  // TODO: replace with configuration
+  sourceDir: string
+
+  /** the title of the current test step */
+  stepTitle: string
+
+  /** link to the global stats counter */
+  statsCounter: StatsCounter
+
+  constructor(
+    activity: Activity,
+    sourceDir: string,
+    statsCounter: StatsCounter
+  ) {
+    this.activity = activity
+    this.sourceDir = sourceDir
+    this.stepTitle = humanize(activity.actionName)
+    this.statsCounter = statsCounter
+  }
+
+  error(e: Error) {
     process.stdout.write(
       color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
       )
     )
-    console.log(errorMessage)
+    console.log(e.message)
     const filePath = path.join(
       this.sourceDir,
       this.activity.file.platformified()
     )
     printCodeFrame(console.log, filePath, this.activity.line)
+    this.statsCounter.error()
+  }
+
+  log(text: string) {
+    console.log(color.dim(text))
   }
 
   skip(message: string) {
-    super.skip(message)
-    if (this.output) {
-      console.log(color.dim(this.output))
-    }
     console.log(
       color.cyan(
         `${this.activity.file.platformified()}:${
@@ -34,13 +59,10 @@ export class DetailedFormatter extends Formatter {
         } -- ${message}`
       )
     )
+    this.statsCounter.skip()
   }
 
   success() {
-    super.success()
-    if (this.output) {
-      console.log(color.dim(this.output))
-    }
     console.log(
       color.green(
         `${this.activity.file.platformified()}:${this.activity.line} -- ${
@@ -48,13 +70,14 @@ export class DetailedFormatter extends Formatter {
         }`
       )
     )
+    this.statsCounter.success()
+  }
+
+  title(text: string) {
+    this.stepTitle = text
   }
 
   warning(warningMessage: string) {
-    super.warning(warningMessage)
-    if (this.output.trim() !== "") {
-      console.log(color.dim(this.output))
-    }
     console.log(
       color.magenta(
         `${this.activity.file.platformified()}:${
@@ -62,5 +85,6 @@ export class DetailedFormatter extends Formatter {
         } -- ${warningMessage}`
       )
     )
+    this.statsCounter.warning()
   }
 }

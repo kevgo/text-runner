@@ -1,4 +1,3 @@
-console.log("HELLO")
 import cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import { parseCmdlineArgs } from "./configuration/cli/parse-cmdline-args"

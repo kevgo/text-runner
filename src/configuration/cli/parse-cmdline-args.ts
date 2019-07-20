@@ -26,7 +26,7 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
   }
 
   // remove optional Windows CLI call
-  if (argv[0] && argv[0].endsWith("dist\\cli\\cli.js")) {
+  if (argv[0] && argv[0].endsWith("dist\\cli.js")) {
     argv.splice(0, 1)
   }
 

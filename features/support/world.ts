@@ -16,11 +16,12 @@ function World() {
   this.execute = async function(params) {
     const args: any = {}
     args.cwd = this.rootDir
-    args.env = {}
     if (this.debug) {
-      args.env.DEBUG = "*,-babel"
+      args.env = {
+        DEBUG: "*,-babel",
+        PATH: process.env.PATH
+      }
     }
-
     const command = this.makeFullPath(params.command)
     if (process.env.NODE_ENV === "coverage") {
       args.command = runWithTestCoverage(args.command)

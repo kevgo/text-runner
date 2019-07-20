@@ -32,7 +32,7 @@ export class DetailedFormatter implements Formatter {
     this.statsCounter = statsCounter
   }
 
-  error(e: Error) {
+  failed(e: Error) {
     process.stdout.write(
       color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
@@ -51,7 +51,7 @@ export class DetailedFormatter implements Formatter {
     console.log(color.dim(text))
   }
 
-  skip(message: string) {
+  skipped(message: string) {
     console.log(
       color.cyan(
         `${this.activity.file.platformified()}:${

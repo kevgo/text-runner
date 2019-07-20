@@ -34,7 +34,7 @@ async function checkLocalImage(imagePath: string, c: Configuration) {
 
 async function checkRemoteImage(url: string, f: Formatter, c: Configuration) {
   if (c.offline) {
-    f.skip(`skipping external image: ${color.magenta(url)}`)
+    f.skipped(`skipping external image: ${color.magenta(url)}`)
     return
   }
   try {

@@ -1,58 +1,34 @@
 /**
  * Formatter is the API that formatters have to implement
  *
- * In general, formatters can print whatever they want.
- * They get information about the current test step through this API.
+ * A formatter formats the steps in the entire test suite.
+ * It is given the total number of test steps in the constructor.
+ * After each test step is done, the test runtime calls either
+ * `success`, `failed`, or `skipped` on the formatter.
+ *
+ * Formatters shouldn't assume that tests run in any particular order
+ * or strictly sequentially.
  */
 export interface Formatter {
   /**
-   * Error notifies the user of a test failure.
+   * Error notifies the user that the step associated with this formatter has failed
+   * by throwing the given Error.
    *
    * This method is called by the test framework when the test step throws an error.
-   * The provided error is the one thrown by the test script.
    */
-  error(e: Error): void
+  failed(e: Error, output: string): void
 
   /**
-   * Log allows to print random test output to the user,
-   * for example terminal output.
-   *
-   * This method is called by the test script (the developer of the test).
+   * Skip notifies the user that the action associated with this formatter
+   * was not executed.
    */
-  log(text: string): void
+  skipped(message: string, output: string): void
 
   /**
-   * Name allows to refine the name of the current step,
-   * for example by providing more details.
-   *
-   * As an example, this method could be called to refine the step name `write file`
-   * to `write file "foo.yml"` once the name of the file to be written is known.
-   *
-   * This method is called by the test step.
-   */
-  name(text: string): void
-
-  /**
-   * Skip notifies the user that the test associated with this formatter
-   * is not going to be executed.
-   */
-  skip(message: string): void
-
-  /**
-   * Success notifies the user that the associated activity has been successful.
+   * Success notifies the user that the activity associated with this formatter has been successful.
    *
    * This method is called by the test framework when the test step
    * that is associated with this formatter instance finishes without throwing an exception.
    */
   success(): void
-
-  /**
-   * Warning allows to notify the user about an issue that occured and is noteworthy
-   * but didn't cause the test to fail.
-   *
-   * Example: a checker for external links receives a 500 error from the server
-   *
-   * This method is called by the test step.
-   */
-  warning(message: string): void
 }

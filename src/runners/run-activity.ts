@@ -39,7 +39,7 @@ export async function runActivity(
     }
   } catch (err) {
     if (isUserError(err)) {
-      formatter.error(err.message)
+      formatter.failed(err.message)
       return new PrintedUserError(err)
     } else {
       // here we have a developer error like for example TypeError

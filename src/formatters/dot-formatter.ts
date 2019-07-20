@@ -36,7 +36,7 @@ export class DotFormatter implements Formatter {
     this.output = []
   }
 
-  error(err: Error) {
+  failed(err: Error) {
     console.log()
     console.log(color.dim(this.output.join("")))
     process.stdout.write(
@@ -57,7 +57,7 @@ export class DotFormatter implements Formatter {
   }
 
   // @ts-ignore: okay to not use the message here
-  skip(message: string) {
+  skipped(message: string) {
     process.stdout.write(color.cyan("."))
   }
 

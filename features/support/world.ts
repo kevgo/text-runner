@@ -1,10 +1,9 @@
 import flatten from "array-flatten"
 import { expect } from "chai"
 import { setWorldConstructor } from "cucumber"
-import dimConsole from "dim-console"
 import fs from "fs-extra"
 import glob from "glob"
-import { ObservableProcess } from "observable-process"
+import { createObservableProcess } from "observable-process"
 import path from "path"
 import stripAnsi from "strip-ansi"
 import { v4 as uuid } from "uuid"
@@ -17,40 +16,23 @@ function World() {
   this.execute = async function(params) {
     const args: any = {}
     args.cwd = this.rootDir
-    args.env = {}
-    this.output = ""
-    if (this.verbose) {
-      args.stdout = dimConsole.process.stdout
-      args.stderr = dimConsole.process.stderr
-    } else {
-      args.stdout = {
-        write: text => {
-          this.output += text
-          return false
-        }
-      }
-      args.stderr = {
-        write: text => {
-          this.output += text
-          return false
-        }
-      }
-    }
     if (this.debug) {
-      args.env.DEBUG = "*,-babel"
+      args.env = {
+        DEBUG: "*,-babel",
+        PATH: process.env.PATH
+      }
     }
-
-    args.command = this.makeFullPath(params.command)
+    const command = this.makeFullPath(params.command)
     if (process.env.NODE_ENV === "coverage") {
       args.command = runWithTestCoverage(args.command)
     }
-    this.process = new ObservableProcess(args)
+    this.process = createObservableProcess(command, args)
     await this.process.waitForEnd()
     if (process.env.NODE_ENV === "coverage") {
       await storeTestCoverage()
     }
     if (this.verbose) {
-      this.output = dimConsole.output
+      this.output = this.process.output.fullText()
     }
     if (this.process.exitCode && !params.expectError) {
       console.log(this.output)
@@ -74,17 +56,17 @@ function World() {
   }
 
   this.verifyCallError = expectedError => {
-    const output = stripAnsi(this.process.fullOutput())
+    const output = stripAnsi(this.process.output.fullText())
     expect(output).to.include(expectedError)
     expect(this.process.exitCode).to.equal(1)
   }
 
   this.verifyErrormessage = expectedText => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(expectedText)
+    expect(stripAnsi(this.process.output.fullText())).to.include(expectedText)
   }
 
   this.verifyFailure = table => {
-    const output = stripAnsi(this.process.fullOutput())
+    const output = stripAnsi(this.process.output.fullText())
     let expectedHeader
     if (table.FILENAME && table.LINE) {
       expectedHeader = `${table.FILENAME}:${table.LINE}`
@@ -121,7 +103,7 @@ function World() {
     if (table.WARNING) {
       expectedText += table.WARNING
     }
-    const actual = standardizePath(stripAnsi(this.process.fullOutput()))
+    const actual = standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!
 Looking for: ${expectedText}
@@ -132,11 +114,11 @@ ${actual}
   }
 
   this.verifyPrintedUsageInstructions = () => {
-    expect(stripAnsi(this.process.fullOutput())).to.include("COMMANDS")
+    expect(stripAnsi(this.process.output.fullText())).to.include("COMMANDS")
   }
 
   this.verifyPrints = (expectedText: string) => {
-    const output = stripAnsi(this.process.fullOutput().trim())
+    const output = stripAnsi(this.process.output.fullText().trim())
     if (!new RegExp(expectedText.trim()).test(output)) {
       throw new Error(
         `expected to find regex '${expectedText.trim()}' in '${output}'`
@@ -145,21 +127,23 @@ ${actual}
   }
 
   this.verifyPrintsNot = (text: string) => {
-    const output = stripAnsi(this.process.fullOutput())
+    const output = stripAnsi(this.process.output.fullText())
     if (new RegExp(text).test(output)) {
       throw new Error(`expected to not find regex '${text}' in '${output}'`)
     }
   }
 
   this.verifyRanConsoleCommand = (command: string) => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(
+    expect(stripAnsi(this.process.output.fullText())).to.include(
       `running console command: ${command}`
     )
   }
 
   this.verifyRanOnlyTests = filenames => {
     filenames = flatten(filenames)
-    const standardizedOutput = this.output.replace(/\\/g, "/")
+    const standardizedOutput = this.process.output
+      .fullText()
+      .replace(/\\/g, "/")
 
     // verify the given tests have run
     for (const filename of filenames) {
@@ -180,13 +164,13 @@ ${actual}
   }
 
   this.verifyTestsRun = (count: number) => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(
+    expect(stripAnsi(this.process.output.fullText())).to.include(
       ` ${count} activities`
     )
   }
 
   this.verifyUnknownCommand = (command: string) => {
-    expect(stripAnsi(this.process.fullOutput())).to.include(
+    expect(stripAnsi(this.process.output.fullText())).to.include(
       `unknown command: ${command}`
     )
   }

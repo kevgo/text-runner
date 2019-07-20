@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { parseCmdlineArgs } from "../../src/cli/parse-cmdline-args"
+import { parseCmdlineArgs } from "./parse-cmdline-args"
 
 describe("parse-cmdline-args", function() {
   context("with unix <node> call", function() {

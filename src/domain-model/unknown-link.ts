@@ -1,4 +1,4 @@
-import { Publications } from "../configuration/publications"
+import { Publications } from "../configuration/publications/publications"
 import { removeDoubleSlash } from "../helpers/remove-double-slash"
 import { unixify } from "../helpers/unixify"
 import { AbsoluteFilePath } from "./absolute-file-path"

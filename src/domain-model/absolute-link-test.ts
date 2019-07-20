@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { Publications } from "../configuration/publications"
+import { Publications } from "../configuration/publications/publications"
 import { AbsoluteLink } from "./absolute-link"
 import { RelativeLink } from "./relative-link"
 

@@ -1,7 +1,7 @@
 import minimist from "minimist"
 import path from "path"
-import { availableCommands } from "../commands/available-commands"
-import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
+import { availableCommands } from "../../commands/available-commands"
+import { UserProvidedConfiguration } from "../user-provided-configuration"
 
 /**
  * Parses the command-line options received
@@ -26,7 +26,7 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
   }
 
   // remove optional Windows CLI call
-  if (argv[0] && argv[0].endsWith("dist\\cli\\cli.js")) {
+  if (argv[0] && argv[0].endsWith("dist\\cli.js")) {
     argv.splice(0, 1)
   }
 

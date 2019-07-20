@@ -1,7 +1,7 @@
 import color from "colorette"
 import path from "path"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
-import { printCodeFrame } from "../helpers/print-code-frame"
+import { printCodeFrame } from "./print-code-frame"
 
 /** prints the given error to the console */
 export function printUserError(err: UnprintedUserError) {

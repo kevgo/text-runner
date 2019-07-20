@@ -1,5 +1,5 @@
 import { Formatter } from "../formatters/formatter"
-import { Publications } from "./publications"
+import { Publications } from "./publications/publications"
 
 /**
  * All configuration values that are provided to the application

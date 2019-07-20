@@ -1,5 +1,5 @@
 import path from "path"
-import { Publications } from "../configuration/publications"
+import { Publications } from "../configuration/publications/publications"
 import { addLeadingDotUnlessEmpty } from "../helpers/add-leading-dot-unless-empty"
 import { addLeadingSlash } from "../helpers/add-leading-slash"
 import { removeDoubleSlash } from "../helpers/remove-double-slash"

@@ -1,5 +1,5 @@
 import color from "colorette"
-import { createConfigurationFile } from "../configuration/create-configuration-file"
+import { createConfigurationFile } from "../configuration/config-file/create-configuration-file"
 
 export async function setupCommand() {
   await createConfigurationFile()

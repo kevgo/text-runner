@@ -1,4 +1,4 @@
-import { Publications } from "../configuration/publications"
+import { Publications } from "../configuration/publications/publications"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
 

@@ -47,15 +47,19 @@ Then("it runs {int} test", function(count) {
 })
 
 Then("it runs in a global temp directory", function() {
-  expect(this.output).to.not.include(this.rootDir)
+  expect(this.process.output.fullText()).to.not.include(this.rootDir)
 })
 
 Then("it runs in the {string} directory", function(dirName) {
-  expect(this.output).to.match(new RegExp(`\\b${dirName}\\b`))
+  expect(this.process.output.fullText()).to.match(
+    new RegExp(`\\b${dirName}\\b`)
+  )
 })
 
 Then("it runs in the current working directory", function() {
-  expect(this.output.trim()).to.match(new RegExp(`${this.rootDir}\\b`))
+  expect(this.process.output.fullText().trim()).to.match(
+    new RegExp(`${this.rootDir}\\b`)
+  )
 })
 
 Then("it runs (only )the tests in {string}", function(filename) {

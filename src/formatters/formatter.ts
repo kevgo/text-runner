@@ -1,25 +1,17 @@
 import deb from "debug"
 import humanize from "humanize-string"
-import { WriteStream } from "observable-process"
 import { Activity } from "../activity-list/activity"
 import { StatsCounter } from "../runners/stats-counter"
 
 const debug = deb("formatter")
-
-interface Console {
-  log(text: string): void
-}
 
 /**
  * Base class for formatters
  */
 export class Formatter {
   activity: Activity
-  console: Console
   sourceDir: string
   statsCounter: StatsCounter
-  stderr: WriteStream
-  stdout: WriteStream
   output: string
   title: string
   skipped: boolean
@@ -33,16 +25,11 @@ export class Formatter {
   ) {
     this.activity = activity
     this.statsCounter = statsCounter
-    this.stdout = { write: this.log.bind(this) }
-    this.stderr = { write: this.log.bind(this) }
     this.output = ""
     this.title = humanize(activity.actionName)
     this.sourceDir = sourceDir
     this.skipped = false
     this.warned = false
-    this.console = {
-      log: text => this.stdout.write(text + "\n")
-    }
   }
 
   error(errorMessage: string) {

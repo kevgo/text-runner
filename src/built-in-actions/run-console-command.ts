@@ -1,6 +1,6 @@
 import color from "colorette"
 import deb from "debug"
-import { ObservableProcess } from "observable-process"
+import { createObservableProcess, ObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../configuration/configuration"
 import { callArgs } from "../helpers/call-args"
@@ -37,11 +37,8 @@ export default async function runConsoleCommand(args: ActionArgs) {
     input = getInput(args.nodes)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
-  const processor = new ObservableProcess({
-    commands: callArgs(commandsToRun),
-    cwd: args.configuration.workspace,
-    stderr: args.formatter.stderr,
-    stdout: args.formatter.stdout
+  const processor = createObservableProcess(callArgs(commandsToRun), {
+    cwd: args.configuration.workspace
   })
   RunningConsoleCommand.set(processor)
 
@@ -49,14 +46,15 @@ export default async function runConsoleCommand(args: ActionArgs) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
+  args.formatter.log(processor.output.fullText())
 }
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
   if (!input.textToWait) {
-    processor.enter(input.input)
+    processor.stdin.write(input.input + "\n")
   } else {
-    await processor.waitForText(input.textToWait)
-    processor.enter(input.input)
+    await processor.stdout.waitForText(input.textToWait)
+    processor.stdin.write(input.input + "\n")
   }
 }
 

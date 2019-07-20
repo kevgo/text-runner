@@ -12,7 +12,7 @@ export default function verifyConsoleCommandOutput(args: ActionArgs) {
     .filter(line => line)
 
   const actualLines = RunningConsoleCommand.instance()
-    .fullOutput()
+    .output.fullText()
     .split("\n")
     .map(line => line.trim())
     .filter(line => line)

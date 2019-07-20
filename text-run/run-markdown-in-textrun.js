@@ -1,6 +1,6 @@
 const { callArgs } = require("../dist/helpers/call-args")
 const fs = require("fs-extra")
-const { ObservableProcess } = require("observable-process")
+const { createObservableProcess } = require("observable-process")
 const path = require("path")
 const debug = require("debug")("text-runner:run-markdown-in-text-run")
 
@@ -19,14 +19,13 @@ module.exports = async function runMarkdownInTextrun(args) {
   trArgs[
     trArgs.length - 1
   ] += ` --keep-tmp --workspace ${args.configuration.workspace}`
-  const processor = new ObservableProcess({
-    commands: trArgs,
+  const processor = createObservableProcess(trArgs, {
     cwd: args.configuration.workspace,
     stdout: args.formatter.stdout,
     stderr: args.formatter.stderr
   })
   await processor.waitForEnd()
-  debug(processor.fullOutput())
+  debug(processor.output.fullText())
   if (processor.exitCode !== 0) {
     throw new Error(
       `text-run exited with code ${processor.exitCode} when processing this markdown block.`

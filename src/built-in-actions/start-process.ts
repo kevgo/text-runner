@@ -1,6 +1,6 @@
 import color from "colorette"
 import deb from "debug"
-import { ObservableProcess } from "observable-process"
+import { createObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../configuration/configuration"
 import { callArgs } from "../helpers/call-args"
@@ -18,11 +18,8 @@ export default async function startProcess(args: ActionArgs) {
     `starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`
   )
   RunningProcess.instance().set(
-    new ObservableProcess({
-      commands: callArgs(commandsToRun),
-      cwd: args.configuration.workspace,
-      stderr: args.formatter.stderr,
-      stdout: args.formatter.stdout
+    createObservableProcess(callArgs(commandsToRun), {
+      cwd: args.configuration.workspace
     })
   )
 }

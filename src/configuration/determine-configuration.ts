@@ -2,7 +2,7 @@ import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { mergeConfigurations } from "../helpers/merge-configurations"
 import { Configuration } from "./configuration"
 import { getFormatterClass } from "./get-formatter-class"
-import { Publications } from "./publications"
+import { Publications } from "./publications/publications"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 const defaultValues: Configuration = {

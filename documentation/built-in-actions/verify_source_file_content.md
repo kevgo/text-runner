@@ -46,7 +46,8 @@ with the content `hello again`.
 You can display its content in your documentation via this active block:
 
 <a textrun="run-markdown-in-textrun">
-````markdown
+
+```markdown
 
 Your **hello2.txt** file in the [bar folder](foo/bar)
 needs to contains this section: 
@@ -54,9 +55,8 @@ needs to contains this section:
 `​``
 hello again
 `​``
-</a>
 
-````
+```
 
 </a>
 

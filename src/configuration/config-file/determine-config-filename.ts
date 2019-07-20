@@ -1,7 +1,7 @@
 import color from "colorette"
 import fs from "fs-extra"
-import { PrintedUserError } from "./../errors/printed-user-error"
-import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { PrintedUserError } from "../../errors/printed-user-error"
+import { UserProvidedConfiguration } from "../user-provided-configuration"
 
 /**
  * Returns the filename for the config file

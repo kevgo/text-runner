@@ -20,6 +20,6 @@ export default async function verifyProcessOutput(args: ActionArgs) {
   }
   for (const line of expectedLines) {
     args.formatter.log(`waiting for ${line}`)
-    await process.waitForText(line)
+    await process.output.waitForText(line)
   }
 }

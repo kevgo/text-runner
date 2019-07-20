@@ -314,11 +314,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.8.tgz#e469b4bf9d1c9832aee4907ba8a051494357c12c"
   integrity sha512-aX+gFgA5GHcDi89KG5keey2zf0WfZk/HAQotEamsK2kbey+8yGKcson0hbK8E+v0NArlCJQCqMP161YhV6ZXLg==
 
-"@types/node@10.5.2":
-  version "10.5.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.5.2.tgz#f19f05314d5421fe37e74153254201a7bf00a707"
-  integrity sha512-m9zXmifkZsMHZBOyxZWilMwmTlpC8x5Ty360JKTiXvlXZfBWYpsg9ZZvP/Ye+iZUh+Q+MxDLjItVTWIsfwz+8Q==
-
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
@@ -2693,13 +2688,6 @@ debug@3.2.6, debug@^3.1.0, debug@^3.2.6:
   dependencies:
     ms "^2.1.1"
 
-debug@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.0.tgz#373687bffa678b38b1cd91f861b63850035ddc87"
-  integrity sha512-heNPJUJIqC+xB6ayLAMHaIrmN9HKa7aQO8MGqKpvCA+uJYVcvR6l5kgdrhRuwPFHU7P5/A1w0BjByPHwpfTDKg==
-  dependencies:
-    ms "^2.1.1"
-
 debug@4.1.1, debug@^4.0.0, debug@^4.1.0, debug@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
@@ -2815,11 +2803,6 @@ define-property@^2.0.2:
   dependencies:
     is-descriptor "^1.0.2"
     isobject "^3.0.1"
-
-delay@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/delay/-/delay-4.1.0.tgz#474cd28809da41d1a048a70a1d835f47ac377cd2"
-  integrity sha512-8Hea6/aOu3bPdDBQhSRUEUzF0QwuWmSPuIK+sxNdvcJtSfzb6HXrTd9DFJBCJcV9o83fFECqTgllqdnmUfq9+w==
 
 delay@4.3.0:
   version "4.3.0"
@@ -3315,7 +3298,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@3.0.2, extend@^3.0.0, extend@~3.0.2:
+extend@^3.0.0, extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -5788,12 +5771,10 @@ merge-source-map@^1.1.0:
   dependencies:
     source-map "^0.6.1"
 
-merge-stream@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-1.0.1.tgz#4041202d508a342ba00174008df0c251b8c135e1"
-  integrity sha1-QEEgLVCKNCugAXQAjfDCUbjBNeE=
-  dependencies:
-    readable-stream "^2.0.1"
+merge-stream@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/merge-stream/-/merge-stream-2.0.0.tgz#52823629a14dd00c9770fb6ad47dc6310f2c1f60"
+  integrity sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==
 
 merge2@^1.2.3:
   version "1.2.3"
@@ -6582,16 +6563,14 @@ object.pick@^1.2.0, object.pick@^1.3.0:
   dependencies:
     isobject "^3.0.1"
 
-observable-process@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-5.0.0.tgz#7fc8861b4c962c2e1a05530657d27fd56fb4c0e8"
-  integrity sha512-j3QqAqkeyyatYmV1c/+zTQy/MOk3PH/39/gqWPsCu5xf/Zvc2P3QKoy4h6SRRwANWRt6aqtgb4dURjHohIbn0Q==
+observable-process@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-7.0.0.tgz#6241cd3440cc1999b188dab71b3b46d119009f71"
+  integrity sha512-l3U8QhZMOgMyBPcaMv8C9LZbMNRPk1PfnD2ObdATL2DdL90MZtvSlhlS7OeiivnH1tqtLTaG9+KRodpm4ca/SA==
   dependencies:
-    debug "4.1.0"
-    extend "3.0.2"
-    merge-stream "1.0.1"
-    string-argv "0.1.1"
-    text-stream-search "2.1.4"
+    merge-stream "2.0.0"
+    string-argv "0.3.0"
+    text-stream-search "4.0.2"
 
 octokit-pagination-methods@^1.1.0:
   version "1.1.0"
@@ -7417,7 +7396,7 @@ read@1, read@~1.0.1, read@~1.0.7:
   dependencies:
     mute-stream "~0.0.4"
 
-"readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.6, readable-stream@~2.3.6:
+"readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.3.6, readable-stream@~2.3.6:
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
   integrity sha512-tQtKA9WIAhBF3+VLAseyMqZeBjW0AHJoxOtYqSUZNJxauErmLbVm2FW1y+J/YA9dUrAC39ITejlZWhVIwawkKw==
@@ -8674,6 +8653,11 @@ string-argv@0.1.1:
   resolved "https://registry.yarnpkg.com/string-argv/-/string-argv-0.1.1.tgz#66bd5ae3823708eaa1916fa5412703150d4ddfaf"
   integrity sha512-El1Va5ehZ0XTj3Ekw4WFidXvTmt9SrC0+eigdojgtJMVtPkF0qbBe9fyNSl9eQf+kUHnTSQxdQYzuHfZy8V+DQ==
 
+string-argv@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/string-argv/-/string-argv-0.3.0.tgz#0ea99e7257fea5e97a1bfcdfc19cf12d68e6ec6a"
+  integrity sha512-NGZHq3nkSXVtGZXTBjFru3MNfoZyIzN25T7BmvdgnSC0LCJczAGLLMQLyjywSIaAoqSemgLzBRHOsnrHbt60+Q==
+
 string-width@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-1.0.2.tgz#118bdf5b8cdc51a2a7e70d211e07e2b0b9b107d3"
@@ -8892,22 +8876,10 @@ text-extensions@^2.0.0:
   resolved "https://registry.yarnpkg.com/text-extensions/-/text-extensions-2.0.0.tgz#43eabd1b495482fae4a2bf65e5f56c29f69220f6"
   integrity sha512-F91ZqLgvi1E0PdvmxMgp+gcf6q8fMH7mhdwWfzXnl1k+GbpQDmi8l7DzLC5JTASKbwpY3TfxajAUzAXcv2NmsQ==
 
-text-stream-accumulator@1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/text-stream-accumulator/-/text-stream-accumulator-1.2.4.tgz#bd54c81ba1c3fec5819467589a4db162a3d113c5"
-  integrity sha512-XQXtj+Y2z+omfTKQ+nLChJ0o179cmdF6rjsqqQ+DTxNxj0sZNxNU5gXYTnW5Wa9nFXMHCxkD47Jcuhgw5RQC7Q==
-  dependencies:
-    "@types/node" "10.5.2"
-    debug "3.1.0"
-
-text-stream-search@2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/text-stream-search/-/text-stream-search-2.1.4.tgz#0cfcd5f1efc7b73f5d2dfd26a1bb6f43fca17dde"
-  integrity sha512-irdMGU09qkxFE/8y5ArSkzLbiz2Z9h9PyAhoc0oLT3XuajMyGBC/ZzR32RMfoDHhU5VhWgVxEVzgW46HsqlipQ==
-  dependencies:
-    debug "4.1.0"
-    delay "4.1.0"
-    text-stream-accumulator "1.2.4"
+text-stream-search@4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/text-stream-search/-/text-stream-search-4.0.2.tgz#5347b6d6ca2f434d154c35987dc68a40e2b158b4"
+  integrity sha512-qAgjrraXFOHGO1rHsDyEV4d5IP1iMGp/irZuEv8BAiwUWSvTQ7rdfK/8Owykh4MrK3/spbuBOFUGuxpkiq/vzw==
 
 text-table@^0.2.0, text-table@~0.2.0:
   version "0.2.0"

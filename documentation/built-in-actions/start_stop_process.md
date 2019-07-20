@@ -39,4 +39,4 @@ Stop the current process by hitting Ctrl-C
 #### More info
 
 - [feature specs](../../features/actions/built-in/start-stop-process/basic.feature)
-- [source code](../../src/built-in-actions/start-process.ts)
+- [source code](../../src/actions/built-in/start-process.ts)

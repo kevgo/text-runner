@@ -1,11 +1,11 @@
 import util from "util"
+import { Action } from "../actions/action"
+import { ActionArgs } from "../actions/action-args"
+import { actionFinder } from "../actions/action-finder"
 import { Activity } from "../activity-list/activity"
 import { Configuration } from "../configuration/configuration"
 import { PrintedUserError } from "../errors/printed-user-error"
 import { LinkTargetList } from "../link-targets/link-target-list"
-import { Action } from "./action"
-import { ActionArgs } from "./action-args"
-import { actionRepo } from "./action-repo"
 import { StatsCounter } from "./stats-counter"
 
 export async function runActivity(
@@ -28,7 +28,7 @@ export async function runActivity(
     nodes: activity.nodes
   }
   try {
-    const action = actionRepo.actionFor(activity)
+    const action = actionFinder.actionFor(activity)
     if (action.length === 1) {
       await runSyncOrPromiseFunc(action, args)
     } else {

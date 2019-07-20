@@ -2,9 +2,9 @@ import color from "colorette"
 import fs from "fs-extra"
 import got from "got"
 import path from "path"
-import { Configuration } from "../configuration/configuration"
-import { Formatter } from "../formatters/formatter"
-import { ActionArgs } from "../runners/action-args"
+import { Configuration } from "../../configuration/configuration"
+import { Formatter } from "../../formatters/formatter"
+import { ActionArgs } from "../action-args"
 
 // Checks for broken hyperlinks
 export default async function checkImage(args: ActionArgs) {

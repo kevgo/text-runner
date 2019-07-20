@@ -15,7 +15,7 @@ interface FunctionRepo {
 }
 
 // ActionRepo provides runnable action instances for activities.
-class ActionRepo {
+class ActionFinder {
   private builtinActions: FunctionRepo
   private customActions: FunctionRepo
 
@@ -92,7 +92,7 @@ class ActionRepo {
 
   private builtinActionFilePaths(): string[] {
     return glob
-      .sync(path.join(__dirname, "..", "built-in-actions", "*.?s"))
+      .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
       .filter(name => !name.endsWith(".d.ts"))
       .map(trimExtension)
   }
@@ -107,4 +107,4 @@ class ActionRepo {
   }
 }
 
-export const actionRepo = new ActionRepo()
+export const actionFinder = new ActionFinder()

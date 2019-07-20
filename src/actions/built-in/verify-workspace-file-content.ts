@@ -2,7 +2,7 @@ import * as assertNoDiff from "assert-no-diff"
 import color from "colorette"
 import fs from "fs-extra"
 import path from "path"
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from "../action-args"
 
 export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType("strong", "em")

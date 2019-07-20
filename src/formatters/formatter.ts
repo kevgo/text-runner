@@ -22,7 +22,7 @@ export interface Formatter {
   log(text: string): void
 
   /**
-   * Title allows to refine the name of the current step,
+   * Name allows to refine the name of the current step,
    * for example by providing more details.
    *
    * As an example, this method could be called to refine the step name `write file`
@@ -30,7 +30,7 @@ export interface Formatter {
    *
    * This method is called by the test step.
    */
-  title(text: string): void
+  name(text: string): void
 
   /**
    * Skip notifies the user that the test associated with this formatter

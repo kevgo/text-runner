@@ -16,7 +16,7 @@ export class DetailedFormatter implements Formatter {
   sourceDir: string
 
   /** the title of the current test step */
-  stepTitle: string
+  stepName: string
 
   /** link to the global stats counter */
   statsCounter: StatsCounter
@@ -28,7 +28,7 @@ export class DetailedFormatter implements Formatter {
   ) {
     this.activity = activity
     this.sourceDir = sourceDir
-    this.stepTitle = humanize(activity.actionName)
+    this.stepName = humanize(activity.actionName)
     this.statsCounter = statsCounter
   }
 
@@ -66,15 +66,15 @@ export class DetailedFormatter implements Formatter {
     console.log(
       color.green(
         `${this.activity.file.platformified()}:${this.activity.line} -- ${
-          this.title
+          this.name
         }`
       )
     )
     this.statsCounter.success()
   }
 
-  title(text: string) {
-    this.stepTitle = text
+  name(text: string) {
+    this.stepName = text
   }
 
   warning(warningMessage: string) {

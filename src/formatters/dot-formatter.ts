@@ -16,7 +16,7 @@ export class DotFormatter implements Formatter {
   sourceDir: string
 
   /** the title of the current test step */
-  stepTitle: string
+  stepName: string
 
   /** link to the global stats counter */
   statsCounter: StatsCounter
@@ -31,7 +31,7 @@ export class DotFormatter implements Formatter {
   ) {
     this.activity = activity
     this.sourceDir = sourceDir
-    this.stepTitle = humanize(activity.actionName)
+    this.stepName = humanize(activity.actionName)
     this.statsCounter = statsCounter
     this.output = []
   }
@@ -65,8 +65,8 @@ export class DotFormatter implements Formatter {
     process.stdout.write(color.green("."))
   }
 
-  title(text: string) {
-    this.stepTitle = text
+  name(text: string) {
+    this.stepName = text
   }
 
   // @ts-ignore: okay to not use the message here

@@ -24,7 +24,7 @@
     "is-glob": "4.0.1",
     "jsonfile": "5.0.0",
     "minimist": "1.2.0",
-    "observable-process": "5.0.0",
+    "observable-process": "7.0.0",
     "rechoir": "0.7.0",
     "remarkable": "1.7.1",
     "rimraf": "2.6.3",

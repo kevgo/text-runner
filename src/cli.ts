@@ -1,9 +1,9 @@
 import cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import { printUserError } from "./cli/print-user-error"
 import { parseCmdlineArgs } from "./configuration/cli/parse-cmdline-args"
 import { PrintedUserError } from "./errors/printed-user-error"
 import { UnprintedUserError } from "./errors/unprinted-user-error"
+import { printUserError } from "./helpers/print-user-error"
 import { textRunner } from "./text-runner"
 
 cliCursor.hide()

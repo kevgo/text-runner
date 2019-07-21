@@ -15,20 +15,30 @@ export interface Formatter {
    * by throwing the given Error.
    *
    * This method is called by the test framework when the test step throws an error.
+   *
+   * @param actionName the name of the action that just failed
+   * @param e the error with which the action failed
+   * @param output output provided by the action
    */
-  failed(e: Error, output: string): void
+  failed(actionName: string, e: Error, output: string): void
 
   /**
    * Skip notifies the user that the action associated with this formatter
    * was not executed.
+   *
+   * @param actionName the name of the action that just failed
+   * @param output output provided by the action
    */
-  skipped(message: string, output: string): void
+  skipped(actionName: string, output: string): void
 
   /**
    * Success notifies the user that the activity associated with this formatter has been successful.
    *
    * This method is called by the test framework when the test step
    * that is associated with this formatter instance finishes without throwing an exception.
+   *
+   * @param actionName the name of the action that just failed
+   * @param output output provided by the action
    */
-  success(): void
+  success(actionName: string, output: string): void
 }

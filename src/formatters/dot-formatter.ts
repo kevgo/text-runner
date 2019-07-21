@@ -1,9 +1,8 @@
 import color from "colorette"
-import humanize from "humanize-string"
 import path from "path"
 import { Activity } from "../activity-list/activity"
+import { Configuration } from "../configuration/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
-import { StatsCounter } from "../runners/stats-counter"
 import { Formatter } from "./formatter"
 
 /** A minimalistic formatter, prints dots for each check */
@@ -11,34 +10,18 @@ export class DotFormatter implements Formatter {
   /** the activity whose progess this formatter describes to the user */
   activity: Activity
 
-  /** the directory in which the sources are located */
-  // TODO: replace with configuration
-  sourceDir: string
+  /** Text-Runner configuration */
+  configuration: Configuration
 
-  /** the title of the current test step */
-  stepName: string
-
-  /** link to the global stats counter */
-  statsCounter: StatsCounter
-
-  /** the accumulated output from the test */
-  output: string[]
-
-  constructor(
-    activity: Activity,
-    sourceDir: string,
-    statsCounter: StatsCounter
-  ) {
+  constructor(activity: Activity, configuration: Configuration) {
     this.activity = activity
-    this.sourceDir = sourceDir
-    this.stepName = humanize(activity.actionName)
-    this.statsCounter = statsCounter
-    this.output = []
+    this.configuration = configuration
   }
 
-  failed(err: Error) {
+  // @ts-ignore: okay to not use parameters here
+  failed(stepName: string, err: Error, output: string) {
     console.log()
-    console.log(color.dim(this.output.join("")))
+    console.log(color.dim(output))
     process.stdout.write(
       color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
@@ -47,30 +30,21 @@ export class DotFormatter implements Formatter {
     console.log(err.message)
     printCodeFrame(
       console.log,
-      path.join(this.sourceDir, this.activity.file.platformified()),
+      path.join(
+        this.configuration.sourceDir,
+        this.activity.file.platformified()
+      ),
       this.activity.line
     )
   }
 
-  log(text: string) {
-    this.output.push(text)
-  }
-
-  // @ts-ignore: okay to not use the message here
-  skipped(message: string) {
+  // @ts-ignore: okay to not use parameters here
+  skipped(stepName: string, output: string) {
     process.stdout.write(color.cyan("."))
   }
 
-  success() {
+  // @ts-ignore: okay to not use parameters here
+  success(stepName: string, output: string) {
     process.stdout.write(color.green("."))
-  }
-
-  name(text: string) {
-    this.stepName = text
-  }
-
-  // @ts-ignore: okay to not use the message here
-  warning(warningMessage: string) {
-    process.stdout.write(color.magenta("."))
   }
 }

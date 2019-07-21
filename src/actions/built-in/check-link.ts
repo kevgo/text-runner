@@ -26,21 +26,22 @@ export default async function checkLink(args: ActionArgs) {
   const filePath = new AbsoluteFilePath(args.file)
 
   if (isLinkToAnchorInSameFile(target)) {
-    await checkLinkToAnchorInSameFile(filePath, target, args)
-    return
+    const result = await checkLinkToAnchorInSameFile(filePath, target, args)
+    return result
   }
 
   if (isLinkToAnchorInOtherFile(target)) {
-    await checkLinkToAnchorInOtherFile(filePath, target, args)
-    return
+    const result = await checkLinkToAnchorInOtherFile(filePath, target, args)
+    return result
   }
 
   if (isExternalLink(target)) {
-    await checkExternalLink(target, args)
-    return
+    const result = await checkExternalLink(target, args)
+    return result
   }
 
   await checkLinkToFilesystem(target, args)
+  return
 }
 
 async function checkExternalLink(target: string, args: ActionArgs) {
@@ -62,6 +63,7 @@ async function checkExternalLink(target: string, args: ActionArgs) {
       )
     }
   }
+  return
 }
 
 async function checkLinkToFilesystem(target: string, args: ActionArgs) {

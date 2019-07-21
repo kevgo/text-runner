@@ -14,12 +14,14 @@ export default async function checkImage(args: ActionArgs) {
   }
   args.name(`image ${color.cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
-    await checkRemoteImage(imagePath, args)
+    const result = await checkRemoteImage(imagePath, args)
+    return result
   } else {
     if (!imagePath.startsWith("/")) {
       imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
     }
-    await checkLocalImage(imagePath, args.configuration)
+    const result = await checkLocalImage(imagePath, args.configuration)
+    return result
   }
 }
 
@@ -46,6 +48,7 @@ async function checkRemoteImage(url: string, args: ActionArgs) {
       throw err
     }
   }
+  return
 }
 
 function isRemoteImage(imagePath: string): boolean {

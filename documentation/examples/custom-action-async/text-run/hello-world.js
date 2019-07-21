@@ -1,7 +1,7 @@
 const delay = require("delay")
 
-module.exports = async ({ formatter }) => {
+module.exports = async ({ log }) => {
   await delay(1)
-  formatter.log("Hello World!")
+  log("Hello World!")
   await delay(1)
 }

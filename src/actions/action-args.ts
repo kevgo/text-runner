@@ -1,6 +1,8 @@
 import { Configuration } from "../configuration/configuration"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { AstNodeList } from "../parsers/ast-node-list"
+import { LogFn } from "../runners/log-function"
+import { RefineNameFn } from "../runners/refine-name-function"
 
 export interface ActionArgs {
   /** TextRunner configuration data derived from the config file and CLI switches */
@@ -16,7 +18,7 @@ export interface ActionArgs {
   line: number
 
   /** allows printing test output to the user, behaves like console.log */
-  log: (text: string) => void
+  log: LogFn
 
   /**
    * Name allows to provide a more specific name for the current action.
@@ -25,7 +27,7 @@ export interface ActionArgs {
    * `write file "foo.yml"` once the name of the file to be written
    * has been extracted from the document AST.
    */
-  name: (newName: string) => void
+  name: RefineNameFn
 
   /** all link targets in the current documentation  */
   linkTargets: LinkTargetList

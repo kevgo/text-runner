@@ -15,6 +15,7 @@ export default async function verifyWorkspaceContainsDirectory(
     )} directory exists in the test workspace`
   )
   args.log(`ls ${fullPath}`)
+  let stats: fs.Stats
   try {
     stats = await fs.lstat(fullPath)
   } catch (err) {

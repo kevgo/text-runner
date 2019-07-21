@@ -28,8 +28,8 @@ but in [kebab-case](http://wiki.c2.com/?KebabCase).
 Let's create this file with the content:
 
 ```javascript
-module.exports = function({ formatter }) {
-  formatter.log('Hello world!')
+module.exports = function({ log }) {
+  log("Hello world!")
 }
 ```
 
@@ -126,15 +126,15 @@ Here is the corresponding action, implemented in
 **text-run/console-command.js**:
 
 ```javascript
-child_process = require('child_process')
+child_process = require("child_process")
 
-module.exports = function({ formatter, nodes }) {
+module.exports = function({ log, nodes }) {
   // determine which command to run
   // (you could also iterate the "nodes" array directly here)
   const commandToRun = nodes.text()
 
   // perform the action
-  formatter.log(child_process.execSync(commandToRun, { encoding: 'utf8' }))
+  log(child_process.execSync(commandToRun, { encoding: "utf8" }))
 }
 ```
 

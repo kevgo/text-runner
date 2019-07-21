@@ -1,7 +1,7 @@
 @smoke
 Feature: checking embedded Markdown images
 
-    When writing documentation
+  When writing documentation
   I want to be able to use Markdown image tags
   So that I can add images easily to the document without having to also learn HTML.
 

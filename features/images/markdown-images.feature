@@ -1,7 +1,7 @@
 @smoke
 Feature: checking embedded Markdown images
 
-  When writing documentation
+    When writing documentation
   I want to be able to use Markdown image tags
   So that I can add images easily to the document without having to also learn HTML.
 
@@ -71,7 +71,7 @@ Feature: checking embedded Markdown images
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
-      | WARNING  | image http://google.com/onetuhoenzonk.png does not exist |
+      | MESSAGE  | image http://google.com/onetuhoenzonk.png does not exist |
 
 
   Scenario: Markdown image tag without source

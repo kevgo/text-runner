@@ -1,6 +1,6 @@
 Feature: Fail on non-actionable Markdown
 
-  When running Text-Runner
+    When running Text-Runner
   I want to know if my entire documentation doesn't perform a single action
   So that I know I am doing something wrong and can fix my mistake.
 
@@ -14,4 +14,4 @@ Feature: Fail on non-actionable Markdown
       """
     When running text-run
     Then it signals:
-      | WARNING | no activities found |
+      | MESSAGE | no activities found |

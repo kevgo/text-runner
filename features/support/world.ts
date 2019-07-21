@@ -94,14 +94,11 @@ function World() {
     if (table.FILENAME && table.LINE) {
       expectedText += `:${table.LINE}`
     }
-    if (table.FILENAME && (table.MESSAGE || table.WARNING)) {
+    if (table.FILENAME && table.MESSAGE) {
       expectedText += " -- "
     }
     if (table.MESSAGE) {
       expectedText += table.MESSAGE
-    }
-    if (table.WARNING) {
-      expectedText += table.WARNING
     }
     const actual = standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {

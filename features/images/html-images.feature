@@ -1,6 +1,7 @@
+@debug
 Feature: checking embedded HTML images
 
-  When writing documentation
+    When writing documentation
   I want to be able to use HTML image tags
   So that I can use extended HTML attributes to size and align images.
 
@@ -83,7 +84,7 @@ Feature: checking embedded HTML images
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
-      | WARNING  | image http://google.com/onetuhoenzonk.png does not exist |
+      | MESSAGE  | image http://google.com/onetuhoenzonk.png does not exist |
 
 
   Scenario: HTML image tag without source

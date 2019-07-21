@@ -14,4 +14,4 @@ Feature: Fail on non-actionable Markdown
       """
     When running text-run
     Then it signals:
-      | WARNING | no activities found |
+      | MESSAGE | no activities found |

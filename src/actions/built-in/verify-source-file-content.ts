@@ -13,7 +13,7 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = args.nodes.textInNodeOfType("fence")
-  args.formatter.name(
+  args.name(
     `verifying document content matches source code file ${color.cyan(
       fileName
     )}`
@@ -24,7 +24,7 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     relativeBaseDir,
     fileName
   )
-  args.formatter.log(`ls ${filePath}`)
+  args.log(`ls ${filePath}`)
   let actualContent
   try {
     actualContent = await fs.readFile(filePath, "utf8")

@@ -3,7 +3,7 @@ import { RunningProcess } from "./helpers/running-process"
 
 // Waits until the currently running console command produces the given output
 export default async function verifyProcessOutput(args: ActionArgs) {
-  args.formatter.name("verifying the output of the long-running process")
+  args.name("verifying the output of the long-running process")
   const expectedOutput = args.nodes.textInNodeOfType("fence")
   const expectedLines = expectedOutput
     .split("\n")
@@ -16,7 +16,7 @@ export default async function verifyProcessOutput(args: ActionArgs) {
     )
   }
   for (const line of expectedLines) {
-    args.formatter.log(`waiting for ${line}`)
+    args.log(`waiting for ${line}`)
     await process.output.waitForText(line)
   }
 }

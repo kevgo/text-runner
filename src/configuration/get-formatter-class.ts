@@ -1,12 +1,12 @@
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
-import { Formatter } from "../formatters/formatter"
+import { FormatterImplemention } from "../formatters/formatter-implementation"
 
 export function getFormatterClass(
   name: string | undefined,
-  defaultClass: typeof Formatter
-): typeof Formatter {
+  defaultClass: FormatterImplemention
+): FormatterImplemention {
   if (!name) {
     return defaultClass
   }

@@ -88,6 +88,9 @@ function World() {
 
   this.verifyOutput = table => {
     let expectedText = ""
+    if (table.OUTPUT) {
+      expectedText += table.OUTPUT + "\n"
+    }
     if (table.FILENAME) {
       expectedText += table.FILENAME
     }

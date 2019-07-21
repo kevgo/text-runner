@@ -1,6 +1,5 @@
 import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
 import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
-import { pretendToUse } from "../../../../../helpers/pretend-to-use"
 import { AstNodeList } from "../../../../ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
 import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
@@ -11,6 +10,7 @@ const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/
 
 export default function(
   node: RemarkableNode,
+  // @ts-ignore: unused variable
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
@@ -42,7 +42,6 @@ export default function(
       tag: "/pre",
       type: "fence_close"
     })
-    pretendToUse(openTags)
     return result
   }
   const tableMatch = node.content.trim().match(tableRegex)

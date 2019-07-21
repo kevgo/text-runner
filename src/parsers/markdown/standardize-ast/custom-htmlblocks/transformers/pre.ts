@@ -1,6 +1,5 @@
 import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
 import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
-import { pretendToUse } from "../../../../../helpers/pretend-to-use"
 import { AstNode } from "../../../../ast-node"
 import { AstNodeList } from "../../../../ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
@@ -11,6 +10,7 @@ const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 
 export default async function transformPre(
   node: RemarkableNode,
+  // @ts-ignore: unused variable
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
@@ -33,6 +33,5 @@ export default async function transformPre(
     type: "fence"
   })
   result.pushNode(resultNode)
-  pretendToUse(openTags)
   return result
 }

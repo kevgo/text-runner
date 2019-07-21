@@ -8,7 +8,7 @@ export default async function createDirectory(args: ActionArgs) {
   if (!directoryName) {
     throw new Error("empty directory name given")
   }
-  args.formatter.name(`create directory ${color.cyan(directoryName)}`)
+  args.name(`create directory ${color.cyan(directoryName)}`)
   const fullPath = path.join(args.configuration.workspace, directoryName)
   await fs.ensureDir(fullPath)
 }

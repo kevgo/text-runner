@@ -11,6 +11,6 @@ Feature: ignoring mailto links
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                 |
-      | LINE     | 1                                    |
-      | MESSAGE  | skipping link to mailto:foo@acme.com |
+      | FILENAME | 1.md                                  |
+      | LINE     | 1                                     |
+      | MESSAGE  | skipping: link to mailto:foo@acme.com |

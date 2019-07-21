@@ -3,7 +3,7 @@ import { ActionArgs } from "../action-args"
 // Runs the JavaScript code given in the code block
 export default function validateJavascript(args: ActionArgs) {
   const code = args.nodes.textInNodeOfType("fence")
-  args.formatter.log(code)
+  args.log(code)
   try {
     new Function(code)
   } catch (e) {

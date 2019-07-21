@@ -1,4 +1,3 @@
-@debug
 Feature: checking embedded HTML images
 
     When writing documentation

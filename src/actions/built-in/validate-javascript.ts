@@ -6,8 +6,7 @@ export default function validateJavascript(args: ActionArgs) {
   const code = args.nodes.textInNodeOfType("fence")
   args.formatter.log(code)
   try {
-    // we only need to run the code for its side effects
-    pretendToUse(new Function(code))
+    new Function(code)
   } catch (e) {
     throw new Error(`invalid Javascript: ${e.message}`)
   }

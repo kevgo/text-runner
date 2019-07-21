@@ -11,7 +11,8 @@ setDefaultTimeout(30000)
 
 Before(async function() {
   if (process.env.CUCUMBER_PARALLEL) {
-    this.rootDir = await tmp.dir()
+    const tempDir = await tmp.dir()
+    this.rootDir = tempDir.path
   } else {
     this.rootDir = path.join(process.cwd(), "tmp")
   }

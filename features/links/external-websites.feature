@@ -55,4 +55,4 @@ Feature: verifying links to websites
       | FILENAME | 1.md                                                       |
       | LINE     | 1                                                          |
       | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com |
-      | OUTPUT   | existing external doesn't exist                            |
+      | OUTPUT   | external website doesn't exist                             |

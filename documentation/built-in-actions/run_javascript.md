@@ -71,10 +71,10 @@ in `text-run.yml`:
 actions:
   runJavascript:
     replace:
-      'regex to find': 'text to replace it with'
+      "regex to find": "text to replace it with"
 ```
 
 #### More info
 
 - [feature specs](../../features/actions/built-in/run-javascript/run-javascript.feature)
-- [source code](../../src/built-in-actions/run-javascript.ts)
+- [source code](../../src/actions/built-in/run-javascript.ts)

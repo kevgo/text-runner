@@ -1,9 +1,9 @@
 import color from "colorette"
+import { actionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
-import { actionRepo } from "../runners/action-repo"
 
 export async function unusedCommand(config: Configuration) {
   // step 1: find files
@@ -22,7 +22,7 @@ export async function unusedCommand(config: Configuration) {
   )
 
   // step 4: find defined activities
-  const definedActivityNames = actionRepo.customActionNames()
+  const definedActivityNames = actionFinder.customActionNames()
 
   // step 5: identify unused activities
   const unusedActivityNames = definedActivityNames.filter(

@@ -17,4 +17,4 @@ you can use this code to verify that it exists:
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-workspace-contains-directory/verify-workspace-contains-directory.feature)
-- [source code](../../src/built-in-actions/verify-workspace-contains-directory.ts)
+- [source code](../../src/actions/built-in/verify-workspace-contains-directory.ts)

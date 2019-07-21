@@ -1,6 +1,6 @@
-import { Configuration } from "../configuration/configuration"
-import { pretendToUse } from "../helpers/pretend-to-use"
-import { ActionArgs } from "../runners/action-args"
+import { Configuration } from "../../configuration/configuration"
+import { pretendToUse } from "../../helpers/pretend-to-use"
+import { ActionArgs } from "../action-args"
 
 type DoneFunction = (err?: Error) => void
 

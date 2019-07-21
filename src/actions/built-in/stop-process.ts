@@ -1,5 +1,5 @@
 import { endChildProcesses } from "end-child-processes"
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from "../action-args"
 import { RunningProcess } from "./helpers/running-process"
 
 // Stops the currently running console command.

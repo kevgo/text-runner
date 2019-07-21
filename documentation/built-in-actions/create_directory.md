@@ -16,4 +16,4 @@
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-directory/create-directory.feature)
-- [source code](../../src/built-in-actions/create-directory.ts)
+- [source code](../../src/actions/built-in/create-directory.ts)

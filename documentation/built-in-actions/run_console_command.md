@@ -27,14 +27,14 @@ Assuming we have a little application called
 **greeter.js**
 
 ```js
-const readline = require('readline')
+const readline = require("readline")
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
 
-rl.question('Your name?', name => {
-  rl.question('Current day of the week?', weekday => {
+rl.question("Your name?", name => {
+  rl.question("Current day of the week?", weekday => {
     console.log(`Hello ${name}, happy ${weekday}!`)
     process.exit()
   })
@@ -130,4 +130,4 @@ folder contains a working version of this configuration.
 #### More info
 
 - [feature specs](../../features/actions/built-in/run-console-command/)
-- [source code](../../src/built-in-actions/run-console-command.ts)
+- [source code](../../src/actions/built-in/run-console-command.ts)

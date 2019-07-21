@@ -3,7 +3,7 @@ import color from "colorette"
 import eol from "eol"
 import fs from "fs-extra"
 import path from "path"
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from "../action-args"
 
 export default async function verifySourceFileContent(args: ActionArgs) {
   const fileName = args.nodes.textInNodeOfType("strong_open")

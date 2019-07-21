@@ -1,5 +1,5 @@
-import { UnprintedUserError } from "../errors/unprinted-user-error"
-import { ActionArgs } from "../runners/action-args"
+import { UnprintedUserError } from "../../errors/unprinted-user-error"
+import { ActionArgs } from "../action-args"
 import { RunningProcess } from "./helpers/running-process"
 
 // Waits until the currently running console command produces the given output

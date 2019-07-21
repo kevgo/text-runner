@@ -11,6 +11,7 @@ export class DetailedFormatter implements Formatter {
   // TODO: replace with configuration
   configuration: Configuration
 
+  // @ts-ignore: unused parameter
   constructor(stepCount: number, configuration: Configuration) {
     this.configuration = configuration
   }

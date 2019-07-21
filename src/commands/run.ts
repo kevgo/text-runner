@@ -47,7 +47,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     config
   )
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, linkTargets, config, stats)
+  const jobs = executeParallel(links, linkTargets, config, stats, formatter)
   jobs.push(
     executeSequential(activities, config, linkTargets, stats, formatter)
   )

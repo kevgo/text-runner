@@ -42,17 +42,30 @@ export async function runActivity(
     }
     if (result === undefined) {
       statsCounter.success()
-      formatter.success(nameRefiner.finalName(), outputCollector.toString())
+      formatter.success(
+        activity,
+        nameRefiner.finalName(),
+        outputCollector.toString()
+      )
     } else if (result === args.SKIPPING) {
       statsCounter.skip()
-      formatter.skipped(nameRefiner.finalName(), outputCollector.toString())
+      formatter.skipped(
+        activity,
+        nameRefiner.finalName(),
+        outputCollector.toString()
+      )
     } else {
       throw new Error(`unknown return code from action: ${result}`)
     }
   } catch (err) {
     statsCounter.error()
     if (isUserError(err)) {
-      formatter.failed(nameRefiner.finalName(), err, outputCollector.toString())
+      formatter.failed(
+        activity,
+        nameRefiner.finalName(),
+        err,
+        outputCollector.toString()
+      )
       return new PrintedUserError(err)
     } else {
       // here we have a developer error like for example TypeError

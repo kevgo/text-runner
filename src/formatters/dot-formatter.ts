@@ -16,7 +16,7 @@ export class DotFormatter implements Formatter {
   }
 
   // @ts-ignore: okay to not use parameters here
-  failed(stepName: string, activity: Activity, err: Error, output: string) {
+  failed(activity: Activity, stepName: string, err: Error, output: string) {
     console.log()
     console.log(color.dim(output))
     process.stdout.write(
@@ -31,12 +31,12 @@ export class DotFormatter implements Formatter {
   }
 
   // @ts-ignore: okay to not use parameters here
-  skipped(stepName: string, activity: Activity, output: string) {
+  skipped(activity: Activity, stepName: string, output: string) {
     process.stdout.write(color.cyan("."))
   }
 
   // @ts-ignore: okay to not use parameters here
-  success(stepName: string, activity: Activity, output: string) {
+  success(activity: Activity, stepName: string, output: string) {
     process.stdout.write(color.green("."))
   }
 }

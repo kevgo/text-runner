@@ -39,10 +39,10 @@ Feature: verifying links to websites
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                                    |
-      | LINE     | 1                                                                       |
-      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com              |
-      | OUTPUT   | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
+      | FILENAME | 1.md                                                       |
+      | LINE     | 1                                                          |
+      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com |
+      | OUTPUT   | existing external doesn't exist                            |
 
 
   Scenario: HTML link to non-existing website
@@ -52,7 +52,7 @@ Feature: verifying links to websites
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                                    |
-      | LINE     | 1                                                                       |
-      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com              |
-      | OUTPUT   | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
+      | FILENAME | 1.md                                                       |
+      | LINE     | 1                                                          |
+      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com |
+      | OUTPUT   | existing external doesn't exist                            |

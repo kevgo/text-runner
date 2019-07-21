@@ -1,5 +1,5 @@
 import * as assertNoDiff from "assert-no-diff"
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from "../action-args"
 import { RunningConsoleCommand } from "./helpers/running-console-command"
 
 export default function verifyConsoleCommandOutput(args: ActionArgs) {

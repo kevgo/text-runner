@@ -3,7 +3,6 @@ import fs from "fs-extra"
 import got from "got"
 import path from "path"
 import { Configuration } from "../../configuration/configuration"
-import { Formatter } from "../../formatters/formatter"
 import { ActionArgs } from "../action-args"
 
 // Checks for broken hyperlinks
@@ -13,9 +12,9 @@ export default async function checkImage(args: ActionArgs) {
   if (!imagePath) {
     throw new Error("image tag without source")
   }
-  args.formatter.name(`image ${color.cyan(imagePath)}`)
+  args.name(`image ${color.cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
-    await checkRemoteImage(imagePath, args.formatter, args.configuration)
+    await checkRemoteImage(imagePath, args)
   } else {
     if (!imagePath.startsWith("/")) {
       imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
@@ -32,18 +31,17 @@ async function checkLocalImage(imagePath: string, c: Configuration) {
   }
 }
 
-async function checkRemoteImage(url: string, f: Formatter, c: Configuration) {
-  if (c.offline) {
-    f.skipped(`skipping external image: ${color.magenta(url)}`)
-    return
+async function checkRemoteImage(url: string, args: ActionArgs) {
+  if (args.configuration.offline) {
+    return args.SKIPPING
   }
   try {
     await got(url, { timeout: 2000 })
   } catch (err) {
     if (err.statusCode === 404) {
-      f.warning(`image ${color.magenta(url)} does not exist`)
+      args.log(`image ${color.magenta(url)} does not exist`)
     } else if (err instanceof got.TimeoutError) {
-      f.warning(`image ${color.magenta(url)} timed out`)
+      args.log(`image ${color.magenta(url)} timed out`)
     } else {
       throw err
     }

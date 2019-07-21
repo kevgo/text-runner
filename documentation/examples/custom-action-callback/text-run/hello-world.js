@@ -1,6 +1,6 @@
-module.exports = ({ formatter }, done) => {
+module.exports = ({ log }, done) => {
   setTimeout(function() {
-    formatter.log("Hello World!")
+    log("Hello World!")
     setTimeout(function() {
       done()
     }, 1)

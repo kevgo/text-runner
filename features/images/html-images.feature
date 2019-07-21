@@ -83,7 +83,8 @@ Feature: checking embedded HTML images
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
-      | WARNING  | image http://google.com/onetuhoenzonk.png does not exist |
+      | MESSAGE  | image http://google.com/onetuhoenzonk.png                |
+      | OUTPUT   | image http://google.com/onetuhoenzonk.png does not exist |
 
 
   Scenario: HTML image tag without source

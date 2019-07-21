@@ -7,7 +7,7 @@ module.exports = async function verifyMakeCommand(args) {
     .text()
     .replace(/make\s+/, "")
     .trim()
-  args.formatter.name(`verify Make command ${color.cyan(expected)} exists`)
+  args.name(`verify Make command ${color.cyan(expected)} exists`)
   const makefilePath = path.join(args.configuration.sourceDir, "Makefile")
   const makefileContent = await fs.readFile(makefilePath, "utf8")
   const commands = makefileContent

@@ -3,7 +3,7 @@ import { ActionArgs } from "../action-args"
 
 // Runs the async-await JavaScript code given in the code block
 export default function runAsyncJavascript(args: ActionArgs) {
-  args.formatter.name("run async javascript")
+  args.name("run async javascript")
   let code = args.nodes.textInNodeOfType("fence")
   if (code == null) {
     throw new Error("no JavaScript code found in the fenced block")
@@ -12,7 +12,7 @@ export default function runAsyncJavascript(args: ActionArgs) {
   code = replaceRequireLocalModule(code)
   code = replaceVariableDeclarations(code)
   code = wrapInAsyncFunction(code)
-  args.formatter.log(code)
+  args.log(code)
   eval(code)
 }
 

@@ -10,4 +10,4 @@ Feature: failing on empty directory
   Scenario: running inside an empty directory
     When running text-run
     Then it signals:
-      | WARNING | no Markdown files found |
+      | MESSAGE | no Markdown files found |

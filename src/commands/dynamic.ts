@@ -64,10 +64,6 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
       filenames.length
     } files`
   )
-  if (stats.warnings() > 0) {
-    text += colorFn(", ")
-    text += color.magenta(`${stats.warnings()} warnings`)
-  }
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   if (error) {

@@ -15,6 +15,6 @@ Feature: "offline" option
       """
     When running "text-run --offline"
     Then it signals:
-      | MESSAGE | skipping external link: http://google.com |
+      | MESSAGE | skipping: link to http://google.com |
     And it signals:
-      | MESSAGE | skipping external image: http://google.com/foo.png |
+      | MESSAGE | skipping: image http://google.com/foo.png |

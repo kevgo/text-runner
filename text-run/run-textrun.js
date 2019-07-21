@@ -6,14 +6,12 @@ const {
 } = require("../dist/actions/built-in/helpers/running-console-command")
 
 module.exports = async function runTextrun(args) {
-  args.formatter.name("running the created Markdown file in TextRunner")
+  args.name("running the created Markdown file in TextRunner")
 
   var textRunPath = path.join(__dirname, "..", "bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const processor = createObservableProcess(callArgs(textRunPath), {
-    cwd: args.configuration.workspace,
-    stdout: args.formatter.stdout,
-    stderr: args.formatter.stderr
+    cwd: args.configuration.workspace
   })
   RunningConsoleCommand.set(processor)
   await processor.waitForEnd()

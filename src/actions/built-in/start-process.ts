@@ -14,7 +14,7 @@ const debug = deb("start-console-command")
 // Leaves the command running.
 export default async function startProcess(args: ActionArgs) {
   const commandsToRun = getCommandsToRun(args)
-  args.formatter.name(
+  args.name(
     `starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`
   )
   RunningProcess.instance().set(

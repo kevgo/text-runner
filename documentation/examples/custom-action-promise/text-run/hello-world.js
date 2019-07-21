@@ -1,7 +1,7 @@
-module.exports = ({ formatter }) => {
+module.exports = ({ log }) => {
   return new Promise(function(resolve) {
     setTimeout(function() {
-      formatter.log("Hello World!")
+      log("Hello World!")
       setTimeout(function() {
         resolve()
       }, 1)

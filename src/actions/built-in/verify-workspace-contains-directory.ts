@@ -9,13 +9,13 @@ export default async function verifyWorkspaceContainsDirectory(
 ) {
   const directory = args.nodes.text()
   const fullPath = path.join(args.configuration.workspace, directory)
-  args.formatter.name(
+  args.name(
     `verifying the ${color.bold(
       color.cyan(directory)
     )} directory exists in the test workspace`
   )
-  args.formatter.log(`ls ${fullPath}`)
-  let stats
+  args.log(`ls ${fullPath}`)
+  let stats: fs.Stats
   try {
     stats = await fs.lstat(fullPath)
   } catch (err) {

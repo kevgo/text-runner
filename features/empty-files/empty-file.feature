@@ -11,6 +11,6 @@ Feature: running empty files
     Given my workspace contains an empty file "empty.md"
     When running text-run
     Then it signals:
-      | WARNING | found empty file empty.md |
+      | MESSAGE | found empty file empty.md |
     And it signals:
-      | WARNING | no activities found |
+      | MESSAGE | no activities found |

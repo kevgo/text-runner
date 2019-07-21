@@ -28,8 +28,8 @@ but in [kebab-case](http://wiki.c2.com/?KebabCase).
 Let's create this file with the content:
 
 ```javascript
-module.exports = function({ formatter }) {
-  formatter.log('Hello world!')
+module.exports = function({ log }) {
+  log("Hello world!")
 }
 ```
 
@@ -50,10 +50,12 @@ The handler function for our action is given an object containing various inform
 
 <a textrun="verify-handler-args">
 
+- **SKIPPING:** return this value if you have decided to skip the current action
 - **file**, **line:** location of the currently executed block in the documentation
 - **nodes:** the [document content](#accessing-document-content) inside the active block for this action,
-- **formatter:** the [Formatter](#formatter) instance to use, for signaling test progress and console output to TextRunner
 - **configuration:** TextRunner configuration data (which TextRunner options are enabled)
+- **log:** call this function to output stuff to the user running your test
+- **name:** call this function to refine the name of the current test step
   </a>
 
 TextRunner supports all forms of synchronous and asynchronous operations:
@@ -126,15 +128,15 @@ Here is the corresponding action, implemented in
 **text-run/console-command.js**:
 
 ```javascript
-child_process = require('child_process')
+child_process = require("child_process")
 
-module.exports = function({ formatter, nodes }) {
+module.exports = function({ log, nodes }) {
   // determine which command to run
   // (you could also iterate the "nodes" array directly here)
   const commandToRun = nodes.text()
 
   // perform the action
-  formatter.log(child_process.execSync(commandToRun, { encoding: 'utf8' }))
+  log(child_process.execSync(commandToRun, { encoding: "utf8" }))
 }
 ```
 

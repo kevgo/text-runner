@@ -9,7 +9,7 @@ export default async function verifyNpmInstall(args: ActionArgs) {
   const pkg = await jsonfile.readFile(
     path.join(args.configuration.sourceDir, "package.json")
   )
-  args.formatter.name(`verify NPM installs ${color.cyan(pkg.name)}`)
+  args.name(`verify NPM installs ${color.cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(

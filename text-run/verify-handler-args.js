@@ -11,5 +11,5 @@ module.exports = function verifyHandlerArgs(args) {
     .map(removeTrailingColon)
   const actualTools = Object.keys(args).sort()
   removeValue(actualTools, "linkTargets")
-  assertNoDiff.chars(expectedTools.join("\n"), actualTools.join("\n"))
+  assertNoDiff.trimmedLines(expectedTools.join("\n"), actualTools.join("\n"))
 }

@@ -1,67 +1,44 @@
-import deb from "debug"
-import humanize from "humanize-string"
-import { Activity } from "../activity-list/activity"
-import { StatsCounter } from "../runners/stats-counter"
-
-const debug = deb("formatter")
-
 /**
- * Base class for formatters
+ * Formatter is the API that formatters have to implement
+ *
+ * A formatter formats the steps in the entire test suite.
+ * It is given the total number of test steps in the constructor.
+ * After each test step is done, the test runtime calls either
+ * `success`, `failed`, or `skipped` on the formatter.
+ *
+ * Formatters shouldn't assume that tests run in any particular order
+ * or strictly sequentially.
  */
-export class Formatter {
-  activity: Activity
-  sourceDir: string
-  statsCounter: StatsCounter
-  output: string
-  title: string
-  skipped: boolean
-  // TODO: remove this?
-  warned: boolean
-
-  constructor(
-    activity: Activity,
-    sourceDir: string,
-    statsCounter: StatsCounter
-  ) {
-    this.activity = activity
-    this.statsCounter = statsCounter
-    this.output = ""
-    this.title = humanize(activity.actionName)
-    this.sourceDir = sourceDir
-    this.skipped = false
-    this.warned = false
-  }
-
-  error(errorMessage: string) {
-    debug("error: " + errorMessage)
-    this.statsCounter.error()
-  }
-
-  log(text: string | Buffer): boolean {
-    this.output += text.toString()
-    return false
-  }
-
-  skip(message: string) {
-    debug("skipping: " + message)
-    this.skipped = true
-    this.statsCounter.skip()
-  }
-
-  success() {
-    this.statsCounter.success()
-  }
+export interface Formatter {
+  /**
+   * Error notifies the user that the step associated with this formatter has failed
+   * by throwing the given Error.
+   *
+   * This method is called by the test framework when the test step throws an error.
+   *
+   * @param actionName the name of the action that just failed
+   * @param e the error with which the action failed
+   * @param output output provided by the action
+   */
+  failed(actionName: string, e: Error, output: string): void
 
   /**
-   * allows the user to set a new name for this step
+   * Skip notifies the user that the action associated with this formatter
+   * was not executed.
+   *
+   * @param actionName the name of the action that just failed
+   * @param output output provided by the action
    */
-  name(newTitle: string) {
-    this.title = newTitle
-  }
+  skipped(actionName: string, output: string): void
 
-  warning(warningMessage: string) {
-    debug("warning: " + warningMessage)
-    this.warned = true
-    this.statsCounter.warning()
-  }
+  /**
+   * Success notifies the user that the activity associated with this formatter has been successful.
+   *
+   * This method is called by the test framework when the test step
+   * that is associated with this formatter instance finishes without throwing an exception.
+   *
+   * @param actionName the name of the action that just failed
+   * @param output output provided by the action
+   */
+  success(actionName: string, output: string): void
 }

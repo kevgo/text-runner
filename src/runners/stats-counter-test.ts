@@ -21,12 +21,6 @@ describe("StatsCounter", function() {
     counter.success()
     expect(counter.successes()).to.equal(2)
   })
-  it("counts the number of warnings", function() {
-    const counter = new StatsCounter()
-    counter.warning()
-    counter.warning()
-    expect(counter.warnings()).to.equal(2)
-  })
   it("counts the time", async function() {
     const counter = new StatsCounter()
     await delay(1)

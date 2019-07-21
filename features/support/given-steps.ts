@@ -129,7 +129,7 @@ Given("my source code contains the HelloWorld action", async function() {
   await fs.writeFile(
     path.join(this.rootDir, "text-run", "hello-world.js"),
     `
-    module.exports = function ({formatter}) { formatter.log('Hello World!') }`
+    module.exports = function ({log}) { log('Hello World!') }`
   )
 })
 

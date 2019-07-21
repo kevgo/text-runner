@@ -1,4 +1,4 @@
-import { Formatter } from "../formatters/formatter"
+import { FormatterImplemention } from "../formatters/formatter-implementation"
 import { Publications } from "./publications/publications"
 
 /**
@@ -7,12 +7,12 @@ import { Publications } from "./publications/publications"
  * and determining other runtime variables.
  */
 export interface Configuration {
-  actions: any // configuration for actions
+  actions: any // configuration data for actions
   classPrefix: string // the name of the attribute that denotes active blocks
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
   fileGlob: string // glob of the files to test
-  FormatterClass: typeof Formatter // type of the Formatter class to use
+  FormatterClass: FormatterImplemention // type of the Formatter class to use
   keepTmp: boolean // whether to keep the tmp dir if tests successful
   publications: Publications // folder mappings
   offline: boolean // whether to skip built-in tests that require a network connection

@@ -1,6 +1,5 @@
 import color from "colorette"
 import fs from "fs-extra"
-import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { Configuration } from "../configuration/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
@@ -32,9 +31,8 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
   const linkTargets = findLinkTargets(ASTs)
 
   // step 4: extract activities
-  const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
-  if (activities.length === 0 && links.length === 0) {
+  if (links.length === 0) {
     console.log(color.magenta("no activities found"))
     return []
   }
@@ -60,11 +58,7 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
     colorFn = color.red
     text += color.red(`${results.length} errors, `)
   }
-  text += colorFn(
-    `${activities.length + links.length} activities in ${
-      filenames.length
-    } files`
-  )
+  text += colorFn(`${links.length} activities in ${filenames.length} files`)
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   return results

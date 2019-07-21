@@ -42,7 +42,7 @@ export async function runActivity(
     if (result === undefined) {
       statsCounter.success()
       formatter.success(nameRefiner.finalName(), outputCollector.toString())
-    } else if (result === 1) {
+    } else if (result === args.SKIPPING) {
       statsCounter.skip()
       formatter.skipped(nameRefiner.finalName(), outputCollector.toString())
     } else {

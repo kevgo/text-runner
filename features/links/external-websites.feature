@@ -41,7 +41,8 @@ Feature: verifying links to websites
     Then it signals:
       | FILENAME | 1.md                                                                    |
       | LINE     | 1                                                                       |
-      | MESSAGE  | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
+      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com              |
+      | OUTPUT   | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
 
 
   Scenario: HTML link to non-existing website
@@ -53,4 +54,5 @@ Feature: verifying links to websites
     Then it signals:
       | FILENAME | 1.md                                                                    |
       | LINE     | 1                                                                       |
-      | MESSAGE  | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |
+      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com              |
+      | OUTPUT   | link to non-existing external website http://oeanuthaoenuthoaeuzonk.com |

@@ -1,5 +1,4 @@
 import { Configuration } from "../../configuration/configuration"
-import { pretendToUse } from "../../helpers/pretend-to-use"
 import { ActionArgs } from "../action-args"
 
 type DoneFunction = (err?: Error) => void
@@ -16,10 +15,10 @@ export default function runJavascript(args: ActionArgs, done: DoneFunction) {
   code = replaceVariableDeclarations(code)
 
   // This is used in an eval'ed string below
+  // @ts-ignore: unused variable
   const __finished = (err: any) => {
     done(err)
   }
-  pretendToUse(__finished.toString())
 
   code = hasCallbackPlaceholder(code)
     ? (code = replaceAsyncCallbacks(code)) // async code

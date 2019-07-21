@@ -1,7 +1,6 @@
 import util from "util"
 import xml2js from "xml2js"
 import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
-import { pretendToUse } from "../../../../../helpers/pretend-to-use"
 import { AstNode } from "../../../../ast-node"
 import { AstNodeList } from "../../../../ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
@@ -14,6 +13,7 @@ const olRegex = /<ol([^>]*)>[\s\S]*<\/ol>/m
 
 export default async function transformOl(
   node: RemarkableNode,
+  // @ts-ignore: unused variable
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
@@ -51,6 +51,5 @@ export default async function transformOl(
     tag: "/ol",
     type: "ordered_list_close"
   })
-  pretendToUse(openTags)
   return result
 }

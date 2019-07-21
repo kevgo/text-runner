@@ -1,5 +1,4 @@
-import { DetailedFormatter } from "../formatters/detailed-formatter"
-import { DotFormatter } from "../formatters/dot-formatter"
+import { FormatterImplemention } from "../formatters/formatter-implementation"
 import { Publications } from "./publications/publications"
 
 /**
@@ -13,7 +12,7 @@ export interface Configuration {
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
   fileGlob: string // glob of the files to test
-  FormatterClass: typeof DetailedFormatter | typeof DotFormatter // type of the Formatter class to use
+  FormatterClass: FormatterImplemention // type of the Formatter class to use
   keepTmp: boolean // whether to keep the tmp dir if tests successful
   publications: Publications // folder mappings
   offline: boolean // whether to skip built-in tests that require a network connection

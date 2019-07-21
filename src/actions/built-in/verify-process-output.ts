@@ -1,4 +1,3 @@
-import { UnprintedUserError } from "../../errors/unprinted-user-error"
 import { ActionArgs } from "../action-args"
 import { RunningProcess } from "./helpers/running-process"
 
@@ -12,10 +11,8 @@ export default async function verifyProcessOutput(args: ActionArgs) {
     .filter(line => line)
   const process = RunningProcess.instance().process
   if (!process) {
-    throw new UnprintedUserError(
-      "Cannot verify process output since no process has been started",
-      args.file,
-      args.line
+    throw new Error(
+      "Cannot verify process output since no process has been started"
     )
   }
   for (const line of expectedLines) {

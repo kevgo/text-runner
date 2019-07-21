@@ -109,4 +109,3 @@ that converts the configuration into test results over several steps:
 
 - for now experiment with `standard-version` until generating CHANGELOG.md fully works
 - then possibly use `semantic-release`
-- later fold this into the <code textrun="verify-make-command">make deploy</code> command

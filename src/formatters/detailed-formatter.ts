@@ -1,65 +1,64 @@
 import color from "colorette"
 import path from "path"
+import { Activity } from "../activity-list/activity"
+import { Configuration } from "../configuration/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
 import { Formatter } from "./formatter"
 
-export class DetailedFormatter extends Formatter {
-  // A detailed formatter, prints output before the step name
+/** A formatter that prints output and step names */
+export class DetailedFormatter implements Formatter {
+  /** the activity whose progess this formatter describes to the user */
+  activity: Activity
 
-  error(errorMessage: string) {
-    super.error(errorMessage)
-    console.log(color.dim(this.output))
+  /** the directory in which the sources are located */
+  // TODO: replace with configuration
+  configuration: Configuration
+
+  constructor(activity: Activity, configuration: Configuration) {
+    this.activity = activity
+    this.configuration = configuration
+  }
+
+  // @ts-ignore: unused stepName
+  failed(stepName: string, e: Error, output: string) {
+    if (output !== "") {
+      process.stdout.write(color.dim(output))
+    }
     process.stdout.write(
       color.red(
         `${this.activity.file.platformified()}:${this.activity.line} -- `
       )
     )
-    console.log(errorMessage)
+    console.log(e.message)
     const filePath = path.join(
-      this.sourceDir,
+      this.configuration.sourceDir,
       this.activity.file.platformified()
     )
     printCodeFrame(console.log, filePath, this.activity.line)
   }
 
-  skip(message: string) {
-    super.skip(message)
-    if (this.output) {
-      console.log(color.dim(this.output))
+  skipped(stepName: string, output: string) {
+    if (output !== "") {
+      process.stdout.write(color.dim(output))
     }
     console.log(
       color.cyan(
         `${this.activity.file.platformified()}:${
           this.activity.line
-        } -- ${message}`
+        } -- skipping: ${stepName}`
       )
     )
   }
 
-  success() {
-    super.success()
-    if (this.output) {
-      console.log(color.dim(this.output))
+  success(stepName: string, output: string) {
+    if (output !== "") {
+      process.stdout.write(color.dim(output))
     }
     console.log(
       color.green(
-        `${this.activity.file.platformified()}:${this.activity.line} -- ${
-          this.title
-        }`
-      )
-    )
-  }
-
-  warning(warningMessage: string) {
-    super.warning(warningMessage)
-    if (this.output.trim() !== "") {
-      console.log(color.dim(this.output))
-    }
-    console.log(
-      color.magenta(
         `${this.activity.file.platformified()}:${
           this.activity.line
-        } -- ${warningMessage}`
+        } -- ${stepName}`
       )
     )
   }

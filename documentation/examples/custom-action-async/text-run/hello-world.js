@@ -1,7 +1,11 @@
-const delay = require("delay")
+async function delay(duration) {
+  return new Promise(function(resolve) {
+    setTimeout(resolve, duration)
+  })
+}
 
-module.exports = async ({ formatter }) => {
+module.exports = async ({ log }) => {
   await delay(1)
-  formatter.log("Hello World!")
+  log("Hello World!")
   await delay(1)
 }

@@ -11,15 +11,15 @@ Feature: adding new handler functions
     When running "text-run add new-step"
     Then it creates the file "text-run/new-step.js" with content:
       """
-      module.exports = async function (activity) {
+      module.exports = async function (args) {
         console.log('This code runs inside the "new-step" block implementation.')
         console.log('I found these elements in your document:')
-        console.log(activity.nodes)
+        console.log(args.nodes)
 
         // capture content from the document
         // const content = activity.searcher.tagContent('boldtext')
         // do something with the content
-        // formatter.log(content)
+        // args.log(content)
       }
 
       """

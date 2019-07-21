@@ -2,10 +2,10 @@ import color from "colorette"
 import deb from "debug"
 import { createObservableProcess } from "observable-process"
 import path from "path"
-import { Configuration } from "../configuration/configuration"
-import { callArgs } from "../helpers/call-args"
-import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "../runners/action-args"
+import { Configuration } from "../../configuration/configuration"
+import { callArgs } from "../../helpers/call-args"
+import { trimDollar } from "../../helpers/trim-dollar"
+import { ActionArgs } from "../action-args"
 import { RunningProcess } from "./helpers/running-process"
 
 const debug = deb("start-console-command")
@@ -14,7 +14,7 @@ const debug = deb("start-console-command")
 // Leaves the command running.
 export default async function startProcess(args: ActionArgs) {
   const commandsToRun = getCommandsToRun(args)
-  args.formatter.name(
+  args.name(
     `starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`
   )
   RunningProcess.instance().set(

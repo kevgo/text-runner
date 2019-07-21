@@ -1,17 +1,15 @@
 import color from "colorette"
 import path from "path"
-import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "../runners/action-args"
+import { trimDollar } from "../../helpers/trim-dollar"
+import { ActionArgs } from "../action-args"
 
 export default function verifyNpmGlobalCommand(args: ActionArgs) {
-  args.formatter.name("NPM module exports the command")
+  args.name("NPM module exports the command")
   const commandName = trimDollar(
     args.nodes.textInNodeOfType("fence", "code").trim()
   )
   const pkg = require(path.join(args.configuration.sourceDir, "package.json"))
-  args.formatter.name(
-    `NPM module exports the ${color.cyan(commandName)} command`
-  )
+  args.name(`NPM module exports the ${color.cyan(commandName)} command`)
 
   if (!hasCommandName(commandName, pkg.bin)) {
     throw new Error(

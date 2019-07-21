@@ -1,4 +1,4 @@
-﻿# Verify the output of the last console command
+# Verify the output of the last console command
 
 - checks that the last short-lived console command
   (run via [runConsoleCommand](run_console_command.md)
@@ -30,4 +30,4 @@ Hello world!
 #### More info
 
 - [feature specs](../../features/actions/built-in/verify-console-command-output/verify-console-command-output.feature)
-- [source code](../../src/built-in-actions/verify-console-command-output.ts)
+- [source code](../../src/actions/built-in/verify-console-command-output.ts)

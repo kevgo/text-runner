@@ -61,11 +61,7 @@ coverage: coverage-build coverage-tests coverage-cli coverage-docs   # measures 
 .PHONY: coverage
 
 cuke: build   # runs the feature specs
-ifndef FILE
-	@node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress
-else
-	@node_modules/.bin/cucumber-js --tags "(not @todo)" $(FILE)
-endif
+	@node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-other:   # test coverage for CLI specs
 	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/!(actions|commands|images|formatters|tag-types)"
@@ -82,16 +78,12 @@ cuke-offline: build   # runs the feature specs that don't need an online connect
 cuke-smoke-win:  # runs the smoke tests
 	@node_modules\.bin\cucumber-js --tags '@smoke' --format progress
 
-
 cuke-win:     # runs the feature specs on Windows
 ifndef FILE
 	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
 else
 	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
 endif
-
-deploy: build  # deploys a new version to npmjs.com
-	semantic-release
 
 docs: build   # runs the documentation tests
 ifndef FILE
@@ -125,12 +117,6 @@ lint: # lints all files
 	node_modules/.bin/prettier -c "*.yml"
 	node_modules$/.bin$/remark .
 
-setup:   # sets up the installation on this machine
-	go get github.com/tj/node-prune
-	rm -rf node_modules
-	yarn install
-	node-prune
-
 test: lint unit cuke docs   # runs all tests
 .PHONY: test
 
@@ -138,8 +124,3 @@ test-offline: lint unit cuke-offline docs   # runs all tests that don't need an 
 
 unit:   # runs the unit tests
 	@node_modules/.bin/mocha --reporter dot "src/**/*-test.ts"
-
-travis: lint coverage   # the set of tests running on Travis-CI
-
-upgrade:   # updates the dependencies to their latest versions
-	yarn upgrade-interactive

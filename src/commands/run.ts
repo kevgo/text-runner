@@ -42,9 +42,15 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
+  const formatter = new config.FormatterClass(
+    activities.length + links.length,
+    config
+  )
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, linkTargets, config, stats)
-  jobs.push(executeSequential(activities, config, linkTargets, stats))
+  const jobs = executeParallel(links, linkTargets, config, stats, formatter)
+  jobs.push(
+    executeSequential(activities, config, linkTargets, stats, formatter)
+  )
   const results = (await Promise.all(jobs)).filter(r => r) as Error[]
 
   // step 6: cleanup

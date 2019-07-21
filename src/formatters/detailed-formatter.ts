@@ -7,58 +7,51 @@ import { Formatter } from "./formatter"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {
-  /** the activity whose progess this formatter describes to the user */
-  activity: Activity
-
   /** the directory in which the sources are located */
   // TODO: replace with configuration
   configuration: Configuration
 
-  constructor(activity: Activity, configuration: Configuration) {
-    this.activity = activity
+  // @ts-ignore: unused parameter
+  constructor(stepCount: number, configuration: Configuration) {
     this.configuration = configuration
   }
 
   // @ts-ignore: unused stepName
-  failed(stepName: string, e: Error, output: string) {
+  failed(activity: Activity, stepName: string, e: Error, output: string) {
     if (output !== "") {
       process.stdout.write(color.dim(output))
     }
     process.stdout.write(
-      color.red(
-        `${this.activity.file.platformified()}:${this.activity.line} -- `
-      )
+      color.red(`${activity.file.platformified()}:${activity.line} -- `)
     )
     console.log(e.message)
     const filePath = path.join(
       this.configuration.sourceDir,
-      this.activity.file.platformified()
+      activity.file.platformified()
     )
-    printCodeFrame(console.log, filePath, this.activity.line)
+    printCodeFrame(console.log, filePath, activity.line)
   }
 
-  skipped(stepName: string, output: string) {
+  skipped(activity: Activity, stepName: string, output: string) {
     if (output !== "") {
       process.stdout.write(color.dim(output))
     }
     console.log(
       color.cyan(
-        `${this.activity.file.platformified()}:${
-          this.activity.line
+        `${activity.file.platformified()}:${
+          activity.line
         } -- skipping: ${stepName}`
       )
     )
   }
 
-  success(stepName: string, output: string) {
+  success(activity: Activity, stepName: string, output: string) {
     if (output !== "") {
       process.stdout.write(color.dim(output))
     }
     console.log(
       color.green(
-        `${this.activity.file.platformified()}:${
-          this.activity.line
-        } -- ${stepName}`
+        `${activity.file.platformified()}:${activity.line} -- ${stepName}`
       )
     )
   }

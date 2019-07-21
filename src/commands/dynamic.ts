@@ -38,8 +38,18 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
+  const formatter = new config.FormatterClass(
+    activities.length + links.length,
+    config
+  )
   process.chdir(config.workspace)
-  const error = await executeSequential(activities, config, linkTargets, stats)
+  const error = await executeSequential(
+    activities,
+    config,
+    linkTargets,
+    stats,
+    formatter
+  )
 
   // step 6: cleanup
   process.chdir(config.sourceDir)

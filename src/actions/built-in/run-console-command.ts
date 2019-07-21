@@ -8,6 +8,7 @@ import { trimDollar } from "../../helpers/trim-dollar"
 import { AstNodeList } from "../../parsers/ast-node-list"
 import { ActionArgs } from "../action-args"
 import { RunningConsoleCommand } from "./helpers/running-console-command"
+import { Globals } from "../../configuration/globals"
 
 const debug = deb("textrun:actions:run-console-command")
 
@@ -83,11 +84,11 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
   return result
 }
 
-function makeGlobal(configuration: Configuration) {
+function makeGlobal(configuration: Configuration): (arg: string) => string {
   configuration = configuration || {}
-  let globals = {}
+  let globals: Globals = {}
   try {
-    globals = configuration.actions.runConsoleCommand.globals
+    globals = configuration.actions.runConsoleCommand.globals as Globals
   } catch (e) {
     // can ignore errors here
   }

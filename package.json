@@ -54,6 +54,7 @@
     "@types/rechoir": "0.6.1",
     "@types/remarkable": "1.7.4",
     "@types/rimraf": "2.0.2",
+    "@types/shelljs": "0.8.5",
     "@types/strip-ansi": "5.2.1",
     "@types/uuid": "3.4.5",
     "@types/xml2js": "0.4.4",

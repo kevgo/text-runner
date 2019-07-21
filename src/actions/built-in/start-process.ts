@@ -7,6 +7,7 @@ import { callArgs } from "../../helpers/call-args"
 import { trimDollar } from "../../helpers/trim-dollar"
 import { ActionArgs } from "../action-args"
 import { RunningProcess } from "./helpers/running-process"
+import { Globals } from "../../configuration/globals"
 
 const debug = deb("start-console-command")
 
@@ -37,9 +38,9 @@ function getCommandsToRun(args: ActionArgs) {
 
 function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
-  let globals = {}
+  let globals: Globals = {}
   try {
-    globals = configuration.actions.runConsoleCommand.globals
+    globals = configuration.actions.runConsoleCommand.globals as Globals
   } catch (e) {
     // we can ignore null-pointer exceptions here since we have a default value
   }

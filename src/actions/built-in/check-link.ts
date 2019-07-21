@@ -18,12 +18,12 @@ export default async function checkLink(args: ActionArgs) {
     throw new Error("link without target")
   }
 
+  args.name(`link to ${color.cyan(target)}`)
+  const filePath = new AbsoluteFilePath(args.file)
+
   if (isMailtoLink(target)) {
     return args.SKIPPING
   }
-
-  args.name(`link to ${color.cyan(target)}`)
-  const filePath = new AbsoluteFilePath(args.file)
 
   if (isLinkToAnchorInSameFile(target)) {
     const result = await checkLinkToAnchorInSameFile(filePath, target, args)

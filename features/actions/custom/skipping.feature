@@ -1,4 +1,3 @@
-@debug
 Feature: skipping an action
 
   As a documentation tester

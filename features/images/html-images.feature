@@ -1,6 +1,6 @@
 Feature: checking embedded HTML images
 
-    When writing documentation
+  When writing documentation
   I want to be able to use HTML image tags
   So that I can use extended HTML attributes to size and align images.
 

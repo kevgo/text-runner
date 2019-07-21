@@ -7,44 +7,36 @@ import { Formatter } from "./formatter"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements Formatter {
-  /** the activity whose progess this formatter describes to the user */
-  activity: Activity
-
   /** Text-Runner configuration */
   configuration: Configuration
 
-  constructor(activity: Activity, configuration: Configuration) {
-    this.activity = activity
+  // @ts-ignore: ignore unused variable
+  constructor(stepCount: number, configuration: Configuration) {
     this.configuration = configuration
   }
 
   // @ts-ignore: okay to not use parameters here
-  failed(stepName: string, err: Error, output: string) {
+  failed(stepName: string, activity: Activity, err: Error, output: string) {
     console.log()
     console.log(color.dim(output))
     process.stdout.write(
-      color.red(
-        `${this.activity.file.platformified()}:${this.activity.line} -- `
-      )
+      color.red(`${activity.file.platformified()}:${activity.line} -- `)
     )
     console.log(err.message)
     printCodeFrame(
       console.log,
-      path.join(
-        this.configuration.sourceDir,
-        this.activity.file.platformified()
-      ),
-      this.activity.line
+      path.join(this.configuration.sourceDir, activity.file.platformified()),
+      activity.line
     )
   }
 
   // @ts-ignore: okay to not use parameters here
-  skipped(stepName: string, output: string) {
+  skipped(stepName: string, activity: Activity, output: string) {
     process.stdout.write(color.cyan("."))
   }
 
   // @ts-ignore: okay to not use parameters here
-  success(stepName: string, output: string) {
+  success(stepName: string, activity: Activity, output: string) {
     process.stdout.write(color.green("."))
   }
 }

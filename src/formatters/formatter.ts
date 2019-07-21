@@ -1,3 +1,5 @@
+import { Activity } from "../activity-list/activity"
+
 /**
  * Formatter is the API that formatters have to implement
  *
@@ -20,7 +22,7 @@ export interface Formatter {
    * @param e the error with which the action failed
    * @param output output provided by the action
    */
-  failed(actionName: string, e: Error, output: string): void
+  failed(activity: Activity, actionName: string, e: Error, output: string): void
 
   /**
    * Skip notifies the user that the action associated with this formatter
@@ -29,7 +31,7 @@ export interface Formatter {
    * @param actionName the name of the action that just failed
    * @param output output provided by the action
    */
-  skipped(actionName: string, output: string): void
+  skipped(activity: Activity, actionName: string, output: string): void
 
   /**
    * Success notifies the user that the activity associated with this formatter has been successful.
@@ -40,5 +42,5 @@ export interface Formatter {
    * @param actionName the name of the action that just failed
    * @param output output provided by the action
    */
-  success(actionName: string, output: string): void
+  success(activity: Activity, actionName: string, output: string): void
 }

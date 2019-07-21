@@ -7,6 +7,7 @@ import { ActionResult } from "../actions/action-result"
 import { Activity } from "../activity-list/activity"
 import { Configuration } from "../configuration/configuration"
 import { PrintedUserError } from "../errors/printed-user-error"
+import { Formatter } from "../formatters/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./name-refiner"
 import { OutputCollector } from "./output-collector"
@@ -16,9 +17,9 @@ export async function runActivity(
   activity: Activity,
   configuration: Configuration,
   linkTargets: LinkTargetList,
-  statsCounter: StatsCounter
+  statsCounter: StatsCounter,
+  formatter: Formatter
 ): Promise<Error | null> {
-  const formatter = new configuration.FormatterClass(activity, configuration)
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: ActionArgs = {

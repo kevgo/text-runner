@@ -86,11 +86,8 @@ else
 endif
 
 docs: build   # runs the documentation tests
-ifndef FILE
-	@bin$/text-run --offline
-else
-	@DEBUG='*,-babel,-text-stream-accumulator,-text-stream-search' bin/text-run --format detailed $(FILE)
-endif
+	@bin$/text-run static --offline
+	@bin$/text-run dynamic
 
 fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix

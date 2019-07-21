@@ -61,7 +61,7 @@ coverage: coverage-build coverage-tests coverage-cli coverage-docs   # measures 
 .PHONY: coverage
 
 cuke: build   # runs the feature specs
-	@node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress
+	@node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-other:   # test coverage for CLI specs
 	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/!(actions|commands|images|formatters|tag-types)"

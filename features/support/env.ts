@@ -3,13 +3,19 @@ import { endChildProcesses } from "end-child-processes"
 import fs from "fs-extra"
 import path from "path"
 import rimraf from "rimraf"
+import tmp from "tmp-promise"
 import util from "util"
 
 // need such a high timeout because test coverage takes time to start up
 setDefaultTimeout(30000)
 
 Before(async function() {
-  this.rootDir = path.join(process.cwd(), "tmp")
+  if (process.env.CUCUMBER_PARALLEL) {
+    const tempDir = await tmp.dir()
+    this.rootDir = tempDir.path
+  } else {
+    this.rootDir = path.join(process.cwd(), "tmp")
+  }
   let rootDirExists = false
   try {
     await fs.stat(this.rootDir)

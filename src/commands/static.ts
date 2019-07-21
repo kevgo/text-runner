@@ -1,6 +1,5 @@
 import color from "colorette"
 import fs from "fs-extra"
-import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { Configuration } from "../configuration/configuration"
 import { getFileNames } from "../finding-files/get-filenames"

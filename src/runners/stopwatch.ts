@@ -1,6 +1,6 @@
 export class StopWatch {
   /** the time when this StopWatch was started */
-  startTime: number
+  private startTime: number
 
   constructor() {
     this.startTime = new Date().getTime()
@@ -8,8 +8,10 @@ export class StopWatch {
 
   duration(): string {
     const endTime = new Date().getTime()
-    const difference = endTime - this.startTime
-    console.log(difference)
-    return ""
+    const milliseconds = endTime - this.startTime
+    if (milliseconds > 1000) {
+      return `${Math.round(milliseconds / 1000)}s`
+    }
+    return `${milliseconds}ms`
   }
 }

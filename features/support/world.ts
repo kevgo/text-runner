@@ -13,7 +13,10 @@ import { v4 as uuid } from "uuid"
  * via its command-line interface
  */
 function World() {
-  this.execute = async function(params) {
+  this.execute = async function(params: {
+    command: string
+    expectError: boolean
+  }) {
     const args: any = {}
     args.cwd = this.rootDir
     if (this.debug) {
@@ -39,7 +42,7 @@ function World() {
     }
   }
 
-  this.makeFullPath = command => {
+  this.makeFullPath = (command: string) => {
     if (/^text-run/.test(command)) {
       return command.replace(/^text-run/, this.fullTextRunPath())
     } else {
@@ -55,17 +58,17 @@ function World() {
     return result
   }
 
-  this.verifyCallError = expectedError => {
+  this.verifyCallError = (expectedError: string) => {
     const output = stripAnsi(this.process.output.fullText())
     expect(output).to.include(expectedError)
     expect(this.process.exitCode).to.equal(1)
   }
 
-  this.verifyErrormessage = expectedText => {
+  this.verifyErrormessage = (expectedText: string) => {
     expect(stripAnsi(this.process.output.fullText())).to.include(expectedText)
   }
 
-  this.verifyFailure = table => {
+  this.verifyFailure = (table: any) => {
     const output = stripAnsi(this.process.output.fullText())
     let expectedHeader
     if (table.FILENAME && table.LINE) {
@@ -86,7 +89,7 @@ function World() {
     )
   }
 
-  this.verifyOutput = table => {
+  this.verifyOutput = (table: any) => {
     let expectedText = ""
     if (table.OUTPUT) {
       expectedText += table.OUTPUT + "\n"
@@ -139,7 +142,7 @@ ${actual}
     )
   }
 
-  this.verifyRanOnlyTests = filenames => {
+  this.verifyRanOnlyTests = (filenames: any) => {
     filenames = flatten(filenames)
     const standardizedOutput = this.process.output
       .fullText()

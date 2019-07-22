@@ -3,6 +3,7 @@ import deb from "debug"
 import { createObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../../configuration/configuration"
+import { Globals } from "../../configuration/globals"
 import { ActionArgs } from "../action-args"
 import { callArgs } from "../helpers/call-args"
 import { RunningProcess } from "../helpers/running-process"
@@ -37,14 +38,14 @@ function getCommandsToRun(args: ActionArgs) {
 
 function makeGlobal(configuration: Configuration) {
   configuration = configuration || {}
-  let globals = {}
+  let globals: Globals = {}
   try {
-    globals = configuration.actions.runConsoleCommand.globals
+    globals = configuration.actions.runConsoleCommand.globals as Globals
   } catch (e) {
     // we can ignore null-pointer exceptions here since we have a default value
   }
   debug(`globals: ${JSON.stringify(globals)}`)
-  return function(commandText) {
+  return function(commandText: string) {
     const commandParts = commandText.split(" ")
     const command = commandParts[0]
     debug(`searching for global replacement for ${command}`)

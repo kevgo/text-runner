@@ -10,7 +10,7 @@ import { TransformerList } from "./transformer-list"
 export async function loadTransformers(
   callerDir: string
 ): Promise<TransformerList> {
-  const result = {}
+  const result: TransformerList = {}
   const distDir = path.join(dirInDistFolder(callerDir), "transformers")
   const files = (await fs.readdir(distDir)).filter(isJsFile)
   for (const file of files) {

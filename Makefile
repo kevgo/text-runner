@@ -92,13 +92,21 @@ docs: build   # runs the documentation tests
 
 fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix
-	node_modules$/.bin$/prettier --write 'src/**/*.ts'
-	node_modules$/.bin$/prettier --write 'features/**/*.ts'
-	node_modules$/.bin$/prettier --write 'text-run/*.js'
-	node_modules$/.bin$/prettier --write '*.md'
-	# node_modules$/.bin$/prettier --write 'documentation/**/*.md'
-	node_modules$/.bin$/prettier --write '*.yml'
-	node_modules/.bin/prettier --write "documentation/examples/**/*.js"
+	@find . -type f \( \
+	       -path './src/**/*.ts' -o \
+				 -path './features/**/*.ts' -o \
+				 -path './text-run/*.js' -o \
+				 -path './documentation/**/*.js' -o \
+				 -path './*.md' -o \
+				 -path './*.yml' -o \
+				 -name '*node_modules*' -prune \) | \
+		grep -v node_modules | \
+		grep -v documentation/built-in-actions/run_javascript.md | \
+		grep -v documentation/built-in-actions/start_stop_process.md | \
+		grep -v documentation/built-in-actions/verify_console_command_output.md | \
+		grep -v documentation/built-in-actions/verify_source_file_content.md | \
+		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
+		xargs node_modules/.bin/prettier --write
 
 help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -106,14 +114,22 @@ help:   # prints all make targets
 lint: # lints all files
 	node_modules$/.bin$/tsc -p tsconfig.json
 	node_modules$/.bin$/tslint --project tsconfig-build.json
-	node_modules/.bin/prettier -c "src/**/*.ts"
-	node_modules/.bin/prettier -c "features/**/*.ts"
-	node_modules/.bin/prettier -c "text-run/*.js"
-	node_modules/.bin/prettier -c "documentation/examples/**/*.js"
-	node_modules/.bin/prettier -c "*.md"
-	# node_modules/.bin/prettier -c "documentation/**/*.md"
-	node_modules/.bin/prettier -c "*.yml"
-	node_modules$/.bin$/remark .
+	@find . -type f \( \
+	       -path './src/**/*.ts' -o \
+				 -path './features/**/*.ts' -o \
+				 -path './text-run/*.js' -o \
+				 -path './documentation/**/*.js' -o \
+				 -path './*.md' -o \
+				 -path './*.yml' -o \
+				 -name '*node_modules*' -prune \) | \
+		grep -v node_modules | \
+		grep -v documentation/built-in-actions/run_javascript.md | \
+		grep -v documentation/built-in-actions/start_stop_process.md | \
+		grep -v documentation/built-in-actions/verify_console_command_output.md | \
+		grep -v documentation/built-in-actions/verify_source_file_content.md | \
+		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
+		xargs node_modules/.bin/prettier -c
+	node_modules$/.bin$/remark . --quiet
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

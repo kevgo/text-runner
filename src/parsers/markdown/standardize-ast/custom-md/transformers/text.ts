@@ -1,5 +1,5 @@
 import { AbsoluteFilePath } from "../../../../../finding-files/absolute-file-path"
-import { AstNodeList } from "../../../../ast-node-list"
+import { AstNodeList } from "../../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
 import { RemarkableNode } from "../../remarkable-node"
 

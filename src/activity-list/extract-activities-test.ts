@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AstNodeList } from "../parsers/ast-node-list"
+import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { extractActivities } from "./extract-activities"
 
 describe("extract-activities", function() {

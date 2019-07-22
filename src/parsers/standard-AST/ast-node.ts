@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
 
 /** a node in the standardized Markdown/HTML AST */
 export class AstNode {

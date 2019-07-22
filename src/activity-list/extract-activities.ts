@@ -1,7 +1,7 @@
 import kebab from "@queso/kebab-case"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
-import { AstNode } from "../parsers/ast-node"
-import { AstNodeList } from "../parsers/ast-node-list"
+import { AstNode } from "../parsers/standard-AST/ast-node"
+import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { ActivityList } from "./types/activity-list"
 
 /**

@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
-import { AstNodeList } from "../parsers/ast-node-list"
+import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { LinkTargetList } from "./link-target-list"
 
 describe("LinkTargetList", function() {

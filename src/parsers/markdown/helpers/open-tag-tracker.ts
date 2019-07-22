@@ -1,7 +1,7 @@
 import color from "colorette"
 import { UnprintedUserError } from "../../../errors/unprinted-user-error"
 import { AbsoluteFilePath } from "../../../finding-files/absolute-file-path"
-import { AstNode } from "../../ast-node"
+import { AstNode } from "../../standard-AST/ast-node"
 
 export class OpenTagTracker {
   nodes: AstNode[]

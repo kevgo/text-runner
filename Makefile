@@ -86,7 +86,7 @@ else
 endif
 
 docs: build   # runs the documentation tests
-	@bin$/text-run static --offline
+	@bin$/text-run static --offline --format dot
 	@echo
 	@bin$/text-run dynamic --format progress
 

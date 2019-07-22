@@ -7,7 +7,7 @@ import { AbsoluteLink } from "./absolute-link"
  * i.e. a link not starting with '/'
  */
 export class RelativeLink {
-  value: string
+  readonly value: string
 
   constructor(publicPath: string) {
     this.value = publicPath

@@ -1,4 +1,4 @@
-import { Configuration } from "../../configuration/configuration"
+import { Configuration } from "../../configuration/types/configuration"
 import { ActionArgs } from "../types/action-args"
 
 // Runs the async-await JavaScript code given in the code block

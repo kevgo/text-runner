@@ -2,7 +2,7 @@ import color from "colorette"
 import fs from "fs-extra"
 import got from "got"
 import path from "path"
-import { Configuration } from "../../configuration/configuration"
+import { Configuration } from "../../configuration/types/configuration"
 import { ActionArgs } from "../types/action-args"
 
 // Checks for broken hyperlinks

@@ -1,4 +1,4 @@
-import { Configuration } from "../../configuration/configuration"
+import { Configuration } from "../../configuration/types/configuration"
 import { LinkTargetList } from "../../link-targets/link-target-list"
 import { AstNodeList } from "../../parsers/ast-node-list"
 import { LogFn } from "../../runners/log-function"

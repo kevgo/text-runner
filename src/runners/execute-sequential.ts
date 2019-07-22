@@ -1,5 +1,5 @@
-import { ActivityList } from "../activity-list/activity-list"
-import { Configuration } from "../configuration/configuration"
+import { ActivityList } from "../activity-list/types/activity-list"
+import { Configuration } from "../configuration/types/configuration"
 import { Formatter } from "../formatters/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"

@@ -1,7 +1,7 @@
 import color from "colorette"
 import path from "path"
-import { Activity } from "../activity-list/activity"
-import { Configuration } from "../configuration/configuration"
+import { Activity } from "../activity-list/types/activity"
+import { Configuration } from "../configuration/types/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
 import { Formatter } from "./formatter"
 

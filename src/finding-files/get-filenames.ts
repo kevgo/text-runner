@@ -1,7 +1,7 @@
 import color from "colorette"
 import deb from "debug"
 import isGlob from "is-glob"
-import { Configuration } from "../configuration/configuration"
+import { Configuration } from "../configuration/types/configuration"
 import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { allMarkdownFiles } from "./all-markdown-files"

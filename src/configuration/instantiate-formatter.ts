@@ -3,7 +3,7 @@ import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
 import { Formatter } from "../formatters/formatter"
 import { ProgressFormatter } from "../formatters/progress-formatter"
-import { Configuration } from "./configuration"
+import { Configuration } from "./types/configuration"
 
 export function instantiateFormatter(
   name: string | undefined,

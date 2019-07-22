@@ -2,8 +2,8 @@ import { ActivityList } from "../activity-list/types/activity-list"
 import { Configuration } from "../configuration/types/configuration"
 import { Formatter } from "../formatters/types/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
-import { runActivity } from "./run-activity"
 import { StatsCounter } from "./helpers/stats-counter"
+import { runActivity } from "./run-activity"
 
 /**
  * Executes the given activities in parallel.

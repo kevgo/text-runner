@@ -9,9 +9,9 @@ import { Configuration } from "../configuration/types/configuration"
 import { PrintedUserError } from "../errors/printed-user-error"
 import { Formatter } from "../formatters/types/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
-import { NameRefiner } from "./name-refiner"
-import { OutputCollector } from "./output-collector"
-import { StatsCounter } from "./stats-counter"
+import { NameRefiner } from "./helpers/name-refiner"
+import { OutputCollector } from "./helpers/output-collector"
+import { StatsCounter } from "./helpers/stats-counter"
 
 export async function runActivity(
   activity: Activity,

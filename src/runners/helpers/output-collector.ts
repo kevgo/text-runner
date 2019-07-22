@@ -1,5 +1,5 @@
 import util from "util"
-import { LogFn } from "./log-function"
+import { LogFn } from "../types/log-function"
 
 /** simulates console.log to collect output from a running action */
 export class OutputCollector {

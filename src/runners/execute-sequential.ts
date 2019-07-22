@@ -3,7 +3,7 @@ import { Configuration } from "../configuration/types/configuration"
 import { Formatter } from "../formatters/types/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"
-import { StatsCounter } from "./stats-counter"
+import { StatsCounter } from "./helpers/stats-counter"
 
 export async function executeSequential(
   activities: ActivityList,

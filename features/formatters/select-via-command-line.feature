@@ -5,7 +5,7 @@ Feature: selecting formatter via the command-line
   So that I can try different formatters out easily.
 
   - you can chose a formatter using the `--format <[formatter name]>` command-line parameter
-  or the `formatter` key in `text-run.yml`
+    or the `formatter` key in `text-run.yml`
 
 
   Background:

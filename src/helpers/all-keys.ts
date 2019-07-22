@@ -1,5 +1,5 @@
 // returns all the keys of all objects
-export function allKeys(...args): string[] {
+export function allKeys(...args: object[]): string[] {
   const result = new Set()
   for (const arg of args) {
     for (const key of Object.keys(arg)) {

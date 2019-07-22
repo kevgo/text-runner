@@ -8,7 +8,9 @@ export function mergeConfigurations(
   const result: UserProvidedConfiguration = {}
   for (const key of allKeys(...configs.reverse())) {
     for (const config of configs) {
+      // @ts-ignore: expression is any
       if (config[key] != null) {
+        // @ts-ignore: expression is any
         result[key] = config[key]
       }
     }

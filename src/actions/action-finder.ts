@@ -65,15 +65,15 @@ class ActionFinder {
   }
 
   private loadBuiltinActions(): FunctionRepo {
-    const result = {}
+    const result: FunctionRepo = {}
     for (const filename of this.builtinActionFilePaths()) {
-      result[getActionName(filename)] = require(filename).default
+      result[getActionName(filename)] = require(filename).default as Action
     }
     return result
   }
 
   private loadCustomActions(): FunctionRepo {
-    const result = {}
+    const result: FunctionRepo = {}
     require("babel-register")
     for (const filename of this.customActionFilePaths()) {
       rechoir.prepare(interpret.jsVariants, filename)

@@ -22,7 +22,11 @@ export class CustomHtmlTagTransformerBlock implements TransformerBlock {
   }
 
   /** Returns whether this transformer can transform the given Remarkable node */
-  canTransform(node: RemarkableNode, filepath, line): boolean {
+  canTransform(
+    node: RemarkableNode,
+    filepath: AbsoluteFilePath,
+    line: number
+  ): boolean {
     if (node.type !== "htmltag") {
       return false
     }

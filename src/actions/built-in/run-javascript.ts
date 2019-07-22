@@ -62,6 +62,6 @@ function replaceVariableDeclarations(code: string): string {
 }
 
 // returns whether the given code block contains a callback placeholder
-function hasCallbackPlaceholder(code): boolean {
+function hasCallbackPlaceholder(code: string): boolean {
   return code.indexOf("<CALLBACK>") > -1 || code.indexOf("// ...") > -1
 }

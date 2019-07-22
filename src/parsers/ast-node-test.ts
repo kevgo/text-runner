@@ -15,12 +15,12 @@ describe("AstNode", function() {
         anchor_open: "anchor_close",
         heading_open: "heading_close"
       }
-      for (const input in data) {
+      for (const [input, output] of Object.entries(data)) {
         if (!data.hasOwnProperty(input)) {
           continue
         }
         const node = AstNode.scaffold({ type: input })
-        expect(node.endType()).to.eql(data[input])
+        expect(node.endType()).to.eql(output)
       }
     })
   })

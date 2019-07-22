@@ -3,6 +3,7 @@ import deb from "debug"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../../configuration/configuration"
+import { Globals } from "../../configuration/globals"
 import { AstNodeList } from "../../parsers/ast-node-list"
 import { ActionArgs } from "../action-args"
 import { callArgs } from "../helpers/call-args"
@@ -83,11 +84,11 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
   return result
 }
 
-function makeGlobal(configuration: Configuration) {
+function makeGlobal(configuration: Configuration): (arg: string) => string {
   configuration = configuration || {}
-  let globals = {}
+  let globals: Globals = {}
   try {
-    globals = configuration.actions.runConsoleCommand.globals
+    globals = configuration.actions.runConsoleCommand.globals as Globals
   } catch (e) {
     // can ignore errors here
   }

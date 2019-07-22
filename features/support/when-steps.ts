@@ -89,7 +89,7 @@ When(
   }
 )
 
-function determineExpectError(tryingText) {
+function determineExpectError(tryingText: string) {
   if (tryingText === "running") {
     return false
   } else if (tryingText === "executing") {
@@ -99,7 +99,7 @@ function determineExpectError(tryingText) {
   }
 }
 
-function finish(trying, error) {
+function finish(trying: boolean, error: Error) {
   if (trying && !error) {
     throw new Error("expected error but test succeeded")
   } else if (trying && error) {

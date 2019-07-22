@@ -9,7 +9,7 @@ import { TagMapper } from "../tag-mapper"
 import { RemarkableNode } from "../types/remarkable-node"
 import { TransformerCategory } from "../types/transformer-category"
 
-export class GenericHtmlTagTransformerBlock implements TransformerCategory {
+export class GenericHtmlTagTransformerCategory implements TransformerCategory {
   private readonly openTags: OpenTagTracker
   private readonly tagMapper: TagMapper
 

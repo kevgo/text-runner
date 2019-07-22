@@ -1,11 +1,11 @@
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 import { AstNodeList } from "../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../helpers/open-tag-tracker"
-import { CustomHtmlTagTransformerBlock } from "./custom-html-tags/custom-html-tag-transformer-category"
-import { CustomHtmlBlockTransformerBlock } from "./custom-htmlblocks/custom-html-block-transformer-category"
-import { CustomMdTransformerBlock } from "./custom-md/custom-md-transformer-category"
-import { GenericHtmlTagTransformerBlock } from "./generic-htmltags/generic-html-tag-transformer-category"
-import { GenericMdTransformerBlock } from "./generic-md/generic-md-transformer-category"
+import { CustomHtmlTagTransformerCategory } from "./custom-html-tags/custom-html-tag-transformer-category"
+import { CustomHtmlBlockTransformerCategory } from "./custom-htmlblocks/custom-html-block-transformer-category"
+import { CustomMdTransformerCategory } from "./custom-md/custom-md-transformer-category"
+import { GenericHtmlTagTransformerCategory } from "./generic-htmltags/generic-html-tag-transformer-category"
+import { GenericMdTransformerCategory } from "./generic-md/generic-md-transformer-category"
 import { TagMapper } from "./tag-mapper"
 import { RemarkableNode } from "./types/remarkable-node"
 import { TransformerCategory } from "./types/transformer-category"
@@ -29,11 +29,11 @@ export default class AstStandardizer {
     this.tagMapper = new TagMapper()
     this.result = new AstNodeList()
     this.transformerCategories = [
-      new CustomHtmlBlockTransformerBlock(this.openTags),
-      new CustomHtmlTagTransformerBlock(this.openTags),
-      new GenericHtmlTagTransformerBlock(this.openTags, this.tagMapper),
-      new CustomMdTransformerBlock(this.openTags),
-      new GenericMdTransformerBlock(this.openTags, this.tagMapper)
+      new CustomHtmlBlockTransformerCategory(this.openTags),
+      new CustomHtmlTagTransformerCategory(this.openTags),
+      new GenericHtmlTagTransformerCategory(this.openTags, this.tagMapper),
+      new CustomMdTransformerCategory(this.openTags),
+      new GenericMdTransformerCategory(this.openTags, this.tagMapper)
     ]
   }
 

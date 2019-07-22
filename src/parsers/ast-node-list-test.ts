@@ -25,6 +25,7 @@ describe("AstNodeList", function() {
       const types = result.map(node => node.type)
       expect(types).to.eql(["heading_open", "text", "heading_close"])
     })
+
     it("returns the given non-opening node", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "paragraph_open" })
@@ -45,6 +46,7 @@ describe("AstNodeList", function() {
       const result = list.getNodeOfTypes("two", "four")
       expect(result.type).to.equal("two")
     })
+
     it("throws for multiple matches", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "one" })
@@ -53,6 +55,7 @@ describe("AstNodeList", function() {
         UnprintedUserError
       )
     })
+
     it("throws for zero matches", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "one" })
@@ -92,6 +95,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "paragraph_close" })
       expect(list.hasNodeOfType("paragraph")).to.be.true
     })
+
     it("returns false if the list does not contain the given node type", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "paragraph_open" })
@@ -165,6 +169,7 @@ describe("AstNodeList", function() {
       const result = list.textInNodeOfType("code")
       expect(result).to.equal("hello")
     })
+
     it("works with the opening type name", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "code_open" })
@@ -173,6 +178,7 @@ describe("AstNodeList", function() {
       const result = list.textInNodeOfType("code_open")
       expect(result).to.equal("hello")
     })
+
     it("allows to provide multiple possible matching nodes", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "code_open" })
@@ -181,6 +187,7 @@ describe("AstNodeList", function() {
       const result = list.textInNodeOfType("code", "fence")
       expect(result).to.equal("hello")
     })
+
     it("throws if multiple matching nodes exist", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "code_open" })
@@ -193,6 +200,7 @@ describe("AstNodeList", function() {
         UnprintedUserError
       )
     })
+
     it("throws if no matching node exists", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "code_open" })

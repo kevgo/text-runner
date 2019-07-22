@@ -58,14 +58,15 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 6: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
-    // NOTE: calling fs.remove causes an exception on Windows here
+    // NOTE: calling fs.remove causes an exception on Windows here,
+    //       hence we use rimraf
     const rimrafp = util.promisify(rimraf)
     await rimrafp(config.workspace, { maxBusyTries: 20 })
   }
 
   // step 7: write stats
   let text = "\n"
-  let colorFn
+  let colorFn: color.Style
   if (results.length === 0) {
     colorFn = color.green
     text += color.green("Success! ")
@@ -76,9 +77,8 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   text += colorFn(
     `${activities.length + links.length} activities in ${
       filenames.length
-    } files`
+    } files, ${stats.duration()}`
   )
-  text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   return results
 }

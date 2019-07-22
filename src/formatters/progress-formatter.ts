@@ -16,7 +16,7 @@ export class ProgressFormatter implements Formatter {
   constructor(stepCount: number, configuration: Configuration) {
     this.configuration = configuration
     this.progressBar = new progress.Bar(
-      { clearOnComplete: true, hideCursor: undefined },
+      { stopOnComplete: true, clearOnComplete: true, hideCursor: undefined },
       progress.Presets.shades_classic
     )
     this.progressBar.start(stepCount, 0)

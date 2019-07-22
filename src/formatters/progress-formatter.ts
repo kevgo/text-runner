@@ -8,10 +8,10 @@ import { Formatter } from "./types/formatter"
 
 export class ProgressFormatter implements Formatter {
   /** Text-Runner configuration */
-  configuration: Configuration
+  private readonly configuration: Configuration
 
   /** Progress bar instance */
-  progressBar: progress.Bar
+  private readonly progressBar: progress.Bar
 
   // @ts-ignore: ignore unused variable
   constructor(stepCount: number, configuration: Configuration) {

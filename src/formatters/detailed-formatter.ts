@@ -9,7 +9,7 @@ import { Formatter } from "./types/formatter"
 export class DetailedFormatter implements Formatter {
   /** the directory in which the sources are located */
   // TODO: replace with configuration
-  configuration: Configuration
+  private readonly configuration: Configuration
 
   // @ts-ignore: unused parameter
   constructor(stepCount: number, configuration: Configuration) {

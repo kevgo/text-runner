@@ -66,7 +66,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
 
   // step 7: write stats
   let text = "\n"
-  let colorFn
+  let colorFn: color.Style
   if (results.length === 0) {
     colorFn = color.green
     text += color.green("Success! ")
@@ -77,9 +77,8 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   text += colorFn(
     `${activities.length + links.length} activities in ${
       filenames.length
-    } files`
+    } files, ${stats.duration()}`
   )
-  text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   return results
 }

@@ -3,10 +3,10 @@ import { AstNodeList } from "../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { loadTransformers } from "../load-transformers"
 import { RemarkableNode } from "../types/remarkable-node"
-import { TransformerBlock } from "../types/transformer-block"
+import { TransformerCategory } from "../types/transformer-category"
 import { TransformerList } from "../types/transformer-list"
 
-export class CustomMdTransformerBlock implements TransformerBlock {
+export class CustomMdTransformerBlock implements TransformerCategory {
   private mdTransformers: TransformerList
   private readonly openTags: OpenTagTracker
 

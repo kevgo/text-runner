@@ -7,9 +7,9 @@ import { parseHtmlTag } from "../../helpers/parse-html-tag"
 import { removeHtmlComments } from "../../helpers/remove-html-comments"
 import { TagMapper } from "../tag-mapper"
 import { RemarkableNode } from "../types/remarkable-node"
-import { TransformerBlock } from "../types/transformer-block"
+import { TransformerCategory } from "../types/transformer-category"
 
-export class GenericHtmlTagTransformerBlock implements TransformerBlock {
+export class GenericHtmlTagTransformerBlock implements TransformerCategory {
   private readonly openTags: OpenTagTracker
   private readonly tagMapper: TagMapper
 

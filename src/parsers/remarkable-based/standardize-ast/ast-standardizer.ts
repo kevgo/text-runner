@@ -8,7 +8,7 @@ import { GenericHtmlTagTransformerBlock } from "./generic-htmltags/generic-html-
 import { GenericMdTransformerBlock } from "./generic-md/generic-md-transformer-block"
 import { TagMapper } from "./tag-mapper"
 import { RemarkableNode } from "./types/remarkable-node"
-import { TransformerBlock } from "./types/transformer-block"
+import { TransformerCategory } from "./types/transformer-category"
 
 /**
  * AstStandardizer converts the AST created by Remarkable
@@ -20,7 +20,7 @@ export default class AstStandardizer {
   private readonly openTags: OpenTagTracker
   private readonly result: AstNodeList
   private readonly tagMapper: TagMapper
-  private readonly transformerBlocks: TransformerBlock[]
+  private readonly transformerCategories: TransformerCategory[]
 
   constructor(filepath: AbsoluteFilePath) {
     this.filepath = filepath
@@ -28,7 +28,7 @@ export default class AstStandardizer {
     this.openTags = new OpenTagTracker()
     this.tagMapper = new TagMapper()
     this.result = new AstNodeList()
-    this.transformerBlocks = [
+    this.transformerCategories = [
       new CustomHtmlBlockTransformerBlock(this.openTags),
       new CustomHtmlTagTransformerBlock(this.openTags),
       new GenericHtmlTagTransformerBlock(this.openTags, this.tagMapper),
@@ -38,7 +38,9 @@ export default class AstStandardizer {
   }
 
   async loadTransformers() {
-    return Promise.all(this.transformerBlocks.map(tb => tb.loadTransformers()))
+    return Promise.all(
+      this.transformerCategories.map(tb => tb.loadTransformers())
+    )
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
@@ -69,9 +71,9 @@ export default class AstStandardizer {
   }
 
   async transform(node: RemarkableNode): Promise<AstNodeList> {
-    for (const transformerBlock of this.transformerBlocks) {
-      if (transformerBlock.canTransform(node, this.filepath, this.line)) {
-        return transformerBlock.transform(node, this.filepath, this.line)
+    for (const transformerCategory of this.transformerCategories) {
+      if (transformerCategory.canTransform(node, this.filepath, this.line)) {
+        return transformerCategory.transform(node, this.filepath, this.line)
       }
     }
     throw new Error(`Unprocessable node: ${node.type}`)

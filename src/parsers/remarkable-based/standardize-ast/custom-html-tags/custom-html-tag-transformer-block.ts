@@ -5,10 +5,10 @@ import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { removeHtmlComments } from "../../helpers/remove-html-comments"
 import { loadTransformers } from "../load-transformers"
 import { RemarkableNode } from "../types/remarkable-node"
-import { TransformerBlock } from "../types/transformer-block"
+import { TransformerCategory } from "../types/transformer-category"
 import { TransformerList } from "../types/transformer-list"
 
-export class CustomHtmlTagTransformerBlock implements TransformerBlock {
+export class CustomHtmlTagTransformerBlock implements TransformerCategory {
   private htmlTagTransformers: TransformerList
   private readonly openTags: OpenTagTracker
 

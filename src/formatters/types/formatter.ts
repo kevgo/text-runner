@@ -1,4 +1,4 @@
-import { Activity } from "../activity-list/types/activity"
+import { Activity } from "../../activity-list/types/activity"
 
 /**
  * Formatter is the API that formatters have to implement

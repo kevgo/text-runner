@@ -1,7 +1,7 @@
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
-import { Formatter } from "../formatters/formatter"
+import { Formatter } from "../formatters/types/formatter"
 import { ProgressFormatter } from "../formatters/progress-formatter"
 import { Configuration } from "./types/configuration"
 

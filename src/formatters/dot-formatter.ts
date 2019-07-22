@@ -3,7 +3,7 @@ import path from "path"
 import { Activity } from "../activity-list/types/activity"
 import { Configuration } from "../configuration/types/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
-import { Formatter } from "./formatter"
+import { Formatter } from "./types/formatter"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements Formatter {

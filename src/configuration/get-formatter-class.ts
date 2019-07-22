@@ -1,3 +1,4 @@
+import { ProgressFormatter } from "cucumber"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
@@ -15,6 +16,9 @@ export function getFormatterClass(
   }
   if (name === "detailed") {
     return DetailedFormatter
+  }
+  if (name === "progress") {
+    return ProgressFormatter
   }
   throw new UnprintedUserError(
     `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot`

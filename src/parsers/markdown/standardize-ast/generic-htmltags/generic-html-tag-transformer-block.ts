@@ -10,8 +10,8 @@ import { TagMapper } from "../tag-mapper"
 import { TransformerBlock } from "../transformer-block"
 
 export class GenericHtmlTagTransformerBlock implements TransformerBlock {
-  openTags: OpenTagTracker
-  tagMapper: TagMapper
+  private readonly openTags: OpenTagTracker
+  private readonly tagMapper: TagMapper
 
   constructor(openTags: OpenTagTracker, tagMapper: TagMapper) {
     this.openTags = openTags

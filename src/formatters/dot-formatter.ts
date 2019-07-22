@@ -8,7 +8,7 @@ import { Formatter } from "./types/formatter"
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements Formatter {
   /** Text-Runner configuration */
-  configuration: Configuration
+  private readonly configuration: Configuration
 
   // @ts-ignore: ignore unused variable
   constructor(stepCount: number, configuration: Configuration) {

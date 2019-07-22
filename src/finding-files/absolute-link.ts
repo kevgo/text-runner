@@ -14,7 +14,7 @@ import { RelativeLink } from "./relative-link"
  * (i.e. a link starting with '/')
  */
 export class AbsoluteLink {
-  value: string
+  readonly value: string
 
   constructor(publicPath: string) {
     this.value = addLeadingSlash(removeDoubleSlash(unixify(publicPath)))

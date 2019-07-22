@@ -14,8 +14,8 @@ export class GenericMdTransformerBlock implements TransformerBlock {
   /** Tags to ignore */
   static readonly ignore = ["hardbreak", "inline"]
 
-  openTags: OpenTagTracker
-  tagMapper: TagMapper
+  private readonly openTags: OpenTagTracker
+  private readonly tagMapper: TagMapper
 
   constructor(openTagTracker: OpenTagTracker, tagMapper: TagMapper) {
     this.openTags = openTagTracker

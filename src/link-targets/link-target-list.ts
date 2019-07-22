@@ -6,7 +6,7 @@ import { LinkTarget } from "./types/link-target"
 import { LinkTargetTypes } from "./types/link-target-types"
 
 export class LinkTargetList {
-  targets: { [key: string]: LinkTarget[] }
+  readonly targets: { [key: string]: LinkTarget[] }
 
   constructor() {
     this.targets = {}

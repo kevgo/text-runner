@@ -112,13 +112,13 @@ describe("AbsoluteLink", function() {
       const link = new AbsoluteLink("/one/two.png")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.value).to.equal("one/two.png")
+      expect(actual.unixified()).to.equal("one/two.png")
     })
     it("url-decodes the file path", function() {
       const link = new AbsoluteLink("/one%20two.png")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.value).to.equal("one two.png")
+      expect(actual.unixified()).to.equal("one two.png")
     })
     it("applies the publication", function() {
       const link = new AbsoluteLink("/blog/two.html")
@@ -130,7 +130,7 @@ describe("AbsoluteLink", function() {
         }
       ])
       const actual = link.localize(publications, "")
-      expect(actual.value).to.equal("content/posts/two.md")
+      expect(actual.unixified()).to.equal("content/posts/two.md")
     })
     it("removes the anchor in publications", function() {
       const link = new AbsoluteLink("/blog/two.html#hello")
@@ -142,13 +142,13 @@ describe("AbsoluteLink", function() {
         }
       ])
       const actual = link.localize(publications, "")
-      expect(actual.value).to.equal("content/posts/two.md")
+      expect(actual.unixified()).to.equal("content/posts/two.md")
     })
     it("removes the anchor in non-published links", function() {
       const link = new AbsoluteLink("/one/two.md#hello")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.value).to.equal("one/two.md")
+      expect(actual.unixified()).to.equal("one/two.md")
     })
   })
 
@@ -157,7 +157,7 @@ describe("AbsoluteLink", function() {
       const link = new AbsoluteLink("/one%20two.png")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.value).to.equal("one two.png")
+      expect(actual.unixified()).to.equal("one two.png")
     })
   })
 

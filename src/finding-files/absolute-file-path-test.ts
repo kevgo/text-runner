@@ -22,7 +22,7 @@ describe("AbsoluteFilePath", function() {
       it(name, function() {
         const [input, output] = data
         const file = new AbsoluteFilePath(input)
-        expect(file.directory().value).to.equal(output)
+        expect(file.directory().unixified()).to.equal(output)
       })
     }
   })

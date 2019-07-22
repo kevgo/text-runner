@@ -7,8 +7,8 @@ import { TransformerBlock } from "../transformer-block"
 import { TransformerList } from "../transformer-list"
 
 export class CustomMdTransformerBlock implements TransformerBlock {
-  mdTransformers: TransformerList
-  openTags: OpenTagTracker
+  private mdTransformers: TransformerList
+  private readonly openTags: OpenTagTracker
 
   constructor(openTags: OpenTagTracker) {
     this.mdTransformers = {}

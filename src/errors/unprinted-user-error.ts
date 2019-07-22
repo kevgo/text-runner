@@ -5,8 +5,8 @@ import { UserError } from "./user-error"
  * This happens for user errors before the formatter could be instantiated
  */
 export class UnprintedUserError extends UserError {
-  filePath: string | undefined
-  line: number | undefined
+  readonly filePath: string | undefined
+  readonly line: number | undefined
 
   constructor(message: string, filePath?: string, line?: number) {
     super(message)

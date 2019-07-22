@@ -5,12 +5,19 @@ import { addLeadingSlash } from "../../helpers/add-leading-slash"
 import { addTrailingSlash } from "../../helpers/add-trailing-slash"
 
 /**
- * Defines the publication of a local file path to a public URL
+ * Publications map local folders (in the source code) to public URL paths.
+ * This is needed when verifying Markdown code that will be published as HTML somewhere,
+ * and the links in Markdown reference the public URLs of the Markdown pages.
  */
 export class Publication {
-  localPath: string
-  publicPath: string
-  publicExtension: string
+  /** filesystem path of the src folder */
+  readonly localPath: string
+
+  /** the corresponding URL path */
+  readonly publicPath: string
+
+  /** which extension the Markdown files have when served as HTML */
+  readonly publicExtension: string
 
   constructor(localPath: string, publicPath: string, publicExtension: string) {
     this.localPath = addLeadingSlash(addTrailingSlash(localPath))
@@ -35,9 +42,7 @@ export class Publication {
     return result.withExtension(this.publicExtension)
   }
 
-  /**
-   * Returns whether this publication applies to the given file path
-   */
+  /** Returns whether this publication applies to the given file path */
   publishes(localPath: AbsoluteFilePath): boolean {
     return addLeadingSlash(addTrailingSlash(localPath.unixified())).startsWith(
       this.localPath
@@ -47,8 +52,6 @@ export class Publication {
   /**
    * Returns the localPath for the given link
    * mapped according to the rules of this publication.
-   * @param link the link to resolve
-   * @param defaultFile if the link points to a directory, append this filename
    */
   resolve(link: AbsoluteLink, defaultFile: string): AbsoluteFilePath {
     let result = link.rebase(this.publicPath, this.localPath)
@@ -68,9 +71,7 @@ export class Publication {
     return new AbsoluteFilePath(result.value)
   }
 
-  /**
-   * Returns whether this publication maps the given link
-   */
+  /** Returns whether this publication maps the given link */
   resolves(link: AbsoluteLink): boolean {
     return link.value.startsWith(this.publicPath)
   }

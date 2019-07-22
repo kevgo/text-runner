@@ -1,5 +1,5 @@
 import { UnprintedUserError } from "../../../errors/unprinted-user-error"
-import { AbsoluteFilePath } from "../../../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 
 const tagNameRE = /^<(\/?\w+).*>/
 

@@ -2,7 +2,7 @@ import color from "colorette"
 import { actionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/types/configuration"
-import { getFileNames } from "../finding-files/get-filenames"
+import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFile } from "../parsers/parse-markdown-file"
 
 export async function unusedCommand(config: Configuration) {

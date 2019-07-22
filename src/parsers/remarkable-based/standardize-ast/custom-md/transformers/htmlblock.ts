@@ -3,7 +3,7 @@ import { AbsoluteFilePath } from "../../../../../finding-files/absolute-file-pat
 import { AstNodeList } from "../../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
 import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
-import { RemarkableNode } from "../../remarkable-node"
+import { RemarkableNode } from "../../types/remarkable-node"
 
 const preRegex = /<pre([^>]*)>([\s\S]*)<\/pre>/m
 const tableRegex = /<table([^>]*)>[\s\S]*<\/table>/

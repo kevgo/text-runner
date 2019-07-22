@@ -2,9 +2,9 @@ import { AbsoluteFilePath } from "../../../../finding-files/absolute-file-path"
 import { AstNodeList } from "../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { loadTransformers } from "../load-transformers"
-import { RemarkableNode } from "../remarkable-node"
-import { TransformerBlock } from "../transformer-block"
-import { TransformerList } from "../transformer-list"
+import { RemarkableNode } from "../types/remarkable-node"
+import { TransformerBlock } from "../types/transformer-block"
+import { TransformerList } from "../types/transformer-list"
 
 export class CustomMdTransformerBlock implements TransformerBlock {
   private mdTransformers: TransformerList

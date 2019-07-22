@@ -1,7 +1,7 @@
 import fs from "fs-extra"
 import path from "path"
 import { isJsFile } from "../../../helpers/is-js-file"
-import { TransformerList } from "./transformer-list"
+import { TransformerList } from "./types/transformer-list"
 
 /**
  * Loads the transformers in the local `transformers` directory

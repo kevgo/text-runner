@@ -2,7 +2,7 @@ import { expect } from "chai"
 import { AbsoluteFilePath } from "../../../../filesystem/absolute-file-path"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { TagMapper } from "../tag-mapper"
-import { GenericMdTransformerBlock } from "./generic-md-transformer-block"
+import { GenericMdTransformerBlock } from "./generic-md-transformer-category"
 
 describe("MdTransformer", function() {
   beforeEach(function() {

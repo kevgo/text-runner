@@ -87,6 +87,7 @@ endif
 
 docs: build   # runs the documentation tests
 	@bin$/text-run static --offline
+	@echo
 	@bin$/text-run dynamic
 
 fix:  # runs the fixers

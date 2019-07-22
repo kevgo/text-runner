@@ -12,6 +12,7 @@ import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
+import { readFileSync } from "jsonfile"
 
 export async function runCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
@@ -28,13 +29,17 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
-  // step 2: read and parse files
-  const ASTs = await Promise.all(filenames.map(parseMarkdownFile))
+  // step 2: read files
+  const fileContents = await readFiles(filenames)
 
-  // step 3: find link targets
+  // step 3: read and parse files
+  const parser = new RemarkableParser()
+  const ASTs = await parser.parseAll(fileContents)
+
+  // step 4: find link targets
   const linkTargets = findLinkTargets(ASTs)
 
-  // step 4: extract activities
+  // step 5: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
@@ -42,7 +47,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
-  // step 5: execute the ActivityList
+  // step 6: execute the ActivityList
   const formatter = instantiateFormatter(
     config.formatterName,
     activities.length + links.length,
@@ -55,7 +60,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   )
   const results = (await Promise.all(jobs)).filter(r => r) as Error[]
 
-  // step 6: cleanup
+  // step 7: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
     // NOTE: calling fs.remove causes an exception on Windows here,

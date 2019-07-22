@@ -116,10 +116,9 @@ your **text-run.yml** needs to contains this section:
 
 ```
 actions:
-
   runConsoleCommand:
     globals:
-      tool: 'public/tool'
+      tool: "public/tool"
 ```
 
 The

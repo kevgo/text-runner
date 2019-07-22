@@ -10,7 +10,8 @@ export class ProgressFormatter implements Formatter {
   /** Text-Runner configuration */
   configuration: Configuration
 
-  progressBar: any
+  /** Progress bar instance */
+  progressBar: progress.Bar
 
   // @ts-ignore: ignore unused variable
   constructor(stepCount: number, configuration: Configuration) {

@@ -9,7 +9,7 @@ import { RelativeLink } from "./relative-link"
  * A link that isn't known yet whether it is relative or absolute
  */
 export class UnknownLink {
-  value: string
+  private readonly value: string
 
   constructor(publicPath: string) {
     this.value = removeDoubleSlash(unixify(publicPath))

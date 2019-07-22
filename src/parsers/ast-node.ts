@@ -1,6 +1,6 @@
 import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
 
-/** A node in the standardized Markdown/HTML AST */
+/** a node in the standardized Markdown/HTML AST */
 export class AstNode {
   static scaffold(data: any = {}): AstNode {
     if (typeof data.file === "string") {
@@ -16,12 +16,23 @@ export class AstNode {
     })
   }
 
-  type: string // markdown type of AST node
-  tag: string // HTML type of AST node
-  file: AbsoluteFilePath // the file in which this AstNode occurs
-  line: number // the line in the file at which this AST node occurs
-  content: string // textual content of this AST node
-  attributes: { [key: string]: string } // the attributes of the node
+  /** markdown type of AST node */
+  readonly type: string
+
+  /** HTML type of AST node */
+  readonly tag: string
+
+  /** the file in which this AstNode occurs */
+  readonly file: AbsoluteFilePath
+
+  /** the line in the file at which this AST node occurs */
+  readonly line: number
+
+  /** textual content of this AST node */
+  readonly content: string
+
+  /** the attributes of the node */
+  readonly attributes: { [key: string]: string }
 
   constructor(data: {
     type: string

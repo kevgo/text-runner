@@ -23,3 +23,4 @@ Feature: Formatter signals
       | FORMATTER |
       | detailed  |
       | dot       |
+      | progress  |

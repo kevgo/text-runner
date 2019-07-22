@@ -1,8 +1,8 @@
 import color from "colorette"
 import fs from "fs-extra"
-import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { Configuration } from "../configuration/configuration"
+import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
@@ -32,16 +32,20 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
   const linkTargets = findLinkTargets(ASTs)
 
   // step 4: extract activities
-  const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
-  if (activities.length === 0 && links.length === 0) {
+  if (links.length === 0) {
     console.log(color.magenta("no activities found"))
     return []
   }
 
   // step 5: execute the ActivityList
+  const formatter = instantiateFormatter(
+    config.formatterName,
+    links.length,
+    config
+  )
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, linkTargets, config, stats)
+  const jobs = executeParallel(links, linkTargets, config, stats, formatter)
   const results = (await Promise.all(jobs)).filter(r => r) as Error[]
 
   // step 6: cleanup
@@ -60,11 +64,7 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
     colorFn = color.red
     text += color.red(`${results.length} errors, `)
   }
-  text += colorFn(
-    `${activities.length + links.length} activities in ${
-      filenames.length
-    } files`
-  )
+  text += colorFn(`${links.length} activities in ${filenames.length} files`)
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   return results

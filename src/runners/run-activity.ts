@@ -7,6 +7,7 @@ import { ActionResult } from "../actions/action-result"
 import { Activity } from "../activity-list/activity"
 import { Configuration } from "../configuration/configuration"
 import { PrintedUserError } from "../errors/printed-user-error"
+import { Formatter } from "../formatters/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./name-refiner"
 import { OutputCollector } from "./output-collector"
@@ -16,9 +17,9 @@ export async function runActivity(
   activity: Activity,
   configuration: Configuration,
   linkTargets: LinkTargetList,
-  statsCounter: StatsCounter
+  statsCounter: StatsCounter,
+  formatter: Formatter
 ): Promise<Error | null> {
-  const formatter = new configuration.FormatterClass(activity, configuration)
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: ActionArgs = {
@@ -41,17 +42,30 @@ export async function runActivity(
     }
     if (result === undefined) {
       statsCounter.success()
-      formatter.success(nameRefiner.finalName(), outputCollector.toString())
+      formatter.success(
+        activity,
+        nameRefiner.finalName(),
+        outputCollector.toString()
+      )
     } else if (result === args.SKIPPING) {
       statsCounter.skip()
-      formatter.skipped(nameRefiner.finalName(), outputCollector.toString())
+      formatter.skipped(
+        activity,
+        nameRefiner.finalName(),
+        outputCollector.toString()
+      )
     } else {
       throw new Error(`unknown return code from action: ${result}`)
     }
   } catch (err) {
     statsCounter.error()
     if (isUserError(err)) {
-      formatter.failed(nameRefiner.finalName(), err, outputCollector.toString())
+      formatter.failed(
+        activity,
+        nameRefiner.finalName(),
+        err,
+        outputCollector.toString()
+      )
       return new PrintedUserError(err)
     } else {
       // here we have a developer error like for example TypeError

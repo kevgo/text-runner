@@ -1,8 +1,8 @@
 import color from "colorette"
 import fs from "fs-extra"
 import { extractActivities } from "../activity-list/extract-activities"
-import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { Configuration } from "../configuration/configuration"
+import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
@@ -33,15 +33,25 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 4: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)
-  const links = extractImagesAndLinks(ASTs)
-  if (activities.length === 0 && links.length === 0) {
+  if (activities.length === 0) {
     console.log(color.magenta("no activities found"))
     return []
   }
 
   // step 5: execute the ActivityList
+  const formatter = instantiateFormatter(
+    config.formatterName,
+    activities.length,
+    config
+  )
   process.chdir(config.workspace)
-  const error = await executeSequential(activities, config, linkTargets, stats)
+  const error = await executeSequential(
+    activities,
+    config,
+    linkTargets,
+    stats,
+    formatter
+  )
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
@@ -60,9 +70,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
     text += color.green("Success! ")
   }
   text += colorFn(
-    `${activities.length + links.length} activities in ${
-      filenames.length
-    } files`
+    `${activities.length} activities in ${filenames.length} files`
   )
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))

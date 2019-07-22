@@ -20,6 +20,7 @@ export interface Configuration {
   workspace: string // the root directory of the workspace
 }
 
+/** creates an empty configuration object for testing */
 export function scaffoldConfiguration(): Configuration {
   return {
     actions: null,

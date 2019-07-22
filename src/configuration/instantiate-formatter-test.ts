@@ -12,10 +12,12 @@ describe("instantiateFormatter", function() {
     const actual = instantiateFormatter("dot", 0, config)
     expect(actual).to.be.an.instanceOf(DotFormatter)
   })
+
   it("returns the detailed formatter if requested", function() {
     const actual = instantiateFormatter("detailed", 0, config)
     expect(actual).to.be.an.instanceOf(DetailedFormatter)
   })
+
   it("throws if an unknown name is given", function() {
     assert.throws(function() {
       instantiateFormatter("zonk", 0, config)

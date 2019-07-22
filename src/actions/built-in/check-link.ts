@@ -4,12 +4,12 @@ import got from "got"
 import path from "path"
 import { AbsoluteFilePath } from "../../domain-model/absolute-file-path"
 import { UnknownLink } from "../../domain-model/unknown-link"
-import { isExternalLink } from "../../helpers/is-external-link"
-import { isLinkToAnchorInOtherFile } from "../../helpers/is-link-to-anchor-in-other-file"
-import { isLinkToAnchorInSameFile } from "../../helpers/is-link-to-anchor-in-same-file"
-import { isMailtoLink } from "../../helpers/is-mailto-link"
 import { removeLeadingSlash } from "../../helpers/remove-leading-slash"
 import { ActionArgs } from "../action-args"
+import { isExternalLink } from "../helpers/is-external-link"
+import { isLinkToAnchorInOtherFile } from "../helpers/is-link-to-anchor-in-other-file"
+import { isLinkToAnchorInSameFile } from "../helpers/is-link-to-anchor-in-same-file"
+import { isMailtoLink } from "../helpers/is-mailto-link"
 
 // Checks for broken hyperlinks
 export default async function checkLink(args: ActionArgs) {

@@ -3,10 +3,10 @@ import deb from "debug"
 import { createObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../../configuration/configuration"
-import { callArgs } from "../../helpers/call-args"
-import { trimDollar } from "../../helpers/trim-dollar"
 import { ActionArgs } from "../action-args"
-import { RunningProcess } from "./helpers/running-process"
+import { callArgs } from "../helpers/call-args"
+import { RunningProcess } from "../helpers/running-process"
+import { trimDollar } from "../helpers/trim-dollar"
 
 const debug = deb("start-console-command")
 

@@ -5,10 +5,10 @@ import path from "path"
 import rechoir from "rechoir"
 import { Activity } from "../activity-list/activity"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
-import { getActionName } from "../helpers/get-action-name"
-import { javascriptExtensions } from "../helpers/javascript-extensions"
-import { trimExtension } from "../helpers/trim-extension"
 import { Action } from "./action"
+import { getActionName } from "./helpers/get-action-name"
+import { javascriptExtensions } from "./helpers/javascript-extensions"
+import { trimExtension } from "./helpers/trim-extension"
 
 interface FunctionRepo {
   [key: string]: Action

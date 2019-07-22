@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "./absolute-file-path"
 import { removeExcludedFiles } from "./remove-excluded-files"
 
 describe("removeExcludedFiles", function() {
@@ -10,6 +10,7 @@ describe("removeExcludedFiles", function() {
     )
     expect(result).to.eql([{ value: "two" }])
   })
+
   it("removes the given filenames", function() {
     const result = removeExcludedFiles(
       [
@@ -21,6 +22,7 @@ describe("removeExcludedFiles", function() {
     )
     expect(result).to.eql([{ value: "two" }])
   })
+
   it("removes the given regex", function() {
     const result = removeExcludedFiles(
       [new AbsoluteFilePath("one"), new AbsoluteFilePath("two")],
@@ -28,6 +30,7 @@ describe("removeExcludedFiles", function() {
     )
     expect(result).to.eql([{ value: "two" }])
   })
+
   it("removes the given regexes", function() {
     const result = removeExcludedFiles(
       [
@@ -39,10 +42,12 @@ describe("removeExcludedFiles", function() {
     )
     expect(result).to.eql([{ value: "two" }])
   })
+
   it("does not remove things if no excludes are given", function() {
     const result = removeExcludedFiles([new AbsoluteFilePath("one")], [])
     expect(result).to.eql([{ value: "one" }])
   })
+
   it("automatically ignores node_modules", function() {
     const result = removeExcludedFiles(
       [

@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AbsoluteFilePath } from "../../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
 import { Publications } from "./publications"
 
 describe("Publications", function() {

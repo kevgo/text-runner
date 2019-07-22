@@ -1,4 +1,4 @@
-import { ActionArgs } from "../action-args"
+import { ActionArgs } from "../types/action-args"
 
 // Runs the JavaScript code given in the code block
 export default function validateJavascript(args: ActionArgs) {

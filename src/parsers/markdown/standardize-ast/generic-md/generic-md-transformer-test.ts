@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AbsoluteFilePath } from "../../../../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../../../../finding-files/absolute-file-path"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { TagMapper } from "../tag-mapper"
 import { GenericMdTransformerBlock } from "./generic-md-transformer-block"

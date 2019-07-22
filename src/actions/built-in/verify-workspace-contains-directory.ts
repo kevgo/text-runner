@@ -1,7 +1,7 @@
 import color from "colorette"
 import fs from "fs-extra"
 import path from "path"
-import { ActionArgs } from "../action-args"
+import { ActionArgs } from "../types/action-args"
 
 // Verifies that the test workspace contains the given directory
 export default async function verifyWorkspaceContainsDirectory(

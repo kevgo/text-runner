@@ -1,4 +1,4 @@
-import { RefineNameFn } from "./refine-name-function"
+import { RefineNameFn } from "../types/refine-name-function"
 
 /** allows refining the current name of a test step */
 export class NameRefiner {

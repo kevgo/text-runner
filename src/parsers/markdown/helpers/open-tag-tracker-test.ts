@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AbsoluteFilePath } from "../../../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../../../finding-files/absolute-file-path"
 import { AstNode } from "../../ast-node"
 import { OpenTagTracker } from "./open-tag-tracker"
 

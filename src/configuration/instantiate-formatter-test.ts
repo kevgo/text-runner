@@ -2,8 +2,8 @@ import { strict as assert } from "assert"
 import { expect } from "chai"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
-import { scaffoldConfiguration } from "./configuration"
 import { instantiateFormatter } from "./instantiate-formatter"
+import { scaffoldConfiguration } from "./types/configuration"
 
 const config = scaffoldConfiguration()
 

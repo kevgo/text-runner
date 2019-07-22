@@ -1,5 +1,5 @@
 import glob from "glob"
-import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "./absolute-file-path"
 
 export function filesMatchingGlob(expression: string): AbsoluteFilePath[] {
   return glob

@@ -1,7 +1,7 @@
 import util from "util"
 import xml2js from "xml2js"
-import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
 import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { AbsoluteFilePath } from "../../../../../finding-files/absolute-file-path"
 import { AstNode } from "../../../../ast-node"
 import { AstNodeList } from "../../../../ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"

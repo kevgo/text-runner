@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { LinkTargetList } from "./link-target-list"
 

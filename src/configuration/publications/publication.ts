@@ -1,5 +1,5 @@
-import { AbsoluteLink } from "../../finding-files/absolute-link"
-import { RelativeLink } from "../../finding-files/relative-link"
+import { AbsoluteLink } from "../../filesystem/absolute-link"
+import { RelativeLink } from "../../filesystem/relative-link"
 import { addLeadingDotUnlessEmpty } from "../../helpers/add-leading-dot-unless-empty"
 import { addLeadingSlash } from "../../helpers/add-leading-slash"
 import { addTrailingSlash } from "../../helpers/add-trailing-slash"
@@ -77,4 +77,4 @@ export class Publication {
   }
 }
 
-import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"

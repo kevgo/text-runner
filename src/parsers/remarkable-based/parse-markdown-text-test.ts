@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import fs from "fs-extra"
 import path from "path"
-import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { parseMarkdownText } from "./parse-markdown-text"
 
 describe("parseMarkdownText", async function() {

@@ -1,21 +1,20 @@
-import Time from "time-diff"
+import { StopWatch } from "./stopwatch"
 
 export class StatsCounter {
   errorCount: number
   skipCount: number
   successCount: number
-  time: Time
+  stopWatch: StopWatch
 
   constructor() {
     this.errorCount = 0
     this.skipCount = 0
     this.successCount = 0
-    this.time = new Time()
-    this.time.start("formatter")
+    this.stopWatch = new StopWatch()
   }
 
   duration() {
-    return this.time.end("formatter")
+    return this.stopWatch.duration()
   }
 
   error() {

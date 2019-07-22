@@ -1,7 +1,7 @@
 import { expect } from "chai"
+import { AbsoluteFilePath } from "../../../domain-model/absolute-file-path"
 import { AstNode } from "../../ast-node"
 import { OpenTagTracker } from "./open-tag-tracker"
-import { AbsoluteFilePath } from "../../../domain-model/absolute-file-path"
 
 describe("OpenTagTracker", function() {
   describe("add", function() {

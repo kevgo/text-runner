@@ -3,7 +3,7 @@ import fs from "fs-extra"
 import got from "got"
 import path from "path"
 import { Configuration } from "../../configuration/configuration"
-import { ActionArgs } from "../action-args"
+import { ActionArgs } from "../types/action-args"
 
 // Checks for broken hyperlinks
 export default async function checkImage(args: ActionArgs) {

@@ -1,7 +1,7 @@
 import color from "colorette"
 import jsonfile from "jsonfile"
 import path from "path"
-import { ActionArgs } from "../action-args"
+import { ActionArgs } from "../types/action-args"
 import { trimDollar } from "../helpers/trim-dollar"
 
 export default async function verifyNpmInstall(args: ActionArgs) {

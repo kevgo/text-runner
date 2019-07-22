@@ -1,5 +1,5 @@
 import { Configuration } from "../../configuration/configuration"
-import { ActionArgs } from "../action-args"
+import { ActionArgs } from "../types/action-args"
 
 type DoneFunction = (err?: Error) => void
 

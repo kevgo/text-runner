@@ -1,4 +1,4 @@
-import { ActionArgs } from "../action-args"
+import { ActionArgs } from "../types/action-args"
 import { RunningProcess } from "../helpers/running-process"
 
 // Waits until the currently running console command produces the given output

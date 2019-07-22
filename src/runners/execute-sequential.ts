@@ -1,9 +1,9 @@
-import { ActivityList } from "../activity-list/activity-list"
-import { Configuration } from "../configuration/configuration"
-import { Formatter } from "../formatters/formatter"
+import { ActivityList } from "../activity-list/types/activity-list"
+import { Configuration } from "../configuration/types/configuration"
+import { Formatter } from "../formatters/types/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
+import { StatsCounter } from "./helpers/stats-counter"
 import { runActivity } from "./run-activity"
-import { StatsCounter } from "./stats-counter"
 
 export async function executeSequential(
   activities: ActivityList,

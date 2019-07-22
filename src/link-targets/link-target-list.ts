@@ -1,9 +1,9 @@
 import kebab from "@queso/kebab-case"
-import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
 import { AstNode } from "../parsers/ast-node"
 import { AstNodeList } from "../parsers/ast-node-list"
-import { LinkTarget } from "./link-target"
-import { LinkTargetTypes } from "./link-target-types"
+import { LinkTarget } from "./types/link-target"
+import { LinkTargetTypes } from "./types/link-target-types"
 
 export class LinkTargetList {
   targets: { [key: string]: LinkTarget[] }

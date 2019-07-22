@@ -1,7 +1,7 @@
 import color from "colorette"
 import path from "path"
-import { ActionArgs } from "../action-args"
 import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "../types/action-args"
 
 export default function verifyNpmGlobalCommand(args: ActionArgs) {
   args.name("NPM module exports the command")

@@ -1,7 +1,7 @@
 import color from "colorette"
 import { actionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
-import { Configuration } from "../configuration/configuration"
+import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
 

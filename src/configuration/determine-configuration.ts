@@ -1,7 +1,7 @@
-import { Configuration } from "./configuration"
 import { mergeConfigurations } from "./merge-configurations"
 import { Publications } from "./publications/publications"
-import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { Configuration } from "./types/configuration"
+import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
 const defaultValues: Configuration = {
   actions: {},

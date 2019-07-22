@@ -1,5 +1,5 @@
-import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
 import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
+import { AbsoluteFilePath } from "../../../../../finding-files/absolute-file-path"
 import { AstNodeList } from "../../../../ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
 import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"

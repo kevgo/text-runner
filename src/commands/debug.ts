@@ -1,6 +1,6 @@
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
-import { Configuration } from "../configuration/configuration"
+import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { AstNode } from "../parsers/ast-node"

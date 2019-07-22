@@ -1,5 +1,5 @@
 import { allKeys } from "../helpers/all-keys"
-import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
 /** Merges the non-null values of the given objects */
 export function mergeConfigurations(

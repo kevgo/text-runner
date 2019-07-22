@@ -10,7 +10,7 @@ import { TransformerCategory } from "../types/transformer-category"
  * Transforms basic Remarkable nodes with opening and closing tags
  * to to standardized AST used by TextRunner
  */
-export class GenericMdTransformerBlock implements TransformerCategory {
+export class GenericMdTransformerCategory implements TransformerCategory {
   /** Tags to ignore */
   static readonly ignore = ["hardbreak", "inline"]
 
@@ -49,7 +49,7 @@ export class GenericMdTransformerBlock implements TransformerCategory {
   }
 
   isIgnoredType(nodeType: string): boolean {
-    return GenericMdTransformerBlock.ignore.includes(nodeType)
+    return GenericMdTransformerCategory.ignore.includes(nodeType)
   }
 
   /**

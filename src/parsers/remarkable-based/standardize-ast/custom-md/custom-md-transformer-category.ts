@@ -6,7 +6,7 @@ import { RemarkableNode } from "../types/remarkable-node"
 import { TransformerCategory } from "../types/transformer-category"
 import { TransformerList } from "../types/transformer-list"
 
-export class CustomMdTransformerBlock implements TransformerCategory {
+export class CustomMdTransformerCategory implements TransformerCategory {
   private mdTransformers: TransformerList
   private readonly openTags: OpenTagTracker
 

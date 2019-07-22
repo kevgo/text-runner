@@ -6,9 +6,9 @@ import {
   RemarkableNode,
   scaffoldRemarkableNode
 } from "../types/remarkable-node"
-import { GenericHtmlTagTransformerBlock } from "./generic-html-tag-transformer-category"
+import { GenericHtmlTagTransformerCategory } from "./generic-html-tag-transformer-category"
 
-const transformer = new GenericHtmlTagTransformerBlock(
+const transformer = new GenericHtmlTagTransformerCategory(
   new OpenTagTracker(),
   new TagMapper()
 )

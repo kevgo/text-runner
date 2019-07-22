@@ -9,7 +9,7 @@ import { RemarkableNode } from "../types/remarkable-node"
 import { TransformerCategory } from "../types/transformer-category"
 import { TransformerList } from "../types/transformer-list"
 
-export class CustomHtmlBlockTransformerBlock implements TransformerCategory {
+export class CustomHtmlBlockTransformerCategory implements TransformerCategory {
   private readonly openTags: OpenTagTracker
   private transformers: TransformerList
 

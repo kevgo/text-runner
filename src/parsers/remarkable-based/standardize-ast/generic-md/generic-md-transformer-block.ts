@@ -2,8 +2,8 @@ import { AbsoluteFilePath } from "../../../../finding-files/absolute-file-path"
 import { AstNode } from "../../../standard-AST/ast-node"
 import { AstNodeList } from "../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
-import { RemarkableNode } from "../types/remarkable-node"
 import { TagMapper } from "../tag-mapper"
+import { RemarkableNode } from "../types/remarkable-node"
 import { TransformerBlock } from "../types/transformer-block"
 
 /**

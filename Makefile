@@ -88,7 +88,7 @@ endif
 docs: build   # runs the documentation tests
 	@bin$/text-run static --offline
 	@echo
-	@bin$/text-run dynamic
+	@bin$/text-run dynamic --format progress
 
 fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix

@@ -22,7 +22,7 @@ describe("instantiateFormatter", function() {
     assert.throws(function() {
       instantiateFormatter("zonk", 0, config)
     }, new Error(
-      "Unknown formatter: zonk\n\nAvailable formatters are: detailed, dot"
+      "Unknown formatter: zonk\n\nAvailable formatters are: detailed, dot, progress"
     ))
   })
 })

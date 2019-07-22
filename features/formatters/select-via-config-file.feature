@@ -23,6 +23,7 @@ Feature: selecting formatter via the config file
       | FORMATTER | OUTPUT      |
       | detailed  | Hello world |
       | dot       | .           |
+      | progress  | Success     |
 
 
   Scenario: the config file specifies an unknown formatter

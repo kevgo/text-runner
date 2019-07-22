@@ -33,10 +33,12 @@ describe("AstNode", function() {
       })
       expect(node.htmlLinkTarget()).to.equal("http://foo.com")
     })
+
     it("returns null for non-link tags", function() {
       const node = AstNode.scaffold({ type: "htmltag", content: "hello" })
       expect(node.htmlLinkTarget()).to.be.null
     })
+
     it("returns null for anchor tags", function() {
       const node = AstNode.scaffold({
         content: '<a name="foo">',

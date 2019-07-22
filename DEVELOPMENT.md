@@ -83,7 +83,7 @@ that converts the configuration into test results over several steps:
    this is done by the [finding files module](src/finding-files)
 1. **list of filenames --> list of file ASTs:**
    the [parse module](src/parsers) reads and parses each file
-   and [transforms](src/parsers/markdown/standardize-ast)
+   and [transforms](src/parsers/remarkable-based/standardize-ast)
    the parser output into a standardized AST format
    that is similar whether the input is Markdown or HTML
    and optimized for analyzing and testing.

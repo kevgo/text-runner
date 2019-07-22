@@ -1,7 +1,7 @@
 import color from "colorette"
 import fs from "fs-extra"
 import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
-import { parseMarkdownText } from "./markdown/parse-markdown-text"
+import { parseMarkdownText } from "./remarkable-based/parse-markdown-text"
 import { AstNodeList } from "./standard-AST/ast-node-list"
 
 /** high-level API of the parser: returns the AST for the file at the given path */

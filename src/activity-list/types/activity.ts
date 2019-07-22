@@ -1,5 +1,5 @@
 import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
-import { AstNodeList } from "../../parsers/ast-node-list"
+import { AstNodeList } from "../../parsers/standard-AST/ast-node-list"
 
 /**
  * Activity is an action instance.

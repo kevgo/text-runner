@@ -76,7 +76,7 @@ export class TagMapper {
 
   /** Calculates the mappings from Remarkable types to HTML tags */
   private createTypeTagMappings(): Mappings {
-    const result = {}
+    const result: Mappings = {}
     for (const [type, tag] of Object.entries(TagMapper.OPEN_CLOSE_MAPPINGS)) {
       result[type + "_open"] = tag
       result[type + "_close"] = "/" + tag
@@ -89,7 +89,7 @@ export class TagMapper {
 
   /** Calculates the mappings from HTML tags to Remarkable types */
   private createTagTypeMappings(): Mappings {
-    const result = {}
+    const result: Mappings = {}
     for (const [type, tag] of Object.entries(this.typeTagMappings)) {
       result[tag] = type
     }

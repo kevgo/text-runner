@@ -18,9 +18,9 @@ describe("AbsoluteFilePath", function() {
       "Windows directory": ["/foo/bar/", "foo/bar/"],
       "Windows file path": ["\\foo\\bar\\baz.md", "foo/bar/"]
     }
-    for (const testName of Object.keys(testData)) {
-      it(testName, function() {
-        const [input, output] = testData[testName]
+    for (const [name, data] of Object.entries(testData)) {
+      it(name, function() {
+        const [input, output] = data
         const file = new AbsoluteFilePath(input)
         expect(file.directory().value).to.equal(output)
       })
@@ -45,10 +45,10 @@ describe("AbsoluteFilePath", function() {
       "Windows directory": ["/foo/bar/", true],
       "Windows file path": ["\\foo\\bar\\baz.md", false]
     }
-    for (const testName of Object.keys(testData)) {
-      it(testName, function() {
-        const [input, output] = testData[testName]
-        const file = new AbsoluteFilePath(input)
+    for (const [name, data] of Object.entries(testData)) {
+      it(name, function() {
+        const [input, output] = data
+        const file = new AbsoluteFilePath(input as string)
         expect(file.isDirectory()).to.equal(output)
       })
     }
@@ -59,10 +59,10 @@ describe("AbsoluteFilePath", function() {
       "/foo/bar": "foo/bar",
       "\\foo/bar\\baz": "foo/bar/baz"
     }
-    for (const input of Object.keys(testData)) {
-      it(`converts ${input} to ${testData[input]}`, function() {
+    for (const [input, output] of Object.entries(testData)) {
+      it(`converts ${input} to ${output}`, function() {
         const filePath = new AbsoluteFilePath(input)
-        expect(filePath.unixified()).to.equal(testData[input])
+        expect(filePath.unixified()).to.equal(output)
       })
     }
   })

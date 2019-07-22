@@ -1,4 +1,4 @@
-import { AstNodeList } from "../parsers/ast-node-list"
+import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { ActivityList } from "./types/activity-list"
 
 /** extracts activities that check images and links from the given ActivityLists */

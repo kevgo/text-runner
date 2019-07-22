@@ -3,9 +3,9 @@ import { extractImagesAndLinks } from "../activity-list/extract-images-and-links
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import { AstNode } from "../parsers/ast-node"
-import { AstNodeList } from "../parsers/ast-node-list"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
+import { AstNode } from "../parsers/standard-AST/ast-node"
+import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 
 export async function debugCommand(config: Configuration): Promise<Error[]> {
   const filenames = await getFileNames(config)

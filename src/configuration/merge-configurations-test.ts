@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
 import { mergeConfigurations } from "./merge-configurations"
 
 describe("mergeConfigurations()", function() {

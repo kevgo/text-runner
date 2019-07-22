@@ -70,7 +70,7 @@ export default class AstStandardizer {
     return this.result
   }
 
-  async transform(node: RemarkableNode): Promise<AstNodeList> {
+  private async transform(node: RemarkableNode): Promise<AstNodeList> {
     for (const transformerCategory of this.transformerCategories) {
       if (transformerCategory.canTransform(node, this.filepath, this.line)) {
         return transformerCategory.transform(node, this.filepath, this.line)
@@ -79,7 +79,7 @@ export default class AstStandardizer {
     throw new Error(`Unprocessable node: ${node.type}`)
   }
 
-  processSoftBreak(node: RemarkableNode): boolean {
+  private processSoftBreak(node: RemarkableNode): boolean {
     if (node.type !== "softbreak") {
       return false
     }

@@ -14,13 +14,13 @@ import { TransformerBlock } from "./transformer-block"
  * AstStandardizer converts the AST created by Remarkable
  * into the standardized AST used by TextRunner
  */
-export default class AstStandardizer {
-  filepath: AbsoluteFilePath
+export class AstStandardizer {
+  readonly filepath: AbsoluteFilePath
   line: number
-  openTags: OpenTagTracker
-  result: AstNodeList
-  tagMapper: TagMapper
-  transformerBlocks: TransformerBlock[]
+  readonly openTags: OpenTagTracker
+  readonly result: AstNodeList
+  readonly tagMapper: TagMapper
+  readonly transformerBlocks: TransformerBlock[]
 
   constructor(filepath: AbsoluteFilePath) {
     this.filepath = filepath

@@ -23,10 +23,10 @@ export class TagMapper {
   }
 
   /** Maps Remarkable types to their corresponding HTML tags */
-  typeTagMappings: Mappings
+  readonly typeTagMappings: Mappings
 
   /** Maps HTML tag names to their corresponding Remarkable types */
-  tagTypeMappings: Mappings
+  readonly tagTypeMappings: Mappings
 
   constructor() {
     this.typeTagMappings = this.createTypeTagMappings()

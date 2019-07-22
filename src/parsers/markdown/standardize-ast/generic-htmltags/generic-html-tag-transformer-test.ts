@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { AbsoluteFilePath } from "../../../../domain-model/absolute-file-path"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
-import { RemarkableNode } from "../remarkable-node"
+import { RemarkableNode, scaffoldRemarkableNode } from "../remarkable-node"
 import { TagMapper } from "../tag-mapper"
 import { GenericHtmlTagTransformerBlock } from "./generic-html-tag-transformer-block"
 
@@ -10,9 +10,10 @@ const transformer = new GenericHtmlTagTransformerBlock(
   new TagMapper()
 )
 const file = new AbsoluteFilePath("foo")
-const openingNode = new RemarkableNode()
-openingNode.type = "htmltag"
-openingNode.content = '<foo class="myClass">'
+const openingNode: RemarkableNode = scaffoldRemarkableNode({
+  content: '<foo class="myClass">',
+  type: "htmltag"
+})
 
 describe("GenericHtmlTagTransformer", function() {
   describe(".transform()", function() {

@@ -1,5 +1,5 @@
 /** A node in the output of the Remarkable parser */
-export class RemarkableNode {
+export interface RemarkableNode {
   lines: number[]
   children: RemarkableNode[]
   type: string
@@ -10,12 +10,23 @@ export class RemarkableNode {
   src: string | undefined
   href: string | undefined
   title: string | undefined
+}
 
-  // This constructor isn't used and just here to make the type checker happy
-  constructor() {
-    this.type = ""
-    this.content = ""
-    this.children = []
-    this.lines = []
-  }
+/** creates empty RemarkableNodes for testing */
+export function scaffoldRemarkableNode(args: OptionalRemarkableNode) {
+  return { ...defaultValues, ...args }
+}
+type OptionalRemarkableNode = Partial<RemarkableNode>
+
+const defaultValues: RemarkableNode = {
+  alt: undefined,
+  attributes: undefined,
+  children: [],
+  content: "",
+  hLevel: undefined,
+  href: undefined,
+  lines: [],
+  src: undefined,
+  title: undefined,
+  type: ""
 }

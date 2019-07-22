@@ -3,7 +3,7 @@ import { actionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
-import { readAndParseFile } from "../parsers/read-and-parse-file"
+import { parseMarkdownFile } from "../parsers/parse-markdown-file"
 
 export async function unusedCommand(config: Configuration) {
   // step 1: find files
@@ -14,7 +14,7 @@ export async function unusedCommand(config: Configuration) {
   }
 
   // step 2: read and parse files
-  const ASTs = await Promise.all(filenames.map(readAndParseFile))
+  const ASTs = await Promise.all(filenames.map(parseMarkdownFile))
 
   // step 3: extract activities
   const usedActivityNames = extractActivities(ASTs, config.classPrefix).map(

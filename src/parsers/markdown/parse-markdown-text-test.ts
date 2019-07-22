@@ -2,9 +2,9 @@ import { expect } from "chai"
 import fs from "fs-extra"
 import path from "path"
 import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
-import { parseMarkdown } from "./parse-markdown"
+import { parseMarkdownText } from "./parse-markdown-text"
 
-describe("parseMarkdown", async function() {
+describe("parseMarkdownText", async function() {
   const testCases = await fs.readdir(path.join(__dirname, "tests"))
   for (const testCase of testCases) {
     const testCaseDir = path.join(__dirname, "tests", testCase)
@@ -18,7 +18,7 @@ describe("parseMarkdown", async function() {
       it(name, async function() {
         const input = await fs.readFile(path.join(testCaseDir, inputFile))
         const expected = require(path.join(testCaseDir, "result.json"))
-        const actual = await parseMarkdown(
+        const actual = await parseMarkdownText(
           input.toString().trim(),
           new AbsoluteFilePath("input.md")
         )

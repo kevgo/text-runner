@@ -5,8 +5,8 @@ import AstStandardizer from "./standardize-ast/ast-standardizer"
 
 const markdownParser = new Remarkable("full", { html: true })
 
-/** parses the given Markdown text into an AstNodeList */
-export async function parseMarkdown(
+/** parses the given Markdown text into the standardized AST format */
+export async function parseMarkdownText(
   markdownText: string,
   filepath: AbsoluteFilePath
 ): Promise<AstNodeList> {

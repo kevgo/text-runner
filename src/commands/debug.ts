@@ -3,7 +3,7 @@ import { extractImagesAndLinks } from "../activity-list/extract-images-and-links
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import { readAndParseFile } from "../parsers/read-and-parse-file"
+import { parseMarkdownFile } from "../parsers/parse-markdown-file"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 
@@ -14,7 +14,9 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
   }
 
   console.log("AST NODES:")
-  const ASTs: AstNodeList[] = await Promise.all(filenames.map(readAndParseFile))
+  const ASTs: AstNodeList[] = await Promise.all(
+    filenames.map(parseMarkdownFile)
+  )
   for (const AST of ASTs) {
     for (const node of AST) {
       console.log(

@@ -1,4 +1,4 @@
-const { AstNode } = require("../dist/parsers/ast-node.js")
+const { AstNode } = require("../dist/parsers/standard-AST/ast-node.js")
 const assertNoDiff = require("assert-no-diff")
 const {
   removeTrailingColon

@@ -15,12 +15,13 @@ export class AstNode {
       type: data.type || "type"
     })
   }
-  type: string // markdown type of AST node
-  tag: string // HTML type of AST node
-  file: AbsoluteFilePath // the file in which this AstNode occurs
-  line: number // the line in the file at which this AST node occurs
-  content: string // textual content of this AST node
-  attributes: { [key: string]: string } // the attributes of the node
+
+  readonly type: string // markdown type of AST node
+  readonly tag: string // HTML type of AST node
+  readonly file: AbsoluteFilePath // the file in which this AstNode occurs
+  readonly line: number // the line in the file at which this AST node occurs
+  readonly content: string // textual content of this AST node
+  readonly attributes: { [key: string]: string } // the attributes of the node
 
   constructor(data: {
     type: string

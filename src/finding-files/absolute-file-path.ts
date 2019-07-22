@@ -6,16 +6,13 @@
  * to a markdown file on the local file system.
  */
 export class AbsoluteFilePath {
-  value: string
+  private readonly value: string
 
   constructor(value: string) {
     this.value = removeLeadingSlash(unixify(value))
   }
 
-  /**
-   * Returns a new file path
-   * with the given file name appended to the end of this file path
-   */
+  /** Returns a new file path with the given file name appended to the end of this file path */
   append(fileName: string): AbsoluteFilePath {
     return new AbsoluteFilePath(path.join(this.platformified(), fileName))
   }

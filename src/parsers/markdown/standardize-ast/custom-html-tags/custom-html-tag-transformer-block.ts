@@ -9,8 +9,8 @@ import { TransformerBlock } from "../transformer-block"
 import { TransformerList } from "../transformer-list"
 
 export class CustomHtmlTagTransformerBlock implements TransformerBlock {
-  htmlTagTransformers: TransformerList
-  openTags: OpenTagTracker
+  private htmlTagTransformers: TransformerList
+  private readonly openTags: OpenTagTracker
 
   constructor(openTags: OpenTagTracker) {
     this.htmlTagTransformers = {}

@@ -7,7 +7,7 @@ import { parseMarkdown } from "../parsers/markdown/parse-markdown"
 export async function readAndParseFile(
   filename: AbsoluteFilePath
 ): Promise<AstNodeList> {
-  const content = (await fs.readFile(filename.value, {
+  const content = (await fs.readFile(filename.platformified(), {
     encoding: "utf8"
   })).trim()
   if (content.length === 0) {

@@ -1,8 +1,8 @@
-import { ProgressFormatter } from "cucumber"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
 import { Formatter } from "../formatters/formatter"
+import { ProgressFormatter } from "../formatters/progress-formatter"
 import { Configuration } from "./configuration"
 
 export function instantiateFormatter(
@@ -17,7 +17,7 @@ export function instantiateFormatter(
     return new DetailedFormatter(stepCount, configuration)
   }
   if (name === "progress") {
-    return ProgressFormatter
+    return new ProgressFormatter(stepCount, configuration)
   }
   throw new UnprintedUserError(
     `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot`

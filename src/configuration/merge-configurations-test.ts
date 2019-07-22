@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
-import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
 describe("mergeConfigurations()", function() {
   it("merges the given UserProvidedConfiguration objects", function() {

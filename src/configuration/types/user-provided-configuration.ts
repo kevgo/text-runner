@@ -1,4 +1,4 @@
-import { Publications } from "./publications/publications"
+import { Publications } from "../publications/publications"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,

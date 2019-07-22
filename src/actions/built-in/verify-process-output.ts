@@ -1,5 +1,5 @@
-import { ActionArgs } from "../action-args"
 import { RunningProcess } from "../helpers/running-process"
+import { ActionArgs } from "../types/action-args"
 
 // Waits until the currently running console command produces the given output
 export default async function verifyProcessOutput(args: ActionArgs) {

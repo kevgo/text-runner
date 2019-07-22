@@ -1,8 +1,8 @@
-import { Configuration } from "../configuration/configuration"
-import { LinkTargetList } from "../link-targets/link-target-list"
-import { AstNodeList } from "../parsers/ast-node-list"
-import { LogFn } from "../runners/log-function"
-import { RefineNameFn } from "../runners/refine-name-function"
+import { Configuration } from "../../configuration/types/configuration"
+import { LinkTargetList } from "../../link-targets/link-target-list"
+import { AstNodeList } from "../../parsers/ast-node-list"
+import { LogFn } from "../../runners/types/log-function"
+import { RefineNameFn } from "../../runners/types/refine-name-function"
 
 export interface ActionArgs {
   /** TextRunner configuration data derived from the config file and CLI switches */

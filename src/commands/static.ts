@@ -1,13 +1,13 @@
 import color from "colorette"
 import fs from "fs-extra"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
-import { Configuration } from "../configuration/configuration"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
+import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
 import { executeParallel } from "../runners/execute-parallel"
-import { StatsCounter } from "../runners/stats-counter"
+import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
 
 export async function staticCommand(config: Configuration): Promise<Error[]> {

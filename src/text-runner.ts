@@ -10,9 +10,9 @@ import { unusedCommand } from "./commands/unused"
 import { versionCommand } from "./commands/version"
 import { determineConfigFilename } from "./configuration/config-file/determine-config-filename"
 import { loadConfigFile } from "./configuration/config-file/load-config-file"
-import { Configuration } from "./configuration/configuration"
 import { determineConfiguration } from "./configuration/determine-configuration"
-import { UserProvidedConfiguration } from "./configuration/user-provided-configuration"
+import { Configuration } from "./configuration/types/configuration"
+import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 
 /**
  * Tests the documentation in the given directory

@@ -1,13 +1,13 @@
 import color from "colorette"
 import fs from "fs-extra"
 import { extractActivities } from "../activity-list/extract-activities"
-import { Configuration } from "../configuration/configuration"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
+import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
 import { executeSequential } from "../runners/execute-sequential"
-import { StatsCounter } from "../runners/stats-counter"
+import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
 
 export async function dynamicCommand(config: Configuration): Promise<Error[]> {

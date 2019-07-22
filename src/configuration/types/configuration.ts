@@ -1,4 +1,4 @@
-import { Publications } from "./publications/publications"
+import { Publications } from "../publications/publications"
 
 /**
  * All configuration values that are provided to the application

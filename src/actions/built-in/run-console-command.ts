@@ -3,12 +3,12 @@ import deb from "debug"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../../configuration/configuration"
-import { callArgs } from "../../helpers/call-args"
-import { trimDollar } from "../../helpers/trim-dollar"
+import { Globals } from "../../configuration/globals"
 import { AstNodeList } from "../../parsers/ast-node-list"
 import { ActionArgs } from "../action-args"
-import { RunningConsoleCommand } from "./helpers/running-console-command"
-import { Globals } from "../../configuration/globals"
+import { callArgs } from "../helpers/call-args"
+import { RunningConsoleCommand } from "../helpers/running-console-command"
+import { trimDollar } from "../helpers/trim-dollar"
 
 const debug = deb("textrun:actions:run-console-command")
 

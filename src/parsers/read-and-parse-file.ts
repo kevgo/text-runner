@@ -8,10 +8,10 @@ import { AstNodeList } from "./standard-AST/ast-node-list"
 export async function readAndParseFile(
   filename: AbsoluteFilePath
 ): Promise<AstNodeList> {
-  const content = (await fs.readFile(filename.platformified(), {
+  const content = await fs.readFile(filename.platformified(), {
     encoding: "utf8"
-  })).trim()
-  if (content.length === 0) {
+  })
+  if (content.trim().length === 0) {
     console.log(color.magenta("found empty file " + filename.platformified()))
   }
   return parseMarkdown(content, filename)

@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AstNodeList } from "./standard-AST/ast-node-list"
 
 /** Parses defines the interface that all parsers have to conform to */

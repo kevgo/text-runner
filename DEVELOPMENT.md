@@ -80,7 +80,7 @@ The [run command](src/commands/run.ts) has a functional architecture
 that converts the configuration into test results over several steps:
 
 1. **configuration --> list of Markdown files to test:**
-   this is done by the [finding files module](src/finding-files)
+   this is done by the [filesystem module](src/filesystem)
 1. **list of filenames --> list of file ASTs:**
    the [parse module](src/parsers) reads and parses each file
    and [transforms](src/parsers/remarkable-based/standardize-ast)

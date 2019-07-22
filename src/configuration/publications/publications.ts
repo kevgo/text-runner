@@ -1,5 +1,5 @@
-import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
-import { AbsoluteLink } from "../../finding-files/absolute-link"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { AbsoluteLink } from "../../filesystem/absolute-link"
 import { Publication } from "./publication"
 
 export class Publications extends Array<Publication> {

@@ -1,5 +1,5 @@
 import { UnprintedUserError } from "../../../../errors/unprinted-user-error"
-import { AbsoluteFilePath } from "../../../../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../../../../filesystem/absolute-file-path"
 import { AstNodeList } from "../../../standard-AST/ast-node-list"
 import { getHtmlBlockTag } from "../../helpers/get-html-block-tag"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"

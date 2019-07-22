@@ -1,5 +1,5 @@
 import { expect } from "chai"
-import { AbsoluteFilePath } from "../../../finding-files/absolute-file-path"
+import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 import { getHtmlBlockTag } from "./get-html-block-tag"
 
 describe("parseHtmlBlock", function() {

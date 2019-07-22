@@ -1,7 +1,7 @@
 import color from "colorette"
 import fs from "fs-extra"
 import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
-import { parseMarkdown } from "./markdown/parse-markdown"
+import { parseMarkdownText } from "./markdown/parse-markdown-text"
 import { AstNodeList } from "./standard-AST/ast-node-list"
 
 /** high-level API of the parser: returns the AST for the file at the given path */
@@ -14,5 +14,5 @@ export async function parseMarkdownFile(
   if (content.trim().length === 0) {
     console.log(color.magenta("found empty file " + filename.platformified()))
   }
-  return parseMarkdown(content, filename)
+  return parseMarkdownText(content, filename)
 }

@@ -1,17 +1,15 @@
-import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { mergeConfigurations } from "../helpers/merge-configurations"
 import { Configuration } from "./configuration"
-import { getFormatterClass } from "./get-formatter-class"
 import { Publications } from "./publications/publications"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 const defaultValues: Configuration = {
-  FormatterClass: DetailedFormatter,
   actions: {},
   classPrefix: "textrun",
   defaultFile: "",
   exclude: [],
   fileGlob: "**/*.md",
+  formatterName: "detailed",
   keepTmp: false,
   offline: false,
   publications: new Publications(),
@@ -32,13 +30,8 @@ export function determineConfiguration(
 ): Configuration {
   // merge the configs
   const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
-  result["FormatterClass"] = getFormatterClass(
-    result["formatterName"],
-    defaultValues.FormatterClass
-  )
   result["publications"] = Publications.fromJSON(
     result["publications"]
   ).sorted()
-  delete result["formatterName"]
   return result as Configuration
 }

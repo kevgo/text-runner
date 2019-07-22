@@ -1,65 +1,57 @@
 import color from "colorette"
 import path from "path"
+import { Activity } from "../activity-list/activity"
+import { Configuration } from "../configuration/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
 import { Formatter } from "./formatter"
 
-export class DetailedFormatter extends Formatter {
-  // A detailed formatter, prints output before the step name
+/** A formatter that prints output and step names */
+export class DetailedFormatter implements Formatter {
+  /** the directory in which the sources are located */
+  // TODO: replace with configuration
+  configuration: Configuration
 
-  error(errorMessage: string) {
-    super.error(errorMessage)
-    console.log(color.dim(this.output))
-    process.stdout.write(
-      color.red(
-        `${this.activity.file.platformified()}:${this.activity.line} -- `
-      )
-    )
-    console.log(errorMessage)
-    const filePath = path.join(
-      this.sourceDir,
-      this.activity.file.platformified()
-    )
-    printCodeFrame(console.log, filePath, this.activity.line)
+  // @ts-ignore: unused parameter
+  constructor(stepCount: number, configuration: Configuration) {
+    this.configuration = configuration
   }
 
-  skip(message: string) {
-    super.skip(message)
-    if (this.output) {
-      console.log(color.dim(this.output))
+  // @ts-ignore: unused stepName
+  failed(activity: Activity, stepName: string, e: Error, output: string) {
+    if (output !== "") {
+      process.stdout.write(color.dim(output))
+    }
+    process.stdout.write(
+      color.red(`${activity.file.platformified()}:${activity.line} -- `)
+    )
+    console.log(e.message)
+    const filePath = path.join(
+      this.configuration.sourceDir,
+      activity.file.platformified()
+    )
+    printCodeFrame(console.log, filePath, activity.line)
+  }
+
+  skipped(activity: Activity, stepName: string, output: string) {
+    if (output !== "") {
+      process.stdout.write(color.dim(output))
     }
     console.log(
       color.cyan(
-        `${this.activity.file.platformified()}:${
-          this.activity.line
-        } -- ${message}`
+        `${activity.file.platformified()}:${
+          activity.line
+        } -- skipping: ${stepName}`
       )
     )
   }
 
-  success() {
-    super.success()
-    if (this.output) {
-      console.log(color.dim(this.output))
+  success(activity: Activity, stepName: string, output: string) {
+    if (output !== "") {
+      process.stdout.write(color.dim(output))
     }
     console.log(
       color.green(
-        `${this.activity.file.platformified()}:${this.activity.line} -- ${
-          this.title
-        }`
-      )
-    )
-  }
-
-  warning(warningMessage: string) {
-    super.warning(warningMessage)
-    if (this.output.trim() !== "") {
-      console.log(color.dim(this.output))
-    }
-    console.log(
-      color.magenta(
-        `${this.activity.file.platformified()}:${
-          this.activity.line
-        } -- ${warningMessage}`
+        `${activity.file.platformified()}:${activity.line} -- ${stepName}`
       )
     )
   }

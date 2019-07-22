@@ -1,7 +1,7 @@
 import color from "colorette"
 import fs from "fs-extra"
 import path from "path"
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from "../action-args"
 
 // Verifies that the test workspace contains the given directory
 export default async function verifyWorkspaceContainsDirectory(
@@ -9,13 +9,13 @@ export default async function verifyWorkspaceContainsDirectory(
 ) {
   const directory = args.nodes.text()
   const fullPath = path.join(args.configuration.workspace, directory)
-  args.formatter.name(
+  args.name(
     `verifying the ${color.bold(
       color.cyan(directory)
     )} directory exists in the test workspace`
   )
-  args.formatter.log(`ls ${fullPath}`)
-  let stats
+  args.log(`ls ${fullPath}`)
+  let stats: fs.Stats
   try {
     stats = await fs.lstat(fullPath)
   } catch (err) {

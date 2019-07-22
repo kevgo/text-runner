@@ -4,6 +4,7 @@ import util from "util"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { Configuration } from "../configuration/configuration"
+import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
@@ -42,9 +43,16 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
+  const formatter = instantiateFormatter(
+    config.formatterName,
+    activities.length + links.length,
+    config
+  )
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, linkTargets, config, stats)
-  jobs.push(executeSequential(activities, config, linkTargets, stats))
+  const jobs = executeParallel(links, linkTargets, config, stats, formatter)
+  jobs.push(
+    executeSequential(activities, config, linkTargets, stats, formatter)
+  )
   const results = (await Promise.all(jobs)).filter(r => r) as Error[]
 
   // step 6: cleanup
@@ -70,10 +78,6 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
       filenames.length
     } files`
   )
-  if (stats.warnings() > 0) {
-    text += colorFn(", ")
-    text += color.magenta(`${stats.warnings()} warnings`)
-  }
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   return results

@@ -2,7 +2,6 @@ import util from "util"
 import xml2js from "xml2js"
 import { AbsoluteFilePath } from "../../../../../domain-model/absolute-file-path"
 import { UnprintedUserError } from "../../../../../errors/unprinted-user-error"
-import { pretendToUse } from "../../../../../helpers/pretend-to-use"
 import { AstNode } from "../../../../ast-node"
 import { AstNodeList } from "../../../../ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
@@ -12,6 +11,7 @@ const xml2jsp = util.promisify(xml2js.parseString)
 
 export default async function transformTable(
   node: RemarkableNode,
+  // @ts-ignore: unused variable
   openTags: OpenTagTracker,
   file: AbsoluteFilePath,
   line: number
@@ -87,7 +87,6 @@ export default async function transformTable(
     tag: "/table",
     type: "table_close"
   })
-  pretendToUse(openTags)
   return result
 }
 

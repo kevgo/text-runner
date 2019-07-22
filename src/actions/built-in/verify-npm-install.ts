@@ -1,15 +1,15 @@
 import color from "colorette"
 import jsonfile from "jsonfile"
 import path from "path"
-import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "../runners/action-args"
+import { trimDollar } from "../../helpers/trim-dollar"
+import { ActionArgs } from "../action-args"
 
 export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
   const pkg = await jsonfile.readFile(
     path.join(args.configuration.sourceDir, "package.json")
   )
-  args.formatter.name(`verify NPM installs ${color.cyan(pkg.name)}`)
+  args.name(`verify NPM installs ${color.cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(

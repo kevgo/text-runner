@@ -2,11 +2,11 @@ import color from "colorette"
 import deb from "debug"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import path from "path"
-import { Configuration } from "../configuration/configuration"
-import { callArgs } from "../helpers/call-args"
-import { trimDollar } from "../helpers/trim-dollar"
-import { AstNodeList } from "../parsers/ast-node-list"
-import { ActionArgs } from "../runners/action-args"
+import { Configuration } from "../../configuration/configuration"
+import { callArgs } from "../../helpers/call-args"
+import { trimDollar } from "../../helpers/trim-dollar"
+import { AstNodeList } from "../../parsers/ast-node-list"
+import { ActionArgs } from "../action-args"
 import { RunningConsoleCommand } from "./helpers/running-console-command"
 
 const debug = deb("textrun:actions:run-console-command")
@@ -31,7 +31,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
     throw new Error("the block that defines console commands to run is empty")
   }
 
-  args.formatter.name(`running console command: ${color.cyan(commandsToRun)}`)
+  args.name(`running console command: ${color.cyan(commandsToRun)}`)
   let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes)
@@ -46,7 +46,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
-  args.formatter.log(processor.output.fullText())
+  args.log(processor.output.fullText())
 }
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {

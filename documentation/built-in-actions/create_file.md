@@ -36,4 +36,4 @@ foo
 #### More info
 
 - [feature specs](../../features/actions/built-in/create-file/create-file.feature)
-- [source code](../../src/built-in-actions/create-file.ts)
+- [source code](../../src/actions/built-in/create-file.ts)

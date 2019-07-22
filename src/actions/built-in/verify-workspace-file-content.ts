@@ -2,13 +2,13 @@ import * as assertNoDiff from "assert-no-diff"
 import color from "colorette"
 import fs from "fs-extra"
 import path from "path"
-import { ActionArgs } from "../runners/action-args"
+import { ActionArgs } from "../action-args"
 
 export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType("strong", "em")
   const fullPath = path.join(process.cwd(), filePath)
-  args.formatter.name(`verifying file ${color.cyan(filePath)}`)
-  args.formatter.log(`verify file ${fullPath}`)
+  args.name(`verifying file ${color.cyan(filePath)}`)
+  args.log(`verify file ${fullPath}`)
   const actualContent = await readFile(filePath, fullPath)
   const expectedContent = args.nodes.textInNodeOfType("fence", "code")
   try {

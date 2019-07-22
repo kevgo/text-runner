@@ -9,21 +9,21 @@ describe("Publication", function() {
       const publication = new Publication("/content", "/", "html")
       const link = new AbsoluteLink("/1.html")
       const actual = publication.resolve(link, "")
-      expect(actual.value).to.equal("content/1.md")
+      expect(actual.unixified()).to.equal("content/1.md")
     })
 
     it("applies the extension mapping for empty public extensions", function() {
       const publication = new Publication("/content", "/", "")
       const link = new AbsoluteLink("/1")
       const actual = publication.resolve(link, "")
-      expect(actual.value).to.equal("content/1.md")
+      expect(actual.unixified()).to.equal("content/1.md")
     })
 
     it("applies the extension mapping for custom public extensions", function() {
       const publication = new Publication("/content/", "/", ".html")
       const link = new AbsoluteLink("1.html")
       const actual = publication.resolve(link, "")
-      expect(actual.value).to.equal("content/1.md")
+      expect(actual.unixified()).to.equal("content/1.md")
     })
 
     it("adds the given default filename if the link has no filename and an anchor", function() {
@@ -86,19 +86,19 @@ describe("Publication", function() {
       const publication = new Publication("/content/posts", "/blog", "html")
       const link = new AbsoluteLink("/one/two.html")
       const actual = publication.resolve(link, "")
-      expect(actual.value).to.equal("one/two.md")
+      expect(actual.unixified()).to.equal("one/two.md")
     })
     it("applies the publication data", function() {
       const publication = new Publication("/content/posts", "/blog", "html")
       const link = new AbsoluteLink("/blog/one.html")
       const actual = publication.resolve(link, "")
-      expect(actual.value).to.equal("content/posts/one.md")
+      expect(actual.unixified()).to.equal("content/posts/one.md")
     })
     it("removes anchors", function() {
       const publication = new Publication("/content/posts", "/blog", "html")
       const link = new AbsoluteLink("/one/two.html#hello")
       const actual = publication.resolve(link, "")
-      expect(actual.value).to.equal("one/two.md")
+      expect(actual.unixified()).to.equal("one/two.md")
     })
   })
 })

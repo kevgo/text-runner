@@ -9,6 +9,7 @@ describe("StopWatch", function() {
     stopWatch.startTime -= 200
     expect(stopWatch.duration()).to.equal("200ms")
   })
+
   it("returns the elapsed time in seconds if it is more than 1s", async function() {
     const stopWatch = new StopWatch()
     // @ts-ignore: access private member

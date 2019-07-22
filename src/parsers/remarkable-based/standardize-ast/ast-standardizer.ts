@@ -11,8 +11,8 @@ import { RemarkableNode } from "./types/remarkable-node"
 import { TransformerCategory } from "./types/transformer-category"
 
 /**
- * AstStandardizer converts the AST created by Remarkable
- * into the standardized AST used by TextRunner
+ * AstStandardizer converts an AST created by Remarkable
+ * into the standardized AST format used by TextRunner
  */
 export default class AstStandardizer {
   private readonly filepath: AbsoluteFilePath

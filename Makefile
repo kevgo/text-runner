@@ -92,7 +92,7 @@ docs: build   # runs the documentation tests
 
 fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix
-	find . -type f \( \
+	@find . -type f \( \
 	       -path './src/**/*.ts' -o \
 				 -path './features/**/*.ts' -o \
 				 -path './text-run/*.js' -o \
@@ -112,9 +112,9 @@ help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint: # lints all files
-	# node_modules$/.bin$/tsc -p tsconfig.json
-	# node_modules$/.bin$/tslint --project tsconfig-build.json
-	find . -type f \( \
+	node_modules$/.bin$/tsc -p tsconfig.json
+	node_modules$/.bin$/tslint --project tsconfig-build.json
+	@find . -type f \( \
 	       -path './src/**/*.ts' -o \
 				 -path './features/**/*.ts' -o \
 				 -path './text-run/*.js' -o \
@@ -129,7 +129,7 @@ lint: # lints all files
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
 		xargs node_modules/.bin/prettier -c
-	node_modules$/.bin$/remark .
+	node_modules$/.bin$/remark . --quiet
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

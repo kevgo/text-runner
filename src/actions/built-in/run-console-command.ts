@@ -2,13 +2,13 @@ import color from "colorette"
 import deb from "debug"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import path from "path"
-import { Configuration } from "../../configuration/configuration"
-import { Globals } from "../../configuration/globals"
+import { Configuration } from "../../configuration/types/configuration"
+import { Globals } from "../../configuration/types/globals"
 import { AstNodeList } from "../../parsers/ast-node-list"
-import { ActionArgs } from "../action-args"
 import { callArgs } from "../helpers/call-args"
 import { RunningConsoleCommand } from "../helpers/running-console-command"
 import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "../types/action-args"
 
 const debug = deb("textrun:actions:run-console-command")
 

@@ -2,12 +2,12 @@ import color from "colorette"
 import deb from "debug"
 import { createObservableProcess } from "observable-process"
 import path from "path"
-import { Configuration } from "../../configuration/configuration"
-import { Globals } from "../../configuration/globals"
-import { ActionArgs } from "../action-args"
+import { Configuration } from "../../configuration/types/configuration"
+import { Globals } from "../../configuration/types/globals"
 import { callArgs } from "../helpers/call-args"
 import { RunningProcess } from "../helpers/running-process"
 import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "../types/action-args"
 
 const debug = deb("start-console-command")
 

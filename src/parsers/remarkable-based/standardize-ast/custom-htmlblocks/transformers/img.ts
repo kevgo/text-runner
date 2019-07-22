@@ -4,7 +4,7 @@ import { AstNodeList } from "../../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../../helpers/open-tag-tracker"
 import { parseHtmlAttributes } from "../../../helpers/parse-html-attributes"
 import { removeHtmlComments } from "../../../helpers/remove-html-comments"
-import { RemarkableNode } from "../../remarkable-node"
+import { RemarkableNode } from "../../types/remarkable-node"
 
 const olRegex = /<img([^>]*)>/
 

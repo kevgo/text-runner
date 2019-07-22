@@ -5,9 +5,9 @@ import { getHtmlBlockTag } from "../../helpers/get-html-block-tag"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { parseHtmlTag } from "../../helpers/parse-html-tag"
 import { removeHtmlComments } from "../../helpers/remove-html-comments"
-import { RemarkableNode } from "../remarkable-node"
 import { TagMapper } from "../tag-mapper"
-import { TransformerBlock } from "../transformer-block"
+import { RemarkableNode } from "../types/remarkable-node"
+import { TransformerBlock } from "../types/transformer-block"
 
 export class GenericHtmlTagTransformerBlock implements TransformerBlock {
   private readonly openTags: OpenTagTracker

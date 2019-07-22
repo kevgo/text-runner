@@ -6,9 +6,9 @@ import { CustomHtmlBlockTransformerBlock } from "./custom-htmlblocks/custom-html
 import { CustomMdTransformerBlock } from "./custom-md/custom-md-transformer-block"
 import { GenericHtmlTagTransformerBlock } from "./generic-htmltags/generic-html-tag-transformer-block"
 import { GenericMdTransformerBlock } from "./generic-md/generic-md-transformer-block"
-import { RemarkableNode } from "./remarkable-node"
 import { TagMapper } from "./tag-mapper"
-import { TransformerBlock } from "./transformer-block"
+import { RemarkableNode } from "./types/remarkable-node"
+import { TransformerBlock } from "./types/transformer-block"
 
 /**
  * AstStandardizer converts the AST created by Remarkable

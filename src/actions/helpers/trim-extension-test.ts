@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { trimExtension } from "./trim-extension"
-import { unixify } from "./unixify"
+import { unixify } from "../../helpers/unixify"
 
 describe("trimExtension", function() {
   it("removes the extension from TypeScript paths", function() {

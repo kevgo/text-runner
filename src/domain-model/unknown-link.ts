@@ -1,5 +1,5 @@
 import { Publications } from "../configuration/publications/publications"
-import { unixify } from "../helpers/unixify"
+import { unixify } from "./helpers/unixify"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
 import { removeDoubleSlash } from "./helpers/remove-double-slash"

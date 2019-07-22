@@ -1,6 +1,6 @@
 files: "{*.md,documentation/**/*.md}"
 exclude: "documentation/examples"
-format: dot
+format: progress
 useSystemTempDirectory: true
 
 actions:

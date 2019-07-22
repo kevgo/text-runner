@@ -15,6 +15,7 @@ export class AstNode {
       type: data.type || "type"
     })
   }
+
   type: string // markdown type of AST node
   tag: string // HTML type of AST node
   file: AbsoluteFilePath // the file in which this AstNode occurs

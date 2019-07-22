@@ -12,6 +12,7 @@
     "babel-register": "6.26.0",
     "camelcase": "5.3.1",
     "cli-cursor": "3.1.0",
+    "cli-progress": "2.1.1",
     "colorette": "1.1.0",
     "debug": "4.1.1",
     "end-child-processes": "1.0.1",
@@ -37,6 +38,7 @@
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
     "@types/chai": "4.1.7",
+    "@types/cli-progress": "1.8.1",
     "@types/cucumber": "4.0.7",
     "@types/fs-extra": "8.0.0",
     "@types/glob": "7.1.1",

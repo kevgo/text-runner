@@ -5,7 +5,7 @@ import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import { readAndParseFile } from "../parsers/read-and-parse-file"
+import { parseMarkdownFile } from "../parsers/parse-markdown-file"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
@@ -26,7 +26,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 2: read and parse files
-  const ASTs = await Promise.all(filenames.map(readAndParseFile))
+  const ASTs = await Promise.all(filenames.map(parseMarkdownFile))
 
   // step 3: find link targets
   const linkTargets = findLinkTargets(ASTs)

@@ -10,8 +10,8 @@ import { TransformerBlock } from "../transformer-block"
 import { TransformerList } from "../transformer-list"
 
 export class CustomHtmlBlockTransformerBlock implements TransformerBlock {
-  openTags: OpenTagTracker
-  transformers: TransformerList
+  private readonly openTags: OpenTagTracker
+  private transformers: TransformerList
 
   constructor(openTags: OpenTagTracker) {
     this.openTags = openTags

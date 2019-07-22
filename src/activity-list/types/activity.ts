@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from "../../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
 import { AstNodeList } from "../../parsers/ast-node-list"
 
 /**

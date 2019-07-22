@@ -30,6 +30,7 @@ export class ProgressFormatter implements Formatter {
     this.progressBar.start(stepCount, 0)
   }
 
+  // @ts-ignore: unused parameters
   failed(activity: Activity, stepName: string, err: Error, output: string) {
     this.progressBar.stop()
     console.log()
@@ -37,10 +38,9 @@ export class ProgressFormatter implements Formatter {
     console.log(color.dim(output))
     console.log(
       color.red(
-        `${activity.file.platformified()}:${activity.line} -- ${stepName}\n`
+        `${activity.file.platformified()}:${activity.line} -- ${err.message}\n`
       )
     )
-    console.log(err.message)
     console.log()
     printCodeFrame(
       console.log,

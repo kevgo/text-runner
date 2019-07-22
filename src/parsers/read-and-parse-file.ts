@@ -1,6 +1,6 @@
 import color from "colorette"
 import fs from "fs-extra"
-import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
 import { AstNodeList } from "../parsers/ast-node-list"
 import { parseMarkdown } from "../parsers/markdown/parse-markdown"
 

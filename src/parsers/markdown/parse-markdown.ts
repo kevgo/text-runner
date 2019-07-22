@@ -1,5 +1,5 @@
 import Remarkable from "remarkable"
-import { AbsoluteFilePath } from "../../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../../finding-files/absolute-file-path"
 import { AstNodeList } from "../ast-node-list"
 import AstStandardizer from "./standardize-ast/ast-standardizer"
 

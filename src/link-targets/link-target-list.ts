@@ -1,5 +1,5 @@
 import kebab from "@queso/kebab-case"
-import { AbsoluteFilePath } from "../domain-model/absolute-file-path"
+import { AbsoluteFilePath } from "../finding-files/absolute-file-path"
 import { AstNode } from "../parsers/ast-node"
 import { AstNodeList } from "../parsers/ast-node-list"
 import { LinkTarget } from "./types/link-target"

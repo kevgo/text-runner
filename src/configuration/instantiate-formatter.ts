@@ -2,20 +2,19 @@ import { ProgressFormatter } from "cucumber"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
-import { FormatterImplemention } from "../formatters/formatter-implementation"
+import { Formatter } from "../formatters/formatter"
+import { Configuration } from "./configuration"
 
-export function getFormatterClass(
+export function instantiateFormatter(
   name: string | undefined,
-  defaultClass: FormatterImplemention
-): FormatterImplemention {
-  if (!name) {
-    return defaultClass
-  }
+  stepCount: number,
+  configuration: Configuration
+): Formatter {
   if (name === "dot") {
-    return DotFormatter
+    return new DotFormatter(stepCount, configuration)
   }
   if (name === "detailed") {
-    return DetailedFormatter
+    return new DetailedFormatter(stepCount, configuration)
   }
   if (name === "progress") {
     return ProgressFormatter

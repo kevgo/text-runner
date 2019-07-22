@@ -4,6 +4,7 @@ import util from "util"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { Configuration } from "../configuration/configuration"
+import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
@@ -42,7 +43,8 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
-  const formatter = new config.FormatterClass(
+  const formatter = instantiateFormatter(
+    config.formatterName,
     activities.length + links.length,
     config
   )

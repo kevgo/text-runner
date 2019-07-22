@@ -1,5 +1,5 @@
-import { mergeConfigurations } from "../helpers/merge-configurations"
 import { Configuration } from "./configuration"
+import { mergeConfigurations } from "./merge-configurations"
 import { Publications } from "./publications/publications"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 

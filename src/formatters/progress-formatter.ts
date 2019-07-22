@@ -18,12 +18,12 @@ export class ProgressFormatter implements Formatter {
     this.configuration = configuration
     this.progressBar = new progress.Bar(
       {
-        stopOnComplete: true,
         clearOnComplete: true,
-        hideCursor: undefined,
         format:
           color.green(" {bar}") +
-          " {percentage}% | ETA: {eta}s | {value}/{total}"
+          " {percentage}% | ETA: {eta}s | {value}/{total}",
+        hideCursor: undefined,
+        stopOnComplete: true
       },
       progress.Presets.shades_classic
     )

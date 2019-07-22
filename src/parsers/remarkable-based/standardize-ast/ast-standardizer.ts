@@ -1,12 +1,6 @@
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 import { AstNodeList } from "../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../helpers/open-tag-tracker"
-import { CustomHtmlTagTransformerBlock } from "./custom-html-tags/custom-html-tag-transformer-block"
-import { CustomHtmlBlockTransformerBlock } from "./custom-htmlblocks/custom-html-block-transformer-block"
-import { CustomMdTransformerBlock } from "./custom-md/custom-md-transformer-block"
-import { GenericHtmlTagTransformerBlock } from "./generic-htmltags/generic-html-tag-transformer-block"
-import { GenericMdTransformerBlock } from "./generic-md/generic-md-transformer-block"
-import { TagMapper } from "./tag-mapper"
 import { RemarkableNode } from "./types/remarkable-node"
 import { TransformerCategory } from "./types/transformer-category"
 
@@ -14,33 +8,22 @@ import { TransformerCategory } from "./types/transformer-category"
  * AstStandardizer converts an AST created by Remarkable
  * into the standardized AST format used by TextRunner
  */
-export default class AstStandardizer {
+export class AstStandardizer {
   private readonly filepath: AbsoluteFilePath
   private line: number
   private readonly openTags: OpenTagTracker
   private readonly result: AstNodeList
-  private readonly tagMapper: TagMapper
   private readonly transformerCategories: TransformerCategory[]
 
-  constructor(filepath: AbsoluteFilePath) {
+  constructor(
+    filepath: AbsoluteFilePath,
+    transformerCategories: TransformerCategory[]
+  ) {
     this.filepath = filepath
     this.line = 1
     this.openTags = new OpenTagTracker()
-    this.tagMapper = new TagMapper()
     this.result = new AstNodeList()
-    this.transformerCategories = [
-      new CustomHtmlBlockTransformerBlock(this.openTags),
-      new CustomHtmlTagTransformerBlock(this.openTags),
-      new GenericHtmlTagTransformerBlock(this.openTags, this.tagMapper),
-      new CustomMdTransformerBlock(this.openTags),
-      new GenericMdTransformerBlock(this.openTags, this.tagMapper)
-    ]
-  }
-
-  async loadTransformers() {
-    return Promise.all(
-      this.transformerCategories.map(tb => tb.loadTransformers())
-    )
+    this.transformerCategories = transformerCategories
   }
 
   async standardize(ast: any): Promise<AstNodeList> {
@@ -73,7 +56,12 @@ export default class AstStandardizer {
   private async transform(node: RemarkableNode): Promise<AstNodeList> {
     for (const transformerCategory of this.transformerCategories) {
       if (transformerCategory.canTransform(node, this.filepath, this.line)) {
-        return transformerCategory.transform(node, this.filepath, this.line)
+        return transformerCategory.transform(
+          node,
+          this.filepath,
+          this.line,
+          this.openTags
+        )
       }
     }
     throw new Error(`Unprocessable node: ${node.type}`)

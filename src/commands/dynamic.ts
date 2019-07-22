@@ -2,6 +2,7 @@ import color from "colorette"
 import fs from "fs-extra"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/configuration"
+import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { getFileNames } from "../finding-files/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { readAndParseFile } from "../parsers/read-and-parse-file"
@@ -38,7 +39,11 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
-  const formatter = new config.FormatterClass(activities.length, config)
+  const formatter = instantiateFormatter(
+    config.formatterName,
+    activities.length,
+    config
+  )
   process.chdir(config.workspace)
   const error = await executeSequential(
     activities,

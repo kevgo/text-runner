@@ -3,11 +3,11 @@ import { AstNodeList } from "../../../standard-AST/ast-node-list"
 import { RemarkableNode } from "./remarkable-node"
 
 /**
- * TransformerBlock is a set of transformers that perform a typical group of transformations.
+ * TransformerCategory is a set of transformers that perform a typical group of transformations.
  *
  * An example is the group of transformers that convert custom HTML tags.
  */
-export interface TransformerBlock {
+export interface TransformerCategory {
   // loadTransformers loads the transformers asynchronously
   loadTransformers(): Promise<void>
 

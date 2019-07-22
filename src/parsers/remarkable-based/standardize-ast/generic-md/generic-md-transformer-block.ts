@@ -4,13 +4,13 @@ import { AstNodeList } from "../../../standard-AST/ast-node-list"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { TagMapper } from "../tag-mapper"
 import { RemarkableNode } from "../types/remarkable-node"
-import { TransformerBlock } from "../types/transformer-block"
+import { TransformerCategory } from "../types/transformer-category"
 
 /**
  * Transforms basic Remarkable nodes with opening and closing tags
  * to to standardized AST used by TextRunner
  */
-export class GenericMdTransformerBlock implements TransformerBlock {
+export class GenericMdTransformerBlock implements TransformerCategory {
   /** Tags to ignore */
   static readonly ignore = ["hardbreak", "inline"]
 

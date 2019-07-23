@@ -1,6 +1,7 @@
 ### verify that the test workspace contains a directory
 
-The `verifyWorkspaceContainsDirectory` action checks links to folders in your source code.
+The `verifyWorkspaceContainsDirectory` action checks links to folders in your
+source code.
 
 #### Example
 

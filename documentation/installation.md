@@ -1,14 +1,13 @@
 # Installation
 
 TextRunner works on all platforms supported by [Node.JS](https://nodejs.org),
-including macOS, Windows, and Linux.
-To get started:
+including macOS, Windows, and Linux. To get started:
 
 - install [Node.JS](https://nodejs.org) version 8 or newer
-- in the terminal,
-  <a textrun="cd-into-empty-tmp-folder"> cd into the folder in which you want to use TextRunner
-  </a>
-- create a **package.json** file, for example by running: <a textrun="run-consoleCommand">
+- in the terminal, <a textrun="cd-into-empty-tmp-folder"> cd into the folder in
+  which you want to use TextRunner </a>
+- create a **package.json** file, for example by running:
+  <a textrun="run-consoleCommand">
   ```
   npm init -y
   ```
@@ -24,10 +23,8 @@ To get started:
   ```
   </a>
 
-This gives you an out-of-the-box installation of TextRunner,
-which checks that all links and images point to something.
-<a textrun="cd-workspace">
-</a>
+This gives you an out-of-the-box installation of TextRunner, which checks that
+all links and images point to something. <a textrun="cd-workspace"> </a>
 
 <hr>
 

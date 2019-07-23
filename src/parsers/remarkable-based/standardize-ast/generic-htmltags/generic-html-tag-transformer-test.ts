@@ -8,10 +8,7 @@ import {
 } from "../types/remarkable-node"
 import { GenericHtmlTagTransformerCategory } from "./generic-html-tag-transformer-category"
 
-const transformer = new GenericHtmlTagTransformerCategory(
-  new OpenTagTracker(),
-  new TagMapper()
-)
+const transformer = new GenericHtmlTagTransformerCategory(new TagMapper())
 const file = new AbsoluteFilePath("foo")
 const openingNode: RemarkableNode = scaffoldRemarkableNode({
   content: '<foo class="myClass">',
@@ -22,7 +19,12 @@ describe("GenericHtmlTagTransformer", function() {
   describe(".transform()", function() {
     describe("tranforming opening nodes", function() {
       beforeEach(async function() {
-        this.actual = await transformer.transform(openingNode, file, 3)
+        this.actual = await transformer.transform(
+          openingNode,
+          file,
+          3,
+          new OpenTagTracker()
+        )
       })
       it("returns the corresponding AstNode", function() {
         expect(this.actual).to.have.length(1)

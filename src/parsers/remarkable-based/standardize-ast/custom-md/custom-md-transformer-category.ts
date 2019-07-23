@@ -8,11 +8,9 @@ import { TransformerList } from "../types/transformer-list"
 
 export class CustomMdTransformerCategory implements TransformerCategory {
   private mdTransformers: TransformerList
-  private readonly openTags: OpenTagTracker
 
-  constructor(openTags: OpenTagTracker) {
+  constructor() {
     this.mdTransformers = {}
-    this.openTags = openTags
   }
 
   async loadTransformers() {
@@ -26,9 +24,10 @@ export class CustomMdTransformerCategory implements TransformerCategory {
   async transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): Promise<AstNodeList> {
     const transformer = this.mdTransformers[node.type]
-    return transformer(node, this.openTags, file, line)
+    return transformer(node, openTags, file, line)
   }
 }

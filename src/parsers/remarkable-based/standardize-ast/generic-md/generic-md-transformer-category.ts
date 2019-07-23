@@ -14,11 +14,9 @@ export class GenericMdTransformerCategory implements TransformerCategory {
   /** Tags to ignore */
   static readonly ignore = ["hardbreak", "inline"]
 
-  private readonly openTags: OpenTagTracker
   private readonly tagMapper: TagMapper
 
-  constructor(openTagTracker: OpenTagTracker, tagMapper: TagMapper) {
-    this.openTags = openTagTracker
+  constructor(tagMapper: TagMapper) {
     this.tagMapper = tagMapper
   }
 
@@ -34,13 +32,14 @@ export class GenericMdTransformerCategory implements TransformerCategory {
   async transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): Promise<AstNodeList> {
     if (this.isOpeningType(node.type)) {
-      return this.transformOpeningNode(node, file, line)
+      return this.transformOpeningNode(node, file, line, openTags)
     }
     if (this.isClosingType(node.type)) {
-      return this.transformClosingNode(node, file, line)
+      return this.transformClosingNode(node, file, line, openTags)
     }
     if (this.isIgnoredType(node.type)) {
       return new AstNodeList()
@@ -72,7 +71,8 @@ export class GenericMdTransformerCategory implements TransformerCategory {
   transformOpeningNode(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): AstNodeList {
     const result = new AstNodeList()
     const resultNode = new AstNode({
@@ -83,7 +83,7 @@ export class GenericMdTransformerCategory implements TransformerCategory {
       tag: this.tagMapper.tagForType(node.type),
       type: node.type
     })
-    this.openTags.add(resultNode)
+    openTags.add(resultNode)
     result.pushNode(resultNode)
     return result
   }
@@ -91,11 +91,12 @@ export class GenericMdTransformerCategory implements TransformerCategory {
   transformClosingNode(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): AstNodeList {
     const result = new AstNodeList()
     const openingNodeType = this.openingTypeFor(node.type)
-    const openNode = this.openTags.popType(openingNodeType, file, line)
+    const openNode = openTags.popType(openingNodeType, file, line)
     result.pushNode({
       attributes: openNode.attributes,
       content: "",

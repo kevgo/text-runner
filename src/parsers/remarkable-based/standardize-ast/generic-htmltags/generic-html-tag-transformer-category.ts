@@ -10,11 +10,9 @@ import { RemarkableNode } from "../types/remarkable-node"
 import { TransformerCategory } from "../types/transformer-category"
 
 export class GenericHtmlTagTransformerCategory implements TransformerCategory {
-  private readonly openTags: OpenTagTracker
   private readonly tagMapper: TagMapper
 
-  constructor(openTags: OpenTagTracker, tagMapper: TagMapper) {
-    this.openTags = openTags
+  constructor(tagMapper: TagMapper) {
     this.tagMapper = tagMapper
   }
 
@@ -29,28 +27,26 @@ export class GenericHtmlTagTransformerCategory implements TransformerCategory {
   async transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): Promise<AstNodeList> {
     const sanitizedContent = removeHtmlComments(node.content)
     const tagName = getHtmlBlockTag(sanitizedContent, file, line)
     if (this.isClosingHtmlTag(tagName)) {
-      return this.transformClosingHtmlTag(tagName, file, line)
+      return this.transformClosingHtmlTag(tagName, file, line, openTags)
     } else {
-      return this.transformOpeningHtmlTag(node, file, line)
+      return this.transformOpeningHtmlTag(node, file, line, openTags)
     }
   }
 
   transformClosingHtmlTag(
     tagName: string,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ) {
     const result = new AstNodeList()
-    const openingTag = this.openTags.popTag(
-      tagName.replace("/", ""),
-      file,
-      line
-    )
+    const openingTag = openTags.popTag(tagName.replace("/", ""), file, line)
     const resultNode = new AstNode({
       attributes: openingTag.attributes,
       content: "",
@@ -66,7 +62,8 @@ export class GenericHtmlTagTransformerCategory implements TransformerCategory {
   transformOpeningHtmlTag(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): AstNodeList {
     const result = new AstNodeList()
     const [tag, attributes] = parseHtmlTag(
@@ -82,7 +79,7 @@ export class GenericHtmlTagTransformerCategory implements TransformerCategory {
       tag,
       type: this.tagMapper.typeForTag(tag)
     })
-    this.openTags.add(resultNode)
+    openTags.add(resultNode)
     result.pushNode(resultNode)
     return result
   }

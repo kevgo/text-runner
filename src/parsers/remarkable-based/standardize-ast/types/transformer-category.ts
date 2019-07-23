@@ -1,5 +1,6 @@
 import { AbsoluteFilePath } from "../../../../filesystem/absolute-file-path"
 import { AstNodeList } from "../../../standard-AST/ast-node-list"
+import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { RemarkableNode } from "./remarkable-node"
 
 /**
@@ -22,6 +23,7 @@ export interface TransformerCategory {
   transform(
     node: RemarkableNode,
     filepath: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): Promise<AstNodeList>
 }

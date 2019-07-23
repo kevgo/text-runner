@@ -10,11 +10,9 @@ import { TransformerCategory } from "../types/transformer-category"
 import { TransformerList } from "../types/transformer-list"
 
 export class CustomHtmlBlockTransformerCategory implements TransformerCategory {
-  private readonly openTags: OpenTagTracker
   private transformers: TransformerList
 
-  constructor(openTags: OpenTagTracker) {
-    this.openTags = openTags
+  constructor() {
     this.transformers = {}
   }
 
@@ -29,7 +27,8 @@ export class CustomHtmlBlockTransformerCategory implements TransformerCategory {
   async transform(
     node: RemarkableNode,
     file: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): Promise<AstNodeList> {
     const cleanedContent = removeHtmlComments(node.content)
     const tagName = getHtmlBlockTag(cleanedContent, file, line)
@@ -41,7 +40,7 @@ export class CustomHtmlBlockTransformerCategory implements TransformerCategory {
         line
       )
     }
-    const transformed = await transformer(node, this.openTags, file, line)
+    const transformed = await transformer(node, openTags, file, line)
     return transformed
   }
 }

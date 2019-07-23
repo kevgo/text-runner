@@ -10,11 +10,9 @@ import { TransformerList } from "../types/transformer-list"
 
 export class CustomHtmlTagTransformerCategory implements TransformerCategory {
   private htmlTagTransformers: TransformerList
-  private readonly openTags: OpenTagTracker
 
-  constructor(openTags: OpenTagTracker) {
+  constructor() {
     this.htmlTagTransformers = {}
-    this.openTags = openTags
   }
 
   async loadTransformers() {
@@ -43,7 +41,8 @@ export class CustomHtmlTagTransformerCategory implements TransformerCategory {
   async transform(
     node: RemarkableNode,
     filepath: AbsoluteFilePath,
-    line: number
+    line: number,
+    openTags: OpenTagTracker
   ): Promise<AstNodeList> {
     const tagName = getHtmlBlockTag(
       removeHtmlComments(node.content),
@@ -51,7 +50,7 @@ export class CustomHtmlTagTransformerCategory implements TransformerCategory {
       line
     )
     const transformer = this.htmlTagTransformers[tagName.replace("/", "_")]
-    return transformer(node, this.openTags, filepath, line)
+    return transformer(node, openTags, filepath, line)
   }
 
   /** Returns the filename that the transformer for the given RemarkableType can be found at */

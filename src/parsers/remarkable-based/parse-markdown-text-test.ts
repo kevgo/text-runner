@@ -20,7 +20,8 @@ describe("parseMarkdownText", async function() {
         const expected = require(path.join(testCaseDir, "result.json"))
         const actual = await parseMarkdownText(
           input.toString().trim(),
-          new AbsoluteFilePath("input.md")
+          new AbsoluteFilePath("input.md"),
+          []
         )
         expect(actual).to.eql(expected)
       })

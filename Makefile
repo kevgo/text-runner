@@ -100,6 +100,7 @@ fix:  # runs the fixers
 				 -path './*.md' -o \
 				 -path './*.yml' -o \
 				 -name '*node_modules*' -prune \) | \
+		grep -v '^./tmp/' | \
 		grep -v node_modules | \
 		grep -v documentation/built-in-actions/run_javascript.md | \
 		grep -v documentation/built-in-actions/start_stop_process.md | \
@@ -122,6 +123,7 @@ lint: # lints all files
 				 -path './*.md' -o \
 				 -path './*.yml' -o \
 				 -name '*node_modules*' -prune \) | \
+		grep -v '^./tmp/' | \
 		grep -v node_modules | \
 		grep -v documentation/built-in-actions/run_javascript.md | \
 		grep -v documentation/built-in-actions/start_stop_process.md | \

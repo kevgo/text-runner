@@ -13,10 +13,9 @@ export interface RemarkableNode {
 }
 
 /** creates empty RemarkableNodes for testing */
-export function scaffoldRemarkableNode(args: OptionalRemarkableNode) {
+export function scaffoldRemarkableNode(args: Partial<RemarkableNode>) {
   return { ...defaultValues, ...args }
 }
-type OptionalRemarkableNode = Partial<RemarkableNode>
 
 const defaultValues: RemarkableNode = {
   alt: undefined,

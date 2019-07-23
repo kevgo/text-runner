@@ -14,16 +14,11 @@ export interface Activity {
 }
 
 /** scaffoldActivity creates a test Activity from the given data */
-export function scaffoldActivity(data: {
-  actionName?: string
-  nodes?: AstNodeList
-  file?: string
-  line?: number
-}): Activity {
+export function scaffoldActivity(data: { actionName?: string }): Activity {
   return {
     actionName: data.actionName || "foo",
-    file: new AbsoluteFilePath(data.file || "file"),
-    line: data.line || 0,
-    nodes: data.nodes || new AstNodeList()
+    file: new AbsoluteFilePath("file"),
+    line: 0,
+    nodes: new AstNodeList()
   }
 }

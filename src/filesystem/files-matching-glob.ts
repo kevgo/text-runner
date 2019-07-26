@@ -1,9 +1,9 @@
-import glob from "glob"
+import glob from "glob-promise"
 import { AbsoluteFilePath } from "./absolute-file-path"
 
-export function filesMatchingGlob(expression: string): AbsoluteFilePath[] {
-  return glob
-    .sync(expression)
-    .sort()
-    .map(file => new AbsoluteFilePath(file))
+export async function filesMatchingGlob(
+  expression: string
+): Promise<AbsoluteFilePath[]> {
+  const files = await glob(expression)
+  return files.sort().map(file => new AbsoluteFilePath(file))
 }

@@ -3,7 +3,7 @@ import { actionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
-import { parseMarkdownFiles } from "../parsers/parse-markdown-files"
+import { RemarkableParser } from "../parsers/remarkable-based/remarkable-parser"
 
 export async function unusedCommand(config: Configuration) {
   // step 1: find files
@@ -14,7 +14,9 @@ export async function unusedCommand(config: Configuration) {
   }
 
   // step 2: read and parse files
-  const ASTs = await parseMarkdownFiles(filenames)
+  const parser = new RemarkableParser()
+  await parser.init()
+  const ASTs = await parser.parseFiles(filenames)
 
   // step 3: extract activities
   const usedActivityNames = extractActivities(ASTs, config.classPrefix).map(

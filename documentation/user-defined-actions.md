@@ -1,14 +1,13 @@
 # User-defined actions
 
-If the [built-in actions](built-in-actions) aren't enough,
-you can write custom actions in JavaScript.
+If the [built-in actions](built-in-actions) aren't enough, you can write custom
+actions in JavaScript.
 
 ## Hello-world example
 
-Let's start by building the simplest possible action first:
-A "hello-world" action that prints the text "hello world"
-in the test runner's console output when running.
-It will be triggered via this piece of Markdown:
+Let's start by building the simplest possible action first: A "hello-world"
+action that prints the text "hello world" in the test runner's console output
+when running. It will be triggered via this piece of Markdown:
 
 <a textrun="create-file">
 
@@ -20,12 +19,11 @@ Create a file **hello.md** with this content to test it.
 
 </a>
 
-When TextRunner encounters this `hello-world` block type,
-it runs the method that the file <a textrun="create-file">**text-run/hello-world.js** exports.
-All user-defined actions are in the "text-run" folder,
-with the file name matching the action name
-but in [kebab-case](http://wiki.c2.com/?KebabCase).
-Let's create this file with the content:
+When TextRunner encounters this `hello-world` block type, it runs the method
+that the file <a textrun="create-file">**text-run/hello-world.js** exports. All
+user-defined actions are in the "text-run" folder, with the file name matching
+the action name but in [kebab-case](http://wiki.c2.com/?KebabCase). Let's create
+this file with the content:
 
 ```javascript
 module.exports = function({ log }) {
@@ -46,74 +44,72 @@ hello.md:1 -- Hello world
 
 ## Handler functions
 
-The handler function for our action is given an object containing various information and utility functions:
+The handler function for our action is given an object containing various
+information and utility functions:
 
 <a textrun="verify-handler-args">
 
 - **SKIPPING:** return this value if you have decided to skip the current action
-- **file**, **line:** location of the currently executed block in the documentation
-- **nodes:** the [document content](#accessing-document-content) inside the active block for this action,
-- **configuration:** TextRunner configuration data (which TextRunner options are enabled)
+- **file**, **line:** location of the currently executed block in the
+  documentation
+- **nodes:** the [document content](#accessing-document-content) inside the
+  active block for this action,
+- **configuration:** TextRunner configuration data (which TextRunner options are
+  enabled)
 - **log:** call this function to output stuff to the user running your test
-- **name:** call this function to refine the name of the current test step
-  </a>
+- **name:** call this function to refine the name of the current test step </a>
 
 TextRunner supports all forms of synchronous and asynchronous operations:
 
-- just do something synchronous ([example](examples/custom-action-sync/text-run/hello-world.js))
-- return a Promise ([example](examples/custom-action-promise/text-run/hello-world.js))
+- just do something synchronous
+  ([example](examples/custom-action-sync/text-run/hello-world.js))
+- return a Promise
+  ([example](examples/custom-action-promise/text-run/hello-world.js))
 - implement the action as a modern
   [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
   ([example](examples/custom-action-async/text-run/hello-world.js))
-- take a callback function as a second parameter to your handler function and call it when you are done
+- take a callback function as a second parameter to your handler function and
+  call it when you are done
   ([example](examples/custom-action-callback/text-run/hello-world.js))
 
-You can write the handler in any language that transpiles to JavaScript,
-for example [BabelJS](https://babeljs.io),
-[CoffeeScript](http://coffeescript.org),
-or [LiveScript](http://livescript.net).
-Just make sure that your project contains a local installation of your transpiler,
-since TextRunner does not find globally installed transpilers.
-This means your project should have a `package.json` file listing the transpiler you want TextRunner to call,
-in addition to any other NPM modules that your handler method uses.
+You can write the handler in any language that transpiles to JavaScript, for
+example [BabelJS](https://babeljs.io), [CoffeeScript](http://coffeescript.org),
+or [LiveScript](http://livescript.net). Just make sure that your project
+contains a local installation of your transpiler, since TextRunner does not find
+globally installed transpilers. This means your project should have a
+`package.json` file listing the transpiler you want TextRunner to call, in
+addition to any other NPM modules that your handler method uses.
 
 ## Accessing document content
 
-Document content is provided in the `nodes` attribute.
-It contains an [AstNodeList](/src/parsers/standard-AST/ast-node-list.ts).
-This is an Array subclass containing [AstNodes](/src/parsers/standard-AST/ast-node.ts)
-from the current active block in the document
-with additional helper methods to extract document content:
+Document content is provided in the `nodes` attribute. It contains an
+[AstNodeList](/src/parsers/standard-AST/ast-node-list.ts). This is an Array
+subclass containing [AstNodes](/src/parsers/standard-AST/ast-node.ts) from the
+current active block in the document with additional helper methods to extract
+document content:
 
 - **text():** returns the entire textual content in the current active block
-- **textInNodeOfType(type1, type2, ...):**
-  returns the text in the AST node of the given types.
-  You can provide multiple alternative node types.
-  Verifies that only one matching AST node exists.
-- **textInNodeOfTypes(type1, type2, ...):**
-  returns the text in the AST nodes of the given types.
-  You can provide multiple alternative node types.
+- **textInNodeOfType(type1, type2, ...):** returns the text in the AST node of
+  the given types. You can provide multiple alternative node types. Verifies
+  that only one matching AST node exists.
+- **textInNodeOfTypes(type1, type2, ...):** returns the text in the AST nodes of
+  the given types. You can provide multiple alternative node types.
 
-You cant also iterate `nodes` manually.
-Each node has these attributes:
+You cant also iterate `nodes` manually. Each node has these attributes:
 <a textrun="verify-ast-node-attributes">
 
-- **file**, **line:** the file and line in the file at which this AST node begins
-- **type:** the type of the AST node. Examples are
-  `text` for normal text,
-  `code` for inline code blocks,
-  `fence` for multi-line code blocks,
-  `emphasized` for italic text,
-  `strong` for bold text,
-  and `link_open` for links.
+- **file**, **line:** the file and line in the file at which this AST node
+  begins
+- **type:** the type of the AST node. Examples are `text` for normal text,
+  `code` for inline code blocks, `fence` for multi-line code blocks,
+  `emphasized` for italic text, `strong` for bold text, and `link_open` for
+  links.
 - **tag:** corresponding HTML tag
 - **content:** textual content of the AST node
-- **attributes:** list of HTML attributes of the node
-  </a>
+- **attributes:** list of HTML attributes of the node </a>
 
 Here is an example for an action that runs a code block in the terminal.
-<a textrun="create-file">
-Create a file **execute.md** with the content:
+<a textrun="create-file"> Create a file **execute.md** with the content:
 
 ```
 <pre textrun="console-command">
@@ -123,8 +119,7 @@ echo "Hello world"
 
 </a>
 
-Here is the corresponding action, implemented in
-<a textrun="create-file">
+Here is the corresponding action, implemented in <a textrun="create-file">
 **text-run/console-command.js**:
 
 ```javascript
@@ -146,30 +141,27 @@ module.exports = function({ log, nodes }) {
 
 ## Formatter
 
-One of the utilities availabe to actions is the formatter instance.
-It allows to signal test progress to TextRunner and print test output to the console.
-It provides the following methods:
+One of the utilities availabe to actions is the formatter instance. It allows to
+signal test progress to TextRunner and print test output to the console. It
+provides the following methods:
 
-- **log(text):**
-  allows to print output of the currently running action to the console -
-  depending on the type of formatter, this output is printed or not
+- **log(text):** allows to print output of the currently running action to the
+  console - depending on the type of formatter, this output is printed or not
 - **warn:** to signal a warning to the user (but keep the test passing)
 - **skip:** call this to skip the current test
 - **name:** overrides how the current action is called in the test output
-- **stdout** and **stderr:**
-  streams that you can pipe output of commands you run into
-- **console:**
-  a console object that you should use instead of the built-in console
-  to generate output that fits into the formatter output
+- **stdout** and **stderr:** streams that you can pipe output of commands you
+  run into
+- **console:** a console object that you should use instead of the built-in
+  console to generate output that fits into the formatter output
 
 To fail a test, throw an `Error` with the corresponding error message.
 TextRunner supports a variety of formatters:
 
-- **detailed formatter:**
-  Prints each test performed, including test output.
+- **detailed formatter:** Prints each test performed, including test output.
 
-- **dot formatter:**
-  A minimalistic formatter, shows only dots for each test performed.
+- **dot formatter:** A minimalistic formatter, shows only dots for each test
+  performed.
 
 ## Finding unused activities
 

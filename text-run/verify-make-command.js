@@ -5,7 +5,7 @@ const path = require("path")
 module.exports = async function verifyMakeCommand(args) {
   const expected = args.nodes
     .text()
-    .replace(/make\s+/, "")
+    .replace(/make\s*/, "")
     .trim()
   args.name(`verify Make command ${color.cyan(expected)} exists`)
   const makefilePath = path.join(args.configuration.sourceDir, "Makefile")

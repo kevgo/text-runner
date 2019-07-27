@@ -1,9 +1,8 @@
 ### Verifying NPM installation instructions
 
-Authors of [NPM](https://www.npmjs.com) modules
-want to provide accurate installation instructions.
-This action verifies that the instructions use the correct package name
-that is listed in `package.json`.
+Authors of [NPM](https://www.npmjs.com) modules want to provide accurate
+installation instructions. This action verifies that the instructions use the
+correct package name that is listed in `package.json`.
 
 #### Example
 
@@ -18,7 +17,8 @@ Assuming our __package.json__ file looks like this:
 
 </a>
 
-then the action below verifies that the instructions use the correct NPM package name:
+then the action below verifies that the instructions use the correct NPM package
+name:
 
 <a textrun="run-markdown-in-textrun">
 ```markdown

@@ -1,7 +1,7 @@
 # Bash Tutorial
 
-This is a small tutorial that demonstrates TextRunner by and teaches you
-a bit of Bash along the way.
+This is a small tutorial that demonstrates TextRunner by and teaches you a bit
+of Bash along the way.
 
 ## IO Streams
 
@@ -13,8 +13,8 @@ There are 3 IO streams:
 
 ## Accessing command-line arguments
 
-Bash makes command-line arguments available via `$` variables.
-`$1` is the first argument, `$2` the second, etc.
+Bash makes command-line arguments available via `$` variables. `$1` is the first
+argument, `$2` the second, etc.
 
 Let's say we have this little Bash script that greets you by name:
 

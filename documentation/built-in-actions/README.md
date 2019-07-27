@@ -1,7 +1,7 @@
 # Built-in Actions
 
-TextRunner provides a number of built-in actions
-for activities typically performed in software documentation.
+TextRunner provides a number of built-in actions for activities typically
+performed in software documentation.
 
 ## Verify the contents from the documented Git repo
 
@@ -10,8 +10,9 @@ for activities typically performed in software documentation.
 
 ## Interacting with the local filesystem
 
-All file system actions happen inside a special directory called the _workspace_.
-This directory is located in `./tmp` unless [configured otherwise](../configuration.md).
+All file system actions happen inside a special directory called the
+_workspace_. This directory is located in `./tmp` unless
+[configured otherwise](../configuration.md).
 
 - [change the current working directory](cd.md)
 - [create a directory](create_directory.md)
@@ -24,13 +25,12 @@ This directory is located in `./tmp` unless [configured otherwise](../configurat
 Text-Runner allows running short-lived (immediately ending) console commands.
 The execution waits until the command is finished running.
 
-- [run a short-lived console command](run_console_command.md)
-  and enter data into it
+- [run a short-lived console command](run_console_command.md) and enter data
+  into it
 - [verify the output of the last short-lived command](verify_console_command_output.md)
 
-Text-Runner also allows running one long-running console command
-(called a process) in the background,
-for example a server.
+Text-Runner also allows running one long-running console command (called a
+process) in the background, for example a server.
 
 - [start and stop the long-running process](start_stop_process.md)
 - [document parts of the process' output](verify_process_output.md)
@@ -47,7 +47,8 @@ Console commands execute in TextRunner's
 - [verify NPM installation instructions](verify_npm_install.md)
 - [verify global command provided by NPM module](verify_npm_global_command.md)
 
-With the option `--offline` given, text-run does not check outgoing links to other websites.
+With the option `--offline` given, text-run does not check outgoing links to
+other websites.
 
 <hr>
 

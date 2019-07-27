@@ -1,7 +1,7 @@
 ### changing the current working directory
 
-The `cd` action changes into the directory
-that its embedded link or code block points to.
+The `cd` action changes into the directory that its embedded link or code block
+points to.
 
 #### Example
 

@@ -10,5 +10,5 @@ export interface DocumentsParser {
   parseFile(filename: AbsoluteFilePath): Promise<AstNodeList>
 
   /** ParseText returns the standard AST for the given document content. */
-  parseText(text: string): Promise<AstNodeList>
+  parseText(text: string, filepath: AbsoluteFilePath): Promise<AstNodeList>
 }

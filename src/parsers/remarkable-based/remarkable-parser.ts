@@ -45,7 +45,7 @@ export class RemarkableParser implements DocumentsParser {
     return Promise.all(promises)
   }
 
-  private async parseFile(filename: AbsoluteFilePath): Promise<AstNodeList> {
+  async parseFile(filename: AbsoluteFilePath): Promise<AstNodeList> {
     const content = await fs.readFile(filename.platformified(), {
       encoding: "utf8"
     })
@@ -55,8 +55,7 @@ export class RemarkableParser implements DocumentsParser {
     return this.parseText(content, filename)
   }
 
-  /** parses the given Markdown text into the standardized AST format */
-  private async parseText(
+  async parseText(
     markdownText: string,
     filepath: AbsoluteFilePath
   ): Promise<AstNodeList> {

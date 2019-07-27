@@ -1,7 +1,9 @@
 # Creating a file
 
-- the name of the file is provided as _emphasized_ or **bold** text within the anchor tag
-- the content of the file is provided as a code block with one or three backticks
+- the name of the file is provided as _emphasized_ or **bold** text within the
+  anchor tag
+- the content of the file is provided as a code block with one or three
+  backticks
 - TextRunner creates the file in the workspace
 
 #### Example

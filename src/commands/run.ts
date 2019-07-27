@@ -7,7 +7,7 @@ import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import { parseMarkdownFiles } from "../parsers/parse-markdown-files"
+import { RemarkableParser } from "../parsers/remarkable-based/remarkable-parser"
 import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
@@ -29,7 +29,9 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 2: read and parse files
-  const ASTs = await parseMarkdownFiles(filenames)
+  const parser = new RemarkableParser()
+  await parser.init()
+  const ASTs = await parser.parseFiles(filenames)
 
   // step 3: find link targets
   const linkTargets = findLinkTargets(ASTs)

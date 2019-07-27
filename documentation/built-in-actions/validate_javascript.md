@@ -1,8 +1,8 @@
 # Validating JavaScript code
 
-This action just checks that JavaScript code contains no syntax errors.
-It is for code blocks that aren't runnable in the context of the tutorial.
-To run Javascript code use the [runJavascript](run_javascript.md) action.
+This action just checks that JavaScript code contains no syntax errors. It is
+for code blocks that aren't runnable in the context of the tutorial. To run
+Javascript code use the [runJavascript](run_javascript.md) action.
 
 <a textrun="run-markdown-in-textrun">
 ```html

@@ -1,8 +1,8 @@
 ### Verifying global commands provided by NPM modules
 
-Authors of [NPM](https://www.npmjs.com) modules
-want to describe global commands provided by their modules.
-This action verifies those command names in documenation.
+Authors of [NPM](https://www.npmjs.com) modules want to describe global commands
+provided by their modules. This action verifies those command names in
+documenation.
 
 #### Example
 
@@ -19,8 +19,8 @@ Assuming our __package.json__ file looks like this:
 
 </a>
 
-then the action below verifies that the instructions describe
-the correct global command name exported by this NPM module.
+then the action below verifies that the instructions describe the correct global
+command name exported by this NPM module.
 
 <a textrun="run-markdown-in-textrun">
 ```markdown

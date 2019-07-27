@@ -3,9 +3,8 @@ import { extractImagesAndLinks } from "../activity-list/extract-images-and-links
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import { parseMarkdownFiles } from "../parsers/parse-markdown-files"
+import { RemarkableParser } from "../parsers/remarkable-based/remarkable-parser"
 import { AstNode } from "../parsers/standard-AST/ast-node"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 
 export async function debugCommand(config: Configuration): Promise<Error[]> {
   const filenames = await getFileNames(config)
@@ -14,7 +13,9 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
   }
 
   console.log("AST NODES:")
-  const ASTs: AstNodeList[] = await parseMarkdownFiles(filenames)
+  const parser = new RemarkableParser()
+  await parser.init()
+  const ASTs = await parser.parseFiles(filenames)
   for (const AST of ASTs) {
     for (const node of AST) {
       console.log(

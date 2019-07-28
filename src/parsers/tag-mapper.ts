@@ -5,7 +5,12 @@ interface Mappings {
   [key: string]: string
 }
 
-/** TagMapper maps Remarkable node types to HTML tags and vice versa. */
+/**
+ * TagMapper maps Remarkable node types to HTML tags and vice versa.
+ *
+ * Remarkable node types: bold_open, bold_close, image, explicitly
+ * Tag types: "b", "/b", "img", etc
+ */
 export class TagMapper {
   /** Mappings of tags that have opening and closing varieties. */
   private static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
@@ -75,6 +80,9 @@ export class TagMapper {
   typeForTag(tag: string, attributes: AstNodeAttributes): string {
     if (tag === "a" && !attributes.href) {
       return "anchor_open"
+    }
+    if (tag === "/a" && !attributes.href) {
+      return "anchor_close"
     }
     if (this.tagTypeMappings.hasOwnProperty(tag)) {
       return this.tagTypeMappings[tag]

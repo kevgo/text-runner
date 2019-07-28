@@ -37,26 +37,62 @@ export class HtmlAstStandardizer {
   }
 
   standardizeNode(
-    node: parse5.DefaultTreeElement,
+    node: any,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    console.log(node.nodeName)
     if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
       const attributes: AstNodeAttributes = {}
       for (const attr of node.attrs) {
         attributes[attr.name] = attr.value
       }
-      const n = new AstNode({
-        attributes,
-        content: "",
-        file,
-        line,
-        tag: node.tagName,
-        type: this.tagMapper.typeForTag(node.tagName, attributes)
-      })
-      result.push(n)
+      result.push(
+        new AstNode({
+          attributes,
+          content: "",
+          file,
+          line,
+          tag: node.tagName,
+          type: this.tagMapper.openingTypeForTag(node.tagName, attributes)
+        })
+      )
+      for (const childNode of node.childNodes) {
+        const standardizedChildNodes = this.standardizeNode(
+          childNode,
+          file,
+          line
+        )
+        result.push(...standardizedChildNodes)
+      }
+      const tag = "/" + node.tagName
+      result.push(
+        new AstNode({
+          attributes,
+          content: "",
+          file,
+          line,
+          tag,
+          type: this.tagMapper.typeForTag(tag, attributes)
+        })
+      )
+    } else if (node.nodeName === "#text") {
+      // textnode
+      if (node.value !== "\n") {
+        result.push(
+          new AstNode({
+            attributes: {},
+            content: node.value,
+            file,
+            line,
+            tag: "",
+            type: "text"
+          })
+        )
+      }
+    } else {
+      // not an open-close node
+      console.log(node)
     }
     return result
   }

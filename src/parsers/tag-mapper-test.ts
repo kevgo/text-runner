@@ -12,11 +12,21 @@ describe("TagMapper", () => {
 
   describe("openingTypeForTag", function() {
     it("returns opening types for opening HTML tags", function() {
-      expect(tagMapper.openingTypeForTag("b")).to.equal("bold_open")
+      expect(tagMapper.openingTypeForTag("b", {})).to.equal("bold_open")
     })
 
     it("returns opening types for closing HTML tags", () => {
-      expect(tagMapper.openingTypeForTag("/b")).to.equal("bold_open")
+      expect(tagMapper.openingTypeForTag("/b", {})).to.equal("bold_open")
+    })
+
+    it("returns opening anchors", function() {
+      expect(tagMapper.openingTypeForTag("/a", {})).to.equal("anchor_open")
+    })
+
+    it("returns opening links", function() {
+      expect(tagMapper.openingTypeForTag("/a", { href: "foo" })).to.equal(
+        "link_open"
+      )
     })
   })
 
@@ -48,23 +58,39 @@ describe("TagMapper", () => {
 
   describe(".typeForTag()", () => {
     it("maps known opening tags", () => {
-      expect(tagMapper.typeForTag("b")).to.equal("bold_open")
+      expect(tagMapper.typeForTag("b", {})).to.equal("bold_open")
     })
 
     it("maps known closing tags", () => {
-      expect(tagMapper.typeForTag("/b")).to.equal("bold_close")
+      expect(tagMapper.typeForTag("/b", {})).to.equal("bold_close")
     })
 
     it("maps known standalone tags", () => {
-      expect(tagMapper.typeForTag("img")).to.equal("image")
+      expect(tagMapper.typeForTag("img", {})).to.equal("image")
+    })
+
+    it("maps opening anchors", () => {
+      expect(tagMapper.typeForTag("a", {})).to.equal("anchor_open")
+    })
+
+    it("maps closing anchors", () => {
+      expect(tagMapper.typeForTag("/a", {})).to.equal("anchor_close")
+    })
+
+    it("maps opening links", () => {
+      expect(tagMapper.typeForTag("a", { href: "foo" })).to.equal("link_open")
+    })
+
+    it("maps closing anchors", () => {
+      expect(tagMapper.typeForTag("/a", { href: "foo" })).to.equal("link_close")
     })
 
     it("maps unknown opening tags", () => {
-      expect(tagMapper.typeForTag("foo")).to.equal("foo_open")
+      expect(tagMapper.typeForTag("foo", {})).to.equal("foo_open")
     })
 
     it("maps unknown closing tags", () => {
-      expect(tagMapper.typeForTag("/foo")).to.equal("foo_close")
+      expect(tagMapper.typeForTag("/foo", {})).to.equal("foo_close")
     })
   })
 })

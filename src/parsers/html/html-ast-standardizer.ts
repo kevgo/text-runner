@@ -15,6 +15,7 @@ export class HtmlAstStandardizer {
   standardizeDocument(
     htmlAst: any,
     file: AbsoluteFilePath,
+    startingLine: number,
     // @ts-ignore
     inline: boolean
   ): AstNodeList {
@@ -29,7 +30,9 @@ export class HtmlAstStandardizer {
       const astNodes = this.standardizeNode(
         childNode,
         file,
-        childNode.sourceCodeLocation.startLine || 1
+        // NOTE: need to substract 1 here because we add two line numbers
+        //       who both started counting at 1 here
+        (childNode.sourceCodeLocation.startLine || 1) + startingLine - 1
       )
       result.push(...astNodes)
     }

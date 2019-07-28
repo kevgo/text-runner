@@ -36,7 +36,7 @@
     "tag": "",
     "file": "src/parsers/html/fixtures/em/input.html",
     "line": 1,
-    "content": "!",
+    "content": "!\n",
     "attributes": {}
   }
 ]

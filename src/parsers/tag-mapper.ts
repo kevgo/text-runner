@@ -16,7 +16,7 @@ export class TagMapper {
   private static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
     bold: "b",
     bullet_list: "ul",
-    code: "code",
+    fence: "pre",
     italic: "i",
     linebreak: "br",
     link: "a",
@@ -42,7 +42,10 @@ export class TagMapper {
   }
 
   isOpenCloseTag(tagName: string): boolean {
-    return Object.values(TagMapper.OPEN_CLOSE_MAPPINGS).includes(tagName)
+    if (tagName === "#text") {
+      return false
+    }
+    return !Object.values(TagMapper.STANDALONE_MAPPINGS).includes(tagName)
   }
 
   /** Returns the opening Remarkable type for the given HTML tag. */
@@ -79,15 +82,20 @@ export class TagMapper {
 
   /** Returns the Remarkable type for the given HTML tag. */
   typeForTag(tag: string, attributes: AstNodeAttributes): string {
+    // distinguish anchors from links
     if (tag === "a" && !attributes.href) {
       return "anchor_open"
     }
     if (tag === "/a" && !attributes.href) {
       return "anchor_close"
     }
+
+    // check for known tags
     if (this.tagTypeMappings.hasOwnProperty(tag)) {
       return this.tagTypeMappings[tag]
     }
+
+    // here it is an unknown tag, we assume it is opening-closing
     if (tag.startsWith("/")) {
       return tag.substring(1) + "_close"
     } else {

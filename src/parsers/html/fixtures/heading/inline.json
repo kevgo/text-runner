@@ -1,6 +1,6 @@
 [
   {
-    "type": "heading_open",
+    "type": "h1_open",
     "tag": "h1",
     "file": "src/parsers/html/fixtures/heading/input.html",
     "line": 1,
@@ -18,7 +18,7 @@
     "attributes": {}
   },
   {
-    "type": "heading_close",
+    "type": "h1_close",
     "tag": "/h1",
     "file": "src/parsers/html/fixtures/heading/input.html",
     "line": 1,

@@ -100,7 +100,7 @@ export class HtmlAstStandardizer {
           content: "",
           file,
           line,
-          tag: "",
+          tag: node.tagName || "",
           type: this.tagMapper.typeForTag(node.tagName, attributes)
         })
       )

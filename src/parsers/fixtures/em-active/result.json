@@ -2,15 +2,15 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": {"value": "input.md"},
+    "file": "src/parsers/fixtures/em-active/input.html",
     "line": 1,
     "content": "",
     "attributes": {}
   },
   {
-    "type": "heading_open",
-    "tag": "h1",
-    "file": {"value": "input.md"},
+    "type": "em_open",
+    "tag": "em",
+    "file": "src/parsers/fixtures/em-active/input.html",
     "line": 1,
     "content": "",
     "attributes": {
@@ -20,15 +20,15 @@
   {
     "type": "text",
     "tag": "",
-    "file": {"value": "input.md"},
+    "file": "src/parsers/fixtures/em-active/input.html",
     "line": 1,
-    "content": "Hello",
+    "content": "world",
     "attributes": {}
   },
   {
-    "type": "heading_close",
-    "tag": "/h1",
-    "file": {"value": "input.md"},
+    "type": "em_close",
+    "tag": "/em",
+    "file": "src/parsers/fixtures/em-active/input.html",
     "line": 1,
     "content": "",
     "attributes": {
@@ -37,8 +37,8 @@
   },
   {
     "type": "paragraph_close",
-    "tag": "/p",
-    "file": {"value": "input.md"},
+    "tag": "p",
+    "file": "src/parsers/fixtures/em-active/input.html",
     "line": 1,
     "content": "",
     "attributes": {}

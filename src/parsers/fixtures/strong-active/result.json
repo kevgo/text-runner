@@ -1,5 +1,13 @@
 [
   {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "src/parsers/fixtures/strong-active/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
     "type": "strong_open",
     "tag": "strong",
     "file": "src/parsers/fixtures/strong-active/input.html",
@@ -26,5 +34,13 @@
     "attributes": {
       "textrun": "foo"
     }
+  },
+  {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "src/parsers/fixtures/strong-active/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {}
   }
 ]

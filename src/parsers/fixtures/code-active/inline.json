@@ -1,5 +1,13 @@
 [
   {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "src/parsers/fixtures/code-active/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
     "type": "code_open",
     "tag": "code",
     "file": "src/parsers/fixtures/code-active/input.html",
@@ -26,5 +34,13 @@
     "attributes": {
       "textrun": "foo"
     }
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "p",
+    "file": "src/parsers/fixtures/code-active/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {}
   }
 ]

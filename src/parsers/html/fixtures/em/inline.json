@@ -1,19 +1,13 @@
 [
   {
-    "type": "text",
-    "tag": "",
-    "file": "src/parsers/html/fixtures/em/input.html",
-    "line": 1,
-    "content": "Hello ",
-    "attributes": {}
-  },
-  {
     "type": "em_open",
     "tag": "em",
     "file": "src/parsers/html/fixtures/em/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
+    "attributes": {
+      "textrun": "foo"
+    }
   },
   {
     "type": "text",
@@ -29,14 +23,8 @@
     "file": "src/parsers/html/fixtures/em/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
-  },
-  {
-    "type": "text",
-    "tag": "",
-    "file": "src/parsers/html/fixtures/em/input.html",
-    "line": 1,
-    "content": "!\n",
-    "attributes": {}
+    "attributes": {
+      "textrun": "foo"
+    }
   }
 ]

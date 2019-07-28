@@ -6,7 +6,8 @@
     "line": 1,
     "content": "",
     "attributes": {
-      "name": "foo"
+      "name": "foo",
+      "textrun": "bar"
     }
   },
   {
@@ -24,7 +25,8 @@
     "line": 1,
     "content": "",
     "attributes": {
-      "name": "foo"
+      "name": "foo",
+      "textrun": "bar"
     }
   }
 ]

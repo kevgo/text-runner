@@ -2,7 +2,7 @@
   {
     "type": "image",
     "tag": "img",
-    "file": "src/parsers/html/fixtures/image/input.html",
+    "file": "src/parsers/fixtures/image/input.html",
     "line": 1,
     "content": "",
     "attributes": {

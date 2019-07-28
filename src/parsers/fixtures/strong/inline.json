@@ -1,8 +1,8 @@
 [
   {
-    "type": "em_open",
-    "tag": "em",
-    "file": "src/parsers/html/fixtures/em/input.html",
+    "type": "strong_open",
+    "tag": "strong",
+    "file": "src/parsers/fixtures/strong/input.html",
     "line": 1,
     "content": "",
     "attributes": {
@@ -12,15 +12,15 @@
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/html/fixtures/em/input.html",
+    "file": "src/parsers/fixtures/strong/input.html",
     "line": 1,
     "content": "world",
     "attributes": {}
   },
   {
-    "type": "em_close",
-    "tag": "/em",
-    "file": "src/parsers/html/fixtures/em/input.html",
+    "type": "strong_close",
+    "tag": "/strong",
+    "file": "src/parsers/fixtures/strong/input.html",
     "line": 1,
     "content": "",
     "attributes": {

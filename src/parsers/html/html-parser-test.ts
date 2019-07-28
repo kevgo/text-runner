@@ -8,7 +8,7 @@ import { HTMLParser } from "./html-parser"
 
 describe("HtmlParser", function() {
   describe("parseFile", function() {
-    const fixtureDirPath = path.join("src", "parsers", "html", "fixtures")
+    const fixtureDirPath = path.join("src", "parsers", "fixtures")
     const testDirNames = fs.readdirSync(fixtureDirPath)
     const htmlParser = new HTMLParser()
     for (const testDirName of testDirNames) {

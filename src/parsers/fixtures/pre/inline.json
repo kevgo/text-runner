@@ -1,0 +1,30 @@
+[
+  {
+    "type": "fence_open",
+    "tag": "pre",
+    "file": "src/parsers/fixtures/pre/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "src/parsers/fixtures/pre/input.html",
+    "line": 1,
+    "content": "my code\n",
+    "attributes": {}
+  },
+  {
+    "type": "fence_close",
+    "tag": "/pre",
+    "file": "src/parsers/fixtures/pre/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  }
+]

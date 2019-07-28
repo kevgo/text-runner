@@ -1,5 +1,9 @@
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 
+export interface AstNodeAttributes {
+  [key: string]: string
+}
+
 /** a node in the standardized Markdown/HTML AST */
 export class AstNode {
   static scaffold(data: any = {}): AstNode {
@@ -32,7 +36,7 @@ export class AstNode {
   readonly content: string
 
   /** the attributes of the node */
-  readonly attributes: { [key: string]: string }
+  readonly attributes: AstNodeAttributes
 
   constructor(data: {
     type: string

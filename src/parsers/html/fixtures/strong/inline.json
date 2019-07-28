@@ -1,13 +1,5 @@
 [
   {
-    "type": "text",
-    "tag": "",
-    "file": "src/parsers/html/fixtures/strong/input.html",
-    "line": 1,
-    "content": "Hello ",
-    "attributes": {}
-  },
-  {
     "type": "strong_open",
     "tag": "strong",
     "file": "src/parsers/html/fixtures/strong/input.html",
@@ -29,14 +21,6 @@
     "file": "src/parsers/html/fixtures/strong/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
-  },
-  {
-    "type": "text",
-    "tag": "",
-    "file": "src/parsers/html/fixtures/strong/input.html",
-    "line": 1,
-    "content": "!",
     "attributes": {}
   }
 ]

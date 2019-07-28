@@ -1,0 +1,30 @@
+[
+  {
+    "type": "em_open",
+    "tag": "em",
+    "file": "src/parsers/fixtures/em-active/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "src/parsers/fixtures/em-active/input.html",
+    "line": 1,
+    "content": "world",
+    "attributes": {}
+  },
+  {
+    "type": "em_close",
+    "tag": "/em",
+    "file": "src/parsers/fixtures/em-active/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  }
+]

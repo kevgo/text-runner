@@ -2,15 +2,17 @@
   {
     "type": "code_open",
     "tag": "code",
-    "file": "src/parsers/fixtures/code/input.html",
+    "file": "src/parsers/fixtures/code-active/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
+    "attributes": {
+      "textrun": "foo"
+    }
   },
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/fixtures/code/input.html",
+    "file": "src/parsers/fixtures/code-active/input.html",
     "line": 1,
     "content": "code block",
     "attributes": {}
@@ -18,9 +20,11 @@
   {
     "type": "code_close",
     "tag": "/code",
-    "file": "src/parsers/fixtures/code/input.html",
+    "file": "src/parsers/fixtures/code-active/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
+    "attributes": {
+      "textrun": "foo"
+    }
   }
 ]

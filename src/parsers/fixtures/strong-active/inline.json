@@ -2,15 +2,17 @@
   {
     "type": "strong_open",
     "tag": "strong",
-    "file": "src/parsers/fixtures/strong/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
+    "attributes": {
+      "textrun": "foo"
+    }
   },
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/fixtures/strong/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.html",
     "line": 1,
     "content": "world",
     "attributes": {}
@@ -18,9 +20,11 @@
   {
     "type": "strong_close",
     "tag": "/strong",
-    "file": "src/parsers/fixtures/strong/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.html",
     "line": 1,
     "content": "",
-    "attributes": {}
+    "attributes": {
+      "textrun": "foo"
+    }
   }
 ]

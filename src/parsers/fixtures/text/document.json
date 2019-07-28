@@ -2,7 +2,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": {"value": "input.md"},
+    "file": "src/parsers/fixtures/text/input.html",
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,15 +10,15 @@
   {
     "type": "text",
     "tag": "",
-    "file": {"value": "input.md"},
+    "file": "src/parsers/fixtures/text/input.html",
     "line": 1,
-    "content": "Hello world!",
+    "content": "Hello world!\n",
     "attributes": {}
-  },
+  }
   {
     "type": "paragraph_close",
     "tag": "/p",
-    "file": {"value": "input.md"},
+    "file": "src/parsers/fixtures/text/input.html",
     "line": 1,
     "content": "",
     "attributes": {}

@@ -5,16 +5,14 @@
     "file": "src/parsers/fixtures/em/input.html",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   },
   {
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/em/input.html",
     "line": 1,
-    "content": "world",
+    "content": "hello",
     "attributes": {}
   },
   {
@@ -23,8 +21,6 @@
     "file": "src/parsers/fixtures/em/input.html",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   }
 ]

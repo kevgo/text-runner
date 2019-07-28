@@ -1,0 +1,10 @@
+[
+  {
+    "type": "fence",
+    "tag": "pre",
+    "file": {"value": "input.md"},
+    "line": 1,
+    "content": "\nmy code\n",
+    "attributes": {}
+  }
+]

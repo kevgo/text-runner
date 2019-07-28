@@ -5,9 +5,7 @@
     "file": "src/parsers/fixtures/heading/input.html",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   },
   {
     "type": "text",
@@ -23,8 +21,6 @@
     "file": "src/parsers/fixtures/heading/input.html",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   }
 ]

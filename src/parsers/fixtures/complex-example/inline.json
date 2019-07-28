@@ -1,10 +1,20 @@
 [
   {
+    "type": "anchor_open",
+    "tag": "a",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.html",
     "line": 1,
-    "content": "Hello ",
+    "content": " \n  Hello ",
     "attributes": {}
   },
   {
@@ -13,9 +23,7 @@
     "file": "src/parsers/fixtures/complex-example/input.html",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   },
   {
     "type": "text",
@@ -31,16 +39,24 @@
     "file": "src/parsers/fixtures/complex-example/input.html",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   },
   {
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.html",
     "line": 1,
-    "content": "!\n",
+    "content": "! \n",
     "attributes": {}
+  },
+  {
+    "type": "anchor_close",
+    "tag": "/a",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
   }
 ]

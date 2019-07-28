@@ -1,7 +1,7 @@
 import { expect } from "chai"
 import { AbsoluteFilePath } from "../../../../filesystem/absolute-file-path"
+import { TagMapper } from "../../../tag-mapper"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
-import { TagMapper } from "../tag-mapper"
 import {
   RemarkableNode,
   scaffoldRemarkableNode

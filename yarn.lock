@@ -367,6 +367,11 @@
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.0.tgz#e486d0d97396d79beedd0a6e33f4534ff6b4973e"
   integrity sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==
 
+"@types/parse5@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@types/parse5/-/parse5-5.0.2.tgz#a877a4658f8238c8266faef300ae41c84d72ec8a"
+  integrity sha512-BOl+6KDs4ItndUWUFchy3aEqGdHhw0BC4Uu+qoDonN/f0rbUnJbm71Ulj8Tt9jLFRaAxPLKvdS1bBLfx1qXR9g==
+
 "@types/ps-tree@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@types/ps-tree/-/ps-tree-1.1.0.tgz#7e2034e8ccdc16f6b0ced7a88529ebcb3b1dc424"
@@ -6772,6 +6777,11 @@ parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
   integrity sha1-bVuTSkVpk7I9N/QKOC1vFmao5cY=
+
+parse5@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.0.tgz#c59341c9723f414c452975564c7c00a68d58acd2"
+  integrity sha512-fxNG2sQjHvlVAYmzBZS9YlDp6PTSSDwa98vkD4QgVDDCAo84z5X1t5XyJQ62ImdLXx5NdIIfihey6xpum9/gRQ==
 
 pascalcase@^0.1.1:
   version "0.1.1"

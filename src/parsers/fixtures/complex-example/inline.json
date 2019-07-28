@@ -1,0 +1,46 @@
+[
+  {
+    "type": "text",
+    "tag": "",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "Hello ",
+    "attributes": {}
+  },
+  {
+    "type": "strong_open",
+    "tag": "strong",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "world",
+    "attributes": {}
+  },
+  {
+    "type": "strong_close",
+    "tag": "/strong",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": "src/parsers/fixtures/complex-example/input.html",
+    "line": 1,
+    "content": "!\n",
+    "attributes": {}
+  }
+]

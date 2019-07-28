@@ -1,0 +1,10 @@
+[
+  {
+    "type": "text",
+    "tag": "",
+    "file": "src/parsers/fixtures/text/input.html",
+    "line": 1,
+    "content": "Hello world!\n",
+    "attributes": {}
+  }
+]

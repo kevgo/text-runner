@@ -30,12 +30,17 @@ export class HTMLParser implements DocumentsParser {
   parseInline(
     text: string,
     file: AbsoluteFilePath,
-    offset: number,
+    startingLine: number,
     inline: boolean
   ): AstNodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true
     })
-    return this.standardizer.standardizeDocument(htmlAst, file, offset, inline)
+    return this.standardizer.standardizeDocument(
+      htmlAst,
+      file,
+      startingLine,
+      inline
+    )
   }
 }

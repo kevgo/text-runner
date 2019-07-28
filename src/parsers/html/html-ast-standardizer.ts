@@ -42,11 +42,13 @@ export class HtmlAstStandardizer {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
-      const attributes: AstNodeAttributes = {}
+    const attributes: AstNodeAttributes = {}
+    if (node.attrs) {
       for (const attr of node.attrs) {
         attributes[attr.name] = attr.value
       }
+    }
+    if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
       result.push(
         new AstNode({
           attributes,
@@ -85,14 +87,23 @@ export class HtmlAstStandardizer {
             content: node.value,
             file,
             line,
-            tag: "",
+            tag: node.tagName || "",
             type: "text"
           })
         )
       }
     } else {
       // not an open-close node
-      console.log(node)
+      result.push(
+        new AstNode({
+          attributes,
+          content: "",
+          file,
+          line,
+          tag: "",
+          type: this.tagMapper.typeForTag(node.tagName, attributes)
+        })
+      )
     }
     return result
   }

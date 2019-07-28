@@ -16,6 +16,7 @@ export class TagMapper {
   private static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
     bold: "b",
     bullet_list: "ul",
+    code: "code",
     italic: "i",
     linebreak: "br",
     link: "a",

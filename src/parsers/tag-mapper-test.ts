@@ -4,6 +4,12 @@ import { TagMapper } from "./tag-mapper"
 const tagMapper = new TagMapper()
 
 describe("TagMapper", () => {
+  describe("isOpenCloseTag", function() {
+    it("return TRUE for <a> tags", function() {
+      expect(tagMapper.isOpenCloseTag("a")).to.be.true
+    })
+  })
+
   describe("openingTypeForTag", function() {
     it("returns opening types for opening HTML tags", function() {
       expect(tagMapper.openingTypeForTag("b")).to.equal("bold_open")

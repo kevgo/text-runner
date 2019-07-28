@@ -5,7 +5,7 @@ import { getHtmlBlockTag } from "../../helpers/get-html-block-tag"
 import { OpenTagTracker } from "../../helpers/open-tag-tracker"
 import { parseHtmlTag } from "../../helpers/parse-html-tag"
 import { removeHtmlComments } from "../../helpers/remove-html-comments"
-import { TagMapper } from "../tag-mapper"
+import { TagMapper } from "../../../tag-mapper"
 import { RemarkableNode } from "../types/remarkable-node"
 import { TransformerCategory } from "../types/transformer-category"
 

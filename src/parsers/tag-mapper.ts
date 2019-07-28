@@ -1,3 +1,5 @@
+import { AstNodeAttributes } from "./standard-AST/ast-node"
+
 /** Mappings from Remarkable types to HTML tag names or vice versa. */
 interface Mappings {
   [key: string]: string
@@ -6,7 +8,7 @@ interface Mappings {
 /** TagMapper maps Remarkable node types to HTML tags and vice versa. */
 export class TagMapper {
   /** Mappings of tags that have opening and closing varieties. */
-  static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
+  private static readonly OPEN_CLOSE_MAPPINGS: Mappings = {
     bold: "b",
     bullet_list: "ul",
     italic: "i",
@@ -18,7 +20,7 @@ export class TagMapper {
   }
 
   /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
-  static readonly STANDALONE_MAPPINGS: Mappings = {
+  private static readonly STANDALONE_MAPPINGS: Mappings = {
     image: "img"
   }
 
@@ -33,12 +35,19 @@ export class TagMapper {
     this.tagTypeMappings = this.createTagTypeMappings()
   }
 
+  isOpenCloseTag(tagName: string): boolean {
+    return Object.values(TagMapper.OPEN_CLOSE_MAPPINGS).includes(tagName)
+  }
+
   /** Returns the opening Remarkable type for the given HTML tag. */
-  openingTypeForTag(tagName: string) {
+  openingTypeForTag(tagName: string, attributes: AstNodeAttributes) {
     if (tagName.startsWith("/")) {
       tagName = tagName.substring(1)
     }
-    return this.typeForTag(tagName)
+    if (tagName === "a" && !attributes.href) {
+      return "anchor_open"
+    }
+    return this.typeForTag(tagName, attributes)
   }
 
   /** Returns the HTML tag for the given Remarkable type. */
@@ -63,7 +72,10 @@ export class TagMapper {
   }
 
   /** Returns the Remarkable type for the given HTML tag. */
-  typeForTag(tag: string): string {
+  typeForTag(tag: string, attributes: AstNodeAttributes): string {
+    if (tag === "a" && !attributes.href) {
+      return "anchor_open"
+    }
     if (this.tagTypeMappings.hasOwnProperty(tag)) {
       return this.tagTypeMappings[tag]
     }

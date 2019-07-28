@@ -10,7 +10,7 @@ import { CustomHtmlBlockTransformerCategory } from "./standardize-ast/custom-htm
 import { CustomMdTransformerCategory } from "./standardize-ast/custom-md/custom-md-transformer-category"
 import { GenericHtmlTagTransformerCategory } from "./standardize-ast/generic-htmltags/generic-html-tag-transformer-category"
 import { GenericMdTransformerCategory } from "./standardize-ast/generic-md/generic-md-transformer-category"
-import { TagMapper } from "./standardize-ast/tag-mapper"
+import { TagMapper } from "../tag-mapper"
 import { TransformerCategory } from "./standardize-ast/types/transformer-category"
 
 /** RemarkableParser is a DocumentsParser that parses Markdown. */

@@ -1,0 +1,26 @@
+[
+  {
+    "type": "code_open",
+    "tag": "code",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "code block",
+    "attributes": {}
+  },
+  {
+    "type": "code_close",
+    "tag": "/code",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  }
+]

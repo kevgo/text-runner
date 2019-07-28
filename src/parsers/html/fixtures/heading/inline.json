@@ -1,0 +1,30 @@
+[
+  {
+    "type": "heading_open",
+    "tag": "h1",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  },
+  {
+    "type": "text",
+    "tag": "",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "Hello",
+    "attributes": {}
+  },
+  {
+    "type": "heading_close",
+    "tag": "/h1",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "textrun": "foo"
+    }
+  }
+]

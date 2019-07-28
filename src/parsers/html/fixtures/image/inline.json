@@ -1,0 +1,13 @@
+[
+  {
+    "type": "image",
+    "tag": "img",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "src": "foo.png",
+      "alt": "foo bar"
+    }
+  }
+]

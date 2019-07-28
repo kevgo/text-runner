@@ -1,0 +1,10 @@
+[
+  {
+    "type": "text",
+    "tag": "",
+    "file": { "value": "input.md" },
+    "line": 1,
+    "content": "Hello world!",
+    "attributes": {}
+  }
+]

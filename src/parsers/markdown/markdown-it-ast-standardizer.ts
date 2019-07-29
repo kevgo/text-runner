@@ -1,4 +1,5 @@
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 
 /**
@@ -27,7 +28,7 @@ export default class MarkdownItAstStandardizer {
     const result = new AstNodeList()
     for (const node of mdAST) {
       // determine the current line we are on
-      let currentLine = Math.max(parentLine, (node.map || [])[0])
+      let currentLine = Math.max(parentLine, (node.map || [[0]])[0])
 
       // handle node with children
       if (node.children) {
@@ -46,16 +47,40 @@ export default class MarkdownItAstStandardizer {
       }
 
       // handle node without children
-      const standardizedNode = this.standardizeNode(node)
+      const standardizedNode = this.standardizeNode(
+        node,
+        this.filepath,
+        currentLine + parentLine - 1
+      )
       result.push(...standardizedNode)
     }
     return result
   }
 
   /** Returns the standardized version of the given MarkdownIt node */
-  private standardizeNode(mdNode: any): AstNodeList {
+  private standardizeNode(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
     const result = new AstNodeList()
     console.log(mdNode)
+    if (
+      mdNode.type.endsWith("_open") ||
+      mdNode.type.endsWith("_close") ||
+      mdNode.type === "text"
+    ) {
+      result.push(
+        new AstNode({
+          attributes: mdNode.attrs || {},
+          content: mdNode.content,
+          file,
+          line,
+          tag: mdNode.tag,
+          type: mdNode.type
+        })
+      )
+    }
     return result
   }
 

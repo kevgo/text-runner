@@ -2,7 +2,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": "src/parsers/fixtures/strong-active/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.*",
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "strong_open",
     "tag": "strong",
-    "file": "src/parsers/fixtures/strong-active/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.*",
     "line": 1,
     "content": "",
     "attributes": {
@@ -20,7 +20,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/fixtures/strong-active/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.*",
     "line": 1,
     "content": "world",
     "attributes": {}
@@ -28,7 +28,7 @@
   {
     "type": "strong_close",
     "tag": "/strong",
-    "file": "src/parsers/fixtures/strong-active/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.*",
     "line": 1,
     "content": "",
     "attributes": {
@@ -38,7 +38,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": "src/parsers/fixtures/strong-active/input.html",
+    "file": "src/parsers/fixtures/strong-active/input.*",
     "line": 1,
     "content": "",
     "attributes": {}

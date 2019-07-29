@@ -14,8 +14,7 @@ export class MdParser implements DocumentsParser {
     this.markdownIt = new MarkdownIt({
       html: true,
       linkify: true
-    }).disable("paragraph")
-    console.log(this.markdownIt)
+    })
   }
 
   async parseFiles(filenames: AbsoluteFilePath[]): Promise<AstNodeList[]> {

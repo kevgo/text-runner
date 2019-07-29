@@ -15,14 +15,15 @@ describe("MdParser", function() {
       const testDirPath = path.join(fixtureDirPath, testDirName)
       it(`parsing '${testDirName}'`, async function() {
         const expectedJSON = await fs.readJSON(
-          path.join(testDirPath, "inline.json")
+          path.join(testDirPath, "result.json")
         )
         const expected = new AstNodeList()
-        for (const e of expectedJSON) {
-          expected.push(AstNode.scaffold(e))
+        for (const expectedNodeData of expectedJSON) {
+          expectedNodeData.file = expectedNodeData.file.replace("*", "md")
+          expected.push(AstNode.scaffold(expectedNodeData))
         }
         const actual = await mdParser.parseFile(
-          new AbsoluteFilePath(path.join(testDirPath, "input.html"))
+          new AbsoluteFilePath(path.join(testDirPath, "input.md"))
         )
         assert.deepEqual(actual, expected)
       })

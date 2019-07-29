@@ -117,6 +117,34 @@ export default class MarkdownItAstStandardizer {
       return result
     }
 
+    // handle headings
+    if (mdNode.type === "heading_open") {
+      result.push(
+        new AstNode({
+          attributes: {},
+          content: "",
+          file,
+          line,
+          tag: mdNode.tag,
+          type: `${mdNode.tag}_open`
+        })
+      )
+      return result
+    }
+    if (mdNode.type === "heading_close") {
+      result.push(
+        new AstNode({
+          attributes: {},
+          content: "",
+          file,
+          line,
+          tag: "/" + mdNode.tag,
+          type: `${mdNode.tag}_close`
+        })
+      )
+      return result
+    }
+
     // handle code blocks
     if (mdNode.type === "code_inline") {
       result.push(

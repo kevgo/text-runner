@@ -77,7 +77,7 @@ export class HtmlAstStandardizer {
         const tag = "/" + node.tagName
         result.push(
           new AstNode({
-            attributes,
+            attributes: {},
             content: "",
             file,
             line,

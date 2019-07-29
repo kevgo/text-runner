@@ -1,13 +1,5 @@
 [
   {
-    "type": "paragraph_open",
-    "tag": "p",
-    "file": "src/parsers/fixtures/image-active/input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
-  },
-  {
     "type": "image",
     "tag": "img",
     "file": "src/parsers/fixtures/image-active/input.*",
@@ -20,13 +12,5 @@
       "height": "200",
       "textrun": "bar"
     }
-  },
-  {
-    "type": "paragraph_close",
-    "tag": "/p",
-    "file": "src/parsers/fixtures/image-active/input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
   }
 ]

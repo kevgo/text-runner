@@ -78,9 +78,13 @@ export default class MarkdownItAstStandardizer {
   ): AstNodeList {
     const result = new AstNodeList()
     console.log(mdNode)
+
+    // ignore empty text blocks
     if (mdNode.type === "text" && mdNode.content === "") {
       return result
     }
+
+    // handle opening/closing and text nodes
     if (
       mdNode.type.endsWith("_open") ||
       mdNode.type.endsWith("_close") ||
@@ -98,6 +102,8 @@ export default class MarkdownItAstStandardizer {
       )
       return result
     }
+
+    // handle code blocks
     if (mdNode.type === "code_inline") {
       result.push(
         new AstNode({
@@ -131,7 +137,9 @@ export default class MarkdownItAstStandardizer {
       )
       return result
     }
-    if (mdNode.type === "html_inline") {
+
+    // handle HTML blocks
+    if (mdNode.type === "html_inline" || mdNode.type === "html_block") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
         const closingTagNodes = this.closingTagParser.parse(
           mdNode.content,
@@ -146,6 +154,7 @@ export default class MarkdownItAstStandardizer {
           line,
           true
         )
+        console.log(mdNodes)
         result.push(...mdNodes)
       }
       return result

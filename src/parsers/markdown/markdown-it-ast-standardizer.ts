@@ -1,6 +1,6 @@
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { HTMLParser } from "../html/html-parser"
-import { AstNode } from "../standard-AST/ast-node"
+import { AstNode, AstNodeAttributes } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
@@ -43,6 +43,17 @@ export default class MarkdownItAstStandardizer {
       // determine the current line we are on
       let currentLine = Math.max(parentLine, (node.map || [[0]])[0])
 
+      // special handling for images
+      if (node.type === "image") {
+        const standardized = this.standardizeNode(
+          node,
+          this.filepath,
+          currentLine
+        )
+        result.push(...standardized)
+        continue
+      }
+
       // handle node with children
       if (node.children) {
         const standardizedChildNodes = this.standardizeAST(
@@ -81,6 +92,28 @@ export default class MarkdownItAstStandardizer {
 
     // ignore empty text blocks
     if (mdNode.type === "text" && mdNode.content === "") {
+      return result
+    }
+
+    // handle images
+    if (mdNode.type === "image") {
+      const attributes: AstNodeAttributes = {}
+      for (const [name, value] of mdNode.attrs) {
+        attributes[name] = value
+      }
+      for (const childNode of mdNode.children) {
+        attributes.alt += childNode.content
+      }
+      result.push(
+        new AstNode({
+          attributes,
+          content: "",
+          file,
+          line,
+          tag: "img",
+          type: "image"
+        })
+      )
       return result
     }
 

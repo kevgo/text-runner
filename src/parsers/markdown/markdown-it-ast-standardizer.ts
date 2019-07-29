@@ -84,25 +84,6 @@ export default class MarkdownItAstStandardizer {
       return result
     }
 
-    // handle opening/closing and text nodes
-    if (
-      mdNode.type.endsWith("_open") ||
-      mdNode.type.endsWith("_close") ||
-      mdNode.type === "text"
-    ) {
-      result.push(
-        new AstNode({
-          attributes: mdNode.attrs || {},
-          content: mdNode.content,
-          file,
-          line,
-          tag: this.tagMapper.tagForType(mdNode.type),
-          type: mdNode.type
-        })
-      )
-      return result
-    }
-
     // handle code blocks
     if (mdNode.type === "code_inline") {
       result.push(
@@ -194,6 +175,26 @@ export default class MarkdownItAstStandardizer {
       }
       return result
     }
+
+    // handle opening/closing and text nodes
+    if (
+      mdNode.type.endsWith("_open") ||
+      mdNode.type.endsWith("_close") ||
+      mdNode.type === "text"
+    ) {
+      result.push(
+        new AstNode({
+          attributes: mdNode.attrs || {},
+          content: mdNode.content,
+          file,
+          line,
+          tag: this.tagMapper.tagForType(mdNode.type),
+          type: mdNode.type
+        })
+      )
+      return result
+    }
+
     throw new Error(`unknown RemarkableIt node type: ${mdNode.type}`)
   }
 

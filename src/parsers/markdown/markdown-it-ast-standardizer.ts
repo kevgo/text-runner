@@ -48,7 +48,7 @@ export default class MarkdownItAstStandardizer {
         const standardized = this.standardizeNode(
           node,
           this.filepath,
-          currentLine
+          currentLine + parentLine - 1
         )
         result.push(...standardized)
         continue
@@ -58,7 +58,7 @@ export default class MarkdownItAstStandardizer {
       if (node.children) {
         const standardizedChildNodes = this.standardizeAST(
           node.children,
-          currentLine
+          currentLine + parentLine - 1
         )
         result.push(...standardizedChildNodes)
         continue
@@ -88,7 +88,6 @@ export default class MarkdownItAstStandardizer {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    console.log(mdNode)
 
     // ignore empty text blocks
     if (mdNode.type === "text" && mdNode.content === "") {
@@ -231,7 +230,6 @@ export default class MarkdownItAstStandardizer {
           line,
           true
         )
-        console.log(mdNodes)
         result.push(...mdNodes)
       }
       return result
@@ -246,7 +244,7 @@ export default class MarkdownItAstStandardizer {
       result.push(
         new AstNode({
           attributes: mdNode.attrs || {},
-          content: mdNode.content,
+          content: mdNode.content.trim(),
           file,
           line,
           tag: this.tagMapper.tagForType(mdNode.type),

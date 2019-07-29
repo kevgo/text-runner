@@ -9,7 +9,7 @@ export class ClosingTagParser {
   tagMapper: TagMapper
 
   constructor() {
-    this.closingTagRE = /^[ ]*<[ ]*(\/[ ]*\w+)[ ]*>[ ]*$/
+    this.closingTagRE = /^\s*<[ ]*(\/[ ]*\w+)[ ]*>\s*$/
     this.tagMapper = new TagMapper()
   }
 

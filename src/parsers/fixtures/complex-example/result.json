@@ -1,13 +1,5 @@
 [
   {
-    "type": "paragraph_open",
-    "tag": "p",
-    "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
-  },
-  {
     "type": "anchor_open",
     "tag": "a",
     "file": "src/parsers/fixtures/complex-example/input.*",
@@ -18,10 +10,18 @@
     }
   },
   {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "src/parsers/fixtures/complex-example/input.*",
+    "line": 2,
+    "content": "",
+    "attributes": {}
+  },
+  {
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
+    "line": 3,
     "content": "Hello",
     "attributes": {}
   },
@@ -29,7 +29,7 @@
     "type": "strong_open",
     "tag": "strong",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
+    "line": 3,
     "content": "",
     "attributes": {}
   },
@@ -37,7 +37,7 @@
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
+    "line": 3,
     "content": "world",
     "attributes": {}
   },
@@ -45,7 +45,7 @@
     "type": "strong_close",
     "tag": "/strong",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
+    "line": 3,
     "content": "",
     "attributes": {}
   },
@@ -53,25 +53,23 @@
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
+    "line": 3,
     "content": "!",
     "attributes": {}
-  },
-  {
-    "type": "anchor_close",
-    "tag": "/a",
-    "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
   },
   {
     "type": "paragraph_close",
     "tag": "/p",
     "file": "src/parsers/fixtures/complex-example/input.*",
     "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "anchor_close",
+    "tag": "/a",
+    "file": "src/parsers/fixtures/complex-example/input.*",
+    "line": 4,
     "content": "",
     "attributes": {}
   }

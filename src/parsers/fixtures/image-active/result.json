@@ -22,8 +22,8 @@
     }
   },
   {
-    "type": "paragraph_open",
-    "tag": "p",
+    "type": "paragraph_close",
+    "tag": "/p",
     "file": "src/parsers/fixtures/image-active/input.*",
     "line": 1,
     "content": "",

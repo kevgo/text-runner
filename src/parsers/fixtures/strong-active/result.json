@@ -36,8 +36,8 @@
     }
   },
   {
-    "type": "paragraph_open",
-    "tag": "p",
+    "type": "paragraph_close",
+    "tag": "/p",
     "file": "src/parsers/fixtures/strong-active/input.*",
     "line": 1,
     "content": "",

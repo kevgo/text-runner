@@ -1,6 +1,7 @@
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
+import { HTMLParser } from "../html/html-parser"
 
 /**
  * MarkdownItAstStandardizer converts an AST created by MarkdownIt
@@ -13,9 +14,13 @@ export default class MarkdownItAstStandardizer {
   /** the path of the file from which the MarkdownIt AST is from */
   filepath: AbsoluteFilePath
 
+  /** parses HTML snippets into AstNodeLists */
+  htmlParser: HTMLParser
+
   constructor(mdAST: any, filepath: AbsoluteFilePath) {
     this.mdAst = mdAST
     this.filepath = filepath
+    this.htmlParser = new HTMLParser()
   }
 
   /** returns the standardized AST for the MarkdownIt-based AST given in the constructor */
@@ -80,8 +85,20 @@ export default class MarkdownItAstStandardizer {
           type: mdNode.type
         })
       )
+      return result
     }
-    return result
+    if (mdNode.type === "html_inline") {
+      const mdNodes = this.htmlParser.parseInline(
+        mdNode.content,
+        file,
+        line,
+        true
+      )
+      console.log(333333333, mdNodes)
+      result.push(...mdNodes)
+      return result
+    }
+    throw new Error(`unknown node: ${mdNode.type}`)
   }
 
   private isSoftBreak(node: any): boolean {

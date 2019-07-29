@@ -1,5 +1,13 @@
 [
   {
+    "type": "paragraph_open",
+    "tag": "p",
+    "file": "src/parsers/fixtures/code/input.*",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
     "type": "code_open",
     "tag": "code",
     "file": "src/parsers/fixtures/code/input.*",
@@ -18,6 +26,14 @@
   {
     "type": "code_close",
     "tag": "/code",
+    "file": "src/parsers/fixtures/code/input.*",
+    "line": 1,
+    "content": "",
+    "attributes": {}
+  },
+  {
+    "type": "paragraph_close",
+    "tag": "/p",
     "file": "src/parsers/fixtures/code/input.*",
     "line": 1,
     "content": "",

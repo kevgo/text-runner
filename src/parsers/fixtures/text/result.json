@@ -12,12 +12,12 @@
     "tag": "",
     "file": "src/parsers/fixtures/text/input.*",
     "line": 1,
-    "content": "Hello world!\n",
+    "content": "Hello world!",
     "attributes": {}
   },
   {
     "type": "paragraph_close",
-    "tag": "p",
+    "tag": "/p",
     "file": "src/parsers/fixtures/text/input.*",
     "line": 1,
     "content": "",

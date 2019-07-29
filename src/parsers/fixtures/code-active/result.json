@@ -37,7 +37,7 @@
   },
   {
     "type": "paragraph_close",
-    "tag": "p",
+    "tag": "/p",
     "file": "src/parsers/fixtures/code-active/input.*",
     "line": 1,
     "content": "",

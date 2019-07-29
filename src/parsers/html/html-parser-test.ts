@@ -8,24 +8,26 @@ import { HTMLParser } from "./html-parser"
 
 describe("HtmlParser", function() {
   describe("parseFile", function() {
-    const fixtureDirPath = path.join("src", "parsers", "fixtures")
-    const testDirNames = fs.readdirSync(fixtureDirPath)
     const htmlParser = new HTMLParser()
-    for (const testDirName of testDirNames) {
-      const testDirPath = path.join(fixtureDirPath, testDirName)
-      it(`inline '${testDirName}' tag parsing`, async function() {
-        const expectedJSON = await fs.readJSON(
-          path.join(testDirPath, "inline.json")
-        )
-        const expected = new AstNodeList()
-        for (const e of expectedJSON) {
-          expected.push(AstNode.scaffold(e))
-        }
-        const actual = await htmlParser.parseFile(
-          new AbsoluteFilePath(path.join(testDirPath, "input.html"))
-        )
-        assert.deepEqual(actual, expected)
-      })
+    const sharedFixturePath = path.join("src", "parsers", "fixtures")
+    const specificFixturePath = path.join("src", "parsers", "html", "fixtures")
+    for (const fixturePath of [sharedFixturePath, specificFixturePath]) {
+      for (const testDirName of fs.readdirSync(fixturePath)) {
+        const testDirPath = path.join(fixturePath, testDirName)
+        it(`parse '${testDirName}'`, async function() {
+          const expectedPath = path.join(testDirPath, "result.json")
+          const expectedJSON = await fs.readJSON(expectedPath)
+          const expected = new AstNodeList()
+          for (const e of expectedJSON) {
+            e.file = e.file.replace("*", "html")
+            expected.push(AstNode.scaffold(e))
+          }
+          const actual = await htmlParser.parseFile(
+            new AbsoluteFilePath(path.join(testDirPath, "input.html"))
+          )
+          assert.deepEqual(actual, expected)
+        })
+      }
     }
   })
 

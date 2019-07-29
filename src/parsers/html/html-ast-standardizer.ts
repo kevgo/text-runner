@@ -45,6 +45,9 @@ export class HtmlAstStandardizer {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
+    if (node.nodeName === "#text" && node.value.trim() === "") {
+      return result
+    }
     const attributes: AstNodeAttributes = {}
     if (node.attrs) {
       for (const attr of node.attrs) {
@@ -70,24 +73,26 @@ export class HtmlAstStandardizer {
         )
         result.push(...standardizedChildNodes)
       }
-      const tag = "/" + node.tagName
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag,
-          type: this.tagMapper.typeForTag(tag, attributes)
-        })
-      )
+      if (node.sourceCodeLocation.endTag) {
+        const tag = "/" + node.tagName
+        result.push(
+          new AstNode({
+            attributes,
+            content: "",
+            file,
+            line,
+            tag,
+            type: this.tagMapper.typeForTag(tag, attributes)
+          })
+        )
+      }
     } else if (node.nodeName === "#text") {
       // textnode
       if (node.value !== "\n") {
         result.push(
           new AstNode({
             attributes: {},
-            content: node.value,
+            content: node.value.trim(),
             file,
             line,
             tag: node.tagName || "",

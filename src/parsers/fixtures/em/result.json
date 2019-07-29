@@ -33,7 +33,7 @@
   },
   {
     "type": "paragraph_close",
-    "tag": "p",
+    "tag": "/p",
     "file": "src/parsers/fixtures/em/input.*",
     "line": 1,
     "content": "",

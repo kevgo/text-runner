@@ -39,7 +39,7 @@
   },
   {
     "type": "paragraph_close",
-    "tag": "p",
+    "tag": "/p",
     "file": "src/parsers/fixtures/anchor/input.*",
     "line": 1,
     "content": "",

@@ -43,9 +43,10 @@ export default class MarkdownItAstStandardizer {
   /** Converts the given MarkdownIt AST into the standard AST format */
   private standardizeAST(mdAST: any, parentLine: number) {
     const result = new AstNodeList()
+    let currentLine = parentLine
     for (const node of mdAST) {
       // determine the current line we are on
-      let currentLine = Math.max((node.map || [[0]])[0] + 1, parentLine)
+      currentLine = Math.max((node.map || [[0]])[0] + 1, currentLine)
 
       // special handling for images
       if (node.type === "image") {
@@ -81,6 +82,7 @@ export default class MarkdownItAstStandardizer {
         currentLine
       )
       result.push(...standardizedNode)
+      continue
     }
     return result
   }

@@ -1,5 +1,6 @@
 <a textrun="foo">
 
-Hello **world**!
+Hello 
+**world**!
 
 </a>

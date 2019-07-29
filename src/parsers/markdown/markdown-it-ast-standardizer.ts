@@ -82,7 +82,6 @@ export default class MarkdownItAstStandardizer {
         currentLine
       )
       result.push(...standardizedNode)
-      continue
     }
     return result
   }

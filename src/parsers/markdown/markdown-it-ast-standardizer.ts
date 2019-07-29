@@ -98,6 +98,39 @@ export default class MarkdownItAstStandardizer {
       )
       return result
     }
+    if (mdNode.type === "code_inline") {
+      result.push(
+        new AstNode({
+          attributes: {},
+          content: "",
+          file,
+          line,
+          tag: "code",
+          type: "code_open"
+        })
+      )
+      result.push(
+        new AstNode({
+          attributes: {},
+          content: mdNode.content,
+          file,
+          line,
+          tag: "",
+          type: "text"
+        })
+      )
+      result.push(
+        new AstNode({
+          attributes: {},
+          content: "",
+          file,
+          line,
+          tag: "/code",
+          type: "code_close"
+        })
+      )
+      return result
+    }
     if (mdNode.type === "html_inline") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
         const closingTagNodes = this.closingTagParser.parse(
@@ -117,7 +150,7 @@ export default class MarkdownItAstStandardizer {
       }
       return result
     }
-    throw new Error(`unknown node: ${mdNode.type}`)
+    throw new Error(`unknown RemarkableIt node type: ${mdNode.type}`)
   }
 
   private isSoftBreak(node: any): boolean {

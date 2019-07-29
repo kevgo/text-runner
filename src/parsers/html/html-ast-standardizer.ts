@@ -30,9 +30,7 @@ export class HtmlAstStandardizer {
       const astNodes = this.standardizeNode(
         childNode,
         file,
-        // NOTE: need to substract 1 here because we add two line numbers
-        //       who both started counting at 1 here
-        (childNode.sourceCodeLocation.startLine || 1) + startingLine - 1
+        (childNode.sourceCodeLocation.startLine || 0) - 1 + startingLine
       )
       result.push(...astNodes)
     }

@@ -41,14 +41,14 @@ export default class MarkdownItAstStandardizer {
     const result = new AstNodeList()
     for (const node of mdAST) {
       // determine the current line we are on
-      let currentLine = Math.max(parentLine, (node.map || [[0]])[0])
+      let currentLine = Math.max((node.map || [[0]])[0] + 1, parentLine)
 
       // special handling for images
       if (node.type === "image") {
         const standardized = this.standardizeNode(
           node,
           this.filepath,
-          currentLine + parentLine - 1
+          currentLine
         )
         result.push(...standardized)
         continue
@@ -58,7 +58,7 @@ export default class MarkdownItAstStandardizer {
       if (node.children) {
         const standardizedChildNodes = this.standardizeAST(
           node.children,
-          currentLine + parentLine - 1
+          currentLine
         )
         result.push(...standardizedChildNodes)
         continue
@@ -74,7 +74,7 @@ export default class MarkdownItAstStandardizer {
       const standardizedNode = this.standardizeNode(
         node,
         this.filepath,
-        currentLine + parentLine - 1
+        currentLine
       )
       result.push(...standardizedNode)
     }

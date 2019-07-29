@@ -78,6 +78,9 @@ export default class MarkdownItAstStandardizer {
   ): AstNodeList {
     const result = new AstNodeList()
     console.log(mdNode)
+    if (mdNode.type === "text" && mdNode.content === "") {
+      return result
+    }
     if (
       mdNode.type.endsWith("_open") ||
       mdNode.type.endsWith("_close") ||

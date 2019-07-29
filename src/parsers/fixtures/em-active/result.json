@@ -31,9 +31,7 @@
     "file": "src/parsers/fixtures/em-active/input.*",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   },
   {
     "type": "paragraph_close",

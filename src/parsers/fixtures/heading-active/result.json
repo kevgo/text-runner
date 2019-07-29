@@ -23,8 +23,6 @@
     "file": "src/parsers/fixtures/heading-active/input.*",
     "line": 1,
     "content": "",
-    "attributes": {
-      "textrun": "foo"
-    }
+    "attributes": {}
   }
 ]

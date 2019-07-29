@@ -4,6 +4,7 @@ import { AstNode, AstNodeAttributes } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
+import { OpenNodeTracker } from "./open-node-tracker"
 
 /**
  * MarkdownItAstStandardizer converts an AST created by MarkdownIt
@@ -23,12 +24,15 @@ export default class MarkdownItAstStandardizer {
 
   tagMapper: TagMapper
 
+  openNodeTracker: OpenNodeTracker
+
   constructor(mdAST: any, filepath: AbsoluteFilePath) {
     this.mdAst = mdAST
     this.filepath = filepath
     this.htmlParser = new HTMLParser()
     this.closingTagParser = new ClosingTagParser()
     this.tagMapper = new TagMapper()
+    this.openNodeTracker = new OpenNodeTracker()
   }
 
   /** returns the standardized AST for the MarkdownIt-based AST given in the constructor */
@@ -235,12 +239,44 @@ export default class MarkdownItAstStandardizer {
       return result
     }
 
-    // handle opening/closing and text nodes
-    if (
-      mdNode.type.endsWith("_open") ||
-      mdNode.type.endsWith("_close") ||
-      mdNode.type === "text"
-    ) {
+    // handle opening nodes
+    if (mdNode.type.endsWith("_open")) {
+      this.openNodeTracker.open(mdNode)
+      result.push(
+        new AstNode({
+          attributes: mdNode.attrs || {},
+          content: mdNode.content.trim(),
+          file,
+          line,
+          tag: this.tagMapper.tagForType(mdNode.type),
+          type: mdNode.type
+        })
+      )
+      return result
+    }
+
+    // handle closing nodes
+    if (mdNode.type.endsWith("_close")) {
+      const openingNode = this.openNodeTracker.close(mdNode, file, line)
+      let closingTagLine = line
+      if (openingNode.map) {
+        closingTagLine = openingNode.map[1]
+      }
+      result.push(
+        new AstNode({
+          attributes: mdNode.attrs || {},
+          content: mdNode.content.trim(),
+          file,
+          line: closingTagLine,
+          tag: this.tagMapper.tagForType(mdNode.type),
+          type: mdNode.type
+        })
+      )
+      return result
+    }
+
+    // handle text nodes
+    if (mdNode.type === "text") {
       result.push(
         new AstNode({
           attributes: mdNode.attrs || {},

@@ -12,6 +12,7 @@ Feature: running inline blocks of Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-javascript">
+
       ```
       console.log('A foo walks into a bar')
       ```
@@ -32,6 +33,7 @@ Feature: running inline blocks of Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-javascript">
+
       ```
       setTimeout(function() {
         console.log('A foo walks into a bar')
@@ -55,6 +57,7 @@ Feature: running inline blocks of Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-javascript">
+
       ```
       setTimeout(<CALLBACK>, 1)
       ```
@@ -71,6 +74,7 @@ Feature: running inline blocks of Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-javascript">
+
       ```
       const foo = 'bar'
       ```
@@ -115,6 +119,7 @@ Feature: running inline blocks of Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-javascript">
+
       ```
       console.log('one')
       ```

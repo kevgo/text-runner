@@ -13,6 +13,7 @@ Feature: running inline blocks of asynchronous Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-async-javascript">
+
       ```
       async function test() {
         console.log('A foo walks into a bar')
@@ -50,6 +51,7 @@ Feature: running inline blocks of asynchronous Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-async-javascript">
+
       ```
       console.log('one')
       ```

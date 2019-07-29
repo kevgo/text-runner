@@ -1,3 +1,4 @@
+@debug
 Feature: creating files with content
 
   As a documentation writer
@@ -13,7 +14,9 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       creating a file with name _one.txt_ and content `Hello world!`
+
       </a>
       """
     When running "text-run --keep-tmp"

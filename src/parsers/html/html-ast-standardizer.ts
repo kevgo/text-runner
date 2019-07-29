@@ -80,7 +80,7 @@ export class HtmlAstStandardizer {
             attributes: {},
             content: "",
             file,
-            line: node.sourceCodeLocation.startLine + startingLine - 1,
+            line: node.sourceCodeLocation.endLine + startingLine - 1,
             tag,
             type: this.tagMapper.typeForTag(tag, attributes)
           })

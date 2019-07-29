@@ -11,7 +11,7 @@
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/pre/input.*",
-    "line": 1,
+    "line": 2,
     "content": "my code",
     "attributes": {}
   },
@@ -19,7 +19,7 @@
     "type": "fence_close",
     "tag": "/pre",
     "file": "src/parsers/fixtures/pre/input.*",
-    "line": 1,
+    "line": 3,
     "content": "",
     "attributes": {}
   }

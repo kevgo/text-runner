@@ -61,7 +61,7 @@
     "type": "paragraph_close",
     "tag": "/p",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 1,
+    "line": 3,
     "content": "",
     "attributes": {}
   },

@@ -196,7 +196,7 @@ export default class MarkdownItAstStandardizer {
           attributes: {},
           content: mdNode.content.trim(),
           file,
-          line,
+          line: line + 1, // content of fenced blocks has to start on the next line
           tag: "",
           type: "text"
         })
@@ -206,7 +206,7 @@ export default class MarkdownItAstStandardizer {
           attributes: {},
           content: "",
           file,
-          line,
+          line: mdNode.map[1],
           tag: "/pre",
           type: "fence_close"
         })

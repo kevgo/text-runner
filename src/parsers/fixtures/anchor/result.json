@@ -32,10 +32,7 @@
     "file": "src/parsers/fixtures/anchor/input.*",
     "line": 1,
     "content": "",
-    "attributes": {
-      "name": "foo",
-      "textrun": "bar"
-    }
+    "attributes": {}
   },
   {
     "type": "paragraph_close",

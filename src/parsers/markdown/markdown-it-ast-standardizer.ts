@@ -1,13 +1,17 @@
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { HTMLParser } from "../html/html-parser"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
-import { HTMLParser } from "../html/html-parser"
+import { TagMapper } from "../tag-mapper"
+import { ClosingTagParser } from "./closing-tag-parser"
 
 /**
  * MarkdownItAstStandardizer converts an AST created by MarkdownIt
  * into the standardized AST format.
  */
 export default class MarkdownItAstStandardizer {
+  closingTagParser: ClosingTagParser
+
   /** the MarkdownIt AST to convert */
   mdAst: any
 
@@ -17,10 +21,14 @@ export default class MarkdownItAstStandardizer {
   /** parses HTML snippets into AstNodeLists */
   htmlParser: HTMLParser
 
+  tagMapper: TagMapper
+
   constructor(mdAST: any, filepath: AbsoluteFilePath) {
     this.mdAst = mdAST
     this.filepath = filepath
     this.htmlParser = new HTMLParser()
+    this.closingTagParser = new ClosingTagParser()
+    this.tagMapper = new TagMapper()
   }
 
   /** returns the standardized AST for the MarkdownIt-based AST given in the constructor */
@@ -81,21 +89,29 @@ export default class MarkdownItAstStandardizer {
           content: mdNode.content,
           file,
           line,
-          tag: mdNode.tag,
+          tag: this.tagMapper.tagForType(mdNode.type),
           type: mdNode.type
         })
       )
       return result
     }
     if (mdNode.type === "html_inline") {
-      const mdNodes = this.htmlParser.parseInline(
-        mdNode.content,
-        file,
-        line,
-        true
-      )
-      console.log(333333333, mdNodes)
-      result.push(...mdNodes)
+      if (this.closingTagParser.isClosingTag(mdNode.content)) {
+        const closingTagNodes = this.closingTagParser.parse(
+          mdNode.content,
+          file,
+          line
+        )
+        result.push(...closingTagNodes)
+      } else {
+        const mdNodes = this.htmlParser.parseInline(
+          mdNode.content,
+          file,
+          line,
+          true
+        )
+        result.push(...mdNodes)
+      }
       return result
     }
     throw new Error(`unknown node: ${mdNode.type}`)

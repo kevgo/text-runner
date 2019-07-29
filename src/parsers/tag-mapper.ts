@@ -61,6 +61,11 @@ export class TagMapper {
 
   /** Returns the HTML tag for the given Remarkable type. */
   tagForType(type: string): string {
+    // handle text tag
+    if (type === "text") {
+      return ""
+    }
+
     // handle explicitly mapped values
     if (this.typeTagMappings.hasOwnProperty(type)) {
       return this.typeTagMappings[type]

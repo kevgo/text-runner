@@ -54,6 +54,10 @@ describe("TagMapper", () => {
     it("maps unknown standalone tags", () => {
       expect(tagMapper.tagForType("foo")).to.equal("foo")
     })
+
+    it("maps text tags", () => {
+      expect(tagMapper.tagForType("text")).to.equal("")
+    })
   })
 
   describe(".typeForTag()", () => {

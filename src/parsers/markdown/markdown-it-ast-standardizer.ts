@@ -229,12 +229,7 @@ export default class MarkdownItAstStandardizer {
         )
         result.push(...closingTagNodes)
       } else {
-        const mdNodes = this.htmlParser.parseInline(
-          mdNode.content,
-          file,
-          line,
-          true
-        )
+        const mdNodes = this.htmlParser.parseInline(mdNode.content, file, line)
         result.push(...mdNodes)
       }
       return result

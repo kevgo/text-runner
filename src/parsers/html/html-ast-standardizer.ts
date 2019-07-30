@@ -15,9 +15,7 @@ export class HtmlAstStandardizer {
   standardizeDocument(
     htmlAst: any,
     file: AbsoluteFilePath,
-    startingLine: number,
-    // @ts-ignore
-    inline: boolean
+    startingLine: number = 1
   ): AstNodeList {
     const result = new AstNodeList()
     const htmlNode = htmlAst.childNodes.filter(

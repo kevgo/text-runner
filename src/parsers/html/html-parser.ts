@@ -24,23 +24,17 @@ export class HTMLParser implements DocumentsParser {
     const content = await fs.readFile(filename.platformified(), {
       encoding: "utf8"
     })
-    return this.parseInline(content, filename, 1, false)
+    return this.parseInline(content, filename, 1)
   }
 
   parseInline(
     text: string,
     file: AbsoluteFilePath,
-    startingLine: number,
-    inline: boolean
+    startingLine: number
   ): AstNodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true
     })
-    return this.standardizer.standardizeDocument(
-      htmlAst,
-      file,
-      startingLine,
-      inline
-    )
+    return this.standardizer.standardizeDocument(htmlAst, file, startingLine)
   }
 }

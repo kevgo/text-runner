@@ -36,7 +36,7 @@ describe("HtmlParser", function() {
       const htmlParser = new HTMLParser()
       const file = new AbsoluteFilePath("foo.html")
       const content = "hello"
-      const parsed = htmlParser.parseInline(content, file, 5, true)
+      const parsed = htmlParser.parseInline(content, file, 5)
       assert.deepEqual(parsed[0].line, 5)
     })
   })

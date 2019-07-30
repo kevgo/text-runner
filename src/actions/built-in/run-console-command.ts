@@ -31,8 +31,8 @@ export default async function runConsoleCommand(args: ActionArgs) {
   if (commandsToRun === "") {
     throw new Error("the block that defines console commands to run is empty")
   }
-
   args.name(`running console command: ${color.cyan(commandsToRun)}`)
+
   let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes)

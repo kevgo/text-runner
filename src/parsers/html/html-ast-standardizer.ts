@@ -12,6 +12,12 @@ export class HtmlAstStandardizer {
     this.tagMapper = new TagMapper()
   }
 
+  /**
+   * StandardizeDocument converts the given MarkdownIt AST into the standardized AST.
+   *
+   * @param startingLine The line at which this HTML snippet is located in the source document.
+   *                     This parameter only applies for HTML snippets that are embedded in Markdown documents.
+   */
   standardizeDocument(
     htmlAst: any,
     file: AbsoluteFilePath,
@@ -53,12 +59,24 @@ export class HtmlAstStandardizer {
 
     // handle open-close tags
     if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
+      let startLine = startingLine
+      if (node.sourceCodeLocation) {
+        startLine += node.sourceCodeLocation.startLine - 1
+      } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
+        startLine += node.parentNode.sourceCodeLocation.startLine
+      }
+      let endLine = startingLine
+      if (node.sourceCodeLocation) {
+        endLine += node.sourceCodeLocation.endLine - 1
+      } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
+        endLine += node.parentNode.sourceCodeLocation.endLine
+      }
       result.push(
         new AstNode({
           attributes,
           content: "",
           file,
-          line: node.sourceCodeLocation.startLine + startingLine - 1,
+          line: startLine,
           tag: node.tagName,
           type: this.tagMapper.openingTypeForTag(node.tagName, attributes)
         })
@@ -71,14 +89,14 @@ export class HtmlAstStandardizer {
         )
         result.push(...standardizedChildNodes)
       }
-      if (node.sourceCodeLocation.endTag) {
+      if (node.sourceCodeLocation && node.sourceCodeLocation.endTag) {
         const tag = "/" + node.tagName
         result.push(
           new AstNode({
             attributes: {},
             content: "",
             file,
-            line: node.sourceCodeLocation.endLine + startingLine - 1,
+            line: endLine,
             tag,
             type: this.tagMapper.typeForTag(tag, attributes)
           })

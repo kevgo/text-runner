@@ -94,6 +94,14 @@
     "content": "",
     "file": "src/parsers/markdown/fixtures/user-input/input.md",
     "line": 12,
+    "tag": "/tbody",
+    "type": "tbody_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 12,
     "tag": "/table",
     "type": "table_close"
   },

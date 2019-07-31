@@ -65,12 +65,6 @@ export class HtmlAstStandardizer {
       } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
         startLine += node.parentNode.sourceCodeLocation.startLine
       }
-      let endLine = startingLine
-      if (node.sourceCodeLocation) {
-        endLine += node.sourceCodeLocation.endLine - 1
-      } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
-        endLine += node.parentNode.sourceCodeLocation.endLine
-      }
       result.push(
         new AstNode({
           attributes,
@@ -89,7 +83,18 @@ export class HtmlAstStandardizer {
         )
         result.push(...standardizedChildNodes)
       }
-      if (node.sourceCodeLocation && node.sourceCodeLocation.endTag) {
+      let endLine: number
+      if (node.sourceCodeLocation) {
+        endLine = node.sourceCodeLocation.endLine + startingLine - 1
+      } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
+        endLine = node.parentNode.sourceCodeLocation.endLine + startingLine - 1
+      } else {
+        throw new Error(`cannot determine end line for node ${node}`)
+      }
+      if (
+        !node.sourceCodeLocation ||
+        (node.sourceCodeLocation && node.sourceCodeLocation.endTag)
+      ) {
         const tag = "/" + node.tagName
         result.push(
           new AstNode({

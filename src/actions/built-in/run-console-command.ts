@@ -51,6 +51,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
 }
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
+  // TODO: reduce redundancy
   if (!input.textToWait) {
     processor.stdin.write(input.input + "\n")
   } else {
@@ -74,6 +75,10 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
       continue
     }
     const tdNode = trContent.getNodesOfTypes("td_open")
+    if (tdNode.length === 0) {
+      // no TD found, possibly because there are THs --> ignore
+      continue
+    }
     if (tdNode.length === 1) {
       // single-column table, use that column
       const text = trContent.textInNode(tdNode[0])
@@ -81,8 +86,8 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
     } else {
       // multi-colum table, use the last column
       result.push({
-        input: tdNode[tdNode.length - 1].content,
-        textToWait: trContent.textInNode(tdNode[tdNode.length - 1])
+        input: trContent.textInNode(tdNode[tdNode.length - 1]),
+        textToWait: trContent.textInNode(tdNode[0])
       })
     }
   }

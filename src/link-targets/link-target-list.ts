@@ -18,7 +18,7 @@ export class LinkTargetList {
       this.targets[key] = this.targets[key] || []
       if (node.type === "anchor_open") {
         this.addAnchor(node)
-      } else if (node.type === "heading_open") {
+      } else if (/h[1-6]_open/.test(node.type)) {
         this.addHeading(node, nodeList)
       }
     }

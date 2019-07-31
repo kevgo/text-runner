@@ -99,12 +99,15 @@ export default class MarkdownItAstStandardizer {
       return result
     }
 
-    // handle images
-    if (mdNode.type === "image") {
-      const attributes: AstNodeAttributes = {}
+    const attributes: AstNodeAttributes = {}
+    if (mdNode.attrs) {
       for (const [name, value] of mdNode.attrs) {
         attributes[name] = value
       }
+    }
+
+    // handle images
+    if (mdNode.type === "image") {
       for (const childNode of mdNode.children) {
         attributes.alt += childNode.content
       }
@@ -125,7 +128,7 @@ export default class MarkdownItAstStandardizer {
     if (mdNode.type === "heading_open") {
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: "",
           file,
           line,
@@ -138,7 +141,7 @@ export default class MarkdownItAstStandardizer {
     if (mdNode.type === "heading_close") {
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: "",
           file,
           line,
@@ -153,7 +156,7 @@ export default class MarkdownItAstStandardizer {
     if (mdNode.type === "code_inline") {
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: "",
           file,
           line,
@@ -163,7 +166,7 @@ export default class MarkdownItAstStandardizer {
       )
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: mdNode.content,
           file,
           line,
@@ -173,7 +176,7 @@ export default class MarkdownItAstStandardizer {
       )
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: "",
           file,
           line,
@@ -188,7 +191,7 @@ export default class MarkdownItAstStandardizer {
     if (mdNode.type === "fence") {
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: "",
           file,
           line,
@@ -198,7 +201,7 @@ export default class MarkdownItAstStandardizer {
       )
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: mdNode.content.trim(),
           file,
           line: line + 1, // content of fenced blocks has to start on the next line
@@ -208,7 +211,7 @@ export default class MarkdownItAstStandardizer {
       )
       result.push(
         new AstNode({
-          attributes: {},
+          attributes,
           content: "",
           file,
           line: mdNode.map[1],
@@ -240,7 +243,7 @@ export default class MarkdownItAstStandardizer {
       this.openNodeTracker.open(mdNode)
       result.push(
         new AstNode({
-          attributes: mdNode.attrs || {},
+          attributes,
           content: mdNode.content.trim(),
           file,
           line,
@@ -260,7 +263,7 @@ export default class MarkdownItAstStandardizer {
       }
       result.push(
         new AstNode({
-          attributes: mdNode.attrs || {},
+          attributes,
           content: mdNode.content.trim(),
           file,
           line: closingTagLine,
@@ -275,7 +278,7 @@ export default class MarkdownItAstStandardizer {
     if (mdNode.type === "text") {
       result.push(
         new AstNode({
-          attributes: mdNode.attrs || {},
+          attributes,
           content: mdNode.content.trim(),
           file,
           line,

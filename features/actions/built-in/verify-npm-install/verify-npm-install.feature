@@ -22,6 +22,7 @@ Feature: verifying NPM installation instructions
       To install, run:
 
       <a textrun="verify-npm-install">
+
       ```
       $ npm i -g my_enormous_package
       ```
@@ -52,6 +53,7 @@ Feature: verifying NPM installation instructions
       To install, run:
 
       <a textrun="verify-npm-install">
+
       ```
       npm i -g zonk
       ```
@@ -87,6 +89,7 @@ Feature: verifying NPM installation instructions
       To install, run:
 
       <a textrun="verify-npm-install">
+
       ```
       npm i
       ```

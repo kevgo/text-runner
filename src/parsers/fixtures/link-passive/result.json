@@ -1,0 +1,42 @@
+[
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/link-passive/input.*",
+    "line": 1,
+    "tag": "p",
+    "type": "paragraph_open"
+  },
+  {
+    "attributes": { "href": "link-target.md" },
+    "content": "",
+    "file": "src/parsers/fixtures/link-passive/input.*",
+    "line": 1,
+    "tag": "a",
+    "type": "link_open"
+  },
+  {
+    "attributes": {},
+    "content": "link title",
+    "file": "src/parsers/fixtures/link-passive/input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/link-passive/input.*",
+    "line": 1,
+    "tag": "/a",
+    "type": "link_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/link-passive/input.*",
+    "line": 1,
+    "tag": "/p",
+    "type": "paragraph_close"
+  }
+]

@@ -14,6 +14,7 @@ Feature: verifying the output of the last console command
     Given my source code contains the file "verify-output.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       echo one
       echo two
@@ -22,6 +23,7 @@ Feature: verifying the output of the last console command
       </a>
 
       <a textrun="verify-console-command-output">
+
       ```
       one
       three
@@ -31,5 +33,5 @@ Feature: verifying the output of the last console command
     When running text-run
     Then it signals:
       | FILENAME | verify-output.md                                     |
-      | LINE     | 9                                                    |
+      | LINE     | 10                                                   |
       | MESSAGE  | verifying the output of the last run console command |

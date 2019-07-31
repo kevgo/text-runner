@@ -20,6 +20,7 @@ Feature: verifying file content
     Given my source code contains the file "01.md" with content:
       """
       <a textrun="verify-workspace-file-content">
+
       _hello.txt_ with content `Hello world!`
       </a>
       """
@@ -34,6 +35,7 @@ Feature: verifying file content
     Given my source code contains the file "01.md" with content:
       """
       <a textrun="verify-workspace-file-content">
+
       __hello.txt__
 
       ```
@@ -52,6 +54,7 @@ Feature: verifying file content
     Given my source code contains the file "01.md" with content:
       """
       <a textrun="verify-workspace-file-content">
+
       __hello.txt__
 
       ```
@@ -71,6 +74,7 @@ Feature: verifying file content
     Given my source code contains the file "01.md" with content:
       """
       <a textrun="verify-workspace-file-content">
+
       __zonk.txt__
 
       `Hello world!`

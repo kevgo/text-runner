@@ -13,7 +13,7 @@ export class MdParser implements DocumentsParser {
   constructor() {
     this.markdownIt = new MarkdownIt({
       html: true,
-      linkify: true
+      linkify: false
     })
   }
 

@@ -81,6 +81,7 @@ Feature: running inline blocks of Javascript
       </a>
 
       <a textrun="run-javascript">
+
       ```
       console.log('A foo walks into a ' + foo)
       ```
@@ -93,7 +94,7 @@ Feature: running inline blocks of Javascript
       | MESSAGE  | Run javascript |
     And it signals:
       | FILENAME | 1.md           |
-      | LINE     | 7              |
+      | LINE     | 8              |
       | MESSAGE  | Run javascript |
     Then it prints:
       """

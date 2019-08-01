@@ -130,6 +130,7 @@ lint: # lints all files
 		grep -v documentation/built-in-actions/verify_console_command_output.md | \
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
+		grep -v fixtures \
 		xargs node_modules/.bin/prettier -c
 	node_modules$/.bin$/remark . --quiet
 

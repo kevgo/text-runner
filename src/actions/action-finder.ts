@@ -74,6 +74,7 @@ class ActionFinder {
 
   private loadCustomActions(): FunctionRepo {
     const result: FunctionRepo = {}
+    // TODO remove
     require("babel-register")
     for (const filename of this.customActionFilePaths()) {
       rechoir.prepare(interpret.jsVariants, filename)

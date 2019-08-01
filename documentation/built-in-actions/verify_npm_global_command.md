@@ -8,7 +8,7 @@ documenation.
 
 <a textrun="create-file">
 
-Assuming our __package.json__ file looks like this:
+Assuming our **package.json** file looks like this:
 
 ```json
 {
@@ -35,6 +35,7 @@ $ foo
 `​``
 </a>
 ```
+
 </a>
 
 #### More info

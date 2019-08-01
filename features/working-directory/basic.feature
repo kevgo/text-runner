@@ -15,6 +15,7 @@ Feature: separate working directory
     Given my workspace contains the file "1.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       pwd
       ```

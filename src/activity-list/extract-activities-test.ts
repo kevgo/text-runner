@@ -2,32 +2,29 @@ import { expect } from "chai"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { extractActivities } from "./extract-activities"
 
-describe("extract-activities", function() {
-  it("extracts activities", function() {
-    const AST = new AstNodeList()
-    AST.pushNode({
+describe("extractActivities()", function() {
+  it("extracts all activities from the given AstNodeList", function() {
+    const input = new AstNodeList()
+    input.pushNode({
       attributes: { textrun: "verify-foo" },
       file: "README.md",
       line: 3,
       type: "anchor_open"
     })
-    AST.pushNode({ type: "text" })
-    AST.pushNode({ type: "anchor_close" })
-    const result = extractActivities([AST], "textrun")
+    input.pushNode({ type: "text" })
+    input.pushNode({ type: "anchor_close" })
+    const result = extractActivities([input], "textrun")
     expect(result).to.have.length(1)
     expect(result[0].actionName).to.equal("verify-foo")
     expect(result[0].file.unixified()).to.equal("README.md")
     expect(result[0].line).to.equal(3)
-    expect(result[0].nodes).to.eql(AST)
+    expect(result[0].nodes).to.eql(input)
   })
 
   it("normalizes action names in CamelCase", function() {
     const AST = new AstNodeList()
     AST.pushNode({
-      attributes: { textrun: "verifyFoo" },
-      file: "README.md",
-      line: 3,
-      type: "anchor_open"
+      attributes: { textrun: "verifyFoo" }
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")

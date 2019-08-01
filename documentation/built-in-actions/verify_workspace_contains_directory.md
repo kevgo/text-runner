@@ -9,11 +9,11 @@ source code.
 
 ```markdown
 Assuming your test workspace contains a
-<code textrun="create-directory">foo</code>
-directory,
-you can use this code to verify that it exists:
+<code textrun="create-directory">foo</code> directory, you can use this code to
+verify that it exists:
 <code textrun="verify-workspace-contains-directory">foo</code>
 ```
+
 </a>
 
 #### More info

@@ -50,13 +50,7 @@ export class TagMapper {
 
   /** Returns the opening Remarkable type for the given HTML tag. */
   openingTypeForTag(tagName: string, attributes: AstNodeAttributes) {
-    if (tagName.startsWith("/")) {
-      tagName = tagName.substring(1)
-    }
-    if (tagName === "a" && !attributes.href) {
-      return "anchor_open"
-    }
-    return this.typeForTag(tagName, attributes)
+    return this.typeForTag(tagName.replace(/^\//, ""), attributes)
   }
 
   /** Returns the HTML tag for the given Remarkable type. */

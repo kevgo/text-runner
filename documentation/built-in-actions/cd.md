@@ -23,4 +23,3 @@ click to see it.
 
 - [feature specs](../../features/actions/built-in/cd/cd.feature)
 - [source code](../../src/actions/built-in/cd.ts)
-```

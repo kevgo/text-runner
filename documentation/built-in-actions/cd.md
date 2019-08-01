@@ -8,18 +8,16 @@ points to.
 <a textrun="run-markdown-in-textrun">
 
 ```markdown
-
-Assuming the workspace contains a <code textrun="create-directory">foo</code> directory,
-you can change into it via this Markdown code:
+Assuming the workspace contains a <code textrun="create-directory">foo</code>
+directory, you can change into it via this Markdown code:
 
 <code textrun="cd">foo</code>
-
 ```
+
 </a>
 
-The directory path should be a link
-so that readers of your documentation can click to see it.
-
+The directory path should be a link so that readers of your documentation can
+click to see it.
 
 #### More info
 

@@ -29,7 +29,7 @@
     "observable-process": "7.0.0",
     "parse5": "5.1.0",
     "rechoir": "0.7.0",
-    "remarkable": "1.7.1",
+    "remarkable": "1.7.2",
     "rimraf": "2.6.3",
     "tmp-promise": "2.0.2",
     "to-space-case": "1.0.0",

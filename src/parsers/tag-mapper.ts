@@ -27,6 +27,7 @@ export class TagMapper {
 
   /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
   private static readonly STANDALONE_MAPPINGS: Mappings = {
+    hr: "hr",
     image: "img"
   }
 
@@ -45,7 +46,11 @@ export class TagMapper {
     if (tagName === "#text") {
       return false
     }
-    return !Object.values(TagMapper.STANDALONE_MAPPINGS).includes(tagName)
+    return !this.isStandaloneTag(tagName)
+  }
+
+  isStandaloneTag(tagName: string): boolean {
+    return Object.values(TagMapper.STANDALONE_MAPPINGS).includes(tagName)
   }
 
   /** Returns the opening Remarkable type for the given HTML tag. */

@@ -152,7 +152,7 @@ export default class MarkdownItAstStandardizer {
       return result
     }
 
-    // handle code blocks
+    // handle code_inline blocks
     if (mdNode.type === "code_inline") {
       result.push(
         new AstNode({
@@ -289,6 +289,22 @@ export default class MarkdownItAstStandardizer {
       return result
     }
 
+    // handle all known stand-alone tags
+    if (this.tagMapper.isStandaloneTag(mdNode.tag)) {
+      result.push(
+        new AstNode({
+          attributes,
+          content: mdNode.content.trim(),
+          file,
+          line,
+          tag: mdNode.tag,
+          type: mdNode.type
+        })
+      )
+      return result
+    }
+
+    console.log(mdNode)
     throw new Error(`unknown RemarkableIt node type: ${mdNode.type}`)
   }
 

@@ -11,12 +11,14 @@ Feature: running a single MarkDown file
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="verify-workspace-contains-directory">
+
       `.`
       </a>
       """
     And my source code contains the file "2.md" with content:
       """
       <a textrun="verify-workspace-contains-directory">
+
       `.`
       </a>
       """

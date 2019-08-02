@@ -1,6 +1,6 @@
 import { strict as assert } from "assert"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNode } from "../standard-AST/ast-node"
+import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
+import { AstNode } from "../../standard-AST/ast-node"
 import { OpenNodeTracker } from "./open-node-tracker"
 
 describe("OpenTagTracker", function() {

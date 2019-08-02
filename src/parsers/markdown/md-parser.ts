@@ -4,8 +4,8 @@ import { HTMLParser } from "../html/html-parser"
 import { AstNode, AstNodeAttributes } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
-import { ClosingTagParser } from "./closing-tag-parser"
-import { OpenNodeTracker } from "./open-node-tracker"
+import { ClosingTagParser } from "./helpers/closing-tag-parser"
+import { OpenNodeTracker } from "./helpers/open-node-tracker"
 
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MarkdownParser {

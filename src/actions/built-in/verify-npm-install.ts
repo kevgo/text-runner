@@ -1,12 +1,12 @@
 import color from "colorette"
-import jsonfile from "jsonfile"
+import fs from "fs-extra"
 import path from "path"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "../types/action-args"
 
 export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
-  const pkg = await jsonfile.readFile(
+  const pkg = await fs.readJSON(
     path.join(args.configuration.sourceDir, "package.json")
   )
   args.name(`verify NPM installs ${color.cyan(pkg.name)}`)

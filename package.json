@@ -30,7 +30,6 @@
     "remarkable": "1.7.1",
     "rimraf": "2.6.3",
     "tmp-promise": "2.0.2",
-    "to-space-case": "1.0.0",
     "xml2js": "0.4.19",
     "yamljs": "0.3.0"
   },

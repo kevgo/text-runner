@@ -83,18 +83,23 @@ export class MarkdownParser {
     if (mdNode.type === "text" && mdNode.content === "") {
       return new AstNodeList()
     }
+
     if (mdNode.type === "heading_open") {
       return this.standardizeHeadingOpen(mdNode, file, line)
     }
+
     if (mdNode.type === "heading_close") {
       return this.standardizeHeadingClose(mdNode, file, line)
     }
+
     if (mdNode.type === "code_inline") {
       return this.standardizeCodeInline(mdNode, file, line)
     }
+
     if (mdNode.type === "fence") {
       return this.standardizeFence(mdNode, file, line)
     }
+
     if (mdNode.type === "html_inline" || mdNode.type === "html_block") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
         return this.standardizeClosingHTMLTag(mdNode, file, line)
@@ -102,15 +107,19 @@ export class MarkdownParser {
         return this.standardizeHTMLBlock(mdNode, file, line)
       }
     }
+
     if (mdNode.type.endsWith("_open")) {
       return this.standardizeOpeningNode(mdNode, file, line, ont)
     }
+
     if (mdNode.type.endsWith("_close")) {
       return this.standardizeClosingNode(mdNode, file, line, ont)
     }
+
     if (mdNode.type === "text") {
       return this.standardizeTextNode(mdNode, file, line)
     }
+
     if (this.tagMapper.isStandaloneTag(mdNode.tag)) {
       return this.standizeStandaloneTag(mdNode, file, line)
     }

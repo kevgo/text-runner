@@ -45,32 +45,28 @@ export class MarkdownParser {
     ont: OpenNodeTracker
   ) {
     const result = new AstNodeList()
-    let line = parentLine
+    let currentLine = parentLine
     for (const node of mdAST) {
-      // determine the current line we are on
-      line = Math.max((node.map || [[0]])[0] + 1, line)
+      currentLine = Math.max((node.map || [[0]])[0] + 1, currentLine)
 
-      // special handling for images
       if (node.type === "image") {
-        result.push(...this.standardizeNode(node, file, line, ont))
+        result.push(...this.standardizeNode(node, file, currentLine, ont))
         continue
       }
 
-      // handle node with children
       if (node.children) {
-        result.push(...this.standardizeAST(node.children, file, line, ont))
+        result.push(
+          ...this.standardizeAST(node.children, file, currentLine, ont)
+        )
         continue
       }
 
-      // handle softbreak
       if (node.type === "softbreak") {
-        line += 1
+        currentLine += 1
         continue
       }
 
-      // handle node without children
-      const standardizedNode = this.standardizeNode(node, file, line, ont)
-      result.push(...standardizedNode)
+      result.push(...this.standardizeNode(node, file, currentLine, ont))
     }
     return result
   }

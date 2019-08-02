@@ -24,7 +24,6 @@
     "humanize-string": "2.1.0",
     "interpret": "1.2.0",
     "is-glob": "4.0.1",
-    "jsonfile": "5.0.0",
     "minimist": "1.2.0",
     "observable-process": "7.0.0",
     "parse5": "5.1.0",

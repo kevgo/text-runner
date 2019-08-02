@@ -137,7 +137,7 @@ lint: # lints all files
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
 		grep -v fixtures | \
-		xargs node_modules/.bin/prettier -c
+		xargs node_modules/.bin/prettier --check
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

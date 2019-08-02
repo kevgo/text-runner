@@ -8,7 +8,7 @@ import MarkdownItAstStandardizer from "./markdown-it-ast-standardizer"
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MdParser implements DocumentsParser {
   /** Markdown parser instance */
-  markdownIt: MarkdownIt
+  private readonly markdownIt: MarkdownIt
 
   constructor() {
     this.markdownIt = new MarkdownIt({

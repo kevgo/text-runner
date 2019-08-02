@@ -1,6 +1,7 @@
 import { strict as assert } from "assert"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNodeList } from "../standard-AST/ast-node-list"
+import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
 
 describe("ClosingTagParser", function() {
@@ -11,7 +12,7 @@ describe("ClosingTagParser", function() {
       "</a>": true,
       "<a>": false
     }
-    const parser = new ClosingTagParser()
+    const parser = new ClosingTagParser(new TagMapper())
     for (const [input, expected] of Object.entries(testData)) {
       it(`'${input}' --> ${expected}`, function() {
         assert.equal(parser.isClosingTag(input), expected)
@@ -20,7 +21,7 @@ describe("ClosingTagParser", function() {
   })
 
   describe(".parse()", function() {
-    const parser = new ClosingTagParser()
+    const parser = new ClosingTagParser(new TagMapper())
     const file = new AbsoluteFilePath("filepath")
     const line = 12
     const actual = parser.parse("  < / a >  ", file, line)

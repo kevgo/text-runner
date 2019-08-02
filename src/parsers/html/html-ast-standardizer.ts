@@ -6,10 +6,10 @@ import { TagMapper } from "../tag-mapper"
 
 /** HtmlAstStandardizer converts HTML5 ASTs into standardized ASTs. */
 export class HtmlAstStandardizer {
-  tagMapper: TagMapper
+  private readonly tagMapper: TagMapper
 
-  constructor() {
-    this.tagMapper = new TagMapper()
+  constructor(tagMapper: TagMapper) {
+    this.tagMapper = tagMapper
   }
 
   /**

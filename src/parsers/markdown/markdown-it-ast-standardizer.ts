@@ -11,27 +11,27 @@ import { OpenNodeTracker } from "./open-node-tracker"
  * into the standardized AST format.
  */
 export default class MarkdownItAstStandardizer {
-  closingTagParser: ClosingTagParser
+  private readonly closingTagParser: ClosingTagParser
 
   /** the MarkdownIt AST to convert */
-  mdAst: any
+  private readonly mdAst: any
 
   /** the path of the file from which the MarkdownIt AST is from */
-  filepath: AbsoluteFilePath
+  private readonly filepath: AbsoluteFilePath
 
   /** parses HTML snippets into AstNodeLists */
-  htmlParser: HTMLParser
+  private readonly htmlParser: HTMLParser
 
-  tagMapper: TagMapper
+  private readonly tagMapper: TagMapper
 
-  openNodeTracker: OpenNodeTracker
+  private readonly openNodeTracker: OpenNodeTracker
 
   constructor(mdAST: any, filepath: AbsoluteFilePath) {
     this.mdAst = mdAST
     this.filepath = filepath
-    this.htmlParser = new HTMLParser()
-    this.closingTagParser = new ClosingTagParser()
     this.tagMapper = new TagMapper()
+    this.htmlParser = new HTMLParser(this.tagMapper)
+    this.closingTagParser = new ClosingTagParser(this.tagMapper)
     this.openNodeTracker = new OpenNodeTracker()
   }
 

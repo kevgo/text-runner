@@ -3,7 +3,7 @@ import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 
 /** helps find open MarkdownIt AST nodes */
 export class OpenNodeTracker {
-  nodes: any[]
+  private readonly nodes: any[]
 
   constructor() {
     this.nodes = []

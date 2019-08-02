@@ -3,13 +3,14 @@ import parse5 from "parse5"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { DocumentsParser } from "../document-parser"
 import { AstNodeList } from "../standard-AST/ast-node-list"
+import { TagMapper } from "../tag-mapper"
 import { HtmlAstStandardizer } from "./html-ast-standardizer"
 
 export class HTMLParser implements DocumentsParser {
-  standardizer: HtmlAstStandardizer
+  private readonly standardizer: HtmlAstStandardizer
 
-  constructor() {
-    this.standardizer = new HtmlAstStandardizer()
+  constructor(tagMapper: TagMapper) {
+    this.standardizer = new HtmlAstStandardizer(tagMapper)
   }
 
   async parseFiles(filenames: AbsoluteFilePath[]): Promise<AstNodeList[]> {

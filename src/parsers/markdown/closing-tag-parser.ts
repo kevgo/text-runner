@@ -4,13 +4,13 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 
 export class ClosingTagParser {
-  closingTagRE: RegExp
+  private readonly closingTagRE: RegExp
 
-  tagMapper: TagMapper
+  private readonly tagMapper: TagMapper
 
-  constructor() {
+  constructor(tagMapper: TagMapper) {
     this.closingTagRE = /^\s*<[ ]*(\/[ ]*\w+)[ ]*>\s*$/
-    this.tagMapper = new TagMapper()
+    this.tagMapper = tagMapper
   }
 
   /** Returns whether the given tag is a closing tag */

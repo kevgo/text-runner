@@ -24,6 +24,7 @@ Feature: verifying global commands provided by NPM modules
       To run this app, call:
 
       <a textrun="verify-npm-global-command">
+
       ```
       $ foo
       ```
@@ -54,6 +55,7 @@ Feature: verifying global commands provided by NPM modules
       To run this app, call:
 
       <a textrun="verify-npm-global-command">
+
       ```
       $ zonk
       ```

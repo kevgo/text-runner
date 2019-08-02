@@ -12,6 +12,7 @@
 
 ```markdown
 <a textrun="run-console-command">
+
 `​``
 $ echo "hello world"
 `​``
@@ -45,6 +46,7 @@ rl.question("Your name?", name => {
 
 ```markdown
 <a textrun="run-console-command">
+
 `​``
 $ node greeter.js
 `​``
@@ -71,9 +73,11 @@ descriptions and are also ignored.
 
 ```markdown
 <a textrun="run-console-command">
+
 `​``
 $ node greeter.js
 `​``
+
 <table>
   <tr>
     <th>question</th>

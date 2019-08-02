@@ -11,6 +11,7 @@ Feature: configuring the class prefix
     Given my source code contains the file "tr.md" with content:
       """
       <a textrun="run-javascript">
+
         ```
         console.log('running block with default class prefix')
         ```
@@ -19,6 +20,7 @@ Feature: configuring the class prefix
     And my source code contains the file "custom-prefix.md" with content:
       """
       <a custom="runJavascript">
+
         ```
         console.log('running block with custom class prefix')
         ```

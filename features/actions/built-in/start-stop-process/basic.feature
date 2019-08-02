@@ -31,13 +31,16 @@ Feature: long-running processes
       </a>
 
       <a textrun="verify-process-output">
+
       ```
       running
       ```
       </a>
 
       <a textrun="stop-process">
+
       Stop the current process by hitting Ctrl-C
+
       </a>
       """
     When running text-run
@@ -51,7 +54,7 @@ Feature: long-running processes
       | MESSAGE  | verifying the output of the long-running process |
     And it signals:
       | FILENAME | 1.md                              |
-      | LINE     | 14                                |
+      | LINE     | 15                                |
       | MESSAGE  | stopping the long-running process |
     And there are no child processes running
 
@@ -60,7 +63,9 @@ Feature: long-running processes
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="stop-process">
+
       There is no process running here
+
       </a>
       """
     When trying to run text-run

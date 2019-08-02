@@ -23,6 +23,7 @@ that specifies that we want to create a file:
 ## Creating a configuration file
 
 <a textrun="create-file">
+
 Please create a file with the name _config.yml_ and the content:
 `​``
 foo: bar

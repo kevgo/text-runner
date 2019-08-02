@@ -55,7 +55,7 @@ Feature: active table tags
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |
-      | LINE     | 1           |
+      | LINE     | 3           |
       | MESSAGE  | Hello world |
 
 
@@ -74,7 +74,7 @@ Feature: active table tags
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |
-      | LINE     | 1           |
+      | LINE     | 6           |
       | MESSAGE  | Hello world |
 
 
@@ -88,7 +88,7 @@ Feature: active table tags
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |
-      | LINE     | 1           |
+      | LINE     | 2           |
       | MESSAGE  | Hello world |
 
 
@@ -104,7 +104,7 @@ Feature: active table tags
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |
-      | LINE     | 1           |
+      | LINE     | 3           |
       | MESSAGE  | Hello world |
 
 
@@ -120,7 +120,7 @@ Feature: active table tags
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |
-      | LINE     | 1           |
+      | LINE     | 3           |
       | MESSAGE  | Hello world |
 
 
@@ -129,7 +129,7 @@ Feature: active table tags
       """
      | Keyboard shortcut                                    | Effect                        |
      | ---------------------------------------------------- | ----------------------------- |
-     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd>   | Toggle between .h/.m file     |
+     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd>  | Toggle between .h/.m file     |
      | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>     | Open Quickly (fuzzy find)     |
 
       """

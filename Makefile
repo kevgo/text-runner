@@ -126,11 +126,17 @@ lint: # lints all files
 				 -name '*node_modules*' -prune \) | \
 		grep -v '^./tmp/' | \
 		grep -v node_modules | \
+		grep -v documentation/how-it-works.md | \
+		grep -v documentation/built-in-actions/run_console_command.md | \
 		grep -v documentation/built-in-actions/run_javascript.md | \
 		grep -v documentation/built-in-actions/start_stop_process.md | \
+		grep -v documentation/built-in-actions/validate_javascript.md | \
 		grep -v documentation/built-in-actions/verify_console_command_output.md | \
+		grep -v documentation/built-in-actions/verify_npm_install.md | \
+		grep -v documentation/built-in-actions/verify_npm_global_command.md | \
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
+		grep -v fixtures | \
 		xargs node_modules/.bin/prettier -c
 
 test: lint unit cuke docs   # runs all tests

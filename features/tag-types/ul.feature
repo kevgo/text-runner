@@ -33,5 +33,5 @@ Feature: active UL tags
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |
-      | LINE     | 1           |
+      | LINE     | 2           |
       | MESSAGE  | Hello world |

@@ -1,0 +1,116 @@
+[
+  {
+    "attributes": {
+      "textrun": "run-console-command"
+    },
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 1,
+    "tag": "a",
+    "type": "anchor_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 3,
+    "tag": "pre",
+    "type": "fence_open"
+  },
+  {
+    "attributes": {},
+    "content": "$ read foo\n$ echo You entered: $foo",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 4,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 6,
+    "tag": "/pre",
+    "type": "fence_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 8,
+    "tag": "table",
+    "type": "table_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 9,
+    "tag": "tbody",
+    "type": "tbody_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 9,
+    "tag": "tr",
+    "type": "tr_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 10,
+    "tag": "td",
+    "type": "td_open"
+  },
+  {
+    "attributes": {},
+    "content": "123",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 10,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 10,
+    "tag": "/td",
+    "type": "td_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 11,
+    "tag": "/tr",
+    "type": "tr_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 12,
+    "tag": "/tbody",
+    "type": "tbody_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 12,
+    "tag": "/table",
+    "type": "table_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/user-input/input.md",
+    "line": 14,
+    "tag": "/a",
+    "type": "anchor_close"
+  }
+]

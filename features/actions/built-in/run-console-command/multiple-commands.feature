@@ -11,6 +11,7 @@ Feature: running multiple console commands
     Given my source code contains the file "running-multiple-commands.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       echo "hello"
       echo "world"
@@ -22,4 +23,3 @@ Feature: running multiple console commands
       | FILENAME | running-multiple-commands.md                          |
       | LINE     | 1                                                     |
       | MESSAGE  | running console command: echo "hello" && echo "world" |
-

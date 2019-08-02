@@ -14,6 +14,6 @@ Feature: footnotes
       """
       foo[^1]
 
-      [^1]: bar
+      [^1]: footnote text
       """
     When running text-run

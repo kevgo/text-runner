@@ -21,8 +21,10 @@ Feature: verifying that documentation matches a file in the source code
     And my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
+
       [documentation](docs)
       __greeting.md__
+
       ```
       Hello!
       ```
@@ -43,8 +45,10 @@ Feature: verifying that documentation matches a file in the source code
     And my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
+
       [documentation](docs)
       __greeting.md__
+
       ```
       Zonk
       ```
@@ -52,18 +56,20 @@ Feature: verifying that documentation matches a file in the source code
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                             |
-      | LINE          | 1                                                                |
-      | ERROR MESSAGE | mismatching content in                                           |
-      | EXIT CODE     | 1                                                                |
+      | FILENAME      | 1.md                   |
+      | LINE          | 1                      |
+      | ERROR MESSAGE | mismatching content in |
+      | EXIT CODE     | 1                      |
 
 
   Scenario: file does not exist
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
+
       [global-tool](not-existing.txt)
       __text-run.yml__
+
       ```
       zonk
       ```
@@ -71,7 +77,7 @@ Feature: verifying that documentation matches a file in the source code
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                             |
-      | LINE          | 1                                                                |
-      | ERROR MESSAGE | file .* not found                                                |
-      | EXIT CODE     | 2                                                                |
+      | FILENAME      | 1.md              |
+      | LINE          | 1                 |
+      | ERROR MESSAGE | file .* not found |
+      | EXIT CODE     | 2                 |

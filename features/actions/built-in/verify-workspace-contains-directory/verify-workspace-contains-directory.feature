@@ -12,6 +12,7 @@ Feature: verify that the workspace contains a directory
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="verify-workspace-contains-directory">
+
         `foo`
       </a>
       """

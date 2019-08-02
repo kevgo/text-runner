@@ -6,6 +6,7 @@ To run JavaScript code:
 
 ````html
 <a textrun="run-javascript">
+
 ```
 console.log('This is getting executed by TextRunner!')
 ```
@@ -25,6 +26,7 @@ Example:
 
 ````html
 <a textrun="run-javascript">
+
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
@@ -39,6 +41,7 @@ Alternatively you can also use the placeholder `// ...`
 
 ````html
 <a textrun="run-javascript">
+
 `​``
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', function(err) {

@@ -12,6 +12,7 @@ Feature: running console commands
     Given my source code contains the file "running.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       echo hello
       ```
@@ -25,6 +26,7 @@ Feature: running console commands
     Given my source code contains the file "running.md" with content:
       """
       <a textrun="run-console-command">
+
       foo
       </a>
       """
@@ -40,6 +42,7 @@ Feature: running console commands
     Given my source code contains the file "running.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       ```
       </a>

@@ -12,6 +12,7 @@ Feature: selecting formatter via the command-line
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       echo "Hello world"
       ```

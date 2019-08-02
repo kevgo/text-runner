@@ -11,6 +11,7 @@ Feature: Counting files
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="validate-javascript">
+
       ```
       foo()
       ```
@@ -19,6 +20,7 @@ Feature: Counting files
     And my source code contains the file "2.md" with content:
       """
       <a textrun="validate-javascript">
+
       ```
       bar()
       ```
@@ -38,6 +40,7 @@ Feature: Counting files
     And my source code contains the file "2.md" with content:
       """
       <a textrun="validate-javascript">
+
       ```
       bar()
       ```

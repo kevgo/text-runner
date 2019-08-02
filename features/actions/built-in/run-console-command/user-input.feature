@@ -19,10 +19,12 @@ Feature: running console commands
     Given my source code contains the file "enter-input.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       $ read foo
       $ echo You entered: $foo
       ```
+
       <table>
         <tr>
           <td>123</td>
@@ -46,6 +48,7 @@ Feature: running console commands
     Given my source code contains the file "enter-input.md" with content:
       """
       <a textrun="run-console-command">
+
       ```
       $ echo "Name of the service to add"
       $ read service_name
@@ -53,6 +56,7 @@ Feature: running console commands
       $ read description
       $ echo "service: $service_name, description: $description"
       ```
+
       <table>
         <tr>
           <th>When you see this</th>

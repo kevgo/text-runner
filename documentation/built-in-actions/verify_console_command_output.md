@@ -12,6 +12,7 @@ First, let's runs a console command:
 
 ````html
 <a textrun="run-console-command">
+
 `​``
 echo Hello world!
 `​``
@@ -19,6 +20,7 @@ echo Hello world!
 
 Now that it's finished, let's verify its output:
 <a textrun="verify-console-command-output">
+
 `​``
 Hello world!
 `​``

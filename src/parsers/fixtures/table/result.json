@@ -1,0 +1,178 @@
+[
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "table",
+    "type": "table_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "thead",
+    "type": "thead_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "tr",
+    "type": "tr_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "th",
+    "type": "th_open"
+  },
+  {
+    "attributes": {},
+    "content": "h1",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "/th",
+    "type": "th_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "th",
+    "type": "th_open"
+  },
+  {
+    "attributes": {},
+    "content": "h2",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "/th",
+    "type": "th_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "/tr",
+    "type": "tr_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 1,
+    "tag": "/thead",
+    "type": "thead_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "tbody",
+    "type": "tbody_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "tr",
+    "type": "tr_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "td",
+    "type": "td_open"
+  },
+  {
+    "attributes": {},
+    "content": "d1",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "/td",
+    "type": "td_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "td",
+    "type": "td_open"
+  },
+  {
+    "attributes": {},
+    "content": "d2",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "/td",
+    "type": "td_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "/tr",
+    "type": "tr_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "/tbody",
+    "type": "tbody_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/table/input.*",
+    "line": 3,
+    "tag": "/table",
+    "type": "table_close"
+  }
+]

@@ -44,7 +44,7 @@ export class AstNode {
     file: AbsoluteFilePath
     line: number
     content: string
-    attributes: { [key: string]: string }
+    attributes: AstNodeAttributes
   }) {
     this.type = data.type
     this.tag = data.tag

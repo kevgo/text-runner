@@ -32,7 +32,7 @@ describe("LinkTargetList", function() {
       nodeList.pushNode({
         attributes: {},
         file: "file.md",
-        type: "heading_open"
+        type: "h1_open"
       })
       nodeList.pushNode({
         content: "foo bar",
@@ -41,7 +41,7 @@ describe("LinkTargetList", function() {
       })
       nodeList.pushNode({
         file: "file.md",
-        type: "heading_close"
+        type: "h1_close"
       })
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)

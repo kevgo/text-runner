@@ -28,8 +28,8 @@ export default async function runConsoleCommand(args: ActionArgs) {
   if (commandsToRun === "") {
     throw new Error("the block that defines console commands to run is empty")
   }
-
   args.name(`running console command: ${color.cyan(commandsToRun)}`)
+
   let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes)
@@ -48,6 +48,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
 }
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
+  // TODO: reduce redundancy
   if (!input.textToWait) {
     processor.stdin.write(input.input + "\n")
   } else {
@@ -57,24 +58,34 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
 }
 
 function getInput(nodes: AstNodeList): ProcessInput[] {
-  if (!nodes) {
-    return []
-  }
   const result: ProcessInput[] = []
-  const rows = nodes.getNodesOfTypes("table_row_open")
-  for (const row of rows) {
-    const cellsN = nodes.getNodesFor(row)
-    const cells = cellsN.getNodesOfTypes("table_cell")
-    if (cells.length === 0) {
+  if (!nodes) {
+    return result
+  }
+  // TODO: simplify this with an "AstNodeList.getSubList" method
+  const tbodyNode = nodes.getNodeOfTypes("tbody_open")
+  const tbodyContent = nodes.getNodesFor(tbodyNode)
+  const trNodes = tbodyContent.getNodesOfTypes("tr_open")
+  for (const trNode of trNodes) {
+    const trContent = nodes.getNodesFor(trNode)
+    if (trContent.length === 0) {
+      // empty table row, ignore
       continue
     }
-    if (cells.length === 1) {
-      // 3 cells = 1 td (<tr>, <td>, </tr>)
-      result.push({ textToWait: null, input: cells[0].content })
+    const tdNode = trContent.getNodesOfTypes("td_open")
+    if (tdNode.length === 0) {
+      // no TD found, possibly because there are THs --> ignore
+      continue
+    }
+    if (tdNode.length === 1) {
+      // single-column table, use that column
+      const text = trContent.textInNode(tdNode[0])
+      result.push({ textToWait: null, input: text })
     } else {
+      // multi-colum table, use the last column
       result.push({
-        input: cells[cells.length - 1].content,
-        textToWait: cells[0].content
+        input: trContent.textInNode(tdNode[tdNode.length - 1]),
+        textToWait: trContent.textInNode(tdNode[0])
       })
     }
   }

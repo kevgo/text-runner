@@ -74,7 +74,7 @@ class ActionFinder {
 
   private loadCustomActions(): FunctionRepo {
     const result: FunctionRepo = {}
-    // TODO remove
+    // TODO remove support for JS transpilers
     require("babel-register")
     for (const filename of this.customActionFilePaths()) {
       rechoir.prepare(interpret.jsVariants, filename)

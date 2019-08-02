@@ -1,4 +1,5 @@
 import MarkdownIt from "markdown-it"
+import util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { HTMLParser } from "../html/html-parser"
 import { AstNode, AstNodeAttributes } from "../standard-AST/ast-node"
@@ -119,8 +120,7 @@ export class MarkdownParser {
       return this.standizeStandaloneTag(mdNode, file, line)
     }
 
-    console.log(mdNode)
-    throw new Error(`unknown RemarkableIt node type: ${mdNode.type}`)
+    throw new Error(`unknown RemarkableIt node: ${util.inspect(mdNode.type)}`)
   }
 
   private standardizeImageNode(

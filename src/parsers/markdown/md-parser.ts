@@ -41,51 +41,34 @@ export class MarkdownParser {
     mdAST: any,
     file: AbsoluteFilePath,
     parentLine: number,
-    openNodeTracker: OpenNodeTracker
+    ont: OpenNodeTracker
   ) {
     const result = new AstNodeList()
-    let currentLine = parentLine
+    let line = parentLine
     for (const node of mdAST) {
       // determine the current line we are on
-      currentLine = Math.max((node.map || [[0]])[0] + 1, currentLine)
+      line = Math.max((node.map || [[0]])[0] + 1, line)
 
       // special handling for images
       if (node.type === "image") {
-        const standardized = this.standardizeNode(
-          node,
-          file,
-          currentLine,
-          openNodeTracker
-        )
-        result.push(...standardized)
+        result.push(...this.standardizeNode(node, file, line, ont))
         continue
       }
 
       // handle node with children
       if (node.children) {
-        const standardizedChildNodes = this.standardizeAST(
-          node.children,
-          file,
-          currentLine,
-          openNodeTracker
-        )
-        result.push(...standardizedChildNodes)
+        result.push(...this.standardizeAST(node.children, file, line, ont))
         continue
       }
 
       // handle softbreak
-      if (this.isSoftBreak(node)) {
-        currentLine += 1
+      if (node.type === "softbreak") {
+        line += 1
         continue
       }
 
       // handle node without children
-      const standardizedNode = this.standardizeNode(
-        node,
-        file,
-        currentLine,
-        openNodeTracker
-      )
+      const standardizedNode = this.standardizeNode(node, file, line, ont)
       result.push(...standardizedNode)
     }
     return result
@@ -96,225 +79,303 @@ export class MarkdownParser {
     mdNode: any,
     file: AbsoluteFilePath,
     line: number,
-    openNodeTracker: OpenNodeTracker
+    ont: OpenNodeTracker
   ): AstNodeList {
-    const result = new AstNodeList()
-
-    // ignore empty text blocks
     if (mdNode.type === "text" && mdNode.content === "") {
-      return result
+      return new AstNodeList()
     }
-
-    const attributes: AstNodeAttributes = {}
-    if (mdNode.attrs) {
-      for (const [name, value] of mdNode.attrs) {
-        attributes[name] = value
-      }
-    }
-
-    // handle images
     if (mdNode.type === "image") {
-      for (const childNode of mdNode.children) {
-        attributes.alt += childNode.content
-      }
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag: "img",
-          type: "image"
-        })
-      )
-      return result
+      return this.standardizeImageNode(mdNode, file, line)
     }
-
-    // handle headings
     if (mdNode.type === "heading_open") {
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag: mdNode.tag,
-          type: `${mdNode.tag}_open`
-        })
-      )
-      return result
+      return this.standardizeHeadingOpen(mdNode, file, line)
     }
     if (mdNode.type === "heading_close") {
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag: "/" + mdNode.tag,
-          type: `${mdNode.tag}_close`
-        })
-      )
-      return result
+      return this.standardizeHeadingClose(mdNode, file, line)
     }
-
-    // handle code_inline blocks
     if (mdNode.type === "code_inline") {
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag: "code",
-          type: "code_open"
-        })
-      )
-      result.push(
-        new AstNode({
-          attributes,
-          content: mdNode.content,
-          file,
-          line,
-          tag: "",
-          type: "text"
-        })
-      )
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag: "/code",
-          type: "code_close"
-        })
-      )
-      return result
+      return this.standardizeCodeInline(mdNode, file, line)
     }
-
-    // handle fence blocks
     if (mdNode.type === "fence") {
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag: "pre",
-          type: "fence_open"
-        })
-      )
-      result.push(
-        new AstNode({
-          attributes,
-          content: mdNode.content.trim(),
-          file,
-          line: line + 1, // content of fenced blocks has to start on the next line
-          tag: "",
-          type: "text"
-        })
-      )
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line: mdNode.map[1],
-          tag: "/pre",
-          type: "fence_close"
-        })
-      )
-      return result
+      return this.standardizeFence(mdNode, file, line)
     }
-
-    // handle HTML blocks
     if (mdNode.type === "html_inline" || mdNode.type === "html_block") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
-        const closingTagNodes = this.closingTagParser.parse(
-          mdNode.content,
-          file,
-          line
-        )
-        result.push(...closingTagNodes)
+        return this.standardizeClosingHTMLTag(mdNode, file, line)
       } else {
-        const mdNodes = this.htmlParser.parse(mdNode.content, file, line)
-        result.push(...mdNodes)
+        return this.standardizeHTMLBlock(mdNode, file, line)
       }
-      return result
     }
-
-    // handle opening nodes
     if (mdNode.type.endsWith("_open")) {
-      openNodeTracker.open(mdNode)
-      result.push(
-        new AstNode({
-          attributes,
-          content: mdNode.content.trim(),
-          file,
-          line,
-          tag: this.tagMapper.tagForType(mdNode.type),
-          type: mdNode.type
-        })
-      )
-      return result
+      return this.standardizeOpeningNode(mdNode, file, line, ont)
     }
-
-    // handle closing nodes
     if (mdNode.type.endsWith("_close")) {
-      const openingNode = openNodeTracker.close(mdNode, file, line)
-      let closingTagLine = line
-      if (openingNode.map) {
-        closingTagLine = openingNode.map[1]
-      }
-      result.push(
-        new AstNode({
-          attributes,
-          content: mdNode.content.trim(),
-          file,
-          line: closingTagLine,
-          tag: this.tagMapper.tagForType(mdNode.type),
-          type: mdNode.type
-        })
-      )
-      return result
+      return this.standardizeClosingNode(mdNode, file, line, ont)
     }
-
-    // handle text nodes
     if (mdNode.type === "text") {
-      result.push(
-        new AstNode({
-          attributes,
-          content: mdNode.content.trim(),
-          file,
-          line,
-          tag: this.tagMapper.tagForType(mdNode.type),
-          type: mdNode.type
-        })
-      )
-      return result
+      return this.standardizeTextNode(mdNode, file, line)
     }
-
-    // handle all known stand-alone tags
     if (this.tagMapper.isStandaloneTag(mdNode.tag)) {
-      result.push(
-        new AstNode({
-          attributes,
-          content: mdNode.content.trim(),
-          file,
-          line,
-          tag: mdNode.tag,
-          type: mdNode.type
-        })
-      )
-      return result
+      return this.standizeStandaloneTag(mdNode, file, line)
     }
 
     console.log(mdNode)
     throw new Error(`unknown RemarkableIt node type: ${mdNode.type}`)
   }
 
-  private isSoftBreak(node: any): boolean {
-    return node.type === "softbreak"
+  private standardizeImageNode(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
+    for (const childNode of mdNode.children) {
+      attributes.alt += childNode.content
+    }
+    result.push(
+      new AstNode({
+        attributes,
+        content: "",
+        file,
+        line,
+        tag: "img",
+        type: "image"
+      })
+    )
+    return result
   }
+
+  private standardizeHeadingOpen(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: "",
+        file,
+        line,
+        tag: mdNode.tag,
+        type: `${mdNode.tag}_open`
+      })
+    )
+    return result
+  }
+
+  private standardizeHeadingClose(
+    node: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(node.attrs),
+        content: "",
+        file,
+        line,
+        tag: "/" + node.tag,
+        type: `${node.tag}_close`
+      })
+    )
+    return result
+  }
+
+  private standardizeCodeInline(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
+    result.push(
+      new AstNode({
+        attributes,
+        content: "",
+        file,
+        line,
+        tag: "code",
+        type: "code_open"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes,
+        content: mdNode.content,
+        file,
+        line,
+        tag: "",
+        type: "text"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes,
+        content: "",
+        file,
+        line,
+        tag: "/code",
+        type: "code_close"
+      })
+    )
+    return result
+  }
+
+  private standardizeFence(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
+    result.push(
+      new AstNode({
+        attributes,
+        content: "",
+        file,
+        line,
+        tag: "pre",
+        type: "fence_open"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes,
+        content: mdNode.content.trim(),
+        file,
+        line: line + 1, // content of fenced blocks has to start on the next line
+        tag: "",
+        type: "text"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes,
+        content: "",
+        file,
+        line: mdNode.map[1],
+        tag: "/pre",
+        type: "fence_close"
+      })
+    )
+    return result
+  }
+
+  private standardizeClosingHTMLTag(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(...this.closingTagParser.parse(mdNode.content, file, line))
+    return result
+  }
+
+  private standardizeHTMLBlock(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(...this.htmlParser.parse(mdNode.content, file, line))
+    return result
+  }
+
+  private standardizeOpeningNode(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number,
+    ont: OpenNodeTracker
+  ): AstNodeList {
+    const result = new AstNodeList()
+    ont.open(mdNode)
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: mdNode.content.trim(),
+        file,
+        line,
+        tag: this.tagMapper.tagForType(mdNode.type),
+        type: mdNode.type
+      })
+    )
+    return result
+  }
+
+  private standardizeClosingNode(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number,
+    ont: OpenNodeTracker
+  ) {
+    const result = new AstNodeList()
+    const openingNode = ont.close(mdNode, file, line)
+    let closingTagLine = line
+    if (openingNode.map) {
+      closingTagLine = openingNode.map[1]
+    }
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: mdNode.content.trim(),
+        file,
+        line: closingTagLine,
+        tag: this.tagMapper.tagForType(mdNode.type),
+        type: mdNode.type
+      })
+    )
+    return result
+  }
+
+  private standardizeTextNode(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: mdNode.content.trim(),
+        file,
+        line,
+        tag: this.tagMapper.tagForType(mdNode.type),
+        type: mdNode.type
+      })
+    )
+    return result
+  }
+
+  private standizeStandaloneTag(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: mdNode.content.trim(),
+        file,
+        line,
+        tag: mdNode.tag,
+        type: mdNode.type
+      })
+    )
+    return result
+  }
+}
+
+/** returns the given attributes from a MarkdownIt node in the standard AST format */
+export function standardizeMarkdownItAttributes(attrs: any): AstNodeAttributes {
+  const result: AstNodeAttributes = {}
+  if (attrs) {
+    for (const [name, value] of attrs) {
+      result[name] = value
+    }
+  }
+  return result
 }

@@ -26,7 +26,7 @@ describe("parseFiles", function() {
           [new AbsoluteFilePath(path.join(testDirPath, "input.html"))],
           tagMapper
         )
-        assert.deepEqual(actual, expected)
+        assert.deepEqual(actual[0], expected)
       })
     }
   }

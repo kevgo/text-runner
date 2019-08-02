@@ -62,6 +62,7 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
   if (!nodes) {
     return result
   }
+  // TODO: simplify this with an "AstNodeList.getSubList" method
   const tbodyNode = nodes.getNodeOfTypes("tbody_open")
   const tbodyContent = nodes.getNodesFor(tbodyNode)
   const trNodes = tbodyContent.getNodesOfTypes("tr_open")

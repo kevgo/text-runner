@@ -1,5 +1,4 @@
 import color from "colorette"
-import deb from "debug"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../../configuration/types/configuration"
@@ -9,8 +8,6 @@ import { callArgs } from "../helpers/call-args"
 import { RunningConsoleCommand } from "../helpers/running-console-command"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "../types/action-args"
-
-const debug = deb("textrun:actions:run-console-command")
 
 interface ProcessInput {
   textToWait: string | null
@@ -92,14 +89,11 @@ function makeGlobal(configuration: Configuration): (arg: string) => string {
   } catch (e) {
     // can ignore errors here
   }
-  debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText: string): string {
     const commandParts = commandText.split(" ")
     const command = commandParts[0]
-    debug(`searching for global replacement for ${command}`)
     const replacement = globals[command] as string | undefined
     if (replacement) {
-      debug(`found replacement: ${replacement}`)
       return (
         path.join(configuration.sourceDir, replacement) +
         " " +

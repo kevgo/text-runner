@@ -1,10 +1,7 @@
-import deb from "debug"
 import fs from "fs-extra"
 import path from "path"
 import tmp from "tmp-promise"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
-
-const debug = deb("text-runner:working-dir")
 
 type workingDirSetting = string | boolean
 
@@ -14,7 +11,6 @@ type workingDirSetting = string | boolean
  */
 export async function createWorkingDir(configSetting: workingDirSetting) {
   const workingDir = await getWorkingDirPath(configSetting)
-  debug(`using test directory: ${workingDir}`)
   await fs.ensureDir(workingDir)
   return workingDir
 }

@@ -80,11 +80,11 @@ converts the configuration into test results over several steps:
 1. **configuration --> list of Markdown files to test:** this is done by the
    [filesystem module](src/filesystem)
 1. **list of filenames --> list of file ASTs:** the [parse module](src/parsers)
-   [reads and parses](src/parsers/markdown/md-parser.ts) each file and
-   [transforms](src/parsers/markdown/markdown-it-ast-standardizer.ts) the
-   Markdown parser output into a [standardized AST](src/parsers/standard-AST)
-   format that is similar whether the input is Markdown or HTML and optimized
-   for analyzing and testing.
+   [reads](src/parsers/markdown/parse-markdown-files.ts) each file and
+   [parses](src/parsers/markdown/md-parser.ts) it into the
+   [standard AST](src/parsers/standard-AST) format. The standard AST is
+   optimized for analyzing and testing,and identical for comparable Markdown and
+   HTML input.
 1. **list of ASTs --> list of tests steps to execute:** the
    [activities module](src/activity-list) finds _active blocks_ in the ASTs and
    gathers all the related information. The output of this step is several

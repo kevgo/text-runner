@@ -27,6 +27,7 @@ export class TagMapper {
 
   /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
   private static readonly STANDALONE_MAPPINGS: Mappings = {
+    hr: "hr",
     image: "img"
   }
 
@@ -45,22 +46,25 @@ export class TagMapper {
     if (tagName === "#text") {
       return false
     }
-    return !Object.values(TagMapper.STANDALONE_MAPPINGS).includes(tagName)
+    return !this.isStandaloneTag(tagName)
+  }
+
+  isStandaloneTag(tagName: string): boolean {
+    return Object.values(TagMapper.STANDALONE_MAPPINGS).includes(tagName)
   }
 
   /** Returns the opening Remarkable type for the given HTML tag. */
   openingTypeForTag(tagName: string, attributes: AstNodeAttributes) {
-    if (tagName.startsWith("/")) {
-      tagName = tagName.substring(1)
-    }
-    if (tagName === "a" && !attributes.href) {
-      return "anchor_open"
-    }
-    return this.typeForTag(tagName, attributes)
+    return this.typeForTag(tagName.replace(/^\//, ""), attributes)
   }
 
   /** Returns the HTML tag for the given Remarkable type. */
   tagForType(type: string): string {
+    // handle text tag
+    if (type === "text") {
+      return ""
+    }
+
     // handle explicitly mapped values
     if (this.typeTagMappings.hasOwnProperty(type)) {
       return this.typeTagMappings[type]

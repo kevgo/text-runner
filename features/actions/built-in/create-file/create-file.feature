@@ -13,7 +13,9 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       creating a file with name _one.txt_ and content `Hello world!`
+
       </a>
       """
     When running "text-run --keep-tmp"
@@ -31,6 +33,7 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       creating a file with name __one.txt__ and content:
 
       ```
@@ -53,9 +56,11 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       ```
       Hello world!
       ```
+
       </a>
       """
     When trying to run text-run
@@ -70,7 +75,9 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       __one.txt__
+
       </a>
       """
     When trying to run text-run
@@ -85,6 +92,7 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       __one.txt__
       __two.txt__
 
@@ -105,6 +113,7 @@ Feature: creating files with content
     Given my source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
+
       __one.txt__
 
       ```

@@ -116,6 +116,7 @@ Given("my workspace contains testable documentation", async function() {
     path.join(this.rootDir, "1.md"),
     `
 <a textrun="run-console-command">
+
 \`\`\`
 echo "Hello world"
 \`\`\`

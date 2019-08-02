@@ -8,19 +8,27 @@ including macOS, Windows, and Linux. To get started:
   which you want to use TextRunner </a>
 - create a **package.json** file, for example by running:
   <a textrun="run-consoleCommand">
+
   ```
   npm init -y
   ```
+
   </a>
+
 - install TextRunner: <a textrun="run-console-command">
+
   ```
   npm install --dev text-runner
   ```
+
   </a>
+
 - make sure it works by running: <a textrun="run-console-command">
+
   ```
   node_modules/.bin/text-run help
   ```
+
   </a>
 
 This gives you an out-of-the-box installation of TextRunner, which checks that

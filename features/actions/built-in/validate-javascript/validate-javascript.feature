@@ -12,6 +12,7 @@ Feature: validating Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="validate-javascript">
+
       ```
       'working javascript'
       ```
@@ -28,6 +29,7 @@ Feature: validating Javascript
     Given my source code contains the file "1.md" with content:
       """
       <a textrun="validate-javascript">
+
       ```
       'missing quotes at end
       ```

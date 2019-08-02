@@ -10,6 +10,11 @@ describe("TagMapper", () => {
     })
   })
 
+  describe(".isStandaloneTag()", function() {
+    it("recognizes known standalone tags", function() {
+      expect(tagMapper.isStandaloneTag("hr")).to.be.true
+    })
+  })
   describe("openingTypeForTag", function() {
     it("returns opening types for opening HTML tags", function() {
       expect(tagMapper.openingTypeForTag("b", {})).to.equal("bold_open")
@@ -53,6 +58,10 @@ describe("TagMapper", () => {
 
     it("maps unknown standalone tags", () => {
       expect(tagMapper.tagForType("foo")).to.equal("foo")
+    })
+
+    it("maps text tags", () => {
+      expect(tagMapper.tagForType("text")).to.equal("")
     })
   })
 

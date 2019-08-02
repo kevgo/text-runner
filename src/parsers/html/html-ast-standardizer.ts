@@ -6,18 +6,22 @@ import { TagMapper } from "../tag-mapper"
 
 /** HtmlAstStandardizer converts HTML5 ASTs into standardized ASTs. */
 export class HtmlAstStandardizer {
-  tagMapper: TagMapper
+  private readonly tagMapper: TagMapper
 
-  constructor() {
-    this.tagMapper = new TagMapper()
+  constructor(tagMapper: TagMapper) {
+    this.tagMapper = tagMapper
   }
 
+  /**
+   * StandardizeDocument converts the given MarkdownIt AST into the standardized AST.
+   *
+   * @param startingLine The line at which this HTML snippet is located in the source document.
+   *                     This parameter only applies for HTML snippets that are embedded in Markdown documents.
+   */
   standardizeDocument(
     htmlAst: any,
     file: AbsoluteFilePath,
-    startingLine: number,
-    // @ts-ignore
-    inline: boolean
+    startingLine: number = 1
   ): AstNodeList {
     const result = new AstNodeList()
     const htmlNode = htmlAst.childNodes.filter(
@@ -27,13 +31,7 @@ export class HtmlAstStandardizer {
       (node: parse5.DefaultTreeElement) => node.nodeName === "body"
     )[0]
     for (const childNode of bodyNode.childNodes) {
-      const astNodes = this.standardizeNode(
-        childNode,
-        file,
-        // NOTE: need to substract 1 here because we add two line numbers
-        //       who both started counting at 1 here
-        (childNode.sourceCodeLocation.startLine || 1) + startingLine - 1
-      )
+      const astNodes = this.standardizeNode(childNode, file, startingLine)
       result.push(...astNodes)
     }
     return result
@@ -42,22 +40,37 @@ export class HtmlAstStandardizer {
   standardizeNode(
     node: any,
     file: AbsoluteFilePath,
-    line: number
+    startingLine: number
   ): AstNodeList {
     const result = new AstNodeList()
+
+    // ignore empty text nodes
+    if (node.nodeName === "#text" && node.value.trim() === "") {
+      return result
+    }
+
+    // calculate attributes
     const attributes: AstNodeAttributes = {}
     if (node.attrs) {
       for (const attr of node.attrs) {
         attributes[attr.name] = attr.value
       }
     }
+
+    // handle open-close tags
     if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
+      let startLine = startingLine
+      if (node.sourceCodeLocation) {
+        startLine += node.sourceCodeLocation.startLine - 1
+      } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
+        startLine += node.parentNode.sourceCodeLocation.startLine
+      }
       result.push(
         new AstNode({
           attributes,
           content: "",
           file,
-          line,
+          line: startLine,
           tag: node.tagName,
           type: this.tagMapper.openingTypeForTag(node.tagName, attributes)
         })
@@ -66,30 +79,43 @@ export class HtmlAstStandardizer {
         const standardizedChildNodes = this.standardizeNode(
           childNode,
           file,
-          line
+          startingLine
         )
         result.push(...standardizedChildNodes)
       }
-      const tag = "/" + node.tagName
-      result.push(
-        new AstNode({
-          attributes,
-          content: "",
-          file,
-          line,
-          tag,
-          type: this.tagMapper.typeForTag(tag, attributes)
-        })
-      )
+      let endLine: number
+      if (node.sourceCodeLocation) {
+        endLine = node.sourceCodeLocation.endLine + startingLine - 1
+      } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
+        endLine = node.parentNode.sourceCodeLocation.endLine + startingLine - 1
+      } else {
+        throw new Error(`cannot determine end line for node ${node}`)
+      }
+      if (
+        !node.sourceCodeLocation ||
+        (node.sourceCodeLocation && node.sourceCodeLocation.endTag)
+      ) {
+        const tag = "/" + node.tagName
+        result.push(
+          new AstNode({
+            attributes: {},
+            content: "",
+            file,
+            line: endLine,
+            tag,
+            type: this.tagMapper.typeForTag(tag, attributes)
+          })
+        )
+      }
     } else if (node.nodeName === "#text") {
       // textnode
       if (node.value !== "\n") {
         result.push(
           new AstNode({
             attributes: {},
-            content: node.value,
+            content: node.value.trim(),
             file,
-            line,
+            line: node.sourceCodeLocation.startLine + startingLine - 1,
             tag: node.tagName || "",
             type: "text"
           })
@@ -102,7 +128,7 @@ export class HtmlAstStandardizer {
           attributes,
           content: "",
           file,
-          line,
+          line: node.sourceCodeLocation.startLine + startingLine - 1,
           tag: node.tagName || "",
           type: this.tagMapper.typeForTag(node.tagName, attributes)
         })

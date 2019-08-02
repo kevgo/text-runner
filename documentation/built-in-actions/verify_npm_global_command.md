@@ -7,7 +7,8 @@ documenation.
 #### Example
 
 <a textrun="create-file">
-Assuming our __package.json__ file looks like this:
+
+Assuming our **package.json** file looks like this:
 
 ```json
 {
@@ -23,15 +24,18 @@ then the action below verifies that the instructions describe the correct global
 command name exported by this NPM module.
 
 <a textrun="run-markdown-in-textrun">
+
 ```markdown
 To run this app, call:
 
 <a textrun="verify-npm-global-command">
+
 `​``
 $ foo
 `​``
 </a>
 ```
+
 </a>
 
 #### More info

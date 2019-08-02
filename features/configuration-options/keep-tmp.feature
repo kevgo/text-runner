@@ -12,6 +12,7 @@ Feature: keeping the tmp directory
     Given my source code contains the file "tr.md" with content:
       """
       <a textrun="create-directory">
+
       `foo`
       </a>
       """

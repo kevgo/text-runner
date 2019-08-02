@@ -1,5 +1,4 @@
 import color from "colorette"
-import deb from "debug"
 import { createObservableProcess } from "observable-process"
 import path from "path"
 import { Configuration } from "../../configuration/types/configuration"
@@ -8,8 +7,6 @@ import { callArgs } from "../helpers/call-args"
 import { RunningProcess } from "../helpers/running-process"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "../types/action-args"
-
-const debug = deb("start-console-command")
 
 // Runs the given commands on the console.
 // Leaves the command running.
@@ -44,14 +41,11 @@ function makeGlobal(configuration: Configuration) {
   } catch (e) {
     // we can ignore null-pointer exceptions here since we have a default value
   }
-  debug(`globals: ${JSON.stringify(globals)}`)
   return function(commandText: string) {
     const commandParts = commandText.split(" ")
     const command = commandParts[0]
-    debug(`searching for global replacement for ${command}`)
     const replacement = globals[command]
     if (replacement) {
-      debug(`found replacement: ${replacement}`)
       return (
         path.join(configuration.sourceDir, replacement) +
         " " +

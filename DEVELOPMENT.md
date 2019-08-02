@@ -101,6 +101,5 @@ converts the configuration into test results over several steps:
 
 ## Deployment
 
-- for now experiment with `standard-version` until generating CHANGELOG.md fully
-  works
-- then possibly use `semantic-release`
+- commit version bump in `package.json` to master
+- run `npm publish`

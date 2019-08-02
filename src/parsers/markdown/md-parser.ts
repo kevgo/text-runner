@@ -50,7 +50,9 @@ export class MarkdownParser {
       currentLine = Math.max((node.map || [[0]])[0] + 1, currentLine)
 
       if (node.type === "image") {
-        result.push(...this.standardizeNode(node, file, currentLine, ont))
+        // need to handle images explicitly here because they have a text node as a child
+        // but the AST shouldn't contain it
+        result.push(...this.standardizeImageNode(node, file, currentLine))
         continue
       }
 
@@ -80,9 +82,6 @@ export class MarkdownParser {
   ): AstNodeList {
     if (mdNode.type === "text" && mdNode.content === "") {
       return new AstNodeList()
-    }
-    if (mdNode.type === "image") {
-      return this.standardizeImageNode(mdNode, file, line)
     }
     if (mdNode.type === "heading_open") {
       return this.standardizeHeadingOpen(mdNode, file, line)

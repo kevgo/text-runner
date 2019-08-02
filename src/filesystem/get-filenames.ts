@@ -1,5 +1,4 @@
 import color from "colorette"
-import deb from "debug"
 import isGlob from "is-glob"
 import { Configuration } from "../configuration/types/configuration"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
@@ -11,8 +10,6 @@ import { isMarkdownFile } from "./is-markdown-file"
 import { markdownFilesInDir } from "./markdown-files-in-dir"
 import { removeExcludedFiles } from "./remove-excluded-files"
 
-const debug = deb("text-runner:run-command")
-
 /**
  * Returns the name of all files/directories that match the given glob
  */
@@ -21,7 +18,6 @@ export async function getFileNames(
 ): Promise<AbsoluteFilePath[]> {
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
-  debugFilenames(filenames)
   return filenames
 }
 
@@ -38,12 +34,5 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
     throw new UnprintedUserError(
       `file or directory does not exist: ${color.red(config.fileGlob)}`
     )
-  }
-}
-
-function debugFilenames(filenames: AbsoluteFilePath[]) {
-  debug("testing files:")
-  for (const filename of filenames) {
-    debug(`  * ${filename.platformified()}`)
   }
 }

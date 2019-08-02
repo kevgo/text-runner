@@ -14,7 +14,6 @@
     "cli-cursor": "3.1.0",
     "cli-progress": "2.1.1",
     "colorette": "1.1.0",
-    "debug": "4.1.1",
     "end-child-processes": "1.0.1",
     "eol": "0.9.1",
     "fs-extra": "8.1.0",

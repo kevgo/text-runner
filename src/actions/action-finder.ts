@@ -16,8 +16,8 @@ interface FunctionRepo {
 
 // ActionRepo provides runnable action instances for activities.
 class ActionFinder {
-  private builtinActions: FunctionRepo
-  private customActions: FunctionRepo
+  private readonly builtinActions: FunctionRepo
+  private readonly customActions: FunctionRepo
 
   constructor() {
     this.builtinActions = this.loadBuiltinActions()

@@ -29,7 +29,6 @@
     "rechoir": "0.7.0",
     "rimraf": "2.6.3",
     "tmp-promise": "2.0.2",
-    "to-space-case": "1.0.0",
     "yamljs": "0.3.0"
   },
   "description": "Tests documentation written in MarkDown",

@@ -5,7 +5,7 @@ import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
-import { parseFiles } from "./parse-files"
+import { parseHTMLFiles } from "./parse-html-files"
 
 describe("parseFiles", function() {
   const tagMapper = new TagMapper()
@@ -22,7 +22,7 @@ describe("parseFiles", function() {
           e.file = e.file.replace("*", "html")
           expected.push(AstNode.scaffold(e))
         }
-        const actual = await parseFiles(
+        const actual = await parseHTMLFiles(
           [new AbsoluteFilePath(path.join(testDirPath, "input.html"))],
           tagMapper
         )

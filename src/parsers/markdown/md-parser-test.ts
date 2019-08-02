@@ -4,11 +4,10 @@ import path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
-import { MdParser } from "./md-parser"
+import { parseMarkdownFiles } from "./parse-markdown-files"
 
 describe("MdParser", function() {
   describe("parseFile", function() {
-    const mdParser = new MdParser()
     const sharedFixtureDir = path.join("src", "parsers", "fixtures")
     const specificFixtureDir = path.join(
       "src",
@@ -28,10 +27,10 @@ describe("MdParser", function() {
             expectedNodeData.file = expectedNodeData.file.replace("*", "md")
             expected.push(AstNode.scaffold(expectedNodeData))
           }
-          const actual = await mdParser.parseFile(
+          const actual = await parseMarkdownFiles([
             new AbsoluteFilePath(path.join(testDirPath, "input.md"))
-          )
-          assert.deepEqual(actual, expected)
+          ])
+          assert.deepEqual(actual[0], expected)
         })
       }
     }

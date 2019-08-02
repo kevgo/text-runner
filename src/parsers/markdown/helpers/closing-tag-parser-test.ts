@@ -1,7 +1,7 @@
 import { strict as assert } from "assert"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNodeList } from "../standard-AST/ast-node-list"
-import { TagMapper } from "../tag-mapper"
+import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
+import { AstNodeList } from "../../standard-AST/ast-node-list"
+import { TagMapper } from "../../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
 
 describe("ClosingTagParser", function() {
@@ -9,6 +9,7 @@ describe("ClosingTagParser", function() {
     const testData = {
       "  < / a > ": true,
       "  </a> ": true,
+      " < a  > ": false,
       "</a>": true,
       "<a>": false
     }

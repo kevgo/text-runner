@@ -4,8 +4,8 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { HTMLParser } from "./html-parser"
 
-/** returns the standard AST for the given HTML files */
-export async function parseFiles(
+/** returns the standard AST for the HTML files with the given paths */
+export async function parseHTMLFiles(
   filenames: AbsoluteFilePath[],
   tagMapper: TagMapper
 ): Promise<AstNodeList[]> {

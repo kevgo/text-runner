@@ -1,8 +1,9 @@
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNode } from "../standard-AST/ast-node"
-import { AstNodeList } from "../standard-AST/ast-node-list"
-import { TagMapper } from "../tag-mapper"
+import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
+import { AstNode } from "../../standard-AST/ast-node"
+import { AstNodeList } from "../../standard-AST/ast-node-list"
+import { TagMapper } from "../../tag-mapper"
 
+/** ClosingTagParser parses HTML blocks containing just a closing tag. */
 export class ClosingTagParser {
   private readonly closingTagRE: RegExp
 

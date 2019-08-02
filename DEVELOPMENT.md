@@ -101,5 +101,5 @@ converts the configuration into test results over several steps:
 
 ## Deployment
 
-- commit version bump in `package.json` to master
+- bump version in `package.json` on master and commit
 - run `npm publish`

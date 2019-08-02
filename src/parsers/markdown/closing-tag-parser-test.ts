@@ -9,6 +9,7 @@ describe("ClosingTagParser", function() {
     const testData = {
       "  < / a > ": true,
       "  </a> ": true,
+      " < a  > ": false,
       "</a>": true,
       "<a>": false
     }

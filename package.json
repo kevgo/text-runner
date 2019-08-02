@@ -33,6 +33,7 @@
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
+    "@mixer/parallel-prettier": "1.0.0",
     "@types/babel__code-frame": "7.0.1",
     "@types/chai": "4.1.7",
     "@types/cli-progress": "1.8.1",

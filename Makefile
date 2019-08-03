@@ -79,11 +79,7 @@ cuke-smoke-win:  # runs the smoke tests
 	@node_modules\.bin\cucumber-js --tags '@smoke' --format progress
 
 cuke-win:     # runs the feature specs on Windows
-ifndef FILE
-	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
-else
-	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
-endif
+	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs: build   # runs the documentation tests
 	@bin$/text-run static --offline --format dot

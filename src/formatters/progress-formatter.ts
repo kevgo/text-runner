@@ -13,7 +13,6 @@ export class ProgressFormatter implements Formatter {
   /** Progress bar instance */
   private readonly progressBar: progress.Bar
 
-  // @ts-ignore: ignore unused variable
   constructor(stepCount: number, configuration: Configuration) {
     this.configuration = configuration
     this.progressBar = new progress.Bar(
@@ -21,13 +20,13 @@ export class ProgressFormatter implements Formatter {
         clearOnComplete: true,
         format:
           color.green(" {bar}") +
-          " {percentage}% | ETA: {eta}s | {value}/{total}",
+          " {value}/{total} ({percentage}%) | ETA: {eta}s | {step}",
         hideCursor: undefined,
         stopOnComplete: true
       },
       progress.Presets.shades_classic
     )
-    this.progressBar.start(stepCount, 0)
+    this.progressBar.start(stepCount, 0, { step: "" })
   }
 
   // @ts-ignore: unused parameters
@@ -56,6 +55,6 @@ export class ProgressFormatter implements Formatter {
 
   // @ts-ignore: okay to not use parameters here
   success(activity: Activity, stepName: string, output: string) {
-    this.progressBar.increment(1)
+    this.progressBar.increment(1, { step: stepName })
   }
 }

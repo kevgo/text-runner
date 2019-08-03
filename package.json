@@ -33,6 +33,7 @@
   },
   "description": "Tests documentation written in MarkDown",
   "devDependencies": {
+    "@mixer/parallel-prettier": "1.0.0",
     "@types/babel__code-frame": "7.0.1",
     "@types/chai": "4.1.7",
     "@types/cli-progress": "1.8.1",
@@ -63,7 +64,6 @@
     "dim-console": "0.4.4",
     "mocha": "6.2.0",
     "nyc": "14.1.1",
-    "prettier": "1.18.2",
     "ps-tree": "1.2.0",
     "remark-cli": "7.0.0",
     "remark-lint": "6.0.5",

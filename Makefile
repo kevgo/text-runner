@@ -79,11 +79,7 @@ cuke-smoke-win:  # runs the smoke tests
 	@node_modules\.bin\cucumber-js --tags '@smoke' --format progress
 
 cuke-win:     # runs the feature specs on Windows
-ifndef FILE
-	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress
-else
-	@node_modules\.bin\cucumber-js --tags "(not @todo) and (not @skipWindows)" $(FILE)
-endif
+	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs: build   # runs the documentation tests
 	@bin$/text-run static --offline --format dot
@@ -113,9 +109,9 @@ help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint: # lints all files
-	node_modules$/.bin$/tsc -p tsconfig.json &
-	node_modules$/.bin$/tslint --project tsconfig-build.json &
-	node_modules$/.bin$/remark . --quiet &
+	@node_modules$/.bin$/tsc -p tsconfig.json &
+	@node_modules$/.bin$/tslint --project tsconfig-build.json &
+	@node_modules$/.bin$/remark . --quiet &
 	@find . -type f \( \
 	       -path './src/**/*.ts' -o \
 				 -path './features/**/*.ts' -o \
@@ -138,6 +134,12 @@ lint: # lints all files
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
 		grep -v fixtures | \
 		xargs node_modules/.bin/pprettier --check
+
+parallel: lint # runs all tests
+	bin$/text-run static --offline --format dot &
+	node_modules/.bin/mocha --reporter dot "src/**/*-test.ts" &
+	bin$/text-run dynamic --format dot
+	node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

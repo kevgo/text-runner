@@ -7,15 +7,12 @@ including macOS, Windows, and Linux. To get started:
 - in the terminal, <a textrun="cd-into-empty-tmp-folder"> cd into the folder in
   which you want to use TextRunner </a>
 - create a **package.json** file, for example by running:
-  <a textrun="run-consoleCommand">
 
   ```
   npm init -y
   ```
 
-  </a>
-
-- install TextRunner: <a textrun="run-console-command">
+- install TextRunner: <a textrun="verify-npm-install">
 
   ```
   npm install --dev text-runner

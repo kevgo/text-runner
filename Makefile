@@ -113,9 +113,9 @@ help:   # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint: # lints all files
-	node_modules$/.bin$/tsc -p tsconfig.json
-	node_modules$/.bin$/tslint --project tsconfig-build.json
-	node_modules$/.bin$/remark . --quiet
+	node_modules$/.bin$/tsc -p tsconfig.json &
+	node_modules$/.bin$/tslint --project tsconfig-build.json &
+	node_modules$/.bin$/remark . --quiet &
 	@find . -type f \( \
 	       -path './src/**/*.ts' -o \
 				 -path './features/**/*.ts' -o \
@@ -137,7 +137,7 @@ lint: # lints all files
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
 		grep -v fixtures | \
-		xargs node_modules/.bin/prettier --check
+		xargs node_modules/.bin/prettier -l
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

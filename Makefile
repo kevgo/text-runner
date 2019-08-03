@@ -135,6 +135,12 @@ lint: # lints all files
 		grep -v fixtures | \
 		xargs node_modules/.bin/pprettier --check
 
+parallel: lint # runs all tests
+	bin$/text-run static --offline --format dot &
+	node_modules/.bin/mocha --reporter dot "src/**/*-test.ts" &
+	bin$/text-run dynamic --format dot
+	node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+
 test: lint unit cuke docs   # runs all tests
 .PHONY: test
 

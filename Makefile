@@ -9,6 +9,7 @@ endif
 
 build: clean    # builds for the current platform
 	@node_modules$/.bin$/tsc -p tsconfig-build.json
+	@rm dist/**/*-test.*
 
 clean:   # Removes all build artifacts
 	@rm -rf dist

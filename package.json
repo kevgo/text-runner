@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "4.0.0-beta.0",
+  "version": "4.0.0-beta.1",
   "author": "Kevin Goslar",
   "bin": {
     "text-run": "bin/text-run"
@@ -13,6 +13,7 @@
     "cli-cursor": "3.1.0",
     "cli-progress": "2.1.1",
     "colorette": "1.1.0",
+    "delay": "4.3.0",
     "end-child-processes": "1.0.1",
     "eol": "0.9.1",
     "fs-extra": "8.1.0",
@@ -60,7 +61,6 @@
     "chai": "4.2.0",
     "coveralls": "3.0.5",
     "cucumber": "5.1.0",
-    "delay": "4.3.0",
     "dim-console": "0.4.4",
     "mocha": "6.2.0",
     "nyc": "14.1.1",

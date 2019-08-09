@@ -124,7 +124,7 @@ export class MarkdownParser {
       return this.standizeStandaloneTag(mdNode, file, line)
     }
 
-    throw new Error(`unknown RemarkableIt node: ${util.inspect(mdNode.type)}`)
+    throw new Error(`unknown MarkdownIt node: ${util.inspect(mdNode)}`)
   }
 
   private standardizeImageNode(

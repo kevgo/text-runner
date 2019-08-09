@@ -25,4 +25,11 @@ describe("OpenTagTracker", function() {
       )
     )
   })
+
+  it("tells whether a node is open", function() {
+    const openTags = new OpenNodeTracker()
+    openTags.open(AstNode.scaffold({ type: "link_open" }))
+    assert.equal(openTags.has("link_open"), true)
+    assert.equal(openTags.has("anchor_open"), false)
+  })
 })

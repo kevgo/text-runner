@@ -21,7 +21,7 @@ export class AstNode {
   }
 
   /** markdown type of AST node */
-  readonly type: string
+  type: string
 
   /** HTML type of AST node */
   readonly tag: string

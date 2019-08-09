@@ -30,4 +30,14 @@ export class OpenNodeTracker {
       line
     )
   }
+
+  /** returns whether a node with the given type is open */
+  has(type: string): boolean {
+    for (const node of this.nodes) {
+      if (node.type === type) {
+        return true
+      }
+    }
+    return false
+  }
 }

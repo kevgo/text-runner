@@ -102,9 +102,9 @@ export class MarkdownParser {
 
     if (mdNode.type === "html_inline" || mdNode.type === "html_block") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
-        return this.standardizeClosingHTMLTag(mdNode, file, line)
+        return this.standardizeClosingHTMLTag(mdNode, ont, file, line)
       } else {
-        return this.standardizeHTMLBlock(mdNode, file, line)
+        return this.standardizeHTMLBlock(mdNode, ont, file, line)
       }
     }
 
@@ -270,21 +270,44 @@ export class MarkdownParser {
 
   private standardizeClosingHTMLTag(
     mdNode: any,
+    ont: OpenNodeTracker,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    result.push(...this.closingTagParser.parse(mdNode.content, file, line))
+    const parsed = this.closingTagParser.parse(mdNode.content, file, line)[0]
+    if (parsed.tag === "/a") {
+      // </a> could be anchor_close or link_close, figure this out here
+      if (ont.has("link_open")) {
+        parsed.type = "link_close"
+      } else if (ont.has("anchor_open")) {
+        parsed.type = "anchor_close"
+      } else {
+        throw new Error("Found neither open link nor anchor")
+      }
+    }
+    ont.close({ type: parsed.type }, file, line)
+    result.push(parsed)
     return result
   }
 
   private standardizeHTMLBlock(
     mdNode: any,
+    ont: OpenNodeTracker,
     file: AbsoluteFilePath,
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    result.push(...this.htmlParser.parse(mdNode.content, file, line))
+    const parsed = this.htmlParser.parse(mdNode.content, file, line)
+    for (const node of parsed) {
+      if (node.type.endsWith("_open")) {
+        ont.open(node)
+      }
+      if (node.type.endsWith("_close")) {
+        ont.close(node, file, line)
+      }
+    }
+    result.push(...parsed)
     return result
   }
 

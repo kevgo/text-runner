@@ -27,6 +27,7 @@ export class TagMapper {
 
   /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
   private static readonly STANDALONE_MAPPINGS: Mappings = {
+    hardbreak: "br",
     hr: "hr",
     image: "img"
   }
@@ -84,7 +85,7 @@ export class TagMapper {
     return type
   }
 
-  /** Returns the Remarkable type for the given HTML tag. */
+  /** Returns the Markdown node type for the given HTML tag. */
   typeForTag(tag: string, attributes: AstNodeAttributes): string {
     // distinguish anchors from links
     if (tag === "a" && !attributes.href) {

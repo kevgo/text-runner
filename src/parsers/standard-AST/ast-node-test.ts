@@ -1,5 +1,6 @@
 import { expect } from "chai"
 import { AstNode } from "./ast-node"
+import { AstNodeList } from "./ast-node-list"
 
 describe("AstNode", function() {
   describe("scaffold", function() {
@@ -22,6 +23,35 @@ describe("AstNode", function() {
         const node = AstNode.scaffold({ type: input })
         expect(node.endType()).to.eql(output)
       }
+    })
+  })
+
+  describe("getNodesFor", function() {
+    it("returns the nodes contained in the given AstNode", function() {
+      const list = new AstNodeList()
+      list.push(AstNode.scaffold({ type: "text", line: 1 }))
+      list.push(AstNode.scaffold({ type: "link_open", line: 2 }))
+      list.push(AstNode.scaffold({ type: "text", line: 3 }))
+      list.push(AstNode.scaffold({ type: "link_close", line: 4 }))
+      list.push(AstNode.scaffold({ type: "text", line: 5 }))
+      const actual = list.getNodesFor(list[1])
+      const lines = actual.map(node => node.line)
+      expect(lines).to.eql([2, 3, 4])
+    })
+
+    it("handles nested links in active regions", function() {
+      const list = new AstNodeList()
+      list.push(AstNode.scaffold({ type: "text", line: 1 }))
+      list.push(AstNode.scaffold({ type: "link_open", line: 2 }))
+      list.push(AstNode.scaffold({ type: "text", line: 3 }))
+      list.push(AstNode.scaffold({ type: "anchor_open", line: 4 }))
+      list.push(AstNode.scaffold({ type: "text", line: 5 }))
+      list.push(AstNode.scaffold({ type: "anchor_close", line: 6 }))
+      list.push(AstNode.scaffold({ type: "link_close", line: 7 }))
+      list.push(AstNode.scaffold({ type: "text", line: 8 }))
+      const actual = list.getNodesFor(list[1])
+      const lines = actual.map(node => node.line)
+      expect(lines).to.eql([2, 3, 4, 5, 6, 7])
     })
   })
 

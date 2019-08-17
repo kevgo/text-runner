@@ -140,7 +140,7 @@ parallel: lint # runs all tests
 	bin$/text-run static --offline --format dot &
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.ts" &
 	bin$/text-run dynamic --format dot
-	node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

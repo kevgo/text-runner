@@ -1,0 +1,10 @@
+[
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/hardbreak/input.*",
+    "line": 1,
+    "tag": "br",
+    "type": "hardbreak"
+  }
+]

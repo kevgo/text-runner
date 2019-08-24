@@ -9,6 +9,7 @@ endif
 
 build: clean    # builds for the current platform
 	@node_modules$/.bin$/tsc -p tsconfig-build.json
+	@rm dist/**/*-test.*
 
 clean:   # Removes all build artifacts
 	@rm -rf dist
@@ -139,7 +140,7 @@ parallel: lint # runs all tests
 	bin$/text-run static --offline --format dot &
 	node_modules/.bin/mocha --reporter dot "src/**/*-test.ts" &
 	bin$/text-run dynamic --format dot
-	node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 test: lint unit cuke docs   # runs all tests
 .PHONY: test

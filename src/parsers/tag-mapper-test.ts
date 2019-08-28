@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { strict as assert } from "assert"
 import { TagMapper } from "./tag-mapper"
 
 const tagMapper = new TagMapper()
@@ -6,30 +6,31 @@ const tagMapper = new TagMapper()
 describe("TagMapper", () => {
   describe("isOpenCloseTag", function() {
     it("return TRUE for <a> tags", function() {
-      expect(tagMapper.isOpenCloseTag("a")).to.be.true
+      assert.equal(tagMapper.isOpenCloseTag("a"), true)
     })
   })
 
   describe(".isStandaloneTag()", function() {
     it("recognizes known standalone tags", function() {
-      expect(tagMapper.isStandaloneTag("hr")).to.be.true
+      assert.equal(tagMapper.isStandaloneTag("hr"), true)
     })
   })
   describe("openingTypeForTag", function() {
     it("returns opening types for opening HTML tags", function() {
-      expect(tagMapper.openingTypeForTag("b", {})).to.equal("bold_open")
+      assert.equal(tagMapper.openingTypeForTag("b", {}), "bold_open")
     })
 
     it("returns opening types for closing HTML tags", () => {
-      expect(tagMapper.openingTypeForTag("/b", {})).to.equal("bold_open")
+      assert.equal(tagMapper.openingTypeForTag("/b", {}), "bold_open")
     })
 
     it("returns opening anchors", function() {
-      expect(tagMapper.openingTypeForTag("/a", {})).to.equal("anchor_open")
+      assert.equal(tagMapper.openingTypeForTag("/a", {}), "anchor_open")
     })
 
     it("returns opening links", function() {
-      expect(tagMapper.openingTypeForTag("/a", { href: "foo" })).to.equal(
+      assert.equal(
+        tagMapper.openingTypeForTag("/a", { href: "foo" }),
         "link_open"
       )
     })
@@ -37,69 +38,69 @@ describe("TagMapper", () => {
 
   describe(".tagForType()", () => {
     it("maps known opening tags", () => {
-      expect(tagMapper.tagForType("bold_open")).to.equal("b")
+      assert.equal(tagMapper.tagForType("bold_open"), "b")
     })
 
     it("maps known closing tags", () => {
-      expect(tagMapper.tagForType("bold_close")).to.equal("/b")
+      assert.equal(tagMapper.tagForType("bold_close"), "/b")
     })
 
     it("maps known standalone tags", () => {
-      expect(tagMapper.tagForType("image")).to.equal("img")
+      assert.equal(tagMapper.tagForType("image"), "img")
     })
 
     it("maps unknown opening tags", () => {
-      expect(tagMapper.tagForType("foo_open")).to.equal("foo")
+      assert.equal(tagMapper.tagForType("foo_open"), "foo")
     })
 
     it("maps unknown closing tags", () => {
-      expect(tagMapper.tagForType("foo_close")).to.equal("/foo")
+      assert.equal(tagMapper.tagForType("foo_close"), "/foo")
     })
 
     it("maps unknown standalone tags", () => {
-      expect(tagMapper.tagForType("foo")).to.equal("foo")
+      assert.equal(tagMapper.tagForType("foo"), "foo")
     })
 
     it("maps text tags", () => {
-      expect(tagMapper.tagForType("text")).to.equal("")
+      assert.equal(tagMapper.tagForType("text"), "")
     })
   })
 
   describe(".typeForTag()", () => {
     it("maps known opening tags", () => {
-      expect(tagMapper.typeForTag("b", {})).to.equal("bold_open")
+      assert.equal(tagMapper.typeForTag("b", {}), "bold_open")
     })
 
     it("maps known closing tags", () => {
-      expect(tagMapper.typeForTag("/b", {})).to.equal("bold_close")
+      assert.equal(tagMapper.typeForTag("/b", {}), "bold_close")
     })
 
     it("maps known standalone tags", () => {
-      expect(tagMapper.typeForTag("img", {})).to.equal("image")
+      assert.equal(tagMapper.typeForTag("img", {}), "image")
     })
 
     it("maps opening anchors", () => {
-      expect(tagMapper.typeForTag("a", {})).to.equal("anchor_open")
+      assert.equal(tagMapper.typeForTag("a", {}), "anchor_open")
     })
 
     it("maps closing anchors", () => {
-      expect(tagMapper.typeForTag("/a", {})).to.equal("anchor_close")
+      assert.equal(tagMapper.typeForTag("/a", {}), "anchor_close")
     })
 
     it("maps opening links", () => {
-      expect(tagMapper.typeForTag("a", { href: "foo" })).to.equal("link_open")
+      assert.equal(tagMapper.typeForTag("a", { href: "foo" }), "link_open")
     })
 
     it("maps closing anchors", () => {
-      expect(tagMapper.typeForTag("/a", { href: "foo" })).to.equal("link_close")
+      assert.equal(tagMapper.typeForTag("/a", { href: "foo" }), "link_close")
     })
 
     it("maps unknown opening tags", () => {
-      expect(tagMapper.typeForTag("foo", {})).to.equal("foo_open")
+      assert.equal(tagMapper.typeForTag("foo", {}), "foo_open")
     })
 
     it("maps unknown closing tags", () => {
-      expect(tagMapper.typeForTag("/foo", {})).to.equal("foo_close")
+      assert.equal(tagMapper.typeForTag("/foo", {}), "foo_close")
     })
   })
 })

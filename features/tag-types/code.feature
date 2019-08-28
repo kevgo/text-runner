@@ -19,3 +19,11 @@ Feature: active code tags
       | FILENAME | 1.md        |
       | LINE     | 1           |
       | MESSAGE  | Hello world |
+
+  Scenario: code block
+    Given my source code contains the file "1.md" with content:
+      """
+      - a list with
+            embedded code block
+      """
+    When running text-run

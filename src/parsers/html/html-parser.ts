@@ -76,13 +76,13 @@ export class HTMLParser {
     if (this.isEmptyTextNode(node)) {
       return new AstNodeList()
     }
-    if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
-      return this.standardizeOpenCloseTag(node, file, startingLine)
-    }
     if (node.nodeName === "#text") {
       return this.standardizeTextNode(node, file, startingLine)
     }
-    return this.standardizeStandaloneNode(node, file, startingLine)
+    if (this.tagMapper.isStandaloneTag(node.nodeName)) {
+      return this.standardizeStandaloneNode(node, file, startingLine)
+    }
+    return this.standardizeOpenCloseTag(node, file, startingLine)
   }
 
   /** converts the given HTML tag with open and closing tag into the standard format */

@@ -1,6 +1,6 @@
 import { AstNodeAttributes } from "./standard-AST/ast-node"
 
-/** Mappings from Remarkable types to HTML tag names or vice versa. */
+/** Mappings from MarkdownIt types to HTML tag names or vice versa. */
 interface Mappings {
   [key: string]: string
 }

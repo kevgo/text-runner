@@ -76,9 +76,6 @@ export class HTMLParser {
     if (this.isEmptyTextNode(node)) {
       return new AstNodeList()
     }
-    if (this.tagMapper.isOpenCloseTag(node.nodeName)) {
-      return this.standardizeOpenCloseTag(node, file, startingLine)
-    }
     if (node.nodeName === "#text") {
       return this.standardizeTextNode(node, file, startingLine)
     }

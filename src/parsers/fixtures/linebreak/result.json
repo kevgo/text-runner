@@ -2,9 +2,9 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/fixtures/hardbreak/input.*",
+    "file": "src/parsers/fixtures/linebreak/input.*",
     "line": 1,
     "tag": "br",
-    "type": "hardbreak"
+    "type": "linebreak"
   }
 ]

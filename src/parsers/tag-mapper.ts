@@ -18,7 +18,6 @@ export class TagMapper {
     bullet_list: "ul",
     fence: "pre",
     italic: "i",
-    linebreak: "br",
     link: "a",
     list_item: "li",
     ordered_list: "ol",
@@ -27,9 +26,9 @@ export class TagMapper {
 
   /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
   private static readonly STANDALONE_MAPPINGS: Mappings = {
-    hardbreak: "br",
     hr: "hr",
-    image: "img"
+    image: "img",
+    linebreak: "br"
   }
 
   /** Maps Remarkable types to their corresponding HTML tags */

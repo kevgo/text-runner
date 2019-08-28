@@ -79,7 +79,7 @@ export class HTMLParser {
     if (node.nodeName === "#text") {
       return this.standardizeTextNode(node, file, startingLine)
     }
-    if (this.tagMapper.isStandaloneHtmlTag(node.nodeName)) {
+    if (this.tagMapper.isStandaloneTag(node.nodeName)) {
       return this.standardizeStandaloneNode(node, file, startingLine)
     }
     return this.standardizeOpenCloseTag(node, file, startingLine)

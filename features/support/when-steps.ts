@@ -24,14 +24,14 @@ When(/^(trying to run|running) "([^"]*)"$/, async function(
   command
 ) {
   const expectError = determineExpectError(tryingText)
-  await this.execute({ command, cwd: this.rootDir, expectError })
+  await this.execute({ command, expectError })
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
 When(/^(trying to run|running) text-run$/, async function(tryingText) {
   const expectError = determineExpectError(tryingText)
   try {
-    await this.execute({ command: "run", cwd: this.rootDir, expectError })
+    await this.execute({ command: "run", expectError })
   } catch (err) {
     finish(expectError, err)
     return
@@ -49,7 +49,7 @@ When(
     const splitted = optionsText.split(" ")
     const command = splitted[0]
     const options = splitted.splice(1)
-    await this.execute({ command, options, cwd: this.rootDir, expectError })
+    await this.execute({ command, options, expectError })
     finish(expectError, this.process.error || this.process.exitCode)
   }
 )
@@ -60,7 +60,6 @@ When(
     const expectError = determineExpectError(tryingText)
     const args = JSON.parse(`{${argsText}}`)
     args.command = "run"
-    args.cwd = this.rootDir
     args.expectError = expectError
     await this.execute(args)
     finish(
@@ -78,7 +77,6 @@ When(
     try {
       await this.execute({
         command: "run",
-        cwd: this.rootDir,
         expectError,
         options: { formatter: formatterName }
       })

@@ -80,26 +80,37 @@ export class MarkdownParser {
     line: number,
     ont: OpenNodeTracker
   ): AstNodeList {
+    // ignore empty text nodes
+    // to avoid having to deal with this edge case later
     if (mdNode.type === "text" && mdNode.content === "") {
       return new AstNodeList()
     }
 
+    // heading_open gets renamed to h1_open
     if (mdNode.type === "heading_open") {
       return this.standardizeHeadingOpen(mdNode, file, line)
     }
 
+    // heading_close gets renamed to h1_close
     if (mdNode.type === "heading_close") {
       return this.standardizeHeadingClose(mdNode, file, line)
     }
 
+    // code is unrolled to code_open, text, code_close
+    // to be compatible with the HTML version
+    // which has to be this way because it can contain more stuff in the content part
     if (mdNode.type === "code_inline") {
       return this.standardizeCodeInline(mdNode, file, line)
     }
 
+    // fence is unrolled to fence_open, text, fence_close
+    // to be compatible with the HTML version
+    // which has to be this way because it can contain more stuff in the content part
     if (mdNode.type === "fence") {
       return this.standardizeFence(mdNode, file, line)
     }
 
+    // handle embedded HTML
     if (mdNode.type === "html_inline" || mdNode.type === "html_block") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
         return this.standardizeClosingHTMLTag(mdNode, ont, file, line)
@@ -108,18 +119,22 @@ export class MarkdownParser {
       }
     }
 
+    // handle opening tags
     if (mdNode.type.endsWith("_open")) {
       return this.standardizeOpeningNode(mdNode, file, line, ont)
     }
 
+    // handle closing tags
     if (mdNode.type.endsWith("_close")) {
       return this.standardizeClosingNode(mdNode, file, line, ont)
     }
 
+    // handle text nodes
     if (mdNode.type === "text") {
       return this.standardizeTextNode(mdNode, file, line)
     }
 
+    // handle stand-alone tags
     if (this.tagMapper.isStandaloneTag(mdNode.tag)) {
       return this.standizeStandaloneTag(mdNode, file, line)
     }

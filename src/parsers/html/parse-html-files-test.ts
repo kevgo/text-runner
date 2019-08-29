@@ -7,7 +7,7 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { parseHTMLFiles } from "./parse-html-files"
 
-describe("parseFiles", function() {
+describe("parseHTMLFiles", function() {
   const tagMapper = new TagMapper()
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
   const specificFixtureDir = path.join("src", "parsers", "html", "fixtures")

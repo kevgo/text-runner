@@ -209,10 +209,9 @@ export class MarkdownParser {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
     result.push(
       new AstNode({
-        attributes,
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
         content: "",
         file,
         line,
@@ -222,7 +221,7 @@ export class MarkdownParser {
     )
     result.push(
       new AstNode({
-        attributes,
+        attributes: {},
         content: mdNode.content,
         file,
         line,
@@ -232,7 +231,7 @@ export class MarkdownParser {
     )
     result.push(
       new AstNode({
-        attributes,
+        attributes: {},
         content: "",
         file,
         line,
@@ -249,10 +248,10 @@ export class MarkdownParser {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
+
     result.push(
       new AstNode({
-        attributes,
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
         content: "",
         file,
         line,
@@ -262,7 +261,7 @@ export class MarkdownParser {
     )
     result.push(
       new AstNode({
-        attributes,
+        attributes: {},
         content: mdNode.content.trim(),
         file,
         line: line + 1, // content of fenced blocks has to start on the next line
@@ -272,7 +271,7 @@ export class MarkdownParser {
     )
     result.push(
       new AstNode({
-        attributes,
+        attributes: {},
         content: "",
         file,
         line: mdNode.map[1],

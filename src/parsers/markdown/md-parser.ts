@@ -86,26 +86,27 @@ export class MarkdownParser {
       return new AstNodeList()
     }
 
-    // heading_open gets renamed to h1_open
+    // special handling for headings to make them compatible with their HTML counterparts:
+    // - they get renamed from heading_open to h1_open etc
     if (mdNode.type === "heading_open") {
       return this.standardizeHeadingOpen(mdNode, file, line)
     }
 
-    // heading_close gets renamed to h1_close
+    // special handling for headings to make them compatible with their HTML counterparts:
+    // - they get renamed from heading_close to h1_close etc
     if (mdNode.type === "heading_close") {
       return this.standardizeHeadingClose(mdNode, file, line)
     }
 
-    // code is unrolled to code_open, text, code_close
-    // to be compatible with the HTML version
-    // which has to be this way because it can contain more stuff in the content part
+    // special handling for embedded code blocks to be compatible with its HTML counterpart:
+    // - it is unrolled to code_open, text, code_close
     if (mdNode.type === "code_inline") {
       return this.standardizeCodeInline(mdNode, file, line)
     }
 
-    // fence is unrolled to fence_open, text, fence_close
-    // to be compatible with the HTML version
-    // which has to be this way because it can contain more stuff in the content part
+    // special handling for fenced code blocks to be compatible with its HTML counterpart:
+    // - it is unrolled to fence_open, text, fence_close
+    // - the content starts on the line below the opening ```
     if (mdNode.type === "fence") {
       return this.standardizeFence(mdNode, file, line)
     }

@@ -14,12 +14,6 @@
 <a href="https://coveralls.io/github/Originate/text-runner?branch=master">
   <img src="https://coveralls.io/repos/github/Originate/text-runner/badge.svg?1" alt='Coverage Status' />
 </a>
-<a href="https://david-dm.org/originate/text-runner">
-  <img src="https://david-dm.org/originate/text-runner.svg" />
-</a>
-<a href="https://david-dm.org/originate/text-runner#info=devDependencies">
-  <img src="https://david-dm.org/originate/text-runner/dev-status.svg" />
-</a>
 <br><br>
 
 TextRunner is an agile documentation tool, in particular a semantic

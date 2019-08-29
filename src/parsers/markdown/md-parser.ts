@@ -106,8 +106,12 @@ export class MarkdownParser {
     // fence is unrolled to fence_open, text, fence_close
     // to be compatible with the HTML version
     // which has to be this way because it can contain more stuff in the content part
-    if (mdNode.type === "fence" || mdNode.type === "code_block") {
+    if (mdNode.type === "fence") {
       return this.standardizeFence(mdNode, file, line)
+    }
+
+    if (mdNode.type === "code_block") {
+      return this.standardizeEmbeddedCodeblock(mdNode, file, line)
     }
 
     // handle embedded HTML
@@ -242,6 +246,46 @@ export class MarkdownParser {
     return result
   }
 
+  private standardizeEmbeddedCodeblock(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: "",
+        file,
+        line,
+        tag: "pre",
+        type: "fence_open"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes: {},
+        content: mdNode.content.trim(),
+        file,
+        line,
+        tag: "",
+        type: "text"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes: {},
+        content: "",
+        file,
+        line: mdNode.map[1],
+        tag: "/pre",
+        type: "fence_close"
+      })
+    )
+    return result
+  }
+
   private standardizeFence(
     mdNode: any,
     file: AbsoluteFilePath,
@@ -312,7 +356,6 @@ export class MarkdownParser {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-    console.log("\n\n*************LINE:", line)
     const parsed = this.htmlParser.parse(mdNode.content, file, line)
     for (const node of parsed) {
       if (node.type.endsWith("_open")) {

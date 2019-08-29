@@ -111,6 +111,12 @@ export class MarkdownParser {
       return this.standardizeFence(mdNode, file, line)
     }
 
+    // special handling for indented code blocks to be compatible with their HTML counterpart:
+    // - they are expanded to fence_open, text, fence_close
+    if (mdNode.type === "code_block") {
+      return this.standardizeEmbeddedCodeblock(mdNode, file, line)
+    }
+
     // handle embedded HTML
     if (mdNode.type === "html_inline" || mdNode.type === "html_block") {
       if (this.closingTagParser.isClosingTag(mdNode.content)) {
@@ -238,6 +244,45 @@ export class MarkdownParser {
         line,
         tag: "/code",
         type: "code_close"
+      })
+    )
+    return result
+  }
+
+  private standardizeEmbeddedCodeblock(
+    mdNode: any,
+    file: AbsoluteFilePath,
+    line: number
+  ): AstNodeList {
+    const result = new AstNodeList()
+    result.push(
+      new AstNode({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: "",
+        file,
+        line,
+        tag: "pre",
+        type: "fence_open"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes: {},
+        content: mdNode.content.trim(),
+        file,
+        line,
+        tag: "",
+        type: "text"
+      })
+    )
+    result.push(
+      new AstNode({
+        attributes: {},
+        content: "",
+        file,
+        line: mdNode.map[1],
+        tag: "/pre",
+        type: "fence_close"
       })
     )
     return result

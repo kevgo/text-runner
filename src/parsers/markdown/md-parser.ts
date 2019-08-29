@@ -254,7 +254,6 @@ export class MarkdownParser {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
-
     result.push(
       new AstNode({
         attributes: standardizeMarkdownItAttributes(mdNode.attrs),

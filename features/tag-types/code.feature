@@ -20,10 +20,11 @@ Feature: active code tags
       | LINE     | 1           |
       | MESSAGE  | Hello world |
 
-  Scenario: code block
+  Scenario: a list contains an indented code block
     Given my source code contains the file "1.md" with content:
       """
-      - a list with
-            embedded code block
+      - a list with an
+
+            indented code block
       """
     When running text-run

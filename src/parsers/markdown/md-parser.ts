@@ -106,7 +106,7 @@ export class MarkdownParser {
     // fence is unrolled to fence_open, text, fence_close
     // to be compatible with the HTML version
     // which has to be this way because it can contain more stuff in the content part
-    if (mdNode.type === "fence") {
+    if (mdNode.type === "fence" || mdNode.type === "code_block") {
       return this.standardizeFence(mdNode, file, line)
     }
 
@@ -312,6 +312,7 @@ export class MarkdownParser {
     line: number
   ): AstNodeList {
     const result = new AstNodeList()
+    console.log("\n\n*************LINE:", line)
     const parsed = this.htmlParser.parse(mdNode.content, file, line)
     for (const node of parsed) {
       if (node.type.endsWith("_open")) {

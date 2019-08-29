@@ -110,6 +110,8 @@ export class MarkdownParser {
       return this.standardizeFence(mdNode, file, line)
     }
 
+    // special handling for indented code blocks to be compatible with their HTML counterpart:
+    // - they are expanded to fence_open, text, fence_close
     if (mdNode.type === "code_block") {
       return this.standardizeEmbeddedCodeblock(mdNode, file, line)
     }

@@ -30,6 +30,11 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
     argv.splice(0, 1)
   }
 
+  // remove optional debug arguments
+  if (argv[0] && argv[0].endsWith("dist/cli.js")) {
+    argv.splice(0, 1)
+  }
+
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: ["offline", "keep-tmp"] })
   const result: UserProvidedConfiguration = {

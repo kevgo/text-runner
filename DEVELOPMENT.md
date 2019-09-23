@@ -99,6 +99,24 @@ converts the configuration into test results over several steps:
 1. **test results --> test statistics:** finally, we write a summary of the test
    to the console and terminate with the corresponding exit code.
 
+## Debugging
+
+To debug in VSCode:
+
+- compile with source maps: `make build-debug`
+- add this launch configuration to VSCode:
+  ```
+  {
+    "type": "node",
+    "request": "launch",
+    "name": "run text-runner",
+    "program": "${workspaceFolder}/src/cli.ts",
+    "outFiles": ["${workspaceFolder}/dist/**"]
+  }
+  ```
+- switch VSCode to the debug view
+- start the `run text-runner` configuration
+
 ## Deployment
 
 - bump version in `package.json` on master and commit

@@ -10,7 +10,7 @@ export function straightenLink(link: string): string {
   while (result.includes("/./")) {
     result = result.replace(replaceDotRE, "/")
   }
-  while (result.includes("/../")) {
+  while (replaceDotDotRE.test(result)) {
     result = result.replace(replaceDotDotRE, "/")
   }
   return result

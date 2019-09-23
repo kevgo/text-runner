@@ -11,6 +11,9 @@ build: clean    # builds for the current platform
 	@node_modules$/.bin$/tsc -p tsconfig-build.json
 	@rm dist/**/*-test.*
 
+build-debug: clean   # builds for debugging
+	@node_modules$/.bin$/tsc -p tsconfig-build.json --sourcemap
+
 clean:   # Removes all build artifacts
 	@rm -rf dist
 	@rm -rf .nyc_output*

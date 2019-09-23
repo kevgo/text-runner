@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "4.0.0-beta.4",
+  "version": "4.0.0-beta.5",
   "author": "Kevin Goslar",
   "bin": {
     "text-run": "bin/text-run"
@@ -102,7 +102,7 @@
     "url": "https://github.com/Originate/text-runner.git"
   },
   "scripts": {
-    "prepublishOnly": "make build",
+    "prepublishOnly": "make build && rm dist/tsconfig-build.tsbuildinfo",
     "test": "make spec"
   }
 }

@@ -15,7 +15,7 @@ export function executeParallel(
   configuration: Configuration,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Array<Promise<Error | null>> {
+): Promise<Error | null>[] {
   return activities.map(activity => {
     return runActivity(
       activity,

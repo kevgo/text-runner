@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { Publications } from "../configuration/publications/publications"
 import { AbsoluteLink } from "./absolute-link"
 import { RelativeLink } from "./relative-link"
@@ -6,12 +6,12 @@ import { RelativeLink } from "./relative-link"
 describe("AbsoluteLink", function() {
   it("prepends a forward slash", function() {
     const link = new AbsoluteLink("foo/bar")
-    expect(link.value).to.equal("/foo/bar")
+    assert.equal(link.value, "/foo/bar")
   })
 
   it("converts Windows paths to forward slashes", function() {
     const link = new AbsoluteLink("\\foo\\bar")
-    expect(link.value).to.equal("/foo/bar")
+    assert.equal(link.value, "/foo/bar")
   })
 
   describe("anchor", function() {
@@ -22,7 +22,7 @@ describe("AbsoluteLink", function() {
     for (const [description, link, expected] of tests) {
       it(description, function() {
         const absoluteLinklink = new AbsoluteLink(link)
-        expect(absoluteLinklink.anchor()).to.equal(expected)
+        assert.equal(absoluteLinklink.anchor(), expected)
       })
     }
   })
@@ -32,12 +32,12 @@ describe("AbsoluteLink", function() {
       const link = new AbsoluteLink("/one/two/")
       const relativeLink = new RelativeLink("new.md")
       const actual = link.append(relativeLink)
-      expect(actual.value).to.equal("/one/two/new.md")
+      assert.equal(actual.value, "/one/two/new.md")
     })
     it("straightens out the path", function() {
       const link = new AbsoluteLink("/one/two")
       const appended = link.append(new RelativeLink("../new"))
-      expect(appended.value).to.equal("/one/new")
+      assert.equal(appended.value, "/one/new")
     })
   })
 
@@ -49,7 +49,7 @@ describe("AbsoluteLink", function() {
     for (const [description, url, expected] of testData) {
       it(description, function() {
         const link = new AbsoluteLink(url)
-        expect(link.directory().value).to.equal(expected)
+        assert.equal(link.directory().value, expected)
       })
     }
   })
@@ -57,53 +57,53 @@ describe("AbsoluteLink", function() {
   describe("hasAnchor", function() {
     it("returns TRUE if the link points to a file with anchor", function() {
       const link = new AbsoluteLink("/one.md#hello")
-      expect(link.hasAnchor()).to.be.true
+      assert.isTrue(link.hasAnchor())
     })
     it("returns TRUE if the link points to a directory with anchor", function() {
       const link = new AbsoluteLink("/#hello")
-      expect(link.hasAnchor()).to.be.true
+      assert.isTrue(link.hasAnchor())
     })
     it("returns FALSE if the link points to a file without anchor", function() {
       const link = new AbsoluteLink("/one.md")
-      expect(link.hasAnchor()).to.be.false
+      assert.isFalse(link.hasAnchor())
     })
     it("returns FALSE if the link points to a directory without anchor", function() {
       const link = new AbsoluteLink("/")
-      expect(link.hasAnchor()).to.be.false
+      assert.isFalse(link.hasAnchor())
     })
   })
 
   describe("hasExtension", function() {
     it("returns TRUE if the link has the given extension with period", function() {
       const link = new AbsoluteLink("/foo.md")
-      expect(link.hasExtension(".md")).to.be.true
+      assert.isTrue(link.hasExtension(".md"))
     })
     it("returns TRUE if the link has the given extension without period", function() {
       const link = new AbsoluteLink("/foo.md")
-      expect(link.hasExtension("md")).to.be.true
+      assert.isTrue(link.hasExtension("md"))
     })
     it("returns TRUE for matches with empty extension", function() {
       const link = new AbsoluteLink("/foo")
-      expect(link.hasExtension("")).to.be.true
+      assert.isTrue(link.hasExtension(""))
     })
     it("returns FALSE if the link has a different extension", function() {
       const link = new AbsoluteLink("/foo/bar.html")
-      expect(link.hasExtension("md")).to.be.false
+      assert.isFalse(link.hasExtension("md"))
     })
     it("returns FALSE if the link has no extension", function() {
       const link = new AbsoluteLink("/foo/bar")
-      expect(link.hasExtension("md")).to.be.false
+      assert.isFalse(link.hasExtension("md"))
     })
   })
 
   describe("isLinkToDirectory", function() {
     it("returns TRUE if the link points to a directory", function() {
       const link = new AbsoluteLink("/foo/")
-      expect(link.isLinkToDirectory()).to.be.true
+      assert.isTrue(link.isLinkToDirectory())
     })
     it("returns FALSE if the link does not point to a directory", function() {
       const link = new AbsoluteLink("/foo/bar.md")
-      expect(link.isLinkToDirectory()).to.be.false
+      assert.isFalse(link.isLinkToDirectory())
     })
   })
 
@@ -112,13 +112,13 @@ describe("AbsoluteLink", function() {
       const link = new AbsoluteLink("/one/two.png")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.unixified()).to.equal("one/two.png")
+      assert.equal(actual.unixified(), "one/two.png")
     })
     it("url-decodes the file path", function() {
       const link = new AbsoluteLink("/one%20two.png")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.unixified()).to.equal("one two.png")
+      assert.equal(actual.unixified(), "one two.png")
     })
     it("applies the publication", function() {
       const link = new AbsoluteLink("/blog/two.html")
@@ -130,7 +130,7 @@ describe("AbsoluteLink", function() {
         }
       ])
       const actual = link.localize(publications, "")
-      expect(actual.unixified()).to.equal("content/posts/two.md")
+      assert.equal(actual.unixified(), "content/posts/two.md")
     })
     it("removes the anchor in publications", function() {
       const link = new AbsoluteLink("/blog/two.html#hello")
@@ -142,13 +142,13 @@ describe("AbsoluteLink", function() {
         }
       ])
       const actual = link.localize(publications, "")
-      expect(actual.unixified()).to.equal("content/posts/two.md")
+      assert.equal(actual.unixified(), "content/posts/two.md")
     })
     it("removes the anchor in non-published links", function() {
       const link = new AbsoluteLink("/one/two.md#hello")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.unixified()).to.equal("one/two.md")
+      assert.equal(actual.unixified(), "one/two.md")
     })
   })
 
@@ -157,7 +157,7 @@ describe("AbsoluteLink", function() {
       const link = new AbsoluteLink("/one%20two.png")
       const publications = new Publications()
       const actual = link.localize(publications, "")
-      expect(actual.unixified()).to.equal("one two.png")
+      assert.equal(actual.unixified(), "one two.png")
     })
   })
 
@@ -165,7 +165,7 @@ describe("AbsoluteLink", function() {
     it("replaces the old base with the new", function() {
       const link = new AbsoluteLink("/one/two/three.md")
       const actual = link.rebase("/one", "/foo")
-      expect(actual.value).to.equal("/foo/two/three.md")
+      assert.equal(actual.value, "/foo/two/three.md")
     })
   })
 
@@ -177,7 +177,7 @@ describe("AbsoluteLink", function() {
     for (const [description, url, anchor, expected] of tests) {
       it(description, function() {
         const link = new AbsoluteLink(url)
-        expect(link.withAnchor(anchor).value).to.equal(expected)
+        assert.equal(link.withAnchor(anchor).value, expected)
       })
     }
   })
@@ -186,13 +186,13 @@ describe("AbsoluteLink", function() {
     it("returns a new AbsoluteLink with the given file extension without dot", function() {
       const link = new AbsoluteLink("foo.txt")
       const actual = link.withExtension("md")
-      expect(actual.value).to.equal("/foo.md")
+      assert.equal(actual.value, "/foo.md")
     })
 
     it("returns a new AbsoluteLink with the given file extension with dot", function() {
       const link = new AbsoluteLink("foo.txt")
       const actual = link.withExtension(".md")
-      expect(actual.value).to.equal("/foo.md")
+      assert.equal(actual.value, "/foo.md")
     })
   })
 
@@ -204,7 +204,7 @@ describe("AbsoluteLink", function() {
     for (const [description, url, expected] of tests) {
       it(description, function() {
         const link = new AbsoluteLink(url)
-        expect(link.withoutAnchor().value).to.equal(expected)
+        assert.equal(link.withoutAnchor().value, expected)
       })
     }
   })

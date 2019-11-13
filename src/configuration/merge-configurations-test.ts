@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
 import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
@@ -22,7 +22,7 @@ describe("mergeConfigurations()", function() {
       configFileData,
       defaultValues
     )
-    expect(result).to.eql({
+    assert.deepEqual(result, {
       command: "run",
       fileGlob: "1.md",
       keepTmp: false,

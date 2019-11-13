@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { parseCmdlineArgs } from "./parse-cmdline-args"
 
 describe("parse-cmdline-args", function() {
@@ -12,7 +12,7 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
   })
 
@@ -26,11 +26,11 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it("returns empty files", function() {
-      expect(this.result.file).to.be.undefined
+      assert.isUndefined(this.result.file)
     })
   })
 
@@ -44,7 +44,7 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
   })
 
@@ -57,7 +57,7 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
   })
 
@@ -70,15 +70,15 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it('returns the "offline" switch', function() {
-      expect(this.result.offline).to.be.true
+      assert.isTrue(this.result.offline)
     })
 
     it("returns the filename", function() {
-      expect(this.result.fileGlob).to.equal("documentation/actions/cd.md")
+      assert.equal(this.result.fileGlob, "documentation/actions/cd.md")
     })
   })
 
@@ -88,11 +88,11 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it("returns the filename", function() {
-      expect(this.result.fileGlob).to.equal("documentation/actions/cd.md")
+      assert.equal(this.result.fileGlob, "documentation/actions/cd.md")
     })
   })
 
@@ -102,11 +102,11 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it("returns undefined as the filename", function() {
-      expect(this.result.file).to.be.undefined
+      assert.isUndefined(this.result.file)
     })
   })
 
@@ -116,11 +116,11 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it("returns the dot formatter option", function() {
-      expect(this.result.formatterName).to.equal("dot")
+      assert.equal(this.result.formatterName, "dot")
     })
   })
 
@@ -130,11 +130,11 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it("returns the foo/bar workspace", function() {
-      expect(this.result.workspace).to.equal("foo/bar")
+      assert.equal(this.result.workspace, "foo/bar")
     })
   })
 
@@ -144,15 +144,15 @@ describe("parse-cmdline-args", function() {
     })
 
     it('returns the "run" command', function() {
-      expect(this.result.command).to.equal("run")
+      assert.equal(this.result.command, "run")
     })
 
     it("sets the keep-tmp flag", function() {
-      expect(this.result.keepTmp).to.be.true
+      assert.isTrue(this.result.keepTmp)
     })
 
     it('returns "foo.md" as the filename', function() {
-      expect(this.result.fileGlob).to.equal("foo.md")
+      assert.equal(this.result.fileGlob, "foo.md")
     })
   })
 })

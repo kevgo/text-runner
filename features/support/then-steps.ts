@@ -1,5 +1,5 @@
 import * as assertNoDiff from "assert-no-diff"
-import { expect } from "chai"
+import { assert } from "chai"
 import { Then } from "cucumber"
 import fs from "fs-extra"
 import path from "path"
@@ -47,17 +47,16 @@ Then("it runs {int} test", function(count) {
 })
 
 Then("it runs in a global temp directory", function() {
-  expect(this.process.output.fullText()).to.not.include(this.rootDir)
+  assert.notInclude(this.process.output.fullText(), this.rootDir)
 })
 
 Then("it runs in the {string} directory", function(dirName) {
-  expect(this.process.output.fullText()).to.match(
-    new RegExp(`\\b${dirName}\\b`)
-  )
+  assert.match(this.process.output.fullText(), new RegExp(`\\b${dirName}\\b`))
 })
 
 Then("it runs in the current working directory", function() {
-  expect(this.process.output.fullText().trim()).to.match(
+  assert.match(
+    this.process.output.fullText().trim(),
     new RegExp(`${this.rootDir}\\b`)
   )
 })
@@ -103,7 +102,7 @@ Then(
       path.join(this.rootDir, "tmp", fileName),
       "utf8"
     )
-    expect(actualContent.trim()).to.equal(expectedContent.trim())
+    assert.equal(actualContent.trim(), expectedContent.trim())
   }
 )
 
@@ -111,7 +110,7 @@ Then("the test workspace now contains a directory {string}", async function(
   name
 ) {
   const stat = await fs.stat(path.join(this.rootDir, "tmp", name))
-  expect(stat.isDirectory()).to.be.true
+  assert.isTrue(stat.isDirectory())
 })
 
 Then("the test fails with:", function(table) {
@@ -120,7 +119,7 @@ Then("the test fails with:", function(table) {
 
 Then("there are no child processes running", async function() {
   const children = await psTree(process.pid)
-  expect(children).to.have.length(1) // 1 is okay, it's the `ps` process used to determine the child processes
+  assert.lengthOf(children, 1) // 1 is okay, it's the `ps` process used to determine the child processes
 })
 
 Then("there is no {string} folder", async function(name) {

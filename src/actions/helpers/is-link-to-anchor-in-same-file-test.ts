@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file"
 
 describe("isLinkToAnchorInSameFile", function() {
@@ -9,7 +9,7 @@ describe("isLinkToAnchorInSameFile", function() {
   ]
   for (const [description, link, expected] of testData) {
     it(description as string, function() {
-      expect(isLinkToAnchorInSameFile(link as string)).to.equal(expected)
+      assert.equal(isLinkToAnchorInSameFile(link as string), expected)
     })
   }
 })

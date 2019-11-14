@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { UnprintedUserError } from "../../errors/unprinted-user-error"
 import { AstNode } from "./ast-node"
 import { AstNodeList } from "./ast-node-list"
@@ -9,7 +9,7 @@ describe("AstNodeList", function() {
       const list1 = AstNodeList.scaffold({ type: "node1" })
       const list2 = AstNodeList.scaffold({ type: "node2" })
       const result = list1.concat(list2)
-      expect(result.map(node => node.type)).to.eql(["node1", "node2"])
+      assert.deepEqual(result.map(node => node.type), ["node1", "node2"])
     })
   })
 
@@ -23,7 +23,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "paragraph_close" })
       const result = list.getNodesFor(list[1])
       const types = result.map(node => node.type)
-      expect(types).to.eql(["heading_open", "text", "heading_close"])
+      assert.deepEqual(types, ["heading_open", "text", "heading_close"])
     })
 
     it("returns the given non-opening node", function() {
@@ -33,7 +33,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "paragraph_close" })
       const result = list.getNodesFor(list[1])
       const types = result.map(node => node.type)
-      expect(types).to.eql(["strongtext"])
+      assert.deepEqual(types, ["strongtext"])
     })
   })
 
@@ -44,22 +44,20 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "two" })
       list.pushNode({ type: "three" })
       const result = list.getNodeOfTypes("two", "four")
-      expect(result.type).to.equal("two")
+      assert.equal(result.type, "two")
     })
 
     it("throws for multiple matches", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "one" })
       list.pushNode({ type: "two" })
-      expect(() => list.getNodeOfTypes("one", "two")).to.throw(
-        UnprintedUserError
-      )
+      assert.throws(() => list.getNodeOfTypes("one", "two"), UnprintedUserError)
     })
 
     it("throws for zero matches", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "one" })
-      expect(() => list.getNodeOfTypes("two")).to.throw(UnprintedUserError)
+      assert.throws(() => list.getNodeOfTypes("two"), UnprintedUserError)
     })
   })
 
@@ -70,7 +68,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "two" })
       list.pushNode({ type: "three" })
       const result = list.getNodesOfTypes("one", "three")
-      expect(result.map(node => node.type)).to.eql(["one", "three"])
+      assert.deepEqual(result.map(node => node.type), ["one", "three"])
     })
   })
 
@@ -84,7 +82,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "heading_close" })
       list.pushNode({ type: "paragraph_close" })
       const result = list.textInNode(list[1])
-      expect(result).to.equal("foobar")
+      assert.equal(result, "foobar")
     })
   })
 
@@ -93,14 +91,14 @@ describe("AstNodeList", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "paragraph_open" })
       list.pushNode({ type: "paragraph_close" })
-      expect(list.hasNodeOfType("paragraph")).to.be.true
+      assert.isTrue(list.hasNodeOfType("paragraph"))
     })
 
     it("returns false if the list does not contain the given node type", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "paragraph_open" })
       list.pushNode({ type: "paragraph_close" })
-      expect(list.hasNodeOfType("code")).to.be.false
+      assert.isFalse(list.hasNodeOfType("code"))
     })
   })
 
@@ -113,9 +111,9 @@ describe("AstNodeList", function() {
       for (const node of list) {
         result.push(node)
       }
-      expect(result).to.have.length(2)
-      expect(result[0].type).to.equal("node1")
-      expect(result[1].type).to.equal("node2")
+      assert.lengthOf(result, 2)
+      assert.equal(result[0].type, "node1")
+      assert.equal(result[1].type, "node2")
     })
   })
 
@@ -124,7 +122,7 @@ describe("AstNodeList", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "type1" })
       list.pushNode({ type: "type2" })
-      expect(list.nodeTypes()).to.eql(["type1", "type2"])
+      assert.deepEqual(list.nodeTypes(), ["type1", "type2"])
     })
   })
 
@@ -133,8 +131,8 @@ describe("AstNodeList", function() {
       const list = new AstNodeList()
       const node = AstNode.scaffold()
       list.push(node)
-      expect(list).to.have.length(1)
-      expect(list[0]).to.equal(node)
+      assert.lengthOf(list, 1)
+      assert.equal(list[0], node)
     })
   })
 
@@ -143,9 +141,9 @@ describe("AstNodeList", function() {
       const list = new AstNodeList()
       list.pushNode({ type: "heading_open" })
       list.pushNode({ type: "text" })
-      expect(list).to.have.length(2)
-      expect(list[0].type).to.eql("heading_open")
-      expect(list[1].type).to.eql("text")
+      assert.lengthOf(list, 2)
+      assert.equal(list[0].type, "heading_open")
+      assert.equal(list[1].type, "text")
     })
   })
 
@@ -156,7 +154,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "text", content: "hello" })
       list.pushNode({ type: "code_close" })
       const result = list.text()
-      expect(result).to.equal("hello")
+      assert.equal(result, "hello")
     })
   })
 
@@ -167,7 +165,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "text", content: "hello" })
       list.pushNode({ type: "code_close" })
       const result = list.textInNodeOfType("code")
-      expect(result).to.equal("hello")
+      assert.equal(result, "hello")
     })
 
     it("works with the opening type name", function() {
@@ -176,7 +174,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "text", content: "hello" })
       list.pushNode({ type: "code_close" })
       const result = list.textInNodeOfType("code_open")
-      expect(result).to.equal("hello")
+      assert.equal(result, "hello")
     })
 
     it("allows to provide multiple possible matching nodes", function() {
@@ -185,7 +183,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "text", content: "hello" })
       list.pushNode({ type: "code_close" })
       const result = list.textInNodeOfType("code", "fence")
-      expect(result).to.equal("hello")
+      assert.equal(result, "hello")
     })
 
     it("throws if multiple matching nodes exist", function() {
@@ -196,7 +194,8 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "fence_open" })
       list.pushNode({ type: "text", content: "world" })
       list.pushNode({ type: "fence_close" })
-      expect(() => list.textInNodeOfType("code", "fence")).to.throw(
+      assert.throws(
+        () => list.textInNodeOfType("code", "fence"),
         UnprintedUserError
       )
     })
@@ -206,7 +205,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "code_open" })
       list.pushNode({ type: "text", content: "hello" })
       list.pushNode({ type: "code_close" })
-      expect(() => list.textInNodeOfType("fence")).to.throw(UnprintedUserError)
+      assert.throws(() => list.textInNodeOfType("fence"), UnprintedUserError)
     })
   })
 
@@ -216,7 +215,7 @@ describe("AstNodeList", function() {
       list.pushNode({ type: "strongtext", content: "foo" })
       list.pushNode({ type: "strongtext", content: "bar" })
       const result = list.textInNodesOfType("strongtext")
-      expect(result).to.eql(["foo", "bar"])
+      assert.deepEqual(result, ["foo", "bar"])
     })
   })
 })

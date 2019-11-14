@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { AstNode } from "./ast-node"
 import { AstNodeList } from "./ast-node-list"
 
@@ -6,7 +6,7 @@ describe("AstNode", function() {
   describe("scaffold", function() {
     it("returns a new node with the given attributes", function() {
       const node = AstNode.scaffold({ type: "heading_open" })
-      expect(node.type).to.eql("heading_open")
+      assert.equal(node.type, "heading_open")
     })
   })
 
@@ -21,7 +21,7 @@ describe("AstNode", function() {
           continue
         }
         const node = AstNode.scaffold({ type: input })
-        expect(node.endType()).to.eql(output)
+        assert.deepEqual(node.endType(), output)
       }
     })
   })
@@ -36,7 +36,7 @@ describe("AstNode", function() {
       list.push(AstNode.scaffold({ type: "text", line: 5 }))
       const actual = list.getNodesFor(list[1])
       const lines = actual.map(node => node.line)
-      expect(lines).to.eql([2, 3, 4])
+      assert.deepEqual(lines, [2, 3, 4])
     })
 
     it("handles nested links in active regions", function() {
@@ -51,7 +51,7 @@ describe("AstNode", function() {
       list.push(AstNode.scaffold({ type: "text", line: 8 }))
       const actual = list.getNodesFor(list[1])
       const lines = actual.map(node => node.line)
-      expect(lines).to.eql([2, 3, 4, 5, 6, 7])
+      assert.deepEqual(lines, [2, 3, 4, 5, 6, 7])
     })
   })
 
@@ -61,12 +61,12 @@ describe("AstNode", function() {
         content: '<a href="http://foo.com">',
         type: "htmltag"
       })
-      expect(node.htmlLinkTarget()).to.equal("http://foo.com")
+      assert.equal(node.htmlLinkTarget(), "http://foo.com")
     })
 
     it("returns null for non-link tags", function() {
       const node = AstNode.scaffold({ type: "htmltag", content: "hello" })
-      expect(node.htmlLinkTarget()).to.be.null
+      assert.isNull(node.htmlLinkTarget())
     })
 
     it("returns null for anchor tags", function() {
@@ -74,7 +74,7 @@ describe("AstNode", function() {
         content: '<a name="foo">',
         type: "htmltag"
       })
-      expect(node.htmlLinkTarget()).to.be.null
+      assert.isNull(node.htmlLinkTarget())
     })
   })
 })

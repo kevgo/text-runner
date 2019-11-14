@@ -1,5 +1,5 @@
 import flatten from "array-flatten"
-import { expect } from "chai"
+import { assert } from "chai"
 import { setWorldConstructor } from "cucumber"
 import fs from "fs-extra"
 import glob from "glob"
@@ -60,12 +60,12 @@ function World() {
 
   this.verifyCallError = (expectedError: string) => {
     const output = stripAnsi(this.process.output.fullText())
-    expect(output).to.include(expectedError)
-    expect(this.process.exitCode).to.equal(1)
+    assert.include(output, expectedError)
+    assert.equal(this.process.exitCode, 1)
   }
 
   this.verifyErrormessage = (expectedText: string) => {
-    expect(stripAnsi(this.process.output.fullText())).to.include(expectedText)
+    assert.include(stripAnsi(this.process.output.fullText()), expectedText)
   }
 
   this.verifyFailure = (table: any) => {
@@ -81,9 +81,10 @@ function World() {
     if (table.MESSAGE) {
       expectedHeader += ` -- ${table.MESSAGE}`
     }
-    expect(output).to.include(expectedHeader)
-    expect(output).to.match(new RegExp(table["ERROR MESSAGE"]))
-    expect(this.process.exitCode).to.equal(
+    assert.include(output, expectedHeader)
+    assert.match(output, new RegExp(table["ERROR MESSAGE"]))
+    assert.equal(
+      this.process.exitCode,
       parseInt(table["EXIT CODE"], 10),
       "exit code"
     )
@@ -117,7 +118,7 @@ ${actual}
   }
 
   this.verifyPrintedUsageInstructions = () => {
-    expect(stripAnsi(this.process.output.fullText())).to.include("COMMANDS")
+    assert.include(stripAnsi(this.process.output.fullText()), "COMMANDS")
   }
 
   this.verifyPrints = (expectedText: string) => {
@@ -137,7 +138,8 @@ ${actual}
   }
 
   this.verifyRanConsoleCommand = (command: string) => {
-    expect(stripAnsi(this.process.output.fullText())).to.include(
+    assert.include(
+      stripAnsi(this.process.output.fullText()),
       `running console command: ${command}`
     )
   }
@@ -150,7 +152,7 @@ ${actual}
 
     // verify the given tests have run
     for (const filename of filenames) {
-      expect(standardizedOutput).to.include(filename)
+      assert.include(standardizedOutput, filename)
     }
 
     // verify all other tests have not run
@@ -162,18 +164,20 @@ ${actual}
       .map(file => file.replace(/\\/g, "/"))
       .filter(file => filenames.indexOf(file) === -1)
     for (const fileShouldntRun of filesShouldntRun) {
-      expect(standardizedOutput).to.not.include(fileShouldntRun)
+      assert.notInclude(standardizedOutput, fileShouldntRun)
     }
   }
 
   this.verifyTestsRun = (count: number) => {
-    expect(stripAnsi(this.process.output.fullText())).to.include(
+    assert.include(
+      stripAnsi(this.process.output.fullText()),
       ` ${count} activities`
     )
   }
 
   this.verifyUnknownCommand = (command: string) => {
-    expect(stripAnsi(this.process.output.fullText())).to.include(
+    assert.include(
+      stripAnsi(this.process.output.fullText()),
       `unknown command: ${command}`
     )
   }

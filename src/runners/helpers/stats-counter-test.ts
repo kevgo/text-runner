@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import delay from "delay"
 import { StatsCounter } from "./stats-counter"
 
@@ -7,23 +7,23 @@ describe("StatsCounter", function() {
     const counter = new StatsCounter()
     counter.error()
     counter.error()
-    expect(counter.errors()).to.equal(2)
+    assert.equal(counter.errors(), 2)
   })
   it("counts the number of skips", function() {
     const counter = new StatsCounter()
     counter.skip()
     counter.skip()
-    expect(counter.skips()).to.equal(2)
+    assert.equal(counter.skips(), 2)
   })
   it("counts the number of successes", function() {
     const counter = new StatsCounter()
     counter.success()
     counter.success()
-    expect(counter.successes()).to.equal(2)
+    assert.equal(counter.successes(), 2)
   })
   it("counts the time", async function() {
     const counter = new StatsCounter()
     await delay(1)
-    expect(counter.duration()).to.match(/\d+.s/)
+    assert.match(counter.duration(), /\d+.s/)
   })
 })

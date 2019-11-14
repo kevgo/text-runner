@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { isExternalLink } from "./is-external-link"
 
 describe("isExternalLink", function() {
@@ -11,7 +11,7 @@ describe("isExternalLink", function() {
   ]
   for (const [description, link, expected] of testData) {
     it(description as string, function() {
-      expect(isExternalLink(link as string)).to.equal(expected)
+      assert.equal(isExternalLink(link as string), expected)
     })
   }
 })

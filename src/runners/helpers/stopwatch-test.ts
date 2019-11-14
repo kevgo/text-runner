@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import delay from "delay"
 import { StopWatch } from "./stopwatch"
 
@@ -7,7 +7,7 @@ describe("StopWatch", function() {
     const stopWatch = new StopWatch()
     // @ts-ignore: access private member
     stopWatch.startTime -= 200
-    expect(stopWatch.duration()).to.equal("200ms")
+    assert.equal(stopWatch.duration(), "200ms")
   })
 
   it("returns the elapsed time in seconds if it is more than 1s", async function() {
@@ -15,6 +15,6 @@ describe("StopWatch", function() {
     // @ts-ignore: access private member
     stopWatch.startTime -= 2000
     await delay(10)
-    expect(stopWatch.duration()).to.equal("2s")
+    assert.equal(stopWatch.duration(), "2s")
   })
 })

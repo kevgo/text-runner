@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import fs from "fs-extra"
 import path from "path"
 import tmp from "tmp-promise"
@@ -7,7 +7,7 @@ import { determineConfiguration } from "./determine-configuration"
 describe("loadConfiguration", function() {
   it("returns default values if no config file is given", function() {
     const result = determineConfiguration({}, { command: "" })
-    expect(result.fileGlob).to.equal("**/*.md")
+    assert.equal(result.fileGlob, "**/*.md")
   })
 
   context("config file given", function() {
@@ -16,7 +16,7 @@ describe("loadConfiguration", function() {
       this.configFilePath = path.join(this.configDir.name, "text-run.yml")
       await fs.writeFile(this.configFilePath, "files: '*.md'")
       const result = determineConfiguration({}, { command: "" })
-      expect(result.fileGlob).to.equal("*.md")
+      assert.equal(result.fileGlob, "*.md")
     })
   })
 })

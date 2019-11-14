@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { Publications } from "../configuration/publications/publications"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { RelativeLink } from "./relative-link"
@@ -10,7 +10,7 @@ describe("RelativeLink", function() {
       const link = new RelativeLink("new.md")
       const containingFile = new AbsoluteFilePath("/one/two.md")
       const actual = link.absolutify(containingFile, publications)
-      expect(actual.value).to.equal("/one/new.md")
+      assert.equal(actual.value, "/one/new.md")
     })
 
     it("converts the relative link an absolute link with publications", function() {
@@ -20,7 +20,7 @@ describe("RelativeLink", function() {
       const link = new RelativeLink("new.md")
       const containingFile = new AbsoluteFilePath("/content/one/two.md")
       const actual = link.absolutify(containingFile, publications)
-      expect(actual.value).to.equal("/one/new.md")
+      assert.equal(actual.value, "/one/new.md")
     })
 
     it("can go upwards", function() {
@@ -28,7 +28,7 @@ describe("RelativeLink", function() {
       const link = new RelativeLink("../new.md")
       const containingFile = new AbsoluteFilePath("/one/two.md")
       const actual = link.absolutify(containingFile, publications)
-      expect(actual.value).to.equal("/new.md")
+      assert.equal(actual.value, "/new.md")
     })
   })
 })

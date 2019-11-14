@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
 import { actionFinder } from "./action-finder"
 
@@ -8,14 +8,14 @@ describe("actionFinder", function() {
       it("returns the matching handler function", function() {
         const activity = scaffoldActivity({ actionName: "cd" })
         const result = actionFinder.actionFor(activity)
-        expect(result).to.be.a("function")
+        assert.typeOf(result, "function")
       })
     })
   })
   describe("customActionNames", function() {
     it("returns the names of all built-in actions", function() {
       const result = actionFinder.customActionNames()
-      expect(result).to.eql([
+      assert.deepEqual(result, [
         "cd-into-empty-tmp-folder",
         "cd-workspace",
         "create-markdown-file",

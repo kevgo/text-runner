@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { isMailtoLink } from "./is-mailto-link"
 
 describe("isMailtoLink", function() {
@@ -8,7 +8,7 @@ describe("isMailtoLink", function() {
   ]
   for (const [link, expected] of testData) {
     it(link as string, function() {
-      expect(isMailtoLink(link as string)).to.equal(expected)
+      assert.equal(isMailtoLink(link as string), expected)
     })
   }
 })

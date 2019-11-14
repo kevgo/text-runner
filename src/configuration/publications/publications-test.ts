@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { Publications } from "./publications"
 
@@ -19,7 +19,7 @@ describe("Publications", function() {
       ])
       const filePath = new AbsoluteFilePath("bar")
       const actual: any = publications.forFilePath(filePath) || {}
-      expect(actual.localPath).to.equal("/bar/")
+      assert.equal(actual.localPath, "/bar/")
     })
 
     it("returns NULL if no publication matches", function() {
@@ -32,7 +32,7 @@ describe("Publications", function() {
       ])
       const filePath = new AbsoluteFilePath("bar")
       const actual = publications.forFilePath(filePath)
-      expect(actual).to.undefined
+      assert.isUndefined(actual)
     })
   })
 
@@ -63,12 +63,12 @@ describe("Publications", function() {
           publicPath: "/"
         }
       ])
-      expect(actual).to.eql(expected)
+      assert.deepEqual(actual, expected)
     })
 
     it("works with empty mappings", function() {
       const publications = new Publications()
-      expect(publications.sort()).to.eql([])
+      assert.lengthOf(publications.sort(), 0)
     })
   })
 })

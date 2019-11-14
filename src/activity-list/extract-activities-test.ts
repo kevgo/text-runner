@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { extractActivities } from "./extract-activities"
 
@@ -14,11 +14,11 @@ describe("extractActivities()", function() {
     input.pushNode({ type: "text" })
     input.pushNode({ type: "anchor_close" })
     const result = extractActivities([input], "textrun")
-    expect(result).to.have.length(1)
-    expect(result[0].actionName).to.equal("verify-foo")
-    expect(result[0].file.unixified()).to.equal("README.md")
-    expect(result[0].line).to.equal(3)
-    expect(result[0].nodes).to.eql(input)
+    assert.lengthOf(result, 1)
+    assert.equal(result[0].actionName, "verify-foo")
+    assert.equal(result[0].file.unixified(), "README.md")
+    assert.equal(result[0].line, 3)
+    assert.deepEqual(result[0].nodes, input)
   })
 
   it("normalizes action names in CamelCase", function() {
@@ -28,7 +28,7 @@ describe("extractActivities()", function() {
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")
-    expect(result[0].actionName).to.equal("verify-foo")
+    assert.equal(result[0].actionName, "verify-foo")
   })
 
   it("normalizes action names in kebab-case", function() {
@@ -41,7 +41,7 @@ describe("extractActivities()", function() {
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")
-    expect(result[0].actionName).to.equal("verify-foo")
+    assert.equal(result[0].actionName, "verify-foo")
   })
 
   it("normalizes action names in snake_case", function() {
@@ -54,6 +54,6 @@ describe("extractActivities()", function() {
     })
     AST.pushNode({ type: "anchor_close" })
     const result = extractActivities([AST], "textrun")
-    expect(result[0].actionName).to.equal("verify-foo")
+    assert.equal(result[0].actionName, "verify-foo")
   })
 })

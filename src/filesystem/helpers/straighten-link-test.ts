@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { straightenLink } from "./straighten-link"
 
 describe("straightenPath", function() {
@@ -13,7 +13,7 @@ describe("straightenPath", function() {
   for (const [description, testData] of Object.entries(tests)) {
     const [input, expected] = Object.entries(testData)[0]
     it(description, function() {
-      expect(straightenLink(input)).to.equal(expected)
+      assert.equal(straightenLink(input), expected)
     })
   }
 })

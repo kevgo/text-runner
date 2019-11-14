@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { Publications } from "../configuration/publications/publications"
 import { AbsoluteFilePath } from "./absolute-file-path"
 
@@ -7,7 +7,7 @@ describe("AbsoluteFilePath", function() {
     it("appends the given filename to the current path", function() {
       const filePath = new AbsoluteFilePath("/one")
       const appended = filePath.append("two")
-      expect(appended.unixified()).to.equal("one/two")
+      assert.equal(appended.unixified(), "one/two")
     })
   })
 
@@ -22,7 +22,7 @@ describe("AbsoluteFilePath", function() {
       it(name, function() {
         const [input, output] = data
         const file = new AbsoluteFilePath(input)
-        expect(file.directory().unixified()).to.equal(output)
+        assert.equal(file.directory().unixified(), output)
       })
     }
   })
@@ -30,11 +30,11 @@ describe("AbsoluteFilePath", function() {
   describe("extName", function() {
     it("returns the file extension including dot", function() {
       const filePath = new AbsoluteFilePath("/one.md")
-      expect(filePath.extName()).to.equal(".md")
+      assert.equal(filePath.extName(), ".md")
     })
     it("returns an empty string for no file extensions", function() {
       const filePath = new AbsoluteFilePath("/one")
-      expect(filePath.extName()).to.equal("")
+      assert.equal(filePath.extName(), "")
     })
   })
 
@@ -49,7 +49,7 @@ describe("AbsoluteFilePath", function() {
       it(name, function() {
         const [input, output] = data
         const file = new AbsoluteFilePath(input as string)
-        expect(file.isDirectory()).to.equal(output)
+        assert.equal(file.isDirectory(), output)
       })
     }
   })
@@ -62,7 +62,7 @@ describe("AbsoluteFilePath", function() {
     for (const [input, output] of Object.entries(testData)) {
       it(`converts ${input} to ${output}`, function() {
         const filePath = new AbsoluteFilePath(input)
-        expect(filePath.unixified()).to.equal(output)
+        assert.equal(filePath.unixified(), output)
       })
     }
   })
@@ -71,7 +71,7 @@ describe("AbsoluteFilePath", function() {
     it("returns the unixified path if there are no publications", function() {
       const filePath = new AbsoluteFilePath("content\\1.md")
       const actual = filePath.publicPath(new Publications())
-      expect(actual.value).to.equal("/content/1.md")
+      assert.equal(actual.value, "/content/1.md")
     })
 
     it("adjusts the directory according to the matching publication", function() {
@@ -84,7 +84,7 @@ describe("AbsoluteFilePath", function() {
       ])
       const filePath = new AbsoluteFilePath("/content/1.md")
       const actual = filePath.publicPath(publications)
-      expect(actual.value).to.equal("/1.html")
+      assert.equal(actual.value, "/1.html")
     })
   })
 })

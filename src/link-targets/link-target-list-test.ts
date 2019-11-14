@@ -1,4 +1,4 @@
-import { expect } from "chai"
+import { assert } from "chai"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { LinkTargetList } from "./link-target-list"
@@ -17,14 +17,14 @@ describe("LinkTargetList", function() {
         new AbsoluteFilePath("file.md"),
         "foo-bar"
       )
-      expect(actual).to.be.true
+      assert.isTrue(actual)
     })
 
     it("registers files even if they do not contain link targets", function() {
       const nodeList = AstNodeList.scaffold({ file: "file.md", type: "text" })
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
-      expect(targetList.hasFile(new AbsoluteFilePath("file.md"))).to.be.true
+      assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")))
     })
 
     it("adds the headings in the given AstNodeList", function() {
@@ -46,7 +46,7 @@ describe("LinkTargetList", function() {
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
       const filePath = new AbsoluteFilePath("file.md")
-      expect(targetList.hasAnchor(filePath, "foo-bar")).to.be.true
+      assert.isTrue(targetList.hasAnchor(filePath, "foo-bar"))
     })
   })
 
@@ -70,13 +70,13 @@ describe("LinkTargetList", function() {
       const list = new LinkTargetList()
       list.addHeading(nodeList[0], nodeList)
       const filePath = new AbsoluteFilePath("file.md")
-      expect(list.anchorType(filePath, "foo-bar")).to.equal("heading")
+      assert.equal(list.anchorType(filePath, "foo-bar"), "heading")
     })
     it('returns "anchor" for HTML anchors', function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
       list.addLinkTarget(filePath, "anchor", "hello")
-      expect(list.anchorType(filePath, "hello")).to.equal("anchor")
+      assert.equal(list.anchorType(filePath, "hello"), "anchor")
     })
   })
 
@@ -85,18 +85,18 @@ describe("LinkTargetList", function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
       list.addLinkTarget(filePath, "heading", "hello")
-      expect(list.hasAnchor(filePath, "hello")).to.be.true
+      assert.isTrue(list.hasAnchor(filePath, "hello"))
     })
     it("returns FALSE if the given anchor does not exist in the file", function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
       list.addLinkTarget(filePath, "heading", "hello")
-      expect(list.hasAnchor(filePath, "zonk")).to.be.false
+      assert.isFalse(list.hasAnchor(filePath, "zonk"))
     })
     it("returns FALSE if the given file does not exist", function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("zonk.md")
-      expect(list.hasAnchor(filePath, "foo")).to.be.false
+      assert.isFalse(list.hasAnchor(filePath, "foo"))
     })
   })
 
@@ -105,18 +105,18 @@ describe("LinkTargetList", function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
       list.addLinkTarget(filePath, "heading", "hello")
-      expect(list.hasFile(filePath)).to.be.true
+      assert.isTrue(list.hasFile(filePath))
     })
     it("returns TRUE if the list contains the file without anchors", function() {
       const nodeList = AstNodeList.scaffold({ file: "file.md", type: "text" })
       const targetList = new LinkTargetList()
       targetList.addNodeList(nodeList)
-      expect(targetList.hasFile(new AbsoluteFilePath("file.md"))).to.be.true
+      assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")))
     })
     it("returns FALSE if the list does not contain the file", function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
-      expect(list.hasFile(filePath)).to.be.false
+      assert.isFalse(list.hasFile(filePath))
     })
   })
 })

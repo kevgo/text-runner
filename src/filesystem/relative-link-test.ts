@@ -12,7 +12,7 @@ suite("RelativeLink.absolutify()", function() {
     assert.equal(actual.value, "/one/new.md")
   })
 
-  it("with publications", function() {
+  test("with publications", function() {
     const publications = Publications.fromJSON([
       { localPath: "/content", publicPath: "/", publicExtension: "" }
     ])
@@ -22,7 +22,7 @@ suite("RelativeLink.absolutify()", function() {
     assert.equal(actual.value, "/one/new.md")
   })
 
-  it("upwards link", function() {
+  test("upwards link", function() {
     const publications = new Publications()
     const link = new RelativeLink("../new.md")
     const containingFile = new AbsoluteFilePath("/one/two.md")

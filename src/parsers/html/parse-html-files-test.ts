@@ -7,14 +7,14 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { parseHTMLFiles } from "./parse-html-files"
 
-describe("parseHTMLFiles", function() {
+suite("parseHTMLFiles", function() {
   const tagMapper = new TagMapper()
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
   const specificFixtureDir = path.join("src", "parsers", "html", "fixtures")
   for (const fixturePath of [sharedFixtureDir, specificFixtureDir]) {
     for (const testDirName of fs.readdirSync(fixturePath)) {
       const testDirPath = path.join(fixturePath, testDirName)
-      it(`parse '${testDirName}'`, async function() {
+      test(`parse '${testDirName}'`, async function() {
         const expectedPath = path.join(testDirPath, "result.json")
         const expectedJSON = await fs.readJSON(expectedPath)
         const expected = new AstNodeList()

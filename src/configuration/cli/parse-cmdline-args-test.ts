@@ -14,7 +14,7 @@ suite("parse-cmdline-args", function() {
   test("with windows <node> call", function() {
     const result = parseCmdlineArgs([
       "C:\\Program Files (x86)\\nodejs\\node.exe",
-      "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli\\cli.js",
+      "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli.js",
       "run"
     ])
     assert.equal(result.command, "run")
@@ -44,8 +44,8 @@ suite("parse-cmdline-args", function() {
       "documentation/actions/cd.md"
     ])
     assert.equal(result.command, "run")
-    assert.isTrue(this.result.offline)
-    assert.equal(this.result.fileGlob, "documentation/actions/cd.md")
+    assert.isTrue(result.offline)
+    assert.equal(result.fileGlob, "documentation/actions/cd.md")
   })
 
   test("<file>", function() {

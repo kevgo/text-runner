@@ -19,20 +19,13 @@ test("TagMapper.openingTypeForTag", function() {
 })
 
 test("TagMapper.tagForType()", function() {
-  const tests = [
-    ["known opening tag", "bold_open", "b"],
-    ["known closing tag", "bold_close", "/b"],
-    ["known standalone tag", "image", "img"],
-    ["unknown opening tag", "foo_open", "foo"],
-    ["unknown closing tag", "foo_close", "/foo"],
-    ["unknown standalone tag", "foo", "foo"],
-    ["text tag", "text", ""]
-  ]
-  for (const [desc, input, expected] of tests) {
-    test(desc, function() {
-      assert.equal(tagMapper.tagForType(input), expected)
-    })
-  }
+  assert.equal(tagMapper.tagForType("bold_open"), "b", "known opening tag")
+  assert.equal(tagMapper.tagForType("bold_close"), "/b", "known closing tag")
+  assert.equal(tagMapper.tagForType("image"), "img", "known standalone tag")
+  assert.equal(tagMapper.tagForType("foo_open"), "foo", "unknown opening tag")
+  assert.equal(tagMapper.tagForType("foo_open"), "foo", "unknown closing tag")
+  assert.equal(tagMapper.tagForType("foo"), "foo", "unknown standalone tag")
+  assert.equal(tagMapper.tagForType("text"), "", "text tag")
 })
 
 test("TagMapper.typeForTag()", () => {

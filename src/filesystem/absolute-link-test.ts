@@ -3,17 +3,9 @@ import { Publications } from "../configuration/publications/publications"
 import { AbsoluteLink } from "./absolute-link"
 import { RelativeLink } from "./relative-link"
 
-suite("AbsoluteLink.anchor()", function() {
-  const tests = [
-    ["link with anchor", "/foo.md#hello", "hello"],
-    ["link without anchor", "/foo.md", ""]
-  ]
-  for (const [description, link, expected] of tests) {
-    test(description, function() {
-      const absoluteLinklink = new AbsoluteLink(link)
-      assert.equal(absoluteLinklink.anchor(), expected)
-    })
-  }
+test("AbsoluteLink.anchor()", function() {
+  assert.equal(new AbsoluteLink("/foo.md#hello").anchor(), "hello")
+  assert.equal(new AbsoluteLink("/foo.md").anchor(), "")
 })
 
 suite("AbsoluteLink.append()", function() {
@@ -33,13 +25,12 @@ suite("AbsoluteLink.append()", function() {
 
 suite("AbsoluteLink.directory()", function() {
   const tests = [
-    ["returns the directory of the given filename", "/dir/file.md", "/dir/"],
-    ["returns the given directory", "/dir/", "/dir/"]
+    { desc: "file path", give: "/dir/file.md", want: "/dir/" },
+    { desc: "directory path", give: "/dir/", want: "/dir/" }
   ]
-  for (const [description, url, expected] of tests) {
-    test(description, function() {
-      const link = new AbsoluteLink(url)
-      assert.equal(link.directory().value, expected)
+  for (const tt of tests) {
+    test(tt.desc, function() {
+      assert.equal(new AbsoluteLink(tt.give).directory().value, tt.want)
     })
   }
 })
@@ -63,33 +54,17 @@ suite("AbsoluteLink.hasAnchor()", function() {
   })
 })
 
-suite("AbsoluteLink.hasExtension()", function() {
-  const tests = [
-    { link: "/foo.md", input: ".md", expected: true },
-    { link: "/foo.md", input: "md", expected: true },
-    { link: "/foo", input: "", expected: true },
-    { link: "/foo/bar.html", input: "md", expected: false },
-    { link: "/foo/bar", input: "md", expected: false }
-  ]
-  for (const tt of tests) {
-    test(`${tt.link}-${tt.input}`, function() {
-      const link = new AbsoluteLink(tt.link)
-      assert.equal(link.hasExtension(tt.input), tt.expected)
-    })
-  }
+test("AbsoluteLink.hasExtension()", function() {
+  assert.isTrue(new AbsoluteLink("/foo.md").hasExtension(".md"))
+  assert.isTrue(new AbsoluteLink("/foo.md").hasExtension("md"))
+  assert.isFalse(new AbsoluteLink("/foo.md").hasExtension(""))
+  assert.isFalse(new AbsoluteLink("/foo/bar.html").hasExtension("md"))
+  assert.isFalse(new AbsoluteLink("/foo/bar").hasExtension("md"))
 })
 
-suite("AbsoluteLink.isLinkToDirectory", function() {
-  const tests = [
-    { desc: "link points to directory", in: "/foo/", out: true },
-    { desc: "link points to file", in: "/foo/bar.md", out: false }
-  ]
-  for (const tt of tests) {
-    test(tt.desc, function() {
-      const link = new AbsoluteLink(tt.in)
-      assert.equal(link.isLinkToDirectory(), tt.out)
-    })
-  }
+test("AbsoluteLink.isLinkToDirectory", function() {
+  assert.isTrue(new AbsoluteLink("/foo/").isLinkToDirectory())
+  assert.isFalse(new AbsoluteLink("/foo/bar.md").isLinkToDirectory())
 })
 
 suite("AbsoluteLink.localize", function() {
@@ -153,42 +128,42 @@ test("AbsoluteLink.rebase()", function() {
   assert.equal(actual.value, "/foo/two/three.md")
 })
 
-suite("AbsoluteLink.withAnchor()", function() {
+test("AbsoluteLink.withAnchor()", function() {
+  assert.equal(
+    new AbsoluteLink("/foo.md#hello").withAnchor("new").value,
+    "/foo.md#new",
+    "link with existing anchor"
+  )
+  assert.equal(
+    new AbsoluteLink("/foo.md").withAnchor("new").value,
+    "/foo.md#new",
+    "link without anchor"
+  )
+})
+
+suite("AbsoluteLink.withExtension()", function() {
   const tests = [
-    ["link with anchor", "/foo.md#hello", "new", "/foo.md#new"],
-    ["link without anchor", "/foo.md", "new", "/foo.md#new"]
+    { file: "foo.txt", ext: "md", want: "/foo.md" },
+    { file: "foo.txt", ext: ".md", want: "/foo.md" }
   ]
-  for (const [description, url, anchor, expected] of tests) {
-    test(description, function() {
-      const link = new AbsoluteLink(url)
-      assert.equal(link.withAnchor(anchor).value, expected)
+  for (const tt of tests) {
+    test(`${tt.file}-${tt.ext}`, function() {
+      const link = new AbsoluteLink(tt.file)
+      const actual = link.withExtension(tt.ext)
+      assert.equal(actual.value, tt.want)
     })
   }
 })
 
-suite("withExtension", function() {
-  test("returns a new AbsoluteLink with the given file extension without dot", function() {
-    const link = new AbsoluteLink("foo.txt")
-    const actual = link.withExtension("md")
-    assert.equal(actual.value, "/foo.md")
-  })
-
-  test("returns a new AbsoluteLink with the given file extension with dot", function() {
-    const link = new AbsoluteLink("foo.txt")
-    const actual = link.withExtension(".md")
-    assert.equal(actual.value, "/foo.md")
-  })
-})
-
-suite("withoutAnchor", function() {
-  const tests = [
-    ["link with anchor", "/foo.md#hello", "/foo.md"],
-    ["link without anchor", "/foo.md", "/foo.md"]
-  ]
-  for (const [description, url, expected] of tests) {
-    test(description, function() {
-      const link = new AbsoluteLink(url)
-      assert.equal(link.withoutAnchor().value, expected)
-    })
-  }
+test("AbsoluteLink.withoutAnchor()", function() {
+  assert.equal(
+    new AbsoluteLink("/foo.md#hello").withoutAnchor().value,
+    "/foo.md",
+    "link with anchor"
+  )
+  assert.equal(
+    new AbsoluteLink("/foo.md").withoutAnchor().value,
+    "/foo.md",
+    "link without anchor"
+  )
 })

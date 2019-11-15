@@ -23,20 +23,20 @@ suite("extractActivities()", function() {
     assert.deepEqual(result[0].nodes, input)
   })
 
-  const tests = {
-    verifyFoo: "verify-foo",
-    "verify-foo": "verify-foo",
-    verify_foo: "verify-foo"
-  }
-  for (const [input, expected] of Object.entries(tests)) {
-    test(`normalizes activity name ${input}`, function() {
+  const tests = [
+    { give: "verifyFoo", want: "verify-foo" },
+    { give: "verify-foo", want: "verify-foo" },
+    { give: "verify_foo", want: "verify-foo" }
+  ]
+  for (const tt of tests) {
+    test(`normalizes activity name ${tt.give}`, function() {
       const AST = new AstNodeList()
       AST.pushNode({
         attributes: { textrun: "verify_foo" }
       })
       AST.pushNode({ type: "anchor_close" })
       const result = extractActivities([AST], "textrun")
-      assert.equal(result[0].actionName, expected)
+      assert.equal(result[0].actionName, tt.want)
     })
   }
 })

@@ -9,39 +9,31 @@ suite("UnknownLink.absolutify()", function() {
     {
       desc: "relative link",
       link: "foo/bar.md",
-      containingFilePath: "/dir/file.md",
-      expected: "/dir/foo/bar.md"
+      give: "/dir/file.md",
+      want: "/dir/foo/bar.md"
     },
     {
       desc: "absolute link",
       link: "/foo/bar.md",
-      containingFilePath: "/dir/file.md",
-      expected: "/foo/bar.md"
+      give: "/dir/file.md",
+      want: "/foo/bar.md"
     }
   ]
   for (const tt of tests) {
     test(tt.desc, function() {
       const link = new UnknownLink(tt.link)
-      const containingFile = new AbsoluteFilePath(tt.containingFilePath)
+      const containingFile = new AbsoluteFilePath(tt.give)
       const publications = new Publications()
 
       const actual = link.absolutify(containingFile, publications)
 
-      assert.deepEqual(actual, new AbsoluteLink(tt.expected))
+      assert.deepEqual(actual, new AbsoluteLink(tt.want))
     })
   }
 })
 
-suite("UnknownLink.isAbsoluteLink()", function() {
-  const tests = {
-    "/foo/bar": true,
-    "foo/bar": false,
-    "../foo/bar": false
-  }
-  for (const [input, expected] of Object.entries(tests)) {
-    test(input, function() {
-      const link = new UnknownLink(input)
-      assert.equal(link.isAbsolute(), expected)
-    })
-  }
+test("UnknownLink.isAbsolute()", function() {
+  assert.isTrue(new UnknownLink("/foo/bar").isAbsolute())
+  assert.isFalse(new UnknownLink("foo/bar").isAbsolute())
+  assert.isFalse(new UnknownLink("../foo/bar").isAbsolute())
 })

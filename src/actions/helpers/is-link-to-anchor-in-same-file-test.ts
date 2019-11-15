@@ -3,13 +3,13 @@ import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file"
 
 suite("isLinkToAnchorInSameFile", function() {
   const tests = [
-    ["link to anchor in same file", "#foo", true],
-    ["link to anchor in other file", "foo#bar", false],
-    ["link to other file", "foo.md", false]
+    { desc: "link to anchor in same file", give: "#foo", want: true },
+    { desc: "link to anchor in other file", give: "foo#bar", want: false },
+    { desc: "link to other file", give: "foo.md", want: false }
   ]
-  for (const [description, link, expected] of tests) {
-    test(description as string, function() {
-      assert.equal(isLinkToAnchorInSameFile(link as string), expected)
+  for (const tt of tests) {
+    test(tt.desc, function() {
+      assert.equal(isLinkToAnchorInSameFile(tt.give), tt.want)
     })
   }
 })

@@ -9,17 +9,16 @@ test("AbsoluteFilePath.append()", function() {
 })
 
 suite("AbsoluteFilePath.directory()", function() {
-  const tests = {
-    "Unix directory": ["/foo/bar/", "foo/bar/"],
-    "Unix file path": ["/foo/bar/baz.md", "foo/bar/"],
-    "Windows directory": ["/foo/bar/", "foo/bar/"],
-    "Windows file path": ["\\foo\\bar\\baz.md", "foo/bar/"]
-  }
-  for (const [name, data] of Object.entries(tests)) {
-    test(name, function() {
-      const [input, output] = data
-      const file = new AbsoluteFilePath(input)
-      assert.equal(file.directory().unixified(), output)
+  const tests = [
+    { desc: "Unix directory", give: "/foo/bar/", want: "foo/bar/" },
+    { desc: "Unix file path", give: "/foo/bar/baz.md", want: "foo/bar/" },
+    { desc: "Windows directory", give: "/foo/bar/", want: "foo/bar/" },
+    { desc: "Windows file path", give: "\\foo\\bar\\baz.md", want: "foo/bar/" }
+  ]
+  for (const tt of tests) {
+    test(tt.desc, function() {
+      const file = new AbsoluteFilePath(tt.give)
+      assert.equal(file.directory().unixified(), tt.want)
     })
   }
 })
@@ -37,32 +36,25 @@ suite("AbsoluteFilePath.extName()", function() {
 })
 
 suite("AbsoluteFilePath.isDirectory()", function() {
-  const tests = {
-    "Unix directory": ["/foo/bar/", true],
-    "Unix file path": ["/foo/bar/baz.md", false],
-    "Windows directory": ["/foo/bar/", true],
-    "Windows file path": ["\\foo\\bar\\baz.md", false]
-  }
-  for (const [name, data] of Object.entries(tests)) {
-    test(name, function() {
-      const [input, output] = data
-      const file = new AbsoluteFilePath(input as string)
-      assert.equal(file.isDirectory(), output)
+  const tests = [
+    { desc: "Unix directory", give: "/foo/bar/", want: true },
+    { desc: "Unix file path", give: "/foo/bar/baz.md", want: false },
+    { desc: "Windows directory", give: "/foo/bar/", want: true },
+    { desc: "Windows file path", give: "\\foo\\bar\\baz.md", want: false }
+  ]
+  for (const tt of tests) {
+    test(tt.desc, function() {
+      assert.equal(new AbsoluteFilePath(tt.give).isDirectory(), tt.want)
     })
   }
 })
 
 suite("AbsoluteFilePath.unixified()", function() {
-  const tests = {
-    "/foo/bar": "foo/bar",
-    "\\foo/bar\\baz": "foo/bar/baz"
-  }
-  for (const [input, output] of Object.entries(tests)) {
-    test(`converts ${input} to ${output}`, function() {
-      const filePath = new AbsoluteFilePath(input)
-      assert.equal(filePath.unixified(), output)
-    })
-  }
+  assert.equal(new AbsoluteFilePath("/foo/bar").unixified(), "foo/bar")
+  assert.equal(
+    new AbsoluteFilePath("\\foo/bar\\baz").unixified(),
+    "foo/bar/baz"
+  )
 })
 
 suite("AbsoluteFilePath.publicPath()", function() {

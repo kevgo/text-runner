@@ -86,16 +86,16 @@ suite("LinkTargetList.anchorType()", function() {
 })
 
 suite("LinkTargetList.hasAnchor()", function() {
-  const tests = {
-    hello: true,
-    zonk: false
-  }
-  for (const [input, expected] of Object.entries(tests)) {
-    test(input, function() {
+  const tests = [
+    { anchor: "hello", give: "hello", want: true },
+    { anchor: "hello", give: "zonk", want: false }
+  ]
+  for (const tt of tests) {
+    test(tt.give, function() {
       const list = new LinkTargetList()
       const filePath = new AbsoluteFilePath("foo.md")
-      list.addLinkTarget(filePath, "heading", "hello")
-      assert.equal(list.hasAnchor(filePath, input), expected)
+      list.addLinkTarget(filePath, "heading", tt.anchor)
+      assert.equal(list.hasAnchor(filePath, tt.give), tt.want)
     })
   }
 })

@@ -3,15 +3,15 @@ import { isExternalLink } from "./is-external-link"
 
 suite("isExternalLink", function() {
   const tests = [
-    ["link without protocol", "//foo.com", true],
-    ["link with protocol", "http://foo.com", true],
-    ["absolute link", "/one/two.md", false],
-    ["relative link", "one.md", false],
-    ["relative link up", "../one.md", false]
+    { desc: "link without protocol", give: "//foo.com", want: true },
+    { desc: "link with protocol", give: "http://foo.com", want: true },
+    { desc: "absolute link", give: "/one/two.md", want: false },
+    { desc: "relative link", give: "one.md", want: false },
+    { desc: "relative link up", give: "../one.md", want: false }
   ]
-  for (const [description, link, expected] of tests) {
-    test(description as string, function() {
-      assert.equal(isExternalLink(link as string), expected)
+  for (const tt of tests) {
+    test(tt.desc, function() {
+      assert.equal(isExternalLink(tt.give), tt.want)
     })
   }
 })

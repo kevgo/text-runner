@@ -1,14 +1,13 @@
 import { assert } from "chai"
 import { unixify } from "./unixify"
 
-describe("unifixy", function() {
-  it("converts Windows paths to Unix paths", function() {
-    assert.equal(unixify("\\foo\\bar\\"), "/foo/bar/")
-  })
-  it("leaves Unix paths alone", function() {
-    assert.equal(unixify("/foo/bar/"), "/foo/bar/")
-  })
-  it("handles mixed path styles", function() {
-    assert.equal(unixify("/foo\\bar/"), "/foo/bar/")
-  })
+suite("unifixy", function() {
+  const tests = [
+    { in: "\\foo\\bar\\", out: "/foo/bar/" },
+    { in: "/foo/bar/", out: "/foo/bar/" },
+    { in: "/foo\\bar/", out: "/foo/bar/" }
+  ]
+  for (const tt of tests) {
+    assert.equal(unixify(tt.in), tt.out)
+  }
 })

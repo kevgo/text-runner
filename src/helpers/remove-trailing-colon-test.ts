@@ -1,16 +1,14 @@
 import { assert } from "chai"
 import { removeTrailingColon } from "./remove-trailing-colon"
 
-describe("removeTrailingColon", function() {
-  context("with trailing colon", function() {
-    it("removes the trailing colon", function() {
-      assert.equal(removeTrailingColon("foo:"), "foo")
+suite("removeTrailingColon", function() {
+  const tests = {
+    "foo:": "foo",
+    foo: "foo"
+  }
+  for (const [input, expected] of Object.entries(tests)) {
+    test(input, function() {
+      assert.equal(removeTrailingColon(input), expected)
     })
-  })
-
-  context("without trailing colon", function() {
-    it("returns the string as-is", function() {
-      assert.equal(removeTrailingColon("foo"), "foo")
-    })
-  })
+  }
 })

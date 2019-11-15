@@ -4,19 +4,17 @@ import path from "path"
 import tmp from "tmp-promise"
 import { determineConfiguration } from "./determine-configuration"
 
-describe("loadConfiguration", function() {
-  it("returns default values if no config file is given", function() {
+suite("loadConfiguration", function() {
+  test("no config file given", function() {
     const result = determineConfiguration({}, { command: "" })
     assert.equal(result.fileGlob, "**/*.md")
   })
 
-  context("config file given", function() {
-    beforeEach(async function() {
-      this.configDir = await tmp.dir()
-      this.configFilePath = path.join(this.configDir.name, "text-run.yml")
-      await fs.writeFile(this.configFilePath, "files: '*.md'")
-      const result = determineConfiguration({}, { command: "" })
-      assert.equal(result.fileGlob, "*.md")
-    })
+  test("config file given", async function() {
+    const configDir = await tmp.dir()
+    const configFilePath = path.join(configDir.path, "text-run.yml")
+    await fs.writeFile(configFilePath, "files: '*.md'")
+    const result = determineConfiguration({}, { command: "" })
+    assert.equal(result.fileGlob, "*.md")
   })
 })

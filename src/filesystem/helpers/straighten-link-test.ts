@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { straightenLink } from "./straighten-link"
 
-describe("straightenPath", function() {
+suite("straightenPath", function() {
   const tests = {
     "goes upward": { "/one/../two": "/two" },
     "goes upward with double slash": { "/one//../two": "/two" },
@@ -12,7 +12,7 @@ describe("straightenPath", function() {
   }
   for (const [description, testData] of Object.entries(tests)) {
     const [input, expected] = Object.entries(testData)[0]
-    it(description, function() {
+    test(description, function() {
       assert.equal(straightenLink(input), expected)
     })
   }

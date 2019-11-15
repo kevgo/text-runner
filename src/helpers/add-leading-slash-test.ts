@@ -1,12 +1,14 @@
 import { assert } from "chai"
 import { addLeadingSlash } from "./add-leading-slash"
 
-describe("addLeadingSlash", function() {
-  it("adds a leading slash if missing", function() {
-    assert.equal(addLeadingSlash("foo"), "/foo")
-  })
-
-  it("does not add a slash if one is already there", function() {
-    assert.equal(addLeadingSlash("/foo"), "/foo")
-  })
+suite("addLeadingSlash", function() {
+  const tests = {
+    foo: "/foo",
+    "/foo": "/foo"
+  }
+  for (const [input, expected] of Object.entries(tests)) {
+    test(input, function() {
+      assert.equal(addLeadingSlash(input), expected)
+    })
+  }
 })

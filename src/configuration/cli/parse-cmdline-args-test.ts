@@ -1,158 +1,81 @@
 import { assert } from "chai"
 import { parseCmdlineArgs } from "./parse-cmdline-args"
 
-describe("parse-cmdline-args", function() {
-  context("with unix <node> call", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs([
-        "/usr/local/Cellar/node/9.3.0_1/bin/node",
-        "/Users/kevlar/d/text-runner/bin/text-run",
-        "run"
-      ])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
+suite("parse-cmdline-args", function() {
+  test("with unix <node> call", function() {
+    const result = parseCmdlineArgs([
+      "/usr/local/Cellar/node/9.3.0_1/bin/node",
+      "/Users/kevlar/d/text-runner/bin/text-run",
+      "run"
+    ])
+    assert.equal(result.command, "run")
   })
 
-  context("with windows <node> call", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs([
-        "C:\\Program Files (x86)\\nodejs\\node.exe",
-        "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli\\cli.js",
-        "run"
-      ])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it("returns empty files", function() {
-      assert.isUndefined(this.result.file)
-    })
+  test("with windows <node> call", function() {
+    const result = parseCmdlineArgs([
+      "C:\\Program Files (x86)\\nodejs\\node.exe",
+      "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli\\cli.js",
+      "run"
+    ])
+    assert.equal(result.command, "run")
+    assert.isUndefined(result.fileGlob)
   })
 
-  context("with <node> and <text-run> call", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs([
-        "/usr/local/Cellar/node/9.3.0_1/bin/node",
-        "/Users/kevlar/d/text-runner/bin/text-run",
-        "run"
-      ])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
+  test("with <node> and <text-run> call", function() {
+    const result = parseCmdlineArgs([
+      "/usr/local/Cellar/node/9.3.0_1/bin/node",
+      "/Users/kevlar/d/text-runner/bin/text-run",
+      "run"
+    ])
+    assert.equal(result.command, "run")
   })
 
-  context("with <text-run> call", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs([
-        "/Users/kevlar/d/text-runner/bin/text-run",
-        "run"
-      ])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
+  test("with <text-run> call", function() {
+    const result = parseCmdlineArgs([
+      "/Users/kevlar/d/text-runner/bin/text-run",
+      "run"
+    ])
+    assert.equal(result.command, "run")
   })
 
-  context("--offline <file>", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs([
-        "--offline",
-        "documentation/actions/cd.md"
-      ])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it('returns the "offline" switch', function() {
-      assert.isTrue(this.result.offline)
-    })
-
-    it("returns the filename", function() {
-      assert.equal(this.result.fileGlob, "documentation/actions/cd.md")
-    })
+  test("--offline <file>", function() {
+    const result = parseCmdlineArgs([
+      "--offline",
+      "documentation/actions/cd.md"
+    ])
+    assert.equal(result.command, "run")
+    assert.isTrue(this.result.offline)
+    assert.equal(this.result.fileGlob, "documentation/actions/cd.md")
   })
 
-  context("<file>", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs(["documentation/actions/cd.md"])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it("returns the filename", function() {
-      assert.equal(this.result.fileGlob, "documentation/actions/cd.md")
-    })
+  test("<file>", function() {
+    const result = parseCmdlineArgs(["documentation/actions/cd.md"])
+    assert.equal(result.command, "run")
+    assert.equal(result.fileGlob, "documentation/actions/cd.md")
   })
 
-  context("(no args)", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs([])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it("returns undefined as the filename", function() {
-      assert.isUndefined(this.result.file)
-    })
+  test("(no args)", function() {
+    const result = parseCmdlineArgs([])
+    assert.equal(result.command, "run")
+    assert.isUndefined(result.fileGlob)
   })
 
-  context("--format dot", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs(["--format", "dot"])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it("returns the dot formatter option", function() {
-      assert.equal(this.result.formatterName, "dot")
-    })
+  test("--format dot", function() {
+    const result = parseCmdlineArgs(["--format", "dot"])
+    assert.equal(result.command, "run")
+    assert.equal(result.formatterName, "dot")
   })
 
-  context("--workspace foo/bar", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs(["--workspace", "foo/bar"])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it("returns the foo/bar workspace", function() {
-      assert.equal(this.result.workspace, "foo/bar")
-    })
+  test("--workspace foo/bar", function() {
+    const result = parseCmdlineArgs(["--workspace", "foo/bar"])
+    assert.equal(result.command, "run")
+    assert.equal(result.workspace, "foo/bar")
   })
 
-  context("--keep-tmp", function() {
-    beforeEach(function() {
-      this.result = parseCmdlineArgs(["--keep-tmp", "foo.md"])
-    })
-
-    it('returns the "run" command', function() {
-      assert.equal(this.result.command, "run")
-    })
-
-    it("sets the keep-tmp flag", function() {
-      assert.isTrue(this.result.keepTmp)
-    })
-
-    it('returns "foo.md" as the filename', function() {
-      assert.equal(this.result.fileGlob, "foo.md")
-    })
+  test("--keep-tmp", function() {
+    const result = parseCmdlineArgs(["--keep-tmp", "foo.md"])
+    assert.equal(result.command, "run")
+    assert.isTrue(result.keepTmp)
+    assert.equal(result.fileGlob, "foo.md")
   })
 })

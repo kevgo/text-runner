@@ -1,11 +1,14 @@
 import { assert } from "chai"
 import { addTrailingSlash } from "./add-trailing-slash"
 
-describe("addTrailingSlash", function() {
-  it("appends a slash if there is not one", function() {
-    assert.equal(addTrailingSlash("foo"), "foo/")
-  })
-  it("does not append a slash if there is one", function() {
-    assert.equal(addTrailingSlash("foo/"), "foo/")
-  })
+suite("addTrailingSlash", function() {
+  const tests = {
+    foo: "foo/",
+    "foo/": "foo/"
+  }
+  for (const [input, expected] of Object.entries(tests)) {
+    test(input, function() {
+      assert.equal(addTrailingSlash(input), expected)
+    })
+  }
 })

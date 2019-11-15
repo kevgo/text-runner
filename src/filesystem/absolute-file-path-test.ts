@@ -42,7 +42,7 @@ suite("AbsoluteFilePath.isDirectory()", function() {
   }
 })
 
-suite("AbsoluteFilePath.unixified()", function() {
+test("AbsoluteFilePath.unixified()", function() {
   assert.equal(new AbsoluteFilePath("/foo/bar").unixified(), "foo/bar")
   assert.equal(
     new AbsoluteFilePath("\\foo/bar\\baz").unixified(),

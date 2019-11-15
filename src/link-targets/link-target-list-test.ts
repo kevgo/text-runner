@@ -11,9 +11,7 @@ suite("LinkTargetList.addNodeList()", function() {
       type: "anchor_open"
     })
     const targetList = new LinkTargetList()
-
     targetList.addNodeList(nodeList)
-
     const actual = targetList.hasAnchor(
       new AbsoluteFilePath("file.md"),
       "foo-bar"
@@ -85,19 +83,12 @@ suite("LinkTargetList.anchorType()", function() {
   })
 })
 
-suite("LinkTargetList.hasAnchor()", function() {
-  const tests = [
-    { anchor: "hello", give: "hello", want: true },
-    { anchor: "hello", give: "zonk", want: false }
-  ]
-  for (const tt of tests) {
-    test(tt.give, function() {
-      const list = new LinkTargetList()
-      const filePath = new AbsoluteFilePath("foo.md")
-      list.addLinkTarget(filePath, "heading", tt.anchor)
-      assert.equal(list.hasAnchor(filePath, tt.give), tt.want)
-    })
-  }
+test("LinkTargetList.hasAnchor()", function() {
+  const list = new LinkTargetList()
+  const filePath = new AbsoluteFilePath("foo.md")
+  list.addLinkTarget(filePath, "heading", "hello")
+  assert.isTrue(list.hasAnchor(filePath, "hello"))
+  assert.isFalse(list.hasAnchor(filePath, "zonk"))
 })
 
 suite("LinkTargetList.hasFile()", function() {

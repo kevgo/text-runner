@@ -9,6 +9,7 @@ suite("parseCmdlineArgs()", function() {
       "run"
     ])
     assert.equal(result.command, "run")
+    assert.isUndefined(result.fileGlob)
   })
 
   test("with windows <node> call", function() {
@@ -28,6 +29,7 @@ suite("parseCmdlineArgs()", function() {
       "run"
     ])
     assert.equal(result.command, "run")
+    assert.isUndefined(result.fileGlob)
   })
 
   test("with <text-run> call", function() {
@@ -36,6 +38,7 @@ suite("parseCmdlineArgs()", function() {
       "run"
     ])
     assert.equal(result.command, "run")
+    assert.isUndefined(result.fileGlob)
   })
 
   test("--offline <file>", function() {

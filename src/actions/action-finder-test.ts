@@ -9,19 +9,15 @@ test("actionFinder.actionFor() with built-in block name", function() {
 
 test("actionFinder.customActionNames()", function() {
   const result = actionFinder.customActionNames()
-  assert.deepEqual(
-    result,
-    [
-      "cd-into-empty-tmp-folder",
-      "cd-workspace",
-      "create-markdown-file",
-      "run-markdown-in-textrun",
-      "run-textrun",
-      "verify-ast-node-attributes",
-      "verify-handler-args",
-      "verify-make-command",
-      "verify-searcher-methods"
-    ],
-    "returns the names of all built-in actions"
-  )
+  assert.deepEqual(result, [
+    "cd-into-empty-tmp-folder",
+    "cd-workspace",
+    "create-markdown-file",
+    "run-markdown-in-textrun",
+    "run-textrun",
+    "verify-ast-node-attributes",
+    "verify-handler-args",
+    "verify-make-command",
+    "verify-searcher-methods"
+  ])
 })

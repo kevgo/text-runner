@@ -7,7 +7,7 @@ suite("NameRefiner", function() {
     assert.equal(refiner.finalName(), "original name")
   })
 
-  test("user provides refinements", function() {
+  test("with refinements", function() {
     const refiner = new NameRefiner("original name")
     const refineFn = refiner.refineFn()
     refineFn("new name")

@@ -3,11 +3,11 @@ import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 import { AstNode } from "../../standard-AST/ast-node"
 import { OpenNodeTracker } from "./open-node-tracker"
 
-suite("OpenTagTracker", function() {
+suite("OpenTagTracker.close()", function() {
   /** placeholder filename */
   const file = new AbsoluteFilePath("foo")
 
-  test("storing nodes", function() {
+  test("closing an open tag", function() {
     const openTags = new OpenNodeTracker()
     openTags.open({ type: "foo_open" })
     const found = openTags.close({ type: "foo_close" }, file, 12)
@@ -23,11 +23,11 @@ suite("OpenTagTracker", function() {
       "No opening node 'other_open' found for closing node 'other_close'"
     )
   })
+})
 
-  test("has", function() {
-    const openTags = new OpenNodeTracker()
-    openTags.open(AstNode.scaffold({ type: "link_open" }))
-    assert.isTrue(openTags.has("link_open"))
-    assert.isFalse(openTags.has("anchor_open"))
-  })
+test("OpenTagTracker.has()", function() {
+  const openTags = new OpenNodeTracker()
+  openTags.open(AstNode.scaffold({ type: "link_open" }))
+  assert.isTrue(openTags.has("link_open"))
+  assert.isFalse(openTags.has("anchor_open"))
 })

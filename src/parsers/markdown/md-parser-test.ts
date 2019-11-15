@@ -6,7 +6,7 @@ import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { parseMarkdownFiles } from "./parse-markdown-files"
 
-suite("MdParser.parseFile", function() {
+suite("MdParser.parseFile()", function() {
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
   const specificFixtureDir = path.join("src", "parsers", "markdown", "fixtures")
   for (const fixtureDir of [sharedFixtureDir, specificFixtureDir]) {

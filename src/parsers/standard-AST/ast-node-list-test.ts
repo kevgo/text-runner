@@ -42,7 +42,7 @@ suite("AstNodeList.getNodesFor()", function() {
 })
 
 suite("AstNodeList.getNodeOfTypes()", function() {
-  test("exactly one match", function() {
+  test("one match", function() {
     const list = new AstNodeList()
     list.pushNode({ type: "one" })
     list.pushNode({ type: "two" })

@@ -2,13 +2,12 @@ import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
 import { actionFinder } from "./action-finder"
 
-test("actionFinder.actionFor - built-in block name", function() {
+test("actionFinder.actionFor() with built-in block name", function() {
   const activity = scaffoldActivity({ actionName: "cd" })
-  const result = actionFinder.actionFor(activity)
-  assert.typeOf(result, "function")
+  assert.typeOf(actionFinder.actionFor(activity), "function")
 })
 
-test("actionFinder.customActionNames", function() {
+test("actionFinder.customActionNames()", function() {
   const result = actionFinder.customActionNames()
   assert.deepEqual(
     result,

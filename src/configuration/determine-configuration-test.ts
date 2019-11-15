@@ -1,14 +1,14 @@
 import { assert } from "chai"
 import { determineConfiguration } from "./determine-configuration"
 
-suite("loadConfiguration", function() {
-  test("no config file given", function() {
-    const result = determineConfiguration({}, { command: "" })
-    assert.equal(result.fileGlob, "**/*.md")
+suite("loadConfiguration()", function() {
+  test("no user config given", function() {
+    const config = determineConfiguration({}, { command: "" })
+    assert.equal(config.fileGlob, "**/*.md")
   })
 
-  test("config file given", async function() {
-    const result = determineConfiguration({ fileGlob: "*.md" }, { command: "" })
-    assert.equal(result.fileGlob, "*.md")
+  test("user config given", async function() {
+    const config = determineConfiguration({ fileGlob: "*.md" }, { command: "" })
+    assert.equal(config.fileGlob, "*.md")
   })
 })

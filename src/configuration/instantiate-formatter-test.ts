@@ -6,18 +6,18 @@ import { scaffoldConfiguration } from "./types/configuration"
 
 const config = scaffoldConfiguration()
 
-suite("instantiateFormatter", function() {
-  test("dot formatter", function() {
-    const actual = instantiateFormatter("dot", 0, config)
-    assert.instanceOf(actual, DotFormatter)
+suite("instantiateFormatter()", function() {
+  test("request dot formatter", function() {
+    const formatter = instantiateFormatter("dot", 0, config)
+    assert.instanceOf(formatter, DotFormatter)
   })
 
-  test("detailed formatter", function() {
-    const actual = instantiateFormatter("detailed", 0, config)
-    assert.instanceOf(actual, DetailedFormatter)
+  test("request detailed formatter", function() {
+    const formatter = instantiateFormatter("detailed", 0, config)
+    assert.instanceOf(formatter, DetailedFormatter)
   })
 
-  test("unknown formatter name", function() {
+  test("request unknown formatter", function() {
     assert.throws(function() {
       instantiateFormatter("zonk", 0, config)
     }, "Unknown formatter: zonk\n\nAvailable formatters are: detailed, dot, progress")

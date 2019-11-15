@@ -72,7 +72,6 @@ suite("Publications.sortPathMappings()", function() {
   })
 
   test("no publications", function() {
-    const publications = new Publications()
-    assert.lengthOf(publications.sort(), 0)
+    assert.lengthOf(new Publications().sort(), 0)
   })
 })

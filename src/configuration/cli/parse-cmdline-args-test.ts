@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { parseCmdlineArgs } from "./parse-cmdline-args"
 
-suite("parse-cmdline-args", function() {
+suite("parseCmdlineArgs()", function() {
   test("with unix <node> call", function() {
     const result = parseCmdlineArgs([
       "/usr/local/Cellar/node/9.3.0_1/bin/node",

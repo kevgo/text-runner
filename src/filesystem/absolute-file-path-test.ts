@@ -23,16 +23,9 @@ suite("AbsoluteFilePath.directory()", function() {
   }
 })
 
-suite("AbsoluteFilePath.extName()", function() {
-  test("with extension", function() {
-    const filePath = new AbsoluteFilePath("/one.md")
-    assert.equal(filePath.extName(), ".md")
-  })
-
-  test("no file extension", function() {
-    const filePath = new AbsoluteFilePath("/one")
-    assert.equal(filePath.extName(), "")
-  })
+test("AbsoluteFilePath.extName()", function() {
+  assert.equal(new AbsoluteFilePath("/one.md").extName(), ".md")
+  assert.equal(new AbsoluteFilePath("/one").extName(), "")
 })
 
 suite("AbsoluteFilePath.isDirectory()", function() {

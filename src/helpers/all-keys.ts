@@ -1,4 +1,4 @@
-// returns all the keys of all objects
+/** allKeys returns all the keys of all objects. */
 export function allKeys(...args: object[]): string[] {
   const result = new Set()
   for (const arg of args) {

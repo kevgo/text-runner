@@ -3,7 +3,10 @@ import fs from "fs-extra"
 import path from "path"
 import { ActionArgs } from "../types/action-args"
 
-// Verifies that the test workspace contains the given directory
+/**
+ * The "verifyWorkspaceContainsDirectory" action verifies that the test workspace
+ * contains the given directory.
+ */
 export default async function verifyWorkspaceContainsDirectory(
   args: ActionArgs
 ) {

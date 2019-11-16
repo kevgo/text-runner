@@ -48,12 +48,12 @@ function replaceSubstitutions(code: string, c: Configuration): string {
   return code
 }
 
-// makes sure "require('.') works as expected even if running in a temp workspace
+/** replaceRequireLocalModule makes sure "require('.') works as expected even if running in a temp workspace. */
 function replaceRequireLocalModule(code: string): string {
   return code.replace(/require\(['"].['"]\)/, "require(process.cwd())")
 }
 
-// make variable declarations persist across code blocks
+/** replaceVariableDeclarations makes variable declarations persist across code blocks. */
 function replaceVariableDeclarations(code: string): string {
   return code
     .replace(/\bconst /g, "global.")
@@ -61,7 +61,7 @@ function replaceVariableDeclarations(code: string): string {
     .replace(/\bthis\./g, "global.")
 }
 
-// returns whether the given code block contains a callback placeholder
+/** hasCallbackPlaceholder returns whether the given code block contains a callback placeholder. */
 function hasCallbackPlaceholder(code: string): boolean {
   return code.indexOf("<CALLBACK>") > -1 || code.indexOf("// ...") > -1
 }

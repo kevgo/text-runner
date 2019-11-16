@@ -3,7 +3,7 @@ import { ActionArgs } from "../types/action-args"
 
 type DoneFunction = (err?: Error) => void
 
-// Runs the JavaScript code given in the code block
+/** The "runJavascript" action runs the JavaScript code given in the code block. */
 export default function runJavascript(args: ActionArgs, done: DoneFunction) {
   let code = args.nodes.textInNodeOfType("fence")
   if (code == null) {
@@ -36,7 +36,7 @@ function replaceAsyncCallbacks(code: string): string {
     .replace(/\/\/\s*\.\.\./g, "__finished()")
 }
 
-// substitutes replacements configured in text-run.yml
+/** replaceSubstitutions substitutes replacements configured in text-run.yml. */
 function replaceSubstitutions(code: string, c: Configuration): string {
   try {
     for (const replaceData of c.actions.runJavascript.replace) {

@@ -38,9 +38,7 @@ class ActionFinder {
     return Object.keys(this.customActions)
   }
 
-  // Note: need to define the return type as Action to satisfy the type checker
-  //       who doesn't understand that this is an error check
-  private errorUnknownAction(activity: Activity): Action {
+  private errorUnknownAction(activity: Activity): never {
     let errorText = `unknown action: ${color.red(
       activity.actionName
     )}\nAvailable built-in actions:\n`

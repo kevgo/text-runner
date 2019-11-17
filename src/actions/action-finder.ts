@@ -14,7 +14,7 @@ interface FunctionRepo {
   [key: string]: Action
 }
 
-// ActionRepo provides runnable action instances for activities.
+/** ActionFinder provides runnable action instances for activities. */
 class ActionFinder {
   private readonly builtinActions: FunctionRepo
   private readonly customActions: FunctionRepo
@@ -24,7 +24,7 @@ class ActionFinder {
     this.customActions = this.loadCustomActions()
   }
 
-  // Provides the action for the given Activity
+  /** actionFor provides the action function for the given Activity. */
   actionFor(activity: Activity): Action {
     return (
       this.builtinActions[activity.actionName] ||
@@ -33,11 +33,12 @@ class ActionFinder {
     )
   }
 
-  // Returns the names of all built-in actions
+  /** customActionNames returns the names of all built-in actions. */
   customActionNames(): string[] {
     return Object.keys(this.customActions)
   }
 
+  /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
     let errorText = `unknown action: ${color.red(
       activity.actionName

@@ -1,6 +1,6 @@
 import { ActionArgs } from "../types/action-args"
 
-// Runs the JavaScript code given in the code block
+/** The "validateJavascript" action cherks the given JavaScript code for syntax errors. */
 export default function validateJavascript(args: ActionArgs) {
   const code = args.nodes.textInNodeOfType("fence")
   args.log(code)

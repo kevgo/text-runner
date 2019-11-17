@@ -2,7 +2,10 @@ import { endChildProcesses } from "end-child-processes"
 import { RunningProcess } from "../helpers/running-process"
 import { ActionArgs } from "../types/action-args"
 
-// Stops the currently running console command.
+/**
+ * The "stopProcess" action stops the currently running console command,
+ * started by the "startProcess" action.
+ */
 export default async function stopProcess(args: ActionArgs) {
   args.name("stopping the long-running process")
   if (!RunningProcess.instance().hasProcess()) {

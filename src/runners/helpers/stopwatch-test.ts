@@ -7,7 +7,7 @@ describe("StopWatch", function() {
     const stopWatch = new StopWatch()
     // @ts-ignore: access private member
     stopWatch.startTime -= 200
-    assert.equal(stopWatch.duration(), "200ms")
+    assert.match(stopWatch.duration(), /20\dms/)
   })
 
   it("returns the elapsed time in seconds if it is more than 1s", async function() {

@@ -7,29 +7,29 @@ suite("Publication.resolve()", function() {
   test("custom public extension", function() {
     const publication = new Publication("/content", "/", "html")
     const link = new AbsoluteLink("/1.html")
-    const actual = publication.resolve(link, "")
-    assert.equal(actual.unixified(), "content/1.md")
+    const localPath = publication.resolve(link, "")
+    assert.equal(localPath.unixified(), "content/1.md")
   })
 
   test("empty public extension", function() {
     const publication = new Publication("/content", "/", "")
     const link = new AbsoluteLink("/1")
-    const actual = publication.resolve(link, "")
-    assert.equal(actual.unixified(), "content/1.md")
+    const localPath = publication.resolve(link, "")
+    assert.equal(localPath.unixified(), "content/1.md")
   })
 
   test("link with no filename and anchor", function() {
     const publication = new Publication("/content/", "/", "")
     const link = new AbsoluteLink("/#hello")
-    const actual = publication.resolve(link, "index.md")
-    assert.equal(actual.unixified(), "content/index.md")
+    const localPath = publication.resolve(link, "index.md")
+    assert.equal(localPath.unixified(), "content/index.md")
   })
 
   test("link with no filename in mapped folder", function() {
     const publication = new Publication("/content/", "/posts", "")
     const link = new AbsoluteLink("/posts")
-    const actual = publication.resolve(link, "index.md")
-    assert.equal(actual.unixified(), "content/index.md")
+    const localPath = publication.resolve(link, "index.md")
+    assert.equal(localPath.unixified(), "content/index.md")
   })
 })
 
@@ -79,8 +79,8 @@ suite("Publication.resolve()", function() {
     test(tt.desc, function() {
       const publication = new Publication("/content/posts", "/blog", "html")
       const link = new AbsoluteLink(tt.give)
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), tt.want)
+      const localPath = publication.resolve(link, "")
+      assert.equal(localPath.unixified(), tt.want)
     })
   }
 })

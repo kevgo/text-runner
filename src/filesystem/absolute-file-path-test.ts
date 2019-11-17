@@ -53,8 +53,8 @@ test("AbsoluteFilePath.unixified()", function() {
 suite("AbsoluteFilePath.publicPath()", function() {
   test("no publications", function() {
     const filePath = new AbsoluteFilePath("content\\1.md")
-    const actual = filePath.publicPath(new Publications())
-    assert.equal(actual.value, "/content/1.md")
+    const publicPath = filePath.publicPath(new Publications())
+    assert.equal(publicPath.value, "/content/1.md")
   })
 
   test("matching publication", function() {
@@ -66,7 +66,7 @@ suite("AbsoluteFilePath.publicPath()", function() {
       }
     ])
     const filePath = new AbsoluteFilePath("/content/1.md")
-    const actual = filePath.publicPath(publications)
-    assert.equal(actual.value, "/1.html")
+    const publicPath = filePath.publicPath(publications)
+    assert.equal(publicPath.value, "/1.html")
   })
 })

@@ -12,11 +12,9 @@ suite("LinkTargetList.addNodeList()", function() {
     })
     const targetList = new LinkTargetList()
     targetList.addNodeList(nodeList)
-    const actual = targetList.hasAnchor(
-      new AbsoluteFilePath("file.md"),
-      "foo-bar"
+    assert.isTrue(
+      targetList.hasAnchor(new AbsoluteFilePath("file.md"), "foo-bar")
     )
-    assert.isTrue(actual)
   })
 
   test("node list without link targets", function() {

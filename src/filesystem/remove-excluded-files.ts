@@ -2,7 +2,6 @@ import { AbsoluteFilePath } from "./absolute-file-path"
 
 /**
  * Removes the given excluded files from the given list of filenames
- * TODO: convert to variadic parameters
  */
 export function removeExcludedFiles(
   fileList: AbsoluteFilePath[],

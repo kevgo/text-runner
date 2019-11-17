@@ -2,8 +2,8 @@ import { assert } from "chai"
 import { javascriptExtensions } from "./javascript-extensions"
 
 test("javascriptExtensions()", function() {
-  const result = javascriptExtensions()
-  assert.include(result, "coffee")
-  assert.include(result, "js")
-  assert.include(result, "ts")
+  const jsExt = javascriptExtensions()
+  assert.include(jsExt, "coffee")
+  assert.include(jsExt, "js")
+  assert.include(jsExt, "ts")
 })

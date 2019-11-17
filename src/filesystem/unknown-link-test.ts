@@ -21,11 +21,11 @@ suite("UnknownLink.absolutify()", function() {
   ]
   for (const tt of tests) {
     test(tt.desc, function() {
-      const link = new UnknownLink(tt.link)
+      const unknownLink = new UnknownLink(tt.link)
       const containingFile = new AbsoluteFilePath(tt.give)
       const publications = new Publications()
-      const actual = link.absolutify(containingFile, publications)
-      assert.deepEqual(actual, new AbsoluteLink(tt.want))
+      const absoluteLink = unknownLink.absolutify(containingFile, publications)
+      assert.deepEqual(absoluteLink, new AbsoluteLink(tt.want))
     })
   }
 })

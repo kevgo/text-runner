@@ -18,11 +18,11 @@ suite("Publications.forFilePath()", function() {
     ])
     const filePath = new AbsoluteFilePath("bar")
 
-    const actual = publications.forFilePath(filePath)
+    const publication = publications.forFilePath(filePath)
 
-    assert.isDefined(actual)
-    // @ts-ignore: actual is not null here
-    assert.equal(actual.localPath, "/bar/")
+    assert.isDefined(publication)
+    // @ts-ignore: publication is not null here
+    assert.equal(publication.localPath, "/bar/")
   })
 
   test("no publication matches", function() {
@@ -35,9 +35,9 @@ suite("Publications.forFilePath()", function() {
     ])
     const filePath = new AbsoluteFilePath("bar")
 
-    const actual = publications.forFilePath(filePath)
+    const publication = publications.forFilePath(filePath)
 
-    assert.isUndefined(actual)
+    assert.isUndefined(publication)
   })
 })
 
@@ -55,7 +55,7 @@ suite("Publications.sortPathMappings()", function() {
         publicPath: "/blog"
       }
     ])
-    const actual = original.sorted()
+    const publication = original.sorted()
     const expected = Publications.fromJSON([
       {
         localPath: "/content/posts",
@@ -68,7 +68,7 @@ suite("Publications.sortPathMappings()", function() {
         publicPath: "/"
       }
     ])
-    assert.deepEqual(actual, expected)
+    assert.deepEqual(publication, expected)
   })
 
   test("no publications", function() {

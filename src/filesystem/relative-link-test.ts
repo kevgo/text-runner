@@ -8,8 +8,8 @@ suite("RelativeLink.absolutify()", function() {
     const publications = new Publications()
     const link = new RelativeLink("new.md")
     const containingFile = new AbsoluteFilePath("/one/two.md")
-    const actual = link.absolutify(containingFile, publications)
-    assert.equal(actual.value, "/one/new.md")
+    const absoluteLink = link.absolutify(containingFile, publications)
+    assert.equal(absoluteLink.value, "/one/new.md")
   })
 
   test("with publications", function() {
@@ -18,15 +18,15 @@ suite("RelativeLink.absolutify()", function() {
     ])
     const link = new RelativeLink("new.md")
     const containingFile = new AbsoluteFilePath("/content/one/two.md")
-    const actual = link.absolutify(containingFile, publications)
-    assert.equal(actual.value, "/one/new.md")
+    const absoluteLink = link.absolutify(containingFile, publications)
+    assert.equal(absoluteLink.value, "/one/new.md")
   })
 
   test("upwards link", function() {
     const publications = new Publications()
     const link = new RelativeLink("../new.md")
     const containingFile = new AbsoluteFilePath("/one/two.md")
-    const actual = link.absolutify(containingFile, publications)
-    assert.equal(actual.value, "/new.md")
+    const absoluteLink = link.absolutify(containingFile, publications)
+    assert.equal(absoluteLink.value, "/new.md")
   })
 })

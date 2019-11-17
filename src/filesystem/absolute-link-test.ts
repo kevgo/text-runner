@@ -12,8 +12,8 @@ suite("AbsoluteLink.append()", function() {
   test("appending a normal relative link", function() {
     const link = new AbsoluteLink("/one/two/")
     const relativeLink = new RelativeLink("new.md")
-    const actual = link.append(relativeLink)
-    assert.equal(actual.value, "/one/two/new.md")
+    const appended = link.append(relativeLink)
+    assert.equal(appended.value, "/one/two/new.md")
   })
 
   test("appending a relative link to parent directory", function() {
@@ -59,15 +59,15 @@ suite("AbsoluteLink.localize()", function() {
   test("link to file", function() {
     const link = new AbsoluteLink("/one/two.png")
     const publications = new Publications()
-    const actual = link.localize(publications, "")
-    assert.equal(actual.unixified(), "one/two.png")
+    const localized = link.localize(publications, "")
+    assert.equal(localized.unixified(), "one/two.png")
   })
 
   test("url-encoded link", function() {
     const link = new AbsoluteLink("/one%20two.png")
     const publications = new Publications()
-    const actual = link.localize(publications, "")
-    assert.equal(actual.unixified(), "one two.png")
+    const localized = link.localize(publications, "")
+    assert.equal(localized.unixified(), "one two.png")
   })
 
   test("link to mapped directory", function() {
@@ -79,8 +79,8 @@ suite("AbsoluteLink.localize()", function() {
         publicPath: "/blog"
       }
     ])
-    const actual = link.localize(publications, "")
-    assert.equal(actual.unixified(), "content/posts/two.md")
+    const localized = link.localize(publications, "")
+    assert.equal(localized.unixified(), "content/posts/two.md")
   })
 
   test("link with anchor to mapped directory", function() {
@@ -92,9 +92,9 @@ suite("AbsoluteLink.localize()", function() {
         publicPath: "/blog"
       }
     ])
-    const actual = link.localize(publications, "")
+    const localized = link.localize(publications, "")
     assert.equal(
-      actual.unixified(),
+      localized.unixified(),
       "content/posts/two.md",
       "should remove the anchor"
     )
@@ -103,15 +103,15 @@ suite("AbsoluteLink.localize()", function() {
   test("link with anchor to normal directory", function() {
     const link = new AbsoluteLink("/one/two.md#hello")
     const publications = new Publications()
-    const actual = link.localize(publications, "")
-    assert.equal(actual.unixified(), "one/two.md")
+    const localized = link.localize(publications, "")
+    assert.equal(localized.unixified(), "one/two.md")
   })
 })
 
 test("AbsoluteLink.rebase()", function() {
   const link = new AbsoluteLink("/one/two/three.md")
-  const actual = link.rebase("/one", "/foo")
-  assert.equal(actual.value, "/foo/two/three.md")
+  const rebased = link.rebase("/one", "/foo")
+  assert.equal(rebased.value, "/foo/two/three.md")
 })
 
 suite("AbsoluteLink.withAnchor()", function() {

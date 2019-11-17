@@ -7,7 +7,10 @@ test("AstNodeList.concat()", function() {
   const list1 = AstNodeList.scaffold({ type: "node1" })
   const list2 = AstNodeList.scaffold({ type: "node2" })
   const result = list1.concat(list2)
-  assert.deepEqual(result.map(node => node.type), ["node1", "node2"])
+  assert.deepEqual(
+    result.map(node => node.type),
+    ["node1", "node2"]
+  )
 })
 
 suite("AstNodeList.getNodesFor()", function() {
@@ -68,7 +71,10 @@ test("AstNodeList.getNodesOfTypes()", function() {
   list.pushNode({ type: "two" })
   list.pushNode({ type: "three" })
   const result = list.getNodesOfTypes("one", "three")
-  assert.deepEqual(result.map(node => node.type), ["one", "three"])
+  assert.deepEqual(
+    result.map(node => node.type),
+    ["one", "three"]
+  )
 })
 
 test("AstNodeList.textInNode()", function() {
@@ -204,6 +210,6 @@ test("AstNodeList.textInNodesOfType()", function() {
   const list = new AstNodeList()
   list.pushNode({ type: "strongtext", content: "foo" })
   list.pushNode({ type: "strongtext", content: "bar" })
-  const result = list.textInNodesOfType("strongtext")
-  assert.deepEqual(result, ["foo", "bar"])
+  const texts = list.textInNodesOfType("strongtext")
+  assert.deepEqual(texts, ["foo", "bar"])
 })

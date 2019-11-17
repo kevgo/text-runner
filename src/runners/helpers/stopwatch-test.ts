@@ -6,7 +6,7 @@ suite("StopWatch", function() {
     const stopWatch = new StopWatch()
     // @ts-ignore: access private member
     stopWatch.startTime -= 200
-    assert.equal(stopWatch.duration(), "200ms")
+    assert.match(stopWatch.duration(), /20\dms/)
   })
 
   test("more than 1s", function() {

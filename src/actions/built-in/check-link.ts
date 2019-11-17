@@ -11,7 +11,7 @@ import { isLinkToAnchorInSameFile } from "../helpers/is-link-to-anchor-in-same-f
 import { isMailtoLink } from "../helpers/is-mailto-link"
 import { ActionArgs } from "../types/action-args"
 
-// Checks for broken hyperlinks
+/** The "checkLink" action checks for broken hyperlinks. */
 export default async function checkLink(args: ActionArgs) {
   const target = args.nodes.getNodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {

@@ -1,5 +1,8 @@
-// NOTE: have to load the exports at the bottom of the file
-//       to avoid a circular dependency issue here
+import path from "path"
+import { Publications } from "../configuration/publications/publications"
+import { removeLeadingSlash } from "../helpers/remove-leading-slash"
+import { AbsoluteLink } from "./absolute-link"
+import { unixify } from "./helpers/unixify"
 
 /**
  * AbsoluteFilePath represents a complete path from the root directory
@@ -68,9 +71,3 @@ export class AbsoluteFilePath {
     return publication.publish(this)
   }
 }
-
-import path from "path"
-import { Publications } from "../configuration/publications/publications"
-import { removeLeadingSlash } from "../helpers/remove-leading-slash"
-import { AbsoluteLink } from "./absolute-link"
-import { unixify } from "./helpers/unixify"

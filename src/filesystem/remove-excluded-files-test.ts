@@ -15,7 +15,7 @@ suite("removeExcludedFiles", function() {
       new AbsoluteFilePath("two"),
       new AbsoluteFilePath("three")
     ]
-    const result = removeExcludedFiles(fileList, ["one", "three"])
+    const result = removeExcludedFiles(fileList, "one", "three")
     expect(result).to.eql([{ value: "two" }])
   })
 
@@ -31,7 +31,7 @@ suite("removeExcludedFiles", function() {
       new AbsoluteFilePath("two"),
       new AbsoluteFilePath("three")
     ]
-    const result = removeExcludedFiles(fileList, ["on.", "thr*"])
+    const result = removeExcludedFiles(fileList, "on.", "thr*")
     expect(result).to.eql([{ value: "two" }])
   })
 

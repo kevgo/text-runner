@@ -18,7 +18,8 @@ describe("removeExcludedFiles", function() {
         new AbsoluteFilePath("two"),
         new AbsoluteFilePath("three")
       ],
-      ["one", "three"]
+      "one",
+      "three"
     )
     expect(result).to.eql([{ value: "two" }])
   })
@@ -38,13 +39,14 @@ describe("removeExcludedFiles", function() {
         new AbsoluteFilePath("two"),
         new AbsoluteFilePath("three")
       ],
-      ["on.", "thr*"]
+      "on.",
+      "thr*"
     )
     expect(result).to.eql([{ value: "two" }])
   })
 
   it("does not remove things if no excludes are given", function() {
-    const result = removeExcludedFiles([new AbsoluteFilePath("one")], [])
+    const result = removeExcludedFiles([new AbsoluteFilePath("one")])
     expect(result).to.eql([{ value: "one" }])
   })
 

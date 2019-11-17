@@ -147,6 +147,7 @@ parallel: lint  # runs all tests
 
 prepublish: build  # prepares the code base for publishing
 	rm dist/tsconfig-build.tsbuildinfo
+	find dist -name '*.map' -exec rm {} \;
 
 test: lint unit cuke docs  # runs all tests
 .PHONY: test

@@ -17,7 +17,7 @@ export async function getFileNames(
   config: Configuration
 ): Promise<AbsoluteFilePath[]> {
   let filenames = await getFiles(config)
-  filenames = removeExcludedFiles(filenames, ...config.exclude)
+  filenames = removeExcludedFiles(filenames, config.exclude)
   return filenames
 }
 

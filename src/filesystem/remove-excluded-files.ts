@@ -5,12 +5,13 @@ import { AbsoluteFilePath } from "./absolute-file-path"
  */
 export function removeExcludedFiles(
   fileList: AbsoluteFilePath[],
-  ...excluded: string[]
+  excluded: string | string[]
 ): AbsoluteFilePath[] {
-  if (!excluded.includes("node_modules")) {
-    excluded.push("node_modules")
+  const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
+  if (!excludedFilesArray.includes("node_modules")) {
+    excludedFilesArray.push("node_modules")
   }
-  const excludedRegexes = excluded.map(file => new RegExp(file))
+  const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
   return fileList.filter(file => {
     for (const excludedRegex of excludedRegexes) {
       if (excludedRegex.test(file.unixified())) {

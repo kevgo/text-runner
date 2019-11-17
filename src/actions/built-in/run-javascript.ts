@@ -3,7 +3,7 @@ import { ActionArgs } from "../types/action-args"
 
 type DoneFunction = (err?: Error) => void
 
-// Runs the JavaScript code given in the code block
+/** The "runJavascript" action runs the JavaScript code given in the code block. */
 export default function runJavascript(args: ActionArgs, done: DoneFunction) {
   let code = args.nodes.textInNodeOfType("fence")
   if (code == null) {
@@ -36,7 +36,7 @@ function replaceAsyncCallbacks(code: string): string {
     .replace(/\/\/\s*\.\.\./g, "__finished()")
 }
 
-// substitutes replacements configured in text-run.yml
+/** replaceSubstitutions substitutes replacements configured in text-run.yml. */
 function replaceSubstitutions(code: string, c: Configuration): string {
   try {
     for (const replaceData of c.actions.runJavascript.replace) {
@@ -48,12 +48,12 @@ function replaceSubstitutions(code: string, c: Configuration): string {
   return code
 }
 
-// makes sure "require('.') works as expected even if running in a temp workspace
+/** replaceRequireLocalModule makes sure "require('.') works as expected even if running in a temp workspace. */
 function replaceRequireLocalModule(code: string): string {
   return code.replace(/require\(['"].['"]\)/, "require(process.cwd())")
 }
 
-// make variable declarations persist across code blocks
+/** replaceVariableDeclarations makes variable declarations persist across code blocks. */
 function replaceVariableDeclarations(code: string): string {
   return code
     .replace(/\bconst /g, "global.")
@@ -61,7 +61,7 @@ function replaceVariableDeclarations(code: string): string {
     .replace(/\bthis\./g, "global.")
 }
 
-// returns whether the given code block contains a callback placeholder
+/** hasCallbackPlaceholder returns whether the given code block contains a callback placeholder. */
 function hasCallbackPlaceholder(code: string): boolean {
   return code.indexOf("<CALLBACK>") > -1 || code.indexOf("// ...") > -1
 }

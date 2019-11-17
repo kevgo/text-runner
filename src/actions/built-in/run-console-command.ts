@@ -14,8 +14,10 @@ interface ProcessInput {
   input: string
 }
 
-// Runs the given commands on the console.
-// Waits until the command is finished.
+/**
+ * The "runConsoleCommand" action runs the given commands on the console
+ * and waits until the command is finished.
+ */
 export default async function runConsoleCommand(args: ActionArgs) {
   const commandsToRun = args.nodes
     .textInNodeOfType("fence")

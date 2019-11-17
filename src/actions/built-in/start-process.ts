@@ -8,8 +8,10 @@ import { RunningProcess } from "../helpers/running-process"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "../types/action-args"
 
-// Runs the given commands on the console.
-// Leaves the command running.
+/**
+ * The "startProcess" action runs the given commands on the console.
+ * It leaves the command running.
+ */
 export default async function startProcess(args: ActionArgs) {
   const commandsToRun = getCommandsToRun(args)
   args.name(

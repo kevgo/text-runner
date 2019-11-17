@@ -1,7 +1,10 @@
 import { RunningProcess } from "../helpers/running-process"
 import { ActionArgs } from "../types/action-args"
 
-// Waits until the currently running console command produces the given output
+/**
+ * The "verifyProcessOutput" action waits until the currently running console command
+ * produces the given output.
+ */
 export default async function verifyProcessOutput(args: ActionArgs) {
   args.name("verifying the output of the long-running process")
   const expectedOutput = args.nodes.textInNodeOfType("fence")

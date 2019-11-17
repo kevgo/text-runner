@@ -1,17 +1,10 @@
 import { assert } from "chai"
 import { isExternalLink } from "./is-external-link"
 
-describe("isExternalLink", function() {
-  const testData = [
-    ["link without protocol", "//foo.com", true],
-    ["link with protocol", "http://foo.com", true],
-    ["absolute link", "/one/two.md", false],
-    ["relative link", "one.md", false],
-    ["relative link up", "../one.md", false]
-  ]
-  for (const [description, link, expected] of testData) {
-    it(description as string, function() {
-      assert.equal(isExternalLink(link as string), expected)
-    })
-  }
+test("isExternalLink", function() {
+  assert.isTrue(isExternalLink("//foo.com"), "link without protocol")
+  assert.isTrue(isExternalLink("http://foo.com"), "link with protocol")
+  assert.isFalse(isExternalLink("/one/two.md"), "absolute link")
+  assert.isFalse(isExternalLink("one.md"), "link to file in same dir")
+  assert.isFalse(isExternalLink("../one.md"), "relative link")
 })

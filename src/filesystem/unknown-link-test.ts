@@ -4,40 +4,34 @@ import { AbsoluteFilePath } from "./absolute-file-path"
 import { UnknownLink } from "./unknown-link"
 import { AbsoluteLink } from "./absolute-link"
 
-describe("UnknownLink", function() {
-  describe("absolutify", function() {
-    it("returns the absolute version of the current relative link", function() {
-      const link = new UnknownLink("foo/bar.md")
-      const containingFile = new AbsoluteFilePath("/dir/file.md")
+suite("UnknownLink.absolutify()", function() {
+  const tests = [
+    {
+      desc: "relative link",
+      link: "foo/bar.md",
+      give: "/dir/file.md",
+      want: "/dir/foo/bar.md"
+    },
+    {
+      desc: "absolute link",
+      link: "/foo/bar.md",
+      give: "/dir/file.md",
+      want: "/foo/bar.md"
+    }
+  ]
+  for (const tt of tests) {
+    test(tt.desc, function() {
+      const unknownLink = new UnknownLink(tt.link)
+      const containingFile = new AbsoluteFilePath(tt.give)
       const publications = new Publications()
-      assert.deepEqual(
-        link.absolutify(containingFile, publications),
-        new AbsoluteLink("/dir/foo/bar.md")
-      )
+      const absoluteLink = unknownLink.absolutify(containingFile, publications)
+      assert.deepEqual(absoluteLink, new AbsoluteLink(tt.want))
     })
-    it("returns the current absolute link", function() {
-      const link = new UnknownLink("/foo/bar.md")
-      const containingFile = new AbsoluteFilePath("/dir/file.md")
-      const publications = new Publications()
-      assert.deepEqual(
-        link.absolutify(containingFile, publications),
-        new AbsoluteLink("/foo/bar.md")
-      )
-    })
-  })
+  }
+})
 
-  describe("isAbsoluteLink", function() {
-    it("returns TRUE if the link is absolute", function() {
-      const link = new UnknownLink("/foo/bar")
-      assert.isTrue(link.isAbsolute())
-    })
-    it("returns FALSE if the link is relative", function() {
-      const link = new UnknownLink("foo/bar")
-      assert.isFalse(link.isAbsolute())
-    })
-    it("returns FALSE if the link goes up", function() {
-      const link = new UnknownLink("../foo/bar")
-      assert.isFalse(link.isAbsolute())
-    })
-  })
+test("UnknownLink.isAbsolute()", function() {
+  assert.isTrue(new UnknownLink("/foo/bar").isAbsolute())
+  assert.isFalse(new UnknownLink("foo/bar").isAbsolute())
+  assert.isFalse(new UnknownLink("../foo/bar").isAbsolute())
 })

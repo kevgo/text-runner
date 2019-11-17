@@ -2,8 +2,8 @@ import { assert } from "chai"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { extractImagesAndLinks } from "./extract-images-and-links"
 
-describe("extractImagesAndLinks", function() {
-  it("extracts images", function() {
+suite("extractImagesAndLinks", function() {
+  test("extracting images", function() {
     const nodes = AstNodeList.scaffold({
       file: "filename",
       line: 3,
@@ -18,7 +18,7 @@ describe("extractImagesAndLinks", function() {
     assert.equal(result[0].nodes[0], nodes[0])
   })
 
-  it("extracts links", function() {
+  test("extracting links", function() {
     const nodes = new AstNodeList()
     nodes.pushNode({ type: "link_open", file: "filename", line: 3 })
     nodes.pushNode({ type: "text", file: "filename", line: 3, content: "foo" })

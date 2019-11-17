@@ -2,73 +2,76 @@ import { assert } from "chai"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { Publications } from "./publications"
 
-describe("Publications", function() {
-  describe("forFilePath", function() {
-    it("returns the publication that publishes the given FilePath", function() {
-      const publications = Publications.fromJSON([
-        {
-          localPath: "foo",
-          publicExtension: "",
-          publicPath: ""
-        },
-        {
-          localPath: "bar",
-          publicExtension: "",
-          publicPath: ""
-        }
-      ])
-      const filePath = new AbsoluteFilePath("bar")
-      const actual: any = publications.forFilePath(filePath) || {}
-      assert.equal(actual.localPath, "/bar/")
-    })
+suite("Publications.forFilePath()", function() {
+  test("a publication matches the given filePath", function() {
+    const publications = Publications.fromJSON([
+      {
+        localPath: "foo",
+        publicExtension: "",
+        publicPath: ""
+      },
+      {
+        localPath: "bar",
+        publicExtension: "",
+        publicPath: ""
+      }
+    ])
+    const filePath = new AbsoluteFilePath("bar")
 
-    it("returns NULL if no publication matches", function() {
-      const publications = Publications.fromJSON([
-        {
-          localPath: "foo",
-          publicExtension: "",
-          publicPath: ""
-        }
-      ])
-      const filePath = new AbsoluteFilePath("bar")
-      const actual = publications.forFilePath(filePath)
-      assert.isUndefined(actual)
-    })
+    const publication = publications.forFilePath(filePath)
+
+    assert.isDefined(publication)
+    // @ts-ignore: publication is not null here
+    assert.equal(publication.localPath, "/bar/")
   })
 
-  describe("sortPathMappings", function() {
-    it("returns the given publications sorted descending by publicPath", function() {
-      const original = Publications.fromJSON([
-        {
-          localPath: "/content/",
-          publicExtension: "",
-          publicPath: "/"
-        },
-        {
-          localPath: "/content/posts",
-          publicExtension: "html",
-          publicPath: "/blog"
-        }
-      ])
-      const actual = original.sorted()
-      const expected = Publications.fromJSON([
-        {
-          localPath: "/content/posts",
-          publicExtension: "html",
-          publicPath: "/blog"
-        },
-        {
-          localPath: "/content/",
-          publicExtension: "",
-          publicPath: "/"
-        }
-      ])
-      assert.deepEqual(actual, expected)
-    })
+  test("no publication matches", function() {
+    const publications = Publications.fromJSON([
+      {
+        localPath: "foo",
+        publicExtension: "",
+        publicPath: ""
+      }
+    ])
+    const filePath = new AbsoluteFilePath("bar")
 
-    it("works with empty mappings", function() {
-      const publications = new Publications()
-      assert.lengthOf(publications.sort(), 0)
-    })
+    const publication = publications.forFilePath(filePath)
+
+    assert.isUndefined(publication)
+  })
+})
+
+suite("Publications.sortPathMappings()", function() {
+  test("has publications", function() {
+    const original = Publications.fromJSON([
+      {
+        localPath: "/content/",
+        publicExtension: "",
+        publicPath: "/"
+      },
+      {
+        localPath: "/content/posts",
+        publicExtension: "html",
+        publicPath: "/blog"
+      }
+    ])
+    const publication = original.sorted()
+    const expected = Publications.fromJSON([
+      {
+        localPath: "/content/posts",
+        publicExtension: "html",
+        publicPath: "/blog"
+      },
+      {
+        localPath: "/content/",
+        publicExtension: "",
+        publicPath: "/"
+      }
+    ])
+    assert.deepEqual(publication, expected)
+  })
+
+  test("no publications", function() {
+    assert.lengthOf(new Publications().sort(), 0)
   })
 })

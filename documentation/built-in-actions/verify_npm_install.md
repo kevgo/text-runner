@@ -8,7 +8,7 @@ correct package name that is listed in `package.json`.
 
 <a textrun="create-file">
 
-Assuming our __package.json__ file looks like this:
+Assuming our **package.json** file looks like this:
 
 ```json
 {
@@ -31,6 +31,7 @@ $ npm i -g my_enormous_package
 `​``
 </a>
 ```
+
 </a>
 
 #### More info

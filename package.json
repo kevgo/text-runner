@@ -102,7 +102,7 @@
     "url": "https://github.com/Originate/text-runner.git"
   },
   "scripts": {
-    "prepublishOnly": "make build && rm dist/tsconfig-build.tsbuildinfo",
+    "prepublishOnly": "make prepublish",
     "test": "make spec"
   }
 }

@@ -24,7 +24,7 @@ function wrapInAsyncFunction(code: string) {
 
 /** replaceSubstitutions  configured in text-run.yml. */
 function replaceSubstitutions(code: string, c: Configuration): string {
-  // TODO: absorb null here
+  // TODO: use optional chaining from TypeScript 3.7 once VSCode and linters can handle it
   for (const replaceData of (c.actions.runJavascript || {}).replace || []) {
     code = code.replace(replaceData.search, replaceData.replace)
   }

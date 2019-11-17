@@ -145,6 +145,9 @@ parallel: lint # runs all tests
 	bin$/text-run dynamic --format dot
 	node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
+prepublish: build  # prepares the code base for publishing
+	rm dist/tsconfig-build.tsbuildinfo
+
 test: lint unit cuke docs   # runs all tests
 .PHONY: test
 

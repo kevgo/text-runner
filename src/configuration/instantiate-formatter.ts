@@ -10,16 +10,16 @@ export function instantiateFormatter(
   stepCount: number,
   configuration: Configuration
 ): Formatter {
-  if (name === "dot") {
-    return new DotFormatter(stepCount, configuration)
+  switch (name) {
+    case "dot":
+      return new DotFormatter(stepCount, configuration)
+    case "detailed":
+      return new DetailedFormatter(stepCount, configuration)
+    case "progress":
+      return new ProgressFormatter(stepCount, configuration)
+    default:
+      throw new UnprintedUserError(
+        `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress`
+      )
   }
-  if (name === "detailed") {
-    return new DetailedFormatter(stepCount, configuration)
-  }
-  if (name === "progress") {
-    return new ProgressFormatter(stepCount, configuration)
-  }
-  throw new UnprintedUserError(
-    `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress`
-  )
 }

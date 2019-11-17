@@ -2,60 +2,52 @@ import { expect } from "chai"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { removeExcludedFiles } from "./remove-excluded-files"
 
-describe("removeExcludedFiles", function() {
-  it("removes the given filename", function() {
-    const result = removeExcludedFiles(
-      [new AbsoluteFilePath("one"), new AbsoluteFilePath("two")],
-      "one"
-    )
-    expect(result).to.eql([{ value: "two" }])
+suite("removeExcludedFiles", function() {
+  test("single filename given", function() {
+    const fileList = [new AbsoluteFilePath("one"), new AbsoluteFilePath("two")]
+    const removedList = removeExcludedFiles(fileList, "one")
+    expect(removedList).to.eql([{ value: "two" }])
   })
 
-  it("removes the given filenames", function() {
-    const result = removeExcludedFiles(
-      [
-        new AbsoluteFilePath("one"),
-        new AbsoluteFilePath("two"),
-        new AbsoluteFilePath("three")
-      ],
-      ["one", "three"]
-    )
-    expect(result).to.eql([{ value: "two" }])
+  test("array of filenames given", function() {
+    const fileList = [
+      new AbsoluteFilePath("one"),
+      new AbsoluteFilePath("two"),
+      new AbsoluteFilePath("three")
+    ]
+    const removedList = removeExcludedFiles(fileList, ["one", "three"])
+    expect(removedList).to.eql([{ value: "two" }])
   })
 
-  it("removes the given regex", function() {
-    const result = removeExcludedFiles(
-      [new AbsoluteFilePath("one"), new AbsoluteFilePath("two")],
-      "on."
-    )
-    expect(result).to.eql([{ value: "two" }])
+  test("regex given", function() {
+    const fileList = [new AbsoluteFilePath("one"), new AbsoluteFilePath("two")]
+    const removedList = removeExcludedFiles(fileList, "on.")
+    expect(removedList).to.eql([{ value: "two" }])
   })
 
-  it("removes the given regexes", function() {
-    const result = removeExcludedFiles(
-      [
-        new AbsoluteFilePath("one"),
-        new AbsoluteFilePath("two"),
-        new AbsoluteFilePath("three")
-      ],
-      ["on.", "thr*"]
-    )
-    expect(result).to.eql([{ value: "two" }])
+  test("array of regexes given", function() {
+    const fileList = [
+      new AbsoluteFilePath("one"),
+      new AbsoluteFilePath("two"),
+      new AbsoluteFilePath("three")
+    ]
+    const removedList = removeExcludedFiles(fileList, ["on.", "thr*"])
+    expect(removedList).to.eql([{ value: "two" }])
   })
 
-  it("does not remove things if no excludes are given", function() {
-    const result = removeExcludedFiles([new AbsoluteFilePath("one")], [])
-    expect(result).to.eql([{ value: "one" }])
+  test("no excludes given", function() {
+    const removedList = removeExcludedFiles([new AbsoluteFilePath("one")], [])
+    expect(removedList).to.eql([{ value: "one" }])
   })
 
-  it("automatically ignores node_modules", function() {
-    const result = removeExcludedFiles(
+  test("file in node_modules given", function() {
+    const removedList = removeExcludedFiles(
       [
         new AbsoluteFilePath("one"),
         new AbsoluteFilePath("node_modules/zonk/broken.md")
       ],
       "one"
     )
-    expect(result).to.eql([])
+    expect(removedList).to.eql([], "should automatically ignore node_modules")
   })
 })

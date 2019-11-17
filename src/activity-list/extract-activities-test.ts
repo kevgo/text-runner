@@ -2,8 +2,8 @@ import { assert } from "chai"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { extractActivities } from "./extract-activities"
 
-describe("extractActivities()", function() {
-  it("extracts all activities from the given AstNodeList", function() {
+suite("extractActivities()", function() {
+  test("many activities", function() {
     const input = new AstNodeList()
     input.pushNode({
       attributes: { textrun: "verify-foo" },
@@ -13,7 +13,9 @@ describe("extractActivities()", function() {
     })
     input.pushNode({ type: "text" })
     input.pushNode({ type: "anchor_close" })
+
     const result = extractActivities([input], "textrun")
+
     assert.lengthOf(result, 1)
     assert.equal(result[0].actionName, "verify-foo")
     assert.equal(result[0].file.unixified(), "README.md")
@@ -21,39 +23,20 @@ describe("extractActivities()", function() {
     assert.deepEqual(result[0].nodes, input)
   })
 
-  it("normalizes action names in CamelCase", function() {
-    const AST = new AstNodeList()
-    AST.pushNode({
-      attributes: { textrun: "verifyFoo" }
+  const tests = [
+    { give: "verifyFoo", want: "verify-foo" },
+    { give: "verify-foo", want: "verify-foo" },
+    { give: "verify_foo", want: "verify-foo" }
+  ]
+  for (const tt of tests) {
+    test(`normalizes activity name ${tt.give}`, function() {
+      const AST = new AstNodeList()
+      AST.pushNode({
+        attributes: { textrun: "verify_foo" }
+      })
+      AST.pushNode({ type: "anchor_close" })
+      const result = extractActivities([AST], "textrun")
+      assert.equal(result[0].actionName, tt.want)
     })
-    AST.pushNode({ type: "anchor_close" })
-    const result = extractActivities([AST], "textrun")
-    assert.equal(result[0].actionName, "verify-foo")
-  })
-
-  it("normalizes action names in kebab-case", function() {
-    const AST = new AstNodeList()
-    AST.pushNode({
-      attributes: { textrun: "verify-foo" },
-      file: "README.md",
-      line: 3,
-      type: "anchor_open"
-    })
-    AST.pushNode({ type: "anchor_close" })
-    const result = extractActivities([AST], "textrun")
-    assert.equal(result[0].actionName, "verify-foo")
-  })
-
-  it("normalizes action names in snake_case", function() {
-    const AST = new AstNodeList()
-    AST.pushNode({
-      attributes: { textrun: "verify_foo" },
-      file: "README.md",
-      line: 3,
-      type: "anchor_open"
-    })
-    AST.pushNode({ type: "anchor_close" })
-    const result = extractActivities([AST], "textrun")
-    assert.equal(result[0].actionName, "verify-foo")
-  })
+  }
 })

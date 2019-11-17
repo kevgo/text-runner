@@ -3,102 +3,84 @@ import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AbsoluteLink } from "../../filesystem/absolute-link"
 import { Publication } from "./publication"
 
-describe("Publication", function() {
-  describe("resolve", function() {
-    it("applies the given path mapping", function() {
-      const publication = new Publication("/content", "/", "html")
-      const link = new AbsoluteLink("/1.html")
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), "content/1.md")
-    })
-
-    it("applies the extension mapping for empty public extensions", function() {
-      const publication = new Publication("/content", "/", "")
-      const link = new AbsoluteLink("/1")
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), "content/1.md")
-    })
-
-    it("applies the extension mapping for custom public extensions", function() {
-      const publication = new Publication("/content/", "/", ".html")
-      const link = new AbsoluteLink("1.html")
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), "content/1.md")
-    })
-
-    it("adds the given default filename if the link has no filename and an anchor", function() {
-      const publication = new Publication("/content/", "/", "")
-      const link = new AbsoluteLink("/#hello")
-      const actual = publication.resolve(link, "index.md")
-      assert.equal(actual.unixified(), "content/index.md")
-    })
-
-    it("uses the given default filename together with publications", function() {
-      const publication = new Publication("/content/", "/posts", "")
-      const link = new AbsoluteLink("/posts")
-      const actual = publication.resolve(link, "index.md")
-      assert.equal(actual.unixified(), "content/index.md")
-    })
+suite("Publication.resolve()", function() {
+  test("custom public extension", function() {
+    const publication = new Publication("/content", "/", "html")
+    const link = new AbsoluteLink("/1.html")
+    const localPath = publication.resolve(link, "")
+    assert.equal(localPath.unixified(), "content/1.md")
   })
 
-  describe("resolves", function() {
-    it("returns TRUE if the link matches", function() {
-      const publication = new Publication("/content", "/foo", "")
-      const link = new AbsoluteLink("/foo/bar")
-      assert.isTrue(publication.resolves(link))
-    })
-    it("returns FALSE if the link does not match", function() {
-      const publication = new Publication("/content", "/foo", "")
-      const link = new AbsoluteLink("/one/two")
-      assert.isFalse(publication.resolves(link))
-    })
+  test("empty public extension", function() {
+    const publication = new Publication("/content", "/", "")
+    const link = new AbsoluteLink("/1")
+    const localPath = publication.resolve(link, "")
+    assert.equal(localPath.unixified(), "content/1.md")
   })
 
-  describe("publish", function() {
-    it("returns the public path of the given file path according to its matching rules", function() {
-      const publication = new Publication("/content", "/", ".html")
-      const filePath = new AbsoluteFilePath("content/1.md")
-      const link = publication.publish(filePath)
-      assert.equal(link.value, "/1.html")
-    })
+  test("link with no filename and anchor", function() {
+    const publication = new Publication("/content/", "/", "")
+    const link = new AbsoluteLink("/#hello")
+    const localPath = publication.resolve(link, "index.md")
+    assert.equal(localPath.unixified(), "content/index.md")
   })
 
-  describe("publishes", function() {
-    it("returns TRUE if it contains the given filePath exactly", function() {
-      const filePath = new AbsoluteFilePath("/foo/bar")
-      const publication = new Publication("/foo/bar", "", "")
-      assert.isTrue(publication.publishes(filePath))
-    })
-    it("returns TRUE if it contains the given filePath and more", function() {
-      const filePath = new AbsoluteFilePath("/foo/bar/baz")
-      const publication = new Publication("/foo/bar", "", "")
-      assert.isTrue(publication.publishes(filePath))
-    })
-    it("returns FALSE if it does not contain the given filePath", function() {
-      const filePath = new AbsoluteFilePath("foo/bar/baz")
-      const publication = new Publication("foo/other", "", "")
-      assert.isFalse(publication.publishes(filePath))
-    })
+  test("link with no filename in mapped folder", function() {
+    const publication = new Publication("/content/", "/posts", "")
+    const link = new AbsoluteLink("/posts")
+    const localPath = publication.resolve(link, "index.md")
+    assert.equal(localPath.unixified(), "content/index.md")
+  })
+})
+
+suite("Publication.resolves()", function() {
+  test("matching link", function() {
+    const publication = new Publication("/content", "/foo", "")
+    const link = new AbsoluteLink("/foo/bar")
+    assert.isTrue(publication.resolves(link))
   })
 
-  describe("resolve", function() {
-    it("returns the filesystem path for the given link", function() {
+  test("non-matching link", function() {
+    const publication = new Publication("/content", "/foo", "")
+    const link = new AbsoluteLink("/one/two")
+    assert.isFalse(publication.resolves(link))
+  })
+})
+
+test("Publication.publish()", function() {
+  const publication = new Publication("/content", "/", ".html")
+  const filePath = new AbsoluteFilePath("content/1.md")
+  const link = publication.publish(filePath)
+  assert.equal(link.value, "/1.html")
+})
+
+suite("Publication.publishes()", function() {
+  const tests = [
+    { pub: "/foo/bar", give: "/foo/bar", want: true },
+    { pub: "/foo/bar", give: "/foo/bar/baz", want: true },
+    { pub: "/foo/other", give: "/foo/bar/baz", want: false }
+  ]
+  for (const tt of tests) {
+    test(`${tt.give}-${tt.pub}`, function() {
+      const publication = new Publication(tt.pub, "", "")
+      const filePath = new AbsoluteFilePath(tt.give)
+      assert.equal(publication.publishes(filePath), tt.want)
+    })
+  }
+})
+
+suite("Publication.resolve()", function() {
+  const tests = [
+    { desc: "other link", give: "/one/two.html", want: "one/two.md" },
+    { desc: "published", give: "/blog/one.html", want: "content/posts/one.md" },
+    { desc: "with anchor", give: "/one/two.html#hello", want: "one/two.md" }
+  ]
+  for (const tt of tests) {
+    test(tt.desc, function() {
       const publication = new Publication("/content/posts", "/blog", "html")
-      const link = new AbsoluteLink("/one/two.html")
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), "one/two.md")
+      const link = new AbsoluteLink(tt.give)
+      const localPath = publication.resolve(link, "")
+      assert.equal(localPath.unixified(), tt.want)
     })
-    it("applies the publication data", function() {
-      const publication = new Publication("/content/posts", "/blog", "html")
-      const link = new AbsoluteLink("/blog/one.html")
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), "content/posts/one.md")
-    })
-    it("removes anchors", function() {
-      const publication = new Publication("/content/posts", "/blog", "html")
-      const link = new AbsoluteLink("/one/two.html#hello")
-      const actual = publication.resolve(link, "")
-      assert.equal(actual.unixified(), "one/two.md")
-    })
-  })
+  }
 })

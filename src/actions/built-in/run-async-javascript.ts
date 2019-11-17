@@ -24,6 +24,7 @@ function wrapInAsyncFunction(code: string) {
 
 // substitutes replacements configured in text-run.yml
 function replaceSubstitutions(code: string, c: Configuration): string {
+  // TODO: absorb null here
   for (const replaceData of c.actions.runJavascript.replace) {
     code = code.replace(replaceData.search, replaceData.replace)
   }

@@ -5,7 +5,7 @@ import path from "path"
 import { Configuration } from "../../configuration/types/configuration"
 import { ActionArgs } from "../types/action-args"
 
-// Checks for broken hyperlinks
+/** The "checkImage" action checks for broken images. */
 export default async function checkImage(args: ActionArgs) {
   const node = args.nodes[0]
   let imagePath = node.attributes ? node.attributes.src : null

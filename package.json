@@ -17,7 +17,7 @@
     "end-child-processes": "1.0.1",
     "eol": "0.9.1",
     "fs-extra": "8.1.0",
-    "glob": "7.1.5",
+    "glob": "7.1.6",
     "glob-promise": "3.4.0",
     "got": "9.6.0",
     "humanize-string": "2.1.0",

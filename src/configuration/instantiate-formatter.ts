@@ -18,8 +18,6 @@ export function instantiateFormatter(
     case "progress":
       return new ProgressFormatter(stepCount, configuration)
     default:
-      throw new UnprintedUserError(
-        `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress`
-      )
+      throw new UnprintedUserError(`Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress`)
   }
 }

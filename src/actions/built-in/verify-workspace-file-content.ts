@@ -14,11 +14,7 @@ export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
   } catch (err) {
-    throw new Error(
-      `mismatching content in ${color.cyan(color.bold(filePath))}:\n${
-        err.message
-      }`
-    )
+    throw new Error(`mismatching content in ${color.cyan(color.bold(filePath))}:\n${err.message}`)
   }
 }
 

@@ -10,11 +10,7 @@ suite("removeExcludedFiles", function() {
   })
 
   test("array of filenames given", function() {
-    const fileList = [
-      new AbsoluteFilePath("one"),
-      new AbsoluteFilePath("two"),
-      new AbsoluteFilePath("three")
-    ]
+    const fileList = [new AbsoluteFilePath("one"), new AbsoluteFilePath("two"), new AbsoluteFilePath("three")]
     const removedList = removeExcludedFiles(fileList, ["one", "three"])
     expect(removedList).to.eql([{ value: "two" }])
   })
@@ -26,11 +22,7 @@ suite("removeExcludedFiles", function() {
   })
 
   test("array of regexes given", function() {
-    const fileList = [
-      new AbsoluteFilePath("one"),
-      new AbsoluteFilePath("two"),
-      new AbsoluteFilePath("three")
-    ]
+    const fileList = [new AbsoluteFilePath("one"), new AbsoluteFilePath("two"), new AbsoluteFilePath("three")]
     const removedList = removeExcludedFiles(fileList, ["on.", "thr*"])
     expect(removedList).to.eql([{ value: "two" }])
   })
@@ -42,10 +34,7 @@ suite("removeExcludedFiles", function() {
 
   test("file in node_modules given", function() {
     const removedList = removeExcludedFiles(
-      [
-        new AbsoluteFilePath("one"),
-        new AbsoluteFilePath("node_modules/zonk/broken.md")
-      ],
+      [new AbsoluteFilePath("one"), new AbsoluteFilePath("node_modules/zonk/broken.md")],
       "one"
     )
     expect(removedList).to.eql([], "should automatically ignore node_modules")

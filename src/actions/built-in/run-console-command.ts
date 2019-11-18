@@ -107,11 +107,7 @@ function makeGlobal(configuration: Configuration): (arg: string) => string {
     const command = commandParts[0]
     const replacement = globals[command] as string | undefined
     if (replacement) {
-      return (
-        path.join(configuration.sourceDir, replacement) +
-        " " +
-        commandParts.splice(1).join(" ")
-      )
+      return path.join(configuration.sourceDir, replacement) + " " + commandParts.splice(1).join(" ")
     } else {
       return commandText
     }

@@ -43,9 +43,7 @@ export class AbsoluteLink {
     if (withoutAnchor.isLinkToDirectory()) {
       return withoutAnchor
     }
-    return new AbsoluteLink(
-      withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1)
-    )
+    return new AbsoluteLink(withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1))
   }
 
   hasAnchor(): boolean {
@@ -109,9 +107,7 @@ export class AbsoluteLink {
    */
   withExtension(newExtension: string): AbsoluteLink {
     const extRE = new RegExp(path.extname(this.value) + "$")
-    return new AbsoluteLink(
-      this.value.replace(extRE, addLeadingDotUnlessEmpty(newExtension))
-    )
+    return new AbsoluteLink(this.value.replace(extRE, addLeadingDotUnlessEmpty(newExtension)))
   }
 
   /**

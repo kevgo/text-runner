@@ -16,18 +16,11 @@ Then("it creates a directory {string}", async function(directoryPath) {
   await fs.stat(path.join(this.rootDir, directoryPath))
 })
 
-Then("it creates the file {string} with content:", async function(
-  filename,
-  expectedContent
-) {
+Then("it creates the file {string} with content:", async function(filename, expectedContent) {
   const actualContent = await fs.readFile(path.join(this.rootDir, filename), {
     encoding: "utf8"
   })
-  assertNoDiff.trimmedLines(
-    expectedContent,
-    actualContent,
-    "MISMATCHING FILE CONTENT!"
-  )
+  assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
 })
 
 Then("it doesn't print:", function(expectedText) {
@@ -55,10 +48,7 @@ Then("it runs in the {string} directory", function(dirName) {
 })
 
 Then("it runs in the current working directory", function() {
-  assert.match(
-    this.process.output.fullText().trim(),
-    new RegExp(`${this.rootDir}\\b`)
-  )
+  assert.match(this.process.output.fullText().trim(), new RegExp(`${this.rootDir}\\b`))
 })
 
 Then("it runs (only )the tests in {string}", function(filename) {
@@ -95,20 +85,12 @@ Then("the {string} directory is now deleted", async function(directoryPath) {
   throw new Error(`file '${directoryPath}' still exists`)
 })
 
-Then(
-  "the test directory now/still contains a file {string} with content:",
-  async function(fileName, expectedContent) {
-    const actualContent = await fs.readFile(
-      path.join(this.rootDir, "tmp", fileName),
-      "utf8"
-    )
-    assert.equal(actualContent.trim(), expectedContent.trim())
-  }
-)
+Then("the test directory now/still contains a file {string} with content:", async function(fileName, expectedContent) {
+  const actualContent = await fs.readFile(path.join(this.rootDir, "tmp", fileName), "utf8")
+  assert.equal(actualContent.trim(), expectedContent.trim())
+})
 
-Then("the test workspace now contains a directory {string}", async function(
-  name
-) {
+Then("the test workspace now contains a directory {string}", async function(name) {
   const stat = await fs.stat(path.join(this.rootDir, "tmp", name))
   assert.isTrue(stat.isDirectory())
 })

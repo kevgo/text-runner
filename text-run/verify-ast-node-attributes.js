@@ -1,8 +1,6 @@
 const { AstNode } = require("../dist/parsers/standard-AST/ast-node.js")
 const assertNoDiff = require("assert-no-diff")
-const {
-  removeTrailingColon
-} = require("../dist/helpers/remove-trailing-colon.js")
+const { removeTrailingColon } = require("../dist/helpers/remove-trailing-colon.js")
 
 module.exports = async function verifyAstNodeAttributes(args) {
   const expected = args.nodes

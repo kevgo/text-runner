@@ -30,32 +30,12 @@ test("TagMapper.tagForType()", function() {
 
 test("TagMapper.typeForTag()", () => {
   assert.equal(tagMapper.typeForTag("b", {}), "bold_open", "known opening tag")
-  assert.equal(
-    tagMapper.typeForTag("/b", {}),
-    "bold_close",
-    "known closing tag"
-  )
+  assert.equal(tagMapper.typeForTag("/b", {}), "bold_close", "known closing tag")
   assert.equal(tagMapper.typeForTag("img", {}), "image", "known standalone tag")
   assert.equal(tagMapper.typeForTag("a", {}), "anchor_open", "opening anchor")
   assert.equal(tagMapper.typeForTag("/a", {}), "anchor_close", "closing anchor")
-  assert.equal(
-    tagMapper.typeForTag("a", { href: "foo" }),
-    "link_open",
-    "opening link"
-  )
-  assert.equal(
-    tagMapper.typeForTag("/a", { href: "foo" }),
-    "link_close",
-    "closing anchor"
-  )
-  assert.equal(
-    tagMapper.typeForTag("foo", {}),
-    "foo_open",
-    "unknown opening tag"
-  )
-  assert.equal(
-    tagMapper.typeForTag("/foo", {}),
-    "foo_close",
-    "unknown closing tag"
-  )
+  assert.equal(tagMapper.typeForTag("a", { href: "foo" }), "link_open", "opening link")
+  assert.equal(tagMapper.typeForTag("/a", { href: "foo" }), "link_close", "closing anchor")
+  assert.equal(tagMapper.typeForTag("foo", {}), "foo_open", "unknown opening tag")
+  assert.equal(tagMapper.typeForTag("/foo", {}), "foo_close", "unknown closing tag")
 })

@@ -15,10 +15,7 @@ export class UnknownLink {
     this.value = removeDoubleSlash(unixify(publicPath))
   }
 
-  absolutify(
-    containingFile: AbsoluteFilePath,
-    publications: Publications
-  ): AbsoluteLink {
+  absolutify(containingFile: AbsoluteFilePath, publications: Publications): AbsoluteLink {
     if (this.isAbsolute()) {
       return new AbsoluteLink(this.value)
     }

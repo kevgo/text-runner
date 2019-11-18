@@ -6,9 +6,7 @@ import { printCodeFrame } from "./print-code-frame"
 /** prints the given error to the console */
 export function printUserError(err: UnprintedUserError) {
   if (err.filePath && err.line != null) {
-    console.log(
-      color.red(`${err.filePath}:${err.line} -- ${err.message || ""}`)
-    )
+    console.log(color.red(`${err.filePath}:${err.line} -- ${err.message || ""}`))
   } else {
     console.log(color.red(err.message))
   }

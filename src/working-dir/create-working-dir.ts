@@ -24,8 +24,6 @@ async function getWorkingDirPath(setting: workingDirSetting): Promise<string> {
     const tmpDir = await tmp.dir()
     return tmpDir.path
   } else {
-    throw new UnprintedUserError(
-      `unknown 'useSystemTempDirectory' setting: ${setting}`
-    )
+    throw new UnprintedUserError(`unknown 'useSystemTempDirectory' setting: ${setting}`)
   }
 }

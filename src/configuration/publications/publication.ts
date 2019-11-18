@@ -31,10 +31,7 @@ export class Publication {
    */
   publish(localPath: AbsoluteFilePath): AbsoluteLink {
     const re = new RegExp("^" + this.localPath)
-    const linkPath = addLeadingSlash(localPath.unixified()).replace(
-      re,
-      this.publicPath
-    )
+    const linkPath = addLeadingSlash(localPath.unixified()).replace(re, this.publicPath)
     const result = new AbsoluteLink(linkPath)
     if (this.publicExtension == null) {
       return result
@@ -44,9 +41,7 @@ export class Publication {
 
   /** Returns whether this publication applies to the given file path */
   publishes(localPath: AbsoluteFilePath): boolean {
-    return addLeadingSlash(addTrailingSlash(localPath.unixified())).startsWith(
-      this.localPath
-    )
+    return addLeadingSlash(addTrailingSlash(localPath.unixified())).startsWith(this.localPath)
   }
 
   /**

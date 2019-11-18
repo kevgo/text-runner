@@ -13,13 +13,7 @@ export async function executeSequential(
   formatter: Formatter
 ): Promise<Error | null> {
   for (const activity of activities) {
-    const error = await runActivity(
-      activity,
-      configuration,
-      linkTargets,
-      statsCounter,
-      formatter
-    )
+    const error = await runActivity(activity, configuration, linkTargets, statsCounter, formatter)
     if (error) {
       return error
     }

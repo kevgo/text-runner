@@ -5,10 +5,7 @@ import { TagMapper } from "../tag-mapper"
 import { HTMLParser } from "./html-parser"
 
 /** returns the standard AST for the HTML files with the given paths */
-export async function parseHTMLFiles(
-  filenames: AbsoluteFilePath[],
-  tagMapper: TagMapper
-): Promise<AstNodeList[]> {
+export async function parseHTMLFiles(filenames: AbsoluteFilePath[], tagMapper: TagMapper): Promise<AstNodeList[]> {
   const result = []
   const parser = new HTMLParser(tagMapper)
   for (const filename of filenames) {

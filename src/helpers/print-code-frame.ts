@@ -3,17 +3,11 @@ import fs from "fs"
 
 type PrintFunc = (arg: string) => void | boolean
 
-export function printCodeFrame(
-  output: PrintFunc,
-  filename: string | undefined,
-  line: number | undefined
-) {
+export function printCodeFrame(output: PrintFunc, filename: string | undefined, line: number | undefined) {
   if (!filename || line == null) {
     return
   }
 
   const fileContent = fs.readFileSync(filename, "utf8")
-  output(
-    codeFrameColumns(fileContent, { start: { line } }, { forceColor: true })
-  )
+  output(codeFrameColumns(fileContent, { start: { line } }, { forceColor: true }))
 }

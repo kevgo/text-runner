@@ -31,9 +31,7 @@ function appendAsyncCallback(code: string): string {
 }
 
 function replaceAsyncCallbacks(code: string): string {
-  return code
-    .replace("<CALLBACK>", "__finished")
-    .replace(/\/\/\s*\.\.\./g, "__finished()")
+  return code.replace("<CALLBACK>", "__finished").replace(/\/\/\s*\.\.\./g, "__finished()")
 }
 
 /** replaceSubstitutions substitutes replacements configured in text-run.yml. */

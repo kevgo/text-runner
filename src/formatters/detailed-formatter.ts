@@ -21,14 +21,9 @@ export class DetailedFormatter implements Formatter {
     if (output !== "") {
       process.stdout.write(color.dim(output))
     }
-    process.stdout.write(
-      color.red(`${activity.file.platformified()}:${activity.line} -- `)
-    )
+    process.stdout.write(color.red(`${activity.file.platformified()}:${activity.line} -- `))
     console.log(e.message)
-    const filePath = path.join(
-      this.configuration.sourceDir,
-      activity.file.platformified()
-    )
+    const filePath = path.join(this.configuration.sourceDir, activity.file.platformified())
     printCodeFrame(console.log, filePath, activity.line)
   }
 
@@ -36,23 +31,13 @@ export class DetailedFormatter implements Formatter {
     if (output !== "") {
       process.stdout.write(color.dim(output))
     }
-    console.log(
-      color.cyan(
-        `${activity.file.platformified()}:${
-          activity.line
-        } -- skipping: ${stepName}`
-      )
-    )
+    console.log(color.cyan(`${activity.file.platformified()}:${activity.line} -- skipping: ${stepName}`))
   }
 
   success(activity: Activity, stepName: string, output: string) {
     if (output !== "") {
       process.stdout.write(color.dim(output))
     }
-    console.log(
-      color.green(
-        `${activity.file.platformified()}:${activity.line} -- ${stepName}`
-      )
-    )
+    console.log(color.green(`${activity.file.platformified()}:${activity.line} -- ${stepName}`))
   }
 }

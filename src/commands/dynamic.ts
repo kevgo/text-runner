@@ -39,19 +39,9 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
-  const formatter = instantiateFormatter(
-    config.formatterName,
-    activities.length,
-    config
-  )
+  const formatter = instantiateFormatter(config.formatterName, activities.length, config)
   process.chdir(config.workspace)
-  const error = await executeSequential(
-    activities,
-    config,
-    linkTargets,
-    stats,
-    formatter
-  )
+  const error = await executeSequential(activities, config, linkTargets, stats, formatter)
 
   // step 6: cleanup
   process.chdir(config.sourceDir)
@@ -69,9 +59,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
     colorFn = color.green
     text += color.green("Success! ")
   }
-  text += colorFn(
-    `${activities.length} activities in ${filenames.length} files`
-  )
+  text += colorFn(`${activities.length} activities in ${filenames.length} files`)
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
   if (error) {

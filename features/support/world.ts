@@ -13,10 +13,7 @@ import { v4 as uuid } from "uuid"
  * via its command-line interface
  */
 function World() {
-  this.execute = async function(params: {
-    command: string
-    expectError: boolean
-  }) {
+  this.execute = async function(params: { command: string; expectError: boolean }) {
     const args: any = {}
     args.cwd = this.rootDir
     if (this.debug) {
@@ -83,11 +80,7 @@ function World() {
     }
     assert.include(output, expectedHeader)
     assert.match(output, new RegExp(table["ERROR MESSAGE"]))
-    assert.equal(
-      this.process.exitCode,
-      parseInt(table["EXIT CODE"], 10),
-      "exit code"
-    )
+    assert.equal(this.process.exitCode, parseInt(table["EXIT CODE"], 10), "exit code")
   }
 
   this.verifyOutput = (table: any) => {
@@ -124,9 +117,7 @@ ${actual}
   this.verifyPrints = (expectedText: string) => {
     const output = stripAnsi(this.process.output.fullText().trim())
     if (!new RegExp(expectedText.trim()).test(output)) {
-      throw new Error(
-        `expected to find regex '${expectedText.trim()}' in '${output}'`
-      )
+      throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
     }
   }
 
@@ -138,17 +129,12 @@ ${actual}
   }
 
   this.verifyRanConsoleCommand = (command: string) => {
-    assert.include(
-      stripAnsi(this.process.output.fullText()),
-      `running console command: ${command}`
-    )
+    assert.include(stripAnsi(this.process.output.fullText()), `running console command: ${command}`)
   }
 
   this.verifyRanOnlyTests = (filenames: any) => {
     filenames = flatten(filenames)
-    const standardizedOutput = this.process.output
-      .fullText()
-      .replace(/\\/g, "/")
+    const standardizedOutput = this.process.output.fullText().replace(/\\/g, "/")
 
     // verify the given tests have run
     for (const filename of filenames) {
@@ -169,17 +155,11 @@ ${actual}
   }
 
   this.verifyTestsRun = (count: number) => {
-    assert.include(
-      stripAnsi(this.process.output.fullText()),
-      ` ${count} activities`
-    )
+    assert.include(stripAnsi(this.process.output.fullText()), ` ${count} activities`)
   }
 
   this.verifyUnknownCommand = (command: string) => {
-    assert.include(
-      stripAnsi(this.process.output.fullText()),
-      `unknown command: ${command}`
-    )
+    assert.include(stripAnsi(this.process.output.fullText()), `unknown command: ${command}`)
   }
 }
 

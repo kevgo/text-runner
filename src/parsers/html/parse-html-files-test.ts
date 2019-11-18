@@ -22,10 +22,7 @@ suite("parseHTMLFiles", function() {
           e.file = e.file.replace("*", "html")
           expected.push(AstNode.scaffold(e))
         }
-        const actual = await parseHTMLFiles(
-          [new AbsoluteFilePath(path.join(testDirPath, "input.html"))],
-          tagMapper
-        )
+        const actual = await parseHTMLFiles([new AbsoluteFilePath(path.join(testDirPath, "input.html"))], tagMapper)
         assert.deepEqual(actual[0], expected)
       })
     }

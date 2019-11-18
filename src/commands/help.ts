@@ -16,15 +16,9 @@ ${error || ""}
 USAGE: ${color.bold("text-run [<options>] <command>")}
 
 COMMANDS
-  ${color.bold(
-    "run"
-  )} [<filename>]      runs all tests on the given file/folder or entire documentation
-  ${color.bold(
-    "dynamic"
-  )} [<filename>]  runs only the programmatic tests, skips checking links
-  ${color.bold(
-    "static"
-  )} [<filename>]   checks only the links, skips programmatic tests
+  ${color.bold("run")} [<filename>]      runs all tests on the given file/folder or entire documentation
+  ${color.bold("dynamic")} [<filename>]  runs only the programmatic tests, skips checking links
+  ${color.bold("static")} [<filename>]   checks only the links, skips programmatic tests
 
   ${color.bold("setup")}                 creates an example configuration file
   ${color.bold("add")} <filename>        scaffolds a new block type handler

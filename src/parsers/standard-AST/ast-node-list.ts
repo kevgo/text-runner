@@ -27,11 +27,7 @@ export class AstNodeList extends Array<AstNode> {
       let msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
       msg += "The node types in this list are: "
       msg += this.nodeTypes().join(", ")
-      throw new UnprintedUserError(
-        msg,
-        this[0].file.platformified(),
-        this[0].line
-      )
+      throw new UnprintedUserError(msg, this[0].file.platformified(), this[0].line)
     }
     return nodes[0]
   }
@@ -101,10 +97,7 @@ export class AstNodeList extends Array<AstNode> {
 
   /** Returns the textual content for the given node. */
   textInNode(astNode: AstNode): string {
-    return this.getNodesFor(astNode).reduce(
-      (acc, node) => acc + node.content,
-      ""
-    )
+    return this.getNodesFor(astNode).reduce((acc, node) => acc + node.content, "")
   }
 
   /**

@@ -13,17 +13,13 @@ suite("MdParser.parseFile()", function() {
     for (const testDirName of fs.readdirSync(fixtureDir)) {
       const testDirPath = path.join(fixtureDir, testDirName)
       test(`parsing '${testDirName}'`, async function() {
-        const expectedJSON = await fs.readJSON(
-          path.join(testDirPath, "result.json")
-        )
+        const expectedJSON = await fs.readJSON(path.join(testDirPath, "result.json"))
         const expected = new AstNodeList()
         for (const expectedNodeData of expectedJSON) {
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
           expected.push(AstNode.scaffold(expectedNodeData))
         }
-        const actual = await parseMarkdownFiles([
-          new AbsoluteFilePath(path.join(testDirPath, "input.md"))
-        ])
+        const actual = await parseMarkdownFiles([new AbsoluteFilePath(path.join(testDirPath, "input.md"))])
         assert.deepEqual(actual[0], expected)
       })
     }

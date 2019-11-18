@@ -93,11 +93,7 @@ suite("AbsoluteLink.localize()", function() {
       }
     ])
     const localized = link.localize(publications, "")
-    assert.equal(
-      localized.unixified(),
-      "content/posts/two.md",
-      "should remove the anchor"
-    )
+    assert.equal(localized.unixified(), "content/posts/two.md", "should remove the anchor")
   })
 
   test("link with anchor to normal directory", function() {
@@ -116,17 +112,11 @@ test("AbsoluteLink.rebase()", function() {
 
 suite("AbsoluteLink.withAnchor()", function() {
   test("replacing existing anchor", function() {
-    assert.equal(
-      new AbsoluteLink("/foo.md#hello").withAnchor("new").value,
-      "/foo.md#new"
-    )
+    assert.equal(new AbsoluteLink("/foo.md#hello").withAnchor("new").value, "/foo.md#new")
   })
 
   test("adding an anchor", function() {
-    assert.equal(
-      new AbsoluteLink("/foo.md").withAnchor("new").value,
-      "/foo.md#new"
-    )
+    assert.equal(new AbsoluteLink("/foo.md").withAnchor("new").value, "/foo.md#new")
   })
 })
 
@@ -137,9 +127,6 @@ test("AbsoluteLink.withExtension()", function() {
 })
 
 test("AbsoluteLink.withoutAnchor()", function() {
-  assert.equal(
-    new AbsoluteLink("/foo.md#hello").withoutAnchor().value,
-    "/foo.md"
-  )
+  assert.equal(new AbsoluteLink("/foo.md#hello").withoutAnchor().value, "/foo.md")
   assert.equal(new AbsoluteLink("/foo.md").withoutAnchor().value, "/foo.md")
 })

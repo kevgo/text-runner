@@ -20,10 +20,7 @@ export class RelativeLink {
    * @param containingFile
    * @param publications the publications of this TextRunner session
    */
-  absolutify(
-    containingFile: AbsoluteFilePath,
-    publications: Publications
-  ): AbsoluteLink {
+  absolutify(containingFile: AbsoluteFilePath, publications: Publications): AbsoluteLink {
     const urlOfDir = containingFile.directory().publicPath(publications)
     return urlOfDir.append(this)
   }

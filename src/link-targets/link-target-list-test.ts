@@ -12,19 +12,14 @@ suite("LinkTargetList.addNodeList()", function() {
     })
     const targetList = new LinkTargetList()
     targetList.addNodeList(nodeList)
-    assert.isTrue(
-      targetList.hasAnchor(new AbsoluteFilePath("file.md"), "foo-bar")
-    )
+    assert.isTrue(targetList.hasAnchor(new AbsoluteFilePath("file.md"), "foo-bar"))
   })
 
   test("node list without link targets", function() {
     const nodeList = AstNodeList.scaffold({ file: "file.md", type: "text" })
     const targetList = new LinkTargetList()
     targetList.addNodeList(nodeList)
-    assert.isTrue(
-      targetList.hasFile(new AbsoluteFilePath("file.md")),
-      "should register files without link targets"
-    )
+    assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")), "should register files without link targets")
   })
 
   test("node list with headings", function() {

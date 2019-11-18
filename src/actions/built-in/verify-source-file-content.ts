@@ -13,17 +13,8 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = args.nodes.textInNodeOfType("fence")
-  args.name(
-    `verifying document content matches source code file ${color.cyan(
-      fileName
-    )}`
-  )
-  const filePath = path.join(
-    args.configuration.sourceDir,
-    path.dirname(args.file),
-    relativeBaseDir,
-    fileName
-  )
+  args.name(`verifying document content matches source code file ${color.cyan(fileName)}`)
+  const filePath = path.join(args.configuration.sourceDir, path.dirname(args.file), relativeBaseDir, fileName)
   args.log(`ls ${filePath}`)
   let actualContent
   try {
@@ -36,15 +27,8 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     }
   }
   try {
-    assertNoDiff.trimmedLines(
-      eol.lf(actualContent.trim()),
-      eol.lf(expectedContent.trim())
-    )
+    assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    throw new Error(
-      `mismatching content in ${color.cyan(color.bold(filePath))}:\n${
-        err.message
-      }`
-    )
+    throw new Error(`mismatching content in ${color.cyan(color.bold(filePath))}:\n${err.message}`)
   }
 }

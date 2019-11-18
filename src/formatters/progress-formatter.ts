@@ -19,9 +19,7 @@ export class ProgressFormatter implements Formatter {
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
-        format:
-          color.green(" {bar}") +
-          " {percentage}% | ETA: {eta}s | {value}/{total}",
+        format: color.green(" {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
         hideCursor: undefined,
         stopOnComplete: true
       },
@@ -36,17 +34,9 @@ export class ProgressFormatter implements Formatter {
     console.log()
     console.log()
     console.log(color.dim(output))
-    console.log(
-      color.red(
-        `${activity.file.platformified()}:${activity.line} -- ${err.message}\n`
-      )
-    )
+    console.log(color.red(`${activity.file.platformified()}:${activity.line} -- ${err.message}\n`))
     console.log()
-    printCodeFrame(
-      console.log,
-      path.join(this.configuration.sourceDir, activity.file.platformified()),
-      activity.line
-    )
+    printCodeFrame(console.log, path.join(this.configuration.sourceDir, activity.file.platformified()), activity.line)
   }
 
   // @ts-ignore: okay to not use parameters here

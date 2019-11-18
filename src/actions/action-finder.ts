@@ -40,9 +40,7 @@ class ActionFinder {
 
   /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
-    let errorText = `unknown action: ${color.red(
-      activity.actionName
-    )}\nAvailable built-in actions:\n`
+    let errorText = `unknown action: ${color.red(activity.actionName)}\nAvailable built-in actions:\n`
     for (const actionName of Object.keys(this.builtinActions).sort()) {
       errorText += `* ${actionName}\n`
     }
@@ -56,11 +54,7 @@ class ActionFinder {
     }
     errorText += `\nTo create a new "${activity.actionName}" action,\n`
     errorText += `run "text-run add ${activity.actionName}"\n`
-    throw new UnprintedUserError(
-      errorText,
-      activity.file.platformified(),
-      activity.line
-    )
+    throw new UnprintedUserError(errorText, activity.file.platformified(), activity.line)
   }
 
   private loadBuiltinActions(): FunctionRepo {
@@ -79,11 +73,7 @@ class ActionFinder {
       rechoir.prepare(interpret.jsVariants, filename)
       const actionName = getActionName(filename)
       if (this.builtinActions[actionName]) {
-        throw new UnprintedUserError(
-          `redefining internal action '${actionName}'`,
-          filename,
-          1
-        )
+        throw new UnprintedUserError(`redefining internal action '${actionName}'`, filename, 1)
       }
       result[actionName] = require(filename)
     }
@@ -98,11 +88,7 @@ class ActionFinder {
   }
 
   private customActionFilePaths(): string[] {
-    const pattern = path.join(
-      process.cwd(),
-      "text-run",
-      `*.@(${javascriptExtensions().join("|")})`
-    )
+    const pattern = path.join(process.cwd(), "text-run", `*.@(${javascriptExtensions().join("|")})`)
     return glob.sync(pattern)
   }
 }

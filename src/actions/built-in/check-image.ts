@@ -53,11 +53,7 @@ async function checkRemoteImage(url: string, args: ActionArgs) {
 
 function isRemoteImage(imagePath: string): boolean {
   if (imagePath != null) {
-    return (
-      imagePath.startsWith("//") ||
-      imagePath.startsWith("http://") ||
-      imagePath.startsWith("https://")
-    )
+    return imagePath.startsWith("//") || imagePath.startsWith("http://") || imagePath.startsWith("https://")
   } else {
     return false
   }

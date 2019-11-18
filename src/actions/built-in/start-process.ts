@@ -14,9 +14,7 @@ import { ActionArgs } from "../types/action-args"
  */
 export default async function startProcess(args: ActionArgs) {
   const commandsToRun = getCommandsToRun(args)
-  args.name(
-    `starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`
-  )
+  args.name(`starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`)
   RunningProcess.instance().set(
     createObservableProcess(callArgs(commandsToRun), {
       cwd: args.configuration.workspace
@@ -48,11 +46,7 @@ function makeGlobal(configuration: Configuration) {
     const command = commandParts[0]
     const replacement = globals[command]
     if (replacement) {
-      return (
-        path.join(configuration.sourceDir, replacement) +
-        " " +
-        commandParts.splice(1).join(" ")
-      )
+      return path.join(configuration.sourceDir, replacement) + " " + commandParts.splice(1).join(" ")
     } else {
       return commandText
     }

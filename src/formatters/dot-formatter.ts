@@ -19,15 +19,9 @@ export class DotFormatter implements Formatter {
   failed(activity: Activity, stepName: string, err: Error, output: string) {
     console.log()
     console.log(color.dim(output))
-    process.stdout.write(
-      color.red(`${activity.file.platformified()}:${activity.line} -- `)
-    )
+    process.stdout.write(color.red(`${activity.file.platformified()}:${activity.line} -- `))
     console.log(err.message)
-    printCodeFrame(
-      console.log,
-      path.join(this.configuration.sourceDir, activity.file.platformified()),
-      activity.line
-    )
+    printCodeFrame(console.log, path.join(this.configuration.sourceDir, activity.file.platformified()), activity.line)
   }
 
   // @ts-ignore: okay to not use parameters here

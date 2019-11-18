@@ -13,9 +13,7 @@ suite("RelativeLink.absolutify()", function() {
   })
 
   test("with publications", function() {
-    const publications = Publications.fromJSON([
-      { localPath: "/content", publicPath: "/", publicExtension: "" }
-    ])
+    const publications = Publications.fromJSON([{ localPath: "/content", publicPath: "/", publicExtension: "" }])
     const link = new RelativeLink("new.md")
     const containingFile = new AbsoluteFilePath("/content/one/two.md")
     const absoluteLink = link.absolutify(containingFile, publications)

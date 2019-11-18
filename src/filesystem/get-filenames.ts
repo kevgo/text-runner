@@ -13,9 +13,7 @@ import { removeExcludedFiles } from "./remove-excluded-files"
 /**
  * Returns the name of all files/directories that match the given glob
  */
-export async function getFileNames(
-  config: Configuration
-): Promise<AbsoluteFilePath[]> {
+export async function getFileNames(config: Configuration): Promise<AbsoluteFilePath[]> {
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   return filenames
@@ -31,8 +29,6 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
   } else if (isGlob(config.fileGlob)) {
     return filesMatchingGlob(config.fileGlob)
   } else {
-    throw new UnprintedUserError(
-      `file or directory does not exist: ${color.red(config.fileGlob)}`
-    )
+    throw new UnprintedUserError(`file or directory does not exist: ${color.red(config.fileGlob)}`)
   }
 }

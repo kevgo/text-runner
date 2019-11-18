@@ -191,10 +191,7 @@ suite("AstNodeList.textInNodeOfType()", function() {
     list.pushNode({ type: "fence_open" })
     list.pushNode({ type: "text", content: "world" })
     list.pushNode({ type: "fence_close" })
-    assert.throws(
-      () => list.textInNodeOfType("code", "fence"),
-      UnprintedUserError
-    )
+    assert.throws(() => list.textInNodeOfType("code", "fence"), UnprintedUserError)
   })
 
   test("no matching nodes", function() {

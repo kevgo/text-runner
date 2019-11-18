@@ -18,10 +18,7 @@ suite("OpenTagTracker.close()", function() {
     const openTags = new OpenNodeTracker()
     openTags.open(AstNode.scaffold({ type: "foo_open" }))
     const testFn = () => openTags.close({ type: "other_close" }, file, 12)
-    assert.throws(
-      testFn,
-      "No opening node 'other_open' found for closing node 'other_close'"
-    )
+    assert.throws(testFn, "No opening node 'other_open' found for closing node 'other_close'")
   })
 })
 

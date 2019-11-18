@@ -1,9 +1,7 @@
 import fs from "fs-extra"
 import path from "path"
 
-export async function addCommand(
-  blockName: string | undefined
-): Promise<Error[]> {
+export async function addCommand(blockName: string | undefined): Promise<Error[]> {
   if (!blockName) {
     throw new Error("no block name given")
   }
@@ -16,11 +14,7 @@ export async function addCommand(
   if (!textRunDirExists) {
     await fs.mkdir("text-run")
   }
-  await fs.writeFile(
-    path.join("text-run", blockName + ".js"),
-    template(blockName),
-    "utf8"
-  )
+  await fs.writeFile(path.join("text-run", blockName + ".js"), template(blockName), "utf8")
   return []
 }
 

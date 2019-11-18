@@ -42,30 +42,17 @@ export async function runActivity(
     }
     if (result === undefined) {
       statsCounter.success()
-      formatter.success(
-        activity,
-        nameRefiner.finalName(),
-        outputCollector.toString()
-      )
+      formatter.success(activity, nameRefiner.finalName(), outputCollector.toString())
     } else if (result === args.SKIPPING) {
       statsCounter.skip()
-      formatter.skipped(
-        activity,
-        nameRefiner.finalName(),
-        outputCollector.toString()
-      )
+      formatter.skipped(activity, nameRefiner.finalName(), outputCollector.toString())
     } else {
       throw new Error(`unknown return code from action: ${result}`)
     }
   } catch (err) {
     statsCounter.error()
     if (isUserError(err)) {
-      formatter.failed(
-        activity,
-        nameRefiner.finalName(),
-        err,
-        outputCollector.toString()
-      )
+      formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
       return new PrintedUserError(err)
     } else {
       // here we have a developer error like for example TypeError
@@ -75,18 +62,12 @@ export async function runActivity(
   return null
 }
 
-async function runCallbackFunc(
-  func: Action,
-  args: ActionArgs
-): Promise<ActionResult> {
+async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {
   const promisified = util.promisify<ActionArgs, ActionResult>(func)
   return promisified(args)
 }
 
-async function runSyncOrPromiseFunc(
-  func: Action,
-  args: ActionArgs
-): Promise<ActionResult> {
+async function runSyncOrPromiseFunc(func: Action, args: ActionArgs): Promise<ActionResult> {
   const result = await Promise.resolve(func(args))
   return result
 }

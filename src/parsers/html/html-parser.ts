@@ -22,11 +22,7 @@ export class HTMLParser {
    *                     This parameter helps show correct line numbers for HTML snippets
    *                     that are embedded in Markdown documents.
    */
-  parse(
-    text: string,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): AstNodeList {
+  parse(text: string, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true
     })
@@ -45,19 +41,13 @@ export class HTMLParser {
         return childNode
       }
     }
-    throw new Error(
-      `child node '${name}' not found in AST: ${util.inspect(node)}`
-    )
+    throw new Error(`child node '${name}' not found in AST: ${util.inspect(node)}`)
   }
 
   /**
    * converts the given HTML AST for an entire HTML document into the standard AST
    */
-  private standardizeDocument(
-    documentAst: any,
-    file: AbsoluteFilePath,
-    startingLine: number = 1
-  ): AstNodeList {
+  private standardizeDocument(documentAst: any, file: AbsoluteFilePath, startingLine: number = 1): AstNodeList {
     const result = new AstNodeList()
     const htmlNode = this.findChildWithName(documentAst, "html")
     const bodyNode = this.findChildWithName(htmlNode, "body")
@@ -68,11 +58,7 @@ export class HTMLParser {
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(
-    node: any,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): AstNodeList {
+  private standardizeNode(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     if (this.isEmptyTextNode(node)) {
       return new AstNodeList()
     }
@@ -86,11 +72,7 @@ export class HTMLParser {
   }
 
   /** converts the given HTML tag with open and closing tag into the standard format */
-  private standardizeOpenCloseTag(
-    node: any,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): AstNodeList {
+  private standardizeOpenCloseTag(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     const result = new AstNodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
@@ -114,11 +96,7 @@ export class HTMLParser {
 
     // store the child nodes in between the opening and closing node
     for (const childNode of node.childNodes) {
-      const standardizedChildNodes = this.standardizeNode(
-        childNode,
-        file,
-        startingLine
-      )
+      const standardizedChildNodes = this.standardizeNode(childNode, file, startingLine)
       result.push(...standardizedChildNodes)
     }
 
@@ -131,10 +109,7 @@ export class HTMLParser {
     } else {
       throw new Error(`cannot determine end line for node ${node}`)
     }
-    if (
-      !node.sourceCodeLocation ||
-      (node.sourceCodeLocation && node.sourceCodeLocation.endTag)
-    ) {
+    if (!node.sourceCodeLocation || (node.sourceCodeLocation && node.sourceCodeLocation.endTag)) {
       const tag = "/" + node.tagName
       result.push(
         new AstNode({
@@ -151,11 +126,7 @@ export class HTMLParser {
   }
 
   /** converts the given HTML standalone node into the standard format */
-  private standardizeStandaloneNode(
-    node: any,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): AstNodeList {
+  private standardizeStandaloneNode(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     const result = new AstNodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
@@ -172,11 +143,7 @@ export class HTMLParser {
   }
 
   /** converts the given HTML text node into the standard format */
-  private standardizeTextNode(
-    node: any,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): AstNodeList {
+  private standardizeTextNode(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     const result = new AstNodeList()
     if (node.value !== "\n") {
       result.push(

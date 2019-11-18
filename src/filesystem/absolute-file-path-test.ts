@@ -44,10 +44,7 @@ suite("AbsoluteFilePath.isDirectory()", function() {
 
 test("AbsoluteFilePath.unixified()", function() {
   assert.equal(new AbsoluteFilePath("/foo/bar").unixified(), "foo/bar")
-  assert.equal(
-    new AbsoluteFilePath("\\foo/bar\\baz").unixified(),
-    "foo/bar/baz"
-  )
+  assert.equal(new AbsoluteFilePath("\\foo/bar\\baz").unixified(), "foo/bar/baz")
 })
 
 suite("AbsoluteFilePath.publicPath()", function() {

@@ -6,15 +6,11 @@ import { ActionArgs } from "../types/action-args"
 
 export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
-  const pkg = await fs.readJSON(
-    path.join(args.configuration.sourceDir, "package.json")
-  )
+  const pkg = await fs.readJSON(path.join(args.configuration.sourceDir, "package.json"))
   args.name(`verify NPM installs ${color.cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    throw new Error(
-      `could not find ${color.cyan(pkg.name)} in installation instructions`
-    )
+    throw new Error(`could not find ${color.cyan(pkg.name)} in installation instructions`)
   }
 }
 

@@ -33,10 +33,7 @@ suite("parseCmdlineArgs()", function() {
   })
 
   test("with <text-run> call", function() {
-    const args = parseCmdlineArgs([
-      "/Users/kevlar/d/text-runner/bin/text-run",
-      "run"
-    ])
+    const args = parseCmdlineArgs(["/Users/kevlar/d/text-runner/bin/text-run", "run"])
     assert.equal(args.command, "run")
     assert.isUndefined(args.fileGlob)
   })

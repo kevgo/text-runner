@@ -56,11 +56,7 @@ suite("AstNode.htmlLinkTarget()", function() {
       content: '<a href="http://foo.com">',
       type: "htmltag"
     })
-    assert.equal(
-      node.htmlLinkTarget(),
-      "http://foo.com",
-      "should return the href content of link tags"
-    )
+    assert.equal(node.htmlLinkTarget(), "http://foo.com", "should return the href content of link tags")
   })
 
   test("non-link tags", function() {

@@ -3,10 +3,7 @@ import { AbsoluteFilePath } from "./absolute-file-path"
 /**
  * Removes the given excluded files from the given list of filenames
  */
-export function removeExcludedFiles(
-  fileList: AbsoluteFilePath[],
-  excluded: string | string[]
-): AbsoluteFilePath[] {
+export function removeExcludedFiles(fileList: AbsoluteFilePath[], excluded: string | string[]): AbsoluteFilePath[] {
   const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
   if (!excludedFilesArray.includes("node_modules")) {
     excludedFilesArray.push("node_modules")

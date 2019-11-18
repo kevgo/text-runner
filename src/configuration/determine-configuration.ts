@@ -30,8 +30,6 @@ export function determineConfiguration(
 ): Configuration {
   // merge the configs
   const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
-  result["publications"] = Publications.fromJSON(
-    result["publications"]
-  ).sorted()
+  result["publications"] = Publications.fromJSON(result["publications"]).sorted()
   return result as Configuration
 }

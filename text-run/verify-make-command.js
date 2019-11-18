@@ -15,9 +15,7 @@ module.exports = async function verifyMakeCommand(args) {
     .filter(lineDefinesMakeCommand)
     .map(extractMakeCommand)
   if (!commands.includes(expected)) {
-    throw new Error(
-      `Make command ${color.cyan(expected)} not found in ${commands}`
-    )
+    throw new Error(`Make command ${color.cyan(expected)} not found in ${commands}`)
   }
 }
 

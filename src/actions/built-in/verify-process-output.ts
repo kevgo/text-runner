@@ -14,9 +14,7 @@ export default async function verifyProcessOutput(args: ActionArgs) {
     .filter(line => line)
   const process = RunningProcess.instance().process
   if (!process) {
-    throw new Error(
-      "Cannot verify process output since no process has been started"
-    )
+    throw new Error("Cannot verify process output since no process has been started")
   }
   for (const line of expectedLines) {
     args.log(`waiting for ${line}`)

@@ -58,9 +58,7 @@ async function checkExternalLink(target: string, args: ActionArgs) {
     } else if (err instanceof got.TimeoutError) {
       args.log("timed out")
     } else {
-      args.log(
-        `error while checking link to ${color.cyan(target)}: ${err.message}`
-      )
+      args.log(`error while checking link to ${color.cyan(target)}: ${err.message}`)
     }
   }
   return
@@ -68,18 +66,9 @@ async function checkExternalLink(target: string, args: ActionArgs) {
 
 async function checkLinkToFilesystem(target: string, args: ActionArgs) {
   const unknownLink = new UnknownLink(decodeURI(target))
-  const absoluteLink = unknownLink.absolutify(
-    new AbsoluteFilePath(args.file),
-    args.configuration.publications
-  )
-  const linkedFile = absoluteLink.localize(
-    args.configuration.publications,
-    args.configuration.defaultFile
-  )
-  const fullPath = path.join(
-    args.configuration.sourceDir,
-    linkedFile.platformified()
-  )
+  const absoluteLink = unknownLink.absolutify(new AbsoluteFilePath(args.file), args.configuration.publications)
+  const linkedFile = absoluteLink.localize(args.configuration.publications, args.configuration.defaultFile)
+  const fullPath = path.join(args.configuration.sourceDir, linkedFile.platformified())
 
   // We only check for directories if no defaultFile is set.
   // Otherwise links to folders point to the default file.
@@ -87,9 +76,7 @@ async function checkLinkToFilesystem(target: string, args: ActionArgs) {
     try {
       const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
-        args.name(
-          `link to local directory ${color.cyan(linkedFile.platformified())}`
-        )
+        args.name(`link to local directory ${color.cyan(linkedFile.platformified())}`)
         return
       }
     } catch (e) {
@@ -101,19 +88,11 @@ async function checkLinkToFilesystem(target: string, args: ActionArgs) {
   try {
     await fs.stat(fullPath)
   } catch (err) {
-    throw new Error(
-      `link to non-existing local file ${color.bold(
-        linkedFile.platformified()
-      )}`
-    )
+    throw new Error(`link to non-existing local file ${color.bold(linkedFile.platformified())}`)
   }
 }
 
-async function checkLinkToAnchorInSameFile(
-  containingFile: AbsoluteFilePath,
-  target: string,
-  args: ActionArgs
-) {
+async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, args: ActionArgs) {
   const anchorName = target.substr(1)
   if (!args.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${color.bold(target)}`)
@@ -125,27 +104,15 @@ async function checkLinkToAnchorInSameFile(
   }
 }
 
-async function checkLinkToAnchorInOtherFile(
-  containingFile: AbsoluteFilePath,
-  target: string,
-  args: ActionArgs
-) {
+async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, args: ActionArgs) {
   const link = new UnknownLink(target)
-  const absoluteLink = link.absolutify(
-    containingFile,
-    args.configuration.publications
-  )
-  const filePath = absoluteLink.localize(
-    args.configuration.publications,
-    args.configuration.defaultFile
-  )
+  const absoluteLink = link.absolutify(containingFile, args.configuration.publications)
+  const filePath = absoluteLink.localize(args.configuration.publications, args.configuration.defaultFile)
   const anchorName = absoluteLink.anchor()
 
   if (!args.linkTargets.hasFile(filePath)) {
     throw new Error(
-      `link to anchor #${color.cyan(
-        anchorName
-      )} in non-existing file ${color.cyan(
+      `link to anchor #${color.cyan(anchorName)} in non-existing file ${color.cyan(
         removeLeadingSlash(filePath.platformified())
       )}`
     )
@@ -153,23 +120,13 @@ async function checkLinkToAnchorInOtherFile(
 
   if (!args.linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
-      `link to non-existing anchor ${color.bold(
-        "#" + anchorName
-      )} in ${color.bold(filePath.platformified())}`
+      `link to non-existing anchor ${color.bold("#" + anchorName)} in ${color.bold(filePath.platformified())}`
     )
   }
 
   if (args.linkTargets.anchorType(filePath, anchorName) === "heading") {
-    args.name(
-      `link to heading ${color.cyan(
-        filePath.platformified() + "#" + anchorName
-      )}`
-    )
+    args.name(`link to heading ${color.cyan(filePath.platformified() + "#" + anchorName)}`)
   } else {
-    args.name(
-      `link to ${color.cyan(filePath.platformified())}#${color.cyan(
-        anchorName
-      )}`
-    )
+    args.name(`link to ${color.cyan(filePath.platformified())}#${color.cyan(anchorName)}`)
   }
 }

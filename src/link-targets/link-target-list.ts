@@ -42,11 +42,7 @@ export class LinkTargetList {
     this.addLinkTarget(node.file, "heading", content)
   }
 
-  addLinkTarget(
-    filePath: AbsoluteFilePath,
-    type: LinkTargetTypes,
-    name: string
-  ) {
+  addLinkTarget(filePath: AbsoluteFilePath, type: LinkTargetTypes, name: string) {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({
@@ -64,9 +60,7 @@ export class LinkTargetList {
     }
     const anchor = anchorsForFile.find(linkTarget => linkTarget.name === name)
     if (!anchor) {
-      throw new Error(
-        `no anchor '${name}' in file '${filePath.platformified()}'`
-      )
+      throw new Error(`no anchor '${name}' in file '${filePath.platformified()}'`)
     }
     return anchor.type
   }

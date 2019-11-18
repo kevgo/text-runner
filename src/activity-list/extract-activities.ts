@@ -4,10 +4,7 @@ import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { ActivityList } from "./types/activity-list"
 
 /** returns all activities found in the given AstNodeLists */
-export function extractActivities(
-  ASTs: AstNodeList[],
-  activeAttributeName: string
-): ActivityList {
+export function extractActivities(ASTs: AstNodeList[], activeAttributeName: string): ActivityList {
   const result: ActivityList = []
   for (const AST of ASTs) {
     result.push(...extractFromAST(AST, activeAttributeName))

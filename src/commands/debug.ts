@@ -16,11 +16,7 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
   const ASTs = await parseMarkdownFiles(filenames)
   for (const AST of ASTs) {
     for (const node of AST) {
-      console.log(
-        `${node.file.platformified()}:${node.line}  ${node.type} ${showAttr(
-          node
-        )}`
-      )
+      console.log(`${node.file.platformified()}:${node.line}  ${node.type} ${showAttr(node)}`)
     }
   }
 
@@ -40,11 +36,7 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
     console.log("(none)")
   } else {
     for (const activity of activities) {
-      console.log(
-        `${activity.file.platformified()}:${activity.line}  ${
-          activity.actionName
-        }`
-      )
+      console.log(`${activity.file.platformified()}:${activity.line}  ${activity.actionName}`)
     }
   }
 

@@ -43,16 +43,10 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 5: execute the ActivityList
-  const formatter = instantiateFormatter(
-    config.formatterName,
-    activities.length + links.length,
-    config
-  )
+  const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)
   process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats, formatter)
-  jobs.push(
-    executeSequential(activities, config, linkTargets, stats, formatter)
-  )
+  jobs.push(executeSequential(activities, config, linkTargets, stats, formatter))
   const results = (await Promise.all(jobs)).filter(r => r) as Error[]
 
   // step 6: cleanup
@@ -74,11 +68,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     colorFn = color.red
     text += color.red(`${results.length} errors, `)
   }
-  text += colorFn(
-    `${activities.length + links.length} activities in ${
-      filenames.length
-    } files, ${stats.duration()}`
-  )
+  text += colorFn(`${activities.length + links.length} activities in ${filenames.length} files, ${stats.duration()}`)
   console.log(color.bold(text))
   return results
 }

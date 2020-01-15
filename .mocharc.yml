@@ -1,0 +1,4 @@
+require: "ts-node/register"
+recursive: true
+exclude: text-run/**/*.js
+ui: tdd

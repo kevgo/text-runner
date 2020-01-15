@@ -1,5 +1,0 @@
---colors
---require ts-node/register
---recursive
---exclude text-run/**/*.js
---ui tdd

@@ -30,7 +30,7 @@ suite("LinkTargetList.addNodeList()", function() {
       type: "h1_open"
     })
     nodeList.pushNode({
-      content: "foo bar",
+      content: "Get Started in 5 Minutes",
       file: "file.md",
       type: "text"
     })
@@ -41,7 +41,7 @@ suite("LinkTargetList.addNodeList()", function() {
     const targetList = new LinkTargetList()
     targetList.addNodeList(nodeList)
     const filePath = new AbsoluteFilePath("file.md")
-    assert.isTrue(targetList.hasAnchor(filePath, "foo-bar"))
+    assert.isTrue(targetList.hasAnchor(filePath, "get-started-in-5-minutes"))
   })
 })
 

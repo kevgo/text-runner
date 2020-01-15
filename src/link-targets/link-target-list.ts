@@ -1,4 +1,4 @@
-import kebab from "@queso/kebab-case"
+import slugify from "@sindresorhus/slugify"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
@@ -46,7 +46,7 @@ export class LinkTargetList {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({
-      name: kebab(name.toLowerCase()),
+      name: slugify(name.toLowerCase()),
       type
     })
   }

@@ -1,6 +1,6 @@
-import kebab from "@queso/kebab-case"
 import path from "path"
+import slugify from "@sindresorhus/slugify"
 
 export function getActionName(filepath: string): string {
-  return kebab(path.basename(filepath, path.extname(filepath)))
+  return slugify(path.basename(filepath, path.extname(filepath)))
 }

@@ -1,4 +1,4 @@
-import flatten from "array-flatten"
+import { flatten } from "array-flatten"
 import { assert } from "chai"
 import { setWorldConstructor } from "cucumber"
 import fs from "fs-extra"

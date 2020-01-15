@@ -40,7 +40,7 @@ async function checkRemoteImage(url: string, args: ActionArgs) {
   try {
     await got(url, { timeout: 2000 })
   } catch (err) {
-    if (err.statusCode === 404) {
+    if (err instanceof got.HTTPError && err.response.statusCode === 404) {
       args.log(`image ${color.magenta(url)} does not exist`)
     } else if (err instanceof got.TimeoutError) {
       args.log(`image ${color.magenta(url)} timed out`)

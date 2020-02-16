@@ -44,4 +44,4 @@ images.
 - [user-defined actions](documentation/user-defined-actions.md)
 - [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)
-- [developer documentation](CONTRIBUTING.md)
+- [developer documentation](DEVELOPMENT.md)

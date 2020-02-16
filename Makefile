@@ -149,6 +149,9 @@ prepublish: build  # prepares the code base for publishing
 	rm dist/tsconfig-build.tsbuildinfo
 	find dist -name '*.map' -exec rm {} \;
 
+stats:  # shows code statistics
+	@find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
+
 test: lint unit cuke docs  # runs all tests
 .PHONY: test
 

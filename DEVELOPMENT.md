@@ -13,6 +13,8 @@ To work on the codebase:
 - run `yarn`
 - add `./bin` and `./node_modules/.bin` to your PATH
 
+To see code statistics, install [scc](https://github.com/boyter/scc)
+
 ## Style
 
 Text-Runner is written in [TypeScript](https://www.typescriptlang.org) and

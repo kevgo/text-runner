@@ -9,8 +9,8 @@
       "request": "launch",
       "name": "unit",
       "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
-      "args": ["src/**/*-test.ts"],
-      "outFiles": ["${workspaceRoot}/src/*-test.ts"]
+      "args": ["src/**/*.test.ts"],
+      "outFiles": ["${workspaceRoot}/src/*.test.ts"]
     },
     {
       "type": "node",

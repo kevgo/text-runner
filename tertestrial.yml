@@ -16,5 +16,5 @@ actions:
     command: "make cuke FILE={{filename}}:{{line}}"
 
   - match:
-      filename: '-test\.js'
+      filename: '\.test\.js'
     command: "mocha {{filename}}"

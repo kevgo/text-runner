@@ -9,7 +9,7 @@ endif
 
 build: clean  # builds for the current platform
 	@node_modules$/.bin$/tsc -p tsconfig-build.json
-	@rm dist/**/*-test.*
+	@rm dist/**/*.test.*
 
 build-debug: clean  # builds for debugging
 	@node_modules$/.bin$/tsc -p tsconfig-build.json --sourcemap
@@ -22,7 +22,7 @@ coverage-build:  # builds the code base with code coverage measurements baked in
 	./node_modules/.bin/babel src -d dist --extensions ".ts"
 
 coverage-tests:  # test coverage for unit tests
-	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*-test.js" --reporter dot
+	BABEL_ENV=test_coverage ./node_modules/.bin/nyc ./node_modules/.bin/mocha "src/**/*.test.js" --reporter dot
 	mv .nyc_output .nyc_output_tests
 
 coverage-cuke-other:  # test coverage for CLI specs
@@ -141,7 +141,7 @@ lint:  # lints all files
 
 parallel: lint  # runs all tests
 	bin$/text-run static --offline --format dot &
-	node_modules/.bin/mocha --reporter dot "src/**/*-test.ts" &
+	node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
 	bin$/text-run dynamic --format dot
 	node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
@@ -158,4 +158,4 @@ test: lint unit cuke docs  # runs all tests
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
-	@node_modules/.bin/mocha --reporter dot "src/**/*-test.ts"
+	@node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"

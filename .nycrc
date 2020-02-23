@@ -4,7 +4,7 @@
     "dist/**",
     "documentation/**",
     "node_modules/**",
-    "**/*-test.js",
+    "**/*.test.js",
     "test/**",
     "text-run/**"
   ],

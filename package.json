@@ -24,7 +24,7 @@
     "interpret": "2.0.0",
     "is-glob": "4.0.1",
     "markdown-it": "10.0.0",
-    "minimist": "1.2.2",
+    "minimist": "1.2.3",
     "observable-process": "7.0.2",
     "parse5": "5.1.1",
     "rechoir": "0.7.0",

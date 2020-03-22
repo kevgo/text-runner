@@ -4,7 +4,6 @@ import fs from "fs-extra"
 import path from "path"
 import rimraf from "rimraf"
 import tmp from "tmp-promise"
-import util from "util"
 
 // need such a high timeout because test coverage takes time to start up
 setDefaultTimeout(30000)
@@ -35,8 +34,7 @@ After(async function(scenario) {
     console.log("\ntest artifacts are located in", this.rootDir)
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
-    const rimrafp = util.promisify(rimraf)
-    await rimrafp(this.rootDir, { maxBusyTries: 20 })
+    rimraf.sync(this.rootDir, { maxBusyTries: 20 })
   }
 })
 

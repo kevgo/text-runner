@@ -1,6 +1,5 @@
 import color from "colorette"
 import rimraf from "rimraf"
-import util from "util"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
@@ -54,8 +53,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   if (results.length === 0 && !config.keepTmp) {
     // NOTE: calling fs.remove causes an exception on Windows here,
     //       hence we use rimraf
-    const rimrafp = util.promisify(rimraf)
-    await rimrafp(config.workspace, { maxBusyTries: 20 })
+    rimraf.sync(config.workspace, { maxBusyTries: 20 })
   }
 
   // step 7: write stats

@@ -16,25 +16,21 @@
 </a>
 <br><br>
 
-TextRunner is an agile documentation tool, in particular a semantic
-documentation checker. It makes documentation executable. An example is the text
-you are reading right now, which is verified for correctness by TextRunner.
+Text-Runner makes rich text executable. An example is the documentation you are
+reading right now. Certain parts of it are executed by Text-Runner to verify
+that it correctly describes how Text-Runner works. Use cases:
 
-There are no limitations on the text that TextRunner executes/verifies. It can
-read and understand (if you tell it how) any form of plain text in any human
-language as well as complex data in tables, bullet point lists, and embedded
-images.
-
-#### Use cases
-
-- **evergreen tutorials:** your documentation is always correct, whether you
-  change it or the product it describes
+- **agile documentation:** your documentation always matches the behavior of the
+  product it describes
 - **[semantic versioning](http://semver.org):** know whether a product change
   affects documented behavior
 - **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
-  documentation is your product prototype and drives its implementation
+  documentation becomes your product prototype and drives the implementation
 
-#### More info
+There are no limitations on the type of text that TextRunner can execute. It can
+read and understand (if you tell it how) any form of plain text in any human
+language as well as complex data in tables, bullet point lists, or embedded
+images.
 
 - [how it works](documentation/how-it-works.md)
 - [installation](documentation/installation.md)

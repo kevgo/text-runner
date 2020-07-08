@@ -12,7 +12,7 @@ export default async function verifySourceFileContent(args: ActionArgs) {
     const linkNode = args.nodes.getNodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
-  const expectedContent = args.nodes.textInNodeOfType("fence")
+  const expectedContent = args.nodes.textInNodeOfTypes("fence", "code")
   args.name(`verifying document content matches source code file ${color.cyan(fileName)}`)
   const filePath = path.join(args.configuration.sourceDir, path.dirname(args.file), relativeBaseDir, fileName)
   args.log(`ls ${filePath}`)

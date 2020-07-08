@@ -15,7 +15,7 @@ module.exports = async function runMarkdownInTextrun(args) {
   const trArgs = callArgs(textRunPath)
   trArgs[trArgs.length - 1] += ` --keep-tmp --workspace ${args.configuration.workspace}`
   const processor = createObservableProcess(trArgs, {
-    cwd: args.configuration.workspace
+    cwd: args.configuration.workspace,
   })
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {

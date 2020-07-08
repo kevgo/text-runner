@@ -2,7 +2,7 @@ import { When } from "cucumber"
 import fs from "fs-extra"
 import path from "path"
 
-When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 }, async function(
+When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 }, async function (
   tryingText,
   exampleName
 ) {
@@ -12,13 +12,13 @@ When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 
   finish(expectError, this.process && (this.process.error || this.process.exitCode))
 })
 
-When(/^(trying to run|running) "([^"]*)"$/, async function(tryingText, command) {
+When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
   await this.execute({ command, expectError })
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
-When(/^(trying to run|running) text-run$/, async function(tryingText) {
+When(/^(trying to run|running) text-run$/, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
   try {
     await this.execute({ command: "run", expectError })
@@ -29,7 +29,7 @@ When(/^(trying to run|running) text-run$/, async function(tryingText) {
   finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
 })
 
-When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async function(tryingText, optionsText) {
+When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async function (tryingText, optionsText) {
   const expectError = determineExpectError(tryingText)
   const splitted = optionsText.split(" ")
   const command = splitted[0]
@@ -38,7 +38,7 @@ When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async f
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
-When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, async function(tryingText, argsText) {
+When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, async function (tryingText, argsText) {
   const expectError = determineExpectError(tryingText)
   const args = JSON.parse(`{${argsText}}`)
   args.command = "run"
@@ -47,13 +47,13 @@ When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, async f
   finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
 })
 
-When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, async function(tryingText, formatterName) {
+When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, async function (tryingText, formatterName) {
   const expectError = determineExpectError(tryingText)
   try {
     await this.execute({
       command: "run",
       expectError,
-      options: { formatter: formatterName }
+      options: { formatter: formatterName },
     })
     finish(expectError, this.process.exitCode)
   } catch (err) {

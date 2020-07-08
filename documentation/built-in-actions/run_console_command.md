@@ -5,51 +5,29 @@
 - a `$` at the beginning of the line is ignored
 - you can [configure](#calling-global-commands) global binaries that you your
   code base exports so that your test can call them directly
-- if you just want to verify that your Javascript has no syntax errors, use the
-  [validateJavascript](validate_javascript.md) action instead
+- if you just want to verify that your Javascript has no syntax errors and not
+  run it, use the [validateJavascript](validate_javascript.md) action instead
 
-<a textrun="run-markdown-in-textrun">
-
-```markdown
+````markdown
 <a textrun="run-console-command">
 
-`​``
+```
 $ echo "hello world"
-`​``
-</a>
 ```
 
 </a>
+````
 
 You can enter text into the running command by providing an HTML table with the
-content to enter. Assuming we have a little application called
-<a textrun="create-file"> **greeter.js**
+content to enter.
 
-```js
-const readline = require("readline")
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
-
-rl.question("Your name?", name => {
-  rl.question("Current day of the week?", weekday => {
-    console.log(`Hello ${name}, happy ${weekday}!`)
-    process.exit()
-  })
-})
-```
-
-</a>
-
-<a textrun="run-markdown-in-textrun">
-
-```markdown
+````markdown
 <a textrun="run-console-command">
 
-`​``
+```
 $ node greeter.js
-`​``
+```
+
 <table>
   <tr>
     <td>Mortimer</td>
@@ -60,23 +38,19 @@ $ node greeter.js
 </table>
 
 </a>
-```
-
-</a>
+````
 
 If the table contains multiple columns, the first column contains output to wait
-for for, and the last one text to enter once the output from the first column
-has appeared. Middle columns are ignored. `<th>` elements are considered
+for, and the last one text to enter once the output from the first column has
+appeared. Middle columns are ignored. `<th>` elements are considered
 descriptions and are also ignored.
 
-<a textrun="run-markdown-in-textrun">
-
-```markdown
+````markdown
 <a textrun="run-console-command">
 
-`​``
+```
 $ node greeter.js
-`​``
+```
 
 <table>
   <tr>
@@ -97,9 +71,7 @@ $ node greeter.js
 </table>
 
 </a>
-```
-
-</a>
+````
 
 This code waits until the called program prints "Your name?", and enters
 "Mortimer&lt;enter&gt;". Then it waits for "What does it do" and enters "Test

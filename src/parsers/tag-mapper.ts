@@ -21,14 +21,14 @@ export class TagMapper {
     link: "a",
     list_item: "li",
     ordered_list: "ol",
-    paragraph: "p"
+    paragraph: "p",
   }
 
   /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
   private static readonly STANDALONE_MAPPINGS: Mappings = {
     hr: "hr",
     image: "img",
-    linebreak: "br"
+    linebreak: "br",
   }
 
   /** Maps Remarkable types to their corresponding HTML tags */

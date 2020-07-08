@@ -16,7 +16,7 @@ export class AstNode {
       file: data.file || new AbsoluteFilePath("file"),
       line: data.line || 1,
       tag: data.tag != null ? data.tag : "tag",
-      type: data.type || "type"
+      type: data.type || "type",
     })
   }
 

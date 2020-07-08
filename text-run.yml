@@ -1,7 +1,7 @@
 files: "{*.md,documentation/**/*.md}"
 exclude: "documentation/examples"
 format: progress
-useSystemTempDirectory: true
+useSystemTempDirectory: false
 
 actions:
   runConsoleCommand:

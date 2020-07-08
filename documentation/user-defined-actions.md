@@ -26,7 +26,7 @@ the action name but in [kebab-case](http://wiki.c2.com/?KebabCase). Let's create
 this file with the content:
 
 ```javascript
-module.exports = function({ log }) {
+module.exports = function ({ log }) {
   log("Hello world!")
 }
 ```
@@ -125,7 +125,7 @@ Here is the corresponding action, implemented in <a textrun="create-file">
 ```javascript
 child_process = require("child_process")
 
-module.exports = function({ log, nodes }) {
+module.exports = function ({ log, nodes }) {
   // determine which command to run
   // (you could also iterate the "nodes" array directly here)
   const commandToRun = nodes.text()

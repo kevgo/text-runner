@@ -10,8 +10,8 @@ export default async function verifyProcessOutput(args: ActionArgs) {
   const expectedOutput = args.nodes.textInNodeOfType("fence")
   const expectedLines = expectedOutput
     .split("\n")
-    .map(line => line.trim())
-    .filter(line => line)
+    .map((line) => line.trim())
+    .filter((line) => line)
   const process = RunningProcess.instance().process
   if (!process) {
     throw new Error("Cannot verify process output since no process has been started")

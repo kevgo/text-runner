@@ -2,12 +2,12 @@ import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
 import { actionFinder } from "./action-finder"
 
-test("actionFinder.actionFor() with built-in block name", function() {
+test("actionFinder.actionFor() with built-in block name", function () {
   const activity = scaffoldActivity({ actionName: "cd" })
   assert.typeOf(actionFinder.actionFor(activity), "function")
 })
 
-test("actionFinder.customActionNames()", function() {
+test("actionFinder.customActionNames()", function () {
   const result = actionFinder.customActionNames()
   assert.deepEqual(result, [
     "cd-into-empty-tmp-folder",
@@ -18,6 +18,6 @@ test("actionFinder.customActionNames()", function() {
     "verify-ast-node-attributes",
     "verify-handler-args",
     "verify-make-command",
-    "verify-searcher-methods"
+    "verify-searcher-methods",
   ])
 })

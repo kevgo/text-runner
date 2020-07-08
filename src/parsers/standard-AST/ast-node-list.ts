@@ -66,9 +66,15 @@ export class AstNodeList extends Array<AstNode> {
   /** Returns the AstNodes matching any of the given types. */
   getNodesOfTypes(...nodeTypes: string[]): AstNodeList {
     const result = new AstNodeList()
-    const matchingNodes = this.filter(node => nodeTypes.includes(node.type))
-    for (const node of matchingNodes) {
-      result.push(node)
+    const expectedTypes: string[] = []
+    for (const nodeType of nodeTypes) {
+      expectedTypes.push(nodeType)
+      expectedTypes.push(nodeType + "_open")
+    }
+    for (const node of this) {
+      if (expectedTypes.includes(node.type)) {
+        result.push(node)
+      }
     }
     return result
   }
@@ -77,12 +83,12 @@ export class AstNodeList extends Array<AstNode> {
   hasNodeOfType(nodeType: string): boolean {
     const types = [nodeType]
     types.push(nodeType + "_open")
-    return this.some(node => types.includes(node.type))
+    return this.some((node) => types.includes(node.type))
   }
 
   /** Returns all node types encountered in this list. */
   nodeTypes(): string[] {
-    return this.map(node => node.type)
+    return this.map((node) => node.type)
   }
 
   /** Adds a new AstNode with the given data to this list. */
@@ -115,6 +121,16 @@ export class AstNodeList extends Array<AstNode> {
   }
 
   /**
+   * Returns the text in the node that has one of the given types.
+   * Expects that exactly one matching node exists, throws otherwise.
+   */
+  textInNodeOfTypes(...nodeTypes: string[]): string {
+    const node = this.getNodeOfTypes(...nodeTypes)
+    const nodes = this.getNodesFor(node)
+    return nodes.text()
+  }
+
+  /**
    * Returns the text in the nodes of the given types.
    */
   textInNodesOfType(...nodeTypes: string[]): string[] {
@@ -123,6 +139,6 @@ export class AstNodeList extends Array<AstNode> {
         nodeTypes.push(nodeType + "_open")
       }
     }
-    return this.getNodesOfTypes(...nodeTypes).map(node => this.textInNode(node))
+    return this.getNodesOfTypes(...nodeTypes).map((node) => this.textInNode(node))
   }
 }

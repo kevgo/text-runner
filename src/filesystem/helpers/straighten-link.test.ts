@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { straightenLink } from "./straighten-link"
 
-test("straightenLink", function() {
+test("straightenLink", function () {
   assert.equal(straightenLink("/one/../two"), "/two")
   assert.equal(straightenLink("/one//../two"), "/two")
   assert.equal(straightenLink("/foo"), "/foo")

@@ -34,6 +34,6 @@ export function scaffoldConfiguration(): Configuration {
     publications: new Publications(),
     sourceDir: "",
     useSystemTempDirectory: false,
-    workspace: ""
+    workspace: "",
   }
 }

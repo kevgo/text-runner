@@ -6,13 +6,13 @@ import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { parseMarkdownFiles } from "./parse-markdown-files"
 
-suite("MdParser.parseFile()", function() {
+suite("MdParser.parseFile()", function () {
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
   const specificFixtureDir = path.join("src", "parsers", "markdown", "fixtures")
   for (const fixtureDir of [sharedFixtureDir, specificFixtureDir]) {
     for (const testDirName of fs.readdirSync(fixtureDir)) {
       const testDirPath = path.join(fixtureDir, testDirName)
-      test(`parsing '${testDirName}'`, async function() {
+      test(`parsing '${testDirName}'`, async function () {
         const expectedJSON = await fs.readJSON(path.join(testDirPath, "result.json"))
         const expected = new AstNodeList()
         for (const expectedNodeData of expectedJSON) {

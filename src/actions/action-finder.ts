@@ -83,7 +83,7 @@ class ActionFinder {
   private builtinActionFilePaths(): string[] {
     return glob
       .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
-      .filter(name => !name.endsWith(".d.ts"))
+      .filter((name) => !name.endsWith(".d.ts"))
       .map(trimExtension)
   }
 

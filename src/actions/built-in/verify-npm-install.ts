@@ -21,7 +21,7 @@ function missesPackageName(installText: string, packageName: string): boolean {
   return (
     installText
       .split(" ")
-      .map(word => word.trim())
-      .filter(word => word === packageName).length === 0
+      .map((word) => word.trim())
+      .filter((word) => word === packageName).length === 0
   )
 }

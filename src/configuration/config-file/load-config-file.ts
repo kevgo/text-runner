@@ -18,7 +18,7 @@ export function loadConfigFile(filename: string): UserProvidedConfiguration {
     offline: fileData.offline,
     publications: fileData.publications,
     useSystemTempDirectory: fileData.useSystemTempDirectory,
-    workspace: fileData.workspace
+    workspace: fileData.workspace,
   }
   return result
 }

@@ -12,7 +12,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
             actionName: "check-link",
             file: node.file,
             line: node.line,
-            nodes: AST.getNodesFor(node)
+            nodes: AST.getNodesFor(node),
           })
           break
 
@@ -23,7 +23,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
             actionName: "check-image",
             file: node.file,
             line: node.line,
-            nodes
+            nodes,
           })
           break
       }

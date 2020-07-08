@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { isLinkToAnchorInOtherFile } from "./is-link-to-anchor-in-other-file"
 
-test("isLinkToAnchorInOtherFile()", function() {
+test("isLinkToAnchorInOtherFile()", function () {
   assert.isTrue(isLinkToAnchorInOtherFile("foo.md#bar"))
   assert.isFalse(isLinkToAnchorInOtherFile("#foo"))
   assert.isFalse(isLinkToAnchorInOtherFile("foo.md"))

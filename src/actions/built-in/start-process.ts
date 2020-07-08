@@ -17,7 +17,7 @@ export default async function startProcess(args: ActionArgs) {
   args.name(`starting a long-running process: ${color.bold(color.cyan(commandsToRun))}`)
   RunningProcess.instance().set(
     createObservableProcess(callArgs(commandsToRun), {
-      cwd: args.configuration.workspace
+      cwd: args.configuration.workspace,
     })
   )
 }
@@ -26,8 +26,8 @@ function getCommandsToRun(args: ActionArgs) {
   return args.nodes
     .textInNodeOfType("fence")
     .split("\n")
-    .map(line => line.trim())
-    .filter(line => line)
+    .map((line) => line.trim())
+    .filter((line) => line)
     .map(trimDollar)
     .map(makeGlobal(args.configuration))
     .join(" && ")
@@ -41,7 +41,7 @@ function makeGlobal(configuration: Configuration) {
   } catch (e) {
     // we can ignore null-pointer exceptions here since we have a default value
   }
-  return function(commandText: string) {
+  return function (commandText: string) {
     const commandParts = commandText.split(" ")
     const command = commandParts[0]
     const replacement = globals[command]

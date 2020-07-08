@@ -8,13 +8,13 @@ export default function verifyConsoleCommandOutput(args: ActionArgs) {
   const expectedLines = args.nodes
     .text()
     .split("\n")
-    .map(line => line.trim())
-    .filter(line => line)
+    .map((line) => line.trim())
+    .filter((line) => line)
   const actualLines = RunningConsoleCommand.instance()
     .output.fullText()
     .split("\n")
-    .map(line => line.trim())
-    .filter(line => line)
-  const commonLines = actualLines.filter(line => expectedLines.includes(line))
+    .map((line) => line.trim())
+    .filter((line) => line)
+  const commonLines = actualLines.filter((line) => expectedLines.includes(line))
   assertNoDiff.trimmedLines(expectedLines.join("\n"), commonLines.join("\n"))
 }

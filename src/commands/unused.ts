@@ -17,14 +17,14 @@ export async function unusedCommand(config: Configuration) {
   const ASTs = await parseMarkdownFiles(filenames)
 
   // step 3: extract activities
-  const usedActivityNames = extractActivities(ASTs, config.classPrefix).map(activity => activity.actionName)
+  const usedActivityNames = extractActivities(ASTs, config.classPrefix).map((activity) => activity.actionName)
 
   // step 4: find defined activities
   const definedActivityNames = actionFinder.customActionNames()
 
   // step 5: identify unused activities
   const unusedActivityNames = definedActivityNames.filter(
-    definedActivityName => !usedActivityNames.includes(definedActivityName)
+    (definedActivityName) => !usedActivityNames.includes(definedActivityName)
   )
 
   // step 6: write results

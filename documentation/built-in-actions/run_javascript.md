@@ -2,7 +2,9 @@
 
 To run JavaScript code:
 
-<pre textrun="run-markdown-in-textrun">
+<a textrun="run-markdown-in-textrun">
+
+````
 
 <a textrun="run-javascript">
 
@@ -11,7 +13,7 @@ console.log('This is getting executed by TextRunner!')
 ```
 
 </a>
-</pre>
+````
 
 ## Asynchronous code
 

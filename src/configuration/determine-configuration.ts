@@ -15,7 +15,7 @@ const defaultValues: Configuration = {
   publications: new Publications(),
   sourceDir: process.cwd(),
   useSystemTempDirectory: false,
-  workspace: "" // will be populated later
+  workspace: "", // will be populated later
 }
 
 /**

@@ -1,7 +1,7 @@
 module.exports = ({ log }, done) => {
-  setTimeout(function() {
+  setTimeout(function () {
     log("Hello World!")
-    setTimeout(function() {
+    setTimeout(function () {
       done()
     }, 1)
   }, 1)

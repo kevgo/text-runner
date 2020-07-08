@@ -21,7 +21,7 @@ function extractFromAST(AST: AstNodeList, attrName: string): ActivityList {
         actionName: slugify(node.attributes[attrName]),
         file: node.file,
         line: node.line,
-        nodes: AST.getNodesFor(node)
+        nodes: AST.getNodesFor(node),
       })
     }
   }

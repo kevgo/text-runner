@@ -19,6 +19,6 @@ export function scaffoldActivity(data: { actionName?: string }): Activity {
     actionName: data.actionName || "foo",
     file: new AbsoluteFilePath("file"),
     line: 0,
-    nodes: new AstNodeList()
+    nodes: new AstNodeList(),
   }
 }

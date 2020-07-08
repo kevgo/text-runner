@@ -30,9 +30,8 @@ To run this app, call:
 
 <a textrun="verify-npm-global-command">
 
-`​``
-$ foo
-`​``
+`$ foo`
+
 </a>
 ```
 

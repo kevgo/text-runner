@@ -13,10 +13,10 @@
 ```markdown
 <a textrun="run-console-command">
 
-`​``
-$ echo "hello world"
-`​``
-</a>
+<<<<<<< Updated upstream ` ​`` $ echo "hello world" `​`` =======
+`$ echo "hello world"`
+
+> > > > > > > Stashed changes </a>
 ```
 
 </a>
@@ -29,11 +29,11 @@ content to enter. Assuming we have a little application called
 const readline = require("readline")
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 })
 
-rl.question("Your name?", name => {
-  rl.question("Current day of the week?", weekday => {
+rl.question("Your name?", (name) => {
+  rl.question("Current day of the week?", (weekday) => {
     console.log(`Hello ${name}, happy ${weekday}!`)
     process.exit()
   })
@@ -47,9 +47,11 @@ rl.question("Your name?", name => {
 ```markdown
 <a textrun="run-console-command">
 
-`​``
-$ node greeter.js
-`​``
+<<<<<<< Updated upstream ` ​`` $ node greeter.js `​`` =======
+`$ node greeter.js`
+
+> > > > > > > Stashed changes
+
 <table>
   <tr>
     <td>Mortimer</td>
@@ -74,9 +76,7 @@ descriptions and are also ignored.
 ```markdown
 <a textrun="run-console-command">
 
-`​``
-$ node greeter.js
-`​``
+`$ node greeter.js`
 
 <table>
   <tr>

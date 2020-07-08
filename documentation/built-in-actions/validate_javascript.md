@@ -8,10 +8,7 @@ Javascript code use the [runJavascript](run_javascript.md) action.
 
 ```html
 <a textrun="run-javascript">
-
-`​``
-console.log('This is getting executed by TextRunner!')
-`​``
+  `console.log('This is getting executed by TextRunner!')`
 </a>
 ```
 

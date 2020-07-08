@@ -5,7 +5,14 @@ type DoneFunction = (err?: Error) => void
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
 export default function runJavascript(args: ActionArgs, done: DoneFunction) {
-  let code = args.nodes.textInNodeOfType("fence")
+  let code = ""
+  if (args.nodes.hasNodeOfType("fence")) {
+    code = args.nodes.textInNodeOfType("fence")
+  } else if (args.nodes.hasNodeOfType("code_open")) {
+    const openNode = args.nodes.getNodeOfTypes("code_open")
+    const nodes = args.nodes.getNodesFor(openNode)
+    code = nodes.text()
+  }
   if (code == null) {
     done(new Error("no JavaScript code found in the fenced block"))
     return

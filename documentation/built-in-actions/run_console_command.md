@@ -28,11 +28,11 @@ content to enter. Assuming we have a little application called
 const readline = require("readline")
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout,
+  output: process.stdout
 })
 
-rl.question("Your name?", (name) => {
-  rl.question("Current day of the week?", (weekday) => {
+rl.question("Your name?", name => {
+  rl.question("Current day of the week?", weekday => {
     console.log(`Hello ${name}, happy ${weekday}!`)
     process.exit()
   })

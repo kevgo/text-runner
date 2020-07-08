@@ -3,22 +3,22 @@ import { TagMapper } from "./tag-mapper"
 
 const tagMapper = new TagMapper()
 
-test("TagMapper.isOpenCloseTag()", function() {
+test("TagMapper.isOpenCloseTag()", function () {
   assert.equal(tagMapper.isOpenCloseTag("a"), true)
 })
 
-test("TagMapper.isStandaloneTag()", function() {
+test("TagMapper.isStandaloneTag()", function () {
   assert.equal(tagMapper.isStandaloneTag("hr"), true)
 })
 
-test("TagMapper.openingTypeForTag", function() {
+test("TagMapper.openingTypeForTag", function () {
   assert.equal(tagMapper.openingTypeForTag("b", {}), "bold_open")
   assert.equal(tagMapper.openingTypeForTag("/b", {}), "bold_open")
   assert.equal(tagMapper.openingTypeForTag("/a", {}), "anchor_open")
   assert.equal(tagMapper.openingTypeForTag("/a", { href: "foo" }), "link_open")
 })
 
-test("TagMapper.tagForType()", function() {
+test("TagMapper.tagForType()", function () {
   assert.equal(tagMapper.tagForType("bold_open"), "b", "known opening tag")
   assert.equal(tagMapper.tagForType("bold_close"), "/b", "known closing tag")
   assert.equal(tagMapper.tagForType("image"), "img", "known standalone tag")

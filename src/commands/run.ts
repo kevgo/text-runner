@@ -46,7 +46,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats, formatter)
   jobs.push(executeSequential(activities, config, linkTargets, stats, formatter))
-  const results = (await Promise.all(jobs)).filter(r => r) as Error[]
+  const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
 
   // step 6: cleanup
   process.chdir(config.sourceDir)

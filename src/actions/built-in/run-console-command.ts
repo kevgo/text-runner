@@ -19,11 +19,20 @@ interface ProcessInput {
  * and waits until the command is finished.
  */
 export default async function runConsoleCommand(args: ActionArgs) {
-  const commandsToRun = args.nodes
-    .textInNodeOfType("fence")
+  let content = ""
+  if (args.nodes.hasNodeOfType("fence")) {
+    content = args.nodes.textInNodeOfType("fence")
+  } else if (args.nodes.hasNodeOfType("code_open")) {
+    const openingCodeNode = args.nodes.getNodeOfTypes("code_open")
+    const codeNodes = args.nodes.getNodesFor(openingCodeNode)
+    content = codeNodes.text()
+  } else {
+    throw new Error('run-console-command requires either a "fence" or a "code" block with the command to run')
+  }
+  const commandsToRun = content
     .split("\n")
-    .map(command => command.trim())
-    .filter(e => e)
+    .map((command) => command.trim())
+    .filter((e) => e)
     .map(trimDollar)
     .map(makeGlobal(args.configuration))
     .join(" && ")
@@ -38,7 +47,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   const processor = createObservableProcess(callArgs(commandsToRun), {
-    cwd: args.configuration.workspace
+    cwd: args.configuration.workspace,
   })
   RunningConsoleCommand.set(processor)
 
@@ -87,7 +96,7 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
       // multi-colum table, use the last column
       result.push({
         input: trContent.textInNode(tdNode[tdNode.length - 1]),
-        textToWait: trContent.textInNode(tdNode[0])
+        textToWait: trContent.textInNode(tdNode[0]),
       })
     }
   }
@@ -102,7 +111,7 @@ function makeGlobal(configuration: Configuration): (arg: string) => string {
   } catch (e) {
     // can ignore errors here
   }
-  return function(commandText: string): string {
+  return function (commandText: string): string {
     const commandParts = commandText.split(" ")
     const command = commandParts[0]
     const replacement = globals[command] as string | undefined

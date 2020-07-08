@@ -55,10 +55,7 @@ export class Publication {
     if (result.isLinkToDirectory() && !result.hasAnchor()) {
       result = result.append(new RelativeLink(defaultFile))
     } else if (result.isLinkToDirectory() && result.hasAnchor()) {
-      result = result
-        .directory()
-        .append(new RelativeLink(defaultFile))
-        .withAnchor(result.anchor())
+      result = result.directory().append(new RelativeLink(defaultFile)).withAnchor(result.anchor())
     } else if (result.hasExtension(this.publicExtension)) {
       result = result.withExtension("md")
     }

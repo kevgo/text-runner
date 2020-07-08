@@ -24,7 +24,7 @@ export class HTMLParser {
    */
   parse(text: string, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     const htmlAst = parse5.parse(text, {
-      sourceCodeLocationInfo: true
+      sourceCodeLocationInfo: true,
     })
     return this.standardizeDocument(htmlAst, file, startingLine)
   }
@@ -90,7 +90,7 @@ export class HTMLParser {
         file,
         line: startLine,
         tag: node.tagName,
-        type: this.tagMapper.openingTypeForTag(node.tagName, attributes)
+        type: this.tagMapper.openingTypeForTag(node.tagName, attributes),
       })
     )
 
@@ -118,7 +118,7 @@ export class HTMLParser {
           file,
           line: endLine,
           tag,
-          type: this.tagMapper.typeForTag(tag, attributes)
+          type: this.tagMapper.typeForTag(tag, attributes),
         })
       )
     }
@@ -136,7 +136,7 @@ export class HTMLParser {
         file,
         line: node.sourceCodeLocation.startLine + startingLine - 1,
         tag: node.tagName || "",
-        type: this.tagMapper.typeForTag(node.tagName, attributes)
+        type: this.tagMapper.typeForTag(node.tagName, attributes),
       })
     )
     return result
@@ -153,7 +153,7 @@ export class HTMLParser {
           file,
           line: node.sourceCodeLocation.startLine + startingLine - 1,
           tag: node.tagName || "",
-          type: "text"
+          type: "text",
         })
       )
     }

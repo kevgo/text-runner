@@ -20,9 +20,9 @@ You can display its content in your documentation via this active block:
 ```markdown
 <a textrun="verify-source-file-content">
 
-Your **hello.txt** file needs to contains this section:
+Your **hello.txt** file should now contain `hello world`
 
-` ​`` hello world `​`` </a>
+</a>
 ```
 
 </a>
@@ -48,7 +48,7 @@ via this active block:
 Your **hello2.txt** file in the [bar folder](foo/bar) needs to contains this
 section:
 
-` ​`` hello again `​``
+`hello again`
 ```
 
 </a>

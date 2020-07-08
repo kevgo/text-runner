@@ -13,13 +13,13 @@ import { v4 as uuid } from "uuid"
  * via its command-line interface
  */
 function World() {
-  this.execute = async function(params: { command: string; expectError: boolean }) {
+  this.execute = async function (params: { command: string; expectError: boolean }) {
     const args: any = {}
     args.cwd = this.rootDir
     if (this.debug) {
       args.env = {
         DEBUG: "*,-babel",
-        PATH: process.env.PATH
+        PATH: process.env.PATH,
       }
     }
     const command = this.makeFullPath(params.command)
@@ -47,7 +47,7 @@ function World() {
     }
   }
 
-  this.fullTextRunPath = function() {
+  this.fullTextRunPath = function () {
     let result = path.join(process.cwd(), "bin", "text-run")
     if (process.platform === "win32") {
       result += ".cmd"
@@ -144,11 +144,11 @@ ${actual}
     // verify all other tests have not run
     const filesShouldntRun = glob
       .sync(`${this.rootDir}/**`)
-      .filter(file => fs.statSync(file).isFile())
-      .map(file => path.relative(this.rootDir, file))
-      .filter(file => file)
-      .map(file => file.replace(/\\/g, "/"))
-      .filter(file => filenames.indexOf(file) === -1)
+      .filter((file) => fs.statSync(file).isFile())
+      .map((file) => path.relative(this.rootDir, file))
+      .filter((file) => file)
+      .map((file) => file.replace(/\\/g, "/"))
+      .filter((file) => filenames.indexOf(file) === -1)
     for (const fileShouldntRun of filesShouldntRun) {
       assert.notInclude(standardizedOutput, fileShouldntRun)
     }

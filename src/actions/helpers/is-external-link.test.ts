@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { isExternalLink } from "./is-external-link"
 
-test("isExternalLink", function() {
+test("isExternalLink", function () {
   assert.isTrue(isExternalLink("//foo.com"), "link without protocol")
   assert.isTrue(isExternalLink("http://foo.com"), "link with protocol")
   assert.isFalse(isExternalLink("/one/two.md"), "absolute link")

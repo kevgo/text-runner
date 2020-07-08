@@ -1,8 +1,8 @@
 module.exports = ({ log }) => {
-  return new Promise(function(resolve) {
-    setTimeout(function() {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
       log("Hello World!")
-      setTimeout(function() {
+      setTimeout(function () {
         resolve()
       }, 1)
     }, 1)

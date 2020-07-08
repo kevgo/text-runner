@@ -8,7 +8,7 @@ import { AbsoluteFilePath } from "./absolute-file-path"
 export async function allMarkdownFiles(fileGlob: string): Promise<AbsoluteFilePath[]> {
   const files = await glob(fileGlob)
   return files
-    .filter(file => !file.includes("node_modules"))
+    .filter((file) => !file.includes("node_modules"))
     .sort()
-    .map(file => new AbsoluteFilePath(file))
+    .map((file) => new AbsoluteFilePath(file))
 }

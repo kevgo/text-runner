@@ -4,16 +4,15 @@ To run JavaScript code:
 
 <a textrun="run-markdown-in-textrun">
 
-````
-
+```markdown
 <a textrun="run-javascript">
 
-```
-console.log('This is getting executed by TextRunner!')
+`console.log('This is getting executed by TextRunner!')`
+
+</a>
 ```
 
 </a>
-````
 
 ## Asynchronous code
 
@@ -21,38 +20,29 @@ TextRunner waits for the code block to finish before continuing with the test.
 To make it wait for asynchronous code, add the placeholder `<CALLBACK>` where
 your code would call the callback when its done. Example:
 
-<a textrun="run-markdown-in-textrun">
-
-```
-
+````markdown
 <a textrun="run-javascript">
 
-`​``
+```
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
-`​``
-
-</a>
-
 ```
 
 </a>
+````
 
 Alternatively you can also use the placeholder `// ...`
-<a textrun="run-markdown-in-textrun">
 
-```
+````markdown
 <a textrun="run-javascript">
 
-`​``
-const fs = require('fs') fs.writeFile('hello.txt', 'hello world',
-function(err) { // ... })
-`​``
-
-</a>
+```
+const fs = require('fs')
+fs.writeFile('hello.txt', 'hello world', function(err) { // ... })
 ```
 
 </a>
+````
 
 ## Substitutions
 
@@ -79,6 +69,5 @@ actions:
 
 #### More info
 
-- [feature
-  specs](../../features/actions/built-in/run-javascript/run-javascript.feature)
+- [feature specs](../../features/actions/built-in/run-javascript/run-javascript.feature)
 - [source code](../../src/actions/built-in/run-javascript.ts)

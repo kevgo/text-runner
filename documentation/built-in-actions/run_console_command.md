@@ -10,15 +10,13 @@
 
 <a textrun="run-markdown-in-textrun">
 
-````markdown
+```markdown
 <a textrun="run-console-command">
 
-```
-$ echo "hello world"
-```
+`$ echo "hello world"`
 
 </a>
-````
+```
 
 </a>
 
@@ -30,11 +28,11 @@ content to enter. Assuming we have a little application called
 const readline = require("readline")
 const rl = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 })
 
-rl.question("Your name?", name => {
-  rl.question("Current day of the week?", weekday => {
+rl.question("Your name?", (name) => {
+  rl.question("Current day of the week?", (weekday) => {
     console.log(`Hello ${name}, happy ${weekday}!`)
     process.exit()
   })
@@ -45,12 +43,10 @@ rl.question("Your name?", name => {
 
 <a textrun="run-markdown-in-textrun">
 
-````markdown
+```markdown
 <a textrun="run-console-command">
 
-```
-$ node greeter.js
-```
+`$ node greeter.js`
 
 <table>
   <tr>
@@ -62,7 +58,7 @@ $ node greeter.js
 </table>
 
 </a>
-````
+```
 
 </a>
 
@@ -73,12 +69,10 @@ descriptions and are also ignored.
 
 <a textrun="run-markdown-in-textrun">
 
-````markdown
+```markdown
 <a textrun="run-console-command">
 
-```
-$ node greeter.js
-```
+`$ node greeter.js`
 
 <table>
   <tr>
@@ -99,7 +93,7 @@ $ node greeter.js
 </table>
 
 </a>
-````
+```
 
 </a>
 

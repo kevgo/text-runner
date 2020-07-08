@@ -7,6 +7,7 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./helpers/closing-tag-parser"
 import { OpenNodeTracker } from "./helpers/open-node-tracker"
+import { UnprintedUserError } from "../../errors/unprinted-user-error"
 
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MarkdownParser {
@@ -24,7 +25,7 @@ export class MarkdownParser {
   constructor() {
     this.markdownIt = new MarkdownIt({
       html: true,
-      linkify: false
+      linkify: false,
     })
     this.tagMapper = new TagMapper()
     this.closingTagParser = new ClosingTagParser(this.tagMapper)
@@ -150,7 +151,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "img",
-        type: "image"
+        type: "image",
       })
     )
     return result
@@ -165,7 +166,7 @@ export class MarkdownParser {
         file,
         line,
         tag: mdNode.tag,
-        type: `${mdNode.tag}_open`
+        type: `${mdNode.tag}_open`,
       })
     )
     return result
@@ -180,7 +181,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "/" + node.tag,
-        type: `${node.tag}_close`
+        type: `${node.tag}_close`,
       })
     )
     return result
@@ -195,7 +196,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "code",
-        type: "code_open"
+        type: "code_open",
       })
     )
     result.push(
@@ -205,7 +206,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "",
-        type: "text"
+        type: "text",
       })
     )
     result.push(
@@ -215,7 +216,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "/code",
-        type: "code_close"
+        type: "code_close",
       })
     )
     return result
@@ -230,7 +231,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "pre",
-        type: "fence_open"
+        type: "fence_open",
       })
     )
     result.push(
@@ -240,7 +241,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "",
-        type: "text"
+        type: "text",
       })
     )
     result.push(
@@ -250,7 +251,7 @@ export class MarkdownParser {
         file,
         line: mdNode.map[1],
         tag: "/pre",
-        type: "fence_close"
+        type: "fence_close",
       })
     )
     return result
@@ -266,7 +267,7 @@ export class MarkdownParser {
         file,
         line,
         tag: "pre",
-        type: "fence_open"
+        type: "fence_open",
       })
     )
     result.push(
@@ -276,7 +277,7 @@ export class MarkdownParser {
         file,
         line: line + 1, // content of fenced blocks has to start on the next line
         tag: "",
-        type: "text"
+        type: "text",
       })
     )
     result.push(
@@ -286,7 +287,7 @@ export class MarkdownParser {
         file,
         line: mdNode.map[1],
         tag: "/pre",
-        type: "fence_close"
+        type: "fence_close",
       })
     )
     return result
@@ -307,7 +308,11 @@ export class MarkdownParser {
       } else if (ont.has("anchor_open")) {
         parsed.type = "anchor_close"
       } else {
-        throw new Error("Found neither open link nor anchor")
+        throw new UnprintedUserError(
+          `Found neither open link nor anchor for node '${mdNode.content}'`,
+          file.platformified(),
+          line
+        )
       }
     }
     ont.close({ type: parsed.type }, file, line)
@@ -340,7 +345,7 @@ export class MarkdownParser {
         file,
         line,
         tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type
+        type: mdNode.type,
       })
     )
     return result
@@ -360,7 +365,7 @@ export class MarkdownParser {
         file,
         line: closingTagLine,
         tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type
+        type: mdNode.type,
       })
     )
     return result
@@ -375,7 +380,7 @@ export class MarkdownParser {
         file,
         line,
         tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type
+        type: mdNode.type,
       })
     )
     return result
@@ -390,7 +395,7 @@ export class MarkdownParser {
         file,
         line,
         tag: mdNode.tag,
-        type: mdNode.type
+        type: mdNode.type,
       })
     )
     return result

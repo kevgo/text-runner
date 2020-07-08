@@ -65,16 +65,29 @@ suite("AstNodeList.getNodeOfTypes()", function () {
   })
 })
 
-test("AstNodeList.getNodesOfTypes()", function () {
-  const list = new AstNodeList()
-  list.pushNode({ type: "one" })
-  list.pushNode({ type: "two" })
-  list.pushNode({ type: "three" })
-  const result = list.getNodesOfTypes("one", "three")
-  assert.deepEqual(
-    result.map((node) => node.type),
-    ["one", "three"]
-  )
+suite("AstNodeList.getNodesOfTypes()", function () {
+  test("normal", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "one" })
+    list.pushNode({ type: "two" })
+    list.pushNode({ type: "three" })
+    const result = list.getNodesOfTypes("one", "three")
+    assert.deepEqual(
+      result.map((node) => node.type),
+      ["one", "three"]
+    )
+  })
+  test("opening nodes", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "one_open" })
+    list.pushNode({ type: "two" })
+    list.pushNode({ type: "one_close" })
+    const result = list.getNodesOfTypes("one")
+    assert.deepEqual(
+      result.map((node) => node.type),
+      ["one_open"]
+    )
+  })
 })
 
 test("AstNodeList.textInNode()", function () {
@@ -200,6 +213,45 @@ suite("AstNodeList.textInNodeOfType()", function () {
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
     assert.throws(() => list.textInNodeOfType("fence"), UnprintedUserError)
+  })
+})
+
+suite("AstNodeList.textInNodeOfTypes()", function () {
+  test("type name given", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    const result = list.textInNodeOfTypes("code", "fence")
+    assert.equal(result, "hello")
+  })
+
+  test("opening type name given", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    const result = list.textInNodeOfTypes("code_open", "fence")
+    assert.equal(result, "hello")
+  })
+
+  test("multiple matching nodes", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    list.pushNode({ type: "fence_open" })
+    list.pushNode({ type: "text", content: "world" })
+    list.pushNode({ type: "fence_close" })
+    assert.throws(() => list.textInNodeOfTypes("code", "fence"), UnprintedUserError)
+  })
+
+  test("no matching nodes", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    assert.throws(() => list.textInNodeOfTypes("fence"), UnprintedUserError)
   })
 })
 

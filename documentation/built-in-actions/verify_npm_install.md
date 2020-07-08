@@ -26,7 +26,9 @@ name:
 ```markdown
 <a textrun="verify-npm-install">
 
-` ​`` $ npm i -g my_enormous_package `​`` </a>
+`$ npm i -g my_enormous_package`
+
+</a>
 ```
 
 </a>

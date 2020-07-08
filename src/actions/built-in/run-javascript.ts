@@ -5,8 +5,16 @@ type DoneFunction = (err?: Error) => void
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
 export default function runJavascript(args: ActionArgs, done: DoneFunction) {
-  let code = args.nodes.textInNodeOfType("fence")
-  if (code == null) {
+  let code = ""
+  if (args.nodes.hasNodeOfType("fence")) {
+    code = args.nodes.textInNodeOfType("fence")
+  } else if (args.nodes.hasNodeOfType("code_open")) {
+    const nodes = args.nodes.getNodesOfTypes("code_open")
+    for (const node of nodes) {
+      code = args.nodes.getNodesFor(node).text()
+    }
+  }
+  if (code === "") {
     done(new Error("no JavaScript code found in the fenced block"))
     return
   }
@@ -16,6 +24,7 @@ export default function runJavascript(args: ActionArgs, done: DoneFunction) {
 
   // This is used in an eval'ed string below
   // @ts-ignore: unused variable
+  // TODO: simplify to = done
   const __finished = (err: any) => {
     done(err)
   }

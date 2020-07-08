@@ -18,13 +18,13 @@ export class AstNodeList extends Array<AstNode> {
     const nodes = this.getNodesOfTypes(...nodeTypes)
     if (nodes.length > 1) {
       throw new UnprintedUserError(
-        `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
+        `Found ${nodes.length} nodes of type '${nodeTypes.join("|")}'`,
         nodes[0].file.platformified(),
         nodes[0].line
       )
     }
     if (nodes.length === 0) {
-      let msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
+      let msg = `Found no nodes of type '${nodeTypes.join("|")}'. `
       msg += "The node types in this list are: "
       msg += this.nodeTypes().join(", ")
       throw new UnprintedUserError(msg, this[0].file.platformified(), this[0].line)

@@ -66,9 +66,15 @@ export class AstNodeList extends Array<AstNode> {
   /** Returns the AstNodes matching any of the given types. */
   getNodesOfTypes(...nodeTypes: string[]): AstNodeList {
     const result = new AstNodeList()
-    const matchingNodes = this.filter((node) => nodeTypes.includes(node.type))
-    for (const node of matchingNodes) {
-      result.push(node)
+    const expectedTypes: string[] = []
+    for (const nodeType of nodeTypes) {
+      expectedTypes.push(nodeType)
+      expectedTypes.push(nodeType + "_open")
+    }
+    for (const node of this) {
+      if (expectedTypes.includes(node.type)) {
+        result.push(node)
+      }
     }
     return result
   }

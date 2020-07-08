@@ -65,16 +65,29 @@ suite("AstNodeList.getNodeOfTypes()", function () {
   })
 })
 
-test("AstNodeList.getNodesOfTypes()", function () {
-  const list = new AstNodeList()
-  list.pushNode({ type: "one" })
-  list.pushNode({ type: "two" })
-  list.pushNode({ type: "three" })
-  const result = list.getNodesOfTypes("one", "three")
-  assert.deepEqual(
-    result.map((node) => node.type),
-    ["one", "three"]
-  )
+suite("AstNodeList.getNodesOfTypes()", function () {
+  test("normal", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "one" })
+    list.pushNode({ type: "two" })
+    list.pushNode({ type: "three" })
+    const result = list.getNodesOfTypes("one", "three")
+    assert.deepEqual(
+      result.map((node) => node.type),
+      ["one", "three"]
+    )
+  })
+  test("opening nodes", function () {
+    const list = new AstNodeList()
+    list.pushNode({ type: "one_open" })
+    list.pushNode({ type: "two" })
+    list.pushNode({ type: "one_close" })
+    const result = list.getNodesOfTypes("one")
+    assert.deepEqual(
+      result.map((node) => node.type),
+      ["one_open"]
+    )
+  })
 })
 
 test("AstNodeList.textInNode()", function () {

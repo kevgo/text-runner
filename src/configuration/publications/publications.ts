@@ -14,12 +14,12 @@ export class Publications extends Array<Publication> {
 
   // Returns the publication that matches the given filepath
   forFilePath(filePath: AbsoluteFilePath): Publication | undefined {
-    return this.find(publication => publication.publishes(filePath))
+    return this.find((publication) => publication.publishes(filePath))
   }
 
   // Returns the publication that applies for the given link
   publicationForLink(link: AbsoluteLink): Publication | undefined {
-    return this.find(publication => publication.resolves(link))
+    return this.find((publication) => publication.resolves(link))
   }
 
   // Returns these publications, sorted by public path

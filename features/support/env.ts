@@ -8,7 +8,7 @@ import tmp from "tmp-promise"
 // need such a high timeout because test coverage takes time to start up
 setDefaultTimeout(30000)
 
-Before(async function() {
+Before(async function () {
   if (process.env.CUCUMBER_PARALLEL) {
     const tempDir = await tmp.dir()
     this.rootDir = tempDir.path
@@ -28,7 +28,7 @@ Before(async function() {
   await fs.mkdir(this.rootDir)
 })
 
-After(async function(scenario) {
+After(async function (scenario) {
   await endChildProcesses()
   if (scenario.result.status === "failed") {
     console.log("\ntest artifacts are located in", this.rootDir)
@@ -38,20 +38,20 @@ After(async function(scenario) {
   }
 })
 
-Before({ tags: "@verbose" }, function() {
+Before({ tags: "@verbose" }, function () {
   this.verbose = true
 })
 
-After({ tags: "@verbose" }, function() {
+After({ tags: "@verbose" }, function () {
   this.verbose = false
 })
 
-Before({ tags: "@debug" }, function() {
+Before({ tags: "@debug" }, function () {
   this.debug = true
   this.verbose = true
 })
 
-After({ tags: "@debug" }, function() {
+After({ tags: "@debug" }, function () {
   this.debug = false
   this.verbose = false
 })

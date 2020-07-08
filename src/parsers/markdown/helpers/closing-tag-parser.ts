@@ -33,7 +33,7 @@ export class ClosingTagParser {
         file,
         line,
         tag: tagName,
-        type: this.tagMapper.typeForTag(tagName, {})
+        type: this.tagMapper.typeForTag(tagName, {}),
       })
     )
     return result

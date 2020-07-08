@@ -10,8 +10,7 @@ look something like this:
 ```markdown
 ## Creating a configuration file
 
-Please create a file with the name _config.yml_ and the content:
-` ​`` foo: bar `​``
+Please create a file with the name _config.yml_ and the content: `foo: bar`
 ```
 
 To make this part of the documentation executable, surround it with an `<a>` tag
@@ -24,10 +23,8 @@ that specifies that we want to create a file:
 
 <a textrun="create-file">
 
-Please create a file with the name _config.yml_ and the content:
-`​``
-foo: bar
-`​``
+Please create a file with the name _config.yml_ and the content: `foo: bar`
+
 </a>
 ```
 

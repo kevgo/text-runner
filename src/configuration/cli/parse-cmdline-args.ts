@@ -45,7 +45,7 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
     formatterName: cliArgs.format,
     keepTmp: cliArgs["keep-tmp"],
     offline: cliArgs.offline,
-    workspace: cliArgs.workspace
+    workspace: cliArgs.workspace,
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"

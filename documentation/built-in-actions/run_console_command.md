@@ -13,10 +13,9 @@
 ```markdown
 <a textrun="run-console-command">
 
-<<<<<<< Updated upstream ` ​`` $ echo "hello world" `​`` =======
 `$ echo "hello world"`
 
-> > > > > > > Stashed changes </a>
+</a>
 ```
 
 </a>
@@ -47,10 +46,7 @@ rl.question("Your name?", (name) => {
 ```markdown
 <a textrun="run-console-command">
 
-<<<<<<< Updated upstream ` ​`` $ node greeter.js `​`` =======
 `$ node greeter.js`
-
-> > > > > > > Stashed changes
 
 <table>
   <tr>
@@ -127,3 +123,7 @@ this configuration. </a>
 
 - [feature specs](../../features/actions/built-in/run-console-command/)
 - [source code](../../src/actions/built-in/run-console-command.ts)
+
+```
+
+```

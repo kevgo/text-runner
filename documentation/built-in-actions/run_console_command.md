@@ -10,13 +10,15 @@
 
 <a textrun="run-markdown-in-textrun">
 
-```markdown
+````markdown
 <a textrun="run-console-command">
 
-`$ echo "hello world"`
+```
+$ echo "hello world"
+```
 
 </a>
-```
+````
 
 </a>
 
@@ -43,10 +45,12 @@ rl.question("Your name?", name => {
 
 <a textrun="run-markdown-in-textrun">
 
-```markdown
+````markdown
 <a textrun="run-console-command">
 
-`$ node greeter.js`
+```
+$ node greeter.js
+```
 
 <table>
   <tr>
@@ -58,7 +62,7 @@ rl.question("Your name?", name => {
 </table>
 
 </a>
-```
+````
 
 </a>
 
@@ -69,10 +73,12 @@ descriptions and are also ignored.
 
 <a textrun="run-markdown-in-textrun">
 
-```markdown
+````markdown
 <a textrun="run-console-command">
 
-`$ node greeter.js`
+```
+$ node greeter.js
+```
 
 <table>
   <tr>
@@ -93,7 +99,7 @@ descriptions and are also ignored.
 </table>
 
 </a>
-```
+````
 
 </a>
 
@@ -123,7 +129,3 @@ this configuration. </a>
 
 - [feature specs](../../features/actions/built-in/run-console-command/)
 - [source code](../../src/actions/built-in/run-console-command.ts)
-
-```
-
-```

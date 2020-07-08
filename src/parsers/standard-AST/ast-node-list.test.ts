@@ -203,6 +203,45 @@ suite("AstNodeList.textInNodeOfType()", function() {
   })
 })
 
+suite("AstNodeList.textInNodeOfTypes()", function() {
+  test("type name given", function() {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    const result = list.textInNodeOfTypes("code", "fence")
+    assert.equal(result, "hello")
+  })
+
+  test("opening type name given", function() {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    const result = list.textInNodeOfTypes("code_open", "fence")
+    assert.equal(result, "hello")
+  })
+
+  test("multiple matching nodes", function() {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    list.pushNode({ type: "fence_open" })
+    list.pushNode({ type: "text", content: "world" })
+    list.pushNode({ type: "fence_close" })
+    assert.throws(() => list.textInNodeOfTypes("code", "fence"), UnprintedUserError)
+  })
+
+  test("no matching nodes", function() {
+    const list = new AstNodeList()
+    list.pushNode({ type: "code_open" })
+    list.pushNode({ type: "text", content: "hello" })
+    list.pushNode({ type: "code_close" })
+    assert.throws(() => list.textInNodeOfTypes("fence"), UnprintedUserError)
+  })
+})
+
 test("AstNodeList.textInNodesOfType()", function() {
   const list = new AstNodeList()
   list.pushNode({ type: "strongtext", content: "foo" })

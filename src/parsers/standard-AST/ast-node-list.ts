@@ -115,6 +115,16 @@ export class AstNodeList extends Array<AstNode> {
   }
 
   /**
+   * Returns the text in the node that has one of the given types.
+   * Expects that exactly one matching node exists, throws otherwise.
+   */
+  textInNodeOfTypes(...nodeTypes: string[]): string {
+    const node = this.getNodeOfTypes(...nodeTypes)
+    const nodes = this.getNodesFor(node)
+    return nodes.text()
+  }
+
+  /**
    * Returns the text in the nodes of the given types.
    */
   textInNodesOfType(...nodeTypes: string[]): string[] {

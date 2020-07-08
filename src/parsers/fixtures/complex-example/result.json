@@ -29,7 +29,7 @@
     "type": "strong_open",
     "tag": "strong",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 4,
+    "line": 3,
     "content": "",
     "attributes": {}
   },
@@ -37,7 +37,7 @@
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 4,
+    "line": 3,
     "content": "world",
     "attributes": {}
   },
@@ -45,7 +45,7 @@
     "type": "strong_close",
     "tag": "/strong",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 4,
+    "line": 3,
     "content": "",
     "attributes": {}
   },
@@ -53,7 +53,7 @@
     "type": "text",
     "tag": "",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 4,
+    "line": 3,
     "content": "!",
     "attributes": {}
   },
@@ -61,7 +61,7 @@
     "type": "paragraph_close",
     "tag": "/p",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 4,
+    "line": 3,
     "content": "",
     "attributes": {}
   },
@@ -69,7 +69,7 @@
     "type": "anchor_close",
     "tag": "/a",
     "file": "src/parsers/fixtures/complex-example/input.*",
-    "line": 6,
+    "line": 5,
     "content": "",
     "attributes": {}
   }

@@ -1,13 +1,17 @@
 # Change Log
 
-## 4.0.3 (2020-07-09)
+## 4.0.3
+
+_July 9 2020_
 
 #### New Features
 
 - improve error messages ([#889](https://github.com/kevgo/text-runner/pull/889),
   [#890](https://github.com/kevgo/text-runner/pull/890))
 
-## 4.0.2 (2020-03-08)
+## 4.0.2
+
+_Mar 03 2020_
 
 #### Internal
 
@@ -16,7 +20,9 @@
 - code statistics
   ([1242052](https://github.com/kevgo/text-runner/commit/12420526c81437407fbc57415ec5195092bc7a07)
 
-## 4.0.1 (2020-02-15)
+## 4.0.1
+
+_Feb 15 2020_
 
 #### Internal
 
@@ -25,7 +31,9 @@
   [#850](https://github.com/kevgo/text-runner/pull/850),
   [#851](https://github.com/kevgo/text-runner/pull/851))
 
-## 4.0.0 (2019-09-23)
+## 4.0.0
+
+_Sep 23 2019_
 
 #### New Features
 
@@ -70,7 +78,9 @@
   ([#794](https://github.com/kevgo/text-runner/pull/794))
 - vastly overhauled internal architecture
 
-## 3.6.0 (2018-11-16)
+## 3.6.0
+
+_Nov 16 2018_
 
 #### New Features
 
@@ -93,7 +103,9 @@
 - Windows compatible Makefile
   ([d24d089](https://github.com/Originate/text-runner/commit/d24d0898f72b58279e424e1ba2e418cd7b64cf79))
 
-## 3.5.0 (2018-08-30)
+## 3.5.0
+
+_Aug 30 2018_
 
 #### New Features
 
@@ -104,7 +116,9 @@
 - support relative links in published folders
   ([7654e8a](https://github.com/Originate/text-runner/commit/7654e8aa5715d617092ec122a260048d869154c5))
 
-## 3.4.0 (2018-08-01)
+## 3.4.0
+
+_Aug 1 2018_
 
 #### New Features
 

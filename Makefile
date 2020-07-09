@@ -107,7 +107,7 @@ fix:  # runs the fixers
 		grep -v documentation/built-in-actions/verify_console_command_output.md | \
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
-		xargs node_modules/.bin/pprettier --write
+		xargs node_modules/.bin/prettier --write
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -137,7 +137,7 @@ lint:  # lints all files
 		grep -v documentation/built-in-actions/verify_source_file_content.md | \
 		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
 		grep -v fixtures | \
-		xargs node_modules/.bin/pprettier --check
+		xargs node_modules/.bin/prettier --check
 
 parallel: lint  # runs all tests
 	bin$/text-run static --offline --format dot &

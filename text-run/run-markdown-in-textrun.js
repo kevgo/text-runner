@@ -2,6 +2,7 @@ const { callArgs } = require("../dist/actions/helpers/call-args")
 const fs = require("fs-extra")
 const { createObservableProcess } = require("observable-process")
 const path = require("path")
+const stripAnsi = require("strip-ansi")
 
 module.exports = async function runMarkdownInTextrun(args) {
   args.name("verify the inline markdown works in TextRunner")
@@ -19,6 +20,10 @@ module.exports = async function runMarkdownInTextrun(args) {
   })
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
-    throw new Error(`text-run exited with code ${processor.exitCode} when processing this markdown block.`)
+    throw new Error(
+      `text-run exited with code ${processor.exitCode} when processing this markdown block:\n${stripAnsi(
+        processor.output.fullText()
+      )}`
+    )
   }
 }

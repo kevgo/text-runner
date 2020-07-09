@@ -32,10 +32,10 @@ Feature: running console commands
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | running.md                                                                              |
-      | LINE          | 1                                                                                       |
-      | ERROR MESSAGE | run-console-command requires either a "fence" or a "code" block with the command to run |
-      | EXIT CODE     | 1                                                                                       |
+      | FILENAME      | running.md                            |
+      | LINE          | 1                                     |
+      | ERROR MESSAGE | Found no nodes of type \'fence/code\' |
+      | EXIT CODE     | 1                                     |
 
 
   Scenario: empty console command

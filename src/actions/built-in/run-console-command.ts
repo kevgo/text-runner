@@ -19,16 +19,7 @@ interface ProcessInput {
  * and waits until the command is finished.
  */
 export default async function runConsoleCommand(args: ActionArgs) {
-  let content = ""
-  if (args.nodes.hasNodeOfType("fence")) {
-    content = args.nodes.textInNodeOfType("fence")
-  } else if (args.nodes.hasNodeOfType("code_open")) {
-    const openingCodeNode = args.nodes.getNodeOfTypes("code_open")
-    const codeNodes = args.nodes.getNodesFor(openingCodeNode)
-    content = codeNodes.text()
-  } else {
-    throw new Error('run-console-command requires either a "fence" or a "code" block with the command to run')
-  }
+  const content = args.nodes.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
     .map((command) => command.trim())

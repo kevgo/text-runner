@@ -1,5 +1,75 @@
 # Change Log
 
+## 4.0.3 (2020-07-09)
+
+#### New Features
+
+- improve error messages ([#889](https://github.com/kevgo/text-runner/pull/889),
+  [#890](https://github.com/kevgo/text-runner/pull/890))
+
+## 4.0.2 (2020-03-08)
+
+#### Internal
+
+- test files changed to `*.test.js`
+  ([875](https://github.com/kevgo/text-runner/pull/875))
+- code statistics
+  ([1242052](https://github.com/kevgo/text-runner/commit/12420526c81437407fbc57415ec5195092bc7a07)
+
+## 4.0.1 (2020-02-15)
+
+#### Internal
+
+- change unit tests to TDD style
+  ([#833](https://github.com/kevgo/text-runner/pull/833/files),
+  [#850](https://github.com/kevgo/text-runner/pull/850),
+  [#851](https://github.com/kevgo/text-runner/pull/851))
+
+## 4.0.0 (2019-09-23)
+
+#### New Features
+
+- support for HTML as input
+  ([#799](https://github.com/kevgo/text-runner/pull/799))
+- progress formatter ([#776](https://github.com/kevgo/text-runner/pull/776))
+- support hardbreak tag ([#828](https://github.com/kevgo/text-runner/pull/828))
+- handle indented code blocks
+  ([#845](https://github.com/kevgo/text-runner/pull/845/files)
+- handle embedded code blocks
+  ([#836](https://github.com/kevgo/text-runner/pull/836))
+- make linebreaks a standalone tag
+  ([#834](https://github.com/kevgo/text-runner/pull/834))
+- many performance optimizations
+
+#### Breaking Changes
+
+- require Node 10 or higher
+- new Markdown parser engine
+  ([#807](https://github.com/kevgo/text-runner/pull/807))
+- CLI and config file use the same keys
+  ([#752](https://github.com/kevgo/text-runner/pull/752))
+- remove obsolete internal parameter
+  ([#847](https://github.com/kevgo/text-runner/pull/847))
+- provide node attributes only for opening AST nodes
+  ([#841](https://github.com/kevgo/text-runner/pull/841))
+
+#### Bug Fixes
+
+- prevent infinite loop for links to higher-up directories
+  ([acb6d0a](https://github.com/kevgo/text-runner/commit/acb6d0a02552b8e791061451e53a96f7770f22a7)
+- handle closing anchor tag correctly
+  ([#829](https://github.com/kevgo/text-runner/pull/829/files))
+
+#### Internal
+
+- debugging in VSCode ([#842](https://github.com/kevgo/text-runner/pull/842),
+  [08bf920](https://github.com/kevgo/text-runner/commit/08bf920d3ab16ac955622d4c0127a885181ea949)
+- new formatter architecture without subclasses
+  ([#763](https://github.com/kevgo/text-runner/pull/763))
+- format documentation using proseWrap option
+  ([#794](https://github.com/kevgo/text-runner/pull/794))
+- vastly overhauled internal architecture
+
 ## 3.6.0 (2018-11-16)
 
 #### New Features

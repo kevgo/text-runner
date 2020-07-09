@@ -92,22 +92,7 @@ docs: build  # runs the documentation tests
 
 fix:  # runs the fixers
 	node_modules$/.bin$/tslint --project tsconfig.json --fix
-	@find . -type f \( \
-	       -path './src/**/*.ts' -o \
-				 -path './features/**/*.ts' -o \
-				 -path './text-run/*.js' -o \
-				 -path './documentation/**/*.js' -o \
-				 -path './*.md' -o \
-				 -path './*.yml' -o \
-				 -name '*node_modules*' -prune \) | \
-		grep -v '^./tmp/' | \
-		grep -v node_modules | \
-		grep -v documentation/built-in-actions/run_javascript.md | \
-		grep -v documentation/built-in-actions/start_stop_process.md | \
-		grep -v documentation/built-in-actions/verify_console_command_output.md | \
-		grep -v documentation/built-in-actions/verify_source_file_content.md | \
-		grep -v documentation/built-in-actions/verify_workspace_file_content.md | \
-		xargs node_modules/.bin/pprettier --write
+	node_modules/.bin/pprettier --write .
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t

@@ -13,7 +13,7 @@ for commit guidelines.
 - prettify YML files
   ([3ba8dd5](https://github.com/Originate/text-runner/commit/3ba8dd5edd83e82efe8fc7e16296c3461be9aa3f))
 
-# 3.6.0 (2018-11-16)
+## 3.6.0 (2018-11-16)
 
 - **core:** switch to TypeScript
   ([621e290](https://github.com/Originate/text-runner/commits/master?after=621e29099e73fa7bbc818088e003b5d3ade5b916+34))
@@ -30,7 +30,7 @@ for commit guidelines.
   - verify all Make commands
     ([5a25648](https://github.com/Originate/text-runner/commit/5a25648155ecddd515e94e0492e23cbdd60a2c81))
 
-# 3.5.0 (2018-08-30)
+## 3.5.0 (2018-08-30)
 
 - **configuration:** `--config` CLI switch to specify a custom configuration
   file
@@ -43,7 +43,7 @@ for commit guidelines.
   - support relative links in published folders
     ([7654e8a](https://github.com/Originate/text-runner/commit/7654e8aa5715d617092ec122a260048d869154c5))
 
-# 3.4.0 (2018-08-01)
+## 3.4.0 (2018-08-01)
 
 - **configuration:**
   - `defaultFiles` configuration option

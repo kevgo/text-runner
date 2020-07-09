@@ -2,8 +2,8 @@
 
 Verifies that a file with the given name exists and has the given content.
 
-- the file name is provided as _emphasized_ or **strong** text
-- the file content is provided as a code block with single or triple backticks
+- the file name is _emphasized_ or **strong** text
+- the file content a code block with single or triple backticks
 
 #### Example
 

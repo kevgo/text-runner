@@ -130,3 +130,9 @@ _Aug 1 2018_
   ([c2594c2](https://github.com/Originate/text-runner/commit/c2594c278a68d1b84867d468e12101b937927c91))
 - show tag errors with code block
   ([7db4836](https://github.com/Originate/text-runner/commit/7db4836be28e81da331d1d515197000402a92eab))
+
+## 3.0.0
+
+#### Internal
+
+- functional architecture

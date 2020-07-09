@@ -44,8 +44,8 @@ hello.md:1 -- Hello world
 
 ## Handler functions
 
-The handler function for our action is given an object containing various
-information and utility functions:
+Handlers are simple JavaScript functions. The handler function for our action is
+given an object containing various information and utility functions:
 
 <a textrun="verify-handler-args">
 
@@ -71,14 +71,6 @@ TextRunner supports all forms of synchronous and asynchronous operations:
 - take a callback function as a second parameter to your handler function and
   call it when you are done
   ([example](examples/custom-action-callback/text-run/hello-world.js))
-
-You can write the handler in any language that transpiles to JavaScript, for
-example [BabelJS](https://babeljs.io), [CoffeeScript](http://coffeescript.org),
-or [LiveScript](http://livescript.net). Just make sure that your project
-contains a local installation of your transpiler, since TextRunner does not find
-globally installed transpilers. This means your project should have a
-`package.json` file listing the transpiler you want TextRunner to call, in
-addition to any other NPM modules that your handler method uses.
 
 ## Accessing document content
 

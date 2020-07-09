@@ -155,6 +155,8 @@ stats:  # shows code statistics
 test: lint unit cuke docs  # runs all tests
 .PHONY: test
 
+test-ts: unit cuke  # runs only the TypeScript tests
+
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests

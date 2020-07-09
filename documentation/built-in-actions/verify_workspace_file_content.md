@@ -7,19 +7,17 @@ Verifies that a file with the given name exists, and has the given content.
 
 #### Example
 
-<a textrun="run-markdown-in-textrun">
-
 ```html
 <a textrun="create-file">
   Assuming we have a file _hello.txt_ with content `hello world`,
 </a>
+
 we can verify it via this block:
+
 <a textrun="verify-workspace-file-content">
   _hello.txt_ `hello world`
 </a>
 ```
-
-</a>
 
 #### More info
 

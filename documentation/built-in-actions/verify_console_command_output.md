@@ -9,24 +9,24 @@
 
 First, let's runs a console command:
 
-<a textrun="run-markdown-in-textrun">
+````html
+<a textrun="run-console-command"> </a>
 
-```html
-<a textrun="run-console-command">
-  `echo Hello world!`
-</a>
+```
+echo Hello world!
+```
 
 </a>
 
 Now that it's finished, let's verify its output:
 <a textrun="verify-console-command-output">
 
-`Hello world!`
-
-</a>
+```
+Hello world!
 ```
 
 </a>
+````
 
 #### More info
 

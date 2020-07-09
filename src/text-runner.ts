@@ -18,9 +18,7 @@ import { UserProvidedConfiguration } from "./configuration/types/user-provided-c
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
-export async function textRunner(
-  cmdlineArgs: UserProvidedConfiguration
-): Promise<Error[]> {
+export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
     const configFilePath = await determineConfigFilename(cmdlineArgs)

@@ -9,7 +9,6 @@
     "@babel/code-frame": "7.10.4",
     "@sindresorhus/slugify": "1.0.0",
     "assert-no-diff": "3.0.4",
-    "babel-register": "6.26.0",
     "cli-cursor": "3.1.0",
     "cli-progress": "3.8.2",
     "colorette": "1.2.1",
@@ -27,7 +26,6 @@
     "minimist": "1.2.5",
     "observable-process": "7.0.2",
     "parse5": "6.0.0",
-    "rechoir": "0.7.0",
     "rimraf": "3.0.2",
     "tmp-promise": "3.0.2",
     "yamljs": "0.3.0"

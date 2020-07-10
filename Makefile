@@ -1,6 +1,5 @@
 .DEFAULT_GOAL := spec
 
-
 build: clean  # builds for the current platform
 	@echo building ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json

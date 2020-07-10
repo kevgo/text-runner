@@ -1,18 +1,11 @@
 .DEFAULT_GOAL := spec
 
-# platform-specificity
-ifdef ComSpec
-	/ := $(strip \)
-else
-	/ := /
-endif
-
 build: clean  # builds for the current platform
-	@node_modules$/.bin$/tsc -p tsconfig-build.json
-	@rm dist/**/*.test.*
+	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
+	@rm ${CURDIR}/dist/**/*.test.*
 
 build-debug: clean  # builds for debugging
-	@node_modules$/.bin$/tsc -p tsconfig-build.json --sourcemap
+	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json --sourcemap
 
 clean:  # Removes all build artifacts
 	@rm -rf dist
@@ -55,59 +48,59 @@ coverage-merge:  # merge all coverage results together
 	find .nyc_output_cuke_tagtypes -type f | cat -n | while read n f; do cp "$$f" ".nyc_output/cli_tagtypes_$$n.json"; done
 
 coverage-html:  # render test coverage as a HTML report
-	node_modules/.bin/nyc report --reporter=lcov
+	${CURDIR}/node_modules/.bin/nyc report --reporter=lcov
 	@echo "open 'file://$(shell pwd)/coverage/lcov-report/index.html' in your browser"
 
 coverage-send:  # sends the coverage to coveralls.io
-	node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
+	${CURDIR}/node_modules/.bin/nyc report --reporter=text-lcov | node_modules/.bin/coveralls
 
 coverage: coverage-build coverage-tests coverage-cli coverage-docs  # measures code coverage
 .PHONY: coverage
 
 cuke: build  # runs the feature specs
-	@node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-other:  # test coverage for CLI specs
-	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/!(actions|commands|images|formatters|tag-types)"
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" "features/!(actions|commands|images|formatters|tag-types)"
 
 cuke-actions:  # test coverage for CLI specs
-	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(actions|images)"
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(actions|images)"
 
 cuke-tagtypes:  # test coverage for CLI specs
-	node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(tag-types|commands|formatters)"
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(tag-types|commands|formatters)"
 
 cuke-offline: build  # runs the feature specs that don't need an online connection
-	@node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-smoke-win:  # runs the smoke tests
-	@node_modules\.bin\cucumber-js --tags '@smoke' --format progress
+	@${CURDIR}/node_modules\.bin\cucumber-js --tags '@smoke' --format progress
 
 cuke-win:  # runs the feature specs on Windows
-	@node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	@${CURDIR}/node_modules\.bin\cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs: build  # runs the documentation tests
-	@bin$/text-run static --offline --format dot
+	@${CURDIR}/bin/text-run static --offline --format dot
 	@echo
-	@bin$/text-run dynamic --format progress
+	@${CURDIR}/bin/text-run dynamic --format progress
 
 fix:  # runs the fixers
-	node_modules$/.bin$/tslint --project tsconfig.json --fix
-	node_modules/.bin/prettier --write .
+	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
+	${CURDIR}/node_modules/.bin/prettier --write .
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints all files
-	@node_modules$/.bin$/tsc -p tsconfig.json &
-	@node_modules$/.bin$/tslint --project tsconfig-build.json &
-	@node_modules$/.bin$/remark . --quiet &
-	@node_modules/.bin/prettier --check .
+	@${CURDIR}/node_modules/.bin/tsc -p tsconfig.json &
+	@${CURDIR}/node_modules/.bin/tslint --project tsconfig-build.json &
+	@${CURDIR}/node_modules/.bin/remark . --quiet &
+	@${CURDIR}/node_modules/.bin/prettier --check .
 
 parallel: lint  # runs all tests
-	bin$/text-run static --offline --format dot &
-	node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
-	bin$/text-run dynamic --format dot
-	node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/bin/text-run static --offline --format dot &
+	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
+	${CURDIR}/bin/text-run dynamic --format dot
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 prepublish: build  # prepares the code base for publishing
 	rm dist/tsconfig-build.tsbuildinfo
@@ -124,4 +117,4 @@ test-ts: unit cuke  # runs only the TypeScript tests
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
-	@node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"
+	@${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"

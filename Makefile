@@ -1,6 +1,7 @@
 .DEFAULT_GOAL := spec
 
 build: clean  # builds for the current platform
+	@echo building ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
 	@rm ${CURDIR}/dist/**/*.test.*
 
@@ -58,6 +59,7 @@ coverage: coverage-build coverage-tests coverage-cli coverage-docs  # measures c
 .PHONY: coverage
 
 cuke: build  # runs the feature specs
+	@echo running feature specs ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-other:  # test coverage for CLI specs
@@ -70,6 +72,7 @@ cuke-tagtypes:  # test coverage for CLI specs
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" "features/+(tag-types|commands|formatters)"
 
 cuke-offline: build  # runs the feature specs that don't need an online connection
+	@echo running feature specs ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-smoke-win:  # runs the smoke tests
@@ -79,6 +82,7 @@ cuke-win:  # runs the feature specs on Windows
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs: build  # runs the documentation tests
+	@echo running document tests ...
 	@${CURDIR}/bin/text-run static --offline --format dot
 	@echo
 	@${CURDIR}/bin/text-run dynamic --format progress

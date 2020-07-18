@@ -23,7 +23,7 @@ function World() {
         PATH: process.env.PATH,
       }
     }
-    const command = helpers.makeFullPath(params.command)
+    const command = helpers.makeFullPath(params.command, process.platform)
     if (process.env.NODE_ENV === "coverage") {
       args.command = helpers.runWithTestCoverage(args.command)
     }

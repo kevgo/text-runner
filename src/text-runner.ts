@@ -26,6 +26,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     configuration = determineConfiguration(configFileData, cmdlineArgs)
     const commandName = cmdlineArgs.command
     let errors: Error[]
+    // TODO: move commands that don't need the config above line 24
     switch (commandName) {
       case "add":
         errors = await addCommand(cmdlineArgs.fileGlob)
@@ -65,3 +66,6 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     return [err]
   }
 }
+
+export { ActionArgs } from "./actions/types/action-args"
+export { Configuration } from "./configuration/types/configuration"

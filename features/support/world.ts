@@ -7,6 +7,7 @@ import { createObservableProcess } from "observable-process"
 import path from "path"
 import stripAnsi from "strip-ansi"
 import { v4 as uuid } from "uuid"
+import * as helpers from "./helpers"
 
 /**
  * World provides step implementations that run and test TextRunner
@@ -22,7 +23,7 @@ function World() {
         PATH: process.env.PATH,
       }
     }
-    const command = this.makeFullPath(params.command)
+    const command = helpers.makeFullPath(params.command)
     if (process.env.NODE_ENV === "coverage") {
       args.command = runWithTestCoverage(args.command)
     }
@@ -37,22 +38,6 @@ function World() {
     if (this.process.exitCode && !params.expectError) {
       console.log(this.output)
     }
-  }
-
-  this.makeFullPath = (command: string) => {
-    if (/^text-run/.test(command)) {
-      return command.replace(/^text-run/, this.fullTextRunPath())
-    } else {
-      return `${this.fullTextRunPath()} ${command}`
-    }
-  }
-
-  this.fullTextRunPath = function () {
-    let result = path.join(process.cwd(), "bin", "text-run")
-    if (process.platform === "win32") {
-      result += ".cmd"
-    }
-    return result
   }
 
   this.verifyCallError = (expectedError: string) => {

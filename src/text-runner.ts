@@ -21,11 +21,25 @@ import { UserProvidedConfiguration } from "./configuration/types/user-provided-c
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
+    const commandName = cmdlineArgs.command
+    let errors: Error[]
+    switch (commandName) {
+      case "help":
+        await helpCommand()
+        return []
+      case "scaffold":
+        errors = await scaffoldCommand(cmdlineArgs.fileGlob)
+        return errors
+      case "setup":
+        await setupCommand()
+        return []
+      case "version":
+        await versionCommand()
+        return []
+    }
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
     configuration = determineConfiguration(configFileData, cmdlineArgs)
-    const commandName = cmdlineArgs.command
-    let errors: Error[]
     switch (commandName) {
       case "debug":
         errors = await debugCommand(configuration)
@@ -33,26 +47,14 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
       case "dynamic":
         errors = await dynamicCommand(configuration)
         return errors
-      case "help":
-        await helpCommand()
-        return []
       case "run":
         errors = await runCommand(configuration)
         return errors
-      case "scaffold":
-        errors = await scaffoldCommand(cmdlineArgs.fileGlob)
-        return errors
-      case "setup":
-        await setupCommand()
-        return []
       case "static":
         errors = await staticCommand(configuration)
         return errors
       case "unused":
         await unusedCommand(configuration)
-        return []
-      case "version":
-        await versionCommand()
         return []
       default:
         console.log(color.red(`unknown command: ${commandName || ""}`))

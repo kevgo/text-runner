@@ -1,7 +1,7 @@
 import fs from "fs-extra"
 import path from "path"
 
-export async function addCommand(blockName: string | undefined): Promise<Error[]> {
+export async function scaffoldCommand(blockName: string | undefined): Promise<Error[]> {
   if (!blockName) {
     throw new Error("no block name given")
   }

@@ -6,8 +6,8 @@ suite("makeFullPath", function () {
     const have = makeFullPath("text-run foo")
     assert.match(have, /.+text-runner\/bin\/text-run foo/)
   })
-  // test("with text-run command", function () {
-  //   const have = makeFullPath("foo bar")
-  //   assert.match(have, /.+text-runner\/bin\/text-run foo/)
-  // })
+  test("without text-run command", function () {
+    const have = makeFullPath("run")
+    assert.match(have, /.+text-runner\/bin\/text-run run/)
+  })
 })

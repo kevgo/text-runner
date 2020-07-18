@@ -25,7 +25,7 @@ function World() {
     }
     const command = helpers.makeFullPath(params.command, process.platform)
     if (process.env.NODE_ENV === "coverage") {
-      args.command = helpers.runWithTestCoverage(args.command)
+      args.command = helpers.coverageCommand(args.command)
     }
     this.process = createObservableProcess(command, args)
     await this.process.waitForEnd()

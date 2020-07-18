@@ -23,6 +23,6 @@ export function standardizePath(filePath: string): string {
 /**
  * Returns the command that runs the given command with test coverage
  */
-export function runWithTestCoverage(command: string) {
+export function coverageCommand(command: string) {
   return path.join(process.cwd(), "node_modules", ".bin", "nyc") + " " + command
 }

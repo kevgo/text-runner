@@ -1,16 +1,16 @@
 import path from "path"
 
-export function makeFullPath(command: string) {
+export function makeFullPath(command: string, platform: string) {
   if (/^text-run/.test(command)) {
-    return command.replace(/^text-run/, fullTextRunPath())
+    return command.replace(/^text-run/, fullTextRunPath(platform))
   } else {
-    return `${fullTextRunPath()} ${command}`
+    return `${fullTextRunPath(platform)} ${command}`
   }
 }
 
-export function fullTextRunPath() {
+export function fullTextRunPath(platform: string) {
   let result = path.join(process.cwd(), "bin", "text-run")
-  if (process.platform === "win32") {
+  if (platform === "win32") {
     result += ".cmd"
   }
   return result

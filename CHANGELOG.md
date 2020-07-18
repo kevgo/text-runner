@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+#### New Features
+
+- TypeScript actions
+
 #### Breaking changes
 
 - rename "add" command to "scaffold"

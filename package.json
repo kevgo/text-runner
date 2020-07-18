@@ -26,6 +26,7 @@
     "minimist": "1.2.5",
     "observable-process": "7.0.2",
     "parse5": "6.0.0",
+    "rechoir": "0.7.0",
     "rimraf": "3.0.2",
     "tmp-promise": "3.0.2",
     "yamljs": "0.3.0"

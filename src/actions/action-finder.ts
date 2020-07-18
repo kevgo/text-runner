@@ -1,6 +1,9 @@
 import color from "colorette"
 import glob from "glob"
+import { jsVariants } from "interpret"
 import path from "path"
+import rechoir from "rechoir"
+import "ts-node/register"
 import { Activity } from "../activity-list/types/activity"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { getActionName } from "./helpers/get-action-name"
@@ -66,8 +69,8 @@ class ActionFinder {
   private loadCustomActions(): FunctionRepo {
     const result: FunctionRepo = {}
     for (const filename of this.customActionFilePaths()) {
+      rechoir.prepare(jsVariants, filename)
       const actionName = getActionName(filename)
-      // TODO: let people overwrite internal actions
       if (this.builtinActions[actionName]) {
         throw new UnprintedUserError(`redefining internal action '${actionName}'`, filename, 1)
       }

@@ -25,7 +25,7 @@ function World() {
     }
     const command = helpers.makeFullPath(params.command)
     if (process.env.NODE_ENV === "coverage") {
-      args.command = runWithTestCoverage(args.command)
+      args.command = helpers.runWithTestCoverage(args.command)
     }
     this.process = createObservableProcess(command, args)
     await this.process.waitForEnd()
@@ -85,7 +85,7 @@ function World() {
     if (table.MESSAGE) {
       expectedText += table.MESSAGE
     }
-    const actual = standardizePath(stripAnsi(this.process.output.fullText()))
+    const actual = helpers.standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!
 Looking for: ${expectedText}
@@ -142,24 +142,9 @@ ${actual}
   this.verifyTestsRun = (count: number) => {
     assert.include(stripAnsi(this.process.output.fullText()), ` ${count} activities`)
   }
-
-  this.verifyUnknownCommand = (command: string) => {
-    assert.include(stripAnsi(this.process.output.fullText()), `unknown command: ${command}`)
-  }
 }
 
 setWorldConstructor(World)
-
-function standardizePath(filePath: string): string {
-  return filePath.replace(/\\/g, "/")
-}
-
-/**
- * Returns the command that runs the given command with test coverage
- */
-function runWithTestCoverage(command: string) {
-  return path.join(process.cwd(), "node_modules", ".bin", "nyc") + " " + command
-}
 
 /**
  * Stores the test coverage data before running the next test that would overwrite it

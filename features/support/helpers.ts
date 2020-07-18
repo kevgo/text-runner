@@ -15,3 +15,14 @@ export function fullTextRunPath() {
   }
   return result
 }
+
+export function standardizePath(filePath: string): string {
+  return filePath.replace(/\\/g, "/")
+}
+
+/**
+ * Returns the command that runs the given command with test coverage
+ */
+export function runWithTestCoverage(command: string) {
+  return path.join(process.cwd(), "node_modules", ".bin", "nyc") + " " + command
+}

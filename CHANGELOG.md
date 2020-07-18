@@ -1,5 +1,12 @@
 # Change Log
 
+## Unreleased
+
+#### Breaking changes
+
+- rename "add" command to "scaffold"
+  ([#900](https://github.com/kevgo/text-runner/pull/900))
+
 ## 4.0.3
 
 _July 9 2020_

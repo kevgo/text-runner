@@ -44,5 +44,5 @@ Feature: unknown action types
       No custom actions defined.
 
       To create a new "unknown-action" action,
-      run "text-run add unknown-action"
+      run "text-run scaffold unknown-action"
       """

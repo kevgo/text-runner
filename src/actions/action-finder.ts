@@ -51,7 +51,7 @@ class ActionFinder {
       errorText += "\nNo custom actions defined.\n"
     }
     errorText += `\nTo create a new "${activity.actionName}" action,\n`
-    errorText += `run "text-run add ${activity.actionName}"\n`
+    errorText += `run "text-run scaffold ${activity.actionName}"\n`
     throw new UnprintedUserError(errorText, activity.file.platformified(), activity.line)
   }
 

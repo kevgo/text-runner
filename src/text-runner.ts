@@ -1,9 +1,9 @@
 import color from "colorette"
-import { addCommand } from "./commands/add"
 import { debugCommand } from "./commands/debug"
 import { dynamicCommand } from "./commands/dynamic"
 import { helpCommand } from "./commands/help"
 import { runCommand } from "./commands/run"
+import { scaffoldCommand } from "./commands/scaffold"
 import { setupCommand } from "./commands/setup"
 import { staticCommand } from "./commands/static"
 import { unusedCommand } from "./commands/unused"
@@ -27,9 +27,6 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     const commandName = cmdlineArgs.command
     let errors: Error[]
     switch (commandName) {
-      case "add":
-        errors = await addCommand(cmdlineArgs.fileGlob)
-        return errors
       case "debug":
         errors = await debugCommand(configuration)
         return errors
@@ -41,6 +38,9 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         return []
       case "run":
         errors = await runCommand(configuration)
+        return errors
+      case "scaffold":
+        errors = await scaffoldCommand(cmdlineArgs.fileGlob)
         return errors
       case "setup":
         await setupCommand()

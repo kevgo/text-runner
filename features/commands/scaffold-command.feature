@@ -4,11 +4,11 @@ Feature: adding new handler functions
   I want to have the ability to generate new handler functions
   So that I don't need to copy-and-paste code.
 
-  - run "text-run add <step-name>" to generate a new handler function for the given block
+  - run "text-run scaffold <step-name>" to generate a new handler function for the given block
 
 
   Scenario: adding a new step
-    When running "text-run add new-step"
+    When running "text-run scaffold new-step"
     Then it creates the file "text-run/new-step.js" with content:
       """
       module.exports = async function (args) {

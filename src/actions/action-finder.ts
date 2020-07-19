@@ -1,6 +1,6 @@
 import color from "colorette"
 import glob from "glob"
-import { jsVariants } from "interpret"
+import * as interpret from "interpret"
 import path from "path"
 import rechoir from "rechoir"
 import { Activity } from "../activity-list/types/activity"
@@ -68,7 +68,7 @@ class ActionFinder {
   private loadCustomActions(): FunctionRepo {
     const result: FunctionRepo = {}
     for (const filename of this.customActionFilePaths()) {
-      rechoir.prepare(jsVariants, filename)
+      rechoir.prepare(interpret.jsVariants, filename)
       const actionName = getActionName(filename)
       if (this.builtinActions[actionName]) {
         throw new UnprintedUserError(`redefining internal action '${actionName}'`, filename, 1)

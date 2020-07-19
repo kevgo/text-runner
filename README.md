@@ -38,6 +38,7 @@ images.
 - [terminology](documentation/terminology.md)
 - [built-in actions](documentation/built-in-actions)
 - [user-defined actions](documentation/user-defined-actions.md)
+- [external actions](documentation/external-actions.md)
 - [questions and answers](documentation/qna.md)
 - [related tools](documentation/related-tools.md)
 - [developer documentation](DEVELOPMENT.md)

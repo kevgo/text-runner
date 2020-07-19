@@ -3,11 +3,11 @@
 If the [built-in actions](built-in-actions) aren't enough, you can write custom
 actions in JavaScript.
 
-## Hello-world example
+## Example 1: Hello world
 
 Let's start by building the simplest possible action first: A "hello-world"
 action that prints the text "hello world" in the test runner's console output
-when running. It will be triggered via this piece of Markdown:
+when running. Inside our Markdown document we trigger it like this:
 
 <a textrun="create-file">
 
@@ -26,8 +26,8 @@ the action name but in [kebab-case](http://wiki.c2.com/?KebabCase). Let's create
 this file with the content:
 
 ```javascript
-module.exports = function ({ log }) {
-  log("Hello world!")
+module.exports = function (action) {
+  action.log("Hello world!")
 }
 ```
 
@@ -42,43 +42,50 @@ Hello world!
 hello.md:1 -- Hello world
 </pre>
 
-## Handler functions
+## Action functions
 
-Handlers are simple JavaScript functions. The handler function for our action is
-given an object containing various information and utility functions:
+Actions are simple JavaScript functions. An action receives an object containing
+various information and utility functions:
 
 <a textrun="verify-handler-args">
 
-- **SKIPPING:** return this value if you have decided to skip the current action
 - **file**, **line:** location of the currently executed block in the
   documentation
 - **nodes:** the [document content](#accessing-document-content) inside the
   active block for this action,
-- **configuration:** TextRunner configuration data (which TextRunner options are
-  enabled)
-- **log:** call this function to output stuff to the user running your test
-- **name:** call this function to refine the name of the current test step </a>
+- **configuration:** TextRunner configuration data
+- **log:** call this function to output text to the user running your test
+- **name:** call this function to refine the name of the current test step
+- **SKIPPING:** return this value if you have decided to skip the current action
 
-TextRunner supports all forms of synchronous and asynchronous operations:
+</a>
 
-- just do something synchronous
+TextRunner supports all forms of JavaScript functions:
+
+- synchronous functions
   ([example](examples/custom-action-sync/text-run/hello-world.js))
-- return a Promise
-  ([example](examples/custom-action-promise/text-run/hello-world.js))
-- implement the action as a modern
-  [async function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-  ([example](examples/custom-action-async/text-run/hello-world.js))
-- take a callback function as a second parameter to your handler function and
-  call it when you are done
+- functions receiving a callback
   ([example](examples/custom-action-callback/text-run/hello-world.js))
+- functions returning a Promise
+  ([example](examples/custom-action-promise/text-run/hello-world.js))
+- [async
+  functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+  ([example](examples/custom-action-async/text-run/hello-world.js))
+
+You can write functions in any of the languages that
+[interpret](https://github.com/gulpjs/interpret) supports. Here are examples
+for:
+
+- [TypeScript](examples/custom-action-typescript/)
+- [CoffeeScript](examples/custom-action-coffeescript/)
 
 ## Accessing document content
 
-Document content is provided in the `nodes` attribute. It contains an
-[AstNodeList](/src/parsers/standard-AST/ast-node-list.ts). This is an Array
-subclass containing [AstNodes](/src/parsers/standard-AST/ast-node.ts) from the
-current active block in the document with additional helper methods to extract
+The `nodes` attribute contains the document content inside the currently active
+region. It is an array of AST nodes that provides helper methods to extract
 document content:
+
+<!-- TODO: ensure completeness of this -->
 
 - **text():** returns the entire textual content in the current active block
 - **textInNodeOfType(type1, type2, ...):** returns the text in the AST node of
@@ -100,6 +107,8 @@ You cant also iterate `nodes` manually. Each node has these attributes:
 - **content:** textual content of the AST node
 - **attributes:** list of HTML attributes of the node </a>
 
+## Example 2: accessing document content
+
 Here is an example for an action that runs a code block in the terminal.
 <a textrun="create-file"> Create a file **execute.md** with the content:
 
@@ -117,13 +126,14 @@ Here is the corresponding action, implemented in <a textrun="create-file">
 ```javascript
 child_process = require("child_process")
 
-module.exports = function ({ log, nodes }) {
+module.exports = function (action) {
   // determine which command to run
   // (you could also iterate the "nodes" array directly here)
-  const commandToRun = nodes.text()
+  const commandToRun = action.nodes.text()
 
   // perform the action
-  log(child_process.execSync(commandToRun, { encoding: "utf8" }))
+  const result = child_process.execSync(commandToRun, { encoding: "utf8" })
+  action.log(result)
 }
 ```
 
@@ -131,11 +141,13 @@ module.exports = function ({ log, nodes }) {
 
 <a textrun="run-textrun"></a>
 
-## Formatter
+## Formatters
 
 One of the utilities availabe to actions is the formatter instance. It allows to
 signal test progress to TextRunner and print test output to the console. It
 provides the following methods:
+
+<!-- TODO: verify completeness -->
 
 - **log(text):** allows to print output of the currently running action to the
   console - depending on the type of formatter, this output is printed or not
@@ -152,12 +164,16 @@ TextRunner supports a variety of formatters:
 
 - **detailed formatter:** Prints each test performed, including test output.
 
-- **dot formatter:** A minimalistic formatter, shows only dots for each test
+- **dot formatter:** A minimalistic formatter, shows a dots for each test
   performed.
 
-## Finding unused activities
+- **progress formatter:** Prints a progress bar
+
+## Cleaning up unused activities
 
 To see all custom activities that aren't currenly used, run:
+
+<!-- TODO: ensure this command exists -->
 
 ```
 text-run unused

@@ -7,18 +7,20 @@ You need to have installed:
 - [Node.js](https://nodejs.org) version 8 or later
 - [Yarn](https://yarnpkg.com)
 - Gnu Make - running `make` should work on your machine
+- to see code statistics: [scc](https://github.com/boyter/scc)
 
 To work on the codebase:
 
-- run `yarn`
-- add `./bin` and `./node_modules/.bin` to your PATH
-
-To see code statistics, install [scc](https://github.com/boyter/scc)
+- install dependencies by running <code textrun="verify-make-command">make
+  setup</code>
+- optionally: add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Style
 
 Text-Runner is written in [TypeScript](https://www.typescriptlang.org) and
 formatted by [Prettier](https://prettier.io).
+
+<!-- TODO: remove this -->
 
 Commit messages must follow the
 [Conventional Commits Specification](https://www.conventionalcommits.org). The

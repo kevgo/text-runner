@@ -1,4 +1,3 @@
-@debug
 Feature: TypeScript Actions
 
   When writing custom Text-Runner Actions

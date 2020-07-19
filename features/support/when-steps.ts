@@ -1,5 +1,4 @@
 import { When } from "cucumber"
-import fs from "fs-extra"
 import path from "path"
 
 When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 }, async function (
@@ -7,8 +6,8 @@ When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 
   exampleName
 ) {
   const expectError = determineExpectError(tryingText)
-  await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
-  await this.execute({ command: "run", expectError })
+  const examplePath = path.join(process.cwd(), "documentation", "examples", exampleName)
+  await this.execute({ command: "run", expectError, cwd: examplePath })
   finish(expectError, this.process && (this.process.error || this.process.exitCode))
 })
 

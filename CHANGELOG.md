@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+#### New Features
+
+- TypeScript actions ([#907](https://github.com/kevgo/text-runner/pull/907))
+
 #### Breaking changes
 
 - rename "add" command to "scaffold"

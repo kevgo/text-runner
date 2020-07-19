@@ -67,3 +67,5 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     return [err]
   }
 }
+
+export type { ActionArgs } from "./actions/types/action-args"

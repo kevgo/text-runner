@@ -72,37 +72,10 @@ TextRunner supports all forms of JavaScript functions:
   functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
   ([example](examples/custom-action-async/text-run/hello-world.js))
 
-You can write functions in any of these languages:
+You can write functions in any of the languages that
+[interpret](https://github.com/gulpjs/interpret) supports. Here are examples
+for:
 
-<a textrun="supported-js-dialects">
-
-- `.js`
-- `.babel.js`
-- `.babel.ts`
-- `.buble.js`
-- `.cirru`
-- `.cjsx`
-- `.co`
-- `.coffee`
-- `.coffee.md`
-- `.eg`
-- `.esm.js`
-- `.iced`
-- `.iced.md`,
-- `.jsx`
-- `.litcoffee`
-- `.liticed`
-- `.ls`
-- `.mjs`
-- `.ts`
-- `.tsx`
-- `.wisp`
-
-</a>
-
-Examples for:
-
-- [JavaScript](examples/custom-action-sync/)
 - [TypeScript](examples/custom-action-typescript/)
 - [CoffeeScript](examples/custom-action-coffeescript/)
 

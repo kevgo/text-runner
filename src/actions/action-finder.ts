@@ -73,7 +73,12 @@ class ActionFinder {
       if (this.builtinActions[actionName]) {
         throw new UnprintedUserError(`redefining internal action '${actionName}'`, filename, 1)
       }
-      result[actionName] = require(filename)
+      const action = require(filename)
+      if (action.default) {
+        result[actionName] = action.default
+      } else {
+        result[actionName] = action
+      }
     }
     return result
   }

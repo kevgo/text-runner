@@ -8,6 +8,6 @@ Feature: TypeScript Actions
   Scenario: an action is written in TypeScript
     When executing the "custom-action-typescript" example
     Then it signals:
-      | FILENAME | 1.md |
-      | LINE     | 3                |
-      | MESSAGE  | Hello world      |
+      | FILENAME | 1.md        |
+      | LINE     | 3           |
+      | MESSAGE  | Hello world |

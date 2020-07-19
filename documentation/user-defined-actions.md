@@ -7,7 +7,7 @@ actions in JavaScript.
 
 Let's start by building the simplest possible action first: A "hello-world"
 action that prints the text "hello world" in the test runner's console output
-when running. It will be triggered via this piece of Markdown:
+when running. Inside our Markdown document we trigger it like this:
 
 <a textrun="create-file">
 

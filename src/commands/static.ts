@@ -13,44 +13,44 @@ import { createWorkingDir } from "../working-dir/create-working-dir"
 export async function staticCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
 
-  // step 0: create working dir
+  // step 1: create working dir
   if (!config.workspace) {
     config.workspace = await createWorkingDir(config.useSystemTempDirectory)
   }
 
-  // step 1: find files
+  // step 2: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
     return []
   }
 
-  // step 2: read and parse files
+  // step 3: read and parse files
   const ASTs = await parseMarkdownFiles(filenames)
 
-  // step 3: find link targets
+  // step 4: find link targets
   const linkTargets = findLinkTargets(ASTs)
 
-  // step 4: extract activities
+  // step 5: extract activities
   const links = extractImagesAndLinks(ASTs)
   if (links.length === 0) {
     console.log(color.magenta("no activities found"))
     return []
   }
 
-  // step 5: execute the ActivityList
+  // step 6: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, links.length, config)
   process.chdir(config.workspace)
   const jobs = executeParallel(links, linkTargets, config, stats, formatter)
   const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
 
-  // step 6: cleanup
+  // step 7: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
     await fs.remove(config.workspace)
   }
 
-  // step 7: write stats
+  // step 8: write stats
   let text = "\n"
   let colorFn
   if (results.length === 0) {

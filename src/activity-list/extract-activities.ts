@@ -1,7 +1,7 @@
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { ActivityList } from "./types/activity-list"
-import slugify from "@sindresorhus/slugify"
+import { normalizeActionName } from "./normalize-action-name"
 
 /** returns all activities found in the given AstNodeLists */
 export function extractActivities(ASTs: AstNodeList[], activeAttributeName: string): ActivityList {
@@ -18,7 +18,7 @@ function extractFromAST(AST: AstNodeList, attrName: string): ActivityList {
   for (const node of AST) {
     if (isActiveBlockTag(node, attrName)) {
       result.push({
-        actionName: slugify(node.attributes[attrName]),
+        actionName: normalizeActionName(node.attributes[attrName]),
         file: node.file,
         line: node.line,
         nodes: AST.getNodesFor(node),

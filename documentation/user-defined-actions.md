@@ -76,6 +76,7 @@ You can write functions in any of the languages that
 [interpret](https://github.com/gulpjs/interpret) supports. Here are examples
 for:
 
+- [JavaScript](examples/custom-action-sync/)
 - [TypeScript](examples/custom-action-typescript/)
 - [CoffeeScript](examples/custom-action-coffeescript/)
 

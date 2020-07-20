@@ -1,7 +1,7 @@
 module.exports = {
-  "textrun-actions": [validate],
+  "textrun-actions": { hello },
 }
 
-function validate(action) {
-  action.log("validating")
+function hello(action) {
+  action.log("Hello world!")
 }

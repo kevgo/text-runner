@@ -21,9 +21,8 @@ import { UserProvidedConfiguration } from "./configuration/types/user-provided-c
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
-    const commandName = cmdlineArgs.command
     let errors: Error[]
-    switch (commandName) {
+    switch (cmdlineArgs.command) {
       case "help":
         await helpCommand()
         return []
@@ -40,7 +39,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
     configuration = determineConfiguration(configFileData, cmdlineArgs)
-    switch (commandName) {
+    switch (cmdlineArgs.command) {
       case "debug":
         errors = await debugCommand(configuration)
         return errors
@@ -57,7 +56,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         await unusedCommand(configuration)
         return []
       default:
-        console.log(color.red(`unknown command: ${commandName || ""}`))
+        console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
         return []
     }
   } catch (err) {

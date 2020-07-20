@@ -114,6 +114,7 @@ setup:  # prepares the code base for development after cloning
 	@yarn
 	@cd documentation/examples/custom-action-coffeescript && yarn
 	@cd documentation/examples/custom-action-typescript && yarn
+	@cd documentation/examples/external-action && yarn
 
 stats:  # shows code statistics
 	@find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc

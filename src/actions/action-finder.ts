@@ -9,8 +9,9 @@ import { getActionName } from "./helpers/get-action-name"
 import { javascriptExtensions } from "./helpers/javascript-extensions"
 import { trimExtension } from "./helpers/trim-extension"
 import { Action } from "./types/action"
+import { ExternalActionManager } from "./external-action-manager"
 
-interface FunctionRepo {
+export interface FunctionRepo {
   [key: string]: Action
 }
 
@@ -18,10 +19,12 @@ interface FunctionRepo {
 class ActionFinder {
   private readonly builtinActions: FunctionRepo
   private readonly customActions: FunctionRepo
+  private readonly externalActions: ExternalActionManager
 
   constructor() {
     this.builtinActions = this.loadBuiltinActions()
     this.customActions = this.loadCustomActions()
+    this.externalActions = new ExternalActionManager()
   }
 
   /** actionFor provides the action function for the given Activity. */
@@ -29,6 +32,7 @@ class ActionFinder {
     return (
       this.builtinActions[activity.actionName] ||
       this.customActions[activity.actionName] ||
+      this.externalActions.actionFor(activity.actionName) ||
       this.errorUnknownAction(activity)
     )
   }

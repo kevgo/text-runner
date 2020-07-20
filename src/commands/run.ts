@@ -36,7 +36,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 5: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
-  if (activities.length === 0 && links.length === 0) {
+  if (activities.length + links.length === 0) {
     console.log(color.magenta("no activities found"))
     return []
   }

@@ -1,5 +1,3 @@
-.DEFAULT_GOAL := spec
-
 build:  # builds
 	@(cd src && make --no-print-directory build)
 
@@ -80,5 +78,12 @@ fix:  # runs the auto-fixers
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
+lint:  # lints everything
+	@${CURDIR}/node_modules/.bin/remark . --quiet &
+	@${CURDIR}/node_modules/.bin/prettier --check .)
+
 setup:  # prepares the code base for development after cloning
 	@yarn
+
+test:  # runs all tests
+	@(cd src && make --no-print-directory test)

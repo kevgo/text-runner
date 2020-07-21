@@ -1,4 +1,4 @@
-dist/
+src/dist/
 node_modules
 src/parsers/fixtures/
 src/parsers/html/fixtures/

@@ -25,11 +25,12 @@ fix:  # runs the fixers
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-lint: lint-global  # lints all files in this codebase
+lint:  # lints all files in this codebase
+	@make --no-print-directory lint-global &
 	@(cd .. && ${CURDIR}/node_modules/.bin/prettier --check src)
 
-lint-global:  # the lint commands to run when linting all code
-	@${CURDIR}/node_modules/.bin/tslint --project tsconfig-build.json
+lint-global:  # the lint commands to run when running the global lint task
+	${CURDIR}/node_modules/.bin/tslint --project tsconfig-build.json
 
 parallel: lint  # runs all tests
 	${CURDIR}/bin/text-run static --offline --format dot &

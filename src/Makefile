@@ -1,3 +1,4 @@
+# TODO: remove
 .DEFAULT_GOAL := spec
 
 build: clean  # builds for the current platform

@@ -62,8 +62,8 @@ permutations of that are tested.
 The architecture is best understood by following along with how a set of
 documents is tested. There are several CLI executables to start TextRunner:
 
-- [bin/text-run](bin/text-run) for unix-like systems and macOS
-- [bin/text-run.cmd](bin/text-run.cmd) for Windows
+- [src/bin/text-run](src/bin/text-run) for unix-like systems and macOS
+- [src/bin/text-run.cmd](src/bin/text-run.cmd) for Windows
 
 These CLI executables call the [cli.ts](src/cli.ts) CLI module. The CLI
 subsystem parses the command-line arguments and calls TextRunner's

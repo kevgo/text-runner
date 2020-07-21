@@ -68,9 +68,9 @@ cuke-smoke-win:  # runs the smoke tests
 
 docs: build  # runs the documentation tests
 	@echo running document tests ...
-	@${CURDIR}/bin/text-run static --offline --format dot
+	@${CURDIR}/src/bin/text-run static --offline --format dot
 	@echo
-	@${CURDIR}/bin/text-run dynamic --format progress
+	@${CURDIR}/src/bin/text-run dynamic --format progress
 
 fix:  # runs the auto-fixers
 	${CURDIR}/node_modules/.bin/prettier --write .
@@ -80,7 +80,7 @@ help:  # prints all make targets
 
 lint:  # lints everything
 	@${CURDIR}/node_modules/.bin/remark . --quiet &
-	@${CURDIR}/node_modules/.bin/prettier --check .)
+	@${CURDIR}/node_modules/.bin/prettier --check .
 
 setup:  # prepares the code base for development after cloning
 	@yarn

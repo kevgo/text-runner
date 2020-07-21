@@ -5,8 +5,6 @@
 - a `$` at the beginning of the line is ignored
 - you can [configure](#calling-global-commands) global binaries that you your
   code base exports so that your test can call them directly
-- if you just want to verify that your Javascript has no syntax errors and not
-  run it, use the [validateJavascript](validate_javascript.md) action instead
 
 ````markdown
 <a textrun="run-console-command">

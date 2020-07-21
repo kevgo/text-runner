@@ -1,18 +1,29 @@
 # Text-Runner Developers Guide
 
+This codebase is organized as a mono-repository.
+
+- [documentation](documentation/) contains the documentation
+- [features](features/) contains the end-to-end tests
+- [src](src/) contains the source code
+- [text-run](text-run/) contains the documentation tests
+- [tools](tools/) contains various other tools
+
+The various code bases are organized as
+<a textrun="is-yarn-workspace" href="https://classic.yarnpkg.com/en/docs/workspaces">Yarn
+workspaces</a>.
+
 ## Installation for development
 
 You need to have installed:
 
-- [Node.js](https://nodejs.org) version 8 or later
+- [Node.js](https://nodejs.org) version 10 or later
 - [Yarn](https://yarnpkg.com)
-- Gnu Make - running `make` should work on your machine
+- Gnu Make - the `make` command should exist on your machine
 - to see code statistics: [scc](https://github.com/boyter/scc)
 
-To work on the codebase:
+To start working on the codebase:
 
-- install dependencies by running <code textrun="verify-make-command">make
-  setup</code>
+- install dependencies by running <code textrun="make/target">make setup</code>
 - optionally: add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Style

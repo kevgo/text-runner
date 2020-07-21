@@ -38,10 +38,6 @@ process) in the background, for example a server.
 Console commands execute in TextRunner's
 [workspace directory](#interacting-with-the-local-filesystem).
 
-## Executing source code
-
-- [run Javascript code](run_javascript.md)
-
 ## Other actions
 
 - [verify NPM installation instructions](verify_npm_install.md)

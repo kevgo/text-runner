@@ -2,6 +2,7 @@
   "name": "custom-action-typescript",
   "version": "0.0.0",
   "dependencies": {
+    "text-runner": "4.0.3",
     "ts-node": "8.10.2"
   }
 }

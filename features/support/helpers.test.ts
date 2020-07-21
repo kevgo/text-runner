@@ -1,6 +1,19 @@
 import * as helpers from "./helpers"
 import { assert } from "chai"
 
+suite("localTextRunPath", function () {
+  test("on unix", function () {
+    const give = "/text-runner/documentation/examples/bash"
+    const want = "/text-runner/documentation/examples/bash/node_modules/.bin/text-run"
+    assert.equal(helpers.localTextRunPath(give, "linux"), want)
+  })
+  test("on windows", function () {
+    const give = "/text-runner/documentation/examples/bash"
+    const want = "/text-runner/documentation/examples/bash/node_modules/.bin/text-run.cmd"
+    assert.equal(helpers.localTextRunPath(give, "win32"), want)
+  })
+})
+
 suite("makeFullPath", function () {
   test("with text-run command on Linux", function () {
     const have = helpers.makeFullPath("text-run foo", "linux")

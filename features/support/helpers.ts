@@ -1,19 +1,27 @@
 import path from "path"
 
-export function makeFullPath(command: string, platform: string) {
-  if (/^text-run/.test(command)) {
-    return command.replace(/^text-run/, fullTextRunPath(platform))
-  } else {
-    return `${fullTextRunPath(platform)} ${command}`
-  }
-}
-
 export function fullTextRunPath(platform: string) {
   let result = path.join(process.cwd(), "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }
   return result
+}
+
+export function localTextRunPath(exampleDir: string, platform: string) {
+  let result = path.join(exampleDir, "node_modules", ".bin", "text-run")
+  if (platform === "win32") {
+    result += ".cmd"
+  }
+  return result
+}
+
+export function makeFullPath(command: string, platform: string) {
+  if (/^text-run/.test(command)) {
+    return command.replace(/^text-run/, fullTextRunPath(platform))
+  } else {
+    return `${fullTextRunPath(platform)} ${command}`
+  }
 }
 
 export function standardizePath(filePath: string): string {

@@ -112,9 +112,16 @@ prepublish: build  # prepares the code base for publishing
 
 setup:  # prepares the code base for development after cloning
 	@yarn
+	@cd documentation/examples/bash && yarn
+	@cd documentation/examples/custom-action-async && yarn
+	@cd documentation/examples/custom-action-callback && yarn
 	@cd documentation/examples/custom-action-coffeescript && yarn
+	@cd documentation/examples/custom-action-promise && yarn
+	@cd documentation/examples/custom-action-sync && yarn
 	@cd documentation/examples/custom-action-typescript && yarn
 	@cd documentation/examples/external-action && yarn
+	@cd documentation/examples/global-tool && yarn
+	@cd documentation/examples/multiple-returns && yarn
 
 stats:  # shows code statistics
 	@find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc

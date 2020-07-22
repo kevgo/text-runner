@@ -38,11 +38,6 @@ process) in the background, for example a server.
 Console commands execute in TextRunner's
 [workspace directory](#interacting-with-the-local-filesystem).
 
-## Other actions
-
-- [verify NPM installation instructions](verify_npm_install.md)
-- [verify global command provided by NPM module](verify_npm_global_command.md)
-
 With the option `--offline` given, text-run does not check outgoing links to
 other websites.
 

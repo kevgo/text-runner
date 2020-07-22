@@ -6,7 +6,7 @@ const { RunningConsoleCommand } = require("../src/dist/actions/helpers/running-c
 module.exports = async function runTextrun(args) {
   args.name("running the created Markdown file in TextRunner")
 
-  var textRunPath = path.join(__dirname, "..", "bin", "text-run")
+  var textRunPath = path.join(__dirname, "..", "src", "bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const processor = createObservableProcess(callArgs(textRunPath), {
     cwd: args.configuration.workspace,
@@ -14,7 +14,7 @@ module.exports = async function runTextrun(args) {
   RunningConsoleCommand.set(processor)
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
-    args.formatter.error(`text-run exited with code ${processor.exitCode} when processing the created Markdown file`)
+    throw new Error(`text-run exited with code ${processor.exitCode} when processing the created Markdown file`)
   }
   global["consoleCommandOutput"] = processor.output.fullText()
 }

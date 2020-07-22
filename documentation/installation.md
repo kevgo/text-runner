@@ -12,15 +12,13 @@ including macOS, Windows, and Linux. To get started:
   npm init -y
   ```
 
-- install TextRunner: <a textrun="verify-npm-install">
+- install TextRunner:
 
-  ```
+  <pre textrun="verify-npm-install">
   npm install --dev text-runner
-  ```
+  </pre>
 
-  </a>
-
-- make sure it works by running: <a textrun="run-console-command">
+* make sure it works by running: <a textrun="run-console-command">
 
   ```
   node_modules/.bin/text-run help

@@ -6,4 +6,4 @@ useSystemTempDirectory: false
 actions:
   runConsoleCommand:
     globals:
-      "text-run": "bin/text-run"
+      "text-run": "src/bin/text-run"

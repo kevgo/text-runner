@@ -23,7 +23,8 @@ You need to have installed:
 
 To start working on the codebase:
 
-- install dependencies by running <code textrun="make/target">make setup</code>
+- install dependencies by running <code textrun="verify-make-command">make
+  setup</code>
 - optionally: add `./bin` and `./node_modules/.bin` to your PATH
 
 ## Style

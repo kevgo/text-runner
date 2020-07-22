@@ -50,6 +50,9 @@ coverage-send:  # sends the coverage to coveralls.io
 coverage: coverage-build coverage-tests coverage-cli coverage-docs  # measures code coverage
 .PHONY: coverage
 
+cuke:  # runs the Cucumber tests
+	@(cd src && make --no-print-directory cuke)
+
 cuke-other:  # test coverage for CLI specs
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" "features/!(actions|commands|images|formatters|tag-types)"
 
@@ -87,3 +90,6 @@ setup:  # prepares the code base for development after cloning
 
 test:  # runs all tests
 	@(cd src && make --no-print-directory test)
+
+test-offline:  # runs all tests
+	@(cd src && make --no-print-directory test-offline)

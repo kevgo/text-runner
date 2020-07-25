@@ -1,5 +1,5 @@
 const assertNoDiff = require("assert-no-diff")
-const { removeTrailingColon } = require("../src/dist/helpers/remove-trailing-colon.js")
+const { removeTrailingColon } = require("../text-runner/src/dist/helpers/remove-trailing-colon.js")
 const removeValue = require("remove-value")
 
 module.exports = function verifyHandlerArgs(args) {

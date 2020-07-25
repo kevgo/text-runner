@@ -1,8 +1,8 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { trimDollar } from "../src/actions/helpers/trim-dollar"
-import { ActionArgs } from "../src/actions/types/action-args"
+import { trimDollar } from "../text-runner/src/actions/helpers/trim-dollar"
+import { ActionArgs } from "../text-runner/src/actions/types/action-args"
 
 export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.text())

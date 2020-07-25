@@ -27,7 +27,7 @@ help:  # prints all make targets
 
 lint:  # lints all files in this codebase
 	@make --no-print-directory lint-global &
-	@(cd .. && ${CURDIR}/node_modules/.bin/prettier --check src)
+	@(cd .. && ${CURDIR}/node_modules/.bin/prettier --check text-runner)
 
 lint-global:  # the lint commands to run when running the global lint task
 	${CURDIR}/node_modules/.bin/tslint --project tsconfig-build.json

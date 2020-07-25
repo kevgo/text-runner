@@ -2,7 +2,7 @@ import color from "colorette"
 import fs from "fs-extra"
 import path from "path"
 import { trimDollar } from "../text-runner/src/actions/helpers/trim-dollar"
-import { ActionArgs } from "../text-runner/src/dist/text-runner"
+import { ActionArgs } from "../text-runner/text-runner"
 
 export default async function verifyNpmInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))

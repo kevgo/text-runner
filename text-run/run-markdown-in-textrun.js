@@ -1,4 +1,4 @@
-const { callArgs } = require("../text-runner/src/dist/actions/helpers/call-args")
+const { callArgs } = require("../text-runner/dist/actions/helpers/call-args")
 const fs = require("fs-extra")
 const { createObservableProcess } = require("observable-process")
 const path = require("path")

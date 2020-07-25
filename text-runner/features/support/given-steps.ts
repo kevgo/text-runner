@@ -85,11 +85,8 @@ Given("my workspace contains testable documentation", async function () {
   await fs.writeFile(
     path.join(this.rootDir, "1.md"),
     `
-<a textrun="run-console-command">
-
-\`\`\`
-echo "Hello world"
-\`\`\`
+<a textrun="test">
+testable documentation
 </a>
     `
   )

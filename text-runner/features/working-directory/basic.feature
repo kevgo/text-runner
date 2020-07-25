@@ -7,14 +7,14 @@ Feature: separate working directory
 
   - by default the tests run in the current directory
   - to run the tests in an external temporary directory,
-    provide the "use-temp-directory: true" option in text-run.yml
+  provide the "use-temp-directory: true" option in text-run.yml
   - the temp folder is removed after the tests have run
 
 
   Background:
     Given my workspace contains the file "1.md" with content:
       """
-      <a textrun="run-console-command">
+      <a textrun="test">
 
       ```
       pwd
@@ -23,26 +23,26 @@ Feature: separate working directory
       """
 
 
-  Scenario: default configuration
-    When running text-run
-    Then it runs in the "tmp" directory
-    And the "tmp" directory is now deleted
+# Scenario: default configuration
+#   When running text-run
+#   Then it runs in the "tmp" directory
+#   And the "tmp" directory is now deleted
 
 
-  Scenario: running in a local temp directory
-    Given my text-run configuration contains:
-      """
-      useSystemTempDirectory: false
-      """
-    When running text-run
-    Then it runs in the "tmp" directory
-    And the "tmp" directory is now deleted
+# Scenario: running in a local temp directory
+#   Given my text-run configuration contains:
+#     """
+#     useSystemTempDirectory: false
+#     """
+#   When running text-run
+#   Then it runs in the "tmp" directory
+#   And the "tmp" directory is now deleted
 
 
-  Scenario: running in a global temp directory
-    Given my text-run configuration contains:
-      """
-      useSystemTempDirectory: true
-      """
-    When running text-run
-    Then it runs in a global temp directory
+# Scenario: running in a global temp directory
+#   Given my text-run configuration contains:
+#     """
+#     useSystemTempDirectory: true
+#     """
+#   When running text-run
+#   Then it runs in a global temp directory

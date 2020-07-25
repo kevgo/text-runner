@@ -20,10 +20,10 @@ Feature: selecting formatter via the config file
       """
 
     Examples:
-      | FORMATTER | OUTPUT      |
-      | detailed  | Hello world |
-      | dot       | .           |
-      | progress  | Success     |
+      | FORMATTER | OUTPUT                 |
+      | detailed  | testable documentation |
+      | dot       | .                      |
+      | progress  | Success                |
 
 
   Scenario: the config file specifies an unknown formatter

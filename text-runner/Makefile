@@ -3,8 +3,7 @@
 
 build: clean  # builds for the current platform
 	@echo building ...
-	@${CURDIR}/src/node_modules/.bin/tsc -p tsconfig-build.json
-	@rm ${CURDIR}/src/dist/**/*.test.*
+	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
 
 build-debug: clean  # builds for debugging
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json --sourcemap
@@ -54,4 +53,4 @@ test-ts: unit cuke  # runs only the TypeScript tests
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
-	@${CURDIR}/src/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"
+	@${CURDIR}/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"

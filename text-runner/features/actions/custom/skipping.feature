@@ -1,3 +1,4 @@
+@debug
 Feature: skipping an action
 
   As a documentation tester
@@ -24,15 +25,9 @@ Feature: skipping an action
       | LINE     | 1                     |
       | MESSAGE  | skipping: Hello world |
 
-  Scenario: skipping a synchronous action
+  Scenario: skipping an asynchronous action
     Given my source code contains the file "text-run/hello-world.js" with content:
       """
-      async function delay(duration) {
-        return new Promise(function(resolve) {
-          setTimeout(resolve, duration)
-        })
-      }
-
       module.exports = async (args) => {
         return args.SKIPPING
       }

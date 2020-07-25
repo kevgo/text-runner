@@ -3,8 +3,8 @@
 
 build: clean  # builds for the current platform
 	@echo building ...
-	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
-	@rm ${CURDIR}/dist/**/*.test.*
+	@${CURDIR}/src/node_modules/.bin/tsc -p tsconfig-build.json
+	@rm ${CURDIR}/src/dist/**/*.test.*
 
 build-debug: clean  # builds for debugging
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json --sourcemap

@@ -1,5 +1,5 @@
 import color from "colorette"
-import { actionFinder } from "../actions/action-finder"
+import { ActionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
@@ -20,7 +20,7 @@ export async function unusedCommand(config: Configuration) {
   const usedActivityNames = extractActivities(ASTs, config.classPrefix).map((activity) => activity.actionName)
 
   // step 4: find defined activities
-  const definedActivityNames = actionFinder.customActionNames()
+  const definedActivityNames = new ActionFinder().customActionNames()
 
   // step 5: identify unused activities
   const unusedActivityNames = definedActivityNames.filter(

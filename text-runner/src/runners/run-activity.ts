@@ -1,6 +1,6 @@
 import humanize from "humanize-string"
 import util from "util"
-import { actionFinder } from "../actions/action-finder"
+import { ActionFinder } from "../actions/action-finder"
 import { Action } from "../actions/types/action"
 import { ActionArgs } from "../actions/types/action-args"
 import { ActionResult } from "../actions/types/action-result"
@@ -33,7 +33,7 @@ export async function runActivity(
     nodes: activity.nodes,
   }
   try {
-    const action = actionFinder.actionFor(activity)
+    const action = new ActionFinder().actionFor(activity)
     let result: ActionResult
     if (action.length === 1) {
       result = await runSyncOrPromiseFunc(action, args)

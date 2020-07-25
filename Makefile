@@ -71,9 +71,9 @@ cuke-smoke-win:  # runs the smoke tests
 
 docs: build  # runs the documentation tests
 	@echo running document tests ...
-	@${CURDIR}/src/bin/text-run static --offline --format dot
+	@${CURDIR}/text-runner/src/bin/text-run static --offline --format dot
 	@echo
-	@${CURDIR}/src/bin/text-run dynamic --format progress
+	@${CURDIR}/text-runner/src/bin/text-run dynamic --format progress
 
 fix:  # runs the auto-fixers
 	${CURDIR}/node_modules/.bin/prettier --write .

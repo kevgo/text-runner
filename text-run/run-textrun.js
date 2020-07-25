@@ -1,7 +1,7 @@
-const { callArgs } = require("../src/dist/actions/helpers/call-args")
+const { callArgs } = require("../text-runner/src/dist/actions/helpers/call-args")
 const { createObservableProcess } = require("observable-process")
 const path = require("path")
-const { RunningConsoleCommand } = require("../src/dist/actions/helpers/running-console-command")
+const { RunningConsoleCommand } = require("../text-runner/src/dist/actions/helpers/running-console-command")
 
 module.exports = async function runTextrun(args) {
   args.name("running the created Markdown file in TextRunner")

@@ -1,23 +1,29 @@
 import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
-import { actionFinder } from "./action-finder"
+import { ActionFinder, loadCustomActions } from "./action-finder"
+import path from "path"
 
-test("actionFinder.actionFor() with built-in block name", function () {
-  const activity = scaffoldActivity({ actionName: "cd" })
-  assert.typeOf(actionFinder.actionFor(activity), "function")
-})
+suite("actionFinder", function () {
+  suite("actionFor()", function () {
+    test("built-in block name", function () {
+      const activity = scaffoldActivity({ actionName: "cd" })
+      const actionFinder = new ActionFinder()
+      assert.typeOf(actionFinder.actionFor(activity), "function")
+    })
+  })
 
-test("actionFinder.customActionNames()", function () {
-  const result = actionFinder.customActionNames()
-  assert.deepEqual(result, [
-    "cd-into-empty-tmp-folder",
-    "cd-workspace",
-    "create-markdown-file",
-    "run-markdown-in-textrun",
-    "run-textrun",
-    "verify-ast-node-attributes",
-    "verify-handler-args",
-    "verify-make-command",
-    "verify-searcher-methods",
-  ])
+  suite("loadCustomActions", function () {
+    test("with text-run folder of this codebase", function () {
+      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "text-run"))
+      assert.typeOf(result["cd-into-empty-tmp-folder"], "function")
+      assert.typeOf(result["cd-workspace"], "function")
+      assert.typeOf(result["create-markdown-file"], "function")
+      assert.typeOf(result["run-markdown-in-textrun"], "function")
+      assert.typeOf(result["run-textrun"], "function")
+      assert.typeOf(result["verify-ast-node-attributes"], "function")
+      assert.typeOf(result["verify-handler-args"], "function")
+      assert.typeOf(result["verify-make-command"], "function")
+      assert.typeOf(result["verify-searcher-methods"], "function")
+    })
+  })
 })

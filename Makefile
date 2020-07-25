@@ -89,7 +89,7 @@ setup:  # prepares the code base for development after cloning
 	@yarn
 
 test:  # runs all tests
-	@(cd src && make --no-print-directory test)
+	@(cd text-runner/src && make --no-print-directory test)
 
 test-offline:  # runs all tests
-	@(cd src && make --no-print-directory test-offline)
+	@(cd text-runner/src && make --no-print-directory test-offline)

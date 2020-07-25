@@ -54,4 +54,4 @@ test-ts: unit cuke  # runs only the TypeScript tests
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
-	@${CURDIR}/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"
+	@${CURDIR}/src/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"

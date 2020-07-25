@@ -16,14 +16,14 @@ export interface FunctionRepo {
 }
 
 /** ActionFinder provides runnable action instances for activities. */
-class ActionFinder {
+export class ActionFinder {
   private readonly builtinActions: FunctionRepo
   private readonly customActions: FunctionRepo
   private readonly externalActions: ExternalActionManager
 
   constructor() {
     this.builtinActions = this.loadBuiltinActions()
-    this.customActions = this.loadCustomActions()
+    this.customActions = loadCustomActions(path.join(process.cwd(), "text-run"))
     this.externalActions = new ExternalActionManager()
   }
 
@@ -69,35 +69,30 @@ class ActionFinder {
     return result
   }
 
-  private loadCustomActions(): FunctionRepo {
-    const result: FunctionRepo = {}
-    for (const filename of this.customActionFilePaths()) {
-      rechoir.prepare(interpret.jsVariants, filename)
-      const actionName = getActionName(filename)
-      if (this.builtinActions[actionName]) {
-        throw new UnprintedUserError(`redefining internal action '${actionName}'`, filename, 1)
-      }
-      const action = require(filename)
-      if (action.default) {
-        result[actionName] = action.default
-      } else {
-        result[actionName] = action
-      }
-    }
-    return result
-  }
-
   private builtinActionFilePaths(): string[] {
     return glob
       .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
       .filter((name) => !name.endsWith(".d.ts"))
       .map(trimExtension)
   }
-
-  private customActionFilePaths(): string[] {
-    const pattern = path.join(process.cwd(), "text-run", `*.@(${javascriptExtensions().join("|")})`)
-    return glob.sync(pattern)
-  }
 }
 
-export const actionFinder = new ActionFinder()
+export function customActionFilePaths(dir: string): string[] {
+  const pattern = path.join(dir, `*.@(${javascriptExtensions().join("|")})`)
+  return glob.sync(pattern)
+}
+
+export function loadCustomActions(dir: string): FunctionRepo {
+  const result: FunctionRepo = {}
+  for (const filename of customActionFilePaths(dir)) {
+    rechoir.prepare(interpret.jsVariants, filename)
+    const actionName = getActionName(filename)
+    const action = require(filename)
+    if (action.default) {
+      result[actionName] = action.default
+    } else {
+      result[actionName] = action
+    }
+  }
+  return result
+}

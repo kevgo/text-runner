@@ -2,7 +2,6 @@
   "private": true,
   "workspaces": [
     "text-runner/",
-    "documentation/examples/bash",
     "documentation/examples/custom-action-async",
     "documentation/examples/custom-action-callback",
     "documentation/examples/custom-action-coffeescript",

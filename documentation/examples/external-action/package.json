@@ -1,7 +1,0 @@
-{
-  "name": "external-action",
-  "version": "1.0.0",
-  "dependencies": {
-    "textrun-external": "file:../external-action-npm/"
-  }
-}

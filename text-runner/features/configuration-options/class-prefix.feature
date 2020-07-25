@@ -10,20 +10,14 @@ Feature: configuring the class prefix
   Background:
     Given my source code contains the file "tr.md" with content:
       """
-      <a textrun="run-javascript">
-
-        ```
-        console.log('running block with default class prefix')
-        ```
+      <a textrun="test">
+      standard prefix
       </a>
       """
     And my source code contains the file "custom-prefix.md" with content:
       """
-      <a custom="runJavascript">
-
-        ```
-        console.log('running block with custom class prefix')
-        ```
+      <a custom="test">
+      custom prefix
       </a>
       """
 
@@ -32,11 +26,11 @@ Feature: configuring the class prefix
     When running text-run
     Then it prints:
       """
-      running block with default class prefix
+      standard prefix
       """
     And it doesn't print:
       """
-      running block with custom class prefix
+      custom prefix
       """
 
 
@@ -48,9 +42,9 @@ Feature: configuring the class prefix
     When running text-run
     Then it prints:
       """
-      running block with custom class prefix
+      custom prefix
       """
     And it doesn't print:
       """
-      running block with default class prefix
+      standard prefix
       """

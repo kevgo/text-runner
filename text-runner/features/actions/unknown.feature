@@ -1,7 +1,7 @@
 @smoke
 Feature: unknown action types
 
-  When using an active block for which there is no action
+    When using an active block for which there is no action
   I want to be notified
   So that I can add the missing custom action.
 
@@ -27,16 +27,7 @@ Feature: unknown action types
       * check-link
       * create-directory
       * create-file
-      * run-async-javascript
-      * run-console-command
-      * run-javascript
-      * start-process
-      * stop-process
-      * validate-javascript
-      * verify-console-command-output
-      * verify-npm-global-command
-      * verify-npm-install
-      * verify-process-output
+      * test
       * verify-source-file-content
       * verify-workspace-contains-directory
       * verify-workspace-file-content

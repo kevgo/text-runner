@@ -5,17 +5,13 @@ Feature: selecting formatter via the command-line
   So that I can try different formatters out easily.
 
   - you can chose a formatter using the `--format <[formatter name]>` command-line parameter
-    or the `formatter` key in `text-run.yml`
+  or the `formatter` key in `text-run.yml`
 
 
   Background:
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="run-console-command">
-
-      ```
-      echo "Hello world"
-      ```
+      <a textrun="test">
       </a>
       """
 

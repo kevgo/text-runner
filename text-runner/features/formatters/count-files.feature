@@ -1,6 +1,7 @@
+@debug
 Feature: Counting files
 
-  When testing documentation
+    When testing documentation
   I want to know how many files have been checked
   So that I know whether all files have been covered.
 
@@ -10,20 +11,12 @@ Feature: Counting files
   Scenario: a test suite with multiple files
     Given my source code contains the file "1.md" with content:
       """
-      <a textrun="validate-javascript">
-
-      ```
-      foo()
-      ```
+      <a textrun="test">
       </a>
       """
     And my source code contains the file "2.md" with content:
       """
-      <a textrun="validate-javascript">
-
-      ```
-      bar()
-      ```
+      <a textrun="test">
       </a>
       """
     When running text-run
@@ -39,11 +32,7 @@ Feature: Counting files
       """
     And my source code contains the file "2.md" with content:
       """
-      <a textrun="validate-javascript">
-
-      ```
-      bar()
-      ```
+      <a textrun="test">
       </a>
       """
     When running text-run

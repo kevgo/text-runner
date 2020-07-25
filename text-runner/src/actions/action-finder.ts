@@ -23,6 +23,7 @@ export class ActionFinder {
 
   constructor(sourceDir: string) {
     this.builtinActions = this.loadBuiltinActions()
+    console.log(this.builtinActions)
     this.customActions = loadCustomActions(path.join(sourceDir, "text-run"))
     this.externalActions = new ExternalActionManager()
   }

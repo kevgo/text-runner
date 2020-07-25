@@ -1,7 +1,0 @@
-{
-  "name": "bash-example",
-  "version": "1.0.0",
-  "dependencies": {
-    "text-runner": "4.0.3"
-  }
-}

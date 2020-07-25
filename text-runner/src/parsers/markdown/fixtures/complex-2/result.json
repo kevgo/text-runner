@@ -17,7 +17,7 @@
   },
   {
     "attributes": {
-      "href": "https://github.com/Originate/git-town/releases.atom"
+      "href": "https://github.com/git-town/git-town/releases.atom"
     },
     "content": "",
     "file": "src/parsers/markdown/fixtures/complex-2/input.md",

@@ -11,7 +11,7 @@ module.exports = async function runMarkdownInTextrun(args) {
   const fileContent = markdown.replace(/​/g, "")
   await fs.writeFile(filePath, fileContent)
 
-  var textRunPath = path.join(args.configuration.sourceDir, "src", "bin", "text-run")
+  var textRunPath = path.join(args.configuration.sourceDir, "text-runner", "bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath)
   trArgs[trArgs.length - 1] += ` --keep-tmp --workspace ${args.configuration.workspace}`

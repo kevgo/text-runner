@@ -23,6 +23,9 @@ cuke-offline: build  # runs the feature specs that don't need an online connecti
 cuke-win:  # runs the feature specs on Windows
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
+docs:  # runs the documentation tests
+	@(cd .. && make --no-print-directory docs)
+
 fix:  # runs the fixers
 	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
 

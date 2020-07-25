@@ -79,7 +79,7 @@
     "bin/text-run",
     "dist"
   ],
-  "homepage": "https://github.com/Originate/text-runner",
+  "homepage": "https://github.com/kevgo/text-runner",
   "main": "dist/text-runner.js",
   "license": "ISC",
   "remarkConfig": {
@@ -94,7 +94,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Originate/text-runner.git"
+    "url": "https://github.com/kevgo/text-runner.git"
   },
   "scripts": {
     "prepublishOnly": "make prepublish",

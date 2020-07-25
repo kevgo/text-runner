@@ -11,8 +11,8 @@
 <a href="https://ci.appveyor.com/project/kevgo/text-runner/branch/master">
   <img src="https://ci.appveyor.com/api/projects/status/t19jjnrdtmhvenax/branch/master?svg=true " alt="Windows build status" />
 </a>
-<a href="https://coveralls.io/github/Originate/text-runner?branch=master">
-  <img src="https://coveralls.io/repos/github/Originate/text-runner/badge.svg?1" alt='Coverage Status' />
+<a href="https://coveralls.io/github/kevgo/text-runner?branch=master">
+  <img src="https://coveralls.io/repos/github/kevgo/text-runner/badge.svg?1" alt='Coverage Status' />
 </a>
 <br><br>
 

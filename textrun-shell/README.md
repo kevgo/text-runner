@@ -1,7 +1,8 @@
-# Text-Runner console actions
+# Text-Runner Shell Actions
 
-Text-Runner allows running short-lived (immediately ending) console commands.
-The execution waits until the command is finished running.
+This package provides [Text-Runner](https://github.com/kevgo/text-runner) allows
+running short-lived (immediately ending) console commands. The execution waits
+until the command is finished running.
 
 - [run a short-lived console command](run_console_command.md) and enter data
   into it

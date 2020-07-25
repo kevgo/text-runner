@@ -21,9 +21,9 @@ export class ActionFinder {
   private readonly customActions: FunctionRepo
   private readonly externalActions: ExternalActionManager
 
-  constructor() {
+  constructor(sourceDir: string) {
     this.builtinActions = this.loadBuiltinActions()
-    this.customActions = loadCustomActions(path.join(process.cwd(), "text-run"))
+    this.customActions = loadCustomActions(path.join(sourceDir, "text-run"))
     this.externalActions = new ExternalActionManager()
   }
 

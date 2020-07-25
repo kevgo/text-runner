@@ -9,6 +9,7 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeParallel } from "../runners/execute-parallel"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
+import { ActionFinder } from "../actions/action-finder"
 
 export async function staticCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
@@ -38,10 +39,13 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
+  // step 4: find actions
+  const actionFinder = new ActionFinder(config.sourceDir)
+
   // step 5: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, links.length, config)
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, linkTargets, config, stats, formatter)
+  const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
   const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
 
   // step 6: cleanup

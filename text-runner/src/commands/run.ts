@@ -11,6 +11,7 @@ import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
+import { ActionFinder } from "../actions/action-finder"
 
 export async function runCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
@@ -33,7 +34,10 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 3: find link targets
   const linkTargets = findLinkTargets(ASTs)
 
-  // step 4: extract activities
+  // step 4: find actions
+  const actionFinder = new ActionFinder(config.sourceDir)
+
+  // step 5: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length === 0 && links.length === 0) {
@@ -41,14 +45,14 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
-  // step 5: execute the ActivityList
+  // step 6: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, linkTargets, config, stats, formatter)
-  jobs.push(executeSequential(activities, config, linkTargets, stats, formatter))
+  const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
+  jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))
   const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
 
-  // step 6: cleanup
+  // step 7: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
     // NOTE: calling fs.remove causes an exception on Windows here,
@@ -57,7 +61,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     rimraf.sync(config.workspace, { maxBusyTries: 20 })
   }
 
-  // step 7: write stats
+  // step 8: write stats
   let text = "\n"
   let colorFn: color.Style
   if (results.length === 0) {

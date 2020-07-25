@@ -4,6 +4,7 @@ import { Formatter } from "../formatters/types/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { StatsCounter } from "./helpers/stats-counter"
 import { runActivity } from "./run-activity"
+import { ActionFinder } from "../actions/action-finder"
 
 /**
  * Executes the given activities in parallel.
@@ -11,12 +12,13 @@ import { runActivity } from "./run-activity"
  */
 export function executeParallel(
   activities: ActivityList,
+  actionFinder: ActionFinder,
   linkTargets: LinkTargetList,
   configuration: Configuration,
   statsCounter: StatsCounter,
   formatter: Formatter
 ): Promise<Error | null>[] {
   return activities.map((activity) => {
-    return runActivity(activity, configuration, linkTargets, statsCounter, formatter)
+    return runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
   })
 }

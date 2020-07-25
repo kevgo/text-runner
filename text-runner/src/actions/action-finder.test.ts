@@ -7,7 +7,7 @@ suite("actionFinder", function () {
   suite("actionFor()", function () {
     test("built-in block name", function () {
       const activity = scaffoldActivity({ actionName: "cd" })
-      const actionFinder = new ActionFinder()
+      const actionFinder = new ActionFinder(".")
       assert.typeOf(actionFinder.actionFor(activity), "function")
     })
   })

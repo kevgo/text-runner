@@ -1,4 +1,3 @@
-@debug
 Feature: External actions
 
   Scenario: using an external action

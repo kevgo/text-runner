@@ -15,6 +15,7 @@ import { StatsCounter } from "./helpers/stats-counter"
 
 export async function runActivity(
   activity: Activity,
+  actionFinder: ActionFinder,
   configuration: Configuration,
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter,
@@ -33,7 +34,7 @@ export async function runActivity(
     nodes: activity.nodes,
   }
   try {
-    const action = new ActionFinder().actionFor(activity)
+    const action = actionFinder.actionFor(activity)
     let result: ActionResult
     if (action.length === 1) {
       result = await runSyncOrPromiseFunc(action, args)

@@ -9,6 +9,7 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkingDir } from "../working-dir/create-working-dir"
+import { ActionFinder } from "../actions/action-finder"
 
 export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
@@ -38,18 +39,21 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
-  // step 5: execute the ActivityList
+  // step 5: find actions
+  const actionFinder = new ActionFinder(config.sourceDir)
+
+  // step 6: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length, config)
   process.chdir(config.workspace)
-  const error = await executeSequential(activities, config, linkTargets, stats, formatter)
+  const error = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
 
-  // step 6: cleanup
+  // step 7: cleanup
   process.chdir(config.sourceDir)
   if (error && !config.keepTmp) {
     await fs.remove(config.workspace)
   }
 
-  // step 7: write stats
+  // step 8: write stats
   let text = "\n"
   let colorFn
   if (error) {

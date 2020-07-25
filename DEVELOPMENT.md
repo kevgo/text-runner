@@ -5,7 +5,7 @@ This codebase is organized as a mono-repository.
 - [documentation](documentation/): end-user manual
 - [text-runner](text-runner/): the main Text-Runner application
 - [textrun-make](textrun-make/): actions for Makefiles
-- [textrun-nodejs](textrun-nodejs/): actions for working with Node.JS codebases
+- [textrun-nodejs](textrun-npm/): actions for working with Node.JS codebases
 - [textrun-shell](textrun-shell/): actions for running commands in subshells
 - [tools](tools/): tools used for development
 
@@ -75,10 +75,9 @@ permutations of that are tested.
 The architecture is best understood by following along with how a set of
 documents is tested. There are several CLI executables to start TextRunner:
 
-- [text-runner/src/bin/text-run](text-runner/src/bin/text-run) for unix-like
-  systems and macOS
-- [text-runner/src/bin/text-run.cmd](text-runner/src/bin/text-run.cmd) for
-  Windows
+- [text-runner/bin/text-run](text-runner/bin/text-run) for unix-like systems and
+  macOS
+- [text-runner/bin/text-run.cmd](text-runner/bin/text-run.cmd) for Windows
 
 These CLI executables call the [cli.ts](text-runner/src/cli.ts) CLI module. The
 CLI subsystem parses the command-line arguments and calls TextRunner's

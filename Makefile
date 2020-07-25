@@ -1,8 +1,8 @@
 build:  # builds
-	@(cd src && make --no-print-directory build)
+	@(cd text-runner/src && make --no-print-directory build)
 
 clean:  # Removes all build artifacts
-	@(cd src && make --no-print-directory clean)
+	@(cd text-runner/src && make --no-print-directory clean)
 
 coverage-build:  # builds the code base with code coverage measurements baked in
 	./src/node_modules/.bin/babel src -d dist --extensions ".ts"
@@ -70,7 +70,7 @@ cuke-smoke-win:  # runs the smoke tests
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress
 
 docs: build  # runs the documentation tests
-	@echo running document tests ...
+	echo running document tests ...
 	@${CURDIR}/text-runner/src/bin/text-run static --offline --format dot
 	@echo
 	@${CURDIR}/text-runner/src/bin/text-run dynamic --format progress

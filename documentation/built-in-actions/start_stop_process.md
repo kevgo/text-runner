@@ -29,5 +29,5 @@ Interact with the server here ...
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/start-stop-process/basic.feature)
-- [source code](../../src/actions/built-in/start-process.ts)
+- [feature specs](../../text-runner/features/actions/built-in/start-stop-process/basic.feature)
+- [source code](../../text-runner/src/actions/built-in/start-process.ts)

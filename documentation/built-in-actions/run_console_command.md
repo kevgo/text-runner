@@ -95,5 +95,5 @@ this configuration. </a>
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/run-console-command/)
-- [source code](../../src/actions/built-in/run-console-command.ts)
+- [feature specs](../../text-runner/features/actions/built-in/run-console-command/)
+- [source code](../../text-runner/src/actions/built-in/run-console-command.ts)

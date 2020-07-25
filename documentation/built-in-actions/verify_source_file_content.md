@@ -55,5 +55,5 @@ section:
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
-- [source code](../../src/actions/built-in/verify-source-file-content.ts)
+- [feature specs](../../text-runner/features/actions/built-in/verify-source-file-content/verify-source-file-content.feature)
+- [source code](../../text-runner/src/actions/built-in/verify-source-file-content.ts)

@@ -30,5 +30,5 @@ Hello world!
 
 #### More info
 
-- [feature specs](../../features/actions/built-in/verify-console-command-output/verify-console-command-output.feature)
-- [source code](../../src/actions/built-in/verify-console-command-output.ts)
+- [feature specs](../../text-runner/features/actions/built-in/verify-console-command-output/verify-console-command-output.feature)
+- [source code](../../text-runner/src/actions/built-in/verify-console-command-output.ts)

@@ -142,5 +142,5 @@ To debug in VSCode:
 
 ## Deployment
 
-- bump version in `package.json` on master and commit
-- run `npm publish`
+- bump all occurrences of `4.0.3` on master and commit
+- in [text-runner](text-runner/): run `npm publish`

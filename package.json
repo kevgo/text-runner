@@ -1,8 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "text-runner/src",
-    "text-runner/features/support",
+    "text-runner/",
     "documentation/examples/bash",
     "documentation/examples/custom-action-async",
     "documentation/examples/custom-action-callback",
@@ -12,7 +11,6 @@
     "documentation/examples/custom-action-typescript",
     "documentation/examples/external-action",
     "documentation/examples/global-tool",
-    "documentation/examples/multiple-returns",
-    "text-runner/features/support"
+    "documentation/examples/multiple-returns"
   ]
 }

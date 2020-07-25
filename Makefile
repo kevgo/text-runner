@@ -1,5 +1,5 @@
 build:  # builds
-	@(cd text-runner/src && make --no-print-directory build)
+	@(cd text-runner && make --no-print-directory build)
 
 clean:  # Removes all build artifacts
 	@(cd text-runner/src && make --no-print-directory clean)

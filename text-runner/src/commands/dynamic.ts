@@ -14,25 +14,25 @@ import { ActionFinder } from "../actions/action-finder"
 export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
 
-  // step 0: create working dir
+  // step 1: create working dir
   if (!config.workspace) {
     config.workspace = await createWorkingDir(config.useSystemTempDirectory)
   }
 
-  // step 1: find files
+  // step 2: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
     return []
   }
 
-  // step 2: read and parse files
+  // step 3: read and parse files
   const ASTs = await parseMarkdownFiles(filenames)
 
-  // step 3: find link targets
+  // step 4: find link targets
   const linkTargets = findLinkTargets(ASTs)
 
-  // step 4: extract activities
+  // step 5: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)
   if (activities.length === 0) {
     console.log(color.magenta("no activities found"))

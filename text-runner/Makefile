@@ -30,7 +30,7 @@ lint:  # lints all files in this codebase
 	@(cd .. && ${CURDIR}/node_modules/.bin/prettier --check src)
 
 lint-global:  # the lint commands to run when running the global lint task
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig-build.json
+	${CURDIR}/node_modules/.bin/tslint --config ./tslint.json --project tsconfig-build.json
 
 parallel: lint  # runs all tests
 	${CURDIR}/bin/text-run static --offline --format dot &

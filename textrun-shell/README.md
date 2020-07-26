@@ -1,21 +1,59 @@
 # Text-Runner Shell Actions
 
-This package provides [Text-Runner](https://github.com/kevgo/text-runner) allows
-running short-lived (immediately ending) console commands. The execution waits
-until the command is finished running.
-
-- [run a short-lived console command](run_console_command.md) and enter data
-  into it
-- [verify the output of the last short-lived command](verify_console_command_output.md)
-
-Text-Runner also allows running one long-running console command (called a
-process) in the background, for example a server.
-
-- [start and stop the long-running process](start_stop_process.md)
-- [document parts of the process' output](verify_process_output.md)
-
-Console commands execute in TextRunner's
+This package provides [Text-Runner](https://github.com/kevgo/text-runner)
+actions for running console commands. These commands run in Text-Runner's
 [workspace directory](#interacting-with-the-local-filesystem).
 
-With the option `--offline` given, text-run does not check outgoing links to
-other websites.
+### Short-lived commands
+
+Use the <code textrun="action-name">shell/exec</code> action to run a shell
+command and wait until it finishes:
+
+<a textrun="run-in-textrun">
+
+```html
+<pre textrun="shell/exec">
+$ echo Hello world!
+</pre>
+```
+
+</a>
+
+This action ignores dollar signs at the beginning of lines that indicate a shell
+prompt. You can document the expected output of the shell command:
+
+<a textrun="run-in-textrun">
+
+```html
+<pre textrun="shell/exec-output">
+Hello world!
+</pre>
+```
+
+</a>
+
+### Long-running processes
+
+Long-running processes, for example web or database servers, keep running while
+Text-Runner continues testing the document. To start a long-running process, use
+the <code textrun="action-name">shell/start</code> action:
+
+<a textrun="run-in-textrun">
+
+```html
+<pre textrun="shell/start">
+read
+</pre>
+```
+
+</a>
+
+The <code textrun="action-name">shell/server-output</code> action waits until
+the server prints the given output. The <code textrun="action-name">
+
+[start and stop a server](start_stop_server.md) -
+[document parts of the server's output](verify_process_output.md) With the
+option `--offline` given, text-run does not check outgoing links to other
+websites.
+
+### User input

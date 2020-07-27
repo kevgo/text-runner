@@ -1,7 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "text-runner/",
+    "text-runner",
     "documentation/examples/custom-action-async",
     "documentation/examples/custom-action-callback",
     "documentation/examples/custom-action-coffeescript",
@@ -10,6 +10,7 @@
     "documentation/examples/custom-action-typescript",
     "documentation/examples/external-action",
     "documentation/examples/global-tool",
-    "documentation/examples/multiple-returns"
+    "documentation/examples/multiple-returns",
+    "textrun-shell"
   ]
 }

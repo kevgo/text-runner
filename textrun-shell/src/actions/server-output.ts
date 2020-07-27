@@ -10,8 +10,8 @@ export async function serverOutput(args: ActionArgs) {
   const expectedOutput = args.nodes.textInNodeOfType("fence")
   const expectedLines = expectedOutput
     .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line)
+    .map((line: string) => line.trim())
+    .filter((line: string) => line)
   const process = CurrentServer.instance().process
   if (!process) {
     throw new Error("Cannot verify process output since no process has been started")

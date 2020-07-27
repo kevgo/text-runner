@@ -23,8 +23,8 @@ function getCommandsToRun(args: ActionArgs) {
   return args.nodes
     .textInNodeOfType("fence")
     .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line)
+    .map((line: string) => line.trim())
+    .filter((line: string) => line)
     .map(trimDollar)
     .join(" && ")
 }

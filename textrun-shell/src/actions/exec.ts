@@ -18,8 +18,8 @@ export async function exec(args: ActionArgs) {
   const content = args.nodes.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
-    .map((command) => command.trim())
-    .filter((e) => e)
+    .map((command: string) => command.trim())
+    .filter((e: string) => e)
     .map(trimDollar)
     .join(" && ")
   if (commandsToRun === "") {

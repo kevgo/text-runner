@@ -2,14 +2,11 @@
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for running console commands. These commands run in Text-Runner's
-[workspace directory](#interacting-with-the-local-filesystem).
+workspace directory.
 
 ### Installation
 
-<a textrun="actions/package-json">
-
-To use these actions, add this package to your [package.json](package.json) file
-by running
+To use these actions, add this package as a development dependency by running
 
 <a textrun="npm/dev-install">
 
@@ -25,10 +22,10 @@ $ yarn i -D textrun-shell
 
 </a>
 
-<a textrun="npm/package-json-part">
-
 Your `package.json` file should end up containing (amongst other things) these
 entries:
+
+<a textrun="npm/package-json-part">
 
 ```json
   "devDependencies": {
@@ -39,10 +36,10 @@ entries:
 
 </a>
 
-### Short-lived commands
+### Run shell commands
 
-The <code textrun="action/full-name">shell/exec</code> action runs a shell
-command and waits until it finishes:
+The <b textrun="action/full-name">shell/exec</b> action runs a shell command and
+waits until it finishes:
 
 <a textrun="run-in-textrun">
 
@@ -54,9 +51,10 @@ $ echo Hello world!
 
 </a>
 
-It ignores dollar signs at the beginning of lines, which indicate a shell
-prompt. You can document the expected output of the shell command. For example,
-the command above should print:
+Dollar signs at the beginning of lines indicating a shell prompt are ignored.
+You can document the expected output of the last shell command run using the
+<b textrun="action/short-name">exec-output</b> action. For example, the command
+above should print:
 
 <a textrun="run-in-textrun">
 
@@ -70,8 +68,8 @@ Hello world!
 
 ### User input
 
-You can enter text into the running command by providing an HTML table with the
-content to enter.
+You can run a shell command and enter text into it with the
+<b textrun="action/full-name">shell/exec-with-input</b> action.
 
 <a textrun="workspace/create-file">
 
@@ -96,7 +94,7 @@ rl.question("your name", (name) => {
 
 </a>
 
-<a textrun="workspace/exec">
+<a textrun="workspace/exec-with-input">
 
 Run this tool on the command line
 
@@ -148,10 +146,10 @@ setTimeout(() => {}, 100_000)
 </a>
 
 Start this long-running server to run in parallel with Text-Runner with the
-<b textrun="action/name">shell/start</b> action. Wait for output using the
-<b textrun="action/name">shell/server-output</b> action. Stop the server with
-the <b textrun="action/name">shell/server-stop</b> action. Here is an example
-that shows them in action:
+<b textrun="action/full-name">shell/start</b> action. Wait for output using the
+<b textrun="action/full-name">shell/server-output</b> action. Stop the server
+with the <b textrun="action/full-name">shell/server-stop</b> action. Here is an
+example that shows them in action:
 
 <a textrun="run-in-textrunner">
 

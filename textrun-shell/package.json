@@ -1,10 +1,11 @@
 {
   "name": "textrun-shell",
   "version": "0.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "main": "dist/index.js",
+  "license": "ISC",
   "devDependencies": {
     "mocha": "8.0.1",
+    "text-runner": "4.0.3",
     "typescript": "3.9.7"
   }
 }

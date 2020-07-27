@@ -8,8 +8,8 @@ export function execOutput(args: ActionArgs) {
   const expectedLines = args.nodes
     .text()
     .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line)
+    .map((line: string) => line.trim())
+    .filter((line: string) => line)
   const actualLines = CurrentCommand.instance()
     .output.fullText()
     .split("\n")

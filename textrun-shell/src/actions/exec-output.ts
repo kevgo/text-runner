@@ -1,8 +1,8 @@
 import * as assertNoDiff from "assert-no-diff"
-import { RunningConsoleCommand } from "../helpers/running-console-command"
-import { ActionArgs } from "../types/action-args"
+import { CurrentCommand } from "../helpers/current-command"
+import { ActionArgs } from "text-runner"
 
-export default function verifyConsoleCommandOutput(args: ActionArgs) {
+export function execOutput(args: ActionArgs) {
   args.name("verifying the output of the last run console command")
 
   const expectedLines = args.nodes
@@ -10,7 +10,7 @@ export default function verifyConsoleCommandOutput(args: ActionArgs) {
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line)
-  const actualLines = RunningConsoleCommand.instance()
+  const actualLines = CurrentCommand.instance()
     .output.fullText()
     .split("\n")
     .map((line) => line.trim())

@@ -69,3 +69,5 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
 
 export type { ActionArgs } from "./actions/types/action-args"
 export type { Configuration } from "./configuration/types/configuration"
+export { AstNode } from "./parsers/standard-AST/ast-node"
+export { AstNodeList } from "./parsers/standard-AST/ast-node-list"

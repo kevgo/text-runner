@@ -1,7 +1,7 @@
 import { ObservableProcess } from "observable-process"
 
-export class RunningProcess {
-  static instance(): RunningProcess {
+export class CurrentServer {
+  static instance(): CurrentServer {
     return instance
   }
   process: ObservableProcess | null
@@ -13,8 +13,9 @@ export class RunningProcess {
   hasProcess(): boolean {
     return this.process != null
   }
+
   kill() {
-    this.process && this.process.kill()
+    this.process?.kill()
   }
 
   reset() {
@@ -26,4 +27,4 @@ export class RunningProcess {
   }
 }
 
-const instance = new RunningProcess()
+const instance = new CurrentServer()

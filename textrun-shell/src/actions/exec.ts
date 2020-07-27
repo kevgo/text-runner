@@ -1,13 +1,9 @@
 import color from "colorette"
 import { createObservableProcess, ObservableProcess } from "observable-process"
-import path from "path"
-import { Configuration } from "../../configuration/types/configuration"
-import { Globals } from "../../configuration/types/globals"
-import { AstNodeList } from "../../parsers/standard-AST/ast-node-list"
 import { callArgs } from "../helpers/call-args"
-import { RunningConsoleCommand } from "../helpers/running-console-command"
+import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs, AstNodeList } from "text-runner"
 
 interface ProcessInput {
   textToWait: string | null
@@ -18,14 +14,13 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export default async function runConsoleCommand(args: ActionArgs) {
+export async function exec(args: ActionArgs) {
   const content = args.nodes.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
     .map((command) => command.trim())
     .filter((e) => e)
     .map(trimDollar)
-    .map(makeGlobal(args.configuration))
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error("the block that defines console commands to run is empty")
@@ -40,7 +35,7 @@ export default async function runConsoleCommand(args: ActionArgs) {
   const processor = createObservableProcess(callArgs(commandsToRun), {
     cwd: args.configuration.workspace,
   })
-  RunningConsoleCommand.set(processor)
+  CurrentCommand.set(processor)
 
   for (const inputLine of input) {
     enter(processor, inputLine)
@@ -92,24 +87,4 @@ function getInput(nodes: AstNodeList): ProcessInput[] {
     }
   }
   return result
-}
-
-function makeGlobal(configuration: Configuration): (arg: string) => string {
-  configuration = configuration || {}
-  let globals: Globals = {}
-  try {
-    globals = configuration.actions.runConsoleCommand.globals as Globals
-  } catch (e) {
-    // can ignore errors here
-  }
-  return function (commandText: string): string {
-    const commandParts = commandText.split(" ")
-    const command = commandParts[0]
-    const replacement = globals[command] as string | undefined
-    if (replacement) {
-      return path.join(configuration.sourceDir, replacement) + " " + commandParts.splice(1).join(" ")
-    } else {
-      return commandText
-    }
-  }
 }

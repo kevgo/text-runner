@@ -2,5 +2,9 @@
   "name": "textrun-shell",
   "version": "0.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "mocha": "8.0.1",
+    "typescript": "3.9.7"
+  }
 }

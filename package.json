@@ -11,6 +11,7 @@
     "documentation/examples/external-action",
     "documentation/examples/global-tool",
     "documentation/examples/multiple-returns",
-    "textrun-shell"
+    "textrun-shell",
+    "tools"
   ]
 }

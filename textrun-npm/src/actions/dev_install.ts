@@ -1,10 +1,10 @@
 import color from "colorette"
 import fs from "fs-extra"
 import path from "path"
-import { trimDollar } from "../text-runner/src/actions/helpers/trim-dollar"
-import { ActionArgs } from "../text-runner/text-runner"
+import { trimDollar } from "../helpers/trim-dollar"
+import { ActionArgs } from "text-runner"
 
-export default async function verifyNpmInstall(args: ActionArgs) {
+export async function devInstall(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
   const pkg = await fs.readJSON(path.join(args.configuration.sourceDir, "package.json"))
   args.name(`verify NPM installs ${color.cyan(pkg.name)}`)

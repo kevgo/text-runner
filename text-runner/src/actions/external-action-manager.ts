@@ -25,7 +25,7 @@ export class ExternalActionManager {
     } catch (e) {
       throw new UnprintedUserError(`NPM package "${moduleName}" not found`)
     }
-    const actions = module["textrun-actions"]
+    const actions = module.textrunActions
     if (!actions) {
       throw new UnprintedUserError(`NPM package "${moduleName}" does not contain any Text-Runner actions`)
     }

@@ -1,0 +1,13 @@
+{
+  "name": "textrun-npm",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "devDependencies": {
+    "text-runner": "4.0.3",
+    "typescript": "3.9.7"
+  },
+  "peerDependencies": {
+    "text-runner": "4.0.3"
+  }
+}

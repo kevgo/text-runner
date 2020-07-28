@@ -1,6 +1,8 @@
 import { FunctionRepo } from "./action-finder"
 import { Action } from "./types/action"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { getActionName } from "./helpers/get-action-name"
+
 /** manages external actions in separate NPM modules */
 export class ExternalActionManager {
   actions: FunctionRepo
@@ -11,14 +13,16 @@ export class ExternalActionManager {
 
   /** provides the external action with the given name */
   actionFor(fullActivity: string): Action | null {
-    console.log(process.cwd())
     const parts = fullActivity.split("/")
     if (parts.length === 1) {
       // not an external action here --> ignore
       return null
     }
+    if (parts.length > 2) {
+      throw new UnprintedUserError(`Too many slashes in action name "${fullActivity}`)
+    }
     const moduleName = "textrun-" + parts[0]
-    const actionName = parts[1]
+    const wantAction = getActionName(parts[1])
     let module
     try {
       module = require(moduleName)
@@ -29,13 +33,17 @@ export class ExternalActionManager {
     if (!actions) {
       throw new UnprintedUserError(`NPM package "${moduleName}" does not contain any Text-Runner actions`)
     }
-    const action = actions[actionName]
-    if (!action) {
-      throw new UnprintedUserError(
-        `NPM package "${moduleName}" does not contain action "${actionName}.
-        Found actions [${Object.keys(actions).join(", ")}]`
-      )
+    const names = []
+    for (const [rawName, action] of Object.entries(actions)) {
+      const name = getActionName(rawName)
+      if (name === wantAction) {
+        return action as Action
+      }
+      names.push(name)
     }
-    return action
+    throw new UnprintedUserError(
+      `NPM package "${moduleName}" does not contain action "${wantAction}.
+        Found actions: ${names.join(", ")}`
+    )
   }
 }

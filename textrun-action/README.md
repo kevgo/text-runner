@@ -1,4 +1,4 @@
-# Text-Runner Actions for Text-Runner Actions
+# Text-Runner Actions for shared Text-Runner Actions
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM modules exporting shared

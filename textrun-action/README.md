@@ -19,15 +19,16 @@ we would use it like this:
 
 ```html
 Use the <b textrun="action/name-full">cooking/recipe</b> action to verify
-recipes.
+cooking instructions.
 ```
 
 </a>
 
 ### action/name-short
 
-This action verifies documentation of the short name of an exported action. In
-our example, we would use it like this:
+This action is similar to [action/name-full](#action-name-full) except that the
+documented action name does not contain the package name. In our example, we
+would use it like this:
 
 <a textrun="run-in-textrunner">
 

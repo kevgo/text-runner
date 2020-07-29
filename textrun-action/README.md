@@ -11,8 +11,8 @@ you would document individual actions inside this NPM module.
 </a>
 
 The <b textrun="action/name-full">action/name-full</b> action verifies the
-documented name of an exported action. In our example, we would use it like
-this:
+documented full name of an exported action, which includes the NPM package name
+without its `textrun-` prefix. In our example, we would use it like this:
 
 <a textrun="run-in-textrunner">
 

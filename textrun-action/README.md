@@ -46,9 +46,9 @@ This action verifies a list of all exported actions. In our example:
 <a textrun="run-in-textrunner">
 
 ```md
-<a textrun="action/list-full">
-
 This module exports the following actions:
+
+<a textrun="action/list-full">
 
 - [cooking/recipe](.) link somewhere here
 - [cooking/utensil](.) link somewhere here

@@ -35,6 +35,7 @@ export async function runActivity(
   }
   try {
     const action = actionFinder.actionFor(activity)
+    console.log(action)
     let result: ActionResult
     if (action.length === 1) {
       result = await runSyncOrPromiseFunc(action, args)
@@ -64,6 +65,7 @@ export async function runActivity(
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {
+  console.log(func)
   const promisified = util.promisify<ActionArgs, ActionResult>(func)
   return promisified(args)
 }

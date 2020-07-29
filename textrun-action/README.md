@@ -1,14 +1,12 @@
 # Text-Runner Actions for shared Text-Runner Actions
 
-This package provides [Text-Runner](https://github.com/kevgo/text-runner)
-actions for verifying the documentation of NPM modules exporting shared
-Text-Runner actions:
-
 <a textrun="test-setup">
 
-Let's say you work on an NPM module called `textrun-cooking`. It provides the
-actions `recipe` and `utensil`. Here is how you would document individual
-actions inside this NPM module:
+This package provides [Text-Runner](https://github.com/kevgo/text-runner)
+actions for verifying the documentation of NPM modules exporting shared
+Text-Runner actions. Let's say you work on an NPM module called
+`textrun-cooking` that provides the actions `recipe` and `utensil`. Here is how
+you would document individual actions inside this NPM module:
 
 </a>
 

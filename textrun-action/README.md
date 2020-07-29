@@ -12,8 +12,9 @@ you would document individual actions inside this NPM module.
 
 ### action/name-full
 
-This action verifies the documented name of an exported action. In our example,
-we would use it like this:
+The <b textrun="action/name-full">action/name-full</b> action verifies the
+documented name of an exported action. In our example, we would use it like
+this:
 
 <a textrun="run-in-textrunner">
 

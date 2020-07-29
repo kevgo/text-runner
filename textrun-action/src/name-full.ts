@@ -1,7 +1,7 @@
 import { actionName, ActionArgs } from "text-runner"
 import path from "path"
 
-export function nameShort(args: ActionArgs) {
+export function nameFull(args: ActionArgs) {
   const want = args.nodes.text()
   const wantStd = actionName(want)
   const pkgJson = require(path.join(args.configuration.sourceDir, "package.json"))

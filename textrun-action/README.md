@@ -10,8 +10,6 @@ you would document individual actions inside this NPM module.
 
 </a>
 
-### action/name-full
-
 The <b textrun="action/name-full">action/name-full</b> action verifies the
 documented name of an exported action. In our example, we would use it like
 this:

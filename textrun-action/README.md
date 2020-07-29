@@ -36,15 +36,44 @@ our example, we would use it like this:
 This module exports the <b textrun="action/name-full">cooking/recipe</b> action.
 ```
 
-### action/name-full
+</a>
+
+### action/name-short
+
+This action verifies documentation of the short name of an exported action. In
+our example, we would use it like this:
+
+<a textrun="run-in-textrunner">
+
+```html
+This module exports the <b textrun="action/name-short">recipe</b> action.
+```
+
+</a>
+
+### action/list-full
+
+This action verifies that a list of all the exported actions contains all and
+only the exported actions. In our example:
+
+<a textrun="run-in-textrunner">
 
 ```md
-This module exports the <b textrun="action/name-short">recipe</b> action.
-
 <a textrun="action/list-full">
-  This module exports the following actions: - [cooking/recipe](.) -
-  [cooking/utensil](.)
+
+This module exports the following actions:
+
+- [cooking/recipe](.)
+- [cooking/utensil](.)
+
 </a>
+```
+
+</a>
+
+### action/list-short
+
+Similar to
 
 <a textrun="action/list-full">
   This module exports the following actions: - [recipe](.) - [utensil](.)

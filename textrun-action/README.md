@@ -58,7 +58,8 @@ This module exports the following actions:
 
 ### action/list-short
 
-Similar to [action/list-full](#actionlist-full) but with the short action names:
+Similar to [action/list-full](#action-list-full) but with the short action
+names:
 
 <a textrun="run-in-textrunner">
 

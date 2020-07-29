@@ -48,8 +48,8 @@ only the exported actions. In our example:
 
 This module exports the following actions:
 
-- [cooking/recipe](.)
-- [cooking/utensil](.)
+- [cooking/recipe](.) link somewhere here
+- [cooking/utensil](.) link somewhere here
 
 </a>
 ```
@@ -58,10 +58,18 @@ This module exports the following actions:
 
 ### action/list-short
 
-Similar to
+Similar to [action/list-full](#actionlist-full) but with the short action names:
 
-<a textrun="action/list-full">
-  This module exports the following actions: - [recipe](.) - [utensil](.)
+<a textrun="run-in-textrunner">
+
+```md
+<a textrun="action/list-short">
+
+This module exports the following actions:
+
+- [recipe](.) link somewhere here
+- [utensil](.) link somewhere here
+
 </a>
 ```
 

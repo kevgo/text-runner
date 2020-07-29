@@ -1,7 +1,7 @@
 import { FunctionRepo } from "./action-finder"
 import { Action } from "./types/action"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
-import { getActionName } from "./helpers/get-action-name"
+import { actionName } from "./helpers/action-name"
 
 /** manages external actions in separate NPM modules */
 export class ExternalActionManager {
@@ -22,7 +22,7 @@ export class ExternalActionManager {
       throw new UnprintedUserError(`Too many slashes in action name "${fullActivity}`)
     }
     const moduleName = "textrun-" + parts[0]
-    const wantAction = getActionName(parts[1])
+    const wantAction = actionName(parts[1])
     let module
     try {
       module = require(moduleName)
@@ -35,7 +35,7 @@ export class ExternalActionManager {
     }
     const names = []
     for (const [rawName, action] of Object.entries(actions)) {
-      const name = getActionName(rawName)
+      const name = actionName(rawName)
       if (name === wantAction) {
         return action as Action
       }

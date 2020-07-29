@@ -5,7 +5,7 @@ import path from "path"
 import rechoir from "rechoir"
 import { Activity } from "../activity-list/types/activity"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
-import { getActionName } from "./helpers/get-action-name"
+import { actionName } from "./helpers/action-name"
 import { javascriptExtensions } from "./helpers/javascript-extensions"
 import { trimExtension } from "./helpers/trim-extension"
 import { Action } from "./types/action"
@@ -64,7 +64,7 @@ export class ActionFinder {
   private loadBuiltinActions(): FunctionRepo {
     const result: FunctionRepo = {}
     for (const filename of this.builtinActionFilePaths()) {
-      result[getActionName(filename)] = require(filename).default as Action
+      result[actionName(filename)] = require(filename).default as Action
     }
     return result
   }
@@ -86,12 +86,12 @@ export function loadCustomActions(dir: string): FunctionRepo {
   const result: FunctionRepo = {}
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
-    const actionName = getActionName(filename)
+    const standardName = actionName(filename)
     const action = require(filename)
     if (action.default) {
-      result[actionName] = action.default
+      result[standardName] = action.default
     } else {
-      result[actionName] = action
+      result[standardName] = action
     }
   }
   return result

@@ -2,7 +2,7 @@
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM modules exporting shared
-Text-Runner actions.
+Text-Runner actions:
 
 <a textrun="action/list-full">
 
@@ -24,6 +24,8 @@ actions `recipe` and `utensil`. Here is how you would document individual
 actions inside this NPM module:
 
 </a>
+
+### action/name-full
 
 <a textrun="run-in-textrunner">
 

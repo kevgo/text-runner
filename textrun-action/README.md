@@ -33,7 +33,8 @@ would use it like this:
 <a textrun="run-in-textrunner">
 
 ```html
-This module exports the <b textrun="action/name-short">recipe</b> action.
+Use the <b textrun="action/name-short">recipe</b> action to verify cooking
+instructions.
 ```
 
 </a>

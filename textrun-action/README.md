@@ -18,7 +18,7 @@ we would use it like this:
 <a textrun="run-in-textrunner">
 
 ```html
-You can use the <b textrun="action/name-full">cooking/recipe</b> action to check
+Use the <b textrun="action/name-full">cooking/recipe</b> action to verify
 recipes.
 ```
 

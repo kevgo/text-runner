@@ -4,19 +4,6 @@ This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM modules exporting shared
 Text-Runner actions:
 
-<a textrun="action/list-full">
-
-- [actions/name-short](#short): verifies that the contained action name is
-  exported by this module
-- [actions/name-full](#full): verifies that this plugin provides the given
-  action
-- [actions/list-short](#list-short): verifies that a list of actions contains
-  all exported actions
-- [actions/list-full](#list-short): verifies that a list of actions contains all
-  exported actions
-
-</a>
-
 <a textrun="test-setup">
 
 Let's say you work on an NPM module called `textrun-cooking`. It provides the

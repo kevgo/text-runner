@@ -41,8 +41,7 @@ instructions.
 
 ### action/list-full
 
-This action verifies that a list of all the exported actions contains all and
-only the exported actions. In our example:
+This action verifies a list of all exported actions. In our example:
 
 <a textrun="run-in-textrunner">
 

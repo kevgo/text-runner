@@ -6,19 +6,20 @@ This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM modules exporting shared
 Text-Runner actions. Let's say you work on an NPM module called
 `textrun-cooking` that provides the actions `recipe` and `utensil`. Here is how
-you would document individual actions inside this NPM module:
+you would document individual actions inside this NPM module.
 
 </a>
 
 ### action/name-full
 
-This action verifies documentation of the full name of an exported action. In
-our example, we would use it like this:
+This action verifies the documented name of an exported action. In our example,
+we would use it like this:
 
 <a textrun="run-in-textrunner">
 
 ```html
-This module exports the <b textrun="action/name-full">cooking/recipe</b> action.
+You can use the <b textrun="action/name-full">cooking/recipe</b> action to check
+recipes.
 ```
 
 </a>

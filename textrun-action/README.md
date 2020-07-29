@@ -27,29 +27,27 @@ actions inside this NPM module:
 
 ### action/name-full
 
+This action verifies documentation of the full name of an exported action. In
+our example, we would use it like this:
+
 <a textrun="run-in-textrunner">
 
-```md
+```html
 This module exports the <b textrun="action/name-full">cooking/recipe</b> action.
+```
 
+### action/name-full
+
+```md
 This module exports the <b textrun="action/name-short">recipe</b> action.
 
 <a textrun="action/list-full">
-
-This module exports the following actions:
-
-- [cooking/recipe](.)
-- [cooking/utensil](.)
-
+  This module exports the following actions: - [cooking/recipe](.) -
+  [cooking/utensil](.)
 </a>
 
 <a textrun="action/list-full">
-
-This module exports the following actions:
-
-- [recipe](.)
-- [utensil](.)
-
+  This module exports the following actions: - [recipe](.) - [utensil](.)
 </a>
 ```
 

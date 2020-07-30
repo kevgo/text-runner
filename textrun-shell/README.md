@@ -24,14 +24,13 @@ The <b textrun="action/name-full">shell/exec</b> action runs a shell command and
 waits until it finishes. As an example, here is a little hypothetical Bash
 tutorial:
 
-> In Bash, the "echo" command prints text on the command line. For example, if
-> we run
+> The "echo" command prints text on the command line. For example, let's run:
 >
 > ```
 > $ echo Hello world!
 > ```
 >
-> It will welcome us with a nice greeting:
+> It welcomes us with a nice greeting:
 >
 > ```
 > Hello world!
@@ -43,14 +42,13 @@ looks like this:
 <a textrun="run-in-textrunner">
 
 ```md
-In Bash, the "echo" command prints text on the command line. For example, if we
-run
+The "echo" command prints text on the command line. For example, let's run:
 
 <pre textrun="shell/exec">
 $ echo Hello world!
 </pre>
 
-It will welcome us with a nice greeting:
+It welcomes us with a nice greeting:
 
 <pre textrun="shell/exec-output">
 Hello world!

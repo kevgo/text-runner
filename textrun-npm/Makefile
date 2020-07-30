@@ -10,5 +10,7 @@ docs:  # runs the documentation tests
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
+test: unit docs  # runs all tests
+
 unit:  # runs the unit tests
 	@${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"

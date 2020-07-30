@@ -41,7 +41,7 @@ want to document how to install this package. It would contain a section that
 looks something like this:
 
 ```md
-You can install the foobar package like this:
+Install the foobar package by running:
 
 <pre textrun="npm/install">
 $ npm install foobar

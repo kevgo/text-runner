@@ -7,6 +7,6 @@ export default async function binaryName(action: ActionArgs) {
   const name = action.nodes.text()
   const filePath = path.join(action.configuration.workspace, name)
   const dirPath = path.dirname(filePath)
-  fs.mkdir(dirPath)
+  await fs.mkdir(dirPath)
   await fs.writeFile(filePath, "")
 }

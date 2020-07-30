@@ -10,10 +10,8 @@ export default async function testSetup(action: ActionArgs) {
   const pkgName = action.nodes.getNodesFor(codeBlocks[0]).text()
   const action1 = action.nodes.getNodesFor(codeBlocks[1]).text()
   const action2 = action.nodes.getNodesFor(codeBlocks[2]).text()
-  const dir = path.join(process.cwd(), action.nodes[0].attributes.dir)
-  fs.mkdir(dir, { recursive: true })
   await fs.writeFile(
-    path.join(dir, "package.json"),
+    path.join(action.configuration.workspace, "package.json"),
     `\
 {
   "name": "${pkgName}",
@@ -22,7 +20,7 @@ export default async function testSetup(action: ActionArgs) {
 }`
   )
   await fs.writeFile(
-    path.join(dir, "index.js"),
+    path.join(action.configuration.workspace, "index.js"),
     `\
 module.exports = {
   textrunActions: {

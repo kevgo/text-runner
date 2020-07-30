@@ -1,30 +1,21 @@
 import { ActionArgs } from "../types/action-args"
 import { promises as fs } from "fs"
-import tmp from "tmp"
-import util from "util"
 import path from "path"
 import { callArgs } from "../helpers/call-args"
 import { createObservableProcess } from "observable-process"
 import stripAnsi from "strip-ansi"
-const tmpDir = util.promisify(tmp.dir)
 
 /** runs the given Markdown in Text-Runner */
 export default async function runInTextRunner(action: ActionArgs) {
   const content = action.nodes.text()
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
-  let dir = action.nodes[0].attributes.dir
-  if (dir) {
-    dir = path.join(process.cwd(), dir)
-  } else {
-    dir = await tmpDir()
-  }
-  await fs.writeFile(path.join(dir, "1.md"), content)
+  await fs.writeFile(path.join(action.configuration.workspace, "1.md"), content)
   // TODO: call existing Text-Runner API here
   var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath)
-  trArgs[trArgs.length - 1] += ` --keep-tmp --workspace ${dir}`
-  const processor = createObservableProcess(trArgs, { cwd: dir })
+  trArgs[trArgs.length - 1] += " --keep-tmp"
+  const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   await processor.waitForEnd()
   if (processor.exitCode !== 0) {
     throw new Error(

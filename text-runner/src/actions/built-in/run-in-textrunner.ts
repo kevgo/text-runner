@@ -17,6 +17,7 @@ export default async function runInTextRunner(action: ActionArgs) {
   trArgs[trArgs.length - 1] += " --keep-tmp"
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   await processor.waitForEnd()
+  action.log(processor.output.fullText())
   if (processor.exitCode !== 0) {
     throw new Error(
       `text-run exited with code ${processor.exitCode} when processing this markdown block:\n${stripAnsi(

@@ -58,13 +58,13 @@ Hello world!
 </a>
 
 Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
-The <b textrun="action/short-name">exec-output</b> action documents output of
-the last shell command run.
+The <b textrun="action/name-full">shell/exec-output</b> action documents output
+of the last shell command run.
 
 ### User input
 
 You can run a shell command and enter text into it with the
-<b textrun="action/full-name">shell/exec-with-input</b> action.
+<b textrun="action/name-full">shell/exec-with-input</b> action.
 
 <a textrun="workspace/create-file">
 

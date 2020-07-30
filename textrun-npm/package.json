@@ -8,6 +8,7 @@
   },
   "devDependencies": {
     "text-runner": "4.0.3",
+    "textrun-action": "0.0.0",
     "typescript": "3.9.7"
   }
 }

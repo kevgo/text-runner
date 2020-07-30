@@ -1,7 +1,7 @@
-# Text-Runner Actions for NPM
+# Text-Runner Actions for npm
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
-actions for verifying the documentation of NPM packages.
+actions for verifying the documentation of npm packages.
 
 ### Installation
 
@@ -20,14 +20,12 @@ $ yarn i -D textrun-npm
 ### Verify installation instructions
 
 The <b textrun="action/name-full">npm/install</b> action verifies that the
-documentation of an NPM package correctly describes that this package should be
+documentation of an npm package correctly describes that this package should be
 installed as a development dependency.
 
-<a textrun="create-file">
-
-As an example, let's assume we are testing the documentation of an NPM package
-called "foobar", i.e. its **package.json** file contains amongst other things
-this entry:
+As an example, let's assume we are testing the documentation of an npm package
+called `foobar`, <a textrun="create-file">i.e. its **package.json** file
+contains amongst other things:
 
 ```json
 {
@@ -39,7 +37,7 @@ this entry:
 
 <a textrun="create-file">
 
-In the documentation of this NPM package, for example its **README.md** file, we
+In the documentation of this npm package, for example its **README.md** file, we
 want to document how to install this package. It could look like this:
 
 ```md
@@ -53,10 +51,19 @@ or with Yarn:
 
 <pre textrun="npm/install">
 $ yarn add foobar
-<pre>
+</pre>
 ```
 
 </a>
 
+<a textrun="run-textrunner">
+
 Text-Runner verifies that the installation instructions contain the correct name
-of the NPM package.
+of the npm package.
+
+</a>
+
+### Verify exported binaries
+
+The <b textrun="action/name-full">npm/bin</b> action verifies documentation of
+exported binaries of npm packages.

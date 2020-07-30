@@ -12,7 +12,12 @@ const tmpDir = util.promisify(tmp.dir)
 export default async function runInTextRunner(action: ActionArgs) {
   const content = action.nodes.text()
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
-  const dir = await tmpDir()
+  let dir = action.nodes[0].attributes.dir
+  if (dir) {
+    dir = path.join(process.cwd(), dir)
+  } else {
+    dir = await tmpDir()
+  }
   await fs.writeFile(path.join(dir, "1.md"), content)
   // TODO: call existing Text-Runner API here
   var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")

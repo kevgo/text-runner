@@ -1,6 +1,6 @@
 # Text-Runner Actions for shared Text-Runner Actions
 
-<a textrun="test-setup">
+<a textrun="test-setup" dir="./action-workspace">
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM modules exporting shared
@@ -14,11 +14,10 @@ The <b textrun="action/name-full">action/name-full</b> action verifies the
 documented full name of an exported action, which includes the NPM package name
 without its `textrun-` prefix. In our example, we would use it like this:
 
-<a textrun="run-in-textrunner">
+<a textrun="run-in-textrunner" dir="./action-workspace">
 
 ```html
-Use the <b textrun="action/name-full">cooking/recipe</b> action to verify
-cooking instructions.
+The <b textrun="action/name-full">cooking/recipe</b> action verifies recipes.
 ```
 
 </a>
@@ -32,8 +31,7 @@ would use it like this:
 <a textrun="run-in-textrunner">
 
 ```html
-Use the <b textrun="action/name-short">recipe</b> action to verify cooking
-instructions.
+The <b textrun="action/name-short">recipe</b> action verifies recipes.
 ```
 
 </a>

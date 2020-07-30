@@ -35,7 +35,6 @@ export async function runActivity(
   }
   try {
     const action = actionFinder.actionFor(activity)
-    console.log(action)
     let result: ActionResult
     if (action.length === 1) {
       result = await runSyncOrPromiseFunc(action, args)

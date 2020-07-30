@@ -130,7 +130,7 @@ descriptions and are also ignored.
 Long-running processes, for example web or database servers, keep running while
 Text-Runner continues executing other actions.
 
-<a textrun="file/create">
+<a textrun="create-file">
 
 As an example, let's say we have a server called **server.js**:
 
@@ -142,10 +142,10 @@ setTimeout(() => {}, 100_000)
 </a>
 
 Start this long-running server to run in parallel with Text-Runner with the
-<b textrun="action/full-name">shell/start</b> action. Wait for output using the
-<b textrun="action/full-name">shell/server-output</b> action. Stop the server
-with the <b textrun="action/full-name">shell/server-stop</b> action. Here is an
-example that shows them in action:
+<b textrun="action/name-full">shell/start</b> action. Wait for output using the
+<b textrun="action/name-full">shell/start-output</b> action. Stop the server
+with the <b textrun="action/name-full">shell/stop</b> action. Here is an example
+that shows them in action:
 
 <a textrun="run-in-textrunner">
 
@@ -156,7 +156,7 @@ $ node server.js
 
 Wait until it is fully booted up:
 
-<pre textrun="shell/server-output">
+<pre textrun="shell/start-output">
 server is running
 </pre>
 
@@ -165,5 +165,5 @@ and click buttons. If it is an API server, make API calls to it. When you are
 done, you can stop the server using the <b textrun="action/name">shell/stop</b>
 action:
 
-<a textrun="shell/server-stop"></a>
+<a textrun="shell/stop"></a>
 ```

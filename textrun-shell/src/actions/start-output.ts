@@ -5,7 +5,7 @@ import { ActionArgs } from "text-runner"
  * The "verifyProcessOutput" action waits until the currently running console command
  * produces the given output.
  */
-export async function serverOutput(args: ActionArgs) {
+export async function startOutput(args: ActionArgs) {
   args.name("verifying the output of the long-running process")
   const expectedOutput = args.nodes.textInNodeOfType("fence")
   const expectedLines = expectedOutput
@@ -17,7 +17,8 @@ export async function serverOutput(args: ActionArgs) {
     throw new Error("Cannot verify process output since no process has been started")
   }
   for (const line of expectedLines) {
-    args.log(`waiting for ${line}`)
+    args.log(`waiting for output: ${line}`)
     await process.output.waitForText(line)
   }
+  args.log(process.output.fullText())
 }

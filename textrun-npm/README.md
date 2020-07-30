@@ -43,8 +43,6 @@ In the documentation of this NPM package, for example its **README.md** file, we
 want to document how to install this package. It could look like this:
 
 ```md
-## Installation
-
 You can install this package like this:
 
 <pre textrun="npm/install">

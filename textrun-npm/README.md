@@ -60,5 +60,5 @@ $ yarn add foobar
 
 </a>
 
-Text-Runner verifies that the installation instructions are accurate, i.e.
-contain the correct name of the NPM package and the right command to install it.
+Text-Runner verifies that the installation instructions contain the correct name
+of the NPM package.

@@ -2,7 +2,6 @@ import { ActionArgs } from "../types/action-args"
 import path from "path"
 import { callArgs } from "../helpers/call-args"
 import { createObservableProcess } from "observable-process"
-import stripAnsi from "strip-ansi"
 
 /** runs Text-Runner in the workspace */
 export default async function runTextRunner(action: ActionArgs) {
@@ -14,12 +13,9 @@ export default async function runTextRunner(action: ActionArgs) {
   trArgs[trArgs.length - 1] += " --keep-tmp"
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   await processor.waitForEnd()
+  action.log(processor.output.fullText())
   if (processor.exitCode !== 0) {
-    throw new Error(
-      `text-run exited with code ${processor.exitCode} when processing this markdown block:\n${stripAnsi(
-        processor.output.fullText()
-      )}`
-    )
+    throw new Error(`text-run exited with code ${processor.exitCode} when processing this markdown block`)
   }
   // fs.rmdir(dir, { recursive: true })
 }

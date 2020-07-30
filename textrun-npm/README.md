@@ -82,9 +82,13 @@ is listed as a binary in its <a textrun="create-file">**package.json** file:
 
 <a textrun="append-file">
 
-Our **README.md** file would document this binary like so:
+The **README.md** file for the `foobar` package would document this binary
+something like this:
 
 ```md
 After you install the "foobar" package, you can run the
 <code textrun="npm/bin">foo</code> command in the terminal.
 ```
+
+<a textrun="run-textrunner">
+</a>

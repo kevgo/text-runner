@@ -14,7 +14,7 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export async function exec(args: ActionArgs) {
+export async function execWithInput(args: ActionArgs) {
   const content = args.nodes.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
@@ -23,7 +23,9 @@ export async function exec(args: ActionArgs) {
     .map(trimDollar)
     .join(" && ")
   if (commandsToRun === "") {
-    throw new Error("the block that defines console commands to run is empty")
+    throw new Error(
+      `the <${args.nodes[0].tag} ${args.configuration.classPrefix}="exec-with-input"> block contains no commands to run`
+    )
   }
   args.name(`running console command: ${color.cyan(commandsToRun)}`)
 

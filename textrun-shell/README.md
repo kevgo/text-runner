@@ -8,33 +8,15 @@ workspace directory.
 
 To use these actions, add this package as a development dependency by running
 
-<a textrun="npm/dev-install">
-
-```
+<pre textrun="npm/install">
 $ npm i -D textrun-shell
-```
+</pre>
 
 or
 
-```
+<pre textrun="npm/install">
 $ yarn i -D textrun-shell
-```
-
-</a>
-
-Your `package.json` file should end up containing (amongst other things) these
-entries:
-
-<a textrun="npm/package-json-part">
-
-```json
-  "devDependencies": {
-    "text-runner": "4.0.3",
-    "textrun-shell": "0.0.0"
-  }
-```
-
-</a>
+</pre>
 
 ### Run shell commands
 

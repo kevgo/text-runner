@@ -17,7 +17,7 @@ or
 $ yarn i -D textrun-npm
 </pre>
 
-### Verify installation instructions
+## Verify installation instructions
 
 The <b textrun="action/name-full">npm/install</b> action verifies that the
 documentation of an npm package correctly describes that this package should be
@@ -62,7 +62,7 @@ of the npm package.
 
 </a>
 
-### Verify exported binaries
+## Verify exported binaries
 
 The <b textrun="action/name-full">npm/bin</b> action verifies documentation of
 exported binaries of npm packages. Let's say the source code of our `foobar`
@@ -82,7 +82,7 @@ is listed as a binary in its <a textrun="create-file">**package.json** file:
 
 <a textrun="append-file">
 
-The **README.md** file for the `foobar` package would document this binary
+The **README.md** file for the "foobar" package would document this binary
 something like this:
 
 ```md

@@ -7,11 +7,9 @@ export default async function testSetup(action: ActionArgs) {
   if (codeBlocks.length !== 3) {
     throw new Error(`Expected 3 code blocks, got ${codeBlocks.length}`)
   }
-  console.log(codeBlocks)
   const pkgName = action.nodes.getNodesFor(codeBlocks[0]).text()
   const action1 = action.nodes.getNodesFor(codeBlocks[1]).text()
   const action2 = action.nodes.getNodesFor(codeBlocks[2]).text()
-  console.log("ACTION1", action1)
   const dir = path.join(process.cwd(), action.nodes[0].attributes.dir)
   fs.mkdir(dir, { recursive: true })
   await fs.writeFile(

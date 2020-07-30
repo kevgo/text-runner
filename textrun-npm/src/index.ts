@@ -1,5 +1,5 @@
-import { devInstall } from "./actions/dev_install"
+import { install } from "./actions/install"
 
 export const textrunActions = {
-  devInstall,
+  install,
 }

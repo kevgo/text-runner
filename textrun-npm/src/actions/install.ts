@@ -4,10 +4,10 @@ import path from "path"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "text-runner"
 
-export async function devInstall(args: ActionArgs) {
+export async function install(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
   const pkg = await fs.readJSON(path.join(args.configuration.sourceDir, "package.json"))
-  args.name(`verify NPM installs ${color.cyan(pkg.name)}`)
+  args.name(`verify NPM package name ${color.cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(`could not find ${color.cyan(pkg.name)} in installation instructions`)

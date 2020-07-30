@@ -3,29 +3,23 @@
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM packages.
 
-<a textrun="action/complete-list">
-
-- [dev-install](#verify-installation-instructions)
-
-</a>
-
 ### Installation
 
 To use these actions, add this package as a development dependency by running
 
-<pre textrun="npm/dev-install">
+<pre textrun="npm/install">
 $ npm i -D textrun-npm
 </pre>
 
 or
 
-<pre textrun="npm/dev-install">
+<pre textrun="npm/install">
 $ yarn i -D textrun-npm
 </pre>
 
 ### Verify installation instructions
 
-The <b textrun="action/full-name">npm/dev-install</b> action verifies that the
+The <b textrun="action/name-full">npm/install</b> action verifies that the
 documentation of an NPM package correctly describes that this package should be
 installed as a development dependency.
 

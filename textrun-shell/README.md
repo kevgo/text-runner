@@ -21,7 +21,17 @@ $ yarn i -D textrun-shell
 ### Run shell commands
 
 The <b textrun="action/name-full">shell/exec</b> action runs a shell command and
-waits until it finishes. Here is an example use case:
+waits until it finishes. As an example, here is a little hypothetical Bash
+tutorial:
+
+> In Bash, the _echo_ command prints text on the command line. For example, if
+> we run
+>
+> ```
+> $ echo Hello world!
+> ```
+>
+> It will output:
 
 <a textrun="create-file">
 

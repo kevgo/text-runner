@@ -37,7 +37,8 @@ things:
 <a textrun="create-file">
 
 In the documentation of this npm package, for example its **README.md** file, we
-want to document how to install this package. It could look like this:
+want to document how to install this package. It would contain a section that
+looks something like this:
 
 ```md
 You can install this package like this:

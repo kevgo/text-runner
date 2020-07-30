@@ -37,11 +37,23 @@ tutorial:
 > Hello world!
 > ```
 
-<a textrun="create-file">
+The source code of this Bash tutorial when executed and verified by Text-Runner
+looks like this:
 
-```html
+<a textrun="run-in-textrunner">
+
+```md
+In Bash, the _echo_ command prints text on the command line. For example, if we
+run
+
 <pre textrun="shell/exec">
 $ echo Hello world!
+</pre>
+
+It will welcome us with a nice greeting:
+
+<pre textrun="shell/exec-output">
+Hello world!
 </pre>
 ```
 

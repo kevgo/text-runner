@@ -20,10 +20,10 @@ $ yarn i -D textrun-shell
 
 ### Run shell commands
 
-The <b textrun="action/full-name">shell/exec</b> action runs a shell command and
-waits until it finishes:
+The <b textrun="action/name-full">shell/exec</b> action runs a shell command and
+waits until it finishes. Here is an example use case:
 
-<a textrun="run-in-textrun">
+<a textrun="create-file">
 
 ```html
 <pre textrun="shell/exec">
@@ -33,8 +33,8 @@ $ echo Hello world!
 
 </a>
 
-Dollar signs at the beginning of lines indicating a shell prompt are ignored.
-You can document the expected output of the last shell command run using the
+Dollar signs at the beginning of lines indicate a shell prompt are ignored. You
+can document the output of the last executed shell command using the
 <b textrun="action/short-name">exec-output</b> action. For example, the command
 above should print:
 

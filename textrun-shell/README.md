@@ -58,19 +58,8 @@ Hello world!
 </a>
 
 Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
-You can document the output of the last executed shell command using the
-<b textrun="action/short-name">exec-output</b> action. For example, the command
-above should print:
-
-<a textrun="run-in-textrun">
-
-```html
-<pre textrun="shell/exec-output">
-Hello world!
-</pre>
-```
-
-</a>
+The <b textrun="action/short-name">exec-output</b> action documents output of
+the last shell command run.
 
 ### User input
 

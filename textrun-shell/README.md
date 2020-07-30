@@ -31,7 +31,11 @@ tutorial:
 > $ echo Hello world!
 > ```
 >
-> It will output:
+> It will output this text:
+>
+> ```
+> Hello world!
+> ```
 
 <a textrun="create-file">
 

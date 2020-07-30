@@ -65,4 +65,26 @@ of the npm package.
 ### Verify exported binaries
 
 The <b textrun="action/name-full">npm/bin</b> action verifies documentation of
-exported binaries of npm packages.
+exported binaries of npm packages. Let's say the source code of our `foobar`
+package contains an executable file <b textrun="binary-name">bin/foo</b>, which
+is listed as a binary in its <a textrun="create-file">**package.json** file:
+
+```js
+{
+  "name": "foobar",
+  "bin": {
+    "foo": "bin/foo"
+  }
+}
+```
+
+</a>
+
+<a textrun="append-file">
+
+Our **README.md** file would document this binary like so:
+
+```md
+After you install the "foobar" package, you can run the
+<code textrun="npm/bin">foo</code> command in the terminal.
+```

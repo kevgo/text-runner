@@ -25,8 +25,10 @@ export default async function testSetup(action: ActionArgs) {
     path.join(dir, "index.js"),
     `\
 module.exports = {
-  "${action1}": function() { console.log(1) },
-  "${action2}": function() {}
+  textrunActions: {
+    "${action1}": function() { console.log(1) },
+    "${action2}": function() {}
+  }
 }`
   )
 }

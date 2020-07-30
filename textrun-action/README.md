@@ -25,8 +25,9 @@ The <b textrun="action/name-full">cooking/recipe</b> action verifies recipes.
 ### action/name-short
 
 The <b textrun="action/name-full">action/name-short</b> action is similar to
-[action/name-full](#action-name-full) except that the documented action name
-does not contain the package name. In our example, we would use it like this:
+<i textrun="action/name-full">action/name-full</i> except that the documented
+action name does not contain the package name. In our example, we would use it
+like this:
 
 <a textrun="run-in-textrunner" dir="./action-workspace">
 

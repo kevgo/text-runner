@@ -66,7 +66,7 @@ of the last shell command run.
 You can run a shell command and enter text into it with the
 <b textrun="action/name-full">shell/exec-with-input</b> action.
 
-<a textrun="workspace/create-file">
+<a textrun="create-file">
 
 As an example, let's say we have a command-line tool written in JavaScript
 called **greeter.js**:
@@ -79,17 +79,18 @@ var rl = readline.createInterface({
   terminal: false,
 })
 
-rl.question("your name", (name) => {
-  rl.question("which day is today", (day) => {
+rl.question("your name\n", (name) => {
+  rl.question("which day is today\n", (day) => {
     console.log(`Hello ${name}, happy ${day}!`)
     rl.close()
+    process.exit()
   })
 })
 ```
 
 </a>
 
-<a textrun="workspace/exec-with-input">
+<a textrun="shell/exec-with-input">
 
 Run this tool on the command line
 

@@ -25,7 +25,7 @@
     "is-glob": "4.0.1",
     "markdown-it": "11.0.0",
     "minimist": "1.2.5",
-    "observable-process": "7.0.2",
+    "observable-process": "7.0.3",
     "parse5": "6.0.0",
     "rechoir": "0.7.0",
     "rimraf": "3.0.2",

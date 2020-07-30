@@ -28,7 +28,6 @@ export async function execWithInput(args: ActionArgs) {
     )
   }
   args.name(`running console command: ${color.cyan(commandsToRun)}`)
-
   let input: ProcessInput[] = []
   if (args.nodes.hasNodeOfType("table")) {
     input = getInput(args.nodes)
@@ -38,7 +37,6 @@ export async function execWithInput(args: ActionArgs) {
     cwd: args.configuration.workspace,
   })
   CurrentCommand.set(processor)
-
   for (const inputLine of input) {
     enter(processor, inputLine)
   }

@@ -31,7 +31,7 @@ tutorial:
 > $ echo Hello world!
 > ```
 >
-> It will output this text:
+> It will welcome us with a nice greeting:
 >
 > ```
 > Hello world!

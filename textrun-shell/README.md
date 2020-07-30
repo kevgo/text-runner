@@ -24,7 +24,7 @@ The <b textrun="action/name-full">shell/exec</b> action runs a shell command and
 waits until it finishes. As an example, here is a little hypothetical Bash
 tutorial:
 
-> In Bash, the _echo_ command prints text on the command line. For example, if
+> In Bash, the "echo" command prints text on the command line. For example, if
 > we run
 >
 > ```
@@ -43,7 +43,7 @@ looks like this:
 <a textrun="run-in-textrunner">
 
 ```md
-In Bash, the _echo_ command prints text on the command line. For example, if we
+In Bash, the "echo" command prints text on the command line. For example, if we
 run
 
 <pre textrun="shell/exec">
@@ -59,8 +59,8 @@ Hello world!
 
 </a>
 
-Dollar signs at the beginning of lines indicate a shell prompt are ignored. You
-can document the output of the last executed shell command using the
+Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
+You can document the output of the last executed shell command using the
 <b textrun="action/short-name">exec-output</b> action. For example, the command
 above should print:
 

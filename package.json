@@ -12,6 +12,7 @@
     "documentation/examples/global-tool",
     "documentation/examples/multiple-returns",
     "textrun-action",
+    "textrun-javascript",
     "textrun-npm",
     "textrun-shell",
     "tools"

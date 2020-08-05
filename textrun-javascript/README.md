@@ -33,7 +33,39 @@ console.log("Hello world!")
 
 </a>
 
-TODO: document callbacks
+TextRunner waits for the code block to finish. To make it wait until
+asynchronous code is done, add the placeholder <CALLBACK> where your code would
+call the callback when its done. Only one placeholder is allowed. Example:
+
+<a textrun="run-javascript">
+
+```
+const fs = require('fs')
+fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
+```
+
+</a>
+
+Alternatively you can use `// ...` as the placeholder:
+
+<a textrun="run-javascript">
+
+```
+const fs = require('fs')
+fs.writeFile('hello.txt', 'hello world', function(err) {
+  // ...
+})
+```
+
+</a>
+
+Each block of Javascript code runs in its own environment. To share local
+variables between different blocks of Javascript, this step performs the the
+following replacements:
+
+/\bthis\./ --> global. /\bconst / --> global. /\bvar / --> global. So const foo
+= 123 gets turned into global.foo = 123, thereby making foo accessible in all
+code blocks.
 
 ### Validate JavaScript
 

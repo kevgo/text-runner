@@ -37,7 +37,7 @@ TextRunner waits for the code block to finish. To make it wait until
 asynchronous code is done, add the placeholder <CALLBACK> where your code would
 call the callback when its done. Only one placeholder is allowed. Example:
 
-<a textrun="run-javascript">
+<a textrun="javascript/run">
 
 ```js
 const fs = require('fs')
@@ -48,7 +48,7 @@ fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 
 Alternatively you can use `// ...` as the placeholder:
 
-<a textrun="run-javascript">
+<a textrun="javascript/run">
 
 ```js
 const fs = require("fs")

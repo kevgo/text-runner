@@ -64,7 +64,6 @@ export async function runActivity(
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {
-  console.log(func)
   const promisified = util.promisify<ActionArgs, ActionResult>(func)
   return promisified(args)
 }

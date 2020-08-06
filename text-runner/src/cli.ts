@@ -17,7 +17,6 @@ async function main() {
     } else if (err instanceof PrintedUserError) {
       // nothing to do
     } else {
-      console.log(1111111111)
       console.log(err.stack)
     }
   }

@@ -63,9 +63,9 @@ Each block of Javascript code runs in its own environment. To share local
 variables between different blocks of Javascript, this step performs the the
 following replacements:
 
-- `const&blank;` --> `global.`
-- `var` --> `global.`
-- `let` --> `global.`
+- `const⎵` --> `global.`
+- `var⎵` --> `global.`
+- `let⎵` --> `global.`
 - `this.` --> `global.`
 
 As an example, `const foo = 123` gets turned into `global.foo = 123`, thereby

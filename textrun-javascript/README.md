@@ -39,7 +39,7 @@ call the callback when its done. Only one placeholder is allowed. Example:
 
 <a textrun="run-javascript">
 
-```
+```js
 const fs = require('fs')
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 ```
@@ -50,9 +50,9 @@ Alternatively you can use `// ...` as the placeholder:
 
 <a textrun="run-javascript">
 
-```
-const fs = require('fs')
-fs.writeFile('hello.txt', 'hello world', function(err) {
+```js
+const fs = require("fs")
+fs.writeFile("hello.txt", "hello world", function (err) {
   // ...
 })
 ```

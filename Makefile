@@ -71,7 +71,7 @@ cuke-smoke-win:  # runs the smoke tests
 
 docs: build  # runs the documentation tests
 	@echo running document tests ...
-	@${CURDIR}/text-runner/bin/text-run static --offline --format dot
+	@${CURDIR}/text-runner/bin/text-run static --offline --format dot *.md
 	@echo
 	@${CURDIR}/text-runner/bin/text-run dynamic --format progress
 

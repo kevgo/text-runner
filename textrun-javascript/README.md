@@ -63,9 +63,13 @@ Each block of Javascript code runs in its own environment. To share local
 variables between different blocks of Javascript, this step performs the the
 following replacements:
 
-/\bthis\./ --> global. /\bconst / --> global. /\bvar / --> global. So const foo
-= 123 gets turned into global.foo = 123, thereby making foo accessible in all
-code blocks.
+- `const&blank;` --> `global.`
+- `var` --> `global.`
+- `let` --> `global.`
+- `this.` --> `global.`
+
+As an example, `const foo = 123` gets turned into `global.foo = 123`, thereby
+making foo accessible in all code blocks.
 
 ### Validate JavaScript
 

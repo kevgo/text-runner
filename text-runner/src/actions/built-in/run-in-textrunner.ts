@@ -14,7 +14,7 @@ export default async function runInTextRunner(action: ActionArgs) {
   var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath)
-  trArgs[trArgs.length - 1] += " --keep-tmp"
+  trArgs[trArgs.length - 1] += " --keep-tmp --workspace=."
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   await processor.waitForEnd()
   action.log(processor.output.fullText())

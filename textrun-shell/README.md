@@ -163,6 +163,8 @@ that shows them in action:
 <a textrun="run-in-textrunner">
 
 ```html
+Start the server:
+
 <pre textrun="shell/start">
 $ node server.js
 </pre>
@@ -173,10 +175,8 @@ Wait until it is fully booted up:
 server is running
 </pre>
 
-Now you can interact with the server. If it is a web server, open up a browser
-and click buttons. If it is an API server, make API calls to it. When you are
-done, you can stop the server using the <b textrun="action/name">shell/stop</b>
-action:
-
-<a textrun="shell/stop"></a>
+Now you can interact with the server. When you are done, stop the server:
+<a textrun="shell/stop">shell/stop</a>
 ```
+
+</a>

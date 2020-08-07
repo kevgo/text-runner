@@ -1,22 +1,25 @@
 # Text-Runner Shell Actions
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
-actions for running console commands. These commands run in Text-Runner's
-workspace directory.
+actions for documenting console commands to be executed by the reader.
 
-### Installation
+### Setup
 
-To use these actions, add this package as a development dependency by running
+To add this package as a Text-Runner plugin, run <code textrun="npm/install">npm
+i -D textrun-shell</code> or <code textrun="npm/install">yarn i -D
+textrun-shell</code>.
 
-<pre textrun="npm/install">
-$ npm i -D textrun-shell
-</pre>
+To help this library find and execute binaries, you can define their absolute
+path by creating a configuration file **textrun-shell.js** in the root directory
+of your documentation base. Here is an example:
 
-or
-
-<pre textrun="npm/install">
-$ yarn i -D textrun-shell
-</pre>
+```js
+module.exports = {
+  binaries: {
+    "text-run": path.join(__dirname, "node_modules", ".bin", "text-run"),
+  },
+}
+```
 
 ### Run shell commands
 

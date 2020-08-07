@@ -13,7 +13,8 @@ export async function exec(args: ActionArgs) {
   const commandsToRun = content
     .split("\n")
     .map((command: string) => command.trim())
-    .filter((e: string) => e)
+    .filter((command: string) => command.length > 0)
+    // TODO: move this one line up
     .map(trimDollar)
     .join(" && ")
   if (commandsToRun === "") {
@@ -28,5 +29,8 @@ export async function exec(args: ActionArgs) {
   // this is also used in the "verify-run-console-output" step
   CurrentCommand.set(processor)
   await processor.waitForEnd()
-  args.log(processor.output.fullText())
+  if (processor.exitCode !== 0) {
+    console.log(processor.output.fullText())
+    throw new Error(`command "${commandsToRun}" failed with exit code ${processor.exitCode}`)
+  }
 }

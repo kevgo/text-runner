@@ -13,5 +13,8 @@ help:  # prints all make targets
 
 test: unit docs  # runs all tests
 
+test-ts: unit  # runs all code tests
+
 unit:  # runs the unit tests
+	@echo unit tests for textrun-javascript ...
 	@${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"

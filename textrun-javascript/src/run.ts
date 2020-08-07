@@ -21,8 +21,8 @@ export function run(args: ActionArgs, done: DoneFunction) {
 
   // TODO: change to normal if clause
   code = hasCallbackPlaceholder(code)
-    ? (code = replaceAsyncCallbacks(code)) // async code
-    : (code = appendAsyncCallback(code)) // sync code
+    ? replaceAsyncCallbacks(code) // async code
+    : appendAsyncCallback(code) // sync code
   eval(code)
 }
 

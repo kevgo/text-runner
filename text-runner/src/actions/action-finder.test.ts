@@ -14,7 +14,7 @@ suite("actionFinder", function () {
 
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", function () {
-      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "text-run"))
+      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
       assert.typeOf(result["cd-into-empty-tmp-folder"], "function")
       assert.typeOf(result["cd-workspace"], "function")
       assert.typeOf(result["create-markdown-file"], "function")

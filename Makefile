@@ -103,5 +103,11 @@ test:  # runs all tests
 	@(cd text-npm && make --no-print-directory test)
 	@(cd text-shell && make --no-print-directory test)
 
+test-ts:  # runs all code tests
+	@(cd text-runner && make --no-print-directory test-ts)
+	@(cd textrun-javascript && make --no-print-directory test-ts)
+	@(cd textrun-npm && make --no-print-directory test-ts)
+	@(cd textrun-shell && make --no-print-directory test-ts)
+
 test-offline:  # runs all tests
 	@(cd text-runner && make --no-print-directory test-offline)

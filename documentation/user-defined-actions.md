@@ -51,7 +51,7 @@ hello.md:1 -- Hello world
 Actions are simple JavaScript functions. An action receives an object containing
 various information and utility functions:
 
-<a textrun="verify-handler-args">
+<a textrun="verify-handler-args" ignore="linkTargets">
 
 - **file**, **line:** location of the currently executed block in the
   documentation

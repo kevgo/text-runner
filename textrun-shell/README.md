@@ -9,9 +9,9 @@ To add this package as a Text-Runner plugin, run <code textrun="npm/install">npm
 i -D textrun-shell</code> or <code textrun="npm/install">yarn i -D
 textrun-shell</code>.
 
-To help this library find and execute binaries, you can define their absolute
-path by creating a configuration file **textrun-shell.js** in the root directory
-of your documentation base. Here is an example:
+You can define the absolute path of documented binaries in a
+**textrun-shell.js** file in the root directory of your documentation. Here is
+an example:
 
 ```js
 module.exports = {

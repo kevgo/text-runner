@@ -6,8 +6,10 @@ import { ActionArgs } from "text-runner"
 
 export async function install(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
-  const pkg = await fs.readJSON(path.join(args.configuration.sourceDir, "package.json"))
-  args.name(`verify NPM package name ${color.cyan(pkg.name)}`)
+  args.name(`check NPM package name ${color.cyan(installText)}`)
+
+  const dir = args.nodes[0]?.attributes?.dir || ""
+  const pkg = await fs.readJSON(path.join(args.configuration.sourceDir, dir, "package.json"))
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(

@@ -69,15 +69,15 @@ cuke-offline: build  # runs the feature specs that don't need an online connecti
 cuke-smoke-win:  # runs the smoke tests
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress
 
-docs: build  # runs the documentation tests
-	@echo running document tests ...
-	@${CURDIR}/text-runner/bin/text-run static --offline --format dot *.md
-	@echo
-	@${CURDIR}/text-runner/bin/text-run dynamic --format progress
+docs:  # runs the documentation tests
 	@(cd textrun-action && make --no-print-directory docs)
 	@(cd textrun-javascript && make --no-print-directory docs)
 	@(cd textrun-npm && make --no-print-directory docs)
 	@(cd textrun-shell && make --no-print-directory docs)
+	@echo documentation tests ...
+	@${CURDIR}/text-runner/bin/text-run static --offline --format dot *.md
+	@echo
+	@${CURDIR}/text-runner/bin/text-run dynamic --format progress
 
 fix:  # runs the auto-fixers
 	${CURDIR}/node_modules/.bin/prettier --write .

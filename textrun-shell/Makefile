@@ -4,7 +4,7 @@ build:  # builds for the current platform
 
 docs:  # runs the documentation tests
 	@echo documentation tests ...
-	@${CURDIR}/node_modules/.bin/text-run
+	@${CURDIR}/node_modules/.bin/text-run --offline --format progress
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t

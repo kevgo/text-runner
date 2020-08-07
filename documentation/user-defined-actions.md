@@ -19,7 +19,7 @@ Create a file **hello.md** with this content to test it.
 
 </a>
 
-When TextRunner encounters this `hello-world` block type, it runs the method
+When TextRunner encounters this block of type `hello-world`, it runs the method
 that the file <a textrun="create-file">**text-run/hello-world.js** exports. All
 user-defined actions are in the "text-run" folder, with the file name matching
 the action name but in [kebab-case](http://wiki.c2.com/?KebabCase). Let's create
@@ -33,11 +33,15 @@ module.exports = function (action) {
 
 </a>
 
-<a textrun="run-textrun">
-The formatter displays test progress on the console as the test runs:
-</a>
+Let's run Text-Runner:
 
-<pre textrun="verify-console-command-output">
+<pre textrun="shell/exec">
+$ text-run
+</pre>
+
+The formatter displays test progress on the console as the test runs:
+
+<pre textrun="shell/exec-output">
 Hello world!
 hello.md:1 -- Hello world
 </pre>
@@ -140,7 +144,7 @@ module.exports = function (action) {
 
 </a>
 
-<a textrun="run-textrun"></a>
+<a textrun="run-textrunner"></a>
 
 ## Formatters
 

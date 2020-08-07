@@ -5,7 +5,7 @@ source code.
 
 #### Example
 
-<a textrun="run-markdown-in-textrun">
+<a textrun="run-in-textrunner">
 
 ```markdown
 Assuming your test workspace contains a

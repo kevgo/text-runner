@@ -1,4 +1,5 @@
 import color from "colorette"
+import path from "path"
 import { createObservableProcess } from "observable-process"
 import { callArgs } from "../helpers/call-args"
 import { CurrentCommand } from "../helpers/current-command"
@@ -10,7 +11,7 @@ import { Configuration } from "../helpers/configuration"
  * Runs the given commands synchronously on the console.
  */
 export async function exec(args: ActionArgs) {
-  const config = await Configuration.load("textrun-shell.js")
+  const config = await Configuration.load(path.join(args.configuration.sourceDir, "textrun-shell.js"))
   const globalizePath = config.pathMapper().globalizePathFunc()
   const commandsToRun = args.nodes
     .text()

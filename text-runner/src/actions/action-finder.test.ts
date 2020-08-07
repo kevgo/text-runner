@@ -18,7 +18,7 @@ suite("actionFinder", function () {
       assert.typeOf(result["cd-into-empty-tmp-folder"], "function")
       assert.typeOf(result["cd-workspace"], "function")
       assert.typeOf(result["create-markdown-file"], "function")
-      assert.typeOf(result["run-markdown-in-textrun"], "function")
+      assert.typeOf(result["run-in-textrunner"], "function")
       assert.typeOf(result["run-textrun"], "function")
       assert.typeOf(result["verify-ast-node-attributes"], "function")
       assert.typeOf(result["verify-handler-args"], "function")

@@ -5,7 +5,7 @@ points to.
 
 #### Example
 
-<a textrun="run-markdown-in-textrun">
+<a textrun="run-in-textrunner">
 
 ```markdown
 Assuming the workspace contains a <code textrun="create-directory">foo</code>

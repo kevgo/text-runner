@@ -8,7 +8,7 @@
 
 #### Example
 
-<a textrun="run-markdown-in-textrun">
+<a textrun="run-in-textrunner">
 
 ```markdown
 <a textrun="create-file">
@@ -22,7 +22,7 @@ _test.txt_ with content `foo`
 
 &ndash; or &ndash;
 
-<a textrun="run-markdown-in-textrun">
+<a textrun="run-in-textrunner">
 
 ````markdown
 <a textrun="create-file">

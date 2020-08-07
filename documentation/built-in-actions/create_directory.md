@@ -5,7 +5,7 @@
 
 #### Example
 
-<a textrun="run-markdown-in-textrun">
+<a textrun="run-in-textrunner">
 
 ```markdown
 <a textrun="create-directory">

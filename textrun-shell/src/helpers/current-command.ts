@@ -4,7 +4,7 @@ import { ObservableProcess } from "observable-process"
 export class CurrentCommand {
   static instance(): ObservableProcess {
     if (!instance) {
-      throw new Error()
+      throw new Error("no instance")
     }
     return instance
   }

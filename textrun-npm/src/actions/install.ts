@@ -10,7 +10,11 @@ export async function install(args: ActionArgs) {
   args.name(`verify NPM package name ${color.cyan(pkg.name)}`)
 
   if (missesPackageName(installText, pkg.name)) {
-    throw new Error(`could not find ${color.cyan(pkg.name)} in installation instructions`)
+    throw new Error(
+      `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${color.cyan(
+        pkg.name
+      )}`
+    )
   }
 }
 

@@ -4,18 +4,22 @@ import { callArgs } from "../helpers/call-args"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "text-runner"
+import { Configuration } from "../helpers/configuration"
 
 /**
  * Runs the given commands synchronously on the console.
  */
 export async function exec(args: ActionArgs) {
-  const content = args.nodes.text()
-  const commandsToRun = content
+  const config = await Configuration.load("textrun-shell.js")
+  const globalizePath = config.pathMapper().globalizePathFunc()
+  const commandsToRun = args.nodes
+    .text()
     .split("\n")
     .map((command: string) => command.trim())
     .filter((command: string) => command.length > 0)
     // TODO: move this one line up
     .map(trimDollar)
+    .map(globalizePath)
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(

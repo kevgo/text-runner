@@ -7,6 +7,6 @@ export default function verifyHandlerArgs(args: ActionArgs) {
   const expectedTools = args.nodes.textInNodesOfType("strong").sort().map(removeTrailingColon)
   const actualTools = Object.keys(args)
     .sort()
-    .filter((tool: string) => tool !== ignore)
+    .filter((tool) => tool !== ignore)
   assertNoDiff.trimmedLines(expectedTools.join("\n"), actualTools.join("\n"))
 }

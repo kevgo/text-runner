@@ -4,7 +4,8 @@ build:  # builds for the current platform
 
 docs: build  # runs the documentation tests
 	@echo documentation tests for textrun-shell ...
-	@${CURDIR}/node_modules/.bin/text-run --offline --format progress
+	@${CURDIR}/node_modules/.bin/text-run static --offline --format progress
+	@${CURDIR}/node_modules/.bin/text-run dynamic --format progress
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t

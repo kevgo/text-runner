@@ -74,6 +74,10 @@ docs: build  # runs the documentation tests
 	@${CURDIR}/text-runner/bin/text-run static --offline --format dot *.md
 	@echo
 	@${CURDIR}/text-runner/bin/text-run dynamic --format progress
+	@(cd textrun-action && make --no-print-directory docs)
+	@(cd textrun-javascript && make --no-print-directory docs)
+	@(cd textrun-npm && make --no-print-directory docs)
+	@(cd textrun-shell && make --no-print-directory docs)
 
 fix:  # runs the auto-fixers
 	${CURDIR}/node_modules/.bin/prettier --write .
@@ -87,9 +91,18 @@ lint:  # lints everything
 
 setup:  # prepares the code base for development after cloning
 	@yarn
+	@(cd text-runner && make --no-print-directory build)
+	@(cd textrun-action && make --no-print-directory build)
+	@(cd textrun-javascript && make --no-print-directory build)
+	@(cd textrun-npm && make --no-print-directory build)
+	@(cd textrun-shell && make --no-print-directory build)
 
 test:  # runs all tests
 	@(cd text-runner && make --no-print-directory test)
+	@(cd text-action && make --no-print-directory test)
+	@(cd text-javascript && make --no-print-directory test)
+	@(cd text-npm && make --no-print-directory test)
+	@(cd text-shell && make --no-print-directory test)
 
 test-offline:  # runs all tests
 	@(cd text-runner && make --no-print-directory test-offline)

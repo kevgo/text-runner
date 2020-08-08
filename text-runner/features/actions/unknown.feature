@@ -22,11 +22,14 @@ Feature: unknown action types
     And it prints the error message:
       """
       Available built-in actions:
+      * append-file
       * cd
       * check-image
       * check-link
       * create-directory
       * create-file
+      * run-in-textrunner
+      * run-textrunner
       * test
       * verify-source-file-content
       * verify-workspace-contains-directory

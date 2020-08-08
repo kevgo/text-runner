@@ -25,7 +25,7 @@ function World() {
     }
     let command = ""
     if (params.cwd) {
-      command = helpers.localTextRunPath(params.cwd, process.platform)
+      command = helpers.globalTextRunPath(process.platform)
     } else {
       command = helpers.makeFullPath(params.command, process.platform)
     }

@@ -7,6 +7,7 @@ import stripAnsi from "strip-ansi"
 
 /** runs the given Markdown in Text-Runner */
 export default async function runInTextRunner(action: ActionArgs) {
+  action.name("execute Markdown in Text-Runner")
   const content = action.nodes.text()
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
   await fs.writeFile(path.join(action.configuration.workspace, "1.md"), content)

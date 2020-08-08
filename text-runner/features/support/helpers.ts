@@ -1,15 +1,15 @@
 import path from "path"
 
 export function fullTextRunPath(platform: string) {
-  let result = path.join(process.cwd(), "bin", "text-run")
+  let result = path.join(__dirname, "..", "..", "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }
   return result
 }
 
-export function localTextRunPath(exampleDir: string, platform: string) {
-  let result = path.join(exampleDir, "node_modules", ".bin", "text-run")
+export function globalTextRunPath(platform: string) {
+  let result = path.join(__dirname, "..", "..", "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }

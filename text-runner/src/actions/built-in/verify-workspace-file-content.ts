@@ -6,7 +6,7 @@ import { ActionArgs } from "../types/action-args"
 
 export default async function verifyWorkspaceFileContent(args: ActionArgs) {
   const filePath = args.nodes.textInNodeOfType("strong", "em")
-  const fullPath = path.join(args.configuration.workspace, filePath)
+  const fullPath = path.join(process.cwd(), filePath)
   args.name(`verifying file ${color.cyan(filePath)}`)
   args.log(`verify file ${fullPath}`)
   const actualContent = await readFile(filePath, fullPath)

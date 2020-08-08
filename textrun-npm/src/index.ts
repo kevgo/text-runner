@@ -1,7 +1,7 @@
-import { bin } from "./actions/bin"
+import { executable } from "./actions/executable"
 import { install } from "./actions/install"
 
 export const textrunActions = {
-  bin,
+  executable,
   install,
 }

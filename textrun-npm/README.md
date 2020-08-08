@@ -65,10 +65,11 @@ of the npm package.
 
 ## Verify exported binaries
 
-The <b textrun="action/name-full">npm/bin</b> action verifies documentation of
-exported binaries of npm packages. Let's say the source code of our `foobar`
-package contains an executable file <b textrun="binary-name">bin/foo</b>, which
-is listed as a binary in its <a textrun="create-file">**package.json** file:
+The <b textrun="action/name-full">npm/executable</b> action verifies
+documentation of exported binaries of npm packages. Let's say the source code of
+our `foobar` package contains an executable file
+<b textrun="binary-name">bin/foo</b>, which is listed as a binary in its
+<a textrun="create-file">**package.json** file:
 
 ```js
 {
@@ -88,7 +89,7 @@ something like this:
 
 ```md
 After you install the "foobar" package, you can run the
-<code textrun="npm/bin">foo</code> command in the terminal.
+<code textrun="npm/executable">foo</code> command in the terminal.
 ```
 
 <a textrun="run-textrunner">

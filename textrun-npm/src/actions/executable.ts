@@ -3,12 +3,14 @@ import path from "path"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "text-runner/src/actions/types/action-args"
 
-export function bin(action: ActionArgs) {
-  action.name("NPM package exports a command")
+export function executable(action: ActionArgs) {
   const commandName = trimDollar(action.nodes.text().trim())
+  if (commandName === "") {
+    throw new Error("No npm package installation command found")
+  }
+  action.name(`NPM package exports executable ${color.cyan(commandName)}`)
   const pkgData = require(path.join(action.configuration.sourceDir, "package.json"))
-  action.name(`NPM module exports the ${color.cyan(commandName)} command`)
   if (!Object.keys(pkgData.bin).includes(commandName)) {
-    throw new Error(`${color.cyan("package.json")} does not export a ${color.red(commandName)} command`)
+    throw new Error(`package.json does not export a "${commandName}" command`)
   }
 }

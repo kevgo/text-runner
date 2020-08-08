@@ -23,7 +23,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a textrun="verify-npm-global-command">
+      <a textrun="npm/executable">
 
       ```
       $ foo
@@ -34,19 +34,19 @@ Feature: verifying global commands provided by NPM modules
     Then it signals:
       | FILENAME | 1.md                               |
       | LINE     | 3                                  |
-      | MESSAGE  | NPM module exports the foo command |
+      | MESSAGE  | NPM package exports executable foo |
 
 
   Scenario: correct command name with single-fenced code block
     Given my source code contains the file "1.md" with content:
       """
-      To run this app, call <a textrun="verify-npm-global-command">`foo`</a> on the command line
+      To run this app, call <a textrun="npm/executable">`foo`</a> on the command line
       """
     When running text-run
     Then it signals:
       | FILENAME | 1.md                               |
       | LINE     | 1                                  |
-      | MESSAGE  | NPM module exports the foo command |
+      | MESSAGE  | NPM package exports executable foo |
 
 
   Scenario: mismatching command name
@@ -54,7 +54,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a textrun="verify-npm-global-command">
+      <a textrun="npm/executable">
 
       ```
       $ zonk
@@ -63,10 +63,10 @@ Feature: verifying global commands provided by NPM modules
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                        |
-      | LINE          | 3                                           |
-      | ERROR MESSAGE | package.json does not export a zonk command |
-      | EXIT CODE     | 1                                           |
+      | FILENAME      | 1.md                                          |
+      | LINE          | 3                                             |
+      | ERROR MESSAGE | package.json does not export a "zonk" command |
+      | EXIT CODE     | 1                                             |
 
 
   Scenario: missing command name
@@ -74,12 +74,12 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a textrun="verify-npm-global-command">
+      <a textrun="npm/executable">
       </a>
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                     |
-      | LINE          | 3                                                        |
-      | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
-      | EXIT CODE     | 1                                                        |
+      | FILENAME      | 1.md                                      |
+      | LINE          | 3                                         |
+      | ERROR MESSAGE | No npm package installation command found |
+      | EXIT CODE     | 1                                         |

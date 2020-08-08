@@ -24,7 +24,6 @@ export class Configuration {
       const content = require(filePath)
       return new Configuration(content)
     } catch (e) {
-      console.log(e)
       return Configuration.default()
     }
   }

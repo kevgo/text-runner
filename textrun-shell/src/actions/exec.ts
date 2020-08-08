@@ -24,7 +24,7 @@ export async function exec(args: ActionArgs) {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${args.nodes[0].tag} ${args.configuration.classPrefix}="exec"> block contains no commands to run`
+      `the <${args.nodes[0].tag} ${args.configuration.classPrefix}="shell/exec"> block contains no commands to run`
     )
   }
   args.name(`running console command: ${color.cyan(commandsToRun)}`)

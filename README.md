@@ -18,7 +18,16 @@
 
 Text-Runner makes rich text executable. An example is the documentation you are
 reading right now. Certain parts of it are executed by Text-Runner to verify
-that it correctly describes how Text-Runner works. Use cases:
+that it correctly describes how Text-Runner works. Text-Runner allows you to
+
+- test your natural-language documentation
+- make your end-to-end tests completely human-readable prose
+- write computer programs in natural language
+
+There are no limitations on the type of text that TextRunner can execute. It can
+read and understand (if you tell it how) any form of plain text in any human
+language as well as complex data in tables, bullet point lists, or embedded
+images. This can be useful for things like
 
 - **agile documentation:** your documentation always matches the behavior of the
   product it describes
@@ -27,10 +36,7 @@ that it correctly describes how Text-Runner works. Use cases:
 - **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
   documentation becomes your product prototype and drives the implementation
 
-There are no limitations on the type of text that TextRunner can execute. It can
-read and understand (if you tell it how) any form of plain text in any human
-language as well as complex data in tables, bullet point lists, or embedded
-images.
+More information about:
 
 - [how it works](documentation/how-it-works.md)
 - [installation](documentation/installation.md)

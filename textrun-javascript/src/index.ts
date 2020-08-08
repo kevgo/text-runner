@@ -1,5 +1,5 @@
-import { run } from "./run"
-import { validate } from "./validate"
+import { run } from "./actions/run"
+import { validate } from "./actions/validate"
 
 export const textrunActions = {
   run,

@@ -22,7 +22,7 @@ Feature: running console commands
 
       ```
       $ read foo
-      $ echo You entered: $foo
+      $ echo You entered: $foo xxx
       ```
 
       <table>
@@ -47,7 +47,7 @@ Feature: running console commands
   Scenario: entering complex text into the console
     Given my source code contains the file "enter-input.md" with content:
       """
-      <a textrun="run-console-command">
+      <a textrun="shell/exec">
 
       ```
       $ echo "Name of the service to add"

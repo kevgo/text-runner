@@ -1,22 +1,22 @@
 import * as helpers from "./helpers"
 import { assert } from "chai"
+import path from "path"
 
-suite("localTextRunPath", function () {
+suite("globalTextRunPath", function () {
   test("on unix", function () {
     if (process.platform === "win32") {
       return
     }
-    const give = "/text-runner/documentation/examples/bash"
-    const want = "/text-runner/documentation/examples/bash/node_modules/.bin/text-run"
-    assert.equal(helpers.globalTextRunPath(give, "linux"), want)
+    const want = path.join(process.cwd(), "bin", "text-run")
+    const have = helpers.globalTextRunPath("linux")
+    assert.equal(have, want)
   })
   test("on windows", function () {
     if (process.platform !== "win32") {
       return
     }
-    const give = "c:\\text-runner\\documentation\\examples\\bash"
     const want = "c:\\text-runner\\documentation\\examples\\bash\\node_modules\\.bin\\text-run.cmd"
-    assert.equal(helpers.globalTextRunPath(give, "win32"), want)
+    assert.equal(helpers.globalTextRunPath("win32"), want)
   })
 })
 

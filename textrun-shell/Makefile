@@ -14,9 +14,9 @@ docs: build  # runs the documentation tests
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-test: unit docs  # runs all tests
+test: unit cuke docs  # runs all tests
 
-test-ts: unit  # runs all code tests
+test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
 	@echo unit tests for textrun-shell ...

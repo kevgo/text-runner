@@ -22,14 +22,14 @@ Feature: verifying the output of the last console command
       """
     And my source code contains the file "verify-output.md" with content:
       """
-      <a textrun="start-process">
+      <a textrun="shell/start">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="verify-process-output">
+      <a textrun="shell/start-output">
 
       ```
       one
@@ -37,7 +37,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
 
-      <a textrun="stop-process">
+      <a textrun="shell/stop">
       Stop the current process by hitting Ctrl-C
       </a>
       """

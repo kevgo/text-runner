@@ -1,5 +1,7 @@
+const path = require("path")
+
 module.exports = {
   globals: {
-    tool: "public/tool",
+    tool: path.join(__dirname, "public", "tool"),
   },
 }

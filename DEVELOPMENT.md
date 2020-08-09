@@ -138,7 +138,17 @@ To debug in VSCode:
   }
   ```
 - switch VSCode to the debug view
-- start the `run text-runner` configuration
+- start the `run text-runner` profile
+
+To debug Cucumber tests in VSCode:
+
+- open `.vscode/launch.json`
+- edit the `cuke current file` section:
+  - args
+  - cwd
+- set a breakpoint inside Cucumber code
+- switch VSCode to the debug view
+- start the `cuke current file` profile
 
 ## Deployment
 

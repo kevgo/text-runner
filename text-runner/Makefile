@@ -13,11 +13,11 @@ clean:  # Removes all build artifacts
 	@rm -rf .nyc_output*
 
 cuke: build  # runs the feature specs
-	@echo running feature specs ...
+	@echo running Text-Runner feature specs ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-offline: build  # runs the feature specs that don't need an online connection
-	@echo running offline feature specs ...
+	@echo running Text-Runner offline feature specs ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-win:  # runs the feature specs on Windows

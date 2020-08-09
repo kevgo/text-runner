@@ -41,7 +41,7 @@ function World() {
       this.output = this.process.output.fullText()
     }
     if (this.process.exitCode && !params.expectError) {
-      console.log(this.output)
+      console.log(this.process.output.fullText())
     }
   }
 

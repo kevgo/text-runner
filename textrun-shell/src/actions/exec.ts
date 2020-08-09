@@ -47,7 +47,7 @@ export async function exec(args: ActionArgs) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
-  console.log(processor.output.fullText())
+  args.log(processor.output.fullText())
   if (processor.exitCode !== 0) {
     throw new Error(`command "${commandsToRun}" failed with exit code ${processor.exitCode}`)
   }

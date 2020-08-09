@@ -1,5 +1,4 @@
-text-runner/dist/
 node_modules
-text-runner/src/parsers/fixtures/
-text-runner/src/parsers/html/fixtures/
-text-runner/tmp/
+dist
+fixtures
+tmp

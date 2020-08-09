@@ -40,5 +40,5 @@ foo
 
 #### More info
 
-- [feature specs](../../text-runner/features/actions/built-in/create-file/create-file.feature)
-- [source code](../../text-runner/src/actions/built-in/create-file.ts)
+- [feature specs](../../features/actions/built-in/create-file/create-file.feature)
+- [source code](../../src/actions/built-in/create-file.ts)

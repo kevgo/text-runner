@@ -71,8 +71,8 @@ cuke-smoke-win:  # runs the smoke tests
 
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...
-	@${CURDIR}/text-runner/bin/text-run static --offline --format progress *.md
-	@(cd documentation && make --no-print-directory docs)
+	@${CURDIR}/text-runner/bin/text-run --offline --format progress "*.md"
+	@(cd text-runner && make --no-print-directory docs)
 	@(cd textrun-action && make --no-print-directory docs)
 	@(cd textrun-javascript && make --no-print-directory docs)
 	@(cd textrun-npm && make --no-print-directory docs)

@@ -19,5 +19,5 @@
 
 #### More info
 
-- [feature specs](../../text-runner/features/actions/built-in/create-directory/create-directory.feature)
-- [source code](../../text-runner/src/actions/built-in/create-directory.ts)
+- [feature specs](../../features/actions/built-in/create-directory/create-directory.feature)
+- [source code](../../src/actions/built-in/create-directory.ts)

@@ -2,16 +2,13 @@
 
 This codebase is organized as a mono-repository.
 
-- [documentation](documentation/): end-user manual
+- [documentation](text-runner/documentation/): end-user manual
 - [text-runner](text-runner/): the main Text-Runner application
-- [textrun-make](textrun-make/): actions for Makefiles
 - [textrun-nodejs](textrun-npm/): actions for working with Node.JS codebases
 - [textrun-shell](textrun-shell/): actions for running commands in subshells
 - [tools](tools/): tools used for development
 
-The various code bases are organized as
-<a textrun="is-yarn-workspace" href="https://classic.yarnpkg.com/en/docs/workspaces">Yarn
-workspaces</a>.
+The various code bases are organized as Yarn workspaces.
 
 ## Installation for development
 

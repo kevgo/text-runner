@@ -18,5 +18,5 @@ verify that it exists:
 
 #### More info
 
-- [feature specs](../../text-runner/features/actions/built-in/verify-workspace-contains-directory/verify-workspace-contains-directory.feature)
-- [source code](../../text-runner/src/actions/built-in/verify-workspace-contains-directory.ts)
+- [feature specs](../../features/actions/built-in/verify-workspace-contains-directory/verify-workspace-contains-directory.feature)
+- [source code](../../src/actions/built-in/verify-workspace-contains-directory.ts)

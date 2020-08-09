@@ -1,4 +1,4 @@
-<a textrun="run-console-command">
+<a textrun="shell/exec">
 
 ```
 $ read foo

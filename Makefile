@@ -98,10 +98,10 @@ setup:  # prepares the code base for development after cloning
 
 test:  # runs all tests
 	@(cd text-runner && make --no-print-directory test)
-	@(cd text-action && make --no-print-directory test)
-	@(cd text-javascript && make --no-print-directory test)
-	@(cd text-npm && make --no-print-directory test)
-	@(cd text-shell && make --no-print-directory test)
+	@(cd textrun-action && make --no-print-directory test)
+	@(cd textrun-javascript && make --no-print-directory test)
+	@(cd textrun-npm && make --no-print-directory test)
+	@(cd textrun-shell && make --no-print-directory test)
 
 test-ts:  # runs all code tests
 	@(cd text-runner && make --no-print-directory test-ts)

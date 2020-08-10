@@ -4,7 +4,7 @@ build:  # builds for the current platform
 
 cuke:  # runs the feature specs
 	@echo feature specs for textrun-shell ...
-	@${CURDIR}/node_modules/.bin/cucumber-js
+	@${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
 
 docs: build  # runs the documentation tests
 	@echo documentation tests for textrun-shell ...

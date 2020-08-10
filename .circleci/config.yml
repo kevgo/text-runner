@@ -29,12 +29,19 @@ jobs:
           paths:
             - node_modules/
 
-  text-runner:
+  text-runner-cuke:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make test
+      - run: cd text-runner && make cuke-ci
+
+  text-runner-others:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: code-{{ .Environment.CIRCLE_SHA1 }}
+      - run: cd text-runner && make lint unit docs
 
   textrun-action:
     <<: *defaults
@@ -102,7 +109,10 @@ workflows:
   testing:
     jobs:
       - checkout_code
-      - text-runner:
+      - text-runner-cuke:
+          requires:
+            - checkout_code
+      - text-runner-others:
           requires:
             - checkout_code
       - textrun-action:

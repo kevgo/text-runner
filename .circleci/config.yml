@@ -48,7 +48,6 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make build
       - run: cd textrun-action && make test
 
   textrun-javascript:
@@ -56,7 +55,6 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make build
       - run: cd textrun-javascript && make test
 
   textrun-npm:
@@ -64,7 +62,6 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make build
       - run: cd textrun-npm && make test
 
   textrun-shell:
@@ -72,7 +69,6 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make build
       - run: cd textrun-shell && make test
 
   send-coverage:

@@ -2,7 +2,7 @@ build:  # builds for the current platform
 	@echo building textrun-javascript ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig.json
 
-cuke:  # runs the feature specs
+cuke: build  # runs the feature specs
 	@${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
 
 docs: build  # runs the documentation tests

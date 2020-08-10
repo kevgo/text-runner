@@ -1,7 +1,7 @@
 [
   {
     "attributes": {
-      "textrun": "run-console-command"
+      "textrun": "shell/exec"
     },
     "content": "",
     "file": "src/parsers/markdown/fixtures/user-input/input.md",

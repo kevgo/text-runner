@@ -67,7 +67,7 @@ cuke-offline: build  # runs the feature specs that don't need an online connecti
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-smoke-win:  # runs the smoke tests
-	@${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress
+	@(cd text-runner && ${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress)
 
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...

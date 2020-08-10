@@ -97,9 +97,6 @@ workflows:
   testing:
     jobs:
       - checkout_code
-      - lint:
-          requires:
-            - checkout_code
       - text-runner:
           requires:
             - checkout_code

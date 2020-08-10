@@ -9,6 +9,7 @@
       "request": "launch",
       "name": "unit",
       "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
+      "cwd": "${workspaceFolder}/text-runner",
       "args": ["src/**/*.test.ts"],
       "outFiles": ["${workspaceRoot}/src/*.test.ts"]
     },

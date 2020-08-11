@@ -27,13 +27,12 @@ images. This can be useful for things like
 
 More information about:
 
-- [how it works](text-runner/documentation/how-it-works.md)
-- [installation](text-runner/documentation/installation.md)
-- [configuration](text-runner/documentation/configuration.md)
-- [terminology](text-runner/documentation/terminology.md)
-- [built-in actions](text-runner/documentation/built-in-actions)
-- [user-defined actions](text-runner/documentation/user-defined-actions.md)
-- [external actions](text-runner/documentation/external-actions.md)
-- [questions and answers](text-runner/documentation/qna.md)
-- [related tools](text-runner/documentation/related-tools.md)
-- [developer documentation](DEVELOPMENT.md)
+- [how it works](documentation/how-it-works.md)
+- [installation](documentation/installation.md)
+- [configuration](documentation/configuration.md)
+- [terminology](documentation/terminology.md)
+- [built-in actions](documentation/built-in-actions)
+- [user-defined actions](documentation/user-defined-actions.md)
+- [external actions](documentation/external-actions.md)
+- [questions and answers](documentation/qna.md)
+- [related tools](documentation/related-tools.md)

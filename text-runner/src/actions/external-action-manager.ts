@@ -3,7 +3,7 @@ import { Action } from "./types/action"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { actionName } from "./helpers/action-name"
 
-/** manages external actions in separate NPM modules */
+/** ExternalActionManager provides external actions from their own NPM modules */
 export class ExternalActionManager {
   actions: FunctionRepo
 
@@ -19,7 +19,7 @@ export class ExternalActionManager {
       return null
     }
     if (parts.length > 2) {
-      throw new UnprintedUserError(`Too many slashes in action name "${fullActivity}`)
+      throw new UnprintedUserError(`Too many slashes in action name "${fullActivity}"`)
     }
     const moduleName = "textrun-" + parts[0]
     const wantAction = actionName(parts[1])

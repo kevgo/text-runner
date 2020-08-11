@@ -24,7 +24,7 @@ async function readFile(filePath: string, fullPath: string): Promise<string> {
     return result
   } catch (err) {
     if (err.code === "ENOENT") {
-      // const files = fs.readdir())
+      // TODO: show all files in the folder here
       throw new Error(`file ${color.red(filePath)} not found`)
     } else {
       throw err

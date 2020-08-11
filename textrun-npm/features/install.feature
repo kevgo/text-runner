@@ -22,9 +22,9 @@ Feature: verifying NPM installation instructions
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 3                                                   |
-      | MESSAGE  | check NPM package name npm i -g my_enormous_package |
+      | FILENAME | 1.md                                                   |
+      | LINE     | 3                                                      |
+      | MESSAGE  | check npm package name in npm i -g my_enormous_package |
 
   Scenario: correct package name inside pre block
     Given my source code contains the file "1.md" with content:
@@ -39,7 +39,7 @@ Feature: verifying NPM installation instructions
     Then it signals:
       | FILENAME | 1.md                                                |
       | LINE     | 3                                                   |
-      | MESSAGE  | check NPM package name npm i -g my_enormous_package |
+      | MESSAGE  | check npm package name in npm i -g my_enormous_package |
 
   Scenario: correct package name with single-fenced code block
     Given my source code contains the file "1.md" with content:
@@ -50,7 +50,7 @@ Feature: verifying NPM installation instructions
     Then it signals:
       | FILENAME | 1.md                                                |
       | LINE     | 1                                                   |
-      | MESSAGE  | check NPM package name npm i -g my_enormous_package |
+      | MESSAGE  | check npm package name in npm i -g my_enormous_package |
 
   Scenario: mismatching package name
     Given my source code contains the file "1.md" with content:

@@ -6,7 +6,7 @@ import { ActionArgs } from "text-runner"
 
 export async function install(args: ActionArgs) {
   const installText = trimDollar(args.nodes.textInNodeOfType("fence", "code"))
-  args.name(`check NPM package name ${color.cyan(installText)}`)
+  args.name(`check npm package name in ${color.cyan(installText)}`)
 
   const dir = args.nodes[0]?.attributes?.dir || ""
   const pkg = await fs.readJSON(path.join(args.configuration.sourceDir, dir, "package.json"))

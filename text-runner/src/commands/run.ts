@@ -34,10 +34,10 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 4: find link targets
   const linkTargets = findLinkTargets(ASTs)
 
-  // step 4: find actions
+  // step 5: find actions
   const actionFinder = new ActionFinder(config.sourceDir)
 
-  // step 5: extract activities
+  // step 6: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length + links.length === 0) {
@@ -45,14 +45,14 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
-  // step 6: execute the ActivityList
+  // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
   jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))
   const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
 
-  // step 7: cleanup
+  // step 8: cleanup
   process.chdir(config.sourceDir)
   if (results.length === 0 && !config.keepTmp) {
     // NOTE: calling fs.remove causes an exception on Windows here,
@@ -61,7 +61,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     rimraf.sync(config.workspace, { maxBusyTries: 20 })
   }
 
-  // step 8: write stats
+  // step 9: write stats
   let text = "\n"
   let colorFn: color.Style
   if (results.length === 0) {

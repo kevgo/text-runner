@@ -1,7 +1,7 @@
 {
   "name": "custom-action-coffeescript",
   "version": "0.0.0",
-  "dependencies": {
+  "devDependencies": {
     "coffeescript": "2.5.1",
     "text-runner": "4.0.3"
   }

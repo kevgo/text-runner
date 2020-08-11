@@ -6,8 +6,8 @@
 > Test runner for text
 
 Text-Runner makes rich text executable. An example is the documentation you are
-reading right now. Text-Runner executes certain parts of it to verify
-that it correctly describes how Text-Runner works. Text-Runner allows you to
+reading right now. Text-Runner executes certain parts of it to verify that it
+correctly describes how Text-Runner works. Text-Runner allows you to
 
 - test your natural-language documentation
 - make your end-to-end tests completely human-readable prose

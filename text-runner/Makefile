@@ -2,7 +2,7 @@
 .DEFAULT_GOAL := spec
 
 build: clean  # builds for the current platform
-	@echo building Text-Runner ...
+	@echo Text-Runner build ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
 
 clean:  # Removes all build artifacts
@@ -10,7 +10,7 @@ clean:  # Removes all build artifacts
 	@rm -rf .nyc_output*
 
 cuke: build  # runs the feature specs
-	@echo e2e tests for Text-Runner ...
+	@echo Text-Runner E2E tests ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-ci:  # runs the feature specs on CI
@@ -27,13 +27,13 @@ cuke-win:  # runs the feature specs on Windows
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs:  # verify documentation
-	@echo documentation tests for Text-Runner ...
+	@echo Text-Runner documentation tests ...
 	@rm -rf tmp
 	@${CURDIR}/bin/text-run static --format progress --offline
 	@${CURDIR}/bin/text-run dynamic --format progress
 
 fix:  # runs the fixers
-	@echo fixing Text-Runner ...
+	@echo Text-Runner auto-fixes ...
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
 	@${CURDIR}/node_modules/.bin/prettier --write .
 
@@ -41,7 +41,7 @@ help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints all files in this codebase
-	@echo linting Text-Runner ...
+	@echo Text-Runner linters ...
 	@${CURDIR}/node_modules/.bin/prettier -l .
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
@@ -66,5 +66,5 @@ test-ts: unit cuke  # runs only the TypeScript tests
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
-	@echo unit tests for Text-Runner ...
+	@echo Text-Runner unit tests ...
 	@${CURDIR}/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"

@@ -1,0 +1,16 @@
+[
+  {
+    "type": "image",
+    "tag": "img",
+    "file": "src/parsers/fixtures/image-active/input.*",
+    "line": 1,
+    "content": "",
+    "attributes": {
+      "src": "foo.png",
+      "alt": "foo bar",
+      "width": "100",
+      "height": "200",
+      "textrun": "bar"
+    }
+  }
+]

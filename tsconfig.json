@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig-build.json",
+  "include": ["src/**/*", "features/support/*.ts"],
+  "compilerOptions": {
+    "noEmit": true /* Do not emit outputs. */,
+    "incremental": false
+  }
+}

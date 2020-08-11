@@ -1,0 +1,100 @@
+[
+  {
+    "attributes": {
+      "textrun": "create-file"
+    },
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 1,
+    "tag": "a",
+    "type": "anchor_open"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "p",
+    "type": "paragraph_open"
+  },
+  {
+    "attributes": {},
+    "content": "creating a file with name",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "em",
+    "type": "em_open"
+  },
+  {
+    "attributes": {},
+    "content": "one.txt",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "/em",
+    "type": "em_close"
+  },
+  {
+    "attributes": {},
+    "content": "and content",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "code",
+    "type": "code_open"
+  },
+  {
+    "attributes": {},
+    "content": "Hello world!",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "/code",
+    "type": "code_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 3,
+    "tag": "/p",
+    "type": "paragraph_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/markdown/fixtures/active-region/input.md",
+    "line": 5,
+    "tag": "/a",
+    "type": "anchor_close"
+  }
+]

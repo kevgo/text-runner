@@ -1,0 +1,10 @@
+[
+  {
+    "attributes": {},
+    "content": "",
+    "file": "src/parsers/fixtures/linebreak/input.*",
+    "line": 1,
+    "tag": "br",
+    "type": "linebreak"
+  }
+]

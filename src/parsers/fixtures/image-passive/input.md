@@ -1,0 +1,1 @@
+![alt text](foo.png)

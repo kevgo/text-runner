@@ -12,7 +12,7 @@
 <br><br>
 
 This mono-repo contains the source code and documentation of
-[Text-Runner](text-runner) as well as plugins for common scenarios:
+[Text-Runner](text-runner) as well as some frequently used plugins:
 
 - [textrun-action](textrun-action/): Text-Runner actions for verifying the
   documentation of Text-Runner plugins

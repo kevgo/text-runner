@@ -33,19 +33,18 @@ docs:  # verify documentation
 
 
 fix:  # runs the fixers
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
+	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
+	@${CURDIR}/node_modules/.bin/prettier --write .
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints all files in this codebase
-	@make --no-print-directory lint-global &
-	@(cd .. && ${CURDIR}/node_modules/.bin/prettier --check text-runner)
+	@echo linting text-runner ...
+	@${CURDIR}/node_modules/.bin/prettier -l .
+	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json
 
-lint-global:  # the lint commands to run when running the global lint task
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig-build.json
-
-parallel: lint  # runs all tests
+parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --offline --format dot &
 	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
 	${CURDIR}/bin/text-run dynamic --format dot

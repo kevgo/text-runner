@@ -1,9 +1,3 @@
-files: "{*.md,documentation/**/*.md}"
-exclude: "documentation/examples"
+files: "*.md"
 format: progress
 useSystemTempDirectory: false
-
-actions:
-  runConsoleCommand:
-    globals:
-      "text-run": "src/bin/text-run"

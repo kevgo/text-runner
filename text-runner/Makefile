@@ -23,6 +23,9 @@ cuke-offline: build  # runs the feature specs that don't need an online connecti
 	@echo running Text-Runner offline feature specs ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
+cuke-smoke-win:  # runs the smoke tests
+	@(cd text-runner && ${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress)
+
 cuke-win:  # runs the feature specs on Windows
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 

@@ -25,7 +25,7 @@ respective codebase.
 
 - run all tests: <code textrun="verify-make-command">make test</code>
 - run unit tests: <code>make unit</code>
-- run end-to-end tests: <code textrun="verify-make-command">make cuke</code>
+- run end-to-end tests: make cuke
 - run documentation tests: <code textrun="verify-make-command">make docs</code>
 - run linters: <code textrun="verify-make-command">make lint</code>
 - run auto-fixers: <code textrun="verify-make-command">make fix</code>
@@ -33,6 +33,9 @@ respective codebase.
 See how the commands inside the Makefile work for how to test individual files.
 To enable debugging statements and verbose output while debugging an end-to-end
 test, add the `@debug` Gherkin tag in the first line of the `.feature` file.
+
+In the root directory, there are `make *-all` tasks that run the respective task
+in all codebases of the mono-repo.
 
 ## Debugging
 

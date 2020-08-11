@@ -1,7 +1,6 @@
-@debug
 Feature: Counting files
 
-    When testing documentation
+  When testing documentation
   I want to know how many files have been checked
   So that I know whether all files have been covered.
 

@@ -12,13 +12,12 @@
 <br><br>
 
 This mono-repo contains the source code and documentation of
-[Text-Runner](text-runner) as well as some frequently used plugins:
+[Text-Runner](text-runner) as well as some frequently used plugins providing
+additional Text-Runner actions:
 
-- [textrun-action](textrun-action/): Text-Runner actions for verifying the
-  documentation of Text-Runner plugins
-- [textrun-javascript](textrun-javascript/): Text-Runner actions for
-  running/verifying embedded JavaScript code
-- [textrun-npm](textrun-npm/): Text-Runner actions for verifying the
-  documentation of npm modules
-- [textrun-shell](textrun-shell/): Text-Runner actions for running executables
-  in a subshell
+- [textrun-action](textrun-action/): verify the documentation of Text-Runner
+  plugins
+- [textrun-javascript](textrun-javascript/): running/verifying embedded
+  JavaScript code
+- [textrun-npm](textrun-npm/): verifying the documentation of npm modules
+- [textrun-shell](textrun-shell/): running executables in a subshell

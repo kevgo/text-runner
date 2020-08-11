@@ -1,4 +1,4 @@
-build: clean  # builds for the current platform
+build:  # builds for the current platform
 	@echo Text-Runner build ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
 

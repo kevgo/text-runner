@@ -1,7 +1,7 @@
 @smoke
 Feature: unknown action types
 
-    When using an active block for which there is no action
+  When using an active block for which there is no action
   I want to be notified
   So that I can add the missing custom action.
 

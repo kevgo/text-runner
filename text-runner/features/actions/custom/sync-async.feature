@@ -1,7 +1,7 @@
 @smoke
 Feature: custom runners
 
-    When testing technical documentation
+  When testing technical documentation
   I want to be able to define my own actions
   So that my documentation can perform things that go beyond the built-in functionality.
 

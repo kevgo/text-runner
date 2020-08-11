@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+#### Internal
+
+- plugins architecture
+- extract non-core actions into plugins
+- organize code into a mono-repository
+
 #### New Features
 
 - TypeScript actions ([#907](https://github.com/kevgo/text-runner/pull/907))

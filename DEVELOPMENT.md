@@ -59,5 +59,7 @@ To debug a Cucumber step implementation in VSCode:
 
 ## Deployment
 
-- bump all occurrences of `4.0.3` on master and commit
+- make a global search-and-replace for `4.0.3` and replace it with the new
+  version
+- get this change into the master branch
 - in [text-runner](text-runner/): run `npm publish`

@@ -17,5 +17,4 @@ export default async function runTextRunner(action: ActionArgs) {
   if (processor.exitCode !== 0) {
     throw new Error(`text-run exited with code ${processor.exitCode} when processing this markdown block`)
   }
-  // fs.rmdir(dir, { recursive: true })
 }

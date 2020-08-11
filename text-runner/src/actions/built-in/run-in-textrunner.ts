@@ -26,5 +26,4 @@ export default async function runInTextRunner(action: ActionArgs) {
       )}`
     )
   }
-  // fs.rmdir(dir, { recursive: true })
 }

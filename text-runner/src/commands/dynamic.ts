@@ -39,21 +39,21 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
     return []
   }
 
-  // step 5: find actions
+  // step 6: find actions
   const actionFinder = new ActionFinder(config.sourceDir)
 
-  // step 6: execute the ActivityList
+  // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length, config)
   process.chdir(config.workspace)
   const error = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
 
-  // step 7: cleanup
+  // step 8: cleanup
   process.chdir(config.sourceDir)
   if (!error && !config.keepTmp) {
     await fs.remove(config.workspace)
   }
 
-  // step 8: write stats
+  // step 9: write stats
   let text = "\n"
   let colorFn
   if (error) {

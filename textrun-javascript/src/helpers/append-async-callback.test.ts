@@ -8,7 +8,7 @@ console.log(123)`
     const have = appendAsyncCallback(give)
     const want = `\
 console.log(123);
-__finished()`
+__finished();`
     assert.equal(have, want)
   })
 })

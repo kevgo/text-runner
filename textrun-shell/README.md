@@ -131,7 +131,7 @@ and provide user input with an HTML table:
 </a>
 
 It will print <code textrun="shell/exec-output">Hello Text-Runner, happy
-Friday!</code>.
+Friday2!</code>.
 
 If the table contains multiple columns, the first column contains output to wait
 for, and the last one text to enter once the output from the first column has

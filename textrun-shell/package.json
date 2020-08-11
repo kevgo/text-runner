@@ -5,14 +5,14 @@
   "license": "ISC",
   "dependencies": {
     "observable-process": "7.0.3",
-    "prettier": "2.0.5",
-    "text-runner": "4.0.3",
-    "tslint": "6.1.2"
+    "text-runner": "4.0.3"
   },
   "devDependencies": {
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
+    "prettier": "2.0.5",
     "textrun-action": "0.0.0",
+    "tslint": "6.1.2",
     "typescript": "3.9.7"
   }
 }

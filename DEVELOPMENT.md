@@ -1,15 +1,5 @@
 # Text-Runner Developers Guide
 
-This codebase is organized as a mono-repository.
-
-- [documentation](text-runner/documentation/): end-user manual
-- [text-runner](text-runner/): the main Text-Runner application
-- [textrun-nodejs](textrun-npm/): actions for working with Node.JS codebases
-- [textrun-shell](textrun-shell/): actions for running commands in subshells
-- [tools](tools/): tools used for development
-
-The various code bases are organized as Yarn workspaces.
-
 ## Installation for development
 
 You need to have installed:

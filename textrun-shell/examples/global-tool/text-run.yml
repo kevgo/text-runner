@@ -1,4 +1,0 @@
-actions:
-  runConsoleCommand:
-    globals:
-      tool: "public/tool"

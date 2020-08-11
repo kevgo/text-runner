@@ -4,8 +4,3 @@ exclude:
   - src/parsers/fixtures
 format: progress
 useSystemTempDirectory: false
-
-actions:
-  runConsoleCommand:
-    globals:
-      "text-run": "src/bin/text-run"

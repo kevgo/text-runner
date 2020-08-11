@@ -11,9 +11,8 @@
 </a>
 <br><br>
 
-This is the mono-repo containing the source code and documetation of
-[Text-Runner](text-runner) as well as a selection of plugins for common
-scenarios:
+This is the mono-repo containing the source code and documentation of
+[Text-Runner](text-runner) as well as plugins for common scenarios:
 
 - [textrun-action](textrun-action/): Text-Runner actions for verifying the
   documentation of Text-Runner plugins

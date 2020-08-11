@@ -1,9 +1,4 @@
-<!-- logo is from: https://icons8.com/icon/40886/test -->
-<img src="text-runner/documentation/logo2.png" align="right" valign="bottom">
-
-# Text-Runner
-
-> Test runner for text
+# Text-Runner monorepo
 
 <a href="https://circleci.com/gh/kevgo/text-runner">
   <img src="https://circleci.com/gh/kevgo/text-runner.svg?style=shield" />
@@ -16,35 +11,15 @@
 </a>
 <br><br>
 
-Text-Runner makes rich text executable. An example is the documentation you are
-reading right now. Certain parts of it are executed by Text-Runner to verify
-that it correctly describes how Text-Runner works. Text-Runner allows you to
+This is the mono-repo containing the source code and documetation of
+[Text-Runner](text-runner) as well as a selection of plugins for common
+scenarios:
 
-- test your natural-language documentation
-- make your end-to-end tests completely human-readable prose
-- write computer programs in natural language
-
-There are no limitations on the type of text that TextRunner can execute. It can
-read and understand (if you tell it how) any form of plain text in any human
-language as well as complex data in tables, bullet point lists, or embedded
-images. This can be useful for things like
-
-- **agile documentation:** your documentation always matches the behavior of the
-  product it describes
-- **[semantic versioning](http://semver.org):** know whether a product change
-  affects documented behavior
-- **[readme-driven development](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html):**
-  documentation becomes your product prototype and drives the implementation
-
-More information about:
-
-- [how it works](text-runner/documentation/how-it-works.md)
-- [installation](text-runner/documentation/installation.md)
-- [configuration](text-runner/documentation/configuration.md)
-- [terminology](text-runner/documentation/terminology.md)
-- [built-in actions](text-runner/documentation/built-in-actions)
-- [user-defined actions](text-runner/documentation/user-defined-actions.md)
-- [external actions](text-runner/documentation/external-actions.md)
-- [questions and answers](text-runner/documentation/qna.md)
-- [related tools](text-runner/documentation/related-tools.md)
-- [developer documentation](DEVELOPMENT.md)
+- [textrun-action](textrun-action/): Text-Runner actions for verifying the
+  documentation of Text-Runner plugins
+- [textrun-javascript](textrun-javascript/): Text-Runner actions for
+  running/verifying embedded JavaScript code
+- [textrun-npm](textrun-npm/): Text-Runner actions for verifying the
+  documentation of npm modules
+- [textrun-shell](textrun-shell/): Text-Runner actions for running executables
+  in a subshell

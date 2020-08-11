@@ -3,6 +3,7 @@ build:  # builds for the current platform
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
 
 clean:  # Removes all build artifacts
+	@echo Text-Runner build artifact cleanup ...
 	@rm -rf dist
 	@rm -rf .nyc_output*
 

@@ -1,6 +1,3 @@
-# TODO: remove
-.DEFAULT_GOAL := spec
-
 build: clean  # builds for the current platform
 	@echo Text-Runner build ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json

@@ -1,7 +1,0 @@
-{
-  "name": "custom-action-coffeescript",
-  "version": "0.0.0",
-  "dependencies": {
-    "coffeescript": "2.5.1"
-  }
-}

@@ -1,3 +1,0 @@
-<pre>
-my code
-</pre>

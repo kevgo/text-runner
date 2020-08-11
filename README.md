@@ -21,3 +21,5 @@ additional Text-Runner actions:
   JavaScript code
 - [textrun-npm](textrun-npm/): verifying the documentation of npm modules
 - [textrun-shell](textrun-shell/): running executables in a subshell
+
+See also the [developers guide](DEVELOPMENT.md).

@@ -78,9 +78,11 @@ docs:  # runs the documentation tests
 	@(cd textrun-npm && make --no-print-directory docs)
 	@(cd textrun-shell && make --no-print-directory docs)
 
-fix:  # runs the auto-fixers
+fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
 	${CURDIR}/node_modules/.bin/prettier --write .
+
+fix-all: fix  # auto-fixes the entire mono-repo
 	@(cd text-runner && make --no-print-directory fix)
 	@(cd textrun-action && make --no-print-directory fix)
 	@(cd textrun-javascript && make --no-print-directory fix)
@@ -90,10 +92,12 @@ fix:  # runs the auto-fixers
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
-lint:  # lints everything
+lint:  # lints the root directory
 	@echo linting root dir ...
 	@${CURDIR}/node_modules/.bin/remark . --quiet &
 	@${CURDIR}/node_modules/.bin/prettier -l '.'
+
+lint-all: lint  # lints the entire mono-repo
 	@(cd text-runner && make --no-print-directory lint)
 	@(cd textrun-action && make --no-print-directory lint)
 	@(cd textrun-javascript && make --no-print-directory lint)

@@ -36,6 +36,7 @@ After(async function (scenario) {
     console.log("\ntest artifacts are located in", this.rootDir)
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
+    // TODO: replace with fs
     await rimrafp(this.rootDir)
   }
 })

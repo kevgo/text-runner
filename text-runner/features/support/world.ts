@@ -85,6 +85,10 @@ function World() {
     if (table.MESSAGE) {
       expectedText += table.MESSAGE
     }
+    if (table["ERROR MESSAGE"]) {
+      expectedText += " -- " + table["ERROR MESSAGE"]
+    }
+    // TODO: check error code
     const actual = helpers.standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!

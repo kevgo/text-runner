@@ -12,6 +12,12 @@ clean-all:  # Removes all build artifacts
 	@(cd textrun-npm && make --no-print-directory clean)
 	@(cd textrun-shell && make --no-print-directory clean)
 
+cuke-all:  # runs all E2E tests
+	@(cd text-runner && make --no-print-directory cuke)
+	@(cd textrun-javascript && make --no-print-directory cuke)
+	@(cd textrun-npm && make --no-print-directory cuke)
+	@(cd textrun-shell && make --no-print-directory cuke)
+
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...
 	@${CURDIR}/text-runner/bin/text-run --offline --format progress "*.md"

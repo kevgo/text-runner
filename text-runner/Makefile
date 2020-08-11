@@ -2,11 +2,8 @@
 .DEFAULT_GOAL := spec
 
 build: clean  # builds for the current platform
-	@echo building text-runner ...
+	@echo building Text-Runner ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json
-
-build-debug: clean  # builds for debugging
-	@${CURDIR}/node_modules/.bin/tsc -p tsconfig-build.json --sourcemap
 
 clean:  # Removes all build artifacts
 	@rm -rf dist
@@ -30,12 +27,13 @@ cuke-win:  # runs the feature specs on Windows
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs:  # verify documentation
+	@echo documentation tests for Text-Runner ...
 	@rm -rf tmp
 	@${CURDIR}/bin/text-run static --format progress --offline
 	@${CURDIR}/bin/text-run dynamic --format progress
 
 fix:  # runs the fixers
-	@echo fixing text-runner ...
+	@echo fixing Text-Runner ...
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
 	@${CURDIR}/node_modules/.bin/prettier --write .
 
@@ -43,7 +41,7 @@ help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints all files in this codebase
-	@echo linting text-runner ...
+	@echo linting Text-Runner ...
 	@${CURDIR}/node_modules/.bin/prettier -l .
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
@@ -68,5 +66,5 @@ test-ts: unit cuke  # runs only the TypeScript tests
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
-	@echo unit tests for text-runner ...
+	@echo unit tests for Text-Runner ...
 	@${CURDIR}/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"

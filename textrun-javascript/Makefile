@@ -6,6 +6,7 @@ clean:  # Removes all build artifacts
 	@rm -rf dist
 
 cuke: build  # runs the feature specs
+	@echo e2e tests for textrun-javascript ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
 
 docs: build  # runs the documentation tests

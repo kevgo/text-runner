@@ -10,7 +10,7 @@ clean:  # Removes all build artifacts
 	@rm -rf .nyc_output*
 
 cuke: build  # runs the feature specs
-	@echo running Text-Runner feature specs ...
+	@echo e2e tests for Text-Runner ...
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-ci:  # runs the feature specs on CI

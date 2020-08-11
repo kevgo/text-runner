@@ -19,12 +19,10 @@ $ yarn i -D textrun-npm
 
 ## Verify installation instructions
 
-The <b textrun="action/name-full">npm/install</b> action verifies that the
-documentation of an npm package correctly describes that this package should be
-installed as a development dependency. As an example, let's assume we are
-testing the documentation of an npm package called `foobar`.
-<a textrun="create-file">Its **package.json** file would contain amongst other
-things:
+The <b textrun="action/name-full">npm/install</b> action verifies installation
+instructions for an npm package. As an example, let's assume we are testing the
+documentation of an npm package called `foobar`. <a textrun="create-file">Its
+**package.json** file would contain amongst other things:
 
 ```json
 {

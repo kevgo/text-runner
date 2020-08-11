@@ -5,7 +5,9 @@
   "license": "ISC",
   "dependencies": {
     "observable-process": "7.0.3",
-    "text-runner": "4.0.3"
+    "prettier": "2.0.5",
+    "text-runner": "4.0.3",
+    "tslint": "6.1.2"
   },
   "devDependencies": {
     "cucumber": "6.0.5",

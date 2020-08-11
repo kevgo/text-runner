@@ -79,14 +79,26 @@ docs:  # runs the documentation tests
 	@(cd textrun-shell && make --no-print-directory docs)
 
 fix:  # runs the auto-fixers
+	@echo fixing root dir ...
 	${CURDIR}/node_modules/.bin/prettier --write .
+	@(cd text-runner && make --no-print-directory fix)
+	@(cd textrun-action && make --no-print-directory fix)
+	@(cd textrun-javascript && make --no-print-directory fix)
+	@(cd textrun-npm && make --no-print-directory fix)
+	@(cd textrun-shell && make --no-print-directory fix)
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints everything
+	@echo linting root dir ...
 	@${CURDIR}/node_modules/.bin/remark . --quiet &
-	@${CURDIR}/node_modules/.bin/prettier --check .
+	@${CURDIR}/node_modules/.bin/prettier -l '.'
+	@(cd text-runner && make --no-print-directory lint)
+	@(cd textrun-action && make --no-print-directory lint)
+	@(cd textrun-javascript && make --no-print-directory lint)
+	@(cd textrun-npm && make --no-print-directory lint)
+	@(cd textrun-shell && make --no-print-directory lint)
 
 setup:  # prepares the code base for development after cloning
 	@yarn

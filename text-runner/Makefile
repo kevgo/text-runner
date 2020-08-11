@@ -31,8 +31,8 @@ docs:  # verify documentation
 	@${CURDIR}/bin/text-run static --format progress --offline
 	@${CURDIR}/bin/text-run dynamic --format progress
 
-
 fix:  # runs the fixers
+	@echo fixing text-runner ...
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
 	@${CURDIR}/node_modules/.bin/prettier --write .
 
@@ -42,7 +42,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	@echo linting text-runner ...
 	@${CURDIR}/node_modules/.bin/prettier -l .
-	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json
+	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --offline --format dot &

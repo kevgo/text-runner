@@ -1,4 +1,2 @@
-dist
-fixtures
-node_modules
-tmp
+text-runner
+textrun-*

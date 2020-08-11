@@ -2,6 +2,9 @@ build:  # builds for the current platform
 	@echo building textrun-action ...
 	@${CURDIR}/node_modules/.bin/tsc -p tsconfig.json
 
+clean:  # Removes all build artifacts
+	@rm -rf dist
+
 docs: build  # runs the documentation tests
 	@echo documentation tests for textrun-action ...
 	@rm -rf tmp

@@ -1,8 +1,9 @@
-build:  # builds
-	@(cd text-runner && make --no-print-directory build)
-
 clean:  # Removes all build artifacts
-	@(cd text-runner/src && make --no-print-directory clean)
+	@(cd text-runner && make --no-print-directory clean)
+	@(cd textrun-action && make --no-print-directory clean)
+	@(cd textrun-javascript && make --no-print-directory clean)
+	@(cd textrun-npm && make --no-print-directory clean)
+	@(cd textrun-shell && make --no-print-directory clean)
 
 coverage-build:  # builds the code base with code coverage measurements baked in
 	./src/node_modules/.bin/babel src -d dist --extensions ".ts"

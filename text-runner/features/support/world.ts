@@ -23,12 +23,7 @@ function World() {
         PATH: process.env.PATH,
       }
     }
-    let command = ""
-    if (params.cwd) {
-      command = helpers.globalTextRunPath(process.platform)
-    } else {
-      command = helpers.makeFullPath(params.command, process.platform)
-    }
+    const command = helpers.makeFullPath(params.command, process.platform)
     if (process.env.NODE_ENV === "coverage") {
       args.command = helpers.coverageCommand(args.command)
     }

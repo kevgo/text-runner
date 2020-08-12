@@ -13,6 +13,7 @@
     "examples/multiple-returns",
     "textrun-action",
     "textrun-javascript",
+    "textrun-make",
     "textrun-npm",
     "textrun-shell",
     "tools"

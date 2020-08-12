@@ -78,6 +78,9 @@ test-all:  # runs all tests
 	@(cd textrun-npm && make --no-print-directory test)
 	@(cd textrun-shell && make --no-print-directory test)
 
+test-changed:  # tests only the changed codebases
+
+
 update-all:  # updates the dependencies for the entire mono-repo
 	@(cd text-runner && yarn upgrade --latest)
 	@(cd textrun-action && yarn upgrade --latest)

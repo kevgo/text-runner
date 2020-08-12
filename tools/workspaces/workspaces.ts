@@ -3,22 +3,6 @@ import * as path from "path"
 import * as os from "os"
 import * as fs from "fs"
 
-// Filters an incoming list of folders to a list of valid workspaces
-//
-// Use like this:
-//
-// COMPILE ALL CHANGED CODE BASES
-// git diff --name-only | workspaces | xargs -i{} 'cd {} && make build'
-// git diff --name-only | workspaces run make build
-//
-// TEST ALL CHANGED CODE BASES ON CI
-// git diff --name-only origin/master | workspaces | xargs -i{} `cd {} && make test'
-// git diff --name-only origin/master | workspaces run make test
-//
-// SKIP TEST IF WORKSPACE ISN'T CHANGED ON CI
-// git diff --name-only origin/master | workspaces | grep textrun-javascript | xargs -i{} make test
-// git diff --name-only origin/master | workspaces if "npm-make" make test
-
 // determine changed workspaces
 const changed = rootFolders(filesInInput())
 console.log("FOLDERS WITH CHANGES:", changed)

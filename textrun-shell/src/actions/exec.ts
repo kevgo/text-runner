@@ -15,8 +15,8 @@ export async function exec(args: ActionArgs) {
   const commandsToRun = args.nodes
     .text()
     .split("\n")
-    .map((command: string) => command.trim())
-    .filter((command: string) => command.length > 0)
+    .map((line: string) => line.trim())
+    .filter((line: string) => line.length > 0)
     // TODO: move this one line up
     .map(trimDollar)
     .map(config.pathMapper().globalizePathFunc())
@@ -27,7 +27,6 @@ export async function exec(args: ActionArgs) {
     )
   }
   args.name(`running console command: ${color.cyan(commandsToRun)}`)
-
   const processor = createObservableProcess(callArgs(commandsToRun), {
     cwd: args.configuration.workspace,
   })

@@ -4,7 +4,6 @@ import { ActionArgs } from "text-runner"
 
 export function execOutput(args: ActionArgs) {
   args.name("verifying the output of the last run console command")
-
   const expectedText = args.nodes.text()
   const expectedLines = expectedText
     .split("\n")

@@ -2,7 +2,7 @@ import { CurrentServer } from "../helpers/current-server"
 import { ActionArgs } from "text-runner"
 
 /**
- * The "verifyProcessOutput" action waits until the currently running console command
+ * The "start-output" action waits until the currently running console command
  * produces the given output.
  */
 export async function startOutput(args: ActionArgs) {

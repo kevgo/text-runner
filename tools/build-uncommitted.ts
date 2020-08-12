@@ -19,11 +19,22 @@ console.log("CHANGED FOLDERS:", changedFolders)
 // determine downstream dependencies of all changed folders
 const depText = shell("yarn workspaces --silent info")
 const depJson = JSON.parse(depText)
-const deps: string[] = []
+const deps = {}
 for (const changed of changedFolders) {
-  deps.push(...upstreamDependencies(changed, depJson))
+  addDeps(changed)
 }
 console.log(deps)
+
+function addDeps(folder: string) {
+  if (deps[folder] !== undefined) {
+    return
+  }
+  const folderDeps = upstreamDependencies(folder, depJson)
+  deps[folder] = folderDeps
+  for (const folderDep of folderDeps) {
+    addDeps(folderDep)
+  }
+}
 
 function upstreamDependencies(folder: string, deps: any): string[] {
   const result: string[] = []

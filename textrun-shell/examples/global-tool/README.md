@@ -1,9 +1,9 @@
 # Example: calling global tools
 
-This example codebase contains a global tool aptly named `tool`. This is the
-documentation for this tool. We want to give usage examples like this one:
+This example codebase contains a global tool aptly named `tool`. This file is
+the documentation for this tool. We want to give usage examples like this one:
 
-> You can run the tool like so:
+> You run the tool with a number as an argument. Here is an example:
 >
 > <pre textrun="shell/exec">
 > tool 123

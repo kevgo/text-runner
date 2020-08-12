@@ -70,3 +70,10 @@ test-all:  # runs all tests
 	@(cd textrun-javascript && make --no-print-directory test)
 	@(cd textrun-npm && make --no-print-directory test)
 	@(cd textrun-shell && make --no-print-directory test)
+
+update-all:  # updates the dependencies for the entire mono-repo
+	@(cd text-runner && yarn upgrade --latest)
+	@(cd textrun-action && yarn upgrade --latest)
+	@(cd textrun-javascript && yarn upgrade --latest)
+	@(cd textrun-npm && yarn upgrade --latest)
+	@(cd textrun-shell && yarn upgrade --latest)

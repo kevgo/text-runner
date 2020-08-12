@@ -7,7 +7,7 @@ import { makefileTargets } from "../helpers/makefile-targets"
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
 export async function target(args: ActionArgs) {
   const target = args.nodes.text().trim()
-  args.name(`make target ${color.cyan(target)} exists`)
+  args.name(`make target ${color.cyan(target)}`)
   const makefile = await fs.readFile(path.join(args.configuration.sourceDir, "Makefile"), "utf8")
   const targets = makefileTargets(makefile)
   if (!targets.includes(target)) {

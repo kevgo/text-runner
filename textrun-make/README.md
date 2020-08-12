@@ -53,7 +53,8 @@ mentioned Make target exists. <a textrun="append-file"> In our example codebase
 the **README.md** file could contain another part:
 
 ```html
-Build the foo package by running <code textrun="make/command">make foo</code>
+If it doesn't work, just run the <code textrun="make/target">foo</code> target
+again.
 ```
 
 </a>

@@ -1,4 +1,4 @@
-# Text-Runner monorepo
+# Text-Runner mono-repo
 
 <a href="https://circleci.com/gh/kevgo/text-runner">
   <img src="https://circleci.com/gh/kevgo/text-runner.svg?style=shield" />

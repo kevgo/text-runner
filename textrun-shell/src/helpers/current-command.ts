@@ -1,6 +1,6 @@
 import { ObservableProcess } from "observable-process"
 
-/** provides global access to the currently running console command. */
+/** CurrentCommand provides global access to the currently running console command. */
 export class CurrentCommand {
   static instance(): ObservableProcess {
     if (!instance) {

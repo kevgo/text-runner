@@ -10,7 +10,7 @@ export interface PathMappings {
   readonly [name: string]: string
 }
 
-/** Configuration represents the configuration options for this Text-Runner library. */
+/** Configuration represents the configuration options for the textrun-shell library. */
 export class Configuration {
   static default(): Configuration {
     return new Configuration({

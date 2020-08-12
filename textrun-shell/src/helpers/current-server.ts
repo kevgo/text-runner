@@ -1,5 +1,6 @@
 import { ObservableProcess } from "observable-process"
 
+/** CurrentServer provides global access to the currently running server process. */
 export class CurrentServer {
   static instance(): CurrentServer {
     return instance

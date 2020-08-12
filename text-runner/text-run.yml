@@ -2,5 +2,7 @@ files: "**/*.md"
 exclude:
   - examples
   - src/parsers/fixtures
+  - src/parsers/markdown/fixtures
+  - tmp
 format: progress
 useSystemTempDirectory: false

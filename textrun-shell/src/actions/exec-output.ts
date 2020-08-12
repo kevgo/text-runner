@@ -5,8 +5,8 @@ import { ActionArgs } from "text-runner"
 export function execOutput(args: ActionArgs) {
   args.name("verifying the output of the last run console command")
 
-  const expectedLines = args.nodes
-    .text()
+  const expectedText = args.nodes.text()
+  const expectedLines = expectedText
     .split("\n")
     .map((line: string) => line.trim())
     .filter((line: string) => line)
@@ -15,11 +15,9 @@ export function execOutput(args: ActionArgs) {
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line)
-  console.log(actualLines)
-  console.log(expectedLines)
   const commonLines = actualLines.filter((line) => expectedLines.includes(line))
   if (commonLines.length === 0) {
-    throw new Error(`expected content not found in output:\n${actualOutput}`)
+    throw new Error(`expected content not found: ${expectedText}\nThis is the output I found:\n${actualOutput}`)
   }
   assertNoDiff.trimmedLines(expectedLines.join("\n"), commonLines.join("\n"))
 }

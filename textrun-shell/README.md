@@ -130,8 +130,11 @@ and provide user input with an HTML table:
 
 </a>
 
-It will print <code textrun="shell/exec-output">Hello Text-Runner, happy
-Friday2!</code>.
+It prints:
+
+<pre textrun="shell/exec-output">
+Hello Text-Runner, happy Friday!
+</pre>.
 
 If the table contains multiple columns, the first column contains output to wait
 for, and the last one text to enter once the output from the first column has
@@ -180,3 +183,4 @@ Now you can interact with the server. When you are done, stop the server:
 ```
 
 </a>
+```

@@ -18,6 +18,9 @@ cuke-all:  # runs all E2E tests
 	@(cd textrun-npm && make --no-print-directory cuke)
 	@(cd textrun-shell && make --no-print-directory cuke)
 
+cuke-smoke-win:  # runs the smoke tests
+	@(cd text-runner && make build && ${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress)
+
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...
 	@${CURDIR}/text-runner/bin/text-run --offline --format progress "*.md"

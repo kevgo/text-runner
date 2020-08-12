@@ -60,6 +60,15 @@ To debug a Cucumber step implementation in VSCode:
 - switch VSCode to the debug view
 - start the `cuke current file` profile
 
+## Updating dependencies
+
+<pre textrun="verify-make-command">
+make update-all
+</pre>
+
+Always update the dependencies for all codebases so that they use the exact same
+versions.
+
 ## Deployment
 
 - make a global search-and-replace for `4.0.3` and replace it with the new

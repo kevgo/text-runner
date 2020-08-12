@@ -2,6 +2,7 @@ build-all:  # builds all the code bases
 	@(cd text-runner && make --no-print-directory build)
 	@(cd textrun-action && make --no-print-directory build)
 	@(cd textrun-javascript && make --no-print-directory build)
+	@(cd textrun-make && make --no-print-directory build)
 	@(cd textrun-npm && make --no-print-directory build)
 	@(cd textrun-shell && make --no-print-directory build)
 
@@ -9,12 +10,14 @@ clean-all:  # Removes all build artifacts
 	@(cd text-runner && make --no-print-directory clean)
 	@(cd textrun-action && make --no-print-directory clean)
 	@(cd textrun-javascript && make --no-print-directory clean)
+	@(cd textrun-make && make --no-print-directory clean)
 	@(cd textrun-npm && make --no-print-directory clean)
 	@(cd textrun-shell && make --no-print-directory clean)
 
 cuke-all:  # runs all E2E tests
 	@(cd text-runner && make --no-print-directory cuke)
 	@(cd textrun-javascript && make --no-print-directory cuke)
+	@(cd textrun-make && make --no-print-directory cuke)
 	@(cd textrun-npm && make --no-print-directory cuke)
 	@(cd textrun-shell && make --no-print-directory cuke)
 
@@ -29,6 +32,7 @@ docs-all: docs  # runs the documentation tests for all codebases
 	@(cd text-runner && make --no-print-directory docs)
 	@(cd textrun-action && make --no-print-directory docs)
 	@(cd textrun-javascript && make --no-print-directory docs)
+	@(cd textrun-make && make --no-print-directory docs)
 	@(cd textrun-npm && make --no-print-directory docs)
 	@(cd textrun-shell && make --no-print-directory docs)
 
@@ -40,6 +44,7 @@ fix-all: fix  # auto-fixes the entire mono-repo
 	@(cd text-runner && make --no-print-directory fix)
 	@(cd textrun-action && make --no-print-directory fix)
 	@(cd textrun-javascript && make --no-print-directory fix)
+	@(cd textrun-make && make --no-print-directory fix)
 	@(cd textrun-npm && make --no-print-directory fix)
 	@(cd textrun-shell && make --no-print-directory fix)
 
@@ -55,6 +60,7 @@ lint-all: lint  # lints the entire mono-repo
 	@(cd text-runner && make --no-print-directory lint)
 	@(cd textrun-action && make --no-print-directory lint)
 	@(cd textrun-javascript && make --no-print-directory lint)
+	@(cd textrun-make && make --no-print-directory lint)
 	@(cd textrun-npm && make --no-print-directory lint)
 	@(cd textrun-shell && make --no-print-directory lint)
 
@@ -68,6 +74,7 @@ test-all:  # runs all tests
 	@(cd text-runner && make --no-print-directory test)
 	@(cd textrun-action && make --no-print-directory test)
 	@(cd textrun-javascript && make --no-print-directory test)
+	@(cd textrun-make && make --no-print-directory test)
 	@(cd textrun-npm && make --no-print-directory test)
 	@(cd textrun-shell && make --no-print-directory test)
 
@@ -75,5 +82,6 @@ update-all:  # updates the dependencies for the entire mono-repo
 	@(cd text-runner && yarn upgrade --latest)
 	@(cd textrun-action && yarn upgrade --latest)
 	@(cd textrun-javascript && yarn upgrade --latest)
+	@(cd textrun-make && yarn upgrade --latest)
 	@(cd textrun-npm && yarn upgrade --latest)
 	@(cd textrun-shell && yarn upgrade --latest)

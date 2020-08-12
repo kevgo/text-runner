@@ -1,0 +1,7 @@
+{
+  "name": "custom-action-sync-example",
+  "version": "1.0.0",
+  "devDependencies": {
+    "text-runner": "4.0.3"
+  }
+}

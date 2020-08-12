@@ -1,127 +1,68 @@
-# Text-Runner Developers Guide
+# Developers Guide
 
-## Installation for development
+This guide is for all codebases in this mono-repo.
 
-You need to have installed:
+## Setup after cloning
 
-- [Node.js](https://nodejs.org) version 8 or later
+You need to have these tools installed:
+
+- [Node.js](https://nodejs.org) version 10 or later
 - [Yarn](https://yarnpkg.com)
-- Gnu Make - running `make` should work on your machine
+- Gnu Make - the `make` command should exist on your machine
 - to see code statistics: [scc](https://github.com/boyter/scc)
 
-To work on the codebase:
+To get the codebase into a runnable state after cloning:
 
-- install dependencies by running <code textrun="verify-make-command">make
-  setup</code>
-- optionally: add `./bin` and `./node_modules/.bin` to your PATH
+- <code textrun="verify-make-command">make setup</code> to install dependencies
+- optionally add `./bin` and `./node_modules/.bin` to the `PATH` environment
+  variable
 
-## Style
+## Running tools
 
-Text-Runner is written in [TypeScript](https://www.typescriptlang.org) and
-formatted by [Prettier](https://prettier.io).
-
-<!-- TODO: remove this -->
-
-Commit messages must follow the
-[Conventional Commits Specification](https://www.conventionalcommits.org). The
-following scopes are available for commit messages:
-
-- **actions:** the built-in actions
-- **CLI:** the CLI
-- **commands:** the available commands
-- **configuration:** the configuration
-- **ecosystem:** the developer ecosystem
-- **core:**: work on the Text-Runner engine
-- **devops:** for deployment and CI
-- **formatters:** work on formatters
-- **markdown:** work on input, like the Markdown parser
-
-## Testing
+All codebases in this mono-repo provide a standardized set of commands for
+executing common tasks. You must run these commands in the directory of the
+respective codebase.
 
 - run all tests: <code textrun="verify-make-command">make test</code>
-- run all tests in offline mode: <code textrun="verify-make-command">make
-  test-offline</code>
-- run end-to-end tests: <code textrun="verify-make-command">make cuke</code>
-- run end-to-end tests in offline mode: <code>make cuke-offline</code>
 - run unit tests: <code>make unit</code>
+- run end-to-end tests: make cuke
 - run documentation tests: <code textrun="verify-make-command">make docs</code>
-- run all linters: <code textrun="verify-make-command">make lint</code>
+- run linters: <code textrun="verify-make-command">make lint</code>
+- run auto-fixers: <code textrun="verify-make-command">make fix</code>
 
-To debug a single end-to-end test:
+See how the commands inside the Makefile work for how to test individual files.
+To enable debugging statements and verbose output while debugging an end-to-end
+test, add the `@debug` Gherkin tag in the first line of the `.feature` file.
 
-- enable console output: add the `@verbose` Gherkin tag
-- enable debugging statements and verbose output: add the `@debug` Gherkin tag
-
-To determine test coverage, run <code textrun="verify-make-command">make
-coverage</code>. The coverage in relatively low because TextRunner contains
-copious amounts of defensive checks against invalid user input. Not all
-permutations of that are tested.
-
-## Architecture
-
-The architecture is best understood by following along with how a set of
-documents is tested. There are several CLI executables to start TextRunner:
-
-- [bin/text-run](bin/text-run) for unix-like systems and macOS
-- [bin/text-run.cmd](bin/text-run.cmd) for Windows
-
-These CLI executables call the [cli.ts](src/cli.ts) CLI module. The CLI
-subsystem parses the command-line arguments and calls TextRunner's
-[JavaScript API](src/text-runner.ts). This API is located in the file
-[src/text-runner.ts](src/text-runner.ts) and also Text-Runner's core.
-
-The core asks the [configuration](src/configuration) module for the current
-[configuration](src/configuration/types/configuration.ts) settings coming from
-command-line arguments and/or configuration files. The configuration structure
-tells TextRunner the command to run. Commands are stored in the
-[commands](src/commands) folder. The most important command is
-[run](src/commands/run.ts), there are others like [help](src/commands/help.ts),
-[setup](src/commands/setup.ts), or [version](src/commands/version.ts).
-
-The [run command](src/commands/run.ts) has a functional architecture that
-converts the configuration into test results over several steps:
-
-1. **configuration --> list of Markdown files to test:** this is done by the
-   [filesystem module](src/filesystem)
-1. **list of filenames --> list of file ASTs:** the [parse module](src/parsers)
-   [reads](src/parsers/markdown/parse-markdown-files.ts) each file and
-   [parses](src/parsers/markdown/md-parser.ts) it into the
-   [standard AST](src/parsers/standard-AST) format. The standard AST is
-   optimized for analyzing and testing,and identical for comparable Markdown and
-   HTML input.
-1. **list of ASTs --> list of tests steps to execute:** the
-   [activities module](src/activity-list) finds _active blocks_ in the ASTs and
-   gathers all the related information. The output of this step is several
-   lists: parallelizable tests like checking static file and image links and
-   sequential tests that have to run one after the other.
-1. **list of test steps --> list of test results:** the
-   [runner module](src/runners) executes the test steps given to it and writes
-   test progress to the console via the configured [formatter](src/formatters).
-   Each test step gets their own formatter instance, this ensures concurrency:
-   the formatter collects all the output of that test step then prints it as a
-   block when the test step is done.
-1. **test results --> test statistics:** finally, we write a summary of the test
-   to the console and terminate with the corresponding exit code.
+In the root directory, there are `make *-all` tasks that run the respective task
+in all codebases of the mono-repo.
 
 ## Debugging
 
-To debug in VSCode:
+To debug Text-Runner in VSCode:
 
-- compile with source maps: `make build-debug`
-- add this launch configuration to VSCode:
-  ```
-  {
-    "type": "node",
-    "request": "launch",
-    "name": "run text-runner",
-    "program": "${workspaceFolder}/src/cli.ts",
-    "outFiles": ["${workspaceFolder}/dist/**"]
-  }
-  ```
 - switch VSCode to the debug view
-- start the `run text-runner` configuration
+- start the `run text-runner` profile
+
+To debug a unit test:
+
+- set a breakpoint in the unit test
+- switch VSCode to the debug view
+- start the `unit` profile
+
+To debug a Cucumber step implementation in VSCode:
+
+- open `.vscode/launch.json`
+- edit the `cuke current file` section:
+  - args
+  - cwd
+- set a breakpoint inside Cucumber code
+- switch VSCode to the debug view
+- start the `cuke current file` profile
 
 ## Deployment
 
-- bump version in `package.json` on master and commit
-- run `npm publish`
+- make a global search-and-replace for `4.0.3` and replace it with the new
+  version
+- get this change into the master branch
+- in [text-runner](text-runner/): run `npm publish`

@@ -18,8 +18,7 @@ jobs:
             - yarn-master
             - yarn-
       - run: yarn
-      - run: make build
-      #   - run: make coverage-build
+      - run: make setup
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -30,72 +29,47 @@ jobs:
           paths:
             - node_modules/
 
-  lint:
+  text-runner-cuke:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make lint
+      - run: cd text-runner && make cuke-ci
 
-  unit-tests:
+  text-runner-others:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make unit
-    #  - run: make coverage-tests
-    #  - save_cache:
-    #      key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
-    #      paths:
-    #        - ~/repo/.nyc_output_tests
+      - run: cd text-runner && make lint unit docs
 
-  cuke-other:
+  textrun-action:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make cuke-other
-    #   - run: make coverage-cuke-other
-    #   - save_cache:
-    #       key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
-    #       paths:
-    #         - ~/repo/.nyc_output_cuke_other
+      - run: cd textrun-action && make test
 
-  cuke-actions:
+  textrun-javascript:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make cuke-actions
-    #   - run: make coverage-cuke-actions
-    #   - save_cache:
-    #       key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
-    #       paths:
-    #         - ~/repo/.nyc_output_cuke_actions
+      - run: cd textrun-javascript && make test
 
-  cuke-tagtypes:
+  textrun-npm:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make cuke-tagtypes
-    #   - run: make coverage-cuke-tagtypes
-    #   - save_cache:
-    #       key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
-    #       paths:
-    #         - ~/repo/.nyc_output_cuke_tagtypes
+      - run: cd textrun-npm && make test
 
-  doc-tests:
+  textrun-shell:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make docs
-      #   - run: make coverage-docs
-      - save_cache:
-          key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
-          paths:
-            - ~/repo/.nyc_output_text_run
+      - run: cd textrun-shell && make test
 
   send-coverage:
     <<: *defaults
@@ -131,29 +105,29 @@ workflows:
   testing:
     jobs:
       - checkout_code
-      - lint:
+      - text-runner-cuke:
           requires:
             - checkout_code
-      - unit-tests:
+      - text-runner-others:
           requires:
             - checkout_code
-      - cuke-other:
+      - textrun-action:
           requires:
             - checkout_code
-      - cuke-actions:
+      - textrun-javascript:
           requires:
             - checkout_code
-      - cuke-tagtypes:
+      - textrun-npm:
           requires:
             - checkout_code
-      - doc-tests:
+      - textrun-shell:
           requires:
             - checkout_code
-    #   - send-coverage:
-    #       requires:
-    #         - lint
-    #         - unit-tests
-    #         - cuke-other
-    #         - cuke-actions
-    #         - cuke-tagtypes
-    #         - doc-tests
+#   - send-coverage:
+#       requires:
+#         - lint
+#         - unit-tests
+#         - cuke-other
+#         - cuke-actions
+#         - cuke-tagtypes
+#         - doc-tests

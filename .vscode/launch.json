@@ -5,19 +5,33 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "unit",
       "type": "node",
       "request": "launch",
-      "name": "unit",
       "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
+      "cwd": "${workspaceFolder}/text-runner",
       "args": ["src/**/*.test.ts"],
       "outFiles": ["${workspaceRoot}/src/*.test.ts"]
     },
     {
+      "name": "run text-runner",
       "type": "node",
       "request": "launch",
-      "name": "run text-runner",
       "program": "${workspaceFolder}/src/cli.ts",
       "outFiles": ["${workspaceFolder}/dist/**"]
+    },
+    {
+      "name": "cuke current file",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/node_modules/.bin/cucumber-js",
+      "args": ["features/exec/global-command.feature"],
+      "cwd": "${workspaceFolder}/textrun-shell",
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "windows": {
+        "program": "${workspaceFolder}/node_modules/cucumber/bin/cucumber"
+      }
     }
   ]
 }

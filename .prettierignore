@@ -1,5 +1,2 @@
-dist/
-node_modules
-src/parsers/fixtures/
-src/parsers/html/fixtures/
-tmp/
+text-runner
+textrun-*

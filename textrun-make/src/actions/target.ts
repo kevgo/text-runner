@@ -7,6 +7,9 @@ import { makefileTargets } from "../helpers/makefile-targets"
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
 export async function target(args: ActionArgs) {
   const target = args.nodes.text().trim()
+  if (target === "") {
+    throw new Error("Empty make target")
+  }
   args.name(`make target ${color.cyan(target)}`)
   const makefile = await fs.readFile(path.join(args.configuration.sourceDir, "Makefile"), "utf8")
   const targets = makefileTargets(makefile)

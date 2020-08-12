@@ -18,7 +18,7 @@ or
 $ yarn i -D textrun-make
 </pre>
 
-## Verify Make commands
+### Verify Make commands
 
 The <b textrun="action/name-full">make/command</b> action verifies that the
 mentioned Make command exists. <a textrun="create-file">As an example, consider
@@ -46,7 +46,7 @@ Build the foo package by running <code textrun="make/command">make foo</code>
 
 Text-Runner verifies that the `Makefile` contains the `foo` target.
 
-## Verify Make targets
+### Verify Make targets
 
 The <b textrun="action/name-full">make/target</b> action verifies that the
 mentioned Make target exists. <a textrun="append-file"> In our example codebase

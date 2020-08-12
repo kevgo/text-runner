@@ -5,6 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "name": "build uncommitted",
+      "program": "${workspaceFolder}/tools/build-uncommitted.ts",
+      "request": "launch",
+      "type": "node"
+    },
+    {
       "name": "unit",
       "type": "node",
       "request": "launch",

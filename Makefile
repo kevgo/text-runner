@@ -6,6 +6,11 @@ build-all:  # builds all the code bases
 	@(cd textrun-npm && make --no-print-directory build)
 	@(cd textrun-shell && make --no-print-directory build)
 
+build-open:  # builds all codebases with uncommitted changes
+
+
+
+
 clean-all:  # Removes all build artifacts
 	@(cd text-runner && make --no-print-directory clean)
 	@(cd textrun-action && make --no-print-directory clean)

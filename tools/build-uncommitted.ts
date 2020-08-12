@@ -2,38 +2,42 @@ import * as child_process from "child_process"
 import * as path from "path"
 import * as os from "os"
 
-function shell(cmd: string): string {
-  return child_process.execSync(cmd, { encoding: "utf-8" })
-}
-
 // determine changed folders
-const changedFolderSet = new Set<string>(
-  shell("git diff --name-only")
-    .split(os.EOL)
-    .map((filename: string) => path.dirname(filename))
-    .map((dirname) => dirname.split(path.sep)[0])
-)
-const changedFolders = Array.from(changedFolderSet).sort()
-console.log("CHANGED FOLDERS:", changedFolders)
+const changed = changedFolders()
+console.log("CHANGED FOLDERS:", changed)
 
-// determine downstream dependencies of all changed folders
-const depText = shell("yarn workspaces --silent info")
-const depJson = JSON.parse(depText)
-const deps = new Set<string>()
-for (const changed of changedFolders) {
-  addDeps(changed)
+// determine upstream dependencies of all changed folders
+const depInfo = loadDeps()
+const upstreams = new Set<string>()
+for (const folder of changed) {
+  addDeps(folder)
 }
-console.log("FOLDERS TO TEST:", deps)
+console.log("FOLDERS TO TEST:", upstreams)
 
 function addDeps(folder: string) {
-  if (deps[folder] !== undefined) {
+  if (upstreams[folder] !== undefined) {
     return
   }
-  const folderDeps = upstreamDependencies(folder, depJson)
-  deps.add(folder)
+  const folderDeps = upstreamDependencies(folder, depInfo)
+  upstreams.add(folder)
   for (const folderDep of folderDeps) {
     addDeps(folderDep)
   }
+}
+
+function changedFolders(): string[] {
+  const set = new Set<string>(
+    shell("git diff --name-only")
+      .split(os.EOL)
+      .map((filename: string) => path.dirname(filename))
+      .map((dirname) => dirname.split(path.sep)[0])
+  )
+  return Array.from(set).sort()
+}
+
+function loadDeps(): any {
+  const depText = shell("yarn workspaces --silent info")
+  return JSON.parse(depText)
 }
 
 function upstreamDependencies(folder: string, deps: any): string[] {
@@ -46,4 +50,8 @@ function upstreamDependencies(folder: string, deps: any): string[] {
     }
   }
   return result
+}
+
+function shell(cmd: string): string {
+  return child_process.execSync(cmd, { encoding: "utf-8" })
 }

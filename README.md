@@ -19,6 +19,7 @@ additional Text-Runner actions:
   plugins
 - [textrun-javascript](textrun-javascript/): running/verifying embedded
   JavaScript code
+- [textrun-make](textrun-make/): verifying Makefile targets
 - [textrun-npm](textrun-npm/): verifying the documentation of npm modules
 - [textrun-shell](textrun-shell/): running executables in a subshell
 

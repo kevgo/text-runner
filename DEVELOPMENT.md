@@ -13,7 +13,7 @@ You need to have these tools installed:
 
 To get the codebase into a runnable state after cloning:
 
-- <code textrun="verify-make-command">make setup</code> to install dependencies
+- <code textrun="make/command">make setup</code> to install dependencies
 - optionally add `./bin` and `./node_modules/.bin` to the `PATH` environment
   variable
 
@@ -23,12 +23,12 @@ All codebases in this mono-repo provide a standardized set of commands for
 executing common tasks. You must run these commands in the directory of the
 respective codebase.
 
-- run all tests: <code textrun="verify-make-command">make test</code>
+- run all tests: <code textrun="make/command">make test</code>
 - run unit tests: <code>make unit</code>
 - run end-to-end tests: make cuke
-- run documentation tests: <code textrun="verify-make-command">make docs</code>
-- run linters: <code textrun="verify-make-command">make lint</code>
-- run auto-fixers: <code textrun="verify-make-command">make fix</code>
+- run documentation tests: <code textrun="make/command">make docs</code>
+- run linters: <code textrun="make/command">make lint</code>
+- run auto-fixers: <code textrun="make/command">make fix</code>
 
 See how the commands inside the Makefile work for how to test individual files.
 To enable debugging statements and verbose output while debugging an end-to-end
@@ -62,7 +62,7 @@ To debug a Cucumber step implementation in VSCode:
 
 ## Updating dependencies
 
-<pre textrun="verify-make-command">
+<pre textrun="make/command">
 make update-all
 </pre>
 

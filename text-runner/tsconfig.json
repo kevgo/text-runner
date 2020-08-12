@@ -1,6 +1,6 @@
 {
   "extends": "./tsconfig-build.json",
-  "include": ["./**/*", "features/support/*.ts"],
+  "include": ["./**/*.ts", "features/support/*.ts"],
   "compilerOptions": {
     "noEmit": true /* Do not emit outputs. */,
     "incremental": false

@@ -10,6 +10,16 @@ export class WorkspaceTagger {
     this.workspaces.set(".", false)
   }
 
+  /** provides the workspace that the given file is in */
+  getWorkspace(filepath: string): string {
+    for (const workspace of this.workspaces.keys()) {
+      if (filepath.startsWith(workspace)) {
+        return workspace
+      }
+    }
+    return "."
+  }
+
   /** indicates whether the given workspace is tagged */
   isTagged(workspace: string): boolean {
     return this.workspaces.get(workspace) || false

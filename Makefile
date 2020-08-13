@@ -6,10 +6,8 @@ build-all:  # builds all the code bases
 	@(cd textrun-npm && make --no-print-directory build)
 	@(cd textrun-shell && make --no-print-directory build)
 
-build-open:  # builds all codebases with uncommitted changes
-
-
-
+build-changed:  # builds all codebases with changes
+	git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory build'
 
 clean-all:  # Removes all build artifacts
 	@(cd text-runner && make --no-print-directory clean)

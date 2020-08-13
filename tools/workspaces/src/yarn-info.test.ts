@@ -1,9 +1,9 @@
-import { UpstreamInfo } from "./upstream-collector"
+import { YarnInfo } from "./yarn-info"
 import { strict as assert } from "assert"
 
 suite("UpstreamCollector", function () {
   test("workspace with upstreams", function () {
-    const uf = new UpstreamInfo(["root", "dep1", "dep2"])
+    const uf = new YarnInfo(["root", "dep1", "dep2"])
     uf.registerDownstream("root", "dep1")
     uf.registerDownstream("root", "dep2")
     uf.registerDownstream("dep1", "dep2")
@@ -11,20 +11,20 @@ suite("UpstreamCollector", function () {
     assert.deepEqual(uf.upstreamsFor("dep2"), ["dep1", "root"])
   })
   test("workspace with no upstreams", function () {
-    const uf = new UpstreamInfo(["root", "dep1"])
+    const uf = new YarnInfo(["root", "dep1"])
     uf.registerDownstream("root", "dep1")
     assert.deepEqual(uf.upstreamsFor("root"), [])
   })
   test("registering an unknown downstream workspace", function () {
-    const uf = new UpstreamInfo(["root"])
+    const uf = new YarnInfo(["root"])
     assert.throws(() => uf.registerDownstream("root", "zonk"), "unregistered workspace: zonk")
   })
   test("registering an unknown upstream workspace", function () {
-    const uf = new UpstreamInfo(["root"])
+    const uf = new YarnInfo(["root"])
     assert.throws(() => uf.registerDownstream("zonk", "root"), "unregistered workspace: zonk")
   })
   test("fetching upstreams for an unknown workspace", function () {
-    const uf = new UpstreamInfo(["root"])
+    const uf = new YarnInfo(["root"])
     assert.throws(() => uf.upstreamsFor("zonk"), "unregistered workspace: zonk")
   })
 })

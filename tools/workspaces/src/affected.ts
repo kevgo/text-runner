@@ -3,12 +3,9 @@ import * as os from "os"
 import * as fs from "fs"
 import { YarnReader, YarnOutput } from "./yarn-reader"
 import { WorkspaceTagger } from "./workspace-tagger"
+import { LogFunc } from "./log-func"
 
-interface LogFunc {
-  (message?: any, ...optionalParams: any[]): void
-}
-
-export function workspaces(yarnOutput: YarnOutput, log: LogFunc) {
+export function affected(yarnOutput: YarnOutput, log: LogFunc) {
   const yarnInfo = new YarnReader(yarnOutput)
 
   // determine the provided workspaces

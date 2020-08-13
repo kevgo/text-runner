@@ -26,7 +26,7 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
     taggedWorkspaces.tagWorkspaces(downstreams)
   }
   const affectedWorkspaces = taggedWorkspaces.tagged()
-  log("all affected workspaces:", affectedWorkspaces)
+  log("affected workspaces:", affectedWorkspaces)
 
   // write to STDOUT
   writeStdout(affectedWorkspaces)

@@ -9,8 +9,11 @@ build-all:  # builds all the codebases
 	@(cd textrun-npm && make --no-print-directory build)
 	@(cd textrun-shell && make --no-print-directory build)
 
-build-affected:  # builds all codebases with changes
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
+build-affected:  # builds the codebases affected by changes in this branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
+
+build-changed:  #builds the codebases changed in this branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
 
 clean-all:  # Removes all build artifacts
 	@(cd text-runner && make --no-print-directory clean)

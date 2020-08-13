@@ -9,7 +9,6 @@ interface LogFunc {
 }
 
 export function workspaces(yarnOutput: YarnOutput, log: LogFunc) {
-  // learn workspace dependency info
   const yarnInfo = new YarnReader(yarnOutput)
 
   // determine the provided workspaces
@@ -22,7 +21,7 @@ export function workspaces(yarnOutput: YarnOutput, log: LogFunc) {
   const providedWorkspaces = taggedWorkspaces.tagged()
   log("changed workspaces:", providedWorkspaces)
 
-  // determine all affected workspaces
+  // determine the affected workspaces
   for (const workspace of providedWorkspaces) {
     const downstreams = yarnInfo.downstreamsFor(workspace)
     for (const downstream of downstreams) {

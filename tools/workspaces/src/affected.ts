@@ -12,7 +12,7 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
   const files = fs.readFileSync(0, "utf-8").split(os.EOL)
   const taggedWorkspaces = new WorkspaceTagger(yarnReader.workspaces())
   for (const file of files) {
-    const workspace = taggedWorkspaces.getWorkspace(file)
+    const workspace = taggedWorkspaces.workspaceOf(file)
     taggedWorkspaces.tag(workspace)
   }
   const providedWorkspaces = taggedWorkspaces.tagged()

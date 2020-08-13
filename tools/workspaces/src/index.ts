@@ -2,11 +2,11 @@ import * as child_process from "child_process"
 import * as color from "colorette"
 import * as os from "os"
 import * as fs from "fs"
-import { YarnInfo } from "./yarn-info"
+import { YarnReader } from "./yarn-reader"
 import { WorkspaceTagger } from "./workspace-tagger"
 
 // learn workspace dependency info
-const yarnInfo = new YarnInfo(workspaceInfo())
+const yarnInfo = new YarnReader(workspaceInfo())
 
 // determine the provided workspaces
 const files = fs.readFileSync(0, "utf-8").split(os.EOL)

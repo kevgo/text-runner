@@ -9,8 +9,11 @@ build-all:  # builds all the codebases
 	@(cd textrun-npm && make --no-print-directory build)
 	@(cd textrun-shell && make --no-print-directory build)
 
-build-affected:  # builds all codebases with changes
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
+build-affected:  # builds the codebases affected by changes in this branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
+
+build-changed:  #builds the codebases changed in this branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
 
 clean-all:  # Removes all build artifacts
 	@(cd text-runner && make --no-print-directory clean)
@@ -43,7 +46,10 @@ docs-all: docs  # runs the documentation tests for all codebases
 	@(cd textrun-shell && make --no-print-directory docs)
 
 docs-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory docs || exit 255'
+
+docs-changed:  # runs the documentation tests for the codebases changed in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory docs || exit 255'
 
 fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
@@ -58,7 +64,10 @@ fix-all: fix  # auto-fixes the entire mono-repo
 	@(cd textrun-shell && make --no-print-directory fix)
 
 fix-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory fix || exit 255'
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory fix || exit 255'
+
+fix-changed:  # runs the documentation tests for the codebases changed in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory fix || exit 255'
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -77,10 +86,16 @@ lint-all: lint  # lints the entire mono-repo
 	@(cd textrun-shell && make --no-print-directory lint)
 
 lint-affected:  # lints the workspaces affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
+
+lint-changed:  # lints the workspaces changed in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
 
 list-affected:  # displays the workspaces affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected
+
+list-changed:  # displays the workspaces changed in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed
 
 setup:  # prepares the mono-repo for development after cloning
 	@find . -type d -name node_modules | xargs rm -rf
@@ -97,8 +112,11 @@ test-all:  # runs all tests
 	@(cd textrun-npm && make --no-print-directory test)
 	@(cd textrun-shell && make --no-print-directory test)
 
-test-affected:  # tests only the changed codebases
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
+test-affected:  # tests only the codebases affected by changes in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
+
+test-changed:  # tests only the codebases changed in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
 
 update-all:  # updates the dependencies for the entire mono-repo
 	@(cd text-runner && yarn upgrade --latest)

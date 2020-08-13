@@ -10,23 +10,25 @@ export class WorkspaceTagger {
     this.workspaces.set(".", false)
   }
 
-  /** provides the workspace that the given file is in */
-  getWorkspace(filepath: string): string {
-    for (const workspace of this.workspaces.keys()) {
-      if (filepath.startsWith(workspace)) {
-        return workspace
-      }
-    }
-    return "."
-  }
-
   /** indicates whether the given workspace is tagged */
   isTagged(workspace: string): boolean {
     return this.workspaces.get(workspace) || false
   }
 
+  /** tags the workspace containing the given file */
+  tagFile(filepath: string) {
+    this.tagWorkspace(this.workspaceOf(filepath))
+  }
+
+  /** tags the workspaces containing the given files */
+  tagFiles(filepaths: string[]) {
+    for (const filepath of filepaths) {
+      this.tagFile(filepath)
+    }
+  }
+
   /** tags the given workspace */
-  tag(workspace: string) {
+  tagWorkspace(workspace: string) {
     if (this.workspaces.has(workspace)) {
       this.workspaces.set(workspace, true)
     } else {
@@ -35,9 +37,9 @@ export class WorkspaceTagger {
   }
 
   /** tags the given workspaces */
-  tagMany(workspaces: string[]) {
+  tagWorkspaces(workspaces: string[]) {
     for (const workspace of workspaces) {
-      this.tag(workspace)
+      this.tagWorkspace(workspace)
     }
   }
 
@@ -50,5 +52,15 @@ export class WorkspaceTagger {
       }
     }
     return result
+  }
+
+  /** provides the workspace that the given file is in */
+  workspaceOf(filepath: string): string {
+    for (const workspace of this.workspaces.keys()) {
+      if (filepath.startsWith(workspace)) {
+        return workspace
+      }
+    }
+    return "."
   }
 }

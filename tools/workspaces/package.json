@@ -6,7 +6,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "colorette": "1.2.1"
+    "colorette": "1.2.1",
+    "minimist": "1.2.5"
   },
   "devDependencies": {
     "mocha": "8.1.1",

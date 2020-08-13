@@ -1,18 +1,29 @@
 # Workspaces tool
 
-This tool filters a Unix stream of filenames into a list of valid workspaces
+This tool converts a text stream of filenames into a text stream of workspaces.
 
 ### Usage
 
-To compile all changed code bases:
+Compile all code bases with uncommitted changes:
 
-git diff --name-only | workspaces | xargs -i{} 'cd {} && make build' git diff
---name-only | workspaces run make build
+```
+git diff --name-only | workspaces | xargs -i{} 'cd {} && make build'
+```
 
-TEST ALL CHANGED CODE BASES ON CI git diff --name-only origin/master |
-workspaces | xargs -i{} `cd {} && make test' git diff --name-only origin/master
-| workspaces run make test
+Compile all code bases that are changed on a branch:
 
-SKIP TEST IF WORKSPACE ISN'T CHANGED ON CI git diff --name-only origin/master |
-workspaces | grep textrun-javascript | xargs -i{} make test git diff --name-only
-origin/master | workspaces if "npm-make" make test
+```
+git diff --name-only master | workspaces | xargs -i{} 'cd {} && make build'
+```
+
+Test all changed code bases on CI:
+
+```
+git diff --name-only origin/master | workspaces | xargs -i{} 'cd {} && make test'
+```
+
+skip test if workspace isn't changed on ci:
+
+```
+git diff --name-only origin/master | workspaces | grep [workspace this job is for] | xargs -i{} 'cd {} && make test'
+```

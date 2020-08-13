@@ -43,7 +43,7 @@ docs-all: docs  # runs the documentation tests for all codebases
 	@(cd textrun-shell && make --no-print-directory docs)
 
 docs-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory lint || exit 255'
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
 
 fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
@@ -58,7 +58,7 @@ fix-all: fix  # auto-fixes the entire mono-repo
 	@(cd textrun-shell && make --no-print-directory fix)
 
 fix-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory fix || exit 255'
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory fix || exit 255'
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -77,7 +77,7 @@ lint-all: lint  # lints the entire mono-repo
 	@(cd textrun-shell && make --no-print-directory lint)
 
 lint-affected:  # lints the workspaces affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory lint || exit 255'
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
 
 list-affected:  # displays the workspaces affected by changes in the current branch
 	@git diff --name-only master | tools/workspaces/bin/workspaces

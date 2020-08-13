@@ -1,7 +1,9 @@
 {
   "name": "workspaces",
   "version": "0.0.0",
-  "main": "index.js",
+  "bin": {
+    "workspaces": "bin/workspaces"
+  },
   "license": "MIT",
   "dependencies": {
     "colorette": "1.2.1"

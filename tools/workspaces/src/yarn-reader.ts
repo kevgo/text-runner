@@ -1,7 +1,7 @@
 import { constructor } from "mocha"
 
 /** describes the entire output of a "yarn workspaces info" command */
-export interface YarnInfo {
+export interface YarnOutput {
   [name: string]: YarnWorkspace
 }
 
@@ -19,7 +19,7 @@ interface YarnWorkspace {
  */
 export class YarnReader {
   /** the data struct received from "yarn workspaces info" */
-  private readonly yarnInfo: YarnInfo
+  private readonly yarnInfo: YarnOutput
 
   /** workspace path --> paths of workspaces that use the key directly, needed because the yarn info contains the names instead of paths */
   private readonly directDownstreams: Map<string, Set<string>>
@@ -27,7 +27,7 @@ export class YarnReader {
   /** workspace path --> paths of workspaces that use the key directly and indirectly */
   private readonly transitiveDownstreams: Map<string, Set<string>>
 
-  constructor(yarnInfo: YarnInfo) {
+  constructor(yarnInfo: YarnOutput) {
     this.yarnInfo = yarnInfo
 
     // initialize empty variables

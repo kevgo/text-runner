@@ -16,7 +16,6 @@
     "textrun-make",
     "textrun-npm",
     "textrun-shell",
-    "tools/prettier",
     "tools/workspaces"
   ]
 }

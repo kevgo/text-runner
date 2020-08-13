@@ -1,4 +1,5 @@
 import * as child_process from "child_process"
+import * as color from "colorette"
 import * as os from "os"
 import * as fs from "fs"
 import { UpstreamInfo } from "./upstream-collector"
@@ -20,14 +21,20 @@ for (const file of files) {
   taggedWorkspaces.tag(rootFolder(file))
 }
 const providedWorkspaces = taggedWorkspaces.tagged()
-console.error("PROVIDED WORKSPACES:", providedWorkspaces)
+console.error("changed workspaces:", providedWorkspaces)
 
 // determine all affected workspaces
 for (const workspace of providedWorkspaces) {
-  taggedWorkspaces.tagMany(upstreamInfo.upstreamsFor(workspace))
+  const upstreams = upstreamInfo.upstreamsFor(workspace)
+  for (const upstream of upstreams) {
+    if (!taggedWorkspaces.isTagged(upstream)) {
+      console.error(`${color.cyan(workspace)} is an upstream of ${color.cyan(upstream)}`)
+    }
+  }
+  taggedWorkspaces.tagMany(upstreams)
 }
 const affectedWorkspaces = taggedWorkspaces.tagged()
-console.error("AFFECTED WORKSPACES:", affectedWorkspaces)
+console.error("all affected workspaces:", affectedWorkspaces)
 
 // write to STDOUT
 console.log(affectedWorkspaces.join(os.EOL))

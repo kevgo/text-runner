@@ -10,6 +10,12 @@ export class WorkspaceTagger {
     this.workspaces.set(".", false)
   }
 
+  /** indicates whether the given workspace is tagged */
+  isTagged(workspace: string): boolean {
+    return this.workspaces.get(workspace) || false
+  }
+
+  /** tags the given workspace */
   tag(workspace: string) {
     if (this.workspaces.has(workspace)) {
       this.workspaces.set(workspace, true)
@@ -18,12 +24,14 @@ export class WorkspaceTagger {
     }
   }
 
+  /** tags the given workspaces */
   tagMany(workspaces: string[]) {
     for (const workspace of workspaces) {
       this.tag(workspace)
     }
   }
 
+  /** provides all tagged workspaces */
   tagged(): string[] {
     const result: string[] = []
     for (const workspace of this.workspaces.keys()) {

@@ -13,7 +13,7 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
   const taggedWorkspaces = new WorkspaceTagger(yarnReader.workspaces())
   for (const file of files) {
     const workspace = taggedWorkspaces.workspaceOf(file)
-    taggedWorkspaces.tag(workspace)
+    taggedWorkspaces.tagWorkspace(workspace)
   }
   const providedWorkspaces = taggedWorkspaces.tagged()
   log("changed workspaces:", providedWorkspaces)
@@ -26,7 +26,7 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
         log(`${color.cyan(workspace)} is a downstream of ${color.cyan(downstream)}`)
       }
     }
-    taggedWorkspaces.tagMany(downstreams)
+    taggedWorkspaces.tagWorkspaces(downstreams)
   }
   const affectedWorkspaces = taggedWorkspaces.tagged()
   log("all affected workspaces:", affectedWorkspaces)

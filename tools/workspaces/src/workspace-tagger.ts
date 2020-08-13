@@ -16,7 +16,7 @@ export class WorkspaceTagger {
   }
 
   /** tags the given workspace */
-  tag(workspace: string) {
+  tagWorkspace(workspace: string) {
     if (this.workspaces.has(workspace)) {
       this.workspaces.set(workspace, true)
     } else {
@@ -25,9 +25,9 @@ export class WorkspaceTagger {
   }
 
   /** tags the given workspaces */
-  tagMany(workspaces: string[]) {
+  tagWorkspaces(workspaces: string[]) {
     for (const workspace of workspaces) {
-      this.tag(workspace)
+      this.tagWorkspace(workspace)
     }
   }
 

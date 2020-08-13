@@ -10,7 +10,7 @@ build-all:  # builds all the code bases
 	@(cd textrun-shell && make --no-print-directory build)
 
 build-changed:  # builds all codebases with changes
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory build'
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
 
 clean-all:  # Removes all build artifacts
 	@(cd text-runner && make --no-print-directory clean)
@@ -78,7 +78,7 @@ setup:  # prepares the mono-repo for development after cloning
 	@yarn
 	@make --no-print-directory build-all
 
-test: test-all  # shorter name for test-all
+test: lint  # shorter name for test-all
 
 test-all:  # runs all tests
 	@(cd text-runner && make --no-print-directory test)
@@ -89,7 +89,7 @@ test-all:  # runs all tests
 	@(cd textrun-shell && make --no-print-directory test)
 
 test-changed:  # tests only the changed codebases
-	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory test'
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory test || exit 255'
 
 update-all:  # updates the dependencies for the entire mono-repo
 	@(cd text-runner && yarn upgrade --latest)

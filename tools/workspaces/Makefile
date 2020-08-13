@@ -8,9 +8,9 @@ clean:  # Removes all build artifacts
 
 docs: build  # runs the documentation tests
 	@echo workspaces tool documentation tests ...
-	@rm -rf tmp
-	@${CURDIR}/node_modules/.bin/text-run static --offline --format progress
-	@${CURDIR}/node_modules/.bin/text-run dynamic --format progress
+	# @rm -rf tmp
+	# @${CURDIR}/node_modules/.bin/text-run static --offline --format progress
+	# @${CURDIR}/node_modules/.bin/text-run dynamic --format progress
 
 fix:  # runs the auto-fixers
 	@echo workspaces tool auto-fixes ...

@@ -25,19 +25,19 @@ export class YarnReader {
   /** workspace path --> paths of workspaces that use the key directly and indirectly */
   private readonly transitiveDownstreams: Map<string, Set<string>>
 
-  constructor(yarnInfo: YarnOutput) {
-    this.yarnInfo = yarnInfo
+  constructor(yarnOutput: YarnOutput) {
+    this.yarnInfo = yarnOutput
 
     // initialize empty variables
     this.directDownstreams = new Map()
     this.transitiveDownstreams = new Map()
-    for (const yarnWSInfo of Object.values(yarnInfo)) {
+    for (const yarnWSInfo of Object.values(yarnOutput)) {
       this.directDownstreams.set(yarnWSInfo.location, new Set())
       this.transitiveDownstreams.set(yarnWSInfo.location, new Set())
     }
 
     // populate direct downstreams
-    for (const yarnWSInfo of Object.values(yarnInfo)) {
+    for (const yarnWSInfo of Object.values(yarnOutput)) {
       const upstreamsPaths = this.pathsFor(yarnWSInfo.workspaceDependencies)
       for (const dsPath of upstreamsPaths) {
         // @ts-ignore

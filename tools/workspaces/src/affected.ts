@@ -6,11 +6,11 @@ import { WorkspaceTagger } from "./workspace-tagger"
 import { LogFunc } from "./log-func"
 
 export function affected(yarnOutput: YarnOutput, log: LogFunc) {
-  const yarnInfo = new YarnReader(yarnOutput)
+  const yarnReader = new YarnReader(yarnOutput)
 
   // determine the provided workspaces
   const files = fs.readFileSync(0, "utf-8").split(os.EOL)
-  const taggedWorkspaces = new WorkspaceTagger(yarnInfo.workspaces())
+  const taggedWorkspaces = new WorkspaceTagger(yarnReader.workspaces())
   for (const file of files) {
     const workspace = taggedWorkspaces.getWorkspace(file)
     taggedWorkspaces.tag(workspace)
@@ -20,7 +20,7 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
 
   // determine the affected workspaces
   for (const workspace of providedWorkspaces) {
-    const downstreams = yarnInfo.downstreamsFor(workspace)
+    const downstreams = yarnReader.downstreamsFor(workspace)
     for (const downstream of downstreams) {
       if (!taggedWorkspaces.isTagged(downstream)) {
         log(`${color.cyan(workspace)} is a downstream of ${color.cyan(downstream)}`)

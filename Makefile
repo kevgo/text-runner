@@ -1,7 +1,7 @@
 build:
 	@echo root folder build ...
 
-build-all:  # builds all the code bases
+build-all:  # builds all the codebases
 	@(cd text-runner && make --no-print-directory build)
 	@(cd textrun-action && make --no-print-directory build)
 	@(cd textrun-javascript && make --no-print-directory build)
@@ -9,7 +9,7 @@ build-all:  # builds all the code bases
 	@(cd textrun-npm && make --no-print-directory build)
 	@(cd textrun-shell && make --no-print-directory build)
 
-build-changed:  # builds all codebases with changes
+build-affected:  # builds all codebases with changes
 	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
 
 clean-all:  # Removes all build artifacts
@@ -42,6 +42,9 @@ docs-all: docs  # runs the documentation tests for all codebases
 	@(cd textrun-npm && make --no-print-directory docs)
 	@(cd textrun-shell && make --no-print-directory docs)
 
+docs-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory lint || exit 255'
+
 fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
 	${CURDIR}/node_modules/.bin/prettier --write .
@@ -53,6 +56,9 @@ fix-all: fix  # auto-fixes the entire mono-repo
 	@(cd textrun-make && make --no-print-directory fix)
 	@(cd textrun-npm && make --no-print-directory fix)
 	@(cd textrun-shell && make --no-print-directory fix)
+
+fix-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory fix || exit 255'
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -70,10 +76,10 @@ lint-all: lint  # lints the entire mono-repo
 	@(cd textrun-npm && make --no-print-directory lint)
 	@(cd textrun-shell && make --no-print-directory lint)
 
-lint-changed:
+lint-affected:  # lints the workspaces affected by changes in the current branch
 	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory lint || exit 255'
 
-list-changed:
+list-affected:  # displays the workspaces affected by changes in the current branch
 	@git diff --name-only master | tools/workspaces/bin/workspaces
 
 setup:  # prepares the mono-repo for development after cloning
@@ -91,7 +97,7 @@ test-all:  # runs all tests
 	@(cd textrun-npm && make --no-print-directory test)
 	@(cd textrun-shell && make --no-print-directory test)
 
-test-changed:  # tests only the changed codebases
+test-affected:  # tests only the changed codebases
 	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
 
 update-all:  # updates the dependencies for the entire mono-repo

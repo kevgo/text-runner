@@ -15,6 +15,18 @@ export class WorkspaceTagger {
     return this.workspaces.get(workspace) || false
   }
 
+  /** tags the workspace containing the given file */
+  tagFile(filepath: string) {
+    this.tagWorkspace(this.workspaceOf(filepath))
+  }
+
+  /** tags the workspaces containing the given files */
+  tagFiles(filepaths: string[]) {
+    for (const filepath of filepaths) {
+      this.tagFile(filepath)
+    }
+  }
+
   /** tags the given workspace */
   tagWorkspace(workspace: string) {
     if (this.workspaces.has(workspace)) {

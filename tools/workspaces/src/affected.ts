@@ -11,10 +11,7 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
   // determine the provided workspaces
   const files = fs.readFileSync(0, "utf-8").split(os.EOL)
   const taggedWorkspaces = new WorkspaceTagger(yarnReader.workspaces())
-  for (const file of files) {
-    const workspace = taggedWorkspaces.workspaceOf(file)
-    taggedWorkspaces.tagWorkspace(workspace)
-  }
+  taggedWorkspaces.tagFiles(files)
   const providedWorkspaces = taggedWorkspaces.tagged()
   log("changed workspaces:", providedWorkspaces)
 

@@ -2,16 +2,59 @@ import { WorkspaceTagger } from "./workspace-tagger"
 import { strict as assert } from "assert"
 
 suite("WorkspaceTagger", function () {
-  test("tagging workspace folders", function () {
-    const wst = new WorkspaceTagger(["one", "two", "three"])
-    wst.tagMany(["three", "one"])
-    assert.deepEqual(wst.tagged(), ["one", "three"])
+  suite("tagFile", function () {
+    test("in workspace", function () {
+      const wst = new WorkspaceTagger(["one", "two", "three"])
+      wst.tagFile("three/foo.md")
+      wst.tagFile("one/bar.md")
+      assert.deepEqual(wst.tagged(), ["one", "three"])
+    })
+    test("in non-workspace folder", function () {
+      const wst = new WorkspaceTagger(["one", "two"])
+      wst.tagFile("other/zonk.md")
+      assert.deepEqual(wst.tagged(), ["."])
+    })
   })
-  test("tagging non-workspace folders", function () {
-    const wst = new WorkspaceTagger(["one", "two"])
-    wst.tagMany(["two", "zonk"])
-    assert.deepEqual(wst.tagged(), ["two", "."])
+  suite("tagFiles", function () {
+    test("in workspace", function () {
+      const wst = new WorkspaceTagger(["one", "two", "three"])
+      wst.tagFiles(["three/foo.md", "one/bar.md"])
+      assert.deepEqual(wst.tagged(), ["one", "three"])
+    })
+    test("in non-workspace folder", function () {
+      const wst = new WorkspaceTagger(["one", "two"])
+      wst.tagFiles(["zonk.md"])
+      assert.deepEqual(wst.tagged(), ["."])
+    })
   })
+
+  suite("tagWorkspace", function () {
+    test("existing workspace", function () {
+      const wst = new WorkspaceTagger(["one", "two", "three"])
+      wst.tagWorkspace("three")
+      wst.tagWorkspace("one")
+      assert.deepEqual(wst.tagged(), ["one", "three"])
+    })
+    test("non-workspace folder", function () {
+      const wst = new WorkspaceTagger(["one", "two"])
+      wst.tagWorkspace("zonk")
+      assert.deepEqual(wst.tagged(), ["."])
+    })
+  })
+
+  suite("tagWorkspaces", function () {
+    test("existing workspaces", function () {
+      const wst = new WorkspaceTagger(["one", "two", "three"])
+      wst.tagWorkspaces(["three", "one"])
+      assert.deepEqual(wst.tagged(), ["one", "three"])
+    })
+    test("non-workspace folder", function () {
+      const wst = new WorkspaceTagger(["one", "two"])
+      wst.tagWorkspaces(["two", "zonk"])
+      assert.deepEqual(wst.tagged(), ["two", "."])
+    })
+  })
+
   suite("workspaceOf", function () {
     const tests = {
       "examples/one/README.md": "examples/one",

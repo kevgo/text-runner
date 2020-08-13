@@ -87,7 +87,7 @@ setup:  # prepares the mono-repo for development after cloning
 	@yarn
 	@make --no-print-directory build-all
 
-test: lint  # shorter name for test-all
+test: lint  # runs all tests for the root directory
 
 test-all:  # runs all tests
 	@(cd text-runner && make --no-print-directory test)

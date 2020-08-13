@@ -1,15 +1,15 @@
 import * as color from "colorette"
-import * as os from "os"
-import * as fs from "fs"
 import { YarnReader, YarnOutput } from "./yarn-reader"
 import { WorkspaceTagger } from "./workspace-tagger"
 import { LogFunc } from "./log-func"
+import { readStdin } from "./read-stdin"
+import { writeStdout } from "./write-stdout"
 
 export function affected(yarnOutput: YarnOutput, log: LogFunc) {
   const yarnReader = new YarnReader(yarnOutput)
 
   // determine the provided workspaces
-  const files = fs.readFileSync(0, "utf-8").split(os.EOL)
+  const files = readStdin()
   const taggedWorkspaces = new WorkspaceTagger(yarnReader.workspaces())
   taggedWorkspaces.tagFiles(files)
   const providedWorkspaces = taggedWorkspaces.tagged()
@@ -29,5 +29,5 @@ export function affected(yarnOutput: YarnOutput, log: LogFunc) {
   log("all affected workspaces:", affectedWorkspaces)
 
   // write to STDOUT
-  console.log(affectedWorkspaces.join(os.EOL))
+  writeStdout(affectedWorkspaces)
 }

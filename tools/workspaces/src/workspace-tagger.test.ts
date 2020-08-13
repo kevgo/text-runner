@@ -12,8 +12,17 @@ suite("WorkspaceTagger", function () {
     wst.tagMany(["two", "zonk"])
     assert.deepEqual(wst.tagged(), ["two", "."])
   })
-  test("getWorkspace", function () {
+  suite("workspaceOf", function () {
+    const tests = {
+      "examples/one/README.md": "examples/one",
+      "examples/two/foo/bar/README.md": "examples/two",
+      "README.md": ".",
+    }
     const wst = new WorkspaceTagger(["examples/one", "examples/two", "tools/three"])
-    assert.equal(wst.getWorkspace("examples/two/README.md"), "examples/two")
+    for (const [give, want] of Object.entries(tests)) {
+      test(`${give} --> ${want}`, function () {
+        assert.equal(wst.workspaceOf(give), want)
+      })
+    }
   })
 })

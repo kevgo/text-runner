@@ -1,9 +1,9 @@
-import { YarnReader, YarnInfo } from "./yarn-reader"
+import { YarnReader, YarnOutput } from "./yarn-reader"
 import { strict as assert } from "assert"
 
 suite("YarnReader", function () {
   test("downstreamsFor normal", function () {
-    const yarnOutput: YarnInfo = {
+    const yarnOutput: YarnOutput = {
       a: {
         location: "a path",
         workspaceDependencies: ["b"],
@@ -24,7 +24,7 @@ suite("YarnReader", function () {
     assert.throws(() => uf.downstreamsFor("zonk"), "unregistered workspace: zonk")
   })
   test("downstreamsFor with cyclical dependency", function () {
-    const yarnOutput: YarnInfo = {
+    const yarnOutput: YarnOutput = {
       a: {
         location: "a path",
         workspaceDependencies: ["b"],
@@ -39,7 +39,7 @@ suite("YarnReader", function () {
     assert.deepEqual(uf.downstreamsFor("b path"), ["a path"])
   })
   test("pathsFor", function () {
-    const yarnOutput: YarnInfo = {
+    const yarnOutput: YarnOutput = {
       a: {
         location: "a path",
         workspaceDependencies: [],

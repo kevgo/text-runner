@@ -6,10 +6,6 @@ clean:  # Removes all build artifacts
 	@echo workspaces tool artifact cleanup ...
 	@rm -rf dist
 
-cuke: build  # runs the feature specs
-	@echo workspaces tool E2E tests ...
-	@${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
-
 docs: build  # runs the documentation tests
 	@echo workspaces tool documentation tests ...
 	@rm -rf tmp
@@ -27,11 +23,11 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	@echo workspaces tool linters ...
 	@${CURDIR}/node_modules/.bin/prettier -l .
-	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
+	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../../tslint.json
 
-test: lint unit cuke docs  # runs all tests
+test: lint unit docs  # runs all tests
 
-test-ts: unit cuke  # runs all code tests
+test-ts: unit  # runs all code tests
 
 unit:  # runs the unit tests
 	@echo workspaces tool unit tests ...

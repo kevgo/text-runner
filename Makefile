@@ -70,7 +70,11 @@ lint-all: lint  # lints the entire mono-repo
 	@(cd textrun-npm && make --no-print-directory lint)
 	@(cd textrun-shell && make --no-print-directory lint)
 
+list-changed:
+	@git diff --name-only master | tools/workspaces/bin/workspaces
+
 setup:  # prepares the mono-repo for development after cloning
+	@find . -type d -name node_modules | xargs rm -rf
 	@yarn
 	@make --no-print-directory build-all
 
@@ -85,7 +89,7 @@ test-all:  # runs all tests
 	@(cd textrun-shell && make --no-print-directory test)
 
 test-changed:  # tests only the changed codebases
-
+	@git diff --name-only master | tools/workspaces/bin/workspaces | xargs -I {} bash -c 'cd {} && pwd && make --no-print-directory test'
 
 update-all:  # updates the dependencies for the entire mono-repo
 	@(cd text-runner && yarn upgrade --latest)

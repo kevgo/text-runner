@@ -1,5 +1,5 @@
 {
-  "name": "tools",
+  "name": "prettier-tool",
   "version": "0.0.0",
   "devDependencies": {
     "mocha": "8.1.1",

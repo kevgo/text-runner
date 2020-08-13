@@ -1,5 +1,3 @@
-import { constructor } from "mocha"
-
 /** describes the entire output of a "yarn workspaces info" command */
 export interface YarnOutput {
   [name: string]: YarnWorkspace

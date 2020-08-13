@@ -8,9 +8,9 @@ export function changed(yarnOutput: YarnOutput, log: LogFunc) {
   const yarnReader = new YarnReader(yarnOutput)
 
   // determine the provided workspaces
-  const taggedWorkspaces = new WorkspaceTagger(yarnReader.workspaces())
-  taggedWorkspaces.tagFiles(readStdin())
-  const providedWorkspaces = taggedWorkspaces.tagged()
+  const tagger = new WorkspaceTagger(yarnReader.workspaces())
+  tagger.tagFiles(readStdin())
+  const providedWorkspaces = tagger.tagged()
   log("changed workspaces:", providedWorkspaces)
 
   // write to STDOUT

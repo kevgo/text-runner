@@ -48,7 +48,7 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-action && ../.circleci/run-if-affected make test-ci
+      - run: cd textrun-action && ../.circleci/run-if-affected make test
 
   textrun-javascript:
     <<: *defaults

@@ -55,20 +55,3 @@ suite("standardizePath", function () {
     assert.equal(helpers.standardizePath("foo\\bar"), "foo/bar")
   })
 })
-
-suite("coverageCommand", function () {
-  test("linux", function () {
-    if (process.platform === "win32") {
-      return
-    }
-    const have = helpers.coverageCommand("text-run foo")
-    assert.match(have, /.+\/node_modules\/.bin\/nyc text-run foo$/)
-  })
-  test("windows", function () {
-    if (process.platform !== "win32") {
-      return
-    }
-    const have = helpers.coverageCommand("text-run foo")
-    assert.match(have, /.+\\node_modules\\.bin\\nyc text-run foo$/)
-  })
-})

@@ -53,17 +53,13 @@
     "@types/rechoir": "0.6.1",
     "@types/rimraf": "3.0.0",
     "@types/shelljs": "0.8.8",
-    "@types/uuid": "8.0.0",
     "@types/yamljs": "0.2.31",
     "array-flatten": "3.0.0",
     "babel-cli": "6.26.0",
-    "babel-plugin-istanbul": "6.0.0",
     "chai": "4.2.0",
-    "coveralls": "3.1.0",
     "cucumber": "6.0.5",
     "dim-console": "0.4.4",
     "mocha": "8.0.1",
-    "nyc": "15.1.0",
     "prettier": "2.0.5",
     "ps-tree": "1.2.0",
     "remark-cli": "8.0.1",
@@ -73,8 +69,7 @@
     "strip-ansi": "6.0.0",
     "ts-node": "8.10.2",
     "tslint": "6.1.2",
-    "typescript": "3.9.7",
-    "uuid": "8.2.0"
+    "typescript": "3.9.7"
   },
   "files": [
     "bin/text-run",

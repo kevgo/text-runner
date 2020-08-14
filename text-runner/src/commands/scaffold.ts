@@ -1,5 +1,5 @@
-import fs from "fs-extra"
-import path from "path"
+import * as fs from "fs-extra"
+import * as path from "path"
 
 export async function scaffoldCommand(blockName: string | undefined): Promise<Error[]> {
   if (!blockName) {

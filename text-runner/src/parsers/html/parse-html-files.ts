@@ -1,4 +1,4 @@
-import fs from "fs-extra"
+import * as fs from "fs-extra"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"

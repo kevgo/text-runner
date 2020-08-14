@@ -1,4 +1,4 @@
-import color from "colorette"
+import * as color from "colorette"
 import { createObservableProcess } from "observable-process"
 import { callArgs } from "../helpers/call-args"
 import { CurrentServer } from "../helpers/current-server"

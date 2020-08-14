@@ -1,5 +1,5 @@
-import color from "colorette"
-import rimraf from "rimraf"
+import * as color from "colorette"
+import * as rimraf from "rimraf"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"

@@ -1,8 +1,8 @@
 import * as assertNoDiff from "assert-no-diff"
-import color from "colorette"
-import eol from "eol"
-import fs from "fs-extra"
-import path from "path"
+import * as color from "colorette"
+import * as eol from "eol"
+import * as fs from "fs-extra"
+import * as path from "path"
 import { ActionArgs } from "../types/action-args"
 
 export default async function verifySourceFileContent(args: ActionArgs) {

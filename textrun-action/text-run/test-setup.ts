@@ -1,6 +1,6 @@
 import { ActionArgs } from "text-runner"
 import { promises as fs } from "fs"
-import path from "path"
+import * as path from "path"
 
 export default async function testSetup(action: ActionArgs) {
   const codeBlocks = action.nodes.getNodesOfTypes("code")

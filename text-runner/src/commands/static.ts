@@ -1,5 +1,5 @@
-import color from "colorette"
-import fs from "fs-extra"
+import * as color from "colorette"
+import * as fs from "fs-extra"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { Configuration } from "../configuration/types/configuration"

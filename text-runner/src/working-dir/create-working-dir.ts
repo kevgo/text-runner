@@ -1,6 +1,6 @@
-import fs from "fs-extra"
-import path from "path"
-import tmp from "tmp-promise"
+import * as fs from "fs-extra"
+import * as path from "path"
+import * as tmp from "tmp-promise"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 
 type workingDirSetting = string | boolean

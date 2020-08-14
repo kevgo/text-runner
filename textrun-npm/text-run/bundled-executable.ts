@@ -1,6 +1,6 @@
 import { ActionArgs } from "text-runner"
 import { promises as fs } from "fs"
-import path from "path"
+import * as path from "path"
 
 /** creates a binary with the given name in the workspace */
 export default async function bundledExecutable(action: ActionArgs) {

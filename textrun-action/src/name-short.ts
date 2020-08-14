@@ -1,5 +1,5 @@
 import { actionName, ActionArgs } from "text-runner"
-import path from "path"
+import * as path from "path"
 
 export function nameShort(args: ActionArgs) {
   const want = args.nodes.text()

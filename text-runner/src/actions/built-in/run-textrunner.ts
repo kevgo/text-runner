@@ -1,5 +1,5 @@
 import { ActionArgs } from "../types/action-args"
-import path from "path"
+import * as path from "path"
 import { callArgs } from "../helpers/call-args"
 import { createObservableProcess } from "observable-process"
 

@@ -1,5 +1,5 @@
-import MarkdownIt from "markdown-it"
-import util from "util"
+import * as MarkdownIt from "markdown-it"
+import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { HTMLParser } from "../html/html-parser"
 import { AstNode, AstNodeAttributes } from "../standard-AST/ast-node"

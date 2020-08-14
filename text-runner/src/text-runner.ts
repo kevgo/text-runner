@@ -1,4 +1,4 @@
-import color from "colorette"
+import * as color from "colorette"
 import { debugCommand } from "./commands/debug"
 import { dynamicCommand } from "./commands/dynamic"
 import { helpCommand } from "./commands/help"

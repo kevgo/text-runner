@@ -1,9 +1,9 @@
 import { ActionArgs } from "../types/action-args"
 import { promises as fs } from "fs"
-import path from "path"
+import * as path from "path"
 import { callArgs } from "../helpers/call-args"
 import { createObservableProcess } from "observable-process"
-import stripAnsi from "strip-ansi"
+import stripAnsi = require("strip-ansi")
 
 /** runs the given Markdown in Text-Runner */
 export default async function runInTextRunner(action: ActionArgs) {

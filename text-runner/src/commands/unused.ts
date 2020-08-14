@@ -1,4 +1,4 @@
-import color from "colorette"
+import * as color from "colorette"
 import { ActionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/types/configuration"

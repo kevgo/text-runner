@@ -1,6 +1,6 @@
 import { strict as assert } from "assert"
-import fs from "fs-extra"
-import path from "path"
+import * as fs from "fs-extra"
+import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"

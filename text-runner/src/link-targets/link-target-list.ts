@@ -1,4 +1,4 @@
-import slugify from "@sindresorhus/slugify"
+import * as slugify from "@sindresorhus/slugify"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"

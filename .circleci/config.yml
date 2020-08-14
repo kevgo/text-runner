@@ -71,34 +71,6 @@ jobs:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
       - run: cd textrun-shell && make test
 
-  send-coverage:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: coverage-tests-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: coverage-cuke-other-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: coverage-cuke-actions-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: coverage-cuke-tagtypes-{{ .Environment.CIRCLE_SHA1 }}
-      - restore_cache:
-          key: coverage-docs-{{ .Environment.CIRCLE_SHA1 }}
-      - run: ls -la
-      - run: make coverage-merge
-      - run: make coverage-send
-
-  deploy:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make build
-      - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
-      - run: npm publish
-
 workflows:
   version: 2
 
@@ -123,11 +95,3 @@ workflows:
       - textrun-shell:
           requires:
             - checkout_code
-#   - send-coverage:
-#       requires:
-#         - lint
-#         - unit-tests
-#         - cuke-other
-#         - cuke-actions
-#         - cuke-tagtypes
-#         - doc-tests

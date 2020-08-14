@@ -6,7 +6,7 @@ Feature: separate working directory
   So that I don't clutter up my documentation source code with temporary files creating by the tests.
 
   Background:
-    Given my workspace contains the file "1.md" with content:
+    Given the workspace contains the file "1.md" with content:
       """
       <pre textrun="test">
       pwd
@@ -19,7 +19,7 @@ Feature: separate working directory
     And the "tmp" directory is now deleted
 
 Scenario: running in a local temp directory
-  Given my text-run configuration contains:
+  Given the text-run configuration contains:
     """
     useSystemTempDirectory: false
     """
@@ -28,7 +28,7 @@ Scenario: running in a local temp directory
   And the "tmp" directory is now deleted
 
 Scenario: running in a global temp directory
-  Given my text-run configuration contains:
+  Given the text-run configuration contains:
     """
     useSystemTempDirectory: true
     """

@@ -6,11 +6,11 @@ Feature: active table tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: simple HTML table
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table textrun="HelloWorld">
         <tr> <td></td> </tr>
@@ -24,7 +24,7 @@ Feature: active table tags
 
 
   Scenario: HTML table with THEAD and TBODY
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table textrun="HelloWorld">
         <thead>
@@ -43,7 +43,7 @@ Feature: active table tags
 
 
   Scenario: active TR tag in THEAD
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table>
         <thead>
@@ -60,7 +60,7 @@ Feature: active table tags
 
 
   Scenario: active TR tag in TBODY
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table>
         <thead>
@@ -79,7 +79,7 @@ Feature: active table tags
 
 
   Scenario: row tag in simple HTML table
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table>
         <tr textrun="HelloWorld"> <td></td> </tr>
@@ -93,7 +93,7 @@ Feature: active table tags
 
 
   Scenario: HTML table cell tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table>
         <tr>
@@ -109,7 +109,7 @@ Feature: active table tags
 
 
   Scenario: HTML table header tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <table>
         <tr>
@@ -125,7 +125,7 @@ Feature: active table tags
 
 
   Scenario: Markdown table
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
      | Keyboard shortcut                                    | Effect                        |
      | ---------------------------------------------------- | ----------------------------- |

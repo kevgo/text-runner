@@ -10,11 +10,11 @@ Feature: checking embedded Markdown images
 
 
   Scenario: existing local Markdown image with relative path
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       ![Alt text](watermelon.gif "watermelon")
       """
-    And my workspace contains an image "watermelon.gif"
+    And the workspace contains an image "watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                 |
@@ -23,11 +23,11 @@ Feature: checking embedded Markdown images
 
 
   Scenario: existing local Markdown image with absolute path
-    Given my source code contains the file "documentation/1.md" with content:
+    Given the source code contains the file "documentation/1.md" with content:
       """
       ![Alt text](/documentation/images/watermelon.gif "watermelon")
       """
-    And my workspace contains an image "documentation/images/watermelon.gif"
+    And the workspace contains an image "documentation/images/watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | documentation/1.md                         |
@@ -36,7 +36,7 @@ Feature: checking embedded Markdown images
 
 
   Scenario: non-existing local Markdown image
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       ![Alt text](zonk.gif "watermelon")
       """
@@ -50,7 +50,7 @@ Feature: checking embedded Markdown images
 
   @online
   Scenario: existing remote Markdown image
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       ![Alt text](http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png "google logo")
       """
@@ -63,7 +63,7 @@ Feature: checking embedded Markdown images
 
   @online
   Scenario: non-existing remote Markdown image
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       ![Alt text](http://google.com/onetuhoenzonk.png "zonk")
       """
@@ -76,7 +76,7 @@ Feature: checking embedded Markdown images
 
 
   Scenario: Markdown image tag without source
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       ![Alt text]()
       """

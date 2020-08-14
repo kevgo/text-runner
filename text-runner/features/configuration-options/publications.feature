@@ -6,18 +6,18 @@ Feature: Folder Mapping
 
 
   Background:
-    Given my source code contains the file "content/2.md" with content:
+    Given the source code contains the file "content/2.md" with content:
       """
       # hello
       """
 
 
   Scenario: mapping a folder to a different URL
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [link to 2.md](2)
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /content
@@ -32,18 +32,18 @@ Feature: Folder Mapping
 
 
   Scenario: relative link to remapped folder
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [relative link to blog post 3](blog/3.html)
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /content/posts
           publicPath: /blog
           publicExtension: .html
       """
-    And my source code contains the file "content/posts/3.md" with content:
+    And the source code contains the file "content/posts/3.md" with content:
       """
       Yo!
       """
@@ -54,18 +54,18 @@ Feature: Folder Mapping
       | MESSAGE  | link to local file content/posts/3.md |
 
   Scenario: relative link to anchor in remapped folder
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [relative link to blog post 3](blog/3.html#welcome)
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /content/posts
           publicPath: /blog
           publicExtension: .html
       """
-    And my source code contains the file "content/posts/3.md" with content:
+    And the source code contains the file "content/posts/3.md" with content:
       """
       # Welcome
       """
@@ -76,18 +76,18 @@ Feature: Folder Mapping
       | MESSAGE  | link to heading content/posts/3.md#welcome |
 
   Scenario: absolute link to remapped folder
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [relative link to blog post 3](/blog/3.html)
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /content/posts
           publicPath: /blog
           publicExtension: .html
       """
-    And my source code contains the file "content/posts/3.md" with content:
+    And the source code contains the file "content/posts/3.md" with content:
       """
       Yo!
       """
@@ -98,18 +98,18 @@ Feature: Folder Mapping
       | MESSAGE  | link to local file content/posts/3.md |
 
   Scenario: absolute link to anchor in remapped folder
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [relative link to blog post 3](/blog/3.html#welcome)
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /content/posts
           publicPath: /blog
           publicExtension: .html
       """
-    And my source code contains the file "content/posts/3.md" with content:
+    And the source code contains the file "content/posts/3.md" with content:
       """
       # Welcome
       """
@@ -120,12 +120,12 @@ Feature: Folder Mapping
       | MESSAGE  | link to heading content/posts/3.md#welcome |
 
   Scenario: multiple mappings
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [link to hello in 2.md](/2#hello)
       [link to blog post 3.md](/blog/3.html)
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /content
@@ -135,7 +135,7 @@ Feature: Folder Mapping
           publicPath: /blog
           publicExtension: .html
       """
-    And my source code contains the file "content/posts/3.md" with content:
+    And the source code contains the file "content/posts/3.md" with content:
       """
       Yo!
       """
@@ -150,15 +150,15 @@ Feature: Folder Mapping
       | MESSAGE  | link to local file content/posts/3.md |
 
   Scenario: relative links within a publicized folder
-    Given my source code contains the file "posts/1.md" with content:
+    Given the source code contains the file "posts/1.md" with content:
       """
       [link to hello in 2.md](2#hello)
       """
-    And my source code contains the file "posts/2.md" with content:
+    And the source code contains the file "posts/2.md" with content:
       """
       # Hello
       """
-    And my source code contains the file "text-run.yml" with content:
+    And the source code contains the file "text-run.yml" with content:
       """
       publications:
         - localPath: /posts

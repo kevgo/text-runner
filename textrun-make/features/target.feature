@@ -1,7 +1,7 @@
 Feature: verifying Make targets
 
   Background:
-    Given my source code contains the file "Makefile" with content:
+    Given the source code contains the file "Makefile" with content:
       """
       foo:  # builds the "foo" executable
         @echo building foo
@@ -11,7 +11,7 @@ Feature: verifying Make targets
       """
 
   Scenario: works
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To build the "foo" executable, build the <code textrun="make/target">foo</code> target.
       """
@@ -22,7 +22,7 @@ Feature: verifying Make targets
       | MESSAGE  | make target foo |
 
   Scenario: mismatching target name
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To build the "foo" executable, build the <code textrun="make/target">zonk</code> target.
       """
@@ -35,7 +35,7 @@ Feature: verifying Make targets
 
 
   Scenario: missing target name
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To build the "foo" executable, build the <code textrun="make/target"></code> target.
       """

@@ -9,7 +9,7 @@ Feature: creating directories
 
 
   Scenario: creating a directory
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <b textrun="create-directory">directory_name</b>
       """
@@ -22,7 +22,7 @@ Feature: creating directories
 
 
   Scenario: no name given
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <b textrun="create-directory"></b>
       """
@@ -35,7 +35,7 @@ Feature: creating directories
 
 
   Scenario: empty name given
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <b textrun="create-directory"> </b>
       """

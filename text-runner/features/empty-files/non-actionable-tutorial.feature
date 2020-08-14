@@ -8,7 +8,7 @@ Feature: Fail on non-actionable Markdown
 
 
   Scenario: documentation with no actions
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       Just text here, nothing to do!
       """

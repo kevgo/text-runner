@@ -9,7 +9,7 @@ Feature: verify that the workspace contains a directory
 
 
   Background:
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="verify-workspace-contains-directory">
 
@@ -19,7 +19,7 @@ Feature: verify that the workspace contains a directory
 
 
   Scenario: the workspace contains the directory
-    Given my workspace contains a directory "foo"
+    Given the workspace contains a directory "foo"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                                     |
@@ -37,7 +37,7 @@ Feature: verify that the workspace contains a directory
 
 
   Scenario: the given directory name points to a file
-    Given my workspace contains the file "foo"
+    Given the workspace contains the file "foo"
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                              |

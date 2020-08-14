@@ -7,16 +7,16 @@ Feature: specifying the configuration filename
 
 
   Scenario: providing a configuration filename
-    Given my source code contains the file "text-run-1.yml" with content:
+    Given the source code contains the file "text-run-1.yml" with content:
       """
       files: 1.md
       """
-    And my source code contains the file "1.md" with content:
+    And the source code contains the file "1.md" with content:
       """
       [link](#foo)
       # Foo
       """
-    And my source code contains the file "2.md" with content:
+    And the source code contains the file "2.md" with content:
       """
       [link](#bar)
       # Bar

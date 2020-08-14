@@ -6,15 +6,15 @@ Feature: active img tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: image tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <img textrun="HelloWorld" src="watermelon.gif">
       """
-    And my workspace contains an image "watermelon.gif"
+    And the workspace contains an image "watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |

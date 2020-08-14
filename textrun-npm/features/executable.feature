@@ -8,7 +8,7 @@ Feature: verifying global commands provided by NPM modules
 
 
   Background:
-    Given my source code contains the file "package.json" with content:
+    Given the source code contains the file "package.json" with content:
       """
       {
         "bin": {
@@ -19,7 +19,7 @@ Feature: verifying global commands provided by NPM modules
 
 
   Scenario: correct command name with triple-fenced code block
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To run this app, call:
 
@@ -38,7 +38,7 @@ Feature: verifying global commands provided by NPM modules
 
 
   Scenario: correct command name with single-fenced code block
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To run this app, call <a textrun="npm/executable">`foo`</a> on the command line
       """
@@ -50,7 +50,7 @@ Feature: verifying global commands provided by NPM modules
 
 
   Scenario: mismatching command name
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To run this app, call:
 
@@ -70,7 +70,7 @@ Feature: verifying global commands provided by NPM modules
 
 
   Scenario: missing command name
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       To run this app, call:
 

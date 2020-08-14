@@ -8,11 +8,11 @@ Feature: flexible block syntax
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: the blocktype is provided in PascalCase
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="HelloWorld">
       </a>
@@ -25,7 +25,7 @@ Feature: flexible block syntax
 
 
   Scenario: the blocktype is provided in camelCase
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="helloWorld">
       </a>
@@ -38,7 +38,7 @@ Feature: flexible block syntax
 
 
   Scenario: the blocktype is provided in snake_case
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="hello_world">
       </a>
@@ -51,7 +51,7 @@ Feature: flexible block syntax
 
 
   Scenario: the blocktype is provided in kebab-case
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="hello-world">
       </a>

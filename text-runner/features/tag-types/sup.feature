@@ -6,11 +6,11 @@ Feature: active SUP tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: active tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <sup textrun="HelloWorld">foo</sup>
       """
@@ -21,7 +21,7 @@ Feature: active SUP tags
       | MESSAGE  | Hello world |
 
   Scenario: passive tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <sup>foo</sup>
       """

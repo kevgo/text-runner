@@ -7,7 +7,7 @@ Feature: show unused steps
 
   Scenario: the code base contains unused steps
     Given my workspace contains testable documentation
-    And my source code contains the HelloWorld action
+    And the source code contains the HelloWorld action
     When running "text-run unused"
     Then it prints:
       """

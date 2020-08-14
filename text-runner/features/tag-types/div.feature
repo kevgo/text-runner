@@ -5,11 +5,11 @@ Feature: div tags
   So that I don't have to litter my document with <a> tags
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: code tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <div textrun="HelloWorld">foo</div>
       """

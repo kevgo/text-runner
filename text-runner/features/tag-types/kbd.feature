@@ -6,11 +6,11 @@ Feature: KBD tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: code tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <kbd textrun="HelloWorld">foo</kbd>
       """
@@ -21,7 +21,7 @@ Feature: KBD tags
       | MESSAGE  | Hello world |
 
   Scenario: inactive HR tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <kbd>foo</kbd>
       """

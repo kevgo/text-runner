@@ -8,7 +8,7 @@ Feature: running multiple console commands
 
 
   Scenario: running multiple console commands
-    Given my source code contains the file "running-multiple-commands.md" with content:
+    Given the source code contains the file "running-multiple-commands.md" with content:
       """
       <a textrun="shell/exec">
 

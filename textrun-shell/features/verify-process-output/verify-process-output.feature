@@ -11,7 +11,7 @@ Feature: verifying the output of the last console command
 
 
   Scenario: verifying the output of a console command
-    Given my workspace contains the file "server.js" with content:
+    Given the workspace contains the file "server.js" with content:
       """
       setTimeout(function() {
         console.log('one');
@@ -20,7 +20,7 @@ Feature: verifying the output of the last console command
         setTimeout(function() {}, 1000)
       }, 100)
       """
-    And my source code contains the file "verify-output.md" with content:
+    And the source code contains the file "verify-output.md" with content:
       """
       <a textrun="shell/start">
 

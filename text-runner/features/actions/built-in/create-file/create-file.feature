@@ -10,7 +10,7 @@ Feature: creating files with content
 
 
   Scenario: providing the filename as emphasized text and the content single-quoted
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
 
@@ -30,7 +30,7 @@ Feature: creating files with content
 
 
   Scenario: providing the filename as bold text and the content triple-quoted
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
 
@@ -53,7 +53,7 @@ Feature: creating files with content
 
 
   Scenario: no file path given
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
 
@@ -72,7 +72,7 @@ Feature: creating files with content
 
 
   Scenario: no content block given
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
 
@@ -89,7 +89,7 @@ Feature: creating files with content
 
 
   Scenario: two file paths given
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
 
@@ -110,7 +110,7 @@ Feature: creating files with content
 
 
   Scenario: two content blocks given
-    Given my source code contains the file "creator.md" with content:
+    Given the source code contains the file "creator.md" with content:
       """
       <a textrun="create-file">
 

@@ -6,11 +6,11 @@ Feature: active anchor tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: anchor tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="HelloWorld">hello</a>
       """
@@ -22,7 +22,7 @@ Feature: active anchor tags
 
 
   Scenario: anchor block
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="HelloWorld">
       hello

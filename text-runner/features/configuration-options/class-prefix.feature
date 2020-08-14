@@ -8,13 +8,13 @@ Feature: configuring the class prefix
 
 
   Background:
-    Given my source code contains the file "tr.md" with content:
+    Given the source code contains the file "tr.md" with content:
       """
       <a textrun="test">
       standard prefix
       </a>
       """
-    And my source code contains the file "custom-prefix.md" with content:
+    And the source code contains the file "custom-prefix.md" with content:
       """
       <a custom="test">
       custom prefix

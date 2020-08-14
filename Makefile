@@ -63,10 +63,10 @@ list-affected:  # displays the workspaces affected by changes in the current bra
 	@git diff --name-only master | tools/workspaces/bin/workspaces affected
 
 list-all:  # displays all workspaces
-	@tools/workspaces/bin/workspaces all
+	@${CURDIR}/node_modules/.bin/lerna ls --toposort
 
 list-changed:  # displays the workspaces changed in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed
+	@${CURDIR}/node_modules/.bin/lerna ls --since master --exclude-dependents --toposort
 
 setup:  # prepares the mono-repo for development after cloning
 	@find . -type d -name node_modules | xargs rm -rf

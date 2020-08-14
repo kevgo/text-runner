@@ -1,5 +1,5 @@
-import color from "colorette"
-import fs from "fs-extra"
+import * as color from "colorette"
+import * as fs from "fs-extra"
 import { PrintedUserError } from "../../errors/printed-user-error"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
 

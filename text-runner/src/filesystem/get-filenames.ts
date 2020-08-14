@@ -1,5 +1,5 @@
-import color from "colorette"
-import isGlob from "is-glob"
+import * as color from "colorette"
+import * as isGlob from "is-glob"
 import { Configuration } from "../configuration/types/configuration"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { AbsoluteFilePath } from "./absolute-file-path"

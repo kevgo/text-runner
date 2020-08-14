@@ -1,5 +1,5 @@
 import { When } from "cucumber"
-import path from "path"
+import * as path from "path"
 
 When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 }, async function (
   tryingText,

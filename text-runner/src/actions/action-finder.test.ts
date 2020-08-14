@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
 import { ActionFinder, customActionFilePaths, loadCustomActions } from "./action-finder"
-import path from "path"
+import * as path from "path"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {

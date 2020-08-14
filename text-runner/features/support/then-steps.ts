@@ -1,10 +1,10 @@
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
 import { Then } from "cucumber"
-import fs from "fs-extra"
-import path from "path"
-import psTreeR from "ps-tree"
-import util from "util"
+import * as fs from "fs-extra"
+import * as path from "path"
+import * as psTreeR from "ps-tree"
+import * as util from "util"
 
 const psTree = util.promisify(psTreeR)
 

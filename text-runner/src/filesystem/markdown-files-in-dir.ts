@@ -1,4 +1,4 @@
-import glob from "glob-promise"
+import * as glob from "glob-promise"
 import { AbsoluteFilePath } from "./absolute-file-path"
 
 /**

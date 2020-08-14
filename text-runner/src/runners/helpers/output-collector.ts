@@ -1,4 +1,4 @@
-import util from "util"
+import * as util from "util"
 import { LogFn } from "../types/log-function"
 
 /** simulates console.log to collect output from a running action */

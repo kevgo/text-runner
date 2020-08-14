@@ -1,4 +1,4 @@
-import YAML from "yamljs"
+import * as YAML from "yamljs"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
 
 /** provides the content of the config file in the standardized format */

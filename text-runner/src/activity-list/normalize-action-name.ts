@@ -1,4 +1,4 @@
-import slugify from "@sindresorhus/slugify"
+import * as slugify from "@sindresorhus/slugify"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 
 export function normalizeActionName(actionName: string): string {

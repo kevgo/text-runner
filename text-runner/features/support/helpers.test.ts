@@ -1,6 +1,6 @@
 import * as helpers from "./helpers"
 import { assert } from "chai"
-import path from "path"
+import * as path from "path"
 
 suite("globalTextRunPath", function () {
   test("on unix", function () {

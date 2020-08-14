@@ -1,6 +1,6 @@
 import { Given } from "cucumber"
-import fs from "fs-extra"
-import path from "path"
+import * as fs from "fs-extra"
+import * as path from "path"
 import { cp } from "shelljs"
 
 Given("a broken file {string}", async function (filePath) {

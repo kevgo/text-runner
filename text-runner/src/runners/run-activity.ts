@@ -1,5 +1,5 @@
 import humanize from "humanize-string"
-import util from "util"
+import * as util from "util"
 import { ActionFinder } from "../actions/action-finder"
 import { Action } from "../actions/types/action"
 import { ActionArgs } from "../actions/types/action-args"

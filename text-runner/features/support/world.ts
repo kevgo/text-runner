@@ -1,11 +1,11 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
 import { setWorldConstructor } from "cucumber"
-import fs from "fs-extra"
-import glob from "glob"
+import * as fs from "fs-extra"
+import * as glob from "glob"
 import { createObservableProcess } from "observable-process"
-import path from "path"
-import stripAnsi from "strip-ansi"
+import * as path from "path"
+import stripAnsi = require("strip-ansi")
 import { v4 as uuid } from "uuid"
 import * as helpers from "./helpers"
 

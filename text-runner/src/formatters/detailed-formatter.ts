@@ -1,5 +1,5 @@
-import color from "colorette"
-import path from "path"
+import * as color from "colorette"
+import * as path from "path"
 import { Activity } from "../activity-list/types/activity"
 import { Configuration } from "../configuration/types/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"

@@ -1,4 +1,4 @@
-import color from "colorette"
+import * as color from "colorette"
 import { createConfigurationFile } from "../configuration/config-file/create-configuration-file"
 
 export async function setupCommand() {

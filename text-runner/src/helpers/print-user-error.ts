@@ -1,5 +1,5 @@
-import color from "colorette"
-import path from "path"
+import * as color from "colorette"
+import * as path from "path"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { printCodeFrame } from "./print-code-frame"
 

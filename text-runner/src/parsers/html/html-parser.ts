@@ -1,5 +1,5 @@
-import parse5 from "parse5"
-import util from "util"
+import * as parse5 from "parse5"
+import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"

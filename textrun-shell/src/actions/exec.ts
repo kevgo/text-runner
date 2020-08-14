@@ -1,5 +1,5 @@
-import color from "colorette"
-import path from "path"
+import * as color from "colorette"
+import * as path from "path"
 import { createObservableProcess } from "observable-process"
 import { callArgs } from "../helpers/call-args"
 import { CurrentCommand } from "../helpers/current-command"

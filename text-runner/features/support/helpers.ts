@@ -1,4 +1,4 @@
-import path from "path"
+import * as path from "path"
 
 export function fullTextRunPath(platform: string) {
   let result = path.join(__dirname, "..", "..", "bin", "text-run")

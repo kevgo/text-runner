@@ -1,10 +1,10 @@
 import { After, Before, setDefaultTimeout } from "cucumber"
 import { endChildProcesses } from "end-child-processes"
-import fs from "fs-extra"
-import path from "path"
-import rimraf from "rimraf"
-import tmp from "tmp-promise"
-import util from "util"
+import * as fs from "fs-extra"
+import * as path from "path"
+import * as rimraf from "rimraf"
+import * as tmp from "tmp-promise"
+import * as util from "util"
 const rimrafp = util.promisify(rimraf)
 
 // need such a high timeout because test coverage takes time to start up

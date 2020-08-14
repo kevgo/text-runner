@@ -1,5 +1,5 @@
 import { codeFrameColumns } from "@babel/code-frame"
-import fs from "fs"
+import * as fs from "fs"
 
 type PrintFunc = (arg: string) => void | boolean
 

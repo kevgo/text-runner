@@ -1,4 +1,4 @@
-import color from "colorette"
+import * as color from "colorette"
 
 export async function helpCommand(error?: string) {
   console.log(template(error))

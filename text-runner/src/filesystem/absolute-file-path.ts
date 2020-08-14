@@ -1,4 +1,4 @@
-import path from "path"
+import * as path from "path"
 import { Publications } from "../configuration/publications/publications"
 import { removeLeadingSlash } from "../helpers/remove-leading-slash"
 import { AbsoluteLink } from "./absolute-link"

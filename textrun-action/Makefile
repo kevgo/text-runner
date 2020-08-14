@@ -6,6 +6,9 @@ clean:  # Removes all build artifacts
 	@echo textrun-action build artifact cleanup ...
 	@rm -rf dist
 
+cuke:
+	@echo textrun-action E2E tests ...
+
 docs: build  # runs the documentation tests
 	@echo textrun-action documentation tests ...
 	@rm -rf tmp

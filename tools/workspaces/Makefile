@@ -6,6 +6,9 @@ clean:  # Removes all build artifacts
 	@echo workspaces tool artifact cleanup ...
 	@rm -rf dist
 
+cuke:
+	@echo workspaces tool E2E tests ...
+
 docs: build  # runs the documentation tests
 	@echo workspaces tool documentation tests ...
 	# @rm -rf tmp

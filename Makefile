@@ -1,6 +1,8 @@
 # Lerna terminology:
 # - dependents = downstreams (my dependents, those that are dependent on me)
 # - dependencies = upstreams (my dependencies, those that I depend on)
+#
+# Must diff against origin/master because master on CircleCI is not the same as origin/master.
 
 build-affected:  # builds the codebases affected by changes in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory build
@@ -73,13 +75,13 @@ lint-changed:  # runs the linters of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory lint
 
 list-affected:  # displays the codebases affected by changes in the current branch
-	@${CURDIR}/node_modules/.bin/lerna ls --since master --include-dependents --toposort
+	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --toposort
 
 list-all:  # displays all codebases
 	@${CURDIR}/node_modules/.bin/lerna ls --toposort
 
 list-changed:  # displays the codebases changed in the current branch
-	@${CURDIR}/node_modules/.bin/lerna ls --since master --exclude-dependents --toposort
+	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --exclude-dependents --toposort
 
 list-involved:  # builds all the codebases needed to test the changes in this branch
 	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --include-dependencies

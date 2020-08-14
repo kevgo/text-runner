@@ -53,6 +53,20 @@ export class YarnReader {
     }
   }
 
+  /**
+   * Provides the given workspaces ordered in the optimal build order.
+   * Workspaces with no upstreams are built first.
+   */
+  order(workspaces: string[]): string[] {
+    return workspaces.sort((a: string, b: string) => {
+      // @ts-ignore
+      const sizeA = this.transitiveDownstreams.get(a).size
+      // @ts-ignore
+      const sizeB = this.transitiveDownstreams.get(b).size
+      return sizeA - sizeB
+    })
+  }
+
   /** provides the paths for the given workspace names */
   pathsFor(names: string[]): string[] {
     return names.map((name) => this.yarnInfo[name].location).sort()

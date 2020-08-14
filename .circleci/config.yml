@@ -95,7 +95,7 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: make build
+      - run: make build-all
       - run: npm set //registry.npmjs.org/:_authToken $AUTH_TOKEN
       - run: npm publish
 

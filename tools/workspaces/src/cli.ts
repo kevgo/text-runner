@@ -1,6 +1,7 @@
 import * as child_process from "child_process"
 import * as minimist from "minimist"
 import { affected } from "./affected"
+import { all } from "./all"
 import { changed } from "./changed"
 
 function noLog(message?: any, ...optionalParams: any[]) {}
@@ -21,6 +22,9 @@ if (args._.length > 1) {
 switch (args._[0]) {
   case "affected":
     affected(yarnOutput, log)
+    break
+  case "all":
+    all(yarnOutput, log)
     break
   case "changed":
     changed(yarnOutput, log)

@@ -10,8 +10,8 @@ Feature: changing the working directory
 
 
   Scenario: pointing to an existing directory via hyperlink
-    Given my workspace contains a directory "foo"
-    And my workspace contains a file "foo/bar" with content "hello"
+    Given the workspace contains a directory "foo"
+    And the workspace contains a file "foo/bar" with content "hello"
     And the source code contains the file "directory_changer.md" with content:
       """
       <code textrun="cd">foo</code>
@@ -27,8 +27,8 @@ Feature: changing the working directory
 
 
   Scenario: pointing to an existing directory via code block
-    Given my workspace contains a directory "foo"
-    And my workspace contains a file "foo/bar" with content "hello"
+    Given the workspace contains a directory "foo"
+    And the workspace contains a file "foo/bar" with content "hello"
     And the source code contains the file "directory_changer.md" with content:
       """
       <code textrun="cd">foo</code>

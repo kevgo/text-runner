@@ -71,12 +71,12 @@ Given("the source code contains the file {string} with content:", async function
   await fs.writeFile(path.join(this.rootDir, fileName), content)
 })
 
-Given("my workspace contains the file {string}", async function (fileName) {
+Given("the workspace contains the file {string}", async function (fileName) {
   await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), "content")
 })
 
-Given("my workspace contains a file {string} with content {string}", async function (fileName, content) {
+Given("the workspace contains a file {string} with content {string}", async function (fileName, content) {
   await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
 })
@@ -101,24 +101,24 @@ Given("the source code contains the HelloWorld action", async function () {
   )
 })
 
-Given("my workspace contains the file {string} with content:", async function (fileName, content) {
+Given("the workspace contains the file {string} with content:", async function (fileName, content) {
   await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
 })
 
-Given("my text-run configuration contains:", async function (text) {
+Given("the text-run configuration contains:", async function (text) {
   await fs.appendFile(path.join(this.rootDir, "text-run.yml"), `\n${text}`)
 })
 
-Given("my workspace contains a directory {string}", async function (dir) {
+Given("the workspace contains a directory {string}", async function (dir) {
   await fs.ensureDir(path.join(this.rootDir, "tmp", dir))
 })
 
-Given("my workspace contains an empty file {string}", async function (fileName) {
+Given("the workspace contains an empty file {string}", async function (fileName) {
   await fs.writeFile(path.join(this.rootDir, fileName), "")
 })
 
-Given("my workspace contains an image {string}", async function (imageName) {
+Given("the workspace contains an image {string}", async function (imageName) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(imageName)))
   cp(path.join(__dirname, path.basename(imageName)), path.join(this.rootDir, imageName))
 })

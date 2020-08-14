@@ -9,4 +9,4 @@ Feature: help command
 
   Scenario:
     When running "text-run help"
-    Then I see usage instructions
+    Then it prints usage instructions

@@ -19,7 +19,7 @@ Feature: verify that the workspace contains a directory
 
 
   Scenario: the workspace contains the directory
-    Given my workspace contains a directory "foo"
+    Given the workspace contains a directory "foo"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                                                     |
@@ -37,7 +37,7 @@ Feature: verify that the workspace contains a directory
 
 
   Scenario: the given directory name points to a file
-    Given my workspace contains the file "foo"
+    Given the workspace contains the file "foo"
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                              |

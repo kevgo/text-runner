@@ -14,7 +14,7 @@ Feature: long-running processes
 
 
   Scenario: starting and stopping a long-running process
-    Given my workspace contains the file "server.js" with content:
+    Given the workspace contains the file "server.js" with content:
       """
       setTimeout(function() {
         console.log('running');

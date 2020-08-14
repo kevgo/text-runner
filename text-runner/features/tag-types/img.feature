@@ -14,7 +14,7 @@ Feature: active img tags
       """
       <img textrun="HelloWorld" src="watermelon.gif">
       """
-    And my workspace contains an image "watermelon.gif"
+    And the workspace contains an image "watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | 1.md        |

@@ -14,7 +14,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](watermelon.gif "watermelon")
       """
-    And my workspace contains an image "watermelon.gif"
+    And the workspace contains an image "watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                 |
@@ -27,7 +27,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](/documentation/images/watermelon.gif "watermelon")
       """
-    And my workspace contains an image "documentation/images/watermelon.gif"
+    And the workspace contains an image "documentation/images/watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | documentation/1.md                         |

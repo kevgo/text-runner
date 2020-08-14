@@ -13,7 +13,7 @@ Feature: checking embedded HTML images
       """
       <img src="images/watermelon.gif">
       """
-    And my workspace contains an image "images/watermelon.gif"
+    And the workspace contains an image "images/watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | 1.md                        |
@@ -26,7 +26,7 @@ Feature: checking embedded HTML images
       """
       <img src="/documentation/images/watermelon.gif">
       """
-    And my workspace contains an image "documentation/images/watermelon.gif"
+    And the workspace contains an image "documentation/images/watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | documentation/1.md                         |
@@ -39,7 +39,7 @@ Feature: checking embedded HTML images
       """
       <img src="watermelon.gif">
       """
-    And my workspace contains an image "documentation/watermelon.gif"
+    And the workspace contains an image "documentation/watermelon.gif"
     When running text-run
     Then it signals:
       | FILENAME | documentation/1.md   |

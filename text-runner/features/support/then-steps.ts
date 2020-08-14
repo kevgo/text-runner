@@ -8,7 +8,7 @@ import * as util from "util"
 
 const psTree = util.promisify(psTreeR)
 
-Then("I see usage instructions", function () {
+Then("it prints usage instructions", function () {
   this.verifyPrintedUsageInstructions()
 })
 

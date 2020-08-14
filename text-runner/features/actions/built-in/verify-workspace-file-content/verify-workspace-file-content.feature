@@ -10,7 +10,7 @@ Feature: verifying file content
 
 
   Background:
-    Given my workspace contains the file "hello.txt" with content:
+    Given the workspace contains the file "hello.txt" with content:
       """
       Hello world!
       """

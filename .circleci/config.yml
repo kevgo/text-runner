@@ -18,7 +18,6 @@ jobs:
             - yarn-master
             - yarn-
       - run: yarn
-      - run: make setup
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
           paths:

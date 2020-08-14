@@ -26,7 +26,9 @@ const allAffected = child_process
   .execSync("make list-affected", { cwd: path.join(process.cwd(), ".."), encoding: "utf-8" })
   .trim()
   .split(os.EOL)
+console.log("all affected workspaces:", allAffected)
 const run = allAffected.includes(workspace)
+console.log("match:", run)
 if (!run) {
   console.log(`workspace "${workspace}" is not affected by the current changes, skipping the tests`)
   process.exit()

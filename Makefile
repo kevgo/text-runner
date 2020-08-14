@@ -81,6 +81,9 @@ list-all:  # displays all codebases
 list-changed:  # displays the codebases changed in the current branch
 	@${CURDIR}/node_modules/.bin/lerna ls --since master --exclude-dependents --toposort
 
+list-involved:  # builds all the codebases needed to test the changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --include-dependencies
+
 setup:  # prepares the mono-repo for development after cloning
 	@find . -type d -name node_modules | xargs rm -rf
 	@yarn

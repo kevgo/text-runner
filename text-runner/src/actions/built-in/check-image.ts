@@ -6,21 +6,21 @@ import { Configuration } from "../../configuration/types/configuration"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkImage" action checks for broken images. */
-export default async function checkImage(args: ActionArgs) {
-  const node = args.nodes[0]
+export default async function checkImage(action: ActionArgs) {
+  const node = action.nodes[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
     throw new Error("image tag without source")
   }
-  args.name(`image ${color.cyan(imagePath)}`)
+  action.name(`image ${color.cyan(imagePath)}`)
   if (isRemoteImage(imagePath)) {
-    const result = await checkRemoteImage(imagePath, args)
+    const result = await checkRemoteImage(imagePath, action)
     return result
   } else {
     if (!imagePath.startsWith("/")) {
       imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
     }
-    const result = await checkLocalImage(imagePath, args.configuration)
+    const result = await checkLocalImage(imagePath, action.configuration)
     return result
   }
 }
@@ -33,17 +33,17 @@ async function checkLocalImage(imagePath: string, c: Configuration) {
   }
 }
 
-async function checkRemoteImage(url: string, args: ActionArgs) {
-  if (args.configuration.offline) {
-    return args.SKIPPING
+async function checkRemoteImage(url: string, action: ActionArgs) {
+  if (action.configuration.offline) {
+    return action.SKIPPING
   }
   try {
     await got(url, { timeout: 2000 })
   } catch (err) {
     if (err instanceof got.HTTPError && err.response.statusCode === 404) {
-      args.log(`image ${color.magenta(url)} does not exist`)
+      action.log(`image ${color.magenta(url)} does not exist`)
     } else if (err instanceof got.TimeoutError) {
-      args.log(`image ${color.magenta(url)} timed out`)
+      action.log(`image ${color.magenta(url)} timed out`)
     } else {
       throw err
     }

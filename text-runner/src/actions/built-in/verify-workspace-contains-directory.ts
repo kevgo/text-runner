@@ -7,11 +7,11 @@ import { ActionArgs } from "../types/action-args"
  * The "verifyWorkspaceContainsDirectory" action verifies that the test workspace
  * contains the given directory.
  */
-export default async function verifyWorkspaceContainsDirectory(args: ActionArgs) {
-  const directory = args.nodes.text()
-  const fullPath = path.join(args.configuration.workspace, directory)
-  args.name(`verifying the ${color.bold(color.cyan(directory))} directory exists in the test workspace`)
-  args.log(`ls ${fullPath}`)
+export default async function verifyWorkspaceContainsDirectory(action: ActionArgs) {
+  const directory = action.nodes.text()
+  const fullPath = path.join(action.configuration.workspace, directory)
+  action.name(`verifying the ${color.bold(color.cyan(directory))} directory exists in the test workspace`)
+  action.log(`ls ${fullPath}`)
   let stats: fs.Stats
   try {
     stats = await fs.lstat(fullPath)

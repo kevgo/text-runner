@@ -11,15 +11,15 @@ Feature: adding new handler functions
     When running "text-run scaffold new-step"
     Then it creates the file "text-run/new-step.js" with content:
       """
-      module.exports = async function (args) {
+      module.exports = async function (action) {
         console.log('This code runs inside the "new-step" block implementation.')
         console.log('I found these elements in your document:')
-        console.log(args.nodes)
+        console.log(action.nodes)
 
         // capture content from the document
         // const content = activity.searcher.tagContent('boldtext')
         // do something with the content
-        // args.log(content)
+        // action.log(content)
       }
 
       """

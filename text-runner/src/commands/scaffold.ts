@@ -19,15 +19,15 @@ export async function scaffoldCommand(blockName: string | undefined): Promise<Er
 }
 
 function template(filename: string) {
-  return `module.exports = async function (args) {
+  return `module.exports = async function (action) {
   console.log('This code runs inside the "${filename}" block implementation.')
   console.log('I found these elements in your document:')
-  console.log(args.nodes)
+  console.log(action.nodes)
 
   // capture content from the document
   // const content = activity.searcher.tagContent('boldtext')
   // do something with the content
-  // args.log(content)
+  // action.log(content)
 }
 `
 }

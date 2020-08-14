@@ -3,11 +3,11 @@ import * as path from "path"
 import { ActionArgs } from "../types/action-args"
 
 /** The "cd" action changes the current working directory to the one given in the hyperlink or code block. */
-export default function cd(args: ActionArgs) {
-  const directory = args.nodes.text()
-  args.name(`changing into the ${color.bold(color.cyan(directory))} directory`)
-  const fullPath = path.join(args.configuration.workspace, directory)
-  args.log(`cd ${fullPath}`)
+export default function cd(action: ActionArgs) {
+  const directory = action.nodes.text()
+  action.name(`changing into the ${color.bold(color.cyan(directory))} directory`)
+  const fullPath = path.join(action.configuration.workspace, directory)
+  action.log(`cd ${fullPath}`)
   try {
     process.chdir(fullPath)
   } catch (e) {

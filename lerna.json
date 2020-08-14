@@ -1,5 +1,4 @@
 {
-  "packages": ["textrun-*", "examples/*", "text-runner"],
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true,

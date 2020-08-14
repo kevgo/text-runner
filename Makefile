@@ -77,6 +77,9 @@ lint-changed:  # runs the linters of codebases changed in this branch
 list-affected:  # displays the codebases affected by changes in the current branch
 	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --toposort
 
+list-affected-master:  # displays the codebases affected by changes in the current commit when on the master branch
+	@${CURDIR}/node_modules/.bin/lerna ls --since HEAD^ --include-dependents --toposort
+
 list-all:  # displays all codebases
 	@${CURDIR}/node_modules/.bin/lerna ls --toposort
 

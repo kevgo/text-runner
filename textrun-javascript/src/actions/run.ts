@@ -8,9 +8,9 @@ import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder"
 type DoneFunction = (err?: Error) => void
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
-export function run(args: ActionArgs, done: DoneFunction) {
-  args.name("run JavaScript")
-  let code = args.nodes.text()
+export function run(action: ActionArgs, done: DoneFunction) {
+  action.name("run JavaScript")
+  let code = action.nodes.text()
   if (code === "") {
     done(new Error("no JavaScript code found"))
     return

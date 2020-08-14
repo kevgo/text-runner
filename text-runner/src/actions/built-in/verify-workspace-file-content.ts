@@ -4,13 +4,13 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import { ActionArgs } from "../types/action-args"
 
-export default async function verifyWorkspaceFileContent(args: ActionArgs) {
-  const filePath = args.nodes.textInNodeOfType("strong", "em")
+export default async function verifyWorkspaceFileContent(action: ActionArgs) {
+  const filePath = action.nodes.textInNodeOfType("strong", "em")
   const fullPath = path.join(process.cwd(), filePath)
-  args.name(`verifying file ${color.cyan(filePath)}`)
-  args.log(`verify file ${fullPath}`)
+  action.name(`verifying file ${color.cyan(filePath)}`)
+  action.log(`verify file ${fullPath}`)
   const actualContent = await readFile(filePath, fullPath)
-  const expectedContent = args.nodes.textInNodeOfType("fence", "code")
+  const expectedContent = action.nodes.textInNodeOfType("fence", "code")
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
   } catch (err) {

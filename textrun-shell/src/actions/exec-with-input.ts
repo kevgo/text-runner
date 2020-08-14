@@ -14,8 +14,8 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export async function execWithInput(args: ActionArgs) {
-  const content = args.nodes.textInNodeOfTypes("fence", "code")
+export async function execWithInput(action: ActionArgs) {
+  const content = action.nodes.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
     .map((command: string) => command.trim())
@@ -24,24 +24,24 @@ export async function execWithInput(args: ActionArgs) {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${args.nodes[0].tag} ${args.configuration.classPrefix}="exec-with-input"> block contains no commands to run`
+      `the <${action.nodes[0].tag} ${action.configuration.classPrefix}="exec-with-input"> block contains no commands to run`
     )
   }
-  args.name(`running console command: ${color.cyan(commandsToRun)}`)
+  action.name(`running console command: ${color.cyan(commandsToRun)}`)
   let input: ProcessInput[] = []
-  if (args.nodes.hasNodeOfType("table")) {
-    input = getInput(args.nodes)
+  if (action.nodes.hasNodeOfType("table")) {
+    input = getInput(action.nodes)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   const processor = createObservableProcess(callArgs(commandsToRun), {
-    cwd: args.configuration.workspace,
+    cwd: action.configuration.workspace,
   })
   CurrentCommand.set(processor)
   for (const inputLine of input) {
     enter(processor, inputLine)
   }
   await processor.waitForEnd()
-  args.log(processor.output.fullText())
+  action.log(processor.output.fullText())
 }
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {

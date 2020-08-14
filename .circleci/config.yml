@@ -34,42 +34,42 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make cuke-ci
+      - run: cd text-runner && ../.circleci/run-if-affected make cuke-ci
 
   text-runner-others:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && make lint unit docs
+      - run: cd text-runner && ../.circleci/run-if-affected make lint unit docs
 
   textrun-action:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-action && make test
+      - run: cd textrun-action && ../.circleci/run-if-affected make test-ci
 
   textrun-javascript:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-javascript && make test
+      - run: cd textrun-javascript && ../.circleci/run-if-affected make test
 
   textrun-npm:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-npm && make test
+      - run: cd textrun-npm && ../.circleci/run-if-affected make test
 
   textrun-shell:
     <<: *defaults
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-shell && make test
+      - run: cd textrun-shell && ../.circleci/run-if-affected make test
 
   send-coverage:
     <<: *defaults

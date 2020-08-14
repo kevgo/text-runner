@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+
+// Runs the given command if the current directory is a workspace that is affected by changes in this branch.
+
+const child_process = require("child_process")
+const os = require("os")
+const path = require("path")
+
+// get command to run
+const commands = process.argv.slice(2)
+if (commands.length === 0) {
+  console.log("Error: please call with the command to run")
+  process.exit(1)
+}
+
+// get current workspace name
+const pkgJson = require(path.join(process.cwd(), "package.json"))
+const workspace = pkgJson.name
+if (!workspace) {
+  console.log("No package name found")
+  process.exit(1)
+}
+
+// determine if the current workspace is affected
+const allAffected = child_process
+  .execSync("make list-affected", { cwd: path.join(process.cwd(), ".."), encoding: "utf-8" })
+  .trim()
+  .split(os.EOL)
+const run = allAffected.includes(workspace)
+if (!run) {
+  console.log(`workspace "${workspace}" is not affected by the current changes, skipping the tests`)
+  process.exit()
+}
+
+// run the given command and print output
+child_process.execSync(commands.join(" "), { stdio: "inherit" })

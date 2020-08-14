@@ -6,7 +6,17 @@ When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 
   exampleName
 ) {
   const expectError = determineExpectError(tryingText)
-  const examplePath = path.join(process.cwd(), "..", "examples", exampleName)
+  const examplePath = path.join(__dirname, "..", "..", "..", "examples", exampleName)
+  await this.execute({ command: "run", expectError, cwd: examplePath })
+  finish(expectError, this.process && (this.process.error || this.process.exitCode))
+})
+
+When(/^(trying to execute|executing) the local "([^"]+)" example$/, { timeout: 100000 }, async function (
+  tryingText,
+  exampleName
+) {
+  const expectError = determineExpectError(tryingText)
+  const examplePath = path.join(process.cwd(), "examples", exampleName)
   await this.execute({ command: "run", expectError, cwd: examplePath })
   finish(expectError, this.process && (this.process.error || this.process.exitCode))
 })

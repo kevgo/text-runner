@@ -5,7 +5,7 @@ Feature: active P tags
 
 
   Scenario: <p> htmlblocks
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <p>
       foo

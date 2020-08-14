@@ -6,11 +6,11 @@ Feature: active bold tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: bold tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <b textrun="HelloWorld">hello</b>
       """

@@ -6,11 +6,11 @@ Feature: active code tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: code tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <code textrun="HelloWorld">foo</code>
       """
@@ -21,7 +21,7 @@ Feature: active code tags
       | MESSAGE  | Hello world |
 
   Scenario: a list contains an indented code block
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       - a list with an
 

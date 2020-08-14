@@ -14,11 +14,11 @@ Feature: verifying that documentation matches a file in the source code
 
 
   Scenario: file content matches
-    Given my source code contains the file "docs/greeting.md" with content:
+    Given the source code contains the file "docs/greeting.md" with content:
       """
       Hello!
       """
-    And my source code contains the file "1.md" with content:
+    And the source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
 
@@ -38,11 +38,11 @@ Feature: verifying that documentation matches a file in the source code
 
 
   Scenario: file content mismatch
-    Given my source code contains the file "docs/greeting.md" with content:
+    Given the source code contains the file "docs/greeting.md" with content:
       """
       Hello!
       """
-    And my source code contains the file "1.md" with content:
+    And the source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
 
@@ -63,7 +63,7 @@ Feature: verifying that documentation matches a file in the source code
 
 
   Scenario: file does not exist
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="verify-source-file-content">
 

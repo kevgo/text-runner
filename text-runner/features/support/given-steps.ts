@@ -57,16 +57,16 @@ Given("I am in a directory that contains the {string} example( without a configu
   await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
 })
 
-Given("my source code contains the directory {string}", function (dirName) {
+Given("the source code contains the directory {string}", function (dirName) {
   return fs.ensureDir(path.join(this.rootDir, dirName))
 })
 
-Given("my source code contains the file {string}", async function (fileName) {
+Given("the source code contains the file {string}", async function (fileName) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, fileName), "content")
 })
 
-Given("my source code contains the file {string} with content:", async function (fileName, content) {
+Given("the source code contains the file {string} with content:", async function (fileName, content) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, fileName), content)
 })
@@ -92,7 +92,7 @@ testable documentation
   )
 })
 
-Given("my source code contains the HelloWorld action", async function () {
+Given("the source code contains the HelloWorld action", async function () {
   await fs.ensureDir(path.join(this.rootDir, "text-run"))
   await fs.writeFile(
     path.join(this.rootDir, "text-run", "hello-world.js"),

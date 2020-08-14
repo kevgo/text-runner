@@ -10,11 +10,11 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: relative link to existing local file
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [link to existing local file](2.md)
       """
-    And my source code contains the file "2.md" with content:
+    And the source code contains the file "2.md" with content:
       """
       foo
       """
@@ -26,11 +26,11 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: relative link to subfolder in subfolder
-    Given my source code contains the file "partners/foo/bar.md" with content:
+    Given the source code contains the file "partners/foo/bar.md" with content:
       """
       [link to existing local file](people/readme.md#carsten)
       """
-    And my source code contains the file "partners/foo/people/readme.md" with content:
+    And the source code contains the file "partners/foo/people/readme.md" with content:
       """
       # Carsten
       """
@@ -42,7 +42,7 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: absolute link to existing local file
-    Given my source code contains the file "docs/1.md" with content:
+    Given the source code contains the file "docs/1.md" with content:
       """
       [link to existing local file](/docs/1.md)
       """
@@ -55,10 +55,10 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: link to existing local directory
-    Given my source code contains the file "docs/1.md" with content:
+    Given the source code contains the file "docs/1.md" with content:
       """
       """
-    And my source code contains the file "1.md" with content:
+    And the source code contains the file "1.md" with content:
       """
       [link to local directory](docs)
       """
@@ -70,7 +70,7 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: link to non-existing local file
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       [link to non-existing local file](zonk.md)
       """
@@ -83,11 +83,11 @@ Feature: verifying links to the local filesystem
 
 
   Scenario: link to existing local file in higher directory
-    Given my source code contains the file "readme.md" with content:
+    Given the source code contains the file "readme.md" with content:
       """
       Hello
       """
-    And my source code contains the file "documentation/1.md" with content:
+    And the source code contains the file "documentation/1.md" with content:
       """
       [link to existing local file](../readme.md)
       """

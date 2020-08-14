@@ -6,11 +6,11 @@ Feature: HR tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: active HR tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <hr textrun="HelloWorld">
       """
@@ -21,14 +21,14 @@ Feature: HR tags
       | MESSAGE  | Hello world |
 
   Scenario: inactive HR tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <hr>
       """
     When running text-run
 
   Scenario: inactive HR Markdown tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       ---
       """

@@ -6,11 +6,11 @@ Feature: active h3 tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: H3 tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <h3 textrun="HelloWorld">hello</h3>
       """

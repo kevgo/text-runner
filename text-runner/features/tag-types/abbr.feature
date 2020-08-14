@@ -6,11 +6,11 @@ Feature: active ABBR tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: active ABBR tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <abbr textrun="HelloWorld">foo</abbr>
       """
@@ -22,7 +22,7 @@ Feature: active ABBR tags
 
 
   Scenario: passive ABBR tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <abbr>foo</abbr>
       """

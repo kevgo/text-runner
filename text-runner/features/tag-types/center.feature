@@ -6,11 +6,11 @@ Feature: active CENTER tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: active CENTER tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <center textrun="HelloWorld">foo</center>
       """
@@ -22,7 +22,7 @@ Feature: active CENTER tags
 
 
   Scenario: passive CENTER tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <center>foo</center>
       """

@@ -21,7 +21,7 @@ Feature: long-running processes
         setTimeout(function() {}, 1000)
       }, 100)
       """
-    And my source code contains the file "1.md" with content:
+    And the source code contains the file "1.md" with content:
       """
       <a textrun="shell/start">
 
@@ -60,7 +60,7 @@ Feature: long-running processes
 
 
   Scenario: no running process
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="shell/stop">
 

@@ -1,7 +1,7 @@
 Feature: shell/exec
 
   Scenario: with fenced block
-    Given my source code contains the file "running.md" with content:
+    Given the source code contains the file "running.md" with content:
       """
       <a textrun="shell/exec">
 
@@ -14,7 +14,7 @@ Feature: shell/exec
     Then it runs the console command "echo hello"
 
   Scenario: inside <pre> tags
-    Given my source code contains the file "running.md" with content:
+    Given the source code contains the file "running.md" with content:
       """
       <pre textrun="shell/exec">
       echo hello
@@ -24,7 +24,7 @@ Feature: shell/exec
     Then it runs the console command "echo hello"
 
   Scenario: empty console command
-    Given my source code contains the file "running.md" with content:
+    Given the source code contains the file "running.md" with content:
       """
       <a textrun="shell/exec">
 

@@ -1,7 +1,7 @@
 Feature: running inline blocks of Javascript
 
   Scenario: missing code block
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="javascript/run">
       </a>
@@ -15,7 +15,7 @@ Feature: running inline blocks of Javascript
 
 
   Scenario: multiple code blocks
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="javascript/run">
 

@@ -6,11 +6,11 @@ Feature: active OL tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: ordered list tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <ol textrun="HelloWorld">
       <li>one</li>
@@ -24,7 +24,7 @@ Feature: active OL tags
 
 
   Scenario: LI tag inside an OL
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <ol>
       <li textrun="HelloWorld">one</li>

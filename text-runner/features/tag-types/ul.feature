@@ -6,11 +6,11 @@ Feature: active UL tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: UL tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <ul textrun="HelloWorld">
         <li>one</li>
@@ -24,7 +24,7 @@ Feature: active UL tags
 
 
   Scenario: unordered list item tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <ul>
       <li textrun="HelloWorld">one</li>

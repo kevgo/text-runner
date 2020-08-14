@@ -6,11 +6,11 @@ Feature: active h6 tags
 
 
   Background:
-    Given my source code contains the HelloWorld action
+    Given the source code contains the HelloWorld action
 
 
   Scenario: H6 tag
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <h6 textrun="HelloWorld">hello</h6>
       """

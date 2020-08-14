@@ -16,7 +16,7 @@ Feature: running console commands
 
 
   Scenario: entering simple text into the console
-    Given my source code contains the file "enter-input.md" with content:
+    Given the source code contains the file "enter-input.md" with content:
       """
       <a textrun="shell/exec-with-input">
 
@@ -45,7 +45,7 @@ Feature: running console commands
 
 
   Scenario: entering complex text into the console
-    Given my source code contains the file "enter-input.md" with content:
+    Given the source code contains the file "enter-input.md" with content:
       """
       <a textrun="shell/exec-with-input">
 

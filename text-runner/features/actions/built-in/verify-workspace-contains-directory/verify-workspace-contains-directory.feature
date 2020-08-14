@@ -9,7 +9,7 @@ Feature: verify that the workspace contains a directory
 
 
   Background:
-    Given my source code contains the file "1.md" with content:
+    Given the source code contains the file "1.md" with content:
       """
       <a textrun="verify-workspace-contains-directory">
 

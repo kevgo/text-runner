@@ -1,73 +1,59 @@
-build:
-	@echo root folder build ...
-
-build-all:  # builds all the codebases
-	@(cd text-runner && make --no-print-directory build)
-	@(cd textrun-action && make --no-print-directory build)
-	@(cd textrun-javascript && make --no-print-directory build)
-	@(cd textrun-make && make --no-print-directory build)
-	@(cd textrun-npm && make --no-print-directory build)
-	@(cd textrun-shell && make --no-print-directory build)
+# Lerna terminology:
+# - dependents = downstreams (my dependents, those that are dependent on me)
+# - dependencies = upstreams (my dependencies, those that I depend on)
 
 build-affected:  # builds the codebases affected by changes in this branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory build
 
-build-changed:  #builds the codebases changed in this branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory build || exit 255'
+build-all:  # builds all the codebases
+	@${CURDIR}/node_modules/.bin/lerna exec --stream -- make --no-print-directory build
+
+build-changed:  # builds the codebases changed in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory build
+
+build-involved:  # builds all the codebases needed to test the changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --include-dependencies --stream -- make --no-print-directory build
 
 clean-all:  # Removes all build artifacts
-	@(cd text-runner && make --no-print-directory clean)
-	@(cd textrun-action && make --no-print-directory clean)
-	@(cd textrun-javascript && make --no-print-directory clean)
-	@(cd textrun-make && make --no-print-directory clean)
-	@(cd textrun-npm && make --no-print-directory clean)
-	@(cd textrun-shell && make --no-print-directory clean)
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory clean
+
+cuke-affected:  # runs the E2E tests for the codebases affected by changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory cuke
 
 cuke-all:  # runs all E2E tests
-	@(cd text-runner && make --no-print-directory cuke)
-	@(cd textrun-javascript && make --no-print-directory cuke)
-	@(cd textrun-make && make --no-print-directory cuke)
-	@(cd textrun-npm && make --no-print-directory cuke)
-	@(cd textrun-shell && make --no-print-directory cuke)
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory cuke
 
-cuke-smoke-win:  # runs the smoke tests
+cuke-changed:  # runs the E2E tests of codebases changed in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory cuke
+
+cuke-smoke-win:  # runs the Windows smoke tests
 	@(cd text-runner && make build && ${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress)
 
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...
 	@${CURDIR}/text-runner/bin/text-run --offline --format progress "*.md"
 
-docs-all: docs  # runs the documentation tests for all codebases
-	@(cd text-runner && make --no-print-directory docs)
-	@(cd textrun-action && make --no-print-directory docs)
-	@(cd textrun-javascript && make --no-print-directory docs)
-	@(cd textrun-make && make --no-print-directory docs)
-	@(cd textrun-npm && make --no-print-directory docs)
-	@(cd textrun-shell && make --no-print-directory docs)
+docs-affected:  # runs the documentation tests for the codebases affected by changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory docs
 
-docs-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory docs || exit 255'
+docs-all:  # runs all documentation tests
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory docs
 
-docs-changed:  # runs the documentation tests for the codebases changed in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory docs || exit 255'
+docs-changed:  # runs the documentation tests of codebases changed in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory docs
 
 fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
 	${CURDIR}/node_modules/.bin/prettier --write .
 
-fix-all: fix  # auto-fixes the entire mono-repo
-	@(cd text-runner && make --no-print-directory fix)
-	@(cd textrun-action && make --no-print-directory fix)
-	@(cd textrun-javascript && make --no-print-directory fix)
-	@(cd textrun-make && make --no-print-directory fix)
-	@(cd textrun-npm && make --no-print-directory fix)
-	@(cd textrun-shell && make --no-print-directory fix)
+fix-affected:  # runs the auto-fixes for the codebases affected by changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory fix
 
-fix-affected:  # runs the documentation tests for the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory fix || exit 255'
+fix-all:  # runs all auto-fixes
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory fix
 
-fix-changed:  # runs the documentation tests for the codebases changed in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory fix || exit 255'
+fix-changed:  # runs the auto-fixes of codebases changed in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory fix
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -77,25 +63,26 @@ lint:  # lints the root directory
 	@${CURDIR}/node_modules/.bin/remark . --quiet &
 	@${CURDIR}/node_modules/.bin/prettier -l '.'
 
-lint-all: lint  # lints the entire mono-repo
-	@(cd text-runner && make --no-print-directory lint)
-	@(cd textrun-action && make --no-print-directory lint)
-	@(cd textrun-javascript && make --no-print-directory lint)
-	@(cd textrun-make && make --no-print-directory lint)
-	@(cd textrun-npm && make --no-print-directory lint)
-	@(cd textrun-shell && make --no-print-directory lint)
+lint-affected:  # runs the linters for the codebases affected by changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory lint
 
-lint-affected:  # lints the workspaces affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
+lint-all:  # runs all linters
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory lint
 
-lint-changed:  # lints the workspaces changed in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory lint || exit 255'
+lint-changed:  # runs the linters of codebases changed in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory lint
 
-list-affected:  # displays the workspaces affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected
+list-affected:  # displays the codebases affected by changes in the current branch
+	@${CURDIR}/node_modules/.bin/lerna ls --since master --include-dependents --toposort
 
-list-changed:  # displays the workspaces changed in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed
+list-all:  # displays all codebases
+	@${CURDIR}/node_modules/.bin/lerna ls --toposort
+
+list-changed:  # displays the codebases changed in the current branch
+	@${CURDIR}/node_modules/.bin/lerna ls --since master --exclude-dependents --toposort
+
+list-involved:  # builds all the codebases needed to test the changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --include-dependencies
 
 setup:  # prepares the mono-repo for development after cloning
 	@find . -type d -name node_modules | xargs rm -rf
@@ -104,24 +91,14 @@ setup:  # prepares the mono-repo for development after cloning
 
 test: lint  # runs all tests for the root directory
 
+test-affected:  # runs all tests for the codebases affected by changes in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory test
+
 test-all:  # runs all tests
-	@(cd text-runner && make --no-print-directory test)
-	@(cd textrun-action && make --no-print-directory test)
-	@(cd textrun-javascript && make --no-print-directory test)
-	@(cd textrun-make && make --no-print-directory test)
-	@(cd textrun-npm && make --no-print-directory test)
-	@(cd textrun-shell && make --no-print-directory test)
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make --no-print-directory test
 
-test-affected:  # tests only the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
-
-test-changed:  # tests only the codebases changed in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
+test-changed:  # runs all tests of codebases changed in this branch
+	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory test
 
 update-all:  # updates the dependencies for the entire mono-repo
-	@(cd text-runner && yarn upgrade --latest)
-	@(cd textrun-action && yarn upgrade --latest)
-	@(cd textrun-javascript && yarn upgrade --latest)
-	@(cd textrun-make && yarn upgrade --latest)
-	@(cd textrun-npm && yarn upgrade --latest)
-	@(cd textrun-shell && yarn upgrade --latest)
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- yarn upgrade --latest

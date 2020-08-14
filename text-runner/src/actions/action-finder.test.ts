@@ -6,6 +6,7 @@ import path from "path"
 suite("actionFinder", function () {
   suite("actionFor()", function () {
     test("built-in block name", function () {
+      this.timeout(10_000)
       const activity = scaffoldActivity({ actionName: "cd" })
       const actionFinder = new ActionFinder(path.join(__dirname, "..", "..", "text-run"))
       assert.typeOf(actionFinder.actionFor(activity), "function")

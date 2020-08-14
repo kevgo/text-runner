@@ -35,8 +35,10 @@ To enable debugging statements and verbose output while debugging an end-to-end
 test, add the `@debug` Gherkin tag in the first line of the `.feature` file.
 
 In the root directory, there are `make *-all` tasks that run the respective task
-in all codebases of the mono-repo. The `make *-affected` targets run in all
-codebases affected by changes in the current branch.
+in all codebases of the mono-repo. The `make *-changed` targets runs in all
+codebases containing changes compared to the master branch. The
+`make *-affected` targets run in all codebases affected by changes in the
+current branch: code bases with changes and their downstream dependencies.
 
 ## Debugging
 

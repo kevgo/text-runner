@@ -5,17 +5,17 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import { ActionArgs } from "../types/action-args"
 
-export default async function verifySourceFileContent(args: ActionArgs) {
-  const fileName = args.nodes.textInNodeOfType("strong_open")
+export default async function verifySourceFileContent(action: ActionArgs) {
+  const fileName = action.nodes.textInNodeOfType("strong_open")
   let relativeBaseDir = "."
-  if (args.nodes.hasNodeOfType("link_open")) {
-    const linkNode = args.nodes.getNodeOfTypes("link_open")
+  if (action.nodes.hasNodeOfType("link_open")) {
+    const linkNode = action.nodes.getNodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
-  const expectedContent = args.nodes.textInNodeOfTypes("fence", "code")
-  args.name(`verifying document content matches source code file ${color.cyan(fileName)}`)
-  const filePath = path.join(args.configuration.sourceDir, path.dirname(args.file), relativeBaseDir, fileName)
-  args.log(`ls ${filePath}`)
+  const expectedContent = action.nodes.textInNodeOfTypes("fence", "code")
+  action.name(`verifying document content matches source code file ${color.cyan(fileName)}`)
+  const filePath = path.join(action.configuration.sourceDir, path.dirname(action.file), relativeBaseDir, fileName)
+  action.log(`ls ${filePath}`)
   let actualContent
   try {
     actualContent = await fs.readFile(filePath, "utf8")

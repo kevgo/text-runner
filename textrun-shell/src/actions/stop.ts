@@ -6,8 +6,8 @@ import { ActionArgs } from "text-runner"
  * The "stop" action stops the currently running server process,
  * started by the "start" action.
  */
-export async function stop(args: ActionArgs) {
-  args.name("stopping the long-running process")
+export async function stop(action: ActionArgs) {
+  action.name("stopping the long-running process")
   if (!CurrentServer.instance().hasProcess()) {
     throw new Error("No running process found")
   }

@@ -2,9 +2,9 @@ import * as assertNoDiff from "assert-no-diff"
 import { CurrentCommand } from "../helpers/current-command"
 import { ActionArgs } from "text-runner"
 
-export function execOutput(args: ActionArgs) {
-  args.name("verifying the output of the last run console command")
-  const expectedText = args.nodes.text()
+export function execOutput(action: ActionArgs) {
+  action.name("verifying the output of the last run console command")
+  const expectedText = action.nodes.text()
   const expectedLines = expectedText
     .split("\n")
     .map((line: string) => line.trim())

@@ -26,21 +26,17 @@ const branch = child_process.execSync("git rev-parse --abbrev-ref HEAD", { encod
 console.log("current branch:", branch)
 
 // determine if the current workspace is affected
-affectedCommand = "make list-affected"
-if (branch === "master") {
-  affectedCommand += "-master"
-}
+const affectedCommand = branch === "master" ? "make list-affected-master" : "make list-affected"
 const allAffected = child_process
   .execSync(affectedCommand, { cwd: path.join(process.cwd(), ".."), encoding: "utf-8" })
   .trim()
   .split(os.EOL)
 console.log("all affected workspaces:", allAffected)
 const run = allAffected.includes(workspace)
-console.log("match:", run)
 if (!run) {
-  console.log(`workspace "${workspace}" is not affected by the current changes, skipping the tests`)
+  console.log(`workspace "${workspace}" is not affected by the current changes, skipping`)
   process.exit()
 }
 
-// run the given command and print output
+// run the given command
 child_process.execSync(commands.join(" "), { stdio: "inherit" })

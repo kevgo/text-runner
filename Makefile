@@ -4,7 +4,7 @@ build:
 	@echo root folder build ...
 
 build-affected:  # builds the codebases affected by changes in this branch
-	@make list-affected | xargs -I {} bash -c 'cd {} && make build || exit 255'
+	@make list-branch-affected | xargs -P 8 -L 8 -I {} bash -c 'cd {} && make build || exit 255'
 
 build-all:  # builds all the codebases
 	@(cd tools/workspaces && make --no-print-directory build)
@@ -94,7 +94,7 @@ test-all:  # runs all tests
 	@tools/workspaces/bin/workspaces all | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
 
 test-affected:  # tests only the codebases affected by changes in the current branch
-	@git diff --name-only master | tools/workspaces/bin/workspaces affected | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'
+	@make list-branch-affected | xargs -P 8 -L 8 -I {} bash -c 'cd {} && make test || exit 255'
 
 test-changed:  # tests only the codebases changed in the current branch
 	@git diff --name-only master | tools/workspaces/bin/workspaces changed | xargs -I {} bash -c 'cd {} && make --no-print-directory test || exit 255'

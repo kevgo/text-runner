@@ -3,7 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 
-export default async function createFile(action: ActionArgs) {
+export async function createFile(action: ActionArgs) {
   const filePath = action.nodes.textInNodeOfType("em", "strong")
   const content = action.nodes.textInNodeOfType("fence", "code")
   action.name(`create file ${color.cyan(filePath)}`)

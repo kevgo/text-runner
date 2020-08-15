@@ -12,7 +12,7 @@ Feature: creating files with content
   Scenario: providing the filename as emphasized text and the content single-quoted
     Given the source code contains the file "creator.md" with content:
       """
-      <a textrun="create-file">
+      <a textrun="workspace/create-file">
 
       creating a file with name _one.txt_ and content `Hello world!`
 
@@ -32,7 +32,7 @@ Feature: creating files with content
   Scenario: providing the filename as bold text and the content triple-quoted
     Given the source code contains the file "creator.md" with content:
       """
-      <a textrun="create-file">
+      <a textrun="workspace/create-file">
 
       creating a file with name __one.txt__ and content:
 
@@ -55,7 +55,7 @@ Feature: creating files with content
   Scenario: no file path given
     Given the source code contains the file "creator.md" with content:
       """
-      <a textrun="create-file">
+      <a textrun="workspace/create-file">
 
       ```
       Hello world!
@@ -74,7 +74,7 @@ Feature: creating files with content
   Scenario: no content block given
     Given the source code contains the file "creator.md" with content:
       """
-      <a textrun="create-file">
+      <a textrun="workspace/create-file">
 
       __one.txt__
 
@@ -91,7 +91,7 @@ Feature: creating files with content
   Scenario: two file paths given
     Given the source code contains the file "creator.md" with content:
       """
-      <a textrun="create-file">
+      <a textrun="workspace/create-file">
 
       __one.txt__
       __two.txt__
@@ -112,7 +112,7 @@ Feature: creating files with content
   Scenario: two content blocks given
     Given the source code contains the file "creator.md" with content:
       """
-      <a textrun="create-file">
+      <a textrun="workspace/create-file">
 
       __one.txt__
 

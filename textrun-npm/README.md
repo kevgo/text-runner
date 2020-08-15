@@ -81,7 +81,7 @@ our `foobar` package contains an executable file
 
 </a>
 
-<a textrun="append-file">
+<a textrun="workspace/append-file">
 
 The **README.md** file for the "foobar" package would document this binary
 something like this:

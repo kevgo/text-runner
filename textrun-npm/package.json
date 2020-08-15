@@ -13,6 +13,7 @@
     "prettier": "2.0.5",
     "shared-cucumber-steps": "0.0.0",
     "textrun-action": "0.0.0",
+    "textrun-workspace": "0.0.0",
     "tslint": "6.1.2",
     "typescript": "3.9.7"
   }

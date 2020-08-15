@@ -49,8 +49,8 @@ Text-Runner verifies that the `Makefile` contains the `foo` target.
 ### Verify Make targets
 
 The <b textrun="action/name-full">make/target</b> action verifies that the
-mentioned Make target exists. <a textrun="append-file"> In our example codebase
-the **README.md** file could contain another part:
+mentioned Make target exists. <a textrun="workspace/append-file"> In our example
+codebase the **README.md** file could contain another part:
 
 ```html
 If it doesn't work, just run the <code textrun="make/target">foo</code> target

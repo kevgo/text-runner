@@ -67,17 +67,14 @@ three backticks. As an example, consider the following documentation snippet:
 <a textrun="run-in-textrunner">
 
 ```markdown
-<a textrun="workspace/create-file">
-
-Please create a file _test.txt_ with the content `foo`.
-
-</a>
+<a textrun="workspace/create-file">Please create a file _apples.txt_ with the
+content `Fuji`.</a>
 ```
 
 </a>
 
 When executing the documentation, Text-Runner will create a file with name
-<a textrun="workspace/file-content">_test.txt_ and content `foo`</a>.
+<a textrun="workspace/file-content">_apples.txt_ and content `Fuji`</a>.
 
 Alternatively, the documentation could also read like this:
 

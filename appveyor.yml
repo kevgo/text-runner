@@ -18,6 +18,8 @@ install:
 test_script:
   - cd shared/cucumber-steps
   - make build
+  - cd ..\..\text-runner
+  - make build
   - cd ..\..
   - make cuke-smoke-win
 

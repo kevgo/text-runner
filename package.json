@@ -1,7 +1,6 @@
 {
   "private": true,
   "workspaces": [
-    "text-runner",
     "examples/custom-action-async",
     "examples/custom-action-callback",
     "examples/custom-action-coffeescript",
@@ -12,6 +11,7 @@
     "examples/global-tool",
     "examples/multiple-returns",
     "shared/cucumber-steps",
+    "text-runner",
     "textrun-action",
     "textrun-javascript",
     "textrun-make",

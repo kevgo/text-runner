@@ -21,8 +21,9 @@ $ yarn i -D textrun-npm
 
 The <b textrun="action/name-full">npm/install</b> action verifies installation
 instructions for an npm package. As an example, let's assume we are testing the
-documentation of an npm package called `foobar`. <a textrun="create-file">Its
-**package.json** file would contain amongst other things:
+documentation of an npm package called `foobar`.
+<a textrun="workspace/create-file">Its **package.json** file would contain
+amongst other things:
 
 ```json
 {
@@ -32,7 +33,7 @@ documentation of an npm package called `foobar`. <a textrun="create-file">Its
 
 </a>
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 In the documentation of this npm package, for example its **README.md** file, we
 want to document how to install this package. It would contain a section that
@@ -67,7 +68,7 @@ The <b textrun="action/name-full">npm/executable</b> action verifies
 documentation of exported binaries of npm packages. Let's say the source code of
 our `foobar` package contains an executable file
 <b textrun="bundled-executable">bin/foo</b>, which is listed as a binary in its
-<a textrun="create-file">**package.json** file:
+<a textrun="workspace/create-file">**package.json** file:
 
 ```js
 {

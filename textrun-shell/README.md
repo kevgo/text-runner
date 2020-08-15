@@ -79,7 +79,7 @@ of the last shell command run.
 You can run a shell command and enter text into it with the
 <b textrun="action/name-full">shell/exec-with-input</b> action.
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 As an example, let's say we have a command-line tool written in JavaScript
 called **greeter.js**:
@@ -146,7 +146,7 @@ descriptions and are also ignored.
 Long-running processes, for example web or database servers, keep running while
 Text-Runner continues executing other actions.
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 As an example, let's say we have a server called **server.js**:
 

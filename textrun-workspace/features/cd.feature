@@ -6,7 +6,7 @@ Feature: changing the working directory
     And the source code contains the file "directory_changer.md" with content:
       """
       Change into the <code textrun="workspace/cd">foo</code> directory.
-      You see a file <a textrun="verify-workspace-file-content">
+      You see a file <a textrun="workspace/file-content">
         __bar__ `hello`
       </a>
       """

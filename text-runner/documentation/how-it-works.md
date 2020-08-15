@@ -21,7 +21,7 @@ that specifies that we want to create a file:
 ```markdown
 ## Creating a configuration file
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 Please create a file with the name _config.yml_ and the content: `foo: bar`
 
@@ -39,8 +39,8 @@ the content to write into the file from a code block. Text outside of `<a>` tags
 is ignored by TextRunner.
 
 If you run `text-run` on the command line to test this document, TextRunner
-creates a file <a textrun="verify-workspace-file-content">_config.yml_ with the
-content `foo: bar`</a> in the `tmp` subfolder of your current directory.
+creates a file <a textrun="workspace/file-content">_config.yml_ with the content
+`foo: bar`</a> in the `tmp` subfolder of your current directory.
 
 <hr>
 

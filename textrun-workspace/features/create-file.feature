@@ -1,14 +1,5 @@
 Feature: creating files with content
 
-  As a documentation writer
-  I want to be able to create files with content
-  So that my test suite has files to work with.
-
-  - to create a file, wrap the code in a tag with class textrun="create-file"
-  - the file name is provided as emphasized or bold text
-  - content is provided as a triple-fenced code block
-
-
   Scenario: providing the filename as emphasized text and the content single-quoted
     Given the source code contains the file "creator.md" with content:
       """
@@ -27,7 +18,6 @@ Feature: creating files with content
       """
       Hello world!
       """
-
 
   Scenario: providing the filename as bold text and the content triple-quoted
     Given the source code contains the file "creator.md" with content:
@@ -51,7 +41,6 @@ Feature: creating files with content
       Hello world!
       """
 
-
   Scenario: no file path given
     Given the source code contains the file "creator.md" with content:
       """
@@ -70,7 +59,6 @@ Feature: creating files with content
       | ERROR MESSAGE | Found no nodes of type 'em/strong/em_open/strong_open' |
       | EXIT CODE     | 1                                                      |
 
-
   Scenario: no content block given
     Given the source code contains the file "creator.md" with content:
       """
@@ -86,7 +74,6 @@ Feature: creating files with content
       | LINE          | 1                                                        |
       | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
       | EXIT CODE     | 1                                                        |
-
 
   Scenario: two file paths given
     Given the source code contains the file "creator.md" with content:
@@ -107,7 +94,6 @@ Feature: creating files with content
       | LINE          | 1                                                     |
       | ERROR MESSAGE | Found 2 nodes of type 'em/strong/em_open/strong_open' |
       | EXIT CODE     | 1                                                     |
-
 
   Scenario: two content blocks given
     Given the source code contains the file "creator.md" with content:

@@ -21,8 +21,8 @@ $ yarn i -D textrun-make
 ### Verify Make commands
 
 The <b textrun="action/name-full">make/command</b> action verifies that the
-mentioned Make command exists. <a textrun="create-file">As an example, consider
-a codebase that contains this **Makefile**:
+mentioned Make command exists. <a textrun="workspace/create-file">As an example,
+consider a codebase that contains this **Makefile**:
 
 ```
 foo:
@@ -31,7 +31,7 @@ foo:
 
 </a>
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 In the documentation of this codebase, for example its **README.md** file, we
 want to document how to build it. This part could look like this:

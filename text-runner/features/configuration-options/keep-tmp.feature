@@ -11,7 +11,7 @@ Feature: keeping the tmp directory
   Background:
     Given the source code contains the file "tr.md" with content:
       """
-      <a textrun="create-directory">
+      <a textrun="workspace/create-directory">
 
       `foo`
       </a>

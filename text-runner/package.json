@@ -67,6 +67,7 @@
     "shared-cucumber-steps": "0.0.0",
     "shelljs": "0.8.4",
     "strip-ansi": "6.0.0",
+    "textrun-workspace": "0.0.0",
     "ts-node": "8.10.2",
     "tslint": "6.1.2",
     "typescript": "3.9.7"

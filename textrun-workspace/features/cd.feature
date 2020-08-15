@@ -22,8 +22,8 @@ Feature: changing the working directory
     And the workspace contains a file "foo/bar" with content "hello"
     And the source code contains the file "directory_changer.md" with content:
       """
-      <code textrun="cd">foo</code>
-      <a textrun="verify-workspace-file-content">
+      <code textrun="workspace/cd">foo</code>
+      <a textrun="workspace/file-content">
         __bar__ `hello`
       </a>
       """
@@ -37,7 +37,7 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given the source code contains the file "directory_changer.md" with content:
       """
-      <code textrun="cd">foo</code>
+      <code textrun="workspace/cd">foo</code>
       """
     When trying to run text-run
     Then the test fails with:

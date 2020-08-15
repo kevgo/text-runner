@@ -32,11 +32,11 @@ Given("a runnable file {string}", async function (filePath) {
       await fs.mkdir(subdirPath)
     }
   }
-  await fs.writeFile(path.join(this.rootDir, filePath), '<a textrun="verify-workspace-contains-directory">`.`</a>')
+  await fs.writeFile(path.join(this.rootDir, filePath), '<a textrun="test"></a>')
 })
 
 Given("I am in a directory that contains documentation without a configuration file", async function () {
-  await fs.writeFile(path.join(this.rootDir, "1.md"), '<code textrun="cd">.</code>')
+  await fs.writeFile(path.join(this.rootDir, "1.md"), '<code textrun="test"></code>')
 })
 
 Given("I am in a directory that contains the {string} example", async function (exampleName) {

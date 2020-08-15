@@ -75,7 +75,6 @@ content `Fuji`.</a>
 
 When executing the documentation, Text-Runner will create a file with name
 <a textrun="workspace/file-content">_apples.txt_ and content `Fuji`</a>.
-
 Alternatively, the documentation could also read like this:
 
 <a textrun="run-in-textrunner">

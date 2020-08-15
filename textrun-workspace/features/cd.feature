@@ -1,59 +1,47 @@
-Feature: verifying Make commands
+Feature: changing the working directory
 
-  Background:
-    Given the source code contains the file "Makefile" with content:
+  Scenario: pointing to an existing directory via hyperlink
+    Given the workspace contains a directory "foo"
+    And the workspace contains a file "foo/bar" with content "hello"
+    And the source code contains the file "directory_changer.md" with content:
       """
-      foo:  # builds the "foo" executable
-        @echo building foo
-
-      bar:
-        @echo building bar
-      """
-
-  Scenario: works
-    Given the source code contains the file "1.md" with content:
-      """
-      To build the "foo" executable, run <code textrun="make/command">make foo</code>.
+      Change into the <code textrun="workspace/cd">foo</code> directory.
+      You see a file <a textrun="verify-workspace-file-content">
+        __bar__ `hello`
+      </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                   |
-      | LINE     | 1                      |
-      | MESSAGE  | make command: make foo |
+      | FILENAME | directory_changer.md            |
+      | LINE     | 1                               |
+      | MESSAGE  | changing into the foo directory |
 
-  Scenario: mismatching target name
-    Given the source code contains the file "1.md" with content:
+
+  Scenario: pointing to an existing directory via code block
+    Given the workspace contains a directory "foo"
+    And the workspace contains a file "foo/bar" with content "hello"
+    And the source code contains the file "directory_changer.md" with content:
       """
-      To build the "foo" executable, run <code textrun="make/command">make zonk</code>.
+      <code textrun="cd">foo</code>
+      <a textrun="verify-workspace-file-content">
+        __bar__ `hello`
+      </a>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | directory_changer.md            |
+      | LINE     | 1                               |
+      | MESSAGE  | changing into the foo directory |
+
+
+  Scenario: pointing to a non-existing directory
+    Given the source code contains the file "directory_changer.md" with content:
+      """
+      <code textrun="cd">foo</code>
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                                          |
-      | LINE          | 1                                                                             |
-      | ERROR MESSAGE | Makefile does not contain target make zonk but these ones: make bar, make foo |
-      | EXIT CODE     | 1                                                                             |
-
-
-  Scenario: missing target name
-    Given the source code contains the file "1.md" with content:
-      """
-      To build the "foo" executable, run <code textrun="make/command">make </code>.
-      """
-    When trying to run text-run
-    Then the test fails with:
-      | FILENAME      | 1.md                                 |
-      | LINE          | 1                                    |
-      | ERROR MESSAGE | Make command must start with "make " |
-      | EXIT CODE     | 1                                    |
-
-  Scenario: empty tag
-    Given the source code contains the file "1.md" with content:
-      """
-      To build the "foo" executable, run <code textrun="make/command"> </code>.
-      """
-    When trying to run text-run
-    Then the test fails with:
-      | FILENAME      | 1.md                  |
-      | LINE          | 1                     |
-      | ERROR MESSAGE | No make command found |
-      | EXIT CODE     | 1                     |
+      | FILENAME      | directory_changer.md    |
+      | LINE          | 1                       |
+      | ERROR MESSAGE | directory foo not found |
+      | EXIT CODE     | 1                       |

@@ -1,11 +1,11 @@
 import * as color from "colorette"
 import * as path from "path"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "../../../text-runner/src/actions/types/action-args"
 
 /** The "cd" action changes the current working directory to the one given in the hyperlink or code block. */
-export default function cd(action: ActionArgs) {
+export function cd(action: ActionArgs) {
   const directory = action.nodes.text()
-  action.name(`changing into the ${color.bold(color.cyan(directory))} directory`)
+  action.name(`changing into the ${color.cyan(directory)} directory`)
   const fullPath = path.join(action.configuration.workspace, directory)
   action.log(`cd ${fullPath}`)
   try {

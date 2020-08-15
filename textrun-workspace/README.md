@@ -115,3 +115,22 @@ everything goes well, your computer will now have a new directory
 ```
 
 </a>
+
+### file-content
+
+The <code textrun="action/name-full">workspace/file-content</code> action
+verifies that a file with the given name exists and has the given content. This
+action assumes that the documentation contains the filename as _emphasized_ or
+**strong** text and the file content as a code block with single or triple
+backticks. As an example, consider the following documentation snippet:
+
+<a textrun="run-in-textrunner">
+
+```markdown
+Assuming a file <a textrun="workspace/create-file"> _hello.txt_ with content
+`hello world`</a>, we can verify it via this action:
+
+<a textrun="workspace/file-content">
+The file _hello.txt_ now contains `hello world`.
+</a>
+```

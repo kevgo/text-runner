@@ -53,6 +53,54 @@ To get started, please create a directory named
 
 </a>
 
-When checking it, Text-Runner will create a
+When executing the documentation, Text-Runner will create a
 <i textrun="workspace/directory">utils</i> directory in the workspace, just as
 the user would.
+
+### create-file
+
+The <code textrun="action/name-full">workspace/create-file</code> action creates
+a file in the workspace. This action assumes that the filename is written in
+_emphasized_ or **bold** text and the file content is a code block with one or
+three backticks. As an example, consider the following documentation snippet:
+
+<a textrun="run-in-textrunner">
+
+```markdown
+<a textrun="workspace/create-file">
+
+Please create a file _test.txt_ with the content `foo`.
+
+</a>
+```
+
+</a>
+
+When executing the documentation, Text-Runner will create a file with name
+<a textrun="workspace/file-content">_test.txt_ and content `foo`</a>.
+
+Alternatively, the documentation could also read like this:
+
+<a textrun="run-in-textrunner">
+
+````markdown
+<a textrun="create-file">
+
+Please create a file with name **test2.txt** and the content:
+
+```
+foo
+```
+
+</a>
+````
+
+</a>
+
+Similarly, Text-Runner will create a file
+<a textrun="workspace/file-content">_test2.txt_ with content `foo`</a>.
+
+#### More info
+
+- [feature specs](../../features/actions/built-in/create-file/create-file.feature)
+- [source code](../../src/actions/built-in/create-file.ts)

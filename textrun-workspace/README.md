@@ -80,12 +80,12 @@ Alternatively, the documentation could also read like this:
 <a textrun="run-in-textrunner">
 
 ````markdown
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
-Please create a file with name **test2.txt** and the content:
+Please create a file with name **apples.txt** and the content:
 
 ```
-foo
+Gala
 ```
 
 </a>
@@ -94,7 +94,7 @@ foo
 </a>
 
 Similarly, Text-Runner will create a file
-<a textrun="workspace/file-content">_test2.txt_ with content `foo`</a>.
+<a textrun="workspace/file-content">_apples.txt_ with content `Gala`</a>.
 
 ### directory
 

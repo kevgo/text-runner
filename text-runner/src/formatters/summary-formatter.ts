@@ -24,9 +24,9 @@ export class SummaryFormatter implements Formatter {
     printCodeFrame(console.log, path.join(this.configuration.sourceDir, activity.file.platformified()), activity.line)
   }
 
-  // @ts-expect-error: okay to not use parameters here
+  // @ts-ignore: okay to not use parameters here
   skipped(activity: Activity, stepName: string, output: string) {}
 
-  // @ts-expect-error: okay to not use parameters here
+  // @ts-ignore: okay to not use parameters here
   success(activity: Activity, stepName: string, output: string) {}
 }

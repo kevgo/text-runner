@@ -174,6 +174,8 @@ TextRunner supports a variety of formatters:
 
 - **progress formatter:** Prints a progress bar
 
+- **summary formatter:** Prints only a summary at the end
+
 ## Cleaning up unused activities
 
 To see all custom activities that aren't currenly used, run:

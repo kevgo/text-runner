@@ -25,6 +25,7 @@ Feature: selecting formatter via the command-line
       | detailed  |
       | dot       |
       | progress  |
+      | summary   |
 
 
   Scenario: selecting an unknown formatter via the command line
@@ -33,5 +34,5 @@ Feature: selecting formatter via the command-line
       """
       Unknown formatter: zonk
 
-      Available formatters are: detailed, dot, progress
+      Available formatters are: detailed, dot, progress, summary
       """

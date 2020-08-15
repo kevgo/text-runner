@@ -7,7 +7,7 @@ suite("globalTextRunPath", function () {
     if (process.platform === "win32") {
       return
     }
-    const want = path.join(process.cwd(), "bin", "text-run")
+    const want = path.join(process.cwd(), "..", "..", "text-runner", "bin", "text-run")
     const have = helpers.globalTextRunPath("linux")
     assert.equal(have, want)
   })

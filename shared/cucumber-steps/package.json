@@ -2,10 +2,13 @@
   "name": "shared-cucumber-steps",
   "version": "0.0.0",
   "license": "MIT",
-  "devDependencies": {
-    "typescript": "3.9.7"
-  },
   "dependencies": {
     "strip-ansi": "6.0.0"
+  },
+  "devDependencies": {
+    "mocha": "8.0.1",
+    "prettier": "2.0.5",
+    "tslint": "6.1.2",
+    "typescript": "3.9.7"
   }
 }

@@ -1,7 +1,5 @@
-import { command } from "./actions/command"
-import { target } from "./actions/target"
+import { cd } from "./actions/cd"
 
 export const textrunActions = {
-  command,
-  target,
+  cd,
 }

@@ -82,7 +82,7 @@ Alternatively, the documentation could also read like this:
 ````markdown
 <a textrun="workspace/create-file">
 
-Please create a file with name **apples.txt** and the content:
+Please create a file with name **more-apples.txt** and the content:
 
 ```
 Gala
@@ -94,7 +94,7 @@ Gala
 </a>
 
 Similarly, Text-Runner will create a file
-<a textrun="workspace/file-content">_apples.txt_ with content `Gala`</a>.
+<a textrun="workspace/file-content">_more-apples.txt_ with content `Gala`</a>.
 
 ### directory
 
@@ -104,7 +104,7 @@ this documentation snippet:
 
 <a textrun="run-in-textrunner">
 
-```markdown
+```html
 Please run the command <code textrun="shell/exec">mkdir images</code>. If
 everything goes well, your computer will now have a new directory
 <i textrun="workspace/directory">images</i>. You can store images in it.

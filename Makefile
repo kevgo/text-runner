@@ -29,7 +29,7 @@ cuke-changed:  # runs the E2E tests of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory cuke
 
 cuke-smoke-win:  # runs the Windows smoke tests
-	@(cd text-runner && make build && ${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress)
+	@${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress
 
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...

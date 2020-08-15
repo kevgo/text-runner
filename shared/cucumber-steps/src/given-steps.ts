@@ -120,7 +120,7 @@ Given("the workspace contains an empty file {string}", async function (fileName)
 
 Given("the workspace contains an image {string}", async function (imageName) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(imageName)))
-  cp(path.join(__dirname, path.basename(imageName)), path.join(this.rootDir, imageName))
+  cp(path.join(__dirname, "..", path.basename(imageName)), path.join(this.rootDir, imageName))
 })
 
 Given("the configuration file:", async function (content) {

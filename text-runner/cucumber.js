@@ -1,3 +1,3 @@
 module.exports = {
-  default: "--require-module ts-node/register --require 'features/support/!(*.test).ts' --fail-fast",
+  default: "--require '../shared/cucumber-steps/dist/!(*.test).js' --fail-fast",
 }

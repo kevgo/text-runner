@@ -99,3 +99,19 @@ foo
 
 Similarly, Text-Runner will create a file
 <a textrun="workspace/file-content">_test2.txt_ with content `foo`</a>.
+
+### directory
+
+The <code textrun="action/name-full">workspace/directory</code> action verifies
+that the workspace contains a directory with the given name. As an example,
+consider this documentation snippet:
+
+<a textrun="run-in-textrunner">
+
+```markdown
+Please run the command <code textrun="shell/exec">mkdir images</code>. If
+everything goes well, your computer will now have a new directory
+<i textrun="workspace/directory">images</i>. You can store images in it.
+```
+
+</a>

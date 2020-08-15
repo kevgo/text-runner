@@ -22,8 +22,8 @@ $ yarn i -D textrun-workspace
 
 ### cd action
 
-The <code textrun="action/name-full">workspace/cd</code> action changes the
-current working directory into the given directory inside the workspace. Example
+The <b textrun="action/name-full">workspace/cd</b> action changes the current
+working directory into the given directory inside the workspace. Example
 documentation snippet to demonstrate the use case:
 
 <a textrun="run-in-textrunner">
@@ -40,9 +40,9 @@ directory. Now you can change into it via this Markdown code:
 
 ### create-directory
 
-The <code textrun="action/name-full">workspace/create-directory</code> action
-creates a directory with the given name in the workspace. As an example,
-consider this snippet of documentation:
+The <b textrun="action/name-full">workspace/create-directory</b> action creates
+a directory with the given name in the workspace. As an example, consider this
+snippet of documentation:
 
 <a textrun="run-in-textrunner">
 
@@ -59,8 +59,8 @@ the user would.
 
 ### create-file
 
-The <code textrun="action/name-full">workspace/create-file</code> action creates
-a file in the workspace. This action assumes that the filename is written in
+The <b textrun="action/name-full">workspace/create-file</b> action creates a
+file in the workspace. This action assumes that the filename is written in
 _emphasized_ or **bold** text and the file content is a code block with one or
 three backticks. As an example, consider the following documentation snippet:
 
@@ -102,9 +102,9 @@ Similarly, Text-Runner will create a file
 
 ### directory
 
-The <code textrun="action/name-full">workspace/directory</code> action verifies
-that the workspace contains a directory with the given name. As an example,
-consider this documentation snippet:
+The <b textrun="action/name-full">workspace/directory</b> action verifies that
+the workspace contains a directory with the given name. As an example, consider
+this documentation snippet:
 
 <a textrun="run-in-textrunner">
 
@@ -118,9 +118,9 @@ everything goes well, your computer will now have a new directory
 
 ### file-content
 
-The <code textrun="action/name-full">workspace/file-content</code> action
-verifies that a file with the given name exists and has the given content. This
-action assumes that the documentation contains the filename as _emphasized_ or
+The <b textrun="action/name-full">workspace/file-content</b> action verifies
+that a file with the given name exists and has the given content. This action
+assumes that the documentation contains the filename as _emphasized_ or
 **strong** text and the file content as a code block with single or triple
 backticks. As an example, consider the following documentation snippet:
 

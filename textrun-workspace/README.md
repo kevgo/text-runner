@@ -23,8 +23,8 @@ $ yarn i -D textrun-workspace
 ### cd action
 
 The <b textrun="action/name-full">workspace/cd</b> action changes the current
-working directory into the given directory inside the workspace. Example
-documentation snippet to demonstrate the use case:
+working directory into the given directory inside the workspace. As an example,
+consider the following documentation snippet:
 
 <a textrun="run-in-textrunner">
 

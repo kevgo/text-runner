@@ -18,6 +18,7 @@ jobs:
             - yarn-master
             - yarn-
       - run: yarn
+      - run: cd text-runner && make build
       - run: make build-involved
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}

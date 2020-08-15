@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "text-runner"
 
 export default async function createFile(action: ActionArgs) {
   const filePath = action.nodes.textInNodeOfType("em", "strong")

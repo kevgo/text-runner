@@ -2,7 +2,7 @@ import * as assertNoDiff from "assert-no-diff"
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { ActionArgs } from "text-runner/src/actions/types/action-args"
+import { ActionArgs } from "text-runner"
 
 export async function fileContent(action: ActionArgs) {
   const filePath = action.nodes.textInNodeOfType("strong", "em")

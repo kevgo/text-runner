@@ -37,3 +37,22 @@ directory. Now you can change into it via this Markdown code:
 ```
 
 </a>
+
+# create-directory
+
+The <code textrun="action/name-full">workspace/create-directory</code> action
+creates a directory with the given name in the workspace. As an example,
+consider this snippet of documentation:
+
+<a textrun="run-in-textrunner">
+
+```markdown
+To get started, please create a directory named
+<b textrun="workspace/create-directory">utils</b>.
+```
+
+</a>
+
+When checking it, Text-Runner will create a
+<i textrun="workspace/directory">utils</i> directory in the workspace, just as
+the user would.

@@ -18,6 +18,9 @@ jobs:
             - yarn-master
             - yarn-
       - run: yarn
+      # need to compile text-runner first here because there is a dependency loop
+      # involving it, Lerna compiles it together with dependencies, which fails on CI.
+      - run: cd text-runner && make build
       - run: make build-involved
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}

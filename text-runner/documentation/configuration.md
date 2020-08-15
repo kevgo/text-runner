@@ -11,9 +11,8 @@ configure TextRunner, and run:
 $ text-run setup
 </pre>
 
-This creates a configuration file called
-<a textrun="verify-workspace-file-content"> **text-run.yml** that looks like
-this:
+This creates a configuration file called <a textrun="workspace/file-content">
+**text-run.yml** that looks like this:
 
 ```yml
 # white-list for files to test

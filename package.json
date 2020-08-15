@@ -16,7 +16,8 @@
     "textrun-javascript",
     "textrun-make",
     "textrun-npm",
-    "textrun-shell"
+    "textrun-shell",
+    "textrun-workspace"
   ],
   "devDependencies": {
     "lerna": "3.22.1"

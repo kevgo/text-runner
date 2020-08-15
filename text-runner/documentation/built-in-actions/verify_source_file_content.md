@@ -6,7 +6,7 @@ without having them do it as part of the tutorial.
 
 #### Simple Example
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 Let's say you have a file **hello.txt** in your code base with the content
 `hello world`.
@@ -36,7 +36,7 @@ The filename of the source code file is relative to the documentation file. You
 can also provide a directory in which your file is located via a link in the
 active block.
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 Let's say you have a file **foo/bar/hello2.txt** in your code base with the
 content `hello again`. </a> You can display its content in your documentation

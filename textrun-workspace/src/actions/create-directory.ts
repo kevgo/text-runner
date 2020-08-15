@@ -1,9 +1,9 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "text-runner"
 
-export default async function createDirectory(action: ActionArgs) {
+export async function createDirectory(action: ActionArgs) {
   const directoryName = action.nodes.text().trim()
   if (!directoryName) {
     throw new Error("empty directory name given")

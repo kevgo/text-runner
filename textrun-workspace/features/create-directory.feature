@@ -1,17 +1,9 @@
 Feature: creating directories
 
-  As a documentation writer
-  I want to be able to create directories in the test workspace
-  So that my test suite has the folder structure to work.
-
-  - to create a directory, write the directory name as a code tag
-    and wrap it in a tag with class textrun="create-directory"
-
-
   Scenario: creating a directory
     Given the source code contains the file "creator.md" with content:
       """
-      <b textrun="create-directory">directory_name</b>
+      Create the directory <b textrun="workspace/create-directory">directory_name</b>.
       """
     When running "text-run --keep-tmp"
     Then it signals:
@@ -20,11 +12,10 @@ Feature: creating directories
       | MESSAGE  | create directory directory_name |
     And the test workspace now contains a directory "directory_name"
 
-
-  Scenario: no name given
+  Scenario: missing closing tag
     Given the source code contains the file "creator.md" with content:
       """
-      <b textrun="create-directory"></b>
+      Create the directory <b textrun="workspace/create-directory">
       """
     When trying to run text-run
     Then the test fails with:
@@ -37,7 +28,7 @@ Feature: creating directories
   Scenario: empty name given
     Given the source code contains the file "creator.md" with content:
       """
-      <b textrun="create-directory"> </b>
+      <b textrun="workspace/create-directory"> </b>
       """
     When trying to run text-run
     Then the test fails with:

@@ -1,21 +1,12 @@
 Feature: changing the working directory
 
-  As a documentation writer
-  I want to be able to let my users run commands from different directories
-  So that they can use my tool appropriately.
-
-  - to change the working directory, wrap a hyperlink into a tag with class textrun=`cd`
-  - the link must point to a local directory
-  - the directory pointed to must exist
-
-
   Scenario: pointing to an existing directory via hyperlink
     Given the workspace contains a directory "foo"
     And the workspace contains a file "foo/bar" with content "hello"
     And the source code contains the file "directory_changer.md" with content:
       """
-      <code textrun="cd">foo</code>
-      <a textrun="verify-workspace-file-content">
+      Change into the <code textrun="workspace/cd">foo</code> directory.
+      You see a file <a textrun="workspace/file-content">
         __bar__ `hello`
       </a>
       """
@@ -31,8 +22,8 @@ Feature: changing the working directory
     And the workspace contains a file "foo/bar" with content "hello"
     And the source code contains the file "directory_changer.md" with content:
       """
-      <code textrun="cd">foo</code>
-      <a textrun="verify-workspace-file-content">
+      <code textrun="workspace/cd">foo</code>
+      <a textrun="workspace/file-content">
         __bar__ `hello`
       </a>
       """
@@ -46,7 +37,7 @@ Feature: changing the working directory
   Scenario: pointing to a non-existing directory
     Given the source code contains the file "directory_changer.md" with content:
       """
-      <code textrun="cd">foo</code>
+      <code textrun="workspace/cd">foo</code>
       """
     When trying to run text-run
     Then the test fails with:

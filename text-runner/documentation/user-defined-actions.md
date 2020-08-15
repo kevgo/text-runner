@@ -9,7 +9,7 @@ Let's start by building the simplest possible action first: A "hello-world"
 action that prints the text "hello world" in the test runner's console output
 when running. Inside our Markdown document we trigger it like this:
 
-<a textrun="create-file">
+<a textrun="workspace/create-file">
 
 ```html
 <a textrun="hello-world"></a>
@@ -20,10 +20,11 @@ Create a file **hello.md** with this content to test it.
 </a>
 
 When TextRunner encounters this block of type `hello-world`, it runs the method
-that the file <a textrun="create-file">**text-run/hello-world.js** exports. All
-user-defined actions are in the "text-run" folder, with the file name matching
-the action name but in [kebab-case](http://wiki.c2.com/?KebabCase). Let's create
-this file with the content:
+that the file <a textrun="workspace/create-file">**text-run/hello-world.js**
+exports. All user-defined actions are in the "text-run" folder, with the file
+name matching the action name but in
+[kebab-case](http://wiki.c2.com/?KebabCase). Let's create this file with the
+content:
 
 ```javascript
 module.exports = function (action) {
@@ -115,7 +116,8 @@ You cant also iterate `nodes` manually. Each node has these attributes:
 ## Example 2: accessing document content
 
 Here is an example for an action that runs a code block in the terminal.
-<a textrun="create-file"> Create a file **execute.md** with the content:
+<a textrun="workspace/create-file"> Create a file **execute.md** with the
+content:
 
 ```
 <pre textrun="console-command">
@@ -125,8 +127,8 @@ echo "Hello world"
 
 </a>
 
-Here is the corresponding action, implemented in <a textrun="create-file">
-**text-run/console-command.js**:
+Here is the corresponding action, implemented in
+<a textrun="workspace/create-file"> **text-run/console-command.js**:
 
 ```javascript
 child_process = require("child_process")

@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as path from "path"
-import { ActionArgs } from "../../../text-runner/src/actions/types/action-args"
+import { ActionArgs } from "text-runner"
 
 /** The "cd" action changes the current working directory to the one given in the hyperlink or code block. */
 export function cd(action: ActionArgs) {

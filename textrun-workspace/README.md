@@ -46,7 +46,7 @@ consider this snippet of documentation:
 
 <a textrun="run-in-textrunner">
 
-```markdown
+```html
 To get started, please create a directory named
 <b textrun="workspace/create-directory">utils</b>.
 ```

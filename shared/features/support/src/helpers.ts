@@ -1,15 +1,16 @@
 import * as path from "path"
 
 export function fullTextRunPath(platform: string) {
-  let result = path.join(__dirname, "..", "..", "bin", "text-run")
+  let result = path.join(__dirname, "..", "..", "..", "..", "text-runner", "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }
   return result
 }
 
+// TODO: merge with fullTextRunPath above
 export function globalTextRunPath(platform: string) {
-  let result = path.join(__dirname, "..", "..", "bin", "text-run")
+  let result = path.join(__dirname, "..", "..", "..", "..", "text-runner", "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }

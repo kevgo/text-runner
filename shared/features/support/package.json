@@ -1,0 +1,9 @@
+{
+  "name": "shared-cucumber-steps",
+  "version": "0.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/strip-ansi": "5.2.1",
+    "typescript": "3.9.7"
+  }
+}

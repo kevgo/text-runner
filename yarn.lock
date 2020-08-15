@@ -1113,6 +1113,13 @@
     "@types/glob" "*"
     "@types/node" "*"
 
+"@types/strip-ansi@5.2.1":
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/@types/strip-ansi/-/strip-ansi-5.2.1.tgz#acd97f1f091e332bb7ce697c4609eb2370fa2a92"
+  integrity sha512-1l5iM0LBkVU8JXxnIoBqNvg+yyOXxPeN6DNoD+7A9AN1B8FhYPSeIXgyNqwIqg1uzipTgVC2hmuDzB0u9qw/PA==
+  dependencies:
+    strip-ansi "*"
+
 "@types/tmp@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@types/tmp/-/tmp-0.2.0.tgz#e3f52b4d7397eaa9193592ef3fdd44dc0af4298c"
@@ -6308,7 +6315,7 @@ stringify-entities@^3.0.0:
     is-decimal "^1.0.2"
     is-hexadecimal "^1.0.0"
 
-strip-ansi@6.0.0, strip-ansi@^6.0.0:
+strip-ansi@*, strip-ansi@6.0.0, strip-ansi@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.0.tgz#0b1571dd7669ccd4f3e06e14ef1eed26225ae532"
   integrity sha512-AuvKTrTfQNYNIctbR1K/YGTR1756GycPsg7b9bdV9Duqur4gv6aKqHXah67Z8ImS7WEz5QVcOtlfW2rZEugt6w==

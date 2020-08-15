@@ -32,7 +32,6 @@ consider the following documentation snippet:
 Create a
 <code textrun="workspace/create-directory">foo</code>
 directory. Now you can change into it via this Markdown code:
-
 <code textrun="workspace/cd">foo</code>
 ```
 

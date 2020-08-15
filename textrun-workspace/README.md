@@ -47,7 +47,8 @@ snippet of documentation:
 
 ```html
 To get started, please create a directory named
-<b textrun="workspace/create-directory">utils</b>.
+<b textrun="workspace/create-directory">utils</b>. We will put all the utilities
+we create later in there.
 ```
 
 </a>

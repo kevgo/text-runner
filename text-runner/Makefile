@@ -5,7 +5,6 @@ build:  # builds for the current platform
 clean:  # Removes all build artifacts
 	@echo Text-Runner build artifact cleanup ...
 	@rm -rf dist
-	@rm -rf .nyc_output*
 
 cuke: build  # runs the feature specs
 	@echo Text-Runner E2E tests ...

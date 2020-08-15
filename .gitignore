@@ -1,7 +1,5 @@
-coverage/
 dist
 node_modules
 npm-debug.log
-.nyc_output*
 test-dir
 tmp

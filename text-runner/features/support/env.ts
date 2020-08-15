@@ -1,4 +1,4 @@
-import { After, Before, setDefaultTimeout } from "cucumber"
+import { After, Before } from "cucumber"
 import { endChildProcesses } from "end-child-processes"
 import * as fs from "fs-extra"
 import * as path from "path"
@@ -6,9 +6,6 @@ import * as rimraf from "rimraf"
 import * as tmp from "tmp-promise"
 import * as util from "util"
 const rimrafp = util.promisify(rimraf)
-
-// need such a high timeout because test coverage takes time to start up
-setDefaultTimeout(30000)
 
 Before(async function () {
   if (process.env.CUCUMBER_PARALLEL) {

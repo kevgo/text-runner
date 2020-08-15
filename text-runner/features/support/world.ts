@@ -6,7 +6,6 @@ import * as glob from "glob"
 import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import stripAnsi = require("strip-ansi")
-import { v4 as uuid } from "uuid"
 import * as helpers from "./helpers"
 
 /**
@@ -24,14 +23,8 @@ function World() {
       }
     }
     const command = helpers.makeFullPath(params.command, process.platform)
-    if (process.env.NODE_ENV === "coverage") {
-      args.command = helpers.coverageCommand(args.command)
-    }
     this.process = createObservableProcess(command, args)
     await this.process.waitForEnd()
-    if (process.env.NODE_ENV === "coverage") {
-      await storeTestCoverage()
-    }
     if (this.verbose) {
       this.output = this.process.output.fullText()
     }
@@ -149,16 +142,3 @@ ${actual}
 }
 
 setWorldConstructor(World)
-
-/**
- * Stores the test coverage data before running the next test that would overwrite it
- */
-async function storeTestCoverage() {
-  const outputPath = path.join(process.cwd(), ".nyc_output")
-  try {
-    await fs.stat(outputPath)
-  } catch (e) {
-    return
-  }
-  await fs.move(outputPath, path.join(process.cwd(), ".nyc_output_cli", uuid()))
-}

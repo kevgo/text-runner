@@ -20,7 +20,7 @@ test_script:
   - make build
   - cd ..\..\text-runner
   - make build
-  - cd ..\..
+  - cd ..
   - make cuke-smoke-win
 
 # Don't double-build PRs

@@ -16,6 +16,9 @@ build-changed:  # builds the codebases changed in this branch
 build-involved:  # builds all the codebases needed to test the changes in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --include-dependencies --stream -- make --no-print-directory build
 
+build-open:  # builds the codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory build
+
 clean-all:  # Removes all build artifacts
 	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory clean
 
@@ -27,6 +30,9 @@ cuke-all:  # runs all E2E tests
 
 cuke-changed:  # runs the E2E tests of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory cuke
+
+cuke-open:  # runs the E2E tests of codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory cuke
 
 cuke-smoke-win:  # runs the Windows smoke tests
 	@${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress
@@ -44,6 +50,9 @@ docs-all:  # runs all documentation tests
 docs-changed:  # runs the documentation tests of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory docs
 
+docs-open:  # runs the documentation tests of codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory docs
+
 fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
 	${CURDIR}/node_modules/.bin/prettier --write .
@@ -56,6 +65,9 @@ fix-all:  # runs all auto-fixes
 
 fix-changed:  # runs the auto-fixes of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory fix
+
+fix-open:  # runs the auto-fixes of codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory fix
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -74,6 +86,9 @@ lint-all:  # runs all linters
 lint-changed:  # runs the linters of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory lint
 
+lint-open:  # runs the linters of codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory lint
+
 list-affected:  # displays the codebases affected by changes in the current branch
 	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --toposort
 
@@ -85,6 +100,9 @@ list-changed:  # displays the codebases changed in the current branch
 
 list-involved:  # builds all the codebases needed to test the changes in this branch
 	@${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --include-dependencies
+
+list-open:  # displays the codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna ls --since HEAD --exclude-dependents --toposort
 
 setup:  # prepares the mono-repo for development after cloning
 	@find . -type d -name node_modules | xargs rm -rf
@@ -101,6 +119,9 @@ test-all:  # runs all tests
 
 test-changed:  # runs all tests of codebases changed in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory test
+
+test-open:  # runs all tests of codebases with uncommitted changes
+	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory test
 
 update-all:  # updates the dependencies for the entire mono-repo
 	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- yarn upgrade --latest

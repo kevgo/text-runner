@@ -11,7 +11,7 @@
     "examples/external-action",
     "examples/global-tool",
     "examples/multiple-returns",
-    "shared/features/support",
+    "shared/cucumber-steps",
     "textrun-action",
     "textrun-javascript",
     "textrun-make",

@@ -24,6 +24,7 @@ Feature: selecting formatter via the config file
       | detailed  | testable documentation |
       | dot       | .                      |
       | progress  | Success                |
+      | summary   | Success                |
 
 
   Scenario: the config file specifies an unknown formatter

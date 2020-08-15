@@ -2,6 +2,7 @@ import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
 import { ProgressFormatter } from "../formatters/progress-formatter"
+import { SummaryFormatter } from "../formatters/summary-formatter"
 import { Formatter } from "../formatters/types/formatter"
 import { Configuration } from "./types/configuration"
 
@@ -17,7 +18,11 @@ export function instantiateFormatter(
       return new DetailedFormatter(stepCount, configuration)
     case "progress":
       return new ProgressFormatter(stepCount, configuration)
+    case "summary":
+      return new SummaryFormatter(stepCount, configuration)
     default:
-      throw new UnprintedUserError(`Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress`)
+      throw new UnprintedUserError(
+        `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress, summary`
+      )
   }
 }

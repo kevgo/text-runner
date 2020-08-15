@@ -38,7 +38,7 @@ directory. Now you can change into it via this Markdown code:
 
 </a>
 
-# create-directory
+### create-directory
 
 The <code textrun="action/name-full">workspace/create-directory</code> action
 creates a directory with the given name in the workspace. As an example,

@@ -123,12 +123,8 @@ backticks. As an example, consider the following documentation snippet:
 <a textrun="run-in-textrunner">
 
 ```markdown
-<a textrun="workspace/create-file">
-
-Assuming a file _hello.txt_ with content `hello world`, we can verify it via
-this action:
-
-</a>
+Assuming a file <a textrun="workspace/create-file">_hello.txt_ with content
+`hello world`</a>, we can verify it via this action:
 
 <a textrun="workspace/file-content">
 

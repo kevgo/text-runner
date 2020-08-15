@@ -99,8 +99,3 @@ foo
 
 Similarly, Text-Runner will create a file
 <a textrun="workspace/file-content">_test2.txt_ with content `foo`</a>.
-
-#### More info
-
-- [feature specs](../../features/actions/built-in/create-file/create-file.feature)
-- [source code](../../src/actions/built-in/create-file.ts)

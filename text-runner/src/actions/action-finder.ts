@@ -40,7 +40,7 @@ export class ActionFinder {
 
   /** customActionNames returns the names of all built-in actions. */
   customActionNames(): string[] {
-    return Object.keys(this.customActions)
+    return this.customActions.names()
   }
 
   /** errorUnknownAction signals that the given activity has no known action. */
@@ -49,9 +49,9 @@ export class ActionFinder {
     for (const actionName of this.builtinActions.names()) {
       errorText += `* ${actionName}\n`
     }
-    if (Object.keys(this.customActions).length > 0) {
+    if (this.customActions.size() > 0) {
       errorText += "\nUser-defined actions:\n"
-      for (const actionName of Object.keys(this.customActions).sort()) {
+      for (const actionName of this.customActions.names()) {
         errorText += `* ${actionName}\n`
       }
     } else {

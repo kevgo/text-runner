@@ -12,6 +12,10 @@ export class Actions {
     return this.list[name]
   }
 
+  size(): number {
+    return Object.keys(this.list).length
+  }
+
   /** provides the names of all registered actions */
   names(): string[] {
     return Object.keys(this.list).sort()

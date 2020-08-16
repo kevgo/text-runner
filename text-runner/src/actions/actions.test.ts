@@ -54,4 +54,16 @@ suite("Actions", function () {
       assert.deepEqual(actions.names(), ["one", "two"])
     })
   })
+  suite("size", function () {
+    test("no actions registered", function () {
+      const actions = new Actions()
+      assert.equal(actions.size(), 0)
+    })
+    test("actions registered", function () {
+      const actions = new Actions()
+      actions.register("two", function () {})
+      actions.register("one", function () {})
+      assert.equal(actions.size(), 2)
+    })
+  })
 })

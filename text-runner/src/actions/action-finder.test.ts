@@ -25,8 +25,8 @@ suite("actionFinder", function () {
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", function () {
       const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
-      assert.typeOf(result["verify-ast-node-attributes"], "function")
-      assert.typeOf(result["verify-handler-args"], "function")
+      assert.typeOf(result.get("verify-ast-node-attributes"), "function")
+      assert.typeOf(result.get("verify-handler-args"), "function")
     })
   })
 })

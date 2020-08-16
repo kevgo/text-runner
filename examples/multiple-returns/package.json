@@ -1,6 +1,6 @@
 {
   "name": "multiple-returns-example",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "devDependencies": {
     "text-runner": "4.0.3"
   }

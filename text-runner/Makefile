@@ -23,8 +23,7 @@ cuke-win:  # runs the feature specs on Windows
 docs:  # verify documentation
 	@echo Text-Runner documentation tests ...
 	@rm -rf tmp
-	@${CURDIR}/bin/text-run static --format progress --offline
-	@${CURDIR}/bin/text-run dynamic --format progress
+	@${CURDIR}/bin/text-run --format progress --offline
 
 fix:  # runs the fixers
 	@echo Text-Runner auto-fixes ...

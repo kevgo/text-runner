@@ -19,7 +19,7 @@ export interface FunctionRepo {
 /** ActionFinder provides runnable action instances for activities. */
 export class ActionFinder {
   private readonly builtinActions: Actions
-  private readonly customActions: FunctionRepo
+  private readonly customActions: Actions
   private readonly externalActions: ExternalActionManager
 
   constructor(sourceDir: string) {
@@ -32,7 +32,7 @@ export class ActionFinder {
   actionFor(activity: Activity): Action {
     return (
       this.builtinActions.get(activity.actionName) ||
-      this.customActions[activity.actionName] ||
+      this.customActions.get(activity.actionName) ||
       this.externalActions.actionFor(activity.actionName) ||
       this.errorUnknownAction(activity)
     )
@@ -83,17 +83,13 @@ export function customActionFilePaths(dir: string): string[] {
   return glob.sync(pattern)
 }
 
-export function loadCustomActions(dir: string): FunctionRepo {
-  const result: FunctionRepo = {}
+export function loadCustomActions(dir: string): Actions {
+  const result = new Actions()
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
     const standardName = actionName(filename)
     const action = require(filename)
-    if (action.default) {
-      result[standardName] = action.default
-    } else {
-      result[standardName] = action
-    }
+    result.register(standardName, action)
   }
   return result
 }

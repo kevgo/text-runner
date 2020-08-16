@@ -47,7 +47,7 @@ Feature: verifying the documented content of a file in the repository
       """
     And the source code contains the file "1.md" with content:
       """
-      <a textrun="verify-source-file-content">
+      <a textrun="repo/file-content">
 
       [documentation](docs)
       __greeting.md__
@@ -59,9 +59,9 @@ Feature: verifying the documented content of a file in the repository
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                            |
-      | LINE     | 1                                                               |
-      | MESSAGE  | verifying document content matches source code file greeting.md |
+      | FILENAME | 1.md                                                       |
+      | LINE     | 1                                                          |
+      | MESSAGE  | document content matches source code file docs/greeting.md |
 
   Scenario: file content mismatch
     Given the source code contains the file "01.md" with content:
@@ -83,7 +83,7 @@ Feature: verifying the documented content of a file in the repository
       | EXIT CODE     | 1                                                                                                 |
 
 
-  Scenario: file is missing
+  Scenario: file doesn't exist
     Given the source code contains the file "1.md" with content:
       """
       <a textrun="repo/file-content">

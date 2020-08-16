@@ -13,15 +13,16 @@ export async function fileContent(action: ActionArgs) {
     relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = action.nodes.textInNodeOfTypes("fence", "code")
-  action.name(`document content matches source code file ${color.cyan(fileName)}`)
-  const filePath = path.join(action.configuration.sourceDir, path.dirname(action.file), relativeBaseDir, fileName)
-  action.log(`ls ${filePath}`)
+  const filePath = path.join(path.dirname(action.file), relativeBaseDir, fileName)
+  action.name(`document content matches source code file ${color.cyan(filePath)}`)
+  const fullPath = path.join(action.configuration.sourceDir, filePath)
+  action.log(`ls ${fullPath}`)
   let actualContent
   try {
-    actualContent = await fs.readFile(filePath, "utf8")
+    actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
     if (err.code === "ENOENT") {
-      throw new Error(`file not found: ${color.cyan(fileName)}`)
+      throw new Error(`file not found: ${color.cyan(filePath)}`)
     } else {
       throw err
     }
@@ -29,6 +30,6 @@ export async function fileContent(action: ActionArgs) {
   try {
     assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    throw new Error(`mismatching content in ${color.cyan(color.bold(fileName))}:\n${err.message}`)
+    throw new Error(`mismatching content in ${color.cyan(color.bold(filePath))}:\n${err.message}`)
   }
 }

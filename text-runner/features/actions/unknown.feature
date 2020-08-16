@@ -27,7 +27,6 @@ Feature: unknown action types
       * run-in-textrunner
       * run-textrunner
       * test
-      * verify-source-file-content
 
       No custom actions defined.
 

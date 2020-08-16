@@ -40,6 +40,29 @@ Feature: verifying the documented content of a file in the repository
       | MESSAGE  | document content matches source code file hello.txt |
 
 
+  Scenario: file in subfolder
+    Given the source code contains the file "docs/greeting.md" with content:
+      """
+      Hello!
+      """
+    And the source code contains the file "1.md" with content:
+      """
+      <a textrun="verify-source-file-content">
+
+      [documentation](docs)
+      __greeting.md__
+
+      ```
+      Hello!
+      ```
+      </a>
+      """
+    When running text-run
+    Then it signals:
+      | FILENAME | 1.md                                                            |
+      | LINE     | 1                                                               |
+      | MESSAGE  | verifying document content matches source code file greeting.md |
+
   Scenario: file content mismatch
     Given the source code contains the file "01.md" with content:
       """

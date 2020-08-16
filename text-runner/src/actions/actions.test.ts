@@ -21,9 +21,9 @@ suite("Actions", function () {
     test("an action exported with a name", function () {
       const actions = new Actions()
       const func = () => {}
-      const want = { other: func }
+      const want = { otherName: func }
       actions.register("default", want)
-      let have = actions.get("other")
+      let have = actions.get("other-name")
       assert.equal(have, func)
       have = actions.get("hello")
       assert.equal(have, undefined)

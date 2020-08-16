@@ -1,5 +1,6 @@
 import { Action } from "./types/action"
 import { FunctionRepo } from "./action-finder"
+import slugify = require("@sindresorhus/slugify")
 
 export class Actions {
   list: FunctionRepo
@@ -31,7 +32,7 @@ export class Actions {
         if (typeof key !== "string") {
           throw new Error(`Key "${key}" has unexpected type "${typeof key}", expected string`)
         }
-        this.list[key] = action[key]
+        this.list[slugify(key)] = action[key]
       }
     } else {
       throw new Error(`Cannot use object of type "${typeof action}" as an exported action: ${action}`)

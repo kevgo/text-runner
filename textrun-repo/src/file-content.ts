@@ -3,25 +3,26 @@ import * as color from "colorette"
 import * as eol from "eol"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "text-runner"
 
-export default async function verifySourceFileContent(action: ActionArgs) {
-  const fileName = action.nodes.textInNodeOfType("strong_open")
+export async function fileContent(action: ActionArgs) {
+  const fileName = action.nodes.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
   if (action.nodes.hasNodeOfType("link_open")) {
     const linkNode = action.nodes.getNodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = action.nodes.textInNodeOfTypes("fence", "code")
-  action.name(`verifying document content matches source code file ${color.cyan(fileName)}`)
-  const filePath = path.join(action.configuration.sourceDir, path.dirname(action.file), relativeBaseDir, fileName)
-  action.log(`ls ${filePath}`)
+  const filePath = path.join(path.dirname(action.file), relativeBaseDir, fileName)
+  action.name(`document content matches source code file ${color.cyan(filePath)}`)
+  const fullPath = path.join(action.configuration.sourceDir, filePath)
+  action.log(`ls ${fullPath}`)
   let actualContent
   try {
-    actualContent = await fs.readFile(filePath, "utf8")
+    actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
     if (err.code === "ENOENT") {
-      throw new Error(`file ${color.cyan(fileName)} not found`)
+      throw new Error(`file not found: ${color.cyan(filePath)}`)
     } else {
       throw err
     }

@@ -38,6 +38,17 @@ When(/^(trying to run|running) text-run$/, async function (tryingText) {
   finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
 })
 
+When(/^(trying to run|running) text-run in the source directory$/, async function (tryingText) {
+  const expectError = determineExpectError(tryingText)
+  try {
+    await this.execute({ command: "run", cwd: this.rootDir, expectError })
+  } catch (err) {
+    finish(expectError, err)
+    return
+  }
+  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
+})
+
 When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, async function (tryingText, optionsText) {
   const expectError = determineExpectError(tryingText)
   const splitted = optionsText.split(" ")

@@ -46,6 +46,6 @@ creates a file <a textrun="workspace/file-content">_config.yml_ with the content
 
 Read more about:
 
-- the other [built-in actions](built-in-actions)
+- the other [built-in actions](built-in-actions.md)
 - writing your own [user-defined actions](user-defined-actions.md)
 - [configuring](configuration.md) TextRunner

@@ -1,6 +1,7 @@
 # User-defined actions
 
-If the [built-in actions](built-in-actions) aren't enough, you can write custom
+If the [built-in actions](built-in-actions.md) and
+[external actions](external-actions.md) aren't enough, you can write custom
 actions in JavaScript.
 
 ## Example 1: Hello world
@@ -192,5 +193,5 @@ text-run unused
 
 Read more about:
 
-- the [built-in actions](built-in-actions)
+- the [built-in actions](built-in-actions.md)
 - [configure](configuration.md) TextRunner

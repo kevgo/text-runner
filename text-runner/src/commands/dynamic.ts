@@ -40,7 +40,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 6: find actions
-  const actionFinder = new ActionFinder(config.sourceDir)
+  const actionFinder = ActionFinder.load(config.sourceDir)
 
   // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length, config)

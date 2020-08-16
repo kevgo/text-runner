@@ -18,10 +18,18 @@ export class ActionFinder {
   private readonly customActions: Actions
   private readonly externalActions: ExternalActionManager
 
-  constructor(sourceDir: string) {
-    this.builtinActions = this.loadBuiltinActions()
-    this.customActions = loadCustomActions(path.join(sourceDir, "text-run"))
-    this.externalActions = new ExternalActionManager()
+  constructor(builtIn: Actions, custom: Actions, external: ExternalActionManager) {
+    this.builtinActions = builtIn
+    this.customActions = custom
+    this.externalActions = external
+  }
+
+  static load(sourceDir: string) {
+    return new ActionFinder(
+      loadBuiltinActions(),
+      loadCustomActions(path.join(sourceDir, "text-run")),
+      new ExternalActionManager()
+    )
   }
 
   /** actionFor provides the action function for the given Activity. */
@@ -57,21 +65,21 @@ export class ActionFinder {
     errorText += `run "text-run scaffold ${activity.actionName}"\n`
     throw new UnprintedUserError(errorText, activity.file.platformified(), activity.line)
   }
+}
 
-  private loadBuiltinActions(): Actions {
-    const result = new Actions()
-    for (const filename of this.builtinActionFilePaths()) {
-      result.register(actionName(filename), require(filename))
-    }
-    return result
+export function loadBuiltinActions(): Actions {
+  const result = new Actions()
+  for (const filename of builtinActionFilePaths()) {
+    result.register(actionName(filename), require(filename))
   }
+  return result
+}
 
-  private builtinActionFilePaths(): string[] {
-    return glob
-      .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
-      .filter((name) => !name.endsWith(".d.ts"))
-      .map(trimExtension)
-  }
+export function builtinActionFilePaths(): string[] {
+  return glob.glob
+    .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
+    .filter((name) => !name.endsWith(".d.ts"))
+    .map(trimExtension)
 }
 
 export function customActionFilePaths(dir: string): string[] {

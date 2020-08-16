@@ -20,7 +20,7 @@ export async function unusedCommand(config: Configuration) {
   const usedActivityNames = extractActivities(ASTs, config.classPrefix).map((activity) => activity.actionName)
 
   // step 4: find defined activities
-  const definedActivityNames = new ActionFinder(config.sourceDir).customActionNames()
+  const definedActivityNames = ActionFinder.load(config.sourceDir).customActionNames()
 
   // step 5: identify unused activities
   const unusedActivityNames = definedActivityNames.filter(

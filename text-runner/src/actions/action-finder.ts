@@ -10,6 +10,7 @@ import { javascriptExtensions } from "./helpers/javascript-extensions"
 import { trimExtension } from "./helpers/trim-extension"
 import { Action } from "./types/action"
 import { ExternalActionManager } from "./external-action-manager"
+import { Actions } from "./actions"
 
 export interface FunctionRepo {
   [key: string]: Action
@@ -17,7 +18,7 @@ export interface FunctionRepo {
 
 /** ActionFinder provides runnable action instances for activities. */
 export class ActionFinder {
-  private readonly builtinActions: FunctionRepo
+  private readonly builtinActions: Actions
   private readonly customActions: FunctionRepo
   private readonly externalActions: ExternalActionManager
 
@@ -30,7 +31,7 @@ export class ActionFinder {
   /** actionFor provides the action function for the given Activity. */
   actionFor(activity: Activity): Action {
     return (
-      this.builtinActions[activity.actionName] ||
+      this.builtinActions.get(activity.actionName) ||
       this.customActions[activity.actionName] ||
       this.externalActions.actionFor(activity.actionName) ||
       this.errorUnknownAction(activity)
@@ -45,7 +46,7 @@ export class ActionFinder {
   /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
     let errorText = `unknown action: ${color.red(activity.actionName)}\nAvailable built-in actions:\n`
-    for (const actionName of Object.keys(this.builtinActions).sort()) {
+    for (const actionName of this.builtinActions.names()) {
       errorText += `* ${actionName}\n`
     }
     if (Object.keys(this.customActions).length > 0) {
@@ -61,10 +62,10 @@ export class ActionFinder {
     throw new UnprintedUserError(errorText, activity.file.platformified(), activity.line)
   }
 
-  private loadBuiltinActions(): FunctionRepo {
-    const result: FunctionRepo = {}
+  private loadBuiltinActions(): Actions {
+    const result = new Actions()
     for (const filename of this.builtinActionFilePaths()) {
-      result[actionName(filename)] = require(filename).default as Action
+      result.register(actionName(filename), require(filename))
     }
     return result
   }

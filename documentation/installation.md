@@ -31,5 +31,5 @@ all links and images point to something.
 Read more about:
 
 - [configuring](configuration.md) TextRunner
-- using some of the [built-in actions](built-in-actions)
+- using some of the [built-in actions](built-in-actions.md)
 - writing your own [user-defined actions](user-defined-actions.md)

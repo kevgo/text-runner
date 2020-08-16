@@ -50,9 +50,7 @@ This action assumes that the documentation contains the filename in bold or
 italic and the content as a single or triple fenced code block. The filename of
 the source code file is relative to the Markdown file describing it. You can
 also provide a directory in which your file is located via a link in the active
-block.
-
-<a textrun="workspace/create-file"> Let's say you have a file
+block. <a textrun="workspace/create-file"> Let's say you have a file
 **foo/bar/hello.txt** in your code base with the content `hello world!`. </a>
 You can display its content in your documentation via this active block:
 

@@ -9,11 +9,18 @@ import { Action } from "./types/action"
 suite("actionFinder", function () {
   suite("actionFor()", function () {
     test("built-in block name", function () {
-      this.timeout(10_000)
       const builtIn = new Actions()
       const func: Action = () => 1
       builtIn.register("foo", func)
       const actionFinder = new ActionFinder(builtIn, new Actions(), new ExternalActionManager())
+      const activity = scaffoldActivity({ actionName: "foo" })
+      assert.equal(actionFinder.actionFor(activity), func)
+    })
+    test("custom block name", function () {
+      const custom = new Actions()
+      const func: Action = () => 1
+      custom.register("foo", func)
+      const actionFinder = new ActionFinder(new Actions(), custom, new ExternalActionManager())
       const activity = scaffoldActivity({ actionName: "foo" })
       assert.equal(actionFinder.actionFor(activity), func)
     })

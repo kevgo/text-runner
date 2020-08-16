@@ -17,6 +17,7 @@
     "textrun-javascript",
     "textrun-make",
     "textrun-npm",
+    "textrun-repo",
     "textrun-shell",
     "textrun-workspace"
   ],

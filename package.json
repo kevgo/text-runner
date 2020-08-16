@@ -1,6 +1,7 @@
 {
   "private": true,
   "workspaces": [
+    "documentation",
     "examples/custom-action-async",
     "examples/custom-action-callback",
     "examples/custom-action-coffeescript",

@@ -31,12 +31,12 @@ Please create a file with the name _config.yml_ and the content: `foo: bar`
 </a>
 
 TextRunner calls parts of text documents that are marked up like this _active
-blocks_. The attribute `textrun="createFile"` tells TextRunner to run the
-`createFile` action here, which creates a file in TextRunner's working
-directory. The built-in implementation of the `createFile` action takes the name
-of the file to create from a bold or italic section inside the `<a>` tag, and
-the content to write into the file from a code block. Text outside of `<a>` tags
-is ignored by TextRunner.
+blocks_. The attribute `textrun="workspace/create-file"` tells TextRunner to run
+the `workspace/create-file` action here, which creates a file in TextRunner's
+working directory. The built-in implementation of the `create-file` action takes
+the name of the file to create from a bold or italic section inside the `<a>`
+tag, and the content to write into the file from a code block. Text outside of
+`<a>` tags is ignored by TextRunner.
 
 If you run `text-run` on the command line to test this document, TextRunner
 creates a file <a textrun="workspace/file-content">_config.yml_ with the content

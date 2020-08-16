@@ -1,6 +1,6 @@
-import { AstNode } from "../src/parsers/standard-AST/ast-node"
+import { AstNode } from "text-runner"
 import * as assertNoDiff from "assert-no-diff"
-import { removeTrailingColon } from "../src/helpers/remove-trailing-colon"
+import { removeTrailingColon } from "../../text-runner/src/helpers/remove-trailing-colon"
 import { ActionArgs } from "text-runner"
 
 export default async function verifyAstNodeAttributes(action: ActionArgs) {

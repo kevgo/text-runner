@@ -1,5 +1,5 @@
 import { Action } from "./types/action"
-import { FunctionRepo } from "./action-finder"
+import { FunctionRepo } from "./types/function-repo"
 import slugify = require("@sindresorhus/slugify")
 
 export class Actions {

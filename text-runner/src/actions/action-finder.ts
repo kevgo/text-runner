@@ -12,10 +12,6 @@ import { Action } from "./types/action"
 import { ExternalActionManager } from "./external-action-manager"
 import { Actions } from "./actions"
 
-export interface FunctionRepo {
-  [key: string]: Action
-}
-
 /** ActionFinder provides runnable action instances for activities. */
 export class ActionFinder {
   private readonly builtinActions: Actions

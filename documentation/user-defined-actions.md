@@ -68,22 +68,22 @@ various information and utility functions:
 TextRunner supports all forms of JavaScript functions:
 
 - synchronous functions
-  ([example](../examples/custom-action-sync/text-run/hello-world.js))
+  ([example](examples/custom-action-sync/text-run/hello-world.js))
 - functions receiving a callback
-  ([example](../examples/custom-action-callback/text-run/hello-world.js))
+  ([example](examples/custom-action-callback/text-run/hello-world.js))
 - functions returning a Promise
-  ([example](../examples/custom-action-promise/text-run/hello-world.js))
+  ([example](examples/custom-action-promise/text-run/hello-world.js))
 - [async
   functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
-  ([example](../examples/custom-action-async/text-run/hello-world.js))
+  ([example](examples/custom-action-async/text-run/hello-world.js))
 
 You can write functions in any of the languages that
 [interpret](https://github.com/gulpjs/interpret) supports. Here are examples
 for:
 
-- [JavaScript](../examples/custom-action-sync/)
-- [TypeScript](../examples/custom-action-typescript/)
-- [CoffeeScript](../examples/custom-action-coffeescript/)
+- [JavaScript](examples/custom-action-sync/)
+- [TypeScript](examples/custom-action-typescript/)
+- [CoffeeScript](examples/custom-action-coffeescript/)
 
 ## Accessing document content
 

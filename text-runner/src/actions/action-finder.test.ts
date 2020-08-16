@@ -14,8 +14,8 @@ suite("actionFinder", function () {
   })
 
   suite("customActionFilePaths", function () {
-    test("with text-run folder of this codebase", function () {
-      const result = customActionFilePaths(path.join(__dirname, "..", "..", "text-run"))
+    test("with text-run folder of the documentation codebase", function () {
+      const result = customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
       assert.lengthOf(result, 2)
       assert.match(result[0], /text-run\/verify-ast-node-attributes.ts$/)
       assert.match(result[1], /text-run\/verify-handler-args.ts$/)
@@ -24,7 +24,7 @@ suite("actionFinder", function () {
 
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", function () {
-      const result = loadCustomActions(path.join(__dirname, "..", "..", "text-run"))
+      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
       assert.typeOf(result["verify-ast-node-attributes"], "function")
       assert.typeOf(result["verify-handler-args"], "function")
     })

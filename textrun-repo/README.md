@@ -59,8 +59,7 @@ You can display its content in your documentation via this active block:
 ```markdown
 <a textrun="repo/file-content">
 
-The **hello.txt** file in the [bar folder](foo/bar) needs to contains this
-section:
+The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 
 `hello world!`
 

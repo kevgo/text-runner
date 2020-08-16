@@ -1,5 +1,5 @@
 <!-- logo is from: https://icons8.com/icon/40886/test -->
-<img src="documentation/logo2.png" align="right" valign="bottom">
+<img src="../documentation/logo2.png" align="right" valign="bottom">
 
 # Text-Runner
 
@@ -27,12 +27,12 @@ images. This can be useful for things like
 
 More information about:
 
-- [how it works](documentation/how-it-works.md)
-- [installation](documentation/installation.md)
-- [configuration](documentation/configuration.md)
-- [terminology](documentation/terminology.md)
-- [built-in actions](documentation/built-in-actions)
-- [user-defined actions](documentation/user-defined-actions.md)
-- [external actions](documentation/external-actions.md)
-- [questions and answers](documentation/qna.md)
-- [related tools](documentation/related-tools.md)
+- [how it works](../documentation/how-it-works.md)
+- [installation](../documentation/installation.md)
+- [configuration](../documentation/configuration.md)
+- [terminology](../documentation/terminology.md)
+- [built-in actions](../documentation/built-in-actions)
+- [user-defined actions](../documentation/user-defined-actions.md)
+- [external actions](../documentation/external-actions.md)
+- [questions and answers](../documentation/qna.md)
+- [related tools](../documentation/related-tools.md)

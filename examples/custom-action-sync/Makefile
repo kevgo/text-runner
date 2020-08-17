@@ -9,6 +9,7 @@ cuke:
 
 docs:
 	@echo custom-action-sync documentation tests ...
+	@${CURDIR}/node_modules/.bin/text-run
 
 fix:
 	@echo custom-action-sync auto-fixes ...

@@ -9,6 +9,7 @@ cuke:
 
 docs:
 	@echo custom-action-callback documentation tests ...
+	@${CURDIR}/node_modules/.bin/text-run
 
 fix:
 	@echo custom-action-callback auto-fixes ...

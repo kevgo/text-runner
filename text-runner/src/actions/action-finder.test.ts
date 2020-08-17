@@ -1,10 +1,13 @@
 import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
-import { ActionFinder, customActionFilePaths, loadCustomActions } from "./action-finder"
+import { ActionFinder, customActionFilePaths, loadCustomActions, builtinActionFilePaths } from "./action-finder"
 import * as path from "path"
 import { Actions } from "./actions"
 import { ExternalActionManager } from "./external-action-manager"
 import { Action } from "./types/action"
+// need to load the compiled version here to avoid requiring TypeScript files here,
+// which is slowing down the test
+import { loadBuiltinActions } from "../../dist/actions/action-finder"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {
@@ -26,6 +29,11 @@ suite("actionFinder", function () {
     })
   })
 
+  test("builtinActionFilePaths", function () {
+    const result = builtinActionFilePaths().map((fp) => path.basename(fp))
+    assert.deepEqual(result, ["check-image", "check-link", "run-in-textrunner", "run-textrunner", "test"])
+  })
+
   suite("customActionFilePaths", function () {
     test("with text-run folder of the documentation codebase", function () {
       const result = customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
@@ -35,12 +43,18 @@ suite("actionFinder", function () {
     })
   })
 
+  test("loadBuiltinActions", function () {
+    const result = loadBuiltinActions()
+    assert.deepEqual(result.names(), ["check-image", "check-link", "run-in-textrunner", "run-textrunner", "test"])
+  })
+
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", function () {
       // TODO: point to JS example for faster loading
-      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
-      assert.typeOf(result.get("verify-ast-node-attributes"), "function")
-      assert.typeOf(result.get("verify-handler-args"), "function")
+      const result = loadCustomActions(
+        path.join(__dirname, "..", "..", "..", "examples", "custom-action-sync", "text-run")
+      )
+      assert.typeOf(result.get("hello-world"), "function")
     })
   })
 })

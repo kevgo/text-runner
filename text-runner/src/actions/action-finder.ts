@@ -67,19 +67,19 @@ export class ActionFinder {
   }
 }
 
+export function builtinActionFilePaths(): string[] {
+  return glob.glob
+    .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
+    .filter((name) => !name.endsWith(".d.ts"))
+    .map(trimExtension)
+}
+
 export function loadBuiltinActions(): Actions {
   const result = new Actions()
   for (const filename of builtinActionFilePaths()) {
     result.register(actionName(filename), require(filename))
   }
   return result
-}
-
-export function builtinActionFilePaths(): string[] {
-  return glob.glob
-    .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
-    .filter((name) => !name.endsWith(".d.ts"))
-    .map(trimExtension)
 }
 
 export function customActionFilePaths(dir: string): string[] {

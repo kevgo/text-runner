@@ -15,6 +15,7 @@
     "shared/cucumber-steps",
     "text-runner",
     "textrun-action",
+    "textrun-extension",
     "textrun-javascript",
     "textrun-make",
     "textrun-npm",

@@ -1,7 +1,7 @@
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "../../text-runner/src/actions/types/action-args"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { callArgs } from "../helpers/call-args"
+import { callArgs } from "../../text-runner/src/actions/helpers/call-args"
 import { createObservableProcess } from "observable-process"
 import stripAnsi = require("strip-ansi")
 

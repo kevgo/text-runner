@@ -1,0 +1,20 @@
+{
+  "name": "textrun-extension",
+  "version": "0.0.0",
+  "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
+  "main": "dist/index.js",
+  "license": "ISC",
+  "dependencies": {
+    "text-runner": "4.0.3"
+  },
+  "devDependencies": {
+    "colorette": "1.2.1",
+    "cucumber": "6.0.5",
+    "mocha": "8.0.1",
+    "prettier": "2.0.5",
+    "strip-ansi": "6.0.0",
+    "textrun-action": "0.0.0",
+    "tslint": "6.1.2",
+    "typescript": "3.9.7"
+  }
+}

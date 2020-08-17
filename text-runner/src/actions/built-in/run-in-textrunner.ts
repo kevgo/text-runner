@@ -6,7 +6,7 @@ import { createObservableProcess } from "observable-process"
 import stripAnsi = require("strip-ansi")
 
 /** runs the given Markdown in Text-Runner */
-export default async function runInTextRunner(action: ActionArgs) {
+export async function runInTextRunner(action: ActionArgs) {
   action.name("execute Markdown in Text-Runner")
   const content = action.nodes.text()
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903

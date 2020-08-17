@@ -1,3 +1,3 @@
-#!/usr/bin/env node
+#!/usr/bin/env bash
 
-require("../dist/cli.js")
+NODE_OPTIONS=--enable-source-maps node "$( dirname "${BASH_SOURCE[0]}" )/../dist/cli.js" "$@"

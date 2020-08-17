@@ -12,6 +12,7 @@ cuke: build  # runs the feature specs
 
 docs: build  # runs the documentation tests
 	@echo textrun-shell documentation tests ...
+	@cd examples/global-tool && ${CURDIR}/node_modules/.bin/text-run --format progress
 	@${CURDIR}/node_modules/.bin/text-run static --offline --format progress
 	@${CURDIR}/node_modules/.bin/text-run dynamic --format progress
 

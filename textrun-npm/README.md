@@ -55,7 +55,7 @@ $ yarn add foobar
 
 </a>
 
-<a textrun="run-textrunner">
+<a textrun="extension/run-textrunner">
 
 Text-Runner verifies that the installation instructions contain the correct name
 of the npm package.
@@ -91,5 +91,5 @@ After you install the "foobar" package, you can run the
 <code textrun="npm/executable">foo</code> command in the terminal.
 ```
 
-<a textrun="run-textrunner">
+<a textrun="extension/run-textrunner">
 </a>

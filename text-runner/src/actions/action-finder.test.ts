@@ -34,7 +34,7 @@ suite("actionFinder", function () {
 
   test("builtinActionFilePaths", function () {
     const result = builtinActionFilePaths().map((fp) => path.basename(fp))
-    assert.deepEqual(result, ["check-image", "check-link", "run-block", "run-textrunner", "test"])
+    assert.deepEqual(result, ["check-image", "check-link", "test"])
   })
 
   suite("customActionFilePaths", function () {
@@ -48,7 +48,7 @@ suite("actionFinder", function () {
 
   test("loadBuiltinActions", function () {
     const result = loadBuiltinActions()
-    assert.deepEqual(result.names(), ["check-image", "check-link", "run-block", "run-textrunner", "test"])
+    assert.deepEqual(result.names(), ["check-image", "check-link", "test"])
   })
 
   suite("loadCustomActions", function () {

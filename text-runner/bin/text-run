@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
+# NOTE: Yarn creates symlinks of binaries in workspaces.
+#       We need to resolve them to find the correct path to cli.js
 if [[ -L $0 ]]; then
-  cliPath=$( dirname "$(readlink -f $0)" )/../dist/cli.js
+  cliPath=$( dirname "$(readlink -f $0)" )
 else
-  cliPath="$( dirname "${BASH_SOURCE[0]}")"/../dist/cli.js
+  cliPath="$( dirname "${BASH_SOURCE[0]}")"
 fi
-node --enable-source-maps $cliPath "$@"
+node --enable-source-maps $cliPath/../dist/cli.js "$@"

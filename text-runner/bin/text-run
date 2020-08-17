@@ -1,3 +1,8 @@
 #!/usr/bin/env bash
 
-NODE_OPTIONS=--enable-source-maps node "$( dirname "${BASH_SOURCE[0]}" )/../dist/cli.js" "$@"
+if [[ -L $0 ]]; then
+  cliPath=$( dirname "$(readlink -f $0)" )/../dist/cli.js
+else
+  cliPath="$( dirname "${BASH_SOURCE[0]}")"/../dist/cli.js
+fi
+NODE_OPTIONS=--enable-source-maps node $cliPath "$@"

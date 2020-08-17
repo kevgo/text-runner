@@ -9,8 +9,8 @@ for Text-Runner.
 When documenting a Text-Runner extension, you might want to provide examples of
 how to use your extension. The Markdown code in the README.md file of your
 extension will list snippets of Markdown to the user that visualize how to use
-your extension. Please take a look at the source code of the
-[make example](examples/make-commands/README.md).
+your extension. The documentation of the Text-Runner plugins in this mono-repo
+provide usage examples.
 
 While verifying such "nested" documentation" using Text-Runner, the
 <b textrun="action/name-full">extension/run-block</b> action executes these

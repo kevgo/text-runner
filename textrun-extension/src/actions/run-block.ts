@@ -12,7 +12,7 @@ export async function runBlock(action: ActionArgs) {
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
   await fs.writeFile(path.join(action.configuration.workspace, "1.md"), content)
   // TODO: call existing Text-Runner API here
-  var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")
+  var textRunPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath, process.platform)
   trArgs[trArgs.length - 1] += " --keep-tmp --workspace=."

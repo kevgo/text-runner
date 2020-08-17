@@ -91,9 +91,7 @@ export function loadCustomActions(dir: string): Actions {
   const result = new Actions()
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
-    const standardName = actionName(filename)
-    const action = require(filename)
-    result.register(standardName, action)
+    result.register(actionName(filename), require(filename))
   }
   return result
 }

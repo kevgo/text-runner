@@ -30,7 +30,7 @@ a file <a textrun="workspace/create-file">**config.yml** with content
 `foo: bar`</a>. The documentation for this codebase might want to mention this
 configuration file:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ````markdown
 <a textrun="repo/file-content">
@@ -54,7 +54,7 @@ block. <a textrun="workspace/create-file"> Let's say you have a file
 **foo/bar/hello.txt** in your code base with the content `hello world!`. </a>
 You can display its content in your documentation via this active block:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```markdown
 <a textrun="repo/file-content">

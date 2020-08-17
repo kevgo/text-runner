@@ -26,7 +26,7 @@ The <b textrun="action/name-full">workspace/cd</b> action changes the current
 working directory into the given directory inside the workspace. As an example,
 consider the following documentation snippet:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```html
 Create a
@@ -43,7 +43,7 @@ The <b textrun="action/name-full">workspace/create-directory</b> action creates
 a directory with the given name in the workspace. As an example, consider this
 snippet of documentation:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```html
 To get started, please create a directory named
@@ -64,7 +64,7 @@ file in the workspace. This action assumes that the filename is written in
 _emphasized_ or **bold** text and the file content is a code block with one or
 three backticks. As an example, consider the following documentation snippet:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```markdown
 <a textrun="workspace/create-file">Please create a file _apples.txt_ with the
@@ -77,7 +77,7 @@ When executing the documentation, Text-Runner will create a file with name
 <a textrun="workspace/file-content">_apples.txt_ and content `Fuji`</a>.
 Alternatively, the documentation could also read like this:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ````markdown
 <a textrun="workspace/create-file">
@@ -102,7 +102,7 @@ The <b textrun="action/name-full">workspace/directory</b> action verifies that
 the workspace contains a directory with the given name. As an example, consider
 this documentation snippet:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```html
 Please run the command <code textrun="shell/exec">mkdir images</code>. If
@@ -120,7 +120,7 @@ assumes that the documentation contains the filename as _emphasized_ or
 **strong** text and the file content as a code block with single or triple
 backticks. As an example, consider the following documentation snippet:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```markdown
 Assuming a file <a textrun="workspace/create-file">_hello.txt_ with content

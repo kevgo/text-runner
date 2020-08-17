@@ -6,7 +6,7 @@ When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command)
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
-When(/^(trying to run|running) text-run$/, async function (tryingText) {
+When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
   try {
     await this.execute({ command: "run", expectError })

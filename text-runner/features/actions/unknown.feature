@@ -24,7 +24,7 @@ Feature: unknown action types
       Available built-in actions:
       * check-image
       * check-link
-      * run-in-textrunner
+      * run-block
       * run-textrunner
       * test
 

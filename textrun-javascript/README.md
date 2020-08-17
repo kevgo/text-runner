@@ -115,7 +115,7 @@ and
 <a textrun="javascript/run">
 
 ```js
-console.log(text)
+text = text + "world"
 ```
 
 </a>

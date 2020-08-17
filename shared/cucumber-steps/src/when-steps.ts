@@ -1,5 +1,4 @@
 import { When } from "cucumber"
-import * as path from "path"
 
 When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)

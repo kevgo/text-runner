@@ -1,7 +1,7 @@
-import { FunctionRepo } from "./action-finder"
 import { Action } from "./types/action"
-import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { actionName } from "./helpers/action-name"
+import { FunctionRepo } from "./types/function-repo"
+import { UnprintedUserError } from "../errors/unprinted-user-error"
 
 /** ExternalActionManager provides external actions from their own NPM modules */
 export class ExternalActionManager {
@@ -12,7 +12,7 @@ export class ExternalActionManager {
   }
 
   /** provides the external action with the given name */
-  actionFor(fullActivity: string): Action | null {
+  get(fullActivity: string): Action | null {
     const parts = fullActivity.split("/")
     if (parts.length === 1) {
       // not an external action here --> ignore

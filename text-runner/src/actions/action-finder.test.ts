@@ -1,16 +1,40 @@
 import { assert } from "chai"
 import { scaffoldActivity } from "../activity-list/types/activity"
-import { ActionFinder, customActionFilePaths, loadCustomActions } from "./action-finder"
+import {
+  ActionFinder,
+  customActionFilePaths,
+  loadCustomActions,
+  builtinActionFilePaths,
+  loadBuiltinActions,
+} from "./action-finder"
 import * as path from "path"
+import { Actions } from "./actions"
+import { ExternalActionManager } from "./external-action-manager"
+import { Action } from "./types/action"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {
     test("built-in block name", function () {
-      this.timeout(10_000)
-      const activity = scaffoldActivity({ actionName: "test" })
-      const actionFinder = new ActionFinder(path.join(__dirname, "..", "..", "text-run"))
-      assert.typeOf(actionFinder.actionFor(activity), "function")
+      const builtIn = new Actions()
+      const func: Action = () => 1
+      builtIn.register("foo", func)
+      const actionFinder = new ActionFinder(builtIn, new Actions(), new ExternalActionManager())
+      const activity = scaffoldActivity({ actionName: "foo" })
+      assert.equal(actionFinder.actionFor(activity), func)
     })
+    test("custom block name", function () {
+      const custom = new Actions()
+      const func: Action = () => 1
+      custom.register("foo", func)
+      const actionFinder = new ActionFinder(new Actions(), custom, new ExternalActionManager())
+      const activity = scaffoldActivity({ actionName: "foo" })
+      assert.equal(actionFinder.actionFor(activity), func)
+    })
+  })
+
+  test("builtinActionFilePaths", function () {
+    const result = builtinActionFilePaths().map((fp) => path.basename(fp))
+    assert.deepEqual(result, ["check-image", "check-link", "run-in-textrunner", "run-textrunner", "test"])
   })
 
   suite("customActionFilePaths", function () {
@@ -22,11 +46,17 @@ suite("actionFinder", function () {
     })
   })
 
+  test("loadBuiltinActions", function () {
+    const result = loadBuiltinActions()
+    assert.deepEqual(result.names(), ["check-image", "check-link", "run-in-textrunner", "run-textrunner", "test"])
+  })
+
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", function () {
-      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
-      assert.typeOf(result["verify-ast-node-attributes"], "function")
-      assert.typeOf(result["verify-handler-args"], "function")
+      const result = loadCustomActions(
+        path.join(__dirname, "..", "..", "..", "examples", "custom-action-sync", "text-run")
+      )
+      assert.typeOf(result.get("hello-world"), "function")
     })
   })
 })

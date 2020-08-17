@@ -10,47 +10,52 @@ import { javascriptExtensions } from "./helpers/javascript-extensions"
 import { trimExtension } from "./helpers/trim-extension"
 import { Action } from "./types/action"
 import { ExternalActionManager } from "./external-action-manager"
-
-export interface FunctionRepo {
-  [key: string]: Action
-}
+import { Actions } from "./actions"
 
 /** ActionFinder provides runnable action instances for activities. */
 export class ActionFinder {
-  private readonly builtinActions: FunctionRepo
-  private readonly customActions: FunctionRepo
+  private readonly builtinActions: Actions
+  private readonly customActions: Actions
   private readonly externalActions: ExternalActionManager
 
-  constructor(sourceDir: string) {
-    this.builtinActions = this.loadBuiltinActions()
-    this.customActions = loadCustomActions(path.join(sourceDir, "text-run"))
-    this.externalActions = new ExternalActionManager()
+  constructor(builtIn: Actions, custom: Actions, external: ExternalActionManager) {
+    this.builtinActions = builtIn
+    this.customActions = custom
+    this.externalActions = external
+  }
+
+  static load(sourceDir: string) {
+    return new ActionFinder(
+      loadBuiltinActions(),
+      loadCustomActions(path.join(sourceDir, "text-run")),
+      new ExternalActionManager()
+    )
   }
 
   /** actionFor provides the action function for the given Activity. */
   actionFor(activity: Activity): Action {
     return (
-      this.builtinActions[activity.actionName] ||
-      this.customActions[activity.actionName] ||
-      this.externalActions.actionFor(activity.actionName) ||
+      this.builtinActions.get(activity.actionName) ||
+      this.customActions.get(activity.actionName) ||
+      this.externalActions.get(activity.actionName) ||
       this.errorUnknownAction(activity)
     )
   }
 
   /** customActionNames returns the names of all built-in actions. */
   customActionNames(): string[] {
-    return Object.keys(this.customActions)
+    return this.customActions.names()
   }
 
   /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
     let errorText = `unknown action: ${color.red(activity.actionName)}\nAvailable built-in actions:\n`
-    for (const actionName of Object.keys(this.builtinActions).sort()) {
+    for (const actionName of this.builtinActions.names()) {
       errorText += `* ${actionName}\n`
     }
-    if (Object.keys(this.customActions).length > 0) {
+    if (this.customActions.size() > 0) {
       errorText += "\nUser-defined actions:\n"
-      for (const actionName of Object.keys(this.customActions).sort()) {
+      for (const actionName of this.customActions.names()) {
         errorText += `* ${actionName}\n`
       }
     } else {
@@ -60,21 +65,21 @@ export class ActionFinder {
     errorText += `run "text-run scaffold ${activity.actionName}"\n`
     throw new UnprintedUserError(errorText, activity.file.platformified(), activity.line)
   }
+}
 
-  private loadBuiltinActions(): FunctionRepo {
-    const result: FunctionRepo = {}
-    for (const filename of this.builtinActionFilePaths()) {
-      result[actionName(filename)] = require(filename).default as Action
-    }
-    return result
-  }
+export function builtinActionFilePaths(): string[] {
+  return glob.glob
+    .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
+    .filter((name) => !name.endsWith(".d.ts"))
+    .map(trimExtension)
+}
 
-  private builtinActionFilePaths(): string[] {
-    return glob
-      .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
-      .filter((name) => !name.endsWith(".d.ts"))
-      .map(trimExtension)
+export function loadBuiltinActions(): Actions {
+  const result = new Actions()
+  for (const filename of builtinActionFilePaths()) {
+    result.register(actionName(filename), require(filename))
   }
+  return result
 }
 
 export function customActionFilePaths(dir: string): string[] {
@@ -82,17 +87,11 @@ export function customActionFilePaths(dir: string): string[] {
   return glob.sync(pattern)
 }
 
-export function loadCustomActions(dir: string): FunctionRepo {
-  const result: FunctionRepo = {}
+export function loadCustomActions(dir: string): Actions {
+  const result = new Actions()
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
-    const standardName = actionName(filename)
-    const action = require(filename)
-    if (action.default) {
-      result[standardName] = action.default
-    } else {
-      result[standardName] = action
-    }
+    result.register(actionName(filename), require(filename))
   }
   return result
 }

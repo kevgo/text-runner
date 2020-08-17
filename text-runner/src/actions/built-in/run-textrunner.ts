@@ -4,7 +4,7 @@ import { callArgs } from "../helpers/call-args"
 import { createObservableProcess } from "observable-process"
 
 /** runs Text-Runner in the workspace */
-export default async function runTextRunner(action: ActionArgs) {
+export async function runTextrunner(action: ActionArgs) {
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
   // TODO: call existing Text-Runner API here
   var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")

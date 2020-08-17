@@ -6,7 +6,7 @@ import { Configuration } from "../../configuration/types/configuration"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkImage" action checks for broken images. */
-export default async function checkImage(action: ActionArgs) {
+export async function checkImage(action: ActionArgs) {
   const node = action.nodes[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {

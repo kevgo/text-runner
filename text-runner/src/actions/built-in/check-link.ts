@@ -12,7 +12,7 @@ import { isMailtoLink } from "../helpers/is-mailto-link"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkLink" action checks for broken hyperlinks. */
-export default async function checkLink(action: ActionArgs) {
+export async function checkLink(action: ActionArgs) {
   const target = action.nodes.getNodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")

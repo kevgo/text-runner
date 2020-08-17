@@ -35,7 +35,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const linkTargets = findLinkTargets(ASTs)
 
   // step 5: find actions
-  const actionFinder = new ActionFinder(config.sourceDir)
+  const actionFinder = ActionFinder.load(config.sourceDir)
 
   // step 6: extract activities
   const activities = extractActivities(ASTs, config.classPrefix)

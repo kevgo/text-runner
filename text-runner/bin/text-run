@@ -5,4 +5,4 @@ if [[ -L $0 ]]; then
 else
   cliPath="$( dirname "${BASH_SOURCE[0]}")"/../dist/cli.js
 fi
-NODE_OPTIONS=--enable-source-maps node $cliPath "$@"
+node --enable-source-maps $cliPath "$@"

@@ -1,25 +1,4 @@
 import { When } from "cucumber"
-import * as path from "path"
-
-When(/^(trying to execute|executing) the "([^"]+)" example$/, { timeout: 100000 }, async function (
-  tryingText,
-  exampleName
-) {
-  const expectError = determineExpectError(tryingText)
-  const examplePath = path.join(__dirname, "..", "..", "..", "examples", exampleName)
-  await this.execute({ command: "run", expectError, cwd: examplePath })
-  finish(expectError, this.process && (this.process.error || this.process.exitCode))
-})
-
-When(/^(trying to execute|executing) the local "([^"]+)" example$/, { timeout: 100000 }, async function (
-  tryingText,
-  exampleName
-) {
-  const expectError = determineExpectError(tryingText)
-  const examplePath = path.join(process.cwd(), "examples", exampleName)
-  await this.execute({ command: "run", expectError, cwd: examplePath })
-  finish(expectError, this.process && (this.process.error || this.process.exitCode))
-})
 
 When(/^(trying to run|running) "([^"]*)"$/, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)

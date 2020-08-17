@@ -4,17 +4,13 @@ This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of NPM packages that contain extensions
 for Text-Runner.
 
-- [run-in-textrunner](#run-in-textrunner)
-- [run-textrunner](#run-textrunner)
-- [installation](#installation)
-
 ### Running Text-Runner inside Text-Runner
 
 When documenting a Text-Runner extension, you might want to provide examples of
 how to use your extension. The Markdown code in the README.md file of your
 extension will list snippets of Markdown to the user that visualize how to use
-your extension. An example is the documentation of the
-[textrun-make](../textrun-make/README.md#verify-make-commands) package.
+your extension. Please take a look at the source code of the
+[make example](examples/make-commands/README.md).
 
 While verifying such "nested" documentation" using Text-Runner, the
 <b textrun="action/name-full">extension/run-block</b> action executes these

@@ -1,12 +1,12 @@
-import { ActionArgs } from "../../text-runner/src/actions/types/action-args"
+import { ActionArgs } from "text-runner"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { callArgs } from "../../text-runner/src/actions/helpers/call-args"
 import { createObservableProcess } from "observable-process"
 import stripAnsi = require("strip-ansi")
+import { callArgs } from "../helpers/call-args"
 
-/** runs the given Markdown in Text-Runner */
-export async function runInTextrunner(action: ActionArgs) {
+/** runs the given content in Text-Runner */
+export async function runBlock(action: ActionArgs) {
   action.name("execute Markdown in Text-Runner")
   const content = action.nodes.text()
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
@@ -14,7 +14,7 @@ export async function runInTextrunner(action: ActionArgs) {
   // TODO: call existing Text-Runner API here
   var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
-  const trArgs = callArgs(textRunPath)
+  const trArgs = callArgs(textRunPath, process.platform)
   trArgs[trArgs.length - 1] += " --keep-tmp --workspace=."
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   await processor.waitForEnd()

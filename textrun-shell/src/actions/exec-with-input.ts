@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import { createObservableProcess, ObservableProcess } from "observable-process"
-import { callArgs } from "../helpers/call-args"
+import { callArgs } from "textrun-extension"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs, AstNodeList } from "text-runner"
@@ -33,7 +33,7 @@ export async function execWithInput(action: ActionArgs) {
     input = getInput(action.nodes)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
-  const processor = createObservableProcess(callArgs(commandsToRun), {
+  const processor = createObservableProcess(callArgs(commandsToRun, process.platform), {
     cwd: action.configuration.workspace,
   })
   CurrentCommand.set(processor)

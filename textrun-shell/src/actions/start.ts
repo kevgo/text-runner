@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import { createObservableProcess } from "observable-process"
-import { callArgs } from "../helpers/call-args"
+import { callArgs } from "textrun-extension"
 import { CurrentServer } from "../helpers/current-server"
 import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "text-runner"
@@ -19,7 +19,7 @@ export async function start(action: ActionArgs) {
     .join(" && ")
   action.name(`starting a server process: ${color.bold(color.cyan(commandsToRun))}`)
   CurrentServer.instance().set(
-    createObservableProcess(callArgs(commandsToRun), {
+    createObservableProcess(callArgs(commandsToRun, process.platform), {
       cwd: action.configuration.workspace,
     })
   )

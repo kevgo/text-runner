@@ -115,7 +115,7 @@ and
 <a textrun="javascript/run">
 
 ```js
-text = text + "world"
+const complete = text + "world"
 ```
 
 </a>

@@ -1,13 +1,7 @@
 Feature: active ABBR tags
 
-  When writing active blocks in a Markdown document
-  I want to be able to make ABBR tags active
-  So that I don't have to litter my document with <a> tags
-
-
   Background:
     Given the source code contains the HelloWorld action
-
 
   Scenario: active ABBR tag
     Given the source code contains a file "1.md" with content:
@@ -19,7 +13,6 @@ Feature: active ABBR tags
       | FILENAME | 1.md        |
       | LINE     | 1           |
       | MESSAGE  | Hello world |
-
 
   Scenario: passive ABBR tag
     Given the source code contains a file "1.md" with content:

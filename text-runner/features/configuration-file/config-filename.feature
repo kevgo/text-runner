@@ -1,11 +1,6 @@
 @smoke
 Feature: specifying the configuration filename
 
-  When working on a repo that contains public content and internal documentation for it
-  I want to be able to specific which configuration file to use
-  So that I can test several directories separately with different configuration options.
-
-
   Scenario: providing a configuration filename
     Given the source code contains a file "text-run-1.yml" with content:
       """

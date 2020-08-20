@@ -1,10 +1,5 @@
 Feature: Default file
 
-  When checking the links for a web site
-  I want to publish the default file for a folder without the filename
-  So that I can support URL-friendly links.
-
-
   Scenario: a default filename is set
     Given the source code contains a file "root.md" with content:
       """

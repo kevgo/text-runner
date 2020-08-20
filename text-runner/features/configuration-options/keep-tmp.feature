@@ -1,13 +1,6 @@
 @smoke
 Feature: keeping the tmp directory
 
-  When debugging custom actions
-  I want to be able to look at the contents of the tmp directory after the test finished
-  So that I can verify artifacts created by my actions.
-
-  - if the configuration option "keepTmp" is set, it does not delete the tmp directory
-
-
   Background:
     Given the source code contains a file "tr.md" with content:
       """

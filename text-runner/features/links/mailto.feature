@@ -1,9 +1,6 @@
 @online
 Feature: ignoring mailto links
 
-  - links containing a "mailto:foo@acme.com" address are skipped
-
-
   Scenario: mailto link
     Given the source code contains a file "1.md" with content:
       """

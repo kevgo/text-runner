@@ -1,13 +1,5 @@
 Feature: checking embedded HTML images
 
-  When writing documentation
-  I want to be able to use HTML image tags
-  So that I can use extended HTML attributes to size and align images.
-
-  - local images must exist
-  - missing remote images cause a warning
-
-
   Scenario: existing local HTML image with relative path
     Given the source code contains a file "1.md" with content:
       """

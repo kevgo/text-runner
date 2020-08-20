@@ -1,13 +1,6 @@
 @online
 Feature: verifying links to websites
 
-  As a documentation writer
-  I want to know whether links to websites work
-  So that I can point my readers to further reading.
-
-  - links pointing to non-existing external websites cause a warning
-
-
   Scenario: markdown link to existing website
     Given the source code contains a file "1.md" with content:
       """

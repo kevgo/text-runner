@@ -1,15 +1,6 @@
 @smoke
 Feature: verifying the output of the last console command
 
-  As a documentation writer
-  I want to be able to print the expected output of console commands
-  So that my readers can verify that they ran a console command correctly.
-
-  - the "verifyLastRunConsoleCommand" action matches the output of the last console command
-  - the expected output is provided as a fenced code block
-  - the actual output can contain more lines in between each line of the expected output
-
-
   Scenario: verifying the output of a console command
     Given the source code contains a file "verify-output.md" with content:
       """

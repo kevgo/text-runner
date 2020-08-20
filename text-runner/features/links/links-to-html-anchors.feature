@@ -1,13 +1,5 @@
 Feature: links to HTML anchors
 
-  As a documentation writer
-  I want to know whether links to other parts of the documentation work
-  So that I can reference releated sections.
-
-  - links pointing to non-existing parts of the same page or other pages
-    cause the test to fail
-
-
   Scenario: link to an existing anchor in the same file
     Given the source code contains a file "1.md" with content:
       """

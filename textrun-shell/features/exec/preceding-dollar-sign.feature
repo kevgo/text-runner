@@ -1,13 +1,5 @@
 Feature: marking console commands with preceding dollar signs
 
-  As a documentation writer
-  I want to visualize console commands in my documentation via preceding dollar signs
-  So that my readers can distinguish them from other code blocks.
-
-  - the commands can be preceded by a dollar sign,
-  which is stripped before running them
-
-
   Scenario: running console commands with dollar signs
     Given the source code contains a file "running-with-dollar-sign.md" with content:
       """

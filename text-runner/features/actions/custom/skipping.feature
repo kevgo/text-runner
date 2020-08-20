@@ -1,9 +1,5 @@
 Feature: skipping an action
 
-  As a documentation tester
-  I want to be able to skip tests
-  So that my test suite can adapt to the particular situation.
-
   Background:
     Given the source code contains a file "1.md" with content:
       """

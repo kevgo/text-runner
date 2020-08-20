@@ -1,12 +1,5 @@
 Feature: verifying global commands provided by NPM modules
 
-    When developing an NPM module that is used as a global command
-  I want to be able to specify the name of available global commands
-  So that my users know how to call my library.
-
-  - surround the installation instructions via the "verifyNpmGlobalCommand" action
-
-
   Background:
     Given the source code contains a file "package.json" with content:
       """
@@ -16,7 +9,6 @@ Feature: verifying global commands provided by NPM modules
         }
       }
       """
-
 
   Scenario: correct command name with triple-fenced code block
     Given the source code contains a file "1.md" with content:
@@ -36,7 +28,6 @@ Feature: verifying global commands provided by NPM modules
       | LINE     | 3                                  |
       | MESSAGE  | NPM package exports executable foo |
 
-
   Scenario: correct command name with single-fenced code block
     Given the source code contains a file "1.md" with content:
       """
@@ -47,7 +38,6 @@ Feature: verifying global commands provided by NPM modules
       | FILENAME | 1.md                               |
       | LINE     | 1                                  |
       | MESSAGE  | NPM package exports executable foo |
-
 
   Scenario: mismatching command name
     Given the source code contains a file "1.md" with content:
@@ -67,7 +57,6 @@ Feature: verifying global commands provided by NPM modules
       | LINE          | 3                                             |
       | ERROR MESSAGE | package.json does not export a "zonk" command |
       | EXIT CODE     | 1                                             |
-
 
   Scenario: missing command name
     Given the source code contains a file "1.md" with content:

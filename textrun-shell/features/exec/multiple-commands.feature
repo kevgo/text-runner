@@ -1,12 +1,5 @@
 Feature: running multiple console commands
 
-  As a documentation writer
-  I want my users to be able to run multiple console commands at once
-  So that I can document more complex steps efficiently.
-
-  - all commands provided are run in a Bash shell, concatenated via " && "
-
-
   Scenario: running multiple console commands
     Given the source code contains a file "running-multiple-commands.md" with content:
       """

@@ -1,10 +1,5 @@
 Feature: display the version
 
-  When encountering problems writing active documentation
-  I want to see what the parser sees
-  So that I can triangulate the issue.
-
-
   Scenario: debugging
     Given the source code contains a file "1.md" with content:
       """

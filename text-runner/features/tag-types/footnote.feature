@@ -1,13 +1,7 @@
 Feature: footnotes
 
-    When writing documentation
-  I want to be able to use and reference footnotes
-  So that I don't have to litter my document with peripheral details.
-
-
   Background:
     Given the source code contains the HelloWorld action
-
 
   Scenario: code tag
     Given the source code contains a file "1.md" with content:

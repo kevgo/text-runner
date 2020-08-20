@@ -33,7 +33,6 @@ Feature: verifying Make targets
       | ERROR MESSAGE | Makefile does not contain target zonk but these ones: bar, foo |
       | EXIT CODE     | 1                                                              |
 
-
   Scenario: missing target name
     Given the source code contains a file "1.md" with content:
       """

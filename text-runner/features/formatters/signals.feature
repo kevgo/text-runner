@@ -1,10 +1,5 @@
 Feature: Formatter signals
 
-  Formatters signal the following methods:
-  - success
-  - error
-  - skip
-
   Scenario Outline: checking output of various formatters
     Given the source code contains a file "error.md" with content:
       """

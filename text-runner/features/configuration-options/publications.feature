@@ -1,16 +1,10 @@
 Feature: Folder Mapping
 
-  When verifying content transpiled together with Javascript
-  I want to provide mappings from local folders to public URLs
-  So that Text-Runner understands the structure of the public links correctly.
-
-
   Background:
     Given the source code contains a file "content/2.md" with content:
       """
       # hello
       """
-
 
   Scenario: mapping a folder to a different URL
     Given the source code contains a file "1.md" with content:
@@ -29,7 +23,6 @@ Feature: Folder Mapping
       | FILENAME | 1.md                            |
       | LINE     | 1                               |
       | MESSAGE  | link to local file content/2.md |
-
 
   Scenario: relative link to remapped folder
     Given the source code contains a file "1.md" with content:

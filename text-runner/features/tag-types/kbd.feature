@@ -1,13 +1,7 @@
 Feature: KBD tags
 
-    When testing Markdown documentation
-  I want to be able to use KBD tags
-  So that I don't have to litter my document with <a> tags
-
-
   Background:
     Given the source code contains the HelloWorld action
-
 
   Scenario: code tag
     Given the source code contains a file "1.md" with content:

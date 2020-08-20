@@ -1,18 +1,6 @@
 @skipWindows
 Feature: long-running processes
 
-  As a documentation writer
-  I want my readers to be able to start and stop long-running processes
-  So that documentation can work with long-running server processes.
-
-  - use the "startConsoleCommand" action to start a command
-  - the command to start is provided as a code block
-  - the command is run in a shell
-  - if the command exits the test fails
-  - use the "stopCommand" action to stop the currently running command
-  - use the "waitForOutput" action to wait until the long-running process outputs text
-
-
   Scenario: starting and stopping a long-running process
     Given the workspace contains a file "server.js" with content:
       """
@@ -57,7 +45,6 @@ Feature: long-running processes
       | LINE     | 15                                |
       | MESSAGE  | stopping the long-running process |
     And there are no child processes running
-
 
   Scenario: no running process
     Given the source code contains a file "1.md" with content:

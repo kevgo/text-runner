@@ -1,13 +1,7 @@
 Feature: active table tags
 
-    When writing active blocks in a Markdown document
-  I want to be able to make table tags active
-  So that I don't have to litter my document with <a> tags
-
-
   Background:
     Given the source code contains the HelloWorld action
-
 
   Scenario: simple HTML table
     Given the source code contains a file "1.md" with content:
@@ -21,7 +15,6 @@ Feature: active table tags
       | FILENAME | 1.md        |
       | LINE     | 1           |
       | MESSAGE  | Hello world |
-
 
   Scenario: HTML table with THEAD and TBODY
     Given the source code contains a file "1.md" with content:
@@ -41,7 +34,6 @@ Feature: active table tags
       | LINE     | 1           |
       | MESSAGE  | Hello world |
 
-
   Scenario: active TR tag in THEAD
     Given the source code contains a file "1.md" with content:
       """
@@ -57,7 +49,6 @@ Feature: active table tags
       | FILENAME | 1.md        |
       | LINE     | 3           |
       | MESSAGE  | Hello world |
-
 
   Scenario: active TR tag in TBODY
     Given the source code contains a file "1.md" with content:
@@ -77,7 +68,6 @@ Feature: active table tags
       | LINE     | 6           |
       | MESSAGE  | Hello world |
 
-
   Scenario: row tag in simple HTML table
     Given the source code contains a file "1.md" with content:
       """
@@ -90,7 +80,6 @@ Feature: active table tags
       | FILENAME | 1.md        |
       | LINE     | 2           |
       | MESSAGE  | Hello world |
-
 
   Scenario: HTML table cell tag
     Given the source code contains a file "1.md" with content:
@@ -107,7 +96,6 @@ Feature: active table tags
       | LINE     | 3           |
       | MESSAGE  | Hello world |
 
-
   Scenario: HTML table header tag
     Given the source code contains a file "1.md" with content:
       """
@@ -122,7 +110,6 @@ Feature: active table tags
       | FILENAME | 1.md        |
       | LINE     | 3           |
       | MESSAGE  | Hello world |
-
 
   Scenario: Markdown table
     Given the source code contains a file "1.md" with content:

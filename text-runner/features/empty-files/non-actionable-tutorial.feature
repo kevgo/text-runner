@@ -1,12 +1,5 @@
 Feature: Fail on non-actionable Markdown
 
-  When running Text-Runner
-  I want to know if my entire documentation doesn't perform a single action
-  So that I know I am doing something wrong and can fix my mistake.
-
-  - documentation with no actions whatsoever causes the test to fail
-
-
   Scenario: documentation with no actions
     Given the source code contains a file "1.md" with content:
       """

@@ -1,12 +1,5 @@
 Feature: running a single MarkDown file
 
-  As a documentation writer
-  I want to be able to test a single MarkDown file
-  So that I can check my current changes quickly without having to run the entire test suite.
-
-  - run "text-run run [<file path>]" or "text-run [<file path>]" to test only the given file
-
-
   Background:
     Given the source code contains a file "1.md" with content:
       """

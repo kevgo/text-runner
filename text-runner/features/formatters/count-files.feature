@@ -1,12 +1,5 @@
 Feature: Counting files
 
-  When testing documentation
-  I want to know how many files have been checked
-  So that I know whether all files have been covered.
-
-  - the formatter displays the number of files tested at the end of the test run
-
-
   Scenario: a test suite with multiple files
     Given the source code contains a file "1.md" with content:
       """

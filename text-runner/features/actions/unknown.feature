@@ -1,13 +1,6 @@
 @smoke
 Feature: unknown action types
 
-  When using an active block for which there is no action
-  I want to be notified
-  So that I can add the missing custom action.
-
-  - using an unknown action causes the test run to fail
-
-
   Scenario: using an unknown action type
     Given the source code contains a file "1.md" with content:
       """

@@ -1,12 +1,5 @@
 Feature: generating a configuration file
 
-  When setting up TextRunner on a new project
-  I want to be able to generate a configuration file with the default options set
-  So that I can run the tool successfully after customizing the options to my project's situation.
-
-  - call "text-run setup" to generate a configuration file
-
-
   Scenario: running in a directory without configuration file
     When running "text-run setup"
     Then it prints:

@@ -1,20 +1,6 @@
 @skipWindows
 Feature: running console commands
 
-  As a documentation writer
-  I want my users to be able to enter text into the console
-  So that they can interact with the commands they run.
-
-  - Optionally there can be an HTML table within the "runConsoleCommand" block
-  that defines input into the commands.
-  - If the table has exactly one column, it contains the input to enter.
-  - If the table has more than one column, the first column contains
-  console output to wait for, and the last column contains the text to enter.
-  All other columns are ignored.
-  - The ENTER key is pressed automatically for the user at the end of each input field.
-  - Only content in TD cells is used. TH cells are considered labels and ignored.
-
-
   Scenario: entering simple text into the console
     Given the source code contains a file "enter-input.md" with content:
       """
@@ -42,7 +28,6 @@ Feature: running console commands
       """
       You entered: 123
       """
-
 
   Scenario: entering complex text into the console
     Given the source code contains a file "enter-input.md" with content:

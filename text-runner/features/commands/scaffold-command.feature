@@ -1,11 +1,4 @@
-Feature: adding new handler functions
-
-  When developing the test harness for my documentation
-  I want to have the ability to generate new handler functions
-  So that I don't need to copy-and-paste code.
-
-  - run "text-run scaffold <step-name>" to generate a new handler function for the given block
-
+Feature: adding new actions
 
   Scenario: adding a new step
     When running "text-run scaffold new-step"

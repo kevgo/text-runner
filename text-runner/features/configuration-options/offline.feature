@@ -1,12 +1,5 @@
 Feature: "offline" option
 
-  When running offline
-  I want to skip checks of remote links
-  So that my test runs.
-
-  - when the option "--offline" is given, TextRunner skips checking remote links and images
-
-
   Scenario: offline option
     Given the source code contains a file "1.md" with content:
       """

@@ -1,6 +1,6 @@
 Feature: active table tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make table tags active
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: active table tags
 
 
   Scenario: simple HTML table
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table textrun="HelloWorld">
         <tr> <td></td> </tr>
@@ -24,7 +24,7 @@ Feature: active table tags
 
 
   Scenario: HTML table with THEAD and TBODY
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table textrun="HelloWorld">
         <thead>
@@ -43,7 +43,7 @@ Feature: active table tags
 
 
   Scenario: active TR tag in THEAD
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table>
         <thead>
@@ -60,7 +60,7 @@ Feature: active table tags
 
 
   Scenario: active TR tag in TBODY
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table>
         <thead>
@@ -79,7 +79,7 @@ Feature: active table tags
 
 
   Scenario: row tag in simple HTML table
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table>
         <tr textrun="HelloWorld"> <td></td> </tr>
@@ -93,7 +93,7 @@ Feature: active table tags
 
 
   Scenario: HTML table cell tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table>
         <tr>
@@ -109,7 +109,7 @@ Feature: active table tags
 
 
   Scenario: HTML table header tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <table>
         <tr>
@@ -125,7 +125,7 @@ Feature: active table tags
 
 
   Scenario: Markdown table
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
      | Keyboard shortcut                                    | Effect                        |
      | ---------------------------------------------------- | ----------------------------- |

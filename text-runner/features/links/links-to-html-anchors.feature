@@ -9,7 +9,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in the same file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [working link to an anchor](#hello)
       text
@@ -23,11 +23,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in another file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [working link to an anchor](2.md#hello)
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       <a name="hello">hi</a>
       """
@@ -39,7 +39,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to a non-existing anchor in the same file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [link to non-existing anchor](#zonk)
       """
@@ -52,11 +52,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to a non-existing anchor in another file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [link to non-existing anchor in other file](2.md#zonk)
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       <a name="hello">hi</a>
       """
@@ -69,7 +69,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to anchor in non-existing file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [link to non-existing anchor in other file](2.md#target)
       """
@@ -82,11 +82,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to anchor in file without anchors
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [link to non-existing anchor in other file](2.md#zonk)
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       no link targets here
       """
@@ -99,7 +99,7 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing heading in the same file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [working link to an anchor](#hello)
       text
@@ -113,11 +113,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing heading in another file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [working link to a heading](2.md#hello)
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       ## Hello
       """
@@ -129,11 +129,11 @@ Feature: links to HTML anchors
 
 
   Scenario: link to heading in PascalCase in another file
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [working link to a heading](2.md#github)
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       ## GitHub
       """
@@ -145,16 +145,16 @@ Feature: links to HTML anchors
 
 
   Scenario: link to an existing anchor in a file with URL-encoded spaces
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       A [working link to a heading](foo/bar%20baz.md#hello)
       """
-    And the source code contains the file "foo/bar baz.md" with content:
+    And the source code contains a file "foo/bar baz.md" with content:
       """
       ## Hello
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                   |
-      | LINE     | 1                                      |
+      | FILENAME | 1.md                                 |
+      | LINE     | 1                                    |
       | MESSAGE  | link to heading foo/bar baz.md#hello |

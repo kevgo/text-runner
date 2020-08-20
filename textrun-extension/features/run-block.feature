@@ -1,7 +1,7 @@
 Feature: Execute blocks of semantic Markdown
 
   Scenario: working example
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="extension/run-block">
       This is a <a textrun="test">test</a>.
@@ -14,7 +14,7 @@ Feature: Execute blocks of semantic Markdown
       | MESSAGE  | execute Markdown in Text-Runner |
 
   Scenario: missing content
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="extension/run-block">
       </a>
@@ -27,7 +27,7 @@ Feature: Execute blocks of semantic Markdown
       | EXIT CODE     | 1                       |
 
   Scenario: error in content
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="extension/run-block">
       This will blow up: <a textrun="zonk"></a>
@@ -35,7 +35,7 @@ Feature: Execute blocks of semantic Markdown
       """
     When trying to run text-run
     Then it signals:
-      | FILENAME      | 1.md                    |
-      | LINE          | 2                       |
+      | FILENAME      | 1.md                 |
+      | LINE          | 2                    |
       | ERROR MESSAGE | unknown action: zonk |
-      | EXIT CODE     | 1                       |
+      | EXIT CODE     | 1                    |

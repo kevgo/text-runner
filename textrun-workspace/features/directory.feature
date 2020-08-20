@@ -1,7 +1,7 @@
 Feature: verify that the workspace contains a directory
 
   Background:
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       Your computer should now contain a
       <code textrun="workspace/directory">foo</code>
@@ -25,7 +25,7 @@ Feature: verify that the workspace contains a directory
       | EXIT CODE     | 1                                             |
 
   Scenario: the given directory name points to a file
-    Given the workspace contains the file "foo"
+    Given the workspace contains a file "foo"
     When trying to run text-run
     Then the test fails with:
       | FILENAME      | 1.md                              |

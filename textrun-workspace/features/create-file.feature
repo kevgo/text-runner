@@ -1,7 +1,7 @@
 Feature: creating files with content
 
   Scenario: providing the filename as emphasized text and the content single-quoted
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <a textrun="workspace/create-file">
 
@@ -20,7 +20,7 @@ Feature: creating files with content
       """
 
   Scenario: providing the filename as bold text and the content triple-quoted
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <a textrun="workspace/create-file">
 
@@ -42,7 +42,7 @@ Feature: creating files with content
       """
 
   Scenario: no file path given
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <a textrun="workspace/create-file">
 
@@ -60,7 +60,7 @@ Feature: creating files with content
       | EXIT CODE     | 1                                                      |
 
   Scenario: no content block given
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <a textrun="workspace/create-file">
 
@@ -76,7 +76,7 @@ Feature: creating files with content
       | EXIT CODE     | 1                                                        |
 
   Scenario: two file paths given
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <a textrun="workspace/create-file">
 
@@ -96,7 +96,7 @@ Feature: creating files with content
       | EXIT CODE     | 1                                                     |
 
   Scenario: two content blocks given
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <a textrun="workspace/create-file">
 

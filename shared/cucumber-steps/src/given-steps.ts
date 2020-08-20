@@ -57,21 +57,21 @@ Given("I am in a directory that contains the {string} example( without a configu
   await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
 })
 
-Given("the source code contains the directory {string}", function (dirName) {
+Given("the source code contains a directory {string}", function (dirName) {
   return fs.ensureDir(path.join(this.rootDir, dirName))
 })
 
-Given("the source code contains the file {string}", async function (fileName) {
+Given("the source code contains a file {string}", async function (fileName) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, fileName), "content")
 })
 
-Given("the source code contains the file {string} with content:", async function (fileName, content) {
+Given("the source code contains a file {string} with content:", async function (fileName, content) {
   await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, fileName), content)
 })
 
-Given("the workspace contains the file {string}", async function (fileName) {
+Given("the workspace contains a file {string}", async function (fileName) {
   await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), "content")
 })
@@ -101,7 +101,7 @@ Given("the source code contains the HelloWorld action", async function () {
   )
 })
 
-Given("the workspace contains the file {string} with content:", async function (fileName, content) {
+Given("the workspace contains a file {string} with content:", async function (fileName, content) {
   await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
 })

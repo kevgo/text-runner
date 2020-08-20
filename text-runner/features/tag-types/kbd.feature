@@ -1,6 +1,6 @@
 Feature: KBD tags
 
-  When testing Markdown documentation
+    When testing Markdown documentation
   I want to be able to use KBD tags
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: KBD tags
 
 
   Scenario: code tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <kbd textrun="HelloWorld">foo</kbd>
       """
@@ -21,7 +21,7 @@ Feature: KBD tags
       | MESSAGE  | Hello world |
 
   Scenario: inactive HR tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <kbd>foo</kbd>
       """

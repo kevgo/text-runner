@@ -1,6 +1,6 @@
 Feature: active code tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make code tags active
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: active code tags
 
 
   Scenario: code tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <code textrun="HelloWorld">foo</code>
       """
@@ -21,7 +21,7 @@ Feature: active code tags
       | MESSAGE  | Hello world |
 
   Scenario: a list contains an indented code block
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       - a list with an
 

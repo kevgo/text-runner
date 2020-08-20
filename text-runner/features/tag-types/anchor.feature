@@ -10,7 +10,7 @@ Feature: active anchor tags
 
 
   Scenario: anchor tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="HelloWorld">hello</a>
       """
@@ -22,7 +22,7 @@ Feature: active anchor tags
 
 
   Scenario: anchor block
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="HelloWorld">
       hello

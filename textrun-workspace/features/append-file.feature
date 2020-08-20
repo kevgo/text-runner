@@ -3,7 +3,7 @@ Feature: Appending content to existing workspace files
   Scenario: the file exists
     Given the workspace contains a directory "foo"
     And the workspace contains a file "foo/bar" with content "hello"
-    And the source code contains the file "directory_changer.md" with content:
+    And the source code contains a file "directory_changer.md" with content:
       """
       <a textrun="workspace/append-file">
 

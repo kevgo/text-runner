@@ -1,6 +1,6 @@
 Feature: HR tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make HR tags active
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: HR tags
 
 
   Scenario: active HR tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <hr textrun="HelloWorld">
       """
@@ -21,14 +21,14 @@ Feature: HR tags
       | MESSAGE  | Hello world |
 
   Scenario: inactive HR tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <hr>
       """
     When running text-run
 
   Scenario: inactive HR Markdown tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       ---
       """

@@ -10,7 +10,7 @@ Feature: active ABBR tags
 
 
   Scenario: active ABBR tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <abbr textrun="HelloWorld">foo</abbr>
       """
@@ -22,7 +22,7 @@ Feature: active ABBR tags
 
 
   Scenario: passive ABBR tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <abbr>foo</abbr>
       """

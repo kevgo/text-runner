@@ -1,13 +1,13 @@
 Feature: verifying file content
 
   Background:
-    Given the workspace contains the file "hello.txt" with content:
+    Given the workspace contains a file "hello.txt" with content:
       """
       Hello world!
       """
 
   Scenario: specify file name via emphasized text and content via code block
-    Given the source code contains the file "01.md" with content:
+    Given the source code contains a file "01.md" with content:
       """
       <a textrun="workspace/file-content">
 
@@ -22,7 +22,7 @@ Feature: verifying file content
       | MESSAGE  | verify content of file hello.txt |
 
   Scenario: specify file name via strong text and content via fenced block
-    Given the source code contains the file "01.md" with content:
+    Given the source code contains a file "01.md" with content:
       """
       <a textrun="workspace/file-content">
 
@@ -41,7 +41,7 @@ Feature: verifying file content
 
 
   Scenario: file content mismatch
-    Given the source code contains the file "01.md" with content:
+    Given the source code contains a file "01.md" with content:
       """
       <a textrun="workspace/file-content">
 
@@ -61,7 +61,7 @@ Feature: verifying file content
 
 
   Scenario: file is missing
-    Given the source code contains the file "01.md" with content:
+    Given the source code contains a file "01.md" with content:
       """
       <a textrun="workspace/file-content">
 

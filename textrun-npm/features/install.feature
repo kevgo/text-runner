@@ -1,7 +1,7 @@
 Feature: verifying NPM installation instructions
 
   Background:
-    Given the source code contains the file "package.json" with content:
+    Given the source code contains a file "package.json" with content:
       """
       {
         "name": "my_enormous_package"
@@ -9,7 +9,7 @@ Feature: verifying NPM installation instructions
       """
 
   Scenario: correct package name with triple-fenced code block
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To install, run:
 
@@ -27,7 +27,7 @@ Feature: verifying NPM installation instructions
       | MESSAGE  | check npm package name in npm i -g my_enormous_package |
 
   Scenario: correct package name inside pre block
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To install, run:
 
@@ -37,23 +37,23 @@ Feature: verifying NPM installation instructions
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 3                                                   |
+      | FILENAME | 1.md                                                   |
+      | LINE     | 3                                                      |
       | MESSAGE  | check npm package name in npm i -g my_enormous_package |
 
   Scenario: correct package name with single-fenced code block
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       installation: <a textrun="npm/install">`npm i -g my_enormous_package`</a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 1                                                   |
+      | FILENAME | 1.md                                                   |
+      | LINE     | 1                                                      |
       | MESSAGE  | check npm package name in npm i -g my_enormous_package |
 
   Scenario: mismatching package name
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To install, run:
 
@@ -72,7 +72,7 @@ Feature: verifying NPM installation instructions
       | EXIT CODE     | 1                                                                                                   |
 
   Scenario: missing installation instructions
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To install, run:
 
@@ -87,7 +87,7 @@ Feature: verifying NPM installation instructions
       | EXIT CODE     | 1                                                        |
 
   Scenario: missing package name
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To install, run:
 

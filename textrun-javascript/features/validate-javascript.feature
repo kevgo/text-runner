@@ -1,7 +1,7 @@
 Feature: validating Javascript
 
   Scenario: missing Javascript
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="javascript/validate">
       </a>
@@ -14,7 +14,7 @@ Feature: validating Javascript
       | EXIT CODE     | 1                        |
 
   Scenario: invalid Javascript
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <pre textrun="javascript/validate">
       'missing quotes at end

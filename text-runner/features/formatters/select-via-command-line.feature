@@ -9,7 +9,7 @@ Feature: selecting formatter via the command-line
 
 
   Background:
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="test">
       </a>

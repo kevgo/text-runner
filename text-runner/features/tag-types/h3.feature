@@ -1,6 +1,6 @@
 Feature: active h3 tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make h3 tags active
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: active h3 tags
 
 
   Scenario: H3 tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <h3 textrun="HelloWorld">hello</h3>
       """

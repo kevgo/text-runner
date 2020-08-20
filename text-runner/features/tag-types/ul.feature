@@ -1,6 +1,6 @@
 Feature: active UL tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make UL tags active
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: active UL tags
 
 
   Scenario: UL tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <ul textrun="HelloWorld">
         <li>one</li>
@@ -24,7 +24,7 @@ Feature: active UL tags
 
 
   Scenario: unordered list item tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <ul>
       <li textrun="HelloWorld">one</li>

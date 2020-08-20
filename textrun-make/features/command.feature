@@ -1,7 +1,7 @@
 Feature: verifying Make commands
 
   Background:
-    Given the source code contains the file "Makefile" with content:
+    Given the source code contains a file "Makefile" with content:
       """
       foo:  # builds the "foo" executable
         @echo building foo
@@ -11,7 +11,7 @@ Feature: verifying Make commands
       """
 
   Scenario: works
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To build the "foo" executable, run <code textrun="make/command">make foo</code>.
       """
@@ -22,7 +22,7 @@ Feature: verifying Make commands
       | MESSAGE  | make command: make foo |
 
   Scenario: mismatching target name
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To build the "foo" executable, run <code textrun="make/command">make zonk</code>.
       """
@@ -35,7 +35,7 @@ Feature: verifying Make commands
 
 
   Scenario: missing target name
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To build the "foo" executable, run <code textrun="make/command">make </code>.
       """
@@ -47,7 +47,7 @@ Feature: verifying Make commands
       | EXIT CODE     | 1                                    |
 
   Scenario: empty tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       To build the "foo" executable, run <code textrun="make/command"> </code>.
       """

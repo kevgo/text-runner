@@ -1,6 +1,6 @@
 Feature: div tags
 
-  When writing complex div tags in a Markdown document
+    When writing complex div tags in a Markdown document
   I want to be able to make div tags active
   So that I don't have to litter my document with <a> tags
 
@@ -9,7 +9,7 @@ Feature: div tags
 
 
   Scenario: code tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <div textrun="HelloWorld">foo</div>
       """

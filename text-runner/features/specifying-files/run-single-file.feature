@@ -8,11 +8,11 @@ Feature: running a single MarkDown file
 
 
   Background:
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="test"></a>.
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       <a textrun="test"></a>.
       """

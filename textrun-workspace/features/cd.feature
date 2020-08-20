@@ -3,7 +3,7 @@ Feature: changing the working directory
   Scenario: pointing to an existing directory via hyperlink
     Given the workspace contains a directory "foo"
     And the workspace contains a file "foo/bar" with content "hello"
-    And the source code contains the file "directory_changer.md" with content:
+    And the source code contains a file "directory_changer.md" with content:
       """
       Change into the <code textrun="workspace/cd">foo</code> directory.
       You see a file <a textrun="workspace/file-content">
@@ -20,7 +20,7 @@ Feature: changing the working directory
   Scenario: pointing to an existing directory via code block
     Given the workspace contains a directory "foo"
     And the workspace contains a file "foo/bar" with content "hello"
-    And the source code contains the file "directory_changer.md" with content:
+    And the source code contains a file "directory_changer.md" with content:
       """
       <code textrun="workspace/cd">foo</code>
       <a textrun="workspace/file-content">
@@ -35,7 +35,7 @@ Feature: changing the working directory
 
 
   Scenario: pointing to a non-existing directory
-    Given the source code contains the file "directory_changer.md" with content:
+    Given the source code contains a file "directory_changer.md" with content:
       """
       <code textrun="workspace/cd">foo</code>
       """

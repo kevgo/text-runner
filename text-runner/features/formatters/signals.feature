@@ -6,7 +6,7 @@ Feature: Formatter signals
   - skip
 
   Scenario Outline: checking output of various formatters
-    Given the source code contains the file "error.md" with content:
+    Given the source code contains a file "error.md" with content:
       """
       <a textrun="run-javascript">
       ```

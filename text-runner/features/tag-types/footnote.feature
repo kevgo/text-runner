@@ -1,6 +1,6 @@
 Feature: footnotes
 
-  When writing documentation
+    When writing documentation
   I want to be able to use and reference footnotes
   So that I don't have to litter my document with peripheral details.
 
@@ -10,7 +10,7 @@ Feature: footnotes
 
 
   Scenario: code tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       foo[^1]
 

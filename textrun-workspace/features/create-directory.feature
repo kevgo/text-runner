@@ -1,7 +1,7 @@
 Feature: creating directories
 
   Scenario: creating a directory
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       Create the directory <b textrun="workspace/create-directory">directory_name</b>.
       """
@@ -13,7 +13,7 @@ Feature: creating directories
     And the test workspace now contains a directory "directory_name"
 
   Scenario: missing closing tag
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       Create the directory <b textrun="workspace/create-directory">
       """
@@ -26,7 +26,7 @@ Feature: creating directories
 
 
   Scenario: empty name given
-    Given the source code contains the file "creator.md" with content:
+    Given the source code contains a file "creator.md" with content:
       """
       <b textrun="workspace/create-directory"> </b>
       """

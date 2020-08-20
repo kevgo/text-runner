@@ -8,12 +8,12 @@ Feature: Counting files
 
 
   Scenario: a test suite with multiple files
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a textrun="test">
       </a>
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       <a textrun="test">
       </a>
@@ -25,11 +25,11 @@ Feature: Counting files
       """
 
   Scenario: a test suite where some files don't contain active blocks
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       No active block here
       """
-    And the source code contains the file "2.md" with content:
+    And the source code contains a file "2.md" with content:
       """
       <a textrun="test">
       </a>

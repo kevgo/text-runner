@@ -6,7 +6,7 @@ Feature: separate working directory
   So that I don't clutter up my documentation source code with temporary files creating by the tests.
 
   Background:
-    Given the workspace contains the file "1.md" with content:
+    Given the workspace contains a file "1.md" with content:
       """
       <pre textrun="test">
       pwd

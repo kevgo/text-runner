@@ -9,7 +9,7 @@ Feature: keeping the tmp directory
 
 
   Background:
-    Given the source code contains the file "tr.md" with content:
+    Given the source code contains a file "tr.md" with content:
       """
       <a textrun="workspace/create-directory">
 

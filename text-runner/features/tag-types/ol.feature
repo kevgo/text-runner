@@ -1,6 +1,6 @@
 Feature: active OL tags
 
-  When writing active blocks in a Markdown document
+    When writing active blocks in a Markdown document
   I want to be able to make OL tags active
   So that I don't have to litter my document with <a> tags
 
@@ -10,7 +10,7 @@ Feature: active OL tags
 
 
   Scenario: ordered list tag
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <ol textrun="HelloWorld">
       <li>one</li>
@@ -24,7 +24,7 @@ Feature: active OL tags
 
 
   Scenario: LI tag inside an OL
-    Given the source code contains the file "1.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <ol>
       <li textrun="HelloWorld">one</li>

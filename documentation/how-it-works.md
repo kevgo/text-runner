@@ -16,7 +16,7 @@ Please create a file with the name _config.yml_ and the content: `foo: bar`
 To make this part of the documentation executable, surround it with an `<a>` tag
 that specifies that we want to create a file:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```markdown
 ## Creating a configuration file

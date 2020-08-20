@@ -42,7 +42,7 @@ Build the foo package by running <code textrun="make/command">make foo</code>
 
 </a>
 
-<a textrun="run-textrunner">
+<a textrun="extension/run-textrunner">
 
 Text-Runner verifies that the `Makefile` contains the `foo` target.
 
@@ -59,6 +59,6 @@ again.
 
 </a>
 
-<a textrun="run-textrunner">
+<a textrun="extension/run-textrunner">
 
 Text-Runner verifies that the `Makefile` contains the `foo` target.

@@ -147,7 +147,7 @@ module.exports = function (action) {
 
 </a>
 
-<a textrun="run-textrunner"></a>
+<a textrun="extension/run-textrunner"></a>
 
 ## Formatters
 

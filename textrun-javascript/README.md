@@ -36,7 +36,7 @@ would:
 
 <!-- prettier-ignore-start -->
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ````html
 Let's run our first JavaScript command:
@@ -54,9 +54,9 @@ console.log("Hello world")
 
 <!-- prettier-ignore-end -->
 
-This could be simplified to:
+You can simplify this to:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```html
 Let's run our first JavaScript command:
@@ -132,7 +132,7 @@ Javascript, this step replaces all occurrences of `const⎵`, `var⎵`, `let⎵`
 The <b textrun="action/name-full">javascript/validate</b> action marks
 documented JavaScript code that should not be executed. Example:
 
-<a textrun="run-in-textrunner">
+<a textrun="extension/run-block">
 
 ```html
 <pre textrun="javascript/validate">

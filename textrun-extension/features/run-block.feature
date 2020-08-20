@@ -36,6 +36,6 @@ Feature: Execute blocks of semantic Markdown
     When trying to run text-run
     Then it signals:
       | FILENAME      | 1.md                    |
-      | LINE          | 1                       |
-      | ERROR MESSAGE | no content to run found |
+      | LINE          | 2                       |
+      | ERROR MESSAGE | unknown action: zonk |
       | EXIT CODE     | 1                       |

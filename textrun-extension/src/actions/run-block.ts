@@ -20,23 +20,18 @@ export async function runBlock(action: ActionArgs) {
   const trArgs = callArgs(textRunPath, process.platform)
   trArgs[trArgs.length - 1] += " --keep-tmp --workspace=."
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
-  console.log(111111111111111)
   try {
     await processor.waitForEnd()
   } catch (e) {
-    console.log(222222222222222)
     throw new Error(`error executing Markdown block: ${e}`)
   }
   action.log(processor.output.fullText())
-  console.log(5555555555)
-  console.log(processor.exitCode)
+  console.log("EXIT CODE:", processor.exitCode)
   if (processor.exitCode !== 0) {
-    console.log(333333333333333)
     throw new Error(
       `text-run exited with code ${processor.exitCode} when processing this markdown block:\n${stripAnsi(
         processor.output.fullText()
       )}`
     )
   }
-  console.log(44444444444444)
 }

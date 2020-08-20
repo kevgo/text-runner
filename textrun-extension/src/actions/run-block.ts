@@ -26,7 +26,6 @@ export async function runBlock(action: ActionArgs) {
     throw new Error(`error executing Markdown block: ${e}`)
   }
   action.log(processor.output.fullText())
-  console.log("EXIT CODE:", processor.exitCode)
   if (processor.exitCode !== 0) {
     throw new Error(
       `text-run exited with code ${processor.exitCode} when processing this markdown block:\n${stripAnsi(

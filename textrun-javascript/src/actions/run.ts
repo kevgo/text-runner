@@ -21,9 +21,7 @@ export function run(action: ActionArgs, done: DoneFunction) {
   // This is used in an eval'ed string below
   // @ts-ignore: unused variable
   // TODO: simplify to = done
-  const __finished = (err: any) => {
-    done(err)
-  }
+  const __finished = done
 
   // TODO: change to normal if clause
   code = hasCallbackPlaceholder(code)

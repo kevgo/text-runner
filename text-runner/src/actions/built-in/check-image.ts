@@ -7,7 +7,7 @@ import { ActionArgs } from "../types/action-args"
 
 /** The "checkImage" action checks for broken images. */
 export async function checkImage(action: ActionArgs) {
-  const node = action.nodes[0]
+  const node = action.region[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
     throw new Error("image tag without source")

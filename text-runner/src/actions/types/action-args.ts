@@ -9,7 +9,7 @@ export interface ActionArgs {
   configuration: Configuration
 
   /** the AST nodes of the active region which the current action tests */
-  nodes: AstNodeList
+  region: AstNodeList
 
   /** name of the file in which the currently tested active region is */
   file: string

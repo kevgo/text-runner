@@ -4,6 +4,7 @@ import { ActivityList } from "./types/activity-list"
 import { normalizeActionName } from "./normalize-action-name"
 
 /** returns all activities found in the given AstNodeLists */
+// TODO: rename ASTs to docs
 export function extractActivities(ASTs: AstNodeList[], activeAttributeName: string): ActivityList {
   const result: ActivityList = []
   for (const AST of ASTs) {
@@ -13,6 +14,7 @@ export function extractActivities(ASTs: AstNodeList[], activeAttributeName: stri
 }
 
 /** returns the activities contained in the given AstNodeList */
+// TODO: rename AST to doc
 function extractFromAST(AST: AstNodeList, attrName: string): ActivityList {
   const result: ActivityList = []
   for (const node of AST) {
@@ -22,6 +24,7 @@ function extractFromAST(AST: AstNodeList, attrName: string): ActivityList {
         file: node.file,
         line: node.line,
         region: AST.getNodesFor(node),
+        document: AST,
       })
     }
   }

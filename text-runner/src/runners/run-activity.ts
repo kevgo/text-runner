@@ -32,6 +32,7 @@ export async function runActivity(
     log: outputCollector.logFn(),
     name: nameRefiner.refineFn(),
     region: activity.region,
+    document: activity.document,
   }
   try {
     const action = actionFinder.actionFor(activity)

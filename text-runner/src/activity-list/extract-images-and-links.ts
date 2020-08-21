@@ -13,6 +13,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
             file: node.file,
             line: node.line,
             region: AST.getNodesFor(node),
+            document: AST,
           })
           break
 
@@ -24,6 +25,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
             file: node.file,
             line: node.line,
             region: nodes,
+            document: AST,
           })
           break
       }

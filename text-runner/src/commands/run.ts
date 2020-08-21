@@ -38,7 +38,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const actionFinder = ActionFinder.load(config.sourceDir)
 
   // step 6: extract activities
-  const activities = extractActivities(ASTs, config.classPrefix)
+  const activities = extractActivities(ASTs, config.regionMarker)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length + links.length === 0) {
     console.log(color.magenta("no activities found"))

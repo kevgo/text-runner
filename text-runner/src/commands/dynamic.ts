@@ -33,7 +33,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const linkTargets = findLinkTargets(ASTs)
 
   // step 5: extract activities
-  const activities = extractActivities(ASTs, config.classPrefix)
+  const activities = extractActivities(ASTs, config.regionMarker)
   if (activities.length === 0) {
     console.log(color.magenta("no activities found"))
     return []

@@ -17,7 +17,7 @@ export async function unusedCommand(config: Configuration) {
   const ASTs = await parseMarkdownFiles(filenames)
 
   // step 3: extract activities
-  const usedActivityNames = extractActivities(ASTs, config.classPrefix).map((activity) => activity.actionName)
+  const usedActivityNames = extractActivities(ASTs, config.regionMarker).map((activity) => activity.actionName)
 
   // step 4: find defined activities
   const definedActivityNames = ActionFinder.load(config.sourceDir).customActionNames()

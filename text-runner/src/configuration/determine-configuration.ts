@@ -5,7 +5,7 @@ import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
 const defaultValues: Configuration = {
   actions: {},
-  classPrefix: "textrun",
+  regionMarker: "textrun",
   defaultFile: "",
   exclude: [],
   fileGlob: "**/*.md",

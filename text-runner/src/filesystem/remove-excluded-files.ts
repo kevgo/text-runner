@@ -11,7 +11,6 @@ export function removeExcludedFiles(fileList: AbsoluteFilePath[], excluded: stri
   const excludedRegexes = excludedFilesArray.map((file) => new RegExp(file))
   return fileList.filter((file) => {
     for (const excludedRegex of excludedRegexes) {
-      // TODO: remove the if-clause, return the result directly
       if (excludedRegex.test(file.unixified())) {
         return false
       }

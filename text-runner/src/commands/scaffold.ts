@@ -3,7 +3,7 @@ import * as path from "path"
 
 export async function scaffoldCommand(blockName: string | undefined): Promise<Error[]> {
   if (!blockName) {
-    throw new Error("no block name given")
+    throw new Error("no region name given")
   }
   let textRunDirExists = true
   try {
@@ -20,7 +20,7 @@ export async function scaffoldCommand(blockName: string | undefined): Promise<Er
 
 function template(filename: string) {
   return `module.exports = async function (action) {
-  console.log('This code runs inside the "${filename}" block implementation.')
+  console.log('This code runs inside the "${filename}" region implementation.')
   console.log('I found these elements in your document:')
   console.log(action.region)
 

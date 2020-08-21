@@ -23,7 +23,7 @@ export async function exec(action: ActionArgs) {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.region[0].tag} ${action.configuration.classPrefix}="shell/exec"> block contains no commands to run`
+      `the <${action.region[0].tag} ${action.configuration.classPrefix}="shell/exec"> region contains no commands to run`
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)

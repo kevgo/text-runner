@@ -1,4 +1,4 @@
-Feature: flexible block syntax
+Feature: flexible region syntax
 
   Background:
     Given the source code contains the HelloWorld action

@@ -30,7 +30,7 @@ a file <a textrun="workspace/create-file">**config.yml** with content
 `foo: bar`</a>. The documentation for this codebase might want to mention this
 configuration file:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ````markdown
 <a textrun="repo/file-content">
@@ -50,11 +50,11 @@ This action assumes that the documentation contains the filename in bold or
 italic and the content as a single or triple fenced code block. The filename of
 the source code file is relative to the Markdown file describing it. You can
 also provide a directory in which your file is located via a link in the active
-block. <a textrun="workspace/create-file"> Let's say you have a file
+region. <a textrun="workspace/create-file"> Let's say you have a file
 **foo/bar/hello.txt** in your code base with the content `hello world!`. </a>
-You can display its content in your documentation via this active block:
+You can display its content in your documentation via this active region:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```markdown
 <a textrun="repo/file-content">

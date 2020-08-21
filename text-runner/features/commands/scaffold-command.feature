@@ -5,7 +5,7 @@ Feature: adding new actions
     Then it creates the file "text-run/new-step.js" with content:
       """
       module.exports = async function (action) {
-        console.log('This code runs inside the "new-step" block implementation.')
+        console.log('This code runs inside the "new-step" region implementation.')
         console.log('I found these elements in your document:')
         console.log(action.region)
 

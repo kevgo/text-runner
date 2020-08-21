@@ -23,12 +23,12 @@ export async function runBlock(action: ActionArgs) {
   try {
     await processor.waitForEnd()
   } catch (e) {
-    throw new Error(`error executing Markdown block: ${e}`)
+    throw new Error(`error executing Markdown region: ${e}`)
   }
   action.log(processor.output.fullText())
   if (processor.exitCode !== 0) {
     throw new Error(
-      `text-run exited with code ${processor.exitCode} when processing this markdown block:\n${stripAnsi(
+      `text-run exited with code ${processor.exitCode} when processing this markdown region:\n${stripAnsi(
         processor.output.fullText()
       )}`
     )

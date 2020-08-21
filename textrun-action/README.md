@@ -14,7 +14,7 @@ The <b textrun="action/name-full">action/name-full</b> action verifies the
 documented full name of an exported action, which includes the NPM package name
 without its `textrun-` prefix. In our example, we would use it like this:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```html
 The <b textrun="action/name-full">cooking/recipe</b> action verifies recipes.
@@ -27,7 +27,7 @@ The <b textrun="action/name-full">action/name-short</b> action is similar to
 action name does not contain the package name. In our example, we would use it
 like this:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```html
 The <b textrun="action/name-short">recipe</b> action verifies recipes.

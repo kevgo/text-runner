@@ -20,7 +20,7 @@ Feature: Counting files
   Scenario: a test suite where some files don't contain active blocks
     Given the source code contains a file "1.md" with content:
       """
-      No active block here
+      No active region here
       """
     And the source code contains a file "2.md" with content:
       """

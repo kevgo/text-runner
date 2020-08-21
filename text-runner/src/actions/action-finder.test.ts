@@ -14,7 +14,7 @@ import { Action } from "./types/action"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {
-    test("built-in block name", function () {
+    test("built-in region name", function () {
       const builtIn = new Actions()
       const func: Action = () => 1
       builtIn.register("foo", func)
@@ -22,7 +22,7 @@ suite("actionFinder", function () {
       const activity = scaffoldActivity({ actionName: "foo" })
       assert.equal(actionFinder.actionFor(activity), func)
     })
-    test("custom block name", function () {
+    test("custom region name", function () {
       const custom = new Actions()
       const func: Action = () => 1
       custom.register("foo", func)

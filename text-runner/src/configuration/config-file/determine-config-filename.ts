@@ -9,21 +9,20 @@ import { UserProvidedConfiguration } from "../types/user-provided-configuration"
  * @param cmdLineArgs
  */
 export async function determineConfigFilename(cmdLineArgs: UserProvidedConfiguration): Promise<string> {
-  if (cmdLineArgs.configFileName == null) {
+  if (cmdLineArgs.configFileName) {
     try {
-      await fs.stat("text-run.yml")
-      return "text-run.yml"
+      await fs.stat(cmdLineArgs.configFileName)
+      return cmdLineArgs.configFileName
     } catch (e) {
-      return ""
+      console.log(color.red(`configuration file ${color.cyan(cmdLineArgs.configFileName)} not found`))
+      throw new PrintedUserError()
     }
   }
 
-  // TODO: move this to the top of the method
   try {
-    await fs.stat(cmdLineArgs.configFileName)
-    return cmdLineArgs.configFileName
+    await fs.stat("text-run.yml")
+    return "text-run.yml"
   } catch (e) {
-    console.log(color.red(`configuration file ${color.cyan(cmdLineArgs.configFileName)} not found`))
-    throw new PrintedUserError()
+    return ""
   }
 }

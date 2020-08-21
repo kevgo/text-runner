@@ -15,6 +15,6 @@ export async function runTextrunner(action: ActionArgs) {
   await processor.waitForEnd()
   action.log(processor.output.fullText())
   if (processor.exitCode !== 0) {
-    throw new Error(`text-run exited with code ${processor.exitCode} when processing this markdown region`)
+    throw new Error(`the nested Text-Runner instance exited with code ${processor.exitCode}`)
   }
 }

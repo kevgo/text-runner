@@ -18,7 +18,7 @@ export async function runBlock(action: ActionArgs) {
   var textRunPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath, process.platform)
-  trArgs[trArgs.length - 1] += " --keep-tmp --workspace=."
+  trArgs[trArgs.length - 1] += " --keep-workspace --workspace=."
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   try {
     await processor.waitForEnd()

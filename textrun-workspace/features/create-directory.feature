@@ -5,7 +5,7 @@ Feature: creating directories
       """
       Create the directory <b textrun="workspace/create-directory">directory_name</b>.
       """
-    When running "text-run --keep-tmp"
+    When running "text-run --keep-workspace"
     Then it signals:
       | FILENAME | creator.md                      |
       | LINE     | 1                               |

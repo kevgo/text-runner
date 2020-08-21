@@ -54,7 +54,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepTmp) {
+  if (results.length === 0 && !config.keepWorkspace) {
     // NOTE: calling fs.remove causes an exception on Windows here,
     //       hence we use rimraf
     // TODO: try https://nodejs.org/api/fs.html#fs_fs_rmdir_path_options_callback here and remove rimraf

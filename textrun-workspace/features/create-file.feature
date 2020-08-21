@@ -9,7 +9,7 @@ Feature: creating files with content
 
       </a>
       """
-    When running "text-run --keep-tmp"
+    When running "text-run --keep-workspace"
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |
@@ -31,7 +31,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running "text-run --keep-tmp"
+    When running "text-run --keep-workspace"
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |

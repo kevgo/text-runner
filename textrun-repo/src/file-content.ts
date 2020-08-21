@@ -6,13 +6,13 @@ import * as path from "path"
 import { ActionArgs } from "text-runner"
 
 export async function fileContent(action: ActionArgs) {
-  const fileName = action.nodes.textInNodeOfType("em_open", "strong_open")
+  const fileName = action.region.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
-  if (action.nodes.hasNodeOfType("link_open")) {
-    const linkNode = action.nodes.getNodeOfTypes("link_open")
+  if (action.region.hasNodeOfType("link_open")) {
+    const linkNode = action.region.getNodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
-  const expectedContent = action.nodes.textInNodeOfTypes("fence", "code")
+  const expectedContent = action.region.textInNodeOfTypes("fence", "code")
   const filePath = path.join(path.dirname(action.file), relativeBaseDir, fileName)
   action.name(`document content matches source code file ${color.cyan(filePath)}`)
   const fullPath = path.join(action.configuration.sourceDir, filePath)

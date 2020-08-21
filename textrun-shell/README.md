@@ -52,7 +52,7 @@ tutorial:
 The source code of this Bash tutorial when executed and verified by Text-Runner
 looks like this:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```md
 The "echo" command prints text on the command line. For example, let's run:
@@ -163,7 +163,7 @@ Start this long-running server to run in parallel with Text-Runner with the
 with the <b textrun="action/name-full">shell/stop</b> action. Here is an example
 that shows them in action:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```html
 Start the server:

@@ -6,7 +6,7 @@ import { makefileTargets } from "../helpers/makefile-targets"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
 export async function target(action: ActionArgs) {
-  const target = action.nodes.text().trim()
+  const target = action.region.text().trim()
   if (target === "") {
     throw new Error("Empty make target")
   }

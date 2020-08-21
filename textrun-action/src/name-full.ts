@@ -2,7 +2,7 @@ import { actionName, ActionArgs } from "text-runner"
 import * as path from "path"
 
 export function nameFull(action: ActionArgs) {
-  const want = action.nodes.text()
+  const want = action.region.text()
   action.name(`verify full name of action "${want}"`)
   const wantStd = actionName(want)
   const pkgJson = require(path.join(action.configuration.sourceDir, "package.json"))

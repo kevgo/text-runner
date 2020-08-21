@@ -5,10 +5,10 @@ import * as path from "path"
 import { ActionArgs } from "text-runner"
 
 export async function fileContent(action: ActionArgs) {
-  const filePath = action.nodes.textInNodeOfType("strong", "em")
+  const filePath = action.region.textInNodeOfType("strong", "em")
   const fullPath = path.join(process.cwd(), filePath)
   action.name(`verify content of file ${color.cyan(filePath)}`)
-  const expectedContent = action.nodes.textInNodeOfType("fence", "code")
+  const expectedContent = action.region.textInNodeOfType("fence", "code")
   action.log(expectedContent)
   let actualContent = ""
   try {

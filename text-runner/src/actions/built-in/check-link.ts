@@ -13,7 +13,7 @@ import { ActionArgs } from "../types/action-args"
 
 /** The "checkLink" action checks for broken hyperlinks. */
 export async function checkLink(action: ActionArgs) {
-  const target = action.nodes.getNodeOfTypes("link_open").attributes.href
+  const target = action.region.getNodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")
   }

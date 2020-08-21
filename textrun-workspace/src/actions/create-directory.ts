@@ -4,7 +4,7 @@ import * as path from "path"
 import { ActionArgs } from "text-runner"
 
 export async function createDirectory(action: ActionArgs) {
-  const directoryName = action.nodes.text().trim()
+  const directoryName = action.region.text().trim()
   if (!directoryName) {
     throw new Error("empty directory name given")
   }

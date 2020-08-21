@@ -31,7 +31,7 @@ export async function runActivity(
     linkTargets,
     log: outputCollector.logFn(),
     name: nameRefiner.refineFn(),
-    nodes: activity.nodes,
+    region: activity.nodes,
   }
   try {
     const action = actionFinder.actionFor(activity)

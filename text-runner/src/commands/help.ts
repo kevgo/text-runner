@@ -21,7 +21,7 @@ COMMANDS
   ${color.bold("static")} [<filename>]   checks only the links, skips programmatic tests
 
   ${color.bold("setup")}                 creates an example configuration file
-  ${color.bold("scaffold")} <filename>   scaffolds a new block type handler
+  ${color.bold("scaffold")} <filename>   scaffolds a new region type handler
   ${color.bold("unused")} <filename>     shows unused custom activities
 
   ${color.bold("help")}                  shows this help screen

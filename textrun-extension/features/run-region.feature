@@ -1,9 +1,9 @@
-Feature: Execute blocks of semantic Markdown
+Feature: Execute regions of semantic Markdown
 
   Scenario: working example
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="extension/run-block">
+      <a textrun="extension/run-region">
       This is a <a textrun="test">test</a>.
       </a>
       """
@@ -16,7 +16,7 @@ Feature: Execute blocks of semantic Markdown
   Scenario: missing content
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="extension/run-block">
+      <a textrun="extension/run-region">
       </a>
       """
     When trying to run text-run
@@ -29,7 +29,7 @@ Feature: Execute blocks of semantic Markdown
   Scenario: error in content
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="extension/run-block">
+      <a textrun="extension/run-region">
       This will blow up: <a textrun="zonk"></a>
       </a>
       """

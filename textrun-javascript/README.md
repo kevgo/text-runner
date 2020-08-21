@@ -36,7 +36,7 @@ would:
 
 <!-- prettier-ignore-start -->
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ````html
 Let's run our first JavaScript command:
@@ -56,7 +56,7 @@ console.log("Hello world")
 
 You can simplify this to:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```html
 Let's run our first JavaScript command:
@@ -99,7 +99,7 @@ fs.writeFile("hello.txt", "hello world", function (err) {
 
 ### Sharing JavaScript variables
 
-Let's say your documentation contains two blocks of JavaScript that share a
+Let's say your documentation contains two regions of JavaScript that share a
 variable:
 
 <a textrun="javascript/run">
@@ -120,19 +120,19 @@ const complete = text + "world"
 
 </a>
 
-Each JavaScript block runs in its own isolated environment. The second block
-would not see the variable `text` from the first block. They do share the
-`global` object, though. To share local variables between different blocks of
+Each JavaScript region runs in its own isolated environment. The second region
+would not see the variable `text` from the first region. They do share the
+`global` object, though. To share local variables between different regions of
 Javascript, this step replaces all occurrences of `const⎵`, `var⎵`, `let⎵`, and
 `this.` with `global.` As an example, `const foo = 123` gets turned into
-`global.foo = 123`, thereby making foo accessible in all code blocks.
+`global.foo = 123`, thereby making foo accessible in all code regions.
 
 ## Validate JavaScript
 
 The <b textrun="action/name-full">javascript/validate</b> action marks
 documented JavaScript code that should not be executed. Example:
 
-<a textrun="extension/run-block">
+<a textrun="extension/run-region">
 
 ```html
 <pre textrun="javascript/validate">

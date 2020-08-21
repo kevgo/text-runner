@@ -4,7 +4,7 @@ import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "text-runner/src/actions/types/action-args"
 
 export function executable(action: ActionArgs) {
-  const commandName = trimDollar(action.nodes.text().trim())
+  const commandName = trimDollar(action.region.text().trim())
   if (commandName === "") {
     throw new Error("No npm package installation command found")
   }

@@ -1,7 +1,7 @@
 import { runTextrunner } from "./actions/run-textrunner"
-import { runBlock } from "./actions/run-block"
+import { runRegion } from "./actions/run-region"
 import { callArgs } from "./helpers/call-args"
 
-const textrunActions = { runBlock, runTextrunner }
+const textrunActions = { runRegion, runTextrunner }
 
 export { callArgs, textrunActions }

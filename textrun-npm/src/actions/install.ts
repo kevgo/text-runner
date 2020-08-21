@@ -5,10 +5,10 @@ import { trimDollar } from "../helpers/trim-dollar"
 import { ActionArgs } from "text-runner"
 
 export async function install(action: ActionArgs) {
-  const installText = trimDollar(action.nodes.textInNodeOfType("fence", "code"))
+  const installText = trimDollar(action.region.textInNodeOfType("fence", "code"))
   action.name(`check npm package name in ${color.cyan(installText)}`)
 
-  const dir = action.nodes[0]?.attributes?.dir || ""
+  const dir = action.region[0]?.attributes?.dir || ""
   const pkg = await fs.readJSON(path.join(action.configuration.sourceDir, dir, "package.json"))
 
   if (missesPackageName(installText, pkg.name)) {

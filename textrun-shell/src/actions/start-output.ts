@@ -7,7 +7,7 @@ import { ActionArgs } from "text-runner"
  */
 export async function startOutput(action: ActionArgs) {
   action.name("verifying the output of the long-running process")
-  const expectedOutput = action.nodes.textInNodeOfType("fence")
+  const expectedOutput = action.region.textInNodeOfType("fence")
   const expectedLines = expectedOutput
     .split("\n")
     .map((line: string) => line.trim())

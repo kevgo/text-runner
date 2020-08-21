@@ -1,4 +1,4 @@
-/** replaceVariableDeclarations makes variable declarations persist across code blocks. */
+/** replaceVariableDeclarations makes variable declarations persist across code regions. */
 export function replaceVariableDeclarations(code: string): string {
   return code
     .replace(/\bconst /g, "global.")

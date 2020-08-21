@@ -34,7 +34,7 @@ Feature: shell/exec
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | running.md                                                     |
-      | LINE          | 1                                                              |
-      | ERROR MESSAGE | the <a textrun="shell/exec"> block contains no commands to run |
-      | EXIT CODE     | 1                                                              |
+      | FILENAME      | running.md                                                      |
+      | LINE          | 1                                                               |
+      | ERROR MESSAGE | the <a textrun="shell/exec"> region contains no commands to run |
+      | EXIT CODE     | 1                                                               |

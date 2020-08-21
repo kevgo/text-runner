@@ -13,7 +13,7 @@ your extension. The documentation of the Text-Runner plugins in this mono-repo
 provide usage examples.
 
 While verifying such "nested" documentation" using Text-Runner, the
-<b textrun="action/name-full">extension/run-block</b> action executes these
+<b textrun="action/name-full">extension/run-region</b> action executes these
 embedded Markdown snippets in a separate Text-Runner instance. That separate
 Text-Runner instance runs in the workspace of its parent Text-Runner instance.
 

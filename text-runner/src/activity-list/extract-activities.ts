@@ -6,8 +6,8 @@ import { normalizeActionName } from "./normalize-action-name"
 /** returns all activities found in the given AstNodeLists */
 export function extractActivities(docs: AstNodeList[], activeAttributeName: string): ActivityList {
   const result: ActivityList = []
-  for (const AST of docs) {
-    result.push(...extractFromAST(AST, activeAttributeName))
+  for (const doc of docs) {
+    result.push(...extractFromAST(doc, activeAttributeName))
   }
   return result
 }

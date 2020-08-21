@@ -17,5 +17,5 @@ Feature: keeping the tmp directory
 
 
   Scenario: configuration option given
-    When running "text-run --keep-tmp"
+    When running "text-run --keep-workspace"
     Then the test workspace now contains a directory "foo"

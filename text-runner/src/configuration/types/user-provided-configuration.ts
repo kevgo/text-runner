@@ -13,7 +13,7 @@ export interface UserProvidedConfiguration {
   exclude?: string | string[]
   fileGlob?: string // files to test
   formatterName?: string // name of the formatter to use
-  keepTmp?: boolean
+  keepWorkspace?: boolean
   offline?: boolean
   publications?: Publications
   useSystemTempDirectory?: boolean

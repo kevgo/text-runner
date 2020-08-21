@@ -69,10 +69,10 @@ suite("parseCmdlineArgs()", function () {
     assert.equal(args.workspace, "foo/bar")
   })
 
-  test("--keep-tmp", function () {
-    const args = parseCmdlineArgs(["--keep-tmp", "foo.md"])
+  test("--keep-workspace", function () {
+    const args = parseCmdlineArgs(["--keep-workspace", "foo.md"])
     assert.equal(args.command, "run")
-    assert.isTrue(args.keepTmp)
+    assert.isTrue(args.keepWorkspace)
     assert.equal(args.fileGlob, "foo.md")
   })
 })

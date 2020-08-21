@@ -145,7 +145,7 @@ _Aug 1 2018_
   ([c8f8856](https://github.com/kevgo/text-runner/commit/c8f8856e2b75caf0e3709bc2425519d0df2b6408))
 - support hardbreaks in Markdown
   ([c2594c2](https://github.com/kevgo/text-runner/commit/c2594c278a68d1b84867d468e12101b937927c91))
-- show tag errors with code region
+- show tag errors with code block
   ([7db4836](https://github.com/kevgo/text-runner/commit/7db4836be28e81da331d1d515197000402a92eab))
 
 ## 3.0.0

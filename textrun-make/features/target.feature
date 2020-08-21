@@ -13,7 +13,7 @@ Feature: verifying Make targets
   Scenario: works
     Given the source code contains a file "1.md" with content:
       """
-      To build the "foo" executable, build the <code textrun="make/target">foo</code> target.
+      To build the "foo" executable, build the <code type="make/target">foo</code> target.
       """
     When running text-run
     Then it signals:
@@ -24,7 +24,7 @@ Feature: verifying Make targets
   Scenario: mismatching target name
     Given the source code contains a file "1.md" with content:
       """
-      To build the "foo" executable, build the <code textrun="make/target">zonk</code> target.
+      To build the "foo" executable, build the <code type="make/target">zonk</code> target.
       """
     When trying to run text-run
     Then the test fails with:
@@ -36,7 +36,7 @@ Feature: verifying Make targets
   Scenario: missing target name
     Given the source code contains a file "1.md" with content:
       """
-      To build the "foo" executable, build the <code textrun="make/target"></code> target.
+      To build the "foo" executable, build the <code type="make/target"></code> target.
       """
     When trying to run text-run
     Then the test fails with:

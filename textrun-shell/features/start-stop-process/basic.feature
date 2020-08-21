@@ -11,21 +11,21 @@ Feature: long-running processes
       """
     And the source code contains a file "1.md" with content:
       """
-      <a textrun="shell/start">
+      <a type="shell/start">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="shell/start-output">
+      <a type="shell/start-output">
 
       ```
       running
       ```
       </a>
 
-      <a textrun="shell/stop">
+      <a type="shell/stop">
 
       Stop the current process by hitting Ctrl-C
 
@@ -49,7 +49,7 @@ Feature: long-running processes
   Scenario: no running process
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="shell/stop">
+      <a type="shell/stop">
 
       There is no process running here
 

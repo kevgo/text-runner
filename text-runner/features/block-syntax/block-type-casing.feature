@@ -6,7 +6,7 @@ Feature: flexible region syntax
   Scenario: the blocktype is provided in PascalCase
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="HelloWorld">
+      <a type="HelloWorld">
       </a>
       """
     When running text-run
@@ -18,7 +18,7 @@ Feature: flexible region syntax
   Scenario: the blocktype is provided in camelCase
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="helloWorld">
+      <a type="helloWorld">
       </a>
       """
     When running text-run
@@ -30,7 +30,7 @@ Feature: flexible region syntax
   Scenario: the blocktype is provided in snake_case
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="hello_world">
+      <a type="hello_world">
       </a>
       """
     When running text-run
@@ -42,7 +42,7 @@ Feature: flexible region syntax
   Scenario: the blocktype is provided in kebab-case
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="hello-world">
+      <a type="hello-world">
       </a>
       """
     When running text-run

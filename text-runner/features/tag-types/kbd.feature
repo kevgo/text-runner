@@ -6,7 +6,7 @@ Feature: KBD tags
   Scenario: code tag
     Given the source code contains a file "1.md" with content:
       """
-      <kbd textrun="HelloWorld">foo</kbd>
+      <kbd type="HelloWorld">foo</kbd>
       """
     When running text-run
     Then it signals:

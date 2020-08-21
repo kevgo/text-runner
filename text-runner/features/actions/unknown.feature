@@ -4,7 +4,7 @@ Feature: unknown action types
   Scenario: using an unknown action type
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="unknown-action">
+      <a type="unknown-action">
       </a>
       """
     When trying to run text-run

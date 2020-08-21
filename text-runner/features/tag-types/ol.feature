@@ -6,7 +6,7 @@ Feature: active OL tags
   Scenario: ordered list tag
     Given the source code contains a file "1.md" with content:
       """
-      <ol textrun="HelloWorld">
+      <ol type="HelloWorld">
       <li>one</li>
       </ol>
       """
@@ -20,7 +20,7 @@ Feature: active OL tags
     Given the source code contains a file "1.md" with content:
       """
       <ol>
-      <li textrun="HelloWorld">one</li>
+      <li type="HelloWorld">one</li>
       </ol>
       """
     When running text-run

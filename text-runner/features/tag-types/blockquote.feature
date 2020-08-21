@@ -6,7 +6,7 @@ Feature: active blockquote tags
   Scenario: blockquote tag
     Given the source code contains a file "1.md" with content:
       """
-      <blockquote textrun="HelloWorld">hello</blockquote>
+      <blockquote type="HelloWorld">hello</blockquote>
       """
     When running text-run
     Then it signals:

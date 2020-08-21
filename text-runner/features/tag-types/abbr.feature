@@ -6,7 +6,7 @@ Feature: active ABBR tags
   Scenario: active ABBR tag
     Given the source code contains a file "1.md" with content:
       """
-      <abbr textrun="HelloWorld">foo</abbr>
+      <abbr type="HelloWorld">foo</abbr>
       """
     When running text-run
     Then it signals:

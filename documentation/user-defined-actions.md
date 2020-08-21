@@ -10,10 +10,10 @@ Let's start by building the simplest possible action first: A "hello-world"
 action that prints the text "hello world" in the test runner's console output
 when running. Inside our Markdown document we trigger it like this:
 
-<a textrun="workspace/create-file">
+<a type="workspace/create-file">
 
 ```html
-<a textrun="hello-world"></a>
+<a type="hello-world"></a>
 ```
 
 Create a file **hello.md** with this content to test it.
@@ -21,7 +21,7 @@ Create a file **hello.md** with this content to test it.
 </a>
 
 When TextRunner encounters this region of type `hello-world`, it runs the method
-that the file <a textrun="workspace/create-file">**text-run/hello-world.js**
+that the file <a type="workspace/create-file">**text-run/hello-world.js**
 exports. All user-defined actions are in the "text-run" folder, with the file
 name matching the action name but in
 [kebab-case](http://wiki.c2.com/?KebabCase). Let's create this file with the
@@ -37,13 +37,13 @@ module.exports = function (action) {
 
 Let's run Text-Runner:
 
-<pre textrun="shell/exec">
+<pre type="shell/exec">
 $ text-run
 </pre>
 
 The formatter displays test progress on the console as the test runs:
 
-<pre textrun="shell/exec-output">
+<pre type="shell/exec-output">
 Hello world!
 hello.md:1 -- Hello world
 </pre>
@@ -53,7 +53,7 @@ hello.md:1 -- Hello world
 Actions are simple JavaScript functions. An action receives an object containing
 various information and utility functions:
 
-<a textrun="verify-action-args" ignore="linkTargets">
+<a type="verify-action-args" ignore="linkTargets">
 
 - **file**, **line:** location of the currently executed region in the
   documentation
@@ -104,7 +104,7 @@ document content:
   the given types. You can provide multiple alternative node types.
 
 You can also iterate `nodes` manually. Each node has these attributes:
-<a textrun="verify-ast-node-attributes">
+<a type="verify-ast-node-attributes">
 
 - **file**, **line:** the file and line in the file at which this AST node
   begins
@@ -119,11 +119,10 @@ You can also iterate `nodes` manually. Each node has these attributes:
 ## Example 2: accessing document content
 
 Here is an example for an action that runs a code block in the terminal.
-<a textrun="workspace/create-file"> Create a file **execute.md** with the
-content:
+<a type="workspace/create-file"> Create a file **execute.md** with the content:
 
 ```
-<pre textrun="console-command">
+<pre type="console-command">
 echo "Hello world"
 </pre>
 ```
@@ -131,7 +130,7 @@ echo "Hello world"
 </a>
 
 Here is the corresponding action, implemented in
-<a textrun="workspace/create-file"> **text-run/console-command.js**:
+<a type="workspace/create-file"> **text-run/console-command.js**:
 
 ```javascript
 child_process = require("child_process")
@@ -149,7 +148,7 @@ module.exports = function (action) {
 
 </a>
 
-<a textrun="extension/run-textrunner"></a>
+<a type="extension/run-textrunner"></a>
 
 ## Formatters
 

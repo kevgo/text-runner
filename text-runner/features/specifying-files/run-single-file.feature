@@ -3,11 +3,11 @@ Feature: running a single MarkDown file
   Background:
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="test"></a>.
+      <a type="test"></a>.
       """
     And the source code contains a file "2.md" with content:
       """
-      <a textrun="test"></a>.
+      <a type="test"></a>.
       """
 
   Scenario: testing a single file via the complete CLI form

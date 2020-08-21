@@ -6,7 +6,7 @@ Feature: active pre tags
   Scenario: pre tag
     Given the source code contains a file "1.md" with content:
       """
-      <pre textrun="HelloWorld">
+      <pre type="HelloWorld">
       foo
       </pre>
       """

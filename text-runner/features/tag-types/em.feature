@@ -6,7 +6,7 @@ Feature: active em tags
   Scenario: em tag
     Given the source code contains a file "1.md" with content:
       """
-      <em textrun="HelloWorld">foo</em>
+      <em type="HelloWorld">foo</em>
       """
     When running text-run
     Then it signals:

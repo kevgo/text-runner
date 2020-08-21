@@ -3,7 +3,7 @@ Feature: Formatter signals
   Scenario Outline: checking output of various formatters
     Given the source code contains a file "error.md" with content:
       """
-      <a textrun="run-javascript">
+      <a type="run-javascript">
       ```
       throw new Error('BOOM!')
       ```

@@ -1,8 +1,8 @@
 You can export multiple actions from a single file.
 
-<a textrun="hello-world">
+<a type="hello-world">
 </a>
-<a textrun="morning">
+<a type="morning">
 </a>
-<a textrun="evening">
+<a type="evening">
 </a>

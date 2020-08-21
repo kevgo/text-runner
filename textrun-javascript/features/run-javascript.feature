@@ -3,7 +3,7 @@ Feature: running inline regions of Javascript
   Scenario: missing code block
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="javascript/run">
+      <a type="javascript/run">
       </a>
       """
     When trying to run text-run
@@ -17,7 +17,7 @@ Feature: running inline regions of Javascript
   Scenario: multiple code blocks
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="javascript/run">
+      <a type="javascript/run">
 
       ```
       console.log('one');

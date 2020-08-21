@@ -3,7 +3,7 @@ Feature: display the version
   Scenario: debugging
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="validate-javascript">
+      <a type="validate-javascript">
       ```
       foo()
       ```

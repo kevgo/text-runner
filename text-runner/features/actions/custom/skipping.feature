@@ -3,7 +3,7 @@ Feature: skipping an action
   Background:
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="hello-world">
+      <a type="hello-world">
       </a>
       """
 

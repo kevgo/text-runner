@@ -6,7 +6,7 @@ Feature: div tags
   Scenario: code tag
     Given the source code contains a file "1.md" with content:
       """
-      <div textrun="HelloWorld">foo</div>
+      <div type="HelloWorld">foo</div>
       """
     When running text-run
     Then it signals:

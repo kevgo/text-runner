@@ -1,4 +1,4 @@
-<a textrun="shell/exec">
+<a type="shell/exec">
 
 ```
 $ read foo

@@ -1,1 +1,1 @@
-<code textrun="foo">code block</code>
+<code type="foo">code block</code>

@@ -6,7 +6,7 @@ Feature: active link tags
   Scenario: link tag
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="HelloWorld" href=".">
+      <a type="HelloWorld" href=".">
       """
     When running text-run
     Then it signals:

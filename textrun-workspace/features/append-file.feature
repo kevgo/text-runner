@@ -5,7 +5,7 @@ Feature: Appending content to existing workspace files
     And the workspace contains a file "foo/bar" with content "hello"
     And the source code contains a file "directory_changer.md" with content:
       """
-      <a textrun="workspace/append-file">
+      <a type="workspace/append-file">
 
       Append to file **foo/bar** the content ` appended content`.
 

@@ -3,12 +3,12 @@ Feature: Counting files
   Scenario: a test suite with multiple files
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="test">
+      <a type="test">
       </a>
       """
     And the source code contains a file "2.md" with content:
       """
-      <a textrun="test">
+      <a type="test">
       </a>
       """
     When running text-run
@@ -24,7 +24,7 @@ Feature: Counting files
       """
     And the source code contains a file "2.md" with content:
       """
-      <a textrun="test">
+      <a type="test">
       </a>
       """
     When running text-run

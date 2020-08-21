@@ -1,4 +1,4 @@
 Let's run a custom action:
 
-<a textrun="hello-world">
+<a type="hello-world">
 </a>

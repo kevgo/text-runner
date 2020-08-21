@@ -6,7 +6,7 @@ Feature: active code tags
   Scenario: code tag
     Given the source code contains a file "1.md" with content:
       """
-      <code textrun="HelloWorld">foo</code>
+      <code type="HelloWorld">foo</code>
       """
     When running text-run
     Then it signals:

@@ -57,7 +57,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   if (results.length === 0 && !config.keepWorkspace) {
     // NOTE: calling fs.remove causes an exception on Windows here,
     //       hence we use rimraf
-    // TODO: try https://nodejs.org/api/fs.html#fs_fs_rmdir_path_options_callback here and remove rimraf
+    // TODO: on Windows, try https://nodejs.org/api/fs.html#fs_fs_rmdir_path_options_callback here and remove rimraf
     rimraf.sync(config.workspace, { maxBusyTries: 20 })
   }
 

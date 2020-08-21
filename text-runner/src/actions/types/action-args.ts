@@ -11,6 +11,9 @@ export interface ActionArgs {
   /** the AST nodes of the active region which the current action tests */
   region: AstNodeList
 
+  /** the AST nodes of the active region which the current action tests */
+  document: AstNodeList
+
   /** name of the file in which the currently tested active region is */
   file: string
 

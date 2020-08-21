@@ -59,6 +59,8 @@ various information and utility functions:
   documentation
 - **region:** the [document content](#accessing-document-content) inside the
   active region for this action,
+- **document:** the [content](#accessing-document-content) of the entire
+  document that contains this action,
 - **configuration:** TextRunner configuration data
 - **log:** call this function to output text to the user running your test
 - **name:** call this function to refine the name of the current test step

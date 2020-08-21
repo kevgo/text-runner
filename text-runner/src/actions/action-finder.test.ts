@@ -42,7 +42,7 @@ suite("actionFinder", function () {
       const result = customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
       assert.lengthOf(result, 2)
       assert.match(result[0], /text-run\/verify-ast-node-attributes.ts$/)
-      assert.match(result[1], /text-run\/verify-handler-args.ts$/)
+      assert.match(result[1], /text-run\/verify-action-args.ts$/)
     })
   })
 

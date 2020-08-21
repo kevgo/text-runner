@@ -57,7 +57,7 @@ various information and utility functions:
 
 - **file**, **line:** location of the currently executed block in the
   documentation
-- **nodes:** the [document content](#accessing-document-content) inside the
+- **region:** the [document content](#accessing-document-content) inside the
   active block for this action,
 - **configuration:** TextRunner configuration data
 - **log:** call this function to output text to the user running your test

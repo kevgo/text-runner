@@ -6,7 +6,7 @@ import stripAnsi = require("strip-ansi")
 import { callArgs } from "../helpers/call-args"
 
 /** runs the given content in Text-Runner */
-export async function runBlock(action: ActionArgs) {
+export async function runRegion(action: ActionArgs) {
   action.name("execute Markdown in Text-Runner")
   const content = action.region.text().trim()
   if (content === "") {

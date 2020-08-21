@@ -7,7 +7,7 @@ import { Publications } from "../publications/publications"
  */
 export interface Configuration {
   actions: any // configuration data for actions
-  classPrefix: string // the name of the attribute that denotes active regions
+  regionMarker: string // the name of the attribute that denotes active regions
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
   fileGlob: string // glob of the files to test
@@ -24,7 +24,7 @@ export interface Configuration {
 export function scaffoldConfiguration(): Configuration {
   return {
     actions: null,
-    classPrefix: "",
+    regionMarker: "",
     defaultFile: "",
     exclude: "",
     fileGlob: "",

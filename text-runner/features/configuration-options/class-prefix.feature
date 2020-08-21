@@ -30,7 +30,7 @@ Feature: configuring the class prefix
   Scenario: configuration option given
     Given the configuration file:
       """
-      classPrefix: 'custom'
+      regionMarker: 'custom'
       """
     When running text-run
     Then it prints:

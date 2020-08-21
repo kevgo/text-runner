@@ -6,7 +6,7 @@ import { Publications } from "../publications/publications"
  */
 export interface UserProvidedConfiguration {
   actions?: any
-  classPrefix?: string
+  regionMarker?: string
   command?: string // the text-runner command to run
   configFileName?: string // name of the config file to use
   defaultFile?: string

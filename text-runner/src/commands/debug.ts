@@ -31,7 +31,7 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
   }
 
   console.log("\nACTIVITIES:")
-  const activities = extractActivities(ASTs, config.classPrefix)
+  const activities = extractActivities(ASTs, config.regionMarker)
   if (activities.length === 0) {
     console.log("(none)")
   } else {

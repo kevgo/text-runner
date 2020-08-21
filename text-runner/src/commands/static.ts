@@ -50,7 +50,7 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepTmp) {
+  if (results.length === 0 && !config.keepWorkspace) {
     await fs.remove(config.workspace)
   }
 

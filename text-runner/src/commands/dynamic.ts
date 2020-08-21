@@ -49,7 +49,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (!error && !config.keepTmp) {
+  if (!error && !config.keepWorkspace) {
     await fs.remove(config.workspace)
   }
 

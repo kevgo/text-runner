@@ -11,7 +11,7 @@ Feature: Appending content to existing workspace files
 
       </a>.
       """
-    When running "text-run --keep-tmp"
+    When running "text-run --keep-workspace"
     Then it signals:
       | FILENAME | directory_changer.md   |
       | LINE     | 1                      |

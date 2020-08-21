@@ -20,7 +20,7 @@ Feature: Execute regions of semantic Markdown
       </a>
       """
     When trying to run text-run
-    Then it signals:
+    Then the test fails with:
       | FILENAME      | 1.md                    |
       | LINE          | 1                       |
       | ERROR MESSAGE | no content to run found |
@@ -34,7 +34,7 @@ Feature: Execute regions of semantic Markdown
       </a>
       """
     When trying to run text-run
-    Then it signals:
+    Then the test fails with:
       | FILENAME      | 1.md                 |
       | LINE          | 2                    |
       | ERROR MESSAGE | unknown action: zonk |

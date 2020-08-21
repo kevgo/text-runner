@@ -7,7 +7,7 @@ Feature: running inline regions of Javascript
       </a>
       """
     When trying to run text-run
-    Then it signals:
+    Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |
       | ERROR MESSAGE | no JavaScript code found |

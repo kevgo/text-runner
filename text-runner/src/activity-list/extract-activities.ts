@@ -4,21 +4,21 @@ import { ActivityList } from "./types/activity-list"
 import { normalizeActionName } from "./normalize-action-name"
 
 /** returns all activities found in the given AstNodeLists */
-export function extractActivities(docs: AstNodeList[], activeAttributeName: string): ActivityList {
+export function extractActivities(docs: AstNodeList[], regionMarker: string): ActivityList {
   const result: ActivityList = []
   for (const doc of docs) {
-    result.push(...extractFromAST(doc, activeAttributeName))
+    result.push(...extractFromAST(doc, regionMarker))
   }
   return result
 }
 
 /** returns the activities contained in the given AstNodeList */
-function extractFromAST(doc: AstNodeList, attrName: string): ActivityList {
+function extractFromAST(doc: AstNodeList, regionMarker: string): ActivityList {
   const result: ActivityList = []
   for (const node of doc) {
-    if (isActiveBlockTag(node, attrName)) {
+    if (isActiveBlockTag(node, regionMarker)) {
       result.push({
-        actionName: normalizeActionName(node.attributes[attrName]),
+        actionName: normalizeActionName(node.attributes[regionMarker]),
         file: node.file,
         line: node.line,
         region: doc.getNodesFor(node),

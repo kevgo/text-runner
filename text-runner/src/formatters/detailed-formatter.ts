@@ -7,8 +7,7 @@ import { Formatter } from "./types/formatter"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {
-  /** the directory in which the sources are located */
-  // TODO: replace with configuration
+  /** the Text-Runner configuration */
   private readonly configuration: Configuration
 
   // @ts-ignore: unused parameter

@@ -4,7 +4,7 @@ import { removeTrailingColon } from "../../text-runner/src/helpers/remove-traili
 import { ActionArgs } from "text-runner"
 
 export default async function verifyAstNodeAttributes(action: ActionArgs) {
-  const expected = action.nodes.textInNodesOfType("strong").sort().map(removeTrailingColon).join("\n")
+  const expected = action.region.textInNodesOfType("strong").sort().map(removeTrailingColon).join("\n")
   const actual = Object.keys(AstNode.scaffold()).sort().join("\n")
   assertNoDiff.chars(expected, actual)
 }

@@ -8,7 +8,7 @@ import { callArgs } from "../helpers/call-args"
 /** runs the given content in Text-Runner */
 export async function runBlock(action: ActionArgs) {
   action.name("execute Markdown in Text-Runner")
-  const content = action.nodes.text().trim()
+  const content = action.region.text().trim()
   if (content === "") {
     throw new Error("no content to run found")
   }

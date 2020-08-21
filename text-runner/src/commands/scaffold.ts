@@ -22,7 +22,7 @@ function template(filename: string) {
   return `module.exports = async function (action) {
   console.log('This code runs inside the "${filename}" block implementation.')
   console.log('I found these elements in your document:')
-  console.log(action.nodes)
+  console.log(action.region)
 
   // capture content from the document
   // const content = activity.searcher.tagContent('boldtext')

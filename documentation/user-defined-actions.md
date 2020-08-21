@@ -137,7 +137,7 @@ child_process = require("child_process")
 module.exports = function (action) {
   // determine which command to run
   // (you could also iterate the "nodes" array directly here)
-  const commandToRun = action.nodes.text()
+  const commandToRun = action.region.text()
 
   // perform the action
   const result = child_process.execSync(commandToRun, { encoding: "utf8" })

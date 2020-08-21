@@ -10,7 +10,7 @@ import { ActionArgs } from "text-runner"
  * It leaves the command running.
  */
 export async function start(action: ActionArgs) {
-  const commandsToRun = action.nodes
+  const commandsToRun = action.region
     .text()
     .split("\n")
     .map((line: string) => line.trim())

@@ -6,7 +6,7 @@ import { makefileTargets } from "../helpers/makefile-targets"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
 export async function command(action: ActionArgs) {
-  const command = action.nodes.text().trim()
+  const command = action.region.text().trim()
   if (command === "") {
     throw new Error("No make command found")
   }

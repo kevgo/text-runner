@@ -8,7 +8,7 @@ import { ActionArgs } from "text-runner"
  * contains the given directory.
  */
 export async function directory(action: ActionArgs) {
-  const directory = action.nodes.text()
+  const directory = action.region.text()
   const fullPath = path.join(action.configuration.workspace, directory)
   action.name(`directory ${color.cyan(directory)} exists in the workspace`)
   let stats: fs.Stats

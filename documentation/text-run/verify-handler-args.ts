@@ -3,8 +3,8 @@ import { removeTrailingColon } from "../../text-runner/src/helpers/remove-traili
 import { ActionArgs } from "text-runner"
 
 export default function verifyHandlerArgs(action: ActionArgs) {
-  const ignore = action.nodes[0].attributes.ignore
-  const expectedTools = action.nodes.textInNodesOfType("strong").sort().map(removeTrailingColon)
+  const ignore = action.region[0].attributes.ignore
+  const expectedTools = action.region.textInNodesOfType("strong").sort().map(removeTrailingColon)
   const actualTools = Object.keys(action)
     .sort()
     .filter((tool) => tool !== ignore)

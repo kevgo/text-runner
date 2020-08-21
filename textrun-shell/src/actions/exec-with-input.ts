@@ -15,7 +15,7 @@ interface ProcessInput {
  * and waits until the command is finished.
  */
 export async function execWithInput(action: ActionArgs) {
-  const content = action.nodes.textInNodeOfTypes("fence", "code")
+  const content = action.region.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
     .map((command: string) => command.trim())
@@ -24,13 +24,13 @@ export async function execWithInput(action: ActionArgs) {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.nodes[0].tag} ${action.configuration.classPrefix}="exec-with-input"> block contains no commands to run`
+      `the <${action.region[0].tag} ${action.configuration.classPrefix}="exec-with-input"> block contains no commands to run`
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
   let input: ProcessInput[] = []
-  if (action.nodes.hasNodeOfType("table")) {
-    input = getInput(action.nodes)
+  if (action.region.hasNodeOfType("table")) {
+    input = getInput(action.region)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   const processor = createObservableProcess(callArgs(commandsToRun, process.platform), {

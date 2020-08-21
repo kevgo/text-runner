@@ -12,7 +12,7 @@ import { Configuration } from "../helpers/configuration"
  */
 export async function exec(action: ActionArgs) {
   const config = await Configuration.load(path.join(action.configuration.sourceDir, "textrun-shell.js"))
-  const commandsToRun = action.nodes
+  const commandsToRun = action.region
     .text()
     .split("\n")
     .map((line: string) => line.trim())
@@ -23,7 +23,7 @@ export async function exec(action: ActionArgs) {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.nodes[0].tag} ${action.configuration.classPrefix}="shell/exec"> block contains no commands to run`
+      `the <${action.region[0].tag} ${action.configuration.classPrefix}="shell/exec"> block contains no commands to run`
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)

@@ -7,7 +7,7 @@ Feature: adding new actions
       module.exports = async function (action) {
         console.log('This code runs inside the "new-step" block implementation.')
         console.log('I found these elements in your document:')
-        console.log(action.nodes)
+        console.log(action.region)
 
         // capture content from the document
         // const content = activity.searcher.tagContent('boldtext')

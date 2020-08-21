@@ -99,7 +99,7 @@ fs.writeFile("hello.txt", "hello world", function (err) {
 
 ### Sharing JavaScript variables
 
-Let's say your documentation contains two blocks of JavaScript that share a
+Let's say your documentation contains two regions of JavaScript that share a
 variable:
 
 <a textrun="javascript/run">
@@ -122,10 +122,10 @@ const complete = text + "world"
 
 Each JavaScript region runs in its own isolated environment. The second region
 would not see the variable `text` from the first region. They do share the
-`global` object, though. To share local variables between different blocks of
+`global` object, though. To share local variables between different regions of
 Javascript, this step replaces all occurrences of `const⎵`, `var⎵`, `let⎵`, and
 `this.` with `global.` As an example, `const foo = 123` gets turned into
-`global.foo = 123`, thereby making foo accessible in all code blocks.
+`global.foo = 123`, thereby making foo accessible in all code regions.
 
 ## Validate JavaScript
 

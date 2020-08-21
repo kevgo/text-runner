@@ -1,4 +1,4 @@
-Feature: running inline blocks of Javascript
+Feature: running inline regions of Javascript
 
   Scenario: missing code block
     Given the source code contains a file "1.md" with content:

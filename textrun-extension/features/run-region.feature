@@ -1,4 +1,4 @@
-Feature: Execute blocks of semantic Markdown
+Feature: Execute regions of semantic Markdown
 
   Scenario: working example
     Given the source code contains a file "1.md" with content:

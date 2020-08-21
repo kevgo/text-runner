@@ -17,7 +17,7 @@ Feature: Counting files
       2 activities in 2 files
       """
 
-  Scenario: a test suite where some files don't contain active blocks
+  Scenario: a test suite where some files don't contain active regions
     Given the source code contains a file "1.md" with content:
       """
       No active region here

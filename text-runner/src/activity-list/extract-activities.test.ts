@@ -20,7 +20,7 @@ suite("extractActivities()", function () {
     assert.equal(result[0].actionName, "verify-foo")
     assert.equal(result[0].file.unixified(), "README.md")
     assert.equal(result[0].line, 3)
-    assert.deepEqual(result[0].nodes, input)
+    assert.deepEqual(result[0].region, input)
   })
 
   const tests = [

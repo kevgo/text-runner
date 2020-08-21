@@ -21,7 +21,7 @@ function extractFromAST(AST: AstNodeList, attrName: string): ActivityList {
         actionName: normalizeActionName(node.attributes[attrName]),
         file: node.file,
         line: node.line,
-        nodes: AST.getNodesFor(node),
+        region: AST.getNodesFor(node),
       })
     }
   }

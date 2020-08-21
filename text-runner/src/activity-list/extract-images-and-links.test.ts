@@ -14,8 +14,8 @@ suite("extractImagesAndLinks", function () {
     assert.equal(result[0].actionName, "check-image")
     assert.equal(result[0].file.unixified(), "filename")
     assert.equal(result[0].line, 3)
-    assert.lengthOf(result[0].nodes, 1)
-    assert.equal(result[0].nodes[0], nodes[0])
+    assert.lengthOf(result[0].region, 1)
+    assert.equal(result[0].region[0], nodes[0])
   })
 
   test("extracting links", function () {
@@ -28,6 +28,6 @@ suite("extractImagesAndLinks", function () {
     assert.equal(result[0].actionName, "check-link")
     assert.equal(result[0].file.unixified(), "filename")
     assert.equal(result[0].line, 3)
-    assert.deepEqual(result[0].nodes, nodes)
+    assert.deepEqual(result[0].region, nodes)
   })
 })

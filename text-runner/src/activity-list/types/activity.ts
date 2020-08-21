@@ -10,7 +10,7 @@ export interface Activity {
   actionName: string
   file: AbsoluteFilePath
   line: number
-  nodes: AstNodeList
+  region: AstNodeList
 }
 
 /** scaffoldActivity creates a test Activity from the given data */
@@ -19,6 +19,6 @@ export function scaffoldActivity(data: { actionName?: string }): Activity {
     actionName: data.actionName || "foo",
     file: new AbsoluteFilePath("file"),
     line: 0,
-    nodes: new AstNodeList(),
+    region: new AstNodeList(),
   }
 }

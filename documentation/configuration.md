@@ -44,7 +44,7 @@ format: detailed
 # defaultFile: index.md
 
 # prefix that makes anchor tags active regions
-regionMarker: textrun
+regionMarker: type
 
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,

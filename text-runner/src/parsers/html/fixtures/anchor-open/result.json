@@ -7,7 +7,7 @@
     "content": "",
     "attributes": {
       "name": "foo",
-      "textrun": "bar"
+      "type": "bar"
     }
   }
 ]

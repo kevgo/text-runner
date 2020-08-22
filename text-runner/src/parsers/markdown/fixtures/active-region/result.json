@@ -1,7 +1,7 @@
 [
   {
     "attributes": {
-      "textrun": "workspace/create-file"
+      "type": "workspace/create-file"
     },
     "content": "",
     "file": "src/parsers/markdown/fixtures/active-region/input.md",

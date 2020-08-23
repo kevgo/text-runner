@@ -158,8 +158,8 @@ setTimeout(() => {}, 100_000)
 </a>
 
 Start this long-running server to run in parallel with Text-Runner with the
-<b type="action/name-full">shell/start</b> action. Wait for output using the
-<b type="action/name-full">shell/start-output</b> action. Stop the server with
+<b type="action/name-full">shell/server</b> action. Wait for output using the
+<b type="action/name-full">shell/server-output</b> action. Stop the server with
 the <b type="action/name-full">shell/stop</b> action. Here is an example that
 shows them in action:
 
@@ -168,13 +168,13 @@ shows them in action:
 ```html
 Start the server:
 
-<pre type="shell/start">
+<pre type="shell/server">
 $ node server.js
 </pre>
 
 Wait until it is fully booted up:
 
-<pre type="shell/start-output">
+<pre type="shell/server-output">
 server is running
 </pre>
 

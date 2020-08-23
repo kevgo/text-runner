@@ -9,7 +9,7 @@ import { ActionArgs } from "text-runner"
  * The "start" action runs the given commands on the console.
  * It leaves the command running.
  */
-export async function start(action: ActionArgs) {
+export async function server(action: ActionArgs) {
   const commandsToRun = action.region
     .text()
     .split("\n")

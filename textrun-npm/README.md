@@ -81,7 +81,7 @@ file:
 
 </a>
 
-<a type="workspace/append-file">
+<a type="workspace/additional-file-content">
 
 The **README.md** file for the "foobar" package would document this binary
 something like this:

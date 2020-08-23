@@ -1,7 +1,7 @@
 [
   {
     "attributes": {
-      "type": "shell/exec"
+      "type": "shell/command"
     },
     "content": "",
     "file": "src/parsers/markdown/fixtures/user-input/input.md",

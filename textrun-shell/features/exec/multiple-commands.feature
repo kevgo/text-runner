@@ -3,7 +3,7 @@ Feature: running multiple console commands
   Scenario: running multiple console commands
     Given the source code contains a file "running-multiple-commands.md" with content:
       """
-      <a type="shell/exec">
+      <a type="shell/command">
 
       ```
       echo "hello"

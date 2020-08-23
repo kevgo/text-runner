@@ -7,7 +7,7 @@ You can configure TextRunner via command-line options or a configuration file.
 To scaffold a config file, open a terminal, go to the folder where you want to
 configure TextRunner, and run:
 
-<pre type="shell/exec">
+<pre type="shell/command">
 $ text-run setup
 </pre>
 

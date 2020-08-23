@@ -33,7 +33,7 @@ module.exports = {
 
 ### Run shell commands
 
-The <b type="action/name-full">shell/exec</b> action runs a shell command and
+The <b type="action/name-full">shell/command</b> action runs a shell command and
 waits until it finishes. As an example, here is a little hypothetical Bash
 tutorial:
 
@@ -57,13 +57,13 @@ looks like this:
 ```md
 The "echo" command prints text on the command line. For example, let's run:
 
-<pre type="shell/exec">
+<pre type="shell/command">
 $ echo Hello world!
 </pre>
 
 It welcomes us with a nice greeting:
 
-<pre type="shell/exec-output">
+<pre type="shell/command-output">
 Hello world!
 </pre>
 ```
@@ -71,13 +71,13 @@ Hello world!
 </a>
 
 Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
-The <b type="action/name-full">shell/exec-output</b> action documents output of
-the last shell command run.
+The <b type="action/name-full">shell/command-output</b> action documents output
+of the last shell command run.
 
 ### User input
 
 You can run a shell command and enter text into it with the
-<b type="action/name-full">shell/exec-with-input</b> action.
+<b type="action/name-full">shell/command-with-input</b> action.
 
 <a type="workspace/create-file">
 
@@ -103,7 +103,7 @@ rl.question("your name\n", (name) => {
 
 </a>
 
-<a type="shell/exec-with-input">
+<a type="shell/command-with-input">
 
 Run this tool on the command line
 
@@ -132,7 +132,7 @@ and provide user input with an HTML table:
 
 It prints:
 
-<pre type="shell/exec-output">
+<pre type="shell/command-output">
 Hello Text-Runner, happy Friday!
 </pre>.
 

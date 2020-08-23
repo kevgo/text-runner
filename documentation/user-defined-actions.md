@@ -37,13 +37,13 @@ module.exports = function (action) {
 
 Let's run Text-Runner:
 
-<pre type="shell/exec">
+<pre type="shell/command">
 $ text-run
 </pre>
 
 The formatter displays test progress on the console as the test runs:
 
-<pre type="shell/exec-output">
+<pre type="shell/command-output">
 Hello world!
 hello.md:1 -- Hello world
 </pre>

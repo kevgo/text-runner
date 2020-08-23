@@ -5,6 +5,6 @@ the documentation for this tool. We want to give usage examples like this one:
 
 > You run the tool with a number as an argument. Here is an example:
 >
-> <pre type="shell/exec">
+> <pre type="shell/command">
 > tool 123
 > </pre>

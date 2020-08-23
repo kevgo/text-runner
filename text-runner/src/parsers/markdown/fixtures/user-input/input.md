@@ -1,4 +1,4 @@
-<a type="shell/exec">
+<a type="shell/command">
 
 ```
 $ read foo

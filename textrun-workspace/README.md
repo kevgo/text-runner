@@ -53,6 +53,8 @@ create later in there.
 
 </a>
 
+<!-- TODO: verify the folder exists -->
+
 When executing the documentation, Text-Runner will create a
 <i type="workspace/directory">utils</i> directory in the workspace, just as the
 user would.
@@ -105,7 +107,7 @@ documentation snippet:
 <a type="extension/run-region">
 
 ```html
-Please run the command <code type="shell/exec">mkdir images</code>. If
+Please run the command <code type="shell/command">mkdir images</code>. If
 everything goes well, your computer will now have a new directory
 <i type="workspace/directory">images</i>. You can store images in it.
 ```

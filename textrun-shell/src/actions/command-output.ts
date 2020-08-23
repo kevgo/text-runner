@@ -2,7 +2,7 @@ import * as assertNoDiff from "assert-no-diff"
 import { CurrentCommand } from "../helpers/current-command"
 import { ActionArgs } from "text-runner"
 
-export function execOutput(action: ActionArgs) {
+export function commandOutput(action: ActionArgs) {
   action.name("verifying the output of the last run console command")
   const expectedText = action.region.text()
   const expectedLines = expectedText

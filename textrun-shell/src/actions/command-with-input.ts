@@ -14,7 +14,7 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export async function execWithInput(action: ActionArgs) {
+export async function commandWithInput(action: ActionArgs) {
   const content = action.region.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")

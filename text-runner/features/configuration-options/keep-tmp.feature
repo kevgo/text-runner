@@ -4,7 +4,7 @@ Feature: keeping the tmp directory
   Background:
     Given the source code contains a file "tr.md" with content:
       """
-      <a type="workspace/create-directory">
+      <a type="workspace/new-directory">
 
       `foo`
       </a>

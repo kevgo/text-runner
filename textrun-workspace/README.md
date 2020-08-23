@@ -56,8 +56,8 @@ create later in there.
 <!-- TODO: verify the folder exists -->
 
 When executing the documentation, Text-Runner will create a
-<i type="workspace/directory">utils</i> directory in the workspace, just as the
-user would.
+<i type="workspace/existing-directory">utils</i> directory in the workspace,
+just as the user would.
 
 ### create-file
 
@@ -100,16 +100,16 @@ Similarly, Text-Runner will create a file
 
 ### directory
 
-The <b type="action/name-full">workspace/directory</b> action verifies that the
-workspace contains a directory with the given name. As an example, consider this
-documentation snippet:
+The <b type="action/name-full">workspace/existing-directory</b> action verifies
+that the workspace contains a directory with the given name. As an example,
+consider this documentation snippet:
 
 <a type="extension/run-region">
 
 ```html
 Please run the command <code type="shell/command">mkdir images</code>. If
 everything goes well, your computer will now have a new directory
-<i type="workspace/directory">images</i>. You can store images in it.
+<i type="workspace/existing-directory">images</i>. You can store images in it.
 ```
 
 </a>

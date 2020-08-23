@@ -30,7 +30,7 @@ example, consider the following documentation snippet:
 
 ```html
 Create a
-<code type="workspace/create-directory">foo</code>
+<code type="workspace/new-directory">foo</code>
 directory. Now you can change into it via this Markdown code:
 <code type="workspace/working-dir">foo</code>
 ```
@@ -39,7 +39,7 @@ directory. Now you can change into it via this Markdown code:
 
 ### create-directory
 
-The <b type="action/name-full">workspace/create-directory</b> action creates a
+The <b type="action/name-full">workspace/new-directory</b> action creates a
 directory with the given name in the workspace. As an example, consider this
 snippet of documentation:
 
@@ -47,7 +47,7 @@ snippet of documentation:
 
 ```html
 To get started, please create a directory named
-<b type="workspace/create-directory">utils</b>. We will put all the utilities we
+<b type="workspace/new-directory">utils</b>. We will put all the utilities we
 create later in there.
 ```
 

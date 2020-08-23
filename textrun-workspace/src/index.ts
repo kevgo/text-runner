@@ -3,7 +3,7 @@ import { workingDir } from "./actions/working-dir"
 import { createFile } from "./actions/create-file"
 import { directory } from "./actions/directory"
 import { fileContent } from "./actions/file-content"
-import { createDirectory } from "./actions/create-directory"
+import { newDirectory } from "./actions/new-directory"
 
 export const textrunActions = {
   appendFile,
@@ -11,5 +11,5 @@ export const textrunActions = {
   createFile,
   directory,
   fileContent,
-  createDirectory,
+  newDirectory,
 }

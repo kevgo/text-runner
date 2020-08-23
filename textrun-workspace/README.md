@@ -61,16 +61,16 @@ user would.
 
 ### create-file
 
-The <b type="action/name-full">workspace/create-file</b> action creates a file
-in the workspace. This action assumes that the filename is written in
-_emphasized_ or **bold** text and the file content is a code block with one or
-three backticks. As an example, consider the following documentation snippet:
+The <b type="action/name-full">workspace/new-file</b> action creates a file in
+the workspace. This action assumes that the filename is written in _emphasized_
+or **bold** text and the file content is a code block with one or three
+backticks. As an example, consider the following documentation snippet:
 
 <a type="extension/run-region">
 
 ```markdown
-<a type="workspace/create-file">Please create a file _apples.txt_ with the
-content `Fuji`.</a>
+<a type="workspace/new-file">Please create a file _apples.txt_ with the content
+`Fuji`.</a>
 ```
 
 </a>
@@ -82,7 +82,7 @@ Alternatively, the documentation could also read like this:
 <a type="extension/run-region">
 
 ````markdown
-<a type="workspace/create-file">
+<a type="workspace/new-file">
 
 Please create a file with name **more-apples.txt** and the content:
 
@@ -125,7 +125,7 @@ example, consider the following documentation snippet:
 <a type="extension/run-region">
 
 ```markdown
-Assuming a file <a type="workspace/create-file">_hello.txt_ with content
+Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 `hello world`</a>, we can verify it via this action:
 
 <a type="workspace/file-content">The file _hello.txt_ now contains

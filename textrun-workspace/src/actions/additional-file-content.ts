@@ -3,7 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 
-export async function appendFile(action: ActionArgs) {
+export async function additionalFileContent(action: ActionArgs) {
   const filePath = action.region.textInNodeOfType("em", "strong")
   const content = action.region.textInNodeOfType("fence", "code")
   action.name(`append to file ${color.cyan(filePath)}`)

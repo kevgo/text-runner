@@ -9,7 +9,7 @@ Feature: verifying the documented content of a file in the repository
   Scenario: specify file name via emphasized text and content via code block
     Given the source code contains a file "1.md" with content:
       """
-      <a type="repo/file-content">
+      <a type="repo/existing-file">
 
       _hello.txt_ with content `Hello world!`
 
@@ -24,7 +24,7 @@ Feature: verifying the documented content of a file in the repository
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "1.md" with content:
       """
-      <a type="repo/file-content">
+      <a type="repo/existing-file">
 
       **hello.txt** with content:
 
@@ -47,7 +47,7 @@ Feature: verifying the documented content of a file in the repository
       """
     And the source code contains a file "1.md" with content:
       """
-      <a type="repo/file-content">
+      <a type="repo/existing-file">
 
       [documentation](docs)
       __greeting.md__
@@ -66,7 +66,7 @@ Feature: verifying the documented content of a file in the repository
   Scenario: file content mismatch
     Given the source code contains a file "01.md" with content:
       """
-      <a type="repo/file-content">
+      <a type="repo/existing-file">
 
       __hello.txt__
 
@@ -86,7 +86,7 @@ Feature: verifying the documented content of a file in the repository
   Scenario: file doesn't exist
     Given the source code contains a file "1.md" with content:
       """
-      <a type="repo/file-content">
+      <a type="repo/existing-file">
 
       __zonk.txt__
 

@@ -32,7 +32,7 @@ documentation for this codebase might want to mention this configuration file:
 <a type="extension/run-region">
 
 ````markdown
-<a type="repo/file-content">
+<a type="repo/existing-file">
 
 The **config.yml** file defines configuration values. The current settings are:
 
@@ -56,7 +56,7 @@ You can display its content in your documentation via this active region:
 <a type="extension/run-region">
 
 ```markdown
-<a type="repo/file-content">
+<a type="repo/existing-file">
 
 The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 

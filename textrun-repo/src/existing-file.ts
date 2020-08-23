@@ -5,7 +5,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 
-export async function fileContent(action: ActionArgs) {
+export async function existingFile(action: ActionArgs) {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
   if (action.region.hasNodeOfType("link_open")) {

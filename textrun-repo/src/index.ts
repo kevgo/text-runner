@@ -1,5 +1,5 @@
-import { fileContent } from "./file-content"
+import { existingFile } from "./existing-file"
 
 export const textrunActions = {
-  fileContent,
+  existingFile,
 }

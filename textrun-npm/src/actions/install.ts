@@ -6,6 +6,9 @@ import { ActionArgs } from "text-runner"
 
 export async function install(action: ActionArgs) {
   const installText = trimDollar(action.region.text())
+  if (installText === "") {
+    throw new Error("no installation instructions found")
+  }
   action.name(`check npm package name in ${color.cyan(installText)}`)
 
   const dir = action.region[0]?.attributes?.dir || ""

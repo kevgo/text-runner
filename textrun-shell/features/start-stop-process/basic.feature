@@ -25,7 +25,7 @@ Feature: long-running processes
       ```
       </a>
 
-      <a type="shell/stop">
+      <a type="shell/stop-server">
 
       Stop the current process by hitting Ctrl-C
 
@@ -49,7 +49,7 @@ Feature: long-running processes
   Scenario: no running process
     Given the source code contains a file "1.md" with content:
       """
-      <a type="shell/stop">
+      <a type="shell/stop-server">
 
       There is no process running here
 

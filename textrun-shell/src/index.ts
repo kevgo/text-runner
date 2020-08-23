@@ -3,7 +3,7 @@ import { commandOutput } from "./actions/command-output"
 import { commandWithInput } from "./actions/command-with-input"
 import { serverOutput } from "./actions/server-output"
 import { server } from "./actions/server"
-import { stop } from "./actions/stop"
+import { stopServer } from "./actions/stop-server"
 
 export const textrunActions = {
   command,
@@ -11,5 +11,5 @@ export const textrunActions = {
   commandWithInput,
   serverOutput,
   server,
-  stop,
+  stopServer,
 }

@@ -160,8 +160,8 @@ setTimeout(() => {}, 100_000)
 Start this long-running server to run in parallel with Text-Runner with the
 <b type="action/name-full">shell/server</b> action. Wait for output using the
 <b type="action/name-full">shell/server-output</b> action. Stop the server with
-the <b type="action/name-full">shell/stop</b> action. Here is an example that
-shows them in action:
+the <b type="action/name-full">shell/stop-server</b> action. Here is an example
+that shows them in action:
 
 <a type="extension/run-region">
 
@@ -179,7 +179,7 @@ server is running
 </pre>
 
 Now you can interact with the server. When you are done, stop the server:
-<a type="shell/stop">shell/stop</a>
+<a type="shell/stop-server">shell/stop-server</a>
 ```
 
 </a>

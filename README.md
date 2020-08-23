@@ -21,7 +21,3 @@ additional Text-Runner actions:
 - [textrun-shell](textrun-shell/): running executables in a subshell
 
 See also the [developers guide](DEVELOPMENT.md).
-
-### foo/bar-baz
-
-hello

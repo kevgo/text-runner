@@ -1,9 +1,9 @@
-import * as slugify from "@sindresorhus/slugify"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { LinkTarget } from "./types/link-target"
 import { LinkTargetTypes } from "./types/link-target-types"
+import { targetURL } from "./target-url"
 
 export class LinkTargetList {
   readonly targets: { [key: string]: LinkTarget[] }
@@ -45,10 +45,7 @@ export class LinkTargetList {
   addLinkTarget(filePath: AbsoluteFilePath, type: LinkTargetTypes, name: string) {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
-    this.targets[key].push({
-      name: slugify(name.toLowerCase()),
-      type,
-    })
+    this.targets[key].push({ name: targetURL(name), type })
   }
 
   // Returns the type of the given anchor

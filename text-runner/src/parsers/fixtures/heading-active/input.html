@@ -1,1 +1,1 @@
-<h1 textrun="foo">Hello</h1>
+<h1 type="foo">Hello</h1>

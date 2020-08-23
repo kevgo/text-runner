@@ -6,7 +6,7 @@ Feature: <marquee> tags
   Scenario: hr tag
     Given the source code contains a file "1.md" with content:
       """
-      <marquee textrun="HelloWorld">
+      <marquee type="HelloWorld">
       """
     When running text-run
     Then it signals:

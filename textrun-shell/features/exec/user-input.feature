@@ -4,7 +4,7 @@ Feature: running console commands
   Scenario: entering simple text into the console
     Given the source code contains a file "enter-input.md" with content:
       """
-      <a textrun="shell/exec-with-input">
+      <a type="shell/exec-with-input">
 
       ```
       $ read foo
@@ -32,7 +32,7 @@ Feature: running console commands
   Scenario: entering complex text into the console
     Given the source code contains a file "enter-input.md" with content:
       """
-      <a textrun="shell/exec-with-input">
+      <a type="shell/exec-with-input">
 
       ```
       $ echo "Name of the service to add"

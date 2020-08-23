@@ -6,7 +6,7 @@ Feature: active bold tags
   Scenario: bold tag
     Given the source code contains a file "1.md" with content:
       """
-      <b textrun="HelloWorld">hello</b>
+      <b type="HelloWorld">hello</b>
       """
     When running text-run
     Then it signals:

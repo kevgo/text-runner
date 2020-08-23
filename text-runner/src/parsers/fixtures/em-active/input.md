@@ -1,1 +1,1 @@
-<em textrun="foo">world</em>
+<em type="foo">world</em>

@@ -6,7 +6,7 @@ Feature: active strong tags
   Scenario: strong tag
     Given the source code contains a file "1.md" with content:
       """
-      <strong textrun="HelloWorld">foo</strong>
+      <strong type="HelloWorld">foo</strong>
       """
     When running text-run
     Then it signals:

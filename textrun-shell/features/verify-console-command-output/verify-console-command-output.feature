@@ -4,7 +4,7 @@ Feature: verifying the output of the last console command
   Scenario: verifying the output of a console command
     Given the source code contains a file "verify-output.md" with content:
       """
-      <a textrun="shell/exec">
+      <a type="shell/exec">
 
       ```
       echo one
@@ -13,7 +13,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
 
-      <a textrun="shell/exec-output">
+      <a type="shell/exec-output">
 
       ```
       one

@@ -7,11 +7,11 @@ You can configure TextRunner via command-line options or a configuration file.
 To scaffold a config file, open a terminal, go to the folder where you want to
 configure TextRunner, and run:
 
-<pre textrun="shell/exec">
+<pre type="shell/exec">
 $ text-run setup
 </pre>
 
-This creates a configuration file called <a textrun="workspace/file-content">
+This creates a configuration file called <a type="workspace/file-content">
 **text-run.yml** that looks like this:
 
 ```yml
@@ -44,7 +44,7 @@ format: detailed
 # defaultFile: index.md
 
 # prefix that makes anchor tags active regions
-regionMarker: textrun
+regionMarker: type
 
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,

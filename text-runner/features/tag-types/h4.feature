@@ -6,7 +6,7 @@ Feature: active h4 tags
   Scenario: H4 tag
     Given the source code contains a file "1.md" with content:
       """
-      <h4 textrun="HelloWorld">hello</h4>
+      <h4 type="HelloWorld">hello</h4>
       """
     When running text-run
     Then it signals:

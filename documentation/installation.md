@@ -13,13 +13,13 @@ including macOS, Windows, and Linux. To get started:
 
 - install TextRunner:
 
-  <pre textrun="npm/install" dir="../text-runner">
+  <pre type="npm/install" dir="../text-runner">
   npm install --dev text-runner
   </pre>
 
 * make sure it works by running:
 
-  <pre textrun="shell/exec">
+  <pre type="shell/exec">
   text-run help
   </pre>
 

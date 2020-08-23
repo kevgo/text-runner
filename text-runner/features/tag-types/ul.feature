@@ -6,7 +6,7 @@ Feature: active UL tags
   Scenario: UL tag
     Given the source code contains a file "1.md" with content:
       """
-      <ul textrun="HelloWorld">
+      <ul type="HelloWorld">
         <li>one</li>
       </ul>
       """
@@ -20,7 +20,7 @@ Feature: active UL tags
     Given the source code contains a file "1.md" with content:
       """
       <ul>
-      <li textrun="HelloWorld">one</li>
+      <li type="HelloWorld">one</li>
       </ul>
       """
     When running text-run

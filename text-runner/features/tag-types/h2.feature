@@ -6,7 +6,7 @@ Feature: active h2 tags
   Scenario: H2 tag
     Given the source code contains a file "1.md" with content:
       """
-      <h2 textrun="HelloWorld">hello</h2>
+      <h2 type="HelloWorld">hello</h2>
       """
     When running text-run
     Then it signals:

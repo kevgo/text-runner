@@ -6,7 +6,7 @@ Feature: active CENTER tags
   Scenario: active CENTER tag
     Given the source code contains a file "1.md" with content:
       """
-      <center textrun="HelloWorld">foo</center>
+      <center type="HelloWorld">foo</center>
       """
     When running text-run
     Then it signals:

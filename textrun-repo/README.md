@@ -11,29 +11,28 @@ from the repository.
 
 To use these actions, add this package as a development dependency by running
 
-<pre textrun="npm/install">
+<pre type="npm/install">
 $ npm i -D textrun-repo
 </pre>
 
 or
 
-<pre textrun="npm/install">
+<pre type="npm/install">
 $ yarn i -D textrun-repo
 </pre>
 
 ### file-content
 
 Sometimes you want to just display a file from your application's source code in
-the documentation. The <b textrun="action/name-full">source/file-content</b>
-action verifies such documentation. As an example, consider a codebase contains
-a file <a textrun="workspace/create-file">**config.yml** with content
-`foo: bar`</a>. The documentation for this codebase might want to mention this
-configuration file:
+the documentation. The <b type="action/name-full">source/file-content</b> action
+verifies such documentation. As an example, consider a codebase contains a file
+<a type="workspace/create-file">**config.yml** with content `foo: bar`</a>. The
+documentation for this codebase might want to mention this configuration file:
 
-<a textrun="extension/run-region">
+<a type="extension/run-region">
 
 ````markdown
-<a textrun="repo/file-content">
+<a type="repo/file-content">
 
 The **config.yml** file defines configuration values. The current settings are:
 
@@ -50,14 +49,14 @@ This action assumes that the documentation contains the filename in bold or
 italic and the content as a single or triple fenced code block. The filename of
 the source code file is relative to the Markdown file describing it. You can
 also provide a directory in which your file is located via a link in the active
-region. <a textrun="workspace/create-file"> Let's say you have a file
+region. <a type="workspace/create-file"> Let's say you have a file
 **foo/bar/hello.txt** in your code base with the content `hello world!`. </a>
 You can display its content in your documentation via this active region:
 
-<a textrun="extension/run-region">
+<a type="extension/run-region">
 
 ```markdown
-<a textrun="repo/file-content">
+<a type="repo/file-content">
 
 The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 

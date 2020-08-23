@@ -6,7 +6,7 @@ Feature: active table tags
   Scenario: simple HTML table
     Given the source code contains a file "1.md" with content:
       """
-      <table textrun="HelloWorld">
+      <table type="HelloWorld">
         <tr> <td></td> </tr>
       </table>
       """
@@ -19,7 +19,7 @@ Feature: active table tags
   Scenario: HTML table with THEAD and TBODY
     Given the source code contains a file "1.md" with content:
       """
-      <table textrun="HelloWorld">
+      <table type="HelloWorld">
         <thead>
           <tr> <td></td> </tr>
         </thead>
@@ -39,7 +39,7 @@ Feature: active table tags
       """
       <table>
         <thead>
-          <tr textrun="HelloWorld"> <th></th> </tr>
+          <tr type="HelloWorld"> <th></th> </tr>
           <tr> <td></td> </tr>
         </thead>
       </table>
@@ -58,7 +58,7 @@ Feature: active table tags
           <tr> <th></th> </tr>
         </thead>
         <tbody>
-          <tr textrun="HelloWorld"> <td></td> </tr>
+          <tr type="HelloWorld"> <td></td> </tr>
         </tbody>
       </table>
       """
@@ -72,7 +72,7 @@ Feature: active table tags
     Given the source code contains a file "1.md" with content:
       """
       <table>
-        <tr textrun="HelloWorld"> <td></td> </tr>
+        <tr type="HelloWorld"> <td></td> </tr>
       </table>
       """
     When running text-run
@@ -86,7 +86,7 @@ Feature: active table tags
       """
       <table>
         <tr>
-          <td textrun="HelloWorld">one</td>
+          <td type="HelloWorld">one</td>
         </tr>
       </table>
       """
@@ -101,7 +101,7 @@ Feature: active table tags
       """
       <table>
         <tr>
-          <th textrun="HelloWorld">one</th>
+          <th type="HelloWorld">one</th>
         </tr>
       </table>
       """

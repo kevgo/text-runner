@@ -7,13 +7,13 @@ actions for JavaScript code snippets inside documentation.
 
 To use these actions, add this package as a development dependency by running
 
-<pre textrun="npm/install">
+<pre type="npm/install">
 $ npm i -D textrun-javascript
 </pre>
 
 or
 
-<pre textrun="npm/install">
+<pre type="npm/install">
 $ yarn i -D textrun-javascript
 </pre>
 
@@ -30,18 +30,18 @@ console.log("Hello world!")
 ```
 ````
 
-When you assign the <b textrun="action/name-full">javascript/run</b> type to
-this document part, Text-Runner executes the JavaScript similar to how the user
+When you assign the <b type="action/name-full">javascript/run</b> type to this
+document part, Text-Runner executes the JavaScript similar to how the user
 would:
 
 <!-- prettier-ignore-start -->
 
-<a textrun="extension/run-region">
+<a type="extension/run-region">
 
 ````html
 Let's run our first JavaScript command:
 
-<a textrun="javascript/run">
+<a type="javascript/run">
 
 ```js
 console.log("Hello world")
@@ -56,12 +56,12 @@ console.log("Hello world")
 
 You can simplify this to:
 
-<a textrun="extension/run-region">
+<a type="extension/run-region">
 
 ```html
 Let's run our first JavaScript command:
 
-<pre textrun="javascript/run">
+<pre type="javascript/run">
 console.log("Hello world!")
 </pre>
 ```
@@ -70,12 +70,12 @@ console.log("Hello world!")
 
 ### Asynchronous JavaScript
 
-The <i textrun="action/name-full">javascript/run</i> action waits for the code
+The <i type="action/name-full">javascript/run</i> action waits for the code
 block to finish. To wait for asynchronous code, add the placeholder `<CALLBACK>`
 where your code would call the callback when its done. Only one placeholder is
 allowed per code block. Example:
 
-<a textrun="javascript/run">
+<a type="javascript/run">
 
 ```js
 const fs = require('fs')
@@ -86,7 +86,7 @@ fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 
 You can also use `// ...` as the placeholder:
 
-<a textrun="javascript/run">
+<a type="javascript/run">
 
 ```js
 const fs = require("fs")
@@ -102,7 +102,7 @@ fs.writeFile("hello.txt", "hello world", function (err) {
 Let's say your documentation contains two regions of JavaScript that share a
 variable:
 
-<a textrun="javascript/run">
+<a type="javascript/run">
 
 ```js
 const text = "hello"
@@ -112,7 +112,7 @@ const text = "hello"
 
 and
 
-<a textrun="javascript/run">
+<a type="javascript/run">
 
 ```js
 const complete = text + "world"
@@ -129,13 +129,13 @@ Javascript, this step replaces all occurrences of `const⎵`, `var⎵`, `let⎵`
 
 ## Validate JavaScript
 
-The <b textrun="action/name-full">javascript/validate</b> action marks
-documented JavaScript code that should not be executed. Example:
+The <b type="action/name-full">javascript/validate</b> action marks documented
+JavaScript code that should not be executed. Example:
 
-<a textrun="extension/run-region">
+<a type="extension/run-region">
 
 ```html
-<pre textrun="javascript/validate">
+<pre type="javascript/validate">
 const a = 1;
 </pre>
 ```

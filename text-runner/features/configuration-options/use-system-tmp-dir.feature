@@ -4,7 +4,7 @@ Feature: separate working directory
   Background:
     Given the workspace contains a file "1.md" with content:
       """
-      <pre textrun="test">
+      <pre type="test">
       pwd
       </pre>
       """

@@ -6,7 +6,7 @@ Feature: active i tags
   Scenario: italic tag
     Given the source code contains a file "1.md" with content:
       """
-      <i textrun="HelloWorld">hello</i>
+      <i type="HelloWorld">hello</i>
       """
     When running text-run
     Then it signals:

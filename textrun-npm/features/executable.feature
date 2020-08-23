@@ -15,7 +15,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a textrun="npm/executable">
+      <a type="npm/executable">
 
       ```
       $ foo
@@ -31,7 +31,7 @@ Feature: verifying global commands provided by NPM modules
   Scenario: correct command name with single-fenced code block
     Given the source code contains a file "1.md" with content:
       """
-      To run this app, call <a textrun="npm/executable">`foo`</a> on the command line
+      To run this app, call <a type="npm/executable">`foo`</a> on the command line
       """
     When running text-run
     Then it signals:
@@ -44,7 +44,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a textrun="npm/executable">
+      <a type="npm/executable">
 
       ```
       $ zonk
@@ -63,7 +63,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call:
 
-      <a textrun="npm/executable">
+      <a type="npm/executable">
       </a>
       """
     When trying to run text-run

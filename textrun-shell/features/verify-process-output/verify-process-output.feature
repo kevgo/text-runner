@@ -13,14 +13,14 @@ Feature: verifying the output of the last console command
       """
     And the source code contains a file "verify-output.md" with content:
       """
-      <a textrun="shell/start">
+      <a type="shell/start">
 
       ```
       node server.js
       ```
       </a>
 
-      <a textrun="shell/start-output">
+      <a type="shell/start-output">
 
       ```
       one
@@ -28,7 +28,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
 
-      <a textrun="shell/stop">
+      <a type="shell/stop">
       Stop the current process by hitting Ctrl-C
       </a>
       """

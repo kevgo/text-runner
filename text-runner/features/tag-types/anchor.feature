@@ -6,7 +6,7 @@ Feature: active anchor tags
   Scenario: anchor tag
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="HelloWorld">hello</a>
+      <a type="HelloWorld">hello</a>
       """
     When running text-run
     Then it signals:
@@ -17,7 +17,7 @@ Feature: active anchor tags
   Scenario: anchor block
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="HelloWorld">
+      <a type="HelloWorld">
       hello
       </a>
       """

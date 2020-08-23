@@ -4,7 +4,7 @@ Feature: verify that the workspace contains a directory
     Given the source code contains a file "1.md" with content:
       """
       Your computer should now contain a
-      <code textrun="workspace/directory">foo</code>
+      <code type="workspace/directory">foo</code>
       directory.
       """
 

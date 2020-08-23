@@ -13,24 +13,24 @@ your extension. The documentation of the Text-Runner plugins in this mono-repo
 provide usage examples.
 
 While verifying such "nested" documentation" using Text-Runner, the
-<b textrun="action/name-full">extension/run-region</b> action executes these
+<b type="action/name-full">extension/run-region</b> action executes these
 embedded Markdown snippets in a separate Text-Runner instance. That separate
 Text-Runner instance runs in the workspace of its parent Text-Runner instance.
 
 For more complex use cases, for example where your documentation needs to create
 more files before running Text-Runner, you can use the
-<b textrun="action/name-full">extension/run-textrunner</b> instance.
+<b type="action/name-full">extension/run-textrunner</b> instance.
 
 ### installation
 
 To use these actions, add this package as a development dependency by running
 
-<pre textrun="npm/install">
+<pre type="npm/install">
 $ npm i -D textrun-extension
 </pre>
 
 or
 
-<pre textrun="npm/install">
+<pre type="npm/install">
 $ yarn i -D textrun-extension
 </pre>

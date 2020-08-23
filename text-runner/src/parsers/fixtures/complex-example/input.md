@@ -1,4 +1,4 @@
-<a textrun="foo">
+<a type="foo">
 
 Hello **world**!
 

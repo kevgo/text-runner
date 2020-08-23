@@ -3,7 +3,7 @@ Feature: validating Javascript
   Scenario: missing Javascript
     Given the source code contains a file "1.md" with content:
       """
-      <a textrun="javascript/validate">
+      <a type="javascript/validate">
       </a>
       """
     When trying to run text-run
@@ -16,7 +16,7 @@ Feature: validating Javascript
   Scenario: invalid Javascript
     Given the source code contains a file "1.md" with content:
       """
-      <pre textrun="javascript/validate">
+      <pre type="javascript/validate">
       'missing quotes at end
       </pre>
       """

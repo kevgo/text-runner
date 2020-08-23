@@ -1,1 +1,1 @@
-<strong textrun="foo">world</strong>
+<strong type="foo">world</strong>

@@ -6,7 +6,7 @@ Feature: active img tags
   Scenario: image tag
     Given the source code contains a file "1.md" with content:
       """
-      <img textrun="HelloWorld" src="watermelon.gif">
+      <img type="HelloWorld" src="watermelon.gif">
       """
     And the workspace contains an image "watermelon.gif"
     When running text-run

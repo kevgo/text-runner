@@ -1,1 +1,1 @@
-<a name="foo" textrun="bar">A foo walks into a bar</a>
+<a name="foo" type="bar">A foo walks into a bar</a>

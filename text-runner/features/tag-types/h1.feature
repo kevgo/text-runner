@@ -6,7 +6,7 @@ Feature: active h1 tags
   Scenario: H1 tag
     Given the source code contains a file "1.md" with content:
       """
-      <h1 textrun="HelloWorld">hello</h1>
+      <h1 type="HelloWorld">hello</h1>
       """
     When running text-run
     Then it signals:

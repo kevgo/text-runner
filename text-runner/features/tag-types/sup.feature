@@ -6,7 +6,7 @@ Feature: active SUP tags
   Scenario: active tag
     Given the source code contains a file "1.md" with content:
       """
-      <sup textrun="HelloWorld">foo</sup>
+      <sup type="HelloWorld">foo</sup>
       """
     When running text-run
     Then it signals:

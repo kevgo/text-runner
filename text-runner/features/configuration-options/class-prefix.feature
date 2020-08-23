@@ -3,7 +3,7 @@ Feature: configuring the class prefix
   Background:
     Given the source code contains a file "tr.md" with content:
       """
-      <a textrun="test">
+      <a type="test">
       standard prefix
       </a>
       """

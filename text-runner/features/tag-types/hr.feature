@@ -6,7 +6,7 @@ Feature: HR tags
   Scenario: active HR tag
     Given the source code contains a file "1.md" with content:
       """
-      <hr textrun="HelloWorld">
+      <hr type="HelloWorld">
       """
     When running text-run
     Then it signals:

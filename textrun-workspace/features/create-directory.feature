@@ -3,7 +3,7 @@ Feature: creating directories
   Scenario: creating a directory
     Given the source code contains a file "creator.md" with content:
       """
-      Create the directory <b textrun="workspace/create-directory">directory_name</b>.
+      Create the directory <b type="workspace/create-directory">directory_name</b>.
       """
     When running "text-run --keep-workspace"
     Then it signals:
@@ -15,7 +15,7 @@ Feature: creating directories
   Scenario: missing closing tag
     Given the source code contains a file "creator.md" with content:
       """
-      Create the directory <b textrun="workspace/create-directory">
+      Create the directory <b type="workspace/create-directory">
       """
     When trying to run text-run
     Then the test fails with:
@@ -28,7 +28,7 @@ Feature: creating directories
   Scenario: empty name given
     Given the source code contains a file "creator.md" with content:
       """
-      <b textrun="workspace/create-directory"> </b>
+      <b type="workspace/create-directory"> </b>
       """
     When trying to run text-run
     Then the test fails with:

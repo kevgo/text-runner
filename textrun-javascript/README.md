@@ -36,7 +36,7 @@ would:
 
 <!-- prettier-ignore-start -->
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ````html
 Let's run our first JavaScript command:
@@ -56,7 +56,7 @@ console.log("Hello world")
 
 You can simplify this to:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```html
 Let's run our first JavaScript command:
@@ -132,7 +132,7 @@ Javascript, this step replaces all occurrences of `const⎵`, `var⎵`, `let⎵`
 The <b type="action/name-full">javascript/validate</b> action marks documented
 JavaScript code that should not be executed. Example:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```html
 <pre type="javascript/validate">

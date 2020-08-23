@@ -26,7 +26,7 @@ The <b type="action/name-full">workspace/working-dir</b> action changes the
 current working directory into the given directory inside the workspace. As an
 example, consider the following documentation snippet:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```html
 Create a
@@ -43,7 +43,7 @@ The <b type="action/name-full">workspace/new-directory</b> action creates a
 directory with the given name in the workspace. As an example, consider this
 snippet of documentation:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```html
 To get started, please create a directory named
@@ -66,7 +66,7 @@ the workspace. This action assumes that the filename is written in _emphasized_
 or **bold** text and the file content is a code block with one or three
 backticks. As an example, consider the following documentation snippet:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```markdown
 <a type="workspace/new-file">Please create a file _apples.txt_ with the content
@@ -79,7 +79,7 @@ When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file">_apples.txt_ and content `Fuji`</a>.
 Alternatively, the documentation could also read like this:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ````markdown
 <a type="workspace/new-file">
@@ -104,7 +104,7 @@ The <b type="action/name-full">workspace/existing-directory</b> action verifies
 that the workspace contains a directory with the given name. As an example,
 consider this documentation snippet:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```html
 Please run the command <code type="shell/command">mkdir images</code>. If
@@ -122,7 +122,7 @@ that the documentation contains the filename as _emphasized_ or **strong** text
 and the file content as a code block with single or triple backticks. As an
 example, consider the following documentation snippet:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```markdown
 Assuming a file <a type="workspace/new-file">_hello.txt_ with content

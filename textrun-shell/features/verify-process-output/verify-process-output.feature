@@ -28,7 +28,7 @@ Feature: verifying the output of the last console command
       ```
       </a>
 
-      <a type="shell/stop">
+      <a type="shell/stop-server">
       Stop the current process by hitting Ctrl-C
       </a>
       """

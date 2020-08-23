@@ -105,7 +105,7 @@ documentation snippet:
 <a type="extension/run-region">
 
 ```html
-Please run the command <code type="shell/exec">mkdir images</code>. If
+Please run the command <code type="shell/command">mkdir images</code>. If
 everything goes well, your computer will now have a new directory
 <i type="workspace/directory">images</i>. You can store images in it.
 ```

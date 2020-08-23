@@ -19,7 +19,7 @@ including macOS, Windows, and Linux. To get started:
 
 * make sure it works by running:
 
-  <pre type="shell/exec">
+  <pre type="shell/command">
   text-run help
   </pre>
 

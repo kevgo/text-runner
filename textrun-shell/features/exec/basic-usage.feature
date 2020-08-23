@@ -1,9 +1,9 @@
-Feature: shell/exec
+Feature: shell/command
 
   Scenario: with fenced block
     Given the source code contains a file "running.md" with content:
       """
-      <a type="shell/exec">
+      <a type="shell/command">
 
       ```
       echo hello
@@ -16,7 +16,7 @@ Feature: shell/exec
   Scenario: inside <pre> tags
     Given the source code contains a file "running.md" with content:
       """
-      <pre type="shell/exec">
+      <pre type="shell/command">
       echo hello
       </pre>
       """
@@ -26,7 +26,7 @@ Feature: shell/exec
   Scenario: empty console command
     Given the source code contains a file "running.md" with content:
       """
-      <a type="shell/exec">
+      <a type="shell/command">
 
       ```
       ```
@@ -36,5 +36,5 @@ Feature: shell/exec
     Then the test fails with:
       | FILENAME      | running.md                                                      |
       | LINE          | 1                                                               |
-      | ERROR MESSAGE | the <a type="shell/exec"> region contains no commands to run |
+      | ERROR MESSAGE | the <a type="shell/command"> region contains no commands to run |
       | EXIT CODE     | 1                                                               |

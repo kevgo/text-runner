@@ -3,7 +3,7 @@ Feature: marking console commands with preceding dollar signs
   Scenario: running console commands with dollar signs
     Given the source code contains a file "running-with-dollar-sign.md" with content:
       """
-      <a type="shell/exec">
+      <a type="shell/command">
 
       ```
       $ echo "hello"

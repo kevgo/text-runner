@@ -10,7 +10,7 @@ import { Configuration } from "../helpers/configuration"
 /**
  * Runs the given commands synchronously on the console.
  */
-export async function exec(action: ActionArgs) {
+export async function command(action: ActionArgs) {
   const config = await Configuration.load(path.join(action.configuration.sourceDir, "textrun-shell.js"))
   const commandsToRun = action.region
     .text()
@@ -23,7 +23,7 @@ export async function exec(action: ActionArgs) {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.region[0].tag} ${action.configuration.regionMarker}="shell/exec"> region contains no commands to run`
+      `the <${action.region[0].tag} ${action.configuration.regionMarker}="shell/command"> region contains no commands to run`
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)

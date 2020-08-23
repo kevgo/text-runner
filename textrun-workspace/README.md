@@ -22,9 +22,9 @@ $ yarn i -D textrun-workspace
 
 ### cd action
 
-The <b type="action/name-full">workspace/cd</b> action changes the current
-working directory into the given directory inside the workspace. As an example,
-consider the following documentation snippet:
+The <b type="action/name-full">workspace/working-dir</b> action changes the
+current working directory into the given directory inside the workspace. As an
+example, consider the following documentation snippet:
 
 <a type="extension/run-region">
 
@@ -32,7 +32,7 @@ consider the following documentation snippet:
 Create a
 <code type="workspace/create-directory">foo</code>
 directory. Now you can change into it via this Markdown code:
-<code type="workspace/cd">foo</code>
+<code type="workspace/working-dir">foo</code>
 ```
 
 </a>

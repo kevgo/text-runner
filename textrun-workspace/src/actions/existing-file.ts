@@ -4,7 +4,7 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 
-export async function fileContent(action: ActionArgs) {
+export async function existingFile(action: ActionArgs) {
   const filePath = action.region.textInNodeOfType("strong", "em")
   const fullPath = path.join(process.cwd(), filePath)
   action.name(`verify content of file ${color.cyan(filePath)}`)

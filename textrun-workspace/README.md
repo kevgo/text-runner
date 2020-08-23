@@ -53,6 +53,8 @@ create later in there.
 
 </a>
 
+<!-- TODO: verify the folder exists -->
+
 When executing the documentation, Text-Runner will create a
 <i type="workspace/directory">utils</i> directory in the workspace, just as the
 user would.

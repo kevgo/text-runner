@@ -10,6 +10,6 @@ export const textrunActions = {
   workingDir,
   newFile,
   directory,
-  fileContent: existingFile,
+  existingFile,
   newDirectory,
 }

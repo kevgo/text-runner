@@ -6,16 +6,8 @@ actions for verifying the documentation of npm packages.
 ### Installation
 
 To use these actions, add this package as a development dependency by running
-
-<pre type="npm/install">
-$ npm i -D textrun-npm
-</pre>
-
-or
-
-<pre type="npm/install">
-$ yarn i -D textrun-npm
-</pre>
+<code type="npm/install">npm i -D textrun-npm</code> or
+<code type="npm/install">yarn i -D textrun-npm</code>.
 
 ## Verify installation instructions
 

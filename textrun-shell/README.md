@@ -7,17 +7,9 @@ actions for documenting console commands to be executed by the reader.
 
 <!-- TODO: convert to inline <code> -->
 
-To add this package as a Text-Runner plugin:
-
-<pre type="npm/install">
-npm i -D textrun-shell
-</pre>
-
-or
-
-<pre type="npm/install">
-yarn i -D textrun-shell
-</pre>
+To add this package as a Text-Runner plugin, run <code type="npm/install">npm i
+-D textrun-shell</code> or <code type="npm/install">yarn i -D
+textrun-shell</code>.
 
 You can define the absolute path of documented binaries in a
 **textrun-shell.js** file in the root directory of your documentation. Here is

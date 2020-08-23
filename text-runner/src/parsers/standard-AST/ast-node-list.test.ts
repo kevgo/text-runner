@@ -159,9 +159,10 @@ test("AstNodeList.text()", function () {
   const list = new AstNodeList()
   list.pushNode({ type: "code_open" })
   list.pushNode({ type: "text", content: "hello" })
+  list.pushNode({ type: "text", content: "world" })
   list.pushNode({ type: "code_close" })
   const result = list.text()
-  assert.equal(result, "hello")
+  assert.equal(result, "hello world")
 })
 
 suite("AstNodeList.textInNodeOfType()", function () {

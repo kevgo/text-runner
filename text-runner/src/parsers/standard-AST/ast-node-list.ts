@@ -98,7 +98,7 @@ export class AstNodeList extends Array<AstNode> {
 
   /** Returns the concatenated textual content of all nodes in this list. */
   text(): string {
-    return this.reduce((acc, node) => acc + node.content, "")
+    return this.reduce((acc, node) => acc + node.content + " ", "").trim()
   }
 
   /** Returns the textual content for the given node. */

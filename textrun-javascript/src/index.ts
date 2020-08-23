@@ -1,7 +1,7 @@
 import { runnable } from "./actions/runnable"
-import { validate } from "./actions/validate"
+import { nonRunnable } from "./actions/non-runnable"
 
 export const textrunActions = {
   runnable,
-  validate,
+  nonRunnable,
 }

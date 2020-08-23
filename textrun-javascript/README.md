@@ -129,13 +129,13 @@ Javascript, this step replaces all occurrences of `const⎵`, `var⎵`, `let⎵`
 
 ## Validate JavaScript
 
-The <b type="action/name-full">javascript/validate</b> action marks documented
-JavaScript code that should not be executed. Example:
+The <b type="action/name-full">javascript/non-runnable</b> action marks
+documented JavaScript code that should not be executed. Example:
 
 <a type="extension/runnable-region">
 
 ```html
-<pre type="javascript/validate">
+<pre type="javascript/non-runnable">
 const a = 1;
 </pre>
 ```

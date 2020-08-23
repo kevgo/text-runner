@@ -3,7 +3,7 @@ import * as path from "path"
 import { ActionArgs } from "text-runner"
 
 /** The "cd" action changes the current working directory to the one given in the hyperlink or code block. */
-export function cd(action: ActionArgs) {
+export function workingDir(action: ActionArgs) {
   const directory = action.region.text()
   action.name(`changing into the ${color.cyan(directory)} directory`)
   const fullPath = path.join(action.configuration.workspace, directory)

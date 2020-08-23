@@ -13,14 +13,14 @@ Feature: verifying the output of the last console command
       """
     And the source code contains a file "verify-output.md" with content:
       """
-      <a type="shell/start">
+      <a type="shell/server">
 
       ```
       node server.js
       ```
       </a>
 
-      <a type="shell/start-output">
+      <a type="shell/server-output">
 
       ```
       one

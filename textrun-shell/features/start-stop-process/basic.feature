@@ -11,14 +11,14 @@ Feature: long-running processes
       """
     And the source code contains a file "1.md" with content:
       """
-      <a type="shell/start">
+      <a type="shell/server">
 
       ```
       node server.js
       ```
       </a>
 
-      <a type="shell/start-output">
+      <a type="shell/server-output">
 
       ```
       running

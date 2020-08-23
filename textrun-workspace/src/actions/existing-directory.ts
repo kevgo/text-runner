@@ -7,7 +7,7 @@ import { ActionArgs } from "text-runner"
  * The "directory" action verifies that the test workspace
  * contains the given directory.
  */
-export async function directory(action: ActionArgs) {
+export async function existingDirectory(action: ActionArgs) {
   const directory = action.region.text()
   const fullPath = path.join(action.configuration.workspace, directory)
   action.name(`directory ${color.cyan(directory)} exists in the workspace`)

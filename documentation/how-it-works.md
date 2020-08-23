@@ -41,7 +41,7 @@ and the content to write into the file from a code block. Text outside of `<a>`
 tags is ignored by TextRunner.
 
 If you run `text-run` on the command line to test this document, TextRunner
-creates a file <a type="workspace/file-content">_config.yml_ with the content
+creates a file <a type="workspace/existing-file">_config.yml_ with the content
 `foo: bar`</a> in the `tmp` subfolder of your current directory.
 
 <hr>

@@ -76,7 +76,7 @@ backticks. As an example, consider the following documentation snippet:
 </a>
 
 When executing the documentation, Text-Runner will create a file with name
-<a type="workspace/file-content">_apples.txt_ and content `Fuji`</a>.
+<a type="workspace/existing-file">_apples.txt_ and content `Fuji`</a>.
 Alternatively, the documentation could also read like this:
 
 <a type="extension/run-region">
@@ -96,7 +96,7 @@ Gala
 </a>
 
 Similarly, Text-Runner will create a file
-<a type="workspace/file-content">_more-apples.txt_ with content `Gala`</a>.
+<a type="workspace/existing-file">_more-apples.txt_ with content `Gala`</a>.
 
 ### directory
 
@@ -116,8 +116,8 @@ everything goes well, your computer will now have a new directory
 
 ### file-content
 
-The <b type="action/name-full">workspace/file-content</b> action verifies that a
-file with the given name exists and has the given content. This action assumes
+The <b type="action/name-full">workspace/existing-file</b> action verifies that
+a file with the given name exists and has the given content. This action assumes
 that the documentation contains the filename as _emphasized_ or **strong** text
 and the file content as a code block with single or triple backticks. As an
 example, consider the following documentation snippet:
@@ -128,6 +128,6 @@ example, consider the following documentation snippet:
 Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 `hello world`</a>, we can verify it via this action:
 
-<a type="workspace/file-content">The file _hello.txt_ now contains
+<a type="workspace/existing-file">The file _hello.txt_ now contains
 `hello world`.</a>
 ```

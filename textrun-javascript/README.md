@@ -30,8 +30,8 @@ console.log("Hello world!")
 ```
 ````
 
-When you assign the <b type="action/name-full">javascript/run</b> type to this
-document part, Text-Runner executes the JavaScript similar to how the user
+When you assign the <b type="action/name-full">javascript/runnable</b> type to
+this document part, Text-Runner executes the JavaScript similar to how the user
 would:
 
 <!-- prettier-ignore-start -->
@@ -41,7 +41,7 @@ would:
 ````html
 Let's run our first JavaScript command:
 
-<a type="javascript/run">
+<a type="javascript/runnable">
 
 ```js
 console.log("Hello world")
@@ -61,7 +61,7 @@ You can simplify this to:
 ```html
 Let's run our first JavaScript command:
 
-<pre type="javascript/run">
+<pre type="javascript/runnable">
 console.log("Hello world!")
 </pre>
 ```
@@ -70,12 +70,12 @@ console.log("Hello world!")
 
 ### Asynchronous JavaScript
 
-The <i type="action/name-full">javascript/run</i> action waits for the code
+The <i type="action/name-full">javascript/runnable</i> action waits for the code
 block to finish. To wait for asynchronous code, add the placeholder `<CALLBACK>`
 where your code would call the callback when its done. Only one placeholder is
 allowed per code block. Example:
 
-<a type="javascript/run">
+<a type="javascript/runnable">
 
 ```js
 const fs = require('fs')
@@ -86,7 +86,7 @@ fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 
 You can also use `// ...` as the placeholder:
 
-<a type="javascript/run">
+<a type="javascript/runnable">
 
 ```js
 const fs = require("fs")
@@ -102,7 +102,7 @@ fs.writeFile("hello.txt", "hello world", function (err) {
 Let's say your documentation contains two regions of JavaScript that share a
 variable:
 
-<a type="javascript/run">
+<a type="javascript/runnable">
 
 ```js
 const text = "hello"
@@ -112,7 +112,7 @@ const text = "hello"
 
 and
 
-<a type="javascript/run">
+<a type="javascript/runnable">
 
 ```js
 const complete = text + "world"

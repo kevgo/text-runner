@@ -6,7 +6,7 @@ Feature: changing the working directory
     And the source code contains a file "directory_changer.md" with content:
       """
       Change into the <code type="workspace/working-dir">foo</code> directory.
-      You see a file <a type="workspace/file-content">
+      You see a file <a type="workspace/existing-file">
         __bar__ `hello`
       </a>
       """
@@ -23,7 +23,7 @@ Feature: changing the working directory
     And the source code contains a file "directory_changer.md" with content:
       """
       <code type="workspace/working-dir">foo</code>
-      <a type="workspace/file-content">
+      <a type="workspace/existing-file">
         __bar__ `hello`
       </a>
       """

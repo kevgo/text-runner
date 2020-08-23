@@ -1,7 +1,7 @@
-import { run } from "./actions/run"
+import { runnable } from "./actions/runnable"
 import { validate } from "./actions/validate"
 
 export const textrunActions = {
-  run,
+  runnable,
   validate,
 }

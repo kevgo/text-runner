@@ -30,7 +30,7 @@ a file <a type="workspace/new-file">**config.yml** with content `foo: bar`</a>.
 The documentation for this codebase might want to mention this configuration
 file:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ````markdown
 <a type="repo/existing-file">
@@ -54,7 +54,7 @@ region. <a type="workspace/new-file"> Let's say you have a file
 **foo/bar/hello.txt** in your code base with the content `hello world!`. </a>
 You can display its content in your documentation via this active region:
 
-<a type="extension/run-region">
+<a type="extension/runnable-region">
 
 ```markdown
 <a type="repo/existing-file">

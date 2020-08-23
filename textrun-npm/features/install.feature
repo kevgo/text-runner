@@ -81,10 +81,10 @@ Feature: verifying NPM installation instructions
       """
     When trying to run text-run
     Then the test fails with:
-      | FILENAME      | 1.md                                                     |
-      | LINE          | 3                                                        |
-      | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
-      | EXIT CODE     | 1                                                        |
+      | FILENAME      | 1.md                               |
+      | LINE          | 3                                  |
+      | ERROR MESSAGE | no installation instructions found |
+      | EXIT CODE     | 1                                  |
 
   Scenario: missing package name
     Given the source code contains a file "1.md" with content:

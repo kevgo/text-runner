@@ -11,7 +11,7 @@ configure TextRunner, and run:
 $ text-run setup
 </pre>
 
-This creates a configuration file called <a type="workspace/file-content">
+This creates a configuration file called <a type="workspace/existing-file">
 **text-run.yml** that looks like this:
 
 ```yml

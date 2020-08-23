@@ -9,7 +9,7 @@ Feature: verifying file content
   Scenario: specify file name via emphasized text and content via code block
     Given the source code contains a file "01.md" with content:
       """
-      <a type="workspace/file-content">
+      <a type="workspace/existing-file">
 
       _hello.txt_ with content `Hello world!`
 
@@ -24,7 +24,7 @@ Feature: verifying file content
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "01.md" with content:
       """
-      <a type="workspace/file-content">
+      <a type="workspace/existing-file">
 
       **hello.txt** with content:
 
@@ -43,7 +43,7 @@ Feature: verifying file content
   Scenario: file content mismatch
     Given the source code contains a file "01.md" with content:
       """
-      <a type="workspace/file-content">
+      <a type="workspace/existing-file">
 
       __hello.txt__
 
@@ -63,7 +63,7 @@ Feature: verifying file content
   Scenario: file is missing
     Given the source code contains a file "01.md" with content:
       """
-      <a type="workspace/file-content">
+      <a type="workspace/existing-file">
 
       __zonk.txt__
 

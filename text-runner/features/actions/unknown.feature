@@ -14,11 +14,6 @@ Feature: unknown action types
       | EXIT CODE     | 1                              |
     And it prints the error message:
       """
-      Available built-in actions:
-      * check-image
-      * check-link
-      * test
-
       No custom actions defined.
 
       To create a new "unknown-action" action,

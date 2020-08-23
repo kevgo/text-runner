@@ -49,10 +49,7 @@ export class ActionFinder {
 
   /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
-    let errorText = `unknown action: ${color.red(activity.actionName)}\nAvailable built-in actions:\n`
-    for (const actionName of this.builtinActions.names()) {
-      errorText += `* ${actionName}\n`
-    }
+    let errorText = `unknown action: ${color.red(activity.actionName)}\n`
     if (this.customActions.size() > 0) {
       errorText += "\nUser-defined actions:\n"
       for (const actionName of this.customActions.names()) {

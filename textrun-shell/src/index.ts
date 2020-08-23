@@ -6,9 +6,9 @@ import { start } from "./actions/start"
 import { stop } from "./actions/stop"
 
 export const textrunActions = {
-  exec: command,
-  execOutput: commandOutput,
-  execWithInput: commandWithInput,
+  command,
+  commandOutput,
+  commandWithInput,
   startOutput,
   start,
   stop,

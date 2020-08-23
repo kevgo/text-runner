@@ -40,7 +40,7 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 6: find actions
-  const actionFinder = ActionFinder.load(config.sourceDir)
+  const actionFinder = ActionFinder.loadStatic()
 
   // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, links.length, config)

@@ -24,12 +24,27 @@ export class ActionFinder {
     this.externalActions = external
   }
 
+  /** loads all actions */
   static load(sourceDir: string) {
     return new ActionFinder(
       loadBuiltinActions(),
       loadCustomActions(path.join(sourceDir, "text-run")),
       new ExternalActionManager()
     )
+  }
+
+  /** loads only the actions for dynamic tests */
+  static loadDynamic(sourceDir: string) {
+    return new ActionFinder(
+      new Actions(),
+      loadCustomActions(path.join(sourceDir, "text-run")),
+      new ExternalActionManager()
+    )
+  }
+
+  /** loads only the actions for static tests */
+  static loadStatic() {
+    return new ActionFinder(loadBuiltinActions(), new Actions(), new ExternalActionManager())
   }
 
   /** actionFor provides the action function for the given Activity. */

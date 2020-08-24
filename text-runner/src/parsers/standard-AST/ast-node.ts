@@ -22,11 +22,11 @@ export type AstNodeType =
   | "linebreak"
   | "link_open"
   | "link_close"
-  | "text"
+  | "text" // text node
 
 /** the HTML tags */
 export type AstNodeTag =
-  | ""
+  | "" // text node
   | "a"
   | "/a"
   | "b"

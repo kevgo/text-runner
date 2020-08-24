@@ -1,1 +1,1 @@
-export type FormatterName = "detailed" | "dot"
+export type FormatterName = "detailed" | "dot" | "progress" | "summary"

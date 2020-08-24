@@ -2,7 +2,7 @@ import * as MarkdownIt from "markdown-it"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { HTMLParser } from "../html/html-parser"
-import { AstNode, AstNodeAttributes } from "../standard-AST/ast-node"
+import { AstNode, AstNodeAttributes, AstNodeTag, AstNodeType } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./helpers/closing-tag-parser"
@@ -39,7 +39,7 @@ export class MarkdownParser {
   }
 
   /** Converts the given MarkdownIt AST into the standard AST format */
-  private standardizeAST(mdAST: any, file: AbsoluteFilePath, parentLine: number, ont: OpenNodeTracker) {
+  private standardizeAST(mdAST: any, file: AbsoluteFilePath, parentLine: number, ont: OpenNodeTracker): AstNodeList {
     const result = new AstNodeList()
     let currentLine = parentLine
     for (const node of mdAST) {
@@ -166,7 +166,7 @@ export class MarkdownParser {
         file,
         line,
         tag: mdNode.tag,
-        type: `${mdNode.tag}_open`,
+        type: `${mdNode.tag}_open` as AstNodeType,
       })
     )
     return result
@@ -180,8 +180,8 @@ export class MarkdownParser {
         content: "",
         file,
         line,
-        tag: "/" + node.tag,
-        type: `${node.tag}_close`,
+        tag: ("/" + node.tag) as AstNodeTag,
+        type: `${node.tag}_close` as AstNodeType,
       })
     )
     return result

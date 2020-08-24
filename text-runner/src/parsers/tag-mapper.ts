@@ -4,9 +4,9 @@ type TypeTagMapping = Map<AstNodeType, AstNodeTag>
 type TagTypeMapping = Map<AstNodeTag, AstNodeType>
 
 /**
- * TagMapper maps Remarkable node types to HTML tags and vice versa.
+ * TagMapper maps MarkdownIt node types to HTML tags and vice versa.
  *
- * Remarkable node types: bold_open, bold_close, image, explicitly
+ * MarkdownIt node types: bold_open, bold_close, image, explicitly
  * Tag types: "b", "/b", "img", etc
  */
 export class TagMapper {
@@ -29,10 +29,10 @@ export class TagMapper {
     ["linebreak", "br"],
   ])
 
-  /** maps Remarkable types to their corresponding HTML tags */
+  /** maps MarkdownIt types to their corresponding HTML tags */
   private readonly typeTagMappings: TypeTagMapping
 
-  /** maps HTML tag names to their corresponding Remarkable types */
+  /** maps HTML tag names to their corresponding MarkdownIt types */
   private readonly tagTypeMappings: TagTypeMapping
 
   constructor() {
@@ -56,12 +56,12 @@ export class TagMapper {
     return false
   }
 
-  /** Returns the opening Remarkable type for the given HTML tag. */
+  /** Returns the opening MarkdownIt type for the given HTML tag. */
   openingTypeForTag(tagName: AstNodeTag, attributes: AstNodeAttributes) {
     return this.typeForTag(tagName.replace(/^\//, "") as AstNodeTag, attributes)
   }
 
-  /** Returns the HTML tag for the given Remarkable type. */
+  /** Returns the HTML tag for the given MarkdownIt type. */
   tagForType(type: AstNodeType): AstNodeTag {
     // handle text tag
     if (type === "text") {
@@ -112,7 +112,7 @@ export class TagMapper {
     }
   }
 
-  /** Calculates the mappings from Remarkable types to HTML tags */
+  /** Calculates the mappings from MarkdownIt types to HTML tags */
   private createTypeTagMappings(): TypeTagMapping {
     const result: TypeTagMapping = new Map()
     for (const [type, tag] of TagMapper.OPEN_CLOSE_MAPPINGS) {
@@ -125,7 +125,7 @@ export class TagMapper {
     return result
   }
 
-  /** Calculates the mappings from HTML tags to Remarkable types */
+  /** Calculates the mappings from HTML tags to MarkdownIt types */
   private createTagTypeMappings(): TagTypeMapping {
     const result: TagTypeMapping = new Map()
     for (const [type, tag] of this.typeTagMappings) {

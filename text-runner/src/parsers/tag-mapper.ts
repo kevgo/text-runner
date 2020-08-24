@@ -48,7 +48,12 @@ export class TagMapper {
   }
 
   isStandaloneTag(tagName: AstNodeTags): boolean {
-    return Object.values(TagMapper.STANDALONE_MAPPINGS).includes(tagName)
+    for (const value of TagMapper.STANDALONE_MAPPINGS.values()) {
+      if (value === tagName) {
+        return true
+      }
+    }
+    return false
   }
 
   /** Returns the opening Remarkable type for the given HTML tag. */

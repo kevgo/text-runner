@@ -4,7 +4,6 @@ import { Configuration } from "./types/configuration"
 import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
 const defaultValues: Configuration = {
-  actions: {},
   regionMarker: "type",
   defaultFile: "",
   exclude: [],

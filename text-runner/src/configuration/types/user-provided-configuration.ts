@@ -7,7 +7,6 @@ import { Commands } from "../../text-runner"
  * either via command line or via config file.
  */
 export interface UserProvidedConfiguration {
-  actions?: any
   regionMarker?: string
   command?: Commands // the text-runner command to run
   configFileName?: string // name of the config file to use

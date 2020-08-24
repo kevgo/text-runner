@@ -7,7 +7,6 @@ import { FormatterName } from "../../formatters/types/formatter-name"
  * and determining other runtime variables.
  */
 export interface Configuration {
-  actions: any // configuration data for actions
   regionMarker: string // the name of the attribute that denotes active regions
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
@@ -24,7 +23,6 @@ export interface Configuration {
 /** creates an empty configuration object for testing */
 export function scaffoldConfiguration(): Configuration {
   return {
-    actions: null,
     regionMarker: "",
     defaultFile: "",
     exclude: "",

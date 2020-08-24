@@ -43,7 +43,7 @@ export class TagMapper {
   }
 
   isOpenCloseTag(tagName: string): boolean {
-    if (tagName === "#text") {
+    if (tagName === "") {
       return false
     }
     return !this.isStandaloneTag(tagName)

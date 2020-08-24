@@ -17,6 +17,7 @@ Feature: selecting formatter via the config file
       | detailed  | testable documentation |
       | dot       | .                      |
       | progress  | Success                |
+      | silent    |                        |
       | summary   | Success                |
 
 

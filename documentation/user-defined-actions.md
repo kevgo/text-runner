@@ -177,6 +177,8 @@ TextRunner supports a variety of formatters:
 
 - **progress formatter:** Prints a progress bar
 
+- **silent formatter:** Prints only errors
+
 - **summary formatter:** Prints only a summary at the end
 
 ## Cleaning up unused activities

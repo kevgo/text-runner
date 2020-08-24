@@ -1,4 +1,5 @@
 import { Publications } from "../publications/publications"
+import { Commands } from "../../text-runner"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,
@@ -7,7 +8,7 @@ import { Publications } from "../publications/publications"
 export interface UserProvidedConfiguration {
   actions?: any
   regionMarker?: string
-  command?: string // the text-runner command to run
+  command?: Commands // the text-runner command to run
   configFileName?: string // name of the config file to use
   defaultFile?: string
   exclude?: string | string[]

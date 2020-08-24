@@ -62,7 +62,7 @@ export class TagMapper {
   }
 
   /** Returns the HTML tag for the given Remarkable type. */
-  tagForType(type: AstNodeType): string {
+  tagForType(type: AstNodeType): AstNodeTag {
     // handle text tag
     if (type === "text") {
       return ""
@@ -79,16 +79,16 @@ export class TagMapper {
 
     // handle generic opening tag
     if (type.endsWith("_open")) {
-      return type.substring(0, type.length - 5)
+      return type.substring(0, type.length - 5) as AstNodeTag
     }
 
     // handle generic closing tag
     if (type.endsWith("_close")) {
-      return "/" + type.substring(0, type.length - 6)
+      return ("/" + type.substring(0, type.length - 6)) as AstNodeTag
     }
 
     // handle generic stand-alone tag
-    return type
+    return type as AstNodeTag
   }
 
   /** Returns the Markdown node type for the given HTML tag. */

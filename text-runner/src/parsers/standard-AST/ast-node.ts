@@ -5,7 +5,7 @@ export interface AstNodeAttributes {
 }
 
 /** the MarkdownIt node types */
-export type AstNodeTypes =
+export type AstNodeType =
   | "anchor_open"
   | "anchor_close"
   | "bold_open"
@@ -25,7 +25,7 @@ export type AstNodeTypes =
   | "text"
 
 /** the HTML tags */
-export type AstNodeTags =
+export type AstNodeTag =
   | ""
   | "a"
   | "/a"
@@ -61,10 +61,10 @@ export class AstNode {
   }
 
   /** markdown type of AST node */
-  type: AstNodeTypes
+  type: AstNodeType
 
   /** HTML type of AST node */
-  readonly tag: AstNodeTags
+  readonly tag: AstNodeTag
 
   /** the file in which this AstNode occurs */
   readonly file: AbsoluteFilePath
@@ -79,8 +79,8 @@ export class AstNode {
   readonly attributes: AstNodeAttributes
 
   constructor(data: {
-    type: AstNodeTypes
-    tag: AstNodeTags
+    type: AstNodeType
+    tag: AstNodeTag
     file: AbsoluteFilePath
     line: number
     content: string

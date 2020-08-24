@@ -1,6 +1,6 @@
 import { strict as assert } from "assert"
 import { TagMapper } from "./tag-mapper"
-import { AstNodeTags, AstNodeTypes } from "./standard-AST/ast-node"
+import { AstNodeTag, AstNodeType } from "./standard-AST/ast-node"
 
 const tagMapper = new TagMapper()
 
@@ -23,9 +23,9 @@ test("TagMapper.tagForType()", function () {
   assert.equal(tagMapper.tagForType("bold_open"), "b", "known opening tag")
   assert.equal(tagMapper.tagForType("bold_close"), "/b", "known closing tag")
   assert.equal(tagMapper.tagForType("image"), "img", "known standalone tag")
-  assert.equal(tagMapper.tagForType("foo_open" as AstNodeTypes), "foo", "unknown opening tag")
-  assert.equal(tagMapper.tagForType("foo_open" as AstNodeTypes), "foo", "unknown closing tag")
-  assert.equal(tagMapper.tagForType("foo" as AstNodeTypes), "foo", "unknown standalone tag")
+  assert.equal(tagMapper.tagForType("foo_open" as AstNodeType), "foo", "unknown opening tag")
+  assert.equal(tagMapper.tagForType("foo_open" as AstNodeType), "foo", "unknown closing tag")
+  assert.equal(tagMapper.tagForType("foo" as AstNodeType), "foo", "unknown standalone tag")
   assert.equal(tagMapper.tagForType("text"), "", "text tag")
 })
 
@@ -37,6 +37,6 @@ test("TagMapper.typeForTag()", () => {
   assert.equal(tagMapper.typeForTag("/a", {}), "anchor_close", "closing anchor")
   assert.equal(tagMapper.typeForTag("a", { href: "foo" }), "link_open", "opening link")
   assert.equal(tagMapper.typeForTag("/a", { href: "foo" }), "link_close", "closing anchor")
-  assert.equal(tagMapper.typeForTag("foo" as AstNodeTags, {}), "foo_open", "unknown opening tag")
-  assert.equal(tagMapper.typeForTag("/foo" as AstNodeTags, {}), "foo_close", "unknown closing tag")
+  assert.equal(tagMapper.typeForTag("foo" as AstNodeTag, {}), "foo_open", "unknown opening tag")
+  assert.equal(tagMapper.typeForTag("/foo" as AstNodeTag, {}), "foo_close", "unknown closing tag")
 })

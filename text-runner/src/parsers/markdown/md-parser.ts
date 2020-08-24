@@ -2,7 +2,7 @@ import * as MarkdownIt from "markdown-it"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { HTMLParser } from "../html/html-parser"
-import { AstNode, AstNodeAttributes, AstNodeTags, AstNodeTypes } from "../standard-AST/ast-node"
+import { AstNode, AstNodeAttributes, AstNodeTag, AstNodeType } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./helpers/closing-tag-parser"
@@ -166,7 +166,7 @@ export class MarkdownParser {
         file,
         line,
         tag: mdNode.tag,
-        type: `${mdNode.tag}_open` as AstNodeTypes,
+        type: `${mdNode.tag}_open` as AstNodeType,
       })
     )
     return result
@@ -180,8 +180,8 @@ export class MarkdownParser {
         content: "",
         file,
         line,
-        tag: ("/" + node.tag) as AstNodeTags,
-        type: `${node.tag}_close` as AstNodeTypes,
+        tag: ("/" + node.tag) as AstNodeTag,
+        type: `${node.tag}_close` as AstNodeType,
       })
     )
     return result
@@ -344,7 +344,7 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTags,
+        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTag,
         type: mdNode.type,
       })
     )
@@ -364,7 +364,7 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line: closingTagLine,
-        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTags,
+        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTag,
         type: mdNode.type,
       })
     )
@@ -379,7 +379,7 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTags,
+        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTag,
         type: mdNode.type,
       })
     )

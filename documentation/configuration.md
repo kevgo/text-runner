@@ -71,5 +71,6 @@ $ text-run --config my-config.yml
 
 Read more about:
 
+- the [built-in actions](built-in-actions.md)
 - writing your own [user-defined actions](user-defined-actions.md)
 - [installing](installation.md) TextRunner

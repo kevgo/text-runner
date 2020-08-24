@@ -379,7 +379,7 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type) as AstNodeTag,
+        tag: this.tagMapper.tagForType(mdNode.type),
         type: mdNode.type,
       })
     )

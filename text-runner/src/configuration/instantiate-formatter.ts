@@ -5,6 +5,7 @@ import { ProgressFormatter } from "../formatters/progress-formatter"
 import { SummaryFormatter } from "../formatters/summary-formatter"
 import { Formatter } from "../formatters/types/formatter"
 import { Configuration } from "./types/configuration"
+import { SilentFormatter } from "../formatters/silent-formatter"
 
 export function instantiateFormatter(
   name: string | undefined,
@@ -18,11 +19,13 @@ export function instantiateFormatter(
       return new DetailedFormatter(stepCount, configuration)
     case "progress":
       return new ProgressFormatter(stepCount, configuration)
+    case "silent":
+      return new SilentFormatter(stepCount, configuration)
     case "summary":
       return new SummaryFormatter(stepCount, configuration)
     default:
       throw new UnprintedUserError(
-        `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress, summary`
+        `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress, silent, summary`
       )
   }
 }

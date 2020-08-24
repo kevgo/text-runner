@@ -55,17 +55,19 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
   }
 
   // step 9: write stats
-  let text = "\n"
-  let colorFn
-  if (results.length === 0) {
-    colorFn = color.green
-    text += color.green("Success! ")
-  } else {
-    colorFn = color.red
-    text += color.red(`${results.length} errors, `)
+  if (config.formatterName !== "silent") {
+    let text = "\n"
+    let colorFn
+    if (results.length === 0) {
+      colorFn = color.green
+      text += color.green("Success! ")
+    } else {
+      colorFn = color.red
+      text += color.red(`${results.length} errors, `)
+    }
+    text += colorFn(`${links.length} activities in ${filenames.length} files`)
+    text += colorFn(`, ${stats.duration()}`)
+    console.log(color.bold(text))
   }
-  text += colorFn(`${links.length} activities in ${filenames.length} files`)
-  text += colorFn(`, ${stats.duration()}`)
-  console.log(color.bold(text))
   return results
 }

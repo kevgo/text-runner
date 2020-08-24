@@ -2,6 +2,7 @@ import * as minimist from "minimist"
 import * as path from "path"
 import { availableCommands } from "../../commands/available-commands"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
+import { Commands } from "../../text-runner"
 
 /**
  * Parses the command-line options received
@@ -38,7 +39,7 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: ["offline", "keep-workspace"] })
   const result: UserProvidedConfiguration = {
-    command: cliArgs._[0], // the first argument is the command to run, as in "text-run debug"
+    command: cliArgs._[0] as Commands, // the first argument is the command to run, as in "text-run debug"
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     fileGlob: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"

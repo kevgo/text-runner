@@ -14,6 +14,8 @@ import { determineConfiguration } from "./configuration/determine-configuration"
 import { Configuration } from "./configuration/types/configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 
+export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
+
 /**
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line

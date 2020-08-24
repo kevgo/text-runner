@@ -1,5 +1,5 @@
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import { AstNode } from "../../standard-AST/ast-node"
+import { AstNode, AstNodeTags } from "../../standard-AST/ast-node"
 import { AstNodeList } from "../../standard-AST/ast-node-list"
 import { TagMapper } from "../../tag-mapper"
 
@@ -24,7 +24,7 @@ export class ClosingTagParser {
     if (!match) {
       throw new Error(`no tag parsed in ${tag}`)
     }
-    const tagName = match[1].replace(/ /g, "")
+    const tagName = match[1].replace(/ /g, "") as AstNodeTags
     const result = new AstNodeList()
     result.push(
       new AstNode({

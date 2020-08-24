@@ -4,6 +4,46 @@ export interface AstNodeAttributes {
   [key: string]: string
 }
 
+/** the MarkdownIt node types */
+export type AstNodeTypes =
+  | "anchor_open"
+  | "anchor_close"
+  | "bold_open"
+  | "bold_close"
+  | "bullet_list_open"
+  | "bullet_list_close"
+  | "code_open"
+  | "code_close"
+  | "fence_open"
+  | "fence_close"
+  | "htmltag"
+  | "hr"
+  | "image"
+  | "linebreak"
+  | "link_open"
+  | "link_close"
+  | "text"
+
+/** the HTML tags */
+export type AstNodeTags =
+  | ""
+  | "a"
+  | "/a"
+  | "b"
+  | "/b"
+  | "br"
+  | "code"
+  | "/code"
+  | "hr"
+  | "i"
+  | "img"
+  | "li"
+  | "ol"
+  | "p"
+  | "pre"
+  | "/pre"
+  | "ul"
+
 /** a node in the standardized Markdown/HTML AST */
 export class AstNode {
   static scaffold(data: any = {}): AstNode {
@@ -21,10 +61,10 @@ export class AstNode {
   }
 
   /** markdown type of AST node */
-  type: string
+  type: AstNodeTypes
 
   /** HTML type of AST node */
-  readonly tag: string
+  readonly tag: AstNodeTags
 
   /** the file in which this AstNode occurs */
   readonly file: AbsoluteFilePath
@@ -39,8 +79,8 @@ export class AstNode {
   readonly attributes: AstNodeAttributes
 
   constructor(data: {
-    type: string
-    tag: string
+    type: AstNodeTypes
+    tag: AstNodeTags
     file: AbsoluteFilePath
     line: number
     content: string

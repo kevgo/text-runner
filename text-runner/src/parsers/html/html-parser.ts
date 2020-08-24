@@ -1,7 +1,7 @@
 import * as parse5 from "parse5"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNode } from "../standard-AST/ast-node"
+import { AstNode, AstNodeTags, AstNodeTypes } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { standardizeHTMLAttributes } from "./helpers/standardize-html-attributes"
@@ -90,7 +90,7 @@ export class HTMLParser {
         file,
         line: startLine,
         tag: node.tagName,
-        type: this.tagMapper.openingTypeForTag(node.tagName, attributes),
+        type: this.tagMapper.openingTypeForTag(node.tagName, attributes) as AstNodeTypes,
       })
     )
 
@@ -110,7 +110,7 @@ export class HTMLParser {
       throw new Error(`cannot determine end line for node ${node}`)
     }
     if (!node.sourceCodeLocation || (node.sourceCodeLocation && node.sourceCodeLocation.endTag)) {
-      const tag = "/" + node.tagName
+      const tag = ("/" + node.tagName) as AstNodeTags
       result.push(
         new AstNode({
           attributes: {},

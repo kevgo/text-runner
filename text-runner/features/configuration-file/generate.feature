@@ -46,9 +46,4 @@ Feature: generating a configuration file
 
       # whether to skip tests that require an online connection
       offline: false
-
-      # action-specific configuration
-      actions:
-        runConsoleCommand:
-          globals: {}
       """

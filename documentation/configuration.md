@@ -53,11 +53,6 @@ useSystemTempDirectory: false
 
 # whether to skip tests that require an online connection
 offline: false
-
-# action-specific configuration
-actions:
-  runConsoleCommand:
-    globals: {}
 ```
 
 </a>
@@ -76,6 +71,5 @@ $ text-run --config my-config.yml
 
 Read more about:
 
-- the [built-in actions](built-in-actions.md)
 - writing your own [user-defined actions](user-defined-actions.md)
 - [installing](installation.md) TextRunner

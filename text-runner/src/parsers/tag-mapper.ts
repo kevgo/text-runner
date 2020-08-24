@@ -69,12 +69,9 @@ export class TagMapper {
     }
 
     // handle explicitly mapped values
-    // TODO: remove if to simplify
-    if (this.typeTagMappings.has(type)) {
-      const result = this.typeTagMappings.get(type)
-      if (result) {
-        return result
-      }
+    const result = this.typeTagMappings.get(type)
+    if (result) {
+      return result
     }
 
     // handle generic opening tag
@@ -102,12 +99,9 @@ export class TagMapper {
     }
 
     // check for known tags
-    // TODO: remove if
-    if (this.tagTypeMappings.has(tag)) {
-      const result = this.tagTypeMappings.get(tag)
-      if (result) {
-        return result
-      }
+    const result = this.tagTypeMappings.get(tag)
+    if (result) {
+      return result
     }
 
     // here it is an unknown tag, we assume it is opening-closing

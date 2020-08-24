@@ -1,4 +1,5 @@
 import { Publications } from "../publications/publications"
+import { FormatterName } from "../../formatters/types/formatter-name"
 
 /**
  * All configuration values that are provided to the application
@@ -11,7 +12,7 @@ export interface Configuration {
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
   fileGlob: string // glob of the files to test
-  formatterName: string // name of the Formatter class to use
+  formatterName: FormatterName // name of the Formatter class to use
   keepWorkspace: boolean // whether to keep the tmp dir if tests successful
   publications: Publications // folder mappings
   offline: boolean // whether to skip built-in tests that require a network connection
@@ -28,7 +29,7 @@ export function scaffoldConfiguration(): Configuration {
     defaultFile: "",
     exclude: "",
     fileGlob: "",
-    formatterName: "",
+    formatterName: "dot",
     keepWorkspace: false,
     offline: false,
     publications: new Publications(),

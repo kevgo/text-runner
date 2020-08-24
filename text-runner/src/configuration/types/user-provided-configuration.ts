@@ -1,4 +1,5 @@
 import { Publications } from "../publications/publications"
+import { FormatterName } from "../../formatters/types/formatter-name"
 import { Commands } from "../../text-runner"
 
 /**
@@ -13,7 +14,7 @@ export interface UserProvidedConfiguration {
   defaultFile?: string
   exclude?: string | string[]
   fileGlob?: string // files to test
-  formatterName?: string // name of the formatter to use
+  formatterName?: FormatterName // name of the formatter to use
   keepWorkspace?: boolean
   offline?: boolean
   publications?: Publications

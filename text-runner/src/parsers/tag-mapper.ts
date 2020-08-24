@@ -10,7 +10,7 @@ type TagTypeMapping = Map<AstNodeTag, AstNodeType>
  * Tag types: "b", "/b", "img", etc
  */
 export class TagMapper {
-  /** Mappings of tags that have opening and closing varieties. */
+  /** tags that have opening and closing versions */
   private static readonly OPEN_CLOSE_MAPPINGS = new Map<string, AstNodeTag>([
     ["bold", "b"],
     ["bullet_list", "ul"],
@@ -22,17 +22,17 @@ export class TagMapper {
     ["paragraph", "p"],
   ])
 
-  /** Mappings of tags that stand alone, i.e. have no opening and closing varieties. */
+  /** tags that stand alone, i.e. have no opening and closing versions */
   private static readonly STANDALONE_MAPPINGS: TypeTagMapping = new Map([
     ["hr", "hr"],
     ["image", "img"],
     ["linebreak", "br"],
   ])
 
-  /** Maps Remarkable types to their corresponding HTML tags */
+  /** maps Remarkable types to their corresponding HTML tags */
   private readonly typeTagMappings: TypeTagMapping
 
-  /** Maps HTML tag names to their corresponding Remarkable types */
+  /** maps HTML tag names to their corresponding Remarkable types */
   private readonly tagTypeMappings: TagTypeMapping
 
   constructor() {
@@ -102,6 +102,7 @@ export class TagMapper {
     }
 
     // check for known tags
+    // TODO: remove if
     if (this.tagTypeMappings.has(tag)) {
       const result = this.tagTypeMappings.get(tag)
       if (result) {

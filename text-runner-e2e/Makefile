@@ -30,9 +30,6 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	@echo Text-Runner-E2E linters ...
 
-lint:  # lints all files in this codebase
-	@echo Text-Runner-E2E linters ...
-
 test: cuke  # runs all tests
 
 unit:  # runs the unit tests

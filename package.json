@@ -14,6 +14,7 @@
     "examples/multiple-returns",
     "shared/cucumber-steps",
     "text-runner",
+    "text-runner-e2e",
     "textrun-action",
     "textrun-extension",
     "textrun-javascript",

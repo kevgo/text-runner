@@ -1,0 +1,10 @@
+{
+  "name": "text-runner-e2e",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "ISC",
+  "devDependencies": {
+    "cucumber": "6.0.5",
+    "shared-cucumber-steps": "0.0.0"
+  }
+}

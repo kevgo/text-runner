@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "dependencies": {
-    "strip-ansi": "6.0.0"
+    "strip-ansi": "6.0.0",
+    "text-runner": "4.0.3"
   },
   "devDependencies": {
     "mocha": "8.0.1",

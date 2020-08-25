@@ -7,6 +7,7 @@ import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import stripAnsi = require("strip-ansi")
 import * as helpers from "./helpers"
+import {} from "text-runner"
 
 /**
  * World provides step implementations that run and test TextRunner
@@ -31,6 +32,10 @@ function World() {
     if (this.process.exitCode && !params.expectError) {
       console.log(this.process.output.fullText())
     }
+  }
+
+  this.executeViaAPI = async function (params: { command: string; expectError: boolean; cwd: string }) {
+    //
   }
 
   this.verifyCallError = (expectedError: string) => {

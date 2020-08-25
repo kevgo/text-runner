@@ -56,7 +56,6 @@
     "@types/yamljs": "0.2.31",
     "array-flatten": "3.0.0",
     "chai": "4.2.0",
-    "cucumber": "6.0.5",
     "dim-console": "0.4.4",
     "mocha": "8.0.1",
     "prettier": "2.0.5",

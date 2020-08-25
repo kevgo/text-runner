@@ -37,7 +37,7 @@ jobs:
     steps:
       - restore_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && ../.circleci/run-if-affected make cuke-ci
+      - run: cd text-runner-e2e && ../.circleci/run-if-affected make cuke-ci
 
   text-runner-others:
     <<: *defaults

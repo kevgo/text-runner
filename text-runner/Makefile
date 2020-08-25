@@ -8,17 +8,6 @@ clean:  # Removes all build artifacts
 
 cuke: build  # runs the feature specs
 	@echo Text-Runner E2E tests ...
-	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
-
-cuke-ci:  # runs the feature specs on CI
-	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8
-
-cuke-offline: build  # runs the feature specs that don't need an online connection
-	@echo running Text-Runner offline feature specs ...
-	@${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
-
-cuke-win:  # runs the feature specs on Windows
-	@${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs:  # verify documentation
 	@echo Text-Runner documentation tests ...
@@ -51,12 +40,15 @@ prepublish: build  # prepares the code base for publishing
 stats:  # shows code statistics
 	@find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
-test: lint unit cuke docs  # runs all tests
+test: lint unit docs  # runs all tests
+	@(cd ../text-runner-e2e && make --no-print-dir cuke)
 .PHONY: test
 
-test-ts: unit cuke  # runs only the TypeScript tests
+test-ts: unit  # runs only the TypeScript tests
+	@(cd ../text-runner-e2e && make --no-print-dir cuke-offline)
 
 test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
+	@(cd ../text-runner-e2e && make --no-print-dir cuke-offline)
 
 unit:  # runs the unit tests
 	@echo Text-Runner unit tests ...

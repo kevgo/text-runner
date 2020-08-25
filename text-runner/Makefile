@@ -41,8 +41,6 @@ stats:  # shows code statistics
 	@find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
 test: lint unit docs  # runs all tests
-	@(cd ../text-runner-e2e && make --no-print-dir cuke)
-.PHONY: test
 
 test-ts: unit  # runs only the TypeScript tests
 	@(cd ../text-runner-e2e && make --no-print-dir cuke-offline)

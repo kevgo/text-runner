@@ -47,6 +47,7 @@ suite("actionFinder", function () {
   })
 
   test("loadBuiltinActions", function () {
+    this.timeout(10_000)
     const result = loadBuiltinActions()
     assert.deepEqual(result.names(), ["check-image", "check-link", "test"])
   })

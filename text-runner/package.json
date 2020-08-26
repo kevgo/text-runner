@@ -57,8 +57,7 @@
     "dim-console": "0.4.4",
     "ps-tree": "1.2.0",
     "shared-cucumber-steps": "0.0.0",
-    "shelljs": "0.8.4",
-    "ts-node": "8.10.2"
+    "shelljs": "0.8.4"
   },
   "files": [
     "bin/text-run",

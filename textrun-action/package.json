@@ -7,7 +7,6 @@
     "text-runner": "4.0.3"
   },
   "devDependencies": {
-    "tslint": "6.1.2",
     "typescript": "3.9.7"
   }
 }

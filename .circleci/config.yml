@@ -9,18 +9,6 @@ jobs:
       - image: circleci/node:12
     steps:
       - checkout
-      - restore_cache:
-          name: restore Yarn cache
-          keys:
-            - yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-{{ .Branch }}
-            - yarn-master
-            - yarn-
       - run: yarn
       - run: make build-all
       - run: make test-all
-      - save_cache:
-          name: save Yarn cache
-          key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules/

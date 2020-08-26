@@ -15,11 +15,8 @@ install:
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:
-  - cd text-runner
-  - make build
-  - cd ../shared/cucumber-steps
-  - make build
-  - cd ../../text-runner-e2e
+  - make build-all
+  - cd text-runner-e2e
   - make cuke-smoke-win
 
 # Don't double-build PRs

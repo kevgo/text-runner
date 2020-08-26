@@ -35,4 +35,4 @@ test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
 	@echo textrun-javascript unit tests ...
-	@${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"
+	@${CURDIR}/../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"

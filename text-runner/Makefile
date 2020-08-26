@@ -40,7 +40,7 @@ lint:  # lints all files in this codebase
 
 parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --offline --format dot &
-	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
+	${CURDIR}/../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
 	${CURDIR}/bin/text-run dynamic --format dot
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
 
@@ -60,4 +60,4 @@ test-offline: lint unit cuke-offline docs   # runs all tests that don't need an 
 
 unit:  # runs the unit tests
 	@echo Text-Runner unit tests ...
-	@${CURDIR}/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"
+	@${CURDIR}/../node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"

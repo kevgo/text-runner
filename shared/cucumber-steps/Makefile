@@ -31,4 +31,4 @@ test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
 	@echo shared features unit tests ...
-	@${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"
+	@${CURDIR}/../../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"

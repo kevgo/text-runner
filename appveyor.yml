@@ -19,7 +19,7 @@ test_script:
   - make build
   - cd ../shared/cucumber-steps
   - make build
-  - cd ../..
+  - cd ../../text-runner-e2e
   - make cuke-smoke-win
 
 # Don't double-build PRs

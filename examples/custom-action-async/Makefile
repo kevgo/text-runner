@@ -5,8 +5,8 @@ clean:
 cuke:
 
 docs:
-	@echo custom-action-async documentation tests ...
-	@${CURDIR}/node_modules/.bin/text-run --format progress
+	echo custom-action-async documentation tests ...
+	${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
 

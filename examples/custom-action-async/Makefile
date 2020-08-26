@@ -1,24 +1,19 @@
 build:
-	@echo custom-action-async build ...
 
 clean:
-	@echo custom-action-async cleanup ...
 
 cuke:
-	@echo custom-action-async E2E tests ...
 
 docs:
 	@echo custom-action-async documentation tests ...
 	@${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
-	@echo custom-action-async auto-fixes ...
 
 lint:
-	@echo custom-action-async linters ...
 
 unit:
-	@echo custom-action-async linters ...
 
 test:
-	@echo custom-action-async tests ...
+
+.SILENT:

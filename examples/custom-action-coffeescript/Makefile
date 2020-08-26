@@ -1,24 +1,19 @@
 build:
-	@echo custom-action-coffeescript build ...
 
 clean:
-	@echo custom-action-coffeescript cleanup ...
 
 cuke:
-	@echo custom-action-coffeescript E2E tests ...
 
 docs:
 	@echo custom-action-coffeescript documentation tests ...
 	@${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
-	@echo custom-action-coffeescript auto-fixes ...
 
 lint:
-	@echo custom-action-coffeescript linters ...
 
 unit:
-	@echo custom-action-coffeescript linters ...
 
 test:
-	@echo custom-action-coffeescript tests ...
+
+.SILENT:

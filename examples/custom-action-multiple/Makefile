@@ -1,24 +1,19 @@
 build:
-	@echo custom-action-multiple build ...
 
 clean:
-	@echo custom-action-multiple cleanup ...
 
 cuke:
-	@echo custom-action-multiple E2E tests ...
 
 docs:
 	@echo custom-action-multiple documentation tests ...
 	@${CURDIR}/node_modules/.bin/text-run
 
 fix:
-	@echo custom-action-multiple auto-fixes ...
 
 lint:
-	@echo custom-action-multiple linters ...
 
 unit:
-	@echo custom-action-multiple linters ...
 
 test:
-	@echo custom-action-multiple tests ...
+
+.SILENT:

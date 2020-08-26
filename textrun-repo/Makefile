@@ -34,4 +34,5 @@ test: lint unit cuke docs  # runs all tests
 test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
-	@echo textrun-workspace unit tests ...
+
+.SILENT:

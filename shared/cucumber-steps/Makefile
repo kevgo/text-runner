@@ -7,10 +7,8 @@ clean:  # Removes all build artifacts
 	@rm -rf dist
 
 cuke: build  # runs the feature specs
-	@echo shared features E2E tests ...
 
 docs:  # runs the documentation tests
-	@echo shared features documentation tests ...
 
 fix:  # runs the auto-fixers
 	@echo shared features auto-fixes ...
@@ -32,3 +30,5 @@ test-ts: unit cuke  # runs all code tests
 unit:  # runs the unit tests
 	@echo shared features unit tests ...
 	@${CURDIR}/../../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"
+
+.SILENT:

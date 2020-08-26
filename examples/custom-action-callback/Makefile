@@ -1,24 +1,19 @@
 build:
-	@echo custom-action-callback build ...
 
 clean:
-	@echo custom-action-callback cleanup ...
 
 cuke:
-	@echo custom-action-callback E2E tests ...
 
 docs:
 	@echo custom-action-callback documentation tests ...
 	@${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
-	@echo custom-action-callback auto-fixes ...
 
 lint:
-	@echo custom-action-callback linters ...
 
 unit:
-	@echo custom-action-callback linters ...
 
 test:
-	@echo custom-action-callback tests ...
+
+.SILENT:

@@ -7,6 +7,6 @@
     "textrun-shell": "0.0.0",
     "textrun-workspace": "0.0.0"
   },
-  "license": "MIT",
+  "license": "ISC",
   "private": true
 }

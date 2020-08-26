@@ -2,7 +2,7 @@
   "name": "textrun-javascript",
   "version": "0.0.0",
   "main": "dist/index.js",
-  "license": "MIT",
+  "license": "ISC",
   "dependencies": {
     "text-runner": "4.0.3"
   },

@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "colorette": "1.2.1",
-    "cucumber": "6.0.5",
     "shared-cucumber-steps": "0.0.0",
     "textrun-action": "0.0.0",
     "textrun-extension": "0.0.0",

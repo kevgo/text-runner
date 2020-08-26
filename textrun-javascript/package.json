@@ -7,7 +7,6 @@
     "text-runner": "4.0.3"
   },
   "devDependencies": {
-    "cucumber": "6.0.5",
     "shared-cucumber-steps": "0.0.0",
     "textrun-npm": "0.0.0",
     "tslint": "6.1.2",

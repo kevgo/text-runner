@@ -55,7 +55,6 @@
     "@types/shelljs": "0.8.8",
     "@types/yamljs": "0.2.31",
     "array-flatten": "3.0.0",
-    "cucumber": "6.0.5",
     "dim-console": "0.4.4",
     "ps-tree": "1.2.0",
     "remark-cli": "8.0.1",

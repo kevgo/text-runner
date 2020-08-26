@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "colorette": "1.2.1",
-    "cucumber": "6.0.5",
     "textrun-action": "0.0.0",
     "tslint": "6.1.2",
     "typescript": "3.9.7"

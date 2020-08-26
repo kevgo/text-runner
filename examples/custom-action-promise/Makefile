@@ -1,24 +1,19 @@
 build:
-	@echo custom-action-promise build ...
 
 clean:
-	@echo custom-action-promise cleanup ...
 
 cuke:
-	@echo custom-action-promise E2E tests ...
 
 docs:
 	@echo custom-action-promise documentation tests ...
 	@${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
-	@echo custom-action-promise auto-fixes ...
 
 lint:
-	@echo custom-action-promise linters ...
 
 unit:
-	@echo custom-action-promise linters ...
 
 test:
-	@echo custom-action-promise tests ...
+
+.SILENT:

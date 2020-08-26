@@ -1,24 +1,19 @@
 build:
-	@echo custom-action-typescript build ...
 
 clean:
-	@echo custom-action-typescript cleanup ...
 
 cuke:
-	@echo custom-action-typescript E2E tests ...
 
 docs:
 	@echo custom-action-typescript documentation tests ...
 	@${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
-	@echo custom-action-typescript auto-fixes ...
 
 lint:
-	@echo custom-action-typescript linters ...
 
 unit:
-	@echo custom-action-typescript linters ...
 
 test:
-	@echo custom-action-typescript tests ...
+
+.SILENT:

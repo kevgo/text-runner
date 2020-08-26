@@ -7,7 +7,6 @@ clean:  # Removes all build artifacts
 	@rm -rf dist
 
 cuke:
-	@echo textrun-action E2E tests ...
 
 docs: build  # runs the documentation tests
 	@echo textrun-action documentation tests ...
@@ -31,4 +30,5 @@ lint:  # lints all files in this codebase
 test: lint docs  # runs all tests
 
 unit:
-	@echo textrun-action unit tests ...
+
+.SILENT:

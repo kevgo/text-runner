@@ -14,6 +14,6 @@ lint:
 
 unit:
 
-test:
+test: docs
 
 .SILENT:

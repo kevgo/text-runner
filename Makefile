@@ -34,9 +34,6 @@ cuke-changed:  # runs the E2E tests of codebases changed in this branch
 cuke-open:  # runs the E2E tests of codebases with uncommitted changes
 	@${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory cuke
 
-cuke-smoke-win:  # runs the Windows smoke tests
-	@${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format progress
-
 docs:  # runs the documentation tests
 	@echo documentation tests for root dir ...
 	@${CURDIR}/text-runner/bin/text-run --offline --format progress "*.md"

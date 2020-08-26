@@ -11,4 +11,10 @@ jobs:
       - checkout
       - run: yarn
       - run: make build-all
-      - run: make test-all
+      - run: echo $CIRCLE_BRANCH
+      - run: |
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            make test-all
+          else
+            make test-affected
+          fi

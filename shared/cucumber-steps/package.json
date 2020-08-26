@@ -5,10 +5,7 @@
     "strip-ansi": "6.0.0"
   },
   "devDependencies": {
-    "mocha": "8.0.1",
-    "prettier": "2.0.5",
-    "tslint": "6.1.2",
-    "typescript": "3.9.7"
+    "@types/cucumber": "6.0.1"
   },
   "license": "ISC",
   "private": true

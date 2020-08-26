@@ -55,7 +55,7 @@ docs-open:  # runs the documentation tests of codebases with uncommitted changes
 
 fix:  # auto-fixes the root directory
 	@echo fixing root dir ...
-	${CURDIR}/node_modules/.bin/prettier --write .
+	${CURDIR}/../node_modules/.bin/prettier --write .
 
 fix-affected:  # runs the auto-fixes for the codebases affected by changes in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory fix
@@ -74,6 +74,7 @@ help:  # prints all make targets
 
 lint:  # lints the root directory
 	@echo linting root dir ...
+	@${CURDIR}/node_modules/.bin/remark . --quiet &
 	@${CURDIR}/node_modules/.bin/prettier -l '.'
 
 lint-affected:  # runs the linters for the codebases affected by changes in this branch
@@ -124,3 +125,6 @@ test-open:  # runs all tests of codebases with uncommitted changes
 
 update-all:  # updates the dependencies for the entire mono-repo
 	@${CURDIR}/node_modules/.bin/lerna exec --parallel -- yarn upgrade --latest
+
+unit-all:  # runs all tests
+	@${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make --no-print-directory unit

@@ -29,3 +29,6 @@ lint:  # lints all files in this codebase
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 test: lint docs  # runs all tests
+
+unit:
+	@echo textrun-action unit tests ...

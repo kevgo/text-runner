@@ -4,5 +4,6 @@
   "devDependencies": {
     "coffeescript": "2.5.1",
     "text-runner": "4.0.3"
-  }
+  },
+  "private": true
 }

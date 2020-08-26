@@ -5,8 +5,5 @@
   "license": "ISC",
   "dependencies": {
     "text-runner": "4.0.3"
-  },
-  "devDependencies": {
-    "typescript": "3.9.7"
   }
 }

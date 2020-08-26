@@ -8,7 +8,6 @@
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "textrun-npm": "0.0.0",
-    "typescript": "3.9.7"
+    "textrun-npm": "0.0.0"
   }
 }

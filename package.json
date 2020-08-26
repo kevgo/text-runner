@@ -29,6 +29,7 @@
     "lerna": "3.22.1",
     "mocha": "8.0.1",
     "prettier": "2.0.5",
-    "tslint": "6.1.2"
+    "tslint": "6.1.2",
+    "typescript": "3.9.7"
   }
 }

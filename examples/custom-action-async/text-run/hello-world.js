@@ -1,8 +1,5 @@
-async function delay(duration) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, duration)
-  })
-}
+const util = require("util")
+const delay = util.promisify(setTimeout)
 
 module.exports = async (action) => {
   await delay(1)

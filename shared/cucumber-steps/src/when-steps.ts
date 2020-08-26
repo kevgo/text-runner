@@ -8,13 +8,8 @@ When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function 
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
-  try {
-    await this.execute({ command: "run", expectError })
-  } catch (err) {
-    finish(expectError, err)
-    return
-  }
-  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
+  const errors = await this.executeViaAPI({ command: "run", expectError })
+  finish(expectError, errors[0])
 })
 
 When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {

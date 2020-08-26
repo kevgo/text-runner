@@ -75,7 +75,7 @@ help:  # prints all make targets
 lint:  # lints the root directory
 	@echo linting root dir ...
 	@${CURDIR}/node_modules/.bin/remark . --quiet &
-	@${CURDIR}/../node_modules/.bin/prettier -l '.'
+	@${CURDIR}/node_modules/.bin/prettier -l '.'
 
 lint-affected:  # runs the linters for the codebases affected by changes in this branch
 	@${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory lint

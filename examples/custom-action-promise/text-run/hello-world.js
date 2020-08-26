@@ -1,7 +1,7 @@
-module.exports = ({ log }) => {
+module.exports = (action) => {
   return new Promise(function (resolve) {
     setTimeout(function () {
-      log("Hello World!")
+      action.log("Hello World!")
       setTimeout(function () {
         resolve()
       }, 1)

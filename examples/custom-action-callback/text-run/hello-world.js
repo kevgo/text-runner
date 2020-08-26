@@ -1,6 +1,6 @@
-module.exports = ({ log }, done) => {
+module.exports = (action, done) => {
   setTimeout(function () {
-    log("Hello World!")
+    action.log("Hello World!")
     setTimeout(function () {
       done()
     }, 1)

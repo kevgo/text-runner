@@ -24,7 +24,9 @@
     "textrun-workspace"
   ],
   "devDependencies": {
+    "@types/chai": "4.2.11",
     "@types/mocha": "8.0.0",
+    "@types/node": "14.0.23",
     "chai": "4.2.0",
     "cucumber": "6.0.5",
     "lerna": "3.22.1",

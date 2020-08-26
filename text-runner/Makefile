@@ -28,14 +28,14 @@ docs:  # verify documentation
 fix:  # runs the fixers
 	@echo Text-Runner auto-fixes ...
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
-	@${CURDIR}/node_modules/.bin/prettier --write .
+	@${CURDIR}/../node_modules/.bin/prettier --write .
 
 help:  # prints all make targets
 	@cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints all files in this codebase
 	@echo Text-Runner linters ...
-	@${CURDIR}/node_modules/.bin/prettier -l .
+	@${CURDIR}/../node_modules/.bin/prettier -l .
 	@${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 parallel: lint  # runs all tests in parallel

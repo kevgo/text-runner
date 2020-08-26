@@ -9,7 +9,6 @@
   "devDependencies": {
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
-    "prettier": "2.0.5",
     "shared-cucumber-steps": "0.0.0",
     "textrun-npm": "0.0.0",
     "tslint": "6.1.2",

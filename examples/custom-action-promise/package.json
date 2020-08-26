@@ -1,8 +1,0 @@
-{
-  "name": "custom-action-promise-example",
-  "version": "0.0.0",
-  "devDependencies": {
-    "text-runner": "4.0.3"
-  },
-  "private": true
-}

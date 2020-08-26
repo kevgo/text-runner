@@ -4,8 +4,8 @@ async function delay(duration) {
   })
 }
 
-module.exports = async ({ log }) => {
+module.exports = async (action) => {
   await delay(1)
-  log("Hello World!")
+  action.log("Hello World!")
   await delay(1)
 }

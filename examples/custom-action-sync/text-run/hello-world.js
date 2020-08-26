@@ -1,3 +1,3 @@
-module.exports = ({ log }) => {
-  log("Hello World!")
+module.exports = (action) => {
+  action.log("Hello World!")
 }

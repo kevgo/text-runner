@@ -1,13 +1,12 @@
 version: 2
 
 defaults: &defaults
-  working_directory: ~/repo
-  docker:
-    - image: circleci/node:12
 
 jobs:
-  checkout_code:
-    <<: *defaults
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:12
     steps:
       - checkout
       - restore_cache:
@@ -19,6 +18,7 @@ jobs:
             - yarn-
       - run: yarn
       - run: make build-all
+      - run: make test-all
       - save_cache:
           key: code-{{ .Environment.CIRCLE_SHA1 }}
           paths:
@@ -28,70 +28,3 @@ jobs:
           key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules/
-
-  text-runner-cuke:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && ../.circleci/run-if-affected make cuke-ci
-
-  text-runner-others:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd text-runner && ../.circleci/run-if-affected make lint unit docs
-
-  textrun-action:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-action && ../.circleci/run-if-affected make test
-
-  textrun-javascript:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-javascript && ../.circleci/run-if-affected make test
-
-  textrun-npm:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-npm && ../.circleci/run-if-affected make test
-
-  textrun-shell:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          key: code-{{ .Environment.CIRCLE_SHA1 }}
-      - run: cd textrun-shell && ../.circleci/run-if-affected make test
-
-workflows:
-  version: 2
-
-  testing:
-    jobs:
-      - checkout_code
-      - text-runner-cuke:
-          requires:
-            - checkout_code
-      - text-runner-others:
-          requires:
-            - checkout_code
-      - textrun-action:
-          requires:
-            - checkout_code
-      - textrun-javascript:
-          requires:
-            - checkout_code
-      - textrun-npm:
-          requires:
-            - checkout_code
-      - textrun-shell:
-          requires:
-            - checkout_code

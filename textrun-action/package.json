@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "text-runner": "4.0.3"
+    "text-runner": "4.0.3",
+    "textrun-action": "0.0.0"
   }
 }

@@ -5,8 +5,8 @@ clean:
 cuke:
 
 docs:
-	@echo custom-action-coffeescript documentation tests ...
-	@${CURDIR}/node_modules/.bin/text-run --format progress
+	echo custom-action-coffeescript documentation tests ...
+	${CURDIR}/node_modules/.bin/text-run --format progress
 
 fix:
 

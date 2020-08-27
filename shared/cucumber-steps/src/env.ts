@@ -1,6 +1,6 @@
 import { After, Before } from "cucumber"
 import { endChildProcesses } from "end-child-processes"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import * as rimraf from "rimraf"
 import * as tmp from "tmp-promise"
@@ -22,7 +22,7 @@ Before(async function () {
     // nothing to do here
   }
   if (rootDirExists) {
-    await fs.remove(this.rootDir)
+    await fs.rmdir(this.rootDir, { recursive: true })
   }
   await fs.mkdir(this.rootDir)
 })

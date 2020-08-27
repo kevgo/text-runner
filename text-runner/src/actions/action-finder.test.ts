@@ -54,10 +54,8 @@ suite("actionFinder", function () {
 
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", function () {
-      const result = loadCustomActions(
-        path.join(__dirname, "..", "..", "..", "examples", "custom-action-sync", "text-run")
-      )
-      assert.typeOf(result.get("hello-world"), "function")
+      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "examples", "custom-action", "text-run"))
+      assert.typeOf(result.get("hello-world-sync"), "function")
     })
   })
 })

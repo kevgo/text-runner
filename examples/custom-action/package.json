@@ -1,5 +1,5 @@
 {
-  "name": "custom-actions",
+  "name": "custom-action-examples",
   "version": "0.0.0",
   "devDependencies": {
     "text-runner": "4.0.3"

@@ -9,13 +9,13 @@ type workingDirSetting = string | boolean
  * Creates the temp directory to run the tests in
  * @param configSetting TRUE: use system temp dir, FALSE: use local tmp dir, STRING: use given temp dir
  */
-export async function createWorkingDir(configSetting: workingDirSetting) {
-  const workingDir = await getWorkingDirPath(configSetting)
-  await fs.ensureDir(workingDir)
-  return workingDir
+export async function createWorkspace(configSetting: workingDirSetting): Promise<string> {
+  const workspacePath = await getWorkspacePath(configSetting)
+  await fs.ensureDir(workspacePath)
+  return workspacePath
 }
 
-async function getWorkingDirPath(setting: workingDirSetting): Promise<string> {
+async function getWorkspacePath(setting: workingDirSetting): Promise<string> {
   if (typeof setting === "string") {
     return setting
   } else if (setting === false) {

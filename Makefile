@@ -90,19 +90,19 @@ lint-open:  # runs the linters of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory lint
 
 list-affected:  # displays the codebases affected by changes in the current branch
-	${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --toposort
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents -- pwd
 
 list-all:  # displays all codebases
-	${CURDIR}/node_modules/.bin/lerna ls --toposort
+	${CURDIR}/node_modules/.bin/lerna exec -- pwd
 
 list-changed:  # displays the codebases changed in the current branch
-	${CURDIR}/node_modules/.bin/lerna ls --since origin/master --exclude-dependents --toposort
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents -- pwd
 
 list-involved:  # builds all the codebases needed to test the changes in this branch
-	${CURDIR}/node_modules/.bin/lerna ls --since origin/master --include-dependents --include-dependencies
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --include-dependencies -- pwd
 
 list-open:  # displays the codebases with uncommitted changes
-	${CURDIR}/node_modules/.bin/lerna ls --since HEAD --exclude-dependents --toposort
+	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents -- pwd
 
 setup:  # prepares the mono-repo for development after cloning
 	find . -type d -name node_modules | xargs rm -rf

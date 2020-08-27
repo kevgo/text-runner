@@ -5,7 +5,7 @@ Feature: running console commands
       """
       <a type="workspace/new-file">
 
-      Let's create a small server called **echo.js**:
+      Create a server called **echo.js**:
 
       ```
       var fs = require("fs");
@@ -16,9 +16,8 @@ Feature: running console commands
 
       <a type="shell/command-with-input">
 
-      ```
-      $ node echo.js
-      ```
+      Now execute this server by running `node echo.js`
+      and enter:
 
       <table>
       <tr>
@@ -43,7 +42,7 @@ Feature: running console commands
       """
       <a type="workspace/new-file">
 
-      Let's create a small server called **input.js**:
+      Create a server called **input.js**:
 
       ```
       const readline = require("readline")
@@ -65,9 +64,8 @@ Feature: running console commands
 
       <a type="shell/command-with-input">
 
-      ```
-      $ node input.js
-      ```
+      Now execute this server by running `node input.js`
+      and enter these values:
 
       <table>
         <tr>

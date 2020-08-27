@@ -1,29 +1,39 @@
-@skipWindows
 Feature: running console commands
 
   Scenario: entering simple text into the console
     Given the source code contains a file "enter-input.md" with content:
       """
+      <a type="workspace/new-file">
+
+      Let's create a small server called **echo.js**:
+
+      ```
+      var fs = require("fs");
+      var stdinBuffer = fs.readFileSync(0, "utf8");
+      console.log("You entered:", stdinBuffer);
+      ```
+
+      </a>
+
       <a type="shell/command-with-input">
 
       ```
-      $ read foo
-      $ echo You entered: $foo xxx
+      $ node echo.js
       ```
 
       <table>
-        <tr>
-          <td>123</td>
-        </tr>
+      <tr>
+      <td>123</td>
+      </tr>
       </table>
 
       </a>
       """
     When running text-run
     Then it signals:
-      | FILENAME | enter-input.md                                              |
-      | LINE     | 1                                                           |
-      | MESSAGE  | running console command: read foo && echo You entered: $foo |
+      | FILENAME | enter-input.md                        |
+      | LINE     | 13                                    |
+      | MESSAGE  | running console command: node echo.js |
     And it prints:
       """
       You entered: 123
@@ -32,14 +42,33 @@ Feature: running console commands
   Scenario: entering complex text into the console
     Given the source code contains a file "enter-input.md" with content:
       """
+      <a type="workspace/new-file">
+
+      Let's create a small server called **input.js**:
+
+      ```
+      const readline = require("readline")
+      var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false,
+      })
+
+      rl.question("Name of the service to add\n", (service) => {
+        rl.question("Description\n", (description) => {
+          console.log(`service: ${service}, description: ${description}!`)
+          rl.close()
+          process.exit()
+        })
+      })
+      ```
+
+      </a>
+
       <a type="shell/command-with-input">
 
       ```
-      $ echo "Name of the service to add"
-      $ read service_name
-      $ echo Description
-      $ read description
-      $ echo "service: $service_name, description: $description"
+      $ node input.js
       ```
 
       <table>
@@ -61,9 +90,9 @@ Feature: running console commands
       """
     When running text-run
     Then it signals:
-      | FILENAME | enter-input.md                                                                                                                                                                      |
-      | LINE     | 1                                                                                                                                                                                   |
-      | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, description: $description" |
+      | FILENAME | enter-input.md                         |
+      | LINE     | 24                                     |
+      | MESSAGE  | running console command: node input.js |
     And it prints:
       """
       service: html-server, description: serves the HTML UI

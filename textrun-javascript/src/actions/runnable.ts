@@ -20,12 +20,11 @@ export function runnable(action: ActionArgs, done: DoneFunction) {
 
   // This is used in an eval'ed string below
   // @ts-ignore: unused variable
-  // TODO: simplify to = done
   const __finished = done
 
-  // TODO: change to normal if clause
   code = hasCallbackPlaceholder(code)
     ? replaceAsyncCallback(code) // async code
     : appendAsyncCallback(code) // sync code
+  action.log(code)
   eval(code)
 }

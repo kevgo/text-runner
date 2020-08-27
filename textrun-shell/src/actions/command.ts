@@ -16,9 +16,8 @@ export async function command(action: ActionArgs) {
     .text()
     .split("\n")
     .map((line: string) => line.trim())
-    .filter((line: string) => line.length > 0)
-    // TODO: move this one line up
     .map(trimDollar)
+    .filter((line: string) => line.length > 0)
     .map(config.pathMapper().globalizePathFunc())
     .join(" && ")
   if (commandsToRun === "") {

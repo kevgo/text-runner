@@ -61,3 +61,5 @@ test-offline: lint unit cuke-offline docs   # runs all tests that don't need an 
 unit:  # runs the unit tests
 	echo Text-Runner unit tests ...
 	${CURDIR}/../node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"
+
+.SILENT:

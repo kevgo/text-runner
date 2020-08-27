@@ -1,5 +1,4 @@
 import * as color from "colorette"
-import * as rimraf from "rimraf"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
@@ -54,12 +53,6 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepWorkspace) {
-    // NOTE: calling fs.remove causes an exception on Windows here,
-    //       hence we use rimraf
-    // TODO: on Windows, try https://nodejs.org/api/fs.html#fs_fs_rmdir_path_options_callback here and remove rimraf
-    rimraf.sync(config.workspace, { maxBusyTries: 20 })
-  }
 
   // step 9: write stats
   let text = "\n"

@@ -12,7 +12,6 @@ Feature: running console commands
       var stdinBuffer = fs.readFileSync(0, "utf8");
       console.log("You entered:", stdinBuffer);
       ```
-
       </a>
 
       <a type="shell/command-with-input">
@@ -32,7 +31,7 @@ Feature: running console commands
     When running text-run
     Then it signals:
       | FILENAME | enter-input.md                        |
-      | LINE     | 13                                    |
+      | LINE     | 12                                    |
       | MESSAGE  | running console command: node echo.js |
     And it prints:
       """
@@ -62,7 +61,6 @@ Feature: running console commands
         })
       })
       ```
-
       </a>
 
       <a type="shell/command-with-input">
@@ -91,7 +89,7 @@ Feature: running console commands
     When running text-run
     Then it signals:
       | FILENAME | enter-input.md                         |
-      | LINE     | 24                                     |
+      | LINE     | 23                                     |
       | MESSAGE  | running console command: node input.js |
     And it prints:
       """

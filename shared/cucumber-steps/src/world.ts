@@ -84,7 +84,6 @@ function World() {
     if (table["EXIT CODE"]) {
       throw new Error("Verifying normal output but table contains an exit code")
     }
-    // TODO: check error code
     const actual = helpers.standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!

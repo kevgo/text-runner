@@ -2,12 +2,8 @@
   "private": true,
   "workspaces": [
     "documentation",
-    "examples/custom-action-async",
-    "examples/custom-action-callback",
+    "examples/custom-action",
     "examples/custom-action-coffeescript",
-    "examples/custom-action-multiple",
-    "examples/custom-action-promise",
-    "examples/custom-action-sync",
     "examples/custom-action-typescript",
     "examples/external-action",
     "examples/global-tool",

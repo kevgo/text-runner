@@ -46,7 +46,7 @@ export async function commandWithInput(action: ActionArgs) {
 
 async function enter(processor: ObservableProcess, input: ProcessInput) {
   // TODO: reduce redundancy
-    processor.stdin.write(input.input + "\n")
+  processor.stdin.write(input.input + "\n")
   if (input.textToWait) {
     await processor.stdout.waitForText(input.textToWait)
   }

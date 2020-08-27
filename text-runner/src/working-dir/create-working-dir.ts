@@ -11,6 +11,7 @@ type workingDirSetting = string | boolean
  */
 export async function createWorkspace(configSetting: workingDirSetting): Promise<string> {
   const workspacePath = await getWorkspacePath(configSetting)
+  await fs.rmdir(workspacePath, { recursive: true })
   await fs.ensureDir(workspacePath)
   return workspacePath
 }

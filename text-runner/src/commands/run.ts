@@ -10,15 +10,15 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
-import { createWorkingDir } from "../working-dir/create-working-dir"
+import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 
 export async function runCommand(config: Configuration): Promise<Error[]> {
   const stats = new StatsCounter()
 
-  // step 1: create working dir
+  // step 1: create workspace
   if (!config.workspace) {
-    config.workspace = await createWorkingDir(config.useSystemTempDirectory)
+    config.workspace = await createWorkspace(config.useSystemTempDirectory)
   }
 
   // step 2: find files

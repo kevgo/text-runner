@@ -8,7 +8,7 @@ import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
-import { createWorkingDir } from "../working-dir/create-working-dir"
+import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 
 export async function dynamicCommand(config: Configuration): Promise<Error[]> {
@@ -16,7 +16,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 1: create working dir
   if (!config.workspace) {
-    config.workspace = await createWorkingDir(config.useSystemTempDirectory)
+    config.workspace = await createWorkspace(config.useSystemTempDirectory)
   }
 
   // step 2: find files

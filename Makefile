@@ -124,7 +124,7 @@ test-open:  # runs all tests of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make test
 
 update-all:  # updates the dependencies for the entire mono-repo
-	${CURDIR}/node_modules/.bin/lerna exec --parallel -- yarn upgrade --latest
+	yarn upgrade-interactive --latest
 
 unit-all:  # runs all tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make unit

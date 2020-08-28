@@ -7,8 +7,11 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # runs the feature specs
+	${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar 2> /dev/null
+
+cuke-lerna: build  # runs the feature specs
 	echo textrun-javascript E2E tests ...
-	${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
+	${CURDIR}/node_modules/.bin/cucumber-js --format summary
 
 docs: build  # runs the documentation tests
 	echo textrun-javascript documentation tests ...
@@ -29,7 +32,7 @@ lint:  # lints all files in this codebase
 	${CURDIR}/node_modules/.bin/prettier -l .
 	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
-test: lint unit docs cuke  # runs all tests
+test: lint unit docs cuke-lerna  # runs all tests
 
 test-ts: unit cuke  # runs all code tests
 

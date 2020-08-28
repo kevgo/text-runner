@@ -25,7 +25,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running "text-run --keep-workspace"
+    When running text-run
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |

@@ -13,6 +13,7 @@ suite("mergeConfigurations()", function () {
   test("config file data given", function () {
     const configFileData: UserProvidedConfiguration = {
       exclude: "1.md",
+      sourceDir: "my-source",
     }
     const have = mergeConfigurations({}, configFileData, defaultValues)
     const want: Configuration = {

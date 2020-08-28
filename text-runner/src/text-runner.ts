@@ -23,7 +23,7 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<Error[]> {
   let configuration: Configuration | undefined
   try {
-    let errors: Error[]
+    let errors: Error[] = []
     switch (cmdlineArgs.command) {
       case "help":
         await helpCommand()

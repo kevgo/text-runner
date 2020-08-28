@@ -2,14 +2,14 @@ import { When } from "cucumber"
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
-  await this.execute({ command, expectError })
+  await this.executeCLI({ command, expectError })
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
   try {
-    await this.execute({ command: "run", expectError })
+    await this.executeCLI({ command: "run", expectError })
   } catch (err) {
     finish(expectError, err)
     return
@@ -20,7 +20,7 @@ When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (
 When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
   try {
-    await this.execute({ command: "run", cwd: this.rootDir, expectError })
+    await this.executeCLI({ command: "run", cwd: this.rootDir, expectError })
   } catch (err) {
     finish(expectError, err)
     return
@@ -36,7 +36,7 @@ When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, { timeo
   const splitted = optionsText.split(" ")
   const command = splitted[0]
   const options = splitted.splice(1)
-  await this.execute({ command, options, expectError })
+  await this.executeCLI({ command, options, expectError })
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
@@ -48,7 +48,7 @@ When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, { timeo
   const args = JSON.parse(`{${argsText}}`)
   args.command = "run"
   args.expectError = expectError
-  await this.execute(args)
+  await this.executeCLI(args)
   finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
 })
 
@@ -58,7 +58,7 @@ When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, { timeou
 ) {
   const expectError = determineExpectError(tryingText)
   try {
-    await this.execute({
+    await this.executeCLI({
       command: "run",
       expectError,
       options: { formatter: formatterName },

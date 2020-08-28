@@ -1,19 +1,23 @@
 Feature: long-running processes
 
   Scenario: starting and stopping a long-running process
-    Given the workspace contains a file "server.js" with content:
+    Given the source code contains a file "create-server.md" with content:
       """
+      Create a file <a type="workspace/new-file">**server.js** with content:
+
+      ```
       setTimeout(function() {
         console.log('running');
         setTimeout(function() {}, 1000)
       }, 100)
+      ```
       """
-    And the source code contains a file "1.md" with content:
+    And the source code contains a file "run-server.md" with content:
       """
       <a type="shell/server">
 
       ```
-      node server.js
+      $ node server.js
       ```
       </a>
 
@@ -32,15 +36,15 @@ Feature: long-running processes
       """
     When running text-run
     Then it signals:
-      | FILENAME | 1.md                                      |
+      | FILENAME | run-server.md                             |
       | LINE     | 1                                         |
       | MESSAGE  | starting a server process: node server.js |
     And it signals:
-      | FILENAME | 1.md                                             |
+      | FILENAME | run-server.md                                    |
       | LINE     | 8                                                |
       | MESSAGE  | verifying the output of the long-running process |
     And it signals:
-      | FILENAME | 1.md                              |
+      | FILENAME | run-server.md                     |
       | LINE     | 15                                |
       | MESSAGE  | stopping the long-running process |
     And there are no child processes running

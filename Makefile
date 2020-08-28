@@ -114,13 +114,13 @@ test-affected:  # runs all tests for the codebases affected by changes in this b
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make test
 
 test-all:  # runs all tests
-	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make test
+	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make test-lerna
 
 test-changed:  # runs all tests of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make test
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make test-lerna
 
 test-open:  # runs all tests of codebases with uncommitted changes
-	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make test
+	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make test-lerna
 
 update-all:  # updates the dependencies for the entire mono-repo
 	yarn upgrade-interactive --latest

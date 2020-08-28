@@ -16,5 +16,6 @@ lint:
 unit:
 
 test: docs
+test-lerna: test
 
 .SILENT:

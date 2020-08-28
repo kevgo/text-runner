@@ -22,8 +22,8 @@ lint:  # lints all files in this codebase
 	${CURDIR}/node_modules/.bin/remark . --quiet &
 	${CURDIR}/node_modules/.bin/prettier -l .
 
-test: lint unit cuke-lerna docs  # runs all tests
-
+test: lint unit cuke docs  # runs all tests
+test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna
 test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests

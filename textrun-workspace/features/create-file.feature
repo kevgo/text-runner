@@ -3,13 +3,9 @@ Feature: creating files with content
   Scenario: providing the filename as emphasized text and the content single-quoted
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/new-file">
-
-      creating a file with name _one.txt_ and content `Hello world!`
-
-      </a>
+      creating a file with name <a type="workspace/new-file">_one.txt_ and content `Hello world!`</a>.
       """
-    When running "text-run --keep-workspace"
+    When running text-run
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |
@@ -22,9 +18,7 @@ Feature: creating files with content
   Scenario: providing the filename as bold text and the content triple-quoted
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/new-file">
-
-      creating a file with name __one.txt__ and content:
+      creating a file with name <a type="workspace/new-file">__one.txt__ and content:
 
       ```
       Hello world!
@@ -44,13 +38,7 @@ Feature: creating files with content
   Scenario: no file path given
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/new-file">
-
-      ```
-      Hello world!
-      ```
-
-      </a>
+      <a type="workspace/new-file">`Hello world!`</a>
       """
     When trying to run text-run
     Then the test fails with:
@@ -62,11 +50,7 @@ Feature: creating files with content
   Scenario: no content block given
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/new-file">
-
-      __one.txt__
-
-      </a>
+      <a type="workspace/new-file">__one.txt__</a>
       """
     When trying to run text-run
     Then the test fails with:

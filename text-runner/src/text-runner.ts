@@ -13,6 +13,7 @@ import { loadConfigFile } from "./configuration/config-file/load-config-file"
 import { determineConfiguration } from "./configuration/determine-configuration"
 import { Configuration } from "./configuration/types/configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
+import { ActivityResult } from "./activity-list/types/activity-result"
 
 export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
 
@@ -20,10 +21,10 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
-export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<Error[]> {
+export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<ActivityResult[]> {
   let configuration: Configuration | undefined
   try {
-    let errors: Error[] = []
+    let errors: ActivityResult[] = []
     switch (cmdlineArgs.command) {
       case "help":
         await helpCommand()
@@ -70,7 +71,8 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
 }
 
 export type { ActionArgs } from "./actions/types/action-args"
-export type { Configuration } from "./configuration/types/configuration"
+export type { Configuration }
 export { AstNode } from "./parsers/standard-AST/ast-node"
 export { AstNodeList } from "./parsers/standard-AST/ast-node-list"
 export { actionName } from "./actions/helpers/action-name"
+export { ActivityResult }

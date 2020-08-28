@@ -12,6 +12,7 @@ import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { StatsCounter } from "./helpers/stats-counter"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
 export async function runActivity(
   activity: Activity,
@@ -20,7 +21,7 @@ export async function runActivity(
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Promise<Error | null> {
+): Promise<ActivityResult> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: ActionArgs = {
@@ -55,13 +56,13 @@ export async function runActivity(
     statsCounter.error()
     if (isUserError(err)) {
       formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
-      return new PrintedUserError(err)
+      return { activity, error: new PrintedUserError(err) }
     } else {
       // here we have a developer error like for example TypeError
       return err
     }
   }
-  return null
+  return { activity, error: null }
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {

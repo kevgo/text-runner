@@ -11,8 +11,9 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
-export async function runCommand(config: Configuration): Promise<Error[]> {
+export async function runCommand(config: Configuration): Promise<ActivityResult[]> {
   const stats = new StatsCounter()
 
   // step 1: create workspace
@@ -47,9 +48,12 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
-  jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))
-  const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
+  // kick off the parallel jobs to run in the background
+  let parJobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
+  // execute the serial jobs
+  const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
+  const parRes = await Promise.all(parJobs)
+  const results = parRes.concat(seqRes)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)

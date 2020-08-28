@@ -5,8 +5,9 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { AstNode } from "../parsers/standard-AST/ast-node"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
-export async function debugCommand(config: Configuration): Promise<Error[]> {
+export async function debugCommand(config: Configuration): Promise<ActivityResult[]> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     return []

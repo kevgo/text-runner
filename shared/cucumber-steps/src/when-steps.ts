@@ -8,13 +8,14 @@ When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function 
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
-  try {
-    await this.executeCLI({ command: "run", expectError })
-  } catch (err) {
-    finish(expectError, err)
-    return
+  const errors = await this.executeAPI({ command: "run", expectError })
+  if (errors.length > 0 && !expectError) {
+    console.log(`${errors.length} errors:`)
+    for (const error of errors) {
+      console.log(`- ${error.name}: ${error.message}`)
+    }
+    throw new Error("unexperted error")
   }
-  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
 })
 
 When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {

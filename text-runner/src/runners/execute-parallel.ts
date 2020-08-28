@@ -5,6 +5,7 @@ import { LinkTargetList } from "../link-targets/link-target-list"
 import { StatsCounter } from "./helpers/stats-counter"
 import { runActivity } from "./run-activity"
 import { ActionFinder } from "../actions/action-finder"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
 /**
  * Executes the given activities in parallel.
@@ -17,8 +18,9 @@ export function executeParallel(
   configuration: Configuration,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Promise<Error | null>[] {
+): Promise<ActivityResult>[] {
   return activities.map((activity) => {
+    // TODO: remove return and enclosing curly braces
     return runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
   })
 }

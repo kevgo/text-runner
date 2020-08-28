@@ -1,0 +1,362 @@
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: shared/cucumber-steps/src/when-steps.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ shared/cucumber-steps/src/when-steps.ts:11 @[1m[38;5;146m When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function[0m
+[m
+When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {[m
+  const expectError = determineExpectError(tryingText)[m
+[1;31m[1;31m  try {[m
+[0m[1;31m[1;31m    await this.executeCLI({ command: "run", expectError })[m
+[0m[1;31m[1;31m  } catch (err) {[m
+[0m[1;31m[1;31m    finish(expectError, err)[m
+[0m[1;31m[1;31m    return[m
+[0m[1;32m[1;32m[m[1;32m  const errors = await this.executeAPI({ command: "run", expectError })[m
+[0m[1;32m[1;32m[m[1;32m  if (errors.length > 0 && !expectError) {[m
+[0m[1;32m[1;32m[m[1;32m    console.log(`${errors.length} errors:`)[m
+[0m[1;32m[1;32m[m[1;32m    for (const error of errors) {[m
+[0m[1;32m[1;32m[m[1;32m      console.log(`- ${error.name}: ${error.message}`)[m
+[0m[1;32m[1;32m[m[1;32m    }[m
+[0m[1;32m[1;32m[m[1;32m    throw new Error("unexperted error")[m
+[0m  }[m
+[1;31m[1;31m  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))[m
+[0m})[m
+[m
+When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: shared/cucumber-steps/src/world.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ shared/cucumber-steps/src/world.ts:10 @[1m[38;5;146m import { createObservableProcess } from "observable-process"[0m
+import * as path from "path"[m
+import stripAnsi = require("strip-ansi")[m
+import * as helpers from "./helpers"[m
+[1;31m[31mimport { textRunner[m[1;31m[m[31m } from "text-runner"[m
+[0m[1;32m[32mimport { textRunner[m[1;32m, ActivityResult[m[32m } from "text-runner"[m
+[0m[m
+/**[m
+ * World provides step implementations that run and test TextRunner[m
+[1;35m@ shared/cucumber-steps/src/world.ts:37 @[1m[38;5;146m function World() {[0m
+    }[m
+  }[m
+[m
+[1;31m[1;31m  this.executeAPI = async function (params: { command: string; expectError: boolean; cwd: string }) {[m
+[0m[1;32m[1;32m[m[1;32m  this.executeAPI = async function (params: {[m
+[0m[1;32m[1;32m[m[1;32m    command: string[m
+[0m[1;32m[1;32m[m[1;32m    expectError: boolean[m
+[0m[1;32m[1;32m[m[1;32m    cwd: string[m
+[0m[1;32m[1;32m[m[1;32m  }): Promise<ActivityResult[]> {[m
+[0m    const args: any = {}[m
+    args.cwd = params.cwd || this.rootDir[m
+    if (this.debug) {[m
+[1;35m@ shared/cucumber-steps/src/world.ts:54 @[1m[38;5;146m function World() {[0m
+    const errors = await textRunner({[m
+      command: "run",[m
+      sourceDir: params.cwd || this.rootDir,[m
+[1;31m[1;31m      useSystemTempDirectory: false,[m
+[0m    })[m
+[1;31m[1;31m    this.process = createObservableProcess(command, args)[m
+[0m[1;31m[1;31m    await this.process.waitForEnd()[m
+[0m[1;31m[1;31m    if (this.verbose) {[m
+[0m[1;31m[1;31m      this.output = this.process.output.fullText()[m
+[0m[1;31m[1;31m    }[m
+[0m[1;31m[1;31m    if (this.process.exitCode && !params.expectError) {[m
+[0m[1;31m[1;31m      console.log(this.process.output.fullText())[m
+[0m[1;31m[1;31m    }[m
+[0m[1;32m[1;32m[m[1;32m    return errors[m
+[0m  }[m
+[m
+  this.verifyCallError = (expectedError: string) => {[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/cli.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/cli.ts:13 @[1m[38;5;146m cliCursor.hide()[0m
+[m
+async function main() {[m
+  const cliArgs = parseCmdlineArgs(process.argv)[m
+[1;31m[1;31m  const errors: Error[] = await textRunner(cliArgs)[m
+[0m[1;31m[1;31m  for (const err of errors) {[m
+[0m[1;31m[1;31m    if (err instanceof UnprintedUserError) {[m
+[0m[1;31m[1;31m      printUserError(err)[m
+[0m[1;31m[1;31m    } else if (err instanceof PrintedUserError) {[m
+[0m[1;32m[1;32m[m[1;32m  const results = await textRunner(cliArgs)[m
+[0m[1;32m[1;32m[m[1;32m  const errors = results.map((result) => result.error).filter((error) => error) as Error[][m
+[0m[1;32m[1;32m[m[1;32m  for (const error of errors) {[m
+[0m[1;32m[1;32m[m[1;32m    if (error instanceof UnprintedUserError) {[m
+[0m[1;32m[1;32m[m[1;32m      printUserError(error)[m
+[0m[1;32m[1;32m[m[1;32m    } else if (error instanceof PrintedUserError) {[m
+[0m      // nothing to do[m
+[1;31m[31m    } else [m[1;31m[m[31m{[m
+[0m[1;31m[31m      console.log(err[m[1;31m[m[31m.stack)[m
+[0m[1;32m[32m    } else [m[1;32mif (error) [m[32m{[m
+[0m[1;32m[32m      console.log(err[m[1;32mor[m[32m.stack)[m
+[0m    }[m
+  }[m
+  await endChildProcesses()[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/commands/debug.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/commands/debug.ts:8 @[1m[38;5;146m import { getFileNames } from "../filesystem/get-filenames"[0m
+import { findLinkTargets } from "../link-targets/find-link-targets"[m
+import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"[m
+import { AstNode } from "../parsers/standard-AST/ast-node"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+[1;31m[31mexport async function debugCommand(config: Configuration): Promise<[m[1;31mError[m[31m[]> {[m
+[0m[1;32m[32mexport async function debugCommand(config: Configuration): Promise<[m[1;32mActivityResult[m[32m[]> {[m
+[0m  const filenames = await getFileNames(config)[m
+  if (filenames.length === 0) {[m
+    return [][m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/commands/dynamic.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/commands/dynamic.ts:12 @[1m[38;5;146m import { executeSequential } from "../runners/execute-sequential"[0m
+import { StatsCounter } from "../runners/helpers/stats-counter"[m
+import { createWorkspace } from "../working-dir/create-working-dir"[m
+import { ActionFinder } from "../actions/action-finder"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+[1;31m[31mexport async function dynamicCommand(config: Configuration): Promise<[m[1;31mError[m[31m[]> {[m
+[0m[1;32m[32mexport async function dynamicCommand(config: Configuration): Promise<[m[1;32mActivityResult[m[32m[]> {[m
+[0m  const stats = new StatsCounter()[m
+[m
+  // step 1: create working dir[m
+[1;35m@ text-runner/src/commands/dynamic.ts:48 @[1m[38;5;146m export async function dynamicCommand(config: Configuration): Promise<Error[]> {[0m
+  // step 7: execute the ActivityList[m
+  const formatter = instantiateFormatter(config.formatterName, activities.length, config)[m
+  process.chdir(config.workspace)[m
+[1;31m[1;31m  const error = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)[m
+[0m[1;32m[1;32m[m[1;32m  const results = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)[m
+[0m[1;32m[1;32m[m[1;32m  const errors = results.map((result) => result.error).filter((error) => !!error) as Error[][m
+[0m[m
+  // step 8: cleanup[m
+  process.chdir(config.sourceDir)[m
+[1;35m@ text-runner/src/commands/dynamic.ts:57 @[1m[38;5;146m export async function dynamicCommand(config: Configuration): Promise<Error[]> {[0m
+  // step 9: write stats[m
+  let text = "\n"[m
+  let colorFn[m
+[1;31m[31m  if (error[m[1;31m[m[31m) {[m
+[0m[1;32m[32m  if (error[m[1;32ms.length > 0[m[32m) {[m
+[0m    colorFn = color.red[m
+[1;31m[31m    text += color.red([m[1;31m"1 error, "[m[31m)[m
+[0m[1;32m[32m    text += color.red([m[1;32m`${errors.length} errors, `[m[32m)[m
+[0m  } else {[m
+    colorFn = color.green[m
+    text += color.green("Success! ")[m
+[1;35m@ text-runner/src/commands/dynamic.ts:67 @[1m[38;5;146m export async function dynamicCommand(config: Configuration): Promise<Error[]> {[0m
+  text += colorFn(`${activities.length} activities in ${filenames.length} files`)[m
+  text += colorFn(`, ${stats.duration()}`)[m
+  console.log(color.bold(text))[m
+[1;31m[1;31m  if (error) {[m
+[0m[1;31m[1;31m    return [error][m
+[0m[1;31m[1;31m  } else {[m
+[0m[1;31m[1;31m    return [][m
+[0m[1;31m[1;31m  }[m
+[0m[1;32m[1;32m[m[1;32m  return results[m
+[0m}[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/commands/run.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/commands/run.ts:14 @[1m[38;5;146m import { executeSequential } from "../runners/execute-sequential"[0m
+import { StatsCounter } from "../runners/helpers/stats-counter"[m
+import { createWorkspace } from "../working-dir/create-working-dir"[m
+import { ActionFinder } from "../actions/action-finder"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+[1;31m[31mexport async function runCommand(config: Configuration): Promise<[m[1;31mError[m[31m[]> {[m
+[0m[1;32m[32mexport async function runCommand(config: Configuration): Promise<[m[1;32mActivityResult[m[32m[]> {[m
+[0m  const stats = new StatsCounter()[m
+[m
+  // step 1: create workspace[m
+[1;35m@ text-runner/src/commands/run.ts:51 @[1m[38;5;146m export async function runCommand(config: Configuration): Promise<Error[]> {[0m
+  // step 7: execute the ActivityList[m
+  const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)[m
+  process.chdir(config.workspace)[m
+[1;31m[1;31m  const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)[m
+[0m[1;31m[1;31m  jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))[m
+[0m[1;31m[1;31m  const results = (await Promise.all(jobs)).filter((r) => r) as Error[][m
+[0m[1;32m[1;32m[m[1;32m  // kick off the parallel jobs in parallel[m
+[0m[1;32m[1;32m[m[1;32m  let parJobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)[m
+[0m[1;32m[1;32m[m[1;32m  // execute the serial jobs[m
+[0m[1;32m[1;32m[m[1;32m  const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)[m
+[0m[1;32m[1;32m[m[1;32m  const parRes = await Promise.all(parJobs)[m
+[0m[1;32m[1;32m[m[1;32m  const results = parRes.concat(seqRes)[m
+[0m[m
+  // step 8: cleanup[m
+  process.chdir(config.sourceDir)[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/commands/scaffold.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/commands/scaffold.ts:4 @[1m[38;5;146m[0m
+[1;31m[1;31mimport { promises as fs } from "fs"[m
+[0mimport * as path from "path"[m
+[1;32m[1;32m[m[1;32mimport { promises as fs } from "fs"[m
+[0m[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+[1;31m[31mexport async function scaffoldCommand(blockName: string | undefined): Promise<[m[1;31mError[m[31m[]> {[m
+[0m[1;32m[32mexport async function scaffoldCommand(blockName: string | undefined): Promise<[m[1;32mActivityResult[m[32m[]> {[m
+[0m  if (!blockName) {[m
+    throw new Error("no region name given")[m
+  }[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/commands/static.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/commands/static.ts:12 @[1m[38;5;146m import { executeParallel } from "../runners/execute-parallel"[0m
+import { StatsCounter } from "../runners/helpers/stats-counter"[m
+import { createWorkspace } from "../working-dir/create-working-dir"[m
+import { ActionFinder } from "../actions/action-finder"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+[1;31m[31mexport async function staticCommand(config: Configuration): Promise<[m[1;31mError[m[31m[]> {[m
+[0m[1;32m[32mexport async function staticCommand(config: Configuration): Promise<[m[1;32mActivityResult[m[32m[]> {[m
+[0m  const stats = new StatsCounter()[m
+[m
+  // step 1: create working dir[m
+[1;35m@ text-runner/src/commands/static.ts:49 @[1m[38;5;146m export async function staticCommand(config: Configuration): Promise<Error[]> {[0m
+  const formatter = instantiateFormatter(config.formatterName, links.length, config)[m
+  process.chdir(config.workspace)[m
+  const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)[m
+[1;31m[1;31m  const results = (await Promise.all(jobs)).filter((r) => r) as Error[][m
+[0m[1;32m[1;32m[m[1;32m  const results = await Promise.all(jobs)[m
+[0m[1;32m[1;32m[m[1;32m  const errors = results.map((result) => result.error).filter((error) => !!error) as Error[][m
+[0m[m
+  // step 8: cleanup[m
+  process.chdir(config.sourceDir)[m
+[1;35m@ text-runner/src/commands/static.ts:59 @[1m[38;5;146m export async function staticCommand(config: Configuration): Promise<Error[]> {[0m
+  if (config.formatterName !== "silent") {[m
+    let text = "\n"[m
+    let colorFn[m
+[1;31m[31m    if ([m[1;31mresult[m[31ms.length === 0) {[m
+[0m[1;32m[32m    if ([m[1;32merror[m[32ms.length === 0) {[m
+[0m      colorFn = color.green[m
+      text += color.green("Success! ")[m
+    } else {[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/runners/execute-parallel.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/runners/execute-parallel.ts:8 @[1m[38;5;146m import { LinkTargetList } from "../link-targets/link-target-list"[0m
+import { StatsCounter } from "./helpers/stats-counter"[m
+import { runActivity } from "./run-activity"[m
+import { ActionFinder } from "../actions/action-finder"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+/**[m
+ * Executes the given activities in parallel.[m
+[1;35m@ text-runner/src/runners/execute-parallel.ts:21 @[1m[38;5;146m export function executeParallel([0m
+  configuration: Configuration,[m
+  statsCounter: StatsCounter,[m
+  formatter: Formatter[m
+[1;31m[31m): Promise<[m[1;31mError | null[m[31m>[] {[m
+[0m[1;32m[32m): Promise<[m[1;32mActivityResult[m[32m>[] {[m
+[0m  return activities.map((activity) => {[m
+[1;32m[1;32m[m[1;32m    // TODO: remove return and enclosing curly braces[m
+[0m    return runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)[m
+  })[m
+}[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/runners/execute-sequential.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/runners/execute-sequential.ts:8 @[1m[38;5;146m import { LinkTargetList } from "../link-targets/link-target-list"[0m
+import { StatsCounter } from "./helpers/stats-counter"[m
+import { runActivity } from "./run-activity"[m
+import { ActionFinder } from "../actions/action-finder"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+export async function executeSequential([m
+  activities: ActivityList,[m
+[1;35m@ text-runner/src/runners/execute-sequential.ts:17 @[1m[38;5;146m export async function executeSequential([0m
+  linkTargets: LinkTargetList,[m
+  statsCounter: StatsCounter,[m
+  formatter: Formatter[m
+[1;31m[1;31m): Promise<Error | null> {[m
+[0m[1;32m[1;32m[m[1;32m): Promise<ActivityResult[]> {[m
+[0m[1;32m[1;32m[m[1;32m  const result: ActivityResult[] = [][m
+[0m  for (const activity of activities) {[m
+[1;31m[1;31m    const error = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)[m
+[0m[1;31m[1;31m    if (error) {[m
+[0m[1;31m[1;31m      return error[m
+[0m[1;32m[1;32m[m[1;32m    const activityResult = await runActivity([m
+[0m[1;32m[1;32m[m[1;32m      activity,[m
+[0m[1;32m[1;32m[m[1;32m      actionFinder,[m
+[0m[1;32m[1;32m[m[1;32m      configuration,[m
+[0m[1;32m[1;32m[m[1;32m      linkTargets,[m
+[0m[1;32m[1;32m[m[1;32m      statsCounter,[m
+[0m[1;32m[1;32m[m[1;32m      formatter[m
+[0m[1;32m[1;32m[m[1;32m    )[m
+[0m[1;32m[1;32m[m[1;32m    result.push(activityResult)[m
+[0m[1;32m[1;32m[m[1;32m    if (activityResult.error) {[m
+[0m[1;32m[1;32m[m[1;32m      return result[m
+[0m    }[m
+  }[m
+[1;31m[31m  return [m[1;31mnull[m[31m[m
+[0m[1;32m[32m  return [m[1;32mresult[m[32m[m
+[0m}[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/runners/run-activity.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/runners/run-activity.ts:15 @[1m[38;5;146m import { LinkTargetList } from "../link-targets/link-target-list"[0m
+import { NameRefiner } from "./helpers/name-refiner"[m
+import { OutputCollector } from "./helpers/output-collector"[m
+import { StatsCounter } from "./helpers/stats-counter"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "../activity-list/types/activity-result"[m
+[0m[m
+export async function runActivity([m
+  activity: Activity,[m
+[1;35m@ text-runner/src/runners/run-activity.ts:24 @[1m[38;5;146m export async function runActivity([0m
+  linkTargets: LinkTargetList,[m
+  statsCounter: StatsCounter,[m
+  formatter: Formatter[m
+[1;31m[31m): Promise<[m[1;31mError | null[m[31m> {[m
+[0m[1;32m[32m): Promise<[m[1;32mActivityResult[m[32m> {[m
+[0m  const outputCollector = new OutputCollector()[m
+  const nameRefiner = new NameRefiner(humanize(activity.actionName))[m
+  const args: ActionArgs = {[m
+[1;35m@ text-runner/src/runners/run-activity.ts:59 @[1m[38;5;146m export async function runActivity([0m
+    statsCounter.error()[m
+    if (isUserError(err)) {[m
+      formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())[m
+[1;31m[31m      return [m[1;31mnew PrintedUserError(err)[m[31m[m
+[0m[1;32m[32m      return [m[1;32m{ activity, error: new PrintedUserError(err) }[m[32m[m
+[0m    } else {[m
+      // here we have a developer error like for example TypeError[m
+      return err[m
+    }[m
+  }[m
+[1;31m[31m  return [m[1;31mnull[m[31m[m
+[0m[1;32m[32m  return [m[1;32m{ activity, error: null }[m[32m[m
+[0m}[m
+[m
+async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {[m
+[34m[0m[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[34mmodified: text-runner/src/text-runner.ts
+[34m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[1;35m@ text-runner/src/text-runner.ts:16 @[1m[38;5;146m import { loadConfigFile } from "./configuration/config-file/load-config-file"[0m
+import { determineConfiguration } from "./configuration/determine-configuration"[m
+import { Configuration } from "./configuration/types/configuration"[m
+import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"[m
+[1;32m[1;32m[m[1;32mimport { ActivityResult } from "./activity-list/types/activity-result"[m
+[0m[m
+export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"[m
+[m
+[1;35m@ text-runner/src/text-runner.ts:24 @[1m[38;5;146m export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu[0m
+ * Tests the documentation in the given directory[m
+ * @param cmdLineArgs the arguments provided on the command line[m
+ */[m
+[1;31m[31mexport async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<[m[1;31mError[m[31m[]> {[m
+[0m[1;32m[32mexport async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<[m[1;32mActivityResult[m[32m[]> {[m
+[0m  let configuration: Configuration | undefined[m
+  try {[m
+[1;31m[31m    let errors: [m[1;31mError[m[31m[] = [][m
+[0m[1;32m[32m    let errors: [m[1;32mActivityResult[m[32m[] = [][m
+[0m    switch (cmdlineArgs.command) {[m
+      case "help":[m
+        await helpCommand()[m
+[1;35m@ text-runner/src/text-runner.ts:74 @[1m[38;5;146m export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis[0m
+}[m
+[m
+export type { ActionArgs } from "./actions/types/action-args"[m
+[1;31m[31mexport type { Configuration }[m[1;31m from "./configuration/types/configuration"[m[31m[m
+[0m[1;32m[32mexport type { Configuration }[m[1;32m[m[32m[m
+[0mexport { AstNode } from "./parsers/standard-AST/ast-node"[m
+export { AstNodeList } from "./parsers/standard-AST/ast-node-list"[m
+export { actionName } from "./actions/helpers/action-name"[m
+[1;32m[1;32m[m[1;32mexport { ActivityResult }[m
+[0m

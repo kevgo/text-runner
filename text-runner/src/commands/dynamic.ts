@@ -9,8 +9,9 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
-export async function dynamicCommand(config: Configuration): Promise<Error[]> {
+export async function dynamicCommand(config: Configuration): Promise<ActivityResult[]> {
   const stats = new StatsCounter()
 
   // step 1: create working dir
@@ -44,7 +45,8 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length, config)
   process.chdir(config.workspace)
-  const error = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
+  const results = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
+  const errors = results.map((result) => result.error).filter((error) => !!error) as Error[]
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -52,9 +54,9 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   // step 9: write stats
   let text = "\n"
   let colorFn
-  if (error) {
+  if (errors.length > 0) {
     colorFn = color.red
-    text += color.red("1 error, ")
+    text += color.red(`${errors.length} errors, `)
   } else {
     colorFn = color.green
     text += color.green("Success! ")
@@ -62,9 +64,5 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   text += colorFn(`${activities.length} activities in ${filenames.length} files`)
   text += colorFn(`, ${stats.duration()}`)
   console.log(color.bold(text))
-  if (error) {
-    return [error]
-  } else {
-    return []
-  }
+  return results
 }

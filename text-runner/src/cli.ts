@@ -10,14 +10,15 @@ cliCursor.hide()
 
 async function main() {
   const cliArgs = parseCmdlineArgs(process.argv)
-  const errors: Error[] = await textRunner(cliArgs)
-  for (const err of errors) {
-    if (err instanceof UnprintedUserError) {
-      printUserError(err)
-    } else if (err instanceof PrintedUserError) {
+  const results = await textRunner(cliArgs)
+  const errors = results.map((result) => result.error).filter((error) => error) as Error[]
+  for (const error of errors) {
+    if (error instanceof UnprintedUserError) {
+      printUserError(error)
+    } else if (error instanceof PrintedUserError) {
       // nothing to do
-    } else {
-      console.log(err.stack)
+    } else if (error) {
+      console.log(error.stack)
     }
   }
   await endChildProcesses()

@@ -9,8 +9,9 @@ import { executeParallel } from "../runners/execute-parallel"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
-export async function staticCommand(config: Configuration): Promise<Error[]> {
+export async function staticCommand(config: Configuration): Promise<ActivityResult[]> {
   const stats = new StatsCounter()
 
   // step 1: create working dir
@@ -45,7 +46,8 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
   const formatter = instantiateFormatter(config.formatterName, links.length, config)
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
-  const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
+  const results = await Promise.all(jobs)
+  const errors = results.map((result) => result.error).filter((error) => error) as Error[]
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -54,7 +56,7 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
   if (config.formatterName !== "silent") {
     let text = "\n"
     let colorFn
-    if (results.length === 0) {
+    if (errors.length === 0) {
       colorFn = color.green
       text += color.green("Success! ")
     } else {

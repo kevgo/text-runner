@@ -11,8 +11,7 @@ Feature: running console commands
       """
       <a type="shell/command-with-input">
 
-      Now execute this server by running `node echo.js`
-      and enter:
+      Run `node echo.js` and enter:
 
       <table>
         <tr>
@@ -54,8 +53,7 @@ Feature: running console commands
       """
       <a type="shell/command-with-input">
 
-      Now execute this server by running `node input.js`
-      and enter these values:
+      Run `node input.js` and enter:
 
       <table>
         <tr>

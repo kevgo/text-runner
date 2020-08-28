@@ -16,7 +16,7 @@ export async function dynamicCommand(config: Configuration): Promise<ActivityRes
 
   // step 1: create working dir
   if (!config.workspace) {
-    config.workspace = await createWorkspace(config.useSystemTempDirectory)
+    config.workspace = await createWorkspace(config)
   }
 
   // step 2: find files

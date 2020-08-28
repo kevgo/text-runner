@@ -18,7 +18,7 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
 
   // step 1: create workspace
   if (!config.workspace) {
-    config.workspace = await createWorkspace(config.useSystemTempDirectory)
+    config.workspace = await createWorkspace(config)
   }
 
   // step 2: find files

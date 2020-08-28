@@ -73,20 +73,19 @@ Then("it prints:", function (table) {
   this.verifyOutput(table.rowsHash())
 })
 
-Then("it signals:", function (table) {
+Then("it executes:", function (table) {
   console.log(11111111111)
   const results = this.apiResults as ActivityResult[]
   const tableHash = table.rowsHash()
-  console.log(tableHash)
   const want = {
     filename: tableHash.FILENAME,
-    line: tableHash.LINE,
-    activityName: tableHash.MESSAGE,
+    line: parseInt(tableHash.LINE, 10),
+    activityName: tableHash.ACTION,
   }
   for (const result of results) {
     console.log(result)
     if (
-      result.activity.file !== want.filename ||
+      result.activity.file.platformified() !== want.filename ||
       result.activity.line !== want.line ||
       result.activity.actionName !== want.activityName
     ) {
@@ -101,7 +100,7 @@ Then("it signals:", function (table) {
   // here we didn't find a match
   console.log(`Text-Runner executed these ${results.length} activities:`)
   for (const result of results) {
-    console.log(`- ${result.activity.file}:${result.activity.line}: ${result.activity.actionName}`)
+    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
   }
   throw new Error("Expected activity not executed")
 })

@@ -15,10 +15,10 @@ Feature: skipping an action
       }
       """
     When running text-run
-    Then it signals:
-      | FILENAME | 1.md                  |
-      | LINE     | 1                     |
-      | MESSAGE  | skipping: Skip action |
+    Then it executes:
+      | FILENAME | 1.md        |
+      | LINE     | 1           |
+      | ACTION   | skip-action |
 
   Scenario: skipping an asynchronous action
     Given the source code contains a file "text-run/skip-action.js" with content:

@@ -6,7 +6,7 @@ clean:  # Removes all build artifacts
 	echo shared features build artifact cleanup ...
 	rm -rf dist
 
-cuke: build  # runs the feature specs
+cuke:
 cuke-lerna:
 
 docs:  # runs the documentation tests

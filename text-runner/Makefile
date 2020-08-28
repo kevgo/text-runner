@@ -48,12 +48,11 @@ prepublish: build  # prepares the code base for publishing
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
-test: lint unit cuke-lerna docs  # runs all tests
+test: lint unit cuke docs  # runs all tests
 .PHONY: test
-
+test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna
 test-ts: unit cuke  # runs only the TypeScript tests
-
-test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
+test-online: lint unit cuke-online docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
 	echo Text-Runner unit tests ...

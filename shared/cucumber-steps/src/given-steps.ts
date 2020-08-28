@@ -41,7 +41,7 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function (exampleName) {
-  await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
+  await fse.copy(path.join("documentation", "examples", exampleName), this.rootDir)
 })
 
 Given("I am in a directory that contains the {string} example with the configuration file:", async function (

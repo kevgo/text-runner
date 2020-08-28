@@ -28,6 +28,7 @@ lint:  # lints all files in this codebase
 	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 test: lint docs  # runs all tests
+test-lerna: test  # for running all tests inside Lerna
 
 unit:
 

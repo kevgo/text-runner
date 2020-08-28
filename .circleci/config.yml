@@ -1,7 +1,5 @@
 version: 2
 
-defaults: &defaults
-
 jobs:
   build:
     working_directory: ~/repo

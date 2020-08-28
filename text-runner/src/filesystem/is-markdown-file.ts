@@ -1,4 +1,4 @@
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 
 export async function isMarkdownFile(filename: string): Promise<boolean> {

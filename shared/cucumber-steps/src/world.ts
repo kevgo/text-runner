@@ -1,7 +1,7 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
 import { setWorldConstructor } from "cucumber"
-import * as fs from "fs-extra"
+import * as fs from "fs"
 import * as glob from "glob"
 import { createObservableProcess } from "observable-process"
 import * as path from "path"

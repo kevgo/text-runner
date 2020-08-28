@@ -111,7 +111,7 @@ setup:  # prepares the mono-repo for development after cloning
 test: lint  # runs all tests for the root directory
 
 test-affected:  # runs all tests for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make test
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make test-lerna
 
 test-all:  # runs all tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make test-lerna

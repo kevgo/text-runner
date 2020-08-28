@@ -58,3 +58,5 @@ test-online: lint unit cuke-online docs   # runs all tests that don't need an on
 unit:  # runs the unit tests
 	echo Text-Runner unit tests ...
 	${CURDIR}/node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"
+
+.SILENT:

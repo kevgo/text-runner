@@ -9,7 +9,7 @@ clean:  # Removes all build artifacts
 cuke: build  # for manually running the cukes for this codebase
 	(cd ${CURDIR}/../text-runner-features && make cuke)
 
-cuke-lerna: build  # cukes for this codebase are in ../text-runner-features, Lerna runs those
+cuke-lerna:  # cukes for this codebase are in ../text-runner-features, Lerna runs those
 
 cuke-ci:  # runs the feature specs on CI
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8

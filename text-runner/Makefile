@@ -8,7 +8,7 @@ clean:  # Removes all build artifacts
 
 cuke: build  # runs the feature specs
 	echo Text-Runner E2E tests ...
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'` 2> /dev/null
 
 cuke-ci:  # runs the feature specs on CI
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8

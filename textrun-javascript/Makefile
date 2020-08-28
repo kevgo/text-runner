@@ -8,7 +8,7 @@ clean:  # Removes all build artifacts
 
 cuke: build  # runs the feature specs
 	echo textrun-javascript E2E tests ...
-	${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
+	${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar 2> /dev/null
 
 docs: build  # runs the documentation tests
 	echo textrun-javascript documentation tests ...

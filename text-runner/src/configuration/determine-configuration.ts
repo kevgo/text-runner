@@ -28,6 +28,7 @@ export function determineConfiguration(
 ): Configuration {
   // merge the configs
   const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
-  result["publications"] = Publications.fromJSON(result["publications"]).sorted()
+  // TODO: convert to dot notation
+  result.publications = Publications.fromJSON(result.publications).sorted()
   return result as Configuration
 }

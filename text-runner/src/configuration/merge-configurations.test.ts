@@ -24,7 +24,7 @@ suite("mergeConfigurations()", function () {
       offline: false,
       publications: new Publications(),
       regionMarker: "type",
-      sourceDir: process.cwd(),
+      sourceDir: "my-source",
       useSystemTempDirectory: false,
       workspace: "",
     }

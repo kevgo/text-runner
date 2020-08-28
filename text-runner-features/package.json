@@ -2,7 +2,6 @@
   "name": "text-runner-features",
   "version": "0.0.0",
   "devDependencies": {
-    "text-runner": "4.0.3",
     "shared-cucumber-steps": "0.0.0"
   },
   "license": "ISC",

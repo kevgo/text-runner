@@ -1,5 +1,6 @@
 import * as color from "colorette"
 import * as isGlob from "is-glob"
+import * as path from "path"
 import { Configuration } from "../configuration/types/configuration"
 import { UnprintedUserError } from "../errors/unprinted-user-error"
 import { AbsoluteFilePath } from "./absolute-file-path"
@@ -20,14 +21,16 @@ export async function getFileNames(config: Configuration): Promise<AbsoluteFileP
 }
 
 async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
+  const relative = path.relative(process.cwd(), config.sourceDir)
+  const fullGlob = path.join(relative, config.fileGlob)
   if (config.fileGlob === "") {
-    return allMarkdownFiles(config.fileGlob)
-  } else if (await hasDirectory(config.fileGlob)) {
-    return markdownFilesInDir(config.fileGlob)
-  } else if (await isMarkdownFile(config.fileGlob)) {
-    return [new AbsoluteFilePath(config.fileGlob)]
+    return allMarkdownFiles(fullGlob)
+  } else if (await hasDirectory(fullGlob)) {
+    return markdownFilesInDir(fullGlob)
+  } else if (await isMarkdownFile(fullGlob)) {
+    return [new AbsoluteFilePath(fullGlob)]
   } else if (isGlob(config.fileGlob)) {
-    return filesMatchingGlob(config.fileGlob)
+    return filesMatchingGlob(fullGlob)
   } else {
     throw new UnprintedUserError(`file or directory does not exist: ${color.red(config.fileGlob)}`)
   }

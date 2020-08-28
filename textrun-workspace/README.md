@@ -45,8 +45,7 @@ directory with the given name in the workspace. Here is a usage example:
 <a type="extension/runnable-region">
 
 ```html
-Create a directory named
-<b type="workspace/new-directory">utils</b>.
+Create a directory named <b type="workspace/new-directory">utils</b>.
 ```
 
 </a>

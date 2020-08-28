@@ -37,14 +37,13 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
   }
 
   // parse argv into the result
-  const cliArgs = minimist(argv, { boolean: ["offline", "keep-workspace"] })
+  const cliArgs = minimist(argv, { boolean: ["offline"] })
   const result: UserProvidedConfiguration = {
     command: cliArgs._[0] as Commands, // the first argument is the command to run, as in "text-run debug"
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     fileGlob: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
     formatterName: cliArgs.format,
-    keepWorkspace: cliArgs["keep-workspace"],
     offline: cliArgs.offline,
     workspace: cliArgs.workspace,
   }

@@ -1,8 +1,11 @@
 Feature: running console commands
 
   Scenario: entering simple text into the console
-    Given the workspace contains a file "echo.js" with content:
+    Given the source code contains a file "create-echo-server.md" with content:
       """
+      Create a file <a type="workspace/new-file">**echo.js** with content:
+
+      ```
       const readline = require("readline")
       var rl = readline.createInterface({
         input: process.stdin,
@@ -15,6 +18,7 @@ Feature: running console commands
         rl.close()
         process.exit()
       })
+      ```
       """
     And the source code contains a file "enter-input.md" with content:
       """
@@ -41,8 +45,11 @@ Feature: running console commands
       """
 
   Scenario: entering complex text into the console
-    Given the workspace contains a file "input.js" with content:
+    Given the source code contains a file "create-input-server.md" with content:
       """
+      Create a file <a type="workspace/new-file">**input.js** with content:
+
+      ```
       const readline = require("readline")
       var rl = readline.createInterface({
         input: process.stdin,
@@ -57,6 +64,7 @@ Feature: running console commands
           process.exit()
         })
       })
+      ```
       """
     And the source code contains a file "enter-input.md" with content:
       """

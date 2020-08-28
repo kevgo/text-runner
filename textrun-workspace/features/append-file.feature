@@ -1,20 +1,15 @@
 Feature: Appending content to existing workspace files
 
   Scenario: the file exists
-    Given the workspace contains a directory "foo"
-    And the workspace contains a file "foo/bar" with content "hello"
-    And the source code contains a file "directory_changer.md" with content:
+    Given the source code contains a file "directory_changer.md" with content:
       """
-      <a type="workspace/additional-file-content">
-
-      Append to file **foo/bar** the content ` appended content`.
-
-      </a>.
+      Create a file <a type="workspace/new-file">**foo/bar** with content `hello`</a>.
+      Now append to file <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
       """
-    When running "text-run --keep-workspace"
+    When running text-run
     Then it signals:
       | FILENAME | directory_changer.md   |
-      | LINE     | 1                      |
+      | LINE     | 2                      |
       | MESSAGE  | append to file foo/bar |
     And the test directory now contains a file "foo/bar" with content:
       """

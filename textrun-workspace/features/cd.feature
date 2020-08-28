@@ -1,40 +1,20 @@
 Feature: changing the working directory
 
-  Scenario: pointing to an existing directory via hyperlink
-    Given the workspace contains a directory "foo"
-    And the workspace contains a file "foo/bar" with content "hello"
-    And the source code contains a file "directory_changer.md" with content:
+  Scenario: existing directory
+    Given the source code contains a file "directory_changer.md" with content:
       """
+      Create file <a type="workspace/new-file">**foo/bar** with content `hello`</a>.
+
       Change into the <code type="workspace/working-dir">foo</code> directory.
-      You see a file <a type="workspace/existing-file">
-        __bar__ `hello`
-      </a>
+      You see a file <a type="workspace/existing-file">__bar__ `hello` </a>.
       """
     When running text-run
     Then it signals:
       | FILENAME | directory_changer.md            |
-      | LINE     | 1                               |
+      | LINE     | 3                               |
       | MESSAGE  | changing into the foo directory |
 
-
-  Scenario: pointing to an existing directory via code block
-    Given the workspace contains a directory "foo"
-    And the workspace contains a file "foo/bar" with content "hello"
-    And the source code contains a file "directory_changer.md" with content:
-      """
-      <code type="workspace/working-dir">foo</code>
-      <a type="workspace/existing-file">
-        __bar__ `hello`
-      </a>
-      """
-    When running text-run
-    Then it signals:
-      | FILENAME | directory_changer.md            |
-      | LINE     | 1                               |
-      | MESSAGE  | changing into the foo directory |
-
-
-  Scenario: pointing to a non-existing directory
+  Scenario: non-existing directory
     Given the source code contains a file "directory_changer.md" with content:
       """
       <code type="workspace/working-dir">foo</code>

@@ -14,13 +14,11 @@ test("mergeConfigurations()", function () {
   }
   const defaultValues: UserProvidedConfiguration = {
     fileGlob: "*.md",
-    keepWorkspace: false,
   }
   const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
   assert.deepEqual(result, {
     command: "run",
     fileGlob: "1.md",
-    keepWorkspace: false,
     offline: false,
   })
 })

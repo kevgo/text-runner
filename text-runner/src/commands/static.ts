@@ -1,5 +1,4 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { Configuration } from "../configuration/types/configuration"
@@ -50,9 +49,6 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepWorkspace) {
-    await fs.remove(config.workspace)
-  }
 
   // step 9: write stats
   if (config.formatterName !== "silent") {

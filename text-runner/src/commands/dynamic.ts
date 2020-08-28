@@ -1,5 +1,4 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
 import { extractActivities } from "../activity-list/extract-activities"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
 import { Configuration } from "../configuration/types/configuration"
@@ -49,9 +48,6 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (!error && !config.keepWorkspace) {
-    await fs.remove(config.workspace)
-  }
 
   // step 9: write stats
   let text = "\n"

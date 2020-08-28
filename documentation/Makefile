@@ -7,7 +7,6 @@ cuke-lerna:
 
 docs: build  # runs the documentation tests
 	echo documentation doc-tests ...
-	rm -rf tmp
 	${CURDIR}/node_modules/.bin/text-run static --offline --format progress
 	${CURDIR}/node_modules/.bin/text-run dynamic --format progress
 

@@ -3,12 +3,12 @@ Feature: skipping an action
   Background:
     Given the source code contains a file "1.md" with content:
       """
-      <a type="hello-world">
+      <a type="skip-action">
       </a>
       """
 
   Scenario: skipping a synchronous action
-    Given the source code contains a file "text-run/hello-world.js" with content:
+    Given the source code contains a file "text-run/skip-action.js" with content:
       """
       module.exports = (action) => {
         return action.SKIPPING
@@ -18,10 +18,10 @@ Feature: skipping an action
     Then it signals:
       | FILENAME | 1.md                  |
       | LINE     | 1                     |
-      | MESSAGE  | skipping: Hello world |
+      | MESSAGE  | skipping: Skip action |
 
   Scenario: skipping an asynchronous action
-    Given the source code contains a file "text-run/hello-world.js" with content:
+    Given the source code contains a file "text-run/skip-action.js" with content:
       """
       module.exports = async (action) => {
         return action.SKIPPING
@@ -31,10 +31,10 @@ Feature: skipping an action
     Then it signals:
       | FILENAME | 1.md                  |
       | LINE     | 1                     |
-      | MESSAGE  | skipping: Hello world |
+      | MESSAGE  | skipping: Skip action |
 
   Scenario: skipping a callback action
-    Given the source code contains a file "text-run/hello-world.js" with content:
+    Given the source code contains a file "text-run/skip-action.js" with content:
       """
       module.exports = (action, done) => {
         done(null, action.SKIPPING)
@@ -44,11 +44,11 @@ Feature: skipping an action
     Then it signals:
       | FILENAME | 1.md                  |
       | LINE     | 1                     |
-      | MESSAGE  | skipping: Hello world |
+      | MESSAGE  | skipping: Skip action |
 
 
   Scenario: skipping a promise action
-    Given the source code contains a file "text-run/hello-world.js" with content:
+    Given the source code contains a file "text-run/skip-action.js" with content:
       """
       module.exports = function(action) {
         return new Promise(function(resolve) {
@@ -60,4 +60,4 @@ Feature: skipping an action
     Then it signals:
       | FILENAME | 1.md                  |
       | LINE     | 1                     |
-      | MESSAGE  | skipping: Hello world |
+      | MESSAGE  | skipping: Skip action |

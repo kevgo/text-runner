@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"

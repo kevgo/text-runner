@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 import { makefileTargets } from "../helpers/makefile-targets"

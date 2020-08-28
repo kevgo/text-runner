@@ -1,7 +1,7 @@
 import * as assertNoDiff from "assert-no-diff"
 import * as color from "colorette"
 import * as eol from "eol"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 

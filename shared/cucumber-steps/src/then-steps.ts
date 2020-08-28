@@ -5,6 +5,8 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as psTreeR from "ps-tree"
 import * as util from "util"
+import stripAnsi = require("strip-ansi")
+import { ActivityResult } from "text-runner"
 
 const psTree = util.promisify(psTreeR)
 
@@ -67,8 +69,41 @@ Then("it runs without errors", function () {
   // Nothing to do here
 })
 
-Then("it signals:", function (table) {
+Then("it prints:", function (table) {
   this.verifyOutput(table.rowsHash())
+})
+
+Then("it signals:", function (table) {
+  console.log(11111111111)
+  const results = this.apiResults as ActivityResult[]
+  const tableHash = table.rowsHash()
+  console.log(tableHash)
+  const want = {
+    filename: tableHash.FILENAME,
+    line: tableHash.LINE,
+    activityName: tableHash.MESSAGE,
+  }
+  for (const result of results) {
+    console.log(result)
+    if (
+      result.activity.file !== want.filename ||
+      result.activity.line !== want.line ||
+      result.activity.actionName !== want.activityName
+    ) {
+      continue
+    }
+    // here the three items above match, check the output
+    if (table.OUTPUT) {
+      assert.include(result.output, table.OUTPUT)
+    }
+    return
+  }
+  // here we didn't find a match
+  console.log(`Text-Runner executed these ${results.length} activities:`)
+  for (const result of results) {
+    console.log(`- ${result.activity.file}:${result.activity.line}: ${result.activity.actionName}`)
+  }
+  throw new Error("Expected activity not executed")
 })
 
 Then("the call fails with the error:", function (expectedError) {

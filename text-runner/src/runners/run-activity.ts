@@ -56,13 +56,13 @@ export async function runActivity(
     statsCounter.error()
     if (isUserError(err)) {
       formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
-      return { activity, error: new PrintedUserError(err) }
+      return { activity, error: new PrintedUserError(err), output: outputCollector.toString() }
     } else {
       // here we have a developer error like for example TypeError
       return err
     }
   }
-  return { activity, error: null }
+  return { activity, error: null, output: outputCollector.toString() }
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {

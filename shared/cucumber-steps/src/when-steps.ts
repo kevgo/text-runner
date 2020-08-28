@@ -8,7 +8,8 @@ When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function 
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
-  const errors = await this.executeAPI({ command: "run", expectError })
+  this.apiResults = await this.executeAPI({ command: "run", expectError })
+  const errors = this.apiResults.map((result: any) => result.error).filter((e: Error) => e) as Error[]
   if (errors.length > 0 && !expectError) {
     console.log(`${errors.length} errors:`)
     for (const error of errors) {

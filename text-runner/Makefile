@@ -7,8 +7,11 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # runs the feature specs
-	echo Text-Runner E2E tests ...
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
+
+cuke-lerna: build  # runs the feature specs
+	echo Text-Runner E2E tests ...
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format summary --parallel `node -e 'console.log(os.cpus().length)'`
 
 cuke-ci:  # runs the feature specs on CI
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8
@@ -48,7 +51,7 @@ prepublish: build  # prepares the code base for publishing
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
-test: lint unit cuke docs  # runs all tests
+test: lint unit cuke-lerna docs  # runs all tests
 .PHONY: test
 
 test-ts: unit cuke  # runs only the TypeScript tests

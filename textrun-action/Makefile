@@ -7,6 +7,7 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke:
+cuke-lerna:
 
 docs: build  # runs the documentation tests
 	echo textrun-action documentation tests ...

@@ -2,7 +2,8 @@ build:  # builds for the current platform
 
 clean:  # Removes all build artifacts
 
-cuke: build  # runs the feature specs
+cuke:
+cuke-lerna:
 
 docs: build  # runs the documentation tests
 	echo documentation doc-tests ...
@@ -22,7 +23,7 @@ lint:  # lints all files in this codebase
 	${CURDIR}/node_modules/.bin/remark . --quiet &
 	${CURDIR}/node_modules/.bin/prettier -l .
 
-test: lint unit cuke docs  # runs all tests
+test: lint unit cuke-lerna docs  # runs all tests
 
 test-ts: unit cuke  # runs all code tests
 

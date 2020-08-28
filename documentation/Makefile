@@ -12,7 +12,7 @@ docs: build  # runs the documentation tests
 
 fix:  # runs the auto-fixers
 	echo documentation auto-fixes ...
-	${CURDIR}/../node_modules/.bin/prettier --write .
+	${CURDIR}/node_modules/.bin/prettier --write .
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -20,7 +20,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	echo documentation linters ...
 	${CURDIR}/node_modules/.bin/remark . --quiet &
-	${CURDIR}/../node_modules/.bin/prettier -l .
+	${CURDIR}/node_modules/.bin/prettier -l .
 
 test: lint unit cuke docs  # runs all tests
 

@@ -1,28 +1,23 @@
 Feature: running console commands
 
   Scenario: entering simple text into the console
-    Given the source code contains a file "enter-input.md" with content:
+    Given the workspace contains a file "echo.js" with content:
       """
-      <a type="workspace/new-file">
-
-      Create a server called **echo.js**:
-
-      ```
       var fs = require("fs");
       var stdinBuffer = fs.readFileSync(0, "utf8");
       console.log("You entered:", stdinBuffer);
-      ```
-      </a>
-
+      """
+    And the source code contains a file "enter-input.md" with content:
+      """
       <a type="shell/command-with-input">
 
       Now execute this server by running `node echo.js`
       and enter:
 
       <table>
-      <tr>
-      <td>123</td>
-      </tr>
+        <tr>
+          <td>123</td>
+        </tr>
       </table>
 
       </a>
@@ -30,7 +25,7 @@ Feature: running console commands
     When running text-run
     Then it signals:
       | FILENAME | enter-input.md                        |
-      | LINE     | 12                                    |
+      | LINE     | 1                                     |
       | MESSAGE  | running console command: node echo.js |
     And it prints:
       """
@@ -38,13 +33,8 @@ Feature: running console commands
       """
 
   Scenario: entering complex text into the console
-    Given the source code contains a file "enter-input.md" with content:
+    Given the workspace contains a file "input.js" with content:
       """
-      <a type="workspace/new-file">
-
-      Create a server called **input.js**:
-
-      ```
       const readline = require("readline")
       var rl = readline.createInterface({
         input: process.stdin,
@@ -59,9 +49,9 @@ Feature: running console commands
           process.exit()
         })
       })
-      ```
-      </a>
-
+      """
+    And the source code contains a file "enter-input.md" with content:
+      """
       <a type="shell/command-with-input">
 
       Now execute this server by running `node input.js`
@@ -87,7 +77,7 @@ Feature: running console commands
     When running text-run
     Then it signals:
       | FILENAME | enter-input.md                         |
-      | LINE     | 23                                     |
+      | LINE     | 1                                      |
       | MESSAGE  | running console command: node input.js |
     And it prints:
       """

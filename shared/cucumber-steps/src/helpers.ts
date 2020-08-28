@@ -8,15 +8,6 @@ export function fullTextRunPath(platform: string) {
   return result
 }
 
-// TODO: merge with fullTextRunPath above
-export function globalTextRunPath(platform: string) {
-  let result = path.join(__dirname, "..", "..", "..", "text-runner", "bin", "text-run")
-  if (platform === "win32") {
-    result += ".cmd"
-  }
-  return result
-}
-
 export function makeFullPath(command: string, platform: string) {
   if (/^text-run/.test(command)) {
     return command.replace(/^text-run/, fullTextRunPath(platform))

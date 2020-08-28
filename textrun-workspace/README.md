@@ -40,22 +40,18 @@ directory. Now you can change into it via this Markdown code:
 ### create-directory
 
 The <b type="action/name-full">workspace/new-directory</b> action creates a
-directory with the given name in the workspace. As an example, consider this
-snippet of documentation:
+directory with the given name in the workspace. Here is a usage example:
 
 <a type="extension/runnable-region">
 
 ```html
-To get started, please create a directory named
-<b type="workspace/new-directory">utils</b>. We will put all the utilities we
-create later in there.
+Create a directory named
+<b type="workspace/new-directory">utils</b>.
 ```
 
 </a>
 
-<!-- TODO: verify the folder exists -->
-
-When executing the documentation, Text-Runner will create a
+When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">utils</i> directory in the workspace,
 just as the user would.
 

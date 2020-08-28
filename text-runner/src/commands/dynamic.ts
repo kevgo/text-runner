@@ -49,9 +49,6 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (!error && !config.keepWorkspace) {
-    await fs.remove(config.workspace)
-  }
 
   // step 9: write stats
   let text = "\n"

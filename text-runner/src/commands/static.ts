@@ -50,9 +50,6 @@ export async function staticCommand(config: Configuration): Promise<Error[]> {
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
-  if (results.length === 0 && !config.keepWorkspace) {
-    await fs.remove(config.workspace)
-  }
 
   // step 9: write stats
   if (config.formatterName !== "silent") {

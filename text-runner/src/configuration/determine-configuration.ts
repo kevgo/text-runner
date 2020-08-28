@@ -9,7 +9,6 @@ const defaultValues: Configuration = {
   exclude: [],
   fileGlob: "**/*.md",
   formatterName: "detailed",
-  keepWorkspace: false,
   offline: false,
   publications: new Publications(),
   sourceDir: process.cwd(),

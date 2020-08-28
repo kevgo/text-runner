@@ -22,7 +22,6 @@ cuke-online: build  # runs the feature specs that don't need an online connectio
 
 docs:  # verify documentation
 	echo Text-Runner documentation tests ...
-	rm -rf tmp
 	${CURDIR}/bin/text-run --format progress --offline
 
 fix:  # runs the fixers

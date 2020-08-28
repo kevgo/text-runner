@@ -15,7 +15,6 @@ cuke-lerna: build  # runs the feature specs
 
 docs: build  # runs the documentation tests
 	echo textrun-make documentation tests ...
-	rm -rf tmp
 	${CURDIR}/node_modules/.bin/text-run static --offline --format progress
 	${CURDIR}/node_modules/.bin/text-run dynamic --format progress
 

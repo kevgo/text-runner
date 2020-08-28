@@ -2,7 +2,8 @@ build:  # builds for the current platform
 
 clean:  # Removes all build artifacts
 
-cuke: build  # runs the feature specs
+cuke:
+cuke-lerna:
 
 docs: build  # runs the documentation tests
 	echo documentation doc-tests ...

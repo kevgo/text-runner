@@ -7,6 +7,7 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # runs the feature specs
+cuke-lerna:
 
 docs:  # runs the documentation tests
 

@@ -7,8 +7,11 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # runs the feature specs
-	echo textrun-shell E2E tests ...
 	${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar 2> /dev/null
+
+cuke-lerna: build  # runs the feature specs
+	echo textrun-shell E2E tests ...
+	${CURDIR}/node_modules/.bin/cucumber-js --format summary 2> /dev/null
 
 docs: build  # runs the documentation tests
 	echo textrun-shell documentation tests ...

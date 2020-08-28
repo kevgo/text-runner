@@ -3,6 +3,7 @@ build:
 clean:
 
 cuke:
+cuke-lerna:
 
 docs:
 	echo custom-action-async documentation tests ...

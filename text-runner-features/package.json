@@ -1,0 +1,9 @@
+{
+  "name": "text-runner-features",
+  "version": "0.0.0",
+  "dependencies": {
+    "text-runner": "4.0.3"
+  },
+  "license": "ISC",
+  "private": true
+}

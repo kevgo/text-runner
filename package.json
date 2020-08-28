@@ -7,6 +7,7 @@
     "examples/custom-action-typescript",
     "shared/cucumber-steps",
     "text-runner",
+    "text-runner-features",
     "textrun-action",
     "textrun-extension",
     "textrun-javascript",

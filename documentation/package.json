@@ -5,6 +5,7 @@
     "custom-action-coffeescript": "0.0.0",
     "custom-action-examples": "0.0.0",
     "custom-action-typescript": "0.0.0",
+    "prettier": "2.0.5",
     "remark-cli": "8.0.1",
     "remark-lint": "7.0.1",
     "remark-preset-lint-recommended": "4.0.1",

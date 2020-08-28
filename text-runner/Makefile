@@ -17,9 +17,6 @@ cuke-online: build  # runs the feature specs that don't need an online connectio
 	echo running Text-Runner offline feature specs ...
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
-cuke-win:  # runs the feature specs on Windows
-	${CURDIR}/node_modules/.bin/cucumber-js --tags '(not @todo) and (not @skipWindows)' --format progress --parallel `node -e 'console.log(os.cpus().length)'`
-
 docs:  # verify documentation
 	echo Text-Runner documentation tests ...
 	rm -rf tmp

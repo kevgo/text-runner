@@ -3,9 +3,18 @@ Feature: running console commands
   Scenario: entering simple text into the console
     Given the workspace contains a file "echo.js" with content:
       """
-      var fs = require("fs");
-      var stdinBuffer = fs.readFileSync(0, "utf8");
-      console.log("You entered:", stdinBuffer);
+      const readline = require("readline")
+      var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false,
+      })
+
+      rl.question("Your input", (answer) => {
+        console.log("You entered:", answer)
+        rl.close()
+        process.exit()
+      })
       """
     And the source code contains a file "enter-input.md" with content:
       """

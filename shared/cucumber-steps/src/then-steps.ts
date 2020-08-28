@@ -1,7 +1,7 @@
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
 import { Then } from "cucumber"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import * as psTreeR from "ps-tree"
 import * as util from "util"

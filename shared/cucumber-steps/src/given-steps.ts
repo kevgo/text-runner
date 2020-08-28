@@ -1,12 +1,13 @@
 import { Given } from "cucumber"
-import * as fs from "fs-extra"
+import * as fse from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import { cp } from "shelljs"
 
 Given("a broken file {string}", async function (filePath) {
   const subdir = path.dirname(filePath)
   if (subdir !== ".") {
-    await fs.ensureDir(path.join(this.rootDir, subdir))
+    await fse.ensureDir(path.join(this.rootDir, subdir))
   }
   await fs.writeFile(
     path.join(this.rootDir, filePath),
@@ -40,44 +41,44 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function (exampleName) {
-  await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
+  await fse.copy(path.join("documentation", "examples", exampleName), this.rootDir)
 })
 
 Given("I am in a directory that contains the {string} example with the configuration file:", async function (
   exampleName,
   configFileContent
 ) {
-  await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
+  await fse.copy(path.join("documentation", "examples", exampleName), this.rootDir)
   await fs.writeFile(path.join(this.rootDir, "text-run.yml"), configFileContent)
 })
 
 Given("I am in a directory that contains the {string} example( without a configuration file)", async function (
   exampleName
 ) {
-  await fs.copy(path.join("documentation", "examples", exampleName), this.rootDir)
+  await fse.copy(path.join("documentation", "examples", exampleName), this.rootDir)
 })
 
 Given("the source code contains a directory {string}", function (dirName) {
-  return fs.ensureDir(path.join(this.rootDir, dirName))
+  return fse.ensureDir(path.join(this.rootDir, dirName))
 })
 
 Given("the source code contains a file {string}", async function (fileName) {
-  await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
+  await fse.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, fileName), "content")
 })
 
 Given("the source code contains a file {string} with content:", async function (fileName, content) {
-  await fs.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
+  await fse.ensureDir(path.join(this.rootDir, path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, fileName), content)
 })
 
 Given("the workspace contains a file {string}", async function (fileName) {
-  await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
+  await fse.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), "content")
 })
 
 Given("the workspace contains a file {string} with content {string}", async function (fileName, content) {
-  await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
+  await fse.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
 })
 
@@ -93,7 +94,7 @@ testable documentation
 })
 
 Given("the source code contains the HelloWorld action", async function () {
-  await fs.ensureDir(path.join(this.rootDir, "text-run"))
+  await fse.ensureDir(path.join(this.rootDir, "text-run"))
   await fs.writeFile(
     path.join(this.rootDir, "text-run", "hello-world.js"),
     `
@@ -102,7 +103,7 @@ Given("the source code contains the HelloWorld action", async function () {
 })
 
 Given("the workspace contains a file {string} with content:", async function (fileName, content) {
-  await fs.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
+  await fse.ensureDir(path.join(this.rootDir, "tmp", path.dirname(fileName)))
   await fs.writeFile(path.join(this.rootDir, "tmp", fileName), content)
 })
 
@@ -111,7 +112,7 @@ Given("the text-run configuration contains:", async function (text) {
 })
 
 Given("the workspace contains a directory {string}", async function (dir) {
-  await fs.ensureDir(path.join(this.rootDir, "tmp", dir))
+  await fse.ensureDir(path.join(this.rootDir, "tmp", dir))
 })
 
 Given("the workspace contains an empty file {string}", async function (fileName) {
@@ -119,7 +120,7 @@ Given("the workspace contains an empty file {string}", async function (fileName)
 })
 
 Given("the workspace contains an image {string}", async function (imageName) {
-  await fs.ensureDir(path.join(this.rootDir, path.dirname(imageName)))
+  await fse.ensureDir(path.join(this.rootDir, path.dirname(imageName)))
   cp(path.join(__dirname, "..", path.basename(imageName)), path.join(this.rootDir, imageName))
 })
 

@@ -1,4 +1,4 @@
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 
 export async function hasDirectory(dirname: string): Promise<boolean> {
   try {

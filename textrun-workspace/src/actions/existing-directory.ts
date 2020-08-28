@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import { ActionArgs } from "text-runner"
 
@@ -11,7 +11,7 @@ export async function existingDirectory(action: ActionArgs) {
   const directory = action.region.text()
   const fullPath = path.join(action.configuration.workspace, directory)
   action.name(`directory ${color.cyan(directory)} exists in the workspace`)
-  let stats: fs.Stats
+  let stats: any
   try {
     stats = await fs.lstat(fullPath)
   } catch (err) {

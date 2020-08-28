@@ -15,8 +15,8 @@ export async function existingFile(action: ActionArgs) {
     actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
     if (e.code === "ENOENT") {
-      // TODO: show all files in the folder here
-      throw new Error(`file not found: ${filePath}`)
+      const files = await fs.readdir(process.cwd())
+      throw new Error(`file not found: ${filePath}\n\nfolder "${process.cwd()}" has these files: ${files.join(", ")}`)
     } else {
       throw e
     }

@@ -1,7 +1,7 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
 import { setWorldConstructor } from "cucumber"
-import * as fs from "fs-extra"
+import * as fs from "fs"
 import * as glob from "glob"
 import { createObservableProcess } from "observable-process"
 import * as path from "path"
@@ -84,7 +84,6 @@ function World() {
     if (table["EXIT CODE"]) {
       throw new Error("Verifying normal output but table contains an exit code")
     }
-    // TODO: check error code
     const actual = helpers.standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!

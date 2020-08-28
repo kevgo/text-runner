@@ -6,10 +6,10 @@ clean:  # Removes all build artifacts
 	echo Text-Runner build artifact cleanup ...
 	rm -rf dist
 
-cuke: build  # runs the feature specs
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
+cuke:  # for manually running the cukes for this codebase
+  cd ../text-runner-features && make cuke
 
-cuke-lerna:  # runs the feature specs
+cuke-lerna:  # cukes for this codebase are in ../text-runner-features, Lerna runs those
 
 cuke-ci:  # runs the feature specs on CI
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8

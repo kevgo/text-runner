@@ -54,8 +54,7 @@ test: lint unit cuke-lerna docs  # runs all tests
 .PHONY: test
 
 test-ts: unit cuke  # runs only the TypeScript tests
-
-test-offline: lint unit cuke-offline docs   # runs all tests that don't need an online connection
+test-online: lint unit cuke-online docs   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
 	echo Text-Runner unit tests ...

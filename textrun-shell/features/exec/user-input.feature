@@ -1,15 +1,26 @@
-@skipWindows
 Feature: running console commands
 
   Scenario: entering simple text into the console
-    Given the source code contains a file "enter-input.md" with content:
+    Given the workspace contains a file "echo.js" with content:
+      """
+      const readline = require("readline")
+      var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false,
+      })
+
+      rl.question("Your input", (answer) => {
+        console.log("You entered:", answer)
+        rl.close()
+        process.exit()
+      })
+      """
+    And the source code contains a file "enter-input.md" with content:
       """
       <a type="shell/command-with-input">
 
-      ```
-      $ read foo
-      $ echo You entered: $foo xxx
-      ```
+      Run `node echo.js` and enter:
 
       <table>
         <tr>
@@ -21,26 +32,37 @@ Feature: running console commands
       """
     When running text-run
     Then it signals:
-      | FILENAME | enter-input.md                                              |
-      | LINE     | 1                                                           |
-      | MESSAGE  | running console command: read foo && echo You entered: $foo |
+      | FILENAME | enter-input.md                        |
+      | LINE     | 1                                     |
+      | MESSAGE  | running console command: node echo.js |
     And it prints:
       """
       You entered: 123
       """
 
   Scenario: entering complex text into the console
-    Given the source code contains a file "enter-input.md" with content:
+    Given the workspace contains a file "input.js" with content:
+      """
+      const readline = require("readline")
+      var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false,
+      })
+
+      rl.question("Name of the service to add\n", (service) => {
+        rl.question("Description\n", (description) => {
+          console.log(`service: ${service}, description: ${description}!`)
+          rl.close()
+          process.exit()
+        })
+      })
+      """
+    And the source code contains a file "enter-input.md" with content:
       """
       <a type="shell/command-with-input">
 
-      ```
-      $ echo "Name of the service to add"
-      $ read service_name
-      $ echo Description
-      $ read description
-      $ echo "service: $service_name, description: $description"
-      ```
+      Run `node input.js` and enter:
 
       <table>
         <tr>
@@ -61,9 +83,9 @@ Feature: running console commands
       """
     When running text-run
     Then it signals:
-      | FILENAME | enter-input.md                                                                                                                                                                      |
-      | LINE     | 1                                                                                                                                                                                   |
-      | MESSAGE  | running console command: echo "Name of the service to add" && read service_name && echo Description && read description && echo "service: $service_name, description: $description" |
+      | FILENAME | enter-input.md                         |
+      | LINE     | 1                                      |
+      | MESSAGE  | running console command: node input.js |
     And it prints:
       """
       service: html-server, description: serves the HTML UI

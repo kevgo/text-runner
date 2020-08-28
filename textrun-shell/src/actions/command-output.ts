@@ -1,6 +1,7 @@
 import * as assertNoDiff from "assert-no-diff"
 import { CurrentCommand } from "../helpers/current-command"
 import { ActionArgs } from "text-runner"
+import stripAnsi = require("strip-ansi")
 
 export function commandOutput(action: ActionArgs) {
   action.name("verifying the output of the last run console command")
@@ -9,14 +10,14 @@ export function commandOutput(action: ActionArgs) {
     .split("\n")
     .map((line: string) => line.trim())
     .filter((line: string) => line)
-  const actualOutput = CurrentCommand.instance().output.fullText()
+  const actualOutput = stripAnsi(CurrentCommand.instance().output.fullText())
   const actualLines = actualOutput
     .split("\n")
     .map((line) => line.trim())
     .filter((line) => line)
   const commonLines = actualLines.filter((line) => expectedLines.includes(line))
   if (commonLines.length === 0) {
-    throw new Error(`expected content not found: ${expectedText}\nThis is the output I found:\n${actualOutput}`)
+    throw new Error(`expected content not found: "${expectedText}"\nThis is the output I found:\n${actualOutput}`)
   }
   assertNoDiff.trimmedLines(expectedLines.join("\n"), commonLines.join("\n"))
 }

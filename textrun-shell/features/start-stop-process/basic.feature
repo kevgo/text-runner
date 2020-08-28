@@ -1,4 +1,3 @@
-@skipWindows
 Feature: long-running processes
 
   Scenario: starting and stopping a long-running process

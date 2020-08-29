@@ -17,14 +17,12 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   const stats = new StatsCounter()
 
   // step 1: create workspace
-  console.log("SCD:", config.sourceDir)
   if (!config.workspace) {
     config.workspace = await createWorkspace(config)
   }
 
   // step 2: find files
   const filenames = await getFileNames(config)
-  console.log(filenames)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
     return []

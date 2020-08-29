@@ -15,7 +15,7 @@ export async function executeSequential(
   statsCounter: StatsCounter,
   formatter: Formatter
 ): Promise<ExecuteResult> {
-  const result = new ExecuteResult()
+  const result = ExecuteResult.empty()
   for (const activity of activities) {
     const res = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
     result.merge(res)

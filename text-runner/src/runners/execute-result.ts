@@ -22,14 +22,19 @@ export class ExecuteResult {
     this.errorCount = errorCount
   }
 
-  merge(result: ExecuteResult) {
-    this.activityResults.push(...result.activityResults)
-    this.errorCount += result.errorCount
+  /** provides a new ExecuteResult instance that contains this instance plus the given one */
+  merge(other: ExecuteResult): ExecuteResult {
+    const result = new ExecuteResult(this.activityResults, this.errorCount)
+    result.activityResults.push(...other.activityResults)
+    result.errorCount += other.errorCount
+    return result
   }
 
-  mergeMany(results: ExecuteResult[]) {
-    for (const result of results) {
+  mergeMany(others: ExecuteResult[]): ExecuteResult {
+    const result = new ExecuteResult(this.activityResults, this.errorCount)
+    for (const result of others) {
       this.merge(result)
     }
+    return result
   }
 }

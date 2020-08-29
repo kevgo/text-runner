@@ -68,7 +68,7 @@ export async function runActivity(
     throw err
   }
   const activityResult: ActivityResult = { activity, error: null, output: outputCollector.toString() }
-  return { activityResults: [activityResult], errorCount: 0 }
+  return new ExecuteResult([activityResult], 0)
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {

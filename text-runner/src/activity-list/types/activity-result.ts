@@ -1,4 +1,4 @@
-import { Activity } from "./activity"
+import { Activity, scaffoldActivity } from "./activity"
 
 /** ActivityResult represents the result of an activity. */
 export interface ActivityResult {
@@ -10,4 +10,12 @@ export interface ActivityResult {
 
   /** the error encountered */
   error: Error | null
+}
+
+export function scaffoldActivityResult(): ActivityResult {
+  return {
+    activity: scaffoldActivity,
+    error: null,
+    output: "",
+  }
 }

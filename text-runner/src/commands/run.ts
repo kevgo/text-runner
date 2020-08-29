@@ -12,7 +12,8 @@ import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 
-export async function runCommand(config: Configuration): Promise<Error[]> {
+/** executes "text-run run", prints everything, returns the number of errors encountered */
+export async function runCommand(config: Configuration): Promise<number> {
   const stats = new StatsCounter()
 
   // step 1: create workspace
@@ -24,7 +25,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return []
+    return 0
   }
 
   // step 3: read and parse files
@@ -41,7 +42,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const links = extractImagesAndLinks(ASTs)
   if (activities.length + links.length === 0) {
     console.log(color.magenta("no activities found"))
-    return []
+    return 0
   }
 
   // step 7: execute the ActivityList
@@ -49,7 +50,8 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
   jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))
-  const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
+  const errors = await Promise.all(jobs)
+  const errorCount = errors.reduce((acc, val) => acc + val, 0)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -57,14 +59,15 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 9: write stats
   let text = "\n"
   let colorFn: color.Style
-  if (results.length === 0) {
+  if (errorCount === 0) {
     colorFn = color.green
     text += color.green("Success! ")
   } else {
     colorFn = color.red
-    text += color.red(`${results.length} errors, `)
+    text += color.red(`${errorCount} errors, `)
   }
   text += colorFn(`${activities.length + links.length} activities in ${filenames.length} files, ${stats.duration()}`)
   console.log(color.bold(text))
-  return results
+
+  return errorCount
 }

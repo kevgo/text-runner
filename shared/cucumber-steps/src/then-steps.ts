@@ -69,7 +69,7 @@ Then("it runs without errors", function () {
   // Nothing to do here
 })
 
-Then("it prints:", function (table) {
+Then("it signals:", function (table) {
   this.verifyOutput(table.rowsHash())
 })
 

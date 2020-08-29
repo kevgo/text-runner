@@ -25,7 +25,6 @@ export async function runCommand(config: Configuration): Promise<number> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    // TODO: make this an error?
     return 0
   }
 

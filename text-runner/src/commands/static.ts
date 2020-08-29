@@ -46,7 +46,6 @@ export async function staticCommand(config: Configuration): Promise<ActivityResu
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
   const results = await Promise.all(jobs)
-  const errors = results.map((result) => result.error).filter((error) => error) as Error[]
 
   // step 8: cleanup
   process.chdir(config.sourceDir)

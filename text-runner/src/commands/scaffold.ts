@@ -1,8 +1,8 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function scaffoldCommand(blockName: string | undefined): Promise<ActivityResult[]> {
+export async function scaffoldCommand(blockName: string | undefined): Promise<ExecuteResult> {
   if (!blockName) {
     throw new Error("no region name given")
   }
@@ -16,7 +16,7 @@ export async function scaffoldCommand(blockName: string | undefined): Promise<Ac
     await fs.mkdir("text-run")
   }
   await fs.writeFile(path.join("text-run", blockName + ".js"), template(blockName), "utf8")
-  return []
+  return ExecuteResult.empty()
 }
 
 function template(filename: string) {

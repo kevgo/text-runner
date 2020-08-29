@@ -9,9 +9,9 @@ import { executeParallel } from "../runners/execute-parallel"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function staticCommand(config: Configuration): Promise<ActivityResult[]> {
+export async function staticCommand(config: Configuration): Promise<ExecuteResult> {
   // step 1: create working dir
   if (!config.workspace) {
     config.workspace = await createWorkspace(config)
@@ -21,7 +21,7 @@ export async function staticCommand(config: Configuration): Promise<ActivityResu
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return []
+    return ExecuteResult.empty()
   }
   const stats = new StatsCounter(filenames.length)
 
@@ -35,7 +35,7 @@ export async function staticCommand(config: Configuration): Promise<ActivityResu
   const links = extractImagesAndLinks(ASTs)
   if (links.length === 0) {
     console.log(color.magenta("no activities found"))
-    return []
+    return ExecuteResult.empty()
   }
 
   // step 6: find actions
@@ -44,8 +44,10 @@ export async function staticCommand(config: Configuration): Promise<ActivityResu
   // step 7: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, links.length, config)
   process.chdir(config.workspace)
-  const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
-  const results = await Promise.all(jobs)
+  const parResultsP = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
+  const parResults = await Promise.all(parResultsP)
+  const result = ExecuteResult.empty()
+  result.mergeMany(parResults)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -53,5 +55,5 @@ export async function staticCommand(config: Configuration): Promise<ActivityResu
   // step 9: write stats
   formatter.summary(stats)
 
-  return results
+  return result
 }

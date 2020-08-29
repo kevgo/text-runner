@@ -4,13 +4,14 @@ import { extractActivities } from "../activity-list/extract-activities"
 import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function unusedCommand(config: Configuration) {
+export async function unusedCommand(config: Configuration): Promise<ExecuteResult> {
   // step 1: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return
+    return ExecuteResult.empty()
   }
 
   // step 2: read and parse files
@@ -32,4 +33,6 @@ export async function unusedCommand(config: Configuration) {
   for (const unusedActivityName of unusedActivityNames) {
     console.log(`- ${unusedActivityName}`)
   }
+
+  return ExecuteResult.empty()
 }

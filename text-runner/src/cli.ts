@@ -5,14 +5,16 @@ import { PrintedUserError } from "./errors/printed-user-error"
 import { UnprintedUserError } from "./errors/unprinted-user-error"
 import { printUserError } from "./helpers/print-user-error"
 import { textRunner } from "./text-runner"
+import { ExecuteResult } from "./runners/execute-result"
 
 cliCursor.hide()
 
 async function main() {
   const cliArgs = parseCmdlineArgs(process.argv)
-  const results = await textRunner(cliArgs)
-  const errors = results.map((result) => result.error).filter((error) => error) as Error[]
-  for (const error of errors) {
+  let result = ExecuteResult.empty()
+  try {
+    result = await textRunner(cliArgs)
+  } catch (error) {
     if (error instanceof UnprintedUserError) {
       printUserError(error)
     } else if (error instanceof PrintedUserError) {
@@ -22,6 +24,6 @@ async function main() {
     }
   }
   await endChildProcesses()
-  process.exit(errors.length)
+  process.exit(result.errorCount)
 }
 main()

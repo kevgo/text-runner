@@ -7,7 +7,7 @@ import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import stripAnsi = require("strip-ansi")
 import * as helpers from "./helpers"
-import { textRunner, ActivityResult } from "text-runner"
+import { textRunner } from "text-runner"
 
 /**
  * World provides step implementations that run and test TextRunner

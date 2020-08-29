@@ -9,9 +9,9 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function dynamicCommand(config: Configuration): Promise<ActivityResult[]> {
+export async function dynamicCommand(config: Configuration): Promise<ExecuteResult> {
   // step 1: create working dir
   if (!config.workspace) {
     config.workspace = await createWorkspace(config)
@@ -21,7 +21,7 @@ export async function dynamicCommand(config: Configuration): Promise<ActivityRes
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return []
+    return ExecuteResult.empty()
   }
   const stats = new StatsCounter(filenames.length)
 
@@ -35,7 +35,7 @@ export async function dynamicCommand(config: Configuration): Promise<ActivityRes
   const activities = extractActivities(ASTs, config.regionMarker)
   if (activities.length === 0) {
     console.log(color.magenta("no activities found"))
-    return []
+    return ExecuteResult.empty()
   }
 
   // step 6: find actions

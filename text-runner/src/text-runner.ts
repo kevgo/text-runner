@@ -14,59 +14,56 @@ import { determineConfiguration } from "./configuration/determine-configuration"
 import { Configuration } from "./configuration/types/configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 import { ActivityResult } from "./activity-list/types/activity-result"
+import { ExecuteResult } from "./runners/execute-result"
 
 export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
 
 /**
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
+ * @returns the number of documentation errors encountered
+ * @throws developer errors
  */
-export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<ActivityResult[]> {
+export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   let configuration: Configuration | undefined
   try {
-    let errors: ActivityResult[] = []
     switch (cmdlineArgs.command) {
       case "help":
         await helpCommand()
-        return []
+        return ExecuteResult.empty()
       case "scaffold":
-        errors = await scaffoldCommand(cmdlineArgs.fileGlob)
-        return errors
+        await scaffoldCommand(cmdlineArgs.fileGlob)
+        return ExecuteResult.empty()
       case "setup":
         await setupCommand()
-        return []
+        return ExecuteResult.empty()
       case "version":
         await versionCommand()
-        return []
+        return ExecuteResult.empty()
     }
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
     configuration = determineConfiguration(configFileData, cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
-        errors = await debugCommand(configuration)
-        return errors
+        return await debugCommand(configuration)
       case "dynamic":
-        errors = await dynamicCommand(configuration)
-        return errors
+        return await dynamicCommand(configuration)
       case "run":
-        errors = await runCommand(configuration)
-        return errors
+        return await runCommand(configuration)
       case "static":
-        errors = await staticCommand(configuration)
-        return errors
+        return await staticCommand(configuration)
       case "unused":
-        await unusedCommand(configuration)
-        return []
+        return await unusedCommand(configuration)
       default:
         console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
-        return []
+        return new ExecuteResult([], 1)
     }
   } catch (err) {
     if (configuration && configuration.sourceDir) {
       process.chdir(configuration.sourceDir)
     }
-    return [err]
+    throw err
   }
 }
 

@@ -11,9 +11,9 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function runCommand(config: Configuration): Promise<ActivityResult[]> {
+export async function runCommand(config: Configuration): Promise<ExecuteResult> {
   // step 1: create workspace
   if (!config.workspace) {
     config.workspace = await createWorkspace(config)
@@ -23,7 +23,7 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return []
+    return ExecuteResult.empty()
   }
   const stats = new StatsCounter(filenames.length)
 
@@ -41,7 +41,7 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   const links = extractImagesAndLinks(ASTs)
   if (activities.length + links.length === 0) {
     console.log(color.magenta("no activities found"))
-    return []
+    return ExecuteResult.empty()
   }
 
   // step 7: execute the ActivityList
@@ -52,7 +52,7 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   // execute the serial jobs
   const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
   const parRes = await Promise.all(parJobs)
-  const results = parRes.concat(seqRes)
+  seqRes.mergeMany(parRes)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -60,5 +60,5 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   // step 9: write stats
   formatter.summary(stats)
 
-  return results
+  return seqRes
 }

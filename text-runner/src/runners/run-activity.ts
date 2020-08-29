@@ -6,12 +6,13 @@ import { ActionArgs } from "../actions/types/action-args"
 import { ActionResult } from "../actions/types/action-result"
 import { Activity } from "../activity-list/types/activity"
 import { Configuration } from "../configuration/types/configuration"
-import { PrintedUserError } from "../errors/printed-user-error"
 import { Formatter } from "../formatters/types/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { StatsCounter } from "./helpers/stats-counter"
+import { PrintedUserError } from "../../dist/errors/printed-user-error"
+import { ExecuteResult } from "./execute-result"
 import { ActivityResult } from "../activity-list/types/activity-result"
 
 export async function runActivity(
@@ -21,7 +22,7 @@ export async function runActivity(
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Promise<ActivityResult> {
+): Promise<ExecuteResult> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: ActionArgs = {
@@ -56,13 +57,18 @@ export async function runActivity(
     statsCounter.error()
     if (isUserError(err)) {
       formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
-      return { activity, error: new PrintedUserError(err), output: outputCollector.toString() }
-    } else {
-      // here we have a developer error like for example TypeError
-      return err
+      const activityResult: ActivityResult = {
+        activity,
+        error: new PrintedUserError(err),
+        output: outputCollector.toString(),
+      }
+      return new ExecuteResult([activityResult], 1)
     }
+    // here we have a developer error like for example TypeError
+    throw err
   }
-  return { activity, error: null, output: outputCollector.toString() }
+  const activityResult: ActivityResult = { activity, error: null, output: outputCollector.toString() }
+  return { activityResults: [activityResult], errorCount: 0 }
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {

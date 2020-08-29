@@ -5,12 +5,12 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { AstNode } from "../parsers/standard-AST/ast-node"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function debugCommand(config: Configuration): Promise<ActivityResult[]> {
+export async function debugCommand(config: Configuration): Promise<ExecuteResult> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    return []
+    return ExecuteResult.empty()
   }
 
   console.log("AST NODES:")
@@ -47,7 +47,7 @@ export async function debugCommand(config: Configuration): Promise<ActivityResul
     console.log(key, linkTargets.targets[key])
   }
 
-  return []
+  return ExecuteResult.empty()
 }
 
 function showAttr(node: AstNode): string {

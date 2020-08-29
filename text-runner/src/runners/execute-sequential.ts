@@ -5,7 +5,7 @@ import { LinkTargetList } from "../link-targets/link-target-list"
 import { StatsCounter } from "./helpers/stats-counter"
 import { runActivity } from "./run-activity"
 import { ActionFinder } from "../actions/action-finder"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ExecuteResult } from "./execute-result"
 
 export async function executeSequential(
   activities: ActivityList,
@@ -14,13 +14,13 @@ export async function executeSequential(
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Promise<ActivityResult[]> {
-  const result: ActivityResult[] = []
+): Promise<ExecuteResult> {
+  const result = new ExecuteResult()
   for (const activity of activities) {
-    const actRes = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
-    result.push(actRes)
-    if (actRes.error) {
-      return result
+    const res = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
+    result.merge(res)
+    if (res.errorCount > 0) {
+      break
     }
   }
   return result

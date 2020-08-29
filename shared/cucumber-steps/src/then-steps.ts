@@ -90,8 +90,8 @@ Then("it executes:", function (table) {
       continue
     }
     // here the three items above match, check the output
-    if (table.OUTPUT) {
-      assert.include(result.output, table.OUTPUT)
+    if (tableHash.OUTPUT) {
+      assert.include(result.output, tableHash.OUTPUT)
     }
     return
   }

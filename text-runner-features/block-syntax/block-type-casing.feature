@@ -10,10 +10,11 @@ Feature: flexible region syntax
       </a>
       """
     When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    Then it executes:
+      | FILENAME | 1.md         |
+      | LINE     | 1            |
+      | ACTION   | hello-world  |
+      | OUTPUT   | Hello World! |
 
   Scenario: the blocktype is provided in camelCase
     Given the source code contains a file "1.md" with content:
@@ -22,10 +23,11 @@ Feature: flexible region syntax
       </a>
       """
     When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    Then it executes:
+      | FILENAME | 1.md         |
+      | LINE     | 1            |
+      | ACTION   | hello-world  |
+      | OUTPUT   | Hello World! |
 
   Scenario: the blocktype is provided in snake_case
     Given the source code contains a file "1.md" with content:
@@ -34,10 +36,11 @@ Feature: flexible region syntax
       </a>
       """
     When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    Then it executes:
+      | FILENAME | 1.md         |
+      | LINE     | 1            |
+      | ACTION   | hello-world  |
+      | OUTPUT   | Hello World! |
 
   Scenario: the blocktype is provided in kebab-case
     Given the source code contains a file "1.md" with content:
@@ -46,7 +49,8 @@ Feature: flexible region syntax
       </a>
       """
     When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    Then it executes:
+      | FILENAME | 1.md         |
+      | LINE     | 1            |
+      | ACTION   | hello-world  |
+      | OUTPUT   | Hello World! |

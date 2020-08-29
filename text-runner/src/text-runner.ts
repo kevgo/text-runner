@@ -20,52 +20,46 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
  */
-export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<Error[]> {
+export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   let configuration: Configuration | undefined
   try {
-    let errors: Error[] = []
     switch (cmdlineArgs.command) {
       case "help":
         await helpCommand()
-        return []
+        return 0
       case "scaffold":
-        errors = await scaffoldCommand(cmdlineArgs.fileGlob)
-        return errors
+        await scaffoldCommand(cmdlineArgs.fileGlob)
+        return 0
       case "setup":
         await setupCommand()
-        return []
+        return 0
       case "version":
         await versionCommand()
-        return []
+        return 0
     }
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
     configuration = determineConfiguration(configFileData, cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
-        errors = await debugCommand(configuration)
-        return errors
+        return await debugCommand(configuration)
       case "dynamic":
-        errors = await dynamicCommand(configuration)
-        return errors
+        return await dynamicCommand(configuration)
       case "run":
-        errors = await runCommand(configuration)
-        return errors
+        return await runCommand(configuration)
       case "static":
-        errors = await staticCommand(configuration)
-        return errors
+        return await staticCommand(configuration)
       case "unused":
-        await unusedCommand(configuration)
-        return []
+        return await unusedCommand(configuration)
       default:
         console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
-        return []
+        return 1
     }
   } catch (err) {
     if (configuration && configuration.sourceDir) {
       process.chdir(configuration.sourceDir)
     }
-    return [err]
+    throw err
   }
 }
 

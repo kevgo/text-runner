@@ -17,7 +17,6 @@ async function main() {
     exitCode = 1
     if (err instanceof UnprintedUserError) {
       printUserError(err)
-      // TODO: remove PrintedUserError class
     } else if (err instanceof PrintedUserError) {
       // nothing to do
     } else {

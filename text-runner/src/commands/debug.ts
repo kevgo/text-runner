@@ -6,10 +6,10 @@ import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 
-export async function debugCommand(config: Configuration): Promise<Error[]> {
+export async function debugCommand(config: Configuration): Promise<number> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    return []
+    return 0
   }
 
   console.log("AST NODES:")
@@ -46,7 +46,7 @@ export async function debugCommand(config: Configuration): Promise<Error[]> {
     console.log(key, linkTargets.targets[key])
   }
 
-  return []
+  return 0
 }
 
 function showAttr(node: AstNode): string {

@@ -13,12 +13,12 @@ export async function executeSequential(
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Promise<Error | null> {
+): Promise<number> {
   for (const activity of activities) {
-    const error = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
-    if (error) {
-      return error
+    const errorCount = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
+    if (errorCount > 0) {
+      return errorCount
     }
   }
-  return null
+  return 0
 }

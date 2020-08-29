@@ -45,23 +45,12 @@ export async function dynamicCommand(config: Configuration): Promise<ActivityRes
   const formatter = instantiateFormatter(config.formatterName, activities.length, config)
   process.chdir(config.workspace)
   const results = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
-  const errors = results.map((result) => result.error).filter((error) => !!error) as Error[]
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
 
   // step 9: write stats
-  let text = "\n"
-  let colorFn
-  if (errors.length > 0) {
-    colorFn = color.red
-    text += color.red(`${errors.length} errors, `)
-  } else {
-    colorFn = color.green
-    text += color.green("Success! ")
-  }
-  text += colorFn(`${activities.length} activities in ${filenames.length} files`)
-  text += colorFn(`, ${stats.duration()}`)
-  console.log(color.bold(text))
+  formatter.summary(stats)
+
   return results
 }

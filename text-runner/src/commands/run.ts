@@ -53,22 +53,12 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
   const parRes = await Promise.all(parJobs)
   const results = parRes.concat(seqRes)
-  const errors = results.map((result) => result.error).filter((e) => e)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
 
   // step 9: write stats
-  let text = "\n"
-  let colorFn: color.Style
-  if (errors.length === 0) {
-    colorFn = color.green
-    text += color.green("Success! ")
-  } else {
-    colorFn = color.red
-    text += color.red(`${errors.length} errors, `)
-  }
-  text += colorFn(`${activities.length + links.length} activities in ${filenames.length} files, ${stats.duration()}`)
-  console.log(color.bold(text))
+  formatter.summary(stats)
+
   return results
 }

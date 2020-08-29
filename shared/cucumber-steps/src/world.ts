@@ -7,7 +7,8 @@ import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import stripAnsi = require("strip-ansi")
 import * as helpers from "./helpers"
-import { textRunner } from "text-runner"
+import { textRunner, ActivityResult } from "text-runner"
+import { ExecuteResult } from "text-runner/dist/runners/execute-result"
 
 /**
  * World provides step implementations that run and test TextRunner
@@ -38,7 +39,7 @@ function World() {
     command: string
     expectError: boolean
     cwd: string
-  }): Promise<ActivityResult[]> {
+  }): Promise<ExecuteResult> {
     const args: any = {}
     args.cwd = params.cwd || this.rootDir
     if (this.debug) {

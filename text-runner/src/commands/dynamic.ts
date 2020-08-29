@@ -49,18 +49,8 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   process.chdir(config.sourceDir)
 
   // step 9: write stats
-  let text = "\n"
-  let colorFn
-  if (error) {
-    colorFn = color.red
-    text += color.red("1 error, ")
-  } else {
-    colorFn = color.green
-    text += color.green("Success! ")
-  }
-  text += colorFn(`${activities.length} activities in ${filenames.length} files`)
-  text += colorFn(`, ${stats.duration()}`)
-  console.log(color.bold(text))
+  formatter.summary(stats)
+
   if (error) {
     return [error]
   } else {

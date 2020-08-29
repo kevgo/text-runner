@@ -54,16 +54,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   process.chdir(config.sourceDir)
 
   // step 9: write stats
-  let text = "\n"
-  let colorFn: color.Style
-  if (results.length === 0) {
-    colorFn = color.green
-    text += color.green("Success! ")
-  } else {
-    colorFn = color.red
-    text += color.red(`${results.length} errors, `)
-  }
-  text += colorFn(`${activities.length + links.length} activities in ${filenames.length} files, ${stats.duration()}`)
-  console.log(color.bold(text))
+  formatter.summary(stats)
+
   return results
 }

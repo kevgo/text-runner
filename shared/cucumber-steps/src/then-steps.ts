@@ -74,7 +74,6 @@ Then("it prints:", function (table) {
 })
 
 Then("it executes:", function (table) {
-  console.log(11111111111)
   const results = this.apiResults as ActivityResult[]
   const tableHash = table.rowsHash()
   const want = {
@@ -83,7 +82,6 @@ Then("it executes:", function (table) {
     activityName: tableHash.ACTION,
   }
   for (const result of results) {
-    console.log(result)
     if (
       result.activity.file.platformified() !== want.filename ||
       result.activity.line !== want.line ||

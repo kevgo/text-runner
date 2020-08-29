@@ -17,12 +17,14 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   const stats = new StatsCounter()
 
   // step 1: create workspace
+  console.log("SCD:", config.sourceDir)
   if (!config.workspace) {
     config.workspace = await createWorkspace(config)
   }
 
   // step 2: find files
   const filenames = await getFileNames(config)
+  console.log(filenames)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
     return []
@@ -54,6 +56,7 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
   const parRes = await Promise.all(parJobs)
   const results = parRes.concat(seqRes)
+  const errors = results.map((result) => result.error).filter((e) => e)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -61,12 +64,12 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   // step 9: write stats
   let text = "\n"
   let colorFn: color.Style
-  if (results.length === 0) {
+  if (errors.length === 0) {
     colorFn = color.green
     text += color.green("Success! ")
   } else {
     colorFn = color.red
-    text += color.red(`${results.length} errors, `)
+    text += color.red(`${errors.length} errors, `)
   }
   text += colorFn(`${activities.length + links.length} activities in ${filenames.length} files, ${stats.duration()}`)
   console.log(color.bold(text))

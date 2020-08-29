@@ -14,7 +14,7 @@ Feature: multiple callbacks
       }
       """
     When running text-run
-    Then it signals:
+    Then it executes:
       | FILENAME | 1.md               |
       | LINE     | 1                  |
-      | MESSAGE  | Multiple callbacks |
+      | ACTION   | multiple-callbacks |

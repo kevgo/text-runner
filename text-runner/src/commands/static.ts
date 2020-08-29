@@ -46,7 +46,7 @@ export async function staticCommand(config: Configuration): Promise<number> {
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
   const errors = await Promise.all(jobs)
-  const errorCount = errors.filter((e) => e).length
+  const errorCount = errors.reduce((acc, val) => acc + val, 0)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)

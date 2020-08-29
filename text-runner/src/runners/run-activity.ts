@@ -11,9 +11,9 @@ import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { StatsCounter } from "./helpers/stats-counter"
-import { PrintedUserError } from "../../dist/errors/printed-user-error"
 import { ExecuteResult } from "./execute-result"
 import { ActivityResult } from "../activity-list/types/activity-result"
+import { PrintedUserError } from "../errors/printed-user-error"
 
 export async function runActivity(
   activity: Activity,

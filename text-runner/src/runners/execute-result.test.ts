@@ -1,6 +1,6 @@
 import { ExecuteResult } from "./execute-result"
 import { strict as assert } from "assert"
-import { ActivityResult, scaffoldActivityResult } from "../activity-list/types/activity-result"
+import { scaffoldActivityResult } from "../activity-list/types/activity-result"
 
 suite("ExecuteResult", function () {
   test("empty", function () {

@@ -15,7 +15,7 @@ export interface Activity {
 }
 
 /** scaffoldActivity creates a test Activity from the given data */
-export function scaffoldActivity(data: { actionName?: string }): Activity {
+export function scaffoldActivity(data: { actionName?: string } = {}): Activity {
   return {
     actionName: data.actionName || "foo",
     file: new AbsoluteFilePath("file"),

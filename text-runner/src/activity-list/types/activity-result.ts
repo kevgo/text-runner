@@ -14,7 +14,7 @@ export interface ActivityResult {
 
 export function scaffoldActivityResult(): ActivityResult {
   return {
-    activity: scaffoldActivity,
+    activity: scaffoldActivity(),
     error: null,
     output: "",
   }

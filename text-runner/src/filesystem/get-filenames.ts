@@ -26,7 +26,6 @@ export async function getFileNames(config: Configuration): Promise<AbsoluteFileP
  */
 async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
   const fullGlob = path.join(config.sourceDir, config.fileGlob)
-  console.log(222222, config.fileGlob)
   if (config.fileGlob === "") {
     return markdownFilesInDir(config.sourceDir, config.sourceDir)
   } else if (await hasDirectory(fullGlob)) {

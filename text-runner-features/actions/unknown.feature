@@ -8,11 +8,11 @@ Feature: unknown action types
       </a>
       """
     When trying to run text-run
-    Then the test fails with:
-      | ERROR MESSAGE | unknown action: unknown-action |
+    Then the execution fails at:
       | FILENAME      | 1.md                           |
-      | EXIT CODE     | 1                              |
-    And it prints the error message:
+      | LINE          | 1                              |
+      | ERROR MESSAGE | unknown action: unknown-action |
+    And it provides the error message:
       """
       No custom actions defined.
 

@@ -29,7 +29,7 @@ export async function runCommand(config: Configuration): Promise<ActivityResult[
   }
 
   // step 3: read and parse files
-  const ASTs = await parseMarkdownFiles(filenames)
+  const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
   // step 4: find link targets
   const linkTargets = findLinkTargets(ASTs)

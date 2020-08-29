@@ -12,8 +12,6 @@ import { ActionFinder } from "../actions/action-finder"
 import { ActivityResult } from "../activity-list/types/activity-result"
 
 export async function staticCommand(config: Configuration): Promise<ActivityResult[]> {
-  const stats = new StatsCounter()
-
   // step 1: create working dir
   if (!config.workspace) {
     config.workspace = await createWorkspace(config)
@@ -25,6 +23,7 @@ export async function staticCommand(config: Configuration): Promise<ActivityResu
     console.log(color.magenta("no Markdown files found"))
     return []
   }
+  const stats = new StatsCounter(filenames.length)
 
   // step 3: read and parse files
   const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)

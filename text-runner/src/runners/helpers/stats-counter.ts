@@ -2,15 +2,21 @@ import { StopWatch } from "./stopwatch"
 
 export class StatsCounter {
   errorCount: number
+  filesCount: number
   skipCount: number
   successCount: number
   stopWatch: StopWatch
 
-  constructor() {
+  constructor(filesCount: number) {
     this.errorCount = 0
+    this.filesCount = filesCount
     this.skipCount = 0
     this.successCount = 0
     this.stopWatch = new StopWatch()
+  }
+
+  activities() {
+    return this.errorCount + this.skipCount + this.successCount
   }
 
   duration() {
@@ -23,6 +29,10 @@ export class StatsCounter {
 
   errors(): number {
     return this.errorCount
+  }
+
+  files(): number {
+    return this.filesCount
   }
 
   skip() {

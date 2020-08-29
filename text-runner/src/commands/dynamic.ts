@@ -10,7 +10,7 @@ import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 
-export async function dynamicCommand(config: Configuration): Promise<Error[]> {
+export async function dynamicCommand(config: Configuration): Promise<number> {
   // step 1: create working dir
   if (!config.workspace) {
     config.workspace = await createWorkspace(config.useSystemTempDirectory)
@@ -20,7 +20,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return []
+    return 0
   }
   const stats = new StatsCounter(filenames.length)
 
@@ -34,7 +34,7 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   const activities = extractActivities(ASTs, config.regionMarker)
   if (activities.length === 0) {
     console.log(color.magenta("no activities found"))
-    return []
+    return 0
   }
 
   // step 6: find actions
@@ -52,8 +52,8 @@ export async function dynamicCommand(config: Configuration): Promise<Error[]> {
   formatter.summary(stats)
 
   if (error) {
-    return [error]
+    return 1
   } else {
-    return []
+    return 0
   }
 }

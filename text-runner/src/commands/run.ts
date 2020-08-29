@@ -12,7 +12,8 @@ import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 
-export async function runCommand(config: Configuration): Promise<Error[]> {
+/** executes "text-run run", prints everything, returns the number of errors encountered */
+export async function runCommand(config: Configuration): Promise<number> {
   // step 1: create workspace
   if (!config.workspace) {
     config.workspace = await createWorkspace(config.useSystemTempDirectory)
@@ -22,7 +23,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return []
+    return 0
   }
   const stats = new StatsCounter(filenames.length)
 
@@ -40,7 +41,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   const links = extractImagesAndLinks(ASTs)
   if (activities.length + links.length === 0) {
     console.log(color.magenta("no activities found"))
-    return []
+    return 0
   }
 
   // step 7: execute the ActivityList
@@ -48,7 +49,8 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
   jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))
-  const results = (await Promise.all(jobs)).filter((r) => r) as Error[]
+  const errors = await Promise.all(jobs)
+  const errorCount = errors.reduce((acc, val) => acc + val, 0)
 
   // step 8: cleanup
   process.chdir(config.sourceDir)
@@ -56,5 +58,5 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
   // step 9: write stats
   formatter.summary(stats)
 
-  return results
+  return errorCount
 }

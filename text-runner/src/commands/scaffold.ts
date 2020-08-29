@@ -1,7 +1,7 @@
 import { promises as fs } from "fs"
 import * as path from "path"
 
-export async function scaffoldCommand(blockName: string | undefined): Promise<Error[]> {
+export async function scaffoldCommand(blockName: string | undefined) {
   if (!blockName) {
     throw new Error("no region name given")
   }
@@ -15,7 +15,6 @@ export async function scaffoldCommand(blockName: string | undefined): Promise<Er
     await fs.mkdir("text-run")
   }
   await fs.writeFile(path.join("text-run", blockName + ".js"), template(blockName), "utf8")
-  return []
 }
 
 function template(filename: string) {

@@ -19,6 +19,8 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
 /**
  * Tests the documentation in the given directory
  * @param cmdLineArgs the arguments provided on the command line
+ * @returns the number of documentation errors encountered
+ * @throws developer errors
  */
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   let configuration: Configuration | undefined

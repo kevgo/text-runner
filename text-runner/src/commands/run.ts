@@ -13,8 +13,6 @@ import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 
 export async function runCommand(config: Configuration): Promise<Error[]> {
-  const stats = new StatsCounter()
-
   // step 1: create workspace
   if (!config.workspace) {
     config.workspace = await createWorkspace(config.useSystemTempDirectory)
@@ -26,6 +24,7 @@ export async function runCommand(config: Configuration): Promise<Error[]> {
     console.log(color.magenta("no Markdown files found"))
     return []
   }
+  const stats = new StatsCounter(filenames.length)
 
   // step 3: read and parse files
   const ASTs = await parseMarkdownFiles(filenames)

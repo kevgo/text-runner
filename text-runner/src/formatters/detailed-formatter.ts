@@ -4,6 +4,8 @@ import { Activity } from "../activity-list/types/activity"
 import { Configuration } from "../configuration/types/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
 import { Formatter } from "./types/formatter"
+import { printSummary } from "./shared/print-summary"
+import { StatsCounter } from "../runners/helpers/stats-counter"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {
@@ -38,5 +40,9 @@ export class DetailedFormatter implements Formatter {
       process.stdout.write(color.dim(output))
     }
     console.log(color.green(`${activity.file.platformified()}:${activity.line} -- ${stepName}`))
+  }
+
+  summary(stats: StatsCounter) {
+    printSummary(stats)
   }
 }

@@ -60,11 +60,12 @@ export async function staticCommand(config: Configuration): Promise<number> {
       text += color.green("Success! ")
     } else {
       colorFn = color.red
-      text += color.red(`${errors.length} errors, `)
+      text += color.red(`${errorCount} errors, `)
     }
     text += colorFn(`${links.length} activities in ${filenames.length} files`)
     text += colorFn(`, ${stats.duration()}`)
     console.log(color.bold(text))
   }
+
   return errorCount
 }

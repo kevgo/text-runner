@@ -15,7 +15,7 @@ When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (
     for (const error of errors) {
       console.log(`- ${error.name}: ${error.message}`)
     }
-    throw new Error("unexperted error")
+    throw new Error("unexpected error")
   }
 })
 

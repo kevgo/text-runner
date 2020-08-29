@@ -10,11 +10,11 @@ cliCursor.hide()
 
 async function main() {
   const cliArgs = parseCmdlineArgs(process.argv)
-  let exitCode = 0
+  let errCount = 0
   try {
-    exitCode = await textRunner(cliArgs)
+    errCount = await textRunner(cliArgs)
   } catch (err) {
-    exitCode = 1
+    errCount = 1
     if (err instanceof UnprintedUserError) {
       printUserError(err)
     } else if (err instanceof PrintedUserError) {
@@ -24,6 +24,6 @@ async function main() {
     }
   }
   await endChildProcesses()
-  process.exit(exitCode)
+  process.exit(errCount)
 }
 main()

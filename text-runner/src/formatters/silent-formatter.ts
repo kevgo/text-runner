@@ -5,7 +5,7 @@ import { Configuration } from "../configuration/types/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
 import { Formatter } from "./types/formatter"
 
-/** A completely minimalistic formatter, prints nothing in the happy path */
+/** A completely minimalistic formatter, prints nothing */
 export class SilentFormatter implements Formatter {
   /** Text-Runner configuration */
   private readonly configuration: Configuration

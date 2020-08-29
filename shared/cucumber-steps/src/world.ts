@@ -50,6 +50,7 @@ function World() {
     const results = await textRunner({
       command: "run",
       sourceDir: params.cwd || this.rootDir,
+      formatterName: "silent",
     })
     return results
   }

@@ -7,7 +7,7 @@ Feature: unknown action types
       <a type="zonk">
       </a>
       """
-    When trying to run text-run
+    When trying to call text-run
     Then the execution fails at:
       | FILENAME      | 1.md                 |
       | LINE          | 1                    |

@@ -1,5 +1,5 @@
 import { When } from "cucumber"
-import { ExecuteResult } from "text-runner"
+import * as textRunner from "text-runner"
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
@@ -7,10 +7,27 @@ When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function 
   finish(expectError, this.process.error || this.process.exitCode)
 })
 
-When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
+When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
   this.apiResults = await this.executeAPI({ command: "run", expectError })
-  const apiResults = this.apiResults as ExecuteResult
+  const apiResults = this.apiResults as textRunner.ExecuteResult
+  if (apiResults.errorCount > 0 && !expectError) {
+    console.log(`${apiResults.errorCount} errors`)
+    for (const activityResult of apiResults.activityResults) {
+      if (activityResult.error) {
+        console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
+      }
+    }
+    throw new Error("unexpected error")
+  }
+})
+
+When(/^(trying to call|calling) `([^`]+)`$/, async function (tryingText: string, jsText: string) {
+  const expectError = determineExpectError(tryingText)
+  // @ts-ignore: this is needed to make textRunner available as a variable here
+  const tr = textRunner
+  this.apiResults = await eval(jsText)
+  const apiResults = this.apiResults as textRunner.ExecuteResult
   if (apiResults.errorCount > 0 && !expectError) {
     console.log(`${apiResults.errorCount} errors`)
     for (const activityResult of apiResults.activityResults) {

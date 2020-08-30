@@ -14,7 +14,7 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -27,7 +27,7 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -40,7 +40,7 @@ Feature: skipping an action
         done(null, action.SKIPPING)
       }
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -55,7 +55,7 @@ Feature: skipping an action
         })
       }
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md        |
       | LINE     | 1           |

@@ -13,7 +13,7 @@ Feature: multiple callbacks
         done();
       }
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md               |
       | LINE     | 1                  |

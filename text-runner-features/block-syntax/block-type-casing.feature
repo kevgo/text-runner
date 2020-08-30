@@ -9,7 +9,7 @@ Feature: flexible region syntax
       <a type="HelloWorld">
       </a>
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md         |
       | LINE     | 1            |
@@ -22,7 +22,7 @@ Feature: flexible region syntax
       <a type="helloWorld">
       </a>
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md         |
       | LINE     | 1            |
@@ -35,7 +35,7 @@ Feature: flexible region syntax
       <a type="hello_world">
       </a>
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md         |
       | LINE     | 1            |
@@ -48,7 +48,7 @@ Feature: flexible region syntax
       <a type="hello-world">
       </a>
       """
-    When running text-run
+    When calling text-run
     Then it executes:
       | FILENAME | 1.md         |
       | LINE     | 1            |

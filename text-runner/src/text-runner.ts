@@ -19,37 +19,32 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
  * @throws developer errors
  */
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
-  const originalDir = process.cwd()
-  try {
-    switch (cmdlineArgs.command) {
-      case "help":
-        await helpCommand()
-        return 0
-      case "scaffold":
-        await scaffoldCommand(cmdlineArgs.fileGlob)
-        return 0
-      case "setup":
-        await setupCommand()
-        return 0
-      case "version":
-        await versionCommand()
-        return 0
-      case "debug":
-        return await debugCommand(cmdlineArgs)
-      case "dynamic":
-        return await dynamicCommand(cmdlineArgs)
-      case "run":
-        return await runCommand(cmdlineArgs)
-      case "static":
-        return await staticCommand(cmdlineArgs)
-      case "unused":
-        return await unusedCommand(cmdlineArgs)
-      default:
-        console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
-        return 1
-    }
-  } finally {
-    process.chdir(originalDir)
+  switch (cmdlineArgs.command) {
+    case "help":
+      await helpCommand()
+      return 0
+    case "scaffold":
+      await scaffoldCommand(cmdlineArgs.fileGlob)
+      return 0
+    case "setup":
+      await setupCommand()
+      return 0
+    case "version":
+      await versionCommand()
+      return 0
+    case "debug":
+      return await debugCommand(cmdlineArgs)
+    case "dynamic":
+      return await dynamicCommand(cmdlineArgs)
+    case "run":
+      return await runCommand(cmdlineArgs)
+    case "static":
+      return await staticCommand(cmdlineArgs)
+    case "unused":
+      return await unusedCommand(cmdlineArgs)
+    default:
+      console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
+      return 1
   }
 }
 

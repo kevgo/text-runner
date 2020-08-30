@@ -1,6 +1,5 @@
 import { When } from "cucumber"
 import { ExecuteResult } from "text-runner"
-import { error } from "shelljs"
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)

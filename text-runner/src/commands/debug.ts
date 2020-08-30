@@ -1,12 +1,15 @@
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
-import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { AstNode } from "../parsers/standard-AST/ast-node"
+import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { loadConfiguration } from "../configuration/load-configuration"
 
-export async function debugCommand(config: Configuration): Promise<number> {
+export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
+  const config = await loadConfiguration(cmdlineArgs)
+
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     return 0

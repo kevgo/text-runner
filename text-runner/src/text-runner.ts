@@ -40,9 +40,9 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     configuration = await loadConfiguration(cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
-        return await debugCommand(configuration)
+        return await debugCommand(cmdlineArgs)
       case "dynamic":
-        return await dynamicCommand(configuration)
+        return await dynamicCommand(cmdlineArgs)
       case "run":
         return await runCommand(configuration)
       case "static":

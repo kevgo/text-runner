@@ -11,10 +11,10 @@ import { versionCommand } from "./commands/version"
 import { determineConfigFilename } from "./configuration/config-file/determine-config-filename"
 import { loadConfigFile } from "./configuration/config-file/load-config-file"
 import { determineConfiguration } from "./configuration/determine-configuration"
-import { Configuration } from "./configuration/types/configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 import { ActivityResult } from "./activity-list/types/activity-result"
 import { ExecuteResult } from "./runners/execute-result"
+import { Configuration } from "../dist/text-runner"
 
 export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
 
@@ -25,7 +25,7 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
  * @throws developer errors
  */
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
-  let configuration: Configuration | undefined
+  const originalDir = process.cwd()
   try {
     switch (cmdlineArgs.command) {
       case "help":
@@ -43,7 +43,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     }
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
-    configuration = determineConfiguration(configFileData, cmdlineArgs)
+    const configuration = determineConfiguration(configFileData, cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
         return await debugCommand(configuration)
@@ -60,9 +60,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         return new ExecuteResult([], 1)
     }
   } catch (err) {
-    if (configuration && configuration.sourceDir) {
-      process.chdir(configuration.sourceDir)
-    }
+    process.chdir(originalDir)
     throw err
   }
 }

@@ -8,11 +8,9 @@ import { setupCommand } from "./commands/setup"
 import { staticCommand } from "./commands/static"
 import { unusedCommand } from "./commands/unused"
 import { versionCommand } from "./commands/version"
-import { determineConfigFilename } from "./configuration/config-file/determine-config-filename"
-import { loadConfigFile } from "./configuration/config-file/load-config-file"
-import { determineConfiguration } from "./configuration/determine-configuration"
 import { Configuration } from "./configuration/types/configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
+import { loadConfiguration } from "./configuration/load-configuration"
 
 export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
 
@@ -39,9 +37,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         await versionCommand()
         return 0
     }
-    const configFilePath = await determineConfigFilename(cmdlineArgs)
-    const configFileData = loadConfigFile(configFilePath)
-    configuration = determineConfiguration(configFileData, cmdlineArgs)
+    configuration = await loadConfiguration(cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
         return await debugCommand(configuration)

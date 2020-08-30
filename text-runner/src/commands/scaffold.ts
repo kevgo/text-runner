@@ -2,8 +2,8 @@ import * as path from "path"
 import { promises as fs } from "fs"
 import { ExecuteResult } from "../runners/execute-result"
 
-export async function scaffoldCommand(blockName: string, sourceDir: string): Promise<ExecuteResult> {
-  if (!blockName) {
+export async function scaffoldCommand(actionName: string, sourceDir: string): Promise<ExecuteResult> {
+  if (!actionName) {
     throw new Error("no action name given")
   }
   const dirPath = path.join(sourceDir, "text-run")
@@ -16,7 +16,7 @@ export async function scaffoldCommand(blockName: string, sourceDir: string): Pro
   if (!textRunDirExists) {
     await fs.mkdir(dirPath, { recursive: true })
   }
-  await fs.writeFile(path.join(dirPath, blockName + ".js"), template(blockName), "utf8")
+  await fs.writeFile(path.join(dirPath, actionName + ".js"), template(actionName), "utf8")
   return ExecuteResult.empty()
 }
 

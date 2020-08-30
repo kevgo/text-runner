@@ -2,7 +2,6 @@ import * as color from "colorette"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../configuration/instantiate-formatter"
-import { Configuration } from "../configuration/types/configuration"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
@@ -11,10 +10,15 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
+import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { loadConfiguration } from "../configuration/load-configuration"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
-export async function runCommand(config: Configuration): Promise<number> {
+export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   const stats = new StatsCounter()
+
+  // step 1: load configuration from file
+  const config = await loadConfiguration(cmdlineArgs)
 
   // step 1: create workspace
   if (!config.workspace) {

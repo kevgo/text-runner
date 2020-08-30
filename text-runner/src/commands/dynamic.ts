@@ -14,7 +14,7 @@ import { UserProvidedConfiguration } from "../configuration/types/user-provided-
 export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   const stats = new StatsCounter()
 
-  // step 1: load configuration from file.
+  // step 1: load configuration from file
   const config = await loadConfiguration(cmdlineArgs)
 
   // step 2: create working dir

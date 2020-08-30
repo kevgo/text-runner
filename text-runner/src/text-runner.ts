@@ -48,9 +48,8 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
         return 1
     }
-  } catch (err) {
+  } finally {
     process.chdir(originalDir)
-    throw err
   }
 }
 

@@ -13,7 +13,6 @@ import { UserProvidedConfiguration } from "../configuration/types/user-provided-
 
 export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   const originalDir = process.cwd()
-  const stats = new StatsCounter()
   try {
     // step 1: load configuration from file
     const config = await loadConfiguration(cmdlineArgs)
@@ -29,6 +28,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
       console.log(color.magenta("no Markdown files found"))
       return 0
     }
+    const stats = new StatsCounter(filenames.length)
 
     // step 4: read and parse files
     const ASTs = await parseMarkdownFiles(filenames)
@@ -57,20 +57,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     process.chdir(config.sourceDir)
 
     // step 10: write stats
-    if (config.formatterName !== "silent") {
-      let text = "\n"
-      let colorFn
-      if (errorCount === 0) {
-        colorFn = color.green
-        text += color.green("Success! ")
-      } else {
-        colorFn = color.red
-        text += color.red(`${errorCount} errors, `)
-      }
-      text += colorFn(`${links.length} activities in ${filenames.length} files`)
-      text += colorFn(`, ${stats.duration()}`)
-      console.log(color.bold(text))
-    }
+    formatter.summary(stats)
 
     return errorCount
   } finally {

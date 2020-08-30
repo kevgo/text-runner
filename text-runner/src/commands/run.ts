@@ -16,7 +16,6 @@ import { loadConfiguration } from "../configuration/load-configuration"
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   const originalDir = process.cwd()
-  const stats = new StatsCounter()
   try {
     // step 1: load configuration from file
     const config = await loadConfiguration(cmdlineArgs)
@@ -32,6 +31,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
       console.log(color.magenta("no Markdown files found"))
       return 0
     }
+    const stats = new StatsCounter(filenames.length)
 
     // step 4: read and parse files
     const ASTs = await parseMarkdownFiles(filenames)
@@ -62,17 +62,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     process.chdir(config.sourceDir)
 
     // step 10: write stats
-    let text = "\n"
-    let colorFn: color.Style
-    if (errorCount === 0) {
-      colorFn = color.green
-      text += color.green("Success! ")
-    } else {
-      colorFn = color.red
-      text += color.red(`${errorCount} errors, `)
-    }
-    text += colorFn(`${activities.length + links.length} activities in ${filenames.length} files, ${stats.duration()}`)
-    console.log(color.bold(text))
+    formatter.summary(stats)
 
     return errorCount
   } finally {

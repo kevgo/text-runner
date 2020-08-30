@@ -4,6 +4,8 @@ import { Activity } from "../activity-list/types/activity"
 import { Configuration } from "../configuration/types/configuration"
 import { printCodeFrame } from "../helpers/print-code-frame"
 import { Formatter } from "./types/formatter"
+import { printSummary } from "./shared/print-summary"
+import { StatsCounter } from "../runners/helpers/stats-counter"
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements Formatter {
@@ -29,4 +31,8 @@ export class SummaryFormatter implements Formatter {
 
   // @ts-ignore: okay to not use parameters here
   success(activity: Activity, stepName: string, output: string) {}
+
+  summary(stats: StatsCounter) {
+    printSummary(stats)
+  }
 }

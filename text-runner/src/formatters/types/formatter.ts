@@ -1,4 +1,5 @@
 import { Activity } from "../../activity-list/types/activity"
+import { StatsCounter } from "../../runners/helpers/stats-counter"
 
 /**
  * Formatter is the API that formatters have to implement
@@ -43,4 +44,7 @@ export interface Formatter {
    * @param output output provided by the action
    */
   success(activity: Activity, actionName: string, output: string): void
+
+  /** Summary notifies the user that the test suite is over by printing statistics. */
+  summary(statsCounter: StatsCounter): void
 }

@@ -13,7 +13,6 @@ import { UserProvidedConfiguration } from "../configuration/types/user-provided-
 
 export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
   const originalDir = process.cwd()
-  const stats = new StatsCounter()
   try {
     // step 1: load configuration from file
     const config = await loadConfiguration(cmdlineArgs)
@@ -29,6 +28,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
       console.log(color.magenta("no Markdown files found"))
       return 0
     }
+    const stats = new StatsCounter(filenames.length)
 
     // step 4: read and parse files
     const ASTs = await parseMarkdownFiles(filenames)
@@ -52,18 +52,8 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     const error = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
 
     // step 9: write stats
-    let text = "\n"
-    let colorFn
-    if (error) {
-      colorFn = color.red
-      text += color.red("1 error, ")
-    } else {
-      colorFn = color.green
-      text += color.green("Success! ")
-    }
-    text += colorFn(`${activities.length} activities in ${filenames.length} files`)
-    text += colorFn(`, ${stats.duration()}`)
-    console.log(color.bold(text))
+    formatter.summary(stats)
+
     if (error) {
       return 1
     } else {

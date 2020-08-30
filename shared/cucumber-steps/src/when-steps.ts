@@ -22,13 +22,13 @@ When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function 
   }
 })
 
-When(/^(trying to call|calling) `([^`]+)`$/, async function (tryingText: string, jsText: string) {
-  const expectError = determineExpectError(tryingText)
-  // @ts-ignore: this is needed to make textRunner available as a variable here
-  const tr = textRunner
-  this.apiResults = await eval(jsText)
+When(/^calling textRunner.scaffoldCommand\(([^`]+)\)$/, async function (jsText: string) {
+  let args: any
+  eval("args = " + jsText)
+  args.sourceDir = this.rootDir
+  this.apiResults = await textRunner.scaffoldCommand(args)
   const apiResults = this.apiResults as textRunner.ExecuteResult
-  if (apiResults.errorCount > 0 && !expectError) {
+  if (apiResults.errorCount > 0) {
     console.log(`${apiResults.errorCount} errors`)
     for (const activityResult of apiResults.activityResults) {
       if (activityResult.error) {

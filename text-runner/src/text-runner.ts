@@ -48,7 +48,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
       case "static":
         return await staticCommand(cmdlineArgs)
       case "unused":
-        return await unusedCommand(configuration)
+        return await unusedCommand(cmdlineArgs)
       default:
         console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
         return 1

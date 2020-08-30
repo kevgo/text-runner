@@ -7,7 +7,7 @@ import { callArgs } from "../helpers/call-args"
 export async function runTextrunner(action: ActionArgs) {
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
   // TODO: call existing Text-Runner API here
-  var textRunPath = path.join(action.configuration.sourceDir, "..", "text-runner", "bin", "text-run")
+  var textRunPath = path.join(action.configuration.sourceDir, "node_modules", ".bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath, process.platform)
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })

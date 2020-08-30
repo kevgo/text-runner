@@ -11,7 +11,6 @@ import { versionCommand } from "./commands/version"
 import { determineConfigFilename } from "./configuration/config-file/determine-config-filename"
 import { loadConfigFile } from "./configuration/config-file/load-config-file"
 import { determineConfiguration } from "./configuration/determine-configuration"
-import { Configuration } from "./configuration/types/configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 
 export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
@@ -23,7 +22,7 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
  * @throws developer errors
  */
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
-  let configuration: Configuration | undefined
+  const originalDir = process.cwd()
   try {
     switch (cmdlineArgs.command) {
       case "help":
@@ -41,7 +40,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
     }
     const configFilePath = await determineConfigFilename(cmdlineArgs)
     const configFileData = loadConfigFile(configFilePath)
-    configuration = determineConfiguration(configFileData, cmdlineArgs)
+    const configuration = determineConfiguration(configFileData, cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
         return await debugCommand(configuration)
@@ -58,9 +57,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         return 1
     }
   } catch (err) {
-    if (configuration && configuration.sourceDir) {
-      process.chdir(configuration.sourceDir)
-    }
+    process.chdir(originalDir)
     throw err
   }
 }

@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "devDependencies": {
     "cucumber": "6.0.5",
-    "shared-cucumber-steps": "0.0.0"
+    "shared-cucumber-steps": "0.0.0",
+    "text-runner": "4.0.3"
   },
   "license": "ISC",
   "private": true

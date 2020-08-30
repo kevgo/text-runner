@@ -22,11 +22,13 @@ When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function 
   }
 })
 
-When(/^calling textRunner.scaffoldCommand\(([^`]+)\)$/, async function (jsText: string) {
-  let args: any
-  eval("args = " + jsText)
-  args.sourceDir = this.rootDir
-  this.apiResults = await textRunner.scaffoldCommand(args)
+When("calling {string}", async function (jsText: string) {
+  // @ts-ignore: this make textRunner available as a variable here
+  const tr = textRunner
+  jsText = jsText.replace("{{source-dir}}", `"${this.rootDir}"`)
+  let result: any
+  eval("result = " + jsText)
+  this.apiResults = await result
   const apiResults = this.apiResults as textRunner.ExecuteResult
   if (apiResults.errorCount > 0) {
     console.log(`${apiResults.errorCount} errors`)

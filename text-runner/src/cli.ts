@@ -28,7 +28,10 @@ async function main() {
         await helpCommand()
         break
       case "scaffold":
-        await scaffoldCommand(config.fileGlob)
+        if (!config.fileGlob) {
+          throw new Error("no action name given")
+        }
+        await scaffoldCommand(config.fileGlob, config.sourceDir || ".")
         break
       case "setup":
         await setupCommand()

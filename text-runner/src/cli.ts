@@ -19,15 +19,15 @@ import console = require("console")
 cliCursor.hide()
 
 async function main() {
-  const cliArgs = parseCmdlineArgs(process.argv)
+  const { command, config } = parseCmdlineArgs(process.argv)
   let errCount = 0
   try {
-    switch (cliArgs.command) {
+    switch (command) {
       case "help":
         await helpCommand()
         break
       case "scaffold":
-        await scaffoldCommand(cliArgs.fileGlob)
+        await scaffoldCommand(config.fileGlob)
         break
       case "setup":
         await setupCommand()
@@ -36,22 +36,22 @@ async function main() {
         await versionCommand()
         break
       case "debug":
-        errCount = await debugCommand(cliArgs)
+        errCount = await debugCommand(config)
         break
       case "dynamic":
-        errCount = await dynamicCommand(cliArgs)
+        errCount = await dynamicCommand(config)
         break
       case "run":
-        errCount = await runCommand(cliArgs)
+        errCount = await runCommand(config)
         break
       case "static":
-        errCount = await staticCommand(cliArgs)
+        errCount = await staticCommand(config)
         break
       case "unused":
-        errCount = await unusedCommand(cliArgs)
+        errCount = await unusedCommand(config)
         break
       default:
-        console.log(color.red(`unknown command: ${cliArgs.command || ""}`))
+        console.log(color.red(`unknown command: ${command || ""}`))
         errCount = 1
     }
   } catch (err) {

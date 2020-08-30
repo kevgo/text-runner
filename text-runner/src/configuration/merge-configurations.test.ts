@@ -8,7 +8,7 @@ test("mergeConfigurations()", function () {
     offline: false,
   }
   const configFileData: UserProvidedConfiguration = {
-    command: "run",
+    formatterName: "dot",
     fileGlob: "**/*.md",
     offline: true,
   }
@@ -17,7 +17,7 @@ test("mergeConfigurations()", function () {
   }
   const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
   assert.deepEqual(result, {
-    command: "run",
+    formatterName: "dot",
     fileGlob: "1.md",
     offline: false,
   })

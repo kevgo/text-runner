@@ -20,28 +20,28 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
   // step 1: load configuration from file
   const config = await loadConfiguration(cmdlineArgs)
 
-  // step 1: create workspace
+  // step 2: create workspace
   if (!config.workspace) {
     config.workspace = await createWorkspace(config.useSystemTempDirectory)
   }
 
-  // step 2: find files
+  // step 3: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
     return 0
   }
 
-  // step 3: read and parse files
+  // step 4: read and parse files
   const ASTs = await parseMarkdownFiles(filenames)
 
-  // step 4: find link targets
+  // step 5: find link targets
   const linkTargets = findLinkTargets(ASTs)
 
-  // step 5: find actions
+  // step 6: find actions
   const actionFinder = ActionFinder.load(config.sourceDir)
 
-  // step 6: extract activities
+  // step 7: extract activities
   const activities = extractActivities(ASTs, config.regionMarker)
   const links = extractImagesAndLinks(ASTs)
   if (activities.length + links.length === 0) {
@@ -49,7 +49,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     return 0
   }
 
-  // step 7: execute the ActivityList
+  // step 8: execute the ActivityList
   const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)
   process.chdir(config.workspace)
   const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
@@ -57,10 +57,10 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
   const errors = await Promise.all(jobs)
   const errorCount = errors.reduce((acc, val) => acc + val, 0)
 
-  // step 8: cleanup
+  // step 9: cleanup
   process.chdir(config.sourceDir)
 
-  // step 9: write stats
+  // step 10: write stats
   let text = "\n"
   let colorFn: color.Style
   if (errorCount === 0) {

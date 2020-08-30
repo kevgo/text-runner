@@ -46,7 +46,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
       case "run":
         return await runCommand(cmdlineArgs)
       case "static":
-        return await staticCommand(configuration)
+        return await staticCommand(cmdlineArgs)
       case "unused":
         return await unusedCommand(configuration)
       default:

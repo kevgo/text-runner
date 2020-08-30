@@ -2,7 +2,6 @@ import * as minimist from "minimist"
 import * as path from "path"
 import { availableCommands } from "../../commands/available-commands"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
-import { Commands } from "../../text-runner"
 
 /**
  * Parses the command-line options received
@@ -10,7 +9,7 @@ import { Commands } from "../../text-runner"
  *
  * @param argv the command-line options received by the process
  */
-export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
+export function parseCmdlineArgs(argv: string[]): { command: string; config: UserProvidedConfiguration } {
   // remove optional unix node call
   if (path.basename(argv[0] || "") === "node") {
     argv.splice(0, 1)
@@ -38,8 +37,8 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
 
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: ["offline"] })
-  const result: UserProvidedConfiguration = {
-    command: cliArgs._[0] as Commands, // the first argument is the command to run, as in "text-run debug"
+  let command = cliArgs._[0]
+  const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     fileGlob: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
@@ -49,10 +48,10 @@ export function parseCmdlineArgs(argv: string[]): UserProvidedConfiguration {
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
-  if (!availableCommands().includes(cliArgs._[0])) {
-    result.command = "run"
-    result.fileGlob = cliArgs._[0]
+  if (!availableCommands().includes(command)) {
+    config.fileGlob = command
+    command = "run"
   }
 
-  return result
+  return { command, config }
 }

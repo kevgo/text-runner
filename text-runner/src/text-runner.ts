@@ -11,7 +11,6 @@ import { versionCommand } from "./commands/version"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 import { ActivityResult } from "./activity-list/types/activity-result"
 import { ExecuteResult } from "./runners/execute-result"
-import { Configuration } from "../dist/text-runner"
 
 export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setup" | "static" | "unused" | "version"
 
@@ -58,7 +57,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
 }
 
 export type { ActionArgs } from "./actions/types/action-args"
-export type { Configuration }
+export type { Configuration } from "./configuration/types/configuration"
 export { AstNode } from "./parsers/standard-AST/ast-node"
 export { AstNodeList } from "./parsers/standard-AST/ast-node-list"
 export { actionName } from "./actions/helpers/action-name"

@@ -21,7 +21,7 @@ export type Commands = "debug" | "dynamic" | "help" | "run" | "scaffold" | "setu
  * @throws developer errors
  */
 export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
-  let configuration: Configuration | undefined
+  const originalDir = process.cwd()
   try {
     switch (cmdlineArgs.command) {
       case "help":
@@ -37,7 +37,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         await versionCommand()
         return 0
     }
-    configuration = await loadConfiguration(cmdlineArgs)
+    const configuration = await loadConfiguration(cmdlineArgs)
     switch (cmdlineArgs.command) {
       case "debug":
         return await debugCommand(cmdlineArgs)
@@ -54,9 +54,7 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
         return 1
     }
   } catch (err) {
-    if (configuration && configuration.sourceDir) {
-      process.chdir(configuration.sourceDir)
-    }
+    process.chdir(originalDir)
     throw err
   }
 }

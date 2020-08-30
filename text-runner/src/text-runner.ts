@@ -8,9 +8,6 @@ import { setupCommand } from "./commands/setup"
 import { staticCommand } from "./commands/static"
 import { unusedCommand } from "./commands/unused"
 import { versionCommand } from "./commands/version"
-import { determineConfigFilename } from "./configuration/config-file/determine-config-filename"
-import { loadConfigFile } from "./configuration/config-file/load-config-file"
-import { determineConfiguration } from "./configuration/determine-configuration"
 import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 import { ActivityResult } from "./activity-list/types/activity-result"
 import { ExecuteResult } from "./runners/execute-result"
@@ -40,21 +37,16 @@ export async function textRunner(cmdlineArgs: UserProvidedConfiguration): Promis
       case "version":
         await versionCommand()
         return ExecuteResult.empty()
-    }
-    const configFilePath = await determineConfigFilename(cmdlineArgs)
-    const configFileData = loadConfigFile(configFilePath)
-    const configuration = determineConfiguration(configFileData, cmdlineArgs)
-    switch (cmdlineArgs.command) {
       case "debug":
-        return await debugCommand(configuration)
+        return await debugCommand(cmdlineArgs)
       case "dynamic":
-        return await dynamicCommand(configuration)
+        return await dynamicCommand(cmdlineArgs)
       case "run":
-        return await runCommand(configuration)
+        return await runCommand(cmdlineArgs)
       case "static":
-        return await staticCommand(configuration)
+        return await staticCommand(cmdlineArgs)
       case "unused":
-        return await unusedCommand(configuration)
+        return await unusedCommand(cmdlineArgs)
       default:
         console.log(color.red(`unknown command: ${cmdlineArgs.command || ""}`))
         return new ExecuteResult([], 1)

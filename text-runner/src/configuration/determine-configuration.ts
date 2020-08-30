@@ -3,7 +3,7 @@ import { Publications } from "./publications/publications"
 import { Configuration } from "./types/configuration"
 import { UserProvidedConfiguration } from "./types/user-provided-configuration"
 
-const defaultValues: Configuration = {
+export const defaultValues: Configuration = {
   regionMarker: "type",
   defaultFile: "",
   exclude: [],

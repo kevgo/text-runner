@@ -14,6 +14,7 @@ export interface UserProvidedConfiguration {
   formatterName?: FormatterName // name of the formatter to use
   offline?: boolean
   publications?: Publications
+  sourceDir?: string // the root directory of the source code to test
   useSystemTempDirectory?: boolean
   workspace?: string // path of the workspace to use
 }

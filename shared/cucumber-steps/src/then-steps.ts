@@ -10,6 +10,69 @@ import { ExecuteResult } from "text-runner"
 
 const psTree = util.promisify(psTreeR)
 
+Then("it executes:", function (table) {
+  const results = this.apiResults as ExecuteResult
+  const tableHash = table.rowsHash()
+  const want = {
+    filename: tableHash.FILENAME,
+    line: parseInt(tableHash.LINE, 10),
+    activityName: tableHash.ACTION,
+  }
+  for (const result of results.activityResults) {
+    if (
+      result.activity.file.platformified() !== want.filename ||
+      result.activity.line !== want.line ||
+      result.activity.actionName !== want.activityName
+    ) {
+      continue
+    }
+    // here the three items above match, check the output
+    if (tableHash.OUTPUT) {
+      assert.include(result.output, tableHash.OUTPUT)
+    }
+    return
+  }
+  // here we didn't find a match
+  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
+  for (const result of results.activityResults) {
+    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
+  }
+  throw new Error("Expected activity not executed")
+})
+
+Then("it executes only this action:", function (table) {
+  const results = this.apiResults as ExecuteResult
+  if (results.activityResults.length !== 1) {
+    throw new Error(`expected 1 action but executed ${results.activityResults.length}`)
+  }
+  const tableHash = table.rowsHash()
+  const want = {
+    filename: tableHash.FILENAME,
+    line: parseInt(tableHash.LINE, 10),
+    activityName: tableHash.ACTION,
+  }
+  for (const result of results.activityResults) {
+    if (
+      result.activity.file.platformified() !== want.filename ||
+      result.activity.line !== want.line ||
+      result.activity.actionName !== want.activityName
+    ) {
+      continue
+    }
+    // here the three items above match, check the output
+    if (tableHash.OUTPUT) {
+      assert.include(result.output, tableHash.OUTPUT)
+    }
+    return
+  }
+  // here we didn't find a match
+  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
+  for (const result of results.activityResults) {
+    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
+  }
+  throw new Error("Expected activity not executed")
+})
+
 Then("it prints usage instructions", function () {
   this.verifyPrintedUsageInstructions()
 })
@@ -71,36 +134,6 @@ Then("it runs without errors", function () {
 
 Then("it signals:", function (table) {
   this.verifyOutput(table.rowsHash())
-})
-
-Then("it executes:", function (table) {
-  const results = this.apiResults as ExecuteResult
-  const tableHash = table.rowsHash()
-  const want = {
-    filename: tableHash.FILENAME,
-    line: parseInt(tableHash.LINE, 10),
-    activityName: tableHash.ACTION,
-  }
-  for (const result of results.activityResults) {
-    if (
-      result.activity.file.platformified() !== want.filename ||
-      result.activity.line !== want.line ||
-      result.activity.actionName !== want.activityName
-    ) {
-      continue
-    }
-    // here the three items above match, check the output
-    if (tableHash.OUTPUT) {
-      assert.include(result.output, tableHash.OUTPUT)
-    }
-    return
-  }
-  // here we didn't find a match
-  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
-  for (const result of results.activityResults) {
-    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
-  }
-  throw new Error("Expected activity not executed")
 })
 
 Then("it provides the error message:", function (want) {

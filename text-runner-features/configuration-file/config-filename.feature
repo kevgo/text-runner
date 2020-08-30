@@ -35,13 +35,6 @@ Feature: specifying the configuration filename
       | LINE     | 1            |
       | ACTION   | hello-world  |
       | OUTPUT   | Hello World! |
-      """
-      1.md:1 -- link to local heading #foo
-      """
-    And it doesn't print:
-      """
-      2.md:1 -- link to local heading #bar
-      """
 
   Scenario: providing a non-existing configuration filename via CLI
     When trying to run "text-run --config zonk.yml"

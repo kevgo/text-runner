@@ -73,3 +73,4 @@ export { AstNode } from "./parsers/standard-AST/ast-node"
 export { AstNodeList } from "./parsers/standard-AST/ast-node-list"
 export { actionName } from "./actions/helpers/action-name"
 export { ActivityResult }
+export { ExecuteResult }

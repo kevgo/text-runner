@@ -6,7 +6,7 @@ import * as path from "path"
 import * as psTreeR from "ps-tree"
 import * as util from "util"
 import stripAnsi = require("strip-ansi")
-import { ActivityResult } from "text-runner"
+import { ExecuteResult } from "text-runner"
 
 const psTree = util.promisify(psTreeR)
 
@@ -74,14 +74,14 @@ Then("it signals:", function (table) {
 })
 
 Then("it executes:", function (table) {
-  const results = this.apiResults as ActivityResult[]
+  const results = this.apiResults as ExecuteResult
   const tableHash = table.rowsHash()
   const want = {
     filename: tableHash.FILENAME,
     line: parseInt(tableHash.LINE, 10),
     activityName: tableHash.ACTION,
   }
-  for (const result of results) {
+  for (const result of results.activityResults) {
     if (
       result.activity.file.platformified() !== want.filename ||
       result.activity.line !== want.line ||
@@ -96,25 +96,26 @@ Then("it executes:", function (table) {
     return
   }
   // here we didn't find a match
-  console.log(`Text-Runner executed these ${results.length} activities:`)
-  for (const result of results) {
+  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
+  for (const result of results.activityResults) {
     console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
   }
   throw new Error("Expected activity not executed")
 })
 
 Then("it provides the error message:", function (want) {
-  const results = this.apiResults as ActivityResult[]
-  const errors = results.map((result) => result.error).filter((e) => e) as Error[]
-  for (const error of errors) {
-    if (error.message.includes(want)) {
+  const results = this.apiResults as ExecuteResult
+  for (const activityResult of results.activityResults) {
+    if (activityResult.error?.message?.includes(want)) {
       return
     }
   }
   console.log("Didn't find error message:", want)
-  console.log(`I found these ${errors.length} errors:`)
-  for (const error of errors) {
-    console.log(`- ${error.message}`)
+  console.log(`I found ${results.errorCount} errors`)
+  for (const activityResult of results.activityResults) {
+    if (activityResult.error) {
+      console.log(`- ${activityResult.error.message}`)
+    }
   }
 })
 
@@ -123,14 +124,14 @@ Then("the call fails with the error:", function (expectedError) {
 })
 
 Then("the execution fails at:", function (table) {
-  const results = this.apiResults as ActivityResult[]
+  const results = this.apiResults as ExecuteResult
   const tableHash = table.rowsHash()
   const want = {
     filename: tableHash.FILENAME,
     line: parseInt(tableHash.LINE, 10),
     errorMessage: "Error: " + tableHash["ERROR MESSAGE"],
   }
-  for (const result of results) {
+  for (const result of results.activityResults) {
     const error = stripAnsi(result.error?.message || "")
     if (
       result.activity.file.platformified() !== want.filename ||
@@ -146,8 +147,8 @@ Then("the execution fails at:", function (table) {
     return
   }
   // here we didn't find a match
-  console.log(`Text-Runner executed these ${results.length} activities:`)
-  for (const result of results) {
+  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
+  for (const result of results.activityResults) {
     console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.error?.message}`)
   }
   throw new Error("Expected error not encountered")

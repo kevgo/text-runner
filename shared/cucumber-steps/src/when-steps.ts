@@ -1,4 +1,6 @@
 import { When } from "cucumber"
+import { ExecuteResult } from "text-runner"
+import { error } from "shelljs"
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
@@ -9,11 +11,13 @@ When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
   const expectError = determineExpectError(tryingText)
   this.apiResults = await this.executeAPI({ command: "run", expectError })
-  const errors = this.apiResults.map((result: any) => result.error).filter((e: Error) => e) as Error[]
-  if (errors.length > 0 && !expectError) {
-    console.log(`${errors.length} errors:`)
-    for (const error of errors) {
-      console.log(`- ${error.name}: ${error.message}`)
+  const apiResults = this.apiResults as ExecuteResult
+  if (apiResults.errorCount > 0 && !expectError) {
+    console.log(`${apiResults.errorCount} errors`)
+    for (const activityResult of apiResults.activityResults) {
+      if (activityResult.error) {
+        console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
+      }
     }
     throw new Error("unexpected error")
   }

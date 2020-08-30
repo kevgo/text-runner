@@ -27,6 +27,8 @@ When("calling {string}", async function (jsText: string) {
   const tr = textRunner
   jsText = jsText.replace("{{source-dir}}", `"${this.rootDir}"`)
   let result: any
+  // @ts-ignore: this is used inside eval
+  const sourceDir = this.rootDir
   eval("result = " + jsText)
   this.apiResults = await result
   const apiResults = this.apiResults as textRunner.ExecuteResult

@@ -35,6 +35,6 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
   } else if (isGlob(config.fileGlob)) {
     return filesMatchingGlob(fullGlob, config.sourceDir)
   } else {
-    throw new UnprintedUserError(`file or directory does not exist: ${color.red(config.fileGlob)}`)
+    throw new UnprintedUserError(`file or directory does not exist: ${color.red(fullGlob)}`)
   }
 }

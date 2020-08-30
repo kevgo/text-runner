@@ -43,32 +43,27 @@ Then("it executes:", function (table) {
 Then("it executes only this action:", function (table) {
   const results = this.apiResults as ExecuteResult
   if (results.activityResults.length !== 1) {
-    throw new Error(`expected 1 action but executed ${results.activityResults.length}`)
-  }
-  const tableHash = table.rowsHash()
-  const want = {
-    filename: tableHash.FILENAME,
-    line: parseInt(tableHash.LINE, 10),
-    activityName: tableHash.ACTION,
-  }
-  for (const result of results.activityResults) {
-    if (
-      result.activity.file.platformified() !== want.filename ||
-      result.activity.line !== want.line ||
-      result.activity.actionName !== want.activityName
-    ) {
-      continue
+    console.log(`expected 1 action but executed ${results.activityResults.length}:`)
+    for (const result of results.activityResults) {
+      console.log(`- ${result.activity.file.platformified()}:${result.activity.line} - ${result.activity.actionName}`)
     }
-    // here the three items above match, check the output
-    if (tableHash.OUTPUT) {
-      assert.include(result.output, tableHash.OUTPUT)
+    throw new Error("unexpected actions")
+  }
+  const wants = table.hashes()
+  for (let i = 0; i < wants.length; i++) {
+    if (
+      results.activityResults[i].activity.file.platformified() !== wants[i].FILENAME ||
+      results.activityResults[i].activity.line !== parseInt(wants[i].LINE, 10) ||
+      results.activityResults[i].activity.actionName !== wants[i].ACTION
+    ) {
+      break
     }
     return
   }
   // here we didn't find a match
   console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
   for (const result of results.activityResults) {
-    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
+    console.log(`- ${result.activity.file.platformified()}:${result.activity.line} - ${result.activity.actionName}`)
   }
   throw new Error("Expected activity not executed")
 })

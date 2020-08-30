@@ -29,12 +29,10 @@ Feature: specifying the configuration filename
       """
 
   Scenario: providing a configuration filename via API
-    When calling "textRunner.runCommand({config: 'text-run-1.yml', sourceDir})"
+    When calling "textRunner.runCommand({configFileName: 'text-run-1.yml', sourceDir})"
     Then it executes only this action:
-      | FILENAME | 1.md         |
-      | LINE     | 1            |
-      | ACTION   | hello-world  |
-      | OUTPUT   | Hello World! |
+      | FILENAME | LINE | ACTION     |
+      | 1.md     | 1    | check-link |
 
   Scenario: providing a non-existing configuration filename via CLI
     When trying to run "text-run --config zonk.yml"

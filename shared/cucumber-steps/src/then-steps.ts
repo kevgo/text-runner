@@ -99,7 +99,7 @@ Then("it signals:", function (table) {
   this.verifyOutput(table.rowsHash())
 })
 
-Then("it provides the full error message:", function (want) {
+Then("it provides the error message:", function (want) {
   const results = this.apiResults as textRunner.ExecuteResult
   for (const activityResult of results.activityResults) {
     assert.equal(stripAnsi(activityResult.error?.message?.trim() || ""), want.trim())

@@ -10,29 +10,65 @@ import * as textRunner from "text-runner"
 
 const psTree = util.promisify(psTreeR)
 
+interface ExecuteResultTable {
+  filename?: string
+  line?: number
+  action?: string
+  output?: string
+  errorType?: string
+  errorMessage?: string
+}
+
 Then("it executes these actions:", function (table) {
   const apiResults = this.apiResults as textRunner.ExecuteResult
   const tableHashes = table.hashes()
-  const want = tableHashes.map((line: any) => {
-    return {
-      filename: line.FILENAME,
-      line: parseInt(line.LINE, 10),
-      action: line.ACTION,
-      output: line.OUTPUT || "",
-      errorType: line["ERROR TYPE"] || "",
-      errorMessage: line["ERROR MESSAGE"] || "",
+  const want: ExecuteResultTable[] = []
+  for (const line of tableHashes) {
+    const result: ExecuteResultTable = {}
+    if (line.FILENAME) {
+      result.filename = line.FILENAME
     }
-  })
-  const have = apiResults.activityResults.map((result) => {
-    return {
-      filename: result.activity.file.platformified(),
-      line: result.activity.line,
-      action: result.activity.actionName,
-      output: result.output.trim() || "",
-      errorType: typeof result.error,
-      errorMessage: stripAnsi(result.error?.message || "").split("\n")[0],
+    if (line.LINE) {
+      result.line = parseInt(line.LINE, 10)
     }
-  })
+    if (line.ACTION) {
+      result.action = line.ACTION
+    }
+    if (line.OUTPUT) {
+      result.output = line.OUTPUT
+    }
+    if (line["ERROR TYPE"]) {
+      result.errorType = line["ERROR TYPE"]
+    }
+    if (line["ERROR MESSAGE"]) {
+      result.errorMessage = line["ERROR MESSAGE"]
+    }
+    want.push(result)
+  }
+  const have: ExecuteResultTable[] = []
+  const wanted = want[0]
+  for (const line of apiResults.activityResults) {
+    const result: ExecuteResultTable = {}
+    if (wanted.filename) {
+      result.filename = line.activity.file.platformified()
+    }
+    if (wanted.line) {
+      result.line = line.activity.line
+    }
+    if (wanted.action) {
+      result.action = line.activity.actionName
+    }
+    if (wanted.output) {
+      result.output = line.output?.trim() || ""
+    }
+    if (wanted.errorType) {
+      result.errorType = line.error?.name || ""
+    }
+    if (wanted.errorMessage) {
+      result.errorMessage = stripAnsi(line.error?.message || "").split("\n")[0]
+    }
+    have.push(result)
+  }
   assert.deepEqual(have, want)
 })
 

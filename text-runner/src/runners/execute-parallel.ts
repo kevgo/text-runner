@@ -21,8 +21,7 @@ export function executeParallel(
 ): Promise<ExecuteResult>[] {
   const result: Promise<ExecuteResult>[] = []
   for (const activity of activities) {
-    const actRes = runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
-    result.push(actRes)
+    result.push(runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter))
   }
   return result
 }

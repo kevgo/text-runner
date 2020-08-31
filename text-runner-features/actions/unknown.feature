@@ -11,8 +11,10 @@ Feature: unknown action types
     Then it executes these actions:
       | FILENAME | LINE | ACTION | ERROR MESSAGE        |
       | 1.md     | 1    | zonk   | unknown action: zonk |
-    And it provides the error message:
+    And it provides the full error message:
       """
+      unknown action: zonk
+
       No custom actions defined.
 
       To create a new "zonk" action,

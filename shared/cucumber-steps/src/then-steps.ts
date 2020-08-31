@@ -97,19 +97,10 @@ Then("it signals:", function (table) {
   this.verifyOutput(table.rowsHash())
 })
 
-Then("it provides the error message:", function (want) {
+Then("it provides the full error message:", function (want) {
   const results = this.apiResults as textRunner.ExecuteResult
   for (const activityResult of results.activityResults) {
-    if (activityResult.error?.message?.includes(want)) {
-      return
-    }
-  }
-  console.log("Didn't find error message:", want)
-  console.log(`I found ${results.errorCount} errors`)
-  for (const activityResult of results.activityResults) {
-    if (activityResult.error) {
-      console.log(`- ${activityResult.error.message}`)
-    }
+    assert.equal(stripAnsi(activityResult.error?.message?.trim() || ""), want.trim())
   }
 })
 

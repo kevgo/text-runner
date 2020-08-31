@@ -20,6 +20,7 @@ interface ExecuteResultTable {
 }
 
 Then("it executes these actions:", function (table) {
+  assert.isUndefined(this.apiException)
   const apiResults = this.apiResults as textRunner.ExecuteResult
   const tableHashes = table.hashes()
   const want: ExecuteResultTable[] = []

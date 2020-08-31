@@ -39,13 +39,13 @@ export class AstNodeList extends Array<AstNode> {
    */
   getNodesFor(openingNode: AstNode): AstNodeList {
     if (openingNode == null) {
-      throw new UserError("null Node given")
+      throw new UserError("no Node given")
     }
     let index = this.indexOf(openingNode)
     if (index === -1) {
       throw new UserError(
         `node '${openingNode.type}' not found in list`,
-        "",
+        "This AstNodeList does not contain the given node.",
         openingNode.file.platformified(),
         openingNode.line
       )

@@ -9,7 +9,7 @@ export function printSummary(stats: StatsCounter) {
     text += color.green("Success! ")
   } else {
     colorFn = color.red
-    text += color.red(`${stats.errors} errors, `)
+    text += color.red(`${stats.errors()} errors, `)
   }
   text += colorFn(`${stats.activities()} activities in ${stats.files()} files, ${stats.duration()}`)
   console.log(color.bold(text))

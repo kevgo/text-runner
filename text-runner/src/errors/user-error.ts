@@ -8,10 +8,10 @@ export class UserError extends Error {
   /** optional longer user-facing guidance on how to resolve the error */
   readonly guidance: string
 
-  constructor(message: string, description?: string, filePath?: string, line?: number) {
+  constructor(message: string, guidance?: string, filePath?: string, line?: number) {
     super(message)
     this.name = "UserError"
-    this.guidance = description || ""
+    this.guidance = guidance || ""
     this.filePath = filePath
     this.line = line
   }

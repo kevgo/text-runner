@@ -12,7 +12,7 @@ Feature: unknown action types
       | ERROR MESSAGE | unknown action: unknown-action |
       | FILENAME      | 1.md                           |
       | EXIT CODE     | 1                              |
-    And it prints the error message:
+    And the error provides the guidance:
       """
       No custom actions defined.
 

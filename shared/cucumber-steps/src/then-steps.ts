@@ -85,10 +85,11 @@ Then("the {string} directory is now deleted", async function (directoryPath) {
   throw new Error(`file '${directoryPath}' still exists`)
 })
 
-Then("the error contains the guidance:", function (expectedText) {
+Then("the error provides the guidance:", function (expectedText) {
   if (!this.apiException) {
     throw new Error("no error thrown")
   }
+  assert.equal(this.apiException.name, "UserError")
   assert.equal(expectedText, this.apiException.guidance)
 })
 

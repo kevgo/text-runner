@@ -34,34 +34,6 @@ Then("it executes these actions:", function (table) {
   assert.deepEqual(have, want)
 })
 
-Then("it executes only this action:", function (table) {
-  const results = this.apiResults as textRunner.ExecuteResult
-  if (results.activityResults.length !== 1) {
-    console.log(`expected 1 action but executed ${results.activityResults.length}:`)
-    for (const result of results.activityResults) {
-      console.log(`- ${result.activity.file.platformified()}:${result.activity.line} - ${result.activity.actionName}`)
-    }
-    throw new Error("unexpected actions")
-  }
-  const wants = table.hashes()
-  for (let i = 0; i < wants.length; i++) {
-    if (
-      results.activityResults[i].activity.file.platformified() !== wants[i].FILENAME ||
-      results.activityResults[i].activity.line !== parseInt(wants[i].LINE, 10) ||
-      results.activityResults[i].activity.actionName !== wants[i].ACTION
-    ) {
-      break
-    }
-    return
-  }
-  // here we didn't find a match
-  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
-  for (const result of results.activityResults) {
-    console.log(`- ${result.activity.file.platformified()}:${result.activity.line} - ${result.activity.actionName}`)
-  }
-  throw new Error("Expected activity not executed")
-})
-
 Then("it prints usage instructions", function () {
   this.verifyPrintedUsageInstructions()
 })

@@ -1,7 +1,6 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
-import { PrintedUserError } from "../../errors/printed-user-error"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
+import { UnprintedUserError } from "../../errors/unprinted-user-error"
 
 /**
  * Returns the filename for the config file
@@ -14,8 +13,7 @@ export async function determineConfigFilename(cmdLineArgs: UserProvidedConfigura
       await fs.stat(cmdLineArgs.configFileName)
       return cmdLineArgs.configFileName
     } catch (e) {
-      console.log(color.red(`configuration file ${color.cyan(cmdLineArgs.configFileName)} not found`))
-      throw new PrintedUserError()
+      throw new UnprintedUserError(`configuration file "${cmdLineArgs.configFileName}" not found`)
     }
   }
 

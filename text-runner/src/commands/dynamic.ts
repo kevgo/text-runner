@@ -50,12 +50,12 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     // step 8: execute the ActivityList
     const formatter = instantiateFormatter(config.formatterName, activities.length, config)
     process.chdir(config.workspace)
-    const results = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
+    const result = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
 
     // step 9: write stats
     formatter.summary(stats)
 
-    return results
+    return result
   } finally {
     process.chdir(originalDir)
   }

@@ -15,7 +15,7 @@ export async function determineConfigFilename(cmdLineArgs: UserProvidedConfigura
       await fs.stat(configFilePath)
       return configFilePath
     } catch (e) {
-      throw new UserError(`configuration file '${cmdLineArgs.configFileName}' not found`)
+      throw new UserError(`configuration file "${cmdLineArgs.configFileName}" not found`)
     }
   }
   try {

@@ -23,7 +23,7 @@ export async function runActivity(
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: ActionArgs = {
-    SKIPPING: 1,
+    SKIPPING: 254,
     configuration,
     file: activity.file.platformified(),
     line: activity.line,

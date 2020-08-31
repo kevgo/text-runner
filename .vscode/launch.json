@@ -21,12 +21,12 @@
       "outFiles": ["${workspaceFolder}/dist/**"]
     },
     {
-      "name": "cuke hard-coded file",
+      "name": "cuke current file",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/.bin/cucumber-js",
-      "args": ["actions/custom/skipping.feature:10"],
-      "cwd": "${workspaceFolder}/text-runner-features",
+      "args": ["features/exec/global-command.feature"],
+      "cwd": "${workspaceFolder}/textrun-shell",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "windows": {

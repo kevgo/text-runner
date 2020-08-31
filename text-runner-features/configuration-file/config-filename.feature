@@ -39,3 +39,7 @@ Feature: specifying the configuration filename
     Then the test fails with:
       | ERROR MESSAGE | configuration file zonk.yml not found |
       | EXIT CODE     | 1                                     |
+
+  Scenario: providing a non-existing configuration filename via API
+    When trying to call "textRunner.runCommand({configFileName: 'zonk.yml', sourceDir, formatterName})"
+    Then it throws the exception "foo"

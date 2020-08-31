@@ -33,7 +33,8 @@ When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function 
   }
 })
 
-When("calling {string}", async function (jsText: string) {
+When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
+  const expectError = determineExpectError(tryingText)
   // @ts-ignore: this make textRunner available as a variable here
   const tr = textRunner
   // @ts-ignore: this is used inside eval
@@ -41,8 +42,14 @@ When("calling {string}", async function (jsText: string) {
   // @ts-ignore: this is used inside eval
   const formatterName = "silent"
   let result: any
+  let error: Error
   eval("result = " + jsText)
-  this.apiResults = await result
+  try {
+    this.apiResults = await result
+  } catch (e) {
+    console.log(111111111, e)
+    error = e
+  }
   const apiResults = this.apiResults as textRunner.ExecuteResult
   if (apiResults.errorCount > 0) {
     console.log(`${apiResults.errorCount} errors`)

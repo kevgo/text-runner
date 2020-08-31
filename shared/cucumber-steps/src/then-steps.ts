@@ -146,6 +146,10 @@ Then("it provides the error message:", function (want) {
   }
 })
 
+Then("it throws the exception", function (message: string) {
+  //
+})
+
 Then("the call fails with the error:", function (expectedError) {
   this.verifyCallError(expectedError)
 })

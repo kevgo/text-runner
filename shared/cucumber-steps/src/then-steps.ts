@@ -156,37 +156,6 @@ Then("the call fails with the error:", function (expectedError) {
   this.verifyCallError(expectedError)
 })
 
-Then("the execution fails at:", function (table) {
-  const results = this.apiResults as textRunner.ExecuteResult
-  const tableHash = table.rowsHash()
-  const want = {
-    filename: tableHash.FILENAME,
-    line: parseInt(tableHash.LINE, 10),
-    errorMessage: tableHash["ERROR MESSAGE"],
-  }
-  for (const result of results.activityResults) {
-    const error = stripAnsi(result.error?.message || "")
-    if (
-      result.activity.file.platformified() !== want.filename ||
-      result.activity.line !== want.line ||
-      !error.includes(want.errorMessage)
-    ) {
-      continue
-    }
-    // here the three items above match, check the output
-    if (table.OUTPUT) {
-      assert.include(result.output, table.OUTPUT)
-    }
-    return
-  }
-  // here we didn't find a match
-  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
-  for (const result of results.activityResults) {
-    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.error?.message}`)
-  }
-  throw new Error("Expected error not encountered")
-})
-
 Then("the {string} directory is now deleted", async function (directoryPath) {
   try {
     await fs.stat(path.join(this.rootDir, directoryPath))

@@ -12,6 +12,7 @@ export interface ActivityResult {
   error: Error | null
 }
 
+/** for testing */
 export function scaffoldActivityResult(): ActivityResult {
   return {
     activity: scaffoldActivity(),

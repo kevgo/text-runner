@@ -17,9 +17,9 @@ export async function executeSequential(
 ): Promise<ExecuteResult> {
   let result = ExecuteResult.empty()
   for (const activity of activities) {
-    const res = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
-    result = result.merge(res)
-    if (res.errorCount > 0) {
+    const actRes = await runActivity(activity, actionFinder, configuration, linkTargets, statsCounter, formatter)
+    result = result.merge(actRes)
+    if (actRes.errorCount > 0) {
       break
     }
   }

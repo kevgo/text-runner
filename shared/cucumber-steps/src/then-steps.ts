@@ -157,7 +157,7 @@ Then("the execution fails at:", function (table) {
   const want = {
     filename: tableHash.FILENAME,
     line: parseInt(tableHash.LINE, 10),
-    errorMessage: "Error: " + tableHash["ERROR MESSAGE"],
+    errorMessage: tableHash["ERROR MESSAGE"],
   }
   for (const result of results.activityResults) {
     const error = stripAnsi(result.error?.message || "")

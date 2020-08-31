@@ -32,11 +32,6 @@ Then("it executes these actions:", function (table) {
     }
   })
   assert.deepEqual(have, want)
-
-  // here the three items above match, check the output
-  if (tableHashes.OUTPUT) {
-    throw new Error("IMPLEMENT OUTPUT CHECKING")
-  }
 })
 
 Then("it executes only this action:", function (table) {

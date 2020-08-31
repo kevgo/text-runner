@@ -4,9 +4,8 @@ import { pathRelativeToDir } from "./helpers/path-relative-to-dir"
 
 export async function filesMatchingGlob(expression: string, sourceDir: string): Promise<AbsoluteFilePath[]> {
   const files = await glob(expression)
-  const result = files
+  return files
     .sort()
     .map((file) => pathRelativeToDir(file, sourceDir))
     .map((file) => new AbsoluteFilePath(file))
-  return result
 }

@@ -30,5 +30,5 @@ Feature: specifying the configuration filename
   Scenario: providing a non-existing configuration filename
     When trying to run "text-run --config zonk.yml"
     Then the test fails with:
-      | ERROR MESSAGE | configuration file zonk.yml not found |
-      | EXIT CODE     | 1                                     |
+      | ERROR MESSAGE | configuration file "zonk.yml" not found |
+      | EXIT CODE     | 1                                       |

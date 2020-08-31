@@ -2,7 +2,6 @@ import * as cliCursor from "cli-cursor"
 import * as color from "colorette"
 import { endChildProcesses } from "end-child-processes"
 import { parseCmdlineArgs } from "./configuration/cli/parse-cmdline-args"
-import { PrintedUserError } from "./errors/printed-user-error"
 import { UnprintedUserError } from "./errors/unprinted-user-error"
 import { printUserError } from "./helpers/print-user-error"
 import { debugCommand } from "./commands/debug"
@@ -58,8 +57,6 @@ async function main() {
     errCount = 1
     if (err instanceof UnprintedUserError) {
       printUserError(err)
-    } else if (err instanceof PrintedUserError) {
-      // nothing to do
     } else {
       console.log(err.stack)
     }

@@ -19,7 +19,7 @@ export class AstNodeList extends Array<AstNode> {
     if (nodes.length > 1) {
       throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
-        "",
+        "The getNodeOfTypes method expects to find only one matching node, but it found multiple.",
         nodes[0].file.platformified(),
         nodes[0].line
       )

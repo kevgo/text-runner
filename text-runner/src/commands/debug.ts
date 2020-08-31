@@ -5,14 +5,15 @@ import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { ExecuteResult } from "../runners/execute-result"
 import { loadConfiguration } from "../configuration/load-configuration"
 
-export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
+export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)
 
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    return 0
+    return ExecuteResult.empty()
   }
 
   console.log("AST NODES:")
@@ -49,7 +50,7 @@ export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Prom
     console.log(key, linkTargets.targets[key])
   }
 
-  return 0
+  return ExecuteResult.empty()
 }
 
 function showAttr(node: AstNode): string {

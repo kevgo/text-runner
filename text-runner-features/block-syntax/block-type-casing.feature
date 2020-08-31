@@ -9,11 +9,10 @@ Feature: flexible region syntax
       <a type="HelloWorld">
       </a>
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | OUTPUT       |
+      | 1.md     | 1    | hello-world | Hello World! |
 
   Scenario: the blocktype is provided in camelCase
     Given the source code contains a file "1.md" with content:
@@ -21,11 +20,10 @@ Feature: flexible region syntax
       <a type="helloWorld">
       </a>
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | OUTPUT       |
+      | 1.md     | 1    | hello-world | Hello World! |
 
   Scenario: the blocktype is provided in snake_case
     Given the source code contains a file "1.md" with content:
@@ -33,11 +31,10 @@ Feature: flexible region syntax
       <a type="hello_world">
       </a>
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | OUTPUT       |
+      | 1.md     | 1    | hello-world | Hello World! |
 
   Scenario: the blocktype is provided in kebab-case
     Given the source code contains a file "1.md" with content:
@@ -45,8 +42,7 @@ Feature: flexible region syntax
       <a type="hello-world">
       </a>
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | OUTPUT       |
+      | 1.md     | 1    | hello-world | Hello World! |

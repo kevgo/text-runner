@@ -1,7 +1,8 @@
-import { promises as fs } from "fs"
 import * as path from "path"
+import { promises as fs } from "fs"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function scaffoldCommand(actionName: string, sourceDir: string) {
+export async function scaffoldCommand(actionName: string, sourceDir: string): Promise<ExecuteResult> {
   if (!actionName) {
     throw new Error("no action name given")
   }
@@ -16,6 +17,7 @@ export async function scaffoldCommand(actionName: string, sourceDir: string) {
     await fs.mkdir(dirPath, { recursive: true })
   }
   await fs.writeFile(path.join(dirPath, actionName + ".js"), template(actionName), "utf8")
+  return ExecuteResult.empty()
 }
 
 function template(filename: string) {

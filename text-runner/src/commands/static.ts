@@ -10,8 +10,9 @@ import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import { loadConfiguration } from "../configuration/load-configuration"
 import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
+export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const originalDir = process.cwd()
   try {
     // step 1: load configuration from file
@@ -26,7 +27,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
       console.log(color.magenta("no Markdown files found"))
-      return 0
+      return ExecuteResult.empty()
     }
     const stats = new StatsCounter(filenames.length)
 
@@ -40,7 +41,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     const links = extractImagesAndLinks(ASTs)
     if (links.length === 0) {
       console.log(color.magenta("no activities found"))
-      return 0
+      return ExecuteResult.empty()
     }
 
     // step 7: find actions
@@ -49,9 +50,9 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     // step 8: execute the ActivityList
     const formatter = instantiateFormatter(config.formatterName, links.length, config)
     process.chdir(config.workspace)
-    const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
-    const errors = await Promise.all(jobs)
-    const errorCount = errors.reduce((acc, val) => acc + val, 0)
+    const parResultsP = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
+    const parResults = await Promise.all(parResultsP)
+    const result = ExecuteResult.empty().merge(...parResults)
 
     // step 9: cleanup
     process.chdir(config.sourceDir)
@@ -59,7 +60,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     // step 10: write stats
     formatter.summary(stats)
 
-    return errorCount
+    return result
   } finally {
     process.chdir(originalDir)
   }

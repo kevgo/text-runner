@@ -5,8 +5,9 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { loadConfiguration } from "../configuration/load-configuration"
 import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { ExecuteResult } from "../runners/execute-result"
 
-export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
+export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   // step 1: load configuration from file
   const config = await loadConfiguration(cmdlineArgs)
 
@@ -14,7 +15,7 @@ export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Pro
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     console.log(color.magenta("no Markdown files found"))
-    return 0
+    return ExecuteResult.empty()
   }
 
   // step 3: read and parse files
@@ -37,5 +38,5 @@ export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     console.log(`- ${unusedActivityName}`)
   }
 
-  return 0
+  return ExecuteResult.empty()
 }

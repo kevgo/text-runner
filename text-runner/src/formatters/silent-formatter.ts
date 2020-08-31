@@ -3,7 +3,7 @@ import { Configuration } from "../configuration/types/configuration"
 import { Formatter } from "./types/formatter"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 
-/** A completely minimalistic formatter, prints nothing in the happy path */
+/** A completely minimalistic formatter, prints nothing */
 export class SilentFormatter implements Formatter {
   // @ts-ignore: ignore unused variable
   constructor(stepCount: number, configuration: Configuration) {}

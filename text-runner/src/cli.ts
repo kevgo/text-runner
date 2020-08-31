@@ -4,6 +4,7 @@ import { endChildProcesses } from "end-child-processes"
 import { parseCmdlineArgs } from "./configuration/cli/parse-cmdline-args"
 import { UserError } from "./errors/user-error"
 import { printUserError } from "./errors/print-user-error"
+import { ExecuteResult } from "./runners/execute-result"
 import { debugCommand } from "./commands/debug"
 import { dynamicCommand } from "./commands/dynamic"
 import { helpCommand } from "./commands/help"
@@ -19,7 +20,7 @@ cliCursor.hide()
 
 async function main() {
   const { command, config } = parseCmdlineArgs(process.argv)
-  let errCount = 0
+  let result = ExecuteResult.empty()
   try {
     switch (command) {
       case "help":
@@ -27,7 +28,7 @@ async function main() {
         break
       case "scaffold":
         if (!config.fileGlob) {
-          throw new Error("No action name given")
+          throw new Error("no action name given")
         }
         await scaffoldCommand(config.fileGlob, config.sourceDir || ".")
         break
@@ -38,26 +39,26 @@ async function main() {
         await versionCommand()
         break
       case "debug":
-        errCount = await debugCommand(config)
+        result = await debugCommand(config)
         break
       case "dynamic":
-        errCount = await dynamicCommand(config)
+        result = await dynamicCommand(config)
         break
       case "run":
-        errCount = await runCommand(config)
+        result = await runCommand(config)
         break
       case "static":
-        errCount = await staticCommand(config)
+        result = await staticCommand(config)
         break
       case "unused":
-        errCount = await unusedCommand(config)
+        result = await unusedCommand(config)
         break
       default:
         console.log(color.red(`unknown command: ${command || ""}`))
-        errCount = 1
+        result.errorCount += 1
     }
   } catch (err) {
-    errCount = 1
+    result.errorCount += 1
     if (err instanceof UserError) {
       printUserError(err)
     } else {
@@ -65,6 +66,6 @@ async function main() {
     }
   }
   await endChildProcesses()
-  process.exit(errCount)
+  process.exit(result.errorCount)
 }
 main()

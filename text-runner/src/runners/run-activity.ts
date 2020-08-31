@@ -11,6 +11,8 @@ import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { StatsCounter } from "./helpers/stats-counter"
+import { ExecuteResult } from "./execute-result"
+import { ActivityResult } from "../activity-list/types/activity-result"
 
 export async function runActivity(
   activity: Activity,
@@ -19,7 +21,7 @@ export async function runActivity(
   linkTargets: LinkTargetList,
   statsCounter: StatsCounter,
   formatter: Formatter
-): Promise<number> {
+): Promise<ExecuteResult> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: ActionArgs = {
@@ -50,16 +52,18 @@ export async function runActivity(
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
-  } catch (err) {
+  } catch (error) {
     statsCounter.error()
-    if (isUserError(err)) {
-      formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
-      return 1
+    if (isUserError(error)) {
+      formatter.failed(activity, nameRefiner.finalName(), error, outputCollector.toString())
+      const activityResult: ActivityResult = { activity, error, output: outputCollector.toString() }
+      return new ExecuteResult([activityResult], 1)
     }
     // here we have a developer error like for example TypeError
-    throw err
+    throw error
   }
-  return 0
+  const activityResult: ActivityResult = { activity, error: null, output: outputCollector.toString() }
+  return new ExecuteResult([activityResult], 0)
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {

@@ -5,8 +5,93 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as psTreeR from "ps-tree"
 import * as util from "util"
+import stripAnsi = require("strip-ansi")
+import * as textRunner from "text-runner"
 
 const psTree = util.promisify(psTreeR)
+
+interface ExecuteResultTable {
+  filename?: string
+  line?: number
+  action?: string
+  output?: string
+  errorType?: string
+  errorMessage?: string
+}
+
+Then("it executes these actions:", function (table) {
+  assert.isUndefined(this.apiException)
+  const apiResults = this.apiResults as textRunner.ExecuteResult
+  const tableHashes = table.hashes()
+  const want: ExecuteResultTable[] = []
+  for (const line of tableHashes) {
+    const result: ExecuteResultTable = {}
+    if (line.FILENAME) {
+      result.filename = line.FILENAME
+    }
+    if (line.LINE) {
+      result.line = parseInt(line.LINE, 10)
+    }
+    if (line.ACTION) {
+      result.action = line.ACTION
+    }
+    if (line.OUTPUT) {
+      result.output = line.OUTPUT
+    }
+    want.push(result)
+  }
+  const have: ExecuteResultTable[] = []
+  const wanted = want[0]
+  for (const line of apiResults?.activityResults || []) {
+    const result: ExecuteResultTable = {}
+    if (wanted.filename) {
+      result.filename = line.activity.file.platformified()
+    }
+    if (wanted.line) {
+      result.line = line.activity.line
+    }
+    if (wanted.action) {
+      result.action = line.activity.actionName
+    }
+    if (wanted.output) {
+      result.output = line.output?.trim() || ""
+    }
+    have.push(result)
+  }
+  assert.deepEqual(have, want)
+})
+
+Then("it throws:", function (table) {
+  if (!this.apiException) {
+    throw new Error("no error thrown")
+  }
+  const tableHash = table.hashes()[0]
+  const want: ExecuteResultTable = {
+    errorType: tableHash["ERROR TYPE"],
+    errorMessage: tableHash["ERROR MESSAGE"],
+  }
+  const have: ExecuteResultTable = {
+    errorType: this.apiException.name,
+    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
+  }
+  if (tableHash.FILENAME) {
+    want.filename = tableHash.FILENAME
+    have.filename = this.apiException.filePath
+  }
+  if (tableHash.LINE) {
+    want.line = parseInt(tableHash.LINE, 10)
+    have.line = this.apiException.line
+  }
+  assert.deepEqual(have, want)
+})
+
+Then("the error provides the guidance:", function (expectedText) {
+  if (!this.apiException) {
+    throw new Error("no error thrown")
+  }
+  assert.equal(this.apiException.name, "UserError")
+  assert.equal(expectedText.trim(), this.apiException.guidance.trim())
+})
 
 Then("it prints usage instructions", function () {
   this.verifyPrintedUsageInstructions()
@@ -29,10 +114,6 @@ Then("it doesn't print:", function (expectedText) {
 
 Then("it prints:", function (expectedText) {
   this.verifyPrints(expectedText)
-})
-
-Then("it prints the error message:", function (expectedText) {
-  this.verifyErrormessage(expectedText)
 })
 
 Then("it runs {int} test", function (count) {

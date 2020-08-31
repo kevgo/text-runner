@@ -12,9 +12,10 @@ import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
 import { loadConfiguration } from "../configuration/load-configuration"
+import { ExecuteResult } from "../runners/execute-result"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
-export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
+export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const originalDir = process.cwd()
   try {
     // step 1: load configuration from file
@@ -29,7 +30,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
       console.log(color.magenta("no Markdown files found"))
-      return 0
+      return ExecuteResult.empty()
     }
     const stats = new StatsCounter(filenames.length)
 
@@ -47,16 +48,18 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     const links = extractImagesAndLinks(ASTs)
     if (activities.length + links.length === 0) {
       console.log(color.magenta("no activities found"))
-      return 0
+      return ExecuteResult.empty()
     }
 
     // step 8: execute the ActivityList
     const formatter = instantiateFormatter(config.formatterName, activities.length + links.length, config)
     process.chdir(config.workspace)
-    const jobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
-    jobs.push(executeSequential(activities, actionFinder, config, linkTargets, stats, formatter))
-    const errors = await Promise.all(jobs)
-    const errorCount = errors.reduce((acc, val) => acc + val, 0)
+    // kick off the parallel jobs to run in the background
+    let parJobs = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
+    // execute the serial jobs
+    const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
+    const parRes = await Promise.all(parJobs)
+    const result = seqRes.merge(...parRes)
 
     // step 9: cleanup
     process.chdir(config.sourceDir)
@@ -64,7 +67,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     // step 10: write stats
     formatter.summary(stats)
 
-    return errorCount
+    return result
   } finally {
     process.chdir(originalDir)
   }

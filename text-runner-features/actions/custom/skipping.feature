@@ -14,11 +14,10 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                  |
-      | LINE     | 1                     |
-      | MESSAGE  | skipping: Skip action |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |
 
   Scenario: skipping an asynchronous action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -27,11 +26,10 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                  |
-      | LINE     | 1                     |
-      | MESSAGE  | skipping: Skip action |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |
 
   Scenario: skipping a callback action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -40,12 +38,10 @@ Feature: skipping an action
         done(null, action.SKIPPING)
       }
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                  |
-      | LINE     | 1                     |
-      | MESSAGE  | skipping: Skip action |
-
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |
 
   Scenario: skipping a promise action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -56,8 +52,7 @@ Feature: skipping an action
         })
       }
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                  |
-      | LINE     | 1                     |
-      | MESSAGE  | skipping: Skip action |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |

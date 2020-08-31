@@ -8,10 +8,11 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
+import { ExecuteResult } from "../runners/execute-result"
 import { loadConfiguration } from "../configuration/load-configuration"
 import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
 
-export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Promise<number> {
+export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const originalDir = process.cwd()
   try {
     // step 1: load configuration from file
@@ -26,7 +27,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
       console.log(color.magenta("no Markdown files found"))
-      return 0
+      return ExecuteResult.empty()
     }
     const stats = new StatsCounter(filenames.length)
 
@@ -40,7 +41,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     const activities = extractActivities(ASTs, config.regionMarker)
     if (activities.length === 0) {
       console.log(color.magenta("no activities found"))
-      return 0
+      return ExecuteResult.empty()
     }
 
     // step 7: find actions
@@ -49,16 +50,12 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     // step 8: execute the ActivityList
     const formatter = instantiateFormatter(config.formatterName, activities.length, config)
     process.chdir(config.workspace)
-    const error = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
+    const result = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
 
     // step 9: write stats
     formatter.summary(stats)
 
-    if (error) {
-      return 1
-    } else {
-      return 0
-    }
+    return result
   } finally {
     process.chdir(originalDir)
   }

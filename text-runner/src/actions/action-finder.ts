@@ -67,12 +67,12 @@ export class ActionFinder {
     const errorText = `unknown action: ${color.red(activity.actionName)}`
     let guidance = ""
     if (this.customActions.size() > 0) {
-      guidance += "\nUser-defined actions:\n"
+      guidance += "User-defined actions:\n"
       for (const actionName of this.customActions.names()) {
         guidance += `* ${actionName}\n`
       }
     } else {
-      guidance += "\nNo custom actions defined.\n"
+      guidance += "No custom actions defined.\n"
     }
     guidance += `\nTo create a new "${activity.actionName}" action,\n`
     guidance += `run "text-run scaffold ${activity.actionName}"\n`

@@ -4,9 +4,7 @@ Feature: Formatter signals
     Given the source code contains a file "error.md" with content:
       """
       <a type="run-javascript">
-      ```
       throw new Error('BOOM!')
-      ```
       </a>
       """
     When trying to run "text-run --format <FORMATTER> --offline"

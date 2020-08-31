@@ -55,15 +55,6 @@ Then("it executes these actions:", function (table) {
     if (wanted.output) {
       result.output = line.output?.trim() || ""
     }
-    if (wanted.errorType) {
-      console.log(util.inspect(line.error))
-      console.log(line.error?.name)
-      console.log(typeof line.error)
-      result.errorType = line.error?.name || ""
-    }
-    if (wanted.errorMessage) {
-      result.errorMessage = stripAnsi(line.error?.message || "").split("\n")[0]
-    }
     have.push(result)
   }
   assert.deepEqual(have, want)

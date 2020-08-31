@@ -146,8 +146,9 @@ Then("it provides the error message:", function (want) {
   }
 })
 
-Then("it throws the exception", function (message: string) {
-  //
+Then("it throws a user error with the message:", function (message: string) {
+  assert.typeOf(this.apiException, "Error")
+  assert.equal(this.apiException.message, message)
 })
 
 Then("the call fails with the error:", function (expectedError) {

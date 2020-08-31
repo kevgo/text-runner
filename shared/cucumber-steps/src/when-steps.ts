@@ -47,8 +47,13 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
   try {
     this.apiResults = await result
   } catch (e) {
-    console.log(111111111, e)
-    error = e
+    this.apiException = e
+    if (expectError) {
+      // expected the error --> done here
+      return
+    } else {
+      throw new Error(`Unexpected exception: ${e}`)
+    }
   }
   const apiResults = this.apiResults as textRunner.ExecuteResult
   if (apiResults.errorCount > 0) {

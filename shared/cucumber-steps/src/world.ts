@@ -13,7 +13,7 @@ import * as helpers from "./helpers"
  * via its command-line interface
  */
 function World() {
-  this.execute = async function (params: { command: string; expectError: boolean; cwd: string }) {
+  this.executeCLI = async function (params: { command: string; expectError: boolean; cwd: string }) {
     const args: any = {}
     args.cwd = params.cwd || this.rootDir
     if (this.debug) {

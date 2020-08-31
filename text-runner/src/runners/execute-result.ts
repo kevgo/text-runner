@@ -9,6 +9,7 @@ export class ExecuteResult {
 
   /**
    * the authoritative number of errors encountered
+   *
    * This number can be higher than the errors in the activityResults,
    * since errors can happen outside of executing activities.
    */

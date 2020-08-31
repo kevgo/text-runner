@@ -2,14 +2,16 @@ import { ActivityResult } from "../activity-list/types/activity-result"
 
 /**
  * ExecuteResult represents the result of executing a number of activities.
- *
- * The contained activityResults represent which activities have been executed.
- * The errorCount is the authoritative number of errors encountered.
- * This number can be higher than the errors in the activityResults,
- * since errors can happen outside of executing activities.
  */
 export class ExecuteResult {
+  /** the activities that have been executed */
   activityResults: ActivityResult[]
+
+  /**
+   * the authoritative number of errors encountered
+   * This number can be higher than the errors in the activityResults,
+   * since errors can happen outside of executing activities.
+   */
   errorCount: number
 
   /** provides an empty ExecuteResult */

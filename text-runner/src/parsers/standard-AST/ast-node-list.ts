@@ -26,9 +26,9 @@ export class AstNodeList extends Array<AstNode> {
     }
     if (nodes.length === 0) {
       const msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
-      let description = "The node types in this list are: "
-      description += this.nodeTypes().join(", ")
-      throw new UserError(msg, description, this[0].file.platformified(), this[0].line)
+      let guidance = "The node types in this list are: "
+      guidance += this.nodeTypes().join(", ")
+      throw new UserError(msg, guidance, this[0].file.platformified(), this[0].line)
     }
     return nodes[0]
   }

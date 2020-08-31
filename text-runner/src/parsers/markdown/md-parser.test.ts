@@ -19,7 +19,7 @@ suite("MdParser.parseFile()", function () {
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
           expected.push(AstNode.scaffold(expectedNodeData))
         }
-        const actual = await parseMarkdownFiles([new AbsoluteFilePath(path.join(testDirPath, "input.md"))])
+        const actual = await parseMarkdownFiles([new AbsoluteFilePath("input.md")], testDirPath)
         assert.deepEqual(actual[0], expected)
       })
     }

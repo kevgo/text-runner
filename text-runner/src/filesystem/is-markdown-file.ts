@@ -1,11 +1,9 @@
 import { promises as fs } from "fs"
-import * as path from "path"
 
-export async function isMarkdownFile(filename: string): Promise<boolean> {
+export async function isMarkdownFile(filepath: string): Promise<boolean> {
   try {
-    const filepath = path.join(process.cwd(), filename)
     const fileStats = await fs.stat(filepath)
-    return filename.endsWith(".md") && fileStats.isFile()
+    return filepath.endsWith(".md") && fileStats.isFile()
   } catch (e) {
     return false
   }

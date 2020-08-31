@@ -22,7 +22,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
 
     // step 2: create workspace
     if (!config.workspace) {
-      config.workspace = await createWorkspace(config.useSystemTempDirectory)
+      config.workspace = await createWorkspace(config)
     }
 
     // step 3: find files
@@ -34,7 +34,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     const stats = new StatsCounter(filenames.length)
 
     // step 4: read and parse files
-    const ASTs = await parseMarkdownFiles(filenames)
+    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
     // step 5: find link targets
     const linkTargets = findLinkTargets(ASTs)

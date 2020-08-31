@@ -1,20 +1,21 @@
 import { promises as fs } from "fs"
 import * as path from "path"
 
-export async function scaffoldCommand(blockName: string | undefined) {
-  if (!blockName) {
-    throw new Error("no region name given")
+export async function scaffoldCommand(actionName: string, sourceDir: string) {
+  if (!actionName) {
+    throw new Error("no action name given")
   }
+  const dirPath = path.join(sourceDir, "text-run")
   let textRunDirExists = true
   try {
-    await fs.stat("text-run")
+    await fs.stat(dirPath)
   } catch (e) {
     textRunDirExists = false
   }
   if (!textRunDirExists) {
-    await fs.mkdir("text-run")
+    await fs.mkdir(dirPath, { recursive: true })
   }
-  await fs.writeFile(path.join("text-run", blockName + ".js"), template(blockName), "utf8")
+  await fs.writeFile(path.join(dirPath, actionName + ".js"), template(actionName), "utf8")
 }
 
 function template(filename: string) {

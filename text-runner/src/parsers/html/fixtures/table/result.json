@@ -2,7 +2,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 1,
     "tag": "table",
     "type": "table_open"
@@ -10,7 +10,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 2,
     "tag": "tbody",
     "type": "tbody_open"
@@ -18,7 +18,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 2,
     "tag": "tr",
     "type": "tr_open"
@@ -26,7 +26,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 3,
     "tag": "td",
     "type": "td_open"
@@ -34,7 +34,7 @@
   {
     "attributes": {},
     "content": "123",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 3,
     "tag": "",
     "type": "text"
@@ -42,7 +42,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 3,
     "tag": "/td",
     "type": "td_close"
@@ -50,7 +50,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 4,
     "tag": "/tr",
     "type": "tr_close"
@@ -58,7 +58,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 5,
     "tag": "/tbody",
     "type": "tbody_close"
@@ -66,7 +66,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/html/fixtures/table/input.html",
+    "file": "input.html",
     "line": 5,
     "tag": "/table",
     "type": "table_close"

@@ -35,7 +35,7 @@ Then("it executes:", function (table) {
   // here we didn't find a match
   console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
   for (const result of results.activityResults) {
-    console.log(`- ${result.activity.file.platformified()}:${result.activity.line}: ${result.activity.actionName}`)
+    console.log(`- ${result.activity.file.platformified()}:${result.activity.line} - ${result.activity.actionName}`)
   }
   throw new Error("Expected activity not executed")
 })

@@ -36,5 +36,5 @@ export interface ActionArgs {
   linkTargets: LinkTargetList
 
   /** return the action with this value to signal that it is being skipped */
-  SKIPPING: 1
+  SKIPPING: 254
 }

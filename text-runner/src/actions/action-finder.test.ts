@@ -16,7 +16,7 @@ suite("actionFinder", function () {
   suite("actionFor()", function () {
     test("built-in region name", function () {
       const builtIn = new Actions()
-      const func: Action = () => 1
+      const func: Action = () => 254
       builtIn.register("foo", func)
       const actionFinder = new ActionFinder(builtIn, new Actions(), new ExternalActionManager())
       const activity = scaffoldActivity({ actionName: "foo" })
@@ -24,7 +24,7 @@ suite("actionFinder", function () {
     })
     test("custom region name", function () {
       const custom = new Actions()
-      const func: Action = () => 1
+      const func: Action = () => 254
       custom.register("foo", func)
       const actionFinder = new ActionFinder(new Actions(), custom, new ExternalActionManager())
       const activity = scaffoldActivity({ actionName: "foo" })

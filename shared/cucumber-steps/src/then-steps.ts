@@ -19,7 +19,8 @@ Then("it executes these actions:", function (table) {
       line: parseInt(line.LINE, 10),
       action: line.ACTION,
       output: line.OUTPUT || "",
-      error: line["ERROR MESSAGE"] || "",
+      errorType: line["ERROR TYPE"] || "",
+      errorMessage: line["ERROR MESSAGE"] || "",
     }
   })
   const have = apiResults.activityResults.map((result) => {
@@ -28,7 +29,8 @@ Then("it executes these actions:", function (table) {
       line: result.activity.line,
       action: result.activity.actionName,
       output: result.output.trim() || "",
-      error: stripAnsi(result.error?.message || "").split("\n")[0],
+      errorType: typeof result.error,
+      errorMessage: stripAnsi(result.error?.message || "").split("\n")[0],
     }
   })
   assert.deepEqual(have, want)

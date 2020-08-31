@@ -10,7 +10,7 @@ Feature: unknown action types
     When trying to call text-run
     Then it executes these actions:
       | FILENAME | LINE | ACTION | ERROR TYPE |
-      | 1.md     | 1    | zonk   | user error |
+      | 1.md     | 1    | zonk   | UserError  |
     And it provides the full error message:
       """
       unknown action: zonk

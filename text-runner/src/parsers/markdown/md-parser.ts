@@ -7,7 +7,7 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./helpers/closing-tag-parser"
 import { OpenNodeTracker } from "./helpers/open-node-tracker"
-import { UserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MarkdownParser {

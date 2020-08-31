@@ -1,7 +1,7 @@
 import * as fs from "fs-extra"
 import * as path from "path"
 import * as tmp from "tmp-promise"
-import { UserError } from "../errors/unprinted-user-error"
+import { UserError } from "../errors/user-error"
 
 type workingDirSetting = string | boolean
 

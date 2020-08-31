@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { UserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 import { AstNode } from "./ast-node"
 import { AstNodeList } from "./ast-node-list"
 

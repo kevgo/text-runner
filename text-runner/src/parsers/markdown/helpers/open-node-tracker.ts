@@ -1,4 +1,4 @@
-import { UserError } from "../../../errors/unprinted-user-error"
+import { UserError } from "../../../errors/user-error"
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 
 /** helps find open MarkdownIt AST nodes */

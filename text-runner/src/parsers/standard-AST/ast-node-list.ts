@@ -1,4 +1,4 @@
-import { UserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 import { AstNode } from "./ast-node"
 
 export class AstNodeList extends Array<AstNode> {

@@ -1,5 +1,5 @@
 import * as slugify from "@sindresorhus/slugify"
-import { UserError } from "../errors/unprinted-user-error"
+import { UserError } from "../errors/user-error"
 
 export function normalizeActionName(actionName: string): string {
   const parts = actionName.split("/")

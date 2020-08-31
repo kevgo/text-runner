@@ -4,7 +4,7 @@ import * as textRunner from "text-runner"
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
   await this.executeCLI({ command, expectError })
-  finish(expectError, this.process.exitCode)
+  finish(expectError, this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
@@ -15,7 +15,7 @@ When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (
     finish(expectError, err)
     return
   }
-  finish(expectError, this.process.exitCode)
+  finish(expectError, this.error || this.process?.exitCode)
 })
 
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
@@ -71,7 +71,7 @@ When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30
     finish(expectError, err)
     return
   }
-  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
+  finish(expectError, this.error || this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, { timeout: 30_000 }, async function (
@@ -83,7 +83,7 @@ When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, { timeo
   const command = splitted[0]
   const options = splitted.splice(1)
   await this.executeCLI({ command, options, expectError })
-  finish(expectError, this.process.error || this.process.exitCode)
+  finish(expectError, this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, { timeout: 30_000 }, async function (
@@ -95,7 +95,7 @@ When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, { timeo
   args.command = "run"
   args.expectError = expectError
   await this.executeCLI(args)
-  finish(expectError, this.error || (this.process && (this.process.error || this.process.exitCode)))
+  finish(expectError, this.error || this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, { timeout: 30_000 }, async function (
@@ -109,7 +109,7 @@ When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, { timeou
       expectError,
       options: { formatter: formatterName },
     })
-    finish(expectError, this.process.exitCode)
+    finish(expectError, this.process?.exitCode)
   } catch (err) {
     finish(expectError, err)
   }
@@ -127,12 +127,16 @@ function determineExpectError(tryingText: string) {
   }
 }
 
-function finish(trying: boolean, exitCode: number) {
-  if (trying && exitCode === 0) {
+function finish(trying: boolean, exitCode: number | Error) {
+  if (trying && !exitCode) {
     throw new Error("expected error but test succeeded")
-  } else if (trying && exitCode > 0) {
+  } else if (trying && exitCode) {
     // nothing to do here, we expected the error
-  } else if (exitCode > 0) {
-    throw new Error(`unexpected exit code: ${exitCode}`)
+  } else if (exitCode) {
+    if (typeof exitCode === "number") {
+      throw new Error(`Expected success but got exit code: ${exitCode}`)
+    } else {
+      throw new Error(`Expected success but got error: ${exitCode}`)
+    }
   }
 }

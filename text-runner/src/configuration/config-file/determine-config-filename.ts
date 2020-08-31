@@ -1,7 +1,7 @@
 import * as path from "path"
 import { promises as fs } from "fs"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
-import { UnprintedUserError } from "../../../dist/errors/unprinted-user-error"
+import { UnprintedUserError } from "../../errors/unprinted-user-error"
 
 /**
  * Returns the filename for the config file

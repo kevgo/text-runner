@@ -41,5 +41,5 @@ Feature: specifying the configuration filename
       | EXIT CODE     | 1                                     |
 
   Scenario: providing a non-existing configuration filename via API
-    When trying to call "textRunner.runCommand({configFileName: 'zonk.yml', sourceDir, formatterName})"
+    When trying to call "textRunner.runCommand({configFileName: 'zonk.yml'})"
     Then it throws the exception "foo"

@@ -8,10 +8,9 @@ Feature: unknown action types
       </a>
       """
     When trying to call text-run
-    Then the execution fails at:
-      | FILENAME      | 1.md                 |
-      | LINE          | 1                    |
-      | ERROR MESSAGE | unknown action: zonk |
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION | ERROR MESSAGE        |
+      | 1.md     | 1    | zonk   | unknown action: zonk |
     And it provides the error message:
       """
       No custom actions defined.

@@ -15,10 +15,9 @@ Feature: skipping an action
       }
       """
     When calling text-run
-    Then it executes:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | ACTION   | skip-action |
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |
 
   Scenario: skipping an asynchronous action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -28,10 +27,9 @@ Feature: skipping an action
       }
       """
     When calling text-run
-    Then it executes:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | ACTION   | skip-action |
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |
 
   Scenario: skipping a callback action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -41,10 +39,9 @@ Feature: skipping an action
       }
       """
     When calling text-run
-    Then it executes:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | ACTION   | skip-action |
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |
 
   Scenario: skipping a promise action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -56,7 +53,6 @@ Feature: skipping an action
       }
       """
     When calling text-run
-    Then it executes:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | ACTION   | skip-action |
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | skip-action |

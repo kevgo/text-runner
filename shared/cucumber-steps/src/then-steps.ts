@@ -10,34 +10,33 @@ import * as textRunner from "text-runner"
 
 const psTree = util.promisify(psTreeR)
 
-Then("it executes:", function (table) {
-  const results = this.apiResults as textRunner.ExecuteResult
-  const tableHash = table.rowsHash()
-  const want = {
-    filename: tableHash.FILENAME,
-    line: parseInt(tableHash.LINE, 10),
-    activityName: tableHash.ACTION,
-  }
-  for (const result of results.activityResults) {
-    if (
-      result.activity.file.platformified() !== want.filename ||
-      result.activity.line !== want.line ||
-      result.activity.actionName !== want.activityName
-    ) {
-      continue
+Then("it executes these actions:", function (table) {
+  const apiResults = this.apiResults as textRunner.ExecuteResult
+  const tableHashes = table.hashes()
+  const want = tableHashes.map((line: any) => {
+    return {
+      filename: line.FILENAME,
+      line: parseInt(line.LINE, 10),
+      action: line.ACTION,
+      output: line.OUTPUT || "",
+      error: line["ERROR MESSAGE"] || "",
     }
-    // here the three items above match, check the output
-    if (tableHash.OUTPUT) {
-      assert.include(result.output, tableHash.OUTPUT)
+  })
+  const have = apiResults.activityResults.map((result) => {
+    return {
+      filename: result.activity.file.platformified(),
+      line: result.activity.line,
+      action: result.activity.actionName,
+      output: result.output.trim() || "",
+      error: stripAnsi(result.error?.message || "").split("\n")[0],
     }
-    return
+  })
+  assert.deepEqual(have, want)
+
+  // here the three items above match, check the output
+  if (tableHashes.OUTPUT) {
+    throw new Error("IMPLEMENT OUTPUT CHECKING")
   }
-  // here we didn't find a match
-  console.log(`Text-Runner executed these ${results.activityResults.length} activities:`)
-  for (const result of results.activityResults) {
-    console.log(`- ${result.activity.file.platformified()}:${result.activity.line} - ${result.activity.actionName}`)
-  }
-  throw new Error("Expected activity not executed")
 })
 
 Then("it executes only this action:", function (table) {

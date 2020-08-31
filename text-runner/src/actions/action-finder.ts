@@ -64,18 +64,19 @@ export class ActionFinder {
 
   /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
-    let errorText = `unknown action: ${color.red(activity.actionName)}\n`
+    const errorText = `unknown action: ${color.red(activity.actionName)}`
+    let guidance = ""
     if (this.customActions.size() > 0) {
-      errorText += "\nUser-defined actions:\n"
+      guidance += "User-defined actions:\n"
       for (const actionName of this.customActions.names()) {
-        errorText += `* ${actionName}\n`
+        guidance += `* ${actionName}\n`
       }
     } else {
-      errorText += "\nNo custom actions defined.\n"
+      guidance += "No custom actions defined.\n"
     }
-    errorText += `\nTo create a new "${activity.actionName}" action,\n`
-    errorText += `run "text-run scaffold ${activity.actionName}"\n`
-    throw new UserError(errorText, activity.file.platformified(), activity.line)
+    guidance += `\nTo create a new "${activity.actionName}" action,\n`
+    guidance += `run "text-run scaffold ${activity.actionName}"\n`
+    throw new UserError(errorText, guidance, activity.file.platformified(), activity.line)
   }
 }
 

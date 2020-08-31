@@ -6,12 +6,12 @@ export class UserError extends Error {
   readonly filePath: string | undefined
   readonly line: number | undefined
   /** optional longer user-facing guidance on how to resolve the error */
-  readonly description: string
+  readonly guidance: string
 
   constructor(message: string, description?: string, filePath?: string, line?: number) {
     super(message)
     this.name = "UserError"
-    this.description = description || ""
+    this.guidance = description || ""
     this.filePath = filePath
     this.line = line
   }

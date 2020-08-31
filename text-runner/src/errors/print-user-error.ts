@@ -10,9 +10,9 @@ export function printUserError(err: UserError) {
   } else {
     console.log(color.red(err.message))
   }
-  if (err.description) {
+  if (err.guidance) {
     console.log()
-    console.log(err.description)
+    console.log(err.guidance)
   }
   const filePath = path.join(process.cwd(), err.filePath || "")
   printCodeFrame(console.log, filePath, err.line)

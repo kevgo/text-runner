@@ -42,7 +42,6 @@ Feature: specifying the configuration filename
 
   Scenario: providing a non-existing configuration filename via API
     When trying to call "textRunner.runCommand({configFileName: 'zonk.yml'})"
-    Then it throws a user error with the message:
-      """
-      configuration file 'zonk.yml' not found
-      """
+    Then it throws:
+      | ERROR TYPE | ERROR MESSAGE                           |
+      | UserError  | configuration file 'zonk.yml' not found |

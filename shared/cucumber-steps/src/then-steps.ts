@@ -66,16 +66,20 @@ Then("it throws:", function (table) {
   }
   const tableHash = table.hashes()[0]
   const want: ExecuteResultTable = {
-    filename: tableHash.FILENAME,
-    line: parseInt(tableHash.LINE, 10),
     errorType: tableHash["ERROR TYPE"],
     errorMessage: tableHash["ERROR MESSAGE"],
   }
   const have: ExecuteResultTable = {
-    filename: this.apiException.filePath,
-    line: this.apiException.line,
     errorType: this.apiException.name,
     errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
+  }
+  if (tableHash.FILENAME) {
+    want.filename = tableHash.FILENAME
+    have.filename = this.apiException.filePath
+  }
+  if (tableHash.LINE) {
+    want.line = parseInt(tableHash.LINE, 10)
+    have.line = this.apiException.line
   }
   assert.deepEqual(have, want)
 })
@@ -145,18 +149,6 @@ Then("it runs without errors", function () {
 
 Then("it signals:", function (table) {
   this.verifyOutput(table.rowsHash())
-})
-
-Then("it provides the error message:", function (want) {
-  const results = this.apiResults as textRunner.ExecuteResult
-  for (const activityResult of results.activityResults) {
-    assert.equal(stripAnsi(activityResult.error?.message?.trim() || ""), want.trim())
-  }
-})
-
-Then("it throws a user error with the message:", function (message: string) {
-  assert.typeOf(this.apiException, "Error")
-  assert.equal(this.apiException.message, message)
 })
 
 Then("the call fails with the error:", function (expectedError) {

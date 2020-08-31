@@ -24,7 +24,7 @@ Before(async function () {
   if (rootDirExists) {
     await fs.rmdir(this.rootDir, { recursive: true })
   }
-  await fs.mkdir(this.rootDir, { recursive: true })
+  await fs.mkdir(this.rootDir)
 })
 
 After(async function (scenario) {

@@ -20,7 +20,7 @@ test_script:
   - cd ../shared/cucumber-steps
   - make build
   - cd ../..
-  - make cuke-smoke-win
+  - make cuke-smoke
 
 # Don't double-build PRs
 skip_branch_with_pr: true

@@ -31,8 +31,15 @@ suite("instantiateFormatter()", function () {
   })
 
   test("request unknown formatter", function () {
-    assert.throws(function () {
+    let err = null
+    try {
       instantiateFormatter("zonk", 0, config)
-    }, "Unknown formatter: zonk\n\nAvailable formatters are: detailed, dot, progress")
+    } catch (e) {
+      err = e
+    }
+    assert.exists(err, "function did not throw")
+    assert.equal(err.name, "UserError")
+    assert.equal(err.message, "Unknown formatter: zonk")
+    assert.equal(err.guidance, "Available formatters are: detailed, dot, progress, silent, summary")
   })
 })

@@ -85,6 +85,13 @@ Then("the {string} directory is now deleted", async function (directoryPath) {
   throw new Error(`file '${directoryPath}' still exists`)
 })
 
+Then("the error contains the guidance:", function (expectedText) {
+  if (!this.apiException) {
+    throw new Error("no error thrown")
+  }
+  assert.equal(expectedText, this.apiException.guidance)
+})
+
 Then("the test directory now/still contains a file {string} with content:", async function (fileName, expectedContent) {
   const actualContent = await fs.readFile(path.join(this.rootDir, "tmp", fileName), "utf8")
   assert.equal(actualContent.trim(), expectedContent.trim())

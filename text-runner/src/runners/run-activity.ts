@@ -13,7 +13,6 @@ import { OutputCollector } from "./helpers/output-collector"
 import { StatsCounter } from "./helpers/stats-counter"
 import { ExecuteResult } from "./execute-result"
 import { ActivityResult } from "../activity-list/types/activity-result"
-import { PrintedUserError } from "../errors/printed-user-error"
 
 export async function runActivity(
   activity: Activity,
@@ -38,20 +37,20 @@ export async function runActivity(
   }
   try {
     const action = actionFinder.actionFor(activity)
-    let result: ActionResult
+    let actionResult: ActionResult
     if (action.length === 1) {
-      result = await runSyncOrPromiseFunc(action, args)
+      actionResult = await runSyncOrPromiseFunc(action, args)
     } else {
-      result = await runCallbackFunc(action, args)
+      actionResult = await runCallbackFunc(action, args)
     }
-    if (result === undefined) {
+    if (actionResult === undefined) {
       statsCounter.success()
       formatter.success(activity, nameRefiner.finalName(), outputCollector.toString())
-    } else if (result === args.SKIPPING) {
+    } else if (actionResult === args.SKIPPING) {
       statsCounter.skip()
       formatter.skipped(activity, nameRefiner.finalName(), outputCollector.toString())
     } else {
-      throw new Error(`unknown return code from action: ${result}`)
+      throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (err) {
     statsCounter.error()
@@ -59,7 +58,7 @@ export async function runActivity(
       formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
       const activityResult: ActivityResult = {
         activity,
-        error: new PrintedUserError(err),
+        error: err,
         output: outputCollector.toString(),
       }
       return new ExecuteResult([activityResult], 1)

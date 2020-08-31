@@ -18,7 +18,7 @@ Feature: adding new actions
       """
 
   Scenario: adding a new step via API
-    When calling "textRunner.scaffoldCommand('new-step', {{source-dir}})"
+    When calling "textRunner.scaffoldCommand('new-step', {sourceDir})"
     Then it creates the file "text-run/new-step.js" with content:
       """
       module.exports = async function (action) {

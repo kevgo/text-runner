@@ -36,10 +36,9 @@ When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function 
 When("calling {string}", async function (jsText: string) {
   // @ts-ignore: this make textRunner available as a variable here
   const tr = textRunner
-  jsText = jsText.replace("{{source-dir}}", `"${this.rootDir}"`)
-  let result: any
   // @ts-ignore: this is used inside eval
   const sourceDir = this.rootDir
+  let result: any
   eval("result = " + jsText)
   this.apiResults = await result
   const apiResults = this.apiResults as textRunner.ExecuteResult

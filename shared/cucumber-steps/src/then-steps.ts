@@ -89,11 +89,12 @@ Then("it throws:", function (table) {
   assert.deepEqual(have, want)
 })
 
-Then("the error contains the guidance:", function (expectedText) {
+Then("the error provides the guidance:", function (expectedText) {
   if (!this.apiException) {
     throw new Error("no error thrown")
   }
-  assert.equal(expectedText, this.apiException.description)
+  assert.equal(this.apiException.name, "UserError")
+  assert.equal(expectedText, this.apiException.guidance)
 })
 
 Then("it prints usage instructions", function () {

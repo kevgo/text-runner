@@ -7,14 +7,12 @@ Feature: unknown action types
       <a type="zonk">
       </a>
       """
-    When trying to call text-run
-    Then it executes these actions:
-      | FILENAME | LINE | ACTION | ERROR TYPE |
-      | 1.md     | 1    | zonk   | UserError  |
-    And it provides the error message:
+    When trying to call "textRunner.runCommand({sourceDir})"
+    Then it throws:
+      | FILENAME | LINE | ERROR TYPE | ERROR MESSAGE        |
+      | 1.md     | 1    | UserError  | unknown action: zonk |
+    And the error contains the description:
       """
-      unknown action: zonk
-
       No custom actions defined.
 
       To create a new "zonk" action,

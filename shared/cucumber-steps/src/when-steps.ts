@@ -18,21 +18,6 @@ When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (
   finish(expectError, this.process.exitCode)
 })
 
-When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function (tryingText) {
-  const expectError = determineExpectError(tryingText)
-  this.apiResults = await this.executeAPI({ command: "run", expectError })
-  const apiResults = this.apiResults as textRunner.ExecuteResult
-  if (apiResults.errorCount > 0 && !expectError) {
-    console.log(`${apiResults.errorCount} errors`)
-    for (const activityResult of apiResults.activityResults) {
-      if (activityResult.error) {
-        console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
-      }
-    }
-    throw new Error("unexpected error")
-  }
-})
-
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
   const expectError = determineExpectError(tryingText)
   // @ts-ignore: this make textRunner available as a variable here
@@ -56,15 +41,26 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
     }
   }
   const apiResults = this.apiResults as textRunner.ExecuteResult
-  if (apiResults.errorCount > 0) {
-    console.log(`${apiResults.errorCount} errors`)
-    for (const activityResult of apiResults.activityResults) {
-      if (activityResult.error) {
-        console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
-      }
-    }
-    throw new Error("unexpected error")
+  if (!expectError && apiResults.errorCount === 0) {
+    // no error expected, no error encountered --> done
+    return
   }
+  if (expectError && apiResults.errorCount > 0) {
+    // error expected and error encountered --> done
+    return
+  }
+  if (expectError && apiResults.errorCount === 0) {
+    // error expected and no error encountered --> error
+    throw new Error("expected error but got none")
+  }
+  // no error expected and error encountered
+  console.log(`${apiResults.errorCount} errors`)
+  for (const activityResult of apiResults.activityResults) {
+    if (activityResult.error) {
+      console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
+    }
+  }
+  throw new Error("unexpected error")
 })
 
 When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {

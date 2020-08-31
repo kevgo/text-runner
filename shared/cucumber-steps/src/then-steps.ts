@@ -37,17 +37,11 @@ Then("it executes these actions:", function (table) {
     if (line.OUTPUT) {
       result.output = line.OUTPUT
     }
-    if (line["ERROR TYPE"]) {
-      result.errorType = line["ERROR TYPE"]
-    }
-    if (line["ERROR MESSAGE"]) {
-      result.errorMessage = line["ERROR MESSAGE"]
-    }
     want.push(result)
   }
   const have: ExecuteResultTable[] = []
   const wanted = want[0]
-  for (const line of apiResults.activityResults) {
+  for (const line of apiResults?.activityResults || []) {
     const result: ExecuteResultTable = {}
     if (wanted.filename) {
       result.filename = line.activity.file.platformified()
@@ -62,6 +56,9 @@ Then("it executes these actions:", function (table) {
       result.output = line.output?.trim() || ""
     }
     if (wanted.errorType) {
+      console.log(util.inspect(line.error))
+      console.log(line.error?.name)
+      console.log(typeof line.error)
       result.errorType = line.error?.name || ""
     }
     if (wanted.errorMessage) {
@@ -70,6 +67,33 @@ Then("it executes these actions:", function (table) {
     have.push(result)
   }
   assert.deepEqual(have, want)
+})
+
+Then("it throws:", function (table) {
+  if (!this.apiException) {
+    throw new Error("no error thrown")
+  }
+  const tableHash = table.hashes()[0]
+  const want: ExecuteResultTable = {
+    filename: tableHash.FILENAME,
+    line: parseInt(tableHash.LINE, 10),
+    errorType: tableHash["ERROR TYPE"],
+    errorMessage: tableHash["ERROR MESSAGE"],
+  }
+  const have: ExecuteResultTable = {
+    filename: this.apiException.filePath,
+    line: this.apiException.line,
+    errorType: this.apiException.name,
+    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
+  }
+  assert.deepEqual(have, want)
+})
+
+Then("the error contains the description:", function (expectedText) {
+  if (!this.apiException) {
+    throw new Error("no error thrown")
+  }
+  assert.equal(expectedText, this.apiException.description)
 })
 
 Then("it prints usage instructions", function () {
@@ -93,10 +117,6 @@ Then("it doesn't print:", function (expectedText) {
 
 Then("it prints:", function (expectedText) {
   this.verifyPrints(expectedText)
-})
-
-Then("it prints the error message:", function (expectedText) {
-  this.verifyErrormessage(expectedText)
 })
 
 Then("it runs {int} test", function (count) {

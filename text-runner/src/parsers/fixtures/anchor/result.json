@@ -2,7 +2,7 @@
   {
     "type": "paragraph_open",
     "tag": "p",
-    "file": "src/parsers/fixtures/anchor/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "anchor_open",
     "tag": "a",
-    "file": "src/parsers/fixtures/anchor/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {
@@ -21,7 +21,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/fixtures/anchor/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "A foo walks into a bar",
     "attributes": {}
@@ -29,7 +29,7 @@
   {
     "type": "anchor_close",
     "tag": "/a",
-    "file": "src/parsers/fixtures/anchor/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {}
@@ -37,7 +37,7 @@
   {
     "type": "paragraph_close",
     "tag": "/p",
-    "file": "src/parsers/fixtures/anchor/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {}

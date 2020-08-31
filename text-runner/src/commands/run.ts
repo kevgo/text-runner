@@ -59,7 +59,9 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     // execute the serial jobs
     const seqRes = await executeSequential(activities, actionFinder, config, linkTargets, stats, formatter)
     const parRes = await Promise.all(parJobs)
+    console.log("PAR_RES", parRes)
     seqRes.mergeMany(parRes)
+    console.log("RES", seqRes)
 
     // step 9: cleanup
     process.chdir(config.sourceDir)

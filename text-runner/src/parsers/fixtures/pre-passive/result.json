@@ -2,7 +2,7 @@
   {
     "type": "fence_open",
     "tag": "pre",
-    "file": "src/parsers/fixtures/pre-passive/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {}
@@ -10,7 +10,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/fixtures/pre-passive/input.*",
+    "file": "input.*",
     "line": 2,
     "content": "my code",
     "attributes": {}
@@ -18,7 +18,7 @@
   {
     "type": "fence_close",
     "tag": "/pre",
-    "file": "src/parsers/fixtures/pre-passive/input.*",
+    "file": "input.*",
     "line": 3,
     "content": "",
     "attributes": {}

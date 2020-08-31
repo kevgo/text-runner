@@ -22,18 +22,12 @@ export class ExecuteResult {
     this.errorCount = errorCount
   }
 
-  /** provides a new ExecuteResult instance that contains this instance plus the given one */
-  merge(other: ExecuteResult): ExecuteResult {
-    const result = new ExecuteResult(this.activityResults, this.errorCount)
-    result.activityResults.push(...other.activityResults)
-    result.errorCount += other.errorCount
-    return result
-  }
-
-  mergeMany(others: ExecuteResult[]): ExecuteResult {
-    const result = new ExecuteResult(this.activityResults, this.errorCount)
-    for (const result of others) {
-      this.merge(result)
+  /** ExecuteResult.merge provides a new ExecuteResult instance that contains this instance plus the given one */
+  merge(...others: ExecuteResult[]): ExecuteResult {
+    let result = new ExecuteResult(this.activityResults, this.errorCount)
+    for (const other of others) {
+      result.activityResults.push(...other.activityResults)
+      result.errorCount += other.errorCount
     }
     return result
   }

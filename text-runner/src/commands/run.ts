@@ -22,7 +22,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
 
     // step 2: create workspace
     if (!config.workspace) {
-      config.workspace = await createWorkspace(config.useSystemTempDirectory)
+      config.workspace = await createWorkspace(config)
     }
 
     // step 3: find files

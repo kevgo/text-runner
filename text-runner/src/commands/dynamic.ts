@@ -19,7 +19,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
 
     // step 2: create working dir
     if (!config.workspace) {
-      config.workspace = await createWorkspace(config.useSystemTempDirectory)
+      config.workspace = await createWorkspace(config)
     }
 
     // step 3: find files

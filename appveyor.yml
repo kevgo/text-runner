@@ -17,9 +17,9 @@ install:
 test_script:
   - cd text-runner
   - make build
-  - cd ../shared/cucumber-steps
+  - cd ..\shared\cucumber-steps
   - make build
-  - cd ../../text-runner-features
+  - cd ..\..\text-runner-features
   - make cuke-smoke
 
 # Don't double-build PRs

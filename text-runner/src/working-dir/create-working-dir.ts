@@ -1,7 +1,7 @@
 import * as fs from "fs-extra"
 import * as path from "path"
 import * as tmp from "tmp-promise"
-import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { UserError } from "../errors/unprinted-user-error"
 
 type workingDirSetting = string | boolean
 
@@ -24,6 +24,6 @@ async function getWorkspacePath(setting: workingDirSetting): Promise<string> {
     const tmpDir = await tmp.dir()
     return tmpDir.path
   } else {
-    throw new UnprintedUserError(`unknown 'useSystemTempDirectory' setting: ${setting}`)
+    throw new UserError(`unknown 'useSystemTempDirectory' setting: ${setting}`)
   }
 }

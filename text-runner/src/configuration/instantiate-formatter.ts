@@ -1,4 +1,4 @@
-import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { UserError } from "../errors/unprinted-user-error"
 import { DetailedFormatter } from "../formatters/detailed-formatter"
 import { DotFormatter } from "../formatters/dot-formatter"
 import { ProgressFormatter } from "../formatters/progress-formatter"
@@ -24,7 +24,7 @@ export function instantiateFormatter(
     case "summary":
       return new SummaryFormatter(stepCount, configuration)
     default:
-      throw new UnprintedUserError(
+      throw new UserError(
         `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress, silent, summary`
       )
   }

@@ -52,19 +52,15 @@ export async function runActivity(
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
-  } catch (err) {
+  } catch (error) {
     statsCounter.error()
-    if (isUserError(err)) {
-      formatter.failed(activity, nameRefiner.finalName(), err, outputCollector.toString())
-      const activityResult: ActivityResult = {
-        activity,
-        error: err,
-        output: outputCollector.toString(),
-      }
+    if (isUserError(error)) {
+      formatter.failed(activity, nameRefiner.finalName(), error, outputCollector.toString())
+      const activityResult: ActivityResult = { activity, error, output: outputCollector.toString() }
       return new ExecuteResult([activityResult], 1)
     }
     // here we have a developer error like for example TypeError
-    throw err
+    throw error
   }
   const activityResult: ActivityResult = { activity, error: null, output: outputCollector.toString() }
   return new ExecuteResult([activityResult], 0)

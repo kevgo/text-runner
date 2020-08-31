@@ -120,6 +120,8 @@ function determineExpectError(tryingText: string) {
     return false
   } else if (tryingText === "executing") {
     return false
+  } else if (tryingText === "calling") {
+    return false
   } else {
     return true
   }

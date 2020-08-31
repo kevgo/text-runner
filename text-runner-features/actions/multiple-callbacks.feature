@@ -13,7 +13,7 @@ Feature: multiple callbacks
         done();
       }
       """
-    When calling text-run
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
       | FILENAME | LINE | ACTION             |
       | 1.md     | 1    | multiple-callbacks |

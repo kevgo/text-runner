@@ -34,7 +34,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     const stats = new StatsCounter(filenames.length)
 
     // step 4: read and parse files
-    const ASTs = await parseMarkdownFiles(filenames)
+    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
     // step 5: find link targets
     const linkTargets = findLinkTargets(ASTs)

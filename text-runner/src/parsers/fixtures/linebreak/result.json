@@ -2,7 +2,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/fixtures/linebreak/input.*",
+    "file": "input.*",
     "line": 1,
     "tag": "br",
     "type": "linebreak"

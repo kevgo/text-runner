@@ -2,7 +2,7 @@
   {
     "type": "h1_open",
     "tag": "h1",
-    "file": "src/parsers/fixtures/heading-active/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {
@@ -12,7 +12,7 @@
   {
     "type": "text",
     "tag": "",
-    "file": "src/parsers/fixtures/heading-active/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "Hello",
     "attributes": {}
@@ -20,7 +20,7 @@
   {
     "type": "h1_close",
     "tag": "/h1",
-    "file": "src/parsers/fixtures/heading-active/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {}

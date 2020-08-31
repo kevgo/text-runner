@@ -2,7 +2,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 1,
     "tag": "p",
     "type": "paragraph_open"
@@ -10,7 +10,7 @@
   {
     "attributes": {},
     "content": "Subscribe to our",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 1,
     "tag": "",
     "type": "text"
@@ -20,7 +20,7 @@
       "href": "https://github.com/git-town/git-town/releases.atom"
     },
     "content": "",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 1,
     "tag": "a",
     "type": "link_open"
@@ -28,7 +28,7 @@
   {
     "attributes": {},
     "content": "release feed",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 2,
     "tag": "",
     "type": "text"
@@ -38,7 +38,7 @@
       "class": "ion-social-rss accent-color"
     },
     "content": "",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 2,
     "tag": "i",
     "type": "italic_open"
@@ -46,7 +46,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 2,
     "tag": "/i",
     "type": "italic_close"
@@ -54,7 +54,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 2,
     "tag": "/a",
     "type": "link_close"
@@ -62,7 +62,7 @@
   {
     "attributes": {},
     "content": "to never miss a new",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 2,
     "tag": "",
     "type": "text"
@@ -70,7 +70,7 @@
   {
     "attributes": {},
     "content": "release!",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 3,
     "tag": "",
     "type": "text"
@@ -78,7 +78,7 @@
   {
     "attributes": {},
     "content": "",
-    "file": "src/parsers/markdown/fixtures/complex-2/input.md",
+    "file": "input.md",
     "line": 3,
     "tag": "/p",
     "type": "paragraph_close"

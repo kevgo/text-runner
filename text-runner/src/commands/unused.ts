@@ -18,7 +18,7 @@ export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Pro
   }
 
   // step 3: read and parse files
-  const ASTs = await parseMarkdownFiles(filenames)
+  const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
   // step 4: extract activities
   const usedActivityNames = extractActivities(ASTs, config.regionMarker).map((activity) => activity.actionName)

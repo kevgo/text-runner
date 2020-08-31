@@ -2,7 +2,7 @@
   {
     "type": "image",
     "tag": "img",
-    "file": "src/parsers/fixtures/image-active/input.*",
+    "file": "input.*",
     "line": 1,
     "content": "",
     "attributes": {

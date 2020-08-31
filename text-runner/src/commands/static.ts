@@ -19,7 +19,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
 
     // step 2: create working dir
     if (!config.workspace) {
-      config.workspace = await createWorkspace(config.useSystemTempDirectory)
+      config.workspace = await createWorkspace(config)
     }
 
     // step 3: find files
@@ -31,7 +31,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     const stats = new StatsCounter(filenames.length)
 
     // step 4: read and parse files
-    const ASTs = await parseMarkdownFiles(filenames)
+    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
     // step 5: find link targets
     const linkTargets = findLinkTargets(ASTs)

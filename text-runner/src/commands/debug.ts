@@ -16,7 +16,7 @@ export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Prom
   }
 
   console.log("AST NODES:")
-  const ASTs = await parseMarkdownFiles(filenames)
+  const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
   for (const AST of ASTs) {
     for (const node of AST) {
       console.log(`${node.file.platformified()}:${node.line}  ${node.type} ${showAttr(node)}`)

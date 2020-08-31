@@ -4,7 +4,18 @@ import * as textRunner from "text-runner"
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
   await this.executeCLI({ command, expectError })
-  finish(expectError, this.process.error || this.process.exitCode)
+  finish(expectError, this.process.exitCode)
+})
+
+When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
+  const expectError = determineExpectError(tryingText)
+  try {
+    await this.executeCLI({ command: "run", expectError })
+  } catch (err) {
+    finish(expectError, err)
+    return
+  }
+  finish(expectError, this.process.exitCode)
 })
 
 When(/^(trying to call|calling) text-run$/, { timeout: 30_000 }, async function (tryingText) {
@@ -105,12 +116,12 @@ function determineExpectError(tryingText: string) {
   }
 }
 
-function finish(trying: boolean, error: Error) {
-  if (trying && !error) {
+function finish(trying: boolean, exitCode: number) {
+  if (trying && exitCode === 0) {
     throw new Error("expected error but test succeeded")
-  } else if (trying && error) {
+  } else if (trying && exitCode > 0) {
     // nothing to do here, we expected the error
-  } else if (error) {
-    throw error
+  } else if (exitCode > 0) {
+    throw new Error(`unexpected exit code: ${exitCode}`)
   }
 }

@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import * as isGlob from "is-glob"
 import * as path from "path"
 import { Configuration } from "../configuration/types/configuration"
@@ -35,6 +34,6 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
   } else if (isGlob(config.fileGlob)) {
     return filesMatchingGlob(fullGlob, config.sourceDir)
   } else {
-    throw new UnprintedUserError(`file or directory does not exist: ${color.red(fullGlob)}`)
+    throw new UnprintedUserError(`file or directory does not exist: ${config.fileGlob}`)
   }
 }

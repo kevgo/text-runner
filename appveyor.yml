@@ -15,12 +15,12 @@ install:
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:
-  - cd shared/cucumber-steps
+  - cd text-runner
   - make build
-  - cd ..\..\text-runner
+  - cd ..\shared\cucumber-steps
   - make build
-  - cd ..
-  - make cuke-smoke-win
+  - cd ..\..\text
+  - make cuke-smoke
 
 # Don't double-build PRs
 skip_branch_with_pr: true

@@ -52,8 +52,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     process.chdir(config.workspace)
     const parResultsP = executeParallel(links, actionFinder, linkTargets, config, stats, formatter)
     const parResults = await Promise.all(parResultsP)
-    const result = ExecuteResult.empty()
-    result.mergeMany(parResults)
+    const result = ExecuteResult.empty().merge(...parResults)
 
     // step 9: cleanup
     process.chdir(config.sourceDir)

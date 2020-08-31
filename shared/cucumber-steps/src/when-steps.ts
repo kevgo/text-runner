@@ -3,7 +3,7 @@ import { When } from "cucumber"
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const expectError = determineExpectError(tryingText)
   await this.executeCLI({ command, expectError })
-  finish(expectError, this.process.exitCode)
+  finish(expectError, this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
@@ -14,7 +14,7 @@ When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (
     finish(expectError, err)
     return
   }
-  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
+  finish(expectError, this.error || this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {
@@ -25,7 +25,7 @@ When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30
     finish(expectError, err)
     return
   }
-  finish(expectError, this.error || (this.process && this.process.exitCode !== 0))
+  finish(expectError, this.error || this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, { timeout: 30_000 }, async function (
@@ -37,7 +37,7 @@ When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, { timeo
   const command = splitted[0]
   const options = splitted.splice(1)
   await this.executeCLI({ command, options, expectError })
-  finish(expectError, this.process.exitCode)
+  finish(expectError, this.process?.exitCode)
 })
 
 When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, { timeout: 30_000 }, async function (
@@ -63,7 +63,7 @@ When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, { timeou
       expectError,
       options: { formatter: formatterName },
     })
-    finish(expectError, this.process.exitCode)
+    finish(expectError, this.process?.exitCode)
   } catch (err) {
     finish(expectError, err)
   }

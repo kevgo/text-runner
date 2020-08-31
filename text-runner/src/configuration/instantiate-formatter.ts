@@ -25,7 +25,8 @@ export function instantiateFormatter(
       return new SummaryFormatter(stepCount, configuration)
     default:
       throw new UserError(
-        `Unknown formatter: ${name}\n\nAvailable formatters are: detailed, dot, progress, silent, summary`
+        `Unknown formatter: ${name}`,
+        "Available formatters are: detailed, dot, progress, silent, summary"
       )
   }
 }

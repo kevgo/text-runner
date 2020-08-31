@@ -42,8 +42,8 @@ export class ExternalActionManager {
       names.push(name)
     }
     throw new UserError(
-      `NPM package "${moduleName}" does not contain action "${wantAction}".
-        Found actions: ${names.join(", ")}`
+      `NPM package "${moduleName}" does not contain action "${wantAction}"`,
+      `Found actions: ${names.join(", ")}`
     )
   }
 }

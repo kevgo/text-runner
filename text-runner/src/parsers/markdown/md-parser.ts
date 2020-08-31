@@ -310,6 +310,7 @@ export class MarkdownParser {
       } else {
         throw new UserError(
           `Found neither open link nor anchor for node '${mdNode.content}'`,
+          "",
           file.platformified(),
           line
         )

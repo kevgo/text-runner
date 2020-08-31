@@ -1,4 +1,4 @@
-import { UnprintedUserError } from "../../../errors/unprinted-user-error"
+import { UserError } from "../../../errors/user-error"
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 
 /** helps find open MarkdownIt AST nodes */
@@ -24,7 +24,7 @@ export class OpenNodeTracker {
         return result
       }
     }
-    throw new UnprintedUserError(
+    throw new UserError(
       `No opening node '${openType}' found for closing node '${node.type}'`,
       file.platformified(),
       line

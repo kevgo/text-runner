@@ -1,7 +1,7 @@
 import * as fs from "fs-extra"
 import * as path from "path"
 import * as tmp from "tmp-promise"
-import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { UserError } from "../errors/user-error"
 import { Configuration } from "../configuration/types/configuration"
 
 /** creates the temp directory to run the tests in */
@@ -20,6 +20,6 @@ async function getWorkspacePath(config: Configuration): Promise<string> {
     const tmpDir = await tmp.dir()
     return tmpDir.path
   } else {
-    throw new UnprintedUserError(`unknown 'useSystemTempDirectory' setting: ${config.useSystemTempDirectory}`)
+    throw new UserError(`unknown 'useSystemTempDirectory' setting: ${config.useSystemTempDirectory}`)
   }
 }

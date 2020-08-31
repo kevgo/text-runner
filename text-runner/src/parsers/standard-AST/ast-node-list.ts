@@ -1,4 +1,4 @@
-import { UnprintedUserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 import { AstNode } from "./ast-node"
 
 export class AstNodeList extends Array<AstNode> {
@@ -17,7 +17,7 @@ export class AstNodeList extends Array<AstNode> {
   getNodeOfTypes(...nodeTypes: string[]): AstNode {
     const nodes = this.getNodesOfTypes(...nodeTypes)
     if (nodes.length > 1) {
-      throw new UnprintedUserError(
+      throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
         nodes[0].file.platformified(),
         nodes[0].line
@@ -27,7 +27,7 @@ export class AstNodeList extends Array<AstNode> {
       let msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
       msg += "The node types in this list are: "
       msg += this.nodeTypes().join(", ")
-      throw new UnprintedUserError(msg, this[0].file.platformified(), this[0].line)
+      throw new UserError(msg, this[0].file.platformified(), this[0].line)
     }
     return nodes[0]
   }
@@ -38,11 +38,11 @@ export class AstNodeList extends Array<AstNode> {
    */
   getNodesFor(openingNode: AstNode): AstNodeList {
     if (openingNode == null) {
-      throw new UnprintedUserError("null Node given")
+      throw new UserError("null Node given")
     }
     let index = this.indexOf(openingNode)
     if (index === -1) {
-      throw new UnprintedUserError(
+      throw new UserError(
         `node '${openingNode.type}' not found in list`,
         openingNode.file.platformified(),
         openingNode.line

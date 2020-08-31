@@ -11,7 +11,7 @@ Feature: unknown action types
     Then it throws:
       | FILENAME | LINE | ERROR TYPE | ERROR MESSAGE        |
       | 1.md     | 1    | UserError  | unknown action: zonk |
-    And the error contains the description:
+    And the error provides the guidance:
       """
       No custom actions defined.
 

@@ -94,7 +94,7 @@ Then("the error provides the guidance:", function (expectedText) {
     throw new Error("no error thrown")
   }
   assert.equal(this.apiException.name, "UserError")
-  assert.equal(expectedText, this.apiException.guidance)
+  assert.equal(expectedText.trim(), this.apiException.guidance.trim())
 })
 
 Then("it prints usage instructions", function () {

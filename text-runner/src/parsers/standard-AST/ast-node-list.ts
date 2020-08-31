@@ -19,15 +19,16 @@ export class AstNodeList extends Array<AstNode> {
     if (nodes.length > 1) {
       throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
+        "The getNodeOfTypes method expects to find only one matching node, but it found multiple.",
         nodes[0].file.platformified(),
         nodes[0].line
       )
     }
     if (nodes.length === 0) {
-      let msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
-      msg += "The node types in this list are: "
-      msg += this.nodeTypes().join(", ")
-      throw new UserError(msg, this[0].file.platformified(), this[0].line)
+      const msg = `Found no nodes of type '${nodeTypes.join("/")}'. `
+      let guidance = "The node types in this list are: "
+      guidance += this.nodeTypes().join(", ")
+      throw new UserError(msg, guidance, this[0].file.platformified(), this[0].line)
     }
     return nodes[0]
   }
@@ -38,12 +39,13 @@ export class AstNodeList extends Array<AstNode> {
    */
   getNodesFor(openingNode: AstNode): AstNodeList {
     if (openingNode == null) {
-      throw new UserError("null Node given")
+      throw new UserError("no Node given")
     }
     let index = this.indexOf(openingNode)
     if (index === -1) {
       throw new UserError(
         `node '${openingNode.type}' not found in list`,
+        "This AstNodeList does not contain the given node.",
         openingNode.file.platformified(),
         openingNode.line
       )

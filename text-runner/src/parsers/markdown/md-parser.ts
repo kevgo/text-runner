@@ -7,7 +7,7 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./helpers/closing-tag-parser"
 import { OpenNodeTracker } from "./helpers/open-node-tracker"
-import { UnprintedUserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MarkdownParser {
@@ -308,7 +308,7 @@ export class MarkdownParser {
       } else if (ont.has("anchor_open")) {
         parsed.type = "anchor_close"
       } else {
-        throw new UnprintedUserError(
+        throw new UserError(
           `Found neither open link nor anchor for node '${mdNode.content}'`,
           file.platformified(),
           line

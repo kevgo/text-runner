@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
-import { UnprintedUserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 
 /**
  * Returns the filename for the config file
@@ -13,7 +13,7 @@ export async function determineConfigFilename(cmdLineArgs: UserProvidedConfigura
       await fs.stat(cmdLineArgs.configFileName)
       return cmdLineArgs.configFileName
     } catch (e) {
-      throw new UnprintedUserError(`configuration file "${cmdLineArgs.configFileName}" not found`)
+      throw new UserError(`configuration file "${cmdLineArgs.configFileName}" not found`)
     }
   }
 

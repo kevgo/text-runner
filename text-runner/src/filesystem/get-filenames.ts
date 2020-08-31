@@ -2,7 +2,7 @@ import * as color from "colorette"
 import * as isGlob from "is-glob"
 import * as path from "path"
 import { Configuration } from "../configuration/types/configuration"
-import { UnprintedUserError } from "../errors/unprinted-user-error"
+import { UserError } from "../errors/user-error"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { allMarkdownFiles } from "./all-markdown-files"
 import { filesMatchingGlob } from "./files-matching-glob"
@@ -32,6 +32,6 @@ async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
   } else if (isGlob(config.fileGlob)) {
     return filesMatchingGlob(fullGlob)
   } else {
-    throw new UnprintedUserError(`file or directory does not exist: ${color.red(config.fileGlob)}`)
+    throw new UserError(`file or directory does not exist: ${color.red(config.fileGlob)}`)
   }
 }

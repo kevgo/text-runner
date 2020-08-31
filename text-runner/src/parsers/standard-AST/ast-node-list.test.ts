@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { UnprintedUserError } from "../../errors/unprinted-user-error"
+import { UserError } from "../../errors/user-error"
 import { AstNode } from "./ast-node"
 import { AstNodeList } from "./ast-node-list"
 
@@ -55,13 +55,13 @@ suite("AstNodeList.getNodeOfTypes()", function () {
     const list = new AstNodeList()
     list.pushNode({ type: "one" })
     list.pushNode({ type: "two" })
-    assert.throws(() => list.getNodeOfTypes("one", "two"), UnprintedUserError)
+    assert.throws(() => list.getNodeOfTypes("one", "two"), UserError)
   })
 
   test("no matches", function () {
     const list = new AstNodeList()
     list.pushNode({ type: "one" })
-    assert.throws(() => list.getNodeOfTypes("two"), UnprintedUserError)
+    assert.throws(() => list.getNodeOfTypes("two"), UserError)
   })
 })
 
@@ -205,7 +205,7 @@ suite("AstNodeList.textInNodeOfType()", function () {
     list.pushNode({ type: "fence_open" })
     list.pushNode({ type: "text", content: "world" })
     list.pushNode({ type: "fence_close" })
-    assert.throws(() => list.textInNodeOfType("code", "fence"), UnprintedUserError)
+    assert.throws(() => list.textInNodeOfType("code", "fence"), UserError)
   })
 
   test("no matching nodes", function () {
@@ -213,7 +213,7 @@ suite("AstNodeList.textInNodeOfType()", function () {
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
-    assert.throws(() => list.textInNodeOfType("fence"), UnprintedUserError)
+    assert.throws(() => list.textInNodeOfType("fence"), UserError)
   })
 })
 
@@ -244,7 +244,7 @@ suite("AstNodeList.textInNodeOfTypes()", function () {
     list.pushNode({ type: "fence_open" })
     list.pushNode({ type: "text", content: "world" })
     list.pushNode({ type: "fence_close" })
-    assert.throws(() => list.textInNodeOfTypes("code", "fence"), UnprintedUserError)
+    assert.throws(() => list.textInNodeOfTypes("code", "fence"), UserError)
   })
 
   test("no matching nodes", function () {
@@ -252,7 +252,7 @@ suite("AstNodeList.textInNodeOfTypes()", function () {
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
-    assert.throws(() => list.textInNodeOfTypes("fence"), UnprintedUserError)
+    assert.throws(() => list.textInNodeOfTypes("fence"), UserError)
   })
 })
 

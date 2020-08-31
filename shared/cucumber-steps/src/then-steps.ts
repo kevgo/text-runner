@@ -6,12 +6,12 @@ import * as path from "path"
 import * as psTreeR from "ps-tree"
 import * as util from "util"
 import stripAnsi = require("strip-ansi")
-import { ExecuteResult } from "text-runner"
+import * as textRunner from "text-runner"
 
 const psTree = util.promisify(psTreeR)
 
 Then("it executes:", function (table) {
-  const results = this.apiResults as ExecuteResult
+  const results = this.apiResults as textRunner.ExecuteResult
   const tableHash = table.rowsHash()
   const want = {
     filename: tableHash.FILENAME,
@@ -41,7 +41,7 @@ Then("it executes:", function (table) {
 })
 
 Then("it executes only this action:", function (table) {
-  const results = this.apiResults as ExecuteResult
+  const results = this.apiResults as textRunner.ExecuteResult
   if (results.activityResults.length !== 1) {
     console.log(`expected 1 action but executed ${results.activityResults.length}:`)
     for (const result of results.activityResults) {
@@ -132,7 +132,7 @@ Then("it signals:", function (table) {
 })
 
 Then("it provides the error message:", function (want) {
-  const results = this.apiResults as ExecuteResult
+  const results = this.apiResults as textRunner.ExecuteResult
   for (const activityResult of results.activityResults) {
     if (activityResult.error?.message?.includes(want)) {
       return
@@ -152,7 +152,7 @@ Then("the call fails with the error:", function (expectedError) {
 })
 
 Then("the execution fails at:", function (table) {
-  const results = this.apiResults as ExecuteResult
+  const results = this.apiResults as textRunner.ExecuteResult
   const tableHash = table.rowsHash()
   const want = {
     filename: tableHash.FILENAME,

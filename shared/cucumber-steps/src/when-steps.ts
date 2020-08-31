@@ -38,6 +38,8 @@ When("calling {string}", async function (jsText: string) {
   const tr = textRunner
   // @ts-ignore: this is used inside eval
   const sourceDir = this.rootDir
+  // @ts-ignore: this is used inside eval
+  const formatterName = "silent"
   let result: any
   eval("result = " + jsText)
   this.apiResults = await result

@@ -29,7 +29,7 @@ Feature: specifying the configuration filename
       """
 
   Scenario: providing a configuration filename via API
-    When calling "textRunner.runCommand({configFileName: 'text-run-1.yml', sourceDir})"
+    When calling "textRunner.runCommand({configFileName: 'text-run-1.yml', sourceDir, formatterName})"
     Then it executes only this action:
       | FILENAME | LINE | ACTION     |
       | 1.md     | 1    | check-link |

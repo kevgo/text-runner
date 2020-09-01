@@ -8,6 +8,7 @@ import * as util from "util"
 import stripAnsi = require("strip-ansi")
 import * as textRunner from "text-runner"
 import { TRWorld } from "./world"
+import { standardizePath } from "./helpers/standardize-path"
 
 const psTree = util.promisify(psTreeR)
 
@@ -150,7 +151,41 @@ Then("it runs without errors", function () {
 })
 
 Then("it signals:", function (table) {
-  this.verifyOutput(table.rowsHash())
+  const world = this as TRWorld
+  const hash = table.rowsHash()
+  let expectedText = ""
+  if (hash.OUTPUT) {
+    expectedText += hash.OUTPUT + "\n"
+  }
+  if (hash.FILENAME) {
+    expectedText += hash.FILENAME
+  }
+  if (hash.FILENAME && hash.LINE) {
+    expectedText += `:${hash.LINE}`
+  }
+  if (hash.FILENAME && hash.MESSAGE) {
+    expectedText += " -- "
+  }
+  if (hash.MESSAGE) {
+    expectedText += hash.MESSAGE
+  }
+  if (hash["ERROR MESSAGE"]) {
+    expectedText += " -- " + hash["ERROR MESSAGE"]
+  }
+  if (hash["EXIT CODE"]) {
+    throw new Error("Verifying normal output but table contains an exit code")
+  }
+  if (!world.process) {
+    throw new Error("no process results found")
+  }
+  const actual = standardizePath(stripAnsi(world.process.output.fullText()))
+  if (!actual.includes(expectedText)) {
+    throw new Error(`Mismatching output!
+Looking for: ${expectedText}
+Actual content:
+${actual}
+`)
+  }
 })
 
 Then("the call fails with the error:", function (expectedError) {

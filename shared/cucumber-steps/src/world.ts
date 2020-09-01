@@ -23,13 +23,6 @@ export interface TRWorld {
  * via its command-line interface
  */
 function World() {
-  this.verifyPrints = (expectedText: string) => {
-    const output = stripAnsi(this.process.output.fullText().trim())
-    if (!new RegExp(expectedText.trim()).test(output)) {
-      throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
-    }
-  }
-
   this.verifyPrintsNot = (text: string) => {
     const output = stripAnsi(this.process.output.fullText())
     if (new RegExp(text).test(output)) {

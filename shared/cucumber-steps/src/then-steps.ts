@@ -119,7 +119,14 @@ Then("it doesn't print:", function (expectedText) {
 })
 
 Then("it prints:", function (expectedText) {
-  this.verifyPrints(expectedText)
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  const output = stripAnsi(world.process.output.fullText().trim())
+  if (!new RegExp(expectedText.trim()).test(output)) {
+    throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
+  }
 })
 
 Then("it runs {int} test", function (count) {

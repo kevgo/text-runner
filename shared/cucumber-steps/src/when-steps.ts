@@ -1,6 +1,6 @@
 import { When } from "cucumber"
 import * as textRunner from "text-runner"
-import { executeCLI } from "./activities/execute-cli"
+import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

@@ -1,4 +1,4 @@
-import { makeFullPath } from "../helpers/make-full-path"
+import { makeFullPath } from "./make-full-path"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import { TRWorld } from "../world"
 

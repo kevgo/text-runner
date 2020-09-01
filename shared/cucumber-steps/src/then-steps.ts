@@ -9,6 +9,7 @@ import stripAnsi = require("strip-ansi")
 import * as textRunner from "text-runner"
 import { TRWorld } from "./world"
 import { standardizePath } from "./helpers/standardize-path"
+import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
 
 const psTree = util.promisify(psTreeR)
 
@@ -157,11 +158,13 @@ Then("it runs in the current working directory", function () {
 })
 
 Then("it runs (only )the tests in {string}", function (filename) {
-  this.verifyRanOnlyTests([filename])
+  const world = this as TRWorld
+  verifyRanOnlyTestsCLI([filename], world)
 })
 
 Then("it runs only the tests in:", function (table) {
-  this.verifyRanOnlyTests(table.raw())
+  const world = this as TRWorld
+  verifyRanOnlyTestsCLI(table.raw(), world)
 })
 
 Then("it runs the console command {string}", async function (command) {

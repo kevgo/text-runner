@@ -137,7 +137,11 @@ Then("it prints:", function (expectedText) {
 })
 
 Then("it runs {int} test", function (count) {
-  this.verifyTestsRun(count)
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  assert.include(stripAnsi(world.process.output.fullText()), ` ${count} activities`)
 })
 
 Then("it runs in a global temp directory", function () {

@@ -23,10 +23,6 @@ export interface TRWorld {
  * via its command-line interface
  */
 function World() {
-  this.verifyErrormessage = (expectedText: string) => {
-    assert.include(stripAnsi(this.process.output.fullText()), expectedText)
-  }
-
   this.verifyOutput = (table: any) => {
     let expectedText = ""
     if (table.OUTPUT) {

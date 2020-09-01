@@ -1,39 +1,28 @@
+import { World } from "cucumber"
 import { flatten } from "array-flatten"
 import { assert } from "chai"
 import { setWorldConstructor } from "cucumber"
 import * as fs from "fs"
 import * as glob from "glob"
-import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import stripAnsi = require("strip-ansi")
-import { makeFullPath } from "./helpers/make-full-path"
 import { standardizePath } from "./helpers/standardize-path"
+import { ObservableProcess } from "observable-process"
+
+/** World is the shared data structure that is provided as `this` to Cucumber steps. */
+export interface TRWorld {
+  /** the currently running subshell process */
+  process: ObservableProcess | undefined
+  rootDir: string
+  debug: boolean
+  verbose: boolean
+}
 
 /**
  * World provides step implementations that run and test TextRunner
  * via its command-line interface
  */
 function World() {
-  this.executeCLI = async function (params: { command: string; expectError: boolean; cwd: string }) {
-    const args: any = {}
-    args.cwd = params.cwd || this.rootDir
-    if (this.debug) {
-      args.env = {
-        DEBUG: "*,-babel",
-        PATH: process.env.PATH,
-      }
-    }
-    const command = makeFullPath(params.command, process.platform)
-    this.process = createObservableProcess(command, args)
-    await this.process.waitForEnd()
-    if (this.verbose) {
-      this.output = this.process.output.fullText()
-    }
-    if (this.process.exitCode && !params.expectError) {
-      console.log(this.process.output.fullText())
-    }
-  }
-
   this.verifyCallError = (expectedError: string) => {
     const output = stripAnsi(this.process.output.fullText())
     assert.include(output, expectedError)

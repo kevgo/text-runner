@@ -1,21 +1,16 @@
 import { When } from "cucumber"
 import * as textRunner from "text-runner"
+import { executeCLI } from "./activities/execute-cli"
+import { TRWorld } from "./world"
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
-  const expectError = determineExpectError(tryingText)
-  await this.executeCLI({ command, expectError })
-  finish(expectError, this.process?.exitCode)
+  const world = this as TRWorld
+  world.process = await executeCLI(command, determineExpectError(tryingText), world)
 })
 
 When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
-  const expectError = determineExpectError(tryingText)
-  try {
-    await this.executeCLI({ command: "run", expectError })
-  } catch (err) {
-    finish(expectError, err)
-    return
-  }
-  finish(expectError, this.error || this.process?.exitCode)
+  const world = this as TRWorld
+  world.process = await executeCLI("run", determineExpectError(tryingText), world)
 })
 
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
@@ -64,55 +59,8 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
 })
 
 When(/^(trying to run|running) text-run in the source directory$/, { timeout: 30_000 }, async function (tryingText) {
-  const expectError = determineExpectError(tryingText)
-  try {
-    await this.executeCLI({ command: "run", cwd: this.rootDir, expectError })
-  } catch (err) {
-    finish(expectError, err)
-    return
-  }
-  finish(expectError, this.error || this.process?.exitCode)
-})
-
-When(/^(trying to run|running) text-run with the arguments? "([^"]*)"$/, { timeout: 30_000 }, async function (
-  tryingText,
-  optionsText
-) {
-  const expectError = determineExpectError(tryingText)
-  const splitted = optionsText.split(" ")
-  const command = splitted[0]
-  const options = splitted.splice(1)
-  await this.executeCLI({ command, options, expectError })
-  finish(expectError, this.process?.exitCode)
-})
-
-When(/^(trying to run|running) text-run with the arguments? {([^}]*)}$/, { timeout: 30_000 }, async function (
-  tryingText,
-  argsText
-) {
-  const expectError = determineExpectError(tryingText)
-  const args = JSON.parse(`{${argsText}}`)
-  args.command = "run"
-  args.expectError = expectError
-  await this.executeCLI(args)
-  finish(expectError, this.error || this.process?.exitCode)
-})
-
-When(/^(trying to run|running) text-run with the "([^"]*)" formatter$/, { timeout: 30_000 }, async function (
-  tryingText,
-  formatterName
-) {
-  const expectError = determineExpectError(tryingText)
-  try {
-    await this.executeCLI({
-      command: "run",
-      expectError,
-      options: { formatter: formatterName },
-    })
-    finish(expectError, this.process?.exitCode)
-  } catch (err) {
-    finish(expectError, err)
-  }
+  const world = this as TRWorld
+  world.process = await executeCLI("run", determineExpectError(tryingText), world, { cwd: world.rootDir })
 })
 
 function determineExpectError(tryingText: string) {

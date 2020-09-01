@@ -161,7 +161,11 @@ Then("it runs only the tests in:", function (table) {
 })
 
 Then("it runs the console command {string}", async function (command) {
-  this.verifyRanConsoleCommand(command)
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  assert.include(stripAnsi(world.process.output.fullText()), `running console command: ${command}`)
 })
 
 Then("it runs without errors", function () {

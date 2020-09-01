@@ -23,10 +23,6 @@ export interface TRWorld {
  * via its command-line interface
  */
 function World() {
-  this.verifyRanConsoleCommand = (command: string) => {
-    assert.include(stripAnsi(this.process.output.fullText()), `running console command: ${command}`)
-  }
-
   this.verifyRanOnlyTests = (filenames: any) => {
     filenames = flatten(filenames)
     const standardizedOutput = this.process.output.fullText().replace(/\\/g, "/")

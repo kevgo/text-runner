@@ -115,7 +115,14 @@ Then("it creates the file {string} with content:", async function (filename, exp
 })
 
 Then("it doesn't print:", function (expectedText) {
-  this.verifyPrintsNot(expectedText)
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  const output = stripAnsi(world.process.output.fullText())
+  if (new RegExp(expectedText).test(output)) {
+    throw new Error(`expected to not find regex '${expectedText}' in '${output}'`)
+  }
 })
 
 Then("it prints:", function (expectedText) {

@@ -48,10 +48,6 @@ function World() {
       assert.notInclude(standardizedOutput, fileShouldntRun)
     }
   }
-
-  this.verifyTestsRun = (count: number) => {
-    assert.include(stripAnsi(this.process.output.fullText()), ` ${count} activities`)
-  }
 }
 
 setWorldConstructor(World)

@@ -14,20 +14,21 @@ When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (
 })
 
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
+  const world = this as TRWorld
   const expectError = determineExpectError(tryingText)
   // @ts-ignore: this make textRunner available as a variable here
   const tr = textRunner
   // @ts-ignore: this is used inside eval
-  const sourceDir = this.rootDir
+  const sourceDir = world.rootDir
   // @ts-ignore: this is used inside eval
   const formatterName = "silent"
   let result: any
   let error: Error
   eval("result = " + jsText)
   try {
-    this.apiResults = await result
+    world.apiResults = await result
   } catch (e) {
-    this.apiException = e
+    world.apiException = e
     if (expectError) {
       // expected the error --> done here
       return
@@ -35,7 +36,7 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
       throw new Error(`Unexpected exception: ${e}`)
     }
   }
-  const apiResults = this.apiResults as textRunner.ExecuteResult
+  const apiResults = world.apiResults as textRunner.ExecuteResult
   if (!expectError && apiResults.errorCount === 0) {
     // no error expected, no error encountered --> done
     return

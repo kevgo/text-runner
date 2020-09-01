@@ -6,7 +6,8 @@ import * as glob from "glob"
 import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import stripAnsi = require("strip-ansi")
-import * as helpers from "./helpers"
+import { makeFullPath } from "./helpers/make-full-path"
+import { standardizePath } from "./helpers/standardize-path"
 
 /**
  * World provides step implementations that run and test TextRunner
@@ -22,7 +23,7 @@ function World() {
         PATH: process.env.PATH,
       }
     }
-    const command = helpers.makeFullPath(params.command, process.platform)
+    const command = makeFullPath(params.command, process.platform)
     this.process = createObservableProcess(command, args)
     await this.process.waitForEnd()
     if (this.verbose) {
@@ -84,7 +85,7 @@ function World() {
     if (table["EXIT CODE"]) {
       throw new Error("Verifying normal output but table contains an exit code")
     }
-    const actual = helpers.standardizePath(stripAnsi(this.process.output.fullText()))
+    const actual = standardizePath(stripAnsi(this.process.output.fullText()))
     if (!actual.includes(expectedText)) {
       throw new Error(`Mismatching output!
 Looking for: ${expectedText}

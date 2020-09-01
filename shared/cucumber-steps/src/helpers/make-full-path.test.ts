@@ -1,6 +1,5 @@
-import * as helpers from "./helpers"
-import { assert } from "chai"
-import * as path from "path"
+import { makeFullPath } from "./make-full-path"
+import { strict as assert } from "assert"
 
 suite("makeFullPath", function () {
   const linuxTests = {
@@ -14,7 +13,7 @@ suite("makeFullPath", function () {
   if (process.platform !== "win32") {
     for (const [give, want] of Object.entries(linuxTests)) {
       test(`Linux: ${give} --> ${want}`, function () {
-        const have = helpers.makeFullPath(give, "linux")
+        const have = makeFullPath(give, "linux")
         assert.match(have, want)
       })
     }
@@ -22,18 +21,9 @@ suite("makeFullPath", function () {
   if (process.platform === "win32") {
     for (const [give, want] of Object.entries(winTests)) {
       test(`Windows: ${give} --> ${want}`, function () {
-        const have = helpers.makeFullPath(give, "win32")
+        const have = makeFullPath(give, "win32")
         assert.match(have, want)
       })
     }
   }
-})
-
-suite("standardizePath", function () {
-  test("unix path", function () {
-    assert.equal(helpers.standardizePath("foo/bar"), "foo/bar")
-  })
-  test("windows path", function () {
-    assert.equal(helpers.standardizePath("foo\\bar"), "foo/bar")
-  })
 })

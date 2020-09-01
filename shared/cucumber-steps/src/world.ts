@@ -23,24 +23,6 @@ export interface TRWorld {
  * via its command-line interface
  */
 function World() {
-  this.verifyFailure = (table: any) => {
-    const output = stripAnsi(this.process.output.fullText())
-    let expectedHeader
-    if (table.FILENAME && table.LINE) {
-      expectedHeader = `${table.FILENAME}:${table.LINE}`
-    } else if (table.FILENAME) {
-      expectedHeader = `${table.FILENAME}`
-    } else {
-      expectedHeader = ""
-    }
-    if (table.MESSAGE) {
-      expectedHeader += ` -- ${table.MESSAGE}`
-    }
-    assert.include(output, expectedHeader)
-    assert.match(output, new RegExp(table["ERROR MESSAGE"]))
-    assert.equal(this.process.exitCode, parseInt(table["EXIT CODE"], 10), "exit code")
-  }
-
   this.verifyOutput = (table: any) => {
     let expectedText = ""
     if (table.OUTPUT) {

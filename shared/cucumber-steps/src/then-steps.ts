@@ -96,7 +96,11 @@ Then("the error provides the guidance:", function (expectedText) {
 })
 
 Then("it prints usage instructions", function () {
-  this.verifyPrintedUsageInstructions()
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  assert.include(stripAnsi(world.process.output.fullText()), "COMMANDS")
 })
 
 Then("it creates a directory {string}", async function (directoryPath) {

@@ -23,8 +23,9 @@ interface ExecuteResultTable {
 }
 
 Then("it executes these actions:", function (table) {
-  assert.isUndefined(this.apiException)
-  const apiResults = this.apiResults as textRunner.ExecuteResult
+  const world = this as TRWorld
+  assert.isUndefined(world.apiException)
+  const apiResults = world.apiResults as textRunner.ExecuteResult
   const tableHashes = table.hashes()
   const want: ExecuteResultTable[] = []
   for (const line of tableHashes) {
@@ -65,7 +66,8 @@ Then("it executes these actions:", function (table) {
 })
 
 Then("it throws:", function (table) {
-  if (!this.apiException) {
+  const world = this as TRWorld
+  if (!world.apiException) {
     throw new Error("no error thrown")
   }
   const tableHash = table.hashes()[0]
@@ -73,27 +75,31 @@ Then("it throws:", function (table) {
     errorType: tableHash["ERROR TYPE"],
     errorMessage: tableHash["ERROR MESSAGE"],
   }
+  if (!world.apiException) {
+    throw new Error("no apiException found")
+  }
   const have: ExecuteResultTable = {
-    errorType: this.apiException.name,
-    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
+    errorType: world.apiException.name,
+    errorMessage: stripAnsi(world.apiException.message).trim().split("\n")[0],
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME
-    have.filename = this.apiException.filePath
+    have.filename = world.apiException.filePath
   }
   if (tableHash.LINE) {
     want.line = parseInt(tableHash.LINE, 10)
-    have.line = this.apiException.line
+    have.line = world.apiException.line
   }
   assert.deepEqual(have, want)
 })
 
 Then("the error provides the guidance:", function (expectedText) {
-  if (!this.apiException) {
+  const world = this as TRWorld
+  if (!world.apiException) {
     throw new Error("no error thrown")
   }
-  assert.equal(this.apiException.name, "UserError")
-  assert.equal(expectedText.trim(), this.apiException.guidance.trim())
+  assert.equal(world.apiException.name, "UserError")
+  assert.equal(expectedText.trim(), world.apiException.guidance.trim())
 })
 
 Then("it prints usage instructions", function () {
@@ -105,11 +111,13 @@ Then("it prints usage instructions", function () {
 })
 
 Then("it creates a directory {string}", async function (directoryPath) {
-  await fs.stat(path.join(this.rootDir, directoryPath))
+  const world = this as TRWorld
+  await fs.stat(path.join(world.rootDir, directoryPath))
 })
 
 Then("it creates the file {string} with content:", async function (filename, expectedContent) {
-  const actualContent = await fs.readFile(path.join(this.rootDir, filename), {
+  const world = this as TRWorld
+  const actualContent = await fs.readFile(path.join(world.rootDir, filename), {
     encoding: "utf8",
   })
   assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
@@ -146,15 +154,27 @@ Then("it runs {int} test", function (count) {
 })
 
 Then("it runs in a global temp directory", function () {
-  assert.notInclude(this.process.output.fullText(), this.rootDir)
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no CLI process found")
+  }
+  assert.notInclude(world.process.output.fullText(), world.rootDir)
 })
 
 Then("it runs in the {string} directory", function (dirName) {
-  assert.match(this.process.output.fullText(), new RegExp(`\\b${dirName}\\b`))
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no CLI process found")
+  }
+  assert.match(world.process.output.fullText(), new RegExp(`\\b${dirName}\\b`))
 })
 
 Then("it runs in the current working directory", function () {
-  assert.match(this.process.output.fullText().trim(), new RegExp(`${this.rootDir}\\b`))
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no CLI process found")
+  }
+  assert.match(world.process.output.fullText().trim(), new RegExp(`${world.rootDir}\\b`))
 })
 
 Then("it runs (only )the tests in {string}", function (filename) {
@@ -228,8 +248,9 @@ Then("the call fails with the error:", function (expectedError) {
 })
 
 Then("the {string} directory is now deleted", async function (directoryPath) {
+  const world = this as TRWorld
   try {
-    await fs.stat(path.join(this.rootDir, directoryPath))
+    await fs.stat(path.join(world.rootDir, directoryPath))
   } catch (e) {
     // we expect an exception here since the directory shouldn't exist
     return
@@ -238,12 +259,14 @@ Then("the {string} directory is now deleted", async function (directoryPath) {
 })
 
 Then("the test directory now/still contains a file {string} with content:", async function (fileName, expectedContent) {
-  const actualContent = await fs.readFile(path.join(this.rootDir, "tmp", fileName), "utf8")
+  const world = this as TRWorld
+  const actualContent = await fs.readFile(path.join(world.rootDir, "tmp", fileName), "utf8")
   assert.equal(actualContent.trim(), expectedContent.trim())
 })
 
 Then("the test workspace now contains a directory {string}", async function (name) {
-  const stat = await fs.stat(path.join(this.rootDir, "tmp", name))
+  const world = this as TRWorld
+  const stat = await fs.stat(path.join(world.rootDir, "tmp", name))
   assert.isTrue(stat.isDirectory())
 })
 
@@ -276,8 +299,9 @@ Then("there are no child processes running", async function () {
 })
 
 Then("there is no {string} folder", async function (name) {
+  const world = this as TRWorld
   try {
-    await fs.stat(path.join(this.rootDir, name))
+    await fs.stat(path.join(world.rootDir, name))
   } catch (e) {
     return
   }

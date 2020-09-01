@@ -5,8 +5,7 @@ import * as glob from "glob"
 import * as path from "path"
 import { TRWorld } from "../world"
 
-export function verifyRanOnlyTestsCLI(filenames: any) {
-  const world = this as TRWorld
+export function verifyRanOnlyTestsCLI(filenames: any, world: TRWorld) {
   filenames = flatten(filenames)
   if (!world.process) {
     throw new Error("no process output found")

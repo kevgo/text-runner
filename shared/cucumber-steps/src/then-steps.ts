@@ -158,11 +158,13 @@ Then("it runs in the current working directory", function () {
 })
 
 Then("it runs (only )the tests in {string}", function (filename) {
-  verifyRanOnlyTestsCLI([filename])
+  const world = this as TRWorld
+  verifyRanOnlyTestsCLI([filename], world)
 })
 
 Then("it runs only the tests in:", function (table) {
-  verifyRanOnlyTestsCLI(table.raw())
+  const world = this as TRWorld
+  verifyRanOnlyTestsCLI(table.raw(), world)
 })
 
 Then("it runs the console command {string}", async function (command) {

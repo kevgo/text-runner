@@ -1,7 +1,3 @@
-import { World } from "cucumber"
-import { setWorldConstructor } from "cucumber"
-import stripAnsi = require("strip-ansi")
-import { standardizePath } from "./helpers/standardize-path"
 import { ObservableProcess } from "observable-process"
 
 /** World is the shared data structure that is provided as `this` to Cucumber steps. */

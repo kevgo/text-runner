@@ -23,38 +23,7 @@ export interface TRWorld {
  * via its command-line interface
  */
 function World() {
-  this.verifyOutput = (table: any) => {
-    let expectedText = ""
-    if (table.OUTPUT) {
-      expectedText += table.OUTPUT + "\n"
-    }
-    if (table.FILENAME) {
-      expectedText += table.FILENAME
-    }
-    if (table.FILENAME && table.LINE) {
-      expectedText += `:${table.LINE}`
-    }
-    if (table.FILENAME && table.MESSAGE) {
-      expectedText += " -- "
-    }
-    if (table.MESSAGE) {
-      expectedText += table.MESSAGE
-    }
-    if (table["ERROR MESSAGE"]) {
-      expectedText += " -- " + table["ERROR MESSAGE"]
-    }
-    if (table["EXIT CODE"]) {
-      throw new Error("Verifying normal output but table contains an exit code")
-    }
-    const actual = standardizePath(stripAnsi(this.process.output.fullText()))
-    if (!actual.includes(expectedText)) {
-      throw new Error(`Mismatching output!
-Looking for: ${expectedText}
-Actual content:
-${actual}
-`)
-    }
-  }
+  this.verifyOutput = (table: any) => {}
 
   this.verifyPrintedUsageInstructions = () => {
     assert.include(stripAnsi(this.process.output.fullText()), "COMMANDS")

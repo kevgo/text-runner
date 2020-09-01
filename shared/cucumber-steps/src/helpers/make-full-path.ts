@@ -9,7 +9,7 @@ export function makeFullPath(command: string, platform: string) {
 }
 
 function fullTextRunPath(platform: string) {
-  let result = path.join(__dirname, "..", "..", "..", "text-runner", "bin", "text-run")
+  let result = path.join(__dirname, "..", "..", "..", "..", "text-runner", "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }

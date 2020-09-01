@@ -184,7 +184,26 @@ Then("the test workspace now contains a directory {string}", async function (nam
 })
 
 Then("the test fails with:", function (table) {
-  this.verifyFailure(table.rowsHash())
+  const world = this as TRWorld
+  const hash = table.rowsHash()
+  if (!world.process) {
+    throw new Error("no process result found")
+  }
+  const output = stripAnsi(world.process.output.fullText())
+  let expectedHeader
+  if (hash.FILENAME && hash.LINE) {
+    expectedHeader = `${hash.FILENAME}:${hash.LINE}`
+  } else if (hash.FILENAME) {
+    expectedHeader = `${hash.FILENAME}`
+  } else {
+    expectedHeader = ""
+  }
+  if (hash.MESSAGE) {
+    expectedHeader += ` -- ${hash.MESSAGE}`
+  }
+  assert.include(output, expectedHeader)
+  assert.match(output, new RegExp(hash["ERROR MESSAGE"]))
+  assert.equal(world.process.exitCode, parseInt(hash["EXIT CODE"], 10))
 })
 
 Then("there are no child processes running", async function () {

@@ -7,6 +7,7 @@ import * as psTreeR from "ps-tree"
 import * as util from "util"
 import stripAnsi = require("strip-ansi")
 import * as textRunner from "text-runner"
+import { TRWorld } from "./world"
 
 const psTree = util.promisify(psTreeR)
 
@@ -153,7 +154,13 @@ Then("it signals:", function (table) {
 })
 
 Then("the call fails with the error:", function (expectedError) {
-  this.verifyCallError(expectedError)
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  const output = stripAnsi(world.process.output.fullText())
+  assert.include(output, expectedError)
+  assert.equal(world.process.exitCode, 1)
 })
 
 Then("the {string} directory is now deleted", async function (directoryPath) {

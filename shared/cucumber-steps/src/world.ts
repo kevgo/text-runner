@@ -23,10 +23,6 @@ export interface TRWorld {
  * via its command-line interface
  */
 function World() {
-  this.verifyPrintedUsageInstructions = () => {
-    assert.include(stripAnsi(this.process.output.fullText()), "COMMANDS")
-  }
-
   this.verifyPrints = (expectedText: string) => {
     const output = stripAnsi(this.process.output.fullText().trim())
     if (!new RegExp(expectedText.trim()).test(output)) {

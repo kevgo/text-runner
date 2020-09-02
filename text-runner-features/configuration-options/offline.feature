@@ -21,6 +21,6 @@ Feature: "offline" option
       """
     When calling "textRunner.runCommand({offline: true, sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      |
-      | 1.md     | 1    | check-link  |
-      | 1.md     | 2    | check-image |
+      | FILENAME | LINE | ACTION      | ACTIVITY                        | STATUS  |
+      | 1.md     | 1    | check-link  | link to http://google.com       | skipped |
+      | 1.md     | 2    | check-image | image http://google.com/foo.png | skipped |

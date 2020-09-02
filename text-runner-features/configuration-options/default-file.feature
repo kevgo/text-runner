@@ -15,8 +15,8 @@ Feature: Default file
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION     |
-      | root.md  | 1    | check-link |
+      | FILENAME | LINE | ACTION     | ACTIVITY                          |
+      | root.md  | 1    | check-link | link to local file guide/start.md |
 
 
   Scenario: no default filename is set
@@ -30,8 +30,8 @@ Feature: Default file
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION     |
-      | root.md  | 1    | check-link |
+      | FILENAME | LINE | ACTION     | ACTIVITY                      |
+      | root.md  | 1    | check-link | link to local directory guide |
 
 
   Scenario: combination with publication settings
@@ -57,8 +57,8 @@ Feature: Default file
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION     |
-      | root.md  | 1    | check-link |
+      | FILENAME | LINE | ACTION     | ACTIVITY                          |
+      | root.md  | 1    | check-link | link to local file guide/index.md |
 
 
   Scenario: relative link from default file to other file in same folder
@@ -80,5 +80,5 @@ Feature: Default file
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME                | LINE | ACTION     |
-      | content/guides/index.md | 1    | check-link |
+      | FILENAME                | LINE | ACTION     | ACTIVITY                                |
+      | content/guides/index.md | 1    | check-link | link to local file content/guides/go.md |

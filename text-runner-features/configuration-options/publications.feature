@@ -6,6 +6,7 @@ Feature: Folder Mapping
       # hello
       """
 
+
   Scenario: mapping a folder to a different URL
     Given the source code contains a file "1.md" with content:
       """
@@ -18,10 +19,11 @@ Feature: Folder Mapping
           publicPath: /
           publicExtension: ''
       """
-    When calling "textRunner.runCommand({offline: true, sourceDir, formatterName})"
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION     |
-      | 1.md     | 1    | check-link |
+      | FILENAME | LINE | ACTION     | ACTIVITY                        |
+      | 1.md     | 1    | check-link | link to local file content/2.md |
+
 
   Scenario: relative link to remapped folder
     Given the source code contains a file "1.md" with content:
@@ -39,11 +41,11 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                  |
-      | LINE     | 1                                     |
-      | MESSAGE  | link to local file content/posts/3.md |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                              |
+      | 1.md     | 1    | check-link | link to local file content/posts/3.md |
+
 
   Scenario: relative link to anchor in remapped folder
     Given the source code contains a file "1.md" with content:
@@ -61,11 +63,11 @@ Feature: Folder Mapping
       """
       # Welcome
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                       |
-      | LINE     | 1                                          |
-      | MESSAGE  | link to heading content/posts/3.md#welcome |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                                   |
+      | 1.md     | 1    | check-link | link to heading content/posts/3.md#welcome |
+
 
   Scenario: absolute link to remapped folder
     Given the source code contains a file "1.md" with content:
@@ -83,11 +85,11 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                  |
-      | LINE     | 1                                     |
-      | MESSAGE  | link to local file content/posts/3.md |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                              |
+      | 1.md     | 1    | check-link | link to local file content/posts/3.md |
+
 
   Scenario: absolute link to anchor in remapped folder
     Given the source code contains a file "1.md" with content:
@@ -105,11 +107,11 @@ Feature: Folder Mapping
       """
       # Welcome
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                                       |
-      | LINE     | 1                                          |
-      | MESSAGE  | link to heading content/posts/3.md#welcome |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                                   |
+      | 1.md     | 1    | check-link | link to heading content/posts/3.md#welcome |
+
 
   Scenario: multiple mappings
     Given the source code contains a file "1.md" with content:
@@ -131,15 +133,12 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                               |
-      | LINE     | 1                                  |
-      | MESSAGE  | link to heading content/2.md#hello |
-    And it signals:
-      | FILENAME | 1.md                                  |
-      | LINE     | 2                                     |
-      | MESSAGE  | link to local file content/posts/3.md |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                              |
+      | 1.md     | 1    | check-link | link to heading content/2.md#hello    |
+      | 1.md     | 2    | check-link | link to local file content/posts/3.md |
+
 
   Scenario: relative links within a publicized folder
     Given the source code contains a file "posts/1.md" with content:
@@ -157,8 +156,7 @@ Feature: Folder Mapping
           publicPath: /blog
           publicExtension: ''
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | posts/1.md                       |
-      | LINE     | 1                                |
-      | MESSAGE  | link to heading posts/2.md#hello |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION     | ACTIVITY                         |
+      | posts/1.md | 1    | check-link | link to heading posts/2.md#hello |

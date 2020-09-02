@@ -75,7 +75,7 @@ Feature: creating files with content
     When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                                            |
-      | LINE          | 3                                                     |
+      | LINE          | 1                                                     |
       | ERROR MESSAGE | Found 2 nodes of type 'em/strong/em_open/strong_open' |
       | EXIT CODE     | 1                                                     |
 
@@ -99,6 +99,6 @@ Feature: creating files with content
     When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                                             |
-      | LINE          | 5                                                      |
+      | LINE          | 1                                                      |
       | ERROR MESSAGE | Found 2 nodes of type 'fence/code/fence_open/code_open |
       | EXIT CODE     | 1                                                      |

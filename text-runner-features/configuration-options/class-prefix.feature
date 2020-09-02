@@ -1,7 +1,7 @@
 Feature: configuring the class prefix
 
   Background:
-    Given the source code contains a file "tr.md" with content:
+    Given the source code contains a file "standard-prefix.md" with content:
       """
       <a type="test">
       standard prefix
@@ -14,30 +14,18 @@ Feature: configuring the class prefix
       </a>
       """
 
-
   Scenario: default behavior
-    When running text-run
-    Then it prints:
-      """
-      standard prefix
-      """
-    And it doesn't print:
-      """
-      custom prefix
-      """
-
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME           | LINE | ACTION |
+      | standard-prefix.md | 1    | test   |
 
   Scenario: configuration option given
-    Given the configuration file:
+    Given the source code contains a file "text-run.yml" with content:
       """
       regionMarker: 'custom'
       """
-    When running text-run
-    Then it prints:
-      """
-      custom prefix
-      """
-    And it doesn't print:
-      """
-      standard prefix
-      """
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME         | LINE | ACTION |
+      | custom-prefix.md | 1    | test   |

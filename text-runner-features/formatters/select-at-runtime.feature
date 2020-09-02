@@ -7,18 +7,11 @@ Feature: selecting formatter via the command-line
       </a>
       """
 
-  Scenario Outline: selecting formatters via CLI
-    When running "text-run --format <FORMATTER>"
+  Scenario: selecting the formatter via CLI
+    When running "text-run --format dot"
     Then it runs without errors
 
-    Examples:
-      | FORMATTER |
-      | detailed  |
-      | dot       |
-      | progress  |
-      | summary   |
-
-  Scenario: selecting formatters via API
+  Scenario: selecting the formatters via API
     When calling "textRunner.runCommand({formatterName: 'silent', sourceDir})"
     Then it runs without errors
 

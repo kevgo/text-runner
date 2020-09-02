@@ -3,16 +3,6 @@ import * as textRunner from "text-runner"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
 
-When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
-  const world = this as TRWorld
-  world.process = await executeCLI(command, determineExpectError(tryingText), world)
-})
-
-When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (tryingText) {
-  const world = this as TRWorld
-  world.process = await executeCLI("run", determineExpectError(tryingText), world)
-})
-
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
   const world = this as TRWorld
   const expectError = determineExpectError(tryingText)
@@ -56,6 +46,16 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
     }
   }
   throw new Error("unexpected error")
+})
+
+When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
+  const world = this as TRWorld
+  world.process = await executeCLI(command, determineExpectError(tryingText), world)
+})
+
+When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (tryingText) {
+  const world = this as TRWorld
+  world.process = await executeCLI("run", determineExpectError(tryingText), world)
 })
 
 When(/^(trying to run|running) Text-Runner in the source directory$/, { timeout: 30_000 }, async function (tryingText) {

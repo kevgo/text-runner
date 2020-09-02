@@ -12,7 +12,8 @@ import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { StatsCounter } from "./helpers/stats-counter"
 import { ExecuteResult } from "./execute-result"
-import { ActivityResult } from "../activity-list/types/activity-result"
+import { ActivityResult, ActivityResultStatus } from "../activity-list/types/activity-result"
+import stripAnsi = require("strip-ansi")
 
 export async function runActivity(
   activity: Activity,
@@ -35,6 +36,7 @@ export async function runActivity(
     region: activity.region,
     document: activity.document,
   }
+  let activityResultStatus: ActivityResultStatus
   try {
     const action = actionFinder.actionFor(activity)
     let actionResult: ActionResult
@@ -45,9 +47,11 @@ export async function runActivity(
     }
     if (actionResult === undefined) {
       statsCounter.success()
+      activityResultStatus = "success"
       formatter.success(activity, nameRefiner.finalName(), outputCollector.toString())
     } else if (actionResult === args.SKIPPING) {
       statsCounter.skip()
+      activityResultStatus = "skipped"
       formatter.skipped(activity, nameRefiner.finalName(), outputCollector.toString())
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
@@ -56,13 +60,25 @@ export async function runActivity(
     statsCounter.error()
     if (isUserError(error)) {
       formatter.failed(activity, nameRefiner.finalName(), error, outputCollector.toString())
-      const activityResult: ActivityResult = { activity, error, output: outputCollector.toString() }
+      const activityResult: ActivityResult = {
+        activity,
+        error,
+        output: outputCollector.toString(),
+        finalName: stripAnsi(nameRefiner.finalName()),
+        status: "failed",
+      }
       return new ExecuteResult([activityResult], 1)
     }
     // here we have a developer error like for example TypeError
     throw error
   }
-  const activityResult: ActivityResult = { activity, error: null, output: outputCollector.toString() }
+  const activityResult: ActivityResult = {
+    activity,
+    error: null,
+    output: outputCollector.toString(),
+    finalName: stripAnsi(nameRefiner.finalName()),
+    status: activityResultStatus,
+  }
   return new ExecuteResult([activityResult], 0)
 }
 

@@ -15,5 +15,5 @@ Feature: multiple callbacks
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION             |
-      | 1.md     | 1    | multiple-callbacks |
+      | FILENAME | LINE | ACTION             | STATUS  |
+      | 1.md     | 1    | multiple-callbacks | success |

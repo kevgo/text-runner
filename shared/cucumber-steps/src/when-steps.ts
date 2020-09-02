@@ -19,6 +19,16 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
   }
 })
 
+When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: string) {
+  const world = this as TRWorld
+  const expectError = determineExpectError(tryingText)
+  world.apiResults = await callTextRunner(
+    "textRunner.runCommand({sourceDir, formatterName})",
+    world.rootDir,
+    expectError
+  )
+})
+
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const world = this as TRWorld
   world.process = await executeCLI(command, determineExpectError(tryingText), world)

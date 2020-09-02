@@ -15,7 +15,7 @@ Feature: configuring the class prefix
       """
 
   Scenario: default behavior
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME           | LINE | ACTION |
       | standard-prefix.md | 1    | test   |
@@ -25,7 +25,7 @@ Feature: configuring the class prefix
       """
       regionMarker: custom
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME         | LINE | ACTION |
       | custom-prefix.md | 1    | test   |

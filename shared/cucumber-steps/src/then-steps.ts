@@ -118,6 +118,16 @@ Then("the error provides the guidance:", function (expectedText) {
   assert.equal(expectedText.trim(), userError.guidance.trim())
 })
 
+Then("the API exception provides the guidance:", function (expectedText) {
+  const world = this as TRWorld
+  if (!world.apiException) {
+    throw new Error("no API exception found")
+  }
+  assert.equal(world.apiException.name, "UserError")
+  const userError = world.apiException as textRunner.UserError
+  assert.equal(expectedText.trim(), userError.guidance.trim())
+})
+
 Then("it prints usage instructions", function () {
   const world = this as TRWorld
   if (!world.process) {

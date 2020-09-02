@@ -31,8 +31,8 @@ Feature: specifying the configuration filename
   Scenario: providing a configuration filename via API
     When calling "textRunner.runCommand({configFileName: 'text-run-1.yml', sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION     |
-      | 1.md     | 1    | check-link |
+      | FILENAME | LINE | ACTION     | ACTIVITY                   |
+      | 1.md     | 1    | check-link | link to local heading #foo |
 
   Scenario: providing a non-existing configuration filename via CLI
     When trying to run "text-run --config zonk.yml"

@@ -14,12 +14,14 @@ import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
 const psTree = util.promisify(psTreeR)
 
 interface ExecuteResultTable {
+  action?: string // standardized name of the action ("check-link")
+  activity?: string // final name of the activity ("checking link http://foo.bar")
+  errorMessage?: string // message of the UserError thrown
+  errorType?: string // UserError or other error
   filename?: string
   line?: number
-  action?: string
-  output?: string
-  errorType?: string
-  errorMessage?: string
+  output?: string // what the action printed via action.log()
+  status?: textRunner.ActivityResultStatus
 }
 
 Then("it executes these actions:", function (table) {
@@ -42,6 +44,12 @@ Then("it executes these actions:", function (table) {
     if (line.OUTPUT) {
       result.output = line.OUTPUT
     }
+    if (line.ACTIVITY) {
+      result.activity = line.ACTIVITY
+    }
+    if (line.STATUS) {
+      result.status = line.STATUS
+    }
     want.push(result)
   }
   const have: ExecuteResultTable[] = []
@@ -59,6 +67,12 @@ Then("it executes these actions:", function (table) {
     }
     if (wanted.output) {
       result.output = line.output?.trim() || ""
+    }
+    if (wanted.activity) {
+      result.activity = line.finalName
+    }
+    if (wanted.status) {
+      result.status = line.status
     }
     have.push(result)
   }

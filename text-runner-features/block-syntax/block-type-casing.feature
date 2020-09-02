@@ -11,8 +11,8 @@ Feature: flexible region syntax
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      | OUTPUT       |
-      | 1.md     | 1    | hello-world | Hello World! |
+      | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
+      | 1.md     | 1    | hello-world | Hello World! | success |
 
   Scenario: the blocktype is provided in camelCase
     Given the source code contains a file "1.md" with content:
@@ -22,8 +22,8 @@ Feature: flexible region syntax
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      | OUTPUT       |
-      | 1.md     | 1    | hello-world | Hello World! |
+      | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
+      | 1.md     | 1    | hello-world | Hello World! | success |
 
   Scenario: the blocktype is provided in snake_case
     Given the source code contains a file "1.md" with content:
@@ -33,8 +33,8 @@ Feature: flexible region syntax
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      | OUTPUT       |
-      | 1.md     | 1    | hello-world | Hello World! |
+      | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
+      | 1.md     | 1    | hello-world | Hello World! | success |
 
   Scenario: the blocktype is provided in kebab-case
     Given the source code contains a file "1.md" with content:
@@ -44,5 +44,5 @@ Feature: flexible region syntax
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      | OUTPUT       |
-      | 1.md     | 1    | hello-world | Hello World! |
+      | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
+      | 1.md     | 1    | hello-world | Hello World! | success |

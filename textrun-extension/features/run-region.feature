@@ -7,7 +7,7 @@ Feature: Execute regions of semantic Markdown
       This is a <a type="test">test</a>.
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                            |
       | LINE     | 1                               |
@@ -19,7 +19,7 @@ Feature: Execute regions of semantic Markdown
       <a type="extension/runnable-region">
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                    |
       | LINE          | 1                       |
@@ -33,7 +33,7 @@ Feature: Execute regions of semantic Markdown
       This will blow up: <a type="zonk"></a>
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                 |
       | LINE          | 2                    |

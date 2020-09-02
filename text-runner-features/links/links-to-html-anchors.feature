@@ -7,7 +7,7 @@ Feature: links to HTML anchors
       text
       <a name="hello">hi</a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md           |
       | LINE     | 1              |
@@ -23,7 +23,7 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md               |
       | LINE     | 1                  |
@@ -35,7 +35,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor](#zonk)
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                    |
       | LINE          | 1                                       |
@@ -52,7 +52,7 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
@@ -65,7 +65,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor in other file](2.md#target)
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                             |
       | LINE          | 1                                                |
@@ -82,7 +82,7 @@ Feature: links to HTML anchors
       """
       no link targets here
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 1                                         |
@@ -97,7 +97,7 @@ Feature: links to HTML anchors
       text
       ## Hello
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                         |
       | LINE     | 1                            |
@@ -113,7 +113,7 @@ Feature: links to HTML anchors
       """
       ## Hello
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                       |
       | LINE     | 1                          |
@@ -129,7 +129,7 @@ Feature: links to HTML anchors
       """
       ## GitHub
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
@@ -145,7 +145,7 @@ Feature: links to HTML anchors
       """
       ## Hello
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                 |
       | LINE     | 1                                    |

@@ -9,7 +9,7 @@ Feature: active img tags
       <img type="HelloWorld" src="watermelon.gif">
       """
     And the workspace contains an image "watermelon.gif"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

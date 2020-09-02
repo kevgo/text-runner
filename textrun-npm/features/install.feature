@@ -20,7 +20,7 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                   |
       | LINE     | 3                                                      |
@@ -35,7 +35,7 @@ Feature: verifying NPM installation instructions
       $ npm i -g my_enormous_package
       </pre>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                   |
       | LINE     | 3                                                      |
@@ -46,7 +46,7 @@ Feature: verifying NPM installation instructions
       """
       installation: <a type="npm/install">`npm i -g my_enormous_package`</a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                   |
       | LINE     | 1                                                      |
@@ -64,7 +64,7 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                                                                                |
       | LINE          | 3                                                                                                   |
@@ -79,7 +79,7 @@ Feature: verifying NPM installation instructions
       <a type="npm/install">
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                               |
       | LINE          | 3                                  |
@@ -98,7 +98,7 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                                                                        |
       | LINE          | 3                                                                                           |

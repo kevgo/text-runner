@@ -15,7 +15,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command">make foo</code>.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                   |
       | LINE     | 1                      |
@@ -26,7 +26,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command">make zonk</code>.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                                                          |
       | LINE          | 1                                                                             |
@@ -38,7 +38,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command">make </code>.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                 |
       | LINE          | 1                                    |
@@ -50,7 +50,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command"> </code>.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                  |
       | LINE          | 1                     |

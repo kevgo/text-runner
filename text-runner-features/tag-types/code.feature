@@ -8,7 +8,7 @@ Feature: active code tags
       """
       <code type="HelloWorld">foo</code>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -21,4 +21,4 @@ Feature: active code tags
 
             indented code block
       """
-    When running text-run
+    When running Text-Runner

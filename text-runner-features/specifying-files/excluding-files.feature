@@ -10,7 +10,7 @@ Feature: excluding files
       """
       exclude: 'foo'
       """
-    When running text-run
+    When running Text-Runner
     Then it runs only the tests in:
       | readme.md |
       | bar/2.md  |

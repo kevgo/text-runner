@@ -10,7 +10,7 @@ Feature: shell/command
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it runs the console command "echo hello"
 
   Scenario: inside <pre> tags
@@ -20,7 +20,7 @@ Feature: shell/command
       echo hello
       </pre>
       """
-    When running text-run
+    When running Text-Runner
     Then it runs the console command "echo hello"
 
   Scenario: empty console command
@@ -32,7 +32,7 @@ Feature: shell/command
       ```
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | running.md                                                      |
       | LINE          | 1                                                               |

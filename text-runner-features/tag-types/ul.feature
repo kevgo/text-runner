@@ -10,7 +10,7 @@ Feature: active UL tags
         <li>one</li>
       </ul>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -23,7 +23,7 @@ Feature: active UL tags
       <li type="HelloWorld">one</li>
       </ul>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 2           |

@@ -8,7 +8,7 @@ Feature: KBD tags
       """
       <kbd type="HelloWorld">foo</kbd>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -19,4 +19,4 @@ Feature: KBD tags
       """
       <kbd>foo</kbd>
       """
-    When running text-run
+    When running Text-Runner

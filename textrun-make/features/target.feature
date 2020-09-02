@@ -15,7 +15,7 @@ Feature: verifying Make targets
       """
       To build the "foo" executable, build the <code type="make/target">foo</code> target.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md            |
       | LINE     | 1               |
@@ -26,7 +26,7 @@ Feature: verifying Make targets
       """
       To build the "foo" executable, build the <code type="make/target">zonk</code> target.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                                           |
       | LINE          | 1                                                              |
@@ -38,7 +38,7 @@ Feature: verifying Make targets
       """
       To build the "foo" executable, build the <code type="make/target"></code> target.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md              |
       | LINE          | 1                 |

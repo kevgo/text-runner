@@ -14,5 +14,5 @@ Feature: recognize empty links
 
     Examples:
       | COMMAND           |
-      | text-run          |
+      | Text-Runner       |
       | "text-run static" |

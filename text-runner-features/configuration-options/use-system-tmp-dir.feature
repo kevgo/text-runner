@@ -9,7 +9,7 @@ Feature: separate working directory
       """
 
   Scenario: default configuration
-    When running text-run
+    When running Text-Runner
     Then it runs in the "tmp" directory
 
   Scenario: running in a local temp directory
@@ -17,7 +17,7 @@ Feature: separate working directory
       """
       useSystemTempDirectory: false
       """
-    When running text-run
+    When running Text-Runner
     Then it runs in the "tmp" directory
 
   Scenario: running in a global temp directory
@@ -25,5 +25,5 @@ Feature: separate working directory
       """
       useSystemTempDirectory: true
       """
-    When running text-run
+    When running Text-Runner
     Then it runs in a global temp directory

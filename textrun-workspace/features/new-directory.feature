@@ -5,7 +5,7 @@ Feature: creating directories
       """
       Create the directory <b type="workspace/new-directory">directory_name</b>.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | creator.md                      |
       | LINE     | 1                               |
@@ -17,7 +17,7 @@ Feature: creating directories
       """
       Create the directory <b type="workspace/new-directory">
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                 |
       | LINE          | 1                          |
@@ -30,7 +30,7 @@ Feature: creating directories
       """
       <b type="workspace/new-directory"> </b>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                 |
       | LINE          | 1                          |

@@ -10,7 +10,7 @@ Feature: verifying links to the local filesystem
       """
       foo
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                    |
       | LINE     | 1                       |
@@ -25,7 +25,7 @@ Feature: verifying links to the local filesystem
       """
       # Carsten
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | partners/foo/bar.md                                   |
       | LINE     | 1                                                     |
@@ -36,7 +36,7 @@ Feature: verifying links to the local filesystem
       """
       [link to existing local file](/docs/1.md)
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | docs/1.md                    |
       | LINE     | 1                            |
@@ -50,7 +50,7 @@ Feature: verifying links to the local filesystem
       """
       [link to local directory](docs)
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                         |
       | LINE     | 1                            |
@@ -61,7 +61,7 @@ Feature: verifying links to the local filesystem
       """
       [link to non-existing local file](zonk.md)
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                    |
       | LINE          | 1                                       |
@@ -77,7 +77,7 @@ Feature: verifying links to the local filesystem
       """
       [link to existing local file](../readme.md)
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | documentation/1.md           |
       | LINE     | 1                            |

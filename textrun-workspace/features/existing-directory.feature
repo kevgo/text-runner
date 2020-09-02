@@ -10,7 +10,7 @@ Feature: verify that the workspace contains a directory
       directory.
       """
     Given the workspace contains a directory "foo"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                  |
       | LINE     | 4                                     |
@@ -23,7 +23,7 @@ Feature: verify that the workspace contains a directory
       <code type="workspace/existing-directory">foo</code>
       directory.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                          |
       | LINE          | 2                                             |
@@ -39,7 +39,7 @@ Feature: verify that the workspace contains a directory
       <code type="workspace/existing-directory">foo</code>
       directory.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                              |
       | LINE          | 4                                 |

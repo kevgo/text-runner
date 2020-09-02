@@ -11,7 +11,7 @@ Feature: running multiple console commands
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | running-multiple-commands.md                          |
       | LINE     | 1                                                     |

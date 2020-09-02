@@ -6,7 +6,7 @@ Feature: ignoring mailto links
       """
       A [working external link](mailto:foo@acme.com)
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                  |
       | LINE     | 1                                     |

@@ -10,4 +10,4 @@ Feature: footnotes
 
       [^1]: footnote text
       """
-    When running text-run
+    When running Text-Runner

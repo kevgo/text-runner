@@ -1,8 +1,9 @@
 import { promises as fs } from "fs"
+import path = require("path")
 
-export async function createConfigurationFile() {
+export async function createConfigurationFile(sourceDir: string) {
   await fs.writeFile(
-    "./text-run.yml",
+    path.join(sourceDir, "./text-run.yml"),
     `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.

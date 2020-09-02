@@ -33,7 +33,7 @@ async function main() {
         await scaffoldCommand(config.fileGlob, config.sourceDir || ".")
         break
       case "setup":
-        await setupCommand()
+        result = await setupCommand(config)
         break
       case "version":
         await versionCommand()

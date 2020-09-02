@@ -29,7 +29,7 @@ Feature: selecting formatter via the command-line
     Then it throws:
       | ERROR TYPE | ERROR MESSAGE           |
       | UserError  | Unknown formatter: zonk |
-    And the exception provides the guidance:
+    And the API exception provides the guidance:
       """
       Available formatters are: detailed, dot, progress, silent, summary
       """

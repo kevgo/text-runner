@@ -7,15 +7,15 @@ Feature: selecting formatter via the command-line
       </a>
       """
 
-  Scenario: selecting the formatter via CLI
+  Scenario: select the formatter via the CLI
     When running "text-run --format dot"
     Then it runs without errors
 
-  Scenario: selecting the formatters via API
+  Scenario: select the formatter via the API
     When calling "textRunner.runCommand({formatterName: 'silent', sourceDir})"
     Then it runs without errors
 
-  Scenario: selecting an unknown formatter via CLI
+  Scenario: select an unknown formatter via the CLI
     When trying to run "text-run --format zonk"
     Then the call fails with the error:
       """
@@ -24,7 +24,7 @@ Feature: selecting formatter via the command-line
       Available formatters are: detailed, dot, progress, silent, summary
       """
 
-  Scenario: selecting an unknown formatter via API
+  Scenario: select an unknown formatter via the API
     When trying to call "textRunner.runCommand({formatterName: 'zonk', sourceDir})"
     Then it throws:
       | ERROR TYPE | ERROR MESSAGE           |

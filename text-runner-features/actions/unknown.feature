@@ -7,10 +7,10 @@ Feature: unknown action types
       <a type="zonk">
       </a>
       """
-    When trying to call "textRunner.runCommand({sourceDir})"
-    Then it throws:
-      | FILENAME | LINE | ERROR TYPE | ERROR MESSAGE        |
-      | 1.md     | 1    | UserError  | unknown action: zonk |
+    When trying to call "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        |
+      | 1.md     | 1    | failed | UserError  | unknown action: zonk |
     And the error provides the guidance:
       """
       No custom actions defined.

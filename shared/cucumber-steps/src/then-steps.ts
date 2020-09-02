@@ -57,7 +57,7 @@ Then("it executes these actions:", function (table) {
   for (const line of apiResults?.activityResults || []) {
     const result: ExecuteResultTable = {}
     if (wanted.filename) {
-      result.filename = line.activity.file.platformified()
+      result.filename = line.activity.file.unixified()
     }
     if (wanted.line) {
       result.line = line.activity.line

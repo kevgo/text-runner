@@ -50,11 +50,7 @@ Feature: generating a configuration file
 
   Scenario: setup via API
     When calling "textRunner.setupCommand({sourceDir, formatterName})"
-    Then it prints:
-      """
-      Created configuration file text-run.yml with default values
-      """
-    And it creates the file "text-run.yml" with content:
+    Then it creates the file "text-run.yml" with content:
       """
       # white-list for files to test
       # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer

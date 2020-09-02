@@ -93,5 +93,5 @@ async function runSyncOrPromiseFunc(func: Action, args: ActionArgs): Promise<Act
 }
 
 function isUserError(err: Error): boolean {
-  return err.name === "Error"
+  return err.name === "UserError" || err.name === "Error"
 }

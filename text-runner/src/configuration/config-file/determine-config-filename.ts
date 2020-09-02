@@ -19,8 +19,9 @@ export async function determineConfigFilename(cmdLineArgs: UserProvidedConfigura
     }
   }
   try {
-    await fs.stat("text-run.yml")
-    return "text-run.yml"
+    const configFilePath = path.join(cmdLineArgs.sourceDir || ".", "text-run.yml")
+    await fs.stat(configFilePath)
+    return configFilePath
   } catch (e) {
     return ""
   }

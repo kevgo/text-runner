@@ -36,22 +36,21 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
       throw new Error(`Unexpected exception: ${e}`)
     }
   }
-  const apiResults = world.apiResults as textRunner.ExecuteResult
-  if (!expectError && apiResults.errorCount === 0) {
+  if (!expectError && world.apiResults.errorCount === 0) {
     // no error expected, no error encountered --> done
     return
   }
-  if (expectError && apiResults.errorCount > 0) {
+  if (expectError && world.apiResults.errorCount > 0) {
     // error expected and error encountered --> done
     return
   }
-  if (expectError && apiResults.errorCount === 0) {
+  if (expectError && world.apiResults.errorCount === 0) {
     // error expected and no error encountered --> error
     throw new Error("expected error but got none")
   }
   // no error expected and error encountered
-  console.log(`${apiResults.errorCount} errors`)
-  for (const activityResult of apiResults.activityResults) {
+  console.log(`${world.apiResults.errorCount} errors`)
+  for (const activityResult of world.apiResults.activityResults) {
     if (activityResult.error) {
       console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
     }

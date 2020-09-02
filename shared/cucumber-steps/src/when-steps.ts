@@ -1,22 +1,13 @@
 import { When } from "cucumber"
-import * as textRunner from "text-runner"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
+import { callTextRunner } from "./helpers/call-text-runner"
 
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
   const world = this as TRWorld
   const expectError = determineExpectError(tryingText)
-  // @ts-ignore: this make textRunner available as a variable here
-  const tr = textRunner
-  // @ts-ignore: this is used inside eval
-  const sourceDir = world.rootDir
-  // @ts-ignore: this is used inside eval
-  const formatterName = "silent"
-  let result: any
-  let error: Error
-  eval("result = " + jsText)
   try {
-    world.apiResults = await result
+    world.apiResults = await callTextRunner(jsText, world.rootDir, expectError)
   } catch (e) {
     world.apiException = e
     if (expectError) {
@@ -26,26 +17,16 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
       throw new Error(`Unexpected exception: ${e}`)
     }
   }
-  if (!expectError && world.apiResults.errorCount === 0) {
-    // no error expected, no error encountered --> done
-    return
-  }
-  if (expectError && world.apiResults.errorCount > 0) {
-    // error expected and error encountered --> done
-    return
-  }
-  if (expectError && world.apiResults.errorCount === 0) {
-    // error expected and no error encountered --> error
-    throw new Error("expected error but got none")
-  }
-  // no error expected and error encountered
-  console.log(`${world.apiResults.errorCount} errors`)
-  for (const activityResult of world.apiResults.activityResults) {
-    if (activityResult.error) {
-      console.log(`- ${activityResult.error.name}: ${activityResult.error.message}`)
-    }
-  }
-  throw new Error("unexpected error")
+})
+
+When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: string) {
+  const world = this as TRWorld
+  const expectError = determineExpectError(tryingText)
+  world.apiResults = await callTextRunner(
+    "textRunner.runCommand({sourceDir, formatterName})",
+    world.rootDir,
+    expectError
+  )
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

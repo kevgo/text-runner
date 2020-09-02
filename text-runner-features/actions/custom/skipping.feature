@@ -14,7 +14,7 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
@@ -26,7 +26,7 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
@@ -38,7 +38,7 @@ Feature: skipping an action
         done(null, action.SKIPPING)
       }
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
@@ -52,7 +52,7 @@ Feature: skipping an action
         })
       }
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |

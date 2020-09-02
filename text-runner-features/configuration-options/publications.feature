@@ -19,7 +19,7 @@ Feature: Folder Mapping
           publicPath: /
           publicExtension: ''
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                        |
       | 1.md     | 1    | check-link | link to local file content/2.md |
@@ -41,7 +41,7 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                              |
       | 1.md     | 1    | check-link | link to local file content/posts/3.md |
@@ -63,7 +63,7 @@ Feature: Folder Mapping
       """
       # Welcome
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                                   |
       | 1.md     | 1    | check-link | link to heading content/posts/3.md#welcome |
@@ -85,7 +85,7 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                              |
       | 1.md     | 1    | check-link | link to local file content/posts/3.md |
@@ -107,7 +107,7 @@ Feature: Folder Mapping
       """
       # Welcome
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                                   |
       | 1.md     | 1    | check-link | link to heading content/posts/3.md#welcome |
@@ -133,7 +133,7 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                              |
       | 1.md     | 1    | check-link | link to heading content/2.md#hello    |
@@ -156,7 +156,7 @@ Feature: Folder Mapping
           publicPath: /blog
           publicExtension: ''
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION     | ACTIVITY                         |
       | posts/1.md | 1    | check-link | link to heading posts/2.md#hello |

@@ -13,7 +13,7 @@ Feature: Default file
       """
       defaultFile: start.md
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                          |
       | root.md  | 1    | check-link | link to local file guide/start.md |
@@ -28,7 +28,7 @@ Feature: Default file
       """
       Subfolder content
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                      |
       | root.md  | 1    | check-link | link to local directory guide |
@@ -55,7 +55,7 @@ Feature: Default file
           publicExtension: ''
       defaultFile: 'index.md'
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                          |
       | root.md  | 1    | check-link | link to local file guide/index.md |
@@ -78,7 +78,7 @@ Feature: Default file
           publicExtension: ''
       defaultFile: index.md
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME                | LINE | ACTION     | ACTIVITY                                |
       | content/guides/index.md | 1    | check-link | link to local file content/guides/go.md |

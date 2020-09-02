@@ -9,7 +9,7 @@ Feature: flexible region syntax
       <a type="HelloWorld">
       </a>
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |
@@ -20,7 +20,7 @@ Feature: flexible region syntax
       <a type="helloWorld">
       </a>
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |
@@ -31,7 +31,7 @@ Feature: flexible region syntax
       <a type="hello_world">
       </a>
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |
@@ -42,7 +42,7 @@ Feature: flexible region syntax
       <a type="hello-world">
       </a>
       """
-    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |

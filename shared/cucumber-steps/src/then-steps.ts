@@ -50,6 +50,12 @@ Then("it executes these actions:", function (table) {
     if (line.STATUS) {
       result.status = line.STATUS
     }
+    if (line["ERROR TYPE"]) {
+      result.errorType = line["ERROR TYPE"]
+    }
+    if (line["ERROR MESSAGE"]) {
+      result.errorMessage = line["ERROR MESSAGE"]
+    }
     want.push(result)
   }
   const have: ExecuteResultTable[] = []
@@ -73,6 +79,12 @@ Then("it executes these actions:", function (table) {
     }
     if (wanted.status) {
       result.status = line.status
+    }
+    if (wanted.errorType) {
+      result.errorType = line.error?.name
+    }
+    if (wanted.errorMessage) {
+      result.errorMessage = stripAnsi(line.error?.message || "")
     }
     have.push(result)
   }

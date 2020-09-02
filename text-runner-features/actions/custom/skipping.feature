@@ -16,8 +16,8 @@ Feature: skipping an action
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      |
-      | 1.md     | 1    | skip-action |
+      | FILENAME | LINE | ACTION      | STATUS  |
+      | 1.md     | 1    | skip-action | skipped |
 
   Scenario: skipping an asynchronous action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -28,8 +28,8 @@ Feature: skipping an action
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      |
-      | 1.md     | 1    | skip-action |
+      | FILENAME | LINE | ACTION      | STATUS  |
+      | 1.md     | 1    | skip-action | skipped |
 
   Scenario: skipping a callback action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -40,8 +40,8 @@ Feature: skipping an action
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      |
-      | 1.md     | 1    | skip-action |
+      | FILENAME | LINE | ACTION      | STATUS  |
+      | 1.md     | 1    | skip-action | skipped |
 
   Scenario: skipping a promise action
     Given the source code contains a file "text-run/skip-action.js" with content:
@@ -54,5 +54,5 @@ Feature: skipping an action
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:
-      | FILENAME | LINE | ACTION      |
-      | 1.md     | 1    | skip-action |
+      | FILENAME | LINE | ACTION      | STATUS  |
+      | 1.md     | 1    | skip-action | skipped |

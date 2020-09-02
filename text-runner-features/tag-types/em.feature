@@ -8,7 +8,7 @@ Feature: active em tags
       """
       <em type="HelloWorld">foo</em>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

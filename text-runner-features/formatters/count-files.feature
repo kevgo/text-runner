@@ -11,7 +11,7 @@ Feature: Counting files
       <a type="test">
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it prints:
       """
       2 activities in 2 files
@@ -27,7 +27,7 @@ Feature: Counting files
       <a type="test">
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it prints:
       """
       1 activities in 2 files

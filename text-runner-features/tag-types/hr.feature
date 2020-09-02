@@ -8,7 +8,7 @@ Feature: HR tags
       """
       <hr type="HelloWorld">
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -19,11 +19,11 @@ Feature: HR tags
       """
       <hr>
       """
-    When running text-run
+    When running Text-Runner
 
   Scenario: inactive HR Markdown tag
     Given the source code contains a file "1.md" with content:
       """
       ---
       """
-    When running text-run
+    When running Text-Runner

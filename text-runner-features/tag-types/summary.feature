@@ -8,7 +8,7 @@ Feature: active code tags
       """
       <summary type="HelloWorld">foo</summary>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

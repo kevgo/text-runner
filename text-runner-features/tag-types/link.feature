@@ -8,7 +8,7 @@ Feature: active link tags
       """
       <a type="HelloWorld" href=".">
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

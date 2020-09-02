@@ -15,7 +15,7 @@ Feature: verifying the documented content of a file in the repository
 
       </a>
       """
-    When running text-run in the source directory
+    When running Text-Runner in the source directory
     Then it signals:
       | FILENAME | 1.md                                                |
       | LINE     | 1                                                   |
@@ -33,7 +33,7 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                |
       | LINE     | 1                                                   |
@@ -57,7 +57,7 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                       |
       | LINE     | 1                                                          |
@@ -75,7 +75,7 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                             |
       | LINE          | 1                                |
@@ -93,7 +93,7 @@ Feature: verifying the documented content of a file in the repository
       `Hello world!`
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |

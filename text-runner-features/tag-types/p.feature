@@ -8,4 +8,4 @@ Feature: active P tags
       bar
       </p>
       """
-    When running text-run
+    When running Text-Runner

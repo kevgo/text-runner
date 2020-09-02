@@ -22,7 +22,7 @@ Feature: verifying global commands provided by NPM modules
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                               |
       | LINE     | 3                                  |
@@ -33,7 +33,7 @@ Feature: verifying global commands provided by NPM modules
       """
       To run this app, call <a type="npm/executable">`foo`</a> on the command line
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                               |
       | LINE     | 1                                  |
@@ -51,7 +51,7 @@ Feature: verifying global commands provided by NPM modules
       ```
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                          |
       | LINE          | 3                                             |
@@ -66,7 +66,7 @@ Feature: verifying global commands provided by NPM modules
       <a type="npm/executable">
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                      |
       | LINE          | 3                                         |

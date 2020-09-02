@@ -8,7 +8,7 @@ Feature: active i tags
       """
       <i type="HelloWorld">hello</i>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

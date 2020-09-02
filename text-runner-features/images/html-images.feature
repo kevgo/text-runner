@@ -6,7 +6,7 @@ Feature: checking embedded HTML images
       <img src="images/watermelon.gif">
       """
     And the workspace contains an image "images/watermelon.gif"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                        |
       | LINE     | 1                           |
@@ -19,7 +19,7 @@ Feature: checking embedded HTML images
       <img src="/documentation/images/watermelon.gif">
       """
     And the workspace contains an image "documentation/images/watermelon.gif"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | documentation/1.md                         |
       | LINE     | 1                                          |
@@ -32,7 +32,7 @@ Feature: checking embedded HTML images
       <img src="watermelon.gif">
       """
     And the workspace contains an image "documentation/watermelon.gif"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | documentation/1.md   |
       | LINE     | 1                    |
@@ -44,7 +44,7 @@ Feature: checking embedded HTML images
       """
       <img src="zonk.gif">
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                          |
       | LINE          | 1                             |
@@ -58,7 +58,7 @@ Feature: checking embedded HTML images
       """
       <img src="http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                                                    |
       | LINE     | 1                                                                                       |
@@ -71,7 +71,7 @@ Feature: checking embedded HTML images
       """
       <img src="http://google.com/onetuhoenzonk.png">
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
@@ -84,7 +84,7 @@ Feature: checking embedded HTML images
       """
       <img src="">
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |

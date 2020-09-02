@@ -7,7 +7,7 @@ Feature: checking embedded Markdown images
       ![Alt text](watermelon.gif "watermelon")
       """
     And the workspace contains an image "watermelon.gif"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                 |
       | LINE     | 1                    |
@@ -19,7 +19,7 @@ Feature: checking embedded Markdown images
       ![Alt text](/documentation/images/watermelon.gif "watermelon")
       """
     And the workspace contains an image "documentation/images/watermelon.gif"
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | documentation/1.md                         |
       | LINE     | 1                                          |
@@ -30,7 +30,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](zonk.gif "watermelon")
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                          |
       | LINE          | 1                             |
@@ -43,7 +43,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png "google logo")
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                                                    |
       | LINE     | 1                                                                                       |
@@ -55,7 +55,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](http://google.com/onetuhoenzonk.png "zonk")
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                     |
       | LINE     | 1                                                        |
@@ -67,7 +67,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text]()
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |

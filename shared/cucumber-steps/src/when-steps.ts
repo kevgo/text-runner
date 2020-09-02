@@ -8,7 +8,7 @@ When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function 
   world.process = await executeCLI(command, determineExpectError(tryingText), world)
 })
 
-When(/^(trying to run|running) text-run$/, { timeout: 30_000 }, async function (tryingText) {
+When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (tryingText) {
   const world = this as TRWorld
   world.process = await executeCLI("run", determineExpectError(tryingText), world)
 })

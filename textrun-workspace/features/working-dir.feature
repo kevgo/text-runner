@@ -8,7 +8,7 @@ Feature: changing the working directory
       Change into the <code type="workspace/working-dir">foo</code> directory.
       You see a file <a type="workspace/existing-file">__bar__ `hello` </a>.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | directory_changer.md            |
       | LINE     | 3                               |
@@ -19,7 +19,7 @@ Feature: changing the working directory
       """
       <code type="workspace/working-dir">foo</code>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | directory_changer.md    |
       | LINE          | 1                       |

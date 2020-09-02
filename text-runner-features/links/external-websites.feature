@@ -6,7 +6,7 @@ Feature: verifying links to websites
       """
       A [working external link](http://google.com)
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
@@ -18,7 +18,7 @@ Feature: verifying links to websites
       """
       A <a href="http://google.com">working external link</a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                       |
       | LINE     | 1                                          |
@@ -30,7 +30,7 @@ Feature: verifying links to websites
       """
       A [broken external link](http://oeanuthaoenuthoaeuzonk.com)
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                       |
       | LINE     | 1                                                          |
@@ -43,7 +43,7 @@ Feature: verifying links to websites
       """
       A <a href="http://oeanuthaoenuthoaeuzonk.com">broken external link</a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                                                       |
       | LINE     | 1                                                          |

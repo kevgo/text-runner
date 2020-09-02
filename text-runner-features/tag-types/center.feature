@@ -8,7 +8,7 @@ Feature: active CENTER tags
       """
       <center type="HelloWorld">foo</center>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -19,4 +19,4 @@ Feature: active CENTER tags
       """
       <center>foo</center>
       """
-    When running text-run
+    When running Text-Runner

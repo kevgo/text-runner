@@ -8,7 +8,7 @@ Feature: active SUP tags
       """
       <sup type="HelloWorld">foo</sup>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -19,4 +19,4 @@ Feature: active SUP tags
       """
       <sup>foo</sup>
       """
-    When running text-run
+    When running Text-Runner

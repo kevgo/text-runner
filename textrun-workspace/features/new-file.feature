@@ -5,7 +5,7 @@ Feature: creating files with content
       """
       creating a file with name <a type="workspace/new-file">_one.txt_ and content `Hello world!`</a>.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |
@@ -25,7 +25,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | creator.md          |
       | LINE     | 1                   |
@@ -40,7 +40,7 @@ Feature: creating files with content
       """
       <a type="workspace/new-file">`Hello world!`</a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                                             |
       | LINE          | 1                                                      |
@@ -52,7 +52,7 @@ Feature: creating files with content
       """
       <a type="workspace/new-file">__one.txt__</a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                                               |
       | LINE          | 1                                                        |
@@ -72,7 +72,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                                            |
       | LINE          | 3                                                     |
@@ -96,7 +96,7 @@ Feature: creating files with content
 
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | creator.md                                             |
       | LINE          | 5                                                      |

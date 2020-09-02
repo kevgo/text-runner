@@ -8,4 +8,4 @@ Feature: Strikethrough text
       """
       hello ~~universe~~world
       """
-    When running text-run
+    When running Text-Runner

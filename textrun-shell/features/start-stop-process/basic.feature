@@ -34,7 +34,7 @@ Feature: long-running processes
 
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | run-server.md                             |
       | LINE     | 1                                         |
@@ -58,7 +58,7 @@ Feature: long-running processes
 
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |

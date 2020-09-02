@@ -6,7 +6,7 @@ Feature: validating Javascript
       <a type="javascript/non-runnable">
       </a>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                     |
       | LINE          | 1                        |
@@ -20,7 +20,7 @@ Feature: validating Javascript
       'missing quotes at end
       </pre>
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                            |
       | LINE          | 1                                               |

@@ -8,7 +8,7 @@ Feature: active anchor tags
       """
       <a type="HelloWorld">hello</a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -21,7 +21,7 @@ Feature: active anchor tags
       hello
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

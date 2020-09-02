@@ -8,7 +8,7 @@ Feature: active ABBR tags
       """
       <abbr type="HelloWorld">foo</abbr>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -19,4 +19,4 @@ Feature: active ABBR tags
       """
       <abbr>foo</abbr>
       """
-    When running text-run
+    When running Text-Runner

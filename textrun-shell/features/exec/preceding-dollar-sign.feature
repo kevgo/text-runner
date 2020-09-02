@@ -11,7 +11,7 @@ Feature: marking console commands with preceding dollar signs
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | running-with-dollar-sign.md                           |
       | LINE     | 1                                                     |

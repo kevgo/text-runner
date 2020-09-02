@@ -6,7 +6,7 @@ Feature: selecting formatter via the config file
       """
       format: <FORMATTER>
       """
-    When running text-run
+    When running Text-Runner
     Then it prints:
       """
       <OUTPUT>
@@ -27,7 +27,7 @@ Feature: selecting formatter via the config file
       """
       format: zonk
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the call fails with the error:
       """
       Unknown formatter: zonk

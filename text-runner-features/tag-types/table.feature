@@ -10,7 +10,7 @@ Feature: active table tags
         <tr> <td></td> </tr>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -28,7 +28,7 @@ Feature: active table tags
         </tbody>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |
@@ -44,7 +44,7 @@ Feature: active table tags
         </thead>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 3           |
@@ -62,7 +62,7 @@ Feature: active table tags
         </tbody>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 6           |
@@ -75,7 +75,7 @@ Feature: active table tags
         <tr type="HelloWorld"> <td></td> </tr>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 2           |
@@ -90,7 +90,7 @@ Feature: active table tags
         </tr>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 3           |
@@ -105,7 +105,7 @@ Feature: active table tags
         </tr>
       </table>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 3           |
@@ -120,4 +120,4 @@ Feature: active table tags
      | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>     | Open Quickly (fuzzy find)     |
 
       """
-    When running text-run
+    When running Text-Runner

@@ -34,7 +34,7 @@ Feature: running console commands
 
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | enter-input.md                        |
       | LINE     | 1                                     |
@@ -89,7 +89,7 @@ Feature: running console commands
 
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | enter-input.md                         |
       | LINE     | 1                                      |

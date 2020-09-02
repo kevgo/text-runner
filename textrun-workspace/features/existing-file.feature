@@ -6,7 +6,7 @@ Feature: verifying file content
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       Your workspace now contains a file <a type="workspace/existing-file">_hello.txt_ with content `Hello world!`</a>.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                             |
       | LINE     | 2                                |
@@ -23,7 +23,7 @@ Feature: verifying file content
       ```
       </a>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md                             |
       | LINE     | 2                                |
@@ -35,7 +35,7 @@ Feature: verifying file content
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       Now you have a file <a type="workspace/existing-file">__hello.txt__ with `mismatching expected content`</a>.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
       | FILENAME      | 1.md                                                                                              |
       | LINE          | 2                                                                                                 |
@@ -47,9 +47,9 @@ Feature: verifying file content
       """
       The file <a type="workspace/existing-file">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
       """
-    When trying to run text-run
+    When trying to run Text-Runner
     Then the test fails with:
-      | FILENAME      | 1.md                    |
+      | FILENAME      | 1.md                     |
       | LINE          | 1                        |
       | ERROR MESSAGE | file not found: zonk.txt |
       | EXIT CODE     | 1                        |

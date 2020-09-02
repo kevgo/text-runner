@@ -6,7 +6,7 @@ Feature: Appending content to existing workspace files
       Create a file <a type="workspace/new-file">**foo/bar** with content `hello`</a>.
       Now append to file <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | directory_changer.md   |
       | LINE     | 2                      |

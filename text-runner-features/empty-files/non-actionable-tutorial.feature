@@ -5,6 +5,6 @@ Feature: Fail on non-actionable Markdown
       """
       Just text here, nothing to do!
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | MESSAGE | no activities found |

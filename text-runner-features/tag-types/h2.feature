@@ -8,7 +8,7 @@ Feature: active h2 tags
       """
       <h2 type="HelloWorld">hello</h2>
       """
-    When running text-run
+    When running Text-Runner
     Then it signals:
       | FILENAME | 1.md        |
       | LINE     | 1           |

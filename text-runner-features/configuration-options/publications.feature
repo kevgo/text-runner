@@ -18,11 +18,10 @@ Feature: Folder Mapping
           publicPath: /
           publicExtension: ''
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | 1.md                            |
-      | LINE     | 1                               |
-      | MESSAGE  | link to local file content/2.md |
+    When calling "textRunner.runCommand({offline: true, sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     |
+      | 1.md     | 1    | check-link |
 
   Scenario: relative link to remapped folder
     Given the source code contains a file "1.md" with content:

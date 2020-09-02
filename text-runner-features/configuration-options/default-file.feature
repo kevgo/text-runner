@@ -5,22 +5,21 @@ Feature: Default file
       """
       link to [our guides](guide)
       """
-    And the source code contains a file "guide/index.md" with content:
+    And the source code contains a file "guide/start.md" with content:
       """
       Subfolder content
       """
-    And the configuration file:
+    And the source code contains a file "text-run.yml" with content:
       """
-      defaultFile: 'index.md'
+      defaultFile: start.md
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | root.md                           |
-      | LINE     | 1                                 |
-      | MESSAGE  | link to local file guide/index.md |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     |
+      | root.md  | 1    | check-link |
 
 
-  Scenario: default behavior
+  Scenario: no default filename is set
     Given the source code contains a file "root.md" with content:
       """
       link to [our guides](guide)
@@ -29,11 +28,11 @@ Feature: Default file
       """
       Subfolder content
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | root.md                       |
-      | LINE     | 1                             |
-      | MESSAGE  | link to local directory guide |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     |
+      | root.md  | 1    | check-link |
+
 
   Scenario: combination with publication settings
     Given the source code contains a file "root.md" with content:
@@ -48,7 +47,7 @@ Feature: Default file
       """
       link to [posts](/blog/)
       """
-    And the configuration file:
+    Given the source code contains a file "text-run.yml" with content:
       """
       publications:
         - localPath: /guide/
@@ -56,11 +55,11 @@ Feature: Default file
           publicExtension: ''
       defaultFile: 'index.md'
       """
-    When running text-run
-    Then it signals:
-      | FILENAME | root.md                           |
-      | LINE     | 1                                 |
-      | MESSAGE  | link to local file guide/index.md |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     |
+      | root.md  | 1    | check-link |
+
 
   Scenario: relative link from default file to other file in same folder
     Given the source code contains a file "content/guides/index.md" with content:
@@ -79,8 +78,7 @@ Feature: Default file
           publicExtension: ''
       defaultFile: index.md
       """
-    When running text-run
-    And it signals:
-      | FILENAME | content/guides/index.md                 |
-      | LINE     | 1                                       |
-      | MESSAGE  | link to local file content/guides/go.md |
+    When calling "textRunner.runCommand({sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME                | LINE | ACTION     |
+      | content/guides/index.md | 1    | check-link |

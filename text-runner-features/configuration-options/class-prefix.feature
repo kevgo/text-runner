@@ -23,7 +23,7 @@ Feature: configuring the class prefix
   Scenario: configuration option given
     Given the source code contains a file "text-run.yml" with content:
       """
-      regionMarker: 'custom'
+      regionMarker: custom
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
     Then it executes these actions:

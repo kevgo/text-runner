@@ -14,6 +14,7 @@ import { StatsCounter } from "./helpers/stats-counter"
 import { ExecuteResult } from "./execute-result"
 import { ActivityResult, ActivityResultStatus } from "../activity-list/types/activity-result"
 import stripAnsi = require("strip-ansi")
+import { UserError } from "../errors/user-error"
 
 export async function runActivity(
   activity: Activity,
@@ -56,13 +57,13 @@ export async function runActivity(
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
-  } catch (error) {
+  } catch (e) {
     statsCounter.error()
-    if (isUserError(error)) {
-      formatter.failed(activity, nameRefiner.finalName(), error, outputCollector.toString())
+    if (isUserError(e)) {
+      formatter.failed(activity, nameRefiner.finalName(), e, outputCollector.toString())
       const activityResult: ActivityResult = {
         activity,
-        error,
+        error: new UserError(e.message),
         output: outputCollector.toString(),
         finalName: stripAnsi(nameRefiner.finalName()),
         status: "failed",
@@ -70,7 +71,7 @@ export async function runActivity(
       return new ExecuteResult([activityResult], 1)
     }
     // here we have a developer error like for example TypeError
-    throw error
+    throw e
   }
   const activityResult: ActivityResult = {
     activity,

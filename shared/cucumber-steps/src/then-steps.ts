@@ -24,6 +24,14 @@ interface ExecuteResultTable {
   status?: textRunner.ActivityResultStatus
 }
 
+Then("it executes {int} test", function (count) {
+  const world = this as TRWorld
+  if (!world.apiResults) {
+    throw new Error("no API results found")
+  }
+  assert.equal(world.apiResults.activityResults.length, 1)
+})
+
 Then("it executes these actions:", function (table) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)

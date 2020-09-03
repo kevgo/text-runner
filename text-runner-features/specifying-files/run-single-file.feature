@@ -23,3 +23,9 @@ Feature: running a single MarkDown file
     Then the test fails with:
       | ERROR MESSAGE | file or directory does not exist: zonk.md |
       | EXIT CODE     | 1                                         |
+
+  Scenario: testing a single file via the API
+    When calling "textRunner.runCommand({fileGlob: '2.md', sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME |
+      | 2.md     |

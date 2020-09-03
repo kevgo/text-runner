@@ -10,13 +10,21 @@ Feature: excluding files
       """
       exclude: 'foo'
       """
-    When running Text-Runner
-    Then it runs only the tests in:
-      | readme.md |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME  |
       | bar/2.md  |
+      | readme.md |
 
   Scenario: excluding via CLI
     When running "text-run --exclude foo"
     Then it runs only the tests in:
       | readme.md |
       | bar/2.md  |
+
+  Scenario: excluding via API
+    When calling "textRunner.runCommand({exclude: 'foo', sourceDir, formatterName})"
+    Then it executes these actions:
+      | FILENAME  |
+      | bar/2.md  |
+      | readme.md |

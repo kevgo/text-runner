@@ -59,19 +59,20 @@ export async function runActivity(
     }
   } catch (e) {
     statsCounter.error()
-    if (isUserError(e)) {
-      formatter.failed(activity, nameRefiner.finalName(), e, outputCollector.toString())
-      const activityResult: ActivityResult = {
-        activity,
-        error: new UserError(e.message),
-        output: outputCollector.toString(),
-        finalName: stripAnsi(nameRefiner.finalName()),
-        status: "failed",
-      }
-      return new ExecuteResult([activityResult], 1)
+    if (!isUserError(e)) {
+      // here we have a developer error like for example ReferenceError
+      throw e
     }
-    // here we have a developer error like for example TypeError
-    throw e
+    formatter.failed(activity, nameRefiner.finalName(), e, outputCollector.toString())
+    const error = e.name === "UserError" ? e : new UserError(e.message)
+    const activityResult: ActivityResult = {
+      activity,
+      error,
+      output: outputCollector.toString(),
+      finalName: stripAnsi(nameRefiner.finalName()),
+      status: "failed",
+    }
+    return new ExecuteResult([activityResult], 1)
   }
   const activityResult: ActivityResult = {
     activity,

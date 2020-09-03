@@ -31,7 +31,7 @@ Feature: checking embedded Markdown images
     When trying to call Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
-      | 1.md     | 1    | check-image | image zonk.gif | failed | User Error | image zonk.gif does not exist |
+      | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
 
   @online
   Scenario: existing remote Markdown image
@@ -63,4 +63,4 @@ Feature: checking embedded Markdown images
     When trying to call Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
-      | 1.md     | 1    | check-image | Check image | failed | User Error | image tag without source |
+      | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

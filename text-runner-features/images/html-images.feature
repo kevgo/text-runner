@@ -6,11 +6,10 @@ Feature: checking embedded HTML images
       <img src="images/watermelon.gif">
       """
     And the workspace contains an image "images/watermelon.gif"
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                        |
-      | LINE     | 1                           |
-      | MESSAGE  | image images/watermelon.gif |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY                    |
+      | 1.md     | 1    | check-image | image images/watermelon.gif |
 
 
   Scenario: existing local HTML image with absolute path
@@ -19,11 +18,10 @@ Feature: checking embedded HTML images
       <img src="/documentation/images/watermelon.gif">
       """
     And the workspace contains an image "documentation/images/watermelon.gif"
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | documentation/1.md                         |
-      | LINE     | 1                                          |
-      | MESSAGE  | image /documentation/images/watermelon.gif |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME           | LINE | ACTION      | ACTIVITY                                   |
+      | documentation/1.md | 1    | check-image | image /documentation/images/watermelon.gif |
 
 
   Scenario: existing local HTML image on page in subfolder
@@ -32,11 +30,10 @@ Feature: checking embedded HTML images
       <img src="watermelon.gif">
       """
     And the workspace contains an image "documentation/watermelon.gif"
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | documentation/1.md   |
-      | LINE     | 1                    |
-      | MESSAGE  | image watermelon.gif |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME           | LINE | ACTION      | ACTIVITY             |
+      | documentation/1.md | 1    | check-image | image watermelon.gif |
 
 
   Scenario: non-existing local HTML image
@@ -44,12 +41,10 @@ Feature: checking embedded HTML images
       """
       <img src="zonk.gif">
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                          |
-      | LINE          | 1                             |
-      | ERROR MESSAGE | image zonk.gif does not exist |
-      | EXIT CODE     | 1                             |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
+      | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
 
 
   @online
@@ -58,11 +53,10 @@ Feature: checking embedded HTML images
       """
       <img src="http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                                                    |
-      | LINE     | 1                                                                                       |
-      | MESSAGE  | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY                                                                                |
+      | 1.md     | 1    | check-image | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
 
   @online
@@ -71,12 +65,10 @@ Feature: checking embedded HTML images
       """
       <img src="http://google.com/onetuhoenzonk.png">
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                     |
-      | LINE     | 1                                                        |
-      | MESSAGE  | image http://google.com/onetuhoenzonk.png                |
-      | OUTPUT   | image http://google.com/onetuhoenzonk.png does not exist |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
+      | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
 
 
   Scenario: HTML image tag without source
@@ -84,9 +76,7 @@ Feature: checking embedded HTML images
       """
       <img src="">
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                     |
-      | LINE          | 1                        |
-      | ERROR MESSAGE | image tag without source |
-      | EXIT CODE     | 1                        |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
+      | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

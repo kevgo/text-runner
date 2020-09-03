@@ -20,11 +20,10 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                   |
-      | LINE     | 3                                                      |
-      | MESSAGE  | check npm package name in npm i -g my_enormous_package |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY                                               |
+      | 1.md     | 3    | npm/install | check npm package name in npm i -g my_enormous_package |
 
   Scenario: correct package name inside pre block
     Given the source code contains a file "1.md" with content:
@@ -35,22 +34,20 @@ Feature: verifying NPM installation instructions
       $ npm i -g my_enormous_package
       </pre>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                   |
-      | LINE     | 3                                                      |
-      | MESSAGE  | check npm package name in npm i -g my_enormous_package |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY                                               |
+      | 1.md     | 3    | npm/install | check npm package name in npm i -g my_enormous_package |
 
   Scenario: correct package name with single-fenced code block
     Given the source code contains a file "1.md" with content:
       """
       installation: <a type="npm/install">`npm i -g my_enormous_package`</a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                   |
-      | LINE     | 1                                                      |
-      | MESSAGE  | check npm package name in npm i -g my_enormous_package |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | ACTIVITY                                               |
+      | 1.md     | 1    | npm/install | check npm package name in npm i -g my_enormous_package |
 
   Scenario: mismatching package name
     Given the source code contains a file "1.md" with content:
@@ -64,12 +61,10 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                                                                                                |
-      | LINE          | 3                                                                                                   |
-      | ERROR MESSAGE | installation instructions npm i -g zonk don't contain expected npm package name my_enormous_package |
-      | EXIT CODE     | 1                                                                                                   |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                                                       |
+      | 1.md     | 3    | npm/install | failed | UserError  | installation instructions npm i -g zonk don't contain expected npm package name my_enormous_package |
 
   Scenario: missing installation instructions
     Given the source code contains a file "1.md" with content:
@@ -79,12 +74,10 @@ Feature: verifying NPM installation instructions
       <a type="npm/install">
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                               |
-      | LINE          | 3                                  |
-      | ERROR MESSAGE | no installation instructions found |
-      | EXIT CODE     | 1                                  |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                      |
+      | 1.md     | 3    | npm/install | failed | UserError  | no installation instructions found |
 
   Scenario: missing package name
     Given the source code contains a file "1.md" with content:
@@ -98,9 +91,7 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                                                                                        |
-      | LINE          | 3                                                                                           |
-      | ERROR MESSAGE | installation instructions npm i don't contain expected npm package name my_enormous_package |
-      | EXIT CODE     | 1                                                                                           |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                                               |
+      | 1.md     | 3    | npm/install | failed | UserError  | installation instructions npm i don't contain expected npm package name my_enormous_package |

@@ -7,11 +7,11 @@ Feature: Execute regions of semantic Markdown
       This is a <a type="test">test</a>.
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                            |
-      | LINE     | 1                               |
-      | MESSAGE  | execute Markdown in Text-Runner |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION                    | ACTIVITY                        |
+      | 1.md     | 1    | extension/runnable-region | execute Markdown in Text-Runner |
+      | 1.md     | 2    | test                      | Test                            |
 
   Scenario: missing content
     Given the source code contains a file "1.md" with content:
@@ -19,12 +19,10 @@ Feature: Execute regions of semantic Markdown
       <a type="extension/runnable-region">
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                    |
-      | LINE          | 1                       |
-      | ERROR MESSAGE | no content to run found |
-      | EXIT CODE     | 1                       |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION                    | STATUS | ERROR TYPE | ERROR MESSAGE           |
+      | 1.md     | 1    | extension/runnable-region | failed | UserError  | no content to run found |
 
   Scenario: error in content
     Given the source code contains a file "1.md" with content:
@@ -33,9 +31,8 @@ Feature: Execute regions of semantic Markdown
       This will blow up: <a type="zonk"></a>
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                 |
-      | LINE          | 2                    |
-      | ERROR MESSAGE | unknown action: zonk |
-      | EXIT CODE     | 1                    |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION                    | STATUS  | ERROR TYPE | ERROR MESSAGE        |
+      | 1.md     | 1    | extension/runnable-region | success |            |                      |
+      | 1.md     | 2    | zonk                      | failed  | UserError  | unknown action: zonk |

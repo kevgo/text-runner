@@ -40,28 +40,28 @@ Then("it executes these actions:", function (table) {
   const want: ExecuteResultTable[] = []
   for (const line of tableHashes) {
     const result: ExecuteResultTable = {}
-    if (line.FILENAME) {
+    if (line.FILENAME != null) {
       result.filename = line.FILENAME
     }
-    if (line.LINE) {
+    if (line.LINE != null) {
       result.line = parseInt(line.LINE, 10)
     }
-    if (line.ACTION) {
+    if (line.ACTION != null) {
       result.action = line.ACTION
     }
-    if (line.OUTPUT) {
+    if (line.OUTPUT != null) {
       result.output = line.OUTPUT
     }
-    if (line.ACTIVITY) {
+    if (line.ACTIVITY != null) {
       result.activity = line.ACTIVITY
     }
-    if (line.STATUS) {
+    if (line.STATUS != null) {
       result.status = line.STATUS
     }
-    if (line["ERROR TYPE"]) {
-      result.errorType = line["ERROR TYPE"]
+    if (line["ERROR TYPE"] != null) {
+      result.errorType = line["ERROR TYPE"] || ""
     }
-    if (line["ERROR MESSAGE"]) {
+    if (line["ERROR MESSAGE"] != null) {
       result.errorMessage = line["ERROR MESSAGE"]
     }
     want.push(result)
@@ -70,28 +70,28 @@ Then("it executes these actions:", function (table) {
   const wanted = want[0]
   for (const line of apiResults?.activityResults || []) {
     const result: ExecuteResultTable = {}
-    if (wanted.filename) {
+    if (wanted.filename != null) {
       result.filename = line.activity.file.unixified()
     }
-    if (wanted.line) {
+    if (wanted.line != null) {
       result.line = line.activity.line
     }
-    if (wanted.action) {
+    if (wanted.action != null) {
       result.action = line.activity.actionName
     }
-    if (wanted.output) {
+    if (wanted.output != null) {
       result.output = line.output?.trim() || ""
     }
-    if (wanted.activity) {
+    if (wanted.activity != null) {
       result.activity = line.finalName
     }
-    if (wanted.status) {
+    if (wanted.status != null) {
       result.status = line.status
     }
-    if (wanted.errorType) {
-      result.errorType = line.error?.name
+    if (wanted.errorType != null) {
+      result.errorType = line.error?.name || ""
     }
-    if (wanted.errorMessage) {
+    if (wanted.errorMessage != null) {
       result.errorMessage = stripAnsi(line.error?.message || "")
     }
     have.push(result)

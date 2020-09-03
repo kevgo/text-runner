@@ -68,7 +68,7 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
   const unknownLink = new UnknownLink(decodeURI(target))
   const absoluteLink = unknownLink.absolutify(new AbsoluteFilePath(action.file), action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
-  const fullPath = path.join(action.configuration.sourceDir, linkedFile.platformified())
+  const fullPath = path.join(action.configuration.sourceDir, linkedFile.unixified())
 
   // We only check for directories if no defaultFile is set.
   // Otherwise links to folders point to the default file.
@@ -76,7 +76,7 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
     try {
       const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
-        action.name(`link to local directory ${color.cyan(linkedFile.platformified())}`)
+        action.name(`link to local directory ${color.cyan(linkedFile.unixified())}`)
         return
       }
     } catch (e) {
@@ -84,11 +84,11 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
     }
   }
 
-  action.name(`link to local file ${color.cyan(linkedFile.platformified())}`)
+  action.name(`link to local file ${color.cyan(linkedFile.unixified())}`)
   try {
     await fs.stat(fullPath)
   } catch (err) {
-    throw new Error(`link to non-existing local file ${color.bold(linkedFile.platformified())}`)
+    throw new Error(`link to non-existing local file ${color.bold(linkedFile.unixified())}`)
   }
 }
 
@@ -113,20 +113,20 @@ async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, ta
   if (!action.linkTargets.hasFile(filePath)) {
     throw new Error(
       `link to anchor #${color.cyan(anchorName)} in non-existing file ${color.cyan(
-        removeLeadingSlash(filePath.platformified())
+        removeLeadingSlash(filePath.unixified())
       )}`
     )
   }
 
   if (!action.linkTargets.hasAnchor(filePath, anchorName)) {
     throw new Error(
-      `link to non-existing anchor ${color.bold("#" + anchorName)} in ${color.bold(filePath.platformified())}`
+      `link to non-existing anchor ${color.bold("#" + anchorName)} in ${color.bold(filePath.unixified())}`
     )
   }
 
   if (action.linkTargets.anchorType(filePath, anchorName) === "heading") {
-    action.name(`link to heading ${color.cyan(filePath.platformified() + "#" + anchorName)}`)
+    action.name(`link to heading ${color.cyan(filePath.unixified() + "#" + anchorName)}`)
   } else {
-    action.name(`link to ${color.cyan(filePath.platformified())}#${color.cyan(anchorName)}`)
+    action.name(`link to ${color.cyan(filePath.unixified())}#${color.cyan(anchorName)}`)
   }
 }

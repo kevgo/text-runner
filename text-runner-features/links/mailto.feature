@@ -6,8 +6,7 @@ Feature: ignoring mailto links
       """
       A [working external link](mailto:foo@acme.com)
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                  |
-      | LINE     | 1                                     |
-      | MESSAGE  | skipping: link to mailto:foo@acme.com |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                    |
+      | 1.md     | 1    | check-link | link to mailto:foo@acme.com |

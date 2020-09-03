@@ -135,7 +135,7 @@ Then("the error provides the guidance:", function (expectedText) {
   }
   assert.equal(failedActivities[0]?.name, "UserError")
   const userError = failedActivities[0] as textRunner.UserError
-  assert.equal(userError.guidance.trim(), expectedText.trim())
+  assert.equal(stripAnsi(userError.guidance.trim()), expectedText.trim())
 })
 
 Then("the API exception provides the guidance:", function (expectedText) {

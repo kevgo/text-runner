@@ -127,7 +127,7 @@ Then("the error provides the guidance:", function (expectedText) {
   }
   assert.equal(failedActivities[0]?.name, "UserError")
   const userError = failedActivities[0] as textRunner.UserError
-  assert.equal(expectedText.trim(), userError.guidance.trim())
+  assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
 Then("the API exception provides the guidance:", function (expectedText) {
@@ -137,7 +137,7 @@ Then("the API exception provides the guidance:", function (expectedText) {
   }
   assert.equal(world.apiException.name, "UserError")
   const userError = world.apiException as textRunner.UserError
-  assert.equal(expectedText.trim(), userError.guidance.trim())
+  assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
 Then("it prints usage instructions", function () {

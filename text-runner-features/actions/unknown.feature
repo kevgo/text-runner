@@ -11,7 +11,7 @@ Feature: unknown action types
     Then it executes these actions:
       | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        |
       | 1.md     | 1    | failed | UserError  | unknown action: zonk |
-    And the error provides the guidance:
+    And the API exception provides the guidance:
       """
       No custom actions defined.
 

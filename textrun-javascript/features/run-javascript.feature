@@ -6,12 +6,10 @@ Feature: running inline regions of Javascript
       <a type="javascript/runnable">
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                     |
-      | LINE          | 1                        |
-      | ERROR MESSAGE | no JavaScript code found |
-      | EXIT CODE     | 1                        |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE            |
+      | 1.md     | 1    | javascript/runnable | failed | UserError  | no JavaScript code found |
 
 
   Scenario: multiple code blocks
@@ -20,16 +18,15 @@ Feature: running inline regions of Javascript
       <a type="javascript/runnable">
 
       ```
-      console.log('one');
+      let a = 1;
       ```
 
       ```
-      console.log('two');
+      let a = 2;
       ```
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md           |
-      | LINE     | 1              |
-      | MESSAGE  | run JavaScript |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION              | ACTIVITY       |
+      | 1.md     | 1    | javascript/runnable | run JavaScript |

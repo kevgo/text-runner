@@ -6,12 +6,10 @@ Feature: validating Javascript
       <a type="javascript/non-runnable">
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                     |
-      | LINE          | 1                        |
-      | ERROR MESSAGE | no JavaScript code found |
-      | EXIT CODE     | 1                        |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
+      | 1.md     | 1    | javascript/non-runnable | failed | UserError  | no JavaScript code found |
 
   Scenario: invalid Javascript
     Given the source code contains a file "1.md" with content:
@@ -20,9 +18,7 @@ Feature: validating Javascript
       'missing quotes at end
       </pre>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                                            |
-      | LINE          | 1                                               |
-      | ERROR MESSAGE | invalid Javascript: Invalid or unexpected token |
-      | EXIT CODE     | 1                                               |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE                                   |
+      | 1.md     | 1    | javascript/non-runnable | failed | UserError  | invalid Javascript: Invalid or unexpected token |

@@ -10,11 +10,10 @@ Feature: active UL tags
         <li>one</li>
       </ul>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |
 
   Scenario: unordered list item tag
     Given the source code contains a file "1.md" with content:
@@ -23,8 +22,7 @@ Feature: active UL tags
       <li type="HelloWorld">one</li>
       </ul>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 2           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 2    | hello-world |

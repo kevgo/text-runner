@@ -8,22 +8,7 @@ Feature: HR tags
       """
       <hr type="HelloWorld">
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
-
-  Scenario: inactive HR tag
-    Given the source code contains a file "1.md" with content:
-      """
-      <hr>
-      """
-    When running Text-Runner
-
-  Scenario: inactive HR Markdown tag
-    Given the source code contains a file "1.md" with content:
-      """
-      ---
-      """
-    When running Text-Runner
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |

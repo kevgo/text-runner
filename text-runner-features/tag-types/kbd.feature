@@ -8,15 +8,7 @@ Feature: KBD tags
       """
       <kbd type="HelloWorld">foo</kbd>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
-
-  Scenario: inactive HR tag
-    Given the source code contains a file "1.md" with content:
-      """
-      <kbd>foo</kbd>
-      """
-    When running Text-Runner
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |

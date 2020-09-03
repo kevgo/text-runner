@@ -2,7 +2,7 @@ import * as assertNoDiff from "assert-no-diff"
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { ActionArgs } from "text-runner"
+import { ActionArgs, UserError } from "text-runner"
 
 export async function existingFile(action: ActionArgs) {
   const filePath = action.region.textInNodeOfType("strong", "em")
@@ -16,7 +16,10 @@ export async function existingFile(action: ActionArgs) {
   } catch (e) {
     if (e.code === "ENOENT") {
       const files = await fs.readdir(process.cwd())
-      throw new Error(`file not found: ${filePath}\n\nfolder "${process.cwd()}" has these files: ${files.join(", ")}`)
+      throw new UserError(
+        `file not found: ${filePath}`,
+        `folder "${process.cwd()}" has these files: ${files.join(", ")}`
+      )
     } else {
       throw e
     }

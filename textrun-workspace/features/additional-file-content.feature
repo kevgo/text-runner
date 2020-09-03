@@ -6,11 +6,11 @@ Feature: Appending content to existing workspace files
       Create a file <a type="workspace/new-file">**foo/bar** with content `hello`</a>.
       Now append to file <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | directory_changer.md   |
-      | LINE     | 2                      |
-      | MESSAGE  | append to file foo/bar |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME             | LINE | ACTION                            | ACTIVITY               |
+      | directory_changer.md | 1    | workspace/new-file                | create file foo/bar    |
+      | directory_changer.md | 2    | workspace/additional-file-content | append to file foo/bar |
     And the test directory now contains a file "foo/bar" with content:
       """
       hello appended content

@@ -5,15 +5,15 @@ Feature: creating files with content
       """
       creating a file with name <a type="workspace/new-file">_one.txt_ and content `Hello world!`</a>.
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | creator.md          |
-      | LINE     | 1                   |
-      | MESSAGE  | create file one.txt |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION             | ACTIVITY            |
+      | creator.md | 1    | workspace/new-file | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
       """
       Hello world!
       """
+
 
   Scenario: providing the filename as bold text and the content triple-quoted
     Given the source code contains a file "creator.md" with content:
@@ -25,39 +25,37 @@ Feature: creating files with content
       ```
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | creator.md          |
-      | LINE     | 1                   |
-      | MESSAGE  | create file one.txt |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION             | ACTIVITY            |
+      | creator.md | 1    | workspace/new-file | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
       """
       Hello world!
       """
+
 
   Scenario: no file path given
     Given the source code contains a file "creator.md" with content:
       """
       <a type="workspace/new-file">`Hello world!`</a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | creator.md                                             |
-      | LINE          | 1                                                      |
-      | ERROR MESSAGE | Found no nodes of type 'em/strong/em_open/strong_open' |
-      | EXIT CODE     | 1                                                      |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' |
+
 
   Scenario: no content block given
     Given the source code contains a file "creator.md" with content:
       """
       <a type="workspace/new-file">__one.txt__</a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | creator.md                                               |
-      | LINE          | 1                                                        |
-      | ERROR MESSAGE | Found no nodes of type 'fence/code/fence_open/code_open' |
-      | EXIT CODE     | 1                                                        |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' |
+
 
   Scenario: two file paths given
     Given the source code contains a file "creator.md" with content:
@@ -72,12 +70,11 @@ Feature: creating files with content
       ```
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | creator.md                                            |
-      | LINE          | 1                                                     |
-      | ERROR MESSAGE | Found 2 nodes of type 'em/strong/em_open/strong_open' |
-      | EXIT CODE     | 1                                                     |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' |
+
 
   Scenario: two content blocks given
     Given the source code contains a file "creator.md" with content:
@@ -96,9 +93,7 @@ Feature: creating files with content
 
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | creator.md                                             |
-      | LINE          | 1                                                      |
-      | ERROR MESSAGE | Found 2 nodes of type 'fence/code/fence_open/code_open |
-      | EXIT CODE     | 1                                                      |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' |

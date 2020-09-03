@@ -8,11 +8,10 @@ Feature: active anchor tags
       """
       <a type="HelloWorld">hello</a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |
 
   Scenario: anchor block
     Given the source code contains a file "1.md" with content:
@@ -21,8 +20,7 @@ Feature: active anchor tags
       hello
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |

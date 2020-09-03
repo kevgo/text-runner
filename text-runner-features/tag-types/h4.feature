@@ -8,8 +8,7 @@ Feature: active h4 tags
       """
       <h4 type="HelloWorld">hello</h4>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |

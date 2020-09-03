@@ -10,11 +10,10 @@ Feature: active table tags
         <tr> <td></td> </tr>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |
 
   Scenario: HTML table with THEAD and TBODY
     Given the source code contains a file "1.md" with content:
@@ -28,11 +27,10 @@ Feature: active table tags
         </tbody>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 1           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 1    | hello-world |
 
   Scenario: active TR tag in THEAD
     Given the source code contains a file "1.md" with content:
@@ -44,11 +42,10 @@ Feature: active table tags
         </thead>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 3           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 3    | hello-world |
 
   Scenario: active TR tag in TBODY
     Given the source code contains a file "1.md" with content:
@@ -62,11 +59,10 @@ Feature: active table tags
         </tbody>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 6           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 6    | hello-world |
 
   Scenario: row tag in simple HTML table
     Given the source code contains a file "1.md" with content:
@@ -75,11 +71,10 @@ Feature: active table tags
         <tr type="HelloWorld"> <td></td> </tr>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 2           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 2    | hello-world |
 
   Scenario: HTML table cell tag
     Given the source code contains a file "1.md" with content:
@@ -90,11 +85,10 @@ Feature: active table tags
         </tr>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 3           |
-      | MESSAGE  | Hello world |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 3    | hello-world |
 
   Scenario: HTML table header tag
     Given the source code contains a file "1.md" with content:
@@ -105,19 +99,7 @@ Feature: active table tags
         </tr>
       </table>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md        |
-      | LINE     | 3           |
-      | MESSAGE  | Hello world |
-
-  Scenario: Markdown table
-    Given the source code contains a file "1.md" with content:
-      """
-     | Keyboard shortcut                                    | Effect                        |
-     | ---------------------------------------------------- | ----------------------------- |
-     | <kbd>command</kbd>+<kbd>control</kbd>+<kbd>↓</kbd>  | Toggle between .h/.m file     |
-     | <kbd>command</kbd>+<kbd>shift</kbd>+<kbd>O</kbd>     | Open Quickly (fuzzy find)     |
-
-      """
-    When running Text-Runner
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION      |
+      | 1.md     | 3    | hello-world |

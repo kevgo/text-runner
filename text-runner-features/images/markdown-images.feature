@@ -1,6 +1,6 @@
-@smoke
 Feature: checking embedded Markdown images
 
+  @smoke
   Scenario: existing local Markdown image with relative path
     Given the source code contains a file "1.md" with content:
       """
@@ -12,6 +12,7 @@ Feature: checking embedded Markdown images
       | FILENAME | LINE | ACTION      | ACTIVITY             |
       | 1.md     | 1    | check-image | image watermelon.gif |
 
+  @smoke
   Scenario: existing local Markdown image with absolute path
     Given the source code contains a file "documentation/1.md" with content:
       """
@@ -23,6 +24,7 @@ Feature: checking embedded Markdown images
       | FILENAME           | LINE | ACTION      | ACTIVITY                                   |
       | documentation/1.md | 1    | check-image | image /documentation/images/watermelon.gif |
 
+  @smoke
   Scenario: non-existing local Markdown image
     Given the source code contains a file "1.md" with content:
       """
@@ -55,6 +57,7 @@ Feature: checking embedded Markdown images
       | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | User Error | image http://google.com/onetuhoenzonk.png does not exist |
 
+  @smoke
   Scenario: Markdown image tag without source
     Given the source code contains a file "1.md" with content:
       """

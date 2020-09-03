@@ -16,7 +16,10 @@ export async function existingFile(action: ActionArgs) {
   } catch (e) {
     if (e.code === "ENOENT") {
       const files = await fs.readdir(process.cwd())
-      throw new UserError(`file not found: ${filePath}`, `folder "${process.cwd()}" has these files: ${files.join(", ")}`)
+      throw new UserError(
+        `file not found: ${filePath}`,
+        `folder "${process.cwd()}" has these files: ${files.join(", ")}`
+      )
     } else {
       throw e
     }

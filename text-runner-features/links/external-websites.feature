@@ -6,11 +6,10 @@ Feature: verifying links to websites
       """
       A [working external link](http://google.com)
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                       |
-      | LINE     | 1                                          |
-      | MESSAGE  | link to external website http://google.com |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                                   |
+      | 1.md     | 1    | check-link | link to external website http://google.com |
 
 
   Scenario: html link to existing website
@@ -18,11 +17,10 @@ Feature: verifying links to websites
       """
       A <a href="http://google.com">working external link</a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                       |
-      | LINE     | 1                                          |
-      | MESSAGE  | link to external website http://google.com |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                                   |
+      | 1.md     | 1    | check-link | link to external website http://google.com |
 
 
   Scenario: markdown link to non-existing website
@@ -30,12 +28,10 @@ Feature: verifying links to websites
       """
       A [broken external link](http://oeanuthaoenuthoaeuzonk.com)
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                       |
-      | LINE     | 1                                                          |
-      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com |
-      | OUTPUT   | external website doesn't exist                             |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                                                   | STATUS | ERROR TYPE | ERROR MESSAGE                  |
+      | 1.md     | 1    | check-link | link to external website http://oeanuthaoenuthoaeuzonk.com | failed | UserError  | external website doesn't exist |
 
 
   Scenario: HTML link to non-existing website
@@ -43,9 +39,7 @@ Feature: verifying links to websites
       """
       A <a href="http://oeanuthaoenuthoaeuzonk.com">broken external link</a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                       |
-      | LINE     | 1                                                          |
-      | MESSAGE  | link to external website http://oeanuthaoenuthoaeuzonk.com |
-      | OUTPUT   | external website doesn't exist                             |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY                                                   | STATUS | ERROR TYPE | ERROR MESSAGE                  |
+      | 1.md     | 1    | check-link | link to external website http://oeanuthaoenuthoaeuzonk.com | failed | UserError  | external website doesn't exist |

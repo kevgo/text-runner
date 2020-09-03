@@ -1,18 +1,11 @@
 Feature: recognize empty links
 
-  Scenario Outline: empty link
+  Scenario: empty link
     Given the source code contains a file "1.md" with content:
       """
       An [empty link to an anchor]()
       """
-    When trying to run <COMMAND>
-    Then the test fails with:
-      | FILENAME      | 1.md                |
-      | LINE          | 1                   |
-      | ERROR MESSAGE | link without target |
-      | EXIT CODE     | 1                   |
-
-    Examples:
-      | COMMAND           |
-      | Text-Runner       |
-      | "text-run static" |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION     | ACTIVITY   | STATUS | ERROR TYPE | ERROR MESSAGE       |
+      | 1.md     | 1    | check-link | Check link | failed | UserError  | link without target |

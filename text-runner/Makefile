@@ -15,7 +15,7 @@ cuke-ci:  # runs the feature specs on CI
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8
 
 cuke-online: build  # runs the feature specs that don't need an online connection
-	echo running Text-Runner --online feature specs ...
+	echo running Text-Runner online feature specs ...
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs:  # verify documentation

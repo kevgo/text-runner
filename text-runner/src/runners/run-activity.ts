@@ -72,7 +72,7 @@ export async function runActivity(
       finalName: stripAnsi(nameRefiner.finalName()),
       status: "failed",
     }
-    return new ExecuteResult([activityResult], 1)
+    return new ExecuteResult([activityResult], 1, [])
   }
   const activityResult: ActivityResult = {
     activity,
@@ -81,7 +81,7 @@ export async function runActivity(
     finalName: stripAnsi(nameRefiner.finalName()),
     status: activityResultStatus,
   }
-  return new ExecuteResult([activityResult], 0)
+  return new ExecuteResult([activityResult], 0, [])
 }
 
 async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {

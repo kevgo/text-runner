@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import { extractActivities } from "../activity-list/extract-activities"
 import { instantiateFormatter } from "../formatters/instantiate"
 import { getFileNames } from "../filesystem/get-filenames"
@@ -26,8 +25,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     // step 3: find files
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
-      console.log(color.magenta("no Markdown files found"))
-      return ExecuteResult.empty()
+      return ExecuteResult.warning("no Markdown files found")
     }
     const stats = new StatsCounter(filenames.length)
 
@@ -40,8 +38,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     // step 6: extract activities
     const activities = extractActivities(ASTs, config.regionMarker)
     if (activities.length === 0) {
-      console.log(color.magenta("no activities found"))
-      return ExecuteResult.empty()
+      return ExecuteResult.warning("no activities found")
     }
 
     // step 7: find actions

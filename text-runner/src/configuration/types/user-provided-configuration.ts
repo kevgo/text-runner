@@ -20,6 +20,7 @@ export interface UserProvidedConfiguration {
   workspace?: string // path of the workspace to use
 }
 
+/** switches used for the "debug" command */
 interface DebugSwitches {
   activities: boolean
   ast: boolean

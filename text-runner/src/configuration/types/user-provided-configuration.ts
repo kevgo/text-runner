@@ -8,6 +8,7 @@ import { FormatterName } from "../../formatters/formatter"
 export interface UserProvidedConfiguration {
   regionMarker?: string
   configFileName?: string // name of the config file to use
+  debugSwitches?: DebugSwitches
   defaultFile?: string
   exclude?: string | string[]
   files?: string // files to test
@@ -17,4 +18,12 @@ export interface UserProvidedConfiguration {
   sourceDir?: string // the root directory of the source code to test
   useSystemTempDirectory?: boolean
   workspace?: string // path of the workspace to use
+}
+
+interface DebugSwitches {
+  activities: boolean
+  ast: boolean
+  images: boolean
+  links: boolean
+  linkTargets: boolean
 }

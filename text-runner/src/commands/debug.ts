@@ -11,6 +11,25 @@ import { loadConfiguration } from "../configuration/load-configuration"
 export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)
 
+  if (Object.values(cmdlineArgs.debugSwitches || {}).filter((v) => v).length === 0) {
+    console.log(`
+Please tell me what to debug. I can print these things:
+
+--activities: active regions
+--ast: AST nodes
+--images: embedded images
+--links: embedded links
+--linkTargets: linkable elements
+
+Example: text-run debug --images foo.md
+`)
+    process.exit(1)
+  }
+  if (cmdlineArgs.files === "") {
+    console.log("Please tell me which file to debug")
+    process.exit(1)
+  }
+  process.exit(2)
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
     return ExecuteResult.empty()

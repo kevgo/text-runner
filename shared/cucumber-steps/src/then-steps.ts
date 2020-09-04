@@ -200,6 +200,15 @@ Then("it prints:", function (expectedText) {
   }
 })
 
+Then("it prints this text:", function (expectedText) {
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process output found")
+  }
+  const output = stripAnsi(world.process.output.fullText().trim())
+  assert.equal(output, expectedText.trim())
+})
+
 Then("it runs {int} test", function (count) {
   const world = this as TRWorld
   if (!world.process) {

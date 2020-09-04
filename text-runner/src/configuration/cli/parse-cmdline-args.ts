@@ -45,6 +45,13 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
+    debugSwitches: {
+      activities: cliArgs.activities,
+      ast: cliArgs.ast,
+      images: cliArgs.images,
+      links: cliArgs.links,
+      linkTargets: cliArgs.linkTargets,
+    },
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"

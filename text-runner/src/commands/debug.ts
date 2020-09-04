@@ -53,6 +53,18 @@ Example: text-run debug --${type} foo.md`
   return ExecuteResult.empty()
 }
 
+function debugActivities(ASTs: AstNodeList[], config: UserProvidedConfiguration) {
+  console.log("\nACTIVITIES:")
+  const activities = extractActivities(ASTs, config.regionMarker || "type")
+  if (activities.length === 0) {
+    console.log("(none)")
+  } else {
+    for (const activity of activities) {
+      console.log(`${activity.file.platformified()}:${activity.line}  ${activity.actionName}`)
+    }
+  }
+}
+
 function debugASTNodes(ASTs: AstNodeList[]) {
   console.log("AST NODES:")
   for (const AST of ASTs) {
@@ -71,18 +83,6 @@ function debugImages(ASTs: AstNodeList[]) {
   }
   for (const image of images) {
     console.log(image)
-  }
-}
-
-function debugActivities(ASTs: AstNodeList[], config: UserProvidedConfiguration) {
-  console.log("\nACTIVITIES:")
-  const activities = extractActivities(ASTs, config.regionMarker || "type")
-  if (activities.length === 0) {
-    console.log("(none)")
-  } else {
-    for (const activity of activities) {
-      console.log(`${activity.file.platformified()}:${activity.line}  ${activity.actionName}`)
-    }
   }
 }
 

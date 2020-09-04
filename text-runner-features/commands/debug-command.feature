@@ -40,7 +40,8 @@ Feature: display the version
       </a>
       """
     When running "text-run debug --activities 1.md"
-    Then it prints:
+    Then it prints this text:
       """
-      AST NODES
+      ACTIVITIES:
+      1.md:1  validate-javascript
       """

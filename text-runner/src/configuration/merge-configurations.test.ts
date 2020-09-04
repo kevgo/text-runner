@@ -21,7 +21,7 @@ suite("mergeConfigurations()", function () {
       exclude: "1.md",
       fileGlob: "**/*.md",
       formatterName: "detailed",
-      offline: false,
+      online: false,
       publications: new Publications(),
       regionMarker: "type",
       sourceDir: "my-source",
@@ -34,12 +34,12 @@ suite("mergeConfigurations()", function () {
   test("complex example", function () {
     const cmdlineArgs: UserProvidedConfiguration = {
       fileGlob: "1.md",
-      offline: false,
+      online: false,
     }
     const configFileData: UserProvidedConfiguration = {
       formatterName: "dot",
       fileGlob: "**/*.md",
-      offline: true,
+      online: true,
     }
     const defaultValues: UserProvidedConfiguration = {
       fileGlob: "*.md",
@@ -48,7 +48,7 @@ suite("mergeConfigurations()", function () {
     assert.deepEqual(result, {
       formatterName: "dot",
       fileGlob: "1.md",
-      offline: false,
+      online: false,
     })
   })
 })

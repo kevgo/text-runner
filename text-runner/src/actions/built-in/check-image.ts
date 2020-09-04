@@ -34,7 +34,7 @@ async function checkLocalImage(imagePath: string, c: Configuration) {
 }
 
 async function checkRemoteImage(url: string, action: ActionArgs) {
-  if (action.configuration.offline) {
+  if (!action.configuration.online) {
     return action.SKIPPING
   }
   try {

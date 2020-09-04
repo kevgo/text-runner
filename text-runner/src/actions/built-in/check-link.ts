@@ -45,7 +45,7 @@ export async function checkLink(action: ActionArgs) {
 }
 
 async function checkExternalLink(target: string, action: ActionArgs) {
-  if (action.configuration.offline) {
+  if (!action.configuration.online) {
     return action.SKIPPING
   }
 

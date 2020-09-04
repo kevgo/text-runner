@@ -44,8 +44,8 @@ Feature: generating a configuration file
       # you can also provide a custom directory path here
       useSystemTempDirectory: false
 
-      # whether to skip tests that require an online connection
-      offline: false
+      # whether to verify online files/links (warning: this makes tests flaky)
+      online: false
       """
 
   Scenario: setup via API
@@ -88,6 +88,6 @@ Feature: generating a configuration file
       # you can also provide a custom directory path here
       useSystemTempDirectory: false
 
-      # whether to skip tests that require an online connection
-      offline: false
+      # whether to verify online files/links (warning: this makes tests flaky)
+      online: false
       """

@@ -15,12 +15,12 @@ cuke-ci:  # runs the feature specs on CI
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8
 
 cuke-online: build  # runs the feature specs that don't need an online connection
-	echo running Text-Runner offline feature specs ...
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
+	echo running Text-Runner online feature specs ...
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs:  # verify documentation
 	echo Text-Runner documentation tests ...
-	${CURDIR}/bin/text-run --format progress --offline
+	${CURDIR}/bin/text-run --format progress
 
 fix:  # runs the fixers
 	echo Text-Runner auto-fixes ...
@@ -36,7 +36,7 @@ lint:  # lints all files in this codebase
 	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 parallel: lint  # runs all tests in parallel
-	${CURDIR}/bin/text-run static --offline --format dot &
+	${CURDIR}/bin/text-run static --format dot &
 	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
 	${CURDIR}/bin/text-run dynamic --format dot
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`

@@ -12,7 +12,7 @@ export interface UserProvidedConfiguration {
   exclude?: string | string[]
   fileGlob?: string // files to test
   formatterName?: FormatterName // name of the formatter to use
-  offline?: boolean
+  online?: boolean
   publications?: Publications
   sourceDir?: string // the root directory of the source code to test
   useSystemTempDirectory?: boolean

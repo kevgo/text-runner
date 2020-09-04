@@ -10,7 +10,7 @@ suite("PathMapper", function () {
   const tests = {
     "foo -b": "/one/two/foo -b",
     "bar README.md": "/three/four/bar README.md",
-    "baz --offline": "baz --offline",
+    "baz --online": "baz --online",
   }
   // the method will be used as a higher-order function in the production code
   const globalizePath = pathMapper.globalizePathFunc()

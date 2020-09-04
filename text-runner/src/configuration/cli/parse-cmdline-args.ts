@@ -36,14 +36,14 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
   }
 
   // parse argv into the result
-  const cliArgs = minimist(argv, { boolean: ["offline"] })
+  const cliArgs = minimist(argv, { boolean: ["online"] })
   let command = cliArgs._[0]
   const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     fileGlob: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
     formatterName: cliArgs.format,
-    offline: cliArgs.offline,
+    online: cliArgs.online,
     workspace: cliArgs.workspace,
   }
 

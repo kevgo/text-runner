@@ -13,7 +13,7 @@ export function loadConfigFile(filename: string): UserProvidedConfiguration {
     exclude: fileData.exclude,
     fileGlob: fileData.files,
     formatterName: fileData.format,
-    offline: fileData.offline,
+    online: fileData.online,
     publications: fileData.publications,
     useSystemTempDirectory: fileData.useSystemTempDirectory,
     workspace: fileData.workspace,

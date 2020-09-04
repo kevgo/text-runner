@@ -38,10 +38,10 @@ suite("parseCmdlineArgs()", function () {
     assert.isUndefined(config.fileGlob)
   })
 
-  test("--offline <file>", function () {
-    const { command, config } = parseCmdlineArgs(["--offline", "documentation/actions/cd.md"])
+  test("--online <file>", function () {
+    const { command, config } = parseCmdlineArgs(["--online", "documentation/actions/cd.md"])
     assert.equal(command, "run")
-    assert.isTrue(config.offline)
+    assert.isTrue(config.online)
     assert.equal(config.fileGlob, "documentation/actions/cd.md")
   })
 

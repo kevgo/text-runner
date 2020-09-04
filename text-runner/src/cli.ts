@@ -65,6 +65,11 @@ async function main() {
       console.log(err.stack)
     }
   }
+  if (result.warnings.length > 0) {
+    for (const warning of result.warnings) {
+      console.log(color.magenta(warning))
+    }
+  }
   await endChildProcesses()
   process.exit(result.errorCount)
 }

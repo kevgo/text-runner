@@ -26,8 +26,7 @@ export async function dynamicCommand(cmdlineArgs: UserProvidedConfiguration): Pr
     // step 3: find files
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
-      console.log(color.magenta("no Markdown files found"))
-      return ExecuteResult.empty()
+      return ExecuteResult.warning("no Markdown files found")
     }
     const stats = new StatsCounter(filenames.length)
 

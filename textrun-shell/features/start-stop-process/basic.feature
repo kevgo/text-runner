@@ -34,19 +34,13 @@ Feature: long-running processes
 
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | run-server.md                             |
-      | LINE     | 1                                         |
-      | MESSAGE  | starting a server process: node server.js |
-    And it signals:
-      | FILENAME | run-server.md                                    |
-      | LINE     | 8                                                |
-      | MESSAGE  | verifying the output of the long-running process |
-    And it signals:
-      | FILENAME | run-server.md                     |
-      | LINE     | 15                                |
-      | MESSAGE  | stopping the long-running process |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME         | LINE | ACTION              | ACTIVITY                                         |
+      | create-server.md | 1    | workspace/new-file  | create file server.js                            |
+      | run-server.md    | 1    | shell/server        | starting a server process: node server.js        |
+      | run-server.md    | 8    | shell/server-output | verifying the output of the long-running process |
+      | run-server.md    | 15   | shell/stop-server   | stopping the long-running process                |
     And there are no child processes running
 
   Scenario: no running process
@@ -58,9 +52,7 @@ Feature: long-running processes
 
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                     |
-      | LINE          | 1                        |
-      | ERROR MESSAGE | No running process found |
-      | EXIT CODE     | 1                        |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION            | STATUS | ERROR TYPE | ERROR MESSAGE            |
+      | 1.md     | 1    | shell/stop-server | failed | UserError  | No running process found |

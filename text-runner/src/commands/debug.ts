@@ -11,7 +11,6 @@ import { loadConfiguration } from "../configuration/load-configuration"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
-import console = require("console")
 
 export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)

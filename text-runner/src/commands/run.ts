@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
-import { instantiateFormatter } from "../configuration/instantiate-formatter"
+import { instantiateFormatter } from "../formatters/instantiate"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"

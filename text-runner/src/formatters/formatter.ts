@@ -1,5 +1,5 @@
-import { Activity } from "../../activity-list/types/activity"
-import { StatsCounter } from "../../runners/helpers/stats-counter"
+import { Activity } from "../activity-list/types/activity"
+import { StatsCounter } from "../runners/helpers/stats-counter"
 
 /**
  * Formatter is the API that formatters have to implement

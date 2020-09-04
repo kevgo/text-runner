@@ -1,7 +1,7 @@
-import { Activity } from "../activity-list/types/activity"
-import { Configuration } from "../configuration/types/configuration"
-import { Formatter } from "./types/formatter"
-import { StatsCounter } from "../runners/helpers/stats-counter"
+import { Activity } from "../../activity-list/types/activity"
+import { Configuration } from "../../configuration/types/configuration"
+import { Formatter } from "../formatter"
+import { StatsCounter } from "../../runners/helpers/stats-counter"
 
 /** A completely minimalistic formatter, prints nothing */
 export class SilentFormatter implements Formatter {

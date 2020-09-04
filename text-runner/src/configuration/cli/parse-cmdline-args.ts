@@ -27,7 +27,7 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
   }
 
   // parse argv into the result
-  const cliArgs = minimist(argv, { boolean: ["online", "activities", "ast", "images", "links", "linkTargets"] })
+  const cliArgs = minimist(argv, { boolean: ["online", "activities", "ast", "images", "links", "link-targets"] })
   let command = cliArgs._[0]
   const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
@@ -41,7 +41,7 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
       ast: cliArgs.ast,
       images: cliArgs.images,
       links: cliArgs.links,
-      linkTargets: cliArgs.linkTargets,
+      linkTargets: cliArgs["link-targets"],
     },
   }
 

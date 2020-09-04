@@ -14,7 +14,7 @@ Feature: display the version
       --ast: AST nodes
       --images: embedded images
       --links: embedded links
-      --linkTargets: linkable elements
+      --link-targets: document anchors to link to
 
       Example: text-run debug --images foo.md
       """
@@ -130,4 +130,16 @@ Feature: display the version
         ],
         document: AstNodeList(0) []
       }
+      """
+
+  Scenario: debugging link targets
+    Given the source code contains a file "1.md" with content:
+      """
+      # hello
+      """
+    When running "text-run debug --link-targets 1.md"
+    Then it prints this text:
+      """
+      LINK TARGETS:
+      1.md [ { name: 'hello', type: 'heading' } ]
       """

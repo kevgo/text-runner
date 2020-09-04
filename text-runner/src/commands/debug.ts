@@ -24,7 +24,7 @@ export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Prom
 --ast: AST nodes
 --images: embedded images
 --links: embedded links
---linkTargets: linkable elements
+--link-targets: linkable elements
 
 Example: text-run debug --images foo.md`
     throw new UserError("missing data type", guidance)
@@ -52,7 +52,7 @@ Example: text-run debug --${type} foo.md`
     case "links":
       debugLinks(ASTs)
       break
-    case "link-targets":
+    case "linkTargets":
       debugLinkTargets(ASTs)
       break
     default:

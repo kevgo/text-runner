@@ -11,7 +11,8 @@ import { loadConfiguration } from "../configuration/load-configuration"
 export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)
 
-  if (Object.values(cmdlineArgs.debugSwitches || {}).filter((v) => v).length === 0) {
+  const typeEntry = Object.entries(cmdlineArgs.debugSwitches || {}).filter((e: any) => e[1])[0]
+  if (!typeEntry) {
     console.log(`
 Please tell me what to debug. I can print these things:
 
@@ -25,8 +26,10 @@ Example: text-run debug --images foo.md
 `)
     process.exit(1)
   }
-  if (cmdlineArgs.files === "") {
-    console.log("Please tell me which file to debug")
+  const type = typeEntry[0]
+  if (!cmdlineArgs.files) {
+    console.log("Please tell me which file to debug\n")
+    console.log(`Example: text-run debug --${type} foo.md`)
     process.exit(1)
   }
   process.exit(2)

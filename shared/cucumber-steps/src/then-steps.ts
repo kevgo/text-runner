@@ -200,7 +200,7 @@ Then("it prints:", function (expectedText) {
   }
 })
 
-Then("it prints this text:", function (expectedText) {
+Then("it prints the text:", function (expectedText) {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no process output found")

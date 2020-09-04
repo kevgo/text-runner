@@ -21,7 +21,7 @@ Feature: display the version
 
   Scenario: subcommand without filename
     When trying to run "text-run debug --ast"
-    Then it prints this text:
+    Then it prints the text:
       """
       no files specified
 
@@ -40,7 +40,7 @@ Feature: display the version
       </a>
       """
     When running "text-run debug --activities 1.md"
-    Then it prints this text:
+    Then it prints the text:
       """
       ACTIVITIES:
       1.md:1  validate-javascript
@@ -54,7 +54,7 @@ Feature: display the version
       </pre>
       """
     When running "text-run debug --ast 1.md"
-    Then it prints this text:
+    Then it prints the text:
       """
       AST NODES:
       1.md:1  fence_open (validate-javascript)
@@ -68,7 +68,7 @@ Feature: display the version
       <img src="watermelon.png">
       """
     When running "text-run debug --images 1.md"
-    Then it prints this text:
+    Then it prints the text:
       """
       IMAGES:
       {
@@ -95,7 +95,7 @@ Feature: display the version
       [another document](2.md)
       """
     When running "text-run debug --links 1.md"
-    Then it prints this text:
+    Then it prints the text:
       """
       LINKS:
       {
@@ -138,7 +138,7 @@ Feature: display the version
       # hello
       """
     When running "text-run debug --link-targets 1.md"
-    Then it prints this text:
+    Then it prints the text:
       """
       LINK TARGETS:
       1.md [ { name: 'hello', type: 'heading' } ]

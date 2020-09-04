@@ -90,6 +90,7 @@ function debugImages(ASTs: AstNodeList[]) {
     return
   }
   for (const image of images) {
+    image.document = new AstNodeList()
     console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
@@ -102,6 +103,7 @@ function debugLinks(ASTs: AstNodeList[]) {
     return
   }
   for (const image of links) {
+    image.document = new AstNodeList()
     console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }

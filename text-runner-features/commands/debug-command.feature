@@ -85,16 +85,7 @@ Feature: display the version
             attributes: { src: 'watermelon.png' }
           }
         ],
-        document: AstNodeList(1) [
-          AstNode {
-            type: 'image',
-            tag: 'img',
-            file: AbsoluteFilePath { value: '1.md' },
-            line: 1,
-            content: '',
-            attributes: { src: 'watermelon.png' }
-          }
-        ]
+        document: AstNodeList(0) []
       }
       """
 
@@ -137,47 +128,6 @@ Feature: display the version
             attributes: {}
           }
         ],
-        document: AstNodeList(5) [
-          AstNode {
-            type: 'paragraph_open',
-            tag: 'p',
-            file: AbsoluteFilePath { value: '1.md' },
-            line: 1,
-            content: '',
-            attributes: {}
-          },
-          AstNode {
-            type: 'link_open',
-            tag: 'a',
-            file: AbsoluteFilePath { value: '1.md' },
-            line: 1,
-            content: '',
-            attributes: { href: '2.md' }
-          },
-          AstNode {
-            type: 'text',
-            tag: '',
-            file: AbsoluteFilePath { value: '1.md' },
-            line: 1,
-            content: 'another document',
-            attributes: {}
-          },
-          AstNode {
-            type: 'link_close',
-            tag: '/a',
-            file: AbsoluteFilePath { value: '1.md' },
-            line: 1,
-            content: '',
-            attributes: {}
-          },
-          AstNode {
-            type: 'paragraph_close',
-            tag: '/p',
-            file: AbsoluteFilePath { value: '1.md' },
-            line: 1,
-            content: '',
-            attributes: {}
-          }
-        ]
+        document: AstNodeList(0) []
       }
       """

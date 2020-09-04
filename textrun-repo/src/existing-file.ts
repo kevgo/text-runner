@@ -3,7 +3,7 @@ import * as color from "colorette"
 import * as eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { ActionArgs } from "text-runner"
+import { ActionArgs, UserError } from "text-runner"
 
 export async function existingFile(action: ActionArgs) {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
@@ -30,6 +30,6 @@ export async function existingFile(action: ActionArgs) {
   try {
     assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    throw new Error(`mismatching content in ${color.cyan(color.bold(filePath))}:\n${err.message}`)
+    throw new UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
   }
 }

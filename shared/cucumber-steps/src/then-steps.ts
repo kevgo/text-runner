@@ -129,13 +129,13 @@ Then("it throws:", function (table) {
 
 Then("the error provides the guidance:", function (expectedText) {
   const world = this as TRWorld
-  const failedActivities = world.apiResults.activityResults.map((res) => res.error)
-  if (failedActivities.length === 0) {
+  const errors = world.apiResults.activityResults.map((res) => res.error).filter((e) => e)
+  if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }
-  assert.equal(failedActivities[0]?.name, "UserError")
-  const userError = failedActivities[0] as textRunner.UserError
-  assert.equal(userError.guidance.trim(), expectedText.trim())
+  assert.equal(errors[0]?.name, "UserError")
+  const userError = errors[0] as textRunner.UserError
+  assert.equal(stripAnsi(userError.guidance.trim()), expectedText.trim())
 })
 
 Then("the API exception provides the guidance:", function (expectedText) {

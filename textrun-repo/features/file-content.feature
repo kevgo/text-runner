@@ -15,11 +15,11 @@ Feature: verifying the documented content of a file in the repository
 
       </a>
       """
-    When running Text-Runner in the source directory
-    Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 1                                                   |
-      | MESSAGE  | document content matches source code file hello.txt |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION             | ACTIVITY                                            |
+      | 1.md     | 1    | repo/existing-file | document content matches source code file hello.txt |
+
 
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "1.md" with content:
@@ -33,11 +33,10 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                |
-      | LINE     | 1                                                   |
-      | MESSAGE  | document content matches source code file hello.txt |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION             | ACTIVITY                                            |
+      | 1.md     | 1    | repo/existing-file | document content matches source code file hello.txt |
 
 
   Scenario: file in subfolder
@@ -57,14 +56,14 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | 1.md                                                       |
-      | LINE     | 1                                                          |
-      | MESSAGE  | document content matches source code file docs/greeting.md |
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION             | ACTIVITY                                                   |
+      | 1.md     | 1    | repo/existing-file | document content matches source code file docs/greeting.md |
+      | 1.md     | 3    | check-link         | link to local directory docs                               |
 
   Scenario: file content mismatch
-    Given the source code contains a file "01.md" with content:
+    Given the source code contains a file "1.md" with content:
       """
       <a type="repo/existing-file">
 
@@ -75,12 +74,16 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                             |
-      | LINE          | 1                                |
-      | ERROR MESSAGE | mismatching content in hello.txt |
-      | EXIT CODE     | 1                                |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                    |
+      | 1.md     | 1    | repo/existing-file | failed | UserError  | mismatching content in hello.txt |
+    And the error provides the guidance:
+      """
+      mismatching lines:
+
+      mismatching expected contentHello world!
+      """
 
 
   Scenario: file doesn't exist
@@ -93,9 +96,7 @@ Feature: verifying the documented content of a file in the repository
       `Hello world!`
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | 1.md                     |
-      | LINE          | 1                        |
-      | ERROR MESSAGE | file not found: zonk.txt |
-      | EXIT CODE     | 1                        |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE            |
+      | 1.md     | 1    | repo/existing-file | failed | UserError  | file not found: zonk.txt |

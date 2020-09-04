@@ -39,9 +39,15 @@ Feature: verifying file content
       """
     When trying to call Text-Runner
     Then it executes these actions:
-      | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                                                                                     |
-      | 1.md     | 1    | workspace/new-file      | success |            |                                                                                                   |
-      | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt:\nmismatching lines:\n\nmismatching expected contentHello world! |
+      | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    |
+      | 1.md     | 1    | workspace/new-file      | success |            |                                  |
+      | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt |
+    And the error provides the guidance:
+      """
+      mismatching lines:
+
+      mismatching expected contentHello world!
+      """"
 
 
   Scenario: non-existing file

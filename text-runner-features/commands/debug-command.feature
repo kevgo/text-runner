@@ -1,8 +1,12 @@
+@debug
 Feature: display the version
 
   Scenario: no subcommand
-    When trying to run "text-run debug"
-    Then it prints this text:
+    When trying to call "textRunner.debugCommand({})"
+    Then it throws:
+      | ERROR TYPE | ERROR MESSAGE     |
+      | UserError  | missing data type |
+    And the API exception provides the guidance:
       """
       Please tell me what to debug. I can print these things:
 
@@ -19,6 +23,8 @@ Feature: display the version
     When trying to run "text-run debug --ast"
     Then it prints this text:
       """
+      no files specified
+
       Please tell me which file to debug
 
       Example: text-run debug --ast foo.md

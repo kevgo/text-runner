@@ -205,7 +205,7 @@ Then("it prints this text:", function (expectedText) {
   if (!world.process) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.process.output.fullText().trim())
+  const output = stripAnsi(world.process.output.fullText()).trim()
   assert.equal(output, expectedText.trim())
 })
 

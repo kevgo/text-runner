@@ -7,7 +7,7 @@ export const defaultValues: Configuration = {
   regionMarker: "type",
   defaultFile: "",
   exclude: [],
-  fileGlob: "**/*.md",
+  files: "**/*.md",
   formatterName: "detailed",
   online: false,
   publications: new Publications(),

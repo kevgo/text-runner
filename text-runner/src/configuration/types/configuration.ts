@@ -10,7 +10,7 @@ export interface Configuration {
   regionMarker: string // the name of the attribute that denotes active regions
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
-  fileGlob: string // glob of the files to test
+  files: string // glob of the files to test
   formatterName: FormatterName // name of the Formatter class to use
   publications: Publications // folder mappings
   online: boolean // whether to skip built-in tests that require a network connection
@@ -25,7 +25,7 @@ export function scaffoldConfiguration(): Configuration {
     regionMarker: "",
     defaultFile: "",
     exclude: "",
-    fileGlob: "",
+    files: "",
     formatterName: "dot",
     online: false,
     publications: new Publications(),

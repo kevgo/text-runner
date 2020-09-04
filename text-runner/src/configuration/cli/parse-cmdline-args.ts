@@ -41,7 +41,7 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
   const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
-    fileGlob: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
+    files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
@@ -49,7 +49,7 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
   if (!availableCommands().includes(command)) {
-    config.fileGlob = command
+    config.files = command
     command = "run"
   }
 

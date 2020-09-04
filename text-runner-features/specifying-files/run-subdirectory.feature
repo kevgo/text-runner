@@ -12,7 +12,7 @@ Feature: testing all docs in a subfolder
       | commands/bar/baz.md |
 
   Scenario: testing all files in a subfolder via API
-    When calling "textRunner.runCommand({fileGlob: 'commands', sourceDir, formatterName})"
+    When calling "textRunner.runCommand({files: 'commands', sourceDir, formatterName})"
     Then it executes these actions:
       | FILENAME            |
       | commands/bar/baz.md |

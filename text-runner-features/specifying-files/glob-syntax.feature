@@ -19,7 +19,7 @@ Feature: finding files in certain directories only
 
 
   Scenario: different glob via API and config file
-    When calling "textRunner.runCommand({fileGlob: 'foo/*.md', sourceDir, formatterName})"
+    When calling "textRunner.runCommand({files: 'foo/*.md', sourceDir, formatterName})"
     Then it executes these actions:
       | FILENAME |
       | foo/1.md |

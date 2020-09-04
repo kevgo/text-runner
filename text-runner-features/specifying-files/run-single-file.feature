@@ -25,7 +25,7 @@ Feature: running a single MarkDown file
       | EXIT CODE     | 1                                         |
 
   Scenario: testing a single file via the API
-    When calling "textRunner.runCommand({fileGlob: '2.md', sourceDir, formatterName})"
+    When calling "textRunner.runCommand({files: '2.md', sourceDir, formatterName})"
     Then it executes these actions:
       | FILENAME |
       | 2.md     |

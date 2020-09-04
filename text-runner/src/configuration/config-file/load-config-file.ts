@@ -11,7 +11,7 @@ export function loadConfigFile(filename: string): UserProvidedConfiguration {
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,
     exclude: fileData.exclude,
-    fileGlob: fileData.files,
+    files: fileData.files,
     formatterName: fileData.format,
     online: fileData.online,
     publications: fileData.publications,

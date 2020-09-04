@@ -65,13 +65,35 @@ Feature: display the version
   Scenario: debugging images
     Given the source code contains a file "1.md" with content:
       """
-      <img src="watermelon.png"> </img>
+      <img src="watermelon.png">
       """
-    When running "text-run debug --ast 1.md"
+    When running "text-run debug --images 1.md"
     Then it prints this text:
       """
-      AST NODES:
-      1.md:1  fence_open (validate-javascript)
-      1.md:2  text ("foo()")
-      1.md:3  fence_close
+      IMAGES:
+      {
+        actionName: 'check-image',
+        file: AbsoluteFilePath { value: '1.md' },
+        line: 1,
+        region: AstNodeList(1) [
+          AstNode {
+            type: 'image',
+            tag: 'img',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: { src: 'watermelon.png' }
+          }
+        ],
+        document: AstNodeList(1) [
+          AstNode {
+            type: 'image',
+            tag: 'img',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: { src: 'watermelon.png' }
+          }
+        ]
+      }
       """

@@ -1,3 +1,4 @@
+import * as util from "util"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { getFileNames } from "../filesystem/get-filenames"
@@ -9,6 +10,8 @@ import { ExecuteResult } from "../runners/execute-result"
 import { loadConfiguration } from "../configuration/load-configuration"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
+import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
+import console = require("console")
 
 export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)
@@ -75,14 +78,14 @@ function debugASTNodes(ASTs: AstNodeList[]) {
 }
 
 function debugImages(ASTs: AstNodeList[]) {
-  console.log("\nIMAGES AND LINKS:")
+  console.log("\nIMAGES:")
   const images = extractImagesAndLinks(ASTs).filter((al) => al.actionName === "check-image")
   if (images.length === 0) {
     console.log("(none)")
     return
   }
   for (const image of images) {
-    console.log(image)
+    console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 

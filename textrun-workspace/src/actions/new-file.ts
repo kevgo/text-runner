@@ -8,7 +8,7 @@ export async function newFile(action: ActionArgs) {
   const content = action.region.textInNodeOfType("fence", "code")
   action.name(`create file ${color.cyan(filePath)}`)
   const fullPath = path.join(action.configuration.workspace, filePath)
-  action.log(`create file ${fullPath}`)
+  action.log(`create file ${filePath}`)
   await fs.ensureDir(path.dirname(fullPath))
   await fs.writeFile(fullPath, content)
 }

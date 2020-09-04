@@ -12,3 +12,5 @@ Feature: running multiple console commands
     Then it executes these actions:
       | FILENAME                     | LINE | ACTION        | ACTIVITY                                        |
       | running-multiple-commands.md | 1    | shell/command | running console command: mkdir one && mkdir two |
+    And the test workspace now contains a directory "one"
+    And the test workspace now contains a directory "two"

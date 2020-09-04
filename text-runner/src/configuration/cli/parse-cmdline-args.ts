@@ -10,28 +10,19 @@ import { UserProvidedConfiguration } from "../types/user-provided-configuration"
  * @param argv the command-line options received by the process
  */
 export function parseCmdlineArgs(argv: string[]): { command: string; config: UserProvidedConfiguration } {
-  // remove optional unix node call
-  if (path.basename(argv[0] || "") === "node") {
+  // remove optional node parameter
+  if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
   }
 
-  // remove optional windows node call
-  if (path.win32.basename(argv[0] || "") === "node.exe") {
+  // remove text-run parameter
+  const unixBasename = path.basename(argv[0] || "")
+  const winBasename = path.win32.basename(argv[0] || "")
+  if (unixBasename === "text-run" || winBasename === "text-run.cmd") {
     argv.splice(0, 1)
   }
-
-  // remove optional linux text-run call
-  if (path.basename(argv[0] || "") === "text-run") {
-    argv.splice(0, 1)
-  }
-
-  // remove optional Windows CLI call
-  if (argv[0] && argv[0].endsWith("dist\\cli.js")) {
-    argv.splice(0, 1)
-  }
-
-  // remove optional debug arguments
-  if (argv[0] && argv[0].endsWith("dist/cli.js")) {
+  // remove optional CLI parameter
+  if (unixBasename === "cli.js" || winBasename === "cli.js") {
     argv.splice(0, 1)
   }
 

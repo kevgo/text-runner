@@ -7,7 +7,7 @@ Feature: display the version
       | UserError  | missing data type |
     And the API exception provides the guidance:
       """
-      Please tell me what to debug. I can print these things:
+      Please tell me what to debug. One of these things:
 
       --activities: active regions
       --ast: AST nodes

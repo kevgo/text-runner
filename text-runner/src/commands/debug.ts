@@ -17,7 +17,7 @@ export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Prom
 
   const typeEntry = Object.entries(cmdlineArgs.debugSwitches || {}).filter((e) => e[1])[0]
   if (!typeEntry) {
-    const guidance = `Please tell me what to debug. I can print these things:
+    const guidance = `Please tell me what to debug. One of these things:
 
 --activities: active regions
 --ast: AST nodes

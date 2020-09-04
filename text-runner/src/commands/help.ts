@@ -30,6 +30,6 @@ COMMANDS
 
 OPTIONS
   ${color.bold("--config")}              provide a custom configuration filename
-  ${color.bold("--offline")}             don't check external links
+  ${color.bold("--online")}              check external links
 `
 }

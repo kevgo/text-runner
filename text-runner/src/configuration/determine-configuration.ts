@@ -9,7 +9,7 @@ export const defaultValues: Configuration = {
   exclude: [],
   fileGlob: "**/*.md",
   formatterName: "detailed",
-  offline: false,
+  online: false,
   publications: new Publications(),
   sourceDir: process.cwd(),
   useSystemTempDirectory: false,

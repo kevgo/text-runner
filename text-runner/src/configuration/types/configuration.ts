@@ -13,7 +13,7 @@ export interface Configuration {
   fileGlob: string // glob of the files to test
   formatterName: FormatterName // name of the Formatter class to use
   publications: Publications // folder mappings
-  offline: boolean // whether to skip built-in tests that require a network connection
+  online: boolean // whether to skip built-in tests that require a network connection
   sourceDir: string // the root directory of the source code to test
   useSystemTempDirectory: boolean // whether to create the workspace in the system temp directory or locally
   workspace: string // the root directory of the workspace
@@ -27,7 +27,7 @@ export function scaffoldConfiguration(): Configuration {
     exclude: "",
     fileGlob: "",
     formatterName: "dot",
-    offline: false,
+    online: false,
     publications: new Publications(),
     sourceDir: "",
     useSystemTempDirectory: false,

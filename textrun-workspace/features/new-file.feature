@@ -44,6 +44,11 @@ Feature: creating files with content
     Then it executes these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' |
+    And the error provides the guidance:
+      """
+      Cannot determine the name of the file to create.
+      The node types in this list are: anchor_open, code_open, text, code_close, anchor_close
+      """
 
 
   Scenario: no content block given
@@ -55,6 +60,11 @@ Feature: creating files with content
     Then it executes these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' |
+    And the error provides the guidance:
+      """
+      Cannot determine the content of the file to create.
+      The node types in this list are: anchor_open, strong_open, text, strong_close, anchor_close
+      """
 
 
   Scenario: two file paths given

@@ -1,6 +1,8 @@
 import { Activity } from "../activity-list/types/activity"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 
+export type FormatterName = "detailed" | "dot" | "progress" | "silent" | "summary"
+
 /**
  * Formatter is the API that formatters have to implement
  *

@@ -6,6 +6,6 @@ import { Configuration } from "./types/configuration"
 
 export async function loadConfiguration(cmdlineArgs: UserProvidedConfiguration): Promise<Configuration> {
   const configFilePath = await determineConfigFilename(cmdlineArgs)
-  const configFileData = loadConfigFile(configFilePath)
+  const configFileData = await loadConfigFile(configFilePath)
   return determineConfiguration(configFileData, cmdlineArgs)
 }

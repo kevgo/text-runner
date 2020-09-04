@@ -45,3 +45,19 @@ Feature: display the version
       ACTIVITIES:
       1.md:1  validate-javascript
       """
+
+  Scenario: debugging AST
+    Given the source code contains a file "1.md" with content:
+      """
+      <pre type="validate-javascript">
+      foo()
+      </pre>
+      """
+    When running "text-run debug --ast 1.md"
+    Then it prints this text:
+      """
+      AST NODES:
+      1.md:1  fence_open (validate-javascript)
+      1.md:2  text ("foo()")
+      1.md:3  fence_close
+      """

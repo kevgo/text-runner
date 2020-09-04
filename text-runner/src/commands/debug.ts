@@ -102,5 +102,5 @@ function showAttr(node: AstNode): string {
   if (keys.length === 0) {
     return ""
   }
-  return `(${node.attributes.textrun})`
+  return `(${node.attributes.type})`
 }

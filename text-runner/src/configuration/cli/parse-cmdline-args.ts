@@ -11,13 +11,13 @@ import { UserProvidedConfiguration } from "../types/user-provided-configuration"
  */
 export function parseCmdlineArgs(argv: string[]): { command: string; config: UserProvidedConfiguration } {
   // remove optional node parameter
-  if (path.basename(argv[0]) === "node" || path.win32.basename(argv[0]) === "node.exe") {
+  if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
   }
 
   // remove text-run parameter
-  const unixBasename = path.basename(argv[0])
-  const winBasename = path.win32.basename(argv[0])
+  const unixBasename = path.basename(argv[0] || "")
+  const winBasename = path.win32.basename(argv[0] || "")
   if (unixBasename === "text-run" || winBasename === "text-run.cmd") {
     argv.splice(0, 1)
   }

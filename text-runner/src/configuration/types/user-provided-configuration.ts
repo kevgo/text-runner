@@ -1,5 +1,5 @@
 import { Publications } from "../publications/publications"
-import { FormatterName } from "../../formatters/types/formatter-name"
+import { FormatterName } from "../../formatters/formatter"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,

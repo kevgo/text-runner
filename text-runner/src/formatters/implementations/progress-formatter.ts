@@ -1,12 +1,12 @@
 import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
-import { Activity } from "../activity-list/types/activity"
-import { Configuration } from "../configuration/types/configuration"
-import { printCodeFrame } from "../helpers/print-code-frame"
-import { Formatter } from "./types/formatter"
-import { printSummary } from "./shared/print-summary"
-import { StatsCounter } from "../runners/helpers/stats-counter"
+import { Activity } from "../../activity-list/types/activity"
+import { Configuration } from "../../configuration/types/configuration"
+import { printCodeFrame } from "../../helpers/print-code-frame"
+import { Formatter } from "../formatter"
+import { printSummary } from "../print-summary"
+import { StatsCounter } from "../../runners/helpers/stats-counter"
 
 export class ProgressFormatter implements Formatter {
   /** Text-Runner configuration */

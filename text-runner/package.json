@@ -53,7 +53,6 @@
     "@types/ps-tree": "1.1.0",
     "@types/rechoir": "0.6.1",
     "@types/rimraf": "3.0.0",
-    "@types/shelljs": "0.8.8",
     "@types/yamljs": "0.2.31",
     "array-flatten": "3.0.0",
     "chai": "4.2.0",

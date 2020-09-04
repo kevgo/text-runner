@@ -49,9 +49,14 @@ Example: text-run debug --${type} foo.md`
     case "images":
       debugImages(ASTs)
       break
+    case "links":
+      debugLinks(ASTs)
+      break
     case "link-targets":
       debugLinkTargets(ASTs)
       break
+    default:
+      throw new UserError("unknown debug sub-command: " + type)
   }
   return ExecuteResult.empty()
 }
@@ -85,6 +90,18 @@ function debugImages(ASTs: AstNodeList[]) {
     return
   }
   for (const image of images) {
+    console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
+  }
+}
+
+function debugLinks(ASTs: AstNodeList[]) {
+  console.log("\nLINKS:")
+  const links = extractImagesAndLinks(ASTs).filter((al) => al.actionName === "check-link")
+  if (links.length === 0) {
+    console.log("(none)")
+    return
+  }
+  for (const image of links) {
     console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }

@@ -97,3 +97,87 @@ Feature: display the version
         ]
       }
       """
+
+  Scenario: debugging links
+    Given the source code contains a file "1.md" with content:
+      """
+      [another document](2.md)
+      """
+    When running "text-run debug --links 1.md"
+    Then it prints this text:
+      """
+      LINKS:
+      {
+        actionName: 'check-link',
+        file: AbsoluteFilePath { value: '1.md' },
+        line: 1,
+        region: AstNodeList(3) [
+          AstNode {
+            type: 'link_open',
+            tag: 'a',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: { href: '2.md' }
+          },
+          AstNode {
+            type: 'text',
+            tag: '',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: 'another document',
+            attributes: {}
+          },
+          AstNode {
+            type: 'link_close',
+            tag: '/a',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: {}
+          }
+        ],
+        document: AstNodeList(5) [
+          AstNode {
+            type: 'paragraph_open',
+            tag: 'p',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: {}
+          },
+          AstNode {
+            type: 'link_open',
+            tag: 'a',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: { href: '2.md' }
+          },
+          AstNode {
+            type: 'text',
+            tag: '',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: 'another document',
+            attributes: {}
+          },
+          AstNode {
+            type: 'link_close',
+            tag: '/a',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: {}
+          },
+          AstNode {
+            type: 'paragraph_close',
+            tag: '/p',
+            file: AbsoluteFilePath { value: '1.md' },
+            line: 1,
+            content: '',
+            attributes: {}
+          }
+        ]
+      }
+      """

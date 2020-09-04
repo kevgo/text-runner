@@ -2,7 +2,6 @@ import { Given } from "cucumber"
 import * as fse from "fs-extra"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { cp } from "shelljs"
 import { TRWorld } from "./world"
 
 Given("a broken file {string}", async function (filePath) {
@@ -140,7 +139,7 @@ Given("the workspace contains an empty file {string}", async function (fileName)
 Given("the workspace contains an image {string}", async function (imageName) {
   const world = this as TRWorld
   await fse.ensureDir(path.join(world.rootDir, path.dirname(imageName)))
-  cp(path.join(__dirname, "..", path.basename(imageName)), path.join(world.rootDir, imageName))
+  fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), path.join(world.rootDir, imageName))
 })
 
 Given("the configuration file:", async function (content) {

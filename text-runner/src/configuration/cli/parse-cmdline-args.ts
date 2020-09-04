@@ -27,7 +27,7 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
   }
 
   // parse argv into the result
-  const cliArgs = minimist(argv, { boolean: ["online"] })
+  const cliArgs = minimist(argv, { boolean: ["online", "activities", "ast", "images", "links", "link-targets"] })
   let command = cliArgs._[0]
   const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
@@ -36,6 +36,13 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
+    debugSwitches: {
+      activities: cliArgs.activities,
+      ast: cliArgs.ast,
+      images: cliArgs.images,
+      links: cliArgs.links,
+      linkTargets: cliArgs["link-targets"],
+    },
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"

@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import { ActionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
@@ -14,8 +13,7 @@ export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Pro
   // step 2: find files
   const filenames = await getFileNames(config)
   if (filenames.length === 0) {
-    console.log(color.magenta("no Markdown files found"))
-    return ExecuteResult.empty()
+    return ExecuteResult.warning("no Markdown files found")
   }
 
   // step 3: read and parse files

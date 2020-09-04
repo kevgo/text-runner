@@ -99,6 +99,15 @@ Then("it executes these actions:", function (table) {
   assert.deepEqual(have, want)
 })
 
+Then("it executes with this warning:", function (warning: string) {
+  const world = this as TRWorld
+  assert.isUndefined(world.apiException)
+  const apiResults = world.apiResults as textRunner.ExecuteResult
+  assert.equal(apiResults.activityResults.length, 0, "activity results")
+  assert.equal(apiResults.warnings.length, 1, "warnings")
+  assert.equal(apiResults.warnings[0], warning)
+})
+
 Then("it throws:", function (table) {
   const world = this as TRWorld
   if (!world.apiException) {

@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import { extractActivities } from "../activity-list/extract-activities"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../formatters/instantiate"
@@ -46,8 +45,7 @@ export async function runCommand(cmdlineArgs: UserProvidedConfiguration): Promis
     const activities = extractActivities(ASTs, config.regionMarker)
     const links = extractImagesAndLinks(ASTs)
     if (activities.length + links.length === 0) {
-      console.log(color.magenta("no activities found"))
-      return ExecuteResult.empty()
+      return ExecuteResult.warning("no activities found")
     }
 
     // step 8: execute the ActivityList

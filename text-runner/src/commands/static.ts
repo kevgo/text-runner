@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
 import { instantiateFormatter } from "../formatters/instantiate"
 import { getFileNames } from "../filesystem/get-filenames"
@@ -39,8 +38,7 @@ export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Pro
     // step 6: extract activities
     const links = extractImagesAndLinks(ASTs)
     if (links.length === 0) {
-      console.log(color.magenta("no activities found"))
-      return ExecuteResult.empty()
+      return ExecuteResult.warning("no activities found")
     }
 
     // step 7: find actions

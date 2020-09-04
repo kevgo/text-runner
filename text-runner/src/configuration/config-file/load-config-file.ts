@@ -1,12 +1,14 @@
 import * as YAML from "yamljs"
+import { promises as fs } from "fs"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
 
 /** provides the content of the config file in the standardized format */
-export function loadConfigFile(filename: string): UserProvidedConfiguration {
+export async function loadConfigFile(filename: string): Promise<UserProvidedConfiguration> {
   if (!filename) {
     return {}
   }
-  const fileData = YAML.load(filename)
+  const fileContent = await fs.readFile(filename, "utf-8")
+  const fileData = YAML.parse(fileContent)
   const result: UserProvidedConfiguration = {
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,

@@ -4,11 +4,11 @@ import { determineConfiguration } from "./determine-configuration"
 suite("loadConfiguration()", function () {
   test("no user config given", function () {
     const config = determineConfiguration({}, {})
-    assert.equal(config.fileGlob, "**/*.md")
+    assert.equal(config.files, "**/*.md")
   })
 
   test("user config given", async function () {
-    const config = determineConfiguration({ fileGlob: "*.md" }, {})
-    assert.equal(config.fileGlob, "*.md")
+    const config = determineConfiguration({ files: "*.md" }, {})
+    assert.equal(config.files, "*.md")
   })
 })

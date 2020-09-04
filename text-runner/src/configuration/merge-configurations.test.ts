@@ -19,7 +19,7 @@ suite("mergeConfigurations()", function () {
     const want: Configuration = {
       defaultFile: "",
       exclude: "1.md",
-      fileGlob: "**/*.md",
+      files: "**/*.md",
       formatterName: "detailed",
       online: false,
       publications: new Publications(),
@@ -33,21 +33,21 @@ suite("mergeConfigurations()", function () {
 
   test("complex example", function () {
     const cmdlineArgs: UserProvidedConfiguration = {
-      fileGlob: "1.md",
+      files: "1.md",
       online: false,
     }
     const configFileData: UserProvidedConfiguration = {
       formatterName: "dot",
-      fileGlob: "**/*.md",
+      files: "**/*.md",
       online: true,
     }
     const defaultValues: UserProvidedConfiguration = {
-      fileGlob: "*.md",
+      files: "*.md",
     }
     const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
     assert.deepEqual(result, {
       formatterName: "dot",
-      fileGlob: "1.md",
+      files: "1.md",
       online: false,
     })
   })

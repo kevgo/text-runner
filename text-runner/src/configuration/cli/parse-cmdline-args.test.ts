@@ -9,7 +9,7 @@ suite("parseCmdlineArgs()", function () {
       "run",
     ])
     assert.equal(command, "run")
-    assert.isUndefined(config.fileGlob)
+    assert.isUndefined(config.files)
   })
 
   test("with windows <node> call", function () {
@@ -19,7 +19,7 @@ suite("parseCmdlineArgs()", function () {
       "run",
     ])
     assert.equal(command, "run")
-    assert.isUndefined(config.fileGlob)
+    assert.isUndefined(config.files)
   })
 
   test("with <node> and <text-run> call", function () {
@@ -29,32 +29,32 @@ suite("parseCmdlineArgs()", function () {
       "run",
     ])
     assert.equal(command, "run")
-    assert.isUndefined(config.fileGlob)
+    assert.isUndefined(config.files)
   })
 
   test("with <text-run> call", function () {
     const { command, config } = parseCmdlineArgs(["/Users/kevlar/d/text-runner/bin/text-run", "run"])
     assert.equal(command, "run")
-    assert.isUndefined(config.fileGlob)
+    assert.isUndefined(config.files)
   })
 
   test("--online <file>", function () {
     const { command, config } = parseCmdlineArgs(["--online", "documentation/actions/cd.md"])
     assert.equal(command, "run")
     assert.isTrue(config.online)
-    assert.equal(config.fileGlob, "documentation/actions/cd.md")
+    assert.equal(config.files, "documentation/actions/cd.md")
   })
 
   test("<file>", function () {
     const { command, config } = parseCmdlineArgs(["documentation/actions/cd.md"])
     assert.equal(command, "run")
-    assert.equal(config.fileGlob, "documentation/actions/cd.md")
+    assert.equal(config.files, "documentation/actions/cd.md")
   })
 
   test("(no args)", function () {
     const { command, config } = parseCmdlineArgs([])
     assert.equal(command, "run")
-    assert.isUndefined(config.fileGlob)
+    assert.isUndefined(config.files)
   })
 
   test("--format dot", function () {

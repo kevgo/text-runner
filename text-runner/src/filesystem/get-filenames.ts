@@ -24,16 +24,16 @@ export async function getFileNames(config: Configuration): Promise<AbsoluteFileP
  * Filenames are relative to config.sourceDir.
  */
 async function getFiles(config: Configuration): Promise<AbsoluteFilePath[]> {
-  const fullGlob = path.join(config.sourceDir, config.fileGlob)
-  if (config.fileGlob === "") {
+  const fullGlob = path.join(config.sourceDir, config.files)
+  if (config.files === "") {
     return markdownFilesInDir(config.sourceDir, config.sourceDir)
   } else if (await hasDirectory(fullGlob)) {
     return markdownFilesInDir(fullGlob, config.sourceDir)
   } else if (await isMarkdownFile(fullGlob)) {
-    return [new AbsoluteFilePath(config.fileGlob)]
-  } else if (isGlob(config.fileGlob)) {
+    return [new AbsoluteFilePath(config.files)]
+  } else if (isGlob(config.files)) {
     return filesMatchingGlob(fullGlob, config.sourceDir)
   } else {
-    throw new UserError(`file or directory does not exist: ${config.fileGlob}`)
+    throw new UserError(`file or directory does not exist: ${config.files}`)
   }
 }

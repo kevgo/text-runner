@@ -15,7 +15,7 @@ import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
 export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)
 
-  const typeEntry = Object.entries(cmdlineArgs.debugSwitches || {}).filter((e: any) => e[1])[0]
+  const typeEntry = Object.entries(cmdlineArgs.debugSwitches || {}).filter((e) => e[1])[0]
   if (!typeEntry) {
     const guidance = `Please tell me what to debug. I can print these things:
 

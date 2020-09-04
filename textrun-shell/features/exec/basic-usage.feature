@@ -1,27 +1,27 @@
 Feature: shell/command
 
+  Scenario: inside <pre> tags
+    Given the source code contains a file "running.md" with content:
+      """
+      <pre type="shell/command">
+      mkdir example
+      </pre>
+      """
+    When calling Text-Runner
+    Then the test workspace now contains a directory "example"
+
   Scenario: with fenced block
     Given the source code contains a file "running.md" with content:
       """
       <a type="shell/command">
 
       ```
-      echo hello
+      mkdir example
       ```
       </a>
       """
-    When running Text-Runner
-    Then it runs the console command "echo hello"
-
-  Scenario: inside <pre> tags
-    Given the source code contains a file "running.md" with content:
-      """
-      <pre type="shell/command">
-      echo hello
-      </pre>
-      """
-    When running Text-Runner
-    Then it runs the console command "echo hello"
+    When calling Text-Runner
+    Then the test workspace now contains a directory "example"
 
   Scenario: empty console command
     Given the source code contains a file "running.md" with content:
@@ -32,9 +32,7 @@ Feature: shell/command
       ```
       </a>
       """
-    When trying to run Text-Runner
-    Then the test fails with:
-      | FILENAME      | running.md                                                      |
-      | LINE          | 1                                                               |
-      | ERROR MESSAGE | the <a type="shell/command"> region contains no commands to run |
-      | EXIT CODE     | 1                                                               |
+    When trying to call Text-Runner
+    Then it executes these actions:
+      | FILENAME   | LINE | ACTION        | STATUS | ERROR TYPE | ERROR MESSAGE                                                   |
+      | running.md | 1    | shell/command | failed | UserError  | the <a type="shell/command"> region contains no commands to run |

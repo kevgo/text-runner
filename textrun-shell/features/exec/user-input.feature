@@ -34,15 +34,11 @@ Feature: running console commands
 
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | enter-input.md                        |
-      | LINE     | 1                                     |
-      | MESSAGE  | running console command: node echo.js |
-    And it prints:
-      """
-      You entered: 123
-      """
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME              | LINE | ACTION                   | ACTIVITY                              | OUTPUT                     |
+      | create-echo-server.md | 1    | workspace/new-file       | create file echo.js                   | create file echo.js        |
+      | enter-input.md        | 1    | shell/command-with-input | running console command: node echo.js | Your inputYou entered: 123 |
 
   Scenario: entering complex text into the console
     Given the source code contains a file "create-input-server.md" with content:
@@ -89,12 +85,8 @@ Feature: running console commands
 
       </a>
       """
-    When running Text-Runner
-    Then it signals:
-      | FILENAME | enter-input.md                         |
-      | LINE     | 1                                      |
-      | MESSAGE  | running console command: node input.js |
-    And it prints:
-      """
-      service: html-server, description: serves the HTML UI
-      """
+    When calling Text-Runner
+    Then it executes these actions:
+      | FILENAME               | LINE | ACTION                   | ACTIVITY                               | OUTPUT                                                                                          |
+      | create-input-server.md | 1    | workspace/new-file       | create file input.js                   | create file input.js                                                                            |
+      | enter-input.md         | 1    | shell/command-with-input | running console command: node input.js | Name of the service to add\nDescription\nservice: html-server, description: serves the HTML UI! |

@@ -1,4 +1,3 @@
-@debug
 Feature: display the version
 
   Scenario: no subcommand

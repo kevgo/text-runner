@@ -14,7 +14,6 @@ import { setupCommand } from "./commands/setup"
 import { staticCommand } from "./commands/static"
 import { unusedCommand } from "./commands/unused"
 import { versionCommand } from "./commands/version"
-import console = require("console")
 
 cliCursor.hide()
 

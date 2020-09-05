@@ -1,42 +1,61 @@
 import * as color from "colorette"
 import * as path from "path"
-import { Activity } from "../../activity-list/types/activity"
+import { CommandEvent } from "../../commands/command"
 import { Configuration } from "../../configuration/types/configuration"
 import { printCodeFrame } from "../../helpers/print-code-frame"
-import { Formatter } from "../formatter"
-import { StatsCounter } from "../../runners/helpers/stats-counter"
 import { printSummary } from "../print-summary"
+import { FailedArgs, FinishArgs, WarnArgs, Formatter } from "../formatter"
+import { EventEmitter } from "events"
+import { Counter } from "../counter"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements Formatter {
-  /** Text-Runner configuration */
   private readonly configuration: Configuration
+  readonly counter: Counter
 
-  // @ts-ignore: ignore unused variable
-  constructor(stepCount: number, configuration: Configuration) {
+  constructor(configuration: Configuration, emitter: EventEmitter) {
+    this.counter = new Counter()
     this.configuration = configuration
+    emitter.on(CommandEvent.success, this.success)
+    emitter.on(CommandEvent.failed, this.failed)
+    emitter.on(CommandEvent.warning, this.warning)
+    emitter.on(CommandEvent.skipped, this.skipped)
+    emitter.on(CommandEvent.finish, this.finish)
   }
 
-  // @ts-ignore: okay to not use parameters here
-  failed(activity: Activity, stepName: string, err: Error, output: string) {
+  failed(args: FailedArgs) {
+    this.counter.failed()
     console.log()
-    console.log(color.dim(output))
-    process.stdout.write(color.red(`${activity.file.platformified()}:${activity.line} -- `))
-    console.log(err.message)
-    printCodeFrame(console.log, path.join(this.configuration.sourceDir, activity.file.platformified()), activity.line)
+    console.log(color.dim(args.output))
+    process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
+    console.log(args.error.message)
+    printCodeFrame(
+      console.log,
+      path.join(this.configuration.sourceDir, args.activity.file.platformified()),
+      args.activity.line
+    )
   }
 
-  // @ts-ignore: okay to not use parameters here
-  skipped(activity: Activity, stepName: string, output: string) {
+  skipped() {
+    this.counter.skipped()
     process.stdout.write(color.cyan("."))
   }
 
-  // @ts-ignore: okay to not use parameters here
-  success(activity: Activity, stepName: string, output: string) {
+  success() {
+    this.counter.success()
     process.stdout.write(color.green("."))
   }
 
-  summary(stats: StatsCounter) {
-    printSummary(stats)
+  finish(args: FinishArgs) {
+    printSummary(args.stats)
+  }
+
+  warning(args: WarnArgs) {
+    this.counter.warning()
+    console.log(color.magenta(args.message))
+  }
+
+  errorCount(): number {
+    return this.counter.errorCount()
   }
 }

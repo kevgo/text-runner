@@ -1,12 +1,19 @@
 import * as color from "colorette"
 import { createConfigurationFile } from "../configuration/config-file/create-configuration-file"
-import { ExecuteResult } from "../text-runner"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { Configuration } from "../configuration/types/configuration"
+import { EventEmitter } from "events"
+import { CommandEvent, Command } from "./command"
 
-export async function setupCommand(config: UserProvidedConfiguration): Promise<ExecuteResult> {
-  await createConfigurationFile(config.sourceDir || ".")
-  if (config.formatterName !== "silent") {
-    console.log(color.green(`Created configuration file ${color.cyan("text-run.yml")} with default values`))
+export class SetupCommand extends EventEmitter implements Command {
+  config: Configuration
+
+  constructor(config: Configuration) {
+    super()
+    this.config = config
   }
-  return ExecuteResult.empty()
+
+  async execute() {
+    await createConfigurationFile(this.config.sourceDir || ".")
+    this.emit(CommandEvent.output, `Created configuration file ${color.cyan("text-run.yml")} with default values`)
+  }
 }

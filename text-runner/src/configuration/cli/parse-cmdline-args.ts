@@ -9,7 +9,7 @@ import { UserProvidedConfiguration } from "../types/user-provided-configuration"
  *
  * @param argv the command-line options received by the process
  */
-export function parseCmdlineArgs(argv: string[]): { command: string; config: UserProvidedConfiguration } {
+export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -54,5 +54,5 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
     command = "run"
   }
 
-  return { command, config }
+  return { commandName: command, cmdLineConfig: config }
 }

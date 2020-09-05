@@ -1,29 +1,41 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { ExecuteResult } from "../runners/execute-result"
 import { camelize } from "../helpers/camelize"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { Configuration } from "../configuration/types/configuration"
+import { ScaffoldSwitches } from "../configuration/types/user-provided-configuration"
+import { EventEmitter } from "events"
+import { Command } from "./command"
 
-export async function scaffoldCommand(config: UserProvidedConfiguration): Promise<ExecuteResult> {
-  if (!config.files) {
-    throw new Error("no action name given")
+export class ScaffoldCommand extends EventEmitter implements Command {
+  config: Configuration
+  switches: ScaffoldSwitches
+
+  constructor(config: Configuration, switches: ScaffoldSwitches) {
+    super()
+    this.config = config
+    this.switches = switches
   }
-  const dirPath = path.join(config.sourceDir || ".", "text-run")
-  let textRunDirExists = true
-  try {
-    await fs.stat(dirPath)
-  } catch (e) {
-    textRunDirExists = false
+
+  async execute() {
+    if (!this.config.files) {
+      throw new Error("no action name given")
+    }
+    const dirPath = path.join(this.config.sourceDir || ".", "text-run")
+    let textRunDirExists = true
+    try {
+      await fs.stat(dirPath)
+    } catch (e) {
+      textRunDirExists = false
+    }
+    if (!textRunDirExists) {
+      await fs.mkdir(dirPath, { recursive: true })
+    }
+    if (this.switches.ts) {
+      await fs.writeFile(path.join(dirPath, this.config.files + ".ts"), tsTemplate(this.config.files), "utf8")
+    } else {
+      await fs.writeFile(path.join(dirPath, this.config.files + ".js"), jsTemplate(this.config.files), "utf8")
+    }
   }
-  if (!textRunDirExists) {
-    await fs.mkdir(dirPath, { recursive: true })
-  }
-  if (config.scaffoldSwitches?.ts) {
-    await fs.writeFile(path.join(dirPath, config.files + ".ts"), tsTemplate(config.files), "utf8")
-  } else {
-    await fs.writeFile(path.join(dirPath, config.files + ".js"), jsTemplate(config.files), "utf8")
-  }
-  return ExecuteResult.empty()
 }
 
 function jsTemplate(filename: string) {

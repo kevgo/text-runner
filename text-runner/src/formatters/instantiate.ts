@@ -5,27 +5,21 @@ import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
 import { Configuration } from "../configuration/types/configuration"
-import { SilentFormatter } from "./implementations/silent-formatter"
+import { EventEmitter } from "events"
 
-export function instantiateFormatter(
-  name: string | undefined,
-  stepCount: number,
-  configuration: Configuration
-): Formatter {
-  switch (name) {
+export function instantiateFormatter(config: Configuration, emitter: EventEmitter): Formatter {
+  switch (config.formatterName) {
     case "dot":
-      return new DotFormatter(stepCount, configuration)
+      return new DotFormatter(config, emitter)
     case "detailed":
-      return new DetailedFormatter(stepCount, configuration)
+      return new DetailedFormatter(config, emitter)
     case "progress":
-      return new ProgressFormatter(stepCount, configuration)
-    case "silent":
-      return new SilentFormatter(stepCount, configuration)
+      return new ProgressFormatter(config, emitter)
     case "summary":
-      return new SummaryFormatter(stepCount, configuration)
+      return new SummaryFormatter(config, emitter)
     default:
       throw new UserError(
-        `Unknown formatter: ${name}`,
+        `Unknown formatter: ${config.formatterName}`,
         "Available formatters are: detailed, dot, progress, silent, summary"
       )
   }

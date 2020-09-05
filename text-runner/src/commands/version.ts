@@ -1,4 +1,9 @@
-export async function versionCommand() {
-  const { version } = require("../../package.json")
-  console.log(`TextRunner v${version}`)
+import { EventEmitter } from "events"
+import { Command } from "./command"
+
+export class VersionCommand extends EventEmitter implements Command {
+  async execute() {
+    const { version } = require("../../package.json")
+    this.emit(`TextRunner v${version}`)
+  }
 }

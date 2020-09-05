@@ -52,7 +52,7 @@ export class ActionFinder {
     return (
       this.builtinActions.get(activity.actionName) ||
       this.customActions.get(activity.actionName) ||
-      this.externalActions.get(activity.actionName) ||
+      this.externalActions.get(activity) ||
       this.errorUnknownAction(activity)
     )
   }
@@ -76,7 +76,7 @@ export class ActionFinder {
     }
     guidance += `\nTo create a new "${activity.actionName}" action,\n`
     guidance += `run "text-run scaffold ${activity.actionName}"\n`
-    throw new UserError(errorText, guidance, activity.file.platformified(), activity.line)
+    throw new UserError(errorText, guidance, activity.file, activity.line)
   }
 }
 

@@ -311,7 +311,7 @@ export class MarkdownParser {
         throw new UserError(
           `Found neither open link nor anchor for node '${mdNode.content}'`,
           "I found a </a> tag here but there isn't an opening <a ...> tag above.",
-          file.platformified(),
+          file,
           line
         )
       }

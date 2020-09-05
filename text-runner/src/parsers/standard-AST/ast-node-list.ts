@@ -20,7 +20,7 @@ export class AstNodeList extends Array<AstNode> {
       throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
         "The getNodeOfTypes method expects to find only one matching node, but it found multiple.",
-        nodes[0].file.platformified(),
+        nodes[0].file,
         nodes[0].line
       )
     }
@@ -28,7 +28,7 @@ export class AstNodeList extends Array<AstNode> {
       const msg = `found no nodes of type '${nodeTypes.join("/")}'`
       let guidance = "The node types in this list are: "
       guidance += this.nodeTypes().join(", ")
-      throw new UserError(msg, guidance, this[0].file.platformified(), this[0].line)
+      throw new UserError(msg, guidance, this[0].file, this[0].line)
     }
     return nodes[0]
   }
@@ -46,7 +46,7 @@ export class AstNodeList extends Array<AstNode> {
       throw new UserError(
         `node '${openingNode.type}' not found in list`,
         "This AstNodeList does not contain the given node.",
-        openingNode.file.platformified(),
+        openingNode.file,
         openingNode.line
       )
     }

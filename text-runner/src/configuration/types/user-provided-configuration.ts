@@ -22,14 +22,14 @@ export interface UserProvidedConfiguration {
 }
 
 /** switches used for the "debug" command */
-interface DebugSwitches {
-  activities: boolean
-  ast: boolean
-  images: boolean
-  links: boolean
-  linkTargets: boolean
+export interface DebugSwitches {
+  activities?: boolean
+  ast?: boolean
+  images?: boolean
+  links?: boolean
+  linkTargets?: boolean
 }
 
-interface ScaffoldSwitches {
-  ts: boolean
+export interface ScaffoldSwitches {
+  ts?: boolean
 }

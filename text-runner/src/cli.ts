@@ -1,72 +1,75 @@
 import * as cliCursor from "cli-cursor"
-import * as color from "colorette"
 import { endChildProcesses } from "end-child-processes"
 import { parseCmdlineArgs } from "./configuration/cli/parse-cmdline-args"
 import { UserError } from "./errors/user-error"
 import { printUserError } from "./errors/print-user-error"
-import { ExecuteResult } from "./runners/execute-result"
-import { debugCommand } from "./commands/debug"
-import { dynamicCommand } from "./commands/dynamic"
-import { helpCommand } from "./commands/help"
-import { runCommand } from "./commands/run"
-import { scaffoldCommand } from "./commands/scaffold"
-import { setupCommand } from "./commands/setup"
-import { staticCommand } from "./commands/static"
-import { unusedCommand } from "./commands/unused"
-import { versionCommand } from "./commands/version"
+import { DebugCommand } from "./commands/debug"
+import { DynamicCommand } from "./commands/dynamic"
+import { HelpCommand } from "./commands/help"
+import { RunCommand } from "./commands/run"
+import { ScaffoldCommand } from "./commands/scaffold"
+import { SetupCommand } from "./commands/setup"
+import { StaticCommand } from "./commands/static"
+import { UnusedCommand } from "./commands/unused"
+import { VersionCommand } from "./commands/version"
+import { loadConfiguration } from "./configuration/load-configuration"
+import { instantiateFormatter } from "./formatters/instantiate"
+import { Configuration } from "./configuration/types/configuration"
+import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
 
 cliCursor.hide()
 
 async function main() {
-  const { command, config } = parseCmdlineArgs(process.argv)
-  let result = ExecuteResult.empty()
+  let errorCount = 0
   try {
-    switch (command) {
-      case "help":
-        await helpCommand()
-        break
-      case "scaffold":
-        await scaffoldCommand(config)
-        break
-      case "setup":
-        result = await setupCommand(config)
-        break
-      case "version":
-        await versionCommand()
-        break
-      case "debug":
-        result = await debugCommand(config)
-        break
-      case "dynamic":
-        result = await dynamicCommand(config)
-        break
-      case "run":
-        result = await runCommand(config)
-        break
-      case "static":
-        result = await staticCommand(config)
-        break
-      case "unused":
-        result = await unusedCommand(config)
-        break
-      default:
-        console.log(color.red(`unknown command: ${command || ""}`))
-        result.errorCount += 1
-    }
+    // step 1: determine configuration
+    const { commandName, cmdLineConfig } = parseCmdlineArgs(process.argv)
+    const config = await loadConfiguration(cmdLineConfig)
+
+    // step 2: create command instance
+    const command = instantiateCommand(commandName, config, cmdLineConfig)
+
+    // step 3: create formatter and attach to command instance
+    const formatter = instantiateFormatter(config, command)
+
+    // step 4: execute the command
+    await command.execute()
+    errorCount += formatter.errorCount()
   } catch (err) {
-    result.errorCount += 1
+    errorCount += 1
     if (err instanceof UserError) {
       printUserError(err)
     } else {
       console.log(err.stack)
     }
+  } finally {
+    await endChildProcesses()
   }
-  if (result.warnings.length > 0) {
-    for (const warning of result.warnings) {
-      console.log(color.magenta(warning))
-    }
-  }
-  await endChildProcesses()
-  process.exit(result.errorCount)
+  process.exit(errorCount)
 }
 main()
+
+function instantiateCommand(commandName: string, config: Configuration, cliArgs: UserProvidedConfiguration) {
+  switch (commandName) {
+    case "help":
+      return new HelpCommand()
+    case "scaffold":
+      return new ScaffoldCommand(config, cliArgs.scaffoldSwitches || {})
+    case "setup":
+      return new SetupCommand(config)
+    case "version":
+      return new VersionCommand()
+    case "debug":
+      return new DebugCommand(config, cliArgs.debugSwitches || {})
+    case "dynamic":
+      return new DynamicCommand(config)
+    case "run":
+      return new RunCommand(config)
+    case "static":
+      return new StaticCommand(config)
+    case "unused":
+      return new UnusedCommand(config)
+    default:
+      throw new UserError(`unknown command: ${commandName}`)
+  }
+}

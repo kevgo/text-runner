@@ -19,18 +19,17 @@ export interface Configuration {
   workspace: string // the root directory of the workspace
 }
 
-/** creates an empty configuration object for testing */
-export function scaffoldConfiguration(): Configuration {
+export function defaultConfiguration(): Configuration {
   return {
-    regionMarker: "",
+    regionMarker: "type",
     defaultFile: "",
-    exclude: "",
-    files: "",
-    formatterName: "dot",
+    exclude: [],
+    files: "**/*.md",
+    formatterName: "detailed",
     online: false,
     publications: new Publications(),
-    sourceDir: "",
+    sourceDir: process.cwd(),
     useSystemTempDirectory: false,
-    workspace: "",
+    workspace: "", // will be populated later
   }
 }

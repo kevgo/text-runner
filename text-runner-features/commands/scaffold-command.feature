@@ -4,32 +4,36 @@ Feature: adding new actions
     When running "text-run scaffold new-step"
     Then it creates the file "text-run/new-step.js" with content:
       """
-      module.exports = async function (action) {
-        console.log('This code runs inside the "new-step" region implementation.')
-        console.log('I found these elements in your document:')
-        console.log(action.region)
-
-        // capture content from the document
-        // const content = activity.searcher.tagContent('boldtext')
-        // do something with the content
-        // action.log(content)
+      module.exports = function newStep (action) {
+        console.log("This is the implementation of the "new-step" action.")
+        console.log('Text inside the semantic document region:', action.region.text())
+        console.log("For more information see")
+        console.log("https://github.com/kevgo/text-runner/blob/master/documentation/user-defined-actions.md")
       }
-
       """
 
   Scenario: adding a new step via API
-    When calling "textRunner.scaffoldCommand('new-step', sourceDir)"
+    When calling "textRunner.scaffoldCommand({files: 'new-step', sourceDir})"
     Then it creates the file "text-run/new-step.js" with content:
       """
-      module.exports = async function (action) {
-        console.log('This code runs inside the "new-step" region implementation.')
-        console.log('I found these elements in your document:')
-        console.log(action.region)
-
-        // capture content from the document
-        // const content = activity.searcher.tagContent('boldtext')
-        // do something with the content
-        // action.log(content)
+      module.exports = function newStep (action) {
+        console.log("This is the implementation of the "new-step" action.")
+        console.log('Text inside the semantic document region:', action.region.text())
+        console.log("For more information see")
+        console.log("https://github.com/kevgo/text-runner/blob/master/documentation/user-defined-actions.md")
       }
+      """
 
+  Scenario: adding a new TypeScript step
+    When running "text-run scaffold --ts new-step"
+    Then it creates the file "text-run/new-step.ts" with content:
+      """
+      import { ActionArgs } from "text-runner"
+
+      export function newStep (action: ActionArgs) {
+        console.log("This is the implementation of the "new-step" action.")
+        console.log('Text inside the semantic document region:', action.region.text())
+        console.log("For more information see")
+        console.log("https://github.com/kevgo/text-runner/blob/master/documentation/user-defined-actions.md")
+      }
       """

@@ -15,6 +15,7 @@ export interface UserProvidedConfiguration {
   formatterName?: FormatterName // name of the formatter to use
   online?: boolean
   publications?: Publications
+  scaffoldSwitches?: ScaffoldSwitches
   sourceDir?: string // the root directory of the source code to test
   useSystemTempDirectory?: boolean
   workspace?: string // path of the workspace to use
@@ -27,4 +28,8 @@ interface DebugSwitches {
   images: boolean
   links: boolean
   linkTargets: boolean
+}
+
+interface ScaffoldSwitches {
+  ts: boolean
 }

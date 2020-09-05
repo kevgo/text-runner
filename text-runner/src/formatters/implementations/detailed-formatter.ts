@@ -16,11 +16,11 @@ export class DetailedFormatter implements Formatter {
   constructor(configuration: Configuration, emitter: EventEmitter) {
     this.counter = new Counter()
     this.configuration = configuration
-    emitter.on(CommandEvent.success, this.success)
-    emitter.on(CommandEvent.failed, this.failed)
-    emitter.on(CommandEvent.warning, this.warning)
-    emitter.on(CommandEvent.skipped, this.skipped)
-    emitter.on(CommandEvent.finish, this.finish)
+    emitter.on(CommandEvent.success, this.success.bind(this))
+    emitter.on(CommandEvent.failed, this.failed.bind(this))
+    emitter.on(CommandEvent.warning, this.warning.bind(this))
+    emitter.on(CommandEvent.skipped, this.skipped.bind(this))
+    emitter.on(CommandEvent.finish, this.finish.bind(this))
   }
 
   success(args: SuccessArgs) {
@@ -28,9 +28,7 @@ export class DetailedFormatter implements Formatter {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
-    console.log(
-      color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.activity.actionName}`)
-    )
+    console.log(color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.finalName}`))
   }
 
   failed(args: FailedArgs) {
@@ -50,7 +48,7 @@ export class DetailedFormatter implements Formatter {
       process.stdout.write(color.dim(args.output))
     }
     console.log(
-      color.cyan(`${args.activity.file.platformified()}:${args.activity.line} -- skipping: ${args.activity.actionName}`)
+      color.cyan(`${args.activity.file.platformified()}:${args.activity.line} -- skipping: ${args.finalName}`)
     )
   }
 
@@ -64,6 +62,6 @@ export class DetailedFormatter implements Formatter {
   }
 
   errorCount(): number {
-    return this.errorCount()
+    return this.counter.errorCount()
   }
 }

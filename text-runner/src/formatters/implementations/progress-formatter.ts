@@ -73,6 +73,6 @@ export class ProgressFormatter implements Formatter {
   }
 
   errorCount(): number {
-    return this.errorCount()
+    return this.counter.errorCount()
   }
 }

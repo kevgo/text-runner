@@ -21,7 +21,7 @@ interface ExecuteResultTable {
   filename?: string
   line?: number
   output?: string // what the action printed via action.log()
-  status?: textRunner.ActivityResultStatus
+  status?: "success" | "failed"
 }
 
 Then("it executes {int} test", function (count) {

@@ -1,14 +1,10 @@
 import * as textRunner from "text-runner"
 
-export async function callTextRunner(
-  jsText: string,
-  sourceDir: string,
-  expectError: boolean
-): Promise<textRunner.ExecuteResult> {
+export async function callTextRunner(jsText: string, sourceDir: string, expectError: boolean) {
   // @ts-ignore: this make textRunner available as a variable here
   const tr = textRunner
   // @ts-ignore: this is used inside eval
-  const formatterName = "silent"
+  const formatter = "silent"
   let result: any
   let error: Error
   eval("result = " + jsText)

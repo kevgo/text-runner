@@ -13,7 +13,7 @@ import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
 
 const psTree = util.promisify(psTreeR)
 
-interface ExecuteResultTable {
+interface ExecuteResultLine {
   action?: string // standardized name of the action ("check-link")
   activity?: string // final name of the activity ("checking link http://foo.bar")
   errorMessage?: string // message of the UserError thrown
@@ -21,25 +21,24 @@ interface ExecuteResultTable {
   filename?: string
   line?: number
   output?: string // what the action printed via action.log()
-  status?: "success" | "failed"
+  status?: "success" | "failed" | "skipped"
 }
 
 Then("it executes {int} test", function (count) {
   const world = this as TRWorld
-  if (!world.apiResults) {
+  if (!world.activityResults) {
     throw new Error("no API results found")
   }
-  assert.equal(world.apiResults.activityResults.length, 1)
+  assert.equal(world.activityResults.length, 1)
 })
 
 Then("it executes these actions:", function (table) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
-  const apiResults = world.apiResults as textRunner.ExecuteResult
   const tableHashes = table.hashes()
-  const want: ExecuteResultTable[] = []
+  const want: ExecuteResultLine[] = []
   for (const line of tableHashes) {
-    const result: ExecuteResultTable = {}
+    const result: ExecuteResultLine = {}
     if (line.FILENAME != null) {
       result.filename = line.FILENAME
     }
@@ -66,33 +65,33 @@ Then("it executes these actions:", function (table) {
     }
     want.push(result)
   }
-  const have: ExecuteResultTable[] = []
+  const have: ExecuteResultLine[] = []
   const wanted = want[0]
-  for (const line of apiResults?.activityResults || []) {
-    const result: ExecuteResultTable = {}
+  for (const activityResult of world.activityResults || []) {
+    const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
-      result.filename = line.activity.file.unixified()
+      result.filename = activityResult.activity?.file.unixified()
     }
     if (wanted.line != null) {
-      result.line = line.activity.line
+      result.line = activityResult.activity?.line
     }
     if (wanted.action != null) {
-      result.action = line.activity.actionName
+      result.action = activityResult.activity?.actionName
     }
     if (wanted.output != null) {
-      result.output = line.output?.trim() || ""
+      result.output = activityResult.output?.trim() || ""
     }
     if (wanted.activity != null) {
-      result.activity = line.finalName
+      result.activity = activityResult.finalName
     }
     if (wanted.status != null) {
-      result.status = line.status
+      result.status = activityResult.status
     }
     if (wanted.errorType != null) {
-      result.errorType = line.error?.name || ""
+      result.errorType = activityResult.error?.name || ""
     }
     if (wanted.errorMessage != null) {
-      result.errorMessage = stripAnsi(line.error?.message || "")
+      result.errorMessage = stripAnsi(activityResult.error?.message || "")
     }
     have.push(result)
   }
@@ -102,10 +101,10 @@ Then("it executes these actions:", function (table) {
 Then("it executes with this warning:", function (warning: string) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
-  const apiResults = world.apiResults as textRunner.ExecuteResult
-  assert.equal(apiResults.activityResults.length, 0, "activity results")
-  assert.equal(apiResults.warnings.length, 1, "warnings")
-  assert.equal(apiResults.warnings[0], warning)
+  assert.equal(world.activityResults.length, 0, "activity results")
+  const warnings = world.activityResults.filter((ar) => ar.message)
+  assert.equal(warnings.length, 1, "warnings")
+  assert.equal(warnings[0].message, warning)
 })
 
 Then("it throws:", function (table) {
@@ -114,20 +113,20 @@ Then("it throws:", function (table) {
     throw new Error("no error thrown")
   }
   const tableHash = table.hashes()[0]
-  const want: ExecuteResultTable = {
+  const want: ExecuteResultLine = {
     errorType: tableHash["ERROR TYPE"],
     errorMessage: tableHash["ERROR MESSAGE"],
   }
   if (!world.apiException) {
     throw new Error("no apiException found")
   }
-  const have: ExecuteResultTable = {
+  const have: ExecuteResultLine = {
     errorType: world.apiException.name,
     errorMessage: stripAnsi(world.apiException.message).trim().split("\n")[0],
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME
-    have.filename = world.apiException.filePath
+    have.filename = world.apiException.file?.unixified()
   }
   if (tableHash.LINE) {
     want.line = parseInt(tableHash.LINE, 10)
@@ -138,7 +137,7 @@ Then("it throws:", function (table) {
 
 Then("the error provides the guidance:", function (expectedText) {
   const world = this as TRWorld
-  const errors = world.apiResults.activityResults.map((res) => res.error).filter((e) => e)
+  const errors = world.activityResults.map((res) => res.error).filter((e) => e)
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }
@@ -219,18 +218,18 @@ Then("it runs {int} test", function (count) {
 
 Then("it runs in a global temp directory", function () {
   const world = this as TRWorld
-  if (!world.apiResults) {
+  if (!world.activityResults) {
     throw new Error("no API results found")
   }
-  assert.notInclude(world.apiResults.activityResults[0].output, world.rootDir)
+  assert.notInclude(world.activityResults[0].output, world.rootDir)
 })
 
 Then("it runs in the local {string} directory", function (dirName) {
   const world = this as TRWorld
-  if (!world.apiResults) {
+  if (!world.activityResults) {
     throw new Error("no API results found")
   }
-  const have = world.apiResults.activityResults[0].output.trim()
+  const have = world.activityResults[0].output?.trim()
   const want = path.join(world.rootDir, dirName)
   assert.equal(have, want)
 })

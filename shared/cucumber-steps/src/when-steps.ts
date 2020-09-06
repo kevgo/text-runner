@@ -2,12 +2,14 @@ import { When } from "cucumber"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
 import { callTextRunner } from "./helpers/call-text-runner"
+import { BlackholeFormatter } from "./blackhole-formatter"
+import * as textRunner from "text-runner"
 
 When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
   const world = this as TRWorld
   const expectError = determineExpectError(tryingText)
   try {
-    world.apiResults = await callTextRunner(jsText, world.rootDir, expectError)
+    world.activityResults = await callTextRunner(jsText, world.rootDir, expectError)
   } catch (e) {
     world.apiException = e
     if (expectError) {
@@ -22,11 +24,13 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
 When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: string) {
   const world = this as TRWorld
   const expectError = determineExpectError(tryingText)
-  world.apiResults = await callTextRunner(
-    "textRunner.runCommand({sourceDir, formatterName})",
-    world.rootDir,
-    expectError
-  )
+  const config = textRunner.defaultConfiguration()
+  config.sourceDir = this.rootDir
+  const runCommand = new textRunner.RunCommand(config)
+  const formatter = new BlackholeFormatter(runCommand)
+  await runCommand.execute()
+  world.activityResults = formatter.activityResults
+  await callTextRunner("textRunner.runCommand({sourceDir, formatterName})", world.rootDir, expectError)
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

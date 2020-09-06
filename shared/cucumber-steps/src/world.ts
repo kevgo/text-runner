@@ -1,5 +1,6 @@
 import { ObservableProcess } from "observable-process"
-import { ExecuteResult, UserError } from "text-runner"
+import { UserError } from "text-runner"
+import { ActivityResult } from "./blackhole-formatter"
 
 /** World is the shared data structure that is provided as `this` to Cucumber steps. */
 export interface TRWorld {
@@ -7,7 +8,7 @@ export interface TRWorld {
   apiException: UserError | undefined
 
   /** result of the last API call */
-  apiResults: ExecuteResult
+  activityResults: ActivityResult[]
 
   /** the currently running subshell process */
   process: ObservableProcess | undefined

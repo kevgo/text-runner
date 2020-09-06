@@ -24,8 +24,7 @@ When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string,
 When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: string) {
   const world = this as TRWorld
   const expectError = determineExpectError(tryingText)
-  const config = textRunner.defaultConfiguration()
-  config.sourceDir = this.rootDir
+  const config = textRunner.defaultConfiguration({ sourceDir: world.rootDir })
   const runCommand = new textRunner.RunCommand(config)
   const formatter = new BlackholeFormatter(runCommand)
   await runCommand.execute()

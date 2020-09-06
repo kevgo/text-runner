@@ -19,17 +19,17 @@ export interface Configuration {
   workspace: string // the root directory of the workspace
 }
 
-export function defaultConfiguration(): Configuration {
+export function defaultConfiguration(overrides: Partial<Configuration> = {}): Configuration {
   return {
-    regionMarker: "type",
-    defaultFile: "",
-    exclude: [],
-    files: "**/*.md",
-    formatterName: "detailed",
-    online: false,
-    publications: new Publications(),
-    sourceDir: process.cwd(),
-    useSystemTempDirectory: false,
-    workspace: "", // will be populated later
+    regionMarker: overrides.regionMarker ?? "type",
+    defaultFile: overrides.defaultFile ?? "",
+    exclude: overrides.exclude ?? [],
+    files: overrides.files ?? "**/*.md",
+    formatterName: overrides.formatterName ?? "detailed",
+    online: overrides.online ?? false,
+    publications: overrides.publications ?? new Publications(),
+    sourceDir: overrides.sourceDir ?? process.cwd(),
+    useSystemTempDirectory: overrides.useSystemTempDirectory ?? false,
+    workspace: overrides.workspace ?? "", // will be populated later
   }
 }

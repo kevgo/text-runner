@@ -4,5 +4,7 @@ Feature: help command
     When running "text-run help"
     Then it prints:
       """
-      xxx
+      USAGE: .*
+
+      COMMANDS
       """

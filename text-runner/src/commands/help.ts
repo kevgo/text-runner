@@ -1,6 +1,5 @@
 import * as color from "colorette"
 import { Command, CommandEvent } from "./command"
-import { error } from "console"
 import { EventEmitter } from "events"
 
 export class HelpCommand extends EventEmitter implements Command {

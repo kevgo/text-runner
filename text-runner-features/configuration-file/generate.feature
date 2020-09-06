@@ -49,7 +49,10 @@ Feature: generating a configuration file
       """
 
   Scenario: setup via API
-    When calling "textRunner.setupCommand({sourceDir, formatterName})"
+    When calling:
+      """
+      new textRunner.SetupCommand(config).execute()
+      """
     Then it creates the file "text-run.yml" with content:
       """
       # white-list for files to test

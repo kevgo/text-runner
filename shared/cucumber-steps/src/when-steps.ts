@@ -6,9 +6,10 @@ import * as textRunner from "text-runner"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const sourceDir = world.rootDir
-  const config = textRunner.defaultConfiguration({ sourceDir })
-  let asyncFunc = async function (tr: typeof textRunner, f: typeof BlackholeFormatter, world: TRWorld) {}
+  const config = textRunner.defaultConfiguration({ sourceDir: world.rootDir })
+  let command = new textRunner.RunCommand(config)
+  let formatter = new BlackholeFormatter(command)
+  let asyncFunc = async function (tr: typeof textRunner, f: typeof BlackholeFormatter, w: TRWorld) {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
   //       would be more elegant here but somehow doesn't work on Node 14.
@@ -19,6 +20,7 @@ When(/^calling:$/, async function (jsText: string) {
   eval(funcText)
   try {
     await asyncFunc(textRunner, BlackholeFormatter, world)
+    world.activityResults = formatter.activityResults
   } catch (e) {
     world.apiException = e
   }

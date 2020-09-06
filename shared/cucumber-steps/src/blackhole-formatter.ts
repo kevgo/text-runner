@@ -18,7 +18,6 @@ export class BlackholeFormatter {
 
   constructor(emitter: EventEmitter) {
     this.activityResults = []
-    const pushArgs = this.activityResults.push.bind(this.activityResults)
     emitter.on(CommandEvent.success, this.success.bind(this))
     emitter.on(CommandEvent.failed, this.failed.bind(this))
     emitter.on(CommandEvent.warning, this.warning.bind(this))

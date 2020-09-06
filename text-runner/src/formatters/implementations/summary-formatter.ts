@@ -16,6 +16,7 @@ export class SummaryFormatter {
   constructor(configuration: Configuration, emitter: EventEmitter) {
     this.configuration = configuration
     this.counter = new Counter()
+    emitter.on(CommandEvent.output, console.log)
     emitter.on(CommandEvent.success, this.success.bind(this))
     emitter.on(CommandEvent.failed, this.failed.bind(this))
     emitter.on(CommandEvent.warning, this.warning.bind(this))

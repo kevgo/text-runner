@@ -18,7 +18,7 @@ export class HelpCommand extends EventEmitter implements Command {
 
     return `
 ${color.dim("TextRunner " + version)}
-${error || ""}
+
 USAGE: ${color.bold("text-run [<options>] <command>")}
 
 COMMANDS

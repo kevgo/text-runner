@@ -16,6 +16,7 @@ export class DetailedFormatter implements Formatter {
   constructor(configuration: Configuration, emitter: EventEmitter) {
     this.counter = new Counter()
     this.configuration = configuration
+    emitter.on(CommandEvent.output, console.log)
     emitter.on(CommandEvent.success, this.success.bind(this))
     emitter.on(CommandEvent.failed, this.failed.bind(this))
     emitter.on(CommandEvent.warning, this.warning.bind(this))

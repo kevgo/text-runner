@@ -27,6 +27,7 @@ export class ProgressFormatter implements Formatter {
       progress.Presets.shades_classic
     )
     emitter.on(CommandEvent.start, this.start.bind(this))
+    emitter.on(CommandEvent.output, console.log)
     emitter.on(CommandEvent.success, this.success.bind(this))
     emitter.on(CommandEvent.failed, this.failed.bind(this))
     emitter.on(CommandEvent.warning, this.warning.bind(this))

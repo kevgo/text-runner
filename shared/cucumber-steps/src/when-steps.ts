@@ -1,33 +1,39 @@
 import { When } from "cucumber"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
-import { callTextRunner } from "./helpers/call-text-runner"
 import { BlackholeFormatter } from "./blackhole-formatter"
 import * as textRunner from "text-runner"
 
-When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
+When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const expectError = determineExpectError(tryingText)
+  const sourceDir = world.rootDir
+  const config = textRunner.defaultConfiguration({ sourceDir })
+  let asyncFunc = async function (tr: typeof textRunner, f: typeof BlackholeFormatter, world: TRWorld) {}
+  // NOTE: instantiating an AsyncFunction
+  //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
+  //       would be more elegant here but somehow doesn't work on Node 14.
+  const funcText = `
+  asyncFunc = async function runner(textRunner, Formatter, world) {
+    ${jsText}
+  }`
+  eval(funcText)
   try {
-    world.activityResults = await callTextRunner(jsText, world.rootDir, expectError)
+    await asyncFunc(textRunner, BlackholeFormatter, world)
   } catch (e) {
     world.apiException = e
-    if (expectError) {
-      // expected the error --> done here
-      return
-    } else {
-      throw new Error(`Unexpected exception: ${e}`)
-    }
   }
 })
 
-When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: string) {
+When(/^calling Text-Runner$/, async function () {
   const world = this as TRWorld
-  const expectError = determineExpectError(tryingText)
   const config = textRunner.defaultConfiguration({ sourceDir: world.rootDir })
-  const runCommand = new textRunner.RunCommand(config)
-  const formatter = new BlackholeFormatter(runCommand)
-  await runCommand.execute()
+  const command = new textRunner.RunCommand(config)
+  const formatter = new BlackholeFormatter(command)
+  try {
+    await command.execute()
+  } catch (e) {
+    world.apiException = e
+  }
   world.activityResults = formatter.activityResults
 })
 

@@ -13,7 +13,12 @@ Feature: adding new actions
       """
 
   Scenario: adding a new step via API
-    When calling "textRunner.scaffoldCommand({files: 'new-step', sourceDir})"
+    When calling:
+      """
+      const command = new textRunner.ScaffoldCommand({files: 'new-step', sourceDir}, {})
+      const formatter = new Formatter(command)
+      await command.execute()
+      """
     Then it creates the file "text-run/new-step.js" with content:
       """
       module.exports = function newStep (action) {

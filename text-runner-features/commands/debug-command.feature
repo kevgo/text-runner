@@ -1,7 +1,12 @@
 Feature: display the version
 
   Scenario: no subcommand
-    When trying to call "textRunner.debugCommand({})"
+    When calling:
+      """
+      const command = new textRunner.DebugCommand(config, {})
+      const formatter = new Formatter(command)
+      await command.execute()
+      """
     Then it throws:
       | ERROR TYPE | ERROR MESSAGE     |
       | UserError  | missing data type |

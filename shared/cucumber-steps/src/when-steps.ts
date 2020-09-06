@@ -30,7 +30,6 @@ When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: strin
   const formatter = new BlackholeFormatter(runCommand)
   await runCommand.execute()
   world.activityResults = formatter.activityResults
-  await callTextRunner("textRunner.runCommand({sourceDir, formatterName})", world.rootDir, expectError)
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

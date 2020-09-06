@@ -21,7 +21,7 @@ interface ExecuteResultLine {
   filename?: string
   line?: number
   output?: string // what the action printed via action.log()
-  status?: "success" | "failed" | "skipped"
+  status?: "success" | "failed" | "skipped" | "warning"
 }
 
 Then("it executes {int} test", function (count) {

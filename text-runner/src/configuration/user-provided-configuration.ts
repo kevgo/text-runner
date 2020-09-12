@@ -1,5 +1,6 @@
-import { Publications } from "../publications/publications"
-import { FormatterName } from "../../formatters/formatter"
+import { Publications } from "./publications/publications"
+import { FormatterName } from "../formatters/formatter"
+import { ScaffoldLanguage } from "../commands/scaffold"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,
@@ -8,28 +9,14 @@ import { FormatterName } from "../../formatters/formatter"
 export interface UserProvidedConfiguration {
   regionMarker?: string
   configFileName?: string // name of the config file to use
-  debugSwitches?: DebugSwitches
   defaultFile?: string
   exclude?: string | string[]
   files?: string // files to test
   formatterName?: FormatterName // name of the formatter to use
   online?: boolean
   publications?: Publications
-  scaffoldSwitches?: ScaffoldSwitches
+  scaffoldLanguage?: ScaffoldLanguage
   sourceDir?: string // the root directory of the source code to test
   useSystemTempDirectory?: boolean
   workspace?: string // path of the workspace to use
-}
-
-/** switches used for the "debug" command */
-export interface DebugSwitches {
-  activities?: boolean
-  ast?: boolean
-  images?: boolean
-  links?: boolean
-  linkTargets?: boolean
-}
-
-export interface ScaffoldSwitches {
-  ts?: boolean
 }

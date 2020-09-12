@@ -5,11 +5,10 @@ import { Action } from "../actions/types/action"
 import { ActionArgs } from "../actions/types/action-args"
 import { ActionResult } from "../actions/types/action-result"
 import { Activity } from "../activity-list/types/activity"
-import { Configuration } from "../configuration/types/configuration"
+import { Configuration } from "../configuration/configuration"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
-import { StatsCounter } from "./helpers/stats-counter"
 import { EventEmitter } from "events"
 import { CommandEvent } from "../commands/command"
 import { SuccessArgs, SkippedArgs, FailedArgs } from "../formatters/formatter"
@@ -20,7 +19,6 @@ export async function runActivity(
   actionFinder: ActionFinder,
   configuration: Configuration,
   linkTargets: LinkTargetList,
-  statsCounter: StatsCounter,
   emitter: EventEmitter
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
@@ -46,7 +44,6 @@ export async function runActivity(
     }
     if (actionResult === undefined) {
       // TODO: remove statsCounter, use the formatters to count
-      statsCounter.success()
       const successArgs: SuccessArgs = {
         activity,
         finalName: nameRefiner.finalName(),
@@ -54,7 +51,6 @@ export async function runActivity(
       }
       emitter.emit(CommandEvent.success, successArgs)
     } else if (actionResult === args.SKIPPING) {
-      statsCounter.skip()
       const skippedArgs: SkippedArgs = {
         activity,
         finalName: nameRefiner.finalName(),
@@ -65,7 +61,6 @@ export async function runActivity(
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (e) {
-    statsCounter.error()
     const failedArgs: FailedArgs = {
       activity,
       finalName: nameRefiner.finalName(),

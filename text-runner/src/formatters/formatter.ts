@@ -1,10 +1,10 @@
 import { Activity } from "../activity-list/types/activity"
-import { StatsCounter } from "../runners/helpers/stats-counter"
+import { Stats } from "../stats-collector"
 
 export type FormatterName = "detailed" | "dot" | "progress" | "silent" | "summary"
 
 export interface Formatter {
-  errorCount(): number
+  finish(args: FinishArgs): void
 }
 
 export interface StartArgs {
@@ -39,5 +39,5 @@ export interface SkippedArgs {
 }
 
 export interface FinishArgs {
-  stats: StatsCounter
+  stats: Stats
 }

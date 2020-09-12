@@ -1,7 +1,8 @@
 import { mergeConfigurations } from "./merge-configurations"
 import { Publications } from "./publications/publications"
-import { Configuration, defaultConfiguration } from "./types/configuration"
-import { UserProvidedConfiguration } from "./types/user-provided-configuration"
+import { Configuration  } from "./configuration"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { defaultConfiguration } from "./default-configuration"
 
 /**
  * Loads the configuration from disk and returns it.

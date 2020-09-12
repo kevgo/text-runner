@@ -1,25 +1,26 @@
 import * as path from "path"
 import { promises as fs } from "fs"
 import { camelize } from "../helpers/camelize"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
 import { EventEmitter } from "events"
 import { Command } from "./command"
-import { loadConfiguration } from "../configuration/load-configuration"
+import { Configuration } from "../configuration/configuration"
+import { UserError } from "../errors/user-error"
+
+export type ScaffoldLanguage = "js" | "ts"
 
 export class ScaffoldCommand extends EventEmitter implements Command {
-  userConfig: UserProvidedConfiguration
+  config: Configuration
 
-  constructor(userConfig: UserProvidedConfiguration) {
+  constructor(config: Configuration) {
     super()
-    this.userConfig = userConfig
+    this.config = config
   }
 
   async execute() {
-    const config = await loadConfiguration(this.userConfig)
-    if (!config.files) {
+    if (!this.config.files) {
       throw new Error("no action name given")
     }
-    const dirPath = path.join(config.sourceDir || ".", "text-run")
+    const dirPath = path.join(this.config.sourceDir || ".", "text-run")
     let textRunDirExists = true
     try {
       await fs.stat(dirPath)
@@ -29,10 +30,13 @@ export class ScaffoldCommand extends EventEmitter implements Command {
     if (!textRunDirExists) {
       await fs.mkdir(dirPath, { recursive: true })
     }
-    if ((this.userConfig.scaffoldSwitches || {}).ts) {
-      await fs.writeFile(path.join(dirPath, config.files + ".ts"), tsTemplate(config.files), "utf8")
+    if (this.config.scaffoldLanguage === "ts") {
+      await fs.writeFile(path.join(dirPath, this.config.files + ".ts"), tsTemplate(this.config.files), "utf8")
+    } else if (this.config.scaffoldLanguage === "js") {
+      await fs.writeFile(path.join(dirPath, this.config.files + ".js"), jsTemplate(this.config.files), "utf8")
     } else {
-      await fs.writeFile(path.join(dirPath, config.files + ".js"), jsTemplate(config.files), "utf8")
+      throw new UserError(`Unknown configuration language: ${this.config.scaffoldLanguage}`,
+      'Possible languages are "js" and "ts"')
     }
   }
 }

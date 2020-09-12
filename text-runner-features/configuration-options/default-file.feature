@@ -15,8 +15,8 @@ Feature: Default file
       """
     When calling Text-Runner
     Then it executes these actions:
-      | FILENAME | LINE | ACTION     | ACTIVITY                          |
-      | root.md  | 1    | check-link | link to local file guide/start.md |
+      | FILENAME | LINE | ACTION     | ACTIVITY                      |
+      | root.md  | 1    | check-link | link to local directory guide |
 
 
   Scenario: no default filename is set

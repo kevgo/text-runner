@@ -5,65 +5,57 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { AstNode } from "../parsers/standard-AST/ast-node"
-import { UserProvidedConfiguration, DebugSwitches } from "../configuration/types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
 import { EventEmitter } from "events"
 import { Command } from "./command"
-import { loadConfiguration } from "../configuration/load-configuration"
+import { Configuration } from "../configuration/configuration"
+
+/** DebugSubcommandName defines the valid subcommands that the debug command can receive */
+export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
 export class DebugCommand extends EventEmitter implements Command {
-  userConfig: UserProvidedConfiguration
+  config: Configuration
+  subcommand: DebugSubcommand
 
-  constructor(userConfig: UserProvidedConfiguration) {
+  constructor(config: Configuration, subcommand: DebugSubcommand) {
     super()
-    this.userConfig = userConfig
+    this.config = config
+    this.subcommand = subcommand
   }
 
   async execute() {
-    const config = await loadConfiguration(this.userConfig)
-    const typeEntry = Object.entries(this.userConfig.debugSwitches || {}).filter((e) => e[1])[0]
-    if (!typeEntry) {
-      const guidance = `Please tell me what to debug. One of these things:
+    const filenames = await getFileNames(this.config)
+    if (filenames.length !== 1) {
+      const guidance = `Please tell me which file to debug
 
+Example: text-run debug --${this.subcommand} foo.md`
+      throw new UserError("no files specified", guidance)
+    }
+    const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+    switch (this.subcommand) {
+      case "activities":
+        return debugActivities(ASTs, this.config)
+      case "ast":
+        return debugASTNodes(ASTs)
+      case "images":
+        return debugImages(ASTs)
+      case "links":
+        return debugLinks(ASTs)
+      case "linkTargets":
+        return debugLinkTargets(ASTs)
+      default:
+        throw new UserError("unknown debug sub-command: " + this.subcommand,
+        `possible subcommands are:
 --activities: active regions
 --ast: AST nodes
 --images: embedded images
 --links: embedded links
 --link-targets: document anchors to link to
 
-Example: text-run debug --images foo.md`
-      throw new UserError("missing data type", guidance)
-    }
-    const type = typeEntry[0]
-    const filenames = await getFileNames(config)
-    if (filenames.length !== 1) {
-      const guidance = `Please tell me which file to debug
-
-Example: text-run debug --${type} foo.md`
-      throw new UserError("no files specified", guidance)
-    }
-    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
-
-    switch (type) {
-      case "activities":
-        debugActivities(ASTs, config)
-        break
-      case "ast":
-        debugASTNodes(ASTs)
-        break
-      case "images":
-        debugImages(ASTs)
-        break
-      case "links":
-        debugLinks(ASTs)
-        break
-      case "linkTargets":
-        debugLinkTargets(ASTs)
-        break
-      default:
-        throw new UserError("unknown debug sub-command: " + type)
+Example: text-run debug --images foo.md`)
     }
   }
 }

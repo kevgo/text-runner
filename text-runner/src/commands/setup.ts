@@ -2,20 +2,18 @@ import * as color from "colorette"
 import { createConfigurationFile } from "../configuration/config-file/create-configuration-file"
 import { EventEmitter } from "events"
 import { CommandEvent, Command } from "./command"
-import { loadConfiguration } from "../configuration/load-configuration"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { Configuration } from "../configuration/configuration"
 
 export class SetupCommand extends EventEmitter implements Command {
-  userConfig: UserProvidedConfiguration
+  config: Configuration
 
-  constructor(userConfig: UserProvidedConfiguration) {
+  constructor(config: Configuration) {
     super()
-    this.userConfig = userConfig
+    this.config = config
   }
 
   async execute() {
-    const config = await loadConfiguration(this.userConfig)
-    await createConfigurationFile(config.sourceDir || ".")
+    await createConfigurationFile(this.config.sourceDir || ".")
     this.emit(CommandEvent.output, `Created configuration file ${color.cyan("text-run.yml")} with default values`)
   }
 }

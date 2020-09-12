@@ -3,7 +3,7 @@ import { endChildProcesses } from "end-child-processes"
 import { parseCmdlineArgs } from "./configuration/cli/parse-cmdline-args"
 import { UserError } from "./errors/user-error"
 import { printUserError } from "./errors/print-user-error"
-import { DebugCommand } from "./commands/debug"
+import { DebugCommand, DebugSubcommand } from "./commands/debug"
 import { DynamicCommand } from "./commands/dynamic"
 import { HelpCommand } from "./commands/help"
 import { RunCommand } from "./commands/run"
@@ -12,29 +12,59 @@ import { SetupCommand } from "./commands/setup"
 import { StaticCommand } from "./commands/static"
 import { UnusedCommand } from "./commands/unused"
 import { VersionCommand } from "./commands/version"
-import { loadConfiguration } from "./configuration/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
-import { Configuration } from "./configuration/types/configuration"
-import { UserProvidedConfiguration } from "./configuration/types/user-provided-configuration"
+import { UserProvidedConfiguration } from "./configuration/user-provided-configuration"
+import { Configuration } from "./configuration/configuration"
+import { loadConfiguration } from "./configuration/load-configuration"
+import { StatsCollector } from "./stats-collector"
 
 cliCursor.hide()
 
 async function main() {
   let errorCount = 0
   try {
-    // step 1: determine configuration
-    const { commandName, cmdLineConfig } = parseCmdlineArgs(process.argv)
-    const config = await loadConfiguration(cmdLineConfig)
-
-    // step 2: create command instance
-    const command = instantiateCommand(commandName, config, cmdLineConfig)
-
-    // step 3: create formatter and attach to command instance
-    const formatter = instantiateFormatter(config, command)
-
-    // step 4: execute the command
+    // CLI WANTS
+    // - call a command with the parsed CLI args
+    // CUKE WANTS
+    // - call a command with no formatter (hence no output) and custom args
+    // OTHER API USERS WANT
+    // - call a command with custom settings
+    //
+    // DEPENDENCIES
+    // - UserProvidedConfiguration --> config file
+    // - config file --> config
+    // - config --> command
+    // - config + command --> formatter
+    // - formatter --> command.exec
+    //
+    // HIGH-LEVEL API
+    // 1. call a command with UserProvidedConfiguration, it loads the config and the formatter
+    //
+    // LOW LEVEL API
+    // - core (commands) receives Configuration, runs, emits events (doesn't care about interaction with outside world)
+    // - loadConfiguration(userArgs): Configuration
+    // - loadFormatter(name): Formatter
+    //
+    // HIGH-LEVEL API
+    // textRunner.execute(commandName, userConfig): results
+    // - loads config file
+    // - creates low-level command instance
+    // - instantiates statsCounter and subscribes it to events
+    // - instantiates formatter with given name and subscribes it to events
+    // - executes the command
+    // - calls "finished" method on formatter with statsCounter
+    // - returns the statsCounter
+    //
+    // idea: use a separate stats-collector that also subscribes to the EventEmitter
+    // in addition to a potential formatter. Then the cukes don't use a formatter at all.
+    const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
+    const configuration = await loadConfiguration(cmdLineConfig)
+    const command = await instantiateCommand(commandName, cmdLineConfig, configuration, debugSubcommand)
+    const formatter = instantiateFormatter(configuration, command)
+    const statsCollector = new StatsCollector(command)
     await command.execute()
-    errorCount += formatter.errorCount()
+    formatter.finish({stats: statsCollector.stats()})
+    errorCount = statsCollector.errorCount
   } catch (err) {
     errorCount += 1
     if (err instanceof UserError) {
@@ -49,26 +79,26 @@ async function main() {
 }
 main()
 
-function instantiateCommand(commandName: string, config: Configuration, cliArgs: UserProvidedConfiguration) {
+async function instantiateCommand(commandName: string, cliArgs: UserProvidedConfiguration, config: Configuration, debugSubcommand: DebugSubcommand) {
   switch (commandName) {
     case "help":
       return new HelpCommand()
     case "scaffold":
-      return new ScaffoldCommand(config, cliArgs.scaffoldSwitches || {})
+      return new ScaffoldCommand(config)
     case "setup":
       return new SetupCommand(config)
     case "version":
       return new VersionCommand()
     case "debug":
-      return new DebugCommand(config, cliArgs.debugSwitches || {})
+      return new DebugCommand(config, debugSubcommand)
     case "dynamic":
-      return new DynamicCommand(config)
+      return new DynamicCommand(cliArgs)
     case "run":
       return new RunCommand(config)
     case "static":
-      return new StaticCommand(config)
+      return new StaticCommand(cliArgs)
     case "unused":
-      return new UnusedCommand(config)
+      return await UnusedCommand.create(cliArgs)
     default:
       throw new UserError(`unknown command: ${commandName}`)
   }

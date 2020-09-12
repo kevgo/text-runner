@@ -4,7 +4,7 @@ import { DotFormatter } from "./implementations/dot-formatter"
 import { instantiateFormatter } from "./instantiate"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { EventEmitter } from "events"
-import { defaultConfiguration } from "../configuration/types/configuration"
+import { defaultConfiguration } from "../configuration/default-configuration"
 
 suite("instantiateFormatter()", function () {
   const emitter = new EventEmitter()
@@ -24,6 +24,7 @@ suite("instantiateFormatter()", function () {
 
   // NOTE: this creates an instance of the formatter right away.
   //       refactor the formatter interface to have a "start" method where the progressbar is instantiated.
+  // TODO: this should work now
   // test("request progress formatter", function () {
   //   const formatter = instantiateFormatter("progress", 0, config)
   //   assert.instanceOf(formatter, ProgressFormatter)

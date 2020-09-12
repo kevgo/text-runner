@@ -1,7 +1,10 @@
 import * as minimist from "minimist"
 import * as path from "path"
 import { availableCommands } from "../../commands/available-commands"
-import { UserProvidedConfiguration } from "../types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../user-provided-configuration"
+import { DebugSubcommand } from "../../commands/debug"
+import { ScaffoldLanguage } from "../../commands/scaffold"
+import { UserError } from "../../errors/user-error"
 
 /**
  * Parses the command-line options received
@@ -9,7 +12,7 @@ import { UserProvidedConfiguration } from "../types/user-provided-configuration"
  *
  * @param argv the command-line options received by the process
  */
-export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration } {
+export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration, debugSubcommand: DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -36,16 +39,7 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
-    debugSwitches: {
-      activities: cliArgs.activities,
-      ast: cliArgs.ast,
-      images: cliArgs.images,
-      links: cliArgs.links,
-      linkTargets: cliArgs["link-targets"],
-    },
-    scaffoldSwitches: {
-      ts: cliArgs.ts,
-    },
+    scaffoldLanguage: parseScaffoldSwitches(cliArgs)
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
@@ -54,5 +48,29 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     command = "run"
   }
 
-  return { commandName: command, cmdLineConfig: config }
+  return { commandName: command, cmdLineConfig: config, debugSubcommand: parseDebugSubcommand(cliArgs)}
+}
+
+function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {
+  if (cliArgs.activities) {
+    return "activities"
+  } else if (cliArgs.ast) {
+    return "ast"
+  } else if (cliArgs.images) {
+      return "images"
+  } else if (cliArgs.links) {
+      return "links"
+  } else if (cliArgs["link-targets"]) {
+      return "linkTargets"
+  } else {
+    throw new UserError("Missing debug subcommand")
+  }
+}
+
+function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): ScaffoldLanguage {
+  if (cliArgs.ts) {
+    return "ts"
+  } else {
+    return "js"
+  }
 }

@@ -1,8 +1,9 @@
 import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
-import { UserProvidedConfiguration } from "./types/user-provided-configuration"
-import { Configuration, defaultConfiguration } from "./types/configuration"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { Configuration  } from "./configuration"
 import { Publications } from "./publications/publications"
+import { defaultConfiguration } from "./default-configuration"
 
 suite("mergeConfigurations()", function () {
   test("no CLI args and config file data given", function () {
@@ -23,6 +24,7 @@ suite("mergeConfigurations()", function () {
       online: false,
       publications: new Publications(),
       regionMarker: "type",
+      scaffoldLanguage: "js",
       sourceDir: "my-source",
       useSystemTempDirectory: false,
       workspace: "",

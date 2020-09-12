@@ -3,13 +3,12 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeSequential } from "../runners/execute-sequential"
-import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import { EventEmitter } from "events"
 import { CommandEvent, Command } from "./command"
-import { StartArgs, FinishArgs, WarnArgs } from "../formatters/formatter"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { StartArgs, WarnArgs } from "../formatters/formatter"
+import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 import { loadConfiguration } from "../configuration/load-configuration"
 
 export class DynamicCommand extends EventEmitter implements Command {
@@ -38,7 +37,6 @@ export class DynamicCommand extends EventEmitter implements Command {
         this.emit(CommandEvent.warning, warnArgs)
         return
       }
-      const stats = new StatsCounter(filenames.length)
 
       // step 4: read and parse files
       const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
@@ -61,13 +59,7 @@ export class DynamicCommand extends EventEmitter implements Command {
       const startArgs: StartArgs = { stepCount: activities.length }
       this.emit(CommandEvent.start, startArgs)
       process.chdir(config.workspace)
-      const result = await executeSequential(activities, actionFinder, config, linkTargets, stats, this)
-
-      // step 9: write stats
-      const finishArgs: FinishArgs = { stats }
-      this.emit(CommandEvent.finish, finishArgs)
-
-      return result
+      await executeSequential(activities, actionFinder, config, linkTargets, this)
     } finally {
       process.chdir(originalDir)
     }

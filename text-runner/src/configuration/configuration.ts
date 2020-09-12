@@ -1,9 +1,10 @@
-import { Publications } from "../publications/publications"
-import { FormatterName } from "../../formatters/formatter"
+import { Publications } from "./publications/publications"
+import { FormatterName } from "../formatters/formatter"
 
 /**
  * All configuration values that are provided to the application
- * after analyzing the configuration provided by the user
+ * after analyzing the configuration provided via CLI,
+ * the configuration
  * and determining other runtime variables.
  */
 export interface Configuration {
@@ -14,22 +15,8 @@ export interface Configuration {
   formatterName: FormatterName // name of the Formatter class to use
   publications: Publications // folder mappings
   online: boolean // whether to skip built-in tests that require a network connection
+  scaffoldLanguage: "js" | "ts" // language in which to scaffold new steps
   sourceDir: string // the root directory of the source code to test
   useSystemTempDirectory: boolean // whether to create the workspace in the system temp directory or locally
   workspace: string // the root directory of the workspace
-}
-
-export function defaultConfiguration(overrides: Partial<Configuration> = {}): Configuration {
-  return {
-    regionMarker: overrides.regionMarker ?? "type",
-    defaultFile: overrides.defaultFile ?? "",
-    exclude: overrides.exclude ?? [],
-    files: overrides.files ?? "**/*.md",
-    formatterName: overrides.formatterName ?? "detailed",
-    online: overrides.online ?? false,
-    publications: overrides.publications ?? new Publications(),
-    sourceDir: overrides.sourceDir ?? process.cwd(),
-    useSystemTempDirectory: overrides.useSystemTempDirectory ?? false,
-    workspace: overrides.workspace ?? "", // will be populated later
-  }
 }

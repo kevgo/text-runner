@@ -1,5 +1,7 @@
 export type { ActionArgs } from "./actions/types/action-args"
+export { Activity} from "./activity-list/types/activity"
 export { Configuration  } from "./configuration/configuration"
+export {defaultConfiguration} from "./configuration/default-configuration"
 export { AstNode } from "./parsers/standard-AST/ast-node"
 export { AstNodeList } from "./parsers/standard-AST/ast-node-list"
 export { actionName } from "./actions/helpers/action-name"

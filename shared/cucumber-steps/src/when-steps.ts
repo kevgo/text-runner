@@ -1,26 +1,27 @@
 import { When } from "cucumber"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
-import { BlackholeFormatter } from "./blackhole-formatter"
 import * as textRunner from "text-runner"
+import { ActivityCollector } from "./activity-collector"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const config = textRunner.defaultConfiguration({ sourceDir: world.rootDir })
+  const config = textRunner.defaultConfiguration()
+  config.sourceDir = world.rootDir
   let command = new textRunner.RunCommand(config)
-  let formatter = new BlackholeFormatter(command)
-  let asyncFunc = async function (tr: typeof textRunner, f: typeof BlackholeFormatter, w: TRWorld) {}
+  const activityCollector = new ActivityCollector(command)
+  let asyncFunc = async function (tr: typeof textRunner, w: TRWorld) {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
   //       would be more elegant here but somehow doesn't work on Node 14.
   const funcText = `
-  asyncFunc = async function runner(textRunner, Formatter, world) {
+  asyncFunc = async function runner(textRunner, world) {
     ${jsText}
   }`
   eval(funcText)
   try {
-    await asyncFunc(textRunner, BlackholeFormatter, world)
-    world.activityResults = formatter.activityResults
+    await asyncFunc(textRunner, world)
+    world.activityResults = activityCollector.activities()
   } catch (e) {
     world.apiException = e
   }
@@ -28,15 +29,16 @@ When(/^calling:$/, async function (jsText: string) {
 
 When(/^calling Text-Runner$/, async function () {
   const world = this as TRWorld
-  const config = textRunner.defaultConfiguration({ sourceDir: world.rootDir })
+  const config = textRunner.defaultConfiguration()
+  config.sourceDir = world.rootDir
   const command = new textRunner.RunCommand(config)
-  const formatter = new BlackholeFormatter(command)
+  const activityCollector = new ActivityCollector(command)
   try {
     await command.execute()
   } catch (e) {
     world.apiException = e
   }
-  world.activityResults = formatter.activityResults
+  world.activityResults = activityCollector.activities()
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

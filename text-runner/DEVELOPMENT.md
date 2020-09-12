@@ -14,7 +14,7 @@ subsystem parses the command-line arguments and calls TextRunner's
 [src/text-runner.ts](src/text-runner.ts) and also Text-Runner's core.
 
 The core asks the [configuration](src/configuration) module for the current
-[configuration](src/configuration/types/configuration.ts) settings coming from
+[configuration](src/configuration/configuration.ts) settings coming from
 command-line arguments and/or configuration files. The configuration structure
 tells TextRunner the command to run. Commands are stored in the
 [commands](src/commands) folder. The most important command is

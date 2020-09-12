@@ -18,9 +18,9 @@ export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkT
 
 export class DebugCommand extends EventEmitter implements Command {
   config: Configuration
-  subcommand: DebugSubcommand
+  subcommand: DebugSubcommand | undefined
 
-  constructor(config: Configuration, subcommand: DebugSubcommand) {
+  constructor(config: Configuration, subcommand: DebugSubcommand | undefined) {
     super()
     this.config = config
     this.subcommand = subcommand
@@ -34,6 +34,14 @@ export class DebugCommand extends EventEmitter implements Command {
 Example: text-run debug --${this.subcommand} foo.md`
       throw new UserError("no files specified", guidance)
     }
+    const guidance = `possible subcommands are:
+--activities: active regions
+--ast: AST nodes
+--images: embedded images
+--links: embedded links
+--link-targets: document anchors to link to
+
+Example: text-run debug --images foo.md`
     const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
     switch (this.subcommand) {
       case "activities":
@@ -46,16 +54,10 @@ Example: text-run debug --${this.subcommand} foo.md`
         return debugLinks(ASTs)
       case "linkTargets":
         return debugLinkTargets(ASTs)
+      case undefined:
+        throw new UserError("missing debug sub-command", guidance)
       default:
-        throw new UserError("unknown debug sub-command: " + this.subcommand,
-        `possible subcommands are:
---activities: active regions
---ast: AST nodes
---images: embedded images
---links: embedded links
---link-targets: document anchors to link to
-
-Example: text-run debug --images foo.md`)
+        throw new UserError(`unknown debug sub-command: ${this.subcommand}`, guidance)
     }
   }
 }

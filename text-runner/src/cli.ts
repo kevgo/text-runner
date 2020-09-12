@@ -79,7 +79,7 @@ async function main() {
 }
 main()
 
-async function instantiateCommand(commandName: string, cliArgs: UserProvidedConfiguration, config: Configuration, debugSubcommand: DebugSubcommand) {
+async function instantiateCommand(commandName: string, cliArgs: UserProvidedConfiguration, config: Configuration, debugSubcommand: DebugSubcommand | undefined) {
   switch (commandName) {
     case "help":
       return new HelpCommand()

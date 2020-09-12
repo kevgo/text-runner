@@ -1,26 +1,10 @@
 Feature: display the version
 
   Scenario: no subcommand
-    When calling:
+    When trying to run "text-run debug"
+    Then it prints the text:
       """
-      const command = new textRunner.DebugCommand(config, {})
-      const formatter = new Formatter(command)
-      await command.execute()
-      """
-    Then it throws:
-      | ERROR TYPE | ERROR MESSAGE     |
-      | UserError  | missing data type |
-    And the API exception provides the guidance:
-      """
-      Please tell me what to debug. One of these things:
-
-      --activities: active regions
-      --ast: AST nodes
-      --images: embedded images
-      --links: embedded links
-      --link-targets: document anchors to link to
-
-      Example: text-run debug --images foo.md
+      Missing debug subcommand
       """
 
   Scenario: subcommand without filename
@@ -37,17 +21,13 @@ Feature: display the version
   Scenario: debugging activities
     Given the source code contains a file "1.md" with content:
       """
-      <a type="validate-javascript">
-      ```
-      foo()
-      ```
-      </a>
+      <a type="test">879043700
       """
     When running "text-run debug --activities 1.md"
     Then it prints the text:
       """
       ACTIVITIES:
-      1.md:1  validate-javascript
+      1.md:1  test
       """
 
   Scenario: debugging AST

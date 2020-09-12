@@ -63,7 +63,9 @@ async function main() {
     const formatter = instantiateFormatter(configuration, command)
     const statsCollector = new StatsCollector(command)
     await command.execute()
-    formatter.finish({stats: statsCollector.stats()})
+    if (["dynamic", "run", "static"].includes(commandName)) {
+      formatter.finish({stats: statsCollector.stats()})
+    }
     errorCount = statsCollector.errorCount
   } catch (err) {
     errorCount += 1

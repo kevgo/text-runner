@@ -12,7 +12,7 @@ import { UserError } from "../../errors/user-error"
  *
  * @param argv the command-line options received by the process
  */
-export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration, debugSubcommand: DebugSubcommand } {
+export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration, debugSubcommand?: DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -48,7 +48,11 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     command = "run"
   }
 
-  return { commandName: command, cmdLineConfig: config, debugSubcommand: parseDebugSubcommand(cliArgs)}
+  let debugSubcommand: DebugSubcommand | undefined
+  if (command === "debug") {
+    debugSubcommand = parseDebugSubcommand(cliArgs)
+  }
+  return { commandName: command, cmdLineConfig: config, debugSubcommand }
 }
 
 function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {

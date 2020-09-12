@@ -9,22 +9,21 @@ import { UserProvidedConfiguration, DebugSwitches } from "../configuration/types
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
-import { Configuration } from "../configuration/types/configuration"
 import { EventEmitter } from "events"
 import { Command } from "./command"
+import { loadConfiguration } from "../configuration/load-configuration"
 
 export class DebugCommand extends EventEmitter implements Command {
-  config: Configuration
-  switches: DebugSwitches
+  userConfig: UserProvidedConfiguration
 
-  constructor(config: Configuration, switches: DebugSwitches) {
+  constructor(userConfig: UserProvidedConfiguration) {
     super()
-    this.config = config
-    this.switches = switches
+    this.userConfig = userConfig
   }
 
   async execute() {
-    const typeEntry = Object.entries(this.switches).filter((e) => e[1])[0]
+    const config = await loadConfiguration(this.userConfig)
+    const typeEntry = Object.entries(this.userConfig.debugSwitches || {}).filter((e) => e[1])[0]
     if (!typeEntry) {
       const guidance = `Please tell me what to debug. One of these things:
 
@@ -38,18 +37,18 @@ Example: text-run debug --images foo.md`
       throw new UserError("missing data type", guidance)
     }
     const type = typeEntry[0]
-    const filenames = await getFileNames(this.config)
+    const filenames = await getFileNames(config)
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug
 
 Example: text-run debug --${type} foo.md`
       throw new UserError("no files specified", guidance)
     }
-    const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
     switch (type) {
       case "activities":
-        debugActivities(ASTs, this.config)
+        debugActivities(ASTs, config)
         break
       case "ast":
         debugASTNodes(ASTs)

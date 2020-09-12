@@ -82,7 +82,7 @@ Then("it executes these actions:", function (table) {
       result.output = activityResult.output?.trim() || ""
     }
     if (wanted.activity != null) {
-      result.activity = activityResult.finalName
+      result.activity = stripAnsi(activityResult.finalName || "")
     }
     if (wanted.status != null) {
       result.status = activityResult.status

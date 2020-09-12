@@ -7,28 +7,32 @@ import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import { EventEmitter } from "events"
-import { Configuration } from "../configuration/types/configuration"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, FinishArgs, WarnArgs } from "../formatters/formatter"
+import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { loadConfiguration } from "../configuration/load-configuration"
 
 export class StaticCommand extends EventEmitter implements Command {
-  config: Configuration
+  userConfig: UserProvidedConfiguration
 
-  constructor(config: Configuration) {
+  constructor(userConfig: UserProvidedConfiguration) {
     super()
-    this.config = config
+    this.userConfig = userConfig
   }
 
   async execute() {
     const originalDir = process.cwd()
     try {
+      // step 1: load configuration
+      const config = await loadConfiguration(this.userConfig)
+
       // step 1: create working dir
-      if (!this.config.workspace) {
-        this.config.workspace = await createWorkspace(this.config)
+      if (!config.workspace) {
+        config.workspace = await createWorkspace(config)
       }
 
       // step 2: find files
-      const filenames = await getFileNames(this.config)
+      const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
         this.emit(CommandEvent.warning, warnArgs)
@@ -37,7 +41,7 @@ export class StaticCommand extends EventEmitter implements Command {
       const stats = new StatsCounter(filenames.length)
 
       // step 3: read and parse files
-      const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+      const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
       // step 4: find link targets
       const linkTargets = findLinkTargets(ASTs)
@@ -56,12 +60,12 @@ export class StaticCommand extends EventEmitter implements Command {
       // step 7: execute the ActivityList
       const startArgs: StartArgs = { stepCount: links.length }
       this.emit(CommandEvent.start, startArgs)
-      process.chdir(this.config.workspace)
-      const parResults = executeParallel(links, actionFinder, linkTargets, this.config, stats, this)
+      process.chdir(config.workspace)
+      const parResults = executeParallel(links, actionFinder, linkTargets, config, stats, this)
       await Promise.all(parResults)
 
       // step 8: cleanup
-      process.chdir(this.config.sourceDir)
+      process.chdir(config.sourceDir)
 
       // step 9: write stats
       const finishArgs: FinishArgs = { stats }

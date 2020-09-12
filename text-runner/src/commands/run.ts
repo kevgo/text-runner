@@ -8,30 +8,34 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { Configuration } from "../configuration/types/configuration"
 import { EventEmitter } from "events"
 import { CommandEvent, Command } from "./command"
 import { FinishArgs, StartArgs, WarnArgs } from "../formatters/formatter"
+import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { loadConfiguration } from "../configuration/load-configuration"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export class RunCommand extends EventEmitter implements Command {
-  config: Configuration
+  userConfig: UserProvidedConfiguration
 
-  constructor(config: Configuration) {
+  constructor(userConfig: UserProvidedConfiguration) {
     super()
-    this.config = config
+    this.userConfig = userConfig
   }
 
   async execute() {
     const originalDir = process.cwd()
     try {
-      // step 1: create workspace
-      if (!this.config.workspace) {
-        this.config.workspace = await createWorkspace(this.config)
+      // step 1: load configuration
+      const config = await loadConfiguration(this.userConfig)
+
+      // step 2: create workspace
+      if (!config.workspace) {
+        config.workspace = await createWorkspace(config)
       }
 
-      // step 2: find files
-      const filenames = await getFileNames(this.config)
+      // step 3: find files
+      const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
         this.emit(CommandEvent.warning, warnArgs)
@@ -39,17 +43,17 @@ export class RunCommand extends EventEmitter implements Command {
       }
       const stats = new StatsCounter(filenames.length)
 
-      // step 3: read and parse files
-      const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+      // step 4: read and parse files
+      const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
-      // step 4: find link targets
+      // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)
 
-      // step 5: find actions
-      const actionFinder = ActionFinder.load(this.config.sourceDir)
+      // step 6: find actions
+      const actionFinder = ActionFinder.load(config.sourceDir)
 
-      // step 6: extract activities
-      const activities = extractActivities(ASTs, this.config.regionMarker)
+      // step 7: extract activities
+      const activities = extractActivities(ASTs, config.regionMarker)
       const links = extractImagesAndLinks(ASTs)
       if (activities.length + links.length === 0) {
         const warnArgs: WarnArgs = { message: "no activities found" }
@@ -57,20 +61,20 @@ export class RunCommand extends EventEmitter implements Command {
         return
       }
 
-      // step 7: execute the ActivityList
+      // step 8: execute the ActivityList
       const startArgs: StartArgs = { stepCount: activities.length + links.length }
       this.emit(CommandEvent.start, startArgs)
-      process.chdir(this.config.workspace)
+      process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
-      let parJobs = executeParallel(links, actionFinder, linkTargets, this.config, stats, this)
+      let parJobs = executeParallel(links, actionFinder, linkTargets, config, stats, this)
       // execute the serial jobs
-      await executeSequential(activities, actionFinder, this.config, linkTargets, stats, this)
+      await executeSequential(activities, actionFinder, config, linkTargets, stats, this)
       await Promise.all(parJobs)
 
-      // step 8: cleanup
-      process.chdir(this.config.sourceDir)
+      // step 9: cleanup
+      process.chdir(config.sourceDir)
 
-      // step 9: finish
+      // step 10: finish
       const finishArgs: FinishArgs = { stats }
       this.emit(CommandEvent.finish, finishArgs)
     } finally {

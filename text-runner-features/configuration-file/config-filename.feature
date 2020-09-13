@@ -1,7 +1,7 @@
 @smoke
 Feature: specifying the configuration filename
 
-  API doesn't load configuration
+  Calling via API doesn't load configuration files
 
   Background:
     Given the source code contains a file "text-run-1.yml" with content:

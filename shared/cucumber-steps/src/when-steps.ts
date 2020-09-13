@@ -9,20 +9,22 @@ When(/^calling:$/, async function (jsText: string) {
   const config = textRunner.defaultConfiguration()
   config.sourceDir = world.rootDir
   let command = new textRunner.RunCommand(config)
-  const activityCollector = new ActivityCollector(command)
-  let asyncFunc = async function (tr: typeof textRunner, w: TRWorld) {}
+  let activityCollector = new ActivityCollector(command)
+  let result = activityCollector.activities()
+  let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
-  //       would be more elegant here but somehow doesn't work on Node 14.
+  //       directly would be more elegant here but somehow doesn't work on Node 14.
   const funcText = `
-  asyncFunc = async function runner(textRunner, world) {
+  asyncFunc = async function runner(textRunner, ActivityCollector) {
     ${jsText}
   }`
   eval(funcText)
   try {
-    await asyncFunc(textRunner, world)
-    world.activityResults = activityCollector.activities()
+    await asyncFunc(textRunner, ActivityCollector)
+    world.activityResults = result
   } catch (e) {
+    console.log(e)
     world.apiException = e
   }
 })

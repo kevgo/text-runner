@@ -19,10 +19,11 @@ Feature: Folder Mapping
           publicPath: /
           publicExtension: ''
       """
-    When calling Text-Runner
-    Then it executes these actions:
-      | FILENAME | LINE | ACTION     | ACTIVITY                        |
-      | 1.md     | 1    | check-link | link to local file content/2.md |
+    When running Text-Runner
+    Then it prints:
+      """
+      1.md:1 -- link to local file content/2.md
+      """
 
 
   Scenario: relative link to remapped folder
@@ -41,10 +42,11 @@ Feature: Folder Mapping
       """
       Yo!
       """
-    When calling Text-Runner
-    Then it executes these actions:
-      | FILENAME | LINE | ACTION     | ACTIVITY                              |
-      | 1.md     | 1    | check-link | link to local file content/posts/3.md |
+    When running Text-Runner
+    Then it prints:
+      """
+      1.md:1 -- link to local file content/posts/3.md
+      """
 
 
   Scenario: relative link to anchor in remapped folder

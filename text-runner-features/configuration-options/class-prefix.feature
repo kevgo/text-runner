@@ -39,8 +39,9 @@ Feature: configuring the class prefix
     When calling:
       """
       command = new textRunner.RunCommand({...config, regionMarker: "custom"})
-      formatter = new Formatter(command)
+      activityCollector = new ActivityCollector(command)
       await command.execute()
+      result = activityCollector.activities()
       """
     Then it executes these actions:
       | FILENAME         | LINE | ACTION |

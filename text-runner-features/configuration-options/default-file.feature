@@ -34,7 +34,7 @@ Feature: Default file
       | root.md  | 1    | check-link | link to local directory guide |
 
 
-  Scenario: combination with publication settings
+  Scenario: publication settings via config file
     Given the source code contains a file "root.md" with content:
       """
       link to [our guides](guide)
@@ -55,10 +55,11 @@ Feature: Default file
           publicExtension: ''
       defaultFile: 'index.md'
       """
-    When calling Text-Runner
-    Then it executes these actions:
-      | FILENAME | LINE | ACTION     | ACTIVITY                          |
-      | root.md  | 1    | check-link | link to local file guide/index.md |
+    When running Text-Runner
+    Then it prints:
+      """
+      root.md:1 -- link to local file guide/index.md
+      """
 
 
   Scenario: relative link from default file to other file in same folder
@@ -73,12 +74,13 @@ Feature: Default file
     And the source code contains a file "text-run.yml" with content:
       """
       publications:
-        - localPath: /content
-          publicPath: /
-          publicExtension: ''
+      - localPath: /content
+        publicPath: /
+        publicExtension: ''
       defaultFile: index.md
       """
-    When calling Text-Runner
-    Then it executes these actions:
-      | FILENAME                | LINE | ACTION     | ACTIVITY                                |
-      | content/guides/index.md | 1    | check-link | link to local file content/guides/go.md |
+    When running Text-Runner
+    Then it prints:
+      """
+      content/guides/index.md:1 -- link to local file content/guides/go.md
+      """

@@ -64,7 +64,7 @@ can tell it to use another configuration file with the `--config` command-line
 switch:
 
 ```
-$ text-run --config my-config.yml
+$ text-run --config=my-config.yml
 ```
 
 <hr>

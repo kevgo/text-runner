@@ -29,7 +29,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	echo textrun-javascript linters ...
 	${CURDIR}/node_modules/.bin/prettier -l .
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
+	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config=../tslint.json
 
 test: lint unit docs cuke  # runs all tests
 test-lerna: lint unit docs cuke-lerna  # for running all tests inside Lerna

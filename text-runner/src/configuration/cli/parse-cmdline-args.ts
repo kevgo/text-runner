@@ -30,9 +30,8 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
   }
 
   // parse argv into the result
-  const cliArgs = minimist(argv, { boolean: ["online", "activities", "ast", "images", "links", "link-targets", "ts"] })
+  const cliArgs = minimist(argv, { boolean: true })
   let command = cliArgs._[0]
-  console.log(cliArgs)
   const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
@@ -42,10 +41,9 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     workspace: cliArgs.workspace,
     scaffoldLanguage: parseScaffoldSwitches(cliArgs),
   }
-  if (cliArgs["use-system-tmp"] != null) {
-    config.useSystemTempDirectory= cliArgs["use-system-tmp"]
+  if (cliArgs['system-tmp'] != null) {
+    config.useSystemTempDirectory = parseSystemTmp(cliArgs['system-tmp'])
   }
-  console.log(config)
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
   if (!availableCommands().includes(command)) {
@@ -58,6 +56,28 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
   return { commandName: command, cmdLineConfig: config, debugSubcommand }
+}
+
+function parseSystemTmp(value: any): boolean | undefined {
+  switch(value) {
+    case true:
+    case 1:
+    case 'y':
+    case 'yes':
+    case 't':
+    case 'true':
+      return true
+    case false:
+    case 0:
+    case 'n':
+    case 'no':
+    case 'f':
+    case 'false':
+      return false
+    case undefined:
+      return undefined
+    default: throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
+  }
 }
 
 function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {

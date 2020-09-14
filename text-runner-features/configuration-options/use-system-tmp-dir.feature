@@ -12,9 +12,11 @@ Feature: separate working directory
       }
       """
 
+
   Scenario: default configuration
     When calling Text-Runner
     Then it executes in the local "tmp" directory
+
 
   Scenario: running in a local temp directory via config file
     Given the text-run configuration contains:
@@ -24,23 +26,25 @@ Feature: separate working directory
     When running Text-Runner
     Then it runs in the local "tmp" directory
 
+
   Scenario: running in a local temp directory via CLI
     Given the text-run configuration contains:
       """
       useSystemTempDirectory: true
       """
-    When running "text-run --use-system-tmp=false"
+    When running "text-run --no-system-tmp"
     Then it runs in the local "tmp" directory
+
 
   Scenario: running in a local temp directory via API
     When calling:
       """
       command = new textRunner.RunCommand({...config, useSystemTempDirectory: false})
-      activityCollector = new ActivityCollector(command)
+      observer = new MyObserverClass(command)
       await command.execute()
-      result = activityCollector.activities()
       """
     Then it executes in the local "tmp" directory
+
 
   Scenario: running in a global temp directory via config file
     Given the text-run configuration contains:
@@ -50,16 +54,17 @@ Feature: separate working directory
     When running Text-Runner
     Then it runs in a global temp directory
 
+
   Scenario: running in a global temp directory via CLI
-    When running "text-run --use-system-tmp=1 *.md"
+    When running "text-run --system-tmp *.md"
     Then it runs in a global temp directory
+
 
   Scenario: running in a local temp directory via API
     When calling:
       """
       command = new textRunner.RunCommand({...config, useSystemTempDirectory: true})
-      activityCollector = new ActivityCollector(command)
+      observer = new MyObserverClass(command)
       await command.execute()
-      result = activityCollector.activities()
       """
     Then it executes in a global temp directory

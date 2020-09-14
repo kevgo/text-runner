@@ -8,21 +8,23 @@ When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
   const config = textRunner.defaultConfiguration()
   config.sourceDir = world.rootDir
+  // define a few variables here, they will be overwritten in the eval call
   let command = new textRunner.RunCommand(config)
-  let activityCollector = new ActivityCollector(command)
-  let result = activityCollector.activities()
+  let observer = new ActivityCollector(command)
+  let result = observer.activities()
+  // eval the given code
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
   //       directly would be more elegant here but somehow doesn't work on Node 14.
   const funcText = `
-  asyncFunc = async function runner(textRunner, ActivityCollector) {
+  asyncFunc = async function runner(textRunner, MyObserverClass) {
     ${jsText}
   }`
   eval(funcText)
   try {
     await asyncFunc(textRunner, ActivityCollector)
-    world.activityResults = result
+    world.activityResults = observer.activities()
   } catch (e) {
     console.log(e)
     world.apiException = e

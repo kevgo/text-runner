@@ -2,7 +2,7 @@ import { EventEmitter } from "events"
 import * as tr from "text-runner"
 
 /** Statistics about a run of Text-Runner */
-export interface TestActivity {
+export interface TRActivity {
   activity?: tr.Activity
   finalName?: string
   status: "success" | "failed" | "skipped" | "warning"
@@ -13,7 +13,7 @@ export interface TestActivity {
 
 /** StatsCollector provides statistics about the Text-Runner command it observes. */
 export class ActivityCollector {
-  _activities: TestActivity[]
+  _activities: TRActivity[]
 
   constructor(emitter: EventEmitter) {
     this._activities = []
@@ -23,7 +23,7 @@ export class ActivityCollector {
     emitter.on(tr.CommandEvent.warning, this.onWarning.bind(this))
   }
 
-  activities(): TestActivity[] {
+  activities(): TRActivity[] {
     return this._activities
   }
 

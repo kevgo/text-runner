@@ -7,7 +7,7 @@ Feature: Formatter signals
       throw new Error("BOOM!")
       </pre>
       """
-    When trying to run "text-run --format <FORMATTER>"
+    When trying to run "text-run --format=<FORMATTER>"
     Then it signals:
       | FILENAME | error.md |
       | ERROR    | BOOM!    |

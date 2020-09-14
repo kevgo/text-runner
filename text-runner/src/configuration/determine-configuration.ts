@@ -1,6 +1,6 @@
 import { mergeConfigurations } from "./merge-configurations"
 import { Publications } from "./publications/publications"
-import { Configuration  } from "./configuration"
+import { Configuration } from "./configuration"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 import { defaultConfiguration } from "./default-configuration"
 

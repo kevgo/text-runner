@@ -30,11 +30,11 @@ export class StatsCollector {
 
   stats(): Stats {
     return {
-      activityCount:this.errorCount + this.skipCount + this.successCount,
-      duration:this.stopWatch.duration(),
-      errorCount:this.errorCount,
+      activityCount: this.errorCount + this.skipCount + this.successCount,
+      duration: this.stopWatch.duration(),
+      errorCount: this.errorCount,
       skipsCount: this.skipCount,
-      successCount: this.successCount
+      successCount: this.successCount,
     }
   }
 

@@ -35,8 +35,10 @@ export class ScaffoldCommand extends EventEmitter implements Command {
     } else if (this.config.scaffoldLanguage === "js") {
       await fs.writeFile(path.join(dirPath, this.config.files + ".js"), jsTemplate(this.config.files), "utf8")
     } else {
-      throw new UserError(`Unknown configuration language: ${this.config.scaffoldLanguage}`,
-      'Possible languages are "js" and "ts"')
+      throw new UserError(
+        `Unknown configuration language: ${this.config.scaffoldLanguage}`,
+        'Possible languages are "js" and "ts"'
+      )
     }
   }
 }

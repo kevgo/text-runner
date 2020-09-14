@@ -33,19 +33,13 @@ suite("parseCmdlineArgs()", function () {
   })
 
   test("with <text-run> call", function () {
-    const have = parseCmdlineArgs([
-      "/Users/kevlar/d/text-runner/bin/text-run",
-      "run",
-    ])
+    const have = parseCmdlineArgs(["/Users/kevlar/d/text-runner/bin/text-run", "run"])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)
   })
 
   test("--online <file>", function () {
-    const have = parseCmdlineArgs([
-      "--online",
-      "documentation/actions/cd.md",
-    ])
+    const have = parseCmdlineArgs(["--online", "documentation/actions/cd.md"])
     assert.equal(have.commandName, "run")
     assert.isTrue(have.cmdLineConfig.online)
     assert.equal(have.cmdLineConfig.files, "documentation/actions/cd.md")

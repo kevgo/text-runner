@@ -8,7 +8,7 @@ import { FinishArgs, FailedArgs, Formatter } from "../formatter"
 import { EventEmitter } from "events"
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
-export class SummaryFormatter implements Formatter{
+export class SummaryFormatter implements Formatter {
   private readonly configuration: Configuration
 
   constructor(configuration: Configuration, emitter: EventEmitter) {

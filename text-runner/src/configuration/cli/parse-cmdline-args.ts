@@ -12,7 +12,9 @@ import { UserError } from "../../errors/user-error"
  *
  * @param argv the command-line options received by the process
  */
-export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration, debugSubcommand?: DebugSubcommand } {
+export function parseCmdlineArgs(
+  argv: string[]
+): { commandName: string; cmdLineConfig: UserProvidedConfiguration; debugSubcommand?: DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -41,8 +43,8 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     workspace: cliArgs.workspace,
     scaffoldLanguage: parseScaffoldSwitches(cliArgs),
   }
-  if (cliArgs['system-tmp'] != null) {
-    config.useSystemTempDirectory = parseSystemTmp(cliArgs['system-tmp'])
+  if (cliArgs["system-tmp"] != null) {
+    config.useSystemTempDirectory = parseSystemTmp(cliArgs["system-tmp"])
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
@@ -59,12 +61,13 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
 }
 
 function parseSystemTmp(value: any): boolean | undefined {
-  switch(value) {
+  switch (value) {
     case true:
       return true
     case false:
       return false
-    default: throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
+    default:
+      throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
   }
 }
 
@@ -74,11 +77,11 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {
   } else if (cliArgs.ast) {
     return "ast"
   } else if (cliArgs.images) {
-      return "images"
+    return "images"
   } else if (cliArgs.links) {
-      return "links"
+    return "links"
   } else if (cliArgs["link-targets"]) {
-      return "linkTargets"
+    return "linkTargets"
   } else {
     throw new UserError("Missing debug subcommand")
   }

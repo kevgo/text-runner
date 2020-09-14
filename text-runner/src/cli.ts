@@ -63,9 +63,9 @@ async function main() {
     const formatter = instantiateFormatter(configuration, command)
     const statsCollector = new StatsCollector(command)
     await command.execute()
-    const stats =statsCollector.stats()
+    const stats = statsCollector.stats()
     if (["dynamic", "run", "static"].includes(commandName)) {
-      formatter.finish({stats})
+      formatter.finish({ stats })
     }
     errorCount = stats.errorCount
   } catch (err) {
@@ -82,7 +82,12 @@ async function main() {
 }
 main()
 
-async function instantiateCommand(commandName: string, cliArgs: UserProvidedConfiguration, config: Configuration, debugSubcommand: DebugSubcommand | undefined) {
+async function instantiateCommand(
+  commandName: string,
+  cliArgs: UserProvidedConfiguration,
+  config: Configuration,
+  debugSubcommand: DebugSubcommand | undefined
+) {
   switch (commandName) {
     case "help":
       return new HelpCommand()

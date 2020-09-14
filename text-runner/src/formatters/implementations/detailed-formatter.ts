@@ -53,5 +53,4 @@ export class DetailedFormatter implements Formatter {
   finish(args: FinishArgs) {
     printSummary(args.stats)
   }
-
 }

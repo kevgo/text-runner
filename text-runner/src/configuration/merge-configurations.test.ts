@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
-import { Configuration  } from "./configuration"
+import { Configuration } from "./configuration"
 import { Publications } from "./publications/publications"
 import { defaultConfiguration } from "./default-configuration"
 

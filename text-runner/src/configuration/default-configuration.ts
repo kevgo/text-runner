@@ -1,8 +1,7 @@
 import { Publications } from "./publications/publications"
 import { Configuration } from "./configuration"
 
-
-  /** provides the default configuration values to use when no values are provided via CLI or config file */
+/** provides the default configuration values to use when no values are provided via CLI or config file */
 export function defaultConfiguration(): Configuration {
   return {
     regionMarker: "type",

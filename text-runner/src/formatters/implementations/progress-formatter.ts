@@ -64,5 +64,4 @@ export class ProgressFormatter implements Formatter {
   finish(args: FinishArgs) {
     printSummary(args.stats)
   }
-
 }

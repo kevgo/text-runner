@@ -61,21 +61,9 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
 function parseSystemTmp(value: any): boolean | undefined {
   switch(value) {
     case true:
-    case 1:
-    case 'y':
-    case 'yes':
-    case 't':
-    case 'true':
       return true
     case false:
-    case 0:
-    case 'n':
-    case 'no':
-    case 'f':
-    case 'false':
       return false
-    case undefined:
-      return undefined
     default: throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
   }
 }

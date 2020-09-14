@@ -36,9 +36,9 @@ lint:  # lints all files in this codebase
 	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 parallel: lint  # runs all tests in parallel
-	${CURDIR}/bin/text-run static --format dot &
+	${CURDIR}/bin/text-run static --format=dot &
 	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
-	${CURDIR}/bin/text-run dynamic --format dot
+	${CURDIR}/bin/text-run dynamic --format=dot
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 prepublish: build  # prepares the code base for publishing

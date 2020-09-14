@@ -11,7 +11,7 @@ cuke: build  # runs the feature specs
 
 cuke-lerna: build  # runs the feature specs
 	echo textrun-workspace E2E tests ...
-	${CURDIR}/node_modules/.bin/cucumber-js --format summary
+	${CURDIR}/node_modules/.bin/cucumber-js --format=summary
 
 docs: build  # runs the documentation tests
 	echo textrun-workspace documentation tests ...

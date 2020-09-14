@@ -12,15 +12,15 @@ cuke: build  # for manually running the cukes for this codebase
 cuke-lerna:  # cukes for this codebase are in ../text-runner-features, Lerna runs those
 
 cuke-ci:  # runs the feature specs on CI
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format progress --parallel 8
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format=progress --parallel 8
 
 cuke-online: build  # runs the feature specs that don't need an online connection
 	echo running Text-Runner online feature specs ...
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 docs:  # verify documentation
 	echo Text-Runner documentation tests ...
-	${CURDIR}/bin/text-run --format progress
+	${CURDIR}/bin/text-run --format=progress
 
 fix:  # runs the fixers
 	echo Text-Runner auto-fixes ...
@@ -39,7 +39,7 @@ parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --format dot &
 	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
 	${CURDIR}/bin/text-run dynamic --format dot
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format progress --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 prepublish: build  # prepares the code base for publishing
 	rm dist/tsconfig-build.tsbuildinfo

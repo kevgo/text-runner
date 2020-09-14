@@ -19,7 +19,7 @@ Feature: selecting formatter via the config file
       """
       Unknown formatter: zonk
 
-      Available formatters are: detailed, dot, progress, silent, summary
+      Available formatters are: detailed, dot, progress, summary
       """
 
   Scenario Outline: select the formatter via config file
@@ -52,5 +52,5 @@ Feature: selecting formatter via the config file
       """
       Unknown formatter: zonk
 
-      Available formatters are: detailed, dot
+      Available formatters are: detailed, dot, progress, summary
       """

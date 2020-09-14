@@ -20,7 +20,7 @@ export function instantiateFormatter(config: Configuration, emitter: EventEmitte
     default:
       throw new UserError(
         `Unknown formatter: ${config.formatterName}`,
-        "Available formatters are: detailed, dot, progress, silent, summary"
+        "Available formatters are: detailed, dot, progress, summary"
       )
   }
 }

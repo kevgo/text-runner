@@ -7,8 +7,8 @@ cuke-lerna:
 
 docs: build  # runs the documentation tests
 	echo documentation doc-tests ...
-	${CURDIR}/node_modules/.bin/text-run static --format progress
-	${CURDIR}/node_modules/.bin/text-run dynamic --format progress
+	${CURDIR}/node_modules/.bin/text-run static --format=progress
+	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress
 
 fix:  # runs the auto-fixers
 	echo documentation auto-fixes ...

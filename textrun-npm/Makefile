@@ -7,7 +7,7 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # runs the feature specs
-	${CURDIR}/node_modules/.bin/cucumber-js --format progress-bar
+	${CURDIR}/node_modules/.bin/cucumber-js --format=progress-bar
 
 cuke-lerna: build  # runs the feature specs
 	echo textrun-npm E2E tests ...
@@ -15,8 +15,8 @@ cuke-lerna: build  # runs the feature specs
 
 docs: build  # runs the documentation tests
 	echo textrun-npm documentation tests ...
-	${CURDIR}/node_modules/.bin/text-run static --format progress
-	${CURDIR}/node_modules/.bin/text-run dynamic --format progress
+	${CURDIR}/node_modules/.bin/text-run static --format=progress
+	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress
 
 fix:  # runs the auto-fixers
 	echo textrun-npm auto-fixes ...

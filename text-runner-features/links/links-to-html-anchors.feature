@@ -36,7 +36,7 @@ Feature: links to HTML anchors
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           |
-      | 1.md     | 1    | check-link | link to #zonk | failed | Error      | link to non-existing local anchor #zonk |
+      | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk |
 
 
   Scenario: link to a non-existing anchor in another file
@@ -51,7 +51,7 @@ Feature: links to HTML anchors
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
-      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | Error      | link to non-existing anchor #zonk in 2.md |
+      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
 
 
   Scenario: link to anchor in non-existing file
@@ -62,7 +62,7 @@ Feature: links to HTML anchors
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY            | STATUS | ERROR TYPE | ERROR MESSAGE                                    |
-      | 1.md     | 1    | check-link | link to 2.md#target | failed | Error      | link to anchor #target in non-existing file 2.md |
+      | 1.md     | 1    | check-link | link to 2.md#target | failed | UserError  | link to anchor #target in non-existing file 2.md |
 
 
   Scenario: link to anchor in file without anchors
@@ -77,7 +77,7 @@ Feature: links to HTML anchors
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
-      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | Error      | link to non-existing anchor #zonk in 2.md |
+      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
 
 
   Scenario: link to an existing heading in the same file

@@ -25,7 +25,7 @@ Feature: verifying Make targets
       """
       To build the "foo" executable, build the <code type="make/target">zonk</code> target.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                  |
       | 1.md     | 1    | make/target | failed | UserError  | Makefile does not contain target zonk but these ones: bar, foo |
@@ -35,7 +35,7 @@ Feature: verifying Make targets
       """
       To build the "foo" executable, build the <code type="make/target"></code> target.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE     |
       | 1.md     | 1    | make/target | failed | UserError  | Empty make target |

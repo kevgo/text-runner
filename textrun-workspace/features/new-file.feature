@@ -40,7 +40,7 @@ Feature: creating files with content
       """
       <a type="workspace/new-file">`Hello world!`</a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' |
@@ -56,7 +56,7 @@ Feature: creating files with content
       """
       <a type="workspace/new-file">__one.txt__</a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' |
@@ -80,7 +80,7 @@ Feature: creating files with content
       ```
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' |
@@ -103,7 +103,7 @@ Feature: creating files with content
 
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' |

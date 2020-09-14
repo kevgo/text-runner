@@ -12,6 +12,7 @@ import { OutputCollector } from "./helpers/output-collector"
 import { EventEmitter } from "events"
 import { CommandEvent } from "../commands/command"
 import { SuccessArgs, SkippedArgs, FailedArgs } from "../formatters/formatter"
+import { UserError } from "../errors/user-error"
 
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(
@@ -64,7 +65,7 @@ export async function runActivity(
     const failedArgs: FailedArgs = {
       activity,
       finalName: nameRefiner.finalName(),
-      error: e,
+      error: new UserError(e.message, e.guidance || "", activity.file, activity.line),
       output: outputCollector.toString(),
     }
     emitter.emit(CommandEvent.failed, failedArgs)

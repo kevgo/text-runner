@@ -21,7 +21,7 @@ Feature: changing the working directory
       """
       <code type="workspace/working-dir">foo</code>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME             | LINE | ACTION                | STATUS | ERROR TYPE | ERROR MESSAGE           |
       | directory_changer.md | 1    | workspace/working-dir | failed | UserError  | directory foo not found |

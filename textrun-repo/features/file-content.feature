@@ -74,7 +74,7 @@ Feature: verifying the documented content of a file in the repository
       ```
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                    |
       | 1.md     | 1    | repo/existing-file | failed | UserError  | mismatching content in hello.txt |
@@ -96,7 +96,7 @@ Feature: verifying the documented content of a file in the repository
       `Hello world!`
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | repo/existing-file | failed | UserError  | file not found: zonk.txt |

@@ -6,7 +6,7 @@ Feature: validating Javascript
       <a type="javascript/non-runnable">
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | javascript/non-runnable | failed | UserError  | no JavaScript code found |
@@ -18,7 +18,7 @@ Feature: validating Javascript
       'missing quotes at end
       </pre>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE                                   |
       | 1.md     | 1    | javascript/non-runnable | failed | UserError  | invalid Javascript: Invalid or unexpected token |

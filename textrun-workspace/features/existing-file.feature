@@ -37,7 +37,7 @@ Feature: verifying file content
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       Now you have a file <a type="workspace/existing-file">__hello.txt__ with `mismatching expected content`</a>.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    |
       | 1.md     | 1    | workspace/new-file      | success |            |                                  |
@@ -55,7 +55,7 @@ Feature: verifying file content
       """
       The file <a type="workspace/existing-file">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt |

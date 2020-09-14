@@ -23,7 +23,7 @@ Feature: verify that the workspace contains a directory
       <code type="workspace/existing-directory">foo</code>
       directory.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                       | STATUS | ERROR TYPE | ERROR MESSAGE                                 |
       | 1.md     | 2    | workspace/existing-directory | failed | UserError  | directory foo does not exist in the workspace |
@@ -37,7 +37,7 @@ Feature: verify that the workspace contains a directory
       <code type="workspace/existing-directory">foo</code>
       directory.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                       | STATUS  | ERROR TYPE | ERROR MESSAGE                     |
       | 1.md     | 1    | workspace/new-file           | success |            |                                   |

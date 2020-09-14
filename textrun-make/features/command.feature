@@ -25,7 +25,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command">make zonk</code>.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE                                                                 |
       | 1.md     | 1    | make/command | failed | UserError  | Makefile does not contain target make zonk but these ones: make bar, make foo |
@@ -35,7 +35,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command">make </code>.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE                        |
       | 1.md     | 1    | make/command | failed | UserError  | Make command must start with "make " |
@@ -45,7 +45,7 @@ Feature: verifying Make commands
       """
       To build the "foo" executable, run <code type="make/command"> </code>.
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE         |
       | 1.md     | 1    | make/command | failed | UserError  | No make command found |

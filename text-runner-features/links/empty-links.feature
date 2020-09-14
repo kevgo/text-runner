@@ -8,4 +8,4 @@ Feature: recognize empty links
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY   | STATUS | ERROR TYPE | ERROR MESSAGE       |
-      | 1.md     | 1    | check-link | Check link | failed | Error      | link without target |
+      | 1.md     | 1    | check-link | Check link | failed | UserError  | link without target |

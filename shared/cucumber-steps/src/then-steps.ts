@@ -10,10 +10,11 @@ import * as textRunner from "text-runner"
 import { TRWorld } from "./world"
 import { standardizePath } from "./helpers/standardize-path"
 import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
+import { compareExecuteResultLine } from "./helpers/compare-execute-result-line"
 
 const psTree = util.promisify(psTreeR)
 
-interface ExecuteResultLine {
+export interface ExecuteResultLine {
   action?: string // standardized name of the action ("check-link")
   activity?: string // final name of the activity ("checking link http://foo.bar")
   errorMessage?: string // message of the UserError thrown
@@ -65,7 +66,7 @@ Then("it executes these actions:", function (table) {
     }
     want.push(result)
   }
-  const have: ExecuteResultLine[] = []
+  let have: ExecuteResultLine[] = []
   const wanted = want[0]
   for (const activityResult of world.activityResults || []) {
     const result: ExecuteResultLine = {}
@@ -95,6 +96,7 @@ Then("it executes these actions:", function (table) {
     }
     have.push(result)
   }
+  have = have.sort(compareExecuteResultLine)
   assert.deepEqual(have, want)
 })
 

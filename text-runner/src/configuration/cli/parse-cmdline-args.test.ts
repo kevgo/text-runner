@@ -58,13 +58,13 @@ suite("parseCmdlineArgs()", function () {
   })
 
   test("--format dot", function () {
-    const { commandName: command, cmdLineConfig: config } = parseCmdlineArgs(["--format", "dot"])
+    const { commandName: command, cmdLineConfig: config } = parseCmdlineArgs(["--format=dot"])
     assert.equal(command, "run")
     assert.equal(config.formatterName, "dot")
   })
 
   test("--workspace foo/bar", function () {
-    const { commandName: command, cmdLineConfig: config } = parseCmdlineArgs(["--workspace", "foo/bar"])
+    const { commandName: command, cmdLineConfig: config } = parseCmdlineArgs(["--workspace=foo/bar"])
     assert.equal(command, "run")
     assert.equal(config.workspace, "foo/bar")
   })

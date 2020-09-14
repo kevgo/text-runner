@@ -50,6 +50,6 @@ suite("instantiateFormatter()", function () {
     assert.exists(err, "function did not throw")
     assert.equal(err.name, "UserError")
     assert.equal(err.message, "Unknown formatter: zonk")
-    assert.equal(err.guidance, "Available formatters are: detailed, dot, progress, silent, summary")
+    assert.equal(err.guidance, "Available formatters are: detailed, dot, progress, summary")
   })
 })

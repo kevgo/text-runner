@@ -1,11 +1,11 @@
 import { ObservableProcess } from "observable-process"
-import { UserError } from "text-runner"
+import * as textRunner from "text-runner"
 import { TestActivity } from "./activity-collector"
 
 /** World is the shared data structure that is provided as `this` to Cucumber steps. */
 export interface TRWorld {
   /** exception thrown at the last API call returned */
-  apiException: UserError | undefined
+  apiException: textRunner.UserError | undefined
 
   /** result of the last API call */
   activityResults: TestActivity[]

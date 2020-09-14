@@ -20,7 +20,7 @@ Feature: specifying the configuration filename
       """
 
   Scenario: providing a configuration filename via CLI
-    When running "text-run --config text-run-1.yml"
+    When running "text-run --config=text-run-1.yml"
     Then it prints:
       """
       1.md:1 -- link to local heading #foo
@@ -31,7 +31,7 @@ Feature: specifying the configuration filename
       """
 
   Scenario: providing a non-existing configuration filename via CLI
-    When trying to run "text-run --config zonk.yml"
+    When trying to run "text-run --config=zonk.yml"
     Then the test fails with:
       | ERROR MESSAGE | configuration file 'zonk.yml' not found |
       | EXIT CODE     | 1                                       |

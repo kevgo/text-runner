@@ -84,4 +84,4 @@ Feature: checking embedded HTML images
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
-      | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |
+      | 1.md     | 1    | check-image | Check image | failed | Error      | image tag without source |

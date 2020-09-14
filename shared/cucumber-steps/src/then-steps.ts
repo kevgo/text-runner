@@ -13,7 +13,7 @@ import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
 
 const psTree = util.promisify(psTreeR)
 
-interface ExecuteResultTable {
+interface ExecuteResultLine {
   action?: string // standardized name of the action ("check-link")
   activity?: string // final name of the activity ("checking link http://foo.bar")
   errorMessage?: string // message of the UserError thrown
@@ -37,9 +37,9 @@ Then("it executes these actions:", function (table) {
   assert.isUndefined(world.apiException)
   const apiResults = world.apiResults as textRunner.ExecuteResult
   const tableHashes = table.hashes()
-  const want: ExecuteResultTable[] = []
+  const want: ExecuteResultLine[] = []
   for (const line of tableHashes) {
-    const result: ExecuteResultTable = {}
+    const result: ExecuteResultLine = {}
     if (line.FILENAME != null) {
       result.filename = line.FILENAME
     }
@@ -66,10 +66,10 @@ Then("it executes these actions:", function (table) {
     }
     want.push(result)
   }
-  const have: ExecuteResultTable[] = []
+  const have: ExecuteResultLine[] = []
   const wanted = want[0]
   for (const line of apiResults?.activityResults || []) {
-    const result: ExecuteResultTable = {}
+    const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
       result.filename = line.activity.file.unixified()
     }
@@ -114,14 +114,14 @@ Then("it throws:", function (table) {
     throw new Error("no error thrown")
   }
   const tableHash = table.hashes()[0]
-  const want: ExecuteResultTable = {
+  const want: ExecuteResultLine = {
     errorType: tableHash["ERROR TYPE"],
     errorMessage: tableHash["ERROR MESSAGE"],
   }
   if (!world.apiException) {
     throw new Error("no apiException found")
   }
-  const have: ExecuteResultTable = {
+  const have: ExecuteResultLine = {
     errorType: world.apiException.name,
     errorMessage: stripAnsi(world.apiException.message).trim().split("\n")[0],
   }

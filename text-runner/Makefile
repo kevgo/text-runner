@@ -33,7 +33,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	echo Text-Runner linters ...
 	${CURDIR}/node_modules/.bin/prettier -l .
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config=../tslint.json
+	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
 
 parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --format=dot &

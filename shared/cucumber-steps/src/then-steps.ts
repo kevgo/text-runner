@@ -27,10 +27,10 @@ export interface ExecuteResultLine {
 
 Then("it executes {int} test", function (count) {
   const world = this as TRWorld
-  if (!world.activityResults) {
+  if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  assert.equal(world.activityResults.length, 1)
+  assert.equal(world.apiResults.length, 1)
 })
 
 Then("it executes these actions:", function (table) {
@@ -68,7 +68,7 @@ Then("it executes these actions:", function (table) {
   }
   let have: ExecuteResultLine[] = []
   const wanted = want[0]
-  for (const activityResult of world.activityResults) {
+  for (const activityResult of world.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
       result.filename = activityResult.activity?.file.unixified()
@@ -103,8 +103,8 @@ Then("it executes these actions:", function (table) {
 Then("it executes with this warning:", function (warning: string) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
-  assert.equal(world.activityResults.length, 1, "activity results")
-  assert.equal(world.activityResults[0].message, warning)
+  assert.equal(world.apiResults.length, 1, "activity results")
+  assert.equal(world.apiResults[0].message, warning)
 })
 
 Then("it throws:", function (table) {
@@ -137,7 +137,7 @@ Then("it throws:", function (table) {
 
 Then("the error provides the guidance:", function (expectedText) {
   const world = this as TRWorld
-  const errors = world.activityResults.map((res) => res.error).filter((e) => e)
+  const errors = world.apiResults.map((res) => res.error).filter((e) => e)
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }
@@ -218,10 +218,10 @@ Then("it runs {int} test", function (count) {
 
 Then("it executes in a global temp directory", function () {
   const world = this as TRWorld
-  if (!world.activityResults) {
+  if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  assert.notInclude(world.activityResults[0].output, world.rootDir)
+  assert.notInclude(world.apiResults[0].output, world.rootDir)
 })
 
 Then("it runs in a global temp directory", function () {
@@ -234,10 +234,10 @@ Then("it runs in a global temp directory", function () {
 
 Then("it executes in the local {string} directory", function (dirName) {
   const world = this as TRWorld
-  if (!world.activityResults) {
+  if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  const have = world.activityResults[0].output?.trim()
+  const have = world.apiResults[0].output?.trim()
   const want = path.join(world.rootDir, dirName)
   assert.equal(have, want)
 })

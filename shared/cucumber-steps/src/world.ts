@@ -8,7 +8,7 @@ export interface TRWorld {
   apiException: textRunner.UserError | undefined
 
   /** result of the last API call */
-  activityResults: ActivityResult[]
+  apiResults: ActivityResult[]
 
   /** the currently running subshell process */
   process: ObservableProcess | undefined

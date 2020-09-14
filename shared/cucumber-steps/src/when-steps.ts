@@ -24,7 +24,7 @@ When(/^calling:$/, async function (jsText: string) {
   eval(funcText)
   try {
     await asyncFunc(textRunner, ActivityCollector)
-    world.activityResults = observer.results()
+    world.apiResults = observer.results()
   } catch (e) {
     world.apiException = e
   }
@@ -41,7 +41,7 @@ When(/^calling Text-Runner$/, async function () {
   } catch (e) {
     world.apiException = e
   }
-  world.activityResults = activityCollector.results()
+  world.apiResults = activityCollector.results()
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

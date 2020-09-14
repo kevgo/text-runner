@@ -32,6 +32,7 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: ["online", "activities", "ast", "images", "links", "link-targets", "ts"] })
   let command = cliArgs._[0]
+  console.log(cliArgs)
   const config: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
@@ -39,8 +40,12 @@ export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLine
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
-    scaffoldLanguage: parseScaffoldSwitches(cliArgs)
+    scaffoldLanguage: parseScaffoldSwitches(cliArgs),
   }
+  if (cliArgs["use-system-tmp"] != null) {
+    config.useSystemTempDirectory= cliArgs["use-system-tmp"]
+  }
+  console.log(config)
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
   if (!availableCommands().includes(command)) {

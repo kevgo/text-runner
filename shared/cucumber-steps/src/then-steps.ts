@@ -216,7 +216,7 @@ Then("it runs {int} test", function (count) {
   assert.include(stripAnsi(world.process.output.fullText()), ` ${count} activities`)
 })
 
-Then("it runs in a global temp directory", function () {
+Then("it executes in a global temp directory", function () {
   const world = this as TRWorld
   if (!world.activityResults) {
     throw new Error("no API results found")
@@ -224,7 +224,15 @@ Then("it runs in a global temp directory", function () {
   assert.notInclude(world.activityResults[0].output, world.rootDir)
 })
 
-Then("it runs in the local {string} directory", function (dirName) {
+Then("it runs in a global temp directory", function () {
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process found")
+  }
+  assert.notInclude(world.process.output.fullText(), world.rootDir)
+})
+
+Then("it executes in the local {string} directory", function (dirName) {
   const world = this as TRWorld
   if (!world.activityResults) {
     throw new Error("no API results found")
@@ -232,6 +240,16 @@ Then("it runs in the local {string} directory", function (dirName) {
   const have = world.activityResults[0].output?.trim()
   const want = path.join(world.rootDir, dirName)
   assert.equal(have, want)
+})
+
+Then("it runs in the local {string} directory", function (dirName) {
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no process found")
+  }
+  const have = world.process.output.fullText()
+  const want = path.join(world.rootDir, dirName)
+  assert.include(have, want)
 })
 
 Then("it runs in the current working directory", function () {

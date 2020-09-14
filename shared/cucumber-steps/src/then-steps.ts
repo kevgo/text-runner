@@ -101,7 +101,7 @@ Then("it executes these actions:", function (table) {
 Then("it executes with this warning:", function (warning: string) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
-  assert.equal(world.activityResults.length, 0, "activity results")
+  assert.equal(world.activityResults.length, 1, "activity results")
   const warnings = world.activityResults.filter((ar) => ar.message)
   assert.equal(warnings.length, 1, "warnings")
   assert.equal(warnings[0].message, warning)

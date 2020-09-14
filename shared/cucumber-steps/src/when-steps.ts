@@ -26,7 +26,6 @@ When(/^calling:$/, async function (jsText: string) {
     await asyncFunc(textRunner, ActivityCollector)
     world.activityResults = observer.activities()
   } catch (e) {
-    console.log(e)
     world.apiException = e
   }
 })

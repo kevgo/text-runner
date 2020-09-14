@@ -8,6 +8,7 @@ cuke-lerna:
 cuke-smoke:  # runs the Windows smoke tests
 	${CURDIR}/node_modules/.bin/cucumber-js --tags '@smoke' --format=progress '**/*.feature'
 
+docs:
 
 fix:
 

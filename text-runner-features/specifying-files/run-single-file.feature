@@ -25,7 +25,12 @@ Feature: running a single MarkDown file
       | EXIT CODE     | 1                                         |
 
   Scenario: testing a single file via the API
-    When calling "textRunner.runCommand({files: '2.md', sourceDir, formatterName})"
+    When calling:
+      """
+      command = new textRunner.RunCommand({...config, files: '2.md'})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it executes these actions:
       | FILENAME |
       | 2.md     |

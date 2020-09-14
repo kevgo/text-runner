@@ -10,20 +10,38 @@ Feature: excluding files
       """
       exclude: 'foo'
       """
-    When calling Text-Runner
-    Then it executes these actions:
-      | FILENAME  |
-      | bar/2.md  |
-      | readme.md |
+    When running Text-Runner
+    Then it prints:
+      """
+      bar/2.md:1 -- Test
+
+      readme.md:1 -- Test
+      """
+    And it doesn't print:
+      """
+      foo/1.md
+      """
 
   Scenario: excluding via CLI
-    When running "text-run --exclude foo"
-    Then it runs only the tests in:
-      | readme.md |
-      | bar/2.md  |
+    When running "text-run --exclude=foo"
+    Then it prints:
+      """
+      bar/2.md:1 -- Test
+
+      readme.md:1 -- Test
+      """
+    And it doesn't print:
+      """
+      foo/1.md
+      """
 
   Scenario: excluding via API
-    When calling "textRunner.runCommand({exclude: 'foo', sourceDir, formatterName})"
+    When calling:
+      """
+      command = new textRunner.RunCommand({...config, exclude: 'foo'})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it executes these actions:
       | FILENAME  |
       | bar/2.md  |

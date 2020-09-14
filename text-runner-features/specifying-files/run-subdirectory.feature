@@ -12,7 +12,12 @@ Feature: testing all docs in a subfolder
       | commands/bar/baz.md |
 
   Scenario: testing all files in a subfolder via API
-    When calling "textRunner.runCommand({files: 'commands', sourceDir, formatterName})"
+    When calling:
+      """
+      command = new textRunner.RunCommand({...config, files: 'commands'})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it executes these actions:
       | FILENAME            |
       | commands/bar/baz.md |

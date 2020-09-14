@@ -7,7 +7,7 @@ cuke-lerna:
 
 docs:
 	echo custom-action-async documentation tests ...
-	${CURDIR}/node_modules/.bin/text-run --format progress
+	${CURDIR}/node_modules/.bin/text-run --format=progress
 
 fix:
 

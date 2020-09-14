@@ -17,7 +17,7 @@ Feature: excluding files
       | readme.md |
 
   Scenario: excluding via CLI
-    When running "text-run --exclude foo"
+    When running "text-run --exclude=foo"
     Then it runs only the tests in:
       | readme.md |
       | bar/2.md  |

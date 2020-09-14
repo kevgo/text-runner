@@ -36,7 +36,7 @@ cuke-open:  # runs the E2E tests of codebases with uncommitted changes
 
 docs:  # runs the documentation tests
 	echo documentation tests for root dir ...
-	${CURDIR}/text-runner/bin/text-run --format progress "*.md"
+	${CURDIR}/text-runner/bin/text-run --format=progress "*.md"
 
 docs-affected:  # runs the documentation tests for the codebases affected by changes in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory docs

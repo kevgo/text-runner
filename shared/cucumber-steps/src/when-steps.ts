@@ -11,7 +11,7 @@ When(/^calling:$/, async function (jsText: string) {
   // define a few variables here, they will be overwritten in the eval call
   let command = new textRunner.RunCommand(config)
   let observer = new ActivityCollector(command)
-  let result = observer.activities()
+  let result = observer.results()
   // eval the given code
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction
@@ -24,7 +24,7 @@ When(/^calling:$/, async function (jsText: string) {
   eval(funcText)
   try {
     await asyncFunc(textRunner, ActivityCollector)
-    world.activityResults = observer.activities()
+    world.activityResults = observer.results()
   } catch (e) {
     world.apiException = e
   }
@@ -41,7 +41,7 @@ When(/^calling Text-Runner$/, async function () {
   } catch (e) {
     world.apiException = e
   }
-  world.activityResults = activityCollector.activities()
+  world.activityResults = activityCollector.results()
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

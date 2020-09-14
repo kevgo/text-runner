@@ -2,7 +2,7 @@ import { EventEmitter } from "events"
 import * as tr from "text-runner"
 
 /** Statistics about a run of Text-Runner */
-export interface TRActivity {
+export interface ActivityResult {
   activity?: tr.Activity
   finalName?: string
   status: "success" | "failed" | "skipped" | "warning"
@@ -13,33 +13,33 @@ export interface TRActivity {
 
 /** StatsCollector provides statistics about the Text-Runner command it observes. */
 export class ActivityCollector {
-  _activities: TRActivity[]
+  activities: ActivityResult[]
 
   constructor(emitter: EventEmitter) {
-    this._activities = []
+    this.activities = []
     emitter.on(tr.CommandEvent.failed, this.onFailure.bind(this))
     emitter.on(tr.CommandEvent.skipped, this.onSkipped.bind(this))
     emitter.on(tr.CommandEvent.success, this.onSuccess.bind(this))
     emitter.on(tr.CommandEvent.warning, this.onWarning.bind(this))
   }
 
-  activities(): TRActivity[] {
-    return this._activities
+  results(): ActivityResult[] {
+    return this.activities
   }
 
   onFailure(args: tr.FailedArgs) {
-    this._activities.push({ ...args, status: "failed" })
+    this.activities.push({ ...args, status: "failed" })
   }
 
   onSkipped(args: tr.SkippedArgs) {
-    this._activities.push({ ...args, status: "skipped" })
+    this.activities.push({ ...args, status: "skipped" })
   }
 
   onSuccess(args: tr.SuccessArgs) {
-    this._activities.push({ ...args, status: "success" })
+    this.activities.push({ ...args, status: "success" })
   }
 
   onWarning(args: tr.WarnArgs) {
-    this._activities.push({ ...args, status: "warning" })
+    this.activities.push({ ...args, status: "warning" })
   }
 }

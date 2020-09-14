@@ -8,7 +8,7 @@ Feature: selecting formatter via the command-line
       """
 
   Scenario: select the formatter via the CLI
-    When running "text-run --format dot"
+    When running "text-run --format=dot"
     Then it runs without errors
 
   Scenario: select the formatter via the API
@@ -16,7 +16,7 @@ Feature: selecting formatter via the command-line
     Then it runs without errors
 
   Scenario: select an unknown formatter via the CLI
-    When trying to run "text-run --format zonk"
+    When trying to run "text-run --format=zonk"
     Then the call fails with the error:
       """
       Unknown formatter: zonk

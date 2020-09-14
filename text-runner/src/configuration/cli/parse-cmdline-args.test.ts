@@ -57,14 +57,14 @@ suite("parseCmdlineArgs()", function () {
     assert.isUndefined(config.files)
   })
 
-  test("--format dot", function () {
-    const { command, config } = parseCmdlineArgs(["--format", "dot"])
+  test("--format=dot", function () {
+    const { command, config } = parseCmdlineArgs(["--format=dot"])
     assert.equal(command, "run")
     assert.equal(config.formatterName, "dot")
   })
 
   test("--workspace foo/bar", function () {
-    const { command, config } = parseCmdlineArgs(["--workspace", "foo/bar"])
+    const { command, config } = parseCmdlineArgs(["--workspace=foo/bar"])
     assert.equal(command, "run")
     assert.equal(config.workspace, "foo/bar")
   })

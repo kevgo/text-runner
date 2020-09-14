@@ -156,14 +156,6 @@ Then("the API exception provides the guidance:", function (expectedText) {
   assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
-Then("it prints usage instructions", function () {
-  const world = this as TRWorld
-  if (!world.process) {
-    throw new Error("no process output found")
-  }
-  assert.include(stripAnsi(world.process.output.fullText()), "COMMANDS")
-})
-
 Then("it creates a directory {string}", async function (directoryPath) {
   const world = this as TRWorld
   await fs.stat(path.join(world.rootDir, directoryPath))

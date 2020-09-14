@@ -21,7 +21,7 @@ Feature: display the version
   Scenario: debugging activities
     Given the source code contains a file "1.md" with content:
       """
-      <a type="test">879043700
+      <a type="test"> </a>
       """
     When running "text-run debug --activities 1.md"
     Then it prints the text:

@@ -17,9 +17,9 @@ TextRunner or could be viable alternatives to it, depending on your use case:
   actual code blocks in your documentation, and verifies only that it runs
   without errors. TextRunner is a superset of this tool, it can run anything
   that can be described textually, and verify it in arbitrary ways.
-  
-- [rust-skeptic](https://github.com/brson/rust-skeptic): executes Rust code embedded in Markdown.
-  Text-Runner is a superset of rust-skeptic.
+
+- [rust-skeptic](https://github.com/brson/rust-skeptic): executes Rust code
+  embedded in Markdown. Text-Runner is a superset of rust-skeptic.
 
 - [mockdown](https://github.com/pjeby/mockdown): like doctest, with verification
   of the output.

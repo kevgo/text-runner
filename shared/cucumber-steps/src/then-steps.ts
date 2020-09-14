@@ -68,7 +68,7 @@ Then("it executes these actions:", function (table) {
   }
   let have: ExecuteResultLine[] = []
   const wanted = want[0]
-  for (const activityResult of world.activityResults || []) {
+  for (const activityResult of world.activityResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
       result.filename = activityResult.activity?.file.unixified()

@@ -1,21 +1,21 @@
 import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
-import { defaultValues } from "./determine-configuration"
 import { Configuration } from "./configuration"
 import { Publications } from "./publications/publications"
+import { defaultConfiguration } from "./default-configuration"
 
 suite("mergeConfigurations()", function () {
   test("no CLI args and config file data given", function () {
-    const have = mergeConfigurations({}, {}, defaultValues)
-    assert.deepEqual(have, defaultValues)
+    const have = mergeConfigurations({}, {}, defaultConfiguration())
+    assert.deepEqual(have, defaultConfiguration())
   })
   test("config file data given", function () {
     const configFileData: UserProvidedConfiguration = {
       exclude: "1.md",
       sourceDir: "my-source",
     }
-    const have = mergeConfigurations({}, configFileData, defaultValues)
+    const have = mergeConfigurations({}, configFileData, defaultConfiguration())
     const want: Configuration = {
       defaultFile: "",
       exclude: "1.md",
@@ -24,6 +24,7 @@ suite("mergeConfigurations()", function () {
       online: false,
       publications: new Publications(),
       regionMarker: "type",
+      scaffoldLanguage: "js",
       sourceDir: "my-source",
       systemTmp: false,
       workspace: "",

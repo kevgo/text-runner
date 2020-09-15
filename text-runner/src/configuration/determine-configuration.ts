@@ -2,19 +2,7 @@ import { mergeConfigurations } from "./merge-configurations"
 import { Publications } from "./publications/publications"
 import { Configuration } from "./configuration"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
-
-export const defaultValues: Configuration = {
-  regionMarker: "type",
-  defaultFile: "",
-  exclude: [],
-  files: "**/*.md",
-  formatterName: "detailed",
-  online: false,
-  publications: new Publications(),
-  sourceDir: process.cwd(),
-  systemTmp: false,
-  workspace: "", // will be populated later
-}
+import { defaultConfiguration } from "./default-configuration"
 
 /**
  * Loads the configuration from disk and returns it.
@@ -27,7 +15,7 @@ export function determineConfiguration(
   cmdlineArgs: UserProvidedConfiguration
 ): Configuration {
   // merge the configs
-  const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
+  const result = mergeConfigurations(cmdlineArgs, configFileData, defaultConfiguration())
   result.publications = Publications.fromJSON(result.publications).sorted()
   return result as Configuration
 }

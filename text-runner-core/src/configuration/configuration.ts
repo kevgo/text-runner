@@ -1,5 +1,4 @@
 import { Publications } from "./publications/publications"
-import { FormatterName } from "../../../text-runner-cli/src/formatters/formatter"
 
 /**
  * All configuration values that are provided to the application

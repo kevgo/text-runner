@@ -1,6 +1,5 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import { parseCmdlineArgs } from "../../text-runner-core/src/configuration/cli/parse-cmdline-args"
 import { UserError } from "../../text-runner-core/src/errors/user-error"
 import { printUserError } from "./errors/print-user-error"
 import { DebugCommand, DebugSubcommand } from "../../text-runner-core/src/commands/debug"
@@ -16,6 +15,7 @@ import { Configuration } from "../../text-runner-core/src/configuration/configur
 import { StatsCollector } from "./helpers/stats-collector"
 import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
+import { parseCmdlineArgs } from "./cmdLineArgs/parse-cmdline-args"
 
 cliCursor.hide()
 

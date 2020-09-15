@@ -20,7 +20,7 @@ Feature: configuring the class prefix
       | FILENAME           | LINE | ACTION |
       | standard-prefix.md | 1    | test   |
 
-  Scenario: custom prefix via config file
+  Scenario: regionMarker via config file
     Given the source code contains a file "text-run.yml" with content:
       """
       regionMarker: custom
@@ -35,7 +35,7 @@ Feature: configuring the class prefix
       standard-prefix.md:1 -- Test
       """
 
-  Scenario: custom prefix via API
+  Scenario: regionMarker via API
     When calling:
       """
       command = new textRunner.RunCommand({...config, regionMarker: "custom"})

@@ -9,7 +9,7 @@ import { executeSequential } from "../runners/execute-sequential"
 import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 import { loadConfiguration } from "../configuration/load-configuration"
 import { ExecuteResult } from "../runners/execute-result"
 

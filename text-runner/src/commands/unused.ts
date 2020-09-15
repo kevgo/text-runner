@@ -3,7 +3,7 @@ import { extractActivities } from "../activity-list/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { loadConfiguration } from "../configuration/load-configuration"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 import { ExecuteResult } from "../runners/execute-result"
 
 export async function unusedCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {

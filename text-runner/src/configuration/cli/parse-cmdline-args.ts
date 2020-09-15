@@ -1,7 +1,7 @@
 import * as minimist from "minimist"
 import * as path from "path"
 import { availableCommands } from "../../commands/available-commands"
-import { UserProvidedConfiguration } from "../types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../user-provided-configuration"
 import { UserError } from "../../errors/user-error"
 
 /**

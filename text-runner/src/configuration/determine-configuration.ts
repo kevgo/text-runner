@@ -1,7 +1,7 @@
 import { mergeConfigurations } from "./merge-configurations"
 import { Publications } from "./publications/publications"
-import { Configuration } from "./types/configuration"
-import { UserProvidedConfiguration } from "./types/user-provided-configuration"
+import { Configuration } from "./configuration"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 export const defaultValues: Configuration = {
   regionMarker: "type",

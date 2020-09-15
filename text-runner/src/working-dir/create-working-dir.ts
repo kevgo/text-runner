@@ -2,7 +2,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import * as tmp from "tmp-promise"
 import { UserError } from "../errors/user-error"
-import { Configuration } from "../configuration/types/configuration"
+import { Configuration } from "../configuration/configuration"
 
 /** creates the temp directory to run the tests in */
 export async function createWorkspace(config: Configuration): Promise<string> {

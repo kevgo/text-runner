@@ -1,6 +1,6 @@
 import * as isGlob from "is-glob"
 import * as path from "path"
-import { Configuration } from "../configuration/types/configuration"
+import { Configuration } from "../configuration/configuration"
 import { UserError } from "../errors/user-error"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { filesMatchingGlob } from "./files-matching-glob"

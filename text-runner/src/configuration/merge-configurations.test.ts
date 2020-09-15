@@ -1,8 +1,8 @@
 import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
-import { UserProvidedConfiguration } from "./types/user-provided-configuration"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
 import { defaultValues } from "./determine-configuration"
-import { Configuration } from "./types/configuration"
+import { Configuration } from "./configuration"
 import { Publications } from "./publications/publications"
 
 suite("mergeConfigurations()", function () {

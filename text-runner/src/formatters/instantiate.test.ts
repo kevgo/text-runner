@@ -2,7 +2,7 @@ import { assert } from "chai"
 import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
 import { instantiateFormatter } from "./instantiate"
-import { scaffoldConfiguration } from "../configuration/types/configuration"
+import { scaffoldConfiguration } from "../configuration/configuration"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 
 const config = scaffoldConfiguration()

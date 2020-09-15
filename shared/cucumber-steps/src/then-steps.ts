@@ -220,9 +220,6 @@ Then("it runs {int} test", function (count) {
 
 Then("it executes in a global temp directory", function () {
   const world = this as TRWorld
-  if (!world.process) {
-    throw new Error("no CLI process found")
-  }
   assert.notInclude(world.apiResults[0].output, world.rootDir)
 })
 
@@ -232,16 +229,6 @@ Then("it runs in a global temp directory", function () {
     throw new Error("no process found")
   }
   assert.notInclude(world.process.output.fullText(), world.rootDir)
-})
-
-Then("it executes in the local {string} directory", function (dirName) {
-  const world = this as TRWorld
-  if (!world.process) {
-    throw new Error("no CLI process found")
-  }
-  const have = world.apiResults[0].output?.trim()
-  const want = path.join(world.rootDir, dirName)
-  assert.equal(have, want)
 })
 
 Then("it runs in the local {string} directory", function (dirName) {

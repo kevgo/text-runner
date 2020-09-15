@@ -30,7 +30,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](zonk.gif "watermelon")
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
       | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
@@ -55,7 +55,7 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
-      | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | User Error | image http://google.com/onetuhoenzonk.png does not exist |
+      | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
 
   @smoke
   Scenario: Markdown image tag without source
@@ -63,7 +63,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text]()
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

@@ -41,7 +41,7 @@ Feature: checking embedded HTML images
       """
       <img src="zonk.gif">
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
       | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
@@ -65,7 +65,12 @@ Feature: checking embedded HTML images
       """
       <img src="http://google.com/onetuhoenzonk.png">
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.RunCommand({...config, online: true})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
@@ -76,7 +81,7 @@ Feature: checking embedded HTML images
       """
       <img src="">
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

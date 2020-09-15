@@ -32,7 +32,7 @@ Feature: shell/command
       ```
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION        | STATUS | ERROR TYPE | ERROR MESSAGE                                                   |
       | running.md | 1    | shell/command | failed | UserError  | the <a type="shell/command"> region contains no commands to run |

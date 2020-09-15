@@ -6,7 +6,7 @@ Feature: running inline regions of Javascript
       <a type="javascript/runnable">
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | javascript/runnable | failed | UserError  | no JavaScript code found |

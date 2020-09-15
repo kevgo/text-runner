@@ -36,6 +36,16 @@ Feature: separate working directory
     Then it runs in the local "tmp" directory
 
 
+  Scenario: running in a local temp directory via API
+    When calling:
+      """
+      command = new textRunner.RunCommand({...config, systemTmp: false})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it executes in the local "tmp" directory
+
+
   Scenario: running in a global temp directory via config file
     Given the text-run configuration contains:
       """
@@ -48,3 +58,13 @@ Feature: separate working directory
   Scenario: running in a global temp directory via CLI
     When running "text-run --system-tmp *.md"
     Then it runs in a global temp directory
+
+
+  Scenario: running in the global temp directory via API
+    When calling:
+      """
+      command = new textRunner.RunCommand({...config, systemTmp: true})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it executes in a global temp directory

@@ -52,7 +52,7 @@ export class ActionFinder {
     return (
       this.builtinActions.get(activity.actionName) ||
       this.customActions.get(activity.actionName) ||
-      this.externalActions.get(activity.actionName) ||
+      this.externalActions.get(activity) ||
       this.errorUnknownAction(activity)
     )
   }

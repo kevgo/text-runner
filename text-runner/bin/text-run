@@ -7,4 +7,4 @@ if [[ -L $0 ]]; then
 else
   cliPath="$( dirname "${BASH_SOURCE[0]}")"
 fi
-node --enable-source-maps $cliPath/../dist/cli.js "$@"
+node --enable-source-maps $cliPath/../dist/cli/cli.js "$@"

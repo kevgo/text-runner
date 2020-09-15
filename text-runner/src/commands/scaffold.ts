@@ -1,31 +1,46 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { ExecuteResult } from "../runners/execute-result"
 import { camelize } from "../helpers/camelize"
-import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
+import { EventEmitter } from "events"
+import { Command } from "./command"
+import { Configuration } from "../configuration/configuration"
+import { UserError } from "../errors/user-error"
 
 export type ScaffoldLanguage = "js" | "ts"
 
-export async function scaffoldCommand(config: UserProvidedConfiguration): Promise<ExecuteResult> {
-  if (!config.files) {
-    throw new Error("no action name given")
+export class ScaffoldCommand extends EventEmitter implements Command {
+  config: Configuration
+
+  constructor(config: Configuration) {
+    super()
+    this.config = config
   }
-  const dirPath = path.join(config.sourceDir || ".", "text-run")
-  let textRunDirExists = true
-  try {
-    await fs.stat(dirPath)
-  } catch (e) {
-    textRunDirExists = false
+
+  async execute() {
+    if (!this.config.files) {
+      throw new Error("no action name given")
+    }
+    const dirPath = path.join(this.config.sourceDir || ".", "text-run")
+    let textRunDirExists = true
+    try {
+      await fs.stat(dirPath)
+    } catch (e) {
+      textRunDirExists = false
+    }
+    if (!textRunDirExists) {
+      await fs.mkdir(dirPath, { recursive: true })
+    }
+    if (this.config.scaffoldLanguage === "ts") {
+      await fs.writeFile(path.join(dirPath, this.config.files + ".ts"), tsTemplate(this.config.files), "utf8")
+    } else if (this.config.scaffoldLanguage === "js") {
+      await fs.writeFile(path.join(dirPath, this.config.files + ".js"), jsTemplate(this.config.files), "utf8")
+    } else {
+      throw new UserError(
+        `Unknown configuration language: ${this.config.scaffoldLanguage}`,
+        'Possible languages are "js" and "ts"'
+      )
+    }
   }
-  if (!textRunDirExists) {
-    await fs.mkdir(dirPath, { recursive: true })
-  }
-  if (config.scaffoldLanguage === "ts") {
-    await fs.writeFile(path.join(dirPath, config.files + ".ts"), tsTemplate(config.files), "utf8")
-  } else {
-    await fs.writeFile(path.join(dirPath, config.files + ".js"), jsTemplate(config.files), "utf8")
-  }
-  return ExecuteResult.empty()
 }
 
 function jsTemplate(filename: string) {

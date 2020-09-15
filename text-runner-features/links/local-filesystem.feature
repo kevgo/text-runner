@@ -61,7 +61,7 @@ Feature: verifying links to the local filesystem
       """
       [link to non-existing local file](zonk.md)
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                   | STATUS | ERROR TYPE | ERROR MESSAGE                           |
       | 1.md     | 1    | check-link | link to local file zonk.md | failed | UserError  | link to non-existing local file zonk.md |

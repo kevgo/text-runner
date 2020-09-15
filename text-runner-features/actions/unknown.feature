@@ -7,7 +7,7 @@ Feature: unknown action types
       <a type="zonk">
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        |
       | 1.md     | 1    | failed | UserError  | unknown action: zonk |

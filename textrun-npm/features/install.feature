@@ -61,7 +61,7 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                                                       |
       | 1.md     | 3    | npm/install | failed | UserError  | installation instructions npm i -g zonk don't contain expected npm package name my_enormous_package |
@@ -74,7 +74,7 @@ Feature: verifying NPM installation instructions
       <a type="npm/install">
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                      |
       | 1.md     | 3    | npm/install | failed | UserError  | no installation instructions found |
@@ -91,7 +91,7 @@ Feature: verifying NPM installation instructions
       ```
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                                               |
       | 1.md     | 3    | npm/install | failed | UserError  | installation instructions npm i don't contain expected npm package name my_enormous_package |

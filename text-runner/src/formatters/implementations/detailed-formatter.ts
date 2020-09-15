@@ -1,48 +1,56 @@
 import * as color from "colorette"
 import * as path from "path"
-import { Activity } from "../../activity-list/types/activity"
 import { Configuration } from "../../configuration/configuration"
 import { printCodeFrame } from "../../helpers/print-code-frame"
-import { Formatter } from "../formatter"
 import { printSummary } from "../print-summary"
-import { StatsCounter } from "../../runners/helpers/stats-counter"
+import { CommandEvent } from "../../commands/command"
+import { FailedArgs, SkippedArgs, SuccessArgs, WarnArgs, FinishArgs, Formatter } from "../formatter"
+import { EventEmitter } from "events"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {
-  /** the Text-Runner configuration */
   private readonly configuration: Configuration
 
-  // @ts-ignore: unused parameter
-  constructor(stepCount: number, configuration: Configuration) {
+  constructor(configuration: Configuration, emitter: EventEmitter) {
     this.configuration = configuration
+    emitter.on(CommandEvent.output, console.log)
+    emitter.on(CommandEvent.success, this.success.bind(this))
+    emitter.on(CommandEvent.failed, this.failed.bind(this))
+    emitter.on(CommandEvent.warning, this.warning.bind(this))
+    emitter.on(CommandEvent.skipped, this.skipped.bind(this))
   }
 
-  // @ts-ignore: unused stepName
-  failed(activity: Activity, stepName: string, e: Error, output: string) {
-    if (output !== "") {
-      process.stdout.write(color.dim(output))
+  success(args: SuccessArgs) {
+    if (args.output !== "") {
+      process.stdout.write(color.dim(args.output))
     }
-    process.stdout.write(color.red(`${activity.file.platformified()}:${activity.line} -- `))
-    console.log(e.message)
-    const filePath = path.join(this.configuration.sourceDir, activity.file.platformified())
-    printCodeFrame(console.log, filePath, activity.line)
+    console.log(color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.finalName}`))
   }
 
-  skipped(activity: Activity, stepName: string, output: string) {
-    if (output !== "") {
-      process.stdout.write(color.dim(output))
+  failed(args: FailedArgs) {
+    if (args.output !== "") {
+      process.stdout.write(color.dim(args.output))
     }
-    console.log(color.cyan(`${activity.file.platformified()}:${activity.line} -- skipping: ${stepName}`))
+    process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
+    console.log(args.error.message)
+    const filePath = path.join(this.configuration.sourceDir, args.activity.file.platformified())
+    printCodeFrame(console.log, filePath, args.activity.line)
   }
 
-  success(activity: Activity, stepName: string, output: string) {
-    if (output !== "") {
-      process.stdout.write(color.dim(output))
+  skipped(args: SkippedArgs) {
+    if (args.output !== "") {
+      process.stdout.write(color.dim(args.output))
     }
-    console.log(color.green(`${activity.file.platformified()}:${activity.line} -- ${stepName}`))
+    console.log(
+      color.cyan(`${args.activity.file.platformified()}:${args.activity.line} -- skipping: ${args.finalName}`)
+    )
   }
 
-  summary(stats: StatsCounter) {
-    printSummary(stats)
+  warning(args: WarnArgs) {
+    console.log(color.magenta(args.message))
+  }
+
+  finish(args: FinishArgs) {
+    printSummary(args.stats)
   }
 }

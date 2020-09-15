@@ -49,7 +49,7 @@ Feature: verifying global commands provided by NPM modules
       ```
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION         | STATUS | ERROR TYPE | ERROR MESSAGE                                 |
       | 1.md     | 3    | npm/executable | failed | UserError  | package.json does not export a "zonk" command |
@@ -62,7 +62,7 @@ Feature: verifying global commands provided by NPM modules
       <a type="npm/executable">
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION         | STATUS | ERROR TYPE | ERROR MESSAGE                             |
       | 1.md     | 3    | npm/executable | failed | UserError  | No npm package installation command found |

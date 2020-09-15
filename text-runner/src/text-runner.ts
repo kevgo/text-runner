@@ -1,14 +1,24 @@
 export type { ActionArgs } from "./actions/types/action-args"
-export type { Configuration } from "./configuration/configuration"
+export { Activity } from "./activity-list/types/activity"
+export { Configuration } from "./configuration/configuration"
+export { defaultConfiguration } from "./configuration/default-configuration"
 export { AstNode } from "./parsers/standard-AST/ast-node"
 export { AstNodeList } from "./parsers/standard-AST/ast-node-list"
 export { actionName } from "./actions/helpers/action-name"
-export { ActivityResult, ActivityResultStatus } from "./activity-list/types/activity-result"
-export { ExecuteResult } from "./runners/execute-result"
-export { debugCommand } from "./commands/debug"
-export { dynamicCommand } from "./commands/dynamic"
-export { runCommand } from "./commands/run"
-export { scaffoldCommand } from "./commands/scaffold"
-export { setupCommand } from "./commands/setup"
-export { staticCommand } from "./commands/static"
+export { DebugCommand } from "./commands/debug"
+export { DynamicCommand } from "./commands/dynamic"
+export { RunCommand } from "./commands/run"
+export { ScaffoldCommand } from "./commands/scaffold"
+export { SetupCommand } from "./commands/setup"
+export { StaticCommand } from "./commands/static"
 export { UserError } from "./errors/user-error"
+export {
+  Formatter,
+  StartArgs,
+  SuccessArgs,
+  FailedArgs,
+  WarnArgs,
+  SkippedArgs,
+  FinishArgs,
+} from "./formatters/formatter"
+export { CommandEvent } from "./commands/command"

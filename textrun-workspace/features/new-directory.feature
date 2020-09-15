@@ -16,7 +16,7 @@ Feature: creating directories
       """
       Create the directory <b type="workspace/new-directory">
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE              |
       | creator.md | 1    | workspace/new-directory | failed | UserError  | empty directory name given |
@@ -27,7 +27,7 @@ Feature: creating directories
       """
       <b type="workspace/new-directory"> </b>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME   | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE              |
       | creator.md | 1    | workspace/new-directory | failed | UserError  | empty directory name given |

@@ -1,32 +1,47 @@
 import { When } from "cucumber"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
-import { callTextRunner } from "./helpers/call-text-runner"
+import * as textRunner from "text-runner"
+import { ActivityCollector } from "./activity-collector"
 
-When(/^(trying to call|calling) "([^"]+)"$/, async function (tryingText: string, jsText: string) {
+When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const expectError = determineExpectError(tryingText)
+  const config = textRunner.defaultConfiguration()
+  config.sourceDir = world.rootDir
+  // define a few variables here, they will be overwritten in the eval call
+  let command = new textRunner.RunCommand(config)
+  let observer = new ActivityCollector(command)
+  let result = observer.results()
+  // eval the given code
+  let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
+  // NOTE: instantiating an AsyncFunction
+  //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
+  //       directly would be more elegant here but somehow doesn't work on Node 14.
+  const funcText = `
+  asyncFunc = async function runner(textRunner, MyObserverClass) {
+    ${jsText}
+  }`
+  eval(funcText)
   try {
-    world.apiResults = await callTextRunner(jsText, world.rootDir, expectError)
+    await asyncFunc(textRunner, ActivityCollector)
+    world.apiResults = observer.results()
   } catch (e) {
     world.apiException = e
-    if (expectError) {
-      // expected the error --> done here
-      return
-    } else {
-      throw new Error(`Unexpected exception: ${e}`)
-    }
   }
 })
 
-When(/^(trying to call|calling) Text-Runner$/, async function (tryingText: string) {
+When(/^calling Text-Runner$/, async function () {
   const world = this as TRWorld
-  const expectError = determineExpectError(tryingText)
-  world.apiResults = await callTextRunner(
-    "textRunner.runCommand({sourceDir, formatterName})",
-    world.rootDir,
-    expectError
-  )
+  const config = textRunner.defaultConfiguration()
+  config.sourceDir = world.rootDir
+  const command = new textRunner.RunCommand(config)
+  const activityCollector = new ActivityCollector(command)
+  try {
+    await command.execute()
+  } catch (e) {
+    world.apiException = e
+  }
+  world.apiResults = activityCollector.results()
 })
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {

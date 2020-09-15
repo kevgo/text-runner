@@ -1,18 +1,23 @@
 import * as color from "colorette"
+import { Command, CommandEvent } from "./command"
+import { EventEmitter } from "events"
 
-export async function helpCommand(error?: string) {
-  console.log(template(error))
-}
-
-function template(error: string | undefined) {
-  if (error) {
-    error = `${color.red(color.bold("Error: " + error))}`
+export class HelpCommand extends EventEmitter implements Command {
+  constructor() {
+    super()
   }
-  const { version } = require("../../package.json")
 
-  return `
+  async execute() {
+    this.emit(CommandEvent.output, this.template())
+  }
+
+  /** provides the text to print */
+  template() {
+    const { version } = require("../../package.json")
+
+    return `
 ${color.dim("TextRunner " + version)}
-${error || ""}
+
 USAGE: ${color.bold("text-run [<options>] <command>")}
 
 COMMANDS
@@ -32,4 +37,5 @@ OPTIONS
   ${color.bold("--config")}                 provide a custom configuration filename
   ${color.bold("--online")}                 check external links
 `
+  }
 }

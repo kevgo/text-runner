@@ -33,7 +33,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor](#zonk)
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           |
       | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk |
@@ -48,7 +48,7 @@ Feature: links to HTML anchors
       """
       <a name="hello">hi</a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
       | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
@@ -59,7 +59,7 @@ Feature: links to HTML anchors
       """
       A [link to non-existing anchor in other file](2.md#target)
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY            | STATUS | ERROR TYPE | ERROR MESSAGE                                    |
       | 1.md     | 1    | check-link | link to 2.md#target | failed | UserError  | link to anchor #target in non-existing file 2.md |
@@ -74,7 +74,7 @@ Feature: links to HTML anchors
       """
       no link targets here
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
       | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |

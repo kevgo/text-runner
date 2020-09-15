@@ -19,7 +19,7 @@ Feature: Execute regions of semantic Markdown
       <a type="extension/runnable-region">
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                    | STATUS | ERROR TYPE | ERROR MESSAGE           |
       | 1.md     | 1    | extension/runnable-region | failed | UserError  | no content to run found |
@@ -31,7 +31,7 @@ Feature: Execute regions of semantic Markdown
       This will blow up: <a type="zonk"></a>
       </a>
       """
-    When trying to call Text-Runner
+    When calling Text-Runner
     Then it executes these actions:
       | FILENAME | LINE | ACTION                    | STATUS  | ERROR TYPE | ERROR MESSAGE        |
       | 1.md     | 1    | extension/runnable-region | success |            |                      |

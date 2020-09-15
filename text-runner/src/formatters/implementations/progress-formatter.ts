@@ -1,22 +1,18 @@
 import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
-import { Activity } from "../../activity-list/types/activity"
 import { Configuration } from "../../configuration/configuration"
 import { printCodeFrame } from "../../helpers/print-code-frame"
-import { Formatter } from "../formatter"
 import { printSummary } from "../print-summary"
-import { StatsCounter } from "../../runners/helpers/stats-counter"
+import { CommandEvent } from "../../commands/command"
+import { StartArgs, FailedArgs, FinishArgs, Formatter } from "../formatter"
+import { EventEmitter } from "events"
 
 export class ProgressFormatter implements Formatter {
-  /** Text-Runner configuration */
   private readonly configuration: Configuration
-
-  /** Progress bar instance */
   private readonly progressBar: progress.Bar
 
-  // @ts-ignore: ignore unused variable
-  constructor(stepCount: number, configuration: Configuration) {
+  constructor(configuration: Configuration, emitter: EventEmitter) {
     this.configuration = configuration
     this.progressBar = new progress.Bar(
       {
@@ -27,31 +23,45 @@ export class ProgressFormatter implements Formatter {
       },
       progress.Presets.shades_classic
     )
-    this.progressBar.start(stepCount, 0)
+    emitter.on(CommandEvent.start, this.start.bind(this))
+    emitter.on(CommandEvent.output, console.log)
+    emitter.on(CommandEvent.success, this.success.bind(this))
+    emitter.on(CommandEvent.failed, this.failed.bind(this))
+    emitter.on(CommandEvent.warning, this.warning.bind(this))
+    emitter.on(CommandEvent.skipped, this.skipped.bind(this))
   }
 
-  // @ts-ignore: unused parameters
-  failed(activity: Activity, stepName: string, err: Error, output: string) {
+  start(args: StartArgs) {
+    this.progressBar.start(args.stepCount, 0)
+  }
+
+  failed(args: FailedArgs) {
     this.progressBar.stop()
     console.log()
     console.log()
-    console.log(color.dim(output))
-    console.log(color.red(`${activity.file.platformified()}:${activity.line} -- ${err.message}\n`))
+    console.log(color.dim(args.output))
+    console.log(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.error.message}\n`))
     console.log()
-    printCodeFrame(console.log, path.join(this.configuration.sourceDir, activity.file.platformified()), activity.line)
+    printCodeFrame(
+      console.log,
+      path.join(this.configuration.sourceDir, args.activity.file.platformified()),
+      args.activity.line
+    )
   }
 
-  // @ts-ignore: okay to not use parameters here
-  skipped(activity: Activity, stepName: string, output: string) {
+  skipped() {
     this.progressBar.increment(1)
   }
 
-  // @ts-ignore: okay to not use parameters here
-  success(activity: Activity, stepName: string, output: string) {
+  success() {
     this.progressBar.increment(1)
   }
 
-  summary(stats: StatsCounter) {
-    printSummary(stats)
+  warning() {
+    this.progressBar.increment(1)
+  }
+
+  finish(args: FinishArgs) {
+    printSummary(args.stats)
   }
 }

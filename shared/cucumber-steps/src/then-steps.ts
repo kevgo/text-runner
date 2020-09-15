@@ -10,10 +10,11 @@ import * as textRunner from "text-runner"
 import { TRWorld } from "./world"
 import { standardizePath } from "./helpers/standardize-path"
 import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
+import { compareExecuteResultLine } from "./helpers/compare-execute-result-line"
 
 const psTree = util.promisify(psTreeR)
 
-interface ExecuteResultLine {
+export interface ExecuteResultLine {
   action?: string // standardized name of the action ("check-link")
   activity?: string // final name of the activity ("checking link http://foo.bar")
   errorMessage?: string // message of the UserError thrown
@@ -21,7 +22,7 @@ interface ExecuteResultLine {
   filename?: string
   line?: number
   output?: string // what the action printed via action.log()
-  status?: textRunner.ActivityResultStatus
+  status?: "success" | "failed" | "skipped" | "warning"
 }
 
 Then("it executes {int} test", function (count) {
@@ -29,7 +30,7 @@ Then("it executes {int} test", function (count) {
   if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  assert.equal(world.apiResults.activityResults.length, 1)
+  assert.equal(world.apiResults.length, 1)
 })
 
 Then("it executes in the local {string} directory", function (dirName) {
@@ -37,8 +38,7 @@ Then("it executes in the local {string} directory", function (dirName) {
   if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  const apiResults = world.apiResults as textRunner.ExecuteResult
-  const have = apiResults.activityResults[0].output.trim()
+  const have = world.apiResults[0].output?.trim()
   const want = path.join(world.rootDir, dirName)
   assert.equal(have, want)
 })
@@ -46,7 +46,6 @@ Then("it executes in the local {string} directory", function (dirName) {
 Then("it executes these actions:", function (table) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
-  const apiResults = world.apiResults as textRunner.ExecuteResult
   const tableHashes = table.hashes()
   const want: ExecuteResultLine[] = []
   for (const line of tableHashes) {
@@ -77,46 +76,45 @@ Then("it executes these actions:", function (table) {
     }
     want.push(result)
   }
-  const have: ExecuteResultLine[] = []
+  let have: ExecuteResultLine[] = []
   const wanted = want[0]
-  for (const line of apiResults?.activityResults || []) {
+  for (const activityResult of world.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
-      result.filename = line.activity.file.unixified()
+      result.filename = activityResult.activity?.file.unixified()
     }
     if (wanted.line != null) {
-      result.line = line.activity.line
+      result.line = activityResult.activity?.line
     }
     if (wanted.action != null) {
-      result.action = line.activity.actionName
+      result.action = activityResult.activity?.actionName
     }
     if (wanted.output != null) {
-      result.output = line.output?.trim() || ""
+      result.output = activityResult.output?.trim() || ""
     }
     if (wanted.activity != null) {
-      result.activity = line.finalName
+      result.activity = stripAnsi(activityResult.finalName || "")
     }
     if (wanted.status != null) {
-      result.status = line.status
+      result.status = activityResult.status
     }
     if (wanted.errorType != null) {
-      result.errorType = line.error?.name || ""
+      result.errorType = activityResult.error?.name || ""
     }
     if (wanted.errorMessage != null) {
-      result.errorMessage = stripAnsi(line.error?.message || "")
+      result.errorMessage = stripAnsi(activityResult.error?.message || "")
     }
     have.push(result)
   }
+  have = have.sort(compareExecuteResultLine)
   assert.deepEqual(have, want)
 })
 
 Then("it executes with this warning:", function (warning: string) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
-  const apiResults = world.apiResults as textRunner.ExecuteResult
-  assert.equal(apiResults.activityResults.length, 0, "activity results")
-  assert.equal(apiResults.warnings.length, 1, "warnings")
-  assert.equal(apiResults.warnings[0], warning)
+  assert.equal(world.apiResults.length, 1, "activity results")
+  assert.equal(world.apiResults[0].message, warning)
 })
 
 Then("it throws:", function (table) {
@@ -149,7 +147,7 @@ Then("it throws:", function (table) {
 
 Then("the error provides the guidance:", function (expectedText) {
   const world = this as TRWorld
-  const errors = world.apiResults.activityResults.map((res) => res.error).filter((e) => e)
+  const errors = world.apiResults.map((res) => res.error).filter((e) => e)
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }
@@ -220,23 +218,27 @@ Then("it runs {int} test", function (count) {
   assert.include(stripAnsi(world.process.output.fullText()), ` ${count} activities`)
 })
 
+Then("it executes in a global temp directory", function () {
+  const world = this as TRWorld
+  assert.notInclude(world.apiResults[0].output, world.rootDir)
+})
+
 Then("it runs in a global temp directory", function () {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no CLI process found")
   }
-  const have = world.process.output.fullText()
-  assert.notInclude(have, world.rootDir)
+  assert.notInclude(world.process.output.fullText(), world.rootDir)
 })
 
 Then("it runs in the local {string} directory", function (dirName) {
   const world = this as TRWorld
   if (!world.process) {
-    throw new Error("no CLI process found")
+    throw new Error("no process found")
   }
-  const have = world.process.output.fullText().trim()
-  const want = new RegExp(`${path.join(world.rootDir, dirName)}\\b`)
-  assert.match(have, want)
+  const have = world.process.output.fullText()
+  const want = path.join(world.rootDir, dirName)
+  assert.include(have, want)
 })
 
 Then("it runs in the current working directory", function () {

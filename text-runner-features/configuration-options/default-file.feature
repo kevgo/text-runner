@@ -35,7 +35,7 @@ Feature: Default file
       | root.md  | 1    | check-link | link to local directory guide |
 
 
-  Scenario: a Markdown codebase that is published
+  Scenario: publication with default file
     Given the source code contains a file "root.md" with content:
       """
       link to [our guides](guide)

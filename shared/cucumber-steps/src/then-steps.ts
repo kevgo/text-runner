@@ -226,7 +226,7 @@ Then("it executes in a global temp directory", function () {
 Then("it runs in a global temp directory", function () {
   const world = this as TRWorld
   if (!world.process) {
-    throw new Error("no process found")
+    throw new Error("no CLI process found")
   }
   assert.notInclude(world.process.output.fullText(), world.rootDir)
 })

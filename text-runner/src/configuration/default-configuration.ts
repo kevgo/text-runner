@@ -13,7 +13,7 @@ export function defaultConfiguration(): Configuration {
     publications: new Publications(),
     scaffoldLanguage: "js",
     sourceDir: process.cwd(),
-    useSystemTempDirectory: false,
+    systemTmp: false,
     workspace: "", // will be populated later
   }
 }

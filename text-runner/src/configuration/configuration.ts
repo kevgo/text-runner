@@ -4,8 +4,8 @@ import { FormatterName } from "../formatters/formatter"
 /**
  * All configuration values that are provided to the application
  * after analyzing the configuration provided via CLI,
- * the configuration
- * and determining other runtime variables.
+ * the configuration provided via config file,
+ * and backfilling with default settings.
  */
 export interface Configuration {
   regionMarker: string // the name of the attribute that denotes active regions

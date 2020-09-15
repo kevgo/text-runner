@@ -1,5 +1,5 @@
 import { CurrentServer } from "../helpers/current-server"
-import { ActionArgs } from "text-runner"
+import { ActionArgs } from "@text-runner/core"
 
 /**
  * The "start-output" action waits until the currently running console command

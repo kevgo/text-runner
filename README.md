@@ -9,8 +9,8 @@
 <br><br>
 
 This mono-repo contains the source code and documentation of
-[Text-Runner](text-runner) as well as some frequently used plugins providing
-additional Text-Runner actions:
+[Text-Runner](text-runner-core) as well as some frequently used plugins
+providing additional Text-Runner actions:
 
 - [textrun-action](textrun-action/): verify the documentation of Text-Runner
   plugins

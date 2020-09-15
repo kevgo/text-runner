@@ -1,4 +1,4 @@
-import { actionName, ActionArgs } from "text-runner"
+import { actionName, ActionArgs } from "@text-runner/core"
 import * as path from "path"
 
 export function nameFull(action: ActionArgs) {

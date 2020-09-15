@@ -6,7 +6,7 @@
   "dependencies": {
     "observable-process": "7.0.3",
     "strip-ansi": "6.0.0",
-    "text-runner": "4.0.3"
+    "@text-runner/core": "4.0.3"
   },
   "devDependencies": {
     "colorette": "1.2.1",

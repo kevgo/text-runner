@@ -1,6 +1,6 @@
 import * as assertNoDiff from "assert-no-diff"
 import { CurrentCommand } from "../helpers/current-command"
-import { ActionArgs } from "text-runner"
+import { ActionArgs } from "@text-runner/core"
 import stripAnsi = require("strip-ansi")
 
 export function commandOutput(action: ActionArgs) {

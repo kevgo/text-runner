@@ -6,10 +6,10 @@ import * as path from "path"
 import * as psTreeR from "ps-tree"
 import * as util from "util"
 import stripAnsi = require("strip-ansi")
-import * as textRunner from "text-runner"
+import * as textRunner from "@text-runner/core"
 import { TRWorld } from "./world"
 import { standardizePath } from "./helpers/standardize-path"
-import { verifyRanOnlyTestsCLI } from "./helpers/varify-ran-only-test-cli"
+import { verifyRanOnlyTestsCLI } from "./helpers/verify-ran-only-test-cli"
 import { compareExecuteResultLine } from "./helpers/compare-execute-result-line"
 
 const psTree = util.promisify(psTreeR)

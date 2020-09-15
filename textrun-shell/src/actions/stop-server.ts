@@ -1,6 +1,6 @@
 import { endChildProcesses } from "end-child-processes"
 import { CurrentServer } from "../helpers/current-server"
-import { ActionArgs } from "text-runner"
+import { ActionArgs } from "@text-runner/core"
 
 /**
  * The "stop" action stops the currently running server process,

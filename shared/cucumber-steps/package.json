@@ -3,10 +3,15 @@
   "version": "0.0.0",
   "devDependencies": {
     "@types/cucumber": "6.0.1",
+    "@types/ps-tree": "1.1.0",
+    "array-flatten": "3.0.0",
+    "chai": "4.2.0",
     "mocha": "8.0.1",
     "prettier": "2.0.5",
+    "ps-tree": "1.2.0",
     "strip-ansi": "6.0.0",
-    "text-runner": "4.0.3",
+    "@text-runner/core": "4.0.3",
+    "tmp-promise": "3.0.2",
     "tslint": "6.1.2",
     "typescript": "3.9.7"
   },

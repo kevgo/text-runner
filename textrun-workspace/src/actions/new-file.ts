@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { ActionArgs, UserError } from "text-runner"
+import { ActionArgs, UserError } from "@text-runner/core"
 
 export async function newFile(action: ActionArgs) {
   let filePath

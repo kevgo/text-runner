@@ -1,5 +1,5 @@
 import { EventEmitter } from "events"
-import * as tr from "text-runner"
+import * as tr from "@text-runner/core"
 
 /** Statistics about a run of Text-Runner */
 export interface ActivityResult {

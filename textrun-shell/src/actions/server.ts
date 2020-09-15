@@ -3,7 +3,7 @@ import { createObservableProcess } from "observable-process"
 import { callArgs } from "textrun-extension"
 import { CurrentServer } from "../helpers/current-server"
 import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "text-runner"
+import { ActionArgs } from "@text-runner/core"
 
 /**
  * The "start" action runs the given commands on the console.

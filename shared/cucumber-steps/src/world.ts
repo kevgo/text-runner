@@ -1,5 +1,5 @@
 import { ObservableProcess } from "observable-process"
-import * as textRunner from "text-runner"
+import * as textRunner from "@text-runner/core"
 import { ActivityResult } from "./activity-collector"
 
 /** World is the shared data structure that is provided as `this` to Cucumber steps. */

@@ -1,0 +1,62 @@
+{
+  "name": "@text-runner/cli",
+  "version": "4.0.3",
+  "author": "Kevin Goslar",
+  "bin": {
+    "text-run": "bin/text-run"
+  },
+  "dependencies": {
+    "@babel/code-frame": "7.10.4",
+    "@text-runner/core": "4.0.3",
+    "cli-cursor": "3.1.0",
+    "cli-progress": "3.8.2",
+    "colorette": "1.2.1",
+    "delay": "4.4.0",
+    "end-child-processes": "1.0.1",
+    "minimist": "1.2.5",
+    "rimraf": "3.0.2",
+    "yamljs": "0.3.0"
+  },
+  "description": "Tests documentation written in MarkDown",
+  "devDependencies": {
+    "@types/babel__code-frame": "7.0.1",
+    "@types/cli-progress": "3.7.0",
+    "@types/cucumber": "6.0.1",
+    "@types/minimist": "1.2.0",
+    "@types/mocha": "8.0.0",
+    "@types/rimraf": "3.0.0",
+    "@types/yamljs": "0.2.31",
+    "chai": "4.2.0",
+    "cucumber": "6.0.5",
+    "mocha": "8.0.1",
+    "prettier": "2.0.5",
+    "ts-node": "8.10.2",
+    "tslint": "6.1.2",
+    "typescript": "3.9.7"
+  },
+  "files": [
+    "bin/text-run",
+    "dist"
+  ],
+  "homepage": "https://github.com/kevgo/text-runner",
+  "main": "dist/text-runner.js",
+  "license": "ISC",
+  "remarkConfig": {
+    "presets": [
+      "lint-recommended"
+    ],
+    "plugins": {
+      "lint": {
+        "list-item-indent": "space"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevgo/text-runner.git"
+  },
+  "scripts": {
+    "prepublishOnly": "make prepublish",
+    "test": "make spec"
+  }
+}

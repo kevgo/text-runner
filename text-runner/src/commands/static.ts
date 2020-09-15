@@ -8,30 +8,26 @@ import { ActionFinder } from "../actions/action-finder"
 import { EventEmitter } from "events"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, WarnArgs } from "../formatters/formatter"
-import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
-import { loadConfiguration } from "../configuration/load-configuration"
+import { Configuration } from "../configuration/configuration"
 
 export class StaticCommand extends EventEmitter implements Command {
-  userConfig: UserProvidedConfiguration
+  config: Configuration
 
-  constructor(userConfig: UserProvidedConfiguration) {
+  constructor(config: Configuration) {
     super()
-    this.userConfig = userConfig
+    this.config = config
   }
 
   async execute() {
     const originalDir = process.cwd()
     try {
-      // step 1: load configuration
-      const config = await loadConfiguration(this.userConfig)
-
       // step 1: create working dir
-      if (!config.workspace) {
-        config.workspace = await createWorkspace(config)
+      if (!this.config.workspace) {
+        this.config.workspace = await createWorkspace(this.config)
       }
 
       // step 2: find files
-      const filenames = await getFileNames(config)
+      const filenames = await getFileNames(this.config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
         this.emit(CommandEvent.warning, warnArgs)
@@ -39,7 +35,7 @@ export class StaticCommand extends EventEmitter implements Command {
       }
 
       // step 3: read and parse files
-      const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
+      const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
 
       // step 4: find link targets
       const linkTargets = findLinkTargets(ASTs)
@@ -58,12 +54,12 @@ export class StaticCommand extends EventEmitter implements Command {
       // step 7: execute the ActivityList
       const startArgs: StartArgs = { stepCount: links.length }
       this.emit(CommandEvent.start, startArgs)
-      process.chdir(config.workspace)
-      const parResults = executeParallel(links, actionFinder, linkTargets, config, this)
+      process.chdir(this.config.workspace)
+      const parResults = executeParallel(links, actionFinder, linkTargets, this.config, this)
       await Promise.all(parResults)
 
       // step 8: cleanup
-      process.chdir(config.sourceDir)
+      process.chdir(this.config.sourceDir)
     } finally {
       process.chdir(originalDir)
     }

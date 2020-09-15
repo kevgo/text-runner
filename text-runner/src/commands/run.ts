@@ -24,12 +24,12 @@ export class RunCommand extends EventEmitter implements Command {
   async execute() {
     const originalDir = process.cwd()
     try {
-      // step 2: create workspace
+      // step 1: create workspace
       if (!this.config.workspace) {
         this.config.workspace = await createWorkspace(this.config)
       }
 
-      // step 3: find files
+      // step 2: find files
       const filenames = await getFileNames(this.config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
@@ -37,16 +37,16 @@ export class RunCommand extends EventEmitter implements Command {
         return
       }
 
-      // step 4: read and parse files
+      // step 3: read and parse files
       const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
 
-      // step 5: find link targets
+      // step 4: find link targets
       const linkTargets = findLinkTargets(ASTs)
 
-      // step 6: find actions
+      // step 5: find actions
       const actionFinder = ActionFinder.load(this.config.sourceDir)
 
-      // step 7: extract activities
+      // step 6: extract activities
       const activities = extractActivities(ASTs, this.config.regionMarker)
       const links = extractImagesAndLinks(ASTs)
       if (activities.length + links.length === 0) {
@@ -55,7 +55,7 @@ export class RunCommand extends EventEmitter implements Command {
         return
       }
 
-      // step 8: execute the ActivityList
+      // step 7: execute the ActivityList
       const startArgs: StartArgs = { stepCount: activities.length + links.length }
       this.emit(CommandEvent.start, startArgs)
       process.chdir(this.config.workspace)
@@ -65,7 +65,7 @@ export class RunCommand extends EventEmitter implements Command {
       await executeSequential(activities, actionFinder, this.config, linkTargets, this)
       await Promise.all(parJobs)
 
-      // step 9: cleanup
+      // step 8: cleanup
       process.chdir(this.config.sourceDir)
     } finally {
       process.chdir(originalDir)

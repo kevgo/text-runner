@@ -5,8 +5,6 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { EventEmitter } from "events"
 import { CommandEvent, Command } from "./command"
 import { WarnArgs } from "../formatters/formatter"
-import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
-import { loadConfiguration } from "../configuration/load-configuration"
 import { Configuration } from "../configuration/configuration"
 
 export class UnusedCommand extends EventEmitter implements Command {
@@ -15,11 +13,6 @@ export class UnusedCommand extends EventEmitter implements Command {
   constructor(config: Configuration) {
     super()
     this.config = config
-  }
-
-  static async create(userConfig: UserProvidedConfiguration) {
-    const config = await loadConfiguration(userConfig)
-    return new UnusedCommand(config)
   }
 
   async execute() {

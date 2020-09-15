@@ -13,7 +13,6 @@ import { StaticCommand } from "./commands/static"
 import { UnusedCommand } from "./commands/unused"
 import { VersionCommand } from "./commands/version"
 import { instantiateFormatter } from "./formatters/instantiate"
-import { UserProvidedConfiguration } from "./configuration/user-provided-configuration"
 import { Configuration } from "./configuration/configuration"
 import { loadConfiguration } from "./configuration/load-configuration"
 import { StatsCollector } from "./stats-collector"
@@ -25,7 +24,7 @@ async function main() {
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
     const configuration = await loadConfiguration(cmdLineConfig)
-    const command = await instantiateCommand(commandName, cmdLineConfig, configuration, debugSubcommand)
+    const command = await instantiateCommand(commandName, configuration, debugSubcommand)
     const formatter = instantiateFormatter(configuration, command)
     const statsCollector = new StatsCollector(command)
     await command.execute()
@@ -50,7 +49,6 @@ main()
 
 async function instantiateCommand(
   commandName: string,
-  cliArgs: UserProvidedConfiguration,
   config: Configuration,
   debugSubcommand: DebugSubcommand | undefined
 ) {
@@ -66,13 +64,13 @@ async function instantiateCommand(
     case "debug":
       return new DebugCommand(config, debugSubcommand)
     case "dynamic":
-      return new DynamicCommand(cliArgs)
+      return new DynamicCommand(config)
     case "run":
       return new RunCommand(config)
     case "static":
-      return new StaticCommand(cliArgs)
+      return new StaticCommand(config)
     case "unused":
-      return await UnusedCommand.create(cliArgs)
+      return new UnusedCommand(config)
     default:
       throw new UserError(`unknown command: ${commandName}`)
   }

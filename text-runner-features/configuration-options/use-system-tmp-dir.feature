@@ -21,7 +21,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via config file
     Given the text-run configuration contains:
       """
-      systemTmp: true
+      systemTmp: false
       """
     When running Text-Runner
     Then it runs in the local "tmp" directory

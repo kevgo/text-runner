@@ -15,7 +15,7 @@ export interface Configuration {
   publications: Publications // folder mappings
   online: boolean // whether to skip built-in tests that require a network connection
   sourceDir: string // the root directory of the source code to test
-  useSystemTempDirectory: boolean // whether to create the workspace in the system temp directory or locally
+  systemTmp: boolean // whether to create the workspace in the system temp directory or locally
   workspace: string // the root directory of the workspace
 }
 
@@ -30,7 +30,7 @@ export function scaffoldConfiguration(): Configuration {
     online: false,
     publications: new Publications(),
     sourceDir: "",
-    useSystemTempDirectory: false,
+    systemTmp: false,
     workspace: "",
   }
 }

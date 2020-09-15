@@ -49,7 +49,7 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
     },
   }
   if (cliArgs["system-tmp"] != null) {
-    config.useSystemTempDirectory = parseSystemTmp(cliArgs["system-tmp"])
+    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"

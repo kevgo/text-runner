@@ -21,7 +21,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via config file
     Given the text-run configuration contains:
       """
-      useSystemTempDirectory: false
+      systemTmp: false
       """
     When running Text-Runner
     Then it runs in the local "tmp" directory
@@ -30,7 +30,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via CLI
     Given the text-run configuration contains:
       """
-      useSystemTempDirectory: true
+      systemTmp: true
       """
     When running "text-run --no-system-tmp"
     Then it runs in the local "tmp" directory
@@ -39,7 +39,7 @@ Feature: separate working directory
   Scenario: running in a global temp directory via config file
     Given the text-run configuration contains:
       """
-      useSystemTempDirectory: true
+      systemTmp: true
       """
     When running Text-Runner
     Then it runs in a global temp directory

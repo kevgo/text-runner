@@ -25,7 +25,7 @@ suite("mergeConfigurations()", function () {
       publications: new Publications(),
       regionMarker: "type",
       sourceDir: "my-source",
-      useSystemTempDirectory: false,
+      systemTmp: false,
       workspace: "",
     }
     assert.deepEqual(have, want)

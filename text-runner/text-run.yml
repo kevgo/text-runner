@@ -5,4 +5,4 @@ exclude:
   - src/parsers/markdown/fixtures
   - tmp
 format: progress
-useSystemTempDirectory: false
+systemTmp: false

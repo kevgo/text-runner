@@ -5,5 +5,6 @@ Feature: help command
     Then it prints:
       """
       USAGE: .*
+
       COMMANDS
       """

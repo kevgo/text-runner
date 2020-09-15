@@ -11,6 +11,6 @@ export function printSummary(stats: StatsCounter) {
     colorFn = color.red
     text += color.red(`${stats.errors()} errors, `)
   }
-  text += colorFn(`${stats.activities()} activities in ${stats.files()} files, ${stats.duration()}`)
+  text += colorFn(`${stats.activities()} activities, ${stats.duration()}`)
   console.log(color.bold(text))
 }

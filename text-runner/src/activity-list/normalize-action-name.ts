@@ -8,12 +8,7 @@ export function normalizeActionName(actionName: string, file: AbsoluteFilePath, 
     return slugify(actionName)
   }
   if (parts.length > 2) {
-    throw new UserError(
-      `Illegal activity name: "${actionName}" contains ${parts.length} slashes`,
-      "",
-      file.unixified(),
-      line
-    )
+    throw new UserError(`Illegal activity name: "${actionName}" contains ${parts.length} slashes`, "", file, line)
   }
   return parts[0] + "/" + slugify(parts[1])
 }

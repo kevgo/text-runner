@@ -27,7 +27,7 @@ export class OpenNodeTracker {
     throw new UserError(
       `No opening node '${openType}' found for closing node '${node.type}'`,
       `Node </${openType}> does not have a corresponding opening node`,
-      file.platformified(),
+      file,
       line
     )
   }

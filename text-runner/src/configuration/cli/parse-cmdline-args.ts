@@ -10,7 +10,7 @@ import { UserError } from "../../errors/user-error"
  *
  * @param argv the command-line options received by the process
  */
-export function parseCmdlineArgs(argv: string[]): { command: string; config: UserProvidedConfiguration } {
+export function parseCmdlineArgs(argv: string[]): { commandName: string; cmdLineConfig: UserProvidedConfiguration } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -29,8 +29,8 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
 
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: true })
-  let command = cliArgs._[0]
-  const config: UserProvidedConfiguration = {
+  let commandName = cliArgs._[0]
+  const cmdLineConfig: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
@@ -49,16 +49,16 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
     },
   }
   if (cliArgs["system-tmp"] != null) {
-    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
+    cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
-  if (!availableCommands().includes(command)) {
-    config.files = command
-    command = "run"
+  if (!availableCommands().includes(commandName)) {
+    cmdLineConfig.files = commandName
+    commandName = "run"
   }
 
-  return { command, config }
+  return { commandName, cmdLineConfig }
 }
 
 function parseSystemTmp(value: any): boolean | undefined {

@@ -33,8 +33,8 @@ export function parseCmdlineArgs(
 
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: true })
-  let command = cliArgs._[0]
-  const config: UserProvidedConfiguration = {
+  let commandName = cliArgs._[0]
+  const cmdLineConfig: UserProvidedConfiguration = {
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
@@ -44,23 +44,23 @@ export function parseCmdlineArgs(
     scaffoldLanguage: parseScaffoldSwitches(cliArgs),
   }
   if (cliArgs["system-tmp"] != null) {
-    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
+    cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }
   if (cliArgs["system-tmp"] != null) {
-    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
+    cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
-  if (!availableCommands().includes(command)) {
-    config.files = command
-    command = "run"
+  if (!availableCommands().includes(commandName)) {
+    cmdLineConfig.files = commandName
+    commandName = "run"
   }
 
   let debugSubcommand: DebugSubcommand | undefined
-  if (command === "debug") {
+  if (commandName === "debug") {
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
-  return { commandName: command, cmdLineConfig: config, debugSubcommand }
+  return { commandName, cmdLineConfig, debugSubcommand }
 }
 
 function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {

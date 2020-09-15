@@ -44,7 +44,6 @@ export async function runActivity(
       actionResult = await runCallbackFunc(action, args)
     }
     if (actionResult === undefined) {
-      // TODO: remove statsCounter, use the formatters to count
       const successArgs: SuccessArgs = {
         activity,
         finalName: nameRefiner.finalName(),

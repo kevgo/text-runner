@@ -13,7 +13,7 @@ import { EventEmitter } from "events"
 import { Command } from "./command"
 import { Configuration } from "../configuration/configuration"
 
-/** DebugSubcommandName defines the valid subcommands that the debug command can receive */
+/** defines the valid subcommands that the debug command can receive */
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
 export class DebugCommand extends EventEmitter implements Command {

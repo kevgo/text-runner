@@ -1,5 +1,6 @@
 import { normalizeActionName } from "./normalize-action-name"
 import { strict as assert } from "assert"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 
 suite("normalizeActionName", function () {
   const tests = {
@@ -12,7 +13,7 @@ suite("normalizeActionName", function () {
   }
   for (const [give, want] of Object.entries(tests)) {
     test(give, function () {
-      assert.equal(normalizeActionName(give), want)
+      assert.equal(normalizeActionName(give, new AbsoluteFilePath(""), 1), want)
     })
   }
 })

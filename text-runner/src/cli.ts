@@ -18,39 +18,39 @@ import { versionCommand } from "./commands/version"
 cliCursor.hide()
 
 async function main() {
-  const { command, config } = parseCmdlineArgs(process.argv)
+  const { commandName, cmdLineConfig } = parseCmdlineArgs(process.argv)
   let result = ExecuteResult.empty()
   try {
-    switch (command) {
+    switch (commandName) {
       case "help":
         await helpCommand()
         break
       case "scaffold":
-        await scaffoldCommand(config)
+        await scaffoldCommand(cmdLineConfig)
         break
       case "setup":
-        result = await setupCommand(config)
+        result = await setupCommand(cmdLineConfig)
         break
       case "version":
         await versionCommand()
         break
       case "debug":
-        result = await debugCommand(config)
+        result = await debugCommand(cmdLineConfig)
         break
       case "dynamic":
-        result = await dynamicCommand(config)
+        result = await dynamicCommand(cmdLineConfig)
         break
       case "run":
-        result = await runCommand(config)
+        result = await runCommand(cmdLineConfig)
         break
       case "static":
-        result = await staticCommand(config)
+        result = await staticCommand(cmdLineConfig)
         break
       case "unused":
-        result = await unusedCommand(config)
+        result = await unusedCommand(cmdLineConfig)
         break
       default:
-        console.log(color.red(`unknown command: ${command || ""}`))
+        console.log(color.red(`unknown command: ${cmdLineConfig || ""}`))
         result.errorCount += 1
     }
   } catch (err) {

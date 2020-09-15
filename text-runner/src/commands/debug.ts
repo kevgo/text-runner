@@ -12,11 +12,15 @@ import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
 
-export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {
+export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
+
+export async function debugCommand(
+  cmdlineArgs: UserProvidedConfiguration,
+  subcommand: DebugSubcommand | undefined
+): Promise<ExecuteResult> {
   const config = await loadConfiguration(cmdlineArgs)
 
-  const typeEntry = Object.entries(cmdlineArgs.debugSwitches || {}).filter((e) => e[1])[0]
-  if (!typeEntry) {
+  if (!subcommand) {
     const guidance = `Please tell me what to debug. One of these things:
 
 --activities: active regions
@@ -28,17 +32,16 @@ export async function debugCommand(cmdlineArgs: UserProvidedConfiguration): Prom
 Example: text-run debug --images foo.md`
     throw new UserError("missing data type", guidance)
   }
-  const type = typeEntry[0]
   const filenames = await getFileNames(config)
   if (filenames.length !== 1) {
     const guidance = `Please tell me which file to debug
 
-Example: text-run debug --${type} foo.md`
+Example: text-run debug --${subcommand} foo.md`
     throw new UserError("no files specified", guidance)
   }
   const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
-  switch (type) {
+  switch (subcommand) {
     case "activities":
       debugActivities(ASTs, config)
       break
@@ -55,7 +58,7 @@ Example: text-run debug --${type} foo.md`
       debugLinkTargets(ASTs)
       break
     default:
-      throw new UserError("unknown debug sub-command: " + type)
+      throw new UserError("unknown debug sub-command: " + subcommand)
   }
   return ExecuteResult.empty()
 }

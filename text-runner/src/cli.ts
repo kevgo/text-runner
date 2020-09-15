@@ -18,7 +18,7 @@ import { versionCommand } from "./commands/version"
 cliCursor.hide()
 
 async function main() {
-  const { commandName, cmdLineConfig } = parseCmdlineArgs(process.argv)
+  const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
   let result = ExecuteResult.empty()
   try {
     switch (commandName) {
@@ -35,7 +35,7 @@ async function main() {
         await versionCommand()
         break
       case "debug":
-        result = await debugCommand(cmdLineConfig)
+        result = await debugCommand(cmdLineConfig, debugSubcommand)
         break
       case "dynamic":
         result = await dynamicCommand(cmdLineConfig)

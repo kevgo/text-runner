@@ -17,7 +17,7 @@ export async function loadConfigFile(filename: string): Promise<UserProvidedConf
     formatterName: fileData.format,
     online: fileData.online,
     publications: fileData.publications,
-    useSystemTempDirectory: fileData.useSystemTempDirectory,
+    systemTmp: fileData.systemTmp,
     workspace: fileData.workspace,
   }
   return result

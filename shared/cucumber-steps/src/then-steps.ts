@@ -33,6 +33,17 @@ Then("it executes {int} test", function (count) {
   assert.equal(world.apiResults.length, 1)
 })
 
+Then("it executes in the local {string} directory", function (dirName) {
+  const world = this as TRWorld
+  if (!world.apiResults) {
+    throw new Error("no API results found")
+  }
+  const apiResults = world.apiResults as textRunner.ExecuteResult
+  const have = apiResults.activityResults[0].output.trim()
+  const want = path.join(world.rootDir, dirName)
+  assert.equal(have, want)
+})
+
 Then("it executes these actions:", function (table) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
@@ -210,8 +221,8 @@ Then("it runs {int} test", function (count) {
 
 Then("it executes in a global temp directory", function () {
   const world = this as TRWorld
-  if (!world.apiResults) {
-    throw new Error("no API results found")
+  if (!world.process) {
+    throw new Error("no CLI process found")
   }
   assert.notInclude(world.apiResults[0].output, world.rootDir)
 })
@@ -226,8 +237,8 @@ Then("it runs in a global temp directory", function () {
 
 Then("it executes in the local {string} directory", function (dirName) {
   const world = this as TRWorld
-  if (!world.apiResults) {
-    throw new Error("no API results found")
+  if (!world.process) {
+    throw new Error("no CLI process found")
   }
   const have = world.apiResults[0].output?.trim()
   const want = path.join(world.rootDir, dirName)

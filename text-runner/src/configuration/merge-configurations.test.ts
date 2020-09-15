@@ -26,7 +26,7 @@ suite("mergeConfigurations()", function () {
       regionMarker: "type",
       scaffoldLanguage: "js",
       sourceDir: "my-source",
-      useSystemTempDirectory: false,
+      systemTmp: false,
       workspace: "",
     }
     assert.deepEqual(have, want)

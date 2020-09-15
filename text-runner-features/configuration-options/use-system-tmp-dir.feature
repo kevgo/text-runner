@@ -21,7 +21,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via config file
     Given the text-run configuration contains:
       """
-      useSystemTempDirectory: false
+      systemTmp: true
       """
     When running Text-Runner
     Then it runs in the local "tmp" directory
@@ -30,7 +30,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via CLI
     Given the text-run configuration contains:
       """
-      useSystemTempDirectory: true
+      systemTmp: true
       """
     When running "text-run --no-system-tmp"
     Then it runs in the local "tmp" directory
@@ -39,7 +39,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via API
     When calling:
       """
-      command = new textRunner.RunCommand({...config, useSystemTempDirectory: false})
+      command = new textRunner.RunCommand({...config, systemTmp: false})
       observer = new MyObserverClass(command)
       await command.execute()
       """
@@ -49,7 +49,7 @@ Feature: separate working directory
   Scenario: running in a global temp directory via config file
     Given the text-run configuration contains:
       """
-      useSystemTempDirectory: true
+      systemTmp: true
       """
     When running Text-Runner
     Then it runs in a global temp directory
@@ -63,7 +63,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via API
     When calling:
       """
-      command = new textRunner.RunCommand({...config, useSystemTempDirectory: true})
+      command = new textRunner.RunCommand({...config, systemTmp: true})
       observer = new MyObserverClass(command)
       await command.execute()
       """

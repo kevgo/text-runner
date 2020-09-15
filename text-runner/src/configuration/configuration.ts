@@ -17,6 +17,6 @@ export interface Configuration {
   online: boolean // whether to skip built-in tests that require a network connection
   scaffoldLanguage: "js" | "ts" // language in which to scaffold new steps
   sourceDir: string // the root directory of the source code to test
-  useSystemTempDirectory: boolean // whether to create the workspace in the system temp directory or locally
+  systemTmp: boolean // whether to create the workspace in the system temp directory or locally
   workspace: string // the root directory of the workspace
 }

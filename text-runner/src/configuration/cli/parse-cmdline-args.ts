@@ -44,7 +44,10 @@ export function parseCmdlineArgs(
     scaffoldLanguage: parseScaffoldSwitches(cliArgs),
   }
   if (cliArgs["system-tmp"] != null) {
-    config.useSystemTempDirectory = parseSystemTmp(cliArgs["system-tmp"])
+    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
+  }
+  if (cliArgs["system-tmp"] != null) {
+    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
@@ -58,17 +61,6 @@ export function parseCmdlineArgs(
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
   return { commandName: command, cmdLineConfig: config, debugSubcommand }
-}
-
-function parseSystemTmp(value: any): boolean | undefined {
-  switch (value) {
-    case true:
-      return true
-    case false:
-      return false
-    default:
-      throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
-  }
 }
 
 function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {
@@ -92,5 +84,16 @@ function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): ScaffoldLanguage {
     return "ts"
   } else {
     return "js"
+  }
+}
+
+function parseSystemTmp(value: any): boolean | undefined {
+  switch (value) {
+    case true:
+      return true
+    case false:
+      return false
+    default:
+      throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
   }
 }

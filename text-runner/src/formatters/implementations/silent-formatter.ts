@@ -1,5 +1,5 @@
 import { Activity } from "../../activity-list/types/activity"
-import { Configuration } from "../../configuration/types/configuration"
+import { Configuration } from "../../configuration/configuration"
 import { Formatter } from "../formatter"
 import { StatsCounter } from "../../runners/helpers/stats-counter"
 

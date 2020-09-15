@@ -1,5 +1,5 @@
 import { ActivityList } from "../activity-list/types/activity-list"
-import { Configuration } from "../configuration/types/configuration"
+import { Configuration } from "../configuration/configuration"
 import { Formatter } from "../formatters/formatter"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { StatsCounter } from "./helpers/stats-counter"

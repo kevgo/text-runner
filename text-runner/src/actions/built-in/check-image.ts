@@ -2,7 +2,7 @@ import * as color from "colorette"
 import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
-import { Configuration } from "../../configuration/types/configuration"
+import { Configuration } from "../../configuration/configuration"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkImage" action checks for broken images. */

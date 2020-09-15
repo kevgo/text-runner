@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as path from "path"
 import { Activity } from "../../activity-list/types/activity"
-import { Configuration } from "../../configuration/types/configuration"
+import { Configuration } from "../../configuration/configuration"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { Formatter } from "../formatter"
 import { StatsCounter } from "../../runners/helpers/stats-counter"

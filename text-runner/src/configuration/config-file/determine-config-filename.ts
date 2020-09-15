@@ -1,6 +1,6 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { UserProvidedConfiguration } from "../types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../user-provided-configuration"
 import { UserError } from "../../errors/user-error"
 
 /**

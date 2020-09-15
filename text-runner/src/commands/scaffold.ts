@@ -2,7 +2,7 @@ import * as path from "path"
 import { promises as fs } from "fs"
 import { ExecuteResult } from "../runners/execute-result"
 import { camelize } from "../helpers/camelize"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 
 export async function scaffoldCommand(config: UserProvidedConfiguration): Promise<ExecuteResult> {
   if (!config.files) {

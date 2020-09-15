@@ -4,7 +4,7 @@ import { DotFormatter } from "./implementations/dot-formatter"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
-import { Configuration } from "../configuration/types/configuration"
+import { Configuration } from "../configuration/configuration"
 import { SilentFormatter } from "./implementations/silent-formatter"
 
 export function instantiateFormatter(

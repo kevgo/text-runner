@@ -8,7 +8,7 @@ import { StatsCounter } from "../runners/helpers/stats-counter"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import { loadConfiguration } from "../configuration/load-configuration"
-import { UserProvidedConfiguration } from "../configuration/types/user-provided-configuration"
+import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 import { ExecuteResult } from "../runners/execute-result"
 
 export async function staticCommand(cmdlineArgs: UserProvidedConfiguration): Promise<ExecuteResult> {

@@ -13,7 +13,7 @@ suite("normalizeActionName", function () {
   }
   for (const [give, want] of Object.entries(tests)) {
     test(give, function () {
-      assert.equal(normalizeActionName(give, new AbsoluteFilePath("foo.md"), 1), want)
+      assert.equal(normalizeActionName(give, new AbsoluteFilePath(""), 1), want)
     })
   }
 })

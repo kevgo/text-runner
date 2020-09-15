@@ -23,40 +23,6 @@ cliCursor.hide()
 async function main() {
   let errorCount = 0
   try {
-    // CLI WANTS
-    // - call a command with the parsed CLI args
-    // CUKE WANTS
-    // - call a command with no formatter (hence no output) and custom args
-    // OTHER API USERS WANT
-    // - call a command with custom settings
-    //
-    // DEPENDENCIES
-    // - UserProvidedConfiguration --> config file
-    // - config file --> config
-    // - config --> command
-    // - config + command --> formatter
-    // - formatter --> command.exec
-    //
-    // HIGH-LEVEL API
-    // 1. call a command with UserProvidedConfiguration, it loads the config and the formatter
-    //
-    // LOW LEVEL API
-    // - core (commands) receives Configuration, runs, emits events (doesn't care about interaction with outside world)
-    // - loadConfiguration(userArgs): Configuration
-    // - loadFormatter(name): Formatter
-    //
-    // HIGH-LEVEL API
-    // textRunner.execute(commandName, userConfig): results
-    // - loads config file
-    // - creates low-level command instance
-    // - instantiates statsCounter and subscribes it to events
-    // - instantiates formatter with given name and subscribes it to events
-    // - executes the command
-    // - calls "finished" method on formatter with statsCounter
-    // - returns the statsCounter
-    //
-    // idea: use a separate stats-collector that also subscribes to the EventEmitter
-    // in addition to a potential formatter. Then the cukes don't use a formatter at all.
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
     const configuration = await loadConfiguration(cmdLineConfig)
     const command = await instantiateCommand(commandName, cmdLineConfig, configuration, debugSubcommand)

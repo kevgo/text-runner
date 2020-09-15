@@ -38,8 +38,7 @@ Then("it executes in the local {string} directory", function (dirName) {
   if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  const apiResults = world.apiResults as textRunner.ExecuteResult
-  const have = apiResults.activityResults[0].output.trim()
+  const have = world.apiResults[0].output?.trim()
   const want = path.join(world.rootDir, dirName)
   assert.equal(have, want)
 })

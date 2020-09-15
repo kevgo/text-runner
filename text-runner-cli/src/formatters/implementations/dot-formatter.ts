@@ -4,7 +4,7 @@ import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
 import { FinishArgs, Formatter } from "../formatter"
 import { EventEmitter } from "events"
-import { Configuration, FailedArgs, WarnArgs, CommandEvent } from "@text-runner/core"
+import { Configuration, FailedArgs, WarnArgs, CommandEvent } from "text-runner-core"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements Formatter {

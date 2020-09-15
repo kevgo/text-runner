@@ -1,7 +1,7 @@
 import { When } from "cucumber"
 import { executeCLI } from "./helpers/execute-cli"
 import { TRWorld } from "./world"
-import * as textRunner from "@text-runner/core"
+import * as textRunner from "text-runner-core"
 import { ActivityCollector } from "./activity-collector"
 
 When(/^calling:$/, async function (jsText: string) {

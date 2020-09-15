@@ -53,7 +53,7 @@ function jsTemplate(filename: string) {
 }
 
 function tsTemplate(filename: string) {
-  return `import { ActionArgs } from "@text-runner/core"
+  return `import { ActionArgs } from "text-runner-core"
 
 export function ${camelize(filename)} (action: ActionArgs) {
   console.log("This is the implementation of the "${filename}" action.")

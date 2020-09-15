@@ -1,6 +1,6 @@
 import { determineConfiguration } from "./determine-configuration"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
-import { Configuration } from "@text-runner/core"
+import { Configuration } from "text-runner-core"
 import { determineConfigFilename } from "../config-file/determine-config-filename"
 import { loadConfigFile } from "../config-file/load-config-file"
 

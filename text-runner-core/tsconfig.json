@@ -1,6 +1,5 @@
 {
   "extends": "./tsconfig-build.json",
-  "include": ["./**/*.ts", "features/support/*.ts", "../text-runner-cli/src/user-provided-configuration.ts"],
   "compilerOptions": {
     "noEmit": true /* Do not emit outputs. */,
     "incremental": false

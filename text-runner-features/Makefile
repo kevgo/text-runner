@@ -1,5 +1,7 @@
 build:
 
+clean:
+
 cuke:
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'` '**/*.feature'
 cuke-lerna:

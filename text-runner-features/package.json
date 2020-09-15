@@ -4,7 +4,7 @@
   "devDependencies": {
     "cucumber": "6.0.5",
     "shared-cucumber-steps": "0.0.0",
-    "@text-runner/core": "4.0.3",
+    "text-runner-core": "4.0.3",
     "textrun-javascript": "0.0.0"
   },
   "license": "ISC",

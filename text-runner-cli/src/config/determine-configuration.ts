@@ -1,5 +1,5 @@
 import { mergeConfigurations } from "./merge-configurations"
-import { Publications, Configuration, defaultConfiguration } from "@text-runner/core"
+import { Publications, Configuration, defaultConfiguration } from "text-runner-core"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 /**

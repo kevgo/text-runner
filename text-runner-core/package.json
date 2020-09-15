@@ -1,5 +1,5 @@
 {
-  "name": "@text-runner/core",
+  "name": "text-runner-core",
   "version": "4.0.3",
   "author": "Kevin Goslar",
   "bin": {

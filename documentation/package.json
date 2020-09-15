@@ -2,6 +2,7 @@
   "name": "documentation",
   "version": "0.0.0",
   "devDependencies": {
+    "assert-no-diff": "3.0.4",
     "custom-action-coffeescript": "0.0.0",
     "custom-action-examples": "0.0.0",
     "custom-action-typescript": "0.0.0",
@@ -9,7 +10,7 @@
     "remark-cli": "8.0.1",
     "remark-lint": "7.0.1",
     "remark-preset-lint-recommended": "4.0.1",
-    "@text-runner/core": "4.0.3",
+    "text-runner-core": "4.0.3",
     "textrun-extension": "0.0.0",
     "textrun-npm": "0.0.0",
     "textrun-shell": "0.0.0",

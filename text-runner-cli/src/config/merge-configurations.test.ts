@@ -1,9 +1,7 @@
 import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
-import { UserProvidedConfiguration } from "../../../text-runner-cli/src/user-provided-configuration"
-import { Configuration } from "./configuration"
-import { Publications } from "./publications/publications"
-import { defaultConfiguration } from "./default-configuration"
+import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { defaultConfiguration, Configuration, Publications } from "text-runner-core"
 
 suite("mergeConfigurations()", function () {
   test("no CLI args and config file data given", function () {

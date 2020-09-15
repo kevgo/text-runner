@@ -1,5 +1,5 @@
 import * as path from "path"
-import { ActionArgs } from "@text-runner/core"
+import { ActionArgs } from "text-runner-core"
 import { createObservableProcess } from "observable-process"
 import { callArgs } from "../helpers/call-args"
 

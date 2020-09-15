@@ -1,10 +1,10 @@
 import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
-import { Configuration } from "@text-runner/core"
+import { Configuration } from "text-runner-core"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
-import { CommandEvent, StartArgs, FailedArgs } from "@text-runner/core"
+import { CommandEvent, StartArgs, FailedArgs } from "text-runner-core"
 import { FinishArgs, Formatter } from "../formatter"
 import { EventEmitter } from "events"
 

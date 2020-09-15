@@ -1,6 +1,6 @@
 import * as YAML from "yamljs"
 import { promises as fs } from "fs"
-import { UserProvidedConfiguration } from "../../../../text-runner-cli/src/user-provided-configuration"
+import { UserProvidedConfiguration } from "../config/user-provided-configuration"
 
 /** provides the content of the config file in the standardized format */
 export async function loadConfigFile(filename: string): Promise<UserProvidedConfiguration> {

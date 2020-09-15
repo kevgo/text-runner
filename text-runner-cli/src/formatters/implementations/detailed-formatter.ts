@@ -4,7 +4,7 @@ import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
 import { FinishArgs, Formatter } from "../formatter"
 import { EventEmitter } from "events"
-import { Configuration, FailedArgs, SkippedArgs, SuccessArgs, WarnArgs, CommandEvent } from "@text-runner/core"
+import { Configuration, FailedArgs, SkippedArgs, SuccessArgs, WarnArgs, CommandEvent } from "text-runner-core"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {

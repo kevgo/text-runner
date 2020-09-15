@@ -4,7 +4,7 @@ import { createObservableProcess } from "observable-process"
 import { callArgs } from "textrun-extension"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "@text-runner/core"
+import { ActionArgs } from "text-runner-core"
 import { Configuration } from "../helpers/configuration"
 
 /**

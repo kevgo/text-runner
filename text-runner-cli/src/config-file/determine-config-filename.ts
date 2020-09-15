@@ -1,6 +1,6 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { UserError } from "@text-runner/core"
+import { UserError } from "text-runner-core"
 import { UserProvidedConfiguration } from "../config/user-provided-configuration"
 
 /**

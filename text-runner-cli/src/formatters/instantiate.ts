@@ -1,14 +1,14 @@
-import { UserError } from "@text-runner/core"
+import { UserError } from "text-runner-core"
 import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
-import { Configuration } from "@text-runner/core"
+import { Configuration } from "text-runner-core"
 import { EventEmitter } from "events"
 
-export function instantiateFormatter(name: string, config: Configuration, emitter: EventEmitter): Formatter {
-  switch (name) {
+export function instantiateFormatter(config: Configuration, emitter: EventEmitter): Formatter {
+  switch (config.formatterName) {
     case "dot":
       return new DotFormatter(config, emitter)
     case "detailed":

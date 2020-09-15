@@ -1,4 +1,4 @@
-import { ActionArgs } from "@text-runner/core"
+import { ActionArgs } from "text-runner-core"
 import { appendAsyncCallback } from "../helpers/append-async-callback"
 import { replaceAsyncCallback } from "../helpers/replace-async-callback"
 import { replaceRequireLocalModule } from "../helpers/replace-require-local-module"

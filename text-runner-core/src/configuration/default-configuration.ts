@@ -10,6 +10,7 @@ export function defaultConfiguration(): Configuration {
     files: "**/*.md",
     online: false,
     publications: new Publications(),
+    formatterName: "detailed",
     scaffoldLanguage: "js",
     sourceDir: process.cwd(),
     systemTmp: false,

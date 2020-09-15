@@ -3,7 +3,7 @@ import { createObservableProcess, ObservableProcess } from "observable-process"
 import { callArgs } from "textrun-extension"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs, AstNodeList } from "@text-runner/core"
+import { ActionArgs, AstNodeList } from "text-runner-core"
 
 interface ProcessInput {
   textToWait: string | null

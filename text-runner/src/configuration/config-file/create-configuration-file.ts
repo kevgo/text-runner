@@ -38,7 +38,7 @@ regionMarker: type
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,
 # you can also provide a custom directory path here
-useSystemTempDirectory: false
+systemTmp: false
 
 # whether to verify online files/links (warning: this makes tests flaky)
 online: false`

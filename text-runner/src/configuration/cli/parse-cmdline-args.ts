@@ -2,6 +2,7 @@ import * as minimist from "minimist"
 import * as path from "path"
 import { availableCommands } from "../../commands/available-commands"
 import { UserProvidedConfiguration } from "../types/user-provided-configuration"
+import { UserError } from "../../errors/user-error"
 
 /**
  * Parses the command-line options received
@@ -47,6 +48,9 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
       ts: cliArgs.ts,
     },
   }
+  if (cliArgs["system-tmp"] != null) {
+    config.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
+  }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
   if (!availableCommands().includes(command)) {
@@ -55,4 +59,15 @@ export function parseCmdlineArgs(argv: string[]): { command: string; config: Use
   }
 
   return { command, config }
+}
+
+function parseSystemTmp(value: any): boolean | undefined {
+  switch (value) {
+    case true:
+      return true
+    case false:
+      return false
+    default:
+      throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
+  }
 }

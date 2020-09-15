@@ -12,7 +12,7 @@ export const defaultValues: Configuration = {
   online: false,
   publications: new Publications(),
   sourceDir: process.cwd(),
-  useSystemTempDirectory: false,
+  systemTmp: false,
   workspace: "", // will be populated later
 }
 

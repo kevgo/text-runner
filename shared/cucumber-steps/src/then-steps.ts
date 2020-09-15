@@ -32,6 +32,17 @@ Then("it executes {int} test", function (count) {
   assert.equal(world.apiResults.activityResults.length, 1)
 })
 
+Then("it executes in the local {string} directory", function (dirName) {
+  const world = this as TRWorld
+  if (!world.apiResults) {
+    throw new Error("no API results found")
+  }
+  const apiResults = world.apiResults as textRunner.ExecuteResult
+  const have = apiResults.activityResults[0].output.trim()
+  const want = path.join(world.rootDir, dirName)
+  assert.equal(have, want)
+})
+
 Then("it executes these actions:", function (table) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
@@ -211,20 +222,21 @@ Then("it runs {int} test", function (count) {
 
 Then("it runs in a global temp directory", function () {
   const world = this as TRWorld
-  if (!world.apiResults) {
-    throw new Error("no API results found")
+  if (!world.process) {
+    throw new Error("no CLI process found")
   }
-  assert.notInclude(world.apiResults.activityResults[0].output, world.rootDir)
+  const have = world.process.output.fullText()
+  assert.notInclude(have, world.rootDir)
 })
 
 Then("it runs in the local {string} directory", function (dirName) {
   const world = this as TRWorld
-  if (!world.apiResults) {
-    throw new Error("no API results found")
+  if (!world.process) {
+    throw new Error("no CLI process found")
   }
-  const have = world.apiResults.activityResults[0].output.trim()
-  const want = path.join(world.rootDir, dirName)
-  assert.equal(have, want)
+  const have = world.process.output.fullText().trim()
+  const want = new RegExp(`${path.join(world.rootDir, dirName)}\\b`)
+  assert.match(have, want)
 })
 
 Then("it runs in the current working directory", function () {

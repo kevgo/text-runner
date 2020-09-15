@@ -17,7 +17,7 @@ export interface UserProvidedConfiguration {
   publications?: Publications
   scaffoldSwitches?: ScaffoldSwitches
   sourceDir?: string // the root directory of the source code to test
-  useSystemTempDirectory?: boolean
+  systemTmp?: boolean
   workspace?: string // path of the workspace to use
 }
 

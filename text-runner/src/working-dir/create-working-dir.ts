@@ -12,14 +12,14 @@ export async function createWorkspace(config: Configuration): Promise<string> {
 }
 
 async function getWorkspacePath(config: Configuration): Promise<string> {
-  if (typeof config.useSystemTempDirectory === "string") {
-    return config.useSystemTempDirectory
-  } else if (config.useSystemTempDirectory === false) {
+  if (typeof config.systemTmp === "string") {
+    return config.systemTmp
+  } else if (config.systemTmp === false) {
     return path.join(config.sourceDir, "tmp")
-  } else if (config.useSystemTempDirectory === true) {
+  } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()
     return tmpDir.path
   } else {
-    throw new UserError(`unknown 'useSystemTempDirectory' setting: ${config.useSystemTempDirectory}`)
+    throw new UserError(`unknown 'systemTmp' setting: ${config.systemTmp}`)
   }
 }

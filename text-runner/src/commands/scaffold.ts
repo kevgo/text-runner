@@ -4,6 +4,8 @@ import { ExecuteResult } from "../runners/execute-result"
 import { camelize } from "../helpers/camelize"
 import { UserProvidedConfiguration } from "../configuration/user-provided-configuration"
 
+export type ScaffoldLanguage = "js" | "ts"
+
 export async function scaffoldCommand(config: UserProvidedConfiguration): Promise<ExecuteResult> {
   if (!config.files) {
     throw new Error("no action name given")
@@ -18,7 +20,7 @@ export async function scaffoldCommand(config: UserProvidedConfiguration): Promis
   if (!textRunDirExists) {
     await fs.mkdir(dirPath, { recursive: true })
   }
-  if (config.scaffoldSwitches?.ts) {
+  if (config.scaffoldLanguage === "ts") {
     await fs.writeFile(path.join(dirPath, config.files + ".ts"), tsTemplate(config.files), "utf8")
   } else {
     await fs.writeFile(path.join(dirPath, config.files + ".js"), jsTemplate(config.files), "utf8")

@@ -2,10 +2,10 @@ import { assert } from "chai"
 import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
 import { instantiateFormatter } from "./instantiate"
-import { scaffoldConfiguration } from "../configuration/configuration"
+import { defaultConfiguration } from "../configuration/default-configuration"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 
-const config = scaffoldConfiguration()
+const config = defaultConfiguration()
 
 suite("instantiateFormatter()", function () {
   test("request detailed formatter", function () {

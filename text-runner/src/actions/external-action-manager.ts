@@ -20,7 +20,12 @@ export class ExternalActionManager {
       return null
     }
     if (parts.length > 2) {
-      throw new UserError(`Too many slashes in action name "${activity.actionName}"`, "", activity.file, activity.line)
+      throw new UserError(
+        `Too many slashes in action name "${activity.actionName}"`,
+        "Activities are only allowed to have one slash in them: to separate the npm module name from the action name",
+        activity.file,
+        activity.line
+      )
     }
     const moduleName = "textrun-" + parts[0]
     const wantAction = actionName(parts[1])

@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import { Stats } from "../stats-collector"
+import { Stats } from "../cli/stats-collector"
 
 export function printSummary(stats: Stats) {
   let text = "\n"

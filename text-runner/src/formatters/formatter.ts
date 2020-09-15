@@ -1,5 +1,5 @@
 import { Activity } from "../activity-list/types/activity"
-import { Stats } from "../stats-collector"
+import { Stats } from "../cli/stats-collector"
 
 export type FormatterName = "detailed" | "dot" | "progress" | "silent" | "summary"
 

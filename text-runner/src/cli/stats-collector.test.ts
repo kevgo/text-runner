@@ -2,7 +2,7 @@ import { assert } from "chai"
 import delay from "delay"
 import { StatsCollector } from "./stats-collector"
 import { EventEmitter } from "events"
-import { CommandEvent } from "./commands/command"
+import { CommandEvent } from "../commands/command"
 
 suite("StatsCollector", function () {
   test("counting activities", function () {

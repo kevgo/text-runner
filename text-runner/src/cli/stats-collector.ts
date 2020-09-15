@@ -1,6 +1,6 @@
 import { StopWatch } from "./stopwatch"
 import { EventEmitter } from "events"
-import { CommandEvent } from "./commands/command"
+import { CommandEvent } from "../commands/command"
 
 /** Statistics about a run of Text-Runner */
 export interface Stats {

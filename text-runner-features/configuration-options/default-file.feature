@@ -75,9 +75,9 @@ Feature: Default file
     And the source code contains a file "text-run.yml" with content:
       """
       publications:
-      - localPath: /content
-        publicPath: /
-        publicExtension: ''
+        - localPath: /content
+          publicPath: /
+          publicExtension: ''
       defaultFile: index.md
       """
     When running Text-Runner

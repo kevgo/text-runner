@@ -138,7 +138,7 @@ Then("it throws:", function (table) {
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME
-    have.filename = world.apiException.filePath
+    have.filename = world.apiException.file?.unixified()
   }
   if (tableHash.LINE) {
     want.line = parseInt(tableHash.LINE, 10)

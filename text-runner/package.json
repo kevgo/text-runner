@@ -15,7 +15,6 @@
     "colorette": "1.2.1",
     "delay": "4.4.0",
     "end-child-processes": "1.0.1",
-    "eol": "0.9.1",
     "fs-extra": "9.0.1",
     "glob": "7.1.6",
     "glob-promise": "3.4.0",

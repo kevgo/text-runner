@@ -60,7 +60,7 @@ Feature: separate working directory
     Then it runs in a global temp directory
 
 
-  Scenario: running in a local temp directory via API
+  Scenario: running in the global temp directory via API
     When calling:
       """
       command = new textRunner.RunCommand({...config, systemTmp: true})

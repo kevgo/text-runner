@@ -5,5 +5,5 @@ Feature: display total test time
     When running Text-Runner
     Then it prints:
       """
-      \d activities in \d files, \d+m?s
+      \d activities, \d+m?s
       """

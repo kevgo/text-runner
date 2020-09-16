@@ -18,6 +18,9 @@ export function instantiateFormatter(config: Configuration, emitter: EventEmitte
     case "summary":
       return new SummaryFormatter(config, emitter)
     default:
-      throw new UserError(`Unknown formatter: ${name}`, "Available formatters are: detailed, dot, progress, summary")
+      throw new UserError(
+        `Unknown formatter: ${config.formatterName}`,
+        "Available formatters are: detailed, dot, progress, summary"
+      )
   }
 }

@@ -1,1 +1,1 @@
-@node %~dp0..\dist\cli\cli.js %*
+@node %~dp0..\dist\cli.js %*

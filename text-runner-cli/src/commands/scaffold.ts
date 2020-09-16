@@ -53,7 +53,7 @@ function jsTemplate(filename: string) {
 function tsTemplate(filename: string) {
   return `import * as tr from "text-runner-core"
 
-export function ${camelize(filename)} (action: ActionArgs) {
+export function ${camelize(filename)} (action: tr.ActionArgs) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")

@@ -33,7 +33,7 @@ suite("actionFinder", function () {
   })
 
   test("builtinActionFilePaths", function () {
-    const result = builtinActionFilePaths().map((fp) => path.basename(fp))
+    const result = builtinActionFilePaths().map(fp => path.basename(fp))
     assert.deepEqual(result, ["check-image", "check-link", "test"])
   })
 

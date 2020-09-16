@@ -147,7 +147,7 @@ Then("it throws:", function (table) {
 
 Then("the error provides the guidance:", function (expectedText) {
   const world = this as TRWorld
-  const errors = world.apiResults.map((res) => res.error).filter((e) => e)
+  const errors = world.apiResults.map(res => res.error).filter(e => e)
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }

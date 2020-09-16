@@ -55,7 +55,7 @@ export class LinkTargetList {
     if (!anchorsForFile) {
       throw new Error(`no anchors in file ${filePath.platformified()}`)
     }
-    const anchor = anchorsForFile.find((linkTarget) => linkTarget.name === name)
+    const anchor = anchorsForFile.find(linkTarget => linkTarget.name === name)
     if (!anchor) {
       throw new Error(`no anchor '${name}' in file '${filePath.platformified()}'`)
     }
@@ -67,7 +67,7 @@ export class LinkTargetList {
     if (!fileList) {
       return false
     }
-    return fileList.some((linkTarget) => linkTarget.name === name)
+    return fileList.some(linkTarget => linkTarget.name === name)
   }
 
   // Returns whether this link target list knows about the given file

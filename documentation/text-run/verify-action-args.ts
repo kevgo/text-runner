@@ -7,6 +7,6 @@ export default function verifyActionArgs(action: tr.ActionArgs) {
   const expectedTools = action.region.textInNodesOfType("strong").sort().map(removeTrailingColon)
   const actualTools = Object.keys(action)
     .sort()
-    .filter((tool) => tool !== ignore)
+    .filter(tool => tool !== ignore)
   assertNoDiff.trimmedLines(expectedTools.join("\n"), actualTools.join("\n"))
 }

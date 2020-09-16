@@ -2,6 +2,7 @@
   "semi": false,
   "proseWrap": "always",
   "printWidth": 120,
+  "arrowParens": "avoid",
   "overrides": [
     {
       "files": "*.md",

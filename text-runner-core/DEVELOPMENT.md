@@ -9,7 +9,9 @@ File [src/text-runner.ts](src/text-runner.ts) contains the
 [JavaScript API](src/text-runner.ts) for the Text-Runner's engine. It exposes a
 number of [commands](src/commands/). To run Text-Runner, you instantiate one of
 these commands with [configuration](src/configuration/configuration.ts) and call
-their `execute` method.
+their `execute` method. Please note that the Text-Runner configuration file is
+considered a part of the [text-runner-cli](../text-runner-cli) wrapper. The core
+engine does not load it automatically.
 
 The Text-Runner engine is headless. When testing documentation, all it does is
 emit events defined by the [CommandEvent](src/commands/command.ts) enum. Callers

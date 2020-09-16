@@ -84,8 +84,8 @@ var rl = readline.createInterface({
   terminal: false,
 })
 
-rl.question("your name\n", (name) => {
-  rl.question("which day is today\n", (day) => {
+rl.question("your name\n", name => {
+  rl.question("which day is today\n", day => {
     console.log(`Hello ${name}, happy ${day}!`)
     rl.close()
     process.exit()

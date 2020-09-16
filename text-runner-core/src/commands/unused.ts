@@ -28,14 +28,14 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
 
     // step 4: extract activities
-    const usedActivityNames = extractActivities(ASTs, this.config.regionMarker).map((activity) => activity.actionName)
+    const usedActivityNames = extractActivities(ASTs, this.config.regionMarker).map(activity => activity.actionName)
 
     // step 5: find defined activities
     const definedActivityNames = ActionFinder.load(this.config.sourceDir).customActionNames()
 
     // step 6: identify unused activities
     const unusedActivityNames = definedActivityNames.filter(
-      (definedActivityName) => !usedActivityNames.includes(definedActivityName)
+      definedActivityName => !usedActivityNames.includes(definedActivityName)
     )
 
     // step 7: write results

@@ -83,7 +83,7 @@ function debugASTNodes(ASTs: AstNodeList[]) {
 
 function debugImages(ASTs: AstNodeList[]) {
   console.log("\nIMAGES:")
-  const images = extractImagesAndLinks(ASTs).filter((al) => al.actionName === "check-image")
+  const images = extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-image")
   if (images.length === 0) {
     console.log("(none)")
     return
@@ -96,7 +96,7 @@ function debugImages(ASTs: AstNodeList[]) {
 
 function debugLinks(ASTs: AstNodeList[]) {
   console.log("\nLINKS:")
-  const links = extractImagesAndLinks(ASTs).filter((al) => al.actionName === "check-link")
+  const links = extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-link")
   if (links.length === 0) {
     console.log("(none)")
     return

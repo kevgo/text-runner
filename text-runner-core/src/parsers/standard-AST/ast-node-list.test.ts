@@ -8,7 +8,7 @@ test("AstNodeList.concat()", function () {
   const list2 = AstNodeList.scaffold({ type: "node2" })
   const result = list1.concat(list2)
   assert.deepEqual(
-    result.map((node) => node.type),
+    result.map(node => node.type),
     ["node1", "node2"]
   )
 })
@@ -22,7 +22,7 @@ suite("AstNodeList.getNodesFor()", function () {
     list.pushNode({ type: "heading_close" })
     list.pushNode({ type: "paragraph_close" })
     const result = list.getNodesFor(list[1])
-    const types = result.map((node) => node.type)
+    const types = result.map(node => node.type)
     assert.deepEqual(
       types,
       ["heading_open", "text", "heading_close"],
@@ -36,7 +36,7 @@ suite("AstNodeList.getNodesFor()", function () {
     list.pushNode({ type: "strongtext", content: "foo" })
     list.pushNode({ type: "paragraph_close" })
     const result = list.getNodesFor(list[1])
-    const types = result.map((node) => node.type)
+    const types = result.map(node => node.type)
     assert.deepEqual(types, ["strongtext"])
   })
 })
@@ -73,7 +73,7 @@ suite("AstNodeList.getNodesOfTypes()", function () {
     list.pushNode({ type: "three" })
     const result = list.getNodesOfTypes("one", "three")
     assert.deepEqual(
-      result.map((node) => node.type),
+      result.map(node => node.type),
       ["one", "three"]
     )
   })
@@ -84,7 +84,7 @@ suite("AstNodeList.getNodesOfTypes()", function () {
     list.pushNode({ type: "one_close" })
     const result = list.getNodesOfTypes("one")
     assert.deepEqual(
-      result.map((node) => node.type),
+      result.map(node => node.type),
       ["one_open"]
     )
   })

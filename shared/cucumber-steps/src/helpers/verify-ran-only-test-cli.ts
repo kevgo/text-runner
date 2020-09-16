@@ -20,11 +20,11 @@ export function verifyRanOnlyTestsCLI(filenames: any, world: TRWorld) {
   // verify all other tests have not run
   const filesShouldntRun = glob
     .sync(`${world.rootDir}/**`)
-    .filter((file) => fs.statSync(file).isFile())
-    .map((file) => path.relative(world.rootDir, file))
-    .filter((file) => file)
-    .map((file) => file.replace(/\\/g, "/"))
-    .filter((file) => filenames.indexOf(file) === -1)
+    .filter(file => fs.statSync(file).isFile())
+    .map(file => path.relative(world.rootDir, file))
+    .filter(file => file)
+    .map(file => file.replace(/\\/g, "/"))
+    .filter(file => filenames.indexOf(file) === -1)
   for (const fileShouldntRun of filesShouldntRun) {
     assert.notInclude(standardizedOutput, fileShouldntRun)
   }

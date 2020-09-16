@@ -13,9 +13,9 @@ export function commandOutput(action: ActionArgs) {
   const actualOutput = stripAnsi(CurrentCommand.instance().output.fullText())
   const actualLines = actualOutput
     .split("\n")
-    .map((line) => line.trim())
-    .filter((line) => line)
-  const commonLines = actualLines.filter((line) => expectedLines.includes(line))
+    .map(line => line.trim())
+    .filter(line => line)
+  const commonLines = actualLines.filter(line => expectedLines.includes(line))
   if (commonLines.length === 0) {
     throw new Error(`expected content not found: "${expectedText}"\nThis is the output I found:\n${actualOutput}`)
   }

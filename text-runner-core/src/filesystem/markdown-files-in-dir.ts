@@ -9,8 +9,8 @@ import { pathRelativeToDir } from "./helpers/path-relative-to-dir"
 export async function markdownFilesInDir(dirName: string, sourceDir: string): Promise<AbsoluteFilePath[]> {
   const files = await glob(`${dirName}/**/*.md`)
   return files
-    .filter((file) => !file.includes("node_modules"))
+    .filter(file => !file.includes("node_modules"))
     .sort()
-    .map((file) => pathRelativeToDir(file, sourceDir))
-    .map((file) => new AbsoluteFilePath(file))
+    .map(file => pathRelativeToDir(file, sourceDir))
+    .map(file => new AbsoluteFilePath(file))
 }

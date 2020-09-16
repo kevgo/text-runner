@@ -8,8 +8,8 @@ export function removeExcludedFiles(fileList: AbsoluteFilePath[], excluded: stri
   if (!excludedFilesArray.includes("node_modules")) {
     excludedFilesArray.push("node_modules")
   }
-  const excludedRegexes = excludedFilesArray.map((file) => new RegExp(file))
-  return fileList.filter((file) => {
+  const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
+  return fileList.filter(file => {
     for (const excludedRegex of excludedRegexes) {
       if (excludedRegex.test(file.unixified())) {
         return false

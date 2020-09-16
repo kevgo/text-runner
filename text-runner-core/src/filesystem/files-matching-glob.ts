@@ -6,6 +6,6 @@ export async function filesMatchingGlob(expression: string, sourceDir: string): 
   const files = await glob(expression)
   return files
     .sort()
-    .map((file) => pathRelativeToDir(file, sourceDir))
-    .map((file) => new AbsoluteFilePath(file))
+    .map(file => pathRelativeToDir(file, sourceDir))
+    .map(file => new AbsoluteFilePath(file))
 }

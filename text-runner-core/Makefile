@@ -11,9 +11,6 @@ cuke: build  # for manually running the cukes for this codebase
 
 cuke-lerna:  # cukes for this codebase are in ../text-runner-features, Lerna runs those
 
-cuke-ci:  # runs the feature specs on CI
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo)" --format=progress --parallel 8
-
 cuke-online: build  # runs the feature specs that don't need an online connection
 	echo running Text-Runner online feature specs ...
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'`

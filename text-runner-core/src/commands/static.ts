@@ -5,12 +5,12 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeParallel } from "../runners/execute-parallel"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, WarnArgs } from "../text-runner"
 import { Configuration } from "../configuration/configuration"
 
-export class StaticCommand extends EventEmitter implements Command {
+export class StaticCommand extends events.EventEmitter implements Command {
   config: Configuration
 
   constructor(config: Configuration) {

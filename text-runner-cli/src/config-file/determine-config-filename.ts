@@ -1,6 +1,6 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { UserProvidedConfiguration } from "../config/user-provided-configuration"
 
 /**
@@ -15,7 +15,7 @@ export async function determineConfigFilename(cmdLineArgs: UserProvidedConfigura
       await fs.stat(configFilePath)
       return configFilePath
     } catch (e) {
-      throw new UserError(`configuration file '${cmdLineArgs.configFileName}' not found`)
+      throw new tr.UserError(`configuration file '${cmdLineArgs.configFileName}' not found`)
     }
   }
   try {

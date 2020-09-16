@@ -1,10 +1,10 @@
 import * as path from "path"
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { createObservableProcess } from "observable-process"
 import { callArgs } from "../helpers/call-args"
 
 /** runs Text-Runner in the workspace */
-export async function runTextrunner(action: ActionArgs) {
+export async function runTextrunner(action: tr.ActionArgs) {
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
   // TODO: call existing Text-Runner API here
   var textRunPath = path.join(action.configuration.sourceDir, "node_modules", ".bin", "text-run")

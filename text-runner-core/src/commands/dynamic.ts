@@ -5,12 +5,12 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { Configuration } from "../configuration/configuration"
 import { WarnArgs, StartArgs } from "../text-runner"
 
-export class DynamicCommand extends EventEmitter implements Command {
+export class DynamicCommand extends events.EventEmitter implements Command {
   config: Configuration
 
   constructor(config: Configuration) {

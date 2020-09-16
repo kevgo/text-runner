@@ -1,13 +1,12 @@
-import { UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
-import { Configuration } from "text-runner-core"
-import { EventEmitter } from "events"
+import * as events from "events"
 
-export function instantiateFormatter(config: Configuration, emitter: EventEmitter): Formatter {
+export function instantiateFormatter(config: tr.Configuration, emitter: events.EventEmitter): Formatter {
   switch (config.formatterName) {
     case "dot":
       return new DotFormatter(config, emitter)
@@ -18,7 +17,7 @@ export function instantiateFormatter(config: Configuration, emitter: EventEmitte
     case "summary":
       return new SummaryFormatter(config, emitter)
     default:
-      throw new UserError(
+      throw new tr.UserError(
         `Unknown formatter: ${config.formatterName}`,
         "Available formatters are: detailed, dot, progress, summary"
       )

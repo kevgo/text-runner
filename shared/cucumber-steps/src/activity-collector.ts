@@ -1,4 +1,4 @@
-import { EventEmitter } from "events"
+import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
@@ -15,7 +15,7 @@ export interface ActivityResult {
 export class ActivityCollector {
   activities: ActivityResult[]
 
-  constructor(emitter: EventEmitter) {
+  constructor(emitter: events.EventEmitter) {
     this.activities = []
     emitter.on(tr.CommandEvent.failed, this.onFailure.bind(this))
     emitter.on(tr.CommandEvent.skipped, this.onSkipped.bind(this))

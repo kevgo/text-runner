@@ -1,6 +1,6 @@
 import { StopWatch } from "./stopwatch"
-import { EventEmitter } from "events"
-import { CommandEvent } from "text-runner-core"
+import * as events from "events"
+import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
 export interface Stats {
@@ -18,14 +18,14 @@ export class StatsCollector {
   successCount: number
   stopWatch: StopWatch
 
-  constructor(emitter: EventEmitter) {
+  constructor(emitter: events.EventEmitter) {
     this.errorCount = 0
     this.skipCount = 0
     this.successCount = 0
     this.stopWatch = new StopWatch()
-    emitter.on(CommandEvent.failed, this.onError.bind(this))
-    emitter.on(CommandEvent.skipped, this.onSkip.bind(this))
-    emitter.on(CommandEvent.success, this.onSuccess.bind(this))
+    emitter.on(tr.CommandEvent.failed, this.onError.bind(this))
+    emitter.on(tr.CommandEvent.skipped, this.onSkip.bind(this))
+    emitter.on(tr.CommandEvent.success, this.onSuccess.bind(this))
   }
 
   stats(): Stats {

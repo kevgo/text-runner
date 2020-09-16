@@ -1,4 +1,4 @@
-import { Publications } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { FormatterName } from "../formatters/formatter"
 import { ScaffoldLanguage } from "../commands/scaffold"
 
@@ -14,7 +14,7 @@ export interface UserProvidedConfiguration {
   files?: string // files to test
   formatterName?: FormatterName // name of the formatter to use
   online?: boolean
-  publications?: Publications
+  publications?: tr.Publications
   scaffoldLanguage?: ScaffoldLanguage
   sourceDir?: string // the root directory of the source code to test
   systemTmp?: boolean

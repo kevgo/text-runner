@@ -1,7 +1,7 @@
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 
 /** checks the given JavaScript code for syntax errors. */
-export function nonRunnable(action: ActionArgs) {
+export function nonRunnable(action: tr.ActionArgs) {
   const code = action.region.text().trim()
   if (code.length === 0) {
     throw new Error("no JavaScript code found")

@@ -1,14 +1,14 @@
 import * as color from "colorette"
-import { Command, CommandEvent } from "text-runner-core"
-import { EventEmitter } from "events"
+import * as tr from "text-runner-core"
+import * as events from "events"
 
-export class HelpCommand extends EventEmitter implements Command {
+export class HelpCommand extends events.EventEmitter implements tr.Command {
   constructor() {
     super()
   }
 
   async execute() {
-    this.emit(CommandEvent.output, this.template())
+    this.emit(tr.CommandEvent.output, this.template())
   }
 
   /** provides the text to print */

@@ -1,4 +1,4 @@
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { promises as fs } from "fs"
 import * as path from "path"
 import { createObservableProcess } from "observable-process"
@@ -6,7 +6,7 @@ import stripAnsi = require("strip-ansi")
 import { callArgs } from "../helpers/call-args"
 
 /** runs the given content in Text-Runner */
-export async function runnableRegion(action: ActionArgs) {
+export async function runnableRegion(action: tr.ActionArgs) {
   action.name("execute Markdown in Text-Runner")
   const content = action.region.text().trim()
   if (content === "") {

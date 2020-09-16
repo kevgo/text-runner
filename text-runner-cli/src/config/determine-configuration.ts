@@ -1,5 +1,5 @@
 import { mergeConfigurations } from "./merge-configurations"
-import { Publications, Configuration, defaultConfiguration } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 /**
@@ -11,9 +11,9 @@ import { UserProvidedConfiguration } from "./user-provided-configuration"
 export function determineConfiguration(
   configFileData: UserProvidedConfiguration,
   cmdlineArgs: UserProvidedConfiguration
-): Configuration {
+): tr.Configuration {
   // merge the configs
-  const result = mergeConfigurations(cmdlineArgs, configFileData, defaultConfiguration())
-  result.publications = Publications.fromJSON(result.publications).sorted()
-  return result as Configuration
+  const result = mergeConfigurations(cmdlineArgs, configFileData, tr.defaultConfiguration())
+  result.publications = tr.Publications.fromJSON(result.publications).sorted()
+  return result as tr.Configuration
 }

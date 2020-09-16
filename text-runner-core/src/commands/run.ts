@@ -7,13 +7,13 @@ import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, WarnArgs } from "../text-runner"
 import { Configuration } from "../configuration/configuration"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
-export class RunCommand extends EventEmitter implements Command {
+export class RunCommand extends events.EventEmitter implements Command {
   config: Configuration
 
   constructor(config: Configuration) {

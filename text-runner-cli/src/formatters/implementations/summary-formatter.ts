@@ -3,14 +3,14 @@ import * as path from "path"
 import * as tr from "text-runner-core"
 import { printSummary } from "../print-summary"
 import { FinishArgs, Formatter } from "../formatter"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements Formatter {
   private readonly configuration: tr.Configuration
 
-  constructor(configuration: tr.Configuration, emitter: EventEmitter) {
+  constructor(configuration: tr.Configuration, emitter: events.EventEmitter) {
     this.configuration = configuration
     emitter.on(tr.CommandEvent.output, console.log)
     emitter.on(tr.CommandEvent.failed, this.failed.bind(this))

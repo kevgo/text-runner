@@ -1,5 +1,5 @@
 import { StopWatch } from "./stopwatch"
-import { EventEmitter } from "events"
+import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
@@ -18,7 +18,7 @@ export class StatsCollector {
   successCount: number
   stopWatch: StopWatch
 
-  constructor(emitter: EventEmitter) {
+  constructor(emitter: events.EventEmitter) {
     this.errorCount = 0
     this.skipCount = 0
     this.successCount = 0

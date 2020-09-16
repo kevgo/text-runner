@@ -1,12 +1,12 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { EventEmitter } from "events"
+import * as events from "events"
 import * as tr from "text-runner-core"
 import { camelize } from "../helpers/camelize"
 
 export type ScaffoldLanguage = "js" | "ts"
 
-export class ScaffoldCommand extends EventEmitter implements tr.Command {
+export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
   config: tr.Configuration
 
   constructor(config: tr.Configuration) {

@@ -1,8 +1,8 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
-import { EventEmitter } from "events"
+import * as events from "events"
 
-export class HelpCommand extends EventEmitter implements tr.Command {
+export class HelpCommand extends events.EventEmitter implements tr.Command {
   constructor() {
     super()
   }

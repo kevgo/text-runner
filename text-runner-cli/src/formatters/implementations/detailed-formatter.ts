@@ -3,14 +3,14 @@ import * as path from "path"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
 import { FinishArgs, Formatter } from "../formatter"
-import { EventEmitter } from "events"
+import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {
   private readonly configuration: tr.Configuration
 
-  constructor(configuration: tr.Configuration, emitter: EventEmitter) {
+  constructor(configuration: tr.Configuration, emitter: events.EventEmitter) {
     this.configuration = configuration
     emitter.on(tr.CommandEvent.output, console.log)
     emitter.on(tr.CommandEvent.success, this.success.bind(this))

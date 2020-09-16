@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as path from "path"
 import { createObservableProcess } from "observable-process"
-import { callArgs } from "textrun-extension"
+import * as trExt from "textrun-extension"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
 import * as tr from "text-runner-core"
@@ -26,7 +26,7 @@ export async function command(action: tr.ActionArgs) {
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
-  const processor = createObservableProcess(callArgs(commandsToRun, process.platform), {
+  const processor = createObservableProcess(trExt.callArgs(commandsToRun, process.platform), {
     cwd: action.configuration.workspace,
   })
   // this is also used in the "verify-run-console-output" step

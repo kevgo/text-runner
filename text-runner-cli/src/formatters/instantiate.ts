@@ -4,9 +4,9 @@ import { DotFormatter } from "./implementations/dot-formatter"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
-import { EventEmitter } from "events"
+import * as events from "events"
 
-export function instantiateFormatter(config: tr.Configuration, emitter: EventEmitter): Formatter {
+export function instantiateFormatter(config: tr.Configuration, emitter: events.EventEmitter): Formatter {
   switch (config.formatterName) {
     case "dot":
       return new DotFormatter(config, emitter)

@@ -8,13 +8,13 @@ import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { Command } from "./command"
 import { Configuration } from "../configuration/configuration"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
-export class DebugCommand extends EventEmitter implements Command {
+export class DebugCommand extends events.EventEmitter implements Command {
   config: Configuration
   subcommand: DebugSubcommand | undefined
 

@@ -3,12 +3,12 @@ import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
 import { instantiateFormatter } from "./instantiate"
 import { SummaryFormatter } from "./implementations/summary-formatter"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import * as tr from "text-runner-core"
 
 suite("instantiateFormatter()", function () {
-  const emitter = new EventEmitter()
+  const emitter = new events.EventEmitter()
   test("request detailed formatter", function () {
     const config = tr.defaultConfiguration()
     config.formatterName = "detailed"

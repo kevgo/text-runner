@@ -5,13 +5,13 @@ import * as tr from "text-runner-core"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
 import { FinishArgs, Formatter } from "../formatter"
-import { EventEmitter } from "events"
+import * as events from "events"
 
 export class ProgressFormatter implements Formatter {
   private readonly configuration: tr.Configuration
   private readonly progressBar: progress.Bar
 
-  constructor(configuration: tr.Configuration, emitter: EventEmitter) {
+  constructor(configuration: tr.Configuration, emitter: events.EventEmitter) {
     this.configuration = configuration
     this.progressBar = new progress.Bar(
       {

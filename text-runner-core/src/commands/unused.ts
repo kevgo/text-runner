@@ -2,12 +2,12 @@ import { ActionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activity-list/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
-import { EventEmitter } from "events"
+import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { WarnArgs } from "../text-runner"
 import { Configuration } from "../configuration/configuration"
 
-export class UnusedCommand extends EventEmitter implements Command {
+export class UnusedCommand extends events.EventEmitter implements Command {
   config: Configuration
 
   constructor(config: Configuration) {

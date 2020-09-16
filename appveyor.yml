@@ -15,7 +15,9 @@ install:
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
 
 test_script:
-  - cd text-runner
+  - cd text-runner-core
+  - make build
+  - cd text-runner-cli
   - make build
   - cd ..\shared\cucumber-steps
   - make build

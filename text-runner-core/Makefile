@@ -20,7 +20,7 @@ cuke-online: build  # runs the feature specs that don't need an online connectio
 
 docs:  # verify documentation
 	echo Text-Runner documentation tests ...
-	${CURDIR}/bin/text-run --format=progress
+	${CURDIR}/../text-runner-cli/bin/text-run --format=summary
 
 fix:  # runs the fixers
 	echo Text-Runner auto-fixes ...

@@ -4,8 +4,8 @@ import { DotFormatter } from "./implementations/dot-formatter"
 import { instantiateFormatter } from "./instantiate"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { EventEmitter } from "events"
-import { defaultConfiguration } from "../configuration/default-configuration"
 import { ProgressFormatter } from "./implementations/progress-formatter"
+import { defaultConfiguration } from "text-runner-core"
 
 suite("instantiateFormatter()", function () {
   const emitter = new EventEmitter()

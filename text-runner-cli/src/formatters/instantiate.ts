@@ -4,7 +4,6 @@ import { DotFormatter } from "./implementations/dot-formatter"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
-import * as tr from "text-runner-core"
 import { EventEmitter } from "events"
 
 export function instantiateFormatter(config: tr.Configuration, emitter: EventEmitter): Formatter {

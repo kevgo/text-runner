@@ -30,6 +30,6 @@ export async function existingFile(action: tr.ActionArgs) {
   try {
     assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    throw new UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
+    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
   }
 }

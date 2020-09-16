@@ -16,7 +16,7 @@ export async function existingFile(action: tr.ActionArgs) {
   } catch (e) {
     if (e.code === "ENOENT") {
       const files = await fs.readdir(process.cwd())
-      throw new UserError(
+      throw new tr.UserError(
         `file not found: ${filePath}`,
         `folder "${process.cwd()}" has these files: ${files.join(", ")}`
       )
@@ -27,6 +27,6 @@ export async function existingFile(action: tr.ActionArgs) {
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
   } catch (err) {
-    throw new UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
+    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
   }
 }

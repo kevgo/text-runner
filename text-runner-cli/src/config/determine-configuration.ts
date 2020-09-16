@@ -13,7 +13,7 @@ export function determineConfiguration(
   cmdlineArgs: UserProvidedConfiguration
 ): tr.Configuration {
   // merge the configs
-  const result = mergeConfigurations(cmdlineArgs, configFileData, defaultConfiguration())
+  const result = mergeConfigurations(cmdlineArgs, configFileData, tr.defaultConfiguration())
   result.publications = tr.Publications.fromJSON(result.publications).sorted()
   return result as tr.Configuration
 }

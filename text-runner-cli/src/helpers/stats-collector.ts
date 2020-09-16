@@ -23,9 +23,9 @@ export class StatsCollector {
     this.skipCount = 0
     this.successCount = 0
     this.stopWatch = new StopWatch()
-    emitter.on(CommandEvent.failed, this.onError.bind(this))
-    emitter.on(CommandEvent.skipped, this.onSkip.bind(this))
-    emitter.on(CommandEvent.success, this.onSuccess.bind(this))
+    emitter.on(tr.CommandEvent.failed, this.onError.bind(this))
+    emitter.on(tr.CommandEvent.skipped, this.onSkip.bind(this))
+    emitter.on(tr.CommandEvent.success, this.onSuccess.bind(this))
   }
 
   stats(): Stats {

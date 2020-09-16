@@ -51,7 +51,7 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-function getInput(nodes: AstNodeList): ProcessInput[] {
+function getInput(nodes: tr.AstNodeList): ProcessInput[] {
   const result: ProcessInput[] = []
   if (!nodes) {
     return result

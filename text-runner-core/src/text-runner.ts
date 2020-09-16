@@ -11,8 +11,9 @@ export { DebugCommand, DebugSubcommand } from "./commands/debug"
 export { DynamicCommand } from "./commands/dynamic"
 export { RunCommand } from "./commands/run"
 export { StaticCommand } from "./commands/static"
+export { UnusedCommand } from "./commands/unused"
 export { UserError } from "./errors/user-error"
-export { CommandEvent } from "./commands/command"
+export { Command, CommandEvent } from "./commands/command"
 export { Publications } from "./configuration/publications/publications"
 
 export interface StartArgs {

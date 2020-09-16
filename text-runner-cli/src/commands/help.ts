@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import { Command, CommandEvent } from "../../../text-runner-core/src/commands/command"
+import { Command, CommandEvent } from "text-runner-core"
 import { EventEmitter } from "events"
 
 export class HelpCommand extends EventEmitter implements Command {

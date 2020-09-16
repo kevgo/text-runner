@@ -1,5 +1,5 @@
 import { EventEmitter } from "events"
-import { Command } from "../../../text-runner-core/src/commands/command"
+import { Command } from "text-runner-core"
 
 export class VersionCommand extends EventEmitter implements Command {
   async execute() {

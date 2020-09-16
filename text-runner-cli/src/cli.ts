@@ -1,17 +1,20 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import { UserError } from "../../text-runner-core/src/errors/user-error"
 import { printUserError } from "./errors/print-user-error"
-import { DebugCommand, DebugSubcommand } from "../../text-runner-core/src/commands/debug"
-import { DynamicCommand } from "../../text-runner-core/src/commands/dynamic"
+import {
+  Configuration,
+  DebugCommand,
+  DebugSubcommand,
+  DynamicCommand,
+  RunCommand,
+  StaticCommand,
+  UnusedCommand,
+  UserError,
+} from "text-runner-core"
 import { HelpCommand } from "./commands/help"
-import { RunCommand } from "../../text-runner-core/src/commands/run"
 import { ScaffoldCommand } from "./commands/scaffold"
 import { SetupCommand } from "./commands/setup"
-import { StaticCommand } from "../../text-runner-core/src/commands/static"
-import { UnusedCommand } from "../../text-runner-core/src/commands/unused"
 import { VersionCommand } from "./commands/version"
-import { Configuration } from "../../text-runner-core/src/configuration/configuration"
 import { StatsCollector } from "./helpers/stats-collector"
 import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"

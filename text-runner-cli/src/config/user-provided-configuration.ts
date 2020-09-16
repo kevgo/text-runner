@@ -1,4 +1,4 @@
-import { Publications } from "../../../text-runner-core/src/configuration/publications/publications"
+import { Publications } from "text-runner-core"
 import { FormatterName } from "../formatters/formatter"
 import { ScaffoldLanguage } from "../commands/scaffold"
 

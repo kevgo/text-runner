@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as path from "path"
-import { UserError } from "../../../text-runner-core/src/errors/user-error"
+import { UserError } from "text-runner-core"
 import { printCodeFrame } from "../helpers/print-code-frame"
 
 /** prints the given error to the console */

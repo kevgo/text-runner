@@ -1,10 +1,8 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import { camelize } from "../../../text-runner-core/src/helpers/camelize"
 import { EventEmitter } from "events"
-import { Command } from "../../../text-runner-core/src/commands/command"
-import { Configuration } from "../../../text-runner-core/src/configuration/configuration"
-import { UserError } from "../../../text-runner-core/src/errors/user-error"
+import { Command, Configuration, UserError } from "text-runner-core"
+import { camelize } from "../helpers/camelize"
 
 export type ScaffoldLanguage = "js" | "ts"
 

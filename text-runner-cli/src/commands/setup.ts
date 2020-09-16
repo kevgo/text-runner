@@ -1,8 +1,7 @@
 import * as color from "colorette"
 import { createConfigurationFile } from "../config-file/create-configuration-file"
 import { EventEmitter } from "events"
-import { CommandEvent, Command } from "../../../text-runner-core/src/commands/command"
-import { Configuration } from "../../../text-runner-core/src/configuration/configuration"
+import { CommandEvent, Command, Configuration } from "text-runner-core"
 
 export class SetupCommand extends EventEmitter implements Command {
   config: Configuration

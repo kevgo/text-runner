@@ -3,7 +3,7 @@ import { createObservableProcess, ObservableProcess } from "observable-process"
 import { callArgs } from "textrun-extension"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs, AstNodeList } from "text-runner-core"
+import * as tr from "text-runner-core"
 
 interface ProcessInput {
   textToWait: string | null
@@ -14,7 +14,7 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export async function commandWithInput(action: ActionArgs) {
+export async function commandWithInput(action: tr.ActionArgs) {
   const content = action.region.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")

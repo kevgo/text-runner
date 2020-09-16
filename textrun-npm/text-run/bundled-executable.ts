@@ -1,4 +1,4 @@
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { promises as fs } from "fs"
 import * as path from "path"
 

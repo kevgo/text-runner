@@ -1,20 +1,20 @@
 import * as color from "colorette"
 import * as path from "path"
-import { Configuration, FailedArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { printSummary } from "../print-summary"
-import { CommandEvent } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { FinishArgs, Formatter } from "../formatter"
 import { EventEmitter } from "events"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements Formatter {
-  private readonly configuration: Configuration
+  private readonly configuration: tr.Configuration
 
-  constructor(configuration: Configuration, emitter: EventEmitter) {
+  constructor(configuration: tr.Configuration, emitter: EventEmitter) {
     this.configuration = configuration
-    emitter.on(CommandEvent.output, console.log)
-    emitter.on(CommandEvent.failed, this.failed.bind(this))
+    emitter.on(tr.CommandEvent.output, console.log)
+    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
   }
 
   // @ts-ignore: okay to not use parameters here

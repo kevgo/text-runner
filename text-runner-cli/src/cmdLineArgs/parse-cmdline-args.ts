@@ -1,7 +1,7 @@
 import * as minimist from "minimist"
 import * as path from "path"
 import { UserProvidedConfiguration } from "../config/user-provided-configuration"
-import { DebugSubcommand, UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { availableCommands } from "../commands/available-commands"
 import { ScaffoldLanguage } from "../commands/scaffold"
 
@@ -13,7 +13,7 @@ import { ScaffoldLanguage } from "../commands/scaffold"
  */
 export function parseCmdlineArgs(
   argv: string[]
-): { commandName: string; cmdLineConfig: UserProvidedConfiguration; debugSubcommand?: DebugSubcommand } {
+): { commandName: string; cmdLineConfig: UserProvidedConfiguration; debugSubcommand?: tr.DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -55,14 +55,14 @@ export function parseCmdlineArgs(
     commandName = "run"
   }
 
-  let debugSubcommand: DebugSubcommand | undefined
+  let debugSubcommand: tr.DebugSubcommand | undefined
   if (commandName === "debug") {
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
   return { commandName, cmdLineConfig, debugSubcommand }
 }
 
-function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {
+function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.DebugSubcommand {
   if (cliArgs.activities) {
     return "activities"
   } else if (cliArgs.ast) {
@@ -74,7 +74,7 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): DebugSubcommand {
   } else if (cliArgs["link-targets"]) {
     return "linkTargets"
   } else {
-    throw new UserError("Missing debug subcommand")
+    throw new tr.UserError("Missing debug subcommand")
   }
 }
 
@@ -93,6 +93,6 @@ function parseSystemTmp(value: any): boolean | undefined {
     case false:
       return false
     default:
-      throw new UserError(`unknown value for "system-tmp" setting: ${value}`)
+      throw new tr.UserError(`unknown value for "system-tmp" setting: ${value}`)
   }
 }

@@ -1,15 +1,15 @@
 import * as path from "path"
 import { promises as fs } from "fs"
 import { EventEmitter } from "events"
-import { Command, Configuration, UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { camelize } from "../helpers/camelize"
 
 export type ScaffoldLanguage = "js" | "ts"
 
-export class ScaffoldCommand extends EventEmitter implements Command {
-  config: Configuration
+export class ScaffoldCommand extends EventEmitter implements tr.Command {
+  config: tr.Configuration
 
-  constructor(config: Configuration) {
+  constructor(config: tr.Configuration) {
     super()
     this.config = config
   }
@@ -33,7 +33,7 @@ export class ScaffoldCommand extends EventEmitter implements Command {
     } else if (this.config.scaffoldLanguage === "js") {
       await fs.writeFile(path.join(dirPath, this.config.files + ".js"), jsTemplate(this.config.files), "utf8")
     } else {
-      throw new UserError(
+      throw new tr.UserError(
         `Unknown configuration language: ${this.config.scaffoldLanguage}`,
         'Possible languages are "js" and "ts"'
       )
@@ -51,7 +51,7 @@ function jsTemplate(filename: string) {
 }
 
 function tsTemplate(filename: string) {
-  return `import { ActionArgs } from "text-runner-core"
+  return `import * as tr from "text-runner-core"
 
 export function ${camelize(filename)} (action: ActionArgs) {
   console.log("This is the implementation of the "${filename}" action.")

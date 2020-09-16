@@ -1,9 +1,9 @@
 import * as assertNoDiff from "assert-no-diff"
 import { CurrentCommand } from "../helpers/current-command"
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 import stripAnsi = require("strip-ansi")
 
-export function commandOutput(action: ActionArgs) {
+export function commandOutput(action: tr.ActionArgs) {
   action.name("verifying the output of the last run console command")
   const expectedText = action.region.text()
   const expectedLines = expectedText

@@ -2,9 +2,9 @@ import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
 import { trimDollar } from "../helpers/trim-dollar"
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 
-export async function install(action: ActionArgs) {
+export async function install(action: tr.ActionArgs) {
   const installText = trimDollar(action.region.text())
   if (installText === "") {
     throw new Error("no installation instructions found")

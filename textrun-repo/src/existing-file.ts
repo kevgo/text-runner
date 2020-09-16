@@ -3,9 +3,9 @@ import * as color from "colorette"
 import * as eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { ActionArgs, UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 
-export async function existingFile(action: ActionArgs) {
+export async function existingFile(action: tr.ActionArgs) {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
   if (action.region.hasNodeOfType("link_open")) {

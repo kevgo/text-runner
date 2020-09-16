@@ -1,12 +1,12 @@
 import { endChildProcesses } from "end-child-processes"
 import { CurrentServer } from "../helpers/current-server"
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 
 /**
  * The "stop" action stops the currently running server process,
  * started by the "start" action.
  */
-export async function stopServer(action: ActionArgs) {
+export async function stopServer(action: tr.ActionArgs) {
   action.name("stopping the long-running process")
   if (!CurrentServer.instance().hasProcess()) {
     throw new Error("No running process found")

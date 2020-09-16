@@ -1,8 +1,8 @@
-import { ActionArgs } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { promises as fs } from "fs"
 import * as path from "path"
 
-export default async function testSetup(action: ActionArgs) {
+export default async function testSetup(action: tr.ActionArgs) {
   const codeBlocks = action.region.getNodesOfTypes("code")
   if (codeBlocks.length !== 2) {
     throw new Error(`Expected 2 code blocks, got ${codeBlocks.length}`)

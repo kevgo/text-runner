@@ -1,26 +1,26 @@
 import { assert } from "chai"
 import { mergeConfigurations } from "./merge-configurations"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
-import { defaultConfiguration, Configuration, Publications } from "text-runner-core"
+import * as tr from "text-runner-core"
 
 suite("mergeConfigurations()", function () {
   test("no CLI args and config file data given", function () {
-    const have = mergeConfigurations({}, {}, defaultConfiguration())
-    assert.deepEqual(have, defaultConfiguration())
+    const have = mergeConfigurations({}, {}, tr.defaultConfiguration())
+    assert.deepEqual(have, tr.defaultConfiguration())
   })
   test("config file data given", function () {
     const configFileData: UserProvidedConfiguration = {
       exclude: "1.md",
       sourceDir: "my-source",
     }
-    const have = mergeConfigurations({}, configFileData, defaultConfiguration())
-    const want: Configuration = {
+    const have = mergeConfigurations({}, configFileData, tr.defaultConfiguration())
+    const want: tr.Configuration = {
       defaultFile: "",
       exclude: "1.md",
       files: "**/*.md",
       formatterName: "detailed",
       online: false,
-      publications: new Publications(),
+      publications: new tr.Publications(),
       regionMarker: "type",
       scaffoldLanguage: "js",
       sourceDir: "my-source",

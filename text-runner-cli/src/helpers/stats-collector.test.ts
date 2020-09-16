@@ -3,7 +3,7 @@ import { assert } from "chai"
 import delay from "delay"
 import { StatsCollector } from "./stats-collector"
 import { EventEmitter } from "events"
-import { CommandEvent } from "text-runner-core"
+import * as tr from "text-runner-core"
 
 suite("StatsCollector", function () {
   test("counting activities", function () {

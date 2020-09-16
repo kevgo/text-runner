@@ -1,18 +1,17 @@
 import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
-import { Configuration } from "text-runner-core"
+import * as tr from "text-runner-core"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
-import { CommandEvent, StartArgs, FailedArgs } from "text-runner-core"
 import { FinishArgs, Formatter } from "../formatter"
 import { EventEmitter } from "events"
 
 export class ProgressFormatter implements Formatter {
-  private readonly configuration: Configuration
+  private readonly configuration: tr.Configuration
   private readonly progressBar: progress.Bar
 
-  constructor(configuration: Configuration, emitter: EventEmitter) {
+  constructor(configuration: tr.Configuration, emitter: EventEmitter) {
     this.configuration = configuration
     this.progressBar = new progress.Bar(
       {
@@ -23,19 +22,19 @@ export class ProgressFormatter implements Formatter {
       },
       progress.Presets.shades_classic
     )
-    emitter.on(CommandEvent.start, this.start.bind(this))
-    emitter.on(CommandEvent.output, console.log)
-    emitter.on(CommandEvent.success, this.success.bind(this))
-    emitter.on(CommandEvent.failed, this.failed.bind(this))
-    emitter.on(CommandEvent.warning, this.warning.bind(this))
-    emitter.on(CommandEvent.skipped, this.skipped.bind(this))
+    emitter.on(tr.CommandEvent.start, this.start.bind(this))
+    emitter.on(tr.CommandEvent.output, console.log)
+    emitter.on(tr.CommandEvent.success, this.success.bind(this))
+    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
+    emitter.on(tr.CommandEvent.warning, this.warning.bind(this))
+    emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
   }
 
-  start(args: StartArgs) {
+  start(args: tr.StartArgs) {
     this.progressBar.start(args.stepCount, 0)
   }
 
-  failed(args: FailedArgs) {
+  failed(args: tr.FailedArgs) {
     this.progressBar.stop()
     console.log()
     console.log()

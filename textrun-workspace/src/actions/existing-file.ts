@@ -2,9 +2,9 @@ import * as assertNoDiff from "assert-no-diff"
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { ActionArgs, UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 
-export async function existingFile(action: ActionArgs) {
+export async function existingFile(action: tr.ActionArgs) {
   const filePath = action.region.textInNodeOfType("strong", "em")
   const fullPath = path.join(process.cwd(), filePath)
   action.name(`verify content of file ${color.cyan(filePath)}`)

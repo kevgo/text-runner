@@ -18,7 +18,7 @@ Feature: adding new actions
       """
       import * as tr from "text-runner-core"
 
-      export function newStep (action: ActionArgs) {
+      export function newStep (action: tr.ActionArgs) {
         console.log("This is the implementation of the "new-step" action.")
         console.log('Text inside the semantic document region:', action.region.text())
         console.log("For more information see")

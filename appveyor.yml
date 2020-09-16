@@ -17,7 +17,7 @@ install:
 test_script:
   - cd text-runner-core
   - make build
-  - cd text-runner-cli
+  - cd ..\text-runner-cli
   - make build
   - cd ..\shared\cucumber-steps
   - make build

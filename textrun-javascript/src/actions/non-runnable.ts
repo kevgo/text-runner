@@ -1,4 +1,4 @@
-import { ActionArgs } from "text-runner"
+import { ActionArgs } from "text-runner-core"
 
 /** checks the given JavaScript code for syntax errors. */
 export function nonRunnable(action: ActionArgs) {

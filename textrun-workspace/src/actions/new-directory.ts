@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { ActionArgs } from "text-runner"
+import { ActionArgs } from "text-runner-core"
 
 export async function newDirectory(action: ActionArgs) {
   const directoryName = action.region.text().trim()

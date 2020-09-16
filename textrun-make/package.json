@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "text-runner": "4.0.3"
+    "text-runner-core": "4.0.3"
   },
   "devDependencies": {
     "colorette": "1.2.1",
@@ -12,6 +12,7 @@
     "mocha": "8.0.1",
     "prettier": "2.0.5",
     "shared-cucumber-steps": "0.0.0",
+    "text-runner-cli": "4.0.3",
     "textrun-action": "0.0.0",
     "textrun-extension": "0.0.0",
     "textrun-npm": "0.0.0",

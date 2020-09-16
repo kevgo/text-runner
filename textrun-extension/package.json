@@ -5,8 +5,9 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
+    "observable-process": "7.0.3",
     "strip-ansi": "6.0.0",
-    "text-runner": "4.0.3"
+    "text-runner-core": "4.0.3"
   },
   "devDependencies": {
     "colorette": "1.2.1",
@@ -14,6 +15,7 @@
     "mocha": "8.0.1",
     "prettier": "2.0.5",
     "textrun-action": "0.0.0",
+    "text-runner-cli": "4.0.3",
     "tslint": "6.1.2",
     "typescript": "3.9.7"
   }

@@ -16,7 +16,7 @@ Feature: adding new actions
     When running "text-run scaffold --ts new-step"
     Then it creates the file "text-run/new-step.ts" with content:
       """
-      import { ActionArgs } from "text-runner"
+      import { ActionArgs } from "text-runner-core"
 
       export function newStep (action: ActionArgs) {
         console.log("This is the implementation of the "new-step" action.")

@@ -3,9 +3,9 @@ Feature: Execute regions of semantic Markdown
   Scenario: working example
     Given the source code contains a file "1.md" with content:
       """
-      <a type="extension/runnable-region">
+      <pre type="extension/runnable-region">
       This is a <a type="test">test</a>.
-      </a>
+      </pre>
       """
     When calling Text-Runner
     Then it executes these actions:

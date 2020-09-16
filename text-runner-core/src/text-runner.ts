@@ -1,5 +1,3 @@
-import { Activity } from "./activity-list/types/activity"
-
 export type { ActionArgs } from "./actions/types/action-args"
 export { Activity } from "./activity-list/types/activity"
 export { Configuration } from "./configuration/configuration"
@@ -15,34 +13,8 @@ export { UnusedCommand } from "./commands/unused"
 export { UserError } from "./errors/user-error"
 export { Command, CommandEvent } from "./commands/command"
 export { Publications } from "./configuration/publications/publications"
-
-export interface StartArgs {
-  stepCount: number
-}
-
-export interface SuccessArgs {
-  activity: Activity
-  finalName: string
-  /** captured output (via action.log) while executing the activity */
-  output: string
-}
-
-export interface FailedArgs {
-  activity: Activity
-  finalName: string
-  error: Error
-  /** captured output (via action.log) while executing the activity */
-  output: string
-}
-
-export interface WarnArgs {
-  activity?: Activity
-  finalName?: string
-  message: string
-}
-
-export interface SkippedArgs {
-  activity: Activity
-  finalName: string
-  output: string
-}
+export { FailedArgs } from "./events/failed"
+export { SkippedArgs } from "./events/skip"
+export { StartArgs } from "./events/start"
+export { SuccessArgs } from "./events/success"
+export { WarnArgs } from "./events/warning"

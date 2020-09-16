@@ -66,6 +66,6 @@
   },
   "scripts": {
     "prepublishOnly": "make prepublish",
-    "test": "make spec"
+    "test": "make test"
   }
 }

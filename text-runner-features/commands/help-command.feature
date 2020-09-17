@@ -1,3 +1,4 @@
+@cli
 Feature: help command
 
   Scenario:

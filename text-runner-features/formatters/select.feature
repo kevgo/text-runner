@@ -1,3 +1,4 @@
+@cli
 Feature: selecting formatter via the config file
 
   - formatters are instantiated outside of the API, see cli.ts for an example

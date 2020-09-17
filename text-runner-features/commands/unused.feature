@@ -1,3 +1,4 @@
+@cli
 Feature: show unused steps
 
   Scenario: the code base contains unused steps

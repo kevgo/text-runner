@@ -1,3 +1,4 @@
+@api
 Feature: active h2 tags
 
   Background:

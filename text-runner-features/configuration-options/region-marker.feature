@@ -14,12 +14,14 @@ Feature: configuring the class prefix
       </a>
       """
 
+  @api
   Scenario: default behavior
     When calling Text-Runner
     Then it executes these actions:
       | FILENAME           | LINE | ACTION |
       | standard-prefix.md | 1    | test   |
 
+  @cli
   Scenario: regionMarker via config file
     Given the source code contains a file "text-run.yml" with content:
       """
@@ -35,6 +37,7 @@ Feature: configuring the class prefix
       standard-prefix.md:1 -- Test
       """
 
+  @api
   Scenario: regionMarker via API
     When calling:
       """

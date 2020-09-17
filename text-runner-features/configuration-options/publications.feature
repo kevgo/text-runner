@@ -1,3 +1,4 @@
+@cli
 Feature: Folder Mapping
 
   Background:

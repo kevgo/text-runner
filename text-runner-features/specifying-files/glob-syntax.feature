@@ -11,6 +11,7 @@ Feature: finding files in certain directories only
       files: '*.md'
       """
 
+  @cli
   Scenario: selecting files via CLI
     When running "text-run foo/*.md"
     Then it runs only the tests in:
@@ -18,6 +19,7 @@ Feature: finding files in certain directories only
       | foo/2.md |
 
 
+  @api
   Scenario: selecting files via API
     When calling:
       """

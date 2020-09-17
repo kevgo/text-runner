@@ -1,6 +1,7 @@
 @online
 Feature: "online" option
 
+  @cli
   Scenario: online option via CLI
     Given the source code contains a file "1.md" with content:
       """
@@ -13,7 +14,7 @@ Feature: "online" option
     And it signals:
       | MESSAGE | image http://google.com/foo.png |
 
-
+  @api
   Scenario: default API setting
     Given the source code contains a file "1.md" with content:
       """
@@ -26,6 +27,7 @@ Feature: "online" option
       | 1.md     | 1    | check-link  | link to http://google.com       | skipped |
       | 1.md     | 2    | check-image | image http://google.com/foo.png | skipped |
 
+  @api
   Scenario: online option via API
     Given the source code contains a file "1.md" with content:
       """

@@ -1,3 +1,4 @@
+@api
 Feature: recognize empty links
 
   Scenario: empty link

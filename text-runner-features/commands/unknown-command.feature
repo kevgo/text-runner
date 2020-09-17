@@ -1,4 +1,5 @@
 @smoke
+@cli
 Feature: unknown command
 
   Scenario: running an unknown command via the CLI

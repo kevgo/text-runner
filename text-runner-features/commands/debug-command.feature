@@ -1,3 +1,4 @@
+@cli
 Feature: display the version
 
   Scenario: no subcommand

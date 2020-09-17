@@ -1,3 +1,4 @@
+@api
 Feature: Fail on non-actionable Markdown
 
   Scenario: documentation with no actions

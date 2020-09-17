@@ -1,4 +1,5 @@
 @smoke
+@cli
 Feature: specifying the configuration filename
 
   Calling via API doesn't load configuration files

@@ -1,3 +1,4 @@
+@api
 Feature: active table tags
 
   Background:

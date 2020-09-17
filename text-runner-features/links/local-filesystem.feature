@@ -1,4 +1,5 @@
 @smoke
+@api
 Feature: verifying links to the local filesystem
 
   Scenario: relative link to existing local file

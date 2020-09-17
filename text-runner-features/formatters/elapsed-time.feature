@@ -1,3 +1,4 @@
+@cli
 Feature: display total test time
 
   Scenario: displaying the elapsed test time

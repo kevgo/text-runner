@@ -31,9 +31,10 @@ Feature: Default file
       Subfolder content
       """
     When running Text-Runner
-    Then it executes these actions:
-      | FILENAME | LINE | ACTION     | ACTIVITY                      |
-      | root.md  | 1    | check-link | link to local directory guide |
+    Then it prints:
+      """
+      root.md:1 -- link to local directory guide
+      """
 
 
   Scenario: publication with default file

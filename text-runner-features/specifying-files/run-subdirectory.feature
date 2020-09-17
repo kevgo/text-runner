@@ -1,6 +1,5 @@
 Feature: testing all docs in a subfolder
 
-  @cli
   Background:
     Given a runnable file "commands/foo.md"
     Given a runnable file "commands/bar/baz.md"

@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
@@ -18,7 +17,7 @@ export async function checkLink(action: ActionArgs) {
     throw new Error("link without target")
   }
 
-  action.name(`link to ${color.cyan(target)}`)
+  action.name(`link to ${target}`)
   const filePath = new AbsoluteFilePath(action.file)
 
   if (isMailtoLink(target)) {
@@ -50,7 +49,7 @@ async function checkExternalLink(target: string, action: ActionArgs) {
   }
 
   try {
-    action.name(`link to external website ${color.cyan(target)}`)
+    action.name(`link to external website ${target}`)
     await got(target, { timeout: 4000 })
   } catch (err) {
     if (err.statusCode === 404 || err.code === "ENOTFOUND") {
@@ -58,7 +57,7 @@ async function checkExternalLink(target: string, action: ActionArgs) {
     } else if (err instanceof got.TimeoutError) {
       action.log("timed out")
     } else {
-      action.log(`error while checking link to ${color.cyan(target)}: ${err.message}`)
+      action.log(`error while checking link to ${target}: ${err.message}`)
     }
   }
   return
@@ -76,7 +75,7 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
     try {
       const stats = await fs.stat(fullPath)
       if (stats.isDirectory()) {
-        action.name(`link to local directory ${color.cyan(linkedFile.unixified())}`)
+        action.name(`link to local directory ${linkedFile.unixified()}`)
         return
       }
     } catch (e) {
@@ -84,23 +83,23 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
     }
   }
 
-  action.name(`link to local file ${color.cyan(linkedFile.unixified())}`)
+  action.name(`link to local file ${linkedFile.unixified()}`)
   try {
     await fs.stat(fullPath)
   } catch (err) {
-    throw new Error(`link to non-existing local file ${color.bold(linkedFile.unixified())}`)
+    throw new Error(`link to non-existing local file ${linkedFile.unixified()}`)
   }
 }
 
 async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: ActionArgs) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
-    throw new Error(`link to non-existing local anchor ${color.bold(target)}`)
+    throw new Error(`link to non-existing local anchor ${target}`)
   }
   if (action.linkTargets.anchorType(containingFile, anchorName) === "heading") {
-    action.name(`link to local heading ${color.cyan(target)}`)
+    action.name(`link to local heading ${target}`)
   } else {
-    action.name(`link to #${color.cyan(anchorName)}`)
+    action.name(`link to #${anchorName}`)
   }
 }
 
@@ -111,22 +110,16 @@ async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, ta
   const anchorName = absoluteLink.anchor()
 
   if (!action.linkTargets.hasFile(filePath)) {
-    throw new Error(
-      `link to anchor #${color.cyan(anchorName)} in non-existing file ${color.cyan(
-        removeLeadingSlash(filePath.unixified())
-      )}`
-    )
+    throw new Error(`link to anchor #${anchorName} in non-existing file ${removeLeadingSlash(filePath.unixified())}`)
   }
 
   if (!action.linkTargets.hasAnchor(filePath, anchorName)) {
-    throw new Error(
-      `link to non-existing anchor ${color.bold("#" + anchorName)} in ${color.bold(filePath.unixified())}`
-    )
+    throw new Error(`link to non-existing anchor ${"#" + anchorName} in ${filePath.unixified()}`)
   }
 
   if (action.linkTargets.anchorType(filePath, anchorName) === "heading") {
-    action.name(`link to heading ${color.cyan(filePath.unixified() + "#" + anchorName)}`)
+    action.name(`link to heading ${filePath.unixified() + "#" + anchorName}`)
   } else {
-    action.name(`link to ${color.cyan(filePath.unixified())}#${color.cyan(anchorName)}`)
+    action.name(`link to ${filePath.unixified()}#${anchorName}`)
   }
 }

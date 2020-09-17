@@ -8,7 +8,6 @@ export function defaultConfiguration(): Configuration {
     defaultFile: "",
     exclude: [],
     files: "**/*.md",
-    formatterName: "detailed",
     online: false,
     publications: new Publications(),
     scaffoldLanguage: "js",

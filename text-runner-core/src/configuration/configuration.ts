@@ -11,7 +11,6 @@ export interface Configuration {
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
   files: string // glob of the files to test
-  formatterName: "detailed" | "dot" | "progress" | "silent" | "summary" | undefined
   publications: Publications // folder mappings
   online: boolean // whether to skip built-in tests that require a network connection
   scaffoldLanguage: "js" | "ts" // language in which to scaffold new steps

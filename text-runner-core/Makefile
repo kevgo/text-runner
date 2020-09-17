@@ -7,7 +7,7 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # for manually running the cukes for this codebase
-	(cd ${CURDIR}/../text-runner-features && make cuke)
+	(cd ${CURDIR}/../text-runner-features && make cuke-api)
 
 cuke-lerna:  # cukes for this codebase are in ../text-runner-features, Lerna runs those
 

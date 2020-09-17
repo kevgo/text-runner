@@ -1,3 +1,4 @@
+@cli
 Feature: generating a configuration file
 
   Scenario: setup via CLI

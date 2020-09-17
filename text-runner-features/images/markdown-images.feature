@@ -1,3 +1,4 @@
+@api
 Feature: checking embedded Markdown images
 
   @smoke

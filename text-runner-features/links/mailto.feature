@@ -1,3 +1,4 @@
+@api
 @online
 Feature: ignoring mailto links
 

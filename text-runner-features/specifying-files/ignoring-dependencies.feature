@@ -1,3 +1,4 @@
+@api
 Feature: ignoring dependencies
 
   Scenario: a code base with a node_modules folder

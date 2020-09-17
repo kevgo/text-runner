@@ -5,6 +5,7 @@ Feature: excluding files
     And a runnable file "foo/1.md"
     And a runnable file "bar/2.md"
 
+  @cli
   Scenario: excluding via config file
     Given the configuration file:
       """
@@ -22,6 +23,7 @@ Feature: excluding files
       foo/1.md
       """
 
+  @cli
   Scenario: excluding via CLI
     When running "text-run --exclude=foo"
     Then it prints:
@@ -35,6 +37,7 @@ Feature: excluding files
       foo/1.md
       """
 
+  @api
   Scenario: excluding via API
     When calling:
       """

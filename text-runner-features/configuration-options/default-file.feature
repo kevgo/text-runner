@@ -1,3 +1,4 @@
+@cli
 Feature: Default file
 
   Scenario: a default filename is set
@@ -29,10 +30,11 @@ Feature: Default file
       """
       Subfolder content
       """
-    When calling Text-Runner
-    Then it executes these actions:
-      | FILENAME | LINE | ACTION     | ACTIVITY                      |
-      | root.md  | 1    | check-link | link to local directory guide |
+    When running Text-Runner
+    Then it prints:
+      """
+      root.md:1 -- link to local directory guide
+      """
 
 
   Scenario: publication with default file

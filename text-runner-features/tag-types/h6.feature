@@ -1,3 +1,4 @@
+@api
 Feature: active h6 tags
 
   Background:

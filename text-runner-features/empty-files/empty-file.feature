@@ -1,3 +1,4 @@
+@api
 Feature: running empty files
 
   Scenario: a documentation consisting of an empty file

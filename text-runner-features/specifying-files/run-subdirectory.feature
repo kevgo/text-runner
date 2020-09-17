@@ -5,12 +5,14 @@ Feature: testing all docs in a subfolder
     Given a runnable file "commands/bar/baz.md"
     And a runnable file "readme.md"
 
+  @cli
   Scenario: testing all files in a subfolder via CLI
     When running "text-run commands"
     Then it runs only the tests in:
       | commands/foo.md     |
       | commands/bar/baz.md |
 
+  @api
   Scenario: testing all files in a subfolder via API
     When calling:
       """

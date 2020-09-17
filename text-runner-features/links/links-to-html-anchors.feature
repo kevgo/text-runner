@@ -1,3 +1,4 @@
+@api
 Feature: links to HTML anchors
 
   Scenario: link to an existing anchor in the same file

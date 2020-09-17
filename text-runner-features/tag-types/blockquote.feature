@@ -1,3 +1,4 @@
+@api
 Feature: active blockquote tags
 
   Background:

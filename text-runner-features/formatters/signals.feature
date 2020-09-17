@@ -1,3 +1,4 @@
+@cli
 Feature: Formatter signals
 
   Scenario Outline: checking output of various formatters

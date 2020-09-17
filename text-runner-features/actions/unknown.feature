@@ -1,4 +1,5 @@
 @smoke
+@api
 Feature: unknown action types
 
   Scenario: using an unknown action type

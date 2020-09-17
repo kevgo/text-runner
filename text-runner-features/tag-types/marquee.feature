@@ -1,3 +1,4 @@
+@api
 Feature: <marquee> tags
 
   Background:

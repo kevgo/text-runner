@@ -1,3 +1,4 @@
+@cli
 Feature: adding new actions
 
   Scenario: adding a new step

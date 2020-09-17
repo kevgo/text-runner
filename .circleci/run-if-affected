@@ -33,7 +33,7 @@ if (branch === "master") {
     .execSync("make list-affected", { cwd: path.join(process.cwd(), ".."), encoding: "utf-8" })
     .trim()
     .split(os.EOL)
-    .filter((e) => e)
+    .filter(e => e)
   console.log("all affected workspaces:", allAffected)
   if (!allAffected.includes(workspace)) {
     console.log(`workspace "${workspace}" is not affected by the current changes, skipping`)

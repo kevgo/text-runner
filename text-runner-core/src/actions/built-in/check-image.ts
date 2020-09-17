@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
@@ -12,7 +11,7 @@ export async function checkImage(action: ActionArgs) {
   if (!imagePath) {
     throw new Error("image tag without source")
   }
-  action.name(`image ${color.cyan(imagePath)}`)
+  action.name(`image ${imagePath}`)
   if (isRemoteImage(imagePath)) {
     const result = await checkRemoteImage(imagePath, action)
     return result
@@ -29,7 +28,7 @@ async function checkLocalImage(imagePath: string, c: Configuration) {
   try {
     await fs.stat(path.join(c.sourceDir, imagePath))
   } catch (err) {
-    throw new Error(`image ${color.red(imagePath)} does not exist`)
+    throw new Error(`image ${imagePath} does not exist`)
   }
 }
 
@@ -41,9 +40,9 @@ async function checkRemoteImage(url: string, action: ActionArgs) {
     await got(url, { timeout: 2000 })
   } catch (err) {
     if (err instanceof got.HTTPError && err.response.statusCode === 404) {
-      action.log(`image ${color.magenta(url)} does not exist`)
+      action.log(`image ${url} does not exist`)
     } else if (err instanceof got.TimeoutError) {
-      action.log(`image ${color.magenta(url)} timed out`)
+      action.log(`image ${url} timed out`)
     } else {
       throw err
     }

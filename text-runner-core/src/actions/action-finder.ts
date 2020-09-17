@@ -1,4 +1,3 @@
-import * as color from "colorette"
 import * as glob from "glob"
 import * as interpret from "interpret"
 import * as path from "path"
@@ -64,7 +63,7 @@ export class ActionFinder {
 
   /** errorUnknownAction signals that the given activity has no known action. */
   private errorUnknownAction(activity: Activity): never {
-    const errorText = `unknown action: ${color.red(activity.actionName)}`
+    const errorText = `unknown action: ${activity.actionName}`
     let guidance = ""
     if (this.customActions.size() > 0) {
       guidance += "User-defined actions:\n"

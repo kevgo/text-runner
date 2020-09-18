@@ -66,17 +66,3 @@ function determineExpectError(tryingText: string) {
     return true
   }
 }
-
-function finish(trying: boolean, exitCode: number | Error) {
-  if (trying && !exitCode) {
-    throw new Error("expected error but test succeeded")
-  } else if (trying && exitCode) {
-    // nothing to do here, we expected the error
-  } else if (exitCode) {
-    if (typeof exitCode === "number") {
-      throw new Error(`Expected success but got exit code: ${exitCode}`)
-    } else {
-      throw new Error(`Expected success but got error: ${exitCode}`)
-    }
-  }
-}

@@ -5,7 +5,6 @@ import { instantiateFormatter } from "./instantiate"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import * as events from "events"
 import { ProgressFormatter } from "./implementations/progress-formatter"
-import * as tr from "text-runner-core"
 
 suite("instantiateFormatter()", function () {
   const emitter = new events.EventEmitter()

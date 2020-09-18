@@ -18,3 +18,5 @@ export interface Configuration {
   systemTmp: boolean // whether to create the workspace in the system temp directory or locally
   workspace: string // the root directory of the workspace
 }
+
+export type PartialConfiguration = Partial<Configuration>

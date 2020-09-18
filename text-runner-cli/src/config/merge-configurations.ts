@@ -1,5 +1,6 @@
 import { allKeys } from "../helpers/all-keys"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
+import * as tr from "text-runner-core"
 
 /** Merges the non-null values of the given objects */
 export function mergeConfigurations(...configs: UserProvidedConfiguration[]): UserProvidedConfiguration {
@@ -13,5 +14,6 @@ export function mergeConfigurations(...configs: UserProvidedConfiguration[]): Us
       }
     }
   }
+  result.publications = tr.Publications.fromJSON(result.publications).sorted()
   return result
 }

@@ -26,10 +26,7 @@ suite("mergeConfigurations()", function () {
       files: "**/*.md",
       online: true,
     }
-    const defaultValues: UserProvidedConfiguration = {
-      files: "*.md",
-    }
-    const result = mergeConfigurations(cmdlineArgs, configFileData, defaultValues)
+    const result = mergeConfigurations(cmdlineArgs, configFileData)
     assert.deepEqual(result, {
       formatterName: "dot",
       files: "1.md",

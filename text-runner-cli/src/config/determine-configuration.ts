@@ -11,9 +11,9 @@ import { UserProvidedConfiguration } from "./user-provided-configuration"
 export function determineConfiguration(
   configFileData: UserProvidedConfiguration,
   cmdlineArgs: UserProvidedConfiguration
-): tr.Configuration {
+): UserProvidedConfiguration {
   // merge the configs
-  const result = mergeConfigurations(cmdlineArgs, configFileData, tr.defaultConfiguration())
+  const result = mergeConfigurations(cmdlineArgs, configFileData)
   result.publications = tr.Publications.fromJSON(result.publications).sorted()
-  return result as tr.Configuration
+  return result
 }

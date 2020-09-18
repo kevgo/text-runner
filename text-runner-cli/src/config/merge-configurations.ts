@@ -1,17 +1,18 @@
-import { allKeys } from "../helpers/all-keys"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 /** Merges the non-null values of the given objects */
-export function mergeConfigurations(...configs: UserProvidedConfiguration[]): UserProvidedConfiguration {
+export function mergeConfigurations(
+  cliArgs: UserProvidedConfiguration,
+  fileArgs: UserProvidedConfiguration
+): UserProvidedConfiguration {
   const result: UserProvidedConfiguration = {}
-  for (const key of allKeys(...configs.reverse())) {
-    for (const config of configs) {
-      // @ts-ignore: expression is any
-      if (config[key] != null) {
-        // @ts-ignore: expression is any
-        result[key] = config[key]
-      }
-    }
+  for (const [key, value] of Object.entries(fileArgs)) {
+    // @ts-ignore
+    result[key] = value
+  }
+  for (const [key, value] of Object.entries(cliArgs)) {
+    // @ts-ignore
+    result[key] = value
   }
   return result
 }

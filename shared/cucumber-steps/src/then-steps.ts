@@ -30,7 +30,7 @@ Then("it executes {int} test", function (count) {
   if (!world.apiResults) {
     throw new Error("no API results found")
   }
-  assert.equal(world.apiResults.length, 1)
+  assert.equal(world.apiResults.length, count)
 })
 
 Then("it executes in the local {string} directory", function (dirName) {

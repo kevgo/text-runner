@@ -11,6 +11,7 @@ When(/^calling:$/, async function (jsText: string) {
   let command = new textRunner.RunCommand(config)
   let observer = new ActivityCollector(command)
   // eval the given code
+  // @ts-ignore
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)

@@ -17,7 +17,7 @@ import { VersionCommand } from "./commands/version"
 import { StatsCollector } from "./helpers/stats-collector"
 import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
-import { parseCmdlineArgs } from "./cmdLineArgs/parse-cmdline-args"
+import { parseCmdlineArgs } from "./parse-cmdline-args"
 import { UserProvidedConfiguration } from "./config/user-provided-configuration"
 
 cliCursor.hide()

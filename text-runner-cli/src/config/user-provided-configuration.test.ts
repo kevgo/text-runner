@@ -31,4 +31,14 @@ suite("UserProvidedConfiguration", function () {
       )
     })
   })
+
+  test("toConfig", function () {
+    const userConfig = new UserProvidedConfiguration({
+      files: "1.md",
+      regionMarker: "foo",
+    })
+    const have = userConfig.toConfig()
+    assert.equal(have.files, "1.md")
+    assert.equal(have.regionMarker, "foo")
+  })
 })

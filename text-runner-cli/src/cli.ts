@@ -28,7 +28,11 @@ async function main() {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
     const configuration = await loadConfiguration(cmdLineConfig)
     const command = await instantiateCommand(commandName, configuration, debugSubcommand)
-    const formatter = instantiateFormatter(configuration, command)
+    const formatter = instantiateFormatter(
+      configuration.formatterName || "detailed",
+      configuration.sourceDir || ".",
+      command
+    )
     const statsCollector = new StatsCollector(command)
     await command.execute()
     const stats = statsCollector.stats()

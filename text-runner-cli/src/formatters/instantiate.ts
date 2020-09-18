@@ -6,20 +6,17 @@ import { SummaryFormatter } from "./implementations/summary-formatter"
 import { Formatter } from "./formatter"
 import * as events from "events"
 
-export function instantiateFormatter(config: tr.Configuration, emitter: events.EventEmitter): Formatter {
-  switch (config.formatterName) {
+export function instantiateFormatter(name: string, sourceDir: string, emitter: events.EventEmitter): Formatter {
+  switch (name) {
     case "dot":
-      return new DotFormatter(config, emitter)
+      return new DotFormatter(sourceDir, emitter)
     case "detailed":
-      return new DetailedFormatter(config, emitter)
+      return new DetailedFormatter(sourceDir, emitter)
     case "progress":
-      return new ProgressFormatter(config, emitter)
+      return new ProgressFormatter(sourceDir, emitter)
     case "summary":
-      return new SummaryFormatter(config, emitter)
+      return new SummaryFormatter(sourceDir, emitter)
     default:
-      throw new tr.UserError(
-        `Unknown formatter: ${config.formatterName}`,
-        "Available formatters are: detailed, dot, progress, summary"
-      )
+      throw new tr.UserError(`Unknown formatter: ${name}`, "Available formatters are: detailed, dot, progress, summary")
   }
 }

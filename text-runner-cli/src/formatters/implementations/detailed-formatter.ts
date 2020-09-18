@@ -8,10 +8,10 @@ import * as tr from "text-runner-core"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements Formatter {
-  private readonly configuration: tr.Configuration
+  private readonly sourceDir: string
 
-  constructor(configuration: tr.Configuration, emitter: events.EventEmitter) {
-    this.configuration = configuration
+  constructor(sourceDir: string, emitter: events.EventEmitter) {
+    this.sourceDir = sourceDir
     emitter.on(tr.CommandEvent.output, console.log)
     emitter.on(tr.CommandEvent.success, this.success.bind(this))
     emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
@@ -32,7 +32,7 @@ export class DetailedFormatter implements Formatter {
     }
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
     console.log(args.error.message)
-    const filePath = path.join(this.configuration.sourceDir, args.activity.file.platformified())
+    const filePath = path.join(this.sourceDir, args.activity.file.platformified())
     printCodeFrame(console.log, filePath, args.activity.line)
   }
 

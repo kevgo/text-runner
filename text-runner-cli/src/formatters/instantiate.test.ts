@@ -10,40 +10,29 @@ import * as tr from "text-runner-core"
 suite("instantiateFormatter()", function () {
   const emitter = new events.EventEmitter()
   test("request detailed formatter", function () {
-    const config = tr.defaultConfiguration()
-    config.formatterName = "detailed"
-    const formatter = instantiateFormatter(config, emitter)
+    const formatter = instantiateFormatter("detailed", ".", emitter)
     assert.instanceOf(formatter, DetailedFormatter)
   })
 
   test("request dot formatter", function () {
-    const config = tr.defaultConfiguration()
-    config.formatterName = "dot"
-    const formatter = instantiateFormatter(config, emitter)
+    const formatter = instantiateFormatter("dot", ".", emitter)
     assert.instanceOf(formatter, DotFormatter)
   })
 
   test("request progress formatter", function () {
-    const config = tr.defaultConfiguration()
-    config.formatterName = "progress"
-    const formatter = instantiateFormatter(config, emitter)
+    const formatter = instantiateFormatter("progress", ".", emitter)
     assert.instanceOf(formatter, ProgressFormatter)
   })
 
   test("request summary formatter", function () {
-    const config = tr.defaultConfiguration()
-    config.formatterName = "summary"
-    const formatter = instantiateFormatter(config, emitter)
+    const formatter = instantiateFormatter("summary", ".", emitter)
     assert.instanceOf(formatter, SummaryFormatter)
   })
 
   test("request unknown formatter", function () {
-    const config = tr.defaultConfiguration()
-    // @ts-ignore
-    config.formatterName = "zonk"
     let err = null
     try {
-      instantiateFormatter(config, emitter)
+      instantiateFormatter("zonk", ".", emitter)
     } catch (e) {
       err = e
     }

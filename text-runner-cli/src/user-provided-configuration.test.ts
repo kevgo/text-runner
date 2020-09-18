@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { Configuration } from "./user-provided-configuration"
 
-suite("UserProvidedConfiguration", function () {
+suite("Configuration", function () {
   suite("merge", function () {
     test("empty inputs", function () {
       const config = new Configuration()
@@ -37,7 +37,7 @@ suite("UserProvidedConfiguration", function () {
       files: "1.md",
       regionMarker: "foo",
     })
-    const have = userConfig.toConfig()
+    const have = userConfig.toCoreConfig()
     assert.equal(have.files, "1.md")
     assert.equal(have.regionMarker, "foo")
   })

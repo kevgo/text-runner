@@ -70,7 +70,7 @@ async function instantiateCommand(
     case "version":
       return new VersionCommand()
   }
-  const trConfig = userConfig.toConfig()
+  const trConfig = userConfig.toCoreConfig()
   switch (commandName) {
     case "debug":
       return new DebugCommand(trConfig, debugSubcommand)

@@ -4,7 +4,7 @@ import { ScaffoldLanguage } from "./commands/scaffold"
 import * as YAML from "yamljs"
 import { promises as fs } from "fs"
 
-export interface UserConfigData {
+export interface ConfigData {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
@@ -23,7 +23,7 @@ export interface UserConfigData {
  * UserProvidedConfiguration describes arguments provided by the user,
  * either via command line or via config file.
  */
-export class Configuration implements UserConfigData {
+export class Configuration implements ConfigData {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
@@ -37,7 +37,7 @@ export class Configuration implements UserConfigData {
   systemTmp?: boolean
   workspace?: string // path of the workspace to use
 
-  constructor(data: UserConfigData = {}) {
+  constructor(data: ConfigData = {}) {
     for (const [key, value] of Object.entries(data)) {
       // @ts-ignore
       this[key] = value
@@ -85,7 +85,7 @@ export class Configuration implements UserConfigData {
     return result
   }
 
-  toConfig(): tr.PartialConfiguration {
+  toCoreConfig(): tr.PartialConfiguration {
     const result: tr.PartialConfiguration = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile

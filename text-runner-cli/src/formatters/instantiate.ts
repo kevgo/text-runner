@@ -3,10 +3,10 @@ import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
 import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
-import { Formatter } from "./formatter"
+import { Formatter, FormatterName } from "./formatter"
 import * as events from "events"
 
-export function instantiateFormatter(name: string, sourceDir: string, emitter: events.EventEmitter): Formatter {
+export function instantiateFormatter(name: FormatterName, sourceDir: string, emitter: events.EventEmitter): Formatter {
   switch (name) {
     case "dot":
       return new DotFormatter(sourceDir, emitter)

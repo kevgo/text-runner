@@ -4,15 +4,15 @@ import * as events from "events"
 import * as tr from "text-runner-core"
 
 export class SetupCommand extends events.EventEmitter implements tr.Command {
-  config: tr.Configuration
+  sourceDir: string
 
-  constructor(config: tr.Configuration) {
+  constructor(sourceDir: string) {
     super()
-    this.config = config
+    this.sourceDir = sourceDir
   }
 
   async execute() {
-    await createConfigurationFile(this.config.sourceDir || ".")
+    await createConfigurationFile(this.sourceDir || ".")
     this.emit(tr.CommandEvent.output, `Created configuration file ${color.cyan("text-run.yml")} with default values`)
   }
 }

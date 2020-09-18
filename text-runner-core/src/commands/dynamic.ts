@@ -7,55 +7,59 @@ import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
-import { Configuration } from "../configuration/configuration"
+import { PartialConfiguration } from "../configuration/configuration"
 import { WarnArgs, StartArgs } from "../text-runner"
+import { backfillDefaults } from "../configuration/backfill-defaults"
 
 export class DynamicCommand extends events.EventEmitter implements Command {
-  config: Configuration
+  userConfig: PartialConfiguration
 
-  constructor(config: Configuration) {
+  constructor(userConfig: PartialConfiguration) {
     super()
-    this.config = config
+    this.userConfig = userConfig
   }
 
   async execute() {
     const originalDir = process.cwd()
     try {
-      // step 1: create working dir
-      if (!this.config.workspace) {
-        this.config.workspace = await createWorkspace(this.config)
+      // step 1: determine full configuration
+      const config = backfillDefaults(this.userConfig)
+
+      // step 2: create working dir
+      if (!config.workspace) {
+        config.workspace = await createWorkspace(config)
       }
 
-      // step 2: find files
-      const filenames = await getFileNames(this.config)
+      // step 3: find files
+      const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
         this.emit(CommandEvent.warning, warnArgs)
         return
       }
 
-      // step 3: read and parse files
-      const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+      // step 4: read and parse files
+      const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
-      // step 4: find link targets
+      // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)
 
-      // step 5: extract activities
-      const activities = extractActivities(ASTs, this.config.regionMarker)
+      // step 6: extract activities
+      const activities = extractActivities(ASTs, config.regionMarker)
       if (activities.length === 0) {
         const warnArgs: WarnArgs = { message: "no activities found" }
         this.emit(CommandEvent.warning, warnArgs)
         return
       }
 
-      // step 6: find actions
-      const actionFinder = ActionFinder.loadDynamic(this.config.sourceDir)
+      // step 7: find actions
+      const actionFinder = ActionFinder.loadDynamic(config.sourceDir)
 
-      // step 7: execute the ActivityList
+      // step 8: execute the ActivityList
       const startArgs: StartArgs = { stepCount: activities.length }
       this.emit(CommandEvent.start, startArgs)
-      process.chdir(this.config.workspace)
-      await executeSequential(activities, actionFinder, this.config, linkTargets, this)
+      process.chdir(config.workspace)
+      await executeSequential(activities, actionFinder, config, linkTargets, this)
     } finally {
       process.chdir(originalDir)
     }

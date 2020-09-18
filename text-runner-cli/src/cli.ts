@@ -31,7 +31,7 @@ async function main() {
     const fileConfig = await loadConfiguration(cmdLineConfig)
     const userConfig = mergeConfigurations(cmdLineConfig, fileConfig, defaultConfiguration())
     const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
-    const formatter = instantiateFormatter(userConfig, command)
+    const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
     const statsCollector = new StatsCollector(command)
     await command.execute()
     const stats = statsCollector.stats()

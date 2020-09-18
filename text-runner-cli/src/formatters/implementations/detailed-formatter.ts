@@ -32,7 +32,7 @@ export class DetailedFormatter implements Formatter {
     }
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
     console.log(args.error.message)
-    const filePath = path.join(this.configuration.sourceDir || ".", args.activity.file.platformified())
+    const filePath = path.join(this.sourceDir, args.activity.file.platformified())
     printCodeFrame(console.log, filePath, args.activity.line)
   }
 

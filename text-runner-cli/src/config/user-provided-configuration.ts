@@ -1,6 +1,8 @@
 import * as tr from "text-runner-core"
 import { FormatterName } from "../formatters/formatter"
 import { ScaffoldLanguage } from "../commands/scaffold"
+import * as YAML from "yamljs"
+import { promises as fs } from "fs"
 
 export interface UserConfigData {
   regionMarker?: string
@@ -40,6 +42,26 @@ export class UserProvidedConfiguration implements UserConfigData {
       // @ts-ignore
       this[key] = value
     }
+  }
+
+  /** provides the content of the config file in the standardized format */
+  static async fromConfigFile(filename: string): Promise<UserProvidedConfiguration> {
+    if (!filename) {
+      return new UserProvidedConfiguration({})
+    }
+    const fileContent = await fs.readFile(filename, "utf-8")
+    const fileData = YAML.parse(fileContent)
+    return new UserProvidedConfiguration({
+      regionMarker: fileData.regionMarker,
+      defaultFile: fileData.defaultFile,
+      exclude: fileData.exclude,
+      files: fileData.files,
+      formatterName: fileData.format,
+      online: fileData.online,
+      publications: fileData.publications,
+      systemTmp: fileData.systemTmp,
+      workspace: fileData.workspace,
+    })
   }
 
   /**

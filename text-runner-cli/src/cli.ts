@@ -15,10 +15,10 @@ import { ScaffoldCommand } from "./commands/scaffold"
 import { SetupCommand } from "./commands/setup"
 import { VersionCommand } from "./commands/version"
 import { StatsCollector } from "./helpers/stats-collector"
-import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./parse-cmdline-args"
 import { UserProvidedConfiguration } from "./config/user-provided-configuration"
+import { determineConfigFilename } from "./config-file/determine-config-filename"
 
 cliCursor.hide()
 
@@ -26,7 +26,7 @@ async function main() {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
-    const fileConfig = await loadConfiguration(cmdLineConfig)
+    const fileConfig = await UserProvidedConfiguration.fromConfigFile(await determineConfigFilename(cmdLineConfig))
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
     const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)

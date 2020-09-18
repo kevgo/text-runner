@@ -11,7 +11,6 @@ When(/^calling:$/, async function (jsText: string) {
   // define a few variables here, they will be overwritten in the eval call
   let command = new textRunner.RunCommand(config)
   let observer = new ActivityCollector(command)
-  let result = observer.results()
   // eval the given code
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction

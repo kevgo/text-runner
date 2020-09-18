@@ -23,7 +23,7 @@ export interface UserConfigData {
  * UserProvidedConfiguration describes arguments provided by the user,
  * either via command line or via config file.
  */
-export class UserProvidedConfiguration implements UserConfigData {
+export class Configuration implements UserConfigData {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
@@ -45,13 +45,13 @@ export class UserProvidedConfiguration implements UserConfigData {
   }
 
   /** provides the content of the config file in the standardized format */
-  static async fromConfigFile(filename: string): Promise<UserProvidedConfiguration> {
+  static async fromConfigFile(filename: string): Promise<Configuration> {
     if (!filename) {
-      return new UserProvidedConfiguration({})
+      return new Configuration({})
     }
     const fileContent = await fs.readFile(filename, "utf-8")
     const fileData = YAML.parse(fileContent)
-    return new UserProvidedConfiguration({
+    return new Configuration({
       regionMarker: fileData.regionMarker,
       defaultFile: fileData.defaultFile,
       exclude: fileData.exclude,
@@ -68,8 +68,8 @@ export class UserProvidedConfiguration implements UserConfigData {
    * Returns a new UserProvidedConfiguration that contains this config
    * with the fields from other overwriting the fields of this one.
    */
-  merge(other: UserProvidedConfiguration): UserProvidedConfiguration {
-    const result = new UserProvidedConfiguration()
+  merge(other: Configuration): Configuration {
+    const result = new Configuration()
     for (const [key, value] of Object.entries(this)) {
       if (value != null) {
         // @ts-ignore

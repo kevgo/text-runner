@@ -1,14 +1,14 @@
 import * as path from "path"
 import { promises as fs } from "fs"
 import * as tr from "text-runner-core"
-import { UserProvidedConfiguration } from "../user-provided-configuration"
+import { Configuration } from "../user-provided-configuration"
 
 /**
  * Returns the filename for the config file
  *
  * @param cmdLineArgs
  */
-export async function determineConfigFilename(cmdLineArgs: UserProvidedConfiguration): Promise<string> {
+export async function determineConfigFilename(cmdLineArgs: Configuration): Promise<string> {
   if (cmdLineArgs.configFileName) {
     const configFilePath = path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName)
     try {

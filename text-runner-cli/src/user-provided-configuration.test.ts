@@ -1,29 +1,29 @@
 import { assert } from "chai"
-import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { Configuration } from "./user-provided-configuration"
 
 suite("UserProvidedConfiguration", function () {
   suite("merge", function () {
     test("empty inputs", function () {
-      const config = new UserProvidedConfiguration()
-      const have = config.merge(new UserProvidedConfiguration())
-      const want = new UserProvidedConfiguration()
+      const config = new Configuration()
+      const have = config.merge(new Configuration())
+      const want = new Configuration()
       assert.deepEqual(have, want)
     })
 
     test("userConfig overrides fileConfig", function () {
-      const config = new UserProvidedConfiguration({
+      const config = new Configuration({
         formatterName: "dot",
         files: "**/*.md",
         online: true,
       })
-      const other = new UserProvidedConfiguration({
+      const other = new Configuration({
         files: "1.md",
         online: false,
       })
       const result = config.merge(other)
       assert.deepEqual(
         result,
-        new UserProvidedConfiguration({
+        new Configuration({
           formatterName: "dot",
           files: "1.md",
           online: false,
@@ -33,7 +33,7 @@ suite("UserProvidedConfiguration", function () {
   })
 
   test("toConfig", function () {
-    const userConfig = new UserProvidedConfiguration({
+    const userConfig = new Configuration({
       files: "1.md",
       regionMarker: "foo",
     })

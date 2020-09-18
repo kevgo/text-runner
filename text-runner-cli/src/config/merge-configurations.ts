@@ -8,12 +8,16 @@ export function mergeConfigurations(
 ): UserProvidedConfiguration {
   const result: UserProvidedConfiguration = {}
   for (const [key, value] of Object.entries(fileArgs)) {
-    // @ts-ignore
-    result[key] = value
+    if (value != null) {
+      // @ts-ignore
+      result[key] = value
+    }
   }
   for (const [key, value] of Object.entries(cliArgs)) {
-    // @ts-ignore
-    result[key] = value
+    if (value != null) {
+      // @ts-ignore
+      result[key] = value
+    }
   }
   result.publications = tr.Publications.fromJSON(result.publications).sorted()
   return result

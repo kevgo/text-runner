@@ -6,10 +6,8 @@ import { ActivityCollector } from "./activity-collector"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const config = textRunner.defaultConfiguration()
-  config.sourceDir = world.rootDir
   // define a few variables here, they will be overwritten in the eval call
-  let command = new textRunner.RunCommand(config)
+  let command = new textRunner.RunCommand({ sourceDir: world.rootDir })
   let observer = new ActivityCollector(command)
   let result = observer.results()
   // eval the given code
@@ -32,9 +30,7 @@ When(/^calling:$/, async function (jsText: string) {
 
 When(/^calling Text-Runner$/, async function () {
   const world = this as TRWorld
-  const config = textRunner.defaultConfiguration()
-  config.sourceDir = world.rootDir
-  const command = new textRunner.RunCommand(config)
+  const command = new textRunner.RunCommand({ sourceDir: world.rootDir })
   const activityCollector = new ActivityCollector(command)
   try {
     await command.execute()

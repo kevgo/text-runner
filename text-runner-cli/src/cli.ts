@@ -1,6 +1,6 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import { printUserError } from "./errors/print-user-error"
+import { printUserError } from "./print-user-error"
 import {
   DebugCommand,
   DebugSubcommand,

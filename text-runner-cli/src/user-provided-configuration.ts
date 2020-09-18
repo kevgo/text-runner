@@ -1,6 +1,6 @@
 import * as tr from "text-runner-core"
-import { FormatterName } from "../formatters/formatter"
-import { ScaffoldLanguage } from "../commands/scaffold"
+import { FormatterName } from "./formatters/formatter"
+import { ScaffoldLanguage } from "./commands/scaffold"
 import * as YAML from "yamljs"
 import { promises as fs } from "fs"
 

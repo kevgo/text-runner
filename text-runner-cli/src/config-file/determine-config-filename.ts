@@ -1,7 +1,7 @@
 import * as path from "path"
 import { promises as fs } from "fs"
 import * as tr from "text-runner-core"
-import { UserProvidedConfiguration } from "../config/user-provided-configuration"
+import { UserProvidedConfiguration } from "../user-provided-configuration"
 
 /**
  * Returns the filename for the config file

@@ -3,10 +3,6 @@ import * as tr from "text-runner-core"
 import * as events from "events"
 
 export class HelpCommand extends events.EventEmitter implements tr.Command {
-  constructor() {
-    super()
-  }
-
   async execute() {
     this.emit(tr.CommandEvent.output, this.template())
   }

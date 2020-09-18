@@ -8,11 +8,11 @@ import { FinishArgs, Formatter } from "../formatter"
 import * as events from "events"
 
 export class ProgressFormatter implements Formatter {
-  private readonly configuration: tr.Configuration
+  private readonly sourceDir: string
   private readonly progressBar: progress.Bar
 
-  constructor(configuration: tr.Configuration, emitter: events.EventEmitter) {
-    this.configuration = configuration
+  constructor(sourceDir: string, emitter: events.EventEmitter) {
+    this.sourceDir = sourceDir
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
@@ -41,11 +41,7 @@ export class ProgressFormatter implements Formatter {
     console.log(color.dim(args.output))
     console.log(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.error.message}\n`))
     console.log()
-    printCodeFrame(
-      console.log,
-      path.join(this.configuration.sourceDir, args.activity.file.platformified()),
-      args.activity.line
-    )
+    printCodeFrame(console.log, path.join(this.sourceDir, args.activity.file.platformified()), args.activity.line)
   }
 
   skipped() {

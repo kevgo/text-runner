@@ -6,7 +6,7 @@ import { ScaffoldLanguage } from "../commands/scaffold"
  * UserProvidedConfiguration describes arguments provided by the user,
  * either via command line or via config file.
  */
-export interface UserProvidedConfiguration {
+export class UserProvidedConfiguration {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string

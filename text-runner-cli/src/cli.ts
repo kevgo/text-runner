@@ -19,6 +19,7 @@ import { StatsCollector } from "./helpers/stats-collector"
 import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./cmdLineArgs/parse-cmdline-args"
+import { mergeConfigurations } from "./config/merge-configurations"
 
 cliCursor.hide()
 
@@ -26,13 +27,10 @@ async function main() {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
-    const configuration = await loadConfiguration(cmdLineConfig)
-    const command = await instantiateCommand(commandName, configuration, debugSubcommand)
-    const formatter = instantiateFormatter(
-      configuration.formatterName || "detailed",
-      configuration.sourceDir || ".",
-      command
-    )
+    const fileConfig = await loadConfiguration(cmdLineConfig)
+    const userConfig = mergeConfigurations(cmdLineConfig, fileConfig)
+    const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
+    const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
     const statsCollector = new StatsCollector(command)
     await command.execute()
     const stats = statsCollector.stats()

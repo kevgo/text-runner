@@ -8,7 +8,7 @@ When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
   const config: textRunner.PartialConfiguration = { sourceDir: world.rootDir }
   // define a few variables here, they will be overwritten in the eval call
-  let command = new textRunner.RunCommand({})
+  let command = new textRunner.RunCommand(config)
   let observer = new ActivityCollector(command)
   // eval the given code
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}

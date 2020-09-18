@@ -5,11 +5,11 @@ import { UserProvidedConfiguration } from "../config/user-provided-configuration
 /** provides the content of the config file in the standardized format */
 export async function loadConfigFile(filename: string): Promise<UserProvidedConfiguration> {
   if (!filename) {
-    return {}
+    return new UserProvidedConfiguration({})
   }
   const fileContent = await fs.readFile(filename, "utf-8")
   const fileData = YAML.parse(fileContent)
-  const result: UserProvidedConfiguration = {
+  return new UserProvidedConfiguration({
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,
     exclude: fileData.exclude,
@@ -19,6 +19,5 @@ export async function loadConfigFile(filename: string): Promise<UserProvidedConf
     publications: fileData.publications,
     systemTmp: fileData.systemTmp,
     workspace: fileData.workspace,
-  }
-  return result
+  })
 }

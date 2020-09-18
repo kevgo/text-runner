@@ -33,7 +33,7 @@ export function parseCmdlineArgs(
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: true })
   let commandName = cliArgs._[0]
-  const cmdLineConfig: UserProvidedConfiguration = {
+  const cmdLineConfig = new UserProvidedConfiguration({
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
@@ -41,7 +41,7 @@ export function parseCmdlineArgs(
     online: cliArgs.online,
     workspace: cliArgs.workspace,
     scaffoldLanguage: parseScaffoldSwitches(cliArgs),
-  }
+  })
   if (cliArgs["system-tmp"] != null) {
     cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }

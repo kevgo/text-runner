@@ -19,7 +19,6 @@ import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./cmdLineArgs/parse-cmdline-args"
 import { UserProvidedConfiguration } from "./config/user-provided-configuration"
-import { convertToConfig } from "./config/convert-to-config"
 
 cliCursor.hide()
 
@@ -28,7 +27,7 @@ async function main() {
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
     const fileConfig = await loadConfiguration(cmdLineConfig)
-    const userConfig = fileConfig.merge(cmdLineConfig).data()
+    const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
     const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
     const statsCollector = new StatsCollector(command)
@@ -71,7 +70,7 @@ async function instantiateCommand(
     case "version":
       return new VersionCommand()
   }
-  const trConfig = convertToConfig(userConfig)
+  const trConfig = userConfig.toConfig()
   switch (commandName) {
     case "debug":
       return new DebugCommand(trConfig, debugSubcommand)

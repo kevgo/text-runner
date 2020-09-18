@@ -1,11 +1,12 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
+import { Publications } from "text-runner-core"
 import { mergeConfigurations } from "./merge-configurations"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
 
 suite("mergeConfigurations()", function () {
   test("empty inputs", function () {
     const have = mergeConfigurations({}, {})
-    assert.deepEqual(have, {})
+    assert.deepEqual(have, { publications: new Publications() })
   })
   test("config file data given", function () {
     const configFileData: UserProvidedConfiguration = {
@@ -13,7 +14,12 @@ suite("mergeConfigurations()", function () {
       sourceDir: "my-source",
     }
     const have = mergeConfigurations({}, configFileData)
-    assert.deepEqual(have, configFileData)
+    const want: UserProvidedConfiguration = {
+      exclude: "1.md",
+      publications: new Publications(),
+      sourceDir: "my-source",
+    }
+    assert.deepEqual(have, want)
   })
 
   test("userConfig overrides fileConfig", function () {
@@ -31,6 +37,7 @@ suite("mergeConfigurations()", function () {
       formatterName: "dot",
       files: "1.md",
       online: false,
+      publications: new Publications(),
     })
   })
 })

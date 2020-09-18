@@ -5,19 +5,23 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { WarnArgs } from "../text-runner"
-import { Configuration } from "../configuration/configuration"
+import { PartialConfiguration } from "../configuration/configuration"
+import { backfillDefaults } from "../configuration/backfill-defaults"
 
 export class UnusedCommand extends events.EventEmitter implements Command {
-  config: Configuration
+  userConfig: PartialConfiguration
 
-  constructor(config: Configuration) {
+  constructor(userConfig: PartialConfiguration) {
     super()
-    this.config = config
+    this.userConfig = userConfig
   }
 
   async execute() {
+    // step 1: determine full configuration
+    const config = backfillDefaults(this.userConfig)
+
     // step 2: find files
-    const filenames = await getFileNames(this.config)
+    const filenames = await getFileNames(config)
     if (filenames.length === 0) {
       const warnArgs: WarnArgs = { message: "no Markdown files found" }
       this.emit(CommandEvent.warning, warnArgs)
@@ -25,13 +29,13 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     }
 
     // step 3: read and parse files
-    const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
     // step 4: extract activities
-    const usedActivityNames = extractActivities(ASTs, this.config.regionMarker).map(activity => activity.actionName)
+    const usedActivityNames = extractActivities(ASTs, config.regionMarker).map(activity => activity.actionName)
 
     // step 5: find defined activities
-    const definedActivityNames = ActionFinder.load(this.config.sourceDir).customActionNames()
+    const definedActivityNames = ActionFinder.load(config.sourceDir).customActionNames()
 
     // step 6: identify unused activities
     const unusedActivityNames = definedActivityNames.filter(

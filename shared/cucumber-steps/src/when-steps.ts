@@ -6,10 +6,10 @@ import { ActivityCollector } from "./activity-collector"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
+  const config: textRunner.PartialConfiguration = { sourceDir: world.rootDir }
   // define a few variables here, they will be overwritten in the eval call
-  let command = new textRunner.RunCommand({ sourceDir: world.rootDir })
+  let command = new textRunner.RunCommand({})
   let observer = new ActivityCollector(command)
-  let result = observer.results()
   // eval the given code
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction

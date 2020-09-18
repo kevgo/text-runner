@@ -7,18 +7,19 @@ import { camelize } from "../helpers/camelize"
 export type ScaffoldLanguage = "js" | "ts"
 
 export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
-  config: tr.Configuration
+  name: string
+  sourceDir: string
+  language: ScaffoldLanguage
 
-  constructor(config: tr.Configuration) {
+  constructor(name: string, sourceDir: string, language: ScaffoldLanguage) {
     super()
-    this.config = config
+    this.name = name
+    this.sourceDir = sourceDir
+    this.language = language
   }
 
   async execute() {
-    if (!this.config.files) {
-      throw new Error("no action name given")
-    }
-    const dirPath = path.join(this.config.sourceDir || ".", "text-run")
+    const dirPath = path.join(this.sourceDir || ".", "text-run")
     let textRunDirExists = true
     try {
       await fs.stat(dirPath)
@@ -28,15 +29,12 @@ export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
     if (!textRunDirExists) {
       await fs.mkdir(dirPath, { recursive: true })
     }
-    if (this.config.scaffoldLanguage === "ts") {
-      await fs.writeFile(path.join(dirPath, this.config.files + ".ts"), tsTemplate(this.config.files), "utf8")
-    } else if (this.config.scaffoldLanguage === "js") {
-      await fs.writeFile(path.join(dirPath, this.config.files + ".js"), jsTemplate(this.config.files), "utf8")
+    if (this.language === "ts") {
+      await fs.writeFile(path.join(dirPath, this.name + ".ts"), tsTemplate(this.name), "utf8")
+    } else if (this.language === "js") {
+      await fs.writeFile(path.join(dirPath, this.name + ".js"), jsTemplate(this.name), "utf8")
     } else {
-      throw new tr.UserError(
-        `Unknown configuration language: ${this.config.scaffoldLanguage}`,
-        'Possible languages are "js" and "ts"'
-      )
+      throw new tr.UserError(`Unknown configuration language: ${this.language}`, 'Possible languages are "js" and "ts"')
     }
   }
 }

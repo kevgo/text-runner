@@ -10,7 +10,7 @@ import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, WarnArgs } from "../text-runner"
-import { Configuration, PartialConfiguration } from "../configuration/configuration"
+import { PartialConfiguration } from "../configuration/configuration"
 import { backfillDefaults } from "../configuration/backfill-defaults"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */

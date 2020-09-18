@@ -10,22 +10,24 @@ import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
 import * as events from "events"
 import { Command } from "./command"
-import { Configuration } from "../configuration/configuration"
+import { Configuration, PartialConfiguration } from "../configuration/configuration"
+import { backfillDefaults } from "../configuration/backfill-defaults"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
 export class DebugCommand extends events.EventEmitter implements Command {
-  config: Configuration
+  userConfig: PartialConfiguration
   subcommand: DebugSubcommand | undefined
 
-  constructor(config: Configuration, subcommand: DebugSubcommand | undefined) {
+  constructor(userConfig: PartialConfiguration, subcommand: DebugSubcommand | undefined) {
     super()
-    this.config = config
+    this.userConfig = userConfig
     this.subcommand = subcommand
   }
 
   async execute() {
-    const filenames = await getFileNames(this.config)
+    const config = backfillDefaults(this.userConfig)
+    const filenames = await getFileNames(config)
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug
 
@@ -40,10 +42,10 @@ Example: text-run debug --${this.subcommand} foo.md`
 --link-targets: document anchors to link to
 
 Example: text-run debug --images foo.md`
-    const ASTs = await parseMarkdownFiles(filenames, this.config.sourceDir)
+    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
     switch (this.subcommand) {
       case "activities":
-        return debugActivities(ASTs, this.config)
+        return debugActivities(ASTs, config)
       case "ast":
         return debugASTNodes(ASTs)
       case "images":

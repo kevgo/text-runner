@@ -2,7 +2,6 @@ import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import { printUserError } from "./errors/print-user-error"
 import {
-  Configuration,
   DebugCommand,
   DebugSubcommand,
   DynamicCommand,
@@ -20,6 +19,8 @@ import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./cmdLineArgs/parse-cmdline-args"
 import { mergeConfigurations } from "./config/merge-configurations"
+import { UserProvidedConfiguration } from "./config/user-provided-configuration"
+import { convertToConfig } from "./config/convert-to-config"
 
 cliCursor.hide()
 
@@ -54,28 +55,35 @@ main()
 
 async function instantiateCommand(
   commandName: string,
-  config: Configuration,
+  userConfig: UserProvidedConfiguration,
   debugSubcommand: DebugSubcommand | undefined
 ) {
+  const sourceDir = userConfig.sourceDir || "."
   switch (commandName) {
     case "help":
       return new HelpCommand()
     case "scaffold":
-      return new ScaffoldCommand(config)
+      if (!userConfig.files) {
+        throw new Error("no action name given")
+      }
+      return new ScaffoldCommand(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
     case "setup":
-      return new SetupCommand(config)
+      return new SetupCommand(sourceDir)
     case "version":
       return new VersionCommand()
+  }
+  const trConfig = convertToConfig(userConfig)
+  switch (commandName) {
     case "debug":
-      return new DebugCommand(config, debugSubcommand)
+      return new DebugCommand(trConfig, debugSubcommand)
     case "dynamic":
-      return new DynamicCommand(config)
+      return new DynamicCommand(trConfig)
     case "run":
-      return new RunCommand(config)
+      return new RunCommand(trConfig)
     case "static":
-      return new StaticCommand(config)
+      return new StaticCommand(trConfig)
     case "unused":
-      return new UnusedCommand(config)
+      return new UnusedCommand(trConfig)
     default:
       throw new UserError(`unknown command: ${commandName}`)
   }

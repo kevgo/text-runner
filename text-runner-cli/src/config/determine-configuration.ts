@@ -1,6 +1,7 @@
 import { mergeConfigurations } from "./merge-configurations"
 import * as tr from "text-runner-core"
 import { UserProvidedConfiguration } from "./user-provided-configuration"
+import { defaultConfiguration } from "./default-configuration"
 
 /**
  * Loads the configuration from disk and returns it.
@@ -13,7 +14,7 @@ export function determineConfiguration(
   cmdlineArgs: UserProvidedConfiguration
 ): tr.Configuration {
   // merge the configs
-  const result = mergeConfigurations(cmdlineArgs, configFileData, tr.defaultConfiguration())
+  const result = mergeConfigurations(cmdlineArgs, configFileData, defaultConfiguration())
   result.publications = tr.Publications.fromJSON(result.publications).sorted()
   return result as tr.Configuration
 }

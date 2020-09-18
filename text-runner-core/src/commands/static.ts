@@ -25,12 +25,12 @@ export class StaticCommand extends events.EventEmitter implements Command {
       // step 1: determine full configuration
       const config = backfillDefaults(this.userConfig)
 
-      // step 1: create working dir
+      // step 2: create working dir
       if (!config.workspace) {
         config.workspace = await createWorkspace(config)
       }
 
-      // step 2: find files
+      // step 3: find files
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
@@ -38,13 +38,13 @@ export class StaticCommand extends events.EventEmitter implements Command {
         return
       }
 
-      // step 3: read and parse files
+      // step 4: read and parse files
       const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
-      // step 4: find link targets
+      // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)
 
-      // step 5: extract activities
+      // step 6: extract activities
       const links = extractImagesAndLinks(ASTs)
       if (links.length === 0) {
         const warnArgs: WarnArgs = { message: "no activities found" }
@@ -52,17 +52,17 @@ export class StaticCommand extends events.EventEmitter implements Command {
         return
       }
 
-      // step 6: find actions
+      // step 7: find actions
       const actionFinder = ActionFinder.loadStatic()
 
-      // step 7: execute the ActivityList
+      // step 8: execute the ActivityList
       const startArgs: StartArgs = { stepCount: links.length }
       this.emit(CommandEvent.start, startArgs)
       process.chdir(config.workspace)
       const parResults = executeParallel(links, actionFinder, linkTargets, config, this)
       await Promise.all(parResults)
 
-      // step 8: cleanup
+      // step 9: cleanup
       process.chdir(config.sourceDir)
     } finally {
       process.chdir(originalDir)

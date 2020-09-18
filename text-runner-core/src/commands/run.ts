@@ -28,12 +28,12 @@ export class RunCommand extends events.EventEmitter implements Command {
       // step 1: determine full configuration
       const config = backfillDefaults(this.userConfig)
 
-      // step 1: create workspace
+      // step 2: create workspace
       if (!config.workspace) {
         config.workspace = await createWorkspace(config)
       }
 
-      // step 2: find files
+      // step 3: find files
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: WarnArgs = { message: "no Markdown files found" }
@@ -41,16 +41,16 @@ export class RunCommand extends events.EventEmitter implements Command {
         return
       }
 
-      // step 3: read and parse files
+      // step 4: read and parse files
       const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
 
-      // step 4: find link targets
+      // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)
 
-      // step 5: find actions
+      // step 6: find actions
       const actionFinder = ActionFinder.load(config.sourceDir)
 
-      // step 6: extract activities
+      // step 7: extract activities
       const activities = extractActivities(ASTs, config.regionMarker)
       const links = extractImagesAndLinks(ASTs)
       if (activities.length + links.length === 0) {
@@ -59,7 +59,7 @@ export class RunCommand extends events.EventEmitter implements Command {
         return
       }
 
-      // step 7: execute the ActivityList
+      // step 8: execute the ActivityList
       const startArgs: StartArgs = { stepCount: activities.length + links.length }
       this.emit(CommandEvent.start, startArgs)
       process.chdir(config.workspace)
@@ -69,7 +69,7 @@ export class RunCommand extends events.EventEmitter implements Command {
       await executeSequential(activities, actionFinder, config, linkTargets, this)
       await Promise.all(parJobs)
 
-      // step 8: cleanup
+      // step 9: cleanup
       process.chdir(config.sourceDir)
     } finally {
       process.chdir(originalDir)

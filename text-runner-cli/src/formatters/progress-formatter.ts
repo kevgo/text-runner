@@ -2,7 +2,7 @@ import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import { printCodeFrame } from "../helpers/print-code-frame"
+import * as helpers from "../helpers"
 import * as formatter from "."
 import * as events from "events"
 
@@ -40,7 +40,11 @@ export class ProgressFormatter implements formatter.Formatter {
     console.log(color.dim(args.output))
     console.log(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.error.message}\n`))
     console.log()
-    printCodeFrame(console.log, path.join(this.sourceDir, args.activity.file.platformified()), args.activity.line)
+    helpers.printCodeFrame(
+      console.log,
+      path.join(this.sourceDir, args.activity.file.platformified()),
+      args.activity.line
+    )
   }
 
   skipped() {

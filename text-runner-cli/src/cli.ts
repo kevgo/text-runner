@@ -1,9 +1,8 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import { printUserError } from "./print-user-error"
 import * as formatters from "./formatters"
 import * as config from "./configuration"
-import * as commands from "./commands/commands"
+import * as commands from "./commands"
 import * as helpers from "./helpers"
 import { UserError } from "text-runner-core"
 
@@ -31,7 +30,7 @@ async function main() {
   } catch (err) {
     errorCount += 1
     if (err instanceof UserError) {
-      printUserError(err)
+      formatters.printUserError(err)
     } else {
       console.log(err.stack)
     }

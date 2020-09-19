@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as path from "path"
-import { printCodeFrame } from "../helpers/print-code-frame"
+import * as helpers from "../helpers"
 import * as formatter from "."
 import * as events from "events"
 import * as tr from "text-runner-core"
@@ -32,7 +32,7 @@ export class DetailedFormatter implements formatter.Formatter {
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
     console.log(args.error.message)
     const filePath = path.join(this.sourceDir, args.activity.file.platformified())
-    printCodeFrame(console.log, filePath, args.activity.line)
+    helpers.printCodeFrame(console.log, filePath, args.activity.line)
   }
 
   skipped(args: tr.SkippedArgs) {

@@ -1,6 +1,6 @@
 import * as config from "../configuration"
-import { HelpCommand } from "./help"
 import * as scaffold from "./scaffold"
+import { HelpCommand } from "./help"
 import { SetupCommand } from "./setup"
 import { VersionCommand } from "./version"
 import {
@@ -26,7 +26,7 @@ export async function instantiate(
       if (!userConfig.files) {
         throw new Error("no action name given")
       }
-      return new scaffold.Command(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
+      return new scaffold.ScaffoldCommand(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
     case "setup":
       return new SetupCommand(userConfig)
     case "version":
@@ -47,9 +47,4 @@ export async function instantiate(
     default:
       throw new UserError(`unknown command: ${commandName}`)
   }
-}
-
-/** returns a list of all available commands */
-export function available(): string[] {
-  return ["debug", "dynamic", "help", "run", "unused", "scaffold", "setup", "static", "version"]
 }

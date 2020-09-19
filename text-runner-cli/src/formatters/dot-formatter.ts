@@ -3,7 +3,7 @@ import * as path from "path"
 import * as formatter from "."
 import * as events from "events"
 import * as tr from "text-runner-core"
-import { printCodeFrame } from "../helpers/print-code-frame"
+import * as helpers from "../helpers"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements formatter.Formatter {
@@ -24,7 +24,11 @@ export class DotFormatter implements formatter.Formatter {
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
     console.log(args.error.message)
-    printCodeFrame(console.log, path.join(this.sourceDir, args.activity.file.platformified()), args.activity.line)
+    helpers.printCodeFrame(
+      console.log,
+      path.join(this.sourceDir, args.activity.file.platformified()),
+      args.activity.line
+    )
   }
 
   skipped() {

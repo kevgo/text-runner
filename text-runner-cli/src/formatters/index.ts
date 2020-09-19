@@ -6,6 +6,7 @@ import { ProgressFormatter } from "./progress-formatter"
 import { SummaryFormatter } from "./summary-formatter"
 import * as events from "events"
 import * as color from "colorette"
+export { printUserError } from "./print-user-error"
 
 /** Names defines the names of all built-in formatters */
 export type Names = "detailed" | "dot" | "progress" | "silent" | "summary"

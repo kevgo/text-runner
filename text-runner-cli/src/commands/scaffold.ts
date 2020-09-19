@@ -2,17 +2,17 @@ import * as path from "path"
 import { promises as fs } from "fs"
 import * as events from "events"
 import * as tr from "text-runner-core"
-import { camelize } from "../helpers/camelize"
+import * as helpers from "../helpers"
 
 /** languages in which this Text-Runner actions can be scaffolded */
-export type Language = "js" | "ts"
+export type ScaffoldLanguage = "js" | "ts"
 
-export class Command extends events.EventEmitter implements tr.Command {
+export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
   name: string
   sourceDir: string
-  language: Language
+  language: ScaffoldLanguage
 
-  constructor(name: string, sourceDir: string, language: Language) {
+  constructor(name: string, sourceDir: string, language: ScaffoldLanguage) {
     super()
     this.name = name
     this.sourceDir = sourceDir
@@ -41,7 +41,7 @@ export class Command extends events.EventEmitter implements tr.Command {
 }
 
 function jsTemplate(filename: string) {
-  return `module.exports = function ${camelize(filename)} (action) {
+  return `module.exports = function ${helpers.camelize(filename)} (action) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")
@@ -52,7 +52,7 @@ function jsTemplate(filename: string) {
 function tsTemplate(filename: string) {
   return `import * as tr from "text-runner-core"
 
-export function ${camelize(filename)} (action: tr.ActionArgs) {
+export function ${helpers.camelize(filename)} (action: tr.ActionArgs) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")

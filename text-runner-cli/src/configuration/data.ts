@@ -1,6 +1,6 @@
 import * as tr from "text-runner-core"
 import * as formatters from "../formatters"
-import * as scaffold from "../commands/scaffold"
+import * as commands from "../commands"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,
@@ -15,7 +15,7 @@ export class Data {
   formatterName?: formatters.Names // name of the formatter to use
   online?: boolean
   publications?: tr.Publications
-  scaffoldLanguage?: scaffold.Language
+  scaffoldLanguage?: commands.ScaffoldLanguage
   sourceDir?: string // the root directory of the source code to test
   systemTmp?: boolean
   workspace?: string // path of the workspace to use

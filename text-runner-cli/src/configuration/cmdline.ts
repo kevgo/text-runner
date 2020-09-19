@@ -1,9 +1,8 @@
 import * as minimist from "minimist"
 import * as path from "path"
-import { Data } from "./data"
+import * as config from "."
 import * as tr from "text-runner-core"
-import * as scaffold from "../commands/scaffold"
-import * as commands from "../commands/commands"
+import * as commands from "../commands"
 
 /**
  * Parses the command-line options received and returns them
@@ -11,7 +10,7 @@ import * as commands from "../commands/commands"
  */
 export function parse(
   argv: string[]
-): { commandName: string; cmdLineConfig: Data; debugSubcommand?: tr.DebugSubcommand } {
+): { commandName: string; cmdLineConfig: config.Data; debugSubcommand?: tr.DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -31,7 +30,7 @@ export function parse(
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: true })
   let commandName = cliArgs._[0]
-  const cmdLineConfig = new Data({
+  const cmdLineConfig = new config.Data({
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
@@ -76,7 +75,7 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.DebugSubcommand 
   }
 }
 
-function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): scaffold.Language {
+function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): commands.ScaffoldLanguage {
   if (cliArgs.ts) {
     return "ts"
   } else {

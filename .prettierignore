@@ -4,3 +4,8 @@ shared
 text-runner-*
 textrun-*
 tools
+
+dist
+fixtures
+node_modules
+tmp

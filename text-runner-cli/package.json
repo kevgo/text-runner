@@ -21,9 +21,7 @@
   "devDependencies": {
     "@types/babel__code-frame": "7.0.1",
     "@types/cli-progress": "3.7.0",
-    "@types/cucumber": "6.0.1",
     "@types/minimist": "1.2.0",
-    "@types/mocha": "8.0.0",
     "@types/rimraf": "3.0.0",
     "@types/yamljs": "0.2.31",
     "cucumber": "6.0.5",

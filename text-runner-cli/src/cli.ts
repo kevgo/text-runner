@@ -1,6 +1,6 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import { printUserError } from "./errors/print-user-error"
+import { printUserError } from "./print-user-error"
 import {
   DebugCommand,
   DebugSubcommand,
@@ -15,12 +15,10 @@ import { ScaffoldCommand } from "./commands/scaffold"
 import { SetupCommand } from "./commands/setup"
 import { VersionCommand } from "./commands/version"
 import { StatsCollector } from "./helpers/stats-collector"
-import { loadConfiguration } from "./config/load-configuration"
 import { instantiateFormatter } from "./formatters/instantiate"
-import { parseCmdlineArgs } from "./cmdLineArgs/parse-cmdline-args"
-import { mergeConfigurations } from "./config/merge-configurations"
-import { UserProvidedConfiguration } from "./config/user-provided-configuration"
-import { convertToConfig } from "./config/convert-to-config"
+import { parseCmdlineArgs } from "./configuration/cmdline-args"
+import { CLIConfiguration } from "./configuration/cli-configuration"
+import { ConfigFileManager } from "./configuration/config-file"
 
 cliCursor.hide()
 
@@ -28,8 +26,8 @@ async function main() {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
-    const fileConfig = await loadConfiguration(cmdLineConfig)
-    const userConfig = mergeConfigurations(cmdLineConfig, fileConfig)
+    const fileConfig = await new ConfigFileManager(cmdLineConfig).load()
+    const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
     const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
     const statsCollector = new StatsCollector(command)
@@ -55,7 +53,7 @@ main()
 
 async function instantiateCommand(
   commandName: string,
-  userConfig: UserProvidedConfiguration,
+  userConfig: CLIConfiguration,
   debugSubcommand: DebugSubcommand | undefined
 ) {
   const sourceDir = userConfig.sourceDir || "."
@@ -68,11 +66,11 @@ async function instantiateCommand(
       }
       return new ScaffoldCommand(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
     case "setup":
-      return new SetupCommand(sourceDir)
+      return new SetupCommand(userConfig)
     case "version":
       return new VersionCommand()
   }
-  const trConfig = convertToConfig(userConfig)
+  const trConfig = userConfig.toCoreConfig()
   switch (commandName) {
     case "debug":
       return new DebugCommand(trConfig, debugSubcommand)

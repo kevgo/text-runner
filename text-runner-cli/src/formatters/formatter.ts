@@ -6,16 +6,20 @@ import { ProgressFormatter } from "./implementations/progress-formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import * as events from "events"
 
+/** Names defines the names of all built-in formatters */
 export type Names = "detailed" | "dot" | "progress" | "silent" | "summary"
 
+/** Formatter defines the interface that Formatters must implement. */
 export interface Formatter {
   finish(args: FinishArgs): void
 }
 
+/** FinishArgs defines the arguments provided to the `finish` method. */
 export interface FinishArgs {
   stats: Stats
 }
 
+/** creates an instance of the formatter with the given name */
 export function instantiate(name: Names, sourceDir: string, emitter: events.EventEmitter): Formatter {
   switch (name) {
     case "dot":

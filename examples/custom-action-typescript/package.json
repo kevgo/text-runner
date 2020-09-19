@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "devDependencies": {
     "text-runner-cli": "4.0.3",
-    "ts-node": "8.10.2",
-    "typescript": "3.9.7"
+    "ts-node": "8.10.2"
   },
   "private": true
 }

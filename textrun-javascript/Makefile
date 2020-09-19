@@ -1,6 +1,6 @@
 build:  # builds for the current platform
 	echo textrun-javascript build ...
-	${CURDIR}/node_modules/.bin/tsc -p tsconfig.json
+	${CURDIR}/../node_modules/.bin/tsc -p tsconfig.json
 
 clean:  # Removes all build artifacts
 	echo textrun-javascript build artifact cleanup ...

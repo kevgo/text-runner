@@ -16,7 +16,7 @@ import { SetupCommand } from "./commands/setup"
 import { VersionCommand } from "./commands/version"
 import { StatsCollector } from "./helpers/stats-collector"
 import { instantiateFormatter } from "./formatters/instantiate"
-import { parseCmdlineArgs } from "./parse-cmdline-args"
+import { parseCmdlineArgs } from "./cmdline-args"
 import { Configuration } from "./user-provided-configuration"
 import { ConfigFile } from "./config-file"
 

@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { parseCmdlineArgs } from "./parse-cmdline-args"
+import { parseCmdlineArgs } from "./cmdline-args"
 
 suite("parseCmdlineArgs()", function () {
   test("with unix <node> call", function () {

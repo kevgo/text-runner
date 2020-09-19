@@ -1,34 +1,22 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import { printUserError } from "./print-user-error"
-import {
-  DebugCommand,
-  DebugSubcommand,
-  DynamicCommand,
-  RunCommand,
-  StaticCommand,
-  UnusedCommand,
-  UserError,
-} from "text-runner-core"
-import { HelpCommand } from "./commands/help"
-import { ScaffoldCommand } from "./commands/scaffold"
-import { SetupCommand } from "./commands/setup"
-import { VersionCommand } from "./commands/version"
-import { StatsCollector } from "./helpers/stats-collector"
 import { instantiateFormatter } from "./formatters/instantiate"
-import { parseCmdlineArgs } from "./configuration/cmdline-args"
-import { CLIConfiguration } from "./configuration/cli-configuration"
+import * as cmdLineArgs from "./configuration/cmdline-args"
 import * as configFile from "./configuration/config-file"
+import * as commands from "./commands/commands"
+import { StatsCollector } from "./helpers/stats-collector"
+import { UserError } from "text-runner-core"
 
 cliCursor.hide()
 
 async function main() {
   let errorCount = 0
   try {
-    const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
+    const { commandName, cmdLineConfig, debugSubcommand } = cmdLineArgs.parse(process.argv)
     const fileConfig = await configFile.load(cmdLineConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
-    const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
+    const command = await commands.instantiate(commandName, userConfig, debugSubcommand)
     const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
     const statsCollector = new StatsCollector(command)
     await command.execute()
@@ -50,39 +38,3 @@ async function main() {
   process.exit(errorCount)
 }
 main()
-
-async function instantiateCommand(
-  commandName: string,
-  userConfig: CLIConfiguration,
-  debugSubcommand: DebugSubcommand | undefined
-) {
-  const sourceDir = userConfig.sourceDir || "."
-  switch (commandName) {
-    case "help":
-      return new HelpCommand()
-    case "scaffold":
-      if (!userConfig.files) {
-        throw new Error("no action name given")
-      }
-      return new ScaffoldCommand(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
-    case "setup":
-      return new SetupCommand(userConfig)
-    case "version":
-      return new VersionCommand()
-  }
-  const trConfig = userConfig.toCoreConfig()
-  switch (commandName) {
-    case "debug":
-      return new DebugCommand(trConfig, debugSubcommand)
-    case "dynamic":
-      return new DynamicCommand(trConfig)
-    case "run":
-      return new RunCommand(trConfig)
-    case "static":
-      return new StaticCommand(trConfig)
-    case "unused":
-      return new UnusedCommand(trConfig)
-    default:
-      throw new UserError(`unknown command: ${commandName}`)
-  }
-}

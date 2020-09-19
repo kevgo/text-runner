@@ -4,14 +4,15 @@ import * as events from "events"
 import * as tr from "text-runner-core"
 import { camelize } from "../helpers/camelize"
 
-export type ScaffoldLanguage = "js" | "ts"
+/** languages in which this Text-Runner actions can be scaffolded */
+export type Language = "js" | "ts"
 
-export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
+export class Command extends events.EventEmitter implements tr.Command {
   name: string
   sourceDir: string
-  language: ScaffoldLanguage
+  language: Language
 
-  constructor(name: string, sourceDir: string, language: ScaffoldLanguage) {
+  constructor(name: string, sourceDir: string, language: Language) {
     super()
     this.name = name
     this.sourceDir = sourceDir

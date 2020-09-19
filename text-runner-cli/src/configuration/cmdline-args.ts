@@ -1,6 +1,6 @@
 import * as minimist from "minimist"
 import * as path from "path"
-import { CLIConfiguration } from "./configuration"
+import { CLIConfiguration } from "./cli-configuration"
 import * as tr from "text-runner-core"
 import { availableCommands } from "../commands/available-commands"
 import { ScaffoldLanguage } from "../commands/scaffold"

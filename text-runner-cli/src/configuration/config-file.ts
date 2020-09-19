@@ -1,4 +1,4 @@
-import { CLIConfiguration } from "./configuration"
+import { CLIConfiguration } from "./cli-configuration"
 import * as YAML from "yamljs"
 import { promises as fs } from "fs"
 import * as path from "path"

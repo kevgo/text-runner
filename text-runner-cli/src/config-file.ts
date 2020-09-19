@@ -4,27 +4,43 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-export class ConfigFile {
-  private filename: string
-  private sourceDir: string
+export class ConfigFileManager {
+  config: Configuration
 
-  constructor(sourceDir: string, filename: string) {
-    this.filename = filename
-    this.sourceDir = sourceDir
+  constructor(config: Configuration) {
+    this.config = config
   }
 
-  static async fromCli(config: Configuration) {
-    const file = new ConfigFile(config.sourceDir || ".", config.configFileName || "text-run.yml")
-    return file.load()
+  /** provides the config file content as a Configuration instance */
+  async load(): Promise<Configuration> {
+    return this.parse(await this.read())
   }
 
-  /** provides the content of the config file in the standardized format */
-  private async load(): Promise<Configuration> {
-    const filename = await this.determineConfigFilename()
-    if (!filename) {
+  /** provides the textual config file content */
+  async read(): Promise<string> {
+    if (this.config.configFileName) {
+      const configFilePath = path.join(this.config.sourceDir || ".", this.config.configFileName)
+      try {
+        const result = await fs.readFile(configFilePath, "utf8")
+        return result
+      } catch (e) {
+        throw new tr.UserError(`cannot read configuration file "${configFilePath}"`, e.message)
+      }
+    }
+    try {
+      const configFilePath = path.join(this.config.sourceDir || ".", "text-run.yml")
+      const result = await fs.readFile(configFilePath, "utf8")
+      return result
+    } catch (e) {
+      return ""
+    }
+  }
+
+  /** parses the textual config file content into a Configuration instance */
+  parse(fileContent: string): Configuration {
+    if (fileContent === "") {
       return new Configuration({})
     }
-    const fileContent = await fs.readFile(filename, "utf-8")
     const fileData = YAML.parse(fileContent)
     return new Configuration({
       regionMarker: fileData.regionMarker,
@@ -41,7 +57,7 @@ export class ConfigFile {
 
   async create() {
     await fs.writeFile(
-      path.join(this.sourceDir, "./text-run.yml"),
+      path.join(this.config.sourceDir || ".", "./text-run.yml"),
       `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.
@@ -81,24 +97,5 @@ systemTmp: false
 # whether to verify online files/links (warning: this makes tests flaky)
 online: false`
     )
-  }
-
-  private static async determineConfigFilename(sourceDir: string, filename: string | undefined): Promise<string> {
-    if (filename) {
-      const configFilePath = path.join(sourceDir || ".", filename)
-      try {
-        await fs.stat(configFilePath)
-        return configFilePath
-      } catch (e) {
-        throw new tr.UserError(`configuration file '${filename}' not found`)
-      }
-    }
-    try {
-      const configFilePath = path.join(sourceDir || ".", "text-run.yml")
-      await fs.stat(configFilePath)
-      return configFilePath
-    } catch (e) {
-      return ""
-    }
   }
 }

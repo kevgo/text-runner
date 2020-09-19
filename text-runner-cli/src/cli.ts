@@ -18,7 +18,7 @@ import { StatsCollector } from "./helpers/stats-collector"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./cmdline-args"
 import { Configuration } from "./user-provided-configuration"
-import { ConfigFile } from "./config-file"
+import { ConfigFileManager } from "./config-file"
 
 cliCursor.hide()
 
@@ -26,11 +26,7 @@ async function main() {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
-    const fileConfig = new ConfigFile(
-      cmdLineConfig.sourceDir || ".",
-      cmdLineConfig.configFileName || "text-run.yml"
-    ).load()
-    //await Configuration.fromConfigFile(await determineConfigFilename(cmdLineConfig))
+    const fileConfig = await new ConfigFileManager(cmdLineConfig).load()
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
     const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
@@ -70,7 +66,7 @@ async function instantiateCommand(
       }
       return new ScaffoldCommand(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
     case "setup":
-      return new SetupCommand(sourceDir)
+      return new SetupCommand(userConfig)
     case "version":
       return new VersionCommand()
   }

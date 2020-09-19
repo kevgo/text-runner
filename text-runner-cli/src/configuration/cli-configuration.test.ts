@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { CLIConfiguration } from "./cli-configuration"
 
-suite("Configuration", function () {
+suite("CLIConfiguration", function () {
   suite("merge", function () {
     test("empty inputs", function () {
       const config = new CLIConfiguration()

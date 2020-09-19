@@ -4,61 +4,15 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-export class ConfigFileManager {
-  cmdLineArgs: CLIConfiguration
+/** provides the config file content as a Configuration instance */
+export async function load(cmdLineArgs: CLIConfiguration): Promise<CLIConfiguration> {
+  return parse(await read(cmdLineArgs))
+}
 
-  constructor(cmdLineArgs: CLIConfiguration) {
-    this.cmdLineArgs = cmdLineArgs
-  }
-
-  /** provides the config file content as a Configuration instance */
-  async load(): Promise<CLIConfiguration> {
-    return this.parse(await this.read())
-  }
-
-  /** provides the textual config file content */
-  async read(): Promise<string> {
-    if (this.cmdLineArgs.configFileName) {
-      const configFilePath = path.join(this.cmdLineArgs.sourceDir || ".", this.cmdLineArgs.configFileName)
-      try {
-        const result = await fs.readFile(configFilePath, "utf8")
-        return result
-      } catch (e) {
-        throw new tr.UserError(`cannot read configuration file "${configFilePath}"`, e.message)
-      }
-    }
-    try {
-      const configFilePath = path.join(this.cmdLineArgs.sourceDir || ".", "text-run.yml")
-      const result = await fs.readFile(configFilePath, "utf8")
-      return result
-    } catch (e) {
-      return ""
-    }
-  }
-
-  /** parses the textual config file content into a Configuration instance */
-  parse(fileContent: string): CLIConfiguration {
-    if (fileContent === "") {
-      return new CLIConfiguration({})
-    }
-    const fileData = YAML.parse(fileContent)
-    return new CLIConfiguration({
-      regionMarker: fileData.regionMarker,
-      defaultFile: fileData.defaultFile,
-      exclude: fileData.exclude,
-      files: fileData.files,
-      formatterName: fileData.format,
-      online: fileData.online,
-      publications: fileData.publications,
-      systemTmp: fileData.systemTmp,
-      workspace: fileData.workspace,
-    })
-  }
-
-  async create() {
-    await fs.writeFile(
-      path.join(this.cmdLineArgs.sourceDir || ".", this.cmdLineArgs.configFileName || "text-run.yml"),
-      `# white-list for files to test
+export async function create(cmdLineArgs: CLIConfiguration) {
+  await fs.writeFile(
+    path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName || "text-run.yml"),
+    `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.
 # To exclude the "vendor" folder: '{,!(vendor)/**/}*.md'
@@ -96,6 +50,44 @@ systemTmp: false
 
 # whether to verify online files/links (warning: this makes tests flaky)
 online: false`
-    )
+  )
+}
+
+/** provides the textual config file content */
+export async function read(cmdLineArgs: CLIConfiguration): Promise<string> {
+  if (cmdLineArgs.configFileName) {
+    const configFilePath = path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName)
+    try {
+      const result = await fs.readFile(configFilePath, "utf8")
+      return result
+    } catch (e) {
+      throw new tr.UserError(`cannot read configuration file "${configFilePath}"`, e.message)
+    }
   }
+  try {
+    const configFilePath = path.join(cmdLineArgs.sourceDir || ".", "text-run.yml")
+    const result = await fs.readFile(configFilePath, "utf8")
+    return result
+  } catch (e) {
+    return ""
+  }
+}
+
+/** parses the textual config file content into a Configuration instance */
+function parse(fileContent: string): CLIConfiguration {
+  if (fileContent === "") {
+    return new CLIConfiguration({})
+  }
+  const fileData = YAML.parse(fileContent)
+  return new CLIConfiguration({
+    regionMarker: fileData.regionMarker,
+    defaultFile: fileData.defaultFile,
+    exclude: fileData.exclude,
+    files: fileData.files,
+    formatterName: fileData.format,
+    online: fileData.online,
+    publications: fileData.publications,
+    systemTmp: fileData.systemTmp,
+    workspace: fileData.workspace,
+  })
 }

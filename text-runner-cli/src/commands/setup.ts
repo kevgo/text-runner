@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as events from "events"
 import * as tr from "text-runner-core"
-import { ConfigFileManager } from "../configuration/config-file"
+import * as configFile from "../configuration/config-file"
 import { CLIConfiguration } from "../configuration/cli-configuration"
 
 export class SetupCommand extends events.EventEmitter implements tr.Command {
@@ -13,7 +13,7 @@ export class SetupCommand extends events.EventEmitter implements tr.Command {
   }
 
   async execute() {
-    await new ConfigFileManager(this.config).create()
+    await configFile.create(this.config)
     this.emit(tr.CommandEvent.output, `Created configuration file ${color.cyan("text-run.yml")} with default values`)
   }
 }

@@ -2,12 +2,11 @@ import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import { printCodeFrame } from "../../helpers/print-code-frame"
-import { printSummary } from "../print-summary"
-import { FinishArgs, Formatter } from ".."
+import { printCodeFrame } from "../helpers/print-code-frame"
+import * as formatter from "."
 import * as events from "events"
 
-export class ProgressFormatter implements Formatter {
+export class ProgressFormatter implements formatter.Formatter {
   private readonly sourceDir: string
   private readonly progressBar: progress.Bar
 
@@ -56,7 +55,7 @@ export class ProgressFormatter implements Formatter {
     this.progressBar.increment(1)
   }
 
-  finish(args: FinishArgs) {
-    printSummary(args.stats)
+  finish(args: formatter.FinishArgs) {
+    formatter.printSummary(args.stats)
   }
 }

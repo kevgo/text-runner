@@ -1,13 +1,12 @@
 import * as color from "colorette"
 import * as path from "path"
-import { printCodeFrame } from "../../helpers/print-code-frame"
-import { printSummary } from "../print-summary"
-import { FinishArgs, Formatter } from ".."
+import { printCodeFrame } from "../helpers/print-code-frame"
+import * as formatter from "."
 import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** A formatter that prints output and step names */
-export class DetailedFormatter implements Formatter {
+export class DetailedFormatter implements formatter.Formatter {
   private readonly sourceDir: string
 
   constructor(sourceDir: string, emitter: events.EventEmitter) {
@@ -49,7 +48,7 @@ export class DetailedFormatter implements Formatter {
     console.log(color.magenta(args.message))
   }
 
-  finish(args: FinishArgs) {
-    printSummary(args.stats)
+  finish(args: formatter.FinishArgs) {
+    formatter.printSummary(args.stats)
   }
 }

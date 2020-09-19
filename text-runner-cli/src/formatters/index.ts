@@ -1,10 +1,11 @@
 import { Stats } from "../helpers/stats-collector"
 import * as tr from "text-runner-core"
-import { DetailedFormatter } from "./implementations/detailed-formatter"
-import { DotFormatter } from "./implementations/dot-formatter"
-import { ProgressFormatter } from "./implementations/progress-formatter"
-import { SummaryFormatter } from "./implementations/summary-formatter"
+import { DetailedFormatter } from "./detailed-formatter"
+import { DotFormatter } from "./dot-formatter"
+import { ProgressFormatter } from "./progress-formatter"
+import { SummaryFormatter } from "./summary-formatter"
 import * as events from "events"
+import * as color from "colorette"
 
 /** Names defines the names of all built-in formatters */
 export type Names = "detailed" | "dot" | "progress" | "silent" | "summary"
@@ -33,4 +34,18 @@ export function instantiate(name: Names, sourceDir: string, emitter: events.Even
     default:
       throw new tr.UserError(`Unknown formatter: ${name}`, "Available formatters are: detailed, dot, progress, summary")
   }
+}
+
+export function printSummary(stats: Stats) {
+  let text = "\n"
+  let colorFn: color.Style
+  if (stats.errorCount === 0) {
+    colorFn = color.green
+    text += color.green("Success! ")
+  } else {
+    colorFn = color.red
+    text += color.red(`${stats.errorCount} errors, `)
+  }
+  text += colorFn(`${stats.activityCount} activities, ${stats.duration}`)
+  console.log(color.bold(text))
 }

@@ -1,10 +1,10 @@
 import { assert } from "chai"
-import { DetailedFormatter } from "./implementations/detailed-formatter"
-import { DotFormatter } from "./implementations/dot-formatter"
-import * as formatter from "."
-import { SummaryFormatter } from "./implementations/summary-formatter"
 import * as events from "events"
-import { ProgressFormatter } from "./implementations/progress-formatter"
+import * as formatter from "."
+import { DetailedFormatter } from "./detailed-formatter"
+import { DotFormatter } from "./dot-formatter"
+import { SummaryFormatter } from "./summary-formatter"
+import { ProgressFormatter } from "./progress-formatter"
 
 suite("instantiateFormatter()", function () {
   const emitter = new events.EventEmitter()

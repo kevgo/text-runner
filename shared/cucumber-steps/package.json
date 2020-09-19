@@ -12,8 +12,7 @@
     "strip-ansi": "6.0.0",
     "text-runner-core": "4.0.3",
     "tmp-promise": "3.0.2",
-    "tslint": "6.1.2",
-    "typescript": "3.9.7"
+    "tslint": "6.1.2"
   },
   "license": "ISC",
   "private": true

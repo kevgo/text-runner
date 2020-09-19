@@ -1,6 +1,6 @@
 build:  # builds for the current platform
 	echo text-runner-cli build ...
-	${CURDIR}/node_modules/.bin/tsc -p .
+	${CURDIR}/../node_modules/.bin/tsc -p .
 
 clean:  # Removes all build artifacts
 	echo text-runner-cli artifact cleanup ...

@@ -14,7 +14,6 @@
     "text-runner-cli": "4.0.3",
     "textrun-extension": "0.0.0",
     "textrun-npm": "0.0.0",
-    "tslint": "6.1.2",
-    "typescript": "3.9.7"
+    "tslint": "6.1.2"
   }
 }

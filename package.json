@@ -19,6 +19,7 @@
     "textrun-workspace"
   ],
   "devDependencies": {
-    "lerna": "3.22.1"
+    "lerna": "3.22.1",
+    "typescript": "3.9.7"
   }
 }

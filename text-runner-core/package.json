@@ -37,7 +37,6 @@
     "@types/rechoir": "0.6.1",
     "chai": "4.2.0",
     "mocha": "8.0.1",
-    "prettier": "2.0.5",
     "tslint": "6.1.2"
   },
   "files": [

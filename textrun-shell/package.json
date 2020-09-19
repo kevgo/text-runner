@@ -12,7 +12,6 @@
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
-    "prettier": "2.0.5",
     "shared-cucumber-steps": "0.0.0",
     "text-runner-cli": "4.0.3",
     "textrun-action": "0.0.0",

@@ -1,4 +1,4 @@
-import { Stats } from "../helpers/stats-collector"
+import * as helpers from "../helpers"
 import * as tr from "text-runner-core"
 import { DetailedFormatter } from "./detailed-formatter"
 import { DotFormatter } from "./dot-formatter"
@@ -17,7 +17,7 @@ export interface Formatter {
 
 /** FinishArgs defines the arguments provided to the `finish` method. */
 export interface FinishArgs {
-  stats: Stats
+  stats: helpers.stats.Data
 }
 
 /** creates an instance of the formatter with the given name */
@@ -36,7 +36,7 @@ export function instantiate(name: Names, sourceDir: string, emitter: events.Even
   }
 }
 
-export function printSummary(stats: Stats) {
+export function printSummary(stats: helpers.stats.Data) {
   let text = "\n"
   let colorFn: color.Style
   if (stats.errorCount === 0) {

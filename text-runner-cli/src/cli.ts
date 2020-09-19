@@ -4,7 +4,7 @@ import { printUserError } from "./print-user-error"
 import * as formatters from "./formatters"
 import * as config from "./configuration"
 import * as commands from "./commands/commands"
-import { StatsCollector } from "./helpers/stats-collector"
+import * as helpers from "./helpers"
 import { UserError } from "text-runner-core"
 
 cliCursor.hide()
@@ -21,7 +21,7 @@ async function main() {
       userConfig.sourceDir || ".",
       command
     )
-    const statsCollector = new StatsCollector(command)
+    const statsCollector = new helpers.stats.Collector(command)
     await command.execute()
     const stats = statsCollector.stats()
     if (["dynamic", "run", "static"].includes(commandName)) {

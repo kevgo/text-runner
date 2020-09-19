@@ -17,7 +17,7 @@ import { VersionCommand } from "./commands/version"
 import { StatsCollector } from "./helpers/stats-collector"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./configuration/cmdline-args"
-import { Configuration } from "./configuration/configuration"
+import { CLIConfiguration } from "./configuration/configuration"
 import { ConfigFileManager } from "./configuration/config-file"
 
 cliCursor.hide()
@@ -53,7 +53,7 @@ main()
 
 async function instantiateCommand(
   commandName: string,
-  userConfig: Configuration,
+  userConfig: CLIConfiguration,
   debugSubcommand: DebugSubcommand | undefined
 ) {
   const sourceDir = userConfig.sourceDir || "."

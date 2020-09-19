@@ -1,6 +1,6 @@
 import * as minimist from "minimist"
 import * as path from "path"
-import { Configuration } from "./configuration"
+import { CLIConfiguration } from "./configuration"
 import * as tr from "text-runner-core"
 import { availableCommands } from "../commands/available-commands"
 import { ScaffoldLanguage } from "../commands/scaffold"
@@ -13,7 +13,7 @@ import { ScaffoldLanguage } from "../commands/scaffold"
  */
 export function parseCmdlineArgs(
   argv: string[]
-): { commandName: string; cmdLineConfig: Configuration; debugSubcommand?: tr.DebugSubcommand } {
+): { commandName: string; cmdLineConfig: CLIConfiguration; debugSubcommand?: tr.DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -33,7 +33,7 @@ export function parseCmdlineArgs(
   // parse argv into the result
   const cliArgs = minimist(argv, { boolean: true })
   let commandName = cliArgs._[0]
-  const cmdLineConfig = new Configuration({
+  const cmdLineConfig = new CLIConfiguration({
     configFileName: cliArgs.config,
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"

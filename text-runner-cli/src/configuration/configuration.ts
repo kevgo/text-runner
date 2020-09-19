@@ -2,7 +2,7 @@ import * as tr from "text-runner-core"
 import { FormatterName } from "../formatters/formatter"
 import { ScaffoldLanguage } from "../commands/scaffold"
 
-export interface ConfigData {
+export interface CLIConfigData {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
@@ -21,7 +21,7 @@ export interface ConfigData {
  * UserProvidedConfiguration describes arguments provided by the user,
  * either via command line or via config file.
  */
-export class Configuration implements ConfigData {
+export class CLIConfiguration implements CLIConfigData {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
@@ -35,7 +35,7 @@ export class Configuration implements ConfigData {
   systemTmp?: boolean
   workspace?: string // path of the workspace to use
 
-  constructor(data: ConfigData = {}) {
+  constructor(data: CLIConfigData = {}) {
     for (const [key, value] of Object.entries(data)) {
       // @ts-ignore
       this[key] = value
@@ -46,8 +46,8 @@ export class Configuration implements ConfigData {
    * Returns a new UserProvidedConfiguration that contains this config
    * with the fields from other overwriting the fields of this one.
    */
-  merge(other: Configuration): Configuration {
-    const result = new Configuration()
+  merge(other: CLIConfiguration): CLIConfiguration {
+    const result = new CLIConfiguration()
     for (const [key, value] of Object.entries(this)) {
       if (value != null) {
         // @ts-ignore

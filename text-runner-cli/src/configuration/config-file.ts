@@ -1,18 +1,18 @@
-import { Configuration } from "./configuration"
+import { CLIConfiguration } from "./configuration"
 import * as YAML from "yamljs"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
 export class ConfigFileManager {
-  config: Configuration
+  config: CLIConfiguration
 
-  constructor(config: Configuration) {
+  constructor(config: CLIConfiguration) {
     this.config = config
   }
 
   /** provides the config file content as a Configuration instance */
-  async load(): Promise<Configuration> {
+  async load(): Promise<CLIConfiguration> {
     return this.parse(await this.read())
   }
 
@@ -37,12 +37,12 @@ export class ConfigFileManager {
   }
 
   /** parses the textual config file content into a Configuration instance */
-  parse(fileContent: string): Configuration {
+  parse(fileContent: string): CLIConfiguration {
     if (fileContent === "") {
-      return new Configuration({})
+      return new CLIConfiguration({})
     }
     const fileData = YAML.parse(fileContent)
-    return new Configuration({
+    return new CLIConfiguration({
       regionMarker: fileData.regionMarker,
       defaultFile: fileData.defaultFile,
       exclude: fileData.exclude,

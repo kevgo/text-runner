@@ -1,4 +1,4 @@
-import { CLIConfiguration } from "../configuration/cli-configuration"
+import * as config from "../configuration"
 import { HelpCommand } from "./help"
 import * as scaffold from "./scaffold"
 import { SetupCommand } from "./setup"
@@ -15,7 +15,7 @@ import {
 
 export async function instantiate(
   commandName: string,
-  userConfig: CLIConfiguration,
+  userConfig: config.Data,
   debugSubcommand: DebugSubcommand | undefined
 ) {
   const sourceDir = userConfig.sourceDir || "."

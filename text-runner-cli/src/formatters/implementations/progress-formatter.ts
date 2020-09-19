@@ -4,7 +4,7 @@ import * as path from "path"
 import * as tr from "text-runner-core"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
-import { FinishArgs, Formatter } from "../formatter"
+import { FinishArgs, Formatter } from ".."
 import * as events from "events"
 
 export class ProgressFormatter implements Formatter {

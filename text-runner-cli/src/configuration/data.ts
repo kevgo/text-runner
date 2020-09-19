@@ -1,12 +1,12 @@
 import * as tr from "text-runner-core"
-import * as formatters from "../formatters/formatter"
+import * as formatters from "../formatters"
 import * as scaffold from "../commands/scaffold"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,
  * either via command line or via config file.
  */
-export class CLIConfiguration {
+export class Data {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
@@ -20,7 +20,7 @@ export class CLIConfiguration {
   systemTmp?: boolean
   workspace?: string // path of the workspace to use
 
-  constructor(data: Partial<CLIConfiguration> = {}) {
+  constructor(data: Partial<Data> = {}) {
     for (const [key, value] of Object.entries(data)) {
       // @ts-ignore
       this[key] = value
@@ -31,8 +31,8 @@ export class CLIConfiguration {
    * Returns a new UserProvidedConfiguration that contains this config
    * with the fields from other overwriting the fields of this one.
    */
-  merge(other: CLIConfiguration): CLIConfiguration {
-    const result = new CLIConfiguration()
+  merge(other: Data): Data {
+    const result = new Data()
     for (const [key, value] of Object.entries(this)) {
       if (value != null) {
         // @ts-ignore

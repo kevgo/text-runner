@@ -1,9 +1,8 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import { printUserError } from "./print-user-error"
-import * as formatters from "./formatters/formatter"
-import * as cmdLineArgs from "./configuration/cmdline-args"
-import * as configFile from "./configuration/config-file"
+import * as formatters from "./formatters"
+import * as config from "./configuration"
 import * as commands from "./commands/commands"
 import { StatsCollector } from "./helpers/stats-collector"
 import { UserError } from "text-runner-core"
@@ -13,8 +12,8 @@ cliCursor.hide()
 async function main() {
   let errorCount = 0
   try {
-    const { commandName, cmdLineConfig, debugSubcommand } = cmdLineArgs.parse(process.argv)
-    const fileConfig = await configFile.load(cmdLineConfig)
+    const { commandName, cmdLineConfig, debugSubcommand } = config.cmdLine.parse(process.argv)
+    const fileConfig = await config.file.load(cmdLineConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await commands.instantiate(commandName, userConfig, debugSubcommand)
     const formatter = formatters.instantiate(

@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
-import * as formatter from "./formatter"
+import * as formatter from "."
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import * as events from "events"
 import { ProgressFormatter } from "./implementations/progress-formatter"

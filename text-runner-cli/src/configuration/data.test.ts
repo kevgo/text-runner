@@ -1,29 +1,29 @@
 import { assert } from "chai"
-import { CLIConfiguration } from "./cli-configuration"
+import { Data } from "./data"
 
 suite("CLIConfiguration", function () {
   suite("merge", function () {
     test("empty inputs", function () {
-      const config = new CLIConfiguration()
-      const have = config.merge(new CLIConfiguration())
-      const want = new CLIConfiguration()
+      const config = new Data()
+      const have = config.merge(new Data())
+      const want = new Data()
       assert.deepEqual(have, want)
     })
 
     test("userConfig overrides fileConfig", function () {
-      const config = new CLIConfiguration({
+      const config = new Data({
         formatterName: "dot",
         files: "**/*.md",
         online: true,
       })
-      const other = new CLIConfiguration({
+      const other = new Data({
         files: "1.md",
         online: false,
       })
       const result = config.merge(other)
       assert.deepEqual(
         result,
-        new CLIConfiguration({
+        new Data({
           formatterName: "dot",
           files: "1.md",
           online: false,
@@ -33,7 +33,7 @@ suite("CLIConfiguration", function () {
   })
 
   test("toConfig", function () {
-    const userConfig = new CLIConfiguration({
+    const userConfig = new Data({
       files: "1.md",
       regionMarker: "foo",
     })

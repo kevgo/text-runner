@@ -2,7 +2,7 @@ import * as color from "colorette"
 import * as path from "path"
 import { printCodeFrame } from "../../helpers/print-code-frame"
 import { printSummary } from "../print-summary"
-import { FinishArgs, Formatter } from "../formatter"
+import { FinishArgs, Formatter } from ".."
 import * as events from "events"
 import * as tr from "text-runner-core"
 

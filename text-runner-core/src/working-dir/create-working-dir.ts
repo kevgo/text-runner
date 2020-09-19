@@ -12,9 +12,7 @@ export async function createWorkspace(config: Configuration): Promise<string> {
 }
 
 async function getWorkspacePath(config: Configuration): Promise<string> {
-  if (typeof config.systemTmp === "string") {
-    return config.systemTmp
-  } else if (config.systemTmp === false) {
+  if (config.systemTmp === false) {
     return path.join(config.sourceDir, "tmp")
   } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()

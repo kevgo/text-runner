@@ -18,7 +18,7 @@ import { StatsCollector } from "./helpers/stats-collector"
 import { instantiateFormatter } from "./formatters/instantiate"
 import { parseCmdlineArgs } from "./parse-cmdline-args"
 import { Configuration } from "./user-provided-configuration"
-import { determineConfigFilename } from "./config-file/determine-config-filename"
+import { ConfigFile } from "./config-file"
 
 cliCursor.hide()
 
@@ -26,7 +26,11 @@ async function main() {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = parseCmdlineArgs(process.argv)
-    const fileConfig = await Configuration.fromConfigFile(await determineConfigFilename(cmdLineConfig))
+    const fileConfig = new ConfigFile(
+      cmdLineConfig.sourceDir || ".",
+      cmdLineConfig.configFileName || "text-run.yml"
+    ).load()
+    //await Configuration.fromConfigFile(await determineConfigFilename(cmdLineConfig))
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await instantiateCommand(commandName, userConfig, debugSubcommand)
     const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)

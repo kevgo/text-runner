@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import { DetailedFormatter } from "./implementations/detailed-formatter"
 import { DotFormatter } from "./implementations/dot-formatter"
-import { instantiateFormatter } from "./instantiate"
+import * as formatter from "./formatter"
 import { SummaryFormatter } from "./implementations/summary-formatter"
 import * as events from "events"
 import { ProgressFormatter } from "./implementations/progress-formatter"
@@ -9,30 +9,30 @@ import { ProgressFormatter } from "./implementations/progress-formatter"
 suite("instantiateFormatter()", function () {
   const emitter = new events.EventEmitter()
   test("request detailed formatter", function () {
-    const formatter = instantiateFormatter("detailed", ".", emitter)
-    assert.instanceOf(formatter, DetailedFormatter)
+    const have = formatter.instantiate("detailed", ".", emitter)
+    assert.instanceOf(have, DetailedFormatter)
   })
 
   test("request dot formatter", function () {
-    const formatter = instantiateFormatter("dot", ".", emitter)
-    assert.instanceOf(formatter, DotFormatter)
+    const have = formatter.instantiate("dot", ".", emitter)
+    assert.instanceOf(have, DotFormatter)
   })
 
   test("request progress formatter", function () {
-    const formatter = instantiateFormatter("progress", ".", emitter)
-    assert.instanceOf(formatter, ProgressFormatter)
+    const have = formatter.instantiate("progress", ".", emitter)
+    assert.instanceOf(have, ProgressFormatter)
   })
 
   test("request summary formatter", function () {
-    const formatter = instantiateFormatter("summary", ".", emitter)
-    assert.instanceOf(formatter, SummaryFormatter)
+    const have = formatter.instantiate("summary", ".", emitter)
+    assert.instanceOf(have, SummaryFormatter)
   })
 
   test("request unknown formatter", function () {
     let err = null
     try {
       // @ts-ignore
-      instantiateFormatter("zonk", ".", emitter)
+      formatter.instantiate("zonk", ".", emitter)
     } catch (e) {
       err = e
     }

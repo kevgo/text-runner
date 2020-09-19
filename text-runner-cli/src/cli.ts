@@ -1,7 +1,7 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import { printUserError } from "./print-user-error"
-import { instantiateFormatter } from "./formatters/instantiate"
+import * as formatters from "./formatters/formatter"
 import * as cmdLineArgs from "./configuration/cmdline-args"
 import * as configFile from "./configuration/config-file"
 import * as commands from "./commands/commands"
@@ -17,7 +17,11 @@ async function main() {
     const fileConfig = await configFile.load(cmdLineConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = await commands.instantiate(commandName, userConfig, debugSubcommand)
-    const formatter = instantiateFormatter(userConfig.formatterName || "detailed", userConfig.sourceDir || ".", command)
+    const formatter = formatters.instantiate(
+      userConfig.formatterName || "detailed",
+      userConfig.sourceDir || ".",
+      command
+    )
     const statsCollector = new StatsCollector(command)
     await command.execute()
     const stats = statsCollector.stats()

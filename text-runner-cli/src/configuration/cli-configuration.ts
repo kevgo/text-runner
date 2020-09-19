@@ -1,6 +1,6 @@
 import * as tr from "text-runner-core"
-import { FormatterName } from "../formatters/formatter"
-import { ScaffoldLanguage } from "../commands/scaffold"
+import * as formatters from "../formatters/formatter"
+import * as scaffold from "../commands/scaffold"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,
@@ -12,10 +12,10 @@ export class CLIConfiguration {
   defaultFile?: string
   exclude?: string | string[]
   files?: string // files to test
-  formatterName?: FormatterName // name of the formatter to use
+  formatterName?: formatters.Names // name of the formatter to use
   online?: boolean
   publications?: tr.Publications
-  scaffoldLanguage?: ScaffoldLanguage
+  scaffoldLanguage?: scaffold.Language
   sourceDir?: string // the root directory of the source code to test
   systemTmp?: boolean
   workspace?: string // path of the workspace to use

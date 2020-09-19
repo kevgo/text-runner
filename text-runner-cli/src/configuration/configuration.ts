@@ -1,6 +1,6 @@
 import * as tr from "text-runner-core"
-import { FormatterName } from "./formatters/formatter"
-import { ScaffoldLanguage } from "./commands/scaffold"
+import { FormatterName } from "../formatters/formatter"
+import { ScaffoldLanguage } from "../commands/scaffold"
 
 export interface ConfigData {
   regionMarker?: string

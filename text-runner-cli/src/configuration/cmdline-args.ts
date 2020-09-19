@@ -1,9 +1,9 @@
 import * as minimist from "minimist"
 import * as path from "path"
-import { Configuration } from "./user-provided-configuration"
+import { Configuration } from "./configuration"
 import * as tr from "text-runner-core"
-import { availableCommands } from "./commands/available-commands"
-import { ScaffoldLanguage } from "./commands/scaffold"
+import { availableCommands } from "../commands/available-commands"
+import { ScaffoldLanguage } from "../commands/scaffold"
 
 /**
  * Parses the command-line options received

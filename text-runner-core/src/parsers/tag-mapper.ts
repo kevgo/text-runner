@@ -57,7 +57,7 @@ export class TagMapper {
   }
 
   /** Returns the opening MarkdownIt type for the given HTML tag. */
-  openingTypeForTag(tagName: AstNodeTag, attributes: AstNodeAttributes) {
+  openingTypeForTag(tagName: AstNodeTag, attributes: AstNodeAttributes): AstNodeType {
     return this.typeForTag(tagName.replace(/^\//, "") as AstNodeTag, attributes)
   }
 

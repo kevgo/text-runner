@@ -10,7 +10,6 @@
     "cli-cursor": "3.1.0",
     "cli-progress": "3.8.2",
     "colorette": "1.2.1",
-    "delay": "4.4.0",
     "end-child-processes": "1.0.1",
     "minimist": "1.2.5",
     "rimraf": "3.0.2",

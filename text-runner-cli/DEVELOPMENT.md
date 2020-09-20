@@ -8,7 +8,7 @@ set of documents. There are several CLI executables to start TextRunner:
 - [bin/text-run](bin/text-run) for unix-like systems and macOS
 - [bin/text-run.cmd](bin/text-run.cmd) for Windows
 
-These CLI executables call the [cli.ts](src/cli.ts) CLI module. The CLI
+These CLI executables call the [index.ts](src/index.ts) CLI module. The CLI
 subsystem parses the command-line arguments, loads the configuration file, and
 calls TextRunner's [JavaScript API](../text-runner-core/).
 

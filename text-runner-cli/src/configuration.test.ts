@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import * as configuration from "."
+import * as configuration from "./configuration"
 
 suite("CLIConfiguration", function () {
   suite("merge", function () {

@@ -23,7 +23,7 @@ export function parse(
     argv.splice(0, 1)
   }
   // remove optional CLI parameter
-  if (unixBasename === "cli.js" || winBasename === "cli.js") {
+  if (unixBasename === "index.js" || winBasename === "index.js") {
     argv.splice(0, 1)
   }
 

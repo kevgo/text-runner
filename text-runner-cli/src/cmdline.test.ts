@@ -15,7 +15,7 @@ suite("parseCmdlineArgs()", function () {
   test("with windows <node> call", function () {
     const have = cmdLine.parse([
       "C:\\Program Files (x86)\\nodejs\\node.exe",
-      "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\cli.js",
+      "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\index.js",
       "run",
     ])
     assert.equal(have.commandName, "run")

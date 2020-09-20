@@ -1,1 +1,0 @@
-export { Data } from "./data"

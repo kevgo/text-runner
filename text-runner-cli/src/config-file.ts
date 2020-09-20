@@ -1,4 +1,4 @@
-import * as config from "./configuration/data"
+import * as config from "./configuration"
 import * as YAML from "yamljs"
 import { promises as fs } from "fs"
 import * as path from "path"

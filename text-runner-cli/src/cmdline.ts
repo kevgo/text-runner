@@ -1,8 +1,8 @@
 import * as minimist from "minimist"
 import * as path from "path"
-import * as config from "."
+import * as config from "./configuration"
 import * as tr from "text-runner-core"
-import * as commands from "../commands"
+import * as commands from "./commands"
 
 /**
  * Parses the command-line options received and returns them

@@ -1,9 +1,10 @@
 import { assert } from "chai"
 // TODO: replace with setTimeout and remove from package.json
-import delay from "delay"
 import * as helpers from "."
 import * as events from "events"
 import * as tr from "text-runner-core"
+const util = require("util")
+const delay = util.promisify(setTimeout)
 
 suite("StatsCollector", function () {
   test("counting activities", function () {

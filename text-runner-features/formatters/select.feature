@@ -1,7 +1,7 @@
 @cli
 Feature: selecting formatter via the config file
 
-  - formatters are instantiated outside of the API, see cli.ts for an example
+  - formatters are instantiated outside of the API, see index.ts for an example
 
   Background:
     Given the source code contains a file "1.md" with content:

@@ -2,12 +2,11 @@ import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import { printCodeFrame } from "../../helpers/print-code-frame"
-import { printSummary } from "../print-summary"
-import { FinishArgs, Formatter } from "../formatter"
+import * as helpers from "../helpers"
+import * as formatter from "."
 import * as events from "events"
 
-export class ProgressFormatter implements Formatter {
+export class ProgressFormatter implements formatter.Formatter {
   private readonly sourceDir: string
   private readonly progressBar: progress.Bar
 
@@ -41,7 +40,11 @@ export class ProgressFormatter implements Formatter {
     console.log(color.dim(args.output))
     console.log(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.error.message}\n`))
     console.log()
-    printCodeFrame(console.log, path.join(this.sourceDir, args.activity.file.platformified()), args.activity.line)
+    helpers.printCodeFrame(
+      console.log,
+      path.join(this.sourceDir, args.activity.file.platformified()),
+      args.activity.line
+    )
   }
 
   skipped() {
@@ -56,7 +59,7 @@ export class ProgressFormatter implements Formatter {
     this.progressBar.increment(1)
   }
 
-  finish(args: FinishArgs) {
-    printSummary(args.stats)
+  finish(args: formatter.FinishArgs) {
+    formatter.printSummary(args.stats)
   }
 }

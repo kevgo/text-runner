@@ -1,7 +1,7 @@
 import * as color from "colorette"
-import { Stats } from "../helpers/stats-collector"
+import * as helpers from "../helpers"
 
-export function printSummary(stats: Stats) {
+export function printSummary(stats: helpers.Statistics) {
   let text = "\n"
   let colorFn: color.Style
   if (stats.errorCount === 0) {

@@ -1,5 +1,5 @@
 import { strict as assert } from "assert"
-import { camelize } from "./camelize"
+import * as helpers from "."
 
 suite("camelize", function () {
   const tests = {
@@ -9,7 +9,7 @@ suite("camelize", function () {
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {
-      assert.equal(camelize(give), want)
+      assert.equal(helpers.camelize(give), want)
     })
   }
 })

@@ -1,12 +1,17 @@
 import * as tr from "text-runner-core"
-import { DetailedFormatter } from "./implementations/detailed-formatter"
-import { DotFormatter } from "./implementations/dot-formatter"
-import { ProgressFormatter } from "./implementations/progress-formatter"
-import { SummaryFormatter } from "./implementations/summary-formatter"
-import { Formatter, FormatterName } from "./formatter"
+import { DetailedFormatter } from "./detailed-formatter"
+import { DotFormatter } from "./dot-formatter"
+import { ProgressFormatter } from "./progress-formatter"
+import { SummaryFormatter } from "./summary-formatter"
 import * as events from "events"
+import * as formatters from "."
 
-export function instantiateFormatter(name: FormatterName, sourceDir: string, emitter: events.EventEmitter): Formatter {
+/** creates an instance of the formatter with the given name */
+export function instantiate(
+  name: formatters.Names,
+  sourceDir: string,
+  emitter: events.EventEmitter
+): formatters.Formatter {
   switch (name) {
     case "dot":
       return new DotFormatter(sourceDir, emitter)

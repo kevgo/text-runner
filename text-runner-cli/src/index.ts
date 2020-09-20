@@ -21,7 +21,7 @@ async function main() {
       userConfig.sourceDir || ".",
       command
     )
-    const statsCollector = new helpers.stats.Collector(command)
+    const statsCollector = new helpers.StatsCollector(command)
     await command.execute()
     const stats = statsCollector.stats()
     if (["dynamic", "run", "static"].includes(commandName)) {

@@ -14,5 +14,5 @@ export interface Formatter {
 
 /** FinishArgs defines the arguments provided to the `finish` method. */
 export interface FinishArgs {
-  stats: helpers.stats.Data
+  stats: helpers.Statistics
 }

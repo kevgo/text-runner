@@ -3,7 +3,7 @@ import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
-export interface Data {
+export interface Statistics {
   activityCount: number
   duration: string
   errorCount: number
@@ -12,7 +12,7 @@ export interface Data {
 }
 
 /** StatsCollector provides statistics about the Text-Runner command it observes. */
-export class Collector {
+export class StatsCollector {
   errorCount: number
   skipCount: number
   successCount: number
@@ -28,7 +28,7 @@ export class Collector {
     emitter.on(tr.CommandEvent.success, this.onSuccess.bind(this))
   }
 
-  stats(): Data {
+  stats(): Statistics {
     return {
       activityCount: this.errorCount + this.skipCount + this.successCount,
       duration: this.stopWatch.duration(),

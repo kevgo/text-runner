@@ -9,9 +9,9 @@ import { ClosingTagParser } from "./helpers/closing-tag-parser"
 import { OpenNodeTracker } from "./helpers/open-node-tracker"
 import { UserError } from "../../errors/user-error"
 
-type MarkdownItNode = any
-type MarkdownItAst = MarkdownItNode[]
-type MarkdownItNodeAttrs = { [key: string]: string }
+export type MarkdownItNode = any
+export type MarkdownItAst = MarkdownItNode[]
+export type MarkdownItNodeAttrs = { [key: string]: string }
 
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MarkdownParser {

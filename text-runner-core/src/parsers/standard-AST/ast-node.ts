@@ -36,6 +36,8 @@ export type AstNodeType =
   | "linebreak"
   | "link_open"
   | "link_close"
+  | "paragraph_open"
+  | "paragraph_close"
   | "text" // text node
 
 /** the HTML tags */

@@ -20,6 +20,7 @@ suite("MdParser.parseFile()", function () {
           expected.push(AstNode.scaffold(expectedNodeData))
         }
         const actual = await parseMarkdownFiles([new AbsoluteFilePath("input.md")], testDirPath)
+        console.log(actual)
         assert.deepEqual(actual[0], expected)
       })
     }

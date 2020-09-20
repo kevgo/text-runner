@@ -26,16 +26,19 @@ export class HTMLParser {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true,
     })
+    if (!instanceOfDefaultTreeDocument(htmlAst)) {
+      throw new Error("expected parse5.DefaultTreeDocument instance")
+    }
     return this.standardizeDocument(htmlAst, file, startingLine)
   }
 
   /** returns whether the given HTML node is an empty text node */
-  private isEmptyTextNode(node: any): boolean {
-    return node.nodeName === "#text" && node.value.trim() === ""
+  private isEmptyTextNode(node: parse5.DefaultTreeNode): boolean {
+    return instanceOfDefaultTreeTextNode(node) && node.value.trim() === ""
   }
 
   /** returns the subtree of the given HTML AST whose root node has the given name */
-  private findChildWithName(node: any, name: string): any {
+  private findChildWithName(node: parse5.DefaultTreeParentNode, name: string): parse5.DefaultTreeNode {
     for (const childNode of node.childNodes) {
       if (childNode.nodeName === name) {
         return childNode
@@ -44,13 +47,33 @@ export class HTMLParser {
     throw new Error(`child node '${name}' not found in AST: ${util.inspect(node)}`)
   }
 
+  private findBodyNode(node: parse5.DefaultTreeParentNode): parse5.DefaultTreeParentNode {
+    const result = this.findChildWithName(node, "body")
+    if (!instanceOfParentTreeNode(result)) {
+      throw new Error("Expected parent tree node")
+    }
+    return result
+  }
+
+  private findHTMLNode(node: parse5.DefaultTreeDocument): parse5.DefaultTreeParentNode {
+    const result = this.findChildWithName(node, "html")
+    if (!instanceOfParentTreeNode(result)) {
+      throw new Error("Expected parent tree node")
+    }
+    return result
+  }
+
   /**
    * converts the given HTML AST for an entire HTML document into the standard AST
    */
-  private standardizeDocument(documentAst: any, file: AbsoluteFilePath, startingLine: number = 1): AstNodeList {
+  private standardizeDocument(
+    documentAst: parse5.DefaultTreeDocument,
+    file: AbsoluteFilePath,
+    startingLine = 1
+  ): AstNodeList {
     const result = new AstNodeList()
-    const htmlNode = this.findChildWithName(documentAst, "html")
-    const bodyNode = this.findChildWithName(htmlNode, "body")
+    const htmlNode = this.findHTMLNode(documentAst)
+    const bodyNode = this.findBodyNode(htmlNode)
     for (const childNode of bodyNode.childNodes) {
       result.push(...this.standardizeNode(childNode, file, startingLine))
     }
@@ -159,4 +182,16 @@ export class HTMLParser {
     }
     return result
   }
+}
+
+function instanceOfDefaultTreeDocument(object: any): object is parse5.DefaultTreeDocument {
+  return "childNodes" in object
+}
+
+function instanceOfDefaultTreeTextNode(object: any): object is parse5.DefaultTreeTextNode {
+  return object.nodeName === "#text"
+}
+
+function instanceOfParentTreeNode(object: any): object is parse5.DefaultTreeParentNode {
+  return object.childNodes
 }

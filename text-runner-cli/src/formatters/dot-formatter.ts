@@ -1,13 +1,12 @@
 import * as color from "colorette"
 import * as path from "path"
-import { printCodeFrame } from "../../helpers/print-code-frame"
-import { printSummary } from "../print-summary"
-import { FinishArgs, Formatter } from "../formatter"
+import * as formatter from "."
 import * as events from "events"
 import * as tr from "text-runner-core"
+import * as helpers from "../helpers"
 
 /** A minimalistic formatter, prints dots for each check */
-export class DotFormatter implements Formatter {
+export class DotFormatter implements formatter.Formatter {
   private readonly sourceDir: string
 
   constructor(sourceDir: string, emitter: events.EventEmitter) {
@@ -25,7 +24,11 @@ export class DotFormatter implements Formatter {
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
     console.log(args.error.message)
-    printCodeFrame(console.log, path.join(this.sourceDir, args.activity.file.platformified()), args.activity.line)
+    helpers.printCodeFrame(
+      console.log,
+      path.join(this.sourceDir, args.activity.file.platformified()),
+      args.activity.line
+    )
   }
 
   skipped() {
@@ -36,8 +39,8 @@ export class DotFormatter implements Formatter {
     process.stdout.write(color.green("."))
   }
 
-  finish(args: FinishArgs) {
-    printSummary(args.stats)
+  finish(args: formatter.FinishArgs) {
+    formatter.printSummary(args.stats)
   }
 
   warning(args: tr.WarnArgs) {

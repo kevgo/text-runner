@@ -4,7 +4,7 @@ import * as formatters from "./formatters"
 import * as config from "./configuration"
 import * as commands from "./commands"
 import * as helpers from "./helpers"
-import { UserError } from "text-runner-core"
+import * as tr from "text-runner-core"
 
 cliCursor.hide()
 
@@ -29,7 +29,7 @@ async function main() {
     errorCount = stats.errorCount
   } catch (err) {
     errorCount += 1
-    if (err instanceof UserError) {
+    if (err instanceof tr.UserError) {
       formatters.printUserError(err)
     } else {
       console.log(err.stack)

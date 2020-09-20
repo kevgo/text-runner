@@ -55,7 +55,7 @@ online: false`
 }
 
 /** provides the textual config file content */
-export async function read(cmdLineArgs: config.Data): Promise<string> {
+async function read(cmdLineArgs: config.Data): Promise<string> {
   if (cmdLineArgs.configFileName) {
     const configFilePath = path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName)
     try {

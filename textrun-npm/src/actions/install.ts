@@ -4,7 +4,7 @@ import * as path from "path"
 import { trimDollar } from "../helpers/trim-dollar"
 import * as tr from "text-runner-core"
 
-export async function install(action: tr.ActionArgs) {
+export async function install(action: tr.ActionArgs): Promise<void> {
   const installText = trimDollar(action.region.text())
   if (installText === "") {
     throw new Error("no installation instructions found")

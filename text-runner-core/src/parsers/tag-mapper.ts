@@ -47,7 +47,7 @@ export class TagMapper {
     return !this.isStandaloneTag(tagName)
   }
 
-  isStandaloneTag(tagName: AstNodeTag): boolean {
+  isStandaloneTag(tagName: string): boolean {
     for (const value of TagMapper.STANDALONE_MAPPINGS.values()) {
       if (value === tagName) {
         return true
@@ -57,7 +57,7 @@ export class TagMapper {
   }
 
   /** Returns the opening MarkdownIt type for the given HTML tag. */
-  openingTypeForTag(tagName: AstNodeTag, attributes: AstNodeAttributes) {
+  openingTypeForTag(tagName: AstNodeTag, attributes: AstNodeAttributes): AstNodeType {
     return this.typeForTag(tagName.replace(/^\//, "") as AstNodeTag, attributes)
   }
 

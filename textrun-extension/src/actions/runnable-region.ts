@@ -6,7 +6,7 @@ import stripAnsi = require("strip-ansi")
 import { callArgs } from "../helpers/call-args"
 
 /** runs the given content in Text-Runner */
-export async function runnableRegion(action: tr.ActionArgs) {
+export async function runnableRegion(action: tr.ActionArgs): Promise<void> {
   action.name("execute Markdown in Text-Runner")
   const content = action.region.text().trim()
   if (content === "") {
@@ -15,7 +15,7 @@ export async function runnableRegion(action: tr.ActionArgs) {
   // TODO: call an internal Text-Runner API here, see https://github.com/kevgo/text-runner/issues/903
   await fs.writeFile(path.join(action.configuration.workspace, "1.md"), content)
   // TODO: call existing Text-Runner API here
-  var textRunPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "text-run")
+  let textRunPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath, process.platform)
   trArgs[trArgs.length - 1] += " --workspace=."

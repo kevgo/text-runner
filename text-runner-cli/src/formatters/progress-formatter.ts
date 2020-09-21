@@ -29,11 +29,11 @@ export class ProgressFormatter implements formatter.Formatter {
     emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
   }
 
-  start(args: tr.StartArgs) {
+  start(args: tr.StartArgs): void {
     this.progressBar.start(args.stepCount, 0)
   }
 
-  failed(args: tr.FailedArgs) {
+  failed(args: tr.FailedArgs): void {
     this.progressBar.stop()
     console.log()
     console.log()
@@ -47,19 +47,19 @@ export class ProgressFormatter implements formatter.Formatter {
     )
   }
 
-  skipped() {
+  skipped(): void {
     this.progressBar.increment(1)
   }
 
-  success() {
+  success(): void {
     this.progressBar.increment(1)
   }
 
-  warning() {
+  warning(): void {
     this.progressBar.increment(1)
   }
 
-  finish(args: formatter.FinishArgs) {
+  finish(args: formatter.FinishArgs): void {
     formatter.printSummary(args.stats)
   }
 }

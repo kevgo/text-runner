@@ -4,7 +4,7 @@ import * as tr from "text-runner-core"
 import * as helpers from "../helpers"
 
 /** prints the given error to the console */
-export function printUserError(err: tr.UserError) {
+export function printUserError(err: tr.UserError): void {
   if (err.file && err.line != null) {
     console.log(color.red(`${err.file.unixified()}:${err.line} -- ${err.message || ""}`))
   } else {

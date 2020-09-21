@@ -1,18 +1,21 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
 import * as events from "events"
+import { promises as fs } from "fs"
+import * as path from "path"
 
 export class HelpCommand extends events.EventEmitter implements tr.Command {
-  async execute() {
-    this.emit(tr.CommandEvent.output, this.template())
+  async execute(): Promise<void> {
+    this.emit(tr.CommandEvent.output, await this.template())
   }
 
   /** provides the text to print */
-  template() {
-    const { version } = require("../../package.json")
+  async template(): Promise<string> {
+    const fileContent = await fs.readFile(path.join(__dirname, "../../package.json"), "utf-8")
+    const pkg = JSON.parse(fileContent)
 
     return `
-${color.dim("TextRunner " + version)}
+${color.dim("TextRunner " + pkg.version)}
 
 USAGE: ${color.bold("text-run [<options>] <command>")}
 

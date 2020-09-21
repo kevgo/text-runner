@@ -9,7 +9,7 @@ export class CurrentCommand {
     return instance
   }
 
-  static set(process: ObservableProcess) {
+  static set(process: ObservableProcess): void {
     instance = process
   }
 }

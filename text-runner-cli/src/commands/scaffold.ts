@@ -19,7 +19,7 @@ export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
     this.language = language
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     const dirPath = path.join(this.sourceDir || ".", "text-run")
     let textRunDirExists = true
     try {

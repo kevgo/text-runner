@@ -25,7 +25,7 @@ export class DebugCommand extends events.EventEmitter implements Command {
     this.subcommand = subcommand
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     const config = backfillDefaults(this.userConfig)
     const filenames = await getFileNames(config)
     if (filenames.length !== 1) {

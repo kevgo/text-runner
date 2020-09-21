@@ -17,7 +17,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
           })
           break
 
-        case "image":
+        case "image": {
           const nodes = new AstNodeList()
           nodes.push(node)
           result.push({
@@ -28,6 +28,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
             document: AST,
           })
           break
+        }
       }
     }
   }

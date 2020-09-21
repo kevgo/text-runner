@@ -15,15 +15,15 @@ export class CurrentServer {
     return this.process != null
   }
 
-  kill() {
+  kill(): void {
     this.process?.kill()
   }
 
-  reset() {
+  reset(): void {
     this.process = null
   }
 
-  set(process: ObservableProcess) {
+  set(process: ObservableProcess): void {
     this.process = process
   }
 }

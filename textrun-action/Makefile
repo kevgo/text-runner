@@ -16,7 +16,7 @@ docs: build  # runs the documentation tests
 
 fix:  # runs the auto-fixers
 	echo textrun-action auto-fixes ...
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
+	${CURDIR}/../node_modules/.bin/eslint . --fix --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/prettier --write .
 
 help:  # prints all make targets
@@ -25,7 +25,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	echo textrun-action linters ...
 	${CURDIR}/../node_modules/.bin/prettier -l .
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
+	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
 
 test: lint docs  # runs all tests
 test-lerna: test  # for running all tests inside Lerna

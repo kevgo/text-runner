@@ -7,10 +7,9 @@ export class OutputCollector {
   content: string[] = []
 
   /** appends to the output with a newline */
-  // @ts-ignore
-  log(message?: any, ...optionalParams: any[]) {
+  log(...args: any[]): void {
     const stringified: string[] = []
-    for (const arg of arguments) {
+    for (const arg of args) {
       if (typeof arg === "string") {
         stringified.push(arg)
       } else {

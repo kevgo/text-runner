@@ -10,7 +10,7 @@ export async function load(cmdLineArgs: config.Data): Promise<config.Data> {
 }
 
 /** creates a new Text-Runner configuration file */
-export async function create(cmdLineArgs: config.Data) {
+export async function create(cmdLineArgs: config.Data): Promise<void> {
   await fs.writeFile(
     path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName || "text-run.yml"),
     `# white-list for files to test

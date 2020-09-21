@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { AstNode } from "./ast-node"
+import { AstNode, AstNodeType } from "./ast-node"
 import { AstNodeList } from "./ast-node-list"
 
 test("AstNode.scaffold()", function () {
@@ -8,16 +8,14 @@ test("AstNode.scaffold()", function () {
 })
 
 test("AstNode.endTypeFor()", function () {
-  const data = {
+  const tests: { [key in AstNodeType]?: AstNodeType } = {
     anchor_open: "anchor_close",
     heading_open: "heading_close",
   }
-  for (const [input, output] of Object.entries(data)) {
-    if (!data.hasOwnProperty(input)) {
-      continue
-    }
-    const node = AstNode.scaffold({ type: input })
-    assert.deepEqual(node.endType(), output)
+  for (const [give, want] of Object.entries(tests)) {
+    const node = AstNode.scaffold({ type: give as AstNodeType })
+    const have = node.endType()
+    assert.deepEqual(have, want)
   }
 })
 

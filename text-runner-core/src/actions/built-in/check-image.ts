@@ -5,7 +5,7 @@ import { Configuration } from "../../configuration/configuration"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkImage" action checks for broken images. */
-export async function checkImage(action: ActionArgs) {
+export async function checkImage(action: ActionArgs): Promise<number | void> {
   const node = action.region[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
@@ -24,7 +24,7 @@ export async function checkImage(action: ActionArgs) {
   }
 }
 
-async function checkLocalImage(imagePath: string, c: Configuration) {
+async function checkLocalImage(imagePath: string, c: Configuration): Promise<void> {
   try {
     await fs.stat(path.join(c.sourceDir, imagePath))
   } catch (err) {

@@ -1,9 +1,9 @@
 import { UserError } from "../../errors/user-error"
-import { AstNode } from "./ast-node"
+import { AstNode, AstNodeScaffoldData } from "./ast-node"
 
 export class AstNodeList extends Array<AstNode> {
   /** Creates a new AstNodeList containing an AstNode scaffoldedd from the given data */
-  static scaffold(data: any = {}): AstNodeList {
+  static scaffold(data: AstNodeScaffoldData = {}): AstNodeList {
     const result = new AstNodeList()
     result.push(AstNode.scaffold(data))
     return result
@@ -94,7 +94,7 @@ export class AstNodeList extends Array<AstNode> {
   }
 
   /** Adds a new AstNode with the given data to this list. */
-  pushNode(data: any) {
+  pushNode(data: AstNodeScaffoldData): void {
     this.push(AstNode.scaffold(data))
   }
 

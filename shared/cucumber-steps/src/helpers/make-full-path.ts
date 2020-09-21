@@ -1,6 +1,6 @@
 import * as path from "path"
 
-export function makeFullPath(command: string, platform: string) {
+export function makeFullPath(command: string, platform: string): string {
   if (/^text-run/.test(command)) {
     return command.replace(/^text-run/, fullTextRunPath(platform))
   } else {
@@ -8,7 +8,7 @@ export function makeFullPath(command: string, platform: string) {
   }
 }
 
-function fullTextRunPath(platform: string) {
+function fullTextRunPath(platform: string): string {
   let result = path.join(__dirname, "..", "..", "..", "..", "text-runner-cli", "bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"

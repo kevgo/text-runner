@@ -1,21 +1,22 @@
 import { UserError } from "../../../errors/user-error"
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
+import * as parser from "../md-parser"
 
 /** helps find open MarkdownIt AST nodes */
 export class OpenNodeTracker {
-  private readonly nodes: any[]
+  private readonly nodes: parser.MarkdownItNode[]
 
   constructor() {
     this.nodes = []
   }
 
   /** registers an opening MarkdownIt AST node */
-  open(node: any) {
+  open(node: parser.MarkdownItNode): void {
     this.nodes.push(node)
   }
 
   /** finds the opening node for the given closing node */
-  close(node: any, file: AbsoluteFilePath, line: number): any {
+  close(node: parser.MarkdownItNode, file: AbsoluteFilePath, line: number): parser.MarkdownItNode {
     const openType = node.type.replace("_close", "_open")
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const result = this.nodes[i]

@@ -1,4 +1,5 @@
 import * as config from "../configuration"
+import * as tr from "text-runner-core"
 import * as scaffold from "./scaffold"
 import { HelpCommand } from "./help"
 import { SetupCommand } from "./setup"
@@ -17,7 +18,7 @@ export async function instantiate(
   commandName: string,
   userConfig: config.Data,
   debugSubcommand: DebugSubcommand | undefined
-) {
+): Promise<tr.Command> {
   const sourceDir = userConfig.sourceDir || "."
   switch (commandName) {
     case "help":

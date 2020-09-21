@@ -38,15 +38,15 @@ export class StatsCollector {
     }
   }
 
-  onError() {
+  onError(): void {
     this.errorCount += 1
   }
 
-  onSkip() {
+  onSkip(): void {
     this.skipCount += 1
   }
 
-  onSuccess() {
+  onSuccess(): void {
     this.successCount += 1
   }
 }

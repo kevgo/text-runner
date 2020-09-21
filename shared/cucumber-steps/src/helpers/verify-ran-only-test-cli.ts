@@ -5,15 +5,15 @@ import * as glob from "glob"
 import * as path from "path"
 import { TRWorld } from "../world"
 
-export function verifyRanOnlyTestsCLI(filenames: any, world: TRWorld) {
-  filenames = flatten(filenames)
+export function verifyRanOnlyTestsCLI(filenames: string | string[], world: TRWorld): void {
+  const flattened = flatten(filenames)
   if (!world.process) {
     throw new Error("no process output found")
   }
   const standardizedOutput = world.process.output.fullText().replace(/\\/g, "/")
 
   // verify the given tests have run
-  for (const filename of filenames) {
+  for (const filename of flattened) {
     assert.include(standardizedOutput, filename)
   }
 
@@ -24,7 +24,7 @@ export function verifyRanOnlyTestsCLI(filenames: any, world: TRWorld) {
     .map(file => path.relative(world.rootDir, file))
     .filter(file => file)
     .map(file => file.replace(/\\/g, "/"))
-    .filter(file => filenames.indexOf(file) === -1)
+    .filter(file => flattened.indexOf(file) === -1)
   for (const fileShouldntRun of filesShouldntRun) {
     assert.notInclude(standardizedOutput, fileShouldntRun)
   }

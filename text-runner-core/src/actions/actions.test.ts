@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Actions } from "./actions"
 import { strict as assert } from "assert"
 

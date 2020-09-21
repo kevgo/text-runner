@@ -16,12 +16,28 @@ export type AstNodeType =
   | "code_close"
   | "fence_open"
   | "fence_close"
+  | "h1_open"
+  | "h1_close"
+  | "h2_open"
+  | "h2_close"
+  | "h3_open"
+  | "h3_close"
+  | "h4_open"
+  | "h4_close"
+  | "h5_open"
+  | "h5_close"
+  | "h6_open"
+  | "h6_close"
+  | "heading_open"
+  | "heading_close"
   | "htmltag"
   | "hr"
   | "image"
   | "linebreak"
   | "link_open"
   | "link_close"
+  | "paragraph_open"
+  | "paragraph_close"
   | "text" // text node
 
 /** the HTML tags */
@@ -44,9 +60,18 @@ export type AstNodeTag =
   | "/pre"
   | "ul"
 
+export interface AstNodeScaffoldData {
+  attributes?: AstNodeAttributes
+  content?: string
+  file?: string | AbsoluteFilePath
+  line?: number
+  tag?: AstNodeTag
+  type?: AstNodeType
+}
+
 /** a node in the standardized Markdown/HTML AST */
 export class AstNode {
-  static scaffold(data: any = {}): AstNode {
+  static scaffold(data: AstNodeScaffoldData = {}): AstNode {
     if (typeof data.file === "string") {
       data.file = new AbsoluteFilePath(data.file)
     }
@@ -55,8 +80,8 @@ export class AstNode {
       content: data.content || "",
       file: data.file || new AbsoluteFilePath("file"),
       line: data.line || 1,
-      tag: data.tag != null ? data.tag : "tag",
-      type: data.type || "type",
+      tag: data.tag != null ? data.tag : "hr",
+      type: data.type || "hr",
     })
   }
 

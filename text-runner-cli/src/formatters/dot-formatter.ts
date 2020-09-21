@@ -19,7 +19,7 @@ export class DotFormatter implements formatter.Formatter {
     emitter.on(tr.CommandEvent.finish, this.finish.bind(this))
   }
 
-  failed(args: tr.FailedArgs) {
+  failed(args: tr.FailedArgs): void {
     console.log()
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
@@ -31,19 +31,19 @@ export class DotFormatter implements formatter.Formatter {
     )
   }
 
-  skipped() {
+  skipped(): void {
     process.stdout.write(color.cyan("."))
   }
 
-  success() {
+  success(): void {
     process.stdout.write(color.green("."))
   }
 
-  finish(args: formatter.FinishArgs) {
+  finish(args: formatter.FinishArgs): void {
     formatter.printSummary(args.stats)
   }
 
-  warning(args: tr.WarnArgs) {
+  warning(args: tr.WarnArgs): void {
     console.log(color.magenta(args.message))
   }
 }

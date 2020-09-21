@@ -19,7 +19,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
     this.userConfig = userConfig
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration

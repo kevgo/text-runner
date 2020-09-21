@@ -8,7 +8,7 @@ import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder"
 type DoneFunction = (err?: Error) => void
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
-export function runnable(action: tr.ActionArgs, done: DoneFunction) {
+export function runnable(action: tr.ActionArgs, done: DoneFunction): void {
   action.name("run JavaScript")
   let code = action.region.text()
   if (code === "") {
@@ -20,6 +20,7 @@ export function runnable(action: tr.ActionArgs, done: DoneFunction) {
 
   // This is used in an eval'ed string below
   // @ts-ignore: unused variable
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const __finished = done
 
   code = hasCallbackPlaceholder(code)

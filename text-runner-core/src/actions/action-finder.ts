@@ -24,7 +24,7 @@ export class ActionFinder {
   }
 
   /** loads all actions */
-  static load(sourceDir: string) {
+  static load(sourceDir: string): ActionFinder {
     return new ActionFinder(
       loadBuiltinActions(),
       loadCustomActions(path.join(sourceDir, "text-run")),
@@ -33,7 +33,7 @@ export class ActionFinder {
   }
 
   /** loads only the actions for dynamic tests */
-  static loadDynamic(sourceDir: string) {
+  static loadDynamic(sourceDir: string): ActionFinder {
     return new ActionFinder(
       new Actions(),
       loadCustomActions(path.join(sourceDir, "text-run")),
@@ -42,7 +42,7 @@ export class ActionFinder {
   }
 
   /** loads only the actions for static tests */
-  static loadStatic() {
+  static loadStatic(): ActionFinder {
     return new ActionFinder(loadBuiltinActions(), new Actions(), new ExternalActionManager())
   }
 
@@ -89,6 +89,7 @@ export function builtinActionFilePaths(): string[] {
 export function loadBuiltinActions(): Actions {
   const result = new Actions()
   for (const filename of builtinActionFilePaths()) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     result.register(actionName(filename), require(filename))
   }
   return result
@@ -103,6 +104,7 @@ export function loadCustomActions(dir: string): Actions {
   const result = new Actions()
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     result.register(actionName(filename), require(filename))
   }
   return result

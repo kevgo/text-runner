@@ -5,7 +5,7 @@ import * as tr from "text-runner-core"
 import { makefileTargets } from "../helpers/makefile-targets"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
-export async function target(action: tr.ActionArgs) {
+export async function target(action: tr.ActionArgs): Promise<void> {
   const target = action.region.text().trim()
   if (target === "") {
     throw new Error("Empty make target")

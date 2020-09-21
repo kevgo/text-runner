@@ -20,7 +20,7 @@ docs: build  # runs the documentation tests
 
 fix:  # runs the auto-fixers
 	echo textrun-make auto-fixes ...
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
+	${CURDIR}/../node_modules/.bin/eslint . --fix --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/prettier --write .
 
 help:  # prints all make targets
@@ -29,7 +29,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	echo textrun-make linters ...
 	${CURDIR}/../node_modules/.bin/prettier -l .
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --config ../tslint.json
+	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
 
 test: lint unit cuke docs  # runs all tests
 test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna

@@ -10,7 +10,7 @@ import { Configuration } from "../helpers/configuration"
 /**
  * Runs the given commands synchronously on the console.
  */
-export async function command(action: tr.ActionArgs) {
+export async function command(action: tr.ActionArgs): Promise<void> {
   const config = await Configuration.load(path.join(action.configuration.sourceDir, "textrun-shell.js"))
   const commandsToRun = action.region
     .text()

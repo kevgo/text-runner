@@ -11,7 +11,7 @@ import { UserError } from "../../errors/user-error"
 
 export type MarkdownItNode = any
 export type MarkdownItAst = MarkdownItNode[]
-export type MarkdownItNodeAttrs = { [key: string]: string }
+export type MarkdownItNodeAttrs = string[][]
 
 /** MarkdownParser is a DocumentsParser that parses Markdown. */
 export class MarkdownParser {
@@ -428,7 +428,7 @@ export class MarkdownParser {
 }
 
 /** returns the given attributes from a MarkdownIt node in the standard AST format */
-export function standardizeMarkdownItAttributes(attrs: any): AstNodeAttributes {
+export function standardizeMarkdownItAttributes(attrs: MarkdownItNodeAttrs | null): AstNodeAttributes {
   const result: AstNodeAttributes = {}
   if (attrs) {
     for (const [name, value] of attrs) {

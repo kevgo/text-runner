@@ -1,8 +1,8 @@
 /** Command describes a Text-Runner command */
-export interface Command {
+export interface Command extends NodeJS.EventEmitter {
   /** executes this command */
   execute(): void
-  on(event: CommandEvent, handler: (arg: any) => void): void
+  on(event: CommandEvent, handler: (arg: any) => void): this
 }
 
 /** CommandEvent defines the events that a command can emit. */

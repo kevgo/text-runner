@@ -12,7 +12,7 @@ export class SetupCommand extends events.EventEmitter implements tr.Command {
     this.config = config
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     await configFile.create(this.config)
     this.emit(tr.CommandEvent.output, `Created configuration file ${color.cyan("text-run.yml")} with default values`)
   }

@@ -38,9 +38,12 @@ export class HTMLParser {
   }
 
   /** returns the subtree of the given HTML AST whose root node has the given name */
-  private findChildWithName(node: parse5.DefaultTreeParentNode, name: string): parse5.DefaultTreeNode {
+  private findChildWithName(node: parse5.DefaultTreeParentNode, name: string): parse5.DefaultTreeElement {
     for (const childNode of node.childNodes) {
       if (childNode.nodeName === name) {
+        if (!instanceOfDefaultTreeElement(childNode)) {
+          throw new Error("Expected DefaultTreeElement")
+        }
         return childNode
       }
     }
@@ -88,6 +91,9 @@ export class HTMLParser {
     if (instanceOfDefaultTreeTextNode(node)) {
       return this.standardizeTextNode(node, file, startingLine)
     }
+    if (!instanceOfDefaultTreeElement(node)) {
+      throw new Error("unknown tree node: " + util.inspect(node))
+    }
     if (this.tagMapper.isStandaloneTag(node.nodeName)) {
       return this.standardizeStandaloneNode(node, file, startingLine)
     }
@@ -95,7 +101,11 @@ export class HTMLParser {
   }
 
   /** converts the given HTML tag with open and closing tag into the standard format */
-  private standardizeOpenCloseTag(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  private standardizeOpenCloseTag(
+    node: parse5.DefaultTreeElement,
+    file: AbsoluteFilePath,
+    startingLine: number
+  ): AstNodeList {
     const result = new AstNodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
@@ -103,8 +113,11 @@ export class HTMLParser {
     let startLine = startingLine
     if (node.sourceCodeLocation) {
       startLine += node.sourceCodeLocation.startLine - 1
-    } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
-      startLine += node.parentNode.sourceCodeLocation.startLine
+    } else {
+      const parentNode = node.parentNode as parse5.DefaultTreeElement
+      if (parentNode.sourceCodeLocation) {
+        startLine += parentNode.sourceCodeLocation.startLine
+      }
     }
     result.push(
       new AstNode({
@@ -112,8 +125,8 @@ export class HTMLParser {
         content: "",
         file,
         line: startLine,
-        tag: node.tagName,
-        type: this.tagMapper.openingTypeForTag(node.tagName, attributes),
+        tag: node.tagName as AstNodeTag,
+        type: this.tagMapper.openingTypeForTag(node.tagName as AstNodeTag, attributes),
       })
     )
 
@@ -127,7 +140,7 @@ export class HTMLParser {
     let endLine: number
     if (node.sourceCodeLocation) {
       endLine = node.sourceCodeLocation.endLine + startingLine - 1
-    } else if (node.parentNode && node.parentNode.sourceCodeLocation) {
+    } else if (node.parentNode && instanceOfDefaultTreeElement(node.parentNode) && node.parentNode.sourceCodeLocation) {
       endLine = node.parentNode.sourceCodeLocation.endLine + startingLine - 1
     } else {
       throw new Error(`cannot determine end line for node ${node}`)
@@ -149,7 +162,11 @@ export class HTMLParser {
   }
 
   /** converts the given HTML standalone node into the standard format */
-  private standardizeStandaloneNode(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  private standardizeStandaloneNode(
+    node: parse5.DefaultTreeElement,
+    file: AbsoluteFilePath,
+    startingLine: number
+  ): AstNodeList {
     const result = new AstNodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
@@ -157,9 +174,9 @@ export class HTMLParser {
         attributes,
         content: "",
         file,
-        line: node.sourceCodeLocation.startLine + startingLine - 1,
-        tag: node.tagName || "",
-        type: this.tagMapper.typeForTag(node.tagName, attributes),
+        line: (node.sourceCodeLocation?.startLine || 0) + startingLine - 1,
+        tag: node.tagName as AstNodeTag,
+        type: this.tagMapper.typeForTag(node.tagName as AstNodeTag, attributes),
       })
     )
     return result
@@ -198,4 +215,8 @@ function instanceOfDefaultTreeTextNode(object: any): object is parse5.DefaultTre
 
 function instanceOfParentTreeNode(object: any): object is parse5.DefaultTreeParentNode {
   return object.childNodes
+}
+
+function instanceOfDefaultTreeElement(object: any): object is parse5.DefaultTreeElement {
+  return object.nodeName && object.tagName && object.attrs
 }

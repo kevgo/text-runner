@@ -428,10 +428,10 @@ export class MarkdownParser {
 }
 
 /** returns the given attributes from a MarkdownIt node in the standard AST format */
-export function standardizeMarkdownItAttributes(attrs: MarkdownItNodeAttrs): AstNodeAttributes {
+export function standardizeMarkdownItAttributes(attrs: any): AstNodeAttributes {
   const result: AstNodeAttributes = {}
   if (attrs) {
-    for (const [name, value] of Object.entries(attrs)) {
+    for (const [name, value] of attrs) {
       result[name] = value
     }
   }

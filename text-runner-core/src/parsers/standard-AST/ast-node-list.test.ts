@@ -127,15 +127,15 @@ test("AstNodeList.iterator()", function () {
     result.push(node)
   }
   assert.lengthOf(result, 2)
-  assert.equal(result[0].type, "node1")
-  assert.equal(result[1].type, "node2")
+  assert.equal(result[0].type, "anchor_open")
+  assert.equal(result[1].type, "bold_open")
 })
 
 test("AstNodeList.nodeTypes()", function () {
   const list = new AstNodeList()
   list.pushNode({ type: "anchor_open" })
   list.pushNode({ type: "bold_open" })
-  assert.deepEqual(list.nodeTypes(), ["type1", "type2"])
+  assert.deepEqual(list.nodeTypes(), ["anchor_open", "bold_open"])
 })
 
 test("AstNodeList.push()", function () {

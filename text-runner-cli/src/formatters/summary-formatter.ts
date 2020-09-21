@@ -16,7 +16,7 @@ export class SummaryFormatter implements formatter.Formatter {
   }
 
   // @ts-ignore: okay to not use parameters here
-  failed(args: FailedArgs) {
+  failed(args: FailedArgs): void {
     console.log()
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
@@ -28,7 +28,7 @@ export class SummaryFormatter implements formatter.Formatter {
     )
   }
 
-  finish(args: formatter.FinishArgs) {
+  finish(args: formatter.FinishArgs): void {
     formatter.printSummary(args.stats)
   }
 }

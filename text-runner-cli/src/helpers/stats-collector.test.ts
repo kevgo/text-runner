@@ -3,7 +3,7 @@ import { assert } from "chai"
 import * as helpers from "."
 import * as events from "events"
 import * as tr from "text-runner-core"
-const util = require("util")
+import * as util from "util"
 const delay = util.promisify(setTimeout)
 
 suite("StatsCollector", function () {

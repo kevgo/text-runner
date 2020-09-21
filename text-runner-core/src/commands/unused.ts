@@ -16,7 +16,7 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     this.userConfig = userConfig
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     // step 1: determine full configuration
     const config = backfillDefaults(this.userConfig)
 

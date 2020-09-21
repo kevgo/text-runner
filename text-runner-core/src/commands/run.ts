@@ -22,7 +22,7 @@ export class RunCommand extends events.EventEmitter implements Command {
     this.userConfig = userConfig
   }
 
-  async execute() {
+  async execute(): Promise<void> {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
@@ -64,7 +64,7 @@ export class RunCommand extends events.EventEmitter implements Command {
       this.emit(CommandEvent.start, startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
-      let parJobs = executeParallel(links, actionFinder, linkTargets, config, this)
+      const parJobs = executeParallel(links, actionFinder, linkTargets, config, this)
       // execute the serial jobs
       await executeSequential(activities, actionFinder, config, linkTargets, this)
       await Promise.all(parJobs)

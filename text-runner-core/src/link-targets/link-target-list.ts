@@ -12,7 +12,7 @@ export class LinkTargetList {
     this.targets = {}
   }
 
-  addNodeList(nodeList: AstNodeList) {
+  addNodeList(nodeList: AstNodeList): void {
     for (const node of nodeList) {
       const key = node.file.platformified()
       this.targets[key] = this.targets[key] || []
@@ -24,7 +24,7 @@ export class LinkTargetList {
     }
   }
 
-  addAnchor(node: AstNode) {
+  addAnchor(node: AstNode): void {
     if (node.attributes.href !== undefined) {
       return
     }
@@ -34,7 +34,7 @@ export class LinkTargetList {
     this.addLinkTarget(node.file, "anchor", node.attributes.name)
   }
 
-  addHeading(node: AstNode, nodeList: AstNodeList) {
+  addHeading(node: AstNode, nodeList: AstNodeList): void {
     const content = nodeList.textInNode(node)
     if (!content) {
       return
@@ -42,7 +42,7 @@ export class LinkTargetList {
     this.addLinkTarget(node.file, "heading", content)
   }
 
-  addLinkTarget(filePath: AbsoluteFilePath, type: LinkTargetTypes, name: string) {
+  addLinkTarget(filePath: AbsoluteFilePath, type: LinkTargetTypes, name: string): void {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })

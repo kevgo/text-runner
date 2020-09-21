@@ -21,7 +21,7 @@ docs:  # verify documentation
 
 fix:  # runs the fixers
 	echo Text-Runner auto-fixes ...
-	${CURDIR}/node_modules/.bin/tslint --project tsconfig.json --fix
+	${CURDIR}/../node_modules/.bin/eslint . --fix --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/prettier --write .
 
 help:  # prints all make targets

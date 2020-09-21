@@ -3,7 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-export async function newDirectory(action: tr.ActionArgs) {
+export async function newDirectory(action: tr.ActionArgs): Promise<void> {
   const directoryName = action.region.text().trim()
   if (!directoryName) {
     throw new Error("empty directory name given")

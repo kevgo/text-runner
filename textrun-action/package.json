@@ -7,7 +7,6 @@
     "text-runner-core": "4.0.3"
   },
   "devDependencies": {
-    "text-runner-cli": "4.0.3",
-    "tslint": "6.1.2"
+    "text-runner-cli": "4.0.3"
   }
 }

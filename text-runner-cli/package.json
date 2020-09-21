@@ -24,8 +24,7 @@
     "@types/rimraf": "3.0.0",
     "@types/yamljs": "0.2.31",
     "cucumber": "6.0.5",
-    "mocha": "8.0.1",
-    "tslint": "6.1.2"
+    "mocha": "8.0.1"
   },
   "files": [
     "bin",

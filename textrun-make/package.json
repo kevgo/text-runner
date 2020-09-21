@@ -15,7 +15,6 @@
     "textrun-action": "0.0.0",
     "textrun-extension": "0.0.0",
     "textrun-npm": "0.0.0",
-    "textrun-workspace": "0.0.0",
-    "tslint": "6.1.2"
+    "textrun-workspace": "0.0.0"
   }
 }

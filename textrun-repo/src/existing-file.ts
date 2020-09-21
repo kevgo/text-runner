@@ -5,7 +5,7 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-export async function existingFile(action: tr.ActionArgs) {
+export async function existingFile(action: tr.ActionArgs): Promise<void> {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
   if (action.region.hasNodeOfType("link_open")) {

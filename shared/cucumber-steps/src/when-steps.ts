@@ -8,10 +8,13 @@ When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
   const config: textRunner.PartialConfiguration = { sourceDir: world.rootDir }
   // define a few variables here, they will be overwritten in the eval call
+  // eslint-disable-next-line prefer-const
   let command = new textRunner.RunCommand(config)
+  // eslint-disable-next-line prefer-const
   let observer = new ActivityCollector(command)
   // eval the given code
   // @ts-ignore
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const, @typescript-eslint/no-empty-function
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)

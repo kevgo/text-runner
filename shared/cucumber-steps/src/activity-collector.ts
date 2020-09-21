@@ -27,19 +27,19 @@ export class ActivityCollector {
     return this.activities
   }
 
-  onFailure(args: tr.FailedArgs) {
+  onFailure(args: tr.FailedArgs): void {
     this.activities.push({ ...args, status: "failed" })
   }
 
-  onSkipped(args: tr.SkippedArgs) {
+  onSkipped(args: tr.SkippedArgs): void {
     this.activities.push({ ...args, status: "skipped" })
   }
 
-  onSuccess(args: tr.SuccessArgs) {
+  onSuccess(args: tr.SuccessArgs): void {
     this.activities.push({ ...args, status: "success" })
   }
 
-  onWarning(args: tr.WarnArgs) {
+  onWarning(args: tr.WarnArgs): void {
     this.activities.push({ ...args, status: "warning" })
   }
 }

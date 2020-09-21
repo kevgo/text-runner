@@ -81,11 +81,11 @@ export class HTMLParser {
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  private standardizeNode(node: parse5.DefaultTreeNode, file: AbsoluteFilePath, startingLine: number): AstNodeList {
     if (this.isEmptyTextNode(node)) {
       return new AstNodeList()
     }
-    if (node.nodeName === "#text") {
+    if (instanceOfDefaultTreeTextNode(node)) {
       return this.standardizeTextNode(node, file, startingLine)
     }
     if (this.tagMapper.isStandaloneTag(node.nodeName)) {
@@ -166,7 +166,11 @@ export class HTMLParser {
   }
 
   /** converts the given HTML text node into the standard format */
-  private standardizeTextNode(node: any, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  private standardizeTextNode(
+    node: parse5.DefaultTreeTextNode,
+    file: AbsoluteFilePath,
+    startingLine: number
+  ): AstNodeList {
     const result = new AstNodeList()
     if (node.value !== "\n") {
       result.push(
@@ -174,8 +178,8 @@ export class HTMLParser {
           attributes: {},
           content: node.value.trim(),
           file,
-          line: node.sourceCodeLocation.startLine + startingLine - 1,
-          tag: node.tagName || "",
+          line: (node.sourceCodeLocation?.startLine ?? 0) + startingLine - 1,
+          tag: "",
           type: "text",
         })
       )

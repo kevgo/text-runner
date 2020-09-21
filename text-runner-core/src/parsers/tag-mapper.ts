@@ -47,7 +47,7 @@ export class TagMapper {
     return !this.isStandaloneTag(tagName)
   }
 
-  isStandaloneTag(tagName: AstNodeTag): boolean {
+  isStandaloneTag(tagName: string): boolean {
     for (const value of TagMapper.STANDALONE_MAPPINGS.values()) {
       if (value === tagName) {
         return true

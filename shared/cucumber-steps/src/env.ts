@@ -27,7 +27,7 @@ Before(async function () {
   await fs.mkdir(this.rootDir, { recursive: true })
 })
 
-After(async function (scenario) {
+After({ timeout: 20_000 }, async function (scenario) {
   await endChildProcesses()
   if (scenario.result.status === "failed") {
     console.log("\ntest artifacts are located in", this.rootDir)

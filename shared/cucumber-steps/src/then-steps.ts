@@ -94,6 +94,9 @@ Then("it executes these actions:", function (table) {
     }
     if (wanted.activity != null) {
       result.activity = stripAnsi(activityResult.finalName || "")
+      if (process.platform === "win32") {
+        result.activity = result.activity.replace(/\\/g, "/")
+      }
     }
     if (wanted.status != null) {
       result.status = activityResult.status
@@ -195,7 +198,10 @@ Then("it prints:", function (expectedText) {
   if (!world.process) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.process.output.fullText().trim())
+  let output = stripAnsi(world.process.output.fullText().trim())
+  if (process.platform === "win32") {
+    output = output.replace(/\\/g, "/")
+  }
   if (!new RegExp(expectedText.trim()).test(output)) {
     throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
   }

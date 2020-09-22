@@ -9,7 +9,7 @@ suite("pathRelativeToDir", function () {
   })
   test("in subdir", function () {
     const have = pathRelativeToDir("/foo/bar/baz/1.md", "/foo/bar")
-    const want = "baz/1.md"
+    const want = process.platform === "win32" ? "baz\\1.md" : "baz/1.md"
     assert.equal(have, want)
   })
 })

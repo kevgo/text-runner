@@ -32,7 +32,7 @@ When(/^calling:$/, async function (jsText: string) {
   }
 })
 
-When(/^calling Text-Runner$/, async function () {
+When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
   const world = this as TRWorld
   const command = new textRunner.RunCommand({ sourceDir: world.rootDir })
   const activityCollector = new ActivityCollector(command)

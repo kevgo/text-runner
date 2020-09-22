@@ -33,7 +33,7 @@ steps:
    optimized for analyzing and testing,and identical for comparable Markdown and
    HTML input.
 1. **list of ASTs --> list of tests activities to execute:** the
-   [activities module](src/activity-list) finds _active blocks_ in the ASTs and
+   [activities module](src/activities) finds _active blocks_ in the ASTs and
    gathers all the related information. The output of this step is several
    lists: parallelizable tests like checking static file and image links and
    sequential tests that have to run one after the other.

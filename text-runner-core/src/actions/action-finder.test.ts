@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { scaffoldActivity } from "../activity-list/types/activity"
+import { scaffoldActivity } from "../activities/types/activity"
 import {
   ActionFinder,
   customActionFilePaths,

@@ -1,4 +1,4 @@
-import { Activity } from "../activity-list/types/activity"
+import { Activity } from "../activities/types/activity"
 
 export interface FailedArgs {
   activity: Activity

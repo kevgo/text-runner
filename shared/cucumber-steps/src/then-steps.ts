@@ -94,6 +94,9 @@ Then("it executes these actions:", function (table) {
     }
     if (wanted.activity != null) {
       result.activity = stripAnsi(activityResult.finalName || "")
+      if (process.platform === "win32") {
+        result.activity = result.activity.replace(/\\/g, "/")
+      }
     }
     if (wanted.status != null) {
       result.status = activityResult.status

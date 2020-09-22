@@ -1,5 +1,5 @@
 import { ActionFinder } from "../actions/action-finder"
-import { extractActivities } from "../activity-list/extract-activities"
+import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import * as events from "events"

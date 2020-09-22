@@ -1,5 +1,5 @@
-import { extractActivities } from "../activity-list/extract-activities"
-import { extractImagesAndLinks } from "../activity-list/extract-images-and-links"
+import { extractActivities } from "../activities/extract-activities"
+import { extractImagesAndLinks } from "../activities/extract-images-and-links"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"

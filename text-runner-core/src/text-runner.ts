@@ -1,5 +1,5 @@
 export type { ActionArgs } from "./actions/types/action-args"
-export { Activity } from "./activity-list/types/activity"
+export { Activity } from "./activities/types/activity"
 export { PartialConfiguration } from "./configuration/configuration"
 export { AstNode } from "./parsers/standard-AST/ast-node"
 export { AstNodeList } from "./parsers/standard-AST/ast-node-list"

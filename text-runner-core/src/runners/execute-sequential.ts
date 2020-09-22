@@ -1,4 +1,4 @@
-import { ActivityList } from "../activity-list/types/activity-list"
+import { ActivityList } from "../activities/types/activity-list"
 import { Configuration } from "../configuration/configuration"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"

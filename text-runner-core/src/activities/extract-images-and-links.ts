@@ -1,5 +1,5 @@
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
-import { ActivityList } from "./types/activity-list"
+import { ActivityList } from "./index"
 
 /** extracts activities that check images and links from the given ActivityLists */
 export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {

@@ -1,7 +1,7 @@
 import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
-import { Configuration } from "../../configuration/configuration"
+import * as configuration from "../../configuration/index"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkImage" action checks for broken images. */
@@ -24,7 +24,7 @@ export async function checkImage(action: ActionArgs): Promise<number | void> {
   }
 }
 
-async function checkLocalImage(imagePath: string, c: Configuration): Promise<void> {
+async function checkLocalImage(imagePath: string, c: configuration.Data): Promise<void> {
   try {
     await fs.stat(path.join(c.sourceDir, imagePath))
   } catch (err) {

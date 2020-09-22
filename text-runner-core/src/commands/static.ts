@@ -8,13 +8,12 @@ import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, WarnArgs } from "../text-runner"
-import { PartialConfiguration } from "../configuration/configuration"
-import { backfillDefaults } from "../configuration/backfill-defaults"
+import * as configuration from "../configuration/index"
 
 export class StaticCommand extends events.EventEmitter implements Command {
-  userConfig: PartialConfiguration
+  userConfig: configuration.PartialData
 
-  constructor(userConfig: PartialConfiguration) {
+  constructor(userConfig: configuration.PartialData) {
     super()
     this.userConfig = userConfig
   }
@@ -23,7 +22,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
-      const config = backfillDefaults(this.userConfig)
+      const config = configuration.backfillDefaults(this.userConfig)
 
       // step 2: create working dir
       if (!config.workspace) {

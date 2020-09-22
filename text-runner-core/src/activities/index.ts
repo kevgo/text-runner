@@ -1,5 +1,9 @@
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNodeList } from "../../parsers/standard-AST/ast-node-list"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+export { extractActivities } from "./extract-activities"
+export { extractImagesAndLinks } from "./extract-images-and-links"
+
+export type ActivityList = Activity[]
 
 /**
  * Activity is an action instance.
@@ -15,7 +19,8 @@ export interface Activity {
 }
 
 /** scaffoldActivity creates a test Activity from the given data */
-export function scaffoldActivity(data: { actionName?: string } = {}): Activity {
+// TODO: use Partial<Activity>
+export function scaffold(data: { actionName?: string } = {}): Activity {
   return {
     actionName: data.actionName || "foo",
     file: new AbsoluteFilePath("file"),

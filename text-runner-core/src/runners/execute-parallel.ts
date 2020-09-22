@@ -1,5 +1,5 @@
-import { ActivityList } from "../activities/types/activity-list"
-import { Configuration } from "../configuration/configuration"
+import { ActivityList } from "../activities/index"
+import * as configuration from "../configuration/index"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"
 import { ActionFinder } from "../actions/action-finder"
@@ -13,7 +13,7 @@ export function executeParallel(
   activities: ActivityList,
   actionFinder: ActionFinder,
   linkTargets: LinkTargetList,
-  configuration: Configuration,
+  configuration: configuration.Data,
   emitter: EventEmitter
 ): Promise<boolean>[] {
   const result: Promise<boolean>[] = []

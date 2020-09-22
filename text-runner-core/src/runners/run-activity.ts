@@ -4,8 +4,8 @@ import { ActionFinder } from "../actions/action-finder"
 import { Action } from "../actions/types/action"
 import { ActionArgs } from "../actions/types/action-args"
 import { ActionResult } from "../actions/types/action-result"
-import { Activity } from "../activities/types/activity"
-import { Configuration } from "../configuration/configuration"
+import { Activity } from "../activities/index"
+import * as configuration from "../configuration/index"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
@@ -18,7 +18,7 @@ import { SuccessArgs, SkippedArgs, FailedArgs } from "../text-runner"
 export async function runActivity(
   activity: Activity,
   actionFinder: ActionFinder,
-  configuration: Configuration,
+  configuration: configuration.Data,
   linkTargets: LinkTargetList,
   emitter: EventEmitter
 ): Promise<boolean> {

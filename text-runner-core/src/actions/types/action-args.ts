@@ -1,4 +1,4 @@
-import { Configuration } from "../../configuration/configuration"
+import * as config from "../../configuration/index"
 import { LinkTargetList } from "../../link-targets/link-target-list"
 import { AstNodeList } from "../../parsers/standard-AST/ast-node-list"
 import { LogFn } from "../../runners/types/log-function"
@@ -6,7 +6,7 @@ import { RefineNameFn } from "../../runners/types/refine-name-function"
 
 export interface ActionArgs {
   /** TextRunner configuration data derived from the config file and CLI switches */
-  configuration: Configuration
+  configuration: config.Data
 
   /** the AST nodes of the active region which the current action tests */
   region: AstNodeList

@@ -2,7 +2,7 @@ import { Action } from "./types/action"
 import { actionName } from "./helpers/action-name"
 import { FunctionRepo } from "./types/function-repo"
 import { UserError } from "../errors/user-error"
-import { Activity } from "../activities/types/activity"
+import { Activity } from "../activities/index"
 
 /** ExternalActionManager provides external actions from their own NPM modules */
 export class ExternalActionManager {

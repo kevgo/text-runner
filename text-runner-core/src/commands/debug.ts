@@ -1,6 +1,5 @@
 import * as util from "util"
-import { extractActivities } from "../activities/extract-activities"
-import { extractImagesAndLinks } from "../activities/extract-images-and-links"
+import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
@@ -10,23 +9,22 @@ import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
 import * as events from "events"
 import { Command } from "./command"
-import { Configuration, PartialConfiguration } from "../configuration/configuration"
-import { backfillDefaults } from "../configuration/backfill-defaults"
+import * as configuration from "../configuration/index"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
 export class DebugCommand extends events.EventEmitter implements Command {
-  userConfig: PartialConfiguration
+  userConfig: configuration.PartialData
   subcommand: DebugSubcommand | undefined
 
-  constructor(userConfig: PartialConfiguration, subcommand: DebugSubcommand | undefined) {
+  constructor(userConfig: configuration.PartialData, subcommand: DebugSubcommand | undefined) {
     super()
     this.userConfig = userConfig
     this.subcommand = subcommand
   }
 
   async execute(): Promise<void> {
-    const config = backfillDefaults(this.userConfig)
+    const config = configuration.backfillDefaults(this.userConfig)
     const filenames = await getFileNames(config)
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug
@@ -62,14 +60,14 @@ Example: text-run debug --images foo.md`
   }
 }
 
-function debugActivities(ASTs: AstNodeList[], config: Configuration) {
+function debugActivities(ASTs: AstNodeList[], config: configuration.Data) {
   console.log("\nACTIVITIES:")
-  const activities = extractActivities(ASTs, config.regionMarker || "type")
-  if (activities.length === 0) {
+  const acts = activities.extractActivities(ASTs, config.regionMarker || "type")
+  if (acts.length === 0) {
     console.log("(none)")
   } else {
-    for (const activity of activities) {
-      console.log(`${activity.file.platformified()}:${activity.line}  ${activity.actionName}`)
+    for (const act of acts) {
+      console.log(`${act.file.platformified()}:${act.line}  ${act.actionName}`)
     }
   }
 }
@@ -85,7 +83,7 @@ function debugASTNodes(ASTs: AstNodeList[]) {
 
 function debugImages(ASTs: AstNodeList[]) {
   console.log("\nIMAGES:")
-  const images = extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-image")
+  const images = activities.extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-image")
   if (images.length === 0) {
     console.log("(none)")
     return
@@ -98,7 +96,7 @@ function debugImages(ASTs: AstNodeList[]) {
 
 function debugLinks(ASTs: AstNodeList[]) {
   console.log("\nLINKS:")
-  const links = extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-link")
+  const links = activities.extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-link")
   if (links.length === 0) {
     console.log("(none)")
     return

@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { scaffoldActivity } from "../activities/types/activity"
+import * as activities from "../activities/index"
 import {
   ActionFinder,
   customActionFilePaths,
@@ -19,7 +19,7 @@ suite("actionFinder", function () {
       const func: Action = () => 254
       builtIn.register("foo", func)
       const actionFinder = new ActionFinder(builtIn, new Actions(), new ExternalActionManager())
-      const activity = scaffoldActivity({ actionName: "foo" })
+      const activity = activities.scaffold({ actionName: "foo" })
       assert.equal(actionFinder.actionFor(activity), func)
     })
     test("custom region name", function () {
@@ -27,7 +27,7 @@ suite("actionFinder", function () {
       const func: Action = () => 254
       custom.register("foo", func)
       const actionFinder = new ActionFinder(new Actions(), custom, new ExternalActionManager())
-      const activity = scaffoldActivity({ actionName: "foo" })
+      const activity = activities.scaffold({ actionName: "foo" })
       assert.equal(actionFinder.actionFor(activity), func)
     })
   })

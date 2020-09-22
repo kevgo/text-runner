@@ -1,8 +1,8 @@
-import { AbsoluteLink } from "../../filesystem/absolute-link"
-import { RelativeLink } from "../../filesystem/relative-link"
-import { addLeadingDotUnlessEmpty } from "../../helpers/add-leading-dot-unless-empty"
-import { addLeadingSlash } from "../../helpers/add-leading-slash"
-import { addTrailingSlash } from "../../helpers/add-trailing-slash"
+import { AbsoluteLink } from "../filesystem/absolute-link"
+import { RelativeLink } from "../filesystem/relative-link"
+import { addLeadingDotUnlessEmpty } from "../helpers/add-leading-dot-unless-empty"
+import { addLeadingSlash } from "../helpers/add-leading-slash"
+import { addTrailingSlash } from "../helpers/add-trailing-slash"
 
 /**
  * Publications map local folders (in the source code) to public URL paths.
@@ -69,4 +69,4 @@ export class Publication {
   }
 }
 
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"

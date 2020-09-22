@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { Publications } from "./publications"
 
 suite("Publications.forFilePath()", function () {

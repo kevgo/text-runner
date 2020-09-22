@@ -1,5 +1,5 @@
-import { ActivityList } from "../activities/types/activity-list"
-import { Configuration } from "../configuration/configuration"
+import { ActivityList } from "../activities/index"
+import * as configuration from "../configuration/index"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"
 import { ActionFinder } from "../actions/action-finder"
@@ -8,7 +8,7 @@ import { EventEmitter } from "events"
 export async function executeSequential(
   activities: ActivityList,
   actionFinder: ActionFinder,
-  configuration: Configuration,
+  configuration: configuration.Data,
   linkTargets: LinkTargetList,
   emitter: EventEmitter
 ): Promise<void> {

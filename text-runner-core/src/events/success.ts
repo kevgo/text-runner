@@ -1,4 +1,4 @@
-import { Activity } from "../activities/types/activity"
+import { Activity } from "../activities/index"
 
 export interface SuccessArgs {
   activity: Activity

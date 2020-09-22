@@ -2,16 +2,16 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import * as tmp from "tmp-promise"
 import { UserError } from "../errors/user-error"
-import { Configuration } from "../configuration/configuration"
+import * as configuration from "../configuration/index"
 
 /** creates the temp directory to run the tests in */
-export async function createWorkspace(config: Configuration): Promise<string> {
+export async function createWorkspace(config: configuration.Data): Promise<string> {
   const workspacePath = await getWorkspacePath(config)
   await fs.emptyDir(workspacePath)
   return workspacePath
 }
 
-async function getWorkspacePath(config: Configuration): Promise<string> {
+async function getWorkspacePath(config: configuration.Data): Promise<string> {
   if (config.systemTmp === false) {
     return path.join(config.sourceDir, "tmp")
   } else if (config.systemTmp === true) {

@@ -1,8 +1,8 @@
-import { Publications } from "./publications/publications"
-import { Configuration } from "./configuration"
+import { Publications } from "./publications"
+import { Data } from "./data"
 
 /** provides the default configuration values to use when no values are provided via CLI or config file */
-export function defaultConfiguration(): Configuration {
+export function defaults(): Data {
   return {
     regionMarker: "type",
     defaultFile: "",

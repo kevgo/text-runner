@@ -5,20 +5,19 @@ import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { WarnArgs } from "../text-runner"
-import { PartialConfiguration } from "../configuration/configuration"
-import { backfillDefaults } from "../configuration/backfill-defaults"
+import * as configuration from "../configuration/index"
 
 export class UnusedCommand extends events.EventEmitter implements Command {
-  userConfig: PartialConfiguration
+  userConfig: configuration.PartialData
 
-  constructor(userConfig: PartialConfiguration) {
+  constructor(userConfig: configuration.PartialData) {
     super()
     this.userConfig = userConfig
   }
 
   async execute(): Promise<void> {
     // step 1: determine full configuration
-    const config = backfillDefaults(this.userConfig)
+    const config = configuration.backfillDefaults(this.userConfig)
 
     // step 2: find files
     const filenames = await getFileNames(config)

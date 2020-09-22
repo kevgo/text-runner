@@ -1,6 +1,6 @@
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
-import { ActivityList } from "./types/activity-list"
+import { ActivityList } from "./index"
 import { normalizeActionName } from "./normalize-action-name"
 
 /** returns all activities found in the given AstNodeLists */

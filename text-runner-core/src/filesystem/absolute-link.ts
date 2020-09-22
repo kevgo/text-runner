@@ -1,5 +1,5 @@
 import * as path from "path"
-import { Publications } from "../configuration/publications/publications"
+import * as configuration from "../configuration/index"
 import { addLeadingDotUnlessEmpty } from "../helpers/add-leading-dot-unless-empty"
 import { addLeadingSlash } from "../helpers/add-leading-slash"
 import { AbsoluteFilePath } from "./absolute-file-path"
@@ -69,7 +69,7 @@ export class AbsoluteLink {
    * @param publications the publications of this TextRunner session
    * @param defaultFile the filename to use in case this link points to a directory
    */
-  localize(publications: Publications, defaultFile: string): AbsoluteFilePath {
+  localize(publications: configuration.Publications, defaultFile: string): AbsoluteFilePath {
     const publication = publications.publicationForLink(this)
     let result = publication
       ? publication.resolve(this.urlDecoded(), defaultFile)

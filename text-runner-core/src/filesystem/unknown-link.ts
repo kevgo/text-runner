@@ -1,4 +1,4 @@
-import { Publications } from "../configuration/publications/publications"
+import * as configuration from "../configuration/index"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
 import { removeDoubleSlash } from "./helpers/remove-double-slash"
@@ -15,7 +15,7 @@ export class UnknownLink {
     this.value = removeDoubleSlash(unixify(publicPath))
   }
 
-  absolutify(containingFile: AbsoluteFilePath, publications: Publications): AbsoluteLink {
+  absolutify(containingFile: AbsoluteFilePath, publications: configuration.Publications): AbsoluteLink {
     if (this.isAbsolute()) {
       return new AbsoluteLink(this.value)
     }

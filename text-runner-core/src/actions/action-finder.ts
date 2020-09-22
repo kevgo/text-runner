@@ -2,7 +2,7 @@ import * as glob from "glob"
 import * as interpret from "interpret"
 import * as path from "path"
 import * as rechoir from "rechoir"
-import { Activity } from "../activities/types/activity"
+import * as activities from "../activities/index"
 import { UserError } from "../errors/user-error"
 import { actionName } from "./helpers/action-name"
 import { javascriptExtensions } from "./helpers/javascript-extensions"
@@ -47,7 +47,7 @@ export class ActionFinder {
   }
 
   /** actionFor provides the action function for the given Activity. */
-  actionFor(activity: Activity): Action {
+  actionFor(activity: activities.Activity): Action {
     return (
       this.builtinActions.get(activity.actionName) ||
       this.customActions.get(activity.actionName) ||
@@ -62,7 +62,7 @@ export class ActionFinder {
   }
 
   /** errorUnknownAction signals that the given activity has no known action. */
-  private errorUnknownAction(activity: Activity): never {
+  private errorUnknownAction(activity: activities.Activity): never {
     const errorText = `unknown action: ${activity.actionName}`
     let guidance = ""
     if (this.customActions.size() > 0) {

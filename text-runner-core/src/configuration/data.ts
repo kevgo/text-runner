@@ -1,4 +1,4 @@
-import { Publications } from "./publications/publications"
+import { Publications } from "./publications"
 
 /**
  * All configuration values that are provided to the application
@@ -6,7 +6,7 @@ import { Publications } from "./publications/publications"
  * the configuration provided via config file,
  * and backfilling with default settings.
  */
-export interface Configuration {
+export interface Data {
   regionMarker: string // the name of the attribute that denotes active regions
   defaultFile: string // the name of the default filename, set to '' if none is given
   exclude: string | string[] // list of names or regexes of files to exclude
@@ -19,4 +19,4 @@ export interface Configuration {
   workspace: string // the root directory of the workspace
 }
 
-export type PartialConfiguration = Partial<Configuration>
+export type PartialData = Partial<Data>

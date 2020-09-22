@@ -1,5 +1,4 @@
-import { extractActivities } from "../activities/extract-activities"
-import { extractImagesAndLinks } from "../activities/extract-images-and-links"
+import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
@@ -10,14 +9,13 @@ import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import { StartArgs, WarnArgs } from "../text-runner"
-import { PartialConfiguration } from "../configuration/configuration"
-import { backfillDefaults } from "../configuration/backfill-defaults"
+import * as configuration from "../configuration/index"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export class RunCommand extends events.EventEmitter implements Command {
-  userConfig: PartialConfiguration
+  userConfig: configuration.PartialData
 
-  constructor(userConfig: PartialConfiguration) {
+  constructor(userConfig: configuration.PartialData) {
     super()
     this.userConfig = userConfig
   }
@@ -26,7 +24,7 @@ export class RunCommand extends events.EventEmitter implements Command {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
-      const config = backfillDefaults(this.userConfig)
+      const config = configuration.backfillDefaults(this.userConfig)
 
       // step 2: create workspace
       if (!config.workspace) {
@@ -51,22 +49,22 @@ export class RunCommand extends events.EventEmitter implements Command {
       const actionFinder = ActionFinder.load(config.sourceDir)
 
       // step 7: extract activities
-      const activities = extractActivities(ASTs, config.regionMarker)
-      const links = extractImagesAndLinks(ASTs)
-      if (activities.length + links.length === 0) {
+      const dynamicActivities = activities.extractActivities(ASTs, config.regionMarker)
+      const links = activities.extractImagesAndLinks(ASTs)
+      if (dynamicActivities.length + links.length === 0) {
         const warnArgs: WarnArgs = { message: "no activities found" }
         this.emit(CommandEvent.warning, warnArgs)
         return
       }
 
       // step 8: execute the ActivityList
-      const startArgs: StartArgs = { stepCount: activities.length + links.length }
+      const startArgs: StartArgs = { stepCount: dynamicActivities.length + links.length }
       this.emit(CommandEvent.start, startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
       const parJobs = executeParallel(links, actionFinder, linkTargets, config, this)
       // execute the serial jobs
-      await executeSequential(activities, actionFinder, config, linkTargets, this)
+      await executeSequential(dynamicActivities, actionFinder, config, linkTargets, this)
       await Promise.all(parJobs)
 
       // step 9: cleanup

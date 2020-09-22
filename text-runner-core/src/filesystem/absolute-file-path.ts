@@ -1,5 +1,5 @@
 import * as path from "path"
-import { Publications } from "../configuration/publications/publications"
+import * as configuration from "../configuration/index"
 import { removeLeadingSlash } from "../helpers/remove-leading-slash"
 import { AbsoluteLink } from "./absolute-link"
 import { unixify } from "./helpers/unixify"
@@ -63,7 +63,7 @@ export class AbsoluteFilePath {
    * Returns the public link under which this file path is published
    * @param publications the publications of this session
    */
-  publicPath(publications: Publications): AbsoluteLink {
+  publicPath(publications: configuration.Publications): AbsoluteLink {
     const publication = publications.forFilePath(this)
     if (publication == null) {
       return new AbsoluteLink(this.unixified())

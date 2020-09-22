@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { OutputCollector } from "./output-collector"
 
 suite("OutputCollector", function () {

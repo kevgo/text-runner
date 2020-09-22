@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { NameRefiner } from "./name-refiner"
 
 suite("NameRefiner", function () {

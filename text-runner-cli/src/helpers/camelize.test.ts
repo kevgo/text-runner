@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import * as helpers from "."
 
 suite("camelize", function () {

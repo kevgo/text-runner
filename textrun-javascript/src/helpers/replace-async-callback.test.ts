@@ -1,5 +1,5 @@
 import { replaceAsyncCallback } from "./replace-async-callback"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 
 suite("replaceAsyncCallback", function () {
   test("<CALLBACK>", function () {

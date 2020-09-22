@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { TagMapper } from "./tag-mapper"
 import { AstNodeTag, AstNodeType } from "./standard-AST/ast-node"
 

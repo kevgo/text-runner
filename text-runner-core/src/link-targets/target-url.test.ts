@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { targetURL } from "./target-url"
 
 suite("targetURL", function () {

@@ -1,5 +1,5 @@
 import { PathMapper } from "./path-mapper"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 
 suite("PathMapper", function () {
   const mappings = {

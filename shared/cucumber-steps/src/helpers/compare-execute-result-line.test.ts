@@ -1,6 +1,6 @@
 import { ExecuteResultLine } from "../then-steps"
 import { compareExecuteResultLine } from "./compare-execute-result-line"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 
 suite("executeResultLine", function () {
   test("different files", function () {

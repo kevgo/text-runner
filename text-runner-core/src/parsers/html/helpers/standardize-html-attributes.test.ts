@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { standardizeHTMLAttributes } from "./standardize-html-attributes"
 import * as parse5 from "parse5"
 

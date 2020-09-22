@@ -1,5 +1,5 @@
 import { appendAsyncCallback } from "./append-async-callback"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 
 suite("appendAsyncCallback", function () {
   test("synchronous code", function () {

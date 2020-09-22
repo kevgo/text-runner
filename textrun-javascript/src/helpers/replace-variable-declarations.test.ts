@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { replaceVariableDeclarations } from "./replace-variable-declarations"
 
 suite("replaceVariableDeclarations", function () {

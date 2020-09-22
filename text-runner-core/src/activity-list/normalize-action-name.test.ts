@@ -1,5 +1,5 @@
 import { normalizeActionName } from "./normalize-action-name"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 
 suite("normalizeActionName", function () {

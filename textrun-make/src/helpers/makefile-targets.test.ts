@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { makefileTargets } from "./makefile-targets"
 
 suite("makefileTargets", function () {

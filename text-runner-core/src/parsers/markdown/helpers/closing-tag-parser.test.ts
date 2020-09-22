@@ -1,4 +1,4 @@
-import { strict as assert } from "assert"
+import { assert } from "chai"
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
 import { AstNodeList } from "../../standard-AST/ast-node-list"
 import { TagMapper } from "../../tag-mapper"

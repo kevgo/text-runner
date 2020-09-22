@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Actions } from "./actions"
-import { strict as assert } from "assert"
+import { assert } from "chai"
+import { Action } from "./types/action"
 
 suite("Actions", function () {
   suite("register", function () {
     test("a directly exported action", function () {
       const actions = new Actions()
-      const want = () => {}
+      const want: Action = () => 254
       actions.register("hello", want)
       const have = actions.get("hello")
       assert.equal(have, want)
     })
     test("an action exported as the default", function () {
       const actions = new Actions()
-      const func = () => {}
+      const func: Action = () => 254
       const want = { default: func }
       actions.register("hello", want)
       const have = actions.get("hello")
@@ -21,7 +22,7 @@ suite("Actions", function () {
     })
     test("an action exported with a name", function () {
       const actions = new Actions()
-      const func = () => {}
+      const func: Action = () => 254
       const want = { otherName: func }
       actions.register("default", want)
       let have = actions.get("other-name")
@@ -31,8 +32,8 @@ suite("Actions", function () {
     })
     test("multiple exported actions", function () {
       const actions = new Actions()
-      const func1 = () => {}
-      const func2 = () => {}
+      const func1: Action = () => 254
+      const func2: Action = () => 254
       const want = { morning: func1, evening: func2 }
       actions.register("default", want)
       let have = actions.get("morning")

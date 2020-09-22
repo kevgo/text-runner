@@ -1,5 +1,5 @@
 import { callArgs } from "./call-args"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 
 suite("callArgs", function () {
   test("on Windows", function () {

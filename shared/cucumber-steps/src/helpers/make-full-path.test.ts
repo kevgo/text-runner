@@ -1,5 +1,5 @@
 import { makeFullPath } from "./make-full-path"
-import { strict as assert } from "assert"
+import { assert } from "chai"
 
 suite("makeFullPath", function () {
   const linuxTests = {

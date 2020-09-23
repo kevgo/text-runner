@@ -29,13 +29,13 @@ export async function instantiate(
     case "debug":
       return new tr.commands.Debug(trConfig, debugSubcommand)
     case "dynamic":
-      return new tr.commands.DynamicCommand(trConfig)
+      return new tr.commands.Dynamic(trConfig)
     case "run":
       return new tr.commands.Run(trConfig)
     case "static":
-      return new tr.commands.StaticCommand(trConfig)
+      return new tr.commands.Static(trConfig)
     case "unused":
-      return new tr.commands.UnusedCommand(trConfig)
+      return new tr.commands.Unused(trConfig)
     default:
       throw new tr.UserError(`unknown command: ${commandName}`)
   }

@@ -7,8 +7,7 @@ import { Command } from "./command"
 import * as configuration from "../configuration/index"
 import { EventEmitter } from "events"
 
-// TODO: don't inherit here, use encapsulation
-export class UnusedCommand implements Command {
+export class Unused implements Command {
   userConfig: configuration.PartialData
   emitter: EventEmitter
 

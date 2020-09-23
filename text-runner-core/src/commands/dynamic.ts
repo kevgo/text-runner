@@ -10,7 +10,7 @@ import * as configuration from "../configuration/index"
 import * as events from "../events/index"
 import { EventEmitter } from "events"
 
-export class DynamicCommand implements Command {
+export class Dynamic implements Command {
   userConfig: configuration.PartialData
   emitter: EventEmitter
 

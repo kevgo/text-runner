@@ -2,7 +2,7 @@ import * as util from "util"
 import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
+import * as parser from "../parsers/index"
 import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
@@ -46,7 +46,7 @@ Example: text-run debug --${this.subcommand} foo.md`
 --link-targets: document anchors to link to
 
 Example: text-run debug --images foo.md`
-    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
+    const ASTs = await parser.markdown.parseMarkdownFiles(filenames, config.sourceDir)
     switch (this.subcommand) {
       case "activities":
         return debugActivities(ASTs, config)

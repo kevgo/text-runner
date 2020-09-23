@@ -1,7 +1,7 @@
 import { ActionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
-import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
+import * as parser from "../parsers"
 import * as events from "../events/index"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
@@ -33,7 +33,7 @@ export class Unused implements Command {
     }
 
     // step 3: read and parse files
-    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
+    const ASTs = await parser.markdown.parseMarkdownFiles(filenames, config.sourceDir)
 
     // step 4: extract activities
     const usedActivityNames = extractActivities(ASTs, config.regionMarker).map(activity => activity.actionName)

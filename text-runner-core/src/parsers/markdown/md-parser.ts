@@ -1,7 +1,7 @@
 import * as MarkdownIt from "markdown-it"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { HTMLParser } from "../html/html-parser"
+import * as html from "../html"
 import { AstNode, AstNodeAttributes, AstNodeTag, AstNodeType } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
@@ -18,7 +18,7 @@ export class MarkdownParser {
   private readonly closingTagParser: ClosingTagParser
 
   /** parses HTML snippets into AstNodeLists */
-  private readonly htmlParser: HTMLParser
+  private readonly htmlParser: html.Parser
 
   /** MarkdownIt instance */
   private readonly markdownIt: MarkdownIt
@@ -33,7 +33,7 @@ export class MarkdownParser {
     })
     this.tagMapper = new TagMapper()
     this.closingTagParser = new ClosingTagParser(this.tagMapper)
-    this.htmlParser = new HTMLParser(this.tagMapper)
+    this.htmlParser = new html.Parser(this.tagMapper)
   }
 
   /** returns the standard AST representing the given Markdown text */

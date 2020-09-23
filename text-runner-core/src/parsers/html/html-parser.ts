@@ -6,8 +6,8 @@ import { AstNodeList } from "../standard-AST/ast-node-list"
 import { TagMapper } from "../tag-mapper"
 import { standardizeHTMLAttributes } from "./helpers/standardize-html-attributes"
 
-/** HtmlParser converts HTML5 source into the standardized AST format. */
-export class HTMLParser {
+/** Parser converts HTML5 source into the standardized AST format. */
+export class Parser {
   private readonly tagMapper: TagMapper
 
   constructor(tagMapper: TagMapper) {

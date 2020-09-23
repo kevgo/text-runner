@@ -4,7 +4,7 @@ import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { AstNode } from "../standard-AST/ast-node"
 import { AstNodeList } from "../standard-AST/ast-node-list"
-import { parseMarkdownFiles } from "./parse-markdown-files"
+import { parse } from "./parse"
 
 suite("MdParser.parseFile()", function () {
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
@@ -19,7 +19,7 @@ suite("MdParser.parseFile()", function () {
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
           expected.push(AstNode.scaffold(expectedNodeData))
         }
-        const actual = await parseMarkdownFiles([new AbsoluteFilePath("input.md")], testDirPath)
+        const actual = await parse([new AbsoluteFilePath("input.md")], testDirPath)
         assert.deepEqual(actual[0], expected)
       })
     }

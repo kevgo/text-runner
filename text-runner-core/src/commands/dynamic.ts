@@ -1,7 +1,7 @@
 import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import * as parser from "../parsers/index"
+import * as parsers from "../parsers/index"
 import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
@@ -43,7 +43,7 @@ export class Dynamic implements Command {
       }
 
       // step 4: read and parse files
-      const ASTs = await parser.markdown.parseMarkdownFiles(filenames, config.sourceDir)
+      const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
 
       // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)

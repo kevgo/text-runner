@@ -13,7 +13,7 @@ export type MarkdownItNode = any
 export type MarkdownItAst = MarkdownItNode[]
 export type MarkdownItNodeAttrs = string[][]
 
-/** MarkdownParser is a DocumentsParser that parses Markdown. */
+/** MarkdownParser parses Markdown. */
 export class MarkdownParser {
   private readonly closingTagParser: ClosingTagParser
 

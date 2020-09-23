@@ -43,7 +43,7 @@ Feature: separate working directory
   Scenario: running in a local temp directory via API
     When calling:
       """
-      command = new textRunner.commands.RunCommand({...config, systemTmp: false})
+      command = new textRunner.commands.Run({...config, systemTmp: false})
       observer = new MyObserverClass(command)
       await command.execute()
       """
@@ -70,7 +70,7 @@ Feature: separate working directory
   Scenario: running in the global temp directory via API
     When calling:
       """
-      command = new textRunner.commands.RunCommand({...config, systemTmp: true})
+      command = new textRunner.commands.Run({...config, systemTmp: true})
       observer = new MyObserverClass(command)
       await command.execute()
       """

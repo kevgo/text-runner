@@ -9,7 +9,7 @@ When(/^calling:$/, async function (jsText: string) {
   const config: textRunner.configuration.PartialData = { sourceDir: world.rootDir }
   // define a few variables here, they will be overwritten in the eval call
   // eslint-disable-next-line prefer-const
-  let command = new textRunner.commands.RunCommand(config)
+  let command = new textRunner.commands.Run(config)
   // eslint-disable-next-line prefer-const
   let observer = new ActivityCollector(command)
   // eval the given code
@@ -34,7 +34,7 @@ When(/^calling:$/, async function (jsText: string) {
 
 When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
   const world = this as TRWorld
-  const command = new textRunner.commands.RunCommand({ sourceDir: world.rootDir })
+  const command = new textRunner.commands.Run({ sourceDir: world.rootDir })
   const activityCollector = new ActivityCollector(command)
   try {
     await command.execute()

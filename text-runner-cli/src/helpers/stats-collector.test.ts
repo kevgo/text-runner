@@ -7,7 +7,7 @@ const delay = util.promisify(setTimeout)
 
 suite("StatsCollector", function () {
   test("counting activities", function () {
-    const command = new tr.commands.RunCommand({})
+    const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
     command.emit("failed", "")
     command.emit("skipped", "")
@@ -16,7 +16,7 @@ suite("StatsCollector", function () {
   })
 
   test("counting errors", function () {
-    const command = new tr.commands.RunCommand({})
+    const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
     command.emit("failed", "")
     command.emit("failed", "")
@@ -24,7 +24,7 @@ suite("StatsCollector", function () {
   })
 
   test("counting skips", function () {
-    const command = new tr.commands.RunCommand({})
+    const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
     command.emit("skipped", "")
     command.emit("skipped", "")
@@ -32,7 +32,7 @@ suite("StatsCollector", function () {
   })
 
   test("counting successes", function () {
-    const command = new tr.commands.RunCommand({})
+    const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
     command.emit("success", "")
     command.emit("success", "")
@@ -40,7 +40,7 @@ suite("StatsCollector", function () {
   })
 
   test("counting the time", async function () {
-    const command = new tr.commands.RunCommand({})
+    const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
     await delay(1)
     assert.match(counter.stats().duration, /\d+.s/)

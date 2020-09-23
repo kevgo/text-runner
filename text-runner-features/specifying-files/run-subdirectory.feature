@@ -16,7 +16,7 @@ Feature: testing all docs in a subfolder
   Scenario: testing all files in a subfolder via API
     When calling:
       """
-      command = new textRunner.commands.RunCommand({...config, files: 'commands'})
+      command = new textRunner.commands.Run({...config, files: 'commands'})
       observer = new MyObserverClass(command)
       await command.execute()
       """

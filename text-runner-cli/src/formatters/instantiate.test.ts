@@ -7,7 +7,7 @@ import { SummaryFormatter } from "./summary-formatter"
 import { ProgressFormatter } from "./progress-formatter"
 
 suite("instantiateFormatter()", function () {
-  const command = new tr.commands.RunCommand({})
+  const command = new tr.commands.Run({})
   test("request detailed formatter", function () {
     const have = formatter.instantiate("detailed", ".", command)
     assert.instanceOf(have, DetailedFormatter)

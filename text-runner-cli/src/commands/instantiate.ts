@@ -27,11 +27,11 @@ export async function instantiate(
   const trConfig = userConfig.toCoreConfig()
   switch (commandName) {
     case "debug":
-      return new tr.commands.DebugCommand(trConfig, debugSubcommand)
+      return new tr.commands.Debug(trConfig, debugSubcommand)
     case "dynamic":
       return new tr.commands.DynamicCommand(trConfig)
     case "run":
-      return new tr.commands.RunCommand(trConfig)
+      return new tr.commands.Run(trConfig)
     case "static":
       return new tr.commands.StaticCommand(trConfig)
     case "unused":

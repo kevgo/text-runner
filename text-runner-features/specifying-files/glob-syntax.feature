@@ -23,7 +23,7 @@ Feature: finding files in certain directories only
   Scenario: selecting files via API
     When calling:
       """
-      command = new textRunner.commands.RunCommand({...config, files: 'foo/*.md'})
+      command = new textRunner.commands.Run({...config, files: 'foo/*.md'})
       observer = new MyObserverClass(command)
       await command.execute()
       """

@@ -14,7 +14,7 @@ import { EventEmitter } from "events"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
-export class DebugCommand implements Command {
+export class Debug implements Command {
   userConfig: configuration.PartialData
   subcommand: DebugSubcommand | undefined
   emitter: EventEmitter

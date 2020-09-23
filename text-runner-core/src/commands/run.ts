@@ -12,7 +12,7 @@ import * as configuration from "../configuration/index"
 import { EventEmitter } from "events"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
-export class RunCommand implements command.Command {
+export class Run implements command.Command {
   userConfig: configuration.PartialData
   emitter: EventEmitter
 

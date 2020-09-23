@@ -11,8 +11,8 @@ export class SummaryFormatter implements formatter.Formatter {
 
   constructor(sourceDir: string, emitter: events.EventEmitter) {
     this.sourceDir = sourceDir
-    emitter.on(tr.CommandEvent.output, console.log)
-    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
+    emitter.on(tr.events.CommandEvent.output, console.log)
+    emitter.on(tr.events.CommandEvent.failed, this.failed.bind(this))
   }
 
   // @ts-ignore: okay to not use parameters here

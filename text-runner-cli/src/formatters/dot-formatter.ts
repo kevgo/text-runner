@@ -11,12 +11,12 @@ export class DotFormatter implements formatter.Formatter {
 
   constructor(sourceDir: string, emitter: events.EventEmitter) {
     this.sourceDir = sourceDir
-    emitter.on(tr.CommandEvent.output, console.log)
-    emitter.on(tr.CommandEvent.success, this.success.bind(this))
-    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
-    emitter.on(tr.CommandEvent.warning, this.warning.bind(this))
-    emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
-    emitter.on(tr.CommandEvent.finish, this.finish.bind(this))
+    emitter.on(tr.events.CommandEvent.output, console.log)
+    emitter.on(tr.events.CommandEvent.success, this.success.bind(this))
+    emitter.on(tr.events.CommandEvent.failed, this.failed.bind(this))
+    emitter.on(tr.events.CommandEvent.warning, this.warning.bind(this))
+    emitter.on(tr.events.CommandEvent.skipped, this.skipped.bind(this))
+    emitter.on(tr.events.CommandEvent.finish, this.finish.bind(this))
   }
 
   failed(args: tr.events.FailedArgs): void {

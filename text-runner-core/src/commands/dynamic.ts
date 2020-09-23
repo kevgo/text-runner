@@ -6,7 +6,7 @@ import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
-import { CommandEvent, Command } from "./command"
+import { Command } from "./command"
 import * as configuration from "../configuration/index"
 import * as event from "../events/index"
 
@@ -33,7 +33,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
-        this.emit(CommandEvent.warning, warnArgs)
+        this.emit(event.CommandEvent.warning, warnArgs)
         return
       }
 
@@ -47,7 +47,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
       const activities = extractActivities(ASTs, config.regionMarker)
       if (activities.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no activities found" }
-        this.emit(CommandEvent.warning, warnArgs)
+        this.emit(event.CommandEvent.warning, warnArgs)
         return
       }
 
@@ -56,7 +56,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
 
       // step 8: execute the ActivityList
       const startArgs: event.StartArgs = { stepCount: activities.length }
-      this.emit(CommandEvent.start, startArgs)
+      this.emit(event.CommandEvent.start, startArgs)
       process.chdir(config.workspace)
       await executeSequential(activities, actionFinder, config, linkTargets, this)
     } finally {

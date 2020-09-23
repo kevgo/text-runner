@@ -6,7 +6,7 @@ import { executeParallel } from "../runners/execute-parallel"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
-import { CommandEvent, Command } from "./command"
+import { Command } from "./command"
 import * as event from "../events/index"
 import * as configuration from "../configuration/index"
 
@@ -33,7 +33,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
-        this.emit(CommandEvent.warning, warnArgs)
+        this.emit(event.CommandEvent.warning, warnArgs)
         return
       }
 
@@ -47,7 +47,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
       const links = extractImagesAndLinks(ASTs)
       if (links.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no activities found" }
-        this.emit(CommandEvent.warning, warnArgs)
+        this.emit(event.CommandEvent.warning, warnArgs)
         return
       }
 
@@ -56,7 +56,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
 
       // step 8: execute the ActivityList
       const startArgs: event.StartArgs = { stepCount: links.length }
-      this.emit(CommandEvent.start, startArgs)
+      this.emit(event.CommandEvent.start, startArgs)
       process.chdir(config.workspace)
       const parResults = executeParallel(links, actionFinder, linkTargets, config, this)
       await Promise.all(parResults)

@@ -4,7 +4,7 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import * as events from "events"
 import * as event from "../events/index"
-import { CommandEvent, Command } from "./command"
+import { Command } from "./command"
 import * as configuration from "../configuration/index"
 
 export class UnusedCommand extends events.EventEmitter implements Command {
@@ -23,7 +23,7 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
       const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
-      this.emit(CommandEvent.warning, warnArgs)
+      this.emit(event.CommandEvent.warning, warnArgs)
       return
     }
 
@@ -42,9 +42,9 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     )
 
     // step 7: write results
-    this.emit(CommandEvent.output, "Unused activities:")
+    this.emit(event.CommandEvent.output, "Unused activities:")
     for (const unusedActivityName of unusedActivityNames) {
-      this.emit(CommandEvent.output, `- ${unusedActivityName}`)
+      this.emit(event.CommandEvent.output, `- ${unusedActivityName}`)
     }
   }
 }

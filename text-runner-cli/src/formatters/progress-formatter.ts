@@ -21,12 +21,12 @@ export class ProgressFormatter implements formatter.Formatter {
       },
       progress.Presets.shades_classic
     )
-    emitter.on(tr.CommandEvent.start, this.start.bind(this))
-    emitter.on(tr.CommandEvent.output, console.log)
-    emitter.on(tr.CommandEvent.success, this.success.bind(this))
-    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
-    emitter.on(tr.CommandEvent.warning, this.warning.bind(this))
-    emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
+    emitter.on(tr.events.CommandEvent.start, this.start.bind(this))
+    emitter.on(tr.events.CommandEvent.output, console.log)
+    emitter.on(tr.events.CommandEvent.success, this.success.bind(this))
+    emitter.on(tr.events.CommandEvent.failed, this.failed.bind(this))
+    emitter.on(tr.events.CommandEvent.warning, this.warning.bind(this))
+    emitter.on(tr.events.CommandEvent.skipped, this.skipped.bind(this))
   }
 
   start(args: tr.events.StartArgs): void {

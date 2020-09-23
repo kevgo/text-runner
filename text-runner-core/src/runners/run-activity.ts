@@ -10,7 +10,6 @@ import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { EventEmitter } from "events"
-import { CommandEvent } from "../commands/command"
 import { UserError } from "../errors/user-error"
 import * as events from "../events/index"
 
@@ -49,14 +48,14 @@ export async function runActivity(
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
       }
-      emitter.emit(CommandEvent.success, successArgs)
+      emitter.emit(events.CommandEvent.success, successArgs)
     } else if (actionResult === args.SKIPPING) {
       const skippedArgs: events.SkippedArgs = {
         activity,
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
       }
-      emitter.emit(CommandEvent.skipped, skippedArgs)
+      emitter.emit(events.CommandEvent.skipped, skippedArgs)
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
@@ -67,7 +66,7 @@ export async function runActivity(
       error: new UserError(e.message, e.guidance || "", activity.file, activity.line),
       output: outputCollector.toString(),
     }
-    emitter.emit(CommandEvent.failed, failedArgs)
+    emitter.emit(events.CommandEvent.failed, failedArgs)
     return true
   }
   return false

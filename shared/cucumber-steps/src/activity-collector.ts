@@ -17,10 +17,10 @@ export class ActivityCollector {
 
   constructor(emitter: events.EventEmitter) {
     this.activities = []
-    emitter.on(tr.CommandEvent.failed, this.onFailure.bind(this))
-    emitter.on(tr.CommandEvent.skipped, this.onSkipped.bind(this))
-    emitter.on(tr.CommandEvent.success, this.onSuccess.bind(this))
-    emitter.on(tr.CommandEvent.warning, this.onWarning.bind(this))
+    emitter.on(tr.events.CommandEvent.failed, this.onFailure.bind(this))
+    emitter.on(tr.events.CommandEvent.skipped, this.onSkipped.bind(this))
+    emitter.on(tr.events.CommandEvent.success, this.onSuccess.bind(this))
+    emitter.on(tr.events.CommandEvent.warning, this.onWarning.bind(this))
   }
 
   results(): ActivityResult[] {

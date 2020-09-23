@@ -6,18 +6,23 @@ import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import { ActionFinder } from "../actions/action-finder"
-import * as events from "events"
-import * as event from "../events"
-import { Command } from "./command"
+import * as events from "../events"
+import * as command from "./index"
 import * as configuration from "../configuration/index"
+import { EventEmitter } from "events"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
-export class RunCommand extends events.EventEmitter implements Command {
+export class RunCommand implements command.Command {
   userConfig: configuration.PartialData
+  emitter: EventEmitter
 
   constructor(userConfig: configuration.PartialData) {
-    super()
     this.userConfig = userConfig
+    this.emitter = new EventEmitter()
+  }
+
+  emit(name: events.CommandEvent, payload: events.Args): void {
+    this.emitter.emit(name, payload)
   }
 
   async execute(): Promise<void> {
@@ -34,7 +39,7 @@ export class RunCommand extends events.EventEmitter implements Command {
       // step 3: find files
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
-        const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
+        const warnArgs: events.WarnArgs = { message: "no Markdown files found" }
         this.emit("warning", warnArgs)
         return
       }
@@ -52,13 +57,13 @@ export class RunCommand extends events.EventEmitter implements Command {
       const dynamicActivities = activities.extractActivities(ASTs, config.regionMarker)
       const links = activities.extractImagesAndLinks(ASTs)
       if (dynamicActivities.length + links.length === 0) {
-        const warnArgs: event.WarnArgs = { message: "no activities found" }
+        const warnArgs: events.WarnArgs = { message: "no activities found" }
         this.emit("warning", warnArgs)
         return
       }
 
       // step 8: execute the ActivityList
-      const startArgs: event.StartArgs = { stepCount: dynamicActivities.length + links.length }
+      const startArgs: events.StartArgs = { stepCount: dynamicActivities.length + links.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
@@ -72,5 +77,10 @@ export class RunCommand extends events.EventEmitter implements Command {
     } finally {
       process.chdir(originalDir)
     }
+  }
+
+  on(name: events.CommandEvent, handler: events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
   }
 }

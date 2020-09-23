@@ -2,18 +2,23 @@ import { ActionFinder } from "../actions/action-finder"
 import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
-import * as events from "events"
-import * as event from "../events/index"
+import * as events from "../events/index"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
+import { EventEmitter } from "events"
 
 // TODO: don't inherit here, use encapsulation
-export class UnusedCommand extends events.EventEmitter implements Command {
+export class UnusedCommand implements Command {
   userConfig: configuration.PartialData
+  emitter: EventEmitter
 
   constructor(userConfig: configuration.PartialData) {
-    super()
     this.userConfig = userConfig
+    this.emitter = new EventEmitter()
+  }
+
+  emit(name: events.CommandEvent, payload: events.Args): void {
+    this.emitter.emit(name, payload)
   }
 
   async execute(): Promise<void> {
@@ -23,7 +28,7 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     // step 2: find files
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
-      const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
+      const warnArgs: events.WarnArgs = { message: "no Markdown files found" }
       this.emit("warning", warnArgs)
       return
     }
@@ -47,5 +52,10 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     for (const unusedActivityName of unusedActivityNames) {
       this.emit("output", `- ${unusedActivityName}`)
     }
+  }
+
+  on(name: events.CommandEvent, handler: events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
   }
 }

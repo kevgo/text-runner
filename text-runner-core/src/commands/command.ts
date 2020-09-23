@@ -1,11 +1,9 @@
 import * as events from "../events/index"
 
 /** Command describes a Text-Runner command */
-// TODO: remove EventEmitter here
-export interface Command extends NodeJS.EventEmitter {
+export interface Command {
   /** executes this command */
   execute(): void
-  on(event: events.CommandEvent, handler: (arg: any) => void): this
-  // TODO: replace boolean with void
-  emit(event: events.CommandEvent, payload: events.Args): boolean
+  on(event: events.CommandEvent, handler: events.Handler): void
+  emit(event: events.CommandEvent, payload: events.Args): void
 }

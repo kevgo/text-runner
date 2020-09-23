@@ -7,20 +7,26 @@ import { AstNode } from "../parsers/standard-AST/ast-node"
 import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
-import * as events from "events"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
+import * as events from "../events/index"
+import { EventEmitter } from "events"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
-export class DebugCommand extends events.EventEmitter implements Command {
+export class DebugCommand implements Command {
   userConfig: configuration.PartialData
   subcommand: DebugSubcommand | undefined
+  emitter: EventEmitter
 
   constructor(userConfig: configuration.PartialData, subcommand: DebugSubcommand | undefined) {
-    super()
     this.userConfig = userConfig
     this.subcommand = subcommand
+    this.emitter = new EventEmitter()
+  }
+
+  emit(name: events.CommandEvent, payload: events.Args): void {
+    this.emitter.emit(name, payload)
   }
 
   async execute(): Promise<void> {
@@ -57,6 +63,11 @@ Example: text-run debug --images foo.md`
       default:
         throw new UserError(`unknown debug sub-command: ${this.subcommand}`, guidance)
     }
+  }
+
+  on(name: events.CommandEvent, handler: events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
   }
 }
 

@@ -10,7 +10,9 @@ export type CommandEvent =
   | "warning" // a warning to print to the user
   | "finish" // execution is done
 
-export type Args = FailedArgs | SkippedArgs | StartArgs | SuccessArgs | WarnArgs
+export type Args = FailedArgs | SkippedArgs | StartArgs | SuccessArgs | WarnArgs | string
+
+export type Handler = (arg: any) => void
 
 export interface FailedArgs {
   activity: Activity

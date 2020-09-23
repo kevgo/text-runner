@@ -1,4 +1,4 @@
-import { ActionFinder } from "../actions/action-finder"
+import * as actions from "../actions"
 import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as parsers from "../parsers"
@@ -39,7 +39,7 @@ export class Unused implements Command {
     const usedActivityNames = extractActivities(ASTs, config.regionMarker).map(activity => activity.actionName)
 
     // step 5: find defined activities
-    const definedActivityNames = ActionFinder.load(config.sourceDir).customActionNames()
+    const definedActivityNames = actions.ActionFinder.load(config.sourceDir).customActionNames()
 
     // step 6: identify unused activities
     const unusedActivityNames = definedActivityNames.filter(

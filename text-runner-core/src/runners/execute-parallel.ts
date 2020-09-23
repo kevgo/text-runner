@@ -2,7 +2,7 @@ import { ActivityList } from "../activities/index"
 import * as configuration from "../configuration/index"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"
-import { ActionFinder } from "../actions/action-finder"
+import * as actions from "../actions"
 import * as commands from "../commands/index"
 
 /**
@@ -11,7 +11,7 @@ import * as commands from "../commands/index"
  */
 export function executeParallel(
   activities: ActivityList,
-  actionFinder: ActionFinder,
+  actionFinder: actions.ActionFinder,
   linkTargets: LinkTargetList,
   configuration: configuration.Data,
   emitter: commands.Command

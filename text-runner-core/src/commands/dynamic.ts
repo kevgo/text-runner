@@ -4,7 +4,7 @@ import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parsers from "../parsers/index"
 import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
-import { ActionFinder } from "../actions/action-finder"
+import * as actions from "../actions"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
 import * as events from "../events/index"
@@ -57,7 +57,7 @@ export class Dynamic implements Command {
       }
 
       // step 7: find actions
-      const actionFinder = ActionFinder.loadDynamic(config.sourceDir)
+      const actionFinder = actions.ActionFinder.loadDynamic(config.sourceDir)
 
       // step 8: execute the ActivityList
       const startArgs: events.StartArgs = { stepCount: activities.length }

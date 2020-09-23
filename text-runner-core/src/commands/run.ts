@@ -1,11 +1,11 @@
 import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import * as parsers from "../parsers"
+import * as parser from "../parsers"
 import { executeParallel } from "../runners/execute-parallel"
 import { executeSequential } from "../runners/execute-sequential"
 import { createWorkspace } from "../working-dir/create-working-dir"
-import { ActionFinder } from "../actions/action-finder"
+import * as actions from "../actions"
 import * as events from "../events"
 import * as command from "./index"
 import * as configuration from "../configuration/index"
@@ -45,13 +45,13 @@ export class Run implements command.Command {
       }
 
       // step 4: read and parse files
-      const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
+      const ASTs = await parser.markdown.parse(filenames, config.sourceDir)
 
       // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)
 
       // step 6: find actions
-      const actionFinder = ActionFinder.load(config.sourceDir)
+      const actionFinder = actions.ActionFinder.load(config.sourceDir)
 
       // step 7: extract activities
       const dynamicActivities = activities.extractActivities(ASTs, config.regionMarker)

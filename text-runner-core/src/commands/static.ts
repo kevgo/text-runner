@@ -1,10 +1,10 @@
 import { extractImagesAndLinks } from "../activities/extract-images-and-links"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
-import * as parsers from "../parsers"
+import * as parser from "../parsers"
 import { executeParallel } from "../runners/execute-parallel"
 import { createWorkspace } from "../working-dir/create-working-dir"
-import { ActionFinder } from "../actions/action-finder"
+import * as actions from "../actions"
 import { Command } from "./command"
 import * as events from "../events/index"
 import * as configuration from "../configuration/index"
@@ -43,7 +43,7 @@ export class Static implements Command {
       }
 
       // step 4: read and parse files
-      const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
+      const ASTs = await parser.markdown.parse(filenames, config.sourceDir)
 
       // step 5: find link targets
       const linkTargets = findLinkTargets(ASTs)
@@ -57,7 +57,7 @@ export class Static implements Command {
       }
 
       // step 7: find actions
-      const actionFinder = ActionFinder.loadStatic()
+      const actionFinder = actions.ActionFinder.loadStatic()
 
       // step 8: execute the ActivityList
       const startArgs: events.StartArgs = { stepCount: links.length }

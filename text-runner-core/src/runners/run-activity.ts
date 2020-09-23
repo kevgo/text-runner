@@ -1,6 +1,6 @@
 import humanize from "humanize-string"
 import * as util from "util"
-import { ActionFinder } from "../actions/action-finder"
+import * as actions from "../actions"
 import { Action } from "../actions/types/action"
 import { ActionArgs } from "../actions/types/action-args"
 import { ActionResult } from "../actions/types/action-result"
@@ -16,7 +16,7 @@ import * as commands from "../commands/index"
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(
   activity: Activity,
-  actionFinder: ActionFinder,
+  actionFinder: actions.ActionFinder,
   configuration: configuration.Data,
   linkTargets: LinkTargetList,
   emitter: commands.Command

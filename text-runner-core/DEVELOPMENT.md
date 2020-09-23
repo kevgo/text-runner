@@ -27,7 +27,7 @@ steps:
 1. **configuration --> list of Markdown files to test:** this is done by the
    [filesystem module](src/filesystem)
 1. **list of filenames --> list of file ASTs:** the [parse module](src/parsers)
-   [reads](src/parsers/markdown/parse-markdown-files.ts) each file and
+   [reads](src/parsers/markdown/parse.ts) each file and
    [parses](src/parsers/markdown/md-parser.ts) it into the
    [standard AST](src/parsers/standard-AST) format. The standard AST is
    optimized for analyzing and testing,and identical for comparable Markdown and

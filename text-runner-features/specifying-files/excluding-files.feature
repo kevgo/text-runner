@@ -41,7 +41,7 @@ Feature: excluding files
   Scenario: excluding via API
     When calling:
       """
-      command = new textRunner.RunCommand({...config, exclude: 'foo'})
+      command = new textRunner.commands.RunCommand({...config, exclude: 'foo'})
       observer = new MyObserverClass(command)
       await command.execute()
       """

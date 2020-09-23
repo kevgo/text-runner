@@ -68,7 +68,7 @@ Feature: checking embedded HTML images
       """
     When calling:
       """
-      command = new textRunner.RunCommand({...config, online: true})
+      command = new textRunner.commands.RunCommand({...config, online: true})
       observer = new MyObserverClass(command)
       await command.execute()
       """

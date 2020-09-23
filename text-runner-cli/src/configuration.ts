@@ -14,7 +14,7 @@ export class Data {
   files?: string // files to test
   formatterName?: formatters.Names // name of the formatter to use
   online?: boolean
-  publications?: tr.Publications
+  publications?: tr.configuration.Publications
   scaffoldLanguage?: commands.ScaffoldLanguage
   sourceDir?: string // the root directory of the source code to test
   systemTmp?: boolean
@@ -48,8 +48,8 @@ export class Data {
     return result
   }
 
-  toCoreConfig(): tr.PartialConfiguration {
-    const result: tr.PartialConfiguration = {}
+  toCoreConfig(): tr.configuration.PartialData {
+    const result: tr.configuration.PartialData = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile
     }
@@ -63,7 +63,7 @@ export class Data {
       result.online = this.online
     }
     if (this.publications != null) {
-      result.publications = tr.Publications.fromJSON(this.publications).sorted()
+      result.publications = tr.configuration.Publications.fromJSON(this.publications).sorted()
     }
     if (this.regionMarker != null) {
       result.regionMarker = this.regionMarker

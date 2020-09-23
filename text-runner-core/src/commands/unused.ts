@@ -3,8 +3,8 @@ import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
 import * as events from "events"
+import * as event from "../events/index"
 import { CommandEvent, Command } from "./command"
-import { WarnArgs } from "../text-runner"
 import * as configuration from "../configuration/index"
 
 export class UnusedCommand extends events.EventEmitter implements Command {
@@ -22,7 +22,7 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     // step 2: find files
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
-      const warnArgs: WarnArgs = { message: "no Markdown files found" }
+      const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
       this.emit(CommandEvent.warning, warnArgs)
       return
     }

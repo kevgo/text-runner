@@ -12,7 +12,7 @@ import { OutputCollector } from "./helpers/output-collector"
 import { EventEmitter } from "events"
 import { CommandEvent } from "../commands/command"
 import { UserError } from "../errors/user-error"
-import { SuccessArgs, SkippedArgs, FailedArgs } from "../text-runner"
+import * as events from "../events/index"
 
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(
@@ -44,14 +44,14 @@ export async function runActivity(
       actionResult = await runCallbackFunc(action, args)
     }
     if (actionResult === undefined) {
-      const successArgs: SuccessArgs = {
+      const successArgs: events.SuccessArgs = {
         activity,
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
       }
       emitter.emit(CommandEvent.success, successArgs)
     } else if (actionResult === args.SKIPPING) {
-      const skippedArgs: SkippedArgs = {
+      const skippedArgs: events.SkippedArgs = {
         activity,
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
@@ -61,7 +61,7 @@ export async function runActivity(
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (e) {
-    const failedArgs: FailedArgs = {
+    const failedArgs: events.FailedArgs = {
       activity,
       finalName: nameRefiner.finalName(),
       error: new UserError(e.message, e.guidance || "", activity.file, activity.line),

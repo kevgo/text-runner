@@ -8,7 +8,7 @@ import { ActionFinder } from "../actions/action-finder"
 import * as events from "events"
 import { CommandEvent, Command } from "./command"
 import * as configuration from "../configuration/index"
-import { WarnArgs, StartArgs } from "../text-runner"
+import * as event from "../events/index"
 
 export class DynamicCommand extends events.EventEmitter implements Command {
   userConfig: configuration.PartialData
@@ -32,7 +32,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
       // step 3: find files
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
-        const warnArgs: WarnArgs = { message: "no Markdown files found" }
+        const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
         this.emit(CommandEvent.warning, warnArgs)
         return
       }
@@ -46,7 +46,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
       // step 6: extract activities
       const activities = extractActivities(ASTs, config.regionMarker)
       if (activities.length === 0) {
-        const warnArgs: WarnArgs = { message: "no activities found" }
+        const warnArgs: event.WarnArgs = { message: "no activities found" }
         this.emit(CommandEvent.warning, warnArgs)
         return
       }
@@ -55,7 +55,7 @@ export class DynamicCommand extends events.EventEmitter implements Command {
       const actionFinder = ActionFinder.loadDynamic(config.sourceDir)
 
       // step 8: execute the ActivityList
-      const startArgs: StartArgs = { stepCount: activities.length }
+      const startArgs: event.StartArgs = { stepCount: activities.length }
       this.emit(CommandEvent.start, startArgs)
       process.chdir(config.workspace)
       await executeSequential(activities, actionFinder, config, linkTargets, this)

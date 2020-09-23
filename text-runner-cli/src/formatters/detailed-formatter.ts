@@ -18,14 +18,14 @@ export class DetailedFormatter implements formatter.Formatter {
     emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
   }
 
-  success(args: tr.SuccessArgs): void {
+  success(args: tr.events.SuccessArgs): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
     console.log(color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.finalName}`))
   }
 
-  failed(args: tr.FailedArgs): void {
+  failed(args: tr.events.FailedArgs): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -35,7 +35,7 @@ export class DetailedFormatter implements formatter.Formatter {
     helpers.printCodeFrame(console.log, filePath, args.activity.line)
   }
 
-  skipped(args: tr.SkippedArgs): void {
+  skipped(args: tr.events.SkippedArgs): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -44,7 +44,7 @@ export class DetailedFormatter implements formatter.Formatter {
     )
   }
 
-  warning(args: tr.WarnArgs): void {
+  warning(args: tr.events.WarnArgs): void {
     console.log(color.magenta(args.message))
   }
 

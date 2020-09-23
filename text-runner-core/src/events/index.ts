@@ -1,15 +1,16 @@
 import { Activity } from "../activities/index"
 
 /** CommandEvent defines the events that a command can emit. */
-export enum CommandEvent {
-  start = "start", // execution is starting
-  output = "output", // something to print to the user
-  success = "success", // a step was successful
-  failed = "failed", // a step failed
-  skipped = "skipped", // a step was skipped
-  warning = "warning", // a warning to print to the user
-  finish = "finish", // execution is done
-}
+export type CommandEvent =
+  | "start" // execution is starting
+  | "output" // something to print to the user
+  | "success" // a step was successful
+  | "failed" // a step failed
+  | "skipped" // a step was skipped
+  | "warning" // a warning to print to the user
+  | "finish" // execution is done
+
+export type Args = FailedArgs | SkippedArgs | StartArgs | SuccessArgs | WarnArgs
 
 export interface FailedArgs {
   activity: Activity

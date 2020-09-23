@@ -35,7 +35,7 @@ export class RunCommand extends events.EventEmitter implements Command {
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
-        this.emit(event.CommandEvent.warning, warnArgs)
+        this.emit("warning", warnArgs)
         return
       }
 
@@ -53,13 +53,13 @@ export class RunCommand extends events.EventEmitter implements Command {
       const links = activities.extractImagesAndLinks(ASTs)
       if (dynamicActivities.length + links.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no activities found" }
-        this.emit(event.CommandEvent.warning, warnArgs)
+        this.emit("warning", warnArgs)
         return
       }
 
       // step 8: execute the ActivityList
       const startArgs: event.StartArgs = { stepCount: dynamicActivities.length + links.length }
-      this.emit(event.CommandEvent.start, startArgs)
+      this.emit("start", startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
       const parJobs = executeParallel(links, actionFinder, linkTargets, config, this)

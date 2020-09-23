@@ -10,7 +10,7 @@ import * as commands from "./commands"
  */
 export function parse(
   argv: string[]
-): { commandName: string; cmdLineConfig: config.Data; debugSubcommand?: tr.DebugSubcommand } {
+): { commandName: string; cmdLineConfig: config.Data; debugSubcommand?: tr.commands.DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)
@@ -52,14 +52,14 @@ export function parse(
     commandName = "run"
   }
 
-  let debugSubcommand: tr.DebugSubcommand | undefined
+  let debugSubcommand: tr.commands.DebugSubcommand | undefined
   if (commandName === "debug") {
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
   return { commandName, cmdLineConfig, debugSubcommand }
 }
 
-function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.DebugSubcommand {
+function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.commands.DebugSubcommand {
   if (cliArgs.activities) {
     return "activities"
   } else if (cliArgs.ast) {

@@ -2,20 +2,19 @@ import * as color from "colorette"
 import * as path from "path"
 import * as helpers from "../helpers"
 import * as formatter from "."
-import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {
   private readonly sourceDir: string
 
-  constructor(sourceDir: string, emitter: events.EventEmitter) {
+  constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
-    emitter.on(tr.events.CommandEvent.output, console.log)
-    emitter.on(tr.events.CommandEvent.success, this.success.bind(this))
-    emitter.on(tr.events.CommandEvent.failed, this.failed.bind(this))
-    emitter.on(tr.events.CommandEvent.warning, this.warning.bind(this))
-    emitter.on(tr.events.CommandEvent.skipped, this.skipped.bind(this))
+    command.on("output", console.log)
+    command.on("success", this.success.bind(this))
+    command.on("failed", this.failed.bind(this))
+    command.on("warning", this.warning.bind(this))
+    command.on("skipped", this.skipped.bind(this))
   }
 
   success(args: tr.events.SuccessArgs): void {

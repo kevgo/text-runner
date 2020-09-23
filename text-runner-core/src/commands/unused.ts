@@ -7,6 +7,7 @@ import * as event from "../events/index"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
 
+// TODO: don't inherit here, use encapsulation
 export class UnusedCommand extends events.EventEmitter implements Command {
   userConfig: configuration.PartialData
 
@@ -23,7 +24,7 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
       const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
-      this.emit(event.CommandEvent.warning, warnArgs)
+      this.emit("warning", warnArgs)
       return
     }
 
@@ -42,9 +43,9 @@ export class UnusedCommand extends events.EventEmitter implements Command {
     )
 
     // step 7: write results
-    this.emit(event.CommandEvent.output, "Unused activities:")
+    this.emit("output", "Unused activities:")
     for (const unusedActivityName of unusedActivityNames) {
-      this.emit(event.CommandEvent.output, `- ${unusedActivityName}`)
+      this.emit("output", `- ${unusedActivityName}`)
     }
   }
 }

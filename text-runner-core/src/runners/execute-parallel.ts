@@ -3,7 +3,7 @@ import * as configuration from "../configuration/index"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { runActivity } from "./run-activity"
 import { ActionFinder } from "../actions/action-finder"
-import { EventEmitter } from "events"
+import * as commands from "../commands/index"
 
 /**
  * Executes the given activities in parallel.
@@ -14,7 +14,7 @@ export function executeParallel(
   actionFinder: ActionFinder,
   linkTargets: LinkTargetList,
   configuration: configuration.Data,
-  emitter: EventEmitter
+  emitter: commands.Command
 ): Promise<boolean>[] {
   const result: Promise<boolean>[] = []
   for (const activity of activities) {

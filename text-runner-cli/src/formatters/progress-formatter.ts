@@ -4,13 +4,12 @@ import * as path from "path"
 import * as tr from "text-runner-core"
 import * as helpers from "../helpers"
 import * as formatter from "."
-import * as events from "events"
 
 export class ProgressFormatter implements formatter.Formatter {
   private readonly sourceDir: string
   private readonly progressBar: progress.Bar
 
-  constructor(sourceDir: string, emitter: events.EventEmitter) {
+  constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
     this.progressBar = new progress.Bar(
       {
@@ -21,12 +20,12 @@ export class ProgressFormatter implements formatter.Formatter {
       },
       progress.Presets.shades_classic
     )
-    emitter.on(tr.events.CommandEvent.start, this.start.bind(this))
-    emitter.on(tr.events.CommandEvent.output, console.log)
-    emitter.on(tr.events.CommandEvent.success, this.success.bind(this))
-    emitter.on(tr.events.CommandEvent.failed, this.failed.bind(this))
-    emitter.on(tr.events.CommandEvent.warning, this.warning.bind(this))
-    emitter.on(tr.events.CommandEvent.skipped, this.skipped.bind(this))
+    command.on("start", this.start.bind(this))
+    command.on("output", console.log)
+    command.on("success", this.success.bind(this))
+    command.on("failed", this.failed.bind(this))
+    command.on("warning", this.warning.bind(this))
+    command.on("skipped", this.skipped.bind(this))
   }
 
   start(args: tr.events.StartArgs): void {

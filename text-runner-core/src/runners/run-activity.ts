@@ -9,9 +9,9 @@ import * as configuration from "../configuration/index"
 import { LinkTargetList } from "../link-targets/link-target-list"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
-import { EventEmitter } from "events"
 import { UserError } from "../errors/user-error"
 import * as events from "../events/index"
+import * as commands from "../commands/index"
 
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(
@@ -19,7 +19,7 @@ export async function runActivity(
   actionFinder: ActionFinder,
   configuration: configuration.Data,
   linkTargets: LinkTargetList,
-  emitter: EventEmitter
+  emitter: commands.Command
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
@@ -48,14 +48,14 @@ export async function runActivity(
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
       }
-      emitter.emit(events.CommandEvent.success, successArgs)
+      emitter.emit("success", successArgs)
     } else if (actionResult === args.SKIPPING) {
       const skippedArgs: events.SkippedArgs = {
         activity,
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
       }
-      emitter.emit(events.CommandEvent.skipped, skippedArgs)
+      emitter.emit("skipped", skippedArgs)
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
@@ -66,7 +66,7 @@ export async function runActivity(
       error: new UserError(e.message, e.guidance || "", activity.file, activity.line),
       output: outputCollector.toString(),
     }
-    emitter.emit(events.CommandEvent.failed, failedArgs)
+    emitter.emit("failed", failedArgs)
     return true
   }
   return false

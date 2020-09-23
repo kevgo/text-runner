@@ -33,7 +33,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no Markdown files found" }
-        this.emit(event.CommandEvent.warning, warnArgs)
+        this.emit("warning", warnArgs)
         return
       }
 
@@ -47,7 +47,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
       const links = extractImagesAndLinks(ASTs)
       if (links.length === 0) {
         const warnArgs: event.WarnArgs = { message: "no activities found" }
-        this.emit(event.CommandEvent.warning, warnArgs)
+        this.emit("warning", warnArgs)
         return
       }
 
@@ -56,7 +56,7 @@ export class StaticCommand extends events.EventEmitter implements Command {
 
       // step 8: execute the ActivityList
       const startArgs: event.StartArgs = { stepCount: links.length }
-      this.emit(event.CommandEvent.start, startArgs)
+      this.emit("start", startArgs)
       process.chdir(config.workspace)
       const parResults = executeParallel(links, actionFinder, linkTargets, config, this)
       await Promise.all(parResults)

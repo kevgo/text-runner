@@ -6,7 +6,7 @@ import * as path from "path"
 
 export class HelpCommand extends events.EventEmitter implements tr.Command {
   async execute(): Promise<void> {
-    this.emit(tr.events.CommandEvent.output, await this.template())
+    this.emit("output", await this.template())
   }
 
   /** provides the text to print */

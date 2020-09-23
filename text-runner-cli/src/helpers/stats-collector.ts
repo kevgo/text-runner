@@ -1,5 +1,4 @@
 import * as helpers from "."
-import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
@@ -18,14 +17,14 @@ export class StatsCollector {
   successCount: number
   stopWatch: helpers.StopWatch
 
-  constructor(emitter: events.EventEmitter) {
+  constructor(command: tr.commands.Command) {
     this.errorCount = 0
     this.skipCount = 0
     this.successCount = 0
     this.stopWatch = new helpers.StopWatch()
-    emitter.on(tr.events.CommandEvent.failed, this.onError.bind(this))
-    emitter.on(tr.events.CommandEvent.skipped, this.onSkip.bind(this))
-    emitter.on(tr.events.CommandEvent.success, this.onSuccess.bind(this))
+    command.on("failed", this.onError.bind(this))
+    command.on("skipped", this.onSkip.bind(this))
+    command.on("success", this.onSuccess.bind(this))
   }
 
   stats(): Statistics {

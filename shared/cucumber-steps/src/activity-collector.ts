@@ -1,4 +1,3 @@
-import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
@@ -15,12 +14,12 @@ export interface ActivityResult {
 export class ActivityCollector {
   activities: ActivityResult[]
 
-  constructor(emitter: events.EventEmitter) {
+  constructor(command: tr.commands.Command) {
     this.activities = []
-    emitter.on(tr.events.CommandEvent.failed, this.onFailure.bind(this))
-    emitter.on(tr.events.CommandEvent.skipped, this.onSkipped.bind(this))
-    emitter.on(tr.events.CommandEvent.success, this.onSuccess.bind(this))
-    emitter.on(tr.events.CommandEvent.warning, this.onWarning.bind(this))
+    command.on("failed", this.onFailure.bind(this))
+    command.on("skipped", this.onSkipped.bind(this))
+    command.on("success", this.onSuccess.bind(this))
+    command.on("warning", this.onWarning.bind(this))
   }
 
   results(): ActivityResult[] {

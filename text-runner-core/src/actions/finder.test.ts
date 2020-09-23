@@ -1,12 +1,6 @@
 import { assert } from "chai"
 import * as activities from "../activities/index"
-import {
-  ActionFinder,
-  customActionFilePaths,
-  loadCustomActions,
-  builtinActionFilePaths,
-  loadBuiltinActions,
-} from "./action-finder"
+import { Finder, customActionFilePaths, loadCustomActions, builtinActionFilePaths, loadBuiltinActions } from "./finder"
 import * as path from "path"
 import { Actions } from "./actions"
 import { ExternalActionManager } from "./external-action-manager"
@@ -18,7 +12,7 @@ suite("actionFinder", function () {
       const builtIn = new Actions()
       const func: Action = () => 254
       builtIn.register("foo", func)
-      const actionFinder = new ActionFinder(builtIn, new Actions(), new ExternalActionManager())
+      const actionFinder = new Finder(builtIn, new Actions(), new ExternalActionManager())
       const activity = activities.scaffold({ actionName: "foo" })
       assert.equal(actionFinder.actionFor(activity), func)
     })
@@ -26,7 +20,7 @@ suite("actionFinder", function () {
       const custom = new Actions()
       const func: Action = () => 254
       custom.register("foo", func)
-      const actionFinder = new ActionFinder(new Actions(), custom, new ExternalActionManager())
+      const actionFinder = new Finder(new Actions(), custom, new ExternalActionManager())
       const activity = activities.scaffold({ actionName: "foo" })
       assert.equal(actionFinder.actionFor(activity), func)
     })

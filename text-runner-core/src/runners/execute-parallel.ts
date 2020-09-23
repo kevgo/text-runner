@@ -11,7 +11,7 @@ import * as commands from "../commands/index"
  */
 export function executeParallel(
   activities: ActivityList,
-  actionFinder: actions.ActionFinder,
+  actionFinder: actions.Finder,
   linkTargets: LinkTargetList,
   configuration: configuration.Data,
   emitter: commands.Command

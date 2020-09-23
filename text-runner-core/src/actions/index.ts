@@ -1,1 +1,1 @@
-export * from "./action-finder"
+export { Finder } from "./finder"

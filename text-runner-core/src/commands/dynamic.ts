@@ -57,7 +57,7 @@ export class Dynamic implements Command {
       }
 
       // step 7: find actions
-      const actionFinder = actions.ActionFinder.loadDynamic(config.sourceDir)
+      const actionFinder = actions.Finder.loadDynamic(config.sourceDir)
 
       // step 8: execute the ActivityList
       const startArgs: events.StartArgs = { stepCount: activities.length }

@@ -12,7 +12,7 @@ import { ExternalActionManager } from "./external-action-manager"
 import { Actions } from "./actions"
 
 /** ActionFinder provides runnable action instances for activities. */
-export class ActionFinder {
+export class Finder {
   private readonly builtinActions: Actions
   private readonly customActions: Actions
   private readonly externalActions: ExternalActionManager
@@ -24,8 +24,8 @@ export class ActionFinder {
   }
 
   /** loads all actions */
-  static load(sourceDir: string): ActionFinder {
-    return new ActionFinder(
+  static load(sourceDir: string): Finder {
+    return new Finder(
       loadBuiltinActions(),
       loadCustomActions(path.join(sourceDir, "text-run")),
       new ExternalActionManager()
@@ -33,17 +33,13 @@ export class ActionFinder {
   }
 
   /** loads only the actions for dynamic tests */
-  static loadDynamic(sourceDir: string): ActionFinder {
-    return new ActionFinder(
-      new Actions(),
-      loadCustomActions(path.join(sourceDir, "text-run")),
-      new ExternalActionManager()
-    )
+  static loadDynamic(sourceDir: string): Finder {
+    return new Finder(new Actions(), loadCustomActions(path.join(sourceDir, "text-run")), new ExternalActionManager())
   }
 
   /** loads only the actions for static tests */
-  static loadStatic(): ActionFinder {
-    return new ActionFinder(loadBuiltinActions(), new Actions(), new ExternalActionManager())
+  static loadStatic(): Finder {
+    return new Finder(loadBuiltinActions(), new Actions(), new ExternalActionManager())
   }
 
   /** actionFor provides the action function for the given Activity. */

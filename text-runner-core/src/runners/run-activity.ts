@@ -16,7 +16,7 @@ import * as commands from "../commands/index"
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(
   activity: Activity,
-  actionFinder: actions.ActionFinder,
+  actionFinder: actions.Finder,
   configuration: configuration.Data,
   linkTargets: LinkTargetList,
   emitter: commands.Command

@@ -7,7 +7,7 @@ import * as commands from "../commands/index"
 
 export async function executeSequential(
   activities: ActivityList,
-  actionFinder: actions.ActionFinder,
+  actionFinder: actions.Finder,
   configuration: configuration.Data,
   linkTargets: LinkTargetList,
   emitter: commands.Command

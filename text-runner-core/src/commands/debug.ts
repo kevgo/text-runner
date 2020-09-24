@@ -120,7 +120,7 @@ function debugLinks(ASTs: ast.NodeList[]) {
 function debugLinkTargets(ASTs: ast.NodeList[]) {
   console.log("\nLINK TARGETS:")
   const targets = linkTargets.find(ASTs)
-  for (const key of Object.keys(targets)) {
+  for (const key of Object.keys(targets.targets)) {
     console.log(key, targets.targets[key])
   }
 }

@@ -3,7 +3,6 @@ import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import * as ast from "../../ast"
 import { TagMapper } from "../tag-mapper"
-import * as helpers from "./helpers"
 
 /** Parser converts HTML5 source into the standardized AST format. */
 export class Parser {
@@ -106,7 +105,7 @@ export class Parser {
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
-    const attributes = helpers.standardizeHTMLAttributes(node.attrs)
+    const attributes = standardizeHTMLAttributes(node.attrs)
 
     // store the opening node
     let startLine = startingLine
@@ -167,7 +166,7 @@ export class Parser {
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
-    const attributes = helpers.standardizeHTMLAttributes(node.attrs)
+    const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
       new ast.Node({
         attributes,
@@ -218,4 +217,15 @@ function instanceOfParentTreeNode(object: any): object is parse5.DefaultTreePare
 
 function instanceOfDefaultTreeElement(object: any): object is parse5.DefaultTreeElement {
   return object.nodeName && object.tagName && object.attrs
+}
+
+/** converts the given HTML AST node attributes into the standard AST format */
+export function standardizeHTMLAttributes(attrs: parse5.Attribute[]): ast.NodeAttributes {
+  const result: ast.NodeAttributes = {}
+  if (attrs) {
+    for (const attr of attrs) {
+      result[attr.name] = attr.value
+    }
+  }
+  return result
 }

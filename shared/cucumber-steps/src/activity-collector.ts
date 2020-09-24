@@ -2,7 +2,7 @@ import * as tr from "text-runner-core"
 
 /** Statistics about a run of Text-Runner */
 export interface ActivityResult {
-  activity?: tr.Activity
+  activity?: tr.activities.Activity
   finalName?: string
   status: "success" | "failed" | "skipped" | "warning"
   output?: string

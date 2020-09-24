@@ -7,7 +7,7 @@ import * as tr from "text-runner-core"
  * The "directory" action verifies that the test workspace
  * contains the given directory.
  */
-export async function existingDirectory(action: tr.ActionArgs): Promise<void> {
+export async function existingDirectory(action: tr.actions.Args): Promise<void> {
   const directory = action.region.text()
   const fullPath = path.join(action.configuration.workspace, directory)
   action.name(`directory ${color.cyan(directory)} exists in the workspace`)

@@ -9,7 +9,7 @@ export async function instantiate(
   commandName: string,
   userConfig: config.Data,
   debugSubcommand: tr.commands.DebugSubcommand | undefined
-): Promise<tr.Command> {
+): Promise<tr.commands.Command> {
   const sourceDir = userConfig.sourceDir || "."
   switch (commandName) {
     case "help":

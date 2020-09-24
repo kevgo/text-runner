@@ -1,12 +1,22 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
-import * as events from "events"
 import { promises as fs } from "fs"
 import * as path from "path"
+import { EventEmitter } from "events"
 
-export class HelpCommand extends events.EventEmitter implements tr.Command {
+export class HelpCommand implements tr.commands.Command {
+  emitter: EventEmitter
+
+  constructor() {
+    this.emitter = new EventEmitter()
+  }
+
   async execute(): Promise<void> {
     this.emit("output", await this.template())
+  }
+
+  emit(name: tr.events.CommandEvent, payload: tr.events.Args): void {
+    this.emitter.emit(name, payload)
   }
 
   /** provides the text to print */
@@ -36,5 +46,10 @@ OPTIONS
   ${color.bold("--config")}                 provide a custom configuration filename
   ${color.bold("--online")}                 check external links
 `
+  }
+
+  on(name: tr.events.CommandEvent, handler: tr.events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
   }
 }

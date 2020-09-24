@@ -1,5 +1,5 @@
 import { Action, FunctionRepo } from "./index"
-import * as helpers from "../helpers"
+import * as actions from "../actions"
 import { UserError } from "../errors/user-error"
 import { Activity } from "../activities/index"
 
@@ -27,15 +27,15 @@ export class ExternalActionManager {
       )
     }
     const moduleName = "textrun-" + parts[0]
-    const wantAction = helpers.actionName(parts[1])
+    const wantAction = actions.name(parts[1])
     let module
     try {
       module = require(moduleName)
     } catch (e) {
       throw new UserError(`NPM package "${moduleName}" not found`, "", activity.file, activity.line)
     }
-    const actions = module.textrunActions
-    if (!actions) {
+    const moduleActions = module.textrunActions
+    if (!moduleActions) {
       throw new UserError(
         `NPM package "${moduleName}" does not contain any Text-Runner actions`,
         "",
@@ -44,8 +44,8 @@ export class ExternalActionManager {
       )
     }
     const names = []
-    for (const [rawName, action] of Object.entries(actions)) {
-      const name = helpers.actionName(rawName)
+    for (const [rawName, action] of Object.entries(moduleActions)) {
+      const name = actions.name(rawName)
       if (name === wantAction) {
         return action as Action
       }

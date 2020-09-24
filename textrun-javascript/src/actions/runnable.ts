@@ -8,7 +8,7 @@ import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder"
 type DoneFunction = (err?: Error) => void
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
-export function runnable(action: tr.ActionArgs, done: DoneFunction): void {
+export function runnable(action: tr.actions.Args, done: DoneFunction): void {
   action.name("run JavaScript")
   let code = action.region.text()
   if (code === "") {

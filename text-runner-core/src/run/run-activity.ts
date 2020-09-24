@@ -20,7 +20,7 @@ export async function runActivity(
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
-  const args: actions.ActionArgs = {
+  const args: actions.Args = {
     SKIPPING: 254,
     configuration,
     file: activity.file.platformified(),
@@ -33,7 +33,7 @@ export async function runActivity(
   }
   try {
     const action = actionFinder.actionFor(activity)
-    let actionResult: actions.ActionResult
+    let actionResult: actions.Result
     if (action.length === 1) {
       actionResult = await runSyncOrPromiseFunc(action, args)
     } else {
@@ -69,12 +69,12 @@ export async function runActivity(
   return false
 }
 
-async function runCallbackFunc(func: actions.Action, args: actions.ActionArgs): Promise<actions.ActionResult> {
-  const promisified = util.promisify<actions.ActionArgs, actions.ActionResult>(func)
+async function runCallbackFunc(func: actions.Action, args: actions.Args): Promise<actions.Result> {
+  const promisified = util.promisify<actions.Args, actions.Result>(func)
   return promisified(args)
 }
 
-async function runSyncOrPromiseFunc(func: actions.Action, args: actions.ActionArgs): Promise<actions.ActionResult> {
+async function runSyncOrPromiseFunc(func: actions.Action, args: actions.Args): Promise<actions.Result> {
   const result = await Promise.resolve(func(args))
   return result
 }

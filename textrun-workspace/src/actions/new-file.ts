@@ -3,7 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-export async function newFile(action: tr.ActionArgs): Promise<void> {
+export async function newFile(action: tr.actions.Args): Promise<void> {
   let filePath
   try {
     filePath = action.region.textInNodeOfType("em", "strong")

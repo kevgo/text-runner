@@ -4,10 +4,10 @@ import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { UnknownLink } from "../../filesystem/unknown-link"
 import * as helpers from "../../helpers"
-import { ActionArgs } from "../index"
+import { Args } from "../index"
 
 /** The "checkLink" action checks for broken hyperlinks. */
-export async function checkLink(action: ActionArgs): Promise<number | void> {
+export async function checkLink(action: Args): Promise<number | void> {
   const target = action.region.getNodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")
@@ -39,7 +39,7 @@ export async function checkLink(action: ActionArgs): Promise<number | void> {
   return
 }
 
-async function checkExternalLink(target: string, action: ActionArgs) {
+async function checkExternalLink(target: string, action: Args) {
   if (!action.configuration.online) {
     return action.SKIPPING
   }
@@ -59,7 +59,7 @@ async function checkExternalLink(target: string, action: ActionArgs) {
   return
 }
 
-async function checkLinkToFilesystem(target: string, action: ActionArgs) {
+async function checkLinkToFilesystem(target: string, action: Args) {
   const unknownLink = new UnknownLink(decodeURI(target))
   const absoluteLink = unknownLink.absolutify(new AbsoluteFilePath(action.file), action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
@@ -87,7 +87,7 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
   }
 }
 
-async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: ActionArgs) {
+async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
@@ -99,7 +99,7 @@ async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, tar
   }
 }
 
-async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: ActionArgs) {
+async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
   const link = new UnknownLink(target)
   const absoluteLink = link.absolutify(containingFile, action.configuration.publications)
   const filePath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)

@@ -7,9 +7,9 @@ import * as run from "../run"
 /**
  * A user-defined or built-in function that tests an active block
  */
-export type Action = (params: ActionArgs) => ActionResult
+export type Action = (params: Args) => Result
 
-export interface ActionArgs {
+export interface Args {
   /** TextRunner configuration data derived from the config file and CLI switches */
   configuration: config.Data
 
@@ -44,8 +44,10 @@ export interface ActionArgs {
   SKIPPING: 254
 }
 
+export * from "./name"
+
 /** the result of an action function */
-export type ActionResult = 254 | undefined
+export type Result = 254 | undefined
 
 export interface FunctionRepo {
   [key: string]: Action

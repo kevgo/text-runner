@@ -1,4 +1,4 @@
-export * from "./action-name"
+export * from "../actions/name"
 export * from "./add-leading-dot-unless-empty"
 export * from "./add-leading-slash"
 export * from "./add-trailing-slash"

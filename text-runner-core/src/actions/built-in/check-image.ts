@@ -2,10 +2,10 @@ import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
 import * as configuration from "../../configuration/index"
-import { ActionArgs } from "../index"
+import { Args } from "../index"
 
 /** The "checkImage" action checks for broken images. */
-export async function checkImage(action: ActionArgs): Promise<number | void> {
+export async function checkImage(action: Args): Promise<number | void> {
   const node = action.region[0]
   let imagePath = node.attributes ? node.attributes.src : null
   if (!imagePath) {
@@ -32,7 +32,7 @@ async function checkLocalImage(imagePath: string, c: configuration.Data): Promis
   }
 }
 
-async function checkRemoteImage(url: string, action: ActionArgs) {
+async function checkRemoteImage(url: string, action: Args) {
   if (!action.configuration.online) {
     return action.SKIPPING
   }

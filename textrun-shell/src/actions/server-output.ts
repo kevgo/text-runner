@@ -5,7 +5,7 @@ import * as tr from "text-runner-core"
  * The "start-output" action waits until the currently running console command
  * produces the given output.
  */
-export async function serverOutput(action: tr.ActionArgs): Promise<void> {
+export async function serverOutput(action: tr.actions.Args): Promise<void> {
   action.name("verifying the output of the long-running process")
   const expectedOutput = action.region.textInNodeOfType("fence")
   const expectedLines = expectedOutput

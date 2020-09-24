@@ -3,7 +3,7 @@ import * as path from "path"
 import { trimDollar } from "../helpers/trim-dollar"
 import * as tr from "text-runner-core"
 
-export function executable(action: tr.ActionArgs): void {
+export function executable(action: tr.actions.Args): void {
   const commandName = trimDollar(action.region.text().trim())
   if (commandName === "") {
     throw new Error("No npm package installation command found")

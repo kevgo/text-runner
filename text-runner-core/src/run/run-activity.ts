@@ -1,9 +1,6 @@
 import humanize from "humanize-string"
 import * as util from "util"
 import * as actions from "../actions"
-import { Action } from "../actions/types/action"
-import { ActionArgs } from "../actions/types/action-args"
-import { ActionResult } from "../actions/types/action-result"
 import { Activity } from "../activities/index"
 import * as configuration from "../configuration/index"
 import * as linkTargets from "../link-targets"
@@ -23,7 +20,7 @@ export async function runActivity(
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
-  const args: ActionArgs = {
+  const args: actions.ActionArgs = {
     SKIPPING: 254,
     configuration,
     file: activity.file.platformified(),
@@ -36,7 +33,7 @@ export async function runActivity(
   }
   try {
     const action = actionFinder.actionFor(activity)
-    let actionResult: ActionResult
+    let actionResult: actions.ActionResult
     if (action.length === 1) {
       actionResult = await runSyncOrPromiseFunc(action, args)
     } else {
@@ -72,12 +69,12 @@ export async function runActivity(
   return false
 }
 
-async function runCallbackFunc(func: Action, args: ActionArgs): Promise<ActionResult> {
-  const promisified = util.promisify<ActionArgs, ActionResult>(func)
+async function runCallbackFunc(func: actions.Action, args: actions.ActionArgs): Promise<actions.ActionResult> {
+  const promisified = util.promisify<actions.ActionArgs, actions.ActionResult>(func)
   return promisified(args)
 }
 
-async function runSyncOrPromiseFunc(func: Action, args: ActionArgs): Promise<ActionResult> {
+async function runSyncOrPromiseFunc(func: actions.Action, args: actions.ActionArgs): Promise<actions.ActionResult> {
   const result = await Promise.resolve(func(args))
   return result
 }

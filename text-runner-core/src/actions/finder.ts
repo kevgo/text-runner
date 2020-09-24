@@ -5,7 +5,7 @@ import * as rechoir from "rechoir"
 import * as activities from "../activities/index"
 import { UserError } from "../errors/user-error"
 import * as helpers from "../helpers"
-import { Action } from "./types/action"
+import { Action } from "./index"
 import { ExternalActionManager } from "./external-action-manager"
 import { Actions } from "./actions"
 

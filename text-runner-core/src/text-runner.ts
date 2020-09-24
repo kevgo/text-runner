@@ -1,4 +1,4 @@
-export type { ActionArgs } from "./actions/types/action-args"
+export type { ActionArgs } from "./actions/"
 export { Activity } from "./activities/index"
 export * as configuration from "./configuration/index"
 export * as parsers from "./parsers"

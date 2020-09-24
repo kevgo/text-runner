@@ -2,7 +2,7 @@ import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
 import * as configuration from "../../configuration/index"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "../index"
 
 /** The "checkImage" action checks for broken images. */
 export async function checkImage(action: ActionArgs): Promise<number | void> {

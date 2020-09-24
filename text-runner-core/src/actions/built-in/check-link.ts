@@ -4,7 +4,7 @@ import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { UnknownLink } from "../../filesystem/unknown-link"
 import * as helpers from "../../helpers"
-import { ActionArgs } from "../types/action-args"
+import { ActionArgs } from "../index"
 
 /** The "checkLink" action checks for broken hyperlinks. */
 export async function checkLink(action: ActionArgs): Promise<number | void> {

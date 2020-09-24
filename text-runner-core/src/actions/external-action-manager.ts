@@ -1,6 +1,5 @@
-import { Action } from "./types/action"
+import { Action, FunctionRepo } from "./index"
 import * as helpers from "../helpers"
-import { FunctionRepo } from "./types/function-repo"
 import { UserError } from "../errors/user-error"
 import { Activity } from "../activities/index"
 

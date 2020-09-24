@@ -1,7 +1,7 @@
 import * as config from "../../configuration/index"
 import { LinkTargetList } from "../../link-targets/link-target-list"
 import * as parsers from "../../parsers"
-import * as runners from "../../runners"
+import * as run from "../../run"
 
 export interface ActionArgs {
   /** TextRunner configuration data derived from the config file and CLI switches */
@@ -20,7 +20,7 @@ export interface ActionArgs {
   line: number
 
   /** allows printing test output to the user, behaves like console.log */
-  log: runners.LogFn
+  log: run.LogFn
 
   /**
    * Name allows to provide a more specific name for the current action.
@@ -29,7 +29,7 @@ export interface ActionArgs {
    * `write file "foo.yml"` once the name of the file to be written
    * has been extracted from the document AST.
    */
-  name: runners.RefineNameFn
+  name: run.RefineNameFn
 
   /** all link targets in the current documentation  */
   linkTargets: LinkTargetList

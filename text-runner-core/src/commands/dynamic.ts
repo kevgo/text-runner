@@ -2,7 +2,7 @@ import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parsers from "../parsers/index"
-import * as runners from "../runners"
+import * as run from "../run"
 import * as workspace from "../workspace"
 import * as actions from "../actions"
 import { Command } from "./command"
@@ -63,7 +63,7 @@ export class Dynamic implements Command {
       const startArgs: events.StartArgs = { stepCount: activities.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
-      await runners.sequential(activities, actionFinder, config, linkTargets, this)
+      await run.sequential(activities, actionFinder, config, linkTargets, this)
     } finally {
       process.chdir(originalDir)
     }

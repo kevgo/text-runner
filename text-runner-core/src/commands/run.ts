@@ -2,7 +2,7 @@ import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parser from "../parsers"
-import * as runners from "../runners"
+import * as run from "../run"
 import * as workspace from "../workspace"
 import * as actions from "../actions"
 import * as events from "../events"
@@ -66,9 +66,9 @@ export class Run implements command.Command {
       this.emit("start", startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
-      const parJobs = runners.parallel(links, actionFinder, linkTargets, config, this)
+      const parJobs = run.parallel(links, actionFinder, linkTargets, config, this)
       // execute the serial jobs
-      await runners.sequential(dynamicActivities, actionFinder, config, linkTargets, this)
+      await run.sequential(dynamicActivities, actionFinder, config, linkTargets, this)
       await Promise.all(parJobs)
 
       // step 9: cleanup

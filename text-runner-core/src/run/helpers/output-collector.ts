@@ -1,5 +1,5 @@
 import * as util from "util"
-import * as runners from "../index"
+import * as run from "../index"
 
 /** simulates console.log to collect output from a running action */
 export class OutputCollector {
@@ -20,7 +20,7 @@ export class OutputCollector {
   }
 
   /** returns the "log" function to be used by actions */
-  logFn(): runners.LogFn {
+  logFn(): run.LogFn {
     return this.log.bind(this)
   }
 

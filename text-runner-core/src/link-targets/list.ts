@@ -1,10 +1,10 @@
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import * as ast from "../ast"
-import { LinkTarget, LinkTargetTypes } from "./index"
+import { Target, Types } from "./index"
 import { targetURL } from "./target-url"
 
 export class List {
-  readonly targets: { [key: string]: LinkTarget[] }
+  readonly targets: { [key: string]: Target[] }
 
   constructor() {
     this.targets = {}
@@ -40,7 +40,7 @@ export class List {
     this.addLinkTarget(node.file, "heading", content)
   }
 
-  addLinkTarget(filePath: AbsoluteFilePath, type: LinkTargetTypes, name: string): void {
+  addLinkTarget(filePath: AbsoluteFilePath, type: Types, name: string): void {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })

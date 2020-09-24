@@ -4,7 +4,7 @@ import { Finder, customActionFilePaths, loadCustomActions, builtinActionFilePath
 import * as path from "path"
 import { Actions } from "./actions"
 import { ExternalActionManager } from "./external-action-manager"
-import { Action } from "./types/action"
+import { Action } from "./index"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {

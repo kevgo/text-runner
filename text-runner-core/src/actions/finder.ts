@@ -4,9 +4,7 @@ import * as path from "path"
 import * as rechoir from "rechoir"
 import * as activities from "../activities/index"
 import { UserError } from "../errors/user-error"
-import { actionName } from "./helpers/action-name"
-import { javascriptExtensions } from "./helpers/javascript-extensions"
-import { trimExtension } from "./helpers/trim-extension"
+import * as helpers from "../helpers"
 import { Action } from "./types/action"
 import { ExternalActionManager } from "./external-action-manager"
 import { Actions } from "./actions"
@@ -79,20 +77,20 @@ export function builtinActionFilePaths(): string[] {
   return glob.glob
     .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
     .filter(name => !name.endsWith(".d.ts"))
-    .map(trimExtension)
+    .map(helpers.trimExtension)
 }
 
 export function loadBuiltinActions(): Actions {
   const result = new Actions()
   for (const filename of builtinActionFilePaths()) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actionName(filename), require(filename))
+    result.register(helpers.actionName(filename), require(filename))
   }
   return result
 }
 
 export function customActionFilePaths(dir: string): string[] {
-  const pattern = path.join(dir, `*.@(${javascriptExtensions().join("|")})`)
+  const pattern = path.join(dir, `*.@(${helpers.javascriptExtensions().join("|")})`)
   return glob.sync(pattern)
 }
 
@@ -101,7 +99,7 @@ export function loadCustomActions(dir: string): Actions {
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actionName(filename), require(filename))
+    result.register(helpers.actionName(filename), require(filename))
   }
   return result
 }

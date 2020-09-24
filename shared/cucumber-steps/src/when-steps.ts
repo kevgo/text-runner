@@ -1,5 +1,5 @@
 import { When } from "cucumber"
-import { executeCLI } from "./helpers/execute-cli"
+import * as helpers from "./helpers"
 import { TRWorld } from "./world"
 import * as textRunner from "text-runner-core"
 import { ActivityCollector } from "./activity-collector"
@@ -46,17 +46,17 @@ When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const world = this as TRWorld
-  world.process = await executeCLI(command, determineExpectError(tryingText), world)
+  world.process = await helpers.executeCLI(command, determineExpectError(tryingText), world)
 })
 
 When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (tryingText) {
   const world = this as TRWorld
-  world.process = await executeCLI("run", determineExpectError(tryingText), world)
+  world.process = await helpers.executeCLI("run", determineExpectError(tryingText), world)
 })
 
 When(/^(trying to run|running) Text-Runner in the source directory$/, { timeout: 30_000 }, async function (tryingText) {
   const world = this as TRWorld
-  world.process = await executeCLI("run", determineExpectError(tryingText), world, { cwd: world.rootDir })
+  world.process = await helpers.executeCLI("run", determineExpectError(tryingText), world, { cwd: world.rootDir })
 })
 
 function determineExpectError(tryingText: string) {

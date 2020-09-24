@@ -1,5 +1,5 @@
 import { Action } from "./types/action"
-import { actionName } from "./helpers/action-name"
+import * as helpers from "../helpers"
 import { FunctionRepo } from "./types/function-repo"
 import { UserError } from "../errors/user-error"
 import { Activity } from "../activities/index"
@@ -28,7 +28,7 @@ export class ExternalActionManager {
       )
     }
     const moduleName = "textrun-" + parts[0]
-    const wantAction = actionName(parts[1])
+    const wantAction = helpers.actionName(parts[1])
     let module
     try {
       module = require(moduleName)
@@ -46,7 +46,7 @@ export class ExternalActionManager {
     }
     const names = []
     for (const [rawName, action] of Object.entries(actions)) {
-      const name = actionName(rawName)
+      const name = helpers.actionName(rawName)
       if (name === wantAction) {
         return action as Action
       }

@@ -37,5 +37,5 @@ steps:
    lists: parallelizable tests like checking static file and image links and
    sequential tests that have to run one after the other.
 1. **list of test activities --> list of test results:** the
-   [runner module](src/runners) executes the test steps given to it and emits
-   test results via the event stream described earlier.
+   [run module](src/run) executes the test steps given to it and emits test
+   results via the event stream described earlier.

@@ -4,10 +4,7 @@ import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { UnknownLink } from "../../filesystem/unknown-link"
 import { removeLeadingSlash } from "../../helpers/remove-leading-slash"
-import { isExternalLink } from "../helpers/is-external-link"
-import { isLinkToAnchorInOtherFile } from "../helpers/is-link-to-anchor-in-other-file"
-import { isLinkToAnchorInSameFile } from "../helpers/is-link-to-anchor-in-same-file"
-import { isMailtoLink } from "../helpers/is-mailto-link"
+import * as helpers from "../../helpers"
 import { ActionArgs } from "../types/action-args"
 
 /** The "checkLink" action checks for broken hyperlinks. */
@@ -20,21 +17,21 @@ export async function checkLink(action: ActionArgs): Promise<number | void> {
   action.name(`link to ${target}`)
   const filePath = new AbsoluteFilePath(action.file)
 
-  if (isMailtoLink(target)) {
+  if (helpers.isMailtoLink(target)) {
     return action.SKIPPING
   }
 
-  if (isLinkToAnchorInSameFile(target)) {
+  if (helpers.isLinkToAnchorInSameFile(target)) {
     const result = await checkLinkToAnchorInSameFile(filePath, target, action)
     return result
   }
 
-  if (isLinkToAnchorInOtherFile(target)) {
+  if (helpers.isLinkToAnchorInOtherFile(target)) {
     const result = await checkLinkToAnchorInOtherFile(filePath, target, action)
     return result
   }
 
-  if (isExternalLink(target)) {
+  if (helpers.isExternalLink(target)) {
     const result = await checkExternalLink(target, action)
     return result
   }

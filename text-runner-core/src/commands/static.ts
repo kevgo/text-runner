@@ -1,6 +1,6 @@
 import { extractImagesAndLinks } from "../activities/extract-images-and-links"
 import { getFileNames } from "../filesystem/get-filenames"
-import { findLinkTargets } from "../link-targets/find-link-targets"
+import * as linkTargets from "../link-targets"
 import * as parser from "../parsers"
 import * as run from "../run"
 import * as workspace from "../workspace"
@@ -46,7 +46,7 @@ export class Static implements Command {
       const ASTs = await parser.markdown.parse(filenames, config.sourceDir)
 
       // step 5: find link targets
-      const linkTargets = findLinkTargets(ASTs)
+      const targets = linkTargets.find(ASTs)
 
       // step 6: extract activities
       const links = extractImagesAndLinks(ASTs)
@@ -63,7 +63,7 @@ export class Static implements Command {
       const startArgs: events.StartArgs = { stepCount: links.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
-      const parResults = run.parallel(links, actionFinder, linkTargets, config, this)
+      const parResults = run.parallel(links, actionFinder, targets, config, this)
       await Promise.all(parResults)
 
       // step 9: cleanup

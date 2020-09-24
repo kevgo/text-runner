@@ -6,7 +6,7 @@ import { ActionArgs } from "../actions/types/action-args"
 import { ActionResult } from "../actions/types/action-result"
 import { Activity } from "../activities/index"
 import * as configuration from "../configuration/index"
-import { LinkTargetList } from "../link-targets/link-target-list"
+import * as linkTargets from "../link-targets"
 import { NameRefiner } from "./helpers/name-refiner"
 import { OutputCollector } from "./helpers/output-collector"
 import { UserError } from "../errors/user-error"
@@ -18,7 +18,7 @@ export async function runActivity(
   activity: Activity,
   actionFinder: actions.Finder,
   configuration: configuration.Data,
-  linkTargets: LinkTargetList,
+  targets: linkTargets.List,
   emitter: commands.Command
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
@@ -28,7 +28,7 @@ export async function runActivity(
     configuration,
     file: activity.file.platformified(),
     line: activity.line,
-    linkTargets,
+    linkTargets: targets,
     log: outputCollector.logFn(),
     name: nameRefiner.refineFn(),
     region: activity.region,

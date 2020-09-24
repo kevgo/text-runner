@@ -1,6 +1,6 @@
 import { extractActivities } from "../activities/extract-activities"
 import { getFileNames } from "../filesystem/get-filenames"
-import { findLinkTargets } from "../link-targets/find-link-targets"
+import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
 import * as run from "../run"
 import * as workspace from "../workspace"
@@ -46,7 +46,7 @@ export class Dynamic implements Command {
       const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
 
       // step 5: find link targets
-      const linkTargets = findLinkTargets(ASTs)
+      const targets = linkTargets.find(ASTs)
 
       // step 6: extract activities
       const activities = extractActivities(ASTs, config.regionMarker)
@@ -63,7 +63,7 @@ export class Dynamic implements Command {
       const startArgs: events.StartArgs = { stepCount: activities.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
-      await run.sequential(activities, actionFinder, config, linkTargets, this)
+      await run.sequential(activities, actionFinder, config, targets, this)
     } finally {
       process.chdir(originalDir)
     }

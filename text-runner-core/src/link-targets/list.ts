@@ -1,10 +1,9 @@
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import * as ast from "../ast"
-import { LinkTarget } from "./types/link-target"
-import { LinkTargetTypes } from "./types/link-target-types"
+import { LinkTarget, LinkTargetTypes } from "./index"
 import { targetURL } from "./target-url"
 
-export class LinkTargetList {
+export class List {
   readonly targets: { [key: string]: LinkTarget[] }
 
   constructor() {

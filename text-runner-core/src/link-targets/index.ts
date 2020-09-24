@@ -1,4 +1,5 @@
-import { LinkTargetTypes } from "./link-target-types"
+export * from "./find"
+export * from "./list"
 
 /**
  * LinkTarget is a position in a Markdown file that links can point to:
@@ -10,3 +11,5 @@ export interface LinkTarget {
   text?: string
   level?: number
 }
+
+export type LinkTargetTypes = "heading" | "anchor"

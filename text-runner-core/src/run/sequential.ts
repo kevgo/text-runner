@@ -1,6 +1,6 @@
 import { ActivityList } from "../activities/index"
 import * as configuration from "../configuration/index"
-import { LinkTargetList } from "../link-targets/link-target-list"
+import * as linkTargets from "../link-targets"
 import { runActivity } from "./run-activity"
 import * as actions from "../actions"
 import * as commands from "../commands/index"
@@ -9,7 +9,7 @@ export async function sequential(
   activities: ActivityList,
   actionFinder: actions.Finder,
   configuration: configuration.Data,
-  linkTargets: LinkTargetList,
+  linkTargets: linkTargets.List,
   emitter: commands.Command
 ): Promise<void> {
   for (const activity of activities) {

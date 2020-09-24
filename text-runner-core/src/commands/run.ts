@@ -1,6 +1,6 @@
 import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
-import { findLinkTargets } from "../link-targets/find-link-targets"
+import * as linkTargets from "../link-targets"
 import * as parser from "../parsers"
 import * as run from "../run"
 import * as workspace from "../workspace"
@@ -47,7 +47,7 @@ export class Run implements command.Command {
       const ASTs = await parser.markdown.parse(filenames, config.sourceDir)
 
       // step 5: find link targets
-      const linkTargets = findLinkTargets(ASTs)
+      const targets = linkTargets.find(ASTs)
 
       // step 6: find actions
       const actionFinder = actions.Finder.load(config.sourceDir)
@@ -66,9 +66,9 @@ export class Run implements command.Command {
       this.emit("start", startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
-      const parJobs = run.parallel(links, actionFinder, linkTargets, config, this)
+      const parJobs = run.parallel(links, actionFinder, targets, config, this)
       // execute the serial jobs
-      await run.sequential(dynamicActivities, actionFinder, config, linkTargets, this)
+      await run.sequential(dynamicActivities, actionFinder, config, targets, this)
       await Promise.all(parJobs)
 
       // step 9: cleanup

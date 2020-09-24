@@ -1,5 +1,5 @@
 import * as config from "../../configuration/index"
-import { LinkTargetList } from "../../link-targets/link-target-list"
+import * as linkTargets from "../../link-targets"
 import * as parsers from "../../parsers"
 import * as run from "../../run"
 
@@ -32,7 +32,7 @@ export interface ActionArgs {
   name: run.RefineNameFn
 
   /** all link targets in the current documentation  */
-  linkTargets: LinkTargetList
+  linkTargets: linkTargets.List
 
   /** return the action with this value to signal that it is being skipped */
   SKIPPING: 254

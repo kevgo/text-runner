@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { TagMapper } from "./tag-mapper"
-import * as ast from "./index"
+import * as ast from "../ast"
 
 const tagMapper = new TagMapper()
 

@@ -1,7 +1,7 @@
 import * as util from "util"
 import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
-import { findLinkTargets } from "../link-targets/find-link-targets"
+import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
 import * as ast from "../ast"
 import { UserError } from "../errors/user-error"
@@ -119,9 +119,9 @@ function debugLinks(ASTs: ast.NodeList[]) {
 
 function debugLinkTargets(ASTs: ast.NodeList[]) {
   console.log("\nLINK TARGETS:")
-  const linkTargets = findLinkTargets(ASTs)
-  for (const key of Object.keys(linkTargets.targets)) {
-    console.log(key, linkTargets.targets[key])
+  const targets = linkTargets.find(ASTs)
+  for (const key of Object.keys(targets)) {
+    console.log(key, targets.targets[key])
   }
 }
 

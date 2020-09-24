@@ -1,6 +1,6 @@
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import * as ast from "../ast"
-export { extract } from "./extract"
+export { extractDynamic } from "./extract-dynamic"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 
 export type ActivityList = Activity[]

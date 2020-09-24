@@ -1,4 +1,4 @@
-import * as activity from "../activities"
+import * as activities from "../activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
@@ -49,8 +49,8 @@ export class Dynamic implements Command {
       const targets = linkTargets.find(ASTs)
 
       // step 6: extract activities
-      const activities = activity.extract(ASTs, config.regionMarker)
-      if (activities.length === 0) {
+      const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker)
+      if (dynamicActivities.length === 0) {
         const warnArgs: events.WarnArgs = { message: "no activities found" }
         this.emit("warning", warnArgs)
         return
@@ -60,10 +60,10 @@ export class Dynamic implements Command {
       const actionFinder = actions.Finder.loadDynamic(config.sourceDir)
 
       // step 8: execute the ActivityList
-      const startArgs: events.StartArgs = { stepCount: activities.length }
+      const startArgs: events.StartArgs = { stepCount: dynamicActivities.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
-      await run.sequential(activities, actionFinder, config, targets, this)
+      await run.sequential(dynamicActivities, actionFinder, config, targets, this)
     } finally {
       process.chdir(originalDir)
     }

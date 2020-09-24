@@ -53,7 +53,7 @@ export class Run implements command.Command {
       const actionFinder = actions.Finder.load(config.sourceDir)
 
       // step 7: extract activities
-      const dynamicActivities = activities.extract(ASTs, config.regionMarker)
+      const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker)
       const links = activities.extractImagesAndLinks(ASTs)
       if (dynamicActivities.length + links.length === 0) {
         const warnArgs: events.WarnArgs = { message: "no activities found" }

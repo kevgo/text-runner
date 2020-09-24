@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import * as ast from "../ast"
-import { extract } from "./extract"
+import { extractDynamic } from "./extract-dynamic"
 
 suite("extract()", function () {
   test("many activities", function () {
@@ -13,7 +13,7 @@ suite("extract()", function () {
     })
     input.pushNode({ type: "text" })
     input.pushNode({ type: "anchor_close" })
-    const result = extract([input], "textrun")
+    const result = extractDynamic([input], "textrun")
     assert.lengthOf(result, 1)
     assert.equal(result[0].actionName, "verify-foo")
     assert.equal(result[0].file.unixified(), "README.md")
@@ -34,7 +34,7 @@ suite("extract()", function () {
         attributes: { textrun: "verify_foo" },
       })
       AST.pushNode({ type: "anchor_close" })
-      const result = extract([AST], "textrun")
+      const result = extractDynamic([AST], "textrun")
       assert.equal(result[0].actionName, tt.want)
     })
   }

@@ -72,11 +72,11 @@ Example: text-run debug --images foo.md`
 
 function debugActivities(ASTs: ast.NodeList[], config: configuration.Data) {
   console.log("\nACTIVITIES:")
-  const acts = activities.extract(ASTs, config.regionMarker || "type")
-  if (acts.length === 0) {
+  const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker || "type")
+  if (dynamicActivities.length === 0) {
     console.log("(none)")
   } else {
-    for (const act of acts) {
+    for (const act of dynamicActivities) {
       console.log(`${act.file.platformified()}:${act.line}  ${act.actionName}`)
     }
   }

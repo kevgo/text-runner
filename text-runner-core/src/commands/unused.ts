@@ -36,7 +36,7 @@ export class Unused implements Command {
     const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
 
     // step 4: extract activities
-    const usedActivityNames = activities.extract(ASTs, config.regionMarker).map(activity => activity.actionName)
+    const usedActivityNames = activities.extractDynamic(ASTs, config.regionMarker).map(activity => activity.actionName)
 
     // step 5: find defined activities
     const definedActivityNames = actions.Finder.load(config.sourceDir).customActionNames()

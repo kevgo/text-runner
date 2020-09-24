@@ -1,4 +1,4 @@
-import { RefineNameFn } from "../index"
+import { RefineNameFn } from "./index"
 
 /** allows refining the current name of a test step */
 export class NameRefiner {

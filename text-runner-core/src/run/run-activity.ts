@@ -7,11 +7,11 @@ import { ActionResult } from "../actions/types/action-result"
 import { Activity } from "../activities/index"
 import * as configuration from "../configuration/index"
 import * as linkTargets from "../link-targets"
-import { NameRefiner } from "./helpers/name-refiner"
-import { OutputCollector } from "./helpers/output-collector"
 import { UserError } from "../errors/user-error"
 import * as events from "../events/index"
 import * as commands from "../commands/index"
+import { OutputCollector } from "./output-collector"
+import { NameRefiner } from "./name-refiner"
 
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(

@@ -2,7 +2,7 @@ import * as path from "path"
 import * as configuration from "../configuration/index"
 import { removeLeadingSlash } from "../helpers/remove-leading-slash"
 import { AbsoluteLink } from "./absolute-link"
-import { unixify } from "./helpers/unixify"
+import { unixify } from "../helpers/unixify"
 
 /**
  * AbsoluteFilePath represents a complete path from the root directory

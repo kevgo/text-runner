@@ -1,7 +1,7 @@
 import { assert } from "chai"
 import * as configuration from "../configuration/index"
-import { AbsoluteFilePath } from "./absolute-file-path"
-import { RelativeLink } from "./relative-link"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { RelativeLink } from "../filesystem/relative-link"
 
 suite("RelativeLink.absolutify()", function () {
   test("no publications", function () {

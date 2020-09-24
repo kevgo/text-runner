@@ -1,11 +1,7 @@
 import * as path from "path"
 import * as configuration from "../configuration/index"
-import { addLeadingDotUnlessEmpty } from "../helpers/add-leading-dot-unless-empty"
-import { addLeadingSlash } from "../helpers/add-leading-slash"
+import * as helpers from "../helpers"
 import { AbsoluteFilePath } from "./absolute-file-path"
-import { removeDoubleSlash } from "./helpers/remove-double-slash"
-import { straightenLink } from "./helpers/straighten-link"
-import { unixify } from "./helpers/unixify"
 import { RelativeLink } from "./relative-link"
 
 /**
@@ -17,7 +13,7 @@ export class AbsoluteLink {
   readonly value: string
 
   constructor(publicPath: string) {
-    this.value = addLeadingSlash(removeDoubleSlash(unixify(publicPath)))
+    this.value = helpers.addLeadingSlash(helpers.removeDoubleSlash(helpers.unixify(publicPath)))
   }
 
   /**
@@ -32,7 +28,7 @@ export class AbsoluteLink {
    * with the given relative link appended
    */
   append(segment: RelativeLink): AbsoluteLink {
-    return new AbsoluteLink(straightenLink(this.value + "/" + segment.value))
+    return new AbsoluteLink(helpers.straightenLink(this.value + "/" + segment.value))
   }
 
   /**
@@ -54,7 +50,7 @@ export class AbsoluteLink {
    * Returns whether this link has the given extension
    */
   hasExtension(extension: string): boolean {
-    return path.extname(this.value) === addLeadingDotUnlessEmpty(extension)
+    return path.extname(this.value) === helpers.addLeadingDotUnlessEmpty(extension)
   }
 
   /**
@@ -107,7 +103,7 @@ export class AbsoluteLink {
    */
   withExtension(newExtension: string): AbsoluteLink {
     const extRE = new RegExp(path.extname(this.value) + "$")
-    return new AbsoluteLink(this.value.replace(extRE, addLeadingDotUnlessEmpty(newExtension)))
+    return new AbsoluteLink(this.value.replace(extRE, helpers.addLeadingDotUnlessEmpty(newExtension)))
   }
 
   /**

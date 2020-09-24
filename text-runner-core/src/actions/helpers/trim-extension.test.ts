@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { unixify } from "../../filesystem/helpers/unixify"
+import { unixify } from "../../helpers/unixify"
 import { trimExtension } from "./trim-extension"
 
 test("trimExtension()", function () {

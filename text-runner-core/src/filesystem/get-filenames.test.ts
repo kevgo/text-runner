@@ -1,6 +1,6 @@
 import { expect } from "chai"
 import { AbsoluteFilePath } from "./absolute-file-path"
-import { removeExcludedFiles } from "./remove-excluded-files"
+import { removeExcludedFiles } from "./get-filenames"
 
 suite("removeExcludedFiles", function () {
   test("single filename given", function () {

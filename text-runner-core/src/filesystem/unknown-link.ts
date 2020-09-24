@@ -1,8 +1,8 @@
 import * as configuration from "../configuration/index"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
-import { removeDoubleSlash } from "./helpers/remove-double-slash"
-import { unixify } from "./helpers/unixify"
+import { removeDoubleSlash } from "../helpers/remove-double-slash"
+import { unixify } from "../helpers/unixify"
 import { RelativeLink } from "./relative-link"
 
 /**

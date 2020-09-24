@@ -1,13 +1,13 @@
 import * as isGlob from "is-glob"
 import * as path from "path"
 import * as configuration from "../configuration/index"
+import * as glob from "glob-promise"
 import { UserError } from "../errors/user-error"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { filesMatchingGlob } from "./files-matching-glob"
 import { hasDirectory } from "./has-directory"
 import { isMarkdownFile } from "./is-markdown-file"
-import { markdownFilesInDir } from "./markdown-files-in-dir"
-import { removeExcludedFiles } from "./remove-excluded-files"
+import { pathRelativeToDir } from "../helpers/path-relative-to-dir"
 
 /**
  * Returns the AbsoluteFilePaths of all files/directories relative to the given sourceDir
@@ -36,4 +36,36 @@ async function getFiles(config: configuration.Data): Promise<AbsoluteFilePath[]>
   } else {
     throw new UserError(`file or directory does not exist: ${config.files}`)
   }
+}
+
+/**
+ * returns all the markdown files in this directory and its children,
+ * relative to the given sourceDir
+ */
+export async function markdownFilesInDir(dirName: string, sourceDir: string): Promise<AbsoluteFilePath[]> {
+  const files = await glob(`${dirName}/**/*.md`)
+  return files
+    .filter(file => !file.includes("node_modules"))
+    .sort()
+    .map(file => pathRelativeToDir(file, sourceDir))
+    .map(file => new AbsoluteFilePath(file))
+}
+
+/**
+ * Removes the given excluded files from the given list of filenames
+ */
+export function removeExcludedFiles(fileList: AbsoluteFilePath[], excluded: string | string[]): AbsoluteFilePath[] {
+  const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
+  if (!excludedFilesArray.includes("node_modules")) {
+    excludedFilesArray.push("node_modules")
+  }
+  const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
+  return fileList.filter(file => {
+    for (const excludedRegex of excludedRegexes) {
+      if (excludedRegex.test(file.unixified())) {
+        return false
+      }
+    }
+    return true
+  })
 }

@@ -1,7 +1,7 @@
 export { Finder } from "./finder"
 import * as config from "../configuration/index"
 import * as linkTargets from "../link-targets"
-import * as parsers from "../parsers"
+import * as ast from "../ast"
 import * as run from "../run"
 
 /**
@@ -14,10 +14,10 @@ export interface Args {
   configuration: config.Data
 
   /** the AST nodes of the active region which the current action tests */
-  region: parsers.ast.NodeList
+  region: ast.NodeList
 
   /** the AST nodes of the active region which the current action tests */
-  document: parsers.ast.NodeList
+  document: ast.NodeList
 
   /** name of the file in which the currently tested active region is */
   file: string

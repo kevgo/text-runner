@@ -23,7 +23,6 @@
     "@types/minimist": "1.2.0",
     "@types/rimraf": "3.0.0",
     "@types/yamljs": "0.2.31",
-    "cucumber": "6.0.5",
     "mocha": "8.0.1"
   },
   "files": [

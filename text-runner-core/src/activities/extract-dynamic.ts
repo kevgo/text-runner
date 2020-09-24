@@ -1,10 +1,10 @@
 import * as ast from "../ast"
-import { ActivityList } from "./index"
+import { List } from "./index"
 import { normalizeActionName } from "./normalize-action-name"
 
 /** returns all activities found in the given ast.NodeLists */
-export function extractDynamic(docs: ast.NodeList[], regionMarker: string): ActivityList {
-  const result: ActivityList = []
+export function extractDynamic(docs: ast.NodeList[], regionMarker: string): List {
+  const result: List = []
   for (const doc of docs) {
     result.push(...extractFromAST(doc, regionMarker))
   }
@@ -12,8 +12,8 @@ export function extractDynamic(docs: ast.NodeList[], regionMarker: string): Acti
 }
 
 /** returns the activities contained in the given NodeList */
-function extractFromAST(doc: ast.NodeList, regionMarker: string): ActivityList {
-  const result: ActivityList = []
+function extractFromAST(doc: ast.NodeList, regionMarker: string): List {
+  const result: List = []
   for (const node of doc) {
     if (isActiveBlockTag(node, regionMarker)) {
       result.push({

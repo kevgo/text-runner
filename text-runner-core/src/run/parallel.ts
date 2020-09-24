@@ -1,4 +1,4 @@
-import { ActivityList } from "../activities/index"
+import * as activities from "../activities/index"
 import * as configuration from "../configuration/index"
 import * as linkTargets from "../link-targets"
 import { runActivity } from "./run-activity"
@@ -10,7 +10,7 @@ import * as commands from "../commands/index"
  * Returns the errors they produce.
  */
 export function parallel(
-  activities: ActivityList,
+  activities: activities.List,
   actionFinder: actions.Finder,
   targets: linkTargets.List,
   configuration: configuration.Data,

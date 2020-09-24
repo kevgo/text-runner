@@ -3,7 +3,7 @@ import * as ast from "../ast"
 export { extractDynamic } from "./extract-dynamic"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 
-export type ActivityList = Activity[]
+export type List = Activity[]
 
 /**
  * Activity is an action instance.

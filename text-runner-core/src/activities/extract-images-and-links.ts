@@ -1,9 +1,9 @@
 import * as ast from "../ast"
-import { ActivityList } from "./index"
+import { List } from "./index"
 
 /** extracts activities that check images and links from the given ActivityLists */
-export function extractImagesAndLinks(ASTs: ast.NodeList[]): ActivityList {
-  const result: ActivityList = []
+export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
+  const result: List = []
   for (const AST of ASTs) {
     for (const node of AST) {
       switch (node.type) {

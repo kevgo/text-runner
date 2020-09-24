@@ -4,9 +4,9 @@ import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import * as html from "../html"
 import * as ast from "../../ast"
 import { TagMapper } from "../tag-mapper"
-import { ClosingTagParser } from "./helpers/closing-tag-parser"
-import { OpenNodeTracker } from "./helpers/open-node-tracker"
 import { UserError } from "../../errors/user-error"
+import { ClosingTagParser } from "./closing-tag-parser"
+import { OpenNodeTracker } from "./open-node-tracker"
 
 export type MarkdownItNode = any
 export type MarkdownItAst = MarkdownItNode[]

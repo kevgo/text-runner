@@ -1,6 +1,6 @@
-import { UserError } from "../../../errors/user-error"
-import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import * as parser from "../md-parser"
+import { UserError } from "../../errors/user-error"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import * as parser from "./md-parser"
 
 /** helps find open MarkdownIt AST nodes */
 export class OpenNodeTracker {

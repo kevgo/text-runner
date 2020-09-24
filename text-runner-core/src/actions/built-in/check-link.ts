@@ -3,7 +3,6 @@ import got from "got"
 import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { UnknownLink } from "../../filesystem/unknown-link"
-import { removeLeadingSlash } from "../../helpers/remove-leading-slash"
 import * as helpers from "../../helpers"
 import { ActionArgs } from "../types/action-args"
 
@@ -107,7 +106,9 @@ async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, ta
   const anchorName = absoluteLink.anchor()
 
   if (!action.linkTargets.hasFile(filePath)) {
-    throw new Error(`link to anchor #${anchorName} in non-existing file ${removeLeadingSlash(filePath.unixified())}`)
+    throw new Error(
+      `link to anchor #${anchorName} in non-existing file ${helpers.removeLeadingSlash(filePath.unixified())}`
+    )
   }
 
   if (!action.linkTargets.hasAnchor(filePath, anchorName)) {

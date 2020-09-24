@@ -7,7 +7,7 @@ import { AbsoluteFilePath } from "./absolute-file-path"
 import { filesMatchingGlob } from "./files-matching-glob"
 import { hasDirectory } from "./has-directory"
 import { isMarkdownFile } from "./is-markdown-file"
-import { pathRelativeToDir } from "../helpers/path-relative-to-dir"
+import * as helpers from "../helpers"
 
 /**
  * Returns the AbsoluteFilePaths of all files/directories relative to the given sourceDir
@@ -47,7 +47,7 @@ export async function markdownFilesInDir(dirName: string, sourceDir: string): Pr
   return files
     .filter(file => !file.includes("node_modules"))
     .sort()
-    .map(file => pathRelativeToDir(file, sourceDir))
+    .map(file => helpers.pathRelativeToDir(file, sourceDir))
     .map(file => new AbsoluteFilePath(file))
 }
 

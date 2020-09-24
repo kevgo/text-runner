@@ -5,7 +5,7 @@ import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
 import * as ast from "../ast"
 import { UserError } from "../errors/user-error"
-import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
+import * as helpers from "../helpers"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
 import * as events from "../events/index"
@@ -100,7 +100,7 @@ function debugImages(ASTs: ast.NodeList[]) {
   }
   for (const image of images) {
     image.document = new ast.NodeList()
-    console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
+    console.log(helpers.trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 
@@ -113,7 +113,7 @@ function debugLinks(ASTs: ast.NodeList[]) {
   }
   for (const image of links) {
     image.document = new ast.NodeList()
-    console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
+    console.log(helpers.trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 

@@ -3,7 +3,7 @@ import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import * as ast from "../../ast"
 import { TagMapper } from "../tag-mapper"
-import { standardizeHTMLAttributes } from "./helpers/standardize-html-attributes"
+import * as helpers from "./helpers"
 
 /** Parser converts HTML5 source into the standardized AST format. */
 export class Parser {
@@ -106,7 +106,7 @@ export class Parser {
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
-    const attributes = standardizeHTMLAttributes(node.attrs)
+    const attributes = helpers.standardizeHTMLAttributes(node.attrs)
 
     // store the opening node
     let startLine = startingLine
@@ -167,7 +167,7 @@ export class Parser {
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
-    const attributes = standardizeHTMLAttributes(node.attrs)
+    const attributes = helpers.standardizeHTMLAttributes(node.attrs)
     result.push(
       new ast.Node({
         attributes,

@@ -1,6 +1,6 @@
-import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import * as ast from "../../../ast"
-import { TagMapper } from "../../tag-mapper"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import * as ast from "../../ast"
+import { TagMapper } from "../tag-mapper"
 
 /** ClosingTagParser parses HTML blocks containing just a closing tag. */
 export class ClosingTagParser {

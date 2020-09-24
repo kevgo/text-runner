@@ -1,7 +1,7 @@
 import { assert } from "chai"
-import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import * as ast from "../../../ast"
-import { TagMapper } from "../../tag-mapper"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import * as ast from "../../ast"
+import { TagMapper } from "../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
 
 suite("ClosingTagParser.isClosingTag()", function () {

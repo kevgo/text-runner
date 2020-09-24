@@ -3,7 +3,7 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parser from "../parsers"
 import * as runners from "../runners"
-import { createWorkspace } from "../working-dir/create-working-dir"
+import * as workspace from "../workspace"
 import * as actions from "../actions"
 import * as events from "../events"
 import * as command from "./index"
@@ -32,7 +32,7 @@ export class Run implements command.Command {
 
       // step 2: create workspace
       if (!config.workspace) {
-        config.workspace = await createWorkspace(config)
+        config.workspace = await workspace.create(config)
       }
 
       // step 3: find files

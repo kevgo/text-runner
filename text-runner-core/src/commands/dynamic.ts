@@ -3,7 +3,7 @@ import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parsers from "../parsers/index"
 import * as runners from "../runners"
-import { createWorkspace } from "../working-dir/create-working-dir"
+import * as workspace from "../workspace"
 import * as actions from "../actions"
 import { Command } from "./command"
 import * as configuration from "../configuration/index"
@@ -31,7 +31,7 @@ export class Dynamic implements Command {
 
       // step 2: create working dir
       if (!config.workspace) {
-        config.workspace = await createWorkspace(config)
+        config.workspace = await workspace.create(config)
       }
 
       // step 3: find files

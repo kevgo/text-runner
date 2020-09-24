@@ -1,8 +1,7 @@
-import { Publications } from "../configuration/publications/publications"
+import * as configuration from "../configuration/index"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
-import { removeDoubleSlash } from "./helpers/remove-double-slash"
-import { unixify } from "./helpers/unixify"
+import * as helpers from "../helpers"
 import { RelativeLink } from "./relative-link"
 
 /**
@@ -12,10 +11,10 @@ export class UnknownLink {
   private readonly value: string
 
   constructor(publicPath: string) {
-    this.value = removeDoubleSlash(unixify(publicPath))
+    this.value = helpers.removeDoubleSlash(helpers.unixify(publicPath))
   }
 
-  absolutify(containingFile: AbsoluteFilePath, publications: Publications): AbsoluteLink {
+  absolutify(containingFile: AbsoluteFilePath, publications: configuration.Publications): AbsoluteLink {
     if (this.isAbsolute()) {
       return new AbsoluteLink(this.value)
     }

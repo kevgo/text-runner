@@ -8,9 +8,7 @@ import * as util from "util"
 import stripAnsi = require("strip-ansi")
 import * as textRunner from "text-runner-core"
 import { TRWorld } from "./world"
-import { standardizePath } from "./helpers/standardize-path"
-import { verifyRanOnlyTestsCLI } from "./helpers/verify-ran-only-test-cli"
-import { compareExecuteResultLine } from "./helpers/compare-execute-result-line"
+import * as helpers from "./helpers"
 
 const psTree = util.promisify(psTreeR)
 
@@ -109,7 +107,7 @@ Then("it executes these actions:", function (table) {
     }
     have.push(result)
   }
-  have = have.sort(compareExecuteResultLine)
+  have = have.sort(helpers.compareExecuteResultLine)
   assert.deepEqual(have, want)
 })
 
@@ -257,12 +255,12 @@ Then("it runs in the current working directory", function () {
 
 Then("it runs (only )the tests in {string}", function (filename) {
   const world = this as TRWorld
-  verifyRanOnlyTestsCLI([filename], world)
+  helpers.verifyRanOnlyTestsCLI([filename], world)
 })
 
 Then("it runs only the tests in:", function (table) {
   const world = this as TRWorld
-  verifyRanOnlyTestsCLI(table.raw(), world)
+  helpers.verifyRanOnlyTestsCLI(table.raw(), world)
 })
 
 Then("it runs the console command {string}", async function (command) {
@@ -305,7 +303,7 @@ Then("it signals:", function (table) {
   if (!world.process) {
     throw new Error("no process results found")
   }
-  const actual = standardizePath(stripAnsi(world.process.output.fullText()))
+  const actual = helpers.standardizePath(stripAnsi(world.process.output.fullText()))
   if (!actual.includes(expectedText)) {
     throw new Error(`Mismatching output!
 Looking for: ${expectedText}

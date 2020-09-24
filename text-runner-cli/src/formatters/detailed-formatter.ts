@@ -2,30 +2,29 @@ import * as color from "colorette"
 import * as path from "path"
 import * as helpers from "../helpers"
 import * as formatter from "."
-import * as events from "events"
 import * as tr from "text-runner-core"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {
   private readonly sourceDir: string
 
-  constructor(sourceDir: string, emitter: events.EventEmitter) {
+  constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
-    emitter.on(tr.CommandEvent.output, console.log)
-    emitter.on(tr.CommandEvent.success, this.success.bind(this))
-    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
-    emitter.on(tr.CommandEvent.warning, this.warning.bind(this))
-    emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
+    command.on("output", console.log)
+    command.on("success", this.success.bind(this))
+    command.on("failed", this.failed.bind(this))
+    command.on("warning", this.warning.bind(this))
+    command.on("skipped", this.skipped.bind(this))
   }
 
-  success(args: tr.SuccessArgs): void {
+  success(args: tr.events.SuccessArgs): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
     console.log(color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.finalName}`))
   }
 
-  failed(args: tr.FailedArgs): void {
+  failed(args: tr.events.FailedArgs): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -35,7 +34,7 @@ export class DetailedFormatter implements formatter.Formatter {
     helpers.printCodeFrame(console.log, filePath, args.activity.line)
   }
 
-  skipped(args: tr.SkippedArgs): void {
+  skipped(args: tr.events.SkippedArgs): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -44,7 +43,7 @@ export class DetailedFormatter implements formatter.Formatter {
     )
   }
 
-  warning(args: tr.WarnArgs): void {
+  warning(args: tr.events.WarnArgs): void {
     console.log(color.magenta(args.message))
   }
 

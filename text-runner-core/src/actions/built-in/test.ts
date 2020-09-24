@@ -1,5 +1,5 @@
-import { ActionArgs } from "../types/action-args"
+import { Args } from "../index"
 
-export function test(action: ActionArgs): void {
+export function test(action: Args): void {
   action.log(action.region.text())
 }

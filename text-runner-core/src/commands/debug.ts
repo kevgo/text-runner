@@ -1,32 +1,35 @@
 import * as util from "util"
-import { extractActivities } from "../activities/extract-activities"
-import { extractImagesAndLinks } from "../activities/extract-images-and-links"
+import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
-import { findLinkTargets } from "../link-targets/find-link-targets"
-import { parseMarkdownFiles } from "../parsers/markdown/parse-markdown-files"
-import { AstNode } from "../parsers/standard-AST/ast-node"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as linkTargets from "../link-targets"
+import * as parsers from "../parsers/index"
+import * as ast from "../ast"
 import { UserError } from "../errors/user-error"
-import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
-import * as events from "events"
+import * as helpers from "../helpers"
 import { Command } from "./command"
-import { Configuration, PartialConfiguration } from "../configuration/configuration"
-import { backfillDefaults } from "../configuration/backfill-defaults"
+import * as configuration from "../configuration/index"
+import * as events from "../events/index"
+import { EventEmitter } from "events"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
-export class DebugCommand extends events.EventEmitter implements Command {
-  userConfig: PartialConfiguration
+export class Debug implements Command {
+  userConfig: configuration.PartialData
   subcommand: DebugSubcommand | undefined
+  emitter: EventEmitter
 
-  constructor(userConfig: PartialConfiguration, subcommand: DebugSubcommand | undefined) {
-    super()
+  constructor(userConfig: configuration.PartialData, subcommand: DebugSubcommand | undefined) {
     this.userConfig = userConfig
     this.subcommand = subcommand
+    this.emitter = new EventEmitter()
+  }
+
+  emit(name: events.CommandEvent, payload: events.Args): void {
+    this.emitter.emit(name, payload)
   }
 
   async execute(): Promise<void> {
-    const config = backfillDefaults(this.userConfig)
+    const config = configuration.backfillDefaults(this.userConfig)
     const filenames = await getFileNames(config)
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug
@@ -42,7 +45,7 @@ Example: text-run debug --${this.subcommand} foo.md`
 --link-targets: document anchors to link to
 
 Example: text-run debug --images foo.md`
-    const ASTs = await parseMarkdownFiles(filenames, config.sourceDir)
+    const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
     switch (this.subcommand) {
       case "activities":
         return debugActivities(ASTs, config)
@@ -60,21 +63,26 @@ Example: text-run debug --images foo.md`
         throw new UserError(`unknown debug sub-command: ${this.subcommand}`, guidance)
     }
   }
+
+  on(name: events.CommandEvent, handler: events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
+  }
 }
 
-function debugActivities(ASTs: AstNodeList[], config: Configuration) {
+function debugActivities(ASTs: ast.NodeList[], config: configuration.Data) {
   console.log("\nACTIVITIES:")
-  const activities = extractActivities(ASTs, config.regionMarker || "type")
-  if (activities.length === 0) {
+  const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker || "type")
+  if (dynamicActivities.length === 0) {
     console.log("(none)")
   } else {
-    for (const activity of activities) {
-      console.log(`${activity.file.platformified()}:${activity.line}  ${activity.actionName}`)
+    for (const act of dynamicActivities) {
+      console.log(`${act.file.platformified()}:${act.line}  ${act.actionName}`)
     }
   }
 }
 
-function debugASTNodes(ASTs: AstNodeList[]) {
+function debugASTNodes(ASTs: ast.NodeList[]) {
   console.log("AST NODES:")
   for (const AST of ASTs) {
     for (const node of AST) {
@@ -83,41 +91,41 @@ function debugASTNodes(ASTs: AstNodeList[]) {
   }
 }
 
-function debugImages(ASTs: AstNodeList[]) {
+function debugImages(ASTs: ast.NodeList[]) {
   console.log("\nIMAGES:")
-  const images = extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-image")
+  const images = activities.extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-image")
   if (images.length === 0) {
     console.log("(none)")
     return
   }
   for (const image of images) {
-    image.document = new AstNodeList()
-    console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
+    image.document = new ast.NodeList()
+    console.log(helpers.trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 
-function debugLinks(ASTs: AstNodeList[]) {
+function debugLinks(ASTs: ast.NodeList[]) {
   console.log("\nLINKS:")
-  const links = extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-link")
+  const links = activities.extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-link")
   if (links.length === 0) {
     console.log("(none)")
     return
   }
   for (const image of links) {
-    image.document = new AstNodeList()
-    console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
+    image.document = new ast.NodeList()
+    console.log(helpers.trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 
-function debugLinkTargets(ASTs: AstNodeList[]) {
+function debugLinkTargets(ASTs: ast.NodeList[]) {
   console.log("\nLINK TARGETS:")
-  const linkTargets = findLinkTargets(ASTs)
-  for (const key of Object.keys(linkTargets.targets)) {
-    console.log(key, linkTargets.targets[key])
+  const targets = linkTargets.find(ASTs)
+  for (const key of Object.keys(targets.targets)) {
+    console.log(key, targets.targets[key])
   }
 }
 
-function showAttr(node: AstNode): string {
+function showAttr(node: ast.Node): string {
   if (node.type === "text") {
     return `("${node.content.trim()}")`
   }

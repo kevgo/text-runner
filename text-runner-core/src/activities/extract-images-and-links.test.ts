@@ -1,10 +1,10 @@
 import { assert } from "chai"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as ast from "../ast"
 import { extractImagesAndLinks } from "./extract-images-and-links"
 
 suite("extractImagesAndLinks", function () {
   test("extracting images", function () {
-    const nodes = AstNodeList.scaffold({
+    const nodes = ast.NodeList.scaffold({
       file: "filename",
       line: 3,
       type: "image",
@@ -21,7 +21,7 @@ suite("extractImagesAndLinks", function () {
   })
 
   test("extracting links", function () {
-    const nodes = new AstNodeList()
+    const nodes = new ast.NodeList()
     nodes.pushNode({ type: "link_open", file: "filename", line: 3 })
     nodes.pushNode({ type: "text", file: "filename", line: 3, content: "foo" })
     nodes.pushNode({ type: "link_close", file: "filename", line: 3 })

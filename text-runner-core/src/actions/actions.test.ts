@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { Actions } from "./actions"
 import { assert } from "chai"
-import { Action } from "./types/action"
+import { Action } from "./index"
 
 suite("Actions", function () {
   suite("register", function () {

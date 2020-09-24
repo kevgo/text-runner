@@ -1,9 +1,9 @@
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
-import { ActivityList } from "./types/activity-list"
+import * as ast from "../ast"
+import { List } from "./index"
 
 /** extracts activities that check images and links from the given ActivityLists */
-export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
-  const result: ActivityList = []
+export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
+  const result: List = []
   for (const AST of ASTs) {
     for (const node of AST) {
       switch (node.type) {
@@ -18,7 +18,7 @@ export function extractImagesAndLinks(ASTs: AstNodeList[]): ActivityList {
           break
 
         case "image": {
-          const nodes = new AstNodeList()
+          const nodes = new ast.NodeList()
           nodes.push(node)
           result.push({
             actionName: "check-image",

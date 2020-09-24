@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { Publications } from "../configuration/publications/publications"
+import * as configuration from "../configuration/index"
 import { AbsoluteLink } from "./absolute-link"
 import { RelativeLink } from "./relative-link"
 
@@ -58,21 +58,21 @@ test("AbsoluteLink.isLinkToDirectory()", function () {
 suite("AbsoluteLink.localize()", function () {
   test("link to file", function () {
     const link = new AbsoluteLink("/one/two.png")
-    const publications = new Publications()
+    const publications = new configuration.Publications()
     const localized = link.localize(publications, "")
     assert.equal(localized.unixified(), "one/two.png")
   })
 
   test("url-encoded link", function () {
     const link = new AbsoluteLink("/one%20two.png")
-    const publications = new Publications()
+    const publications = new configuration.Publications()
     const localized = link.localize(publications, "")
     assert.equal(localized.unixified(), "one two.png")
   })
 
   test("link to mapped directory", function () {
     const link = new AbsoluteLink("/blog/two.html")
-    const publications = Publications.fromJSON([
+    const publications = configuration.Publications.fromJSON([
       {
         localPath: "/content/posts",
         publicExtension: "html",
@@ -85,7 +85,7 @@ suite("AbsoluteLink.localize()", function () {
 
   test("link with anchor to mapped directory", function () {
     const link = new AbsoluteLink("/blog/two.html#hello")
-    const publications = Publications.fromJSON([
+    const publications = configuration.Publications.fromJSON([
       {
         localPath: "/content/posts",
         publicExtension: "html",
@@ -98,7 +98,7 @@ suite("AbsoluteLink.localize()", function () {
 
   test("link with anchor to normal directory", function () {
     const link = new AbsoluteLink("/one/two.md#hello")
-    const publications = new Publications()
+    const publications = new configuration.Publications()
     const localized = link.localize(publications, "")
     assert.equal(localized.unixified(), "one/two.md")
   })

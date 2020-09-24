@@ -4,21 +4,12 @@ import * as scaffold from "./scaffold"
 import { HelpCommand } from "./help"
 import { SetupCommand } from "./setup"
 import { VersionCommand } from "./version"
-import {
-  DebugCommand,
-  DebugSubcommand,
-  DynamicCommand,
-  RunCommand,
-  StaticCommand,
-  UnusedCommand,
-  UserError,
-} from "text-runner-core"
 
 export async function instantiate(
   commandName: string,
   userConfig: config.Data,
-  debugSubcommand: DebugSubcommand | undefined
-): Promise<tr.Command> {
+  debugSubcommand: tr.commands.DebugSubcommand | undefined
+): Promise<tr.commands.Command> {
   const sourceDir = userConfig.sourceDir || "."
   switch (commandName) {
     case "help":
@@ -36,16 +27,16 @@ export async function instantiate(
   const trConfig = userConfig.toCoreConfig()
   switch (commandName) {
     case "debug":
-      return new DebugCommand(trConfig, debugSubcommand)
+      return new tr.commands.Debug(trConfig, debugSubcommand)
     case "dynamic":
-      return new DynamicCommand(trConfig)
+      return new tr.commands.Dynamic(trConfig)
     case "run":
-      return new RunCommand(trConfig)
+      return new tr.commands.Run(trConfig)
     case "static":
-      return new StaticCommand(trConfig)
+      return new tr.commands.Static(trConfig)
     case "unused":
-      return new UnusedCommand(trConfig)
+      return new tr.commands.Unused(trConfig)
     default:
-      throw new UserError(`unknown command: ${commandName}`)
+      throw new tr.UserError(`unknown command: ${commandName}`)
   }
 }

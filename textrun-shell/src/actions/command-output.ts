@@ -3,7 +3,7 @@ import { CurrentCommand } from "../helpers/current-command"
 import * as tr from "text-runner-core"
 import stripAnsi = require("strip-ansi")
 
-export function commandOutput(action: tr.ActionArgs): void {
+export function commandOutput(action: tr.actions.Args): void {
   action.name("verifying the output of the last run console command")
   const expectedText = action.region.text()
   const expectedLines = expectedText

@@ -1,22 +1,27 @@
 import * as path from "path"
 import { promises as fs } from "fs"
-import * as events from "events"
 import * as tr from "text-runner-core"
 import * as helpers from "../helpers"
+import { EventEmitter } from "events"
 
 /** languages in which this Text-Runner actions can be scaffolded */
 export type ScaffoldLanguage = "js" | "ts"
 
-export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
+export class ScaffoldCommand implements tr.commands.Command {
+  emitter: EventEmitter
   name: string
   sourceDir: string
   language: ScaffoldLanguage
 
   constructor(name: string, sourceDir: string, language: ScaffoldLanguage) {
-    super()
     this.name = name
     this.sourceDir = sourceDir
     this.language = language
+    this.emitter = new EventEmitter()
+  }
+
+  emit(name: tr.events.CommandEvent, payload: tr.events.Args): void {
+    this.emitter.emit(name, payload)
   }
 
   async execute(): Promise<void> {
@@ -38,6 +43,11 @@ export class ScaffoldCommand extends events.EventEmitter implements tr.Command {
       throw new tr.UserError(`Unknown configuration language: ${this.language}`, 'Possible languages are "js" and "ts"')
     }
   }
+
+  on(name: tr.events.CommandEvent, handler: tr.events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
+  }
 }
 
 function jsTemplate(filename: string) {
@@ -52,7 +62,7 @@ function jsTemplate(filename: string) {
 function tsTemplate(filename: string) {
   return `import * as tr from "text-runner-core"
 
-export function ${helpers.camelize(filename)} (action: tr.ActionArgs) {
+export function ${helpers.camelize(filename)} (action: tr.actions.Args) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")

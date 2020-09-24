@@ -1,7 +1,7 @@
-import { AstNodeAttributes, AstNodeType, AstNodeTag } from "./standard-AST/ast-node"
+import * as ast from "../ast/node"
 
-type TypeTagMapping = Map<AstNodeType, AstNodeTag>
-type TagTypeMapping = Map<AstNodeTag, AstNodeType>
+type TypeTagMapping = Map<ast.NodeType, ast.NodeTag>
+type TagTypeMapping = Map<ast.NodeTag, ast.NodeType>
 
 /**
  * TagMapper maps MarkdownIt node types to HTML tags and vice versa.
@@ -11,7 +11,7 @@ type TagTypeMapping = Map<AstNodeTag, AstNodeType>
  */
 export class TagMapper {
   /** tags that have opening and closing versions */
-  private static readonly OPEN_CLOSE_MAPPINGS = new Map<string, AstNodeTag>([
+  private static readonly OPEN_CLOSE_MAPPINGS = new Map<string, ast.NodeTag>([
     ["bold", "b"],
     ["bullet_list", "ul"],
     ["fence", "pre"],
@@ -40,7 +40,7 @@ export class TagMapper {
     this.tagTypeMappings = this.createTagTypeMappings()
   }
 
-  isOpenCloseTag(tagName: AstNodeTag): boolean {
+  isOpenCloseTag(tagName: ast.NodeTag): boolean {
     if (tagName === "") {
       return false
     }
@@ -57,12 +57,12 @@ export class TagMapper {
   }
 
   /** Returns the opening MarkdownIt type for the given HTML tag. */
-  openingTypeForTag(tagName: AstNodeTag, attributes: AstNodeAttributes): AstNodeType {
-    return this.typeForTag(tagName.replace(/^\//, "") as AstNodeTag, attributes)
+  openingTypeForTag(tagName: ast.NodeTag, attributes: ast.NodeAttributes): ast.NodeType {
+    return this.typeForTag(tagName.replace(/^\//, "") as ast.NodeTag, attributes)
   }
 
   /** Returns the HTML tag for the given MarkdownIt type. */
-  tagForType(type: AstNodeType): AstNodeTag {
+  tagForType(type: ast.NodeType): ast.NodeTag {
     // handle text tag
     if (type === "text") {
       return ""
@@ -76,20 +76,20 @@ export class TagMapper {
 
     // handle generic opening tag
     if (type.endsWith("_open")) {
-      return type.substring(0, type.length - 5) as AstNodeTag
+      return type.substring(0, type.length - 5) as ast.NodeTag
     }
 
     // handle generic closing tag
     if (type.endsWith("_close")) {
-      return ("/" + type.substring(0, type.length - 6)) as AstNodeTag
+      return ("/" + type.substring(0, type.length - 6)) as ast.NodeTag
     }
 
     // handle generic stand-alone tag
-    return type as AstNodeTag
+    return type as ast.NodeTag
   }
 
   /** Returns the Markdown node type for the given HTML tag. */
-  typeForTag(tag: AstNodeTag, attributes: AstNodeAttributes): AstNodeType {
+  typeForTag(tag: ast.NodeTag, attributes: ast.NodeAttributes): ast.NodeType {
     // distinguish anchors from links
     if (tag === "a" && !attributes.href) {
       return "anchor_open"
@@ -106,9 +106,9 @@ export class TagMapper {
 
     // here it is an unknown tag, we assume it is opening-closing
     if (tag.startsWith("/")) {
-      return (tag.substring(1) + "_close") as AstNodeType
+      return (tag.substring(1) + "_close") as ast.NodeType
     } else {
-      return (tag + "_open") as AstNodeType
+      return (tag + "_open") as ast.NodeType
     }
   }
 
@@ -116,8 +116,8 @@ export class TagMapper {
   private createTypeTagMappings(): TypeTagMapping {
     const result: TypeTagMapping = new Map()
     for (const [type, tag] of TagMapper.OPEN_CLOSE_MAPPINGS) {
-      result.set((type + "_open") as AstNodeType, tag)
-      result.set((type + "_close") as AstNodeType, ("/" + tag) as AstNodeTag)
+      result.set((type + "_open") as ast.NodeType, tag)
+      result.set((type + "_close") as ast.NodeType, ("/" + tag) as ast.NodeTag)
     }
     for (const [type, tag] of TagMapper.STANDALONE_MAPPINGS) {
       result.set(type, tag)

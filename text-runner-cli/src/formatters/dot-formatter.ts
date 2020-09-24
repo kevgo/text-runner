@@ -1,7 +1,6 @@
 import * as color from "colorette"
 import * as path from "path"
 import * as formatter from "."
-import * as events from "events"
 import * as tr from "text-runner-core"
 import * as helpers from "../helpers"
 
@@ -9,17 +8,17 @@ import * as helpers from "../helpers"
 export class DotFormatter implements formatter.Formatter {
   private readonly sourceDir: string
 
-  constructor(sourceDir: string, emitter: events.EventEmitter) {
+  constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
-    emitter.on(tr.CommandEvent.output, console.log)
-    emitter.on(tr.CommandEvent.success, this.success.bind(this))
-    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
-    emitter.on(tr.CommandEvent.warning, this.warning.bind(this))
-    emitter.on(tr.CommandEvent.skipped, this.skipped.bind(this))
-    emitter.on(tr.CommandEvent.finish, this.finish.bind(this))
+    command.on("output", console.log)
+    command.on("success", this.success.bind(this))
+    command.on("failed", this.failed.bind(this))
+    command.on("warning", this.warning.bind(this))
+    command.on("skipped", this.skipped.bind(this))
+    command.on("finish", this.finish.bind(this))
   }
 
-  failed(args: tr.FailedArgs): void {
+  failed(args: tr.events.FailedArgs): void {
     console.log()
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
@@ -43,7 +42,7 @@ export class DotFormatter implements formatter.Formatter {
     formatter.printSummary(args.stats)
   }
 
-  warning(args: tr.WarnArgs): void {
+  warning(args: tr.events.WarnArgs): void {
     console.log(color.magenta(args.message))
   }
 }

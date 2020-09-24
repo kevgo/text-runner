@@ -41,7 +41,7 @@ Feature: configuring the class prefix
   Scenario: regionMarker via API
     When calling:
       """
-      command = new textRunner.RunCommand({...config, regionMarker: "custom"})
+      command = new textRunner.commands.Run({...config, regionMarker: "custom"})
       observer = new MyObserverClass(command)
       await command.execute()
       """

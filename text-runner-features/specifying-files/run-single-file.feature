@@ -31,7 +31,7 @@ Feature: running a single MarkDown file
   Scenario: testing a single file via the API
     When calling:
       """
-      command = new textRunner.RunCommand({...config, files: '2.md'})
+      command = new textRunner.commands.Run({...config, files: '2.md'})
       observer = new MyObserverClass(command)
       await command.execute()
       """

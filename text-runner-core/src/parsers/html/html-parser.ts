@@ -1,13 +1,11 @@
 import * as parse5 from "parse5"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNode, AstNodeTag } from "../standard-AST/ast-node"
-import { AstNodeList } from "../standard-AST/ast-node-list"
+import * as ast from "../../ast"
 import { TagMapper } from "../tag-mapper"
-import { standardizeHTMLAttributes } from "./helpers/standardize-html-attributes"
 
-/** HtmlParser converts HTML5 source into the standardized AST format. */
-export class HTMLParser {
+/** Parser converts HTML5 source into the standardized AST format. */
+export class Parser {
   private readonly tagMapper: TagMapper
 
   constructor(tagMapper: TagMapper) {
@@ -22,7 +20,7 @@ export class HTMLParser {
    *                     This parameter helps show correct line numbers for HTML snippets
    *                     that are embedded in Markdown documents.
    */
-  parse(text: string, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  parse(text: string, file: AbsoluteFilePath, startingLine: number): ast.NodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true,
     })
@@ -73,8 +71,8 @@ export class HTMLParser {
     documentAst: parse5.DefaultTreeDocument,
     file: AbsoluteFilePath,
     startingLine = 1
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     const htmlNode = this.findHTMLNode(documentAst)
     const bodyNode = this.findBodyNode(htmlNode)
     for (const childNode of bodyNode.childNodes) {
@@ -84,9 +82,9 @@ export class HTMLParser {
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: parse5.DefaultTreeNode, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  private standardizeNode(node: parse5.DefaultTreeNode, file: AbsoluteFilePath, startingLine: number): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
-      return new AstNodeList()
+      return new ast.NodeList()
     }
     if (instanceOfDefaultTreeTextNode(node)) {
       return this.standardizeTextNode(node, file, startingLine)
@@ -105,8 +103,8 @@ export class HTMLParser {
     node: parse5.DefaultTreeElement,
     file: AbsoluteFilePath,
     startingLine: number
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
     // store the opening node
@@ -120,13 +118,13 @@ export class HTMLParser {
       }
     }
     result.push(
-      new AstNode({
+      new ast.Node({
         attributes,
         content: "",
         file,
         line: startLine,
-        tag: node.tagName as AstNodeTag,
-        type: this.tagMapper.openingTypeForTag(node.tagName as AstNodeTag, attributes),
+        tag: node.tagName as ast.NodeTag,
+        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes),
       })
     )
 
@@ -146,9 +144,9 @@ export class HTMLParser {
       throw new Error(`cannot determine end line for node ${node}`)
     }
     if (!node.sourceCodeLocation || (node.sourceCodeLocation && node.sourceCodeLocation.endTag)) {
-      const tag = ("/" + node.tagName) as AstNodeTag
+      const tag = ("/" + node.tagName) as ast.NodeTag
       result.push(
-        new AstNode({
+        new ast.Node({
           attributes: {},
           content: "",
           file,
@@ -166,17 +164,17 @@ export class HTMLParser {
     node: parse5.DefaultTreeElement,
     file: AbsoluteFilePath,
     startingLine: number
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
-      new AstNode({
+      new ast.Node({
         attributes,
         content: "",
         file,
         line: (node.sourceCodeLocation?.startLine || 0) + startingLine - 1,
-        tag: node.tagName as AstNodeTag,
-        type: this.tagMapper.typeForTag(node.tagName as AstNodeTag, attributes),
+        tag: node.tagName as ast.NodeTag,
+        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes),
       })
     )
     return result
@@ -187,11 +185,11 @@ export class HTMLParser {
     node: parse5.DefaultTreeTextNode,
     file: AbsoluteFilePath,
     startingLine: number
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     if (node.value !== "\n") {
       result.push(
-        new AstNode({
+        new ast.Node({
           attributes: {},
           content: node.value.trim(),
           file,
@@ -219,4 +217,15 @@ function instanceOfParentTreeNode(object: any): object is parse5.DefaultTreePare
 
 function instanceOfDefaultTreeElement(object: any): object is parse5.DefaultTreeElement {
   return object.nodeName && object.tagName && object.attrs
+}
+
+/** converts the given HTML AST node attributes into the standard AST format */
+export function standardizeHTMLAttributes(attrs: parse5.Attribute[]): ast.NodeAttributes {
+  const result: ast.NodeAttributes = {}
+  if (attrs) {
+    for (const attr of attrs) {
+      result[attr.name] = attr.value
+    }
+  }
+  return result
 }

@@ -14,7 +14,7 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export async function commandWithInput(action: tr.ActionArgs): Promise<void> {
+export async function commandWithInput(action: tr.actions.Args): Promise<void> {
   const content = action.region.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
@@ -51,12 +51,12 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-function getInput(nodes: tr.AstNodeList): ProcessInput[] {
+function getInput(nodes: tr.ast.NodeList): ProcessInput[] {
   const result: ProcessInput[] = []
   if (!nodes) {
     return result
   }
-  // TODO: simplify this with an "AstNodeList.getSubList" method
+  // TODO: simplify this with an "tr.parser.ast.NodeList.getSubList" method
   const tbodyNode = nodes.getNodeOfTypes("tbody_open")
   const tbodyContent = nodes.getNodesFor(tbodyNode)
   const trNodes = tbodyContent.getNodesOfTypes("tr_open")

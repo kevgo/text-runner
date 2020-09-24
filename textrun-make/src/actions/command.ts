@@ -5,7 +5,7 @@ import * as tr from "text-runner-core"
 import { makefileTargets } from "../helpers/makefile-targets"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
-export async function command(action: tr.ActionArgs): Promise<void> {
+export async function command(action: tr.actions.Args): Promise<void> {
   const command = action.region.text().trim()
   if (command === "") {
     throw new Error("No make command found")

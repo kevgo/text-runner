@@ -1,8 +1,7 @@
 import * as path from "path"
-import { Publications } from "../configuration/publications/publications"
-import { removeLeadingSlash } from "../helpers/remove-leading-slash"
+import * as configuration from "../configuration/index"
+import * as helpers from "../helpers"
 import { AbsoluteLink } from "./absolute-link"
-import { unixify } from "./helpers/unixify"
 
 /**
  * AbsoluteFilePath represents a complete path from the root directory
@@ -12,7 +11,7 @@ export class AbsoluteFilePath {
   private readonly value: string
 
   constructor(value: string) {
-    this.value = removeLeadingSlash(unixify(value))
+    this.value = helpers.removeLeadingSlash(helpers.unixify(value))
   }
 
   /** Returns a new file path with the given file name appended to the end of this file path */
@@ -63,7 +62,7 @@ export class AbsoluteFilePath {
    * Returns the public link under which this file path is published
    * @param publications the publications of this session
    */
-  publicPath(publications: Publications): AbsoluteLink {
+  publicPath(publications: configuration.Publications): AbsoluteLink {
     const publication = publications.forFilePath(this)
     if (publication == null) {
       return new AbsoluteLink(this.unixified())

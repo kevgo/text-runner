@@ -2,17 +2,16 @@ import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
 import * as formatter from "."
-import * as events from "events"
 import * as helpers from "../helpers"
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements formatter.Formatter {
   private readonly sourceDir: string
 
-  constructor(sourceDir: string, emitter: events.EventEmitter) {
+  constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
-    emitter.on(tr.CommandEvent.output, console.log)
-    emitter.on(tr.CommandEvent.failed, this.failed.bind(this))
+    command.on("output", console.log)
+    command.on("failed", this.failed.bind(this))
   }
 
   // @ts-ignore: okay to not use parameters here

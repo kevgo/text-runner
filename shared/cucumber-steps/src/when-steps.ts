@@ -1,15 +1,15 @@
 import { When } from "cucumber"
-import { executeCLI } from "./helpers/execute-cli"
+import * as helpers from "./helpers"
 import { TRWorld } from "./world"
 import * as textRunner from "text-runner-core"
 import { ActivityCollector } from "./activity-collector"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const config: textRunner.PartialConfiguration = { sourceDir: world.rootDir }
+  const config: textRunner.configuration.PartialData = { sourceDir: world.rootDir }
   // define a few variables here, they will be overwritten in the eval call
   // eslint-disable-next-line prefer-const
-  let command = new textRunner.RunCommand(config)
+  let command = new textRunner.commands.Run(config)
   // eslint-disable-next-line prefer-const
   let observer = new ActivityCollector(command)
   // eval the given code
@@ -34,7 +34,7 @@ When(/^calling:$/, async function (jsText: string) {
 
 When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
   const world = this as TRWorld
-  const command = new textRunner.RunCommand({ sourceDir: world.rootDir })
+  const command = new textRunner.commands.Run({ sourceDir: world.rootDir })
   const activityCollector = new ActivityCollector(command)
   try {
     await command.execute()
@@ -46,17 +46,17 @@ When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
 
 When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (tryingText, command) {
   const world = this as TRWorld
-  world.process = await executeCLI(command, determineExpectError(tryingText), world)
+  world.process = await helpers.executeCLI(command, determineExpectError(tryingText), world)
 })
 
 When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (tryingText) {
   const world = this as TRWorld
-  world.process = await executeCLI("run", determineExpectError(tryingText), world)
+  world.process = await helpers.executeCLI("run", determineExpectError(tryingText), world)
 })
 
 When(/^(trying to run|running) Text-Runner in the source directory$/, { timeout: 30_000 }, async function (tryingText) {
   const world = this as TRWorld
-  world.process = await executeCLI("run", determineExpectError(tryingText), world, { cwd: world.rootDir })
+  world.process = await helpers.executeCLI("run", determineExpectError(tryingText), world, { cwd: world.rootDir })
 })
 
 function determineExpectError(tryingText: string) {

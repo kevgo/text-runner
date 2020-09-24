@@ -3,15 +3,11 @@ import got from "got"
 import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { UnknownLink } from "../../filesystem/unknown-link"
-import { removeLeadingSlash } from "../../helpers/remove-leading-slash"
-import { isExternalLink } from "../helpers/is-external-link"
-import { isLinkToAnchorInOtherFile } from "../helpers/is-link-to-anchor-in-other-file"
-import { isLinkToAnchorInSameFile } from "../helpers/is-link-to-anchor-in-same-file"
-import { isMailtoLink } from "../helpers/is-mailto-link"
-import { ActionArgs } from "../types/action-args"
+import * as helpers from "../../helpers"
+import { Args } from "../index"
 
 /** The "checkLink" action checks for broken hyperlinks. */
-export async function checkLink(action: ActionArgs): Promise<number | void> {
+export async function checkLink(action: Args): Promise<number | void> {
   const target = action.region.getNodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")
@@ -20,21 +16,21 @@ export async function checkLink(action: ActionArgs): Promise<number | void> {
   action.name(`link to ${target}`)
   const filePath = new AbsoluteFilePath(action.file)
 
-  if (isMailtoLink(target)) {
+  if (helpers.isMailtoLink(target)) {
     return action.SKIPPING
   }
 
-  if (isLinkToAnchorInSameFile(target)) {
+  if (helpers.isLinkToAnchorInSameFile(target)) {
     const result = await checkLinkToAnchorInSameFile(filePath, target, action)
     return result
   }
 
-  if (isLinkToAnchorInOtherFile(target)) {
+  if (helpers.isLinkToAnchorInOtherFile(target)) {
     const result = await checkLinkToAnchorInOtherFile(filePath, target, action)
     return result
   }
 
-  if (isExternalLink(target)) {
+  if (helpers.isExternalLink(target)) {
     const result = await checkExternalLink(target, action)
     return result
   }
@@ -43,7 +39,7 @@ export async function checkLink(action: ActionArgs): Promise<number | void> {
   return
 }
 
-async function checkExternalLink(target: string, action: ActionArgs) {
+async function checkExternalLink(target: string, action: Args) {
   if (!action.configuration.online) {
     return action.SKIPPING
   }
@@ -63,7 +59,7 @@ async function checkExternalLink(target: string, action: ActionArgs) {
   return
 }
 
-async function checkLinkToFilesystem(target: string, action: ActionArgs) {
+async function checkLinkToFilesystem(target: string, action: Args) {
   const unknownLink = new UnknownLink(decodeURI(target))
   const absoluteLink = unknownLink.absolutify(new AbsoluteFilePath(action.file), action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
@@ -91,7 +87,7 @@ async function checkLinkToFilesystem(target: string, action: ActionArgs) {
   }
 }
 
-async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: ActionArgs) {
+async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
@@ -103,14 +99,16 @@ async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, tar
   }
 }
 
-async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: ActionArgs) {
+async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
   const link = new UnknownLink(target)
   const absoluteLink = link.absolutify(containingFile, action.configuration.publications)
   const filePath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   const anchorName = absoluteLink.anchor()
 
   if (!action.linkTargets.hasFile(filePath)) {
-    throw new Error(`link to anchor #${anchorName} in non-existing file ${removeLeadingSlash(filePath.unixified())}`)
+    throw new Error(
+      `link to anchor #${anchorName} in non-existing file ${helpers.removeLeadingSlash(filePath.unixified())}`
+    )
   }
 
   if (!action.linkTargets.hasAnchor(filePath, anchorName)) {

@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import * as events from "events"
+import * as tr from "text-runner-core"
 import * as formatter from "."
 import { DetailedFormatter } from "./detailed-formatter"
 import { DotFormatter } from "./dot-formatter"
@@ -7,24 +7,24 @@ import { SummaryFormatter } from "./summary-formatter"
 import { ProgressFormatter } from "./progress-formatter"
 
 suite("instantiateFormatter()", function () {
-  const emitter = new events.EventEmitter()
+  const command = new tr.commands.Run({})
   test("request detailed formatter", function () {
-    const have = formatter.instantiate("detailed", ".", emitter)
+    const have = formatter.instantiate("detailed", ".", command)
     assert.instanceOf(have, DetailedFormatter)
   })
 
   test("request dot formatter", function () {
-    const have = formatter.instantiate("dot", ".", emitter)
+    const have = formatter.instantiate("dot", ".", command)
     assert.instanceOf(have, DotFormatter)
   })
 
   test("request progress formatter", function () {
-    const have = formatter.instantiate("progress", ".", emitter)
+    const have = formatter.instantiate("progress", ".", command)
     assert.instanceOf(have, ProgressFormatter)
   })
 
   test("request summary formatter", function () {
-    const have = formatter.instantiate("summary", ".", emitter)
+    const have = formatter.instantiate("summary", ".", command)
     assert.instanceOf(have, SummaryFormatter)
   })
 
@@ -32,7 +32,7 @@ suite("instantiateFormatter()", function () {
     let err = null
     try {
       // @ts-ignore
-      formatter.instantiate("zonk", ".", emitter)
+      formatter.instantiate("zonk", ".", command)
     } catch (e) {
       err = e
     }

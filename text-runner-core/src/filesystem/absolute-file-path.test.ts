@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { Publications } from "../configuration/publications/publications"
+import * as configuration from "../configuration/index"
 import { AbsoluteFilePath } from "./absolute-file-path"
 
 test("AbsoluteFilePath.append()", function () {
@@ -50,12 +50,12 @@ test("AbsoluteFilePath.unixified()", function () {
 suite("AbsoluteFilePath.publicPath()", function () {
   test("no publications", function () {
     const filePath = new AbsoluteFilePath("content\\1.md")
-    const publicPath = filePath.publicPath(new Publications())
+    const publicPath = filePath.publicPath(new configuration.Publications())
     assert.equal(publicPath.value, "/content/1.md")
   })
 
   test("matching publication", function () {
-    const publications = Publications.fromJSON([
+    const publications = configuration.Publications.fromJSON([
       {
         localPath: "/content",
         publicExtension: "html",

@@ -1,5 +1,5 @@
 import * as actions from "../actions"
-import { extractActivities } from "../activities/extract-activities"
+import * as activities from "../activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as parsers from "../parsers"
 import * as events from "../events/index"
@@ -36,7 +36,7 @@ export class Unused implements Command {
     const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
 
     // step 4: extract activities
-    const usedActivityNames = extractActivities(ASTs, config.regionMarker).map(activity => activity.actionName)
+    const usedActivityNames = activities.extract(ASTs, config.regionMarker).map(activity => activity.actionName)
 
     // step 5: find defined activities
     const definedActivityNames = actions.Finder.load(config.sourceDir).customActionNames()

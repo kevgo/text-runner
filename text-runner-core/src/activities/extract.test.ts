@@ -1,8 +1,8 @@
 import { assert } from "chai"
 import * as ast from "../ast"
-import { extractActivities } from "./extract-activities"
+import { extract } from "./extract"
 
-suite("extractActivities()", function () {
+suite("extract()", function () {
   test("many activities", function () {
     const input = new ast.NodeList()
     input.pushNode({
@@ -13,7 +13,7 @@ suite("extractActivities()", function () {
     })
     input.pushNode({ type: "text" })
     input.pushNode({ type: "anchor_close" })
-    const result = extractActivities([input], "textrun")
+    const result = extract([input], "textrun")
     assert.lengthOf(result, 1)
     assert.equal(result[0].actionName, "verify-foo")
     assert.equal(result[0].file.unixified(), "README.md")
@@ -34,7 +34,7 @@ suite("extractActivities()", function () {
         attributes: { textrun: "verify_foo" },
       })
       AST.pushNode({ type: "anchor_close" })
-      const result = extractActivities([AST], "textrun")
+      const result = extract([AST], "textrun")
       assert.equal(result[0].actionName, tt.want)
     })
   }

@@ -72,7 +72,7 @@ Example: text-run debug --images foo.md`
 
 function debugActivities(ASTs: ast.NodeList[], config: configuration.Data) {
   console.log("\nACTIVITIES:")
-  const acts = activities.extractActivities(ASTs, config.regionMarker || "type")
+  const acts = activities.extract(ASTs, config.regionMarker || "type")
   if (acts.length === 0) {
     console.log("(none)")
   } else {

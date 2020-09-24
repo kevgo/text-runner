@@ -1,4 +1,4 @@
-import { extractActivities } from "../activities/extract-activities"
+import * as activity from "../activities"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
@@ -49,7 +49,7 @@ export class Dynamic implements Command {
       const targets = linkTargets.find(ASTs)
 
       // step 6: extract activities
-      const activities = extractActivities(ASTs, config.regionMarker)
+      const activities = activity.extract(ASTs, config.regionMarker)
       if (activities.length === 0) {
         const warnArgs: events.WarnArgs = { message: "no activities found" }
         this.emit("warning", warnArgs)

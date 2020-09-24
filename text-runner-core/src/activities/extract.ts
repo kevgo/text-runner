@@ -3,7 +3,7 @@ import { ActivityList } from "./index"
 import { normalizeActionName } from "./normalize-action-name"
 
 /** returns all activities found in the given ast.NodeLists */
-export function extractActivities(docs: ast.NodeList[], regionMarker: string): ActivityList {
+export function extract(docs: ast.NodeList[], regionMarker: string): ActivityList {
   const result: ActivityList = []
   for (const doc of docs) {
     result.push(...extractFromAST(doc, regionMarker))

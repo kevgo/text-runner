@@ -60,8 +60,8 @@ Feature: display the version
         actionName: 'check-image',
         file: AbsoluteFilePath { value: '1.md' },
         line: 1,
-        region: AstNodeList(1) [
-          AstNode {
+        region: NodeList(1) [
+          Node {
             type: 'image',
             tag: 'img',
             file: AbsoluteFilePath { value: '1.md' },
@@ -70,7 +70,7 @@ Feature: display the version
             attributes: { src: 'watermelon.png' }
           }
         ],
-        document: AstNodeList(0) []
+        document: NodeList(0) []
       }
       """
 
@@ -87,8 +87,8 @@ Feature: display the version
         actionName: 'check-link',
         file: AbsoluteFilePath { value: '1.md' },
         line: 1,
-        region: AstNodeList(3) [
-          AstNode {
+        region: NodeList(3) [
+          Node {
             type: 'link_open',
             tag: 'a',
             file: AbsoluteFilePath { value: '1.md' },
@@ -96,7 +96,7 @@ Feature: display the version
             content: '',
             attributes: { href: '2.md' }
           },
-          AstNode {
+          Node {
             type: 'text',
             tag: '',
             file: AbsoluteFilePath { value: '1.md' },
@@ -104,7 +104,7 @@ Feature: display the version
             content: 'another document',
             attributes: {}
           },
-          AstNode {
+          Node {
             type: 'link_close',
             tag: '/a',
             file: AbsoluteFilePath { value: '1.md' },
@@ -113,7 +113,7 @@ Feature: display the version
             attributes: {}
           }
         ],
-        document: AstNodeList(0) []
+        document: NodeList(0) []
       }
       """
 

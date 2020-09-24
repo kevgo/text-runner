@@ -1,6 +1,5 @@
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
-import { AstNode } from "../parsers/standard-AST/ast-node"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as ast from "../parsers/standard-AST"
 import { LinkTarget } from "./types/link-target"
 import { LinkTargetTypes } from "./types/link-target-types"
 import { targetURL } from "./target-url"
@@ -12,7 +11,7 @@ export class LinkTargetList {
     this.targets = {}
   }
 
-  addNodeList(nodeList: AstNodeList): void {
+  addNodeList(nodeList: ast.NodeList): void {
     for (const node of nodeList) {
       const key = node.file.platformified()
       this.targets[key] = this.targets[key] || []
@@ -24,7 +23,7 @@ export class LinkTargetList {
     }
   }
 
-  addAnchor(node: AstNode): void {
+  addAnchor(node: ast.Node): void {
     if (node.attributes.href !== undefined) {
       return
     }
@@ -34,7 +33,7 @@ export class LinkTargetList {
     this.addLinkTarget(node.file, "anchor", node.attributes.name)
   }
 
-  addHeading(node: AstNode, nodeList: AstNodeList): void {
+  addHeading(node: ast.Node, nodeList: ast.NodeList): void {
     const content = nodeList.textInNode(node)
     if (!content) {
       return

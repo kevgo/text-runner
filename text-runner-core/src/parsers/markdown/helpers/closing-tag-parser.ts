@@ -1,6 +1,5 @@
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import { AstNode, AstNodeTag } from "../../standard-AST/ast-node"
-import { AstNodeList } from "../../standard-AST/ast-node-list"
+import * as ast from "../../standard-AST"
 import { TagMapper } from "../../tag-mapper"
 
 /** ClosingTagParser parses HTML blocks containing just a closing tag. */
@@ -19,15 +18,15 @@ export class ClosingTagParser {
     return this.closingTagRE.test(tag)
   }
 
-  parse(tag: string, file: AbsoluteFilePath, line: number): AstNodeList {
+  parse(tag: string, file: AbsoluteFilePath, line: number): ast.NodeList {
     const match = tag.match(this.closingTagRE)
     if (!match) {
       throw new Error(`no tag parsed in ${tag}`)
     }
-    const tagName = match[1].replace(/ /g, "") as AstNodeTag
-    const result = new AstNodeList()
+    const tagName = match[1].replace(/ /g, "") as ast.NodeTag
+    const result = new ast.NodeList()
     result.push(
-      new AstNode({
+      new ast.Node({
         attributes: {},
         content: "",
         file,

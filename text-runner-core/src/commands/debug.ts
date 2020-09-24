@@ -3,8 +3,7 @@ import * as activities from "../activities/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parsers from "../parsers/index"
-import { AstNode } from "../parsers/standard-AST/ast-node"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as ast from "../parsers/standard-AST"
 import { UserError } from "../errors/user-error"
 import { trimAllLineEnds } from "../helpers/trim-all-line-ends"
 import { Command } from "./command"
@@ -71,7 +70,7 @@ Example: text-run debug --images foo.md`
   }
 }
 
-function debugActivities(ASTs: AstNodeList[], config: configuration.Data) {
+function debugActivities(ASTs: ast.NodeList[], config: configuration.Data) {
   console.log("\nACTIVITIES:")
   const acts = activities.extractActivities(ASTs, config.regionMarker || "type")
   if (acts.length === 0) {
@@ -83,7 +82,7 @@ function debugActivities(ASTs: AstNodeList[], config: configuration.Data) {
   }
 }
 
-function debugASTNodes(ASTs: AstNodeList[]) {
+function debugASTNodes(ASTs: ast.NodeList[]) {
   console.log("AST NODES:")
   for (const AST of ASTs) {
     for (const node of AST) {
@@ -92,7 +91,7 @@ function debugASTNodes(ASTs: AstNodeList[]) {
   }
 }
 
-function debugImages(ASTs: AstNodeList[]) {
+function debugImages(ASTs: ast.NodeList[]) {
   console.log("\nIMAGES:")
   const images = activities.extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-image")
   if (images.length === 0) {
@@ -100,12 +99,12 @@ function debugImages(ASTs: AstNodeList[]) {
     return
   }
   for (const image of images) {
-    image.document = new AstNodeList()
+    image.document = new ast.NodeList()
     console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 
-function debugLinks(ASTs: AstNodeList[]) {
+function debugLinks(ASTs: ast.NodeList[]) {
   console.log("\nLINKS:")
   const links = activities.extractImagesAndLinks(ASTs).filter(al => al.actionName === "check-link")
   if (links.length === 0) {
@@ -113,12 +112,12 @@ function debugLinks(ASTs: AstNodeList[]) {
     return
   }
   for (const image of links) {
-    image.document = new AstNodeList()
+    image.document = new ast.NodeList()
     console.log(trimAllLineEnds(util.inspect(image, false, Infinity)))
   }
 }
 
-function debugLinkTargets(ASTs: AstNodeList[]) {
+function debugLinkTargets(ASTs: ast.NodeList[]) {
   console.log("\nLINK TARGETS:")
   const linkTargets = findLinkTargets(ASTs)
   for (const key of Object.keys(linkTargets.targets)) {
@@ -126,7 +125,7 @@ function debugLinkTargets(ASTs: AstNodeList[]) {
   }
 }
 
-function showAttr(node: AstNode): string {
+function showAttr(node: ast.Node): string {
   if (node.type === "text") {
     return `("${node.content.trim()}")`
   }

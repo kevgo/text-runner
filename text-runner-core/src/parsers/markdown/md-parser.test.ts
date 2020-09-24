@@ -2,8 +2,7 @@ import { assert } from "chai"
 import * as fs from "fs-extra"
 import * as path from "path"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNode } from "../standard-AST/ast-node"
-import { AstNodeList } from "../standard-AST/ast-node-list"
+import * as ast from "../standard-AST"
 import { parse } from "./parse"
 
 suite("MdParser.parseFile()", function () {
@@ -14,10 +13,10 @@ suite("MdParser.parseFile()", function () {
       const testDirPath = path.join(fixtureDir, testDirName)
       test(`parsing '${testDirName}'`, async function () {
         const expectedJSON = await fs.readJSON(path.join(testDirPath, "result.json"))
-        const expected = new AstNodeList()
+        const expected = new ast.NodeList()
         for (const expectedNodeData of expectedJSON) {
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
-          expected.push(AstNode.scaffold(expectedNodeData))
+          expected.push(ast.Node.scaffold(expectedNodeData))
         }
         const actual = await parse([new AbsoluteFilePath("input.md")], testDirPath)
         assert.deepEqual(actual[0], expected)

@@ -9,7 +9,7 @@ import * as commands from "../commands/index"
  * Executes the given activities in parallel.
  * Returns the errors they produce.
  */
-export function executeParallel(
+export function parallel(
   activities: ActivityList,
   actionFinder: actions.Finder,
   linkTargets: LinkTargetList,

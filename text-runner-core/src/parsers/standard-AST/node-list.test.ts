@@ -1,11 +1,10 @@
 import { assert } from "chai"
 import { UserError } from "../../errors/user-error"
-import { AstNode } from "./ast-node"
-import { AstNodeList } from "./ast-node-list"
+import * as ast from "./index"
 
-test("AstNodeList.concat()", function () {
-  const list1 = AstNodeList.scaffold({ type: "anchor_open" })
-  const list2 = AstNodeList.scaffold({ type: "bold_open" })
+test("ast.NodeList.concat()", function () {
+  const list1 = ast.NodeList.scaffold({ type: "anchor_open" })
+  const list2 = ast.NodeList.scaffold({ type: "bold_open" })
   const result = list1.concat(list2)
   assert.deepEqual(
     result.map(node => node.type),
@@ -13,9 +12,9 @@ test("AstNodeList.concat()", function () {
   )
 })
 
-suite("AstNodeList.getNodesFor()", function () {
+suite("ast.NodeList.getNodesFor()", function () {
   test("opening node given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "paragraph_open" })
     list.pushNode({ type: "heading_open" })
     list.pushNode({ type: "text" })
@@ -31,7 +30,7 @@ suite("AstNodeList.getNodesFor()", function () {
   })
 
   test("non-opening node given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "paragraph_open" })
     list.pushNode({ type: "text", content: "foo" })
     list.pushNode({ type: "paragraph_close" })
@@ -41,9 +40,9 @@ suite("AstNodeList.getNodesFor()", function () {
   })
 })
 
-suite("AstNodeList.getNodeOfTypes()", function () {
+suite("ast.NodeList.getNodeOfTypes()", function () {
   test("one match", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "anchor_open" })
     list.pushNode({ type: "bold_open" })
     list.pushNode({ type: "code_open" })
@@ -52,22 +51,22 @@ suite("AstNodeList.getNodeOfTypes()", function () {
   })
 
   test("multiple matches", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "anchor_open" })
     list.pushNode({ type: "bold_open" })
     assert.throws(() => list.getNodeOfTypes("anchor_open", "bold_open"), UserError)
   })
 
   test("no matches", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "anchor_open" })
     assert.throws(() => list.getNodeOfTypes("bold_open"), UserError)
   })
 })
 
-suite("AstNodeList.getNodesOfTypes()", function () {
+suite("ast.NodeList.getNodesOfTypes()", function () {
   test("normal", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "anchor_open" })
     list.pushNode({ type: "bold_open" })
     list.pushNode({ type: "code_open" })
@@ -78,7 +77,7 @@ suite("AstNodeList.getNodesOfTypes()", function () {
     )
   })
   test("opening nodes", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "anchor_open" })
     list.pushNode({ type: "text" })
     list.pushNode({ type: "anchor_close" })
@@ -90,8 +89,8 @@ suite("AstNodeList.getNodesOfTypes()", function () {
   })
 })
 
-test("AstNodeList.textInNode()", function () {
-  const list = new AstNodeList()
+test("ast.NodeList.textInNode()", function () {
+  const list = new ast.NodeList()
   list.pushNode({ type: "paragraph_open" })
   list.pushNode({ type: "heading_open" })
   list.pushNode({ type: "text", content: "foo" })
@@ -102,27 +101,27 @@ test("AstNodeList.textInNode()", function () {
   assert.equal(result, "foobar")
 })
 
-suite("AstNodeList.hasNodeOfType()", function () {
+suite("ast.NodeList.hasNodeOfType()", function () {
   test("contains the given node type", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "paragraph_open" })
     list.pushNode({ type: "paragraph_close" })
     assert.isTrue(list.hasNodeOfType("paragraph"))
   })
 
   test("doesn't contain the given node type", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "paragraph_open" })
     list.pushNode({ type: "paragraph_close" })
     assert.isFalse(list.hasNodeOfType("code"))
   })
 })
 
-test("AstNodeList.iterator()", function () {
-  const list = new AstNodeList()
+test("ast.NodeList.iterator()", function () {
+  const list = new ast.NodeList()
   list.pushNode({ type: "anchor_open" })
   list.pushNode({ type: "bold_open" })
-  const result = new AstNodeList()
+  const result = new ast.NodeList()
   for (const node of list) {
     result.push(node)
   }
@@ -131,23 +130,23 @@ test("AstNodeList.iterator()", function () {
   assert.equal(result[1].type, "bold_open")
 })
 
-test("AstNodeList.nodeTypes()", function () {
-  const list = new AstNodeList()
+test("ast.NodeList.nodeTypes()", function () {
+  const list = new ast.NodeList()
   list.pushNode({ type: "anchor_open" })
   list.pushNode({ type: "bold_open" })
   assert.deepEqual(list.nodeTypes(), ["anchor_open", "bold_open"])
 })
 
-test("AstNodeList.push()", function () {
-  const list = new AstNodeList()
-  const node = AstNode.scaffold()
+test("ast.NodeList.push()", function () {
+  const list = new ast.NodeList()
+  const node = ast.Node.scaffold()
   list.push(node)
   assert.lengthOf(list, 1)
   assert.equal(list[0], node)
 })
 
-test("AstNodeList.scaffold()", function () {
-  const list = new AstNodeList()
+test("ast.NodeList.scaffold()", function () {
+  const list = new ast.NodeList()
   list.pushNode({ type: "heading_open" })
   list.pushNode({ type: "text" })
   assert.lengthOf(list, 2)
@@ -155,8 +154,8 @@ test("AstNodeList.scaffold()", function () {
   assert.equal(list[1].type, "text")
 })
 
-test("AstNodeList.text()", function () {
-  const list = new AstNodeList()
+test("ast.NodeList.text()", function () {
+  const list = new ast.NodeList()
   list.pushNode({ type: "code_open" })
   list.pushNode({ type: "text", content: "hello" })
   list.pushNode({ type: "text", content: "world" })
@@ -165,9 +164,9 @@ test("AstNodeList.text()", function () {
   assert.equal(result, "hello world")
 })
 
-suite("AstNodeList.textInNodeOfType()", function () {
+suite("ast.NodeList.textInNodeOfType()", function () {
   test("type name given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -178,7 +177,7 @@ suite("AstNodeList.textInNodeOfType()", function () {
   })
 
   test("opening type name given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -189,7 +188,7 @@ suite("AstNodeList.textInNodeOfType()", function () {
   })
 
   test("multiple possible type names given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -198,7 +197,7 @@ suite("AstNodeList.textInNodeOfType()", function () {
   })
 
   test("multiple matching nodes", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -209,7 +208,7 @@ suite("AstNodeList.textInNodeOfType()", function () {
   })
 
   test("no matching nodes", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -217,9 +216,9 @@ suite("AstNodeList.textInNodeOfType()", function () {
   })
 })
 
-suite("AstNodeList.textInNodeOfTypes()", function () {
+suite("ast.NodeList.textInNodeOfTypes()", function () {
   test("type name given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -228,7 +227,7 @@ suite("AstNodeList.textInNodeOfTypes()", function () {
   })
 
   test("opening type name given", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -237,7 +236,7 @@ suite("AstNodeList.textInNodeOfTypes()", function () {
   })
 
   test("multiple matching nodes", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -248,7 +247,7 @@ suite("AstNodeList.textInNodeOfTypes()", function () {
   })
 
   test("no matching nodes", function () {
-    const list = new AstNodeList()
+    const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
     list.pushNode({ type: "text", content: "hello" })
     list.pushNode({ type: "code_close" })
@@ -256,8 +255,8 @@ suite("AstNodeList.textInNodeOfTypes()", function () {
   })
 })
 
-test("AstNodeList.textInNodesOfType()", function () {
-  const list = new AstNodeList()
+test("ast.NodeList.textInNodesOfType()", function () {
+  const list = new ast.NodeList()
   list.pushNode({ type: "text", content: "foo" })
   list.pushNode({ type: "text", content: "bar" })
   const texts = list.textInNodesOfType("text")

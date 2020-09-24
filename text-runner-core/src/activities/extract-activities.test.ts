@@ -1,10 +1,10 @@
 import { assert } from "chai"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as ast from "../parsers/standard-AST"
 import { extractActivities } from "./extract-activities"
 
 suite("extractActivities()", function () {
   test("many activities", function () {
-    const input = new AstNodeList()
+    const input = new ast.NodeList()
     input.pushNode({
       attributes: { textrun: "verify-foo" },
       file: "README.md",
@@ -29,7 +29,7 @@ suite("extractActivities()", function () {
   ]
   for (const tt of tests) {
     test(`normalizes activity name ${tt.give}`, function () {
-      const AST = new AstNodeList()
+      const AST = new ast.NodeList()
       AST.pushNode({
         attributes: { textrun: "verify_foo" },
       })

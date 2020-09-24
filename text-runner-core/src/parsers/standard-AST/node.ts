@@ -1,11 +1,11 @@
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 
-export interface AstNodeAttributes {
+export interface NodeAttributes {
   [key: string]: string
 }
 
 /** the MarkdownIt node types */
-export type AstNodeType =
+export type NodeType =
   | "anchor_open"
   | "anchor_close"
   | "bold_open"
@@ -41,7 +41,7 @@ export type AstNodeType =
   | "text" // text node
 
 /** the HTML tags */
-export type AstNodeTag =
+export type NodeTag =
   | "" // text node
   | "a"
   | "/a"
@@ -60,22 +60,22 @@ export type AstNodeTag =
   | "/pre"
   | "ul"
 
-export interface AstNodeScaffoldData {
-  attributes?: AstNodeAttributes
+export interface NodeScaffoldData {
+  attributes?: NodeAttributes
   content?: string
   file?: string | AbsoluteFilePath
   line?: number
-  tag?: AstNodeTag
-  type?: AstNodeType
+  tag?: NodeTag
+  type?: NodeType
 }
 
 /** a node in the standardized Markdown/HTML AST */
-export class AstNode {
-  static scaffold(data: AstNodeScaffoldData = {}): AstNode {
+export class Node {
+  static scaffold(data: NodeScaffoldData = {}): Node {
     if (typeof data.file === "string") {
       data.file = new AbsoluteFilePath(data.file)
     }
-    return new AstNode({
+    return new Node({
       attributes: data.attributes || {},
       content: data.content || "",
       file: data.file || new AbsoluteFilePath("file"),
@@ -86,10 +86,10 @@ export class AstNode {
   }
 
   /** markdown type of AST node */
-  type: AstNodeType
+  type: NodeType
 
   /** HTML type of AST node */
-  readonly tag: AstNodeTag
+  readonly tag: NodeTag
 
   /** the file in which this AstNode occurs */
   readonly file: AbsoluteFilePath
@@ -101,15 +101,15 @@ export class AstNode {
   readonly content: string
 
   /** the attributes of the node */
-  readonly attributes: AstNodeAttributes
+  readonly attributes: NodeAttributes
 
   constructor(data: {
-    type: AstNodeType
-    tag: AstNodeTag
+    type: NodeType
+    tag: NodeTag
     file: AbsoluteFilePath
     line: number
     content: string
-    attributes: AstNodeAttributes
+    attributes: NodeAttributes
   }) {
     this.type = data.type
     this.tag = data.tag

@@ -1,5 +1,5 @@
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as ast from "../parsers/standard-AST"
 export { extractActivities } from "./extract-activities"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 
@@ -14,8 +14,8 @@ export interface Activity {
   actionName: string
   file: AbsoluteFilePath
   line: number
-  region: AstNodeList
-  document: AstNodeList
+  region: ast.NodeList
+  document: ast.NodeList
 }
 
 /** scaffoldActivity creates a test Activity from the given data */
@@ -25,7 +25,7 @@ export function scaffold(data: { actionName?: string } = {}): Activity {
     actionName: data.actionName || "foo",
     file: new AbsoluteFilePath("file"),
     line: 0,
-    region: new AstNodeList(),
-    document: new AstNodeList(),
+    region: new ast.NodeList(),
+    document: new ast.NodeList(),
   }
 }

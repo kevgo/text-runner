@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import { AstNodeList } from "../../standard-AST/ast-node-list"
+import * as ast from "../../standard-AST"
 import { TagMapper } from "../../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
 
@@ -25,7 +25,7 @@ test("ClosingTagParser.parse()", function () {
   const file = new AbsoluteFilePath("filepath")
   const line = 12
   const actual = parser.parse("  < / a >  ", file, line)
-  const expected = AstNodeList.scaffold({
+  const expected = ast.NodeList.scaffold({
     attributes: {},
     content: "",
     file,

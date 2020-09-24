@@ -1,8 +1,7 @@
 import * as parse5 from "parse5"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNode, AstNodeTag } from "../standard-AST/ast-node"
-import { AstNodeList } from "../standard-AST/ast-node-list"
+import * as ast from "../standard-AST"
 import { TagMapper } from "../tag-mapper"
 import { standardizeHTMLAttributes } from "./helpers/standardize-html-attributes"
 
@@ -22,7 +21,7 @@ export class Parser {
    *                     This parameter helps show correct line numbers for HTML snippets
    *                     that are embedded in Markdown documents.
    */
-  parse(text: string, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  parse(text: string, file: AbsoluteFilePath, startingLine: number): ast.NodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true,
     })
@@ -73,8 +72,8 @@ export class Parser {
     documentAst: parse5.DefaultTreeDocument,
     file: AbsoluteFilePath,
     startingLine = 1
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     const htmlNode = this.findHTMLNode(documentAst)
     const bodyNode = this.findBodyNode(htmlNode)
     for (const childNode of bodyNode.childNodes) {
@@ -84,9 +83,9 @@ export class Parser {
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: parse5.DefaultTreeNode, file: AbsoluteFilePath, startingLine: number): AstNodeList {
+  private standardizeNode(node: parse5.DefaultTreeNode, file: AbsoluteFilePath, startingLine: number): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
-      return new AstNodeList()
+      return new ast.NodeList()
     }
     if (instanceOfDefaultTreeTextNode(node)) {
       return this.standardizeTextNode(node, file, startingLine)
@@ -105,8 +104,8 @@ export class Parser {
     node: parse5.DefaultTreeElement,
     file: AbsoluteFilePath,
     startingLine: number
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
     // store the opening node
@@ -120,13 +119,13 @@ export class Parser {
       }
     }
     result.push(
-      new AstNode({
+      new ast.Node({
         attributes,
         content: "",
         file,
         line: startLine,
-        tag: node.tagName as AstNodeTag,
-        type: this.tagMapper.openingTypeForTag(node.tagName as AstNodeTag, attributes),
+        tag: node.tagName as ast.NodeTag,
+        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes),
       })
     )
 
@@ -146,9 +145,9 @@ export class Parser {
       throw new Error(`cannot determine end line for node ${node}`)
     }
     if (!node.sourceCodeLocation || (node.sourceCodeLocation && node.sourceCodeLocation.endTag)) {
-      const tag = ("/" + node.tagName) as AstNodeTag
+      const tag = ("/" + node.tagName) as ast.NodeTag
       result.push(
-        new AstNode({
+        new ast.Node({
           attributes: {},
           content: "",
           file,
@@ -166,17 +165,17 @@ export class Parser {
     node: parse5.DefaultTreeElement,
     file: AbsoluteFilePath,
     startingLine: number
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
-      new AstNode({
+      new ast.Node({
         attributes,
         content: "",
         file,
         line: (node.sourceCodeLocation?.startLine || 0) + startingLine - 1,
-        tag: node.tagName as AstNodeTag,
-        type: this.tagMapper.typeForTag(node.tagName as AstNodeTag, attributes),
+        tag: node.tagName as ast.NodeTag,
+        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes),
       })
     )
     return result
@@ -187,11 +186,11 @@ export class Parser {
     node: parse5.DefaultTreeTextNode,
     file: AbsoluteFilePath,
     startingLine: number
-  ): AstNodeList {
-    const result = new AstNodeList()
+  ): ast.NodeList {
+    const result = new ast.NodeList()
     if (node.value !== "\n") {
       result.push(
-        new AstNode({
+        new ast.Node({
           attributes: {},
           content: node.value.trim(),
           file,

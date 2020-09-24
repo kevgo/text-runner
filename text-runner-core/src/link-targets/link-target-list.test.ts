@@ -1,11 +1,11 @@
 import { assert } from "chai"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
-import { AstNodeList } from "../parsers/standard-AST/ast-node-list"
+import * as ast from "../parsers/standard-AST"
 import { LinkTargetList } from "./link-target-list"
 
 suite("LinkTargetList.addNodeList()", function () {
   test("node list with anchors", function () {
-    const nodeList = AstNodeList.scaffold({
+    const nodeList = ast.NodeList.scaffold({
       attributes: { name: "foo bar" },
       file: "file.md",
       type: "anchor_open",
@@ -16,14 +16,14 @@ suite("LinkTargetList.addNodeList()", function () {
   })
 
   test("node list without link targets", function () {
-    const nodeList = AstNodeList.scaffold({ file: "file.md", type: "text" })
+    const nodeList = ast.NodeList.scaffold({ file: "file.md", type: "text" })
     const targetList = new LinkTargetList()
     targetList.addNodeList(nodeList)
     assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")), "should register files without link targets")
   })
 
   test("node list with headings", function () {
-    const nodeList = new AstNodeList()
+    const nodeList = new ast.NodeList()
     nodeList.pushNode({
       attributes: {},
       file: "file.md",
@@ -47,7 +47,7 @@ suite("LinkTargetList.addNodeList()", function () {
 
 suite("LinkTargetList.anchorType()", function () {
   test("headings", function () {
-    const nodeList = new AstNodeList()
+    const nodeList = new ast.NodeList()
     nodeList.pushNode({
       attributes: {},
       file: "file.md",
@@ -93,7 +93,7 @@ suite("LinkTargetList.hasFile()", function () {
   })
 
   test("contains the file without anchors", function () {
-    const nodeList = AstNodeList.scaffold({ file: "file.md", type: "text" })
+    const nodeList = ast.NodeList.scaffold({ file: "file.md", type: "text" })
     const targetList = new LinkTargetList()
     targetList.addNodeList(nodeList)
     assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")))

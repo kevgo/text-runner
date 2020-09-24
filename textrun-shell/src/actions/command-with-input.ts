@@ -51,12 +51,12 @@ async function enter(processor: ObservableProcess, input: ProcessInput) {
   }
 }
 
-function getInput(nodes: tr.AstNodeList): ProcessInput[] {
+function getInput(nodes: tr.parsers.ast.NodeList): ProcessInput[] {
   const result: ProcessInput[] = []
   if (!nodes) {
     return result
   }
-  // TODO: simplify this with an "AstNodeList.getSubList" method
+  // TODO: simplify this with an "tr.parser.ast.NodeList.getSubList" method
   const tbodyNode = nodes.getNodeOfTypes("tbody_open")
   const tbodyContent = nodes.getNodesFor(tbodyNode)
   const trNodes = tbodyContent.getNodesOfTypes("tr_open")

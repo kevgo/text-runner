@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { AstNodeList } from "../standard-AST/ast-node-list"
+import * as ast from "../standard-AST"
 import { TagMapper } from "../tag-mapper"
 import { Parser } from "./html-parser"
 import path = require("path")
@@ -10,7 +10,7 @@ export async function parseHTMLFiles(
   filenames: AbsoluteFilePath[],
   sourceDir: string,
   tagMapper: TagMapper
-): Promise<AstNodeList[]> {
+): Promise<ast.NodeList[]> {
   const result = []
   const parser = new Parser(tagMapper)
   for (const filename of filenames) {

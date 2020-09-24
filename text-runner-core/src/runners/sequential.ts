@@ -5,7 +5,7 @@ import { runActivity } from "./run-activity"
 import * as actions from "../actions"
 import * as commands from "../commands/index"
 
-export async function executeSequential(
+export async function sequential(
   activities: ActivityList,
   actionFinder: actions.Finder,
   configuration: configuration.Data,

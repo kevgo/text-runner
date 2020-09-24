@@ -1,18 +1,17 @@
 import * as config from "../../configuration/index"
 import { LinkTargetList } from "../../link-targets/link-target-list"
-import { AstNodeList } from "../../parsers/standard-AST/ast-node-list"
-import { LogFn } from "../../runners/types/log-function"
-import { RefineNameFn } from "../../runners/types/refine-name-function"
+import * as parsers from "../../parsers"
+import * as runners from "../../runners"
 
 export interface ActionArgs {
   /** TextRunner configuration data derived from the config file and CLI switches */
   configuration: config.Data
 
   /** the AST nodes of the active region which the current action tests */
-  region: AstNodeList
+  region: parsers.ast.NodeList
 
   /** the AST nodes of the active region which the current action tests */
-  document: AstNodeList
+  document: parsers.ast.NodeList
 
   /** name of the file in which the currently tested active region is */
   file: string
@@ -21,7 +20,7 @@ export interface ActionArgs {
   line: number
 
   /** allows printing test output to the user, behaves like console.log */
-  log: LogFn
+  log: runners.LogFn
 
   /**
    * Name allows to provide a more specific name for the current action.
@@ -30,7 +29,7 @@ export interface ActionArgs {
    * `write file "foo.yml"` once the name of the file to be written
    * has been extracted from the document AST.
    */
-  name: RefineNameFn
+  name: runners.RefineNameFn
 
   /** all link targets in the current documentation  */
   linkTargets: LinkTargetList

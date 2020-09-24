@@ -2,7 +2,7 @@ import { extractImagesAndLinks } from "../activities/extract-images-and-links"
 import { getFileNames } from "../filesystem/get-filenames"
 import { findLinkTargets } from "../link-targets/find-link-targets"
 import * as parser from "../parsers"
-import { executeParallel } from "../runners/execute-parallel"
+import * as runners from "../runners"
 import { createWorkspace } from "../working-dir/create-working-dir"
 import * as actions from "../actions"
 import { Command } from "./command"
@@ -63,7 +63,7 @@ export class Static implements Command {
       const startArgs: events.StartArgs = { stepCount: links.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
-      const parResults = executeParallel(links, actionFinder, linkTargets, config, this)
+      const parResults = runners.parallel(links, actionFinder, linkTargets, config, this)
       await Promise.all(parResults)
 
       // step 9: cleanup

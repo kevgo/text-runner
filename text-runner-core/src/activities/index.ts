@@ -3,6 +3,7 @@ import * as ast from "../ast"
 export { extractDynamic } from "./extract-dynamic"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 
+/** a list of activities */
 export type List = Activity[]
 
 /**

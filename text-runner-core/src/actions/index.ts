@@ -1,8 +1,10 @@
-export { Finder } from "./finder"
 import * as config from "../configuration/index"
 import * as linkTargets from "../link-targets"
 import * as ast from "../ast"
 import * as run from "../run"
+
+export { Finder } from "./finder"
+export * from "./name"
 
 /**
  * A user-defined or built-in function that tests an active block
@@ -43,8 +45,6 @@ export interface Args {
   /** return the action with this value to signal that it is being skipped */
   SKIPPING: 254
 }
-
-export * from "./name"
 
 /** the result of an action function */
 export type Result = 254 | undefined

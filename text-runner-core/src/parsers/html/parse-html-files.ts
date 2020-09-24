@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import * as ast from "../standard-AST"
+import * as ast from "../../ast"
 import { TagMapper } from "../tag-mapper"
 import { Parser } from "./html-parser"
 import path = require("path")

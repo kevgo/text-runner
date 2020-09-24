@@ -1,4 +1,4 @@
-import { UserError } from "../../errors/user-error"
+import { UserError } from "../errors/user-error"
 import { Node, NodeScaffoldData } from "./node"
 
 export class NodeList extends Array<Node> {

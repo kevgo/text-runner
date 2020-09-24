@@ -1,4 +1,4 @@
-import * as ast from "../parsers/standard-AST"
+import * as ast from "../ast"
 import { ActivityList } from "./index"
 import { normalizeActionName } from "./normalize-action-name"
 

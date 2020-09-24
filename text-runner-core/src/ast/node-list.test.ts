@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import { UserError } from "../../errors/user-error"
+import { UserError } from "../errors/user-error"
 import * as ast from "./index"
 
 test("ast.NodeList.concat()", function () {

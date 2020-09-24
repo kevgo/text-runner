@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import * as ast from "../../standard-AST"
+import * as ast from "../../../ast"
 import { TagMapper } from "../../tag-mapper"
 import { ClosingTagParser } from "./closing-tag-parser"
 

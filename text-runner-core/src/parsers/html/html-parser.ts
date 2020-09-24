@@ -1,7 +1,7 @@
 import * as parse5 from "parse5"
 import * as util from "util"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import * as ast from "../standard-AST"
+import * as ast from "../../ast"
 import { TagMapper } from "../tag-mapper"
 import { standardizeHTMLAttributes } from "./helpers/standardize-html-attributes"
 

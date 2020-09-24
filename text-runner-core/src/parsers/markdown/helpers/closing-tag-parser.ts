@@ -1,5 +1,5 @@
 import { AbsoluteFilePath } from "../../../filesystem/absolute-file-path"
-import * as ast from "../../standard-AST"
+import * as ast from "../../../ast"
 import { TagMapper } from "../../tag-mapper"
 
 /** ClosingTagParser parses HTML blocks containing just a closing tag. */

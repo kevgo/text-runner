@@ -1,4 +1,4 @@
-import * as ast from "../parsers/standard-AST"
+import * as ast from "../ast"
 import { ActivityList } from "./index"
 
 /** extracts activities that check images and links from the given ActivityLists */

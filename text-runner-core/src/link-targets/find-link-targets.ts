@@ -1,4 +1,4 @@
-import * as ast from "../parsers/standard-AST"
+import * as ast from "../ast"
 import { LinkTargetList } from "./link-target-list"
 
 export function findLinkTargets(nodeLists: ast.NodeList[]): LinkTargetList {

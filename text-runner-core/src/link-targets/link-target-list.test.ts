@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
-import * as ast from "../parsers/standard-AST"
+import * as ast from "../ast"
 import { LinkTargetList } from "./link-target-list"
 
 suite("LinkTargetList.addNodeList()", function () {

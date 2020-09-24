@@ -1,5 +1,5 @@
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
-import * as ast from "../parsers/standard-AST"
+import * as ast from "../ast"
 export { extractActivities } from "./extract-activities"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 

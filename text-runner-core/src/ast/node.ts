@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 
 export interface NodeAttributes {
   [key: string]: string

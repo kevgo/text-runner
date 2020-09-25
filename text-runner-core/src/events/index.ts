@@ -1,6 +1,6 @@
 import { Activity } from "../activities/index"
 
-/** CommandEvent defines the events that a command can emit. */
+/** defines the events that a command can emit. */
 export type Name =
   | "start" // test suite is starting
   | "result" // activity result

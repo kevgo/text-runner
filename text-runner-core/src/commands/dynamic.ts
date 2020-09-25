@@ -19,7 +19,7 @@ export class Dynamic implements Command {
     this.emitter = new EventEmitter()
   }
 
-  emit(name: events.CommandEvent, payload: events.Args): void {
+  emit(name: events.Name, payload: events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -37,8 +37,7 @@ export class Dynamic implements Command {
       // step 3: find files
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
-        const warnArgs: events.WarnArgs = { message: "no Markdown files found" }
-        this.emit("warning", warnArgs)
+        this.emit("result", { status: "warning", message: "no Markdown files found" })
         return
       }
 
@@ -51,8 +50,7 @@ export class Dynamic implements Command {
       // step 6: extract activities
       const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker)
       if (dynamicActivities.length === 0) {
-        const warnArgs: events.WarnArgs = { message: "no activities found" }
-        this.emit("warning", warnArgs)
+        this.emit("result", { status: "warning", message: "no activities found" })
         return
       }
 
@@ -60,8 +58,7 @@ export class Dynamic implements Command {
       const actionFinder = actions.Finder.loadDynamic(config.sourceDir)
 
       // step 8: execute the ActivityList
-      const startArgs: events.StartArgs = { stepCount: dynamicActivities.length }
-      this.emit("start", startArgs)
+      this.emit("start", { stepCount: dynamicActivities.length } as events.Start)
       process.chdir(config.workspace)
       await run.sequential(dynamicActivities, actionFinder, config, targets, this)
     } finally {
@@ -69,7 +66,7 @@ export class Dynamic implements Command {
     }
   }
 
-  on(name: events.CommandEvent, handler: events.Handler): this {
+  on(name: events.Name, handler: events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

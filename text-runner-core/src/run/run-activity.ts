@@ -5,7 +5,6 @@ import { Activity } from "../activities/index"
 import * as configuration from "../configuration/index"
 import * as linkTargets from "../link-targets"
 import { UserError } from "../errors/user-error"
-import * as events from "../events/index"
 import * as commands from "../commands/index"
 import { OutputCollector } from "./output-collector"
 import { NameRefiner } from "./name-refiner"
@@ -40,30 +39,30 @@ export async function runActivity(
       actionResult = await runCallbackFunc(action, args)
     }
     if (actionResult === undefined) {
-      const successArgs: events.SuccessArgs = {
+      emitter.emit("result", {
+        status: "success",
         activity,
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
-      }
-      emitter.emit("success", successArgs)
+      })
     } else if (actionResult === args.SKIPPING) {
-      const skippedArgs: events.SkippedArgs = {
+      emitter.emit("result", {
+        status: "skipped",
         activity,
         finalName: nameRefiner.finalName(),
         output: outputCollector.toString(),
-      }
-      emitter.emit("skipped", skippedArgs)
+      })
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (e) {
-    const failedArgs: events.FailedArgs = {
+    emitter.emit("result", {
+      status: "failed",
       activity,
       finalName: nameRefiner.finalName(),
       error: new UserError(e.message, e.guidance || "", activity.file, activity.line),
       output: outputCollector.toString(),
-    }
-    emitter.emit("failed", failedArgs)
+    })
     return true
   }
   return false

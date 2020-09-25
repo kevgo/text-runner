@@ -4,7 +4,7 @@ import * as tr from "text-runner-core"
 export interface ActivityResult {
   activity?: tr.activities.Activity
   finalName?: string
-  status: "success" | "failed" | "skipped" | "warning"
+  status: tr.events.ResultStatus
   output?: string
   error?: Error
   message?: string // warning message
@@ -16,29 +16,14 @@ export class ActivityCollector {
 
   constructor(command: tr.commands.Command) {
     this.activities = []
-    command.on("failed", this.onFailure.bind(this))
-    command.on("skipped", this.onSkipped.bind(this))
-    command.on("success", this.onSuccess.bind(this))
-    command.on("warning", this.onWarning.bind(this))
+    command.on("result", this.onResult.bind(this))
+  }
+
+  onResult(result: tr.events.Result): void {
+    this.activities.push(result)
   }
 
   results(): ActivityResult[] {
     return this.activities
-  }
-
-  onFailure(args: tr.events.FailedArgs): void {
-    this.activities.push({ ...args, status: "failed" })
-  }
-
-  onSkipped(args: tr.events.SkippedArgs): void {
-    this.activities.push({ ...args, status: "skipped" })
-  }
-
-  onSuccess(args: tr.events.SuccessArgs): void {
-    this.activities.push({ ...args, status: "success" })
-  }
-
-  onWarning(args: tr.events.WarnArgs): void {
-    this.activities.push({ ...args, status: "warning" })
   }
 }

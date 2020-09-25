@@ -22,9 +22,17 @@ export class StatsCollector {
     this.skipCount = 0
     this.successCount = 0
     this.stopWatch = new helpers.StopWatch()
-    command.on("failed", this.onError.bind(this))
-    command.on("skipped", this.onSkip.bind(this))
-    command.on("success", this.onSuccess.bind(this))
+    command.on("result", this.onResult.bind(this))
+  }
+
+  onResult(result: tr.events.Result): void {
+    if (tr.events.instanceOfSuccess(result)) {
+      this.onSuccess()
+    } else if (tr.events.instanceOfSkipped(result)) {
+      this.onSkip()
+    } else if (tr.events.instanceOfFailed(result)) {
+      this.onError()
+    }
   }
 
   stats(): Statistics {

@@ -16,7 +16,7 @@ export class Unused implements Command {
     this.emitter = new EventEmitter()
   }
 
-  emit(name: events.CommandEvent, payload: events.Args): void {
+  emit(name: events.Name, payload: events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -27,8 +27,7 @@ export class Unused implements Command {
     // step 2: find files
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
-      const warnArgs: events.WarnArgs = { message: "no Markdown files found" }
-      this.emit("warning", warnArgs)
+      this.emit("result", { status: "warning", message: "no Markdown files found" })
       return
     }
 
@@ -53,7 +52,7 @@ export class Unused implements Command {
     }
   }
 
-  on(name: events.CommandEvent, handler: events.Handler): this {
+  on(name: events.Name, handler: events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

@@ -20,7 +20,7 @@ export class Run implements command.Command {
     this.emitter = new EventEmitter()
   }
 
-  emit(name: events.CommandEvent, payload: events.Args): void {
+  emit(name: events.Name, payload: events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -38,8 +38,7 @@ export class Run implements command.Command {
       // step 3: find files
       const filenames = await getFileNames(config)
       if (filenames.length === 0) {
-        const warnArgs: events.WarnArgs = { message: "no Markdown files found" }
-        this.emit("warning", warnArgs)
+        this.emit("result", { status: "warning", message: "no Markdown files found" })
         return
       }
 
@@ -56,13 +55,12 @@ export class Run implements command.Command {
       const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker)
       const links = activities.extractImagesAndLinks(ASTs)
       if (dynamicActivities.length + links.length === 0) {
-        const warnArgs: events.WarnArgs = { message: "no activities found" }
-        this.emit("warning", warnArgs)
+        this.emit("result", { status: "warning", message: "no activities found" })
         return
       }
 
       // step 8: execute the ActivityList
-      const startArgs: events.StartArgs = { stepCount: dynamicActivities.length + links.length }
+      const startArgs: events.Start = { stepCount: dynamicActivities.length + links.length }
       this.emit("start", startArgs)
       process.chdir(config.workspace)
       // kick off the parallel jobs to run in the background
@@ -78,7 +76,7 @@ export class Run implements command.Command {
     }
   }
 
-  on(name: events.CommandEvent, handler: events.Handler): this {
+  on(name: events.Name, handler: events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

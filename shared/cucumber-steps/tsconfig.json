@@ -1,9 +1,5 @@
+// configuration for the IDE: includes test code for global code navigation and refactoring
 {
-  "include": ["./src/**/*"],
-  "exclude": ["./src/**/*.test.ts"],
-  "compilerOptions": {
-    "outDir": "./dist",
-    "declaration": true /* Generates corresponding '.d.ts' file. */,
-    "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */
-  }
+  "extends": "../../tsconfig.json",
+  "include": ["./src/**/*"]
 }

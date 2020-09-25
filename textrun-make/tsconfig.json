@@ -1,7 +1,5 @@
+// configuration for the IDE: includes test code for global code navigation and refactoring
 {
   "extends": "../tsconfig.json",
-  "include": ["./src/**/*"],
-  "compilerOptions": {
-    "outDir": "./dist"
-  }
+  "include": ["./src/**/*.ts"]
 }

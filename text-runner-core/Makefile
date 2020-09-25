@@ -1,6 +1,6 @@
 build:  # builds for the current platform
 	echo Text-Runner build ...
-	${CURDIR}/../node_modules/.bin/tsc -p tsconfig.json
+	${CURDIR}/../node_modules/.bin/tsc -p tsconfig-build.json
 
 clean:  # Removes all build artifacts
 	echo Text-Runner build artifact cleanup ...
@@ -39,7 +39,7 @@ parallel: lint  # runs all tests in parallel
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 prepublish: build  # prepares the code base for publishing
-	rm dist/tsconfig.tsbuildinfo
+	rm dist/tsconfig-build.tsbuildinfo
 	find dist -name '*.test.js' | xargs rm
 
 stats:  # shows code statistics

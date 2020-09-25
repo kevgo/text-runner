@@ -1,6 +1,6 @@
 build:  # builds for the current platform
 	echo shared features build ...
-	${CURDIR}/../../node_modules/.bin/tsc -p tsconfig.json
+	${CURDIR}/../../node_modules/.bin/tsc -p tsconfig-build.json
 
 clean:  # Removes all build artifacts
 	echo shared features build artifact cleanup ...

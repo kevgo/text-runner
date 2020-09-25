@@ -27,11 +27,11 @@ export class StatsCollector {
 
   onResult(result: tr.events.Result): void {
     if (tr.events.instanceOfSuccess(result)) {
-      this.onSuccess()
+      this.successCount += 1
     } else if (tr.events.instanceOfSkipped(result)) {
-      this.onSkip()
+      this.skipCount += 1
     } else if (tr.events.instanceOfFailed(result)) {
-      this.onError()
+      this.errorCount += 1
     }
   }
 
@@ -43,17 +43,5 @@ export class StatsCollector {
       skipsCount: this.skipCount,
       successCount: this.successCount,
     }
-  }
-
-  onError(): void {
-    this.errorCount += 1
-  }
-
-  onSkip(): void {
-    this.skipCount += 1
-  }
-
-  onSuccess(): void {
-    this.successCount += 1
   }
 }

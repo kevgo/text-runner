@@ -27,8 +27,7 @@ export class Unused implements Command {
     // step 2: find files
     const filenames = await getFileNames(config)
     if (filenames.length === 0) {
-      const warnArgs: events.WarnArgs = { message: "no Markdown files found" }
-      this.emit("warning", warnArgs)
+      this.emit("result", { status: "warning", message: "no Markdown files found" })
       return
     }
 

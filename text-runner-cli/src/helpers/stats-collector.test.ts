@@ -9,33 +9,81 @@ suite("StatsCollector", function () {
   test("counting activities", function () {
     const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
-    command.emit("failed", "")
-    command.emit("skipped", "")
-    command.emit("success", "")
+    command.emit("result", {
+      status: "failed",
+      activity: tr.activities.scaffold(),
+      error: new Error(),
+      finalName: "",
+      output: "",
+    })
+    command.emit("result", {
+      status: "skipped",
+      activity: tr.activities.scaffold(),
+      finalName: "",
+      output: "",
+    })
+    command.emit("result", {
+      status: "success",
+      activity: tr.activities.scaffold(),
+      finalName: "",
+      output: "",
+    })
     assert.equal(counter.stats().activityCount, 3)
   })
 
   test("counting errors", function () {
     const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
-    command.emit("failed", "")
-    command.emit("failed", "")
+    command.emit("result", {
+      status: "failed",
+      activity: tr.activities.scaffold(),
+      error: new Error(),
+      finalName: "",
+      output: "",
+    })
+    command.emit("result", {
+      status: "failed",
+      activity: tr.activities.scaffold(),
+      error: new Error(),
+      finalName: "",
+      output: "",
+    })
     assert.equal(counter.stats().errorCount, 2)
   })
 
   test("counting skips", function () {
     const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
-    command.emit("skipped", "")
-    command.emit("skipped", "")
+    command.emit("result", {
+      status: "skipped",
+      activity: tr.activities.scaffold(),
+      finalName: "",
+      output: "",
+    })
+    command.emit("result", {
+      status: "skipped",
+      activity: tr.activities.scaffold(),
+      finalName: "",
+      output: "",
+    })
     assert.equal(counter.stats().skipsCount, 2)
   })
 
   test("counting successes", function () {
     const command = new tr.commands.Run({})
     const counter = new helpers.StatsCollector(command)
-    command.emit("success", "")
-    command.emit("success", "")
+    command.emit("result", {
+      status: "success",
+      activity: tr.activities.scaffold(),
+      finalName: "",
+      output: "",
+    })
+    command.emit("result", {
+      status: "success",
+      activity: tr.activities.scaffold(),
+      finalName: "",
+      output: "",
+    })
     assert.equal(counter.stats().successCount, 2)
   })
 

@@ -22,17 +22,26 @@ export class ProgressFormatter implements formatter.Formatter {
     )
     command.on("start", this.start.bind(this))
     command.on("output", console.log)
-    command.on("success", this.success.bind(this))
-    command.on("failed", this.failed.bind(this))
-    command.on("warning", this.warning.bind(this))
-    command.on("skipped", this.skipped.bind(this))
+    command.on("result", this.onResult.bind(this))
   }
 
-  start(args: tr.events.StartArgs): void {
+  onResult(result: tr.events.Result): void {
+    if (tr.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    } else if (tr.events.instanceOfSkipped(result)) {
+      this.progressBar.increment(1)
+    } else if (tr.events.instanceOfSuccess(result)) {
+      this.progressBar.increment(1)
+    } else if (tr.events.instanceOfWarning(result)) {
+      this.progressBar.increment(1)
+    }
+  }
+
+  start(args: tr.events.Start): void {
     this.progressBar.start(args.stepCount, 0)
   }
 
-  failed(args: tr.events.FailedArgs): void {
+  onFailed(args: tr.events.Failed): void {
     this.progressBar.stop()
     console.log()
     console.log()
@@ -44,18 +53,6 @@ export class ProgressFormatter implements formatter.Formatter {
       path.join(this.sourceDir, args.activity.file.platformified()),
       args.activity.line
     )
-  }
-
-  skipped(): void {
-    this.progressBar.increment(1)
-  }
-
-  success(): void {
-    this.progressBar.increment(1)
-  }
-
-  warning(): void {
-    this.progressBar.increment(1)
   }
 
   finish(args: formatter.FinishArgs): void {

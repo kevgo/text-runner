@@ -11,11 +11,16 @@ export class SummaryFormatter implements formatter.Formatter {
   constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
     command.on("output", console.log)
-    command.on("failed", this.failed.bind(this))
+    command.on("result", this.onResult.bind(this))
   }
 
-  // @ts-ignore: okay to not use parameters here
-  failed(args: FailedArgs): void {
+  onResult(result: tr.events.Result): void {
+    if (tr.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    }
+  }
+
+  onFailed(args: tr.events.Failed): void {
     console.log()
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))

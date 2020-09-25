@@ -11,20 +11,29 @@ export class DetailedFormatter implements formatter.Formatter {
   constructor(sourceDir: string, command: tr.commands.Command) {
     this.sourceDir = sourceDir
     command.on("output", console.log)
-    command.on("success", this.success.bind(this))
-    command.on("failed", this.failed.bind(this))
-    command.on("warning", this.warning.bind(this))
-    command.on("skipped", this.skipped.bind(this))
+    command.on("result", this.onResult.bind(this))
   }
 
-  success(args: tr.events.SuccessArgs): void {
+  onResult(result: tr.events.Result): void {
+    if (tr.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    } else if (tr.events.instanceOfSkipped(result)) {
+      this.onSkipped(result)
+    } else if (tr.events.instanceOfSuccess(result)) {
+      this.onSuccess(result)
+    } else if (tr.events.instanceOfWarning(result)) {
+      this.onWarning(result)
+    }
+  }
+
+  onSuccess(args: tr.events.Success): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
     console.log(color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.finalName}`))
   }
 
-  failed(args: tr.events.FailedArgs): void {
+  onFailed(args: tr.events.Failed): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -34,7 +43,7 @@ export class DetailedFormatter implements formatter.Formatter {
     helpers.printCodeFrame(console.log, filePath, args.activity.line)
   }
 
-  skipped(args: tr.events.SkippedArgs): void {
+  onSkipped(args: tr.events.Skipped): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -43,7 +52,7 @@ export class DetailedFormatter implements formatter.Formatter {
     )
   }
 
-  warning(args: tr.events.WarnArgs): void {
+  onWarning(args: tr.events.Warning): void {
     console.log(color.magenta(args.message))
   }
 

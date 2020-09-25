@@ -1,7 +1,6 @@
 {
   "include": ["./src/**/*"],
   "exclude": ["./src/**/*.test.ts"],
-  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true /* Generates corresponding '.d.ts' file. */,

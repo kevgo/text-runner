@@ -18,11 +18,11 @@ export class DotFormatter implements formatter.Formatter {
     if (tr.events.instanceOfFailed(result)) {
       this.onFailed(result)
     } else if (tr.events.instanceOfSkipped(result)) {
-      this.onSkipped()
+      process.stdout.write(color.cyan("."))
     } else if (tr.events.instanceOfSuccess(result)) {
-      this.onSuccess()
+      process.stdout.write(color.green("."))
     } else if (tr.events.instanceOfWarning(result)) {
-      this.onWarning(result)
+      console.log(color.magenta(result.message))
     }
   }
 
@@ -36,18 +36,6 @@ export class DotFormatter implements formatter.Formatter {
       path.join(this.sourceDir, args.activity.file.platformified()),
       args.activity.line
     )
-  }
-
-  onSkipped(): void {
-    process.stdout.write(color.cyan("."))
-  }
-
-  onSuccess(): void {
-    process.stdout.write(color.green("."))
-  }
-
-  onWarning(args: tr.events.Warning): void {
-    console.log(color.magenta(args.message))
   }
 
   finish(args: formatter.FinishArgs): void {

@@ -29,11 +29,11 @@ export class ProgressFormatter implements formatter.Formatter {
     if (tr.events.instanceOfFailed(result)) {
       this.onFailed(result)
     } else if (tr.events.instanceOfSkipped(result)) {
-      this.onSkipped()
+      this.progressBar.increment(1)
     } else if (tr.events.instanceOfSuccess(result)) {
-      this.onSuccess()
+      this.progressBar.increment(1)
     } else if (tr.events.instanceOfWarning(result)) {
-      this.onWarning()
+      this.progressBar.increment(1)
     }
   }
 
@@ -53,18 +53,6 @@ export class ProgressFormatter implements formatter.Formatter {
       path.join(this.sourceDir, args.activity.file.platformified()),
       args.activity.line
     )
-  }
-
-  onSkipped(): void {
-    this.progressBar.increment(1)
-  }
-
-  onSuccess(): void {
-    this.progressBar.increment(1)
-  }
-
-  onWarning(): void {
-    this.progressBar.increment(1)
   }
 
   finish(args: formatter.FinishArgs): void {

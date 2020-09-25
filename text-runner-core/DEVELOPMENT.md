@@ -14,7 +14,7 @@ considered a part of the [text-runner-cli](../text-runner-cli) wrapper. The core
 engine does not load it automatically.
 
 The Text-Runner engine is headless. When testing documentation, all it does is
-emit events defined by the [CommandEvent](src/commands/command.ts) enum. Callers
+emit events defined by the [events.Name](src/commands/index.ts) enum. Callers
 can subscribe to this event stream to follow test progress. For example, the
 [text-runner-cli](../text-runner-cli/) module displays test steps on the CLI.
 The [end-to-end tests](../text-runner-features/) doesn't print anything but

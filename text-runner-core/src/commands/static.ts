@@ -19,7 +19,7 @@ export class Static implements Command {
     this.emitter = new EventEmitter()
   }
 
-  emit(name: events.CommandEvent, payload: events.Args): void {
+  emit(name: events.Name, payload: events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -73,7 +73,7 @@ export class Static implements Command {
     }
   }
 
-  on(name: events.CommandEvent, handler: events.Handler): this {
+  on(name: events.Name, handler: events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

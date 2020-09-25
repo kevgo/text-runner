@@ -15,7 +15,7 @@ export class HelpCommand implements tr.commands.Command {
     this.emit("output", await this.template())
   }
 
-  emit(name: tr.events.CommandEvent, payload: tr.events.Args): void {
+  emit(name: tr.events.Name, payload: tr.events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -48,7 +48,7 @@ OPTIONS
 `
   }
 
-  on(name: tr.events.CommandEvent, handler: tr.events.Handler): this {
+  on(name: tr.events.Name, handler: tr.events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

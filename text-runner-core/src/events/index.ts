@@ -1,7 +1,7 @@
 import { Activity } from "../activities/index"
 
-/** CommandEvent defines the events that a command can emit. */
-export type CommandEvent =
+/** defines the events that a command can emit. */
+export type Name =
   | "start" // execution is starting
   | "output" // something to print to the user
   | "success" // a step was successful

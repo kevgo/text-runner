@@ -24,7 +24,7 @@ export class Debug implements Command {
     this.emitter = new EventEmitter()
   }
 
-  emit(name: events.CommandEvent, payload: events.Args): void {
+  emit(name: events.Name, payload: events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -64,7 +64,7 @@ Example: text-run debug --images foo.md`
     }
   }
 
-  on(name: events.CommandEvent, handler: events.Handler): this {
+  on(name: events.Name, handler: events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

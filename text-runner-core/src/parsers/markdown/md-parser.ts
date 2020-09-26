@@ -336,15 +336,7 @@ export class MarkdownParser {
         )
       }
     }
-    const closingNode: MarkdownItNode = {
-      type: parsed.type,
-      attrs: [],
-      children: [],
-      content: parsed.content,
-      map: mdNode.map,
-      tag: parsed.tag,
-    }
-    ont.close(closingNode, file, line)
+    ont.close(parsed, file, line)
     result.push(parsed)
     return result
   }

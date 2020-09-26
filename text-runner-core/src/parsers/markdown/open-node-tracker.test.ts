@@ -9,17 +9,17 @@ suite("OpenTagTracker.close()", function () {
 
   test("closing an open tag", function () {
     const openTags = new OpenNodeTracker()
-    openTags.open({ type: "foo_open" })
-    const found = openTags.close({ type: "foo_close" }, file, 12)
-    assert.equal(found.type, "foo_open")
+    openTags.open(ast.Node.scaffold({ type: "anchor_open" }))
+    const found = openTags.close(ast.Node.scaffold({ type: "anchor_close" }), file, 12)
+    assert.equal(found.type, "anchor_open")
   })
 
   test("closing a tag that hasn't been opened", function () {
     const openTags = new OpenNodeTracker()
     // @ts-ignore
-    openTags.open(ast.Node.scaffold({ type: "foo_open" }))
-    const testFn = () => openTags.close({ type: "other_close" }, file, 12)
-    assert.throws(testFn, "No opening node 'other_open' found for closing node 'other_close'")
+    openTags.open(ast.Node.scaffold({ type: "anchor_open" }))
+    const testFn = () => openTags.close(ast.Node.scaffold({ type: "bold_close" }), file, 12)
+    assert.throws(testFn, "No opening node 'bold_open' found for closing node 'bold_close'")
   })
 })
 

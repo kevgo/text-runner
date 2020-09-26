@@ -336,7 +336,7 @@ export class MarkdownParser {
         )
       }
     }
-    ont.close(parsed, file, line)
+    ont.close(parsed.type, file, line)
     result.push(parsed)
     return result
   }
@@ -354,7 +354,7 @@ export class MarkdownParser {
         ont.open(node)
       }
       if (node.type.endsWith("_close")) {
-        ont.close(node, file, line)
+        ont.close(node.type, file, line)
       }
     }
     result.push(...parsed)
@@ -384,6 +384,10 @@ export class MarkdownParser {
 
   private standardizeClosingNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
+    const openingNode = ont.close(mdNode.type as ast.NodeType, file, line)
+    if (openingNode.map) {
+      astNode.line = openingNode.map[1]
+    }
     const astNode = new ast.Node({
       attributes: standardizeMarkdownItAttributes(mdNode.attrs),
       content: mdNode.content.trim(),
@@ -392,10 +396,6 @@ export class MarkdownParser {
       tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
       type: mdNode.type as ast.NodeType,
     })
-    // const openingNode = ont.close(astNode, file, line)
-    // if (openingNode.map) {
-    //   astNode.line = openingNode.map[1]
-    // }
     result.push(astNode)
     return result
   }

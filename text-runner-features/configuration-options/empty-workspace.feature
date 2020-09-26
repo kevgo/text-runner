@@ -1,9 +1,22 @@
 Feature: empty the workspace
 
   Background:
-    Given the workspace contains a file "1.md" with content:
+    Given the source code contains a file "text-run/list-dir.js" with content:
       """
-      <a type="test"> </a>
+      const fs = require("fs").promises
+
+      module.exports = async function(action) {
+        const items = await fs.readdir(action.configuration.workspace)
+        action.log(items.join(", "))
+      }
+      """
+    And the source code contains a file "1.md" with content:
+      """
+      <a type="list-dir"> </a>
+      """
+    And the workspace contains a file "hello.md" with content:
+      """
+      Hello!
       """
 
   @api
@@ -32,3 +45,15 @@ Feature: empty the workspace
       """
       foo
       """
+
+  @api
+  Scenario: disable via API
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, emptyWorkspace: false})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it emits these events:
+      | FILENAME | LINE | ACTION   | OUTPUT   |
+      | 1.md     | 1    | list-dir | hello.md |

@@ -1,15 +1,15 @@
 Feature: separate working directory
 
   Background:
-    Given the source code contains a file "print-cwd.md" with content:
-      """
-      <a type="printCWD"> </a>
-      """
-    Given the source code contains a file "text-run/print-cwd.js" with content:
+    And the source code contains a file "text-run/print-cwd.js" with content:
       """
       module.exports = function(action) {
         action.log(process.cwd())
       }
+      """
+    Given the source code contains a file "print-cwd.md" with content:
+      """
+      <a type="printCWD"> </a>
       """
 
 

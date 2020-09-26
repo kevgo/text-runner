@@ -10,6 +10,6 @@ Feature: active BR tags
       <br type="HelloWorld">
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |

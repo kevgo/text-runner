@@ -42,7 +42,7 @@ Then("it executes in the local {string} directory", function (dirName) {
   assert.equal(have, want)
 })
 
-Then("it executes these actions:", function (table) {
+Then("it emits these events:", function (table) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
   const tableHashes = table.hashes()

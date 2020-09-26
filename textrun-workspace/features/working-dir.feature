@@ -9,7 +9,7 @@ Feature: changing the working directory
       You see a file <a type="workspace/existing-file">__bar__ `hello` </a>.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME             | LINE | ACTION                  | ACTIVITY                        |
       | directory_changer.md | 1    | workspace/new-file      | create file foo/bar             |
       | directory_changer.md | 3    | workspace/working-dir   | changing into the foo directory |
@@ -22,6 +22,6 @@ Feature: changing the working directory
       <code type="workspace/working-dir">foo</code>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME             | LINE | ACTION                | STATUS | ERROR TYPE | ERROR MESSAGE           |
       | directory_changer.md | 1    | workspace/working-dir | failed | UserError  | directory foo not found |

@@ -20,7 +20,7 @@ Feature: testing all docs in a subfolder
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME            |
       | commands/bar/baz.md |
       | commands/foo.md     |

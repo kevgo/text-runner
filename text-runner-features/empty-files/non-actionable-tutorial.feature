@@ -7,6 +7,6 @@ Feature: Fail on non-actionable Markdown
       Just text here, nothing to do!
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | STATUS  | MESSAGE             |
       | warning | no activities found |

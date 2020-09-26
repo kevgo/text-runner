@@ -6,7 +6,7 @@ Feature: creating files with content
       creating a file with name <a type="workspace/new-file">_one.txt_ and content `Hello world!`</a>.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
@@ -26,7 +26,7 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
     And the test directory now contains a file "one.txt" with content:
@@ -41,7 +41,7 @@ Feature: creating files with content
       <a type="workspace/new-file">`Hello world!`</a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' |
     And the error provides the guidance:
@@ -57,7 +57,7 @@ Feature: creating files with content
       <a type="workspace/new-file">__one.txt__</a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' |
     And the error provides the guidance:
@@ -81,7 +81,7 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' |
 
@@ -104,6 +104,6 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' |

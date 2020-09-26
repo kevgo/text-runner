@@ -20,7 +20,7 @@ Feature: separate working directory
 
 
   @cli
-  Scenario: running in a local temp directory via config file
+  Scenario: running in the default local temp directory via config file
     Given the text-run configuration contains:
       """
       systemTmp: false
@@ -30,7 +30,18 @@ Feature: separate working directory
 
 
   @cli
-  Scenario: running in a local temp directory via CLI
+  Scenario: running in a custom local temp directory via config file
+    Given the text-run configuration contains:
+      """
+      systemTmp: false
+      workspace: foo
+      """
+    When running Text-Runner
+    Then it runs in the local "foo" directory
+
+
+  @cli
+  Scenario: running in the default local temp directory via CLI
     Given the text-run configuration contains:
       """
       systemTmp: true
@@ -39,8 +50,19 @@ Feature: separate working directory
     Then it runs in the local "tmp" directory
 
 
+  @cli
+  Scenario: running in a custom local temp directory via CLI
+    Given the text-run configuration contains:
+      """
+      systemTmp: true
+      workspace: foo
+      """
+    When running "text-run --no-system-tmp --workspace=bar"
+    Then it runs in the local "bar" directory
+
+
   @api
-  Scenario: running in a local temp directory via API
+  Scenario: running in the default local temp directory via API
     When calling:
       """
       command = new textRunner.commands.Run({...config, systemTmp: false})
@@ -50,8 +72,19 @@ Feature: separate working directory
     Then it executes in the local "tmp" directory
 
 
+  @api
+  Scenario: running in a custom local temp directory via API
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, systemTmp: false, workspace: "foo"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it executes in the local "foo" directory
+
+
   @cli
-  Scenario: running in a global temp directory via config file
+  Scenario: running in the default global temp directory via config file
     Given the text-run configuration contains:
       """
       systemTmp: true
@@ -61,13 +94,30 @@ Feature: separate working directory
 
 
   @cli
-  Scenario: running in a global temp directory via CLI
+  Scenario: running in a custom global temp directory via config file
+    Given the text-run configuration contains:
+      """
+      systemTmp: true
+      workspace: foo
+      """
+    When running Text-Runner
+    Then it runs in the global "foo" temp directory
+
+
+  @cli
+  Scenario: running in the default global temp directory via CLI
     When running "text-run --system-tmp *.md"
     Then it runs in a global temp directory
 
 
+  @cli
+  Scenario: running in a custom global temp directory via CLI
+    When running "text-run --system-tmp --workspace=foo *.md"
+    Then it runs in the global "foo" temp directory
+
+
   @api
-  Scenario: running in the global temp directory via API
+  Scenario: running in the default global temp directory via API
     When calling:
       """
       command = new textRunner.commands.Run({...config, systemTmp: true})
@@ -75,3 +125,13 @@ Feature: separate working directory
       await command.execute()
       """
     Then it executes in a global temp directory
+
+  @api
+  Scenario: running in a custom global temp directory via API
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, systemTmp: true, workspace: "foo"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it executes in the global "foo" temp directory

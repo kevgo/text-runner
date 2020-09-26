@@ -8,6 +8,6 @@ Feature: ignoring mailto links
       A [working external link](mailto:foo@acme.com)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                    |
       | 1.md     | 1    | check-link | link to mailto:foo@acme.com |

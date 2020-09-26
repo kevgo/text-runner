@@ -32,7 +32,7 @@ Feature: verifying the output of the last console command
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME         | LINE | ACTION              | ACTIVITY                                         |
       | create-server.md | 1    | workspace/new-file  | create file server.js                            |
       | verify-output.md | 1    | shell/server        | starting a server process: node server.js        |

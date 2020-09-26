@@ -11,7 +11,7 @@ Feature: verify that the workspace contains a directory
       """
     Given the workspace contains a directory "foo"
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                       | ACTIVITY                              |
       | 1.md     | 1    | workspace/new-directory      | create directory foo                  |
       | 1.md     | 4    | workspace/existing-directory | directory foo exists in the workspace |
@@ -24,7 +24,7 @@ Feature: verify that the workspace contains a directory
       directory.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                       | STATUS | ERROR TYPE | ERROR MESSAGE                                 |
       | 1.md     | 2    | workspace/existing-directory | failed | UserError  | directory foo does not exist in the workspace |
 
@@ -38,7 +38,7 @@ Feature: verify that the workspace contains a directory
       directory.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                       | STATUS  | ERROR TYPE | ERROR MESSAGE                     |
       | 1.md     | 1    | workspace/new-file           | success |            |                                   |
       | 1.md     | 4    | workspace/existing-directory | failed  | UserError  | foo exists but is not a directory |

@@ -12,7 +12,7 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |
 
@@ -29,7 +29,7 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |
 
@@ -44,7 +44,7 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 3    | hello-world |
 
@@ -61,7 +61,7 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 6    | hello-world |
 
@@ -73,7 +73,7 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 2    | hello-world |
 
@@ -87,7 +87,7 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 3    | hello-world |
 
@@ -101,6 +101,6 @@ Feature: active table tags
       </table>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 3    | hello-world |

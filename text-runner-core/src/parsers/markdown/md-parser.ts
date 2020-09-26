@@ -385,14 +385,15 @@ export class MarkdownParser {
   private standardizeClosingNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
     const openingNode = ont.close(mdNode.type as ast.NodeType, file, line)
+    let closingTagLine = line
     if (openingNode.map) {
-      astNode.line = openingNode.map[1]
+      closingTagLine = openingNode.map[1]
     }
     const astNode = new ast.Node({
       attributes: standardizeMarkdownItAttributes(mdNode.attrs),
       content: mdNode.content.trim(),
       file,
-      line,
+      line: closingTagLine,
       tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
       type: mdNode.type as ast.NodeType,
     })

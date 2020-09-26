@@ -19,6 +19,7 @@ export interface ExecuteResultLine {
   errorType?: string // UserError or other error
   filename?: string
   line?: number
+  message?: string
   output?: string // what the action printed via action.log()
   status?: "success" | "failed" | "skipped" | "warning"
 }
@@ -66,6 +67,9 @@ Then("it executes these actions:", function (table) {
     if (line.STATUS != null) {
       result.status = line.STATUS
     }
+    if (line.MESSAGE != null) {
+      result.message = line.MESSAGE
+    }
     if (line["ERROR TYPE"] != null) {
       result.errorType = line["ERROR TYPE"] || ""
     }
@@ -96,6 +100,9 @@ Then("it executes these actions:", function (table) {
         result.activity = result.activity.replace(/\\/g, "/")
       }
     }
+    if (wanted.message != null) {
+      result.message = activityResult.message
+    }
     if (wanted.status != null) {
       result.status = activityResult.status
     }
@@ -109,13 +116,6 @@ Then("it executes these actions:", function (table) {
   }
   have = have.sort(helpers.compareExecuteResultLine)
   assert.deepEqual(have, want)
-})
-
-Then("it executes with this warning:", function (warning: string) {
-  const world = this as TRWorld
-  assert.isUndefined(world.apiException)
-  assert.equal(world.apiResults.length, 1, "activity results")
-  assert.equal(world.apiResults[0].message, warning)
 })
 
 Then("it throws:", function (table) {

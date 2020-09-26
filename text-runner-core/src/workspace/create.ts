@@ -7,7 +7,9 @@ import * as configuration from "../configuration/index"
 /** creates the temp directory to run the tests in */
 export async function create(config: configuration.Data): Promise<string> {
   const workspacePath = await getPath(config)
-  await fs.emptyDir(workspacePath)
+  if (config.emptyWorkspace) {
+    await fs.emptyDir(workspacePath)
+  }
   return workspacePath
 }
 

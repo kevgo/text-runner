@@ -4,10 +4,9 @@ Feature: empty the workspace
     Given the source code contains a file "text-run/list-dir.js" with content:
       """
       const fs = require("fs").promises
-
       module.exports = async function(action) {
         const items = await fs.readdir(action.configuration.workspace)
-        action.log(items.join(", "))
+        action.name(`${items.length} workspace files (${items.join(", ")})`)
       }
       """
     And the source code contains a file "1.md" with content:
@@ -23,15 +22,15 @@ Feature: empty the workspace
   Scenario: default API behavior
     When calling Text-Runner
     Then it emits these events:
-      | STATUS  | MESSAGE                 |
-      | warning | no Markdown files found |
+      | STATUS  | ACTIVITY             |
+      | success | 0 workspace files () |
 
   @cli
   Scenario: default CLI behavior
     When running Text-Runner
     Then it prints:
       """
-      no Markdown files found
+      1.md:1 -- 0 workspace files
       """
 
   @cli
@@ -43,7 +42,15 @@ Feature: empty the workspace
     When running Text-Runner
     Then it prints:
       """
-      foo
+      1.md:1 -- 1 workspace files (hello.md)
+      """
+
+  @cli
+  Scenario: disable via CLI
+    When running "text-run --no-empty-workspace"
+    Then it prints:
+      """
+      1.md:1 -- 1 workspace files (hello.md)
       """
 
   @api
@@ -55,5 +62,5 @@ Feature: empty the workspace
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME | LINE | ACTION   | OUTPUT   |
-      | 1.md     | 1    | list-dir | hello.md |
+      | FILENAME | LINE | ACTIVITY                     |
+      | 1.md     | 1    | 1 workspace files (hello.md) |

@@ -83,6 +83,7 @@ function parse(fileContent: string): config.Data {
   return new config.Data({
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,
+    emptyWorkspace: fileData.emptyWorkspace,
     exclude: fileData.exclude,
     files: fileData.files,
     formatterName: fileData.format,

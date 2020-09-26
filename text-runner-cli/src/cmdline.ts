@@ -32,6 +32,7 @@ export function parse(
   let commandName = cliArgs._[0]
   const cmdLineConfig = new config.Data({
     configFileName: cliArgs.config,
+    emptyWorkspace: cliArgs["empty-workspace"],
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
     formatterName: cliArgs.format,

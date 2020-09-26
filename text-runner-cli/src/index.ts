@@ -15,7 +15,7 @@ async function main() {
     const { commandName, cmdLineConfig, debugSubcommand } = cmdLine.parse(process.argv)
     const fileConfig = await configFile.load(cmdLineConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
-    const command = await commands.instantiate(commandName, userConfig, debugSubcommand)
+    const command = commands.instantiate(commandName, userConfig, debugSubcommand)
     const formatter = formatters.instantiate(
       userConfig.formatterName || "detailed",
       userConfig.sourceDir || ".",
@@ -40,4 +40,4 @@ async function main() {
   }
   process.exit(errorCount)
 }
-main()
+void main()

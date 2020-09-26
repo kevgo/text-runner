@@ -25,7 +25,7 @@ export class HelpCommand implements tr.commands.Command {
     const pkg = JSON.parse(fileContent)
 
     return `
-${color.dim("TextRunner " + pkg.version)}
+${color.dim(`TextRunner ${pkg.version}`)}
 
 USAGE: ${color.bold("text-run [<options>] <command>")}
 

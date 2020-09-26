@@ -11,7 +11,7 @@ export async function stopServer(action: tr.actions.Args): Promise<void> {
   if (!CurrentServer.instance().hasProcess()) {
     throw new Error("No running process found")
   }
-  CurrentServer.instance().kill()
+  await CurrentServer.instance().kill()
   await endChildProcesses()
   CurrentServer.instance().reset()
 }

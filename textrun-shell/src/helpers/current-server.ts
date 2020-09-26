@@ -15,8 +15,8 @@ export class CurrentServer {
     return this.process != null
   }
 
-  kill(): void {
-    this.process?.kill()
+  async kill(): Promise<void> {
+    await this.process?.kill()
   }
 
   reset(): void {

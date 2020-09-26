@@ -38,7 +38,7 @@ export async function commandWithInput(action: tr.actions.Args): Promise<void> {
   })
   CurrentCommand.set(processor)
   for (const inputLine of input) {
-    enter(processor, inputLine)
+    await enter(processor, inputLine)
   }
   await processor.waitForEnd()
   action.log(processor.output.fullText())

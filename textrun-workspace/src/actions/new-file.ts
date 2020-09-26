@@ -8,14 +8,14 @@ export async function newFile(action: tr.actions.Args): Promise<void> {
   try {
     filePath = action.region.textInNodeOfType("em", "strong")
   } catch (e) {
-    const guidance = "Cannot determine the name of the file to create.\n" + e.guidance
+    const guidance = `Cannot determine the name of the file to create.\n${e.guidance}`
     throw new tr.UserError(e.message, guidance)
   }
   let content
   try {
     content = action.region.textInNodeOfType("fence", "code")
   } catch (e) {
-    const guidance = "Cannot determine the content of the file to create.\n" + e.guidance
+    const guidance = `Cannot determine the content of the file to create.\n${e.guidance}`
     throw new tr.UserError(e.message, guidance)
   }
   action.name(`create file ${color.cyan(filePath)}`)

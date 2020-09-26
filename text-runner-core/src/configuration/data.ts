@@ -9,6 +9,7 @@ import { Publications } from "./publications"
 export interface Data {
   regionMarker: string // the name of the attribute that denotes active regions
   defaultFile: string // the name of the default filename, set to '' if none is given
+  emptyWorkspace: boolean // whether to empty the workspace before executing tests
   exclude: string | string[] // list of names or regexes of files to exclude
   files: string // glob of the files to test
   publications: Publications // folder mappings

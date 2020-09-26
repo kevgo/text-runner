@@ -47,4 +47,7 @@ Feature: generating a configuration file
 
       # whether to verify online files/links (warning: this makes tests flaky)
       online: false
+
+      # whether to delete all files in the workspace folder before running the tests
+      emptyWorkspace: true
       """

@@ -18,6 +18,7 @@ suite("parseHTMLFiles", function () {
         const expectedJSON = await fs.readJSON(expectedPath)
         const expected = new ast.NodeList()
         for (const e of expectedJSON) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           e.file = e.file.replace("*", "html")
           expected.push(ast.Node.scaffold(e))
         }

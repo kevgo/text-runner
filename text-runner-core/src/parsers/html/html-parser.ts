@@ -212,11 +212,11 @@ function instanceOfDefaultTreeTextNode(object: any): object is parse5.DefaultTre
 }
 
 function instanceOfParentTreeNode(object: any): object is parse5.DefaultTreeParentNode {
-  return object.childNodes
+  return !!object.childNodes
 }
 
 function instanceOfDefaultTreeElement(object: any): object is parse5.DefaultTreeElement {
-  return object.nodeName && object.tagName && object.attrs
+  return !!object.nodeName && !!object.tagName && !!object.attrs
 }
 
 /** converts the given HTML AST node attributes into the standard AST format */

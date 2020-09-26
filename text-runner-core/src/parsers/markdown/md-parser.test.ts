@@ -15,6 +15,7 @@ suite("MdParser.parseFile()", function () {
         const expectedJSON = await fs.readJSON(path.join(testDirPath, "result.json"))
         const expected = new ast.NodeList()
         for (const expectedNodeData of expectedJSON) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
           expected.push(ast.Node.scaffold(expectedNodeData))
         }

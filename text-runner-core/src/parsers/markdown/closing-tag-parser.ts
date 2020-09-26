@@ -19,7 +19,7 @@ export class ClosingTagParser {
   }
 
   parse(tag: string, file: AbsoluteFilePath, line: number): ast.NodeList {
-    const match = tag.match(this.closingTagRE)
+    const match = this.closingTagRE.exec(tag)
     if (!match) {
       throw new Error(`no tag parsed in ${tag}`)
     }

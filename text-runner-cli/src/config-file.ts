@@ -23,7 +23,7 @@ files: "**/*.md"
 # This is applied after the white-list above.
 exclude: []
 
-# the formatter to use (detailed, dot, progress, silent, summary)
+# the formatter to use (detailed, dot, progress, summary)
 format: detailed
 
 # Define which folders of your Markdown source get compiled to HTML
@@ -50,7 +50,10 @@ regionMarker: type
 systemTmp: false
 
 # whether to verify online files/links (warning: this makes tests flaky)
-online: false`
+online: false
+
+# whether to delete all files in the workspace folder before running the tests
+emptyWorkspace: true`
   )
 }
 

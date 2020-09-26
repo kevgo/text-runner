@@ -19,7 +19,7 @@ export async function runnableRegion(action: tr.actions.Args): Promise<void> {
   let textRunPath = path.join(__dirname, "..", "..", "node_modules", ".bin", "text-run")
   if (process.platform === "win32") textRunPath += ".cmd"
   const trArgs = callArgs(textRunPath, process.platform)
-  trArgs[trArgs.length - 1] += " --workspace=."
+  trArgs[trArgs.length - 1] += " --workspace=. --no-empty-workspace"
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   try {
     await processor.waitForEnd()

@@ -1,7 +1,7 @@
 import { UserError } from "../../errors/user-error"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import { ast } from "../../text-runner"
 import * as parser from "./md-parser"
+import * as ast from "../../ast/index"
 
 /** helps find open MarkdownIt AST nodes */
 export class OpenNodeTracker {

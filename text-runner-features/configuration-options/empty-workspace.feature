@@ -6,8 +6,29 @@ Feature: empty the workspace
       <a type="test"> </a>
       """
 
-  Scenario: default behavior: on
+  @api
+  Scenario: default API behavior
     When calling Text-Runner
-    Then it executes these actions:
-      | STATUS  | MESSAGE        |
-      | warning | no files found |
+    Then it emits these events:
+      | STATUS  | MESSAGE                 |
+      | warning | no Markdown files found |
+
+  @cli
+  Scenario: default CLI behavior
+    When running Text-Runner
+    Then it prints:
+      """
+      no Markdown files found
+      """
+
+  @cli
+  Scenario: disable via config file
+    Given the text-run configuration contains:
+      """
+      emptyWorkspace: false
+      """
+    When running Text-Runner
+    Then it prints:
+      """
+      foo
+      """

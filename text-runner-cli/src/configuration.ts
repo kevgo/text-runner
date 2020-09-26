@@ -10,6 +10,7 @@ export class Data {
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string
+  emptyWorkspace?: boolean
   exclude?: string | string[]
   files?: string // files to test
   formatterName?: formatters.Names // name of the formatter to use
@@ -52,6 +53,9 @@ export class Data {
     const result: tr.configuration.PartialData = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile
+    }
+    if (this.emptyWorkspace != null) {
+      result.emptyWorkspace = this.emptyWorkspace
     }
     if (this.exclude != null) {
       result.exclude = this.exclude

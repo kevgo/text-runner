@@ -6,6 +6,7 @@ export function defaults(): Data {
   return {
     regionMarker: "type",
     defaultFile: "",
+    emptyWorkspace: true,
     exclude: [],
     files: "**/*.md",
     online: false,

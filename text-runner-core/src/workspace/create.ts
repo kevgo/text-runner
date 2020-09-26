@@ -8,7 +8,9 @@ import * as configuration from "../configuration/index"
 export async function create(config: configuration.Data): Promise<string> {
   const workspacePath = await getPath(config)
   console.log("CREATING WORKSPACE", workspacePath)
-  await fs.emptyDir(workspacePath)
+  if (config.emptyWorkspace) {
+    await fs.emptyDir(workspacePath)
+  }
   return workspacePath
 }
 

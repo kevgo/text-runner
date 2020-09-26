@@ -200,7 +200,7 @@ Then("it prints:", function (expectedText) {
   if (process.platform === "win32") {
     output = output.replace(/\\/g, "/")
   }
-  if (!new RegExp(expectedText.trim()).test(output)) {
+  if (!new RegExp(expectedText.trim().replace(/\(/g, "\\(").replace(/\)/g, "\\)")).test(output)) {
     throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
   }
 })

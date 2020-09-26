@@ -50,7 +50,10 @@ regionMarker: type
 systemTmp: false
 
 # whether to verify online files/links (warning: this makes tests flaky)
-online: false`
+online: false
+
+# whether to delete all files in the workspace folder before running the tests
+emptyWorkspace: true`
   )
 }
 
@@ -83,6 +86,7 @@ function parse(fileContent: string): config.Data {
   return new config.Data({
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,
+    emptyWorkspace: fileData.emptyWorkspace,
     exclude: fileData.exclude,
     files: fileData.files,
     formatterName: fileData.format,

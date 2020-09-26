@@ -6,6 +6,7 @@ export function defaults(): Data {
   return {
     regionMarker: "type",
     defaultFile: "",
+    emptyWorkspace: true,
     exclude: [],
     files: "**/*.md",
     online: false,
@@ -13,6 +14,6 @@ export function defaults(): Data {
     scaffoldLanguage: "js",
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: "", // will be populated later
+    workspace: "tmp",
   }
 }

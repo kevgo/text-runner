@@ -10,6 +10,6 @@ Feature: active h5 tags
       <h5 type="HelloWorld">hello</h5>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |

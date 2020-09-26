@@ -11,7 +11,7 @@ Feature: flexible region syntax
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |
 
@@ -22,7 +22,7 @@ Feature: flexible region syntax
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |
 
@@ -33,7 +33,7 @@ Feature: flexible region syntax
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |
 
@@ -44,6 +44,6 @@ Feature: flexible region syntax
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | OUTPUT       | STATUS  |
       | 1.md     | 1    | hello-world | Hello World! | success |

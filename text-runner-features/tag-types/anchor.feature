@@ -10,7 +10,7 @@ Feature: active anchor tags
       <a type="HelloWorld">hello</a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |
 
@@ -22,6 +22,6 @@ Feature: active anchor tags
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |

@@ -5,7 +5,7 @@ export { printUserError } from "./print-user-error"
 export { instantiate } from "./instantiate"
 
 /** Names defines the names of all built-in formatters */
-export type Names = "detailed" | "dot" | "progress" | "silent" | "summary"
+export type Names = "detailed" | "dot" | "progress" | "summary"
 
 /** Formatter defines the interface that Formatters must implement. */
 export interface Formatter {

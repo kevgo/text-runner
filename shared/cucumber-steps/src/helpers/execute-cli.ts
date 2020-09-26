@@ -1,6 +1,7 @@
 import { makeFullPath } from "./make-full-path"
 import { createObservableProcess, ObservableProcess } from "observable-process"
 import { TRWorld } from "../world"
+import * as childProcess from "child_process"
 
 /**
  * Executes the given command in a subshell.
@@ -15,7 +16,7 @@ export async function executeCLI(
   world: TRWorld,
   opts: { cwd?: string } = {}
 ): Promise<ObservableProcess> {
-  const args: any = {}
+  const args: childProcess.SpawnOptions = {}
   args.cwd = opts.cwd || world.rootDir
   if (world.debug) {
     args.env = {

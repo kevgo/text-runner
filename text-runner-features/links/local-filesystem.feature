@@ -12,7 +12,7 @@ Feature: verifying links to the local filesystem
       foo
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                |
       | 1.md     | 1    | check-link | link to local file 2.md |
 
@@ -27,7 +27,7 @@ Feature: verifying links to the local filesystem
       # Carsten
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME            | LINE | ACTION     | ACTIVITY                                              |
       | partners/foo/bar.md | 1    | check-link | link to heading partners/foo/people/readme.md#carsten |
 
@@ -38,7 +38,7 @@ Feature: verifying links to the local filesystem
       [link to existing local file](/docs/1.md)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME  | LINE | ACTION     | ACTIVITY                     |
       | docs/1.md | 1    | check-link | link to local file docs/1.md |
 
@@ -52,7 +52,7 @@ Feature: verifying links to the local filesystem
       [link to local directory](docs)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                     |
       | 1.md     | 1    | check-link | link to local directory docs |
 
@@ -63,7 +63,7 @@ Feature: verifying links to the local filesystem
       [link to non-existing local file](zonk.md)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                   | STATUS | ERROR TYPE | ERROR MESSAGE                           |
       | 1.md     | 1    | check-link | link to local file zonk.md | failed | UserError  | link to non-existing local file zonk.md |
 
@@ -78,6 +78,6 @@ Feature: verifying links to the local filesystem
       [link to existing local file](../readme.md)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME           | LINE | ACTION     | ACTIVITY                     |
       | documentation/1.md | 1    | check-link | link to local file readme.md |

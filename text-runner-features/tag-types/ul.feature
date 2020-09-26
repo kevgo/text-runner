@@ -12,7 +12,7 @@ Feature: active UL tags
       </ul>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |
 
@@ -24,6 +24,6 @@ Feature: active UL tags
       </ul>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 2    | hello-world |

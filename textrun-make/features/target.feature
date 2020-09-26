@@ -16,7 +16,7 @@ Feature: verifying Make targets
       To build the "foo" executable, build the <code type="make/target">foo</code> target.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | ACTIVITY        |
       | 1.md     | 1    | make/target | make target foo |
 
@@ -26,7 +26,7 @@ Feature: verifying Make targets
       To build the "foo" executable, build the <code type="make/target">zonk</code> target.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                  |
       | 1.md     | 1    | make/target | failed | UserError  | Makefile does not contain target zonk but these ones: bar, foo |
 
@@ -36,6 +36,6 @@ Feature: verifying Make targets
       To build the "foo" executable, build the <code type="make/target"></code> target.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE     |
       | 1.md     | 1    | make/target | failed | UserError  | Empty make target |

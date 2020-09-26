@@ -16,7 +16,7 @@ Feature: verifying the documented content of a file in the repository
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION             | ACTIVITY                                            |
       | 1.md     | 1    | repo/existing-file | document content matches source code file hello.txt |
 
@@ -34,7 +34,7 @@ Feature: verifying the documented content of a file in the repository
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION             | ACTIVITY                                            |
       | 1.md     | 1    | repo/existing-file | document content matches source code file hello.txt |
 
@@ -57,7 +57,7 @@ Feature: verifying the documented content of a file in the repository
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION             | ACTIVITY                                                   |
       | 1.md     | 1    | repo/existing-file | document content matches source code file docs/greeting.md |
       | 1.md     | 3    | check-link         | link to local directory docs                               |
@@ -75,7 +75,7 @@ Feature: verifying the documented content of a file in the repository
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                    |
       | 1.md     | 1    | repo/existing-file | failed | UserError  | mismatching content in hello.txt |
     And the error provides the guidance:
@@ -97,6 +97,6 @@ Feature: verifying the documented content of a file in the repository
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | repo/existing-file | failed | UserError  | file not found: zonk.txt |

@@ -7,7 +7,7 @@ Feature: verifying file content
       Your workspace now contains a file <a type="workspace/existing-file">_hello.txt_ with content `Hello world!`</a>.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                  | ACTIVITY                         |
       | 1.md     | 1    | workspace/new-file      | create file hello.txt            |
       | 1.md     | 2    | workspace/existing-file | verify content of file hello.txt |
@@ -25,7 +25,7 @@ Feature: verifying file content
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                  | ACTIVITY                         |
       | 1.md     | 1    | workspace/new-file      | create file hello.txt            |
       | 1.md     | 2    | workspace/existing-file | verify content of file hello.txt |
@@ -38,7 +38,7 @@ Feature: verifying file content
       Now you have a file <a type="workspace/existing-file">__hello.txt__ with `mismatching expected content`</a>.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    |
       | 1.md     | 1    | workspace/new-file      | success |            |                                  |
       | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt |
@@ -56,6 +56,6 @@ Feature: verifying file content
       The file <a type="workspace/existing-file">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt |

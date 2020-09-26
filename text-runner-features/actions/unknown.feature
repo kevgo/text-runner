@@ -9,7 +9,7 @@ Feature: unknown action types
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        |
       | 1.md     | 1    | failed | UserError  | unknown action: zonk |
     And the error provides the guidance:

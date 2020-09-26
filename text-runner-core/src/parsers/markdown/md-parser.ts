@@ -329,7 +329,7 @@ export class MarkdownParser {
         )
       }
     }
-    ont.close(parsed, file, line)
+    ont.close(parsed.type, file, line)
     result.push(parsed)
     return result
   }
@@ -347,7 +347,7 @@ export class MarkdownParser {
         ont.open(node)
       }
       if (node.type.endsWith("_close")) {
-        ont.close(node, file, line)
+        ont.close(node.type, file, line)
       }
     }
     result.push(...parsed)
@@ -377,7 +377,7 @@ export class MarkdownParser {
 
   private standardizeClosingNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
-    const openingNode = ont.close(mdNode, file, line)
+    const openingNode = ont.close(mdNode.type, file, line)
     let closingTagLine = line
     if (openingNode.map) {
       closingTagLine = openingNode.map[1]

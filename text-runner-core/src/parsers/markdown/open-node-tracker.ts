@@ -17,8 +17,8 @@ export class OpenNodeTracker {
   }
 
   /** finds the opening node for the given closing node */
-  close(node: ast.Node, file: AbsoluteFilePath, line: number): parser.MarkdownItNode {
-    const openType = node.type.replace("_close", "_open")
+  close(type: ast.NodeType, file: AbsoluteFilePath, line: number): parser.MarkdownItNode {
+    const openType = type.replace("_close", "_open")
     for (let i = this.nodes.length - 1; i >= 0; i--) {
       const result = this.nodes[i]
       if (result.type === openType) {
@@ -27,7 +27,7 @@ export class OpenNodeTracker {
       }
     }
     throw new UserError(
-      `No opening node '${openType}' found for closing node '${node.type}'`,
+      `No opening node '${openType}' found for closing node '${type}'`,
       `Node </${openType}> does not have a corresponding opening node`,
       file,
       line

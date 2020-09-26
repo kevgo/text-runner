@@ -227,12 +227,25 @@ Then("it executes in a global temp directory", function () {
   assert.notInclude(world.apiResults[0].output, world.rootDir)
 })
 
+Then("it executes in the global {string} temp directory", function (dirName: string) {
+  const world = this as TRWorld
+  assert.notInclude(world.apiResults[0].output, path.join(world.rootDir, dirName))
+})
+
 Then("it runs in a global temp directory", function () {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no CLI process found")
   }
   assert.notInclude(world.process.output.fullText(), world.rootDir)
+})
+
+Then("it runs in the global {string} temp directory", function (dirName: string) {
+  const world = this as TRWorld
+  if (!world.process) {
+    throw new Error("no CLI process found")
+  }
+  assert.notInclude(world.process.output.fullText(), path.join(world.rootDir, dirName))
 })
 
 Then("it runs in the local {string} directory", function (dirName) {

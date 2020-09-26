@@ -126,6 +126,7 @@ Feature: separate working directory
       """
     Then it executes in a global temp directory
 
+
   @api
   Scenario: running in a custom global temp directory via API
     When calling:

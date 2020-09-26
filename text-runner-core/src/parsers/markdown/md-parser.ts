@@ -368,37 +368,35 @@ export class MarkdownParser {
     ont: OpenNodeTracker
   ): ast.NodeList {
     const result = new ast.NodeList()
-    ont.open(mdNode)
     result.push(
       new ast.Node({
         attributes: standardizeMarkdownItAttributes(mdNode.attrs),
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type,
+        tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+        type: mdNode.type as ast.NodeType,
       })
     )
+    ont.open(result[0])
     return result
   }
 
   private standardizeClosingNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
-    const openingNode = ont.close(mdNode, file, line)
-    let closingTagLine = line
-    if (openingNode.map) {
-      closingTagLine = openingNode.map[1]
-    }
-    result.push(
-      new ast.Node({
-        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
-        content: mdNode.content.trim(),
-        file,
-        line: closingTagLine,
-        tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type,
-      })
-    )
+    const astNode = new ast.Node({
+      attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+      content: mdNode.content.trim(),
+      file,
+      line,
+      tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+      type: mdNode.type as ast.NodeType,
+    })
+    // const openingNode = ont.close(astNode, file, line)
+    // if (openingNode.map) {
+    //   astNode.line = openingNode.map[1]
+    // }
+    result.push(astNode)
     return result
   }
 

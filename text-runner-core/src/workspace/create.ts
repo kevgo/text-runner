@@ -15,10 +15,10 @@ export async function create(config: configuration.Data): Promise<string> {
 
 async function getPath(config: configuration.Data): Promise<string> {
   if (config.systemTmp === false) {
-    return path.join(config.sourceDir, "tmp")
+    return path.join(config.sourceDir, config.workspace)
   } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()
-    return tmpDir.path
+    return path.join(tmpDir.path, config.workspace)
   } else {
     throw new UserError(`unknown 'systemTmp' setting: ${config.systemTmp}`)
   }

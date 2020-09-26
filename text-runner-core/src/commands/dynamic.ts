@@ -30,9 +30,7 @@ export class Dynamic implements Command {
       const config = configuration.backfillDefaults(this.userConfig)
 
       // step 2: create working dir
-      if (!config.workspace) {
-        config.workspace = await workspace.create(config)
-      }
+      config.workspace = await workspace.create(config)
 
       // step 3: find files
       const filenames = await getFileNames(config)

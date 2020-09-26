@@ -329,7 +329,7 @@ export class MarkdownParser {
         )
       }
     }
-    ont.close({ type: parsed.type }, file, line)
+    ont.close(parsed, file, line)
     result.push(parsed)
     return result
   }

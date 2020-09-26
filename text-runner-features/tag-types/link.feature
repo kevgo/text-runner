@@ -10,7 +10,7 @@ Feature: active link tags
       <a type="HelloWorld" href=".">
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |
       | 1.md     | 1    | check-link  |

@@ -7,7 +7,7 @@ Feature: validating Javascript
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | javascript/non-runnable | failed | UserError  | no JavaScript code found |
 
@@ -19,6 +19,6 @@ Feature: validating Javascript
       </pre>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE                                   |
       | 1.md     | 1    | javascript/non-runnable | failed | UserError  | invalid Javascript: Invalid or unexpected token |

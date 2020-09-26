@@ -9,7 +9,7 @@ Feature: running multiple console commands
       </pre>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME                     | LINE | ACTION        | ACTIVITY                                        |
       | running-multiple-commands.md | 1    | shell/command | running console command: mkdir one && mkdir two |
     And the test workspace now contains a directory "one"

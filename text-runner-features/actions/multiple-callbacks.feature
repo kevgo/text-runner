@@ -15,6 +15,6 @@ Feature: multiple callbacks
       }
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION             | STATUS  |
       | 1.md     | 1    | multiple-callbacks | success |

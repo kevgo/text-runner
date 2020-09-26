@@ -9,7 +9,7 @@ Feature: links to HTML anchors
       <a name="hello">hi</a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY       |
       | 1.md     | 1    | check-link | link to #hello |
 
@@ -24,7 +24,7 @@ Feature: links to HTML anchors
       <a name="hello">hi</a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY           |
       | 1.md     | 1    | check-link | link to 2.md#hello |
 
@@ -35,7 +35,7 @@ Feature: links to HTML anchors
       A [link to non-existing anchor](#zonk)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           |
       | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk |
 
@@ -50,7 +50,7 @@ Feature: links to HTML anchors
       <a name="hello">hi</a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
       | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
 
@@ -61,7 +61,7 @@ Feature: links to HTML anchors
       A [link to non-existing anchor in other file](2.md#target)
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY            | STATUS | ERROR TYPE | ERROR MESSAGE                                    |
       | 1.md     | 1    | check-link | link to 2.md#target | failed | UserError  | link to anchor #target in non-existing file 2.md |
 
@@ -76,7 +76,7 @@ Feature: links to HTML anchors
       no link targets here
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
       | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
 
@@ -89,7 +89,7 @@ Feature: links to HTML anchors
       ## Hello
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                     |
       | 1.md     | 1    | check-link | link to local heading #hello |
 
@@ -104,7 +104,7 @@ Feature: links to HTML anchors
       ## Hello
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                   |
       | 1.md     | 1    | check-link | link to heading 2.md#hello |
 
@@ -119,7 +119,7 @@ Feature: links to HTML anchors
       ## GitHub
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                    |
       | 1.md     | 1    | check-link | link to heading 2.md#github |
 
@@ -134,6 +134,6 @@ Feature: links to HTML anchors
       ## Hello
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION     | ACTIVITY                             |
       | 1.md     | 1    | check-link | link to heading foo/bar baz.md#hello |

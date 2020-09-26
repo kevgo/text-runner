@@ -8,7 +8,7 @@ Feature: Execute regions of semantic Markdown
       </pre>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                    | ACTIVITY                        |
       | 1.md     | 1    | extension/runnable-region | execute Markdown in Text-Runner |
       | 1.md     | 2    | test                      | Test                            |
@@ -20,7 +20,7 @@ Feature: Execute regions of semantic Markdown
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                    | STATUS | ERROR TYPE | ERROR MESSAGE           |
       | 1.md     | 1    | extension/runnable-region | failed | UserError  | no content to run found |
 
@@ -32,7 +32,7 @@ Feature: Execute regions of semantic Markdown
       </a>
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION                    | STATUS  | ERROR TYPE | ERROR MESSAGE        |
       | 1.md     | 1    | extension/runnable-region | success |            |                      |
       | 1.md     | 2    | zonk                      | failed  | UserError  | unknown action: zonk |

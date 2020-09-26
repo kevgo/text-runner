@@ -16,7 +16,7 @@ Feature: skipping an action
       }
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
 
@@ -28,7 +28,7 @@ Feature: skipping an action
       }
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
 
@@ -40,7 +40,7 @@ Feature: skipping an action
       }
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
 
@@ -54,6 +54,6 @@ Feature: skipping an action
       }
       """
     When calling Text-Runner
-    Then it executes these actions:
+    Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |

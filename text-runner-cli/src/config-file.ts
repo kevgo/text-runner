@@ -23,7 +23,7 @@ files: "**/*.md"
 # This is applied after the white-list above.
 exclude: []
 
-# the formatter to use (detailed, dot, progress, silent, summary)
+# the formatter to use (detailed, dot, progress, summary)
 format: detailed
 
 # Define which folders of your Markdown source get compiled to HTML

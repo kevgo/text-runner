@@ -26,7 +26,7 @@ export async function runnableRegion(action: tr.actions.Args): Promise<void> {
     throw new Error(`error executing Markdown region: ${e}`)
   }
   action.log(processor.output.fullText())
-  if (processor.exitCode !== 0) {
+  if (processor.exitCode && processor.exitCode !== 0) {
     throw new Error(
       `text-run exited with code ${processor.exitCode} when processing this markdown region:\n${stripAnsi(
         processor.output.fullText()

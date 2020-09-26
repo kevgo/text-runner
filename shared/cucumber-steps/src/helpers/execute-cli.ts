@@ -30,11 +30,7 @@ export async function executeCLI(
   if (runner.exitCode && !expectError) {
     // unexpected failure
     console.log(runner.output.fullText())
-    if (typeof runner.exitCode === "number") {
-      throw new Error(`Expected success but got exit code: ${runner.exitCode}`)
-    } else {
-      throw new Error(`Expected success but got error: ${runner.exitCode}`)
-    }
+    throw new Error(`Expected success but got exit code: ${runner.exitCode}`)
   }
   if (expectError && !runner.exitCode) {
     // expected failure didn't occur

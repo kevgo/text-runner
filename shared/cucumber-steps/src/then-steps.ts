@@ -1,6 +1,7 @@
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
 import { Then } from "cucumber"
+import * as cucumber from "cucumber"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as psTreeR from "ps-tree"
@@ -42,7 +43,7 @@ Then("it executes in the local {string} directory", function (dirName) {
   assert.equal(have, want)
 })
 
-Then("it emits these events:", function (table) {
+Then("it emits these events:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   assert.isUndefined(world.apiException)
   const tableHashes = table.hashes()
@@ -65,6 +66,7 @@ Then("it emits these events:", function (table) {
       result.activity = line.ACTIVITY
     }
     if (line.STATUS != null) {
+      // @ts-ignore
       result.status = line.STATUS
     }
     if (line.MESSAGE != null) {
@@ -118,7 +120,7 @@ Then("it emits these events:", function (table) {
   assert.deepEqual(have, want)
 })
 
-Then("it throws:", function (table) {
+Then("it throws:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   if (!world.apiException) {
     throw new Error("no error thrown")
@@ -146,7 +148,7 @@ Then("it throws:", function (table) {
   assert.deepEqual(have, want)
 })
 
-Then("the error provides the guidance:", function (expectedText) {
+Then("the error provides the guidance:", function (expectedText: string) {
   const world = this as TRWorld
   const errors = world.apiResults.map(res => res.error).filter(e => e)
   if (errors.length === 0) {
@@ -157,13 +159,13 @@ Then("the error provides the guidance:", function (expectedText) {
   assert.equal(stripAnsi(userError.guidance.trim()), expectedText.trim())
 })
 
-Then("the API exception provides the guidance:", function (expectedText) {
+Then("the API exception provides the guidance:", function (expectedText: string) {
   const world = this as TRWorld
   if (!world.apiException) {
     throw new Error("no API exception found")
   }
   assert.equal(world.apiException.name, "UserError")
-  const userError = world.apiException as textRunner.UserError
+  const userError = world.apiException
   assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
@@ -180,7 +182,7 @@ Then("it creates the file {string} with content:", async function (filename, exp
   assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
 })
 
-Then("it doesn't print:", function (expectedText) {
+Then("it doesn't print:", function (expectedText: string) {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no process output found")
@@ -191,7 +193,7 @@ Then("it doesn't print:", function (expectedText) {
   }
 })
 
-Then("it prints:", function (expectedText) {
+Then("it prints:", function (expectedText: string) {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no process output found")
@@ -205,7 +207,7 @@ Then("it prints:", function (expectedText) {
   }
 })
 
-Then("it prints the text:", function (expectedText) {
+Then("it prints the text:", function (expectedText: string) {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no process output found")
@@ -214,7 +216,7 @@ Then("it prints the text:", function (expectedText) {
   assert.equal(output, expectedText.trim())
 })
 
-Then("it runs {int} test", function (count) {
+Then("it runs {int} test", function (count: number) {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no process output found")
@@ -271,12 +273,12 @@ Then("it runs (only )the tests in {string}", function (filename) {
   helpers.verifyRanOnlyTestsCLI([filename], world)
 })
 
-Then("it runs only the tests in:", function (table) {
+Then("it runs only the tests in:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   helpers.verifyRanOnlyTestsCLI(table.raw(), world)
 })
 
-Then("it runs the console command {string}", async function (command) {
+Then("it runs the console command {string}", function (command: string) {
   const world = this as TRWorld
   if (!world.process) {
     throw new Error("no process output found")
@@ -288,7 +290,7 @@ Then("it runs without errors", function () {
   // Nothing to do here
 })
 
-Then("it signals:", function (table) {
+Then("it signals:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   const hash = table.rowsHash()
   let expectedText = ""
@@ -336,7 +338,7 @@ Then("the call fails with the error:", function (expectedError) {
   assert.equal(world.process.exitCode, 1)
 })
 
-Then("the {string} directory is now deleted", async function (directoryPath) {
+Then("the {string} directory is now deleted", async function (directoryPath: string) {
   const world = this as TRWorld
   try {
     await fs.stat(path.join(world.rootDir, directoryPath))
@@ -347,7 +349,10 @@ Then("the {string} directory is now deleted", async function (directoryPath) {
   throw new Error(`file '${directoryPath}' still exists`)
 })
 
-Then("the test directory now/still contains a file {string} with content:", async function (fileName, expectedContent) {
+Then("the test directory now/still contains a file {string} with content:", async function (
+  fileName: string,
+  expectedContent: string
+) {
   const world = this as TRWorld
   const actualContent = await fs.readFile(path.join(world.rootDir, "tmp", fileName), "utf8")
   assert.equal(actualContent.trim(), expectedContent.trim())
@@ -359,7 +364,7 @@ Then("the test workspace now contains a directory {string}", async function (nam
   assert.isTrue(stat.isDirectory())
 })
 
-Then("the test fails with:", function (table) {
+Then("the test fails with:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   const hash = table.rowsHash()
   if (!world.process) {
@@ -387,7 +392,7 @@ Then("there are no child processes running", async function () {
   assert.lengthOf(children, 1) // 1 is okay, it's the `ps` process used to determine the child processes
 })
 
-Then("there is no {string} folder", async function (name) {
+Then("there is no {string} folder", async function (name: string) {
   const world = this as TRWorld
   try {
     await fs.stat(path.join(world.rootDir, name))

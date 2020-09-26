@@ -1,5 +1,6 @@
 import { makeFullPath } from "./make-full-path"
 import { assert } from "chai"
+import * as util from "util"
 
 suite("makeFullPath", function () {
   const linuxTests = {
@@ -12,7 +13,7 @@ suite("makeFullPath", function () {
   }
   if (process.platform !== "win32") {
     for (const [give, want] of Object.entries(linuxTests)) {
-      test(`Linux: ${give} --> ${want}`, function () {
+      test(`Linux: ${give} --> ${util.inspect(want)}`, function () {
         const have = makeFullPath(give, "linux")
         assert.match(have, want)
       })
@@ -20,7 +21,7 @@ suite("makeFullPath", function () {
   }
   if (process.platform === "win32") {
     for (const [give, want] of Object.entries(winTests)) {
-      test(`Windows: ${give} --> ${want}`, function () {
+      test(`Windows: ${give} --> ${util.inspect(want)}`, function () {
         const have = makeFullPath(give, "win32")
         assert.match(have, want)
       })

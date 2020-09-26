@@ -7,7 +7,6 @@ import { callArgs } from "../helpers/call-args"
 
 /** runs the given content in Text-Runner */
 export async function runnableRegion(action: tr.actions.Args): Promise<void> {
-  console.log("RUNNABLE REGION"), action.configuration
   action.name("execute Markdown in Text-Runner")
   const content = action.region.text().trim()
   if (content === "") {

@@ -13,6 +13,6 @@ export function defaults(): Data {
     scaffoldLanguage: "js",
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: "", // will be populated later
+    workspace: "tmp",
   }
 }

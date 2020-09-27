@@ -2,13 +2,14 @@ import * as glob from "glob"
 import * as interpret from "interpret"
 import * as path from "path"
 import * as rechoir from "rechoir"
+
+import * as actions from "../actions"
 import * as activities from "../activities/index"
 import { UserError } from "../errors/user-error"
 import * as helpers from "../helpers"
-import * as actions from "../actions"
-import { Action } from "./index"
-import { ExternalActionManager } from "./external-action-manager"
 import { Actions } from "./actions"
+import { ExternalActionManager } from "./external-action-manager"
+import { Action } from "./index"
 
 /** ActionFinder provides runnable action instances for activities. */
 export class Finder {

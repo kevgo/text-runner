@@ -1,6 +1,6 @@
+import * as ast from "../ast"
 import * as config from "../configuration/index"
 import * as linkTargets from "../link-targets"
-import * as ast from "../ast"
 import * as run from "../run"
 
 export { Finder } from "./finder"

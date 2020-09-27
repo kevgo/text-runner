@@ -1,9 +1,10 @@
 import { assert } from "chai"
-import * as activities from "../activities/index"
-import { Finder, customActionFilePaths, loadCustomActions, builtinActionFilePaths, loadBuiltinActions } from "./finder"
 import * as path from "path"
+
+import * as activities from "../activities/index"
 import { Actions } from "./actions"
 import { ExternalActionManager } from "./external-action-manager"
+import { builtinActionFilePaths, customActionFilePaths, Finder, loadBuiltinActions, loadCustomActions } from "./finder"
 import { Action } from "./index"
 
 suite("actionFinder", function () {

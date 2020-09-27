@@ -1,5 +1,5 @@
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import * as ast from "../ast"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 export { extractDynamic } from "./extract-dynamic"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 

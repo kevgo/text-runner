@@ -3,11 +3,11 @@ import * as tr from "text-runner-core"
 /** Statistics about a run of Text-Runner */
 export interface ActivityResult {
   activity?: tr.activities.Activity
-  finalName?: string
-  status: tr.events.ResultStatus
-  output?: string
   error?: Error
+  finalName?: string
   message?: string // warning message
+  output?: string
+  status: tr.events.ResultStatus
 }
 
 /** StatsCollector provides statistics about the Text-Runner command it observes. */

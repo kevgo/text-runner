@@ -9,9 +9,9 @@ suite("OpenTagTracker.close()", function () {
 
   test("closing an open tag", function () {
     const openTags = new OpenNodeTracker()
-    openTags.open(ast.Node.scaffold({ type: "anchor_open" }))
+    openTags.open(ast.Node.scaffold({ type: "anchor_open" }), 3)
     const found = openTags.close("anchor_close", file, 12)
-    assert.equal(found.type, "anchor_open")
+    assert.equal(found, 3)
   })
 
   test("closing a tag that hasn't been opened", function () {
@@ -25,7 +25,7 @@ suite("OpenTagTracker.close()", function () {
 
 test("OpenTagTracker.has()", function () {
   const openTags = new OpenNodeTracker()
-  openTags.open(ast.Node.scaffold({ type: "link_open" }))
+  openTags.open(ast.Node.scaffold({ type: "link_open" }), 3)
   assert.isTrue(openTags.has("link_open"))
   assert.isFalse(openTags.has("anchor_open"))
 })

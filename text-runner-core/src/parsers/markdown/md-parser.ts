@@ -351,7 +351,7 @@ export class MarkdownParser {
     const parsed = this.htmlParser.parse(mdNode.content, file, line)
     for (const node of parsed) {
       if (node.type.endsWith("_open")) {
-        ont.open(node)
+        ont.open(node, parseInt(mdNode.tag[1], 10))
       }
       if (node.type.endsWith("_close")) {
         ont.close(node.type, file, line)
@@ -378,7 +378,7 @@ export class MarkdownParser {
         type: mdNode.type as ast.NodeType,
       })
     )
-    ont.open(result[0])
+    ont.open(result[0], parseInt(mdNode.tag[1], 10))
     return result
   }
 
@@ -386,8 +386,8 @@ export class MarkdownParser {
     const result = new ast.NodeList()
     const openingNode = ont.close(mdNode.type as ast.NodeType, file, line)
     let closingTagLine = line
-    if (openingNode.map) {
-      closingTagLine = openingNode.map[1]
+    if (openingNode) {
+      closingTagLine = openingNode
     }
     result.push(
       new ast.Node({

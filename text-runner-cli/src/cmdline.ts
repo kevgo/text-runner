@@ -10,7 +10,7 @@ import * as commands from "./commands"
  */
 export function parse(
   argv: string[]
-): { commandName: string; cmdLineConfig: config.Data; debugSubcommand?: tr.commands.DebugSubcommand } {
+): { cmdLineConfig: config.Data; commandName: string; debugSubcommand?: tr.commands.DebugSubcommand } {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)

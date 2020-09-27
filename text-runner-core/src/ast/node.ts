@@ -104,12 +104,12 @@ export class Node {
   readonly attributes: NodeAttributes
 
   constructor(data: {
-    type: NodeType
-    tag: NodeTag
+    attributes: NodeAttributes
+    content: string
     file: AbsoluteFilePath
     line: number
-    content: string
-    attributes: NodeAttributes
+    tag: NodeTag
+    type: NodeType
   }) {
     this.type = data.type
     this.tag = data.tag

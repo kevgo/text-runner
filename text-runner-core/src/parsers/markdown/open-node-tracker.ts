@@ -3,8 +3,8 @@ import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import * as ast from "../../ast/index"
 
 interface Entry {
-  node: ast.Node
   endLine: number
+  node: ast.Node
 }
 
 /** helps find open MarkdownIt AST nodes */

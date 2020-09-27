@@ -24,37 +24,37 @@ export type ResultStatus = "failed" | "skipped" | "success" | "warning"
 
 /** signals a failed activity */
 export interface Failed {
-  status: "failed"
   activity: Activity
-  finalName: string
   error: Error
+  finalName: string
   /** captured output (via action.log) while executing the activity */
   output: string
+  status: "failed"
 }
 
 /** signals a skipped activity */
 export interface Skipped {
-  status: "skipped"
   activity: Activity
   finalName: string
   output: string
+  status: "skipped"
 }
 
 /** signals a successful activity */
 export interface Success {
-  status: "success"
   activity: Activity
   finalName: string
   /** captured output (via action.log) while executing the activity */
   output: string
+  status: "success"
 }
 
 /** signals an activity succeeded but with warnings */
 export interface Warning {
-  status: "warning"
   activity?: Activity
   finalName?: string
   message: string
+  status: "warning"
 }
 
 export function instanceOfFailed(event: Result): event is Failed {

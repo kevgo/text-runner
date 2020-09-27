@@ -1,5 +1,6 @@
-import { backfillDefaults } from "./backfill-defaults"
 import { assert } from "chai"
+
+import { backfillDefaults } from "./backfill-defaults"
 
 suite("backfillDefaults", function () {
   test("no input", function () {

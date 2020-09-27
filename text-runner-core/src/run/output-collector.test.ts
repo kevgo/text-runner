@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { OutputCollector } from "./output-collector"
 
 suite("OutputCollector", function () {

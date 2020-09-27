@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { javascriptExtensions } from "./javascript-extensions"
 
 test("javascriptExtensions()", function () {

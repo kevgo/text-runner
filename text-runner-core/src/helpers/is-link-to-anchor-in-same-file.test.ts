@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file"
 
 test("isLinkToAnchorInSameFile", function () {

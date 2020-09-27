@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { trimAllLineEnds } from "./trim-all-line-ends"
 
 suite("trimAllLineEnds", function () {

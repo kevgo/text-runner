@@ -1,6 +1,7 @@
 import { assert } from "chai"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+
 import * as ast from "../../ast"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { OpenNodeTracker } from "./open-node-tracker"
 
 suite("OpenTagTracker.close()", function () {

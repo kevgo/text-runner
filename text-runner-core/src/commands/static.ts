@@ -1,14 +1,15 @@
+import { EventEmitter } from "events"
+
+import * as actions from "../actions"
 import { extractImagesAndLinks } from "../activities/extract-images-and-links"
+import * as configuration from "../configuration/index"
+import * as events from "../events/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as linkTargets from "../link-targets"
 import * as parser from "../parsers"
 import * as run from "../run"
 import * as workspace from "../workspace"
-import * as actions from "../actions"
 import { Command } from "./command"
-import * as events from "../events/index"
-import * as configuration from "../configuration/index"
-import { EventEmitter } from "events"
 
 export class Static implements Command {
   userConfig: configuration.PartialData

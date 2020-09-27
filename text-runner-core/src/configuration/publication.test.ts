@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AbsoluteLink } from "../filesystem/absolute-link"
 import { Publication } from "./publication"

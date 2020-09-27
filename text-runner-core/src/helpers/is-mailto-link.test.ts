@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { isMailtoLink } from "./is-mailto-link"
 
 test("isMailtoLink", function () {

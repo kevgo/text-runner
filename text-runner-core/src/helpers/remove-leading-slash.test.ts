@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { removeLeadingSlash } from "./remove-leading-slash"
 
 test("removeLeadingSlash", function () {

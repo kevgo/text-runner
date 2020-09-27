@@ -1,8 +1,9 @@
 import * as fs from "fs-extra"
 import * as path from "path"
 import * as tmp from "tmp-promise"
-import { UserError } from "../errors/user-error"
+
 import * as configuration from "../configuration/index"
+import { UserError } from "../errors/user-error"
 
 /** creates the temp directory to run the tests in */
 export async function create(config: configuration.Data): Promise<string> {

@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { addTrailingSlash } from "./add-trailing-slash"
 
 suite("addTrailingSlash", function () {

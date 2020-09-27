@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { straightenLink } from "./straighten-link"
 
 test("straightenLink", function () {

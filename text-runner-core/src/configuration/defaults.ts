@@ -1,5 +1,5 @@
-import { Publications } from "./publications"
 import { Data } from "./data"
+import { Publications } from "./publications"
 
 /** provides the default configuration values to use when no values are provided via CLI or config file */
 export function defaults(): Data {

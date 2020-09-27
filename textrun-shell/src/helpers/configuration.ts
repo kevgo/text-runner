@@ -19,7 +19,7 @@ export class Configuration {
   }
 
   /** Provides the configuration stored in the file with the given path. */
-  static async load(filePath: string): Promise<Configuration> {
+  static load(filePath: string): Configuration {
     try {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const content = require(filePath)

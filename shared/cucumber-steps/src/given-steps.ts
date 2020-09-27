@@ -121,7 +121,7 @@ Given("the workspace contains a file {string} with content:", async function (fi
   await fs.writeFile(path.join(world.rootDir, "tmp", fileName), content)
 })
 
-Given("the text-run configuration contains:", async function (text) {
+Given("the text-run configuration contains:", async function (text: string) {
   const world = this as TRWorld
   await fs.appendFile(path.join(world.rootDir, "text-run.yml"), `\n${text}`)
 })
@@ -139,7 +139,7 @@ Given("the workspace contains an empty file {string}", async function (fileName)
 Given("the workspace contains an image {string}", async function (imageName) {
   const world = this as TRWorld
   await fse.ensureDir(path.join(world.rootDir, path.dirname(imageName)))
-  fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), path.join(world.rootDir, imageName))
+  await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), path.join(world.rootDir, imageName))
 })
 
 Given("the configuration file:", async function (content) {

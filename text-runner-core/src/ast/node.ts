@@ -138,7 +138,7 @@ export class Node {
     if (this.type !== "htmltag") {
       return null
     }
-    const matches = this.content.match(/<a[^>]*href="([^"]*)".*?>/)
+    const matches = /<a[^>]*href="([^"]*)".*?>/.exec(this.content)
     return matches ? matches[1] : null
   }
 

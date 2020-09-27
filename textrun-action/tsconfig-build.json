@@ -2,7 +2,7 @@
 // tests are type-checked and compiled when running the unit tests
 {
   "extends": "./tsconfig.json",
-  "exclude": ["./src/**/*.test.ts"],
+  "exclude": ["./src/**/*.test.ts", "./text-run/*.ts"],
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true /* Generates corresponding '.d.ts' file. */,

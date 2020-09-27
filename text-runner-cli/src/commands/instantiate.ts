@@ -5,11 +5,11 @@ import { HelpCommand } from "./help"
 import { SetupCommand } from "./setup"
 import { VersionCommand } from "./version"
 
-export async function instantiate(
+export function instantiate(
   commandName: string,
   userConfig: config.Data,
   debugSubcommand: tr.commands.DebugSubcommand | undefined
-): Promise<tr.commands.Command> {
+): tr.commands.Command {
   const sourceDir = userConfig.sourceDir || "."
   switch (commandName) {
     case "help":

@@ -13,7 +13,7 @@ export async function runTextrunner(action: tr.actions.Args): Promise<void> {
   const processor = createObservableProcess(trArgs, { cwd: action.configuration.workspace })
   await processor.waitForEnd()
   action.log(processor.output.fullText())
-  if (processor.exitCode !== 0) {
+  if (processor.exitCode && processor.exitCode !== 0) {
     throw new Error(`the nested Text-Runner instance exited with code ${processor.exitCode}`)
   }
 }

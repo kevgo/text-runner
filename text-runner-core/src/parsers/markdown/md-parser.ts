@@ -8,7 +8,14 @@ import { UserError } from "../../errors/user-error"
 import { ClosingTagParser } from "./closing-tag-parser"
 import { OpenNodeTracker } from "./open-node-tracker"
 
-export type MarkdownItNode = any
+export interface MarkdownItNode {
+  type: string // Type of the token, e.g. "paragraph_open"
+  tag: string // HTML tag name, e.g. "p"
+  attrs: [string, string][] | null //HTML attributes. Format: `[[name1, value1], [name2, value2]]`
+  map: [number, number] | null // Source map info. Format: `[line_begin, line_end]`
+  children: MarkdownItNode[] | null // An array of child nodes (inline and img tokens)
+  content: string // In a case of self-closing tag (code, html, fence, etc.), it has contents of this tag.
+}
 export type MarkdownItAst = MarkdownItNode[]
 export type MarkdownItNodeAttrs = string[][]
 
@@ -51,7 +58,7 @@ export class MarkdownParser {
     const result = new ast.NodeList()
     let currentLine = parentLine
     for (const node of mdAST) {
-      currentLine = Math.max((node.map || [[0]])[0] + 1, currentLine)
+      currentLine = Math.max((node.map || [0, 0])[0] + 1, currentLine)
 
       if (node.type === "image") {
         // need to handle images explicitly here because they have a text node as a child
@@ -154,7 +161,7 @@ export class MarkdownParser {
   private standardizeImageNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
-    for (const childNode of mdNode.children) {
+    for (const childNode of mdNode.children || []) {
       attributes.alt += childNode.content
     }
     result.push(
@@ -178,7 +185,7 @@ export class MarkdownParser {
         content: "",
         file,
         line,
-        tag: mdNode.tag,
+        tag: mdNode.tag as ast.NodeTag,
         type: `${mdNode.tag}_open` as ast.NodeType,
       })
     )
@@ -262,7 +269,7 @@ export class MarkdownParser {
         attributes: {},
         content: "",
         file,
-        line: mdNode.map[1],
+        line: (mdNode.map || [0, 0])[1],
         tag: "/pre",
         type: "fence_close",
       })
@@ -298,7 +305,7 @@ export class MarkdownParser {
         attributes: {},
         content: "",
         file,
-        line: mdNode.map[1],
+        line: (mdNode.map || [0, 0])[1],
         tag: "/pre",
         type: "fence_close",
       })
@@ -344,7 +351,7 @@ export class MarkdownParser {
     const parsed = this.htmlParser.parse(mdNode.content, file, line)
     for (const node of parsed) {
       if (node.type.endsWith("_open")) {
-        ont.open(node)
+        ont.open(node, (mdNode.map || [0, 0])[1])
       }
       if (node.type.endsWith("_close")) {
         ont.close(node.type, file, line)
@@ -361,26 +368,26 @@ export class MarkdownParser {
     ont: OpenNodeTracker
   ): ast.NodeList {
     const result = new ast.NodeList()
-    ont.open(mdNode)
     result.push(
       new ast.Node({
         attributes: standardizeMarkdownItAttributes(mdNode.attrs),
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type,
+        tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+        type: mdNode.type as ast.NodeType,
       })
     )
+    ont.open(result[0], (mdNode.map || [0, 0])[1])
     return result
   }
 
   private standardizeClosingNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
-    const openingNode = ont.close(mdNode.type, file, line)
+    const openingNodeEndLine = ont.close(mdNode.type as ast.NodeType, file, line)
     let closingTagLine = line
-    if (openingNode.map) {
-      closingTagLine = openingNode.map[1]
+    if (openingNodeEndLine) {
+      closingTagLine = openingNodeEndLine
     }
     result.push(
       new ast.Node({
@@ -388,8 +395,8 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line: closingTagLine,
-        tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type,
+        tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+        type: mdNode.type as ast.NodeType,
       })
     )
     return result
@@ -403,8 +410,8 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type,
+        tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+        type: mdNode.type as ast.NodeType,
       })
     )
     return result
@@ -418,8 +425,8 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: mdNode.tag,
-        type: mdNode.type,
+        tag: mdNode.tag as ast.NodeTag,
+        type: mdNode.type as ast.NodeType,
       })
     )
     return result

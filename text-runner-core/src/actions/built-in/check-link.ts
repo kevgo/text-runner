@@ -21,12 +21,12 @@ export async function checkLink(action: Args): Promise<number | void> {
   }
 
   if (helpers.isLinkToAnchorInSameFile(target)) {
-    const result = await checkLinkToAnchorInSameFile(filePath, target, action)
+    const result = checkLinkToAnchorInSameFile(filePath, target, action)
     return result
   }
 
   if (helpers.isLinkToAnchorInOtherFile(target)) {
-    const result = await checkLinkToAnchorInOtherFile(filePath, target, action)
+    const result = checkLinkToAnchorInOtherFile(filePath, target, action)
     return result
   }
 
@@ -87,7 +87,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   }
 }
 
-async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
+function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
@@ -99,7 +99,7 @@ async function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, tar
   }
 }
 
-async function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
+function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
   const link = new UnknownLink(target)
   const absoluteLink = link.absolutify(containingFile, action.configuration.publications)
   const filePath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)

@@ -29,8 +29,8 @@ help:  # prints all make targets
 
 lint:  # lints all files in this codebase
 	echo Text-Runner linters ...
-	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
+	${CURDIR}/../node_modules/.bin/prettier -l .
 
 parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --format=dot &

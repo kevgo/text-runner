@@ -7,6 +7,7 @@ import * as tmp from "tmp-promise"
 import * as util from "util"
 const rimrafp = util.promisify(rimraf)
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 Before(async function () {
   if (process.env.CUCUMBER_PARALLEL) {
     const tempDir = await tmp.dir()
@@ -27,6 +28,7 @@ Before(async function () {
   await fs.mkdir(this.rootDir, { recursive: true })
 })
 
+// eslint-disable-next-line @typescript-eslint/no-misused-promises
 After({ timeout: 20_000 }, async function (scenario) {
   await endChildProcesses()
   if (scenario.result.status === "failed") {

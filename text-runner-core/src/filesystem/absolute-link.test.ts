@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import * as configuration from "../configuration/index"
 import { AbsoluteLink } from "./absolute-link"
 import { RelativeLink } from "./relative-link"

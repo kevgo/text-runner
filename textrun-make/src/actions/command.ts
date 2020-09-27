@@ -2,6 +2,7 @@ import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
+
 import { makefileTargets } from "../helpers/makefile-targets"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */

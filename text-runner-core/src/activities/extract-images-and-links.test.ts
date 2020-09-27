@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import * as ast from "../ast"
 import { extractImagesAndLinks } from "./extract-images-and-links"
 

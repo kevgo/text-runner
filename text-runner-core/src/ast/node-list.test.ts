@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { UserError } from "../errors/user-error"
 import * as ast from "./index"
 

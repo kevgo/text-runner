@@ -1,6 +1,7 @@
 import * as assertNoDiff from "assert-no-diff"
-import { CurrentCommand } from "../helpers/current-command"
 import * as tr from "text-runner-core"
+
+import { CurrentCommand } from "../helpers/current-command"
 import stripAnsi = require("strip-ansi")
 
 export function commandOutput(action: tr.actions.Args): void {

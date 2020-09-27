@@ -1,5 +1,5 @@
-import * as tr from "text-runner-core"
 import * as path from "path"
+import * as tr from "text-runner-core"
 
 export function nameShort(action: tr.actions.Args): void {
   const want = action.region.text()

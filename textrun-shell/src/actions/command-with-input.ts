@@ -1,9 +1,10 @@
 import * as color from "colorette"
 import { createObservableProcess, ObservableProcess } from "observable-process"
+import * as tr from "text-runner-core"
 import { callArgs } from "textrun-extension"
+
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
-import * as tr from "text-runner-core"
 
 interface ProcessInput {
   input: string

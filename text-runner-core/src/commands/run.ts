@@ -1,14 +1,15 @@
+import { EventEmitter } from "events"
+
+import * as actions from "../actions"
 import * as activities from "../activities/index"
+import * as configuration from "../configuration/index"
+import * as events from "../events"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as linkTargets from "../link-targets"
 import * as parser from "../parsers"
 import * as run from "../run"
 import * as workspace from "../workspace"
-import * as actions from "../actions"
-import * as events from "../events"
 import * as command from "./index"
-import * as configuration from "../configuration/index"
-import { EventEmitter } from "events"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {

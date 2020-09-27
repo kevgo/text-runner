@@ -1,7 +1,8 @@
 import * as parse5 from "parse5"
 import * as util from "util"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+
 import * as ast from "../../ast"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { TagMapper } from "../tag-mapper"
 
 /** Parser converts HTML5 source into the standardized AST format. */

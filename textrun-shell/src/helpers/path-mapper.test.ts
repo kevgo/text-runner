@@ -1,5 +1,6 @@
-import { PathMapper } from "./path-mapper"
 import { assert } from "chai"
+
+import { PathMapper } from "./path-mapper"
 
 suite("PathMapper", function () {
   const mappings = {

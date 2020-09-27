@@ -1,6 +1,7 @@
 import * as tr from "text-runner-core"
-import * as formatters from "./formatters"
+
 import * as commands from "./commands"
+import * as formatters from "./formatters"
 
 /**
  * UserProvidedConfiguration describes arguments provided by the user,

@@ -1,7 +1,7 @@
 import * as configuration from "../configuration/index"
+import * as helpers from "../helpers"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
-import * as helpers from "../helpers"
 import { RelativeLink } from "./relative-link"
 
 /**

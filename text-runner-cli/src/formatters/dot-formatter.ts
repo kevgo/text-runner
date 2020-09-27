@@ -1,8 +1,9 @@
 import * as color from "colorette"
 import * as path from "path"
-import * as formatter from "."
 import * as tr from "text-runner-core"
+
 import * as helpers from "../helpers"
+import * as formatter from "."
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements formatter.Formatter {

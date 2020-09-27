@@ -1,13 +1,14 @@
+import * as glob from "glob-promise"
 import * as isGlob from "is-glob"
 import * as path from "path"
+
 import * as configuration from "../configuration/index"
-import * as glob from "glob-promise"
 import { UserError } from "../errors/user-error"
+import * as helpers from "../helpers"
 import { AbsoluteFilePath } from "./absolute-file-path"
 import { filesMatchingGlob } from "./files-matching-glob"
 import { hasDirectory } from "./has-directory"
 import { isMarkdownFile } from "./is-markdown-file"
-import * as helpers from "../helpers"
 
 /**
  * Returns the AbsoluteFilePaths of all files/directories relative to the given sourceDir

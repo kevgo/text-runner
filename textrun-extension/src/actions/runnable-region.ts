@@ -1,7 +1,7 @@
-import * as tr from "text-runner-core"
 import { promises as fs } from "fs"
-import * as path from "path"
 import { createObservableProcess } from "observable-process"
+import * as path from "path"
+import * as tr from "text-runner-core"
 import stripAnsi = require("strip-ansi")
 import { callArgs } from "../helpers/call-args"
 

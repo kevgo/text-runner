@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import * as ast from "./index"
 
 test("ast.Node.scaffold()", function () {

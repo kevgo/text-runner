@@ -1,6 +1,6 @@
+import * as ast from "../../ast/index"
 import { UserError } from "../../errors/user-error"
 import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
-import * as ast from "../../ast/index"
 
 interface Entry {
   endLine: number

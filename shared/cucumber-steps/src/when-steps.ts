@@ -1,8 +1,9 @@
 import { When } from "cucumber"
+import * as textRunner from "text-runner-core"
+
+import { ActivityCollector } from "./activity-collector"
 import * as helpers from "./helpers"
 import { TRWorld } from "./world"
-import * as textRunner from "text-runner-core"
-import { ActivityCollector } from "./activity-collector"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld

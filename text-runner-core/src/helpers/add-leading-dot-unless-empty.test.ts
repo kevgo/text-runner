@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { addLeadingDotUnlessEmpty } from "./add-leading-dot-unless-empty"
 
 test("addLeadingDotUnlessEmpty", function () {

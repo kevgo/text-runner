@@ -1,6 +1,7 @@
 import { assert } from "chai"
-import { standardizeHTMLAttributes } from "./html-parser"
 import * as parse5 from "parse5"
+
+import { standardizeHTMLAttributes } from "./html-parser"
 
 suite("standardizeHTMLAttributes", function () {
   test("values", function () {

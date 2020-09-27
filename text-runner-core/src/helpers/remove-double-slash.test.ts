@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { removeDoubleSlash } from "./remove-double-slash"
 
 test("removeDoubleSlash", function () {

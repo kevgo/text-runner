@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import * as configuration from "./configuration"
 
 suite("CLIConfiguration", function () {

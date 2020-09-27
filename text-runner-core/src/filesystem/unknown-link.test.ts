@@ -1,8 +1,9 @@
 import { assert } from "chai"
+
 import * as configuration from "../configuration/index"
 import { AbsoluteFilePath } from "./absolute-file-path"
-import { UnknownLink } from "./unknown-link"
 import { AbsoluteLink } from "./absolute-link"
+import { UnknownLink } from "./unknown-link"
 
 suite("UnknownLink.absolutify()", function () {
   const tests = [

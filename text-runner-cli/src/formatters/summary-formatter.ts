@@ -1,8 +1,9 @@
 import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import * as formatter from "."
+
 import * as helpers from "../helpers"
+import * as formatter from "."
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements formatter.Formatter {

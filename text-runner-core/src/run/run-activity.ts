@@ -1,13 +1,14 @@
 import humanize from "humanize-string"
 import * as util from "util"
+
 import * as actions from "../actions"
 import { Activity } from "../activities/index"
-import * as configuration from "../configuration/index"
-import * as linkTargets from "../link-targets"
-import { UserError } from "../errors/user-error"
 import * as commands from "../commands/index"
-import { OutputCollector } from "./output-collector"
+import * as configuration from "../configuration/index"
+import { UserError } from "../errors/user-error"
+import * as linkTargets from "../link-targets"
 import { NameRefiner } from "./name-refiner"
+import { OutputCollector } from "./output-collector"
 
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(

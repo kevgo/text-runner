@@ -1,8 +1,9 @@
 import * as color from "colorette"
 import * as path from "path"
+import * as tr from "text-runner-core"
+
 import * as helpers from "../helpers"
 import * as formatter from "."
-import * as tr from "text-runner-core"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {

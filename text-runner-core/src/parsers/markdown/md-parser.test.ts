@@ -1,8 +1,9 @@
 import { assert } from "chai"
 import * as fs from "fs-extra"
 import * as path from "path"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+
 import * as ast from "../../ast"
+import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
 import { parse } from "./parse"
 
 suite("MdParser.parseFile()", function () {

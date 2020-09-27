@@ -1,7 +1,8 @@
 import * as color from "colorette"
 import * as path from "path"
-import { trimDollar } from "../helpers/trim-dollar"
 import * as tr from "text-runner-core"
+
+import { trimDollar } from "../helpers/trim-dollar"
 
 export function executable(action: tr.actions.Args): void {
   const commandName = trimDollar(action.region.text().trim())

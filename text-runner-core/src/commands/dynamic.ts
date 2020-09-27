@@ -1,14 +1,15 @@
+import { EventEmitter } from "events"
+
+import * as actions from "../actions"
 import * as activities from "../activities"
+import * as configuration from "../configuration/index"
+import * as events from "../events/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
 import * as run from "../run"
 import * as workspace from "../workspace"
-import * as actions from "../actions"
 import { Command } from "./command"
-import * as configuration from "../configuration/index"
-import * as events from "../events/index"
-import { EventEmitter } from "events"
 
 export class Dynamic implements Command {
   userConfig: configuration.PartialData

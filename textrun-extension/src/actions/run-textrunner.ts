@@ -1,6 +1,7 @@
+import { createObservableProcess } from "observable-process"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import { createObservableProcess } from "observable-process"
+
 import { callArgs } from "../helpers/call-args"
 
 /** runs Text-Runner in the workspace */

@@ -1,5 +1,6 @@
-import { pathRelativeToDir } from "./path-relative-to-dir"
 import { assert } from "chai"
+
+import { pathRelativeToDir } from "./path-relative-to-dir"
 
 suite("pathRelativeToDir", function () {
   test("in same dir", function () {

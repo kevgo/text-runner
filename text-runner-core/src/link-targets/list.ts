@@ -1,5 +1,5 @@
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import * as ast from "../ast"
+import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { Target, Types } from "./index"
 import { targetURL } from "./target-url"
 

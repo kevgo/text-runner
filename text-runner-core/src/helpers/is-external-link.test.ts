@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { isExternalLink } from "./is-external-link"
 
 test("isExternalLink", function () {

@@ -1,7 +1,7 @@
-import { Action, FunctionRepo } from "./index"
 import * as actions from "../actions"
-import { UserError } from "../errors/user-error"
 import { Activity } from "../activities/index"
+import { UserError } from "../errors/user-error"
+import { Action, FunctionRepo } from "./index"
 
 /** ExternalActionManager provides external actions from their own NPM modules */
 export class ExternalActionManager {

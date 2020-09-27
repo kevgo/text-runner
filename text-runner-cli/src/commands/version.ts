@@ -1,7 +1,7 @@
-import * as tr from "text-runner-core"
-import * as path from "path"
-import { promises as fs } from "fs"
 import { EventEmitter } from "events"
+import { promises as fs } from "fs"
+import * as path from "path"
+import * as tr from "text-runner-core"
 
 export class VersionCommand implements tr.commands.Command {
   emitter: EventEmitter

@@ -1,6 +1,7 @@
 import * as glob from "glob-promise"
-import { AbsoluteFilePath } from "./absolute-file-path"
+
 import * as helpers from "../helpers"
+import { AbsoluteFilePath } from "./absolute-file-path"
 
 export async function filesMatchingGlob(expression: string, sourceDir: string): Promise<AbsoluteFilePath[]> {
   const files = await glob(expression)

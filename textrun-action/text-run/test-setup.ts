@@ -1,6 +1,6 @@
-import * as tr from "text-runner-core"
 import { promises as fs } from "fs"
 import * as path from "path"
+import * as tr from "text-runner-core"
 
 export default async function testSetup(action: tr.actions.Args): Promise<void> {
   const codeBlocks = action.region.getNodesOfTypes("code")

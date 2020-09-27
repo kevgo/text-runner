@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { standardizePath } from "./standardize-path"
 
 suite("standardizePath", function () {

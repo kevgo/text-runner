@@ -1,15 +1,16 @@
+import { EventEmitter } from "events"
 import * as util from "util"
+
 import * as activities from "../activities/index"
+import * as ast from "../ast"
+import * as configuration from "../configuration/index"
+import { UserError } from "../errors/user-error"
+import * as events from "../events/index"
 import { getFileNames } from "../filesystem/get-filenames"
+import * as helpers from "../helpers"
 import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
-import * as ast from "../ast"
-import { UserError } from "../errors/user-error"
-import * as helpers from "../helpers"
 import { Command } from "./command"
-import * as configuration from "../configuration/index"
-import * as events from "../events/index"
-import { EventEmitter } from "events"
 
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 

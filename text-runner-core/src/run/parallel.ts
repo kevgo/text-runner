@@ -1,9 +1,9 @@
+import * as actions from "../actions"
 import * as activities from "../activities/index"
+import * as commands from "../commands/index"
 import * as configuration from "../configuration/index"
 import * as linkTargets from "../link-targets"
 import { runActivity } from "./run-activity"
-import * as actions from "../actions"
-import * as commands from "../commands/index"
 
 /**
  * Executes the given activities in parallel.

@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { unixify } from "./unixify"
 
 test("unifixy", function () {

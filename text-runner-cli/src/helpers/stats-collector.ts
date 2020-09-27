@@ -1,5 +1,6 @@
-import * as helpers from "."
 import * as tr from "text-runner-core"
+
+import * as helpers from "."
 
 /** Statistics about a run of Text-Runner */
 export interface Statistics {

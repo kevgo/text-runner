@@ -1,11 +1,12 @@
+import { EventEmitter } from "events"
+
 import * as actions from "../actions"
 import * as activities from "../activities"
+import * as configuration from "../configuration/index"
+import * as events from "../events/index"
 import { getFileNames } from "../filesystem/get-filenames"
 import * as parsers from "../parsers"
-import * as events from "../events/index"
 import { Command } from "./command"
-import * as configuration from "../configuration/index"
-import { EventEmitter } from "events"
 
 export class Unused implements Command {
   userConfig: configuration.PartialData

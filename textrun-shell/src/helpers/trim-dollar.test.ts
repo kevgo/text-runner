@@ -1,5 +1,6 @@
-import { trimDollar } from "./trim-dollar"
 import { assert } from "chai"
+
+import { trimDollar } from "./trim-dollar"
 
 suite("trimDollar", function () {
   const tests = {

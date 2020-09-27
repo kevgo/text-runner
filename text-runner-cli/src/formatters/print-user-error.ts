@@ -1,6 +1,7 @@
 import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
+
 import * as helpers from "../helpers"
 
 /** prints the given error to the console */

@@ -1,8 +1,9 @@
 import * as color from "colorette"
-import * as tr from "text-runner-core"
-import * as config from "../configuration"
-import * as configFile from "../config-file"
 import { EventEmitter } from "events"
+import * as tr from "text-runner-core"
+
+import * as configFile from "../config-file"
+import * as config from "../configuration"
 
 export class SetupCommand implements tr.commands.Command {
   config: config.Data

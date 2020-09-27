@@ -2,6 +2,7 @@ import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as path from "path"
 import * as tr from "text-runner-core"
+
 import * as helpers from "../helpers"
 import * as formatter from "."
 

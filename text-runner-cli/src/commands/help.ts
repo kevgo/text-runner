@@ -1,8 +1,8 @@
 import * as color from "colorette"
-import * as tr from "text-runner-core"
+import { EventEmitter } from "events"
 import { promises as fs } from "fs"
 import * as path from "path"
-import { EventEmitter } from "events"
+import * as tr from "text-runner-core"
 
 export class HelpCommand implements tr.commands.Command {
   emitter: EventEmitter

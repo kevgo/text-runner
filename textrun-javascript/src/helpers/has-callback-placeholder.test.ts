@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { hasCallbackPlaceholder } from "./has-callback-placeholder"
 
 suite("hasCallbackPlaceholder", function () {

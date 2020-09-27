@@ -1,9 +1,10 @@
 import * as tr from "text-runner-core"
+
 import { appendAsyncCallback } from "../helpers/append-async-callback"
+import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder"
 import { replaceAsyncCallback } from "../helpers/replace-async-callback"
 import { replaceRequireLocalModule } from "../helpers/replace-require-local-module"
 import { replaceVariableDeclarations } from "../helpers/replace-variable-declarations"
-import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder"
 
 type DoneFunction = (err?: Error) => void
 

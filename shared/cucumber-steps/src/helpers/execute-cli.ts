@@ -1,7 +1,8 @@
-import { makeFullPath } from "./make-full-path"
-import { createObservableProcess, ObservableProcess } from "observable-process"
-import { TRWorld } from "../world"
 import * as childProcess from "child_process"
+import { createObservableProcess, ObservableProcess } from "observable-process"
+
+import { TRWorld } from "../world"
+import { makeFullPath } from "./make-full-path"
 
 /**
  * Executes the given command in a subshell.

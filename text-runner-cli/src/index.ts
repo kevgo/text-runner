@@ -1,11 +1,12 @@
 import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
-import * as formatters from "./formatters"
-import * as commands from "./commands"
-import * as helpers from "./helpers"
 import * as tr from "text-runner-core"
+
 import * as cmdLine from "./cmdline"
+import * as commands from "./commands"
 import * as configFile from "./config-file"
+import * as formatters from "./formatters"
+import * as helpers from "./helpers"
 
 cliCursor.hide()
 

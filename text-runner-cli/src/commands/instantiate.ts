@@ -1,7 +1,8 @@
-import * as config from "../configuration"
 import * as tr from "text-runner-core"
-import * as scaffold from "./scaffold"
+
+import * as config from "../configuration"
 import { HelpCommand } from "./help"
+import * as scaffold from "./scaffold"
 import { SetupCommand } from "./setup"
 import { VersionCommand } from "./version"
 

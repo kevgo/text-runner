@@ -1,4 +1,5 @@
 import * as color from "colorette"
+
 import * as helpers from "../helpers"
 
 export function printSummary(stats: helpers.Statistics): void {

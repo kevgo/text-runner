@@ -8,8 +8,9 @@ import * as psTreeR from "ps-tree"
 import * as util from "util"
 import stripAnsi = require("strip-ansi")
 import * as textRunner from "text-runner-core"
-import { TRWorld } from "./world"
+
 import * as helpers from "./helpers"
+import { TRWorld } from "./world"
 
 const psTree = util.promisify(psTreeR)
 

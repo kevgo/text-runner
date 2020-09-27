@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import * as cmdLine from "./cmdline"
 
 suite("parseCmdlineArgs()", function () {

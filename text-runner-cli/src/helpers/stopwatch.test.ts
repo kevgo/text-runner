@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import * as helpers from "."
 
 suite("StopWatch", function () {

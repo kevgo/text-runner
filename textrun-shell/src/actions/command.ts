@@ -1,11 +1,12 @@
 import * as color from "colorette"
-import * as path from "path"
 import { createObservableProcess } from "observable-process"
+import * as path from "path"
+import * as tr from "text-runner-core"
 import * as trExt from "textrun-extension"
+
+import { Configuration } from "../helpers/configuration"
 import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
-import * as tr from "text-runner-core"
-import { Configuration } from "../helpers/configuration"
 
 /**
  * Runs the given commands synchronously on the console.

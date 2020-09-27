@@ -1,6 +1,7 @@
-import { makeFullPath } from "./make-full-path"
 import { assert } from "chai"
 import * as util from "util"
+
+import { makeFullPath } from "./make-full-path"
 
 suite("makeFullPath", function () {
   const linuxTests = {

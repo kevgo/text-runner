@@ -1,4 +1,5 @@
 import { assert } from "chai"
+
 import { replaceRequireLocalModule } from "./replace-require-local-module"
 
 suite("replaceRequireLocalModule", function () {

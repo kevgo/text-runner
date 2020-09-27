@@ -7,17 +7,38 @@ import { Publications } from "./publications"
  * and backfilling with default settings.
  */
 export interface Data {
-  regionMarker: string // the name of the attribute that denotes active regions
-  defaultFile: string // the name of the default filename, set to '' if none is given
-  emptyWorkspace: boolean // whether to empty the workspace before executing tests
-  exclude: string | string[] // list of names or regexes of files to exclude
-  files: string // glob of the files to test
-  publications: Publications // folder mappings
-  online: boolean // whether to skip built-in tests that require a network connection
-  scaffoldLanguage: "js" | "ts" // language in which to scaffold new steps
-  sourceDir: string // the root directory of the source code to test
-  systemTmp: boolean // whether to create the workspace in the system temp directory or locally
-  workspace: string // the root directory of the workspace
+  /** the name of the default filename, set to '' if none is given */
+  defaultFile: string
+
+  /** whether to empty the workspace before executing tests */
+  emptyWorkspace: boolean
+
+  /** list of names or regexes of files to exclude */
+  exclude: string | string[]
+
+  /** glob of the files to test */
+  files: string
+
+  /** whether to skip built-in tests that require a network connection */
+  online: boolean
+
+  /** folder mappings */
+  publications: Publications
+
+  /** the name of the attribute that denotes active regions */
+  regionMarker: string
+
+  /** language in which to scaffold new steps */
+  scaffoldLanguage: "js" | "ts"
+
+  /** the root directory of the source code to test */
+  sourceDir: string
+
+  /** whether to create the workspace in the system temp directory or locally */
+  systemTmp: boolean
+
+  /** the root directory of the workspace */
+  workspace: string
 }
 
 export type PartialData = Partial<Data>

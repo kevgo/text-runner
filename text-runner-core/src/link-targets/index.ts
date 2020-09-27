@@ -6,10 +6,10 @@ export * from "./list"
  * headers or anchors
  */
 export interface Target {
-  type: Types
+  level?: number
   name: string
   text?: string
-  level?: number
+  type: Types
 }
 
 /** types of link targets */

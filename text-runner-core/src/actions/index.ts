@@ -12,11 +12,11 @@ export * from "./name"
 export type Action = (params: Args) => Result
 
 export interface Args {
+  /** return the action with this value to signal that it is being skipped */
+  SKIPPING: 254
+
   /** TextRunner configuration data derived from the config file and CLI switches */
   configuration: config.Data
-
-  /** the AST nodes of the active region which the current action tests */
-  region: ast.NodeList
 
   /** the AST nodes of the active region which the current action tests */
   document: ast.NodeList
@@ -26,6 +26,9 @@ export interface Args {
 
   /** line in the current file at which the currently tested active region starts */
   line: number
+
+  /** all link targets in the current documentation  */
+  linkTargets: linkTargets.List
 
   /** allows printing test output to the user, behaves like console.log */
   log: run.LogFn
@@ -39,11 +42,8 @@ export interface Args {
    */
   name: run.RefineNameFn
 
-  /** all link targets in the current documentation  */
-  linkTargets: linkTargets.List
-
-  /** return the action with this value to signal that it is being skipped */
-  SKIPPING: 254
+  /** the AST nodes of the active region which the current action tests */
+  region: ast.NodeList
 }
 
 /** the result of an action function */

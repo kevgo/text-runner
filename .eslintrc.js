@@ -1,11 +1,12 @@
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "typescript-sort-keys"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:typescript-sort-keys/recommended",
   ],
   rules: {
     "@typescript-eslint/no-explicit-any": "off",

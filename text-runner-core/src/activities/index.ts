@@ -13,10 +13,10 @@ export type List = Activity[]
  */
 export interface Activity {
   actionName: string
+  document: ast.NodeList
   file: AbsoluteFilePath
   line: number
   region: ast.NodeList
-  document: ast.NodeList
 }
 
 /** scaffoldActivity creates a test Activity from the given data */

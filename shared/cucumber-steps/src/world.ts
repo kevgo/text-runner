@@ -10,12 +10,12 @@ export interface TRWorld {
   /** result of the last API call */
   apiResults: ActivityResult[]
 
+  /** whether debug mode is enabled */
+  debug: boolean
+
   /** the currently running subshell process */
   process: ObservableProcess | undefined
 
   /** the test directory */
   rootDir: string
-
-  /** whether debug mode is enabled */
-  debug: boolean
 }

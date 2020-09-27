@@ -6,8 +6,8 @@ import { trimDollar } from "../helpers/trim-dollar"
 import * as tr from "text-runner-core"
 
 interface ProcessInput {
-  textToWait: string | null
   input: string
+  textToWait: string | null
 }
 
 /**

@@ -9,12 +9,23 @@ import { ClosingTagParser } from "./closing-tag-parser"
 import { OpenNodeTracker } from "./open-node-tracker"
 
 export interface MarkdownItNode {
-  type: string // Type of the token, e.g. "paragraph_open"
-  tag: string // HTML tag name, e.g. "p"
-  attrs: [string, string][] | null //HTML attributes. Format: `[[name1, value1], [name2, value2]]`
-  map: [number, number] | null // Source map info. Format: `[line_begin, line_end]`
-  children: MarkdownItNode[] | null // An array of child nodes (inline and img tokens)
-  content: string // In a case of self-closing tag (code, html, fence, etc.), it has contents of this tag.
+  /** HTML attributes. Format: `[[name1, value1], [name2, value2]]` */
+  attrs: [string, string][] | null
+
+  /** An array of child nodes (inline and img tokens) */
+  children: MarkdownItNode[] | null
+
+  /** In a case of self-closing tag (code, html, fence, etc.), it has contents of this tag. */
+  content: string
+
+  /** Source map info. Format: `[line_begin, line_end]` */
+  map: [number, number] | null
+
+  /** HTML tag name, e.g. "p" */
+  tag: string
+
+  /** Type of the token, e.g. "paragraph_open" */
+  type: string
 }
 export type MarkdownItAst = MarkdownItNode[]
 export type MarkdownItNodeAttrs = string[][]

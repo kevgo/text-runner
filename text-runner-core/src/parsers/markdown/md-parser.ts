@@ -389,15 +389,16 @@ export class MarkdownParser {
     if (openingNode.map) {
       closingTagLine = openingNode.map[1]
     }
-    const astNode = new ast.Node({
-      attributes: standardizeMarkdownItAttributes(mdNode.attrs),
-      content: mdNode.content.trim(),
-      file,
-      line: closingTagLine,
-      tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
-      type: mdNode.type as ast.NodeType,
-    })
-    result.push(astNode)
+    result.push(
+      new ast.Node({
+        attributes: standardizeMarkdownItAttributes(mdNode.attrs),
+        content: mdNode.content.trim(),
+        file,
+        line: closingTagLine,
+        tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+        type: mdNode.type as ast.NodeType,
+      })
+    )
     return result
   }
 

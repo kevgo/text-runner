@@ -269,7 +269,7 @@ export class MarkdownParser {
         attributes: {},
         content: "",
         file,
-        line: (mdNode.map || [line, line])[1],
+        line: (mdNode.map || [0, 0])[1],
         tag: "/pre",
         type: "fence_close",
       })
@@ -305,7 +305,7 @@ export class MarkdownParser {
         attributes: {},
         content: "",
         file,
-        line: (mdNode.map || [line, line])[1],
+        line: (mdNode.map || [0, 0])[1],
         tag: "/pre",
         type: "fence_close",
       })
@@ -351,7 +351,7 @@ export class MarkdownParser {
     const parsed = this.htmlParser.parse(mdNode.content, file, line)
     for (const node of parsed) {
       if (node.type.endsWith("_open")) {
-        ont.open(node, (mdNode.map || [line, line])[1])
+        ont.open(node, (mdNode.map || [0, 0])[1])
       }
       if (node.type.endsWith("_close")) {
         ont.close(node.type, file, line)
@@ -378,7 +378,7 @@ export class MarkdownParser {
         type: mdNode.type as ast.NodeType,
       })
     )
-    ont.open(result[0], (mdNode.map || [line, line])[1])
+    ont.open(result[0], (mdNode.map || [0, 0])[1])
     return result
   }
 

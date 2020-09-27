@@ -410,8 +410,8 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: this.tagMapper.tagForType(mdNode.type),
-        type: mdNode.type,
+        tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
+        type: mdNode.type as ast.NodeType,
       })
     )
     return result
@@ -425,8 +425,8 @@ export class MarkdownParser {
         content: mdNode.content.trim(),
         file,
         line,
-        tag: mdNode.tag,
-        type: mdNode.type,
+        tag: mdNode.tag as ast.NodeTag,
+        type: mdNode.type as ast.NodeType,
       })
     )
     return result

@@ -384,10 +384,10 @@ export class MarkdownParser {
 
   private standardizeClosingNode(mdNode: MarkdownItNode, file: AbsoluteFilePath, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
-    const openingNode = ont.close(mdNode.type as ast.NodeType, file, line)
+    const openingNodeEndLine = ont.close(mdNode.type as ast.NodeType, file, line)
     let closingTagLine = line
-    if (openingNode) {
-      closingTagLine = openingNode
+    if (openingNodeEndLine) {
+      closingTagLine = openingNodeEndLine
     }
     result.push(
       new ast.Node({

@@ -40,7 +40,7 @@ Feature: generating a configuration file
       # prefix that makes anchor tags active regions
       regionMarker: type
 
-      # whether to show skipped files
+      # whether to display/emit skipped activities
       showSkipped: false
 
       # whether to run the tests in an external temp directory,

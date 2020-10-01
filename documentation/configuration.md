@@ -46,6 +46,9 @@ format: detailed
 # prefix that makes anchor tags active regions
 regionMarker: type
 
+# whether to display/emit skipped activities
+showSkipped: false
+
 # whether to run the tests in an external temp directory,
 # uses ./tmp if false,
 # you can also provide a custom directory path here

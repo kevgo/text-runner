@@ -10,7 +10,7 @@
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner-cli": "5.0.0-pre1",
+    "text-runner": "5.0.0-pre1",
     "textrun-extension": "0.0.0",
     "textrun-npm": "0.0.0"
   }

@@ -7,6 +7,6 @@
     "text-runner-core": "5.0.0-pre1"
   },
   "devDependencies": {
-    "text-runner-cli": "5.0.0-pre1"
+    "text-runner": "5.0.0-pre1"
   }
 }

@@ -33,9 +33,9 @@ Feature: show-skipped option
     When running "text-run --show-skipped"
     Then it prints:
       """
-      1.md:1 -- Check link
-      1.md:2 -- Check image
-      1.md:3 -- Check link
+      1.md:1 -- skipping: link to http://google.com
+      1.md:2 -- skipping: image http://google.com/foo.png
+      1.md:3 -- link to local file 1.md
       """
 
   Scenario: enable via API
@@ -46,10 +46,10 @@ Feature: show-skipped option
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME | LINE | ACTIVITY   |
-      | 1.md     | 1    | Check link |
-      | 1.md     | 2    | Check link |
-      | 1.md     | 3    | Check link |
+      | FILENAME | LINE | ACTIVITY                        |
+      | 1.md     | 1    | link to http://google.com       |
+      | 1.md     | 2    | image http://google.com/foo.png |
+      | 1.md     | 3    | link to local file 1.md         |
 
   Scenario: disable via CLI
     Given the source code contains a file "text-run.yml" with content:
@@ -59,7 +59,7 @@ Feature: show-skipped option
     When running "text-run --no-show-skipped"
     Then it prints:
       """
-      1.md:1 -- Check link
+      1.md:3 -- link to local file 1.md
       """
     And it doesn't print:
       """

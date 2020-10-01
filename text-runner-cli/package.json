@@ -1,5 +1,5 @@
 {
-  "name": "text-runner-cli",
+  "name": "text-runner",
   "version": "4.0.3",
   "author": "Kevin Goslar",
   "bin": {

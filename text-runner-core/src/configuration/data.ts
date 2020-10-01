@@ -31,6 +31,9 @@ export interface Data {
   /** language in which to scaffold new steps */
   scaffoldLanguage: "js" | "ts"
 
+  /** whether to display/emit skipped tests */
+  showSkipped: boolean
+
   /** the root directory of the source code to test */
   sourceDir: string
 

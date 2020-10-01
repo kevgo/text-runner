@@ -18,15 +18,15 @@ Feature: show-skipped option
     When running Text-Runner
     Then it prints:
       """
-      1.md:3 -- Check link
+      1.md:3 -- link to local file 1.md
       """
     And it doesn't print:
       """
-      1.md:1 -- Check link
+      1.md:1
       """
     And it doesn't print:
       """
-      1.md:2 -- Check image
+      1.md:2
       """
 
   Scenario: enable via CLI

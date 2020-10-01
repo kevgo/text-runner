@@ -44,8 +44,8 @@ export function parse(
   if (cliArgs["system-tmp"] != null) {
     cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
   }
-  if (cliArgs["system-tmp"] != null) {
-    cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
+  if (cliArgs["show-skipped"] != null) {
+    cmdLineConfig.showSkipped = parseSystemTmp(cliArgs["show-skipped"])
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"

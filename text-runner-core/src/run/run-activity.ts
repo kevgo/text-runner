@@ -47,12 +47,14 @@ export async function runActivity(
         output: outputCollector.toString(),
       })
     } else if (actionResult === args.SKIPPING) {
-      emitter.emit("result", {
-        status: "skipped",
-        activity,
-        finalName: nameRefiner.finalName(),
-        output: outputCollector.toString(),
-      })
+      if (configuration.showSkipped) {
+        emitter.emit("result", {
+          status: "skipped",
+          activity,
+          finalName: nameRefiner.finalName(),
+          output: outputCollector.toString(),
+        })
+      }
     } else {
       throw new Error(`unknown return code from action: ${actionResult}`)
     }

@@ -1,21 +1,47 @@
 # Change Log
 
-## Unreleased
+## 5.0.0
 
-#### Internal
-
-- plugins architecture
-- extract non-core actions into plugins
-- organize code into a mono-repository
-
-#### New Features
-
-- TypeScript actions ([#907](https://github.com/kevgo/text-runner/pull/907))
+_Oct 1 2020_
 
 #### Breaking changes
 
+- change marker for active regions from `textrun` to `type`
 - rename "add" command to "scaffold"
   ([#900](https://github.com/kevgo/text-runner/pull/900))
+- always keeps the workspace around, emptying it before test runs
+  ([1276](https://github.com/kevgo/text-runner/pull/1276),
+  [1281](https://github.com/kevgo/text-runner/pull/1281))
+- don't display skipped activities ([#1295](https://github.com/kevgo/text-runner/pull/1295))
+- configuration `system-tmp` no longer accepts a string ([1254](https://github.com/kevgo/text-runner/pull/1254))
+- requires Node 12 or newer ([1231](https://github.com/kevgo/text-runner/pull/1231))
+
+#### New Features
+
+- plugins with reusable custom actions
+- actions can be written in transpiled languages like TypeScript or CoffeeScript
+  ([#907](https://github.com/kevgo/text-runner/pull/907))
+- JavaScript API
+  - provided by the `text-runner-core` package
+  - emits an EventStream ([1274](https://github.com/kevgo/text-runner/pull/1274))
+
+#### Internal
+
+- organization as a mono-repository
+  ([1217](https://github.com/kevgo/text-runner/pull/1217))
+- extract non-core actions into plugins
+- organize code into a mono-repository
+- switch from TSLint to ESLint ([1264](https://github.com/kevgo/text-runner/pull/1264)
+- OpenNodeTracker tracks standardized AST nodes instead of MarkdownIt nodes
+  ([1287](https://github.com/kevgo/text-runner/pull/1287)
+- type-checks unit tests ([1272](https://github.com/kevgo/text-runner/pull/1272)
+- uses namespaces for code classes
+  ([1229]https://github.com/kevgo/text-runner/pull/1229),
+  [1271](https://github.com/kevgo/text-runner/pull/1271))
+- rename `ActivityList` to `Activities` ([1267](https://github.com/kevgo/text-runner/pull/1267))
+- remove dependency on `delay` package ([1263](https://github.com/kevgo/text-runner/pull/1263))
+
+
 
 ## 4.0.3
 

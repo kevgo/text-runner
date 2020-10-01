@@ -7,41 +7,81 @@ _Oct 1 2020_
 #### Breaking changes
 
 - change marker for active regions from `textrun` to `type`
-- rename "add" command to "scaffold"
+  ([1007](https://github.com/kevgo/text-runner/pull/1007))
+- extract most internal actions into plugins and adjust their names
+- rename `add` command to `scaffold`
   ([#900](https://github.com/kevgo/text-runner/pull/900))
+- replace the `offline` option with `online` and run offline by default
+  ([](https://github.com/kevgo/text-runner/pull/1181))
 - always keeps the workspace around, emptying it before test runs
-  ([1276](https://github.com/kevgo/text-runner/pull/1276),
+  ([1091]https://github.com/kevgo/text-runner/pull/1091),
+  [1276](https://github.com/kevgo/text-runner/pull/1276),
   [1281](https://github.com/kevgo/text-runner/pull/1281))
-- don't display skipped activities ([#1295](https://github.com/kevgo/text-runner/pull/1295))
-- configuration `system-tmp` no longer accepts a string ([1254](https://github.com/kevgo/text-runner/pull/1254))
-- requires Node 12 or newer ([1231](https://github.com/kevgo/text-runner/pull/1231))
+- don't display skipped activities
+  ([#1295](https://github.com/kevgo/text-runner/pull/1295))
+- configuration `system-tmp` no longer accepts a string
+  ([1254](https://github.com/kevgo/text-runner/pull/1254))
+- requires Node 12 or newer
+  ([1231](https://github.com/kevgo/text-runner/pull/1231),
+  [1045]https://github.com/kevgo/text-runner/pull/1045))
+- no longer prints file count on CLI
+  ([1203](https://github.com/kevgo/text-runner/pull/1203))
+- shorten `useSystemTempDirectory` config option to `systemTmp`
+  ([1202](https://github.com/kevgo/text-runner/pull/1202))
+- requires proper formatting of CLI arguments
+  ([1197](https://github.com/kevgo/text-runner/pull/1197))
+- `debug` command has subcommands
+  ([1189](https://github.com/kevgo/text-runner/pull/1189))
+- consistently prints relative paths for files everywhere
+  ([1138](https://github.com/kevgo/text-runner/pull/1138))
+- standardize all licenses to ISC
+  ([1049](https://github.com/kevgo/text-runner/pull/1049))
+- make anchors more GitHub compatible
+  ([1023](https://github.com/kevgo/text-runner/pull/1023))
 
 #### New Features
 
 - plugins with reusable custom actions
 - actions can be written in transpiled languages like TypeScript or CoffeeScript
   ([#907](https://github.com/kevgo/text-runner/pull/907))
+- scaffold TypeScript actions
+  ([1190](https://github.com/kevgo/text-runner/pull/1190))
 - JavaScript API
   - provided by the `text-runner-core` package
-  - emits an EventStream ([1274](https://github.com/kevgo/text-runner/pull/1274))
+  - emits an EventStream
+    ([1274](https://github.com/kevgo/text-runner/pull/1274))
+- more guidance on errors
+  ([1187](https://github.com/kevgo/text-runner/pull/1187))
+- logs executed JS on console
+  ([1074](https://github.com/kevgo/text-runner/pull/1074))
+
+#### Bug fixes
+
+- handle newlines inside tags
+  ([1022](https://github.com/kevgo/text-runner/pull/1022))
 
 #### Internal
 
 - organization as a mono-repository
-  ([1217](https://github.com/kevgo/text-runner/pull/1217))
-- extract non-core actions into plugins
-- organize code into a mono-repository
-- switch from TSLint to ESLint ([1264](https://github.com/kevgo/text-runner/pull/1264)
+  ([956]https://github.com/kevgo/text-runner/pull/956),
+  [1102]https://github.com/kevgo/text-runner/pull/1102),
+  [1217](https://github.com/kevgo/text-runner/pull/1217))
+- extract all actions into plugins
+- much faster end-to-end tests using the JS API
+- switch from TSLint to ESLint
+  ([1264](https://github.com/kevgo/text-runner/pull/1264)
 - OpenNodeTracker tracks standardized AST nodes instead of MarkdownIt nodes
   ([1287](https://github.com/kevgo/text-runner/pull/1287)
 - type-checks unit tests ([1272](https://github.com/kevgo/text-runner/pull/1272)
 - uses namespaces for code classes
   ([1229]https://github.com/kevgo/text-runner/pull/1229),
   [1271](https://github.com/kevgo/text-runner/pull/1271))
-- rename `ActivityList` to `Activities` ([1267](https://github.com/kevgo/text-runner/pull/1267))
-- remove dependency on `delay` package ([1263](https://github.com/kevgo/text-runner/pull/1263))
-
-
+- rename `ActivityList` to `Activities`
+  ([1267](https://github.com/kevgo/text-runner/pull/1267))
+- all tests run on Windows now
+  ([1086](https://github.com/kevgo/text-runner/pull/1086))
+- cross-platform Makefiles
+- use more type checks ([1025](https://github.com/kevgo/text-runner/pull/1025))
 
 ## 4.0.3
 

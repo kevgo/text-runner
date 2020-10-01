@@ -12,6 +12,7 @@ export function defaults(): Data {
     online: false,
     publications: new Publications(),
     scaffoldLanguage: "js",
+    showSkipped: false,
     sourceDir: process.cwd(),
     systemTmp: false,
     workspace: "tmp",

@@ -15,7 +15,12 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, showSkipped: true})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
@@ -27,7 +32,12 @@ Feature: skipping an action
         return action.SKIPPING
       }
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, showSkipped: true})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
@@ -39,7 +49,12 @@ Feature: skipping an action
         done(null, action.SKIPPING)
       }
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, showSkipped: true})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
@@ -53,7 +68,12 @@ Feature: skipping an action
         })
       }
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, showSkipped: true})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |

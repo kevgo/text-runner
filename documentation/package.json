@@ -9,7 +9,7 @@
     "remark-cli": "8.0.1",
     "remark-lint": "7.0.1",
     "remark-preset-lint-recommended": "4.0.1",
-    "text-runner-cli": "5.0.0-pre1",
+    "text-runner": "5.0.0-pre1",
     "text-runner-core": "5.0.0-pre1",
     "textrun-extension": "0.0.0",
     "textrun-npm": "0.0.0",

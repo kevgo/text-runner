@@ -12,7 +12,7 @@
     "cucumber": "6.0.5",
     "eol": "0.9.1",
     "mocha": "8.0.1",
-    "text-runner-cli": "5.0.0-pre1",
+    "text-runner": "5.0.0-pre1",
     "textrun-action": "0.0.0",
     "textrun-extension": "0.0.0"
   }

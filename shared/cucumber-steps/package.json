@@ -7,7 +7,7 @@
     "mocha": "8.0.1",
     "ps-tree": "1.2.0",
     "strip-ansi": "6.0.0",
-    "text-runner-core": "4.0.3",
+    "text-runner-core": "5.0.0-pre1",
     "tmp-promise": "3.0.2"
   },
   "license": "ISC",

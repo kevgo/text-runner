@@ -5,14 +5,14 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "text-runner-core": "4.0.3"
+    "text-runner-core": "5.0.0-pre1"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "eol": "0.9.1",
     "mocha": "8.0.1",
-    "text-runner-cli": "4.0.3",
+    "text-runner-cli": "5.0.0-pre1",
     "textrun-action": "0.0.0",
     "textrun-extension": "0.0.0"
   }

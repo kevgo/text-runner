@@ -6,14 +6,14 @@
   "dependencies": {
     "observable-process": "7.0.3",
     "strip-ansi": "6.0.0",
-    "text-runner-core": "4.0.3"
+    "text-runner-core": "5.0.0-pre1"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner-cli": "4.0.3",
+    "text-runner-cli": "5.0.0-pre1",
     "textrun-action": "0.0.0",
     "textrun-extension": "0.0.0",
     "textrun-workspace": "0.0.0"

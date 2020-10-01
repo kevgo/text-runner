@@ -2,7 +2,7 @@
   "name": "custom-action-typescript",
   "version": "0.0.0",
   "devDependencies": {
-    "text-runner-cli": "4.0.3"
+    "text-runner-cli": "5.0.0-pre1"
   },
   "private": true
 }

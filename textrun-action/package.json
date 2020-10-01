@@ -4,9 +4,9 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "text-runner-core": "5.0.0-pre1"
+    "text-runner-core": "5.0.0-pre2"
   },
   "devDependencies": {
-    "text-runner": "5.0.0-pre1"
+    "text-runner": "5.0.0-pre2"
   }
 }

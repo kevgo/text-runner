@@ -40,7 +40,6 @@ parallel: lint  # runs all tests in parallel
 
 prepublish: build  # prepares the code base for publishing
 	rm dist/tsconfig-build.tsbuildinfo
-	find dist -name '*.test.js' | xargs rm
 
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc

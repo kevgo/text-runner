@@ -19,7 +19,7 @@ async function main() {
     const command = commands.instantiate(commandName, userConfig, debugSubcommand)
     const formatter = formatters.instantiate(
       userConfig.formatterName || "detailed",
-      userConfig.sourceDir || ".",
+      userConfig.sourceDir || process.cwd(),
       command
     )
     const statsCollector = new helpers.StatsCollector(command)

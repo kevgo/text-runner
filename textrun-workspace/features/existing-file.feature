@@ -47,7 +47,7 @@ Feature: verifying file content
       mismatching lines:
 
       mismatching expected contentHello world!
-      """"
+      """
 
 
   Scenario: non-existing file
@@ -59,3 +59,18 @@ Feature: verifying file content
     Then it emits these events:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt |
+
+
+  Scenario: setting the base directory
+    Given the workspace contains a file "hello.txt" with content:
+      """
+      Hello world!
+      """
+    And the source code contains a file "subdir/1.md" with content:
+      """
+      Your workspace contains a file <a type="workspace/existing-file" dir="..">_hello.txt_ with content `Hello world!`</a>.
+      """
+    When calling Text-Runner in the "subdir" directory
+    Then it emits these events:
+      | FILENAME | LINE | ACTION                  | ACTIVITY                            |
+      | 1.md     | 1    | workspace/existing-file | verify content of file ../hello.txt |

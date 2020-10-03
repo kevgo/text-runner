@@ -6,6 +6,7 @@ import * as tr from "text-runner-core"
 
 export async function existingFile(action: tr.actions.Args): Promise<void> {
   const filePath = action.region.textInNodeOfType("strong", "em")
+  // TODO: replace with action.configuration.workspace
   const fullPath = path.join(process.cwd(), filePath)
   action.name(`verify content of file ${color.cyan(filePath)}`)
   const expectedContent = action.region.textInNodeOfType("fence", "code")

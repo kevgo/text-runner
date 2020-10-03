@@ -138,11 +138,17 @@ the following documentation snippet:
 
 ```markdown
 <a type="workspace/new-file" dir="subdir">
+
 Please create a file _apples.txt_ with the content `Boskoop`.
+
 </a>
 ```
 
 </a>
 
+<a type="workspace/existing-file">
+
 When executing the documentation, Text-Runner will create a file
-<a type="workspace/existing-file">_subdir/apples.txt_ and content `Boskoop`</a>.
+_subdir/apples.txt_ and content `Boskoop`
+
+</a>.

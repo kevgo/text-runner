@@ -66,11 +66,17 @@ Feature: verifying file content
       """
       Hello world!
       """
-    And the source code contains a file "subdir/1.md" with content:
+    And the workspace contains a directory "subdir"
+    And the source code contains a file "1.md" with content:
       """
       Your workspace contains a file <a type="workspace/existing-file" dir="..">_hello.txt_ with content `Hello world!`</a>.
       """
-    When calling Text-Runner in the "subdir" directory
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, workspace: "tmp/subdir"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
       | FILENAME | LINE | ACTION                  | ACTIVITY                            |
       | 1.md     | 1    | workspace/existing-file | verify content of file ../hello.txt |

@@ -45,7 +45,12 @@ Feature: verifying Make targets
       """
       To build the "foo" executable, run <code type="make/target" cwd="..">foo</code>.
       """
-    When calling Text-Runner in the "subdir" directory
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, sourceDir: config.sourceDir + "/subdir"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS  | ACTIVITY        |
       | 1.md     | 1    | make/target | success | make target foo |

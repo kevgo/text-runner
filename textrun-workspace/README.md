@@ -129,10 +129,10 @@ Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 
 ### specifying the directory
 
-By default, Text-Runner creates the files in the workspace. To create them in a
-different directory, provide a `dir` attribute at the region marker containing
-the relative path to the directory to use. As an example, consider the following
-documentation snippet:
+By default, actions in this plugin create the files in the workspace. To create
+them in a different directory, provide a `dir` attribute at the region marker
+containing the relative path to the directory to use. As an example, consider
+the following documentation snippet:
 
 <a type="extension/runnable-region">
 

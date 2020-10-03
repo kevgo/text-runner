@@ -49,3 +49,13 @@ Feature: verifying Make commands
     Then it emits these events:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE         |
       | 1.md     | 1    | make/command | failed | UserError  | No make command found |
+
+  Scenario: dir attribute
+    Given the source code contains a file "subdir/1.md" with content:
+      """
+      To build the "foo" executable, run <code type="make/command" dir="..">make foo</code>.
+      """
+    When calling Text-Runner in the "subdir" directory
+    Then it emits these events:
+      | FILENAME | LINE | ACTION       | STATUS  | ACTIVITY               |
+      | 1.md     | 1    | make/command | success | make command: make foo |

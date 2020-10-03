@@ -12,7 +12,8 @@ export async function target(action: tr.actions.Args): Promise<void> {
     throw new Error("Empty make target")
   }
   action.name(`make target ${color.cyan(target)}`)
-  const makefile = await fs.readFile(path.join(action.configuration.sourceDir, "Makefile"), "utf8")
+  const makePath = path.join(action.configuration.sourceDir, action.region[0].attributes["cwd"] ?? ".", "Makefile")
+  const makefile = await fs.readFile(makePath, "utf8")
   const targets = makefileTargets(makefile)
   if (!targets.includes(target)) {
     throw new Error(

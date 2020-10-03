@@ -39,3 +39,13 @@ Feature: verifying Make targets
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE     |
       | 1.md     | 1    | make/target | failed | UserError  | Empty make target |
+
+  Scenario: cwd attribute
+    Given the source code contains a file "subdir/1.md" with content:
+      """
+      To build the "foo" executable, run <code type="make/target" cwd="..">foo</code>.
+      """
+    When calling Text-Runner in the "subdir" directory
+    Then it emits these events:
+      | FILENAME | LINE | ACTION      | STATUS  | ACTIVITY        |
+      | 1.md     | 1    | make/target | success | make target foo |

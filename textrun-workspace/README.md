@@ -137,8 +137,9 @@ the following documentation snippet:
 <a type="extension/runnable-region">
 
 ```markdown
-<a type="workspace/new-file" dir="subdir">Please create a file _apples.txt_ with
-the content `Boskoop`.</a>
+<a type="workspace/new-file" dir="subdir">
+Please create a file _apples.txt_ with the content `Boskoop`.
+</a>
 ```
 
 </a>

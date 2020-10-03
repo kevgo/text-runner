@@ -10,7 +10,7 @@ Feature: verifying Make commands
         @echo building bar
       """
 
-  Scenario: works
+  Scenario: working example
     Given the source code contains a file "1.md" with content:
       """
       To build the "foo" executable, run <code type="make/command">make foo</code>.

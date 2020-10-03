@@ -23,10 +23,6 @@ Feature: Appending content to existing workspace files
       """
       hello
       """
-    And the workspace contains a file "subdir/1.md" with content:
-      """
-      Hello world!
-      """
     And the source code contains a file "1.md" with content:
       """
       Append to file <a type="workspace/additional-file-content" dir="..">**foo/bar** the content ` appended content`.</a>.

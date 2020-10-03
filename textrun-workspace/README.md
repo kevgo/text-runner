@@ -57,9 +57,9 @@ just as the user would.
 ### create-file
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
-the workspace. This action assumes that the filename is written in _emphasized_
-or **bold** text and the file content is a code block with one or three
-backticks. As an example, consider the following documentation snippet:
+the workspace. This action assumes that the documentation writes the filename in
+_emphasized_ or **bold** text and the file content as a code block with one or
+three backticks. As an example, consider the following documentation snippet:
 
 <a type="extension/runnable-region">
 
@@ -126,3 +126,29 @@ Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 <a type="workspace/existing-file">The file _hello.txt_ now contains
 `hello world`.</a>
 ```
+
+### specifying the directory
+
+By default, actions in this plugin create the files in the workspace. To create
+them in a different directory, provide a `dir` attribute at the region marker
+containing the relative path to the directory to use. As an example, consider
+the following documentation snippet:
+
+<a type="extension/runnable-region">
+
+```markdown
+<a type="workspace/new-file" dir="subdir">
+
+Please create a file _apples.txt_ with the content `Boskoop`.
+
+</a>
+```
+
+</a>
+
+<a type="workspace/existing-file">
+
+When executing the documentation, Text-Runner will create a file
+_subdir/apples.txt_ and content `Boskoop`
+
+</a>.

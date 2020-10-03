@@ -59,4 +59,4 @@ Feature: verify that the workspace contains a directory
       """
     Then it emits these events:
       | FILENAME | LINE | ACTION                       | ACTIVITY                                     |
-      | 1.md     | 1    | workspace/existing-directory | directory ../subdir2 exists in the workspace |
+      | 1.md     | 2    | workspace/existing-directory | directory ../subdir2 exists in the workspace |

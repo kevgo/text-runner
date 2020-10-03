@@ -69,7 +69,11 @@ Feature: verifying file content
     And the workspace contains a directory "subdir"
     And the source code contains a file "1.md" with content:
       """
-      Your workspace contains a file <a type="workspace/existing-file" dir="..">_hello.txt_ with content `Hello world!`</a>.
+      <a type="workspace/existing-file" dir="..">
+
+      Your workspace contains a file _hello.txt_ with content `Hello world!`
+
+      </a>.
       """
     When calling:
       """

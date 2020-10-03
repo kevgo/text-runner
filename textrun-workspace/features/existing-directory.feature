@@ -48,7 +48,8 @@ Feature: verify that the workspace contains a directory
     Given the workspace contains a directory "subdir2"
     And the source code contains a file "1.md" with content:
       """
-      Your workspace contains a folder <a type="workspace/existing-directory" dir="..">subdir2</a>.
+      Your workspace contains a folder
+      <a type="workspace/existing-directory" dir="..">subdir2</a>.
       """
     When calling:
       """

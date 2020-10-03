@@ -107,3 +107,22 @@ Feature: creating files with content
     Then it emits these events:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' |
+
+
+  Scenario: setting the base directory
+    Given the source code contains a file "creator.md" with content:
+      """
+      <a type="workspace/new-file" dir="subdir">
+
+      Create a file _one.txt_ with content `Hello world!`
+
+      </a>.
+      """
+    When calling Text-Runner
+    Then it emits these events:
+      | FILENAME   | LINE | ACTION             | ACTIVITY                   |
+      | creator.md | 1    | workspace/new-file | create file subdir/one.txt |
+    And the test directory now contains a file "subdir/one.txt" with content:
+      """
+      Hello world!
+      """

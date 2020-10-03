@@ -5,10 +5,11 @@ import * as path from "path"
 import * as tr from "text-runner-core"
 
 export async function existingFile(action: tr.actions.Args): Promise<void> {
-  const filePath = action.region.textInNodeOfType("strong", "em")
+  const fileName = action.region.textInNodeOfType("strong", "em")
+  const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
+  action.name(`verify content of file ${color.cyan(fileRelPath)}`)
   // TODO: replace with action.configuration.workspace
-  const fullPath = path.join(process.cwd(), filePath)
-  action.name(`verify content of file ${color.cyan(filePath)}`)
+  const fullPath = path.join(process.cwd(), fileRelPath)
   const expectedContent = action.region.textInNodeOfType("fence", "code")
   action.log(expectedContent)
   let actualContent = ""
@@ -18,7 +19,7 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
     if (e.code === "ENOENT") {
       const files = await fs.readdir(process.cwd())
       throw new tr.UserError(
-        `file not found: ${filePath}`,
+        `file not found: ${fileRelPath}`,
         `folder "${process.cwd()}" has these files: ${files.join(", ")}`
       )
     } else {
@@ -28,6 +29,6 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
   } catch (err) {
-    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
+    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(fileRelPath))}`, err.message)
   }
 }

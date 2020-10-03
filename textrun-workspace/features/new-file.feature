@@ -112,7 +112,11 @@ Feature: creating files with content
   Scenario: setting the base directory
     Given the source code contains a file "creator.md" with content:
       """
-      creating a file with name <a type="workspace/new-file" dir="subdir">_one.txt_ and content `Hello world!`</a>.
+      <a type="workspace/new-file" dir="subdir">
+
+      Create a file _one.txt_ with content `Hello world!`
+
+      </a>.
       """
     When calling Text-Runner
     Then it emits these events:

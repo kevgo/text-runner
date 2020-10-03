@@ -25,7 +25,11 @@ Feature: Appending content to existing workspace files
       """
     And the source code contains a file "1.md" with content:
       """
-      Append to file <a type="workspace/additional-file-content" dir="..">**foo/bar** the content ` appended content`.</a>.
+      <a type="workspace/additional-file-content" dir="..">
+
+      Append to file **foo/bar** the content ` appended content`.
+
+      </a>
       """
     When calling:
       """
@@ -34,8 +38,8 @@ Feature: Appending content to existing workspace files
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-      | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+      | FILENAME | LINE | ACTION                            | ACTIVITY                  | ERROR MESSAGE |
+      | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |               |
     And the test directory now contains a file "foo/bar" with content:
       """
       hello appended content

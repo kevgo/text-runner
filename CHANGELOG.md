@@ -8,6 +8,8 @@ _Oct 1 2020_
 
 - change marker for active regions from `textrun` to `type`
   ([1007](https://github.com/kevgo/text-runner/pull/1007))
+- change action names from verbs (action to do) to nouns (semantic meaning of
+  document part)
 - extract most internal actions into plugins and adjust their names
 - rename `add` command to `scaffold`
   ([#900](https://github.com/kevgo/text-runner/pull/900))

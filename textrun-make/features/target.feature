@@ -40,7 +40,7 @@ Feature: verifying Make targets
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE     |
       | 1.md     | 1    | make/target | failed | UserError  | Empty make target |
 
-  Scenario: cwd attribute
+  Scenario: "dir" attribute
     Given the source code contains a file "subdir/1.md" with content:
       """
       To build the "foo" executable, run <code type="make/target" cwd="..">foo</code>.

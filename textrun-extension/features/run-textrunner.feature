@@ -12,7 +12,7 @@ Feature: Running Text-Runner inside a Text-Runner session
       """
     When calling:
       """
-      command = new textRunner.commands.Run({...config, emptyWorkspace: false, exclude: "tmp/*.*"})
+      command = new textRunner.commands.Run({...config, emptyWorkspace: false})
       observer = new MyObserverClass(command)
       await command.execute()
       """

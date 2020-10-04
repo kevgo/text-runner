@@ -13,8 +13,7 @@ export async function runTextrunner(action: tr.actions.Args): Promise<void> {
   })
   const activityCollector = new ActivityCollector(command)
   await command.execute()
-  const results = activityCollector.results()
-  for (const result of results) {
+  for (const result of activityCollector.results()) {
     action.log(util.inspect(result))
     if (result.error) {
       throw result.error

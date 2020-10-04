@@ -17,6 +17,7 @@ import { isMarkdownFile } from "./is-markdown-file"
 export async function getFileNames(config: configuration.Data): Promise<AbsoluteFilePath[]> {
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
+  filenames = removeExcludedFiles(filenames, "node_modules")
   return filenames
 }
 
@@ -57,9 +58,6 @@ export async function markdownFilesInDir(dirName: string, sourceDir: string): Pr
  */
 export function removeExcludedFiles(fileList: AbsoluteFilePath[], excluded: string | string[]): AbsoluteFilePath[] {
   const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
-  if (!excludedFilesArray.includes("node_modules")) {
-    excludedFilesArray.push("node_modules")
-  }
   const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
   return fileList.filter(file => {
     for (const excludedRegex of excludedRegexes) {

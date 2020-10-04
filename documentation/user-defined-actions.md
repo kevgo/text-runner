@@ -1,8 +1,8 @@
 # User-defined actions
 
 If the [built-in actions](built-in-actions.md) and
-[external actions](external-actions.md) aren't enough, you can write custom
-actions in JavaScript.
+[available plugins](external-actions.md) aren't enough, you can write your own
+custom actions in JavaScript.
 
 ## Example 1: Hello world
 
@@ -28,7 +28,7 @@ Let's create this file with the content:
 
 ```javascript
 module.exports = function (action) {
-  action.log("Hello world!")
+  action.log("Hello world!!")
 }
 ```
 
@@ -43,7 +43,7 @@ $ text-run
 The formatter displays test progress on the console as the test runs:
 
 <pre type="shell/command-output">
-Hello world!
+Hello world!!
 hello.md:1 -- Hello world
 </pre>
 

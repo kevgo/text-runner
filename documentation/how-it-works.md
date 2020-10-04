@@ -1,53 +1,106 @@
-# How TextRunner works
+# Introduction to Text-Runner
 
-<!-- TODO: start with a simpler example, like converting a code block of JavaScript to <pre>. -->
+TextRunner is a tool that executes semantic rich-text. _Rich text_ is text with
+basic formatting like bold, italic, links, headings, bullet points, embedded
+images, etc. Text-Runner supports rich text in the form of Markdown, optionally
+with embedded HTML. Knowing the _semantics_ of text means understanding what the
+text is talking about. As an example, if you look at a restaurant receipt, you
+know which of the numbers is the net amount, the tax, the tip for the staff, and
+the total amount. You know the _meaning_ of these numbers, i.e. their semantics.
+Semantic text is any text where we understand what various parts of the text
+talk about. Text-Runner _executes_ semantic rich text. It understands what type
+of information the various parts of a rich text document contain and runs code
+for each identified document part.
 
-To make a part of any Markdown file actionable by TextRunner, surround it with
-in an HTML tag that has the attribute `type="[semantic meaning of the part]"`.
-If you need an HTML tag that doesn't change the layout of your text, that's the
-`<a>` tag. As an example, let's say a tutorial tells its reader to create a file
-`config.yml` with the content `foo: bar` on their machine. The markdown code of
-this tutorial might look something like this:
+### Semantic rich text format
 
-```markdown
-## Creating a configuration file
+Text-Runner can derive the semantics of some rich text elements on its own. For
+example, it knows that links are references to other documents or headings
+inside documents and that images reference image files. This allows Text-Runner
+to verify the basic link structure of documents and prevent broken links and
+images.
 
-Please create a file with the name _config.yml_ and the content: `foo: bar`
+You can describe domain-specific semantics using the `type` attribute on HTML
+tags. This attribute contains the type of the document region. As an example,
+let's say we are creating an automated test for a tutorial that teaches people
+how to use the command line of computers. Here is a paragraph from this
+tutorial:
+
+````markdown
+## The "echo" command
+
+Use the _echo_ command to print to the console. Try it out by running:
+
+```
+$ echo Hello world!
 ```
 
-To make this part of the documentation executable, surround it with an `<a>` tag
-that specifies that we want to create a file:
+The terminal prints the output right after the call. Our first Bash program
+greets us with "Hello world!"
+````
+
+At this point, a human reader of the tutorial will run `echo Hello world!` and
+verify the output. To test this tutorial, all we have to do is point out which
+part of the document contains the command to run and which part contains the
+output to look for. We'll use `<a>` tags since they don't change the formatting
+of the document.
+
+<a type="extension/runnable-region">
+
+````markdown
+## The "echo" command
+
+Use the _echo_ command to print to the console. Try it out by running:
+
+<a type="shell/command">
+
+```
+$ echo Hello world!
+```
+
+</a>
+
+The terminal prints the output right after the call. Our first Bash program
+greets us with <a type="shell/command-output">`Hello world!`</a>.
+````
+
+</a>
+
+We have created two active regions in the document. The first active region is
+of type `shell/command`. It contains the shell command that the user should run.
+When executing this tutorial, Text-Runner will run the `command` action from the
+`shell` plugin. This action takes the textual content inside its active region
+and executes it in a shell, exactly like a human user would. The second active
+region contains the output expected when running this command. It takes the
+output from the previous `shell/command` call and compares it against the
+content inside its active region. Ultimately, Text-Runner has performed the same
+steps a human reader of the tutorial would do, using the document content.
+Text-Runner plays the tutorial through. This creates confindence that the
+tutorial still works after making changes to either the tutorial or the product
+that the tutorial describes.
+
+Pro tip: if you have basic familiarity with HTML, you could simplify the above
+paragraph to:
 
 <a type="extension/runnable-region">
 
 ```markdown
-## Creating a configuration file
+## The "echo" command
 
-<a type="workspace/new-file">
+Use the _echo_ command to print to the console. Try it out by running:
 
-Please create a file with the name _config.yml_ and the content: `foo: bar`
+<pre type="shell/command">
+$ echo Hello world!
+</pre>
 
-</a>
+The terminal prints the output right after the call. Our first Bash program
+greets us with <code type="shell/command-output">Hello world!</code>.
 ```
 
 </a>
 
-TextRunner calls parts of text documents that are marked up like this _active
-blocks_. The attribute `type="workspace/new-file"` tells TextRunner to run the
-`workspace/new-file` action here, which creates a file in TextRunner's working
-directory. The built-in implementation of the `create-file` action takes the
-name of the file to create from a bold or italic section inside the `<a>` tag,
-and the content to write into the file from a code block. Text outside of `<a>`
-tags is ignored by TextRunner.
+### Further reading
 
-If you run `text-run` on the command line to test this document, TextRunner
-creates a file <a type="workspace/existing-file">_config.yml_ with the content
-`foo: bar`</a> in the `tmp` subfolder of your current directory.
-
-<hr>
-
-Read more about:
-
-- the other [built-in actions](built-in-actions.md)
-- writing your own [user-defined actions](user-defined-actions.md)
+- the [built-in actions](built-in-actions.md)
+- writing your own [custom actions](user-defined-actions.md)
 - [configuring](configuration.md) TextRunner

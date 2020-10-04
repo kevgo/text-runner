@@ -13,7 +13,7 @@ You need to have these tools installed:
 
 To get the codebase into a runnable state after cloning:
 
-- <code type="make/command">make setup</code> to install dependencies
+- <code type="make/command" dir="..">make setup</code> to install dependencies
 - optionally add `./bin` and `./node_modules/.bin` to the `PATH` environment
   variable
 
@@ -66,7 +66,7 @@ To debug a Cucumber step implementation in VSCode:
 
 ## Updating dependencies
 
-<pre type="make/command">
+<pre type="make/command" dir="..">
 make update-all
 </pre>
 
@@ -75,7 +75,7 @@ versions.
 
 ## Deployment
 
-- make a global search-and-replace for `4.0.3` and replace it with the new
+- make a global search-and-replace for "5.0.0-pre1" and replace it with the new
   version
 - get this change into the master branch
-- in [text-runner](text-runner/): run `npm publish`
+- run `npm publish` in all code bases

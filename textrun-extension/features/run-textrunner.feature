@@ -1,4 +1,3 @@
-@debug
 Feature: Running Text-Runner inside a Text-Runner session
 
   Scenario: working example

@@ -9,9 +9,9 @@ Feature: Execute regions of semantic Markdown
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME  | LINE | ACTION                    | ACTIVITY                        |
-      | source.md | 1    | extension/runnable-region | execute Markdown in Text-Runner |
-      | source.md | 2    | test                      | Test                            |
+      | FILENAME  | LINE | ACTION                    | ACTIVITY                        | STATUS  |
+      | source.md | 1    | extension/runnable-region | execute Markdown in Text-Runner | success |
+      | source.md | 2    | test                      | Test                            | success |
 
   Scenario: missing content
     Given the source code contains a file "source.md" with content:

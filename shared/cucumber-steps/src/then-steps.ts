@@ -25,6 +25,9 @@ export interface ExecuteResultLine {
   output?: string // what the action printed via action.log()
   status?: "success" | "failed" | "skipped" | "warning"
 }
+Then("explode", function () {
+  throw new Error("BOOM")
+})
 
 Then("it executes {int} test", function (count) {
   const world = this as TRWorld

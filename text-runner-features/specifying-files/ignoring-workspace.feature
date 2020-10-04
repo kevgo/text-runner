@@ -1,4 +1,3 @@
-@debug
 Feature: ignoring workspace files
 
   Scenario: a code base with existing workspace files

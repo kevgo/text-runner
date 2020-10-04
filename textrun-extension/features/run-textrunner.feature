@@ -1,3 +1,4 @@
+@debug
 Feature: Running Text-Runner inside a Text-Runner session
 
   Scenario: working example
@@ -9,10 +10,15 @@ Feature: Running Text-Runner inside a Text-Runner session
       """
       <a type="extension/run-textrunner"> </a>
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, emptyWorkspace: false})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
-      | FILENAME | LINE | ACTION                   | ACTIVITY                         |
-      | 1.md     | 1    | extension/run-textrunner | Running Text-Runner in workspace |
+      | FILENAME | LINE | ACTION                   | ACTIVITY                         | STATUS  | ERROR MESSAGE |
+      | 1.md     | 1    | extension/run-textrunner | Running Text-Runner in workspace | success |               |
 
 
   Scenario: error in Markdown to run
@@ -24,7 +30,12 @@ Feature: Running Text-Runner inside a Text-Runner session
       """
       <a type="extension/run-textrunner"> </a>
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, emptyWorkspace: false})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it emits these events:
-      | FILENAME | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE                                        |
-      | 1.md     | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | the nested Text-Runner instance exited with code 127 |
+      | FILENAME | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE        |
+      | 1.md     | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | unknown action: zonk |

@@ -54,3 +54,20 @@ again.
 <a type="extension/run-textrunner">
 
 Text-Runner verifies that the `Makefile` contains the `foo` target.
+
+### Specifying the directory of the Makefile
+
+If the Makefile is not in the root directory of your documentation base, you can
+specify its directory using the `dir` attribute.
+<a type="workspace/new-file" dir="foo"> As an example, this _README.md_ file
+tells Text-Runner to use the Makefile in the parent directory of the
+documentation base:
+
+```html
+Build the foo package by running
+<code type="make/command" dir="..">make foo</code>
+```
+
+</a>
+
+<a type="extension/run-textrunner" dir="foo">

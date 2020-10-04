@@ -39,3 +39,18 @@ Feature: verifying Make targets
     Then it emits these events:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE     |
       | 1.md     | 1    | make/target | failed | UserError  | Empty make target |
+
+  Scenario: "dir" attribute
+    Given the source code contains a file "subdir/1.md" with content:
+      """
+      To build the "foo" executable, run <code type="make/target" dir="..">foo</code>.
+      """
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, sourceDir: config.sourceDir + "/subdir"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it emits these events:
+      | FILENAME | LINE | ACTION      | STATUS  | ACTIVITY        |
+      | 1.md     | 1    | make/target | success | make target foo |

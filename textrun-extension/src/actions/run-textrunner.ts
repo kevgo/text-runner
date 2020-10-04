@@ -1,3 +1,4 @@
+import * as path from "path"
 import * as tr from "text-runner-core"
 import * as util from "util"
 
@@ -7,7 +8,7 @@ import { ActivityCollector } from "../../../shared/cucumber-steps/dist/activity-
 export async function runTextrunner(action: tr.actions.Args): Promise<void> {
   action.name("Running Text-Runner in workspace")
   const command = new tr.commands.Run({
-    sourceDir: action.configuration.workspace,
+    sourceDir: path.join(action.configuration.workspace, action.region[0].attributes["dir"] || "."),
     workspace: ".",
     emptyWorkspace: false,
   })

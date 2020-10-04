@@ -43,7 +43,7 @@ Feature: verifying Make targets
   Scenario: "dir" attribute
     Given the source code contains a file "subdir/1.md" with content:
       """
-      To build the "foo" executable, run <code type="make/target" cwd="..">foo</code>.
+      To build the "foo" executable, run <code type="make/target" dir="..">foo</code>.
       """
     When calling:
       """

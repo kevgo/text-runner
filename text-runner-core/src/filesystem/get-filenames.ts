@@ -18,6 +18,7 @@ export async function getFileNames(config: configuration.Data): Promise<Absolute
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   filenames = removeExcludedFiles(filenames, "node_modules")
+  filenames = removeExcludedFiles(filenames, config.workspace)
   return filenames
 }
 

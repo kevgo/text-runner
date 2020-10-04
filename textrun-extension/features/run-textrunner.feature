@@ -5,14 +5,14 @@ Feature: Running Text-Runner inside a Text-Runner session
       """
       <a type="test"> </a>
       """
-    And the source code contains a file "1.md" with content:
+    And the source code contains a file "source.md" with content:
       """
       <a type="extension/run-textrunner"> </a>
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                   | ACTIVITY                         |
-      | 1.md     | 1    | extension/run-textrunner | Running Text-Runner in workspace |
+      | FILENAME  | LINE | ACTION                   | ACTIVITY                         |
+      | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace |
 
 
   Scenario: error in Markdown to run
@@ -20,11 +20,11 @@ Feature: Running Text-Runner inside a Text-Runner session
       """
       <a type="zonk"> </a>
       """
-    And the source code contains a file "1.md" with content:
+    And the source code contains a file "source.md" with content:
       """
       <a type="extension/run-textrunner"> </a>
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE                                        |
-      | 1.md     | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | the nested Text-Runner instance exited with code 127 |
+      | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE                                        |
+      | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | the nested Text-Runner instance exited with code 127 |

@@ -44,9 +44,7 @@ Feature: Running Text-Runner inside a Text-Runner session
     Given the workspace contains a file "subdir/workspace.md" with content:
       """
       <a type="javascript/runnable">
-      const fs = require("fs")
-      const util = require("util")
-      const files = fs.readdirSync(".").join(", ")
+      const files = require("fs").readdirSync(".").join(", ")
       if (files !== "workspace.md") {
         throw new Error("unexpected files: " + files)
       }

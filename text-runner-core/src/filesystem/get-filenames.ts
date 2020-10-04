@@ -18,6 +18,12 @@ export async function getFileNames(config: configuration.Data): Promise<Absolute
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   filenames = removeExcludedFiles(filenames, "node_modules")
+  if (!config.emptyWorkspace) {
+    const relativeWorkspace = path.relative(config.sourceDir, config.workspace)
+    if (relativeWorkspace !== "") {
+      filenames = removeExcludedFiles(filenames, relativeWorkspace)
+    }
+  }
   return filenames
 }
 

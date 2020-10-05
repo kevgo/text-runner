@@ -5188,15 +5188,6 @@ object.pick@^1.3.0:
   dependencies:
     isobject "^3.0.1"
 
-observable-process@8.0.0-pre3:
-  version "8.0.0-pre3"
-  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-8.0.0-pre3.tgz#482ee1e2977076032980cd74e371db994ad35591"
-  integrity sha512-wZ+Zpux0Pz8gQfvahEzovBbXmCsJXFmDTnnMhiSwvPQvmFLp6xFCyVoXSulotvqjQJXKh1x8lfmwsJc2sPJEkw==
-  dependencies:
-    merge-stream "2.0.0"
-    string-argv "0.3.1"
-    text-stream-search "4.0.3"
-
 observable-process@8.0.0-pre4:
   version "8.0.0-pre4"
   resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-8.0.0-pre4.tgz#ca6e7597fd190f576327cfab855a5359156eda37"

@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import { createObservableProcess } from "observable-process"
+import * as observableProcess from "observable-process"
 import * as tr from "text-runner-core"
 import * as trExt from "textrun-extension"
 
@@ -20,7 +20,7 @@ export function server(action: tr.actions.Args): void {
     .join(" && ")
   action.name(`starting a server process: ${color.bold(color.cyan(commandsToRun))}`)
   CurrentServer.instance().set(
-    createObservableProcess(trExt.callArgs(commandsToRun, process.platform), {
+    observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
       cwd: action.configuration.workspace,
     })
   )

@@ -11,7 +11,7 @@ export function commandOutput(action: tr.actions.Args): void {
     .split("\n")
     .map((line: string) => line.trim())
     .filter((line: string) => line)
-  const actualOutput = stripAnsi(CurrentCommand.instance().output.fullText())
+  const actualOutput = stripAnsi(CurrentCommand.instance().combinedText)
   const actualLines = actualOutput
     .split("\n")
     .map(line => line.trim())

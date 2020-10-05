@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import { createObservableProcess, ObservableProcess } from "observable-process"
+import * as observableProcess from "observable-process"
 import * as tr from "text-runner-core"
 import { callArgs } from "textrun-extension"
 
@@ -34,18 +34,18 @@ export async function commandWithInput(action: tr.actions.Args): Promise<void> {
     input = getInput(action.region)
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
-  const processor = createObservableProcess(callArgs(commandsToRun, process.platform), {
+  const processor = observableProcess.start(callArgs(commandsToRun, process.platform), {
     cwd: action.configuration.workspace,
   })
-  CurrentCommand.set(processor)
   for (const inputLine of input) {
     await enter(processor, inputLine)
   }
-  await processor.waitForEnd()
+  const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess
+  CurrentCommand.set(finished)
   action.log(processor.output.fullText())
 }
 
-async function enter(processor: ObservableProcess, input: ProcessInput) {
+async function enter(processor: observableProcess.RunningProcess, input: ProcessInput) {
   processor.stdin.write(input.input + "\n")
   if (input.textToWait) {
     await processor.stdout.waitForText(input.textToWait)

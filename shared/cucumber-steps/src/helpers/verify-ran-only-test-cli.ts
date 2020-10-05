@@ -8,10 +8,10 @@ import { TRWorld } from "../world"
 
 export function verifyRanOnlyTestsCLI(filenames: string | string[][], world: TRWorld): void {
   const flattened = flatten(filenames)
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  const standardizedOutput = world.process.output.fullText().replace(/\\/g, "/")
+  const standardizedOutput = world.finishedProcess.combinedText.replace(/\\/g, "/")
 
   // verify the given tests have run
   for (const filename of flattened) {

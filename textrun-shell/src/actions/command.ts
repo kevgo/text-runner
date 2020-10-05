@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import { createObservableProcess } from "observable-process"
+import * as observableProcess from "observable-process"
 import * as path from "path"
 import * as tr from "text-runner-core"
 import * as trExt from "textrun-extension"
@@ -27,14 +27,14 @@ export async function command(action: tr.actions.Args): Promise<void> {
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
-  const processor = createObservableProcess(trExt.callArgs(commandsToRun, process.platform), {
+  const processor = observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
     cwd: action.configuration.workspace,
   })
   // this is also used in the "verify-run-console-output" step
-  CurrentCommand.set(processor)
-  await processor.waitForEnd()
-  action.log(processor.output.fullText())
-  if (processor.exitCode !== 0) {
-    throw new Error(`command "${commandsToRun}" failed with exit code ${processor.exitCode}`)
+  const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess
+  action.log(finished.combinedText)
+  CurrentCommand.set(finished)
+  if (finished.exitCode !== 0) {
+    throw new Error(`command "${commandsToRun}" failed with exit code ${finished.exitCode}`)
   }
 }

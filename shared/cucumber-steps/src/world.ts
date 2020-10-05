@@ -1,4 +1,4 @@
-import { ObservableProcess } from "observable-process"
+import * as observableProcess from "observable-process"
 import * as textRunner from "text-runner-core"
 
 import { ActivityResult } from "./activity-collector"
@@ -14,8 +14,8 @@ export interface TRWorld {
   /** whether debug mode is enabled */
   debug: boolean
 
-  /** the currently running subshell process */
-  process: ObservableProcess | undefined
+  /** statistics about the subshell process after it finished */
+  finishedProcess: observableProcess.FinishedProcess | undefined
 
   /** the test directory */
   rootDir: string

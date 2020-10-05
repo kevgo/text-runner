@@ -19,7 +19,8 @@ export async function command(action: tr.actions.Args): Promise<void> {
   if (target === "") {
     throw new Error(`No make target found in "${command}"`)
   }
-  const makefile = await fs.readFile(path.join(action.configuration.sourceDir, "Makefile"), "utf8")
+  const makePath = path.join(action.configuration.sourceDir, action.region[0].attributes["dir"] || ".", "Makefile")
+  const makefile = await fs.readFile(makePath, "utf8")
   const commands = makefileTargets(makefile).map((target: string) => `make ${target}`)
   if (!commands.includes(command)) {
     throw new Error(

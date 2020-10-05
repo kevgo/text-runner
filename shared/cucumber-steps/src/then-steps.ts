@@ -25,6 +25,9 @@ export interface ExecuteResultLine {
   output?: string // what the action printed via action.log()
   status?: "success" | "failed" | "skipped" | "warning"
 }
+Then("explode", function () {
+  throw new Error("BOOM")
+})
 
 Then("it executes {int} test", function (count) {
   const world = this as TRWorld
@@ -185,10 +188,10 @@ Then("it creates the file {string} with content:", async function (filename, exp
 
 Then("it doesn't print:", function (expectedText: string) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.process.output.fullText())
+  const output = stripAnsi(world.finishedProcess.combinedText)
   if (new RegExp(expectedText).test(output)) {
     throw new Error(`expected to not find regex '${expectedText}' in '${output}'`)
   }
@@ -196,10 +199,10 @@ Then("it doesn't print:", function (expectedText: string) {
 
 Then("it prints:", function (expectedText: string) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  let output = stripAnsi(world.process.output.fullText().trim())
+  let output = stripAnsi(world.finishedProcess.combinedText.trim())
   if (process.platform === "win32") {
     output = output.replace(/\\/g, "/")
   }
@@ -210,19 +213,19 @@ Then("it prints:", function (expectedText: string) {
 
 Then("it prints the text:", function (expectedText: string) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.process.output.fullText()).trim()
+  const output = stripAnsi(world.finishedProcess.combinedText).trim()
   assert.equal(output, expectedText.trim())
 })
 
 Then("it runs {int} test", function (count: number) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  assert.include(stripAnsi(world.process.output.fullText()), ` ${count} activities`)
+  assert.include(stripAnsi(world.finishedProcess.combinedText), ` ${count} activities`)
 })
 
 Then("it executes in a global temp directory", function () {
@@ -237,36 +240,36 @@ Then("it executes in the global {string} temp directory", function (dirName: str
 
 Then("it runs in a global temp directory", function () {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(world.process.output.fullText(), world.rootDir)
+  assert.notInclude(world.finishedProcess.combinedText, world.rootDir)
 })
 
 Then("it runs in the global {string} temp directory", function (dirName: string) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(world.process.output.fullText(), path.join(world.rootDir, dirName))
+  assert.notInclude(world.finishedProcess.combinedText, path.join(world.rootDir, dirName))
 })
 
 Then("it runs in the local {string} directory", function (dirName) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process found")
   }
-  const have = world.process.output.fullText()
+  const have = world.finishedProcess.combinedText
   const want = path.join(world.rootDir, dirName)
   assert.include(have, want)
 })
 
 Then("it runs in the current working directory", function () {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.match(world.process.output.fullText().trim(), new RegExp(`${world.rootDir}\\b`))
+  assert.match(world.finishedProcess.combinedText.trim(), new RegExp(`${world.rootDir}\\b`))
 })
 
 Then("it runs (only )the tests in {string}", function (filename) {
@@ -281,10 +284,10 @@ Then("it runs only the tests in:", function (table: cucumber.TableDefinition) {
 
 Then("it runs the console command {string}", function (command: string) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  assert.include(stripAnsi(world.process.output.fullText()), `running console command: ${command}`)
+  assert.include(stripAnsi(world.finishedProcess.combinedText), `running console command: ${command}`)
 })
 
 Then("it runs without errors", function () {
@@ -316,10 +319,10 @@ Then("it signals:", function (table: cucumber.TableDefinition) {
   if (hash["EXIT CODE"]) {
     throw new Error("Verifying normal output but table contains an exit code")
   }
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process results found")
   }
-  const actual = helpers.standardizePath(stripAnsi(world.process.output.fullText()))
+  const actual = helpers.standardizePath(stripAnsi(world.finishedProcess.combinedText))
   if (!actual.includes(expectedText)) {
     throw new Error(`Mismatching output!
 Looking for: ${expectedText}
@@ -331,12 +334,12 @@ ${actual}
 
 Then("the call fails with the error:", function (expectedError) {
   const world = this as TRWorld
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.process.output.fullText())
+  const output = stripAnsi(world.finishedProcess.combinedText)
   assert.include(output, expectedError)
-  assert.equal(world.process.exitCode, 1)
+  assert.equal(world.finishedProcess.exitCode, 1)
 })
 
 Then("the {string} directory is now deleted", async function (directoryPath: string) {
@@ -368,10 +371,10 @@ Then("the test workspace now contains a directory {string}", async function (nam
 Then("the test fails with:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   const hash = table.rowsHash()
-  if (!world.process) {
+  if (!world.finishedProcess) {
     throw new Error("no process result found")
   }
-  const output = stripAnsi(world.process.output.fullText())
+  const output = stripAnsi(world.finishedProcess.combinedText)
   let expectedHeader
   if (hash.FILENAME && hash.LINE) {
     expectedHeader = `${hash.FILENAME}:${hash.LINE}`
@@ -385,7 +388,7 @@ Then("the test fails with:", function (table: cucumber.TableDefinition) {
   }
   assert.include(output, expectedHeader)
   assert.match(output, new RegExp(hash["ERROR MESSAGE"]))
-  assert.equal(world.process.exitCode, parseInt(hash["EXIT CODE"], 10))
+  assert.equal(world.finishedProcess.exitCode, parseInt(hash["EXIT CODE"], 10))
 })
 
 Then("there are no child processes running", async function () {

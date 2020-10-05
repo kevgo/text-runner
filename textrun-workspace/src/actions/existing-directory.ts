@@ -9,16 +9,17 @@ import * as tr from "text-runner-core"
  * contains the given directory.
  */
 export async function existingDirectory(action: tr.actions.Args): Promise<void> {
-  const directory = action.region.text()
-  const fullPath = path.join(action.configuration.workspace, directory)
-  action.name(`directory ${color.cyan(directory)} exists in the workspace`)
+  const dirName = action.region.text()
+  const dirRelName = path.join(action.region[0].attributes["dir"] || ".", dirName)
+  action.name(`directory ${color.cyan(dirRelName)} exists in the workspace`)
+  const fullPath = path.join(action.configuration.workspace, dirRelName)
   let stats: fs.Stats
   try {
     stats = await fsp.lstat(fullPath)
   } catch (err) {
-    throw new Error(`directory ${color.cyan(color.bold(directory))} does not exist in the workspace`)
+    throw new Error(`directory ${color.cyan(color.bold(dirRelName))} does not exist in the workspace`)
   }
   if (!stats.isDirectory()) {
-    throw new Error(`${color.cyan(directory)} exists but is not a directory`)
+    throw new Error(`${color.cyan(dirRelName)} exists but is not a directory`)
   }
 }

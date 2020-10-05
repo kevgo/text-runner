@@ -47,7 +47,7 @@ Feature: verifying file content
       mismatching lines:
 
       mismatching expected contentHello world!
-      """"
+      """
 
 
   Scenario: non-existing file
@@ -59,3 +59,28 @@ Feature: verifying file content
     Then it emits these events:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt |
+
+
+  Scenario: setting the base directory
+    Given the workspace contains a file "hello.txt" with content:
+      """
+      Hello world!
+      """
+    And the workspace contains a directory "subdir"
+    And the source code contains a file "1.md" with content:
+      """
+      <a type="workspace/existing-file" dir="..">
+
+      Your workspace contains a file _hello.txt_ with content `Hello world!`
+
+      </a>.
+      """
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, workspace: "tmp/subdir"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it emits these events:
+      | FILENAME | LINE | ACTION                  | ACTIVITY                            |
+      | 1.md     | 1    | workspace/existing-file | verify content of file ../hello.txt |

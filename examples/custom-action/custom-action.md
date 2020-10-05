@@ -1,4 +1,4 @@
-Let's run a fuw custom actions:
+Let's run a few custom actions:
 
 <a type="hello-world-sync"></a>
 

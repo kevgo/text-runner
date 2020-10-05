@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "observable-process": "7.0.3",
+    "observable-process": "8.0.0-pre3",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.0-pre1"
   },
@@ -13,7 +13,7 @@
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
-    "textrun-action": "0.0.0",
-    "text-runner": "5.0.0-pre1"
+    "text-runner": "5.0.0-pre1",
+    "textrun-action": "0.0.0"
   }
 }

@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "observable-process": "7.0.3",
+    "observable-process": "8.0.0-pre3",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.0-pre1"
   },

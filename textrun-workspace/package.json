@@ -1,18 +1,18 @@
 {
   "name": "textrun-workspace",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Text-Runner actions for the Text-Runner workspace",
   "main": "dist/index.js",
   "license": "ISC",
   "dependencies": {
-    "text-runner-core": "5.0.0-pre1"
+    "text-runner-core": "5.0.0-pre2"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
-    "text-runner": "5.0.0-pre1",
-    "textrun-action": "0.0.0",
-    "textrun-extension": "0.0.0"
+    "text-runner": "5.0.0-pre2",
+    "textrun-action": "0.0.1",
+    "textrun-extension": "0.0.1"
   }
 }

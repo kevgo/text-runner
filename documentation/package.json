@@ -9,13 +9,13 @@
     "remark-cli": "8.0.1",
     "remark-lint": "7.0.1",
     "remark-preset-lint-recommended": "4.0.1",
-    "text-runner": "5.0.0-pre1",
-    "text-runner-core": "5.0.0-pre1",
-    "textrun-extension": "0.0.0",
-    "textrun-make": "0.0.0",
-    "textrun-npm": "0.0.0",
-    "textrun-shell": "0.0.0",
-    "textrun-workspace": "0.0.0"
+    "text-runner": "5.0.0-pre2",
+    "text-runner-core": "5.0.0-pre2",
+    "textrun-extension": "0.0.1",
+    "textrun-make": "0.0.1",
+    "textrun-npm": "0.0.1",
+    "textrun-shell": "0.0.1",
+    "textrun-workspace": "0.0.1"
   },
   "license": "ISC",
   "private": true

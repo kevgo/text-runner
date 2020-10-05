@@ -14,8 +14,8 @@
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre2",
-    "textrun-action": "0.0.0",
-    "textrun-extension": "0.0.0",
-    "textrun-workspace": "0.0.0"
+    "textrun-action": "0.0.1",
+    "textrun-extension": "0.0.1",
+    "textrun-workspace": "0.0.1"
   }
 }

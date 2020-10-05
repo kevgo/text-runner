@@ -1,11 +1,11 @@
-import { ObservableProcess } from "observable-process"
+import * as observableProcess from "observable-process"
 
 /** CurrentServer provides global access to the currently running server process. */
 export class CurrentServer {
   static instance(): CurrentServer {
     return instance
   }
-  process: ObservableProcess | null
+  process: observableProcess.RunningProcess | null
 
   constructor() {
     this.process = null
@@ -23,7 +23,7 @@ export class CurrentServer {
     this.process = null
   }
 
-  set(process: ObservableProcess): void {
+  set(process: observableProcess.RunningProcess): void {
     this.process = process
   }
 }

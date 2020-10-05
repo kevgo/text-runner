@@ -1,17 +1,17 @@
-import { ObservableProcess } from "observable-process"
+import * as observableProcess from "observable-process"
 
 /** CurrentCommand provides global access to the currently running console command. */
 export class CurrentCommand {
-  static instance(): ObservableProcess {
+  static instance(): observableProcess.FinishedProcess {
     if (!instance) {
       throw new Error("no instance")
     }
     return instance
   }
 
-  static set(process: ObservableProcess): void {
+  static set(process: observableProcess.FinishedProcess): void {
     instance = process
   }
 }
 
-let instance: ObservableProcess | null = null
+let instance: observableProcess.FinishedProcess | null = null

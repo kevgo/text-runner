@@ -5197,6 +5197,15 @@ observable-process@8.0.0-pre3:
     string-argv "0.3.1"
     text-stream-search "4.0.3"
 
+observable-process@8.0.0-pre4:
+  version "8.0.0-pre4"
+  resolved "https://registry.yarnpkg.com/observable-process/-/observable-process-8.0.0-pre4.tgz#ca6e7597fd190f576327cfab855a5359156eda37"
+  integrity sha512-FdWz2cBDadXagebUo3XlcDYkgPqdBzaTSc6ljIMxtshdBfJFYHrwEvyQyrzHTBt68dLdR/9bAK4dIXeGATcJqA==
+  dependencies:
+    merge-stream "2.0.0"
+    string-argv "0.3.1"
+    text-stream-search "4.0.3"
+
 octokit-pagination-methods@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/octokit-pagination-methods/-/octokit-pagination-methods-1.1.0.tgz#cf472edc9d551055f9ef73f6e42b4dbb4c80bea4"

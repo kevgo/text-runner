@@ -102,7 +102,7 @@ list-involved:  # builds all the codebases needed to test the changes in this br
 list-open:  # displays the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents -- pwd
 
-publish-all:  # publishes all code bases
+publish-all: clean-all build-all  # publishes all code bases
 	${CURDIR}/node_modules/.bin/lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning

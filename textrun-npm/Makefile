@@ -31,6 +31,9 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
 
+publish: clean build  # publishes this package
+	npm publish
+
 test: lint unit cuke docs  # runs all tests
 test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna
 test-ts: unit cuke  # runs all code tests

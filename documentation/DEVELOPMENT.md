@@ -75,7 +75,8 @@ versions.
 
 ## Deployment
 
-- make a global search-and-replace for "5.0.0-pre1" and replace it with the new
-  version
+- bump the versions by running `lerna version <patch|minor|major> --no-private`
+  or make a global search-and-replace for "5.0.0-pre2" and replace it with the
+  new version
 - get this change into the master branch
-- run `npm publish` in all code bases
+- run `make publish-all`

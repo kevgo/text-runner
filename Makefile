@@ -19,9 +19,6 @@ build-involved:  # builds all the codebases needed to test the changes in this b
 build-open:  # builds the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory build
 
-bump-all:  # bumps all code bases
-	${CURDIR}/node_modules/.bin/lerna version patch --no-private
-
 clean-all:  # Removes all build artifacts
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory clean
 

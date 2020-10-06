@@ -13,7 +13,7 @@
     "end-child-processes": "1.0.1",
     "minimist": "1.2.5",
     "rimraf": "3.0.2",
-    "text-runner-core": "5.0.0-pre2",
+    "text-runner-core": "5.0.0-pre3",
     "yamljs": "0.3.0"
   },
   "description": "CLI test runner for documentation written in Markdown",

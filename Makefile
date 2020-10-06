@@ -110,6 +110,9 @@ setup:  # prepares the mono-repo for development after cloning
 	yarn
 	make build-all
 
+stats:  # shows code statistics
+	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
+
 test: lint  # runs all tests for the root directory
 
 test-affected:  # runs all tests for the codebases affected by changes in this branch

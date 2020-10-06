@@ -19,6 +19,9 @@ build-involved:  # builds all the codebases needed to test the changes in this b
 build-open:  # builds the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory build
 
+bump-all:  # bumps all code bases
+
+
 clean-all:  # Removes all build artifacts
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory clean
 
@@ -101,6 +104,9 @@ list-involved:  # builds all the codebases needed to test the changes in this br
 
 list-open:  # displays the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents -- pwd
+
+publish-all:  # publishes all code bases
+
 
 setup:  # prepares the mono-repo for development after cloning
 	find . -type d -name node_modules | xargs rm -rf

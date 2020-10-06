@@ -38,8 +38,8 @@ parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run dynamic --format=dot
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
 
-prepublish: build  # prepares the code base for publishing
-	rm dist/tsconfig-build.tsbuildinfo
+publish: clean build  # publishes this package
+	npm publish
 
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc

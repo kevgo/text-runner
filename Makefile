@@ -102,10 +102,16 @@ list-involved:  # builds all the codebases needed to test the changes in this br
 list-open:  # displays the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents -- pwd
 
+publish-all:  # publishes all code bases
+	${CURDIR}/node_modules/.bin/lerna exec -- make publish
+
 setup:  # prepares the mono-repo for development after cloning
 	find . -type d -name node_modules | xargs rm -rf
 	yarn
 	make build-all
+
+stats:  # shows code statistics
+	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
 test: lint  # runs all tests for the root directory
 

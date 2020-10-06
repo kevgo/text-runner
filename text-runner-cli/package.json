@@ -27,7 +27,7 @@
   },
   "files": [
     "bin",
-    "dist"
+    "dist/**/*.js"
   ],
   "homepage": "https://github.com/kevgo/text-runner",
   "license": "ISC",
@@ -46,7 +46,6 @@
     "url": "https://github.com/kevgo/text-runner.git"
   },
   "scripts": {
-    "prepublishOnly": "make prepublish",
     "test": "make test"
   }
 }

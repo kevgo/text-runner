@@ -4,6 +4,9 @@
   "description": "Text-Runner actions for verifying the content of the current repository",
   "main": "dist/index.js",
   "license": "ISC",
+  "files": [
+    "dist/**/*.js"
+  ],
   "dependencies": {
     "text-runner-core": "5.0.0-pre2"
   },

@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
   "main": "dist/index.js",
+  "files": [
+    "dist/**/*.js"
+  ],
   "license": "ISC",
   "dependencies": {
     "observable-process": "8.0.0-pre4",

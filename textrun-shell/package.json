@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "license": "ISC",
+  "files": [
+    "dist/**/*.js"
+  ],
   "dependencies": {
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "6.0.0",

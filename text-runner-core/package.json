@@ -34,7 +34,8 @@
   },
   "files": [
     "bin/text-run",
-    "dist"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "homepage": "https://github.com/kevgo/text-runner",
   "main": "dist/text-runner.js",
@@ -54,7 +55,6 @@
     "url": "https://github.com/kevgo/text-runner.git"
   },
   "scripts": {
-    "prepublishOnly": "make prepublish",
     "test": "make test"
   }
 }

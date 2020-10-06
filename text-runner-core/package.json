@@ -1,6 +1,6 @@
 {
   "name": "text-runner-core",
-  "version": "5.0.0-pre2",
+  "version": "5.0.0-pre3",
   "author": "Kevin Goslar",
   "bin": {
     "text-run": "bin/text-run"

@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as files from "../filesystem/full-link"
+import * as files from "../filesystem/index"
 import { Publication } from "./publication"
 
 suite("Publication.resolve()", function () {

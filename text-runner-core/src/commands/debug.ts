@@ -6,7 +6,7 @@ import * as ast from "../ast"
 import * as configuration from "../configuration/index"
 import { UserError } from "../errors/user-error"
 import * as events from "../events/index"
-import { getFileNames } from "../filesystem/get-filenames"
+import * as files from "../filesystem/index"
 import * as helpers from "../helpers"
 import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
@@ -31,7 +31,7 @@ export class Debug implements Command {
 
   async execute(): Promise<void> {
     const config = configuration.backfillDefaults(this.userConfig)
-    const filenames = await getFileNames(config)
+    const filenames = await files.getFileNames(config)
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug
 

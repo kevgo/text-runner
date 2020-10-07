@@ -1,4 +1,4 @@
-import { FullPath } from "../filesystem/full-path"
+import * as files from "../filesystem/index"
 
 export interface NodeAttributes {
   [key: string]: string
@@ -63,7 +63,7 @@ export type NodeTag =
 export interface NodeScaffoldData {
   attributes?: NodeAttributes
   content?: string
-  file?: string | FullPath
+  file?: string | files.FullPath
   line?: number
   tag?: NodeTag
   type?: NodeType
@@ -73,12 +73,12 @@ export interface NodeScaffoldData {
 export class Node {
   static scaffold(data: NodeScaffoldData = {}): Node {
     if (typeof data.file === "string") {
-      data.file = new FullPath(data.file)
+      data.file = new files.FullPath(data.file)
     }
     return new Node({
       attributes: data.attributes || {},
       content: data.content || "",
-      file: data.file || new FullPath("file"),
+      file: data.file || new files.FullPath("file"),
       line: data.line || 1,
       tag: data.tag != null ? data.tag : "hr",
       type: data.type || "hr",
@@ -92,7 +92,7 @@ export class Node {
   readonly tag: NodeTag
 
   /** the file in which this AstNode occurs */
-  readonly file: FullPath
+  readonly file: files.FullPath
 
   /** the line in the file at which this AST node occurs */
   readonly line: number
@@ -106,7 +106,7 @@ export class Node {
   constructor(data: {
     attributes: NodeAttributes
     content: string
-    file: FullPath
+    file: files.FullPath
     line: number
     tag: NodeTag
     type: NodeType

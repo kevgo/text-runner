@@ -1,9 +1,9 @@
 import * as slugify from "@sindresorhus/slugify"
 
 import { UserError } from "../errors/user-error"
-import { FullPath } from "../filesystem/full-path"
+import * as files from "../filesystem/index"
 
-export function normalizeActionName(actionName: string, file: FullPath, line: number): string {
+export function normalizeActionName(actionName: string, file: files.FullPath, line: number): string {
   const parts = actionName.split("/")
   if (parts.length === 1) {
     return slugify(actionName)

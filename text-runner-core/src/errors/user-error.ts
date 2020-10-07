@@ -1,4 +1,4 @@
-import { FullPath } from "../filesystem/full-path"
+import * as files from "../filesystem/index"
 
 /**
  * Represents a UserError that has not been printed via the formatter.
@@ -7,10 +7,10 @@ import { FullPath } from "../filesystem/full-path"
 export class UserError extends Error {
   /** optional longer user-facing guidance on how to resolve the error */
   readonly guidance: string
-  readonly file: FullPath | undefined
+  readonly file: files.FullPath | undefined
   readonly line: number | undefined
 
-  constructor(message: string, guidance?: string, file?: FullPath, line?: number) {
+  constructor(message: string, guidance?: string, file?: files.FullPath, line?: number) {
     super(message)
     this.name = "UserError"
     this.guidance = guidance || ""

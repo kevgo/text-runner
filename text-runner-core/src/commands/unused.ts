@@ -4,7 +4,7 @@ import * as actions from "../actions"
 import * as activities from "../activities"
 import * as configuration from "../configuration/index"
 import * as events from "../events/index"
-import { getFileNames } from "../filesystem/get-filenames"
+import * as files from "../filesystem/index"
 import * as parsers from "../parsers"
 import { Command } from "./command"
 
@@ -26,7 +26,7 @@ export class Unused implements Command {
     const config = configuration.backfillDefaults(this.userConfig)
 
     // step 2: find files
-    const filenames = await getFileNames(config)
+    const filenames = await files.getFileNames(config)
     if (filenames.length === 0) {
       this.emit("result", { status: "warning", message: "no Markdown files found" })
       return

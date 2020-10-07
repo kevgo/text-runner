@@ -4,7 +4,8 @@
   "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
   "main": "dist/index.js",
   "files": [
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "license": "ISC",
   "dependencies": {

@@ -25,7 +25,7 @@ Feature: verifying global commands provided by NPM modules
     When calling Text-Runner
     Then it emits these events:
       | FILENAME | LINE | ACTION         | ACTIVITY                           |
-      | 1.md     | 3    | npm/executable | NPM package exports executable foo |
+      | 1.md     | 3    | npm/executable | npm package exports executable foo |
 
   Scenario: correct command name with single-fenced code block
     Given the source code contains a file "1.md" with content:
@@ -35,7 +35,7 @@ Feature: verifying global commands provided by NPM modules
     When calling Text-Runner
     Then it emits these events:
       | FILENAME | LINE | ACTION         | ACTIVITY                           |
-      | 1.md     | 1    | npm/executable | NPM package exports executable foo |
+      | 1.md     | 1    | npm/executable | npm package exports executable foo |
 
   Scenario: mismatching command name
     Given the source code contains a file "1.md" with content:

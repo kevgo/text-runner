@@ -9,7 +9,7 @@ export function executable(action: tr.actions.Args): void {
   if (commandName === "") {
     throw new Error("No npm package installation command found")
   }
-  action.name(`NPM package exports executable ${color.cyan(commandName)}`)
+  action.name(`npm package exports executable ${color.cyan(commandName)}`)
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const pkgData = require(path.join(action.configuration.sourceDir, "package.json"))
   if (!Object.keys(pkgData.bin).includes(commandName)) {

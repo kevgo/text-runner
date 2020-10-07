@@ -1,6 +1,6 @@
 {
   "name": "textrun-workspace",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Text-Runner actions for the Text-Runner workspace",
   "main": "dist/index.js",
   "files": [

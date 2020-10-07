@@ -1,6 +1,6 @@
 import * as configuration from "../configuration/index"
-import { FullPath } from "./full-path"
 import { AbsoluteLink } from "./absolute-link"
+import { FullPath } from "./full-path"
 
 /**
  * A link relative to the current location,

@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import { FullPath } from "../filesystem/full-path"
 import { AbsoluteLink } from "../filesystem/absolute-link"
+import { FullPath } from "../filesystem/full-path"
 import { Publication } from "./publication"
 
 suite("Publication.resolve()", function () {

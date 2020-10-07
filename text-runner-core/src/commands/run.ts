@@ -4,7 +4,7 @@ import * as actions from "../actions"
 import * as activities from "../activities/index"
 import * as configuration from "../configuration/index"
 import * as events from "../events"
-import { getFileNames } from "../filesystem/get-filenames"
+import * as files from "../filesystem/index"
 import * as linkTargets from "../link-targets"
 import * as parser from "../parsers"
 import * as run from "../run"
@@ -35,7 +35,7 @@ export class Run implements command.Command {
       config.workspace = await workspace.create(config)
 
       // step 3: find files
-      const filenames = await getFileNames(config)
+      const filenames = await files.getFileNames(config)
       if (filenames.length === 0) {
         this.emit("result", { status: "warning", message: "no Markdown files found" })
         return

@@ -1,34 +1,33 @@
 import { assert } from "chai"
 
-import { FullLink } from "../filesystem/full-link"
-import { FullPath } from "../filesystem/full-path"
+import * as files from "../filesystem/full-link"
 import { Publication } from "./publication"
 
 suite("Publication.resolve()", function () {
   test("custom public extension", function () {
     const publication = new Publication("/content", "/", "html")
-    const link = new FullLink("/1.html")
+    const link = new files.FullLink("/1.html")
     const localPath = publication.resolve(link, "")
     assert.equal(localPath.unixified(), "content/1.md")
   })
 
   test("empty public extension", function () {
     const publication = new Publication("/content", "/", "")
-    const link = new FullLink("/1")
+    const link = new files.FullLink("/1")
     const localPath = publication.resolve(link, "")
     assert.equal(localPath.unixified(), "content/1.md")
   })
 
   test("link with no filename and anchor", function () {
     const publication = new Publication("/content/", "/", "")
-    const link = new FullLink("/#hello")
+    const link = new files.FullLink("/#hello")
     const localPath = publication.resolve(link, "index.md")
     assert.equal(localPath.unixified(), "content/index.md")
   })
 
   test("link with no filename in mapped folder", function () {
     const publication = new Publication("/content/", "/posts", "")
-    const link = new FullLink("/posts")
+    const link = new files.FullLink("/posts")
     const localPath = publication.resolve(link, "index.md")
     assert.equal(localPath.unixified(), "content/index.md")
   })
@@ -37,20 +36,20 @@ suite("Publication.resolve()", function () {
 suite("Publication.resolves()", function () {
   test("matching link", function () {
     const publication = new Publication("/content", "/foo", "")
-    const link = new FullLink("/foo/bar")
+    const link = new files.FullLink("/foo/bar")
     assert.isTrue(publication.resolves(link))
   })
 
   test("non-matching link", function () {
     const publication = new Publication("/content", "/foo", "")
-    const link = new FullLink("/one/two")
+    const link = new files.FullLink("/one/two")
     assert.isFalse(publication.resolves(link))
   })
 })
 
 test("Publication.publish()", function () {
   const publication = new Publication("/content", "/", ".html")
-  const filePath = new FullPath("content/1.md")
+  const filePath = new files.FullPath("content/1.md")
   const link = publication.publish(filePath)
   assert.equal(link.value, "/1.html")
 })
@@ -64,7 +63,7 @@ suite("Publication.publishes()", function () {
   for (const tt of tests) {
     test(`${tt.give}-${tt.pub}`, function () {
       const publication = new Publication(tt.pub, "", "")
-      const filePath = new FullPath(tt.give)
+      const filePath = new files.FullPath(tt.give)
       assert.equal(publication.publishes(filePath), tt.want)
     })
   }
@@ -79,7 +78,7 @@ suite("Publication.resolve()", function () {
   for (const tt of tests) {
     test(tt.desc, function () {
       const publication = new Publication("/content/posts", "/blog", "html")
-      const link = new FullLink(tt.give)
+      const link = new files.FullLink(tt.give)
       const localPath = publication.resolve(link, "")
       assert.equal(localPath.unixified(), tt.want)
     })

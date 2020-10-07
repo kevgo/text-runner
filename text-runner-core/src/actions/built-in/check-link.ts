@@ -2,8 +2,7 @@ import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
 
-import { FullPath } from "../../filesystem/full-path"
-import { UnknownLink } from "../../filesystem/unknown-link"
+import * as files from "../../filesystem/"
 import * as helpers from "../../helpers"
 import { Args } from "../index"
 
@@ -15,7 +14,7 @@ export async function checkLink(action: Args): Promise<number | void> {
   }
 
   action.name(`link to ${target}`)
-  const filePath = new FullPath(action.file)
+  const filePath = new files.FullPath(action.file)
 
   if (helpers.isMailtoLink(target)) {
     return action.SKIPPING
@@ -61,8 +60,8 @@ async function checkExternalLink(target: string, action: Args) {
 }
 
 async function checkLinkToFilesystem(target: string, action: Args) {
-  const unknownLink = new UnknownLink(decodeURI(target))
-  const absoluteLink = unknownLink.absolutify(new FullPath(action.file), action.configuration.publications)
+  const unknownLink = new files.UnknownLink(decodeURI(target))
+  const absoluteLink = unknownLink.absolutify(new files.FullPath(action.file), action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   const fullPath = path.join(action.configuration.sourceDir, linkedFile.unixified())
 
@@ -88,7 +87,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   }
 }
 
-function checkLinkToAnchorInSameFile(containingFile: FullPath, target: string, action: Args) {
+function checkLinkToAnchorInSameFile(containingFile: files.FullPath, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
@@ -100,8 +99,8 @@ function checkLinkToAnchorInSameFile(containingFile: FullPath, target: string, a
   }
 }
 
-function checkLinkToAnchorInOtherFile(containingFile: FullPath, target: string, action: Args) {
-  const link = new UnknownLink(target)
+function checkLinkToAnchorInOtherFile(containingFile: files.FullPath, target: string, action: Args) {
+  const link = new files.UnknownLink(target)
   const absoluteLink = link.absolutify(containingFile, action.configuration.publications)
   const filePath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   const anchorName = absoluteLink.anchor()

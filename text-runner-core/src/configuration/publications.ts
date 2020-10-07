@@ -1,5 +1,4 @@
-import { FullLink } from "../filesystem/full-link"
-import { FullPath } from "../filesystem/full-path"
+import * as files from "../filesystem/index"
 import { Publication } from "./publication"
 
 export class Publications extends Array<Publication> {
@@ -13,12 +12,12 @@ export class Publications extends Array<Publication> {
   }
 
   // Returns the publication that matches the given filepath
-  forFilePath(filePath: FullPath): Publication | undefined {
+  forFilePath(filePath: files.FullPath): Publication | undefined {
     return this.find(publication => publication.publishes(filePath))
   }
 
   // Returns the publication that applies for the given link
-  publicationForLink(link: FullLink): Publication | undefined {
+  publicationForLink(link: files.FullLink): Publication | undefined {
     return this.find(publication => publication.resolves(link))
   }
 

@@ -3,7 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 
 import * as ast from "../../ast"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 import { TagMapper } from "../tag-mapper"
 import { parseHTMLFiles } from "./parse-html-files"
 
@@ -23,7 +23,7 @@ suite("parseHTMLFiles", function () {
           e.file = e.file.replace("*", "html")
           expected.push(ast.Node.scaffold(e))
         }
-        const actual = await parseHTMLFiles([new AbsoluteFilePath("input.html")], testDirPath, tagMapper)
+        const actual = await parseHTMLFiles([new FullPath("input.html")], testDirPath, tagMapper)
         assert.deepEqual(actual[0], expected)
       })
     }

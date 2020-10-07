@@ -1,5 +1,5 @@
 import * as ast from "../../ast"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 import { TagMapper } from "../tag-mapper"
 
 /** ClosingTagParser parses HTML blocks containing just a closing tag. */
@@ -18,7 +18,7 @@ export class ClosingTagParser {
     return this.closingTagRE.test(tag)
   }
 
-  parse(tag: string, file: AbsoluteFilePath, line: number): ast.NodeList {
+  parse(tag: string, file: FullPath, line: number): ast.NodeList {
     const match = this.closingTagRE.exec(tag)
     if (!match) {
       throw new Error(`no tag parsed in ${tag}`)

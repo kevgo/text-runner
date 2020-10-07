@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 import { Publications } from "./publications"
 
 suite("Publications.forFilePath()", function () {
@@ -17,7 +17,7 @@ suite("Publications.forFilePath()", function () {
         publicPath: "",
       },
     ])
-    const filePath = new AbsoluteFilePath("bar")
+    const filePath = new FullPath("bar")
 
     const publication = publications.forFilePath(filePath)
 
@@ -34,7 +34,7 @@ suite("Publications.forFilePath()", function () {
         publicPath: "",
       },
     ])
-    const filePath = new AbsoluteFilePath("bar")
+    const filePath = new FullPath("bar")
 
     const publication = publications.forFilePath(filePath)
 

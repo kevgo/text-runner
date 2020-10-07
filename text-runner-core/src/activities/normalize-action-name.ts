@@ -1,9 +1,9 @@
 import * as slugify from "@sindresorhus/slugify"
 
 import { UserError } from "../errors/user-error"
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 
-export function normalizeActionName(actionName: string, file: AbsoluteFilePath, line: number): string {
+export function normalizeActionName(actionName: string, file: FullPath, line: number): string {
   const parts = actionName.split("/")
   if (parts.length === 1) {
     return slugify(actionName)

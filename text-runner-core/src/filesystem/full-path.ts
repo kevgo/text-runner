@@ -5,10 +5,10 @@ import * as helpers from "../helpers"
 import { AbsoluteLink } from "./absolute-link"
 
 /**
- * AbsoluteFilePath represents a complete path from the root directory
- * to a markdown file on the local file system.
+ * FullPath represents a complete path from the root directory of the document base
+ * to a Markdown file on the local file system.
  */
-export class AbsoluteFilePath {
+export class FullPath {
   private readonly value: string
 
   constructor(value: string) {
@@ -16,18 +16,18 @@ export class AbsoluteFilePath {
   }
 
   /** Returns a new file path with the given file name appended to the end of this file path */
-  append(fileName: string): AbsoluteFilePath {
-    return new AbsoluteFilePath(path.join(this.platformified(), fileName))
+  append(fileName: string): FullPath {
+    return new FullPath(path.join(this.platformified(), fileName))
   }
 
   /**
    * Returns the directory that contains this file path
    */
-  directory(): AbsoluteFilePath {
+  directory(): FullPath {
     if (this.isDirectory()) {
       return this
     }
-    return new AbsoluteFilePath(path.dirname(this.value) + "/")
+    return new FullPath(path.dirname(this.value) + "/")
   }
 
   /**

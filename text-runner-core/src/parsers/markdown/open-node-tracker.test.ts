@@ -1,12 +1,12 @@
 import { assert } from "chai"
 
 import * as ast from "../../ast"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 import { OpenNodeTracker } from "./open-node-tracker"
 
 suite("OpenTagTracker.close()", function () {
   /** placeholder filename */
-  const file = new AbsoluteFilePath("foo")
+  const file = new FullPath("foo")
 
   test("closing an open tag", function () {
     const openTags = new OpenNodeTracker()

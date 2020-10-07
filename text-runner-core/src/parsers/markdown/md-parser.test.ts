@@ -3,7 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 
 import * as ast from "../../ast"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 import { parse } from "./parse"
 
 suite("MdParser.parseFile()", function () {
@@ -20,7 +20,7 @@ suite("MdParser.parseFile()", function () {
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
           expected.push(ast.Node.scaffold(expectedNodeData))
         }
-        const actual = await parse([new AbsoluteFilePath("input.md")], testDirPath)
+        const actual = await parse([new FullPath("input.md")], testDirPath)
         assert.deepEqual(actual[0], expected)
       })
     }

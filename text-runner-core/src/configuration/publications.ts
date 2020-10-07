@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 import { AbsoluteLink } from "../filesystem/absolute-link"
 import { Publication } from "./publication"
 
@@ -13,7 +13,7 @@ export class Publications extends Array<Publication> {
   }
 
   // Returns the publication that matches the given filepath
-  forFilePath(filePath: AbsoluteFilePath): Publication | undefined {
+  forFilePath(filePath: FullPath): Publication | undefined {
     return this.find(publication => publication.publishes(filePath))
   }
 

@@ -1,6 +1,6 @@
 import * as ast from "../../ast/index"
 import { UserError } from "../../errors/user-error"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 
 interface Entry {
   endLine: number
@@ -21,7 +21,7 @@ export class OpenNodeTracker {
   }
 
   /** closes the corresponding open ast.Node and returns its endLine */
-  close(type: ast.NodeType, file: AbsoluteFilePath, line: number): number {
+  close(type: ast.NodeType, file: FullPath, line: number): number {
     const openType = type.replace("_close", "_open")
     for (let i = this.entries.length - 1; i >= 0; i--) {
       if (this.entries[i].node.type === openType) {

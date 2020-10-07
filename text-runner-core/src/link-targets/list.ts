@@ -1,5 +1,5 @@
 import * as ast from "../ast"
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 import { Target, Types } from "./index"
 import { targetURL } from "./target-url"
 
@@ -40,7 +40,7 @@ export class List {
     this.addLinkTarget(node.file, "heading", content)
   }
 
-  addLinkTarget(filePath: AbsoluteFilePath, type: Types, name: string): void {
+  addLinkTarget(filePath: FullPath, type: Types, name: string): void {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })
@@ -48,7 +48,7 @@ export class List {
 
   // Returns the type of the given anchor
   // with the given name in the given file
-  anchorType(filePath: AbsoluteFilePath, name: string): string {
+  anchorType(filePath: FullPath, name: string): string {
     const anchorsForFile = this.targets[filePath.platformified()]
     if (!anchorsForFile) {
       throw new Error(`no anchors in file ${filePath.platformified()}`)
@@ -60,7 +60,7 @@ export class List {
     return anchor.type
   }
 
-  hasAnchor(filePath: AbsoluteFilePath, name: string): boolean {
+  hasAnchor(filePath: FullPath, name: string): boolean {
     const fileList = this.targets[filePath.platformified()]
     if (!fileList) {
       return false
@@ -69,7 +69,7 @@ export class List {
   }
 
   // Returns whether this link target list knows about the given file
-  hasFile(filePath: AbsoluteFilePath): boolean {
+  hasFile(filePath: FullPath): boolean {
     return this.targets[filePath.platformified()] != null
   }
 }

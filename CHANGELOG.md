@@ -61,6 +61,8 @@ _Oct 1 2020_
 
 - handle newlines inside tags
   ([1022](https://github.com/kevgo/text-runner/pull/1022))
+- fully compatible GitHub anchor links
+  ([1328](https://github.com/kevgo/text-runner/pull/1328))
 
 #### Internal
 

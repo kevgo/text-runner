@@ -11,13 +11,13 @@
   "dependencies": {
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "6.0.0",
-    "text-runner-core": "5.0.0-pre5"
+    "text-runner-core": "5.0.0-pre6"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
-    "text-runner": "5.0.0-pre5",
+    "text-runner": "5.0.0-pre6",
     "textrun-action": "0.0.5"
   }
 }

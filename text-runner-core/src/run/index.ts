@@ -1,5 +1,7 @@
 export * from "./parallel"
 export * from "./sequential"
+export * from "./activity-collector"
+export * from "./stopwatch"
 
 /** LogFn defines the signature of the "log" function available to actions */
 export type LogFn = (message?: any, ...optionalParams: any[]) => void

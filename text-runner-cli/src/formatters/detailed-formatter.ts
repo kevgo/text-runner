@@ -58,6 +58,6 @@ export class DetailedFormatter implements formatter.Formatter {
   }
 
   finish(args: formatter.FinishArgs): void {
-    formatter.printSummary(args.stats)
+    formatter.printSummary(args.results)
   }
 }

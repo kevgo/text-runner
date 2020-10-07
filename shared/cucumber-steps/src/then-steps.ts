@@ -154,7 +154,7 @@ Then("it throws:", function (table: cucumber.TableDefinition) {
 
 Then("the error provides the guidance:", function (expectedText: string) {
   const world = this as TRWorld
-  const errors = world.apiResults.map(res => res.error).filter(e => e)
+  const errors = world.apiResults.errors()
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }

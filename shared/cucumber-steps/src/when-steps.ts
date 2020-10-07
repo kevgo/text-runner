@@ -1,7 +1,6 @@
 import { When } from "cucumber"
 import * as textRunner from "text-runner-core"
 
-import { ActivityCollector } from "./activity-collector"
 import * as helpers from "./helpers"
 import { TRWorld } from "./world"
 
@@ -12,7 +11,7 @@ When(/^calling:$/, async function (jsText: string) {
   // eslint-disable-next-line prefer-const
   let command = new textRunner.commands.Run(config)
   // eslint-disable-next-line prefer-const
-  let observer = new ActivityCollector(command)
+  let observer = new textRunner.ActivityCollector(command)
   // eval the given code
   // @ts-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const, @typescript-eslint/no-empty-function
@@ -26,7 +25,7 @@ When(/^calling:$/, async function (jsText: string) {
   }`
   eval(funcText)
   try {
-    await asyncFunc(textRunner, ActivityCollector)
+    await asyncFunc(textRunner, textRunner.ActivityCollector)
     world.apiResults = observer.results()
   } catch (e) {
     world.apiException = e
@@ -36,7 +35,7 @@ When(/^calling:$/, async function (jsText: string) {
 When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
   const world = this as TRWorld
   const command = new textRunner.commands.Run({ sourceDir: world.rootDir })
-  const activityCollector = new ActivityCollector(command)
+  const activityCollector = new textRunner.ActivityCollector(command)
   try {
     await command.execute()
   } catch (e) {

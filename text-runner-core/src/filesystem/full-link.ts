@@ -10,7 +10,7 @@ import { RelativeLink } from "./relative-link"
  * all the way from the root directory
  * (i.e. a link starting with '/')
  */
-export class AbsoluteLink {
+export class FullLink {
   readonly value: string
 
   constructor(publicPath: string) {
@@ -28,19 +28,19 @@ export class AbsoluteLink {
    * Returns a new link that consists of this link
    * with the given relative link appended
    */
-  append(segment: RelativeLink): AbsoluteLink {
-    return new AbsoluteLink(helpers.straightenLink(this.value + "/" + segment.value))
+  append(segment: RelativeLink): FullLink {
+    return new FullLink(helpers.straightenLink(this.value + "/" + segment.value))
   }
 
   /**
    * Returns a link to the containing directory
    */
-  directory(): AbsoluteLink {
+  directory(): FullLink {
     const withoutAnchor = this.withoutAnchor()
     if (withoutAnchor.isLinkToDirectory()) {
       return withoutAnchor
     }
-    return new AbsoluteLink(withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1))
+    return new FullLink(withoutAnchor.value.substr(0, withoutAnchor.value.lastIndexOf("/") + 1))
   }
 
   hasAnchor(): boolean {
@@ -83,34 +83,34 @@ export class AbsoluteLink {
    * Returns a link where the old enclosing directory is replaced
    * with the new enclosing directory
    */
-  rebase(oldPath: string, newPath: string): AbsoluteLink {
+  rebase(oldPath: string, newPath: string): FullLink {
     const re = new RegExp("^" + oldPath)
-    return new AbsoluteLink(this.value.replace(re, newPath))
+    return new FullLink(this.value.replace(re, newPath))
   }
 
-  urlDecoded(): AbsoluteLink {
-    return new AbsoluteLink(decodeURI(this.value))
+  urlDecoded(): FullLink {
+    return new FullLink(decodeURI(this.value))
   }
 
   /**
    * Returns a link that contains the given anchor
    */
-  withAnchor(anchor: string): AbsoluteLink {
-    return new AbsoluteLink(this.withoutAnchor().value + "#" + anchor)
+  withAnchor(anchor: string): FullLink {
+    return new FullLink(this.withoutAnchor().value + "#" + anchor)
   }
 
   /**
-   * Returns another AbsoluteLink instance that uses the given file extension
+   * Returns another FullLink instance that uses the given file extension
    */
-  withExtension(newExtension: string): AbsoluteLink {
+  withExtension(newExtension: string): FullLink {
     const extRE = new RegExp(path.extname(this.value) + "$")
-    return new AbsoluteLink(this.value.replace(extRE, helpers.addLeadingDotUnlessEmpty(newExtension)))
+    return new FullLink(this.value.replace(extRE, helpers.addLeadingDotUnlessEmpty(newExtension)))
   }
 
   /**
    * Returns a link that is this link without the anchor
    */
-  withoutAnchor(): AbsoluteLink {
-    return new AbsoluteLink(this.value.split("#")[0])
+  withoutAnchor(): FullLink {
+    return new FullLink(this.value.split("#")[0])
   }
 }

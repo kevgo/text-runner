@@ -8,7 +8,7 @@
     "observable-process": "8.0.0-pre4",
     "ps-tree": "1.2.0",
     "strip-ansi": "6.0.0",
-    "text-runner-core": "5.0.0-pre6",
+    "text-runner-core": "5.0.0-pre7",
     "tmp-promise": "3.0.2"
   },
   "license": "ISC",

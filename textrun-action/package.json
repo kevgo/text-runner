@@ -7,9 +7,9 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "text-runner-core": "5.0.0-pre6"
+    "text-runner-core": "5.0.0-pre7"
   },
   "devDependencies": {
-    "text-runner": "5.0.0-pre6"
+    "text-runner": "5.0.0-pre7"
   }
 }

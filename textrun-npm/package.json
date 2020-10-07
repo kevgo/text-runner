@@ -7,14 +7,14 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "text-runner-core": "5.0.0-pre3"
+    "text-runner-core": "5.0.0-pre4"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.0-pre3",
+    "text-runner": "5.0.0-pre4",
     "textrun-action": "0.0.1",
     "textrun-extension": "0.0.1",
     "textrun-workspace": "0.0.1"

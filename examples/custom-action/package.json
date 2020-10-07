@@ -2,7 +2,7 @@
   "name": "custom-action-examples",
   "version": "0.0.0",
   "devDependencies": {
-    "text-runner": "5.0.0-pre3"
+    "text-runner": "5.0.0-pre4"
   },
   "private": true
 }

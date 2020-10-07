@@ -2,9 +2,6 @@
   "name": "text-runner-core",
   "version": "5.0.0-pre3",
   "author": "Kevin Goslar",
-  "bin": {
-    "text-run": "bin/text-run"
-  },
   "dependencies": {
     "@sindresorhus/slugify": "1.1.0",
     "@types/tmp": "0.2.0",

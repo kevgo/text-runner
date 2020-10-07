@@ -4,6 +4,7 @@ import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers"
 import * as formatter from "."
+import { printUserError } from "./print-user-error"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {
@@ -38,10 +39,14 @@ export class DetailedFormatter implements formatter.Formatter {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
-    process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
-    console.log(args.error.message)
-    const filePath = path.join(this.sourceDir, args.activity.file.platformified())
-    helpers.printCodeFrame(console.log, filePath, args.activity.line)
+    if (tr.instanceOfUserError(args.error)) {
+      printUserError(args.error)
+    } else {
+      process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
+      console.log(args.error.message)
+      const filePath = path.join(this.sourceDir, args.activity.file.platformified())
+      helpers.printCodeFrame(console.log, filePath, args.activity.line)
+    }
   }
 
   onSkipped(args: tr.events.Skipped): void {

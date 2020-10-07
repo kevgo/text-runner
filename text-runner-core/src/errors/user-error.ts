@@ -18,3 +18,7 @@ export class UserError extends Error {
     this.line = line
   }
 }
+
+export function instanceOfUserError(arg: Error): arg is UserError {
+  return arg.name === "UserError"
+}

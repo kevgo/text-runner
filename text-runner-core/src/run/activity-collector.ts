@@ -14,7 +14,7 @@ interface ActivityResult {
 }
 
 export class ActivityResults extends Array<ActivityResult> {
-  duration: string
+  readonly duration: string
 
   constructor(results: Array<ActivityResult>, duration: string) {
     super()

@@ -1,4 +1,4 @@
-import { AbsoluteLink } from "../filesystem/absolute-link"
+import { FullLink } from "../filesystem/full-link"
 import { RelativeLink } from "../filesystem/relative-link"
 import * as helpers from "../helpers"
 
@@ -27,10 +27,10 @@ export class Publication {
    * Returns the public link under which the given file path would be published
    * according to the rules of this publication
    */
-  publish(localPath: FullPath): AbsoluteLink {
+  publish(localPath: FullPath): FullLink {
     const re = new RegExp("^" + this.localPath)
     const linkPath = helpers.addLeadingSlash(localPath.unixified()).replace(re, this.publicPath)
-    const result = new AbsoluteLink(linkPath)
+    const result = new FullLink(linkPath)
     if (this.publicExtension == null) {
       return result
     }
@@ -46,7 +46,7 @@ export class Publication {
    * Returns the localPath for the given link
    * mapped according to the rules of this publication.
    */
-  resolve(link: AbsoluteLink, defaultFile: string): FullPath {
+  resolve(link: FullLink, defaultFile: string): FullPath {
     let result = link.rebase(this.publicPath, this.localPath)
     result = result.withoutAnchor()
 
@@ -62,7 +62,7 @@ export class Publication {
   }
 
   /** Returns whether this publication maps the given link */
-  resolves(link: AbsoluteLink): boolean {
+  resolves(link: FullLink): boolean {
     return link.value.startsWith(this.publicPath)
   }
 }

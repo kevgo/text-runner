@@ -1,4 +1,4 @@
-import { AbsoluteLink } from "../filesystem/absolute-link"
+import { FullLink } from "../filesystem/full-link"
 import { FullPath } from "../filesystem/full-path"
 import { Publication } from "./publication"
 
@@ -18,7 +18,7 @@ export class Publications extends Array<Publication> {
   }
 
   // Returns the publication that applies for the given link
-  publicationForLink(link: AbsoluteLink): Publication | undefined {
+  publicationForLink(link: FullLink): Publication | undefined {
     return this.find(publication => publication.resolves(link))
   }
 

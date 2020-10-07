@@ -2,7 +2,7 @@ import * as path from "path"
 
 import * as configuration from "../configuration/index"
 import * as helpers from "../helpers"
-import { AbsoluteLink } from "./absolute-link"
+import { FullLink } from "./full-link"
 
 /**
  * FullPath represents a complete path from the root directory of the document base
@@ -63,10 +63,10 @@ export class FullPath {
    * Returns the public link under which this file path is published
    * @param publications the publications of this session
    */
-  publicPath(publications: configuration.Publications): AbsoluteLink {
+  publicPath(publications: configuration.Publications): FullLink {
     const publication = publications.forFilePath(this)
     if (publication == null) {
-      return new AbsoluteLink(this.unixified())
+      return new FullLink(this.unixified())
     }
     return publication.publish(this)
   }

@@ -1,34 +1,34 @@
 import { assert } from "chai"
 
-import { AbsoluteLink } from "../filesystem/absolute-link"
+import { FullLink } from "../filesystem/full-link"
 import { FullPath } from "../filesystem/full-path"
 import { Publication } from "./publication"
 
 suite("Publication.resolve()", function () {
   test("custom public extension", function () {
     const publication = new Publication("/content", "/", "html")
-    const link = new AbsoluteLink("/1.html")
+    const link = new FullLink("/1.html")
     const localPath = publication.resolve(link, "")
     assert.equal(localPath.unixified(), "content/1.md")
   })
 
   test("empty public extension", function () {
     const publication = new Publication("/content", "/", "")
-    const link = new AbsoluteLink("/1")
+    const link = new FullLink("/1")
     const localPath = publication.resolve(link, "")
     assert.equal(localPath.unixified(), "content/1.md")
   })
 
   test("link with no filename and anchor", function () {
     const publication = new Publication("/content/", "/", "")
-    const link = new AbsoluteLink("/#hello")
+    const link = new FullLink("/#hello")
     const localPath = publication.resolve(link, "index.md")
     assert.equal(localPath.unixified(), "content/index.md")
   })
 
   test("link with no filename in mapped folder", function () {
     const publication = new Publication("/content/", "/posts", "")
-    const link = new AbsoluteLink("/posts")
+    const link = new FullLink("/posts")
     const localPath = publication.resolve(link, "index.md")
     assert.equal(localPath.unixified(), "content/index.md")
   })
@@ -37,13 +37,13 @@ suite("Publication.resolve()", function () {
 suite("Publication.resolves()", function () {
   test("matching link", function () {
     const publication = new Publication("/content", "/foo", "")
-    const link = new AbsoluteLink("/foo/bar")
+    const link = new FullLink("/foo/bar")
     assert.isTrue(publication.resolves(link))
   })
 
   test("non-matching link", function () {
     const publication = new Publication("/content", "/foo", "")
-    const link = new AbsoluteLink("/one/two")
+    const link = new FullLink("/one/two")
     assert.isFalse(publication.resolves(link))
   })
 })
@@ -79,7 +79,7 @@ suite("Publication.resolve()", function () {
   for (const tt of tests) {
     test(tt.desc, function () {
       const publication = new Publication("/content/posts", "/blog", "html")
-      const link = new AbsoluteLink(tt.give)
+      const link = new FullLink(tt.give)
       const localPath = publication.resolve(link, "")
       assert.equal(localPath.unixified(), tt.want)
     })

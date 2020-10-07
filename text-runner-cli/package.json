@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "5.0.0-pre4",
+  "version": "5.0.0-pre5",
   "author": "Kevin Goslar",
   "bin": {
     "text-run": "bin/text-run"
@@ -13,7 +13,7 @@
     "end-child-processes": "1.0.1",
     "minimist": "1.2.5",
     "rimraf": "3.0.2",
-    "text-runner-core": "5.0.0-pre4",
+    "text-runner-core": "5.0.0-pre5",
     "yamljs": "0.3.0"
   },
   "description": "CLI test runner for documentation written in Markdown",

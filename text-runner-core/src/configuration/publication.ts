@@ -27,7 +27,7 @@ export class Publication {
    * Returns the public link under which the given file path would be published
    * according to the rules of this publication
    */
-  publish(localPath: AbsoluteFilePath): AbsoluteLink {
+  publish(localPath: FullPath): AbsoluteLink {
     const re = new RegExp("^" + this.localPath)
     const linkPath = helpers.addLeadingSlash(localPath.unixified()).replace(re, this.publicPath)
     const result = new AbsoluteLink(linkPath)
@@ -38,7 +38,7 @@ export class Publication {
   }
 
   /** Returns whether this publication applies to the given file path */
-  publishes(localPath: AbsoluteFilePath): boolean {
+  publishes(localPath: FullPath): boolean {
     return helpers.addLeadingSlash(helpers.addTrailingSlash(localPath.unixified())).startsWith(this.localPath)
   }
 
@@ -46,7 +46,7 @@ export class Publication {
    * Returns the localPath for the given link
    * mapped according to the rules of this publication.
    */
-  resolve(link: AbsoluteLink, defaultFile: string): AbsoluteFilePath {
+  resolve(link: AbsoluteLink, defaultFile: string): FullPath {
     let result = link.rebase(this.publicPath, this.localPath)
     result = result.withoutAnchor()
 
@@ -58,7 +58,7 @@ export class Publication {
       result = result.withExtension("md")
     }
 
-    return new AbsoluteFilePath(result.value)
+    return new FullPath(result.value)
   }
 
   /** Returns whether this publication maps the given link */
@@ -67,4 +67,4 @@ export class Publication {
   }
 }
 
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"

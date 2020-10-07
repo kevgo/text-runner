@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
 import * as ast from "../ast"
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 import * as linkTarget from "./index"
 
 suite("linkTarget.List.addNodeList()", function () {
@@ -13,14 +13,14 @@ suite("linkTarget.List.addNodeList()", function () {
     })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
-    assert.isTrue(targetList.hasAnchor(new AbsoluteFilePath("file.md"), "foo-bar"))
+    assert.isTrue(targetList.hasAnchor(new FullPath("file.md"), "foo-bar"))
   })
 
   test("node list without link targets", function () {
     const nodeList = ast.NodeList.scaffold({ file: "file.md", type: "text" })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
-    assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")), "should register files without link targets")
+    assert.isTrue(targetList.hasFile(new FullPath("file.md")), "should register files without link targets")
   })
 
   test("node list with headings", function () {
@@ -41,7 +41,7 @@ suite("linkTarget.List.addNodeList()", function () {
     })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
-    const filePath = new AbsoluteFilePath("file.md")
+    const filePath = new FullPath("file.md")
     assert.isTrue(targetList.hasAnchor(filePath, "get-started-in-5-minutes"))
   })
 })
@@ -65,13 +65,13 @@ suite("linkTarget.List.anchorType()", function () {
     })
     const list = new linkTarget.List()
     list.addHeading(nodeList[0], nodeList)
-    const filePath = new AbsoluteFilePath("file.md")
+    const filePath = new FullPath("file.md")
     assert.equal(list.anchorType(filePath, "foo-bar"), "heading")
   })
 
   test("anchors", function () {
     const list = new linkTarget.List()
-    const filePath = new AbsoluteFilePath("foo.md")
+    const filePath = new FullPath("foo.md")
     list.addLinkTarget(filePath, "anchor", "hello")
     assert.equal(list.anchorType(filePath, "hello"), "anchor")
   })
@@ -79,7 +79,7 @@ suite("linkTarget.List.anchorType()", function () {
 
 test("linkTarget.List.hasAnchor()", function () {
   const list = new linkTarget.List()
-  const filePath = new AbsoluteFilePath("foo.md")
+  const filePath = new FullPath("foo.md")
   list.addLinkTarget(filePath, "heading", "hello")
   assert.isTrue(list.hasAnchor(filePath, "hello"))
   assert.isFalse(list.hasAnchor(filePath, "zonk"))
@@ -88,7 +88,7 @@ test("linkTarget.List.hasAnchor()", function () {
 suite("linkTarget.List.hasFile()", function () {
   test("contains file with anchors", function () {
     const list = new linkTarget.List()
-    const filePath = new AbsoluteFilePath("foo.md")
+    const filePath = new FullPath("foo.md")
     list.addLinkTarget(filePath, "heading", "hello")
     assert.isTrue(list.hasFile(filePath))
   })
@@ -97,12 +97,12 @@ suite("linkTarget.List.hasFile()", function () {
     const nodeList = ast.NodeList.scaffold({ file: "file.md", type: "text" })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
-    assert.isTrue(targetList.hasFile(new AbsoluteFilePath("file.md")))
+    assert.isTrue(targetList.hasFile(new FullPath("file.md")))
   })
 
   test("doesn't contain the file", function () {
     const list = new linkTarget.List()
-    const filePath = new AbsoluteFilePath("foo.md")
+    const filePath = new FullPath("foo.md")
     assert.isFalse(list.hasFile(filePath))
   })
 })

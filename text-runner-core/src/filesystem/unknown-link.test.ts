@@ -1,8 +1,8 @@
 import { assert } from "chai"
 
 import * as configuration from "../configuration/index"
-import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
+import { FullPath } from "./full-path"
 import { UnknownLink } from "./unknown-link"
 
 suite("UnknownLink.absolutify()", function () {
@@ -23,7 +23,7 @@ suite("UnknownLink.absolutify()", function () {
   for (const tt of tests) {
     test(tt.desc, function () {
       const unknownLink = new UnknownLink(tt.link)
-      const containingFile = new AbsoluteFilePath(tt.give)
+      const containingFile = new FullPath(tt.give)
       const publications = new configuration.Publications()
       const absoluteLink = unknownLink.absolutify(containingFile, publications)
       assert.deepEqual(absoluteLink, new AbsoluteLink(tt.want))

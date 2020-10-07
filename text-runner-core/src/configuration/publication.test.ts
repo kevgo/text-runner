@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 import { AbsoluteLink } from "../filesystem/absolute-link"
+import { FullPath } from "../filesystem/full-path"
 import { Publication } from "./publication"
 
 suite("Publication.resolve()", function () {
@@ -50,7 +50,7 @@ suite("Publication.resolves()", function () {
 
 test("Publication.publish()", function () {
   const publication = new Publication("/content", "/", ".html")
-  const filePath = new AbsoluteFilePath("content/1.md")
+  const filePath = new FullPath("content/1.md")
   const link = publication.publish(filePath)
   assert.equal(link.value, "/1.html")
 })
@@ -64,7 +64,7 @@ suite("Publication.publishes()", function () {
   for (const tt of tests) {
     test(`${tt.give}-${tt.pub}`, function () {
       const publication = new Publication(tt.pub, "", "")
-      const filePath = new AbsoluteFilePath(tt.give)
+      const filePath = new FullPath(tt.give)
       assert.equal(publication.publishes(filePath), tt.want)
     })
   }

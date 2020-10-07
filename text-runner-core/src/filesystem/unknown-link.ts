@@ -1,7 +1,7 @@
 import * as configuration from "../configuration/index"
 import * as helpers from "../helpers"
-import { AbsoluteFilePath } from "./absolute-file-path"
 import { AbsoluteLink } from "./absolute-link"
+import { FullPath } from "./full-path"
 import { RelativeLink } from "./relative-link"
 
 /**
@@ -14,7 +14,7 @@ export class UnknownLink {
     this.value = helpers.removeDoubleSlash(helpers.unixify(publicPath))
   }
 
-  absolutify(containingFile: AbsoluteFilePath, publications: configuration.Publications): AbsoluteLink {
+  absolutify(containingFile: FullPath, publications: configuration.Publications): AbsoluteLink {
     if (this.isAbsolute()) {
       return new AbsoluteLink(this.value)
     }

@@ -2,7 +2,7 @@ import { promises as fs } from "fs"
 import got from "got"
 import * as path from "path"
 
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 import { UnknownLink } from "../../filesystem/unknown-link"
 import * as helpers from "../../helpers"
 import { Args } from "../index"
@@ -15,7 +15,7 @@ export async function checkLink(action: Args): Promise<number | void> {
   }
 
   action.name(`link to ${target}`)
-  const filePath = new AbsoluteFilePath(action.file)
+  const filePath = new FullPath(action.file)
 
   if (helpers.isMailtoLink(target)) {
     return action.SKIPPING
@@ -62,7 +62,7 @@ async function checkExternalLink(target: string, action: Args) {
 
 async function checkLinkToFilesystem(target: string, action: Args) {
   const unknownLink = new UnknownLink(decodeURI(target))
-  const absoluteLink = unknownLink.absolutify(new AbsoluteFilePath(action.file), action.configuration.publications)
+  const absoluteLink = unknownLink.absolutify(new FullPath(action.file), action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   const fullPath = path.join(action.configuration.sourceDir, linkedFile.unixified())
 
@@ -88,7 +88,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   }
 }
 
-function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
+function checkLinkToAnchorInSameFile(containingFile: FullPath, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
@@ -100,7 +100,7 @@ function checkLinkToAnchorInSameFile(containingFile: AbsoluteFilePath, target: s
   }
 }
 
-function checkLinkToAnchorInOtherFile(containingFile: AbsoluteFilePath, target: string, action: Args) {
+function checkLinkToAnchorInOtherFile(containingFile: FullPath, target: string, action: Args) {
   const link = new UnknownLink(target)
   const absoluteLink = link.absolutify(containingFile, action.configuration.publications)
   const filePath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)

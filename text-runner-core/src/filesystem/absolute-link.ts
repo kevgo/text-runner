@@ -2,7 +2,7 @@ import * as path from "path"
 
 import * as configuration from "../configuration/index"
 import * as helpers from "../helpers"
-import { AbsoluteFilePath } from "./absolute-file-path"
+import { FullPath } from "./full-path"
 import { RelativeLink } from "./relative-link"
 
 /**
@@ -66,11 +66,11 @@ export class AbsoluteLink {
    * @param publications the publications of this TextRunner session
    * @param defaultFile the filename to use in case this link points to a directory
    */
-  localize(publications: configuration.Publications, defaultFile: string): AbsoluteFilePath {
+  localize(publications: configuration.Publications, defaultFile: string): FullPath {
     const publication = publications.publicationForLink(this)
     let result = publication
       ? publication.resolve(this.urlDecoded(), defaultFile)
-      : new AbsoluteFilePath(this.urlDecoded().withoutAnchor().value)
+      : new FullPath(this.urlDecoded().withoutAnchor().value)
 
     // append the default file
     if (result.extName() === "" && defaultFile) {

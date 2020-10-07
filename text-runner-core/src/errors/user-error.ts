@@ -1,4 +1,4 @@
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 
 /**
  * Represents a UserError that has not been printed via the formatter.
@@ -7,10 +7,10 @@ import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
 export class UserError extends Error {
   /** optional longer user-facing guidance on how to resolve the error */
   readonly guidance: string
-  readonly file: AbsoluteFilePath | undefined
+  readonly file: FullPath | undefined
   readonly line: number | undefined
 
-  constructor(message: string, guidance?: string, file?: AbsoluteFilePath, line?: number) {
+  constructor(message: string, guidance?: string, file?: FullPath, line?: number) {
     super(message)
     this.name = "UserError"
     this.guidance = guidance || ""

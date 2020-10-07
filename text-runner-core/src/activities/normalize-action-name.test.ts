@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { AbsoluteFilePath } from "../filesystem/absolute-file-path"
+import { FullPath } from "../filesystem/full-path"
 import { normalizeActionName } from "./normalize-action-name"
 
 suite("normalizeActionName", function () {
@@ -14,7 +14,7 @@ suite("normalizeActionName", function () {
   }
   for (const [give, want] of Object.entries(tests)) {
     test(give, function () {
-      assert.equal(normalizeActionName(give, new AbsoluteFilePath(""), 1), want)
+      assert.equal(normalizeActionName(give, new FullPath(""), 1), want)
     })
   }
 })

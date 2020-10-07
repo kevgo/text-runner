@@ -1,15 +1,15 @@
 import { assert } from "chai"
 
 import * as configuration from "../configuration/index"
-import { AbsoluteFilePath } from "./absolute-file-path"
+import { FullPath } from "./full-path"
 
-test("AbsoluteFilePath.append()", function () {
-  const filePath = new AbsoluteFilePath("/one")
+test("FullPath.append()", function () {
+  const filePath = new FullPath("/one")
   const appended = filePath.append("two")
   assert.equal(appended.unixified(), "one/two")
 })
 
-suite("AbsoluteFilePath.directory()", function () {
+suite("FullPath.directory()", function () {
   const tests = [
     { desc: "Unix directory", give: "/foo/bar/", want: "foo/bar/" },
     { desc: "Unix file path", give: "/foo/bar/baz.md", want: "foo/bar/" },
@@ -18,18 +18,18 @@ suite("AbsoluteFilePath.directory()", function () {
   ]
   for (const tt of tests) {
     test(tt.desc, function () {
-      const file = new AbsoluteFilePath(tt.give)
+      const file = new FullPath(tt.give)
       assert.equal(file.directory().unixified(), tt.want)
     })
   }
 })
 
-test("AbsoluteFilePath.extName()", function () {
-  assert.equal(new AbsoluteFilePath("/one.md").extName(), ".md")
-  assert.equal(new AbsoluteFilePath("/one").extName(), "")
+test("FullPath.extName()", function () {
+  assert.equal(new FullPath("/one.md").extName(), ".md")
+  assert.equal(new FullPath("/one").extName(), "")
 })
 
-suite("AbsoluteFilePath.isDirectory()", function () {
+suite("FullPath.isDirectory()", function () {
   const tests = [
     { desc: "Unix directory", give: "/foo/bar/", want: true },
     { desc: "Unix file path", give: "/foo/bar/baz.md", want: false },
@@ -38,19 +38,19 @@ suite("AbsoluteFilePath.isDirectory()", function () {
   ]
   for (const tt of tests) {
     test(tt.desc, function () {
-      assert.equal(new AbsoluteFilePath(tt.give).isDirectory(), tt.want)
+      assert.equal(new FullPath(tt.give).isDirectory(), tt.want)
     })
   }
 })
 
-test("AbsoluteFilePath.unixified()", function () {
-  assert.equal(new AbsoluteFilePath("/foo/bar").unixified(), "foo/bar")
-  assert.equal(new AbsoluteFilePath("\\foo/bar\\baz").unixified(), "foo/bar/baz")
+test("FullPath.unixified()", function () {
+  assert.equal(new FullPath("/foo/bar").unixified(), "foo/bar")
+  assert.equal(new FullPath("\\foo/bar\\baz").unixified(), "foo/bar/baz")
 })
 
-suite("AbsoluteFilePath.publicPath()", function () {
+suite("FullPath.publicPath()", function () {
   test("no publications", function () {
-    const filePath = new AbsoluteFilePath("content\\1.md")
+    const filePath = new FullPath("content\\1.md")
     const publicPath = filePath.publicPath(new configuration.Publications())
     assert.equal(publicPath.value, "/content/1.md")
   })
@@ -63,7 +63,7 @@ suite("AbsoluteFilePath.publicPath()", function () {
         publicPath: "/",
       },
     ])
-    const filePath = new AbsoluteFilePath("/content/1.md")
+    const filePath = new FullPath("/content/1.md")
     const publicPath = filePath.publicPath(publications)
     assert.equal(publicPath.value, "/1.html")
   })

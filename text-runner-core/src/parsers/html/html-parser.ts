@@ -2,7 +2,7 @@ import * as parse5 from "parse5"
 import * as util from "util"
 
 import * as ast from "../../ast"
-import { AbsoluteFilePath } from "../../filesystem/absolute-file-path"
+import { FullPath } from "../../filesystem/full-path"
 import { TagMapper } from "../tag-mapper"
 
 /** Parser converts HTML5 source into the standardized AST format. */
@@ -21,7 +21,7 @@ export class Parser {
    *                     This parameter helps show correct line numbers for HTML snippets
    *                     that are embedded in Markdown documents.
    */
-  parse(text: string, file: AbsoluteFilePath, startingLine: number): ast.NodeList {
+  parse(text: string, file: FullPath, startingLine: number): ast.NodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true,
     })
@@ -68,11 +68,7 @@ export class Parser {
   /**
    * converts the given HTML AST for an entire HTML document into the standard AST
    */
-  private standardizeDocument(
-    documentAst: parse5.DefaultTreeDocument,
-    file: AbsoluteFilePath,
-    startingLine = 1
-  ): ast.NodeList {
+  private standardizeDocument(documentAst: parse5.DefaultTreeDocument, file: FullPath, startingLine = 1): ast.NodeList {
     const result = new ast.NodeList()
     const htmlNode = this.findHTMLNode(documentAst)
     const bodyNode = this.findBodyNode(htmlNode)
@@ -83,7 +79,7 @@ export class Parser {
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: parse5.DefaultTreeNode, file: AbsoluteFilePath, startingLine: number): ast.NodeList {
+  private standardizeNode(node: parse5.DefaultTreeNode, file: FullPath, startingLine: number): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
       return new ast.NodeList()
     }
@@ -100,11 +96,7 @@ export class Parser {
   }
 
   /** converts the given HTML tag with open and closing tag into the standard format */
-  private standardizeOpenCloseTag(
-    node: parse5.DefaultTreeElement,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): ast.NodeList {
+  private standardizeOpenCloseTag(node: parse5.DefaultTreeElement, file: FullPath, startingLine: number): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
@@ -163,7 +155,7 @@ export class Parser {
   /** converts the given HTML standalone node into the standard format */
   private standardizeStandaloneNode(
     node: parse5.DefaultTreeElement,
-    file: AbsoluteFilePath,
+    file: FullPath,
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
@@ -182,11 +174,7 @@ export class Parser {
   }
 
   /** converts the given HTML text node into the standard format */
-  private standardizeTextNode(
-    node: parse5.DefaultTreeTextNode,
-    file: AbsoluteFilePath,
-    startingLine: number
-  ): ast.NodeList {
+  private standardizeTextNode(node: parse5.DefaultTreeTextNode, file: FullPath, startingLine: number): ast.NodeList {
     const result = new ast.NodeList()
     if (node.value !== "\n") {
       result.push(

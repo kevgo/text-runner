@@ -1,4 +1,5 @@
-import * as helpers from "../helpers"
+import * as tr from "text-runner-core"
+
 export * as formatters from "."
 export { printSummary } from "./print-summary"
 export { printUserError } from "./print-user-error"
@@ -14,5 +15,5 @@ export interface Formatter {
 
 /** FinishArgs defines the arguments provided to the `finish` method. */
 export interface FinishArgs {
-  stats: helpers.Statistics
+  results: tr.ActivityResults
 }

@@ -6,7 +6,6 @@ import * as cmdLine from "./cmdline"
 import * as commands from "./commands"
 import * as configFile from "./config-file"
 import * as formatters from "./formatters"
-import * as helpers from "./helpers"
 
 cliCursor.hide()
 
@@ -22,13 +21,13 @@ async function main() {
       userConfig.sourceDir || process.cwd(),
       command
     )
-    const statsCollector = new helpers.StatsCollector(command)
+    const activityCollector = new tr.ActivityCollector(command)
     await command.execute()
-    const stats = statsCollector.stats()
+    const stats = activityCollector.results()
     if (["dynamic", "run", "static"].includes(commandName)) {
-      formatter.finish({ stats })
+      formatter.finish({ results: stats })
     }
-    errorCount = stats.errorCount
+    errorCount = stats.errorCount()
   } catch (err) {
     errorCount += 1
     if (err instanceof tr.UserError) {

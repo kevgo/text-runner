@@ -23,11 +23,11 @@ async function main() {
     )
     const activityCollector = new tr.ActivityCollector(command)
     await command.execute()
-    const stats = activityCollector.results()
+    const results = activityCollector.results()
     if (["dynamic", "run", "static"].includes(commandName)) {
-      formatter.finish({ results: stats })
+      formatter.finish({ results })
     }
-    errorCount = stats.errorCount()
+    errorCount = results.errorCount()
   } catch (err) {
     errorCount += 1
     if (err instanceof tr.UserError) {

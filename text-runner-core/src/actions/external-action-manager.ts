@@ -32,12 +32,12 @@ export class ExternalActionManager {
     try {
       module = require(moduleName)
     } catch (e) {
-      throw new UserError(`NPM package "${moduleName}" not found`, "", activity.file, activity.line)
+      throw new UserError(`cannot load npm package "${moduleName}"`, e.message, activity.file, activity.line)
     }
     const moduleActions = module.textrunActions
     if (!moduleActions) {
       throw new UserError(
-        `NPM package "${moduleName}" does not contain any Text-Runner actions`,
+        `npm package "${moduleName}" does not contain any Text-Runner actions`,
         "",
         activity.file,
         activity.line
@@ -52,7 +52,7 @@ export class ExternalActionManager {
       names.push(name)
     }
     throw new UserError(
-      `NPM package "${moduleName}" does not contain action "${wantAction}"`,
+      `npm package "${moduleName}" does not contain action "${wantAction}"`,
       `Found actions: ${names.join(", ")}`,
       activity.file,
       activity.line

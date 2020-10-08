@@ -28,10 +28,10 @@ export class Dynamic implements Command {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
-      const config = configuration.backfillDefaults(this.userConfig)
+      const config = await configuration.backfillDefaults(this.userConfig)
 
       // step 2: create working dir
-      config.workspace = await workspace.create(config)
+      await workspace.create(config)
 
       // step 3: find files
       const filenames = await files.getFileNames(config)

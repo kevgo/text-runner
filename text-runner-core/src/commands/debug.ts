@@ -30,7 +30,7 @@ export class Debug implements Command {
   }
 
   async execute(): Promise<void> {
-    const config = configuration.backfillDefaults(this.userConfig)
+    const config = await configuration.backfillDefaults(this.userConfig)
     const filenames = await files.getFileNames(config)
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug

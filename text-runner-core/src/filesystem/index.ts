@@ -1,4 +1,5 @@
 export * from "./files-matching-glob"
+export * from "./full-file"
 export * from "./full-link"
 export * from "./full-path"
 export * from "./get-filenames"

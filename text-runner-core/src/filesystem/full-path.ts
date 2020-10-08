@@ -5,8 +5,8 @@ import * as helpers from "../helpers"
 import { FullLink } from "./full-link"
 
 /**
- * FullPath represents a complete path from the root directory of the document base
- * to a Markdown file on the local file system.
+ * represents a full path to either a file or a directory,
+ * i.e. a link from the document base root to the object
  */
 export class FullPath {
   private readonly value: string

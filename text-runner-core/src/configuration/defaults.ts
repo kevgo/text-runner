@@ -1,3 +1,4 @@
+import * as files from "../filesystem"
 import { Data } from "./data"
 import { Publications } from "./publications"
 
@@ -15,6 +16,6 @@ export function defaults(): Data {
     showSkipped: false,
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: "tmp",
+    workspace: new files.FullDir("tmp"),
   }
 }

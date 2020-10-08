@@ -1,3 +1,4 @@
+import * as files from "../filesystem"
 import { Publications } from "./publications"
 
 /**
@@ -41,7 +42,7 @@ export interface Data {
   systemTmp: boolean
 
   /** the root directory of the workspace */
-  workspace: string
+  workspace: files.FullDir
 }
 
 export type PartialData = Partial<Data>

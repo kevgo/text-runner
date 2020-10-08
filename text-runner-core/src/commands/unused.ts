@@ -23,7 +23,7 @@ export class Unused implements Command {
 
   async execute(): Promise<void> {
     // step 1: determine full configuration
-    const config = configuration.backfillDefaults(this.userConfig)
+    const config = await configuration.backfillDefaults(this.userConfig)
 
     // step 2: find files
     const filenames = await files.getFileNames(config)

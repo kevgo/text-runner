@@ -2,6 +2,8 @@ import * as path from "path"
 
 import * as files from "."
 
+const sepRE = new RegExp(path.sep, "g")
+
 /**
  * represents a full path to a file,
  * i.e. a path from the document base to a file.
@@ -10,7 +12,7 @@ export class FullFile {
   private value: string
 
   constructor(value: string) {
-    this.value = value
+    this.value = value.replace(sepRE, "/")
   }
 
   /** Returns the directory that contains this file */

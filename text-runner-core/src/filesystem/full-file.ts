@@ -13,7 +13,7 @@ export class FullFile {
     this.value = value
   }
 
-  /** Returns the directory that contains this file path */
+  /** Returns the directory that contains this file */
   directory(): files.FullPath {
     return new files.FullPath(path.dirname(this.value) + "/")
   }

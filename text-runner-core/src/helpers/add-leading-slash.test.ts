@@ -2,7 +2,14 @@ import { assert } from "chai"
 
 import { addLeadingSlash } from "./add-leading-slash"
 
-test("addLeadingSlash", function () {
-  assert.equal(addLeadingSlash("foo"), "/foo")
-  assert.equal(addLeadingSlash("/foo"), "/foo")
+suite("addLeadingSlash", function () {
+  const tests = {
+    foo: "/foo",
+    "/foo": "/foo",
+  }
+  for (const [give, want] of Object.entries(tests)) {
+    test(`${give} ==> ${want}`, function () {
+      assert.equal(addLeadingSlash(give), want)
+    })
+  }
 })

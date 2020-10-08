@@ -2,6 +2,11 @@ import { assert } from "chai"
 
 import { name } from "./name"
 
-test("getActionName()", function () {
-  assert.equal(name("/users/foo/text-runner/text-run/cdBack.js"), "cd-back")
+suite("getActionName()", function () {
+  const tests = {
+    "/users/foo/text-runner/text-run/cdBack.js": "cd-back",
+  }
+  for (const [give, want] of Object.entries(tests)) {
+    assert.equal(name(give), want)
+  }
 })

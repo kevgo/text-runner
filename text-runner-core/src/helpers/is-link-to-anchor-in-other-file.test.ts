@@ -2,10 +2,17 @@ import { assert } from "chai"
 
 import { isLinkToAnchorInOtherFile } from "./is-link-to-anchor-in-other-file"
 
-test("isLinkToAnchorInOtherFile()", function () {
-  assert.isTrue(isLinkToAnchorInOtherFile("foo.md#bar"))
-  assert.isFalse(isLinkToAnchorInOtherFile("#foo"))
-  assert.isFalse(isLinkToAnchorInOtherFile("foo.md"))
-  assert.isFalse(isLinkToAnchorInOtherFile("https://foo.com/bar"))
-  assert.isFalse(isLinkToAnchorInOtherFile("https://foo.com/bar#baz"))
+suite("isLinkToAnchorInOtherFile()", function () {
+  const tests = {
+    "foo.md#bar": true,
+    "#foo": false,
+    "foo.md": false,
+    "https://foo.com/bar": false,
+    "https://foo.com/bar#baz": false,
+  }
+  for (const [give, want] of Object.entries(tests)) {
+    test(`${give} is ${want}`, function () {
+      assert.equal(isLinkToAnchorInOtherFile(give), want)
+    })
+  }
 })

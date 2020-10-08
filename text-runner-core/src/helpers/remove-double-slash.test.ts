@@ -2,6 +2,13 @@ import { assert } from "chai"
 
 import { removeDoubleSlash } from "./remove-double-slash"
 
-test("removeDoubleSlash", function () {
-  assert.equal(removeDoubleSlash("/foo//bar/"), "/foo/bar/")
+suite("removeDoubleSlash", function () {
+  const tests = {
+    "/foo//bar/": "/foo/bar/",
+  }
+  for (const [give, want] of Object.entries(tests)) {
+    test(`${give} ==> ${want}`, function () {
+      assert.equal(removeDoubleSlash(give), want)
+    })
+  }
 })

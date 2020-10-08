@@ -42,7 +42,7 @@ export interface Data {
   systemTmp: boolean
 
   /** the root directory of the workspace */
-  workspace: files.FullDir
+  workspace: files.AbsoluteDir
 }
 
 export type PartialData = Partial<Data>

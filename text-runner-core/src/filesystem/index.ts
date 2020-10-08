@@ -1,5 +1,5 @@
+export * from "./absolute-dir"
 export * from "./files-matching-glob"
-export * from "./full-dir"
 export * from "./full-file"
 export * from "./full-link"
 export * from "./full-path"

@@ -58,7 +58,7 @@ export class Dynamic implements Command {
 
       // step 8: execute the ActivityList
       this.emit("start", { stepCount: dynamicActivities.length } as events.Start)
-      process.chdir(config.workspace)
+      process.chdir(config.workspace.platformified())
       await run.sequential(dynamicActivities, actionFinder, config, targets, this)
     } finally {
       process.chdir(originalDir)

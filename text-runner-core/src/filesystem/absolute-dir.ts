@@ -1,10 +1,10 @@
 import * as path from "path"
 
 /**
- * represents a full directory path,
- * i.e. path from document base root to the directory
+ * represents an absolute path to a directory,
+ * i.e. path from filesystem root to the directory
  */
-export class FullDir {
+export class AbsoluteDir {
   value: string
 
   constructor(value: string) {

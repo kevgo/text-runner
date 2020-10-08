@@ -16,6 +16,6 @@ export function defaults(): Data {
     showSkipped: false,
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: new files.FullDir("tmp"),
+    workspace: new files.AbsoluteDir(""),
   }
 }

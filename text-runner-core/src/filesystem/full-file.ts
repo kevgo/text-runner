@@ -13,16 +13,16 @@ export class FullFile {
     this.value = value
   }
 
-  /**
-   * Returns the directory that contains this file path
-   */
+  /** Returns the directory that contains this file path */
   directory(): files.FullPath {
     return new files.FullPath(path.dirname(this.value) + "/")
   }
 
-  /**
-   * Returns the file extension of this path
-   */
+  dirname(): string {
+    return path.dirname(this.value)
+  }
+
+  /** Returns the file extension of this path */
   extName(): string {
     return path.extname(this.value)
   }
@@ -35,9 +35,7 @@ export class FullFile {
     return this.value.replace(/\//g, path.sep)
   }
 
-  /**
-   * Returns this absolute path using forward slashes as path separators
-   */
+  /** Returns this absolute path using forward slashes as path separators */
   unixified(): string {
     return this.value
   }

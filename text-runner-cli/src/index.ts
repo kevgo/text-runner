@@ -16,11 +16,7 @@ async function main() {
     const fileConfig = await configFile.load(cmdLineConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = commands.instantiate(commandName, userConfig, debugSubcommand)
-    const formatter = formatters.instantiate(
-      userConfig.formatterName || "detailed",
-      userConfig.sourceDir || process.cwd(),
-      command
-    )
+    const formatter = formatters.instantiate(userConfig.formatterName || "detailed", process.cwd(), command)
     const activityCollector = new tr.ActivityCollector(command)
     await command.execute()
     const results = activityCollector.results()

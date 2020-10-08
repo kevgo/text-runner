@@ -2,7 +2,7 @@ import * as path from "path"
 
 import * as files from "."
 
-const sepRE = new RegExp(path.sep, "g")
+const sepRE = new RegExp("\\" + path.sep, "g")
 
 /**
  * represents a full path to a file,

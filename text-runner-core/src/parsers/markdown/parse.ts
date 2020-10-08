@@ -6,7 +6,7 @@ import { MarkdownParser } from "./md-parser"
 import path = require("path")
 
 /** returns the standard AST for the Markdown files given as paths relative to the given sourceDir */
-export async function parse(filenames: files.FullPath[], sourceDir: string): Promise<ast.NodeList[]> {
+export async function parse(filenames: files.FullFile[], sourceDir: string): Promise<ast.NodeList[]> {
   const result: ast.NodeList[] = []
   const parser = new MarkdownParser()
   for (const filename of filenames) {

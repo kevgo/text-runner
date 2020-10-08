@@ -1,8 +1,6 @@
 import * as configuration from "../configuration/index"
 import * as helpers from "../helpers"
-import { FullLink } from "./full-link"
-import { FullPath } from "./full-path"
-import { RelativeLink } from "./relative-link"
+import * as files from "./index"
 
 /**
  * A link that isn't known yet whether it is relative or absolute
@@ -14,11 +12,11 @@ export class UnknownLink {
     this.value = helpers.removeDoubleSlash(helpers.unixify(publicPath))
   }
 
-  absolutify(containingFile: FullPath, publications: configuration.Publications): FullLink {
+  absolutify(containingFile: files.FullFile, publications: configuration.Publications): files.FullLink {
     if (this.isAbsolute()) {
-      return new FullLink(this.value)
+      return new files.FullLink(this.value)
     }
-    return new RelativeLink(this.value).absolutify(containingFile, publications)
+    return new files.RelativeLink(this.value).absolutify(containingFile, publications)
   }
 
   /**

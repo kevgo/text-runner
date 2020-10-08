@@ -21,7 +21,7 @@ export class Parser {
    *                     This parameter helps show correct line numbers for HTML snippets
    *                     that are embedded in Markdown documents.
    */
-  parse(text: string, file: files.FullPath, startingLine: number): ast.NodeList {
+  parse(text: string, file: files.FullFile, startingLine: number): ast.NodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true,
     })
@@ -70,7 +70,7 @@ export class Parser {
    */
   private standardizeDocument(
     documentAst: parse5.DefaultTreeDocument,
-    file: files.FullPath,
+    file: files.FullFile,
     startingLine = 1
   ): ast.NodeList {
     const result = new ast.NodeList()
@@ -83,7 +83,7 @@ export class Parser {
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: parse5.DefaultTreeNode, file: files.FullPath, startingLine: number): ast.NodeList {
+  private standardizeNode(node: parse5.DefaultTreeNode, file: files.FullFile, startingLine: number): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
       return new ast.NodeList()
     }
@@ -102,7 +102,7 @@ export class Parser {
   /** converts the given HTML tag with open and closing tag into the standard format */
   private standardizeOpenCloseTag(
     node: parse5.DefaultTreeElement,
-    file: files.FullPath,
+    file: files.FullFile,
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
@@ -163,7 +163,7 @@ export class Parser {
   /** converts the given HTML standalone node into the standard format */
   private standardizeStandaloneNode(
     node: parse5.DefaultTreeElement,
-    file: files.FullPath,
+    file: files.FullFile,
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()
@@ -184,7 +184,7 @@ export class Parser {
   /** converts the given HTML text node into the standard format */
   private standardizeTextNode(
     node: parse5.DefaultTreeTextNode,
-    file: files.FullPath,
+    file: files.FullFile,
     startingLine: number
   ): ast.NodeList {
     const result = new ast.NodeList()

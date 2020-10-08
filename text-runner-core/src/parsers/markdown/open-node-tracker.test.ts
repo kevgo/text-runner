@@ -6,7 +6,7 @@ import { OpenNodeTracker } from "./open-node-tracker"
 
 suite("OpenTagTracker.close()", function () {
   /** placeholder filename */
-  const file = new files.FullPath("foo")
+  const file = new files.FullFile("foo.md")
 
   test("closing an open tag", function () {
     const openTags = new OpenNodeTracker()

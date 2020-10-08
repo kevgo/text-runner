@@ -1,12 +1,12 @@
 import * as glob from "glob-promise"
 
 import * as helpers from "../helpers"
-import { FullPath } from "./full-path"
+import * as files from "."
 
-export async function filesMatchingGlob(expression: string, sourceDir: string): Promise<FullPath[]> {
-  const files = await glob(expression)
-  return files
+export async function filesMatchingGlob(expression: string, sourceDir: string): Promise<files.FullFile[]> {
+  const allFiles = await glob(expression)
+  return allFiles
     .sort()
     .map(file => helpers.pathRelativeToDir(file, sourceDir))
-    .map(file => new FullPath(file))
+    .map(file => new files.FullFile(file))
 }

@@ -1,5 +1,5 @@
 import * as ast from "../ast"
-import * as files from "../filesystem/full-path"
+import * as files from "../filesystem"
 export { extractDynamic } from "./extract-dynamic"
 export { extractImagesAndLinks } from "./extract-images-and-links"
 
@@ -14,7 +14,7 @@ export type List = Activity[]
 export interface Activity {
   actionName: string
   document: ast.NodeList
-  file: files.FullPath
+  file: files.FullFile
   line: number
   region: ast.NodeList
 }
@@ -24,7 +24,7 @@ export interface Activity {
 export function scaffold(data: { actionName?: string } = {}): Activity {
   return {
     actionName: data.actionName || "foo",
-    file: new files.FullPath("file"),
+    file: new files.FullFile("file"),
     line: 0,
     region: new ast.NodeList(),
     document: new ast.NodeList(),

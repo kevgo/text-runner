@@ -63,7 +63,7 @@ export type NodeTag =
 export interface NodeScaffoldData {
   attributes?: NodeAttributes
   content?: string
-  file?: string | files.FullPath
+  file?: string | files.FullFile
   line?: number
   tag?: NodeTag
   type?: NodeType
@@ -73,12 +73,12 @@ export interface NodeScaffoldData {
 export class Node {
   static scaffold(data: NodeScaffoldData = {}): Node {
     if (typeof data.file === "string") {
-      data.file = new files.FullPath(data.file)
+      data.file = new files.FullFile(data.file)
     }
     return new Node({
       attributes: data.attributes || {},
       content: data.content || "",
-      file: data.file || new files.FullPath("file"),
+      file: data.file || new files.FullFile("file"),
       line: data.line || 1,
       tag: data.tag != null ? data.tag : "hr",
       type: data.type || "hr",
@@ -92,7 +92,7 @@ export class Node {
   readonly tag: NodeTag
 
   /** the file in which this AstNode occurs */
-  readonly file: files.FullPath
+  readonly file: files.FullFile
 
   /** the line in the file at which this AST node occurs */
   readonly line: number
@@ -106,7 +106,7 @@ export class Node {
   constructor(data: {
     attributes: NodeAttributes
     content: string
-    file: files.FullPath
+    file: files.FullFile
     line: number
     tag: NodeTag
     type: NodeType

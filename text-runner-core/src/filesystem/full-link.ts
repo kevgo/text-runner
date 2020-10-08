@@ -2,8 +2,7 @@ import * as path from "path"
 
 import * as configuration from "../configuration/index"
 import * as helpers from "../helpers"
-import { FullPath } from "./full-path"
-import { RelativeLink } from "./relative-link"
+import * as files from "."
 
 /**
  * Represents a link to another Markdown file,
@@ -28,7 +27,7 @@ export class FullLink {
    * Returns a new link that consists of this link
    * with the given relative link appended
    */
-  append(segment: RelativeLink): FullLink {
+  append(segment: files.RelativeLink): FullLink {
     return new FullLink(helpers.straightenLink(this.value + "/" + segment.value))
   }
 
@@ -66,15 +65,15 @@ export class FullLink {
    * @param publications the publications of this TextRunner session
    * @param defaultFile the filename to use in case this link points to a directory
    */
-  localize(publications: configuration.Publications, defaultFile: string): FullPath {
+  localize(publications: configuration.Publications, defaultFile: string): files.FullPath | files.FullFile {
     const publication = publications.publicationForLink(this)
-    let result = publication
+    const result = publication
       ? publication.resolve(this.urlDecoded(), defaultFile)
-      : new FullPath(this.urlDecoded().withoutAnchor().value)
+      : new files.FullPath(this.urlDecoded().withoutAnchor().value)
 
     // append the default file
     if (result.extName() === "" && defaultFile) {
-      result = result.append(defaultFile)
+      return result.append(defaultFile)
     }
     return result
   }

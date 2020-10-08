@@ -7,7 +7,7 @@ import * as helpers from "../../helpers"
 import { Args } from "../index"
 
 /** The "checkLink" action checks for broken hyperlinks. */
-export async function checkLink(action: Args): Promise<number | void> {
+export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> {
   const target = action.region.getNodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")

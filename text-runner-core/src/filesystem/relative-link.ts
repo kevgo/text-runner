@@ -1,6 +1,5 @@
 import * as configuration from "../configuration/index"
-import { FullLink } from "./full-link"
-import { FullPath } from "./full-path"
+import * as files from "./index"
 
 /**
  * A link relative to the current location,
@@ -20,7 +19,7 @@ export class RelativeLink {
    * @param containingFile
    * @param publications the publications of this TextRunner session
    */
-  absolutify(containingFile: FullPath, publications: configuration.Publications): FullLink {
+  absolutify(containingFile: files.FullFile, publications: configuration.Publications): files.FullLink {
     const urlOfDir = containingFile.directory().publicPath(publications)
     return urlOfDir.append(this)
   }

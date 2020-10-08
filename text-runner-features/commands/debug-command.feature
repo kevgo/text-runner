@@ -58,13 +58,13 @@ Feature: display the version
       IMAGES:
       {
         actionName: 'check-image',
-        file: FullPath { value: '1.md' },
+        file: FullFile { value: '1.md' },
         line: 1,
         region: NodeList(1) [
           Node {
             type: 'image',
             tag: 'img',
-            file: FullPath { value: '1.md' },
+            file: FullFile { value: '1.md' },
             line: 1,
             content: '',
             attributes: { src: 'watermelon.png' }
@@ -85,13 +85,13 @@ Feature: display the version
       LINKS:
       {
         actionName: 'check-link',
-        file: FullPath { value: '1.md' },
+        file: FullFile { value: '1.md' },
         line: 1,
         region: NodeList(3) [
           Node {
             type: 'link_open',
             tag: 'a',
-            file: FullPath { value: '1.md' },
+            file: FullFile { value: '1.md' },
             line: 1,
             content: '',
             attributes: { href: '2.md' }
@@ -99,7 +99,7 @@ Feature: display the version
           Node {
             type: 'text',
             tag: '',
-            file: FullPath { value: '1.md' },
+            file: FullFile { value: '1.md' },
             line: 1,
             content: 'another document',
             attributes: {}
@@ -107,7 +107,7 @@ Feature: display the version
           Node {
             type: 'link_close',
             tag: '/a',
-            file: FullPath { value: '1.md' },
+            file: FullFile { value: '1.md' },
             line: 1,
             content: '',
             attributes: {}

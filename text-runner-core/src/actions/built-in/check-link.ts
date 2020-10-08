@@ -14,19 +14,18 @@ export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> 
   }
 
   action.name(`link to ${target}`)
-  const filePath = new files.FullPath(action.file)
 
   if (helpers.isMailtoLink(target)) {
     return action.SKIPPING
   }
 
   if (helpers.isLinkToAnchorInSameFile(target)) {
-    const result = checkLinkToAnchorInSameFile(filePath, target, action)
+    const result = checkLinkToAnchorInSameFile(action.file, target, action)
     return result
   }
 
   if (helpers.isLinkToAnchorInOtherFile(target)) {
-    const result = checkLinkToAnchorInOtherFile(filePath, target, action)
+    const result = checkLinkToAnchorInOtherFile(action.file, target, action)
     return result
   }
 
@@ -61,7 +60,7 @@ async function checkExternalLink(target: string, action: Args) {
 
 async function checkLinkToFilesystem(target: string, action: Args) {
   const unknownLink = new files.UnknownLink(decodeURI(target))
-  const absoluteLink = unknownLink.absolutify(new files.FullPath(action.file), action.configuration.publications)
+  const absoluteLink = unknownLink.absolutify(action.file, action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   const fullPath = path.join(action.configuration.sourceDir, linkedFile.unixified())
 
@@ -87,7 +86,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   }
 }
 
-function checkLinkToAnchorInSameFile(containingFile: files.FullPath, target: string, action: Args) {
+function checkLinkToAnchorInSameFile(containingFile: files.FullFile, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(containingFile, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
@@ -99,25 +98,31 @@ function checkLinkToAnchorInSameFile(containingFile: files.FullPath, target: str
   }
 }
 
-function checkLinkToAnchorInOtherFile(containingFile: files.FullPath, target: string, action: Args) {
+function checkLinkToAnchorInOtherFile(containingFile: files.FullFile, target: string, action: Args) {
   const link = new files.UnknownLink(target)
   const absoluteLink = link.absolutify(containingFile, action.configuration.publications)
-  const filePath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   const anchorName = absoluteLink.anchor()
+  const fullPath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
+  let fullFile: files.FullFile
+  try {
+    fullFile = fullPath.toFullFile()
+  } catch (e) {
+    throw new Error(`link to non-existing file ${fullPath.unixified()}`)
+  }
 
-  if (!action.linkTargets.hasFile(filePath)) {
+  if (!action.linkTargets.hasFile(fullFile)) {
     throw new Error(
-      `link to anchor #${anchorName} in non-existing file ${helpers.removeLeadingSlash(filePath.unixified())}`
+      `link to anchor #${anchorName} in non-existing file ${helpers.removeLeadingSlash(fullFile.unixified())}`
     )
   }
 
-  if (!action.linkTargets.hasAnchor(filePath, anchorName)) {
-    throw new Error(`link to non-existing anchor ${"#" + anchorName} in ${filePath.unixified()}`)
+  if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
+    throw new Error(`link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`)
   }
 
-  if (action.linkTargets.anchorType(filePath, anchorName) === "heading") {
-    action.name(`link to heading ${filePath.unixified() + "#" + anchorName}`)
+  if (action.linkTargets.anchorType(fullFile, anchorName) === "heading") {
+    action.name(`link to heading ${fullFile.unixified() + "#" + anchorName}`)
   } else {
-    action.name(`link to ${filePath.unixified()}#${anchorName}`)
+    action.name(`link to ${fullFile.unixified()}#${anchorName}`)
   }
 }

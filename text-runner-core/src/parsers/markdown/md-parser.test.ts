@@ -20,7 +20,7 @@ suite("MdParser.parseFile()", function () {
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
           expected.push(ast.Node.scaffold(expectedNodeData))
         }
-        const actual = await parse([new files.FullPath("input.md")], testDirPath)
+        const actual = await parse([new files.FullFile("input.md")], testDirPath)
         assert.deepEqual(actual[0], expected)
       })
     }

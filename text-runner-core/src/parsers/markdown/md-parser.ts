@@ -55,7 +55,7 @@ export class MarkdownParser {
   }
 
   /** returns the standard AST representing the given Markdown text */
-  parse(text: string, file: files.FullPath): ast.NodeList {
+  parse(text: string, file: files.FullFile): ast.NodeList {
     const mdAST = this.markdownIt.parse(text, {})
     return this.standardizeAST(mdAST, file, 1, new OpenNodeTracker())
   }
@@ -63,7 +63,7 @@ export class MarkdownParser {
   /** Converts the given MarkdownIt AST into the standard AST format */
   private standardizeAST(
     mdAST: MarkdownItAst,
-    file: files.FullPath,
+    file: files.FullFile,
     parentLine: number,
     ont: OpenNodeTracker
   ): ast.NodeList {
@@ -97,7 +97,7 @@ export class MarkdownParser {
   /** Returns the standardized version of the given MarkdownIt node */
   private standardizeNode(
     mdNode: MarkdownItNode,
-    file: files.FullPath,
+    file: files.FullFile,
     line: number,
     ont: OpenNodeTracker
   ): ast.NodeList {
@@ -170,7 +170,7 @@ export class MarkdownParser {
     throw new Error(`unknown MarkdownIt node: ${util.inspect(mdNode)}`)
   }
 
-  private standardizeImageNode(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeImageNode(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeMarkdownItAttributes(mdNode.attrs)
     for (const childNode of mdNode.children || []) {
@@ -189,7 +189,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeHeadingOpen(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeHeadingOpen(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     result.push(
       new ast.Node({
@@ -204,7 +204,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeHeadingClose(node: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeHeadingClose(node: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     result.push(
       new ast.Node({
@@ -219,7 +219,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeCodeInline(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeCodeInline(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     result.push(
       new ast.Node({
@@ -254,7 +254,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeEmbeddedCodeblock(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeEmbeddedCodeblock(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     result.push(
       new ast.Node({
@@ -289,7 +289,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeFence(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeFence(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
 
     result.push(
@@ -328,7 +328,7 @@ export class MarkdownParser {
   private standardizeClosingHTMLTag(
     mdNode: MarkdownItNode,
     ont: OpenNodeTracker,
-    file: files.FullPath,
+    file: files.FullFile,
     line: number
   ): ast.NodeList {
     const result = new ast.NodeList()
@@ -356,7 +356,7 @@ export class MarkdownParser {
   private standardizeHTMLBlock(
     mdNode: MarkdownItNode,
     ont: OpenNodeTracker,
-    file: files.FullPath,
+    file: files.FullFile,
     line: number
   ): ast.NodeList {
     const result = new ast.NodeList()
@@ -375,7 +375,7 @@ export class MarkdownParser {
 
   private standardizeOpeningNode(
     mdNode: MarkdownItNode,
-    file: files.FullPath,
+    file: files.FullFile,
     line: number,
     ont: OpenNodeTracker
   ): ast.NodeList {
@@ -394,7 +394,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeClosingNode(mdNode: MarkdownItNode, file: files.FullPath, line: number, ont: OpenNodeTracker) {
+  private standardizeClosingNode(mdNode: MarkdownItNode, file: files.FullFile, line: number, ont: OpenNodeTracker) {
     const result = new ast.NodeList()
     const openingNodeEndLine = ont.close(mdNode.type as ast.NodeType, file, line)
     let closingTagLine = line
@@ -414,7 +414,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standardizeTextNode(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standardizeTextNode(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     result.push(
       new ast.Node({
@@ -429,7 +429,7 @@ export class MarkdownParser {
     return result
   }
 
-  private standizeStandaloneTag(mdNode: MarkdownItNode, file: files.FullPath, line: number): ast.NodeList {
+  private standizeStandaloneTag(mdNode: MarkdownItNode, file: files.FullFile, line: number): ast.NodeList {
     const result = new ast.NodeList()
     result.push(
       new ast.Node({

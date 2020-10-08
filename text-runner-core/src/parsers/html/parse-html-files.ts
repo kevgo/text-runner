@@ -8,7 +8,7 @@ import path = require("path")
 
 /** returns the standard AST for the HTML files with the given paths */
 export async function parseHTMLFiles(
-  filenames: files.FullPath[],
+  filenames: files.FullFile[],
   sourceDir: string,
   tagMapper: TagMapper
 ): Promise<ast.NodeList[]> {

@@ -40,7 +40,7 @@ export class List {
     this.addLinkTarget(node.file, "heading", content)
   }
 
-  addLinkTarget(filePath: files.FullPath, type: Types, name: string): void {
+  addLinkTarget(filePath: files.FullFile, type: Types, name: string): void {
     const key = filePath.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })
@@ -48,7 +48,7 @@ export class List {
 
   // Returns the type of the given anchor
   // with the given name in the given file
-  anchorType(filePath: files.FullPath, name: string): string {
+  anchorType(filePath: files.FullFile, name: string): string {
     const anchorsForFile = this.targets[filePath.platformified()]
     if (!anchorsForFile) {
       throw new Error(`no anchors in file ${filePath.platformified()}`)
@@ -60,7 +60,7 @@ export class List {
     return anchor.type
   }
 
-  hasAnchor(filePath: files.FullPath, name: string): boolean {
+  hasAnchor(filePath: files.FullFile, name: string): boolean {
     const fileList = this.targets[filePath.platformified()]
     if (!fileList) {
       return false
@@ -69,7 +69,7 @@ export class List {
   }
 
   // Returns whether this link target list knows about the given file
-  hasFile(filePath: files.FullPath): boolean {
+  hasFile(filePath: files.FullFile): boolean {
     return this.targets[filePath.platformified()] != null
   }
 }

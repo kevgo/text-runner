@@ -21,7 +21,7 @@ export class OpenNodeTracker {
   }
 
   /** closes the corresponding open ast.Node and returns its endLine */
-  close(type: ast.NodeType, file: files.FullPath, line: number): number {
+  close(type: ast.NodeType, file: files.FullFile, line: number): number {
     const openType = type.replace("_close", "_open")
     for (let i = this.entries.length - 1; i >= 0; i--) {
       if (this.entries[i].node.type === openType) {

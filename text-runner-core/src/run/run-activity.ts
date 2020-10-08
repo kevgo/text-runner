@@ -23,7 +23,7 @@ export async function runActivity(
   const args: actions.Args = {
     SKIPPING: 254,
     configuration,
-    file: activity.file.platformified(),
+    file: activity.file,
     line: activity.line,
     linkTargets: targets,
     log: outputCollector.logFn(),

@@ -1,9 +1,7 @@
 import { assert } from "chai"
 
 import * as configuration from "../configuration/index"
-import { FullLink } from "./full-link"
-import { FullPath } from "./full-path"
-import { UnknownLink } from "./unknown-link"
+import * as files from "."
 
 suite("UnknownLink", function () {
   suite(".absolutify()", function () {
@@ -23,18 +21,18 @@ suite("UnknownLink", function () {
     ]
     for (const tt of tests) {
       test(tt.desc, function () {
-        const unknownLink = new UnknownLink(tt.link)
-        const containingFile = new FullPath(tt.give)
+        const unknownLink = new files.UnknownLink(tt.link)
+        const containingFile = new files.FullFile(tt.give)
         const publications = new configuration.Publications()
         const absoluteLink = unknownLink.absolutify(containingFile, publications)
-        assert.deepEqual(absoluteLink, new FullLink(tt.want))
+        assert.deepEqual(absoluteLink, new files.FullLink(tt.want))
       })
     }
   })
 
   test(".isAbsolute()", function () {
-    assert.isTrue(new UnknownLink("/foo/bar").isAbsolute())
-    assert.isFalse(new UnknownLink("foo/bar").isAbsolute())
-    assert.isFalse(new UnknownLink("../foo/bar").isAbsolute())
+    assert.isTrue(new files.UnknownLink("/foo/bar").isAbsolute())
+    assert.isFalse(new files.UnknownLink("foo/bar").isAbsolute())
+    assert.isFalse(new files.UnknownLink("../foo/bar").isAbsolute())
   })
 })

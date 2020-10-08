@@ -2,11 +2,11 @@ import * as path from "path"
 
 import * as configuration from "../configuration/index"
 import * as helpers from "../helpers"
-import { FullLink } from "./full-link"
+import * as files from "."
 
 /**
- * FullPath represents a complete path from the root directory of the document base
- * to a Markdown file on the local file system.
+ * represents a full path to either a file or a directory,
+ * i.e. a link from the document base root to the object
  */
 export class FullPath {
   private readonly value: string
@@ -16,8 +16,8 @@ export class FullPath {
   }
 
   /** Returns a new file path with the given file name appended to the end of this file path */
-  append(fileName: string): FullPath {
-    return new FullPath(path.join(this.platformified(), fileName))
+  append(fileName: string): files.FullFile {
+    return new files.FullFile(path.join(this.platformified(), fileName))
   }
 
   /**
@@ -63,11 +63,19 @@ export class FullPath {
    * Returns the public link under which this file path is published
    * @param publications the publications of this session
    */
-  publicPath(publications: configuration.Publications): FullLink {
+  publicPath(publications: configuration.Publications): files.FullLink {
     const publication = publications.forFilePath(this)
     if (publication == null) {
-      return new FullLink(this.unixified())
+      return new files.FullLink(this.unixified())
     }
     return publication.publish(this)
+  }
+
+  /** provides the FullFile if this path points to a file */
+  toFullFile(): files.FullFile {
+    if (this.isDirectory()) {
+      throw new Error(`FullPath '${this.unixified()}' does tot point to a file`)
+    }
+    return new files.FullFile(this.value)
   }
 }

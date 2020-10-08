@@ -23,7 +23,7 @@ suite("ClosingTagParser.isClosingTag()", function () {
 
 test("ClosingTagParser.parse()", function () {
   const parser = new ClosingTagParser(new TagMapper())
-  const file = new files.FullPath("filepath")
+  const file = new files.FullFile("filepath")
   const line = 12
   const actual = parser.parse("  < / a >  ", file, line)
   const expected = ast.NodeList.scaffold({

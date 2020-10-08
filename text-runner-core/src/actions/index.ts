@@ -1,5 +1,6 @@
 import * as ast from "../ast"
 import * as config from "../configuration/index"
+import * as files from "../filesystem"
 import * as linkTargets from "../link-targets"
 import * as run from "../run"
 
@@ -22,7 +23,7 @@ export interface Args {
   document: ast.NodeList
 
   /** name of the file in which the currently tested active region is */
-  file: string
+  file: files.FullFile
 
   /** line in the current file at which the currently tested active region starts */
   line: number

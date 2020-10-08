@@ -18,10 +18,6 @@ export class FullFile {
     return new files.FullPath(path.dirname(this.value) + "/")
   }
 
-  dirname(): string {
-    return path.dirname(this.value)
-  }
-
   /** Returns the file extension of this path */
   extName(): string {
     return path.extname(this.value)

@@ -1,5 +1,4 @@
 import { promises as fs } from "fs"
-import * as path from "path"
 import * as tr from "text-runner-core"
 import * as YAML from "yamljs"
 
@@ -13,7 +12,7 @@ export async function load(cmdLineArgs: config.Data): Promise<config.Data> {
 /** creates a new Text-Runner configuration file */
 export async function create(cmdLineArgs: config.Data): Promise<void> {
   await fs.writeFile(
-    path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName || "text-run.yml"),
+    cmdLineArgs.configFileName || "text-run.yml",
     `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.
@@ -64,17 +63,15 @@ emptyWorkspace: true`
 /** provides the textual config file content */
 async function read(cmdLineArgs: config.Data): Promise<string> {
   if (cmdLineArgs.configFileName) {
-    const configFilePath = path.join(cmdLineArgs.sourceDir || ".", cmdLineArgs.configFileName)
     try {
-      const result = await fs.readFile(configFilePath, "utf8")
+      const result = await fs.readFile(cmdLineArgs.configFileName, "utf8")
       return result
     } catch (e) {
-      throw new tr.UserError(`cannot read configuration file "${configFilePath}"`, e.message)
+      throw new tr.UserError(`cannot read configuration file "${cmdLineArgs.configFileName}"`, e.message)
     }
   }
   try {
-    const configFilePath = path.join(cmdLineArgs.sourceDir || ".", "text-run.yml")
-    const result = await fs.readFile(configFilePath, "utf8")
+    const result = await fs.readFile("text-run.yml", "utf8")
     return result
   } catch (e) {
     return ""

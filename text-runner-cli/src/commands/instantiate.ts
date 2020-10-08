@@ -11,7 +11,6 @@ export function instantiate(
   userConfig: config.Data,
   debugSubcommand: tr.commands.DebugSubcommand | undefined
 ): tr.commands.Command {
-  const sourceDir = userConfig.sourceDir || "."
   switch (commandName) {
     case "help":
       return new HelpCommand()
@@ -19,7 +18,7 @@ export function instantiate(
       if (!userConfig.files) {
         throw new Error("no action name given")
       }
-      return new scaffold.ScaffoldCommand(userConfig.files, sourceDir, userConfig.scaffoldLanguage || "js")
+      return new scaffold.ScaffoldCommand(userConfig.files, ".", userConfig.scaffoldLanguage || "js")
     case "setup":
       return new SetupCommand(userConfig)
     case "version":

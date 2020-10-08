@@ -19,7 +19,6 @@ export class Data {
   publications?: tr.configuration.Publications
   scaffoldLanguage?: commands.ScaffoldLanguage
   showSkipped?: boolean
-  sourceDir?: string // the root directory of the source code to test
   systemTmp?: boolean
   workspace?: string // path of the workspace to use
 
@@ -76,9 +75,6 @@ export class Data {
     }
     if (this.showSkipped != null) {
       result.showSkipped = this.showSkipped
-    }
-    if (this.sourceDir != null) {
-      result.sourceDir = this.sourceDir
     }
     if (this.systemTmp != null) {
       result.systemTmp = this.systemTmp

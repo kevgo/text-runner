@@ -16,6 +16,6 @@ export function defaults(): Data {
     showSkipped: false,
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: new files.AbsoluteDir(""),
+    workspace: new files.AbsoluteDir("determined later at backfill-defaults"),
   }
 }

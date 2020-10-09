@@ -13,6 +13,11 @@ export class AbsoluteDir {
     this.value = helpers.unixify(value)
   }
 
+  /** provides a path of this directory with the given path appended */
+  joinStr(file: string): string {
+    return path.join(this.platformified(), file)
+  }
+
   /**
    * Returns the path in the platform-specific format,
    * i.e. using '\' on Windows and '/' everywhere else

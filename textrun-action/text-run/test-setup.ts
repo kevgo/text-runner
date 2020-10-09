@@ -1,5 +1,4 @@
 import { promises as fs } from "fs"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 export default async function testSetup(action: tr.actions.Args): Promise<void> {
@@ -10,7 +9,7 @@ export default async function testSetup(action: tr.actions.Args): Promise<void> 
   const pkgName = action.region.getNodesFor(codeBlocks[0]).text()
   const action1 = action.region.getNodesFor(codeBlocks[1]).text()
   await fs.writeFile(
-    path.join(action.configuration.workspace.platformified(), "package.json"),
+    action.configuration.workspace.joinStr("package.json"),
     `\
 {
   "name": "${pkgName}",
@@ -19,7 +18,7 @@ export default async function testSetup(action: tr.actions.Args): Promise<void> 
 }`
   )
   await fs.writeFile(
-    path.join(action.configuration.workspace.platformified(), "index.js"),
+    action.configuration.workspace.joinStr("index.js"),
     `\
 module.exports = {
   textrunActions: {

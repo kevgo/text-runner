@@ -1,13 +1,14 @@
 import * as files from "../filesystem"
 import { Publications } from "./publications"
 
-/** Configuration values for Text-Runner Core used internally */
-export type Data = CoreData & AbsoluteDirs
-
+/** configuration values used by the Text-Runner API */
 export type APIData = Partial<CompleteAPIData>
 
-/** Configuration values for Text-Runner Core from the outside */
-export type CompleteAPIData = CoreData & StringDirs
+/** a full set of configuration values used by the Text-Runner API */
+export type CompleteAPIData = SharedValues & StringDirs
+
+/** Configuration values used inside Text-Runner Core */
+export type Data = SharedValues & AbsoluteDirs
 
 interface AbsoluteDirs {
   /** the root directory of the source code to test */
@@ -17,7 +18,7 @@ interface AbsoluteDirs {
   workspace: files.AbsoluteDir
 }
 
-interface CoreData {
+interface SharedValues {
   /** the name of the default filename, set to '' if none is given */
   defaultFile: string
 

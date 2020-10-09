@@ -10,7 +10,7 @@ export default async function testSetup(action: tr.actions.Args): Promise<void> 
   const pkgName = action.region.getNodesFor(codeBlocks[0]).text()
   const action1 = action.region.getNodesFor(codeBlocks[1]).text()
   await fs.writeFile(
-    path.join(action.configuration.workspace, "package.json"),
+    path.join(action.configuration.workspace.platformified(), "package.json"),
     `\
 {
   "name": "${pkgName}",
@@ -19,7 +19,7 @@ export default async function testSetup(action: tr.actions.Args): Promise<void> 
 }`
   )
   await fs.writeFile(
-    path.join(action.configuration.workspace, "index.js"),
+    path.join(action.configuration.workspace.platformified(), "index.js"),
     `\
 module.exports = {
   textrunActions: {

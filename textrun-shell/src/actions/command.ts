@@ -1,6 +1,5 @@
 import * as color from "colorette"
 import * as observableProcess from "observable-process"
-import * as path from "path"
 import * as tr from "text-runner-core"
 import * as trExt from "textrun-extension"
 
@@ -12,7 +11,7 @@ import { trimDollar } from "../helpers/trim-dollar"
  * Runs the given commands synchronously on the console.
  */
 export async function command(action: tr.actions.Args): Promise<void> {
-  const config = Configuration.load(path.join(action.configuration.sourceDir, "textrun-shell.js"))
+  const config = Configuration.load(action.configuration.sourceDir.joinStr("textrun-shell.js"))
   const commandsToRun = action.region
     .text()
     .split("\n")

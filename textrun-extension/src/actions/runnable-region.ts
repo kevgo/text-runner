@@ -11,7 +11,7 @@ export async function runnableRegion(action: tr.actions.Args): Promise<void> {
   }
   await fs.writeFile(action.configuration.workspace.joinStr("runnable-region.md"), content)
   const command = new tr.commands.Run({
-    sourceDir: action.configuration.workspace.platformified(),
+    sourceDir: action.configuration.workspace,
     workspace: ".",
     emptyWorkspace: false,
   })

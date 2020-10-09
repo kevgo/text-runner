@@ -28,7 +28,7 @@ export class Dynamic implements Command {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
-      const config = await configuration.backfillDefaults(this.userConfig)
+      const config = await configuration.addDefaults(this.userConfig)
 
       // step 2: create working dir
       await workspace.create(config)

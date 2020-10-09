@@ -1,4 +1,3 @@
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 export function nameFull(action: tr.actions.Args): void {
@@ -6,9 +5,9 @@ export function nameFull(action: tr.actions.Args): void {
   action.name(`verify full name of action "${want}"`)
   const wantStd = tr.actions.name(want)
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const pkgJson = require(path.join(action.configuration.sourceDir, "package.json"))
+  const pkgJson = require(action.configuration.sourceDir.joinStr("package.json"))
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const main = require(path.join(action.configuration.sourceDir, pkgJson.main))
+  const main = require(action.configuration.sourceDir.joinStr(pkgJson.main))
   const allNames = Object.keys(main.textrunActions)
   const allNamesStd = allNames.map(tr.actions.name)
   if (!allNamesStd.includes(wantStd)) {

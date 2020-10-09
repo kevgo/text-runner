@@ -49,7 +49,7 @@ Then("it executes in the local {string} directory", function (dirName) {
 Then("it emits these events:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   if (world.apiException) {
-    throw world.apiException
+    console.log(world.apiException)
   }
   const tableHashes = table.hashes()
   const want: ExecuteResultLine[] = []
@@ -87,6 +87,7 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
   }
   let have: ExecuteResultLine[] = []
   const wanted = want[0]
+  console.log(world.apiResults)
   for (const activityResult of world.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {

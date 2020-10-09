@@ -29,7 +29,7 @@ export class Run implements command.Command {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
-      const config = await configuration.backfillDefaults(this.userConfig)
+      const config = await configuration.addDefaults(this.userConfig)
 
       // step 2: create workspace
       await workspace.create(config)

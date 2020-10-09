@@ -5,7 +5,9 @@ import { Publications } from "./publications"
 export type Data = CoreData & AbsoluteDirWorkspace
 
 /** Configuration values for Text-Runner Core from the outside */
-export type APIData = Partial<CoreData> & Partial<StringWorkspace>
+export type CompleteAPIData = CoreData & StringWorkspace
+
+export type APIData = Partial<CompleteAPIData>
 
 interface AbsoluteDirWorkspace {
   /** the root directory of the workspace */

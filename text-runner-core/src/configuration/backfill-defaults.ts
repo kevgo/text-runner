@@ -14,7 +14,9 @@ export async function backfillDefaults(partial: PartialData): Promise<Data> {
       result[key] = value
     }
   }
-  result.workspace = await getWorkspacePath(result)
+  if (partial.workspace != null) {
+    result.workspace = await getWorkspacePath(result)
+  }
   return result
 }
 

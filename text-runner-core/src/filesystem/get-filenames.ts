@@ -51,8 +51,7 @@ export async function markdownFilesInDir(dirName: string, sourceDir: string): Pr
   return allFiles
     .filter(file => !file.includes("node_modules"))
     .sort()
-    .map(file => new files.AbsoluteFile(file))
-    .map(file => file.toFullFile(sourceDir))
+    .map(file => new files.AbsoluteFile(file).toFullFile(sourceDir))
 }
 
 /**

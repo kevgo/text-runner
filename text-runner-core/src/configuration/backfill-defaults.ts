@@ -13,16 +13,16 @@ export async function backfillDefaults(partial: PartialData): Promise<Data> {
       result[key] = value
     }
   }
-  result.workspace = await getWorkspacePath(result)
+  result.workspace = await getWorkspacePath(result, partial.workspace || "tmp")
   return result
 }
 
-async function getWorkspacePath(config: Data): Promise<string> {
+async function getWorkspacePath(config: Data, workspace: string): Promise<string> {
   if (config.systemTmp === false) {
-    return path.join(config.sourceDir, config.workspace)
+    return path.join(config.sourceDir, workspace)
   } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()
-    return path.join(tmpDir.path, config.workspace)
+    return path.join(tmpDir.path, workspace)
   } else {
     throw new UserError(`unknown 'systemTmp' setting: ${config.systemTmp}`)
   }

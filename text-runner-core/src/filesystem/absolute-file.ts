@@ -10,14 +10,14 @@ export class AbsoluteFile {
     this.value = value
   }
 
-  /** provides the directory that contains this file path */
+  /** provides the directory that contains this file */
   directory(): files.AbsoluteDir {
     return new files.AbsoluteDir(path.dirname(this.value) + "/")
   }
 
   /**
-   * Returns the path in the platform-specific format,
-   * i.e. using '\' on Windows and '/' everywhere else
+   * provides this file path with platform specific path separators,
+   * i.e. '\' on Windows and '/' everywhere else
    */
   platformified(): string {
     return this.value.replace(/\//g, path.sep)
@@ -28,9 +28,7 @@ export class AbsoluteFile {
     return new files.FullFile(path.relative(sourceDir, this.platformified()))
   }
 
-  /**
-   * Returns this absolute path using forward slashes as path separators
-   */
+  /** provides this file path with forward slashes as path separators */
   unixified(): string {
     return this.value
   }

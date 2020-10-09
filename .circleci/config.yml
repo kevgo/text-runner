@@ -19,8 +19,8 @@ jobs:
       - run: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
             echo testing all codebases ...
-            make test-all
+            make test-all-ci
           else
             echo testing affected codebases
-            make test-affected
+            make test-affected-ci
           fi

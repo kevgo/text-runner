@@ -118,8 +118,14 @@ test: lint  # runs all tests for the root directory
 test-affected:  # runs all tests for the codebases affected by changes in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory test-lerna
 
+test-affected-ci:  # runs all tests for the codebases affected by changes in this branch (which only provides 2 cores but reports 36 and kills processes randomly if they use more)
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel --concurrency=2 -- make --no-print-directory test-lerna
+
 test-all:  # runs all tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make --no-print-directory test-lerna
+
+test-all-ci:  # runs all tests on CircleCI (which only provides 2 cores but reports 36 and kills processes randomly if they use more)
+	${CURDIR}/node_modules/.bin/lerna exec --parallel --concurrency=2 --stream -- make --no-print-directory test-lerna
 
 test-changed:  # runs all tests of codebases changed in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory test-lerna

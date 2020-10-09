@@ -3,10 +3,10 @@ import got from "got"
 import * as path from "path"
 
 import * as configuration from "../../configuration/index"
-import { Args } from "../index"
+import * as actions from "../index"
 
 /** The "checkImage" action checks for broken images. */
-export async function checkImage(action: Args): Promise<number | void> {
+export async function checkImage(action: actions.Args): Promise<number | void> {
   const node = action.region[0]
   let imagePath = node.attributes.src
   if (!imagePath) {
@@ -33,7 +33,7 @@ async function checkLocalImage(imagePath: string, c: configuration.Data): Promis
   }
 }
 
-async function checkRemoteImage(url: string, action: Args) {
+async function checkRemoteImage(url: string, action: actions.Args) {
   if (!action.configuration.online) {
     return action.SKIPPING
   }

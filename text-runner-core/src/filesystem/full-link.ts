@@ -73,7 +73,7 @@ export class FullLink {
 
     // append the default file
     if (result.extName() === "" && defaultFile) {
-      return result.append(defaultFile)
+      return result.joinStr(defaultFile)
     }
     return result
   }

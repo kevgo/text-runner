@@ -1,6 +1,5 @@
 import { promises as fs } from "fs"
 import got from "got"
-import * as path from "path"
 
 import * as configuration from "../../configuration/index"
 import * as files from "../../filesystem"
@@ -23,7 +22,7 @@ export async function checkImage(action: actions.Args): Promise<number | void> {
     if (imagePath.startsWith("/")) {
       imageFullFile = new files.FullFile(imagePath)
     } else {
-      imageFullFile = new files.FullFile(path.join(path.dirname(node.file.platformified()), imagePath))
+      imageFullFile = node.file.directory().joinStr(imagePath)
     }
     const result = await checkLocalImage(imageFullFile, action.configuration)
     return result

@@ -15,11 +15,6 @@ export class FullPath {
     this.value = helpers.removeLeadingSlash(helpers.unixify(value))
   }
 
-  /** Returns a new file path with the given file name appended to the end of this file path */
-  append(fileName: string): files.FullFile {
-    return new files.FullFile(path.join(this.platformified(), fileName))
-  }
-
   /** Returns the directory that contains this file path */
   directory(): FullPath {
     if (this.isDirectory()) {

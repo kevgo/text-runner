@@ -60,7 +60,7 @@ export class Publication {
     return new files.FullPath(result.value)
   }
 
-  /** Returns whether this publication maps the given link */
+  /** indicates whether this publication maps the given link */
   resolves(link: files.FullLink): boolean {
     return link.value.startsWith(this.publicPath)
   }

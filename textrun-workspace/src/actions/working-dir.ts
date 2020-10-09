@@ -6,7 +6,7 @@ import * as tr from "text-runner-core"
 export function workingDir(action: tr.actions.Args): void {
   const directory = action.region.text()
   action.name(`changing into the ${color.cyan(directory)} directory`)
-  const fullPath = path.join(action.configuration.workspace, directory)
+  const fullPath = path.join(action.configuration.workspace.platformified(), directory)
   action.log(`cd ${fullPath}`)
   try {
     process.chdir(fullPath)

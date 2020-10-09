@@ -8,7 +8,7 @@ export async function additionalFileContent(action: tr.actions.Args): Promise<vo
   const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
   action.name(`append to file ${color.cyan(fileRelPath)}`)
   const content = action.region.textInNodeOfType("fence", "code")
-  const fullPath = path.join(action.configuration.workspace, fileRelPath)
+  const fullPath = path.join(action.configuration.workspace.platformified(), fileRelPath)
   action.log(content)
   await fs.appendFile(fullPath, content)
 }

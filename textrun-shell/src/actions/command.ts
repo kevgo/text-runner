@@ -28,7 +28,7 @@ export async function command(action: tr.actions.Args): Promise<void> {
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
   const processor = observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
-    cwd: action.configuration.workspace,
+    cwd: action.configuration.workspace.platformified(),
   })
   // this is also used in the "verify-run-console-output" step
   const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess

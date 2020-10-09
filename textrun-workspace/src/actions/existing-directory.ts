@@ -12,7 +12,7 @@ export async function existingDirectory(action: tr.actions.Args): Promise<void> 
   const dirName = action.region.text()
   const dirRelName = path.join(action.region[0].attributes["dir"] || ".", dirName)
   action.name(`directory ${color.cyan(dirRelName)} exists in the workspace`)
-  const fullPath = path.join(action.configuration.workspace, dirRelName)
+  const fullPath = path.join(action.configuration.workspace.platformified(), dirRelName)
   let stats: fs.Stats
   try {
     stats = await fsp.lstat(fullPath)

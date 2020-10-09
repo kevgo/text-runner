@@ -14,8 +14,8 @@ export class AbsoluteDir {
   }
 
   /** provides a path of this directory with the given path appended */
-  joinStr(file: string): string {
-    return path.join(this.platformified(), file)
+  joinStr(...paths: string[]): string {
+    return path.join(this.platformified(), ...paths)
   }
 
   /**
@@ -24,6 +24,10 @@ export class AbsoluteDir {
    */
   platformified(): string {
     return this.value.replace(/\//g, path.sep)
+  }
+
+  relativeStr(other: string): string {
+    return path.relative(this.platformified(), other)
   }
 
   /**

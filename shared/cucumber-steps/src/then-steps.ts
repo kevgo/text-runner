@@ -48,7 +48,9 @@ Then("it executes in the local {string} directory", function (dirName) {
 
 Then("it emits these events:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
-  assert.isUndefined(world.apiException)
+  if (world.apiException) {
+    throw world.apiException
+  }
   const tableHashes = table.hashes()
   const want: ExecuteResultLine[] = []
   for (const line of tableHashes) {

@@ -1,4 +1,3 @@
-import * as glob from "glob-promise"
 import * as path from "path"
 
 import * as helpers from "../helpers"
@@ -15,11 +14,6 @@ export class AbsoluteDir {
     this.value = helpers.unixify(value)
   }
 
-  async fullFilesMatchingGlob(expression: string): Promise<files.FullFile[]> {
-    const allFiles = await glob(expression)
-    return allFiles.sort().map(file => new files.AbsoluteFile(file).toFullFile(this))
-  }
-
   /** joins the given relative directory */
   joinDir(other: files.RelativeDir): AbsoluteDir {
     return new AbsoluteDir(this.joinStr(other.value))
@@ -28,6 +22,11 @@ export class AbsoluteDir {
   /** provides a path of this directory with the given path appended */
   joinStr(...paths: string[]): string {
     return path.join(this.platformified(), ...paths)
+  }
+
+  /** indicates whether this directory is the same as the given source dir */
+  matches(other: files.SourceDir): boolean {
+    return this.unixified() === other.unixified()
   }
 
   /**
@@ -40,6 +39,10 @@ export class AbsoluteDir {
 
   relativeStr(other: string): string {
     return path.relative(this.platformified(), other)
+  }
+
+  toFullDir(sourceDir: files.SourceDir): files.FullDir {
+    return new files.FullDir(path.relative(sourceDir.platformified(), this.platformified()))
   }
 
   /**

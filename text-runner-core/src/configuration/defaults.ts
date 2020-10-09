@@ -34,7 +34,7 @@ export async function addDefaults(partial: configuration.APIData): Promise<confi
   }
   return {
     ...fullAPIData,
-    sourceDir: new files.AbsoluteDir(fullAPIData.sourceDir),
+    sourceDir: new files.SourceDir(fullAPIData.sourceDir),
     workspace: await getWorkspacePath(fullAPIData),
   }
 }

@@ -14,9 +14,9 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
   filenames = removeExcludedFiles(filenames, config.exclude)
   filenames = removeExcludedFiles(filenames, "node_modules")
   if (config.emptyWorkspace === false) {
-    const relativeWorkspace = config.sourceDir.relativeStr(config.workspace.platformified())
-    if (relativeWorkspace !== "") {
-      filenames = removeExcludedFiles(filenames, relativeWorkspace)
+    if (!config.workspace.matches(config.sourceDir)) {
+      const fullWorkspace = config.workspace.toFullDir(config.sourceDir)
+      filenames = removeExcludedFiles(filenames, fullWorkspace.platformified())
     }
   }
   return filenames
@@ -45,7 +45,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
  * returns all the markdown files in this directory and its children,
  * relative to the given sourceDir
  */
-export async function markdownFilesInDir(dirName: string, sourceDir: files.AbsoluteDir): Promise<files.FullFile[]> {
+export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFile[]> {
   const allFiles = await glob(`${dirName}/**/*.md`)
   return allFiles
     .filter(file => !file.includes("node_modules"))

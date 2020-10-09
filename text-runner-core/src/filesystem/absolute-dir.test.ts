@@ -16,6 +16,13 @@ suite("files.AbsoluteDir", function () {
     assert.equal(have.unixified(), "/home/acme/textrun/src")
   })
 
+  test("joinFile", function () {
+    const absDir = new files.AbsoluteDir("/home/acme/textrun")
+    const give = new files.FullFile("/src/README.md")
+    const have = absDir.joinFullFile(give)
+    assert.equal(have.unixified(), "/home/acme/textrun/src/README.md")
+  })
+
   suite("platformified", function () {
     test("on *nix", function () {
       if (process.platform === "win32") {

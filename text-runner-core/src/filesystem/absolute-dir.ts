@@ -25,6 +25,11 @@ export class AbsoluteDir {
     return new AbsoluteDir(this.joinStr(other.value))
   }
 
+  /** provides the absolute path to the given file inside this directory */
+  joinFullFile(file: files.FullFile): files.AbsoluteFile {
+    return new files.AbsoluteFile(this.joinStr(file.platformified()))
+  }
+
   /** provides a path of this directory with the given path appended */
   joinStr(...paths: string[]): string {
     return path.join(this.platformified(), ...paths)

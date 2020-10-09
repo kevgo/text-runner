@@ -26,10 +26,19 @@ suite("AbsoluteFile", function () {
       assert.equal(have, "c:\\Users\\acme\\textrun\\README.md")
     })
   })
-  test("relativeFromStrDir", function () {
-    const file = new files.AbsoluteFile("/home/acme/text-runner/README.md")
-    const want = new files.FullFile("text-runner/README.md")
-    assert.deepEqual(file.toFullFile("/home/acme/"), want)
+  suite("toFullFile", function () {
+    test("in same dir", function () {
+      const file = new files.AbsoluteFile("/home/acme/text-runner/README.md")
+      const have = file.toFullFile("/home/acme/text-runner")
+      const want = new files.FullFile("README.md")
+      assert.deepEqual(have, want)
+    })
+    test("in subdir", function () {
+      const file = new files.AbsoluteFile("/home/acme/text-runner/README.md")
+      const have = file.toFullFile("/home/acme")
+      const want = new files.FullFile("text-runner/README.md")
+      assert.deepEqual(have, want)
+    })
   })
   suite("unixified", function () {
     test("on *nix", function () {

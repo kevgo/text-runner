@@ -6,7 +6,7 @@ import * as util from "util"
 export async function runTextrunner(action: tr.actions.Args): Promise<void> {
   action.name("Running Text-Runner in workspace")
   const command = new tr.commands.Run({
-    sourceDir: path.join(action.configuration.workspace, action.region[0].attributes["dir"] || "."),
+    sourceDir: path.join(action.configuration.workspace.platformified(), action.region[0].attributes["dir"] || "."),
     workspace: ".",
     emptyWorkspace: false,
   })

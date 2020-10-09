@@ -25,7 +25,7 @@ export class Finder {
   }
 
   /** loads all actions */
-  static load(sourceDir: files.AbsoluteDir): Finder {
+  static load(sourceDir: files.SourceDir): Finder {
     return new Finder(
       loadBuiltinActions(),
       loadCustomActions(sourceDir.joinStr("text-run")),
@@ -34,7 +34,7 @@ export class Finder {
   }
 
   /** loads only the actions for dynamic tests */
-  static loadDynamic(sourceDir: files.AbsoluteDir): Finder {
+  static loadDynamic(sourceDir: files.SourceDir): Finder {
     return new Finder(new Actions(), loadCustomActions(sourceDir.joinStr("text-run")), new ExternalActionManager())
   }
 

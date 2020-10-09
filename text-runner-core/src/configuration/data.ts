@@ -12,7 +12,7 @@ export type Data = SharedValues & AbsoluteDirs
 
 interface AbsoluteDirs {
   /** the root directory of the source code to test */
-  sourceDir: files.AbsoluteDir
+  sourceDir: files.SourceDir
 
   /** the root directory of the workspace */
   workspace: files.AbsoluteDir

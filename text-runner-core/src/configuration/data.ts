@@ -41,7 +41,7 @@ interface CoreData {
   showSkipped: boolean
 
   /** the root directory of the source code to test */
-  sourceDir: string
+  sourceDir: files.AbsoluteDir
 
   /** whether to create the workspace in the system temp directory or locally */
   systemTmp: boolean

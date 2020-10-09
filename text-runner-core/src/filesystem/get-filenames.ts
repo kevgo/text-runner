@@ -1,6 +1,5 @@
 import * as glob from "glob-promise"
 import * as isGlob from "is-glob"
-import * as path from "path"
 
 import * as configuration from "../configuration/index"
 import { UserError } from "../errors/user-error"
@@ -15,7 +14,7 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
   filenames = removeExcludedFiles(filenames, config.exclude)
   filenames = removeExcludedFiles(filenames, "node_modules")
   if (!config.emptyWorkspace) {
-    const relativeWorkspace = path.relative(config.sourceDir.platformified(), config.workspace.platformified())
+    const relativeWorkspace = config.sourceDir.relativeStr(config.workspace.platformified())
     if (relativeWorkspace !== "") {
       filenames = removeExcludedFiles(filenames, relativeWorkspace)
     }

@@ -1,6 +1,5 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 import { makefileTargets } from "../helpers/makefile-targets"
@@ -19,7 +18,7 @@ export async function command(action: tr.actions.Args): Promise<void> {
   if (target === "") {
     throw new Error(`No make target found in "${command}"`)
   }
-  const makePath = path.join(action.configuration.sourceDir, action.region[0].attributes["dir"] || ".", "Makefile")
+  const makePath = action.configuration.sourceDir.joinStr(action.region[0].attributes["dir"] || ".", "Makefile")
   const makefile = await fs.readFile(makePath, "utf8")
   const commands = makefileTargets(makefile).map((target: string) => `make ${target}`)
   if (!commands.includes(command)) {

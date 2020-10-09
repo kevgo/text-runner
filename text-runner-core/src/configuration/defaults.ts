@@ -14,7 +14,7 @@ export function defaults(): Data {
     publications: new Publications(),
     scaffoldLanguage: "js",
     showSkipped: false,
-    sourceDir: process.cwd(),
+    sourceDir: new files.AbsoluteDir(process.cwd()),
     systemTmp: false,
     workspace: new files.AbsoluteDir("determined later at backfill-defaults"),
   }

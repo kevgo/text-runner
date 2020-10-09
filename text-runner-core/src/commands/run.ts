@@ -69,7 +69,7 @@ export class Run implements command.Command {
       await Promise.all(parJobs)
 
       // step 9: cleanup
-      process.chdir(config.sourceDir)
+      process.chdir(config.sourceDir.platformified())
     } finally {
       process.chdir(originalDir)
     }

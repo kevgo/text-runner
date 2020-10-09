@@ -46,10 +46,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
  * returns all the markdown files in this directory and its children,
  * relative to the given sourceDir
  */
-export async function markdownFilesInDir(
-  dirName: files.AbsoluteDir,
-  sourceDir: files.AbsoluteDir
-): Promise<files.FullFile[]> {
+export async function markdownFilesInDir(dirName: string, sourceDir: files.AbsoluteDir): Promise<files.FullFile[]> {
   const allFiles = await glob(`${dirName}/**/*.md`)
   return allFiles
     .filter(file => !file.includes("node_modules"))

@@ -20,7 +20,7 @@ export async function backfillDefaults(partial: APIData): Promise<Data> {
 
 async function getWorkspacePath(config: Data, workspace: string): Promise<files.AbsoluteDir> {
   if (config.systemTmp === false) {
-    return new files.AbsoluteDir(path.join(config.sourceDir, workspace))
+    return new files.AbsoluteDir(config.sourceDir.joinStr(workspace))
   } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()
     return new files.AbsoluteDir(path.join(tmpDir.path, workspace))

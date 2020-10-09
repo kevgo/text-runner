@@ -63,7 +63,7 @@ export class Static implements Command {
       await Promise.all(parResults)
 
       // step 9: cleanup
-      process.chdir(config.sourceDir)
+      process.chdir(config.sourceDir.platformified())
     } finally {
       process.chdir(originalDir)
     }

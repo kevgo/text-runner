@@ -27,7 +27,7 @@ export async function checkImage(action: Args): Promise<number | void> {
 
 async function checkLocalImage(imagePath: string, c: configuration.Data): Promise<void> {
   try {
-    await fs.stat(path.join(c.sourceDir, imagePath))
+    await fs.stat(c.sourceDir.joinStr(imagePath))
   } catch (err) {
     throw new Error(`image ${imagePath} does not exist`)
   }

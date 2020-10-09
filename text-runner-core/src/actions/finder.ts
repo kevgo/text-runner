@@ -6,6 +6,7 @@ import * as rechoir from "rechoir"
 import * as actions from "../actions"
 import * as activities from "../activities/index"
 import { UserError } from "../errors/user-error"
+import * as files from "../filesystem"
 import * as helpers from "../helpers"
 import { Actions } from "./actions"
 import { ExternalActionManager } from "./external-action-manager"
@@ -24,17 +25,17 @@ export class Finder {
   }
 
   /** loads all actions */
-  static load(sourceDir: string): Finder {
+  static load(sourceDir: files.AbsoluteDir): Finder {
     return new Finder(
       loadBuiltinActions(),
-      loadCustomActions(path.join(sourceDir, "text-run")),
+      loadCustomActions(sourceDir.joinStr("text-run")),
       new ExternalActionManager()
     )
   }
 
   /** loads only the actions for dynamic tests */
-  static loadDynamic(sourceDir: string): Finder {
-    return new Finder(new Actions(), loadCustomActions(path.join(sourceDir, "text-run")), new ExternalActionManager())
+  static loadDynamic(sourceDir: files.AbsoluteDir): Finder {
+    return new Finder(new Actions(), loadCustomActions(sourceDir.joinStr("text-run")), new ExternalActionManager())
   }
 
   /** loads only the actions for static tests */

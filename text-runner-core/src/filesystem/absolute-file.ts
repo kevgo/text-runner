@@ -24,8 +24,8 @@ export class AbsoluteFile {
   }
 
   /** provides the relative path from the given directory to this file */
-  toFullFile(sourceDir: string): files.FullFile {
-    return new files.FullFile(path.relative(sourceDir, this.platformified()))
+  toFullFile(sourceDir: files.AbsoluteDir): files.FullFile {
+    return new files.FullFile(path.relative(sourceDir.platformified(), this.platformified()))
   }
 
   /** provides this file path with forward slashes as path separators */

@@ -28,7 +28,7 @@ export class Static implements Command {
     const originalDir = process.cwd()
     try {
       // step 1: determine full configuration
-      const config = await configuration.backfillDefaults(this.userConfig)
+      const config = await configuration.addDefaults(this.userConfig)
 
       // step 2: create working dir
       await workspace.create(config)
@@ -63,7 +63,7 @@ export class Static implements Command {
       await Promise.all(parResults)
 
       // step 9: cleanup
-      process.chdir(config.sourceDir)
+      process.chdir(config.sourceDir.platformified())
     } finally {
       process.chdir(originalDir)
     }

@@ -1,6 +1,5 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 import { trimDollar } from "../helpers/trim-dollar"
@@ -13,7 +12,7 @@ export async function install(action: tr.actions.Args): Promise<void> {
   action.name(`check npm package name in ${color.cyan(installText)}`)
 
   const dir = action.region[0]?.attributes?.dir || ""
-  const pkg = await fs.readJSON(path.join(action.configuration.sourceDir, dir, "package.json"))
+  const pkg = await fs.readJSON(action.configuration.sourceDir.joinStr(dir, "package.json"))
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(

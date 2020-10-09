@@ -1,10 +1,10 @@
 import { assert } from "chai"
 
-import { backfillDefaults } from "./backfill-defaults"
+import * as config from "./index"
 
-suite("backfillDefaults", function () {
+suite("addDefaults", function () {
   test("no input", async function () {
-    const have = await backfillDefaults({})
+    const have = await config.addDefaults({})
     assert.strictEqual(have.files, "**/*.md")
     const want = "text-runner-core/tmp"
     if (!have.workspace.unixified().endsWith(want)) {
@@ -12,7 +12,7 @@ suite("backfillDefaults", function () {
     }
   })
   test("input", async function () {
-    const have = await backfillDefaults({ files: "1.md", regionMarker: "foo" })
+    const have = await config.addDefaults({ files: "1.md", regionMarker: "foo" })
     assert.strictEqual(have.files, "1.md")
     assert.strictEqual(have.regionMarker, "foo")
   })

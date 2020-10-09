@@ -1,6 +1,5 @@
 import { promises as fs } from "fs"
 import got from "got"
-import * as path from "path"
 
 import * as files from "../../filesystem/"
 import * as helpers from "../../helpers"
@@ -62,7 +61,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   const unknownLink = new files.UnknownLink(decodeURI(target))
   const absoluteLink = unknownLink.absolutify(action.file, action.configuration.publications)
   const linkedFile = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
-  const fullPath = path.join(action.configuration.sourceDir, linkedFile.unixified())
+  const fullPath = action.configuration.sourceDir.joinStr(linkedFile.unixified())
 
   // We only check for directories if no defaultFile is set.
   // Otherwise links to folders point to the default file.

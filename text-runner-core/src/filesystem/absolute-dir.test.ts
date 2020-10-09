@@ -8,6 +8,14 @@ suite("files.AbsoluteDir", function () {
     const have = absDir.joinStr("src")
     assert.equal(have, "/home/acme/textrun/src")
   })
+
+  test("joinDir", function () {
+    const absDir = new files.AbsoluteDir("/home/acme/textrun")
+    const give = new files.RelativeDir("src")
+    const have = absDir.joinDir(give)
+    assert.equal(have.unixified(), "/home/acme/textrun/src")
+  })
+
   suite("platformified", function () {
     test("on *nix", function () {
       if (process.platform === "win32") {
@@ -26,6 +34,7 @@ suite("files.AbsoluteDir", function () {
       assert.equal(have, "c:\\Users\\acme\\textrun")
     })
   })
+
   suite("unixified", function () {
     test("on *nix", function () {
       if (process.platform === "win32") {

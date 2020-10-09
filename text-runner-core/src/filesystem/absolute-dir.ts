@@ -1,6 +1,7 @@
 import * as path from "path"
 
 import * as helpers from "../helpers"
+import * as files from "."
 
 /**
  * represents an absolute path to a directory,
@@ -11,6 +12,11 @@ export class AbsoluteDir {
 
   constructor(value: string) {
     this.value = helpers.unixify(value)
+  }
+
+  /** joins the given relative directory */
+  joinDir(other: files.RelativeDir): AbsoluteDir {
+    return new AbsoluteDir(this.joinStr(other.value))
   }
 
   /** provides a path of this directory with the given path appended */

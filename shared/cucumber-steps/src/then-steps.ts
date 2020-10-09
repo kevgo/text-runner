@@ -105,7 +105,7 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     if (wanted.activity != null) {
       result.activity = stripAnsi(activityResult.finalName || "")
       if (process.platform === "win32") {
-        result.activity = result.activity.replace(/\\/g, "/")
+        result.activity = result.activity?.replace(/\\/g, "/")
       }
     }
     if (wanted.message != null) {

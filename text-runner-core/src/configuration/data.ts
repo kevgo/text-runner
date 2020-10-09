@@ -1,18 +1,24 @@
 import * as files from "../filesystem"
 import { Publications } from "./publications"
 
-/** Configuration values for Text-Runner Core used internally */
-export type Data = CoreData & AbsoluteDirWorkspace
+/** configuration values used by the Text-Runner API */
+export type APIData = Partial<CompleteAPIData>
 
-/** Configuration values for Text-Runner Core from the outside */
-export type APIData = Partial<CoreData> & Partial<StringWorkspace>
+/** a full set of configuration values used by the Text-Runner API */
+export type CompleteAPIData = SharedValues & StringDirs
 
-interface AbsoluteDirWorkspace {
+/** Configuration values used inside Text-Runner Core */
+export type Data = SharedValues & AbsoluteDirs
+
+interface AbsoluteDirs {
+  /** the root directory of the source code to test */
+  sourceDir: files.AbsoluteDir
+
   /** the root directory of the workspace */
   workspace: files.AbsoluteDir
 }
 
-interface CoreData {
+interface SharedValues {
   /** the name of the default filename, set to '' if none is given */
   defaultFile: string
 
@@ -40,14 +46,14 @@ interface CoreData {
   /** whether to display/emit skipped tests */
   showSkipped: boolean
 
-  /** the root directory of the source code to test */
-  sourceDir: string
-
   /** whether to create the workspace in the system temp directory or locally */
   systemTmp: boolean
 }
 
-interface StringWorkspace {
+interface StringDirs {
+  /** the root directory of the source code to test */
+  sourceDir: string
+
   /** the root directory of the workspace */
   workspace?: string
 }

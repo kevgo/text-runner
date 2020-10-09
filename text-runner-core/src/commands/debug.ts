@@ -15,11 +15,11 @@ import { Command } from "./command"
 export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
 
 export class Debug implements Command {
-  userConfig: configuration.PartialData
+  userConfig: configuration.APIData
   subcommand: DebugSubcommand | undefined
   emitter: EventEmitter
 
-  constructor(userConfig: configuration.PartialData, subcommand: DebugSubcommand | undefined) {
+  constructor(userConfig: configuration.APIData, subcommand: DebugSubcommand | undefined) {
     this.userConfig = userConfig
     this.subcommand = subcommand
     this.emitter = new EventEmitter()

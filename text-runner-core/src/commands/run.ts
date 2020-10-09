@@ -13,10 +13,10 @@ import * as command from "./index"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {
-  userConfig: configuration.PartialData
+  userConfig: configuration.APIData
   emitter: EventEmitter
 
-  constructor(userConfig: configuration.PartialData) {
+  constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
     this.emitter = new EventEmitter()
   }

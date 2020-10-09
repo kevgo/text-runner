@@ -5,7 +5,7 @@ Feature: empty the workspace
       """
       const fs = require("fs").promises
       module.exports = async function(action) {
-        const items = await fs.readdir(action.configuration.workspace)
+        const items = await fs.readdir(action.configuration.workspace.platformified())
         action.name(`${items.length} workspace files (${items.join(", ")})`)
       }
       """

@@ -20,9 +20,7 @@ export class FullPath {
     return new files.FullFile(path.join(this.platformified(), fileName))
   }
 
-  /**
-   * Returns the directory that contains this file path
-   */
+  /** Returns the directory that contains this file path */
   directory(): FullPath {
     if (this.isDirectory()) {
       return this
@@ -30,16 +28,12 @@ export class FullPath {
     return new FullPath(path.dirname(this.value) + "/")
   }
 
-  /**
-   * Returns the file extension of this path
-   */
+  /** Returns the file extension of this path */
   extName(): string {
     return path.extname(this.value)
   }
 
-  /**
-   * Returns whether this file path points to a directory
-   */
+  /** Returns whether this file path points to a directory */
   isDirectory(): boolean {
     return this.value.endsWith("/")
   }
@@ -52,17 +46,12 @@ export class FullPath {
     return this.value.replace(/\//g, path.sep)
   }
 
-  /**
-   * Returns this absolute path using forward slashes as path separators
-   */
+  /** Returns this absolute path using forward slashes as path separators */
   unixified(): string {
     return this.value
   }
 
-  /**
-   * Returns the public link under which this file path is published
-   * @param publications the publications of this session
-   */
+  /** Returns the public link under which this file path is published */
   publicPath(publications: configuration.Publications): files.FullLink {
     const publication = publications.forFilePath(this)
     if (publication == null) {

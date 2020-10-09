@@ -49,10 +49,8 @@ export class Publication {
     let result = link.rebase(this.publicPath, this.localPath)
     result = result.withoutAnchor()
 
-    if (result.isLinkToDirectory() && !result.hasAnchor()) {
+    if (result.isLinkToDirectory()) {
       result = result.append(new files.RelativeLink(defaultFile))
-    } else if (result.isLinkToDirectory() && result.hasAnchor()) {
-      result = result.directory().append(new files.RelativeLink(defaultFile)).withAnchor(result.anchor())
     } else if (result.hasExtension(this.publicExtension)) {
       result = result.withExtension("md")
     }

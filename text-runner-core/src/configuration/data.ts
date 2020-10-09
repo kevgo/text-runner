@@ -1,12 +1,18 @@
+import * as files from "../filesystem"
 import { Publications } from "./publications"
 
-/**
- * All configuration values that are provided to the application
- * after analyzing the configuration provided via CLI,
- * the configuration provided via config file,
- * and backfilling with default settings.
- */
-export interface Data {
+/** Configuration values for Text-Runner Core used internally */
+export type Data = CoreData & AbsoluteDirWorkspace
+
+/** Configuration values for Text-Runner Core from the outside */
+export type APIData = Partial<CoreData> & Partial<StringWorkspace>
+
+interface AbsoluteDirWorkspace {
+  /** the root directory of the workspace */
+  workspace: files.AbsoluteDir
+}
+
+interface CoreData {
   /** the name of the default filename, set to '' if none is given */
   defaultFile: string
 
@@ -39,9 +45,9 @@ export interface Data {
 
   /** whether to create the workspace in the system temp directory or locally */
   systemTmp: boolean
-
-  /** the root directory of the workspace */
-  workspace: string
 }
 
-export type PartialData = Partial<Data>
+interface StringWorkspace {
+  /** the root directory of the workspace */
+  workspace?: string
+}

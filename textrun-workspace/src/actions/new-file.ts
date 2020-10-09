@@ -20,7 +20,7 @@ export async function newFile(action: tr.actions.Args): Promise<void> {
   }
   const filePath = path.join(action.region[0].attributes["dir"] ?? ".", fileName)
   action.name(`create file ${color.cyan(filePath)}`)
-  const fullPath = path.join(action.configuration.workspace, filePath)
+  const fullPath = action.configuration.workspace.joinStr(filePath)
   action.log(`create file ${filePath}`)
   await fs.ensureDir(path.dirname(fullPath))
   await fs.writeFile(fullPath, content)

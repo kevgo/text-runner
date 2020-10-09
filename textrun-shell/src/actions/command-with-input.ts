@@ -35,7 +35,7 @@ export async function commandWithInput(action: tr.actions.Args): Promise<void> {
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   const processor = observableProcess.start(callArgs(commandsToRun, process.platform), {
-    cwd: action.configuration.workspace,
+    cwd: action.configuration.workspace.platformified(),
   })
   for (const inputLine of input) {
     await enter(processor, inputLine)

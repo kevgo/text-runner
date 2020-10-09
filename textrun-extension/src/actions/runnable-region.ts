@@ -1,5 +1,4 @@
 import { promises as fs } from "fs"
-import * as path from "path"
 import * as tr from "text-runner-core"
 import * as util from "util"
 
@@ -10,9 +9,9 @@ export async function runnableRegion(action: tr.actions.Args): Promise<void> {
   if (content === "") {
     throw new Error("no content to run found")
   }
-  await fs.writeFile(path.join(action.configuration.workspace, "runnable-region.md"), content)
+  await fs.writeFile(action.configuration.workspace.joinStr("runnable-region.md"), content)
   const command = new tr.commands.Run({
-    sourceDir: action.configuration.workspace,
+    sourceDir: action.configuration.workspace.platformified(),
     workspace: ".",
     emptyWorkspace: false,
   })

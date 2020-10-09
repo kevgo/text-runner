@@ -21,7 +21,7 @@ export function server(action: tr.actions.Args): void {
   action.name(`starting a server process: ${color.bold(color.cyan(commandsToRun))}`)
   CurrentServer.instance().set(
     observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
-      cwd: action.configuration.workspace,
+      cwd: action.configuration.workspace.platformified(),
     })
   )
 }

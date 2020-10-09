@@ -12,10 +12,10 @@ import * as workspace from "../workspace"
 import { Command } from "./command"
 
 export class Dynamic implements Command {
-  userConfig: configuration.PartialData
+  userConfig: configuration.APIData
   emitter: EventEmitter
 
-  constructor(userConfig: configuration.PartialData) {
+  constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
     this.emitter = new EventEmitter()
   }
@@ -58,7 +58,7 @@ export class Dynamic implements Command {
 
       // step 8: execute the ActivityList
       this.emit("start", { stepCount: dynamicActivities.length } as events.Start)
-      process.chdir(config.workspace)
+      process.chdir(config.workspace.platformified())
       await run.sequential(dynamicActivities, actionFinder, config, targets, this)
     } finally {
       process.chdir(originalDir)

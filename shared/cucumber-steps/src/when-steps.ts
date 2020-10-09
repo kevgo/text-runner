@@ -6,7 +6,7 @@ import { TRWorld } from "./world"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const config: textRunner.configuration.PartialData = { sourceDir: world.rootDir }
+  const config: textRunner.configuration.APIData = { sourceDir: world.rootDir }
   // define a few variables here, they will be overwritten in the eval call
   // eslint-disable-next-line prefer-const
   let command = new textRunner.commands.Run(config)

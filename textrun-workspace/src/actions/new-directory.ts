@@ -10,6 +10,6 @@ export async function newDirectory(action: tr.actions.Args): Promise<void> {
   }
   const dirRelName = path.join(action.region[0].attributes["dir"] || ".", dirName)
   action.name(`create directory ${color.cyan(dirRelName)}`)
-  const fullPath = path.join(action.configuration.workspace, dirRelName)
+  const fullPath = action.configuration.workspace.joinStr(dirRelName)
   await fs.ensureDir(fullPath)
 }

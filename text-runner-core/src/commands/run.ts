@@ -13,10 +13,10 @@ import * as command from "./index"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {
-  userConfig: configuration.PartialData
+  userConfig: configuration.APIData
   emitter: EventEmitter
 
-  constructor(userConfig: configuration.PartialData) {
+  constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
     this.emitter = new EventEmitter()
   }
@@ -61,7 +61,7 @@ export class Run implements command.Command {
       // step 8: execute the ActivityList
       const startArgs: events.Start = { stepCount: dynamicActivities.length + links.length }
       this.emit("start", startArgs)
-      process.chdir(config.workspace)
+      process.chdir(config.workspace.platformified())
       // kick off the parallel jobs to run in the background
       const parJobs = run.parallel(links, actionFinder, targets, config, this)
       // execute the serial jobs

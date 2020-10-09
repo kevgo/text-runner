@@ -9,10 +9,10 @@ import * as parsers from "../parsers"
 import { Command } from "./command"
 
 export class Unused implements Command {
-  userConfig: configuration.PartialData
+  userConfig: configuration.APIData
   emitter: EventEmitter
 
-  constructor(userConfig: configuration.PartialData) {
+  constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
     this.emitter = new EventEmitter()
   }

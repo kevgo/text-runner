@@ -50,8 +50,8 @@ export class Data {
     return result
   }
 
-  toCoreConfig(): tr.configuration.PartialData {
-    const result: tr.configuration.PartialData = {}
+  toCoreConfig(): tr.configuration.APIData {
+    const result: tr.configuration.APIData = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile
     }

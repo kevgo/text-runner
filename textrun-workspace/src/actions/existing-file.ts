@@ -8,7 +8,7 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("strong", "em")
   const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
   action.name(`verify content of file ${color.cyan(fileRelPath)}`)
-  const fullPath = path.join(action.configuration.workspace.platformified(), fileRelPath)
+  const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const expectedContent = action.region.textInNodeOfType("fence", "code")
   action.log(expectedContent)
   let actualContent = ""

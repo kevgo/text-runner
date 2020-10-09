@@ -6,7 +6,7 @@ import { TRWorld } from "./world"
 
 When(/^calling:$/, async function (jsText: string) {
   const world = this as TRWorld
-  const config: textRunner.configuration.APIData = { sourceDir: world.rootDir }
+  const config: textRunner.configuration.APIData = { sourceDir: world.rootDir.platformified() }
   // define a few variables here, they will be overwritten in the eval call
   // eslint-disable-next-line prefer-const
   let command = new textRunner.commands.Run(config)
@@ -34,7 +34,7 @@ When(/^calling:$/, async function (jsText: string) {
 
 When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
   const world = this as TRWorld
-  const command = new textRunner.commands.Run({ sourceDir: world.rootDir })
+  const command = new textRunner.commands.Run({ sourceDir: world.rootDir.platformified() })
   const activityCollector = new textRunner.ActivityCollector(command)
   try {
     await command.execute()

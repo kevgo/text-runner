@@ -2,14 +2,17 @@ import * as files from "../filesystem"
 import { Publications } from "./publications"
 
 /** Configuration values for Text-Runner Core used internally */
-export type Data = CoreData & AbsoluteDirWorkspace
-
-/** Configuration values for Text-Runner Core from the outside */
-export type CompleteAPIData = CoreData & StringWorkspace
+export type Data = CoreData & AbsoluteDirs
 
 export type APIData = Partial<CompleteAPIData>
 
-interface AbsoluteDirWorkspace {
+/** Configuration values for Text-Runner Core from the outside */
+export type CompleteAPIData = CoreData & StringDirs
+
+interface AbsoluteDirs {
+  /** the root directory of the source code to test */
+  sourceDir: files.AbsoluteDir
+
   /** the root directory of the workspace */
   workspace: files.AbsoluteDir
 }
@@ -42,14 +45,14 @@ interface CoreData {
   /** whether to display/emit skipped tests */
   showSkipped: boolean
 
-  /** the root directory of the source code to test */
-  sourceDir: files.AbsoluteDir
-
   /** whether to create the workspace in the system temp directory or locally */
   systemTmp: boolean
 }
 
-interface StringWorkspace {
+interface StringDirs {
+  /** the root directory of the source code to test */
+  sourceDir: string
+
   /** the root directory of the workspace */
   workspace?: string
 }

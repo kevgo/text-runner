@@ -18,7 +18,7 @@ export function defaults(): configuration.CompleteAPIData {
     publications: new Publications(),
     scaffoldLanguage: "js",
     showSkipped: false,
-    sourceDir: new files.AbsoluteDir(process.cwd()),
+    sourceDir: process.cwd(),
     systemTmp: false,
     workspace: "tmp",
   }
@@ -32,13 +32,16 @@ export async function addDefaults(partial: configuration.APIData): Promise<confi
       fullAPIData[key] = value
     }
   }
-  const result = { ...fullAPIData, workspace: await getWorkspacePath(fullAPIData) }
-  return result
+  return {
+    ...fullAPIData,
+    sourceDir: new files.AbsoluteDir(fullAPIData.sourceDir),
+    workspace: await getWorkspacePath(fullAPIData),
+  }
 }
 
 async function getWorkspacePath(config: configuration.CompleteAPIData): Promise<files.AbsoluteDir> {
   if (config.systemTmp === false) {
-    return new files.AbsoluteDir(config.sourceDir?.joinStr(config.workspace || "") || "")
+    return new files.AbsoluteDir(path.join(config.sourceDir, config.workspace || "") || "")
   } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()
     return new files.AbsoluteDir(path.join(tmpDir.path, config.workspace || ""))

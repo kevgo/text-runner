@@ -5,9 +5,7 @@ import * as util from "util"
 export async function runTextrunner(action: tr.actions.Args): Promise<void> {
   action.name("Running Text-Runner in workspace")
   const command = new tr.commands.Run({
-    sourceDir: action.configuration.workspace.joinDir(
-      new tr.files.RelativeDir(action.region[0].attributes["dir"] || ".")
-    ),
+    sourceDir: action.configuration.workspace.joinStr(action.region[0].attributes["dir"] || "."),
     workspace: ".",
     emptyWorkspace: false,
   })

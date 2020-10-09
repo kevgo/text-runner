@@ -1,7 +1,7 @@
 import * as path from "path"
 
 import * as helpers from "../helpers"
-import { files } from "../text-runner"
+import * as files from "."
 
 /**
  * represents an absolute path to a directory,

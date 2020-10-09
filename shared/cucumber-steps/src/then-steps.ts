@@ -50,6 +50,7 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
   const world = this as TRWorld
   if (world.apiException) {
     console.log(world.apiException)
+    assert.fail("unexpected exception during API call")
   }
   const tableHashes = table.hashes()
   const want: ExecuteResultLine[] = []

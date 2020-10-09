@@ -42,7 +42,7 @@ export class AbsoluteDir {
   }
 
   toFullDir(sourceDir: files.SourceDir): files.FullDir {
-    return new files.FullDir("/" + path.relative(sourceDir.platformified(), this.platformified()))
+    return new files.FullDir(path.relative(sourceDir.platformified(), this.platformified()))
   }
 
   /**

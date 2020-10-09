@@ -4,7 +4,6 @@ import * as path from "path"
 
 import * as configuration from "../configuration/index"
 import { UserError } from "../errors/user-error"
-import * as helpers from "../helpers"
 import * as files from "./"
 
 /**
@@ -52,8 +51,8 @@ export async function markdownFilesInDir(dirName: string, sourceDir: string): Pr
   return allFiles
     .filter(file => !file.includes("node_modules"))
     .sort()
-    .map(file => helpers.pathRelativeToDir(file, sourceDir))
-    .map(file => new files.FullFile(file))
+    .map(file => new files.AbsoluteFile(file))
+    .map(file => file.toFullFile(sourceDir))
 }
 
 /**

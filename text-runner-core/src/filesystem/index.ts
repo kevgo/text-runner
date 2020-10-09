@@ -1,4 +1,5 @@
 export * from "./absolute-dir"
+export * from "./absolute-file"
 export * from "./files-matching-glob"
 export * from "./full-file"
 export * from "./full-link"

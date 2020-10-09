@@ -8,7 +8,6 @@ export function printCodeFrame(output: PrintFunc, filename: string | undefined, 
     return
   }
 
-  // TODO: make async
   const fileContent = fs.readFileSync(filename, "utf8")
   output(babel.codeFrameColumns(fileContent, { start: { line } }, { forceColor: true }))
 }

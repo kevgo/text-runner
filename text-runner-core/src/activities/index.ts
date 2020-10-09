@@ -20,8 +20,7 @@ export interface Activity {
 }
 
 /** scaffoldActivity creates a test Activity from the given data */
-// TODO: use Partial<Activity>
-export function scaffold(data: { actionName?: string } = {}): Activity {
+export function scaffold(data: Partial<Activity> = {}): Activity {
   return {
     actionName: data.actionName || "foo",
     file: new files.FullFile("file"),

@@ -8,7 +8,7 @@ import { Args } from "../index"
 /** The "checkImage" action checks for broken images. */
 export async function checkImage(action: Args): Promise<number | void> {
   const node = action.region[0]
-  let imagePath = node.attributes ? node.attributes.src : null
+  let imagePath = node.attributes.src
   if (!imagePath) {
     throw new Error("image tag without source")
   }

@@ -2,12 +2,12 @@ import * as files from "../filesystem"
 import { Publications } from "./publications"
 
 /** Configuration values for Text-Runner Core used internally */
-export type Data = CoreData & RequiredWorkspace
+export type Data = CoreData & AbsoluteDirWorkspace
 
 /** Configuration values for Text-Runner Core from the outside */
-export type APIData = Partial<Data> & OptionalWorkspace
+export type APIData = Partial<CoreData> & Partial<StringWorkspace>
 
-interface RequiredWorkspace {
+interface AbsoluteDirWorkspace {
   /** the root directory of the workspace */
   workspace: files.AbsoluteDir
 }
@@ -47,7 +47,7 @@ interface CoreData {
   systemTmp: boolean
 }
 
-interface OptionalWorkspace {
+interface StringWorkspace {
   /** the root directory of the workspace */
   workspace?: string
 }

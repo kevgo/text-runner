@@ -87,7 +87,6 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
   }
   let have: ExecuteResultLine[] = []
   const wanted = want[0]
-  console.log(world.apiResults)
   for (const activityResult of world.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {

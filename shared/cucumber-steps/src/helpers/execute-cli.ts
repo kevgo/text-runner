@@ -12,7 +12,7 @@ export async function executeCLI(
   opts: { cwd?: string } = {}
 ): Promise<observableProcess.FinishedProcess> {
   const args: childProcess.SpawnOptions = {}
-  args.cwd = opts.cwd || world.rootDir
+  args.cwd = opts.cwd || world.rootDir.platformified()
   if (world.debug) {
     args.env = {
       DEBUG: "*,-babel",

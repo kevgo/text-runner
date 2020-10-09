@@ -3,6 +3,7 @@ import { endChildProcesses } from "end-child-processes"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as rimraf from "rimraf"
+import * as textRunner from "text-runner-core"
 import * as tmp from "tmp-promise"
 import * as util from "util"
 
@@ -14,21 +15,21 @@ Before(async function () {
   const world = this as TRWorld
   if (process.env.CUCUMBER_PARALLEL) {
     const tempDir = await tmp.dir()
-    world.rootDir = tempDir.path
+    world.rootDir = new textRunner.files.AbsoluteDir(tempDir.path)
   } else {
-    world.rootDir = path.join(process.cwd(), "tmp")
+    world.rootDir = new textRunner.files.AbsoluteDir(path.join(process.cwd(), "tmp"))
   }
   let rootDirExists = false
   try {
-    await fs.stat(world.rootDir)
+    await fs.stat(world.rootDir.platformified())
     rootDirExists = true
   } catch (e) {
     // nothing to do here
   }
   if (rootDirExists) {
-    await fs.rmdir(world.rootDir, { recursive: true })
+    await fs.rmdir(world.rootDir.platformified(), { recursive: true })
   }
-  await fs.mkdir(world.rootDir, { recursive: true })
+  await fs.mkdir(world.rootDir.platformified(), { recursive: true })
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -40,7 +41,7 @@ After({ timeout: 20_000 }, async function (scenario) {
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     // TODO: replace with fs
-    await rimrafp(world.rootDir)
+    await rimrafp(world.rootDir.platformified())
   }
 })
 

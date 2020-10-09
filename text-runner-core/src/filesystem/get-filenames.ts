@@ -30,7 +30,7 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
 async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
   const fullGlob = path.join(config.sourceDir, config.files)
   if (config.files === "") {
-    return markdownFilesInDir(config.sourceDir, config.sourceDir)
+    return markdownFilesInDir("", config.sourceDir)
   } else if (await files.hasDirectory(fullGlob)) {
     return markdownFilesInDir(fullGlob, config.sourceDir)
   } else if (await files.isMarkdownFile(fullGlob)) {

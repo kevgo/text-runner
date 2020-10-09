@@ -13,7 +13,7 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   filenames = removeExcludedFiles(filenames, "node_modules")
-  if (!config.emptyWorkspace) {
+  if (config.emptyWorkspace === false) {
     if (!config.workspace.matches(config.sourceDir)) {
       const fullWorkspace = config.workspace.toFullDir(config.sourceDir)
       filenames = removeExcludedFiles(filenames, fullWorkspace.platformified())

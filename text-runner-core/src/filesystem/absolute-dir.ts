@@ -1,3 +1,4 @@
+import * as glob from "glob-promise"
 import * as path from "path"
 
 import * as helpers from "../helpers"
@@ -12,6 +13,11 @@ export class AbsoluteDir {
 
   constructor(value: string) {
     this.value = helpers.unixify(value)
+  }
+
+  async fullFilesMatchingGlob(expression: string): Promise<files.FullFile[]> {
+    const allFiles = await glob(expression)
+    return allFiles.sort().map(file => new files.AbsoluteFile(file).toFullFile(this))
   }
 
   /** joins the given relative directory */

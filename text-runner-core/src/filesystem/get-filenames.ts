@@ -35,7 +35,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
   } else if (await files.isMarkdownFile(fullGlob)) {
     return [new files.FullFile(config.files)]
   } else if (isGlob(config.files)) {
-    return files.filesMatchingGlob(fullGlob, config.sourceDir)
+    return config.sourceDir.fullFilesMatchingGlob(fullGlob)
   } else {
     throw new UserError(`file or directory does not exist: ${config.files}`)
   }

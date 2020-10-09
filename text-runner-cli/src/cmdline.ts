@@ -49,7 +49,7 @@ export function parse(
   }
 
   // handle special case where text-run is called without a command, as in "text-run foo.md"
-  if (!commands.available().includes(commandName)) {
+  if (!commands.names().includes(commandName)) {
     cmdLineConfig.files = commandName
     commandName = "run"
   }

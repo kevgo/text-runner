@@ -14,7 +14,7 @@ export class AbsoluteDir {
     this.value = helpers.unixify(value)
   }
 
-  /** Joins the given relative directory */
+  /** joins the given relative directory */
   joinDir(other: files.RelativeDir): AbsoluteDir {
     return new AbsoluteDir(this.joinStr(other.value))
   }

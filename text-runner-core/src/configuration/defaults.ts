@@ -15,6 +15,6 @@ export function defaults(): Data {
     showSkipped: false,
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: "tmp",
+    workspace: "determined later at backfill-defaults",
   }
 }

@@ -1,6 +1,7 @@
 import { assert } from "chai"
 
 import * as configuration from "../configuration/index"
+import { files } from "../text-runner"
 import { FullPath } from "./full-path"
 
 suite("FullPath", function () {
@@ -42,6 +43,13 @@ suite("FullPath", function () {
         assert.equal(new FullPath(tt.give).isDirectory(), tt.want)
       })
     }
+  })
+
+  test(".joinStr()", function () {
+    const fullPath = new files.FullPath("/one/two")
+    const have = fullPath.joinStr("three")
+    const want = "one/two/three"
+    assert.deepEqual(have, want)
   })
 
   test(".unixified()", function () {

@@ -18,7 +18,7 @@ export async function checkImage(action: actions.Args): Promise<number | void> {
     return result
   } else {
     if (!imagePath.startsWith("/")) {
-      imagePath = path.join(path.dirname(node.file.platformified()), imagePath)
+      imagePath = path.join(path.dirname(node.location.file.platformified()), imagePath)
     }
     const result = await checkLocalImage(imagePath, action.configuration)
     return result

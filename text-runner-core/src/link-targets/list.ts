@@ -12,7 +12,7 @@ export class List {
 
   addNodeList(nodeList: ast.NodeList): void {
     for (const node of nodeList) {
-      const key = node.file.platformified()
+      const key = node.location.file.platformified()
       this.targets[key] = this.targets[key] || []
       if (node.type === "anchor_open") {
         this.addAnchor(node)
@@ -29,7 +29,7 @@ export class List {
     if (!node.attributes.name) {
       return
     }
-    this.addLinkTarget(node.file, "anchor", node.attributes.name)
+    this.addLinkTarget(node.location, "anchor", node.attributes.name)
   }
 
   addHeading(node: ast.Node, nodeList: ast.NodeList): void {
@@ -37,31 +37,33 @@ export class List {
     if (!content) {
       return
     }
-    this.addLinkTarget(node.file, "heading", content)
+    this.addLinkTarget(node.location, "heading", content)
   }
 
-  addLinkTarget(filePath: files.FullFile, type: Types, name: string): void {
-    const key = filePath.platformified()
+  addLinkTarget(location: files.Location, type: Types, name: string): void {
+    const key = location.file.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })
   }
 
   // Returns the type of the given anchor
   // with the given name in the given file
-  anchorType(filePath: files.FullFile, name: string): string {
-    const anchorsForFile = this.targets[filePath.platformified()]
+  anchorType(location: files.Location, name: string): string {
+    const anchorsForFile = this.targets[location.file.platformified()]
     if (!anchorsForFile) {
-      throw new Error(`no anchors in file ${filePath.platformified()}`)
+      // TODO: make UserError
+      throw new Error(`no anchors in file ${location.file.platformified()}`)
     }
     const anchor = anchorsForFile.find(linkTarget => linkTarget.name === name)
     if (!anchor) {
-      throw new Error(`no anchor '${name}' in file '${filePath.platformified()}'`)
+      // TODO: make UserError
+      throw new Error(`no anchor '${name}' in file '${location.file.platformified()}'`)
     }
     return anchor.type
   }
 
-  hasAnchor(filePath: files.FullFile, name: string): boolean {
-    const fileList = this.targets[filePath.platformified()]
+  hasAnchor(location: files.Location, name: string): boolean {
+    const fileList = this.targets[location.file.platformified()]
     if (!fileList) {
       return false
     }

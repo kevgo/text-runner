@@ -20,6 +20,10 @@ export class Location {
     return this.sourceDir.joinFullFile(this.file)
   }
 
+  withFile(file: files.FullFile): Location {
+    return new Location(this.sourceDir, file, this.line)
+  }
+
   withLine(line: number): Location {
     return new Location(this.sourceDir, this.file, line)
   }

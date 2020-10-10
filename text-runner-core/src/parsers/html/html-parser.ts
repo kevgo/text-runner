@@ -77,39 +77,35 @@ export class Parser {
     const htmlNode = this.findHTMLNode(documentAst)
     const bodyNode = this.findBodyNode(htmlNode)
     for (const childNode of bodyNode.childNodes) {
-      result.push(...this.standardizeNode(childNode, file, startingLine))
+      result.push(...this.standardizeNode(childNode, startingLocation.withLine(startingLine)))
     }
     return result
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: parse5.DefaultTreeNode, file: files.FullFile, startingLine: number): ast.NodeList {
+  private standardizeNode(node: parse5.DefaultTreeNode, startingLocation: files.Location): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
       return new ast.NodeList()
     }
     if (instanceOfDefaultTreeTextNode(node)) {
-      return this.standardizeTextNode(node, file, startingLine)
+      return this.standardizeTextNode(node, startingLocation)
     }
     if (!instanceOfDefaultTreeElement(node)) {
       throw new Error("unknown tree node: " + util.inspect(node))
     }
     if (this.tagMapper.isStandaloneTag(node.nodeName)) {
-      return this.standardizeStandaloneNode(node, file, startingLine)
+      return this.standardizeStandaloneNode(node, startingLocation)
     }
-    return this.standardizeOpenCloseTag(node, file, startingLine)
+    return this.standardizeOpenCloseTag(node, startingLocation)
   }
 
   /** converts the given HTML tag with open and closing tag into the standard format */
-  private standardizeOpenCloseTag(
-    node: parse5.DefaultTreeElement,
-    file: files.FullFile,
-    startingLine: number
-  ): ast.NodeList {
+  private standardizeOpenCloseTag(node: parse5.DefaultTreeElement, startingLocation: files.Location): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
     // store the opening node
-    let startLine = startingLine
+    let startLine = startingLocation.line
     if (node.sourceCodeLocation) {
       startLine += node.sourceCodeLocation.startLine - 1
     } else {
@@ -122,8 +118,7 @@ export class Parser {
       new ast.Node({
         attributes,
         content: "",
-        file,
-        line: startLine,
+        location: startingLocation.withLine(startLine),
         tag: node.tagName as ast.NodeTag,
         type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes),
       })
@@ -131,16 +126,16 @@ export class Parser {
 
     // store the child nodes in between the opening and closing node
     for (const childNode of node.childNodes) {
-      const standardizedChildNodes = this.standardizeNode(childNode, file, startingLine)
+      const standardizedChildNodes = this.standardizeNode(childNode, startingLocation)
       result.push(...standardizedChildNodes)
     }
 
     // store the closing node
     let endLine: number
     if (node.sourceCodeLocation) {
-      endLine = node.sourceCodeLocation.endLine + startingLine - 1
+      endLine = node.sourceCodeLocation.endLine + startingLocation.line - 1
     } else if (node.parentNode && instanceOfDefaultTreeElement(node.parentNode) && node.parentNode.sourceCodeLocation) {
-      endLine = node.parentNode.sourceCodeLocation.endLine + startingLine - 1
+      endLine = node.parentNode.sourceCodeLocation.endLine + startingLocation.line - 1
     } else {
       throw new Error(`cannot determine end line for node ${node}`)
     }
@@ -150,8 +145,7 @@ export class Parser {
         new ast.Node({
           attributes: {},
           content: "",
-          file,
-          line: endLine,
+          location: startingLocation.withLine(endLine),
           tag,
           type: this.tagMapper.typeForTag(tag, attributes),
         })
@@ -161,19 +155,14 @@ export class Parser {
   }
 
   /** converts the given HTML standalone node into the standard format */
-  private standardizeStandaloneNode(
-    node: parse5.DefaultTreeElement,
-    file: files.FullFile,
-    startingLine: number
-  ): ast.NodeList {
+  private standardizeStandaloneNode(node: parse5.DefaultTreeElement, startingLocation: files.Location): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
       new ast.Node({
         attributes,
         content: "",
-        file,
-        line: (node.sourceCodeLocation?.startLine || 0) + startingLine - 1,
+        location: startingLocation.withLine((node.sourceCodeLocation?.startLine || 0) + startingLocation.line - 1),
         tag: node.tagName as ast.NodeTag,
         type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes),
       })
@@ -182,19 +171,14 @@ export class Parser {
   }
 
   /** converts the given HTML text node into the standard format */
-  private standardizeTextNode(
-    node: parse5.DefaultTreeTextNode,
-    file: files.FullFile,
-    startingLine: number
-  ): ast.NodeList {
+  private standardizeTextNode(node: parse5.DefaultTreeTextNode, startingLocation: files.Location): ast.NodeList {
     const result = new ast.NodeList()
     if (node.value !== "\n") {
       result.push(
         new ast.Node({
           attributes: {},
           content: node.value.trim(),
-          file,
-          line: (node.sourceCodeLocation?.startLine ?? 0) + startingLine - 1,
+          location: startingLocation.withLine((node.sourceCodeLocation?.startLine ?? 0) + startingLocation.line - 1),
           tag: "",
           type: "text",
         })

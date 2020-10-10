@@ -24,10 +24,6 @@ export class SourceDir {
     return new files.AbsoluteFile(path.join(this.platformified(), file.platformified()))
   }
 
-  joinFullFile(file: files.FullFile): files.AbsoluteFile {
-    return new files.AbsoluteFile(path.join(this.platformified(), file.platformified()))
-  }
-
   /** provides a path of this directory with the given path appended */
   joinStr(...paths: string[]): string {
     return path.join(this.platformified(), ...paths)

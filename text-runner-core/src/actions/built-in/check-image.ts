@@ -33,7 +33,7 @@ async function checkLocalImage(image: files.FullFile, c: configuration.Data): Pr
   try {
     await fs.stat(c.sourceDir.joinFullFile(image).platformified())
   } catch (err) {
-    throw new Error(`image ${image} does not exist`)
+    throw new Error(`image ${image.unixified()} does not exist`)
   }
 }
 

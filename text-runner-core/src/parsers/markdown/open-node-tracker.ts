@@ -21,7 +21,7 @@ export class OpenNodeTracker {
   }
 
   /** closes the corresponding open ast.Node and returns its endLine */
-  close(type: ast.NodeType, file: files.FullFile, line: number): number {
+  close(type: ast.NodeType, location: files.Location): number {
     const openType = type.replace("_close", "_open")
     for (let i = this.entries.length - 1; i >= 0; i--) {
       if (this.entries[i].node.type === openType) {
@@ -33,8 +33,7 @@ export class OpenNodeTracker {
     throw new UserError(
       `No opening node '${openType}' found for closing node '${type}'`,
       `Node </${openType}> does not have a corresponding opening node`,
-      file,
-      line
+      location
     )
   }
 

@@ -72,7 +72,7 @@ export class Finder {
     }
     guidance += `\nTo create a new "${activity.actionName}" action,\n`
     guidance += `run "text-run scaffold ${activity.actionName}"\n`
-    throw new UserError(errorText, guidance, activity.file, activity.line)
+    throw new UserError(errorText, guidance, activity.location)
   }
 }
 

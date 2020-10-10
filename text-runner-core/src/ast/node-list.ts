@@ -20,15 +20,14 @@ export class NodeList extends Array<Node> {
       throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
         "The getNodeOfTypes method expects to find only one matching node, but it found multiple.",
-        nodes[0].file,
-        nodes[0].line
+        nodes[0].location
       )
     }
     if (nodes.length === 0) {
       const msg = `found no nodes of type '${nodeTypes.join("/")}'`
       let guidance = "The node types in this list are: "
       guidance += this.nodeTypes().join(", ")
-      throw new UserError(msg, guidance, this[0].file, this[0].line)
+      throw new UserError(msg, guidance, this[0].location)
     }
     return nodes[0]
   }
@@ -46,8 +45,7 @@ export class NodeList extends Array<Node> {
       throw new UserError(
         `node '${openingNode.type}' not found in list`,
         "This ast.NodeList does not contain the given node.",
-        openingNode.file,
-        openingNode.line
+        openingNode.location
       )
     }
     const result = new NodeList()

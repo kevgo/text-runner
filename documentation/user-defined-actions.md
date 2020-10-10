@@ -54,8 +54,7 @@ various information and utility functions:
 
 <a type="verify-action-args" ignore="linkTargets">
 
-- **file**, **line:** location of the currently executed region in the
-  documentation
+- **location** location of the currently executed region in the documentation
 - **region:** the [document content](#accessing-document-content) inside the
   active region for this action,
 - **document:** the [content](#accessing-document-content) of the entire
@@ -102,8 +101,7 @@ document content:
 You can also iterate `nodes` manually. Each node has these attributes:
 <a type="verify-ast-node-attributes">
 
-- **file**, **line:** the file and line in the file at which this AST node
-  begins
+- **location:** the file and line in the file at which this AST node begins
 - **type:** the type of the AST node. Examples are `text` for normal text,
   `code` for inline code blocks, `fence` for multi-line code blocks,
   `emphasized` for italic text, `strong` for bold text, and `link_open` for

@@ -13,7 +13,7 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
     relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = action.region.textInNodeOfTypes("fence", "code")
-  const filePath = path.join(action.file.directory().platformified(), relativeBaseDir, fileName)
+  const filePath = path.join(action.location.file.directory().platformified(), relativeBaseDir, fileName)
   action.name(`document content matches source code file ${color.cyan(filePath)}`)
   const fullPath = action.configuration.sourceDir.joinStr(filePath)
   action.log(`ls ${fullPath}`)

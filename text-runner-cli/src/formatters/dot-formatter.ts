@@ -30,12 +30,12 @@ export class DotFormatter implements formatter.Formatter {
   onFailed(args: tr.events.Failed): void {
     console.log()
     console.log(color.dim(args.output))
-    process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
+    process.stdout.write(color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `))
     console.log(args.error.message)
     helpers.printCodeFrame(
       console.log,
-      path.join(this.sourceDir, args.activity.file.platformified()),
-      args.activity.line
+      path.join(this.sourceDir, args.activity.location.file.platformified()),
+      args.activity.location.line
     )
   }
 

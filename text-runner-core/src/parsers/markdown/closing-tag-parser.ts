@@ -18,7 +18,7 @@ export class ClosingTagParser {
     return this.closingTagRE.test(tag)
   }
 
-  parse(tag: string, file: files.FullFile, line: number): ast.NodeList {
+  parse(tag: string, location: files.Location): ast.NodeList {
     const match = this.closingTagRE.exec(tag)
     if (!match) {
       throw new Error(`no tag parsed in ${tag}`)
@@ -29,8 +29,7 @@ export class ClosingTagParser {
       new ast.Node({
         attributes: {},
         content: "",
-        file,
-        line,
+        location,
         tag: tagName,
         type: this.tagMapper.typeForTag(tagName, {}),
       })

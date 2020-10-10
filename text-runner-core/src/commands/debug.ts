@@ -78,7 +78,7 @@ function debugActivities(ASTs: ast.NodeList[], config: configuration.Data) {
     console.log("(none)")
   } else {
     for (const act of dynamicActivities) {
-      console.log(`${act.file.platformified()}:${act.line}  ${act.actionName}`)
+      console.log(`${act.location.file.platformified()}:${act.location.line}  ${act.actionName}`)
     }
   }
 }
@@ -87,7 +87,7 @@ function debugASTNodes(ASTs: ast.NodeList[]) {
   console.log("AST NODES:")
   for (const AST of ASTs) {
     for (const node of AST) {
-      console.log(`${node.file.platformified()}:${node.line}  ${node.type} ${showAttr(node)}`)
+      console.log(`${node.location.file.platformified()}:${node.location.line}  ${node.type} ${showAttr(node)}`)
     }
   }
 }

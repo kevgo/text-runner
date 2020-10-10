@@ -10,8 +10,7 @@ export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
         case "link_open":
           result.push({
             actionName: "check-link",
-            file: node.file,
-            line: node.line,
+            location: node.location,
             region: AST.getNodesFor(node),
             document: AST,
           })
@@ -22,8 +21,7 @@ export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
           nodes.push(node)
           result.push({
             actionName: "check-image",
-            file: node.file,
-            line: node.line,
+            location: node.location,
             region: nodes,
             document: AST,
           })

@@ -47,12 +47,16 @@ export class ProgressFormatter implements formatter.Formatter {
     console.log()
     console.log()
     console.log(color.dim(args.output))
-    console.log(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.error.message}\n`))
+    console.log(
+      color.red(
+        `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`
+      )
+    )
     console.log()
     helpers.printCodeFrame(
       console.log,
-      path.join(this.sourceDir, args.activity.file.platformified()),
-      args.activity.line
+      path.join(this.sourceDir, args.activity.location.file.platformified()),
+      args.activity.location.line
     )
   }
 

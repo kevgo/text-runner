@@ -32,7 +32,9 @@ export class DetailedFormatter implements formatter.Formatter {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
-    console.log(color.green(`${args.activity.file.platformified()}:${args.activity.line} -- ${args.finalName}`))
+    console.log(
+      color.green(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
+    )
   }
 
   onFailed(args: tr.events.Failed): void {
@@ -42,10 +44,12 @@ export class DetailedFormatter implements formatter.Formatter {
     if (tr.instanceOfUserError(args.error)) {
       printUserError(args.error)
     } else {
-      process.stdout.write(color.red(`${args.activity.file.platformified()}:${args.activity.line} -- `))
+      process.stdout.write(
+        color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
+      )
       console.log(args.error.message)
-      const filePath = path.join(this.sourceDir, args.activity.file.platformified())
-      helpers.printCodeFrame(console.log, filePath, args.activity.line)
+      const filePath = path.join(this.sourceDir, args.activity.location.file.platformified())
+      helpers.printCodeFrame(console.log, filePath, args.activity.location.line)
     }
   }
 
@@ -54,7 +58,9 @@ export class DetailedFormatter implements formatter.Formatter {
       process.stdout.write(color.dim(args.output))
     }
     console.log(
-      color.cyan(`${args.activity.file.platformified()}:${args.activity.line} -- skipping: ${args.finalName}`)
+      color.cyan(
+        `${args.activity.location.file.platformified()}:${args.activity.location.line} -- skipping: ${args.finalName}`
+      )
     )
   }
 

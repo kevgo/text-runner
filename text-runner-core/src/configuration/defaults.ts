@@ -46,6 +46,9 @@ async function getWorkspacePath(config: configuration.CompleteAPIData): Promise<
     const tmpDir = await tmp.dir()
     return new files.AbsoluteDir(path.join(tmpDir.path, config.workspace || ""))
   } else {
-    throw new UserError(`unknown 'systemTmp' setting: ${config.systemTmp}`)
+    throw new UserError(
+      `unknown 'systemTmp' setting: ${config.systemTmp}`,
+      `Since version 5.0.0, the only valid settings for "systemTmp" are "true" and "false"`
+    )
   }
 }

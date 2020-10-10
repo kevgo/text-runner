@@ -5,7 +5,10 @@ Feature: display the version
     When trying to run "text-run debug"
     Then it prints the text:
       """
-      Missing debug subcommand
+      Missing or invalid debug subcommand
+
+      Valid debug subcommands are: activities, ast, images, links, linkTargets.
+      Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"
       """
 
   Scenario: subcommand without filename

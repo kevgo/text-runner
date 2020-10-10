@@ -38,7 +38,14 @@ export class NodeList extends Array<Node> {
    */
   getNodesFor(openingNode: Node): NodeList {
     if (openingNode == null) {
-      throw new UserError("no Node given")
+      throw new UserError(
+        "no Node given",
+        `Somebody called the Text-Runner API method "NodeList.getNodesFor()" without an argument.
+This method provides all AST nodes until the given AST node closes.
+This callstack should point you to the problem:
+
+${new Error().stack}`
+      )
     }
     let index = this.indexOf(openingNode)
     if (index === -1) {

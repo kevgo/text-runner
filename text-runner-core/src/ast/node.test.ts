@@ -29,7 +29,7 @@ suite("ast.Node", function () {
       list.push(ast.Node.scaffold({ type: "link_close", line: 4 }))
       list.push(ast.Node.scaffold({ type: "text", line: 5 }))
       const nodes = list.getNodesFor(list[1])
-      const lines = nodes.map(node => node.line)
+      const lines = nodes.map(node => node.location.line)
       assert.deepEqual(lines, [2, 3, 4])
     })
 
@@ -44,7 +44,7 @@ suite("ast.Node", function () {
       list.push(ast.Node.scaffold({ type: "link_close", line: 7 }))
       list.push(ast.Node.scaffold({ type: "text", line: 8 }))
       const nodes = list.getNodesFor(list[1])
-      const lines = nodes.map(node => node.line)
+      const lines = nodes.map(node => node.location.line)
       assert.deepEqual(lines, [2, 3, 4, 5, 6, 7])
     })
   })

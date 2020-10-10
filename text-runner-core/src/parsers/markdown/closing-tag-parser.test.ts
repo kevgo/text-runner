@@ -23,14 +23,13 @@ suite("ClosingTagParser.isClosingTag()", function () {
 
 test("ClosingTagParser.parse()", function () {
   const parser = new ClosingTagParser(new TagMapper())
-  const file = new files.FullFile("filepath")
-  const line = 12
-  const actual = parser.parse("  < / a >  ", file, line)
+  const location = new files.Location(new files.SourceDir(""), new files.FullFile("filepath"), 12)
+  const actual = parser.parse("  < / a >  ", location)
   const expected = ast.NodeList.scaffold({
     attributes: {},
     content: "",
-    file,
-    line,
+    file: location.file,
+    line: location.line,
     tag: "/a",
     type: "anchor_close",
   })

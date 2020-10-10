@@ -16,8 +16,8 @@ export class FullFile {
   }
 
   /** Returns the directory that contains this file */
-  directory(): files.FullPath {
-    return new files.FullPath(path.dirname(this.value) + "/")
+  directory(): files.FullDir {
+    return new files.FullDir(path.dirname(this.value) + "/")
   }
 
   /** Returns the file extension of this path */

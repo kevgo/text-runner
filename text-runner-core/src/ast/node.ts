@@ -65,6 +65,7 @@ export interface NodeScaffoldData {
   content?: string
   file?: string | files.FullFile
   line?: number
+  sourceDir?: string
   tag?: NodeTag
   type?: NodeType
 }
@@ -78,7 +79,11 @@ export class Node {
     return new Node({
       attributes: data.attributes || {},
       content: data.content || "",
-      location: new files.Location(new files.SourceDir(""), data.file || new files.FullFile("file"), data.line || 1),
+      location: new files.Location(
+        new files.SourceDir(data.sourceDir || ""),
+        data.file || new files.FullFile("file"),
+        data.line || 1
+      ),
       tag: data.tag != null ? data.tag : "hr",
       type: data.type || "hr",
     })

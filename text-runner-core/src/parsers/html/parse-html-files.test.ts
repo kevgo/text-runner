@@ -21,9 +21,14 @@ suite("parseHTMLFiles", function () {
         for (const e of expectedJSON) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           e.file = e.file.replace("*", "html")
+          e.sourceDir = testDirPath
           expected.push(ast.Node.scaffold(e))
         }
-        const actual = await parseHTMLFiles([new files.FullFile("input.html")], testDirPath, tagMapper)
+        const actual = await parseHTMLFiles(
+          [new files.FullFile("input.html")],
+          new files.SourceDir(testDirPath),
+          tagMapper
+        )
         assert.deepEqual(actual[0], expected)
       })
     }

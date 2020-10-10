@@ -12,11 +12,11 @@ export class UnknownLink {
     this.value = helpers.removeDoubleSlash(helpers.unixify(publicPath))
   }
 
-  absolutify(containingFile: files.FullFile, publications: configuration.Publications): files.FullLink {
+  absolutify(containingLocation: files.Location, publications: configuration.Publications): files.FullLink {
     if (this.isAbsolute()) {
       return new files.FullLink(this.value)
     }
-    return new files.RelativeLink(this.value).absolutify(containingFile, publications)
+    return new files.RelativeLink(this.value).absolutify(containingLocation, publications)
   }
 
   /**

@@ -23,8 +23,7 @@ export async function runActivity(
   const args: actions.Args = {
     SKIPPING: 254,
     configuration,
-    file: activity.file,
-    line: activity.line,
+    location: activity.location,
     linkTargets: targets,
     log: outputCollector.logFn(),
     name: nameRefiner.refineFn(),
@@ -63,7 +62,7 @@ export async function runActivity(
       status: "failed",
       activity,
       finalName: nameRefiner.finalName(),
-      error: new UserError(e.message, e.guidance || "", activity.file, activity.line),
+      error: new UserError(e.message, e.guidance || "", activity.location),
       output: outputCollector.toString(),
     })
     return true

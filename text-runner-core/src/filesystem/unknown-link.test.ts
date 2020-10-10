@@ -24,7 +24,8 @@ suite("UnknownLink", function () {
         const unknownLink = new files.UnknownLink(tt.link)
         const containingFile = new files.FullFile(tt.give)
         const publications = new configuration.Publications()
-        const absoluteLink = unknownLink.absolutify(containingFile, publications)
+        const location = new files.Location(new files.SourceDir(""), containingFile, 1)
+        const absoluteLink = unknownLink.absolutify(location, publications)
         assert.deepEqual(absoluteLink, new files.FullLink(tt.want))
       })
     }

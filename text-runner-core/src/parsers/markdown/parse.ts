@@ -5,14 +5,14 @@ import * as files from "../../filesystem/index"
 import { MarkdownParser } from "./md-parser"
 
 /** returns the standard AST for the Markdown files given as paths relative to the given sourceDir */
-export async function parse(filenames: files.FullFile[], sourceDir: files.AbsoluteDir): Promise<ast.NodeList[]> {
+export async function parse(filenames: files.FullFile[], sourceDir: files.SourceDir): Promise<ast.NodeList[]> {
   const result: ast.NodeList[] = []
   const parser = new MarkdownParser()
   for (const filename of filenames) {
     const content = await fs.readFile(sourceDir.joinStr(filename.platformified()), {
       encoding: "utf8",
     })
-    result.push(parser.parse(content, filename))
+    result.push(parser.parse(content, sourceDir, filename))
   }
   return result
 }

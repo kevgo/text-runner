@@ -25,7 +25,7 @@ export class Finder {
   }
 
   /** loads all actions */
-  static load(sourceDir: files.AbsoluteDir): Finder {
+  static load(sourceDir: files.SourceDir): Finder {
     return new Finder(
       loadBuiltinActions(),
       loadCustomActions(sourceDir.joinStr("text-run")),
@@ -34,7 +34,7 @@ export class Finder {
   }
 
   /** loads only the actions for dynamic tests */
-  static loadDynamic(sourceDir: files.AbsoluteDir): Finder {
+  static loadDynamic(sourceDir: files.SourceDir): Finder {
     return new Finder(new Actions(), loadCustomActions(sourceDir.joinStr("text-run")), new ExternalActionManager())
   }
 
@@ -72,7 +72,7 @@ export class Finder {
     }
     guidance += `\nTo create a new "${activity.actionName}" action,\n`
     guidance += `run "text-run scaffold ${activity.actionName}"\n`
-    throw new UserError(errorText, guidance, activity.file, activity.line)
+    throw new UserError(errorText, guidance, activity.location)
   }
 }
 

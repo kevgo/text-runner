@@ -2,7 +2,7 @@ import * as path from "path"
 
 import * as files from "."
 
-/** represents a full path to a directory inside the document */
+/** represents the full path to a directory inside the document base, i.e. from the document root */
 export class FullDir {
   value: string
 

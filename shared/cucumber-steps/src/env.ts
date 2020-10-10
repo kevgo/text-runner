@@ -37,7 +37,7 @@ After({ timeout: 20_000 }, async function (scenario) {
   const world = this as TRWorld
   await endChildProcesses()
   if (scenario.result.status === "failed") {
-    console.log("\ntest artifacts are located in", world.rootDir)
+    console.log("\ntest artifacts are located in", world.rootDir.platformified())
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     // TODO: replace with fs

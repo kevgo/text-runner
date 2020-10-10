@@ -17,9 +17,8 @@ function extractFromAST(doc: ast.NodeList, regionMarker: string): List {
   for (const node of doc) {
     if (isActiveBlockTag(node, regionMarker)) {
       result.push({
-        actionName: normalizeActionName(node.attributes[regionMarker], node.file, node.line),
-        file: node.file,
-        line: node.line,
+        actionName: normalizeActionName(node.attributes[regionMarker], node.location),
+        location: node.location,
         region: doc.getNodesFor(node),
         document: doc,
       })

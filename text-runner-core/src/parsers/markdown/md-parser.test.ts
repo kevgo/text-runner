@@ -18,9 +18,10 @@ suite("MdParser.parseFile()", function () {
         for (const expectedNodeData of expectedJSON) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           expectedNodeData.file = expectedNodeData.file.replace("*", "md")
+          expectedNodeData.sourceDir = testDirPath
           expected.push(ast.Node.scaffold(expectedNodeData))
         }
-        const actual = await parse([new files.FullFile("input.md")], new files.AbsoluteDir(testDirPath))
+        const actual = await parse([new files.FullFile("input.md")], new files.SourceDir(testDirPath))
         assert.deepEqual(actual[0], expected)
       })
     }

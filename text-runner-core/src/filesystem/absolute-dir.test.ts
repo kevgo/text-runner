@@ -42,6 +42,16 @@ suite("files.AbsoluteDir", function () {
     })
   })
 
+  suite("toFullDir", function () {
+    test("subdirectory", function () {
+      const absDir = new files.AbsoluteDir("/home/acme/text-runner/src/")
+      const sourceDir = new files.SourceDir("/home/acme/text-runner/")
+      const have = absDir.toFullDir(sourceDir)
+      const want = new files.FullDir("src")
+      assert.deepEqual(have, want)
+    })
+  })
+
   suite("unixified", function () {
     test("on *nix", function () {
       if (process.platform === "win32") {

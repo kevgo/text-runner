@@ -22,8 +22,7 @@ export class ExternalActionManager {
       throw new UserError(
         `Too many slashes in action name "${activity.actionName}"`,
         "Activities are only allowed to have one slash in them: to separate the npm module name from the action name",
-        activity.file,
-        activity.line
+        activity.location
       )
     }
     const moduleName = "textrun-" + parts[0]
@@ -32,16 +31,11 @@ export class ExternalActionManager {
     try {
       module = require(moduleName)
     } catch (e) {
-      throw new UserError(`cannot load npm package "${moduleName}"`, e.message, activity.file, activity.line)
+      throw new UserError(`cannot load npm package "${moduleName}"`, e.message, activity.location)
     }
     const moduleActions = module.textrunActions
     if (!moduleActions) {
-      throw new UserError(
-        `npm package "${moduleName}" does not contain any Text-Runner actions`,
-        "",
-        activity.file,
-        activity.line
-      )
+      throw new UserError(`npm package "${moduleName}" does not contain any Text-Runner actions`, "", activity.location)
     }
     const names = []
     for (const [rawName, action] of Object.entries(moduleActions)) {
@@ -54,8 +48,7 @@ export class ExternalActionManager {
     throw new UserError(
       `npm package "${moduleName}" does not contain action "${wantAction}"`,
       `Found actions: ${names.join(", ")}`,
-      activity.file,
-      activity.line
+      activity.location
     )
   }
 }

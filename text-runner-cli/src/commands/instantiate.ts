@@ -37,6 +37,6 @@ export function instantiate(
     case "unused":
       return new tr.commands.Unused(trConfig)
     default:
-      throw new tr.UserError(`unknown command: ${commandName}`)
+      throw new tr.UserError(`unknown command: ${commandName}`, `Run "text-run help" for a list of all valid commands.`)
   }
 }

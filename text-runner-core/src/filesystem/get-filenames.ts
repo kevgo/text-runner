@@ -37,7 +37,10 @@ async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
   } else if (isGlob(config.files)) {
     return config.sourceDir.fullFilesMatchingGlob(fullGlob)
   } else {
-    throw new UserError(`file or directory does not exist: ${config.files}`)
+    throw new UserError(
+      `file or directory does not exist: ${config.files}`,
+      "You can provide a glob expression or the path to a file or folder."
+    )
   }
 }
 

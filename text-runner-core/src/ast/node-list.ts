@@ -38,7 +38,12 @@ export class NodeList extends Array<Node> {
    */
   getNodesFor(openingNode: Node): NodeList {
     if (openingNode == null) {
-      throw new UserError("no Node given")
+      throw new UserError(
+        "no Node given",
+        `NodeList.getNodesFor() provides all ast nodes until the given AST node closes. The callstack is: ${
+          new Error().stack
+        }`
+      )
     }
     let index = this.indexOf(openingNode)
     if (index === -1) {

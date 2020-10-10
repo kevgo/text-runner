@@ -12,7 +12,8 @@ import * as linkTargets from "../link-targets"
 import * as parsers from "../parsers/index"
 import { Command } from "./command"
 
-export type DebugSubcommand = "activities" | "ast" | "images" | "links" | "linkTargets"
+export const DebugSubCommandValues = ["activities", "ast", "images", "links", "linkTargets"] as const
+export type DebugSubcommand = typeof DebugSubCommandValues[number]
 
 export class Debug implements Command {
   userConfig: configuration.APIData

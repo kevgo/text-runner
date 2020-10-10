@@ -73,7 +73,12 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.commands.DebugSu
   } else if (cliArgs["link-targets"]) {
     return "linkTargets"
   } else {
-    throw new tr.UserError("Missing debug subcommand")
+    // TODO
+    throw new tr.UserError(
+      "Missing or invalid debug subcommand",
+      `Valid debug subcommands are: ${tr.commands.DebugSubCommandValues.join(", ")}.
+Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"`
+    )
   }
 }
 
@@ -92,6 +97,9 @@ function parseSystemTmp(value: any): boolean | undefined {
     case false:
       return false
     default:
-      throw new tr.UserError(`unknown value for "system-tmp" setting: ${value}`)
+      throw new tr.UserError(
+        `unknown value for "system-tmp" setting: ${value}`,
+        'Set the "system-tmp" setting to "true" to have Text-Runner put the test workspace into the global system temp folder and "false" to put it into the current folder.'
+      )
   }
 }

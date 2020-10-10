@@ -9,7 +9,7 @@ export class UserError extends Error {
   readonly guidance: string
   readonly location: files.Location | undefined
 
-  constructor(message: string, guidance?: string, location?: files.Location) {
+  constructor(message: string, guidance: string, location?: files.Location) {
     super(message)
     this.name = "UserError"
     this.guidance = guidance || ""

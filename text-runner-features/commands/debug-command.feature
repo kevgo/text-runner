@@ -53,19 +53,25 @@ Feature: display the version
       <img src="watermelon.png">
       """
     When running "text-run debug --images 1.md"
-    Then it prints the text:
+    Then it prints:
       """
       IMAGES:
       {
         actionName: 'check-image',
-        file: FullFile { value: '1.md' },
-        line: 1,
+        location: Location {
+          sourceDir: SourceDir { .* },
+          file: FullFile { value: '1.md' },
+          line: 1
+        },
         region: NodeList(1) [
           Node {
             type: 'image',
             tag: 'img',
-            file: FullFile { value: '1.md' },
-            line: 1,
+            location: Location {
+              sourceDir: SourceDir { .* },
+              file: FullFile { value: '1.md' },
+              line: 1
+            },
             content: '',
             attributes: { src: 'watermelon.png' }
           }
@@ -80,35 +86,47 @@ Feature: display the version
       [another document](2.md)
       """
     When running "text-run debug --links 1.md"
-    Then it prints the text:
+    Then it prints:
       """
       LINKS:
       {
         actionName: 'check-link',
-        file: FullFile { value: '1.md' },
-        line: 1,
+        location: Location {
+          sourceDir: SourceDir { .* },
+          file: FullFile { value: '1.md' },
+          line: 1
+        },
         region: NodeList(3) [
           Node {
             type: 'link_open',
             tag: 'a',
-            file: FullFile { value: '1.md' },
-            line: 1,
+            location: Location {
+              sourceDir: SourceDir { .* },
+              file: FullFile { value: '1.md' },
+              line: 1
+            },
             content: '',
             attributes: { href: '2.md' }
           },
           Node {
             type: 'text',
             tag: '',
-            file: FullFile { value: '1.md' },
-            line: 1,
+            location: Location {
+              sourceDir: SourceDir { .* },
+              file: FullFile { value: '1.md' },
+              line: 1
+            },
             content: 'another document',
             attributes: {}
           },
           Node {
             type: 'link_close',
             tag: '/a',
-            file: FullFile { value: '1.md' },
-            line: 1,
+            location: Location {
+              sourceDir: SourceDir { .* },
+              file: FullFile { value: '1.md' },
+              line: 1
+            },
             content: '',
             attributes: {}
           }

@@ -91,10 +91,10 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
   for (const activityResult of world.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
-      result.filename = activityResult.activity?.file.unixified()
+      result.filename = activityResult.activity?.location.file.unixified()
     }
     if (wanted.line != null) {
-      result.line = activityResult.activity?.line
+      result.line = activityResult.activity?.location.line
     }
     if (wanted.action != null) {
       result.action = activityResult.activity?.actionName
@@ -145,11 +145,11 @@ Then("it throws:", function (table: cucumber.TableDefinition) {
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME
-    have.filename = world.apiException.file?.unixified()
+    have.filename = world.apiException.location?.file.unixified()
   }
   if (tableHash.LINE) {
     want.line = parseInt(tableHash.LINE, 10)
-    have.line = world.apiException.line
+    have.line = world.apiException.location?.line
   }
   assert.deepEqual(have, want)
 })
@@ -206,9 +206,19 @@ Then("it prints:", function (expectedText: string) {
   }
   let output = stripAnsi(world.finishedProcess.combinedText.trim())
   if (process.platform === "win32") {
-    output = output.replace(/\\/g, "/")
+    output = output.trim().replace(/\\/g, "/")
   }
-  if (!new RegExp(expectedText.trim().replace(/\(/g, "\\(").replace(/\)/g, "\\)")).test(output)) {
+  const escapedText = expectedText
+    .trim()
+    .replace(/\\/g, "/")
+    .replace(/\(/g, "\\(")
+    .replace(/\)/g, "\\)")
+    .replace(/\{/g, "\\{")
+    .replace(/\}/g, "\\}")
+    .replace(/\//g, "\\/")
+    .replace(/\[/g, "\\[")
+    .replace(/\]/g, "\\]")
+  if (!new RegExp(escapedText, "m").test(output)) {
     throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
   }
 })

@@ -21,6 +21,7 @@ suite("parseHTMLFiles", function () {
         for (const e of expectedJSON) {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-call
           e.file = e.file.replace("*", "html")
+          e.sourceDir = testDirPath
           expected.push(ast.Node.scaffold(e))
         }
         const actual = await parseHTMLFiles(

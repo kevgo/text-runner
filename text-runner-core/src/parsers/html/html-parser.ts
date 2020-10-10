@@ -15,11 +15,6 @@ export class Parser {
 
   /**
    * Parse returns the standard AST for the given HTML text.
-   *
-   * @param file The file in which the given text happens (for error messages)
-   * @param startingLine The line at which this HTML snippet is located in the source document.
-   *                     This parameter helps show correct line numbers for HTML snippets
-   *                     that are embedded in Markdown documents.
    */
   parse(text: string, startingLocation: files.Location): ast.NodeList {
     const htmlAst = parse5.parse(text, {
@@ -68,16 +63,12 @@ export class Parser {
   /**
    * converts the given HTML AST for an entire HTML document into the standard AST
    */
-  private standardizeDocument(
-    documentAst: parse5.DefaultTreeDocument,
-    startingLocation: files.Location,
-    startingLine = 1
-  ): ast.NodeList {
+  private standardizeDocument(documentAst: parse5.DefaultTreeDocument, startingLocation: files.Location): ast.NodeList {
     const result = new ast.NodeList()
     const htmlNode = this.findHTMLNode(documentAst)
     const bodyNode = this.findBodyNode(htmlNode)
     for (const childNode of bodyNode.childNodes) {
-      result.push(...this.standardizeNode(childNode, startingLocation.withLine(startingLine)))
+      result.push(...this.standardizeNode(childNode, startingLocation.withLine(startingLocation.line)))
     }
     return result
   }

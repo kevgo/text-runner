@@ -33,6 +33,10 @@ export class FullPath {
     return this.value.endsWith("/")
   }
 
+  joinStr(relPath: string): string {
+    return path.join(this.value, relPath)
+  }
+
   /**
    * Returns the path in the platform-specific format,
    * i.e. using '\' on Windows and '/' everywhere else

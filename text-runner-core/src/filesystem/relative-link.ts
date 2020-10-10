@@ -15,9 +15,6 @@ export class RelativeLink {
   /**
    * Assuming this relative link is in the given file,
    * returns the absolute links that point to the same target as this relative link.
-   *
-   * @param containingLocation
-   * @param publications the publications of this TextRunner session
    */
   absolutify(containingLocation: files.Location, publications: configuration.Publications): files.FullLink {
     const urlOfDir = containingLocation.file.directory().publicPath(publications)

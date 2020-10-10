@@ -17,6 +17,7 @@ export async function checkImage(action: actions.Args): Promise<number | void> {
     const result = await checkRemoteImage(imagePath, action)
     return result
   } else {
+    // local image here
     if (!imagePath.startsWith("/")) {
       imagePath = path.join(path.dirname(node.location.file.platformified()), imagePath)
     }

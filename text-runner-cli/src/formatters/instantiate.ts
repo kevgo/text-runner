@@ -7,20 +7,16 @@ import { ProgressFormatter } from "./progress-formatter"
 import { SummaryFormatter } from "./summary-formatter"
 
 /** creates an instance of the formatter with the given name */
-export function instantiate(
-  name: formatters.Names,
-  sourceDir: string,
-  command: tr.commands.Command
-): formatters.Formatter {
+export function instantiate(name: formatters.Names, command: tr.commands.Command): formatters.Formatter {
   switch (name) {
     case "dot":
-      return new DotFormatter(sourceDir, command)
+      return new DotFormatter(command)
     case "detailed":
-      return new DetailedFormatter(sourceDir, command)
+      return new DetailedFormatter(command)
     case "progress":
-      return new ProgressFormatter(sourceDir, command)
+      return new ProgressFormatter(command)
     case "summary":
-      return new SummaryFormatter(sourceDir, command)
+      return new SummaryFormatter(command)
     default:
       throw new tr.UserError(`Unknown formatter: ${name}`, "Available formatters are: detailed, dot, progress, summary")
   }

@@ -1,5 +1,4 @@
 import * as color from "colorette"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers"
@@ -7,10 +6,7 @@ import * as formatter from "."
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements formatter.Formatter {
-  private readonly sourceDir: string
-
-  constructor(sourceDir: string, command: tr.commands.Command) {
-    this.sourceDir = sourceDir
+  constructor(command: tr.commands.Command) {
     command.on("output", console.log)
     command.on("result", this.onResult.bind(this))
   }
@@ -26,11 +22,7 @@ export class SummaryFormatter implements formatter.Formatter {
     console.log(color.dim(args.output))
     process.stdout.write(color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `))
     console.log(args.error.message)
-    helpers.printCodeFrame(
-      console.log,
-      path.join(this.sourceDir, args.activity.location.file.platformified()),
-      args.activity.location.line
-    )
+    helpers.printCodeFrame(console.log, args.activity.location)
   }
 
   finish(args: formatter.FinishArgs): void {

@@ -1,5 +1,4 @@
 import * as color from "colorette"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers"
@@ -15,6 +14,5 @@ export function printUserError(err: tr.UserError): void {
     console.log()
     console.log(err.guidance)
   }
-  const filePath = path.join(process.cwd(), err.location?.file?.platformified() || "")
-  helpers.printCodeFrame(console.log, filePath, err.location?.line)
+  helpers.printCodeFrame(console.log, err.location)
 }

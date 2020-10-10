@@ -1,5 +1,4 @@
 import * as color from "colorette"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers"
@@ -8,10 +7,7 @@ import { printUserError } from "./print-user-error"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {
-  private readonly sourceDir: string
-
-  constructor(sourceDir: string, command: tr.commands.Command) {
-    this.sourceDir = sourceDir
+  constructor(command: tr.commands.Command) {
     command.on("output", console.log)
     command.on("result", this.onResult.bind(this))
   }
@@ -48,8 +44,7 @@ export class DetailedFormatter implements formatter.Formatter {
         color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
       )
       console.log(args.error.message)
-      const filePath = path.join(this.sourceDir, args.activity.location.file.platformified())
-      helpers.printCodeFrame(console.log, filePath, args.activity.location.line)
+      helpers.printCodeFrame(console.log, args.activity.location)
     }
   }
 

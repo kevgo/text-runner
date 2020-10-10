@@ -36,13 +36,13 @@ export class Publication {
     return result.withExtension(this.publicExtension)
   }
 
-  /** Returns whether this publication applies to the given file path */
+  /** indicates whether this publication applies to the given file path */
   publishes(localPath: files.FullPath): boolean {
     return helpers.addLeadingSlash(helpers.addTrailingSlash(localPath.unixified())).startsWith(this.localPath)
   }
 
   /**
-   * Returns the localPath for the given link
+   * provides the localPath for the given link
    * mapped according to the rules of this publication.
    */
   resolve(link: files.FullLink, defaultFile: string): files.FullPath {
@@ -58,7 +58,7 @@ export class Publication {
     return new files.FullPath(result.value)
   }
 
-  /** Returns whether this publication maps the given link */
+  /** indicates whether this publication maps the given link */
   resolves(link: files.FullLink): boolean {
     return link.value.startsWith(this.publicPath)
   }

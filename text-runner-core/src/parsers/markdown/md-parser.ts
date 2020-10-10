@@ -57,8 +57,7 @@ export class MarkdownParser {
   /** returns the standard AST representing the given Markdown text */
   parse(text: string, sourceDir: files.SourceDir, file: files.FullFile): ast.NodeList {
     const mdAST = this.markdownIt.parse(text, {})
-    const location = new files.Location(sourceDir, file, 1)
-    return this.standardizeAST(mdAST, location, new OpenNodeTracker())
+    return this.standardizeAST(mdAST, new files.Location(sourceDir, file, 1), new OpenNodeTracker())
   }
 
   /** Converts the given MarkdownIt AST into the standard AST format */

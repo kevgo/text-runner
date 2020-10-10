@@ -18,7 +18,8 @@ export async function parseHTMLFiles(
     const content = await fs.readFile(path.join(sourceDir, filename.platformified()), {
       encoding: "utf8",
     })
-    result.push(parser.parse(content, filename, 1))
+    const startingLocation = new files.Location(sourceDir, filename, 1)
+    result.push(parser.parse(content, startingLocation))
   }
   return Promise.all(result)
 }

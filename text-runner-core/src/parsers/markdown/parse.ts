@@ -12,7 +12,7 @@ export async function parse(filenames: files.FullFile[], sourceDir: files.Source
     const content = await fs.readFile(sourceDir.joinStr(filename.platformified()), {
       encoding: "utf8",
     })
-    result.push(parser.parse(content, filename))
+    result.push(parser.parse(content, sourceDir, filename))
   }
   return result
 }

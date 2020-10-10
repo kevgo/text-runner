@@ -55,32 +55,28 @@ export class MarkdownParser {
   }
 
   /** returns the standard AST representing the given Markdown text */
-  parse(text: string, file: files.FullFile): ast.NodeList {
+  parse(text: string, sourceDir: files.SourceDir, file: files.FullFile): ast.NodeList {
     const mdAST = this.markdownIt.parse(text, {})
-    return this.standardizeAST(mdAST, file, 1, new OpenNodeTracker())
+    const location = new files.Location(sourceDir, file, 1)
+    return this.standardizeAST(mdAST, location, new OpenNodeTracker())
   }
 
   /** Converts the given MarkdownIt AST into the standard AST format */
-  private standardizeAST(
-    mdAST: MarkdownItAst,
-    file: files.FullFile,
-    parentLine: number,
-    ont: OpenNodeTracker
-  ): ast.NodeList {
+  private standardizeAST(mdAST: MarkdownItAst, parentLocation: files.Location, ont: OpenNodeTracker): ast.NodeList {
     const result = new ast.NodeList()
-    let currentLine = parentLine
+    let currentLine = parentLocation.line
     for (const node of mdAST) {
       currentLine = Math.max((node.map || [0, 0])[0] + 1, currentLine)
 
       if (node.type === "image") {
         // need to handle images explicitly here because they have a text node as a child
         // but the AST shouldn't contain it
-        result.push(...this.standardizeImageNode(node, file, currentLine))
+        result.push(...this.standardizeImageNode(node, parentLocation.withLine(currentLine)))
         continue
       }
 
       if (node.children) {
-        result.push(...this.standardizeAST(node.children, file, currentLine, ont))
+        result.push(...this.standardizeAST(node.children, parentLocation.withLine(currentLine), ont))
         continue
       }
 
@@ -89,7 +85,7 @@ export class MarkdownParser {
         continue
       }
 
-      result.push(...this.standardizeNode(node, location, ont))
+      result.push(...this.standardizeNode(node, parentLocation.withLine(currentLine), ont))
     }
     return result
   }

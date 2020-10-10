@@ -4,18 +4,17 @@ import * as ast from "../../ast"
 import * as files from "../../filesystem/index"
 import { TagMapper } from "../tag-mapper"
 import { Parser } from "./html-parser"
-import path = require("path")
 
 /** returns the standard AST for the HTML files with the given paths */
 export async function parseHTMLFiles(
   filenames: files.FullFile[],
-  sourceDir: string,
+  sourceDir: files.SourceDir,
   tagMapper: TagMapper
 ): Promise<ast.NodeList[]> {
   const result = []
   const parser = new Parser(tagMapper)
   for (const filename of filenames) {
-    const content = await fs.readFile(path.join(sourceDir, filename.platformified()), {
+    const content = await fs.readFile(sourceDir.joinFullFile(filename).platformified(), {
       encoding: "utf8",
     })
     result.push(parser.parse(content, filename, 1))

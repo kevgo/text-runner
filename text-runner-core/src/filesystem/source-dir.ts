@@ -16,8 +16,12 @@ export class SourceDir {
     return allFiles.sort().map(file => new files.AbsoluteFile(file).toFullFile(this))
   }
 
-  joinFullDir(dir: files.FullFile): files.AbsoluteFile {
-    return new files.AbsoluteFile(path.join(this.platformified(), dir.platformified()))
+  joinFullDir(dir: files.FullDir): files.AbsoluteDir {
+    return new files.AbsoluteDir(path.join(this.platformified(), dir.platformified()))
+  }
+
+  joinFullFile(file: files.FullFile): files.AbsoluteFile {
+    return new files.AbsoluteFile(path.join(this.platformified(), file.platformified()))
   }
 
   /** provides a path of this directory with the given path appended */

@@ -210,7 +210,6 @@ Then("it prints:", function (expectedText: string) {
   }
   const escapedText = expectedText
     .trim()
-    .replace(/\\/g, "/")
     .replace(/\(/g, "\\(")
     .replace(/\)/g, "\\)")
     .replace(/\{/g, "\\{")

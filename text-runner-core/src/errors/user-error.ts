@@ -7,15 +7,13 @@ import * as files from "../filesystem/index"
 export class UserError extends Error {
   /** optional longer user-facing guidance on how to resolve the error */
   readonly guidance: string
-  readonly file: files.FullFile | undefined
-  readonly line: number | undefined
+  readonly location: files.Location | undefined
 
-  constructor(message: string, guidance?: string, file?: files.FullFile, line?: number) {
+  constructor(message: string, guidance?: string, location?: files.Location) {
     super(message)
     this.name = "UserError"
     this.guidance = guidance || ""
-    this.file = file
-    this.line = line
+    this.location = location
   }
 }
 

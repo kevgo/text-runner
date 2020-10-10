@@ -21,14 +21,14 @@ export class Parser {
    *                     This parameter helps show correct line numbers for HTML snippets
    *                     that are embedded in Markdown documents.
    */
-  parse(text: string, file: files.FullFile, startingLine: number): ast.NodeList {
+  parse(text: string, startingLocation: files.Location): ast.NodeList {
     const htmlAst = parse5.parse(text, {
       sourceCodeLocationInfo: true,
     })
     if (!instanceOfDefaultTreeDocument(htmlAst)) {
       throw new Error("expected parse5.DefaultTreeDocument instance")
     }
-    return this.standardizeDocument(htmlAst, file, startingLine)
+    return this.standardizeDocument(htmlAst, startingLocation)
   }
 
   /** returns whether the given HTML node is an empty text node */
@@ -70,7 +70,7 @@ export class Parser {
    */
   private standardizeDocument(
     documentAst: parse5.DefaultTreeDocument,
-    file: files.FullFile,
+    startingLocation: files.Location,
     startingLine = 1
   ): ast.NodeList {
     const result = new ast.NodeList()

@@ -78,8 +78,7 @@ export class Node {
     return new Node({
       attributes: data.attributes || {},
       content: data.content || "",
-      file: data.file || new files.FullFile("file"),
-      line: data.line || 1,
+      location: new files.Location(new files.SourceDir(""), data.file || new files.FullFile("file"), data.line || 1),
       tag: data.tag != null ? data.tag : "hr",
       type: data.type || "hr",
     })
@@ -92,10 +91,7 @@ export class Node {
   readonly tag: NodeTag
 
   /** the file in which this AstNode occurs */
-  readonly file: files.FullFile
-
-  /** the line in the file at which this AST node occurs */
-  readonly line: number
+  readonly location: files.Location
 
   /** textual content of this AST node */
   readonly content: string
@@ -106,15 +102,13 @@ export class Node {
   constructor(data: {
     attributes: NodeAttributes
     content: string
-    file: files.FullFile
-    line: number
+    location: files.Location
     tag: NodeTag
     type: NodeType
   }) {
     this.type = data.type
     this.tag = data.tag
-    this.file = data.file
-    this.line = data.line
+    this.location = data.location
     this.content = data.content
     this.attributes = data.attributes
   }

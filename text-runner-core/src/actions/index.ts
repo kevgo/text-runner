@@ -22,14 +22,11 @@ export interface Args {
   /** the AST nodes of the active region which the current action tests */
   document: ast.NodeList
 
-  /** name of the file in which the currently tested active region is */
-  file: files.FullFile
-
-  /** line in the current file at which the currently tested active region starts */
-  line: number
-
   /** all link targets in the current documentation  */
   linkTargets: linkTargets.List
+
+  /** name of the file in which the currently tested active region is */
+  location: files.Location
 
   /** allows printing test output to the user, behaves like console.log */
   log: run.LogFn

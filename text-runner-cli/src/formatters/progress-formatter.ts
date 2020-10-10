@@ -1,17 +1,14 @@
 import * as progress from "cli-progress"
 import * as color from "colorette"
-import * as path from "path"
 import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers"
 import * as formatter from "."
 
 export class ProgressFormatter implements formatter.Formatter {
-  private readonly sourceDir: string
   private readonly progressBar: progress.Bar
 
-  constructor(sourceDir: string, command: tr.commands.Command) {
-    this.sourceDir = sourceDir
+  constructor(command: tr.commands.Command) {
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
@@ -53,11 +50,7 @@ export class ProgressFormatter implements formatter.Formatter {
       )
     )
     console.log()
-    helpers.printCodeFrame(
-      console.log,
-      path.join(this.sourceDir, args.activity.location.file.platformified()),
-      args.activity.location.line
-    )
+    helpers.printCodeFrame(console.log, args.activity.location)
   }
 
   finish(args: formatter.FinishArgs): void {

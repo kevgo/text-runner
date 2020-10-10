@@ -10,22 +10,22 @@ import { SummaryFormatter } from "./summary-formatter"
 suite("instantiateFormatter()", function () {
   const command = new tr.commands.Run({})
   test("request detailed formatter", function () {
-    const have = formatter.instantiate("detailed", ".", command)
+    const have = formatter.instantiate("detailed", command)
     assert.instanceOf(have, DetailedFormatter)
   })
 
   test("request dot formatter", function () {
-    const have = formatter.instantiate("dot", ".", command)
+    const have = formatter.instantiate("dot", command)
     assert.instanceOf(have, DotFormatter)
   })
 
   test("request progress formatter", function () {
-    const have = formatter.instantiate("progress", ".", command)
+    const have = formatter.instantiate("progress", command)
     assert.instanceOf(have, ProgressFormatter)
   })
 
   test("request summary formatter", function () {
-    const have = formatter.instantiate("summary", ".", command)
+    const have = formatter.instantiate("summary", command)
     assert.instanceOf(have, SummaryFormatter)
   })
 

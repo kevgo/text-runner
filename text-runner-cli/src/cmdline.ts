@@ -73,7 +73,6 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.commands.DebugSu
   } else if (cliArgs["link-targets"]) {
     return "linkTargets"
   } else {
-    // TODO
     throw new tr.UserError(
       "Missing or invalid debug subcommand",
       `Valid debug subcommands are: ${tr.commands.DebugSubCommandValues.join(", ")}.

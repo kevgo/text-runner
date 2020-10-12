@@ -28,4 +28,4 @@ test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
 
-# .SILENT:
+.SILENT:

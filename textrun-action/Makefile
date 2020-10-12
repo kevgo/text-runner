@@ -26,6 +26,7 @@ lint:  # lints all files in this codebase
 	echo textrun-action linters ...
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
+	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc
 
 publish: clean build  # publishes this package
 	npm publish

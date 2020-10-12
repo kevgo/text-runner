@@ -1,0 +1,1 @@
+ignores: ["mocha", "chai", "cucumber", "shared-cucumber-steps", "text-runner-core", "textrun-javascript", "custom-action-coffeescript"]

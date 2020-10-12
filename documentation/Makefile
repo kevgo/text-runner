@@ -21,6 +21,7 @@ lint:  # lints all files in this codebase
 	echo documentation linters ...
 	${CURDIR}/node_modules/.bin/remark . --quiet &
 	${CURDIR}/../node_modules/.bin/prettier -l .
+	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc
 
 test: lint unit cuke docs  # runs all tests
 test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna

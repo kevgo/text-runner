@@ -43,7 +43,7 @@ Then("it executes in the local {string} directory", function (dirName) {
     throw new Error("no API results found")
   }
   const have = world.apiResults[0].output?.trim()
-  const want = world.rootDir.joinStr(dirName)
+  const want = world.workspace.joinStr(dirName)
   assert.equal(have, want)
 })
 
@@ -173,12 +173,12 @@ Then("the API exception provides the guidance:", function (expectedText: string)
 
 Then("it creates a directory {string}", async function (directoryPath) {
   const world = this as TRWorld
-  await fs.stat(world.rootDir.joinStr(directoryPath))
+  await fs.stat(world.workspace.joinStr(directoryPath))
 })
 
 Then("it creates the file {string} with content:", async function (filename, expectedContent) {
   const world = this as TRWorld
-  const actualContent = await fs.readFile(world.rootDir.joinStr(filename), {
+  const actualContent = await fs.readFile(world.workspace.joinStr(filename), {
     encoding: "utf8",
   })
   assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
@@ -237,12 +237,12 @@ Then("it runs {int} test", function (count: number) {
 
 Then("it executes in a global temp directory", function () {
   const world = this as TRWorld
-  assert.notInclude(world.apiResults[0].output, world.rootDir.unixified())
+  assert.notInclude(world.apiResults[0].output, world.workspace.unixified())
 })
 
 Then("it executes in the global {string} temp directory", function (dirName: string) {
   const world = this as TRWorld
-  assert.notInclude(world.apiResults[0].output, world.rootDir.joinStr(dirName))
+  assert.notInclude(world.apiResults[0].output, world.workspace.joinStr(dirName))
 })
 
 Then("it runs in a global temp directory", function () {
@@ -250,7 +250,7 @@ Then("it runs in a global temp directory", function () {
   if (!world.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(world.finishedProcess.combinedText, world.rootDir.unixified())
+  assert.notInclude(world.finishedProcess.combinedText, world.workspace.unixified())
 })
 
 Then("it runs in the global {string} temp directory", function (dirName: string) {
@@ -258,7 +258,7 @@ Then("it runs in the global {string} temp directory", function (dirName: string)
   if (!world.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(world.finishedProcess.combinedText, world.rootDir.joinStr(dirName))
+  assert.notInclude(world.finishedProcess.combinedText, world.workspace.joinStr(dirName))
 })
 
 Then("it runs in the local {string} directory", function (dirName) {
@@ -267,7 +267,7 @@ Then("it runs in the local {string} directory", function (dirName) {
     throw new Error("no process found")
   }
   const have = world.finishedProcess.combinedText
-  const want = world.rootDir.joinStr(dirName)
+  const want = world.workspace.joinStr(dirName)
   assert.include(have, want)
 })
 
@@ -276,7 +276,7 @@ Then("it runs in the current working directory", function () {
   if (!world.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.match(world.finishedProcess.combinedText.trim(), new RegExp(`${world.rootDir}\\b`))
+  assert.match(world.finishedProcess.combinedText.trim(), new RegExp(`${world.workspace}\\b`))
 })
 
 Then("it runs (only )the tests in {string}", function (filename) {
@@ -352,7 +352,7 @@ Then("the call fails with the error:", function (expectedError) {
 Then("the {string} directory is now deleted", async function (directoryPath: string) {
   const world = this as TRWorld
   try {
-    await fs.stat(world.rootDir.joinStr(directoryPath))
+    await fs.stat(world.workspace.joinStr(directoryPath))
   } catch (e) {
     // we expect an exception here since the directory shouldn't exist
     return
@@ -365,13 +365,13 @@ Then("the workspace now/still contains a file {string} with content:", async fun
   expectedContent: string
 ) {
   const world = this as TRWorld
-  const actualContent = await fs.readFile(world.rootDir.joinStr("tmp", fileName), "utf8")
+  const actualContent = await fs.readFile(world.workspace.joinStr("tmp", fileName), "utf8")
   assert.equal(actualContent.trim(), expectedContent.trim())
 })
 
 Then("the test workspace now contains a directory {string}", async function (name) {
   const world = this as TRWorld
-  const stat = await fs.stat(world.rootDir.joinStr("tmp", name))
+  const stat = await fs.stat(world.workspace.joinStr("tmp", name))
   assert.isTrue(stat.isDirectory())
 })
 
@@ -406,7 +406,7 @@ Then("there are no child processes running", async function () {
 Then("there is no {string} folder", async function (name: string) {
   const world = this as TRWorld
   try {
-    await fs.stat(world.rootDir.joinStr(name))
+    await fs.stat(world.workspace.joinStr(name))
   } catch (e) {
     return
   }

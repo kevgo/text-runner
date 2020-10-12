@@ -15,21 +15,21 @@ Before(async function () {
   const world = this as TRWorld
   if (process.env.CUCUMBER_PARALLEL) {
     const tempDir = await tmp.dir()
-    world.rootDir = new textRunner.files.AbsoluteDir(tempDir.path)
+    world.workspace = new textRunner.files.AbsoluteDir(tempDir.path)
   } else {
-    world.rootDir = new textRunner.files.AbsoluteDir(path.join(process.cwd(), "tmp"))
+    world.workspace = new textRunner.files.AbsoluteDir(path.join(process.cwd(), "tmp"))
   }
-  let rootDirExists = false
+  let workspaceExists = false
   try {
-    await fs.stat(world.rootDir.platformified())
-    rootDirExists = true
+    await fs.stat(world.workspace.platformified())
+    workspaceExists = true
   } catch (e) {
     // nothing to do here
   }
-  if (rootDirExists) {
-    await fs.rmdir(world.rootDir.platformified(), { recursive: true })
+  if (workspaceExists) {
+    await fs.rmdir(world.workspace.platformified(), { recursive: true })
   }
-  await fs.mkdir(world.rootDir.platformified(), { recursive: true })
+  await fs.mkdir(world.workspace.platformified(), { recursive: true })
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -37,11 +37,11 @@ After({ timeout: 20_000 }, async function (scenario) {
   const world = this as TRWorld
   await endChildProcesses()
   if (scenario.result.status === "failed") {
-    console.log("\ntest artifacts are located in", world.rootDir.platformified())
+    console.log("\ntest artifacts are located in", world.workspace.platformified())
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     // TODO: replace with fs
-    await rimrafp(world.rootDir.platformified())
+    await rimrafp(world.workspace.platformified())
   }
 })
 

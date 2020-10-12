@@ -19,9 +19,9 @@ export function verifyRanOnlyTestsCLI(filenames: string | string[][], world: TRW
 
   // verify all other tests have not run
   const filesShouldntRun = glob
-    .sync(`${world.rootDir}/**`)
+    .sync(`${world.workspace}/**`)
     .filter(file => fs.statSync(file).isFile())
-    .map(file => world.rootDir.relativeStr(file))
+    .map(file => world.workspace.relativeStr(file))
     .filter(file => file)
     .map(file => file.replace(/\\/g, "/"))
     .filter(file => flattened.indexOf(file) === -1)

@@ -16,5 +16,5 @@ export interface TRWorld {
   finishedProcess: observableProcess.FinishedProcess | undefined
 
   /** the workspace */
-  rootDir: textRunner.files.AbsoluteDir
+  workspace: textRunner.files.AbsoluteDir
 }

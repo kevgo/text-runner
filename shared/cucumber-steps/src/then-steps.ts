@@ -71,19 +71,15 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     if (line.ACTIVITY != null) {
       result.activity = line.ACTIVITY
     }
-    if (line.STATUS != null) {
-      // @ts-ignore
-      result.status = line.STATUS
-    }
+    // @ts-ignore
+    result.status = line.STATUS ?? "success"
     if (line.MESSAGE != null) {
       result.message = line.MESSAGE
     }
     if (line["ERROR TYPE"] != null) {
-      result.errorType = line["ERROR TYPE"] || ""
+      result.errorType = line["ERROR TYPE"]
     }
-    if (line["ERROR MESSAGE"] != null) {
-      result.errorMessage = line["ERROR MESSAGE"]
-    }
+    result.errorMessage = line["ERROR MESSAGE"] ?? ""
     want.push(result)
   }
   let have: ExecuteResultLine[] = []

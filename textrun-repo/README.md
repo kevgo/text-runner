@@ -59,3 +59,20 @@ The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 ```
 
 </a>
+
+### executables
+
+If your documentation mentions executables that the user can run, use the
+<b type="action/name-full">repo/executable</b> action to verify that they exist
+and are indeed executable. As an example, consider a codebase that contains an
+executable <b type="workspace/new-executable">scripts/setup</b>. The semantic
+documentation for this codebase might look like this:
+
+<a type="extension/runnable-region">
+
+```html
+Run the <code type="repo/executable">script/setup</code> binary to set up your
+environment.
+```
+
+</a>

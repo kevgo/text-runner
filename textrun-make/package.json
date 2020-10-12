@@ -1,6 +1,6 @@
 {
   "name": "textrun-make",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "dist/index.js",
   "license": "ISC",
   "files": [
@@ -15,9 +15,9 @@
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre8",
-    "textrun-action": "0.0.5",
-    "textrun-extension": "0.0.5",
-    "textrun-npm": "0.0.5",
-    "textrun-workspace": "0.0.5"
+    "textrun-action": "0.0.6",
+    "textrun-extension": "0.0.6",
+    "textrun-npm": "0.0.6",
+    "textrun-workspace": "0.0.6"
   }
 }

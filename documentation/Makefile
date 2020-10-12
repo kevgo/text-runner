@@ -19,7 +19,6 @@ help:  # prints all make targets
 
 lint:  # lints all files in this codebase
 	echo documentation linters ...
-	${CURDIR}/node_modules/.bin/remark . --quiet &
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc --ignores=`${CURDIR}/../node_modules/.bin/lerna ls -a | cut -d ' ' -f1 | paste -s -d, -`
 

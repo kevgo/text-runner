@@ -6,6 +6,7 @@ from the repository.
 
 - [installation](#installation)
 - [file-content](#file-content)
+- [executable](#executable)
 
 ### installation
 

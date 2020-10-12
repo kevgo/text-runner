@@ -7,9 +7,7 @@ import * as run from "../run"
 export { Finder } from "./finder"
 export * from "./name"
 
-/**
- * A user-defined or built-in function that tests an active block
- */
+/** A user-defined or built-in function that tests an active block */
 export type Action = (params: Args) => Result
 
 export interface Args {

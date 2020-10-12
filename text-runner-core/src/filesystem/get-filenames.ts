@@ -56,9 +56,7 @@ export async function markdownFilesInDir(dirName: string, sourceDir: files.Sourc
     .map(file => new files.AbsoluteFile(file).toFullFile(sourceDir))
 }
 
-/**
- * Removes the given excluded files from the given list of filenames
- */
+/** Removes the given excluded files from the given list of filenames */
 export function removeExcludedFiles(fileList: files.FullFile[], excluded: string | string[]): files.FullFile[] {
   const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
   const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))

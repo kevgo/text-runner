@@ -16,9 +16,7 @@ export class FullLink {
     this.value = helpers.addLeadingSlash(helpers.removeDoubleSlash(helpers.unixify(publicPath)))
   }
 
-  /**
-   * Returns the anchor part of this link
-   */
+  /** Returns the anchor part of this link */
   anchor(): string {
     return this.value.split("#")[1] || ""
   }
@@ -31,9 +29,7 @@ export class FullLink {
     return new FullLink(helpers.straightenLink(this.value + "/" + segment.value))
   }
 
-  /**
-   * Returns a link to the containing directory
-   */
+  /** Returns a link to the containing directory */
   directory(): FullLink {
     const withoutAnchor = this.withoutAnchor()
     if (withoutAnchor.isLinkToDirectory()) {
@@ -46,25 +42,17 @@ export class FullLink {
     return this.anchor() !== ""
   }
 
-  /**
-   * Returns whether this link has the given extension
-   */
+  /** Returns whether this link has the given extension */
   hasExtension(extension: string): boolean {
     return path.extname(this.value) === helpers.addLeadingDotUnlessEmpty(extension)
   }
 
-  /**
-   * Returns whether this link points to a directory
-   */
+  /** Returns whether this link points to a directory */
   isLinkToDirectory(): boolean {
     return this.value.endsWith("/")
   }
 
-  /**
-   * Returns the file path that this link has on the local filesystem
-   * @param publications the publications of this TextRunner session
-   * @param defaultFile the filename to use in case this link points to a directory
-   */
+  /** Returns the file path that this link has on the local filesystem */
   localize(publications: configuration.Publications, defaultFile: string): files.FullPath | files.FullFile {
     const publication = publications.publicationForLink(this)
     const result = publication
@@ -91,24 +79,18 @@ export class FullLink {
     return new FullLink(decodeURI(this.value))
   }
 
-  /**
-   * Returns a link that contains the given anchor
-   */
+  /** Returns a link that contains the given anchor */
   withAnchor(anchor: string): FullLink {
     return new FullLink(this.withoutAnchor().value + "#" + anchor)
   }
 
-  /**
-   * Returns another FullLink instance that uses the given file extension
-   */
+  /** Returns another FullLink instance that uses the given file extension */
   withExtension(newExtension: string): FullLink {
     const extRE = new RegExp(path.extname(this.value) + "$")
     return new FullLink(this.value.replace(extRE, helpers.addLeadingDotUnlessEmpty(newExtension)))
   }
 
-  /**
-   * Returns a link that is this link without the anchor
-   */
+  /** Returns a link that is this link without the anchor */
   withoutAnchor(): FullLink {
     return new FullLink(this.value.split("#")[0])
   }

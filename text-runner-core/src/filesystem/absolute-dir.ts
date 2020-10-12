@@ -45,9 +45,7 @@ export class AbsoluteDir {
     return new files.FullDir(path.relative(sourceDir.platformified(), this.platformified()))
   }
 
-  /**
-   * Returns this absolute path using forward slashes as path separators
-   */
+  /** Returns this absolute path using forward slashes as path separators */
   unixified(): string {
     return this.value
   }

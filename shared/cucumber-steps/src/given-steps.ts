@@ -82,6 +82,12 @@ Given("the source code contains a file {string} with content:", async function (
   await fs.writeFile(world.workspace.joinStr(fileName), content)
 })
 
+Given("the source code contains an executable {string}", async function (fileName) {
+  const world = this as TRWorld
+  await fse.ensureDir(world.workspace.joinStr(path.dirname(fileName)))
+  await fs.writeFile(world.workspace.joinStr(fileName), "content", { mode: 0o744 })
+})
+
 Given("the workspace contains a file {string}", async function (fileName) {
   const world = this as TRWorld
   await fse.ensureDir(world.workspace.joinStr("tmp", path.dirname(fileName)))

@@ -66,13 +66,13 @@ The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 The <b type="action/name-full">repo/executable</b> action verifies that an
 executable that the documentation mentions exists and is indeed executable. It
 doesn't run the executable. As an example, consider a codebase that contains an
-executable <b type="workspace/new-executable">scripts/setup</b>. The semantic
+executable <b type="new-executable">scripts/setup</b>. The semantic
 documentation for this codebase might look like this:
 
 <a type="extension/runnable-region">
 
 ```html
-Run the <b type="repo/executable">script/setup</b> binary to set up your
+Run the <b type="repo/executable">scripts/setup</b> binary to set up your
 environment.
 ```
 

@@ -71,7 +71,7 @@ documentation for this codebase might look like this:
 <a type="extension/runnable-region">
 
 ```html
-Run the <code type="repo/executable">script/setup</code> binary to set up your
+Run the <b type="repo/executable">script/setup</b> binary to set up your
 environment.
 ```
 

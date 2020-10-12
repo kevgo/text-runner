@@ -4,7 +4,6 @@
   "author": "Kevin Goslar",
   "dependencies": {
     "@sindresorhus/slugify": "1.1.0",
-    "@types/tmp": "0.2.0",
     "anchor-markdown-header": "0.5.7",
     "fs-extra": "9.0.1",
     "glob": "7.1.6",
@@ -16,7 +15,6 @@
     "markdown-it": "11.0.0",
     "parse5": "6.0.1",
     "rechoir": "0.7.0",
-    "tmp": "0.2.1",
     "tmp-promise": "3.0.2"
   },
   "description": "Tests documentation written in MarkDown",

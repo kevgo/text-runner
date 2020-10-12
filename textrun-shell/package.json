@@ -7,6 +7,8 @@
     "dist/**/*.js"
   ],
   "dependencies": {
+    "assert-no-diff": "3.0.4",
+    "end-child-processes": "1.0.1",
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.0-pre7",

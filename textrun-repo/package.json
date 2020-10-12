@@ -11,6 +11,7 @@
     "text-runner-core": "5.0.0-pre7"
   },
   "devDependencies": {
+    "assert-no-diff": "3.0.4",
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "eol": "0.9.1",

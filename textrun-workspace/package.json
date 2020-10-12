@@ -8,6 +8,8 @@
   ],
   "license": "ISC",
   "dependencies": {
+    "assert-no-diff": "3.0.4",
+    "fs-extra": "9.0.1",
     "text-runner-core": "5.0.0-pre7"
   },
   "devDependencies": {

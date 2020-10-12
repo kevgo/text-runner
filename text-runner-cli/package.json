@@ -31,16 +31,6 @@
   ],
   "homepage": "https://github.com/kevgo/text-runner",
   "license": "ISC",
-  "remarkConfig": {
-    "presets": [
-      "lint-recommended"
-    ],
-    "plugins": {
-      "lint": {
-        "list-item-indent": "space"
-      }
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/kevgo/text-runner.git"

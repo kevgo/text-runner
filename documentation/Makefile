@@ -19,7 +19,6 @@ help:  # prints all make targets
 
 lint:  # lints all files in this codebase
 	echo documentation linters ...
-	${CURDIR}/node_modules/.bin/remark . --quiet &
 	${CURDIR}/../node_modules/.bin/prettier -l .
 
 test: lint unit cuke docs  # runs all tests

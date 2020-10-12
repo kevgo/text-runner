@@ -20,7 +20,7 @@ help:  # prints all make targets
 lint:  # lints all files in this codebase
 	echo documentation linters ...
 	${CURDIR}/../node_modules/.bin/prettier -l .
-	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc --ignores=`${CURDIR}/../node_modules/.bin/lerna ls -a | cut -d ' ' -f1 | paste -s -d, -`
+	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc
 
 test: lint unit cuke docs  # runs all tests
 test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna

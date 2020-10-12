@@ -13,6 +13,7 @@ import { TRWorld } from "./world"
 
 const psTree = util.promisify(psTreeR)
 
+type ResultStatus = "success" | "failed" | "skipped" | "warning"
 export interface ExecuteResultLine {
   action?: string // standardized name of the action ("check-link")
   activity?: string // final name of the activity ("checking link http://foo.bar")
@@ -22,7 +23,7 @@ export interface ExecuteResultLine {
   line?: number
   message?: string
   output?: string // what the action printed via action.log()
-  status?: "success" | "failed" | "skipped" | "warning"
+  status?: ResultStatus
 }
 Then("explode", function () {
   throw new Error("BOOM")
@@ -71,8 +72,7 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     if (line.ACTIVITY != null) {
       result.activity = line.ACTIVITY
     }
-    // @ts-ignore
-    result.status = line.STATUS ?? "success"
+    result.status = (line.STATUS as ResultStatus) ?? "success"
     if (line.MESSAGE != null) {
       result.message = line.MESSAGE
     }

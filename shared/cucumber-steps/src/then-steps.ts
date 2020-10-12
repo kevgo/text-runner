@@ -360,7 +360,7 @@ Then("the {string} directory is now deleted", async function (directoryPath: str
   throw new Error(`file '${directoryPath}' still exists`)
 })
 
-Then("the test directory now/still contains a file {string} with content:", async function (
+Then("the workspace now/still contains a file {string} with content:", async function (
   fileName: string,
   expectedContent: string
 ) {

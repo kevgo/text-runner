@@ -15,6 +15,6 @@ export interface TRWorld {
   /** statistics about the subshell process after it finished */
   finishedProcess: observableProcess.FinishedProcess | undefined
 
-  /** the test directory */
+  /** the workspace */
   rootDir: textRunner.files.AbsoluteDir
 }

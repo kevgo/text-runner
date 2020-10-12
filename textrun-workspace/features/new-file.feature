@@ -9,7 +9,7 @@ Feature: creating files with content
     Then it emits these events:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
-    And the test directory now contains a file "one.txt" with content:
+    And the workspace now contains a file "one.txt" with content:
       """
       Hello world!
       """
@@ -29,7 +29,7 @@ Feature: creating files with content
     Then it emits these events:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
-    And the test directory now contains a file "one.txt" with content:
+    And the workspace now contains a file "one.txt" with content:
       """
       Hello world!
       """
@@ -122,7 +122,7 @@ Feature: creating files with content
     Then it emits these events:
       | FILENAME   | LINE | ACTION             | ACTIVITY                   |
       | creator.md | 1    | workspace/new-file | create file subdir/one.txt |
-    And the test directory now contains a file "subdir/one.txt" with content:
+    And the workspace now contains a file "subdir/one.txt" with content:
       """
       Hello world!
       """

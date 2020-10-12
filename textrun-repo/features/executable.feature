@@ -1,8 +1,6 @@
 Feature: verifying a documented executable in the repository
 
-  Background:
-
-  Scenario: executable exists
+  Scenario: file exists and is executable
     Given the source code contains an executable "scripts/setup"
     And the source code contains a file "1.md" with content:
       """

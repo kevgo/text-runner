@@ -60,7 +60,7 @@ The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 
 </a>
 
-### executables
+### executable
 
 The <b type="action/name-full">repo/executable</b> action verifies that an
 executable that the documentation mentions exists and is indeed executable. It

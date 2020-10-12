@@ -8,7 +8,7 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "text-runner-core": "5.0.0-pre7"
+    "text-runner-core": "5.0.0-pre8"
   },
   "devDependencies": {
     "assert-no-diff": "3.0.4",
@@ -16,7 +16,7 @@
     "cucumber": "6.0.5",
     "eol": "0.9.1",
     "mocha": "8.0.1",
-    "text-runner": "5.0.0-pre7",
+    "text-runner": "5.0.0-pre8",
     "textrun-action": "0.0.5",
     "textrun-extension": "0.0.5"
   }

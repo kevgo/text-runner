@@ -1,6 +1,6 @@
 {
   "name": "text-runner-core",
-  "version": "5.0.0-pre7",
+  "version": "5.0.0-pre8",
   "author": "Kevin Goslar",
   "dependencies": {
     "@sindresorhus/slugify": "1.1.0",

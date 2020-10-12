@@ -46,10 +46,10 @@ Feature: show-skipped option
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME | LINE | ACTIVITY                        |
-      | 1.md     | 1    | link to http://google.com       |
-      | 1.md     | 2    | image http://google.com/foo.png |
-      | 1.md     | 3    | link to local file 1.md         |
+      | FILENAME | LINE | ACTIVITY                        | STATUS  |
+      | 1.md     | 1    | link to http://google.com       | skipped |
+      | 1.md     | 2    | image http://google.com/foo.png | skipped |
+      | 1.md     | 3    | link to local file 1.md         | success |
 
   Scenario: disable via CLI
     Given the source code contains a file "text-run.yml" with content:

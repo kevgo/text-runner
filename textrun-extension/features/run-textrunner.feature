@@ -36,8 +36,8 @@ Feature: Running Text-Runner inside a Text-Runner session
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE        |
-      | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | unknown action: zonk |
+      | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE        | ERROR TYPE |
+      | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | unknown action: zonk | UserError  |
 
 
   Scenario: "dir" attribute

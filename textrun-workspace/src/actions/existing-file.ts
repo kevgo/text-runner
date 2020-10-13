@@ -16,11 +16,8 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
     actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
     if (e.code === "ENOENT") {
-      const files = await fs.readdir(process.cwd())
-      throw new tr.UserError(
-        `file not found: ${fileRelPath}`,
-        `folder "${process.cwd()}" has these files: ${files.join(", ")}`
-      )
+      const files = await fs.readdir(action.configuration.sourceDir.platformified())
+      throw new tr.UserError(`file not found: ${fileRelPath}`, `the workspace has these files: ${files.join(", ")}`)
     } else {
       throw e
     }

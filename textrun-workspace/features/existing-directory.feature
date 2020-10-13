@@ -39,9 +39,9 @@ Feature: verify that the workspace contains a directory
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                       | STATUS  | ERROR TYPE | ERROR MESSAGE                     |
-      | 1.md     | 1    | workspace/new-file           | success |            |                                   |
-      | 1.md     | 4    | workspace/existing-directory | failed  | UserError  | foo exists but is not a directory |
+      | FILENAME | LINE | ACTION                       | STATUS  | ERROR TYPE | ERROR MESSAGE                     | GUIDANCE |
+      | 1.md     | 1    | workspace/new-file           | success |            |                                   |          |
+      | 1.md     | 4    | workspace/existing-directory | failed  | UserError  | foo exists but is not a directory |          |
 
   Scenario: setting the base directory
     Given the workspace contains a directory "subdir1"

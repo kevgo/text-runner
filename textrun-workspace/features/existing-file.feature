@@ -39,9 +39,9 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    |
-      | 1.md     | 1    | workspace/new-file      | success |            |                                  |
-      | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt |
+      | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    | GUIDANCE                                                       |
+      | 1.md     | 1    | workspace/new-file      | success |            |                                  |                                                                |
+      | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
     And the error provides the guidance:
       """
       mismatching lines:
@@ -57,8 +57,8 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            |
-      | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt |
+      | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                 |
+      | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt | the workspace has these files: 1.md, tmp |
 
 
   Scenario: setting the base directory

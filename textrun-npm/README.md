@@ -87,3 +87,20 @@ After you install the "foobar" package, you can run the
 
 <a type="extension/run-textrunner">
 </a>
+
+### Verify installed binaries
+
+The <b type="action/name-full">npm/installed-executable</b> action verifies
+binaries installed by other npm packages. Let's say you developer instructions
+for a codebase that uses the <code type="create-npm-executable">cucumber</code>
+command provided by the npm [cucumber](https://www.npmjs.com/package/cucumber)
+package:
+
+<a type="extension/runnable-region">
+
+```html
+To run the end-to-end tests, run
+<code type="npm/installed-executable">cucumber</code> in the terminal.
+```
+
+</a>

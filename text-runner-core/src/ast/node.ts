@@ -63,7 +63,7 @@ export type NodeTag =
 export interface NodeScaffoldData {
   attributes?: NodeAttributes
   content?: string
-  file?: string | files.FullFile
+  file?: string | files.FullFilePath
   line?: number
   sourceDir?: string
   tag?: NodeTag
@@ -74,14 +74,14 @@ export interface NodeScaffoldData {
 export class Node {
   static scaffold(data: NodeScaffoldData = {}): Node {
     if (typeof data.file === "string") {
-      data.file = new files.FullFile(data.file)
+      data.file = new files.FullFilePath(data.file)
     }
     return new Node({
       attributes: data.attributes || {},
       content: data.content || "",
       location: new files.Location(
         new files.SourceDir(data.sourceDir || ""),
-        data.file || new files.FullFile("file"),
+        data.file || new files.FullFilePath("file"),
         data.line || 1
       ),
       tag: data.tag != null ? data.tag : "hr",

@@ -16,8 +16,8 @@ export class FullPath {
   }
 
   /** Returns a new file path with the given file name appended to the end of this file path */
-  append(fileName: string): files.FullFile {
-    return new files.FullFile(path.join(this.platformified(), fileName))
+  append(fileName: string): files.FullFilePath {
+    return new files.FullFilePath(path.join(this.platformified(), fileName))
   }
 
   /** Returns the directory that contains this file path */
@@ -64,11 +64,11 @@ export class FullPath {
     return publication.publish(this)
   }
 
-  /** provides the FullFile if this path points to a file */
-  toFullFile(): files.FullFile {
+  /** provides the FullFilePath if this path points to a file */
+  toFullFilePath(): files.FullFilePath {
     if (this.isDirectory()) {
       throw new Error(`FullPath '${this.unixified()}' does tot point to a file`)
     }
-    return new files.FullFile(this.value)
+    return new files.FullFilePath(this.value)
   }
 }

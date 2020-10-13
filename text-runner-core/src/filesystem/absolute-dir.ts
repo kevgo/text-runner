@@ -7,7 +7,7 @@ import * as files from "."
  * represents an absolute path to a directory,
  * i.e. path from filesystem root to the directory
  */
-export class AbsoluteDir {
+export class AbsoluteDirPath {
   value: string
 
   constructor(value: string) {
@@ -15,8 +15,8 @@ export class AbsoluteDir {
   }
 
   /** joins the given relative directory */
-  joinDir(other: files.RelativeDir): AbsoluteDir {
-    return new AbsoluteDir(this.joinStr(other.value))
+  joinDir(other: files.RelativeDir): AbsoluteDirPath {
+    return new AbsoluteDirPath(this.joinStr(other.value))
   }
 
   /** provides a path of this directory with the given path appended */

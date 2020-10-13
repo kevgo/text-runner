@@ -25,7 +25,7 @@ suite("parseHTMLFiles", function () {
           expected.push(ast.Node.scaffold(e))
         }
         const actual = await parseHTMLFiles(
-          [new files.FullFile("input.html")],
+          [new files.FullFilePath("input.html")],
           new files.SourceDir(testDirPath),
           tagMapper
         )

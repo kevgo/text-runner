@@ -9,7 +9,7 @@ import * as files from "./"
  * Returns the FullPaths of all files/directories relative to the given sourceDir
  * that match the given glob
  */
-export async function getFileNames(config: configuration.Data): Promise<files.FullFile[]> {
+export async function getFileNames(config: configuration.Data): Promise<files.FullFilePath[]> {
   let filenames = await getFiles(config)
   filenames = removeExcludedFiles(filenames, config.exclude)
   filenames = removeExcludedFiles(filenames, "node_modules")
@@ -26,14 +26,14 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
  * Returns files described by the given configuration.
  * Filenames are relative to config.sourceDir.
  */
-async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
+async function getFiles(config: configuration.Data): Promise<files.FullFilePath[]> {
   const fullGlob = config.sourceDir.joinStr(config.files)
   if (config.files === "") {
     return markdownFilesInDir("", config.sourceDir)
   } else if (await files.hasDirectory(fullGlob)) {
     return markdownFilesInDir(fullGlob, config.sourceDir)
   } else if (await files.isMarkdownFile(fullGlob)) {
-    return [new files.FullFile(config.files)]
+    return [new files.FullFilePath(config.files)]
   } else if (isGlob(config.files)) {
     return config.sourceDir.fullFilesMatchingGlob(fullGlob)
   } else {
@@ -48,16 +48,16 @@ async function getFiles(config: configuration.Data): Promise<files.FullFile[]> {
  * returns all the markdown files in this directory and its children,
  * relative to the given sourceDir
  */
-export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFile[]> {
+export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFilePath[]> {
   const allFiles = await glob(`${dirName}/**/*.md`)
   return allFiles
     .filter(file => !file.includes("node_modules"))
     .sort()
-    .map(file => new files.AbsoluteFile(file).toFullFile(sourceDir))
+    .map(file => new files.AbsoluteFilePath(file).toFullFile(sourceDir))
 }
 
 /** Removes the given excluded files from the given list of filenames */
-export function removeExcludedFiles(fileList: files.FullFile[], excluded: string | string[]): files.FullFile[] {
+export function removeExcludedFiles(fileList: files.FullFilePath[], excluded: string | string[]): files.FullFilePath[] {
   const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
   const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
   return fileList.filter(file => {

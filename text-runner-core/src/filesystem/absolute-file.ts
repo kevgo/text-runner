@@ -3,7 +3,7 @@ import * as path from "path"
 import * as files from "."
 
 /** represents an absolute path to a file, i.e. from filesystem root to the file */
-export class AbsoluteFile {
+export class AbsoluteFilePath {
   value: string
 
   constructor(value: string) {
@@ -11,8 +11,8 @@ export class AbsoluteFile {
   }
 
   /** provides the directory that contains this file */
-  directory(): files.AbsoluteDir {
-    return new files.AbsoluteDir(path.dirname(this.value) + "/")
+  directory(): files.AbsoluteDirPath {
+    return new files.AbsoluteDirPath(path.dirname(this.value) + "/")
   }
 
   /**
@@ -24,8 +24,8 @@ export class AbsoluteFile {
   }
 
   /** provides the relative path from the given directory to this file */
-  toFullFile(sourceDir: files.SourceDir): files.FullFile {
-    return new files.FullFile(path.relative(sourceDir.platformified(), this.platformified()))
+  toFullFile(sourceDir: files.SourceDir): files.FullFilePath {
+    return new files.FullFilePath(path.relative(sourceDir.platformified(), this.platformified()))
   }
 
   /** provides this file path with forward slashes as path separators */

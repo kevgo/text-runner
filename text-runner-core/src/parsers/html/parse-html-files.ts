@@ -7,7 +7,7 @@ import { Parser } from "./html-parser"
 
 /** returns the standard AST for the HTML files with the given paths */
 export async function parseHTMLFiles(
-  filenames: files.FullFile[],
+  filenames: files.FullFilePath[],
   sourceDir: files.SourceDir,
   tagMapper: TagMapper
 ): Promise<ast.NodeList[]> {

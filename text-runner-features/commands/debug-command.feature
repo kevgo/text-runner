@@ -63,7 +63,7 @@ Feature: display the version
         actionName: 'check-image',
         location: Location {
           sourceDir: SourceDir { .* },
-          file: FullFile { value: '1.md' },
+          file: FullFilePath { value: '1.md' },
           line: 1
         },
         region: NodeList(1) [
@@ -72,7 +72,7 @@ Feature: display the version
             tag: 'img',
             location: Location {
               sourceDir: SourceDir { .* },
-              file: FullFile { value: '1.md' },
+              file: FullFilePath { value: '1.md' },
               line: 1
             },
             content: '',
@@ -96,7 +96,7 @@ Feature: display the version
         actionName: 'check-link',
         location: Location {
           sourceDir: SourceDir { .* },
-          file: FullFile { value: '1.md' },
+          file: FullFilePath { value: '1.md' },
           line: 1
         },
         region: NodeList(3) [
@@ -105,7 +105,7 @@ Feature: display the version
             tag: 'a',
             location: Location {
               sourceDir: SourceDir { .* },
-              file: FullFile { value: '1.md' },
+              file: FullFilePath { value: '1.md' },
               line: 1
             },
             content: '',
@@ -116,7 +116,7 @@ Feature: display the version
             tag: '',
             location: Location {
               sourceDir: SourceDir { .* },
-              file: FullFile { value: '1.md' },
+              file: FullFilePath { value: '1.md' },
               line: 1
             },
             content: 'another document',
@@ -127,7 +127,7 @@ Feature: display the version
             tag: '/a',
             location: Location {
               sourceDir: SourceDir { .* },
-              file: FullFile { value: '1.md' },
+              file: FullFilePath { value: '1.md' },
               line: 1
             },
             content: '',

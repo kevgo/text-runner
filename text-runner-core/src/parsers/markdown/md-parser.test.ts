@@ -21,7 +21,7 @@ suite("MdParser.parseFile()", function () {
           expectedNodeData.sourceDir = testDirPath
           expected.push(ast.Node.scaffold(expectedNodeData))
         }
-        const actual = await parse([new files.FullFile("input.md")], new files.SourceDir(testDirPath))
+        const actual = await parse([new files.FullFilePath("input.md")], new files.SourceDir(testDirPath))
         assert.deepEqual(actual[0], expected)
       })
     }

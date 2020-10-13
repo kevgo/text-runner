@@ -15,7 +15,7 @@ interface AbsoluteDirs {
   sourceDir: files.SourceDir
 
   /** the root directory of the workspace */
-  workspace: files.AbsoluteDir
+  workspace: files.AbsoluteDirPath
 }
 
 interface SharedValues {

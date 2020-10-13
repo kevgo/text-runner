@@ -91,6 +91,18 @@ suite("linkTarget.List.getAnchor()", function () {
   })
 })
 
+suite(".getAnchors()", function () {
+  test("file has anchors", function () {
+    const list = new linkTarget.List()
+    const filePath = new files.FullFilePath("foo.md")
+    list.addLinkTarget(filePath, "heading", "#hello")
+    list.addLinkTarget(filePath, "heading", "#world")
+    const have = list.getAnchors(filePath)
+    const want = ["#hello", "#world"]
+    assert.deepEqual(have, want)
+  })
+})
+
 test("linkTarget.List.hasAnchor()", function () {
   const list = new linkTarget.List()
   const filePath = new files.FullFilePath("foo.md")

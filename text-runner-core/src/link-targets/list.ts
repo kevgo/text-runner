@@ -71,8 +71,9 @@ export class List {
     return null
   }
 
-  getAnchors(file: files.FullFilePath): Target[] {
-    return (this.targets[file.platformified()] || []).filter(target => target.name === name)
+  /** provides all the anchors for the given file */
+  getAnchors(file: files.FullFilePath): string[] {
+    return (this.targets[file.platformified()] || []).map(target => target.name)
   }
 
   hasAnchor(file: files.FullFilePath, name: string): boolean {

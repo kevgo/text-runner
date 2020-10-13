@@ -121,7 +121,7 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
       result.errorMessage = stripAnsi(activityResult.error?.message || "")
     }
     if (wanted.guidance != null) {
-      result.guidance = (activityResult.error as textRunner.UserError)?.guidance?.trim() || ""
+      result.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim()) || ""
     }
     have.push(result)
   }

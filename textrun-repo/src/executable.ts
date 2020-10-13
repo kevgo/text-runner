@@ -13,12 +13,13 @@ export async function executable(action: tr.actions.Args): Promise<void> {
   try {
     await fsp.access(fullPath, fs.constants.X_OK)
   } catch (err) {
-    if (err.code === "EACCES") {
-      throw new tr.UserError(`file is not executable: ${color.cyan(filePath)}`, "", action.location)
+    switch (err.code) {
+      case "EACCES":
+        throw new tr.UserError(`file is not executable: ${color.cyan(filePath)}`, "", action.location)
+      case "ENOENT":
+        throw new tr.UserError(`file not found: ${color.cyan(filePath)}`, "", action.location)
+      default:
+        throw err
     }
-    if (err.code === "ENOENT") {
-      throw new tr.UserError(`file not found: ${color.cyan(filePath)}`, "", action.location)
-    }
-    throw err
   }
 }

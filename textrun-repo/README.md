@@ -5,7 +5,8 @@ actions for verifying documentation containing the content of source code files
 from the repository.
 
 - [installation](#installation)
-- [file-content](#file-content)
+- [repo/existing-file](#repoexisting-file)
+- [repo/executable](#repoexecutable)
 
 ### installation
 
@@ -13,7 +14,7 @@ To use these actions, add this package as a development dependency by running
 <code type="npm/install">npm i -D textrun-repo</code> or
 <code type="npm/install">yarn i -D textrun-repo</code>.
 
-### file-content
+### repo/existing-file
 
 Sometimes you want to just display a file from your application's source code in
 the documentation. The <b type="action/name-full">source/existing-file</b>
@@ -56,6 +57,23 @@ The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 `hello world!`
 
 </a>
+```
+
+</a>
+
+### repo/executable
+
+The <b type="action/name-full">repo/executable</b> action verifies that an
+executable that the documentation mentions exists and is indeed executable. It
+doesn't run the executable. As an example, consider a codebase that contains an
+executable <b type="new-executable">scripts/setup</b>. The semantic
+documentation for this codebase might look like this:
+
+<a type="extension/runnable-region">
+
+```html
+Run the <b type="repo/executable">scripts/setup</b> binary to set up your
+environment.
 ```
 
 </a>

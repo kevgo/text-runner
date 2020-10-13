@@ -6,7 +6,7 @@ import { trimDollar } from "../helpers/trim-dollar"
 export function exportedExecutable(action: tr.actions.Args): void {
   const commandName = trimDollar(action.region.text().trim())
   if (commandName === "") {
-    throw new Error("No npm package installation command found")
+    throw new Error("No executable name specified")
   }
   action.name(`npm package exports executable ${color.cyan(commandName)}`)
   // eslint-disable-next-line @typescript-eslint/no-var-requires

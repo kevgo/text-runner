@@ -95,10 +95,10 @@ suite(".getAnchors()", function () {
   test("file has anchors", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    list.addLinkTarget(filePath, "heading", "#hello")
-    list.addLinkTarget(filePath, "heading", "#world")
+    list.addLinkTarget(filePath, "heading", "hello")
+    list.addLinkTarget(filePath, "heading", "world")
     const have = list.getAnchors(filePath)
-    const want = ["#hello", "#world"]
+    const want = ["hello", "world"]
     assert.deepEqual(have, want)
   })
 })

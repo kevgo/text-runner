@@ -22,7 +22,7 @@ suite("UnknownLink", function () {
     for (const tt of tests) {
       test(tt.desc, function () {
         const unknownLink = new files.UnknownLink(tt.link)
-        const containingFile = new files.FullFile(tt.give)
+        const containingFile = new files.FullFilePath(tt.give)
         const publications = new configuration.Publications()
         const location = new files.Location(new files.SourceDir(""), containingFile, 1)
         const absoluteLink = unknownLink.absolutify(location, publications)

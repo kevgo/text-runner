@@ -7,15 +7,15 @@ suite("sourceDir", function () {
     const sourceDir = new files.SourceDir("/home/acme/text-runner")
     const fullDir = new files.FullDir("src")
     const have = sourceDir.joinFullDir(fullDir)
-    const want = new files.AbsoluteDir("/home/acme/text-runner/src")
+    const want = new files.AbsoluteDirPath("/home/acme/text-runner/src")
     assert.deepEqual(have, want)
   })
 
   test("joinFullFile", function () {
     const sourceDir = new files.SourceDir("/home/acme/text-runner")
-    const fullFile = new files.FullFile("src/README.md")
+    const fullFile = new files.FullFilePath("src/README.md")
     const have = sourceDir.joinFullFile(fullFile)
-    const want = new files.AbsoluteFile("/home/acme/text-runner/src/README.md")
+    const want = new files.AbsoluteFilePath("/home/acme/text-runner/src/README.md")
     assert.deepEqual(have, want)
   })
 

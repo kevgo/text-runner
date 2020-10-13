@@ -2,15 +2,15 @@ import { assert } from "chai"
 
 import * as files from "./index"
 
-suite("files.AbsoluteDir", function () {
+suite("files.AbsoluteDirPath", function () {
   test("joinStr", function () {
-    const absDir = new files.AbsoluteDir("/home/acme/textrun")
+    const absDir = new files.AbsoluteDirPath("/home/acme/textrun")
     const have = absDir.joinStr("src")
     assert.equal(have, "/home/acme/textrun/src")
   })
 
   test("joinDir", function () {
-    const absDir = new files.AbsoluteDir("/home/acme/textrun")
+    const absDir = new files.AbsoluteDirPath("/home/acme/textrun")
     const give = new files.RelativeDir("src")
     const have = absDir.joinDir(give)
     assert.equal(have.unixified(), "/home/acme/textrun/src")
@@ -21,7 +21,7 @@ suite("files.AbsoluteDir", function () {
       if (process.platform === "win32") {
         return
       }
-      const absDir = new files.AbsoluteDir("/home/acme/textrun")
+      const absDir = new files.AbsoluteDirPath("/home/acme/textrun")
       const have = absDir.platformified()
       assert.equal(have, "/home/acme/textrun")
     })
@@ -29,7 +29,7 @@ suite("files.AbsoluteDir", function () {
       if (process.platform !== "win32") {
         return
       }
-      const absDir = new files.AbsoluteDir("c:\\Users\\acme\\textrun")
+      const absDir = new files.AbsoluteDirPath("c:\\Users\\acme\\textrun")
       const have = absDir.platformified()
       assert.equal(have, "c:\\Users\\acme\\textrun")
     })
@@ -37,7 +37,7 @@ suite("files.AbsoluteDir", function () {
 
   suite("toFullDir", function () {
     test("subdirectory", function () {
-      const absDir = new files.AbsoluteDir("/home/acme/text-runner/src/")
+      const absDir = new files.AbsoluteDirPath("/home/acme/text-runner/src/")
       const sourceDir = new files.SourceDir("/home/acme/text-runner/")
       const have = absDir.toFullDir(sourceDir)
       const want = new files.FullDir("src")
@@ -50,7 +50,7 @@ suite("files.AbsoluteDir", function () {
       if (process.platform === "win32") {
         return
       }
-      const absDir = new files.AbsoluteDir("/home/acme/textrun")
+      const absDir = new files.AbsoluteDirPath("/home/acme/textrun")
       const have = absDir.platformified()
       assert.equal(have, "/home/acme/textrun")
     })
@@ -58,7 +58,7 @@ suite("files.AbsoluteDir", function () {
       if (process.platform !== "win32") {
         return
       }
-      const absDir = new files.AbsoluteDir("c:\\Users\\acme\\textrun")
+      const absDir = new files.AbsoluteDirPath("c:\\Users\\acme\\textrun")
       const have = absDir.platformified()
       assert.equal(have, "c:/Users/acme/textrun")
     })

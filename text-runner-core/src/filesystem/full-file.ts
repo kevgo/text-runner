@@ -8,7 +8,7 @@ const sepRE = new RegExp("\\" + path.sep, "g")
  * represents a full path to a file,
  * i.e. a path from the document base to a file.
  */
-export class FullFile {
+export class FullFilePath {
   private value: string
 
   constructor(value: string) {
@@ -38,7 +38,7 @@ export class FullFile {
     return this.value
   }
 
-  toFullFile(): FullFile {
+  toFullFilePath(): FullFilePath {
     return this
   }
 }

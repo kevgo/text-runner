@@ -71,7 +71,7 @@ export class List {
   }
 
   // Returns whether this link target list knows about the given file
-  hasFile(filePath: files.FullFile): boolean {
+  hasFile(filePath: files.FullFilePath): boolean {
     return this.targets[filePath.platformified()] != null
   }
 }

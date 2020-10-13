@@ -15,9 +15,9 @@ Before(async function () {
   const world = this as TRWorld
   if (process.env.CUCUMBER_PARALLEL) {
     const tempDir = await tmp.dir()
-    world.workspace = new textRunner.files.AbsoluteDir(tempDir.path)
+    world.workspace = new textRunner.files.AbsoluteDirPath(tempDir.path)
   } else {
-    world.workspace = new textRunner.files.AbsoluteDir(path.join(process.cwd(), "tmp"))
+    world.workspace = new textRunner.files.AbsoluteDirPath(path.join(process.cwd(), "tmp"))
   }
   let workspaceExists = false
   try {

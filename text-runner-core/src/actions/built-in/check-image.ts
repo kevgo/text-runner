@@ -18,7 +18,7 @@ export async function checkImage(action: actions.Args): Promise<number | void> {
     return result
   } else {
     // local image here
-    const imageFullFile = new files.FullFile(
+    const imageFullFile = new files.FullFilePath(
       imagePath.startsWith("/") ? imagePath : node.location.file.directory().joinStr(imagePath)
     )
     const result = await checkLocalImage(imageFullFile, action.configuration)
@@ -26,7 +26,7 @@ export async function checkImage(action: actions.Args): Promise<number | void> {
   }
 }
 
-async function checkLocalImage(image: files.FullFile, c: configuration.Data): Promise<void> {
+async function checkLocalImage(image: files.FullFilePath, c: configuration.Data): Promise<void> {
   try {
     await fs.stat(c.sourceDir.joinFullFile(image).platformified())
   } catch (err) {

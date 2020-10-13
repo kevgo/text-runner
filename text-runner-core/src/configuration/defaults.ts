@@ -39,12 +39,12 @@ export async function addDefaults(partial: configuration.APIData): Promise<confi
   }
 }
 
-async function getWorkspacePath(config: configuration.CompleteAPIData): Promise<files.AbsoluteDir> {
+async function getWorkspacePath(config: configuration.CompleteAPIData): Promise<files.AbsoluteDirPath> {
   if (config.systemTmp === false) {
-    return new files.AbsoluteDir(path.join(config.sourceDir, config.workspace || "") || "")
+    return new files.AbsoluteDirPath(path.join(config.sourceDir, config.workspace || "") || "")
   } else if (config.systemTmp === true) {
     const tmpDir = await tmp.dir()
-    return new files.AbsoluteDir(path.join(tmpDir.path, config.workspace || ""))
+    return new files.AbsoluteDirPath(path.join(tmpDir.path, config.workspace || ""))
   } else {
     throw new UserError(
       `unknown 'systemTmp' setting: ${config.systemTmp}`,

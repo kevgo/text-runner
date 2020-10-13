@@ -14,7 +14,7 @@ suite("normalizeActionName", function () {
   }
   for (const [give, want] of Object.entries(tests)) {
     test(give, function () {
-      const location = new files.Location(new files.SourceDir(""), new files.FullFile(""), 1)
+      const location = new files.Location(new files.SourceDir(""), new files.FullFilePath(""), 1)
       assert.equal(normalizeActionName(give, location), want)
     })
   }

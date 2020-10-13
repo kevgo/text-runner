@@ -58,11 +58,11 @@ of the npm package.
 
 ## Verify exported binaries
 
-The <b type="action/name-full">npm/executable</b> action verifies documentation
-of exported binaries of npm packages. Let's say the source code of our `foobar`
-package contains an executable file <b type="bundled-executable">bin/foo</b>,
-which is listed as a binary in its <a type="workspace/new-file">**package.json**
-file:
+The <b type="action/name-full">npm/exported-executable</b> action verifies
+documentation of exported binaries of npm packages. Let's say the source code of
+our `foobar` package contains an executable file
+<b type="bundled-executable">bin/foo</b>, which is listed as a binary in its
+<a type="workspace/new-file">**package.json** file:
 
 ```js
 {
@@ -82,7 +82,7 @@ something like this:
 
 ```md
 After you install the "foobar" package, you can run the
-<code type="npm/executable">foo</code> command in the terminal.
+<code type="npm/exported-executable">foo</code> command in the terminal.
 ```
 
 <a type="extension/run-textrunner">

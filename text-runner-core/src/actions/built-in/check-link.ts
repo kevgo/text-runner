@@ -19,7 +19,7 @@ export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> 
   }
 
   if (helpers.isLinkToAnchorInSameFile(target)) {
-    const result = checkLinkToAnchorInSameFile(action.location, target, action)
+    const result = checkLinkToAnchorInSameFile(action.location.file, target, action)
     return result
   }
 
@@ -85,12 +85,12 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   }
 }
 
-function checkLinkToAnchorInSameFile(location: files.Location, target: string, action: Args) {
+function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, action: Args) {
   const anchorName = target.substr(1)
-  if (!action.linkTargets.hasAnchor(location.file, anchorName)) {
+  if (!action.linkTargets.hasAnchor(file, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
   }
-  if (action.linkTargets.anchorType(location.file, anchorName) === "heading") {
+  if (action.linkTargets.anchorType(file, anchorName) === "heading") {
     action.name(`link to local heading ${target}`)
   } else {
     action.name(`link to #${anchorName}`)

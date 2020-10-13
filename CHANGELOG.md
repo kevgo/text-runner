@@ -26,6 +26,7 @@ _Oct 1 2020_
 - requires Node 12 or newer
   ([1231](https://github.com/kevgo/text-runner/pull/1231),
   [1045]https://github.com/kevgo/text-runner/pull/1045))
+- API for actions exposes strongly typed strings for file and directory paths
 - no longer prints file count on CLI
   ([1203](https://github.com/kevgo/text-runner/pull/1203))
 - shorten `useSystemTempDirectory` config option to `systemTmp`
@@ -56,6 +57,9 @@ _Oct 1 2020_
   ([1187](https://github.com/kevgo/text-runner/pull/1187))
 - logs executed JS on console
   ([1074](https://github.com/kevgo/text-runner/pull/1074))
+- list existing anchors when linking to non-existing anchors
+  ([1378](https://github.com/kevgo/text-runner/pull/1378),
+  [1377](https://github.com/kevgo/text-runner/pull/1377))
 
 #### Bug fixes
 
@@ -76,6 +80,14 @@ _Oct 1 2020_
   ([1264](https://github.com/kevgo/text-runner/pull/1264)
 - OpenNodeTracker tracks standardized AST nodes instead of MarkdownIt nodes
   ([1287](https://github.com/kevgo/text-runner/pull/1287)
+- much stronger typing to avoid stringly-typed code
+  ([1356](https://github.com/kevgo/text-runner/pull/1356),
+  [1357](https://github.com/kevgo/text-runner/pull/1357),
+  [1355](https://github.com/kevgo/text-runner/pull/1355),
+  [1353](https://github.com/kevgo/text-runner/pull/1353),
+  [1362](https://github.com/kevgo/text-runner/pull/1362),
+  [1346](https://github.com/kevgo/text-runner/pull/1346),
+  [1344](https://github.com/kevgo/text-runner/pull/1344))
 - type-checks unit tests ([1272](https://github.com/kevgo/text-runner/pull/1272)
 - uses namespaces for code classes
   ([1229]https://github.com/kevgo/text-runner/pull/1229),

@@ -1,6 +1,7 @@
 import { promises as fs } from "fs"
 import got from "got"
 
+import { UserError } from "../../errors/user-error"
 import * as files from "../../filesystem/"
 import * as helpers from "../../helpers"
 import { Args } from "../index"
@@ -88,7 +89,14 @@ async function checkLinkToFilesystem(target: string, action: Args) {
 function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, action: Args) {
   const anchorName = target.substr(1)
   if (!action.linkTargets.hasAnchor(file, anchorName)) {
-    throw new Error(`link to non-existing local anchor ${target}`)
+    throw new UserError(
+      `link to non-existing local anchor ${target}`,
+      `These local anchors exist: ${action.linkTargets
+        .getAnchors(file)
+        .map(anchor => `#${anchor}`)
+        .join(", ")}`,
+      action.location
+    )
   }
   if (action.linkTargets.anchorType(file, anchorName) === "heading") {
     action.name(`link to local heading ${target}`)

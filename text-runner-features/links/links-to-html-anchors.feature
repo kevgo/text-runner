@@ -39,8 +39,8 @@ Feature: links to HTML anchors
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           | GUIDANCE |
-      | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk |          |
+      | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           | GUIDANCE                                          |
+      | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk | These local anchors exist: #heading-1, #heading-2 |
 
 
   Scenario: link to a non-existing anchor in another file

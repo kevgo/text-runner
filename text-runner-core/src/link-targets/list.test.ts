@@ -72,7 +72,34 @@ suite("linkTarget.List.anchorType()", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
     list.addLinkTarget(filePath, "anchor", "hello")
-    assert.equal(list.anchorType(filePath, "hello"), "anchor")
+  })
+})
+
+suite("linkTarget.List.getAnchor()", function () {
+  test("target exists", function () {
+    const list = new linkTarget.List()
+    const filePath = new files.FullFilePath("foo.md")
+    list.addLinkTarget(filePath, "heading", "hello")
+    const have = list.getAnchor(filePath, "hello")
+    const want: linkTarget.Target = { name: "hello", type: "heading" }
+    assert.deepEqual(have, want)
+  })
+  test("target does not exist", function () {
+    const list = new linkTarget.List()
+    const filePath = new files.FullFilePath("foo.md")
+    assert.isNull(list.getAnchor(filePath, "zonk"))
+  })
+})
+
+suite(".getAnchors()", function () {
+  test("file has anchors", function () {
+    const list = new linkTarget.List()
+    const filePath = new files.FullFilePath("foo.md")
+    list.addLinkTarget(filePath, "heading", "hello")
+    list.addLinkTarget(filePath, "heading", "world")
+    const have = list.getAnchors(filePath)
+    const want = ["hello", "world"]
+    assert.deepEqual(have, want)
   })
 })
 

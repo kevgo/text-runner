@@ -1,6 +1,6 @@
 {
   "name": "textrun-repo",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Text-Runner actions for verifying the content of the current repository",
   "main": "dist/index.js",
   "license": "ISC",
@@ -18,8 +18,8 @@
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre9",
-    "textrun-action": "0.0.7",
-    "textrun-extension": "0.0.7",
-    "textrun-npm": "0.0.7"
+    "textrun-action": "0.0.8",
+    "textrun-extension": "0.0.8",
+    "textrun-npm": "0.0.8"
   }
 }

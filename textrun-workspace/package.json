@@ -1,6 +1,6 @@
 {
   "name": "textrun-workspace",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Text-Runner actions for the Text-Runner workspace",
   "main": "dist/index.js",
   "files": [
@@ -17,7 +17,7 @@
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "text-runner": "5.0.0-pre9",
-    "textrun-action": "0.0.7",
-    "textrun-extension": "0.0.7"
+    "textrun-action": "0.0.8",
+    "textrun-extension": "0.0.8"
   }
 }

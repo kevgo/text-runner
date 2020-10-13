@@ -124,7 +124,13 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   }
 
   if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
-    throw new Error(`link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`)
+    throw new UserError(
+      `link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`,
+      `File ${fullFile.unixified()} contains these anchors: ${action.linkTargets
+        .getAnchors(fullFile)
+        .map(anchor => `#${anchor}`)
+        .join(", ")}`
+    )
   }
 
   if (action.linkTargets.anchorType(fullFile, anchorName) === "heading") {

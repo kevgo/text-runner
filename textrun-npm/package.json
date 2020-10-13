@@ -1,6 +1,6 @@
 {
   "name": "textrun-npm",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "main": "dist/index.js",
   "license": "ISC",
   "files": [
@@ -8,16 +8,16 @@
   ],
   "dependencies": {
     "fs-extra": "9.0.1",
-    "text-runner-core": "5.0.0-pre8"
+    "text-runner-core": "5.0.0-pre9"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.0-pre8",
-    "textrun-action": "0.0.6",
-    "textrun-extension": "0.0.6",
-    "textrun-workspace": "0.0.6"
+    "text-runner": "5.0.0-pre9",
+    "textrun-action": "0.0.7",
+    "textrun-extension": "0.0.7",
+    "textrun-workspace": "0.0.7"
   }
 }

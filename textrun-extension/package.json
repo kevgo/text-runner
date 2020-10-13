@@ -1,6 +1,6 @@
 {
   "name": "textrun-extension",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
   "main": "dist/index.js",
   "files": [
@@ -9,12 +9,12 @@
   ],
   "license": "ISC",
   "dependencies": {
-    "text-runner-core": "5.0.0-pre8"
+    "text-runner-core": "5.0.0-pre9"
   },
   "devDependencies": {
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
-    "text-runner": "5.0.0-pre8",
-    "textrun-action": "0.0.6"
+    "text-runner": "5.0.0-pre9",
+    "textrun-action": "0.0.7"
   }
 }

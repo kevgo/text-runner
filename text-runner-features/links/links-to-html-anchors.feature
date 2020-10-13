@@ -32,12 +32,15 @@ Feature: links to HTML anchors
   Scenario: link to a non-existing anchor in the same file
     Given the source code contains a file "1.md" with content:
       """
-      A [link to non-existing anchor](#zonk)
+      A [link to non-existing local anchor](#zonk)
+
+      # heading 1
+      # heading 2
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           |
-      | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk |
+      | FILENAME | LINE | ACTION     | ACTIVITY      | STATUS | ERROR TYPE | ERROR MESSAGE                           | GUIDANCE |
+      | 1.md     | 1    | check-link | link to #zonk | failed | UserError  | link to non-existing local anchor #zonk |          |
 
 
   Scenario: link to a non-existing anchor in another file

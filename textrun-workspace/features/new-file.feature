@@ -42,8 +42,8 @@ Feature: creating files with content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          |
-      | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' |
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          | GUIDANCE                                                                                                                                  |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' | Cannot determine the name of the file to create.\nThe node types in this list are: anchor_open, code_open, text, code_close, anchor_close |
     And the error provides the guidance:
       """
       Cannot determine the name of the file to create.
@@ -58,8 +58,8 @@ Feature: creating files with content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
-      | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' |
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            | GUIDANCE                                                                                                                                         |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' | Cannot determine the content of the file to create.\nThe node types in this list are: anchor_open, strong_open, text, strong_close, anchor_close |
     And the error provides the guidance:
       """
       Cannot determine the content of the file to create.
@@ -82,8 +82,8 @@ Feature: creating files with content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         |
-      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' |
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         | GUIDANCE                                                                                                                                   |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' | Cannot determine the name of the file to create.\nThe getNodeOfTypes method expects to find only one matching node, but it found multiple. |
 
 
   Scenario: two content blocks given
@@ -105,8 +105,8 @@ Feature: creating files with content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           |
-      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' |
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           | GUIDANCE                                                                                                                                      |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' | Cannot determine the content of the file to create.\nThe getNodeOfTypes method expects to find only one matching node, but it found multiple. |
 
 
   Scenario: setting the base directory

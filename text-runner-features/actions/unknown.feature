@@ -10,8 +10,8 @@ Feature: unknown action types
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        |
-      | 1.md     | 1    | failed | UserError  | unknown action: zonk |
+      | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        | GUIDANCE                                                                                   |
+      | 1.md     | 1    | failed | UserError  | unknown action: zonk | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-run scaffold zonk" |
     And the error provides the guidance:
       """
       No custom actions defined.

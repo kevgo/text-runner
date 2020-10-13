@@ -20,6 +20,7 @@ export interface ExecuteResultLine {
   errorMessage?: string // message of the UserError thrown
   errorType?: string // UserError or other error
   filename?: string
+  guidance?: string // guidance provided together with the error
   line?: number
   message?: string
   output?: string // what the action printed via action.log()
@@ -79,7 +80,10 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     if (line["ERROR TYPE"] != null) {
       result.errorType = line["ERROR TYPE"]
     }
-    result.errorMessage = line["ERROR MESSAGE"] ?? ""
+    result.errorMessage = line["ERROR MESSAGE"] || ""
+    if (line["ERROR TYPE"] === "UserError") {
+      result.guidance = line.GUIDANCE?.trim() || ""
+    }
     want.push(result)
   }
   let have: ExecuteResultLine[] = []
@@ -115,6 +119,9 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     }
     if (wanted.errorMessage != null) {
       result.errorMessage = stripAnsi(activityResult.error?.message || "")
+    }
+    if (wanted.guidance != null && wanted.errorType === "UserError") {
+      result.guidance = (activityResult.error as textRunner.UserError).guidance?.trim() || ""
     }
     have.push(result)
   }

@@ -62,12 +62,21 @@ export class List {
     return anchor.type
   }
 
-  hasAnchor(location: files.Location, name: string): boolean {
-    const fileList = this.targets[location.file.platformified()]
-    if (!fileList) {
-      return false
+  getAnchor(file: files.FullFilePath, name: string): Target | null {
+    for (const target of this.targets[file.platformified()] || []) {
+      if (target.name === name) {
+        return target
+      }
     }
-    return fileList.some(linkTarget => linkTarget.name === name)
+    return null
+  }
+
+  getAnchors(file: files.FullFilePath): Target[] {
+    return (this.targets[file.platformified()] || []).filter(target => target.name === name)
+  }
+
+  hasAnchor(file: files.FullFilePath, name: string): boolean {
+    return this.getAnchor(file, name) != null
   }
 
   // Returns whether this link target list knows about the given file

@@ -91,7 +91,7 @@ function checkLinkToAnchorInSameFile(location: files.Location, target: string, a
   if (!action.linkTargets.hasAnchor(location, anchorName)) {
     throw new UserError(
       `link to non-existing local anchor ${target}`,
-      `These local anchors exist: ${Object.keys(action.linkTargets.targets).join(", ")}`,
+      `These local anchors exist: ${Object.keys(action.linkTargets.getAnchors(location)).join(", ")}`,
       action.location
     )
   }

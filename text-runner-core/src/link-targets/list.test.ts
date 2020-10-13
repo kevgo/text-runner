@@ -71,8 +71,7 @@ suite("linkTarget.List.anchorType()", function () {
   test("anchors", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    list.addLinkTarget(location, "anchor", "hello")
+    list.addLinkTarget(filePath, "anchor", "hello")
     assert.equal(list.anchorType(filePath, "hello"), "anchor")
   })
 })
@@ -80,8 +79,7 @@ suite("linkTarget.List.anchorType()", function () {
 test("linkTarget.List.hasAnchor()", function () {
   const list = new linkTarget.List()
   const filePath = new files.FullFilePath("foo.md")
-  const location = new files.Location(new files.SourceDir(""), filePath, 1)
-  list.addLinkTarget(location, "heading", "hello")
+  list.addLinkTarget(filePath, "heading", "hello")
   assert.isTrue(list.hasAnchor(filePath, "hello"))
   assert.isFalse(list.hasAnchor(filePath, "zonk"))
 })
@@ -90,8 +88,7 @@ suite("linkTarget.List.hasFile()", function () {
   test("contains file with anchors", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    list.addLinkTarget(location, "heading", "hello")
+    list.addLinkTarget(filePath, "heading", "hello")
     assert.isTrue(list.hasFile(filePath))
   })
 

@@ -29,7 +29,7 @@ export class List {
     if (!node.attributes.name) {
       return
     }
-    this.addLinkTarget(node.location, "anchor", node.attributes.name)
+    this.addLinkTarget(node.location.file, "anchor", node.attributes.name)
   }
 
   addHeading(node: ast.Node, nodeList: ast.NodeList): void {
@@ -37,11 +37,11 @@ export class List {
     if (!content) {
       return
     }
-    this.addLinkTarget(node.location, "heading", content)
+    this.addLinkTarget(node.location.file, "heading", content)
   }
 
-  addLinkTarget(location: files.Location, type: Types, name: string): void {
-    const key = location.file.platformified()
+  addLinkTarget(file: files.FullFilePath, type: Types, name: string): void {
+    const key = file.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })
   }

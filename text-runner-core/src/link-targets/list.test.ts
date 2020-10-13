@@ -13,8 +13,7 @@ suite("linkTarget.List.addNodeList()", function () {
     })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
-    const location = new files.Location(new files.SourceDir(""), new files.FullFilePath("file.md"), 1)
-    assert.isTrue(targetList.hasAnchor(location, "foo-bar"))
+    assert.isTrue(targetList.hasAnchor(new files.FullFilePath("file.md"), "foo-bar"))
   })
 
   test("node list without link targets", function () {
@@ -42,8 +41,7 @@ suite("linkTarget.List.addNodeList()", function () {
     })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
-    const location = new files.Location(new files.SourceDir(""), new files.FullFilePath("file.md"), 1)
-    assert.isTrue(targetList.hasAnchor(location, "get-started-in-5-minutes"))
+    assert.isTrue(targetList.hasAnchor(new files.FullFilePath("file.md"), "get-started-in-5-minutes"))
   })
 })
 
@@ -67,15 +65,13 @@ suite("linkTarget.List.anchorType()", function () {
     const list = new linkTarget.List()
     list.addHeading(nodeList[0], nodeList)
     const filePath = new files.FullFilePath("file.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    assert.equal(list.anchorType(location, "foo-bar"), "heading")
+    assert.equal(list.anchorType(filePath, "foo-bar"), "heading")
   })
 
   test("anchors", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    list.addLinkTarget(location, "anchor", "hello")
+    list.addLinkTarget(filePath, "anchor", "hello")
   })
 })
 
@@ -83,35 +79,31 @@ suite("linkTarget.List.getAnchor()", function () {
   test("target exists", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    list.addLinkTarget(location, "heading", "hello")
-    const have = list.getAnchor(location, "hello")
+    list.addLinkTarget(filePath, "heading", "hello")
+    const have = list.getAnchor(filePath, "hello")
     const want: linkTarget.Target = { name: "hello", type: "heading" }
     assert.deepEqual(have, want)
   })
   test("target does not exist", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    assert.isNull(list.getAnchor(location, "zonk"))
+    assert.isNull(list.getAnchor(filePath, "zonk"))
   })
 })
 
 test("linkTarget.List.hasAnchor()", function () {
   const list = new linkTarget.List()
   const filePath = new files.FullFilePath("foo.md")
-  const location = new files.Location(new files.SourceDir(""), filePath, 1)
-  list.addLinkTarget(location, "heading", "hello")
-  assert.isTrue(list.hasAnchor(location, "hello"))
-  assert.isFalse(list.hasAnchor(location, "zonk"))
+  list.addLinkTarget(filePath, "heading", "hello")
+  assert.isTrue(list.hasAnchor(filePath, "hello"))
+  assert.isFalse(list.hasAnchor(filePath, "zonk"))
 })
 
 suite("linkTarget.List.hasFile()", function () {
   test("contains file with anchors", function () {
     const list = new linkTarget.List()
     const filePath = new files.FullFilePath("foo.md")
-    const location = new files.Location(new files.SourceDir(""), filePath, 1)
-    list.addLinkTarget(location, "heading", "hello")
+    list.addLinkTarget(filePath, "heading", "hello")
     assert.isTrue(list.hasFile(filePath))
   })
 

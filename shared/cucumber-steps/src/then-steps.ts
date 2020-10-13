@@ -81,7 +81,7 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
       result.errorType = line["ERROR TYPE"]
     }
     result.errorMessage = line["ERROR MESSAGE"] || ""
-    if (line["ERROR TYPE"] === "UserError") {
+    if (line.GUIDANCE != null || line["ERROR TYPE"] === "UserError") {
       result.guidance = line.GUIDANCE?.trim() || ""
     }
     want.push(result)
@@ -120,8 +120,8 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     if (wanted.errorMessage != null) {
       result.errorMessage = stripAnsi(activityResult.error?.message || "")
     }
-    if (wanted.guidance != null && wanted.errorType === "UserError") {
-      result.guidance = (activityResult.error as textRunner.UserError).guidance?.trim() || ""
+    if (wanted.guidance != null) {
+      result.guidance = (activityResult.error as textRunner.UserError)?.guidance?.trim() || ""
     }
     have.push(result)
   }

@@ -29,7 +29,7 @@ export class List {
     if (!node.attributes.name) {
       return
     }
-    this.addLinkTarget(node.location, "anchor", node.attributes.name)
+    this.addLinkTarget(node.location.file, "anchor", node.attributes.name)
   }
 
   addHeading(node: ast.Node, nodeList: ast.NodeList): void {
@@ -37,33 +37,33 @@ export class List {
     if (!content) {
       return
     }
-    this.addLinkTarget(node.location, "heading", content)
+    this.addLinkTarget(node.location.file, "heading", content)
   }
 
-  addLinkTarget(location: files.Location, type: Types, name: string): void {
-    const key = location.file.platformified()
+  addLinkTarget(file: files.FullFilePath, type: Types, name: string): void {
+    const key = file.platformified()
     this.targets[key] = this.targets[key] || []
     this.targets[key].push({ name: targetURL(name), type })
   }
 
   // Returns the type of the given anchor
   // with the given name in the given file
-  anchorType(location: files.Location, name: string): string {
-    const anchorsForFile = this.targets[location.file.platformified()]
+  anchorType(file: files.FullFilePath, name: string): string {
+    const anchorsForFile = this.targets[file.platformified()]
     if (!anchorsForFile) {
       // TODO: make UserError
-      throw new Error(`no anchors in file ${location.file.platformified()}`)
+      throw new Error(`no anchors in file ${file.platformified()}`)
     }
     const anchor = anchorsForFile.find(linkTarget => linkTarget.name === name)
     if (!anchor) {
       // TODO: make UserError
-      throw new Error(`no anchor '${name}' in file '${location.file.platformified()}'`)
+      throw new Error(`no anchor '${name}' in file '${file.platformified()}'`)
     }
     return anchor.type
   }
 
-  hasAnchor(location: files.Location, name: string): boolean {
-    const fileList = this.targets[location.file.platformified()]
+  hasAnchor(file: files.FullFilePath, name: string): boolean {
+    const fileList = this.targets[file.platformified()]
     if (!fileList) {
       return false
     }

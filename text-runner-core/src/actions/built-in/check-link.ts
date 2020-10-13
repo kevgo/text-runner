@@ -19,7 +19,7 @@ export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> 
   }
 
   if (helpers.isLinkToAnchorInSameFile(target)) {
-    const result = checkLinkToAnchorInSameFile(action.location, target, action)
+    const result = checkLinkToAnchorInSameFile(action.location.file, target, action)
     return result
   }
 
@@ -85,12 +85,12 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   }
 }
 
-function checkLinkToAnchorInSameFile(location: files.Location, target: string, action: Args) {
+function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, action: Args) {
   const anchorName = target.substr(1)
-  if (!action.linkTargets.hasAnchor(location, anchorName)) {
+  if (!action.linkTargets.hasAnchor(file, anchorName)) {
     throw new Error(`link to non-existing local anchor ${target}`)
   }
-  if (action.linkTargets.anchorType(location, anchorName) === "heading") {
+  if (action.linkTargets.anchorType(file, anchorName) === "heading") {
     action.name(`link to local heading ${target}`)
   } else {
     action.name(`link to #${anchorName}`)
@@ -108,7 +108,6 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   } catch (e) {
     throw new Error(`link to non-existing file ${fullPath.unixified()}`)
   }
-  const location = containingLocation.withFile(fullFile)
 
   if (!action.linkTargets.hasFile(fullFile)) {
     throw new Error(
@@ -116,11 +115,11 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
     )
   }
 
-  if (!action.linkTargets.hasAnchor(location, anchorName)) {
+  if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
     throw new Error(`link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`)
   }
 
-  if (action.linkTargets.anchorType(location, anchorName) === "heading") {
+  if (action.linkTargets.anchorType(fullFile, anchorName) === "heading") {
     action.name(`link to heading ${fullFile.unixified() + "#" + anchorName}`)
   } else {
     action.name(`link to ${fullFile.unixified()}#${anchorName}`)

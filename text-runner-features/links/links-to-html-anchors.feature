@@ -51,11 +51,13 @@ Feature: links to HTML anchors
     And the source code contains a file "2.md" with content:
       """
       <a name="hello">hi</a>
+
+      # world
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
-      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
+      | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             | GUIDANCE                                         |
+      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md | File 2.md contains these anchors: #hello, #world |
 
 
   Scenario: link to anchor in non-existing file
@@ -80,8 +82,8 @@ Feature: links to HTML anchors
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             |
-      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md |
+      | FILENAME | LINE | ACTION     | ACTIVITY          | STATUS | ERROR TYPE | ERROR MESSAGE                             | GUIDANCE                          |
+      | 1.md     | 1    | check-link | link to 2.md#zonk | failed | UserError  | link to non-existing anchor #zonk in 2.md | File 2.md contains these anchors: |
 
 
   Scenario: link to an existing heading in the same file

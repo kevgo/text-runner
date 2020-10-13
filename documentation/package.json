@@ -8,11 +8,11 @@
     "custom-action-typescript": "0.0.0",
     "text-runner": "5.0.0-pre9",
     "text-runner-core": "5.0.0-pre9",
-    "textrun-extension": "0.0.6",
-    "textrun-make": "0.0.6",
-    "textrun-npm": "0.0.6",
-    "textrun-shell": "0.0.6",
-    "textrun-workspace": "0.0.6"
+    "textrun-extension": "0.0.7",
+    "textrun-make": "0.0.7",
+    "textrun-npm": "0.0.7",
+    "textrun-shell": "0.0.7",
+    "textrun-workspace": "0.0.7"
   },
   "license": "ISC",
   "private": true

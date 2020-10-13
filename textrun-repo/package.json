@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "eol": "0.9.1",
-    "text-runner-core": "5.0.0-pre8"
+    "text-runner-core": "5.0.0-pre9"
   },
   "devDependencies": {
     "assert-no-diff": "3.0.4",
@@ -17,7 +17,7 @@
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.0-pre8",
+    "text-runner": "5.0.0-pre9",
     "textrun-action": "0.0.6",
     "textrun-extension": "0.0.6",
     "textrun-npm": "0.0.6"

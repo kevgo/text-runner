@@ -145,7 +145,7 @@ echo "Hello world"
 Here is the corresponding action, implemented in <a type="workspace/new-file">
 **text-run/console-command.ts** (we are using TypeScript this time):
 
-```javascript
+```typescript
 import * as child_process from "child_process"
 import * as tr from "text-runner-core"
 

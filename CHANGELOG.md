@@ -16,7 +16,7 @@ _Oct 13 2020_
 - replace the `offline` option with `online` and run offline by default
   ([](https://github.com/kevgo/text-runner/pull/1181))
 - always keeps the workspace around, emptying it before test runs
-  ([1091]https://github.com/kevgo/text-runner/pull/1091),
+  ([1091](https://github.com/kevgo/text-runner/pull/1091),
   [1276](https://github.com/kevgo/text-runner/pull/1276),
   [1281](https://github.com/kevgo/text-runner/pull/1281))
 - don't display skipped activities
@@ -25,7 +25,7 @@ _Oct 13 2020_
   ([1254](https://github.com/kevgo/text-runner/pull/1254))
 - requires Node 12 or newer
   ([1231](https://github.com/kevgo/text-runner/pull/1231),
-  [1045]https://github.com/kevgo/text-runner/pull/1045))
+  [1045](https://github.com/kevgo/text-runner/pull/1045))
 - API for actions exposes strongly typed strings for file and directory paths
 - no longer prints file count on CLI
   ([1203](https://github.com/kevgo/text-runner/pull/1203))

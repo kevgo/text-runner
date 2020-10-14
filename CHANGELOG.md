@@ -79,7 +79,7 @@ _Oct 13 2020_
 - switch from TSLint to ESLint
   ([1264](https://github.com/kevgo/text-runner/pull/1264)
 - OpenNodeTracker tracks standardized AST nodes instead of MarkdownIt nodes
-  ([1287](https://github.com/kevgo/text-runner/pull/1287)
+  ([1287](https://github.com/kevgo/text-runner/pull/1287))
 - much stronger typing to avoid stringly-typed code
   ([1356](https://github.com/kevgo/text-runner/pull/1356),
   [1357](https://github.com/kevgo/text-runner/pull/1357),

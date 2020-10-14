@@ -2,7 +2,7 @@
 
 ## 5.0.0
 
-_Oct 1 2020_
+_Oct 13 2020_
 
 #### Breaking changes
 

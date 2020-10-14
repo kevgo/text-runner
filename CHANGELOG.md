@@ -71,8 +71,8 @@ _Oct 13 2020_
 #### Internal
 
 - organization as a mono-repository
-  ([956]https://github.com/kevgo/text-runner/pull/956),
-  [1102]https://github.com/kevgo/text-runner/pull/1102),
+  ([956](https://github.com/kevgo/text-runner/pull/956),
+  [1102](https://github.com/kevgo/text-runner/pull/1102),
   [1217](https://github.com/kevgo/text-runner/pull/1217))
 - extract all actions into plugins
 - much faster end-to-end tests using the JS API
@@ -90,7 +90,7 @@ _Oct 13 2020_
   [1344](https://github.com/kevgo/text-runner/pull/1344))
 - type-checks unit tests ([1272](https://github.com/kevgo/text-runner/pull/1272)
 - uses namespaces for code classes
-  ([1229]https://github.com/kevgo/text-runner/pull/1229),
+  ([1229](https://github.com/kevgo/text-runner/pull/1229),
   [1271](https://github.com/kevgo/text-runner/pull/1271))
 - rename `ActivityList` to `Activities`
   ([1267](https://github.com/kevgo/text-runner/pull/1267))

@@ -177,11 +177,9 @@ const attr = action.region[0].attributes
 
 To see all custom activities that aren't currenly used, run:
 
-<!-- TODO: ensure this command exists -->
-
-```
+<pre type="textrunner-command">
 text-run unused
-```
+</pre>
 
 <hr>
 

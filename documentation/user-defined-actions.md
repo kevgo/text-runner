@@ -96,8 +96,8 @@ nodes that provides helper methods to extract document content:
 - **textInNodeOfTypes(type1, type2, ...):** returns the text in the AST nodes of
   the given types. You can provide multiple alternative node types. Only one
   node is allowed to match.
-- **getNodeOfTypes(type1, type2, ...):** provides the syntax node of the given
-  types
+- **getNodeOfTypes(type1, type2, ...):** provides exactly one syntax node
+  matching any of the given types
 
 </a>
 

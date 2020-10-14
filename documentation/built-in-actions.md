@@ -18,9 +18,29 @@ location of the linked files. In these situations, you can describe how your
 site generator maps links using the `publications` section inside Text-Runner's
 configuration file.
 
+As an example, let's say you use a static site generator for your blog. The
+source code contains blog posts as Markdown files inside the `content/posts/`
+folder. The website shows the blog posts as HTML files at the `/blog` path. Here
+is the publication that explains Text-Runner that for example the file
+`content/posts/welcome.md` gets mapped to the URL path `/blog/welcome.html`:
+
+```yml
+publications:
+  - localPath: /content/posts
+    publicPath: /blog
+    publicExtension: .html
+```
+
+More examples at the
+[end-to-end test for publications](https://github.com/kevgo/text-runner/blob/master/text-runner-features/configuration-options/publications.feature)
+
 <hr>
 
 Read more about:
 
 - writing your own [user-defined actions](user-defined-actions.md)
 - use [external actions](external-actions.md)
+
+```
+
+```

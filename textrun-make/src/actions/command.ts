@@ -1,29 +1,44 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
+import * as os from "os"
 import * as tr from "text-runner-core"
 
 import { makefileTargets } from "../helpers/makefile-targets"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
 export async function command(action: tr.actions.Args): Promise<void> {
-  const command = action.region.text().trim()
-  if (command === "") {
-    throw new Error("No make command found")
+  const wants = getMakeTargets(action.region.text())
+  if (wants.length === 0) {
+    throw new tr.UserError("No Make commands found", `Make commands must start with "make"`, action.location)
+  } else if (wants.length === 1) {
+    action.name(`make command: ${color.cyan(wants[0])}`)
+  } else {
+    action.name(`make commands: ${color.cyan(wants.join(", "))}`)
   }
-  if (!command.startsWith("make ")) {
-    throw new Error('Make command must start with "make "')
+  const makefilePath = action.configuration.sourceDir.joinStr(action.region[0].attributes["dir"] || ".", "Makefile")
+  const makefileContent = await fs.readFile(makefilePath, "utf8")
+  const haves = makefileTargets(makefileContent)
+  for (const want of wants) {
+    if (!haves.includes(want)) {
+      throw new Error(
+        `Makefile does not contain command make ${color.cyan(want)} but these targets: ${color.cyan(haves.join(", "))}`
+      )
+    }
   }
-  action.name(`make command: ${color.cyan(command)}`)
-  const target = command.substring(5).trim()
-  if (target === "") {
-    throw new Error(`No make target found in "${command}"`)
+}
+
+export function getMakeTargets(code: string): string[] {
+  const result: string[] = []
+  for (let line of code.split(os.EOL)) {
+    line = trimDollar(line.trim())
+    if (line.startsWith("make ")) {
+      result.push(line.substring(5).trim())
+    }
   }
-  const makePath = action.configuration.sourceDir.joinStr(action.region[0].attributes["dir"] || ".", "Makefile")
-  const makefile = await fs.readFile(makePath, "utf8")
-  const commands = makefileTargets(makefile).map((target: string) => `make ${target}`)
-  if (!commands.includes(command)) {
-    throw new Error(
-      `Makefile does not contain target ${color.cyan(command)} but these ones: ${color.cyan(commands.join(", "))}`
-    )
-  }
+  return result
+}
+
+/** trims the leading dollar from the given command */
+export function trimDollar(text: string): string {
+  return text.replace(/^\$?\s*/, "")
 }

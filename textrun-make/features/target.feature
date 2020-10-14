@@ -10,7 +10,7 @@ Feature: verifying Make targets
         @echo building bar
       """
 
-  Scenario: works
+  Scenario: exact match
     Given the source code contains a file "1.md" with content:
       """
       To build the "foo" executable, build the <code type="make/target">foo</code> target.

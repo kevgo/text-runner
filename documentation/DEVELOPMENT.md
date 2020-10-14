@@ -26,7 +26,7 @@ respective codebase.
 - run all tests: <code type="make/command">make test</code>
 - run unit tests: <code>make unit</code>
 - run end-to-end tests: make cuke
-- run documentation tests: <code type="make/command">make docs</code>
+- run documentation tests: <code type="make/command">make doc</code>
 - run linters: <code type="make/command">make lint</code>
 - run auto-fixers: <code type="make/command">make fix</code>
 

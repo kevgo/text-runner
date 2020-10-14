@@ -31,7 +31,7 @@ lint:  # lints all files in this codebase
 publish: clean build  # publishes this package
 	npm publish
 
-test: lint docs  # runs all tests
+test: lint doc  # runs all tests
 test-lerna: test  # for running all tests inside Lerna
 
 unit:

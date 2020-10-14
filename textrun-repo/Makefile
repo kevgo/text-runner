@@ -35,8 +35,8 @@ lint:  # lints all files in this codebase
 publish: clean build  # publishes this package
 	npm publish
 
-test: unit cuke lint docs  # runs all tests
-test-lerna: unit cuke-lerna lint docs  # for running all tests inside Lerna
+test: unit cuke lint doc  # runs all tests
+test-lerna: unit cuke-lerna lint doc  # for running all tests inside Lerna
 test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests

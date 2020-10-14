@@ -45,10 +45,10 @@ publish: clean build  # publishes this package
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
-test: unit cuke lint docs  # runs all tests
-test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna
+test: unit cuke lint doc  # runs all tests
+test-lerna: lint unit cuke-lerna doc  # for running all tests inside Lerna
 test-ts: unit cuke  # runs only the TypeScript tests
-test-online: lint unit cuke-online docs   # runs all tests that don't need an online connection
+test-online: lint unit cuke-online doc   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
 	echo Text-Runner unit tests ...

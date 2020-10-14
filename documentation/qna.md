@@ -1,6 +1,6 @@
 # Q & A
 
-### Does this replace other testing frameworks like [Cucumber](https://cucumber.io) or [Gauge](https://gauge.org)?
+#### Does this replace other testing frameworks like [Cucumber](https://cucumber.io) or [Gauge](https://gauge.org)?
 
 No. Text-Runner complements these frameworks. Text-Runner is to make sure
 end-user facing documentation is correct. Cucumber and Gauge are for more

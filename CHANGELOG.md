@@ -14,9 +14,9 @@ _Oct 13 2020_
 - rename `add` command to `scaffold`
   ([#900](https://github.com/kevgo/text-runner/pull/900))
 - replace the `offline` option with `online` and run offline by default
-  ([](https://github.com/kevgo/text-runner/pull/1181))
+  ([1181](https://github.com/kevgo/text-runner/pull/1181))
 - always keeps the workspace around, emptying it before test runs
-  ([1091]https://github.com/kevgo/text-runner/pull/1091),
+  ([1091](https://github.com/kevgo/text-runner/pull/1091),
   [1276](https://github.com/kevgo/text-runner/pull/1276),
   [1281](https://github.com/kevgo/text-runner/pull/1281))
 - don't display skipped activities
@@ -25,7 +25,7 @@ _Oct 13 2020_
   ([1254](https://github.com/kevgo/text-runner/pull/1254))
 - requires Node 12 or newer
   ([1231](https://github.com/kevgo/text-runner/pull/1231),
-  [1045]https://github.com/kevgo/text-runner/pull/1045))
+  [1045](https://github.com/kevgo/text-runner/pull/1045))
 - API for actions exposes strongly typed strings for file and directory paths
 - no longer prints file count on CLI
   ([1203](https://github.com/kevgo/text-runner/pull/1203))
@@ -71,15 +71,15 @@ _Oct 13 2020_
 #### Internal
 
 - organization as a mono-repository
-  ([956]https://github.com/kevgo/text-runner/pull/956),
-  [1102]https://github.com/kevgo/text-runner/pull/1102),
+  ([956](https://github.com/kevgo/text-runner/pull/956),
+  [1102](https://github.com/kevgo/text-runner/pull/1102),
   [1217](https://github.com/kevgo/text-runner/pull/1217))
 - extract all actions into plugins
 - much faster end-to-end tests using the JS API
 - switch from TSLint to ESLint
-  ([1264](https://github.com/kevgo/text-runner/pull/1264)
+  ([1264](https://github.com/kevgo/text-runner/pull/1264))
 - OpenNodeTracker tracks standardized AST nodes instead of MarkdownIt nodes
-  ([1287](https://github.com/kevgo/text-runner/pull/1287)
+  ([1287](https://github.com/kevgo/text-runner/pull/1287))
 - much stronger typing to avoid stringly-typed code
   ([1356](https://github.com/kevgo/text-runner/pull/1356),
   [1357](https://github.com/kevgo/text-runner/pull/1357),
@@ -90,7 +90,7 @@ _Oct 13 2020_
   [1344](https://github.com/kevgo/text-runner/pull/1344))
 - type-checks unit tests ([1272](https://github.com/kevgo/text-runner/pull/1272)
 - uses namespaces for code classes
-  ([1229]https://github.com/kevgo/text-runner/pull/1229),
+  ([1229](https://github.com/kevgo/text-runner/pull/1229),
   [1271](https://github.com/kevgo/text-runner/pull/1271))
 - rename `ActivityList` to `Activities`
   ([1267](https://github.com/kevgo/text-runner/pull/1267))

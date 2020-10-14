@@ -81,6 +81,8 @@ for:
 - [TypeScript](../examples/custom-action-typescript/)
 - [CoffeeScript](../examples/custom-action-coffeescript/)
 
+Throw an exception to fail a test.
+
 ## Accessing document content
 
 The <code type="action-arg">region</code> attribute contains the document
@@ -171,36 +173,6 @@ You can access other attributes on the HTML nodes like so:
 const attr = action.region[0].attributes
 ```
 
-## Formatters
-
-One of the utilities availabe to actions is the formatter instance. It allows to
-signal test progress to TextRunner and print test output to the console. It
-provides the following methods:
-
-<!-- TODO: verify completeness -->
-
-- **log(text):** allows to print output of the currently running action to the
-  console - depending on the type of formatter, this output is printed or not
-- **warn:** to signal a warning to the user (but keep the test passing)
-- **skip:** call this to skip the current test
-- **name:** overrides how the current action is called in the test output
-- **stdout** and **stderr:** streams that you can pipe output of commands you
-  run into
-- **console:** a console object that you should use instead of the built-in
-  console to generate output that fits into the formatter output
-
-To fail a test, throw an `Error` with the corresponding error message.
-TextRunner supports a variety of formatters:
-
-- **detailed formatter:** Prints each test performed, including test output.
-
-- **dot formatter:** A minimalistic formatter, shows a dots for each test
-  performed.
-
-- **progress formatter:** Prints a progress bar
-
-- **summary formatter:** Prints only a summary at the end
-
 ## Cleaning up unused activities
 
 To see all custom activities that aren't currenly used, run:
@@ -208,9 +180,7 @@ To see all custom activities that aren't currenly used, run:
 <!-- TODO: ensure this command exists -->
 
 ```
-
 text-run unused
-
 ```
 
 <hr>
@@ -219,7 +189,3 @@ Read more about:
 
 - the [built-in actions](built-in-actions.md)
 - [configure](configuration.md) TextRunner
-
-```
-
-```

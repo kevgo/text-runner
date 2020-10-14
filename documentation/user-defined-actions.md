@@ -87,18 +87,22 @@ The <code type="action-arg">region</code> attribute contains the document
 content inside the currently active region. It is a flat array of syntax tree
 nodes that provides helper methods to extract document content:
 
-<!-- TODO: ensure completeness of this -->
+<a type="ast-node-list-methods" ignore="pushNode">
 
 - **text():** returns the entire textual content in the current active region
 - **textInNodeOfType(type1, type2, ...):** returns the text in the AST node of
   the given types. You can provide multiple alternative node types. Verifies
   that only one matching AST node exists.
 - **textInNodeOfTypes(type1, type2, ...):** returns the text in the AST nodes of
-  the given types. You can provide multiple alternative node types.
+  the given types. You can provide multiple alternative node types. Only one
+  node is allowed to match.
+- **getNodeOfTypes(type1, type2, ...):** provides the syntax node of the given
+  types
 
-To see the existing node types, run `text-run debug --ast <filename>` You can
-also iterate `nodes` manually. Each node has these attributes:
-<a type="verify-ast-node-attributes">
+</a>
+
+To see the node types run `text-run debug --ast <filename>` You can also iterate
+`nodes` manually. Each node has these attributes: <a type="ast-node-attributes">
 
 - **location:** the file and line in the file at which this AST node begins
 - **type:** the type of the AST node. Examples are `text` for normal text,

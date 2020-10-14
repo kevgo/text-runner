@@ -139,9 +139,7 @@ ${new Error().stack}`
     return nodes.text()
   }
 
-  /**
-   * Returns the text in the nodes of the given types.
-   */
+  /** provides the text in the nodes of the given types */
   textInNodesOfType(...nodeTypes: string[]): string[] {
     for (const nodeType of nodeTypes) {
       if (!nodeType.endsWith("_open")) {

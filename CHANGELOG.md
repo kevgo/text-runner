@@ -14,7 +14,7 @@ _Oct 13 2020_
 - rename `add` command to `scaffold`
   ([#900](https://github.com/kevgo/text-runner/pull/900))
 - replace the `offline` option with `online` and run offline by default
-  ([](https://github.com/kevgo/text-runner/pull/1181))
+  ([1181](https://github.com/kevgo/text-runner/pull/1181))
 - always keeps the workspace around, emptying it before test runs
   ([1091](https://github.com/kevgo/text-runner/pull/1091),
   [1276](https://github.com/kevgo/text-runner/pull/1276),

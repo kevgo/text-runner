@@ -1,13 +1,16 @@
 # Q & A
 
-> Does this replace [Cucumber](https://cucumber.io), [Gauge](https://gauge.org),
-> or unit testing?
+> Does this replace other testing frameworks like
+> [Cucumber](https://cucumber.io) or [Gauge](https://gauge.org)?
 
-No, it complements those technologies. Text-Runner is to make sure end-user
-facing behavior is correctly documented, Cucumber and Gauge are for more
-fine-grained BDD including documenting behavior in all edge cases while unit
-testing is to make sure the individual components from which you build your
-solution function correctly.
+No. Text-Runner complements these frameworks. Text-Runner is to make sure
+end-user facing documentation is correct. Cucumber and Gauge are for more
+fine-grained BDD. In particular, they are great for documenting all possible
+failure scenarios which would make end-user facing documentation unreadable.
+
+> Does this replace unit testing?
+
+No. Text-Runner is for end-to-end testing.
 
 > I don't want to add a `package.json` file to my root folder
 

@@ -9,7 +9,7 @@ clean:  # Removes all build artifacts
 cuke:
 cuke-lerna:
 
-docs:  # runs the documentation tests
+doc:  # runs the documentation tests
 
 fix:  # runs the auto-fixers
 	echo shared features auto-fixes ...

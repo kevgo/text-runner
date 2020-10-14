@@ -13,7 +13,7 @@ cuke-lerna: build  # runs the feature specs
 	echo textrun-npm E2E tests ...
 	${CURDIR}/node_modules/.bin/cucumber-js --format=summary
 
-docs: build  # runs the documentation tests
+doc: build  # runs the documentation tests
 	echo textrun-npm documentation tests ...
 	${CURDIR}/node_modules/.bin/text-run static --format=summary
 	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress

@@ -5,7 +5,7 @@ clean:
 cuke:
 cuke-lerna:
 
-docs:
+doc:
 	echo custom-action-async documentation tests ...
 	${CURDIR}/node_modules/.bin/text-run --format=progress
 

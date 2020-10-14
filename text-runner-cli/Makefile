@@ -15,7 +15,7 @@ cuke-online: build  # runs the feature specs that don't need an online connectio
 	echo running Text-Runner online feature specs ...
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
-docs:  # verify documentation
+doc:  # verify documentation
 	echo Text-Runner documentation tests ...
 	${CURDIR}/bin/text-run --format=summary
 

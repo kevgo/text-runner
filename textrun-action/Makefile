@@ -9,7 +9,7 @@ clean:  # Removes all build artifacts
 cuke:
 cuke-lerna:
 
-docs: build  # runs the documentation tests
+doc: build  # runs the documentation tests
 	echo textrun-action documentation tests ...
 	${CURDIR}/node_modules/.bin/text-run static --format=summary
 	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress

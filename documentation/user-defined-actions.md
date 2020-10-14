@@ -84,8 +84,8 @@ for:
 ## Accessing document content
 
 The <code type="action-arg">region</code> attribute contains the document
-content inside the currently active region. It is an array of AST nodes that
-provides helper methods to extract document content:
+content inside the currently active region. It is a flat array of syntax tree
+nodes that provides helper methods to extract document content:
 
 <!-- TODO: ensure completeness of this -->
 
@@ -96,7 +96,8 @@ provides helper methods to extract document content:
 - **textInNodeOfTypes(type1, type2, ...):** returns the text in the AST nodes of
   the given types. You can provide multiple alternative node types.
 
-You can also iterate `nodes` manually. Each node has these attributes:
+To see the existing node types, run `text-run debug --ast <filename>` You can
+also iterate `nodes` manually. Each node has these attributes:
 <a type="verify-ast-node-attributes">
 
 - **location:** the file and line in the file at which this AST node begins

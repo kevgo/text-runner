@@ -147,15 +147,16 @@ Here is the corresponding action, implemented in <a type="workspace/new-file">
 
 ```typescript
 import * as child_process from "child_process"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
-export function consoleCommand(action: tr.actions.Args) {
-  // determine which command to run
-  // (you could also iterate the "nodes" array directly here)
+export function consoleCommand(action: textRunner.actions.Args) {
+  // determine the console command to run
   const commandToRun = action.region.text()
 
-  // perform the action
+  // run the console command
   const result = child_process.execSync(commandToRun, { encoding: "utf8" })
+
+  // print the output to the user
   action.log(result)
 }
 ```

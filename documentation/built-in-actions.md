@@ -40,7 +40,3 @@ Read more about:
 
 - writing your own [user-defined actions](user-defined-actions.md)
 - use [external actions](external-actions.md)
-
-```
-
-```

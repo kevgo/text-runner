@@ -13,6 +13,7 @@ export function printUserError(err: tr.UserError): void {
   if (err.guidance) {
     console.log()
     console.log(err.guidance)
+    console.log()
   }
   helpers.printCodeFrame(console.log, err.location)
 }

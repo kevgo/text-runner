@@ -4,6 +4,7 @@ import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers"
 import * as formatter from "."
+import { printUserError } from "./print-user-error"
 
 export class ProgressFormatter implements formatter.Formatter {
   private readonly progressBar: progress.Bar
@@ -44,13 +45,17 @@ export class ProgressFormatter implements formatter.Formatter {
     console.log()
     console.log()
     console.log(color.dim(args.output))
-    console.log(
-      color.red(
-        `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`
+    if (tr.instanceOfUserError(args.error)) {
+      printUserError(args.error)
+    } else {
+      console.log(
+        color.red(
+          `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`
+        )
       )
-    )
-    console.log()
-    helpers.printCodeFrame(console.log, args.activity.location)
+      console.log()
+      helpers.printCodeFrame(console.log, args.activity.location)
+    }
   }
 
   finish(args: formatter.FinishArgs): void {

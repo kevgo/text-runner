@@ -1,14 +1,13 @@
 # User-defined actions
 
-If the [built-in actions](built-in-actions.md) and
-[available plugins](external-actions.md) aren't enough, you can write your own
-custom actions in JavaScript.
+If the [available plugins](external-actions.md) aren't enough, you can write
+your own custom actions in the JavaScript dialect of your choice.
 
 ## Example 1: Hello world
 
 Let's start by building the simplest possible action first: A "hello-world"
 action that prints the text "hello world" in the test runner's console output
-when running. Inside our Markdown document we trigger it like this:
+when running. Inside a Markdown document we will trigger it like this:
 
 <a type="workspace/new-file">
 
@@ -20,11 +19,9 @@ Create a file **hello.md** with this content to test it.
 
 </a>
 
-When TextRunner encounters this region of type `hello-world`, it runs the method
-that the file <a type="workspace/new-file">**text-run/hello-world.js** exports.
-All user-defined actions are in the "text-run" folder, with the file name
-matching the action name but in [kebab-case](http://wiki.c2.com/?KebabCase).
-Let's create this file with the content:
+When TextRunner encounters this region of type `hello-world`, it reads the file
+<a type="workspace/new-file">**text-run/hello-world.js** and runs the function
+exported by it. Let's create this file with the content:
 
 ```javascript
 module.exports = function (action) {
@@ -47,26 +44,27 @@ Hello world!!
 hello.md:1 -- Hello world
 </pre>
 
-## Action functions
+## How it works
 
-Actions are simple JavaScript functions. An action receives an object containing
-various information and utility functions:
+An action is a simple JavaScript function. It receives an object containing
+information and utility functions:
 
-<a type="verify-action-args" ignore="linkTargets">
+<a type="all-action-args" ignore="linkTargets">
 
 - **location** location of the currently executed region in the documentation
-- **region:** the [document content](#accessing-document-content) inside the
-  active region for this action,
+  (file and line)
+- **region:** the document content inside the active region for this action
 - **document:** the [content](#accessing-document-content) of the entire
-  document that contains this action,
+  document that contains this action
 - **configuration:** TextRunner configuration data
-- **log:** call this function to output text to the user running your test
-- **name:** call this function to refine the name of the current test step
+- **log:** a function similar to `console.log` that outputs text to the person
+  running the test
+- **name:** call this function to provide a human-readable name for this action
 - **SKIPPING:** return this value if you have decided to skip the current action
 
 </a>
 
-TextRunner supports all forms of JavaScript functions:
+TextRunner supports all forms of JavaScript functions as actions:
 
 - synchronous functions
 - functions receiving a callback
@@ -85,9 +83,9 @@ for:
 
 ## Accessing document content
 
-The `nodes` attribute contains the document content inside the currently active
-region. It is an array of AST nodes that provides helper methods to extract
-document content:
+The <code type="action-arg">region</code> attribute contains the document
+content inside the currently active region. It is an array of AST nodes that
+provides helper methods to extract document content:
 
 <!-- TODO: ensure completeness of this -->
 
@@ -143,6 +141,8 @@ module.exports = function (action) {
 </a>
 
 <a type="extension/run-textrunner"></a>
+
+TODO: access attributes
 
 ## Formatters
 

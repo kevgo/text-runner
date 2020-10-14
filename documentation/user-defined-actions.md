@@ -113,7 +113,10 @@ nodes that provides helper methods to extract document content:
 </a>
 
 To see the node types run `text-run debug --ast <filename>` You can also iterate
-`nodes` manually. Each node has these attributes: <a type="ast-node-attributes">
+<code type="action-arg">region</code> manually. Each element has these
+attributes:
+
+<a type="ast-node-attributes">
 
 - **location:** the file and line in the file at which this AST node begins
 - **type:** the type of the AST node. Examples are `text` for normal text,
@@ -122,7 +125,9 @@ To see the node types run `text-run debug --ast <filename>` You can also iterate
   links.
 - **tag:** corresponding HTML tag
 - **content:** textual content of the AST node
-- **attributes:** list of HTML attributes of the node </a>
+- **attributes:** list of HTML attributes of the node
+
+</a>
 
 ## Example 2: accessing document content
 
@@ -138,12 +143,13 @@ echo "Hello world"
 </a>
 
 Here is the corresponding action, implemented in <a type="workspace/new-file">
-**text-run/console-command.js**:
+**text-run/console-command.ts** (we are using TypeScript this time):
 
 ```javascript
-child_process = require("child_process")
+import * as child_process from "child_process"
+import * as tr from "text-runner-core"
 
-module.exports = function (action) {
+export function consoleCommand(action: tr.actions.Args) {
   // determine which command to run
   // (you could also iterate the "nodes" array directly here)
   const commandToRun = action.region.text()

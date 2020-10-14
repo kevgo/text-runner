@@ -77,7 +77,7 @@ _Oct 13 2020_
 - extract all actions into plugins
 - much faster end-to-end tests using the JS API
 - switch from TSLint to ESLint
-  ([1264](https://github.com/kevgo/text-runner/pull/1264)
+  ([1264](https://github.com/kevgo/text-runner/pull/1264))
 - OpenNodeTracker tracks standardized AST nodes instead of MarkdownIt nodes
   ([1287](https://github.com/kevgo/text-runner/pull/1287))
 - much stronger typing to avoid stringly-typed code

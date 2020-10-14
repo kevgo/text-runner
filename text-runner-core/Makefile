@@ -15,7 +15,7 @@ cuke-online: build  # runs the feature specs that don't need an online connectio
 	echo running Text-Runner online feature specs ...
 	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
-docs:  # verify documentation
+doc:  # verify documentation
 	echo Text-Runner documentation tests ...
 	${CURDIR}/../text-runner-cli/bin/text-run --format=summary
 
@@ -45,10 +45,10 @@ publish: clean build  # publishes this package
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
-test: unit cuke lint docs  # runs all tests
-test-lerna: unit cuke-lerna lint docs  # for running all tests inside Lerna
+test: unit cuke lint doc  # runs all tests
+test-lerna: unit cuke-lerna lint doc  # for running all tests inside Lerna
 test-ts: unit cuke  # runs only the TypeScript tests
-test-online: unit cuke-online lint docs   # runs all tests that don't need an online connection
+test-online: unit cuke-online lint doc   # runs all tests that don't need an online connection
 
 unit:  # runs the unit tests
 	echo Text-Runner unit tests ...

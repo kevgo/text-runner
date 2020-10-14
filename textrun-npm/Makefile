@@ -13,7 +13,7 @@ cuke-lerna: build  # runs the feature specs
 	echo textrun-npm E2E tests ...
 	${CURDIR}/node_modules/.bin/cucumber-js --format=summary
 
-docs: build  # runs the documentation tests
+doc: build  # runs the documentation tests
 	echo textrun-npm documentation tests ...
 	${CURDIR}/node_modules/.bin/text-run static --format=summary
 	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress
@@ -35,8 +35,8 @@ lint:  # lints all files in this codebase
 publish: clean build  # publishes this package
 	npm publish
 
-test: unit cuke lint docs  # runs all tests
-test-lerna: unit cuke-lerna lint docs  # for running all tests inside Lerna
+test: unit cuke lint doc  # runs all tests
+test-lerna: unit cuke-lerna lint doc  # for running all tests inside Lerna
 test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests

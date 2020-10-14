@@ -9,7 +9,7 @@ clean:  # Removes all build artifacts
 cuke:
 cuke-lerna:
 
-docs: build  # runs the documentation tests
+doc: build  # runs the documentation tests
 	echo textrun-action documentation tests ...
 	${CURDIR}/node_modules/.bin/text-run static --format=summary
 	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress
@@ -31,7 +31,7 @@ lint:  # lints all files in this codebase
 publish: clean build  # publishes this package
 	npm publish
 
-test: lint docs  # runs all tests
+test: lint doc  # runs all tests
 test-lerna: test  # for running all tests inside Lerna
 
 unit:

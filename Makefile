@@ -34,21 +34,21 @@ cuke-changed:  # runs the E2E tests of codebases changed in this branch
 cuke-open:  # runs the E2E tests of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory cuke
 
-docs:  # runs the documentation tests
+doc:  # runs the documentation tests
 	echo documentation tests for root dir ...
 	${CURDIR}/text-runner-cli/bin/text-run --format=progress "*.md"
 
-docs-affected:  # runs the documentation tests for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory docs
+doc-affected:  # runs the documentation tests for the codebases affected by changes in this branch
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory doc
 
-docs-all:  # runs all documentation tests
-	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory docs
+doc-all:  # runs all documentation tests
+	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory doc
 
-docs-changed:  # runs the documentation tests of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory docs
+doc-changed:  # runs the documentation tests of codebases changed in this branch
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory doc
 
-docs-open:  # runs the documentation tests of codebases with uncommitted changes
-	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory docs
+doc-open:  # runs the documentation tests of codebases with uncommitted changes
+	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory doc
 
 fix:  # auto-fixes the root directory
 	echo fixing root dir ...

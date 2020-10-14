@@ -9,7 +9,7 @@ clean:  # Removes all build artifacts
 cuke:
 cuke-lerna:
 
-docs:  # runs the documentation tests
+doc:  # runs the documentation tests
 
 fix:  # runs the auto-fixers
 	echo shared features auto-fixes ...
@@ -25,8 +25,8 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../../node_modules/.bin/eslint . --ext .ts --ignore-path ../../.eslintignore
 	${CURDIR}/../../node_modules/.bin/depcheck --config=../../.depcheckrc
 
-test: unit cuke lint docs  # runs all tests
-test-lerna: unit cuke-lerna lint docs  # for running all tests inside Lerna
+test: unit cuke lint doc  # runs all tests
+test-lerna: unit cuke-lerna lint doc  # for running all tests inside Lerna
 test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests

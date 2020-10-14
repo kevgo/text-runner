@@ -5,7 +5,7 @@ clean:  # Removes all build artifacts
 cuke:
 cuke-lerna:
 
-docs: build  # runs the documentation tests
+doc: build  # runs the documentation tests
 	echo documentation doc-tests ...
 	${CURDIR}/node_modules/.bin/text-run static --format=summary
 	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress
@@ -22,8 +22,8 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc
 
-test: unit cuke lint docs  # runs all tests
-test-lerna: lint unit cuke-lerna docs  # for running all tests inside Lerna
+test: unit cuke lint doc  # runs all tests
+test-lerna: lint unit cuke-lerna doc  # for running all tests inside Lerna
 test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests

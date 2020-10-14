@@ -165,7 +165,11 @@ export function consoleCommand(action: textRunner.actions.Args) {
 
 <a type="extension/run-textrunner"></a>
 
-TODO: access attributes
+You can access other attributes on the HTML nodes like so:
+
+```javascript
+const attr = action.region[0].attributes
+```
 
 ## Formatters
 
@@ -204,7 +208,9 @@ To see all custom activities that aren't currenly used, run:
 <!-- TODO: ensure this command exists -->
 
 ```
+
 text-run unused
+
 ```
 
 <hr>
@@ -213,3 +219,7 @@ Read more about:
 
 - the [built-in actions](built-in-actions.md)
 - [configure](configuration.md) TextRunner
+
+```
+
+```

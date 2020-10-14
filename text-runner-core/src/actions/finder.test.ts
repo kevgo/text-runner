@@ -35,9 +35,9 @@ suite("actionFinder", function () {
   suite("customActionFilePaths", function () {
     test("with text-run folder of the documentation codebase", function () {
       const result = customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
-      assert.lengthOf(result, 2)
-      assert.match(result[0], /text-run\/verify-action-args.ts$/)
-      assert.match(result[1], /text-run\/verify-ast-node-attributes.ts$/)
+      assert.lengthOf(result, 5)
+      assert.match(result[0], /text-run\/action-arg.ts$/)
+      assert.match(result[1], /text-run\/all-action-args.ts$/)
     })
   })
 

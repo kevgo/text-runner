@@ -1,14 +1,13 @@
 # User-defined actions
 
-If the [built-in actions](built-in-actions.md) and
-[available plugins](external-actions.md) aren't enough, you can write your own
-custom actions in JavaScript.
+If the [available plugins](external-actions.md) aren't enough, you can write
+your own custom actions in the JavaScript dialect of your choice.
 
 ## Example 1: Hello world
 
 Let's start by building the simplest possible action first: A "hello-world"
 action that prints the text "hello world" in the test runner's console output
-when running. Inside our Markdown document we trigger it like this:
+when running. Inside a Markdown document we will trigger it like this:
 
 <a type="workspace/new-file">
 
@@ -20,11 +19,9 @@ Create a file **hello.md** with this content to test it.
 
 </a>
 
-When TextRunner encounters this region of type `hello-world`, it runs the method
-that the file <a type="workspace/new-file">**text-run/hello-world.js** exports.
-All user-defined actions are in the "text-run" folder, with the file name
-matching the action name but in [kebab-case](http://wiki.c2.com/?KebabCase).
-Let's create this file with the content:
+When TextRunner encounters this region of type `hello-world`, it reads the file
+<a type="workspace/new-file">**text-run/hello-world.js** and runs the function
+exported by it. Let's create this file with the content:
 
 ```javascript
 module.exports = function (action) {
@@ -47,26 +44,27 @@ Hello world!!
 hello.md:1 -- Hello world
 </pre>
 
-## Action functions
+## How it works
 
-Actions are simple JavaScript functions. An action receives an object containing
-various information and utility functions:
+An action is a simple JavaScript function. It receives an object containing
+information and utility functions:
 
-<a type="verify-action-args" ignore="linkTargets">
+<a type="all-action-args" ignore="linkTargets">
 
 - **location** location of the currently executed region in the documentation
-- **region:** the [document content](#accessing-document-content) inside the
-  active region for this action,
+  (file and line)
+- **region:** the document content inside the active region for this action
 - **document:** the [content](#accessing-document-content) of the entire
-  document that contains this action,
+  document that contains this action
 - **configuration:** TextRunner configuration data
-- **log:** call this function to output text to the user running your test
-- **name:** call this function to refine the name of the current test step
+- **log:** a function similar to `console.log` that outputs text to the person
+  running the test
+- **name:** call this function to provide a human-readable name for this action
 - **SKIPPING:** return this value if you have decided to skip the current action
 
 </a>
 
-TextRunner supports all forms of JavaScript functions:
+TextRunner supports all forms of JavaScript functions as actions:
 
 - synchronous functions
 - functions receiving a callback
@@ -83,23 +81,44 @@ for:
 - [TypeScript](../examples/custom-action-typescript/)
 - [CoffeeScript](../examples/custom-action-coffeescript/)
 
+Throw an exception to fail a test.
+
 ## Accessing document content
 
-The `nodes` attribute contains the document content inside the currently active
-region. It is an array of AST nodes that provides helper methods to extract
-document content:
+The <code type="action-arg">region</code> attribute contains the document
+content inside the currently active region. It is a flat array of syntax tree
+nodes that provides helper methods to extract document content:
 
-<!-- TODO: ensure completeness of this -->
+<a type="ast-node-list-methods" ignore="pushNode">
 
 - **text():** returns the entire textual content in the current active region
 - **textInNodeOfType(type1, type2, ...):** returns the text in the AST node of
   the given types. You can provide multiple alternative node types. Verifies
   that only one matching AST node exists.
 - **textInNodeOfTypes(type1, type2, ...):** returns the text in the AST nodes of
-  the given types. You can provide multiple alternative node types.
+  the given types. You can provide multiple alternative node types. Only one
+  node is allowed to match.
+- **textInNodesOfType(type):** provides the text in all nodes with the given
+  type
+- **getNodeOfTypes(type1, type2, ...):** provides exactly one syntax node
+  matching any of the given types
+- **getNodesFor(node):** provides a list of nodes from the given opening node to
+  its closing counterpart
+- **getNodesOfTypes(type1, type2, ...):** provides the syntax nodes with any of
+  the given types
+- **hasNodeOfType(type):** indicates whether a syntax node with the given type
+  exists
+- **nodeTypes():** provides the names of all node types in this document region
+- **textInNode():** providess the textual content for all nodes from the given
+  opening node to its closing counterpart
 
-You can also iterate `nodes` manually. Each node has these attributes:
-<a type="verify-ast-node-attributes">
+</a>
+
+To see the node types run `text-run debug --ast <filename>` You can also iterate
+<code type="action-arg">region</code> manually. Each element has these
+attributes:
+
+<a type="ast-node-attributes">
 
 - **location:** the file and line in the file at which this AST node begins
 - **type:** the type of the AST node. Examples are `text` for normal text,
@@ -108,7 +127,9 @@ You can also iterate `nodes` manually. Each node has these attributes:
   links.
 - **tag:** corresponding HTML tag
 - **content:** textual content of the AST node
-- **attributes:** list of HTML attributes of the node </a>
+- **attributes:** list of HTML attributes of the node
+
+</a>
 
 ## Example 2: accessing document content
 
@@ -124,18 +145,20 @@ echo "Hello world"
 </a>
 
 Here is the corresponding action, implemented in <a type="workspace/new-file">
-**text-run/console-command.js**:
+**text-run/console-command.ts** (we are using TypeScript this time):
 
-```javascript
-child_process = require("child_process")
+```typescript
+import * as child_process from "child_process"
+import * as textRunner from "text-runner-core"
 
-module.exports = function (action) {
-  // determine which command to run
-  // (you could also iterate the "nodes" array directly here)
+export function consoleCommand(action: textRunner.actions.Args) {
+  // determine the console command to run
   const commandToRun = action.region.text()
 
-  // perform the action
+  // run the console command
   const result = child_process.execSync(commandToRun, { encoding: "utf8" })
+
+  // print the output to the user
   action.log(result)
 }
 ```
@@ -144,45 +167,19 @@ module.exports = function (action) {
 
 <a type="extension/run-textrunner"></a>
 
-## Formatters
+You can access other attributes on the HTML nodes like so:
 
-One of the utilities availabe to actions is the formatter instance. It allows to
-signal test progress to TextRunner and print test output to the console. It
-provides the following methods:
-
-<!-- TODO: verify completeness -->
-
-- **log(text):** allows to print output of the currently running action to the
-  console - depending on the type of formatter, this output is printed or not
-- **warn:** to signal a warning to the user (but keep the test passing)
-- **skip:** call this to skip the current test
-- **name:** overrides how the current action is called in the test output
-- **stdout** and **stderr:** streams that you can pipe output of commands you
-  run into
-- **console:** a console object that you should use instead of the built-in
-  console to generate output that fits into the formatter output
-
-To fail a test, throw an `Error` with the corresponding error message.
-TextRunner supports a variety of formatters:
-
-- **detailed formatter:** Prints each test performed, including test output.
-
-- **dot formatter:** A minimalistic formatter, shows a dots for each test
-  performed.
-
-- **progress formatter:** Prints a progress bar
-
-- **summary formatter:** Prints only a summary at the end
+```javascript
+const attr = action.region[0].attributes
+```
 
 ## Cleaning up unused activities
 
 To see all custom activities that aren't currenly used, run:
 
-<!-- TODO: ensure this command exists -->
-
-```
+<pre type="textrunner-command">
 text-run unused
-```
+</pre>
 
 <hr>
 

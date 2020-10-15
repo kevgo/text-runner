@@ -23,6 +23,8 @@ _Oct 13 2020_
   ([#1295](https://github.com/kevgo/text-runner/pull/1295))
 - configuration `system-tmp` no longer accepts a string
   ([1254](https://github.com/kevgo/text-runner/pull/1254))
+- action API uses shorter methods
+  ([1387](https://github.com/kevgo/text-runner/pull/1387))
 - requires Node 12 or newer
   ([1231](https://github.com/kevgo/text-runner/pull/1231),
   [1045](https://github.com/kevgo/text-runner/pull/1045))

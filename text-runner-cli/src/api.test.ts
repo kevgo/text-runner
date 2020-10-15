@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-const cli = require("..")
+import cli = require("..")
 
 suite("JS API export", function () {
   test("exports", function () {

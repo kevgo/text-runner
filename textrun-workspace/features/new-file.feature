@@ -82,8 +82,8 @@ Feature: creating files with content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         | GUIDANCE                                                                                                                                   |
-      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' | Cannot determine the name of the file to create.\nThe getNodeOfTypes method expects to find only one matching node, but it found multiple. |
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         | GUIDANCE                                                                                                                                |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' | Cannot determine the name of the file to create.\nThe nodeOfTypes method expects to find only one matching node, but it found multiple. |
 
 
   Scenario: two content blocks given
@@ -105,8 +105,8 @@ Feature: creating files with content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           | GUIDANCE                                                                                                                                      |
-      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' | Cannot determine the content of the file to create.\nThe getNodeOfTypes method expects to find only one matching node, but it found multiple. |
+      | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           | GUIDANCE                                                                                                                                   |
+      | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' | Cannot determine the content of the file to create.\nThe nodeOfTypes method expects to find only one matching node, but it found multiple. |
 
 
   Scenario: setting the base directory

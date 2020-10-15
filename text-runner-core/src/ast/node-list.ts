@@ -10,16 +10,15 @@ export class NodeList extends Array<Node> {
   }
 
   /**
-   * Returns the Node matching any of the given types.
-   * Only one result is expected,
-   * multiple or zero matches cause an exception.
+   * provides exactly one node matching any of the given types,
+   * multiple or zero matches cause an exception
    */
-  getNodeOfTypes(...nodeTypes: string[]): Node {
-    const nodes = this.getNodesOfTypes(...nodeTypes)
+  nodeOfTypes(...nodeTypes: string[]): Node {
+    const nodes = this.nodesOfTypes(...nodeTypes)
     if (nodes.length > 1) {
       throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
-        "The getNodeOfTypes method expects to find only one matching node, but it found multiple.",
+        "The nodeOfTypes method expects to find only one matching node, but it found multiple.",
         nodes[0].location
       )
     }
@@ -36,7 +35,7 @@ export class NodeList extends Array<Node> {
    * Assuming the given Node is an opening node,
    * returns all nodes until it closes.
    */
-  getNodesFor(openingNode: Node): NodeList {
+  nodesFor(openingNode: Node): NodeList {
     if (openingNode == null) {
       throw new UserError(
         "no Node given",
@@ -71,7 +70,7 @@ ${new Error().stack}`
   }
 
   /** Returns the Nodes matching any of the given types. */
-  getNodesOfTypes(...nodeTypes: string[]): NodeList {
+  nodesOfTypes(...nodeTypes: string[]): NodeList {
     const result = new NodeList()
     const expectedTypes: string[] = []
     for (const nodeType of nodeTypes) {
@@ -112,7 +111,7 @@ ${new Error().stack}`
 
   /** Returns the textual content for the given node. */
   textInNode(astNode: Node): string {
-    return this.getNodesFor(astNode).reduce((acc, node) => acc + node.content, "")
+    return this.nodesFor(astNode).reduce((acc, node) => acc + node.content, "")
   }
 
   /**
@@ -126,7 +125,7 @@ ${new Error().stack}`
         nodeTypes.push(nodeType + "_open")
       }
     }
-    return this.textInNode(this.getNodeOfTypes(...nodeTypes))
+    return this.textInNode(this.nodeOfTypes(...nodeTypes))
   }
 
   /**
@@ -134,8 +133,8 @@ ${new Error().stack}`
    * Expects that exactly one matching node exists, throws otherwise.
    */
   textInNodeOfTypes(...nodeTypes: string[]): string {
-    const node = this.getNodeOfTypes(...nodeTypes)
-    const nodes = this.getNodesFor(node)
+    const node = this.nodeOfTypes(...nodeTypes)
+    const nodes = this.nodesFor(node)
     return nodes.text()
   }
 
@@ -146,6 +145,6 @@ ${new Error().stack}`
         nodeTypes.push(nodeType + "_open")
       }
     }
-    return this.getNodesOfTypes(...nodeTypes).map(node => this.textInNode(node))
+    return this.nodesOfTypes(...nodeTypes).map(node => this.textInNode(node))
   }
 }

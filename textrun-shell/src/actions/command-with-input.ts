@@ -58,16 +58,16 @@ function getInput(nodes: tr.ast.NodeList): ProcessInput[] {
     return result
   }
   // TODO: simplify this with an "tr.parser.ast.NodeList.getSubList" method
-  const tbodyNode = nodes.getNodeOfTypes("tbody_open")
-  const tbodyContent = nodes.getNodesFor(tbodyNode)
-  const trNodes = tbodyContent.getNodesOfTypes("tr_open")
+  const tbodyNode = nodes.nodeOfTypes("tbody_open")
+  const tbodyContent = nodes.nodesFor(tbodyNode)
+  const trNodes = tbodyContent.nodesOfTypes("tr_open")
   for (const trNode of trNodes) {
-    const trContent = nodes.getNodesFor(trNode)
+    const trContent = nodes.nodesFor(trNode)
     if (trContent.length === 0) {
       // empty table row, ignore
       continue
     }
-    const tdNode = trContent.getNodesOfTypes("td_open")
+    const tdNode = trContent.nodesOfTypes("td_open")
     if (tdNode.length === 0) {
       // no TD found, possibly because there are THs --> ignore
       continue

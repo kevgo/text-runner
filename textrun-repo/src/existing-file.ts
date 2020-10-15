@@ -9,7 +9,7 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
   if (action.region.hasNodeOfType("link_open")) {
-    const linkNode = action.region.getNodeOfTypes("link_open")
+    const linkNode = action.region.nodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
   const expectedContent = action.region.textInNodeOfTypes("fence", "code")

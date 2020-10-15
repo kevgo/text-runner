@@ -7,13 +7,13 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "text-runner-core": "5.0.0-pre9"
+    "text-runner-core": "5.0.0-pre10"
   },
   "devDependencies": {
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.0-pre9",
+    "text-runner": "5.0.0-pre10",
     "textrun-extension": "0.0.10",
     "textrun-npm": "0.0.10"
   }

@@ -29,6 +29,7 @@
   ],
   "homepage": "https://github.com/kevgo/text-runner",
   "license": "ISC",
+  "main": "dist/api.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/kevgo/text-runner.git"

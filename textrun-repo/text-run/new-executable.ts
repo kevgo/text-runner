@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as tr from "text-runner"
 
 export async function newExecutable(action: tr.actions.Args): Promise<void> {
   const name = action.region.text()

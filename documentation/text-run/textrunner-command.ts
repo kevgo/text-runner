@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as tr from "text-runner"
 
 export default function textrunnerCommand(action: tr.actions.Args): void {
   const documented = action.region.text().replace("text-run ", "")

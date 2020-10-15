@@ -61,7 +61,7 @@ function jsTemplate(filename: string) {
 }
 
 function tsTemplate(filename: string) {
-  return `import * as tr from "text-runner-core"
+  return `import * as tr from "text-runner"
 
 export function ${helpers.camelize(filename)} (action: tr.actions.Args) {
   console.log("This is the implementation of the "${filename}" action.")

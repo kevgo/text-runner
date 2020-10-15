@@ -149,7 +149,7 @@ Here is the corresponding action, implemented in <a type="workspace/new-file">
 
 ```typescript
 import * as child_process from "child_process"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner"
 
 export function consoleCommand(action: textRunner.actions.Args) {
   // determine the console command to run

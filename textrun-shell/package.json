@@ -1,6 +1,6 @@
 {
   "name": "textrun-shell",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "main": "dist/index.js",
   "license": "ISC",
   "files": [
@@ -12,7 +12,7 @@
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.0-pre9",
-    "textrun-extension": "0.0.9"
+    "textrun-extension": "0.0.10"
   },
   "devDependencies": {
     "colorette": "1.2.1",
@@ -20,8 +20,8 @@
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre9",
-    "textrun-action": "0.0.9",
-    "textrun-extension": "0.0.9",
-    "textrun-workspace": "0.0.9"
+    "textrun-action": "0.0.10",
+    "textrun-extension": "0.0.10",
+    "textrun-workspace": "0.0.10"
   }
 }

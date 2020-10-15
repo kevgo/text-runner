@@ -22,7 +22,7 @@ suite("ast.NodeList", function () {
       list.pushNode({ type: "text" })
       list.pushNode({ type: "heading_close" })
       list.pushNode({ type: "paragraph_close" })
-      const result = list.getNodesFor(list[1])
+      const result = list.nodesFor(list[1])
       const types = result.map(node => node.type)
       assert.deepEqual(
         types,
@@ -36,19 +36,19 @@ suite("ast.NodeList", function () {
       list.pushNode({ type: "paragraph_open" })
       list.pushNode({ type: "text", content: "foo" })
       list.pushNode({ type: "paragraph_close" })
-      const result = list.getNodesFor(list[1])
+      const result = list.nodesFor(list[1])
       const types = result.map(node => node.type)
       assert.deepEqual(types, ["text"])
     })
   })
 
-  suite(".getNodeOfTypes()", function () {
+  suite(".nodeOfTypes()", function () {
     test("one match", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "anchor_open" })
       list.pushNode({ type: "bold_open" })
       list.pushNode({ type: "code_open" })
-      const result = list.getNodeOfTypes("bold_open", "fence_open")
+      const result = list.nodeOfTypes("bold_open", "fence_open")
       assert.equal(result.type, "bold_open")
     })
 
@@ -56,13 +56,13 @@ suite("ast.NodeList", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "anchor_open" })
       list.pushNode({ type: "bold_open" })
-      assert.throws(() => list.getNodeOfTypes("anchor_open", "bold_open"), UserError)
+      assert.throws(() => list.nodeOfTypes("anchor_open", "bold_open"), UserError)
     })
 
     test("no matches", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "anchor_open" })
-      assert.throws(() => list.getNodeOfTypes("bold_open"), UserError)
+      assert.throws(() => list.nodeOfTypes("bold_open"), UserError)
     })
   })
 
@@ -72,7 +72,7 @@ suite("ast.NodeList", function () {
       list.pushNode({ type: "anchor_open" })
       list.pushNode({ type: "bold_open" })
       list.pushNode({ type: "code_open" })
-      const result = list.getNodesOfTypes("anchor_open", "code_open")
+      const result = list.nodesOfTypes("anchor_open", "code_open")
       assert.deepEqual(
         result.map(node => node.type),
         ["anchor_open", "code_open"]
@@ -83,7 +83,7 @@ suite("ast.NodeList", function () {
       list.pushNode({ type: "anchor_open" })
       list.pushNode({ type: "text" })
       list.pushNode({ type: "anchor_close" })
-      const result = list.getNodesOfTypes("anchor_open")
+      const result = list.nodesOfTypes("anchor_open")
       assert.deepEqual(
         result.map(node => node.type),
         ["anchor_open"]

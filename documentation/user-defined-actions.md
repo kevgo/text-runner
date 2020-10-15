@@ -100,12 +100,12 @@ nodes that provides helper methods to extract document content:
   node is allowed to match.
 - **textInNodesOfType(type):** provides the text in all nodes with the given
   type
-- **getNodeOfTypes(type1, type2, ...):** provides exactly one syntax node
-  matching any of the given types
-- **getNodesFor(node):** provides a list of nodes from the given opening node to
+- **nodeOfTypes(type1, type2, ...):** provides exactly one syntax node matching
+  any of the given types
+- **nodesFor(node):** provides a list of nodes from the given opening node to
   its closing counterpart
-- **getNodesOfTypes(type1, type2, ...):** provides the syntax nodes with any of
-  the given types
+- **nodesOfTypes(type1, type2, ...):** provides the syntax nodes with any of the
+  given types
 - **hasNodeOfType(type):** indicates whether a syntax node with the given type
   exists
 - **nodeTypes():** provides the names of all node types in this document region

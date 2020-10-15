@@ -11,7 +11,7 @@ export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
           result.push({
             actionName: "check-link",
             location: node.location,
-            region: AST.getNodesFor(node),
+            region: AST.nodesFor(node),
             document: AST,
           })
           break

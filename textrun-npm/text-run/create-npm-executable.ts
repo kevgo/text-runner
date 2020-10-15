@@ -1,5 +1,5 @@
 import { promises as fs } from "fs"
-import * as tr from "text-runner-core"
+import * as tr from "text-runner"
 
 /** creates a binary with the given name in the workspace */
 export default async function createNPMExecutable(action: tr.actions.Args): Promise<void> {

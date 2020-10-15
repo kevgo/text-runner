@@ -25,7 +25,8 @@
   },
   "files": [
     "bin",
-    "dist/**/*.js"
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
   ],
   "homepage": "https://github.com/kevgo/text-runner",
   "license": "ISC",

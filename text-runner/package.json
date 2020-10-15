@@ -1,0 +1,13 @@
+{
+  "name": "text-runner",
+  "version": "5.0.0-pre9",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "dependencies": {
+    "text-runner-cli": "5.0.0-pre9",
+    "text-runner-core": "5.0.0-pre9"
+  },
+  "devDependencies": {
+    "mocha": "8.0.1"
+  }
+}

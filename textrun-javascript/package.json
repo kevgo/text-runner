@@ -1,6 +1,6 @@
 {
   "name": "textrun-javascript",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "main": "dist/index.js",
   "license": "ISC",
   "files": [
@@ -14,7 +14,7 @@
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre10",
-    "textrun-extension": "0.0.10",
-    "textrun-npm": "0.0.10"
+    "textrun-extension": "0.0.11",
+    "textrun-npm": "0.0.11"
   }
 }

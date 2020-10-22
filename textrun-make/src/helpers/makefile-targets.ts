@@ -2,6 +2,8 @@
 export function makefileTargets(text: string): string[] {
   return text
     .split("\n")
+    .filter((line: string) => !line.startsWith("\t"))
+    .filter((line: string) => !line.startsWith("."))
     .filter((line: string) => line.includes(":"))
     .map((line: string) => line.split(":")[0])
     .map((line: string) => line.trim())

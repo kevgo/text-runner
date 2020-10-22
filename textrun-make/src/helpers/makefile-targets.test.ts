@@ -13,6 +13,7 @@ bar:
 `
     assert.deepEqual(makefileTargets(give), ["bar", "foo"])
   })
+
   test("line contains column", function () {
     const give = `\
 help:   # shows all available Make commands
@@ -22,6 +23,7 @@ lint:  # lints the code base
 `
     assert.deepEqual(makefileTargets(give), ["help", "lint"])
   })
+
   test("Makefile contains hidden targets", function () {
     const give = `\
 .PHONY: test

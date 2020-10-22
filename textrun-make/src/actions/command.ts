@@ -15,7 +15,12 @@ export async function command(action: tr.actions.Args): Promise<void> {
   } else {
     action.name(`make commands: ${color.cyan(wants.join(", "))}`)
   }
-  const makefilePath = action.configuration.sourceDir.joinStr(action.region[0].attributes["dir"] || ".", "Makefile")
+
+  const makefilePath = action.configuration.sourceDir.joinStr(
+    action.location.file.directory().platformified(),
+    action.region[0].attributes["dir"] || ".",
+    "Makefile"
+  )
   const makefileContent = await fs.readFile(makefilePath, "utf8")
   const haves = makefileTargets(makefileContent)
   for (const want of wants) {

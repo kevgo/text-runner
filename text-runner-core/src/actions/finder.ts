@@ -25,22 +25,26 @@ export class Finder {
   }
 
   /** loads all actions */
-  static load(sourceDir: files.SourceDir): Finder {
+  static async load(sourceDir: files.SourceDir): Promise<Finder> {
     return new Finder(
-      loadBuiltinActions(),
-      loadCustomActions(sourceDir.joinStr("text-run")),
+      await loadBuiltinActions(),
+      await loadCustomActions(sourceDir.joinStr("text-run")),
       new ExternalActionManager()
     )
   }
 
   /** loads only the actions for dynamic tests */
-  static loadDynamic(sourceDir: files.SourceDir): Finder {
-    return new Finder(new Actions(), loadCustomActions(sourceDir.joinStr("text-run")), new ExternalActionManager())
+  static async loadDynamic(sourceDir: files.SourceDir): Promise<Finder> {
+    return new Finder(
+      new Actions(),
+      await loadCustomActions(sourceDir.joinStr("text-run")),
+      new ExternalActionManager()
+    )
   }
 
   /** loads only the actions for static tests */
-  static loadStatic(): Finder {
-    return new Finder(loadBuiltinActions(), new Actions(), new ExternalActionManager())
+  static async loadStatic(): Promise<Finder> {
+    return new Finder(await loadBuiltinActions(), new Actions(), new ExternalActionManager())
   }
 
   /** actionFor provides the action function for the given Activity. */
@@ -83,11 +87,11 @@ export function builtinActionFilePaths(): string[] {
     .map(helpers.trimExtension)
 }
 
-export function loadBuiltinActions(): Actions {
+export async function loadBuiltinActions(): Promise<Actions> {
   const result = new Actions()
   for (const filename of builtinActionFilePaths()) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actions.name(filename), require(filename))
+    result.register(actions.name(filename), await import(filename))
   }
   return result
 }
@@ -97,12 +101,12 @@ export function customActionFilePaths(dir: string): string[] {
   return glob.sync(pattern)
 }
 
-export function loadCustomActions(dir: string): Actions {
+export async function loadCustomActions(dir: string): Promise<Actions> {
   const result = new Actions()
   for (const filename of customActionFilePaths(dir)) {
     rechoir.prepare(interpret.jsVariants, filename)
     // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actions.name(filename), require(filename))
+    result.register(actions.name(filename), await import(filename))
   }
   return result
 }

@@ -41,15 +41,17 @@ suite("actionFinder", function () {
     })
   })
 
-  test("loadBuiltinActions", function () {
+  test("loadBuiltinActions", async function () {
     this.timeout(10_000)
-    const result = loadBuiltinActions()
+    const result = await loadBuiltinActions()
     assert.deepEqual(result.names(), ["check-image", "check-link", "test"])
   })
 
   suite("loadCustomActions", function () {
-    test("with text-run folder of this codebase", function () {
-      const result = loadCustomActions(path.join(__dirname, "..", "..", "..", "examples", "custom-action", "text-run"))
+    test("with text-run folder of this codebase", async function () {
+      const result = await loadCustomActions(
+        path.join(__dirname, "..", "..", "..", "examples", "custom-action", "text-run")
+      )
       assert.typeOf(result.get("hello-world-sync"), "function")
     })
   })

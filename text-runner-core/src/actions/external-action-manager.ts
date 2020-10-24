@@ -12,7 +12,7 @@ export class ExternalActionManager {
   }
 
   /** provides the external action with the given name */
-  get(activity: Activity): Action | null {
+  async get(activity: Activity): Promise<Action | null> {
     const parts = activity.actionName.split("/")
     if (parts.length === 1) {
       // not an external action here --> ignore
@@ -29,7 +29,7 @@ export class ExternalActionManager {
     const wantAction = actions.name(parts[1])
     let module
     try {
-      module = require(moduleName)
+      module = await import(moduleName)
     } catch (e) {
       throw new UserError(`cannot load npm package "${moduleName}"`, e.message, activity.location)
     }

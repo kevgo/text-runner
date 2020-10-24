@@ -9,21 +9,21 @@ import { Action } from "./index"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {
-    test("built-in region name", function () {
+    test("built-in region name", async function () {
       const builtIn = new Actions()
       const func: Action = () => 254
       builtIn.register("foo", func)
       const actionFinder = new Finder(builtIn, new Actions(), new ExternalActionManager())
       const activity = activities.scaffold({ actionName: "foo" })
-      assert.equal(actionFinder.actionFor(activity), func)
+      assert.equal(await actionFinder.actionFor(activity), func)
     })
-    test("custom region name", function () {
+    test("custom region name", async function () {
       const custom = new Actions()
       const func: Action = () => 254
       custom.register("foo", func)
       const actionFinder = new Finder(new Actions(), custom, new ExternalActionManager())
       const activity = activities.scaffold({ actionName: "foo" })
-      assert.equal(actionFinder.actionFor(activity), func)
+      assert.equal(await actionFinder.actionFor(activity), func)
     })
   })
 

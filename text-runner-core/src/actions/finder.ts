@@ -44,11 +44,11 @@ export class Finder {
   }
 
   /** actionFor provides the action function for the given Activity. */
-  actionFor(activity: activities.Activity): Action {
+  async actionFor(activity: activities.Activity): Promise<Action> {
     return (
       this.builtinActions.get(activity.actionName) ||
       this.customActions.get(activity.actionName) ||
-      this.externalActions.get(activity) ||
+      (await this.externalActions.get(activity)) ||
       this.errorUnknownAction(activity)
     )
   }

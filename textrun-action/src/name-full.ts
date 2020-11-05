@@ -1,13 +1,11 @@
 import * as tr from "text-runner-core"
 
-export function nameFull(action: tr.actions.Args): void {
+export async function nameFull(action: tr.actions.Args): Promise<void> {
   const want = action.region.text()
   action.name(`verify full name of action "${want}"`)
   const wantStd = tr.actions.name(want)
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const pkgJson = require(action.configuration.sourceDir.joinStr("package.json"))
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const main = require(action.configuration.sourceDir.joinStr(pkgJson.main))
+  const pkgJson = await import(action.configuration.sourceDir.joinStr("package.json"))
+  const main = await import(action.configuration.sourceDir.joinStr(pkgJson.main))
   const allNames = Object.keys(main.textrunActions)
   const allNamesStd = allNames.map(tr.actions.name)
   if (!allNamesStd.includes(wantStd)) {

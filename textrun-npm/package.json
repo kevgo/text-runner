@@ -1,6 +1,6 @@
 {
   "name": "textrun-npm",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "main": "dist/index.js",
   "license": "ISC",
   "files": [
@@ -16,8 +16,8 @@
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre10",
-    "textrun-action": "0.0.11",
-    "textrun-extension": "0.0.11",
-    "textrun-workspace": "0.0.11"
+    "textrun-action": "0.0.12",
+    "textrun-extension": "0.0.12",
+    "textrun-workspace": "0.0.12"
   }
 }

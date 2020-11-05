@@ -139,4 +139,7 @@ update-all:  # updates the dependencies for the entire mono-repo
 unit-all:  # runs all tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make --no-print-directory unit
 
+unit-changed:  # runs all unit tests of codebases changed in this branch
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory unit
+
 .SILENT:

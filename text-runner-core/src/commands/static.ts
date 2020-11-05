@@ -54,7 +54,7 @@ export class Static implements Command {
       }
 
       // step 7: find actions
-      const actionFinder = actions.Finder.loadStatic()
+      const actionFinder = await actions.Finder.loadStatic()
 
       // step 8: execute the ActivityList
       this.emit("start", { stepCount: links.length } as events.Start)

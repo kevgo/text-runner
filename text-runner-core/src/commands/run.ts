@@ -48,7 +48,7 @@ export class Run implements command.Command {
       const targets = linkTargets.find(ASTs)
 
       // step 6: find actions
-      const actionFinder = actions.Finder.load(config.sourceDir)
+      const actionFinder = await actions.Finder.load(config.sourceDir)
 
       // step 7: extract activities
       const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker)

@@ -10,14 +10,14 @@
   "dependencies": {
     "assert-no-diff": "3.0.4",
     "eol": "0.9.1",
-    "text-runner-core": "5.0.0-pre10"
+    "text-runner-core": "5.0.0-pre11"
   },
   "devDependencies": {
     "colorette": "1.2.1",
     "cucumber": "6.0.5",
     "mocha": "8.0.1",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.0-pre10",
+    "text-runner": "5.0.0-pre11",
     "textrun-action": "0.0.12",
     "textrun-extension": "0.0.12",
     "textrun-npm": "0.0.12"

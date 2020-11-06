@@ -14,6 +14,27 @@ To use these actions, add this package as a development dependency by running
 <code type="npm/install">npm i -D textrun-repo</code> or
 <code type="npm/install">yarn i -D textrun-repo</code>.
 
+### repo/existing-file
+
+Sometimes you want to mention the name of a file from your application's source
+code in the documentation. The
+<b type="action/name-full">source/existing-file</b> action verifies this. As an
+example, consider a codebase contains a file
+<a type="workspace/new-file">**config.yml** with content `foo: bar`</a>. The
+documentation for this codebase might want to mention this configuration file:
+
+<a type="extension/runnable-region">
+
+```markdown
+The file <b type="repo/existing-file">config.yml</b> defines configuration
+values.
+```
+
+</a>
+
+The filename of the source code file is relative to the Markdown file describing
+it.
+
 ### repo/existing-file-content
 
 Sometimes you want to just display a file from your application's source code in

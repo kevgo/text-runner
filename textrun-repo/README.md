@@ -5,7 +5,7 @@ actions for verifying documentation containing the content of source code files
 from the repository.
 
 - [installation](#installation)
-- [repo/existing-file](#repoexisting-file)
+- [repo/existing-file-content](#repoexisting-file-content)
 - [repo/executable](#repoexecutable)
 
 ### installation
@@ -14,19 +14,19 @@ To use these actions, add this package as a development dependency by running
 <code type="npm/install">npm i -D textrun-repo</code> or
 <code type="npm/install">yarn i -D textrun-repo</code>.
 
-### repo/existing-file
+### repo/existing-file-content
 
 Sometimes you want to just display a file from your application's source code in
-the documentation. The <b type="action/name-full">source/existing-file</b>
-action verifies such documentation. As an example, consider a codebase contains
-a file <a type="workspace/new-file">**config.yml** with content `foo: bar`</a>.
-The documentation for this codebase might want to mention this configuration
-file:
+the documentation. The
+<b type="action/name-full">source/existing-file-content</b> action verifies such
+documentation. As an example, consider a codebase contains a file
+<a type="workspace/new-file">**config.yml** with content `foo: bar`</a>. The
+documentation for this codebase might want to mention this configuration file:
 
 <a type="extension/runnable-region">
 
 ````markdown
-<a type="repo/existing-file">
+<a type="repo/existing-file-content">
 
 The **config.yml** file defines configuration values. The current settings are:
 
@@ -50,7 +50,7 @@ You can display its content in your documentation via this active region:
 <a type="extension/runnable-region">
 
 ```markdown
-<a type="repo/existing-file">
+<a type="repo/existing-file-content">
 
 The **hello.txt** file in the [bar folder](foo/bar) contains this section:
 

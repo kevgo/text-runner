@@ -27,9 +27,8 @@ export class ExternalActionManager {
     }
     const moduleName = "textrun-" + parts[0]
     const wantAction = actions.name(parts[1])
-    let module
     try {
-      module = await import(moduleName)
+      var module = await import(moduleName)
     } catch (e) {
       throw new UserError(`cannot load npm package "${moduleName}"`, e.message, activity.location)
     }

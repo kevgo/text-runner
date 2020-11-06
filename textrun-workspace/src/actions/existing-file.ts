@@ -11,9 +11,8 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const expectedContent = action.region.textInNodeOfType("fence", "code")
   action.log(expectedContent)
-  let actualContent = ""
   try {
-    actualContent = await fs.readFile(fullPath, "utf-8")
+    var actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
     if (e.code === "ENOENT") {
       const files = await fs.readdir(action.configuration.sourceDir.platformified())

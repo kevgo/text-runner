@@ -30,7 +30,7 @@ suite("instantiateFormatter()", function () {
   })
 
   test("request unknown formatter", function () {
-    let err = null
+    let err
     try {
       // @ts-ignore
       formatter.instantiate("zonk", ".", command)

@@ -17,9 +17,8 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   action.name(`document content matches source code file ${color.cyan(filePath)}`)
   const fullPath = action.configuration.sourceDir.joinStr(filePath)
   action.log(`ls ${fullPath}`)
-  let actualContent
   try {
-    actualContent = await fs.readFile(fullPath, "utf8")
+    var actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
     if (err.code === "ENOENT") {
       throw new Error(`file not found: ${color.cyan(filePath)}`)

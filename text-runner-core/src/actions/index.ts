@@ -12,22 +12,22 @@ export type Action = (params: Args) => Result
 
 export interface Args {
   /** return the action with this value to signal that it is being skipped */
-  SKIPPING: 254
+  readonly SKIPPING: 254
 
   /** TextRunner configuration data derived from the config file and CLI switches */
-  configuration: config.Data
+  readonly configuration: config.Data
 
   /** the AST nodes of the active region which the current action tests */
-  document: ast.NodeList
+  readonly document: ast.NodeList
 
   /** all link targets in the current documentation  */
-  linkTargets: linkTargets.List
+  readonly linkTargets: linkTargets.List
 
   /** name of the file in which the currently tested active region is */
-  location: files.Location
+  readonly location: files.Location
 
   /** allows printing test output to the user, behaves like console.log */
-  log: run.LogFn
+  readonly log: run.LogFn
 
   /**
    * Name allows to provide a more specific name for the current action.
@@ -36,10 +36,10 @@ export interface Args {
    * `write file "foo.yml"` once the name of the file to be written
    * has been extracted from the document AST.
    */
-  name: run.RefineNameFn
+  readonly name: run.RefineNameFn
 
   /** the AST nodes of the active region which the current action tests */
-  region: ast.NodeList
+  readonly region: ast.NodeList
 }
 
 /** the result of an action function */

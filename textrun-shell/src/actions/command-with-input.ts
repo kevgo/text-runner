@@ -7,8 +7,8 @@ import { CurrentCommand } from "../helpers/current-command"
 import { trimDollar } from "../helpers/trim-dollar"
 
 interface ProcessInput {
-  input: string
-  textToWait: string | null
+  readonly input: string
+  readonly textToWait: string | null
 }
 
 /**

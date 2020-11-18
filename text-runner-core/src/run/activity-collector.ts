@@ -5,12 +5,12 @@ import { StopWatch } from "./stopwatch"
 
 /** Statistics about a run of Text-Runner */
 interface ActivityResult {
-  activity?: Activity
-  error?: Error
-  finalName?: string
-  message?: string // warning message
-  output?: string
-  status: events.ResultStatus
+  readonly activity?: Activity
+  readonly error?: Error
+  readonly finalName?: string
+  readonly message?: string // warning message
+  readonly output?: string
+  readonly status: events.ResultStatus
 }
 
 export class ActivityResults extends Array<ActivityResult> {

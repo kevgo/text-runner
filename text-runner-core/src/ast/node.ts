@@ -61,13 +61,13 @@ export type NodeTag =
   | "ul"
 
 export interface NodeScaffoldData {
-  attributes?: NodeAttributes
-  content?: string
+  readonly attributes?: NodeAttributes
+  readonly content?: string
   file?: string | files.FullFilePath
-  line?: number
-  sourceDir?: string
-  tag?: NodeTag
-  type?: NodeType
+  readonly line?: number
+  readonly sourceDir?: string
+  readonly tag?: NodeTag
+  readonly type?: NodeType
 }
 
 /** a node in the standardized Markdown/HTML AST */

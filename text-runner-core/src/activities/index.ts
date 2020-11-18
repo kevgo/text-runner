@@ -12,10 +12,10 @@ export type List = Activity[]
  * on a particular region of a particular document.
  */
 export interface Activity {
-  actionName: string
+  readonly actionName: string
   document: ast.NodeList
-  location: files.Location
-  region: ast.NodeList
+  readonly location: files.Location
+  readonly region: ast.NodeList
 }
 
 /** scaffoldActivity creates a test Activity from the given data */

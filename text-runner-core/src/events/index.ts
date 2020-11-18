@@ -13,48 +13,48 @@ export type Handler = (arg: any) => void
 
 /** signals the start of a test suite */
 export interface Start {
-  stepCount: number
+  readonly stepCount: number
 }
 
 export interface Result {
-  status: ResultStatus
+  readonly status: ResultStatus
 }
 
 export type ResultStatus = "failed" | "skipped" | "success" | "warning"
 
 /** signals a failed activity */
 export interface Failed {
-  activity: Activity
-  error: Error
-  finalName: string
+  readonly activity: Activity
+  readonly error: Error
+  readonly finalName: string
   /** captured output (via action.log) while executing the activity */
-  output: string
-  status: "failed"
+  readonly output: string
+  readonly status: "failed"
 }
 
 /** signals a skipped activity */
 export interface Skipped {
-  activity: Activity
-  finalName: string
-  output: string
-  status: "skipped"
+  readonly activity: Activity
+  readonly finalName: string
+  readonly output: string
+  readonly status: "skipped"
 }
 
 /** signals a successful activity */
 export interface Success {
-  activity: Activity
-  finalName: string
+  readonly activity: Activity
+  readonly finalName: string
   /** captured output (via action.log) while executing the activity */
-  output: string
-  status: "success"
+  readonly output: string
+  readonly status: "success"
 }
 
 /** signals an activity succeeded but with warnings */
 export interface Warning {
-  activity?: Activity
-  finalName?: string
-  message: string
-  status: "warning"
+  readonly activity?: Activity
+  readonly finalName?: string
+  readonly message: string
+  readonly status: "warning"
 }
 
 export function instanceOfFailed(event: Result): event is Failed {

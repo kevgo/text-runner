@@ -15,5 +15,5 @@ export interface Formatter {
 
 /** FinishArgs defines the arguments provided to the `finish` method. */
 export interface FinishArgs {
-  results: tr.ActivityResults
+  readonly results: tr.ActivityResults
 }

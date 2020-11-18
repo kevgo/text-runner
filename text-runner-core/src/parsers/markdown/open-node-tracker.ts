@@ -3,8 +3,8 @@ import { UserError } from "../../errors/user-error"
 import * as files from "../../filesystem/index"
 
 interface Entry {
-  endLine: number
-  node: ast.Node
+  readonly endLine: number
+  readonly node: ast.Node
 }
 
 /** helps find open MarkdownIt AST nodes */

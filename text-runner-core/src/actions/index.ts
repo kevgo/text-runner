@@ -45,6 +45,4 @@ export interface Args {
 /** the result of an action function */
 export type Result = 254 | undefined
 
-export interface FunctionRepo {
-  [key: string]: Action
-}
+export type FunctionRepo = Record<string, Action>

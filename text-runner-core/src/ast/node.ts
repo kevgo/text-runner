@@ -1,8 +1,6 @@
 import * as files from "../filesystem/index"
 
-export interface NodeAttributes {
-  [key: string]: string
-}
+export type NodeAttributes = Record<string, string>
 
 /** the MarkdownIt node types */
 export type NodeType =

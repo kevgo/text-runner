@@ -4,7 +4,7 @@ import { Target, Types } from "./index"
 import { targetURL } from "./target-url"
 
 export class List {
-  readonly targets: { [key: string]: Target[] }
+  readonly targets: Record<string, Target[]>
 
   constructor() {
     this.targets = {}

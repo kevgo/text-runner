@@ -17,10 +17,10 @@ export class Parser {
    * Parse returns the standard AST for the given HTML text.
    */
   parse(text: string, startingLocation: files.Location): ast.NodeList {
-    const result = new ast.NodeList()
-    const htmlAst = parse5.parse(text, { sourceCodeLocationInfo: true })
-    const htmlNode = this.findNodeWithName(htmlAst.childNodes, "html")
+    const htmlDoc = parse5.parse(text, { sourceCodeLocationInfo: true })
+    const htmlNode = this.findNodeWithName(htmlDoc.childNodes, "html")
     const bodyNode = this.findNodeWithName(htmlNode.childNodes, "body")
+    const result = new ast.NodeList()
     for (const childNode of bodyNode.childNodes) {
       result.push(...this.standardizeNode(childNode, startingLocation.withLine(startingLocation.line)))
     }

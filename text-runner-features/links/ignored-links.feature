@@ -36,5 +36,5 @@ Feature: ignore link patterns
       """
     And it doesn't print:
       """
-      1.md:1 -- Test
+      1.md:1
       """

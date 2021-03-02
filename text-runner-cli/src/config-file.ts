@@ -26,6 +26,9 @@ exclude: []
 # the formatter to use (detailed, dot, progress, summary)
 format: detailed
 
+# regex patterns for link targets to ignore
+ignoreLinkTargets: []
+
 # Define which folders of your Markdown source get compiled to HTML
 # and published under a different URL path.
 #

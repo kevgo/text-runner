@@ -13,7 +13,7 @@
 
 Text-Runner is an agile documentation tool that helps create living end-user
 readable documentation. An example is the text you are reading right now, which
-is verified for correctness by TextRunner.
+TextRunner verifies for correctness.
 
 If you tell it how, TextRunner can read and understand any form of
 Markdown-formatted text in any human language as well as complex data in tables,

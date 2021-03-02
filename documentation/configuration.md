@@ -22,7 +22,7 @@ This creates a configuration file called <a type="workspace/existing-file">
 files: "**/*.md"
 
 # black-list of files not to test
-# This is applied after the white-list above.
+# applied after the white-list above.
 exclude: []
 
 # the formatter to use (detailed, dot, progress, summary)
@@ -32,15 +32,15 @@ format: detailed
 # and published under a different URL path.
 #
 # In this example, the public URL "/blog/foo"
-# is hosted as "post/foo.md":
+# would be hosted as "post/foo.md":
 # publications:
 #   - localPath: /posts/
 #     publicPath: /blog
 #     publicExtension: ''
 
 # Name of the default filename in folders.
-# If this setting is given, and a link points to a folder,
-# the link is assumed to point to the default file in that folder.
+# If this is set, and a link points to a folder,
+# Text-Runner assumes the link points to the default file in that folder.
 # defaultFile: index.md
 
 # prefix that makes anchor tags active regions

@@ -36,7 +36,7 @@ Feature: generating a configuration file
       #     publicExtension: ''
 
       # Name of the default filename in folders.
-      # If this is set, and a link points to a folder,
+      # If you set this, and a link points to a folder,
       # Text-Runner assumes the link points to the default file in that folder.
       # defaultFile: index.md
 

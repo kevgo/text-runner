@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "cucumber": "6.0.5",
-    "mocha": "8.0.1",
+    "mocha": "8.3.0",
     "text-runner": "5.0.0-pre11",
     "textrun-action": "0.0.13"
   }

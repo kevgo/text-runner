@@ -30,6 +30,11 @@ Feature: ignore link patterns
       a [normal link](text-run.yml)
       """
     When running Text-Runner
-    Then it emits these events:
-      | FILENAME | LINE | ACTION     |
-      | 1.md     | 2    | check-link |
+    Then it prints:
+      """
+      1.md:2 -- link to local file text-run.yml
+      """
+    And it doesn't print:
+      """
+      1.md:1 -- Test
+      """

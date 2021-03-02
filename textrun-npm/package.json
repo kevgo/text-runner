@@ -7,13 +7,13 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "fs-extra": "9.0.1",
+    "fs-extra": "9.1.0",
     "text-runner-core": "5.0.0-pre11"
   },
   "devDependencies": {
-    "colorette": "1.2.1",
+    "colorette": "1.2.2",
     "cucumber": "6.0.5",
-    "mocha": "8.0.1",
+    "mocha": "8.3.0",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.0-pre11",
     "textrun-action": "0.0.13",

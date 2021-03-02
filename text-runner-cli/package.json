@@ -6,10 +6,10 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
-    "@babel/code-frame": "7.10.4",
+    "@babel/code-frame": "7.12.13",
     "cli-cursor": "3.1.0",
-    "cli-progress": "3.8.2",
-    "colorette": "1.2.1",
+    "cli-progress": "3.9.0",
+    "colorette": "1.2.2",
     "end-child-processes": "1.0.1",
     "minimist": "1.2.5",
     "text-runner-core": "5.0.0-pre11",
@@ -17,11 +17,11 @@
   },
   "description": "CLI test runner for documentation written in Markdown",
   "devDependencies": {
-    "@types/babel__code-frame": "7.0.1",
-    "@types/cli-progress": "3.7.0",
-    "@types/minimist": "1.2.0",
+    "@types/babel__code-frame": "7.0.2",
+    "@types/cli-progress": "3.9.0",
+    "@types/minimist": "1.2.1",
     "@types/yamljs": "0.2.31",
-    "mocha": "8.0.1"
+    "mocha": "8.3.0"
   },
   "files": [
     "bin",

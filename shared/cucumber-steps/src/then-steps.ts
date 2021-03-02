@@ -367,14 +367,14 @@ Then("the {string} directory is now deleted", async function (directoryPath: str
   throw new Error(`file '${directoryPath}' still exists`)
 })
 
-Then("the workspace now/still contains a file {string} with content:", async function (
-  fileName: string,
-  expectedContent: string
-) {
-  const world = this as TRWorld
-  const actualContent = await fs.readFile(world.workspace.joinStr("tmp", fileName), "utf8")
-  assert.equal(actualContent.trim(), expectedContent.trim())
-})
+Then(
+  "the workspace now/still contains a file {string} with content:",
+  async function (fileName: string, expectedContent: string) {
+    const world = this as TRWorld
+    const actualContent = await fs.readFile(world.workspace.joinStr("tmp", fileName), "utf8")
+    assert.equal(actualContent.trim(), expectedContent.trim())
+  }
+)
 
 Then("the test workspace now contains a directory {string}", async function (name) {
   const world = this as TRWorld

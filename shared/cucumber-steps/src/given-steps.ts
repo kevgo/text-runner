@@ -49,21 +49,22 @@ Given("I am in a directory that contains the {string} example", async function (
   await fse.copy(path.join("documentation", "examples", exampleName), world.workspace.platformified())
 })
 
-Given("I am in a directory that contains the {string} example with the configuration file:", async function (
-  exampleName,
-  configFileContent
-) {
-  const world = this as TRWorld
-  await fse.copy(path.join("documentation", "examples", exampleName), world.workspace.platformified())
-  await fs.writeFile(world.workspace.joinStr("text-run.yml"), configFileContent)
-})
+Given(
+  "I am in a directory that contains the {string} example with the configuration file:",
+  async function (exampleName, configFileContent) {
+    const world = this as TRWorld
+    await fse.copy(path.join("documentation", "examples", exampleName), world.workspace.platformified())
+    await fs.writeFile(world.workspace.joinStr("text-run.yml"), configFileContent)
+  }
+)
 
-Given("I am in a directory that contains the {string} example( without a configuration file)", async function (
-  exampleName
-) {
-  const world = this as TRWorld
-  await fse.copy(path.join("documentation", "examples", exampleName), world.workspace.platformified())
-})
+Given(
+  "I am in a directory that contains the {string} example( without a configuration file)",
+  async function (exampleName) {
+    const world = this as TRWorld
+    await fse.copy(path.join("documentation", "examples", exampleName), world.workspace.platformified())
+  }
+)
 
 Given("the source code contains a directory {string}", function (dirName) {
   const world = this as TRWorld

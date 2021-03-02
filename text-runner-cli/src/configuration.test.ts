@@ -12,16 +12,16 @@ suite("CLIConfiguration", function () {
     })
 
     test("userConfig overrides fileConfig", function () {
-      const config = new configuration.Data({
+      const fileConfig = new configuration.Data({
         formatterName: "dot",
         files: "**/*.md",
         online: true,
       })
-      const other = new configuration.Data({
+      const userConfig = new configuration.Data({
         files: "1.md",
         online: false,
       })
-      const result = config.merge(other)
+      const result = fileConfig.merge(userConfig)
       assert.deepEqual(
         result,
         new configuration.Data({

@@ -31,6 +31,9 @@ interface SharedValues {
   /** glob of the files to test */
   files: string
 
+  /** link patterns to ignore */
+  ignoreLinkTargets: RegExp[]
+
   /** whether to skip built-in tests that require a network connection */
   online: boolean
 

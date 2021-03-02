@@ -1,18 +1,35 @@
 Feature: ignore link patterns
 
+
+  Scenario: regex via API
+    Given the source code contains a file "1.md" with content:
+      """
+      a [placeholder link]($PLACEHOLDER)
+      a [normal link](1.md)
+      """
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, ignoreLinkTargets: [/^\$/]})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
+    Then it emits these events:
+      | FILENAME | LINE | ACTION     |
+      | 1.md     | 2    | check-link |
+
   @cli
-  Scenario: regex given
+  Scenario: regex via CLI
     Given the source code contains a file "text-run.yml" with content:
       """
-      ignoreLinks:
-        - "\\(\\$.*\\)"
+      ignoreLinkTargets:
+        - "^\\$"
       """
     Given the source code contains a file "1.md" with content:
       """
       a [placeholder link]($PLACEHOLDER)
       a [normal link](text-run.yml)
       """
-    When calling Text-Runner
+    When running Text-Runner
     Then it emits these events:
       | FILENAME | LINE | ACTION     |
       | 1.md     | 2    | check-link |

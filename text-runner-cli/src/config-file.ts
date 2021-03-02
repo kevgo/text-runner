@@ -91,6 +91,7 @@ function parse(fileContent: string): config.Data {
     exclude: fileData.exclude,
     files: fileData.files,
     formatterName: fileData.format,
+    ignoreLinkTargets: fileData.ignoreLinkTargets,
     online: fileData.online,
     publications: fileData.publications,
     showSkipped: fileData.showSkipped,

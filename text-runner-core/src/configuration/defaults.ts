@@ -14,6 +14,7 @@ export function defaults(): configuration.CompleteAPIData {
     emptyWorkspace: true,
     exclude: [],
     files: "**/*.md",
+    ignoreLinkTargets: [],
     online: false,
     publications: new Publications(),
     scaffoldLanguage: "js",

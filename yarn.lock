@@ -2532,13 +2532,6 @@ debug@3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha512-pYAIzeRo8J6KPEaJ0VWOh5Pzkbw/RetuzehGM7QRRX5he4fPHx2rdKMB256ehJCkX+XRQm16eZLqLNS8RSZXZw==
-  dependencies:
-    ms "^2.1.1"
-
 debug@4.3.1, debug@^4.2.0:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
@@ -2832,12 +2825,12 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "^0.6.2"
 
-end-child-processes@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/end-child-processes/-/end-child-processes-1.0.1.tgz#13aa8342638dee30b58973bd6b95d5b5ae6b62fb"
-  integrity sha512-Wt+GavyhSIc57gaCFW9UAAS+82QpD4XC32XjlkBQEEAcUy1HHygevXo09+HWjpY/uhiDky7ms2tw8hOrZZGQ+w==
+end-child-processes@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/end-child-processes/-/end-child-processes-1.0.3.tgz#1e4cb7e954b8b2ab3043c123c971d1bba8b4d48d"
+  integrity sha512-+efaOv+nQ8U3vUtYKBRUuR63+c/hqdjQAd3uFGk0IqsX03s+lcxA2nPKMW6XINT/GsU/MGc5r68DwtuWzFYlcQ==
   dependencies:
-    debug "4.1.1"
+    debug "4.3.1"
     ps-tree "1.2.0"
 
 end-of-stream@^1.0.0, end-of-stream@^1.1.0:

@@ -4,7 +4,7 @@ import * as textRunner from "text-runner-core"
 import * as helpers from "./helpers"
 import { TRWorld } from "./world"
 
-When(/^calling:$/, async function (jsText: string) {
+When(/^calling:$/, { timeout: 20_000 }, async function (jsText: string) {
   const world = this as TRWorld
   const config: textRunner.configuration.APIData = { sourceDir: world.workspace.platformified() }
   // define a few variables here, they will be overwritten in the eval call

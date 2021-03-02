@@ -1,6 +1,5 @@
 Feature: ignore link patterns
 
-
   @api
   Scenario: regex via API
     Given the source code contains a file "1.md" with content:

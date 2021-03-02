@@ -8,7 +8,7 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "assert-no-diff": "3.0.4",
+    "assert-no-diff": "3.0.5",
     "eol": "0.9.1",
     "text-runner-core": "5.0.0-pre11"
   },

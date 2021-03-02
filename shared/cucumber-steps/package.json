@@ -6,7 +6,7 @@
     "@types/rimraf": "3.0.0",
     "array-flatten": "3.0.0",
     "assert-no-diff": "3.0.6",
-    "end-child-processes": "1.0.1",
+    "end-child-processes": "1.0.3",
     "fs-extra": "9.1.0",
     "glob": "7.1.6",
     "mocha": "8.3.0",

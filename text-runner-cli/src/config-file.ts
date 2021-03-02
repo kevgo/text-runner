@@ -26,6 +26,9 @@ exclude: []
 # the formatter to use (detailed, dot, progress, summary)
 format: detailed
 
+# regex patterns for link targets to ignore
+ignoreLinkTargets: []
+
 # Define which folders of your Markdown source get compiled to HTML
 # and published under a different URL path.
 #
@@ -91,6 +94,7 @@ function parse(fileContent: string): config.Data {
     exclude: fileData.exclude,
     files: fileData.files,
     formatterName: fileData.format,
+    ignoreLinkTargets: fileData.ignoreLinkTargets,
     online: fileData.online,
     publications: fileData.publications,
     showSkipped: fileData.showSkipped,

@@ -15,6 +15,7 @@ export class Data {
   exclude?: string | string[]
   files?: string // files to test
   formatterName?: formatters.Names // name of the formatter to use
+  ignoreLinkTargets?: RegExp[]
   online?: boolean
   publications?: tr.configuration.Publications
   scaffoldLanguage?: commands.ScaffoldLanguage
@@ -63,6 +64,9 @@ export class Data {
     }
     if (this.files != null) {
       result.files = this.files
+    }
+    if (this.ignoreLinkTargets != null) {
+      result.ignoreLinkTargets = this.ignoreLinkTargets.map(ignoreLink => new RegExp(ignoreLink))
     }
     if (this.online != null) {
       result.online = this.online

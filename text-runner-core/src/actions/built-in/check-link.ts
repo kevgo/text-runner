@@ -13,6 +13,12 @@ export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> 
     throw new Error("link without target")
   }
 
+  for (const ignoreLinkTarget of action.configuration.ignoreLinkTargets) {
+    if (ignoreLinkTarget.test(target)) {
+      return action.SKIPPING
+    }
+  }
+
   action.name(`link to ${target}`)
 
   if (helpers.isMailtoLink(target)) {

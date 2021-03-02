@@ -2,7 +2,7 @@
   "name": "documentation",
   "version": "0.0.0",
   "devDependencies": {
-    "assert-no-diff": "3.0.4",
+    "assert-no-diff": "3.0.6",
     "custom-action-coffeescript": "0.0.0",
     "custom-action-examples": "0.0.0",
     "custom-action-typescript": "0.0.0",

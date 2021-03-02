@@ -5,7 +5,7 @@
     "@types/ps-tree": "1.1.0",
     "@types/rimraf": "3.0.0",
     "array-flatten": "3.0.0",
-    "assert-no-diff": "3.0.4",
+    "assert-no-diff": "3.0.6",
     "end-child-processes": "1.0.1",
     "fs-extra": "9.1.0",
     "glob": "7.1.6",

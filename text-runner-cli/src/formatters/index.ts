@@ -1,9 +1,9 @@
 import * as tr from "text-runner-core"
 
 export * as formatters from "."
+export { instantiate } from "./instantiate"
 export { printSummary } from "./print-summary"
 export { printUserError } from "./print-user-error"
-export { instantiate } from "./instantiate"
 
 /** Names defines the names of all built-in formatters */
 export type Names = "detailed" | "dot" | "progress" | "summary"

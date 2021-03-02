@@ -1,4 +1,4 @@
-export { defaults, addDefaults } from "./defaults"
-export { Data, APIData, CompleteAPIData } from "./data"
+export { APIData, CompleteAPIData, Data } from "./data"
+export { addDefaults, defaults } from "./defaults"
 export { Publication } from "./publication"
 export { Publications } from "./publications"

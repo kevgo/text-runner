@@ -1,6 +1,6 @@
+export * from "./activity-collector"
 export * from "./parallel"
 export * from "./sequential"
-export * from "./activity-collector"
 export * from "./stopwatch"
 
 /** LogFn defines the signature of the "log" function available to actions */

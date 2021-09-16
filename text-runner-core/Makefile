@@ -34,10 +34,11 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../node_modules/.bin/depcheck
 
 parallel: lint  # runs all tests in parallel
-	${CURDIR}/bin/text-run static --format=dot &
-	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
-	${CURDIR}/bin/text-run dynamic --format=dot
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/bin/text-run static --format=dot & \
+	${CURDIR}/node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" & \
+	${CURDIR}/bin/text-run dynamic --format=dot & \
+	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'` & \
+	wait
 
 publish: clean build  # publishes this package
 	npm publish

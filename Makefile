@@ -108,7 +108,7 @@ publish-all: clean-all build-all  # publishes all code bases
 setup:  # prepares the mono-repo for development after cloning
 	find . -type d -name node_modules | xargs rm -rf
 	yarn
-	make build-all
+	make --no-print-directory build-all
 
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc

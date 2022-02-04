@@ -15,7 +15,7 @@
     "rimraf": "3.0.2",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.0",
-    "tmp-promise": "3.0.2"
+    "tmp-promise": "3.0.3"
   },
   "license": "ISC",
   "private": true

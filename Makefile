@@ -1,3 +1,6 @@
+.DEFAULT_GOAL := help
+
+
 # Lerna terminology:
 # - dependents = downstreams (my dependents, those that are dependent on me)
 # - dependencies = upstreams (my dependencies, those that I depend on)
@@ -68,7 +71,7 @@ fix-open:  # runs the auto-fixes of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory fix
 
 help:  # prints all make targets
-	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
+	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' |grep -v '.SILENT' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints the root directory
 	echo linting root dir ...

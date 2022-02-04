@@ -6,9 +6,9 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
-    "@babel/code-frame": "7.12.13",
+    "@babel/code-frame": "7.16.7",
     "cli-cursor": "3.1.0",
-    "cli-progress": "3.9.0",
+    "cli-progress": "3.10.0",
     "colorette": "1.2.2",
     "end-child-processes": "1.0.3",
     "minimist": "1.2.5",

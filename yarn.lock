@@ -9,12 +9,12 @@
   dependencies:
     "@babel/highlight" "^7.10.4"
 
-"@babel/code-frame@7.12.13", "@babel/code-frame@^7.12.13":
-  version "7.12.13"
-  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
-  integrity sha512-HV1Cm0Q3ZrpCR93tkWOYiuYIgLxZXZFVG2VgK+MBWjUqZTundupbfx2aXarXuw5Ko5aMcjtJgbSs4vUGBS5v6g==
+"@babel/code-frame@7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
+  integrity sha512-iAXqUn8IIeBTNd72xsFlgaXHkMBMt6y4HJp1tIaK465CWLT/fG1aqB7ykr95gHHmlBdGbFeWWfyB4NJJ0nmeIg==
   dependencies:
-    "@babel/highlight" "^7.12.13"
+    "@babel/highlight" "^7.16.7"
 
 "@babel/code-frame@^7.0.0":
   version "7.10.4"
@@ -22,6 +22,13 @@
   integrity sha512-vG6SvB6oYEhvgisZNFRmRCUkLz11c7rp+tbNTynGqc6mS1d5ATd/sGyV6W0KZZnXRKMTzZDRgQT3Ou9jhpAfUg==
   dependencies:
     "@babel/highlight" "^7.10.4"
+
+"@babel/code-frame@^7.12.13":
+  version "7.12.13"
+  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.13.tgz#dcfc826beef65e75c50e21d3837d7d95798dd658"
+  integrity sha512-HV1Cm0Q3ZrpCR93tkWOYiuYIgLxZXZFVG2VgK+MBWjUqZTundupbfx2aXarXuw5Ko5aMcjtJgbSs4vUGBS5v6g==
+  dependencies:
+    "@babel/highlight" "^7.12.13"
 
 "@babel/generator@^7.13.0":
   version "7.13.9"
@@ -65,6 +72,11 @@
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.12.11.tgz#c9a1f021917dcb5ccf0d4e453e399022981fc9ed"
   integrity sha512-np/lG3uARFybkoHokJUmf1QfEvRVCPbmQeUQpKow5cQ3xWrV9i3rUHodKDJPQfTVX61qKi+UdYk8kik84n7XOw==
 
+"@babel/helper-validator-identifier@^7.16.7":
+  version "7.16.7"
+  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.16.7.tgz#e8c602438c4a8195751243da9031d1607d247cad"
+  integrity sha512-hsEnFemeiW4D08A5gUAZxLBTXpZ39P+a+DGDsHw1yxqyQ/jzFEnxf5uTEGp+3bzAbNOxU1paTgYS4ECU/IgfDw==
+
 "@babel/highlight@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.10.4.tgz#7d1bdfd65753538fabe6c38596cdb76d9ac60143"
@@ -80,6 +92,15 @@
   integrity sha512-4vrIhfJyfNf+lCtXC2ck1rKSzDwciqF7IWFhXXrSOUC2O5DrVp+w4c6ed4AllTxhTkUP5x2tYj41VaxdVMMRDw==
   dependencies:
     "@babel/helper-validator-identifier" "^7.12.11"
+    chalk "^2.0.0"
+    js-tokens "^4.0.0"
+
+"@babel/highlight@^7.16.7":
+  version "7.16.10"
+  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.16.10.tgz#744f2eb81579d6eea753c227b0f570ad785aba88"
+  integrity sha512-5FnTQLSLswEj6IkgVw5KusNUUFY9ZGqe/TRFnP/BKYHYgfh7tc+C7mwiy95/yNP7Dh9x580Vv8r7u7ZfTBFxdw==
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.16.7"
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
@@ -2098,12 +2119,11 @@ cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
-cli-progress@3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/cli-progress/-/cli-progress-3.9.0.tgz#25db83447deb812e62d05bac1af9aec5387ef3d4"
-  integrity sha512-g7rLWfhAo/7pF+a/STFH/xPyosaL1zgADhI0OM83hl3c7S43iGvJWEAV2QuDOnQ8i6EMBj/u4+NTd0d5L+4JfA==
+cli-progress@3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/cli-progress/-/cli-progress-3.10.0.tgz#63fd9d6343c598c93542fdfa3563a8b59887d78a"
+  integrity sha512-kLORQrhYCAtUPLZxqsAt2YJGOvRdt34+O6jl5cQGb7iF3dM55FQZlTR+rQyIK9JUcO9bBMwZsTlND+3dmFU2Cw==
   dependencies:
-    colors "^1.1.2"
     string-width "^4.2.0"
 
 cli-table3@^0.5.1:
@@ -3656,10 +3676,10 @@ glob-parent@^5.0.0, glob-parent@^5.1.0, glob-parent@~5.1.0:
   dependencies:
     is-glob "^4.0.1"
 
-glob-promise@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/glob-promise/-/glob-promise-4.1.0.tgz#cde1692fd7442ce24b50e123dfe8b5f8428f35a3"
-  integrity sha512-wOdaX1+QJi3ldbjq4fXX/BbGSjhsG6eGXqMnBjQj9ubDiDLvrXbbXRj02rA0CXbMMM7J58dajiQ72va63D7pNw==
+glob-promise@4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/glob-promise/-/glob-promise-4.2.2.tgz#15f44bcba0e14219cd93af36da6bb905ff007877"
+  integrity sha512-xcUzJ8NWN5bktoTIX7eOclO1Npxd/dyVqUJxlLIDasT4C7KZyqlPIwkdJ0Ypiy3p2ZKahTjK4M9uC3sNSfNMzw==
   dependencies:
     "@types/glob" "^7.1.3"
 
@@ -3672,6 +3692,18 @@ glob@7.1.6, glob@^7.0.5, glob@^7.1.1, glob@^7.1.3, glob@^7.1.4, glob@^7.1.6:
   version "7.1.6"
   resolved "https://registry.yarnpkg.com/glob/-/glob-7.1.6.tgz#141f33b81a7c2492e125594307480c46679278a6"
   integrity sha512-LwaxwyZ72Lk7vZINtNNrywX0ZuLyStrdDtabefZKAY5ZGJhVtgdznluResxNmPitE0SAO+O26sWTHeKSI2wMBA==
+  dependencies:
+    fs.realpath "^1.0.0"
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "^3.0.4"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
+
+glob@7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-7.2.0.tgz#d15535af7732e02e948f4c41628bd910293f6023"
+  integrity sha512-lmLf6gtyrPq8tTjSmrO94wBeQbFR3HbLHbuyD69wuyQkImp2hWqMGB47OX65FBkPffO641IP9jWa1z4ivqG26Q==
   dependencies:
     fs.realpath "^1.0.0"
     inflight "^1.0.4"
@@ -4824,10 +4856,10 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-markdown-it@12.0.4:
-  version "12.0.4"
-  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-12.0.4.tgz#eec8247d296327eac3ba9746bdeec9cfcc751e33"
-  integrity sha512-34RwOXZT8kyuOJy25oJNJoulO8L0bTHYWXcdZBYZqFnjIy3NgjeoM3FmPXIOFQ26/lSHYMr8oc62B6adxXcb3Q==
+markdown-it@12.3.2:
+  version "12.3.2"
+  resolved "https://registry.yarnpkg.com/markdown-it/-/markdown-it-12.3.2.tgz#bf92ac92283fe983fe4de8ff8abfb5ad72cd0c90"
+  integrity sha512-TchMembfxfNVpHkbtriWltGWc+m3xszaRD0CZup7GFFhzIgQqxIfn3eGj1yZpfuflzPvfkt611B2Q/Bsk1YnGg==
   dependencies:
     argparse "^2.0.1"
     entities "~2.1.0"
@@ -7043,6 +7075,13 @@ tmp-promise@3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/tmp-promise/-/tmp-promise-3.0.2.tgz#6e933782abff8b00c3119d63589ca1fb9caaa62a"
   integrity sha512-OyCLAKU1HzBjL6Ev3gxUeraJNlbNingmi8IrHHEsYH8LTmEuhvYfqvhn2F/je+mjf4N58UmZ96OMEy1JanSCpA==
+  dependencies:
+    tmp "^0.2.0"
+
+tmp-promise@3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/tmp-promise/-/tmp-promise-3.0.3.tgz#60a1a1cc98c988674fcbfd23b6e3367bdeac4ce7"
+  integrity sha512-RwM7MoPojPxsOBYnyd2hy0bxtIlVrihNs9pj5SUvY8Zz1sQcQG2tG1hSr8PDxfgEB8RNKDhqbIlroIarSNDNsQ==
   dependencies:
     tmp "^0.2.0"
 

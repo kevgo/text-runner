@@ -9,9 +9,11 @@ import * as config from "./configuration"
  * Parses the command-line options received and returns them
  * structured as the command to run and options.
  */
-export function parse(
-  argv: string[]
-): { cmdLineConfig: config.Data; commandName: string; debugSubcommand?: tr.commands.DebugSubcommand } {
+export function parse(argv: string[]): {
+  cmdLineConfig: config.Data
+  commandName: string
+  debugSubcommand?: tr.commands.DebugSubcommand
+} {
   // remove optional node parameter
   if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
     argv.splice(0, 1)

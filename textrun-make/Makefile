@@ -1,3 +1,6 @@
+.DEFAULT_GOAL := help
+
+
 build:  # builds for the current platform
 	echo textrun-make build ...
 	${CURDIR}/../node_modules/.bin/tsc -p tsconfig-build.json

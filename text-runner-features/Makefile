@@ -1,3 +1,6 @@
+.DEFAULT_GOAL := help
+
+
 build:
 
 clean:

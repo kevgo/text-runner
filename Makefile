@@ -1,3 +1,6 @@
+.DEFAULT_GOAL := help
+
+
 # Lerna terminology:
 # - dependents = downstreams (my dependents, those that are dependent on me)
 # - dependencies = upstreams (my dependencies, those that I depend on)

@@ -7,7 +7,7 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "fs-extra": "9.1.0",
+    "fs-extra": "10.0.0",
     "text-runner-core": "5.0.0"
   },
   "devDependencies": {

@@ -33,7 +33,7 @@
     "eslint-plugin-typescript-sort-keys": "1.5.0",
     "lerna": "3.22.1",
     "prettier": "2.5.1",
-    "ts-node": "9.1.1",
+    "ts-node": "10.4.0",
     "typescript": "4.2.2"
   }
 }

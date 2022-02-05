@@ -1,5 +1,13 @@
 # Change Log
 
+## 5.0.1
+
+_Feb 4 2022_
+
+#### Bug fixes
+
+- Change starter script to Node ([1416](https://github.com/kevgo/text-runner/pull/1416))
+
 ## 5.0.0
 
 _Oct 13 2020_

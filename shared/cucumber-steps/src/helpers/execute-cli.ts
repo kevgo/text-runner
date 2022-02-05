@@ -1,4 +1,3 @@
-import * as childProcess from "child_process"
 import * as observableProcess from "observable-process"
 
 import { TRWorld } from "../world"
@@ -11,7 +10,7 @@ export async function executeCLI(
   world: TRWorld,
   opts: { cwd?: string } = {}
 ): Promise<observableProcess.FinishedProcess> {
-  const args: childProcess.SpawnOptions = {}
+  const args: observableProcess.StartOptions = {}
   args.cwd = opts.cwd || world.workspace.platformified()
   if (world.debug) {
     args.env = {

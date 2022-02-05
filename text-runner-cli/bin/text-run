@@ -1,10 +1,3 @@
-#!/usr/bin/env bash
+#!/usr/bin/env node
 
-# NOTE: Yarn creates symlinks of binaries in workspaces.
-#       We need to resolve them to find the correct path to index.js
-if [[ -L $0 ]]; then
-  cliPath=$( dirname "$(realpath $0)" )
-else
-  cliPath="$( dirname "${BASH_SOURCE[0]}")"
-fi
-node --enable-source-maps $cliPath/../dist/index.js "$@"
+require("../dist/index")

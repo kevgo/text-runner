@@ -6,9 +6,9 @@
     "text-run": "bin/text-run"
   },
   "dependencies": {
-    "@babel/code-frame": "7.12.13",
+    "@babel/code-frame": "7.16.7",
     "cli-cursor": "3.1.0",
-    "cli-progress": "3.9.0",
+    "cli-progress": "3.10.0",
     "colorette": "1.2.2",
     "end-child-processes": "1.0.3",
     "minimist": "1.2.5",
@@ -17,11 +17,11 @@
   },
   "description": "CLI test runner for documentation written in Markdown",
   "devDependencies": {
-    "@types/babel__code-frame": "7.0.2",
-    "@types/cli-progress": "3.9.0",
-    "@types/minimist": "1.2.1",
+    "@types/babel__code-frame": "7.0.3",
+    "@types/cli-progress": "3.9.2",
+    "@types/minimist": "1.2.2",
     "@types/yamljs": "0.2.31",
-    "mocha": "8.3.0"
+    "mocha": "9.2.0"
   },
   "files": [
     "bin",

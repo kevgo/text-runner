@@ -1,21 +1,21 @@
 {
   "name": "textrun-javascript",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/index.js",
   "license": "ISC",
   "files": [
     "dist/**/*.js"
   ],
   "dependencies": {
-    "text-runner-core": "5.0.0"
+    "text-runner-core": "^5.0.1"
   },
   "devDependencies": {
     "cucumber": "6.0.5",
     "mocha": "9.2.0",
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.0",
-    "textrun-extension": "0.1.0",
-    "textrun-npm": "0.1.0",
+    "text-runner": "^5.0.1",
+    "textrun-extension": "^0.1.1",
+    "textrun-npm": "^0.1.1",
     "ts-node": "10.4.0"
   }
 }

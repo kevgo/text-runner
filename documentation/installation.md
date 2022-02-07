@@ -14,7 +14,7 @@ including macOS, Windows, and Linux. To get started:
 - install TextRunner:
 
   <pre type="npm/install" dir="../text-runner-cli">
-  npm install --include=dev text-runner
+  npm install -D text-runner
   </pre>
 
 - make sure it works by running:

@@ -11,7 +11,7 @@
     "cli-progress": "3.10.0",
     "colorette": "1.2.2",
     "end-child-processes": "1.0.3",
-    "minimist": "1.2.5",
+    "minimist": "1.2.6",
     "text-runner-core": "5.0.1",
     "yamljs": "0.3.0"
   },

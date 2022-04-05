@@ -6,7 +6,8 @@ _Feb 4 2022_
 
 #### Bug fixes
 
-- Change starter script to Node ([1416](https://github.com/kevgo/text-runner/pull/1416))
+- Change starter script to Node
+  ([1416](https://github.com/kevgo/text-runner/pull/1416))
 
 ## 5.0.0
 

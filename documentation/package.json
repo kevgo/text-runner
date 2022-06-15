@@ -1,6 +1,8 @@
 {
   "name": "documentation",
   "version": "0.0.0",
+  "private": true,
+  "license": "ISC",
   "devDependencies": {
     "assert-no-diff": "3.0.6",
     "custom-action-coffeescript": "0.0.0",
@@ -13,7 +15,5 @@
     "textrun-npm": "0.1.0",
     "textrun-shell": "0.1.0",
     "textrun-workspace": "0.1.0"
-  },
-  "license": "ISC",
-  "private": true
+  }
 }

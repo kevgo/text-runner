@@ -18,7 +18,7 @@ fix:  # runs the auto-fixers
 	echo shared features auto-fixes ...
 	${CURDIR}/../../node_modules/.bin/eslint . --fix --ext .ts --ignore-path ../../.eslintignore
 	${CURDIR}/../../node_modules/.bin/prettier --write .
-	${CURDIR}/../node_modules/.bin/sort-package-json
+	${CURDIR}/../../node_modules/.bin/sort-package-json
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -28,7 +28,7 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../../node_modules/.bin/prettier -l .
 	${CURDIR}/../../node_modules/.bin/eslint . --ext .ts --ignore-path ../../.eslintignore
 	${CURDIR}/../../node_modules/.bin/depcheck --config=../../.depcheckrc
-	${CURDIR}/../node_modules/.bin/sort-package-json --check
+	${CURDIR}/../../node_modules/.bin/sort-package-json --check
 
 test: unit cuke lint doc  # runs all tests
 test-lerna: unit cuke-lerna lint doc  # for running all tests inside Lerna

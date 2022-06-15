@@ -2,12 +2,12 @@
   "name": "textrun-extension",
   "version": "0.1.1",
   "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
+  "license": "ISC",
   "main": "dist/index.js",
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts"
   ],
-  "license": "ISC",
   "dependencies": {
     "text-runner-core": "5.0.1"
   },

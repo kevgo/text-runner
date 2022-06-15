@@ -13,6 +13,7 @@ doc: build  # runs the documentation tests
 fix:  # runs the auto-fixers
 	echo documentation auto-fixes ...
 	${CURDIR}/../node_modules/.bin/prettier --write .
+	${CURDIR}/../node_modules/.bin/sort-package-json
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -21,6 +22,7 @@ lint:  # lints all files in this codebase
 	echo documentation linters ...
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc
+	${CURDIR}/../node_modules/.bin/sort-package-json --check
 
 test: unit cuke lint doc  # runs all tests
 test-lerna: lint unit cuke-lerna doc  # for running all tests inside Lerna

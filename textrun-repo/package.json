@@ -2,8 +2,8 @@
   "name": "textrun-repo",
   "version": "0.1.1",
   "description": "Text-Runner actions for verifying the content of the current repository",
-  "main": "dist/index.js",
   "license": "ISC",
+  "main": "dist/index.js",
   "files": [
     "dist/**/*.js"
   ],

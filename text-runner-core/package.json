@@ -1,7 +1,22 @@
 {
   "name": "text-runner-core",
   "version": "5.0.1",
+  "description": "Tests documentation written in MarkDown",
+  "homepage": "https://github.com/kevgo/text-runner",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kevgo/text-runner.git"
+  },
+  "license": "ISC",
   "author": "Kevin Goslar",
+  "main": "dist/text-runner.js",
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.d.ts"
+  ],
+  "scripts": {
+    "test": "make test"
+  },
   "dependencies": {
     "@sindresorhus/slugify": "1.1.0",
     "anchor-markdown-header": "0.5.7",
@@ -17,7 +32,6 @@
     "rechoir": "0.8.0",
     "tmp-promise": "3.0.3"
   },
-  "description": "Tests documentation written in MarkDown",
   "devDependencies": {
     "@types/glob": "7.2.0",
     "@types/got": "9.6.12",
@@ -27,19 +41,5 @@
     "@types/parse5": "6.0.3",
     "@types/rechoir": "0.6.1",
     "mocha": "9.2.0"
-  },
-  "files": [
-    "dist/**/*.js",
-    "dist/**/*.d.ts"
-  ],
-  "homepage": "https://github.com/kevgo/text-runner",
-  "main": "dist/text-runner.js",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kevgo/text-runner.git"
-  },
-  "scripts": {
-    "test": "make test"
   }
 }

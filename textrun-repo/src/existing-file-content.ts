@@ -4,6 +4,7 @@ import * as eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
+import { instanceOfFsError } from "text-runner-core/dist/errors/node-error"
 
 export async function existingFileContent(action: tr.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
@@ -21,6 +22,9 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
+    if (!instanceOfFsError(err)) {
+      throw err
+    }
     if (err.code === "ENOENT") {
       throw new Error(`file not found: ${color.cyan(filePath)}`)
     } else {
@@ -30,6 +34,9 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
+    if (!tr.instanceOfUserError(err)) {
+      throw err
+    }
     throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
   }
 }

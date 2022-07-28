@@ -48,12 +48,12 @@ async function checkExternalLink(target: string, action: Args) {
   if (!action.configuration.online) {
     return action.SKIPPING
   }
-
+  action.name(`link to external website ${target}`)
   try {
-    action.name(`link to external website ${target}`)
     await got(target, { timeout: 4000 })
-  } catch (err) {
-    if (err.statusCode === 404 || err.code === "ENOTFOUND") {
+  } catch (e) {
+    const err = e as Error
+    if (isNotFound(err)) {
       action.log("external website doesn't exist")
     } else if (err instanceof got.TimeoutError) {
       action.log("timed out")
@@ -143,4 +143,14 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   } else {
     action.name(`link to ${fullFile.unixified()}#${anchorName}`)
   }
+}
+
+function isNotFound(err: any): boolean {
+  if ("statusCode" in err) {
+    return err.statusCode === 404
+  }
+  if ("code" in err) {
+    return err.code === "ENOTFOUND"
+  }
+  return false
 }

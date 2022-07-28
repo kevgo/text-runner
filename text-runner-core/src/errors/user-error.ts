@@ -18,6 +18,6 @@ export class UserError extends Error {
 }
 
 // TODO: rename to isUserError
-export function instanceOfUserError(arg: Error): arg is UserError {
-  return arg.name === "UserError"
+export function instanceOfUserError(arg: unknown): arg is UserError {
+  return arg instanceof Error && arg.name === "UserError"
 }

@@ -3,7 +3,7 @@ import * as fs from "fs"
 import { promises as fsp } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import { instanceOfNodeFsError } from "text-runner-core/dist/errors/user-error"
+import { instanceOfFsError } from "text-runner-core/dist/errors/node-error"
 
 export async function executable(action: tr.actions.Args): Promise<void> {
   const fileName = action.region.text()
@@ -14,7 +14,7 @@ export async function executable(action: tr.actions.Args): Promise<void> {
   try {
     await fsp.access(fullPath, fs.constants.X_OK)
   } catch (err) {
-    if (!instanceOfNodeFsError(err)) {
+    if (!instanceOfFsError(err)) {
       throw err
     }
     switch (err.code) {

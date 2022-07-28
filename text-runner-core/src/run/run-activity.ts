@@ -5,7 +5,8 @@ import * as actions from "../actions"
 import { Activity } from "../activities/index"
 import * as commands from "../commands/index"
 import * as configuration from "../configuration/index"
-import { UserError } from "../errors/user-error"
+import { instanceOfFsError } from "../errors/node-error"
+import { instanceOfUserError, UserError } from "../errors/user-error"
 import * as linkTargets from "../link-targets"
 import { NameRefiner } from "./name-refiner"
 import { OutputCollector } from "./output-collector"
@@ -58,11 +59,13 @@ export async function runActivity(
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (e) {
+    const err = e as Error
+    const guidance = instanceOfUserError(err) ? err.guidance : ""
     emitter.emit("result", {
       status: "failed",
       activity,
       finalName: nameRefiner.finalName(),
-      error: new UserError(e.message, e.guidance || "", activity.location),
+      error: new UserError(err.message, guidance, activity.location),
       output: outputCollector.toString(),
     })
     return true

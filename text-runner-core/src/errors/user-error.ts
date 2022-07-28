@@ -17,11 +17,7 @@ export class UserError extends Error {
   }
 }
 
+// TODO: rename to isUserError
 export function instanceOfUserError(arg: Error): arg is UserError {
   return arg.name === "UserError"
 }
-
-/** type guard that indicates Node errors */
-// export function instanceOfNodeFsError(arg: unknown): arg is NodeJS.ErrnoException {
-//   return arg instanceof Error && "code" in arg
-// }

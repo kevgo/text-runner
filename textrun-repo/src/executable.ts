@@ -3,6 +3,7 @@ import * as fs from "fs"
 import { promises as fsp } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
+import { instanceOfNodeFsError } from "text-runner-core/dist/errors/user-error"
 
 export async function executable(action: tr.actions.Args): Promise<void> {
   const fileName = action.region.text()
@@ -13,6 +14,9 @@ export async function executable(action: tr.actions.Args): Promise<void> {
   try {
     await fsp.access(fullPath, fs.constants.X_OK)
   } catch (err) {
+    if (!instanceOfNodeFsError(err)) {
+      throw err
+    }
     switch (err.code) {
       case "EACCES":
         throw new tr.UserError(`file is not executable: ${color.cyan(filePath)}`, "", action.location)

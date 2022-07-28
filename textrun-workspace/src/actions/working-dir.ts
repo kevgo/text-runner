@@ -10,7 +10,8 @@ export function workingDir(action: tr.actions.Args): void {
   try {
     process.chdir(fullPath)
   } catch (e) {
-    if (e.code === "ENOENT") {
+    const fsErr = e as NodeJS.ErrnoException
+    if (fsErr.code === "ENOENT") {
       throw new Error(`directory ${directory} not found`)
     }
     throw e

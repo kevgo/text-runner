@@ -12,7 +12,7 @@ export class UserError extends Error {
   constructor(message: string, guidance: string, location?: files.Location) {
     super(message)
     this.name = "UserError"
-    this.guidance = guidance || ""
+    this.guidance = guidance
     this.location = location
   }
 }
@@ -22,6 +22,6 @@ export function instanceOfUserError(arg: Error): arg is UserError {
 }
 
 /** type guard that indicates Node errors */
-export function instanceOfNodeFsError(arg: unknown): arg is NodeJS.ErrnoException {
-  return arg instanceof Error && "code" in arg
-}
+// export function instanceOfNodeFsError(arg: unknown): arg is NodeJS.ErrnoException {
+//   return arg instanceof Error && "code" in arg
+// }

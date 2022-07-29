@@ -70,7 +70,11 @@ async function read(cmdLineArgs: config.Data): Promise<string> {
       const result = await fs.readFile(cmdLineArgs.configFileName, "utf8")
       return result
     } catch (e) {
-      throw new tr.UserError(`cannot read configuration file "${cmdLineArgs.configFileName}"`, e.message)
+      if (tr.instanceOfFsError(e)) {
+        throw new tr.UserError(`cannot read configuration file "${cmdLineArgs.configFileName}"`, e.message)
+      } else {
+        throw e
+      }
     }
   }
   try {

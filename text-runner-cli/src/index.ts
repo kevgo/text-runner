@@ -24,12 +24,15 @@ async function main() {
       formatter.finish({ results })
     }
     errorCount = results.errorCount()
-  } catch (err) {
+  } catch (e) {
     errorCount += 1
-    if (err instanceof tr.UserError) {
-      formatters.printUserError(err)
+    if (e instanceof tr.UserError) {
+      formatters.printUserError(e)
+    } else if (e instanceof Error) {
+      console.log(e.message)
+      console.log(e.stack)
     } else {
-      console.log(err.stack)
+      console.log(e)
     }
   } finally {
     await endChildProcesses()

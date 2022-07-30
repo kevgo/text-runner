@@ -29,17 +29,22 @@ suite("instantiateFormatter()", function () {
     assert.instanceOf(have, SummaryFormatter)
   })
 
-  test("request unknown formatter", function () {
-    let err
+  test("request unknown formatter", function (done) {
+    let err: tr.UserError
     try {
       // @ts-ignore
       formatter.instantiate("zonk", ".", command)
+      return done("did not explode")
     } catch (e) {
+      if (!tr.isUserError(e)) {
+        throw new Error("should be UserError")
+      }
       err = e
     }
     assert.exists(err, "function did not throw")
     assert.equal(err.name, "UserError")
     assert.equal(err.message, "Unknown formatter: zonk")
     assert.equal(err.guidance, "Available formatters are: detailed, dot, progress, summary")
+    done()
   })
 })

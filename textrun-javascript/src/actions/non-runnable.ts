@@ -9,6 +9,6 @@ export function nonRunnable(action: tr.actions.Args): void {
   try {
     new Function(code)
   } catch (e) {
-    throw new Error(`invalid Javascript: ${e.message}`)
+    throw new Error(`invalid Javascript: ${tr.errorMessage(e)}`)
   }
 }

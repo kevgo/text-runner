@@ -12,11 +12,11 @@ export class UserError extends Error {
   constructor(message: string, guidance: string, location?: files.Location) {
     super(message)
     this.name = "UserError"
-    this.guidance = guidance || ""
+    this.guidance = guidance
     this.location = location
   }
 }
 
-export function instanceOfUserError(arg: Error): arg is UserError {
-  return arg.name === "UserError"
+export function isUserError(arg: unknown): arg is UserError {
+  return arg instanceof Error && arg.name === "UserError"
 }

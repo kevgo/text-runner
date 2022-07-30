@@ -1,6 +1,7 @@
 import { promises as fs } from "fs"
 import got from "got"
 
+import { errorMessage } from "../../errors/error"
 import { UserError } from "../../errors/user-error"
 import * as files from "../../filesystem/"
 import * as helpers from "../../helpers"
@@ -48,17 +49,16 @@ async function checkExternalLink(target: string, action: Args) {
   if (!action.configuration.online) {
     return action.SKIPPING
   }
-
+  action.name(`link to external website ${target}`)
   try {
-    action.name(`link to external website ${target}`)
-    await got(target, { timeout: 4000 })
-  } catch (err) {
-    if (err.statusCode === 404 || err.code === "ENOTFOUND") {
-      action.log("external website doesn't exist")
-    } else if (err instanceof got.TimeoutError) {
+    await got(target, { timeout: 2000 })
+  } catch (e) {
+    if (e instanceof got.HTTPError && e.response.statusCode === 404) {
+      throw new Error(`external website doesn't exist: ${target}`)
+    } else if (e instanceof got.TimeoutError) {
       action.log("timed out")
     } else {
-      action.log(`error while checking link to ${target}: ${err.message}`)
+      action.log(`error while checking link to ${target}: ${errorMessage(e)}`)
     }
   }
   return

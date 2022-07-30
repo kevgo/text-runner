@@ -21,6 +21,9 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
+    if (!tr.isFsError(err)) {
+      throw err
+    }
     if (err.code === "ENOENT") {
       throw new Error(`file not found: ${color.cyan(filePath)}`)
     } else {
@@ -30,6 +33,6 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)
+    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, tr.errorMessage(err))
   }
 }

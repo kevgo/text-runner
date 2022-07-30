@@ -59,7 +59,7 @@ async function checkExternalLink(target: string, action: Args) {
     } else if (e instanceof Error) {
       action.log(`error while checking link to ${target}: ${e.message}`)
     } else {
-      throw e
+      action.log(`error while checking link to ${target}: ${e}`)
     }
   }
   return

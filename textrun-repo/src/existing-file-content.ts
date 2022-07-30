@@ -4,7 +4,6 @@ import * as eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
-import { instanceOfFsError } from "text-runner-core/dist/errors/node-error"
 
 export async function existingFileContent(action: tr.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")

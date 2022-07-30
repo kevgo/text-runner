@@ -58,14 +58,21 @@ export async function runActivity(
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (e) {
-    if (!instanceOfUserError(e)) {
-      throw e
+    let message = ""
+    if (e instanceof Error) {
+      message = e.message
+    } else {
+      message = e as string
+    }
+    let guidance = ""
+    if (instanceOfUserError(e)) {
+      guidance = e.guidance
     }
     emitter.emit("result", {
       status: "failed",
       activity,
       finalName: nameRefiner.finalName(),
-      error: new UserError(err.message, guidance, activity.location),
+      error: new UserError(message, guidance, activity.location),
       output: outputCollector.toString(),
     })
     return true

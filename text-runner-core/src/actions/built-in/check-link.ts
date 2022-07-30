@@ -50,15 +50,16 @@ async function checkExternalLink(target: string, action: Args) {
   }
   action.name(`link to external website ${target}`)
   try {
-    await got(target, { timeout: 4000 })
+    await got(target, { timeout: 2000 })
   } catch (e) {
-    const err = e as Error
-    if (isNotFound(err)) {
-      action.log("external website doesn't exist")
-    } else if (err instanceof got.TimeoutError) {
+    if (e instanceof got.HTTPError && e.response.statusCode === 404) {
+      throw new Error(`external website doesn't exist: ${target}`)
+    } else if (e instanceof got.TimeoutError) {
       action.log("timed out")
+    } else if (e instanceof Error) {
+      action.log(`error while checking link to ${target}: ${e.message}`)
     } else {
-      action.log(`error while checking link to ${target}: ${err.message}`)
+      throw e
     }
   }
   return
@@ -143,17 +144,4 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   } else {
     action.name(`link to ${fullFile.unixified()}#${anchorName}`)
   }
-}
-
-function isNotFound(err: unknown): boolean {
-  if (!(err instanceof Error)) {
-    return false
-  }
-  if ("statusCode" in err) {
-    return err.statusCode === 404
-  }
-  if ("code" in err) {
-    return err.code === "ENOTFOUND"
-  }
-  return false
 }

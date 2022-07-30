@@ -7,6 +7,7 @@ import * as commands from "../commands/index"
 import * as configuration from "../configuration/index"
 import { isUserError, UserError } from "../errors/user-error"
 import * as linkTargets from "../link-targets"
+import { errorMessage } from "../text-runner"
 import { NameRefiner } from "./name-refiner"
 import { OutputCollector } from "./output-collector"
 
@@ -58,12 +59,6 @@ export async function runActivity(
       throw new Error(`unknown return code from action: ${actionResult}`)
     }
   } catch (e) {
-    let message = ""
-    if (e instanceof Error) {
-      message = e.message
-    } else {
-      message = e as string
-    }
     let guidance = ""
     if (isUserError(e)) {
       guidance = e.guidance
@@ -72,7 +67,7 @@ export async function runActivity(
       status: "failed",
       activity,
       finalName: nameRefiner.finalName(),
-      error: new UserError(message, guidance, activity.location),
+      error: new UserError(errorMessage(e), guidance, activity.location),
       output: outputCollector.toString(),
     })
     return true

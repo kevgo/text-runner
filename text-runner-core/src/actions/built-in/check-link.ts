@@ -1,6 +1,7 @@
 import { promises as fs } from "fs"
 import got from "got"
 
+import { errorMessage } from "../../errors/error"
 import { UserError } from "../../errors/user-error"
 import * as files from "../../filesystem/"
 import * as helpers from "../../helpers"
@@ -56,10 +57,8 @@ async function checkExternalLink(target: string, action: Args) {
       throw new Error(`external website doesn't exist: ${target}`)
     } else if (e instanceof got.TimeoutError) {
       action.log("timed out")
-    } else if (e instanceof Error) {
-      action.log(`error while checking link to ${target}: ${e.message}`)
     } else {
-      action.log(`error while checking link to ${target}: ${e}`)
+      action.log(`error while checking link to ${target}: ${errorMessage(e)}`)
     }
   }
   return

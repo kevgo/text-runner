@@ -29,6 +29,7 @@ async function main() {
     if (e instanceof tr.UserError) {
       formatters.printUserError(e)
     } else if (e instanceof Error) {
+      console.log(e.message)
       console.log(e.stack)
     } else {
       console.log(e)

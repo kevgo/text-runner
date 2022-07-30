@@ -13,6 +13,9 @@ export async function executable(action: tr.actions.Args): Promise<void> {
   try {
     await fsp.access(fullPath, fs.constants.X_OK)
   } catch (err) {
+    if (!tr.instanceOfFsError(err)) {
+      throw err
+    }
     switch (err.code) {
       case "EACCES":
         throw new tr.UserError(`file is not executable: ${color.cyan(filePath)}`, "", action.location)

@@ -10,7 +10,7 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   try {
     var stats = await fs.stat(fullPath)
   } catch (err) {
-    if (!tr.instanceOfFsError(err)) {
+    if (!tr.isFsError(err)) {
       throw err
     }
     if (err.code === "ENOENT") {

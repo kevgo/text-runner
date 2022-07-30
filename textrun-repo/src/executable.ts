@@ -13,7 +13,7 @@ export async function executable(action: tr.actions.Args): Promise<void> {
   try {
     await fsp.access(fullPath, fs.constants.X_OK)
   } catch (err) {
-    if (!tr.instanceOfFsError(err)) {
+    if (!tr.isFsError(err)) {
       throw err
     }
     switch (err.code) {

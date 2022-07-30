@@ -19,7 +19,7 @@ export async function installedExecutable(action: tr.actions.Args): Promise<void
   try {
     await fsp.stat(action.configuration.sourceDir.joinStr(fullPath))
   } catch (e) {
-    if (tr.instanceOfFsError(e) && e.code === "ENOENT") {
+    if (tr.isFsError(e) && e.code === "ENOENT") {
       throw new Error(`no installed executable ${color.cyan(fullPath)} found`)
     } else {
       throw e

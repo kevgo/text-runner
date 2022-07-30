@@ -10,7 +10,7 @@ export function workingDir(action: tr.actions.Args): void {
   try {
     process.chdir(fullPath)
   } catch (e) {
-    if (!tr.instanceOfFsError(e)) {
+    if (!tr.isFsError(e)) {
       throw e
     }
     if (e.code === "ENOENT") {

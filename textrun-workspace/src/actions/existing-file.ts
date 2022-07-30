@@ -14,7 +14,7 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   try {
     var actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
-    if (!tr.instanceOfFsError(e)) {
+    if (!tr.isFsError(e)) {
       throw e
     }
     if (e.code === "ENOENT") {

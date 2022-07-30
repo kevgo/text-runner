@@ -10,6 +10,7 @@ clean:  # Removes all build artifacts
 	rm -rf dist
 
 cuke: build  # runs the feature specs
+	echo textrun-workspace E2E tests ...
 	${CURDIR}/node_modules/.bin/cucumber-js --format=progress-bar
 
 cuke-lerna: build  # runs the feature specs

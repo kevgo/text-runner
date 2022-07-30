@@ -7,7 +7,7 @@ export async function newFile(action: tr.actions.Args): Promise<void> {
   try {
     var fileName = action.region.textInNodeOfType("em", "strong")
   } catch (e) {
-    if (!tr.instanceOfUserError(e)) {
+    if (!tr.isUserError(e)) {
       throw e
     }
     const guidance = `Cannot determine the name of the file to create.\n${e.guidance}`
@@ -16,7 +16,7 @@ export async function newFile(action: tr.actions.Args): Promise<void> {
   try {
     var content = action.region.textInNodeOfType("fence", "code")
   } catch (e) {
-    if (!tr.instanceOfUserError(e)) {
+    if (!tr.isUserError(e)) {
       throw e
     }
     const guidance = `Cannot determine the content of the file to create.\n${e.guidance}`

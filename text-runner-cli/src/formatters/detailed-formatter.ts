@@ -37,7 +37,7 @@ export class DetailedFormatter implements formatter.Formatter {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
-    if (tr.instanceOfUserError(args.error)) {
+    if (tr.isUserError(args.error)) {
       printUserError(args.error)
     } else {
       process.stdout.write(

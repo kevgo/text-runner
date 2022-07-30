@@ -5,7 +5,7 @@ import * as actions from "../actions"
 import { Activity } from "../activities/index"
 import * as commands from "../commands/index"
 import * as configuration from "../configuration/index"
-import { instanceOfUserError, UserError } from "../errors/user-error"
+import { isUserError, UserError } from "../errors/user-error"
 import * as linkTargets from "../link-targets"
 import { NameRefiner } from "./name-refiner"
 import { OutputCollector } from "./output-collector"
@@ -65,7 +65,7 @@ export async function runActivity(
       message = e as string
     }
     let guidance = ""
-    if (instanceOfUserError(e)) {
+    if (isUserError(e)) {
       guidance = e.guidance
     }
     emitter.emit("result", {

@@ -36,7 +36,7 @@ suite("instantiateFormatter()", function () {
       formatter.instantiate("zonk", ".", command)
       return done("did not explode")
     } catch (e) {
-      if (!tr.instanceOfUserError(e)) {
+      if (!tr.isUserError(e)) {
         throw new Error("should be UserError")
       }
       err = e

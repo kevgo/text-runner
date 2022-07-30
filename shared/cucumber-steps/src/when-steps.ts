@@ -28,7 +28,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (jsText: string) {
     await asyncFunc(textRunner, textRunner.ActivityCollector)
     world.apiResults = observer.results()
   } catch (e) {
-    if (textRunner.instanceOfUserError(e)) {
+    if (textRunner.isUserError(e)) {
       world.apiException = e
     } else {
       throw e
@@ -43,7 +43,7 @@ When(/^calling Text-Runner$/, { timeout: 20_000 }, async function () {
   try {
     await command.execute()
   } catch (e) {
-    if (textRunner.instanceOfUserError(e)) {
+    if (textRunner.isUserError(e)) {
       world.apiException = e
     } else {
       throw e

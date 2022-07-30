@@ -45,7 +45,7 @@ export class ProgressFormatter implements formatter.Formatter {
     console.log()
     console.log()
     console.log(color.dim(args.output))
-    if (tr.instanceOfUserError(args.error)) {
+    if (tr.isUserError(args.error)) {
       printUserError(args.error)
     } else {
       console.log(

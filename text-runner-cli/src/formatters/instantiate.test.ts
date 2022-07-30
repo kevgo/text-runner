@@ -1,5 +1,6 @@
 import { assert } from "chai"
 import * as tr from "text-runner-core"
+import { UserError } from "text-runner-core"
 
 import * as formatter from "."
 import { DetailedFormatter } from "./detailed-formatter"
@@ -29,17 +30,23 @@ suite("instantiateFormatter()", function () {
     assert.instanceOf(have, SummaryFormatter)
   })
 
-  test("request unknown formatter", function () {
-    let err
+  test("request unknown formatter", function (done) {
+    let err: UserError
     try {
       // @ts-ignore
       formatter.instantiate("zonk", ".", command)
+      done("did not explode")
+      return
     } catch (e) {
+      if (!tr.instanceOfUserError(e)) {
+        throw new Error("should be UserError")
+      }
       err = e
     }
     assert.exists(err, "function did not throw")
     assert.equal(err.name, "UserError")
     assert.equal(err.message, "Unknown formatter: zonk")
     assert.equal(err.guidance, "Available formatters are: detailed, dot, progress, summary")
+    done()
   })
 })

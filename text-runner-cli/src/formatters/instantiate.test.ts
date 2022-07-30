@@ -1,6 +1,5 @@
 import { assert } from "chai"
 import * as tr from "text-runner-core"
-import { UserError } from "text-runner-core"
 
 import * as formatter from "."
 import { DetailedFormatter } from "./detailed-formatter"
@@ -31,7 +30,7 @@ suite("instantiateFormatter()", function () {
   })
 
   test("request unknown formatter", function (done) {
-    let err: UserError
+    let err: tr.UserError
     try {
       // @ts-ignore
       formatter.instantiate("zonk", ".", command)

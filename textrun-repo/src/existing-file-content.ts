@@ -34,7 +34,7 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
   } catch (err) {
-    if (!tr.instanceOfUserError(err)) {
+    if (!(err instanceof Error)) {
       throw err
     }
     throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, err.message)

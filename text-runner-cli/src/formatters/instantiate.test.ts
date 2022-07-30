@@ -34,8 +34,7 @@ suite("instantiateFormatter()", function () {
     try {
       // @ts-ignore
       formatter.instantiate("zonk", ".", command)
-      done("did not explode")
-      return
+      return done("did not explode")
     } catch (e) {
       if (!tr.instanceOfUserError(e)) {
         throw new Error("should be UserError")

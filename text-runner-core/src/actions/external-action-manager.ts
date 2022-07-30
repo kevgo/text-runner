@@ -30,8 +30,10 @@ export class ExternalActionManager {
     try {
       var module = await import(moduleName)
     } catch (e) {
-      const err = e as Error
-      throw new UserError(`cannot load npm package "${moduleName}"`, err.message, activity.location)
+      if (!(e instanceof Error)) {
+        throw e
+      }
+      throw new UserError(`cannot load npm package "${moduleName}"`, e.message, activity.location)
     }
     const moduleActions = module.textrunActions
     if (!moduleActions) {

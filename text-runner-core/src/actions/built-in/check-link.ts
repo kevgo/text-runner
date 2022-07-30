@@ -145,7 +145,10 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   }
 }
 
-function isNotFound(err: any): boolean {
+function isNotFound(err: unknown): boolean {
+  if (!(err instanceof Error)) {
+    return false
+  }
   if ("statusCode" in err) {
     return err.statusCode === 404
   }

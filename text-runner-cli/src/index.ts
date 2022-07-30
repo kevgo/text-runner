@@ -31,7 +31,7 @@ async function main() {
     } else if (e instanceof Error) {
       console.log(e.stack)
     } else {
-      throw e
+      console.log(e)
     }
   } finally {
     await endChildProcesses()

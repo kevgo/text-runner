@@ -7,16 +7,20 @@ export async function newFile(action: tr.actions.Args): Promise<void> {
   try {
     var fileName = action.region.textInNodeOfType("em", "strong")
   } catch (e) {
-    const userErr = e as tr.UserError
-    const guidance = `Cannot determine the name of the file to create.\n${userErr.guidance}`
-    throw new tr.UserError(userErr.message, guidance)
+    if (!tr.instanceOfUserError(e)) {
+      throw e
+    }
+    const guidance = `Cannot determine the name of the file to create.\n${e.guidance}`
+    throw new tr.UserError(e.message, guidance)
   }
   try {
     var content = action.region.textInNodeOfType("fence", "code")
   } catch (e) {
-    const userErr = e as tr.UserError
-    const guidance = `Cannot determine the content of the file to create.\n${userErr.guidance}`
-    throw new tr.UserError(userErr.message, guidance)
+    if (!tr.instanceOfUserError(e)) {
+      throw e
+    }
+    const guidance = `Cannot determine the content of the file to create.\n${e.guidance}`
+    throw new tr.UserError(e.message, guidance)
   }
   const filePath = path.join(action.region[0].attributes["dir"] ?? ".", fileName)
   action.name(`create file ${color.cyan(filePath)}`)

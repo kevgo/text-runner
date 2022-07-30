@@ -14,8 +14,10 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   try {
     var actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
-    const fsErr = e as NodeJS.ErrnoException
-    if (fsErr.code === "ENOENT") {
+    if (!tr.instanceOfFsError(e)) {
+      throw e
+    }
+    if (e.code === "ENOENT") {
       const files = await fs.readdir(action.configuration.sourceDir.platformified())
       throw new tr.UserError(`file not found: ${fileRelPath}`, `the workspace has these files: ${files.join(", ")}`)
     } else {
@@ -24,8 +26,10 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   }
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
-  } catch (e) {
-    const err = e as Error
+  } catch (err) {
+    if (!(err instanceof Error)) {
+      throw err
+    }
     throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(fileRelPath))}`, err.message)
   }
 }

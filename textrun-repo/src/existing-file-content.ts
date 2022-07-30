@@ -22,7 +22,7 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
-    if (!instanceOfFsError(err)) {
+    if (!tr.instanceOfFsError(err)) {
       throw err
     }
     if (err.code === "ENOENT") {

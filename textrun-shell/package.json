@@ -20,7 +20,7 @@
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.1",
     "textrun-action": "0.1.1",
-    "textrun-extension": "0.1.0",
+    "textrun-extension": "0.1.1",
     "textrun-workspace": "0.1.1"
   }
 }

@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "devDependencies": {
-    "coffeescript": "2.6.1",
+    "coffeescript": "2.7.0",
     "text-runner": "5.0.1"
   },
   "private": true

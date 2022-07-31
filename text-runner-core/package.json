@@ -27,7 +27,7 @@
     "humanize-string": "2.1.0",
     "interpret": "2.2.0",
     "is-glob": "4.0.3",
-    "markdown-it": "12.3.2",
+    "markdown-it": "13.0.1",
     "parse5": "6.0.1",
     "rechoir": "0.8.0",
     "tmp-promise": "3.0.3"

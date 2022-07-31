@@ -11,7 +11,7 @@ clean:  # Removes all build artifacts
 
 cuke: build  # runs the feature specs
 	echo textrun-repo E2E tests ...
-	${CURDIR}/node_modules/.bin/cucumber-js --format=progress-bar
+	${CURDIR}/../node_modules/.bin/cucumber-js --format=progress-bar
 
 cuke-lerna: build  # runs the feature specs
 	echo textrun-repo E2E tests ...

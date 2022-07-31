@@ -51,13 +51,12 @@ doc-open:  # runs the documentation tests of codebases with uncommitted changes
 fix:  # auto-fixes the root directory
 	echo fixing root dir ...
 	${CURDIR}/node_modules/.bin/prettier --write .
-	${CURDIR}/node_modules/.bin/sort-package-json
 
 fix-affected:  # runs the auto-fixes for the codebases affected by changes in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory fix
 
 fix-all:  # runs all auto-fixes
-	make fix
+	make --no-print-directory fix
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory fix
 
 fix-changed:  # runs the auto-fixes of codebases changed in this branch
@@ -72,13 +71,12 @@ help:  # prints all make targets
 lint:  # lints the root directory
 	echo linting root dir ...
 	${CURDIR}/node_modules/.bin/prettier -l '.'
-	${CURDIR}/node_modules/.bin/sort-package-json --check
 
 lint-affected:  # runs the linters for the codebases affected by changes in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory lint
 
 lint-all:  # runs all linters
-	make lint
+	make --no-print-directory lint
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory lint
 
 lint-changed:  # runs the linters of codebases changed in this branch

@@ -26,7 +26,6 @@ fix:  # runs the fixers
 	echo Text-Runner auto-fixes ...
 	${CURDIR}/../node_modules/.bin/eslint . --fix --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/prettier --write .
-	${CURDIR}/../node_modules/.bin/sort-package-json
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -36,7 +35,6 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/depcheck
-	${CURDIR}/../node_modules/.bin/sort-package-json --check
 
 parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --format=dot &

@@ -25,7 +25,6 @@ fix:  # runs the auto-fixers
 	echo textrun-make auto-fixes ...
 	${CURDIR}/../node_modules/.bin/eslint . --fix --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/prettier --write .
-	${CURDIR}/../node_modules/.bin/sort-package-json
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
@@ -35,7 +34,6 @@ lint:  # lints all files in this codebase
 	${CURDIR}/../node_modules/.bin/prettier -l .
 	${CURDIR}/../node_modules/.bin/eslint . --ext .ts --ignore-path ../.eslintignore
 	${CURDIR}/../node_modules/.bin/depcheck --config=../.depcheckrc
-	${CURDIR}/../node_modules/.bin/sort-package-json --check
 
 publish: clean build  # publishes this package
 	npm publish

@@ -1,9 +1,10 @@
 {
   "name": "textrun-workspace",
+  "type": "module",
   "version": "0.1.1",
   "description": "Text-Runner actions for the Text-Runner workspace",
   "license": "ISC",
-  "main": "dist/index.js",
+  "exports": "./dist/index.js",
   "files": [
     "dist/**/*.js"
   ],

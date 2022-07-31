@@ -1,5 +1,6 @@
 {
   "name": "text-runner-features",
+  "type": "module",
   "version": "0.0.0",
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",

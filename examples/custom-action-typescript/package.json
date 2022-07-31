@@ -1,5 +1,6 @@
 {
   "name": "custom-action-typescript",
+  "type": "module",
   "version": "0.0.0",
   "devDependencies": {
     "text-runner": "5.0.1"

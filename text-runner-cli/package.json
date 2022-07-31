@@ -1,5 +1,6 @@
 {
   "name": "text-runner",
+  "type": "module",
   "version": "5.0.1",
   "description": "CLI test runner for documentation written in Markdown",
   "homepage": "https://github.com/kevgo/text-runner",
@@ -9,7 +10,7 @@
   },
   "license": "ISC",
   "author": "Kevin Goslar",
-  "main": "dist/api.js",
+  "exports": "./dist/api.js",
   "bin": {
     "text-run": "bin/text-run"
   },

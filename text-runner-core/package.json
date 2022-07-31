@@ -1,5 +1,6 @@
 {
   "name": "text-runner-core",
+  "type": "module",
   "version": "5.0.1",
   "description": "Tests documentation written in MarkDown",
   "homepage": "https://github.com/kevgo/text-runner",
@@ -9,7 +10,7 @@
   },
   "license": "ISC",
   "author": "Kevin Goslar",
-  "main": "dist/text-runner.js",
+  "exports": "./dist/text-runner.js",
   "files": [
     "dist/**/*.js",
     "dist/**/*.d.ts"

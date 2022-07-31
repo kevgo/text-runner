@@ -47,6 +47,6 @@ cucumber.Before({ tags: "@debug" }, function (this: TRWorld) {
   this.debug = true
 })
 
-cucumber.After({ tags: "@debug" }, function () {
+cucumber.After({ tags: "@debug" }, function (this: TRWorld) {
   this.debug = false
 })

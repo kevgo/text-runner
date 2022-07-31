@@ -4,6 +4,7 @@
   "private": true,
   "license": "ISC",
   "devDependencies": {
+    "@cucumber/cucumber": "8.5.1",
     "@types/ps-tree": "1.1.2",
     "@types/rimraf": "3.0.2",
     "array-flatten": "3.0.0",

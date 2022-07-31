@@ -3,7 +3,7 @@ import * as tr from "text-runner-core"
 
 export function printSummary(results: tr.ActivityResults): void {
   let text = "\n"
-  let colorFn: color.Style
+  let colorFn: color.Color
   const errorCount = results.errorCount()
   if (errorCount === 0) {
     colorFn = color.green

@@ -1,7 +1,7 @@
 ignores:
+  - "@cucumber/cucumber"
   - mocha
   - chai
-  - cucumber
   - documentation
   - custom-action-examples
   - custom-action-coffeescript

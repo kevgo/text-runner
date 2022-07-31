@@ -1,3 +1,5 @@
+import { promises as fs } from "fs"
+
 import { PathMapper } from "./path-mapper"
 
 /** ConfigFile defines the structure of the configuration file for this Text-Runner plugin. */
@@ -19,10 +21,11 @@ export class Configuration {
   }
 
   /** Provides the configuration stored in the file with the given path. */
-  static load(filePath: string): Configuration {
+  static async load(filePath: string): Promise<Configuration> {
     try {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const content = require(filePath)
+      const fileText = await fs.readFile(filePath, "utf8")
+      const content: ConfigFile = JSON.parse(fileText)
       return new Configuration(content)
     } catch (e) {
       return Configuration.default()

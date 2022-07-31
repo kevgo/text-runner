@@ -1,4 +1,4 @@
-import { After, Before } from "cucumber"
+import * as cucumber from "@cucumber/cucumber"
 import { endChildProcesses } from "end-child-processes"
 import { promises as fs } from "fs"
 import * as path from "path"
@@ -11,46 +11,42 @@ import { TRWorld } from "./world"
 const rimrafp = util.promisify(rimraf)
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-Before(async function () {
-  const world = this as TRWorld
+cucumber.Before(async function (this: TRWorld) {
   if (process.env.CUCUMBER_PARALLEL) {
     const tempDir = await tmp.dir()
-    world.workspace = new textRunner.files.AbsoluteDirPath(tempDir.path)
+    this.workspace = new textRunner.files.AbsoluteDirPath(tempDir.path)
   } else {
-    world.workspace = new textRunner.files.AbsoluteDirPath(path.join(process.cwd(), "tmp"))
+    this.workspace = new textRunner.files.AbsoluteDirPath(path.join(process.cwd(), "tmp"))
   }
   let workspaceExists = false
   try {
-    await fs.stat(world.workspace.platformified())
+    await fs.stat(this.workspace.platformified())
     workspaceExists = true
   } catch (e) {
     // nothing to do here
   }
   if (workspaceExists) {
-    await fs.rmdir(world.workspace.platformified(), { recursive: true })
+    await fs.rmdir(this.workspace.platformified(), { recursive: true })
   }
-  await fs.mkdir(world.workspace.platformified(), { recursive: true })
+  await fs.mkdir(this.workspace.platformified(), { recursive: true })
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-After({ timeout: 20_000 }, async function (scenario) {
-  const world = this as TRWorld
+cucumber.After({ timeout: 20_000 }, async function (this: TRWorld, scenario) {
   await endChildProcesses()
-  if (scenario.result.status === "failed") {
-    console.log("\ntest artifacts are located in", world.workspace.platformified())
+  if (scenario.result?.status === cucumber.Status.FAILED) {
+    console.log("\ntest artifacts are located in", this.workspace.platformified())
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     // TODO: replace with fs
-    await rimrafp(world.workspace.platformified())
+    await rimrafp(this.workspace.platformified())
   }
 })
 
-Before({ tags: "@debug" }, function () {
-  const world = this as TRWorld
-  world.debug = true
+cucumber.Before({ tags: "@debug" }, function (this: TRWorld) {
+  this.debug = true
 })
 
-After({ tags: "@debug" }, function () {
-  const world = this as TRWorld
-  world.debug = false
+cucumber.After({ tags: "@debug" }, function () {
+  this.debug = false
 })

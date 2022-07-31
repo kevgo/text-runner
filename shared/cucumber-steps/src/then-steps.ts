@@ -1,7 +1,7 @@
+import { Then } from "@cucumber/cucumber"
+import * as cucumber from "@cucumber/cucumber"
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
-import { Then } from "cucumber"
-import * as cucumber from "cucumber"
 import { promises as fs } from "fs"
 import * as psTreeR from "ps-tree"
 import * as util from "util"
@@ -30,28 +30,25 @@ Then("explode", function () {
   throw new Error("BOOM")
 })
 
-Then("it executes {int} test", function (count) {
-  const world = this as TRWorld
-  if (!world.apiResults) {
+Then("it executes {int} test", function (this: TRWorld, count: number) {
+  if (!this.apiResults) {
     throw new Error("no API results found")
   }
-  assert.equal(world.apiResults.length, count)
+  assert.equal(this.apiResults.length, count)
 })
 
-Then("it executes in the local {string} directory", function (dirName) {
-  const world = this as TRWorld
-  if (!world.apiResults) {
+Then("it executes in the local {string} directory", function (this: TRWorld, dirName: string) {
+  if (!this.apiResults) {
     throw new Error("no API results found")
   }
-  const have = world.apiResults[0].output?.trim()
-  const want = world.workspace.joinStr(dirName)
+  const have = this.apiResults[0].output?.trim()
+  const want = this.workspace.joinStr(dirName)
   assert.equal(have, want)
 })
 
-Then("it emits these events:", function (table: cucumber.TableDefinition) {
-  const world = this as TRWorld
-  if (world.apiException) {
-    console.log(world.apiException)
+Then("it emits these events:", function (this: TRWorld, table: cucumber.DataTable) {
+  if (this.apiException) {
+    console.log(this.apiException)
     assert.fail("unexpected exception during API call")
   }
   const tableHashes = table.hashes()
@@ -82,13 +79,14 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
     }
     result.errorMessage = line["ERROR MESSAGE"] || ""
     if (line.GUIDANCE != null || line["ERROR TYPE"] === "UserError") {
-      result.guidance = line.GUIDANCE?.trim() || ""
+      const guidance: string = line["GUIDANCE"] || ""
+      result.guidance = guidance.trim()
     }
     want.push(result)
   }
   let have: ExecuteResultLine[] = []
   const wanted = want[0]
-  for (const activityResult of world.apiResults) {
+  for (const activityResult of this.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
       result.filename = activityResult.activity?.location.file.unixified()
@@ -129,9 +127,8 @@ Then("it emits these events:", function (table: cucumber.TableDefinition) {
   assert.deepEqual(have, want)
 })
 
-Then("it throws:", function (table: cucumber.TableDefinition) {
-  const world = this as TRWorld
-  if (!world.apiException) {
+Then("it throws:", function (this: TRWorld, table: cucumber.DataTable) {
+  if (!this.apiException) {
     throw new Error("no error thrown")
   }
   const tableHash = table.hashes()[0]
@@ -139,75 +136,72 @@ Then("it throws:", function (table: cucumber.TableDefinition) {
     errorType: tableHash["ERROR TYPE"],
     errorMessage: tableHash["ERROR MESSAGE"],
   }
-  if (!world.apiException) {
+  if (!this.apiException) {
     throw new Error("no apiException found")
   }
   const have: ExecuteResultLine = {
-    errorType: world.apiException.name,
-    errorMessage: stripAnsi(world.apiException.message).trim().split("\n")[0],
+    errorType: this.apiException.name,
+    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME
-    have.filename = world.apiException.location?.file.unixified()
+    have.filename = this.apiException.location?.file.unixified()
   }
   if (tableHash.LINE) {
     want.line = parseInt(tableHash.LINE, 10)
-    have.line = world.apiException.location?.line
+    have.line = this.apiException.location?.line
   }
   assert.deepEqual(have, want)
 })
 
-Then("the error provides the guidance:", function (expectedText: string) {
-  const world = this as TRWorld
-  const errors = world.apiResults.errors()
+Then("the error provides the guidance:", function (this: TRWorld, expectedText: string) {
+  const errors = this.apiResults?.errors() || []
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
   }
-  assert.equal(errors[0]?.name, "UserError")
+  assert.equal(errors[0].name, "UserError")
   const userError = errors[0] as textRunner.UserError
   assert.equal(stripAnsi(userError.guidance.trim()), expectedText.trim())
 })
 
-Then("the API exception provides the guidance:", function (expectedText: string) {
-  const world = this as TRWorld
-  if (!world.apiException) {
+Then("the API exception provides the guidance:", function (this: TRWorld, expectedText: string) {
+  if (!this.apiException) {
     throw new Error("no API exception found")
   }
-  assert.equal(world.apiException.name, "UserError")
-  const userError = world.apiException
+  assert.equal(this.apiException.name, "UserError")
+  const userError = this.apiException
   assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
-Then("it creates a directory {string}", async function (directoryPath) {
-  const world = this as TRWorld
-  await fs.stat(world.workspace.joinStr(directoryPath))
+Then("it creates a directory {string}", async function (this: TRWorld, directoryPath: string) {
+  await fs.stat(this.workspace.joinStr(directoryPath))
 })
 
-Then("it creates the file {string} with content:", async function (filename, expectedContent) {
-  const world = this as TRWorld
-  const actualContent = await fs.readFile(world.workspace.joinStr(filename), {
-    encoding: "utf8",
-  })
-  assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
-})
+Then(
+  "it creates the file {string} with content:",
+  async function (this: TRWorld, filename: string, expectedContent: string) {
+    const actualContent = await fs.readFile(this.workspace.joinStr(filename), {
+      encoding: "utf8",
+    })
+    assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
+  }
+)
 
-Then("it doesn't print:", function (expectedText: string) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it doesn't print:", function (this: TRWorld, expectedText: string) {
+  if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.finishedProcess.combinedText)
+  const output = stripAnsi(this.finishedProcess.combinedText)
   if (new RegExp(expectedText).test(output)) {
     throw new Error(`expected to not find regex '${expectedText}' in '${output}'`)
   }
 })
 
-Then("it prints:", function (expectedText: string) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it prints:", function (this: TRWorld, expectedText: string) {
+  if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
-  let output = stripAnsi(world.finishedProcess.combinedText.trim())
+  let output = stripAnsi(this.finishedProcess.combinedText.trim())
   if (process.platform === "win32") {
     output = output.trim().replace(/\\/g, "/")
   }
@@ -225,91 +219,79 @@ Then("it prints:", function (expectedText: string) {
   }
 })
 
-Then("it prints the text:", function (expectedText: string) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it prints the text:", function (this: TRWorld, expectedText: string) {
+  if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.finishedProcess.combinedText).trim()
+  const output = stripAnsi(this.finishedProcess.combinedText).trim()
   assert.equal(output, expectedText.trim())
 })
 
-Then("it runs {int} test", function (count: number) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it runs {int} test", function (this: TRWorld, count: number) {
+  if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
-  assert.include(stripAnsi(world.finishedProcess.combinedText), ` ${count} activities`)
+  assert.include(stripAnsi(this.finishedProcess.combinedText), ` ${count} activities`)
 })
 
-Then("it executes in a global temp directory", function () {
-  const world = this as TRWorld
-  assert.notInclude(world.apiResults[0].output, world.workspace.unixified())
+Then("it executes in a global temp directory", function (this: TRWorld) {
+  assert.notInclude(this.apiResults[0].output, this.workspace.unixified())
 })
 
-Then("it executes in the global {string} temp directory", function (dirName: string) {
-  const world = this as TRWorld
-  assert.notInclude(world.apiResults[0].output, world.workspace.joinStr(dirName))
+Then("it executes in the global {string} temp directory", function (this: TRWorld, dirName: string) {
+  assert.notInclude(this.apiResults[0].output, this.workspace.joinStr(dirName))
 })
 
-Then("it runs in a global temp directory", function () {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it runs in a global temp directory", function (this: TRWorld) {
+  if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(world.finishedProcess.combinedText, world.workspace.unixified())
+  assert.notInclude(this.finishedProcess.combinedText, this.workspace.unixified())
 })
 
-Then("it runs in the global {string} temp directory", function (dirName: string) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it runs in the global {string} temp directory", function (this: TRWorld, dirName: string) {
+  if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(world.finishedProcess.combinedText, world.workspace.joinStr(dirName))
+  assert.notInclude(this.finishedProcess.combinedText, this.workspace.joinStr(dirName))
 })
 
-Then("it runs in the local {string} directory", function (dirName) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it runs in the local {string} directory", function (this: TRWorld, dirName: string) {
+  if (!this.finishedProcess) {
     throw new Error("no process found")
   }
-  const have = world.finishedProcess.combinedText
-  const want = world.workspace.joinStr(dirName)
+  const have = this.finishedProcess.combinedText
+  const want = this.workspace.joinStr(dirName)
   assert.include(have, want)
 })
 
-Then("it runs in the current working directory", function () {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it runs in the current working directory", function (this: TRWorld) {
+  if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.match(world.finishedProcess.combinedText.trim(), new RegExp(`${world.workspace}\\b`))
+  assert.match(this.finishedProcess.combinedText.trim(), new RegExp(`${this.workspace}\\b`))
 })
 
-Then("it runs (only )the tests in {string}", function (filename) {
-  const world = this as TRWorld
-  helpers.verifyRanOnlyTestsCLI([filename], world)
+Then("it runs (only )the tests in {string}", function (this: TRWorld, filename: string) {
+  helpers.verifyRanOnlyTestsCLI([filename], this)
 })
 
-Then("it runs only the tests in:", function (table: cucumber.TableDefinition) {
-  const world = this as TRWorld
-  helpers.verifyRanOnlyTestsCLI(table.raw(), world)
+Then("it runs only the tests in:", function (this: TRWorld, table: cucumber.DataTable) {
+  helpers.verifyRanOnlyTestsCLI(table.raw(), this)
 })
 
-Then("it runs the console command {string}", function (command: string) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("it runs the console command {string}", function (this: TRWorld, command: string) {
+  if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
-  assert.include(stripAnsi(world.finishedProcess.combinedText), `running console command: ${command}`)
+  assert.include(stripAnsi(this.finishedProcess.combinedText), `running console command: ${command}`)
 })
 
-Then("it runs without errors", function () {
+Then("it runs without errors", function (this: TRWorld) {
   // Nothing to do here
 })
 
-Then("it signals:", function (table: cucumber.TableDefinition) {
-  const world = this as TRWorld
+Then("it signals:", function (this: TRWorld, table: cucumber.DataTable) {
   const hash = table.rowsHash()
   let expectedText = ""
   if (hash.OUTPUT) {
@@ -333,10 +315,10 @@ Then("it signals:", function (table: cucumber.TableDefinition) {
   if (hash["EXIT CODE"]) {
     throw new Error("Verifying normal output but table contains an exit code")
   }
-  if (!world.finishedProcess) {
+  if (!this.finishedProcess) {
     throw new Error("no process results found")
   }
-  const actual = helpers.standardizePath(stripAnsi(world.finishedProcess.combinedText))
+  const actual = helpers.standardizePath(stripAnsi(this.finishedProcess.combinedText))
   if (!actual.includes(expectedText)) {
     throw new Error(`Mismatching output!
 Looking for: ${expectedText}
@@ -346,20 +328,18 @@ ${actual}
   }
 })
 
-Then("the call fails with the error:", function (expectedError) {
-  const world = this as TRWorld
-  if (!world.finishedProcess) {
+Then("the call fails with the error:", function (this: TRWorld, expectedError: string) {
+  if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
-  const output = stripAnsi(world.finishedProcess.combinedText)
+  const output = stripAnsi(this.finishedProcess.combinedText)
   assert.include(output, expectedError)
-  assert.equal(world.finishedProcess.exitCode, 1)
+  assert.equal(this.finishedProcess.exitCode, 1)
 })
 
-Then("the {string} directory is now deleted", async function (directoryPath: string) {
-  const world = this as TRWorld
+Then("the {string} directory is now deleted", async function (this: TRWorld, directoryPath: string) {
   try {
-    await fs.stat(world.workspace.joinStr(directoryPath))
+    await fs.stat(this.workspace.joinStr(directoryPath))
   } catch (e) {
     // we expect an exception here since the directory shouldn't exist
     return
@@ -369,26 +349,23 @@ Then("the {string} directory is now deleted", async function (directoryPath: str
 
 Then(
   "the workspace now/still contains a file {string} with content:",
-  async function (fileName: string, expectedContent: string) {
-    const world = this as TRWorld
-    const actualContent = await fs.readFile(world.workspace.joinStr("tmp", fileName), "utf8")
+  async function (this: TRWorld, fileName: string, expectedContent: string) {
+    const actualContent = await fs.readFile(this.workspace.joinStr("tmp", fileName), "utf8")
     assert.equal(actualContent.trim(), expectedContent.trim())
   }
 )
 
-Then("the test workspace now contains a directory {string}", async function (name) {
-  const world = this as TRWorld
-  const stat = await fs.stat(world.workspace.joinStr("tmp", name))
+Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name: string) {
+  const stat = await fs.stat(this.workspace.joinStr("tmp", name))
   assert.isTrue(stat.isDirectory())
 })
 
-Then("the test fails with:", function (table: cucumber.TableDefinition) {
-  const world = this as TRWorld
+Then("the test fails with:", function (this: TRWorld, table: cucumber.DataTable) {
   const hash = table.rowsHash()
-  if (!world.finishedProcess) {
+  if (!this.finishedProcess) {
     throw new Error("no process result found")
   }
-  const output = stripAnsi(world.finishedProcess.combinedText)
+  const output = stripAnsi(this.finishedProcess.combinedText)
   let expectedHeader
   if (hash.FILENAME && hash.LINE) {
     expectedHeader = `${hash.FILENAME}:${hash.LINE}`
@@ -402,18 +379,17 @@ Then("the test fails with:", function (table: cucumber.TableDefinition) {
   }
   assert.include(output, expectedHeader)
   assert.match(output, new RegExp(hash["ERROR MESSAGE"]))
-  assert.equal(world.finishedProcess.exitCode, parseInt(hash["EXIT CODE"], 10))
+  assert.equal(this.finishedProcess.exitCode, parseInt(hash["EXIT CODE"], 10))
 })
 
-Then("there are no child processes running", async function () {
+Then("there are no child processes running", async function (this: TRWorld) {
   const children = await psTree(process.pid)
   assert.lengthOf(children, 1) // 1 is okay, it's the `ps` process used to determine the child processes
 })
 
-Then("there is no {string} folder", async function (name: string) {
-  const world = this as TRWorld
+Then("there is no {string} folder", async function (this: TRWorld, name: string) {
   try {
-    await fs.stat(world.workspace.joinStr(name))
+    await fs.stat(this.workspace.joinStr(name))
   } catch (e) {
     return
   }

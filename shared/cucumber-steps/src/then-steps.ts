@@ -30,14 +30,14 @@ Then("explode", function () {
   throw new Error("BOOM")
 })
 
-Then("it executes {int} test", function (this: TRWorld, count) {
+Then("it executes {int} test", function (this: TRWorld, count: number) {
   if (!this.apiResults) {
     throw new Error("no API results found")
   }
   assert.equal(this.apiResults.length, count)
 })
 
-Then("it executes in the local {string} directory", function (this: TRWorld, dirName) {
+Then("it executes in the local {string} directory", function (this: TRWorld, dirName: string) {
   if (!this.apiResults) {
     throw new Error("no API results found")
   }
@@ -173,16 +173,19 @@ Then("the API exception provides the guidance:", function (this: TRWorld, expect
   assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
-Then("it creates a directory {string}", async function (this: TRWorld, directoryPath) {
+Then("it creates a directory {string}", async function (this: TRWorld, directoryPath: string) {
   await fs.stat(this.workspace.joinStr(directoryPath))
 })
 
-Then("it creates the file {string} with content:", async function (this: TRWorld, filename, expectedContent) {
-  const actualContent = await fs.readFile(this.workspace.joinStr(filename), {
-    encoding: "utf8",
-  })
-  assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
-})
+Then(
+  "it creates the file {string} with content:",
+  async function (this: TRWorld, filename: string, expectedContent: string) {
+    const actualContent = await fs.readFile(this.workspace.joinStr(filename), {
+      encoding: "utf8",
+    })
+    assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
+  }
+)
 
 Then("it doesn't print:", function (this: TRWorld, expectedText: string) {
   if (!this.finishedProcess) {
@@ -253,7 +256,7 @@ Then("it runs in the global {string} temp directory", function (this: TRWorld, d
   assert.notInclude(this.finishedProcess.combinedText, this.workspace.joinStr(dirName) || "zonk")
 })
 
-Then("it runs in the local {string} directory", function (this: TRWorld, dirName) {
+Then("it runs in the local {string} directory", function (this: TRWorld, dirName: string) {
   if (!this.finishedProcess) {
     throw new Error("no process found")
   }
@@ -269,7 +272,7 @@ Then("it runs in the current working directory", function (this: TRWorld) {
   assert.match(this.finishedProcess.combinedText.trim(), new RegExp(`${this.workspace}\\b`))
 })
 
-Then("it runs (only )the tests in {string}", function (this: TRWorld, filename) {
+Then("it runs (only )the tests in {string}", function (this: TRWorld, filename: string) {
   helpers.verifyRanOnlyTestsCLI([filename], this)
 })
 
@@ -325,7 +328,7 @@ ${actual}
   }
 })
 
-Then("the call fails with the error:", function (this: TRWorld, expectedError) {
+Then("the call fails with the error:", function (this: TRWorld, expectedError: string) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
@@ -352,7 +355,7 @@ Then(
   }
 )
 
-Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name) {
+Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name: string) {
   const stat = await fs.stat(this.workspace.joinStr("tmp", name))
   assert.isTrue(stat.isDirectory())
 })

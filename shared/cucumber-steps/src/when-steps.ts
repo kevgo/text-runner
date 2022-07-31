@@ -50,19 +50,27 @@ When(/^calling Text-Runner$/, { timeout: 20_000 }, async function (this: TRWorld
   this.apiResults = activityCollector.results()
 })
 
-When(/^(trying to run|running) "([^"]*)"$/, { timeout: 30_000 }, async function (this: TRWorld, tryingText, command) {
-  this.finishedProcess = await helpers.executeCLI(command, determineExpectError(tryingText), this)
-})
+When(
+  /^(trying to run|running) "([^"]*)"$/,
+  { timeout: 30_000 },
+  async function (this: TRWorld, tryingText: string, command: string) {
+    this.finishedProcess = await helpers.executeCLI(command, determineExpectError(tryingText), this)
+  }
+)
 
-When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (this: TRWorld, tryingText) {
+When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (this: TRWorld, tryingText: string) {
   this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this)
 })
 
-When(/^(trying to run|running) Text-Runner in the source directory$/, { timeout: 30_000 }, async function (this: TRWorld, tryingText) {
-  this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
-    cwd: this.workspace.platformified(),
-  })
-})
+When(
+  /^(trying to run|running) Text-Runner in the source directory$/,
+  { timeout: 30_000 },
+  async function (this: TRWorld, tryingText) {
+    this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
+      cwd: this.workspace.platformified(),
+    })
+  }
+)
 
 function determineExpectError(tryingText: string) {
   if (tryingText === "running") {

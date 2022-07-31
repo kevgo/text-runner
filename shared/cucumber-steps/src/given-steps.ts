@@ -5,7 +5,7 @@ import * as path from "path"
 
 import { TRWorld } from "./world"
 
-Given("a broken file {string}", async function (this: TRWorld, filePath) {
+Given("a broken file {string}", async function (this: TRWorld, filePath: string) {
   const subdir = path.dirname(filePath)
   if (subdir !== ".") {
     await fse.ensureDir(this.workspace.joinStr(subdir))
@@ -19,7 +19,7 @@ Given("a broken file {string}", async function (this: TRWorld, filePath) {
   )
 })
 
-Given("a runnable file {string}", async function (this: TRWorld, filePath) {
+Given("a runnable file {string}", async function (this: TRWorld, filePath: string) {
   const subdir = path.dirname(filePath)
   if (subdir !== ".") {
     const subdirPath = path.join(this.workspace.joinStr(subdir))
@@ -41,13 +41,13 @@ Given("I am in a directory that contains documentation without a configuration f
   await fs.writeFile(this.workspace.joinStr("1.md"), '<code type="test"></code>')
 })
 
-Given("I am in a directory that contains the {string} example", async function (this: TRWorld, exampleName) {
+Given("I am in a directory that contains the {string} example", async function (this: TRWorld, exampleName: string) {
   await fse.copy(path.join("documentation", "examples", exampleName), this.workspace.platformified())
 })
 
 Given(
   "I am in a directory that contains the {string} example with the configuration file:",
-  async function (this: TRWorld, exampleName, configFileContent) {
+  async function (this: TRWorld, exampleName: string, configFileContent: string) {
     await fse.copy(path.join("documentation", "examples", exampleName), this.workspace.platformified())
     await fs.writeFile(this.workspace.joinStr("text-run.yml"), configFileContent)
   }
@@ -55,38 +55,41 @@ Given(
 
 Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
-  async function (this: TRWorld, exampleName) {
+  async function (this: TRWorld, exampleName: string) {
     await fse.copy(path.join("documentation", "examples", exampleName), this.workspace.platformified())
   }
 )
 
-Given("the source code contains a directory {string}", function (this: TRWorld, dirName) {
+Given("the source code contains a directory {string}", function (this: TRWorld, dirName: string) {
   return fse.ensureDir(this.workspace.joinStr(dirName))
 })
 
-Given("the source code contains a file {string}", async function (this: TRWorld, fileName) {
+Given("the source code contains a file {string}", async function (this: TRWorld, fileName: string) {
   await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
   await fs.writeFile(this.workspace.joinStr(fileName), "content")
 })
 
-Given("the source code contains a file {string} with content:", async function (this: TRWorld, fileName, content) {
-  await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
-  await fs.writeFile(this.workspace.joinStr(fileName), content)
-})
+Given(
+  "the source code contains a file {string} with content:",
+  async function (this: TRWorld, fileName: string, content: string) {
+    await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
+    await fs.writeFile(this.workspace.joinStr(fileName), content)
+  }
+)
 
-Given("the source code contains an executable {string}", async function (this: TRWorld, fileName) {
+Given("the source code contains an executable {string}", async function (this: TRWorld, fileName: string) {
   await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
   await fs.writeFile(this.workspace.joinStr(fileName), "content", { mode: 0o744 })
 })
 
-Given("the workspace contains a file {string}", async function (this: TRWorld, fileName) {
+Given("the workspace contains a file {string}", async function (this: TRWorld, fileName: string) {
   await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
   await fs.writeFile(this.workspace.joinStr("tmp", fileName), "content")
 })
 
 Given(
   "the workspace contains a file {string} with content {string}",
-  async function (this: TRWorld, fileName, content) {
+  async function (this: TRWorld, fileName: string, content: string) {
     await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
     await fs.writeFile(this.workspace.joinStr("tmp", fileName), content)
   }
@@ -112,28 +115,31 @@ Given("the source code contains the HelloWorld action", async function (this: TR
   )
 })
 
-Given("the workspace contains a file {string} with content:", async function (this: TRWorld, fileName, content) {
-  await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
-  await fs.writeFile(this.workspace.joinStr("tmp", fileName), content)
-})
+Given(
+  "the workspace contains a file {string} with content:",
+  async function (this: TRWorld, fileName: string, content: string) {
+    await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
+    await fs.writeFile(this.workspace.joinStr("tmp", fileName), content)
+  }
+)
 
 Given("the text-run configuration contains:", async function (this: TRWorld, text: string) {
   await fs.appendFile(this.workspace.joinStr("text-run.yml"), `\n${text}`)
 })
 
-Given("the workspace contains a directory {string}", async function (this: TRWorld, dir) {
+Given("the workspace contains a directory {string}", async function (this: TRWorld, dir: string) {
   await fse.ensureDir(this.workspace.joinStr("tmp", dir))
 })
 
-Given("the workspace contains an empty file {string}", async function (this: TRWorld, fileName) {
+Given("the workspace contains an empty file {string}", async function (this: TRWorld, fileName: string) {
   await fs.writeFile(this.workspace.joinStr(fileName), "")
 })
 
-Given("the workspace contains an image {string}", async function (this: TRWorld, imageName) {
+Given("the workspace contains an image {string}", async function (this: TRWorld, imageName: string) {
   await fse.ensureDir(this.workspace.joinStr(path.dirname(imageName)))
   await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), this.workspace.joinStr(imageName))
 })
 
-Given("the configuration file:", async function (this: TRWorld, content) {
+Given("the configuration file:", async function (this: TRWorld, content: string) {
   await fs.writeFile(this.workspace.joinStr("text-run.yml"), content)
 })

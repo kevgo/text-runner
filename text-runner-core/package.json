@@ -24,7 +24,7 @@
     "glob": "7.2.0",
     "glob-promise": "4.2.2",
     "got": "11.8.2",
-    "humanize-string": "2.1.0",
+    "humanize-string": "3.0.0",
     "interpret": "2.2.0",
     "is-glob": "4.0.3",
     "markdown-it": "12.3.2",

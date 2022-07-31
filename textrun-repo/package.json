@@ -9,7 +9,7 @@
   ],
   "dependencies": {
     "assert-no-diff": "3.0.6",
-    "colorette": "1.2.2",
+    "colorette": "2.0.19",
     "eol": "0.9.1",
     "text-runner-core": "5.0.1"
   },

@@ -14,21 +14,9 @@ jobs:
       matrix:
         node-version: [16.x, 18.x]
     steps:
-      - run: nproc
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
       - run: make setup
-      # - run: make test-all
-      # - run: |
-      #     if [ "${CIRCLE_BRANCH}" == "master" ]; then
-      #       echo building all codebases ...
-      #       make build-all
-      #     else
-      #       echo building involved codebases ...
-      #       make build-involved
-      #     fi
-      # - run: make setup
-      # - run: npm run build --if-present
-      # - run: npm test
+      - run: make test-all

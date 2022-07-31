@@ -246,14 +246,14 @@ Then("it runs in a global temp directory", function (this: TRWorld) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(this.finishedProcess.combinedText, this.workspace.unixified() || "zonk")
+  assert.notInclude(this.finishedProcess.combinedText, this.workspace.unixified())
 })
 
 Then("it runs in the global {string} temp directory", function (this: TRWorld, dirName: string) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(this.finishedProcess.combinedText, this.workspace.joinStr(dirName) || "zonk")
+  assert.notInclude(this.finishedProcess.combinedText, this.workspace.joinStr(dirName))
 })
 
 Then("it runs in the local {string} directory", function (this: TRWorld, dirName: string) {

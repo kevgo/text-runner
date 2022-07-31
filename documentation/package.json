@@ -10,10 +10,10 @@
     "custom-action-typescript": "0.0.0",
     "text-runner": "5.0.1",
     "text-runner-core": "5.0.1",
-    "textrun-extension": "0.1.0",
-    "textrun-make": "0.1.0",
-    "textrun-npm": "0.1.0",
-    "textrun-shell": "0.1.0",
-    "textrun-workspace": "0.1.0"
+    "textrun-extension": "0.1.1",
+    "textrun-make": "0.1.1",
+    "textrun-npm": "0.1.1",
+    "textrun-shell": "0.1.1",
+    "textrun-workspace": "0.1.1"
   }
 }

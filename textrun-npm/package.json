@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "8.5.1",
-    "colorette": "1.2.2",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.1",
     "textrun-action": "0.1.1",

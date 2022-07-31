@@ -86,7 +86,7 @@ Then("it emits these events:", function (this: TRWorld, table: cucumber.DataTabl
   }
   let have: ExecuteResultLine[] = []
   const wanted = want[0]
-  for (const activityResult of this.apiResults || []) {
+  for (const activityResult of this.apiResults) {
     const result: ExecuteResultLine = {}
     if (wanted.filename != null) {
       result.filename = activityResult.activity?.location.file.unixified()
@@ -235,11 +235,11 @@ Then("it runs {int} test", function (this: TRWorld, count: number) {
 })
 
 Then("it executes in a global temp directory", function (this: TRWorld) {
-  assert.notInclude((this.apiResults || [])[0].output, this.workspace.unixified())
+  assert.notInclude(this.apiResults[0].output, this.workspace.unixified())
 })
 
 Then("it executes in the global {string} temp directory", function (this: TRWorld, dirName: string) {
-  assert.notInclude((this.apiResults || [])[0].output, this.workspace.joinStr(dirName))
+  assert.notInclude(this.apiResults[0].output, this.workspace.joinStr(dirName))
 })
 
 Then("it runs in a global temp directory", function (this: TRWorld) {

@@ -11,7 +11,6 @@
     "text-runner-core": "5.0.1"
   },
   "devDependencies": {
-    "@cucumber/cucumber": "8.5.1",
     "colorette": "1.2.2",
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.1",

@@ -16,7 +16,7 @@ cuke-lerna:  # cukes for this codebase are in ../text-runner-features, Lerna run
 
 cuke-online: build  # runs the feature specs that don't need an online connection
 	echo running Text-Runner online feature specs ...
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/../node_modules/.bin/cucumber-js --tags "(not @todo) and @online" --format=progress-bar --parallel `node -e 'console.log(os.cpus().length)'`
 
 doc:  # verify documentation
 	echo Text-Runner documentation tests ...
@@ -42,7 +42,7 @@ parallel: lint  # runs all tests in parallel
 	${CURDIR}/bin/text-run static --format=dot &
 	${CURDIR}/../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts" &
 	${CURDIR}/bin/text-run dynamic --format=dot
-	${CURDIR}/node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
+	${CURDIR}/../node_modules/.bin/cucumber-js --tags "(not @online) and (not @todo)" --format=progress --parallel `node -e 'console.log(os.cpus().length)'`
 
 publish: clean build  # publishes this package
 	npm publish

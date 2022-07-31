@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import { UserError } from "../errors/user-error"
-import * as ast from "./index"
+import { UserError } from "../errors/user-error.js"
+import * as ast from "./index.js"
 
 suite("ast.NodeList", function () {
   test(".concat()", function () {

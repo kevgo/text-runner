@@ -1,4 +1,4 @@
-import { ExecuteResultLine } from "../then-steps"
+import { ExecuteResultLine } from "../then-steps.js"
 
 export function compareExecuteResultLine(a: ExecuteResultLine, b: ExecuteResultLine): number {
   if (!a.filename || !b.filename || !a.line || !b.line) {

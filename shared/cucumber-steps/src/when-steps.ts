@@ -1,8 +1,8 @@
 import { When } from "@cucumber/cucumber"
 import * as textRunner from "text-runner-core"
 
-import * as helpers from "./helpers"
-import { TRWorld } from "./world"
+import * as helpers from "./helpers/index.js"
+import { TRWorld } from "./world.js"
 
 When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
   const config: textRunner.configuration.APIData = { sourceDir: this.workspace.platformified() }

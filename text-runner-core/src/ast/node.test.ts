@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as ast from "./index"
+import * as ast from "./index.js"
 
 suite("ast.Node", function () {
   test(".scaffold()", function () {

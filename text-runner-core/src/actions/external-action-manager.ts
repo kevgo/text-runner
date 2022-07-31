@@ -1,6 +1,6 @@
-import * as actions from "../actions"
 import { Activity } from "../activities/index.js"
 import { UserError } from "../errors/user-error.js"
+import * as actions from "./index.js"
 import { Action, FunctionRepo } from "./index.js"
 
 /** ExternalActionManager provides external actions from their own NPM modules */

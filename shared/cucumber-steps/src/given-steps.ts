@@ -3,7 +3,7 @@ import { promises as fs } from "fs"
 import * as fse from "fs-extra"
 import * as path from "path"
 
-import { TRWorld } from "./world"
+import { TRWorld } from "./world.js"
 
 Given("a broken file {string}", async function (this: TRWorld, filePath: string) {
   const subdir = path.dirname(filePath)

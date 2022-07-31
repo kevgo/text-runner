@@ -7,7 +7,7 @@ import * as textRunner from "text-runner-core"
 import * as tmp from "tmp-promise"
 import * as util from "util"
 
-import { TRWorld } from "./world"
+import { TRWorld } from "./world.js"
 const rimrafp = util.promisify(rimraf)
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises

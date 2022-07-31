@@ -33,6 +33,7 @@
     "eslint-plugin-simple-import-sort": "7.0.0",
     "eslint-plugin-typescript-sort-keys": "1.5.0",
     "lerna": "3.22.1",
+    "mocha": "9.2.0",
     "prettier": "2.5.1",
     "sort-package-json": "1.57.0",
     "ts-node": "10.9.1",

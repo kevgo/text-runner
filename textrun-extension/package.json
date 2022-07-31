@@ -12,7 +12,6 @@
     "text-runner-core": "5.0.1"
   },
   "devDependencies": {
-    "mocha": "9.2.0",
     "text-runner": "5.0.1",
     "textrun-action": "0.1.1"
   }

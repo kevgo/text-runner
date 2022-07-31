@@ -1,11 +1,6 @@
-.DEFAULT_GOAL := help
-
-
 # Lerna terminology:
 # - dependents = downstreams (my dependents, those that are dependent on me)
 # - dependencies = upstreams (my dependencies, those that I depend on)
-#
-# Must diff against origin/master because master on CircleCI is not the same as origin/master.
 
 build-affected:  # builds the codebases affected by changes in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory build
@@ -145,3 +140,4 @@ unit-changed:  # runs all unit tests of codebases changed in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory unit
 
 .SILENT:
+.DEFAULT_GOAL := help

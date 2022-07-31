@@ -15,7 +15,6 @@
     "shared-cucumber-steps": "0.0.0",
     "text-runner": "5.0.1",
     "textrun-extension": "0.1.1",
-    "textrun-npm": "0.1.1",
-    "ts-node": "10.4.0"
+    "textrun-npm": "0.1.1"
   }
 }

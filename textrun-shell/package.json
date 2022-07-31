@@ -11,7 +11,7 @@
     "colorette": "2.0.19",
     "end-child-processes": "1.0.3",
     "observable-process": "8.0.0-pre4",
-    "strip-ansi": "6.0.0",
+    "strip-ansi": "7.0.1",
     "text-runner-core": "5.0.1",
     "textrun-extension": "0.1.1"
   },

@@ -3,12 +3,7 @@ import * as fs from "fs-extra"
 import * as tr from "text-runner-core"
 
 import { trimDollar } from "../helpers/trim-dollar"
-
-/** data structure of the package.json file as needed by this codebase */
-interface PackageJson {
-  bin: Record<string, string>
-  name: string
-}
+import { PackageJson } from "./package-json"
 
 export async function exportedExecutable(action: tr.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())

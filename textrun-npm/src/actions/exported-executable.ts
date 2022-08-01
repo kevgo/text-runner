@@ -1,16 +1,23 @@
 import * as color from "colorette"
+import * as fs from "fs-extra"
 import * as tr from "text-runner-core"
 
 import { trimDollar } from "../helpers/trim-dollar"
 
-export function exportedExecutable(action: tr.actions.Args): void {
+/** data structure of the package.json file as needed by this codebase */
+interface PackageJson {
+  bin: Record<string, string>
+  name: string
+}
+
+export async function exportedExecutable(action: tr.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())
   if (commandName === "") {
     throw new Error("No executable name specified")
   }
   action.name(`npm package exports executable ${color.cyan(commandName)}`)
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const pkgData = require(action.configuration.sourceDir.joinStr("package.json"))
+  const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
+  const pkgData: PackageJson = await fs.readJSON(packageJsonPath)
   if (!Object.keys(pkgData.bin).includes(commandName)) {
     throw new Error(`package.json does not export a "${commandName}" command`)
   }

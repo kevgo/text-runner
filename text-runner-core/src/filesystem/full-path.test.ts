@@ -65,7 +65,7 @@ suite("FullPath", function () {
     })
 
     test("matching publication", function () {
-      const publications = configuration.Publications.fromJSON([
+      const publications = configuration.Publications.create([
         {
           localPath: "/content",
           publicExtension: "html",

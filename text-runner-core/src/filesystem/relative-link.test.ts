@@ -15,7 +15,7 @@ suite("RelativeLink", function () {
     })
 
     test("with publications", function () {
-      const publications = configuration.Publications.fromJSON([
+      const publications = configuration.Publications.create([
         { localPath: "/content", publicPath: "/", publicExtension: "" },
       ])
       const link = new files.RelativeLink("new.md")

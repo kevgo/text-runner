@@ -1,12 +1,18 @@
 import * as files from "../filesystem/index"
 import * as helpers from "../helpers"
 
+export interface PublicationConfig {
+  localPath: string
+  publicExtension: string
+  publicPath: string
+}
+
 /**
  * Publications map local folders (in the source code) to public URL paths.
  * This is needed when verifying Markdown code that will be published as HTML somewhere,
  * and the links in Markdown reference the public URLs of the Markdown pages.
  */
-export class Publication {
+export class Publication implements PublicationConfig {
   /** filesystem path of the src folder */
   readonly localPath: string
 

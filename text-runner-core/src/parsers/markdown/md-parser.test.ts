@@ -3,6 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 
 import * as ast from "../../ast"
+import { NodeScaffoldData } from "../../ast"
 import * as files from "../../filesystem/index"
 import { parse } from "./parse"
 
@@ -13,11 +14,12 @@ suite("MdParser.parseFile()", function () {
     for (const testDirName of fs.readdirSync(fixtureDir)) {
       const testDirPath = path.join(fixtureDir, testDirName)
       test(`parsing '${testDirName}'`, async function () {
-        const expectedJSON = await fs.readJSON(path.join(testDirPath, "result.json"))
+        const expectedJSON: NodeScaffoldData[] = await fs.readJSON(path.join(testDirPath, "result.json"))
         const expected = new ast.NodeList()
         for (const expectedNodeData of expectedJSON) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-          expectedNodeData.file = expectedNodeData.file.replace("*", "md")
+          if (expectedNodeData.file && typeof expectedNodeData.file === "string") {
+            expectedNodeData.file = expectedNodeData.file.replace("*", "md")
+          }
           expectedNodeData.sourceDir = testDirPath
           expected.push(ast.Node.scaffold(expectedNodeData))
         }

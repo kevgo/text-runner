@@ -3,6 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 
 import * as ast from "../../ast"
+import { NodeScaffoldData } from "../../ast"
 import * as files from "../../filesystem/index"
 import { TagMapper } from "../tag-mapper"
 import { parseHTMLFiles } from "./parse-html-files"
@@ -16,11 +17,12 @@ suite("parseHTMLFiles", function () {
       const testDirPath = path.join(fixturePath, testDirName)
       test(`parse '${testDirName}'`, async function () {
         const expectedPath = path.join(testDirPath, "result.json")
-        const expectedJSON = await fs.readJSON(expectedPath)
+        const expectedJSON: NodeScaffoldData[] = await fs.readJSON(expectedPath)
         const expected = new ast.NodeList()
         for (const e of expectedJSON) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-          e.file = e.file.replace("*", "html")
+          if (e.file && typeof e.file === "string") {
+            e.file = e.file.replace("*", "html")
+          }
           e.sourceDir = testDirPath
           expected.push(ast.Node.scaffold(e))
         }

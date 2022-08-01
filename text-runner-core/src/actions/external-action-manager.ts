@@ -1,6 +1,7 @@
 import * as actions from "../actions"
 import { Activity } from "../activities/index"
 import { UserError } from "../errors/user-error"
+import * as tr_export from "./export"
 import { Action, FunctionRepo } from "./index"
 
 /** ExternalActionManager provides external actions from their own NPM modules */
@@ -28,7 +29,7 @@ export class ExternalActionManager {
     const moduleName = "textrun-" + parts[0]
     const wantAction = actions.name(parts[1])
     try {
-      var module = await import(moduleName)
+      var module: tr_export.TextrunActions = await import(moduleName)
     } catch (e) {
       if (!(e instanceof Error)) {
         throw e

@@ -3,6 +3,7 @@ import * as fs from "fs-extra"
 import * as tr from "text-runner-core"
 
 import { trimDollar } from "../helpers/trim-dollar"
+import { PackageJson } from "./package-json"
 
 export async function install(action: tr.actions.Args): Promise<void> {
   const installText = trimDollar(action.region.text())
@@ -12,7 +13,7 @@ export async function install(action: tr.actions.Args): Promise<void> {
   action.name(`check npm package name in ${color.cyan(installText)}`)
 
   const dir = action.region[0]?.attributes?.dir || ""
-  const pkg = await fs.readJSON(action.configuration.sourceDir.joinStr(dir, "package.json"))
+  const pkg: PackageJson = await fs.readJSON(action.configuration.sourceDir.joinStr(dir, "package.json"))
 
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(

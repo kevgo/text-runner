@@ -1,5 +1,3 @@
-import * as fs from "fs-extra"
-
 import { PathMapper } from "./path-mapper"
 
 /** ConfigFile defines the structure of the configuration file for this Text-Runner plugin. */

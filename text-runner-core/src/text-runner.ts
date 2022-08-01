@@ -1,4 +1,5 @@
 export * as actions from "./actions/"
+export * as exports from "./actions/export"
 export * as activities from "./activities"
 export * as ast from "./ast"
 export * as commands from "./commands"

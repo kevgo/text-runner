@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import * as fs from "fs-extra"
 
 import { PathMapper } from "./path-mapper"
 
@@ -24,8 +24,7 @@ export class Configuration {
   static async load(filePath: string): Promise<Configuration> {
     try {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const fileText = await fs.readFile(filePath, "utf8")
-      const content: ConfigFile = JSON.parse(fileText)
+      const content: ConfigFile = await fs.readJSON(filePath)
       return new Configuration(content)
     } catch (e) {
       return Configuration.default()

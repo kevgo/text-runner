@@ -65,7 +65,7 @@ suite("FullPath", function () {
     })
 
     test("matching publication", function () {
-      const publications = configuration.Publications.fromData([
+      const publications = configuration.Publications.fromConfigs([
         {
           localPath: "/content",
           publicExtension: "html",

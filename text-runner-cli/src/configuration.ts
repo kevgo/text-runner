@@ -72,7 +72,7 @@ export class Data {
       result.online = this.online
     }
     if (this.publications != null) {
-      result.publications = tr.configuration.Publications.fromJSON(this.publications).sorted()
+      result.publications = tr.configuration.Publications.create(this.publications).sorted()
     }
     if (this.regionMarker != null) {
       result.regionMarker = this.regionMarker

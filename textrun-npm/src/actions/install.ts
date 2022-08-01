@@ -12,7 +12,7 @@ export async function install(action: tr.actions.Args): Promise<void> {
   }
   action.name(`check npm package name in ${color.cyan(installText)}`)
   const dir = action.region[0]?.attributes?.dir || ""
-  const pkgJson: PackageJson = await fs.readJSON(action.configuration.sourceDir.joinStr(dir, "package.json"), "utf8")
+  const pkgJson: PackageJson = await fs.readJSON(action.configuration.sourceDir.joinStr(dir, "package.json"))
   if (missesPackageName(installText, pkgJson.name)) {
     throw new Error(
       `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${color.cyan(

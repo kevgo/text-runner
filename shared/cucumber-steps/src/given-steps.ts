@@ -48,7 +48,9 @@ Given("I am in a directory that contains the {string} example", async function (
 Given(
   "I am in a directory that contains the {string} example with the configuration file:",
   async function (this: TRWorld, exampleName: string, configFileContent: string) {
-    await fse.copy(path.join("documentation", "examples", exampleName), this.workspace.platformified())
+    await fs.cp(path.join("documentation", "examples", exampleName), this.workspace.platformified(), {
+      recursive: true,
+    })
     await fs.writeFile(this.workspace.joinStr("text-run.yml"), configFileContent)
   }
 )
@@ -56,41 +58,43 @@ Given(
 Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
   async function (this: TRWorld, exampleName: string) {
-    await fse.copy(path.join("documentation", "examples", exampleName), this.workspace.platformified())
+    await fs.cp(path.join("documentation", "examples", exampleName), this.workspace.platformified(), {
+      recursive: true,
+    })
   }
 )
 
 Given("the source code contains a directory {string}", function (this: TRWorld, dirName: string) {
-  return fse.ensureDir(this.workspace.joinStr(dirName))
+  return fs.mkdir(this.workspace.joinStr(dirName), { recursive: true })
 })
 
 Given("the source code contains a file {string}", async function (this: TRWorld, fileName: string) {
-  await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
+  await fs.mkdir(this.workspace.joinStr(path.dirname(fileName)), { recursive: true })
   await fs.writeFile(this.workspace.joinStr(fileName), "content")
 })
 
 Given(
   "the source code contains a file {string} with content:",
   async function (this: TRWorld, fileName: string, content: string) {
-    await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
+    await fs.mkdir(this.workspace.joinStr(path.dirname(fileName)), { recursive: true })
     await fs.writeFile(this.workspace.joinStr(fileName), content)
   }
 )
 
 Given("the source code contains an executable {string}", async function (this: TRWorld, fileName: string) {
-  await fse.ensureDir(this.workspace.joinStr(path.dirname(fileName)))
+  await fs.mkdir(this.workspace.joinStr(path.dirname(fileName)), { recursive: true })
   await fs.writeFile(this.workspace.joinStr(fileName), "content", { mode: 0o744 })
 })
 
 Given("the workspace contains a file {string}", async function (this: TRWorld, fileName: string) {
-  await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
+  await fs.mkdir(this.workspace.joinStr("tmp", path.dirname(fileName)), { recursive: true })
   await fs.writeFile(this.workspace.joinStr("tmp", fileName), "content")
 })
 
 Given(
   "the workspace contains a file {string} with content {string}",
   async function (this: TRWorld, fileName: string, content: string) {
-    await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
+    await fs.mkdir(this.workspace.joinStr("tmp", path.dirname(fileName)), { recursive: true })
     await fs.writeFile(this.workspace.joinStr("tmp", fileName), content)
   }
 )
@@ -107,7 +111,7 @@ testable documentation
 })
 
 Given("the source code contains the HelloWorld action", async function (this: TRWorld) {
-  await fse.ensureDir(this.workspace.joinStr("text-run"))
+  await fs.mkdir(this.workspace.joinStr("text-run"), { recursive: true })
   await fs.writeFile(
     this.workspace.joinStr("text-run", "hello-world.js"),
     `
@@ -118,7 +122,7 @@ Given("the source code contains the HelloWorld action", async function (this: TR
 Given(
   "the workspace contains a file {string} with content:",
   async function (this: TRWorld, fileName: string, content: string) {
-    await fse.ensureDir(this.workspace.joinStr("tmp", path.dirname(fileName)))
+    await fs.mkdir(this.workspace.joinStr("tmp", path.dirname(fileName)), { recursive: true })
     await fs.writeFile(this.workspace.joinStr("tmp", fileName), content)
   }
 )
@@ -128,7 +132,7 @@ Given("the text-run configuration contains:", async function (this: TRWorld, tex
 })
 
 Given("the workspace contains a directory {string}", async function (this: TRWorld, dir: string) {
-  await fse.ensureDir(this.workspace.joinStr("tmp", dir))
+  await fs.mkdir(this.workspace.joinStr("tmp", dir), { recursive: true })
 })
 
 Given("the workspace contains an empty file {string}", async function (this: TRWorld, fileName: string) {
@@ -136,7 +140,7 @@ Given("the workspace contains an empty file {string}", async function (this: TRW
 })
 
 Given("the workspace contains an image {string}", async function (this: TRWorld, imageName: string) {
-  await fse.ensureDir(this.workspace.joinStr(path.dirname(imageName)))
+  await fs.mkdir(this.workspace.joinStr(path.dirname(imageName)), { recursive: true })
   await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), this.workspace.joinStr(imageName))
 })
 

@@ -74,7 +74,7 @@ suite("FullLink", function () {
 
     test("link to mapped directory", function () {
       const link = new FullLink("/blog/two.html")
-      const publications = configuration.Publications.fromData([
+      const publications = configuration.Publications.fromConfigs([
         {
           localPath: "/content/posts",
           publicExtension: "html",
@@ -87,7 +87,7 @@ suite("FullLink", function () {
 
     test("link with anchor to mapped directory", function () {
       const link = new FullLink("/blog/two.html#hello")
-      const publications = configuration.Publications.fromData([
+      const publications = configuration.Publications.fromConfigs([
         {
           localPath: "/content/posts",
           publicExtension: "html",

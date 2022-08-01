@@ -1,12 +1,12 @@
 import * as files from "../filesystem/index"
-import { Publication, PublicationData } from "./publication"
+import { Publication, PublicationConfig } from "./publication"
 
 export class Publications extends Array<Publication> {
   // Creates a new Publications instance based on the given JSON data
-  static fromData(publicationsData: PublicationData[] = []): Publications {
+  static fromConfigs(configs: PublicationConfig[] = []): Publications {
     const result = new Publications()
-    for (const p of publicationsData) {
-      result.push(new Publication(p))
+    for (const config of configs) {
+      result.push(new Publication(config))
     }
     return result
   }
@@ -24,6 +24,6 @@ export class Publications extends Array<Publication> {
   // Returns these publications, sorted by public path
   sorted(): Publications {
     const sorted = this.sort((a, b) => (a.publicPath > b.publicPath ? -1 : 1))
-    return Publications.fromData(sorted)
+    return Publications.fromConfigs(sorted)
   }
 }

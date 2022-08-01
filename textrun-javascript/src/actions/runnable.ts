@@ -6,10 +6,8 @@ import { replaceAsyncCallback } from "../helpers/replace-async-callback"
 import { replaceRequireLocalModule } from "../helpers/replace-require-local-module"
 import { replaceVariableDeclarations } from "../helpers/replace-variable-declarations"
 
-type DoneFunction = (err?: Error) => void
-
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
-export function runnable(action: tr.actions.Args, done: DoneFunction): void {
+export function runnable(action: tr.actions.Args, done: tr.export.DoneFunction): void {
   action.name("run JavaScript")
   let code = action.region.text()
   if (code === "") {

@@ -2,7 +2,6 @@ import * as actions from "../actions"
 import * as trExports from "../actions/export"
 import { Activity } from "../activities/index"
 import { UserError } from "../errors/user-error"
-import * as tr_export from "./export"
 import { Action, FunctionRepo } from "./index"
 
 /** ExternalActionManager provides external actions from their own NPM modules */

@@ -1,7 +1,7 @@
 import * as files from "../filesystem/index"
 import * as helpers from "../helpers"
 
-export interface PublicationData {
+export interface PublicationConfig {
   /** filesystem path of the src folder */
   localPath: string
 
@@ -17,7 +17,7 @@ export interface PublicationData {
  * This is needed when verifying Markdown code that will be published as HTML somewhere,
  * and the links in Markdown reference the public URLs of the Markdown pages.
  */
-export class Publication implements PublicationData {
+export class Publication implements PublicationConfig {
   /** filesystem path of the src folder */
   readonly localPath: string
 

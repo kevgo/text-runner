@@ -6,7 +6,7 @@ export class Publications extends Array<Publication> {
   static create(publicationsData: PublicationConfig[] = []): Publications {
     const result = new Publications()
     for (const p of publicationsData) {
-      result.push(new Publication(p.localPath, p.publicPath, p.publicExtension))
+      result.push(new Publication(p))
     }
     return result
   }

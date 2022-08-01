@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import * as fs from "fs-extra"
+import * as fs from "fs"
 import * as path from "path"
 
 import * as ast from "../../ast"
@@ -14,7 +14,9 @@ suite("MdParser.parseFile()", function () {
     for (const testDirName of fs.readdirSync(fixtureDir)) {
       const testDirPath = path.join(fixtureDir, testDirName)
       test(`parsing '${testDirName}'`, async function () {
-        const expectedJSON: NodeScaffoldData[] = await fs.readJSON(path.join(testDirPath, "result.json"))
+        const expectedJSON: NodeScaffoldData[] = JSON.parse(
+          fs.readFileSync(path.join(testDirPath, "result.json"), "utf-8")
+        )
         const expected = new ast.NodeList()
         for (const expectedNodeData of expectedJSON) {
           if (expectedNodeData.file && typeof expectedNodeData.file === "string") {

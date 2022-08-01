@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import * as fs from "fs-extra"
+import * as fs from "fs"
 import * as path from "path"
 
 import * as ast from "../../ast"
@@ -17,7 +17,7 @@ suite("parseHTMLFiles", function () {
       const testDirPath = path.join(fixturePath, testDirName)
       test(`parse '${testDirName}'`, async function () {
         const resultFilePath = path.join(testDirPath, "result.json")
-        const resultData: NodeScaffoldData[] = await fs.readJSON(resultFilePath)
+        const resultData: NodeScaffoldData[] = JSON.parse(fs.readFileSync(resultFilePath, "utf-8"))
         const expected = new ast.NodeList()
         for (const resultEntry of resultData) {
           if (resultEntry.file && typeof resultEntry.file === "string") {

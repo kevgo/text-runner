@@ -28,7 +28,7 @@ export class Actions {
     } else if (typeof action.default === "function") {
       this.list[fileBasedName] = action.default
     } else if (typeof action === "object") {
-      for (const key of Object.keys(action as object)) {
+      for (const key of Object.keys(action as Record<string, Action>)) {
         if (typeof key !== "string") {
           throw new Error(`Key "${key}" has unexpected type "${typeof key}", expected string`)
         }

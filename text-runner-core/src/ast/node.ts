@@ -68,6 +68,8 @@ export interface NodeScaffoldData {
   type?: NodeType
 }
 
+export type NodeScaffoldDataReadonly = Readonly<NodeScaffoldData>
+
 /** a node in the standardized Markdown/HTML AST */
 export class Node {
   static scaffold(data: NodeScaffoldData = {}): Node {

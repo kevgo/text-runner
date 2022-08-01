@@ -4,7 +4,7 @@ import { exportedExecutable } from "./actions/exported-executable"
 import { install } from "./actions/install"
 import { installedExecutable } from "./actions/installed-executable"
 
-export const textrunActions: tr.exports.TextrunActions = {
+export const textrunActions: tr.export.TextrunActions = {
   exportedExecutable,
   install,
   installedExecutable,

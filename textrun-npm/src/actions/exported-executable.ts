@@ -5,12 +5,6 @@ import * as tr from "text-runner-core"
 import { trimDollar } from "../helpers/trim-dollar"
 import { PackageJson } from "./package-json"
 
-/** data structure of the package.json file as needed by this codebase */
-interface PackageJson {
-  bin: Record<string, string>
-  name: string
-}
-
 export async function exportedExecutable(action: tr.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())
   if (commandName === "") {

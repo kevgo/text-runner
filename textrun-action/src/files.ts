@@ -7,5 +7,5 @@ export interface PackageJson {
 
 /** expected file structure of "index.js" files */
 export interface IndexFile {
-  textrunActions: tr.exports.TextrunActions
+  textrunActions: tr.export.TextrunActions
 }

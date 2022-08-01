@@ -10,7 +10,6 @@
     "assert-no-diff": "3.0.6",
     "colorette": "2.0.19",
     "end-child-processes": "1.0.3",
-    "fs-extra": "10.1.0",
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.1",

@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as tr from "text-runner"
 
 import { command } from "./actions/command"
 import { commandOutput } from "./actions/command-output"

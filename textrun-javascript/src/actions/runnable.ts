@@ -7,7 +7,7 @@ import { replaceRequireLocalModule } from "../helpers/replace-require-local-modu
 import { replaceVariableDeclarations } from "../helpers/replace-variable-declarations"
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
-export function runnable(action: tr.actions.Args, done: tr.export.DoneFunction): void {
+export function runnable(action: tr.actions.Args, done: tr.exports.DoneFunction): void {
   action.name("run JavaScript")
   let code = action.region.text()
   if (code === "") {

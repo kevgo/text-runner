@@ -42,7 +42,7 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function (this: TRWorld, exampleName: string) {
-  await fse.copy(path.join("documentation", "examples", exampleName), this.workspace.platformified())
+  await fs.cp(path.join("documentation", "examples", exampleName), this.workspace.platformified(), { recursive: true })
 })
 
 Given(

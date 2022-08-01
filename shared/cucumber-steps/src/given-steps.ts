@@ -1,6 +1,5 @@
 import { Given } from "@cucumber/cucumber"
 import { promises as fs } from "fs"
-import * as fse from "fs-extra"
 import * as path from "path"
 
 import { TRWorld } from "./world"

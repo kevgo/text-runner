@@ -59,14 +59,16 @@ export type NodeTag =
   | "ul"
 
 export interface NodeScaffoldData {
-  readonly attributes?: NodeAttributes
-  readonly content?: string
+  attributes?: NodeAttributes
+  content?: string
   file?: string | files.FullFilePath
-  readonly line?: number
-  readonly sourceDir?: string
-  readonly tag?: NodeTag
-  readonly type?: NodeType
+  line?: number
+  sourceDir?: string
+  tag?: NodeTag
+  type?: NodeType
 }
+
+export type NodeScaffoldDataReadonly = Readonly<NodeScaffoldData>
 
 /** a node in the standardized Markdown/HTML AST */
 export class Node {

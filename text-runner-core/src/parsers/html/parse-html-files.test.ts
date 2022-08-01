@@ -3,6 +3,7 @@ import * as fs from "fs-extra"
 import * as path from "path"
 
 import * as ast from "../../ast"
+import { NodeScaffoldData } from "../../ast"
 import * as files from "../../filesystem/index"
 import { TagMapper } from "../tag-mapper"
 import { parseHTMLFiles } from "./parse-html-files"
@@ -15,14 +16,15 @@ suite("parseHTMLFiles", function () {
     for (const testDirName of fs.readdirSync(fixturePath)) {
       const testDirPath = path.join(fixturePath, testDirName)
       test(`parse '${testDirName}'`, async function () {
-        const expectedPath = path.join(testDirPath, "result.json")
-        const expectedJSON = await fs.readJSON(expectedPath)
+        const resultFilePath = path.join(testDirPath, "result.json")
+        const resultData: NodeScaffoldData[] = await fs.readJSON(resultFilePath)
         const expected = new ast.NodeList()
-        for (const e of expectedJSON) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-          e.file = e.file.replace("*", "html")
-          e.sourceDir = testDirPath
-          expected.push(ast.Node.scaffold(e))
+        for (const resultEntry of resultData) {
+          if (resultEntry.file && typeof resultEntry.file === "string") {
+            resultEntry.file = resultEntry.file.replace("*", "html")
+          }
+          resultEntry.sourceDir = testDirPath
+          expected.push(ast.Node.scaffold(resultEntry))
         }
         const actual = await parseHTMLFiles(
           [new files.FullFilePath("input.html")],

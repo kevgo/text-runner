@@ -9,8 +9,8 @@ export function exportedExecutable(action: tr.actions.Args): void {
     throw new Error("No executable name specified")
   }
   action.name(`npm package exports executable ${color.cyan(commandName)}`)
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  const pkgData = require(action.configuration.sourceDir.joinStr("package.json"))
+  const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
+  const pkgData = fs.readJSON(packageJsonPath)
   if (!Object.keys(pkgData.bin).includes(commandName)) {
     throw new Error(`package.json does not export a "${commandName}" command`)
   }

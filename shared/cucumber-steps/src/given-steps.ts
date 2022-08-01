@@ -8,7 +8,7 @@ import { TRWorld } from "./world"
 Given("a broken file {string}", async function (this: TRWorld, filePath: string) {
   const subdir = path.dirname(filePath)
   if (subdir !== ".") {
-    await fse.ensureDir(this.workspace.joinStr(subdir))
+    await fs.mkdir(this.workspace.joinStr(subdir), { recursive: true })
   }
   await fs.writeFile(
     this.workspace.joinStr(filePath),

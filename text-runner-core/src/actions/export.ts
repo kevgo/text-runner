@@ -1,6 +1,6 @@
 import * as actions from "./index"
 
-/** expected file structure of "package.json" files */
+/** elements of "package.json" files used here */
 export interface PackageJson {
   main: string
 }

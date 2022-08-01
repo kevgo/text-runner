@@ -7,7 +7,7 @@ import { newDirectory } from "./actions/new-directory"
 import { newFile } from "./actions/new-file"
 import { workingDir } from "./actions/working-dir"
 
-export const textrunActions: tr.export.TextrunActions = {
+export const textrunActions: tr.exports.TextrunActions = {
   additionalFileContent,
   workingDir,
   newFile,

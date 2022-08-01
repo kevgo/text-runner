@@ -7,7 +7,7 @@ import { server } from "./actions/server"
 import { serverOutput } from "./actions/server-output"
 import { stopServer } from "./actions/stop-server"
 
-export const textrunActions: tr.export.TextrunActions = {
+export const textrunActions: tr.exports.TextrunActions = {
   command,
   commandOutput,
   commandWithInput,

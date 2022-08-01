@@ -1,4 +1,5 @@
 import * as actions from "../actions"
+import * as trExports from "../actions/export"
 import { Activity } from "../activities/index"
 import { UserError } from "../errors/user-error"
 import { Action, FunctionRepo } from "./index"
@@ -28,7 +29,7 @@ export class ExternalActionManager {
     const moduleName = "textrun-" + parts[0]
     const wantAction = actions.name(parts[1])
     try {
-      var module = await import(moduleName)
+      var module: trExports.IndexFile = await import(moduleName)
     } catch (e) {
       if (!(e instanceof Error)) {
         throw e

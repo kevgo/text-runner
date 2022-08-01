@@ -1,5 +1,15 @@
 import * as actions from "./index"
 
+/** expected file structure of "package.json" files */
+export interface PackageJson {
+  main: string
+}
+
+/** expected file structure of "index.js" files exporting Text-Runner actions */
+export interface IndexFile {
+  textrunActions: TextrunActions
+}
+
 /** continuous-passing-style callback function */
 export type DoneFunction = (err?: Error) => void
 

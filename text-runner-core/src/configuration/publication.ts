@@ -1,9 +1,14 @@
 import * as files from "../filesystem/index"
 import * as helpers from "../helpers"
 
-export interface PublicationConfig {
+export interface PublicationData {
+  /** filesystem path of the src folder */
   localPath: string
+
+  /** which extension the Markdown files have when served as HTML */
   publicExtension: string
+
+  /** the corresponding URL path */
   publicPath: string
 }
 
@@ -12,7 +17,7 @@ export interface PublicationConfig {
  * This is needed when verifying Markdown code that will be published as HTML somewhere,
  * and the links in Markdown reference the public URLs of the Markdown pages.
  */
-export class Publication implements PublicationConfig {
+export class Publication implements PublicationData {
   /** filesystem path of the src folder */
   readonly localPath: string
 

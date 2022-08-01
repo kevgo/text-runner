@@ -1,12 +1,23 @@
 import * as files from "../filesystem/index"
 import * as helpers from "../helpers"
 
+export interface PublicationData {
+  /** filesystem path of the src folder */
+  localPath: string
+
+  /** which extension the Markdown files have when served as HTML */
+  publicExtension: string
+
+  /** the corresponding URL path */
+  publicPath: string
+}
+
 /**
  * Publications map local folders (in the source code) to public URL paths.
  * This is needed when verifying Markdown code that will be published as HTML somewhere,
  * and the links in Markdown reference the public URLs of the Markdown pages.
  */
-export class Publication {
+export class Publication implements PublicationData {
   /** filesystem path of the src folder */
   readonly localPath: string
 
@@ -16,10 +27,10 @@ export class Publication {
   /** which extension the Markdown files have when served as HTML */
   readonly publicExtension: string
 
-  constructor(localPath: string, publicPath: string, publicExtension: string) {
-    this.localPath = helpers.addLeadingSlash(helpers.addTrailingSlash(localPath))
-    this.publicPath = helpers.addLeadingSlash(publicPath)
-    this.publicExtension = helpers.addLeadingDotUnlessEmpty(publicExtension)
+  constructor(args: { localPath: string; publicExtension: string; publicPath: string }) {
+    this.localPath = helpers.addLeadingSlash(helpers.addTrailingSlash(args.localPath))
+    this.publicPath = helpers.addLeadingSlash(args.publicPath)
+    this.publicExtension = helpers.addLeadingDotUnlessEmpty(args.publicExtension)
   }
 
   /**

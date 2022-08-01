@@ -5,7 +5,7 @@ import { Publications } from "./publications"
 
 suite("Publications.forFilePath()", function () {
   test("a publication matches the given filePath", function () {
-    const publications = Publications.fromJSON([
+    const publications = Publications.fromData([
       {
         localPath: "foo",
         publicExtension: "",
@@ -27,7 +27,7 @@ suite("Publications.forFilePath()", function () {
   })
 
   test("no publication matches", function () {
-    const publications = Publications.fromJSON([
+    const publications = Publications.fromData([
       {
         localPath: "foo",
         publicExtension: "",
@@ -44,7 +44,7 @@ suite("Publications.forFilePath()", function () {
 
 suite("Publications.sortPathMappings()", function () {
   test("has publications", function () {
-    const original = Publications.fromJSON([
+    const original = Publications.fromData([
       {
         localPath: "/content/",
         publicExtension: "",
@@ -57,7 +57,7 @@ suite("Publications.sortPathMappings()", function () {
       },
     ])
     const publication = original.sorted()
-    const expected = Publications.fromJSON([
+    const expected = Publications.fromData([
       {
         localPath: "/content/posts",
         publicExtension: "html",

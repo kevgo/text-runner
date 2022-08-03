@@ -65,7 +65,7 @@ When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async functio
 When(
   /^(trying to run|running) Text-Runner in the source directory$/,
   { timeout: 30_000 },
-  async function (this: TRWorld, tryingText) {
+  async function (this: TRWorld, tryingText: string) {
     this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
       cwd: this.workspace.platformified(),
     })

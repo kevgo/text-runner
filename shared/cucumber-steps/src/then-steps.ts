@@ -59,7 +59,7 @@ Then("it emits these events:", function (this: TRWorld, table: cucumber.DataTabl
       result.filename = line.FILENAME
     }
     if (line.LINE != null) {
-      result.line = parseInt(line.LINE, 10)
+      result.line = parseInt(line.LINE as string, 10)
     }
     if (line.ACTION != null) {
       result.action = line.ACTION
@@ -148,7 +148,7 @@ Then("it throws:", function (this: TRWorld, table: cucumber.DataTable) {
     have.filename = this.apiException.location?.file.unixified()
   }
   if (tableHash.LINE) {
-    want.line = parseInt(tableHash.LINE, 10)
+    want.line = parseInt(tableHash.LINE as string, 10)
     have.line = this.apiException.location?.line
   }
   assert.deepEqual(have, want)

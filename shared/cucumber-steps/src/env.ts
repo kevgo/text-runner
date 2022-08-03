@@ -37,7 +37,7 @@ cucumber.After({ timeout: 20_000 }, async function (this: TRWorld, scenario) {
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     // TODO: replace with fs
-    await deleteAsync(this.workspace.platformified())
+    await deleteAsync(this.workspace.platformified(), { force: true })
   }
 })
 

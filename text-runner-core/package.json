@@ -1,6 +1,5 @@
 {
   "name": "text-runner-core",
-  "type": "module",
   "version": "5.0.1",
   "description": "Tests documentation written in MarkDown",
   "homepage": "https://github.com/kevgo/text-runner",
@@ -10,6 +9,7 @@
   },
   "license": "ISC",
   "author": "Kevin Goslar",
+  "type": "module",
   "exports": "./dist/text-runner.js",
   "files": [
     "dist/**/*.js",
@@ -24,7 +24,7 @@
     "fs-extra": "10.1.0",
     "glob": "7.2.0",
     "glob-promise": "4.2.2",
-    "got": "11.8.2",
+    "got": "12.3.0",
     "humanize-string": "2.1.0",
     "interpret": "3.1.1",
     "is-glob": "4.0.3",

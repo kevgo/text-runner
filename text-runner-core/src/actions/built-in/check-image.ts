@@ -39,7 +39,7 @@ async function checkRemoteImage(url: string, action: actions.Args) {
     return action.SKIPPING
   }
   try {
-    await got(url, { timeout: 2000 })
+    await got(url, { timeout: { request: 2000 } })
   } catch (err) {
     if (err instanceof got.HTTPError && err.response.statusCode === 404) {
       action.log(`image ${url} does not exist`)

@@ -1,5 +1,5 @@
 import { promises as fs } from "fs"
-import got from "got"
+import * as got from "got"
 
 import { errorMessage } from "../../errors/error.js"
 import { UserError } from "../../errors/user-error.js"

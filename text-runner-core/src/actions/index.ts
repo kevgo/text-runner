@@ -2,7 +2,7 @@ import * as ast from "../ast/index.js"
 import * as config from "../configuration/index.js"
 import * as files from "../filesystem/index.js"
 import * as linkTargets from "../link-targets/index.js"
-import * as run from "../text-runner.js"
+import * as run from "../run/index.js"
 
 export { Finder } from "./finder.js"
 export * from "./name.js"

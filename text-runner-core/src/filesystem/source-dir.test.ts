@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as files from "."
+import * as files from "./index.js"
 
 suite("sourceDir", function () {
   test("joinFullDir", function () {

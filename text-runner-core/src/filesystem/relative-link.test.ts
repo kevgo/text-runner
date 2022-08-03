@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
 import * as configuration from "../configuration/index.js"
-import * as files from "."
+import * as files from "./index.js"
 
 suite("RelativeLink", function () {
   suite(".absolutify()", function () {

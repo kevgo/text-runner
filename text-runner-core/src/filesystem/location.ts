@@ -1,4 +1,4 @@
-import * as files from "."
+import * as files from "./index.js"
 
 /** represents a location inside the document base, i.e. a line inside a file */
 export class Location {

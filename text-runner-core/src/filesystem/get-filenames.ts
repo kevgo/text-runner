@@ -1,5 +1,5 @@
-import * as glob from "glob-promise"
-import * as isGlob from "is-glob"
+import { globby } from "globby"
+import isGlob from "is-glob"
 
 import * as configuration from "../configuration/index.js"
 import { UserError } from "../errors/user-error.js"
@@ -49,7 +49,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFilePath[
  * relative to the given sourceDir
  */
 export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFilePath[]> {
-  const allFiles = await glob(`${dirName}/**/*.md`)
+  const allFiles = await globby(`${dirName}/**/*.md`)
   return allFiles
     .filter(file => !file.includes("node_modules"))
     .sort()

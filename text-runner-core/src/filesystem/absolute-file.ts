@@ -1,6 +1,6 @@
 import * as path from "path"
 
-import * as files from "."
+import * as files from "./index.js"
 
 /** represents an absolute path to a file, i.e. from filesystem root to the file */
 export class AbsoluteFilePath {

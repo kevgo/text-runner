@@ -2,7 +2,7 @@ import * as color from "colorette"
 import * as tr from "text-runner-core"
 
 import * as helpers from "../helpers/index.js"
-import * as formatter from "."
+import * as formatter from "./index.js"
 
 /** An extremely minimalistic formatter, prints only a summary at the end */
 export class SummaryFormatter implements formatter.Formatter {

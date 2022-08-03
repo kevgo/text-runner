@@ -1,8 +1,8 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers.js"
-import * as formatter from "."
+import * as helpers from "../helpers/index.js"
+import * as formatter from "./index.js"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements formatter.Formatter {

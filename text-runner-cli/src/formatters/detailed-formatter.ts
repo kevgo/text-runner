@@ -1,8 +1,8 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers.js"
-import * as formatter from "."
+import * as helpers from "../helpers/index.js"
+import * as formatter from "./index.js"
 import { printUserError } from "./print-user-error.js"
 
 /** A formatter that prints output and step names */

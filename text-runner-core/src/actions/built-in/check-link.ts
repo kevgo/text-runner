@@ -1,5 +1,5 @@
 import { promises as fs } from "fs"
-import got from "got"
+import got, { HTTPError, TimeoutError } from "got"
 
 import { errorMessage } from "../../errors/error.js"
 import { UserError } from "../../errors/user-error.js"
@@ -51,11 +51,11 @@ async function checkExternalLink(target: string, action: Args) {
   }
   action.name(`link to external website ${target}`)
   try {
-    await got(target, { timeout: 2000 })
+    await got(target, { timeout: { request: 2000 } })
   } catch (e) {
-    if (e instanceof got.HTTPError && e.response.statusCode === 404) {
+    if (e instanceof HTTPError && e.response.statusCode === 404) {
       throw new Error(`external website doesn't exist: ${target}`)
-    } else if (e instanceof got.TimeoutError) {
+    } else if (e instanceof TimeoutError) {
       action.log("timed out")
     } else {
       action.log(`error while checking link to ${target}: ${errorMessage(e)}`)

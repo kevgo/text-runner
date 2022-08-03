@@ -1,4 +1,4 @@
-import * as slugify from "@sindresorhus/slugify"
+import slugify from "@sindresorhus/slugify"
 
 import { UserError } from "../errors/user-error.js"
 import * as files from "../filesystem/index.js"

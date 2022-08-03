@@ -1,2 +1,2 @@
-export { MarkdownParser } from "./md-parser"
-export * from "./parse"
+export { MarkdownParser } from "./md-parser.js"
+export * from "./parse.js"

@@ -1,5 +1,6 @@
 import { assert } from "chai"
 import * as path from "path"
+import * as url from "url"
 
 import * as activities from "../activities/index.js"
 import { Actions } from "./actions.js"
@@ -12,6 +13,8 @@ import {
   loadCustomActions,
 } from "./finder.js"
 import { Action } from "./index.js"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {
@@ -35,7 +38,7 @@ suite("actionFinder", function () {
 
   test("builtinActionFilePaths", function () {
     const result = builtinActionFilePaths().map(fp => path.basename(fp))
-    assert.deepEqual(result, ["check-image", "check-link", "test"])
+    assert.deepEqual(result, ["check-image.ts", "check-link.ts", "test.ts"])
   })
 
   suite("customActionFilePaths", function () {

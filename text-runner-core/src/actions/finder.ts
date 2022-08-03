@@ -1,7 +1,8 @@
-import * as glob from "glob"
+import { globbySync } from "globby"
 import * as interpret from "interpret"
 import * as path from "path"
 import * as rechoir from "rechoir"
+import * as url from "url"
 
 import * as actions from "../actions/index.js"
 import * as activities from "../activities/index.js"
@@ -11,6 +12,8 @@ import * as helpers from "../helpers/index.js"
 import { Actions } from "./actions.js"
 import { ExternalActionManager } from "./external-action-manager.js"
 import { Action } from "./index.js"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 /** ActionFinder provides runnable action instances for activities. */
 export class Finder {
@@ -81,16 +84,12 @@ export class Finder {
 }
 
 export function builtinActionFilePaths(): string[] {
-  return glob.glob
-    .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
-    .filter(name => !name.endsWith(".d.ts"))
-    .map(helpers.trimExtension)
+  return globbySync(path.join(__dirname, "built-in", "*.?s")).filter(name => !name.endsWith(".d.ts"))
 }
 
 export async function loadBuiltinActions(): Promise<Actions> {
   const result = new Actions()
   for (const filename of builtinActionFilePaths()) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     result.register(actions.name(filename), await import(filename))
   }
   return result
@@ -98,7 +97,7 @@ export async function loadBuiltinActions(): Promise<Actions> {
 
 export function customActionFilePaths(dir: string): string[] {
   const pattern = path.join(dir, `*.@(${helpers.javascriptExtensions().join("|")})`)
-  return glob.sync(pattern)
+  return globbySync(pattern)
 }
 
 export async function loadCustomActions(dir: string): Promise<Actions> {

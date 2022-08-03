@@ -3,10 +3,10 @@ import * as cucumber from "@cucumber/cucumber"
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
 import { promises as fs } from "fs"
-import * as psTreeR from "ps-tree"
-import * as util from "util"
-import stripAnsi = require("strip-ansi")
+import psTreeR from "ps-tree"
+import stripAnsi from "strip-ansi"
 import * as textRunner from "text-runner-core"
+import * as util from "util"
 
 import * as helpers from "./helpers/index.js"
 import { TRWorld } from "./world.js"

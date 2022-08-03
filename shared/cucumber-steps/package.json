@@ -1,20 +1,20 @@
 {
   "name": "shared-cucumber-steps",
-  "type": "module",
   "version": "0.0.0",
   "private": true,
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "@types/ps-tree": "1.1.2",
     "@types/rimraf": "3.0.2",
     "array-flatten": "3.0.0",
     "assert-no-diff": "3.0.6",
+    "del": "7.0.0",
     "end-child-processes": "1.0.3",
     "fs-extra": "10.1.0",
     "glob": "7.2.0",
     "observable-process": "8.0.0-pre4",
     "ps-tree": "1.2.0",
-    "rimraf": "3.0.2",
     "strip-ansi": "6.0.0",
     "text-runner-core": "5.0.1",
     "tmp-promise": "3.0.3"

@@ -1,14 +1,12 @@
 import * as cucumber from "@cucumber/cucumber"
+import { deleteAsync } from "del"
 import { endChildProcesses } from "end-child-processes"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as rimraf from "rimraf"
 import * as textRunner from "text-runner-core"
 import * as tmp from "tmp-promise"
-import * as util from "util"
 
 import { TRWorld } from "./world.js"
-const rimrafp = util.promisify(rimraf)
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 cucumber.Before(async function (this: TRWorld) {
@@ -26,7 +24,7 @@ cucumber.Before(async function (this: TRWorld) {
     // nothing to do here
   }
   if (workspaceExists) {
-    await fs.rm(this.workspace.platformified(), { recursive: true })
+    await fs.rmdir(this.workspace.platformified(), { recursive: true })
   }
   await fs.mkdir(this.workspace.platformified(), { recursive: true })
 })
@@ -39,7 +37,7 @@ cucumber.After({ timeout: 20_000 }, async function (this: TRWorld, scenario) {
   } else {
     // NOTE: need rimraf here because Windows requires to retry this for a few times
     // TODO: replace with fs
-    await rimrafp(this.workspace.platformified())
+    await deleteAsync(this.workspace.platformified())
   }
 })
 

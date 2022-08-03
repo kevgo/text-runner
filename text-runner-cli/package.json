@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "description": "CLI test runner for documentation written in Markdown",
   "homepage": "https://github.com/kevgo/text-runner",
   "repository": {
@@ -28,7 +28,7 @@
     "colorette": "2.0.19",
     "end-child-processes": "1.0.3",
     "minimist": "1.2.6",
-    "text-runner-core": "5.0.1",
+    "text-runner-core": "^5.0.2",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

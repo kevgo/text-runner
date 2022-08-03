@@ -1,6 +1,6 @@
 {
   "name": "textrun-repo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Text-Runner actions for verifying the content of the current repository",
   "license": "ISC",
   "main": "dist/index.js",
@@ -11,13 +11,13 @@
     "assert-no-diff": "3.0.6",
     "colorette": "2.0.19",
     "eol": "0.9.1",
-    "text-runner-core": "5.0.1"
+    "text-runner-core": "^5.0.2"
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.1",
-    "textrun-action": "0.1.1",
-    "textrun-extension": "0.1.1",
-    "textrun-npm": "0.1.1"
+    "text-runner": "^5.0.2",
+    "textrun-action": "^0.1.2",
+    "textrun-extension": "^0.1.2",
+    "textrun-npm": "^0.1.2"
   }
 }

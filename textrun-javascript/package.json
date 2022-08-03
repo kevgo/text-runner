@@ -1,18 +1,18 @@
 {
   "name": "textrun-javascript",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "ISC",
   "main": "dist/index.js",
   "files": [
     "dist/**/*.js"
   ],
   "dependencies": {
-    "text-runner-core": "5.0.1"
+    "text-runner-core": "^5.0.2"
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.1",
-    "textrun-extension": "0.1.1",
-    "textrun-npm": "0.1.1"
+    "text-runner": "^5.0.2",
+    "textrun-extension": "^0.1.2",
+    "textrun-npm": "^0.1.2"
   }
 }

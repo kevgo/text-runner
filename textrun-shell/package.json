@@ -1,7 +1,7 @@
 {
   "name": "textrun-shell",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "ISC",
   "exports": "./dist/index.js",
   "files": [
@@ -13,14 +13,14 @@
     "end-child-processes": "1.0.3",
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "6.0.0",
-    "text-runner-core": "5.0.1",
-    "textrun-extension": "0.1.1"
+    "text-runner-core": "5.0.2",
+    "textrun-extension": "0.1.2"
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "5.0.1",
-    "textrun-action": "0.1.1",
-    "textrun-extension": "0.1.1",
-    "textrun-workspace": "0.1.1"
+    "text-runner": "5.0.2",
+    "textrun-action": "0.1.2",
+    "textrun-extension": "0.1.2",
+    "textrun-workspace": "0.1.2"
   }
 }

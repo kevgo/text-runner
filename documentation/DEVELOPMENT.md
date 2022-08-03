@@ -76,7 +76,7 @@ versions.
 ## Deployment
 
 - bump the versions by running `lerna version <patch|minor|major> --no-private`
-  or make a global search-and-replace for "5.0.1" and replace it with the new
-  version
-- get this change into the master branch
+- make a global search-and-replace for "5.0.2" and "0.1.2" replace it with the
+  new version
+- get this change into the `main` branch
 - run `make publish-all`

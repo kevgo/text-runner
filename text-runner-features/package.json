@@ -2,11 +2,11 @@
   "name": "text-runner-features",
   "type": "module",
   "version": "0.0.0",
+  "private": true,
+  "license": "ISC",
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "text-runner-core": "5.0.1",
-    "textrun-javascript": "0.1.1"
-  },
-  "license": "ISC",
-  "private": true
+    "text-runner-core": "5.0.2",
+    "textrun-javascript": "0.1.2"
+  }
 }

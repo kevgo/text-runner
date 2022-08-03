@@ -9,12 +9,12 @@
     "custom-action-coffeescript": "0.0.0",
     "custom-action-examples": "0.0.0",
     "custom-action-typescript": "0.0.0",
-    "text-runner": "5.0.1",
-    "text-runner-core": "5.0.1",
-    "textrun-extension": "0.1.1",
-    "textrun-make": "0.1.1",
-    "textrun-npm": "0.1.1",
-    "textrun-shell": "0.1.1",
-    "textrun-workspace": "0.1.1"
+    "text-runner": "5.0.2",
+    "text-runner-core": "5.0.2",
+    "textrun-extension": "0.1.2",
+    "textrun-make": "0.1.2",
+    "textrun-npm": "0.1.2",
+    "textrun-shell": "0.1.2",
+    "textrun-workspace": "0.1.2"
   }
 }

@@ -2,9 +2,9 @@
   "name": "custom-action-coffeescript",
   "type": "module",
   "version": "0.0.0",
+  "private": true,
   "devDependencies": {
     "coffeescript": "2.7.0",
-    "text-runner": "5.0.1"
-  },
-  "private": true
+    "text-runner": "5.0.2"
+  }
 }

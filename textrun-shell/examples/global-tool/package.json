@@ -3,6 +3,6 @@
   "type": "module",
   "version": "1.0.0",
   "dependencies": {
-    "text-runner-core": "5.0.1"
+    "text-runner-core": "5.0.2"
   }
 }

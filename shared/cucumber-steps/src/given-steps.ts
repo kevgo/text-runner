@@ -2,8 +2,11 @@ import { Given } from "@cucumber/cucumber"
 import { promises as fs } from "fs"
 import * as fse from "fs-extra"
 import * as path from "path"
+import * as url from "url"
 
 import { TRWorld } from "./world.js"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 Given("a broken file {string}", async function (this: TRWorld, filePath: string) {
   const subdir = path.dirname(filePath)

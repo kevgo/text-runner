@@ -11,11 +11,10 @@
   "author": "Kevin Goslar",
   "type": "module",
   "exports": "./dist/api.js",
-  "directories": {
-    "bin": "./bin"
+  "bin": {
+    "text-run": "./dist/index.js"
   },
   "files": [
-    "bin",
     "dist/**/*.js",
     "dist/**/*.d.ts"
   ],

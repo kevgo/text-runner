@@ -1,8 +1,8 @@
 {
   "name": "custom-action-examples",
   "version": "0.0.0",
+  "private": true,
   "devDependencies": {
-    "text-runner": "5.0.1"
-  },
-  "private": true
+    "text-runner": "5.0.2"
+  }
 }

@@ -1,4 +1,4 @@
-import * as MarkdownIt from "markdown-it"
+import MarkdownIt from "markdown-it"
 import * as util from "util"
 
 import * as ast from "../../ast/index.js"

@@ -1,15 +1,15 @@
 import { EventEmitter } from "events"
 
-import * as actions from "../actions"
-import * as activities from "../activities/index"
-import * as configuration from "../configuration/index"
-import * as events from "../events"
-import * as files from "../filesystem/index"
-import * as linkTargets from "../link-targets"
-import * as parser from "../parsers"
-import * as run from "../run"
-import * as workspace from "../workspace"
-import * as command from "./index"
+import * as actions from "../actions/index.js"
+import * as activities from "../activities/index.js"
+import * as configuration from "../configuration/index.js"
+import * as events from "../events/index.js"
+import * as files from "../filesystem/index.js"
+import * as linkTargets from "../link-targets/index.js"
+import * as parser from "../parsers/index.js"
+import * as run from "../run/index.js"
+import * as workspace from "../workspace/index.js"
+import * as command from "./index.js"
 
 /** executes "text-run run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {

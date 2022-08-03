@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { name } from "./name"
+import { name } from "./name.js"
 
 suite("getActionName()", function () {
   const tests = {

@@ -1,8 +1,8 @@
 import { assert } from "chai"
 
-import * as configuration from "../configuration/index"
-import { FullLink } from "./full-link"
-import { RelativeLink } from "./relative-link"
+import * as configuration from "../configuration/index.js"
+import { FullLink } from "./full-link.js"
+import { RelativeLink } from "./relative-link.js"
 
 suite("FullLink", function () {
   test(".anchor()", function () {

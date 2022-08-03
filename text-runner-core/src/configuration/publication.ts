@@ -1,5 +1,5 @@
-import * as files from "../filesystem/index"
-import * as helpers from "../helpers"
+import * as files from "../filesystem/index.js"
+import * as helpers from "../helpers/index.js"
 
 export interface PublicationConfig {
   /** filesystem path of the src folder */

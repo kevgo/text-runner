@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import { assert } from "chai"
 
-import { Actions } from "./actions"
-import { Action } from "./index"
+import { Actions } from "./actions.js"
+import { Action } from "./index.js"
 
 suite("Actions", function () {
   suite("register", function () {

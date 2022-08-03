@@ -3,7 +3,7 @@ import { promises as fs } from "fs"
 import * as os from "os"
 import * as tr from "text-runner-core"
 
-import { makefileTargets } from "../helpers/makefile-targets"
+import { makefileTargets } from "../helpers/makefile-targets.js"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
 export async function command(action: tr.actions.Args): Promise<void> {

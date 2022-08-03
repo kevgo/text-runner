@@ -1,6 +1,6 @@
-import * as ast from "../ast"
-import { List } from "./index"
-import { normalizeActionName } from "./normalize-action-name"
+import * as ast from "../ast/index.js"
+import { List } from "./index.js"
+import { normalizeActionName } from "./normalize-action-name.js"
 
 /** returns all activities found in the given ast.NodeLists */
 export function extractDynamic(docs: ast.NodeList[], regionMarker: string): List {

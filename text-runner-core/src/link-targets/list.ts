@@ -1,7 +1,7 @@
-import * as ast from "../ast"
-import * as files from "../filesystem/index"
-import { Target, Types } from "./index"
-import { targetURL } from "./target-url"
+import * as ast from "../ast/index.js"
+import * as files from "../filesystem/index.js"
+import { Target, Types } from "./index.js"
+import { targetURL } from "./target-url.js"
 
 export class List {
   readonly targets: Record<string, Target[]>

@@ -1,6 +1,6 @@
-import * as configuration from "../configuration/index"
-import * as helpers from "../helpers"
-import * as files from "./index"
+import * as configuration from "../configuration/index.js"
+import * as helpers from "../helpers/index.js"
+import * as files from "./index.js"
 
 /**
  * A link that isn't known yet whether it is relative or absolute

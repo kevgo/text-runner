@@ -1,11 +1,11 @@
 import { promises as fs } from "fs"
 import got from "got"
 
-import { errorMessage } from "../../errors/error"
-import { UserError } from "../../errors/user-error"
-import * as files from "../../filesystem/"
-import * as helpers from "../../helpers"
-import { Args } from "../index"
+import { errorMessage } from "../../errors/error.js"
+import { UserError } from "../../errors/user-error.js"
+import * as files from "../../filesystem/index.js"
+import * as helpers from "../../helpers/index.js"
+import { Args } from "../index.js"
 
 /** The "checkLink" action checks for broken hyperlinks. */
 export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> {

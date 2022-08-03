@@ -1,7 +1,7 @@
 import * as observableProcess from "observable-process"
 
-import { TRWorld } from "../world"
-import { makeFullPath } from "./make-full-path"
+import { TRWorld } from "../world.js"
+import { makeFullPath } from "./make-full-path.js"
 
 /** Executes the given command in a subshell. */
 export async function executeCLI(

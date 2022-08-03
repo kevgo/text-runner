@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import * as ast from "../ast"
-import { extractImagesAndLinks } from "./extract-images-and-links"
+import * as ast from "../ast/index.js"
+import { extractImagesAndLinks } from "./extract-images-and-links.js"
 
 suite("extractImagesAndLinks", function () {
   test("extracting images", function () {

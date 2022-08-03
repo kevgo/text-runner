@@ -1,16 +1,16 @@
 import { EventEmitter } from "events"
 import * as util from "util"
 
-import * as activities from "../activities/index"
-import * as ast from "../ast"
-import * as configuration from "../configuration/index"
-import { UserError } from "../errors/user-error"
-import * as events from "../events/index"
-import * as files from "../filesystem/index"
-import * as helpers from "../helpers"
-import * as linkTargets from "../link-targets"
-import * as parsers from "../parsers/index"
-import { Command } from "./command"
+import * as activities from "../activities/index.js"
+import * as ast from "../ast/index.js"
+import * as configuration from "../configuration/index.js"
+import { UserError } from "../errors/user-error.js"
+import * as events from "../events/index.js"
+import * as files from "../filesystem/index.js"
+import * as helpers from "../helpers/index.js"
+import * as linkTargets from "../link-targets/index.js"
+import * as parsers from "../parsers/index.js"
+import { Command } from "./command.js"
 
 export const DebugSubCommandValues = ["activities", "ast", "images", "links", "linkTargets"] as const
 export type DebugSubcommand = typeof DebugSubCommandValues[number]

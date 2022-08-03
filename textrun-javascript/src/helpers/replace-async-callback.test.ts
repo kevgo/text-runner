@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { replaceAsyncCallback } from "./replace-async-callback"
+import { replaceAsyncCallback } from "./replace-async-callback.js"
 
 suite("replaceAsyncCallback", function () {
   test("<CALLBACK>", function () {

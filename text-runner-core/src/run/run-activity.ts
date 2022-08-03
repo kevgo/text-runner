@@ -1,15 +1,15 @@
 import humanize from "humanize-string"
 import * as util from "util"
 
-import * as actions from "../actions"
-import { Activity } from "../activities/index"
-import * as commands from "../commands/index"
-import * as configuration from "../configuration/index"
-import { isUserError, UserError } from "../errors/user-error"
-import * as linkTargets from "../link-targets"
-import { errorMessage } from "../text-runner"
-import { NameRefiner } from "./name-refiner"
-import { OutputCollector } from "./output-collector"
+import * as actions from "../actions/index.js"
+import { Activity } from "../activities/index.js"
+import * as commands from "../commands/index.js"
+import * as configuration from "../configuration/index.js"
+import { isUserError, UserError } from "../errors/user-error.js"
+import * as linkTargets from "../link-targets/index.js"
+import { errorMessage } from "../text-runner.js"
+import { NameRefiner } from "./name-refiner.js"
+import { OutputCollector } from "./output-collector.js"
 
 /** runs the given activity, indicates whether it encountered an error */
 export async function runActivity(

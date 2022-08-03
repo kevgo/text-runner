@@ -1,8 +1,8 @@
 import { assert } from "chai"
 
-import * as ast from "../ast"
-import * as files from "../filesystem/index"
-import * as linkTarget from "./index"
+import * as ast from "../ast/index.js"
+import * as files from "../filesystem/index.js"
+import * as linkTarget from "./index.js"
 
 suite("linkTarget.List.addNodeList()", function () {
   test("node list with anchors", function () {

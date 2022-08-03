@@ -3,7 +3,7 @@ import { assert } from "chai"
 import * as fs from "fs"
 import * as glob from "glob"
 
-import { TRWorld } from "../world"
+import { TRWorld } from "../world.js"
 
 export function verifyRanOnlyTestsCLI(filenames: string[] | string[][], world: TRWorld): void {
   const flattened = flatten(filenames)

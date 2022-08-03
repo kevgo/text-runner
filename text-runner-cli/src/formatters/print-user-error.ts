@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers"
+import * as helpers from "../helpers/index.js"
 
 /** prints the given error to the console */
 export function printUserError(err: tr.UserError): void {

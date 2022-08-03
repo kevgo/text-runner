@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { removeDoubleSlash } from "./remove-double-slash"
+import { removeDoubleSlash } from "./remove-double-slash.js"
 
 suite("removeDoubleSlash", function () {
   const tests = {

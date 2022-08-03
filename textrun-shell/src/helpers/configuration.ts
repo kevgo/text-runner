@@ -1,4 +1,4 @@
-import { PathMapper } from "./path-mapper"
+import { PathMapper } from "./path-mapper.js"
 
 /** ConfigFile defines the structure of the configuration file for this Text-Runner plugin. */
 interface ConfigFile {

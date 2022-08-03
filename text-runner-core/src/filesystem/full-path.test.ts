@@ -1,8 +1,8 @@
 import { assert } from "chai"
 
-import * as configuration from "../configuration/index"
-import { files } from "../text-runner"
-import { FullPath } from "./full-path"
+import * as configuration from "../configuration/index.js"
+import { files } from "../text-runner.js"
+import { FullPath } from "./full-path.js"
 
 suite("FullPath", function () {
   test(".append()", function () {

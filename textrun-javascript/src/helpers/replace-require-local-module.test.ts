@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { replaceRequireLocalModule } from "./replace-require-local-module"
+import { replaceRequireLocalModule } from "./replace-require-local-module.js"
 
 suite("replaceRequireLocalModule", function () {
   test("double-quotes", function () {

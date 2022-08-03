@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { files } from "../text-runner"
+import { files } from "../text-runner.js"
 
 suite("AbsoluteFile", function () {
   test("directory", function () {

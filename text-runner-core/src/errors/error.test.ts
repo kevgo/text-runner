@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import { errorMessage } from "./error"
-import { UserError } from "./user-error"
+import { errorMessage } from "./error.js"
+import { UserError } from "./user-error.js"
 
 suite("errorMessage", function () {
   test("Error", function () {

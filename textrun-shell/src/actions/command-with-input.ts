@@ -3,8 +3,8 @@ import * as observableProcess from "observable-process"
 import * as tr from "text-runner-core"
 import { callArgs } from "textrun-extension"
 
-import { CurrentCommand } from "../helpers/current-command"
-import { trimDollar } from "../helpers/trim-dollar"
+import { CurrentCommand } from "../helpers/current-command.js"
+import { trimDollar } from "../helpers/trim-dollar.js"
 
 interface ProcessInput {
   readonly input: string

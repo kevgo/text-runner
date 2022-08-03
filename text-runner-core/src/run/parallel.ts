@@ -1,9 +1,9 @@
-import * as actions from "../actions"
-import * as activities from "../activities/index"
-import * as commands from "../commands/index"
-import * as configuration from "../configuration/index"
-import * as linkTargets from "../link-targets"
-import { runActivity } from "./run-activity"
+import * as actions from "../actions/index.js"
+import * as activities from "../activities/index.js"
+import * as commands from "../commands/index.js"
+import * as configuration from "../configuration/index.js"
+import * as linkTargets from "../link-targets/index.js"
+import { runActivity } from "./run-activity.js"
 
 /**
  * Executes the given activities in parallel.

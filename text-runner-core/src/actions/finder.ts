@@ -3,14 +3,14 @@ import * as interpret from "interpret"
 import * as path from "path"
 import * as rechoir from "rechoir"
 
-import * as actions from "../actions"
-import * as activities from "../activities/index"
-import { UserError } from "../errors/user-error"
-import * as files from "../filesystem"
-import * as helpers from "../helpers"
-import { Actions } from "./actions"
-import { ExternalActionManager } from "./external-action-manager"
-import { Action } from "./index"
+import * as actions from "../actions/index.js"
+import * as activities from "../activities/index.js"
+import { UserError } from "../errors/user-error.js"
+import * as files from "../filesystem/index.js"
+import * as helpers from "../helpers/index.js"
+import { Actions } from "./actions.js"
+import { ExternalActionManager } from "./external-action-manager.js"
+import { Action } from "./index.js"
 
 /** ActionFinder provides runnable action instances for activities. */
 export class Finder {

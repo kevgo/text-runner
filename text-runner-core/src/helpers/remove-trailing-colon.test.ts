@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { removeTrailingColon } from "./remove-trailing-colon"
+import { removeTrailingColon } from "./remove-trailing-colon.js"
 
 suite("removeTrailingColon", function () {
   const tests = {

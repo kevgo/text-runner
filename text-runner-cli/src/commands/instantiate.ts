@@ -1,10 +1,10 @@
 import * as tr from "text-runner-core"
 
-import * as config from "../configuration"
-import { HelpCommand } from "./help"
-import * as scaffold from "./scaffold"
-import { SetupCommand } from "./setup"
-import { VersionCommand } from "./version"
+import * as config from "../configuration.js"
+import { HelpCommand } from "./help.js"
+import * as scaffold from "./scaffold.js"
+import { SetupCommand } from "./setup.js"
+import { VersionCommand } from "./version.js"
 
 export function instantiate(
   commandName: string,

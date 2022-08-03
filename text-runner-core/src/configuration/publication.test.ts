@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import * as files from "../filesystem/index"
-import { Publication } from "./publication"
+import * as files from "../filesystem/index.js"
+import { Publication } from "./publication.js"
 
 suite("Publication.resolve()", function () {
   test("custom public extension", function () {

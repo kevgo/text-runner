@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as cmdLine from "./cmdline"
+import * as cmdLine from "./cmdline.js"
 
 suite("parseCmdlineArgs()", function () {
   test("with unix <node> call", function () {

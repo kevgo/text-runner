@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { NameRefiner } from "./name-refiner"
+import { NameRefiner } from "./name-refiner.js"
 
 suite("NameRefiner", function () {
   test("no refinements", function () {

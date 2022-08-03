@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import * as files from "../filesystem/index"
-import { normalizeActionName } from "./normalize-action-name"
+import * as files from "../filesystem/index.js"
+import { normalizeActionName } from "./normalize-action-name.js"
 
 suite("normalizeActionName", function () {
   const tests = {

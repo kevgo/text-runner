@@ -1,7 +1,7 @@
 import * as slugify from "@sindresorhus/slugify"
 
-import { UserError } from "../errors/user-error"
-import * as files from "../filesystem/index"
+import { UserError } from "../errors/user-error.js"
+import * as files from "../filesystem/index.js"
 
 export function normalizeActionName(actionName: string, location: files.Location): string {
   const parts = actionName.split("/")

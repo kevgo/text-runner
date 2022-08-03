@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { standardizePath } from "./standardize-path"
+import { standardizePath } from "./standardize-path.js"
 
 suite("standardizePath", function () {
   test("unix path", function () {

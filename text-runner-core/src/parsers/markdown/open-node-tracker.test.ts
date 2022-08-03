@@ -1,8 +1,8 @@
 import { assert } from "chai"
 
-import * as ast from "../../ast"
-import * as files from "../../filesystem/index"
-import { OpenNodeTracker } from "./open-node-tracker"
+import * as ast from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { OpenNodeTracker } from "./open-node-tracker.js"
 
 suite("OpenTagTracker.close()", function () {
   /** placeholder filename */

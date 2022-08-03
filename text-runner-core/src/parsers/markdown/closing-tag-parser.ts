@@ -1,6 +1,6 @@
-import * as ast from "../../ast"
-import * as files from "../../filesystem/index"
-import { TagMapper } from "../tag-mapper"
+import * as ast from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { TagMapper } from "../tag-mapper.js"
 
 /** ClosingTagParser parses HTML blocks containing just a closing tag. */
 export class ClosingTagParser {

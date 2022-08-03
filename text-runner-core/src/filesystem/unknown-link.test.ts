@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as configuration from "../configuration/index"
+import * as configuration from "../configuration/index.js"
 import * as files from "."
 
 suite("UnknownLink", function () {

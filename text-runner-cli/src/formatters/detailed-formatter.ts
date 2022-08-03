@@ -1,9 +1,9 @@
 import * as color from "colorette"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers"
+import * as helpers from "../helpers.js"
 import * as formatter from "."
-import { printUserError } from "./print-user-error"
+import { printUserError } from "./print-user-error.js"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {

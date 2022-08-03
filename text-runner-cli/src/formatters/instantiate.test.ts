@@ -2,10 +2,10 @@ import { assert } from "chai"
 import * as tr from "text-runner-core"
 
 import * as formatter from "."
-import { DetailedFormatter } from "./detailed-formatter"
-import { DotFormatter } from "./dot-formatter"
-import { ProgressFormatter } from "./progress-formatter"
-import { SummaryFormatter } from "./summary-formatter"
+import { DetailedFormatter } from "./detailed-formatter.js"
+import { DotFormatter } from "./dot-formatter.js"
+import { ProgressFormatter } from "./progress-formatter.js"
+import { SummaryFormatter } from "./summary-formatter.js"
 
 suite("instantiateFormatter()", function () {
   const command = new tr.commands.Run({})

@@ -2,10 +2,10 @@ import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import * as tr from "text-runner-core"
 
-import * as cmdLine from "./cmdline"
-import * as commands from "./commands"
-import * as configFile from "./config-file"
-import * as formatters from "./formatters"
+import * as cmdLine from "./cmdline.js"
+import * as commands from "./commands/index.js"
+import * as configFile from "./config-file.js"
+import * as formatters from "./formatters/index.js"
 
 cliCursor.hide()
 

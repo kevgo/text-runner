@@ -3,9 +3,9 @@ import * as observableProcess from "observable-process"
 import * as tr from "text-runner-core"
 import * as trExt from "textrun-extension"
 
-import { Configuration } from "../helpers/configuration"
-import { CurrentCommand } from "../helpers/current-command"
-import { trimDollar } from "../helpers/trim-dollar"
+import { Configuration } from "../helpers/configuration.js"
+import { CurrentCommand } from "../helpers/current-command.js"
+import { trimDollar } from "../helpers/trim-dollar.js"
 
 /** Runs the given commands synchronously on the console. */
 export async function command(action: tr.actions.Args): Promise<void> {

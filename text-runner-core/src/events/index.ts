@@ -1,4 +1,4 @@
-import { Activity } from "../activities/index"
+import { Activity } from "../activities/index.js"
 
 /** defines the events that a command can emit. */
 export type Name =

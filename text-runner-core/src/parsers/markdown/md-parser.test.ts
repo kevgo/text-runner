@@ -2,10 +2,10 @@ import { assert } from "chai"
 import * as fs from "fs-extra"
 import * as path from "path"
 
-import * as ast from "../../ast"
-import { NodeScaffoldData } from "../../ast"
-import * as files from "../../filesystem/index"
-import { parse } from "./parse"
+import * as ast from "../../ast/index.js"
+import { NodeScaffoldData } from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { parse } from "./parse.js"
 
 suite("MdParser.parseFile()", function () {
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")

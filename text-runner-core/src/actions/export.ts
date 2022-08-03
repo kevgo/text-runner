@@ -1,4 +1,4 @@
-import * as actions from "./index"
+import * as actions from "./index.js"
 
 /** elements of "package.json" files used here */
 export interface PackageJson {

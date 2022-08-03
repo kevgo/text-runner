@@ -2,8 +2,8 @@ import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as tr from "text-runner-core"
 
-import { trimDollar } from "../helpers/trim-dollar"
-import { PackageJson } from "./package-json"
+import { trimDollar } from "../helpers/trim-dollar.js"
+import { PackageJson } from "./package-json.js"
 
 export async function exportedExecutable(action: tr.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())

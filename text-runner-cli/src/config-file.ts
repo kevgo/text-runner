@@ -2,7 +2,7 @@ import { promises as fs } from "fs"
 import * as tr from "text-runner-core"
 import * as YAML from "yamljs"
 
-import * as config from "./configuration"
+import * as config from "./configuration.js"
 
 /** provides the config file content as a Configuration instance */
 export async function load(cmdLineArgs: config.Data): Promise<config.Data> {

@@ -1,15 +1,15 @@
 import { EventEmitter } from "events"
 
-import * as actions from "../actions"
-import { extractImagesAndLinks } from "../activities/extract-images-and-links"
-import * as configuration from "../configuration/index"
-import * as events from "../events/index"
-import * as files from "../filesystem/index"
-import * as linkTargets from "../link-targets"
-import * as parser from "../parsers"
-import * as run from "../run"
-import * as workspace from "../workspace"
-import { Command } from "./command"
+import * as actions from "../actions/index.js"
+import { extractImagesAndLinks } from "../activities/extract-images-and-links.js"
+import * as configuration from "../configuration/index.js"
+import * as events from "../events/index.js"
+import * as files from "../filesystem/index.js"
+import * as linkTargets from "../link-targets/index.js"
+import * as parser from "../parsers/index.js"
+import * as run from "../run/index.js"
+import * as workspace from "../workspace/index.js"
+import { Command } from "./command.js"
 
 export class Static implements Command {
   userConfig: configuration.APIData

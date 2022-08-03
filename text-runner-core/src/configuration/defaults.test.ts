@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as config from "./index"
+import * as config from "./index.js"
 
 suite("addDefaults", function () {
   test("no input", async function () {

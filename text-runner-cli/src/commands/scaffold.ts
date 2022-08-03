@@ -3,7 +3,7 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers"
+import * as helpers from "../helpers/index.js"
 
 /** languages in which this Text-Runner actions can be scaffolded */
 export type ScaffoldLanguage = "js" | "ts"

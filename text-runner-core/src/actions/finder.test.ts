@@ -1,11 +1,17 @@
 import { assert } from "chai"
 import * as path from "path"
 
-import * as activities from "../activities/index"
-import { Actions } from "./actions"
-import { ExternalActionManager } from "./external-action-manager"
-import { builtinActionFilePaths, customActionFilePaths, Finder, loadBuiltinActions, loadCustomActions } from "./finder"
-import { Action } from "./index"
+import * as activities from "../activities/index.js"
+import { Actions } from "./actions.js"
+import { ExternalActionManager } from "./external-action-manager.js"
+import {
+  builtinActionFilePaths,
+  customActionFilePaths,
+  Finder,
+  loadBuiltinActions,
+  loadCustomActions,
+} from "./finder.js"
+import { Action } from "./index.js"
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {

@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { removeLeadingSlash } from "./remove-leading-slash"
+import { removeLeadingSlash } from "./remove-leading-slash.js"
 
 suite("removeLeadingSlash", function () {
   const tests = {

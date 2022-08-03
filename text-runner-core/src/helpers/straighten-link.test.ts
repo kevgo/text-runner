@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { straightenLink } from "./straighten-link"
+import { straightenLink } from "./straighten-link.js"
 
 suite("straightenLink", function () {
   const tests = {

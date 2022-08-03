@@ -1,5 +1,5 @@
-import * as configuration from "../configuration/index"
-import * as files from "./index"
+import * as configuration from "../configuration/index.js"
+import * as files from "./index.js"
 
 /**
  * A link relative to the current location,

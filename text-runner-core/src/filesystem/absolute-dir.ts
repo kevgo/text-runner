@@ -1,6 +1,6 @@
 import * as path from "path"
 
-import * as helpers from "../helpers"
+import * as helpers from "../helpers/index.js"
 import * as files from "."
 
 /**

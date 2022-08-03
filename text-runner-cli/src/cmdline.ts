@@ -2,8 +2,8 @@ import * as minimist from "minimist"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-import * as commands from "./commands"
-import * as config from "./configuration"
+import * as commands from "./commands.js"
+import * as config from "./configuration.js
 
 /**
  * Parses the command-line options received and returns them

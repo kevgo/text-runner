@@ -2,11 +2,11 @@ import { assert } from "chai"
 import * as fs from "fs-extra"
 import * as path from "path"
 
-import * as ast from "../../ast"
-import { NodeScaffoldData } from "../../ast"
-import * as files from "../../filesystem/index"
-import { TagMapper } from "../tag-mapper"
-import { parseHTMLFiles } from "./parse-html-files"
+import * as ast from "../../ast/index.js"
+import { NodeScaffoldData } from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { TagMapper } from "../tag-mapper.js"
+import { parseHTMLFiles } from "./parse-html-files.js"
 
 suite("parseHTMLFiles", function () {
   const tagMapper = new TagMapper()

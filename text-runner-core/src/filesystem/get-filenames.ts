@@ -1,9 +1,9 @@
 import * as glob from "glob-promise"
 import * as isGlob from "is-glob"
 
-import * as configuration from "../configuration/index"
-import { UserError } from "../errors/user-error"
-import * as files from "./"
+import * as configuration from "../configuration/index.js"
+import { UserError } from "../errors/user-error.js"
+import * as files from "./index.js"
 
 /**
  * Returns the FullPaths of all files/directories relative to the given sourceDir

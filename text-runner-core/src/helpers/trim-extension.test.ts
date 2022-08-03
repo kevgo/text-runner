@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import { trimExtension } from "./trim-extension"
-import { unixify } from "./unixify"
+import { trimExtension } from "./trim-extension.js"
+import { unixify } from "./unixify.js"
 
 suite("trimExtension()", function () {
   const tests = {

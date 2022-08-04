@@ -26,8 +26,7 @@ export class HelpCommand implements tr.commands.Command {
     const fileContent = await fs.readFile(path.join(__dirname, "../../package.json"), "utf-8")
     const pkg = JSON.parse(fileContent)
 
-    return `
-${color.dim(`TextRunner ${pkg.version}`)}
+    return `${color.dim(`TextRunner ${pkg.version}`)}
 
 USAGE: ${color.bold("text-run [<options>] <command>")}
 

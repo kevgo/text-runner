@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import fs from "fs"
+import * as fs from "fs"
 import * as path from "path"
 
 import * as ast from "../../ast/index.js"

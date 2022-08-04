@@ -1,9 +1,9 @@
 {
   "name": "textrun-extension",
-  "type": "module",
   "version": "0.1.2",
   "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
   "license": "ISC",
+  "type": "module",
   "exports": "./dist/index.js",
   "files": [
     "dist/**/*.js",

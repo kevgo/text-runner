@@ -1,7 +1,7 @@
 {
   "name": "global-tool-example",
-  "type": "module",
   "version": "1.0.0",
+  "type": "module",
   "dependencies": {
     "text-runner-core": "5.0.2"
   }

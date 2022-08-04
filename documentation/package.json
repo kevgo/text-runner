@@ -2,8 +2,8 @@
   "name": "documentation",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "assert-no-diff": "3.0.6",
     "custom-action-coffeescript": "0.0.0",

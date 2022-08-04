@@ -1,9 +1,9 @@
 {
   "name": "textrun-repo",
-  "type": "module",
   "version": "0.1.2",
   "description": "Text-Runner actions for verifying the content of the current repository",
   "license": "ISC",
+  "type": "module",
   "exports": "./dist/index.js",
   "files": [
     "dist/**/*.js"

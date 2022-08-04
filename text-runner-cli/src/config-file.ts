@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import * as tr from "text-runner-core"
-import * as YAML from "yamljs"
+import YAML from "yamljs"
 
 import * as config from "./configuration.js"
 

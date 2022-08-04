@@ -2,6 +2,7 @@ import { EventEmitter } from "events"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
+import * as url from "url"
 
 export class VersionCommand implements tr.commands.Command {
   emitter: EventEmitter
@@ -15,6 +16,7 @@ export class VersionCommand implements tr.commands.Command {
   }
 
   async execute(): Promise<void> {
+    const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
     const fileContent = await fs.readFile(path.join(__dirname, "../../package.json"), "utf-8")
     const pkg = JSON.parse(fileContent)
     this.emit("output", `TextRunner v${pkg.version}`)

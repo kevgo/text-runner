@@ -1,7 +1,7 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
 import * as fs from "fs"
-import * as glob from "glob"
+import { globbySync } from "globby"
 
 import { TRWorld } from "../world.js"
 
@@ -18,8 +18,7 @@ export function verifyRanOnlyTestsCLI(filenames: string[] | string[][], world: T
   }
 
   // verify all other tests have not run
-  const filesShouldntRun = glob
-    .sync(`${world.workspace}/**`)
+  const filesShouldntRun = globbySync(`${world.workspace}/**`)
     .filter(file => fs.statSync(file).isFile())
     .map(file => world.workspace.relativeStr(file))
     .filter(file => file)

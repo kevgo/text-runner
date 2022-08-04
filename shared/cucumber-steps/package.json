@@ -11,7 +11,7 @@
     "del": "7.0.0",
     "end-child-processes": "1.0.3",
     "fs-extra": "10.1.0",
-    "glob": "7.2.0",
+    "globby": "13.1.2",
     "observable-process": "8.0.0-pre4",
     "ps-tree": "1.2.0",
     "strip-ansi": "6.0.0",

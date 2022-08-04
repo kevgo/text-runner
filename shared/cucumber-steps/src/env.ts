@@ -24,7 +24,7 @@ cucumber.Before(async function (this: TRWorld) {
     // nothing to do here
   }
   if (workspaceExists) {
-    await fs.rmdir(this.workspace.platformified(), { recursive: true })
+    await fs.rm(this.workspace.platformified(), { recursive: true })
   }
   await fs.mkdir(this.workspace.platformified(), { recursive: true })
 })

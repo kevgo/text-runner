@@ -20,7 +20,7 @@ cuke-online: build  # runs the feature specs that don't need an online connectio
 
 doc:  # verify documentation
 	echo Text-Runner documentation tests ...
-	${CURDIR}/../text-runner-cli/bin/text-run --format=summary
+	${CURDIR}/../node_modules/.bin/text-run --format=summary
 
 fix:  # runs the fixers
 	echo Text-Runner auto-fixes ...

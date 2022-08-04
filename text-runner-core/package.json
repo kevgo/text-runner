@@ -33,7 +33,6 @@
     "tmp-promise": "3.0.3"
   },
   "devDependencies": {
-    "@types/glob": "7.2.0",
     "@types/got": "9.6.12",
     "@types/interpret": "1.1.1",
     "@types/is-glob": "4.0.2",

@@ -46,7 +46,7 @@ Feature: running console commands
       Create a file <a type="workspace/new-file">**input.js** with content:
 
       ```
-      import * as readline from("readline")
+      import * as readline from "node:readline"
       var rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,

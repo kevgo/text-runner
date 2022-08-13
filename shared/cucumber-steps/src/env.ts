@@ -12,21 +12,17 @@ const filesToKeep = ["package.json", "tsconfig.json", "node_modules", "Makefile"
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-cucumber.Before(async function (this: TRWorld) {
+cucumber.Before(function (this: TRWorld) {
   const workerId = process.env.CUCUMBER_WORKER_ID ?? 0
   const workspacePath = path.join(__dirname, "..", "..", "..", "test", `workspace_${workerId}`)
   this.workspace = new textRunner.files.AbsoluteDirPath(workspacePath)
-  await resetWorkspace(workspacePath)
+  // await resetWorkspace(workspacePath)
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
-cucumber.After({ timeout: 20_000 }, async function (this: TRWorld, scenario) {
+cucumber.After({ timeout: 20_000 }, async function (this: TRWorld) {
   await endChildProcesses()
-  if (scenario.result?.status === cucumber.Status.FAILED) {
-    console.log("\ntest artifacts are located in", this.workspace.platformified())
-  } else {
-    await resetWorkspace(this.workspace.platformified())
-  }
+  await resetWorkspace(this.workspace.platformified())
 })
 
 cucumber.Before({ tags: "@debug" }, function (this: TRWorld) {

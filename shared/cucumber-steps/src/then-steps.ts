@@ -119,7 +119,7 @@ Then("it emits these events:", function (this: TRWorld, table: cucumber.DataTabl
       result.errorMessage = stripAnsi(activityResult.error?.message || "")
     }
     if (wanted.guidance != null) {
-      result.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim()) || ""
+      result.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim() || "")
     }
     have.push(result)
   }

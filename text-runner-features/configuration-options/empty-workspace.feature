@@ -3,8 +3,8 @@ Feature: empty the workspace
   Background:
     Given the source code contains a file "text-run/list-dir.js" with content:
       """
-      const fs = require("fs").promises
-      module.exports = async function(action) {
+      import {promises as fs} from "fs"
+      export default async (action) => {
         const items = await fs.readdir(action.configuration.workspace.platformified())
         action.name(`${items.length} workspace files (${items.join(", ")})`)
       }

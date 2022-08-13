@@ -24,7 +24,7 @@ When TextRunner encounters this region of type `hello-world`, it reads the file
 exported by it. Let's create this file with the content:
 
 ```javascript
-module.exports = function (action) {
+export default action => {
   action.log("Hello world!!")
 }
 ```

@@ -52,7 +52,7 @@ export class ScaffoldCommand implements tr.commands.Command {
 }
 
 function jsTemplate(filename: string) {
-  return `module.exports = function ${helpers.camelize(filename)} (action) {
+  return `export default function ${helpers.camelize(filename)} (action) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")

@@ -3,7 +3,6 @@
   "workspaces": [
     "documentation",
     "examples/custom-action",
-    "examples/custom-action-coffeescript",
     "examples/custom-action-typescript",
     "shared/cucumber-steps",
     "text-runner-cli",
@@ -16,7 +15,15 @@
     "textrun-npm",
     "textrun-repo",
     "textrun-shell",
-    "textrun-workspace"
+    "textrun-workspace",
+    "test/workspace_0",
+    "test/workspace_1",
+    "test/workspace_2",
+    "test/workspace_3",
+    "test/workspace_4",
+    "test/workspace_5",
+    "test/workspace_6",
+    "test/workspace_7"
   ],
   "devDependencies": {
     "@cucumber/cucumber": "8.5.1",

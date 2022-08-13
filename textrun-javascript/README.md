@@ -70,7 +70,7 @@ allowed per code block. Example:
 <a type="javascript/runnable">
 
 ```js
-const fs = require('fs')
+import * as fs from "fs
 fs.writeFile('hello.txt', 'hello world', <CALLBACK>)
 ```
 
@@ -81,7 +81,7 @@ You can also use `// ...` as the placeholder:
 <a type="javascript/runnable">
 
 ```js
-const fs = require("fs")
+import * as fs from "fs
 fs.writeFile("hello.txt", "hello world", function (err) {
   // ...
 })

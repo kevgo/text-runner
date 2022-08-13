@@ -114,7 +114,7 @@ Given("the source code contains the HelloWorld action", async function (this: TR
   await fs.writeFile(
     this.workspace.joinStr("text-run", "hello-world.js"),
     `
-    module.exports = function (action) { action.log('Hello World!') }`
+    export default (action) => action.log('Hello World!') `
   )
 })
 

@@ -9,7 +9,7 @@ Feature: multiple callbacks
       """
     And the source code contains a file "text-run/multiple-callbacks.js" with content:
       """
-      module.exports = function (_, done) {
+      export default function (_, done) {
         done();
         done();
       }

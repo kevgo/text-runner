@@ -1,32 +1,21 @@
 import * as cucumber from "@cucumber/cucumber"
-import { deleteAsync } from "del"
 import { endChildProcesses } from "end-child-processes"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as textRunner from "text-runner-core"
-import * as tmp from "tmp-promise"
+import * as url from "url"
 
 import { TRWorld } from "./world.js"
 
+const filesToKeep = ["package.json", "tsconfig.json", "node_modules", "Makefile"]
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
+
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 cucumber.Before(async function (this: TRWorld) {
-  if (process.env.CUCUMBER_PARALLEL) {
-    const tempDir = await tmp.dir()
-    this.workspace = new textRunner.files.AbsoluteDirPath(tempDir.path)
-  } else {
-    this.workspace = new textRunner.files.AbsoluteDirPath(path.join(process.cwd(), "tmp"))
-  }
-  let workspaceExists = false
-  try {
-    await fs.stat(this.workspace.platformified())
-    workspaceExists = true
-  } catch (e) {
-    // nothing to do here
-  }
-  if (workspaceExists) {
-    await fs.rm(this.workspace.platformified(), { recursive: true })
-  }
-  await fs.mkdir(this.workspace.platformified(), { recursive: true })
+  const workerId = process.env.CUCUMBER_WORKER_ID ?? 0
+  const workspacePath = path.join(__dirname, "..", "..", "..", "test", `workspace_${workerId}`)
+  this.workspace = new textRunner.files.AbsoluteDirPath(workspacePath)
+  await emptyWorkspace(workspacePath)
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -35,9 +24,7 @@ cucumber.After({ timeout: 20_000 }, async function (this: TRWorld, scenario) {
   if (scenario.result?.status === cucumber.Status.FAILED) {
     console.log("\ntest artifacts are located in", this.workspace.platformified())
   } else {
-    // NOTE: need rimraf here because Windows requires to retry this for a few times
-    // TODO: replace with fs
-    await deleteAsync(this.workspace.platformified(), { force: true })
+    await emptyWorkspace(this.workspace.platformified())
   }
 })
 
@@ -48,3 +35,14 @@ cucumber.Before({ tags: "@debug" }, function (this: TRWorld) {
 cucumber.After({ tags: "@debug" }, function (this: TRWorld) {
   this.debug = false
 })
+
+async function emptyWorkspace(workspacePath: string) {
+  const deletes = []
+  for (const fileName of await fs.readdir(workspacePath)) {
+    if (!filesToKeep.includes(fileName)) {
+      const filePath = path.join(workspacePath, fileName)
+      deletes.push(fs.rm(filePath, { recursive: true }))
+    }
+  }
+  await Promise.all(deletes)
+}

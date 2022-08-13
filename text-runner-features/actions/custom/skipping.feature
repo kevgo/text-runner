@@ -11,7 +11,7 @@ Feature: skipping an action
   Scenario: skipping a synchronous action
     Given the source code contains a file "text-run/skip-action.js" with content:
       """
-      module.exports = (action) => {
+      export default (action) => {
         return action.SKIPPING
       }
       """
@@ -28,7 +28,7 @@ Feature: skipping an action
   Scenario: skipping an asynchronous action
     Given the source code contains a file "text-run/skip-action.js" with content:
       """
-      module.exports = async (action) => {
+      export default async (action) => {
         return action.SKIPPING
       }
       """
@@ -45,7 +45,7 @@ Feature: skipping an action
   Scenario: skipping a callback action
     Given the source code contains a file "text-run/skip-action.js" with content:
       """
-      module.exports = (action, done) => {
+      export default (action, done) => {
         done(null, action.SKIPPING)
       }
       """
@@ -62,7 +62,7 @@ Feature: skipping an action
   Scenario: skipping a promise action
     Given the source code contains a file "text-run/skip-action.js" with content:
       """
-      module.exports = function(action) {
+      export default (action) => {
         return new Promise(function(resolve) {
           resolve(action.SKIPPING)
         })

@@ -20,7 +20,7 @@ export default async function testSetup(action: tr.actions.Args): Promise<void> 
   await fs.writeFile(
     action.configuration.workspace.joinStr("index.js"),
     `\
-module.exports = {
+export default {
   textrunActions: {
     "${action1}": function() { console.log(1) }
   }

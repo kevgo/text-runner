@@ -3,7 +3,7 @@ Feature: separate working directory
   Background:
     Given the source code contains a file "text-run/print-cwd.js" with content:
       """
-      module.exports = function(action) {
+      export default (action) => {
         action.log(process.cwd())
       }
       """

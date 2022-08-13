@@ -1,5 +1,3 @@
 {
-  "bin": {
-    "foo": "bin/foo"
-  }
+  "name": "my_enormous_package"
 }

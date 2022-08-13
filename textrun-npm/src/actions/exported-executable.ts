@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as tr from "text-runner-core"
 
 import { trimDollar } from "../helpers/trim-dollar.js"
@@ -12,7 +12,7 @@ export async function exportedExecutable(action: tr.actions.Args): Promise<void>
   }
   action.name(`npm package exports executable ${color.cyan(commandName)}`)
   const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
-  const pkgData: PackageJson = await fs.readJSON(packageJsonPath)
+  const pkgData: PackageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf-8"))
   if (!Object.keys(pkgData.bin).includes(commandName)) {
     throw new Error(`package.json does not export a "${commandName}" command`)
   }

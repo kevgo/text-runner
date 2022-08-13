@@ -1,4 +1,5 @@
 import * as cucumber from "@cucumber/cucumber"
+import * as child_process from "child_process"
 import { endChildProcesses } from "end-child-processes"
 import { promises as fs } from "fs"
 import * as path from "path"
@@ -15,7 +16,7 @@ cucumber.Before(async function (this: TRWorld) {
   const workerId = process.env.CUCUMBER_WORKER_ID ?? 0
   const workspacePath = path.join(__dirname, "..", "..", "..", "test", `workspace_${workerId}`)
   this.workspace = new textRunner.files.AbsoluteDirPath(workspacePath)
-  await emptyWorkspace(workspacePath)
+  await resetWorkspace(workspacePath)
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -24,7 +25,7 @@ cucumber.After({ timeout: 20_000 }, async function (this: TRWorld, scenario) {
   if (scenario.result?.status === cucumber.Status.FAILED) {
     console.log("\ntest artifacts are located in", this.workspace.platformified())
   } else {
-    await emptyWorkspace(this.workspace.platformified())
+    await resetWorkspace(this.workspace.platformified())
   }
 })
 
@@ -36,7 +37,7 @@ cucumber.After({ tags: "@debug" }, function (this: TRWorld) {
   this.debug = false
 })
 
-async function emptyWorkspace(workspacePath: string) {
+async function resetWorkspace(workspacePath: string) {
   const deletes = []
   for (const fileName of await fs.readdir(workspacePath)) {
     if (!filesToKeep.includes(fileName)) {
@@ -44,5 +45,6 @@ async function emptyWorkspace(workspacePath: string) {
       deletes.push(fs.rm(filePath, { recursive: true }))
     }
   }
+  child_process.execSync("git restore .", { cwd: workspacePath })
   await Promise.all(deletes)
 }

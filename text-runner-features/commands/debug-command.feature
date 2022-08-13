@@ -71,7 +71,9 @@ Feature: display the version
             type: 'image',
             tag: 'img',
             location: Location {
-              sourceDir: SourceDir { .* },
+              sourceDir: SourceDir {
+                .*
+              },
               file: FullFilePath { value: '1.md' },
               line: 1
             },

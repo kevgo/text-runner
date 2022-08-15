@@ -18,3 +18,4 @@ ignores:
   - textrun-repo
   - textrun-shell
   - textrun-workspace
+  - ts-node

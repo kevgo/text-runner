@@ -72,16 +72,9 @@ TextRunner supports all forms of JavaScript functions as actions:
 - [async
   functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
-Examples are [here](../examples/custom-action/text-run/hello-world.js)
-
-You can write functions in any of the languages that
-[interpret](https://github.com/gulpjs/interpret) supports. Here are examples
-for:
-
-- [TypeScript](../examples/custom-action-typescript/)
-- [CoffeeScript](../examples/custom-action-coffeescript/)
-
-Throw an exception to fail a test.
+Throw an exception to fail a test. Examples are
+[here](../examples/custom-action/text-run/hello-world.js) You can write
+functions in [TypeScript](../examples/custom-action-typescript/).
 
 ## Accessing document content
 

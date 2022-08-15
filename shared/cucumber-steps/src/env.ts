@@ -1,5 +1,4 @@
 import * as cucumber from "@cucumber/cucumber"
-import * as child_process from "child_process"
 import { endChildProcesses } from "end-child-processes"
 import { promises as fs } from "fs"
 import * as path from "path"
@@ -10,19 +9,32 @@ import { TRWorld } from "./world.js"
 
 const filesToKeep = ["package.json", "tsconfig.json", "node_modules", "Makefile"]
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
+const fileBackups = {
+  "package.json": "",
+  Makefile: "",
+}
+
+cucumber.BeforeAll(async function () {
+  const workspace = determineWorkspace(process.cwd())
+  for (const fileName in fileBackups) {
+    const filePath = path.join(workspace, fileName)
+    const fileContent = await fs.readFile(filePath, "utf-8")
+    // @ts-expect-error TypeScript is too stupid to understand that "filePath" contains exactly the type signature ("package.json" | "Makefile") that it wants here
+    fileBackups[fileName] = fileContent
+  }
+})
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 cucumber.Before(function (this: TRWorld) {
-  const workerId = process.env.CUCUMBER_WORKER_ID ?? 0
-  const workspacePath = path.join(__dirname, "..", "..", "..", "test", `workspace_${workerId}`)
+  const workspacePath = determineWorkspace(process.cwd())
   this.workspace = new textRunner.files.AbsoluteDirPath(workspacePath)
-  // await resetWorkspace(workspacePath)
 })
 
 // eslint-disable-next-line @typescript-eslint/no-misused-promises
 cucumber.After({ timeout: 20_000 }, async function (this: TRWorld) {
   await endChildProcesses()
-  await resetWorkspace(this.workspace.platformified())
+  const workspacePath = determineWorkspace(process.cwd())
+  await resetWorkspace(workspacePath)
 })
 
 cucumber.Before({ tags: "@debug" }, function (this: TRWorld) {
@@ -34,13 +46,26 @@ cucumber.After({ tags: "@debug" }, function (this: TRWorld) {
 })
 
 async function resetWorkspace(workspacePath: string) {
-  const deletes = []
+  const fileOps = []
   for (const fileName of await fs.readdir(workspacePath)) {
     if (!filesToKeep.includes(fileName)) {
       const filePath = path.join(workspacePath, fileName)
-      deletes.push(fs.rm(filePath, { recursive: true }))
+      fileOps.push(fs.rm(filePath, { recursive: true }))
     }
   }
-  child_process.execSync("git restore .", { cwd: workspacePath })
-  await Promise.all(deletes)
+  for (const [fileName, fileContent] of Object.entries(fileBackups)) {
+    const filePath = path.join(workspacePath, fileName)
+    fileOps.push(fs.writeFile(filePath, fileContent))
+  }
+  await Promise.all(fileOps)
+}
+
+function determineWorkspace(cwd: string): string {
+  let dir = path.basename(cwd)
+  dir = dir.replace("text-runner-", "")
+  dir = dir.replace("textrun-", "")
+  if (dir === "features") {
+    dir += `_${process.env.CUCUMBER_WORKER_ID ?? 0}`
+  }
+  return path.join(__dirname, "..", "..", "..", "test", dir)
 }

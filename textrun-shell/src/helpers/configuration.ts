@@ -21,8 +21,9 @@ export class Configuration {
   /** Provides the configuration stored in the file with the given path. */
   static async load(filePath: string): Promise<Configuration> {
     try {
-      const content: ConfigFile = await import(filePath)
-      return new Configuration(content)
+      const content = await import(filePath)
+      const config: ConfigFile = content.default
+      return new Configuration(config)
     } catch (e) {
       return Configuration.default()
     }

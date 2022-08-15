@@ -2,7 +2,7 @@ import * as actions from "./index.js"
 
 /** elements of "package.json" files used here */
 export interface PackageJson {
-  main: string
+  exports: string
 }
 
 /** expected file structure of "index.js" files exporting Text-Runner actions */

@@ -26,7 +26,7 @@ module.exports = {
 ### Run shell commands
 
 The <b type="action/name-full">shell/command</b> action runs a shell command and
-waits until it finishes. As an example, here is a little hypothetical Bash
+waits until it finishes. As an example, here is a little hypothetical Shell
 tutorial:
 
 > The "echo" command prints text on the command line. For example, let's run:
@@ -41,7 +41,7 @@ tutorial:
 > Hello world!
 > ```
 
-The source code of this Bash tutorial when executed and verified by Text-Runner
+The source code of this Shell tutorial when executed and verified by Text-Runner
 looks like this:
 
 <a type="extension/runnable-region">

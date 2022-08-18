@@ -9,6 +9,6 @@ suite("callArgs", function () {
   })
   test("on Linux", function () {
     const have = callArgs("bin/text-run dynamic", "linux")
-    assert.deepEqual(have, ["bash", "-c", "bin/text-run dynamic"])
+    assert.deepEqual(have, ["sh", "-c", "bin/text-run dynamic"])
   })
 })

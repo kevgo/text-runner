@@ -14,7 +14,8 @@ suite("MdParser.parseFile()", function () {
     for (const testDirName of fs.readdirSync(fixtureDir)) {
       const testDirPath = path.join(fixtureDir, testDirName)
       test(`parsing '${testDirName}'`, async function () {
-        const fileContent = fs.readFileSync(path.join(testDirPath, "result.json"), "utf-8")
+        const filePath = path.join(testDirPath, "result.json")
+        const fileContent = fs.readFileSync(filePath, "utf-8")
         const expectedJSON: NodeScaffoldData[] = JSON.parse(fileContent)
         const expected = new ast.NodeList()
         for (const expectedNodeData of expectedJSON) {

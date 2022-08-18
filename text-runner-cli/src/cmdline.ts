@@ -22,7 +22,7 @@ export function parse(argv: string[]): {
   // remove text-run parameter
   const unixBasename = path.basename(argv[0] || "")
   const winBasename = path.win32.basename(argv[0] || "")
-  if (unixBasename === "text-run" || winBasename === "text-run.cmd") {
+  if (unixBasename === "text-run" || winBasename === "text-run.cmd" || winBasename === "text-run.mjs") {
     argv.splice(0, 1)
   }
   // remove optional CLI parameter

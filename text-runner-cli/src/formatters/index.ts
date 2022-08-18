@@ -1,6 +1,5 @@
 import * as tr from "text-runner-core"
 
-// export * as formatters from "./"
 export { instantiate } from "./instantiate.js"
 export { printSummary } from "./print-summary.js"
 export { printUserError } from "./print-user-error.js"

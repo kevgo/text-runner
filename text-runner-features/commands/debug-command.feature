@@ -62,7 +62,7 @@ Feature: display the version
       {
         actionName: 'check-image',
         location: Location {
-          sourceDir: SourceDir { .* },
+          sourceDir: SourceDir {\n?.*\n?},
           file: FullFilePath { value: '1.md' },
           line: 1
         },
@@ -71,7 +71,7 @@ Feature: display the version
             type: 'image',
             tag: 'img',
             location: Location {
-              sourceDir: SourceDir { .* },
+              sourceDir: SourceDir {\n?.*\n?},
               file: FullFilePath { value: '1.md' },
               line: 1
             },
@@ -95,7 +95,7 @@ Feature: display the version
       {
         actionName: 'check-link',
         location: Location {
-          sourceDir: SourceDir { .* },
+          sourceDir: SourceDir {\n?.*\n?},
           file: FullFilePath { value: '1.md' },
           line: 1
         },
@@ -104,7 +104,7 @@ Feature: display the version
             type: 'link_open',
             tag: 'a',
             location: Location {
-              sourceDir: SourceDir { .* },
+              sourceDir: SourceDir {\n?.*\n?},
               file: FullFilePath { value: '1.md' },
               line: 1
             },
@@ -115,7 +115,7 @@ Feature: display the version
             type: 'text',
             tag: '',
             location: Location {
-              sourceDir: SourceDir { .* },
+              sourceDir: SourceDir {\n?.*\n?},
               file: FullFilePath { value: '1.md' },
               line: 1
             },
@@ -126,7 +126,7 @@ Feature: display the version
             type: 'link_close',
             tag: '/a',
             location: Location {
-              sourceDir: SourceDir { .* },
+              sourceDir: SourceDir {\n?.*\n?},
               file: FullFilePath { value: '1.md' },
               line: 1
             },

@@ -1,0 +1,7 @@
+publications:
+  - localPath: /content
+    publicPath: /
+    publicExtension: ''
+  - localPath: /content/posts
+    publicPath: /blog
+    publicExtension: .html

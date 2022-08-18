@@ -35,7 +35,7 @@ Use the _echo_ command to print to the console. Try it out by running:
 $ echo Hello world!
 ```
 
-The terminal prints the output right after the call. Our first Bash program
+The terminal prints the output right after the call. Our first Shell program
 greets us with "Hello world!"
 ````
 
@@ -60,7 +60,7 @@ $ echo Hello world!
 
 </a>
 
-The terminal prints the output right after the call. Our first Bash program
+The terminal prints the output right after the call. Our first Shell program
 greets us with <a type="shell/command-output">`Hello world!`</a>.
 ````
 
@@ -93,7 +93,7 @@ Use the _echo_ command to print to the console. Try it out by running:
 $ echo Hello world!
 </pre>
 
-The terminal prints the output right after the call. Our first Bash program
+The terminal prints the output right after the call. Our first Shell program
 greets us with <code type="shell/command-output">Hello world!</code>.
 ```
 

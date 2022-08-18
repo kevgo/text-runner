@@ -15,6 +15,7 @@
     "text-run": "./bin/text-run.mjs"
   },
   "files": [
+    "bin",
     "dist/**/*.js",
     "dist/**/*.d.ts"
   ],

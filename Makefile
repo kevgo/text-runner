@@ -3,16 +3,16 @@
 # - dependencies = upstreams (my dependencies, those that I depend on)
 
 build-affected:  # builds the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory build
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory build
 
 build-all:  # builds all the codebases
 	${CURDIR}/node_modules/.bin/lerna exec --stream -- make --no-print-directory build
 
 build-changed:  # builds the codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory build
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory build
 
 build-involved:  # builds all the codebases needed to test the changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --include-dependencies --stream -- make --no-print-directory build
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --include-dependencies --stream -- make --no-print-directory build
 
 build-open:  # builds the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory build
@@ -21,13 +21,13 @@ clean-all:  # Removes all build artifacts
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory clean
 
 cuke-affected:  # runs the E2E tests for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory cuke
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory cuke
 
 cuke-all:  # runs all E2E tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory cuke-lerna
 
 cuke-changed:  # runs the E2E tests of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory cuke
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory cuke
 
 cuke-open:  # runs the E2E tests of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory cuke
@@ -37,13 +37,13 @@ doc:  # runs the documentation tests
 	${CURDIR}/text-runner-cli/bin/text-run --format=progress "*.md"
 
 doc-affected:  # runs the documentation tests for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory doc
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory doc
 
 doc-all:  # runs all documentation tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory doc
 
 doc-changed:  # runs the documentation tests of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory doc
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory doc
 
 doc-open:  # runs the documentation tests of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory doc
@@ -53,14 +53,14 @@ fix:  # auto-fixes the root directory
 	${CURDIR}/node_modules/.bin/prettier --write .
 
 fix-affected:  # runs the auto-fixes for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory fix
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory fix
 
 fix-all:  # runs all auto-fixes
 	make --no-print-directory fix
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory fix
 
 fix-changed:  # runs the auto-fixes of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory fix
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory fix
 
 fix-open:  # runs the auto-fixes of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory fix
@@ -73,29 +73,29 @@ lint:  # lints the root directory
 	${CURDIR}/node_modules/.bin/prettier -l '.'
 
 lint-affected:  # runs the linters for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory lint
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory lint
 
 lint-all:  # runs all linters
 	make --no-print-directory lint
 	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory lint
 
 lint-changed:  # runs the linters of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory lint
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory lint
 
 lint-open:  # runs the linters of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory lint
 
 list-affected:  # displays the codebases affected by changes in the current branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents -- pwd
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents -- pwd
 
 list-all:  # displays all codebases
 	${CURDIR}/node_modules/.bin/lerna exec -- pwd
 
 list-changed:  # displays the codebases changed in the current branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents -- pwd
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents -- pwd
 
 list-involved:  # builds all the codebases needed to test the changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --include-dependencies -- pwd
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --include-dependencies -- pwd
 
 list-open:  # displays the codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents -- pwd
@@ -114,16 +114,16 @@ stats:  # shows code statistics
 test: lint  # runs all tests for the root directory
 
 test-affected:  # runs all tests for the codebases affected by changes in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory test-lerna
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory test-lerna
 
 test-affected-ci:  # runs all tests for the codebases affected by changes in this branch (which only provides 2 cores but reports 36 and kills processes randomly if they use more)
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel --concurrency=2 -- make --no-print-directory test-lerna
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel --concurrency=2 -- make --no-print-directory test-lerna
 
 test-all:  # runs all tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make --no-print-directory test-lerna
 
 test-changed:  # runs all tests of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory test-lerna
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory test-lerna
 
 test-open:  # runs all tests of codebases with uncommitted changes
 	${CURDIR}/node_modules/.bin/lerna exec --since HEAD --exclude-dependents --parallel -- make --no-print-directory test-lerna
@@ -135,7 +135,7 @@ unit-all:  # runs all tests
 	${CURDIR}/node_modules/.bin/lerna exec --parallel --stream -- make --no-print-directory unit
 
 unit-changed:  # runs all unit tests of codebases changed in this branch
-	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory unit
+	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --exclude-dependents --parallel -- make --no-print-directory unit
 
 .SILENT:
 .DEFAULT_GOAL := help

@@ -4,7 +4,7 @@
 # Test-Runner for Text
 
 [![CI](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
-[![CI](https://ci.appveyor.com/api/projects/status/96q06796xyrste9x/branch/master?svg=true)](https://ci.appveyor.com/project/kevgo/text-runner/branch/master)
+[![CI](https://ci.appveyor.com/api/projects/status/96q06796xyrste9x/branch/main?svg=true)](https://ci.appveyor.com/project/kevgo/text-runner/branch/main)
 <br>
 
 Text-Runner is an agile documentation tool that helps create living end-user

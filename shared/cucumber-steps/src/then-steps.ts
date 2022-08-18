@@ -215,7 +215,7 @@ Then("it prints:", function (this: TRWorld, expectedText: string) {
     .replace(/\//g, "\\/")
     .replace(/\[/g, "\\[")
     .replace(/\]/g, "\\]")
-  if (!new RegExp(escapedText, "m").test(output)) {
+  if (!new RegExp(escapedText, "ms").test(output)) {
     throw new Error(`expected to find regex '${expectedText.trim()}' in '${output}'`)
   }
 })

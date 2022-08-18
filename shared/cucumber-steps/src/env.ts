@@ -25,7 +25,6 @@ cucumber.BeforeAll(async function () {
   }
 })
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
 cucumber.Before(function (this: TRWorld) {
   const workspacePath = determineWorkspace(process.cwd())
   this.workspace = new textRunner.files.AbsoluteDirPath(workspacePath)

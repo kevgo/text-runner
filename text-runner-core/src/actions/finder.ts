@@ -1,6 +1,5 @@
 import { globbySync } from "globby"
 import * as interpret from "interpret"
-import * as path from "path"
 import * as rechoir from "rechoir"
 import * as url from "url"
 
@@ -95,8 +94,7 @@ export async function loadBuiltinActions(): Promise<Actions> {
 }
 
 export function customActionFilePaths(dir: string): string[] {
-  const pattern = path.join(dir, `*.@(js|ts)`)
-  return globbySync(pattern)
+  return globbySync(`${dir}/*.@(js|ts)`)
 }
 
 export async function loadCustomActions(dir: string): Promise<Actions> {

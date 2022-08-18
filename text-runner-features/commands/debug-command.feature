@@ -95,7 +95,7 @@ Feature: display the version
       {
         actionName: 'check-link',
         location: Location {
-          sourceDir: SourceDir {.*},
+          sourceDir: SourceDir { .* },
           file: FullFilePath { value: '1.md' },
           line: 1
         },

@@ -83,8 +83,7 @@ export class Finder {
 }
 
 export function builtinActionFilePaths(): string[] {
-  const query = path.join(__dirname, "built-in", "*.?s")
-  return globbySync(query).filter(filename => !filename.endsWith(".d.ts"))
+  return globbySync(`${__dirname}/built-in/*.?s`).filter(filename => !filename.endsWith(".d.ts"))
 }
 
 export async function loadBuiltinActions(): Promise<Actions> {

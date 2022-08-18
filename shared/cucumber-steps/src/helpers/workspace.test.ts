@@ -3,7 +3,7 @@ import { strict as assert } from "assert"
 import { dirPath } from "./workspace.js"
 
 suite("dirPath", function () {
-  const __dirname = "/home/foo/text-runner/shared/cucumber-steps/src"
+  const __dirname = "/home/foo/text-runner/shared/cucumber-steps/src/helpers"
   const tests = {
     "/home/foo/text-runner/text-runner-core": "/home/foo/text-runner/test/core",
     "/home/foo/text-runner/text-runner-cli": "/home/foo/text-runner/test/cli",

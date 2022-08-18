@@ -20,9 +20,8 @@ cucumber.BeforeAll(async function () {
   const workspace = determineWorkspace(process.cwd())
   for (const fileName in fileBackups) {
     const filePath = path.join(workspace, fileName)
-    const fileContent = await fs.readFile(filePath, "utf-8")
     // @ts-expect-error TypeScript is too stupid to understand that "filePath" contains exactly the type signature ("package.json" | "Makefile") that it wants here
-    fileBackups[fileName] = fileContent
+    fileBackups[fileName] = await fs.readFile(filePath, "utf-8")
   }
 })
 

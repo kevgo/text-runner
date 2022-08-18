@@ -37,7 +37,7 @@ test, add the `@debug` Gherkin tag in the first line of the `.feature` file.
 In the root directory, there are `make *-all` tasks that run the respective task
 in all codebases of the mono-repo. The `make *-open` targets run in all
 codebases containing uncommitted changes. The `make *-changed` targets run in
-all codebases containing changes compared to the master branch. The
+all codebases containing changes compared to the main branch. The
 `make *-affected` targets run in all codebases affected by changes in the
 current branch: code bases with changes and their downstream dependencies.
 

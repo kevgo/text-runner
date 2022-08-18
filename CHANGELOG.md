@@ -209,7 +209,7 @@ _Nov 16 2018_
 #### Internal
 
 - switch to TypeScript
-  ([621e290](https://github.com/kevgo/text-runner/commits/master?after=621e29099e73fa7bbc818088e003b5d3ade5b916+34))
+  ([621e290](https://github.com/kevgo/text-runner/commits/main?after=621e29099e73fa7bbc818088e003b5d3ade5b916+34))
 - Windows compatible Makefile
   ([d24d089](https://github.com/kevgo/text-runner/commit/d24d0898f72b58279e424e1ba2e418cd7b64cf79))
 

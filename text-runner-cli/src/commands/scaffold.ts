@@ -56,7 +56,7 @@ function jsTemplate(filename: string) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")
-  console.log("https://github.com/kevgo/text-runner/blob/master/documentation/user-defined-actions.md")
+  console.log("https://github.com/kevgo/text-runner/blob/main/documentation/user-defined-actions.md")
 }`
 }
 
@@ -67,6 +67,6 @@ export function ${helpers.camelize(filename)} (action: tr.actions.Args) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")
-  console.log("https://github.com/kevgo/text-runner/blob/master/documentation/user-defined-actions.md")
+  console.log("https://github.com/kevgo/text-runner/blob/main/documentation/user-defined-actions.md")
 }`
 }

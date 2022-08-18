@@ -32,7 +32,7 @@ publications:
 ```
 
 More examples at the
-[end-to-end test for publications](https://github.com/kevgo/text-runner/blob/master/text-runner-features/configuration-options/publications.feature)
+[end-to-end test for publications](https://github.com/kevgo/text-runner/blob/main/text-runner-features/configuration-options/publications.feature)
 
 <hr>
 

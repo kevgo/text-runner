@@ -7,12 +7,12 @@
     "dist/**/*.js"
   ],
   "dependencies": {
-    "text-runner-core": "^5.0.2"
+    "text-runner-core": "5.0.2"
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "text-runner": "^5.0.2",
-    "textrun-extension": "^0.1.2",
-    "textrun-npm": "^0.1.2"
+    "text-runner": "5.0.2",
+    "textrun-extension": "0.1.2",
+    "textrun-npm": "0.1.2"
   }
 }

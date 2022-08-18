@@ -3,8 +3,8 @@ ignores:
   - mocha
   - chai
   - documentation
+  - custom-action-commonjs
   - custom-action-examples
-  - custom-action-coffeescript
   - custom-action-typescript
   - shared-cucumber-steps
   - text-runner

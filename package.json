@@ -3,6 +3,7 @@
   "workspaces": [
     "documentation",
     "examples/custom-action",
+    "examples/custom-action-commonjs",
     "examples/custom-action-typescript",
     "shared/cucumber-steps",
     "test/extension",

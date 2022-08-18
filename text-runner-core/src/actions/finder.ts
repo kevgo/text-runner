@@ -8,7 +8,6 @@ import * as actions from "../actions/index.js"
 import * as activities from "../activities/index.js"
 import { UserError } from "../errors/user-error.js"
 import * as files from "../filesystem/index.js"
-import * as helpers from "../helpers/index.js"
 import { Actions } from "./actions.js"
 import { ExternalActionManager } from "./external-action-manager.js"
 import { Action } from "./index.js"
@@ -97,7 +96,7 @@ export async function loadBuiltinActions(): Promise<Actions> {
 }
 
 export function customActionFilePaths(dir: string): string[] {
-  const pattern = path.join(dir, `*.@(${helpers.javascriptExtensions().join("|")})`)
+  const pattern = path.join(dir, `*.@(js|ts)`)
   return globbySync(pattern)
 }
 

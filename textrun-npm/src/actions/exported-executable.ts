@@ -12,7 +12,8 @@ export async function exportedExecutable(action: tr.actions.Args): Promise<void>
   }
   action.name(`npm package exports executable ${color.cyan(commandName)}`)
   const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
-  const pkgData: PackageJson = JSON.parse(await fs.readFile(packageJsonPath, "utf-8"))
+  const pkgText = await fs.readFile(packageJsonPath, "utf-8")
+  const pkgData: PackageJson = JSON.parse(pkgText)
   if (!Object.keys(pkgData.bin).includes(commandName)) {
     throw new Error(`package.json does not export a "${commandName}" command`)
   }

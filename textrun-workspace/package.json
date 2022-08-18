@@ -11,11 +11,11 @@
     "assert-no-diff": "3.0.6",
     "colorette": "2.0.19",
     "fs-extra": "10.1.0",
-    "text-runner-core": "^5.0.2"
+    "text-runner-core": "5.0.2"
   },
   "devDependencies": {
-    "text-runner": "^5.0.2",
-    "textrun-action": "^0.1.2",
-    "textrun-extension": "^0.1.2"
+    "text-runner": "5.0.2",
+    "textrun-action": "0.1.2",
+    "textrun-extension": "0.1.2"
   }
 }

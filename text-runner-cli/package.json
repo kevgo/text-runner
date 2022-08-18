@@ -28,7 +28,7 @@
     "colorette": "2.0.19",
     "end-child-processes": "1.0.3",
     "minimist": "1.2.6",
-    "text-runner-core": "^5.0.2",
+    "text-runner-core": "5.0.2",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

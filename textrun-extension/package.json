@@ -9,10 +9,10 @@
     "dist/**/*.d.ts"
   ],
   "dependencies": {
-    "text-runner-core": "^5.0.2"
+    "text-runner-core": "5.0.2"
   },
   "devDependencies": {
-    "text-runner": "^5.0.2",
-    "textrun-action": "^0.1.2"
+    "text-runner": "5.0.2",
+    "textrun-action": "0.1.2"
   }
 }

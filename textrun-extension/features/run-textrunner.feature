@@ -44,10 +44,10 @@ Feature: Running Text-Runner inside a Text-Runner session
     Given the workspace contains a file "subdir/workspace.md" with content:
       """
       <a type="javascript/runnable">
-        const cwd = process.cwd()
-        if (!cwd.endsWith("/subdir")) {
-          throw new Error("unexpected cwd: " + cwd)
-        }
+      const cwd = process.cwd()
+      if (!cwd.endsWith("/subdir")) {
+        throw new Error("unexpected cwd: " + cwd)
+      }
       </a>
       """
     And the source code contains a file "source.md" with content:

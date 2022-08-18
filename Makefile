@@ -24,7 +24,7 @@ cuke-affected:  # runs the E2E tests for the codebases affected by changes in th
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --include-dependents --parallel -- make --no-print-directory cuke
 
 cuke-all:  # runs all E2E tests
-	${CURDIR}/node_modules/.bin/lerna exec -- make --no-print-directory cuke-lerna
+	${CURDIR}/node_modules/.bin/lerna exec --parallel -- make --no-print-directory cuke-lerna
 
 cuke-changed:  # runs the E2E tests of codebases changed in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/master --exclude-dependents --parallel -- make --no-print-directory cuke

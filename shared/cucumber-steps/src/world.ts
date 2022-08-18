@@ -14,9 +14,6 @@ export class TRWorld extends cucumber.World {
 
   /** statistics about the subshell process after it finished */
   finishedProcess: observableProcess.FinishedProcess | undefined
-
-  /** the workspace */
-  workspace = new textRunner.files.AbsoluteDirPath("uninitialized")
 }
 
 cucumber.setWorldConstructor(TRWorld)

@@ -9,6 +9,7 @@ import * as textRunner from "text-runner-core"
 import * as util from "util"
 
 import * as helpers from "./helpers/index.js"
+import * as workspace from "./helpers/workspace.js"
 import { TRWorld } from "./world.js"
 
 const psTree = util.promisify(psTreeR)
@@ -42,7 +43,7 @@ Then("it executes in the local {string} directory", function (this: TRWorld, dir
     throw new Error("no API results found")
   }
   const have = this.apiResults[0].output?.trim()
-  const want = this.workspace.joinStr(dirName)
+  const want = workspace.absPath.joinStr(dirName)
   assert.equal(have, want)
 })
 
@@ -174,13 +175,13 @@ Then("the API exception provides the guidance:", function (this: TRWorld, expect
 })
 
 Then("it creates a directory {string}", async function (this: TRWorld, directoryPath: string) {
-  await fs.stat(this.workspace.joinStr(directoryPath))
+  await fs.stat(workspace.absPath.joinStr(directoryPath))
 })
 
 Then(
   "it creates the file {string} with content:",
   async function (this: TRWorld, filename: string, expectedContent: string) {
-    const actualContent = await fs.readFile(this.workspace.joinStr(filename), {
+    const actualContent = await fs.readFile(workspace.absPath.joinStr(filename), {
       encoding: "utf8",
     })
     assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
@@ -235,25 +236,25 @@ Then("it runs {int} test", function (this: TRWorld, count: number) {
 })
 
 Then("it executes in a global temp directory", function (this: TRWorld) {
-  assert.notInclude(this.apiResults[0].output, this.workspace.unixified())
+  assert.notInclude(this.apiResults[0].output, workspace.absPath.unixified())
 })
 
 Then("it executes in the global {string} temp directory", function (this: TRWorld, dirName: string) {
-  assert.notInclude(this.apiResults[0].output, this.workspace.joinStr(dirName))
+  assert.notInclude(this.apiResults[0].output, workspace.absPath.joinStr(dirName))
 })
 
 Then("it runs in a global temp directory", function (this: TRWorld) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(this.finishedProcess.combinedText, this.workspace.unixified())
+  assert.notInclude(this.finishedProcess.combinedText, workspace.absPath.unixified())
 })
 
 Then("it runs in the global {string} temp directory", function (this: TRWorld, dirName: string) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.notInclude(this.finishedProcess.combinedText, this.workspace.joinStr(dirName))
+  assert.notInclude(this.finishedProcess.combinedText, workspace.absPath.joinStr(dirName))
 })
 
 Then("it runs in the local {string} directory", function (this: TRWorld, dirName: string) {
@@ -261,7 +262,7 @@ Then("it runs in the local {string} directory", function (this: TRWorld, dirName
     throw new Error("no process found")
   }
   const have = this.finishedProcess.combinedText
-  const want = this.workspace.joinStr(dirName)
+  const want = workspace.absPath.joinStr(dirName)
   assert.include(have, want)
 })
 
@@ -269,7 +270,7 @@ Then("it runs in the current working directory", function (this: TRWorld) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
-  assert.match(this.finishedProcess.combinedText.trim(), new RegExp(`${this.workspace}\\b`))
+  assert.match(this.finishedProcess.combinedText.trim(), new RegExp(`${workspace.absPath}\\b`))
 })
 
 Then("it runs (only )the tests in {string}", function (this: TRWorld, filename: string) {
@@ -339,7 +340,7 @@ Then("the call fails with the error:", function (this: TRWorld, expectedError: s
 
 Then("the {string} directory is now deleted", async function (this: TRWorld, directoryPath: string) {
   try {
-    await fs.stat(this.workspace.joinStr(directoryPath))
+    await fs.stat(workspace.absPath.joinStr(directoryPath))
   } catch (e) {
     // we expect an exception here since the directory shouldn't exist
     return
@@ -350,13 +351,13 @@ Then("the {string} directory is now deleted", async function (this: TRWorld, dir
 Then(
   "the workspace now/still contains a file {string} with content:",
   async function (this: TRWorld, fileName: string, expectedContent: string) {
-    const actualContent = await fs.readFile(this.workspace.joinStr("tmp", fileName), "utf8")
+    const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
     assert.equal(actualContent.trim(), expectedContent.trim())
   }
 )
 
 Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name: string) {
-  const stat = await fs.stat(this.workspace.joinStr("tmp", name))
+  const stat = await fs.stat(workspace.absPath.joinStr("tmp", name))
   assert.isTrue(stat.isDirectory())
 })
 
@@ -389,7 +390,7 @@ Then("there are no child processes running", async function (this: TRWorld) {
 
 Then("there is no {string} folder", async function (this: TRWorld, name: string) {
   try {
-    await fs.stat(this.workspace.joinStr(name))
+    await fs.stat(workspace.absPath.joinStr(name))
   } catch (e) {
     return
   }

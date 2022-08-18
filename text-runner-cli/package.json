@@ -12,7 +12,8 @@
   "type": "module",
   "exports": "./dist/api.js",
   "bin": {
-    "text-run": "./bin/text-run.mjs"
+    "text-run": "./bin/text-run.mjs",
+    "homedir": "./bin/homedir.mjs"
   },
   "files": [
     "bin",

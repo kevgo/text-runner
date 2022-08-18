@@ -7,8 +7,10 @@ import * as url from "url"
 
 import { TRWorld } from "./world.js"
 
-const filesToKeep = ["package.json", "tsconfig.json", "node_modules", "Makefile"]
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
+/** files that should not be deleted when cleaning up a workspace */
+const filesToKeep = ["package.json", "tsconfig.json", "node_modules", "Makefile"]
+/** the original contents of files before an end-to-end test ran in a workspace */
 const fileBackups = {
   "package.json": "",
   Makefile: "",

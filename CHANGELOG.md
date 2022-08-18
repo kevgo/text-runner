@@ -1,5 +1,19 @@
 # Change Log
 
+## unreleased
+
+#### Breaking changes
+
+- Text-Runner is now an ESM module
+  - Your code doesn't need to be an ESM module to use Text-Runner.
+  - For best results, upgrade your Text-Runner custom actions to also be ESM
+    modules.
+
+#### New features
+
+- removes dependency on Bash: a normal Unix shell (/bin/sh) is now sufficient to
+  run Text-Runner
+
 ## 5.0.1
 
 _Feb 4 2022_

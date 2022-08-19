@@ -2,6 +2,11 @@
   "name": "global-tool-example",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "doc": "make doc",
+    "fix": "make fix",
+    "lint": "make lint"
+  },
   "dependencies": {
     "text-runner": "5.0.2",
     "textrun-shell": "0.1.2"

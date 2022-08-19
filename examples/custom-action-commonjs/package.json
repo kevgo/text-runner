@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "module": "commonjs",
+  "scripts": {
+    "doc": "make doc",
+    "fix": "make fix",
+    "lint": "make lint"
+  },
   "devDependencies": {
     "text-runner": "5.0.2",
     "ts-node": "10.9.1"

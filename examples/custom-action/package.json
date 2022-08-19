@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "doc": "make doc",
+    "fix": "make fix",
+    "lint": "make lint"
+  },
   "devDependencies": {
     "text-runner": "5.0.2",
     "ts-node": "10.9.1"

@@ -110,6 +110,9 @@ Then("it emits these events:", function (this: TRWorld, table: cucumber.DataTabl
     if (wanted.message != null) {
       result.message = activityResult.message
     }
+    if (activityResult.message != null) {
+      result.message = activityResult.message
+    }
     if (wanted.status != null) {
       result.status = activityResult.status
     }

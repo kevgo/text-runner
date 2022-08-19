@@ -27,7 +27,13 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
  * Filenames are relative to config.sourceDir.
  */
 async function getFiles(config: configuration.Data): Promise<files.FullFilePath[]> {
-  const fullGlob = config.sourceDir.joinStr(config.files)
+  let fullGlob = config.sourceDir.joinStr(config.files)
+  if (process.platform === "win32") {
+    // globby cannot handle backslashes in globs,
+    // see https://github.com/sindresorhus/globby/issues/155#issuecomment-732961466
+    // and  https://github.com/micromatch/micromatch#backslashes
+    fullGlob = fullGlob.replace(/\\/g, '/')
+  }
   if (config.files === "") {
     return markdownFilesInDir("", config.sourceDir)
   } else if (await files.hasDirectory(fullGlob)) {

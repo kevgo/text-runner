@@ -31,7 +31,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFilePath[
   if (process.platform === "win32") {
     // globby cannot handle backslashes in globs,
     // see https://github.com/sindresorhus/globby/issues/155#issuecomment-732961466
-    // and  https://github.com/micromatch/micromatch#backslashes
+    // and https://github.com/micromatch/micromatch#backslashes
     fullGlob = fullGlob.replace(/\\/g, "/")
   }
   if (config.files === "") {

@@ -1,6 +1,3 @@
-.DEFAULT_GOAL := help
-
-
 build:
 
 clean:
@@ -31,4 +28,6 @@ test-lerna: cuke-lerna
 
 unit:
 
+
 .SILENT:
+.DEFAULT_GOAL := help

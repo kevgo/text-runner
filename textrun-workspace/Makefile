@@ -1,6 +1,3 @@
-.DEFAULT_GOAL := help
-
-
 build:  # builds for the current platform
 	echo textrun-workspace build ...
 	${CURDIR}/../node_modules/.bin/tsc -p tsconfig-build.json
@@ -44,4 +41,6 @@ test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
 
+
 .SILENT:
+.DEFAULT_GOAL := help

@@ -15,7 +15,11 @@ export function parse(argv: string[]): {
   debugSubcommand?: tr.commands.DebugSubcommand
 } {
   // remove optional node parameter
-  if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
+  if (
+    path.basename(argv[0] || "") === "node" ||
+    path.win32.basename(argv[0] || "") === "node.exe" ||
+    argv[0].includes("node_modules/ts-node")
+  ) {
     argv.splice(0, 1)
   }
 

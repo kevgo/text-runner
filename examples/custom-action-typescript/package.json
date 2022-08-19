@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "devDependencies": {
-    "text-runner": "5.0.2"
+    "text-runner": "5.0.2",
+    "ts-node": "10.9.1"
   }
 }

@@ -1,4 +1,5 @@
-import { globbySync } from "globby"
+import { promises as fs } from "fs"
+import path from "path"
 import * as url from "url"
 
 import * as actions from "../actions/index.js"
@@ -79,29 +80,41 @@ export class Finder {
   }
 }
 
-export function builtinActionFilePaths(): string[] {
-  const query = `${__dirname}/built-in/*.?s`.replace(/\\/g, "/")
-  return globbySync(query).filter(filename => !filename.endsWith(".d.ts"))
+export async function builtinActionFilePaths(): Promise<string[]> {
+  const result = []
+  const builtinDir = path.join(__dirname, "built-in")
+  for (const file of await fs.readdir(builtinDir)) {
+    if (file.endsWith(".ts") && !file.endsWith(".d.ts")) {
+      result.push(path.join(__dirname, file))
+    }
+  }
+  return result
 }
 
 export async function loadBuiltinActions(): Promise<Actions> {
   const result = new Actions()
-  for (const filename of builtinActionFilePaths()) {
+  for (const filename of await builtinActionFilePaths()) {
     const fileURL = url.pathToFileURL(filename)
     result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }
 
-export function customActionFilePaths(dir: string): string[] {
-  return globbySync(`${dir}/*.@(js|ts)`)
+export async function customActionFilePaths(dir: string): Promise<string[]> {
+  const result = []
+  for (const file of await fs.readdir(dir)) {
+    if (file.endsWith(".js") || file.endsWith(".ts")) {
+      result.push(path.join(dir, file))
+    }
+  }
+  return result
 }
 
 export async function loadCustomActions(dir: string): Promise<Actions> {
   const result = new Actions()
-  for (const filename of customActionFilePaths(dir)) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actions.name(filename), await import(filename))
+  for (const filename of await customActionFilePaths(dir)) {
+    const fileURL = url.pathToFileURL(filename)
+    result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }

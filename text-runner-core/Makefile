@@ -1,6 +1,3 @@
-.DEFAULT_GOAL := help
-
-
 build:  # builds for the current platform
 	echo Text-Runner build ...
 	${CURDIR}/../node_modules/.bin/tsc -p tsconfig-build.json
@@ -57,4 +54,6 @@ unit:  # runs the unit tests
 	echo Text-Runner unit tests ...
 	env NODE_NO_WARNINGS=1 ${CURDIR}/../node_modules/.bin/mocha --reporter dot "{src,features}/**/*.test.ts"
 
+
 .SILENT:
+.DEFAULT_GOAL := help

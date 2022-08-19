@@ -1,6 +1,3 @@
-.DEFAULT_GOAL := help
-
-
 build:  # builds for the current platform
 	echo textrun-action build ...
 	${CURDIR}/../node_modules/.bin/tsc -p tsconfig-build.json
@@ -39,4 +36,6 @@ test-lerna: test  # for running all tests inside Lerna
 
 unit:
 
+
 .SILENT:
+.DEFAULT_GOAL := help

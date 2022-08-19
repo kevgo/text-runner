@@ -4,6 +4,7 @@
   "private": true,
   "module": "commonjs",
   "devDependencies": {
-    "text-runner": "5.0.2"
+    "text-runner": "5.0.2",
+    "ts-node": "10.9.1"
   }
 }

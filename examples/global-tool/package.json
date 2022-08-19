@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "text-runner-core": "5.0.2"
+    "text-runner": "5.0.2",
+    "textrun-shell": "0.1.2"
   },
   "devDependencies": {
     "ts-node": "10.9.1"

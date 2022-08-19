@@ -5,6 +5,7 @@
     "examples/custom-action",
     "examples/custom-action-commonjs",
     "examples/custom-action-typescript",
+    "examples/global-tool",
     "shared/cucumber-steps",
     "test/extension",
     "test/features_0",

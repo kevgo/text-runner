@@ -1,4 +1,4 @@
-import { PathMappings } from "./configuration"
+import { PathMappings } from "./configuration.js"
 
 /** Absolutifier makes  */
 export class PathMapper {

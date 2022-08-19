@@ -1,5 +1,5 @@
-import { UserError } from "../errors/user-error"
-import { Node, NodeScaffoldDataReadonly } from "./node"
+import { UserError } from "../errors/user-error.js"
+import { Node, NodeScaffoldDataReadonly } from "./node.js"
 
 export class NodeList extends Array<Node> {
   /** Creates a new ast.NodeList containing an Node scaffoldedd from the given data */

@@ -3,7 +3,7 @@ import { promises as fsp } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-import { trimDollar } from "../helpers/trim-dollar"
+import { trimDollar } from "../helpers/trim-dollar.js"
 
 export async function installedExecutable(action: tr.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())

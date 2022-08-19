@@ -1,6 +1,6 @@
 import { expect } from "chai"
 
-import * as helpers from "."
+import * as helpers from "./index.js"
 
 test("allKeys()", function () {
   const obj1 = { a: "1" }

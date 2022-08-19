@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
@@ -26,6 +26,6 @@ export async function newFile(action: tr.actions.Args): Promise<void> {
   action.name(`create file ${color.cyan(filePath)}`)
   const fullPath = action.configuration.workspace.joinStr(filePath)
   action.log(`create file ${filePath}`)
-  await fs.ensureDir(path.dirname(fullPath))
+  await fs.mkdir(path.dirname(fullPath), { recursive: true })
   await fs.writeFile(fullPath, content)
 }

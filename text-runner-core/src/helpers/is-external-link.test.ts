@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { isExternalLink } from "./is-external-link"
+import { isExternalLink } from "./is-external-link.js"
 
 suite("isExternalLink", function () {
   test("link without protocol", function () {

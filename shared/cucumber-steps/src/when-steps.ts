@@ -1,11 +1,12 @@
 import { When } from "@cucumber/cucumber"
 import * as textRunner from "text-runner-core"
 
-import * as helpers from "./helpers"
-import { TRWorld } from "./world"
+import * as helpers from "./helpers/index.js"
+import * as workspace from "./helpers/workspace.js"
+import { TRWorld } from "./world.js"
 
 When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
-  const config: textRunner.configuration.APIData = { sourceDir: this.workspace.platformified() }
+  const config: textRunner.configuration.APIData = { sourceDir: workspace.absPath.platformified() }
   // define a few variables here, they will be overwritten in the eval call
   // eslint-disable-next-line prefer-const
   let command = new textRunner.commands.Run(config)
@@ -36,7 +37,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: s
 })
 
 When(/^calling Text-Runner$/, { timeout: 20_000 }, async function (this: TRWorld) {
-  const command = new textRunner.commands.Run({ sourceDir: this.workspace.platformified() })
+  const command = new textRunner.commands.Run({ sourceDir: workspace.absPath.platformified() })
   const activityCollector = new textRunner.ActivityCollector(command)
   try {
     await command.execute()
@@ -67,7 +68,7 @@ When(
   { timeout: 30_000 },
   async function (this: TRWorld, tryingText: string) {
     this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
-      cwd: this.workspace.platformified(),
+      cwd: workspace.absPath.platformified(),
     })
   }
 )

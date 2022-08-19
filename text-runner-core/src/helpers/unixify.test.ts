@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { unixify } from "./unixify"
+import { unixify } from "./unixify.js"
 
 suite("unifixy", function () {
   const tests = {

@@ -1,9 +1,9 @@
-import * as glob from "glob-promise"
-import * as isGlob from "is-glob"
+import { globby } from "globby"
+import isGlob from "is-glob"
 
-import * as configuration from "../configuration/index"
-import { UserError } from "../errors/user-error"
-import * as files from "./"
+import * as configuration from "../configuration/index.js"
+import { UserError } from "../errors/user-error.js"
+import * as files from "./index.js"
 
 /**
  * Returns the FullPaths of all files/directories relative to the given sourceDir
@@ -27,7 +27,13 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
  * Filenames are relative to config.sourceDir.
  */
 async function getFiles(config: configuration.Data): Promise<files.FullFilePath[]> {
-  const fullGlob = config.sourceDir.joinStr(config.files)
+  let fullGlob = config.sourceDir.joinStr(config.files)
+  if (process.platform === "win32") {
+    // globby cannot handle backslashes in globs,
+    // see https://github.com/sindresorhus/globby/issues/155#issuecomment-732961466
+    // and https://github.com/micromatch/micromatch#backslashes
+    fullGlob = fullGlob.replace(/\\/g, "/")
+  }
   if (config.files === "") {
     return markdownFilesInDir("", config.sourceDir)
   } else if (await files.hasDirectory(fullGlob)) {
@@ -49,7 +55,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFilePath[
  * relative to the given sourceDir
  */
 export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFilePath[]> {
-  const allFiles = await glob(`${dirName}/**/*.md`)
+  const allFiles = await globby(`${dirName}/**/*.md`)
   return allFiles
     .filter(file => !file.includes("node_modules"))
     .sort()

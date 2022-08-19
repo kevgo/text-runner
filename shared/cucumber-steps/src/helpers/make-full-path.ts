@@ -1,4 +1,7 @@
 import * as path from "path"
+import * as url from "url"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 export function makeFullPath(command: string, platform: string): string {
   if (/^text-run/.test(command)) {
@@ -9,7 +12,7 @@ export function makeFullPath(command: string, platform: string): string {
 }
 
 function fullTextRunPath(platform: string): string {
-  let result = path.join(__dirname, "..", "..", "..", "..", "text-runner-cli", "bin", "text-run")
+  let result = path.join(__dirname, "..", "..", "..", "..", "node_modules", ".bin", "text-run")
   if (platform === "win32") {
     result += ".cmd"
   }

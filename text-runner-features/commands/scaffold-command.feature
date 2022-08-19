@@ -5,7 +5,7 @@ Feature: adding new actions
     When running "text-run scaffold new-step"
     Then it creates the file "text-run/new-step.js" with content:
       """
-      module.exports = function newStep (action) {
+      export default function newStep (action) {
         console.log("This is the implementation of the "new-step" action.")
         console.log('Text inside the semantic document region:', action.region.text())
         console.log("For more information see")

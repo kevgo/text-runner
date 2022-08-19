@@ -1,4 +1,4 @@
-import * as slugify from "@sindresorhus/slugify"
+import slugify from "@sindresorhus/slugify"
 import * as path from "path"
 
 export function name(filepath: string): string {

@@ -3,8 +3,8 @@ import * as observableProcess from "observable-process"
 import * as tr from "text-runner-core"
 import * as trExt from "textrun-extension"
 
-import { CurrentServer } from "../helpers/current-server"
-import { trimDollar } from "../helpers/trim-dollar"
+import { CurrentServer } from "../helpers/current-server.js"
+import { trimDollar } from "../helpers/trim-dollar.js"
 
 /**
  * The "start" action runs the given commands on the console.

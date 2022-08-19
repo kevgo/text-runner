@@ -1,9 +1,9 @@
 import { assert } from "chai"
 
-import * as ast from "../../ast"
-import * as files from "../../filesystem/index"
-import { TagMapper } from "../tag-mapper"
-import { ClosingTagParser } from "./closing-tag-parser"
+import * as ast from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { TagMapper } from "../tag-mapper.js"
+import { ClosingTagParser } from "./closing-tag-parser.js"
 
 suite("ClosingTagParser.isClosingTag()", function () {
   const testData = {

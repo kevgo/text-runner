@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { trimAllLineEnds } from "./trim-all-line-ends"
+import { trimAllLineEnds } from "./trim-all-line-ends.js"
 
 suite("trimAllLineEnds", function () {
   const tests = {

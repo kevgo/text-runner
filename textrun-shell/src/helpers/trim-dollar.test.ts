@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { trimDollar } from "./trim-dollar"
+import { trimDollar } from "./trim-dollar.js"
 
 suite("trimDollar", function () {
   const tests = {

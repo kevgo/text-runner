@@ -1,5 +1,5 @@
-import * as ast from "../ast"
-import { List } from "./list"
+import * as ast from "../ast/index.js"
+import { List } from "./list.js"
 
 export function find(nodeLists: ast.NodeList[]): List {
   const linkTargetList = new List()

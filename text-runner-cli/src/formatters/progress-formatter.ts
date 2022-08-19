@@ -2,9 +2,9 @@ import * as progress from "cli-progress"
 import * as color from "colorette"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers"
-import * as formatter from "."
-import { printUserError } from "./print-user-error"
+import * as helpers from "../helpers/index.js"
+import * as formatter from "./index.js"
+import { printUserError } from "./print-user-error.js"
 
 export class ProgressFormatter implements formatter.Formatter {
   private readonly progressBar: progress.Bar

@@ -1,11 +1,11 @@
 import * as tr from "text-runner"
 
-import { additionalFileContent } from "./actions/additional-file-content"
-import { existingDirectory } from "./actions/existing-directory"
-import { existingFile } from "./actions/existing-file"
-import { newDirectory } from "./actions/new-directory"
-import { newFile } from "./actions/new-file"
-import { workingDir } from "./actions/working-dir"
+import { additionalFileContent } from "./actions/additional-file-content.js"
+import { existingDirectory } from "./actions/existing-directory.js"
+import { existingFile } from "./actions/existing-file.js"
+import { newDirectory } from "./actions/new-directory.js"
+import { newFile } from "./actions/new-file.js"
+import { workingDir } from "./actions/working-dir.js"
 
 export const textrunActions: tr.exports.TextrunActions = {
   additionalFileContent,

@@ -1,7 +1,7 @@
-import * as ast from "../ast"
-import * as files from "../filesystem"
-export { extractDynamic } from "./extract-dynamic"
-export { extractImagesAndLinks } from "./extract-images-and-links"
+import * as ast from "../ast/index.js"
+import * as files from "../filesystem/index.js"
+export { extractDynamic } from "./extract-dynamic.js"
+export { extractImagesAndLinks } from "./extract-images-and-links.js"
 
 /** a list of activities */
 export type List = Activity[]

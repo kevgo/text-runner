@@ -2,14 +2,14 @@ import * as cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import * as tr from "text-runner-core"
 
-import * as cmdLine from "./cmdline"
-import * as commands from "./commands"
-import * as configFile from "./config-file"
-import * as formatters from "./formatters"
+import * as cmdLine from "./cmdline.js"
+import * as commands from "./commands/index.js"
+import * as configFile from "./config-file.js"
+import * as formatters from "./formatters/index.js"
 
-cliCursor.hide()
+export async function main() {
+  cliCursor.hide()
 
-async function main() {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = cmdLine.parse(process.argv)
@@ -39,4 +39,3 @@ async function main() {
   }
   process.exit(errorCount)
 }
-void main()

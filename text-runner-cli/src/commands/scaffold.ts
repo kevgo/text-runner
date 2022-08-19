@@ -3,7 +3,7 @@ import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-import * as helpers from "../helpers"
+import * as helpers from "../helpers/index.js"
 
 /** languages in which this Text-Runner actions can be scaffolded */
 export type ScaffoldLanguage = "js" | "ts"
@@ -52,7 +52,7 @@ export class ScaffoldCommand implements tr.commands.Command {
 }
 
 function jsTemplate(filename: string) {
-  return `module.exports = function ${helpers.camelize(filename)} (action) {
+  return `export default function ${helpers.camelize(filename)} (action) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")

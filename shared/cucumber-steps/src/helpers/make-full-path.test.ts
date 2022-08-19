@@ -1,12 +1,12 @@
 import { assert } from "chai"
 import * as util from "util"
 
-import { makeFullPath } from "./make-full-path"
+import { makeFullPath } from "./make-full-path.js"
 
 suite("makeFullPath", function () {
   const linuxTests = {
-    "text-run foo": /.+\/bin\/text-run foo$/,
-    run: /.+\/bin\/text-run run$/,
+    "text-run foo": /.+\/node_modules\/.bin\/text-run foo$/,
+    run: /.+\/node_modules\/.bin\/text-run run$/,
   }
   const winTests = {
     "text-run foo": /.+\\bin\\text-run.cmd foo$/,

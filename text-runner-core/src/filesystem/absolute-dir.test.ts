@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as files from "./index"
+import * as files from "./index.js"
 
 suite("files.AbsoluteDirPath", function () {
   test("joinStr", function () {

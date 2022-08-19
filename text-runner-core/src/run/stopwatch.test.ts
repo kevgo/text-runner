@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as run from "./index"
+import * as run from "./index.js"
 
 suite("StopWatch", function () {
   test("less than 1s", function () {

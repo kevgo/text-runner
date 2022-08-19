@@ -19,7 +19,6 @@ bullet point lists, and even embedded images!
 
 - [how it works](documentation/how-it-works.md)
 - [installation](documentation/installation.md)
-- [configuration](documentation/configuration.md)
 - [built-in actions](documentation/built-in-actions.md)
 - [user-defined actions](documentation/user-defined-actions.md)
   - [example actions](examples/)

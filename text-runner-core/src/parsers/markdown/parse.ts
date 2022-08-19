@@ -1,8 +1,8 @@
 import { promises as fs } from "fs"
 
-import * as ast from "../../ast"
-import * as files from "../../filesystem/index"
-import { MarkdownParser } from "./md-parser"
+import * as ast from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { MarkdownParser } from "./md-parser.js"
 
 /** returns the standard AST for the Markdown files given as paths relative to the given sourceDir */
 export async function parse(filenames: files.FullFilePath[], sourceDir: files.SourceDir): Promise<ast.NodeList[]> {

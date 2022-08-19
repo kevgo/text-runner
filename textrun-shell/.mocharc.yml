@@ -1,3 +1,3 @@
-require: "ts-node/register"
+loader: "ts-node/esm"
 recursive: true
 ui: tdd

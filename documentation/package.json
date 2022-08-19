@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "assert-no-diff": "3.0.6",
-    "custom-action-coffeescript": "0.0.0",
+    "custom-action-commonjs": "0.0.0",
     "custom-action-examples": "0.0.0",
     "custom-action-typescript": "0.0.0",
     "text-runner": "5.0.2",
@@ -14,6 +15,7 @@
     "textrun-make": "0.1.2",
     "textrun-npm": "0.1.2",
     "textrun-shell": "0.1.2",
-    "textrun-workspace": "0.1.2"
+    "textrun-workspace": "0.1.2",
+    "ts-node": "10.9.1"
   }
 }

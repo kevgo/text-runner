@@ -1,6 +1,6 @@
 import * as tr from "text-runner-core"
 
-import { CurrentServer } from "../helpers/current-server"
+import { CurrentServer } from "../helpers/current-server.js"
 
 /**
  * The "start-output" action waits until the currently running console command

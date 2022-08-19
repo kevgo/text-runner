@@ -1,0 +1,10 @@
+{
+  "name": "custom-action-commonjs",
+  "version": "0.0.0",
+  "private": true,
+  "module": "commonjs",
+  "devDependencies": {
+    "text-runner": "5.0.2",
+    "ts-node": "10.9.1"
+  }
+}

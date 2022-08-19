@@ -1,16 +1,16 @@
-import * as glob from "glob"
-import * as interpret from "interpret"
-import * as path from "path"
-import * as rechoir from "rechoir"
+import { promises as fs } from "fs"
+import path from "path"
+import * as url from "url"
 
-import * as actions from "../actions"
-import * as activities from "../activities/index"
-import { UserError } from "../errors/user-error"
-import * as files from "../filesystem"
-import * as helpers from "../helpers"
-import { Actions } from "./actions"
-import { ExternalActionManager } from "./external-action-manager"
-import { Action } from "./index"
+import * as actions from "../actions/index.js"
+import * as activities from "../activities/index.js"
+import { UserError } from "../errors/user-error.js"
+import * as files from "../filesystem/index.js"
+import { Actions } from "./actions.js"
+import { ExternalActionManager } from "./external-action-manager.js"
+import { Action } from "./index.js"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 /** ActionFinder provides runnable action instances for activities. */
 export class Finder {
@@ -80,33 +80,47 @@ export class Finder {
   }
 }
 
-export function builtinActionFilePaths(): string[] {
-  return glob.glob
-    .sync(path.join(__dirname, "..", "actions", "built-in", "*.?s"))
-    .filter(name => !name.endsWith(".d.ts"))
-    .map(helpers.trimExtension)
-}
-
-export async function loadBuiltinActions(): Promise<Actions> {
-  const result = new Actions()
-  for (const filename of builtinActionFilePaths()) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actions.name(filename), await import(filename))
+export async function builtinActionFilePaths(): Promise<string[]> {
+  const result = []
+  const builtinDir = path.join(__dirname, "built-in")
+  for (const file of await fs.readdir(builtinDir)) {
+    if (file.endsWith(".js") || (file.endsWith(".ts") && !file.endsWith(".d.ts"))) {
+      result.push(path.join(builtinDir, file))
+    }
   }
   return result
 }
 
-export function customActionFilePaths(dir: string): string[] {
-  const pattern = path.join(dir, `*.@(${helpers.javascriptExtensions().join("|")})`)
-  return glob.sync(pattern)
+export async function loadBuiltinActions(): Promise<Actions> {
+  const result = new Actions()
+  for (const filename of await builtinActionFilePaths()) {
+    const fileURL = url.pathToFileURL(filename)
+    result.register(actions.name(filename), await import(fileURL.href))
+  }
+  return result
+}
+
+export async function customActionFilePaths(dir: string): Promise<string[]> {
+  try {
+    var files = await fs.readdir(dir)
+  } catch (e) {
+    // it's okay if there is no dir with custom actions
+    return []
+  }
+  const result = []
+  for (const file of files) {
+    if (file.endsWith(".js") || file.endsWith(".ts")) {
+      result.push(path.join(dir, file))
+    }
+  }
+  return result
 }
 
 export async function loadCustomActions(dir: string): Promise<Actions> {
   const result = new Actions()
-  for (const filename of customActionFilePaths(dir)) {
-    rechoir.prepare(interpret.jsVariants, filename)
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    result.register(actions.name(filename), await import(filename))
+  for (const filename of await customActionFilePaths(dir)) {
+    const fileURL = url.pathToFileURL(filename)
+    result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }

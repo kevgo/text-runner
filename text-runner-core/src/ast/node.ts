@@ -1,4 +1,4 @@
-import * as files from "../filesystem/index"
+import * as files from "../filesystem/index.js"
 
 export type NodeAttributes = Record<string, string>
 

@@ -1,6 +1,6 @@
-import { runTextrunner } from "./actions/run-textrunner"
-import { runnableRegion } from "./actions/runnable-region"
-import { callArgs } from "./helpers/call-args"
+import { runTextrunner } from "./actions/run-textrunner.js"
+import { runnableRegion } from "./actions/runnable-region.js"
+import { callArgs } from "./helpers/call-args.js"
 
 const textrunActions = { runnableRegion, runTextrunner }
 

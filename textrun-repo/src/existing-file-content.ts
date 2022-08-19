@@ -1,6 +1,6 @@
 import * as assertNoDiff from "assert-no-diff"
 import * as color from "colorette"
-import * as eol from "eol"
+import eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
 import * as tr from "text-runner-core"
@@ -12,7 +12,7 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
     const linkNode = action.region.nodeOfTypes("link_open")
     relativeBaseDir = linkNode.attributes.href
   }
-  const expectedContent = action.region.textInNodeOfTypes("fence", "code")
+  let expectedContent = action.region.textInNodeOfTypes("fence", "code")
   const filePath = path.join(action.location.file.directory().platformified(), relativeBaseDir, fileName)
   action.name(`document content matches source code file ${color.cyan(filePath)}`)
   const fullPath = action.configuration.sourceDir.joinStr(filePath)
@@ -30,8 +30,10 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
       throw err
     }
   }
+  actualContent = eol.lf(actualContent.trim())
+  expectedContent = eol.lf(expectedContent.trim())
   try {
-    assertNoDiff.trimmedLines(eol.lf(actualContent.trim()), eol.lf(expectedContent.trim()))
+    assertNoDiff.trimmedLines(actualContent, expectedContent)
   } catch (err) {
     throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, tr.errorMessage(err))
   }

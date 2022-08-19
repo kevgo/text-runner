@@ -1,10 +1,10 @@
 import * as tr from "text-runner-core"
 
-import * as formatters from "."
-import { DetailedFormatter } from "./detailed-formatter"
-import { DotFormatter } from "./dot-formatter"
-import { ProgressFormatter } from "./progress-formatter"
-import { SummaryFormatter } from "./summary-formatter"
+import { DetailedFormatter } from "./detailed-formatter.js"
+import { DotFormatter } from "./dot-formatter.js"
+import * as formatters from "./index.js"
+import { ProgressFormatter } from "./progress-formatter.js"
+import { SummaryFormatter } from "./summary-formatter.js"
 
 /** creates an instance of the formatter with the given name */
 export function instantiate(name: formatters.Names, command: tr.commands.Command): formatters.Formatter {

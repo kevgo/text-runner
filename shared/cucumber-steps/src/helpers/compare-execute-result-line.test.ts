@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import { ExecuteResultLine } from "../then-steps"
-import { compareExecuteResultLine } from "./compare-execute-result-line"
+import { ExecuteResultLine } from "../then-steps.js"
+import { compareExecuteResultLine } from "./compare-execute-result-line.js"
 
 suite("executeResultLine", function () {
   test("different files", function () {

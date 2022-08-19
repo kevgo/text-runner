@@ -1,11 +1,11 @@
-import * as ast from "../ast"
-import * as config from "../configuration/index"
-import * as files from "../filesystem"
-import * as linkTargets from "../link-targets"
-import * as run from "../run"
+import * as ast from "../ast/index.js"
+import * as config from "../configuration/index.js"
+import * as files from "../filesystem/index.js"
+import * as linkTargets from "../link-targets/index.js"
+import * as run from "../run/index.js"
 
-export { Finder } from "./finder"
-export * from "./name"
+export { Finder } from "./finder.js"
+export * from "./name.js"
 
 /** A user-defined or built-in function that tests an active block */
 export type Action = (params: Args) => Result

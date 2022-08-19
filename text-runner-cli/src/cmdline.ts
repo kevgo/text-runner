@@ -1,9 +1,9 @@
-import * as minimist from "minimist"
+import minimist from "minimist"
 import * as path from "path"
 import * as tr from "text-runner-core"
 
-import * as commands from "./commands"
-import * as config from "./configuration"
+import * as commands from "./commands/index.js"
+import * as config from "./configuration.js"
 
 /**
  * Parses the command-line options received and returns them
@@ -15,14 +15,19 @@ export function parse(argv: string[]): {
   debugSubcommand?: tr.commands.DebugSubcommand
 } {
   // remove optional node parameter
-  if (path.basename(argv[0] || "") === "node" || path.win32.basename(argv[0] || "") === "node.exe") {
+  if (
+    path.basename(argv[0] || "") === "node" ||
+    path.win32.basename(argv[0] || "") === "node.exe" ||
+    argv[0]?.includes("node_modules/ts-node") ||
+    argv[0]?.includes("node_modules\\ts-node")
+  ) {
     argv.splice(0, 1)
   }
 
   // remove text-run parameter
   const unixBasename = path.basename(argv[0] || "")
   const winBasename = path.win32.basename(argv[0] || "")
-  if (unixBasename === "text-run" || winBasename === "text-run.cmd") {
+  if (unixBasename === "text-run" || winBasename === "text-run.cmd" || winBasename === "text-run.mjs") {
     argv.splice(0, 1)
   }
   // remove optional CLI parameter

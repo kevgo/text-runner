@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import * as ast from "../ast"
-import { extractDynamic } from "./extract-dynamic"
+import * as ast from "../ast/index.js"
+import { extractDynamic } from "./extract-dynamic.js"
 
 suite("extract()", function () {
   test("many activities", function () {

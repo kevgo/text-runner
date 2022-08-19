@@ -20,8 +20,8 @@ To get the codebase into a runnable state after cloning:
 ## Running tools
 
 All codebases in this mono-repo provide a standardized set of commands for
-executing common tasks. You must run these commands in the directory of the
-respective codebase.
+executing common development tasks. You must run these commands in the directory
+of the respective codebase.
 
 - run all tests: <code type="make/command">make test</code>
 - run unit tests: <code>make unit</code>

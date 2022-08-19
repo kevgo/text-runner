@@ -12,7 +12,7 @@ install:
   - ps: Install-Product node $env:nodejs_version
   - node --version
   - yarn
-  - set PATH=%APPDATA%\npm;c:\MinGW\bin;%PATH%
+  - set PATH=%APPDATA%\npm;c:\MinGW\bin;.\node_modules\.bin;%PATH%
 
 test_script:
   - cd text-runner-core

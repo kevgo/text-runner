@@ -1,11 +1,20 @@
 import { assert } from "chai"
 import * as path from "path"
+import * as url from "url"
 
-import * as activities from "../activities/index"
-import { Actions } from "./actions"
-import { ExternalActionManager } from "./external-action-manager"
-import { builtinActionFilePaths, customActionFilePaths, Finder, loadBuiltinActions, loadCustomActions } from "./finder"
-import { Action } from "./index"
+import * as activities from "../activities/index.js"
+import { Actions } from "./actions.js"
+import { ExternalActionManager } from "./external-action-manager.js"
+import {
+  builtinActionFilePaths,
+  customActionFilePaths,
+  Finder,
+  loadBuiltinActions,
+  loadCustomActions,
+} from "./finder.js"
+import { Action } from "./index.js"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 suite("actionFinder", function () {
   suite("actionFor()", function () {
@@ -27,14 +36,14 @@ suite("actionFinder", function () {
     })
   })
 
-  test("builtinActionFilePaths", function () {
-    const result = builtinActionFilePaths().map(fp => path.basename(fp))
-    assert.deepEqual(result, ["check-image", "check-link", "test"])
+  test("builtinActionFilePaths", async function () {
+    const result = (await builtinActionFilePaths()).map(fp => path.basename(fp))
+    assert.deepEqual(result, ["check-image.ts", "check-link.ts", "test.ts"])
   })
 
   suite("customActionFilePaths", function () {
-    test("with text-run folder of the documentation codebase", function () {
-      const result = customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
+    test("with text-run folder of the documentation codebase", async function () {
+      const result = await customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
       assert.lengthOf(result, 5)
       assert.match(result[0], /text-run\/action-arg.ts$/)
       assert.match(result[1], /text-run\/all-action-args.ts$/)
@@ -42,7 +51,7 @@ suite("actionFinder", function () {
   })
 
   test("loadBuiltinActions", async function () {
-    this.timeout(10_000)
+    this.timeout(20_000)
     const result = await loadBuiltinActions()
     assert.deepEqual(result.names(), ["check-image", "check-link", "test"])
   })

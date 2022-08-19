@@ -14,16 +14,15 @@ export default async function testSetup(action: tr.actions.Args): Promise<void> 
 {
   "name": "${pkgName}",
   "version": "0.0.0",
-  "main": "index.js"
+  "type": "module",
+  "exports": "./index.js"
 }`
   )
   await fs.writeFile(
     action.configuration.workspace.joinStr("index.js"),
     `\
-module.exports = {
-  textrunActions: {
-    "${action1}": function() { console.log(1) }
-  }
+export const textrunActions = {
+  "${action1}": function() { console.log(1) }
 }`
   )
 }

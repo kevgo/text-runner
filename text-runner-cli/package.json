@@ -9,9 +9,10 @@
   },
   "license": "ISC",
   "author": "Kevin Goslar",
-  "main": "dist/api.js",
+  "type": "module",
+  "exports": "./dist/api.js",
   "bin": {
-    "text-run": "bin/text-run"
+    "text-run": "./bin/text-run.mjs"
   },
   "files": [
     "bin",
@@ -29,6 +30,7 @@
     "end-child-processes": "1.0.3",
     "minimist": "1.2.6",
     "text-runner-core": "5.0.2",
+    "ts-node": "10.9.1",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

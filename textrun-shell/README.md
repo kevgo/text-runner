@@ -16,7 +16,7 @@ You can define the absolute path of documented binaries in a
 an example:
 
 ```js
-module.exports = {
+export default {
   binaries: {
     "text-run": path.join(__dirname, "node_modules", ".bin", "text-run"),
   },
@@ -77,7 +77,7 @@ As an example, let's say we have a command-line tool written in JavaScript
 called **greeter.js**:
 
 ```js
-const readline = require("readline")
+import * as readline from "readline"
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,

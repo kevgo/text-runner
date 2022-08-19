@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { getMakeTargets, trimDollar } from "./command"
+import { getMakeTargets, trimDollar } from "./command.js"
 
 suite("getMakeTargets", function () {
   test("exact match", function () {

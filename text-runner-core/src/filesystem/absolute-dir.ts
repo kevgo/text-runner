@@ -1,7 +1,7 @@
 import * as path from "path"
 
-import * as helpers from "../helpers"
-import * as files from "."
+import * as helpers from "../helpers/index.js"
+import * as files from "./index.js"
 
 /**
  * represents an absolute path to a directory,

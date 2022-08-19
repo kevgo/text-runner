@@ -1,7 +1,7 @@
-import { Activity } from "../activities"
-import { Command } from "../commands"
-import * as events from "../events"
-import { StopWatch } from "./stopwatch"
+import { Activity } from "../activities/index.js"
+import { Command } from "../commands/index.js"
+import * as events from "../events/index.js"
+import { StopWatch } from "./stopwatch.js"
 
 /** Statistics about a run of Text-Runner */
 interface ActivityResult {

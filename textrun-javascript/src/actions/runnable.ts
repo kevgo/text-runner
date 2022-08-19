@@ -1,10 +1,10 @@
 import * as tr from "text-runner-core"
 
-import { appendAsyncCallback } from "../helpers/append-async-callback"
-import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder"
-import { replaceAsyncCallback } from "../helpers/replace-async-callback"
-import { replaceRequireLocalModule } from "../helpers/replace-require-local-module"
-import { replaceVariableDeclarations } from "../helpers/replace-variable-declarations"
+import { appendAsyncCallback } from "../helpers/append-async-callback.js"
+import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder.js"
+import { replaceAsyncCallback } from "../helpers/replace-async-callback.js"
+import { replaceRequireLocalModule } from "../helpers/replace-require-local-module.js"
+import { replaceVariableDeclarations } from "../helpers/replace-variable-declarations.js"
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
 export function runnable(action: tr.actions.Args, done: tr.exports.DoneFunction): void {

@@ -1,7 +1,7 @@
 import { assert } from "chai"
 
-import * as files from "../filesystem/full-path"
-import { Publications } from "./publications"
+import * as files from "../filesystem/full-path.js"
+import { Publications } from "./publications.js"
 
 suite("Publications.forFilePath()", function () {
   test("a publication matches the given filePath", function () {

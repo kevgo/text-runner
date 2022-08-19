@@ -24,7 +24,7 @@ When TextRunner encounters this region of type `hello-world`, it reads the file
 exported by it. Let's create this file with the content:
 
 ```javascript
-module.exports = function (action) {
+export default action => {
   action.log("Hello world!!")
 }
 ```
@@ -72,16 +72,11 @@ TextRunner supports all forms of JavaScript functions as actions:
 - [async
   functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
-Examples are [here](../examples/custom-action/text-run/hello-world.js)
-
-You can write functions in any of the languages that
-[interpret](https://github.com/gulpjs/interpret) supports. Here are examples
-for:
-
-- [TypeScript](../examples/custom-action-typescript/)
-- [CoffeeScript](../examples/custom-action-coffeescript/)
-
-Throw an exception to fail a test.
+Examples for custom actions written in ESM are
+[here](../examples/custom-action/text-run/hello-world.js). You can write
+functions in [TypeScript](../examples/custom-action-typescript/) or in classic
+[CommonJS](../examples/custom-action-commonjs/text-run/hello-world.js). Throw an
+exception to fail a test.
 
 ## Accessing document content
 
@@ -186,4 +181,3 @@ text-run unused
 Read more about:
 
 - the [built-in actions](built-in-actions.md)
-- [configure](configuration.md) TextRunner

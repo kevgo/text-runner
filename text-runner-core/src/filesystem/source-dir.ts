@@ -1,7 +1,7 @@
-import * as glob from "glob-promise"
+import { globby } from "globby"
 import * as path from "path"
 
-import * as files from "."
+import * as files from "./index.js"
 
 /** represents the document base directory */
 export class SourceDir {
@@ -12,7 +12,7 @@ export class SourceDir {
   }
 
   async fullFilesMatchingGlob(expression: string): Promise<files.FullFilePath[]> {
-    const allFiles = await glob(expression)
+    const allFiles = await globby(expression)
     return allFiles.sort().map(file => new files.AbsoluteFilePath(file).toFullFile(this))
   }
 

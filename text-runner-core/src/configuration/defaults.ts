@@ -1,10 +1,10 @@
 import * as path from "path"
 import * as tmp from "tmp-promise"
 
-import { UserError } from "../errors/user-error"
-import * as files from "../filesystem"
-import * as configuration from "."
-import { Publications } from "./publications"
+import { UserError } from "../errors/user-error.js"
+import * as files from "../filesystem/index.js"
+import * as configuration from "./index.js"
+import { Publications } from "./publications.js"
 
 /** provides the default configuration values to use when no values are provided via CLI or config file */
 export function defaults(): configuration.CompleteAPIData {

@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { addLeadingSlash } from "./add-leading-slash"
+import { addLeadingSlash } from "./add-leading-slash.js"
 
 suite("addLeadingSlash", function () {
   const tests = {

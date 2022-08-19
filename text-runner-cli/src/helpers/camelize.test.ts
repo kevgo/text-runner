@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import * as helpers from "."
+import * as helpers from "./index.js"
 
 suite("camelize", function () {
   const tests = {

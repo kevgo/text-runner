@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { makefileTargets } from "./makefile-targets"
+import { makefileTargets } from "./makefile-targets.js"
 
 suite("makefileTargets", function () {
   test("with tabs", function () {

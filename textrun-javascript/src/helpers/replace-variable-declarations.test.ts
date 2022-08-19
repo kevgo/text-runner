@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { replaceVariableDeclarations } from "./replace-variable-declarations"
+import { replaceVariableDeclarations } from "./replace-variable-declarations.js"
 
 suite("replaceVariableDeclarations", function () {
   const tests = {

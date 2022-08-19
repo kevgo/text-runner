@@ -2,7 +2,8 @@
   "name": "textrun-action",
   "version": "0.1.2",
   "license": "ISC",
-  "main": "dist/index.js",
+  "type": "module",
+  "exports": "./dist/index.js",
   "files": [
     "dist/**/*.js"
   ],
@@ -10,6 +11,7 @@
     "text-runner-core": "5.0.2"
   },
   "devDependencies": {
-    "text-runner": "5.0.2"
+    "text-runner": "5.0.2",
+    "ts-node": "10.9.1"
   }
 }

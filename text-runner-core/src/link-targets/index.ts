@@ -1,5 +1,5 @@
-export * from "./find"
-export * from "./list"
+export * from "./find.js"
+export * from "./list.js"
 
 /**
  * Target is a position in a Markdown file that links can point to:

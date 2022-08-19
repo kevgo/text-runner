@@ -1,6 +1,6 @@
 import * as path from "path"
 
-import * as files from "."
+import * as files from "./index.js"
 
 const sepRE = new RegExp("\\" + path.sep, "g")
 

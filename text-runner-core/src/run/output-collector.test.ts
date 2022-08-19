@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { OutputCollector } from "./output-collector"
+import { OutputCollector } from "./output-collector.js"
 
 suite("OutputCollector", function () {
   test("initial state", function () {

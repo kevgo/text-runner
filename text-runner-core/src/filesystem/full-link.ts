@@ -1,8 +1,8 @@
 import * as path from "path"
 
-import * as configuration from "../configuration/index"
-import * as helpers from "../helpers"
-import * as files from "."
+import * as configuration from "../configuration/index.js"
+import * as helpers from "../helpers/index.js"
+import * as files from "./index.js"
 
 /**
  * Represents a link to another Markdown file,

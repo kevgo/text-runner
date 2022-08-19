@@ -1,6 +1,6 @@
 import { expect } from "chai"
 
-import * as files from "."
+import * as files from "./index.js"
 
 suite("removeExcludedFiles", function () {
   test("single filename given", function () {

@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { isMailtoLink } from "./is-mailto-link"
+import { isMailtoLink } from "./is-mailto-link.js"
 
 suite("isMailtoLink", function () {
   const tests = {

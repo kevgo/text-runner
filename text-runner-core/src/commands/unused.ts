@@ -1,12 +1,12 @@
 import { EventEmitter } from "events"
 
-import * as actions from "../actions"
-import * as activities from "../activities"
-import * as configuration from "../configuration/index"
-import * as events from "../events/index"
-import * as files from "../filesystem/index"
-import * as parsers from "../parsers"
-import { Command } from "./command"
+import * as actions from "../actions/index.js"
+import * as activities from "../activities/index.js"
+import * as configuration from "../configuration/index.js"
+import * as events from "../events/index.js"
+import * as files from "../filesystem/index.js"
+import * as parsers from "../parsers/index.js"
+import { Command } from "./command.js"
 
 export class Unused implements Command {
   userConfig: configuration.APIData

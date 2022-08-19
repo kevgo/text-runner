@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file"
+import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file.js"
 
 suite("isLinkToAnchorInSameFile", function () {
   test("anchor in same file", function () {

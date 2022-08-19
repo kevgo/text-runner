@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { targetURL } from "./target-url"
+import { targetURL } from "./target-url.js"
 
 suite("targetURL", function () {
   const tests = {

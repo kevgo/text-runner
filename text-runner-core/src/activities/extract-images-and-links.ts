@@ -1,5 +1,5 @@
-import * as ast from "../ast"
-import { List } from "./index"
+import * as ast from "../ast/index.js"
+import { List } from "./index.js"
 
 /** extracts activities that check images and links from the given ActivityLists */
 export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {

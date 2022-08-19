@@ -1,2 +1,2 @@
-export * as html from "./html"
-export * as markdown from "./markdown"
+export * as html from "./html/index.js"
+export * as markdown from "./markdown/index.js"

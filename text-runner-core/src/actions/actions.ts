@@ -1,5 +1,6 @@
-import { Action, FunctionRepo } from "./index"
-import slugify = require("@sindresorhus/slugify")
+import slugify from "@sindresorhus/slugify"
+
+import { Action, FunctionRepo } from "./index.js"
 
 export class Actions {
   list: FunctionRepo

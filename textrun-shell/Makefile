@@ -18,9 +18,9 @@ cuke-lerna: build  # runs the feature specs
 
 doc: build  # runs the documentation tests
 	echo textrun-shell documentation tests ...
-	cd examples/global-tool && ${CURDIR}/node_modules/.bin/text-run --format=summary
 	${CURDIR}/node_modules/.bin/text-run static --format=summary
 	${CURDIR}/node_modules/.bin/text-run dynamic --format=progress
+	cd ../examples/global-tool && ${CURDIR}/node_modules/.bin/text-run --format=summary
 
 fix:  # runs the auto-fixers
 	echo textrun-shell auto-fixes ...
@@ -45,6 +45,6 @@ test-ts: unit cuke  # runs all code tests
 
 unit:  # runs the unit tests
 	echo textrun-shell unit tests ...
-	${CURDIR}/../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"
+	env NODE_NO_WARNINGS=1 ${CURDIR}/../node_modules/.bin/mocha --reporter dot "src/**/*.test.ts"
 
 .SILENT:

@@ -1,9 +1,9 @@
 import { promises as fs } from "fs"
-import got from "got"
+import got, { HTTPError, TimeoutError } from "got"
 
-import * as configuration from "../../configuration/index"
-import * as files from "../../filesystem"
-import * as actions from "../index"
+import * as configuration from "../../configuration/index.js"
+import * as files from "../../filesystem/index.js"
+import * as actions from "../index.js"
 
 /** The "checkImage" action checks for broken images. */
 export async function checkImage(action: actions.Args): Promise<number | void> {
@@ -39,11 +39,11 @@ async function checkRemoteImage(url: string, action: actions.Args) {
     return action.SKIPPING
   }
   try {
-    await got(url, { timeout: 2000 })
+    await got(url, { timeout: { request: 2000 } })
   } catch (err) {
-    if (err instanceof got.HTTPError && err.response.statusCode === 404) {
+    if (err instanceof HTTPError && err.response.statusCode === 404) {
       action.log(`image ${url} does not exist`)
-    } else if (err instanceof got.TimeoutError) {
+    } else if (err instanceof TimeoutError) {
       action.log(`image ${url} timed out`)
     } else {
       throw err

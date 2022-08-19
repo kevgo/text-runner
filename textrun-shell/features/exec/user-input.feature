@@ -6,7 +6,7 @@ Feature: running console commands
       Create a file <a type="workspace/new-file">**echo.js** with content:
 
       ```
-      const readline = require("readline")
+      import * as readline from "readline"
       var rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,
@@ -46,7 +46,7 @@ Feature: running console commands
       Create a file <a type="workspace/new-file">**input.js** with content:
 
       ```
-      const readline = require("readline")
+      import * as readline from "node:readline"
       var rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout,

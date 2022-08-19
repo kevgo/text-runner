@@ -1,15 +1,15 @@
 import { EventEmitter } from "events"
 
-import * as actions from "../actions"
-import * as activities from "../activities"
-import * as configuration from "../configuration/index"
-import * as events from "../events/index"
-import * as files from "../filesystem/index"
-import * as linkTargets from "../link-targets"
-import * as parsers from "../parsers/index"
-import * as run from "../run"
-import * as workspace from "../workspace"
-import { Command } from "./command"
+import * as actions from "../actions/index.js"
+import * as activities from "../activities/index.js"
+import * as configuration from "../configuration/index.js"
+import * as events from "../events/index.js"
+import * as files from "../filesystem/index.js"
+import * as linkTargets from "../link-targets/index.js"
+import * as parsers from "../parsers/index.js"
+import * as run from "../run/index.js"
+import * as workspace from "../workspace/index.js"
+import { Command } from "./command.js"
 
 export class Dynamic implements Command {
   userConfig: configuration.APIData

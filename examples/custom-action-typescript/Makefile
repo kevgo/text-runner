@@ -10,8 +10,12 @@ doc:
 	${CURDIR}/node_modules/.bin/text-run --format=progress
 
 fix:
+	echo custom-action-typescript auto-fixes ...
+	${CURDIR}/../../node_modules/.bin/prettier --write .
 
 lint:
+	echo custom-action-typescript linters ...
+	${CURDIR}/../../node_modules/.bin/prettier -l .
 
 unit:
 

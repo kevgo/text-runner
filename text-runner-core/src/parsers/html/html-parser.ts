@@ -1,9 +1,9 @@
 import * as parse5 from "parse5"
 import * as util from "util"
 
-import * as ast from "../../ast"
-import * as files from "../../filesystem/index"
-import { TagMapper } from "../tag-mapper"
+import * as ast from "../../ast/index.js"
+import * as files from "../../filesystem/index.js"
+import { TagMapper } from "../tag-mapper.js"
 
 /** Parser converts HTML5 source into the standardized AST format. */
 export class Parser {

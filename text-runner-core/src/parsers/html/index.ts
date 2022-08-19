@@ -1,1 +1,1 @@
-export { Parser } from "./html-parser"
+export { Parser } from "./html-parser.js"

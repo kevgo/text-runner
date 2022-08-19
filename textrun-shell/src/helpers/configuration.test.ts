@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { Configuration } from "./configuration"
+import { Configuration } from "./configuration.js"
 
 suite("Configuration", function () {
   test("pathMapper", function () {

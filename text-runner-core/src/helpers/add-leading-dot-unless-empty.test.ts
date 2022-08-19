@@ -1,6 +1,6 @@
 import { assert } from "chai"
 
-import { addLeadingDotUnlessEmpty } from "./add-leading-dot-unless-empty"
+import { addLeadingDotUnlessEmpty } from "./add-leading-dot-unless-empty.js"
 
 suite("addLeadingDotUnlessEmpty", function () {
   const tests = {

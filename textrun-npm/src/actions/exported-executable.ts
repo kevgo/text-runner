@@ -1,9 +1,9 @@
 import * as color from "colorette"
-import * as fs from "fs-extra"
+import { promises as fs } from "fs"
 import * as tr from "text-runner-core"
 
-import { trimDollar } from "../helpers/trim-dollar"
-import { PackageJson } from "./package-json"
+import { trimDollar } from "../helpers/trim-dollar.js"
+import { PackageJson } from "./package-json.js"
 
 export async function exportedExecutable(action: tr.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())
@@ -12,7 +12,8 @@ export async function exportedExecutable(action: tr.actions.Args): Promise<void>
   }
   action.name(`npm package exports executable ${color.cyan(commandName)}`)
   const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
-  const pkgData: PackageJson = await fs.readJSON(packageJsonPath)
+  const pkgText = await fs.readFile(packageJsonPath, "utf-8")
+  const pkgData: PackageJson = JSON.parse(pkgText)
   if (!Object.keys(pkgData.bin).includes(commandName)) {
     throw new Error(`package.json does not export a "${commandName}" command`)
   }

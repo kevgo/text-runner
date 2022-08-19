@@ -1,13 +1,13 @@
-import * as MarkdownIt from "markdown-it"
+import MarkdownIt from "markdown-it"
 import * as util from "util"
 
-import * as ast from "../../ast"
-import { UserError } from "../../errors/user-error"
-import * as files from "../../filesystem/index"
-import * as html from "../html"
-import { TagMapper } from "../tag-mapper"
-import { ClosingTagParser } from "./closing-tag-parser"
-import { OpenNodeTracker } from "./open-node-tracker"
+import * as ast from "../../ast/index.js"
+import { UserError } from "../../errors/user-error.js"
+import * as files from "../../filesystem/index.js"
+import * as html from "../html/index.js"
+import { TagMapper } from "../tag-mapper.js"
+import { ClosingTagParser } from "./closing-tag-parser.js"
+import { OpenNodeTracker } from "./open-node-tracker.js"
 
 export interface MarkdownItNode {
   /** HTML attributes. Format: `[[name1, value1], [name2, value2]]` */

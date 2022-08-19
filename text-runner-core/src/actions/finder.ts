@@ -82,13 +82,15 @@ export class Finder {
 }
 
 export function builtinActionFilePaths(): string[] {
-  return globbySync(`${__dirname}/built-in/*.?s`).filter(filename => !filename.endsWith(".d.ts"))
+  const query = `${__dirname}/built-in/*.?s`.replace(/\\/g, "/")
+  return globbySync(query).filter(filename => !filename.endsWith(".d.ts"))
 }
 
 export async function loadBuiltinActions(): Promise<Actions> {
   const result = new Actions()
   for (const filename of builtinActionFilePaths()) {
-    result.register(actions.name(filename), await import(filename))
+    const fileURL = url.pathToFileURL(filename)
+    result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }

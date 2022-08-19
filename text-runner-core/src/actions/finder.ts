@@ -85,7 +85,7 @@ export async function builtinActionFilePaths(): Promise<string[]> {
   const builtinDir = path.join(__dirname, "built-in")
   for (const file of await fs.readdir(builtinDir)) {
     if (file.endsWith(".ts") && !file.endsWith(".d.ts")) {
-      result.push(path.join(__dirname, file))
+      result.push(path.join(builtinDir, file))
     }
   }
   return result

@@ -17,6 +17,7 @@
   "devDependencies": {
     "text-runner": "5.0.2",
     "textrun-action": "0.1.2",
-    "textrun-extension": "0.1.2"
+    "textrun-extension": "0.1.2",
+    "ts-node": "10.9.1"
   }
 }

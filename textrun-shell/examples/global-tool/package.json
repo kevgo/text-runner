@@ -4,5 +4,8 @@
   "type": "module",
   "dependencies": {
     "text-runner-core": "5.0.2"
+  },
+  "devDependencies": {
+    "ts-node": "10.9.1"
   }
 }

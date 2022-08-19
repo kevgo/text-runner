@@ -1,6 +1,4 @@
 import { globbySync } from "globby"
-import * as interpret from "interpret"
-import * as rechoir from "rechoir"
 import * as url from "url"
 
 import * as actions from "../actions/index.js"
@@ -102,7 +100,6 @@ export function customActionFilePaths(dir: string): string[] {
 export async function loadCustomActions(dir: string): Promise<Actions> {
   const result = new Actions()
   for (const filename of customActionFilePaths(dir)) {
-    rechoir.prepare(interpret.jsVariants, filename)
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     result.register(actions.name(filename), await import(filename))
   }

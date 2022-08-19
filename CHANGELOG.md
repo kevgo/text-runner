@@ -7,7 +7,8 @@
 - Text-Runner is now an ESM module
   - Your code doesn't need to be an ESM module to use Text-Runner.
   - For best results, upgrade your Text-Runner custom actions to also be ESM
-    modules.
+    modules:
+    https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
 
 #### New features
 

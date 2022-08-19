@@ -29,7 +29,6 @@ More information about:
 
 - [how it works](../documentation/how-it-works.md)
 - [installation](../documentation/installation.md)
-- [configuration](../documentation/configuration.md)
 - [built-in actions](../documentation/built-in-actions.md)
 - [user-defined actions](../documentation/user-defined-actions.md)
 - [external actions](../documentation/external-actions.md)

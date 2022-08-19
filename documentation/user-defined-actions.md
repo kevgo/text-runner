@@ -181,4 +181,3 @@ text-run unused
 Read more about:
 
 - the [built-in actions](built-in-actions.md)
-- [configure](configuration.md) TextRunner

@@ -103,4 +103,3 @@ greets us with <code type="shell/command-output">Hello world!</code>.
 
 - the [built-in actions](built-in-actions.md)
 - writing your own [custom actions](user-defined-actions.md)
-- [configuring](configuration.md) TextRunner

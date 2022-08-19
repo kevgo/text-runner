@@ -51,7 +51,7 @@ suite("actionFinder", function () {
   })
 
   test("loadBuiltinActions", async function () {
-    this.timeout(10_000)
+    this.timeout(20_000)
     const result = await loadBuiltinActions()
     assert.deepEqual(result.names(), ["check-image", "check-link", "test"])
   })

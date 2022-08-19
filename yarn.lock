@@ -1406,13 +1406,6 @@
   resolved "https://registry.npmjs.org/@types/http-cache-semantics/-/http-cache-semantics-4.0.0.tgz"
   integrity sha512-c3Xy026kOF7QOTn00hbIllV1dLR9hG9NkSrLQgCVs8NF6sBU+VGWjD3wLPhmh1TYAc7ugCFsvHYMN4VcBN1U1A==
 
-"@types/interpret@*", "@types/interpret@1.1.1":
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/@types/interpret/-/interpret-1.1.1.tgz"
-  integrity sha512-HZ4d0m2Ebl8DmrOdYZHgYyipj/8Ftq1/ssB/oQR7fqfUrwtTP7IW3BDi2V445nhPBLzZjEkApaPVp83moSCXlA==
-  dependencies:
-    "@types/node" "*"
-
 "@types/is-glob@4.0.2":
   version "4.0.2"
   resolved "https://registry.npmjs.org/@types/is-glob/-/is-glob-4.0.2.tgz"
@@ -1502,13 +1495,6 @@
   version "1.1.2"
   resolved "https://registry.npmjs.org/@types/ps-tree/-/ps-tree-1.1.2.tgz"
   integrity sha512-ZREFYlpUmPQJ0esjxoG1fMvB2HNaD3z+mjqdSosZvd3RalncI9NEur73P8ZJz4YQdL64CmV1w0RuqoRUlhQRBw==
-
-"@types/rechoir@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.npmjs.org/@types/rechoir/-/rechoir-0.6.1.tgz"
-  integrity sha512-HbMQqyZC8W9NxE3R89rW+hFwFXeIdmCT7x91NQjzB4+0CI42K/CJfRak5/jAQ7L5qi1cGcQQdo+GI9pqqUhbKQ==
-  dependencies:
-    "@types/interpret" "*"
 
 "@types/responselike@*", "@types/responselike@^1.0.0":
   version "1.0.0"

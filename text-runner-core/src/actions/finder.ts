@@ -84,7 +84,7 @@ export async function builtinActionFilePaths(): Promise<string[]> {
   const result = []
   const builtinDir = path.join(__dirname, "built-in")
   for (const file of await fs.readdir(builtinDir)) {
-    if (file.endsWith(".ts") && !file.endsWith(".d.ts")) {
+    if (file.endsWith(".js") || (file.endsWith(".ts") && !file.endsWith(".d.ts"))) {
       result.push(path.join(builtinDir, file))
     }
   }
@@ -101,8 +101,14 @@ export async function loadBuiltinActions(): Promise<Actions> {
 }
 
 export async function customActionFilePaths(dir: string): Promise<string[]> {
+  try {
+    var files = await fs.readdir(dir)
+  } catch (e) {
+    // it's okay if there is no dir with custom actions
+    return []
+  }
   const result = []
-  for (const file of await fs.readdir(dir)) {
+  for (const file of files) {
     if (file.endsWith(".js") || file.endsWith(".ts")) {
       result.push(path.join(dir, file))
     }

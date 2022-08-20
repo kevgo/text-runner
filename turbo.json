@@ -12,21 +12,21 @@
     },
     "cuke": {
       "dependsOn": ["build"],
-      "inputs": ["**/*.feature", "**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "cucumber.cjs"],
+      "inputs": [
+        "**/*.feature",
+        "src/*.ts",
+        "src/**/*.ts",
+        ":!:src/*.test.ts",
+        ":!:src/**/*.test.ts",
+        "cucumber.cjs",
+        "package.json"
+      ],
       "outputs": [],
       "outputMode": "new-only"
     },
     "doc": {
       "dependsOn": ["build"],
-      "inputs": [
-        "*.md",
-        "**/*.md",
-        "src/*.ts",
-        "src/**/*.ts",
-        ":!:src/*.test.ts",
-        ":!:src/**/*.test.ts",
-        "text-run.yml"
-      ],
+      "inputs": ["*.md", "**/*.md", "**/*.ts", ":!:**.test.ts", "text-run.yml"],
       "outputMode": "new-only"
     },
     "fix": {
@@ -45,7 +45,7 @@
     },
     "unit": {
       "dependsOn": ["^test"],
-      "inputs": ["src/**/*.ts", ".mocharc.yml"],
+      "inputs": ["**/*.ts", ".mocharc.yml", "package.json"],
       "outputs": [],
       "outputMode": "new-only"
     }

@@ -36,5 +36,5 @@
       "outputMode": "new-only"
     }
   },
-  "globalDependencies": ["tsconfig.json", "yarn.lock"]
+  "globalDependencies": ["tsconfig.json", "package.json", "yarn.lock"]
 }

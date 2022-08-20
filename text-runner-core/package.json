@@ -22,7 +22,6 @@
     "doc": "text-run --format=summary",
     "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
     "lint": "eslint . --ext .ts --ignore-path ../.eslintignore && prettier -l . && depcheck",
-    "test": "make test",
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot src/**/*.test.ts"
   },
   "dependencies": {

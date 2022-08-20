@@ -10,12 +10,17 @@
       "dependsOn": ["build"],
       "inputs": ["**/*.md", "text-run.yml"]
     },
+    "lint": {
+      "outputs": []
+    },
     "test": {
-      "dependsOn": ["build"],
+      "dependsOn": ["build", "^test", "doc", "unit"],
       "outputs": [],
       "inputs": ["src/**/*.ts"]
     },
-    "lint": {
+    "unit": {
+      "dependsOn": [],
+      "inputs": ["src/**/*.ts", ".mocharc.yml"],
       "outputs": []
     }
   }

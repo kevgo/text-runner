@@ -25,6 +25,7 @@
     "doc": "text-run --format=summary",
     "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
     "lint": "prettier -l . && eslint . --ext .ts --ignore-path ../.eslintignore && depcheck --config=../.depcheckrc",
+    "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot src/**/*.test.ts"
   },
   "dependencies": {

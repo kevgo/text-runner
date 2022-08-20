@@ -16,7 +16,14 @@
     "dist/**/*.d.ts"
   ],
   "scripts": {
-    "test": "make test"
+    "build": "tsc -p tsconfig-build.json",
+    "clean": "rm -rf dist",
+    "cuke": "cd ../text-runner-features && make --no-print-directory cuke-api",
+    "doc": "text-run --format=summary",
+    "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
+    "lint": "eslint . --ext .ts --ignore-path ../.eslintignore && prettier -l . && depcheck",
+    "test": "make test",
+    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot src/**/*.test.ts"
   },
   "dependencies": {
     "@sindresorhus/slugify": "2.1.0",

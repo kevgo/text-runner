@@ -22,7 +22,6 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "cuke": "cd ../text-runner-features && make --no-print-directory cuke-cli",
     "doc": "text-run --format=summary",
     "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
     "lint": "prettier -l . && eslint . --ext .ts --ignore-path ../.eslintignore && depcheck --config=../.depcheckrc",

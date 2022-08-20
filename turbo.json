@@ -10,6 +10,12 @@
     "clean": {
       "outputs": []
     },
+    "cuke": {
+      "dependsOn": ["build"],
+      "inputs": ["**/*.feature", "**/*.ts", "cucumber.cjs"],
+      "outputs": [],
+      "outputMode": "new-only"
+    },
     "doc": {
       "dependsOn": ["build"],
       "inputs": ["**/*.md", "text-run.yml"],
@@ -24,7 +30,7 @@
       "outputMode": "new-only"
     },
     "test": {
-      "dependsOn": ["build", "^test", "doc", "unit"],
+      "dependsOn": ["build", "^test", "unit", "cuke", "doc"],
       "outputs": [],
       "inputs": ["src/**/*.ts"],
       "outputMode": "new-only"

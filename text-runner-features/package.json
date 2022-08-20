@@ -1,9 +1,12 @@
 {
   "name": "text-runner-features",
-  "type": "module",
   "version": "0.0.0",
   "private": true,
   "license": "ISC",
+  "type": "module",
+  "scripts": {
+    "cuke": "cucumber-js --tags '(not @online) and (not @todo)' --format=progress --parallel `node -e 'console.log(os.cpus().length)'` **/*.feature"
+  },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
     "text-runner-core": "5.0.2",

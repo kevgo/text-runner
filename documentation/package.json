@@ -5,9 +5,9 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "doc": "make doc",
-    "fix": "make fix",
-    "lint": "make lint"
+    "doc": "text-run static --format=summary && text-run dynamic --format=progress",
+    "fix": "prettier --write .",
+    "lint": "prettier -l . && depcheck --config=../.depcheckrc"
   },
   "devDependencies": {
     "assert-no-diff": "3.0.6",

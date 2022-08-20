@@ -111,7 +111,9 @@ setup:  # prepares the mono-repo for development after cloning
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
-test: lint  # runs all tests for the root directory
+test:  # runs all tests for the root directory
+	${CURDIR}/node_modules/.bin/turbo run test
+.PHONY: test
 
 test-affected:  # runs all tests for the codebases affected by changes in this branch
 	${CURDIR}/node_modules/.bin/lerna exec --since origin/main --include-dependents --parallel -- make --no-print-directory test-lerna

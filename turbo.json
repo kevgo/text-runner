@@ -3,10 +3,12 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
+      "inputs": ["src/**/*.ts", "tsconfig.json", "package.json", "yarn.lock"],
       "outputs": ["dist/**"]
     },
     "doc": {
-      "dependsOn": ["**/*.md", "text-run.yml"]
+      "dependsOn": ["build"],
+      "inputs": ["**/*.md", "text-run.yml"]
     },
     "test": {
       "dependsOn": ["build"],

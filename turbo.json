@@ -39,9 +39,7 @@
     },
     "test": {
       "dependsOn": ["^test", "build", "unit", "cuke", "doc"],
-      "outputs": [],
-      "inputs": ["src/*.ts", "src/**/*.ts"],
-      "outputMode": "new-only"
+      "outputs": []
     },
     "unit": {
       "dependsOn": ["^test"],

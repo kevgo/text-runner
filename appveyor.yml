@@ -16,13 +16,13 @@ install:
 
 test_script:
   - cd text-runner-core
-  - make build
+  - yarn run build
   - cd ..\text-runner-cli
-  - make build
+  - yarn run build
   - cd ..\shared\cucumber-steps
-  - make build
+  - yarn run build
   - cd ..\..\text-runner-features
-  - make cuke-smoke
+  - yarn run cuke:smoke
 
 # Don't double-build PRs
 skip_branch_with_pr: true

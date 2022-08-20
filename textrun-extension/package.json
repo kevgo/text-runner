@@ -22,6 +22,7 @@
     "text-runner-core": "5.0.2"
   },
   "devDependencies": {
+    "shared-cucumber-steps": "*",
     "text-runner": "5.0.2",
     "textrun-action": "0.1.2",
     "ts-node": "10.9.1"

@@ -2,7 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^test"],
       "inputs": ["src/*.ts", "src/**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "tsconfig.json", "package.json"],
       "outputs": ["dist/**"],
       "outputMode": "new-only"
@@ -40,7 +40,7 @@
       "outputMode": "new-only"
     },
     "test": {
-      "dependsOn": ["^test", "build", "unit", "cuke", "doc"],
+      "dependsOn": ["build", "unit", "cuke", "doc"],
       "outputs": []
     },
     "unit": {

@@ -3,8 +3,8 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["src/**/*.ts", "tsconfig.json", "package.json", "yarn.lock"],
-      "outputs": ["dist/**"],
+      "inputs": ["src/*.ts", "src/**/*.ts", "tsconfig.json", "package.json"],
+      "outputs": ["dist/"],
       "outputMode": "new-only"
     },
     "clean": {
@@ -18,7 +18,7 @@
     },
     "doc": {
       "dependsOn": ["build"],
-      "inputs": ["**/*.md", "text-run.yml"],
+      "inputs": ["*.md", "**/*.md", "text-run.yml"],
       "outputMode": "new-only"
     },
     "fix": {

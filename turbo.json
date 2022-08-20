@@ -4,11 +4,13 @@
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/*.ts", "src/**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "tsconfig.json", "package.json"],
-      "outputs": ["dist/"],
+      "outputs": ["dist/**"],
       "outputMode": "new-only"
     },
     "clean": {
-      "outputs": []
+      "outputs": [],
+      "outputMode": "new-only",
+      "cache": false
     },
     "cuke": {
       "dependsOn": ["build"],

@@ -2,6 +2,18 @@
 # - dependents = downstreams (my dependents, those that are dependent on me)
 # - dependencies = upstreams (my dependencies, those that I depend on)
 
+build:  # builds all codebases
+	env FORCE_COLOR=1 yarn exec --silent -- turbo run build --concurrency=100%
+
+rebuild:  # rebuilds all codebases even if their already exist
+	env FORCE_COLOR=1 yarn exec --silent -- turbo run build --force --concurrency=100%
+
+clean:  # remove all build artifacts
+	env FORCE_COLOR=1 yarn exec --silent -- turbo run clean --concurrency=100%
+
+cuke:  # runs all E2E tests
+	env FORCE_COLOR=1 yarn exec --silent -- turbo run cuke --concurrency=100%
+
 doc:  # runs the documentation tests
 	env FORCE_COLOR=1 yarn exec --silent -- turbo run doc --concurrency=100%
 
@@ -14,12 +26,12 @@ help:  # prints all make targets
 lint:  # lints the root directory
 	env FORCE_COLOR=1 yarn exec --silent -- turbo run lint --concurrency=100%
 
-publish-all: clean-all build-all  # publishes all code bases
+publish: clean rebuild  # publishes all code bases
 	yarn exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning
 	yarn
-	env FORCE_COLOR=1 yarn exec --silent -- turbo run build --concurrency=100%
+	make --no-print-directory build
 
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc

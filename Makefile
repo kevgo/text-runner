@@ -111,6 +111,9 @@ setup:  # prepares the mono-repo for development after cloning
 stats:  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
 
+ps:  # pitstop
+	env FORCE_COLOR=1 ${CURDIR}/node_modules/.bin/turbo run fix test --concurrency=100%
+
 test:  # runs all tests for the root directory
 	env FORCE_COLOR=1 ${CURDIR}/node_modules/.bin/turbo run test --concurrency=100%
 .PHONY: test

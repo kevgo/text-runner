@@ -4,9 +4,9 @@
   "private": true,
   "module": "commonjs",
   "scripts": {
-    "doc": "make doc",
-    "fix": "make fix",
-    "lint": "make lint"
+    "doc": "text-run --format=progress",
+    "fix": "prettier --write .",
+    "lint": "prettier -l ."
   },
   "devDependencies": {
     "text-runner": "5.0.2",

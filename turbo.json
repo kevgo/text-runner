@@ -44,7 +44,7 @@
       "outputs": []
     },
     "unit": {
-      "dependsOn": ["^test"],
+      "dependsOn": ["build"],
       "inputs": ["**/*.ts", ".mocharc.yml", "package.json"],
       "outputs": [],
       "outputMode": "new-only"

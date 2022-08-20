@@ -10,6 +10,9 @@
       "dependsOn": ["build"],
       "inputs": ["**/*.md", "text-run.yml"]
     },
+    "fix": {
+      "outputs": []
+    },
     "lint": {
       "outputs": []
     },

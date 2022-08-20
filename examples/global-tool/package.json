@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "doc": "make doc",
-    "fix": "make fix",
-    "lint": "make lint"
+    "doc": "text-run --format=progress",
+    "fix": "prettier --write .",
+    "lint": "prettier -l ."
   },
   "dependencies": {
     "text-runner": "5.0.2",

@@ -5,7 +5,9 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "cuke": "cucumber-js --tags '(not @online) and (not @todo)' --format=progress --parallel `node -e 'console.log(os.cpus().length)'` **/*.feature"
+    "cuke": "cucumber-js --tags '(not @online) and (not @todo)' --format=progress --parallel `node -e 'console.log(os.cpus().length)'` **/*.feature",
+    "cuke:api": "cucumber-js --tags '(not @online) and (not @todo) and (@api)' --format=progress --parallel `node -e 'console.log(os.cpus().length)'` **/*.feature",
+    "cuke:cli": "cucumber-js --tags '(not @online) and (not @todo) and (@cli)' --format=progress --parallel `node -e 'console.log(os.cpus().length)'` **/*.feature"
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",

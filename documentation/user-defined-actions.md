@@ -73,7 +73,7 @@ TextRunner supports all forms of JavaScript functions as actions:
   functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
 Examples for custom actions written in ESM are
-[here](../examples/custom-action/text-run/hello-world.js). You can write
+[here](../examples/custom-action-esm/text-run/hello-world.js). You can write
 functions in [TypeScript](../examples/custom-action-typescript/) or in classic
 [CommonJS](../examples/custom-action-commonjs/text-run/hello-world.js). Throw an
 exception to fail a test.

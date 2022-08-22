@@ -59,7 +59,7 @@ suite("actionFinder", function () {
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", async function () {
       const result = await loadCustomActions(
-        path.join(__dirname, "..", "..", "..", "examples", "custom-action", "text-run")
+        path.join(__dirname, "..", "..", "..", "examples", "custom-action-esm", "text-run")
       )
       assert.typeOf(result.get("hello-world-sync"), "function")
     })

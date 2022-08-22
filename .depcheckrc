@@ -4,7 +4,7 @@ ignores:
   - chai
   - documentation
   - custom-action-commonjs
-  - custom-action-examples
+  - custom-action-esm
   - custom-action-typescript
   - shared-cucumber-steps
   - text-runner

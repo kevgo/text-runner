@@ -8,7 +8,6 @@ cucumber.BeforeAll(async function () {
   await workspace.backup()
 })
 
-// eslint-disable-next-line @typescript-eslint/no-misused-promises
 cucumber.After({ timeout: 20_000 }, async function (this: TRWorld) {
   await endChildProcesses()
   await workspace.restore()

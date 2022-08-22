@@ -25,7 +25,7 @@ export class Data {
 
   constructor(data: Partial<Data> = {}) {
     for (const [key, value] of Object.entries(data)) {
-      // @ts-ignore
+      // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
       this[key] = value
     }
   }
@@ -38,13 +38,13 @@ export class Data {
     const result = new Data()
     for (const [key, value] of Object.entries(this)) {
       if (value != null) {
-        // @ts-ignore
+        // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
         result[key] = value
       }
     }
     for (const [key, value] of Object.entries(other)) {
       if (value != null) {
-        // @ts-ignore
+        // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
         result[key] = value
       }
     }

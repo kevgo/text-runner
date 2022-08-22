@@ -5,7 +5,7 @@ import { standardizeHTMLAttributes } from "./html-parser.js"
 
 suite("standardizeHTMLAttributes", function () {
   test("values", function () {
-    const input: parse5.Attribute[] = [
+    const input: parse5.Token.Attribute[] = [
       { name: "one", value: "1" },
       { name: "two", value: "2" },
     ]

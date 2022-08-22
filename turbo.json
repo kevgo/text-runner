@@ -2,7 +2,7 @@
   "$schema": "https://turborepo.org/schema.json",
   "pipeline": {
     "build": {
-      "dependsOn": ["^test"],
+      "dependsOn": ["^build"],
       "inputs": ["src/*.ts", "src/**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "tsconfig.json", "package.json"],
       "outputs": ["dist/**"],
       "outputMode": "new-only"

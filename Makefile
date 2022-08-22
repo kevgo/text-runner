@@ -10,6 +10,7 @@ rebuild:  # rebuilds all codebases even if their already exist
 
 clean:  # remove all build artifacts
 	env FORCE_COLOR=1 yarn exec --silent -- turbo run clean --concurrency=100%
+	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
 	env FORCE_COLOR=1 yarn exec --silent -- turbo run cuke --concurrency=100%

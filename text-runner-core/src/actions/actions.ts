@@ -22,7 +22,6 @@ export class Actions {
     return Object.keys(this.list).sort()
   }
 
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   register(fileBasedName: string, action: any): void {
     if (typeof action === "function") {
       this.list[fileBasedName] = action

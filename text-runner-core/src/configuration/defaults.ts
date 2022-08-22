@@ -29,7 +29,7 @@ export async function addDefaults(partial: configuration.APIData): Promise<confi
   const fullAPIData = defaults()
   for (const [key, value] of Object.entries(partial)) {
     if (value != null) {
-      // @ts-ignore
+      // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
       fullAPIData[key] = value
     }
   }

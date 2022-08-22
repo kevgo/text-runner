@@ -18,11 +18,10 @@ suite("Publications.forFilePath()", function () {
       },
     ])
     const filePath = new files.FullPath("bar")
-
     const publication = publications.forFilePath(filePath)
-
-    assert.isDefined(publication)
-    // @ts-ignore: publication is not null here
+    if (publication == null) {
+      throw "publication is null"
+    }
     assert.equal(publication.localPath, "/bar/")
   })
 

@@ -12,7 +12,7 @@ const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 Given("a broken file {string}", async function (this: TRWorld, filePath: string) {
   const subdir = path.dirname(filePath)
   if (subdir !== ".") {
-    await fse.ensureDir(workspace.absPath.joinStr(subdir))
+    await fs.mkdir(workspace.absPath.joinStr(subdir), { recursive: true })
   }
   await fs.writeFile(
     workspace.absPath.joinStr(filePath),
@@ -46,13 +46,17 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function (this: TRWorld, exampleName: string) {
-  await fse.copy(path.join("documentation", "examples", exampleName), workspace.absPath.platformified())
+  await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
+    recursive: true,
+  })
 })
 
 Given(
   "I am in a directory that contains the {string} example with the configuration file:",
   async function (this: TRWorld, exampleName: string, configFileContent: string) {
-    await fse.copy(path.join("documentation", "examples", exampleName), workspace.absPath.platformified())
+    await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
+      recursive: true,
+    })
     await fs.writeFile(workspace.absPath.joinStr("text-run.yml"), configFileContent)
   }
 )

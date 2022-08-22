@@ -12,7 +12,7 @@
   "devDependencies": {
     "assert-no-diff": "3.0.6",
     "custom-action-commonjs": "0.0.0",
-    "custom-action-examples": "0.0.0",
+    "custom-action-esm": "0.0.0",
     "custom-action-typescript": "0.0.0",
     "text-runner": "5.0.2",
     "text-runner-core": "5.0.2",

@@ -2,8 +2,8 @@
   "private": true,
   "workspaces": [
     "documentation",
-    "examples/custom-action",
     "examples/custom-action-commonjs",
+    "examples/custom-action-esm",
     "examples/custom-action-typescript",
     "examples/global-tool",
     "shared/cucumber-steps",

@@ -1,6 +1,6 @@
 import minimist from "minimist"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import * as commands from "./commands/index.js"
 import * as config from "./configuration.js"
@@ -12,7 +12,7 @@ import * as config from "./configuration.js"
 export function parse(argv: string[]): {
   cmdLineConfig: config.Data
   commandName: string
-  debugSubcommand?: tr.commands.DebugSubcommand
+  debugSubcommand?: textRunner.commands.DebugSubcommand
 } {
   // remove optional node parameter
   if (
@@ -61,14 +61,14 @@ export function parse(argv: string[]): {
     commandName = "run"
   }
 
-  let debugSubcommand: tr.commands.DebugSubcommand | undefined
+  let debugSubcommand: textRunner.commands.DebugSubcommand | undefined
   if (commandName === "debug") {
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
   return { commandName, cmdLineConfig, debugSubcommand }
 }
 
-function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.commands.DebugSubcommand {
+function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): textRunner.commands.DebugSubcommand {
   if (cliArgs.activities) {
     return "activities"
   } else if (cliArgs.ast) {
@@ -80,9 +80,9 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): tr.commands.DebugSu
   } else if (cliArgs["link-targets"]) {
     return "linkTargets"
   } else {
-    throw new tr.UserError(
+    throw new textRunner.UserError(
       "Missing or invalid debug subcommand",
-      `Valid debug subcommands are: ${tr.commands.DebugSubCommandValues.join(", ")}.
+      `Valid debug subcommands are: ${textRunner.commands.DebugSubCommandValues.join(", ")}.
 Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"`
     )
   }
@@ -103,7 +103,7 @@ function parseSystemTmp(value: any): boolean | undefined {
     case false:
       return false
     default:
-      throw new tr.UserError(
+      throw new textRunner.UserError(
         `unknown value for "system-tmp" setting: ${value}`,
         'Set the "system-tmp" setting to "true" to have Text-Runner put the test workspace into the global system temp folder and "false" to put it into the current folder.'
       )

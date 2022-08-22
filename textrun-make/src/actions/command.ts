@@ -1,15 +1,15 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as os from "os"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { makefileTargets } from "../helpers/makefile-targets.js"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
-export async function command(action: tr.actions.Args): Promise<void> {
+export async function command(action: textRunner.actions.Args): Promise<void> {
   const wants = getMakeTargets(action.region.text())
   if (wants.length === 0) {
-    throw new tr.UserError("No Make commands found", `Make commands must start with "make"`, action.location)
+    throw new textRunner.UserError("No Make commands found", `Make commands must start with "make"`, action.location)
   } else if (wants.length === 1) {
     action.name(`make command: ${color.cyan(wants[0])}`)
   } else {

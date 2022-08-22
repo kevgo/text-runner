@@ -2,9 +2,9 @@ import * as assertNoDiff from "assert-no-diff"
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
-export async function existingFile(action: tr.actions.Args): Promise<void> {
+export async function existingFile(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("strong", "em")
   const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
   action.name(`verify content of file ${color.cyan(fileRelPath)}`)
@@ -14,12 +14,15 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   try {
     var actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
-    if (!tr.isFsError(e)) {
+    if (!textRunner.isFsError(e)) {
       throw e
     }
     if (e.code === "ENOENT") {
       const files = await fs.readdir(action.configuration.sourceDir.platformified())
-      throw new tr.UserError(`file not found: ${fileRelPath}`, `the workspace has these files: ${files.join(", ")}`)
+      throw new textRunner.UserError(
+        `file not found: ${fileRelPath}`,
+        `the workspace has these files: ${files.join(", ")}`
+      )
     } else {
       throw e
     }
@@ -27,6 +30,9 @@ export async function existingFile(action: tr.actions.Args): Promise<void> {
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
   } catch (err) {
-    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(fileRelPath))}`, tr.errorMessage(err))
+    throw new textRunner.UserError(
+      `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
+      textRunner.errorMessage(err)
+    )
   }
 }

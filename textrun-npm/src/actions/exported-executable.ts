@@ -1,11 +1,11 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { trimDollar } from "../helpers/trim-dollar.js"
 import { PackageJson } from "./package-json.js"
 
-export async function exportedExecutable(action: tr.actions.Args): Promise<void> {
+export async function exportedExecutable(action: textRunner.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())
   if (commandName === "") {
     throw new Error("No executable name specified")

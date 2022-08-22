@@ -1,6 +1,6 @@
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
-export default function actionArg(action: tr.actions.Args): void {
+export default function actionArg(action: textRunner.actions.Args): void {
   const documented = action.region.text()
   const allExisting = Object.keys(action).sort()
   for (const existing of allExisting) {
@@ -8,7 +8,7 @@ export default function actionArg(action: tr.actions.Args): void {
       return
     }
   }
-  throw new tr.UserError(
+  throw new textRunner.UserError(
     `"${documented}" is not an attribute of action`,
     `The attributes are ${allExisting.join(", ")}`,
     action.location

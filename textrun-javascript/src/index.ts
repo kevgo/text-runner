@@ -1,9 +1,9 @@
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
 import { nonRunnable } from "./actions/non-runnable.js"
 import { runnable } from "./actions/runnable.js"
 
-export const textrunActions: tr.exports.TextrunActions = {
+export const textrunActions: textRunner.exports.TextrunActions = {
   runnable,
   nonRunnable,
 }

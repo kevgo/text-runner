@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import * as commands from "./commands/index.js"
 import * as formatters from "./formatters/index.js"
@@ -17,7 +17,7 @@ export class Data {
   formatterName?: formatters.Names // name of the formatter to use
   ignoreLinkTargets?: RegExp[]
   online?: boolean
-  publications?: tr.configuration.Publications
+  publications?: textRunner.configuration.Publications
   scaffoldLanguage?: commands.ScaffoldLanguage
   showSkipped?: boolean
   systemTmp?: boolean
@@ -51,8 +51,8 @@ export class Data {
     return result
   }
 
-  toCoreConfig(): tr.configuration.APIData {
-    const result: tr.configuration.APIData = {}
+  toCoreConfig(): textRunner.configuration.APIData {
+    const result: textRunner.configuration.APIData = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile
     }
@@ -72,7 +72,7 @@ export class Data {
       result.online = this.online
     }
     if (this.publications != null) {
-      result.publications = tr.configuration.Publications.fromConfigs(this.publications).sorted()
+      result.publications = textRunner.configuration.Publications.fromConfigs(this.publications).sorted()
     }
     if (this.regionMarker != null) {
       result.regionMarker = this.regionMarker

@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import * as helpers from "../helpers/index.js"
 import * as formatter from "./index.js"
@@ -7,24 +7,24 @@ import { printUserError } from "./print-user-error.js"
 
 /** A formatter that prints output and step names */
 export class DetailedFormatter implements formatter.Formatter {
-  constructor(command: tr.commands.Command) {
+  constructor(command: textRunner.commands.Command) {
     command.on("output", console.log)
     command.on("result", this.onResult.bind(this))
   }
 
-  onResult(result: tr.events.Result): void {
-    if (tr.events.instanceOfFailed(result)) {
+  onResult(result: textRunner.events.Result): void {
+    if (textRunner.events.instanceOfFailed(result)) {
       this.onFailed(result)
-    } else if (tr.events.instanceOfSkipped(result)) {
+    } else if (textRunner.events.instanceOfSkipped(result)) {
       this.onSkipped(result)
-    } else if (tr.events.instanceOfSuccess(result)) {
+    } else if (textRunner.events.instanceOfSuccess(result)) {
       this.onSuccess(result)
-    } else if (tr.events.instanceOfWarning(result)) {
+    } else if (textRunner.events.instanceOfWarning(result)) {
       this.onWarning(result)
     }
   }
 
-  onSuccess(args: tr.events.Success): void {
+  onSuccess(args: textRunner.events.Success): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -33,11 +33,11 @@ export class DetailedFormatter implements formatter.Formatter {
     )
   }
 
-  onFailed(args: tr.events.Failed): void {
+  onFailed(args: textRunner.events.Failed): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
-    if (tr.isUserError(args.error)) {
+    if (textRunner.isUserError(args.error)) {
       printUserError(args.error)
     } else {
       process.stdout.write(
@@ -48,7 +48,7 @@ export class DetailedFormatter implements formatter.Formatter {
     }
   }
 
-  onSkipped(args: tr.events.Skipped): void {
+  onSkipped(args: textRunner.events.Skipped): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
     }
@@ -59,7 +59,7 @@ export class DetailedFormatter implements formatter.Formatter {
     )
   }
 
-  onWarning(args: tr.events.Warning): void {
+  onWarning(args: textRunner.events.Warning): void {
     console.log(color.magenta(args.message))
   }
 

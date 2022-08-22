@@ -1,9 +1,9 @@
 import * as color from "colorette"
 import * as fs from "fs-extra"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
-export async function newDirectory(action: tr.actions.Args): Promise<void> {
+export async function newDirectory(action: textRunner.actions.Args): Promise<void> {
   const dirName = action.region.text().trim()
   if (!dirName) {
     throw new Error("empty directory name given")

@@ -1,5 +1,5 @@
 import { promises as fs } from "fs"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 import YAML from "yamljs"
 
 import * as config from "./configuration.js"
@@ -70,8 +70,8 @@ async function read(cmdLineArgs: config.Data): Promise<string> {
       const result = await fs.readFile(cmdLineArgs.configFileName, "utf8")
       return result
     } catch (e) {
-      if (tr.isFsError(e)) {
-        throw new tr.UserError(`cannot read configuration file "${cmdLineArgs.configFileName}"`, e.message)
+      if (textRunner.isFsError(e)) {
+        throw new textRunner.UserError(`cannot read configuration file "${cmdLineArgs.configFileName}"`, e.message)
       } else {
         throw e
       }

@@ -1,5 +1,5 @@
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
-export default function HelloWorld(action: tr.actions.Args): void {
+export default function HelloWorld(action: textRunner.actions.Args): void {
   action.log("Hello World from TypeScript!")
 }

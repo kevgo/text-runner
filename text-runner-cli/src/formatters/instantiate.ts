@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { DetailedFormatter } from "./detailed-formatter.js"
 import { DotFormatter } from "./dot-formatter.js"
@@ -7,7 +7,7 @@ import { ProgressFormatter } from "./progress-formatter.js"
 import { SummaryFormatter } from "./summary-formatter.js"
 
 /** creates an instance of the formatter with the given name */
-export function instantiate(name: formatters.Names, command: tr.commands.Command): formatters.Formatter {
+export function instantiate(name: formatters.Names, command: textRunner.commands.Command): formatters.Formatter {
   switch (name) {
     case "dot":
       return new DotFormatter(command)
@@ -18,6 +18,9 @@ export function instantiate(name: formatters.Names, command: tr.commands.Command
     case "summary":
       return new SummaryFormatter(command)
     default:
-      throw new tr.UserError(`Unknown formatter: ${name}`, "Available formatters are: detailed, dot, progress, summary")
+      throw new textRunner.UserError(
+        `Unknown formatter: ${name}`,
+        "Available formatters are: detailed, dot, progress, summary"
+      )
   }
 }

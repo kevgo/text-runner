@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { appendAsyncCallback } from "../helpers/append-async-callback.js"
 import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder.js"
@@ -7,7 +7,7 @@ import { replaceRequireLocalModule } from "../helpers/replace-require-local-modu
 import { replaceVariableDeclarations } from "../helpers/replace-variable-declarations.js"
 
 /** The "runJavascript" action runs the JavaScript code given in the code block. */
-export function runnable(action: tr.actions.Args, done: tr.exports.DoneFunction): void {
+export function runnable(action: textRunner.actions.Args, done: textRunner.exports.DoneFunction): void {
   action.name("run JavaScript")
   let code = action.region.text()
   if (code === "") {

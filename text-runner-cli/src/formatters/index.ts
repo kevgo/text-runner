@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 export { instantiate } from "./instantiate.js"
 export { printSummary } from "./print-summary.js"
@@ -14,5 +14,5 @@ export interface Formatter {
 
 /** FinishArgs defines the arguments provided to the `finish` method. */
 export interface FinishArgs {
-  readonly results: tr.ActivityResults
+  readonly results: textRunner.ActivityResults
 }

@@ -1,6 +1,6 @@
 import * as progress from "cli-progress"
 import * as color from "colorette"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import * as helpers from "../helpers/index.js"
 import * as formatter from "./index.js"
@@ -9,7 +9,7 @@ import { printUserError } from "./print-user-error.js"
 export class ProgressFormatter implements formatter.Formatter {
   private readonly progressBar: progress.Bar
 
-  constructor(command: tr.commands.Command) {
+  constructor(command: textRunner.commands.Command) {
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
@@ -24,28 +24,28 @@ export class ProgressFormatter implements formatter.Formatter {
     command.on("result", this.onResult.bind(this))
   }
 
-  onResult(result: tr.events.Result): void {
-    if (tr.events.instanceOfFailed(result)) {
+  onResult(result: textRunner.events.Result): void {
+    if (textRunner.events.instanceOfFailed(result)) {
       this.onFailed(result)
-    } else if (tr.events.instanceOfSkipped(result)) {
+    } else if (textRunner.events.instanceOfSkipped(result)) {
       this.progressBar.increment(1)
-    } else if (tr.events.instanceOfSuccess(result)) {
+    } else if (textRunner.events.instanceOfSuccess(result)) {
       this.progressBar.increment(1)
-    } else if (tr.events.instanceOfWarning(result)) {
+    } else if (textRunner.events.instanceOfWarning(result)) {
       this.progressBar.increment(1)
     }
   }
 
-  start(args: tr.events.Start): void {
+  start(args: textRunner.events.Start): void {
     this.progressBar.start(args.stepCount, 0)
   }
 
-  onFailed(args: tr.events.Failed): void {
+  onFailed(args: textRunner.events.Failed): void {
     this.progressBar.stop()
     console.log()
     console.log()
     console.log(color.dim(args.output))
-    if (tr.isUserError(args.error)) {
+    if (textRunner.isUserError(args.error)) {
       printUserError(args.error)
     } else {
       console.log(

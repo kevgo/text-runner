@@ -22,7 +22,7 @@
     "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
     "lint": "eslint . --ext .ts --ignore-path ../.eslintignore && prettier -l . && depcheck",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./\\.git/ | grep -v \\./\\.vscode/ | grep -v \\./tmp/ | xargs scc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot src/**/*.test.ts"
+    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot 'src/**/*.test.ts'"
   },
   "dependencies": {
     "@sindresorhus/slugify": "2.1.0",

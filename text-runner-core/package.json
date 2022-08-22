@@ -19,10 +19,10 @@
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
     "doc": "text-run --format=summary",
-    "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
-    "lint": "eslint . --ext .ts --ignore-path ../.eslintignore && prettier -l . && depcheck",
+    "fix": "eslint . --fix --ext=.ts --ignore-path=../.eslintignore && prettier --write .",
+    "lint": "eslint . --ext=.ts --ignore-path=../.eslintignore && prettier -l . && depcheck",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./\\.git/ | grep -v \\./\\.vscode/ | grep -v \\./tmp/ | xargs scc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot src/**/*.test.ts"
+    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "dependencies": {
     "@sindresorhus/slugify": "2.1.0",
@@ -30,7 +30,7 @@
     "fs-extra": "10.1.0",
     "globby": "13.1.2",
     "got": "12.3.1",
-    "humanize-string": "2.1.0",
+    "humanize-string": "3.0.0",
     "is-glob": "4.0.3",
     "markdown-it": "13.0.1",
     "parse5": "7.0.0",

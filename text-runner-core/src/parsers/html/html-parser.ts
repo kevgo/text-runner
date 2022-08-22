@@ -180,7 +180,7 @@ function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap[
 }
 
 /** converts the given HTML AST node attributes into the standard AST format */
-export function standardizeHTMLAttributes(attrs: parse5.Attribute[]): ast.NodeAttributes {
+export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.NodeAttributes {
   const result: ast.NodeAttributes = {}
   if (attrs) {
     for (const attr of attrs) {

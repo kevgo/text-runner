@@ -28,25 +28,31 @@ export class Parser {
   }
 
   /** returns whether the given HTML node is an empty text node */
-  private isEmptyTextNode(node: parse5.ChildNode): boolean {
+  private isEmptyTextNode(node: parse5.DefaultTreeAdapterMap["childNode"]): boolean {
     return instanceOfTextNode(node) && node.value.trim() === ""
   }
 
   /** returns the subtree of the given HTML AST whose root node has the given name */
-  private findNodeWithName(nodes: parse5.ChildNode[], name: string): parse5.Element {
-    for (const childNode of nodes) {
-      if (childNode.nodeName === name) {
-        if (!instanceOfElement(childNode)) {
+  private findNodeWithName(
+    nodes: parse5.DefaultTreeAdapterMap["childNode"][],
+    name: string
+  ): parse5.DefaultTreeAdapterMap["element"] {
+    for (const node of nodes) {
+      if (node.nodeName === name) {
+        if (!instanceOfElement(node)) {
           throw new Error("Expected parse5.Element")
         }
-        return childNode
+        return node
       }
     }
     throw new Error(`child node '${name}' not found in AST: ${util.inspect(nodes)}`)
   }
 
   /** converts the given HTML AST node into the standard format */
-  private standardizeNode(node: parse5.ChildNode, startingLocation: files.Location): ast.NodeList {
+  private standardizeNode(
+    node: parse5.DefaultTreeAdapterMap["childNode"],
+    startingLocation: files.Location
+  ): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
       return new ast.NodeList()
     }
@@ -63,7 +69,10 @@ export class Parser {
   }
 
   /** converts the given HTML tag with open and closing tag into the standard format */
-  private standardizeOpenCloseTag(node: parse5.Element, startingLocation: files.Location): ast.NodeList {
+  private standardizeOpenCloseTag(
+    node: parse5.DefaultTreeAdapterMap["element"],
+    startingLocation: files.Location
+  ): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
 
@@ -72,7 +81,10 @@ export class Parser {
     if (node.sourceCodeLocation) {
       startLine += node.sourceCodeLocation.startLine - 1
     } else {
-      const parentNode = node.parentNode as parse5.Element
+      const parentNode = node.parentNode
+      if (parentNode == null) {
+        throw new Error(`node "${node} has no parent`)
+      }
       if (parentNode.sourceCodeLocation) {
         startLine += parentNode.sourceCodeLocation.startLine
       }
@@ -118,7 +130,10 @@ export class Parser {
   }
 
   /** converts the given HTML standalone node into the standard format */
-  private standardizeStandaloneNode(node: parse5.Element, startingLocation: files.Location): ast.NodeList {
+  private standardizeStandaloneNode(
+    node: parse5.DefaultTreeAdapterMap["element"],
+    startingLocation: files.Location
+  ): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
     result.push(
@@ -134,7 +149,10 @@ export class Parser {
   }
 
   /** converts the given HTML text node into the standard format */
-  private standardizeTextNode(node: parse5.TextNode, startingLocation: files.Location): ast.NodeList {
+  private standardizeTextNode(
+    node: parse5.DefaultTreeAdapterMap["textNode"],
+    startingLocation: files.Location
+  ): ast.NodeList {
     const result = new ast.NodeList()
     if (node.value !== "\n") {
       result.push(
@@ -151,16 +169,18 @@ export class Parser {
   }
 }
 
-function instanceOfTextNode(object: parse5.ChildNode): object is parse5.TextNode {
+function instanceOfTextNode(
+  object: parse5.DefaultTreeAdapterMap["childNode"]
+): object is parse5.DefaultTreeAdapterMap["textNode"] {
   return object.nodeName === "#text"
 }
 
-function instanceOfElement(object: any): object is parse5.Element {
+function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
   return !!object.nodeName && !!object.tagName && !!object.attrs
 }
 
 /** converts the given HTML AST node attributes into the standard AST format */
-export function standardizeHTMLAttributes(attrs: parse5.Attribute[]): ast.NodeAttributes {
+export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.NodeAttributes {
   const result: ast.NodeAttributes = {}
   if (attrs) {
     for (const attr of attrs) {

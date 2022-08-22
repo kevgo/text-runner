@@ -1,13 +1,13 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 /**
  * The "directory" action verifies that the test workspace
  * contains the given directory.
  */
-export async function existingDirectory(action: tr.actions.Args): Promise<void> {
+export async function existingDirectory(action: textRunner.actions.Args): Promise<void> {
   const dirName = action.region.text()
   const dirRelName = path.join(action.region[0].attributes["dir"] || ".", dirName)
   action.name(`directory ${color.cyan(dirRelName)} exists in the workspace`)

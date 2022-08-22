@@ -3,9 +3,9 @@ import * as color from "colorette"
 import eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
-export async function existingFileContent(action: tr.actions.Args): Promise<void> {
+export async function existingFileContent(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")
   let relativeBaseDir = "."
   if (action.region.hasNodeOfType("link_open")) {
@@ -21,7 +21,7 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {
-    if (!tr.isFsError(err)) {
+    if (!textRunner.isFsError(err)) {
       throw err
     }
     if (err.code === "ENOENT") {
@@ -35,6 +35,9 @@ export async function existingFileContent(action: tr.actions.Args): Promise<void
   try {
     assertNoDiff.trimmedLines(actualContent, expectedContent)
   } catch (err) {
-    throw new tr.UserError(`mismatching content in ${color.cyan(color.bold(filePath))}`, tr.errorMessage(err))
+    throw new textRunner.UserError(
+      `mismatching content in ${color.cyan(color.bold(filePath))}`,
+      textRunner.errorMessage(err)
+    )
   }
 }

@@ -1,7 +1,7 @@
 import * as color from "colorette"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
-export function printSummary(results: tr.ActivityResults): void {
+export function printSummary(results: textRunner.ActivityResults): void {
   let text = "\n"
   let colorFn: color.Color
   const errorCount = results.errorCount()

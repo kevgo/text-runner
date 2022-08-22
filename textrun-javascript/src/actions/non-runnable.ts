@@ -1,7 +1,7 @@
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 /** checks the given JavaScript code for syntax errors. */
-export function nonRunnable(action: tr.actions.Args): void {
+export function nonRunnable(action: textRunner.actions.Args): void {
   const code = action.region.text().trim()
   if (code.length === 0) {
     throw new Error("no JavaScript code found")
@@ -9,6 +9,6 @@ export function nonRunnable(action: tr.actions.Args): void {
   try {
     new Function(code)
   } catch (e) {
-    throw new Error(`invalid Javascript: ${tr.errorMessage(e)}`)
+    throw new Error(`invalid Javascript: ${textRunner.errorMessage(e)}`)
   }
 }

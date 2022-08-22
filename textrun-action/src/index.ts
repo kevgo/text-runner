@@ -1,9 +1,9 @@
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
 import { nameFull } from "./name-full.js"
 import { nameShort } from "./name-short.js"
 
-export const textrunActions: tr.exports.TextrunActions = {
+export const textrunActions: textRunner.exports.TextrunActions = {
   nameFull,
   nameShort,
 }

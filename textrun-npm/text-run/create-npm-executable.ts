@@ -1,8 +1,8 @@
 import { promises as fs } from "fs"
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
 /** creates a binary with the given name in the workspace */
-export default async function createNPMExecutable(action: tr.actions.Args): Promise<void> {
+export default async function createNPMExecutable(action: textRunner.actions.Args): Promise<void> {
   const name = action.region.text()
   await fs.mkdir(action.configuration.workspace.joinStr("node_modules"))
   await fs.mkdir(action.configuration.workspace.joinStr("node_modules", ".bin"))

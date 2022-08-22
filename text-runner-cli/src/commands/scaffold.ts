@@ -1,14 +1,14 @@
 import { EventEmitter } from "events"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import * as helpers from "../helpers/index.js"
 
 /** languages in which this Text-Runner actions can be scaffolded */
 export type ScaffoldLanguage = "js" | "ts"
 
-export class ScaffoldCommand implements tr.commands.Command {
+export class ScaffoldCommand implements textRunner.commands.Command {
   emitter: EventEmitter
   name: string
   sourceDir: string
@@ -21,7 +21,7 @@ export class ScaffoldCommand implements tr.commands.Command {
     this.emitter = new EventEmitter()
   }
 
-  emit(name: tr.events.Name, payload: tr.events.Args): void {
+  emit(name: textRunner.events.Name, payload: textRunner.events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -41,11 +41,14 @@ export class ScaffoldCommand implements tr.commands.Command {
     } else if (this.language === "js") {
       await fs.writeFile(path.join(dirPath, this.name + ".js"), jsTemplate(this.name), "utf8")
     } else {
-      throw new tr.UserError(`Unknown configuration language: ${this.language}`, 'Possible languages are "js" and "ts"')
+      throw new textRunner.UserError(
+        `Unknown configuration language: ${this.language}`,
+        'Possible languages are "js" and "ts"'
+      )
     }
   }
 
-  on(name: tr.events.Name, handler: tr.events.Handler): this {
+  on(name: textRunner.events.Name, handler: textRunner.events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }
@@ -61,9 +64,9 @@ function jsTemplate(filename: string) {
 }
 
 function tsTemplate(filename: string) {
-  return `import * as tr from "text-runner"
+  return `import * as textRunner from "text-runner"
 
-export function ${helpers.camelize(filename)} (action: tr.actions.Args) {
+export function ${helpers.camelize(filename)} (action: textRunner.actions.Args) {
   console.log("This is the implementation of the "${filename}" action.")
   console.log('Text inside the semantic document region:', action.region.text())
   console.log("For more information see")

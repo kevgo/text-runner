@@ -1,8 +1,8 @@
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
-export async function newExecutable(action: tr.actions.Args): Promise<void> {
+export async function newExecutable(action: textRunner.actions.Args): Promise<void> {
   const name = action.region.text()
   const dirName = path.dirname(name)
   await fs.mkdir(path.join(action.configuration.workspace.platformified(), dirName))

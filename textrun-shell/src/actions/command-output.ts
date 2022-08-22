@@ -1,10 +1,10 @@
 import * as assertNoDiff from "assert-no-diff"
 import stripAnsi from "strip-ansi"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { CurrentCommand } from "../helpers/current-command.js"
 
-export function commandOutput(action: tr.actions.Args): void {
+export function commandOutput(action: textRunner.actions.Args): void {
   action.name("verifying the output of the last run console command")
   const expectedText = action.region.text()
   const expectedLines = expectedText

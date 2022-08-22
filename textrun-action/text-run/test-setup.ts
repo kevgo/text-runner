@@ -1,7 +1,7 @@
 import { promises as fs } from "fs"
-import * as tr from "text-runner"
+import * as textRunner from "text-runner"
 
-export default async function testSetup(action: tr.actions.Args): Promise<void> {
+export default async function testSetup(action: textRunner.actions.Args): Promise<void> {
   const codeBlocks = action.region.nodesOfTypes("code")
   if (codeBlocks.length !== 2) {
     throw new Error(`Expected 2 code blocks, got ${codeBlocks.length}`)

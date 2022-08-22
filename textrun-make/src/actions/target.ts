@@ -1,11 +1,11 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { makefileTargets } from "../helpers/makefile-targets.js"
 
 /** verifies that the Makefile in the sourceDir contains the enclosed target */
-export async function target(action: tr.actions.Args): Promise<void> {
+export async function target(action: textRunner.actions.Args): Promise<void> {
   const target = action.region.text().trim()
   if (target === "") {
     throw new Error("Empty make target")

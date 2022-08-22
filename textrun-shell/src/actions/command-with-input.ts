@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as observableProcess from "observable-process"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 import { callArgs } from "textrun-extension"
 
 import { CurrentCommand } from "../helpers/current-command.js"
@@ -15,7 +15,7 @@ interface ProcessInput {
  * The "runConsoleCommand" action runs the given commands on the console
  * and waits until the command is finished.
  */
-export async function commandWithInput(action: tr.actions.Args): Promise<void> {
+export async function commandWithInput(action: textRunner.actions.Args): Promise<void> {
   const content = action.region.textInNodeOfTypes("fence", "code")
   const commandsToRun = content
     .split("\n")
@@ -52,7 +52,7 @@ async function enter(processor: observableProcess.RunningProcess, input: Process
   }
 }
 
-function getInput(nodes: tr.ast.NodeList): ProcessInput[] {
+function getInput(nodes: textRunner.ast.NodeList): ProcessInput[] {
   const result: ProcessInput[] = []
   if (!nodes) {
     return result

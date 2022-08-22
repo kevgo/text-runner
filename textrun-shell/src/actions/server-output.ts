@@ -1,4 +1,4 @@
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { CurrentServer } from "../helpers/current-server.js"
 
@@ -6,7 +6,7 @@ import { CurrentServer } from "../helpers/current-server.js"
  * The "start-output" action waits until the currently running console command
  * produces the given output.
  */
-export async function serverOutput(action: tr.actions.Args): Promise<void> {
+export async function serverOutput(action: textRunner.actions.Args): Promise<void> {
   action.name("verifying the output of the long-running process")
   const expectedOutput = action.region.textInNodeOfType("fence")
   const expectedLines = expectedOutput

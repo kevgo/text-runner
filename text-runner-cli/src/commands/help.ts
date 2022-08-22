@@ -2,10 +2,10 @@ import * as color from "colorette"
 import { EventEmitter } from "events"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 import * as url from "url"
 
-export class HelpCommand implements tr.commands.Command {
+export class HelpCommand implements textRunner.commands.Command {
   emitter: EventEmitter
 
   constructor() {
@@ -16,7 +16,7 @@ export class HelpCommand implements tr.commands.Command {
     this.emit("output", await this.template())
   }
 
-  emit(name: tr.events.Name, payload: tr.events.Args): void {
+  emit(name: textRunner.events.Name, payload: textRunner.events.Args): void {
     this.emitter.emit(name, payload)
   }
 
@@ -49,7 +49,7 @@ OPTIONS
 `
   }
 
-  on(name: tr.events.Name, handler: tr.events.Handler): this {
+  on(name: textRunner.events.Name, handler: textRunner.events.Handler): this {
     this.emitter.on(name, handler)
     return this
   }

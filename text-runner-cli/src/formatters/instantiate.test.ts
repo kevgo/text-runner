@@ -1,5 +1,5 @@
 import { assert } from "chai"
-import * as tr from "text-runner-core"
+import * as textRunner from "text-runner-core"
 
 import { DetailedFormatter } from "./detailed-formatter.js"
 import { DotFormatter } from "./dot-formatter.js"
@@ -8,7 +8,7 @@ import { ProgressFormatter } from "./progress-formatter.js"
 import { SummaryFormatter } from "./summary-formatter.js"
 
 suite("instantiateFormatter()", function () {
-  const command = new tr.commands.Run({})
+  const command = new textRunner.commands.Run({})
   test("request detailed formatter", function () {
     const have = formatter.instantiate("detailed", command)
     assert.instanceOf(have, DetailedFormatter)
@@ -30,13 +30,13 @@ suite("instantiateFormatter()", function () {
   })
 
   test("request unknown formatter", function (done) {
-    let err: tr.UserError
+    let err: textRunner.UserError
     try {
       // @ts-ignore
       formatter.instantiate("zonk", ".", command)
       return done("did not explode")
     } catch (e) {
-      if (!tr.isUserError(e)) {
+      if (!textRunner.isUserError(e)) {
         throw new Error("should be UserError")
       }
       err = e

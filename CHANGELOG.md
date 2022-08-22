@@ -4,12 +4,11 @@
 
 #### Breaking changes
 
-- Text-Runner is now an ESM module
-  ([1458](https://github.com/kevgo/text-runner/pull/1458))
-  - Your code doesn't need to be an ESM module to use Text-Runner.
-  - For best results, upgrade your Text-Runner custom actions to also be ESM
-    modules:
-    https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c
+- Text-Runner is now an
+  [ESM module](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
+  ([1458](https://github.com/kevgo/text-runner/pull/1458)). Your code or
+  TextRunner Actions don't need to be an ESM module to use the new Text-Runner
+  version.
 
 #### New features
 
@@ -18,10 +17,12 @@
 
 #### Internal
 
-- fewer dependencies on external npm packages, reducing the overall size and
-  attack surface ([1476](https://github.com/kevgo/text-runner/pull/1476))
 - significantly improved compile and test time thanks to using a scalable
   monorepo build system ([1465](https://github.com/kevgo/text-runner/pull/1465))
+- replace Makefiles for individual repos with Yarn tasks to be used by
+  [Atalanta](https://github.com/kevgo/atalanta))
+- fewer dependencies on external npm packages, reducing the overall size and
+  attack surface ([1476](https://github.com/kevgo/text-runner/pull/1476))
 
 ## 5.0.1
 

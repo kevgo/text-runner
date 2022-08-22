@@ -1,10 +1,11 @@
 # Change Log
 
-## unreleased
+## 6.0.0
 
 #### Breaking changes
 
 - Text-Runner is now an ESM module
+  ([1458](https://github.com/kevgo/text-runner/pull/1458))
   - Your code doesn't need to be an ESM module to use Text-Runner.
   - For best results, upgrade your Text-Runner custom actions to also be ESM
     modules:
@@ -14,6 +15,13 @@
 
 - removes dependency on Bash: a normal Unix shell (/bin/sh) is now sufficient to
   run Text-Runner
+
+#### Internal
+
+- fewer dependencies on external npm packages, reducing the overall size and
+  attack surface ([1476](https://github.com/kevgo/text-runner/pull/1476))
+- significantly improved compile and test time thanks to using a scalable
+  monorepo build system ([1465](https://github.com/kevgo/text-runner/pull/1465))
 
 ## 5.0.1
 

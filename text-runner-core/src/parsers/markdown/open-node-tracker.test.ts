@@ -18,8 +18,7 @@ suite("OpenTagTracker.close()", function () {
 
   test("closing a tag that hasn't been opened", function () {
     const openTags = new OpenNodeTracker()
-    // @ts-ignore
-    openTags.open(ast.Node.scaffold({ type: "anchor_open" }))
+    openTags.open(ast.Node.scaffold({ type: "anchor_open" }), 3)
     const location = new files.Location(new files.SourceDir(""), file, 12)
     const testFn = () => openTags.close("bold_close", location)
     assert.throws(testFn, "No opening node 'bold_open' found for closing node 'bold_close'")

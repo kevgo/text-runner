@@ -32,8 +32,8 @@ suite("instantiateFormatter()", function () {
   test("request unknown formatter", function (done) {
     let err: textRunner.UserError
     try {
-      // @ts-ignore
-      formatter.instantiate("zonk", ".", command)
+      // @ts-expect-error "zonk" is not allowed here
+      formatter.instantiate("zonk", command)
       return done("did not explode")
     } catch (e) {
       if (!textRunner.isUserError(e)) {

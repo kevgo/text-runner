@@ -128,7 +128,7 @@ Then("it emits these events:", function (this: TRWorld, table: cucumber.DataTabl
     have.push(result)
   }
   have = have.sort(helpers.compareExecuteResultLine)
-  assert.deepEqual(want, have)
+  assert.deepEqual(have, want)
 })
 
 Then("it throws:", function (this: TRWorld, table: cucumber.DataTable) {

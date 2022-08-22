@@ -1,4 +1,4 @@
-import * as cliCursor from "cli-cursor"
+import cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import * as tr from "text-runner-core"
 

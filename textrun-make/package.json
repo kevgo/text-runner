@@ -1,6 +1,6 @@
 {
   "name": "textrun-make",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -18,15 +18,15 @@
   },
   "dependencies": {
     "colorette": "2.0.19",
-    "text-runner-core": "5.0.2"
+    "text-runner-core": "6.0.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "5.0.2",
-    "textrun-action": "0.1.2",
-    "textrun-extension": "0.1.2",
-    "textrun-npm": "0.1.2",
-    "textrun-workspace": "0.1.2",
+    "text-runner": "6.0.0",
+    "textrun-action": "0.2.0",
+    "textrun-extension": "0.2.0",
+    "textrun-npm": "0.2.0",
+    "textrun-workspace": "0.2.0",
     "ts-node": "10.9.1"
   }
 }

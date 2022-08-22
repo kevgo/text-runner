@@ -64,23 +64,25 @@ Given(
 Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
   async function (this: TRWorld, exampleName: string) {
-    await fse.copy(path.join("documentation", "examples", exampleName), workspace.absPath.platformified())
+    await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
+      recursive: true,
+    })
   }
 )
 
 Given("the source code contains a directory {string}", function (this: TRWorld, dirName: string) {
-  return fse.ensureDir(workspace.absPath.joinStr(dirName))
+  return fs.mkdir(workspace.absPath.joinStr(dirName), { recursive: true })
 })
 
 Given("the source code contains a file {string}", async function (this: TRWorld, fileName: string) {
-  await fse.ensureDir(workspace.absPath.joinStr(path.dirname(fileName)))
+  await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
   await fs.writeFile(workspace.absPath.joinStr(fileName), "content")
 })
 
 Given(
   "the source code contains a file {string} with content:",
   async function (this: TRWorld, fileName: string, content: string) {
-    await fse.ensureDir(workspace.absPath.joinStr(path.dirname(fileName)))
+    await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
     await fs.writeFile(workspace.absPath.joinStr(fileName), content)
   }
 )

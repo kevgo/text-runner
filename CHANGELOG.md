@@ -8,7 +8,8 @@
   [ESM module](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)
   ([1458](https://github.com/kevgo/text-runner/pull/1458)). Your code or
   TextRunner Actions don't need to be an ESM module to use the new Text-Runner
-  version.
+  version
+  ([upgrade instructions](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)).
 
 #### New features
 

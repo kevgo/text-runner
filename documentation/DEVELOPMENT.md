@@ -23,23 +23,15 @@ All codebases in this mono-repo provide a standardized set of commands for
 executing common development tasks. You must run these commands in the directory
 of the respective codebase.
 
-- run all tests: <code type="make/command">make test</code>
-- run unit tests: <code>make unit</code>
-- run end-to-end tests: make cuke
-- run documentation tests: <code type="make/command">make doc</code>
-- run linters: <code type="make/command">make lint</code>
-- run auto-fixers: <code type="make/command">make fix</code>
+- run all tests: <code type="make/command" dir="..">make test</code>
+- run unit tests: <code type="make/command" dir="..">make unit</code>
+- run end-to-end tests: <code type="make/command" dir="..">make cuke</code>
+- run documentation tests: <code type="make/command" dir="..">make doc</code>
+- run linters: <code type="make/command" dir="..">make lint</code>
+- run auto-fixers: <code type="make/command" dir="..">make fix</code>
 
-See how the commands inside the Makefile work for how to test individual files.
 To enable debugging statements and verbose output while debugging an end-to-end
 test, add the `@debug` Gherkin tag in the first line of the `.feature` file.
-
-In the root directory, there are `make *-all` tasks that run the respective task
-in all codebases of the mono-repo. The `make *-open` targets run in all
-codebases containing uncommitted changes. The `make *-changed` targets run in
-all codebases containing changes compared to the main branch. The
-`make *-affected` targets run in all codebases affected by changes in the
-current branch: code bases with changes and their downstream dependencies.
 
 ## Debugging
 
@@ -67,7 +59,7 @@ To debug a Cucumber step implementation in VSCode:
 ## Updating dependencies
 
 <pre type="make/command" dir="..">
-make update-all
+make update
 </pre>
 
 Always update the dependencies for all codebases so that they use the exact same

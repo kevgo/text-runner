@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "module": "commonjs",
+  "scripts": {
+    "doc": "text-run --format=progress",
+    "fix": "prettier --write .",
+    "lint": "prettier -l ."
+  },
   "devDependencies": {
     "text-runner": "5.0.2",
     "ts-node": "10.9.1"

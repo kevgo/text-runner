@@ -4,6 +4,11 @@
   "private": true,
   "license": "ISC",
   "type": "module",
+  "scripts": {
+    "doc": "text-run static --format=summary && text-run dynamic --format=progress",
+    "fix": "prettier --write .",
+    "lint": "prettier -l . && depcheck --config=../.depcheckrc"
+  },
   "devDependencies": {
     "assert-no-diff": "3.0.6",
     "custom-action-commonjs": "0.0.0",

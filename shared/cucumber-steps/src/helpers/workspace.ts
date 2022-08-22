@@ -4,11 +4,10 @@ import * as textRunner from "text-runner-core"
 import * as url from "url"
 
 /** files that we should not delete when cleaning up a workspace */
-const filesToKeep = ["package.json", "tsconfig.json", "node_modules", "Makefile"]
+const filesToKeep = ["package.json", "tsconfig.json", "node_modules"]
 /** the original contents of files before an end-to-end test ran in a workspace */
 const fileBackups = {
   "package.json": "",
-  Makefile: "",
 }
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 /** full path to the workspace */
@@ -30,7 +29,7 @@ export function dirPath(cwd: string, dirname: string, cucumberWorkerId: string):
 export async function backup() {
   for (const fileName in fileBackups) {
     const filePath = path.join(workspacePath, fileName)
-    // @ts-expect-error TypeScript is too stupid to understand that "filePath" contains exactly the type signature ("package.json" | "Makefile") that it wants here
+    // @ts-expect-error TypeScript is too stupid to understand that "filePath" contains exactly the type signature ("package.json") that it wants here
     fileBackups[fileName] = await fs.readFile(filePath, "utf-8")
   }
 }

@@ -1,0 +1,54 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["src/*.ts", "src/**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "tsconfig.json", "package.json"],
+      "outputs": ["dist/**"],
+      "outputMode": "new-only"
+    },
+    "clean": {
+      "outputs": [],
+      "outputMode": "new-only",
+      "cache": false
+    },
+    "cuke": {
+      "dependsOn": ["build"],
+      "inputs": [
+        "**/*.feature",
+        "src/*.ts",
+        "src/**/*.ts",
+        ":!:src/*.test.ts",
+        ":!:src/**/*.test.ts",
+        "cucumber.cjs",
+        "package.json"
+      ],
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "doc": {
+      "dependsOn": ["build"],
+      "inputs": ["*.md", "**/*.md", "**/*.ts", ":!:**.test.ts", "text-run.yml"],
+      "outputMode": "new-only"
+    },
+    "fix": {
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "lint": {
+      "outputs": [],
+      "outputMode": "new-only"
+    },
+    "test": {
+      "dependsOn": ["build", "unit", "cuke", "doc"],
+      "outputs": []
+    },
+    "unit": {
+      "dependsOn": ["build"],
+      "inputs": ["**/*.ts", ".mocharc.yml", "package.json"],
+      "outputs": [],
+      "outputMode": "new-only"
+    }
+  },
+  "globalDependencies": ["tsconfig.json", "package.json", "yarn.lock"]
+}

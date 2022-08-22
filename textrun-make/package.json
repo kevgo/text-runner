@@ -14,7 +14,7 @@
     "doc": "text-run static --format=summary && text-run dynamic --format=progress",
     "fix": "eslint . --fix --ext=.ts --ignore-path=../.eslintignore && prettier --write .",
     "lint": "prettier -l . && eslint . --ext=.ts --ignore-path=../.eslintignore && depcheck --config=../.depcheckrc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter dot 'src/**/*.test.ts'"
+    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "dependencies": {
     "colorette": "2.0.19",

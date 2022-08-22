@@ -11,7 +11,7 @@
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
     "doc": "text-run static --format=summary && text-run dynamic --format=progress",
-    "fix": "eslint . --fix --ext .ts --ignore-path ../.eslintignore && prettier --write .",
+    "fix": "eslint . --fix --ext=.ts --ignore-path=../.eslintignore && prettier --write .",
     "lint": "prettier -l . && eslint . --ext .ts --ignore-path ../.eslintignore && depcheck --config=../.depcheckrc"
   },
   "dependencies": {

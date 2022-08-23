@@ -4,8 +4,6 @@
   <img alt="Text-Runner logo" src="documentation/logo_800_light.jpg">
 </picture>
 
-<hr>
-
 <div align="center">
 
 [![CI](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)

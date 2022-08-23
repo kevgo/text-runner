@@ -10,6 +10,8 @@
 [![CI](https://ci.appveyor.com/api/projects/status/96q06796xyrste9x/branch/main?svg=true)](https://ci.appveyor.com/project/kevgo/text-runner/branch/main)
 <br>
 
+<hr>
+
 </div>
 
 <hr>

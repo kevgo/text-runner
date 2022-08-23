@@ -1,5 +1,5 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="documentation/logo_800_dark.jpg">
+  <source media="(prefers-color-scheme: dark)" srcset="documentation/logo_800_dark.png">
   <source media="(prefers-color-scheme: light)" srcset="documentation/logo_800_light.jpg">
   <img alt="Text-Runner logo" src="documentation/logo_800_light.jpg">
 </picture>

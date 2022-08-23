@@ -12,8 +12,6 @@
 
 </div>
 
-<hr>
-
 Text-Runner is an agile documentation tool that helps create living end-user
 readable documentation. An example is the text you are reading right now, which
 TextRunner verifies for correctness.

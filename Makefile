@@ -27,7 +27,7 @@ help:  # prints all make targets
 lint:  # lints the root directory
 	env FORCE_COLOR=1 yarn exec --silent -- turbo run lint --concurrency=100%
 
-publish: clean build  # publishes all code bases
+publish: clean setup  # publishes all code bases
 	yarn exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning

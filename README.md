@@ -1,5 +1,4 @@
-<!-- logo is from: https://icons8.com/icon/40886/test -->
-<img src="documentation/logo2.png" align="right" valign="bottom">
+<img src="documentation/logo_800.png" width="800" height="600">
 
 # Test-Runner for Text
 

@@ -1,4 +1,4 @@
-<img src="documentation/logo_800.png" width="800" height="600">
+<img src="documentation/logo_800.jpg" width="800" height="600">
 
 # Test-Runner for Text
 

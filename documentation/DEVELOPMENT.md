@@ -71,4 +71,4 @@ versions.
 - make a global search-and-replace for "6.0.0" and "0.2.0" replace it with the
   new version
 - get this change into the `main` branch
-- run `make publish-all`
+- run <code type="make/command" dir="..">make publish</code>

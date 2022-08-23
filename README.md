@@ -1,11 +1,16 @@
-<!-- logo is from: https://icons8.com/icon/40886/test -->
-<img src="documentation/logo2.png" align="right" valign="bottom">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="documentation/logo_800_dark.png">
+  <source media="(prefers-color-scheme: light)" srcset="documentation/logo_800_light.png">
+  <img alt="Text-Runner logo" src="documentation/logo_800_light.jpg">
+</picture>
 
-# Test-Runner for Text
+<div align="center">
 
 [![CI](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
 [![CI](https://ci.appveyor.com/api/projects/status/96q06796xyrste9x/branch/main?svg=true)](https://ci.appveyor.com/project/kevgo/text-runner/branch/main)
 <br>
+
+</div>
 
 Text-Runner is an agile documentation tool that helps create living end-user
 readable documentation. An example is the text you are reading right now, which

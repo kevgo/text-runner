@@ -4,11 +4,11 @@
   <img alt="Text-Runner logo" src="documentation/logo_800_light.jpg">
 </picture>
 
-# Test-Runner for Text
-
+<center>
 [![CI](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
 [![CI](https://ci.appveyor.com/api/projects/status/96q06796xyrste9x/branch/main?svg=true)](https://ci.appveyor.com/project/kevgo/text-runner/branch/main)
 <br>
+</center>
 
 Text-Runner is an agile documentation tool that helps create living end-user
 readable documentation. An example is the text you are reading right now, which

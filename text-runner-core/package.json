@@ -25,14 +25,14 @@
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "2.1.0",
-    "anchor-markdown-header": "0.5.7",
+    "@sindresorhus/slugify": "2.1.1",
+    "anchor-markdown-header": "0.6.0",
     "globby": "13.1.2",
-    "got": "12.3.1",
+    "got": "12.5.1",
     "humanize-string": "3.0.0",
     "is-glob": "4.0.3",
     "markdown-it": "13.0.1",
-    "parse5": "7.0.0",
+    "parse5": "7.1.1",
     "tmp-promise": "3.0.3"
   },
   "devDependencies": {

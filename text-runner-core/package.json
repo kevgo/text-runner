@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@sindresorhus/slugify": "2.1.1",
-    "anchor-markdown-header": "0.5.7",
+    "anchor-markdown-header": "0.6.0",
     "globby": "13.1.2",
     "got": "12.5.1",
     "humanize-string": "3.0.0",

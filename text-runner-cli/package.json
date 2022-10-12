@@ -34,7 +34,7 @@
     "cli-progress": "3.11.2",
     "colorette": "2.0.19",
     "end-child-processes": "1.0.3",
-    "minimist": "1.2.6",
+    "minimist": "1.2.7",
     "text-runner-core": "6.0.0",
     "ts-node": "10.9.1",
     "yamljs": "0.3.0"

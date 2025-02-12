@@ -17,7 +17,7 @@
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "colorette": "2.0.19",
+    "colorette": "2.0.20",
     "text-runner-core": "6.0.0"
   },
   "devDependencies": {
@@ -26,6 +26,6 @@
     "textrun-action": "0.2.0",
     "textrun-extension": "0.2.0",
     "textrun-workspace": "0.2.0",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.2"
   }
 }

@@ -18,10 +18,10 @@
   },
   "dependencies": {
     "assert-no-diff": "3.0.6",
-    "colorette": "2.0.19",
+    "colorette": "2.0.20",
     "end-child-processes": "1.0.3",
     "observable-process": "8.0.0-pre4",
-    "strip-ansi": "7.0.1",
+    "strip-ansi": "7.1.0",
     "text-runner-core": "6.0.0",
     "textrun-extension": "0.2.0"
   },
@@ -31,6 +31,6 @@
     "textrun-action": "0.2.0",
     "textrun-extension": "0.2.0",
     "textrun-workspace": "0.2.0",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.2"
   }
 }

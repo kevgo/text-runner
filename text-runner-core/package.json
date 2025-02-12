@@ -25,20 +25,20 @@
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "2.1.1",
+    "@sindresorhus/slugify": "2.2.1",
     "anchor-markdown-header": "0.6.0",
     "globby": "13.1.2",
     "got": "12.5.2",
     "humanize-string": "3.0.0",
     "is-glob": "4.0.3",
     "markdown-it": "13.0.1",
-    "parse5": "7.1.1",
+    "parse5": "7.2.1",
     "tmp-promise": "3.0.3"
   },
   "devDependencies": {
     "@types/got": "9.6.12",
-    "@types/is-glob": "4.0.2",
+    "@types/is-glob": "4.0.4",
     "@types/markdown-it": "12.2.3",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.2"
   }
 }

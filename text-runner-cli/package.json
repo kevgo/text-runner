@@ -29,20 +29,20 @@
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@babel/code-frame": "7.18.6",
+    "@babel/code-frame": "7.26.2",
     "cli-cursor": "4.0.0",
-    "cli-progress": "3.11.2",
-    "colorette": "2.0.19",
+    "cli-progress": "3.12.0",
+    "colorette": "2.0.20",
     "end-child-processes": "1.0.3",
-    "minimist": "1.2.7",
+    "minimist": "1.2.8",
     "text-runner-core": "6.0.0",
-    "ts-node": "10.9.1",
+    "ts-node": "10.9.2",
     "yamljs": "0.3.0"
   },
   "devDependencies": {
-    "@types/babel__code-frame": "7.0.3",
-    "@types/cli-progress": "3.11.0",
-    "@types/minimist": "1.2.2",
-    "@types/yamljs": "0.2.31"
+    "@types/babel__code-frame": "7.0.6",
+    "@types/cli-progress": "3.11.6",
+    "@types/minimist": "1.2.5",
+    "@types/yamljs": "0.2.34"
   }
 }

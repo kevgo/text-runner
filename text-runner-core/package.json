@@ -31,14 +31,14 @@
     "got": "12.5.2",
     "humanize-string": "3.0.0",
     "is-glob": "4.0.3",
-    "markdown-it": "13.0.1",
+    "markdown-it": "14.1.0",
     "parse5": "7.2.1",
     "tmp-promise": "3.0.3"
   },
   "devDependencies": {
     "@types/got": "9.6.12",
     "@types/is-glob": "4.0.4",
-    "@types/markdown-it": "12.2.3",
+    "@types/markdown-it": "14.1.2",
     "ts-node": "10.9.2"
   }
 }

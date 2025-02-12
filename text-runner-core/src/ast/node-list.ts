@@ -19,7 +19,7 @@ export class NodeList extends Array<Node> {
       throw new UserError(
         `Found ${nodes.length} nodes of type '${nodeTypes.join("/")}'`,
         "The nodeOfTypes method expects to find only one matching node, but it found multiple.",
-        nodes[0].location,
+        nodes[0].location
       )
     }
     if (nodes.length === 0) {
@@ -43,7 +43,7 @@ export class NodeList extends Array<Node> {
 This method provides all AST nodes until the given AST node closes.
 This callstack should point you to the problem:
 
-${new Error().stack}`,
+${new Error().stack}`
       )
     }
     let index = this.indexOf(openingNode)
@@ -51,7 +51,7 @@ ${new Error().stack}`,
       throw new UserError(
         `node '${openingNode.type}' not found in list`,
         "This ast.NodeList does not contain the given node.",
-        openingNode.location,
+        openingNode.location
       )
     }
     const result = new NodeList()

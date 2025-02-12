@@ -7,7 +7,7 @@ suite("parseCmdlineArgs()", function () {
     const have = cmdLine.parse([
       "/usr/local/Cellar/node/9.3.0_1/bin/node",
       "/Users/kevlar/d/text-runner/bin/text-run",
-      "run",
+      "run"
     ])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)
@@ -17,7 +17,7 @@ suite("parseCmdlineArgs()", function () {
     const have = cmdLine.parse([
       "C:\\Program Files (x86)\\nodejs\\node.exe",
       "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\index.js",
-      "run",
+      "run"
     ])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)
@@ -27,7 +27,7 @@ suite("parseCmdlineArgs()", function () {
     const have = cmdLine.parse([
       "/usr/local/Cellar/node/9.3.0_1/bin/node",
       "/Users/kevlar/d/text-runner/bin/text-run",
-      "run",
+      "run"
     ])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)

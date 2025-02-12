@@ -29,7 +29,7 @@ suite("parseHTMLFiles", function () {
         const actual = await parseHTMLFiles(
           [new files.FullFilePath("input.html")],
           new files.SourceDir(testDirPath),
-          tagMapper,
+          tagMapper
         )
         assert.deepEqual(actual[0], expected)
       })

@@ -56,7 +56,7 @@ When(
   { timeout: 30_000 },
   async function (this: TRWorld, tryingText: string, command: string) {
     this.finishedProcess = await helpers.executeCLI(command, determineExpectError(tryingText), this)
-  },
+  }
 )
 
 When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (this: TRWorld, tryingText: string) {
@@ -68,9 +68,9 @@ When(
   { timeout: 30_000 },
   async function (this: TRWorld, tryingText: string) {
     this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
-      cwd: workspace.absPath.platformified(),
+      cwd: workspace.absPath.platformified()
     })
-  },
+  }
 )
 
 function determineExpectError(tryingText: string) {

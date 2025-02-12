@@ -59,7 +59,7 @@ systemTmp: false
 online: false
 
 # whether to delete all files in the workspace folder before running the tests
-emptyWorkspace: true`,
+emptyWorkspace: true`
   )
 }
 
@@ -103,6 +103,6 @@ function parse(fileContent: string): config.Data {
     publications: fileData.publications,
     showSkipped: fileData.showSkipped,
     systemTmp: fileData.systemTmp,
-    workspace: fileData.workspace,
+    workspace: fileData.workspace
   })
 }

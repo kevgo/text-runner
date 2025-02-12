@@ -35,7 +35,7 @@ suite("removeExcludedFiles", function () {
   test("relative folder name given", function () {
     const removedList = files.removeExcludedFiles(
       [new files.FullFilePath("one"), new files.FullFilePath("node_modules/zonk/broken.md")],
-      "node_modules",
+      "node_modules"
     )
     expect(removedList).to.eql([{ value: "one" }])
   })

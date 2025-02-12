@@ -11,7 +11,7 @@ export async function installedExecutable(action: textRunner.actions.Args): Prom
     throw new textRunner.UserError(
       "Executable name not specified",
       "This action checks for executables provided by npm modules that you have installed. They are typically inside node_modules/.bin. Please provide the name of the executable.",
-      action.location,
+      action.location
     )
   }
   action.name(`installed npm executable ${color.cyan(commandName)}`)

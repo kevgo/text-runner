@@ -46,7 +46,7 @@ export function parse(argv: string[]): {
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
-    scaffoldLanguage: parseScaffoldSwitches(cliArgs),
+    scaffoldLanguage: parseScaffoldSwitches(cliArgs)
   })
   if (cliArgs["system-tmp"] != null) {
     cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
@@ -83,7 +83,7 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): textRunner.commands
     throw new textRunner.UserError(
       "Missing or invalid debug subcommand",
       `Valid debug subcommands are: ${textRunner.commands.DebugSubCommandValues.join(", ")}.
-Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"`,
+Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"`
     )
   }
 }
@@ -105,7 +105,7 @@ function parseSystemTmp(value: any): boolean | undefined {
     default:
       throw new textRunner.UserError(
         `unknown value for "system-tmp" setting: ${value}`,
-        'Set the "system-tmp" setting to "true" to have Text-Runner put the test workspace into the global system temp folder and "false" to put it into the current folder.',
+        'Set the "system-tmp" setting to "true" to have Text-Runner put the test workspace into the global system temp folder and "false" to put it into the current folder.'
       )
   }
 }

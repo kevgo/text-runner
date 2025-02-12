@@ -138,14 +138,14 @@ Then("it throws:", function (this: TRWorld, table: cucumber.DataTable) {
   const tableHash = table.hashes()[0]
   const want: ExecuteResultLine = {
     errorType: tableHash["ERROR TYPE"],
-    errorMessage: tableHash["ERROR MESSAGE"],
+    errorMessage: tableHash["ERROR MESSAGE"]
   }
   if (!this.apiException) {
     throw new Error("no apiException found")
   }
   const have: ExecuteResultLine = {
     errorType: this.apiException.name,
-    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
+    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0]
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME
@@ -185,10 +185,10 @@ Then(
   "it creates the file {string} with content:",
   async function (this: TRWorld, filename: string, expectedContent: string) {
     const actualContent = await fs.readFile(workspace.absPath.joinStr(filename), {
-      encoding: "utf8",
+      encoding: "utf8"
     })
     assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
-  },
+  }
 )
 
 Then("it doesn't print:", function (this: TRWorld, expectedText: string) {
@@ -356,7 +356,7 @@ Then(
   async function (this: TRWorld, fileName: string, expectedContent: string) {
     const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
     assert.equal(actualContent.trim(), expectedContent.trim())
-  },
+  }
 )
 
 Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name: string) {

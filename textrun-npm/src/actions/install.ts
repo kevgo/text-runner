@@ -18,8 +18,8 @@ export async function install(action: textRunner.actions.Args): Promise<void> {
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(
       `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${color.cyan(
-        pkg.name,
-      )}`,
+        pkg.name
+      )}`
     )
   }
 }

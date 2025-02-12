@@ -31,8 +31,8 @@ export class ClosingTagParser {
         content: "",
         location,
         tag: tagName,
-        type: this.tagMapper.typeForTag(tagName, {}),
-      }),
+        type: this.tagMapper.typeForTag(tagName, {})
+      })
     )
     return result
   }

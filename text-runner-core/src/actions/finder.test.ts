@@ -10,7 +10,7 @@ import {
   customActionFilePaths,
   Finder,
   loadBuiltinActions,
-  loadCustomActions,
+  loadCustomActions
 } from "./finder.js"
 import { Action } from "./index.js"
 
@@ -59,7 +59,7 @@ suite("actionFinder", function () {
   suite("loadCustomActions", function () {
     test("with text-run folder of this codebase", async function () {
       const result = await loadCustomActions(
-        path.join(__dirname, "..", "..", "..", "examples", "custom-action-esm", "text-run"),
+        path.join(__dirname, "..", "..", "..", "examples", "custom-action-esm", "text-run")
       )
       assert.typeOf(result.get("hello-world-sync"), "function")
     })

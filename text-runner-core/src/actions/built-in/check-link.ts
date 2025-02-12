@@ -101,7 +101,7 @@ function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, a
         .getAnchors(file)
         .map(anchor => `#${anchor}`)
         .join(", ")}`,
-      action.location,
+      action.location
     )
   }
   if (action.linkTargets.anchorType(file, anchorName) === "heading") {
@@ -124,7 +124,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
 
   if (!action.linkTargets.hasFile(fullFile)) {
     throw new Error(
-      `link to anchor #${anchorName} in non-existing file ${helpers.removeLeadingSlash(fullFile.unixified())}`,
+      `link to anchor #${anchorName} in non-existing file ${helpers.removeLeadingSlash(fullFile.unixified())}`
     )
   }
 
@@ -134,7 +134,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
       `File ${fullFile.unixified()} contains these anchors: ${action.linkTargets
         .getAnchors(fullFile)
         .map(anchor => `#${anchor}`)
-        .join(", ")}`,
+        .join(", ")}`
     )
   }
 

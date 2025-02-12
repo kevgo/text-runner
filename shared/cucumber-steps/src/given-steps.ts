@@ -18,7 +18,7 @@ Given("a broken file {string}", async function (this: TRWorld, filePath: string)
     `
       <a href="missing">
       </a>
-      `,
+      `
   )
 })
 
@@ -46,7 +46,7 @@ Given("I am in a directory that contains documentation without a configuration f
 
 Given("I am in a directory that contains the {string} example", async function (this: TRWorld, exampleName: string) {
   await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-    recursive: true,
+    recursive: true
   })
 })
 
@@ -54,19 +54,19 @@ Given(
   "I am in a directory that contains the {string} example with the configuration file:",
   async function (this: TRWorld, exampleName: string, configFileContent: string) {
     await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-      recursive: true,
+      recursive: true
     })
     await fs.writeFile(workspace.absPath.joinStr("text-run.yml"), configFileContent)
-  },
+  }
 )
 
 Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
   async function (this: TRWorld, exampleName: string) {
     await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-      recursive: true,
+      recursive: true
     })
-  },
+  }
 )
 
 Given("the source code contains a directory {string}", function (this: TRWorld, dirName: string) {
@@ -83,7 +83,7 @@ Given(
   async function (this: TRWorld, fileName: string, content: string) {
     await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
     await fs.writeFile(workspace.absPath.joinStr(fileName), content)
-  },
+  }
 )
 
 Given("the source code contains an executable {string}", async function (this: TRWorld, fileName: string) {
@@ -101,7 +101,7 @@ Given(
   async function (this: TRWorld, fileName: string, content: string) {
     await fs.mkdir(workspace.absPath.joinStr("tmp", path.dirname(fileName)), { recursive: true })
     await fs.writeFile(workspace.absPath.joinStr("tmp", fileName), content)
-  },
+  }
 )
 
 Given("my workspace contains testable documentation", async function (this: TRWorld) {
@@ -111,7 +111,7 @@ Given("my workspace contains testable documentation", async function (this: TRWo
 <a type="test">
 testable documentation
 </a>
-    `,
+    `
   )
 })
 
@@ -120,7 +120,7 @@ Given("the source code contains the HelloWorld action", async function (this: TR
   await fs.writeFile(
     workspace.absPath.joinStr("text-run", "hello-world.js"),
     `
-    export default (action) => action.log('Hello World!') `,
+    export default (action) => action.log('Hello World!') `
   )
 })
 
@@ -129,7 +129,7 @@ Given(
   async function (this: TRWorld, fileName: string, content: string) {
     await fs.mkdir(workspace.absPath.joinStr("tmp", path.dirname(fileName)), { recursive: true })
     await fs.writeFile(workspace.absPath.joinStr("tmp", fileName), content)
-  },
+  }
 )
 
 Given("the text-run configuration contains:", async function (this: TRWorld, text: string) {

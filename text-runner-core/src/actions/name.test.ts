@@ -4,7 +4,7 @@ import { name } from "./name.js"
 
 suite("getActionName()", function () {
   const tests = {
-    "/users/foo/text-runner/text-run/cdBack.js": "cd-back",
+    "/users/foo/text-runner/text-run/cdBack.js": "cd-back"
   }
   for (const [give, want] of Object.entries(tests)) {
     assert.equal(name(give), want)

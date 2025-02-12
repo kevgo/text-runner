@@ -29,7 +29,7 @@ export class Finder {
     return new Finder(
       await loadBuiltinActions(),
       await loadCustomActions(sourceDir.joinStr("text-run")),
-      new ExternalActionManager(),
+      new ExternalActionManager()
     )
   }
 
@@ -38,7 +38,7 @@ export class Finder {
     return new Finder(
       new Actions(),
       await loadCustomActions(sourceDir.joinStr("text-run")),
-      new ExternalActionManager(),
+      new ExternalActionManager()
     )
   }
 

@@ -21,7 +21,7 @@ export async function existingFile(action: textRunner.actions.Args): Promise<voi
       const files = await fs.readdir(action.configuration.sourceDir.platformified())
       throw new textRunner.UserError(
         `file not found: ${fileRelPath}`,
-        `the workspace has these files: ${files.join(", ")}`,
+        `the workspace has these files: ${files.join(", ")}`
       )
     } else {
       throw e
@@ -32,7 +32,7 @@ export async function existingFile(action: textRunner.actions.Args): Promise<voi
   } catch (err) {
     throw new textRunner.UserError(
       `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
-      textRunner.errorMessage(err),
+      textRunner.errorMessage(err)
     )
   }
 }

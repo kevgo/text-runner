@@ -19,14 +19,14 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
   const makefilePath = action.configuration.sourceDir.joinStr(
     action.location.file.directory().platformified(),
     action.region[0].attributes["dir"] || ".",
-    "Makefile",
+    "Makefile"
   )
   const makefileContent = await fs.readFile(makefilePath, "utf8")
   const haves = makefileTargets(makefileContent)
   for (const want of wants) {
     if (!haves.includes(want)) {
       throw new Error(
-        `Makefile does not contain command make ${color.cyan(want)} but these targets: ${color.cyan(haves.join(", "))}`,
+        `Makefile does not contain command make ${color.cyan(want)} but these targets: ${color.cyan(haves.join(", "))}`
       )
     }
   }

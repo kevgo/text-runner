@@ -82,10 +82,10 @@ export class Node {
       location: new files.Location(
         new files.SourceDir(data.sourceDir || ""),
         data.file || new files.FullFilePath("file"),
-        data.line || 1,
+        data.line || 1
       ),
       tag: data.tag != null ? data.tag : "hr",
-      type: data.type || "hr",
+      type: data.type || "hr"
     })
   }
 

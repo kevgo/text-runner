@@ -15,9 +15,9 @@ export class ProgressFormatter implements formatter.Formatter {
         clearOnComplete: true,
         format: color.green(" {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
         hideCursor: undefined,
-        stopOnComplete: true,
+        stopOnComplete: true
       },
-      progress.Presets.shades_classic,
+      progress.Presets.shades_classic
     )
     command.on("start", this.start.bind(this))
     command.on("output", console.log)
@@ -50,8 +50,8 @@ export class ProgressFormatter implements formatter.Formatter {
     } else {
       console.log(
         color.red(
-          `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`,
-        ),
+          `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`
+        )
       )
       console.log()
       helpers.printCodeFrame(console.log, args.activity.location)

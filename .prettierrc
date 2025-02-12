@@ -3,6 +3,7 @@
   "proseWrap": "always",
   "printWidth": 120,
   "arrowParens": "avoid",
+  "trailingComma": "none",
   "overrides": [
     {
       "files": "*.md",

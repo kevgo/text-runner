@@ -9,7 +9,7 @@ import { VersionCommand } from "./version.js"
 export function instantiate(
   commandName: string,
   userConfig: config.Data,
-  debugSubcommand: textRunner.commands.DebugSubcommand | undefined,
+  debugSubcommand: textRunner.commands.DebugSubcommand | undefined
 ): textRunner.commands.Command {
   switch (commandName) {
     case "help":
@@ -39,7 +39,7 @@ export function instantiate(
     default:
       throw new textRunner.UserError(
         `unknown command: ${commandName}`,
-        `Run "text-run help" for a list of all valid commands.`,
+        `Run "text-run help" for a list of all valid commands.`
       )
   }
 }

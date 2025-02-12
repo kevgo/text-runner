@@ -35,7 +35,7 @@ export class Parser {
   /** returns the subtree of the given HTML AST whose root node has the given name */
   private findNodeWithName(
     nodes: parse5.DefaultTreeAdapterMap["childNode"][],
-    name: string,
+    name: string
   ): parse5.DefaultTreeAdapterMap["element"] {
     for (const node of nodes) {
       if (node.nodeName === name) {
@@ -51,7 +51,7 @@ export class Parser {
   /** converts the given HTML AST node into the standard format */
   private standardizeNode(
     node: parse5.DefaultTreeAdapterMap["childNode"],
-    startingLocation: files.Location,
+    startingLocation: files.Location
   ): ast.NodeList {
     if (this.isEmptyTextNode(node)) {
       return new ast.NodeList()
@@ -71,7 +71,7 @@ export class Parser {
   /** converts the given HTML tag with open and closing tag into the standard format */
   private standardizeOpenCloseTag(
     node: parse5.DefaultTreeAdapterMap["element"],
-    startingLocation: files.Location,
+    startingLocation: files.Location
   ): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
@@ -95,8 +95,8 @@ export class Parser {
         content: "",
         location: startingLocation.withLine(startLine),
         tag: node.tagName as ast.NodeTag,
-        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes),
-      }),
+        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes)
+      })
     )
 
     // store the child nodes in between the opening and closing node
@@ -122,8 +122,8 @@ export class Parser {
           content: "",
           location: startingLocation.withLine(endLine),
           tag,
-          type: this.tagMapper.typeForTag(tag, attributes),
-        }),
+          type: this.tagMapper.typeForTag(tag, attributes)
+        })
       )
     }
     return result
@@ -132,7 +132,7 @@ export class Parser {
   /** converts the given HTML standalone node into the standard format */
   private standardizeStandaloneNode(
     node: parse5.DefaultTreeAdapterMap["element"],
-    startingLocation: files.Location,
+    startingLocation: files.Location
   ): ast.NodeList {
     const result = new ast.NodeList()
     const attributes = standardizeHTMLAttributes(node.attrs)
@@ -142,8 +142,8 @@ export class Parser {
         content: "",
         location: startingLocation.withLine((node.sourceCodeLocation?.startLine || 0) + startingLocation.line - 1),
         tag: node.tagName as ast.NodeTag,
-        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes),
-      }),
+        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes)
+      })
     )
     return result
   }
@@ -151,7 +151,7 @@ export class Parser {
   /** converts the given HTML text node into the standard format */
   private standardizeTextNode(
     node: parse5.DefaultTreeAdapterMap["textNode"],
-    startingLocation: files.Location,
+    startingLocation: files.Location
   ): ast.NodeList {
     const result = new ast.NodeList()
     if (node.value !== "\n") {
@@ -161,8 +161,8 @@ export class Parser {
           content: node.value.trim(),
           location: startingLocation.withLine((node.sourceCodeLocation?.startLine ?? 0) + startingLocation.line - 1),
           tag: "",
-          type: "text",
-        }),
+          type: "text"
+        })
       )
     }
     return result
@@ -170,7 +170,7 @@ export class Parser {
 }
 
 function instanceOfTextNode(
-  object: parse5.DefaultTreeAdapterMap["childNode"],
+  object: parse5.DefaultTreeAdapterMap["childNode"]
 ): object is parse5.DefaultTreeAdapterMap["textNode"] {
   return object.nodeName === "#text"
 }

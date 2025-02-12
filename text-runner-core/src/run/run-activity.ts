@@ -17,7 +17,7 @@ export async function runActivity(
   actionFinder: actions.Finder,
   configuration: configuration.Data,
   targets: linkTargets.List,
-  emitter: commands.Command,
+  emitter: commands.Command
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
@@ -29,7 +29,7 @@ export async function runActivity(
     log: outputCollector.logFn(),
     name: nameRefiner.refineFn(),
     region: activity.region,
-    document: activity.document,
+    document: activity.document
   }
   try {
     const action = await actionFinder.actionFor(activity)
@@ -44,7 +44,7 @@ export async function runActivity(
         status: "success",
         activity,
         finalName: nameRefiner.finalName(),
-        output: outputCollector.toString(),
+        output: outputCollector.toString()
       })
     } else if (actionResult === args.SKIPPING) {
       if (configuration.showSkipped) {
@@ -52,7 +52,7 @@ export async function runActivity(
           status: "skipped",
           activity,
           finalName: nameRefiner.finalName(),
-          output: outputCollector.toString(),
+          output: outputCollector.toString()
         })
       }
     } else {
@@ -68,7 +68,7 @@ export async function runActivity(
       activity,
       finalName: nameRefiner.finalName(),
       error: new UserError(errorMessage(e), guidance, activity.location),
-      output: outputCollector.toString(),
+      output: outputCollector.toString()
     })
     return true
   }

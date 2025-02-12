@@ -16,7 +16,7 @@ export async function target(action: textRunner.actions.Args): Promise<void> {
   const targets = makefileTargets(makefile)
   if (!targets.includes(target)) {
     throw new Error(
-      `Makefile does not contain target ${color.cyan(target)} but these ones: ${color.cyan(targets.join(", "))}`,
+      `Makefile does not contain target ${color.cyan(target)} but these ones: ${color.cyan(targets.join(", "))}`
     )
   }
 }

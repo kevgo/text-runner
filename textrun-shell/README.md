@@ -18,8 +18,8 @@ an example:
 ```js
 export default {
   binaries: {
-    "text-run": path.join(__dirname, "node_modules", ".bin", "text-run"),
-  },
+    "text-run": path.join(__dirname, "node_modules", ".bin", "text-run")
+  }
 }
 ```
 
@@ -81,7 +81,7 @@ import * as readline from "readline"
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  terminal: false,
+  terminal: false
 })
 
 rl.question("your name\n", name => {

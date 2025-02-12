@@ -20,7 +20,7 @@ export function instantiate(name: formatters.Names, command: textRunner.commands
     default:
       throw new textRunner.UserError(
         `Unknown formatter: ${name}`,
-        "Available formatters are: detailed, dot, progress, summary",
+        "Available formatters are: detailed, dot, progress, summary"
       )
   }
 }

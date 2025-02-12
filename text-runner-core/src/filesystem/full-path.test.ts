@@ -16,7 +16,7 @@ suite("FullPath", function () {
       { desc: "Unix directory", give: "/foo/bar/", want: "foo/bar/" },
       { desc: "Unix file path", give: "/foo/bar/baz.md", want: "foo/bar/" },
       { desc: "Windows directory", give: "/foo/bar/", want: "foo/bar/" },
-      { desc: "Windows file path", give: "\\foo\\bar\\baz.md", want: "foo/bar/" },
+      { desc: "Windows file path", give: "\\foo\\bar\\baz.md", want: "foo/bar/" }
     ]
     for (const tt of tests) {
       test(tt.desc, function () {
@@ -36,7 +36,7 @@ suite("FullPath", function () {
       { desc: "Unix directory", give: "/foo/bar/", want: true },
       { desc: "Unix file path", give: "/foo/bar/baz.md", want: false },
       { desc: "Windows directory", give: "/foo/bar/", want: true },
-      { desc: "Windows file path", give: "\\foo\\bar\\baz.md", want: false },
+      { desc: "Windows file path", give: "\\foo\\bar\\baz.md", want: false }
     ]
     for (const tt of tests) {
       test(tt.desc, function () {
@@ -69,8 +69,8 @@ suite("FullPath", function () {
         {
           localPath: "/content",
           publicExtension: "html",
-          publicPath: "/",
-        },
+          publicPath: "/"
+        }
       ])
       const filePath = new FullPath("/content/1.md")
       const publicPath = filePath.publicPath(publications)

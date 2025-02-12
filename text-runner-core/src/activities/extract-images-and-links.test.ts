@@ -8,7 +8,7 @@ suite("extractImagesAndLinks", function () {
     const nodes = ast.NodeList.scaffold({
       file: "filename",
       line: 3,
-      type: "image",
+      type: "image"
     })
     const result = extractImagesAndLinks([nodes])
     assert.lengthOf(result, 1)

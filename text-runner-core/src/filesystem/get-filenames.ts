@@ -45,7 +45,7 @@ async function getFiles(config: configuration.Data): Promise<files.FullFilePath[
   } else {
     throw new UserError(
       `file or directory does not exist: ${config.files}`,
-      "You can provide a glob expression or the path to a file or folder.",
+      "You can provide a glob expression or the path to a file or folder."
     )
   }
 }

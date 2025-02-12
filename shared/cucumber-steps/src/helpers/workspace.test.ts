@@ -9,7 +9,7 @@ suite("dirPath", function () {
     "/home/foo/text-runner/text-runner-cli": "/home/foo/text-runner/test/cli",
     "/home/foo/text-runner/text-runner-features": "/home/foo/text-runner/test/features_1",
     "/home/foo/text-runner/textrun-action": "/home/foo/text-runner/test/action",
-    "/home/foo/text-runner/textrun-extension": "/home/foo/text-runner/test/extension",
+    "/home/foo/text-runner/textrun-extension": "/home/foo/text-runner/test/extension"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

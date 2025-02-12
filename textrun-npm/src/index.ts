@@ -7,5 +7,5 @@ import { installedExecutable } from "./actions/installed-executable.js"
 export const textrunActions: textRunner.exports.TextrunActions = {
   exportedExecutable,
   install,
-  installedExecutable
+  installedExecutable,
 }

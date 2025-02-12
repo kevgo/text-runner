@@ -95,7 +95,7 @@ export class Parser {
         content: "",
         location: startingLocation.withLine(startLine),
         tag: node.tagName as ast.NodeTag,
-        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes)
+        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes),
       })
     )
 
@@ -122,7 +122,7 @@ export class Parser {
           content: "",
           location: startingLocation.withLine(endLine),
           tag,
-          type: this.tagMapper.typeForTag(tag, attributes)
+          type: this.tagMapper.typeForTag(tag, attributes),
         })
       )
     }
@@ -142,7 +142,7 @@ export class Parser {
         content: "",
         location: startingLocation.withLine((node.sourceCodeLocation?.startLine || 0) + startingLocation.line - 1),
         tag: node.tagName as ast.NodeTag,
-        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes)
+        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes),
       })
     )
     return result
@@ -161,7 +161,7 @@ export class Parser {
           content: node.value.trim(),
           location: startingLocation.withLine((node.sourceCodeLocation?.startLine ?? 0) + startingLocation.line - 1),
           tag: "",
-          type: "text"
+          type: "text",
         })
       )
     }

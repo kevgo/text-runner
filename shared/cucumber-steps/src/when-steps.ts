@@ -68,7 +68,7 @@ When(
   { timeout: 30_000 },
   async function (this: TRWorld, tryingText: string) {
     this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
-      cwd: workspace.absPath.platformified()
+      cwd: workspace.absPath.platformified(),
     })
   }
 )

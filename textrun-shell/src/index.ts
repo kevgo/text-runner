@@ -13,5 +13,5 @@ export const textrunActions: textRunner.exports.TextrunActions = {
   commandWithInput,
   serverOutput,
   server,
-  stopServer
+  stopServer,
 }

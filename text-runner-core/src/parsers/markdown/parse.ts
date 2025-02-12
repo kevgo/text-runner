@@ -10,7 +10,7 @@ export async function parse(filenames: files.FullFilePath[], sourceDir: files.So
   const parser = new MarkdownParser()
   for (const filename of filenames) {
     const content = await fs.readFile(sourceDir.joinStr(filename.platformified()), {
-      encoding: "utf8"
+      encoding: "utf8",
     })
     result.push(parser.parse(content, sourceDir, filename))
   }

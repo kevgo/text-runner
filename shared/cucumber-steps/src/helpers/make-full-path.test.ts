@@ -6,11 +6,11 @@ import { makeFullPath } from "./make-full-path.js"
 suite("makeFullPath", function () {
   const linuxTests = {
     "text-run foo": /.+\/node_modules\/.bin\/text-run foo$/,
-    run: /.+\/node_modules\/.bin\/text-run run$/
+    run: /.+\/node_modules\/.bin\/text-run run$/,
   }
   const winTests = {
     "text-run foo": /.+\\bin\\text-run.cmd foo$/,
-    run: /.+\\bin\\text-run.cmd run$/
+    run: /.+\\bin\\text-run.cmd run$/,
   }
   if (process.platform !== "win32") {
     for (const [give, want] of Object.entries(linuxTests)) {

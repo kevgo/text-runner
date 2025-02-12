@@ -14,7 +14,7 @@ export interface PathMappings {
 export class Configuration {
   static default(): Configuration {
     return new Configuration({
-      globals: {}
+      globals: {},
     })
   }
 

@@ -5,5 +5,5 @@ import { runnable } from "./actions/runnable.js"
 
 export const textrunActions: textRunner.exports.TextrunActions = {
   runnable,
-  nonRunnable
+  nonRunnable,
 }

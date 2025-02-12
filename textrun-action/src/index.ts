@@ -5,5 +5,5 @@ import { nameShort } from "./name-short.js"
 
 export const textrunActions: textRunner.exports.TextrunActions = {
   nameFull,
-  nameShort
+  nameShort,
 }

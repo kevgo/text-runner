@@ -6,7 +6,7 @@ suite("hasCallbackPlaceholder", function () {
   const tests = {
     'fs.writeFile("foo", "bar", <CALLBACK>)': true,
     'fs.writeFile("foo", "bar", function() {\n  // ...\n})': true,
-    'await fs.writeFile("foo", "bar")': false
+    'await fs.writeFile("foo", "bar")': false,
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

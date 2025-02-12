@@ -9,7 +9,7 @@ suite("linkTarget.List.addNodeList()", function () {
     const nodeList = ast.NodeList.scaffold({
       attributes: { name: "foo bar" },
       file: "file.md",
-      type: "anchor_open"
+      type: "anchor_open",
     })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
@@ -28,16 +28,16 @@ suite("linkTarget.List.addNodeList()", function () {
     nodeList.pushNode({
       attributes: {},
       file: "file.md",
-      type: "h1_open"
+      type: "h1_open",
     })
     nodeList.pushNode({
       content: "Get Started in 5 Minutes",
       file: "file.md",
-      type: "text"
+      type: "text",
     })
     nodeList.pushNode({
       file: "file.md",
-      type: "h1_close"
+      type: "h1_close",
     })
     const targetList = new linkTarget.List()
     targetList.addNodeList(nodeList)
@@ -51,16 +51,16 @@ suite("linkTarget.List.anchorType()", function () {
     nodeList.pushNode({
       attributes: {},
       file: "file.md",
-      type: "heading_open"
+      type: "heading_open",
     })
     nodeList.pushNode({
       content: "foo bar",
       file: "file.md",
-      type: "text"
+      type: "text",
     })
     nodeList.pushNode({
       file: "file.md",
-      type: "heading_close"
+      type: "heading_close",
     })
     const list = new linkTarget.List()
     list.addHeading(nodeList[0], nodeList)

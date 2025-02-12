@@ -11,7 +11,7 @@ suite("ast.Node", function () {
   test(".endTypeFor()", function () {
     const tests: { [key in ast.NodeType]?: ast.NodeType } = {
       anchor_open: "anchor_close",
-      heading_open: "heading_close"
+      heading_open: "heading_close",
     }
     for (const [give, want] of Object.entries(tests)) {
       const node = ast.Node.scaffold({ type: give as ast.NodeType })
@@ -53,7 +53,7 @@ suite("ast.Node", function () {
     test("link tags", function () {
       const node = ast.Node.scaffold({
         content: '<a href="http://foo.com">',
-        type: "htmltag"
+        type: "htmltag",
       })
       assert.equal(node.htmlLinkTarget(), "http://foo.com", "should return the href content of link tags")
     })
@@ -66,7 +66,7 @@ suite("ast.Node", function () {
     test("anchor tags", function () {
       const node = ast.Node.scaffold({
         content: '<a name="foo">',
-        type: "htmltag"
+        type: "htmltag",
       })
       assert.isNull(node.htmlLinkTarget())
     })

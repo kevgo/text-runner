@@ -7,7 +7,7 @@ import * as url from "url"
 const filesToKeep = ["package.json", "tsconfig.json", "node_modules"]
 /** the original contents of files before an end-to-end test ran in a workspace */
 const fileBackups = {
-  "package.json": ""
+  "package.json": "",
 }
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 /** full path to the workspace */

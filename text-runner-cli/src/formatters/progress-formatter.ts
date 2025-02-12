@@ -15,7 +15,7 @@ export class ProgressFormatter implements formatter.Formatter {
         clearOnComplete: true,
         format: color.green(" {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
         hideCursor: undefined,
-        stopOnComplete: true
+        stopOnComplete: true,
       },
       progress.Presets.shades_classic
     )

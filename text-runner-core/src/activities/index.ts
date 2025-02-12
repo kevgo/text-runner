@@ -24,6 +24,6 @@ export function scaffold(data: Partial<Activity> = {}): Activity {
     actionName: data.actionName || "foo",
     location: files.Location.scaffold(),
     region: new ast.NodeList(),
-    document: new ast.NodeList()
+    document: new ast.NodeList(),
   }
 }

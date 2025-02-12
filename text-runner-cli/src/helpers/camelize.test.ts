@@ -6,7 +6,7 @@ suite("camelize", function () {
   const tests = {
     foo: "foo",
     "one-two-three": "oneTwoThree",
-    oneTwoThree: "oneTwoThree"
+    oneTwoThree: "oneTwoThree",
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

@@ -16,7 +16,7 @@ export async function executeCLI(
   if (world.debug) {
     args.env = {
       DEBUG: "*,-babel",
-      PATH: process.env.PATH
+      PATH: process.env.PATH,
     }
   }
   const fullCommand = makeFullPath(command, process.platform)

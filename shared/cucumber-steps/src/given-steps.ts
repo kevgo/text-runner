@@ -46,7 +46,7 @@ Given("I am in a directory that contains documentation without a configuration f
 
 Given("I am in a directory that contains the {string} example", async function (this: TRWorld, exampleName: string) {
   await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-    recursive: true
+    recursive: true,
   })
 })
 
@@ -54,7 +54,7 @@ Given(
   "I am in a directory that contains the {string} example with the configuration file:",
   async function (this: TRWorld, exampleName: string, configFileContent: string) {
     await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-      recursive: true
+      recursive: true,
     })
     await fs.writeFile(workspace.absPath.joinStr("text-run.yml"), configFileContent)
   }
@@ -64,7 +64,7 @@ Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
   async function (this: TRWorld, exampleName: string) {
     await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-      recursive: true
+      recursive: true,
     })
   }
 )

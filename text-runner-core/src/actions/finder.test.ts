@@ -10,7 +10,7 @@ import {
   customActionFilePaths,
   Finder,
   loadBuiltinActions,
-  loadCustomActions
+  loadCustomActions,
 } from "./finder.js"
 import { Action } from "./index.js"
 

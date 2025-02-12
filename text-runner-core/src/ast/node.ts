@@ -85,7 +85,7 @@ export class Node {
         data.line || 1
       ),
       tag: data.tag != null ? data.tag : "hr",
-      type: data.type || "hr"
+      type: data.type || "hr",
     })
   }
 

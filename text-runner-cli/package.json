@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@babel/code-frame": "7.26.2",
-    "cli-cursor": "4.0.0",
+    "cli-cursor": "5.0.0",
     "cli-progress": "3.12.0",
     "colorette": "2.0.20",
     "end-child-processes": "1.0.3",

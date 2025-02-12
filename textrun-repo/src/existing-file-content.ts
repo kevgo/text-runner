@@ -37,7 +37,7 @@ export async function existingFileContent(action: textRunner.actions.Args): Prom
   } catch (err) {
     throw new textRunner.UserError(
       `mismatching content in ${color.cyan(color.bold(filePath))}`,
-      textRunner.errorMessage(err)
+      textRunner.errorMessage(err),
     )
   }
 }

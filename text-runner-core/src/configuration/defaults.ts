@@ -49,7 +49,7 @@ async function getWorkspacePath(config: configuration.CompleteAPIData): Promise<
   } else {
     throw new UserError(
       `unknown 'systemTmp' setting: ${config.systemTmp}`,
-      `Since version 5.0.0, the only valid settings for "systemTmp" are "true" and "false"`
+      `Since version 5.0.0, the only valid settings for "systemTmp" are "true" and "false"`,
     )
   }
 }

@@ -13,7 +13,7 @@ import * as parsers from "../parsers/index.js"
 import { Command } from "./command.js"
 
 export const DebugSubCommandValues = ["activities", "ast", "images", "links", "linkTargets"] as const
-export type DebugSubcommand = typeof DebugSubCommandValues[number]
+export type DebugSubcommand = (typeof DebugSubCommandValues)[number]
 
 export class Debug implements Command {
   userConfig: configuration.APIData

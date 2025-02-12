@@ -9,7 +9,7 @@ import { Parser } from "./html-parser.js"
 export async function parseHTMLFiles(
   filenames: files.FullFilePath[],
   sourceDir: files.SourceDir,
-  tagMapper: TagMapper
+  tagMapper: TagMapper,
 ): Promise<ast.NodeList[]> {
   const result = []
   const parser = new Parser(tagMapper)

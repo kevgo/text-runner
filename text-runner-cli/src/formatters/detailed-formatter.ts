@@ -29,7 +29,7 @@ export class DetailedFormatter implements formatter.Formatter {
       process.stdout.write(color.dim(args.output))
     }
     console.log(
-      color.green(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
+      color.green(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`),
     )
   }
 
@@ -41,7 +41,7 @@ export class DetailedFormatter implements formatter.Formatter {
       printUserError(args.error)
     } else {
       process.stdout.write(
-        color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
+        color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `),
       )
       console.log(args.error.message)
       helpers.printCodeFrame(console.log, args.activity.location)
@@ -54,8 +54,8 @@ export class DetailedFormatter implements formatter.Formatter {
     }
     console.log(
       color.cyan(
-        `${args.activity.location.file.platformified()}:${args.activity.location.line} -- skipping: ${args.finalName}`
-      )
+        `${args.activity.location.file.platformified()}:${args.activity.location.line} -- skipping: ${args.finalName}`,
+      ),
     )
   }
 

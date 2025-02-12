@@ -33,7 +33,7 @@ export class OpenNodeTracker {
     throw new UserError(
       `No opening node '${openType}' found for closing node '${type}'`,
       `Node </${openType}> does not have a corresponding opening node`,
-      location
+      location,
     )
   }
 

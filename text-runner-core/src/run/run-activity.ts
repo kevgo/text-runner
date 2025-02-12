@@ -17,7 +17,7 @@ export async function runActivity(
   actionFinder: actions.Finder,
   configuration: configuration.Data,
   targets: linkTargets.List,
-  emitter: commands.Command
+  emitter: commands.Command,
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))

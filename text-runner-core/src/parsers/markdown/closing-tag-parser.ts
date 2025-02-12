@@ -32,7 +32,7 @@ export class ClosingTagParser {
         location,
         tag: tagName,
         type: this.tagMapper.typeForTag(tagName, {}),
-      })
+      }),
     )
     return result
   }

@@ -23,7 +23,7 @@ export class ExternalActionManager {
       throw new UserError(
         `Too many slashes in action name "${activity.actionName}"`,
         "Activities are only allowed to have one slash in them: to separate the npm module name from the action name",
-        activity.location
+        activity.location,
       )
     }
     const moduleName = "textrun-" + parts[0]
@@ -51,7 +51,7 @@ export class ExternalActionManager {
     throw new UserError(
       `npm package "${moduleName}" does not contain action "${wantAction}"`,
       `Found actions: ${names.join(", ")}`,
-      activity.location
+      activity.location,
     )
   }
 }

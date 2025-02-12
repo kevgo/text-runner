@@ -173,7 +173,7 @@ export class MarkdownParser {
         location,
         tag: "img",
         type: "image",
-      })
+      }),
     )
     return result
   }
@@ -187,7 +187,7 @@ export class MarkdownParser {
         location,
         tag: mdNode.tag as ast.NodeTag,
         type: `${mdNode.tag}_open` as ast.NodeType,
-      })
+      }),
     )
     return result
   }
@@ -201,7 +201,7 @@ export class MarkdownParser {
         location,
         tag: ("/" + node.tag) as ast.NodeTag,
         type: `${node.tag}_close` as ast.NodeType,
-      })
+      }),
     )
     return result
   }
@@ -215,7 +215,7 @@ export class MarkdownParser {
         location,
         tag: "code",
         type: "code_open",
-      })
+      }),
     )
     result.push(
       new ast.Node({
@@ -224,7 +224,7 @@ export class MarkdownParser {
         location,
         tag: "",
         type: "text",
-      })
+      }),
     )
     result.push(
       new ast.Node({
@@ -233,7 +233,7 @@ export class MarkdownParser {
         location,
         tag: "/code",
         type: "code_close",
-      })
+      }),
     )
     return result
   }
@@ -247,7 +247,7 @@ export class MarkdownParser {
         location,
         tag: "pre",
         type: "fence_open",
-      })
+      }),
     )
     result.push(
       new ast.Node({
@@ -256,7 +256,7 @@ export class MarkdownParser {
         location,
         tag: "",
         type: "text",
-      })
+      }),
     )
     result.push(
       new ast.Node({
@@ -265,7 +265,7 @@ export class MarkdownParser {
         location: location.withLine((mdNode.map || [0, 0])[1]),
         tag: "/pre",
         type: "fence_close",
-      })
+      }),
     )
     return result
   }
@@ -280,7 +280,7 @@ export class MarkdownParser {
         location,
         tag: "pre",
         type: "fence_open",
-      })
+      }),
     )
     result.push(
       new ast.Node({
@@ -289,7 +289,7 @@ export class MarkdownParser {
         location: location.withLine(location.line + 1), // content of fenced blocks has to start on the next line
         tag: "",
         type: "text",
-      })
+      }),
     )
     result.push(
       new ast.Node({
@@ -298,7 +298,7 @@ export class MarkdownParser {
         location: location.withLine((mdNode.map || [0, 0])[1]),
         tag: "/pre",
         type: "fence_close",
-      })
+      }),
     )
     return result
   }
@@ -306,7 +306,7 @@ export class MarkdownParser {
   private standardizeClosingHTMLTag(
     mdNode: MarkdownItNode,
     ont: OpenNodeTracker,
-    location: files.Location
+    location: files.Location,
   ): ast.NodeList {
     const result = new ast.NodeList()
     const parsed = this.closingTagParser.parse(mdNode.content, location)[0]
@@ -320,7 +320,7 @@ export class MarkdownParser {
         throw new UserError(
           `Found neither open link nor anchor for node '${mdNode.content}'`,
           "I found a </a> tag here but there isn't an opening <a ...> tag above.",
-          location
+          location,
         )
       }
     }
@@ -353,7 +353,7 @@ export class MarkdownParser {
         location,
         tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
         type: mdNode.type as ast.NodeType,
-      })
+      }),
     )
     ont.open(result[0], (mdNode.map || [0, 0])[1])
     return result
@@ -373,7 +373,7 @@ export class MarkdownParser {
         location: location.withLine(closingTagLine),
         tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
         type: mdNode.type as ast.NodeType,
-      })
+      }),
     )
     return result
   }
@@ -387,7 +387,7 @@ export class MarkdownParser {
         location,
         tag: this.tagMapper.tagForType(mdNode.type as ast.NodeType),
         type: mdNode.type as ast.NodeType,
-      })
+      }),
     )
     return result
   }
@@ -401,7 +401,7 @@ export class MarkdownParser {
         location,
         tag: mdNode.tag as ast.NodeTag,
         type: mdNode.type as ast.NodeType,
-      })
+      }),
     )
     return result
   }

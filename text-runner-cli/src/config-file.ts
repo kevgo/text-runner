@@ -59,7 +59,7 @@ systemTmp: false
 online: false
 
 # whether to delete all files in the workspace folder before running the tests
-emptyWorkspace: true`
+emptyWorkspace: true`,
   )
 }
 

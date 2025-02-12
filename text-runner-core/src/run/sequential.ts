@@ -10,7 +10,7 @@ export async function sequential(
   actionFinder: actions.Finder,
   configuration: configuration.Data,
   linkTargets: linkTargets.List,
-  emitter: commands.Command
+  emitter: commands.Command,
 ): Promise<void> {
   for (const activity of activities) {
     const abort = await runActivity(activity, actionFinder, configuration, linkTargets, emitter)

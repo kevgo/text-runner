@@ -43,7 +43,7 @@ export class Unused implements Command {
 
     // step 6: identify unused activities
     const unusedActivityNames = definedActivityNames.filter(
-      definedActivityName => !usedActivityNames.includes(definedActivityName)
+      definedActivityName => !usedActivityNames.includes(definedActivityName),
     )
 
     // step 7: write results

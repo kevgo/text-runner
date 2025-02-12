@@ -8,7 +8,7 @@ export default function textrunnerCommand(action: textRunner.actions.Args): void
     throw new textRunner.UserError(
       `No text-run command: ${documented}`,
       `Commands are: ${existing.join(", ")}`,
-      action.location
+      action.location,
     )
   }
 }

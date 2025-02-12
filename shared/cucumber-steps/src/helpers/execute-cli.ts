@@ -9,7 +9,7 @@ export async function executeCLI(
   command: string,
   expectError: boolean,
   world: TRWorld,
-  opts: { cwd?: string } = {}
+  opts: { cwd?: string } = {},
 ): Promise<observableProcess.FinishedProcess> {
   const args: observableProcess.StartOptions = {}
   args.cwd = opts.cwd || workspace.absPath.platformified()

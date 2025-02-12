@@ -11,6 +11,6 @@ export default function actionArg(action: textRunner.actions.Args): void {
   throw new textRunner.UserError(
     `"${documented}" is not an attribute of action`,
     `The attributes are ${allExisting.join(", ")}`,
-    action.location
+    action.location,
   )
 }

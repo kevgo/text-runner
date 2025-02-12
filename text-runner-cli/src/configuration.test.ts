@@ -28,7 +28,7 @@ suite("CLIConfiguration", function () {
           formatterName: "dot",
           files: "1.md",
           online: false,
-        })
+        }),
       )
     })
   })

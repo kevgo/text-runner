@@ -10,7 +10,7 @@ suite("ast.NodeList", function () {
     const result = list1.concat(list2)
     assert.deepEqual(
       result.map(node => node.type),
-      ["anchor_open", "bold_open"]
+      ["anchor_open", "bold_open"],
     )
   })
 
@@ -27,7 +27,7 @@ suite("ast.NodeList", function () {
       assert.deepEqual(
         types,
         ["heading_open", "text", "heading_close"],
-        "should return the nodes until the given opening node is closed"
+        "should return the nodes until the given opening node is closed",
       )
     })
 
@@ -75,7 +75,7 @@ suite("ast.NodeList", function () {
       const result = list.nodesOfTypes("anchor_open", "code_open")
       assert.deepEqual(
         result.map(node => node.type),
-        ["anchor_open", "code_open"]
+        ["anchor_open", "code_open"],
       )
     })
     test("opening nodes", function () {
@@ -86,7 +86,7 @@ suite("ast.NodeList", function () {
       const result = list.nodesOfTypes("anchor_open")
       assert.deepEqual(
         result.map(node => node.type),
-        ["anchor_open"]
+        ["anchor_open"],
       )
     })
   })

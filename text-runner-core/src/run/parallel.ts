@@ -14,7 +14,7 @@ export function parallel(
   actionFinder: actions.Finder,
   targets: linkTargets.List,
   configuration: configuration.Data,
-  emitter: commands.Command
+  emitter: commands.Command,
 ): Promise<boolean>[] {
   const result: Promise<boolean>[] = []
   for (const activity of activities) {

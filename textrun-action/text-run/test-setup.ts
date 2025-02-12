@@ -16,13 +16,13 @@ export default async function testSetup(action: textRunner.actions.Args): Promis
   "version": "0.0.0",
   "type": "module",
   "exports": "./index.js"
-}`
+}`,
   )
   await fs.writeFile(
     action.configuration.workspace.joinStr("index.js"),
     `\
 export const textrunActions = {
   "${action1}": function() { console.log(1) }
-}`
+}`,
   )
 }

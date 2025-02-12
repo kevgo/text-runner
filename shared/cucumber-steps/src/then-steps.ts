@@ -188,7 +188,7 @@ Then(
       encoding: "utf8",
     })
     assertNoDiff.trimmedLines(expectedContent, actualContent, "MISMATCHING FILE CONTENT!")
-  }
+  },
 )
 
 Then("it doesn't print:", function (this: TRWorld, expectedText: string) {
@@ -356,7 +356,7 @@ Then(
   async function (this: TRWorld, fileName: string, expectedContent: string) {
     const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
     assert.equal(actualContent.trim(), expectedContent.trim())
-  }
+  },
 )
 
 Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name: string) {

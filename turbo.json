@@ -1,15 +1,15 @@
 {
   "$schema": "https://turborepo.org/schema.json",
-  "pipeline": {
+  "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["src/*.ts", "src/**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "tsconfig.json", "package.json"],
       "outputs": ["dist/**"],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "clean": {
       "outputs": [],
-      "outputMode": "new-only",
+      "outputLogs": "new-only",
       "cache": false
     },
     "cuke": {
@@ -24,20 +24,20 @@
         "package.json"
       ],
       "outputs": [],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "doc": {
       "dependsOn": ["build"],
       "inputs": ["*.md", "**/*.md", "**/*.ts", ":!:**.test.ts", "text-run.yml"],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "fix": {
       "outputs": [],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "lint": {
       "outputs": [],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     },
     "test": {
       "dependsOn": ["build", "unit", "cuke", "doc"],
@@ -47,7 +47,7 @@
       "dependsOn": ["build"],
       "inputs": ["**/*.ts", ".mocharc.yml", "package.json"],
       "outputs": [],
-      "outputMode": "new-only"
+      "outputLogs": "new-only"
     }
   },
   "globalDependencies": ["tsconfig.json", "package.json", "yarn.lock"]

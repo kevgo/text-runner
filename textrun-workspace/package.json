@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "assert-no-diff": "3.0.6",
-    "colorette": "2.0.19",
+    "colorette": "2.0.20",
     "text-runner-core": "6.0.0"
   },
   "devDependencies": {
@@ -26,6 +26,6 @@
     "text-runner": "6.0.0",
     "textrun-action": "0.2.0",
     "textrun-extension": "0.2.0",
-    "ts-node": "10.9.1"
+    "ts-node": "10.9.2"
   }
 }

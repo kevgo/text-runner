@@ -29,7 +29,6 @@ export default [
     },
     rules: {
       ...tslintPlugin.configs.recommended.rules,
-      "no-var": "off", // TODO: enable?
       "no-empty-function": "error",
       "prefer-const": [
         "error",

@@ -8,7 +8,7 @@ import sortKeys from "eslint-plugin-typescript-sort-keys"
 export default [
   {
     files: ["**/*.ts"],
-    ignores: ["**/node_modules/", ".git/", "**/dist/**", "shared/cucumber-steps/dist/"],
+    ignores: ["**/node_modules/", ".git/", "**/dist/**"],
     languageOptions: {
       ecmaVersion: 2021,
       sourceType: "module",

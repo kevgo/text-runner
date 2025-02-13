@@ -52,8 +52,8 @@ suite("Actions", function () {
     })
     test("actions registered", function () {
       const actions = new Actions()
-      actions.register("two", function () { })
-      actions.register("one", function () { })
+      actions.register("two", function () {})
+      actions.register("one", function () {})
       assert.deepEqual(actions.names(), ["one", "two"])
     })
   })
@@ -64,8 +64,8 @@ suite("Actions", function () {
     })
     test("actions registered", function () {
       const actions = new Actions()
-      actions.register("two", function () { })
-      actions.register("one", function () { })
+      actions.register("two", function () {})
+      actions.register("one", function () {})
       assert.equal(actions.size(), 2)
     })
   })

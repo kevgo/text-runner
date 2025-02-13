@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "fix": "eslint . --fix --ext=.ts --ignore-path=../../.eslintignore && prettier --write .",
-    "lint": "prettier -l . && eslint . --ext=.ts --ignore-path=../../.eslintignore && depcheck --config=../../.depcheckrc",
+    "fix": "eslint . --fix && prettier --write .",
+    "lint": "prettier -l . && eslint . && depcheck --config=../../.depcheckrc",
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },
   "devDependencies": {

@@ -46,6 +46,7 @@ export default [
       "@typescript-eslint/no-implied-eval": "off",
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off", // TODO: enable?
+      "@typescript-eslint/no-unsafe-call": "error",
     },
   },
 ]

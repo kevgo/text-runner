@@ -30,6 +30,13 @@ export default [
     rules: {
       ...eslintPlugin.configs.recommended.rules,
       "no-var": "off",
+      "prefer-const": [
+        "error",
+        {
+          destructuring: "any",
+          ignoreReadBeforeAssign: false,
+        },
+      ],
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "typescript-sort-keys/interface": "error",

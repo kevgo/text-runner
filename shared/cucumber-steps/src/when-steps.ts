@@ -14,7 +14,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: s
   let observer = new textRunner.ActivityCollector(command)
   // eval the given code
   // @ts-expect-error
-  // eslint-disable-next-line prefer-const
+  // eslint-disable-next-line prefer-const,no-empty-function
   let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) { }
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)

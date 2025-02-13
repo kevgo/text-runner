@@ -30,7 +30,7 @@ Given("a runnable file {string}", async function (this: TRWorld, filePath: strin
     try {
       await fs.stat(subdirPath)
       subdirExists = true
-    } catch (_) {
+    } catch (e) {
       // nothing to do here
     }
     if (!subdirExists) {

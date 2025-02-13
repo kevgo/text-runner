@@ -10,7 +10,7 @@ export default [
     files: ["**/*.ts"],
     ignores: ["**/node_modules/", ".git/", "**/dist/**"],
     languageOptions: {
-      ecmaVersion: 2021,
+      ecmaVersion: "latest",
       sourceType: "module",
       parser: tsParser,
       parserOptions: {

@@ -3,6 +3,7 @@
 import eslintPlugin from "@typescript-eslint/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
+import sortKeys from "eslint-plugin-typescript-sort-keys"
 
 export default [
   {
@@ -21,7 +22,11 @@ export default [
         process: "readonly",
       },
     },
-    plugins: { "@typescript-eslint": eslintPlugin, "simple-import-sort": simpleImportSort },
+    plugins: {
+      "@typescript-eslint": eslintPlugin,
+      "simple-import-sort": simpleImportSort,
+      "typescript-sort-keys": sortKeys,
+    },
     rules: {
       ...eslintPlugin.configs.recommended.rules,
       "no-var": "off",

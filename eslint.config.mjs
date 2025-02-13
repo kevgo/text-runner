@@ -43,16 +43,4 @@ export default [
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
-  // {
-  //   files: ["examples/custom-action-commonjs/text-run/hello-world.js"],
-  //   languageOptions: {
-  //     ecmaVersion: 2021,
-  //     sourceType: "commonjs",
-  //     globals: {
-  //       console: "readonly",
-  //       module: "readonly",
-  //       process: "readonly",
-  //     },
-  //   },
-  // },
 ]

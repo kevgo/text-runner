@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable no-empty-function */
 import { assert } from "chai"
 
 import { Actions } from "./actions.js"

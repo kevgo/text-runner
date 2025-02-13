@@ -19,8 +19,8 @@
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
     "doc": "text-run --format=summary",
-    "fix": "eslint . --fix --ext=.ts --ignore-path=../.eslintignore && prettier --write .",
-    "lint": "eslint . --ext=.ts --ignore-path=../.eslintignore && prettier -l . && depcheck",
+    "fix": "eslint . --fix && prettier --write .",
+    "lint": "eslint . && prettier -l . && depcheck",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./\\.git/ | grep -v \\./\\.vscode/ | grep -v \\./tmp/ | xargs scc",
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },

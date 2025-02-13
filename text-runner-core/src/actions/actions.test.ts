@@ -1,3 +1,4 @@
+/* eslint-disable no-empty-function */
 import { assert } from "chai"
 
 import { Actions } from "./actions.js"
@@ -51,9 +52,7 @@ suite("Actions", function () {
     })
     test("actions registered", function () {
       const actions = new Actions()
-      // eslint-disable-next-line no-empty-function
       actions.register("two", function () { })
-      // eslint-disable-next-line no-empty-function
       actions.register("one", function () { })
       assert.deepEqual(actions.names(), ["one", "two"])
     })
@@ -65,9 +64,7 @@ suite("Actions", function () {
     })
     test("actions registered", function () {
       const actions = new Actions()
-      // eslint-disable-next-line no-empty-function
       actions.register("two", function () { })
-      // eslint-disable-next-line no-empty-function
       actions.register("one", function () { })
       assert.equal(actions.size(), 2)
     })

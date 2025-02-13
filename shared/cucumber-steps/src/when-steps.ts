@@ -8,14 +8,11 @@ import { TRWorld } from "./world.js"
 When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
   const config: textRunner.configuration.APIData = { sourceDir: workspace.absPath.platformified() }
   // define a few variables here, they will be overwritten in the eval call
-  // eslint-disable-next-line prefer-const
   let command = new textRunner.commands.Run(config)
-  // eslint-disable-next-line prefer-const
   let observer = new textRunner.ActivityCollector(command)
   // eval the given code
   // @ts-expect-error
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const, @typescript-eslint/no-empty-function
-  let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) {}
+  let asyncFunc = async function (tr: typeof textRunner, ac: typeof ActivityCollector) { }
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
   //       directly would be more elegant here but somehow doesn't work on Node 14.

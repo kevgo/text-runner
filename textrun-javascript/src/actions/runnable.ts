@@ -19,7 +19,6 @@ export function runnable(action: textRunner.actions.Args, done: textRunner.expor
 
   // This is used in an eval'ed string below
   // @ts-ignore: unused variable
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const __finished = done
 
   code = hasCallbackPlaceholder(code)

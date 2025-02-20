@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "fix": "eslint . --fix && prettier --write .",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
     "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
     "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
   },

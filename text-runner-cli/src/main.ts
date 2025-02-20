@@ -1,4 +1,3 @@
-import cliCursor from "cli-cursor"
 import { endChildProcesses } from "end-child-processes"
 import * as textRunner from "text-runner-core"
 
@@ -7,9 +6,7 @@ import * as commands from "./commands/index.js"
 import * as configFile from "./config-file.js"
 import * as formatters from "./formatters/index.js"
 
-export async function main() {
-  cliCursor.hide()
-
+export async function main(): Promise<number> {
   let errorCount = 0
   try {
     const { commandName, cmdLineConfig, debugSubcommand } = cmdLine.parse(process.argv)
@@ -37,5 +34,5 @@ export async function main() {
   } finally {
     await endChildProcesses()
   }
-  process.exit(errorCount)
+  return errorCount
 }

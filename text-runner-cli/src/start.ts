@@ -1,5 +1,6 @@
+import cliCursor from "cli-cursor"
 import { main } from "./main.js"
 
-main().catch(function (e) {
-  throw e
-})
+cliCursor.hide()
+let errorCount = await main()
+process.exit(errorCount)

@@ -12,9 +12,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "exports": "./dist/api.js",
-  "bin": {
-    "text-run": "./dist/start.js"
-  },
+  "bin": "./dist/start.js",
   "files": [
     "bin",
     "dist/**/*.js",

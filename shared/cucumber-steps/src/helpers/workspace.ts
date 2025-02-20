@@ -16,6 +16,7 @@ export const absPath = new textRunner.files.AbsoluteDirPath(workspacePath)
 
 /** provides the path of the workspace to use */
 export function dirPath(cwd: string, dirname: string, cucumberWorkerId: string): string {
+  console.log("1111111111111111111111111111111", cucumberWorkerId)
   let dir = path.basename(cwd)
   dir = dir.replace("text-runner-", "")
   dir = dir.replace("textrun-", "")

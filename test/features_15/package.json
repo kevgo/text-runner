@@ -1,0 +1,11 @@
+{
+  "name": "test-features-15",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "text-runner": "6.0.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.3"
+  }
+}

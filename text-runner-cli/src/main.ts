@@ -6,10 +6,10 @@ import * as commands from "./commands/index.js"
 import * as configFile from "./config-file.js"
 import * as formatters from "./formatters/index.js"
 
-export async function main(): Promise<number> {
+export async function main(argv: string[]): Promise<number> {
   let errorCount = 0
   try {
-    const { commandName, cmdLineConfig, debugSubcommand } = cmdLine.parse(process.argv)
+    const { commandName, cmdLineConfig, debugSubcommand } = cmdLine.parse(argv)
     const fileConfig = await configFile.load(cmdLineConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = commands.instantiate(commandName, userConfig, debugSubcommand)

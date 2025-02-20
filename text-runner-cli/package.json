@@ -13,7 +13,7 @@
   "main": "./dist/index.js",
   "exports": "./dist/api.js",
   "bin": {
-    "text-run": "./bin/text-run.mjs"
+    "text-run": "./dist/start.js"
   },
   "files": [
     "bin",

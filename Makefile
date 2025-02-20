@@ -1,6 +1,5 @@
-# Lerna terminology:
-# - dependents = downstreams (my dependents, those that are dependent on me)
-# - dependencies = upstreams (my dependencies, those that I depend on)
+# dev tooling and versions
+RUN_THAT_APP_VERSION = 0.13.0
 
 YARN_ARGS = FORCE_COLOR=1
 
@@ -36,8 +35,8 @@ setup:  # prepares the mono-repo for development after cloning
 	yarn
 	make --no-print-directory build
 
-stats:  # shows code statistics
-	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs scc
+stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
+	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
 ps:  # pitstop
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix test --concurrency=100%
@@ -52,6 +51,14 @@ update:  # updates the dependencies for the entire mono-repo
 unit:  # runs all tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run unit --concurrency=100%
 
+
+# --- HELPER TARGETS --------------------------------------------------------------------------------------------------------------------------------
+
+tools/rta@${RUN_THAT_APP_VERSION}:
+	@rm -f tools/rta* tools/rta
+	@(cd tools && curl https://raw.githubusercontent.com/kevgo/run-that-app/main/download.sh | sh)
+	@mv tools/rta tools/rta@${RUN_THAT_APP_VERSION}
+	@ln -s rta@${RUN_THAT_APP_VERSION} tools/rta
 
 .SILENT:
 .DEFAULT_GOAL := help

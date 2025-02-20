@@ -23,7 +23,7 @@ fix:  # runs all auto-fixes
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix --concurrency=100%
 
 help:  # prints all make targets
-	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' |grep -v '.SILENT' | grep -v help | sed 's/:.*#/#/' | column -s "#" -t
+	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint --concurrency=100%

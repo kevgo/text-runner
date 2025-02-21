@@ -20,7 +20,6 @@
     "textrun-make": "0.2.0",
     "textrun-npm": "0.2.0",
     "textrun-shell": "0.2.0",
-    "textrun-workspace": "0.2.0",
-    "tsx": "4.19.3"
+    "textrun-workspace": "0.2.0"
   }
 }

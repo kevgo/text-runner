@@ -24,7 +24,7 @@ export function parse(argv: string[]): {
   ) {
     argv.splice(0, 1)
   }
-  if (argv[0]?.endsWith("start.js")) {
+  if (argv[0]?.endsWith("text-runner")) {
     argv.splice(0, 1)
   }
 

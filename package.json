@@ -58,5 +58,5 @@
   "peerDependencies": {
     "ts-node": ">10.9.0"
   },
-  "packageManager": "yarn@1.22.22"
+  "packageManager": "yarn@4.6.0"
 }

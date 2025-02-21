@@ -26,6 +26,6 @@
     "text-runner": "6.0.0",
     "textrun-action": "0.2.0",
     "textrun-extension": "0.2.0",
-    "ts-node": "10.9.2"
+    "tsx": "4.19.3"
   }
 }

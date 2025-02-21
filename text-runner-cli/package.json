@@ -35,7 +35,7 @@
     "end-child-processes": "1.0.3",
     "minimist": "1.2.8",
     "text-runner-core": "6.0.0",
-    "ts-node": "10.9.2",
+    "tsx": "4.19.3",
     "yamljs": "0.3.0"
   },
   "devDependencies": {

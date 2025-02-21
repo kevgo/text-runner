@@ -5,7 +5,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "doc": "text-run static --format=summary && text-run dynamic --format=progress",
+    "doc": "../text-runner-cli/bin/text-runner static --format=summary && ../text-runner-cli/bin/text-runner dynamic --format=progress",
     "fix": "prettier --write .",
     "lint": "prettier -l . && depcheck --config=../.depcheckrc"
   },

@@ -11,7 +11,7 @@
   "author": "Kevin Goslar",
   "type": "module",
   "exports": "./dist/api.js",
-  "bin": "./bin/text-runner.mjs",
+  "bin": "./bin/text-runner",
   "files": [
     "bin",
     "dist"
@@ -19,7 +19,7 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "doc": "node dist/start.js --format=summary",
+    "doc": "bin/text-runner --format=summary",
     "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
     "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",

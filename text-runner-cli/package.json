@@ -10,7 +10,6 @@
   "license": "ISC",
   "author": "Kevin Goslar",
   "type": "module",
-  "main": "./dist/index.js",
   "exports": "./dist/api.js",
   "bin": "./bin/text-runner.mjs",
   "files": [

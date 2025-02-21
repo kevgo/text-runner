@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/mocharc",
   "loader": "ts-node/esm",
   "recursive": true,
   "ui": "tdd"

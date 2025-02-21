@@ -13,7 +13,7 @@ including macOS, Windows, and Linux. To get started:
     "type": "module",
     "devDependencies": {
       "text-runner": "6.0.0",
-      "ts-node": "10.9.1"
+      "tsx": "4.19.3"
     }
   }
   ```
@@ -23,7 +23,7 @@ including macOS, Windows, and Linux. To get started:
 - install TextRunner:
 
   <pre type="shell/command">
-  npm install -D text-runner ts-node
+  npm install -D text-runner tsx
   </pre>
 
 - make sure it works by running:

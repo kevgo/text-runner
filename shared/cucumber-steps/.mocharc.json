@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/mocharc",
   "node-option": ["import=tsx"],
   "recursive": true,
   "ui": "tdd"

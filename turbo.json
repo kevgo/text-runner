@@ -3,33 +3,31 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputLogs": "new-only"
+      "cache": false
     },
     "clean": {
-      "outputLogs": "new-only",
       "cache": false
     },
     "cuke": {
       "dependsOn": ["build"],
-      "outputLogs": "new-only"
+      "cache": false
     },
     "doc": {
       "dependsOn": ["build"],
-      "outputLogs": "new-only"
+      "cache": false
     },
     "fix": {
-      "outputLogs": "new-only"
+      "cache": false
     },
     "lint": {
-      "outputLogs": "new-only"
+      "cache": false
     },
     "test": {
       "dependsOn": ["build", "unit", "cuke", "doc"],
-      "outputs": []
+      "cache": false
     },
     "unit": {
-      "dependsOn": ["build"],
-      "outputLogs": "new-only"
+      "dependsOn": ["build"]
     }
   }
 }

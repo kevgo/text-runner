@@ -41,9 +41,12 @@ stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 ps:  # pitstop
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix test --concurrency=100%
 
-test:  # runs all tests for the root directory
+test:  # runs all tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run test --concurrency=100%
 .PHONY: test
+
+retest:  # runs all tests uncached
+	env $(YARN_ARGS) yarn exec --silent -- turbo run test --force $(TURBO_ARGS)
 
 update:  # updates the dependencies for the entire mono-repo
 	yarn upgrade-interactive --latest

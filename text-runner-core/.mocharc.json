@@ -1,0 +1,5 @@
+{
+  "loader": "ts-node/esm",
+  "recursive": true,
+  "ui": "tdd"
+}

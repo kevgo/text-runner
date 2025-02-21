@@ -24,7 +24,10 @@ export async function executeCLI(
   const runResult = (await runner.waitForEnd()) as observableProcess.FinishedProcess
   if (runResult.exitCode && !expectError) {
     // unexpected failure
-    console.log(runner.output.fullText())
+    console.log("UNEXPECTED TEST FAILURE\n")
+    console.log("OUTPUT START")
+    console.log(runner.output.fullText());
+    console.log("OUTPUT END")
     throw new Error(`Expected success but got exit code: ${runResult.exitCode}`)
   }
   if (expectError && !runResult.exitCode) {

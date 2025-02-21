@@ -27,7 +27,8 @@
       "cache": false
     },
     "unit": {
-      "dependsOn": ["build"]
+      "dependsOn": ["build"],
+      "cache": false
     }
   }
 }

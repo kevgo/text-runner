@@ -18,8 +18,8 @@ export function parse(argv: string[]): {
   if (
     path.basename(argv[0] || "") === "node" ||
     path.win32.basename(argv[0] || "") === "node.exe" ||
-    argv[0]?.includes("node_modules/ts-node") ||
-    argv[0]?.includes("node_modules\\ts-node") ||
+    argv[0]?.includes("node_modules/tsx") ||
+    argv[0]?.includes("node_modules\\tsx") ||
     argv[0]?.startsWith("/usr/bin/node")
   ) {
     argv.splice(0, 1)

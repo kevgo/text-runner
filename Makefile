@@ -2,7 +2,7 @@
 RUN_THAT_APP_VERSION = 0.13.0
 
 YARN_ARGS = FORCE_COLOR=1
-TURBO_ARGS = --concurrency=0%
+TURBO_ARGS = --concurrency=1%
 
 build:  # builds all codebases
 	env $(YARN_ARGS) yarn exec --silent -- turbo run build $(TURBO_ARGS)

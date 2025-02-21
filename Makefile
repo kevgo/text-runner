@@ -51,6 +51,7 @@ retest:  # runs all tests uncached
 
 update:  # updates the dependencies for the entire mono-repo
 	yarn upgrade-interactive --latest
+	# yarn up
 
 unit:  # runs all tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run unit $(TURBO_ARGS)

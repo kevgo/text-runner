@@ -19,8 +19,12 @@ export function parse(argv: string[]): {
     path.basename(argv[0] || "") === "node" ||
     path.win32.basename(argv[0] || "") === "node.exe" ||
     argv[0]?.includes("node_modules/ts-node") ||
-    argv[0]?.includes("node_modules\\ts-node")
+    argv[0]?.includes("node_modules\\ts-node") ||
+    argv[0]?.startsWith("/usr/bin/node")
   ) {
+    argv.splice(0, 1)
+  }
+  if (argv[0]?.endsWith("text-runner")) {
     argv.splice(0, 1)
   }
 

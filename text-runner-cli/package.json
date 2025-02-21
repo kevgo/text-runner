@@ -12,7 +12,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "exports": "./dist/api.js",
-  "bin": "./dist/start.js",
+  "bin": "./bin/text-runner.mjs",
   "files": [
     "bin",
     "dist/**/*.js",
@@ -21,7 +21,7 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "doc": "text-run --format=summary",
+    "doc": "node dist/start.js --format=summary",
     "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
     "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",

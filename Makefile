@@ -12,6 +12,7 @@ rebuild:  # rebuilds all codebases even if their already exist
 
 clean:  # remove all build artifacts
 	env $(YARN_ARGS) yarn exec -- turbo run clean $(TURBO_ARGS)
+	find . -name .turbo -type d | xargs rm -rf
 	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests

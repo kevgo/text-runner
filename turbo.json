@@ -3,40 +3,24 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["src/*.ts", "src/**/*.ts", ":!:src/*.test.ts", ":!:src/**/*.test.ts", "tsconfig.json", "package.json"],
-      "outputs": ["dist/**"],
       "outputLogs": "new-only"
     },
     "clean": {
-      "outputs": [],
       "outputLogs": "new-only",
       "cache": false
     },
     "cuke": {
       "dependsOn": ["build"],
-      "inputs": [
-        "**/*.feature",
-        "src/*.ts",
-        "src/**/*.ts",
-        ":!:src/*.test.ts",
-        ":!:src/**/*.test.ts",
-        "cucumber.cjs",
-        "package.json"
-      ],
-      "outputs": [],
       "outputLogs": "new-only"
     },
     "doc": {
       "dependsOn": ["build"],
-      "inputs": ["*.md", "**/*.md", "**/*.ts", ":!:**.test.ts", "text-run.yml"],
       "outputLogs": "new-only"
     },
     "fix": {
-      "outputs": [],
       "outputLogs": "new-only"
     },
     "lint": {
-      "outputs": [],
       "outputLogs": "new-only"
     },
     "test": {
@@ -45,10 +29,7 @@
     },
     "unit": {
       "dependsOn": ["build"],
-      "inputs": ["**/*.ts", ".mocharc.yml", "package.json"],
-      "outputs": [],
       "outputLogs": "new-only"
     }
-  },
-  "globalDependencies": ["tsconfig.json", "package.json", "yarn.lock"]
+  }
 }

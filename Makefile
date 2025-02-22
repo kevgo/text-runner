@@ -20,6 +20,7 @@ cuke:  # runs all E2E tests
 
 doc:  # runs the documentation tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- text-run
 
 fix:  # runs all auto-fixes
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)

@@ -8022,6 +8022,8 @@ __metadata:
     end-child-processes: "npm:1.0.3"
     globby: "npm:14.1.0"
     observable-process: "npm:8.0.0-pre4"
+    prettier: "npm:3.5.1"
+    prettier-plugin-packagejson: "npm:2.5.8"
     ps-tree: "npm:1.2.0"
     strip-ansi: "npm:7.1.0"
     text-runner-core: "npm:6.0.0"

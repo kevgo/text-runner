@@ -12,8 +12,8 @@
 
 </div>
 
-Text-Runner is a test framework for user-facing documentation. It helps keep documentation up to date.
-An example is the text you are reading right now.
+Text-Runner is a test framework for user-facing documentation. It helps keep
+documentation up to date. An example is the text you are reading right now.
 TextRunner verifies it for technical correctness.
 
 If you tell it how, TextRunner can read and understand any form of

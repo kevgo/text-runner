@@ -12,6 +12,7 @@
     "cuke:smoke": "cucumber-js --tags=@smoke --format=progress '**/*.feature'"
   },
   "devDependencies": {
+    "@cucumber/cucumber": "11.2.0",
     "shared-cucumber-steps": "0.0.0",
     "text-runner-core": "6.0.0",
     "textrun-javascript": "0.2.0"

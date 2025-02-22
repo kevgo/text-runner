@@ -8689,6 +8689,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "text-runner-features@workspace:text-runner-features"
   dependencies:
+    "@cucumber/cucumber": "npm:11.2.0"
     shared-cucumber-steps: "npm:0.0.0"
     text-runner-core: "npm:6.0.0"
     textrun-javascript: "npm:0.2.0"

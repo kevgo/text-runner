@@ -34,6 +34,7 @@ publish: clean setup  # publishes all code bases
 	yarn exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning
+	corepack enable
 	yarn
 	make --no-print-directory build
 

@@ -1,60 +1,59 @@
 # dev tooling and versions
 RUN_THAT_APP_VERSION = 0.13.0
 
-YARN_ARGS = FORCE_COLOR=1
 TURBO_ARGS = --concurrency=100%
 
 build:  # builds all codebases
-	env $(YARN_ARGS) yarn exec --silent -- turbo run build $(TURBO_ARGS)
+	npm exec -- turbo run build $(TURBO_ARGS)
 
 rebuild:  # rebuilds all codebases even if their already exist
-	env $(YARN_ARGS) yarn exec --silent -- turbo run build --force $(TURBO_ARGS)
+	npm exec --silent -- turbo run build --force $(TURBO_ARGS)
 
 clean:  # remove all build artifacts
-	env $(YARN_ARGS) yarn exec --silent -- turbo run clean $(TURBO_ARGS)
+	npm exec --silent -- turbo run clean $(TURBO_ARGS)
 	find . -name .turbo -type d | xargs rm -rf
 	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
-	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke $(TURBO_ARGS)
+	npm exec --silent -- turbo run cuke $(TURBO_ARGS)
 
 doc:  # runs the documentation tests
-	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
+	npm exec --silent -- turbo run doc $(TURBO_ARGS)
 
 fix:  # runs all auto-fixes
-	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
+	npm exec --silent -- turbo run fix $(TURBO_ARGS)
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints the root directory
-	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
+	npm exec --silent -- turbo run lint $(TURBO_ARGS)
 
 publish: clean setup  # publishes all code bases
-	yarn exec -- lerna publish from-package
+	npm exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning
-	yarn
+	npm install
 	make --no-print-directory build
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
 ps:  # pitstop
-	env $(YARN_ARGS) yarn exec --silent -- turbo run fix test $(TURBO_ARGS)
+	npm exec --silent -- turbo run fix test $(TURBO_ARGS)
 
 test:  # runs all tests cached
-	env $(YARN_ARGS) yarn exec --silent -- turbo run test $(TURBO_ARGS)
+	npm exec --silent -- turbo run test $(TURBO_ARGS)
 .PHONY: test
 
 retest:  # runs all tests uncached
-	env $(YARN_ARGS) yarn exec --silent -- turbo run test --force $(TURBO_ARGS)
+	npm exec --silent -- turbo run test --force $(TURBO_ARGS)
 
 update:  # updates the dependencies for the entire mono-repo
-	yarn upgrade-interactive --latest
+	npm upgrade-interactive --latest
 
 unit:  # runs all tests
-	env $(YARN_ARGS) yarn exec --silent -- turbo run unit $(TURBO_ARGS)
+	npm exec --silent -- turbo run unit $(TURBO_ARGS)
 
 
 # --- HELPER TARGETS --------------------------------------------------------------------------------------------------------------------------------

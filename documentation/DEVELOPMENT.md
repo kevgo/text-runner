@@ -7,7 +7,6 @@ This guide is for all codebases in this mono-repo.
 You need to have these tools installed:
 
 - [Node.js](https://nodejs.org) version 10 or later
-- [Yarn](https://yarnpkg.com)
 - Gnu Make - the `make` command should exist on your machine
 - to see code statistics: [scc](https://github.com/boyter/scc)
 

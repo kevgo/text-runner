@@ -9,8 +9,8 @@
     "lint": "prettier -l ."
   },
   "dependencies": {
-    "text-runner": "6.0.0",
-    "textrun-shell": "0.2.0"
+    "text-runner": "6.0.1",
+    "textrun-shell": "0.2.1"
   },
   "devDependencies": {
     "tsx": "4.19.3"

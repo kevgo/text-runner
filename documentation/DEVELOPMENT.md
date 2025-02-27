@@ -68,7 +68,7 @@ versions.
 ## Deployment
 
 - bump the versions by running `lerna version <patch|minor|major> --no-private`
-- make a global search-and-replace for "6.0.0" and "0.2.0" replace it with the
+- make a global search-and-replace for "6.0.1" and "0.2.1" replace it with the
   new version
 - get this change into the `main` branch
 - run <code type="make/command" dir="..">make publish</code>

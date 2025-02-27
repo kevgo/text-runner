@@ -1,10 +1,10 @@
 # dev tooling and versions
 RUN_THAT_APP_VERSION = 0.13.0
 
-TURBO_ARGS = --concurrency=100%
+TURBO_ARGS = --concurrency=1
 
 build:  # builds all codebases
-	npm exec -- turbo run build $(TURBO_ARGS)
+	npm run --workspaces build
 
 clean:  # remove all build artifacts
 	npm exec --silent -- turbo run clean $(TURBO_ARGS)

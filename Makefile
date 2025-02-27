@@ -6,9 +6,6 @@ TURBO_ARGS = --concurrency=100%
 build:  # builds all codebases
 	npm exec -- turbo run build $(TURBO_ARGS)
 
-rebuild:  # rebuilds all codebases even if their already exist
-	npm exec --silent -- turbo run build --force $(TURBO_ARGS)
-
 clean:  # remove all build artifacts
 	npm exec --silent -- turbo run clean $(TURBO_ARGS)
 	find . -name .turbo -type d | xargs rm -rf
@@ -45,9 +42,6 @@ ps:  # pitstop
 test:  # runs all tests cached
 	npm exec --silent -- turbo run test $(TURBO_ARGS)
 .PHONY: test
-
-retest:  # runs all tests uncached
-	npm exec --silent -- turbo run test --force $(TURBO_ARGS)
 
 update:  # updates the dependencies for the entire mono-repo
 	npm upgrade-interactive --latest

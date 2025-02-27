@@ -13,7 +13,7 @@ clean:  # remove all build artifacts
 	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
-	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke --concurrency=1
 
 doc:  # runs the documentation tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
@@ -37,8 +37,8 @@ setup:  # prepares the mono-repo for development after cloning
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
-test:  # runs all tests cached
-	env $(YARN_ARGS) yarn exec --silent -- turbo run test $(TURBO_ARGS)
+test: lint unit cuke doc  # runs all tests
+# need to run the tests separately because of a concurrency bug in npm, which is called by yarn
 .PHONY: test
 
 update:  # updates the dependencies for the entire mono-repo

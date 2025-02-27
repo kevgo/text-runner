@@ -12,7 +12,7 @@ clean:  # remove all build artifacts
 	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
-	npm exec -- turbo run cuke $(TURBO_ARGS)
+	npm run cuke --workspaces --if-present
 
 doc:  # runs the documentation tests
 	npm exec -- turbo run doc $(TURBO_ARGS)

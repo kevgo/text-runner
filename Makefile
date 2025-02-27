@@ -36,9 +36,6 @@ setup:  # prepares the mono-repo for development after cloning
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
-ps:  # pitstop
-	npm exec -- turbo run fix test $(TURBO_ARGS)
-
 test:  # runs all tests cached
 	npm exec -- turbo run test $(TURBO_ARGS)
 .PHONY: test

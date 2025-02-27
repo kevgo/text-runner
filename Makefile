@@ -40,8 +40,8 @@ stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 ps:  # pitstop
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix test $(TURBO_ARGS)
 
-test:  # runs all tests cached
-	env $(YARN_ARGS) yarn exec --silent -- turbo run test $(TURBO_ARGS)
+test: lint unit cuke doc  # runs all tests
+# need to run the tests separately because of a concurrency bug in npm, which is called by yarn
 .PHONY: test
 
 update:  # updates the dependencies for the entire mono-repo

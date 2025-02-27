@@ -5,11 +5,10 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "cuke": "cucumber-js --tags='(not @online) and (not @todo)' --format=progress --parallel=$(node -e 'console.log(os.cpus().length)') '**/*.feature'",
-    "tt": "cpus=$(node -e 'console.log(os.cpus().length)') && echo $cpus",
-    "cuke:api": "cucumber-js --tags='(not @online) and (not @todo) and (@api)' --format=progress --parallel=$(node -e 'console.log(os.cpus().length)') '**/*.feature'",
-    "cuke:cli": "cucumber-js --tags='(not @online) and (not @todo) and (@cli)' --format=progress --parallel=$(node -e 'console.log(os.cpus().length)') '**/*.feature'",
-    "cuke:online": "cucumber-js --tags='(not @todo) and @online' --format=progress --parallel=$(node -e 'console.log(os.cpus().length)')",
+    "cuke": "cucumber-js --tags='(not @online) and (not @todo) and (not @cli)' --format=progress --parallel=`node -e 'console.log(os.cpus().length)'` '**/*.feature' && npm run cuke:cli",
+    "cuke:api": "cucumber-js --tags='(not @online) and (not @todo) and (@api)' --format=progress --parallel=`node -e 'console.log(os.cpus().length)'` '**/*.feature'",
+    "cuke:cli": "cucumber-js --tags='(not @online) and (not @todo) and (@cli)' --format=progress '**/*.feature'",
+    "cuke:online": "cucumber-js --tags='(not @todo) and @online' --format=progress --parallel=`node -e 'console.log(os.cpus().length)`",
     "cuke:smoke": "cucumber-js --tags=@smoke --format=progress '**/*.feature'"
   },
   "devDependencies": {

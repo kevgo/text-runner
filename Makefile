@@ -4,10 +4,10 @@ RUN_THAT_APP_VERSION = 0.13.0
 TURBO_ARGS = --concurrency=1
 
 build:  # builds all codebases
-	npm run --workspaces build
+	npm run --workspaces --if-present build
 
 clean:  # remove all build artifacts
-	npm exec --silent -- turbo run clean $(TURBO_ARGS)
+	npm run clean $(TURBO_ARGS)
 	find . -name .turbo -type d | xargs rm -rf
 	find . -name node_modules -type d | xargs rm -rf
 

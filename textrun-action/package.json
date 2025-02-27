@@ -1,6 +1,6 @@
 {
   "name": "textrun-action",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -15,10 +15,10 @@
     "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc"
   },
   "dependencies": {
-    "text-runner-core": "6.0.0"
+    "text-runner-core": "^6.0.1"
   },
   "devDependencies": {
-    "text-runner": "6.0.0",
+    "text-runner": "^6.0.1",
     "tsx": "4.19.3"
   }
 }

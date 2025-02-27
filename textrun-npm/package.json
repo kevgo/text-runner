@@ -18,14 +18,14 @@
   },
   "dependencies": {
     "colorette": "2.0.20",
-    "text-runner-core": "^6.0.1"
+    "text-runner-core": "6.0.1"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "^6.0.1",
-    "textrun-action": "^0.2.1",
-    "textrun-extension": "^0.2.1",
-    "textrun-workspace": "^0.2.1",
+    "text-runner": "6.0.1",
+    "textrun-action": "0.2.1",
+    "textrun-extension": "0.2.1",
+    "textrun-workspace": "0.2.1",
     "tsx": "4.19.3"
   }
 }

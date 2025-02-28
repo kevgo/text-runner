@@ -14,6 +14,7 @@ Feature: show-skipped option
       | FILENAME | LINE | ACTION     |
       | 1.md     | 3    | check-link |
 
+  # TODO: add @cli and @api tags
   Scenario: default CLI setting
     When running Text-Runner
     Then it prints:
@@ -52,9 +53,11 @@ Feature: show-skipped option
       | 1.md     | 3    | link to local file 1.md         | success |
 
   Scenario: disable via CLI
-    Given the source code contains a file "text-runner.yml" with content:
+    Given the source code contains a file "text-runner.jsonc" with content:
       """
-      show-skipped: true
+      {
+        "show-skipped": true
+      }
       """
     When running "text-runner --no-show-skipped"
     Then it prints:

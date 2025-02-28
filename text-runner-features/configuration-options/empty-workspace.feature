@@ -37,7 +37,9 @@ Feature: empty the workspace
   Scenario: disable via config file
     Given the text-runner configuration contains:
       """
-      emptyWorkspace: false
+      {
+        "emptyWorkspace": false
+      }
       """
     When running Text-Runner
     Then it prints:
@@ -57,7 +59,9 @@ Feature: empty the workspace
   Scenario: enable via CLI
     Given the text-runner configuration contains:
       """
-      emptyWorkspace: false
+      {
+        "emptyWorkspace": false
+      }
       """
     When running "text-runner --empty-workspace"
     Then it prints:

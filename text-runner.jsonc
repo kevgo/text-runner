@@ -1,0 +1,5 @@
+{
+  "files": "*.md",
+  "format": "progress",
+  "systemTmp": false
+}

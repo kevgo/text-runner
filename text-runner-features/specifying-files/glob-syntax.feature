@@ -8,7 +8,9 @@ Feature: finding files in certain directories only
     And a runnable file "foo/2.md"
     And the configuration file:
       """
-      files: '*.md'
+      {
+        "files": "*.md"
+      }
       """
 
   @cli

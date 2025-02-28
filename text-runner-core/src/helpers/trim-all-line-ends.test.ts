@@ -7,7 +7,7 @@ import { trimAllLineEnds } from "./trim-all-line-ends.js"
 suite("trimAllLineEnds", function () {
   const tests = {
     hello: "hello",
-    "one \n  two ": "one\n  two",
+    "one \n  two ": "one\n  two"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

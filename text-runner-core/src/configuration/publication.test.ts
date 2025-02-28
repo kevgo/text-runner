@@ -60,7 +60,7 @@ suite("Publication.publishes()", function () {
   const tests = [
     { pub: "/foo/bar", give: "/foo/bar", want: true },
     { pub: "/foo/bar", give: "/foo/bar/baz", want: true },
-    { pub: "/foo/other", give: "/foo/bar/baz", want: false },
+    { pub: "/foo/other", give: "/foo/bar/baz", want: false }
   ]
   for (const tt of tests) {
     test(`${tt.give}-${tt.pub}`, function () {
@@ -75,7 +75,7 @@ suite("Publication.resolve()", function () {
   const tests = [
     { desc: "other link", give: "/one/two.html", want: "one/two.md" },
     { desc: "published", give: "/blog/one.html", want: "content/posts/one.md" },
-    { desc: "with anchor", give: "/one/two.html#hello", want: "one/two.md" },
+    { desc: "with anchor", give: "/one/two.html#hello", want: "one/two.md" }
   ]
   for (const tt of tests) {
     test(tt.desc, function () {

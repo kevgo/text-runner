@@ -12,14 +12,14 @@ suite("UnknownLink", function () {
         desc: "relative link",
         link: "foo/bar.md",
         give: "/dir/file.md",
-        want: "/dir/foo/bar.md",
+        want: "/dir/foo/bar.md"
       },
       {
         desc: "absolute link",
         link: "/foo/bar.md",
         give: "/dir/file.md",
-        want: "/foo/bar.md",
-      },
+        want: "/foo/bar.md"
+      }
     ]
     for (const tt of tests) {
       test(tt.desc, function () {

@@ -9,7 +9,7 @@ suite("replaceVariableDeclarations", function () {
     "const foo = 123": "global.foo = 123",
     "let foo = 123": "global.foo = 123",
     "var foo = 123": "global.foo = 123",
-    "this.foo = 123": "global.foo = 123",
+    "this.foo = 123": "global.foo = 123"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

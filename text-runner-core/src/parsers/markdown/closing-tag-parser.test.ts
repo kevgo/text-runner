@@ -13,7 +13,7 @@ suite("ClosingTagParser.isClosingTag()", function () {
     "  </a> ": true,
     " < a  > ": false,
     "</a>": true,
-    "<a>": false,
+    "<a>": false
   }
   const parser = new ClosingTagParser(new TagMapper())
   for (const [input, expected] of Object.entries(testData)) {
@@ -33,7 +33,7 @@ test("ClosingTagParser.parse()", function () {
     file: location.file,
     line: location.line,
     tag: "/a",
-    type: "anchor_close",
+    type: "anchor_close"
   })
   assert.deepEqual(actual, expected)
 })

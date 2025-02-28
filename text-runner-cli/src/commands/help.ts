@@ -28,7 +28,7 @@ export class HelpCommand implements textRunner.commands.Command {
 
     return `${color.dim(`TextRunner ${pkg.version}`)}
 
-USAGE: ${color.bold("text-run [<options>] <command>")}
+USAGE: ${color.bold("text-runner [<options>] <command>")}
 
 COMMANDS
   ${color.bold("run")} [<filename>]         runs all tests on the given file/folder or entire documentation

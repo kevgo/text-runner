@@ -7,7 +7,7 @@ Feature: testing all docs in a subfolder
 
   @cli
   Scenario: testing all files in a subfolder via CLI
-    When running "text-run commands"
+    When running "text-runner commands"
     Then it runs only the tests in:
       | commands/foo.md     |
       | commands/bar/baz.md |

@@ -18,7 +18,7 @@ an example:
 ```js
 export default {
   binaries: {
-    "text-run": path.join(__dirname, "node_modules", ".bin", "text-run"),
+    "text-runner": path.join(__dirname, "node_modules", ".bin", "text-runner"),
   },
 }
 ```

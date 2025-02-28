@@ -23,7 +23,7 @@ Feature: configuring the class prefix
 
   @cli
   Scenario: regionMarker via config file
-    Given the source code contains a file "text-run.yml" with content:
+    Given the source code contains a file "text-runner.yml" with content:
       """
       regionMarker: custom
       """

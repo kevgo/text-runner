@@ -11,7 +11,7 @@ import * as run from "../run/index.js"
 import * as workspace from "../workspace/index.js"
 import * as command from "./index.js"
 
-/** executes "text-run run", prints everything, returns the number of errors encountered */
+/** executes "text-runner run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {
   userConfig: configuration.APIData
   emitter: EventEmitter

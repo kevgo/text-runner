@@ -10,7 +10,7 @@ Feature: Default file
       """
       Subfolder content
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.yml" with content:
       """
       defaultFile: start.md
       """
@@ -50,7 +50,7 @@ Feature: Default file
       """
       link to [posts](/blog/)
       """
-    Given the source code contains a file "text-run.yml" with content:
+    Given the source code contains a file "text-runner.yml" with content:
       """
       publications:
         - localPath: /guide/
@@ -74,7 +74,7 @@ Feature: Default file
       """
       Go guide
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.yml" with content:
       """
       publications:
         - localPath: /content

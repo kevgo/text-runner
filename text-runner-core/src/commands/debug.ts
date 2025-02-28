@@ -36,7 +36,7 @@ export class Debug implements Command {
     if (filenames.length !== 1) {
       const guidance = `Please tell me which file to debug
 
-Example: text-run debug --${this.subcommand} foo.md`
+Example: text-runner debug --${this.subcommand} foo.md`
       throw new UserError("no files specified", guidance)
     }
     const guidance = `possible subcommands are:
@@ -46,7 +46,7 @@ Example: text-run debug --${this.subcommand} foo.md`
 --links: embedded links
 --link-targets: document anchors to link to
 
-Example: text-run debug --images foo.md`
+Example: text-runner debug --images foo.md`
     const ASTs = await parsers.markdown.parse(filenames, config.sourceDir)
     switch (this.subcommand) {
       case "activities":

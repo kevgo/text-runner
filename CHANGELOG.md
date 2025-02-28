@@ -1,5 +1,9 @@
 # Change Log
 
+## 6.0.2
+
+This version removes outdated dependencies and adds bug fixes.
+
 ## 6.0.1
 
 This version updates dependencies and improves compatibility of the Text-Runner
@@ -15,6 +19,7 @@ executable.
   TextRunner Actions don't need to be an ESM module to use the new Text-Runner
   version
   ([upgrade instructions](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c)).
+- The binary name changes from `text-run` to `text-runner`.
 
 #### New features
 

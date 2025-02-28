@@ -11,14 +11,14 @@ Feature: selecting formatter via the config file
       """
 
   Scenario: select the formatter via CLI
-    When running "text-run --format=dot"
+    When running "text-runner --format=dot"
     Then it prints:
       """
       \.\.
       """
 
   Scenario: select an unknown formatter via CLI
-    When trying to run "text-run --format=zonk"
+    When trying to run "text-runner --format=zonk"
     Then the call fails with the error:
       """
       Unknown formatter: zonk

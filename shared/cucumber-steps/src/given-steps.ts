@@ -56,7 +56,7 @@ Given(
     await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
       recursive: true,
     })
-    await fs.writeFile(workspace.absPath.joinStr("text-run.yml"), configFileContent)
+    await fs.writeFile(workspace.absPath.joinStr("text-runner.yml"), configFileContent)
   }
 )
 
@@ -116,9 +116,9 @@ testable documentation
 })
 
 Given("the source code contains the HelloWorld action", async function (this: TRWorld) {
-  await fs.mkdir(workspace.absPath.joinStr("text-run"), { recursive: true })
+  await fs.mkdir(workspace.absPath.joinStr("text-runner"), { recursive: true })
   await fs.writeFile(
-    workspace.absPath.joinStr("text-run", "hello-world.js"),
+    workspace.absPath.joinStr("text-runner", "hello-world.js"),
     `
     export default (action) => action.log('Hello World!') `
   )
@@ -132,8 +132,8 @@ Given(
   }
 )
 
-Given("the text-run configuration contains:", async function (this: TRWorld, text: string) {
-  await fs.appendFile(workspace.absPath.joinStr("text-run.yml"), `\n${text}`)
+Given("the text-runner configuration contains:", async function (this: TRWorld, text: string) {
+  await fs.appendFile(workspace.absPath.joinStr("text-runner.yml"), `\n${text}`)
 })
 
 Given("the workspace contains a directory {string}", async function (this: TRWorld, dir: string) {
@@ -150,5 +150,5 @@ Given("the workspace contains an image {string}", async function (this: TRWorld,
 })
 
 Given("the configuration file:", async function (this: TRWorld, content: string) {
-  await fs.writeFile(workspace.absPath.joinStr("text-run.yml"), content)
+  await fs.writeFile(workspace.absPath.joinStr("text-runner.yml"), content)
 })

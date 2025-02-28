@@ -2,12 +2,12 @@
 Feature: generating a configuration file
 
   Scenario: setup via CLI
-    When running "text-run setup"
+    When running "text-runner setup"
     Then it prints:
       """
-      Created configuration file text-run.yml with default values
+      Created configuration file text-runner.yml with default values
       """
-    And it creates the file "text-run.yml" with content:
+    And it creates the file "text-runner.yml" with content:
       """
       # white-list for files to test
       # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer

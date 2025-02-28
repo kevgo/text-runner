@@ -20,7 +20,7 @@ Create a file **hello.md** with this content to test it.
 </a>
 
 When TextRunner encounters this region of type `hello-world`, it reads the file
-<a type="workspace/new-file">**text-run/hello-world.js** and runs the function
+<a type="workspace/new-file">**text-runner/hello-world.js** and runs the function
 exported by it. Let's create this file with the content:
 
 ```javascript
@@ -34,7 +34,7 @@ export default action => {
 Let's run Text-Runner:
 
 <pre type="shell/command">
-$ text-run
+$ text-runner
 </pre>
 
 The formatter displays test progress on the console as the test runs:
@@ -73,9 +73,9 @@ TextRunner supports all forms of JavaScript functions as actions:
   functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
 Examples for custom actions written in ESM are
-[here](../examples/custom-action-esm/text-run/hello-world.js). You can write
+[here](../examples/custom-action-esm/text-runner/hello-world.js). You can write
 functions in [TypeScript](../examples/custom-action-typescript/) or in classic
-[CommonJS](../examples/custom-action-commonjs/text-run/hello-world.js). Throw an
+[CommonJS](../examples/custom-action-commonjs/text-runner/hello-world.js). Throw an
 exception to fail a test.
 
 ## Accessing document content
@@ -109,7 +109,7 @@ nodes that provides helper methods to extract document content:
 
 </a>
 
-To see the node types run `text-run debug --ast <filename>` You can also iterate
+To see the node types run `text-runner debug --ast <filename>` You can also iterate
 <code type="action-arg">region</code> manually. Each element has these
 attributes:
 
@@ -140,7 +140,7 @@ echo "Hello world"
 </a>
 
 Here is the corresponding action, implemented in <a type="workspace/new-file">
-**text-run/console-command.ts** (we are using TypeScript this time):
+**text-runner/console-command.ts** (we are using TypeScript this time):
 
 ```typescript
 import * as child_process from "child_process"
@@ -173,7 +173,7 @@ const attr = action.region[0].attributes
 To see all custom activities that aren't currenly used, run:
 
 <pre type="textrunner-command">
-text-run unused
+text-runner unused
 </pre>
 
 <hr>

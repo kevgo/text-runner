@@ -28,7 +28,7 @@ export class Finder {
   static async load(sourceDir: files.SourceDir): Promise<Finder> {
     return new Finder(
       await loadBuiltinActions(),
-      await loadCustomActions(sourceDir.joinStr("text-run")),
+      await loadCustomActions(sourceDir.joinStr("text-runner")),
       new ExternalActionManager()
     )
   }
@@ -37,7 +37,7 @@ export class Finder {
   static async loadDynamic(sourceDir: files.SourceDir): Promise<Finder> {
     return new Finder(
       new Actions(),
-      await loadCustomActions(sourceDir.joinStr("text-run")),
+      await loadCustomActions(sourceDir.joinStr("text-runner")),
       new ExternalActionManager()
     )
   }
@@ -75,7 +75,7 @@ export class Finder {
       guidance += "No custom actions defined.\n"
     }
     guidance += `\nTo create a new "${activity.actionName}" action,\n`
-    guidance += `run "text-run scaffold ${activity.actionName}"\n`
+    guidance += `run "text-runner scaffold ${activity.actionName}"\n`
     throw new UserError(errorText, guidance, activity.location)
   }
 }

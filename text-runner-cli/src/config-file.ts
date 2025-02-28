@@ -12,7 +12,7 @@ export async function load(cmdLineArgs: config.Data): Promise<config.Data> {
 /** creates a new Text-Runner configuration file */
 export async function create(cmdLineArgs: config.Data): Promise<void> {
   await fs.writeFile(
-    cmdLineArgs.configFileName || "text-run.yml",
+    cmdLineArgs.configFileName || "text-runner.yml",
     `# white-list for files to test
 # This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
 # The folder "node_modules" is already excluded.
@@ -78,7 +78,7 @@ async function read(cmdLineArgs: config.Data): Promise<string> {
     }
   }
   try {
-    const result = await fs.readFile("text-run.yml", "utf8")
+    const result = await fs.readFile("text-runner.yml", "utf8")
     return result
   } catch (e) {
     return ""

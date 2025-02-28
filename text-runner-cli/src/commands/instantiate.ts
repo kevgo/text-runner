@@ -39,7 +39,7 @@ export function instantiate(
     default:
       throw new textRunner.UserError(
         `unknown command: ${commandName}`,
-        `Run "text-run help" for a list of all valid commands.`
+        `Run "text-runner help" for a list of all valid commands.`
       )
   }
 }

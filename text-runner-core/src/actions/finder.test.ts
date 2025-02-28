@@ -44,11 +44,11 @@ suite("actionFinder", function () {
   })
 
   suite("customActionFilePaths", function () {
-    test("with text-run folder of the documentation codebase", async function () {
-      const result = await customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-run"))
+    test("with text-runner folder of the documentation codebase", async function () {
+      const result = await customActionFilePaths(path.join(__dirname, "..", "..", "..", "documentation", "text-runner"))
       assert.lengthOf(result, 5)
-      assert.match(result[0], /text-run\/action-arg.ts$/)
-      assert.match(result[1], /text-run\/all-action-args.ts$/)
+      assert.match(result[0], /text-runner\/action-arg.ts$/)
+      assert.match(result[1], /text-runner\/all-action-args.ts$/)
     })
   })
 
@@ -58,9 +58,9 @@ suite("actionFinder", function () {
   })
 
   suite("loadCustomActions", function () {
-    test("with text-run folder of this codebase", async function () {
+    test("with text-runner folder of this codebase", async function () {
       const result = await loadCustomActions(
-        path.join(__dirname, "..", "..", "..", "examples", "custom-action-esm", "text-run")
+        path.join(__dirname, "..", "..", "..", "examples", "custom-action-esm", "text-runner")
       )
       assert.typeOf(result.get("hello-world-sync"), "function")
     })

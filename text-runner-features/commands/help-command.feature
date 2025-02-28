@@ -2,7 +2,7 @@
 Feature: help command
 
   Scenario:
-    When running "text-run help"
+    When running "text-runner help"
     Then it prints:
       """
       USAGE: .*

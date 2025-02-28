@@ -30,12 +30,12 @@ Feature: ignore link patterns
     Given the source code contains a file "1.md" with content:
       """
       a [placeholder link]($PLACEHOLDER)
-      a [normal link](text-runner.yml)
+      a [normal link](text-runner.jsonc)
       """
     When running Text-Runner
     Then it prints:
       """
-      1.md:2 -- link to local file text-runner.yml
+      1.md:2 -- link to local file text-runner.jsonc
       """
     And it doesn't print:
       """

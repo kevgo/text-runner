@@ -24,10 +24,7 @@ export class Data {
   workspace?: string // path of the workspace to use
 
   constructor(data: Partial<Data> = {}) {
-    for (const [key, value] of Object.entries(data)) {
-      // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
-      this[key] = value
-    }
+    Object.assign(this, data)
   }
 
   /**

@@ -24,10 +24,7 @@ export class Data {
   workspace?: string // path of the workspace to use
 
   constructor(data: Partial<Data> = {}) {
-    for (const [key, value] of Object.entries(data)) {
-      // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
-      this[key] = value
-    }
+    Object.assign(this, data)
   }
 
   /**
@@ -38,13 +35,13 @@ export class Data {
     const result = new Data()
     for (const [key, value] of Object.entries(this)) {
       if (value != null) {
-        // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
+        // @ts-expect-error `key` has the correct type here
         result[key] = value
       }
     }
     for (const [key, value] of Object.entries(other)) {
       if (value != null) {
-        // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
+        // @ts-expect-error `key` has the correct type here
         result[key] = value
       }
     }

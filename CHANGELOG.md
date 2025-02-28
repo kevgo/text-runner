@@ -2,7 +2,8 @@
 
 ## 6.0.1
 
-This version updates dependencies and improves compatibility of the Text-Runner executable.
+This version updates dependencies and improves compatibility of the Text-Runner
+executable.
 
 ## 6.0.0
 

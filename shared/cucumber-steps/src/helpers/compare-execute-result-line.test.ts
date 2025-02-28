@@ -1,5 +1,6 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+
+import { assert } from "chai"
 
 import { ExecuteResultLine } from "../then-steps.js"
 import { compareExecuteResultLine } from "./compare-execute-result-line.js"

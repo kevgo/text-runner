@@ -1,5 +1,6 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+
+import { assert } from "chai"
 
 import * as files from "../filesystem/index.js"
 import { normalizeActionName } from "./normalize-action-name.js"

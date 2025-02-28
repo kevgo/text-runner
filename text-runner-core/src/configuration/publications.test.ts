@@ -1,5 +1,6 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+
+import { assert } from "chai"
 
 import * as files from "../filesystem/full-path.js"
 import { Publications } from "./publications.js"

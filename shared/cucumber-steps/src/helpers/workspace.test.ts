@@ -1,5 +1,6 @@
-import { strict as assert } from "assert"
 import { suite, test } from "node:test"
+
+import { strict as assert } from "assert"
 
 import { dirPath } from "./workspace.js"
 

@@ -1,7 +1,8 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 import * as path from "path"
 import * as url from "url"
-import { suite, test } from "node:test"
 
 import * as activities from "../activities/index.js"
 import { Actions } from "./actions.js"

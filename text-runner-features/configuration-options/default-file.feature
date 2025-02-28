@@ -92,6 +92,7 @@ Feature: Default file
           }
         ],
         "defaultFile": "index.md"
+      }
       """
     When running Text-Runner
     Then it prints:

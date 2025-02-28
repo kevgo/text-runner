@@ -14,6 +14,7 @@ Feature: show-skipped option
       | FILENAME | LINE | ACTION     |
       | 1.md     | 3    | check-link |
 
+  # TODO: add @cli and @api tags
   Scenario: default CLI setting
     When running Text-Runner
     Then it prints:

@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
-import * as textRunner from "text-runner-core"
 import * as jsonc from "jsonc-reader"
+import * as textRunner from "text-runner-core"
 
 import * as config from "./configuration.js"
 

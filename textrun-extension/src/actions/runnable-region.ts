@@ -13,7 +13,7 @@ export async function runnableRegion(action: textRunner.actions.Args): Promise<v
   const command = new textRunner.commands.Run({
     sourceDir: action.configuration.workspace.platformified(),
     workspace: ".",
-    emptyWorkspace: false,
+    emptyWorkspace: false
   })
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()

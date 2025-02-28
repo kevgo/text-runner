@@ -13,5 +13,5 @@ export const textrunActions: textRunner.exports.TextrunActions = {
   newFile,
   existingDirectory,
   existingFile,
-  newDirectory,
+  newDirectory
 }

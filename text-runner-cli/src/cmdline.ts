@@ -50,7 +50,7 @@ export function parse(argv: string[]): {
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
-    scaffoldLanguage: parseScaffoldSwitches(cliArgs),
+    scaffoldLanguage: parseScaffoldSwitches(cliArgs)
   })
   if (cliArgs["system-tmp"] != null) {
     cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])

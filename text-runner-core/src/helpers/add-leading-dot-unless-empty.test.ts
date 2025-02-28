@@ -8,7 +8,7 @@ suite("addLeadingDotUnlessEmpty", function () {
   const tests = {
     foo: ".foo",
     ".foo": ".foo",
-    "": "",
+    "": ""
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} ==> ${want}`, function () {

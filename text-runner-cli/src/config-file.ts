@@ -105,6 +105,6 @@ function parse(fileContent: string): config.Data {
     publications: fileData.publications,
     showSkipped: fileData.showSkipped,
     systemTmp: fileData.systemTmp,
-    workspace: fileData.workspace,
+    workspace: fileData.workspace
   })
 }

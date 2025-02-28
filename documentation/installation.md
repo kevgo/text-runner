@@ -99,7 +99,7 @@ This creates a configuration file called <a type="workspace/existing-file">
   "online": false,
 
   // whether to delete all files in the workspace folder before running the tests
-  "emptyWorkspace": true,
+  "emptyWorkspace": true
 }
 ```
 

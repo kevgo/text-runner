@@ -29,7 +29,9 @@ Feature: selecting formatter via the config file
   Scenario Outline: select the formatter via config file
     Given the configuration file:
       """
-      format: <FORMATTER>
+      {
+        "format": "<FORMATTER>"
+      }
       """
     When running Text-Runner
     Then it prints:
@@ -49,7 +51,9 @@ Feature: selecting formatter via the config file
     Given my workspace contains testable documentation
     And the configuration file:
       """
-      format: zonk
+      {
+        "format": "zonk"
+      }
       """
     When trying to run Text-Runner
     Then the call fails with the error:

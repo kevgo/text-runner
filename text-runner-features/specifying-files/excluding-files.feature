@@ -9,7 +9,9 @@ Feature: excluding files
   Scenario: excluding via config file
     Given the configuration file:
       """
-      exclude: 'foo'
+      {
+        "exclude": "foo"
+      }
       """
     When running Text-Runner
     Then it prints:

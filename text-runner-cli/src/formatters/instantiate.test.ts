@@ -1,5 +1,6 @@
 import { assert } from "chai"
 import * as textRunner from "text-runner-core"
+import { suite, test } from "node:test"
 
 import { DetailedFormatter } from "./detailed-formatter.js"
 import { DotFormatter } from "./dot-formatter.js"
@@ -29,7 +30,7 @@ suite("instantiateFormatter()", function () {
     assert.instanceOf(have, SummaryFormatter)
   })
 
-  test("request unknown formatter", function (done) {
+  test("request unknown formatter", function (context, done) {
     let err: textRunner.UserError
     try {
       // @ts-expect-error "zonk" is not allowed here

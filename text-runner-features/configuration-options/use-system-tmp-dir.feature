@@ -23,7 +23,9 @@ Feature: separate working directory
   Scenario: running in the default local temp directory via config file
     Given the text-runner configuration contains:
       """
-      systemTmp: false
+      {
+        "systemTmp": false
+      }
       """
     When running Text-Runner
     Then it runs in the local "tmp" directory
@@ -33,8 +35,10 @@ Feature: separate working directory
   Scenario: running in a custom local temp directory via config file
     Given the text-runner configuration contains:
       """
-      systemTmp: false
-      workspace: foo
+      {
+        "systemTmp": false,
+        "workspace": "foo"
+      }
       """
     When running Text-Runner
     Then it runs in the local "foo" directory
@@ -44,7 +48,9 @@ Feature: separate working directory
   Scenario: running in the default local temp directory via CLI
     Given the text-runner configuration contains:
       """
-      systemTmp: true
+      {
+        "systemTmp": true
+      }
       """
     When running "text-runner --no-system-tmp"
     Then it runs in the local "tmp" directory
@@ -54,8 +60,10 @@ Feature: separate working directory
   Scenario: running in a custom local temp directory via CLI
     Given the text-runner configuration contains:
       """
-      systemTmp: true
-      workspace: foo
+      {
+        "systemTmp": true,
+        "workspace": "foo"
+      }
       """
     When running "text-runner --no-system-tmp --workspace=bar"
     Then it runs in the local "bar" directory
@@ -87,7 +95,9 @@ Feature: separate working directory
   Scenario: running in the default global temp directory via config file
     Given the text-runner configuration contains:
       """
-      systemTmp: true
+      {
+        "systemTmp": true
+      }
       """
     When running Text-Runner
     Then it runs in a global temp directory
@@ -97,8 +107,10 @@ Feature: separate working directory
   Scenario: running in a custom global temp directory via config file
     Given the text-runner configuration contains:
       """
-      systemTmp: true
-      workspace: foo
+      {
+        "systemTmp": true,
+        "workspace": foo
+      }
       """
     When running Text-Runner
     Then it runs in the global "foo" temp directory

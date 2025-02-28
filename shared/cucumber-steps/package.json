@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
     "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
+    "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "devDependencies": {
     "@types/ps-tree": "1.1.6",

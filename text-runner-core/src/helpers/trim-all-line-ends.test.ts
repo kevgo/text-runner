@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 
 import { trimAllLineEnds } from "./trim-all-line-ends.js"

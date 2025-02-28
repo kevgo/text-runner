@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 
 import { replaceRequireLocalModule } from "./replace-require-local-module.js"

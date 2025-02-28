@@ -1,4 +1,6 @@
 /* eslint-disable no-empty-function */
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 
 import { Actions } from "./actions.js"

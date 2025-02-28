@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 import * as path from "path"
 import * as url from "url"
@@ -51,7 +53,6 @@ suite("actionFinder", function () {
   })
 
   test("loadBuiltinActions", async function () {
-    this.timeout(20_000)
     const result = await loadBuiltinActions()
     assert.deepEqual(result.names(), ["check-image", "check-link", "test"])
   })

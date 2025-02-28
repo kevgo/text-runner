@@ -1,3 +1,5 @@
+import { test } from "node:test"
+
 import { expect } from "chai"
 
 import * as helpers from "./index.js"

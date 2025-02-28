@@ -14,7 +14,7 @@
     "doc": "text-run static --format=summary && text-run dynamic --format=progress",
     "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
     "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
+    "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
     "assert-no-diff": "3.0.6",

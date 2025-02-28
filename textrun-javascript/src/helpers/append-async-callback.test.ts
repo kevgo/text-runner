@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 
 import { appendAsyncCallback } from "./append-async-callback.js"

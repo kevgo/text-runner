@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 
 import { addLeadingDotUnlessEmpty } from "./add-leading-dot-unless-empty.js"

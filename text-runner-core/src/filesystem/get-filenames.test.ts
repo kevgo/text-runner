@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { expect } from "chai"
 
 import * as files from "./index.js"

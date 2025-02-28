@@ -1,3 +1,5 @@
+import { suite, test } from "node:test"
+
 import { assert } from "chai"
 
 import { name } from "./name.js"
@@ -7,6 +9,8 @@ suite("getActionName()", function () {
     "/users/foo/text-runner/text-run/cdBack.js": "cd-back",
   }
   for (const [give, want] of Object.entries(tests)) {
-    assert.equal(name(give), want)
+    test(give, () => {
+      assert.equal(name(give), want)
+    })
   }
 })

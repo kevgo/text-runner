@@ -99,7 +99,7 @@ This creates a configuration file called <a type="workspace/existing-file">
   "online": false,
 
   // whether to delete all files in the workspace folder before running the tests
-  "emptyWorkspace": true
+  "emptyWorkspace": true,
 }
 ```
 
@@ -107,8 +107,8 @@ This creates a configuration file called <a type="workspace/existing-file">
 
 ### Using a custom configuration file
 
-By default Text-Runner uses a file `text-runner.jsonc` as the configuration file.
-You can tell it to use another configuration file with the `--config`
+By default Text-Runner uses a file `text-runner.jsonc` as the configuration
+file. You can tell it to use another configuration file with the `--config`
 command-line switch:
 
 ```

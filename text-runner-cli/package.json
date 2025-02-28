@@ -22,8 +22,8 @@
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
     "doc": "text-run --format=summary",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
-    "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write . && sort-package-json --quiet",
+    "lint": "prettier -l . && sort-package-json --check && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },

@@ -5,8 +5,8 @@
   "module": "commonjs",
   "scripts": {
     "doc": "text-run --format=progress",
-    "fix": "prettier --write .",
-    "lint": "prettier -l ."
+    "fix": "prettier --write . && sort-package-json --quiet",
+    "lint": "prettier -l . && sort-package-json --check"
   },
   "devDependencies": {
     "text-runner": "6.0.1",

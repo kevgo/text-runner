@@ -109,7 +109,7 @@ Feature: separate working directory
       """
       {
         "systemTmp": true,
-        "workspace": foo
+        "workspace": "foo"
       }
       """
     When running Text-Runner

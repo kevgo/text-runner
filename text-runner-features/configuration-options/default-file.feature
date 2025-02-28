@@ -12,7 +12,9 @@ Feature: Default file
       """
     And the source code contains a file "text-runner.jsonc" with content:
       """
-      defaultFile: start.md
+      {
+        "defaultFile": "start.md"
+      }
       """
     When running Text-Runner
     Then it prints:
@@ -52,11 +54,15 @@ Feature: Default file
       """
     Given the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /guide/
-          publicPath: /blog
-          publicExtension: ''
-      defaultFile: 'index.md'
+      {
+        "publications": [
+          {
+            "localPath": "/guide/",
+            "publicPath": "/blog",
+            "publicExtension": ""
+        ],
+        "defaultFile": "index.md"
+      }
       """
     When running Text-Runner
     Then it prints:
@@ -76,11 +82,15 @@ Feature: Default file
       """
     And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content
-          publicPath: /
-          publicExtension: ''
-      defaultFile: index.md
+      {
+        "publications": [
+          {
+            "localPath": "/content",
+            "publicPath": "/",
+            "publicExtension": ""
+          }
+        ],
+        "defaultFile": "index.md"
       """
     When running Text-Runner
     Then it prints:

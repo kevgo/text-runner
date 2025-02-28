@@ -36,5 +36,5 @@ Feature: specifying the configuration filename
   Scenario: providing a non-existing configuration filename via CLI
     When trying to run "text-runner --config=zonk.jsonc"
     Then the test fails with:
-      | ERROR MESSAGE | cannot read configuration file "zonk.yml" |
-      | EXIT CODE     | 1                                         |
+      | ERROR MESSAGE | cannot read configuration file "zonk.jsonc" |
+      | EXIT CODE     | 1                                           |

@@ -1,6 +1,5 @@
 ignores:
   - "@cucumber/cucumber"
-  - mocha
   - chai
   - documentation
   - custom-action-commonjs

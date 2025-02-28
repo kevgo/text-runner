@@ -10,30 +10,22 @@
       "request": "launch",
       "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
       "cwd": "${workspaceFolder}/text-runner",
-      "args": [
-        "src/**/*.test.ts"
-      ],
-      "outFiles": [
-        "${workspaceRoot}/src/*.test.ts"
-      ]
+      "args": ["src/**/*.test.ts"],
+      "outFiles": ["${workspaceRoot}/src/*.test.ts"]
     },
     {
       "name": "run text-runner",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/src/index.ts",
-      "outFiles": [
-        "${workspaceFolder}/dist/**"
-      ]
+      "outFiles": ["${workspaceFolder}/dist/**"]
     },
     {
       "name": "cuke hard-coded file",
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/node_modules/.bin/cucumber-js",
-      "args": [
-        "actions/custom/skipping.feature:10"
-      ],
+      "args": ["actions/custom/skipping.feature:10"],
       "cwd": "${workspaceFolder}/text-runner-features",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",

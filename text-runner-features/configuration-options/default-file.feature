@@ -60,6 +60,7 @@ Feature: Default file
             "localPath": "/guide/",
             "publicPath": "/blog",
             "publicExtension": ""
+          }
         ],
         "defaultFile": "index.md"
       }

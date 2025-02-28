@@ -20,6 +20,7 @@ doc:  # runs the documentation tests
 
 fix:  # runs all auto-fixes
 	yarn exec --silent -- prettier --write .
+	yarn exec --silent -- sort-package-json --quiet
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
 
 help:  # prints all make targets

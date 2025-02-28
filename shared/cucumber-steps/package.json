@@ -7,8 +7,8 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
-    "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write . && sort-package-json --quite",
+    "lint": "prettier -l . && sort-package-json --check && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "devDependencies": {

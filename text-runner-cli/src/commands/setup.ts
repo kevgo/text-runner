@@ -20,7 +20,7 @@ export class SetupCommand implements textRunner.commands.Command {
 
   async execute(): Promise<void> {
     await configFile.create(this.config)
-    this.emit("output", `Created configuration file ${color.cyan("text-run.yml")} with default values`)
+    this.emit("output", `Created configuration file ${color.cyan("text-runner.yml")} with default values`)
   }
 
   on(name: textRunner.events.Name, handler: textRunner.events.Handler): this {

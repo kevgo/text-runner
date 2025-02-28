@@ -28,10 +28,10 @@ export function parse(argv: string[]): {
     argv.splice(0, 1)
   }
 
-  // remove text-run parameter
+  // remove text-runner parameter
   const unixBasename = path.basename(argv[0] || "")
   const winBasename = path.win32.basename(argv[0] || "")
-  if (unixBasename === "text-run" || winBasename === "text-run.cmd" || winBasename === "text-run.mjs") {
+  if (unixBasename === "text-runner" || winBasename === "text-runner.cmd" || winBasename === "text-runner.mjs") {
     argv.splice(0, 1)
   }
   // remove optional CLI parameter
@@ -46,7 +46,7 @@ export function parse(argv: string[]): {
     configFileName: cliArgs.config,
     emptyWorkspace: cliArgs["empty-workspace"],
     exclude: cliArgs.exclude,
-    files: cliArgs._[1], // after the command can be a filename, as in "text-run debug foo.md"
+    files: cliArgs._[1], // after the command can be a filename, as in "text-runner debug foo.md"
     formatterName: cliArgs.format,
     online: cliArgs.online,
     workspace: cliArgs.workspace,
@@ -59,7 +59,7 @@ export function parse(argv: string[]): {
     cmdLineConfig.showSkipped = parseSystemTmp(cliArgs["show-skipped"])
   }
 
-  // handle special case where text-run is called without a command, as in "text-run foo.md"
+  // handle special case where text-runner is called without a command, as in "text-runner foo.md"
   if (!commands.names().includes(commandName)) {
     cmdLineConfig.files = commandName
     commandName = "run"
@@ -87,7 +87,7 @@ function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): textRunner.commands
     throw new textRunner.UserError(
       "Missing or invalid debug subcommand",
       `Valid debug subcommands are: ${textRunner.commands.DebugSubCommandValues.join(", ")}.
-Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"`
+Please provide the debug subcommands as switches, e.g. "text-runner debug --ast README.md"`
     )
   }
 }

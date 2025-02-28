@@ -30,7 +30,7 @@ Feature: show-skipped option
       """
 
   Scenario: enable via CLI
-    When running "text-run --show-skipped"
+    When running "text-runner --show-skipped"
     Then it prints:
       """
       1.md:1 -- skipping: link to http://google.com
@@ -52,11 +52,11 @@ Feature: show-skipped option
       | 1.md     | 3    | link to local file 1.md         | success |
 
   Scenario: disable via CLI
-    Given the source code contains a file "text-run.yml" with content:
+    Given the source code contains a file "text-runner.yml" with content:
       """
       show-skipped: true
       """
-    When running "text-run --no-show-skipped"
+    When running "text-runner --no-show-skipped"
     Then it prints:
       """
       1.md:3 -- link to local file 1.md

@@ -26,7 +26,7 @@ export class ScaffoldCommand implements textRunner.commands.Command {
   }
 
   async execute(): Promise<void> {
-    const dirPath = path.join(this.sourceDir || ".", "text-run")
+    const dirPath = path.join(this.sourceDir || ".", "text-runner")
     let textRunDirExists = true
     try {
       await fs.stat(dirPath)

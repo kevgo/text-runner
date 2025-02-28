@@ -8,7 +8,7 @@ suite("parseCmdlineArgs()", function () {
   test("with unix <node> call", function () {
     const have = cmdLine.parse([
       "/usr/local/Cellar/node/9.3.0_1/bin/node",
-      "/Users/kevlar/d/text-runner/bin/text-run",
+      "/Users/kevlar/d/text-runner/bin/text-runner",
       "run",
     ])
     assert.equal(have.commandName, "run")
@@ -18,25 +18,25 @@ suite("parseCmdlineArgs()", function () {
   test("with windows <node> call", function () {
     const have = cmdLine.parse([
       "C:\\Program Files (x86)\\nodejs\\node.exe",
-      "C:\\projects\\text-runner\\bin\\text-run.cmd\\..\\..\\dist\\index.js",
+      "C:\\projects\\text-runner\\bin\\text-runner.cmd\\..\\..\\dist\\index.js",
       "run",
     ])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)
   })
 
-  test("with <node> and <text-run> call", function () {
+  test("with <node> and <text-runner> call", function () {
     const have = cmdLine.parse([
       "/usr/local/Cellar/node/9.3.0_1/bin/node",
-      "/Users/kevlar/d/text-runner/bin/text-run",
+      "/Users/kevlar/d/text-runner/bin/text-runner",
       "run",
     ])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)
   })
 
-  test("with <text-run> call", function () {
-    const have = cmdLine.parse(["/Users/kevlar/d/text-runner/bin/text-run", "run"])
+  test("with <text-runner> call", function () {
+    const have = cmdLine.parse(["/Users/kevlar/d/text-runner/bin/text-runner", "run"])
     assert.equal(have.commandName, "run")
     assert.isUndefined(have.cmdLineConfig.files)
   })

@@ -8,7 +8,7 @@ Feature: "online" option
       <a href="http://google.com">Google</a>
       <img src="http://google.com/foo.png">
       """
-    When running "text-run --online"
+    When running "text-runner --online"
     Then it signals:
       | MESSAGE | link to http://google.com |
     And it signals:

@@ -41,6 +41,6 @@ Feature: Execute regions of semantic Markdown
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME  | LINE | ACTION                    | STATUS  | ERROR TYPE | ERROR MESSAGE        | GUIDANCE                                                                                   |
-      | source.md | 1    | extension/runnable-region | success |            |                      |                                                                                            |
-      | source.md | 4    | zonk                      | failed  | UserError  | unknown action: zonk | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-run scaffold zonk" |
+      | FILENAME  | LINE | ACTION                    | STATUS  | ERROR TYPE | ERROR MESSAGE        | GUIDANCE                                                                                      |
+      | source.md | 1    | extension/runnable-region | success |            |                      |                                                                                               |
+      | source.md | 4    | zonk                      | failed  | UserError  | unknown action: zonk | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-runner scaffold zonk" |

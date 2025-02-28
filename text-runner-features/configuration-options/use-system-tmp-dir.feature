@@ -1,7 +1,7 @@
 Feature: separate working directory
 
   Background:
-    Given the source code contains a file "text-run/print-cwd.js" with content:
+    Given the source code contains a file "text-runner/print-cwd.js" with content:
       """
       export default (action) => {
         action.log(process.cwd())
@@ -21,7 +21,7 @@ Feature: separate working directory
 
   @cli
   Scenario: running in the default local temp directory via config file
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
       systemTmp: false
       """
@@ -31,7 +31,7 @@ Feature: separate working directory
 
   @cli
   Scenario: running in a custom local temp directory via config file
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
       systemTmp: false
       workspace: foo
@@ -42,22 +42,22 @@ Feature: separate working directory
 
   @cli
   Scenario: running in the default local temp directory via CLI
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
       systemTmp: true
       """
-    When running "text-run --no-system-tmp"
+    When running "text-runner --no-system-tmp"
     Then it runs in the local "tmp" directory
 
 
   @cli
   Scenario: running in a custom local temp directory via CLI
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
       systemTmp: true
       workspace: foo
       """
-    When running "text-run --no-system-tmp --workspace=bar"
+    When running "text-runner --no-system-tmp --workspace=bar"
     Then it runs in the local "bar" directory
 
 
@@ -85,7 +85,7 @@ Feature: separate working directory
 
   @cli
   Scenario: running in the default global temp directory via config file
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
       systemTmp: true
       """
@@ -95,7 +95,7 @@ Feature: separate working directory
 
   @cli
   Scenario: running in a custom global temp directory via config file
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
       systemTmp: true
       workspace: foo
@@ -106,13 +106,13 @@ Feature: separate working directory
 
   @cli
   Scenario: running in the default global temp directory via CLI
-    When running "text-run --system-tmp *.md"
+    When running "text-runner --system-tmp *.md"
     Then it runs in a global temp directory
 
 
   @cli
   Scenario: running in a custom global temp directory via CLI
-    When running "text-run --system-tmp --workspace=foo *.md"
+    When running "text-runner --system-tmp --workspace=foo *.md"
     Then it runs in the global "foo" temp directory
 
 

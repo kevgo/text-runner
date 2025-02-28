@@ -5,7 +5,7 @@ Feature: specifying the configuration filename
   Calling via API doesn't load configuration files
 
   Background:
-    Given the source code contains a file "text-run-1.yml" with content:
+    Given the source code contains a file "text-runner-1.yml" with content:
       """
       files: 1.md
       """
@@ -21,7 +21,7 @@ Feature: specifying the configuration filename
       """
 
   Scenario: providing a configuration filename via CLI
-    When running "text-run --config=text-run-1.yml"
+    When running "text-runner --config=text-runner-1.yml"
     Then it prints:
       """
       1.md:1 -- link to local heading #foo
@@ -32,7 +32,7 @@ Feature: specifying the configuration filename
       """
 
   Scenario: providing a non-existing configuration filename via CLI
-    When trying to run "text-run --config=zonk.yml"
+    When trying to run "text-runner --config=zonk.yml"
     Then the test fails with:
       | ERROR MESSAGE | cannot read configuration file "zonk.yml" |
       | EXIT CODE     | 1                                         |

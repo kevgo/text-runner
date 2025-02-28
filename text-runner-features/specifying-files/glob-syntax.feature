@@ -13,7 +13,7 @@ Feature: finding files in certain directories only
 
   @cli
   Scenario: selecting files via CLI
-    When running "text-run foo/*.md"
+    When running "text-runner foo/*.md"
     Then it runs only the tests in:
       | foo/1.md |
       | foo/2.md |

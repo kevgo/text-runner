@@ -19,7 +19,7 @@ Feature: ignore link patterns
 
   @cli
   Scenario: regex via CLI
-    Given the source code contains a file "text-run.yml" with content:
+    Given the source code contains a file "text-runner.yml" with content:
       """
       ignoreLinkTargets:
         - "^\\$"
@@ -27,12 +27,12 @@ Feature: ignore link patterns
     Given the source code contains a file "1.md" with content:
       """
       a [placeholder link]($PLACEHOLDER)
-      a [normal link](text-run.yml)
+      a [normal link](text-runner.yml)
       """
     When running Text-Runner
     Then it prints:
       """
-      1.md:2 -- link to local file text-run.yml
+      1.md:2 -- link to local file text-runner.yml
       """
     And it doesn't print:
       """

@@ -29,7 +29,7 @@ including macOS, Windows, and Linux. To get started:
 - make sure it works by running:
 
   <pre type="shell/command">
-  text-run help
+  text-runner help
   </pre>
 
 This gives you an out-of-the-box installation of TextRunner, which checks that
@@ -45,11 +45,11 @@ To scaffold a config file, open a terminal, go to the folder where you want to
 configure TextRunner, and run:
 
 <pre type="shell/command">
-$ text-run setup
+$ text-runner setup
 </pre>
 
 This creates a configuration file called <a type="workspace/existing-file">
-**text-run.yml** that looks like this:
+**text-runner.yml** that looks like this:
 
 ```yml
 # white-list for files to test
@@ -105,12 +105,12 @@ emptyWorkspace: true
 
 ### Using a custom configuration file
 
-By default Text-Runner uses a file `text-run.yml` as the configuration file. You
-can tell it to use another configuration file with the `--config` command-line
-switch:
+By default Text-Runner uses a file `text-runner.yml` as the configuration file.
+You can tell it to use another configuration file with the `--config`
+command-line switch:
 
 ```
-$ text-run --config=my-config.yml
+$ text-runner --config=my-config.yml
 ```
 
 <hr>

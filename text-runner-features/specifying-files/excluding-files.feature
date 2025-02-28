@@ -25,7 +25,7 @@ Feature: excluding files
 
   @cli
   Scenario: excluding via CLI
-    When running "text-run --exclude=foo"
+    When running "text-runner --exclude=foo"
     Then it prints:
       """
       bar/2.md:1 -- Test

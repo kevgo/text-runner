@@ -33,7 +33,7 @@
     "cli-progress": "3.12.0",
     "colorette": "2.0.20",
     "end-child-processes": "1.0.3",
-    "jsonc-reader": "0.1.0",
+    "jsonc-reader": "0.1.2",
     "minimist": "1.2.8",
     "text-runner-core": "6.0.1",
     "tsx": "4.19.3"

@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import * as textRunner from "text-runner-core"
-import * as yaml from "yaml"
+import * as jsonc from "jsonc-reader"
 
 import * as config from "./configuration.js"
 
@@ -92,7 +92,7 @@ function parse(fileContent: string): config.Data {
   if (fileContent === "") {
     return new config.Data({})
   }
-  const fileData = yaml.parse(fileContent)
+  const fileData = jsonc.parse(fileContent)
   return new config.Data({
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,

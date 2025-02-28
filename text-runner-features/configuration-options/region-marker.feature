@@ -23,9 +23,11 @@ Feature: configuring the class prefix
 
   @cli
   Scenario: regionMarker via config file
-    Given the source code contains a file "text-runner.yml" with content:
+    Given the source code contains a file "text-runner.jsonc" with content:
       """
-      regionMarker: custom
+      {
+        "regionMarker": "custom"
+      }
       """
     When running Text-Runner
     Then it prints:

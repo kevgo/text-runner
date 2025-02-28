@@ -19,10 +19,13 @@ Feature: ignore link patterns
 
   @cli
   Scenario: regex via CLI
-    Given the source code contains a file "text-runner.yml" with content:
+    Given the source code contains a file "text-runner.jsonc" with content:
       """
-      ignoreLinkTargets:
-        - "^\\$"
+      {
+        "ignoreLinkTargets": [
+          "^\\$"
+        ]
+      }
       """
     Given the source code contains a file "1.md" with content:
       """

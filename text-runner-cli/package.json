@@ -41,7 +41,6 @@
   "devDependencies": {
     "@types/babel__code-frame": "7.0.6",
     "@types/cli-progress": "3.11.6",
-    "@types/minimist": "1.2.5",
-    "@types/yamljs": "0.2.34"
+    "@types/minimist": "1.2.5"
   }
 }

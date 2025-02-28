@@ -30,7 +30,7 @@ suite("FullLink", function () {
   suite(".directory()", function () {
     const tests = [
       { desc: "file path", give: "/dir/file.md", want: "/dir/" },
-      { desc: "directory path", give: "/dir/", want: "/dir/" },
+      { desc: "directory path", give: "/dir/", want: "/dir/" }
     ]
     for (const tt of tests) {
       test(tt.desc, function () {
@@ -80,8 +80,8 @@ suite("FullLink", function () {
         {
           localPath: "/content/posts",
           publicExtension: "html",
-          publicPath: "/blog",
-        },
+          publicPath: "/blog"
+        }
       ])
       const localized = link.localize(publications, "")
       assert.equal(localized.unixified(), "content/posts/two.md")
@@ -93,8 +93,8 @@ suite("FullLink", function () {
         {
           localPath: "/content/posts",
           publicExtension: "html",
-          publicPath: "/blog",
-        },
+          publicPath: "/blog"
+        }
       ])
       const localized = link.localize(publications, "")
       assert.equal(localized.unixified(), "content/posts/two.md", "should remove the anchor")

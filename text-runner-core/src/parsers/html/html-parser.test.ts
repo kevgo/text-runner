@@ -9,7 +9,7 @@ suite("standardizeHTMLAttributes", function () {
   test("values", function () {
     const input: parse5.Token.Attribute[] = [
       { name: "one", value: "1" },
-      { name: "two", value: "2" },
+      { name: "two", value: "2" }
     ]
     const expected = { one: "1", two: "2" }
     assert.deepEqual(standardizeHTMLAttributes(input), expected)

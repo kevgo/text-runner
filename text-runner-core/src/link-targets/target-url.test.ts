@@ -9,7 +9,7 @@ suite("targetURL", function () {
     hello: "hello",
     "foo/bar-baz": "foobar-baz",
     CamelCase: "camelcase",
-    "identity & access": "identity--access",
+    "identity & access": "identity--access"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

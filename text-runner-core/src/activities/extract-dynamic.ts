@@ -20,7 +20,7 @@ function extractFromAST(doc: ast.NodeList, regionMarker: string): List {
         actionName: normalizeActionName(node.attributes[regionMarker], node.location),
         location: node.location,
         region: doc.nodesFor(node),
-        document: doc,
+        document: doc
       })
     }
   }

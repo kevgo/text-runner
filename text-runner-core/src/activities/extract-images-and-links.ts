@@ -12,7 +12,7 @@ export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
             actionName: "check-link",
             location: node.location,
             region: AST.nodesFor(node),
-            document: AST,
+            document: AST
           })
           break
 
@@ -23,7 +23,7 @@ export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
             actionName: "check-image",
             location: node.location,
             region: nodes,
-            document: AST,
+            document: AST
           })
           break
         }

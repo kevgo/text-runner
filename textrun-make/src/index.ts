@@ -5,5 +5,5 @@ import { target } from "./actions/target.js"
 
 export const textrunActions: textRunner.exports.TextrunActions = {
   command,
-  target,
+  target
 }

@@ -13,17 +13,17 @@ export default [
       sourceType: "module",
       parser: tsParser,
       parserOptions: {
-        project: "./tsconfig.json",
+        project: "./tsconfig.json"
       },
       globals: {
         console: "readonly",
         module: "readonly",
-        process: "readonly",
-      },
+        process: "readonly"
+      }
     },
     plugins: {
       "@typescript-eslint": tslintPlugin,
-      "simple-import-sort": simpleImportSort,
+      "simple-import-sort": simpleImportSort
     },
     rules: {
       ...tslintPlugin.configs.recommended.rules,
@@ -32,8 +32,8 @@ export default [
         "error",
         {
           destructuring: "any",
-          ignoreReadBeforeAssign: false,
-        },
+          ignoreReadBeforeAssign: false
+        }
       ],
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
@@ -42,7 +42,7 @@ export default [
       "@typescript-eslint/no-implied-eval": "off",
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off", // TODO: enable?
-      "@typescript-eslint/no-unsafe-call": "error",
-    },
-  },
+      "@typescript-eslint/no-unsafe-call": "error"
+    }
+  }
 ]

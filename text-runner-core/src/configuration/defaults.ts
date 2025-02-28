@@ -21,7 +21,7 @@ export function defaults(): configuration.CompleteAPIData {
     showSkipped: false,
     sourceDir: process.cwd(),
     systemTmp: false,
-    workspace: "tmp",
+    workspace: "tmp"
   }
 }
 
@@ -36,7 +36,7 @@ export async function addDefaults(partial: configuration.APIData): Promise<confi
   return {
     ...fullAPIData,
     sourceDir: new files.SourceDir(fullAPIData.sourceDir),
-    workspace: await getWorkspacePath(fullAPIData),
+    workspace: await getWorkspacePath(fullAPIData)
   }
 }
 

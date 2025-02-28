@@ -17,11 +17,11 @@ suite("CLIConfiguration", function () {
       const fileConfig = new configuration.Data({
         formatterName: "dot",
         files: "**/*.md",
-        online: true,
+        online: true
       })
       const userConfig = new configuration.Data({
         files: "1.md",
-        online: false,
+        online: false
       })
       const result = fileConfig.merge(userConfig)
       assert.deepEqual(
@@ -29,7 +29,7 @@ suite("CLIConfiguration", function () {
         new configuration.Data({
           formatterName: "dot",
           files: "1.md",
-          online: false,
+          online: false
         })
       )
     })
@@ -38,7 +38,7 @@ suite("CLIConfiguration", function () {
   test("toConfig", function () {
     const userConfig = new configuration.Data({
       files: "1.md",
-      regionMarker: "foo",
+      regionMarker: "foo"
     })
     const have = userConfig.toCoreConfig()
     assert.equal(have.files, "1.md")

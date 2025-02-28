@@ -7,5 +7,5 @@ import { existingFileContent } from "./existing-file-content.js"
 export const textrunActions: textRunner.exports.TextrunActions = {
   executable,
   existingFile,
-  existingFileContent,
+  existingFileContent
 }

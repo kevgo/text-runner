@@ -10,7 +10,7 @@ suite("isLinkToAnchorInOtherFile()", function () {
     "#foo": false,
     "foo.md": false,
     "https://foo.com/bar": false,
-    "https://foo.com/bar#baz": false,
+    "https://foo.com/bar#baz": false
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} is ${want}`, function () {

@@ -57,9 +57,11 @@ Feature: show-skipped option
 
   @cli
   Scenario: disable via CLI
-    Given the source code contains a file "text-runner.yml" with content:
+    Given the source code contains a file "text-runner.jsonc" with content:
       """
-      show-skipped: true
+      {
+        "show-skipped": true
+      }
       """
     When running "text-runner --no-show-skipped"
     Then it prints:

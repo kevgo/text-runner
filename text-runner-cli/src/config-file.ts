@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import * as textRunner from "text-runner-core"
-import YAML from "yamljs"
+import * as yaml from "yaml"
 
 import * as config from "./configuration.js"
 
@@ -90,7 +90,7 @@ function parse(fileContent: string): config.Data {
   if (fileContent === "") {
     return new config.Data({})
   }
-  const fileData = YAML.parse(fileContent)
+  const fileData = yaml.parse(fileContent)
   return new config.Data({
     regionMarker: fileData.regionMarker,
     defaultFile: fileData.defaultFile,

@@ -20,8 +20,8 @@ Create a file **hello.md** with this content to test it.
 </a>
 
 When TextRunner encounters this region of type `hello-world`, it reads the file
-<a type="workspace/new-file">**text-runner/hello-world.js** and runs the function
-exported by it. Let's create this file with the content:
+<a type="workspace/new-file">**text-runner/hello-world.js** and runs the
+function exported by it. Let's create this file with the content:
 
 ```javascript
 export default action => {
@@ -75,8 +75,8 @@ TextRunner supports all forms of JavaScript functions as actions:
 Examples for custom actions written in ESM are
 [here](../examples/custom-action-esm/text-runner/hello-world.js). You can write
 functions in [TypeScript](../examples/custom-action-typescript/) or in classic
-[CommonJS](../examples/custom-action-commonjs/text-runner/hello-world.js). Throw an
-exception to fail a test.
+[CommonJS](../examples/custom-action-commonjs/text-runner/hello-world.js). Throw
+an exception to fail a test.
 
 ## Accessing document content
 
@@ -109,8 +109,8 @@ nodes that provides helper methods to extract document content:
 
 </a>
 
-To see the node types run `text-runner debug --ast <filename>` You can also iterate
-<code type="action-arg">region</code> manually. Each element has these
+To see the node types run `text-runner debug --ast <filename>` You can also
+iterate <code type="action-arg">region</code> manually. Each element has these
 attributes:
 
 <a type="ast-node-attributes">

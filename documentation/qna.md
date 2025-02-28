@@ -13,8 +13,8 @@ No. Text-Runner is for end-to-end testing.
 
 ### I don't want to add a `package.json` file to my root folder
 
-No problem, you can put it in the `text-runner` folder and call TextRunner from the
-root directory of your code base via:
+No problem, you can put it in the `text-runner` folder and call TextRunner from
+the root directory of your code base via:
 
 ```
 $ text-runner/node_modules/.bin/text-runner

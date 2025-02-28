@@ -105,9 +105,9 @@ emptyWorkspace: true
 
 ### Using a custom configuration file
 
-By default Text-Runner uses a file `text-runner.yml` as the configuration file. You
-can tell it to use another configuration file with the `--config` command-line
-switch:
+By default Text-Runner uses a file `text-runner.yml` as the configuration file.
+You can tell it to use another configuration file with the `--config`
+command-line switch:
 
 ```
 $ text-runner --config=my-config.yml

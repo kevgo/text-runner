@@ -1,4 +1,5 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { OutputCollector } from "./output-collector.js"
 

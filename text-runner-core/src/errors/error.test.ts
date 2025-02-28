@@ -1,4 +1,5 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { errorMessage } from "./error.js"
 import { UserError } from "./user-error.js"

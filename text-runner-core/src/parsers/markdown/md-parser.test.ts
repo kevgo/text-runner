@@ -1,4 +1,5 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 import * as fs from "fs"
 import * as path from "path"
 

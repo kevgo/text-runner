@@ -1,4 +1,5 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as files from "../filesystem/index.js"
 import { Publication } from "./publication.js"

@@ -1,4 +1,5 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { addLeadingSlash } from "./add-leading-slash.js"
 

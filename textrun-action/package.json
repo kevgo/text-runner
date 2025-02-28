@@ -12,7 +12,7 @@
     "clean": "rm -rf dist",
     "doc": "text-run static --format=summary && text-run dynamic --format=progress",
     "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write . && sort-package-json --quiet",
-    "lint": "prettier -l . && sort-package-json --check && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc"
+    "lint": "prettier -l . && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc"
   },
   "dependencies": {
     "text-runner-core": "6.0.1"

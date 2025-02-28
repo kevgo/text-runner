@@ -7,7 +7,7 @@
   "scripts": {
     "doc": "text-run static --format=summary && text-run dynamic --format=progress",
     "fix": "prettier --write . && sort-package-json --quiet",
-    "lint": "prettier -l . && sort-package-json --check && depcheck --config=../.depcheckrc"
+    "lint": "prettier -l . && sort-package-json --check --quiet && depcheck --config=../.depcheckrc"
   },
   "devDependencies": {
     "assert-no-diff": "3.0.6",

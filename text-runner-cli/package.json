@@ -36,7 +36,7 @@
     "minimist": "1.2.8",
     "text-runner-core": "6.0.1",
     "tsx": "4.19.3",
-    "yamljs": "0.3.0"
+    "yaml": "2.7.0"
   },
   "devDependencies": {
     "@types/babel__code-frame": "7.0.6",

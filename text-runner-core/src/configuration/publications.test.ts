@@ -11,13 +11,13 @@ suite("Publications.forFilePath()", function () {
       {
         localPath: "foo",
         publicExtension: "",
-        publicPath: "",
+        publicPath: ""
       },
       {
         localPath: "bar",
         publicExtension: "",
-        publicPath: "",
-      },
+        publicPath: ""
+      }
     ])
     const filePath = new files.FullPath("bar")
     const publication = publications.forFilePath(filePath)
@@ -32,8 +32,8 @@ suite("Publications.forFilePath()", function () {
       {
         localPath: "foo",
         publicExtension: "",
-        publicPath: "",
-      },
+        publicPath: ""
+      }
     ])
     const filePath = new files.FullPath("bar")
 
@@ -49,26 +49,26 @@ suite("Publications.sortPathMappings()", function () {
       {
         localPath: "/content/",
         publicExtension: "",
-        publicPath: "/",
+        publicPath: "/"
       },
       {
         localPath: "/content/posts",
         publicExtension: "html",
-        publicPath: "/blog",
-      },
+        publicPath: "/blog"
+      }
     ])
     const publication = original.sorted()
     const expected = Publications.fromConfigs([
       {
         localPath: "/content/posts",
         publicExtension: "html",
-        publicPath: "/blog",
+        publicPath: "/blog"
       },
       {
         localPath: "/content/",
         publicExtension: "",
-        publicPath: "/",
-      },
+        publicPath: "/"
+      }
     ])
     assert.deepEqual(publication, expected)
   })

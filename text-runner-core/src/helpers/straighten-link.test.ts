@@ -11,7 +11,7 @@ suite("straightenLink", function () {
     "/foo": "/foo",
     "/one/two/../three/../four": "/one/four",
     "/one/two/three/../../four": "/one/four",
-    "/one/./././two/./": "/one/two/",
+    "/one/./././two/./": "/one/two/"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} ==> ${want}`, function () {

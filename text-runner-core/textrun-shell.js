@@ -5,6 +5,6 @@ const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 export default {
   globals: {
-    "text-runner": path.join(__dirname, "bin", "text-runner"),
-  },
+    "text-runner": path.join(__dirname, "bin", "text-runner")
+  }
 }

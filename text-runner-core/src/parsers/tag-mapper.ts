@@ -19,14 +19,14 @@ export class TagMapper {
     ["link", "a"],
     ["list_item", "li"],
     ["ordered_list", "ol"],
-    ["paragraph", "p"],
+    ["paragraph", "p"]
   ])
 
   /** tags that stand alone, i.e. have no opening and closing versions */
   private static readonly STANDALONE_MAPPINGS: TypeTagMapping = new Map([
     ["hr", "hr"],
     ["image", "img"],
-    ["linebreak", "br"],
+    ["linebreak", "br"]
   ])
 
   /** maps MarkdownIt types to their corresponding HTML tags */

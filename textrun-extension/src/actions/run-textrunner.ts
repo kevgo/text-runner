@@ -7,7 +7,7 @@ export async function runTextrunner(action: textRunner.actions.Args): Promise<vo
   const command = new textRunner.commands.Run({
     sourceDir: action.configuration.workspace.joinStr(action.region[0].attributes["dir"] || "."),
     workspace: ".",
-    emptyWorkspace: false,
+    emptyWorkspace: false
   })
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()

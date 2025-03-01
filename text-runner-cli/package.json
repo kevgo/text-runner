@@ -21,6 +21,7 @@
     "clean": "rm -rf dist",
     "doc": "text-runner --format=summary",
     "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write . && sort-package-json --quiet",
+    "json-schema": "ts-json-schema-generator --path src/configuration.ts --type Data",
     "lint": "prettier -l . && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@types/babel__code-frame": "7.0.6",
     "@types/cli-progress": "3.11.6",
-    "@types/minimist": "1.2.5"
+    "@types/minimist": "1.2.5",
+    "ts-json-schema-generator": "2.3.0"
   }
 }

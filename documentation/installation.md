@@ -12,7 +12,7 @@ including macOS, Windows, and Linux. To get started:
   {
     "type": "module",
     "devDependencies": {
-      "text-runner": "6.0.1",
+      "text-runner": "7.0.0",
       "tsx": "4.19.3"
     }
   }

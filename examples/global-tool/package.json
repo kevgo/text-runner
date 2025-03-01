@@ -9,7 +9,7 @@
     "lint": "prettier -l . && sort-package-json --check --quiet"
   },
   "dependencies": {
-    "text-runner": "6.0.1",
+    "text-runner": "7.0.0",
     "textrun-shell": "0.2.1"
   },
   "devDependencies": {

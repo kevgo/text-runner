@@ -69,7 +69,7 @@ versions.
 
 - on a branch:
   - `yarn run json-schema && make fix` in the root folder and ship
-  - bump the versions by running `lerna version <patch|minor|major> --no-private`
+  - bump the versions by running `lerna version <patch|minor> --no-private` or by updating the versions manually if bumping the major version
   - make a global search-and-replace for "7.0.0" and "0.2.1" replace it with the
     new version
   - ship this branch

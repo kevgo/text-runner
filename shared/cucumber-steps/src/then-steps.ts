@@ -26,7 +26,9 @@ export interface ExecuteResultLine {
   output?: string // what the action printed via action.log()
   status?: ResultStatus
 }
+
 type ResultStatus = "failed" | "skipped" | "success" | "warning"
+
 Then("explode", function () {
   throw new Error("BOOM")
 })

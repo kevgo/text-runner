@@ -5,6 +5,7 @@ import * as formatters from "./formatters/index.js"
 
 /** arguments provided by the user, either via command line or via config file */
 export class Data {
+  $schema?: string // link to the JSON-Schema, not used by Text-Runner but by editors
   regionMarker?: string
   configFileName?: string // name of the config file to use
   defaultFile?: string

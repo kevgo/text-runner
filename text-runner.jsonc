@@ -1,5 +1,6 @@
 {
+  "$schema": "https://raw.githubusercontent.com/kevgo/text-runner/refs/heads/main/documentation/text-runner.schema.json",
   "files": "*.md",
-  "format": "progress",
+  "formatterName": "progress",
   "systemTmp": false
 }

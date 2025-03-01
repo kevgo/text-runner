@@ -67,12 +67,7 @@
     },
     "Names": {
       "description": "Names defines the names of all built-in formatters",
-      "enum": [
-        "detailed",
-        "dot",
-        "progress",
-        "summary"
-      ],
+      "enum": ["detailed", "dot", "progress", "summary"],
       "type": "string"
     },
     "Publication": {
@@ -92,11 +87,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "localPath",
-        "publicExtension",
-        "publicPath"
-      ],
+      "required": ["localPath", "publicExtension", "publicPath"],
       "type": "object"
     },
     "Publications": {
@@ -107,10 +98,7 @@
     },
     "ScaffoldLanguage": {
       "description": "languages in which this Text-Runner actions can be scaffolded",
-      "enum": [
-        "js",
-        "ts"
-      ],
+      "enum": ["js", "ts"],
       "type": "string"
     }
   }

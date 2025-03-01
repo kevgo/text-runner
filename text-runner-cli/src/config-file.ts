@@ -4,11 +4,6 @@ import * as textRunner from "text-runner-core"
 
 import * as config from "./configuration.js"
 
-/** provides the config file content as a Configuration instance */
-export async function load(cmdLineArgs: config.Data): Promise<config.Data> {
-  return parse(await read(cmdLineArgs))
-}
-
 /** creates a new Text-Runner configuration file */
 export async function create(cmdLineArgs: config.Data): Promise<void> {
   await fs.writeFile(
@@ -68,6 +63,33 @@ export async function create(cmdLineArgs: config.Data): Promise<void> {
   )
 }
 
+/** provides the config file content as a Configuration instance */
+export async function load(cmdLineArgs: config.Data): Promise<config.Data> {
+  return parse(await read(cmdLineArgs))
+}
+
+/** parses the textual config file content into a Configuration instance */
+function parse(fileContent: string): config.Data {
+  if (fileContent === "") {
+    return new config.Data({})
+  }
+  const fileData = jsonc.parse(fileContent)
+  return new config.Data({
+    defaultFile: fileData.defaultFile,
+    emptyWorkspace: fileData.emptyWorkspace,
+    exclude: fileData.exclude,
+    files: fileData.files,
+    formatterName: fileData.format,
+    ignoreLinkTargets: fileData.ignoreLinkTargets,
+    online: fileData.online,
+    publications: fileData.publications,
+    regionMarker: fileData.regionMarker,
+    showSkipped: fileData.showSkipped,
+    systemTmp: fileData.systemTmp,
+    workspace: fileData.workspace
+  })
+}
+
 /** provides the textual config file content */
 async function read(cmdLineArgs: config.Data): Promise<string> {
   if (cmdLineArgs.configFileName) {
@@ -88,26 +110,4 @@ async function read(cmdLineArgs: config.Data): Promise<string> {
   } catch (e) {
     return ""
   }
-}
-
-/** parses the textual config file content into a Configuration instance */
-function parse(fileContent: string): config.Data {
-  if (fileContent === "") {
-    return new config.Data({})
-  }
-  const fileData = jsonc.parse(fileContent)
-  return new config.Data({
-    regionMarker: fileData.regionMarker,
-    defaultFile: fileData.defaultFile,
-    emptyWorkspace: fileData.emptyWorkspace,
-    exclude: fileData.exclude,
-    files: fileData.files,
-    formatterName: fileData.format,
-    ignoreLinkTargets: fileData.ignoreLinkTargets,
-    online: fileData.online,
-    publications: fileData.publications,
-    showSkipped: fileData.showSkipped,
-    systemTmp: fileData.systemTmp,
-    workspace: fileData.workspace
-  })
 }

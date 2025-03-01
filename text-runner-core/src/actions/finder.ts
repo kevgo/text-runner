@@ -91,15 +91,6 @@ export async function builtinActionFilePaths(): Promise<string[]> {
   return result
 }
 
-export async function loadBuiltinActions(): Promise<Actions> {
-  const result = new Actions()
-  for (const filename of await builtinActionFilePaths()) {
-    const fileURL = url.pathToFileURL(filename)
-    result.register(actions.name(filename), await import(fileURL.href))
-  }
-  return result
-}
-
 export async function customActionFilePaths(dir: string): Promise<string[]> {
   try {
     var files = await fs.readdir(dir)
@@ -112,6 +103,15 @@ export async function customActionFilePaths(dir: string): Promise<string[]> {
     if (file.endsWith(".js") || file.endsWith(".ts")) {
       result.push(path.join(dir, file))
     }
+  }
+  return result
+}
+
+export async function loadBuiltinActions(): Promise<Actions> {
+  const result = new Actions()
+  for (const filename of await builtinActionFilePaths()) {
+    const fileURL = url.pathToFileURL(filename)
+    result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }

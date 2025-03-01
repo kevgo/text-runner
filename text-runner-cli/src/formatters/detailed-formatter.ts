@@ -12,25 +12,8 @@ export class DetailedFormatter implements formatter.Formatter {
     command.on("result", this.onResult.bind(this))
   }
 
-  onResult(result: textRunner.events.Result): void {
-    if (textRunner.events.instanceOfFailed(result)) {
-      this.onFailed(result)
-    } else if (textRunner.events.instanceOfSkipped(result)) {
-      this.onSkipped(result)
-    } else if (textRunner.events.instanceOfSuccess(result)) {
-      this.onSuccess(result)
-    } else if (textRunner.events.instanceOfWarning(result)) {
-      this.onWarning(result)
-    }
-  }
-
-  onSuccess(args: textRunner.events.Success): void {
-    if (args.output !== "") {
-      process.stdout.write(color.dim(args.output))
-    }
-    console.log(
-      color.green(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
-    )
+  finish(args: formatter.FinishArgs): void {
+    formatter.printSummary(args.results)
   }
 
   onFailed(args: textRunner.events.Failed): void {
@@ -48,6 +31,18 @@ export class DetailedFormatter implements formatter.Formatter {
     }
   }
 
+  onResult(result: textRunner.events.Result): void {
+    if (textRunner.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    } else if (textRunner.events.instanceOfSkipped(result)) {
+      this.onSkipped(result)
+    } else if (textRunner.events.instanceOfSuccess(result)) {
+      this.onSuccess(result)
+    } else if (textRunner.events.instanceOfWarning(result)) {
+      this.onWarning(result)
+    }
+  }
+
   onSkipped(args: textRunner.events.Skipped): void {
     if (args.output !== "") {
       process.stdout.write(color.dim(args.output))
@@ -59,11 +54,16 @@ export class DetailedFormatter implements formatter.Formatter {
     )
   }
 
-  onWarning(args: textRunner.events.Warning): void {
-    console.log(color.magenta(args.message))
+  onSuccess(args: textRunner.events.Success): void {
+    if (args.output !== "") {
+      process.stdout.write(color.dim(args.output))
+    }
+    console.log(
+      color.green(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
+    )
   }
 
-  finish(args: formatter.FinishArgs): void {
-    formatter.printSummary(args.results)
+  onWarning(args: textRunner.events.Warning): void {
+    console.log(color.magenta(args.message))
   }
 }

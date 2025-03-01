@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as configuration from "../configuration/index.js"
 import * as files from "./index.js"
@@ -10,14 +9,14 @@ suite("UnknownLink", function () {
     const tests = [
       {
         desc: "relative link",
-        link: "foo/bar.md",
         give: "/dir/file.md",
+        link: "foo/bar.md",
         want: "/dir/foo/bar.md"
       },
       {
         desc: "absolute link",
-        link: "/foo/bar.md",
         give: "/dir/file.md",
+        link: "/foo/bar.md",
         want: "/foo/bar.md"
       }
     ]

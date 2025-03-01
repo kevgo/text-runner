@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as cmdLine from "./cmdline.js"
 
@@ -55,19 +54,19 @@ suite("parseCmdlineArgs()", function () {
   })
 
   test("(no args)", function () {
-    const { commandName: command, cmdLineConfig: config } = cmdLine.parse([])
+    const { cmdLineConfig: config, commandName: command } = cmdLine.parse([])
     assert.equal(command, "run")
     assert.isUndefined(config.files)
   })
 
   test("--format=dot", function () {
-    const { commandName, cmdLineConfig } = cmdLine.parse(["--format=dot"])
+    const { cmdLineConfig, commandName } = cmdLine.parse(["--format=dot"])
     assert.equal(commandName, "run")
     assert.equal(cmdLineConfig.formatterName, "dot")
   })
 
   test("--workspace foo/bar", function () {
-    const { commandName, cmdLineConfig } = cmdLine.parse(["--workspace=foo/bar"])
+    const { cmdLineConfig, commandName } = cmdLine.parse(["--workspace=foo/bar"])
     assert.equal(commandName, "run")
     assert.equal(cmdLineConfig.workspace, "foo/bar")
   })

@@ -13,10 +13,6 @@ export class Actions {
     return this.list[name]
   }
 
-  size(): number {
-    return Object.keys(this.list).length
-  }
-
   /** provides the names of all registered actions */
   names(): string[] {
     return Object.keys(this.list).sort()
@@ -37,5 +33,9 @@ export class Actions {
     } else {
       throw new Error(`Cannot use object of type "${typeof action}" as an exported action: ${action}`)
     }
+  }
+
+  size(): number {
+    return Object.keys(this.list).length
   }
 }

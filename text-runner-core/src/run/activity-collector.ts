@@ -13,30 +13,6 @@ interface ActivityResult {
   readonly status: events.ResultStatus
 }
 
-export class ActivityResults extends Array<ActivityResult> {
-  readonly duration: string
-
-  constructor(results: Array<ActivityResult>, duration: string) {
-    super()
-    this.push(...results)
-    this.duration = duration
-  }
-
-  errors(): Error[] {
-    const result = []
-    for (const res of this) {
-      if (res.error) {
-        result.push(res.error)
-      }
-    }
-    return result
-  }
-
-  errorCount(): number {
-    return this.errors().length
-  }
-}
-
 /** ActivityCollector provides statistics about the Text-Runner command it observes. */
 export class ActivityCollector {
   activities: ActivityResult[]
@@ -54,5 +30,29 @@ export class ActivityCollector {
 
   results(): ActivityResults {
     return new ActivityResults(this.activities, this.stopWatch.duration())
+  }
+}
+
+export class ActivityResults extends Array<ActivityResult> {
+  readonly duration: string
+
+  constructor(results: Array<ActivityResult>, duration: string) {
+    super()
+    this.push(...results)
+    this.duration = duration
+  }
+
+  errorCount(): number {
+    return this.errors().length
+  }
+
+  errors(): Error[] {
+    const result = []
+    for (const res of this) {
+      if (res.error) {
+        result.push(res.error)
+      }
+    }
+    return result
   }
 }

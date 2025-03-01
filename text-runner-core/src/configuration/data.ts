@@ -8,7 +8,7 @@ export type APIData = Partial<CompleteAPIData>
 export type CompleteAPIData = SharedValues & StringDirs
 
 /** Configuration values used inside Text-Runner Core */
-export type Data = SharedValues & AbsoluteDirs
+export type Data = AbsoluteDirs & SharedValues
 
 interface AbsoluteDirs {
   /** the root directory of the source code to test */

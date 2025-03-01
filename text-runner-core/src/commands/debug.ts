@@ -16,9 +16,9 @@ export const DebugSubCommandValues = ["activities", "ast", "images", "links", "l
 export type DebugSubcommand = (typeof DebugSubCommandValues)[number]
 
 export class Debug implements Command {
-  userConfig: configuration.APIData
-  subcommand: DebugSubcommand | undefined
   emitter: EventEmitter
+  subcommand: DebugSubcommand | undefined
+  userConfig: configuration.APIData
 
   constructor(userConfig: configuration.APIData, subcommand: DebugSubcommand | undefined) {
     this.userConfig = userConfig

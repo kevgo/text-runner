@@ -14,7 +14,6 @@ import { TRWorld } from "./world.js"
 
 const psTree = util.promisify(psTreeR)
 
-type ResultStatus = "success" | "failed" | "skipped" | "warning"
 export interface ExecuteResultLine {
   action?: string // standardized name of the action ("check-link")
   activity?: string // final name of the activity ("checking link http://foo.bar")
@@ -27,6 +26,7 @@ export interface ExecuteResultLine {
   output?: string // what the action printed via action.log()
   status?: ResultStatus
 }
+type ResultStatus = "failed" | "skipped" | "success" | "warning"
 Then("explode", function () {
   throw new Error("BOOM")
 })
@@ -137,15 +137,15 @@ Then("it throws:", function (this: TRWorld, table: cucumber.DataTable) {
   }
   const tableHash = table.hashes()[0]
   const want: ExecuteResultLine = {
-    errorType: tableHash["ERROR TYPE"],
-    errorMessage: tableHash["ERROR MESSAGE"]
+    errorMessage: tableHash["ERROR MESSAGE"],
+    errorType: tableHash["ERROR TYPE"]
   }
   if (!this.apiException) {
     throw new Error("no apiException found")
   }
   const have: ExecuteResultLine = {
-    errorType: this.apiException.name,
-    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0]
+    errorMessage: stripAnsi(this.apiException.message).trim().split("\n")[0],
+    errorType: this.apiException.name
   }
   if (tableHash.FILENAME) {
     want.filename = tableHash.FILENAME

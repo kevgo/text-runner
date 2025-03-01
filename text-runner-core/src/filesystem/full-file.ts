@@ -33,12 +33,12 @@ export class FullFilePath {
     return this.value.replace(/\//g, path.sep)
   }
 
+  toFullFilePath(): FullFilePath {
+    return this
+  }
+
   /** Returns this absolute path using forward slashes as path separators */
   unixified(): string {
     return this.value
-  }
-
-  toFullFilePath(): FullFilePath {
-    return this
   }
 }

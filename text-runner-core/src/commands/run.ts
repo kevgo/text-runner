@@ -13,8 +13,8 @@ import * as command from "./index.js"
 
 /** executes "text-runner run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {
-  userConfig: configuration.APIData
   emitter: EventEmitter
+  userConfig: configuration.APIData
 
   constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
@@ -37,7 +37,7 @@ export class Run implements command.Command {
       // step 3: find files
       const filenames = await files.getFileNames(config)
       if (filenames.length === 0) {
-        this.emit("result", { status: "warning", message: "no Markdown files found" })
+        this.emit("result", { message: "no Markdown files found", status: "warning" })
         return
       }
 
@@ -54,7 +54,7 @@ export class Run implements command.Command {
       const dynamicActivities = activities.extractDynamic(ASTs, config.regionMarker)
       const links = activities.extractImagesAndLinks(ASTs)
       if (dynamicActivities.length + links.length === 0) {
-        this.emit("result", { status: "warning", message: "no activities found" })
+        this.emit("result", { message: "no activities found", status: "warning" })
         return
       }
 

@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as configuration from "../configuration/index.js"
 import { FullLink } from "./full-link.js"

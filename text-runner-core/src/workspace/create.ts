@@ -6,7 +6,7 @@ import * as configuration from "../configuration/index.js"
 export async function create(config: configuration.Data): Promise<void> {
   const path = config.workspace.platformified()
   if (config.emptyWorkspace) {
-    await fs.rm(path, { recursive: true, force: true })
+    await fs.rm(path, { force: true, recursive: true })
   }
   await fs.mkdir(path, { recursive: true })
 }

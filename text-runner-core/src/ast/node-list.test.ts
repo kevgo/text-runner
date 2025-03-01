@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { UserError } from "../errors/user-error.js"
 import * as ast from "./index.js"
@@ -36,7 +35,7 @@ suite("ast.NodeList", function () {
     test("non-opening node given", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "paragraph_open" })
-      list.pushNode({ type: "text", content: "foo" })
+      list.pushNode({ content: "foo", type: "text" })
       list.pushNode({ type: "paragraph_close" })
       const result = list.nodesFor(list[1])
       const types = result.map(node => node.type)
@@ -97,8 +96,8 @@ suite("ast.NodeList", function () {
     const list = new ast.NodeList()
     list.pushNode({ type: "paragraph_open" })
     list.pushNode({ type: "heading_open" })
-    list.pushNode({ type: "text", content: "foo" })
-    list.pushNode({ type: "text", content: "bar" })
+    list.pushNode({ content: "foo", type: "text" })
+    list.pushNode({ content: "bar", type: "text" })
     list.pushNode({ type: "heading_close" })
     list.pushNode({ type: "paragraph_close" })
     const result = list.textInNode(list[1])
@@ -161,8 +160,8 @@ suite("ast.NodeList", function () {
   test(".text()", function () {
     const list = new ast.NodeList()
     list.pushNode({ type: "code_open" })
-    list.pushNode({ type: "text", content: "hello" })
-    list.pushNode({ type: "text", content: "world" })
+    list.pushNode({ content: "hello", type: "text" })
+    list.pushNode({ content: "world", type: "text" })
     list.pushNode({ type: "code_close" })
     const result = list.text()
     assert.equal(result, "hello world")
@@ -172,7 +171,7 @@ suite("ast.NodeList", function () {
     test("type name given", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
 
       const result = list.textInNodeOfType("code")
@@ -183,7 +182,7 @@ suite("ast.NodeList", function () {
     test("opening type name given", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
 
       const result = list.textInNodeOfType("code_open")
@@ -194,7 +193,7 @@ suite("ast.NodeList", function () {
     test("multiple possible type names given", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       const result = list.textInNodeOfType("code", "fence")
       assert.equal(result, "hello")
@@ -203,10 +202,10 @@ suite("ast.NodeList", function () {
     test("multiple matching nodes", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       list.pushNode({ type: "fence_open" })
-      list.pushNode({ type: "text", content: "world" })
+      list.pushNode({ content: "world", type: "text" })
       list.pushNode({ type: "fence_close" })
       assert.throws(() => list.textInNodeOfType("code", "fence"), UserError)
     })
@@ -214,7 +213,7 @@ suite("ast.NodeList", function () {
     test("no matching nodes", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       assert.throws(() => list.textInNodeOfType("fence"), UserError)
     })
@@ -224,7 +223,7 @@ suite("ast.NodeList", function () {
     test("type name given", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       const result = list.textInNodeOfTypes("code", "fence")
       assert.equal(result, "hello")
@@ -233,7 +232,7 @@ suite("ast.NodeList", function () {
     test("opening type name given", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       const result = list.textInNodeOfTypes("code_open", "fence")
       assert.equal(result, "hello")
@@ -242,10 +241,10 @@ suite("ast.NodeList", function () {
     test("multiple matching nodes", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       list.pushNode({ type: "fence_open" })
-      list.pushNode({ type: "text", content: "world" })
+      list.pushNode({ content: "world", type: "text" })
       list.pushNode({ type: "fence_close" })
       assert.throws(() => list.textInNodeOfTypes("code", "fence"), UserError)
     })
@@ -253,7 +252,7 @@ suite("ast.NodeList", function () {
     test("no matching nodes", function () {
       const list = new ast.NodeList()
       list.pushNode({ type: "code_open" })
-      list.pushNode({ type: "text", content: "hello" })
+      list.pushNode({ content: "hello", type: "text" })
       list.pushNode({ type: "code_close" })
       assert.throws(() => list.textInNodeOfTypes("fence"), UserError)
     })
@@ -261,8 +260,8 @@ suite("ast.NodeList", function () {
 
   test(".textInNodesOfType()", function () {
     const list = new ast.NodeList()
-    list.pushNode({ type: "text", content: "foo" })
-    list.pushNode({ type: "text", content: "bar" })
+    list.pushNode({ content: "foo", type: "text" })
+    list.pushNode({ content: "bar", type: "text" })
     const texts = list.textInNodesOfType("text")
     assert.deepEqual(texts, ["foo", "bar"])
   })

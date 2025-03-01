@@ -11,9 +11,6 @@ export * from "./name.js"
 export type Action = (params: Args) => Result
 
 export interface Args {
-  /** return the action with this value to signal that it is being skipped */
-  readonly SKIPPING: 254
-
   /** TextRunner configuration data derived from the config file and CLI switches */
   readonly configuration: config.Data
 
@@ -40,9 +37,12 @@ export interface Args {
 
   /** the AST nodes of the active region which the current action tests */
   readonly region: ast.NodeList
+
+  /** return the action with this value to signal that it is being skipped */
+  readonly SKIPPING: 254
 }
+
+export type FunctionRepo = Record<string, Action>
 
 /** the result of an action function */
 export type Result = 254 | undefined
-
-export type FunctionRepo = Record<string, Action>

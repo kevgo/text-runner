@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as ast from "./index.js"
 
@@ -25,11 +24,11 @@ suite("ast.Node", function () {
   suite(".getNodesFor()", function () {
     test("flat list", function () {
       const list = new ast.NodeList()
-      list.push(ast.Node.scaffold({ type: "text", line: 1 }))
-      list.push(ast.Node.scaffold({ type: "link_open", line: 2 }))
-      list.push(ast.Node.scaffold({ type: "text", line: 3 }))
-      list.push(ast.Node.scaffold({ type: "link_close", line: 4 }))
-      list.push(ast.Node.scaffold({ type: "text", line: 5 }))
+      list.push(ast.Node.scaffold({ line: 1, type: "text" }))
+      list.push(ast.Node.scaffold({ line: 2, type: "link_open" }))
+      list.push(ast.Node.scaffold({ line: 3, type: "text" }))
+      list.push(ast.Node.scaffold({ line: 4, type: "link_close" }))
+      list.push(ast.Node.scaffold({ line: 5, type: "text" }))
       const nodes = list.nodesFor(list[1])
       const lines = nodes.map(node => node.location.line)
       assert.deepEqual(lines, [2, 3, 4])
@@ -37,14 +36,14 @@ suite("ast.Node", function () {
 
     test("nested links in active regions", function () {
       const list = new ast.NodeList()
-      list.push(ast.Node.scaffold({ type: "text", line: 1 }))
-      list.push(ast.Node.scaffold({ type: "link_open", line: 2 }))
-      list.push(ast.Node.scaffold({ type: "text", line: 3 }))
-      list.push(ast.Node.scaffold({ type: "anchor_open", line: 4 }))
-      list.push(ast.Node.scaffold({ type: "text", line: 5 }))
-      list.push(ast.Node.scaffold({ type: "anchor_close", line: 6 }))
-      list.push(ast.Node.scaffold({ type: "link_close", line: 7 }))
-      list.push(ast.Node.scaffold({ type: "text", line: 8 }))
+      list.push(ast.Node.scaffold({ line: 1, type: "text" }))
+      list.push(ast.Node.scaffold({ line: 2, type: "link_open" }))
+      list.push(ast.Node.scaffold({ line: 3, type: "text" }))
+      list.push(ast.Node.scaffold({ line: 4, type: "anchor_open" }))
+      list.push(ast.Node.scaffold({ line: 5, type: "text" }))
+      list.push(ast.Node.scaffold({ line: 6, type: "anchor_close" }))
+      list.push(ast.Node.scaffold({ line: 7, type: "link_close" }))
+      list.push(ast.Node.scaffold({ line: 8, type: "text" }))
       const nodes = list.nodesFor(list[1])
       const lines = nodes.map(node => node.location.line)
       assert.deepEqual(lines, [2, 3, 4, 5, 6, 7])
@@ -61,7 +60,7 @@ suite("ast.Node", function () {
     })
 
     test("non-link tags", function () {
-      const node = ast.Node.scaffold({ type: "htmltag", content: "hello" })
+      const node = ast.Node.scaffold({ content: "hello", type: "htmltag" })
       assert.isNull(node.htmlLinkTarget())
     })
 

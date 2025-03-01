@@ -14,6 +14,9 @@ export async function create(cmdLineArgs: config.Data): Promise<void> {
   await fs.writeFile(
     cmdLineArgs.configFileName || "text-runner.jsonc",
     `{
+  // link to the JSON schema that defines this document
+  "$schema": "https://raw.githubusercontent.com/kevgo/text-runner/refs/heads/main/documentation/text-runner.schema.json",
+
   // white-list for files to test
   // This is a glob expression, see https://github.com/isaacs/node-glob#glob-primer
   // The folder "node_modules" is already excluded.

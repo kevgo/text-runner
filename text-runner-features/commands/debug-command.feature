@@ -61,6 +61,7 @@ Feature: display the version
       IMAGES:
       {
         actionName: 'check-image',
+        document: NodeList(0) [],
         location: Location {
           sourceDir: SourceDir {.*},
           file: FullFilePath { value: '1.md' },
@@ -78,8 +79,7 @@ Feature: display the version
             content: '',
             attributes: { src: 'watermelon.png' }
           }
-        ],
-        document: NodeList(0) []
+        ]
       }
       """
 
@@ -94,6 +94,7 @@ Feature: display the version
       LINKS:
       {
         actionName: 'check-link',
+        document: NodeList(0) [],
         location: Location {
           sourceDir: SourceDir {.*},
           file: FullFilePath { value: '1.md' },
@@ -133,8 +134,7 @@ Feature: display the version
             content: '',
             attributes: {}
           }
-        ],
-        document: NodeList(0) []
+        ]
       }
       """
 

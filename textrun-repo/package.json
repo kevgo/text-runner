@@ -1,6 +1,6 @@
 {
   "name": "textrun-repo",
-  "version": "1.0.0",
+  "version": "0.2.1",
   "description": "Text-Runner actions for verifying the content of the current repository",
   "license": "ISC",
   "type": "module",

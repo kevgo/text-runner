@@ -67,6 +67,7 @@ versions.
 
 ## Deployment
 
+- `yarn run json-schema` in the root folder and ship
 - bump the versions by running `lerna version <patch|minor|major> --no-private`
 - make a global search-and-replace for "6.0.1" and "0.2.1" replace it with the
   new version

@@ -2,9 +2,7 @@
 
 ## 7.0.0
 
-This version cleans up some poor previous decisions.
-
-- All things that were named `text-run` are now named `text-runner`:
+- Streamlining the naming, everything named `text-run` is now named `text-runner`:
   - The Text-Runner binary name changes from `text-run` to `text-runner`.
   - The configuration file name changes from `text-run.yml` to `text-runner.jsonc`
   - The folder in which Text-Runner looks for actions changes from `text-run/` to `text-runner/`.

@@ -52,7 +52,7 @@
     "typescript-eslint": "8.25.0"
   },
   "scripts": {
-    "json-schema": "ts-json-schema-generator --path 'text-runner-cli/src/configuration.ts' --type Data --tsconfig tsconfig.json"
+    "json-schema": "ts-json-schema-generator --path 'text-runner-cli/src/configuration.ts' --type Data --tsconfig tsconfig.json --out documentation/text-runner.schema.json"
   },
   "packageManager": "yarn@1.22.22"
 }

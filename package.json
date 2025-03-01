@@ -46,7 +46,6 @@
     "depcheck": "1.4.7",
     "eslint": "9.21.0",
     "eslint-plugin-perfectionist": "4.9.0",
-    "eslint-plugin-simple-import-sort": "12.1.1",
     "lerna": "8.2.0",
     "prettier": "3.5.2",
     "sort-package-json": "2.15.0",

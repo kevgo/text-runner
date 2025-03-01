@@ -9,7 +9,11 @@
     "suspicious": "warn"
   },
   "settings": {},
-  "rules": {},
+  "rules": {
+    "unicorn/prefer-optional-catch-binding": "off",
+    "sort-imports": "off",
+    "unicorn/no-null": "off"
+  },
   "overrides": [
     {
       "files": ["*.test.ts", "*.spec.ts"],

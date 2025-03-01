@@ -1,5 +1,5 @@
 import { promises as fs } from "fs"
-import got, { HTTPError, TimeoutError } from "got"
+import { got, HTTPError, TimeoutError } from "got"
 
 import { errorMessage } from "../../errors/error.js"
 import { UserError } from "../../errors/user-error.js"
@@ -71,7 +71,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   const fullPath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
   try {
     var fullFile = fullPath.toFullFilePath()
-  } catch (e) {
+  } catch (error) {
     throw new Error(`link to non-existing file ${fullPath.unixified()}`)
   }
 
@@ -99,7 +99,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
 }
 
 function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, action: Args) {
-  const anchorName = target.substr(1)
+  const anchorName = target.slice(1)
   if (!action.linkTargets.hasAnchor(file, anchorName)) {
     throw new UserError(
       `link to non-existing local anchor ${target}`,
@@ -132,7 +132,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
         action.name(`link to local directory ${linkedFile.unixified()}`)
         return
       }
-    } catch (e) {
+    } catch (error) {
       // we can ignore errors here since we keep checking the file below
     }
   }
@@ -140,7 +140,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   action.name(`link to local file ${linkedFile.unixified()}`)
   try {
     await fs.stat(fullPath)
-  } catch (err) {
+  } catch (error) {
     throw new Error(`link to non-existing local file ${linkedFile.unixified()}`)
   }
 }

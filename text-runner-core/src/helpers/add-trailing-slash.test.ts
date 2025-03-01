@@ -9,7 +9,7 @@ suite("addTrailingSlash", function () {
     "foo/": "foo/"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} ==> ${want}`, function () {
+    test(`${give} ==> ${want}`, () => {
       assert.equal(addTrailingSlash(give), want)
     })
   }

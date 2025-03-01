@@ -35,7 +35,7 @@
     "textrun-workspace"
   ],
   "scripts": {
-    "json-schema": "ts-json-schema-generator --path 'text-runner-cli/src/configuration.ts' --type Data --tsconfig tsconfig.json --out documentation/text-runner.schema.json"
+    "json-schema": "ts-json-schema-generator --path text-runner-cli/src/configuration.ts --type Data --tsconfig tsconfig.json --out documentation/text-runner.schema.json"
   },
   "devDependencies": {
     "@cucumber/cucumber": "11.2.0",

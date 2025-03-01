@@ -3,6 +3,7 @@
 import tslintPlugin from "@typescript-eslint/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
 import simpleImportSort from "eslint-plugin-simple-import-sort"
+import perfectionist from "eslint-plugin-perfectionist"
 
 export default [
   {
@@ -23,7 +24,8 @@ export default [
     },
     plugins: {
       "@typescript-eslint": tslintPlugin,
-      "simple-import-sort": simpleImportSort
+      "simple-import-sort": simpleImportSort,
+      perfectionist
     },
     rules: {
       ...tslintPlugin.configs.recommended.rules,
@@ -35,6 +37,7 @@ export default [
           ignoreReadBeforeAssign: false
         }
       ],
+      "perfectionist/sort-imports": "error",
       "simple-import-sort/imports": "error",
       "simple-import-sort/exports": "error",
       "@typescript-eslint/no-explicit-any": "off",

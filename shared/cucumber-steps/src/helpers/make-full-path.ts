@@ -4,7 +4,7 @@ import * as url from "url"
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
 export function makeFullPath(command: string, platform: string): string {
-  if (/^text-runner/.test(command)) {
+  if (command.startsWith("text-runner")) {
     return command.replace(/^text-runner/, fullTextRunPath(platform))
   } else {
     return `${fullTextRunPath(platform)} ${command}`

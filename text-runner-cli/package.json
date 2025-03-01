@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "6.0.1",
+  "version": "7.0.0",
   "description": "CLI test runner for documentation written in Markdown",
   "homepage": "https://github.com/kevgo/text-runner",
   "repository": {
@@ -33,7 +33,7 @@
     "end-child-processes": "1.0.3",
     "jsonc-reader": "0.1.2",
     "minimist": "1.2.8",
-    "text-runner-core": "6.0.1",
+    "text-runner-core": "^7.0.0",
     "tsx": "4.19.3"
   },
   "devDependencies": {

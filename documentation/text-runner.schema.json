@@ -6,6 +6,9 @@
       "additionalProperties": false,
       "description": "arguments provided by the user, either via command line or via config file",
       "properties": {
+        "$schema": {
+          "type": "string"
+        },
         "configFileName": {
           "type": "string"
         },

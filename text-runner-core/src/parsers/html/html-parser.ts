@@ -27,11 +27,6 @@ export class Parser {
     return result
   }
 
-  /** returns whether the given HTML node is an empty text node */
-  private isEmptyTextNode(node: parse5.DefaultTreeAdapterMap["childNode"]): boolean {
-    return instanceOfTextNode(node) && node.value.trim() === ""
-  }
-
   /** returns the subtree of the given HTML AST whose root node has the given name */
   private findNodeWithName(
     nodes: parse5.DefaultTreeAdapterMap["childNode"][],
@@ -46,6 +41,11 @@ export class Parser {
       }
     }
     throw new Error(`child node '${name}' not found in AST: ${util.inspect(nodes)}`)
+  }
+
+  /** returns whether the given HTML node is an empty text node */
+  private isEmptyTextNode(node: parse5.DefaultTreeAdapterMap["childNode"]): boolean {
+    return instanceOfTextNode(node) && node.value.trim() === ""
   }
 
   /** converts the given HTML AST node into the standard format */
@@ -169,16 +169,6 @@ export class Parser {
   }
 }
 
-function instanceOfTextNode(
-  object: parse5.DefaultTreeAdapterMap["childNode"]
-): object is parse5.DefaultTreeAdapterMap["textNode"] {
-  return object.nodeName === "#text"
-}
-
-function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
-  return !!object.nodeName && !!object.tagName && !!object.attrs
-}
-
 /** converts the given HTML AST node attributes into the standard AST format */
 export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.NodeAttributes {
   const result: ast.NodeAttributes = {}
@@ -188,4 +178,14 @@ export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.
     }
   }
   return result
+}
+
+function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
+  return !!object.nodeName && !!object.tagName && !!object.attrs
+}
+
+function instanceOfTextNode(
+  object: parse5.DefaultTreeAdapterMap["childNode"]
+): object is parse5.DefaultTreeAdapterMap["textNode"] {
+  return object.nodeName === "#text"
 }

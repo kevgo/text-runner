@@ -9,6 +9,13 @@ export class NodeList extends Array<Node> {
     return result
   }
 
+  /** Returns whether this ast.NodeList contains a node of the given type. */
+  hasNodeOfType(nodeType: string): boolean {
+    const types = [nodeType]
+    types.push(nodeType + "_open")
+    return this.some(node => types.includes(node.type))
+  }
+
   /**
    * provides exactly one node matching any of the given types,
    * multiple or zero matches cause an exception
@@ -83,13 +90,6 @@ ${new Error().stack}`
       }
     }
     return result
-  }
-
-  /** Returns whether this ast.NodeList contains a node of the given type. */
-  hasNodeOfType(nodeType: string): boolean {
-    const types = [nodeType]
-    types.push(nodeType + "_open")
-    return this.some(node => types.includes(node.type))
   }
 
   /** Returns all node types encountered in this list. */

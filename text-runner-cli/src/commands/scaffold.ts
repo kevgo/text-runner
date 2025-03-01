@@ -10,9 +10,9 @@ export type ScaffoldLanguage = "js" | "ts"
 
 export class ScaffoldCommand implements textRunner.commands.Command {
   emitter: EventEmitter
+  language: ScaffoldLanguage
   name: string
   sourceDir: string
-  language: ScaffoldLanguage
 
   constructor(name: string, sourceDir: string, language: ScaffoldLanguage) {
     this.name = name

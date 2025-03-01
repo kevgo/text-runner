@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as ast from "../ast/index.js"
 import { extractDynamic } from "./extract-dynamic.js"

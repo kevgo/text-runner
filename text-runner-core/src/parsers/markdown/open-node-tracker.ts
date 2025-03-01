@@ -15,11 +15,6 @@ export class OpenNodeTracker {
     this.entries = []
   }
 
-  /** registers an opening MarkdownIt AST node */
-  open(node: ast.Node, endLine: number): void {
-    this.entries.push({ node, endLine })
-  }
-
   /** closes the corresponding open ast.Node and returns its endLine */
   close(type: ast.NodeType, location: files.Location): number {
     const openType = type.replace("_close", "_open")
@@ -45,5 +40,10 @@ export class OpenNodeTracker {
       }
     }
     return false
+  }
+
+  /** registers an opening MarkdownIt AST node */
+  open(node: ast.Node, endLine: number): void {
+    this.entries.push({ endLine, node })
   }
 }

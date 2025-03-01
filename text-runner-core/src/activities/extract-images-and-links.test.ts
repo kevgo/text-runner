@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as ast from "../ast/index.js"
 import { extractImagesAndLinks } from "./extract-images-and-links.js"
@@ -25,9 +24,9 @@ suite("extractImagesAndLinks", function () {
 
   test("extracting links", function () {
     const nodes = new ast.NodeList()
-    nodes.pushNode({ type: "link_open", file: "filename", line: 3 })
-    nodes.pushNode({ type: "text", file: "filename", line: 3, content: "foo" })
-    nodes.pushNode({ type: "link_close", file: "filename", line: 3 })
+    nodes.pushNode({ file: "filename", line: 3, type: "link_open" })
+    nodes.pushNode({ content: "foo", file: "filename", line: 3, type: "text" })
+    nodes.pushNode({ file: "filename", line: 3, type: "link_close" })
     const result = extractImagesAndLinks([nodes])
     assert.lengthOf(result, 1)
     assert.equal(result[0].actionName, "check-link")

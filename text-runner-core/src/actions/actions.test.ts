@@ -1,7 +1,6 @@
 /* eslint-disable no-empty-function */
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { Actions } from "./actions.js"
 import { Action } from "./index.js"
@@ -37,7 +36,7 @@ suite("Actions", function () {
       const actions = new Actions()
       const func1: Action = () => 254
       const func2: Action = () => 254
-      const want = { morning: func1, evening: func2 }
+      const want = { evening: func2, morning: func1 }
       actions.register("default", want)
       let have = actions.get("morning")
       assert.equal(have, func1)

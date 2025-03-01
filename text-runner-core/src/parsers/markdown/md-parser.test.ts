@@ -1,7 +1,6 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
 import * as fs from "fs"
+import { suite, test } from "node:test"
 import * as path from "path"
 
 import * as ast from "../../ast/index.js"

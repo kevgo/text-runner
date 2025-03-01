@@ -11,10 +11,8 @@ export class SummaryFormatter implements formatter.Formatter {
     command.on("result", this.onResult.bind(this))
   }
 
-  onResult(result: textRunner.events.Result): void {
-    if (textRunner.events.instanceOfFailed(result)) {
-      this.onFailed(result)
-    }
+  finish(args: formatter.FinishArgs): void {
+    formatter.printSummary(args.results)
   }
 
   onFailed(args: textRunner.events.Failed): void {
@@ -25,7 +23,9 @@ export class SummaryFormatter implements formatter.Formatter {
     helpers.printCodeFrame(console.log, args.activity.location)
   }
 
-  finish(args: formatter.FinishArgs): void {
-    formatter.printSummary(args.results)
+  onResult(result: textRunner.events.Result): void {
+    if (textRunner.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    }
   }
 }

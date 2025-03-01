@@ -49,8 +49,8 @@ export function parse(argv: string[]): {
     files: cliArgs._[1], // after the command can be a filename, as in "text-runner debug foo.md"
     formatterName: cliArgs.format,
     online: cliArgs.online,
-    workspace: cliArgs.workspace,
-    scaffoldLanguage: parseScaffoldSwitches(cliArgs)
+    scaffoldLanguage: parseScaffoldSwitches(cliArgs),
+    workspace: cliArgs.workspace
   })
   if (cliArgs["system-tmp"] != null) {
     cmdLineConfig.systemTmp = parseSystemTmp(cliArgs["system-tmp"])
@@ -69,7 +69,7 @@ export function parse(argv: string[]): {
   if (commandName === "debug") {
     debugSubcommand = parseDebugSubcommand(cliArgs)
   }
-  return { commandName, cmdLineConfig, debugSubcommand }
+  return { cmdLineConfig, commandName, debugSubcommand }
 }
 
 function parseDebugSubcommand(cliArgs: minimist.ParsedArgs): textRunner.commands.DebugSubcommand {
@@ -102,10 +102,10 @@ function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): commands.ScaffoldL
 
 function parseSystemTmp(value: any): boolean | undefined {
   switch (value) {
-    case true:
-      return true
     case false:
       return false
+    case true:
+      return true
     default:
       throw new textRunner.UserError(
         `unknown value for "system-tmp" setting: ${value}`,

@@ -1,17 +1,24 @@
 import { PathMapper } from "./path-mapper.js"
 
-/** ConfigFile defines the structure of the configuration file for this Text-Runner plugin. */
-interface ConfigFile {
-  readonly globals: PathMappings
-}
-
 /** PathMappings contains mappings of local to global executable paths. */
 export interface PathMappings {
   readonly [name: string]: string
 }
 
+/** ConfigFile defines the structure of the configuration file for this Text-Runner plugin. */
+interface ConfigFile {
+  readonly globals: PathMappings
+}
+
 /** Configuration represents the configuration options for the textrun-shell library. */
 export class Configuration {
+  /** contains the configuration settings read from the config file */
+  file: ConfigFile
+
+  constructor(file: ConfigFile) {
+    this.file = file
+  }
+
   static default(): Configuration {
     return new Configuration({
       globals: {}
@@ -27,13 +34,6 @@ export class Configuration {
     } catch (e) {
       return Configuration.default()
     }
-  }
-
-  /** contains the configuration settings read from the config file */
-  file: ConfigFile
-
-  constructor(file: ConfigFile) {
-    this.file = file
   }
 
   /** provides the PathMapper instance to use */

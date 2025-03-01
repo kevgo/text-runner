@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { getMakeTargets, trimDollar } from "./command.js"
 
@@ -21,9 +20,9 @@ suite("getMakeTargets", function () {
 
 suite("trimDollar", function () {
   const tests = {
-    foo: "foo",
     "$ foo": "foo",
-    "$   foo": "foo"
+    "$   foo": "foo",
+    foo: "foo"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(`${give} --> ${want}`, function () {

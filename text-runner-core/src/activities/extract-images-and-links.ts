@@ -7,26 +7,26 @@ export function extractImagesAndLinks(ASTs: ast.NodeList[]): List {
   for (const AST of ASTs) {
     for (const node of AST) {
       switch (node.type) {
-        case "link_open":
-          result.push({
-            actionName: "check-link",
-            location: node.location,
-            region: AST.nodesFor(node),
-            document: AST
-          })
-          break
-
         case "image": {
           const nodes = new ast.NodeList()
           nodes.push(node)
           result.push({
             actionName: "check-image",
+            document: AST,
             location: node.location,
-            region: nodes,
-            document: AST
+            region: nodes
           })
           break
         }
+
+        case "link_open":
+          result.push({
+            actionName: "check-link",
+            document: AST,
+            location: node.location,
+            region: AST.nodesFor(node)
+          })
+          break
       }
     }
   }

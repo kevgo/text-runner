@@ -22,14 +22,14 @@ export async function runActivity(
   const outputCollector = new OutputCollector()
   const nameRefiner = new NameRefiner(humanize(activity.actionName))
   const args: actions.Args = {
-    SKIPPING: 254,
     configuration,
-    location: activity.location,
+    document: activity.document,
     linkTargets: targets,
+    location: activity.location,
     log: outputCollector.logFn(),
     name: nameRefiner.refineFn(),
     region: activity.region,
-    document: activity.document
+    SKIPPING: 254
   }
   try {
     const action = await actionFinder.actionFor(activity)
@@ -41,18 +41,18 @@ export async function runActivity(
     }
     if (actionResult === undefined) {
       emitter.emit("result", {
-        status: "success",
         activity,
         finalName: nameRefiner.finalName(),
-        output: outputCollector.toString()
+        output: outputCollector.toString(),
+        status: "success"
       })
     } else if (actionResult === args.SKIPPING) {
       if (configuration.showSkipped) {
         emitter.emit("result", {
-          status: "skipped",
           activity,
           finalName: nameRefiner.finalName(),
-          output: outputCollector.toString()
+          output: outputCollector.toString(),
+          status: "skipped"
         })
       }
     } else {
@@ -64,11 +64,11 @@ export async function runActivity(
       guidance = e.guidance
     }
     emitter.emit("result", {
-      status: "failed",
       activity,
-      finalName: nameRefiner.finalName(),
       error: new UserError(errorMessage(e), guidance, activity.location),
-      output: outputCollector.toString()
+      finalName: nameRefiner.finalName(),
+      output: outputCollector.toString(),
+      status: "failed"
     })
     return true
   }

@@ -3,9 +3,6 @@ import * as files from "../filesystem/index.js"
 export { extractDynamic } from "./extract-dynamic.js"
 export { extractImagesAndLinks } from "./extract-images-and-links.js"
 
-/** a list of activities */
-export type List = Activity[]
-
 /**
  * Activity is an action instance.
  * A particular action that we are going to perform
@@ -18,12 +15,15 @@ export interface Activity {
   readonly region: ast.NodeList
 }
 
+/** a list of activities */
+export type List = Activity[]
+
 /** scaffoldActivity creates a test Activity from the given data */
 export function scaffold(data: Partial<Activity> = {}): Activity {
   return {
     actionName: data.actionName || "foo",
+    document: new ast.NodeList(),
     location: files.Location.scaffold(),
-    region: new ast.NodeList(),
-    document: new ast.NodeList()
+    region: new ast.NodeList()
   }
 }

@@ -9,8 +9,8 @@ import * as parsers from "../parsers/index.js"
 import { Command } from "./command.js"
 
 export class Unused implements Command {
-  userConfig: configuration.APIData
   emitter: EventEmitter
+  userConfig: configuration.APIData
 
   constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
@@ -28,7 +28,7 @@ export class Unused implements Command {
     // step 2: find files
     const filenames = await files.getFileNames(config)
     if (filenames.length === 0) {
-      this.emit("result", { status: "warning", message: "no Markdown files found" })
+      this.emit("result", { message: "no Markdown files found", status: "warning" })
       return
     }
 

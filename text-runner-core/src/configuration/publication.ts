@@ -21,11 +21,11 @@ export class Publication implements PublicationConfig {
   /** filesystem path of the src folder */
   readonly localPath: string
 
-  /** the corresponding URL path */
-  readonly publicPath: string
-
   /** which extension the Markdown files have when served as HTML */
   readonly publicExtension: string
+
+  /** the corresponding URL path */
+  readonly publicPath: string
 
   constructor(args: { localPath: string; publicExtension: string; publicPath: string }) {
     this.localPath = helpers.addLeadingSlash(helpers.addTrailingSlash(args.localPath))

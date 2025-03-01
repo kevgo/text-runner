@@ -6,25 +6,6 @@ import * as files from "../filesystem/index.js"
 import * as configuration from "./index.js"
 import { Publications } from "./publications.js"
 
-/** provides the default configuration values to use when no values are provided via CLI or config file */
-export function defaults(): configuration.CompleteAPIData {
-  return {
-    regionMarker: "type",
-    defaultFile: "",
-    emptyWorkspace: true,
-    exclude: [],
-    files: "**/*.md",
-    ignoreLinkTargets: [],
-    online: false,
-    publications: new Publications(),
-    scaffoldLanguage: "js",
-    showSkipped: false,
-    sourceDir: process.cwd(),
-    systemTmp: false,
-    workspace: "tmp"
-  }
-}
-
 export async function addDefaults(partial: configuration.APIData): Promise<configuration.Data> {
   const fullAPIData = defaults()
   for (const [key, value] of Object.entries(partial)) {
@@ -37,6 +18,25 @@ export async function addDefaults(partial: configuration.APIData): Promise<confi
     ...fullAPIData,
     sourceDir: new files.SourceDir(fullAPIData.sourceDir),
     workspace: await getWorkspacePath(fullAPIData)
+  }
+}
+
+/** provides the default configuration values to use when no values are provided via CLI or config file */
+export function defaults(): configuration.CompleteAPIData {
+  return {
+    defaultFile: "",
+    emptyWorkspace: true,
+    exclude: [],
+    files: "**/*.md",
+    ignoreLinkTargets: [],
+    online: false,
+    publications: new Publications(),
+    regionMarker: "type",
+    scaffoldLanguage: "js",
+    showSkipped: false,
+    sourceDir: process.cwd(),
+    systemTmp: false,
+    workspace: "tmp"
   }
 }
 

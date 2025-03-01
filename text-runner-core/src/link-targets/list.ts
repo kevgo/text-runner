@@ -10,18 +10,6 @@ export class List {
     this.targets = {}
   }
 
-  addNodeList(nodeList: ast.NodeList): void {
-    for (const node of nodeList) {
-      const key = node.location.file.platformified()
-      this.targets[key] = this.targets[key] || []
-      if (node.type === "anchor_open") {
-        this.addAnchor(node)
-      } else if (/h[1-6]_open/.test(node.type)) {
-        this.addHeading(node, nodeList)
-      }
-    }
-  }
-
   addAnchor(node: ast.Node): void {
     if (node.attributes.href !== undefined) {
       return
@@ -46,6 +34,18 @@ export class List {
     this.targets[key].push({ name: targetURL(name), type })
   }
 
+  addNodeList(nodeList: ast.NodeList): void {
+    for (const node of nodeList) {
+      const key = node.location.file.platformified()
+      this.targets[key] = this.targets[key] || []
+      if (node.type === "anchor_open") {
+        this.addAnchor(node)
+      } else if (/h[1-6]_open/.test(node.type)) {
+        this.addHeading(node, nodeList)
+      }
+    }
+  }
+
   // Returns the type of the given anchor
   // with the given name in the given file
   anchorType(file: files.FullFilePath, name: string): string {
@@ -62,7 +62,7 @@ export class List {
     return anchor.type
   }
 
-  getAnchor(file: files.FullFilePath, name: string): Target | null {
+  getAnchor(file: files.FullFilePath, name: string): null | Target {
     for (const target of this.targets[file.platformified()] || []) {
       if (target.name === name) {
         return target

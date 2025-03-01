@@ -1,7 +1,7 @@
 import * as ast from "../ast/node.js"
 
-type TypeTagMapping = Map<ast.NodeType, ast.NodeTag>
 type TagTypeMapping = Map<ast.NodeTag, ast.NodeType>
+type TypeTagMapping = Map<ast.NodeType, ast.NodeTag>
 
 /**
  * TagMapper maps MarkdownIt node types to HTML tags and vice versa.
@@ -29,11 +29,11 @@ export class TagMapper {
     ["linebreak", "br"]
   ])
 
-  /** maps MarkdownIt types to their corresponding HTML tags */
-  private readonly typeTagMappings: TypeTagMapping
-
   /** maps HTML tag names to their corresponding MarkdownIt types */
   private readonly tagTypeMappings: TagTypeMapping
+
+  /** maps MarkdownIt types to their corresponding HTML tags */
+  private readonly typeTagMappings: TypeTagMapping
 
   constructor() {
     this.typeTagMappings = this.createTypeTagMappings()
@@ -112,6 +112,15 @@ export class TagMapper {
     }
   }
 
+  /** Calculates the mappings from HTML tags to MarkdownIt types */
+  private createTagTypeMappings(): TagTypeMapping {
+    const result: TagTypeMapping = new Map()
+    for (const [type, tag] of this.typeTagMappings) {
+      result.set(tag, type)
+    }
+    return result
+  }
+
   /** Calculates the mappings from MarkdownIt types to HTML tags */
   private createTypeTagMappings(): TypeTagMapping {
     const result: TypeTagMapping = new Map()
@@ -121,15 +130,6 @@ export class TagMapper {
     }
     for (const [type, tag] of TagMapper.STANDALONE_MAPPINGS) {
       result.set(type, tag)
-    }
-    return result
-  }
-
-  /** Calculates the mappings from HTML tags to MarkdownIt types */
-  private createTagTypeMappings(): TagTypeMapping {
-    const result: TagTypeMapping = new Map()
-    for (const [type, tag] of this.typeTagMappings) {
-      result.set(tag, type)
     }
     return result
   }

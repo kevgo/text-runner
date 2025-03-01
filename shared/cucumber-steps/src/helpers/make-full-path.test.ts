@@ -1,18 +1,17 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 import * as util from "util"
 
 import { makeFullPath } from "./make-full-path.js"
 
 suite("makeFullPath", function () {
   const linuxTests = {
-    "text-runner foo": /.+\/node_modules\/.bin\/text-runner foo$/,
-    run: /.+\/node_modules\/.bin\/text-runner run$/
+    run: /.+\/node_modules\/.bin\/text-runner run$/,
+    "text-runner foo": /.+\/node_modules\/.bin\/text-runner foo$/
   }
   const winTests = {
-    "text-runner foo": /.+\\bin\\text-runner.cmd foo$/,
-    run: /.+\\bin\\text-runner.cmd run$/
+    run: /.+\\bin\\text-runner.cmd run$/,
+    "text-runner foo": /.+\\bin\\text-runner.cmd foo$/
   }
   if (process.platform !== "win32") {
     for (const [give, want] of Object.entries(linuxTests)) {

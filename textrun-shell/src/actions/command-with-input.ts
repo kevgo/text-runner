@@ -8,7 +8,7 @@ import { trimDollar } from "../helpers/trim-dollar.js"
 
 interface ProcessInput {
   readonly input: string
-  readonly textToWait: string | null
+  readonly textToWait: null | string
 }
 
 /**
@@ -75,7 +75,7 @@ function getInput(nodes: textRunner.ast.NodeList): ProcessInput[] {
     if (tdNode.length === 1) {
       // single-column table, use that column
       const text = trContent.textInNode(tdNode[0])
-      result.push({ textToWait: null, input: text })
+      result.push({ input: text, textToWait: null })
     } else {
       // multi-colum table, use the last column
       result.push({

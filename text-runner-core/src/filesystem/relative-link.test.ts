@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as configuration from "../configuration/index.js"
 import * as files from "./index.js"
@@ -18,7 +17,7 @@ suite("RelativeLink", function () {
 
     test("with publications", function () {
       const publications = configuration.Publications.fromConfigs([
-        { localPath: "/content", publicPath: "/", publicExtension: "" }
+        { localPath: "/content", publicExtension: "", publicPath: "/" }
       ])
       const link = new files.RelativeLink("new.md")
       const containingFile = new files.FullFilePath("/content/one/two.md")

@@ -1,6 +1,5 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as configuration from "./configuration.js"
 
@@ -15,8 +14,8 @@ suite("CLIConfiguration", function () {
 
     test("userConfig overrides fileConfig", function () {
       const fileConfig = new configuration.Data({
-        formatterName: "dot",
         files: "**/*.md",
+        formatterName: "dot",
         online: true
       })
       const userConfig = new configuration.Data({
@@ -27,8 +26,8 @@ suite("CLIConfiguration", function () {
       assert.deepEqual(
         result,
         new configuration.Data({
-          formatterName: "dot",
           files: "1.md",
+          formatterName: "dot",
           online: false
         })
       )

@@ -1,19 +1,18 @@
-import { suite, test } from "node:test"
-
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { PathMapper } from "./path-mapper.js"
 
 suite("PathMapper", function () {
   const mappings = {
-    foo: "/one/two/foo",
-    bar: "/three/four/bar"
+    bar: "/three/four/bar",
+    foo: "/one/two/foo"
   }
   const pathMapper = new PathMapper(mappings)
   const tests = {
-    "foo -b": "/one/two/foo -b",
     "bar README.md": "/three/four/bar README.md",
-    "baz --online": "baz --online"
+    "baz --online": "baz --online",
+    "foo -b": "/one/two/foo -b"
   }
   // the method will be used as a higher-order function in the production code
   const globalizePath = pathMapper.globalizePathFunc()

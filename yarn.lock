@@ -1021,6 +1021,46 @@
   dependencies:
     "@octokit/openapi-types" "^18.0.0"
 
+"@oxlint/darwin-arm64@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/darwin-arm64/-/darwin-arm64-0.15.12.tgz#f4e164746d6f045bd228fe34f8a6aed8f498b2f1"
+  integrity sha512-q55uDzFt3QcuxVZQhumsx8HvqiwPVgjs+X+8W17IgNBLsYTRd+akkvq11lGaeVDn3JicIUo3lurFTSdlsleeeg==
+
+"@oxlint/darwin-x64@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/darwin-x64/-/darwin-x64-0.15.12.tgz#75b1f7d3603bfc81d78e301691298f8808a8ca45"
+  integrity sha512-T+w1AqY6hK09TMaAm24ifv4ptWSDmdvO8KZwGYmnOZq1zcSc2qAHT3T5/5HC9Si9DYdQ+BxyEmGpTT57PiTDhA==
+
+"@oxlint/linux-arm64-gnu@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/linux-arm64-gnu/-/linux-arm64-gnu-0.15.12.tgz#7da69c0d159ab2949784e212c5f44f7c5b3e094c"
+  integrity sha512-C4kPsFdMg2572F2llt+xyteP+fY1fTI4w2MZ33vhOOpep69Im2NNTl5wgI5b8DVI3F2zUydT17iRARqMey1R5w==
+
+"@oxlint/linux-arm64-musl@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/linux-arm64-musl/-/linux-arm64-musl-0.15.12.tgz#63acb50c957f6fcf7a71b551e94fc0c282d39da5"
+  integrity sha512-+Zhiu9s+vNrpUVAuC6ZnYi8+7DhbcITmw+BLSnAa0O954CPVR9yb8bQb9XHYQy7gn9lg9Rj0aeWbsceM/Xjvog==
+
+"@oxlint/linux-x64-gnu@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/linux-x64-gnu/-/linux-x64-gnu-0.15.12.tgz#dd4d7b90e4bce4a1d4d0622f96d5a269724fcdce"
+  integrity sha512-2YbZJF+CFcpuovsuUFpLaDtAGqW/Rfc9k2x4Z801ktwnoe19voos43EbxRqfNhLU5ecpGjfqs+eVi7OM1qglNA==
+
+"@oxlint/linux-x64-musl@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/linux-x64-musl/-/linux-x64-musl-0.15.12.tgz#f23347750eead5c94f4baa4c7d4ec3e6f5f0a8b0"
+  integrity sha512-UiedwMcDSBgqZOStTGC9QS2k+ycgo0oXM3kHOnDZRHV/+kRYY6dMWVB6lMisZIerRQnsZEtaYoFg88X9yrHscQ==
+
+"@oxlint/win32-arm64@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/win32-arm64/-/win32-arm64-0.15.12.tgz#2315eaf7b8583da73196c4f24a9446e06903dd84"
+  integrity sha512-rf5FCe7E68AHFw0pFdj+YBWpFT41pQsNPSy3OZsI7jH6vPnjYQmC0rntNJgcN/XEetioe0bExcccVjWB1ZBnZw==
+
+"@oxlint/win32-x64@0.15.12":
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/@oxlint/win32-x64/-/win32-x64-0.15.12.tgz#b1e0702dd82f6c2d67de419e56523c9aaf212bf5"
+  integrity sha512-gmSjINoXtJIjvZtsKQ/KDdnYJpuksBpAivvjPokl0+OllJjbm8TW/fc83kCUEs6Zn91NIyyq/5ft1MQ4Obb/fA==
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
@@ -2547,11 +2587,6 @@ eslint-plugin-perfectionist@4.9.0:
     "@typescript-eslint/types" "^8.24.0"
     "@typescript-eslint/utils" "^8.24.0"
     natural-orderby "^5.0.0"
-
-eslint-plugin-simple-import-sort@12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-simple-import-sort/-/eslint-plugin-simple-import-sort-12.1.1.tgz#e64bfdaf91c5b98a298619aa634a9f7aa43b709e"
-  integrity sha512-6nuzu4xwQtE3332Uz0to+TxDQYRLTKRESSc2hefVT48Zc8JthmN23Gx9lnYhu0FtkRSL1oxny3kJ2aveVhmOVA==
 
 eslint-scope@^8.2.0:
   version "8.2.0"
@@ -4755,6 +4790,20 @@ os-tmpdir@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/os-tmpdir/-/os-tmpdir-1.0.2.tgz#bbe67406c79aa85c5cfec766fe5734555dfa1274"
   integrity sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==
+
+oxlint@0.15.12:
+  version "0.15.12"
+  resolved "https://registry.yarnpkg.com/oxlint/-/oxlint-0.15.12.tgz#189e39f574968fb1726fc839dfad09091f761146"
+  integrity sha512-nfiT04swYLhh1nutpvp+kCgY6GcIRKv1WWIUIzQrVaoF0+I/FRX7XS5Qm/cznaLWN38hn/pDI/Ge+0XJdHSyxg==
+  optionalDependencies:
+    "@oxlint/darwin-arm64" "0.15.12"
+    "@oxlint/darwin-x64" "0.15.12"
+    "@oxlint/linux-arm64-gnu" "0.15.12"
+    "@oxlint/linux-arm64-musl" "0.15.12"
+    "@oxlint/linux-x64-gnu" "0.15.12"
+    "@oxlint/linux-x64-musl" "0.15.12"
+    "@oxlint/win32-arm64" "0.15.12"
+    "@oxlint/win32-x64" "0.15.12"
 
 p-cancelable@^4.0.1:
   version "4.0.1"

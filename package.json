@@ -47,6 +47,7 @@
     "eslint": "9.21.0",
     "eslint-plugin-perfectionist": "4.9.0",
     "lerna": "8.2.0",
+    "oxlint": "0.15.12",
     "prettier": "3.5.2",
     "sort-package-json": "2.15.0",
     "ts-json-schema-generator": "2.3.0",

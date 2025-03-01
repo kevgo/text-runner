@@ -3,10 +3,7 @@ import * as textRunner from "text-runner-core"
 import * as commands from "./commands/index.js"
 import * as formatters from "./formatters/index.js"
 
-/**
- * UserProvidedConfiguration describes arguments provided by the user,
- * either via command line or via config file.
- */
+/** arguments provided by the user, either via command line or via config file */
 export class Data {
   regionMarker?: string
   configFileName?: string // name of the config file to use
@@ -27,10 +24,7 @@ export class Data {
     Object.assign(this, data)
   }
 
-  /**
-   * Returns a new UserProvidedConfiguration that contains this config
-   * with the fields from other overwriting the fields of this one.
-   */
+  /** merges the given configuration data into this instance */
   merge(other: Data): Data {
     const result = new Data()
     for (const [key, value] of Object.entries(this)) {

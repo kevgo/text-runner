@@ -4,9 +4,9 @@ Feature: verifying scripts defined in package.json
     Given the source code contains a file "package.json" with content:
       """
       {
-        "scriptsn": {
+        "scripts": {
           "alpha": "echo alpha",
-          "beta": "echo beta",
+          "beta": "echo beta"
         }
       }
       """
@@ -19,8 +19,8 @@ Feature: verifying scripts defined in package.json
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION          | ACTIVITY                     |
-      | 1.md     | 1    | npm/script-name | npm package has script alpha |
+      | FILENAME | LINE | ACTION     | ACTIVITY                     |
+      | 1.md     | 1    | npm/script | npm package has script alpha |
 
 # Scenario: mismatching script name
 #   Given the source code contains a file "1.md" with content:

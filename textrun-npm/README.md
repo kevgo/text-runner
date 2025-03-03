@@ -104,3 +104,5 @@ To run the end-to-end tests, run
 ```
 
 </a>
+
+### Verify scripts defined in package.json

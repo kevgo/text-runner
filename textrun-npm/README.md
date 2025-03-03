@@ -106,3 +106,8 @@ To run the end-to-end tests, run
 </a>
 
 ### Verify scripts defined in package.json
+
+You can verify that documented scripts that your `package.json` file defines exist:
+
+```html
+To run the unit tests, please call the <code type="npm/script">unit</code> script.

@@ -110,4 +110,7 @@ To run the end-to-end tests, run
 You can verify that documented scripts that your `package.json` file defines exist:
 
 ```html
-To run the unit tests, please call the <code type="npm/script">unit</code> script.
+To run the unit tests, please run the <code type="npm/script">unit</code> script.
+
+To run the linters, please run the <code>npm <a type="npm/script">lint</a></code>.
+```

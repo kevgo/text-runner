@@ -7,7 +7,7 @@ import { PackageJson } from "./package-json.js"
 export async function script(action: textRunner.actions.Args): Promise<void> {
   const want = action.region.text().trim()
   if (want === "") {
-    throw new Error("No executable name specified")
+    throw new Error("No script name specified")
   }
   action.name(`npm package has script ${color.cyan(want)}`)
   const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")

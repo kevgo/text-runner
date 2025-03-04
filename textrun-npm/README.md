@@ -1,7 +1,5 @@
 # Text-Runner Actions for npm
 
-hello
-
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of npm packages.
 
@@ -116,6 +114,9 @@ Let's say your npm package has this <a type="workspace/new-file">**package.json*
   "name": "foobar",
   "scripts": {
     "lint": "echo linting"
+  },
+  "bin": {
+    "foo": "bar"
   }
 }
 ```
@@ -127,10 +128,11 @@ Let's say your npm package has this <a type="workspace/new-file">**package.json*
 And your documentation, e.g. **README.md** file says:
 
 ```html
-To run the unit tests, please run the <code type="npm/script-name2">unit</code> script.
+To run the linters, please run the <code type="npm/script-name">lint</code> script.
 ```
 
 </a>
 
 <a type="extension/run-textrunner">
+
 </a>

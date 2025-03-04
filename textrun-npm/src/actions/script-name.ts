@@ -5,7 +5,6 @@ import * as textRunner from "text-runner-core"
 import { PackageJson } from "./package-json.js"
 
 export async function scriptName(action: textRunner.actions.Args): Promise<void> {
-  console.log("11111111111111111111111111111111", action)
   const want = action.region.text().trim()
   if (want === "") {
     throw new Error("No script name specified")

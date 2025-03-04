@@ -24,7 +24,7 @@ Feature: verifying scripts defined in package.json
   Scenario: mismatching script name
     Given the source code contains a file "1.md" with content:
       """
-    To run this app, run <code type="npm/script-name">zonk</code>.
+      To run this app, run <code type="npm/script-name">zonk</code>.
       """
     When calling Text-Runner
     Then it emits these events:
@@ -34,10 +34,10 @@ Feature: verifying scripts defined in package.json
   Scenario: missing command name
     Given the source code contains a file "1.md" with content:
       """
-    To run this app, call:
+      To run this app, call:
 
-    <a type="npm/script-name">
-    </a>
+      <a type="npm/script-name">
+      </a>
       """
     When calling Text-Runner
     Then it emits these events:

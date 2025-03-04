@@ -105,9 +105,11 @@ To run the end-to-end tests, run
 
 ### Verify scripts defined in package.json
 
-The <b type="action/name-full">npm/script-name</b> action verifies that you document scripts that your `package.json` file defines correctly:
+The <b type="action/name-full">npm/script-name</b> action verifies that you
+document scripts that your `package.json` file defines correctly:
 
-Let's say your npm package has this <a type="workspace/new-file">**package.json** file:
+Let's say your npm package has this
+<a type="workspace/new-file">**package.json** file:
 
 ```json
 {
@@ -128,11 +130,10 @@ Let's say your npm package has this <a type="workspace/new-file">**package.json*
 And your documentation, e.g. **README.md** file says:
 
 ```html
-To run the linters, please run the <code type="npm/script-name">lint</code> script.
+To run the linters, please run the
+<code type="npm/script-name">lint</code> script.
 ```
 
 </a>
 
-<a type="extension/run-textrunner">
-
-</a>
+<a type="extension/run-textrunner"></a>

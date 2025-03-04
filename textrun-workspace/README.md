@@ -58,8 +58,9 @@ just as the user would.
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
-_emphasized_ or **bold** text and the file content as a code block with one or
-three backticks. As an example, consider the following documentation snippet:
+_emphasized_ or **bold** text, or inside a "filename" attribute, and the file
+content is a code block with one or three backticks. As an example, consider the
+following documentation snippet:
 
 <a type="extension/runnable-region">
 

@@ -1,7 +1,5 @@
 # Text-Runner Actions for npm
 
-hello
-
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying the documentation of npm packages.
 
@@ -104,3 +102,38 @@ To run the end-to-end tests, run
 ```
 
 </a>
+
+### Verify scripts defined in package.json
+
+The <b type="action/name-full">npm/script-name</b> action verifies that you
+document scripts that your `package.json` file defines correctly:
+
+Let's say your npm package has this
+<a type="workspace/new-file">**package.json** file:
+
+```json
+{
+  "name": "foobar",
+  "scripts": {
+    "lint": "echo linting"
+  },
+  "bin": {
+    "foo": "bar"
+  }
+}
+```
+
+</a>
+
+<a type="workspace/additional-file-content">
+
+And your documentation, e.g. **README.md** file says:
+
+```html
+To run the linters, please run the
+<code type="npm/script-name">lint</code> script.
+```
+
+</a>
+
+<a type="extension/run-textrunner"></a>

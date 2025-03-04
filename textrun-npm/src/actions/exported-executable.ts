@@ -14,7 +14,10 @@ export async function exportedExecutable(action: textRunner.actions.Args): Promi
   const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
   const pkgText = await fs.readFile(packageJsonPath, "utf-8")
   const pkgData: PackageJson = JSON.parse(pkgText)
-  if (!Object.keys(pkgData.bin).includes(commandName)) {
+  if (!pkgData.bin) {
+    throw new Error(`package.json does not export commands`)
+  }
+  if (!Object.keys(pkgData?.bin).includes(commandName)) {
     throw new Error(`package.json does not export a "${commandName}" command`)
   }
 }

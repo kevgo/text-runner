@@ -32,13 +32,13 @@ bullet point lists, and even embedded images!
 
 ### Plugins
 
-- [verify source code files](textrun-repo/)
-- [modify/verify workspace files](textrun-workspace/)
-- [run executables in a subshell](textrun-shell/)
-- [run/verify embedded JavaScript code](textrun-javascript/)
-- [verify Makefile targets](textrun-make/)
-- [verify the documentation of npm modules](textrun-npm/)
-- [verify the documentation of Text-Runner plugins](textrun-action/)
+- [textrun-repo](textrun-repo/): verify source code files
+- [textrun-workspace](textrun-workspace/): modify/verify workspace files
+- [textrun-shell](textrun-shell/): run executables in a subshell
+- [textrun-javascript](textrun-javascript/): run/verify embedded JavaScript code
+- [textrun-make](textrun-make/): verify Makefile targets
+- [textrun-npm](textrun-npm/): verify the documentation of npm modules
+- [textrun-action](textrun-action/): verify the documentation of Text-Runner plugins
 
 ### For developers
 

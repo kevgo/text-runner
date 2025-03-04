@@ -3,9 +3,6 @@
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for working with files.
 
-- [installation](#installation)
-- [cd action](#cd-action)
-
 ### installation
 
 To use these actions, add this package as a development dependency by running

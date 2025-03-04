@@ -27,9 +27,8 @@ other things:
 
 <a type="workspace/new-file" filename="README.md">
 
-In the documentation of this npm package, we
-want to document how to install this package. It would contain a section that
-looks something like this:
+In the documentation of this npm package, we want to document how to install
+this package. It would contain a section that looks something like this:
 
 ```md
 Install the foobar package by running:
@@ -57,9 +56,10 @@ of the npm package.
 ## Verify exported binaries
 
 The <b type="action/name-full">npm/exported-executable</b> action verifies
-documentation of exported binaries of npm packages. Let's say our `foobar` package provides an executable file
-<b type="bundled-executable">bin/foo</b>, which is listed as a binary in the
-<a type="workspace/new-file">**package.json** file:
+documentation of exported binaries of npm packages. Let's say our `foobar`
+package provides an executable file <b type="bundled-executable">bin/foo</b>,
+which is listed as a binary in the <a type="workspace/new-file">**package.json**
+file:
 
 ```js
 {
@@ -74,8 +74,7 @@ documentation of exported binaries of npm packages. Let's say our `foobar` packa
 
 <a type="workspace/new-file" filename="README.md">
 
-The documentation for the "foobar" package would document this binary
-like this:
+The documentation for the "foobar" package would document this binary like this:
 
 ```md
 After you install the "foobar" package, you can run the
@@ -87,10 +86,10 @@ After you install the "foobar" package, you can run the
 ### Verify installed binaries
 
 The <b type="action/name-full">npm/installed-executable</b> action verifies
-binaries installed by other npm packages. Let's say you develop technical documentation
-for a codebase that uses the <code type="create-npm-executable">cucumber</code>
-command provided by the npm [cucumber](https://www.npmjs.com/package/@cucumber/cucumber)
-package:
+binaries installed by other npm packages. Let's say you develop technical
+documentation for a codebase that uses the
+<code type="create-npm-executable">cucumber</code> command provided by the npm
+[cucumber](https://www.npmjs.com/package/@cucumber/cucumber) package:
 
 <a type="workspace/new-file" filename="README.md">
 

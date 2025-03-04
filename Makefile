@@ -13,7 +13,7 @@ clean:  # remove all build artifacts
 	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
-	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke --concurrency=1
+	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke $(TURBO_ARGS)
 
 doc:  # runs the documentation tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)

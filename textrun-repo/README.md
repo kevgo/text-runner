@@ -91,7 +91,7 @@ documentation for this codebase might look like this:
 <a type="extension/runnable-region">
 
 ```html
-Run the <b type="repo/executable">scripts/setup</b> binary to set up your
+Run the <b type="repo/executable">scripts/setup</b> script to set up your
 environment.
 ```
 

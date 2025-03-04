@@ -35,13 +35,13 @@ bullet point lists, and even embedded images!
 This monorepo contains a number of Text-Runner plugins that provide more domain-specific functionality.
 You can think of these plugins as the standard library of Text-Runner.
 
-- [textrun-repo](textrun-repo/): verify source code files
-- [textrun-workspace](textrun-workspace/): modify/verify workspace files
-- [textrun-shell](textrun-shell/): run executables in a subshell
-- [textrun-javascript](textrun-javascript/): run/verify embedded JavaScript code
-- [textrun-make](textrun-make/): verify Makefile targets
-- [textrun-npm](textrun-npm/): verify the documentation of npm modules
-- [textrun-action](textrun-action/): verify the documentation of Text-Runner plugins
+- [repo](textrun-repo/): verify source code files
+- [workspace](textrun-workspace/): modify/verify workspace files
+- [shell](textrun-shell/): run executables in a subshell
+- [javascript](textrun-javascript/): run/verify embedded JavaScript code
+- [make](textrun-make/): verify Makefile targets
+- [npm](textrun-npm/): verify the documentation of npm modules
+- [action](textrun-action/): verify the documentation of Text-Runner plugins
 
 ### For developers
 

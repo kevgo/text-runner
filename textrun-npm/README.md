@@ -109,7 +109,7 @@ The <b type="action/name-full">npm/script-name</b> action verifies that you docu
 
 Let's say your npm package has this <a type="workspace/new-file">**package.json** file:
 
-```js
+```json
 {
   "name": "foobar",
   "scripts": {

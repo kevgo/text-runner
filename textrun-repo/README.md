@@ -20,7 +20,7 @@ Sometimes you want to mention the name of a file from your application's source
 code in the documentation. The
 <b type="action/name-full">repo/existing-file</b> action verifies this. As an
 example, consider a codebase contains a file
-<a type="workspace/new-file">**config.yml** with content `foo: bar`</a>. The
+<a type="workspace/new-file">**config.yml**</a>. The
 documentation for this codebase might want to mention this configuration file:
 
 <a type="extension/runnable-region">

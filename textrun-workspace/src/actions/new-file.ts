@@ -14,14 +14,10 @@ export async function newFile(action: textRunner.actions.Args): Promise<void> {
     const guidance = `Cannot determine the name of the file to create.\n${e.guidance}`
     throw new textRunner.UserError(e.message, guidance)
   }
+  let content = ""
   try {
-    var content = action.region.textInNodeOfType("fence", "code")
+    content = action.region.textInNodeOfType("fence", "code")
   } catch (e) {
-    if (!textRunner.isUserError(e)) {
-      throw e
-    }
-    const guidance = `Cannot determine the content of the file to create.\n${e.guidance}`
-    throw new textRunner.UserError(e.message, guidance)
   }
   const filePath = path.join(action.region[0].attributes["dir"] ?? ".", fileName)
   action.name(`create file ${color.cyan(filePath)}`)

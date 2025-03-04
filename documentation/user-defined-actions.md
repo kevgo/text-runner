@@ -46,8 +46,8 @@ hello.md:1 -- Hello world
 
 ## How it works
 
-An action is a simple JavaScript function. It receives an object containing
-information and utility functions:
+An action is a simple JavaScript or TypeScript function. It receives an object
+containing information and utility functions:
 
 <a type="all-action-args" ignore="linkTargets">
 
@@ -76,7 +76,8 @@ Examples for custom actions written in ESM are
 [here](../examples/custom-action-esm/text-runner/hello-world.js). You can write
 functions in [TypeScript](../examples/custom-action-typescript/) or in classic
 [CommonJS](../examples/custom-action-commonjs/text-runner/hello-world.js). Throw
-an exception to fail a test.
+an exception to fail a test. Use only [strippable
+types](https://nodejs.org/en/learn/typescript/run-natively).
 
 ## Accessing document content
 

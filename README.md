@@ -32,6 +32,9 @@ bullet point lists, and even embedded images!
 
 ### Plugins
 
+This monorepo contains a number of Text-Runner plugins that provide more domain-specific functionality.
+You can think of these plugins as the standard library of Text-Runner.
+
 - [textrun-repo](textrun-repo/): verify source code files
 - [textrun-workspace](textrun-workspace/): modify/verify workspace files
 - [textrun-shell](textrun-shell/): run executables in a subshell

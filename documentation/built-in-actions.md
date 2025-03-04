@@ -7,7 +7,7 @@ existing files or directories.
 By default, Text-Runner checks only links and images pointing to local files and
 directories. Use the `--online` switch to add checking links pointing to the
 internet. Please note that this will slow down your documentation test suite and
-make it more brittle.
+make it more flaky.
 
 ### Publications
 

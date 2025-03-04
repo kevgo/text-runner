@@ -107,10 +107,30 @@ To run the end-to-end tests, run
 
 ### Verify scripts defined in package.json
 
-You can verify that documented scripts that your `package.json` file defines exist:
+The <b type="action/name-full">npm/script-name</b> action verifies that you document scripts that your `package.json` file defines correctly:
+
+Let's say your npm package has this <a type="workspace/new-file">**package.json** file:
+
+```js
+{
+  "name": "foobar",
+  "scripts": {
+    "lint": "echo linting"
+  }
+}
+```
+
+</a>
+
+<a type="workspace/additional-file-content">
+
+And your documentation, e.g. **README.md** file says:
 
 ```html
-To run the unit tests, please run the <code type="npm/script">unit</code> script.
-
-To run the linters, please run the <code>npm <a type="npm/script">lint</a></code>.
+To run the unit tests, please run the <code type="npm/script-name2">unit</code> script.
 ```
+
+</a>
+
+<a type="extension/run-textrunner">
+</a>

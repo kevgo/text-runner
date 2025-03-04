@@ -17,7 +17,7 @@ or
 $ yarn i -D textrun-workspace
 </pre>
 
-### cd action
+### working-dir
 
 The <b type="action/name-full">workspace/working-dir</b> action changes the
 current working directory into the given directory inside the workspace. As an

@@ -35,6 +35,23 @@ Feature: creating files with content
       """
 
 
+  Scenario: providing the filename as an attribute and the content triple-quoted
+    Given the source code contains a file "creator.md" with content:
+      """
+      The documentation contains <pre type="workspace/new-file" filename="one.txt">
+      Hello world!
+      </pre>
+      """
+    When calling Text-Runner
+    Then it emits these events:
+      | FILENAME   | LINE | ACTION             | ACTIVITY            |
+      | creator.md | 1    | workspace/new-file | create file one.txt |
+    And the workspace now contains a file "one.txt" with content:
+      """
+      Hello world!
+      """
+
+
   Scenario: no file path given
     Given the source code contains a file "creator.md" with content:
       """

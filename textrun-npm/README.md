@@ -25,9 +25,9 @@ other things:
 
 </a>
 
-<a type="workspace/new-file">
+<a type="workspace/new-file" filename="README.md">
 
-In the documentation of this npm package, for example its **README.md** file, we
+In the documentation of this npm package, we
 want to document how to install this package. It would contain a section that
 looks something like this:
 
@@ -57,9 +57,8 @@ of the npm package.
 ## Verify exported binaries
 
 The <b type="action/name-full">npm/exported-executable</b> action verifies
-documentation of exported binaries of npm packages. Let's say the source code of
-our `foobar` package contains an executable file
-<b type="bundled-executable">bin/foo</b>, which is listed as a binary in its
+documentation of exported binaries of npm packages. Let's say our `foobar` package provides an executable file
+<b type="bundled-executable">bin/foo</b>, which is listed as a binary in the
 <a type="workspace/new-file">**package.json** file:
 
 ```js
@@ -73,28 +72,27 @@ our `foobar` package contains an executable file
 
 </a>
 
-<a type="workspace/additional-file-content">
+<a type="workspace/new-file" filename="README.md">
 
-The **README.md** file for the "foobar" package would document this binary
-something like this:
+The documentation for the "foobar" package would document this binary
+like this:
 
 ```md
 After you install the "foobar" package, you can run the
 <code type="npm/exported-executable">foo</code> command in the terminal.
 ```
 
-<a type="extension/run-textrunner">
-</a>
+<a type="extension/run-textrunner"></a>
 
 ### Verify installed binaries
 
 The <b type="action/name-full">npm/installed-executable</b> action verifies
-binaries installed by other npm packages. Let's say you developer instructions
+binaries installed by other npm packages. Let's say you develop technical documentation
 for a codebase that uses the <code type="create-npm-executable">cucumber</code>
-command provided by the npm [cucumber](https://www.npmjs.com/package/cucumber)
+command provided by the npm [cucumber](https://www.npmjs.com/package/@cucumber/cucumber)
 package:
 
-<a type="extension/runnable-region">
+<a type="workspace/new-file" filename="README.md">
 
 ```html
 To run the end-to-end tests, run
@@ -103,10 +101,12 @@ To run the end-to-end tests, run
 
 </a>
 
+<a type="extension/run-textrunner"></a>
+
 ### Verify scripts defined in package.json
 
 The <b type="action/name-full">npm/script-name</b> action verifies that you
-document scripts that your `package.json` file defines correctly:
+document scripts that your `package.json` file defines correctly.
 
 Let's say your npm package has this
 <a type="workspace/new-file">**package.json** file:
@@ -116,18 +116,15 @@ Let's say your npm package has this
   "name": "foobar",
   "scripts": {
     "lint": "echo linting"
-  },
-  "bin": {
-    "foo": "bar"
   }
 }
 ```
 
 </a>
 
-<a type="workspace/additional-file-content">
+<a type="workspace/new-file" filename="README.md">
 
-And your documentation, e.g. **README.md** file says:
+And your documentation says:
 
 ```html
 To run the linters, please run the

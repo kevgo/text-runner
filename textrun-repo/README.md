@@ -11,8 +11,7 @@ from the repository.
 ### installation
 
 To use these actions, add this package as a development dependency by running
-<code type="npm/install">npm i -D textrun-repo</code> or
-<code type="npm/install">yarn i -D textrun-repo</code>.
+<code type="npm/install">npm i -D textrun-repo</code>.
 
 ### repo/existing-file
 

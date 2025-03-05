@@ -33,7 +33,7 @@ into it
 Create a
 <code type="workspace/new-directory">scripts</code>
 folder. Now you can change into it via this Markdown code:
-<code type="workspace/working-dir">foo</code>
+<code type="workspace/working-dir">scripts</code>
 ```
 
 </a>

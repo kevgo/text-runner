@@ -1,7 +1,7 @@
 # Text-Runner Actions for the Text-Runner test workspace
 
 Some Text-Runner actions create files and folders on disk. These files and
-folders get created in a temporary directory called the "workspace". This
+folders get created in a temporary directory called the `workspace`. This
 package provides [Text-Runner](https://github.com/kevgo/text-runner) actions for
 working with this Text-Runner workspace.
 

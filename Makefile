@@ -32,7 +32,7 @@ publish: clean setup  # publishes all code bases
 	npm exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning
-	npm
+	npm install
 	make --no-print-directory build
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics

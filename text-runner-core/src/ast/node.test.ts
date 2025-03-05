@@ -53,7 +53,7 @@ suite("ast.Node", function() {
   suite(".htmlLinkTarget()", function() {
     test("link tags", function() {
       const node = ast.Node.scaffold({
-        content: "<a href=\"http://foo.com\">",
+        content: '<a href="http://foo.com">',
         type: "htmltag"
       })
       assert.equal(node.htmlLinkTarget(), "http://foo.com", "should return the href content of link tags")
@@ -66,7 +66,7 @@ suite("ast.Node", function() {
 
     test("anchor tags", function() {
       const node = ast.Node.scaffold({
-        content: "<a name=\"foo\">",
+        content: '<a name="foo">',
         type: "htmltag"
       })
       assert.isNull(node.htmlLinkTarget())

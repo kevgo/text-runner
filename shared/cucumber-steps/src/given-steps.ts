@@ -37,11 +37,11 @@ Given("a runnable file {string}", async function(this: TRWorld, filePath: string
       await fs.mkdir(subdirPath)
     }
   }
-  await fs.writeFile(workspace.absPath.joinStr(filePath), "<a type=\"test\"></a>")
+  await fs.writeFile(workspace.absPath.joinStr(filePath), '<a type="test"></a>')
 })
 
 Given("I am in a directory that contains documentation without a configuration file", async function(this: TRWorld) {
-  await fs.writeFile(workspace.absPath.joinStr("1.md"), "<code type=\"test\"></code>")
+  await fs.writeFile(workspace.absPath.joinStr("1.md"), '<code type="test"></code>')
 })
 
 Given("I am in a directory that contains the {string} example", async function(this: TRWorld, exampleName: string) {

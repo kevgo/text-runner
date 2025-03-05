@@ -109,7 +109,7 @@ function parseSystemTmp(value: any): boolean | undefined {
     default:
       throw new textRunner.UserError(
         `unknown value for "system-tmp" setting: ${value}`,
-        "Set the \"system-tmp\" setting to \"true\" to have Text-Runner put the test workspace into the global system temp folder and \"false\" to put it into the current folder."
+        'Set the "system-tmp" setting to "true" to have Text-Runner put the test workspace into the global system temp folder and "false" to put it into the current folder.'
       )
   }
 }

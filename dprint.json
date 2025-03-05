@@ -3,7 +3,8 @@
     "lineWidth": 120,
     "semiColons": "asi",
     "arrowFunction.useParentheses": "preferNone",
-    "trailingCommas": "never"
+    "trailingCommas": "never",
+    "quoteStyle": "preferDouble"
   },
   "json": {
     "trailingCommas": "never"

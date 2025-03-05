@@ -5,8 +5,8 @@ import { replaceAsyncCallback } from "./replace-async-callback.js"
 
 suite("replaceAsyncCallback", function() {
   test("<CALLBACK>", function() {
-    const give = "fs.writeFile(\"foo\", \"bar\", <CALLBACK>)"
-    const want = "fs.writeFile(\"foo\", \"bar\", __finished)"
+    const give = 'fs.writeFile("foo", "bar", <CALLBACK>)'
+    const want = 'fs.writeFile("foo", "bar", __finished)'
     assert.equal(replaceAsyncCallback(give), want)
   })
   test("// ...", function() {

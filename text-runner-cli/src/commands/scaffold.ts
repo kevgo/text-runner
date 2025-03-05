@@ -43,7 +43,7 @@ export class ScaffoldCommand implements textRunner.commands.Command {
     } else {
       throw new textRunner.UserError(
         `Unknown configuration language: ${this.language}`,
-        "Possible languages are \"js\" and \"ts\""
+        'Possible languages are "js" and "ts"'
       )
     }
   }

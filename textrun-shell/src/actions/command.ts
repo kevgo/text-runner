@@ -21,7 +21,8 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.region[0].tag
+      `the <${
+        action.region[0].tag
       } ${action.configuration.regionMarker}="shell/command"> region contains no commands to run`
     )
   }

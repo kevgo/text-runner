@@ -5,7 +5,7 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "doc": "text-runner",
+    "doc": "text-runner --format=dot",
     "fix": "dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc"
   },

@@ -62,7 +62,7 @@ suite("parseCmdlineArgs()", function() {
   test("--format=dot", function() {
     const { cmdLineConfig, commandName } = cmdLine.parse(["--format=dot"])
     assert.equal(commandName, "run")
-    assert.equal(cmdLineConfig.formatterName, "dot")
+    assert.equal(cmdLineConfig.format, "dot")
   })
 
   test("--workspace foo/bar", function() {

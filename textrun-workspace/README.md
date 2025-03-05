@@ -17,16 +17,6 @@ npm i -D textrun-workspace
 
 </a>
 
-or
-
-<a type="npm/install">
-
-```
-yarn i -D textrun-workspace
-```
-
-</a>
-
 ### working-dir
 
 Each Text-Runner test starts at the

@@ -5,7 +5,9 @@
     "arrowFunction.useParentheses": "preferNone",
     "trailingCommas": "never"
   },
-  "json": {},
+  "json": {
+    "trailingCommas": "never"
+  },
   "markdown": {
     "textWrap": "always",
     "lineWidth": 80

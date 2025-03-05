@@ -23,7 +23,7 @@ including macOS, Windows, and Linux. To get started:
 - install TextRunner:
 
   <pre type="shell/command">
-  npm install -D text-runner tsx
+  npm install -D text-runner
   </pre>
 
 - make sure it works by running:

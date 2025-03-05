@@ -1,15 +1,17 @@
-# Text-Runner Actions for the Text-Runner workspace
+# Text-Runner Actions for the Text-Runner test workspace
 
-This package provides [Text-Runner](https://github.com/kevgo/text-runner)
-actions for working with files.
+Some Text-Runner actions create files and folders on disk. These files and
+folders get created in a temporary directory called the "workspace". This
+package provides [Text-Runner](https://github.com/kevgo/text-runner) actions for
+working with this Text-Runner workspace.
 
 ### installation
 
-To use these actions, add this package as a development dependency by running
-
-<pre type="npm/install">
+<a type="npm/install">
+```
 $ npm i -D textrun-workspace
-</pre>
+```
+</a>
 
 or
 
@@ -20,8 +22,10 @@ $ yarn i -D textrun-workspace
 ### working-dir
 
 The <b type="action/name-full">workspace/working-dir</b> action changes the
-current working directory into the given directory inside the workspace. As an
-example, consider the following documentation snippet:
+current working directory to the given directory inside the workspace. As an
+example, consider your repository contains a
+<b type="workspace/new-directory">test</b> folder. Your can make can change into
+it
 
 <a type="extension/runnable-region">
 

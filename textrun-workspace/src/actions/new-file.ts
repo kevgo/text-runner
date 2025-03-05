@@ -17,8 +17,7 @@ export async function newFile(action: textRunner.actions.Args): Promise<void> {
   let content = ""
   try {
     content = action.region.textInNodeOfType("fence", "code")
-  } catch (e) {
-  }
+  } catch (e) {}
   const filePath = path.join(action.region[0].attributes["dir"] ?? ".", fileName)
   action.name(`create file ${color.cyan(filePath)}`)
   const fullPath = action.configuration.workspace.joinStr(filePath)

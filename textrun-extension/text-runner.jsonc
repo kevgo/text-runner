@@ -1,6 +1,4 @@
 {
   "files": "*.md",
-  "exclude": [
-    "tmp"
-  ]
+  "exclude": ["tmp"]
 }

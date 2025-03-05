@@ -26,7 +26,7 @@ When you assign the <b type="action/name-full">javascript/runnable</b> type to
 this document part, Text-Runner executes the JavaScript similar to how the user
 would:
 
-<!-- prettier-ignore-start -->
+<!-- dprint-ignore-start -->
 
 <a type="extension/runnable-region">
 
@@ -35,16 +35,12 @@ Let's run our first JavaScript command:
 
 <a type="javascript/runnable">
 
-```js
-console.log("Hello world")
-```
-
-</a>
+```js console.log("Hello world") ``` </a>
 ````
 
 </a>
 
-<!-- prettier-ignore-end -->
+<!-- dprint-ignore-end -->
 
 You can simplify this to:
 

@@ -84,10 +84,12 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
     throw new UserError(
       `link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`,
-      `File ${fullFile.unixified()} contains these anchors: ${action.linkTargets
-        .getAnchors(fullFile)
-        .map(anchor => `#${anchor}`)
-        .join(", ")}`
+      `File ${fullFile.unixified()} contains these anchors: ${
+        action.linkTargets
+          .getAnchors(fullFile)
+          .map(anchor => `#${anchor}`)
+          .join(", ")
+      }`
     )
   }
 
@@ -103,10 +105,12 @@ function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, a
   if (!action.linkTargets.hasAnchor(file, anchorName)) {
     throw new UserError(
       `link to non-existing local anchor ${target}`,
-      `These local anchors exist: ${action.linkTargets
-        .getAnchors(file)
-        .map(anchor => `#${anchor}`)
-        .join(", ")}`,
+      `These local anchors exist: ${
+        action.linkTargets
+          .getAnchors(file)
+          .map(anchor => `#${anchor}`)
+          .join(", ")
+      }`,
       action.location
     )
   }

@@ -3,7 +3,7 @@ import { suite, test } from "node:test"
 
 import { name } from "./name.js"
 
-suite("getActionName()", function () {
+suite("getActionName()", function() {
   const tests = {
     "/users/foo/text-runner/text-runner/cdBack.js": "cd-back"
   }

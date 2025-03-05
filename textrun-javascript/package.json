@@ -12,8 +12,8 @@
     "clean": "rm -rf dist",
     "cuke": "cucumber-js --format=progress",
     "doc": "text-runner static --format=summary && text-runner dynamic --format=progress",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write . && sort-package-json --quiet",
-    "lint": "prettier -l . && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {

@@ -10,16 +10,20 @@ working with this Text-Runner workspace.
 <a type="npm/install">
 
 ```
-$ npm i -D textrun-workspace
+npm i -D textrun-workspace
 ```
 
 </a>
 
 or
 
-<pre type="npm/install">
-$ yarn i -D textrun-workspace
-</pre>
+<a type="npm/install">
+
+```
+yarn i -D textrun-workspace
+```
+
+</a>
 
 ### working-dir
 

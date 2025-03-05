@@ -1,3 +1,5 @@
 {
-  "exclude": ["examples"]
+  "exclude": [
+    "examples"
+  ]
 }

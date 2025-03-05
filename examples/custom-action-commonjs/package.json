@@ -4,7 +4,7 @@
   "private": true,
   "module": "commonjs",
   "scripts": {
-    "doc": "text-runner --format=progress",
+    "doc": "text-runner --format=dot",
     "fix": "dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet"
   },

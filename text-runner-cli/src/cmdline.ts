@@ -16,11 +16,11 @@ export function parse(argv: string[]): {
 } {
   // remove optional node parameter
   if (
-    path.basename(argv[0] || "") === "node" ||
-    path.win32.basename(argv[0] || "") === "node.exe" ||
-    argv[0]?.includes("node_modules/tsx") ||
-    argv[0]?.includes("node_modules\\tsx") ||
-    argv[0]?.startsWith("/usr/bin/node")
+    path.basename(argv[0] || "") === "node"
+    || path.win32.basename(argv[0] || "") === "node.exe"
+    || argv[0]?.includes("node_modules/tsx")
+    || argv[0]?.includes("node_modules\\tsx")
+    || argv[0]?.startsWith("/usr/bin/node")
   ) {
     argv.splice(0, 1)
   }
@@ -109,7 +109,7 @@ function parseSystemTmp(value: any): boolean | undefined {
     default:
       throw new textRunner.UserError(
         `unknown value for "system-tmp" setting: ${value}`,
-        'Set the "system-tmp" setting to "true" to have Text-Runner put the test workspace into the global system temp folder and "false" to put it into the current folder.'
+        "Set the \"system-tmp\" setting to \"true\" to have Text-Runner put the test workspace into the global system temp folder and \"false\" to put it into the current folder."
       )
   }
 }

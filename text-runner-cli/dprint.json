@@ -1,4 +1,0 @@
-{
-  "extends": ["../dprint.json"],
-  "excludes": ["bin", "fixtures"]
-}

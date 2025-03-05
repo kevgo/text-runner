@@ -79,7 +79,7 @@ function parse(fileContent: string): config.Data {
     emptyWorkspace: fileData.emptyWorkspace,
     exclude: fileData.exclude,
     files: fileData.files,
-    formatterName: fileData.format,
+    format: fileData.format,
     ignoreLinkTargets: fileData.ignoreLinkTargets,
     online: fileData.online,
     publications: fileData.publications,

@@ -47,7 +47,7 @@ export function parse(argv: string[]): {
     emptyWorkspace: cliArgs["empty-workspace"],
     exclude: cliArgs.exclude,
     files: cliArgs._[1], // after the command can be a filename, as in "text-runner debug foo.md"
-    formatterName: cliArgs.format,
+    format: cliArgs.format,
     online: cliArgs.online,
     scaffoldLanguage: parseScaffoldSwitches(cliArgs),
     workspace: cliArgs.workspace

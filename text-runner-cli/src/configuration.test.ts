@@ -15,7 +15,7 @@ suite("CLIConfiguration", function() {
     test("userConfig overrides fileConfig", function() {
       const fileConfig = new configuration.Data({
         files: "**/*.md",
-        formatterName: "dot",
+        format: "dot",
         online: true
       })
       const userConfig = new configuration.Data({
@@ -27,7 +27,7 @@ suite("CLIConfiguration", function() {
         result,
         new configuration.Data({
           files: "1.md",
-          formatterName: "dot",
+          format: "dot",
           online: false
         })
       )

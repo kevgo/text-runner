@@ -17,7 +17,6 @@
   "excludes": [
     "documentation",
     "examples",
-    "node_modules",
     "shared",
     "text-runner-cli",
     "text-runner-core",

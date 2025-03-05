@@ -1,4 +1,3 @@
 {
-  "extends": ["../dprint.json"],
-  "excludes": ["dist", "tmp"]
+  "extends": ["../dprint.json"]
 }

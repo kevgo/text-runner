@@ -11,7 +11,7 @@ export class Data {
   emptyWorkspace?: boolean
   exclude?: string | string[]
   files?: string // files to test
-  formatterName?: formatters.Names // name of the formatter to use
+  format?: formatters.Names // name of the formatter to use
   ignoreLinkTargets?: RegExp[]
   online?: boolean
   publications?: textRunner.configuration.Publications

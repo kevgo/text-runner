@@ -3,19 +3,19 @@ import { suite, test } from "node:test"
 
 import * as configuration from "./configuration.js"
 
-suite("CLIConfiguration", function() {
-  suite("merge", function() {
-    test("empty inputs", function() {
+suite("CLIConfiguration", function () {
+  suite("merge", function () {
+    test("empty inputs", function () {
       const config = new configuration.Data()
       const have = config.merge(new configuration.Data())
       const want = new configuration.Data()
       assert.deepEqual(have, want)
     })
 
-    test("userConfig overrides fileConfig", function() {
+    test("userConfig overrides fileConfig", function () {
       const fileConfig = new configuration.Data({
         files: "**/*.md",
-        formatterName: "dot",
+        format: "dot",
         online: true
       })
       const userConfig = new configuration.Data({
@@ -27,14 +27,14 @@ suite("CLIConfiguration", function() {
         result,
         new configuration.Data({
           files: "1.md",
-          formatterName: "dot",
+          format: "dot",
           online: false
         })
       )
     })
   })
 
-  test("toConfig", function() {
+  test("toConfig", function () {
     const userConfig = new configuration.Data({
       files: "1.md",
       regionMarker: "foo"

@@ -11,9 +11,10 @@ export async function main(argv: string[]): Promise<number> {
   try {
     const { cmdLineConfig, commandName, debugSubcommand } = cmdLine.parse(argv)
     const fileConfig = await configFile.load(cmdLineConfig)
+    console.log("111111111111111111111111", fileConfig)
     const userConfig = fileConfig.merge(cmdLineConfig)
     const command = commands.instantiate(commandName, userConfig, debugSubcommand)
-    const formatter = formatters.instantiate(userConfig.formatterName || "detailed", command)
+    const formatter = formatters.instantiate(userConfig.format || "detailed", command)
     const activityCollector = new textRunner.ActivityCollector(command)
     await command.execute()
     const results = activityCollector.results()

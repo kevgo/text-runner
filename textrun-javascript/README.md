@@ -35,7 +35,10 @@ Let's run our first JavaScript command:
 
 <a type="javascript/runnable">
 
-```js console.log("Hello world") ``` </a>
+```js
+console.log("Hello world")
+```
+</a>
 ````
 
 </a>

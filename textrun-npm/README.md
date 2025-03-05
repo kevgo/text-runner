@@ -6,8 +6,7 @@ actions for verifying the documentation of npm packages.
 ### Installation
 
 To use these actions, add this package as a development dependency by running
-<code type="npm/install">npm i -D textrun-npm</code> or
-<code type="npm/install">yarn i -D textrun-npm</code>.
+<code type="npm/install">npm i -D textrun-npm</code>.
 
 ## Verify installation instructions
 
@@ -35,12 +34,6 @@ Install the foobar package by running:
 
 <pre type="npm/install">
 $ npm install foobar
-</pre>
-
-or with Yarn:
-
-<pre type="npm/install">
-$ yarn add foobar
 </pre>
 ```
 

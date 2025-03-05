@@ -14,12 +14,6 @@ To use these actions, add this package as a development dependency by running
 $ npm i -D textrun-workspace
 </pre>
 
-or
-
-<pre type="npm/install">
-$ yarn i -D textrun-workspace
-</pre>
-
 ### cd action
 
 The <b type="action/name-full">workspace/working-dir</b> action changes the

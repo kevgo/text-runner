@@ -3,7 +3,7 @@ import { suite, test } from "node:test"
 
 import { isLinkToAnchorInOtherFile } from "./is-link-to-anchor-in-other-file.js"
 
-suite("isLinkToAnchorInOtherFile()", function () {
+suite("isLinkToAnchorInOtherFile()", function() {
   const tests = {
     "#foo": false,
     "foo.md": false,
@@ -12,7 +12,7 @@ suite("isLinkToAnchorInOtherFile()", function () {
     "https://foo.com/bar#baz": false
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} is ${want}`, function () {
+    test(`${give} is ${want}`, function() {
       assert.equal(isLinkToAnchorInOtherFile(give), want)
     })
   }

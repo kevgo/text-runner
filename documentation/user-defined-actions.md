@@ -69,15 +69,14 @@ TextRunner supports all forms of JavaScript functions as actions:
 - synchronous functions
 - functions receiving a callback
 - functions returning a Promise
-- [async
-  functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
+- [async functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
 Examples for custom actions written in ESM are
 [here](../examples/custom-action-esm/text-runner/hello-world.js). You can write
 functions in [TypeScript](../examples/custom-action-typescript/) or in classic
 [CommonJS](../examples/custom-action-commonjs/text-runner/hello-world.js). Throw
-an exception to fail a test. Use only [strippable
-types](https://nodejs.org/en/learn/typescript/run-natively).
+an exception to fail a test. Use only
+[strippable types](https://nodejs.org/en/learn/typescript/run-natively).
 
 ## Accessing document content
 

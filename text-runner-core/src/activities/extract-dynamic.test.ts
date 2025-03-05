@@ -4,8 +4,8 @@ import { suite, test } from "node:test"
 import * as ast from "../ast/index.js"
 import { extractDynamic } from "./extract-dynamic.js"
 
-suite("extract()", function () {
-  test("many activities", function () {
+suite("extract()", function() {
+  test("many activities", function() {
     const input = new ast.NodeList()
     input.pushNode({
       attributes: { textrun: "verify-foo" },
@@ -30,7 +30,7 @@ suite("extract()", function () {
     { give: "verify_foo", want: "verify-foo" }
   ]
   for (const tt of tests) {
-    test(`normalizes activity name ${tt.give}`, function () {
+    test(`normalizes activity name ${tt.give}`, function() {
       const AST = new ast.NodeList()
       AST.pushNode({
         attributes: { textrun: "verify_foo" }

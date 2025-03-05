@@ -3,13 +3,13 @@ import { suite, test } from "node:test"
 
 import * as ast from "./index.js"
 
-suite("ast.Node", function () {
-  test(".scaffold()", function () {
+suite("ast.Node", function() {
+  test(".scaffold()", function() {
     const node = ast.Node.scaffold({ type: "heading_open" })
     assert.equal(node.type, "heading_open")
   })
 
-  test(".endTypeFor()", function () {
+  test(".endTypeFor()", function() {
     const tests: { [key in ast.NodeType]?: ast.NodeType } = {
       anchor_open: "anchor_close",
       heading_open: "heading_close"
@@ -21,8 +21,8 @@ suite("ast.Node", function () {
     }
   })
 
-  suite(".getNodesFor()", function () {
-    test("flat list", function () {
+  suite(".getNodesFor()", function() {
+    test("flat list", function() {
       const list = new ast.NodeList()
       list.push(ast.Node.scaffold({ line: 1, type: "text" }))
       list.push(ast.Node.scaffold({ line: 2, type: "link_open" }))
@@ -34,7 +34,7 @@ suite("ast.Node", function () {
       assert.deepEqual(lines, [2, 3, 4])
     })
 
-    test("nested links in active regions", function () {
+    test("nested links in active regions", function() {
       const list = new ast.NodeList()
       list.push(ast.Node.scaffold({ line: 1, type: "text" }))
       list.push(ast.Node.scaffold({ line: 2, type: "link_open" }))
@@ -50,8 +50,8 @@ suite("ast.Node", function () {
     })
   })
 
-  suite(".htmlLinkTarget()", function () {
-    test("link tags", function () {
+  suite(".htmlLinkTarget()", function() {
+    test("link tags", function() {
       const node = ast.Node.scaffold({
         content: '<a href="http://foo.com">',
         type: "htmltag"
@@ -59,12 +59,12 @@ suite("ast.Node", function () {
       assert.equal(node.htmlLinkTarget(), "http://foo.com", "should return the href content of link tags")
     })
 
-    test("non-link tags", function () {
+    test("non-link tags", function() {
       const node = ast.Node.scaffold({ content: "hello", type: "htmltag" })
       assert.isNull(node.htmlLinkTarget())
     })
 
-    test("anchor tags", function () {
+    test("anchor tags", function() {
       const node = ast.Node.scaffold({
         content: '<a name="foo">',
         type: "htmltag"

@@ -1,0 +1,34 @@
+{
+  "typescript": {
+    "lineWidth": 120,
+    "semiColons": "asi",
+    "arrowFunction.useParentheses": "preferNone",
+    "trailingCommas": "never",
+    "quoteStyle": "preferDouble"
+  },
+  "json": {
+    "trailingCommas": "never"
+  },
+  "markdown": {
+    "textWrap": "always",
+    "lineWidth": 80
+  },
+  "markup": {},
+  "yaml": {},
+  "excludes": [
+    "documentation",
+    "examples",
+    "shared",
+    "text-runner-cli",
+    "text-runner-core",
+    "text-runner-features",
+    "tools"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.94.0.wasm",
+    "https://plugins.dprint.dev/json-0.20.0.wasm",
+    "https://plugins.dprint.dev/markdown-0.18.0.wasm",
+    "https://plugins.dprint.dev/g-plane/markup_fmt-v0.19.0.wasm",
+    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.0.wasm"
+  ]
+}

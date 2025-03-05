@@ -50,10 +50,10 @@ export class Finder {
   /** actionFor provides the action function for the given Activity. */
   async actionFor(activity: activities.Activity): Promise<Action> {
     return (
-      this.builtinActions.get(activity.actionName) ||
-      this.customActions.get(activity.actionName) ||
-      (await this.externalActions.get(activity)) ||
-      this.errorUnknownAction(activity)
+      this.builtinActions.get(activity.actionName)
+      || this.customActions.get(activity.actionName)
+      || (await this.externalActions.get(activity))
+      || this.errorUnknownAction(activity)
     )
   }
 

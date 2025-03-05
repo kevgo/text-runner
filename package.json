@@ -54,5 +54,5 @@
     "typescript": "5.7.3",
     "typescript-eslint": "8.25.0"
   },
-  "packageManager": "npm@10.22.22"
+  "packageManager": "npm@10.9.0"
 }

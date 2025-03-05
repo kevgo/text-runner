@@ -3,7 +3,7 @@ import { suite, test } from "node:test"
 
 import { straightenLink } from "./straighten-link.js"
 
-suite("straightenLink", function () {
+suite("straightenLink", function() {
   const tests = {
     "/foo": "/foo",
     "/one/../two": "/two",
@@ -13,7 +13,7 @@ suite("straightenLink", function () {
     "/one/two/three/../../four": "/one/four"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} ==> ${want}`, function () {
+    test(`${give} ==> ${want}`, function() {
       assert.equal(straightenLink(give), want)
     })
   }

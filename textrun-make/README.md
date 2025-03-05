@@ -2,7 +2,7 @@
 
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for verifying documentation mentioning
-[Make](<https://en.wikipedia.org/wiki/Make_(software)>) targets.
+[Make](https://en.wikipedia.org/wiki/Make_(software)) targets.
 
 ### Installation
 

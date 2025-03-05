@@ -3,7 +3,7 @@ import { suite, test } from "node:test"
 
 import { dirPath } from "./workspace.js"
 
-suite("dirPath", function () {
+suite("dirPath", function() {
   const __dirname = "/home/foo/text-runner/shared/cucumber-steps/src/helpers"
   const tests = {
     "/home/foo/text-runner/text-runner-cli": "/home/foo/text-runner/test/cli",
@@ -13,7 +13,7 @@ suite("dirPath", function () {
     "/home/foo/text-runner/textrun-extension": "/home/foo/text-runner/test/extension"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} --> ${want}`, function () {
+    test(`${give} --> ${want}`, function() {
       const have = dirPath(give, __dirname, "1")
       assert.equal(have, want)
     })

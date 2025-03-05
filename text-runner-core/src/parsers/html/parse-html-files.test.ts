@@ -9,14 +9,14 @@ import * as files from "../../filesystem/index.js"
 import { TagMapper } from "../tag-mapper.js"
 import { parseHTMLFiles } from "./parse-html-files.js"
 
-suite("parseHTMLFiles", function () {
+suite("parseHTMLFiles", function() {
   const tagMapper = new TagMapper()
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
   const specificFixtureDir = path.join("src", "parsers", "html", "fixtures")
   for (const fixturePath of [sharedFixtureDir, specificFixtureDir]) {
     for (const testDirName of fs.readdirSync(fixturePath)) {
       const testDirPath = path.join(fixturePath, testDirName)
-      test(`parse '${testDirName}'`, async function () {
+      test(`parse '${testDirName}'`, async function() {
         const resultFilePath = path.join(testDirPath, "result.json")
         const resultData: NodeScaffoldData[] = JSON.parse(fs.readFileSync(resultFilePath, "utf-8"))
         const expected = new ast.NodeList()

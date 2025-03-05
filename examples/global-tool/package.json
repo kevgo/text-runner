@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "doc": "text-runner --format=progress",
-    "fix": "prettier --write . && sort-package-json --quiet",
-    "lint": "prettier -l . && sort-package-json --check --quiet"
+    "fix": "dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet"
   },
   "dependencies": {
     "text-runner": "7.0.0",

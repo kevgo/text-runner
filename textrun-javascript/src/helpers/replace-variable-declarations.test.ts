@@ -3,7 +3,7 @@ import { suite, test } from "node:test"
 
 import { replaceVariableDeclarations } from "./replace-variable-declarations.js"
 
-suite("replaceVariableDeclarations", function () {
+suite("replaceVariableDeclarations", function() {
   const tests = {
     "const foo = 123": "global.foo = 123",
     "let foo = 123": "global.foo = 123",
@@ -11,7 +11,7 @@ suite("replaceVariableDeclarations", function () {
     "var foo = 123": "global.foo = 123"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} --> ${want}`, function () {
+    test(`${give} --> ${want}`, function() {
       assert.equal(replaceVariableDeclarations(give), want)
     })
   }

@@ -90,7 +90,7 @@ function asyncFoo(done) {
   done()
 }
 
-asyncFoo(function (err) {
+asyncFoo(function(err) {
   // ...
 })
 ```

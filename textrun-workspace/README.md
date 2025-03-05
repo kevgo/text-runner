@@ -28,17 +28,17 @@ yarn i -D textrun-workspace
 ### working-dir
 
 The <b type="action/name-full">workspace/working-dir</b> action changes the
-current working directory to the given directory inside the workspace. As an
-example, consider your repository contains a
-<b type="workspace/new-directory">test</b> folder. Your can make can change into
-it
+current working directory of the test runner to the given directory inside the
+workspace. As an example, consider your repository contains a
+<b type="workspace/new-directory">examples</b> folder. Your can make can change
+into it
 
 <a type="extension/runnable-region">
 
 ```html
 Create a
-<code type="workspace/new-directory">foo</code>
-directory. Now you can change into it via this Markdown code:
+<code type="workspace/new-directory">scripts</code>
+folder. Now you can change into it via this Markdown code:
 <code type="workspace/working-dir">foo</code>
 ```
 

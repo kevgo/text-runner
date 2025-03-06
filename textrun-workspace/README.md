@@ -62,7 +62,9 @@ content is a code block with one or three backticks. Here are a few examples:
 
 ```markdown
 <a type="workspace/new-file">
+
 Create file _apples.txt_ with the content `Fuji apples are the best`.
+
 </a>
 ```
 
@@ -72,6 +74,7 @@ Create file _apples.txt_ with the content `Fuji apples are the best`.
 
 ````markdown
 <a type="workspace/new-file">
+
 Create file **apples.txt** with the content:
 
 ```
@@ -85,7 +88,7 @@ Fuji apples are the best
 
 When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file">_apples.txt_ and content
-`Fuji apples are the best!`</a> in the workspace.
+`Fuji apples are the best`</a> in the workspace.
 
 ### directory
 

@@ -84,27 +84,7 @@ Fuji apples are the best!
 
 When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file">_apples.txt_ and content
-`Fuji apples are the best!`</a>. Alternatively, the documentation could also
-read like this:
-
-<a type="extension/runnable-region">
-
-````markdown
-<a type="workspace/new-file">
-
-Please create a file with name **more-apples.txt** and the content:
-
-```
-Gala
-```
-
-</a>
-````
-
-</a>
-
-Similarly, Text-Runner will create a file
-<a type="workspace/existing-file">_more-apples.txt_ with content `Gala`</a>.
+`Fuji apples are the best!`</a>.
 
 ### directory
 

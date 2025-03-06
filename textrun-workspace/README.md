@@ -30,7 +30,8 @@ change into it like this:
 
 ```html
 Please change into the
-<code type="workspace/working-dir">scripts</code> folder.
+<code type="workspace/working-dir">scripts</code>
+folder.
 ```
 
 </a>

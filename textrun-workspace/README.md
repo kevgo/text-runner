@@ -1,11 +1,10 @@
 # Text-Runner Actions for the Text-Runner test workspace
 
 Some Text-Runner actions create files and folders on disk. These files and
-folders get created in a temporary directory called the `workspace`. The
-workspace
-
-This package provides [Text-Runner](https://github.com/kevgo/text-runner)
-actions for working with this Text-Runner workspace.
+folders get created in a temporary directory called the `workspace` so that they
+don't interfere with the documentation files. This package provides
+[Text-Runner](https://github.com/kevgo/text-runner) actions for interacting with
+this Text-Runner workspace.
 
 ### installation
 
@@ -19,21 +18,18 @@ npm i -D textrun-workspace
 
 ### working-dir
 
-Each Text-Runner test starts at the
-
-The <b type="action/name-full">workspace/working-dir</b> action changes the
-current working directory of the test runner to the given directory inside the
+Each Text-Runner test starts in the workspace directory. The
+<b type="action/name-full">workspace/working-dir</b> action changes the current
+working directory of the test runner to the given directory inside the
 workspace. As an example, consider your repository contains a
-<b type="workspace/new-directory">examples</b> folder. Your can make can change
-into it
+<b type="workspace/new-directory">scripts</b> folder. Your documentation can
+change into it like this:
 
 <a type="extension/runnable-region">
 
 ```html
-Create a
-<code type="workspace/new-directory">scripts</code>
-folder. Now you can change into it via this Markdown code:
-<code type="workspace/working-dir">scripts</code>
+Please change into the
+<code type="workspace/working-dir">scripts</code> folder.
 ```
 
 </a>

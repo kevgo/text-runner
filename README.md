@@ -12,13 +12,13 @@
 
 </div>
 
-Text-Runner is a test framework for user-facing documentation. It helps keep
+Text-Runner is a test framework for technical documentation. It helps keep
 documentation up to date. An example is the text you are reading right now.
 TextRunner verifies it for technical correctness.
 
-If you tell it how, TextRunner can read and understand any form of
-Markdown-formatted text in any human language as well as complex data in tables,
-bullet point lists, and even embedded images!
+As a fully programmable test framework, TextRunner can read and understand any
+form of Markdown-formatted text in any human language as well as complex data in
+tables, bullet point lists, and even images!
 
 ### For users
 

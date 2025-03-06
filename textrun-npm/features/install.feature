@@ -21,7 +21,7 @@ Feature: verifying NPM installation instructions
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                               |
       | 1.md     | 3    | npm/install | check npm package name in npm i -g my_enormous_package |
 
@@ -35,7 +35,7 @@ Feature: verifying NPM installation instructions
       </pre>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                               |
       | 1.md     | 3    | npm/install | check npm package name in npm i -g my_enormous_package |
 
@@ -45,7 +45,7 @@ Feature: verifying NPM installation instructions
       installation: <a type="npm/install">`npm i -g my_enormous_package`</a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                               |
       | 1.md     | 1    | npm/install | check npm package name in npm i -g my_enormous_package |
 
@@ -62,7 +62,7 @@ Feature: verifying NPM installation instructions
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                                                       |
       | 1.md     | 3    | npm/install | failed | UserError  | installation instructions npm i -g zonk don't contain expected npm package name my_enormous_package |
 
@@ -75,7 +75,7 @@ Feature: verifying NPM installation instructions
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                      |
       | 1.md     | 3    | npm/install | failed | UserError  | no installation instructions found |
 
@@ -92,6 +92,6 @@ Feature: verifying NPM installation instructions
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS | ERROR TYPE | ERROR MESSAGE                                                                               |
       | 1.md     | 3    | npm/install | failed | UserError  | installation instructions npm i don't contain expected npm package name my_enormous_package |

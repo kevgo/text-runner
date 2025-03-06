@@ -13,7 +13,7 @@ Feature: ignore link patterns
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION     |
       | 1.md     | 2    | check-link |
 

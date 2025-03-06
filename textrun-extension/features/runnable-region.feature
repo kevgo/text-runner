@@ -12,7 +12,7 @@ Feature: Execute regions of semantic Markdown
       </pre>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  | LINE | ACTION                    | ACTIVITY                        | STATUS  |
       | source.md | 1    | extension/runnable-region | execute Markdown in Text-Runner | success |
       | source.md | 4    | test                      | Test                            | success |
@@ -24,7 +24,7 @@ Feature: Execute regions of semantic Markdown
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  | LINE | ACTION                    | STATUS | ERROR TYPE | ERROR MESSAGE           |
       | source.md | 1    | extension/runnable-region | failed | UserError  | no content to run found |
 
@@ -40,7 +40,7 @@ Feature: Execute regions of semantic Markdown
       </pre>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  | LINE | ACTION                    | STATUS  | ERROR TYPE | ERROR MESSAGE        | GUIDANCE                                                                                      |
       | source.md | 1    | extension/runnable-region | success |            |                      |                                                                                               |
       | source.md | 4    | zonk                      | failed  | UserError  | unknown action: zonk | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-runner scaffold zonk" |

@@ -35,7 +35,7 @@ Feature: running console commands
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME              | LINE | ACTION                   | ACTIVITY                              | OUTPUT                     |
       | create-echo-server.md | 1    | workspace/new-file       | create file echo.js                   | create file echo.js        |
       | enter-input.md        | 1    | shell/command-with-input | running console command: node echo.js | Your inputYou entered: 123 |
@@ -86,7 +86,7 @@ Feature: running console commands
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME               | LINE | ACTION                   | ACTIVITY                               | OUTPUT                                                                                          |
       | create-input-server.md | 1    | workspace/new-file       | create file input.js                   | create file input.js                                                                            |
       | enter-input.md         | 1    | shell/command-with-input | running console command: node input.js | Name of the service to add\nDescription\nservice: html-server, description: serves the HTML UI! |

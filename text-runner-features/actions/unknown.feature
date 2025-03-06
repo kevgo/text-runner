@@ -9,7 +9,7 @@ Feature: unknown action types
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | STATUS | ERROR TYPE | ERROR MESSAGE        | GUIDANCE                                                                                      |
       | 1.md     | 1    | failed | UserError  | unknown action: zonk | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-runner scaffold zonk" |
     And the error provides the guidance:

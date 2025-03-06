@@ -23,7 +23,7 @@ Feature: verifying global commands provided by NPM modules
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION                  | ACTIVITY                           |
       | 1.md     | 3    | npm/exported-executable | npm package exports executable foo |
 
@@ -33,7 +33,7 @@ Feature: verifying global commands provided by NPM modules
       To run this app, call <code type="npm/exported-executable">foo</code> on the command line
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION                  | ACTIVITY                           |
       | 1.md     | 1    | npm/exported-executable | npm package exports executable foo |
 
@@ -50,7 +50,7 @@ Feature: verifying global commands provided by NPM modules
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE                                 |
       | 1.md     | 3    | npm/exported-executable | failed | UserError  | package.json does not export a "zonk" command |
 
@@ -63,6 +63,6 @@ Feature: verifying global commands provided by NPM modules
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE                |
       | 1.md     | 3    | npm/exported-executable | failed | UserError  | No executable name specified |

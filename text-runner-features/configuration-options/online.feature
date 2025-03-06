@@ -22,7 +22,7 @@ Feature: "online" option
       <img src="http://google.com/foo.png">
       """
     When calling "textRunner.runCommand({sourceDir, formatterName})"
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                        | STATUS  |
       | 1.md     | 1    | check-link  | link to http://google.com       | skipped |
       | 1.md     | 2    | check-image | image http://google.com/foo.png | skipped |
@@ -35,7 +35,7 @@ Feature: "online" option
       <img src="http://google.com/foo.png">
       """
     When calling "textRunner.runCommand({online: true, sourceDir, formatterName})"
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                        | STATUS  |
       | 1.md     | 1    | check-link  | link to http://google.com       | success |
       | 1.md     | 2    | check-image | image http://google.com/foo.png | success |

@@ -6,7 +6,7 @@ Feature: creating files with content
       creating a file with name <a type="workspace/new-file">_one.txt_ and content `Hello world!`</a>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
@@ -26,7 +26,7 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
@@ -43,7 +43,7 @@ Feature: creating files with content
       </pre>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
@@ -63,7 +63,7 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | ACTIVITY            |
       | creator.md | 1    | workspace/new-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
@@ -78,7 +78,7 @@ Feature: creating files with content
       <a type="workspace/new-file">`Hello world!`</a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                          | GUIDANCE                                                                                                                                  |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'em/strong/em_open/strong_open' | Cannot determine the name of the file to create.\nThe node types in this list are: anchor_open, code_open, text, code_close, anchor_close |
     And the error provides the guidance:
@@ -94,7 +94,7 @@ Feature: creating files with content
       <a type="workspace/new-file">__one.txt__</a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                            | GUIDANCE                                                                                                                                         |
       | creator.md | 1    | workspace/new-file | failed | UserError  | found no nodes of type 'fence/code/fence_open/code_open' | Cannot determine the content of the file to create.\nThe node types in this list are: anchor_open, strong_open, text, strong_close, anchor_close |
     And the error provides the guidance:
@@ -118,7 +118,7 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                         | GUIDANCE                                                                                                                                |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'em/strong/em_open/strong_open' | Cannot determine the name of the file to create.\nThe nodeOfTypes method expects to find only one matching node, but it found multiple. |
 
@@ -141,7 +141,7 @@ Feature: creating files with content
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE                                           | GUIDANCE                                                                                                                                   |
       | creator.md | 1    | workspace/new-file | failed | UserError  | Found 2 nodes of type 'fence/code/fence_open/code_open' | Cannot determine the content of the file to create.\nThe nodeOfTypes method expects to find only one matching node, but it found multiple. |
 
@@ -156,7 +156,7 @@ Feature: creating files with content
       </a>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION             | ACTIVITY                   |
       | creator.md | 1    | workspace/new-file | create file subdir/one.txt |
     And the workspace now contains a file "subdir/one.txt" with content:

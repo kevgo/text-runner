@@ -6,7 +6,7 @@ Feature: creating directories
       Create the directory <b type="workspace/new-directory">directory_name</b>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION                  | ACTIVITY                        |
       | creator.md | 1    | workspace/new-directory | create directory directory_name |
     And the test workspace now contains a directory "directory_name"
@@ -17,7 +17,7 @@ Feature: creating directories
       Create the directory <b type="workspace/new-directory">
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE              |
       | creator.md | 1    | workspace/new-directory | failed | UserError  | empty directory name given |
 
@@ -28,7 +28,7 @@ Feature: creating directories
       <b type="workspace/new-directory"> </b>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE              |
       | creator.md | 1    | workspace/new-directory | failed | UserError  | empty directory name given |
 
@@ -40,7 +40,7 @@ Feature: creating directories
       <a type="workspace/new-directory" dir="subdir">directory_name</a>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION                  | ACTIVITY                               |
       | creator.md | 2    | workspace/new-directory | create directory subdir/directory_name |
     And the test workspace now contains a directory "subdir/directory_name"

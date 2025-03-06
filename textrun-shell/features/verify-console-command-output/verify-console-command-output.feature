@@ -22,7 +22,7 @@ Feature: verifying the output of the last console command
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME         | LINE | ACTION               | ACTIVITY                                                    |
       | verify-output.md | 1    | shell/command        | running console command: echo one && echo two && echo three |
       | verify-output.md | 10   | shell/command-output | verifying the output of the last run console command        |

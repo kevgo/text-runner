@@ -7,7 +7,7 @@ Feature: Appending content to existing workspace files
       Now append to file <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY               |
       | directory_changer.md | 1    | workspace/new-file                | create file foo/bar    |
       | directory_changer.md | 2    | workspace/additional-file-content | append to file foo/bar |
@@ -37,7 +37,7 @@ Feature: Appending content to existing workspace files
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION                            | ACTIVITY                  |
       | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
     And the workspace now contains a file "foo/bar" with content:

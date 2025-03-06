@@ -49,7 +49,7 @@ Then("it executes in the local {string} directory", function(this: TRWorld, dirN
   assert.equal(have, want)
 })
 
-Then("it emits these events:", function(this: TRWorld, table: cucumber.DataTable) {
+Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable) {
   if (this.apiException) {
     console.log(this.apiException)
     assert.fail("unexpected exception during API call")

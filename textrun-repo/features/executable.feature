@@ -7,7 +7,7 @@ Feature: verifying a documented executable in the repository
       <i type="repo/executable">scripts/setup</i>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION          | ACTIVITY                                     |
       | 1.md     | 1    | repo/executable | repository contains executable scripts/setup |
 
@@ -19,7 +19,7 @@ Feature: verifying a documented executable in the repository
       <i type="repo/executable">scripts/setup</i>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION          | ACTIVITY                                     | STATUS | ERROR MESSAGE                         |
       | 1.md     | 1    | repo/executable | repository contains executable scripts/setup | failed | file is not executable: scripts/setup |
 
@@ -30,6 +30,6 @@ Feature: verifying a documented executable in the repository
       <i type="repo/executable">scripts/zonk</i>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION          | ACTIVITY                                    | STATUS | ERROR MESSAGE                |
       | 1.md     | 1    | repo/executable | repository contains executable scripts/zonk | failed | file not found: scripts/zonk |

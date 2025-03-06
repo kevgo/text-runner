@@ -16,7 +16,7 @@ Feature: verifying Make commands
       To build the "foo" executable, run <code type="make/command">make foo</code>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION       | ACTIVITY          |
       | 1.md     | 1    | make/command | make command: foo |
 
@@ -32,7 +32,7 @@ Feature: verifying Make commands
       </code>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION       | ACTIVITY          |
       | 1.md     | 3    | make/command | make command: foo |
 
@@ -42,7 +42,7 @@ Feature: verifying Make commands
       To build the "foo" executable, run <code type="make/command">make zonk</code>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE                                                           |
       | 1.md     | 1    | make/command | failed | UserError  | Makefile does not contain command make zonk but these targets: bar, foo |
 
@@ -52,7 +52,7 @@ Feature: verifying Make commands
       To build the "foo" executable, run <code type="make/command">make </code>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE          | GUIDANCE                             |
       | 1.md     | 1    | make/command | failed | UserError  | No Make commands found | Make commands must start with "make" |
 
@@ -62,7 +62,7 @@ Feature: verifying Make commands
       To build the "foo" executable, run <code type="make/command"> </code>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION       | STATUS | ERROR TYPE | ERROR MESSAGE          | GUIDANCE                             |
       | 1.md     | 1    | make/command | failed | UserError  | No Make commands found | Make commands must start with "make" |
 
@@ -77,6 +77,6 @@ Feature: verifying Make commands
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION       | STATUS  | ACTIVITY          |
       | 1.md     | 1    | make/command | success | make command: foo |

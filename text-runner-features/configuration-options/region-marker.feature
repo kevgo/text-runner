@@ -17,7 +17,7 @@ Feature: configuring the class prefix
   @api
   Scenario: default behavior
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME           | LINE | ACTION |
       | standard-prefix.md | 1    | test   |
 
@@ -47,6 +47,6 @@ Feature: configuring the class prefix
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME         | LINE | ACTION |
       | custom-prefix.md | 1    | test   |

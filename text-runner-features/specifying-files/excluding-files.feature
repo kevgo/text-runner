@@ -47,7 +47,7 @@ Feature: excluding files
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  |
       | bar/2.md  |
       | readme.md |

@@ -8,7 +8,7 @@ Feature: checking embedded HTML images
       """
     And the workspace contains an image "images/watermelon.gif"
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                    |
       | 1.md     | 1    | check-image | image images/watermelon.gif |
 
@@ -20,7 +20,7 @@ Feature: checking embedded HTML images
       """
     And the workspace contains an image "documentation/images/watermelon.gif"
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME           | LINE | ACTION      | ACTIVITY                                   |
       | documentation/1.md | 1    | check-image | image /documentation/images/watermelon.gif |
 
@@ -32,7 +32,7 @@ Feature: checking embedded HTML images
       """
     And the workspace contains an image "documentation/watermelon.gif"
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME           | LINE | ACTION      | ACTIVITY             |
       | documentation/1.md | 1    | check-image | image watermelon.gif |
 
@@ -43,7 +43,7 @@ Feature: checking embedded HTML images
       <img src="zonk.gif">
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
       | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
 
@@ -55,7 +55,7 @@ Feature: checking embedded HTML images
       <img src="http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png">
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                                                                |
       | 1.md     | 1    | check-image | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
@@ -72,7 +72,7 @@ Feature: checking embedded HTML images
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
 
@@ -83,6 +83,6 @@ Feature: checking embedded HTML images
       <img src="">
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

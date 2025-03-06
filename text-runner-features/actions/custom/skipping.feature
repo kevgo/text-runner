@@ -21,7 +21,7 @@ Feature: skipping an action
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
 
@@ -38,7 +38,7 @@ Feature: skipping an action
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
 
@@ -55,7 +55,7 @@ Feature: skipping an action
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |
 
@@ -74,6 +74,6 @@ Feature: skipping an action
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | STATUS  |
       | 1.md     | 1    | skip-action | skipped |

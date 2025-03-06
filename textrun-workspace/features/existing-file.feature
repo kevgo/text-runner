@@ -4,7 +4,7 @@ Feature: verifying file content
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
-      Your workspace now contains a file <a type="workspace/existing-file">_hello.txt_ with content `Hello world!`</a>.
+      Your workspace now contains a file <a type="workspace/existing-file-with-content">_hello.txt_ with content `Hello world!`</a>.
       """
     When calling Text-Runner
     Then it emits these events:
@@ -17,7 +17,7 @@ Feature: verifying file content
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
-      Now you have a file <a type="workspace/existing-file">**hello.txt** with content:
+      Now you have a file <a type="workspace/existing-file-with-content">**hello.txt** with content:
 
       ```
       Hello world!
@@ -35,7 +35,7 @@ Feature: verifying file content
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
-      Now you have a file <a type="workspace/existing-file">__hello.txt__ with `mismatching expected content`</a>.
+      Now you have a file <a type="workspace/existing-file-with-content">__hello.txt__ with `mismatching expected content`</a>.
       """
     When calling Text-Runner
     Then it emits these events:
@@ -53,7 +53,7 @@ Feature: verifying file content
   Scenario: non-existing file
     Given the source code contains a file "1.md" with content:
       """
-      The file <a type="workspace/existing-file">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
+      The file <a type="workspace/existing-file-with-content">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
       """
     When calling Text-Runner
     Then it emits these events:
@@ -69,7 +69,7 @@ Feature: verifying file content
     And the workspace contains a directory "subdir"
     And the source code contains a file "1.md" with content:
       """
-      <a type="workspace/existing-file" dir="..">
+      <a type="workspace/existing-file-with-content" dir="..">
 
       Your workspace contains a file _hello.txt_ with content `Hello world!`
 

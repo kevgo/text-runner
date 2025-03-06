@@ -86,7 +86,7 @@ Fuji apples are the best
 </a>
 
 When executing the documentation, Text-Runner will create a file with name
-<a type="workspace/existing-file">_apples.txt_ and content
+<a type="workspace/existing-file-with-content">_apples.txt_ and content
 `Fuji apples are the best`</a> in the workspace.
 
 ### empty-file
@@ -137,7 +137,7 @@ example, consider the following documentation snippet:
 Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 `hello world`</a>, we can verify it via this action:
 
-<a type="workspace/existing-file">The file _hello.txt_ now contains
+<a type="workspace/existing-file-with-content">The file _hello.txt_ now contains
 `hello world`.</a>
 ```
 
@@ -160,7 +160,7 @@ Please create a file _apples.txt_ with the content `Boskoop`.
 
 </a>
 
-<a type="workspace/existing-file">
+<a type="workspace/existing-file-with-content">
 
 When executing the documentation, Text-Runner will create a file
 _subdir/apples.txt_ and content `Boskoop`

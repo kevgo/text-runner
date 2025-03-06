@@ -6,7 +6,7 @@ Feature: changing the working directory
       Create file <a type="workspace/new-file">**foo/bar** with content `hello`</a>.
 
       Change into the <code type="workspace/working-dir">foo</code> directory.
-      You see a file <a type="workspace/existing-file">__bar__ `hello` </a>.
+      You see a file <a type="workspace/existing-file-with-content">__bar__ `hello` </a>.
       """
     When calling Text-Runner
     Then it emits these events:

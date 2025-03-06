@@ -47,8 +47,9 @@ want to configure TextRunner, and run:
 text-runner setup
 </pre>
 
-This creates a configuration file called <a type="workspace/existing-file">
-**text-runner.jsonc** with this content:
+This creates a configuration file called
+<a type="workspace/existing-file-with-content"> **text-runner.jsonc** with this
+content:
 
 ```jsonc
 {

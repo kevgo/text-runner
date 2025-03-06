@@ -17,25 +17,6 @@ npm i -D textrun-workspace
 
 </a>
 
-### working-dir
-
-Each Text-Runner test starts in the workspace directory. The
-<b type="action/name-full">workspace/working-dir</b> action changes the current
-working directory of the test runner to the given directory inside the
-workspace. As an example, consider your workspace contains a
-<b type="workspace/new-directory">scripts</b> folder. Your documentation can
-change into it like this:
-
-<a type="extension/runnable-region">
-
-```html
-Please change into the
-<code type="workspace/working-dir">scripts</code>
-folder.
-```
-
-</a>
-
 ### create-directory
 
 The <b type="action/name-full">workspace/new-directory</b> action creates a
@@ -52,6 +33,23 @@ Create a directory named <b type="workspace/new-directory">utils</b>.
 When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">utils</i> directory in the workspace,
 just as the user would.
+
+### working-dir
+
+Each Text-Runner test starts in the workspace directory. The
+<b type="action/name-full">workspace/working-dir</b> action changes the current
+working directory of the test runner to the given directory inside the
+workspace. To change into the directory the reader created above:
+
+<a type="extension/runnable-region">
+
+```html
+Please change into the
+<code type="workspace/working-dir">utils</code>
+folder.
+```
+
+</a>
 
 ### create-file
 

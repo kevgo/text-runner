@@ -2,24 +2,24 @@
 Feature: display the version
 
   Scenario: no subcommand
-    When trying to run "text-run debug"
+    When trying to run "text-runner debug"
     Then it prints the text:
       """
       Missing or invalid debug subcommand
 
       Valid debug subcommands are: activities, ast, images, links, linkTargets.
-      Please provide the debug subcommands as switches, e.g. "text-run debug --ast README.md"
+      Please provide the debug subcommands as switches, e.g. "text-runner debug --ast README.md"
       """
 
   Scenario: subcommand without filename
-    When trying to run "text-run debug --ast"
+    When trying to run "text-runner debug --ast"
     Then it prints the text:
       """
       no files specified
 
       Please tell me which file to debug
 
-      Example: text-run debug --ast foo.md
+      Example: text-runner debug --ast foo.md
       """
 
   Scenario: debugging activities
@@ -27,7 +27,7 @@ Feature: display the version
       """
       <a type="test"> </a>
       """
-    When running "text-run debug --activities 1.md"
+    When running "text-runner debug --activities 1.md"
     Then it prints the text:
       """
       ACTIVITIES:
@@ -41,7 +41,7 @@ Feature: display the version
       foo()
       </pre>
       """
-    When running "text-run debug --ast 1.md"
+    When running "text-runner debug --ast 1.md"
     Then it prints the text:
       """
       AST NODES:
@@ -55,12 +55,13 @@ Feature: display the version
       """
       <img src="watermelon.png">
       """
-    When running "text-run debug --images 1.md"
+    When running "text-runner debug --images 1.md"
     Then it prints:
       """
       IMAGES:
       {
         actionName: 'check-image',
+        document: NodeList(0) [],
         location: Location {
           sourceDir: SourceDir {.*},
           file: FullFilePath { value: '1.md' },
@@ -78,8 +79,7 @@ Feature: display the version
             content: '',
             attributes: { src: 'watermelon.png' }
           }
-        ],
-        document: NodeList(0) []
+        ]
       }
       """
 
@@ -88,12 +88,13 @@ Feature: display the version
       """
       [another document](2.md)
       """
-    When running "text-run debug --links 1.md"
+    When running "text-runner debug --links 1.md"
     Then it prints:
       """
       LINKS:
       {
         actionName: 'check-link',
+        document: NodeList(0) [],
         location: Location {
           sourceDir: SourceDir {.*},
           file: FullFilePath { value: '1.md' },
@@ -133,8 +134,7 @@ Feature: display the version
             content: '',
             attributes: {}
           }
-        ],
-        document: NodeList(0) []
+        ]
       }
       """
 
@@ -143,7 +143,7 @@ Feature: display the version
       """
       # hello
       """
-    When running "text-run debug --link-targets 1.md"
+    When running "text-runner debug --link-targets 1.md"
     Then it prints the text:
       """
       LINK TARGETS:

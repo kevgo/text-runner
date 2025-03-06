@@ -1,14 +1,11 @@
 # dev tooling and versions
-RUN_THAT_APP_VERSION = 0.13.0
+RUN_THAT_APP_VERSION = 0.14.0
 
 YARN_ARGS = FORCE_COLOR=1
 TURBO_ARGS = --concurrency=100%
 
 build:  # builds all codebases
 	env $(YARN_ARGS) yarn exec --silent -- turbo run build $(TURBO_ARGS)
-
-rebuild:  # rebuilds all codebases even if their already exist
-	env $(YARN_ARGS) yarn exec --silent -- turbo run build --force $(TURBO_ARGS)
 
 clean:  # remove all build artifacts
 	env $(YARN_ARGS) yarn exec --silent -- turbo run clean $(TURBO_ARGS)
@@ -22,6 +19,8 @@ doc:  # runs the documentation tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
 
 fix:  # runs all auto-fixes
+	yarn exec --silent -- dprint fmt
+	yarn exec --silent -- sort-package-json --quiet
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
 
 help:  # prints all make targets
@@ -40,15 +39,9 @@ setup:  # prepares the mono-repo for development after cloning
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
-ps:  # pitstop
-	env $(YARN_ARGS) yarn exec --silent -- turbo run fix test $(TURBO_ARGS)
-
-test:  # runs all tests cached
-	env $(YARN_ARGS) yarn exec --silent -- turbo run test $(TURBO_ARGS)
+test: lint unit cuke doc  # runs all tests
+# need to run the tests separately because of a concurrency bug in npm, which is called by yarn
 .PHONY: test
-
-retest:  # runs all tests uncached
-	env $(YARN_ARGS) yarn exec --silent -- turbo run test --force $(TURBO_ARGS)
 
 update:  # updates the dependencies for the entire mono-repo
 	yarn upgrade-interactive --latest

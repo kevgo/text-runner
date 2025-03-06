@@ -12,8 +12,8 @@ import * as workspace from "../workspace/index.js"
 import { Command } from "./command.js"
 
 export class Static implements Command {
-  userConfig: configuration.APIData
   emitter: EventEmitter
+  userConfig: configuration.APIData
 
   constructor(userConfig: configuration.APIData) {
     this.userConfig = userConfig
@@ -36,7 +36,7 @@ export class Static implements Command {
       // step 3: find files
       const filenames = await files.getFileNames(config)
       if (filenames.length === 0) {
-        this.emit("result", { status: "warning", message: "no Markdown files found" })
+        this.emit("result", { message: "no Markdown files found", status: "warning" })
         return
       }
 
@@ -49,7 +49,7 @@ export class Static implements Command {
       // step 6: extract activities
       const links = extractImagesAndLinks(ASTs)
       if (links.length === 0) {
-        this.emit("result", { status: "warning", message: "no activities found" })
+        this.emit("result", { message: "no activities found", status: "warning" })
         return
       }
 

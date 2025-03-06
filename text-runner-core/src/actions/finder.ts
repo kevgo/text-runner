@@ -28,7 +28,7 @@ export class Finder {
   static async load(sourceDir: files.SourceDir): Promise<Finder> {
     return new Finder(
       await loadBuiltinActions(),
-      await loadCustomActions(sourceDir.joinStr("text-run")),
+      await loadCustomActions(sourceDir.joinStr("text-runner")),
       new ExternalActionManager()
     )
   }
@@ -37,7 +37,7 @@ export class Finder {
   static async loadDynamic(sourceDir: files.SourceDir): Promise<Finder> {
     return new Finder(
       new Actions(),
-      await loadCustomActions(sourceDir.joinStr("text-run")),
+      await loadCustomActions(sourceDir.joinStr("text-runner")),
       new ExternalActionManager()
     )
   }
@@ -50,10 +50,10 @@ export class Finder {
   /** actionFor provides the action function for the given Activity. */
   async actionFor(activity: activities.Activity): Promise<Action> {
     return (
-      this.builtinActions.get(activity.actionName) ||
-      this.customActions.get(activity.actionName) ||
-      (await this.externalActions.get(activity)) ||
-      this.errorUnknownAction(activity)
+      this.builtinActions.get(activity.actionName)
+      || this.customActions.get(activity.actionName)
+      || (await this.externalActions.get(activity))
+      || this.errorUnknownAction(activity)
     )
   }
 
@@ -75,7 +75,7 @@ export class Finder {
       guidance += "No custom actions defined.\n"
     }
     guidance += `\nTo create a new "${activity.actionName}" action,\n`
-    guidance += `run "text-run scaffold ${activity.actionName}"\n`
+    guidance += `run "text-runner scaffold ${activity.actionName}"\n`
     throw new UserError(errorText, guidance, activity.location)
   }
 }
@@ -87,15 +87,6 @@ export async function builtinActionFilePaths(): Promise<string[]> {
     if (file.endsWith(".js") || (file.endsWith(".ts") && !file.endsWith(".d.ts"))) {
       result.push(path.join(builtinDir, file))
     }
-  }
-  return result
-}
-
-export async function loadBuiltinActions(): Promise<Actions> {
-  const result = new Actions()
-  for (const filename of await builtinActionFilePaths()) {
-    const fileURL = url.pathToFileURL(filename)
-    result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }
@@ -112,6 +103,15 @@ export async function customActionFilePaths(dir: string): Promise<string[]> {
     if (file.endsWith(".js") || file.endsWith(".ts")) {
       result.push(path.join(dir, file))
     }
+  }
+  return result
+}
+
+export async function loadBuiltinActions(): Promise<Actions> {
+  const result = new Actions()
+  for (const filename of await builtinActionFilePaths()) {
+    const fileURL = url.pathToFileURL(filename)
+    result.register(actions.name(filename), await import(fileURL.href))
   }
   return result
 }

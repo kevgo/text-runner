@@ -7,7 +7,7 @@ Feature: multiple callbacks
       <a type="multiple-callbacks">
       </a>
       """
-    And the source code contains a file "text-run/multiple-callbacks.js" with content:
+    And the source code contains a file "text-runner/multiple-callbacks.js" with content:
       """
       export default function (_, done) {
         done();

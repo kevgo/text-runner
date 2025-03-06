@@ -2,8 +2,7 @@
 
 import tslintPlugin from "@typescript-eslint/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
-import simpleImportSort from "eslint-plugin-simple-import-sort"
-import sortKeys from "eslint-plugin-typescript-sort-keys"
+import perfectionist from "eslint-plugin-perfectionist"
 
 export default [
   {
@@ -14,18 +13,16 @@ export default [
       sourceType: "module",
       parser: tsParser,
       parserOptions: {
-        project: "./tsconfig.json",
+        project: "./tsconfig.json"
       },
       globals: {
         console: "readonly",
         module: "readonly",
-        process: "readonly",
-      },
+        process: "readonly"
+      }
     },
     plugins: {
-      "@typescript-eslint": tslintPlugin,
-      "simple-import-sort": simpleImportSort,
-      "typescript-sort-keys": sortKeys,
+      "@typescript-eslint": tslintPlugin
     },
     rules: {
       ...tslintPlugin.configs.recommended.rules,
@@ -34,19 +31,16 @@ export default [
         "error",
         {
           destructuring: "any",
-          ignoreReadBeforeAssign: false,
-        },
+          ignoreReadBeforeAssign: false
+        }
       ],
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
-      "typescript-sort-keys/interface": "error",
-      "typescript-sort-keys/string-enum": "error",
       "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/no-implied-eval": "off",
       "@typescript-eslint/restrict-template-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off", // TODO: enable?
-      "@typescript-eslint/no-unsafe-call": "error",
-    },
+      "@typescript-eslint/no-unsafe-call": "error"
+    }
   },
+  perfectionist.configs["recommended-natural"]
 ]

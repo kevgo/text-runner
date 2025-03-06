@@ -6,8 +6,7 @@ actions for documenting console commands to be executed by the reader.
 ### Setup
 
 To add this package as a Text-Runner plugin, run <code type="npm/install">npm i
--D textrun-shell</code> or <code type="npm/install">yarn i -D
-textrun-shell</code>.
+-D textrun-shell</code>.
 
 <!-- TODO: verify this somehow -->
 
@@ -18,8 +17,8 @@ an example:
 ```js
 export default {
   binaries: {
-    "text-run": path.join(__dirname, "node_modules", ".bin", "text-run"),
-  },
+    "text-runner": path.join(__dirname, "node_modules", ".bin", "text-runner")
+  }
 }
 ```
 
@@ -81,7 +80,7 @@ import * as readline from "readline"
 var rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
-  terminal: false,
+  terminal: false
 })
 
 rl.question("your name\n", name => {

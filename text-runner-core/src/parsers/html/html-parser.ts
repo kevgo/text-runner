@@ -27,11 +27,6 @@ export class Parser {
     return result
   }
 
-  /** returns whether the given HTML node is an empty text node */
-  private isEmptyTextNode(node: parse5.DefaultTreeAdapterMap["childNode"]): boolean {
-    return instanceOfTextNode(node) && node.value.trim() === ""
-  }
-
   /** returns the subtree of the given HTML AST whose root node has the given name */
   private findNodeWithName(
     nodes: parse5.DefaultTreeAdapterMap["childNode"][],
@@ -46,6 +41,11 @@ export class Parser {
       }
     }
     throw new Error(`child node '${name}' not found in AST: ${util.inspect(nodes)}`)
+  }
+
+  /** returns whether the given HTML node is an empty text node */
+  private isEmptyTextNode(node: parse5.DefaultTreeAdapterMap["childNode"]): boolean {
+    return instanceOfTextNode(node) && node.value.trim() === ""
   }
 
   /** converts the given HTML AST node into the standard format */
@@ -95,7 +95,7 @@ export class Parser {
         content: "",
         location: startingLocation.withLine(startLine),
         tag: node.tagName as ast.NodeTag,
-        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes),
+        type: this.tagMapper.openingTypeForTag(node.tagName as ast.NodeTag, attributes)
       })
     )
 
@@ -122,7 +122,7 @@ export class Parser {
           content: "",
           location: startingLocation.withLine(endLine),
           tag,
-          type: this.tagMapper.typeForTag(tag, attributes),
+          type: this.tagMapper.typeForTag(tag, attributes)
         })
       )
     }
@@ -142,7 +142,7 @@ export class Parser {
         content: "",
         location: startingLocation.withLine((node.sourceCodeLocation?.startLine || 0) + startingLocation.line - 1),
         tag: node.tagName as ast.NodeTag,
-        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes),
+        type: this.tagMapper.typeForTag(node.tagName as ast.NodeTag, attributes)
       })
     )
     return result
@@ -161,22 +161,12 @@ export class Parser {
           content: node.value.trim(),
           location: startingLocation.withLine((node.sourceCodeLocation?.startLine ?? 0) + startingLocation.line - 1),
           tag: "",
-          type: "text",
+          type: "text"
         })
       )
     }
     return result
   }
-}
-
-function instanceOfTextNode(
-  object: parse5.DefaultTreeAdapterMap["childNode"]
-): object is parse5.DefaultTreeAdapterMap["textNode"] {
-  return object.nodeName === "#text"
-}
-
-function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
-  return !!object.nodeName && !!object.tagName && !!object.attrs
 }
 
 /** converts the given HTML AST node attributes into the standard AST format */
@@ -188,4 +178,14 @@ export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.
     }
   }
   return result
+}
+
+function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
+  return !!object.nodeName && !!object.tagName && !!object.attrs
+}
+
+function instanceOfTextNode(
+  object: parse5.DefaultTreeAdapterMap["childNode"]
+): object is parse5.DefaultTreeAdapterMap["textNode"] {
+  return object.nodeName === "#text"
 }

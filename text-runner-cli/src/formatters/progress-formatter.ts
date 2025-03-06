@@ -15,7 +15,7 @@ export class ProgressFormatter implements formatter.Formatter {
         clearOnComplete: true,
         format: color.green(" {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
         hideCursor: undefined,
-        stopOnComplete: true,
+        stopOnComplete: true
       },
       progress.Presets.shades_classic
     )
@@ -24,20 +24,8 @@ export class ProgressFormatter implements formatter.Formatter {
     command.on("result", this.onResult.bind(this))
   }
 
-  onResult(result: textRunner.events.Result): void {
-    if (textRunner.events.instanceOfFailed(result)) {
-      this.onFailed(result)
-    } else if (textRunner.events.instanceOfSkipped(result)) {
-      this.progressBar.increment(1)
-    } else if (textRunner.events.instanceOfSuccess(result)) {
-      this.progressBar.increment(1)
-    } else if (textRunner.events.instanceOfWarning(result)) {
-      this.progressBar.increment(1)
-    }
-  }
-
-  start(args: textRunner.events.Start): void {
-    this.progressBar.start(args.stepCount, 0)
+  finish(args: formatter.FinishArgs): void {
+    formatter.printSummary(args.results)
   }
 
   onFailed(args: textRunner.events.Failed): void {
@@ -58,7 +46,19 @@ export class ProgressFormatter implements formatter.Formatter {
     }
   }
 
-  finish(args: formatter.FinishArgs): void {
-    formatter.printSummary(args.results)
+  onResult(result: textRunner.events.Result): void {
+    if (textRunner.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    } else if (textRunner.events.instanceOfSkipped(result)) {
+      this.progressBar.increment(1)
+    } else if (textRunner.events.instanceOfSuccess(result)) {
+      this.progressBar.increment(1)
+    } else if (textRunner.events.instanceOfWarning(result)) {
+      this.progressBar.increment(1)
+    }
+  }
+
+  start(args: textRunner.events.Start): void {
+    this.progressBar.start(args.stepCount, 0)
   }
 }

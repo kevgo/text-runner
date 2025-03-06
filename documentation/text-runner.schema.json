@@ -1,0 +1,120 @@
+{
+  "$ref": "#/definitions/Data",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "Data": {
+      "additionalProperties": false,
+      "description": "arguments provided by the user, either via command line or via config file",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        },
+        "configFileName": {
+          "type": "string"
+        },
+        "defaultFile": {
+          "type": "string"
+        },
+        "emptyWorkspace": {
+          "type": "boolean"
+        },
+        "exclude": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ]
+        },
+        "files": {
+          "type": "string"
+        },
+        "format": {
+          "$ref": "#/definitions/Names"
+        },
+        "ignoreLinkTargets": {
+          "items": {
+            "format": "regex",
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "online": {
+          "type": "boolean"
+        },
+        "publications": {
+          "$ref": "#/definitions/Publications"
+        },
+        "regionMarker": {
+          "type": "string"
+        },
+        "scaffoldLanguage": {
+          "$ref": "#/definitions/ScaffoldLanguage"
+        },
+        "showSkipped": {
+          "type": "boolean"
+        },
+        "systemTmp": {
+          "type": "boolean"
+        },
+        "workspace": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "Names": {
+      "description": "Names defines the names of all built-in formatters",
+      "enum": [
+        "detailed",
+        "dot",
+        "progress",
+        "summary"
+      ],
+      "type": "string"
+    },
+    "Publication": {
+      "additionalProperties": false,
+      "description": "Publications map local folders (in the source code) to public URL paths. This is needed when verifying Markdown code that will be published as HTML somewhere, and the links in Markdown reference the public URLs of the Markdown pages.",
+      "properties": {
+        "localPath": {
+          "description": "filesystem path of the src folder",
+          "type": "string"
+        },
+        "publicExtension": {
+          "description": "which extension the Markdown files have when served as HTML",
+          "type": "string"
+        },
+        "publicPath": {
+          "description": "the corresponding URL path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "localPath",
+        "publicExtension",
+        "publicPath"
+      ],
+      "type": "object"
+    },
+    "Publications": {
+      "items": {
+        "$ref": "#/definitions/Publication"
+      },
+      "type": "array"
+    },
+    "ScaffoldLanguage": {
+      "description": "languages in which this Text-Runner actions can be scaffolded",
+      "enum": [
+        "js",
+        "ts"
+      ],
+      "type": "string"
+    }
+  }
+}

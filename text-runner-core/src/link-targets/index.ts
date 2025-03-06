@@ -13,4 +13,4 @@ export interface Target {
 }
 
 /** types of link targets */
-export type Types = "heading" | "anchor"
+export type Types = "anchor" | "heading"

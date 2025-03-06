@@ -11,16 +11,8 @@ export class DotFormatter implements formatter.Formatter {
     command.on("result", this.onResult.bind(this))
   }
 
-  onResult(result: textRunner.events.Result): void {
-    if (textRunner.events.instanceOfFailed(result)) {
-      this.onFailed(result)
-    } else if (textRunner.events.instanceOfSkipped(result)) {
-      process.stdout.write(color.cyan("."))
-    } else if (textRunner.events.instanceOfSuccess(result)) {
-      process.stdout.write(color.green("."))
-    } else if (textRunner.events.instanceOfWarning(result)) {
-      console.log(color.magenta(result.message))
-    }
+  finish(args: formatter.FinishArgs): void {
+    formatter.printSummary(args.results)
   }
 
   onFailed(args: textRunner.events.Failed): void {
@@ -31,7 +23,15 @@ export class DotFormatter implements formatter.Formatter {
     helpers.printCodeFrame(console.log, args.activity.location)
   }
 
-  finish(args: formatter.FinishArgs): void {
-    formatter.printSummary(args.results)
+  onResult(result: textRunner.events.Result): void {
+    if (textRunner.events.instanceOfFailed(result)) {
+      this.onFailed(result)
+    } else if (textRunner.events.instanceOfSkipped(result)) {
+      process.stdout.write(color.cyan("."))
+    } else if (textRunner.events.instanceOfSuccess(result)) {
+      process.stdout.write(color.green("."))
+    } else if (textRunner.events.instanceOfWarning(result)) {
+      console.log(color.magenta(result.message))
+    }
   }
 }

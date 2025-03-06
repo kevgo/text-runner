@@ -2,4 +2,5 @@
 export interface PackageJson {
   bin: Record<string, string>
   name: string
+  scripts: Record<string, string>
 }

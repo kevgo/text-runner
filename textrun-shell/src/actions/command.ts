@@ -21,12 +21,14 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.region[0].tag} ${action.configuration.regionMarker}="shell/command"> region contains no commands to run`
+      `the <${
+        action.region[0].tag
+      } ${action.configuration.regionMarker}="shell/command"> region contains no commands to run`
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
   const processor = observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
-    cwd: action.configuration.workspace.platformified(),
+    cwd: action.configuration.workspace.platformified()
   })
   // this is also used in the "verify-run-console-output" step
   const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess

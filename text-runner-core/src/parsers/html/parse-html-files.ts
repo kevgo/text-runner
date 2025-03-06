@@ -15,7 +15,7 @@ export async function parseHTMLFiles(
   const parser = new Parser(tagMapper)
   for (const filename of filenames) {
     const content = await fs.readFile(sourceDir.joinFullFile(filename).platformified(), {
-      encoding: "utf8",
+      encoding: "utf8"
     })
     result.push(parser.parse(content, new files.Location(sourceDir, filename, 1)))
   }

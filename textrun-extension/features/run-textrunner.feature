@@ -36,8 +36,8 @@ Feature: Running Text-Runner inside a Text-Runner session
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE        | ERROR TYPE | GUIDANCE                                                                                   |
-      | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | unknown action: zonk | UserError  | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-run scaffold zonk" |
+      | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE        | ERROR TYPE | GUIDANCE                                                                                      |
+      | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | unknown action: zonk | UserError  | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-runner scaffold zonk" |
 
 
   Scenario: "dir" attribute

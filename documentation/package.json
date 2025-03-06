@@ -5,21 +5,21 @@
   "license": "ISC",
   "type": "module",
   "scripts": {
-    "doc": "text-run static --format=summary && text-run dynamic --format=progress",
-    "fix": "prettier --write .",
-    "lint": "prettier -l . && depcheck --config=../.depcheckrc"
+    "doc": "text-runner",
+    "fix": "dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc"
   },
   "devDependencies": {
     "assert-no-diff": "3.0.6",
     "custom-action-commonjs": "0.0.0",
     "custom-action-esm": "0.0.0",
     "custom-action-typescript": "0.0.0",
-    "text-runner": "6.0.0",
-    "text-runner-core": "6.0.0",
-    "textrun-extension": "0.2.0",
-    "textrun-make": "0.2.0",
-    "textrun-npm": "0.2.0",
-    "textrun-shell": "0.2.0",
-    "textrun-workspace": "0.2.0"
+    "text-runner": "7.0.0",
+    "text-runner-core": "7.0.0",
+    "textrun-extension": "0.2.1",
+    "textrun-make": "0.2.1",
+    "textrun-npm": "0.2.1",
+    "textrun-shell": "0.2.1",
+    "textrun-workspace": "0.2.1"
   }
 }

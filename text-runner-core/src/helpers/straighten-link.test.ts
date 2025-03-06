@@ -1,18 +1,19 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { straightenLink } from "./straighten-link.js"
 
-suite("straightenLink", function () {
+suite("straightenLink", function() {
   const tests = {
-    "/one/../two": "/two",
-    "/one//../two": "/two",
     "/foo": "/foo",
-    "/one/two/../three/../four": "/one/four",
-    "/one/two/three/../../four": "/one/four",
+    "/one/../two": "/two",
     "/one/./././two/./": "/one/two/",
+    "/one//../two": "/two",
+    "/one/two/../three/../four": "/one/four",
+    "/one/two/three/../../four": "/one/four"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} ==> ${want}`, function () {
+    test(`${give} ==> ${want}`, function() {
       assert.equal(straightenLink(give), want)
     })
   }

@@ -12,12 +12,17 @@ export class HelpCommand implements textRunner.commands.Command {
     this.emitter = new EventEmitter()
   }
 
+  emit(name: textRunner.events.Name, payload: textRunner.events.Args): void {
+    this.emitter.emit(name, payload)
+  }
+
   async execute(): Promise<void> {
     this.emit("output", await this.template())
   }
 
-  emit(name: textRunner.events.Name, payload: textRunner.events.Args): void {
-    this.emitter.emit(name, payload)
+  on(name: textRunner.events.Name, handler: textRunner.events.Handler): this {
+    this.emitter.on(name, handler)
+    return this
   }
 
   /** provides the text to print */
@@ -28,7 +33,7 @@ export class HelpCommand implements textRunner.commands.Command {
 
     return `${color.dim(`TextRunner ${pkg.version}`)}
 
-USAGE: ${color.bold("text-run [<options>] <command>")}
+USAGE: ${color.bold("text-runner [<options>] <command>")}
 
 COMMANDS
   ${color.bold("run")} [<filename>]         runs all tests on the given file/folder or entire documentation
@@ -47,10 +52,5 @@ OPTIONS
   ${color.bold("--config")}                 provide a custom configuration filename
   ${color.bold("--online")}                 check external links
 `
-  }
-
-  on(name: textRunner.events.Name, handler: textRunner.events.Handler): this {
-    this.emitter.on(name, handler)
-    return this
   }
 }

@@ -4,8 +4,9 @@ import * as path from "path"
 import * as textRunner from "text-runner-core"
 
 export async function newFile(action: textRunner.actions.Args): Promise<void> {
+  let fileName = action.region[0].attributes["filename"] || ""
   try {
-    var fileName = action.region.textInNodeOfType("em", "strong")
+    fileName ||= action.region.textInNodeOfType("em", "strong")
   } catch (e) {
     if (!textRunner.isUserError(e)) {
       throw e

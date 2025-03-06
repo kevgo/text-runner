@@ -360,7 +360,7 @@ export class MarkdownParser {
       return this.standizeStandaloneTag(mdNode, location)
     }
 
-    throw new Error(`unknown MarkdownIt node: ${util.inspect(mdNode)}`)
+    throw new Error(`unknown MarkdownIt node: ${util.inspect(mdNode, false, Infinity)}`)
   }
 
   private standardizeOpeningNode(mdNode: MarkdownItNode, location: files.Location, ont: OpenNodeTracker): ast.NodeList {

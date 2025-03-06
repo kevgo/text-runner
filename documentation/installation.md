@@ -5,16 +5,15 @@ including macOS, Windows, and Linux. To get started:
 
 - install [Node.JS](https://nodejs.org) version 22 or newer
 - in the terminal, cd into the folder in which you want to use TextRunner
-- make sure you have a file <a type="workspace/new-file"> **package.json** with
-  at least these entries:
+- Text-Runner is a Node.js application, so you need to have a
+  <a type="workspace/new-file"> **package.json** file. If you don't know what
+  that is, create one with this content:
 
   ```json
   {
+    "name": "documentation-tests",
     "type": "module",
-    "devDependencies": {
-      "text-runner": "7.0.0",
-      "tsx": "4.19.3"
-    }
+    "private": true
   }
   ```
 
@@ -32,8 +31,8 @@ including macOS, Windows, and Linux. To get started:
   text-runner help
   </pre>
 
-This gives you an out-of-the-box installation of TextRunner, which checks that
-all links and images point to something.
+This gives you an out-of-the-box installation of TextRunner. It checks for dead
+links and images.
 
 ## Configuration
 
@@ -41,15 +40,15 @@ You can configure TextRunner via command-line options or a configuration file.
 
 ### Creating a configuration file
 
-To scaffold a config file, open a terminal, go to the folder where you want to
-configure TextRunner, and run:
+To scaffold a configuration file, open a terminal, go to the folder where you
+want to configure TextRunner, and run:
 
 <pre type="shell/command">
-$ text-runner setup
+text-runner setup
 </pre>
 
 This creates a configuration file called <a type="workspace/existing-file">
-**text-runner.jsonc** that looks like this:
+**text-runner.jsonc** with this content:
 
 ```jsonc
 {

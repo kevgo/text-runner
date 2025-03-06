@@ -150,4 +150,14 @@ export class Node {
   isOpeningNode(): boolean {
     return this.type.endsWith("_open")
   }
+
+  get [Symbol.toStringTag]() {
+    let result = `${this.type}{`
+    if (this.content) {
+      result += `"${this.content}"`
+    }
+    result += `, ${this.attributes}`
+    result += `}`
+    return result
+  }
 }

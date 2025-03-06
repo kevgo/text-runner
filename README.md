@@ -12,13 +12,13 @@
 
 </div>
 
-Text-Runner is a test framework for user-facing documentation. It helps keep
+Text-Runner is a test framework for technical documentation. It helps keep
 documentation up to date. An example is the text you are reading right now.
 TextRunner verifies it for technical correctness.
 
-If you tell it how, TextRunner can read and understand any form of
-Markdown-formatted text in any human language as well as complex data in tables,
-bullet point lists, and even embedded images!
+As a fully programmable test framework, TextRunner can read and understand any
+form of Markdown-formatted text in any human language as well as complex data in
+tables, bullet point lists, and even images!
 
 ### For users
 
@@ -32,13 +32,17 @@ bullet point lists, and even embedded images!
 
 ### Plugins
 
-- [verify source code files](textrun-repo/)
-- [modify/verify workspace files](textrun-workspace/)
-- [run executables in a subshell](textrun-shell/)
-- [run/verify embedded JavaScript code](textrun-javascript/)
-- [verify Makefile targets](textrun-make/)
-- [verify the documentation of npm modules](textrun-npm/)
-- [verify the documentation of Text-Runner plugins](textrun-action/)
+This monorepo contains a number of Text-Runner plugins that provide more
+domain-specific functionality. You can think of these plugins as the "standard
+library" of Text-Runner.
+
+- [repo](textrun-repo/): verify source code files
+- [workspace](textrun-workspace/): modify/verify workspace files
+- [shell](textrun-shell/): run executables in a subshell
+- [javascript](textrun-javascript/): run/verify embedded JavaScript code
+- [make](textrun-make/): verify Makefile targets
+- [npm](textrun-npm/): verify the documentation of npm modules
+- [action](textrun-action/): verify the documentation of Text-Runner plugins
 
 ### For developers
 

@@ -26,5 +26,5 @@ more files before running Text-Runner, you can use the
 To use these actions, add this package as a development dependency by running
 
 <pre type="npm/install">
-$ npm i -D textrun-extension
+npm i -D textrun-extension
 </pre>

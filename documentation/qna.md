@@ -17,7 +17,7 @@ No problem, you can put it in the `text-runner` folder and call TextRunner from
 the root directory of your code base via:
 
 ```
-$ text-runner/node_modules/.bin/text-runner
+text-runner/node_modules/.bin/text-runner
 ```
 
 Remember to run `npm install` inside the `text-runner` directory as well.

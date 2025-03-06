@@ -4,7 +4,6 @@ import * as util from "util"
 
 /** runs the given content in Text-Runner */
 export async function runnableRegion(action: textRunner.actions.Args): Promise<void> {
-  console.log("111111111111111111111111111")
   action.name("execute Markdown in Text-Runner")
   const content = action.region.text().trim()
   if (content === "") {

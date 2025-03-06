@@ -14,7 +14,7 @@ export class OutputCollector {
       if (typeof arg === "string") {
         stringified.push(arg)
       } else {
-        stringified.push(util.inspect(arg))
+        stringified.push(util.inspect(arg, false, Infinity))
       }
     }
     this.content.push(stringified.join(" ") + "\n")

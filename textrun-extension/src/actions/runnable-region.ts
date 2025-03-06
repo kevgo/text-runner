@@ -18,7 +18,7 @@ export async function runnableRegion(action: textRunner.actions.Args): Promise<v
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()
   for (const result of activityCollector.results()) {
-    action.log(util.inspect(result))
+    action.log(util.inspect(result, false, Infinity))
     if (result.error) {
       throw result.error
     }

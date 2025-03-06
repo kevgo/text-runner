@@ -15,7 +15,7 @@ suite("makeFullPath", function() {
   }
   if (process.platform !== "win32") {
     for (const [give, want] of Object.entries(linuxTests)) {
-      test(`Linux: ${give} --> ${util.inspect(want)}`, function() {
+      test(`Linux: ${give} --> ${util.inspect(want, false, Infinity)}`, function() {
         const have = makeFullPath(give, "linux")
         assert.match(have, want)
       })
@@ -23,7 +23,7 @@ suite("makeFullPath", function() {
   }
   if (process.platform === "win32") {
     for (const [give, want] of Object.entries(winTests)) {
-      test(`Windows: ${give} --> ${util.inspect(want)}`, function() {
+      test(`Windows: ${give} --> ${util.inspect(want, false, Infinity)}`, function() {
         const have = makeFullPath(give, "win32")
         assert.match(have, want)
       })

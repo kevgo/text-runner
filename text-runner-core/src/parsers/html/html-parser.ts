@@ -40,7 +40,7 @@ export class Parser {
         return node
       }
     }
-    throw new Error(`child node '${name}' not found in AST: ${util.inspect(nodes)}`)
+    throw new Error(`child node '${name}' not found in AST: ${util.inspect(nodes, false, Infinity)}`)
   }
 
   /** returns whether the given HTML node is an empty text node */
@@ -60,7 +60,7 @@ export class Parser {
       return this.standardizeTextNode(node, startingLocation)
     }
     if (!instanceOfElement(node)) {
-      throw new Error("unknown tree node: " + util.inspect(node))
+      throw new Error("unknown tree node: " + util.inspect(node, false, Infinity))
     }
     if (this.tagMapper.isStandaloneTag(node.nodeName)) {
       return this.standardizeStandaloneNode(node, startingLocation)

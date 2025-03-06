@@ -88,6 +88,24 @@ Gala
 Similarly, Text-Runner will create a file
 <a type="workspace/existing-file">_more-apples.txt_ with content `Gala`</a>.
 
+### empty-file
+
+The <b type="action/name-full">workspace/empty-file</b> action creates an empty
+file.
+
+An example is this documentation:
+
+<a type="extension/runnable-region">
+
+```html
+Please create an empty file <b type="workspace/empty-file">.gitkeep</b>.
+```
+
+</a>
+
+When executing the documentation, Text-Runner will create a file with name
+<i type="workspace/existing-file">.gitkeep</i> in the workspace.
+
 ### directory
 
 The <b type="action/name-full">workspace/existing-directory</b> action verifies

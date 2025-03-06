@@ -2,5 +2,6 @@
   "$schema": "https://raw.githubusercontent.com/kevgo/text-runner/refs/heads/main/documentation/text-runner.schema.json",
   "exclude": [
     "examples"
-  ]
+  ],
+  "format": "dot"
 }

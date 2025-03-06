@@ -10,8 +10,8 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "cuke": "npm run build && cucumber-js --format=progress",
-    "doc": "npm run build && text-runner --format=dot",
+    "cuke": "yarn run build && cucumber-js --format=progress",
+    "doc": "yarn run build && text-runner --format=dot",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"

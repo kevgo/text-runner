@@ -70,7 +70,7 @@ You can display its content in your documentation via this active region:
 ```markdown
 <a type="repo/existing-file-content">
 
-The **hello.txt** file in the [bar folder](foo/bar) contains this section:
+The **hello.txt** file in the [bar folder](foo/bar) contains:
 
 `hello world!`
 
@@ -90,7 +90,7 @@ documentation for this codebase might look like this:
 <a type="extension/runnable-region">
 
 ```html
-Run the <b type="repo/executable">scripts/setup</b> binary to set up your
+Run the <b type="repo/executable">scripts/setup</b> script to set up your
 environment.
 ```
 

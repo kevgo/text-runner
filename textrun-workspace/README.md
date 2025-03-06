@@ -62,11 +62,12 @@ content is a code block with one or three backticks. Here are a few examples:
 
 ```markdown
 <a type="workspace/new-file">
-Create file _apples.txt_ with the content `Fuji apples are the best!`.
+Create file _apples.txt_ with the content `Fuji apples are the best`.
 </a>
 ```
 
 </a>
+
 <a type="extension/runnable-region">
 
 ````markdown
@@ -74,7 +75,7 @@ Create file _apples.txt_ with the content `Fuji apples are the best!`.
 Create file **apples.txt** with the content:
 
 ```
-Fuji apples are the best!
+Fuji apples are the best
 ```
 
 </a>

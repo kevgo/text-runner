@@ -9,7 +9,7 @@ Feature: skipping an action
       """
 
   Scenario: skipping a synchronous action
-    Given the source code contains a file "text-run/skip-action.js" with content:
+    Given the source code contains a file "text-runner/skip-action.js" with content:
       """
       export default (action) => {
         return action.SKIPPING
@@ -26,7 +26,7 @@ Feature: skipping an action
       | 1.md     | 1    | skip-action | skipped |
 
   Scenario: skipping an asynchronous action
-    Given the source code contains a file "text-run/skip-action.js" with content:
+    Given the source code contains a file "text-runner/skip-action.js" with content:
       """
       export default async (action) => {
         return action.SKIPPING
@@ -43,7 +43,7 @@ Feature: skipping an action
       | 1.md     | 1    | skip-action | skipped |
 
   Scenario: skipping a callback action
-    Given the source code contains a file "text-run/skip-action.js" with content:
+    Given the source code contains a file "text-runner/skip-action.js" with content:
       """
       export default (action, done) => {
         done(null, action.SKIPPING)
@@ -60,7 +60,7 @@ Feature: skipping an action
       | 1.md     | 1    | skip-action | skipped |
 
   Scenario: skipping a promise action
-    Given the source code contains a file "text-run/skip-action.js" with content:
+    Given the source code contains a file "text-runner/skip-action.js" with content:
       """
       export default (action) => {
         return new Promise(function(resolve) {

@@ -23,6 +23,32 @@ export async function getFileNames(config: configuration.Data): Promise<files.Fu
 }
 
 /**
+ * returns all the markdown files in this directory and its children,
+ * relative to the given sourceDir
+ */
+export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFilePath[]> {
+  const allFiles = await globby(`${dirName}/**/*.md`)
+  return allFiles
+    .filter(file => !file.includes("node_modules"))
+    .sort()
+    .map(file => new files.AbsoluteFilePath(file).toFullFile(sourceDir))
+}
+
+/** Removes the given excluded files from the given list of filenames */
+export function removeExcludedFiles(fileList: files.FullFilePath[], excluded: string | string[]): files.FullFilePath[] {
+  const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
+  const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
+  return fileList.filter(file => {
+    for (const excludedRegex of excludedRegexes) {
+      if (excludedRegex.test(file.unixified())) {
+        return false
+      }
+    }
+    return true
+  })
+}
+
+/**
  * Returns files described by the given configuration.
  * Filenames are relative to config.sourceDir.
  */
@@ -48,30 +74,4 @@ async function getFiles(config: configuration.Data): Promise<files.FullFilePath[
       "You can provide a glob expression or the path to a file or folder."
     )
   }
-}
-
-/**
- * returns all the markdown files in this directory and its children,
- * relative to the given sourceDir
- */
-export async function markdownFilesInDir(dirName: string, sourceDir: files.SourceDir): Promise<files.FullFilePath[]> {
-  const allFiles = await globby(`${dirName}/**/*.md`)
-  return allFiles
-    .filter(file => !file.includes("node_modules"))
-    .sort()
-    .map(file => new files.AbsoluteFilePath(file).toFullFile(sourceDir))
-}
-
-/** Removes the given excluded files from the given list of filenames */
-export function removeExcludedFiles(fileList: files.FullFilePath[], excluded: string | string[]): files.FullFilePath[] {
-  const excludedFilesArray = Array.isArray(excluded) ? excluded : [excluded]
-  const excludedRegexes = excludedFilesArray.map(file => new RegExp(file))
-  return fileList.filter(file => {
-    for (const excludedRegex of excludedRegexes) {
-      if (excludedRegex.test(file.unixified())) {
-        return false
-      }
-    }
-    return true
-  })
 }

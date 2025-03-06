@@ -7,9 +7,9 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
-    "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
+    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
+    "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "devDependencies": {
     "@types/ps-tree": "1.1.6",
@@ -20,6 +20,6 @@
     "observable-process": "8.0.0-pre4",
     "ps-tree": "1.2.0",
     "strip-ansi": "7.1.0",
-    "text-runner-core": "6.0.0"
+    "text-runner-core": "7.0.0"
   }
 }

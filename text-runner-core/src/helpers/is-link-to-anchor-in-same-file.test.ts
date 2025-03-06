@@ -1,15 +1,16 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file.js"
 
-suite("isLinkToAnchorInSameFile", function () {
-  test("anchor in same file", function () {
+suite("isLinkToAnchorInSameFile", function() {
+  test("anchor in same file", function() {
     assert.isTrue(isLinkToAnchorInSameFile("#foo"))
   })
-  test("anchor in other file", function () {
+  test("anchor in other file", function() {
     assert.isFalse(isLinkToAnchorInSameFile("foo#bar"))
   })
-  test("other file", function () {
+  test("other file", function() {
     assert.isFalse(isLinkToAnchorInSameFile("foo.md"))
   })
 })

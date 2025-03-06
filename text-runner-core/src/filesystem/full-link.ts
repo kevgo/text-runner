@@ -53,7 +53,7 @@ export class FullLink {
   }
 
   /** Returns the file path that this link has on the local filesystem */
-  localize(publications: configuration.Publications, defaultFile: string): files.FullPath | files.FullFilePath {
+  localize(publications: configuration.Publications, defaultFile: string): files.FullFilePath | files.FullPath {
     const publication = publications.publicationForLink(this)
     const result = publication
       ? publication.resolve(this.urlDecoded(), defaultFile)

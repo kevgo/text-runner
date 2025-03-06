@@ -14,4 +14,4 @@ export class CurrentCommand {
   }
 }
 
-let instance: observableProcess.FinishedProcess | null = null
+let instance: null | observableProcess.FinishedProcess = null

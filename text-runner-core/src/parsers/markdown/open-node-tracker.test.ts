@@ -1,14 +1,15 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as ast from "../../ast/index.js"
 import * as files from "../../filesystem/index.js"
 import { OpenNodeTracker } from "./open-node-tracker.js"
 
-suite("OpenTagTracker.close()", function () {
+suite("OpenTagTracker.close()", function() {
   /** placeholder filename */
   const file = new files.FullFilePath("foo.md")
 
-  test("closing an open tag", function () {
+  test("closing an open tag", function() {
     const openTags = new OpenNodeTracker()
     openTags.open(ast.Node.scaffold({ type: "anchor_open" }), 3)
     const location = new files.Location(new files.SourceDir(""), file, 12)
@@ -16,7 +17,7 @@ suite("OpenTagTracker.close()", function () {
     assert.equal(found, 3)
   })
 
-  test("closing a tag that hasn't been opened", function () {
+  test("closing a tag that hasn't been opened", function() {
     const openTags = new OpenNodeTracker()
     openTags.open(ast.Node.scaffold({ type: "anchor_open" }), 3)
     const location = new files.Location(new files.SourceDir(""), file, 12)
@@ -25,7 +26,7 @@ suite("OpenTagTracker.close()", function () {
   })
 })
 
-test("OpenTagTracker.has()", function () {
+test("OpenTagTracker.has()", function() {
   const openTags = new OpenNodeTracker()
   openTags.open(ast.Node.scaffold({ type: "link_open" }), 3)
   assert.isTrue(openTags.has("link_open"))

@@ -1,21 +1,22 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as files from "../filesystem/full-path.js"
 import { Publications } from "./publications.js"
 
-suite("Publications.forFilePath()", function () {
-  test("a publication matches the given filePath", function () {
+suite("Publications.forFilePath()", function() {
+  test("a publication matches the given filePath", function() {
     const publications = Publications.fromConfigs([
       {
         localPath: "foo",
         publicExtension: "",
-        publicPath: "",
+        publicPath: ""
       },
       {
         localPath: "bar",
         publicExtension: "",
-        publicPath: "",
-      },
+        publicPath: ""
+      }
     ])
     const filePath = new files.FullPath("bar")
     const publication = publications.forFilePath(filePath)
@@ -25,13 +26,13 @@ suite("Publications.forFilePath()", function () {
     assert.equal(publication.localPath, "/bar/")
   })
 
-  test("no publication matches", function () {
+  test("no publication matches", function() {
     const publications = Publications.fromConfigs([
       {
         localPath: "foo",
         publicExtension: "",
-        publicPath: "",
-      },
+        publicPath: ""
+      }
     ])
     const filePath = new files.FullPath("bar")
 
@@ -41,37 +42,37 @@ suite("Publications.forFilePath()", function () {
   })
 })
 
-suite("Publications.sortPathMappings()", function () {
-  test("has publications", function () {
+suite("Publications.sortPathMappings()", function() {
+  test("has publications", function() {
     const original = Publications.fromConfigs([
       {
         localPath: "/content/",
         publicExtension: "",
-        publicPath: "/",
+        publicPath: "/"
       },
       {
         localPath: "/content/posts",
         publicExtension: "html",
-        publicPath: "/blog",
-      },
+        publicPath: "/blog"
+      }
     ])
     const publication = original.sorted()
     const expected = Publications.fromConfigs([
       {
         localPath: "/content/posts",
         publicExtension: "html",
-        publicPath: "/blog",
+        publicPath: "/blog"
       },
       {
         localPath: "/content/",
         publicExtension: "",
-        publicPath: "/",
-      },
+        publicPath: "/"
+      }
     ])
     assert.deepEqual(publication, expected)
   })
 
-  test("no publications", function () {
+  test("no publications", function() {
     assert.lengthOf(new Publications().sort(), 0)
   })
 })

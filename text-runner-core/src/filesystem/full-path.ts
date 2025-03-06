@@ -50,11 +50,6 @@ export class FullPath {
     return this.value.replace(/\//g, path.sep)
   }
 
-  /** Returns this absolute path using forward slashes as path separators */
-  unixified(): string {
-    return this.value
-  }
-
   /** Returns the public link under which this file path is published */
   publicPath(publications: configuration.Publications): files.FullLink {
     const publication = publications.forFilePath(this)
@@ -70,5 +65,10 @@ export class FullPath {
       throw new Error(`FullPath '${this.unixified()}' does tot point to a file`)
     }
     return new files.FullFilePath(this.value)
+  }
+
+  /** Returns this absolute path using forward slashes as path separators */
+  unixified(): string {
+    return this.value
   }
 }

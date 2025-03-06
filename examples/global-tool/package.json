@@ -4,13 +4,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "doc": "text-run --format=progress",
-    "fix": "prettier --write .",
-    "lint": "prettier -l ."
+    "doc": "text-runner --format=dot",
+    "fix": "dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet"
   },
   "dependencies": {
-    "text-runner": "6.0.0",
-    "textrun-shell": "0.2.0"
+    "text-runner": "7.0.0",
+    "textrun-shell": "0.2.1"
   },
   "devDependencies": {
     "tsx": "4.19.3"

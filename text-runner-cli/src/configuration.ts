@@ -3,48 +3,40 @@ import * as textRunner from "text-runner-core"
 import * as commands from "./commands/index.js"
 import * as formatters from "./formatters/index.js"
 
-/**
- * UserProvidedConfiguration describes arguments provided by the user,
- * either via command line or via config file.
- */
+/** arguments provided by the user, either via command line or via config file */
 export class Data {
-  regionMarker?: string
+  $schema?: string // link to the JSON-Schema, not used by Text-Runner but by editors
   configFileName?: string // name of the config file to use
   defaultFile?: string
   emptyWorkspace?: boolean
   exclude?: string | string[]
   files?: string // files to test
-  formatterName?: formatters.Names // name of the formatter to use
+  format?: formatters.Names // name of the formatter to use
   ignoreLinkTargets?: RegExp[]
   online?: boolean
   publications?: textRunner.configuration.Publications
+  regionMarker?: string
   scaffoldLanguage?: commands.ScaffoldLanguage
   showSkipped?: boolean
   systemTmp?: boolean
   workspace?: string // path of the workspace to use
 
   constructor(data: Partial<Data> = {}) {
-    for (const [key, value] of Object.entries(data)) {
-      // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
-      this[key] = value
-    }
+    Object.assign(this, data)
   }
 
-  /**
-   * Returns a new UserProvidedConfiguration that contains this config
-   * with the fields from other overwriting the fields of this one.
-   */
+  /** merges the given configuration data into this instance */
   merge(other: Data): Data {
     const result = new Data()
     for (const [key, value] of Object.entries(this)) {
       if (value != null) {
-        // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
+        // @ts-expect-error `key` has the correct type here
         result[key] = value
       }
     }
     for (const [key, value] of Object.entries(other)) {
       if (value != null) {
-        // @ts-expect-error TypeScript is too stupid to realize that `key` has the correct type here
+        // @ts-expect-error `key` has the correct type here
         result[key] = value
       }
     }

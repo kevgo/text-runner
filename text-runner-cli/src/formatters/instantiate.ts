@@ -9,10 +9,10 @@ import { SummaryFormatter } from "./summary-formatter.js"
 /** creates an instance of the formatter with the given name */
 export function instantiate(name: formatters.Names, command: textRunner.commands.Command): formatters.Formatter {
   switch (name) {
-    case "dot":
-      return new DotFormatter(command)
     case "detailed":
       return new DetailedFormatter(command)
+    case "dot":
+      return new DotFormatter(command)
     case "progress":
       return new ProgressFormatter(command)
     case "summary":

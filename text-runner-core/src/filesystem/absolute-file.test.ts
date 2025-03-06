@@ -1,15 +1,16 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { files } from "../text-runner.js"
 
-suite("AbsoluteFile", function () {
-  test("directory", function () {
+suite("AbsoluteFile", function() {
+  test("directory", function() {
     const file = new files.AbsoluteFilePath("/home/acme/text-runner/README.md")
     const want = new files.AbsoluteDirPath("/home/acme/text-runner/")
     assert.deepEqual(file.directory(), want)
   })
-  suite("platformified", function () {
-    test("on *nix", function () {
+  suite("platformified", function() {
+    test("on *nix", function() {
       if (process.platform === "win32") {
         return
       }
@@ -17,7 +18,7 @@ suite("AbsoluteFile", function () {
       const have = absFile.platformified()
       assert.equal(have, "/home/acme/textrun/README.md")
     })
-    test("on Windows", function () {
+    test("on Windows", function() {
       if (process.platform !== "win32") {
         return
       }
@@ -27,14 +28,14 @@ suite("AbsoluteFile", function () {
     })
   })
 
-  suite("toFullFile", function () {
-    test("in same dir", function () {
+  suite("toFullFile", function() {
+    test("in same dir", function() {
       const file = new files.AbsoluteFilePath("/home/acme/text-runner/README.md")
       const have = file.toFullFile(new files.SourceDir("/home/acme/text-runner"))
       const want = new files.FullFilePath("README.md")
       assert.deepEqual(have, want)
     })
-    test("in subdir", function () {
+    test("in subdir", function() {
       const file = new files.AbsoluteFilePath("/home/acme/text-runner/README.md")
       const have = file.toFullFile(new files.SourceDir("/home/acme"))
       const want = new files.FullFilePath("text-runner/README.md")
@@ -42,8 +43,8 @@ suite("AbsoluteFile", function () {
     })
   })
 
-  suite("unixified", function () {
-    test("on *nix", function () {
+  suite("unixified", function() {
+    test("on *nix", function() {
       if (process.platform === "win32") {
         return
       }
@@ -51,7 +52,7 @@ suite("AbsoluteFile", function () {
       const have = absFile.platformified()
       assert.equal(have, "/home/acme/textrun/README.md")
     })
-    test("on Windows", function () {
+    test("on Windows", function() {
       if (process.platform !== "win32") {
         return
       }

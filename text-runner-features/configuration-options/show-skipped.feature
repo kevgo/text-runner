@@ -8,12 +8,14 @@ Feature: show-skipped option
       [1.md](1.md)
       """
 
+  @api
   Scenario: default API setting
     When calling Text-Runner
     Then it emits these events:
       | FILENAME | LINE | ACTION     |
       | 1.md     | 3    | check-link |
 
+  @cli
   Scenario: default CLI setting
     When running Text-Runner
     Then it prints:
@@ -29,8 +31,9 @@ Feature: show-skipped option
       1.md:2
       """
 
+  @cli
   Scenario: enable via CLI
-    When running "text-run --show-skipped"
+    When running "text-runner --show-skipped"
     Then it prints:
       """
       1.md:1 -- skipping: link to http://google.com
@@ -38,6 +41,7 @@ Feature: show-skipped option
       1.md:3 -- link to local file 1.md
       """
 
+  @api
   Scenario: enable via API
     When calling:
       """
@@ -51,12 +55,15 @@ Feature: show-skipped option
       | 1.md     | 2    | image http://google.com/foo.png | skipped |
       | 1.md     | 3    | link to local file 1.md         | success |
 
+  @cli
   Scenario: disable via CLI
-    Given the source code contains a file "text-run.yml" with content:
+    Given the source code contains a file "text-runner.jsonc" with content:
       """
-      show-skipped: true
+      {
+        "show-skipped": true
+      }
       """
-    When running "text-run --no-show-skipped"
+    When running "text-runner --no-show-skipped"
     Then it prints:
       """
       1.md:3 -- link to local file 1.md

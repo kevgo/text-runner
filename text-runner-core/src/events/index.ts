@@ -1,26 +1,6 @@
 import { Activity } from "../activities/index.js"
 
-/** defines the events that a command can emit. */
-export type Name =
-  | "start" // test suite is starting
-  | "result" // activity result
-  | "finish" // test suite is done
-  | "output" // things to print
-
-export type Args = Start | Success | Warning | Skipped | Failed | string
-
-export type Handler = (arg: any) => void
-
-/** signals the start of a test suite */
-export interface Start {
-  readonly stepCount: number
-}
-
-export interface Result {
-  readonly status: ResultStatus
-}
-
-export type ResultStatus = "failed" | "skipped" | "success" | "warning"
+export type Args = Failed | Skipped | Start | string | Success | Warning
 
 /** signals a failed activity */
 export interface Failed {
@@ -32,12 +12,32 @@ export interface Failed {
   readonly status: "failed"
 }
 
+export type Handler = (arg: any) => void
+
+/** defines the events that a command can emit. */
+export type Name =
+  | "finish" // test suite is done
+  | "output" // things to print
+  | "result" // activity result
+  | "start" // test suite is starting
+
+export interface Result {
+  readonly status: ResultStatus
+}
+
+export type ResultStatus = "failed" | "skipped" | "success" | "warning"
+
 /** signals a skipped activity */
 export interface Skipped {
   readonly activity: Activity
   readonly finalName: string
   readonly output: string
   readonly status: "skipped"
+}
+
+/** signals the start of a test suite */
+export interface Start {
+  readonly stepCount: number
 }
 
 /** signals a successful activity */

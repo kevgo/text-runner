@@ -16,7 +16,7 @@ export async function executeCLI(
   if (world.debug) {
     args.env = {
       DEBUG: "*,-babel",
-      PATH: process.env.PATH,
+      PATH: process.env.PATH
     }
   }
   const fullCommand = makeFullPath(command, process.platform)
@@ -26,7 +26,7 @@ export async function executeCLI(
     // unexpected failure
     console.log("UNEXPECTED TEST FAILURE\n")
     console.log("OUTPUT START")
-    console.log(runner.output.fullText());
+    console.log(runner.output.fullText())
     console.log("OUTPUT END")
     throw new Error(`Expected success but got exit code: ${runResult.exitCode}`)
   }

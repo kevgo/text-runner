@@ -1,7 +1,7 @@
 Feature: empty the workspace
 
   Background:
-    Given the source code contains a file "text-run/list-dir.js" with content:
+    Given the source code contains a file "text-runner/list-dir.js" with content:
       """
       import {promises as fs} from "fs"
       export default async (action) => {
@@ -35,9 +35,11 @@ Feature: empty the workspace
 
   @cli
   Scenario: disable via config file
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
-      emptyWorkspace: false
+      {
+        "emptyWorkspace": false
+      }
       """
     When running Text-Runner
     Then it prints:
@@ -47,7 +49,7 @@ Feature: empty the workspace
 
   @cli
   Scenario: disable via CLI
-    When running "text-run --no-empty-workspace"
+    When running "text-runner --no-empty-workspace"
     Then it prints:
       """
       1.md:1 -- 1 workspace files (hello.md)
@@ -55,11 +57,13 @@ Feature: empty the workspace
 
   @cli
   Scenario: enable via CLI
-    Given the text-run configuration contains:
+    Given the text-runner configuration contains:
       """
-      emptyWorkspace: false
+      {
+        "emptyWorkspace": false
+      }
       """
-    When running "text-run --empty-workspace"
+    When running "text-runner --empty-workspace"
     Then it prints:
       """
       1.md:1 -- 0 workspace files

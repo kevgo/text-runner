@@ -1,8 +1,9 @@
 import { expect } from "chai"
+import { test } from "node:test"
 
 import * as helpers from "./index.js"
 
-test("allKeys()", function () {
+test("allKeys()", function() {
   const obj1 = { a: "1" }
   const obj2 = { b: "1" }
   const obj3 = { c: "1" }

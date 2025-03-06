@@ -6,8 +6,7 @@ actions for JavaScript code snippets inside documentation.
 ## Installation
 
 To use these actions, add this package as a development dependency by running
-<code type="npm/install">npm i -D textrun-javascript</code> or
-<code type="npm/install">yarn i -D textrun-javascript</code>.
+<code type="npm/install">npm i -D textrun-javascript</code>.
 
 ## Run JavaScript
 
@@ -26,7 +25,7 @@ When you assign the <b type="action/name-full">javascript/runnable</b> type to
 this document part, Text-Runner executes the JavaScript similar to how the user
 would:
 
-<!-- prettier-ignore-start -->
+<!-- dprint-ignore-start -->
 
 <a type="extension/runnable-region">
 
@@ -44,7 +43,7 @@ console.log("Hello world")
 
 </a>
 
-<!-- prettier-ignore-end -->
+<!-- dprint-ignore-end -->
 
 You can simplify this to:
 
@@ -90,7 +89,7 @@ function asyncFoo(done) {
   done()
 }
 
-asyncFoo(function (err) {
+asyncFoo(function(err) {
   // ...
 })
 ```

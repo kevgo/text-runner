@@ -2,13 +2,13 @@ import * as observableProcess from "observable-process"
 
 /** CurrentServer provides global access to the currently running server process. */
 export class CurrentServer {
-  static instance(): CurrentServer {
-    return instance
-  }
-  process: observableProcess.RunningProcess | null
-
+  process: null | observableProcess.RunningProcess
   constructor() {
     this.process = null
+  }
+
+  static instance(): CurrentServer {
+    return instance
   }
 
   hasProcess(): boolean {

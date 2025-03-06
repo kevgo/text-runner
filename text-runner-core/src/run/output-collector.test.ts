@@ -1,14 +1,15 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { OutputCollector } from "./output-collector.js"
 
-suite("OutputCollector", function () {
-  test("initial state", function () {
+suite("OutputCollector", function() {
+  test("initial state", function() {
     const collector = new OutputCollector()
     assert.equal(collector.toString(), "")
   })
 
-  test("collecting strings", function () {
+  test("collecting strings", function() {
     const collector = new OutputCollector()
     const logFn = collector.logFn()
     logFn("hello")
@@ -16,7 +17,7 @@ suite("OutputCollector", function () {
     assert.equal(collector.toString(), "hello\nworld\n")
   })
 
-  test("collecting other data types", function () {
+  test("collecting other data types", function() {
     const collector = new OutputCollector()
     const logFn = collector.logFn()
     logFn(123)
@@ -24,7 +25,7 @@ suite("OutputCollector", function () {
     assert.equal(collector.toString(), "123\n{ a: 1 }\n")
   })
 
-  test("multiple arguments", function () {
+  test("multiple arguments", function() {
     const collector = new OutputCollector()
     const logFn = collector.logFn()
     logFn("hello", "world")

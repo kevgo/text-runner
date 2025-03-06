@@ -1,14 +1,15 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { replaceAsyncCallback } from "./replace-async-callback.js"
 
-suite("replaceAsyncCallback", function () {
-  test("<CALLBACK>", function () {
+suite("replaceAsyncCallback", function() {
+  test("<CALLBACK>", function() {
     const give = 'fs.writeFile("foo", "bar", <CALLBACK>)'
     const want = 'fs.writeFile("foo", "bar", __finished)'
     assert.equal(replaceAsyncCallback(give), want)
   })
-  test("// ...", function () {
+  test("// ...", function() {
     const give = `\
 fs.writeFile("foo", "bar", function() {
   // ...

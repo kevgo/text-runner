@@ -13,12 +13,17 @@ Feature: Folder Mapping
       """
       [link to 2.md](2)
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content
-          publicPath: /
-          publicExtension: ''
+      {
+        "publications": [
+          {
+            "localPath": "/content",
+            "publicPath": "/",
+            "publicExtension": ""
+          }
+        ]
+      }
       """
     When running Text-Runner
     Then it prints:
@@ -32,12 +37,17 @@ Feature: Folder Mapping
       """
       [relative link to blog post 3](blog/3.html)
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content/posts
-          publicPath: /blog
-          publicExtension: .html
+      {
+        "publications": [
+          {
+            "localPath": "/content/posts",
+            "publicPath": "/blog",
+            "publicExtension": ".html"
+          }
+        ]
+      }
       """
     And the source code contains a file "content/posts/3.md" with content:
       """
@@ -55,12 +65,17 @@ Feature: Folder Mapping
       """
       [relative link to blog post 3](blog/3.html#welcome)
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content/posts
-          publicPath: /blog
-          publicExtension: .html
+      {
+        "publications": [
+          {
+            "localPath": "/content/posts",
+            "publicPath": "/blog",
+            "publicExtension": ".html"
+          }
+        ]
+      }
       """
     And the source code contains a file "content/posts/3.md" with content:
       """
@@ -78,12 +93,17 @@ Feature: Folder Mapping
       """
       [relative link to blog post 3](/blog/3.html)
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content/posts
-          publicPath: /blog
-          publicExtension: .html
+      {
+        "publications": [
+          {
+            "localPath": "/content/posts",
+            "publicPath": "/blog",
+            "publicExtension": ".html"
+          }
+        ]
+      }
       """
     And the source code contains a file "content/posts/3.md" with content:
       """
@@ -101,12 +121,17 @@ Feature: Folder Mapping
       """
       [relative link to blog post 3](/blog/3.html#welcome)
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content/posts
-          publicPath: /blog
-          publicExtension: .html
+      {
+        "publications": [
+          {
+            "localPath": "/content/posts",
+            "publicPath": "/blog",
+            "publicExtension": ".html"
+          }
+        ]
+      }
       """
     And the source code contains a file "content/posts/3.md" with content:
       """
@@ -125,15 +150,22 @@ Feature: Folder Mapping
       [link to hello in 2.md](/2#hello)
       [link to blog post 3.md](/blog/3.html)
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /content
-          publicPath: /
-          publicExtension: ''
-        - localPath: /content/posts
-          publicPath: /blog
-          publicExtension: .html
+      {
+        "publications": [
+          {
+            "localPath": "/content",
+            "publicPath": "/",
+            "publicExtension": ""
+          },
+          {
+            "localPath": "/content/posts",
+            "publicPath": "/blog",
+            "publicExtension": ".html"
+          }
+        ]
+      }
       """
     And the source code contains a file "content/posts/3.md" with content:
       """
@@ -156,12 +188,17 @@ Feature: Folder Mapping
       """
       # Hello
       """
-    And the source code contains a file "text-run.yml" with content:
+    And the source code contains a file "text-runner.jsonc" with content:
       """
-      publications:
-        - localPath: /posts
-          publicPath: /blog
-          publicExtension: ''
+      {
+        "publications": [
+          {
+            "localPath": "/posts",
+            "publicPath": "/blog",
+            "publicExtension": ""
+          }
+        ]
+      }
       """
     When running Text-Runner
     Then it prints:

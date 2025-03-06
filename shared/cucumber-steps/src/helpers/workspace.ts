@@ -7,12 +7,21 @@ import * as url from "url"
 const filesToKeep = ["package.json", "tsconfig.json", "node_modules"]
 /** the original contents of files before an end-to-end test ran in a workspace */
 const fileBackups = {
-  "package.json": "",
+  "package.json": ""
 }
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 /** full path to the workspace */
 const workspacePath = dirPath(process.cwd(), __dirname, process.env.CUCUMBER_WORKER_ID ?? "0")
 export const absPath = new textRunner.files.AbsoluteDirPath(workspacePath)
+
+/** stores the original content of a workspace for end-to-end tests in order to restore it later */
+export async function backup() {
+  for (const fileName in fileBackups) {
+    const filePath = path.join(workspacePath, fileName)
+    // @ts-expect-error TypeScript is too stupid to understand that "filePath" contains exactly the type signature ("package.json") that it wants here
+    fileBackups[fileName] = await fs.readFile(filePath, "utf-8")
+  }
+}
 
 /** provides the path of the workspace to use */
 export function dirPath(cwd: string, dirname: string, cucumberWorkerId: string): string {
@@ -23,15 +32,6 @@ export function dirPath(cwd: string, dirname: string, cucumberWorkerId: string):
     dir += `_${cucumberWorkerId}`
   }
   return path.join(dirname, "..", "..", "..", "..", "test", dir)
-}
-
-/** stores the original content of a workspace for end-to-end tests in order to restore it later */
-export async function backup() {
-  for (const fileName in fileBackups) {
-    const filePath = path.join(workspacePath, fileName)
-    // @ts-expect-error TypeScript is too stupid to understand that "filePath" contains exactly the type signature ("package.json") that it wants here
-    fileBackups[fileName] = await fs.readFile(filePath, "utf-8")
-  }
 }
 
 export async function restore() {

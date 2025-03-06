@@ -1,16 +1,17 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import { targetURL } from "./target-url.js"
 
-suite("targetURL", function () {
+suite("targetURL", function() {
   const tests = {
-    hello: "hello",
-    "foo/bar-baz": "foobar-baz",
     CamelCase: "camelcase",
-    "identity & access": "identity--access",
+    "foo/bar-baz": "foobar-baz",
+    hello: "hello",
+    "identity & access": "identity--access"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} --> ${want}`, function () {
+    test(`${give} --> ${want}`, function() {
       assert.equal(targetURL(give), want)
     })
   }

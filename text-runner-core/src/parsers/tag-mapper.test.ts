@@ -1,27 +1,28 @@
 import { assert } from "chai"
+import { suite, test } from "node:test"
 
 import * as ast from "../ast/index.js"
 import { TagMapper } from "./tag-mapper.js"
 
 const tagMapper = new TagMapper()
 
-suite("TagMapper", function () {
-  test(".isOpenCloseTag()", function () {
+suite("TagMapper", function() {
+  test(".isOpenCloseTag()", function() {
     assert.equal(tagMapper.isOpenCloseTag("a"), true)
   })
 
-  test(".isStandaloneTag()", function () {
+  test(".isStandaloneTag()", function() {
     assert.equal(tagMapper.isStandaloneTag("hr"), true)
   })
 
-  test(".openingTypeForTag", function () {
+  test(".openingTypeForTag", function() {
     assert.equal(tagMapper.openingTypeForTag("b", {}), "bold_open")
     assert.equal(tagMapper.openingTypeForTag("/b", {}), "bold_open")
     assert.equal(tagMapper.openingTypeForTag("/a", {}), "anchor_open")
     assert.equal(tagMapper.openingTypeForTag("/a", { href: "foo" }), "link_open")
   })
 
-  test(".tagForType()", function () {
+  test(".tagForType()", function() {
     assert.equal(tagMapper.tagForType("bold_open"), "b", "known opening tag")
     assert.equal(tagMapper.tagForType("bold_close"), "/b", "known closing tag")
     assert.equal(tagMapper.tagForType("image"), "img", "known standalone tag")

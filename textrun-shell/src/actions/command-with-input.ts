@@ -8,7 +8,7 @@ import { trimDollar } from "../helpers/trim-dollar.js"
 
 interface ProcessInput {
   readonly input: string
-  readonly textToWait: string | null
+  readonly textToWait: null | string
 }
 
 /**
@@ -25,7 +25,9 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.region[0].tag} ${action.configuration.regionMarker}="exec-with-input"> region contains no commands to run`
+      `the <${
+        action.region[0].tag
+      } ${action.configuration.regionMarker}="exec-with-input"> region contains no commands to run`
     )
   }
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
@@ -35,7 +37,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
   }
   // this needs to be global because it is used in the "verify-run-console-output" step
   const processor = observableProcess.start(callArgs(commandsToRun, process.platform), {
-    cwd: action.configuration.workspace.platformified(),
+    cwd: action.configuration.workspace.platformified()
   })
   for (const inputLine of input) {
     await enter(processor, inputLine)
@@ -75,12 +77,12 @@ function getInput(nodes: textRunner.ast.NodeList): ProcessInput[] {
     if (tdNode.length === 1) {
       // single-column table, use that column
       const text = trContent.textInNode(tdNode[0])
-      result.push({ textToWait: null, input: text })
+      result.push({ input: text, textToWait: null })
     } else {
       // multi-colum table, use the last column
       result.push({
         input: trContent.textInNode(tdNode[tdNode.length - 1]),
-        textToWait: trContent.textInNode(tdNode[0]),
+        textToWait: trContent.textInNode(tdNode[0])
       })
     }
   }

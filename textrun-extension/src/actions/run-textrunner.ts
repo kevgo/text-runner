@@ -5,9 +5,9 @@ import * as util from "util"
 export async function runTextrunner(action: textRunner.actions.Args): Promise<void> {
   action.name("Running Text-Runner in workspace")
   const command = new textRunner.commands.Run({
-    sourceDir: action.configuration.workspace.joinStr(action.region[0].attributes["dir"] || "."),
-    workspace: ".",
     emptyWorkspace: false,
+    sourceDir: action.configuration.workspace.joinStr(action.region[0].attributes["dir"] || "."),
+    workspace: "."
   })
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()

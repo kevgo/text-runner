@@ -1,6 +1,6 @@
 {
   "name": "textrun-shell",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -11,10 +11,10 @@
     "build": "tsc -p tsconfig-build.json",
     "clean": "rm -rf dist",
     "cuke": "cucumber-js --format=progress",
-    "doc": "text-run static --format=summary && text-run dynamic --format=progress",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && prettier --write .",
-    "lint": "prettier -l . && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
-    "unit": "env NODE_NO_WARNINGS=1 mocha --reporter=dot 'src/**/*.test.ts'"
+    "doc": "text-runner",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
+    "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
     "assert-no-diff": "3.0.6",
@@ -22,15 +22,15 @@
     "end-child-processes": "1.0.3",
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "7.1.0",
-    "text-runner-core": "6.0.0",
-    "textrun-extension": "0.2.0"
+    "text-runner-core": "7.0.0",
+    "textrun-extension": "0.2.1"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "6.0.0",
-    "textrun-action": "0.2.0",
-    "textrun-extension": "0.2.0",
-    "textrun-workspace": "0.2.0",
+    "text-runner": "7.0.0",
+    "textrun-action": "0.2.1",
+    "textrun-extension": "0.2.1",
+    "textrun-workspace": "0.2.1",
     "tsx": "4.19.3"
   }
 }

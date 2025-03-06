@@ -9,9 +9,9 @@ import { workingDir } from "./actions/working-dir.js"
 
 export const textrunActions: textRunner.exports.TextrunActions = {
   additionalFileContent,
-  workingDir,
-  newFile,
   existingDirectory,
   existingFile,
   newDirectory,
+  newFile,
+  workingDir
 }

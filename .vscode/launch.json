@@ -8,9 +8,9 @@
       "name": "unit",
       "type": "node",
       "request": "launch",
-      "program": "${workspaceRoot}/node_modules/mocha/bin/mocha",
+      "program": "node",
       "cwd": "${workspaceFolder}/text-runner",
-      "args": ["src/**/*.test.ts"],
+      "args": ["--test", "--import tsx", "src /**/*.test.ts"],
       "outFiles": ["${workspaceRoot}/src/*.test.ts"]
     },
     {

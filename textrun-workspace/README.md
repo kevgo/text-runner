@@ -84,7 +84,7 @@ Fuji apples are the best!
 
 When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file">_apples.txt_ and content
-`Fuji apples are the best!`</a>.
+`Fuji apples are the best!`</a> in the workspace.
 
 ### directory
 

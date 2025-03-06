@@ -87,16 +87,6 @@ export class Node {
   /** markdown type of AST node */
   type: NodeType
 
-  get [Symbol.toStringTag]() {
-    let result = `${this.type}{`
-    if (this.content) {
-      result += `"${this.content}"`
-    }
-    result += `, ${this.attributes}`
-    result += `}`
-    return result
-  }
-
   constructor(data: {
     attributes: NodeAttributes
     content: string

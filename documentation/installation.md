@@ -115,7 +115,7 @@ file. You can tell it to use another configuration file with the `--config`
 command-line switch:
 
 ```
-$ text-runner --config=my-config.jsonc
+text-runner --config=my-config.jsonc
 ```
 
 <hr>

@@ -10,10 +10,10 @@ Feature: changing the working directory
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME             | LINE | ACTION                  | ACTIVITY                        | STATUS  | ERROR MESSAGE       |
-      | directory_changer.md | 1    | workspace/new-file      | create file foo/bar             | success |                     |
-      | directory_changer.md | 3    | workspace/working-dir   | changing into the foo directory | success |                     |
-      | directory_changer.md | 4    | workspace/existing-file | verify content of file bar      | failed  | file not found: bar |
+      | FILENAME             | LINE | ACTION                               | ACTIVITY                        | STATUS  | ERROR MESSAGE       |
+      | directory_changer.md | 1    | workspace/new-file                   | create file foo/bar             | success |                     |
+      | directory_changer.md | 3    | workspace/working-dir                | changing into the foo directory | success |                     |
+      | directory_changer.md | 4    | workspace/existing-file-with-content | verify content of file bar      | failed  | file not found: bar |
 
 
   Scenario: non-existing directory

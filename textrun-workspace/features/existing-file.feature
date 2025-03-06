@@ -8,9 +8,9 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                         |
-      | 1.md     | 1    | workspace/new-file      | create file hello.txt            |
-      | 1.md     | 2    | workspace/existing-file | verify content of file hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                         |
+      | 1.md     | 1    | workspace/new-file                   | create file hello.txt            |
+      | 1.md     | 2    | workspace/existing-file-with-content | verify content of file hello.txt |
 
 
   Scenario: specify file name via strong text and content via fenced block
@@ -26,9 +26,9 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                         |
-      | 1.md     | 1    | workspace/new-file      | create file hello.txt            |
-      | 1.md     | 2    | workspace/existing-file | verify content of file hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                         |
+      | 1.md     | 1    | workspace/new-file                   | create file hello.txt            |
+      | 1.md     | 2    | workspace/existing-file-with-content | verify content of file hello.txt |
 
 
   Scenario: file content mismatch
@@ -39,9 +39,9 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    | GUIDANCE                                                       |
-      | 1.md     | 1    | workspace/new-file      | success |            |                                  |                                                                |
-      | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
+      | FILENAME | LINE | ACTION                               | STATUS  | ERROR TYPE | ERROR MESSAGE                    | GUIDANCE                                                       |
+      | 1.md     | 1    | workspace/new-file                   | success |            |                                  |                                                                |
+      | 1.md     | 2    | workspace/existing-file-with-content | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
     And the error provides the guidance:
       """
       mismatching lines:
@@ -57,8 +57,8 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                                                            |
-      | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt | the workspace has these files: 1.md, node_modules, package.json, tmp, tsconfig.json |
+      | FILENAME | LINE | ACTION                               | STATUS | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                                                            |
+      | 1.md     | 1    | workspace/existing-file-with-content | failed | UserError  | file not found: zonk.txt | the workspace has these files: 1.md, node_modules, package.json, tmp, tsconfig.json |
 
 
   Scenario: setting the base directory
@@ -82,5 +82,5 @@ Feature: verifying file content
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                            |
-      | 1.md     | 1    | workspace/existing-file | verify content of file ../hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                            |
+      | 1.md     | 1    | workspace/existing-file-with-content | verify content of file ../hello.txt |

@@ -68,7 +68,7 @@ Feature: display the version
           line: 1
         },
         region: NodeList(1) [
-          Node {
+          Node [.*] {
             type: 'image',
             tag: 'img',
             location: Location {
@@ -101,7 +101,7 @@ Feature: display the version
           line: 1
         },
         region: NodeList(3) [
-          Node {
+          Node [.*] {
             type: 'link_open',
             tag: 'a',
             location: Location {
@@ -112,7 +112,7 @@ Feature: display the version
             content: '',
             attributes: { href: '2.md' }
           },
-          Node {
+          Node [.*] {
             type: 'text',
             tag: '',
             location: Location {
@@ -123,7 +123,7 @@ Feature: display the version
             content: 'another document',
             attributes: {}
           },
-          Node {
+          Node [.*] {
             type: 'link_close',
             tag: '/a',
             location: Location {

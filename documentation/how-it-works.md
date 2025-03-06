@@ -32,7 +32,7 @@ tutorial:
 Use the _echo_ command to print to the console. Try it out by running:
 
 ```
-$ echo Hello world!
+echo Hello world!
 ```
 
 The terminal prints the output right after the call. Our first Shell program
@@ -55,7 +55,7 @@ Use the _echo_ command to print to the console. Try it out by running:
 <a type="shell/command">
 
 ```
-$ echo Hello world!
+echo Hello world!
 ```
 
 </a>
@@ -90,7 +90,7 @@ paragraph to:
 Use the _echo_ command to print to the console. Try it out by running:
 
 <pre type="shell/command">
-$ echo Hello world!
+echo Hello world!
 </pre>
 
 The terminal prints the output right after the call. Our first Shell program

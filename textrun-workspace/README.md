@@ -11,7 +11,7 @@ actions for working with files.
 To use these actions, add this package as a development dependency by running
 
 <pre type="npm/install">
-$ npm i -D textrun-workspace
+npm i -D textrun-workspace
 </pre>
 
 ### cd action

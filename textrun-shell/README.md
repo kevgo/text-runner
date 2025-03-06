@@ -49,7 +49,7 @@ looks like this:
 The "echo" command prints text on the command line. For example, let's run:
 
 <pre type="shell/command">
-$ echo Hello world!
+echo Hello world!
 </pre>
 
 It welcomes us with a nice greeting:
@@ -99,7 +99,7 @@ rl.question("your name\n", name => {
 Run this tool on the command line
 
 ```
-$ node greeter.js
+node greeter.js
 ```
 
 and provide user input with an HTML table:
@@ -160,7 +160,7 @@ that shows them in action:
 Start the server:
 
 <pre type="shell/server">
-$ node server.js
+node server.js
 </pre>
 
 Wait until it is fully booted up:

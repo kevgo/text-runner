@@ -33,13 +33,13 @@ this package. It would contain a section that looks something like this:
 Install the foobar package by running:
 
 <pre type="npm/install">
-$ npm install foobar
+npm install foobar
 </pre>
 
 or with Yarn:
 
 <pre type="npm/install">
-$ yarn add foobar
+yarn add foobar
 </pre>
 ```
 

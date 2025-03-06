@@ -34,7 +34,7 @@ export default action => {
 Let's run Text-Runner:
 
 <pre type="shell/command">
-$ text-runner
+text-runner
 </pre>
 
 The formatter displays test progress on the console as the test runs:

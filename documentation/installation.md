@@ -45,7 +45,7 @@ To scaffold a config file, open a terminal, go to the folder where you want to
 configure TextRunner, and run:
 
 <pre type="shell/command">
-$ text-runner setup
+text-runner setup
 </pre>
 
 This creates a configuration file called
@@ -116,7 +116,7 @@ file. You can tell it to use another configuration file with the `--config`
 command-line switch:
 
 ```
-$ text-runner --config=my-config.jsonc
+text-runner --config=my-config.jsonc
 ```
 
 <hr>

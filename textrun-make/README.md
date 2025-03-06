@@ -7,7 +7,8 @@ actions for verifying documentation mentioning
 ### Installation
 
 To use these actions, add this package as a development dependency by running
-<code type="npm/install">npm i -D textrun-make</code>.
+<code type="npm/install">npm i -D textrun-make</code> or
+<code type="npm/install">yarn i -D textrun-make</code>.
 
 ### Verify Make commands
 

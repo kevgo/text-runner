@@ -7,6 +7,7 @@ This guide is for all codebases in this mono-repo.
 You need to have these tools installed:
 
 - [Node.js](https://nodejs.org) version 10 or later
+- [Yarn](https://yarnpkg.com)
 - Gnu Make - the `make` command should exist on your machine
 - to see code statistics: [scc](https://github.com/boyter/scc)
 
@@ -67,7 +68,7 @@ versions.
 ## Deployment
 
 - on a branch:
-  - `npm run json-schema && make fix` in the root folder and ship
+  - `yarn run json-schema && make fix` in the root folder and ship
   - bump the versions by running `lerna version <patch|minor> --no-private` or
     by updating the versions manually if bumping the major version
   - make a global search-and-replace for "7.0.0" and "0.2.1" replace it with the

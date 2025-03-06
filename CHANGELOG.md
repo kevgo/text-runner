@@ -43,7 +43,7 @@ executable.
 
 - significantly improved compile and test time thanks to using a scalable
   monorepo build system ([1465](https://github.com/kevgo/text-runner/pull/1465))
-- replace Makefiles for individual repos with npm tasks to be used by
+- replace Makefiles for individual repos with Yarn tasks to be used by
   [Atalanta](https://github.com/kevgo/atalanta))
 - fewer dependencies on external npm packages, reducing the overall size and
   attack surface ([1476](https://github.com/kevgo/text-runner/pull/1476))

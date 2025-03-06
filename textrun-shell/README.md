@@ -6,7 +6,8 @@ actions for documenting console commands to be executed by the reader.
 ### Setup
 
 To add this package as a Text-Runner plugin, run <code type="npm/install">npm i
--D textrun-shell</code>.
+-D textrun-shell</code> or <code type="npm/install">yarn i -D
+textrun-shell</code>.
 
 <!-- TODO: verify this somehow -->
 

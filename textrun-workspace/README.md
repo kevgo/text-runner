@@ -22,7 +22,7 @@ npm i -D textrun-workspace
 Each Text-Runner test starts in the workspace directory. The
 <b type="action/name-full">workspace/working-dir</b> action changes the current
 working directory of the test runner to the given directory inside the
-workspace. As an example, consider your repository contains a
+workspace. As an example, consider your workspace contains a
 <b type="workspace/new-directory">scripts</b> folder. Your documentation can
 change into it like this:
 

@@ -4,20 +4,20 @@ Feature: verifying file content
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
-      Your workspace now contains a file <a type="workspace/existing-file">_hello.txt_ with content `Hello world!`</a>.
+      Your workspace now contains a file <a type="workspace/existing-file-with-content">_hello.txt_ with content `Hello world!`</a>.
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                         |
-      | 1.md     | 1    | workspace/new-file      | create file hello.txt            |
-      | 1.md     | 2    | workspace/existing-file | verify content of file hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                         |
+      | 1.md     | 1    | workspace/new-file                   | create file hello.txt            |
+      | 1.md     | 2    | workspace/existing-file-with-content | verify content of file hello.txt |
 
 
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
-      Now you have a file <a type="workspace/existing-file">**hello.txt** with content:
+      Now you have a file <a type="workspace/existing-file-with-content">**hello.txt** with content:
 
       ```
       Hello world!
@@ -26,22 +26,22 @@ Feature: verifying file content
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                         |
-      | 1.md     | 1    | workspace/new-file      | create file hello.txt            |
-      | 1.md     | 2    | workspace/existing-file | verify content of file hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                         |
+      | 1.md     | 1    | workspace/new-file                   | create file hello.txt            |
+      | 1.md     | 2    | workspace/existing-file-with-content | verify content of file hello.txt |
 
 
   Scenario: file content mismatch
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
-      Now you have a file <a type="workspace/existing-file">__hello.txt__ with `mismatching expected content`</a>.
+      Now you have a file <a type="workspace/existing-file-with-content">__hello.txt__ with `mismatching expected content`</a>.
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE                    | GUIDANCE                                                       |
-      | 1.md     | 1    | workspace/new-file      | success |            |                                  |                                                                |
-      | 1.md     | 2    | workspace/existing-file | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
+      | FILENAME | LINE | ACTION                               | STATUS  | ERROR TYPE | ERROR MESSAGE                    | GUIDANCE                                                       |
+      | 1.md     | 1    | workspace/new-file                   | success |            |                                  |                                                                |
+      | 1.md     | 2    | workspace/existing-file-with-content | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
     And the error provides the guidance:
       """
       mismatching lines:
@@ -53,12 +53,12 @@ Feature: verifying file content
   Scenario: non-existing file
     Given the source code contains a file "1.md" with content:
       """
-      The file <a type="workspace/existing-file">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
+      The file <a type="workspace/existing-file-with-content">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
       """
     When calling Text-Runner
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | STATUS | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                                                            |
-      | 1.md     | 1    | workspace/existing-file | failed | UserError  | file not found: zonk.txt | the workspace has these files: 1.md, node_modules, package.json, tmp, tsconfig.json |
+      | FILENAME | LINE | ACTION                               | STATUS | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                                                            |
+      | 1.md     | 1    | workspace/existing-file-with-content | failed | UserError  | file not found: zonk.txt | the workspace has these files: 1.md, node_modules, package.json, tmp, tsconfig.json |
 
 
   Scenario: setting the base directory
@@ -69,7 +69,7 @@ Feature: verifying file content
     And the workspace contains a directory "subdir"
     And the source code contains a file "1.md" with content:
       """
-      <a type="workspace/existing-file" dir="..">
+      <a type="workspace/existing-file-with-content" dir="..">
 
       Your workspace contains a file _hello.txt_ with content `Hello world!`
 
@@ -82,5 +82,5 @@ Feature: verifying file content
       await command.execute()
       """
     Then it emits these events:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                            |
-      | 1.md     | 1    | workspace/existing-file | verify content of file ../hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                            |
+      | 1.md     | 1    | workspace/existing-file-with-content | verify content of file ../hello.txt |

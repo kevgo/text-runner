@@ -9,7 +9,7 @@ Feature: checking embedded Markdown images
       """
     And the workspace contains an image "watermelon.gif"
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY             |
       | 1.md     | 1    | check-image | image watermelon.gif |
 
@@ -21,7 +21,7 @@ Feature: checking embedded Markdown images
       """
     And the workspace contains an image "documentation/images/watermelon.gif"
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME           | LINE | ACTION      | ACTIVITY                                   |
       | documentation/1.md | 1    | check-image | image /documentation/images/watermelon.gif |
 
@@ -32,7 +32,7 @@ Feature: checking embedded Markdown images
       ![Alt text](zonk.gif "watermelon")
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
       | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
 
@@ -43,7 +43,7 @@ Feature: checking embedded Markdown images
       ![Alt text](http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png "google logo")
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                                                                |
       | 1.md     | 1    | check-image | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
@@ -54,7 +54,7 @@ Feature: checking embedded Markdown images
       ![Alt text](http://google.com/onetuhoenzonk.png "zonk")
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
       | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
 
@@ -65,6 +65,6 @@ Feature: checking embedded Markdown images
       ![Alt text]()
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

@@ -12,7 +12,7 @@ Feature: verifying a documented repository file name
       <b type="repo/existing-file">hello.txt</b>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION             | ACTIVITY                                     |
       | 1.md     | 1    | repo/existing-file | document mentions source code file hello.txt |
 
@@ -23,6 +23,6 @@ Feature: verifying a documented repository file name
       <b type="repo/existing-file">zonk.txt</b>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION             | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | repo/existing-file | failed | UserError  | file not found: zonk.txt |

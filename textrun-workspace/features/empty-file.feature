@@ -6,7 +6,7 @@ Feature: creating empty files
       creating a file with name <b type="workspace/empty-file">one.txt</b>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY            |
       | creator.md | 1    | workspace/empty-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
@@ -19,7 +19,7 @@ Feature: creating empty files
       <a type="workspace/empty-file"> </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION               | STATUS | ERROR TYPE | ERROR MESSAGE     | GUIDANCE |
       | creator.md | 1    | workspace/empty-file | failed | UserError  | No filename given |          |
 
@@ -29,7 +29,7 @@ Feature: creating empty files
       <a type="workspace/empty-file" dir="subdir">one.txt</a>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY                   |
       | creator.md | 1    | workspace/empty-file | create file subdir/one.txt |
     And the workspace now contains a file "subdir/one.txt" with content:

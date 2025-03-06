@@ -10,6 +10,6 @@ Feature: active em tags
       <em type="HelloWorld">foo</em>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION      |
       | 1.md     | 1    | hello-world |

@@ -15,7 +15,7 @@ Feature: Running Text-Runner inside a Text-Runner session
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS  |
       | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | success |
 
@@ -35,7 +35,7 @@ Feature: Running Text-Runner inside a Text-Runner session
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS | ERROR MESSAGE        | ERROR TYPE | GUIDANCE                                                                                      |
       | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | failed | unknown action: zonk | UserError  | No custom actions defined.\n\nTo create a new "zonk" action,\nrun "text-runner scaffold zonk" |
 
@@ -60,6 +60,6 @@ Feature: Running Text-Runner inside a Text-Runner session
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  | LINE | ACTION                   | ACTIVITY                         | STATUS  |
       | source.md | 1    | extension/run-textrunner | Running Text-Runner in workspace | success |

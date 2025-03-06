@@ -11,7 +11,7 @@ Feature: show-skipped option
   @api
   Scenario: default API setting
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION     |
       | 1.md     | 3    | check-link |
 
@@ -49,7 +49,7 @@ Feature: show-skipped option
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTIVITY                        | STATUS  |
       | 1.md     | 1    | link to http://google.com       | skipped |
       | 1.md     | 2    | image http://google.com/foo.png | skipped |

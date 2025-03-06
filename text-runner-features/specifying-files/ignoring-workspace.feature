@@ -16,6 +16,6 @@ Feature: ignoring workspace files
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME  |
       | source.md |

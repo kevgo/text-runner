@@ -17,7 +17,7 @@ Feature: verifying scripts defined in package.json
       To run this app, call <code type="npm/script-name">alpha</code> on the command line
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION          | ACTIVITY                     |
       | 1.md     | 1    | npm/script-name | npm package has script alpha |
 
@@ -27,7 +27,7 @@ Feature: verifying scripts defined in package.json
       To run this app, run <code type="npm/script-name">zonk</code>.
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION          | STATUS | ERROR TYPE | ERROR MESSAGE                              |
       | 1.md     | 1    | npm/script-name | failed | UserError  | package.json does not have a "zonk" script |
 
@@ -40,6 +40,6 @@ Feature: verifying scripts defined in package.json
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION          | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 3    | npm/script-name | failed | UserError  | No script name specified |

@@ -29,7 +29,7 @@ Feature: finding files in certain directories only
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME |
       | foo/1.md |
       | foo/2.md |

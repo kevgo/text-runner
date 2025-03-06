@@ -8,7 +8,7 @@ Feature: verifying links to websites
       A [working external link](http://google.com)
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                                   |
       | 1.md     | 1    | check-link | link to external website http://google.com |
 
@@ -19,7 +19,7 @@ Feature: verifying links to websites
       A <a href="http://google.com">working external link</a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                                   |
       | 1.md     | 1    | check-link | link to external website http://google.com |
 
@@ -30,7 +30,7 @@ Feature: verifying links to websites
       A [broken external link](http://oeanuthaoenuthoaeuzonk.com)
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                                                   | STATUS | ERROR TYPE | ERROR MESSAGE                  |
       | 1.md     | 1    | check-link | link to external website http://oeanuthaoenuthoaeuzonk.com | failed | UserError  | external website doesn't exist |
 
@@ -41,6 +41,6 @@ Feature: verifying links to websites
       A <a href="http://oeanuthaoenuthoaeuzonk.com">broken external link</a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION     | ACTIVITY                                                   | STATUS | ERROR TYPE | ERROR MESSAGE                  |
       | 1.md     | 1    | check-link | link to external website http://oeanuthaoenuthoaeuzonk.com | failed | UserError  | external website doesn't exist |

@@ -35,7 +35,7 @@ Feature: long-running processes
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME         | LINE | ACTION              | ACTIVITY                                         |
       | create-server.md | 1    | workspace/new-file  | create file server.js                            |
       | run-server.md    | 1    | shell/server        | starting a server process: node server.js        |
@@ -53,6 +53,6 @@ Feature: long-running processes
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION            | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | shell/stop-server | failed | UserError  | No running process found |

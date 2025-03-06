@@ -35,6 +35,6 @@ Feature: running a single MarkDown file
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME |
       | 2.md     |

@@ -21,7 +21,7 @@ Feature: empty the workspace
   @api
   Scenario: default API behavior
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | STATUS  | ACTIVITY             |
       | success | 0 workspace files () |
 
@@ -77,7 +77,7 @@ Feature: empty the workspace
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTIVITY                     |
       | 1.md     | 1    | 1 workspace files (hello.md) |
 
@@ -89,6 +89,6 @@ Feature: empty the workspace
       observer = new MyObserverClass(command)
       await command.execute()
       """
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTIVITY             |
       | 1.md     | 1    | 0 workspace files () |

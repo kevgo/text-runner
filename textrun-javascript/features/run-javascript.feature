@@ -7,7 +7,7 @@ Feature: running inline regions of Javascript
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE            |
       | 1.md     | 1    | javascript/runnable | failed | UserError  | no JavaScript code found |
 
@@ -27,6 +27,6 @@ Feature: running inline regions of Javascript
       </a>
       """
     When calling Text-Runner
-    Then it emits these events:
+    Then it runs these actions:
       | FILENAME | LINE | ACTION              | ACTIVITY       |
       | 1.md     | 1    | javascript/runnable | run JavaScript |

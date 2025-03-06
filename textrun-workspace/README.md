@@ -66,8 +66,8 @@ following documentation snippet:
 </a>
 
 When executing the documentation, Text-Runner will create a file with name
-<a type="workspace/existing-file">_apples.txt_ and content `Fuji`</a>.
-Alternatively, the documentation could also read like this:
+<a type="workspace/existing-file-with-content">_apples.txt_ and content
+`Fuji`</a>. Alternatively, the documentation could also read like this:
 
 <a type="extension/runnable-region">
 
@@ -86,7 +86,8 @@ Gala
 </a>
 
 Similarly, Text-Runner will create a file
-<a type="workspace/existing-file">_more-apples.txt_ with content `Gala`</a>.
+<a type="workspace/existing-file-with-content">_more-apples.txt_ with content
+`Gala`</a>.
 
 ### empty-file
 
@@ -136,7 +137,7 @@ example, consider the following documentation snippet:
 Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 `hello world`</a>, we can verify it via this action:
 
-<a type="workspace/existing-file">The file _hello.txt_ now contains
+<a type="workspace/existing-file-with-content">The file _hello.txt_ now contains
 `hello world`.</a>
 ```
 
@@ -159,7 +160,7 @@ Please create a file _apples.txt_ with the content `Boskoop`.
 
 </a>
 
-<a type="workspace/existing-file">
+<a type="workspace/existing-file-with-content">
 
 When executing the documentation, Text-Runner will create a file
 _subdir/apples.txt_ and content `Boskoop`

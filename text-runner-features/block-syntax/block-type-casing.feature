@@ -1,4 +1,3 @@
-@api
 Feature: flexible region syntax
 
   Background:

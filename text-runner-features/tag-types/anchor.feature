@@ -1,4 +1,3 @@
-@api
 Feature: active anchor tags
 
   Background:

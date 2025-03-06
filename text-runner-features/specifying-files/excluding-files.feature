@@ -39,7 +39,6 @@ Feature: excluding files
       foo/1.md
       """
 
-  @api
   Scenario: excluding via API
     When calling:
       """

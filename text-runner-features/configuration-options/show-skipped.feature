@@ -8,7 +8,6 @@ Feature: show-skipped option
       [1.md](1.md)
       """
 
-  @api
   Scenario: default API setting
     When calling Text-Runner
     Then it runs these actions:
@@ -41,7 +40,6 @@ Feature: show-skipped option
       1.md:3 -- link to local file 1.md
       """
 
-  @api
   Scenario: enable via API
     When calling:
       """

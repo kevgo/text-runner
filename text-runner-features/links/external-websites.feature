@@ -1,4 +1,3 @@
-@api
 @online
 Feature: verifying links to websites
 

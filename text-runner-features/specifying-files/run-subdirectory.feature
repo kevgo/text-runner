@@ -12,7 +12,6 @@ Feature: testing all docs in a subfolder
       | commands/foo.md     |
       | commands/bar/baz.md |
 
-  @api
   Scenario: testing all files in a subfolder via API
     When calling:
       """

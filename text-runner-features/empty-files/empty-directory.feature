@@ -1,4 +1,3 @@
-@api
 Feature: failing on empty directory
 
   Scenario: running inside an empty directory

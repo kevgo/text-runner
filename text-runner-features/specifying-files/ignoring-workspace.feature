@@ -1,6 +1,5 @@
 Feature: ignoring workspace files
 
-  @api
   Scenario: a code base with existing workspace files
     Given the source code contains a file "source.md" with content:
       """

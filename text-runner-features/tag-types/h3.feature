@@ -1,4 +1,3 @@
-@api
 Feature: active h3 tags
 
   Background:

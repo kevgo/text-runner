@@ -1,4 +1,3 @@
-@api
 Feature: multiple callbacks
 
   Scenario: synchronous action

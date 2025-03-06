@@ -4,10 +4,9 @@ import * as path from "path"
 import * as textRunner from "text-runner-core"
 
 export async function emptyFile(action: textRunner.actions.Args): Promise<void> {
-  let fileName = action.region.text().trim()
+  const fileName = action.region.text().trim()
   if (fileName === "") {
     throw new textRunner.UserError("No filename given", "")
-
   }
   const filePath = path.join(action.region[0].attributes["dir"] ?? ".", fileName)
   action.name(`create file ${color.cyan(filePath)}`)

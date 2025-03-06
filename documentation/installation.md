@@ -5,15 +5,15 @@ including macOS, Windows, and Linux. To get started:
 
 - install [Node.JS](https://nodejs.org) version 22 or newer
 - in the terminal, cd into the folder in which you want to use TextRunner
-- make sure you have a file <a type="workspace/new-file"> **package.json** with
-  at least these entries:
+- Text-Runner is a Node.js application, so you need to have a
+  <a type="workspace/new-file"> **package.json** file. If you don't know
+  what that is, create one with this content:
 
   ```json
   {
+    "name": "documentation-tests",
     "type": "module",
-    "devDependencies": {
-      "text-runner": "7.0.0"
-    }
+    "private": true
   }
   ```
 

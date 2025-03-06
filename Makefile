@@ -1,52 +1,53 @@
 # dev tooling and versions
 RUN_THAT_APP_VERSION = 0.14.0
 
+YARN_ARGS = FORCE_COLOR=1
 TURBO_ARGS = --concurrency=100%
 
 build:  # builds all codebases
-	npm exec -- turbo run build $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run build $(TURBO_ARGS)
 
 clean:  # remove all build artifacts
-	npm exec -- turbo run clean $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run clean $(TURBO_ARGS)
 	find . -name .turbo -type d | xargs rm -rf
 	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
-	npm exec -- turbo run cuke $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke $(TURBO_ARGS)
 
 doc:  # runs the documentation tests
-	npm exec -- turbo run doc $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
 
 fix:  # runs all auto-fixes
-	npm exec -- dprint fmt
-	npm exec -- sort-package-json --quiet
-	npm exec -- turbo run fix $(TURBO_ARGS)
+	yarn exec --silent -- dprint fmt
+	yarn exec --silent -- sort-package-json --quiet
+	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
 
 lint:  # lints the root directory
-	npm exec -- turbo run lint $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
 
 publish: clean setup  # publishes all code bases
-	npm exec -- lerna publish from-package
+	yarn exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning
-	npm install
+	yarn
 	make --no-print-directory build
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
 test: lint unit cuke doc  # runs all tests
-# need to run the tests separately because of a concurrency bug in npm, which is called by npm
+# need to run the tests separately because of a concurrency bug in npm, which is called by yarn
 .PHONY: test
 
 update:  # updates the dependencies for the entire mono-repo
-	npm upgrade-interactive --latest
+	yarn upgrade-interactive --latest
 
 unit:  # runs all tests
-	npm exec -- turbo run unit $(TURBO_ARGS)
+	env $(YARN_ARGS) yarn exec --silent -- turbo run unit $(TURBO_ARGS)
 
 
 # --- HELPER TARGETS --------------------------------------------------------------------------------------------------------------------------------

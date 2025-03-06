@@ -6,7 +6,8 @@ actions for JavaScript code snippets inside documentation.
 ## Installation
 
 To use these actions, add this package as a development dependency by running
-<code type="npm/install">npm i -D textrun-javascript</code>.
+<code type="npm/install">npm i -D textrun-javascript</code> or
+<code type="npm/install">yarn i -D textrun-javascript</code>.
 
 ## Run JavaScript
 

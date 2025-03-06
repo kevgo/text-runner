@@ -28,3 +28,9 @@ To use these actions, add this package as a development dependency by running
 <pre type="npm/install">
 $ npm i -D textrun-extension
 </pre>
+
+or
+
+<pre type="npm/install">
+$ yarn i -D textrun-extension
+</pre>

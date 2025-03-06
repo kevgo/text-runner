@@ -40,8 +40,8 @@ setup:  # prepares the mono-repo for development after cloning
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
-test: lint unit cuke doc  # runs all tests
-# need to run the tests separately because of a concurrency bug in npm, which is called by yarn
+test:  # runs all tests
+	env $(YARN_ARGS) yarn exec --silent -- turbo run lint unit cuke doc $(TURBO_ARGS)
 .PHONY: test
 
 update:  # updates the dependencies for the entire mono-repo

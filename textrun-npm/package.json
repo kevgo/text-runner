@@ -1,6 +1,6 @@
 {
   "name": "textrun-npm",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -18,14 +18,14 @@
   },
   "dependencies": {
     "colorette": "2.0.20",
-    "text-runner-engine": "7.0.0"
+    "text-runner-engine": "^7.1.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "7.0.0",
-    "textrun-action": "0.2.1",
-    "textrun-extension": "0.2.1",
-    "textrun-workspace": "0.2.1",
+    "text-runner": "^7.1.0",
+    "textrun-action": "^0.3.0",
+    "textrun-extension": "^0.3.0",
+    "textrun-workspace": "^0.3.0",
     "tsx": "4.19.3"
   }
 }

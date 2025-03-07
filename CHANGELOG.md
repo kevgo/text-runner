@@ -1,5 +1,23 @@
 # Change Log
 
+## 7.1.0
+
+- provides a JSON-Schema definition for config files:
+  https://raw.githubusercontent.com/kevgo/text-runner/refs/heads/main/documentation/text-runner.schema.json
+- actions are now type stripped rather than transpiled
+
+This version bumps the standard library.
+
+- the new `npm/script-name` action verifies that file `package.json` defines a
+  script with the given name
+- the new `npm/script-call` action verifies full calls of npm script
+- renames `workspace/existing-file` to `workspace/existing-file-with-content`
+- new `workspace/existing-file` action verifies only file existence, not content
+- new `workspace/empty-file` action creates an empty file with the given name in
+  the workspace
+- the `workspace/new-file` action allows providing the filename via a HTML
+  attributed called `filename`
+
 ## 7.0.0
 
 - Streamlining the naming, everything named `text-run` is now named

@@ -12,7 +12,8 @@ Updates to the standard library:
 
 - the new `npm/script-name` action verifies that file `package.json` defines a
   script with the given name
-- the new `npm/script-call` action verifies full calls of an npm script
+- the new `npm/script-call` action verifies full calls of a script defined in
+  `package.json`
 - renames `workspace/existing-file` to `workspace/existing-file-with-content`
 - new `workspace/existing-file` action verifies only file existence, not content
 - new `workspace/empty-file` action creates an empty file with the given name in

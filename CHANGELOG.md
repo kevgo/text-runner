@@ -2,7 +2,7 @@
 
 ## 7.1.0
 
-- provides a JSON-Schema definition for config files:
+- provides JSON-Schema definition for Text-Runner config files:
   https://raw.githubusercontent.com/kevgo/text-runner/refs/heads/main/documentation/text-runner.schema.json
 - actions are now type stripped rather than transpiled - if you want to keep
   using full TypeScript, move your actions into their own npm modules or

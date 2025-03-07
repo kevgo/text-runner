@@ -19,13 +19,13 @@
   "dependencies": {
     "assert-no-diff": "3.0.6",
     "colorette": "2.0.20",
-    "text-runner-engine": "^7.1.0"
+    "text-runner-engine": "7.1.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "^7.1.0",
-    "textrun-action": "^0.3.0",
-    "textrun-extension": "^0.3.0",
+    "text-runner": "7.1.0",
+    "textrun-action": "0.3.0",
+    "textrun-extension": "0.3.0",
     "tsx": "4.19.3"
   }
 }

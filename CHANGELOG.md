@@ -4,7 +4,9 @@
 
 - provides a JSON-Schema definition for config files:
   https://raw.githubusercontent.com/kevgo/text-runner/refs/heads/main/documentation/text-runner.schema.json
-- actions are now type stripped rather than transpiled
+- actions are now type stripped rather than transpiled - if you want to keep
+  using full TypeScript, move your actions into their own npm modules or
+  transpile them yourself
 
 This version bumps the standard library.
 

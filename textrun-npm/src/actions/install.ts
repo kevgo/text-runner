@@ -17,9 +17,10 @@ export async function install(action: textRunner.actions.Args): Promise<void> {
   const pkg: PackageJson = JSON.parse(pkgText)
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(
-      `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${color.cyan(
-        pkg.name
-      )
+      `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${
+        color.cyan(
+          pkg.name
+        )
       }`
     )
   }

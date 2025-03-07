@@ -25,7 +25,8 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${action.region[0].tag
+      `the <${
+        action.region[0].tag
       } ${action.configuration.regionMarker}="exec-with-input"> region contains no commands to run`
     )
   }

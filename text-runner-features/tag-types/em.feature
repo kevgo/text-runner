@@ -1,4 +1,3 @@
-@api
 Feature: active em tags
 
   Background:

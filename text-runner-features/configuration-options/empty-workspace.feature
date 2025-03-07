@@ -18,7 +18,6 @@ Feature: empty the workspace
       Hello!
       """
 
-  @api
   Scenario: default API behavior
     When calling Text-Runner
     Then it runs these actions:
@@ -69,7 +68,6 @@ Feature: empty the workspace
       1.md:1 -- 0 workspace files
       """
 
-  @api
   Scenario: disable via API
     When calling:
       """
@@ -81,7 +79,6 @@ Feature: empty the workspace
       | FILENAME | LINE | ACTIVITY                     |
       | 1.md     | 1    | 1 workspace files (hello.md) |
 
-  @api
   Scenario: enable via API
     When calling:
       """

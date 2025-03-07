@@ -1,4 +1,3 @@
-@api
 Feature: active P tags
 
   Scenario: <p> htmlblocks

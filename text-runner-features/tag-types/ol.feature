@@ -1,4 +1,3 @@
-@api
 Feature: active OL tags
 
   Background:

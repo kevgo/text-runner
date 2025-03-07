@@ -1,4 +1,3 @@
-@api
 Feature: div tags
 
   Background:

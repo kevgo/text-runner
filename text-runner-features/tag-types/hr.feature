@@ -1,4 +1,3 @@
-@api
 Feature: HR tags
 
   Background:

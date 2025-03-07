@@ -1,4 +1,3 @@
-@api
 Feature: Configuration file is optional
 
   Scenario: running without a configuration file

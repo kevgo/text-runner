@@ -14,7 +14,6 @@ Feature: configuring the class prefix
       </a>
       """
 
-  @api
   Scenario: default behavior
     When calling Text-Runner
     Then it runs these actions:
@@ -39,7 +38,6 @@ Feature: configuring the class prefix
       standard-prefix.md:1 -- Test
       """
 
-  @api
   Scenario: regionMarker via API
     When calling:
       """

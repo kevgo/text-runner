@@ -21,7 +21,6 @@ Feature: finding files in certain directories only
       | foo/2.md |
 
 
-  @api
   Scenario: selecting files via API
     When calling:
       """

@@ -27,7 +27,6 @@ Feature: running a single MarkDown file
       | ERROR MESSAGE | file or directory does not exist: zonk.md |
       | EXIT CODE     | 1                                         |
 
-  @api
   Scenario: testing a single file via the API
     When calling:
       """

@@ -1,4 +1,3 @@
-@api
 Feature: active h5 tags
 
   Background:

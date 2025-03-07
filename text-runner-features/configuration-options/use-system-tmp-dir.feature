@@ -13,7 +13,6 @@ Feature: separate working directory
       """
 
 
-  @api
   Scenario: default configuration
     When calling Text-Runner
     Then it executes in the local "tmp" directory
@@ -69,7 +68,6 @@ Feature: separate working directory
     Then it runs in the local "bar" directory
 
 
-  @api
   Scenario: running in the default local temp directory via API
     When calling:
       """
@@ -80,7 +78,6 @@ Feature: separate working directory
     Then it executes in the local "tmp" directory
 
 
-  @api
   Scenario: running in a custom local temp directory via API
     When calling:
       """
@@ -128,7 +125,6 @@ Feature: separate working directory
     Then it runs in the global "foo" temp directory
 
 
-  @api
   Scenario: running in the default global temp directory via API
     When calling:
       """
@@ -139,7 +135,6 @@ Feature: separate working directory
     Then it executes in a global temp directory
 
 
-  @api
   Scenario: running in a custom global temp directory via API
     When calling:
       """

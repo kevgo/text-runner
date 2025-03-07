@@ -1,4 +1,3 @@
-@api
 Feature: active h4 tags
 
   Background:

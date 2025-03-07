@@ -1,4 +1,3 @@
-@api
 Feature: finding documentation files to run
 
   Scenario: the current directory contains Markdown files

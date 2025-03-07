@@ -1,4 +1,3 @@
-@api
 Feature: checking embedded HTML images
 
   Scenario: existing local HTML image with relative path

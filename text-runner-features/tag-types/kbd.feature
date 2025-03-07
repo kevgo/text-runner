@@ -1,4 +1,3 @@
-@api
 Feature: KBD tags
 
   Background:

@@ -3,29 +3,29 @@ import { suite, test } from "node:test"
 
 import { getMakeTargets, trimDollar } from "./command.js"
 
-suite("getMakeTargets", function() {
-  test("exact match", function() {
+suite("getMakeTargets", () => {
+  test("exact match", () => {
     const have = getMakeTargets("make foo")
     assert.deepEqual(have, ["foo"])
   })
-  test("match inside block", function() {
+  test("match inside block", () => {
     const give = "$ echo start\n$ make foo\n$echo done"
     const have = getMakeTargets(give)
     assert.deepEqual(have, ["foo"])
   })
-  test("empty block", function() {
+  test("empty block", () => {
     assert.deepEqual(getMakeTargets(""), [])
   })
 })
 
-suite("trimDollar", function() {
+suite("trimDollar", () => {
   const tests = {
     "$ foo": "foo",
     "$   foo": "foo",
     foo: "foo"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} --> ${want}`, function() {
+    test(`${give} --> ${want}`, () => {
       assert.equal(want, trimDollar(give))
     })
   }

@@ -8,13 +8,13 @@ import { NodeScaffoldData } from "../../ast/index.js"
 import * as files from "../../filesystem/index.js"
 import { parse } from "./parse.js"
 
-suite("MdParser.parseFile()", function() {
+suite("MdParser.parseFile()", () => {
   const sharedFixtureDir = path.join("src", "parsers", "fixtures")
   const specificFixtureDir = path.join("src", "parsers", "markdown", "fixtures")
   for (const fixtureDir of [sharedFixtureDir, specificFixtureDir]) {
     for (const testDirName of fs.readdirSync(fixtureDir)) {
       const testDirPath = path.join(fixtureDir, testDirName)
-      test(`parsing '${testDirName}'`, async function() {
+      test(`parsing '${testDirName}'`, async () => {
         const filePath = path.join(testDirPath, "result.json")
         const fileContent = fs.readFileSync(filePath, "utf-8")
         const expectedJSON: NodeScaffoldData[] = JSON.parse(fileContent)

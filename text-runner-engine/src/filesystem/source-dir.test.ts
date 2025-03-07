@@ -3,8 +3,8 @@ import { suite, test } from "node:test"
 
 import * as files from "./index.js"
 
-suite("sourceDir", function() {
-  test("joinFullDir", function() {
+suite("sourceDir", () => {
+  test("joinFullDir", () => {
     const sourceDir = new files.SourceDir("/home/acme/text-runner")
     const fullDir = new files.FullDir("src")
     const have = sourceDir.joinFullDir(fullDir)
@@ -12,7 +12,7 @@ suite("sourceDir", function() {
     assert.deepEqual(have, want)
   })
 
-  test("joinFullFile", function() {
+  test("joinFullFile", () => {
     const sourceDir = new files.SourceDir("/home/acme/text-runner")
     const fullFile = new files.FullFilePath("src/README.md")
     const have = sourceDir.joinFullFile(fullFile)
@@ -20,14 +20,14 @@ suite("sourceDir", function() {
     assert.deepEqual(have, want)
   })
 
-  test("joinFullStr", function() {
+  test("joinFullStr", () => {
     const sourceDir = new files.SourceDir("/home/acme/text-runner")
     const have = sourceDir.joinStr("src/README.md")
     assert.deepEqual(have, "/home/acme/text-runner/src/README.md")
   })
 
-  suite("platformified", function() {
-    test("on *nix", function() {
+  suite("platformified", () => {
+    test("on *nix", () => {
       if (process.platform === "win32") {
         return
       }
@@ -35,7 +35,7 @@ suite("sourceDir", function() {
       const have = sourceDir.platformified()
       assert.equal(have, "/home/acme/textrun")
     })
-    test("on Windows", function() {
+    test("on Windows", () => {
       if (process.platform !== "win32") {
         return
       }
@@ -45,8 +45,8 @@ suite("sourceDir", function() {
     })
   })
 
-  suite("unixified", function() {
-    test("on *nix", function() {
+  suite("unixified", () => {
+    test("on *nix", () => {
       if (process.platform === "win32") {
         return
       }
@@ -54,7 +54,7 @@ suite("sourceDir", function() {
       const have = sourceDir.platformified()
       assert.equal(have, "/home/acme/textrun")
     })
-    test("on Windows", function() {
+    test("on Windows", () => {
       if (process.platform !== "win32") {
         return
       }

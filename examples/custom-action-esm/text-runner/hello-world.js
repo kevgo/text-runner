@@ -12,15 +12,15 @@ export async function helloWorldAsync(action) {
 }
 
 export function helloWorldCallback(action, done) {
-  setTimeout(function() {
+  setTimeout(() => {
     action.log("Greetings from the callback action!")
     setTimeout(done, 1)
   }, 1)
 }
 
 export function helloWorldPromise(action) {
-  return new Promise(function(resolve) {
-    setTimeout(function() {
+  return new Promise(resolve => {
+    setTimeout(() => {
       action.log("Greetings from the promise-based action!")
       setTimeout(resolve, 1)
     }, 1)

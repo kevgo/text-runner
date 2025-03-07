@@ -4,8 +4,8 @@ import { suite, test } from "node:test"
 import * as ast from "../ast/index.js"
 import { extractImagesAndLinks } from "./extract-images-and-links.js"
 
-suite("extractImagesAndLinks", function() {
-  test("extracting images", function() {
+suite("extractImagesAndLinks", () => {
+  test("extracting images", () => {
     const nodes = ast.NodeList.scaffold({
       file: "filename",
       line: 3,
@@ -22,7 +22,7 @@ suite("extractImagesAndLinks", function() {
     assert.equal(result[0].document[0], nodes[0])
   })
 
-  test("extracting links", function() {
+  test("extracting links", () => {
     const nodes = new ast.NodeList()
     nodes.pushNode({ file: "filename", line: 3, type: "link_open" })
     nodes.pushNode({ content: "foo", file: "filename", line: 3, type: "text" })

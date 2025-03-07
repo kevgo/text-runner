@@ -29,7 +29,7 @@ export interface ExecuteResultLine {
 
 type ResultStatus = "failed" | "skipped" | "success" | "warning"
 
-Then("explode", function() {
+Then("explode", () => {
   throw new Error("BOOM")
 })
 

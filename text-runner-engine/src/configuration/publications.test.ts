@@ -4,8 +4,8 @@ import { suite, test } from "node:test"
 import * as files from "../filesystem/full-path.js"
 import { Publications } from "./publications.js"
 
-suite("Publications.forFilePath()", function() {
-  test("a publication matches the given filePath", function() {
+suite("Publications.forFilePath()", () => {
+  test("a publication matches the given filePath", () => {
     const publications = Publications.fromConfigs([
       {
         localPath: "foo",
@@ -26,7 +26,7 @@ suite("Publications.forFilePath()", function() {
     assert.equal(publication.localPath, "/bar/")
   })
 
-  test("no publication matches", function() {
+  test("no publication matches", () => {
     const publications = Publications.fromConfigs([
       {
         localPath: "foo",
@@ -42,8 +42,8 @@ suite("Publications.forFilePath()", function() {
   })
 })
 
-suite("Publications.sortPathMappings()", function() {
-  test("has publications", function() {
+suite("Publications.sortPathMappings()", () => {
+  test("has publications", () => {
     const original = Publications.fromConfigs([
       {
         localPath: "/content/",
@@ -72,7 +72,7 @@ suite("Publications.sortPathMappings()", function() {
     assert.deepEqual(publication, expected)
   })
 
-  test("no publications", function() {
+  test("no publications", () => {
     assert.lengthOf(new Publications().sort(), 0)
   })
 })

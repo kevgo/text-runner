@@ -7,11 +7,11 @@ Feature: verifying the output of the last console command
       Create a file <a type="workspace/new-file">**server.js** with content:
 
       ```
-      setTimeout(function() {
+      setTimeout(() => {
         console.log('one');
         console.log('two');
         console.log('three');
-        setTimeout(function() {}, 1000)
+        setTimeout(() => {}, 1000)
       }, 100)
       ```
       </a>

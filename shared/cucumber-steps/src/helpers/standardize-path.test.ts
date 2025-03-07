@@ -3,11 +3,11 @@ import { suite, test } from "node:test"
 
 import { standardizePath } from "./standardize-path.js"
 
-suite("standardizePath", function() {
-  test("unix path", function() {
+suite("standardizePath", () => {
+  test("unix path", () => {
     assert.equal(standardizePath("foo/bar"), "foo/bar")
   })
-  test("windows path", function() {
+  test("windows path", () => {
     assert.equal(standardizePath("foo\\bar"), "foo/bar")
   })
 })

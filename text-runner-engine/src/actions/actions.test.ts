@@ -5,16 +5,16 @@ import { suite, test } from "node:test"
 import { Actions } from "./actions.js"
 import { Action } from "./index.js"
 
-suite("Actions", function() {
-  suite("register", function() {
-    test("a directly exported action", function() {
+suite("Actions", () => {
+  suite("register", () => {
+    test("a directly exported action", () => {
       const actions = new Actions()
       const want: Action = () => 254
       actions.register("hello", want)
       const have = actions.get("hello")
       assert.equal(have, want)
     })
-    test("an action exported as the default", function() {
+    test("an action exported as the default", () => {
       const actions = new Actions()
       const func: Action = () => 254
       const want = { default: func }
@@ -22,7 +22,7 @@ suite("Actions", function() {
       const have = actions.get("hello")
       assert.equal(have, func)
     })
-    test("an action exported with a name", function() {
+    test("an action exported with a name", () => {
       const actions = new Actions()
       const func: Action = () => 254
       const want = { otherName: func }
@@ -32,7 +32,7 @@ suite("Actions", function() {
       have = actions.get("hello")
       assert.equal(have, undefined)
     })
-    test("multiple exported actions", function() {
+    test("multiple exported actions", () => {
       const actions = new Actions()
       const func1: Action = () => 254
       const func2: Action = () => 254
@@ -46,27 +46,27 @@ suite("Actions", function() {
       assert.equal(have, undefined)
     })
   })
-  suite("names", function() {
-    test("no actions registered", function() {
+  suite("names", () => {
+    test("no actions registered", () => {
       const actions = new Actions()
       assert.deepEqual(actions.names(), [])
     })
-    test("actions registered", function() {
+    test("actions registered", () => {
       const actions = new Actions()
-      actions.register("two", function() {})
-      actions.register("one", function() {})
+      actions.register("two", () => {})
+      actions.register("one", () => {})
       assert.deepEqual(actions.names(), ["one", "two"])
     })
   })
-  suite("size", function() {
-    test("no actions registered", function() {
+  suite("size", () => {
+    test("no actions registered", () => {
       const actions = new Actions()
       assert.equal(actions.size(), 0)
     })
-    test("actions registered", function() {
+    test("actions registered", () => {
       const actions = new Actions()
-      actions.register("two", function() {})
-      actions.register("one", function() {})
+      actions.register("two", () => {})
+      actions.register("one", () => {})
       assert.equal(actions.size(), 2)
     })
   })

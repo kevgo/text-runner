@@ -8,7 +8,7 @@
   using full TypeScript, move your actions into their own npm modules or
   transpile them yourself
 
-This version bumps the standard library.
+Updates to the standard library:
 
 - the new `npm/script-name` action verifies that file `package.json` defines a
   script with the given name

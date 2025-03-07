@@ -62,7 +62,7 @@ Feature: skipping an action
     Given the source code contains a file "text-runner/skip-action.js" with content:
       """
       export default (action) => {
-        return new Promise(function(resolve) {
+        return new Promise((resolve) => {
           resolve(action.SKIPPING)
         })
       }

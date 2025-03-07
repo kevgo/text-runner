@@ -30,7 +30,7 @@ suite("instantiateFormatter()", () => {
     assert.instanceOf(have, SummaryFormatter)
   })
 
-  test("request unknown formatter", function(context, done) {
+  test("request unknown formatter", (context, done) => {
     let err: textRunner.UserError
     try {
       // @ts-expect-error "zonk" is not allowed here

@@ -19,7 +19,7 @@ export function helloWorldCallback(action, done) {
 }
 
 export function helloWorldPromise(action) {
-  return new Promise(function(resolve) {
+  return new Promise(resolve => {
     setTimeout(() => {
       action.log("Greetings from the promise-based action!")
       setTimeout(resolve, 1)

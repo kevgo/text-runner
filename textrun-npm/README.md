@@ -101,7 +101,7 @@ To run the end-to-end tests, run
 
 <a type="extension/run-textrunner"></a>
 
-### Verify scripts defined in package.json
+### Verify script names defined in package.json
 
 The <b type="action/name-full">npm/script-name</b> action verifies that you
 document scripts that your `package.json` file defines correctly.
@@ -127,6 +127,38 @@ And your documentation says:
 ```html
 To run the linters, please run the
 <code type="npm/script-name">lint</code> script.
+```
+
+</a>
+
+<a type="extension/run-textrunner"></a>
+
+### Verify calls of scripts defined in package.json
+
+The <b type="action/name-full">npm/script-call</b> action verifies that you
+document calls of scripts defined in your `package.json` file correctly.
+
+Let's say your npm package has this
+<a type="workspace/new-file">**package.json** file:
+
+```json
+{
+  "name": "foobar",
+  "scripts": {
+    "lint": "echo linting"
+  }
+}
+```
+
+</a>
+
+<a type="workspace/new-file" filename="README.md">
+
+And your documentation says:
+
+```html
+To run the linters, please execute
+<code type="npm/script-call">npm run lint</code>.
 ```
 
 </a>

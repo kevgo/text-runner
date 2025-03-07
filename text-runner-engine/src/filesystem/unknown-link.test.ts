@@ -4,8 +4,8 @@ import { suite, test } from "node:test"
 import * as configuration from "../configuration/index.js"
 import * as files from "./index.js"
 
-suite("UnknownLink", function() {
-  suite(".absolutify()", function() {
+suite("UnknownLink", () => {
+  suite(".absolutify()", () => {
     const tests = [
       {
         desc: "relative link",
@@ -21,7 +21,7 @@ suite("UnknownLink", function() {
       }
     ]
     for (const tt of tests) {
-      test(tt.desc, function() {
+      test(tt.desc, () => {
         const unknownLink = new files.UnknownLink(tt.link)
         const containingFile = new files.FullFilePath(tt.give)
         const publications = new configuration.Publications()
@@ -32,7 +32,7 @@ suite("UnknownLink", function() {
     }
   })
 
-  test(".isAbsolute()", function() {
+  test(".isAbsolute()", () => {
     assert.isTrue(new files.UnknownLink("/foo/bar").isAbsolute())
     assert.isFalse(new files.UnknownLink("foo/bar").isAbsolute())
     assert.isFalse(new files.UnknownLink("../foo/bar").isAbsolute())

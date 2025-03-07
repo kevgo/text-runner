@@ -8,24 +8,24 @@ import * as formatter from "./index.js"
 import { ProgressFormatter } from "./progress-formatter.js"
 import { SummaryFormatter } from "./summary-formatter.js"
 
-suite("instantiateFormatter()", function() {
+suite("instantiateFormatter()", () => {
   const command = new textRunner.commands.Run({})
-  test("request detailed formatter", function() {
+  test("request detailed formatter", () => {
     const have = formatter.instantiate("detailed", command)
     assert.instanceOf(have, DetailedFormatter)
   })
 
-  test("request dot formatter", function() {
+  test("request dot formatter", () => {
     const have = formatter.instantiate("dot", command)
     assert.instanceOf(have, DotFormatter)
   })
 
-  test("request progress formatter", function() {
+  test("request progress formatter", () => {
     const have = formatter.instantiate("progress", command)
     assert.instanceOf(have, ProgressFormatter)
   })
 
-  test("request summary formatter", function() {
+  test("request summary formatter", () => {
     const have = formatter.instantiate("summary", command)
     assert.instanceOf(have, SummaryFormatter)
   })

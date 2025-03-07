@@ -12,7 +12,7 @@ async function helloWorldAsync(action) {
 }
 
 function helloWorldCallback(action, done) {
-  setTimeout(function() {
+  setTimeout(() => {
     action.log("Greetings from the callback action!")
     setTimeout(done, 1)
   }, 1)
@@ -20,11 +20,16 @@ function helloWorldCallback(action, done) {
 
 function helloWorldPromise(action) {
   return new Promise(function(resolve) {
-    setTimeout(function() {
+    setTimeout(() => {
       action.log("Greetings from the promise-based action!")
       setTimeout(resolve, 1)
     }, 1)
   })
 }
 
-module.exports = { helloWorldSync, helloWorldAsync, helloWorldCallback, helloWorldPromise }
+module.exports = {
+  helloWorldSync,
+  helloWorldAsync,
+  helloWorldCallback,
+  helloWorldPromise
+}

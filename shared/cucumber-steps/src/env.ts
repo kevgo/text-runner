@@ -4,7 +4,7 @@ import { endChildProcesses } from "end-child-processes"
 import * as workspace from "./helpers/workspace.js"
 import { TRWorld } from "./world.js"
 
-cucumber.BeforeAll(async function() {
+cucumber.BeforeAll(async () => {
   await workspace.backup()
 })
 

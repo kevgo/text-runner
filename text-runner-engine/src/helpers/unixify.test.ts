@@ -3,14 +3,14 @@ import { suite, test } from "node:test"
 
 import { unixify } from "./unixify.js"
 
-suite("unifixy", function() {
+suite("unifixy", () => {
   const tests = {
     "/foo/bar/": "/foo/bar/",
     "/foo\\bar/": "/foo/bar/",
     "\\foo\\bar\\": "/foo/bar/"
   }
   for (const [give, want] of Object.entries(tests)) {
-    test(`${give} ==> ${want}`, function() {
+    test(`${give} ==> ${want}`, () => {
       assert.equal(unixify(give), want)
     })
   }

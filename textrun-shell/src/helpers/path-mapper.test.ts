@@ -3,7 +3,7 @@ import { suite, test } from "node:test"
 
 import { PathMapper } from "./path-mapper.js"
 
-suite("PathMapper", function() {
+suite("PathMapper", () => {
   const mappings = {
     bar: "/three/four/bar",
     foo: "/one/two/foo"
@@ -17,7 +17,7 @@ suite("PathMapper", function() {
   // the method will be used as a higher-order function in the production code
   const globalizePath = pathMapper.globalizePathFunc()
   for (const [give, want] of Object.entries(tests)) {
-    test(`makePath "${give}" --> "${want}"`, function() {
+    test(`makePath "${give}" --> "${want}"`, () => {
       const have = globalizePath(give)
       assert.equal(have, want)
     })

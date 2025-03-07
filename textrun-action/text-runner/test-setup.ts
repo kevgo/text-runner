@@ -22,7 +22,7 @@ export default async function testSetup(action: textRunner.actions.Args): Promis
     action.configuration.workspace.joinStr("index.js"),
     `\
 export const textrunActions = {
-  "${action1}": function() { console.log(1) }
+  "${action1}": () => { console.log(1) }
 }`
   )
 }

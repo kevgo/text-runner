@@ -4,8 +4,8 @@ import * as parse5 from "parse5"
 
 import { standardizeHTMLAttributes } from "./html-parser.js"
 
-suite("standardizeHTMLAttributes", function() {
-  test("values", function() {
+suite("standardizeHTMLAttributes", () => {
+  test("values", () => {
     const input: parse5.Token.Attribute[] = [
       { name: "one", value: "1" },
       { name: "two", value: "2" }
@@ -14,7 +14,7 @@ suite("standardizeHTMLAttributes", function() {
     assert.deepEqual(standardizeHTMLAttributes(input), expected)
   })
 
-  test("empty", function() {
+  test("empty", () => {
     assert.deepEqual(standardizeHTMLAttributes([]), {})
   })
 })

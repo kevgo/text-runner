@@ -3,8 +3,8 @@ import { suite, test } from "node:test"
 
 import { Configuration } from "./configuration.js"
 
-suite("Configuration", function() {
-  test("pathMapper", function() {
+suite("Configuration", () => {
+  test("pathMapper", () => {
     const configFileContent = { globals: {} }
     const config = new Configuration(configFileContent)
     const pathMapper = config.pathMapper()

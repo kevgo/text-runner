@@ -6,9 +6,9 @@ Feature: long-running processes
       Create a file <a type="workspace/new-file">**server.js** with content:
 
       ```
-      setTimeout(function() {
+      setTimeout(() => {
         console.log('running');
-        setTimeout(function() {}, 1000)
+        setTimeout(() => {}, 1000)
       }, 100)
       ```
       """

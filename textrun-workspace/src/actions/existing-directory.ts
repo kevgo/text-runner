@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 /**
  * The "directory" action verifies that the test workspace

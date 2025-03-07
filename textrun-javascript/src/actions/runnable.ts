@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import { appendAsyncCallback } from "../helpers/append-async-callback.js"
 import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder.js"

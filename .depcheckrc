@@ -7,7 +7,7 @@ ignores:
   - custom-action-typescript
   - shared-cucumber-steps
   - text-runner
-  - text-runner-core
+  - text-runner-engine
   - text-runner-features
   - textrun-action
   - textrun-extension

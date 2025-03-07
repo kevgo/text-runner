@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import * as trExt from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"
@@ -21,8 +21,7 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${
-        action.region[0].tag
+      `the <${action.region[0].tag
       } ${action.configuration.regionMarker}="shell/command"> region contains no commands to run`
     )
   }

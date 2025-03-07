@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as commands from "./commands/index.js"
 import * as formatters from "./formatters/index.js"

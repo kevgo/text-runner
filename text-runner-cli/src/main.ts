@@ -1,5 +1,5 @@
 import { endChildProcesses } from "end-child-processes"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as cmdLine from "./cmdline.js"
 import * as commands from "./commands/index.js"

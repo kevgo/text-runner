@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
 
 import { CurrentCommand } from "../helpers/current-command.js"
@@ -25,8 +25,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
     .join(" && ")
   if (commandsToRun === "") {
     throw new Error(
-      `the <${
-        action.region[0].tag
+      `the <${action.region[0].tag
       } ${action.configuration.regionMarker}="exec-with-input"> region contains no commands to run`
     )
   }

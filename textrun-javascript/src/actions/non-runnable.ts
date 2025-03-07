@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 /** checks the given JavaScript code for syntax errors. */
 export function nonRunnable(action: textRunner.actions.Args): void {

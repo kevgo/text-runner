@@ -1,6 +1,6 @@
 import * as cucumber from "@cucumber/cucumber"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 export class TRWorld extends cucumber.World {
   /** exception thrown at the last API call returned */

@@ -19,7 +19,7 @@
   "dependencies": {
     "assert-no-diff": "3.0.6",
     "colorette": "2.0.20",
-    "text-runner-core": "7.0.0"
+    "text-runner-engine": "7.0.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",

@@ -1,4 +1,4 @@
-# text-runner-core Developers Guide
+# text-runner-engine Developers Guide
 
 ## Architecture
 

@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import { trimDollar } from "../helpers/trim-dollar.js"
 import { PackageJson } from "./package-json.js"
@@ -17,10 +17,9 @@ export async function install(action: textRunner.actions.Args): Promise<void> {
   const pkg: PackageJson = JSON.parse(pkgText)
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(
-      `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${
-        color.cyan(
-          pkg.name
-        )
+      `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${color.cyan(
+        pkg.name
+      )
       }`
     )
   }

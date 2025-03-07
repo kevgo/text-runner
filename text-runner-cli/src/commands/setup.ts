@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import { EventEmitter } from "events"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as configFile from "../config-file.js"
 import * as config from "../configuration.js"

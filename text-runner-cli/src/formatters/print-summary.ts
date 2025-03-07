@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 export function printSummary(results: textRunner.ActivityResults): void {
   let text = "\n"

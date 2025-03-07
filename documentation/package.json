@@ -14,12 +14,12 @@
     "custom-action-commonjs": "0.0.0",
     "custom-action-esm": "0.0.0",
     "custom-action-typescript": "0.0.0",
-    "text-runner": "7.0.0",
-    "text-runner-engine": "7.0.0",
-    "textrun-extension": "0.2.1",
-    "textrun-make": "0.2.1",
-    "textrun-npm": "0.2.1",
-    "textrun-shell": "0.2.1",
-    "textrun-workspace": "0.2.1"
+    "text-runner": "7.1.0",
+    "text-runner-engine": "7.1.0",
+    "textrun-extension": "0.3.0",
+    "textrun-make": "0.3.0",
+    "textrun-npm": "0.3.0",
+    "textrun-shell": "0.3.0",
+    "textrun-workspace": "0.3.0"
   }
 }

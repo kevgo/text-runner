@@ -2,9 +2,9 @@ import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as textRunner from "text-runner-engine"
 
-import { PackageJson } from "./package-json.js"
-import { trimNpmRun } from "../helpers/trim-npm-run.js"
 import { startsWithNpmRun } from "../helpers/starts-with-npm-run.js"
+import { trimNpmRun } from "../helpers/trim-npm-run.js"
+import { PackageJson } from "./package-json.js"
 
 export async function scriptCall(action: textRunner.actions.Args): Promise<void> {
   const call = action.region.text().trim()

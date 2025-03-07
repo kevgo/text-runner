@@ -1,6 +1,6 @@
 import * as color from "colorette"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
 
 import { CurrentCommand } from "../helpers/current-command.js"

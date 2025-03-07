@@ -7,7 +7,7 @@ suite("addDefaults", function() {
   test("no input", async function() {
     const have = await config.addDefaults({})
     assert.strictEqual(have.files, "**/*.md")
-    const want = "text-runner-core/tmp"
+    const want = "text-runner-engine/tmp"
     if (!have.workspace.unixified().endsWith(want)) {
       throw new Error(`expected ${have.workspace.unixified()} to end with ${want}`)
     }

@@ -3,7 +3,7 @@ import * as color from "colorette"
 import eol from "eol"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 export async function existingFileContent(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("em_open", "strong_open")

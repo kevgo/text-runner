@@ -1,5 +1,5 @@
 import { When } from "@cucumber/cucumber"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as helpers from "./helpers/index.js"
 import * as workspace from "./helpers/workspace.js"

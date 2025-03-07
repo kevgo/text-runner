@@ -1,6 +1,6 @@
 import { assert } from "chai"
 import { suite, test } from "node:test"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import { DetailedFormatter } from "./detailed-formatter.js"
 import { DotFormatter } from "./dot-formatter.js"

@@ -1,6 +1,6 @@
 import minimist from "minimist"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as commands from "./commands/index.js"
 import * as config from "./configuration.js"

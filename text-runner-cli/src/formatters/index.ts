@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 export { instantiate } from "./instantiate.js"
 export { printSummary } from "./print-summary.js"

@@ -1,5 +1,5 @@
 import * as color from "colorette"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 /** The "cd" action changes the current working directory to the one given in the hyperlink or code block. */
 export function workingDir(action: textRunner.actions.Args): void {

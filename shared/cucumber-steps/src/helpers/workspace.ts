@@ -1,6 +1,6 @@
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import * as url from "url"
 
 /** files that we should not delete when cleaning up a workspace */

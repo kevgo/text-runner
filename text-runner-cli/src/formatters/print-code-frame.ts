@@ -1,6 +1,6 @@
 import * as babel from "@babel/code-frame"
 import * as fs from "fs"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 type PrintFunc = (arg: string) => boolean | void
 

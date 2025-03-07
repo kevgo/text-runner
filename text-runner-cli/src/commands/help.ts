@@ -2,7 +2,7 @@ import * as color from "colorette"
 import { EventEmitter } from "events"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import * as url from "url"
 
 export class HelpCommand implements textRunner.commands.Command {

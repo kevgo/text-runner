@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as os from "os"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import { makefileTargets } from "../helpers/makefile-targets.js"
 

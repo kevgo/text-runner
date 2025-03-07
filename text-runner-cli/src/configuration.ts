@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as commands from "./commands/index.js"
 import * as formatters from "./formatters/index.js"
@@ -43,7 +43,7 @@ export class Data {
     return result
   }
 
-  toCoreConfig(): textRunner.configuration.APIData {
+  toEngineConfig(): textRunner.configuration.APIData {
     const result: textRunner.configuration.APIData = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile

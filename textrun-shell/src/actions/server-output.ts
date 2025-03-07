@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import { CurrentServer } from "../helpers/current-server.js"
 

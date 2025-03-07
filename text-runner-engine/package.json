@@ -1,5 +1,5 @@
 {
-  "name": "text-runner-core",
+  "name": "text-runner-engine",
   "version": "7.0.0",
   "description": "Tests documentation written in MarkDown",
   "homepage": "https://github.com/kevgo/text-runner",

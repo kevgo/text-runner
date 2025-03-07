@@ -50,8 +50,8 @@ This mono-repository contains the source code for the Text-Runner engine,
 tooling, and some plugins containing popular actions.
 
 - [developers guide](documentation/DEVELOPMENT.md)
-- [text-runner-core](text-runner-core): the Text-Runner engine
+- [text-runner-engine](text-runner-engine): the Text-Runner runtime
 - [text-runner-cli](text-runner-cli): runs Text-Runner on the command line
-- [text-runner-features](text-runner-features): end-to-end tests for core and
+- [text-runner-features](text-runner-features): end-to-end tests for engine and
   CLI
 - [shared test code](shared/)

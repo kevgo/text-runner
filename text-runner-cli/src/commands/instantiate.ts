@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 import * as config from "../configuration.js"
 import { HelpCommand } from "./help.js"
@@ -24,7 +24,7 @@ export function instantiate(
     case "version":
       return new VersionCommand()
   }
-  const trConfig = userConfig.toCoreConfig()
+  const trConfig = userConfig.toEngineConfig()
   switch (commandName) {
     case "debug":
       return new textRunner.commands.Debug(trConfig, debugSubcommand)

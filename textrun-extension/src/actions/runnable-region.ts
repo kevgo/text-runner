@@ -1,5 +1,5 @@
 import { promises as fs } from "fs"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import * as util from "util"
 
 /** runs the given content in Text-Runner */

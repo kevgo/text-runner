@@ -15,7 +15,7 @@ install:
   - set PATH=%APPDATA%\npm;c:\MinGW\bin;.\node_modules\.bin;%PATH%
 
 test_script:
-  - cd text-runner-core
+  - cd text-runner-engine
   - yarn run build
   - cd ..\text-runner-cli
   - yarn run build

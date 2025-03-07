@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 import * as util from "util"
 
 /** runs Text-Runner in the workspace */

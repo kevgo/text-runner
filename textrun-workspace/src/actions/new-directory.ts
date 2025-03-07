@@ -1,7 +1,7 @@
 import * as color from "colorette"
 import { promises as fs } from "fs"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 export async function newDirectory(action: textRunner.actions.Args): Promise<void> {
   const dirName = action.region.text().trim()

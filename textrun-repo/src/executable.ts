@@ -2,7 +2,7 @@ import * as color from "colorette"
 import * as fs from "fs"
 import { promises as fsp } from "fs"
 import * as path from "path"
-import * as textRunner from "text-runner-core"
+import * as textRunner from "text-runner-engine"
 
 export async function executable(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.text()

@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  windows:
     runs-on: windows-latest
     strategy:
       matrix:

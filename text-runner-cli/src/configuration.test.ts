@@ -39,7 +39,7 @@ suite("CLIConfiguration", function() {
       files: "1.md",
       regionMarker: "foo"
     })
-    const have = userConfig.toCoreConfig()
+    const have = userConfig.toEngineConfig()
     assert.equal(have.files, "1.md")
     assert.equal(have.regionMarker, "foo")
   })

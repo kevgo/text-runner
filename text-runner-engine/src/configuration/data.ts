@@ -7,7 +7,7 @@ export type APIData = Partial<CompleteAPIData>
 /** a full set of configuration values used by the Text-Runner API */
 export type CompleteAPIData = SharedValues & StringDirs
 
-/** Configuration values used inside Text-Runner Core */
+/** Configuration values used inside Text-Runner Engine */
 export type Data = AbsoluteDirs & SharedValues
 
 interface AbsoluteDirs {

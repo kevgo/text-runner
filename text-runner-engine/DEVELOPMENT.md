@@ -10,7 +10,7 @@ File [src/text-runner.ts](src/text-runner.ts) contains the
 number of [commands](src/commands/). To run Text-Runner, you instantiate one of
 these commands with [configuration data](src/configuration/data.ts) and call
 their `execute` method. Please note that the Text-Runner configuration file is
-considered a part of the [text-runner-cli](../text-runner-cli) wrapper. The core
+considered a part of the [text-runner-cli](../text-runner-cli) wrapper. The
 engine does not load it automatically.
 
 The Text-Runner engine is headless. When testing documentation, all it does is

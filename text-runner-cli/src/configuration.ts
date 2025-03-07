@@ -43,7 +43,7 @@ export class Data {
     return result
   }
 
-  toCoreConfig(): textRunner.configuration.APIData {
+  toEngineConfig(): textRunner.configuration.APIData {
     const result: textRunner.configuration.APIData = {}
     if (this.defaultFile != null) {
       result.defaultFile = this.defaultFile

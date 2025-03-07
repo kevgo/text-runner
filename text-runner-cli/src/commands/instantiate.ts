@@ -24,7 +24,7 @@ export function instantiate(
     case "version":
       return new VersionCommand()
   }
-  const trConfig = userConfig.toCoreConfig()
+  const trConfig = userConfig.toEngineConfig()
   switch (commandName) {
     case "debug":
       return new textRunner.commands.Debug(trConfig, debugSubcommand)

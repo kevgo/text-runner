@@ -15,11 +15,11 @@ Updates to the standard library:
 - the new `npm/script-call` action verifies full calls of a script defined in
   `package.json`
 - renames `workspace/existing-file` to `workspace/existing-file-with-content`
+- the `workspace/new-file` action now allows providing the filename via a HTML
+  attributed called `filename`
 - new `workspace/existing-file` action verifies only file existence, not content
 - new `workspace/empty-file` action creates an empty file with the given name in
   the workspace
-- the `workspace/new-file` action allows providing the filename via a HTML
-  attributed called `filename`
 
 ## 7.0.0
 

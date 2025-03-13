@@ -14,8 +14,6 @@ You need to have these tools installed:
 To get the codebase into a runnable state after cloning:
 
 - <code type="make/command" dir="..">make setup</code> to install dependencies
-- optionally add `./bin` and `./node_modules/.bin` to the `PATH` environment
-  variable
 
 ## Running tools
 

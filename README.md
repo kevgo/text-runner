@@ -6,7 +6,7 @@
 
 <div align="center">
 
-[![CI](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
+[![tests](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
 [![windows](https://github.com/kevgo/text-runner/actions/workflows/windows.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/windows.yml)
 <br>
 

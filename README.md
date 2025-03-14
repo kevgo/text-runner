@@ -7,7 +7,7 @@
 <div align="center">
 
 [![CI](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
-[![CI](https://ci.appveyor.com/api/projects/status/96q06796xyrste9x/branch/main?svg=true)](https://ci.appveyor.com/project/kevgo/text-runner/branch/main)
+[![windows](https://github.com/kevgo/text-runner/actions/workflows/windows.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/windows.yml)
 <br>
 
 </div>

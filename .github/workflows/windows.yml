@@ -14,6 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "22"
+      - run: yarn
       - run: cd text-runner-engine && yarn run build
       - run: cd ..\text-runner-cli && yarn run build
       - run: cd ..\shared\cucumber-steps && yarn run build

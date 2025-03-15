@@ -9,14 +9,11 @@ on:
 jobs:
   windows:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: [22.x, 23.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "stable"
       - cd text-runner-engine
       - yarn run build
       - cd ..\text-runner-cli

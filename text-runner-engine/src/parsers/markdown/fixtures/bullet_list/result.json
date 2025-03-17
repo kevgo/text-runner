@@ -10,240 +10,88 @@
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 1,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 1,
     "tag": "li",
     "type": "list_item_open"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 1,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 1,
     "tag": "p",
     "type": "paragraph_open"
   },
   {
     "attributes": {},
     "content": "one",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 1,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 1,
     "tag": "",
     "type": "text"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 1,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 1,
     "tag": "/p",
     "type": "paragraph_close"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 1,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 1,
     "tag": "/li",
     "type": "list_item_close"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 2,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 2,
     "tag": "li",
     "type": "list_item_open"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 2,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 2,
     "tag": "p",
     "type": "paragraph_open"
   },
   {
     "attributes": {},
     "content": "two",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 2,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 2,
     "tag": "",
     "type": "text"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 2,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 2,
     "tag": "/p",
     "type": "paragraph_close"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 2,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 2,
     "tag": "/li",
     "type": "list_item_close"
   },
   {
     "attributes": {},
     "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 3,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
-    "tag": "li",
-    "type": "list_item_open"
-  },
-  {
-    "attributes": {},
-    "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 3,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
-    "tag": "p",
-    "type": "paragraph_open"
-  },
-  {
-    "attributes": {},
-    "content": "three",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 3,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
-    "tag": "",
-    "type": "text"
-  },
-  {
-    "attributes": {},
-    "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 3,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
-    "tag": "/p",
-    "type": "paragraph_close"
-  },
-  {
-    "attributes": {},
-    "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 3,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
-    "tag": "/li",
-    "type": "list_item_close"
-  },
-  {
-    "attributes": {},
-    "content": "",
-    "location": {
-      "file": {
-        "value": "input.md"
-      },
-      "line": 3,
-      "sourceDir": {
-        "value": "src/parsers/markdown/fixtures/lists"
-      }
-    },
+    "file": "input.md",
+    "line": 2,
     "tag": "/ul",
     "type": "bullet_list_close"
   }

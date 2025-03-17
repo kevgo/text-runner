@@ -39,7 +39,6 @@
     "@types/got": "9.6.12",
     "@types/is-glob": "4.0.4",
     "@types/markdown-it": "14.1.2",
-    "assert-no-diff": "4.1.0",
     "tsx": "4.19.3"
   }
 }

@@ -1,6 +1,6 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
-import * as fs from "fs"
+import * as fs from "fs/promises"
 import { globby } from "globby"
 
 import { TRWorld } from "../world.js"
@@ -20,7 +20,7 @@ export async function verifyRanOnlyTestsCLI(filenames: string[] | string[][], wo
 
   // verify all other tests have not run
   const filesShouldntRun = (await globby(`${workspace.absPath}/**`))
-    .filter(file => fs.statSync(file).isFile())
+    .filter(async file => (await fs.stat(file)).isFile())
     .map(file => workspace.absPath.relativeStr(file))
     .filter(file => file)
     .map(file => file.replace(/\\/g, "/"))

@@ -1636,6 +1636,14 @@ assert-no-diff@3.0.6:
     chalk "4.1.0"
     diff "4.0.2"
 
+assert-no-diff@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/assert-no-diff/-/assert-no-diff-4.1.0.tgz#a7d528856b1b465bb02c7975aaff097dd64abe96"
+  integrity sha512-gLBvtdMN6e2bKz8niDBRpMldhmg4keOcMTJ72O1rqh6Ksxl+31pBTNaK61wro75CUOhKPf3Gz4H95N8OQL4F3Q==
+  dependencies:
+    colorette "2.0.20"
+    diff "7.0.0"
+
 assertion-error-formatter@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/assertion-error-formatter/-/assertion-error-formatter-3.0.0.tgz#be9c8825dee6a8a6c72183d915912d9b57d5d265"
@@ -2370,6 +2378,11 @@ diff@4.0.2, diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/diff/-/diff-4.0.2.tgz#60f3aecb89d5fae520c11aa19efc2bb982aade7d"
   integrity sha512-58lmxKSA4BNyLz+HHMUzlOEpg09FV+ev6ZMe3vJihgdxzgcwZ8VoEEPmALCZG9LmqfVoNMMKpttIYTVG6uDY7A==
+
+diff@7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/diff/-/diff-7.0.0.tgz#3fb34d387cd76d803f6eebea67b921dab0182a9a"
+  integrity sha512-PJWHUb1RFevKCwaFA9RlG5tCd+FO5iRh9A8HEtkmBH2Li03iJriB6m6JIN4rGz3K3JLawI7/veA1xzRKP6ISBw==
 
 dir-glob@^3.0.1:
   version "3.0.1"

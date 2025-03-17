@@ -1,7 +1,7 @@
-import { assert } from "chai"
 import * as fs from "fs/promises"
 import { suite, test } from "node:test"
 import * as path from "path"
+import * as assertNoDiff from "assert-no-diff"
 
 import * as ast from "../../ast/index.js"
 import { NodeScaffoldData } from "../../ast/index.js"
@@ -27,12 +27,7 @@ suite("MdParser.parseFile()", async () => {
           expected.push(ast.Node.scaffold(expectedNodeData))
         }
         const actual = await parse([new files.FullFilePath("input.md")], new files.SourceDir(testDirPath))
-        try {
-          assert.deepEqual(actual[0], expected)
-        } catch (e) {
-          console.log("ACTUAL:\n", JSON.stringify(actual[0], null, "  "))
-          throw e
-        }
+        assertNoDiff.json(actual[0], expected)
       })
     }
   }

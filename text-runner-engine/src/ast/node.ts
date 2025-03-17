@@ -66,6 +66,8 @@ export type NodeType =
   | "linebreak"
   | "link_close"
   | "link_open"
+  | "list_item_close"
+  | "list_item_open"
   | "paragraph_close"
   | "paragraph_open"
   | "text" // text node

@@ -9,7 +9,7 @@ suite("ast.Node", () => {
     assert.equal(node.type, "heading_open")
   })
 
-  test(".endTypeFor()", () => {
+  test(".endType()", () => {
     const tests: { [key in ast.NodeType]?: ast.NodeType } = {
       anchor_open: "anchor_close",
       heading_open: "heading_close"

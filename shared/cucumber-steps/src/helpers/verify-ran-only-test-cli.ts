@@ -1,12 +1,12 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
-import * as fs from "fs"
-import { globbySync } from "globby"
+import * as fs from "fs/promises"
+import { globby } from "globby"
 
 import { TRWorld } from "../world.js"
 import * as workspace from "./workspace.js"
 
-export function verifyRanOnlyTestsCLI(filenames: string[] | string[][], world: TRWorld): void {
+export async function verifyRanOnlyTestsCLI(filenames: string[] | string[][], world: TRWorld): Promise<void> {
   const flattened = flatten(filenames)
   if (!world.finishedProcess) {
     throw new Error("no process output found")
@@ -19,8 +19,8 @@ export function verifyRanOnlyTestsCLI(filenames: string[] | string[][], world: T
   }
 
   // verify all other tests have not run
-  const filesShouldntRun = globbySync(`${workspace.absPath}/**`)
-    .filter(file => fs.statSync(file).isFile())
+  const filesShouldntRun = (await globby(`${workspace.absPath}/**`))
+    .filter(async file => (await fs.stat(file)).isFile())
     .map(file => workspace.absPath.relativeStr(file))
     .filter(file => file)
     .map(file => file.replace(/\\/g, "/"))

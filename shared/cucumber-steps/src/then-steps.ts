@@ -278,12 +278,12 @@ Then("it runs in the current working directory", function(this: TRWorld) {
   assert.match(this.finishedProcess.combinedText.trim(), new RegExp(`${workspace.absPath}\\b`))
 })
 
-Then("it runs (only )the tests in {string}", function(this: TRWorld, filename: string) {
-  helpers.verifyRanOnlyTestsCLI([filename], this)
+Then("it runs (only )the tests in {string}", async function(this: TRWorld, filename: string) {
+  await helpers.verifyRanOnlyTestsCLI([filename], this)
 })
 
-Then("it runs only the tests in:", function(this: TRWorld, table: cucumber.DataTable) {
-  helpers.verifyRanOnlyTestsCLI(table.raw(), this)
+Then("it runs only the tests in:", async function(this: TRWorld, table: cucumber.DataTable) {
+  await helpers.verifyRanOnlyTestsCLI(table.raw(), this)
 })
 
 Then("it runs the console command {string}", function(this: TRWorld, command: string) {

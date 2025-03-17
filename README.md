@@ -8,6 +8,7 @@
 
 [![tests](https://github.com/kevgo/text-runner/actions/workflows/ci.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/ci.yml)
 [![windows](https://github.com/kevgo/text-runner/actions/workflows/windows.yml/badge.svg)](https://github.com/kevgo/text-runner/actions/workflows/windows.yml)
+[![install size](https://packagephobia.com/badge?p=text-runner)](https://packagephobia.com/result?p=text-runner)
 <br>
 
 </div>

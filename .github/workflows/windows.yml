@@ -9,19 +9,13 @@ on:
 jobs:
   windows:
     runs-on: windows-latest
-    strategy:
-      matrix:
-        node-version: [22.x, 23.x]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - cd text-runner-engine
-      - yarn run build
-      - cd ..\text-runner-cli
-      - yarn run build
-      - cd ..\shared\cucumber-steps
-      - yarn run build
-      - cd ..\..\text-runner-features
-      - yarn run cuke:smoke
+          node-version: "22"
+      - run: yarn
+      - run: cd text-runner-engine && yarn run build
+      - run: cd text-runner-cli && yarn run build
+      - run: cd shared\cucumber-steps && yarn run build
+      - run: cd text-runner-features && yarn run cuke:smoke

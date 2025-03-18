@@ -70,7 +70,7 @@ versions.
   - `yarn run json-schema && make fix` in the root folder and ship
   - bump the versions by running `lerna version <patch|minor> --no-private` or
     by updating the versions manually if bumping the major version
-  - make a global search-and-replace for "7.1.0" and "0.3.0" replace it with the
+  - make a global search-and-replace for "7.1.1" and "0.3.0" replace it with the
     new version
   - ship this branch
 - `git town sync --all && git tag 7.1.0 && git push --tags`

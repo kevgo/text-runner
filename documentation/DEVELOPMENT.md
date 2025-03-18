@@ -66,6 +66,7 @@ versions.
 ## Deployment
 
 - on a branch:
+  - update CHANGELOG.md
   - `yarn run json-schema && make fix` in the root folder and ship
   - bump the versions by running `lerna version <patch|minor> --no-private` or
     by updating the versions manually if bumping the major version

@@ -22,7 +22,6 @@
   "devDependencies": {
     "shared-cucumber-steps": "*",
     "text-runner": "7.1.0",
-    "text-runner-engine": "7.1.0",
     "textrun-extension": "0.3.0",
     "textrun-npm": "0.3.0",
     "tsx": "4.19.3"

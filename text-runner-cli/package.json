@@ -18,11 +18,11 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "clean": "rm -rf dist",
     "doc": "text-runner --format=dot",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
+    "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {

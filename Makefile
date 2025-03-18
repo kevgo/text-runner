@@ -7,11 +7,6 @@ TURBO_ARGS = --concurrency=100%
 build:  # builds all codebases
 	env $(YARN_ARGS) yarn exec --silent -- turbo run build $(TURBO_ARGS)
 
-clean:  # remove all build artifacts
-	env $(YARN_ARGS) yarn exec --silent -- turbo run clean $(TURBO_ARGS)
-	find . -name .turbo -type d | xargs rm -rf
-	find . -name node_modules -type d | xargs rm -rf
-
 cuke:  # runs all E2E tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke $(TURBO_ARGS)
 
@@ -30,12 +25,18 @@ help:  # prints all make targets
 lint:  # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
 
-publish: clean setup  # publishes all code bases
+publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package
 
 setup:  # prepares the mono-repo for development after cloning
 	yarn
 	make --no-print-directory build
+
+reset:  # fresh setup
+	env $(YARN_ARGS) yarn exec --silent -- turbo run reset $(TURBO_ARGS)
+	find . -name .turbo -type d | xargs rm -rf
+	find . -name node_modules -type d | xargs rm -rf
+	make --no-print-directory setup
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc

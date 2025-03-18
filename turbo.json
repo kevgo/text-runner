@@ -5,9 +5,6 @@
       "dependsOn": ["^build"],
       "cache": false
     },
-    "clean": {
-      "cache": false
-    },
     "cuke": {
       "dependsOn": ["build"],
       "cache": false
@@ -24,6 +21,9 @@
     },
     "test": {
       "dependsOn": ["build", "unit", "cuke", "doc"],
+      "cache": false
+    },
+    "reset": {
       "cache": false
     },
     "unit": {

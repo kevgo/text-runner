@@ -11,11 +11,11 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "clean": "rm -rf dist",
     "cuke": "cucumber-js --format=progress",
     "doc": "text-runner",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck",
+    "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {

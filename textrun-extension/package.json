@@ -19,11 +19,11 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "text-runner-engine": "7.1.0"
+    "text-runner-engine": "7.1.1"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "7.1.0",
+    "text-runner": "7.1.1",
     "textrun-action": "0.3.0",
     "tsx": "4.19.3"
   }

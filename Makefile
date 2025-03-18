@@ -33,9 +33,9 @@ setup:  # prepares the mono-repo for development after cloning
 	make --no-print-directory build
 
 reset:  # fresh setup
-	env $(YARN_ARGS) yarn exec --silent -- turbo run reset $(TURBO_ARGS)
 	find . -name .turbo -type d | xargs rm -rf
 	find . -name node_modules -type d | xargs rm -rf
+	find . -name dist -type d | xargs rm -rf
 	make --no-print-directory setup
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics

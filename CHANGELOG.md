@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.1.1
+
+- adds missing `ast.NodeType` for list items
+
 ## 7.1.0
 
 - provides JSON-Schema definition for Text-Runner config files:

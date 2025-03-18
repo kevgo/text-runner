@@ -73,5 +73,5 @@ versions.
   - make a global search-and-replace for "7.1.1" and "0.3.0" replace it with the
     new version
   - ship this branch
-- `git town sync --all && git tag 7.1.0 && git push --tags`
+- `git town sync --all && git tag 7.1.1 && git push --tags`
 - run <code type="make/command" dir="..">make publish</code>

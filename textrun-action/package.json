@@ -15,9 +15,9 @@
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc"
   },
   "dependencies": {
-    "text-runner-engine": "7.1.0"
+    "text-runner-engine": "7.1.1"
   },
   "devDependencies": {
-    "text-runner": "7.1.0"
+    "text-runner": "7.1.1"
   }
 }

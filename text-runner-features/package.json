@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "shared-cucumber-steps": "0.0.0",
-    "text-runner-engine": "7.1.0",
+    "text-runner-engine": "7.1.1",
     "textrun-javascript": "0.3.0"
   }
 }

@@ -33,9 +33,9 @@ setup:  # prepares the mono-repo for development after cloning
 	make --no-print-directory build
 
 reset:  # fresh setup
-	find . -name .turbo -type d | xargs rm -rf
-	find . -name node_modules -type d | xargs rm -rf
-	find . -name dist -type d | xargs rm -rf
+	echo "deleting turbo cache" && find . -name .turbo -type d | xargs rm -rf
+	echo "deleting node_modules" && find . -name node_modules -type d | xargs rm -rf
+	echo "deleting dist" && find . -name dist -type d | xargs rm -rf
 	make --no-print-directory setup
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics

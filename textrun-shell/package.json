@@ -22,12 +22,12 @@
     "end-child-processes": "1.0.3",
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "7.1.0",
-    "text-runner-engine": "7.1.0",
+    "text-runner-engine": "7.1.1",
     "textrun-extension": "0.3.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "7.1.0",
+    "text-runner": "7.1.1",
     "textrun-action": "0.3.0",
     "textrun-extension": "0.3.0",
     "textrun-workspace": "0.3.0",

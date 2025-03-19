@@ -13,7 +13,7 @@
     "doc": "text-runner",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
-    "reset": "rm -rf dist && yarn run build",
+    "reset": "rm -rf dist && npm run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {

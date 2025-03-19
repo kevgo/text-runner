@@ -35,12 +35,6 @@ Install the foobar package by running:
 <pre type="npm/install">
 npm install foobar
 </pre>
-
-or with Yarn:
-
-<pre type="npm/install">
-yarn add foobar
-</pre>
 ```
 
 </a>

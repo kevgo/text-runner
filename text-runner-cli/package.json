@@ -21,7 +21,7 @@
     "doc": "text-runner --format=dot",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
-    "reset": "rm -rf dist && yarn run build",
+    "reset": "rm -rf dist && npm run build",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },

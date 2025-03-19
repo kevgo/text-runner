@@ -14,7 +14,7 @@
     "doc": "text-runner",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck",
-    "reset": "rm -rf dist && yarn run build"
+    "reset": "rm -rf dist && npm run build"
   },
   "dependencies": {
     "assert-no-diff": "3.0.6",

@@ -41,8 +41,7 @@ stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
 test:  # runs all tests
-	npm exec -- turbo run build $(TURBO_ARGS)
-	npm exec -- turbo run lint unit cuke $(TURBO_ARGS)
+	npm exec -- turbo run build lint unit cuke $(TURBO_ARGS)
 	npm exec -- turbo run doc $(TURBO_ARGS)
 .PHONY: test
 

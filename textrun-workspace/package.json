@@ -17,7 +17,7 @@
     "reset": "rm -rf dist && yarn run build"
   },
   "dependencies": {
-    "assert-no-diff": "3.0.6",
+    "assert-no-diff": "4.1.0",
     "colorette": "2.0.20",
     "text-runner-engine": "7.1.1"
   },

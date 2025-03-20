@@ -20,14 +20,14 @@
     "assert-no-diff": "4.1.0",
     "colorette": "2.0.20",
     "eol": "0.10.0",
-    "text-runner-engine": "^7.1.2"
+    "text-runner-engine": "7.1.2"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "^7.1.2",
-    "textrun-action": "^0.3.1",
-    "textrun-extension": "^0.3.1",
-    "textrun-npm": "^0.3.1",
+    "text-runner": "7.1.2",
+    "textrun-action": "0.3.1",
+    "textrun-extension": "0.3.1",
+    "textrun-npm": "0.3.1",
     "tsx": "4.19.3"
   }
 }

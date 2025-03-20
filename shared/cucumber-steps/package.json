@@ -15,7 +15,7 @@
     "@types/ps-tree": "1.1.6",
     "array-flatten": "3.0.0",
     "assert-no-diff": "4.1.0",
-    "end-child-processes": "1.0.3",
+    "end-child-processes": "2.0.3",
     "globby": "14.1.0",
     "observable-process": "8.0.0-pre4",
     "ps-tree": "1.2.0",

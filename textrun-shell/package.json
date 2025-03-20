@@ -19,7 +19,7 @@
   "dependencies": {
     "assert-no-diff": "4.1.0",
     "colorette": "2.0.20",
-    "end-child-processes": "1.0.3",
+    "end-child-processes": "2.0.3",
     "observable-process": "8.0.0-pre4",
     "strip-ansi": "7.1.0",
     "text-runner-engine": "7.1.1",

@@ -39,20 +39,20 @@
   },
   "devDependencies": {
     "@cucumber/cucumber": "11.2.0",
-    "@eslint/js": "9.21.0",
-    "@types/chai": "5.0.1",
+    "@eslint/js": "9.22.0",
+    "@types/chai": "5.2.0",
     "@types/node": "22.13.5",
     "chai": "5.2.0",
     "depcheck": "1.4.7",
     "dprint": "0.49.0",
-    "eslint": "9.21.0",
-    "eslint-plugin-perfectionist": "4.9.0",
+    "eslint": "9.22.0",
+    "eslint-plugin-perfectionist": "4.10.1",
     "lerna": "8.2.0",
     "sort-package-json": "2.15.0",
     "ts-json-schema-generator": "2.3.0",
     "turbo": "2.4.4",
-    "typescript": "5.7.3",
-    "typescript-eslint": "8.25.0"
+    "typescript": "5.8.2",
+    "typescript-eslint": "8.27.0"
   },
   "packageManager": "yarn@1.22.22"
 }

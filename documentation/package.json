@@ -10,7 +10,7 @@
     "lint": "dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc"
   },
   "devDependencies": {
-    "assert-no-diff": "3.0.6",
+    "assert-no-diff": "4.1.0",
     "custom-action-commonjs": "0.0.0",
     "custom-action-esm": "0.0.0",
     "custom-action-typescript": "0.0.0",

@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.1.2
+
+- updates dependencies to fix all current security alerts
+
 ## 7.1.1
 
 - adds missing `ast.NodeType` for list items

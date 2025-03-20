@@ -17,7 +17,7 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "assert-no-diff": "3.0.6",
+    "assert-no-diff": "4.1.0",
     "colorette": "2.0.20",
     "end-child-processes": "1.0.3",
     "observable-process": "8.0.0-pre4",

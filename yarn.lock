@@ -3813,10 +3813,10 @@ jsonc-parser@3.2.0:
   resolved "https://registry.yarnpkg.com/jsonc-parser/-/jsonc-parser-3.2.0.tgz#31ff3f4c2b9793f89c67212627c51c6394f88e76"
   integrity sha512-gfFQZrcTc8CnKXp6Y4/CBT3fTc0OVuDofpre4aEeEpSBPV5X5v4+Vmx+8snU7RLPrNHPKSgLxGo9YuQzz20o+w==
 
-jsonc-reader@0.1.2:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/jsonc-reader/-/jsonc-reader-0.1.2.tgz#0d195ce3319d8a4644cb4ce055f07aabc71eae74"
-  integrity sha512-1wR27gXYDkBUsCT7pN03vdcE332YqPDdKgm6gGKS61CvrGe3eari/9A/WzPWM5GiKmkGK7CBWVgBKbF+iP28RA==
+jsonc-reader@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/jsonc-reader/-/jsonc-reader-0.3.0.tgz#f152c7856f38b442b60ae18bfebfe188225a06c1"
+  integrity sha512-VhccWXRd96QqRRo0OLqwpRdX7fVBktUQhVnVvlDYuy6gpie/+TR9kQHkcdUHkK1MnxrFHTWFZmr6Dna5WoTtxw==
 
 jsonfile@^6.0.1:
   version "6.1.0"

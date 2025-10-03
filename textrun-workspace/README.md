@@ -103,9 +103,7 @@ When executing the documentation, Text-Runner will create a file with name
 ## empty-file
 
 The <b type="action/name-full">workspace/empty-file</b> action creates an empty
-file.
-
-An example is this documentation:
+file. An example is this documentation:
 
 <a type="extension/runnable-region">
 

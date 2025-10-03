@@ -56,8 +56,7 @@ The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
 _emphasized_ or **bold** text, or inside a `filename` attribute, and the file
 content is a code block with one or three backticks. Here are a few examples
-that all do the same thing, write a file `apples.txt` with content
-`Fuji apples are the best`:
+that all do the same thing. See if you can figure out what that is.
 
 <a type="extension/runnable-region">
 

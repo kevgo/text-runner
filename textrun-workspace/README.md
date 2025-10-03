@@ -41,7 +41,7 @@ gets created.
 <a type="extension/runnable-region">
 
 ```html
-Create a directory named <b type="workspace/new-directory" dir="subdir">utils</b>.
+Create a directory named <code type="workspace/new-directory" dir="subdir">utils</code>.
 ```
 
 </a>

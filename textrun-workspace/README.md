@@ -50,23 +50,6 @@ When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">subdir/utils</i> directory in the
 workspace.
 
-## working-dir
-
-Each Text-Runner test starts in the workspace directory. The
-<b type="action/name-full">workspace/working-dir</b> action changes the current
-working directory of the test runner to the given directory inside the
-workspace. To change into the directory the reader created above:
-
-<a type="extension/runnable-region">
-
-```html
-Please change into the
-<code type="workspace/working-dir">utils</code>
-folder.
-```
-
-</a>
-
 ### new-file
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
@@ -196,3 +179,20 @@ When executing the documentation, Text-Runner will create a file
 _subdir/apples.txt_ and content `Boskoop`
 
 </a>.
+
+## working-dir
+
+Each Text-Runner test starts in the workspace directory. The
+<b type="action/name-full">workspace/working-dir</b> action changes the working
+directory of the test runner to another directory inside the workspace. To
+change into the directory the reader created above:
+
+<a type="extension/runnable-region">
+
+```html
+Please change into the
+<code type="workspace/working-dir">utils</code>
+folder.
+```
+
+</a>

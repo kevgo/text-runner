@@ -132,7 +132,7 @@ Please create an empty file <b type="workspace/empty-file" dir="subdir">.gitkeep
 When executing the documentation, Text-Runner will create a file with name
 <i type="workspace/existing-file">subdir/.gitkeep</i> in the workspace.
 
-## directory
+## existing-directory
 
 The <b type="action/name-full">workspace/existing-directory</b> action verifies
 that the workspace contains a directory with the given name. As an example,

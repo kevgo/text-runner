@@ -199,18 +199,18 @@ existence via this action:
 
 ## existing-file-with-content
 
-The <b type="action/name-full">workspace/existing-file</b> action verifies that
-a file with the given name exists and has the given content. This action assumes
-that the documentation contains the filename as _emphasized_ or **strong** text
-and the file content as a code block with single or triple backticks. As an
-example, consider the following documentation snippet:
+The <b type="action/name-full">workspace/existing-file-with-content</b> action
+verifies that a file with the given name exists in the workspace and has the
+given content. This action assumes that the documentation contains the filename
+as _emphasized_ or **strong** text and the file content as a code block with
+single or triple backticks.
+
+Assuming a file <a type="workspace/new-file">_hello.txt_ with content
+`hello world`</a>, we can verify it via this action:
 
 <a type="extension/runnable-region">
 
 ```markdown
-Assuming a file <a type="workspace/new-file">_hello.txt_ with content
-`hello world`</a>, we can verify it via this action:
-
 <a type="workspace/existing-file-with-content">The file _hello.txt_ now contains
 `hello world`.</a>
 ```

@@ -143,7 +143,7 @@ consider this documentation snippet:
 ```html
 Please run the command <code type="shell/command">mkdir images</code>. If
 everything goes well, your computer will now have a new directory
-<i type="workspace/existing-directory">images</i>. You can store images in it.
+<i type="workspace/existing-directory">images</i>.
 ```
 
 </a>
@@ -158,7 +158,7 @@ directory by providing a `dir` attribute:
 ```html
 Please run the command <code type="shell/command">mkdir subdir/images</code>. If
 everything goes well, your computer will now have a new directory
-<i type="workspace/existing-directory" dir="subdir">images</i>. You can store images in it.
+<i type="workspace/existing-directory" dir="subdir">images</i>.
 ```
 
 </a>

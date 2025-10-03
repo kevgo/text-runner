@@ -10,7 +10,6 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
   action.name(`verify content of file ${color.cyan(fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const expectedContent = action.region.textInNodeOfType("fence", "code")
-  action.log(expectedContent)
   try {
     var actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
@@ -30,6 +29,7 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
   try {
     assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
   } catch (err) {
+    action.log(expectedContent)
     throw new textRunner.UserError(
       `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
       textRunner.errorMessage(err)

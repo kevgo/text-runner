@@ -23,9 +23,8 @@ fix: tools/rta@${RUN_THAT_APP_VERSION}  # runs all auto-fixes
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
 
-lint: tools/rta@${RUN_THAT_APP_VERSION}  # lints the root directory
+lint:  # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
-	tools/rta ghokin check text-runner-features
 
 publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package

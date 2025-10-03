@@ -165,7 +165,46 @@ everything goes well, your computer will now have a new directory
 
 ## existing-file
 
-### file-content
+The <b type="action/name-full">workspace/existing-file</b> action verifies that
+a file with the given name exists. As an example, consider the following
+documentation snippet:
+
+<a type="extension/runnable-region">
+
+```markdown
+Assuming a file <em type="workspace/empty-file">hello.txt</em>, we can verify
+it's existence via this action:
+
+<code type="workspace/existing-file">hello.txt</code>
+```
+
+### specifying the directory
+
+By default, actions in this plugin create the files in the workspace. To create
+them in a different directory, provide a `dir` attribute at the region marker
+containing the relative path to the directory to use. As an example, consider
+the following documentation snippet:
+
+<a type="extension/runnable-region">
+
+```markdown
+<a type="workspace/new-file" dir="subdir">
+
+Please create a file _apples.txt_ with the content `Boskoop`.
+
+</a>
+```
+
+</a>
+
+<a type="workspace/existing-file-with-content">
+
+When executing the documentation, Text-Runner will create a file
+_subdir/apples.txt_ and content `Boskoop`
+
+</a>.
+
+## existing-file-with-content
 
 The <b type="action/name-full">workspace/existing-file</b> action verifies that
 a file with the given name exists and has the given content. This action assumes

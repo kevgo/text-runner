@@ -44,7 +44,6 @@
     "@types/debug": "4.1.12",
     "@types/node": "24.6.2",
     "chai": "6.2.0",
-    "debug": "4.4.3",
     "depcheck": "1.4.7",
     "dprint": "0.50.2",
     "eslint": "9.36.0",

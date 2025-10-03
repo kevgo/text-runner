@@ -1,4 +1,8 @@
+import Debug from "debug"
+
 import { PathMapper } from "./path-mapper.js"
+
+const debug = Debug("shell")
 
 /** PathMappings contains mappings of local to global executable paths. */
 export interface PathMappings {
@@ -29,7 +33,7 @@ export class Configuration {
   static async load(filePath: string): Promise<Configuration> {
     try {
       const content = await import(filePath)
-      // TODO: use the "debug" module to log this message under the "shell" namespace: `found path mapping at ${filePath}`
+      debug(`found path mapping at ${filePath}`)
       const config: ConfigFile = content.default
       return new Configuration(config)
     } catch (e) {

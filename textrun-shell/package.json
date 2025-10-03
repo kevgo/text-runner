@@ -19,6 +19,7 @@
   "dependencies": {
     "assert-no-diff": "4.1.0",
     "colorette": "2.0.20",
+    "debug": "4.4.3",
     "end-child-processes": "2.0.3",
     "observable-process": "8.0.0",
     "strip-ansi": "7.1.2",

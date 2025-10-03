@@ -181,29 +181,11 @@ this action:
 
 ### "dir" attribute
 
-By default, this action looks for files in the workspace. To look for them in a
-different directory inside the workspace, provide a `dir` attribute at the
-region marker containing the relative path to the directory to use. As an
-example, consider the following documentation snippet:
-
-<a type="extension/runnable-region">
-
-```markdown
-<a type="workspace/new-file" dir="subdir">
-
-Please create a file _apples.txt_ with the content `Boskoop`.
-
-</a>
-```
-
-</a>
-
-<a type="workspace/existing-file-with-content">
-
-When executing the documentation, Text-Runner will create a file
-_subdir/apples.txt_ and content `Boskoop`
-
-</a>.
+By default, this action looks for files in the workspace. You can tell it to
+look in a different directory inside the workspace by providing a `dir`
+attribute. Assuming the workspace contains a file
+<em type="workspace/empty-file">subdir/hello.txt</em>, we can verify it's
+existence via this action:
 
 ## existing-file-with-content
 

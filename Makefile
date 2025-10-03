@@ -30,9 +30,10 @@ lint: tools/rta@${RUN_THAT_APP_VERSION}  # lints the root directory
 publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package
 
-setup:  # prepares the mono-repo for development after cloning
+setup: tools/rta@${RUN_THAT_APP_VERSION}  # prepares the mono-repo for development after cloning
 	yarn
 	make --no-print-directory build
+	tools/rta ghokin version
 
 reset:  # fresh setup
 	echo "deleting turbo cache" && find . -name .turbo -type d | xargs rm -rf

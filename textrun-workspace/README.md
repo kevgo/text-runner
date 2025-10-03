@@ -6,7 +6,7 @@ don't interfere with the codebase that you document. This package provides
 [Text-Runner](https://github.com/kevgo/text-runner) actions for interacting with
 this Text-Runner workspace.
 
-### installation
+## installation
 
 <a type="npm/install">
 
@@ -16,7 +16,7 @@ npm i -D textrun-workspace
 
 </a>
 
-### new-directory
+## new-directory
 
 The <b type="action/name-full">workspace/new-directory</b> action creates a
 directory with the given name in the workspace. Here is a usage example:
@@ -33,7 +33,7 @@ When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">utils</i> directory in the workspace,
 just as the user would.
 
-#### "dir" attribute
+### "dir" attribute
 
 The `dir` attributes allows you to specify in which directory the new directory
 gets created.
@@ -50,7 +50,7 @@ When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">subdir/utils</i> directory in the
 workspace.
 
-### working-dir
+## working-dir
 
 Each Text-Runner test starts in the workspace directory. The
 <b type="action/name-full">workspace/working-dir</b> action changes the current

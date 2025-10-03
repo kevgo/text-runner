@@ -32,7 +32,7 @@ export default {
 }
 ```
 
-## shell/command and shell/command-output
+## shell/command
 
 The <b type="action/name-full">shell/command</b> action runs a shell command and
 waits until it finishes. The <b type="action/name-full">shell/command-output</b>
@@ -48,7 +48,23 @@ The "echo" command prints text on the command line. For example, let's run:
 <pre type="shell/command">
 echo Hello world!
 </pre>
+```
 
+</a>
+
+Some tutorials print a dollar sign at the beginning of the command to execute,
+indicating an interactive command prompt. These dollar signs are ignored.
+
+## shell/command-output
+
+The <b type="action/name-full">shell/command-output</b> action verifies the
+output of the most recently executed shell command.
+
+Here is the next paragraph of our hypothetical tutorial for the Linux shell:
+
+<a type="extension/runnable-region">
+
+```md
 It welcomes us with a nice greeting:
 
 <pre type="shell/command-output">

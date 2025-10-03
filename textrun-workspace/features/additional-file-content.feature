@@ -16,7 +16,7 @@ Feature: Appending content to existing workspace files
       hello appended content
       """
 
-  # TODO: Scenario: the file does not exist
+# TODO: Scenario: the file does not exist
 
   Scenario: setting the base directory
     Given the workspace contains a file "foo/bar" with content:

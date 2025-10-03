@@ -18,13 +18,13 @@ fix:  # runs all auto-fixes
 	yarn exec --silent -- dprint fmt
 	yarn exec --silent -- sort-package-json --quiet
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
+	tools/rta ghokin fmt replace text-runner-features
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
 
 lint: tools/rta@${RUN_THAT_APP_VERSION} # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
-	tools/rta ghokin fmt replace text-runner-features
 
 publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package

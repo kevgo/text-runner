@@ -47,7 +47,7 @@
     "dprint": "0.50.2",
     "eslint": "9.36.0",
     "eslint-plugin-perfectionist": "4.15.0",
-    "lerna": "8.2.1",
+    "lerna": "9.0.0",
     "sort-package-json": "3.4.0",
     "ts-json-schema-generator": "2.4.0",
     "turbo": "2.5.8",

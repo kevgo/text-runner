@@ -151,7 +151,8 @@ Text-Runner continues executing other actions.
 
 <a type="workspace/new-file">
 
-As an example, let's say we have a server called **server.js**:
+As an example, let's say we write a tutorial about developing a web server, have
+just created a server called **server.js**:
 
 ```js
 console.log("server is running")
@@ -160,7 +161,8 @@ setTimeout(() => {}, 100_000)
 
 </a>
 
-Start this long-running server to run in parallel with Text-Runner with the
+Our tutorial starts this long-running server to run in parallel with Text-Runner
+with the
 <b type="action/name-full">shell/server</b> action:
 
 <a type="extension/runnable-region">

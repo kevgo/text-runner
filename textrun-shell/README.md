@@ -127,7 +127,7 @@ and provide user input with an HTML table:
   </tr>
   <tr>
     <td>which day is today</td>
-    <td>Friday</td>
+    <td>Monday</td>
   </tr>
 </table>
 
@@ -136,7 +136,7 @@ and provide user input with an HTML table:
 It prints:
 
 <pre type="shell/command-output">
-Hello Text-Runner, happy Friday!
+Hello Text-Runner, happy Monday!
 </pre>
 
 If the table contains multiple columns, the first column contains output to wait

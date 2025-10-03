@@ -58,7 +58,8 @@ Hello world!
 
 </a>
 
-Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
+Some tutorials print a dollar sign at the beginning of the command to execute,
+indicating an interactive command prompt. These dollar signs are ignored.
 
 ## User input
 

@@ -206,7 +206,7 @@ Here is the final part of our hypothetical server tutorial:
 <a type="extension/runnable-region">
 
 ```html
- When you are done, stop the server:
+When you are done, stop the server:
 <a type="shell/stop-server">shell/stop-server</a>
 ```
 

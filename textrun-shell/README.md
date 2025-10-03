@@ -161,8 +161,8 @@ setTimeout(() => {}, 100_000)
 
 </a>
 
-Our tutorial starts this long-running server to run in parallel with Text-Runner
-with the
+Our tutorial instructs the user to start this long-running server to run in
+parallel with Text-Runner with the
 <b type="action/name-full">shell/server</b> action:
 
 <a type="extension/runnable-region">

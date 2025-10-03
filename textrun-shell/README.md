@@ -15,9 +15,15 @@ You can define the absolute path of documented binaries in a
 an example:
 
 ```js
+import * as path from "path"
+import * as url from "url"
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
+const foo_path = path.join(__dirname, "bin", "foo")
+
 export default {
   binaries: {
-    "text-runner": path.join(__dirname, "node_modules", ".bin", "text-runner")
+    "foo": foo_path
   }
 }
 ```

@@ -33,10 +33,11 @@ export class Configuration {
   static async load(filePath: string): Promise<Configuration> {
     try {
       const content = await import(filePath)
-      debug(`found path mapping at ${filePath}`)
+      debug(`found path mapping in ${filePath}`)
       const config: ConfigFile = content.default
       return new Configuration(config)
     } catch (e) {
+      debug(`found no path mapping in ${filePath}`)
       return Configuration.default()
     }
   }

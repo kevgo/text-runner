@@ -35,8 +35,8 @@ just as the user would.
 
 ### "dir" attribute
 
-The `dir` attributes allows you to specify in which directory the new directory
-gets created.
+You can override in which directory the new directory gets created by providing
+a `dir` attribute:
 
 <a type="extension/runnable-region">
 

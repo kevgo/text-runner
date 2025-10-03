@@ -40,7 +40,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "11.2.0",
     "@eslint/js": "9.36.0",
-    "@types/chai": "5.2.0",
+    "@types/chai": "5.2.2",
     "@types/node": "22.13.10",
     "chai": "5.2.0",
     "depcheck": "1.4.7",
@@ -48,8 +48,8 @@
     "eslint": "9.36.0",
     "eslint-plugin-perfectionist": "4.15.0",
     "lerna": "8.2.1",
-    "sort-package-json": "3.0.0",
-    "ts-json-schema-generator": "2.3.0",
+    "sort-package-json": "3.4.0",
+    "ts-json-schema-generator": "2.4.0",
     "turbo": "2.5.8",
     "typescript": "5.9.3",
     "typescript-eslint": "8.45.0"

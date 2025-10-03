@@ -50,7 +50,7 @@ When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">subdir/utils</i> directory in the
 workspace.
 
-### new-file
+## new-file
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
@@ -100,7 +100,7 @@ When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file-with-content">_apples.txt_ and content
 `Fuji apples are the best`</a> in the workspace.
 
-### empty-file
+## empty-file
 
 The <b type="action/name-full">workspace/empty-file</b> action creates an empty
 file.
@@ -118,7 +118,7 @@ Please create an empty file <b type="workspace/empty-file">.gitkeep</b>.
 When executing the documentation, Text-Runner will create a file with name
 <i type="workspace/existing-file">.gitkeep</i> in the workspace.
 
-### directory
+## directory
 
 The <b type="action/name-full">workspace/existing-directory</b> action verifies
 that the workspace contains a directory with the given name. As an example,
@@ -134,9 +134,9 @@ everything goes well, your computer will now have a new directory
 
 </a>
 
-### existing-file
+## existing-file
 
-### file-content
+## file-content
 
 The <b type="action/name-full">workspace/existing-file</b> action verifies that
 a file with the given name exists and has the given content. This action assumes
@@ -154,7 +154,7 @@ Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 `hello world`.</a>
 ```
 
-### specifying the directory
+## specifying the directory
 
 By default, actions in this plugin create the files in the workspace. To create
 them in a different directory, provide a `dir` attribute at the region marker

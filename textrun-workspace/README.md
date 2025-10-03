@@ -89,15 +89,11 @@ Fuji apples are the best
 
 <a type="extension/runnable-region">
 
-````markdown
-<a type="workspace/new-file" filename="apples.txt">
-
-```
+```markdown
+<pre type="workspace/new-file" filename="apples.txt">
 Fuji apples are the best
+</pre>
 ```
-
-</a>
-````
 
 </a>
 

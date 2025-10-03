@@ -215,7 +215,7 @@ with content `hello world`</a>, we can verify it via this action:
 `hello world`.</a>
 ```
 
-### specifying the directory
+### "dir" attribute
 
 By default, actions in this plugin create the files in the workspace. To create
 them in a different directory, provide a `dir` attribute at the region marker

@@ -27,6 +27,6 @@
     "textrun-extension": "0.3.1",
     "textrun-npm": "0.3.1",
     "textrun-workspace": "0.3.1",
-    "tsx": "4.19.3"
+    "tsx": "4.20.6"
   }
 }

@@ -21,7 +21,7 @@
     "colorette": "2.0.20",
     "end-child-processes": "2.0.3",
     "observable-process": "8.0.0",
-    "strip-ansi": "7.1.0",
+    "strip-ansi": "7.1.2",
     "text-runner-engine": "7.1.2",
     "textrun-extension": "0.3.1"
   },
@@ -31,6 +31,6 @@
     "textrun-action": "0.3.1",
     "textrun-extension": "0.3.1",
     "textrun-workspace": "0.3.1",
-    "tsx": "4.19.3"
+    "tsx": "4.20.6"
   }
 }

@@ -26,6 +26,7 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
       } ${action.configuration.regionMarker}="shell/command"> region contains no commands to run`
     )
   }
+  const allowError = action.region[0].attributes["allow-error"] !== undefined
   action.name(`running console command: ${color.cyan(commandsToRun)}`)
   const processor = observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
     cwd: action.configuration.workspace.platformified()
@@ -35,7 +36,7 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
   action.log(finished.combinedText)
   CurrentCommand.set(finished)
   // TODO: allow non-zero exit codes through an attribute
-  if (finished.exitCode !== 0) {
+  if (finished.exitCode !== 0 && !allowError) {
     throw new Error(`command "${commandsToRun}" failed with exit code ${finished.exitCode}`)
   }
 }

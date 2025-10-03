@@ -59,8 +59,6 @@ Hello world!
 </a>
 
 Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
-The <b type="action/name-full">shell/command-output</b> action documents output
-of the last shell command run.
 
 ## User input
 

@@ -9,16 +9,15 @@ Feature: verifying file content
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                         |
-      | 1.md     | 1    | workspace/new-file                   | create file hello.txt            |
-      | 1.md     | 2    | workspace/existing-file-with-content | verify content of file hello.txt |
-
+      |     1.md |    1 | workspace/new-file                   | create file hello.txt            |
+      |     1.md |    2 | workspace/existing-file-with-content | verify content of file hello.txt |
 
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "1.md" with content:
       """
       Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       Now you have a file <a type="workspace/existing-file-with-content">**hello.txt** with content:
-
+      
       ```
       Hello world!
       ```
@@ -27,9 +26,8 @@ Feature: verifying file content
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                         |
-      | 1.md     | 1    | workspace/new-file                   | create file hello.txt            |
-      | 1.md     | 2    | workspace/existing-file-with-content | verify content of file hello.txt |
-
+      |     1.md |    1 | workspace/new-file                   | create file hello.txt            |
+      |     1.md |    2 | workspace/existing-file-with-content | verify content of file hello.txt |
 
   Scenario: file content mismatch
     Given the source code contains a file "1.md" with content:
@@ -40,26 +38,27 @@ Feature: verifying file content
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | STATUS  | ERROR TYPE | ERROR MESSAGE                    | GUIDANCE                                                       |
-      | 1.md     | 1    | workspace/new-file                   | success |            |                                  |                                                                |
-      | 1.md     | 2    | workspace/existing-file-with-content | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
+      |     1.md |    1 | workspace/new-file                   | success |            |                                  |                                                                |
+      |     1.md |    2 | workspace/existing-file-with-content | failed  | UserError  | mismatching content in hello.txt | mismatching lines:\n\nmismatching expected contentHello world! |
     And the error provides the guidance:
       """
       mismatching lines:
-
+      
       mismatching expected contentHello world!
       """
-
 
   Scenario: non-existing file
     Given the source code contains a file "1.md" with content:
       """
+      Create a file just for validation: <a type="workspace/empty-file">test_file</a>
+      
       The file <a type="workspace/existing-file-with-content">__zonk.txt__ with content `Hello world!`</a> doesn't exist.
       """
     When calling Text-Runner
     Then it runs these actions:
-      | FILENAME | LINE | ACTION                               | STATUS | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                                                            |
-      | 1.md     | 1    | workspace/existing-file-with-content | failed | UserError  | file not found: zonk.txt | the workspace has these files: 1.md, node_modules, package.json, tmp, tsconfig.json |
-
+      | FILENAME | LINE | ACTION                               | STATUS  | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                 |
+      |     1.md |    1 | workspace/empty-file                 | success |            |                          |                                          |
+      |     1.md |    3 | workspace/existing-file-with-content | failed  | UserError  | file not found: zonk.txt | the workspace has these files: test_file |
 
   Scenario: setting the base directory
     Given the workspace contains a file "hello.txt" with content:
@@ -70,9 +69,9 @@ Feature: verifying file content
     And the source code contains a file "1.md" with content:
       """
       <a type="workspace/existing-file-with-content" dir="..">
-
+      
       Your workspace contains a file _hello.txt_ with content `Hello world!`
-
+      
       </a>.
       """
     When calling:
@@ -83,4 +82,4 @@ Feature: verifying file content
       """
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                            |
-      | 1.md     | 1    | workspace/existing-file-with-content | verify content of file ../hello.txt |
+      |     1.md |    1 | workspace/existing-file-with-content | verify content of file ../hello.txt |

@@ -141,8 +141,9 @@ consider this documentation snippet:
 <a type="extension/runnable-region">
 
 ```html
-Please run the command <code type="shell/command">mkdir images</code>. If
-everything goes well, your computer will now have a new directory
+Please run the command <code type="shell/command">mkdir images</code>.
+
+If everything goes well, your computer will now have a new directory
 <i type="workspace/existing-directory">images</i>.
 ```
 
@@ -156,8 +157,9 @@ directory by providing a `dir` attribute:
 <a type="extension/runnable-region">
 
 ```html
-Please run the command <code type="shell/command">mkdir subdir/images</code>. If
-everything goes well, your computer will now have a new directory
+Please run the command <code type="shell/command">mkdir subdir/images</code>.
+
+If everything goes well, your computer will now have a new directory
 <i type="workspace/existing-directory" dir="subdir">images</i>.
 ```
 
@@ -166,15 +168,13 @@ everything goes well, your computer will now have a new directory
 ## existing-file
 
 The <b type="action/name-full">workspace/existing-file</b> action verifies that
-a file with the given name exists. As an example, consider the following
-documentation snippet:
+a file with the given name exists. As an example, assuming a file
+<em type="workspace/empty-file">hello.txt</em>, we can verify it's existence via
+this action:
 
 <a type="extension/runnable-region">
 
 ```markdown
-Assuming a file <em type="workspace/empty-file">hello.txt</em>, we can verify
-it's existence via this action:
-
 <code type="workspace/existing-file">hello.txt</code>
 ```
 

@@ -208,7 +208,8 @@ Here is the final part of our hypothetical server tutorial:
 ```html
 When you are done, stop the server:
 <pre type="shell/stop-server">
-shell/stop-server</pre>
+shell/stop-server
+</pre>
 ```
 
 </a>

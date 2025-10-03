@@ -152,7 +152,7 @@ Text-Runner continues executing other actions.
 <a type="workspace/new-file">
 
 As an example, let's say we write a tutorial about developing a web server, have
-just created a server called **server.js**:
+just created an implementation in file **server.js**:
 
 ```js
 console.log("server is running")

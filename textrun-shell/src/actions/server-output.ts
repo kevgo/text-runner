@@ -8,7 +8,7 @@ import { CurrentServer } from "../helpers/current-server.js"
  */
 export async function serverOutput(action: textRunner.actions.Args): Promise<void> {
   action.name("verifying the output of the long-running process")
-  const expectedOutput = action.region.text()
+  const expectedOutput = action.region.textInNodeOfType("fence")
   const expectedLines = expectedOutput
     .split("\n")
     .map((line: string) => line.trim())

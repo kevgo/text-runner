@@ -35,7 +35,7 @@ export default {
 ## shell/command and shell/command-output
 
 The <b type="action/name-full">shell/command</b> action runs a shell command and
-waits until it finishes. The <b type="action/name-full">shell/command-output<b>
+waits until it finishes. The <b type="action/name-full">shell/command-output</b>
 action verifies the output of the most recently executed shell command.
 
 As an example, here is a little hypothetical Shell tutorial:

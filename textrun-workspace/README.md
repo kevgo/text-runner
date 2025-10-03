@@ -168,7 +168,8 @@ If everything goes well, your computer will now have a new directory
 ## existing-file
 
 The <b type="action/name-full">workspace/existing-file</b> action verifies that
-a file with the given name exists. As an example, assuming a file
+a file with the given name exists. As an example, assuming the workspace
+contains a file
 <em type="workspace/empty-file">hello.txt</em>, we can verify it's existence via
 this action:
 
@@ -180,10 +181,10 @@ this action:
 
 ### "dir" attribute
 
-By default, actions in this plugin create the files in the workspace. To create
-them in a different directory, provide a `dir` attribute at the region marker
-containing the relative path to the directory to use. As an example, consider
-the following documentation snippet:
+By default, this action looks for files in the workspace. To look for them in a
+different directory inside the workspace, provide a `dir` attribute at the
+region marker containing the relative path to the directory to use. As an
+example, consider the following documentation snippet:
 
 <a type="extension/runnable-region">
 

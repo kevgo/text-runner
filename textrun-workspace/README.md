@@ -54,8 +54,10 @@ folder.
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
-_emphasized_ or **bold** text, or inside a "filename" attribute, and the file
-content is a code block with one or three backticks. Here are a few examples:
+_emphasized_ or **bold** text, or inside a `filename` attribute, and the file
+content is a code block with one or three backticks. Here are a few examples
+that all do the same thing, write a file `apples.txt` with content
+`Fuji apples are the best`:
 
 <a type="extension/runnable-region">
 
@@ -75,6 +77,20 @@ Create file _apples.txt_ with the content `Fuji apples are the best`.
 <a type="workspace/new-file">
 
 Create file **apples.txt** with the content:
+
+```
+Fuji apples are the best
+```
+
+</a>
+````
+
+</a>
+
+<a type="extension/runnable-region">
+
+````markdown
+<a type="workspace/new-file" filename="apples.txt">
 
 ```
 Fuji apples are the best

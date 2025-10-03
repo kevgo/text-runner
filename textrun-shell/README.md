@@ -211,7 +211,7 @@ Here is the final part of our hypothetical server tutorial:
 When you are done, stop the server:
 
 <pre type="shell/stop-server">
-shell/stop-server
+killall node
 </pre>
 ```
 

@@ -22,7 +22,7 @@ const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 const foo_path = path.join(__dirname, "bin", "foo")
 
 export default {
-  binaries: {
+  globals: {
     "foo": foo_path
   }
 }

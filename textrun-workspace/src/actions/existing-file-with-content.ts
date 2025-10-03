@@ -18,7 +18,7 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
       throw e
     }
     if (e.code === "ENOENT") {
-      const files = await fs.readdir(action.configuration.sourceDir.platformified())
+      const files = await fs.readdir(action.configuration.workspace.platformified())
       throw new textRunner.UserError(
         `file not found: ${fileRelPath}`,
         `the workspace has these files: ${files.join(", ")}`

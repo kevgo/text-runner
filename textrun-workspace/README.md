@@ -148,6 +148,21 @@ everything goes well, your computer will now have a new directory
 
 </a>
 
+### "dir" attribute
+
+You can override in which subdirectory of the workspace to look for the
+directory by providing a `dir` attribute:
+
+<a type="extension/runnable-region">
+
+```html
+Please run the command <code type="shell/command">mkdir subdir/images</code>. If
+everything goes well, your computer will now have a new directory
+<i type="workspace/existing-directory" dir="subdir">images</i>. You can store images in it.
+```
+
+</a>
+
 ## existing-file
 
 ### file-content

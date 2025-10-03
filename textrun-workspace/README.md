@@ -211,8 +211,9 @@ with content `hello world`</a>, we can verify it via this action:
 <a type="extension/runnable-region">
 
 ```markdown
-<a type="workspace/existing-file-with-content">The file _hello.txt_ now contains
-`hello world`.</a>
+<a type="workspace/existing-file-with-content">
+  The file <em>hello.txt</em> now contains <code>hello world</code>.
+</a>
 ```
 
 </a>
@@ -228,8 +229,9 @@ _subdir/apples.txt_ with the content `Boskoop`</a>, we can verify it like this:
 <a type="extension/runnable-region">
 
 ```markdown
-<a type="workspace/existing-file-with-content" dir="subdir">The file
-_apples.txt_ now contains `Boskoop`.</a>
+<a type="workspace/existing-file-with-content" dir="subdir">
+  The file <em>apples.txt</em> now contains <code>Boskoop</code>.
+</a>
 ```
 
 </a>

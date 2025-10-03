@@ -215,31 +215,24 @@ with content `hello world`</a>, we can verify it via this action:
 `hello world`.</a>
 ```
 
+</a>
+
 ### "dir" attribute
 
-By default, actions in this plugin create the files in the workspace. To create
-them in a different directory, provide a `dir` attribute at the region marker
-containing the relative path to the directory to use. As an example, consider
-the following documentation snippet:
+By default, this action creates the file in the workspace. To create it in a
+different directory, provide a name of the directory using the `dir` attribute.
+
+As an example, if the workspace contains file <a type="workspace/new-file">
+_subdir/apples.txt_ with the content `Boskoop`</a>, we can verify it like this:
 
 <a type="extension/runnable-region">
 
 ```markdown
-<a type="workspace/new-file" dir="subdir">
-
-Please create a file _apples.txt_ with the content `Boskoop`.
-
-</a>
+<a type="workspace/existing-file-with-content" dir="subdir">The file
+_apples.txt_ now contains `Boskoop`.</a>
 ```
 
 </a>
-
-<a type="workspace/existing-file-with-content">
-
-When executing the documentation, Text-Runner will create a file
-_subdir/apples.txt_ and content `Boskoop`
-
-</a>.
 
 ## working-dir
 

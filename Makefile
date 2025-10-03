@@ -43,7 +43,7 @@ reset:  # fresh setup
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
-test:  # runs all tests
+test: tools/rta@${RUN_THAT_APP_VERSION}  # runs all tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint unit cuke doc $(TURBO_ARGS)
 .PHONY: test
 

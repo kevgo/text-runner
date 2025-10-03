@@ -13,9 +13,9 @@ npm i -D textrun-shell
 
 <!-- TODO: verify this somehow -->
 
-You can define the absolute path of documented binaries in a
-**textrun-shell.js** file in the root directory of your documentation. Here is
-an example:
+You can define the absolute path of binaries that your documentation tests call
+by creating a file **textrun-shell.js** file in the root directory of your
+documentation. Here is an example:
 
 ```js
 import * as path from "path"

@@ -144,7 +144,7 @@ for, and the last one text to enter once the output from the first column has
 appeared. Middle columns are ignored. `<th>` elements are considered
 descriptions and are also ignored.
 
-## Long-running processes
+## shell/server
 
 Long-running processes, for example web or database servers, keep running while
 Text-Runner continues executing other actions.
@@ -161,10 +161,7 @@ setTimeout(() => {}, 100_000)
 </a>
 
 Start this long-running server to run in parallel with Text-Runner with the
-<b type="action/name-full">shell/server</b> action. Wait for output using the
-<b type="action/name-full">shell/server-output</b> action. Stop the server with
-the <b type="action/name-full">shell/stop-server</b> action. Here is an example
-that shows them in action:
+<b type="action/name-full">shell/server</b> action:
 
 <a type="extension/runnable-region">
 
@@ -174,16 +171,43 @@ Start the server:
 <pre type="shell/server">
 node server.js
 </pre>
+```
 
-Wait until it is fully booted up:
+</a>
+
+## shell/server-output
+
+After we started a long-running server through
+<em type="action/name-full">shell/server</em> above, we can await specific
+output from it using the
+<b type="action/name-full">shell/server-output</b> action.
+
+Here is the next paragraph of our hypothetic server tutorial:
+
+<a type="extension/runnable-region">
+
+```html
+Wait until the server is fully booted up:
 
 <pre type="shell/server-output">
 server is running
 </pre>
+```
 
-Now you can interact with the server. When you are done, stop the server:
+</a>
+
+## shell/stop-server
+
+Stop a long-running process with the
+<b type="action/name-full">shell/stop-server</b> action.
+
+Here is the final part of our hypothetical server tutorial:
+
+<a type="extension/runnable-region">
+
+```html
+ When you are done, stop the server:
 <a type="shell/stop-server">shell/stop-server</a>
 ```
 
 </a>
-```

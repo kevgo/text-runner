@@ -16,7 +16,7 @@ npm i -D textrun-workspace
 
 </a>
 
-### create-directory
+### new-directory
 
 The <b type="action/name-full">workspace/new-directory</b> action creates a
 directory with the given name in the workspace. Here is a usage example:
@@ -32,6 +32,23 @@ Create a directory named <b type="workspace/new-directory">utils</b>.
 When executing this Markdown snippet, Text-Runner will create a
 <i type="workspace/existing-directory">utils</i> directory in the workspace,
 just as the user would.
+
+#### "dir" attribute
+
+The `dir` attributes allows you to specify in which directory the new directory
+gets created.
+
+<a type="extension/runnable-region">
+
+```html
+Create a directory named <b type="workspace/new-directory" dir="subdir">utils</b>.
+```
+
+</a>
+
+When executing this Markdown snippet, Text-Runner will create a
+<i type="workspace/existing-directory">subdir/utils</i> directory in the
+workspace.
 
 ### working-dir
 
@@ -50,7 +67,7 @@ folder.
 
 </a>
 
-### create-file
+### new-file
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
@@ -133,6 +150,8 @@ everything goes well, your computer will now have a new directory
 ```
 
 </a>
+
+### existing-file
 
 ### file-content
 

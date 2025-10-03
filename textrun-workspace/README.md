@@ -178,7 +178,7 @@ this action:
 <code type="workspace/existing-file">hello.txt</code>
 ```
 
-### specifying the directory
+### "dir" attribute
 
 By default, actions in this plugin create the files in the workspace. To create
 them in a different directory, provide a `dir` attribute at the region marker

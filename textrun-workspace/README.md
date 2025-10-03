@@ -205,8 +205,8 @@ given content. This action assumes that the documentation contains the filename
 as _emphasized_ or **strong** text and the file content as a code block with
 single or triple backticks.
 
-Assuming a file <a type="workspace/new-file">_hello.txt_ with content
-`hello world`</a>, we can verify it via this action:
+Assuming the workspace contains a file <a type="workspace/new-file">_hello.txt_
+with content `hello world`</a>, we can verify it via this action:
 
 <a type="extension/runnable-region">
 

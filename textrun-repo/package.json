@@ -19,6 +19,7 @@
   "dependencies": {
     "assert-no-diff": "4.1.0",
     "colorette": "2.0.20",
+    "debug": "4.4.3",
     "eol": "0.10.0",
     "text-runner-engine": "7.1.2"
   },

@@ -1,10 +1,6 @@
 const util = require("util")
 const delay = util.promisify(setTimeout)
 
-function helloWorldSync(action) {
-  action.log("Greetings from the 2222 sync action!")
-}
-
 async function helloWorldAsync(action) {
   await delay(1)
   action.log("Greetings from the async action!")
@@ -27,9 +23,13 @@ function helloWorldPromise(action) {
   })
 }
 
+function helloWorldSync(action) {
+  action.log("Greetings from the sync action!")
+}
+
 module.exports = {
-  helloWorldSync,
   helloWorldAsync,
   helloWorldCallback,
-  helloWorldPromise
+  helloWorldPromise,
+  helloWorldSync
 }

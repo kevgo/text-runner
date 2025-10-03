@@ -19,6 +19,7 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
+    "debug": "4.4.3",
     "text-runner-engine": "7.1.2"
   },
   "devDependencies": {

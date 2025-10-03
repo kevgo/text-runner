@@ -61,7 +61,7 @@ Hello world!
 Some tutorials print a dollar sign at the beginning of the command to execute,
 indicating an interactive command prompt. These dollar signs are ignored.
 
-## User input
+## shell/command-with-input
 
 You can run a shell command and enter text into it with the
 <b type="action/name-full">shell/command-with-input</b> action.

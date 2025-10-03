@@ -2,7 +2,6 @@ import { RefineNameFn } from "./index.js"
 
 /** allows refining the current name of a test step */
 export class NameRefiner {
-  // eslint-disable-next-line no-empty-function
   constructor(private name: string) {}
 
   /** returns the refined name */

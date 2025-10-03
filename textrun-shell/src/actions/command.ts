@@ -34,6 +34,7 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
   const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess
   action.log(finished.combinedText)
   CurrentCommand.set(finished)
+  // TODO: allow non-zero exit codes through an attribute
   if (finished.exitCode !== 0) {
     throw new Error(`command "${commandsToRun}" failed with exit code ${finished.exitCode}`)
   }

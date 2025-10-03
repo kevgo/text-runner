@@ -38,7 +38,7 @@ The <b type="action/name-full">shell/command</b> action runs a shell command and
 waits until it finishes. The <b type="action/name-full">shell/command-output</b>
 action verifies the output of the most recently executed shell command.
 
-As an example, here is a little hypothetical Shell tutorial:
+As an example, here is a hypothetical tutorial for how to use the Linux shell:
 
 <a type="extension/runnable-region">
 

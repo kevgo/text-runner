@@ -42,7 +42,7 @@ As an example, here is a hypothetical tutorial for how to use the Linux shell:
 
 <a type="extension/runnable-region">
 
-```md
+```html
 The "echo" command prints text on the command line. For example, let's run:
 
 <pre type="shell/command">
@@ -54,6 +54,21 @@ echo Hello world!
 
 Some tutorials print a dollar sign at the beginning of the command to execute,
 indicating an interactive command prompt. These dollar signs are ignored.
+
+### allow-error attribute
+
+By default the test suite fails if the subshell command exits with a non-zero
+exit code. To allow errors, add the `allow-error` attribute, like so:
+
+<pre type="shell/command" allow-error>
+echo Hello world!
+</pre>
+
+```html
+<pre type="shell/command" allow-error>
+echo Hello world!
+</pre>
+```
 
 ## shell/command-output
 

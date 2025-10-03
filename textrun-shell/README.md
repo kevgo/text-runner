@@ -23,6 +23,7 @@ import * as url from "url"
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 const foo_path = path.join(__dirname, "bin", "foo")
+// console.log(`calling "foo" in the documentation now runs ${foo_path}`)
 
 export default {
   globals: {

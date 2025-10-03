@@ -25,7 +25,7 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "2.2.1",
+    "@sindresorhus/slugify": "3.0.0",
     "anchor-markdown-header": "0.7.0",
     "globby": "15.0.0",
     "got": "14.4.9",

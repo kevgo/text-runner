@@ -24,7 +24,7 @@ help:  # prints all make targets
 
 lint: tools/rta@${RUN_THAT_APP_VERSION} # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
-	tools/rta ghokin fmt text-runner-features
+	tools/rta ghokin fmt replace text-runner-features
 
 publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package

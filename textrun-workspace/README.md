@@ -179,6 +179,8 @@ this action:
 <code type="workspace/existing-file">hello.txt</code>
 ```
 
+</a>
+
 ### "dir" attribute
 
 By default, this action looks for files in the workspace. You can tell it to
@@ -186,6 +188,14 @@ look in a different directory inside the workspace by providing a `dir`
 attribute. Assuming the workspace contains a file
 <em type="workspace/empty-file">subdir/hello.txt</em>, we can verify it's
 existence via this action:
+
+<a type="extension/runnable-region">
+
+```markdown
+<code type="workspace/existing-file" dir="subdir">hello.txt</code>
+```
+
+</a>
 
 ## existing-file-with-content
 

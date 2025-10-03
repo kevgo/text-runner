@@ -60,10 +60,6 @@ indicating an interactive command prompt. These dollar signs are ignored.
 By default the test suite fails if the subshell command exits with a non-zero
 exit code. To allow errors, add the `allow-error` attribute, like so:
 
-<pre type="shell/command" allow-error>
-echo Hello world!
-</pre>
-
 ```html
 <pre type="shell/command" allow-error>
 echo Hello world!

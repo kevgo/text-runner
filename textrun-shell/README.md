@@ -169,7 +169,7 @@ Start this long-running server to run in parallel with Text-Runner with the
 Start the server:
 
 <pre type="shell/server">
-  node server.js
+node server.js
 </pre>
 ```
 
@@ -190,7 +190,7 @@ Here is the next paragraph of our hypothetic server tutorial:
 Wait until the server is fully booted up:
 
 <pre type="shell/server-output">
-  server is running
+server is running
 </pre>
 ```
 
@@ -208,8 +208,7 @@ Here is the final part of our hypothetical server tutorial:
 ```html
 When you are done, stop the server:
 <pre type="shell/stop-server">
-  shell/stop-server
-</pre>
+shell/stop-server</pre>
 ```
 
 </a>

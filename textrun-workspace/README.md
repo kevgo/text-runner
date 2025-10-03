@@ -150,7 +150,7 @@ everything goes well, your computer will now have a new directory
 
 ## existing-file
 
-## file-content
+### file-content
 
 The <b type="action/name-full">workspace/existing-file</b> action verifies that
 a file with the given name exists and has the given content. This action assumes
@@ -168,7 +168,7 @@ Assuming a file <a type="workspace/new-file">_hello.txt_ with content
 `hello world`.</a>
 ```
 
-## specifying the directory
+### specifying the directory
 
 By default, actions in this plugin create the files in the workspace. To create
 them in a different directory, provide a `dir` attribute at the region marker

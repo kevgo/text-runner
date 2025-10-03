@@ -1,5 +1,5 @@
 # dev tooling and versions
-RUN_THAT_APP_VERSION = 0.14.0
+RUN_THAT_APP_VERSION = 0.19.1
 
 YARN_ARGS = FORCE_COLOR=1
 TURBO_ARGS = --concurrency=100%
@@ -22,8 +22,9 @@ fix:  # runs all auto-fixes
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
 
-lint:  # lints the root directory
+lint: tools/rta@${RUN_THAT_APP_VERSION} # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
+	tools/rta ghokin fmt text-runner-features
 
 publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package

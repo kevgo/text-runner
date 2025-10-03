@@ -5,7 +5,7 @@ actions for documenting console commands to be executed by the reader.
 
 ## Setup
 
-To add this package as a Text-Runner plugin, run:
+To add this package as a Text-Runner plugin:
 
 <pre type="npm/install">
 npm i -D textrun-shell

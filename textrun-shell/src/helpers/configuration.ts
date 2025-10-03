@@ -29,6 +29,7 @@ export class Configuration {
   static async load(filePath: string): Promise<Configuration> {
     try {
       const content = await import(filePath)
+      // TODO: use the "debug" module to log this message under the "shell" namespace: `found path mapping at ${filePath}`
       const config: ConfigFile = content.default
       return new Configuration(config)
     } catch (e) {

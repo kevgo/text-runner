@@ -41,6 +41,7 @@
     "@cucumber/cucumber": "12.2.0",
     "@eslint/js": "9.36.0",
     "@types/chai": "5.2.2",
+    "@types/debug": "4.1.12",
     "@types/node": "24.6.2",
     "chai": "6.2.0",
     "debug": "4.4.3",

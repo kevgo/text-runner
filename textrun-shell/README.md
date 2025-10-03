@@ -3,7 +3,7 @@
 This package provides [Text-Runner](https://github.com/kevgo/text-runner)
 actions for documenting console commands to be executed by the reader.
 
-### Setup
+## Setup
 
 To add this package as a Text-Runner plugin, run <code type="npm/install">npm i
 -D textrun-shell</code>.
@@ -28,7 +28,7 @@ export default {
 }
 ```
 
-### Run shell commands
+## Run shell commands
 
 The <b type="action/name-full">shell/command</b> action runs a shell command and
 waits until it finishes. As an example, here is a little hypothetical Shell
@@ -71,7 +71,7 @@ Dollar signs at the beginning of lines indicate a shell prompt and are ignored.
 The <b type="action/name-full">shell/command-output</b> action documents output
 of the last shell command run.
 
-### User input
+## User input
 
 You can run a shell command and enter text into it with the
 <b type="action/name-full">shell/command-with-input</b> action.
@@ -138,7 +138,7 @@ for, and the last one text to enter once the output from the first column has
 appeared. Middle columns are ignored. `<th>` elements are considered
 descriptions and are also ignored.
 
-### Long-running processes
+## Long-running processes
 
 Long-running processes, for example web or database servers, keep running while
 Text-Runner continues executing other actions.

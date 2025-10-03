@@ -137,7 +137,7 @@ It prints:
 
 <pre type="shell/command-output">
 Hello Text-Runner, happy Friday!
-</pre>.
+</pre>
 
 If the table contains multiple columns, the first column contains output to wait
 for, and the last one text to enter once the output from the first column has

@@ -137,7 +137,7 @@ content to with the `dir` attribute:
 ```html
 <a type="workspace/additional-file-content" dir="greeting">
 
-Now append `!` to file _hello.txt_.
+Now append `!!!` to file _hello.txt_.
 
 </a>.
 ```
@@ -146,7 +146,7 @@ Now append `!` to file _hello.txt_.
 
 <a type="workspace/existing-file-with-content">
 
-Now file _greeting/hello.txt_ has content `hello world!`.
+Now file _greeting/hello.txt_ has content `hello world!!!`.
 
 </a>
 

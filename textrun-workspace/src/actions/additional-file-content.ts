@@ -12,5 +12,6 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const content = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")
   action.log(content)
+  console.log("11111111111111111111111111111111111111111", content, fullPath)
   await fs.appendFile(fullPath, content)
 }

@@ -9,13 +9,12 @@ Feature: Appending content to existing workspace files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-      | directory_changer.md | 1    | workspace/new-file                | create file foo/bar    |
-      | directory_changer.md | 2    | workspace/additional-file-content | append to file foo/bar |
+      | directory_changer.md |    1 | workspace/new-file                | create file foo/bar    |
+      | directory_changer.md |    2 | workspace/additional-file-content | append to file foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content
       """
-
 # TODO: Scenario: the file does not exist
 
   Scenario: setting the base directory
@@ -26,9 +25,9 @@ Feature: Appending content to existing workspace files
     And the source code contains a file "1.md" with content:
       """
       <a type="workspace/additional-file-content" dir="..">
-
+      
       Append to file **foo/bar** the content ` appended content`.
-
+      
       </a>
       """
     When calling:
@@ -39,8 +38,28 @@ Feature: Appending content to existing workspace files
       """
     Then it runs these actions:
       | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-      | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+      |     1.md |    1 | workspace/additional-file-content | append to file ../foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content
+      """
+
+  Scenario: providing the filename via tag
+    Given the workspace contains a file "file.txt" with content:
+      """
+      hello sun
+      """
+    And the source code contains a file "1.md" with content:
+      """
+      <a type="workspace/additional-file-content" filename="file.txt">
+      shine
+      </a>
+      """
+    When calling Text-Runner
+    Then it runs these actions:
+      | FILENAME | LINE | ACTION                            | ACTIVITY                |
+      |     1.md |    1 | workspace/additional-file-content | append to file file.txt |
+    And the workspace now contains a file "file.txt" with content:
+      """
+      hello sunshine
       """

@@ -294,11 +294,11 @@ attribute.
 Consider the workspace contains file _findings.txt_ with content:
 
 ```
-line 1
+finding 1
 
-# caption
+# Additional findings
 
-line 2
+finding 2
 ```
 
 </a>
@@ -309,7 +309,7 @@ We can verify the caption like this:
 
 ```markdown
 <a type="workspace/existing-file-with-content" partial-match> The file
-<em>findings.txt</em> now contains the caption <code># caption</code>.
+<em>findings.txt</em> now contains <code># Additional findings</code>.
 </a>
 ```
 

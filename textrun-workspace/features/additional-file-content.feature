@@ -9,8 +9,8 @@ Feature: Appending content to existing workspace files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-      | directory_changer.md | 1    | workspace/new-file                | create file foo/bar    |
-      | directory_changer.md | 2    | workspace/additional-file-content | append to file foo/bar |
+      | directory_changer.md |    1 | workspace/new-file                | create file foo/bar    |
+      | directory_changer.md |    2 | workspace/additional-file-content | append to file foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content
@@ -25,9 +25,9 @@ Feature: Appending content to existing workspace files
     And the source code contains a file "1.md" with content:
       """
       <a type="workspace/additional-file-content" dir="..">
-
+      
       Append to file **foo/bar** the content ` appended content`.
-
+      
       </a>
       """
     When calling:
@@ -38,26 +38,33 @@ Feature: Appending content to existing workspace files
       """
     Then it runs these actions:
       | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-      | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+      |     1.md |    1 | workspace/additional-file-content | append to file ../foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content
       """
 
-  Scenario: providing the filename via tag
-    Given the workspace contains a file "file.txt" with content:
+  Scenario: append
+    Given the workspace contains a file "foo/bar" with content:
       """
-      hello sun
+      hello
       """
     And the source code contains a file "1.md" with content:
       """
-      <a type="workspace/additional-file-content" filename="file.txt">shine</a>
+      <a type="workspace/additional-file-content" dir=".." filename="foo/bar">
+      sun
+      </a>
       """
-    When calling Text-Runner
+    When calling:
+      """
+      command = new textRunner.commands.Run({...config, workspace: "tmp/subdir"})
+      observer = new MyObserverClass(command)
+      await command.execute()
+      """
     Then it runs these actions:
-      | FILENAME | LINE | ACTION                            | ACTIVITY                |
-      | 1.md     | 1    | workspace/additional-file-content | append to file file.txt |
-    And the workspace now contains a file "file.txt" with content:
+      | FILENAME | LINE | ACTION                            | ACTIVITY                  |
+      |     1.md |    1 | workspace/additional-file-content | append to file ../foo/bar |
+    And the workspace now contains a file "foo/bar" with content:
       """
-      hello sunshine
+      hellosun
       """

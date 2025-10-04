@@ -11,7 +11,7 @@ export async function runTextrunner(action: textRunner.actions.Args): Promise<vo
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()
   for (const result of activityCollector.results()) {
-    // TODO: print more details here when debug mode is activated
+    // TODO: maybe print this when debug mode is activated
     // action.log(util.inspect(result, false, Infinity))
     if (result.error) {
       throw result.error

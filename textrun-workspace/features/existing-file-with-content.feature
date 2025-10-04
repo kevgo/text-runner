@@ -83,3 +83,15 @@ Feature: verifying file content
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                            |
       | test.md  | 1    | workspace/existing-file-with-content | verify content of file ../hello.txt |
+
+  Scenario: partial-match found
+    Given the source code contains a file "test.md" with content:
+      """
+      Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
+      Your workspace now contains a file <a type="workspace/existing-file-with-content" partial-match>_hello.txt_ with content `Hello`</a>.
+      """
+    When calling Text-Runner
+    Then it runs these actions:
+      | FILENAME | LINE | ACTION                               | ACTIVITY                                |
+      | test.md  | 1    | workspace/new-file                   | create file hello.txt                   |
+      | test.md  | 2    | workspace/existing-file-with-content | file hello.txt contains substring Hello |

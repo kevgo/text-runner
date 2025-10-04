@@ -8,9 +8,9 @@ Feature: active img tags
       """
       <img type="HelloWorld" src="watermelon.gif">
       """
-    And the workspace contains an image "watermelon.gif"
+    And the source code contains an image "watermelon.gif"
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      |
-      | 1.md     | 1    | hello-world |
-      | 1.md     | 1    | check-image |
+      |     1.md |    1 | hello-world |
+      |     1.md |    1 | check-image |

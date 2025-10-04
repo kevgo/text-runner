@@ -162,9 +162,12 @@ Given("the workspace contains an empty file {string}", async function(this: TRWo
   await fs.writeFile(workspace.absPath.joinStr(fileName), "")
 })
 
-Given("the workspace contains an image {string}", async function(this: TRWorld, imageName: string) {
-  await fs.mkdir(workspace.absPath.joinStr(path.dirname(imageName)), { recursive: true })
-  await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), workspace.absPath.joinStr(imageName))
+Given("the source code contains an image {string}", async function(this: TRWorld, imageName: string) {
+    const sourceRoot = workspace.absPath
+    const imgDir = sourceRoot.joinStr(path.dirname(imageName))
+  await fs.mkdir(imgDir, { recursive: true })
+  const imgPath = sourceRoot.joinStr(imageName)
+  await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), imgPath)
 })
 
 Given("the configuration file:", async function(this: TRWorld, content: string) {

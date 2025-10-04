@@ -308,8 +308,9 @@ We can verify the caption like this:
 <a type="extension/runnable-region">
 
 ```markdown
-<a type="workspace/existing-file-with-content" partial-match> The file
-<em>findings.txt</em> now contains <code># Additional findings</code>.
+<a type="workspace/existing-file-with-content" partial-match>
+
+The file _findings.txt_ now contains `# Additional findings`.
 </a>
 ```
 

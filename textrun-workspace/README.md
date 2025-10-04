@@ -156,14 +156,14 @@ content is the entire content of the active region.
 <a type="extension/runnable-region">
 
 ```html
-<code type="workspace/additional-file-content" filename="greeting/hello.txt">shine</code>
+<code type="workspace/additional-file-content" filename="greeting/hello.txt">light</code>
 ```
 
 </a>
 
 <a type="workspace/existing-file-with-content">
 
-Now file _greeting/hello.txt_ has content `hello sun and moonshine`.
+Now file _greeting/hello.txt_ has content `hello sun and moonlight`.
 
 </a>
 

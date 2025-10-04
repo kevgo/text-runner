@@ -56,6 +56,31 @@ When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file-with-content">_apples.txt_ and content
 `Fuji apples are the best`</a> in the workspace.
 
+### "dir" attribute
+
+You can override in which directory Text-Runner looks for the file to append
+content to with the `dir` attribute:
+
+<a type="extension/runnable-region">
+
+````markdown
+<a type="workspace/new-file" dir="subdir">
+
+Create file **apples.txt** with the content:
+
+```
+Fuji apples are the best
+```
+
+</a>
+````
+
+</a>
+
+When executing the documentation, Text-Runner will create a file with name
+<a type="workspace/existing-file-with-content">_subdir/apples.txt_ and content
+`Fuji apples are the best`</a> in the workspace.
+
 ### "filename" attribute
 
 If you don't want to repeat the filename in the text too often, you can also

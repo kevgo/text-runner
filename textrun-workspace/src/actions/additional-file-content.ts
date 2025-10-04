@@ -12,12 +12,5 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const content = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")
   action.log(content)
-  // try {
-  //   await fs.access(fullPath, fs.constants.F_OK)
-  // } catch (e) {
-  //   if (e instanceof Error) {
-  //     throw new textRunner.UserError(`cannot access file ${fileRelPath}`, e.message)
-  //   }
-  // }
   await fs.appendFile(fullPath, content)
 }

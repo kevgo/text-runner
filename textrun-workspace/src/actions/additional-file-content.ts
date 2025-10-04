@@ -10,6 +10,13 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
   const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
   action.name(`append to file ${color.cyan(fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
+  try {
+    await fs.access(fullPath, fs.constants.F_OK)
+  } catch (e) {
+    if (e instanceof Error) {
+      throw new textRunner.UserError(`file ${fileRelPath} doesn't exist`, e.message)
+    }
+  }
   const content = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")
   action.log(content)
   await fs.appendFile(fullPath, content)

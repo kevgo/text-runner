@@ -1,17 +1,16 @@
 Feature: verifying file content
 
-  @this
   Scenario: specify file name via emphasized text and content via code block
     Given the source code contains a file "test.md" with content:
       """
-      Create a file <a type="workspace/empty-file">hello.txt</a>.
-      Your workspace now contains a file <a type="workspace/existing-file">hello.txt</a>.
+      Create a file <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
+      Your workspace now contains a file <a type="workspace/existing-file-with-content">_hello.txt_ with content `Hello world!`</a>.
       """
     When calling Text-Runner
     Then it runs these actions:
-      | FILENAME | LINE | ACTION                  | ACTIVITY                           |
-      | test.md  |    1 | workspace/empty-file    | create file hello.txt              |
-      | test.md  |    2 | workspace/existing-file | verify existence of file hello.txt |
+      | FILENAME | LINE | ACTION                               | ACTIVITY                         |
+      | test.md  |    1 | workspace/new-file                   | create file hello.txt            |
+      | test.md  |    2 | workspace/existing-file-with-content | verify content of file hello.txt |
 
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "test.md" with content:

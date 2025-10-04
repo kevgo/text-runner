@@ -45,7 +45,7 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function(this: TRWorld, exampleName: string) {
-    const exampleDir = path.join("documentation", "examples", exampleName)
+  const exampleDir = path.join("documentation", "examples", exampleName)
   await fs.cp(exampleDir, workspace.absPath.platformified(), { recursive: true })
 })
 
@@ -133,19 +133,20 @@ testable documentation
 })
 
 Given("the source code contains the HelloWorld action", async function(this: TRWorld) {
-  await fs.mkdir(workspace.absPath.joinStr("text-runner"), { recursive: true })
-  await fs.writeFile(
-    workspace.absPath.joinStr("text-runner", "hello-world.js"),
-    `
-    export default (action) => action.log('Hello World!') `
-  )
+  const actionDir = workspace.absPath.joinStr("text-runner")
+  await fs.mkdir(actionDir, { recursive: true })
+  const actionFile = path.join(actionDir, "hello-world.js")
+  await fs.writeFile(actionFile, `export default (action) => action.log('Hello World!')`)
 })
 
 Given(
   "the workspace contains a file {string} with content:",
   async function(this: TRWorld, fileName: string, content: string) {
-    await fs.mkdir(workspace.absPath.joinStr("tmp", path.dirname(fileName)), { recursive: true })
-    await fs.writeFile(workspace.absPath.joinStr("tmp", fileName), content)
+    const workspaceRoot = workspace.absPath.joinStr("tmp")
+    const fileDir = path.join(workspaceRoot,path.dirname(fileName))
+    await fs.mkdir(fileDir, { recursive: true })
+    const filePath = path.join(workspaceRoot, fileName)
+    await fs.writeFile(filePath, content)
   }
 )
 

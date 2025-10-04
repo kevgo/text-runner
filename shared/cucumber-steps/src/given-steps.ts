@@ -81,14 +81,20 @@ Given("the source code contains a file {string}", async function(this: TRWorld, 
 Given(
   "the source code contains a file {string} with content:",
   async function(this: TRWorld, fileName: string, content: string) {
-    await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
-    await fs.writeFile(workspace.absPath.joinStr(fileName), content)
+  const sourceRoot =workspace.absPath
+  const fileDir = sourceRoot.joinStr(path.dirname(fileName))
+    await fs.mkdir(fileDir, { recursive: true })
+  const filePath = sourceRoot.joinStr(fileName)
+    await fs.writeFile(filePath, content)
   }
 )
 
 Given("the source code contains an executable {string}", async function(this: TRWorld, fileName: string) {
-  await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
-  await fs.writeFile(workspace.absPath.joinStr(fileName), "content", { mode: 0o744 })
+  const sourceRoot =workspace.absPath
+  const fileDir = sourceRoot.joinStr(path.dirname(fileName))
+  await fs.mkdir(fileDir, { recursive: true })
+  const filePath = sourceRoot.joinStr(fileName)
+  await fs.writeFile(filePath, "content", { mode: 0o744 })
 })
 
 Given("the workspace contains a file {string}", async function(this: TRWorld, fileName: string) {

@@ -35,4 +35,4 @@ Feature: specifying the configuration filename
     When trying to run "text-runner --config=zonk.jsonc"
     Then the test fails with:
       | ERROR MESSAGE | cannot read configuration file "zonk.jsonc" |
-      | EXIT CODE     |                                           1 |
+      | EXIT CODE     | 1                                           |

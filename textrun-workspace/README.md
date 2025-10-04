@@ -16,47 +16,13 @@ npm i -D textrun-workspace
 
 </a>
 
-## new-directory
-
-The <b type="action/name-full">workspace/new-directory</b> action creates a
-directory with the given name in the workspace. Here is a usage example:
-
-<a type="extension/runnable-region">
-
-```html
-Create a directory named <b type="workspace/new-directory">utils</b>.
-```
-
-</a>
-
-When executing this Markdown snippet, Text-Runner will create a
-<i type="workspace/existing-directory">utils</i> directory in the workspace,
-just as the user would.
-
-### "dir" attribute
-
-You can override in which directory the new directory gets created by providing
-a `dir` attribute:
-
-<a type="extension/runnable-region">
-
-```html
-Create a directory named <code type="workspace/new-directory" dir="subdir">utils</code>.
-```
-
-</a>
-
-When executing this Markdown snippet, Text-Runner will create a
-<i type="workspace/existing-directory">subdir/utils</i> directory in the
-workspace.
-
 ## new-file
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
 _emphasized_ or **bold** text, or inside a `filename` attribute, and the file
 content is a code block with one or three backticks. Here are a few examples
-that all do the same thing. See if you can figure out what that is.
+that all do the same thing. See if you can figure out what it does.
 
 <a type="extension/runnable-region">
 
@@ -86,11 +52,42 @@ Fuji apples are the best
 
 </a>
 
+When executing the documentation, Text-Runner will create a file with name
+<a type="workspace/existing-file-with-content">_apples.txt_ and content
+`Fuji apples are the best`</a> in the workspace.
+
+### "dir" attribute
+
+You can override in which directory Text-Runner looks for the file to append
+content to with the `dir` attribute:
+
 <a type="extension/runnable-region">
 
 ```markdown
+<a type="workspace/new-file" dir="subdir">
+
+Create file _apples.txt_ with the content `Fuji apples are the best`.
+
+</a>
+```
+
+</a>
+
+When executing the documentation, Text-Runner will create a file with name
+<a type="workspace/existing-file-with-content">_subdir/apples.txt_ and content
+`Fuji apples are the best`</a> in the workspace.
+
+### "filename" attribute
+
+If you don't want to repeat the filename in the text too often, you can also
+provide it invisibly through the `filename` attribute. In that case, the file
+content is the entire content of the active region.
+
+<a type="extension/runnable-region">
+
+```html
 <pre type="workspace/new-file" filename="apples.txt">
-Fuji apples are the best
+Gala aren't that bad either!
 </pre>
 ```
 
@@ -98,7 +95,57 @@ Fuji apples are the best
 
 When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file-with-content">_apples.txt_ and content
-`Fuji apples are the best`</a> in the workspace.
+`Gala aren't that bad either!`</a> in the workspace.
+
+## additional-file-content
+
+The <code type="action/name-full">workspace/additional-file-content</code>
+action appends the given text to the given file.
+
+Assume the workspace contains file <a type="workspace/new-file">
+_greeting/hello.txt_ with content `hello`</a>. Then you execute this
+documentation:
+
+<a type="extension/runnable-region">
+
+```html
+<a type="workspace/additional-file-content">
+
+Now append ` world` to file _greeting/hello.txt_.
+
+</a>.
+```
+
+</a>
+
+<a type="workspace/existing-file-with-content">
+
+Now file _greeting/hello.txt_ has content `hello world`.
+
+</a>
+
+### "dir" attribute
+
+You can override in which directory Text-Runner looks for the file to append
+content to with the `dir` attribute:
+
+<a type="extension/runnable-region">
+
+```html
+<a type="workspace/additional-file-content" dir="greeting">
+
+Now append `!!!` to file _hello.txt_.
+
+</a>.
+```
+
+</a>
+
+<a type="workspace/existing-file-with-content">
+
+Now file _greeting/hello.txt_ has content `hello world!!!`.
+
+</a>
 
 ## empty-file
 
@@ -108,7 +155,7 @@ file. An example is this documentation:
 <a type="extension/runnable-region">
 
 ```html
-Please create an empty file <b type="workspace/empty-file">.gitkeep</b>.
+Please a file <b type="workspace/empty-file">.gitkeep</b>. It's okay to leave it empty.
 ```
 
 </a>
@@ -235,6 +282,40 @@ _subdir/apples.txt_ with the content `Boskoop`</a>, we can verify it like this:
 ```
 
 </a>
+
+## new-directory
+
+The <b type="action/name-full">workspace/new-directory</b> action creates a
+directory with the given name in the workspace. Here is a usage example:
+
+<a type="extension/runnable-region">
+
+```html
+Create a directory named <b type="workspace/new-directory">utils</b>.
+```
+
+</a>
+
+When executing this Markdown snippet, Text-Runner will create a
+<i type="workspace/existing-directory">utils</i> directory in the workspace,
+just as the user would.
+
+### "dir" attribute
+
+You can override in which directory the new directory gets created by providing
+a `dir` attribute:
+
+<a type="extension/runnable-region">
+
+```html
+Create a directory named <code type="workspace/new-directory" dir="subdir">utils</code>.
+```
+
+</a>
+
+When executing this Markdown snippet, Text-Runner will create a
+<i type="workspace/existing-directory">subdir/utils</i> directory in the
+workspace.
 
 ## working-dir
 

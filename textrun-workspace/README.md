@@ -155,7 +155,7 @@ file. An example is this documentation:
 <a type="extension/runnable-region">
 
 ```html
-Please create an empty file <b type="workspace/empty-file">.gitkeep</b>.
+Please a file <b type="workspace/empty-file">.gitkeep</b>. It's okay to leave it empty.
 ```
 
 </a>

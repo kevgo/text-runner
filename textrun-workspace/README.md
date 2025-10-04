@@ -316,6 +316,8 @@ The file _findings.txt_ now contains `# Additional findings`.
 
 </a>
 
+TODO: Document how to combine this with the "filename" attribute.
+
 ## new-directory
 
 The <b type="action/name-full">workspace/new-directory</b> action creates a

@@ -70,12 +70,17 @@ Given(
 )
 
 Given("the source code contains a directory {string}", function(this: TRWorld, dirName: string) {
-  return fs.mkdir(workspace.absPath.joinStr(dirName), { recursive: true })
+  const sourceRoot =workspace.absPath
+  const fileDir = sourceRoot.joinStr(dirName)
+  return fs.mkdir(fileDir, { recursive: true })
 })
 
 Given("the source code contains a file {string}", async function(this: TRWorld, fileName: string) {
-  await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
-  await fs.writeFile(workspace.absPath.joinStr(fileName), "content")
+  const sourceRoot =workspace.absPath
+  const fileDir = sourceRoot.joinStr(path.dirname(fileName))
+  await fs.mkdir(fileDir, { recursive: true })
+  const filePath = sourceRoot.joinStr(fileName)
+  await fs.writeFile(filePath, "content")
 })
 
 Given(

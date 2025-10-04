@@ -6,7 +6,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](watermelon.gif "watermelon")
       """
-    And the workspace contains an image "watermelon.gif"
+    And the source code contains an image "watermelon.gif"
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY             |
@@ -18,7 +18,7 @@ Feature: checking embedded Markdown images
       """
       ![Alt text](/documentation/images/watermelon.gif "watermelon")
       """
-    And the workspace contains an image "documentation/images/watermelon.gif"
+    And the source code contains an image "documentation/images/watermelon.gif"
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME           | LINE | ACTION      | ACTIVITY                                   |

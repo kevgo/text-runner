@@ -45,62 +45,79 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function(this: TRWorld, exampleName: string) {
-  await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-    recursive: true
-  })
+  const exampleDir = path.join("documentation", "examples", exampleName)
+  await fs.cp(exampleDir, workspace.absPath.platformified(), { recursive: true })
 })
 
 Given(
   "I am in a directory that contains the {string} example with the configuration file:",
   async function(this: TRWorld, exampleName: string, configFileContent: string) {
-    await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-      recursive: true
-    })
-    await fs.writeFile(workspace.absPath.joinStr("text-runner.jsonc"), configFileContent)
+    const exampleDir = path.join("documentation", "examples", exampleName)
+    await fs.cp(exampleDir, workspace.absPath.platformified(), { recursive: true })
+    const configFilePath = workspace.absPath.joinStr("text-runner.jsonc")
+    await fs.writeFile(configFilePath, configFileContent)
   }
 )
 
 Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
   async function(this: TRWorld, exampleName: string) {
-    await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
+    const exampleDir = path.join("documentation", "examples", exampleName)
+    await fs.cp(exampleDir, workspace.absPath.platformified(), {
       recursive: true
     })
   }
 )
 
 Given("the source code contains a directory {string}", function(this: TRWorld, dirName: string) {
-  return fs.mkdir(workspace.absPath.joinStr(dirName), { recursive: true })
+  const sourceRoot = workspace.absPath
+  const fileDir = sourceRoot.joinStr(dirName)
+  return fs.mkdir(fileDir, { recursive: true })
 })
 
 Given("the source code contains a file {string}", async function(this: TRWorld, fileName: string) {
-  await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
-  await fs.writeFile(workspace.absPath.joinStr(fileName), "content")
+  const sourceRoot = workspace.absPath
+  const fileDir = sourceRoot.joinStr(path.dirname(fileName))
+  await fs.mkdir(fileDir, { recursive: true })
+  const filePath = sourceRoot.joinStr(fileName)
+  await fs.writeFile(filePath, "content")
 })
 
 Given(
   "the source code contains a file {string} with content:",
   async function(this: TRWorld, fileName: string, content: string) {
-    await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
-    await fs.writeFile(workspace.absPath.joinStr(fileName), content)
+    const sourceRoot = workspace.absPath
+    const fileDir = sourceRoot.joinStr(path.dirname(fileName))
+    await fs.mkdir(fileDir, { recursive: true })
+    const filePath = sourceRoot.joinStr(fileName)
+    await fs.writeFile(filePath, content)
   }
 )
 
 Given("the source code contains an executable {string}", async function(this: TRWorld, fileName: string) {
-  await fs.mkdir(workspace.absPath.joinStr(path.dirname(fileName)), { recursive: true })
-  await fs.writeFile(workspace.absPath.joinStr(fileName), "content", { mode: 0o744 })
+  const sourceRoot = workspace.absPath
+  const fileDir = sourceRoot.joinStr(path.dirname(fileName))
+  await fs.mkdir(fileDir, { recursive: true })
+  const filePath = sourceRoot.joinStr(fileName)
+  await fs.writeFile(filePath, "content", { mode: 0o744 })
 })
 
 Given("the workspace contains a file {string}", async function(this: TRWorld, fileName: string) {
-  await fs.mkdir(workspace.absPath.joinStr("tmp", path.dirname(fileName)), { recursive: true })
-  await fs.writeFile(workspace.absPath.joinStr("tmp", fileName), "content")
+  const workspaceRoot = workspace.absPath.joinStr("tmp")
+  const fileDir = path.join(workspaceRoot, path.dirname(fileName))
+  await fs.mkdir(fileDir, { recursive: true })
+  const filePath = path.join(workspaceRoot, fileName)
+  await fs.writeFile(filePath, "content")
 })
 
 Given(
   "the workspace contains a file {string} with content {string}",
   async function(this: TRWorld, fileName: string, content: string) {
-    await fs.mkdir(workspace.absPath.joinStr("tmp", path.dirname(fileName)), { recursive: true })
-    await fs.writeFile(workspace.absPath.joinStr("tmp", fileName), content)
+    const workspaceRoot = workspace.absPath.joinStr("tmp")
+    const fileDir = path.join(workspaceRoot, path.dirname(fileName))
+    await fs.mkdir(fileDir, { recursive: true })
+    const filePath = path.join(workspaceRoot, fileName)
+    await fs.writeFile(filePath, content)
   }
 )
 
@@ -116,19 +133,21 @@ testable documentation
 })
 
 Given("the source code contains the HelloWorld action", async function(this: TRWorld) {
-  await fs.mkdir(workspace.absPath.joinStr("text-runner"), { recursive: true })
-  await fs.writeFile(
-    workspace.absPath.joinStr("text-runner", "hello-world.js"),
-    `
-    export default (action) => action.log('Hello World!') `
-  )
+  const sourceRoot = workspace.absPath
+  const actionDir = sourceRoot.joinStr("text-runner")
+  await fs.mkdir(actionDir, { recursive: true })
+  const actionFile = path.join(actionDir, "hello-world.js")
+  await fs.writeFile(actionFile, `export default (action) => action.log('Hello World!')`)
 })
 
 Given(
   "the workspace contains a file {string} with content:",
   async function(this: TRWorld, fileName: string, content: string) {
-    await fs.mkdir(workspace.absPath.joinStr("tmp", path.dirname(fileName)), { recursive: true })
-    await fs.writeFile(workspace.absPath.joinStr("tmp", fileName), content)
+    const workspaceRoot = workspace.absPath.joinStr("tmp")
+    const fileDir = path.join(workspaceRoot, path.dirname(fileName))
+    await fs.mkdir(fileDir, { recursive: true })
+    const filePath = path.join(workspaceRoot, fileName)
+    await fs.writeFile(filePath, content)
   }
 )
 
@@ -144,9 +163,12 @@ Given("the workspace contains an empty file {string}", async function(this: TRWo
   await fs.writeFile(workspace.absPath.joinStr(fileName), "")
 })
 
-Given("the workspace contains an image {string}", async function(this: TRWorld, imageName: string) {
-  await fs.mkdir(workspace.absPath.joinStr(path.dirname(imageName)), { recursive: true })
-  await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), workspace.absPath.joinStr(imageName))
+Given("the source code contains an image {string}", async function(this: TRWorld, imageName: string) {
+  const sourceRoot = workspace.absPath
+  const imgDir = sourceRoot.joinStr(path.dirname(imageName))
+  await fs.mkdir(imgDir, { recursive: true })
+  const imgPath = sourceRoot.joinStr(imageName)
+  await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), imgPath)
 })
 
 Given("the configuration file:", async function(this: TRWorld, content: string) {

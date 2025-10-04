@@ -1,5 +1,4 @@
 import * as textRunner from "text-runner-engine"
-import * as util from "util"
 
 /** runs Text-Runner in the workspace */
 export async function runTextrunner(action: textRunner.actions.Args): Promise<void> {
@@ -12,7 +11,8 @@ export async function runTextrunner(action: textRunner.actions.Args): Promise<vo
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()
   for (const result of activityCollector.results()) {
-    action.log(util.inspect(result, false, Infinity))
+    // NOTE: print this when debugging a step implementation
+    // action.log(util.inspect(result, false, Infinity))
     if (result.error) {
       throw result.error
     }

@@ -26,13 +26,22 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
       throw e
     }
   }
-  try {
-    assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
-  } catch (err) {
-    action.log(expectedContent)
-    throw new textRunner.UserError(
-      `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
-      textRunner.errorMessage(err)
-    )
+  if (partialMatch) {
+    if (!actualContent.includes(expectedContent)) {
+      throw new textRunner.UserError(
+        `file ${color.cyan(color.bold(fileRelPath))} does not contain "${expectedContent}"`,
+        `Content of ${color.cyan(fileRelPath)}:\n\n${actualContent}`
+      )
+    }
+  } else {
+    try {
+      assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
+    } catch (err) {
+      action.log(actualContent)
+      throw new textRunner.UserError(
+        `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
+        textRunner.errorMessage(err)
+      )
+    }
   }
 }

@@ -52,9 +52,19 @@ Fuji apples are the best
 
 </a>
 
+When executing the documentation, Text-Runner will create a file with name
+<a type="workspace/existing-file-with-content">_apples.txt_ and content
+`Fuji apples are the best`</a> in the workspace.
+
+### "filename" attribute
+
+If you don't want to repeat the filename in the text too often, you can also
+provide it invisibly through the `filename` attribute. In that case, the file
+content is the entire content of the active region.
+
 <a type="extension/runnable-region">
 
-```markdown
+```html
 <pre type="workspace/new-file" filename="apples.txt">
 Fuji apples are the best
 </pre>

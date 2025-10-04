@@ -51,13 +51,13 @@ Feature: Appending content to existing workspace files
       """
     And the source code contains a file "1.md" with content:
       """
-      <a type="workspace/additional-file-content" dir=".." filename="foo/bar">
+      <a type="workspace/additional-file-content" filename="foo/bar">
       sun
       </a>
       """
     When calling:
       """
-      command = new textRunner.commands.Run({...config, workspace: "tmp/subdir"})
+      command = new textRunner.commands.Run({...config, workspace: "tmp"})
       observer = new MyObserverClass(command)
       await command.execute()
       """

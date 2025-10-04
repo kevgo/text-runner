@@ -111,7 +111,7 @@ documentation:
 ```html
 <a type="workspace/additional-file-content">
 
-Now append ` world` to file _greeting/hello.txt_.
+Now append ` sun` to file _greeting/hello.txt_.
 
 </a>.
 ```
@@ -120,7 +120,7 @@ Now append ` world` to file _greeting/hello.txt_.
 
 <a type="workspace/existing-file-with-content">
 
-Now file _greeting/hello.txt_ has content `hello world`.
+Now file _greeting/hello.txt_ has content `hello sun`.
 
 </a>
 
@@ -134,7 +134,7 @@ content to with the `dir` attribute:
 ```html
 <a type="workspace/additional-file-content" dir="greeting">
 
-Now append `!!!` to file _hello.txt_.
+Now append ` and moon` to file _hello.txt_.
 
 </a>.
 ```
@@ -143,7 +143,27 @@ Now append `!!!` to file _hello.txt_.
 
 <a type="workspace/existing-file-with-content">
 
-Now file _greeting/hello.txt_ has content `hello world!!!`.
+Now file _greeting/hello.txt_ has content `hello sun and moon`.
+
+</a>
+
+### "filename" attribute
+
+If you don't want to repeat the filename in the text too often, you can also
+provide it invisibly through the `filename` attribute. In that case, the file
+content is the entire content of the active region.
+
+<a type="extension/runnable-region">
+
+```html
+<code type="workspace/additional-file-content" filename="greeting/hello.txt">shine</code>
+```
+
+</a>
+
+<a type="workspace/existing-file-with-content">
+
+Now file _greeting/hello.txt_ has content `hello sun and moonshine`.
 
 </a>
 

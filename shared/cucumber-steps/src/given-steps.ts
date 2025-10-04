@@ -45,9 +45,8 @@ Given("I am in a directory that contains documentation without a configuration f
 })
 
 Given("I am in a directory that contains the {string} example", async function(this: TRWorld, exampleName: string) {
-  await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-    recursive: true
-  })
+    const exampleDir = path.join("documentation", "examples", exampleName)
+  await fs.cp(exampleDir, workspace.absPath.platformified(), { recursive: true })
 })
 
 Given(

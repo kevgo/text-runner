@@ -87,7 +87,7 @@ content is the entire content of the active region.
 
 ```html
 <pre type="workspace/new-file" filename="apples.txt">
-Fuji apples are the best
+Gala aren't that bad either!
 </pre>
 ```
 
@@ -95,7 +95,7 @@ Fuji apples are the best
 
 When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file-with-content">_apples.txt_ and content
-`Fuji apples are the best`</a> in the workspace.
+`Gala aren't that bad either!`</a> in the workspace.
 
 ## additional-file-content
 

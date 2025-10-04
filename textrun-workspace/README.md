@@ -106,9 +106,7 @@ The <code type="action/name-full">workspace/additional-file-content</code>
 action appends the given text to the given file.
 
 Assume the workspace contains file <a type="workspace/new-file"> _greeting.txt_
-with content `hello`</a>.
-
-Then you execute this documentation:
+with content `hello`</a>. Then you execute this documentation:
 
 <a type="extension/runnable-region">
 

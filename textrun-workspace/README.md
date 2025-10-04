@@ -63,17 +63,13 @@ content to with the `dir` attribute:
 
 <a type="extension/runnable-region">
 
-````markdown
+```markdown
 <a type="workspace/new-file" dir="subdir">
 
-Create file **apples.txt** with the content:
-
-```
-Fuji apples are the best
-```
+Create file _apples.txt_ with the content `Fuji apples are the best`.
 
 </a>
-````
+```
 
 </a>
 

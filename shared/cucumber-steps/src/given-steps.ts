@@ -133,7 +133,7 @@ testable documentation
 })
 
 Given("the source code contains the HelloWorld action", async function(this: TRWorld) {
-  const sourceRoot =workspace.absPath
+  const sourceRoot = workspace.absPath
   const actionDir = sourceRoot.joinStr("text-runner")
   await fs.mkdir(actionDir, { recursive: true })
   const actionFile = path.join(actionDir, "hello-world.js")

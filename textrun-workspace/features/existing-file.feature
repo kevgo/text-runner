@@ -26,18 +26,11 @@ Feature: verifying file content
       | test.md  |    3 | workspace/existing-file | failed  | UserError  | file not found: zonk.txt | the workspace has these files: test_file |
 
   Scenario: setting the base directory
-    Given the workspace contains a file "hello.txt" with content:
-      """
-      Hello world!
-      """
+    Given the workspace contains a file "hello.txt"
     And the workspace contains a directory "subdir"
     And the source code contains a file "test.md" with content:
       """
-      <a type="workspace/existing-file-with-content" dir="..">
-      
-      Your workspace contains a file _hello.txt_ with content `Hello world!`
-      
-      </a>.
+      <a type="workspace/existing-file" dir="..">hello.txt</a>
       """
     When calling:
       """
@@ -46,5 +39,5 @@ Feature: verifying file content
       await command.execute()
       """
     Then it runs these actions:
-      | FILENAME | LINE | ACTION                               | ACTIVITY                            |
-      | test.md  |    1 | workspace/existing-file-with-content | verify content of file ../hello.txt |
+      | FILENAME | LINE | ACTION                  | ACTIVITY                              |
+      | test.md  |    1 | workspace/existing-file | verify existence of file ../hello.txt |

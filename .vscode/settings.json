@@ -1,0 +1,7 @@
+{
+  "cucumber.glue": [
+    "shared/cucumber-steps/src/given-steps.ts",
+    "shared/cucumber-steps/src/when-steps.ts",
+    "shared/cucumber-steps/src/then-steps.ts"
+  ]
+}

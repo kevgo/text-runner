@@ -7,9 +7,14 @@ import * as textRunner from "text-runner-engine"
 export async function existingFileWithContent(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.textInNodeOfType("strong", "em")
   const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
-  action.name(`verify content of file ${color.cyan(fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
+  const partialMatch = action.region[0].attributes["partial-match"] !== undefined
   const expectedContent = action.region.textInNodeOfType("fence", "code")
+  if (partialMatch) {
+    action.name(`file ${color.cyan(fileRelPath)} contains substring ${expectedContent}`)
+  } else {
+    action.name(`verify content of file ${color.cyan(fileRelPath)}`)
+  }
   try {
     var actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
@@ -26,13 +31,20 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
       throw e
     }
   }
-  try {
-    assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
-  } catch (err) {
-    action.log(expectedContent)
-    throw new textRunner.UserError(
-      `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
-      textRunner.errorMessage(err)
-    )
+  if (partialMatch) {
+    if (!actualContent.includes(expectedContent)) {
+      action.log(actualContent)
+      throw new Error(`file ${color.cyan(color.bold(fileRelPath))} does not contain "${expectedContent}"`)
+    }
+  } else {
+    try {
+      assertNoDiff.trimmedLines(actualContent.trim(), expectedContent.trim())
+    } catch (err) {
+      action.log(actualContent)
+      throw new textRunner.UserError(
+        `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
+        textRunner.errorMessage(err)
+      )
+    }
   }
 }

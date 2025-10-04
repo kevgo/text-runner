@@ -11,6 +11,7 @@ Feature: creating empty files
       | creator.md | 1    | workspace/empty-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
       """
+
       """
 
   Scenario: no file path given
@@ -34,4 +35,5 @@ Feature: creating empty files
       | creator.md | 1    | workspace/empty-file | create file subdir/one.txt |
     And the workspace now contains a file "subdir/one.txt" with content:
       """
+
       """

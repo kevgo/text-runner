@@ -37,7 +37,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function(this: TRWorld, jsText: st
 })
 
 When(/^calling Text-Runner$/, { timeout: 20_000 }, async function(this: TRWorld) {
-  const command = new textRunner.commands.Run({ sourceDir: workspace.absPath.platformified() })
+  const command = new textRunner.commands.Run({ emptyWorkspace: false, sourceDir: workspace.absPath.platformified(), systemTmp: false  })
   const activityCollector = new textRunner.ActivityCollector(command)
   try {
     await command.execute()

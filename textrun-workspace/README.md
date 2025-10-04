@@ -111,7 +111,11 @@ with content `hello`</a>. Then you execute this documentation:
 <a type="extension/runnable-region">
 
 ```html
-<a type="workspace/additional-file-content">Now append ` world` to file _greeting.txt_.</a>.
+<a type="workspace/additional-file-content">
+
+Now append ` world` to file _greeting.txt_.
+
+</a>.
 ```
 
 </a>

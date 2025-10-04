@@ -53,17 +53,18 @@ Given("I am in a directory that contains the {string} example", async function(t
 Given(
   "I am in a directory that contains the {string} example with the configuration file:",
   async function(this: TRWorld, exampleName: string, configFileContent: string) {
-    await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
-      recursive: true
-    })
-    await fs.writeFile(workspace.absPath.joinStr("text-runner.jsonc"), configFileContent)
+    const exampleDir =path.join("documentation", "examples", exampleName)
+    await fs.cp(exampleDir, workspace.absPath.platformified(), { recursive: true })
+    const configFilePath =workspace.absPath.joinStr("text-runner.jsonc")
+    await fs.writeFile(configFilePath, configFileContent)
   }
 )
 
 Given(
   "I am in a directory that contains the {string} example( without a configuration file)",
   async function(this: TRWorld, exampleName: string) {
-    await fs.cp(path.join("documentation", "examples", exampleName), workspace.absPath.platformified(), {
+    const exampleDir =path.join("documentation", "examples", exampleName)
+    await fs.cp(exampleDir, workspace.absPath.platformified(), {
       recursive: true
     })
   }

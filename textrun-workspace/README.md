@@ -105,15 +105,16 @@ When executing the documentation, Text-Runner will create a file with name
 The <code type="action/name-full">workspace/additional-file-content</code>
 action appends the given text to the given file.
 
-Assume the workspace contains file <a type="workspace/new-file"> _greeting.txt_
-with content `hello`</a>. Then you execute this documentation:
+Assume the workspace contains file <a type="workspace/new-file">
+_greeting/hello.txt_ with content `hello`</a>. Then you execute this
+documentation:
 
 <a type="extension/runnable-region">
 
 ```html
 <a type="workspace/additional-file-content">
 
-Now append ` world` to file _greeting.txt_.
+Now append ` world` to file _greeting/hello.txt_.
 
 </a>.
 ```
@@ -122,7 +123,30 @@ Now append ` world` to file _greeting.txt_.
 
 <a type="workspace/existing-file-with-content">
 
-Now file _greeting.txt_ has content `hello world`.
+Now file _greeting/hello.txt_ has content `hello world`.
+
+</a>
+
+### "dir" attribute
+
+You can override in which directory Text-Runner looks for the file to append
+content to with the `dir` attribute:
+
+<a type="extension/runnable-region">
+
+```html
+<a type="workspace/additional-file-content" dir="greeting">
+
+Now append `!` to file _hello.txt_.
+
+</a>.
+```
+
+</a>
+
+<a type="workspace/existing-file-with-content">
+
+Now file _greeting/hello.txt_ has content `hello world!`.
 
 </a>
 

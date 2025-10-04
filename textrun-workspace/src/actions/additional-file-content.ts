@@ -4,11 +4,13 @@ import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function additionalFileContent(action: textRunner.actions.Args): Promise<void> {
-  const fileName = action.region.textInNodeOfType("em", "strong")
-  const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
+  const fileNameAttribute = action.region[0].attributes["filename"]
+  const fileName = fileNameAttribute || action.region.textInNodeOfType("em", "strong")
+  const dirAttribute = action.region[0].attributes["dir"]
+  const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
   action.name(`append to file ${color.cyan(fileRelPath)}`)
-  const content = action.region.textInNodeOfType("fence", "code")
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
+  const content = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")
   action.log(content)
   await fs.appendFile(fullPath, content)
 }

@@ -3,6 +3,7 @@ import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
 import * as formatter from "./index.js"
+import { printUserError } from "./print-user-error.js"
 
 /** A minimalistic formatter, prints dots for each check */
 export class DotFormatter implements formatter.Formatter {
@@ -16,13 +17,16 @@ export class DotFormatter implements formatter.Formatter {
   }
 
   onFailed(args: textRunner.events.Failed): void {
-    console.log("111111111111111111111111111111111111111111")
     console.log()
-    console.log(color.dim(args.output))
-    process.stdout.write(color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `))
-    console.log(args.error.message)
-    helpers.printCodeFrame(console.log, args.activity.location)
-    console.log("22222222222222222222222222222222222222222222222222222")
+    if (textRunner.isUserError(args.error)) {
+      printUserError(args.error)
+    } else {
+      process.stdout.write(
+        color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
+      )
+      console.log(args.error.message)
+      helpers.printCodeFrame(console.log, args.activity.location)
+    }
   }
 
   onResult(result: textRunner.events.Result): void {

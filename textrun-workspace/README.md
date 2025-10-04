@@ -283,6 +283,38 @@ _subdir/apples.txt_ with the content `Boskoop`</a>, we can verify it like this:
 
 </a>
 
+### "partial-match" attribute
+
+By default, this action matches the entire file content. If you want to verify
+only a part of the file content, like a single line, provide the `partial-match`
+attribute.
+
+<a type="workspace/new-file">
+
+Consider the workspace contains file _findings.txt_ with content:
+
+```
+line 1
+
+# caption
+
+line 2
+```
+
+</a>
+
+We can verify the caption like this:
+
+<a type="extension/runnable-region">
+
+```markdown
+<a type="workspace/existing-file-with-content" partial-match> The file
+<em>findings.txt</em> now contains the caption <code># caption</code>.
+</a>
+```
+
+</a>
+
 ## new-directory
 
 The <b type="action/name-full">workspace/new-directory</b> action creates a

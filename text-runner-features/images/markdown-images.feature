@@ -10,7 +10,7 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY             |
-      |     1.md |    1 | check-image | image watermelon.gif |
+      | 1.md     | 1    | check-image | image watermelon.gif |
 
   @smoke
   Scenario: existing local Markdown image with absolute path
@@ -22,7 +22,7 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME           | LINE | ACTION      | ACTIVITY                                   |
-      | documentation/1.md |    1 | check-image | image /documentation/images/watermelon.gif |
+      | documentation/1.md | 1    | check-image | image /documentation/images/watermelon.gif |
 
   @smoke
   Scenario: non-existing local Markdown image
@@ -33,7 +33,7 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY       | STATUS | ERROR TYPE | ERROR MESSAGE                 |
-      |     1.md |    1 | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
+      | 1.md     | 1    | check-image | image zonk.gif | failed | UserError  | image zonk.gif does not exist |
 
   @online
   Scenario: existing remote Markdown image
@@ -44,7 +44,7 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                                                                |
-      |     1.md |    1 | check-image | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
+      | 1.md     | 1    | check-image | image http://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png |
 
   @online
   Scenario: non-existing remote Markdown image
@@ -55,7 +55,7 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY                                  | STATUS | ERROR TYPE | ERROR MESSAGE                                            |
-      |     1.md |    1 | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
+      | 1.md     | 1    | check-image | image http://google.com/onetuhoenzonk.png | failed | UserError  | image http://google.com/onetuhoenzonk.png does not exist |
 
   @smoke
   Scenario: Markdown image tag without source
@@ -66,4 +66,4 @@ Feature: checking embedded Markdown images
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      | ACTIVITY    | STATUS | ERROR TYPE | ERROR MESSAGE            |
-      |     1.md |    1 | check-image | Check image | failed | UserError  | image tag without source |
+      | 1.md     | 1    | check-image | Check image | failed | UserError  | image tag without source |

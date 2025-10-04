@@ -143,7 +143,7 @@ Given(
   "the workspace contains a file {string} with content:",
   async function(this: TRWorld, fileName: string, content: string) {
     const workspaceRoot = workspace.absPath.joinStr("tmp")
-    const fileDir = path.join(workspaceRoot,path.dirname(fileName))
+    const fileDir = path.join(workspaceRoot, path.dirname(fileName))
     await fs.mkdir(fileDir, { recursive: true })
     const filePath = path.join(workspaceRoot, fileName)
     await fs.writeFile(filePath, content)
@@ -163,8 +163,8 @@ Given("the workspace contains an empty file {string}", async function(this: TRWo
 })
 
 Given("the source code contains an image {string}", async function(this: TRWorld, imageName: string) {
-    const sourceRoot = workspace.absPath
-    const imgDir = sourceRoot.joinStr(path.dirname(imageName))
+  const sourceRoot = workspace.absPath
+  const imgDir = sourceRoot.joinStr(path.dirname(imageName))
   await fs.mkdir(imgDir, { recursive: true })
   const imgPath = sourceRoot.joinStr(imageName)
   await fs.copyFile(path.join(__dirname, "..", path.basename(imageName)), imgPath)

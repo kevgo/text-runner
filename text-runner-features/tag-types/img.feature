@@ -12,5 +12,5 @@ Feature: active img tags
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION      |
-      |     1.md |    1 | hello-world |
-      |     1.md |    1 | check-image |
+      | 1.md     | 1    | hello-world |
+      | 1.md     | 1    | check-image |

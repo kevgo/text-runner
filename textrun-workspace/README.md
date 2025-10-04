@@ -16,47 +16,13 @@ npm i -D textrun-workspace
 
 </a>
 
-## new-directory
-
-The <b type="action/name-full">workspace/new-directory</b> action creates a
-directory with the given name in the workspace. Here is a usage example:
-
-<a type="extension/runnable-region">
-
-```html
-Create a directory named <b type="workspace/new-directory">utils</b>.
-```
-
-</a>
-
-When executing this Markdown snippet, Text-Runner will create a
-<i type="workspace/existing-directory">utils</i> directory in the workspace,
-just as the user would.
-
-### "dir" attribute
-
-You can override in which directory the new directory gets created by providing
-a `dir` attribute:
-
-<a type="extension/runnable-region">
-
-```html
-Create a directory named <code type="workspace/new-directory" dir="subdir">utils</code>.
-```
-
-</a>
-
-When executing this Markdown snippet, Text-Runner will create a
-<i type="workspace/existing-directory">subdir/utils</i> directory in the
-workspace.
-
 ## new-file
 
 The <b type="action/name-full">workspace/new-file</b> action creates a file in
 the workspace. This action assumes that the documentation writes the filename in
 _emphasized_ or **bold** text, or inside a `filename` attribute, and the file
 content is a code block with one or three backticks. Here are a few examples
-that all do the same thing. See if you can figure out what that is.
+that all do the same thing. See if you can figure out what it does.
 
 <a type="extension/runnable-region">
 
@@ -285,6 +251,40 @@ _subdir/apples.txt_ with the content `Boskoop`</a>, we can verify it like this:
 ```
 
 </a>
+
+## new-directory
+
+The <b type="action/name-full">workspace/new-directory</b> action creates a
+directory with the given name in the workspace. Here is a usage example:
+
+<a type="extension/runnable-region">
+
+```html
+Create a directory named <b type="workspace/new-directory">utils</b>.
+```
+
+</a>
+
+When executing this Markdown snippet, Text-Runner will create a
+<i type="workspace/existing-directory">utils</i> directory in the workspace,
+just as the user would.
+
+### "dir" attribute
+
+You can override in which directory the new directory gets created by providing
+a `dir` attribute:
+
+<a type="extension/runnable-region">
+
+```html
+Create a directory named <code type="workspace/new-directory" dir="subdir">utils</code>.
+```
+
+</a>
+
+When executing this Markdown snippet, Text-Runner will create a
+<i type="workspace/existing-directory">subdir/utils</i> directory in the
+workspace.
 
 ## working-dir
 

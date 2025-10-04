@@ -279,7 +279,9 @@ with content `hello world`</a>, we can verify it via this action:
 
 ```markdown
 <a type="workspace/existing-file-with-content">
-  The file <em>hello.txt</em> now contains <code>hello world</code>.
+
+The file _hello.txt_ now contains `hello world`.
+
 </a>
 ```
 
@@ -298,6 +300,22 @@ _subdir/apples.txt_ with the content `Boskoop`</a>, we can verify it like this:
 ```markdown
 <a type="workspace/existing-file-with-content" dir="subdir">
   The file <em>apples.txt</em> now contains <code>Boskoop</code>.
+</a>
+```
+
+</a>
+
+### "filename" attribute
+
+If you don't want to repeat the filename in the text too often, you can also
+provide it invisibly through the `filename` attribute. In that case, the file
+content is the entire content of the active region.
+
+<a type="extension/runnable-region">
+
+```markdown
+<a type="workspace/existing-file-with-content" filename="hello.txt">
+hello world
 </a>
 ```
 
@@ -335,8 +353,6 @@ The file _findings.txt_ now contains `# Additional findings`.
 ```
 
 </a>
-
-TODO: Document how to combine this with the "filename" attribute.
 
 ## new-directory
 

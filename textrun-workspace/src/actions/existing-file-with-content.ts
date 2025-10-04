@@ -5,11 +5,13 @@ import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function existingFileWithContent(action: textRunner.actions.Args): Promise<void> {
-  const fileName = action.region.textInNodeOfType("strong", "em")
-  const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
+  const fileNameAttribute = action.region[0].attributes["filename"]
+  const fileName = fileNameAttribute || action.region.textInNodeOfType("em", "strong")
+  const dirAttribute = action.region[0].attributes["dir"]
+  const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const partialMatch = action.region[0].attributes["partial-match"] !== undefined
-  const expectedContent = action.region.textInNodeOfType("fence", "code")
+  const expectedContent = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")
   if (partialMatch) {
     action.name(`file ${color.cyan(fileRelPath)} contains substring ${expectedContent}`)
   } else {

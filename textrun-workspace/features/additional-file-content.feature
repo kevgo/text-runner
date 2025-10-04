@@ -51,9 +51,7 @@ Feature: Appending content to existing workspace files
       """
     And the source code contains a file "1.md" with content:
       """
-      <a type="workspace/additional-file-content" filename="file.txt">
-      shine
-      </a>
+      <a type="workspace/additional-file-content" filename="file.txt">shine</a>
       """
     When calling Text-Runner
     Then it runs these actions:

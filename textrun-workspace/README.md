@@ -102,8 +102,8 @@ When executing the documentation, Text-Runner will create a file with name
 
 ## additional-file-content
 
-The <b type="action/name-full">workspace/additional-file-content</b> action
-appends the given text to the given file.
+The <code type="action/name-full">workspace/additional-file-content</code>
+action appends the given text to the given file.
 
 Assume the workspace contains file <a type="workspace/new-file"> _greeting.txt_
 with content `hello`</a>.

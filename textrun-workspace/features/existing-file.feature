@@ -12,8 +12,8 @@ Feature: verifying file content
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                  | ACTIVITY                           |
-      | test.md  |    1 | workspace/empty-file    | create file hello.txt              |
-      | test.md  |    2 | workspace/existing-file | verify existence of file hello.txt |
+      | test.md  |    2 | workspace/empty-file    | create file hello.txt              |
+      | test.md  |    5 | workspace/existing-file | verify existence of file hello.txt |
 
   Scenario: non-existing file
     Given the source code contains a file "test.md" with content:
@@ -28,8 +28,8 @@ Feature: verifying file content
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                  | STATUS  | ERROR TYPE | ERROR MESSAGE            | GUIDANCE                                 |
-      | test.md  |    1 | workspace/empty-file    | success |            |                          |                                          |
-      | test.md  |    3 | workspace/existing-file | failed  | UserError  | file not found: zonk.txt | the workspace has these files: test_file |
+      | test.md  |    2 | workspace/empty-file    | success |            |                          |                                          |
+      | test.md  |    5 | workspace/existing-file | failed  | UserError  | file not found: zonk.txt | the workspace has these files: test_file |
 
   Scenario: setting the base directory
     Given the workspace contains a file "hello.txt"

@@ -59,12 +59,16 @@ Feature: Appending content to existing workspace files
       """
     And the source code contains a file "directory_changer.md" with content:
       """
-      Now append to file <a type="workspace/additional-file-content" filename="file.txt">shine</a>.
+      Now append to file
+      
+      <a type="workspace/additional-file-content" filename="file.txt">
+        shine
+      </a>.
       """
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY                |
-      | directory_changer.md |    1 | workspace/additional-file-content | append to file file.txt |
+      | directory_changer.md |    3 | workspace/additional-file-content | append to file file.txt |
     And the workspace now contains a file "file.txt" with content:
       """
       hello sunshine

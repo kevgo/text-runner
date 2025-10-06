@@ -3,6 +3,7 @@
 ## 7.2.0
 
 - rename `workspace/additional-file-content` to `workspace/append-file`
+- you can now run `env DEBUG=* text-runner` to see additional debug messages
 - all
   [workspace](https://github.com/kevgo/text-runner/tree/main/textrun-workspace)
   actions now consistently allow `dir` and `filename` attributes

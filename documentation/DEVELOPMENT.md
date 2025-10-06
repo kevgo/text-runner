@@ -69,10 +69,14 @@ versions.
   - update CHANGELOG.md
   - `yarn run json-schema && make fix` in the root folder
   - bump the versions by running one of:
-    - `lerna version <patch|minor> --no-private` to bump only Text-Runner and not the stdlib modules
-    - `lerna version <patch|minor>` to bump both Text-Runner and the stdlib modules
-    - make sure to use `--no-private` if bumping the major version otherwise the stdlib gets stabilized
-  - make a global search-and-replace for `7.1.2` and `0.3.1` replace with the new versions
+    - `lerna version <patch|minor> --no-private` to bump only Text-Runner and
+      not the stdlib modules
+    - `lerna version <patch|minor>` to bump both Text-Runner and the stdlib
+      modules
+    - make sure to use `--no-private` if bumping the major version otherwise the
+      stdlib gets stabilized
+  - make a global search-and-replace for `7.1.2` and `0.3.1` replace with the
+    new versions
   - ship this branch
 - `git town sync --all && git tag 7.1.2 && git push --tags`
 - run <code type="make/command" dir="..">make publish</code>

@@ -83,7 +83,7 @@ Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable
     result.errorMessage = line["ERROR MESSAGE"] || ""
     if (line.GUIDANCE != null || line["ERROR TYPE"] === "UserError") {
       const guidance: string = line["GUIDANCE"] || ""
-      let replaced =guidance.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
+      const replaced = guidance.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
       result.guidance = replaced
     }
     want.push(result)
@@ -142,7 +142,7 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
   const want: ExecuteResultLine[] = []
   const result: ExecuteResultLine = {}
   for (const [name, value] of table.raw()) {
-    if (name === "FILENAME" ) {
+    if (name === "FILENAME") {
       result.filename = value
     }
     if (name === "LINE") {
@@ -174,7 +174,7 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
     }
   }
   want.push(result)
-  let have: ExecuteResultLine[] = []
+  const have: ExecuteResultLine[] = []
   const wanted = want[0]
   for (const activityResult of this.apiResults) {
     const result: ExecuteResultLine = {}

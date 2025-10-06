@@ -138,81 +138,78 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
     console.log(this.apiException)
     assert.fail("unexpected exception during API call")
   }
-  const result: ExecuteResultLine = {}
+  const want: ExecuteResultLine = {}
   for (const [name, value] of table.raw()) {
     if (name === "FILENAME") {
-      result.filename = value
+      want.filename = value
     }
     if (name === "LINE") {
-      result.line = parseInt(value, 10)
+      want.line = parseInt(value, 10)
     }
     if (name === "ACTION") {
-      result.action = value
+      want.action = value
     }
     if (name === "OUTPUT") {
-      result.output = value
+      want.output = value
     }
     if (name === "ACTIVITY") {
-      result.activity = value
+      want.activity = value
     }
     if (name === "STATUS") {
-      result.status = (value as ResultStatus) ?? "success"
+      want.status = (value as ResultStatus) ?? "success"
     }
     if (name === "MESSAGE") {
-      result.message = value
+      want.message = value
     }
     if (name === "ERROR TYPE") {
-      result.errorType = value
+      want.errorType = value
     }
     if (name === "ERROR MESSAGE") {
-      result.errorMessage = value
+      want.errorMessage = value
     }
     if (name === "GUIDANCE") {
-      result.guidance = value.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
+      want.guidance = value.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
     }
   }
-  const want: ExecuteResultLine[] = [result]
-  const wanted = want[0]
+  const have: ExecuteResultLine = {}
   for (const activityResult of this.apiResults) {
-    const result: ExecuteResultLine = {}
-    if (wanted.filename != null) {
-      result.filename = activityResult.activity?.location.file.unixified()
+    if (want.filename != null) {
+      have.filename = activityResult.activity?.location.file.unixified()
     }
-    if (wanted.line != null) {
-      result.line = activityResult.activity?.location.line
+    if (want.line != null) {
+      have.line = activityResult.activity?.location.line
     }
-    if (wanted.action != null) {
-      result.action = activityResult.activity?.actionName
+    if (want.action != null) {
+      have.action = activityResult.activity?.actionName
     }
-    if (wanted.output != null) {
-      result.output = activityResult.output?.trim() || ""
+    if (want.output != null) {
+      have.output = activityResult.output?.trim() || ""
     }
-    if (wanted.activity != null) {
-      result.activity = stripAnsi(activityResult.finalName || "")
+    if (want.activity != null) {
+      have.activity = stripAnsi(activityResult.finalName || "")
       if (process.platform === "win32") {
-        result.activity = result.activity?.replace(/\\/g, "/")
+        have.activity = have.activity?.replace(/\\/g, "/")
       }
     }
-    if (wanted.message != null) {
-      result.message = activityResult.message
+    if (want.message != null) {
+      have.message = activityResult.message
     }
     if (activityResult.message != null) {
-      result.message = activityResult.message
+      have.message = activityResult.message
     }
-    if (wanted.status != null) {
-      result.status = activityResult.status
+    if (want.status != null) {
+      have.status = activityResult.status
     }
-    if (wanted.errorType != null) {
-      result.errorType = activityResult.error?.name || ""
+    if (want.errorType != null) {
+      have.errorType = activityResult.error?.name || ""
     }
-    if (wanted.errorMessage != null) {
-      result.errorMessage = stripAnsi(activityResult.error?.message || "")
+    if (want.errorMessage != null) {
+      have.errorMessage = stripAnsi(activityResult.error?.message || "")
     }
-    if (wanted.guidance != null) {
-      result.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim() || "")
+    if (want.guidance != null) {
+      have.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim() || "")
     }
   }
-  const have: ExecuteResultLine[] = [result]
   assert.deepEqual(have, want)
 })
 

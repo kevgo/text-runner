@@ -5,7 +5,7 @@ Feature: verify that the workspace contains a directory
       """
       Create directory
       <b type="workspace/new-directory">foo</b>.
-      
+
       Your computer should now contain a
       <code type="workspace/existing-directory">foo</code>
       directory.
@@ -14,8 +14,8 @@ Feature: verify that the workspace contains a directory
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                       | ACTIVITY                              |
-      |     1.md |    2 | workspace/new-directory      | create directory foo                  |
-      |     1.md |    5 | workspace/existing-directory | directory foo exists in the workspace |
+      | 1.md     | 2    | workspace/new-directory      | create directory foo                  |
+      | 1.md     | 5    | workspace/existing-directory | directory foo exists in the workspace |
 
   Scenario: the workspace does not contain the directory
     Given the source code contains a file "1.md" with content:
@@ -27,13 +27,13 @@ Feature: verify that the workspace contains a directory
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                       | STATUS | ERROR TYPE | ERROR MESSAGE                                 |
-      |     1.md |    2 | workspace/existing-directory | failed | UserError  | directory foo does not exist in the workspace |
+      | 1.md     | 2    | workspace/existing-directory | failed | UserError  | directory foo does not exist in the workspace |
 
   Scenario: the given directory name points to a file
     Given the source code contains a file "1.md" with content:
       """
       Create file <b type="workspace/new-file">**foo** with content `bar`</b>.
-      
+
       Your computer should now contain a
       <code type="workspace/existing-directory">foo</code>
       directory.
@@ -41,8 +41,8 @@ Feature: verify that the workspace contains a directory
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                       | STATUS  | ERROR TYPE | ERROR MESSAGE                     | GUIDANCE |
-      |     1.md |    1 | workspace/new-file           | success |            |                                   |          |
-      |     1.md |    4 | workspace/existing-directory | failed  | UserError  | foo exists but is not a directory |          |
+      | 1.md     | 1    | workspace/new-file           | success |            |                                   |          |
+      | 1.md     | 4    | workspace/existing-directory | failed  | UserError  | foo exists but is not a directory |          |
 
   Scenario: setting the base directory
     Given the workspace contains a directory "subdir1"
@@ -60,4 +60,4 @@ Feature: verify that the workspace contains a directory
       """
     Then it runs these actions:
       | FILENAME | LINE | ACTION                       | ACTIVITY                                     |
-      |     1.md |    2 | workspace/existing-directory | directory ../subdir2 exists in the workspace |
+      | 1.md     | 2    | workspace/existing-directory | directory ../subdir2 exists in the workspace |

@@ -138,7 +138,6 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
     console.log(this.apiException)
     assert.fail("unexpected exception during API call")
   }
-  const want: ExecuteResultLine[] = []
   const result: ExecuteResultLine = {}
   for (const [name, value] of table.raw()) {
     if (name === "FILENAME") {
@@ -172,8 +171,7 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
       result.guidance = value.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
     }
   }
-  want.push(result)
-  const have: ExecuteResultLine[] = []
+  const want: ExecuteResultLine[] = [result]
   const wanted = want[0]
   for (const activityResult of this.apiResults) {
     const result: ExecuteResultLine = {}
@@ -213,8 +211,8 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
     if (wanted.guidance != null) {
       result.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim() || "")
     }
-    have.push(result)
   }
+  const have: ExecuteResultLine[] = [result]
   assert.deepEqual(have, want)
 })
 

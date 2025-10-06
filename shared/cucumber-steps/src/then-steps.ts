@@ -83,8 +83,7 @@ Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable
     result.errorMessage = line["ERROR MESSAGE"] || ""
     if (line.GUIDANCE != null || line["ERROR TYPE"] === "UserError") {
       const guidance: string = line["GUIDANCE"] || ""
-      const replaced = guidance.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
-      result.guidance = replaced
+      result.guidance = guidance.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
     }
     want.push(result)
   }

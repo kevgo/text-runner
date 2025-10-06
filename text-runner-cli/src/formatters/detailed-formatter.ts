@@ -1,4 +1,4 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
@@ -18,13 +18,13 @@ export class DetailedFormatter implements formatter.Formatter {
 
   onFailed(args: textRunner.events.Failed): void {
     if (args.output !== "") {
-      process.stdout.write(color.dim(args.output))
+      process.stdout.write(styleText("dim", args.output))
     }
     if (textRunner.isUserError(args.error)) {
       printUserError(args.error)
     } else {
       process.stdout.write(
-        color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
+        styleText("red",`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
       )
       console.log(args.error.message)
       helpers.printCodeFrame(console.log, args.activity.location)
@@ -45,10 +45,10 @@ export class DetailedFormatter implements formatter.Formatter {
 
   onSkipped(args: textRunner.events.Skipped): void {
     if (args.output !== "") {
-      process.stdout.write(color.dim(args.output))
+      process.stdout.write(styleText("dim", args.output))
     }
     console.log(
-      color.cyan(
+      styleText("cyan",
         `${args.activity.location.file.platformified()}:${args.activity.location.line} -- skipping: ${args.finalName}`
       )
     )
@@ -56,14 +56,14 @@ export class DetailedFormatter implements formatter.Formatter {
 
   onSuccess(args: textRunner.events.Success): void {
     if (args.output !== "") {
-      process.stdout.write(color.dim(args.output))
+      process.stdout.write(styleText("dim",args.output))
     }
     console.log(
-      color.green(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
+      styleText("green",`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
     )
   }
 
   onWarning(args: textRunner.events.Warning): void {
-    console.log(color.magenta(args.message))
+    console.log(styleText("magenta", args.message))
   }
 }

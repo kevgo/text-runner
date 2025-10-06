@@ -30,7 +30,7 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
     await fs.access(fullPath, fs.constants.F_OK)
   } catch (e) {
     if (e instanceof Error) {
-      throw new textRunner.UserError(`file ${fileRelPath} doesn't exist`, e.message)
+      throw new textRunner.UserError(`file "${fileRelPath}" doesn't exist`, e.message)
     }
   }
   const content = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")

@@ -65,7 +65,7 @@ Feature: Appending content to existing workspace files
         | ACTIVITY      | append to file zonk.txt                                                  |
         | STATUS        | failed                                                                   |
         | ERROR TYPE    | UserError                                                                |
-        | ERROR MESSAGE | file zonk.txt doesn't exist                                              |
+        | ERROR MESSAGE | file "zonk.txt" doesn't exist                                            |
         | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
 
   Rule: the "dir" attribute sets the base directory
@@ -135,7 +135,7 @@ Feature: Appending content to existing workspace files
 
   Rule: the "filename" attribute sets the filename
 
-    Scenario: provide filename via tag
+    Scenario: existing filename
       Given the workspace contains a file "file.txt" with content:
         """
         hello sun
@@ -153,6 +153,22 @@ Feature: Appending content to existing workspace files
         """
         hello sunshine
         """
+
+    Scenario: non-existing filename
+      Given the source code contains a file "empty_filename_attribute.md" with content:
+        """
+        <a type="workspace/additional-file-content" filename="zonk.txt"></a>.
+        """
+      When calling Text-Runner
+      Then it runs this action:
+        | FILENAME      | empty_filename_attribute.md                                              |
+        | LINE          |                                                                        1 |
+        | ACTION        | workspace/additional-file-content                                        |
+        | ACTIVITY      | append to file zonk.txt                                                  |
+        | STATUS        | failed                                                                   |
+        | ERROR TYPE    | UserError                                                                |
+        | ERROR MESSAGE | file "zonk.txt" doesn't exist                                            |
+        | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
 
     Scenario: empty "filename" attribute
       Given the source code contains a file "empty_filename_attribute.md" with content:

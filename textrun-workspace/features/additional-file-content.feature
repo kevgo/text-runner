@@ -2,32 +2,36 @@ Feature: Appending content to existing workspace files
 
   Rule: the filename is taken from the _, **, <em>, <i>, <strong>, or <b> section, the content from `, ```, <code>, or <pre>
 
+    Background:
+      Given the workspace contains a file "file" with content:
+        """
+        hello sun
+        """
+
     Scenario Outline:
-      Given the workspace contains a file "foo/bar" with content:
-        """
-        hello
-        """
       Given the source code contains a file "directory_changer.md" with content:
         """
-        <a type="workspace/additional-file-content"><FILENAME>foo/bar<FILENAME> the content <CONTENT> appended content<CONTENT>.</a>.
+        <a type="workspace/additional-file-content">
+
+        <FILENAME> with content <CONTENT>
+
+        </a>.
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-        | directory_changer.md | 1    | workspace/additional-file-content | append to file foo/bar |
-      And the workspace now contains a file "foo/bar" with content:
+        | FILENAME             | LINE | ACTION                            | ACTIVITY            |
+        | directory_changer.md | 1    | workspace/additional-file-content | append to file file |
+      And the workspace now contains a file "file" with content:
         """
-        hello appended content
+        <RESULT>
         """
 
       Examples:
-        | FILENAME OPEN | FILENAME CLOSE | CONTENT OPEN | CONTENT CLOSE |
-        | _             | _              | `            | `             |
-        | **            | **             | ```          | ```           |
-        | <em>          | </em>          | <code>       | </code>       |
-        | <i>           | </i>           | <code>       | </code>       |
-        | <strong>      | </strong>      | <pre>        | </pre>        |
-        | <b>           | </b>           | <pre>        | </pre>        |
+        | FILENAME              | CONTENT             | RESULT          |
+        | _file_                | ` shine`            | hello sun shine |
+        | **file**              | ``` shine```        | hello sun shine |
+        | <em>file</em>         | <code> shine</code> | hello sunshine  |
+        | <strong>file</strong> | <pre> shine</pre>   | hello sunshine  |
 
   Rule: the file must exist
 

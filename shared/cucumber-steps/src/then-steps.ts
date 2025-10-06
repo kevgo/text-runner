@@ -361,6 +361,14 @@ Then(
   }
 )
 
+Then(
+  "the workspace now contains an empty file {string}",
+  async function(this: TRWorld, fileName: string) {
+    const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
+    assert.equal(actualContent.trim(), "")
+  }
+)
+
 Then("the test workspace now contains a directory {string}", async function(this: TRWorld, name: string) {
   const stat = await fs.stat(workspace.absPath.joinStr("tmp", name))
   assert.isTrue(stat.isDirectory())

@@ -83,7 +83,7 @@ Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable
     result.errorMessage = line["ERROR MESSAGE"] || ""
     if (line.GUIDANCE != null || line["ERROR TYPE"] === "UserError") {
       const guidance: string = line["GUIDANCE"] || ""
-      result.guidance = guidance.trim()
+      result.guidance = guidance.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
     }
     want.push(result)
   }
@@ -130,6 +130,86 @@ Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable
     have.push(result)
   }
   have = have.sort(helpers.compareExecuteResultLine)
+  assert.deepEqual(have, want)
+})
+
+Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) {
+  if (this.apiException) {
+    console.log(this.apiException)
+    assert.fail("unexpected exception during API call")
+  }
+  const want: ExecuteResultLine = {}
+  for (const [name, value] of table.raw()) {
+    if (name === "FILENAME") {
+      want.filename = value
+    }
+    if (name === "LINE") {
+      want.line = parseInt(value, 10)
+    }
+    if (name === "ACTION") {
+      want.action = value
+    }
+    if (name === "OUTPUT") {
+      want.output = value
+    }
+    if (name === "ACTIVITY") {
+      want.activity = value
+    }
+    if (name === "STATUS") {
+      want.status = (value as ResultStatus) ?? "success"
+    }
+    if (name === "MESSAGE") {
+      want.message = value
+    }
+    if (name === "ERROR TYPE") {
+      want.errorType = value
+    }
+    if (name === "ERROR MESSAGE") {
+      want.errorMessage = value
+    }
+    if (name === "GUIDANCE") {
+      want.guidance = value.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
+    }
+  }
+  const have: ExecuteResultLine = {}
+  for (const activityResult of this.apiResults) {
+    if (want.filename != null) {
+      have.filename = activityResult.activity?.location.file.unixified()
+    }
+    if (want.line != null) {
+      have.line = activityResult.activity?.location.line
+    }
+    if (want.action != null) {
+      have.action = activityResult.activity?.actionName
+    }
+    if (want.output != null) {
+      have.output = activityResult.output?.trim() || ""
+    }
+    if (want.activity != null) {
+      have.activity = stripAnsi(activityResult.finalName || "")
+      if (process.platform === "win32") {
+        have.activity = have.activity?.replace(/\\/g, "/")
+      }
+    }
+    if (want.message != null) {
+      have.message = activityResult.message
+    }
+    if (activityResult.message != null) {
+      have.message = activityResult.message
+    }
+    if (want.status != null) {
+      have.status = activityResult.status
+    }
+    if (want.errorType != null) {
+      have.errorType = activityResult.error?.name || ""
+    }
+    if (want.errorMessage != null) {
+      have.errorMessage = stripAnsi(activityResult.error?.message || "")
+    }
+    if (want.guidance != null) {
+      have.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim() || "")
+    }
+  }
   assert.deepEqual(have, want)
 })
 
@@ -358,6 +438,14 @@ Then(
   async function(this: TRWorld, fileName: string, expectedContent: string) {
     const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
     assert.equal(actualContent.trim(), expectedContent.trim())
+  }
+)
+
+Then(
+  "the workspace now contains an empty file {string}",
+  async function(this: TRWorld, fileName: string) {
+    const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
+    assert.equal(actualContent.trim(), "")
   }
 )
 

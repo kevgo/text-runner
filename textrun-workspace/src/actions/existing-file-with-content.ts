@@ -36,7 +36,7 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
   if (partialMatch) {
     if (!actualContent.includes(expectedContent)) {
       throw new textRunner.UserError(
-        `file ${styleText("cyan", styleText("bold", fileRelPath))} does not contain "${expectedContent}"`,
+        `file ${styleText(["cyan", "bold"], fileRelPath)} does not contain "${expectedContent}"`,
         actualContent
       )
     }

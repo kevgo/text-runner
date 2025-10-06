@@ -8,11 +8,7 @@ Feature: Appending content to existing workspace files
     Given the source code contains a file "directory_changer.md" with content:
       """
       Now append to file
-      <a type="workspace/additional-file-content">
-      
-        **foo/bar** the content ` appended content`.
-      
-      </a>.
+      <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
       """
     When calling Text-Runner
     Then it runs these actions:
@@ -60,9 +56,7 @@ Feature: Appending content to existing workspace files
       """
       Now append to file
       
-      <a type="workspace/additional-file-content" filename="file.txt">
-        shine
-      </a>.
+      <a type="workspace/additional-file-content" filename="file.txt">shine</a>.
       """
     When calling Text-Runner
     Then it runs these actions:

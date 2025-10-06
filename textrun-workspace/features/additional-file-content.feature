@@ -58,9 +58,15 @@ Feature: Appending content to existing workspace files
         <a type="workspace/additional-file-content">**zonk.txt** the content `content`</a>.
         """
       When calling Text-Runner
-      Then it runs these actions:
-        | FILENAME             | LINE | ACTION                            | ACTIVITY                | STATUS | ERROR TYPE | ERROR MESSAGE               | GUIDANCE                                                                 |
-        | directory_changer.md |    1 | workspace/additional-file-content | append to file zonk.txt | failed | UserError  | file zonk.txt doesn't exist | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
+      Then it runs this action:
+        | FILENAME      | directory_changer.md                                                     |
+        | LINE          |                                                                        1 |
+        | ACTION        | workspace/additional-file-content                                        |
+        | ACTIVITY      | append to file zonk.txt                                                  |
+        | STATUS        | failed                                                                   |
+        | ERROR TYPE    | UserError                                                                |
+        | ERROR MESSAGE | file zonk.txt doesn't exist                                              |
+        | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
 
   Rule: the "dir" attribute sets the base directory
 

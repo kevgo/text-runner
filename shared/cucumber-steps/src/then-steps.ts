@@ -134,6 +134,91 @@ Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable
   assert.deepEqual(have, want)
 })
 
+Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) {
+  if (this.apiException) {
+    console.log(this.apiException)
+    assert.fail("unexpected exception during API call")
+  }
+  const want: ExecuteResultLine[] = []
+  const result: ExecuteResultLine = {}
+  for (const [name, value] of table.raw()) {
+    if (name === "FILENAME" ) {
+      result.filename = value
+    }
+    if (name === "LINE") {
+      result.line = parseInt(value, 10)
+    }
+    if (name === "ACTION") {
+      result.action = value
+    }
+    if (name === "OUTPUT") {
+      result.output = value
+    }
+    if (name === "ACTIVITY") {
+      result.activity = value
+    }
+    if (name === "STATUS") {
+      result.status = (value as ResultStatus) ?? "success"
+    }
+    if (name === "MESSAGE") {
+      result.message = value
+    }
+    if (name === "ERROR TYPE") {
+      result.errorType = value
+    }
+    if (name === "ERROR MESSAGE") {
+      result.errorMessage = value
+    }
+    if (name === "GUIDANCE") {
+      result.guidance = value.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
+    }
+  }
+  want.push(result)
+  let have: ExecuteResultLine[] = []
+  const wanted = want[0]
+  for (const activityResult of this.apiResults) {
+    const result: ExecuteResultLine = {}
+    if (wanted.filename != null) {
+      result.filename = activityResult.activity?.location.file.unixified()
+    }
+    if (wanted.line != null) {
+      result.line = activityResult.activity?.location.line
+    }
+    if (wanted.action != null) {
+      result.action = activityResult.activity?.actionName
+    }
+    if (wanted.output != null) {
+      result.output = activityResult.output?.trim() || ""
+    }
+    if (wanted.activity != null) {
+      result.activity = stripAnsi(activityResult.finalName || "")
+      if (process.platform === "win32") {
+        result.activity = result.activity?.replace(/\\/g, "/")
+      }
+    }
+    if (wanted.message != null) {
+      result.message = activityResult.message
+    }
+    if (activityResult.message != null) {
+      result.message = activityResult.message
+    }
+    if (wanted.status != null) {
+      result.status = activityResult.status
+    }
+    if (wanted.errorType != null) {
+      result.errorType = activityResult.error?.name || ""
+    }
+    if (wanted.errorMessage != null) {
+      result.errorMessage = stripAnsi(activityResult.error?.message || "")
+    }
+    if (wanted.guidance != null) {
+      result.guidance = stripAnsi((activityResult.error as textRunner.UserError)?.guidance?.trim() || "")
+    }
+    have.push(result)
+  }
+  assert.deepEqual(have, want)
+})
+
 Then("it throws:", function(this: TRWorld, table: cucumber.DataTable) {
   if (!this.apiException) {
     throw new Error("no error thrown")

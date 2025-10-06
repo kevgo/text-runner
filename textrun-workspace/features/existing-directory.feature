@@ -14,8 +14,8 @@ Feature: verify that the workspace contains a directory
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                       | ACTIVITY                              |
-      |     1.md |    1 | workspace/new-directory      | create directory foo                  |
-      |     1.md |    4 | workspace/existing-directory | directory foo exists in the workspace |
+      |     1.md |    2 | workspace/new-directory      | create directory foo                  |
+      |     1.md |    5 | workspace/existing-directory | directory foo exists in the workspace |
 
   Scenario: the workspace does not contain the directory
     Given the source code contains a file "1.md" with content:

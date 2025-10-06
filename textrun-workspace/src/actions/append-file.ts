@@ -4,6 +4,7 @@ import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function appendFile(action: textRunner.actions.Args): Promise<void> {
+  action.name("append to existing file")
   const fileNameAttribute = action.region[0].attributes["filename"]
   if (fileNameAttribute === "") {
     throw new textRunner.UserError(`attribute "filename" is empty`, "")

@@ -45,7 +45,7 @@ Feature: Appending content to existing workspace files
         | FILENAME      | file_appender.md                                                                                    |
         | LINE          | 1                                                                                                   |
         | ACTION        | workspace/append-file                                                                               |
-        | ACTIVITY      | Workspace append file                                                                               |
+        | ACTIVITY      | append to existing file                                                                             |
         | STATUS        | failed                                                                                              |
         | ERROR TYPE    | UserError                                                                                           |
         | ERROR MESSAGE | found no nodes of type 'em/strong/em_open/strong_open'                                              |
@@ -159,7 +159,7 @@ Feature: Appending content to existing workspace files
         | FILENAME      | file.md                                                              |
         | LINE          | 1                                                                    |
         | ACTION        | workspace/append-file                                                |
-        | ACTIVITY      | Workspace append file                                                |
+        | ACTIVITY      | append to existing file                                              |
         | STATUS        | failed                                                               |
         | ERROR TYPE    | UserError                                                            |
         | ERROR MESSAGE | dir "zonk" doesn't exist                                             |
@@ -175,7 +175,7 @@ Feature: Appending content to existing workspace files
         | FILENAME      | empty_dir_attribute.md   |
         | LINE          | 1                        |
         | ACTION        | workspace/append-file    |
-        | ACTIVITY      | Workspace append file    |
+        | ACTIVITY      | append to existing file  |
         | STATUS        | failed                   |
         | ERROR TYPE    | UserError                |
         | ERROR MESSAGE | attribute "dir" is empty |
@@ -228,7 +228,7 @@ Feature: Appending content to existing workspace files
         | FILENAME      | empty_filename_attribute.md   |
         | LINE          | 1                             |
         | ACTION        | workspace/append-file         |
-        | ACTIVITY      | Workspace append file         |
+        | ACTIVITY      | append to existing file       |
         | STATUS        | failed                        |
         | ERROR TYPE    | UserError                     |
         | ERROR MESSAGE | attribute "filename" is empty |

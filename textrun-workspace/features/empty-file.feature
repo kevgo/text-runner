@@ -31,10 +31,7 @@ Feature: creating empty files
     Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY                   |
       | creator.md |    1 | workspace/empty-file | create file subdir/one.txt |
-    And the workspace now contains a file "subdir/one.txt" with content:
-      """
-      
-      """
+    And the workspace now contains an empty file "subdir/one.txt"
 
   Rule: the filename can be provided via the "filename" attribute
 
@@ -48,10 +45,7 @@ Feature: creating empty files
       Then it runs these actions:
         | FILENAME   | LINE | ACTION               | ACTIVITY            |
         | creator.md |    2 | workspace/empty-file | create file one.txt |
-      And the workspace now contains a file "one.txt" with content:
-        """
-        
-        """
+      And the workspace now contains an empty file "one.txt"
 
     Scenario: no file path given
       Given the source code contains a file "creator.md" with content:

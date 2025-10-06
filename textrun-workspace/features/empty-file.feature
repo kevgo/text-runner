@@ -9,7 +9,7 @@ Feature: creating empty files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY            |
-      | creator.md |    3 | workspace/empty-file | create file one.txt |
+      | creator.md |    2 | workspace/empty-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
       """
       

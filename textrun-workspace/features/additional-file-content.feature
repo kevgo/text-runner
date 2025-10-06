@@ -17,7 +17,7 @@ Feature: Appending content to existing workspace files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-      | directory_changer.md |    3 | workspace/additional-file-content | append to file foo/bar |
+      | directory_changer.md |    2 | workspace/additional-file-content | append to file foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content

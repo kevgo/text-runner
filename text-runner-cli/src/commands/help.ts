@@ -1,6 +1,6 @@
-import * as color from "colorette"
 import { EventEmitter } from "events"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 import * as url from "url"
@@ -31,26 +31,26 @@ export class HelpCommand implements textRunner.commands.Command {
     const fileContent = await fs.readFile(path.join(__dirname, "../../package.json"), "utf-8")
     const pkg = JSON.parse(fileContent)
 
-    return `${color.dim(`TextRunner ${pkg.version}`)}
+    return `${styleText("dim", `TextRunner ${pkg.version}`)}
 
-USAGE: ${color.bold("text-runner [<options>] <command>")}
+USAGE: ${styleText("bold", "text-runner [<options>] <command>")}
 
 COMMANDS
-  ${color.bold("run")} [<filename>]         runs all tests on the given file/folder or entire documentation
-  ${color.bold("dynamic")} [<filename>]     runs only the programmatic tests, skips checking links
-  ${color.bold("static")} [<filename>]      checks only the links, skips programmatic tests
+  ${styleText ("bold", "run")} [<filename>]         runs all tests on the given file/folder or entire documentation
+  ${styleText("bold", "dynamic")} [<filename>]     runs only the programmatic tests, skips checking links
+  ${styleText("bold", "static")} [<filename>]      checks only the links, skips programmatic tests
 
-  ${color.bold("setup")}                    creates an example configuration file
-  ${color.bold("scaffold")} [--ts] <name>   scaffolds a new region type handler (--ts = in TypeScript)
-  ${color.bold("unused")} <filename>        shows unused custom activities
+  ${styleText("bold", "setup")}                    creates an example configuration file
+  ${styleText("bold", "scaffold")} [--ts] <name>   scaffolds a new region type handler (--ts = in TypeScript)
+  ${styleText("bold", "unused")} <filename>        shows unused custom activities
 
-  ${color.bold("help")}                     shows this help screen
-  ${color.bold("version")}                  shows the currently installed version
-  ${color.bold("debug")}                    shows debug data
+  ${styleText("bold", "help")}                     shows this help screen
+  ${styleText("bold", "version")}                  shows the currently installed version
+  ${styleText("bold", "debug")}                    shows debug data
 
 OPTIONS
-  ${color.bold("--config")}                 provide a custom configuration filename
-  ${color.bold("--online")}                 check external links
+  ${styleText("bold", "--config")}                 provide a custom configuration filename
+  ${styleText("bold", "--online")}                 check external links
 `
   }
 }

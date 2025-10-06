@@ -3,12 +3,13 @@ Feature: creating empty files
   Scenario: providing the filename as text
     Given the source code contains a file "creator.md" with content:
       """
-      creating a file with name <b type="workspace/empty-file">one.txt</b>.
+      creating a file with name
+      <b type="workspace/empty-file">one.txt</b>.
       """
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY            |
-      | creator.md | 1    | workspace/empty-file | create file one.txt |
+      | creator.md | 2    | workspace/empty-file | create file one.txt |
     And the workspace now contains a file "one.txt" with content:
       """
       """
@@ -16,7 +17,7 @@ Feature: creating empty files
   Scenario: no file path given
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/empty-file"> </a>
+      <a type="workspace/empty-file">  </a>
       """
     When calling Text-Runner
     Then it runs these actions:
@@ -41,12 +42,13 @@ Feature: creating empty files
     Scenario: providing the filename via attribute
       Given the source code contains a file "creator.md" with content:
         """
-        creating a file with name <b type="workspace/empty-file" filename="one.txt"></b>.
+        creating a file with name
+        <b type="workspace/empty-file" filename="one.txt"></b>.
         """
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME   | LINE | ACTION               | ACTIVITY            |
-        | creator.md | 1    | workspace/empty-file | create file one.txt |
+        | creator.md | 2    | workspace/empty-file | create file one.txt |
       And the workspace now contains a file "one.txt" with content:
         """
         """

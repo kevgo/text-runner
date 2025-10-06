@@ -1,6 +1,6 @@
 {
   "name": "textrun-action",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -15,9 +15,9 @@
     "reset": "rm -rf dist && yarn run build"
   },
   "dependencies": {
-    "text-runner-engine": "7.1.2"
+    "text-runner-engine": "^7.2.0"
   },
   "devDependencies": {
-    "text-runner": "7.1.2"
+    "text-runner": "^7.2.0"
   }
 }

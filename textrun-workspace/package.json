@@ -1,6 +1,6 @@
 {
   "name": "textrun-workspace",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Text-Runner actions for the Text-Runner workspace",
   "license": "ISC",
   "type": "module",
@@ -18,13 +18,13 @@
   },
   "dependencies": {
     "assert-no-diff": "4.1.0",
-    "text-runner-engine": "7.1.2"
+    "text-runner-engine": "^7.2.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "7.1.2",
-    "textrun-action": "0.3.1",
-    "textrun-extension": "0.3.1",
+    "text-runner": "^7.2.0",
+    "textrun-action": "^0.4.0",
+    "textrun-extension": "^0.4.0",
     "tsx": "4.20.6"
   }
 }

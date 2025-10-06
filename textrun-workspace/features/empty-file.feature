@@ -4,10 +4,7 @@ Feature: creating empty files
     Given the source code contains a file "creator.md" with content:
       """
       creating a file with name
-      
-      <b type="workspace/empty-file">
-        one.txt
-      </b>.
+      <b type="workspace/empty-file">one.txt</b>.
       """
     When calling Text-Runner
     Then it runs these actions:

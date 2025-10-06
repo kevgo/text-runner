@@ -8,7 +8,6 @@ Feature: Appending content to existing workspace files
     Given the source code contains a file "directory_changer.md" with content:
       """
       Now append to file
-      
       <a type="workspace/additional-file-content">
       
         **foo/bar** the content ` appended content`.

@@ -18,7 +18,7 @@ export function server(action: textRunner.actions.Args): void {
     .filter((line: string) => line.length > 0)
     .map(trimDollar)
     .join(" && ")
-  action.name(`starting a server process: ${styleText("bold", styleText("cyan", commandsToRun))}`)
+  action.name(`starting a server process: ${styleText(["bold", "cyan"], commandsToRun)}`)
   CurrentServer.instance().set(
     observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
       cwd: action.configuration.workspace.platformified()

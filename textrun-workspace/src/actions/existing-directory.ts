@@ -15,7 +15,7 @@ export async function existingDirectory(action: textRunner.actions.Args): Promis
   try {
     var stats = await fs.lstat(fullPath)
   } catch (err) {
-    throw new Error(`directory ${styleText("cyan", styleText("bold", dirRelName))} does not exist in the workspace`)
+    throw new Error(`directory ${styleText(["cyan", "bold"], dirRelName)} does not exist in the workspace`)
   }
   if (!stats.isDirectory()) {
     throw new Error(`${styleText("cyan", dirRelName)} exists but is not a directory`)

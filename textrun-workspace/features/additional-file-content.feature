@@ -9,7 +9,7 @@ Feature: Appending content to existing workspace files
         """
       Given the source code contains a file "file_appender.md" with content:
         """
-        <a type="workspace/additional-file-content">
+        <a type="workspace/append-file">
 
         <FILENAME> with content <CONTENT>
 
@@ -17,8 +17,8 @@ Feature: Appending content to existing workspace files
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME         | LINE | ACTION                            | ACTIVITY            |
-        | file_appender.md | 1    | workspace/additional-file-content | append to file file |
+        | FILENAME         | LINE | ACTION                | ACTIVITY            |
+        | file_appender.md | 1    | workspace/append-file | append to file file |
       And the workspace now contains a file "file" with content:
         """
         <RESULT>
@@ -38,14 +38,14 @@ Feature: Appending content to existing workspace files
         """
       Given the source code contains a file "file_appender.md" with content:
         """
-        <a type="workspace/additional-file-content">no filename and content ` appended content`.</a>.
+        <a type="workspace/append-file">no filename and content ` appended content`.</a>.
         """
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | file_appender.md                                                                                    |
         | LINE          | 1                                                                                                   |
-        | ACTION        | workspace/additional-file-content                                                                   |
-        | ACTIVITY      | Workspace additional file content                                                                   |
+        | ACTION        | workspace/append-file                                                                               |
+        | ACTIVITY      | Workspace append file                                                                               |
         | STATUS        | failed                                                                                              |
         | ERROR TYPE    | UserError                                                                                           |
         | ERROR MESSAGE | found no nodes of type 'em/strong/em_open/strong_open'                                              |
@@ -62,13 +62,13 @@ Feature: Appending content to existing workspace files
         """
       Given the source code contains a file "file_appender.md" with content:
         """
-        <a type="workspace/additional-file-content">_file.txt_ and no content</a>.
+        <a type="workspace/append-file">_file.txt_ and no content</a>.
         """
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | file_appender.md                                                                          |
         | LINE          | 1                                                                                         |
-        | ACTION        | workspace/additional-file-content                                                         |
+        | ACTION        | workspace/append-file                                                                     |
         | ACTIVITY      | append to file file.txt                                                                   |
         | STATUS        | failed                                                                                    |
         | ERROR TYPE    | UserError                                                                                 |
@@ -89,12 +89,12 @@ Feature: Appending content to existing workspace files
       Given the source code contains a file "file_appender.md" with content:
         """
         Now append to file
-        <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
+        <a type="workspace/append-file">**foo/bar** the content ` appended content`.</a>.
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME         | LINE | ACTION                            | ACTIVITY               |
-        | file_appender.md | 2    | workspace/additional-file-content | append to file foo/bar |
+        | FILENAME         | LINE | ACTION                | ACTIVITY               |
+        | file_appender.md | 2    | workspace/append-file | append to file foo/bar |
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
@@ -103,13 +103,13 @@ Feature: Appending content to existing workspace files
     Scenario: the file does not exist
       Given the source code contains a file "file_appender.md" with content:
         """
-        <a type="workspace/additional-file-content">**zonk.txt** the content `content`</a>.
+        <a type="workspace/append-file">**zonk.txt** the content `content`</a>.
         """
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | file_appender.md                                                         |
         | LINE          | 1                                                                        |
-        | ACTION        | workspace/additional-file-content                                        |
+        | ACTION        | workspace/append-file                                                    |
         | ACTIVITY      | append to file zonk.txt                                                  |
         | STATUS        | failed                                                                   |
         | ERROR TYPE    | UserError                                                                |
@@ -125,7 +125,7 @@ Feature: Appending content to existing workspace files
         """
       And the source code contains a file "1.md" with content:
         """
-        <a type="workspace/additional-file-content" dir="..">
+        <a type="workspace/append-file" dir="..">
 
         Append to file **foo/bar** the content ` appended content`.
 
@@ -138,8 +138,8 @@ Feature: Appending content to existing workspace files
         await command.execute()
         """
       Then it runs these actions:
-        | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-        | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+        | FILENAME | LINE | ACTION                | ACTIVITY                  |
+        | 1.md     | 1    | workspace/append-file | append to file ../foo/bar |
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
@@ -148,7 +148,7 @@ Feature: Appending content to existing workspace files
     Scenario: non-existing dir
       And the source code contains a file "file.md" with content:
         """
-        <a type="workspace/additional-file-content" dir="zonk">
+        <a type="workspace/append-file" dir="zonk">
 
         Append to file **foo/bar** the content ` appended content`.
 
@@ -158,8 +158,8 @@ Feature: Appending content to existing workspace files
       Then it runs this action:
         | FILENAME      | file.md                                                              |
         | LINE          | 1                                                                    |
-        | ACTION        | workspace/additional-file-content                                    |
-        | ACTIVITY      | Workspace additional file content                                    |
+        | ACTION        | workspace/append-file                                                |
+        | ACTIVITY      | Workspace append file                                                |
         | STATUS        | failed                                                               |
         | ERROR TYPE    | UserError                                                            |
         | ERROR MESSAGE | dir "zonk" doesn't exist                                             |
@@ -168,18 +168,18 @@ Feature: Appending content to existing workspace files
     Scenario: empty attribute
       Given the source code contains a file "empty_dir_attribute.md" with content:
         """
-        <a type="workspace/additional-file-content" dir="">**file** `content`</a>.
+        <a type="workspace/append-file" dir="">**file** `content`</a>.
         """
       When calling Text-Runner
       Then it runs this action:
-        | FILENAME      | empty_dir_attribute.md            |
-        | LINE          | 1                                 |
-        | ACTION        | workspace/additional-file-content |
-        | ACTIVITY      | Workspace additional file content |
-        | STATUS        | failed                            |
-        | ERROR TYPE    | UserError                         |
-        | ERROR MESSAGE | attribute "dir" is empty          |
-        | GUIDANCE      |                                   |
+        | FILENAME      | empty_dir_attribute.md   |
+        | LINE          | 1                        |
+        | ACTION        | workspace/append-file    |
+        | ACTIVITY      | Workspace append file    |
+        | STATUS        | failed                   |
+        | ERROR TYPE    | UserError                |
+        | ERROR MESSAGE | attribute "dir" is empty |
+        | GUIDANCE      |                          |
 
   Rule: the "filename" attribute can set the filename
 
@@ -191,12 +191,12 @@ Feature: Appending content to existing workspace files
       And the source code contains a file "file_appender.md" with content:
         """
         Now append to file
-        <a type="workspace/additional-file-content" filename="file.txt">shine</a>.
+        <a type="workspace/append-file" filename="file.txt">shine</a>.
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME         | LINE | ACTION                            | ACTIVITY                |
-        | file_appender.md | 2    | workspace/additional-file-content | append to file file.txt |
+        | FILENAME         | LINE | ACTION                | ACTIVITY                |
+        | file_appender.md | 2    | workspace/append-file | append to file file.txt |
       And the workspace now contains a file "file.txt" with content:
         """
         hello sunshine
@@ -205,13 +205,13 @@ Feature: Appending content to existing workspace files
     Scenario: non-existing filename
       Given the source code contains a file "empty_filename_attribute.md" with content:
         """
-        <a type="workspace/additional-file-content" filename="zonk.txt"></a>.
+        <a type="workspace/append-file" filename="zonk.txt"></a>.
         """
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | empty_filename_attribute.md                                              |
         | LINE          | 1                                                                        |
-        | ACTION        | workspace/additional-file-content                                        |
+        | ACTION        | workspace/append-file                                                    |
         | ACTIVITY      | append to file zonk.txt                                                  |
         | STATUS        | failed                                                                   |
         | ERROR TYPE    | UserError                                                                |
@@ -221,15 +221,15 @@ Feature: Appending content to existing workspace files
     Scenario: empty attribute
       Given the source code contains a file "empty_filename_attribute.md" with content:
         """
-        <a type="workspace/additional-file-content" filename=""></a>.
+        <a type="workspace/append-file" filename=""></a>.
         """
       When calling Text-Runner
       Then it runs this action:
-        | FILENAME      | empty_filename_attribute.md       |
-        | LINE          | 1                                 |
-        | ACTION        | workspace/additional-file-content |
-        | ACTIVITY      | Workspace additional file content |
-        | STATUS        | failed                            |
-        | ERROR TYPE    | UserError                         |
-        | ERROR MESSAGE | attribute "filename" is empty     |
-        | GUIDANCE      |                                   |
+        | FILENAME      | empty_filename_attribute.md   |
+        | LINE          | 1                             |
+        | ACTION        | workspace/append-file         |
+        | ACTIVITY      | Workspace append file         |
+        | STATUS        | failed                        |
+        | ERROR TYPE    | UserError                     |
+        | ERROR MESSAGE | attribute "filename" is empty |
+        | GUIDANCE      |                               |

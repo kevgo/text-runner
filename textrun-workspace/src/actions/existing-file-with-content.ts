@@ -1,6 +1,6 @@
 import * as assertNoDiff from "assert-no-diff"
-import * as color from "colorette"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
@@ -13,9 +13,9 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
   const partialMatch = action.region[0].attributes["partial-match"] !== undefined
   const expectedContent = fileNameAttribute ? action.region.text() : action.region.textInNodeOfType("fence", "code")
   if (partialMatch) {
-    action.name(`file ${color.cyan(fileRelPath)} contains substring ${expectedContent}`)
+    action.name(`file ${styleText("cyan", fileRelPath)} contains substring ${expectedContent}`)
   } else {
-    action.name(`verify content of file ${color.cyan(fileRelPath)}`)
+    action.name(`verify content of file ${styleText("cyan", fileRelPath)}`)
   }
   try {
     var actualContent = await fs.readFile(fullPath, "utf-8")
@@ -36,7 +36,7 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
   if (partialMatch) {
     if (!actualContent.includes(expectedContent)) {
       throw new textRunner.UserError(
-        `file ${color.cyan(color.bold(fileRelPath))} does not contain "${expectedContent}"`,
+        `file ${styleText("cyan", styleText("bold", fileRelPath))} does not contain "${expectedContent}"`,
         actualContent
       )
     }
@@ -46,7 +46,7 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
     } catch (err) {
       action.log(actualContent)
       throw new textRunner.UserError(
-        `mismatching content in ${color.cyan(color.bold(fileRelPath))}`,
+        `mismatching content in ${styleText("cyan", styleText("bold", fileRelPath))}`,
         textRunner.errorMessage(err)
       )
     }

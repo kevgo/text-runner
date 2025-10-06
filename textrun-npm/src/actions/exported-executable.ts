@@ -1,5 +1,5 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import { trimDollar } from "../helpers/trim-dollar.js"
@@ -10,7 +10,7 @@ export async function exportedExecutable(action: textRunner.actions.Args): Promi
   if (commandName === "") {
     throw new Error("No executable name specified")
   }
-  action.name(`npm package exports executable ${color.cyan(commandName)}`)
+  action.name(`npm package exports executable ${styleText("cyan", commandName)}`)
   const packageJsonPath = action.configuration.sourceDir.joinStr("package.json")
   const pkgText = await fs.readFile(packageJsonPath, "utf-8")
   const pkgData: PackageJson = JSON.parse(pkgText)

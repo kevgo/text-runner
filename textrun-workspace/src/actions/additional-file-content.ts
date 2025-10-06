@@ -1,5 +1,5 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
@@ -24,7 +24,7 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
     }
   }
   const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
-  action.name(`append to file ${color.cyan(fileRelPath)}`)
+  action.name(`append to file ${styleText("cyan", fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   try {
     await fs.access(fullPath, fs.constants.F_OK)

@@ -1,12 +1,12 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function existingFile(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.text()
   const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
-  action.name(`verify existence of file ${color.cyan(fileRelPath)}`)
+  action.name(`verify existence of file ${styleText("cyan", fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   try {
     await fs.stat(fullPath)

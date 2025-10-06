@@ -1,4 +1,4 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
@@ -17,8 +17,8 @@ export class SummaryFormatter implements formatter.Formatter {
 
   onFailed(args: textRunner.events.Failed): void {
     console.log()
-    console.log(color.dim(args.output))
-    process.stdout.write(color.red(`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `))
+    console.log(styleText("dim", args.output))
+    process.stdout.write(styleText("red", `${args.activity.location.file.platformified()}:${args.activity.location.line} -- `))
     console.log(args.error.message)
     helpers.printCodeFrame(console.log, args.activity.location)
   }

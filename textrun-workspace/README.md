@@ -97,10 +97,10 @@ When executing the documentation, Text-Runner will create a file with name
 <a type="workspace/existing-file-with-content">_apples.txt_ and content
 `Gala aren't that bad either!`</a> in the workspace.
 
-## additional-file-content
+## append-file
 
-The <code type="action/name-full">workspace/additional-file-content</code>
-action appends the given text to the given file.
+The <code type="action/name-full">workspace/append-file</code> action appends
+the given text to the given file.
 
 Assume the workspace contains file <a type="workspace/new-file">
 _greeting/hello.txt_ with content `hello`</a>. Then you execute this
@@ -109,7 +109,7 @@ documentation:
 <a type="extension/runnable-region">
 
 ```html
-<a type="workspace/additional-file-content">
+<a type="workspace/append-file">
 
 Now append ` sun` to file _greeting/hello.txt_.
 
@@ -132,7 +132,7 @@ content to with the `dir` attribute:
 <a type="extension/runnable-region">
 
 ```html
-<a type="workspace/additional-file-content" dir="greeting">
+<a type="workspace/append-file" dir="greeting">
 
 Now append ` and moon` to file _hello.txt_.
 
@@ -156,7 +156,7 @@ content is the entire content of the active region.
 <a type="extension/runnable-region">
 
 ```html
-<code type="workspace/additional-file-content" filename="greeting/hello.txt">light</code>
+<code type="workspace/append-file" filename="greeting/hello.txt">light</code>
 ```
 
 </a>

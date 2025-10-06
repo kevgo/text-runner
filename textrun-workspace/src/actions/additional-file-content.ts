@@ -13,6 +13,16 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
   if (dirAttribute === "") {
     throw new textRunner.UserError(`attribute "dir" is empty`, "")
   }
+  if (dirAttribute !== undefined) {
+    const dirPath = action.configuration.workspace.joinStr(dirAttribute)
+    try {
+      await fs.access(dirPath, fs.constants.F_OK)
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new textRunner.UserError(`dir "${dirAttribute}" doesn't exist`, e.message)
+      }
+    }
+  }
   const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
   action.name(`append to file ${color.cyan(fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)

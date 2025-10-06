@@ -10,15 +10,15 @@ Feature: Appending content to existing workspace files
       Given the source code contains a file "directory_changer.md" with content:
         """
         <a type="workspace/additional-file-content">
-
+        
         <FILENAME> with content <CONTENT>
-
+        
         </a>.
         """
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME             | LINE | ACTION                            | ACTIVITY            |
-        | directory_changer.md | 1    | workspace/additional-file-content | append to file file |
+        | directory_changer.md |    1 | workspace/additional-file-content | append to file file |
       And the workspace now contains a file "file" with content:
         """
         <RESULT>
@@ -46,7 +46,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-        | directory_changer.md | 2    | workspace/additional-file-content | append to file foo/bar |
+        | directory_changer.md |    2 | workspace/additional-file-content | append to file foo/bar |
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
@@ -60,7 +60,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | directory_changer.md                                                     |
-        | LINE          | 1                                                                        |
+        | LINE          |                                                                        1 |
         | ACTION        | workspace/additional-file-content                                        |
         | ACTIVITY      | append to file zonk.txt                                                  |
         | STATUS        | failed                                                                   |
@@ -78,9 +78,9 @@ Feature: Appending content to existing workspace files
       And the source code contains a file "1.md" with content:
         """
         <a type="workspace/additional-file-content" dir="..">
-
+        
         Append to file **foo/bar** the content ` appended content`.
-
+        
         </a>
         """
       When calling:
@@ -91,16 +91,31 @@ Feature: Appending content to existing workspace files
         """
       Then it runs these actions:
         | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-        | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+        |     1.md |    1 | workspace/additional-file-content | append to file ../foo/bar |
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
         """
 
-      And the workspace now contains a file "foo/bar" with content:
+    Scenario: non-existing dir
+      And the source code contains a file "file.md" with content:
         """
-        hello appended content
+        <a type="workspace/additional-file-content" dir="zonk">
+        
+        Append to file **foo/bar** the content ` appended content`.
+        
+        </a>
         """
+      When calling Text-Runner
+      Then it runs this action:
+        | FILENAME      | file.md                                                              |
+        | LINE          |                                                                    1 |
+        | ACTION        | workspace/additional-file-content                                    |
+        | ACTIVITY      | Workspace/additional file content                                    |
+        | STATUS        | failed                                                               |
+        | ERROR TYPE    | UserError                                                            |
+        | ERROR MESSAGE | dir "zonk" doesn't exist                                             |
+        | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk' |
 
     Scenario: empty "dir" attribute
       Given the source code contains a file "empty_dir_attribute.md" with content:
@@ -110,7 +125,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | empty_dir_attribute.md            |
-        | LINE          | 1                                 |
+        | LINE          |                                 1 |
         | ACTION        | workspace/additional-file-content |
         | ACTIVITY      | Workspace/additional file content |
         | STATUS        | failed                            |
@@ -133,7 +148,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME             | LINE | ACTION                            | ACTIVITY                |
-        | directory_changer.md | 2    | workspace/additional-file-content | append to file file.txt |
+        | directory_changer.md |    2 | workspace/additional-file-content | append to file file.txt |
       And the workspace now contains a file "file.txt" with content:
         """
         hello sunshine
@@ -147,7 +162,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | empty_filename_attribute.md       |
-        | LINE          | 1                                 |
+        | LINE          |                                 1 |
         | ACTION        | workspace/additional-file-content |
         | ACTIVITY      | Workspace/additional file content |
         | STATUS        | failed                            |

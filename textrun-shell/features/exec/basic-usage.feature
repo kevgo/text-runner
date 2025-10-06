@@ -1,6 +1,6 @@
 Feature: shell/command
 
-  Scenario: inside <pre> tags
+  Scenario: no fenced code block
     Given the source code contains a file "running.md" with content:
       """
       <pre type="shell/command">

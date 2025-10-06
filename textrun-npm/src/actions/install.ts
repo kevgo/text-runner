@@ -1,5 +1,5 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import { trimDollar } from "../helpers/trim-dollar.js"
@@ -10,17 +10,15 @@ export async function install(action: textRunner.actions.Args): Promise<void> {
   if (installText === "") {
     throw new Error("no installation instructions found")
   }
-  action.name(`check npm package name in ${color.cyan(installText)}`)
+  action.name(`check npm package name in ${styleText("cyan", installText)}`)
   const dir = action.region[0]?.attributes?.dir || ""
   const pkgJsonPath = action.configuration.sourceDir.joinStr(dir, "package.json")
   const pkgText = await fs.readFile(pkgJsonPath, "utf-8")
   const pkg: PackageJson = JSON.parse(pkgText)
   if (missesPackageName(installText, pkg.name)) {
     throw new Error(
-      `installation instructions ${color.cyan(installText)} don't contain expected npm package name ${
-        color.cyan(
-          pkg.name
-        )
+      `installation instructions ${styleText("cyan", installText)} don't contain expected npm package name ${
+        styleText("cyan", pkg.name)
       }`
     )
   }

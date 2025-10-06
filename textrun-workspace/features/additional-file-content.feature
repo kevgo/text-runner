@@ -2,13 +2,11 @@ Feature: Appending content to existing workspace files
 
   Rule: the filename is taken from the _, **, <em>, <i>, <strong>, or <b> section, the content from `, ```, <code>, or <pre>
 
-    Background:
+    Scenario Outline:
       Given the workspace contains a file "file" with content:
         """
         hello sun
         """
-
-    Scenario Outline:
       Given the source code contains a file "directory_changer.md" with content:
         """
         <a type="workspace/additional-file-content">
@@ -53,7 +51,7 @@ Feature: Appending content to existing workspace files
         """
         hello appended content
         """
-# TODO: Scenario: the file does not exist
+# TODO: add scenario: the file does not exist
 
   Rule: the "dir" attribute sets the base directory
 

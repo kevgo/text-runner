@@ -1,6 +1,6 @@
 Feature: Appending content to existing workspace files
 
-  Rule: the filename is taken from the _, **, <em>, <i>, <strong>, or <b> section, the content from `, ```, <code>, or <pre>
+  Rule: the filename is taken from the _, **, <em>, or <strong> section; the content from `, ```, <code>, or <pre>
 
     Scenario Outline:
       Given the workspace contains a file "file" with content:
@@ -10,15 +10,15 @@ Feature: Appending content to existing workspace files
       Given the source code contains a file "directory_changer.md" with content:
         """
         <a type="workspace/additional-file-content">
-        
+
         <FILENAME> with content <CONTENT>
-        
+
         </a>.
         """
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME             | LINE | ACTION                            | ACTIVITY            |
-        | directory_changer.md |    1 | workspace/additional-file-content | append to file file |
+        | directory_changer.md | 1    | workspace/additional-file-content | append to file file |
       And the workspace now contains a file "file" with content:
         """
         <RESULT>
@@ -46,7 +46,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-        | directory_changer.md |    2 | workspace/additional-file-content | append to file foo/bar |
+        | directory_changer.md | 2    | workspace/additional-file-content | append to file foo/bar |
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
@@ -60,7 +60,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | directory_changer.md                                                     |
-        | LINE          |                                                                        1 |
+        | LINE          | 1                                                                        |
         | ACTION        | workspace/additional-file-content                                        |
         | ACTIVITY      | append to file zonk.txt                                                  |
         | STATUS        | failed                                                                   |
@@ -70,7 +70,7 @@ Feature: Appending content to existing workspace files
 
   Rule: the "dir" attribute sets the base directory
 
-    Scenario: valid dir
+    Scenario: existing dir
       Given the workspace contains a file "foo/bar" with content:
         """
         hello
@@ -78,9 +78,9 @@ Feature: Appending content to existing workspace files
       And the source code contains a file "1.md" with content:
         """
         <a type="workspace/additional-file-content" dir="..">
-        
+
         Append to file **foo/bar** the content ` appended content`.
-        
+
         </a>
         """
       When calling:
@@ -91,7 +91,12 @@ Feature: Appending content to existing workspace files
         """
       Then it runs these actions:
         | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-        |     1.md |    1 | workspace/additional-file-content | append to file ../foo/bar |
+        | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+      And the workspace now contains a file "foo/bar" with content:
+        """
+        hello appended content
+        """
+
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
@@ -105,7 +110,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | empty_dir_attribute.md            |
-        | LINE          |                                 1 |
+        | LINE          | 1                                 |
         | ACTION        | workspace/additional-file-content |
         | ACTIVITY      | Workspace/additional file content |
         | STATUS        | failed                            |
@@ -128,7 +133,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME             | LINE | ACTION                            | ACTIVITY                |
-        | directory_changer.md |    2 | workspace/additional-file-content | append to file file.txt |
+        | directory_changer.md | 2    | workspace/additional-file-content | append to file file.txt |
       And the workspace now contains a file "file.txt" with content:
         """
         hello sunshine
@@ -142,7 +147,7 @@ Feature: Appending content to existing workspace files
       When calling Text-Runner
       Then it runs this action:
         | FILENAME      | empty_filename_attribute.md       |
-        | LINE          |                                 1 |
+        | LINE          | 1                                 |
         | ACTION        | workspace/additional-file-content |
         | ACTIVITY      | Workspace/additional file content |
         | STATUS        | failed                            |

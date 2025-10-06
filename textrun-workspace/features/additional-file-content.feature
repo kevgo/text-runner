@@ -38,16 +38,21 @@ Feature: Appending content to existing workspace files
         """
       Given the source code contains a file "file_appender.md" with content:
         """
-        Now append to file
-        <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
+        <a type="workspace/additional-file-content">no filename and content ` appended content`.</a>.
         """
       When calling Text-Runner
-      Then it runs these actions:
-        | FILENAME         | LINE | ACTION                            | ACTIVITY               |
-        | file_appender.md |    2 | workspace/additional-file-content | append to file foo/bar |
+      Then it runs this action:
+        | FILENAME      | file_appender.md                                                                                    |
+        | LINE          |                                                                                                   1 |
+        | ACTION        | workspace/additional-file-content                                                                   |
+        | ACTIVITY      | Workspace/additional file content                                                                   |
+        | STATUS        | failed                                                                                              |
+        | ERROR TYPE    | UserError                                                                                           |
+        | ERROR MESSAGE | found no nodes of type 'em/strong/em_open/strong_open'                                              |
+        | GUIDANCE      | The node types in this list are: anchor_open, text, code_open, text, code_close, text, anchor_close |
       And the workspace now contains a file "foo/bar" with content:
         """
-        hello appended content
+        hello
         """
 
   Rule: the file must exist

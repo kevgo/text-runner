@@ -4,7 +4,8 @@ import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function emptyFile(action: textRunner.actions.Args): Promise<void> {
-  const fileName = action.region.text().trim()
+  const fileNameAttribute = action.region[0].attributes["filename"]
+  const fileName = fileNameAttribute || action.region.text().trim()
   if (fileName === "") {
     throw new textRunner.UserError("No filename given", "")
   }

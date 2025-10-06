@@ -55,6 +55,30 @@ Feature: Appending content to existing workspace files
         hello
         """
 
+    Scenario: missing content
+      Given the workspace contains a file "file.txt" with content:
+        """
+        hello
+        """
+      Given the source code contains a file "file_appender.md" with content:
+        """
+        <a type="workspace/additional-file-content">_file.txt_ and no content</a>.
+        """
+      When calling Text-Runner
+      Then it runs this action:
+        | FILENAME      | file_appender.md                                                                          |
+        | LINE          |                                                                                         1 |
+        | ACTION        | workspace/additional-file-content                                                         |
+        | ACTIVITY      | append to file file.txt                                                                   |
+        | STATUS        | failed                                                                                    |
+        | ERROR TYPE    | UserError                                                                                 |
+        | ERROR MESSAGE | found no nodes of type 'fence/code/fence_open/code_open'                                  |
+        | GUIDANCE      | The node types in this list are: anchor_open, em_open, text, em_close, text, anchor_close |
+      And the workspace now contains a file "file.txt" with content:
+        """
+        hello
+        """
+
   Rule: the file must exist
 
     Scenario: the file exists

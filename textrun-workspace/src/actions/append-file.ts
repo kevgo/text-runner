@@ -3,7 +3,7 @@ import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
-export async function additionalFileContent(action: textRunner.actions.Args): Promise<void> {
+export async function appendFile(action: textRunner.actions.Args): Promise<void> {
   const fileNameAttribute = action.region[0].attributes["filename"]
   if (fileNameAttribute === "") {
     throw new textRunner.UserError(`attribute "filename" is empty`, "")

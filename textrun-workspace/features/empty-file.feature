@@ -18,7 +18,7 @@ Feature: creating empty files
   Scenario: no file path given
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/empty-file"> </a>
+      <a type="workspace/empty-file">  </a>
       """
     When calling Text-Runner
     Then it runs these actions:
@@ -28,9 +28,7 @@ Feature: creating empty files
   Scenario: setting the base directory
     Given the source code contains a file "creator.md" with content:
       """
-      <a type="workspace/empty-file" dir="subdir">
-        one.txt
-      </a>.
+      <a type="workspace/empty-file" dir="subdir">one.txt</a>.
       """
     When calling Text-Runner
     Then it runs these actions:

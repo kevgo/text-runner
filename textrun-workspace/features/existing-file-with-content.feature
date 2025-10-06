@@ -4,38 +4,25 @@ Feature: verifying file content
     Given the source code contains a file "test.md" with content:
       """
       Create a file
-      <a type="workspace/new-file">
-      
-      **hello.txt** with content `Hello world!`
-      
-      </a>.
+      <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       
       Your workspace now contains a file
-      <a type="workspace/existing-file-with-content">
-      
-      _hello.txt_ with content `Hello world!`
-      
-      </a>.
+      <a type="workspace/existing-file-with-content">_hello.txt_ with content `Hello world!`</a>.
       """
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                         |
       | test.md  |    2 | workspace/new-file                   | create file hello.txt            |
-      | test.md  |    9 | workspace/existing-file-with-content | verify content of file hello.txt |
+      | test.md  |    5 | workspace/existing-file-with-content | verify content of file hello.txt |
 
   Scenario: specify file name via strong text and content via fenced block
     Given the source code contains a file "test.md" with content:
       """
       Create a file
-      <a type="workspace/new-file">
-      
-      **hello.txt** with content `Hello world!`
-      
-      </a>.
+      <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       
       Now you have a file
       <a type="workspace/existing-file-with-content">
-      
       **hello.txt** with content:
       
       ```
@@ -47,7 +34,7 @@ Feature: verifying file content
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                         |
       | test.md  |    2 | workspace/new-file                   | create file hello.txt            |
-      | test.md  |    9 | workspace/existing-file-with-content | verify content of file hello.txt |
+      | test.md  |    5 | workspace/existing-file-with-content | verify content of file hello.txt |
 
   Scenario: file content mismatch
     Given the source code contains a file "test.md" with content:
@@ -85,11 +72,7 @@ Feature: verifying file content
       <a type="workspace/empty-file">test_file</a>
       
       The file
-      <a type="workspace/existing-file-with-content">
-      
-      __zonk.txt__ with content `Hello world!`
-      
-      </a>
+      <a type="workspace/existing-file-with-content">__zonk.txt__ with content `Hello world!`</a>
       doesn't exist.
       """
     When calling Text-Runner
@@ -126,21 +109,13 @@ Feature: verifying file content
     Given the source code contains a file "test.md" with content:
       """
       Create a file
-      <a type="workspace/new-file">
-      
-      **hello.txt** with content `Hello world!`
-      
-      </a>.
+      <a type="workspace/new-file">**hello.txt** with content `Hello world!`</a>.
       
       Your workspace now contains a file
-      <a type="workspace/existing-file-with-content" partial-match>
-      
-      _hello.txt_ with content `Hello`
-      
-      </a>.
+      <a type="workspace/existing-file-with-content" partial-match>_hello.txt_ with content `Hello`</a>.
       """
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION                               | ACTIVITY                                |
       | test.md  |    2 | workspace/new-file                   | create file hello.txt                   |
-      | test.md  |    9 | workspace/existing-file-with-content | file hello.txt contains substring Hello |
+      | test.md  |    5 | workspace/existing-file-with-content | file hello.txt contains substring Hello |

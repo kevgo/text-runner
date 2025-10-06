@@ -7,12 +7,18 @@ Feature: Appending content to existing workspace files
       """
     Given the source code contains a file "directory_changer.md" with content:
       """
-      Now append to file <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
+      Now append to file
+      
+      <a type="workspace/additional-file-content">
+      
+        **foo/bar** the content ` appended content`.
+      
+      </a>.
       """
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-      | directory_changer.md | 1    | workspace/additional-file-content | append to file foo/bar |
+      | directory_changer.md |    3 | workspace/additional-file-content | append to file foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content
@@ -27,9 +33,9 @@ Feature: Appending content to existing workspace files
     And the source code contains a file "1.md" with content:
       """
       <a type="workspace/additional-file-content" dir="..">
-
+      
       Append to file **foo/bar** the content ` appended content`.
-
+      
       </a>
       """
     When calling:
@@ -40,7 +46,7 @@ Feature: Appending content to existing workspace files
       """
     Then it runs these actions:
       | FILENAME | LINE | ACTION                            | ACTIVITY                  |
-      | 1.md     | 1    | workspace/additional-file-content | append to file ../foo/bar |
+      |     1.md |    1 | workspace/additional-file-content | append to file ../foo/bar |
     And the workspace now contains a file "foo/bar" with content:
       """
       hello appended content
@@ -58,7 +64,7 @@ Feature: Appending content to existing workspace files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME             | LINE | ACTION                            | ACTIVITY                |
-      | directory_changer.md | 1    | workspace/additional-file-content | append to file file.txt |
+      | directory_changer.md |    1 | workspace/additional-file-content | append to file file.txt |
     And the workspace now contains a file "file.txt" with content:
       """
       hello sunshine

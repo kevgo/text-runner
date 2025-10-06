@@ -37,7 +37,8 @@ export class ProgressFormatter implements formatter.Formatter {
       printUserError(args.error)
     } else {
       console.log(
-        styleText("red",
+        styleText(
+          "red",
           `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`
         )
       )

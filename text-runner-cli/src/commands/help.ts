@@ -36,7 +36,7 @@ export class HelpCommand implements textRunner.commands.Command {
 USAGE: ${styleText("bold", "text-runner [<options>] <command>")}
 
 COMMANDS
-  ${styleText ("bold", "run")} [<filename>]         runs all tests on the given file/folder or entire documentation
+  ${styleText("bold", "run")} [<filename>]         runs all tests on the given file/folder or entire documentation
   ${styleText("bold", "dynamic")} [<filename>]     runs only the programmatic tests, skips checking links
   ${styleText("bold", "static")} [<filename>]      checks only the links, skips programmatic tests
 

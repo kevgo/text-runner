@@ -24,7 +24,7 @@ export class DetailedFormatter implements formatter.Formatter {
       printUserError(args.error)
     } else {
       process.stdout.write(
-        styleText("red",`${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
+        styleText("red", `${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
       )
       console.log(args.error.message)
       helpers.printCodeFrame(console.log, args.activity.location)
@@ -48,7 +48,8 @@ export class DetailedFormatter implements formatter.Formatter {
       process.stdout.write(styleText("dim", args.output))
     }
     console.log(
-      styleText("cyan",
+      styleText(
+        "cyan",
         `${args.activity.location.file.platformified()}:${args.activity.location.line} -- skipping: ${args.finalName}`
       )
     )
@@ -56,10 +57,13 @@ export class DetailedFormatter implements formatter.Formatter {
 
   onSuccess(args: textRunner.events.Success): void {
     if (args.output !== "") {
-      process.stdout.write(styleText("dim",args.output))
+      process.stdout.write(styleText("dim", args.output))
     }
     console.log(
-      styleText("green",`${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`)
+      styleText(
+        "green",
+        `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.finalName}`
+      )
     )
   }
 

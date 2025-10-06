@@ -18,7 +18,9 @@ export class SummaryFormatter implements formatter.Formatter {
   onFailed(args: textRunner.events.Failed): void {
     console.log()
     console.log(styleText("dim", args.output))
-    process.stdout.write(styleText("red", `${args.activity.location.file.platformified()}:${args.activity.location.line} -- `))
+    process.stdout.write(
+      styleText("red", `${args.activity.location.file.platformified()}:${args.activity.location.line} -- `)
+    )
     console.log(args.error.message)
     helpers.printCodeFrame(console.log, args.activity.location)
   }

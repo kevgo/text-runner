@@ -9,6 +9,7 @@ import { trimDollar } from "../helpers/trim-dollar.js"
 
 /** Runs the given commands synchronously on the console. */
 export async function command(action: textRunner.actions.Args): Promise<void> {
+  action.name("run shell command")
   const configPath = action.configuration.sourceDir.joinStr("textrun-shell.js")
   const config = await Configuration.load(configPath)
   const commandsToRun = action.region

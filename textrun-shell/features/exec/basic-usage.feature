@@ -37,7 +37,7 @@ Feature: shell/command
       | FILENAME      | running.md                                                      |
       | LINE          | 1                                                               |
       | ACTION        | shell/command                                                   |
-      | ACTIVITY      | Shell command                                                   |
+      | ACTIVITY      | run shell command                                               |
       | STATUS        | failed                                                          |
       | ERROR TYPE    | UserError                                                       |
       | ERROR MESSAGE | the <a type="shell/command"> region contains no commands to run |

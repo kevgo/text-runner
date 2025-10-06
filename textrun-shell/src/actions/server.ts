@@ -1,4 +1,4 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
 import * as textRunner from "text-runner-engine"
 import * as trExt from "textrun-extension"
@@ -18,7 +18,7 @@ export function server(action: textRunner.actions.Args): void {
     .filter((line: string) => line.length > 0)
     .map(trimDollar)
     .join(" && ")
-  action.name(`starting a server process: ${color.bold(color.cyan(commandsToRun))}`)
+  action.name(`starting a server process: ${styleText(["bold", "cyan"], commandsToRun)}`)
   CurrentServer.instance().set(
     observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
       cwd: action.configuration.workspace.platformified()

@@ -1,7 +1,7 @@
 import * as assertNoDiff from "assert-no-diff"
-import * as color from "colorette"
 import eol from "eol"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
@@ -14,7 +14,7 @@ export async function existingFileContent(action: textRunner.actions.Args): Prom
   }
   let expectedContent = action.region.textInNodeOfTypes("fence", "code")
   const filePath = path.join(action.location.file.directory().platformified(), relativeBaseDir, fileName)
-  action.name(`document content matches source code file ${color.cyan(filePath)}`)
+  action.name(`document content matches source code file ${styleText("cyan", filePath)}`)
   const fullPath = action.configuration.sourceDir.joinStr(filePath)
   action.log(`cat ${fullPath}`)
   let actualContent
@@ -25,7 +25,7 @@ export async function existingFileContent(action: textRunner.actions.Args): Prom
       throw err
     }
     if (err.code === "ENOENT") {
-      throw new Error(`file not found: ${color.cyan(filePath)}`)
+      throw new Error(`file not found: ${styleText("cyan", filePath)}`)
     } else {
       throw err
     }
@@ -36,7 +36,7 @@ export async function existingFileContent(action: textRunner.actions.Args): Prom
     assertNoDiff.trimmedLines(actualContent, expectedContent)
   } catch (err) {
     throw new textRunner.UserError(
-      `mismatching content in ${color.cyan(color.bold(filePath))}`,
+      `mismatching content in ${styleText("cyan", styleText("bold", filePath))}`,
       textRunner.errorMessage(err)
     )
   }

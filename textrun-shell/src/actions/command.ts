@@ -1,4 +1,4 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
 import * as textRunner from "text-runner-engine"
 import * as trExt from "textrun-extension"
@@ -27,7 +27,7 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
     )
   }
   const allowError = action.region[0].attributes["allow-error"] !== undefined
-  action.name(`running console command: ${color.cyan(commandsToRun)}`)
+  action.name(`running console command: ${styleText("cyan", commandsToRun)}`)
   const processor = observableProcess.start(trExt.callArgs(commandsToRun, process.platform), {
     cwd: action.configuration.workspace.platformified()
   })

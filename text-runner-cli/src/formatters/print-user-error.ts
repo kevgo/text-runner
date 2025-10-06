@@ -1,4 +1,4 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
@@ -6,9 +6,9 @@ import * as helpers from "../helpers/index.js"
 /** prints the given error to the console */
 export function printUserError(err: textRunner.UserError): void {
   if (err.location) {
-    console.log(color.red(`${err.location.file.unixified()}:${err.location.line} -- ${err.message || ""}`))
+    console.log(styleText("red", `${err.location.file.unixified()}:${err.location.line} -- ${err.message || ""}`))
   } else {
-    console.log(color.red(err.message))
+    console.log(styleText("red", err.message))
   }
   if (err.guidance) {
     console.log()

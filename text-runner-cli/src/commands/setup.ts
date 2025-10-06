@@ -1,5 +1,5 @@
-import * as color from "colorette"
 import { EventEmitter } from "events"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import * as configFile from "../config-file.js"
@@ -20,7 +20,7 @@ export class SetupCommand implements textRunner.commands.Command {
 
   async execute(): Promise<void> {
     await configFile.create(this.config)
-    this.emit("output", `Created configuration file ${color.cyan("text-runner.jsonc")} with default values`)
+    this.emit("output", `Created configuration file ${styleText("cyan", "text-runner.jsonc")} with default values`)
   }
 
   on(name: textRunner.events.Name, handler: textRunner.events.Handler): this {

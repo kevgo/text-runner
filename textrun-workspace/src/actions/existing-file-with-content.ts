@@ -46,7 +46,7 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
     } catch (err) {
       action.log(actualContent)
       throw new textRunner.UserError(
-        `mismatching content in ${styleText("cyan", styleText("bold", fileRelPath))}`,
+        `mismatching content in ${styleText(["cyan", "bold"], fileRelPath)}`,
         textRunner.errorMessage(err)
       )
     }

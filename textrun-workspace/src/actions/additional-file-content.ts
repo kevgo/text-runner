@@ -10,6 +10,9 @@ export async function additionalFileContent(action: textRunner.actions.Args): Pr
   }
   const fileName = fileNameAttribute || action.region.textInNodeOfType("em", "strong")
   const dirAttribute = action.region[0].attributes["dir"]
+  if (dirAttribute === "") {
+    throw new textRunner.UserError(`attribute "dir" is empty`, "")
+  }
   const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
   action.name(`append to file ${color.cyan(fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)

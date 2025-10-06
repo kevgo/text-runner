@@ -97,6 +97,22 @@ Feature: Appending content to existing workspace files
         hello appended content
         """
 
+    Scenario: empty "dir" attribute
+      Given the source code contains a file "empty_dir_attribute.md" with content:
+        """
+        <a type="workspace/additional-file-content" dir="">**file** `content`</a>.
+        """
+      When calling Text-Runner
+      Then it runs this action:
+        | FILENAME      | empty_dir_attribute.md            |
+        | LINE          |                                 1 |
+        | ACTION        | workspace/additional-file-content |
+        | ACTIVITY      | Workspace/additional file content |
+        | STATUS        | failed                            |
+        | ERROR TYPE    | UserError                         |
+        | ERROR MESSAGE | attribute "dir" is empty          |
+        | GUIDANCE      |                                   |
+
   Rule: the "filename" attribute sets the filename
 
     Scenario: provide filename via tag

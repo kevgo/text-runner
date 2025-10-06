@@ -7,7 +7,7 @@ Feature: Appending content to existing workspace files
         """
         hello sun
         """
-      Given the source code contains a file "directory_changer.md" with content:
+      Given the source code contains a file "file_appender.md" with content:
         """
         <a type="workspace/additional-file-content">
         
@@ -17,8 +17,8 @@ Feature: Appending content to existing workspace files
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME             | LINE | ACTION                            | ACTIVITY            |
-        | directory_changer.md |    1 | workspace/additional-file-content | append to file file |
+        | FILENAME         | LINE | ACTION                            | ACTIVITY            |
+        | file_appender.md |    1 | workspace/additional-file-content | append to file file |
       And the workspace now contains a file "file" with content:
         """
         <RESULT>
@@ -31,6 +31,25 @@ Feature: Appending content to existing workspace files
         | <em>file</em>         | <code> shine</code> | hello sunshine  |
         | <strong>file</strong> | <pre> shine</pre>   | hello sunshine  |
 
+    Scenario: missing filename
+      Given the workspace contains a file "foo/bar" with content:
+        """
+        hello
+        """
+      Given the source code contains a file "file_appender.md" with content:
+        """
+        Now append to file
+        <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
+        """
+      When calling Text-Runner
+      Then it runs these actions:
+        | FILENAME         | LINE | ACTION                            | ACTIVITY               |
+        | file_appender.md |    2 | workspace/additional-file-content | append to file foo/bar |
+      And the workspace now contains a file "foo/bar" with content:
+        """
+        hello appended content
+        """
+
   Rule: the file must exist
 
     Scenario: the file exists
@@ -38,28 +57,28 @@ Feature: Appending content to existing workspace files
         """
         hello
         """
-      Given the source code contains a file "directory_changer.md" with content:
+      Given the source code contains a file "file_appender.md" with content:
         """
         Now append to file
         <a type="workspace/additional-file-content">**foo/bar** the content ` appended content`.</a>.
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME             | LINE | ACTION                            | ACTIVITY               |
-        | directory_changer.md |    2 | workspace/additional-file-content | append to file foo/bar |
+        | FILENAME         | LINE | ACTION                            | ACTIVITY               |
+        | file_appender.md |    2 | workspace/additional-file-content | append to file foo/bar |
       And the workspace now contains a file "foo/bar" with content:
         """
         hello appended content
         """
 
     Scenario: the file does not exist
-      Given the source code contains a file "directory_changer.md" with content:
+      Given the source code contains a file "file_appender.md" with content:
         """
         <a type="workspace/additional-file-content">**zonk.txt** the content `content`</a>.
         """
       When calling Text-Runner
       Then it runs this action:
-        | FILENAME      | directory_changer.md                                                     |
+        | FILENAME      | file_appender.md                                                         |
         | LINE          |                                                                        1 |
         | ACTION        | workspace/additional-file-content                                        |
         | ACTIVITY      | append to file zonk.txt                                                  |
@@ -140,15 +159,15 @@ Feature: Appending content to existing workspace files
         """
         hello sun
         """
-      And the source code contains a file "directory_changer.md" with content:
+      And the source code contains a file "file_appender.md" with content:
         """
         Now append to file
         <a type="workspace/additional-file-content" filename="file.txt">shine</a>.
         """
       When calling Text-Runner
       Then it runs these actions:
-        | FILENAME             | LINE | ACTION                            | ACTIVITY                |
-        | directory_changer.md |    2 | workspace/additional-file-content | append to file file.txt |
+        | FILENAME         | LINE | ACTION                            | ACTIVITY                |
+        | file_appender.md |    2 | workspace/additional-file-content | append to file file.txt |
       And the workspace now contains a file "file.txt" with content:
         """
         hello sunshine

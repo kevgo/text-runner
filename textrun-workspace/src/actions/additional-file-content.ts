@@ -5,6 +5,9 @@ import * as textRunner from "text-runner-engine"
 
 export async function additionalFileContent(action: textRunner.actions.Args): Promise<void> {
   const fileNameAttribute = action.region[0].attributes["filename"]
+  if (fileNameAttribute === "") {
+    throw new textRunner.UserError(`attribute "filename" is empty`, "")
+  }
   const fileName = fileNameAttribute || action.region.textInNodeOfType("em", "strong")
   const dirAttribute = action.region[0].attributes["dir"]
   const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName

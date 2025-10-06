@@ -117,3 +117,19 @@ Feature: Appending content to existing workspace files
         """
         hello sunshine
         """
+
+    Scenario: empty "filename" attribute
+      Given the source code contains a file "empty_filename_attribute.md" with content:
+        """
+        <a type="workspace/additional-file-content" filename=""></a>.
+        """
+      When calling Text-Runner
+      Then it runs this action:
+        | FILENAME      | empty_filename_attribute.md       |
+        | LINE          |                                 1 |
+        | ACTION        | workspace/additional-file-content |
+        | ACTIVITY      | Workspace/additional file content |
+        | STATUS        | failed                            |
+        | ERROR TYPE    | UserError                         |
+        | ERROR MESSAGE | attribute "filename" is empty     |
+        | GUIDANCE      |                                   |

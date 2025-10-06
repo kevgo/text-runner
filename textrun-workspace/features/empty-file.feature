@@ -9,7 +9,7 @@ Feature: creating empty files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY            |
-      | creator.md |    2 | workspace/empty-file | create file one.txt |
+      | creator.md | 2    | workspace/empty-file | create file one.txt |
     And the workspace now contains an empty file "one.txt"
 
   Scenario: no file path given
@@ -20,7 +20,7 @@ Feature: creating empty files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME   | LINE | ACTION               | STATUS | ERROR TYPE | ERROR MESSAGE     | GUIDANCE |
-      | creator.md |    1 | workspace/empty-file | failed | UserError  | No filename given |          |
+      | creator.md | 1    | workspace/empty-file | failed | UserError  | No filename given |          |
 
   Scenario: setting the base directory
     Given the source code contains a file "creator.md" with content:
@@ -30,7 +30,7 @@ Feature: creating empty files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME   | LINE | ACTION               | ACTIVITY                   |
-      | creator.md |    1 | workspace/empty-file | create file subdir/one.txt |
+      | creator.md | 1    | workspace/empty-file | create file subdir/one.txt |
     And the workspace now contains an empty file "subdir/one.txt"
 
   Rule: the filename can be provided via the "filename" attribute
@@ -44,7 +44,7 @@ Feature: creating empty files
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME   | LINE | ACTION               | ACTIVITY            |
-        | creator.md |    2 | workspace/empty-file | create file one.txt |
+        | creator.md | 2    | workspace/empty-file | create file one.txt |
       And the workspace now contains an empty file "one.txt"
 
     Scenario: no file path given
@@ -55,4 +55,4 @@ Feature: creating empty files
       When calling Text-Runner
       Then it runs these actions:
         | FILENAME   | LINE | ACTION               | STATUS | ERROR TYPE | ERROR MESSAGE     | GUIDANCE |
-        | creator.md |    1 | workspace/empty-file | failed | UserError  | No filename given |          |
+        | creator.md | 1    | workspace/empty-file | failed | UserError  | No filename given |          |

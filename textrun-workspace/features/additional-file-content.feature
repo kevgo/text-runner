@@ -79,7 +79,7 @@ Feature: Appending content to existing workspace files
         hello
         """
 
-  Rule: the file must exist
+  Rule: the file to append to must exist
 
     Scenario: the file exists
       Given the workspace contains a file "foo/bar" with content:
@@ -116,7 +116,7 @@ Feature: Appending content to existing workspace files
         | ERROR MESSAGE | file "zonk.txt" doesn't exist                                            |
         | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
 
-  Rule: the "dir" attribute sets the base directory
+  Rule: the "dir" attribute can override the base directory
 
     Scenario: existing dir
       Given the workspace contains a file "foo/bar" with content:
@@ -165,7 +165,7 @@ Feature: Appending content to existing workspace files
         | ERROR MESSAGE | dir "zonk" doesn't exist                                             |
         | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk' |
 
-    Scenario: empty "dir" attribute
+    Scenario: empty attribute
       Given the source code contains a file "empty_dir_attribute.md" with content:
         """
         <a type="workspace/additional-file-content" dir="">**file** `content`</a>.
@@ -181,7 +181,7 @@ Feature: Appending content to existing workspace files
         | ERROR MESSAGE | attribute "dir" is empty          |
         | GUIDANCE      |                                   |
 
-  Rule: the "filename" attribute sets the filename
+  Rule: the "filename" attribute can set the filename
 
     Scenario: existing filename
       Given the workspace contains a file "file.txt" with content:
@@ -218,7 +218,7 @@ Feature: Appending content to existing workspace files
         | ERROR MESSAGE | file "zonk.txt" doesn't exist                                            |
         | GUIDANCE      | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
 
-    Scenario: empty "filename" attribute
+    Scenario: empty attribute
       Given the source code contains a file "empty_filename_attribute.md" with content:
         """
         <a type="workspace/additional-file-content" filename=""></a>.

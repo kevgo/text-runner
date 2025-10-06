@@ -17,7 +17,6 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "colorette": "2.0.20",
     "text-runner-engine": "7.1.2"
   },
   "devDependencies": {

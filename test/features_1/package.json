@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "text-runner": "7.2.0",
+    "text-runner": "7.2.1",
     "tsx": "4.20.6",
     "typescript": "5.9.3"
   }

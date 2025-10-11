@@ -1,6 +1,5 @@
 import { promises as fs } from "fs"
 import * as textRunner from "text-runner-engine"
-import * as util from "util"
 
 /** runs the given content in Text-Runner */
 export async function runnableRegion(action: textRunner.actions.Args): Promise<void> {
@@ -18,7 +17,8 @@ export async function runnableRegion(action: textRunner.actions.Args): Promise<v
   const activityCollector = new textRunner.ActivityCollector(command)
   await command.execute()
   for (const result of activityCollector.results()) {
-    action.log(util.inspect(result, false, Infinity))
+    // TODO: maybe print this when debug mode is activated
+    // action.log(util.inspect(result, false, Infinity))
     if (result.error) {
       throw result.error
     }

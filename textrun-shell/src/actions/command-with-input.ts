@@ -1,4 +1,4 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
 import * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
@@ -30,7 +30,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
       } ${action.configuration.regionMarker}="exec-with-input"> region contains no commands to run`
     )
   }
-  action.name(`running console command: ${color.cyan(commandsToRun)}`)
+  action.name(`running console command: ${styleText("cyan", commandsToRun)}`)
   let input: ProcessInput[] = []
   if (action.region.hasNodeOfType("table")) {
     input = getInput(action.region)

@@ -21,8 +21,8 @@ Feature: empty the workspace
   Scenario: default API behavior
     When calling Text-Runner
     Then it runs these actions:
-      | STATUS  | ACTIVITY             |
-      | success | 0 workspace files () |
+      | STATUS  | ACTIVITY                     |
+      | success | 1 workspace files (hello.md) |
 
   @cli
   Scenario: default CLI behavior

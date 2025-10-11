@@ -16,10 +16,10 @@
     "array-flatten": "3.0.0",
     "assert-no-diff": "4.1.0",
     "end-child-processes": "2.0.3",
-    "globby": "14.1.0",
+    "globby": "15.0.0",
     "observable-process": "8.0.0",
     "ps-tree": "1.2.0",
-    "strip-ansi": "7.1.0",
-    "text-runner-engine": "7.1.2"
+    "strip-ansi": "7.1.2",
+    "text-runner-engine": "7.2.0"
   }
 }

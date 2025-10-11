@@ -1,5 +1,14 @@
 # Change Log
 
+## 7.2.0
+
+- rename `workspace/additional-file-content` to `workspace/append-file`
+- you can now run `env DEBUG=* text-runner` to see additional debug messages
+- all
+  [workspace](https://github.com/kevgo/text-runner/tree/main/textrun-workspace)
+  actions now consistently allow `dir` and `filename` attributes
+- [workspace/append-file] now errors if the file to append doesn't exist
+
 ## 7.1.2
 
 - updates dependencies to fix all current security alerts

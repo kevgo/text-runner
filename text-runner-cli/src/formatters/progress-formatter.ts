@@ -1,5 +1,5 @@
 import * as progress from "cli-progress"
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
@@ -13,7 +13,7 @@ export class ProgressFormatter implements formatter.Formatter {
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
-        format: color.green(" {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
+        format: styleText("green", " {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
         hideCursor: undefined,
         stopOnComplete: true
       },
@@ -32,12 +32,13 @@ export class ProgressFormatter implements formatter.Formatter {
     this.progressBar.stop()
     console.log()
     console.log()
-    console.log(color.dim(args.output))
+    console.log(styleText("dim", args.output))
     if (textRunner.isUserError(args.error)) {
       printUserError(args.error)
     } else {
       console.log(
-        color.red(
+        styleText(
+          "red",
           `${args.activity.location.file.platformified()}:${args.activity.location.line} -- ${args.error.message}\n`
         )
       )

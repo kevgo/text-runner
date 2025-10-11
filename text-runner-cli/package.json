@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "7.1.2",
+  "version": "7.2.0",
   "description": "CLI test runner for documentation written in Markdown",
   "homepage": "https://github.com/kevgo/text-runner",
   "repository": {
@@ -26,14 +26,13 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@babel/code-frame": "7.26.2",
+    "@babel/code-frame": "7.27.1",
     "cli-cursor": "5.0.0",
     "cli-progress": "3.12.0",
-    "colorette": "2.0.20",
     "end-child-processes": "2.0.3",
     "jsonc-reader": "0.3.0",
     "minimist": "1.2.8",
-    "text-runner-engine": "7.1.2"
+    "text-runner-engine": "7.2.0"
   },
   "devDependencies": {
     "@types/babel__code-frame": "7.0.6",

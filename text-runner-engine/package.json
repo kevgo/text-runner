@@ -28,7 +28,7 @@
     "@sindresorhus/slugify": "3.0.0",
     "anchor-markdown-header": "0.7.0",
     "globby": "15.0.0",
-    "got": "14.4.9",
+    "got": "14.5.0",
     "humanize-string": "3.1.0",
     "is-glob": "4.0.3",
     "markdown-it": "14.1.0",

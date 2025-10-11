@@ -1,6 +1,6 @@
 {
   "name": "textrun-javascript",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -17,14 +17,14 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "text-runner-engine": "7.2.0"
+    "text-runner-engine": "7.2.1"
   },
   "devDependencies": {
     "colorette": "2.0.20",
     "shared-cucumber-steps": "*",
-    "text-runner": "7.2.0",
-    "textrun-extension": "0.4.0",
-    "textrun-npm": "0.4.0",
+    "text-runner": "7.2.1",
+    "textrun-extension": "0.4.1",
+    "textrun-npm": "0.4.1",
     "tsx": "4.20.6"
   }
 }

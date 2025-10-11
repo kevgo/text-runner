@@ -18,13 +18,13 @@
   },
   "dependencies": {
     "assert-no-diff": "4.1.0",
-    "text-runner-engine": "^7.2.1"
+    "text-runner-engine": "7.2.1"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "^7.2.1",
-    "textrun-action": "^0.4.1",
-    "textrun-extension": "^0.4.1",
+    "text-runner": "7.2.1",
+    "textrun-action": "0.4.1",
+    "textrun-extension": "0.4.1",
     "tsx": "4.20.6"
   }
 }

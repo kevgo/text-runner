@@ -1,5 +1,6 @@
 {
   "version": "independent",
   "npmClient": "yarn",
-  "loglevel": "error"
+  "loglevel": "error",
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

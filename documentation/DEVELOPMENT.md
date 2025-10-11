@@ -75,8 +75,8 @@ versions.
       modules
     - make sure to use `--no-private` if bumping the major version otherwise the
       stdlib gets stabilized
-  - make a global search-and-replace for `7.2.0` and `0.4.0` replace with the
+  - make a global search-and-replace for `7.2.1` and `0.4.1` replace with the
     new versions
   - ship this branch
-- `git town sync --all && git tag 7.2.0 && git push --tags`
+- `git town sync --all && git tag 7.2.1 && git push --tags`
 - run <code type="make/command" dir="..">make publish</code>

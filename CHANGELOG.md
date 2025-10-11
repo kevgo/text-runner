@@ -1,5 +1,10 @@
 # Change Log
 
+## 7.2.1
+
+- updates dependencies to remove all security warnings
+- remove outdated dependencies that cause security warnings
+
 ## 7.2.0
 
 - rename `workspace/additional-file-content` to `workspace/append-file`

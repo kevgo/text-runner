@@ -1,5 +1,5 @@
 # dev tooling and versions
-RUN_THAT_APP_VERSION = 0.19.1
+RUN_THAT_APP_VERSION = 0.22.0
 
 YARN_ARGS = FORCE_COLOR=1
 TURBO_ARGS = --concurrency=100%

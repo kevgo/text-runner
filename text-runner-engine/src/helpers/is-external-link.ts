@@ -1,5 +1,12 @@
-import * as url from "url"
-
 export function isExternalLink(target: string): boolean {
-  return target.startsWith("//") || !!url.parse(target).protocol
+  if (target.startsWith("//")) {
+    return true
+  }
+  try {
+    const parsedUrl = new URL(target)
+    return !!parsedUrl.protocol
+  } catch {
+    // If URL constructor throws, it's not a valid absolute URL
+    return false
+  }
 }

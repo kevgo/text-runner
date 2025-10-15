@@ -41,3 +41,11 @@ Feature: shell/command
       | STATUS        | failed                                                          |
       | ERROR TYPE    | UserError                                                       |
       | ERROR MESSAGE | the <a type="shell/command"> region contains no commands to run |
+
+  Scenario: provide command via attribute
+    Given the source code contains a file "running.md" with content:
+      """
+      <pre type="shell/command" command="mkdir example"></pre>
+      """
+    When calling Text-Runner
+    Then the test workspace now contains a directory "example"

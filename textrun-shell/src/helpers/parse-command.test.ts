@@ -22,9 +22,15 @@ suite("parseCommand", () => {
     assert.equal(have, want)
   })
 
-  test("one", () => {
+  test("mapping a single command", () => {
     const have = parseCommand("myapp foo", fakeGlobalize)
     const want = "/globalized/path/myapp foo"
+    assert.equal(have, want)
+  })
+
+  test("mapping multiple commands", () => {
+    const have = parseCommand("myapp foo\notherapp bar", fakeGlobalize)
+    const want = "/globalized/path/myapp foo && /globalized/path/otherapp bar"
     assert.equal(have, want)
   })
 })

@@ -5,7 +5,7 @@ import * as trExt from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"
 import { CurrentCommand } from "../helpers/current-command.js"
-import { trimDollar } from "../helpers/trim-dollar.js"
+import { parseCommand } from "../helpers/parse-command.js"
 
 /** Runs the given commands synchronously on the console. */
 export async function command(action: textRunner.actions.Args): Promise<void> {
@@ -14,18 +14,12 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
   const config = await Configuration.load(configPath)
   var commandText = action.region[0].attributes["command"]
   if (commandText === "") {
-    throw new Error("empty filename attribute")
+    throw new Error('empty "filename" attribute')
   }
   if (!commandText) {
     commandText = action.region.text()
   }
-  const commandsToRun = commandText
-    .split("\n")
-    .map((line: string) => line.trim())
-    .map(trimDollar)
-    .filter((line: string) => line.length > 0)
-    .map(config.pathMapper().globalizePathFunc())
-    .join(" && ")
+  const commandsToRun = parseCommand(commandText, config.pathMapper().globalizePathFunc())
   if (commandsToRun === "") {
     throw new Error(
       `the <${

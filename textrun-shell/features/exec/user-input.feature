@@ -113,17 +113,11 @@ Feature: running console commands
       """
     And the source code contains a file "enter-input.md" with content:
       """
-      <a type="shell/command-with-input" command="node echo.js">
-
-      Now enter this:
-
-      <table>
+      <table type="shell/command-with-input" command="node echo.js">
         <tr>
           <td>123</td>
         </tr>
       </table>
-
-      </a>
       """
     When calling Text-Runner
     Then it runs these actions:

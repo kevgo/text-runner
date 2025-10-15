@@ -171,12 +171,10 @@ descriptions and are also ignored.
 
 ### command attribute
 
-You can provide the command to run via an HTML attribute. As an example, if you
-run the previous script with this other input:
+You can provide the command to run via the `command` HTML attribute. As an
+example, if you run the previous script with this other input:
 
-<a type="shell/command-with-input" command="node greeter.js">
-
-<table>
+<table type="shell/command-with-input" command="node greeter.js">
   <tr>
     <th>Output to wait for</th>
     <th>input</th>
@@ -190,8 +188,6 @@ run the previous script with this other input:
     <td>Tuesday</td>
   </tr>
 </table>
-
-</a>
 
 Then it prints:
 

@@ -169,6 +169,32 @@ for, and the last one text to enter once the output from the first column has
 appeared. Middle columns are ignored. `<th>` elements are considered
 descriptions and are also ignored.
 
+### command attribute
+
+You can provide the command to run via the `command` HTML attribute. As an
+example, if you run the previous script with this other input:
+
+<table type="shell/command-with-input" command="node greeter.js">
+  <tr>
+    <th>Output to wait for</th>
+    <th>input</th>
+  </tr>
+  <tr>
+    <td>your name</td>
+    <td>Text-Runner</td>
+  </tr>
+  <tr>
+    <td>which day is today</td>
+    <td>Tuesday</td>
+  </tr>
+</table>
+
+Then it prints:
+
+<pre type="shell/command-output">
+Hello Text-Runner, happy Tuesday!
+</pre>
+
 ## shell/server
 
 Long-running processes, for example web or database servers, keep running while

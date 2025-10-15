@@ -179,14 +179,14 @@ documentation:
 <a type="extension/runnable-region">
 
 ```html
-<a type="workspace/copy-file" src="greeting/hello.txt" dst="greeting.txt"></a>.
+<a type="workspace/copy-file" src="greeting/hello.txt" dst="new.txt"></a>.
 ```
 
 </a>
 
 <a type="workspace/existing-file-with-content">
 
-Now your workspace contains a new file _greeting.txt_ with content `hello`.
+Now your workspace contains a new file _new.txt_ with content `hello`.
 
 </a>
 

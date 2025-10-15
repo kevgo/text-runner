@@ -12,8 +12,14 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
   action.name("run shell command")
   const configPath = action.configuration.sourceDir.joinStr("textrun-shell.js")
   const config = await Configuration.load(configPath)
-  const commandsToRun = action.region
-    .text()
+  var commandText = action.region[0].attributes["command"]
+  if (commandText === "") {
+    throw new Error("empty filename attribute")
+  }
+  if (!commandText) {
+    commandText = action.region.text()
+  }
+  const commandsToRun = commandText
     .split("\n")
     .map((line: string) => line.trim())
     .map(trimDollar)

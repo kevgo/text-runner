@@ -53,10 +53,10 @@ suite("parseCommand", () => {
   })
 })
 
-function noGlobalize(x: string): string {
-  return x
-}
-
 function fakeGlobalize(x: string): string {
   return `/globalized/path/${x}`
+}
+
+function noGlobalize(x: string): string {
+  return x
 }

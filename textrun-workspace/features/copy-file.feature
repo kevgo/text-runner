@@ -12,7 +12,7 @@ Feature: copying files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME | LINE | ACTION              | ACTIVITY                           |
-      | copy.md  |    1 | workspace/copy-file | copy file file_1.txt to file_2.txt |
+      | copy.md  | 1    | workspace/copy-file | copy file file_1.txt to file_2.txt |
     And the workspace still contains a file "file_1.txt" with content:
       """
       file one
@@ -30,7 +30,7 @@ Feature: copying files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | copy.md                                                                  |
-      | LINE          |                                                                        1 |
+      | LINE          | 1                                                                        |
       | ACTION        | workspace/copy-file                                                      |
       | ACTIVITY      | copy file zonk.txt to funk.txt                                           |
       | STATUS        | failed                                                                   |
@@ -46,7 +46,7 @@ Feature: copying files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | copy.md                                                 |
-      | LINE          |                                                       1 |
+      | LINE          | 1                                                       |
       | ACTION        | workspace/copy-file                                     |
       | ACTIVITY      | Workspace copy file                                     |
       | STATUS        | failed                                                  |
@@ -62,7 +62,7 @@ Feature: copying files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | copy.md                                                         |
-      | LINE          |                                                               1 |
+      | LINE          | 1                                                               |
       | ACTION        | workspace/copy-file                                             |
       | ACTIVITY      | Workspace copy file                                             |
       | STATUS        | failed                                                          |

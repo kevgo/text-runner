@@ -13,7 +13,7 @@ Feature: copying files
     Then it runs these actions:
       | FILENAME | LINE | ACTION              | ACTIVITY                           |
       | copy.md  |    1 | workspace/copy-file | copy file file_1.txt to file_2.txt |
-    And the workspace now contains a file "file_1.txt" with content:
+    And the workspace still contains a file "file_1.txt" with content:
       """
       file one
       """

@@ -15,9 +15,9 @@
     "reset": "rm -rf dist && yarn run build"
   },
   "dependencies": {
-    "text-runner-engine": "^7.3.0"
+    "text-runner-engine": "7.3.0"
   },
   "devDependencies": {
-    "text-runner": "^7.3.0"
+    "text-runner": "7.3.0"
   }
 }

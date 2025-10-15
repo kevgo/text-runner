@@ -44,9 +44,15 @@ Feature: copying files
       <a type="workspace/copy-file"></a>
       """
     When calling Text-Runner
-    Then it runs these actions:
-      | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE | GUIDANCE |
-      | copy.md  |    1 | workspace/copy-file | failed | UserError  | No src given  |          |
+    Then it runs this action:
+      | FILENAME      | copy.md                                                 |
+      | LINE          |                                                       1 |
+      | ACTION        | workspace/copy-file                                     |
+      | ACTIVITY      | Workspace copy file                                     |
+      | STATUS        | failed                                                  |
+      | ERROR TYPE    | UserError                                               |
+      | ERROR MESSAGE | No src given                                            |
+      | GUIDANCE      | Please provide the file to copy via the "src" attribute |
 
   Scenario: no dst given
     Given the source code contains a file "copy.md" with content:
@@ -54,6 +60,12 @@ Feature: copying files
       <a type="workspace/copy-file" src="file.txt"></a>
       """
     When calling Text-Runner
-    Then it runs these actions:
-      | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE | GUIDANCE |
-      | copy.md  |    1 | workspace/copy-file | failed | UserError  | No dst given  |          |
+    Then it runs this action:
+      | FILENAME      | copy.md                                                         |
+      | LINE          |                                                               1 |
+      | ACTION        | workspace/copy-file                                             |
+      | ACTIVITY      | Workspace copy file                                             |
+      | STATUS        | failed                                                          |
+      | ERROR TYPE    | UserError                                                       |
+      | ERROR MESSAGE | No dst given                                                    |
+      | GUIDANCE      | Please provide the destination filename via the "dst" attribute |

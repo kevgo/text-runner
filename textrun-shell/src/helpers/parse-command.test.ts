@@ -34,6 +34,12 @@ suite("parseCommand", () => {
     assert.equal(have, want)
   })
 
+  test("removes leading $", () => {
+    const have = parseCommand("$ echo one\n\n\n$ echo two", noGlobalize)
+    const want = "echo one && echo two"
+    assert.equal(have, want)
+  })
+
   test("mapping a single command", () => {
     const have = parseCommand("myapp foo", fakeGlobalize)
     const want = "/globalized/path/myapp foo"

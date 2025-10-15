@@ -228,6 +228,11 @@ node server.js
 
 </a>
 
+### command attribute
+
+You can also provide the command to start the server via the `command`
+attribute.
+
 ## shell/server-output
 
 After we started a long-running server through

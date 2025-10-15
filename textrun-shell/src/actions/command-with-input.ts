@@ -19,7 +19,7 @@ interface ProcessInput {
 export async function commandWithInput(action: textRunner.actions.Args): Promise<void> {
   var commandText = action.region[0].attributes["command"]
   if (commandText === "") {
-    throw new Error('empty "filename" attribute')
+    throw new Error('empty "command" attribute')
   }
   if (!commandText) {
     commandText = action.region.textInNodeOfTypes("fence", "code")

@@ -171,8 +171,8 @@ descriptions and are also ignored.
 
 ### command attribute
 
-You can provide the command to run via an HTML attribute. As an example, you can
-run the previous script with other input:
+You can provide the command to run via an HTML attribute. As an example, if you
+run the previous script with this other input:
 
 <a type="shell/command-with-input" command="node greeter.js">
 
@@ -193,7 +193,7 @@ run the previous script with other input:
 
 </a>
 
-It prints:
+Then it prints:
 
 <pre type="shell/command-output">
 Hello Text-Runner, happy Tuesday!

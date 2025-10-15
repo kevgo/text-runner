@@ -13,6 +13,13 @@ export async function copyFile(action: textRunner.actions.Args): Promise<void> {
   }
   action.name(`copy file ${styleText("cyan", src)} to ${styleText("cyan", dst)}`)
   const srcPath = action.configuration.workspace.joinStr(src)
+  try {
+    await fs.access(srcPath, fs.constants.F_OK)
+  } catch (e) {
+    if (e instanceof Error) {
+      throw new textRunner.UserError(`file "${src}" doesn't exist`, e.message)
+    }
+  }
   const dstPath = action.configuration.workspace.joinStr(dst)
   await fs.copyFile(srcPath, dstPath)
 }

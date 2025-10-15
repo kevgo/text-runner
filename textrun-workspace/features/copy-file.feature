@@ -22,6 +22,16 @@ Feature: copying files
       file one
       """
 
+  Scenario: file doesn't exist
+    Given the source code contains a file "copy.md" with content:
+      """
+      <a type="workspace/copy-file" src="zonk.txt" dst="funk.txt"></a>
+      """
+    When calling Text-Runner
+    Then it runs these actions:
+      | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE                 | GUIDANCE                                                                 |
+      | copy.md  |    1 | workspace/copy-file | failed | UserError  | file "zonk.txt" doesn't exist | ENOENT: no such file or directory, access '{{ WORKSPACE }}/tmp/zonk.txt' |
+
   Scenario: no src given
     Given the source code contains a file "copy.md" with content:
       """

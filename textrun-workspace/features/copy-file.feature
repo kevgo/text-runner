@@ -22,7 +22,17 @@ Feature: copying files
       file one
       """
 
-  Scenario: no file path given
+  Scenario: no src given
+    Given the source code contains a file "copy.md" with content:
+      """
+      <a type="workspace/copy-file"></a>
+      """
+    When calling Text-Runner
+    Then it runs these actions:
+      | FILENAME | LINE | ACTION              | STATUS | ERROR TYPE | ERROR MESSAGE | GUIDANCE |
+      | copy.md  |    1 | workspace/copy-file | failed | UserError  | No src given  |          |
+
+  Scenario: no dst given
     Given the source code contains a file "copy.md" with content:
       """
       <a type="workspace/copy-file" src="file.txt"></a>

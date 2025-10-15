@@ -66,6 +66,20 @@ echo Hello world!
 </pre>
 ```
 
+### command attribute
+
+You can provide the command to run via an HTML attribute:
+
+<a type="extension/runnable-region">
+
+```html
+The "echo" command prints text on the command line. For example, let's run:
+
+<pre type="shell/command" command="echo Hello world!"></pre>
+```
+
+</a>
+
 ## shell/command-output
 
 The <b type="action/name-full">shell/command-output</b> action verifies the

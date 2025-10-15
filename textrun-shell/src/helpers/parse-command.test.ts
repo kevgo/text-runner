@@ -5,7 +5,7 @@ import { parseCommand } from "./parse-command.js"
 
 suite("parseCommand", () => {
   test("empty", () => {
-    const have = parseCommand("", noGlobalize)
+    const have = parseCommand("    \n      ", noGlobalize)
     const want = ""
     assert.equal(have, want)
   })

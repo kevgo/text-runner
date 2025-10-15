@@ -167,6 +167,29 @@ Now file _greeting/hello.txt_ has content `hello sun and moonlight`.
 
 </a>
 
+## copy-file
+
+The <code type="action/name-full">workspace/copy-file</code> action copies the
+given file.
+
+Assume the workspace contains file <a type="workspace/new-file">
+_greeting/hello.txt_ with content `hello`</a>. Then you execute this
+documentation:
+
+<a type="extension/runnable-region">
+
+```html
+<a type="workspace/copy-file" src="greeting/hello.txt" dst="greeting.txt"></a>.
+```
+
+</a>
+
+<a type="workspace/existing-file-with-content">
+
+Now your workspace contains a new file _greeting.txt_ with content `hello`.
+
+</a>
+
 ## empty-file
 
 The <b type="action/name-full">workspace/empty-file</b> action creates an empty

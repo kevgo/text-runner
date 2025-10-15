@@ -14,7 +14,7 @@ Feature: shell/command
     Given the source code contains a file "running.md" with content:
       """
       <a type="shell/command">
-      
+
       ```
       mkdir example
       ```
@@ -27,7 +27,7 @@ Feature: shell/command
     Given the source code contains a file "running.md" with content:
       """
       <a type="shell/command">
-      
+
       ```
       ```
       </a>
@@ -35,7 +35,7 @@ Feature: shell/command
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | running.md                                                      |
-      | LINE          |                                                               1 |
+      | LINE          | 1                                                               |
       | ACTION        | shell/command                                                   |
       | ACTIVITY      | run shell command                                               |
       | STATUS        | failed                                                          |

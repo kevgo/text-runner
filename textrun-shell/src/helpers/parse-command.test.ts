@@ -22,13 +22,25 @@ suite("parseCommand", () => {
     assert.equal(have, want)
   })
 
+  test("ignores empty lines", () => {
+    const have = parseCommand("echo one\n\n\necho two", noGlobalize)
+    const want = "echo one && echo two"
+    assert.equal(have, want)
+  })
+
+  test("ignores whitespace", () => {
+    const have = parseCommand("     echo one    \n\n\n    echo two     ", noGlobalize)
+    const want = "echo one && echo two"
+    assert.equal(have, want)
+  })
+
   test("mapping a single command", () => {
     const have = parseCommand("myapp foo", fakeGlobalize)
     const want = "/globalized/path/myapp foo"
     assert.equal(have, want)
   })
 
-  test("mapping multiple commands", () => {
+  test("globalizes all commands using the given function", () => {
     const have = parseCommand("myapp foo\notherapp bar", fakeGlobalize)
     const want = "/globalized/path/myapp foo && /globalized/path/otherapp bar"
     assert.equal(have, want)

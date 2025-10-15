@@ -1,5 +1,10 @@
 # Change Log
 
+## 7.2.2
+
+- subshell actions can now receive the command to execute via the `command`
+  attribute
+
 ## 7.2.1
 
 - updates dependencies to remove all security warnings

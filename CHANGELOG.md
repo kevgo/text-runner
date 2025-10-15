@@ -1,6 +1,6 @@
 # Change Log
 
-## 7.2.2
+## 7.3.0
 
 - subshell actions can now receive the command to execute via the `command`
   attribute

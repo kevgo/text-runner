@@ -172,8 +172,8 @@ Now file _greeting/hello.txt_ has content `hello sun and moonlight`.
 The <code type="action/name-full">workspace/compare-files</code> action compares
 the content of the given files.
 
-Assume the workspace contains file <a type="workspace/new-file"> _one.txt_ with
-content `hello`</a> and file <a type="workspace/new-file"> _two.txt_, also with
+Assume the workspace contains file <a type="workspace/new-file"> _one.txt_, with
+content `hello`</a>, and file <a type="workspace/new-file"> _two.txt_, also with
 content `hello`</a>. Then this documentation passes:
 
 <a type="extension/runnable-region">

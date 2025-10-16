@@ -16,7 +16,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs these actions:
       | FILENAME   | LINE | ACTION                  | ACTIVITY                            |
-      | compare.md |    1 | workspace/compare-files | compare files have.txt and want.txt |
+      | compare.md | 1    | workspace/compare-files | compare files have.txt and want.txt |
 
   Scenario: have not provided
     Given the source code contains a file "compare.md" with content:
@@ -26,7 +26,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                                                 |
-      | LINE          |                                                          1 |
+      | LINE          | 1                                                          |
       | ACTION        | workspace/compare-files                                    |
       | ACTIVITY      | Workspace compare files                                    |
       | STATUS        | failed                                                     |
@@ -42,7 +42,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                                                 |
-      | LINE          |                                                          1 |
+      | LINE          | 1                                                          |
       | ACTION        | workspace/compare-files                                    |
       | ACTIVITY      | Workspace compare files                                    |
       | STATUS        | failed                                                     |
@@ -58,7 +58,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                                              |
-      | LINE          |                                                       1 |
+      | LINE          | 1                                                       |
       | ACTION        | workspace/compare-files                                 |
       | ACTIVITY      | Workspace compare files                                 |
       | STATUS        | failed                                                  |
@@ -74,7 +74,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                                              |
-      | LINE          |                                                       1 |
+      | LINE          | 1                                                       |
       | ACTION        | workspace/compare-files                                 |
       | ACTIVITY      | Workspace compare files                                 |
       | STATUS        | failed                                                  |
@@ -94,7 +94,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                              |
-      | LINE          |                                       1 |
+      | LINE          | 1                                       |
       | ACTION        | workspace/compare-files                 |
       | ACTIVITY      | compare files have.txt and want.txt     |
       | STATUS        | failed                                  |
@@ -114,7 +114,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                              |
-      | LINE          |                                       1 |
+      | LINE          | 1                                       |
       | ACTION        | workspace/compare-files                 |
       | ACTIVITY      | compare files have.txt and want.txt     |
       | STATUS        | failed                                  |
@@ -138,7 +138,7 @@ Feature: compare files
     When calling Text-Runner
     Then it runs this action:
       | FILENAME      | compare.md                                               |
-      | LINE          |                                                        1 |
+      | LINE          | 1                                                        |
       | ACTION        | workspace/compare-files                                  |
       | ACTIVITY      | compare files have.txt and want.txt                      |
       | STATUS        | failed                                                   |

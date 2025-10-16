@@ -6,11 +6,14 @@ import * as textRunner from "text-runner-engine"
 export async function compareFiles(action: textRunner.actions.Args): Promise<void> {
   const have = action.region[0].attributes["have"]
   if (!have) {
-    throw new textRunner.UserError("No have given", 'Please provide the file to verify via the "have" attribute')
+    throw new textRunner.UserError(
+      "Missing attribute: have",
+      'Please provide the file to verify via the "have" attribute'
+    )
   }
   const want = action.region[0].attributes["want"]
   if (!want) {
-    throw new textRunner.UserError("No want given", 'Please provide the golden file via the "want" attribute')
+    throw new textRunner.UserError("Missing attribute: want", 'Please provide the golden file via the "want" attribute')
   }
 
   action.name(`compare files ${styleText("cyan", have)} and ${styleText("cyan", want)}`)

@@ -18,6 +18,70 @@ Feature: compare files
       | FILENAME   | LINE | ACTION                  | ACTIVITY                            |
       | compare.md |    1 | workspace/compare-files | compare files have.txt and want.txt |
 
+  Scenario: have not provided
+    Given the source code contains a file "compare.md" with content:
+      """
+      <a type="workspace/compare-files" want="want.txt"></a>.
+      """
+    When calling Text-Runner
+    Then it runs this action:
+      | FILENAME      | compare.md                                                 |
+      | LINE          |                                                          1 |
+      | ACTION        | workspace/compare-files                                    |
+      | ACTIVITY      | Workspace compare files                                    |
+      | STATUS        | failed                                                     |
+      | ERROR TYPE    | UserError                                                  |
+      | ERROR MESSAGE | Missing attribute: have                                    |
+      | GUIDANCE      | Please provide the file to verify via the "have" attribute |
+
+  Scenario: have is empty
+    Given the source code contains a file "compare.md" with content:
+      """
+      <a type="workspace/compare-files" have="" want="want.txt"></a>.
+      """
+    When calling Text-Runner
+    Then it runs this action:
+      | FILENAME      | compare.md                                                 |
+      | LINE          |                                                          1 |
+      | ACTION        | workspace/compare-files                                    |
+      | ACTIVITY      | Workspace compare files                                    |
+      | STATUS        | failed                                                     |
+      | ERROR TYPE    | UserError                                                  |
+      | ERROR MESSAGE | Missing attribute: have                                    |
+      | GUIDANCE      | Please provide the file to verify via the "have" attribute |
+
+  Scenario: want not provided
+    Given the source code contains a file "compare.md" with content:
+      """
+      <a type="workspace/compare-files" have="have.txt"></a>.
+      """
+    When calling Text-Runner
+    Then it runs this action:
+      | FILENAME      | compare.md                                              |
+      | LINE          |                                                       1 |
+      | ACTION        | workspace/compare-files                                 |
+      | ACTIVITY      | Workspace compare files                                 |
+      | STATUS        | failed                                                  |
+      | ERROR TYPE    | UserError                                               |
+      | ERROR MESSAGE | Missing attribute: want                                 |
+      | GUIDANCE      | Please provide the golden file via the "want" attribute |
+
+  Scenario: want is empty
+    Given the source code contains a file "compare.md" with content:
+      """
+      <a type="workspace/compare-files" have="have.txt" want=""></a>.
+      """
+    When calling Text-Runner
+    Then it runs this action:
+      | FILENAME      | compare.md                                              |
+      | LINE          |                                                       1 |
+      | ACTION        | workspace/compare-files                                 |
+      | ACTIVITY      | Workspace compare files                                 |
+      | STATUS        | failed                                                  |
+      | ERROR TYPE    | UserError                                               |
+      | ERROR MESSAGE | Missing attribute: want                                 |
+      | GUIDANCE      | Please provide the golden file via the "want" attribute |
+
   Scenario: have doesn't exist
     And the workspace contains a file "want.txt" with content:
       """

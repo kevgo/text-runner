@@ -9,8 +9,8 @@
     "lint": "dprint check && sort-package-json --check --quiet"
   },
   "dependencies": {
-    "text-runner": "7.3.0",
-    "textrun-shell": "0.5.0"
+    "text-runner": "7.4.0",
+    "textrun-shell": "0.6.0"
   },
   "devDependencies": {
     "tsx": "4.20.6"

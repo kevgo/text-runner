@@ -72,8 +72,8 @@ versions.
     - `lerna version patch --no-private`
     - `lerna version minor --no-private`
     - `lerna version major --no-private`
-  - make a global search-and-replace for `7.3.0` and `0.5.0` replace with the
+  - make a global search-and-replace for `7.4.0` and `0.5.0` replace with the
     new versions
   - ship this branch
-- `git town sync --all && git tag 7.3.0 && git push --tags`
+- `git town sync --all && git tag 7.4.0 && git push --tags`
 - run <code type="make/command" dir="..">make publish</code>

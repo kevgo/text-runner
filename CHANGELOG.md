@@ -1,5 +1,10 @@
 # Change Log
 
+## 7.4.0
+
+- new action: `workspace/copy-file`
+- new action: `workspace/compare-files`
+
 ## 7.3.0
 
 - subshell actions can now receive the command to execute via the `command`

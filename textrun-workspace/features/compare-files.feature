@@ -38,6 +38,26 @@ Feature: compare files
       | ERROR MESSAGE | file not found: have.txt                |
       | GUIDANCE      | the workspace has these files: want.txt |
 
+  Scenario: want doesn't exist
+    And the workspace contains a file "have.txt" with content:
+      """
+      same file content
+      """
+    And the source code contains a file "compare.md" with content:
+      """
+      <a type="workspace/compare-files" have="have.txt" want="want.txt"></a>.
+      """
+    When calling Text-Runner
+    Then it runs this action:
+      | FILENAME      | compare.md                              |
+      | LINE          |                                       1 |
+      | ACTION        | workspace/compare-files                 |
+      | ACTIVITY      | compare files have.txt and want.txt     |
+      | STATUS        | failed                                  |
+      | ERROR TYPE    | UserError                               |
+      | ERROR MESSAGE | file not found: want.txt                |
+      | GUIDANCE      | the workspace has these files: have.txt |
+
   Scenario: no src given
     Given the source code contains a file "copy.md" with content:
       """

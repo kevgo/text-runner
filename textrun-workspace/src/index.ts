@@ -1,7 +1,7 @@
 import * as textRunner from "text-runner"
 
 import { appendFile } from "./actions/append-file.js"
-import { comparefiles } from "./actions/compare-files.js"
+import { compareFiles } from "./actions/compare-files.js"
 import { copyFile } from "./actions/copy-file.js"
 import { emptyFile } from "./actions/empty-file.js"
 import { existingDirectory } from "./actions/existing-directory.js"
@@ -13,7 +13,7 @@ import { workingDir } from "./actions/working-dir.js"
 
 export const textrunActions: textRunner.exports.TextrunActions = {
   appendFile,
-  comparefiles,
+  compareFiles,
   copyFile,
   emptyFile,
   existingDirectory,

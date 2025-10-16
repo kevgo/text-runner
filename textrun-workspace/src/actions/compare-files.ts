@@ -3,7 +3,7 @@ import { promises as fs } from "fs"
 import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
-export async function comparefiles(action: textRunner.actions.Args): Promise<void> {
+export async function compareFiles(action: textRunner.actions.Args): Promise<void> {
   const have = action.region[0].attributes["have"]
   if (!have) {
     throw new textRunner.UserError("No have given", 'Please provide the file to verify via the "have" attribute')

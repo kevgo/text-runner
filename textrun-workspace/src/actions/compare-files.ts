@@ -13,7 +13,7 @@ export async function compareFiles(action: textRunner.actions.Args): Promise<voi
     throw new textRunner.UserError("No want given", 'Please provide the golden file via the "want" attribute')
   }
 
-  action.name(`compare file ${styleText("cyan", have)} and ${styleText("cyan", want)}`)
+  action.name(`compare files ${styleText("cyan", have)} and ${styleText("cyan", want)}`)
 
   const haveContent = await readFile(have, action.configuration.workspace)
   const wantContent = await readFile(want, action.configuration.workspace)

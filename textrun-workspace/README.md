@@ -167,6 +167,8 @@ Now file _greeting/hello.txt_ has content `hello sun and moonlight`.
 
 </a>
 
+## compare-files
+
 ## copy-file
 
 The <code type="action/name-full">workspace/copy-file</code> action copies the

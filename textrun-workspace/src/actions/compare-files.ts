@@ -23,7 +23,7 @@ export async function compareFiles(action: textRunner.actions.Args): Promise<voi
   } catch (err) {
     action.log(haveContent)
     throw new textRunner.UserError(
-      `mismatching content in ${styleText(["cyan", "bold"], have)}`,
+      `mismatching content`,
       textRunner.errorMessage(err)
     )
   }

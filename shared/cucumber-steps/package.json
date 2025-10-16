@@ -20,6 +20,6 @@
     "observable-process": "8.0.0",
     "ps-tree": "1.2.0",
     "strip-ansi": "7.1.2",
-    "text-runner-engine": "7.3.0"
+    "text-runner-engine": "7.4.0"
   }
 }

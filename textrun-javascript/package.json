@@ -17,13 +17,13 @@
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "text-runner-engine": "^7.4.0"
+    "text-runner-engine": "7.4.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "^7.4.0",
-    "textrun-extension": "^0.6.0",
-    "textrun-npm": "^0.6.0",
+    "text-runner": "7.4.0",
+    "textrun-extension": "0.6.0",
+    "textrun-npm": "0.6.0",
     "tsx": "4.20.6"
   }
 }

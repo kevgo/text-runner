@@ -1,5 +1,5 @@
-import * as color from "colorette"
 import { promises as fs } from "fs"
+import { styleText } from "node:util"
 import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
@@ -10,14 +10,14 @@ import * as textRunner from "text-runner-engine"
 export async function existingDirectory(action: textRunner.actions.Args): Promise<void> {
   const dirName = action.region.text()
   const dirRelName = path.join(action.region[0].attributes["dir"] || ".", dirName)
-  action.name(`directory ${color.cyan(dirRelName)} exists in the workspace`)
+  action.name(`directory ${styleText("cyan", dirRelName)} exists in the workspace`)
   const fullPath = action.configuration.workspace.joinStr(dirRelName)
   try {
     var stats = await fs.lstat(fullPath)
   } catch (err) {
-    throw new Error(`directory ${color.cyan(color.bold(dirRelName))} does not exist in the workspace`)
+    throw new Error(`directory ${styleText(["cyan", "bold"], dirRelName)} does not exist in the workspace`)
   }
   if (!stats.isDirectory()) {
-    throw new Error(`${color.cyan(dirRelName)} exists but is not a directory`)
+    throw new Error(`${styleText("cyan", dirRelName)} exists but is not a directory`)
   }
 }

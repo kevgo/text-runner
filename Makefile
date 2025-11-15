@@ -1,16 +1,11 @@
 # dev tooling and versions
-RUN_THAT_APP_VERSION = 0.14.0
+RUN_THAT_APP_VERSION = 0.22.0
 
 YARN_ARGS = FORCE_COLOR=1
 TURBO_ARGS = --concurrency=100%
 
 build:  # builds all codebases
 	env $(YARN_ARGS) yarn exec --silent -- turbo run build $(TURBO_ARGS)
-
-clean:  # remove all build artifacts
-	env $(YARN_ARGS) yarn exec --silent -- turbo run clean $(TURBO_ARGS)
-	find . -name .turbo -type d | xargs rm -rf
-	find . -name node_modules -type d | xargs rm -rf
 
 cuke:  # runs all E2E tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run cuke $(TURBO_ARGS)
@@ -19,10 +14,11 @@ doc:  # runs the documentation tests
 	env $(YARN_ARGS) yarn exec --silent -- text-runner
 	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
 
-fix:  # runs all auto-fixes
+fix: tools/rta@${RUN_THAT_APP_VERSION}  # runs all auto-fixes
 	yarn exec --silent -- dprint fmt
 	yarn exec --silent -- sort-package-json --quiet
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
+	tools/rta ghokin fmt replace text-runner-features
 
 help:  # prints all make targets
 	cat Makefile | grep '^[^ ]*:' | grep -v '.PHONY' | grep -v '.SILENT' | grep -v help | grep -v '^tools/rta' | sed 's/:.*#/#/' | column -s "#" -t
@@ -30,17 +26,24 @@ help:  # prints all make targets
 lint:  # lints the root directory
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint $(TURBO_ARGS)
 
-publish: clean setup  # publishes all code bases
+publish: reset  # publishes all code bases
 	yarn exec -- lerna publish from-package
 
-setup:  # prepares the mono-repo for development after cloning
+setup: tools/rta@${RUN_THAT_APP_VERSION}  # prepares the mono-repo for development after cloning
 	yarn
 	make --no-print-directory build
+	tools/rta ghokin version
+
+reset:  # fresh setup
+	echo "deleting turbo cache" && find . -name .turbo -type d | xargs rm -rf
+	echo "deleting node_modules" && find . -name node_modules -type d | xargs rm -rf
+	echo "deleting dist" && find . -name dist -type d | xargs rm -rf
+	make --no-print-directory setup
 
 stats: tools/rta@${RUN_THAT_APP_VERSION}  # shows code statistics
 	find . -type f | grep -v '/node_modules/' | grep -v '/dist/' | grep -v '\./.git/' | grep -v '\./\.vscode/' | grep -v '\./tmp/' | xargs tools/rta scc
 
-test:  # runs all tests
+test: tools/rta@${RUN_THAT_APP_VERSION}  # runs all tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run lint unit cuke doc $(TURBO_ARGS)
 .PHONY: test
 

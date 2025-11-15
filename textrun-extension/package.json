@@ -1,6 +1,6 @@
 {
   "name": "textrun-extension",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "description": "Text-Runner actions for verifying the documentation of Text-Runner extensions",
   "license": "ISC",
   "type": "module",
@@ -11,20 +11,20 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "clean": "rm -rf dist",
     "cuke": "cucumber-js --format=progress",
     "doc": "text-runner",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet && ../tools/rta ghokin fmt replace features",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck",
+    "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "text-runner-engine": "7.1.0"
+    "text-runner-engine": "7.4.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "7.1.0",
-    "textrun-action": "0.3.0",
-    "tsx": "4.19.3"
+    "text-runner": "7.4.0",
+    "textrun-action": "0.6.0",
+    "tsx": "4.20.6"
   }
 }

@@ -20,7 +20,7 @@ export async function runActivity(
   emitter: commands.Command
 ): Promise<boolean> {
   const outputCollector = new OutputCollector()
-  const nameRefiner = new NameRefiner(humanize(activity.actionName))
+  const nameRefiner = new NameRefiner(humanize(activity.actionName.replace("/", " ")))
   const args: actions.Args = {
     configuration,
     document: activity.document,

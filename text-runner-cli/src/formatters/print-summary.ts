@@ -1,17 +1,15 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
 export function printSummary(results: textRunner.ActivityResults): void {
   let text = "\n"
-  let colorFn: color.Color
   const errorCount = results.errorCount()
   if (errorCount === 0) {
-    colorFn = color.green
-    text += color.green("Success! ")
+    text += styleText("green", "Success! ")
+    text += styleText("green", `${results.length} activities, ${results.duration}`)
   } else {
-    colorFn = color.red
-    text += color.red(`${errorCount} errors, `)
+    text += styleText("red", `${errorCount} errors, `)
+    text += styleText("red", `${results.length} activities, ${results.duration}`)
   }
-  text += colorFn(`${results.length} activities, ${results.duration}`)
-  console.log(color.bold(text))
+  console.log(styleText("bold", text))
 }

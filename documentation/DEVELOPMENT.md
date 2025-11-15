@@ -66,11 +66,14 @@ versions.
 ## Deployment
 
 - on a branch:
-  - `yarn run json-schema && make fix` in the root folder and ship
-  - bump the versions by running `lerna version <patch|minor> --no-private` or
-    by updating the versions manually if bumping the major version
-  - make a global search-and-replace for "7.1.0" and "0.3.0" replace it with the
-    new version
+  - update CHANGELOG.md
+  - `yarn run json-schema && make fix` in the root folder
+  - bump the versions by running one of:
+    - `lerna version patch --no-private`
+    - `lerna version minor --no-private`
+    - `lerna version major --no-private`
+  - make a global search-and-replace for `7.4.0` and `0.5.0` replace with the
+    new versions
   - ship this branch
-- `git town sync --all && git tag 7.1.0 && git push --tags`
+- `git town sync --all && git tag 7.4.0 && git push --tags`
 - run <code type="make/command" dir="..">make publish</code>

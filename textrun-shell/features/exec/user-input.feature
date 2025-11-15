@@ -90,3 +90,37 @@ Feature: running console commands
       | FILENAME               | LINE | ACTION                   | ACTIVITY                               | OUTPUT                                                                                          |
       | create-input-server.md | 1    | workspace/new-file       | create file input.js                   | create file input.js                                                                            |
       | enter-input.md         | 1    | shell/command-with-input | running console command: node input.js | Name of the service to add\nDescription\nservice: html-server, description: serves the HTML UI! |
+
+  Scenario: provide the command to run via an attribute
+    Given the source code contains a file "create-echo-server.md" with content:
+      """
+      Create a file <a type="workspace/new-file">**echo.js** with content:
+
+      ```
+      import * as readline from "readline"
+      var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false,
+      })
+
+      rl.question("Your input", (answer) => {
+        console.log("You entered:", answer)
+        rl.close()
+        process.exit()
+      })
+      ```
+      """
+    And the source code contains a file "enter-input.md" with content:
+      """
+      <table type="shell/command-with-input" command="node echo.js">
+        <tr>
+          <td>123</td>
+        </tr>
+      </table>
+      """
+    When calling Text-Runner
+    Then it runs these actions:
+      | FILENAME              | LINE | ACTION                   | ACTIVITY                              | OUTPUT                     |
+      | create-echo-server.md | 1    | workspace/new-file       | create file echo.js                   | create file echo.js        |
+      | enter-input.md        | 1    | shell/command-with-input | running console command: node echo.js | Your inputYou entered: 123 |

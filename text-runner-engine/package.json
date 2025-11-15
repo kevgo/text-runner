@@ -1,6 +1,6 @@
 {
   "name": "text-runner-engine",
-  "version": "7.1.0",
+  "version": "7.4.0",
   "description": "Tests documentation written in MarkDown",
   "homepage": "https://github.com/kevgo/text-runner",
   "repository": {
@@ -17,29 +17,28 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "clean": "rm -rf dist",
     "doc": "text-runner",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "eslint --ignore-pattern=dist/ . && dprint check && sort-package-json --check --quiet && depcheck",
+    "reset": "rm -rf dist && yarn run build",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./\\.git/ | grep -v \\./\\.vscode/ | grep -v \\./tmp/ | xargs scc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@sindresorhus/slugify": "2.2.1",
+    "@sindresorhus/slugify": "3.0.0",
     "anchor-markdown-header": "0.7.0",
-    "globby": "14.1.0",
-    "got": "14.4.6",
-    "humanize-string": "3.0.0",
+    "globby": "15.0.0",
+    "got": "14.5.0",
+    "humanize-string": "3.1.0",
     "is-glob": "4.0.3",
     "markdown-it": "14.1.0",
-    "parse5": "7.2.1",
+    "parse5": "8.0.0",
     "tmp-promise": "3.0.3"
   },
   "devDependencies": {
-    "@types/got": "9.6.12",
     "@types/is-glob": "4.0.4",
     "@types/markdown-it": "14.1.2",
     "assert-no-diff": "4.1.0",
-    "tsx": "4.19.3"
+    "tsx": "4.20.6"
   }
 }

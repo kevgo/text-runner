@@ -1,6 +1,6 @@
 {
   "name": "textrun-javascript",
-  "version": "0.3.0",
+  "version": "0.6.0",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -9,23 +9,22 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "clean": "rm -rf dist",
     "cuke": "cucumber-js --format=progress",
     "doc": "text-runner --format=dot",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
+    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet && ../tools/rta ghokin fmt replace features",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck",
+    "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "text-runner-engine": "7.1.0"
+    "text-runner-engine": "7.4.0"
   },
   "devDependencies": {
     "colorette": "2.0.20",
     "shared-cucumber-steps": "*",
-    "text-runner": "7.1.0",
-    "text-runner-engine": "7.1.0",
-    "textrun-extension": "0.3.0",
-    "textrun-npm": "0.3.0",
-    "tsx": "4.19.3"
+    "text-runner": "7.4.0",
+    "textrun-extension": "0.6.0",
+    "textrun-npm": "0.6.0",
+    "tsx": "4.20.6"
   }
 }

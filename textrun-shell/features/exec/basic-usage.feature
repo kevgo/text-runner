@@ -1,6 +1,6 @@
 Feature: shell/command
 
-  Scenario: inside <pre> tags
+  Scenario: no fenced code block
     Given the source code contains a file "running.md" with content:
       """
       <pre type="shell/command">
@@ -33,6 +33,19 @@ Feature: shell/command
       </a>
       """
     When calling Text-Runner
-    Then it runs these actions:
-      | FILENAME   | LINE | ACTION        | STATUS | ERROR TYPE | ERROR MESSAGE                                                   |
-      | running.md | 1    | shell/command | failed | UserError  | the <a type="shell/command"> region contains no commands to run |
+    Then it runs this action:
+      | FILENAME      | running.md                                                      |
+      | LINE          | 1                                                               |
+      | ACTION        | shell/command                                                   |
+      | ACTIVITY      | run shell command                                               |
+      | STATUS        | failed                                                          |
+      | ERROR TYPE    | UserError                                                       |
+      | ERROR MESSAGE | the <a type="shell/command"> region contains no commands to run |
+
+  Scenario: provide command via attribute
+    Given the source code contains a file "running.md" with content:
+      """
+      <pre type="shell/command" command="mkdir example"></pre>
+      """
+    When calling Text-Runner
+    Then the test workspace now contains a directory "example"

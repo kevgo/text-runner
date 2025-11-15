@@ -1,5 +1,37 @@
 # Change Log
 
+## 7.4.0
+
+- new action: `workspace/copy-file`
+- new action: `workspace/compare-files`
+
+## 7.3.0
+
+- subshell actions can now receive the command to execute via the `command`
+  attribute
+
+## 7.2.1
+
+- updates dependencies to remove all security warnings
+- remove outdated dependencies that cause security warnings
+
+## 7.2.0
+
+- rename `workspace/additional-file-content` to `workspace/append-file`
+- you can now run `env DEBUG=* text-runner` to see additional debug messages
+- all
+  [workspace](https://github.com/kevgo/text-runner/tree/main/textrun-workspace)
+  actions now consistently allow `dir` and `filename` attributes
+- [workspace/append-file] now errors if the file to append doesn't exist
+
+## 7.1.2
+
+- updates dependencies to fix all current security alerts
+
+## 7.1.1
+
+- adds missing `ast.NodeType` for list items
+
 ## 7.1.0
 
 - provides JSON-Schema definition for Text-Runner config files:

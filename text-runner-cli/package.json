@@ -1,6 +1,6 @@
 {
   "name": "text-runner",
-  "version": "7.1.0",
+  "version": "7.4.0",
   "description": "CLI test runner for documentation written in Markdown",
   "homepage": "https://github.com/kevgo/text-runner",
   "repository": {
@@ -18,22 +18,21 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "clean": "rm -rf dist",
     "doc": "text-runner --format=dot",
     "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
     "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
+    "reset": "rm -rf dist && yarn run build",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
   "dependencies": {
-    "@babel/code-frame": "7.26.2",
+    "@babel/code-frame": "7.27.1",
     "cli-cursor": "5.0.0",
     "cli-progress": "3.12.0",
-    "colorette": "2.0.20",
-    "end-child-processes": "1.0.3",
-    "jsonc-reader": "0.1.2",
+    "end-child-processes": "2.0.3",
+    "jsonc-reader": "0.3.0",
     "minimist": "1.2.8",
-    "text-runner-engine": "7.1.0"
+    "text-runner-engine": "7.4.0"
   },
   "devDependencies": {
     "@types/babel__code-frame": "7.0.6",

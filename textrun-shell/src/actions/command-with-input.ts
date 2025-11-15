@@ -1,10 +1,11 @@
-import * as color from "colorette"
+import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
 import * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
 
+import { Configuration } from "../helpers/configuration.js"
 import { CurrentCommand } from "../helpers/current-command.js"
-import { trimDollar } from "../helpers/trim-dollar.js"
+import { parseCommand } from "../helpers/parse-command.js"
 
 interface ProcessInput {
   readonly input: string
@@ -16,13 +17,16 @@ interface ProcessInput {
  * and waits until the command is finished.
  */
 export async function commandWithInput(action: textRunner.actions.Args): Promise<void> {
-  const content = action.region.textInNodeOfTypes("fence", "code")
-  const commandsToRun = content
-    .split("\n")
-    .map((command: string) => command.trim())
-    .filter((e: string) => e)
-    .map(trimDollar)
-    .join(" && ")
+  var commandText = action.region[0].attributes["command"]
+  if (commandText === "") {
+    throw new Error('empty "command" attribute')
+  }
+  if (!commandText) {
+    commandText = action.region.textInNodeOfTypes("fence", "code")
+  }
+  const configPath = action.configuration.sourceDir.joinStr("textrun-shell.js")
+  const config = await Configuration.load(configPath)
+  const commandsToRun = parseCommand(commandText, config.pathMapper().globalizePathFunc())
   if (commandsToRun === "") {
     throw new Error(
       `the <${
@@ -30,7 +34,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
       } ${action.configuration.regionMarker}="exec-with-input"> region contains no commands to run`
     )
   }
-  action.name(`running console command: ${color.cyan(commandsToRun)}`)
+  action.name(`running console command: ${styleText("cyan", commandsToRun)}`)
   let input: ProcessInput[] = []
   if (action.region.hasNodeOfType("table")) {
     input = getInput(action.region)

@@ -22,7 +22,7 @@ To get the codebase into a runnable state after cloning:
   Text-Runner in a shell
 - text-runner-features: end-to-end tests for Text-Runner
 
-Text-Runner plugins are defined in [the readme](../README.md#plugins).
+The other folders are Text-Runner plugins or utility folders.
 
 ## Running tools
 

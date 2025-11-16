@@ -1,6 +1,6 @@
 # Developers Guide
 
-This guide is for all codebases in this mono-repo.
+This monorepo contains the code for Text-Runner and its standard library.
 
 ## Setup after cloning
 
@@ -14,6 +14,14 @@ You need to have these tools installed:
 To get the codebase into a runnable state after cloning:
 
 - <code type="make/command" dir="..">make setup</code> to install dependencies
+
+## Folders
+
+- text-runner-engine: implements the Text-Runner functionality as a library
+- text-runner-cli: a CLI wrapper around the Text-Runner engine, to call Text-Runner in a shell
+- text-runner-features: end-to-end tests for Text-Runner
+
+Text-Runner plugins are defined in [the readme](../README.md#plugins).
 
 ## Running tools
 

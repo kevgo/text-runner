@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "text-runner": "7.5.0",
-    "textrun-shell": "0.6.0"
+    "textrun-shell": "0.7.0"
   },
   "devDependencies": {
     "tsx": "4.21.0"

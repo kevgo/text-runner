@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.5.0
+
+- requires Node 24 or newer
+
 ## 7.4.0
 
 - new action: `workspace/copy-file`

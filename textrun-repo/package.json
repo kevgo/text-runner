@@ -1,6 +1,6 @@
 {
   "name": "textrun-repo",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Text-Runner actions for verifying the content of the current repository",
   "license": "ISC",
   "type": "module",
@@ -19,14 +19,14 @@
   "dependencies": {
     "assert-no-diff": "4.1.0",
     "eol": "0.10.0",
-    "text-runner-engine": "7.4.0"
+    "text-runner-engine": "7.5.0"
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "7.4.0",
-    "textrun-action": "0.6.0",
-    "textrun-extension": "0.6.0",
-    "textrun-npm": "0.6.0",
+    "text-runner": "7.5.0",
+    "textrun-action": "0.7.0",
+    "textrun-extension": "0.7.0",
+    "textrun-npm": "0.7.0",
     "tsx": "4.21.0"
   }
 }

@@ -1,4 +1,3 @@
 #!/usr/bin/env -S node --experimental-strip-types --no-warnings
 
-import { start } from "../dist/start.js"
-start()
+import "../dist/start.js"

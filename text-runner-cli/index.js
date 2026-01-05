@@ -1,6 +1,6 @@
 import cliCursor from "cli-cursor"
 
-import { main } from "./main.js"
+import { main } from "./src/main.js"
 
 async function start() {
   cliCursor.hide()

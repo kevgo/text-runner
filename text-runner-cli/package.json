@@ -14,7 +14,8 @@
   "bin": "./bin/text-runner",
   "files": [
     "bin",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",

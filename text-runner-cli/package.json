@@ -15,7 +15,7 @@
   "files": [
     "bin",
     "dist",
-    "index.js"
+    "start.js"
   ],
   "scripts": {
     "build": "tsc -p tsconfig-build.json",

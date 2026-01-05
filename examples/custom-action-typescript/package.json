@@ -10,6 +10,6 @@
   },
   "devDependencies": {
     "text-runner": "7.4.0",
-    "tsx": "4.20.6"
+    "tsx": "4.21.0"
   }
 }

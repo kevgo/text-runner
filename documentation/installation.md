@@ -31,6 +31,12 @@ including macOS, Windows, and Linux. To get started:
   text-runner help
   </pre>
 
+  If that doesn't work, try this:
+
+  ```
+  node node_modules/text-runner/start.js
+  ```
+
 This gives you an out-of-the-box installation of TextRunner. It checks for dead
 links and images.
 

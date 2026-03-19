@@ -13,7 +13,11 @@
     "enabled": true
   },
   "files": {
-    "includes": ["**", "!shared/cucumber-steps/dist", "!**/package.json"]
+    "includes": [
+      "**", // format all files
+      "!shared/cucumber-steps/dist", // this folder is generated
+      "!**/package.json" // package.json gets formatted by sort-package-json
+    ]
   },
   "formatter": {
     "useEditorconfig": true

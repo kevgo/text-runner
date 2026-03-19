@@ -8,7 +8,7 @@
       "arrowParentheses": "asNeeded",
       "lineWidth": 120,
       "semicolons": "asNeeded",
-      "trailingCommas": "es5"
+      "trailingCommas": "none"
     }
   }
 }

@@ -1,16 +1,16 @@
+import type * as cucumber from "@cucumber/cucumber"
 import { Then } from "@cucumber/cucumber"
-import * as cucumber from "@cucumber/cucumber"
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
 import { promises as fs } from "fs"
 import psTreeR from "ps-tree"
 import stripAnsi from "strip-ansi"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 import * as util from "util"
 
 import * as helpers from "./helpers/index.js"
 import * as workspace from "./helpers/workspace.js"
-import { TRWorld } from "./world.js"
+import type { TRWorld } from "./world.js"
 
 const psTree = util.promisify(psTreeR)
 
@@ -33,14 +33,14 @@ Then("explode", () => {
   throw new Error("BOOM")
 })
 
-Then("it executes {int} test", function(this: TRWorld, count: number) {
+Then("it executes {int} test", function (this: TRWorld, count: number) {
   if (!this.apiResults) {
     throw new Error("no API results found")
   }
   assert.equal(this.apiResults.length, count)
 })
 
-Then("it executes in the local {string} directory", function(this: TRWorld, dirName: string) {
+Then("it executes in the local {string} directory", function (this: TRWorld, dirName: string) {
   if (!this.apiResults) {
     throw new Error("no API results found")
   }
@@ -49,7 +49,7 @@ Then("it executes in the local {string} directory", function(this: TRWorld, dirN
   assert.equal(have, want)
 })
 
-Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable) {
+Then("it runs these actions:", function (this: TRWorld, table: cucumber.DataTable) {
   if (this.apiException) {
     console.log(this.apiException)
     assert.fail("unexpected exception during API call")
@@ -133,7 +133,7 @@ Then("it runs these actions:", function(this: TRWorld, table: cucumber.DataTable
   assert.deepEqual(have, want)
 })
 
-Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) {
+Then("it runs this action:", function (this: TRWorld, table: cucumber.DataTable) {
   if (this.apiException) {
     console.log(this.apiException)
     assert.fail("unexpected exception during API call")
@@ -213,7 +213,7 @@ Then("it runs this action:", function(this: TRWorld, table: cucumber.DataTable) 
   assert.deepEqual(have, want)
 })
 
-Then("it throws:", function(this: TRWorld, table: cucumber.DataTable) {
+Then("it throws:", function (this: TRWorld, table: cucumber.DataTable) {
   if (!this.apiException) {
     throw new Error("no error thrown")
   }
@@ -240,7 +240,7 @@ Then("it throws:", function(this: TRWorld, table: cucumber.DataTable) {
   assert.deepEqual(have, want)
 })
 
-Then("the error provides the guidance:", function(this: TRWorld, expectedText: string) {
+Then("the error provides the guidance:", function (this: TRWorld, expectedText: string) {
   const errors = this.apiResults?.errors() || []
   if (errors.length === 0) {
     throw new Error("no failed activity encountered")
@@ -250,7 +250,7 @@ Then("the error provides the guidance:", function(this: TRWorld, expectedText: s
   assert.equal(stripAnsi(userError.guidance.trim()), expectedText.trim())
 })
 
-Then("the API exception provides the guidance:", function(this: TRWorld, expectedText: string) {
+Then("the API exception provides the guidance:", function (this: TRWorld, expectedText: string) {
   if (!this.apiException) {
     throw new Error("no API exception found")
   }
@@ -259,13 +259,13 @@ Then("the API exception provides the guidance:", function(this: TRWorld, expecte
   assert.equal(userError.guidance.trim(), expectedText.trim())
 })
 
-Then("it creates a directory {string}", async function(this: TRWorld, directoryPath: string) {
+Then("it creates a directory {string}", async function (this: TRWorld, directoryPath: string) {
   await fs.stat(workspace.absPath.joinStr(directoryPath))
 })
 
 Then(
   "it creates the file {string} with content:",
-  async function(this: TRWorld, filename: string, expectedContent: string) {
+  async function (this: TRWorld, filename: string, expectedContent: string) {
     const actualContent = await fs.readFile(workspace.absPath.joinStr(filename), {
       encoding: "utf8"
     })
@@ -273,7 +273,7 @@ Then(
   }
 )
 
-Then("it doesn't print:", function(this: TRWorld, expectedText: string) {
+Then("it doesn't print:", function (this: TRWorld, expectedText: string) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
@@ -283,7 +283,7 @@ Then("it doesn't print:", function(this: TRWorld, expectedText: string) {
   }
 })
 
-Then("it prints:", function(this: TRWorld, expectedText: string) {
+Then("it prints:", function (this: TRWorld, expectedText: string) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
@@ -305,7 +305,7 @@ Then("it prints:", function(this: TRWorld, expectedText: string) {
   }
 })
 
-Then("it prints the text:", function(this: TRWorld, expectedText: string) {
+Then("it prints the text:", function (this: TRWorld, expectedText: string) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
@@ -313,36 +313,36 @@ Then("it prints the text:", function(this: TRWorld, expectedText: string) {
   assert.equal(output, expectedText.trim())
 })
 
-Then("it runs {int} test", function(this: TRWorld, count: number) {
+Then("it runs {int} test", function (this: TRWorld, count: number) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
   assert.include(stripAnsi(this.finishedProcess.combinedText), ` ${count} activities`)
 })
 
-Then("it executes in a global temp directory", function(this: TRWorld) {
+Then("it executes in a global temp directory", function (this: TRWorld) {
   assert.notInclude(this.apiResults[0].output, workspace.absPath.unixified())
 })
 
-Then("it executes in the global {string} temp directory", function(this: TRWorld, dirName: string) {
+Then("it executes in the global {string} temp directory", function (this: TRWorld, dirName: string) {
   assert.notInclude(this.apiResults[0].output, workspace.absPath.joinStr(dirName))
 })
 
-Then("it runs in a global temp directory", function(this: TRWorld) {
+Then("it runs in a global temp directory", function (this: TRWorld) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
   assert.notInclude(this.finishedProcess.combinedText, workspace.absPath.unixified())
 })
 
-Then("it runs in the global {string} temp directory", function(this: TRWorld, dirName: string) {
+Then("it runs in the global {string} temp directory", function (this: TRWorld, dirName: string) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
   assert.notInclude(this.finishedProcess.combinedText, workspace.absPath.joinStr(dirName))
 })
 
-Then("it runs in the local {string} directory", function(this: TRWorld, dirName: string) {
+Then("it runs in the local {string} directory", function (this: TRWorld, dirName: string) {
   if (!this.finishedProcess) {
     throw new Error("no process found")
   }
@@ -351,33 +351,33 @@ Then("it runs in the local {string} directory", function(this: TRWorld, dirName:
   assert.include(have, want)
 })
 
-Then("it runs in the current working directory", function(this: TRWorld) {
+Then("it runs in the current working directory", function (this: TRWorld) {
   if (!this.finishedProcess) {
     throw new Error("no CLI process found")
   }
   assert.match(this.finishedProcess.combinedText.trim(), new RegExp(`${workspace.absPath}\\b`))
 })
 
-Then("it runs (only )the tests in {string}", async function(this: TRWorld, filename: string) {
+Then("it runs (only )the tests in {string}", async function (this: TRWorld, filename: string) {
   await helpers.verifyRanOnlyTestsCLI([filename], this)
 })
 
-Then("it runs only the tests in:", async function(this: TRWorld, table: cucumber.DataTable) {
+Then("it runs only the tests in:", async function (this: TRWorld, table: cucumber.DataTable) {
   await helpers.verifyRanOnlyTestsCLI(table.raw(), this)
 })
 
-Then("it runs the console command {string}", function(this: TRWorld, command: string) {
+Then("it runs the console command {string}", function (this: TRWorld, command: string) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
   assert.include(stripAnsi(this.finishedProcess.combinedText), `running console command: ${command}`)
 })
 
-Then("it runs without errors", function(this: TRWorld) {
+Then("it runs without errors", function (this: TRWorld) {
   // Nothing to do here
 })
 
-Then("it signals:", function(this: TRWorld, table: cucumber.DataTable) {
+Then("it signals:", function (this: TRWorld, table: cucumber.DataTable) {
   const hash = table.rowsHash()
   let expectedText = ""
   if (hash.OUTPUT) {
@@ -414,7 +414,7 @@ ${actual}
   }
 })
 
-Then("the call fails with the error:", function(this: TRWorld, expectedError: string) {
+Then("the call fails with the error:", function (this: TRWorld, expectedError: string) {
   if (!this.finishedProcess) {
     throw new Error("no process output found")
   }
@@ -423,7 +423,7 @@ Then("the call fails with the error:", function(this: TRWorld, expectedError: st
   assert.equal(this.finishedProcess.exitCode, 1)
 })
 
-Then("the {string} directory is now deleted", async function(this: TRWorld, directoryPath: string) {
+Then("the {string} directory is now deleted", async function (this: TRWorld, directoryPath: string) {
   try {
     await fs.stat(workspace.absPath.joinStr(directoryPath))
   } catch (e) {
@@ -435,26 +435,23 @@ Then("the {string} directory is now deleted", async function(this: TRWorld, dire
 
 Then(
   "the workspace now/still contains a file {string} with content:",
-  async function(this: TRWorld, fileName: string, expectedContent: string) {
+  async function (this: TRWorld, fileName: string, expectedContent: string) {
     const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
     assert.equal(actualContent.trim(), expectedContent.trim())
   }
 )
 
-Then(
-  "the workspace now contains an empty file {string}",
-  async function(this: TRWorld, fileName: string) {
-    const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
-    assert.equal(actualContent.trim(), "")
-  }
-)
+Then("the workspace now contains an empty file {string}", async function (this: TRWorld, fileName: string) {
+  const actualContent = await fs.readFile(workspace.absPath.joinStr("tmp", fileName), "utf8")
+  assert.equal(actualContent.trim(), "")
+})
 
-Then("the test workspace now contains a directory {string}", async function(this: TRWorld, name: string) {
+Then("the test workspace now contains a directory {string}", async function (this: TRWorld, name: string) {
   const stat = await fs.stat(workspace.absPath.joinStr("tmp", name))
   assert.isTrue(stat.isDirectory())
 })
 
-Then("the test fails with:", function(this: TRWorld, table: cucumber.DataTable) {
+Then("the test fails with:", function (this: TRWorld, table: cucumber.DataTable) {
   const hash = table.rowsHash()
   if (!this.finishedProcess) {
     throw new Error("no process result found")
@@ -476,12 +473,12 @@ Then("the test fails with:", function(this: TRWorld, table: cucumber.DataTable) 
   assert.equal(this.finishedProcess.exitCode, parseInt(hash["EXIT CODE"], 10))
 })
 
-Then("there are no child processes running", async function(this: TRWorld) {
+Then("there are no child processes running", async function (this: TRWorld) {
   const children = await psTree(process.pid)
   assert.lengthOf(children, 1) // 1 is okay, it's the `ps` process used to determine the child processes
 })
 
-Then("there is no {string} folder", async function(this: TRWorld, name: string) {
+Then("there is no {string} folder", async function (this: TRWorld, name: string) {
   try {
     await fs.stat(workspace.absPath.joinStr(name))
   } catch (e) {

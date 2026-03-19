@@ -1,5 +1,5 @@
 import * as cucumber from "@cucumber/cucumber"
-import * as observableProcess from "observable-process"
+import type * as observableProcess from "observable-process"
 import * as textRunner from "text-runner-engine"
 
 export class TRWorld extends cucumber.World {

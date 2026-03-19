@@ -14,7 +14,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: s
   const observer = new textRunner.ActivityCollector(command)
   // eval the given code
   // @ts-expect-error
-  // eslint-disable-next-line prefer-const,no-empty-function
+  // biome-ignore lint/correctness/noUnusedFunctionParameters: this is used in eval'ed code
   const asyncFunc = async (tr: typeof textRunner, ac: typeof ActivityCollector) => {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
@@ -23,6 +23,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: s
   asyncFunc = async function runner(textRunner, MyObserverClass) {
     ${jsText}
   }`
+  // biome-ignore lint/security/noGlobalEval: this is the core feature of Text-Runner
   eval(funcText)
   try {
     await asyncFunc(textRunner, textRunner.ActivityCollector)

@@ -1,5 +1,5 @@
+import { EventEmitter } from "node:events"
 import { styleText } from "node:util"
-import { EventEmitter } from "events"
 import type * as textRunner from "text-runner-engine"
 
 import * as configFile from "../config-file.js"

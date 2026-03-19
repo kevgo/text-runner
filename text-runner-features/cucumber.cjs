@@ -1,3 +1,3 @@
 module.exports = {
-  default: "--import '../shared/cucumber-steps/dist/*.js' --fail-fast",
+  default: "--import '../shared/cucumber-steps/dist/*.js' --fail-fast"
 }

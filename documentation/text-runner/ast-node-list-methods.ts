@@ -2,7 +2,7 @@ import * as assertNoDiff from "assert-no-diff"
 import * as textRunner from "text-runner"
 
 export default function astNodeListMethods(action: textRunner.actions.Args): void {
-  const ignore = (action.region[0].attributes["ignore"] || "").split(",").filter(s => s)
+  const ignore = (action.region[0].attributes.ignore || "").split(",").filter(s => s)
   ignore.push("constructor")
   const documented = action.region
     .textInNodesOfType("strong")

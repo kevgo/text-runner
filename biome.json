@@ -1,4 +1,7 @@
 {
+  "files": {
+    "includes": ["**", "!dist"]
+  },
   "formatter": {
     "useEditorconfig": true
   },

@@ -7,7 +7,7 @@
   "scripts": {
     "doc": "text-runner",
     "fix": "dprint fmt && sort-package-json --quiet",
-    "lint": "dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc"
+    "lint": "biome check && dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc"
   },
   "devDependencies": {
     "assert-no-diff": "4.1.0",

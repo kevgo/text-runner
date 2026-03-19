@@ -1,5 +1,5 @@
+import * as fs from "node:fs"
 import * as babel from "@babel/code-frame"
-import * as fs from "fs"
 import type * as textRunner from "text-runner-engine"
 
 type PrintFunc = (arg: string) => boolean | void

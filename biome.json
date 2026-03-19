@@ -1,6 +1,6 @@
 {
   "files": {
-    "includes": ["**", "!dist"]
+    "includes": ["**", "!shared/cucumber-steps/dist"]
   },
   "formatter": {
     "useEditorconfig": true

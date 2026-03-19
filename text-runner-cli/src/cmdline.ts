@@ -100,6 +100,7 @@ function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): commands.ScaffoldL
   }
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: the third-party module gives us any here
 function parseSystemTmp(value: any): boolean | undefined {
   switch (value) {
     case false:

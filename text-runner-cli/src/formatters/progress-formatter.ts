@@ -13,7 +13,7 @@ export class ProgressFormatter implements formatter.Formatter {
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
-        format: styleText("green", " {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
+        format: `${styleText("green", " {bar}")} {percentage}% | ETA: {eta}s | {value}/{total}`,
         hideCursor: undefined,
         stopOnComplete: true
       },

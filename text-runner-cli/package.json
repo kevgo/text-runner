@@ -20,8 +20,8 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "doc": "text-runner --format=dot",
-    "fix": "biome check --write && dprint fmt && sort-package-json --quiet",
-    "lint": "biome check --error-on-warnings && dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc",
+    "fix": "biome check --write && sort-package-json --quiet",
+    "lint": "biome check --error-on-warnings && sort-package-json --check --quiet && depcheck --config=../.depcheckrc",
     "reset": "rm -rf dist && yarn run build",
     "stats": "find . -type f | grep -v /node_modules/ | grep -v /dist/ | grep -v \\./.git/ | grep -v \\.\\/\\.vscode/ | grep -v \\.\\/tmp\\/ | xargs scc",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"

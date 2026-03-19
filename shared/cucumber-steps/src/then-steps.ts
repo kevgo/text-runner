@@ -82,7 +82,7 @@ Then("it runs these actions:", function (this: TRWorld, table: cucumber.DataTabl
     }
     result.errorMessage = line["ERROR MESSAGE"] || ""
     if (line.GUIDANCE != null || line["ERROR TYPE"] === "UserError") {
-      const guidance: string = line["GUIDANCE"] || ""
+      const guidance: string = line.GUIDANCE || ""
       result.guidance = guidance.trim().replace("{{ WORKSPACE }}", workspace.absPath.platformified())
     }
     want.push(result)
@@ -381,7 +381,7 @@ Then("it signals:", function (this: TRWorld, table: cucumber.DataTable) {
   const hash = table.rowsHash()
   let expectedText = ""
   if (hash.OUTPUT) {
-    expectedText += hash.OUTPUT + "\n"
+    expectedText += `${hash.OUTPUT}\n`
   }
   if (hash.FILENAME) {
     expectedText += hash.FILENAME
@@ -396,7 +396,7 @@ Then("it signals:", function (this: TRWorld, table: cucumber.DataTable) {
     expectedText += hash.MESSAGE
   }
   if (hash["ERROR MESSAGE"]) {
-    expectedText += " -- " + hash["ERROR MESSAGE"]
+    expectedText += ` -- ${hash["ERROR MESSAGE"]}`
   }
   if (hash["EXIT CODE"]) {
     throw new Error("Verifying normal output but table contains an exit code")
@@ -426,7 +426,7 @@ Then("the call fails with the error:", function (this: TRWorld, expectedError: s
 Then("the {string} directory is now deleted", async function (this: TRWorld, directoryPath: string) {
   try {
     await fs.stat(workspace.absPath.joinStr(directoryPath))
-  } catch (e) {
+  } catch (_e) {
     // we expect an exception here since the directory shouldn't exist
     return
   }
@@ -457,7 +457,7 @@ Then("the test fails with:", function (this: TRWorld, table: cucumber.DataTable)
     throw new Error("no process result found")
   }
   const output = stripAnsi(this.finishedProcess.combinedText)
-  let expectedHeader
+  let expectedHeader: string
   if (hash.FILENAME && hash.LINE) {
     expectedHeader = `${hash.FILENAME}:${hash.LINE}`
   } else if (hash.FILENAME) {
@@ -481,7 +481,7 @@ Then("there are no child processes running", async function (this: TRWorld) {
 Then("there is no {string} folder", async function (this: TRWorld, name: string) {
   try {
     await fs.stat(workspace.absPath.joinStr(name))
-  } catch (e) {
+  } catch (_e) {
     return
   }
   throw new Error(`Expected folder ${name} to not be there, but it is`)

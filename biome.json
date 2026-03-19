@@ -2,11 +2,15 @@
   "assist": {
     "actions": {
       "source": {
+        "noDuplicateClasses": "on",
+        "organizeImports": "on",
         "useSortedAttributes": "on",
         "useSortedInterfaceMembers": "on",
-        "useSortedKeys": "on"
+        "useSortedKeys": "on",
+        "useSortedProperties": "on"
       }
-    }
+    },
+    "enabled": true
   },
   "files": {
     "includes": ["**", "!shared/cucumber-steps/dist"]

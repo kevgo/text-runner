@@ -1,7 +1,43 @@
 {
+  "[html]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "dprint.dprint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
   "cucumber.glue": [
     "shared/cucumber-steps/src/given-steps.ts",
     "shared/cucumber-steps/src/when-steps.ts",
     "shared/cucumber-steps/src/then-steps.ts"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.action.noDuplicateClasses.biome": "always",
+    "source.action.useSortedAttributes.biome": "always",
+    "source.action.useSortedInterfaceMembers.biome": "always",
+    "source.action.useSortedKeys.biome": "always",
+    "source.action.useSortedProperties.biome": "always",
+    "source.fixAll.biome": "always",
+    "source.organizeImports.biome": "always"
+  }
 }

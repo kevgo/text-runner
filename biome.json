@@ -1,4 +1,13 @@
 {
+  "assist": {
+    "actions": {
+      "source": {
+        "useSortedAttributes": "on",
+        "useSortedInterfaceMembers": "on",
+        "useSortedKeys": "on"
+      }
+    }
+  },
   "files": {
     "includes": ["**", "!shared/cucumber-steps/dist"]
   },
@@ -11,15 +20,6 @@
       "lineWidth": 120,
       "semicolons": "asNeeded",
       "trailingCommas": "none"
-    }
-  },
-  "assist": {
-    "actions": {
-      "source": {
-        "useSortedAttributes": "on",
-        "useSortedInterfaceMembers": "on",
-        "useSortedKeys": "on"
-      }
     }
   }
 }

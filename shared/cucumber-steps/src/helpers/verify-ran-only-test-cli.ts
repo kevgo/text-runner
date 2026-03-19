@@ -1,6 +1,6 @@
+import * as fs from "node:fs/promises"
 import { flatten } from "array-flatten"
 import { assert } from "chai"
-import * as fs from "node:fs/promises"
 import { globby } from "globby"
 
 import type { TRWorld } from "../world.js"

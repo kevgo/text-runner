@@ -15,7 +15,7 @@
   "files": {
     "includes": [
       "**", // format all files
-      "!**/dist/**/*.js", // ignore generated JS files
+      "!**/dist/**/*.*", // ignore generated JS files
       "!**/package.json" // package.json gets formatted by sort-package-json
     ]
   },

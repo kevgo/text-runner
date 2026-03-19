@@ -1,5 +1,5 @@
+import * as path from "node:path"
 import minimist from "minimist"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 import * as commands from "./commands/index.js"

@@ -1,8 +1,8 @@
+import { styleText } from "node:util"
 import { EventEmitter } from "events"
 import { promises as fs } from "fs"
-import { styleText } from "node:util"
 import * as path from "path"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 import * as url from "url"
 
 export class HelpCommand implements textRunner.commands.Command {

@@ -1,5 +1,5 @@
 import { styleText } from "node:util"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
 

@@ -1,9 +1,9 @@
-import { EventEmitter } from "events"
 import { styleText } from "node:util"
-import * as textRunner from "text-runner-engine"
+import { EventEmitter } from "events"
+import type * as textRunner from "text-runner-engine"
 
 import * as configFile from "../config-file.js"
-import * as config from "../configuration.js"
+import type * as config from "../configuration.js"
 
 export class SetupCommand implements textRunner.commands.Command {
   config: config.Data

@@ -1,7 +1,7 @@
 import { Given } from "@cucumber/cucumber"
-import { promises as fs } from "fs"
-import * as path from "path"
-import * as url from "url"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
+import * as url from "node:url"
 
 import * as workspace from "./helpers/workspace.js"
 import type { TRWorld } from "./world.js"

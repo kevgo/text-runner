@@ -16,6 +16,7 @@
     "includes": [
       "**", // format all files
       "!shared/cucumber-steps/dist", // this folder is generated
+      "!**/dist/**/*.js",
       "!**/package.json" // package.json gets formatted by sort-package-json
     ]
   },

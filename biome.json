@@ -1,7 +1,6 @@
 {
   "formatter": {
-    "indentStyle": "space",
-    "indentWidth": 2
+    "useEditorconfig": true
   },
   "javascript": {
     "formatter": {

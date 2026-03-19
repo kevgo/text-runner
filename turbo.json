@@ -2,16 +2,16 @@
   "$schema": "https://turborepo.org/schema.json",
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "cache": false
+      "cache": false,
+      "dependsOn": ["^build"]
     },
     "cuke": {
-      "dependsOn": ["build"],
-      "cache": false
+      "cache": false,
+      "dependsOn": ["build"]
     },
     "doc": {
-      "dependsOn": ["build"],
-      "cache": false
+      "cache": false,
+      "dependsOn": ["build"]
     },
     "fix": {
       "cache": false
@@ -19,16 +19,16 @@
     "lint": {
       "cache": false
     },
-    "test": {
-      "dependsOn": ["build", "unit", "cuke", "doc"],
-      "cache": false
-    },
     "reset": {
       "cache": false
     },
+    "test": {
+      "cache": false,
+      "dependsOn": ["build", "unit", "cuke", "doc"]
+    },
     "unit": {
-      "dependsOn": ["build"],
-      "cache": false
+      "cache": false,
+      "dependsOn": ["build"]
     }
   }
 }

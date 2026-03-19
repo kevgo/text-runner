@@ -12,5 +12,14 @@
       "semicolons": "asNeeded",
       "trailingCommas": "none"
     }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "useSortedAttributes": "on",
+        "useSortedInterfaceMembers": "on",
+        "useSortedKeys": "on"
+      }
+    }
   }
 }

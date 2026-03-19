@@ -107,7 +107,7 @@ async function read(cmdLineArgs: config.Data): Promise<string> {
   try {
     const result = await fs.readFile("text-runner.jsonc", "utf8")
     return result
-  } catch (e) {
+  } catch (_e) {
     return ""
   }
 }

@@ -8,14 +8,15 @@ import type { TRWorld } from "./world.js"
 When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
   const config: textRunner.configuration.APIData = { sourceDir: workspace.absPath.platformified() }
   // define a few variables here, they will be overwritten in the eval call
-  // eslint-disable-next-line prefer-const
-  const command = new textRunner.commands.Run(config)
-  // eslint-disable-next-line prefer-const
-  const observer = new textRunner.ActivityCollector(command)
+  // biome-ignore lint/style/useConst: this variable is used in the concatenated evaled code
+  let command = new textRunner.commands.Run(config)
+  // biome-ignore lint/style/useConst: this variable is used in the concatenated evaled code
+  let observer = new textRunner.ActivityCollector(command)
   // eval the given code
   // @ts-expect-error
-  // biome-ignore lint/correctness/noUnusedFunctionParameters: this is used in eval'ed code
-  const asyncFunc = async (tr: typeof textRunner, ac: typeof ActivityCollector) => {}
+  // biome-ignore lint/style/useConst: this variable is used in the concatenated evaled code
+  // biome-ignore lint/correctness/noUnusedFunctionParameters: this param is used in the concatenated evaled code.
+  let asyncFunc = async (tr: typeof textRunner, ac: typeof ActivityCollector) => {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
   //       directly would be more elegant here but somehow doesn't work on Node 14.
@@ -23,7 +24,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: s
   asyncFunc = async function runner(textRunner, MyObserverClass) {
     ${jsText}
   }`
-  // biome-ignore lint/security/noGlobalEval: this is the core feature of Text-Runner
+  // biome-ignore lint/security/noGlobalEval: this evals only safe code from the E2E tests
   eval(funcText)
   try {
     await asyncFunc(textRunner, textRunner.ActivityCollector)

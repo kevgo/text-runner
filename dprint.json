@@ -1,8 +1,4 @@
 {
-  "markdown": {
-    "textWrap": "always",
-    "lineWidth": 80
-  },
   "excludes": [
     "documentation",
     "examples",
@@ -12,5 +8,13 @@
     "text-runner-features",
     "tools"
   ],
-  "plugins": ["https://plugins.dprint.dev/markdown-0.18.0.wasm"]
+  "markdown": {
+    "lineWidth": 80,
+    "textWrap": "always"
+  },
+  "plugins": [
+    "https://plugins.dprint.dev/markdown-0.18.0.wasm",
+    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.0.wasm"
+  ],
+  "yaml": {}
 }

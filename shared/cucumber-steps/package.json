@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "fix": "biome check --write && sort-package-json --quiet",
+    "fix": "biome check --write --unsafe && sort-package-json --quiet",
     "lint": "biome check --error-on-warnings && sort-package-json --check --quiet && depcheck --config=../../.depcheckrc",
     "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"

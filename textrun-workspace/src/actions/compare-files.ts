@@ -1,17 +1,17 @@
-import * as assertNoDiff from "assert-no-diff"
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import { styleText } from "node:util"
+import * as assertNoDiff from "assert-no-diff"
 import * as textRunner from "text-runner-engine"
 
 export async function compareFiles(action: textRunner.actions.Args): Promise<void> {
-  const have = action.region[0].attributes["have"]
+  const have = action.region[0].attributes.have
   if (!have) {
     throw new textRunner.UserError(
       "Missing attribute: have",
       'Please provide the file to verify via the "have" attribute'
     )
   }
-  const want = action.region[0].attributes["want"]
+  const want = action.region[0].attributes.want
   if (!want) {
     throw new textRunner.UserError("Missing attribute: want", 'Please provide the golden file via the "want" attribute')
   }
@@ -25,10 +25,7 @@ export async function compareFiles(action: textRunner.actions.Args): Promise<voi
     assertNoDiff.trimmedLines(haveContent.trim(), wantContent.trim())
   } catch (err) {
     action.log(haveContent)
-    throw new textRunner.UserError(
-      `mismatching content`,
-      textRunner.errorMessage(err)
-    )
+    throw new textRunner.UserError(`mismatching content`, textRunner.errorMessage(err))
   }
 }
 

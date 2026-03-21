@@ -18,6 +18,7 @@ export class Actions {
     return Object.keys(this.list).sort()
   }
 
+  // biome-ignore lint/suspicious/noExplicitAny: too many possible types here
   register(fileBasedName: string, action: any): void {
     if (typeof action === "function") {
       this.list[fileBasedName] = action

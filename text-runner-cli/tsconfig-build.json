@@ -1,5 +1,3 @@
-// configuration for the compiler: ignore tests for increased speed
-// tests are type-checked and compiled when running the unit tests
 {
   "compilerOptions": {
     "declaration": true,

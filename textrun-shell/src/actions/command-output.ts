@@ -1,6 +1,6 @@
 import * as assertNoDiff from "assert-no-diff"
 import stripAnsi from "strip-ansi"
-import type * as textRunner from "text-runner-engine"
+import * as textRunner from "text-runner-engine"
 
 import * as currentCommand from "../helpers/current-command.js"
 

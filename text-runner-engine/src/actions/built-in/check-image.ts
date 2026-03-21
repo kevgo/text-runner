@@ -23,7 +23,7 @@ export async function checkImage(action: actions.Args): Promise<number | undefin
     )
     await checkLocalImage(imageFullFile, action.configuration)
   }
-  return 0
+  return
 }
 
 async function checkLocalImage(image: files.FullFilePath, c: configuration.Data): Promise<void> {
@@ -49,7 +49,7 @@ async function checkRemoteImage(url: string, action: actions.Args) {
       throw err
     }
   }
-  return 0
+  return
 }
 
 function isRemoteImage(imagePath: string): boolean {

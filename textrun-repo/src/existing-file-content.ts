@@ -17,7 +17,7 @@ export async function existingFileContent(action: textRunner.actions.Args): Prom
   action.name(`document content matches source code file ${styleText("cyan", filePath)}`)
   const fullPath = action.configuration.sourceDir.joinStr(filePath)
   action.log(`cat ${fullPath}`)
-  let actualContent
+  let actualContent: string
   try {
     actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {

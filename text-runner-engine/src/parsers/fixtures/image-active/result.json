@@ -1,16 +1,16 @@
 [
   {
-    "type": "image",
-    "tag": "img",
+    "attributes": {
+      "alt": "foo bar",
+      "height": "200",
+      "src": "foo.png",
+      "type": "bar",
+      "width": "100"
+    },
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {
-      "src": "foo.png",
-      "alt": "foo bar",
-      "width": "100",
-      "height": "200",
-      "type": "bar"
-    }
+    "tag": "img",
+    "type": "image"
   }
 ]

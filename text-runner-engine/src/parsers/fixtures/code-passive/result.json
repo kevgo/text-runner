@@ -1,42 +1,42 @@
 [
   {
-    "type": "paragraph_open",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "p",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "paragraph_open"
   },
   {
-    "type": "code_open",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "code",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "code_open"
   },
   {
-    "type": "text",
-    "tag": "",
-    "file": "input.*",
-    "line": 1,
+    "attributes": {},
     "content": "code block",
-    "attributes": {}
+    "file": "input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
   },
   {
-    "type": "code_close",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "/code",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "code_close"
   },
   {
-    "type": "paragraph_close",
-    "tag": "/p",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {}
+    "tag": "/p",
+    "type": "paragraph_close"
   }
 ]

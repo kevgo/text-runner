@@ -1,76 +1,76 @@
 [
   {
-    "type": "anchor_open",
-    "tag": "a",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
     "attributes": {
       "type": "foo"
-    }
+    },
+    "content": "",
+    "file": "input.*",
+    "line": 1,
+    "tag": "a",
+    "type": "anchor_open"
   },
   {
-    "type": "paragraph_open",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 3,
     "tag": "p",
-    "file": "input.*",
-    "line": 3,
-    "content": "",
-    "attributes": {}
+    "type": "paragraph_open"
   },
   {
-    "type": "text",
-    "tag": "",
-    "file": "input.*",
-    "line": 3,
+    "attributes": {},
     "content": "Hello",
-    "attributes": {}
+    "file": "input.*",
+    "line": 3,
+    "tag": "",
+    "type": "text"
   },
   {
-    "type": "strong_open",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 3,
     "tag": "strong",
-    "file": "input.*",
-    "line": 3,
-    "content": "",
-    "attributes": {}
+    "type": "strong_open"
   },
   {
-    "type": "text",
-    "tag": "",
-    "file": "input.*",
-    "line": 3,
+    "attributes": {},
     "content": "world",
-    "attributes": {}
-  },
-  {
-    "type": "strong_close",
-    "tag": "/strong",
     "file": "input.*",
     "line": 3,
-    "content": "",
-    "attributes": {}
-  },
-  {
-    "type": "text",
     "tag": "",
-    "file": "input.*",
-    "line": 3,
-    "content": "!",
-    "attributes": {}
+    "type": "text"
   },
   {
-    "type": "paragraph_close",
-    "tag": "/p",
-    "file": "input.*",
-    "line": 3,
+    "attributes": {},
     "content": "",
-    "attributes": {}
+    "file": "input.*",
+    "line": 3,
+    "tag": "/strong",
+    "type": "strong_close"
   },
   {
-    "type": "anchor_close",
-    "tag": "/a",
+    "attributes": {},
+    "content": "!",
+    "file": "input.*",
+    "line": 3,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 3,
+    "tag": "/p",
+    "type": "paragraph_close"
+  },
+  {
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 5,
-    "content": "",
-    "attributes": {}
+    "tag": "/a",
+    "type": "anchor_close"
   }
 ]

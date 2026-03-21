@@ -1,28 +1,28 @@
 [
   {
-    "type": "h1_open",
-    "tag": "h1",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
     "attributes": {
       "type": "foo"
-    }
-  },
-  {
-    "type": "text",
-    "tag": "",
-    "file": "input.*",
-    "line": 1,
-    "content": "Hello",
-    "attributes": {}
-  },
-  {
-    "type": "h1_close",
-    "tag": "/h1",
-    "file": "input.*",
-    "line": 1,
+    },
     "content": "",
-    "attributes": {}
+    "file": "input.*",
+    "line": 1,
+    "tag": "h1",
+    "type": "h1_open"
+  },
+  {
+    "attributes": {},
+    "content": "Hello",
+    "file": "input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
+    "tag": "/h1",
+    "type": "h1_close"
   }
 ]

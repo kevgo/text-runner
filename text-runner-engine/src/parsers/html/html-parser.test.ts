@@ -1,6 +1,6 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
-import * as parse5 from "parse5"
+import { assert } from "chai"
+import type * as parse5 from "parse5"
 
 import { standardizeHTMLAttributes } from "./html-parser.js"
 

@@ -1,6 +1,6 @@
-import * as ast from "../../ast/index.js"
+import type * as ast from "../../ast/index.js"
 import { UserError } from "../../errors/user-error.js"
-import * as files from "../../filesystem/index.js"
+import type * as files from "../../filesystem/index.js"
 
 interface Entry {
   readonly endLine: number

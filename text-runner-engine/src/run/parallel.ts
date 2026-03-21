@@ -1,8 +1,8 @@
-import * as actions from "../actions/index.js"
-import * as activities from "../activities/index.js"
-import * as commands from "../commands/index.js"
-import * as configuration from "../configuration/index.js"
-import * as linkTargets from "../link-targets/index.js"
+import type * as actions from "../actions/index.js"
+import type * as activities from "../activities/index.js"
+import type * as commands from "../commands/index.js"
+import type * as configuration from "../configuration/index.js"
+import type * as linkTargets from "../link-targets/index.js"
 import { runActivity } from "./run-activity.js"
 
 /**

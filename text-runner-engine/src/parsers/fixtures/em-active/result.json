@@ -1,44 +1,44 @@
 [
   {
-    "type": "paragraph_open",
-    "tag": "p",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {}
+    "tag": "p",
+    "type": "paragraph_open"
   },
   {
-    "type": "em_open",
-    "tag": "em",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
     "attributes": {
       "type": "foo"
-    }
-  },
-  {
-    "type": "text",
-    "tag": "",
+    },
+    "content": "",
     "file": "input.*",
     "line": 1,
+    "tag": "em",
+    "type": "em_open"
+  },
+  {
+    "attributes": {},
     "content": "world",
-    "attributes": {}
+    "file": "input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
   },
   {
-    "type": "em_close",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "/em",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "em_close"
   },
   {
-    "type": "paragraph_close",
-    "tag": "/p",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {}
+    "tag": "/p",
+    "type": "paragraph_close"
   }
 ]

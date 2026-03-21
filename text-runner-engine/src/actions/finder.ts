@@ -1,14 +1,14 @@
-import { promises as fs } from "fs"
-import path from "path"
-import * as url from "url"
+import { promises as fs } from "node:fs"
+import path from "node:path"
+import * as url from "node:url"
 
 import * as actions from "../actions/index.js"
-import * as activities from "../activities/index.js"
+import type * as activities from "../activities/index.js"
 import { UserError } from "../errors/user-error.js"
-import * as files from "../filesystem/index.js"
+import type * as files from "../filesystem/index.js"
 import { Actions } from "./actions.js"
 import { ExternalActionManager } from "./external-action-manager.js"
-import { Action } from "./index.js"
+import type { Action } from "./index.js"
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 
@@ -50,10 +50,10 @@ export class Finder {
   /** actionFor provides the action function for the given Activity. */
   async actionFor(activity: activities.Activity): Promise<Action> {
     return (
-      this.builtinActions.get(activity.actionName)
-      || this.customActions.get(activity.actionName)
-      || (await this.externalActions.get(activity))
-      || this.errorUnknownAction(activity)
+      this.builtinActions.get(activity.actionName) ||
+      this.customActions.get(activity.actionName) ||
+      (await this.externalActions.get(activity)) ||
+      this.errorUnknownAction(activity)
     )
   }
 
@@ -92,9 +92,10 @@ export async function builtinActionFilePaths(): Promise<string[]> {
 }
 
 export async function customActionFilePaths(dir: string): Promise<string[]> {
+  let files: string[]
   try {
-    var files = await fs.readdir(dir)
-  } catch (e) {
+    files = await fs.readdir(dir)
+  } catch (_e) {
     // it's okay if there is no dir with custom actions
     return []
   }

@@ -1,6 +1,6 @@
-import * as util from "util"
+import * as util from "node:util"
 
-import * as run from "./index.js"
+import type * as run from "./index.js"
 
 /** simulates console.log to collect output from a running action */
 export class OutputCollector {
@@ -8,6 +8,7 @@ export class OutputCollector {
   content: string[] = []
 
   /** appends to the output with a newline */
+  // biome-ignore lint/suspicious/noExplicitAny: we want to allow any argument here for debugging variables
   log(...args: any[]): void {
     const stringified: string[] = []
     for (const arg of args) {
@@ -17,7 +18,7 @@ export class OutputCollector {
         stringified.push(util.inspect(arg, false, Infinity))
       }
     }
-    this.content.push(stringified.join(" ") + "\n")
+    this.content.push(`${stringified.join(" ")}\n`)
   }
 
   /** returns the "log" function to be used by actions */

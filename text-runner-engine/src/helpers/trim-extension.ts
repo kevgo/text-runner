@@ -1,4 +1,4 @@
-import * as path from "path"
+import * as path from "node:path"
 
 export function trimExtension(filePath: string): string {
   return path.join(path.dirname(filePath), path.basename(filePath, path.extname(filePath)))

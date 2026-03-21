@@ -4,7 +4,7 @@ export class StopWatch {
   private startTime: number
 
   constructor() {
-    this.startTime = new Date().getTime()
+    this.startTime = Date.now()
   }
 
   /**
@@ -12,7 +12,7 @@ export class StopWatch {
    * between the current time and when this StopWatch was created.
    */
   duration(): string {
-    const endTime = new Date().getTime()
+    const endTime = Date.now()
     const milliseconds = endTime - this.startTime
     if (milliseconds > 1000) {
       return `${Math.round(milliseconds / 1000)}s`

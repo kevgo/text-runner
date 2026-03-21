@@ -1,7 +1,7 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 
-import * as ast from "../../ast/index.js"
-import * as files from "../../filesystem/index.js"
+import type * as ast from "../../ast/index.js"
+import type * as files from "../../filesystem/index.js"
 import { MarkdownParser } from "./md-parser.js"
 
 /** returns the standard AST for the Markdown files given as paths relative to the given sourceDir */

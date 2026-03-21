@@ -1,4 +1,4 @@
-import * as files from "../filesystem/index.js"
+import type * as files from "../filesystem/index.js"
 
 /**
  * Represents a UserError that has not been printed via the formatter.

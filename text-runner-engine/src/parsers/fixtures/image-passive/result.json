@@ -1,29 +1,29 @@
 [
   {
-    "type": "paragraph_open",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "p",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "paragraph_open"
   },
   {
-    "type": "image",
-    "tag": "img",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
     "attributes": {
-      "src": "foo.png",
-      "alt": "alt text"
-    }
-  },
-  {
-    "type": "paragraph_close",
-    "tag": "/p",
+      "alt": "alt text",
+      "src": "foo.png"
+    },
+    "content": "",
     "file": "input.*",
     "line": 1,
+    "tag": "img",
+    "type": "image"
+  },
+  {
+    "attributes": {},
     "content": "",
-    "attributes": {}
+    "file": "input.*",
+    "line": 1,
+    "tag": "/p",
+    "type": "paragraph_close"
   }
 ]

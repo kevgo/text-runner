@@ -125,7 +125,7 @@ export class Node {
     if (!this.isOpeningNode()) {
       throw new Error("not an opening node")
     }
-    return this.type.replace("open", "") + "close"
+    return `${this.type.replace("open", "")}close`
   }
 
   /**

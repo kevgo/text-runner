@@ -1,6 +1,6 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 
-import * as configuration from "../configuration/index.js"
+import type * as configuration from "../configuration/index.js"
 
 /** creates the temp directory to run the tests in */
 export async function create(config: configuration.Data): Promise<void> {

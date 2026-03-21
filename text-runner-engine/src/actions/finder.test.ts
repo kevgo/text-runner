@@ -1,7 +1,7 @@
-import { assert } from "chai"
+import * as path from "node:path"
 import { suite, test } from "node:test"
-import * as path from "path"
-import * as url from "url"
+import * as url from "node:url"
+import { assert } from "chai"
 
 import * as activities from "../activities/index.js"
 import { Actions } from "./actions.js"
@@ -13,7 +13,7 @@ import {
   loadBuiltinActions,
   loadCustomActions
 } from "./finder.js"
-import { Action } from "./index.js"
+import type { Action } from "./index.js"
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 

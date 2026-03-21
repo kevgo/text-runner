@@ -1,6 +1,6 @@
-import * as path from "path"
+import * as path from "node:path"
 
-import * as configuration from "../configuration/index.js"
+import type * as configuration from "../configuration/index.js"
 import * as helpers from "../helpers/index.js"
 import * as files from "./index.js"
 
@@ -26,7 +26,7 @@ export class FullLink {
    * with the given relative link appended
    */
   append(segment: files.RelativeLink): FullLink {
-    return new FullLink(helpers.straightenLink(this.value + "/" + segment.value))
+    return new FullLink(helpers.straightenLink(`${this.value}/${segment.value}`))
   }
 
   /** Returns a link to the containing directory */
@@ -71,7 +71,7 @@ export class FullLink {
    * with the new enclosing directory
    */
   rebase(oldPath: string, newPath: string): FullLink {
-    const re = new RegExp("^" + oldPath)
+    const re = new RegExp(`^${oldPath}`)
     return new FullLink(this.value.replace(re, newPath))
   }
 
@@ -81,12 +81,12 @@ export class FullLink {
 
   /** Returns a link that contains the given anchor */
   withAnchor(anchor: string): FullLink {
-    return new FullLink(this.withoutAnchor().value + "#" + anchor)
+    return new FullLink(`${this.withoutAnchor().value}#${anchor}`)
   }
 
   /** Returns another FullLink instance that uses the given file extension */
   withExtension(newExtension: string): FullLink {
-    const extRE = new RegExp(path.extname(this.value) + "$")
+    const extRE = new RegExp(`${path.extname(this.value)}$`)
     return new FullLink(this.value.replace(extRE, helpers.addLeadingDotUnlessEmpty(newExtension)))
   }
 

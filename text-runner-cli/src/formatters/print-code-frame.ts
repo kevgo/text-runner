@@ -1,8 +1,8 @@
+import * as fs from "node:fs"
 import * as babel from "@babel/code-frame"
-import * as fs from "fs"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 
-type PrintFunc = (arg: string) => boolean | void
+type PrintFunc = (arg: string) => boolean | undefined
 
 export function printCodeFrame(output: PrintFunc, location: textRunner.files.Location | undefined): void {
   if (!location) {

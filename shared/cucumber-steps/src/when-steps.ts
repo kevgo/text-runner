@@ -8,7 +8,7 @@ import type { TRWorld } from "./world.js"
 When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
   const config: textRunner.configuration.APIData = { sourceDir: workspace.absPath.platformified() }
   // define a few variables here, they will be overwritten in the eval call
-  // eslint-disable-next-line prefer-const
+  // biome-ignore format: this variable is used in the concatenated code from the step
   let command = new textRunner.commands.Run(config)
   // eslint-disable-next-line prefer-const
   let observer = new textRunner.ActivityCollector(command)

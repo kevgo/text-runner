@@ -2,7 +2,8 @@ import * as fs from "node:fs"
 import * as babel from "@babel/code-frame"
 import type * as textRunner from "text-runner-engine"
 
-type PrintFunc = (arg: string) => boolean | undefined
+// biome-ignore lint/suspicious/noConfusingVoidType: console.log is void and used here
+type PrintFunc = (arg: string) => boolean | void
 
 export function printCodeFrame(output: PrintFunc, location: textRunner.files.Location | undefined): void {
   if (!location) {

@@ -1,34 +1,34 @@
 {
-	"assist": {
-		"actions": {
-			"source": {
-				"noDuplicateClasses": "on",
-				"organizeImports": "on",
-				"useSortedAttributes": "on",
-				"useSortedInterfaceMembers": "on",
-				"useSortedKeys": "on",
-				"useSortedProperties": "on"
-			}
-		},
-		"enabled": true
-	},
-	"files": {
-		"includes": [
-			"**", // format all files
-			"!**/dist/**/*.*", // ignore generated JS files
-			"!**/package.json", // package.json gets formatted by sort-package-json
-			"!text-runner-engine/src/parsers/html/fixtures/anchor-open/input.html" // this is intentionally only an opening tag
-		]
-	},
-	"formatter": {
-		"useEditorconfig": true
-	},
-	"javascript": {
-		"formatter": {
-			"arrowParentheses": "asNeeded",
-			"lineWidth": 120,
-			"semicolons": "asNeeded",
-			"trailingCommas": "none"
-		}
-	}
+  "assist": {
+    "actions": {
+      "source": {
+        "noDuplicateClasses": "on",
+        "organizeImports": "on",
+        "useSortedAttributes": "on",
+        "useSortedInterfaceMembers": "on",
+        "useSortedKeys": "on",
+        "useSortedProperties": "on"
+      }
+    },
+    "enabled": true
+  },
+  "files": {
+    "includes": [
+      "**", // format all files
+      "!**/dist/**/*.*", // ignore generated JS files
+      "!**/package.json", // package.json gets formatted by sort-package-json
+      "!text-runner-engine/src/parsers/html/fixtures/anchor-open/input.html" // this is intentionally only an opening tag
+    ]
+  },
+  "formatter": {
+    "useEditorconfig": true
+  },
+  "javascript": {
+    "formatter": {
+      "arrowParentheses": "asNeeded",
+      "lineWidth": 120,
+      "semicolons": "asNeeded",
+      "trailingCommas": "none"
+    }
+  }
 }

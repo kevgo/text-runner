@@ -1,5 +1,5 @@
+import * as path from "node:path"
 import minimist from "minimist"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 import * as commands from "./commands/index.js"
@@ -16,11 +16,11 @@ export function parse(argv: string[]): {
 } {
   // remove optional node parameter
   if (
-    path.basename(argv[0] || "") === "node"
-    || path.win32.basename(argv[0] || "") === "node.exe"
-    || argv[0]?.includes("node_modules/tsx")
-    || argv[0]?.includes("node_modules\\tsx")
-    || argv[0]?.startsWith("/usr/bin/node")
+    path.basename(argv[0] || "") === "node" ||
+    path.win32.basename(argv[0] || "") === "node.exe" ||
+    argv[0]?.includes("node_modules/tsx") ||
+    argv[0]?.includes("node_modules\\tsx") ||
+    argv[0]?.startsWith("/usr/bin/node")
   ) {
     argv.splice(0, 1)
   }
@@ -100,6 +100,7 @@ function parseScaffoldSwitches(cliArgs: minimist.ParsedArgs): commands.ScaffoldL
   }
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: we get any from minimist here
 function parseSystemTmp(value: any): boolean | undefined {
   switch (value) {
     case false:

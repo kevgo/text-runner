@@ -1,5 +1,5 @@
-import * as progress from "cli-progress"
 import { styleText } from "node:util"
+import * as progress from "cli-progress"
 import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
@@ -13,7 +13,7 @@ export class ProgressFormatter implements formatter.Formatter {
     this.progressBar = new progress.Bar(
       {
         clearOnComplete: true,
-        format: styleText("green", " {bar}") + " {percentage}% | ETA: {eta}s | {value}/{total}",
+        format: `${styleText("green", " {bar}")} {percentage}% | ETA: {eta}s | {value}/{total}`,
         hideCursor: undefined,
         stopOnComplete: true
       },

@@ -1,8 +1,8 @@
-import { EventEmitter } from "events"
-import { promises as fs } from "fs"
-import * as path from "path"
-import * as textRunner from "text-runner-engine"
-import * as url from "url"
+import { EventEmitter } from "node:events"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
+import * as url from "node:url"
+import type * as textRunner from "text-runner-engine"
 
 export class VersionCommand implements textRunner.commands.Command {
   emitter: EventEmitter

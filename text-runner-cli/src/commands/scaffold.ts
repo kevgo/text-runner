@@ -1,6 +1,6 @@
-import { EventEmitter } from "events"
-import { promises as fs } from "fs"
-import * as path from "path"
+import { EventEmitter } from "node:events"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
 import * as textRunner from "text-runner-engine"
 
 import * as helpers from "../helpers/index.js"
@@ -30,16 +30,16 @@ export class ScaffoldCommand implements textRunner.commands.Command {
     let textRunDirExists = true
     try {
       await fs.stat(dirPath)
-    } catch (e) {
+    } catch (_e) {
       textRunDirExists = false
     }
     if (!textRunDirExists) {
       await fs.mkdir(dirPath, { recursive: true })
     }
     if (this.language === "ts") {
-      await fs.writeFile(path.join(dirPath, this.name + ".ts"), tsTemplate(this.name), "utf8")
+      await fs.writeFile(path.join(dirPath, `${this.name}.ts`), tsTemplate(this.name), "utf8")
     } else if (this.language === "js") {
-      await fs.writeFile(path.join(dirPath, this.name + ".js"), jsTemplate(this.name), "utf8")
+      await fs.writeFile(path.join(dirPath, `${this.name}.js`), jsTemplate(this.name), "utf8")
     } else {
       throw new textRunner.UserError(
         `Unknown configuration language: ${this.language}`,

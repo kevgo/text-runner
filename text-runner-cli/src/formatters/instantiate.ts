@@ -2,7 +2,7 @@ import * as textRunner from "text-runner-engine"
 
 import { DetailedFormatter } from "./detailed-formatter.js"
 import { DotFormatter } from "./dot-formatter.js"
-import * as formatters from "./index.js"
+import type * as formatters from "./index.js"
 import { ProgressFormatter } from "./progress-formatter.js"
 import { SummaryFormatter } from "./summary-formatter.js"
 

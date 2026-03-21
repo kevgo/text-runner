@@ -1,10 +1,8 @@
-// configuration for the compiler: ignore tests for increased speed
-// tests are type-checked and compiled when running the unit tests
 {
-  "extends": "./tsconfig.json",
-  "exclude": ["./src/**/*.test.ts"],
   "compilerOptions": {
-    "outDir": "./dist",
-    "declaration": true
-  }
+    "declaration": true,
+    "outDir": "./dist"
+  },
+  "exclude": ["./src/**/*.test.ts"],
+  "extends": "./tsconfig.json"
 }

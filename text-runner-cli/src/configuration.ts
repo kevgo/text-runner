@@ -1,7 +1,7 @@
 import * as textRunner from "text-runner-engine"
 
-import * as commands from "./commands/index.js"
-import * as formatters from "./formatters/index.js"
+import type * as commands from "./commands/index.js"
+import type * as formatters from "./formatters/index.js"
 
 /** arguments provided by the user, either via command line or via config file */
 export class Data {

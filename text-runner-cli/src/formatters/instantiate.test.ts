@@ -1,5 +1,5 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 import * as textRunner from "text-runner-engine"
 
 import { DetailedFormatter } from "./detailed-formatter.js"
@@ -30,7 +30,7 @@ suite("instantiateFormatter()", () => {
     assert.instanceOf(have, SummaryFormatter)
   })
 
-  test("request unknown formatter", (context, done) => {
+  test("request unknown formatter", (_context, done) => {
     let err: textRunner.UserError
     try {
       // @ts-expect-error "zonk" is not allowed here

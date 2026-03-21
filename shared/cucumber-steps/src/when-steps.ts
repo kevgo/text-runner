@@ -24,6 +24,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: s
   asyncFunc = async function runner(textRunner, MyObserverClass) {
     ${jsText}
   }`
+  // biome-ignore lint/security/noGlobalEval: this evals only safe code from the E2E tests
   eval(funcText)
   try {
     await asyncFunc(textRunner, textRunner.ActivityCollector)

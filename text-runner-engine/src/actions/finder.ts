@@ -1,6 +1,6 @@
-import { promises as fs } from "fs"
-import path from "path"
-import * as url from "url"
+import { promises as fs } from "node:fs"
+import path from "node:path"
+import * as url from "node:url"
 
 import * as actions from "../actions/index.js"
 import type * as activities from "../activities/index.js"

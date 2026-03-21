@@ -5,5 +5,5 @@ export function addLeadingDotUnlessEmpty(text: string): string {
   if (text.startsWith(".")) {
     return text
   }
-  return "." + text
+  return `.${text}`
 }

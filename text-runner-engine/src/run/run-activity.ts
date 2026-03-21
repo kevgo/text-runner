@@ -1,5 +1,5 @@
+import * as util from "node:util"
 import humanize from "humanize-string"
-import * as util from "util"
 
 import type * as actions from "../actions/index.js"
 import type { Activity } from "../activities/index.js"

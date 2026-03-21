@@ -12,7 +12,7 @@ export class NodeList extends Array<Node> {
   /** Returns whether this ast.NodeList contains a node of the given type. */
   hasNodeOfType(nodeType: string): boolean {
     const types = [nodeType]
-    types.push(nodeType + "_open")
+    types.push(`${nodeType}_open`)
     return this.some(node => types.includes(node.type))
   }
 
@@ -82,7 +82,7 @@ ${new Error().stack}`
     const expectedTypes: string[] = []
     for (const nodeType of nodeTypes) {
       expectedTypes.push(nodeType)
-      expectedTypes.push(nodeType + "_open")
+      expectedTypes.push(`${nodeType}_open`)
     }
     for (const node of this) {
       if (expectedTypes.includes(node.type)) {
@@ -122,7 +122,7 @@ ${new Error().stack}`
   textInNodeOfType(...nodeTypes: string[]): string {
     for (const nodeType of nodeTypes) {
       if (!nodeType.endsWith("_open")) {
-        nodeTypes.push(nodeType + "_open")
+        nodeTypes.push(`${nodeType}_open`)
       }
     }
     return this.textInNode(this.nodeOfTypes(...nodeTypes))
@@ -142,7 +142,7 @@ ${new Error().stack}`
   textInNodesOfType(...nodeTypes: string[]): string[] {
     for (const nodeType of nodeTypes) {
       if (!nodeType.endsWith("_open")) {
-        nodeTypes.push(nodeType + "_open")
+        nodeTypes.push(`${nodeType}_open`)
       }
     }
     return this.nodesOfTypes(...nodeTypes).map(node => this.textInNode(node))

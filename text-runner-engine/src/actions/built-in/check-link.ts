@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import got, { HTTPError, TimeoutError } from "got"
 
 import { errorMessage } from "../../errors/error.js"
@@ -8,7 +8,7 @@ import * as helpers from "../../helpers/index.js"
 import type { Args } from "../index.js"
 
 /** The "checkLink" action checks for broken hyperlinks. */
-export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> {
+export async function checkLink(action: Args): Promise<Args["SKIPPING"] | undefined> {
   const target = action.region.nodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")
@@ -133,7 +133,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
         action.name(`link to local directory ${linkedFile.unixified()}`)
         return
       }
-    } catch (e) {
+    } catch (_e) {
       // we can ignore errors here since we keep checking the file below
     }
   }
@@ -141,7 +141,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   action.name(`link to local file ${linkedFile.unixified()}`)
   try {
     await fs.stat(fullPath)
-  } catch (err) {
+  } catch (_err) {
     throw new Error(`link to non-existing local file ${linkedFile.unixified()}`)
   }
 }

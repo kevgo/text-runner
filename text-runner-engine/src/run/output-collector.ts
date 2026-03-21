@@ -1,4 +1,4 @@
-import * as util from "util"
+import * as util from "node:util"
 
 import type * as run from "./index.js"
 
@@ -17,7 +17,7 @@ export class OutputCollector {
         stringified.push(util.inspect(arg, false, Infinity))
       }
     }
-    this.content.push(stringified.join(" ") + "\n")
+    this.content.push(`${stringified.join(" ")}\n`)
   }
 
   /** returns the "log" function to be used by actions */

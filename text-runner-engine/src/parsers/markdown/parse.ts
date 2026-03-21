@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 
 import type * as ast from "../../ast/index.js"
 import type * as files from "../../filesystem/index.js"

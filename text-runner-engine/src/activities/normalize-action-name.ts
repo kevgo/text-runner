@@ -11,5 +11,5 @@ export function normalizeActionName(actionName: string, location: files.Location
   if (parts.length > 2) {
     throw new UserError(`Illegal activity name: "${actionName}" contains ${parts.length} slashes`, "", location)
   }
-  return parts[0] + "/" + slugify(parts[1])
+  return `${parts[0]}/${slugify(parts[1])}`
 }

@@ -1,4 +1,4 @@
-import * as path from "path"
+import * as path from "node:path"
 
 import type * as configuration from "../configuration/index.js"
 import * as helpers from "../helpers/index.js"
@@ -25,7 +25,7 @@ export class FullPath {
     if (this.isDirectory()) {
       return this
     }
-    return new FullPath(path.dirname(this.value) + "/")
+    return new FullPath(`${path.dirname(this.value)}/`)
   }
 
   /** Returns the file extension of this path */

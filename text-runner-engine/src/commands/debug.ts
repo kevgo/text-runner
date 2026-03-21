@@ -1,5 +1,5 @@
-import { EventEmitter } from "events"
-import * as util from "util"
+import { EventEmitter } from "node:events"
+import * as util from "node:util"
 
 import * as activities from "../activities/index.js"
 import * as ast from "../ast/index.js"

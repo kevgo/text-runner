@@ -1,4 +1,4 @@
-import { EventEmitter } from "events"
+import { EventEmitter } from "node:events"
 
 import * as actions from "../actions/index.js"
 import { extractImagesAndLinks } from "../activities/extract-images-and-links.js"

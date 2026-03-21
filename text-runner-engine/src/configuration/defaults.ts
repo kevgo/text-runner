@@ -1,4 +1,4 @@
-import * as path from "path"
+import * as path from "node:path"
 import * as tmp from "tmp-promise"
 
 import { UserError } from "../errors/user-error.js"

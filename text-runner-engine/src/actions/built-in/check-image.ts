@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import got, { HTTPError, TimeoutError } from "got"
 
 import type * as configuration from "../../configuration/index.js"
@@ -6,7 +6,7 @@ import * as files from "../../filesystem/index.js"
 import type * as actions from "../index.js"
 
 /** The "checkImage" action checks for broken images. */
-export async function checkImage(action: actions.Args): Promise<number | void> {
+export async function checkImage(action: actions.Args): Promise<number | undefined> {
   const node = action.region[0]
   const imagePath = node.attributes.src
   if (!imagePath) {
@@ -29,7 +29,7 @@ export async function checkImage(action: actions.Args): Promise<number | void> {
 async function checkLocalImage(image: files.FullFilePath, c: configuration.Data): Promise<void> {
   try {
     await fs.stat(c.sourceDir.joinFullFile(image).platformified())
-  } catch (err) {
+  } catch (_err) {
     throw new Error(`image ${image.unixified()} does not exist`)
   }
 }

@@ -1,16 +1,16 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
 import { styleText } from "node:util"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function appendFile(action: textRunner.actions.Args): Promise<void> {
   action.name("append to existing file")
-  const fileNameAttribute = action.region[0].attributes["filename"]
+  const fileNameAttribute = action.region[0].attributes.filename
   if (fileNameAttribute === "") {
     throw new textRunner.UserError(`attribute "filename" is empty`, "")
   }
   const fileName = fileNameAttribute || action.region.textInNodeOfType("em", "strong")
-  const dirAttribute = action.region[0].attributes["dir"]
+  const dirAttribute = action.region[0].attributes.dir
   if (dirAttribute === "") {
     throw new textRunner.UserError(`attribute "dir" is empty`, "")
   }

@@ -4,7 +4,7 @@ import * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"
-import { CurrentCommand } from "../helpers/current-command.js"
+import * as currentCommand from "../helpers/current-command.js"
 import { parseCommand } from "../helpers/parse-command.js"
 
 interface ProcessInput {
@@ -47,7 +47,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
     await enter(processor, inputLine)
   }
   const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess
-  CurrentCommand.set(finished)
+  currentCommand.set(finished)
   action.log(processor.output.fullText())
 }
 

@@ -1,11 +1,11 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
 import { styleText } from "node:util"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function existingFile(action: textRunner.actions.Args): Promise<void> {
   const fileName = action.region.text()
-  const fileRelPath = path.join(action.region[0].attributes["dir"] || ".", fileName)
+  const fileRelPath = path.join(action.region[0].attributes.dir || ".", fileName)
   action.name(`verify existence of file ${styleText("cyan", fileRelPath)}`)
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   try {

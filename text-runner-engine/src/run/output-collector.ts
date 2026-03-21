@@ -8,6 +8,7 @@ export class OutputCollector {
   content: string[] = []
 
   /** appends to the output with a newline */
+  // biome-ignore lint/suspicious/noExplicitAny: we want to allow any argument here for debugging variables
   log(...args: any[]): void {
     const stringified: string[] = []
     for (const arg of args) {

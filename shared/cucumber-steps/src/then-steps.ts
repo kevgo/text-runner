@@ -457,7 +457,7 @@ Then("the test fails with:", function (this: TRWorld, table: cucumber.DataTable)
     throw new Error("no process result found")
   }
   const output = stripAnsi(this.finishedProcess.combinedText)
-  let expectedHeader
+  let expectedHeader: string
   if (hash.FILENAME && hash.LINE) {
     expectedHeader = `${hash.FILENAME}:${hash.LINE}`
   } else if (hash.FILENAME) {
@@ -481,7 +481,7 @@ Then("there are no child processes running", async function (this: TRWorld) {
 Then("there is no {string} folder", async function (this: TRWorld, name: string) {
   try {
     await fs.stat(workspace.absPath.joinStr(name))
-  } catch (e) {
+  } catch (_e) {
     return
   }
   throw new Error(`Expected folder ${name} to not be there, but it is`)

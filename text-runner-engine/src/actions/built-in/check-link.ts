@@ -101,7 +101,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
 }
 
 function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, action: Args) {
-  const anchorName = target.substr(1)
+  const anchorName = target.substring(1)
   if (!action.linkTargets.hasAnchor(file, anchorName)) {
     throw new UserError(
       `link to non-existing local anchor ${target}`,

@@ -12,6 +12,7 @@ export interface Failed {
   readonly status: "failed"
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: too many possible types here
 export type Handler = (arg: any) => void
 
 /** defines the events that a command can emit. */

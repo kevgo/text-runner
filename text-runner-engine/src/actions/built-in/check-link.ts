@@ -69,9 +69,10 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   const absoluteLink = link.absolutify(containingLocation, action.configuration.publications)
   const anchorName = absoluteLink.anchor()
   const fullPath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
+  let fullFile: files.FullFilePath
   try {
-    var fullFile = fullPath.toFullFilePath()
-  } catch (e) {
+    fullFile = fullPath.toFullFilePath()
+  } catch (_e) {
     throw new Error(`link to non-existing file ${fullPath.unixified()}`)
   }
 
@@ -83,7 +84,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
 
   if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
     throw new UserError(
-      `link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`,
+      `link to non-existing anchor ${`#${anchorName}`} in ${fullFile.unixified()}`,
       `File ${fullFile.unixified()} contains these anchors: ${action.linkTargets
         .getAnchors(fullFile)
         .map(anchor => `#${anchor}`)
@@ -92,7 +93,7 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   }
 
   if (action.linkTargets.anchorType(fullFile, anchorName) === "heading") {
-    action.name(`link to heading ${fullFile.unixified() + "#" + anchorName}`)
+    action.name(`link to heading ${`${fullFile.unixified()}#${anchorName}`}`)
   } else {
     action.name(`link to ${fullFile.unixified()}#${anchorName}`)
   }

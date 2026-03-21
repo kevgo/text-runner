@@ -92,8 +92,9 @@ export async function builtinActionFilePaths(): Promise<string[]> {
 }
 
 export async function customActionFilePaths(dir: string): Promise<string[]> {
+  let files: string[]
   try {
-    var files = await fs.readdir(dir)
+    files = await fs.readdir(dir)
   } catch (_e) {
     // it's okay if there is no dir with custom actions
     return []

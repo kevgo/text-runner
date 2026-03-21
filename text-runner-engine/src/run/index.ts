@@ -4,6 +4,7 @@ export * from "./sequential.js"
 export * from "./stopwatch.js"
 
 /** LogFn defines the signature of the "log" function available to actions */
+// biome-ignore lint/suspicious/noExplicitAny: we intentionally allow all types here since this is for logging during debugging
 export type LogFn = (message?: any, ...optionalParams: any[]) => void
 
 /** signature of the method that allows actions to set a refined name for the current test step */

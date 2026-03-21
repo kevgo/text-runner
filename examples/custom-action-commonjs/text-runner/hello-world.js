@@ -1,4 +1,4 @@
-const util = require("util")
+const util = require("node:util")
 const delay = util.promisify(setTimeout)
 
 function helloWorldSync(action) {

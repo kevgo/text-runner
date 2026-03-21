@@ -23,6 +23,13 @@ extend-enable = ["MD060", "MD063", "MD070", "MD073"]
 exclude = [
     ".git",
     ".github",
+    "documentation",
+    "examples",
+    "shared",
+    "text-runner-cli",
+    "text-runner-engine",
+    "text-runner-features",
+    "tools"
 ]
 
 # Respect .gitignore files when scanning directories (default: true)

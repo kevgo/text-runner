@@ -180,6 +180,7 @@ export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.
   return result
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: there are too many different node types to list here
 function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
   return !!object.nodeName && !!object.tagName && !!object.attrs
 }

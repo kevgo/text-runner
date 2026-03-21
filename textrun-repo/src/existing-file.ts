@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 

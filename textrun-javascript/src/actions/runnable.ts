@@ -25,5 +25,6 @@ export function runnable(action: textRunner.actions.Args, done: textRunner.expor
     ? replaceAsyncCallback(code) // async code
     : appendAsyncCallback(code) // sync code
   action.log(code)
+  // biome-ignore lint=/security/noGlobalEval: running only user-provided code here
   eval(code)
 }

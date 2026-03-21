@@ -10,8 +10,8 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "doc": "text-runner --format=dot",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
-    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
+    "fix": "biome check --write --unsafe . && dprint fmt && sort-package-json --quiet",
+    "lint": "dprint check && sort-package-json --check --quiet && biome check --error-on-warnings && depcheck --config=../.depcheckrc",
     "reset": "rm -rf dist && yarn run build"
   },
   "dependencies": {

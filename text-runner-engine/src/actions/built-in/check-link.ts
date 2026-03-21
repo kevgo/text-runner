@@ -68,8 +68,9 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   const absoluteLink = link.absolutify(containingLocation, action.configuration.publications)
   const anchorName = absoluteLink.anchor()
   const fullPath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
+  let fullFile: files.FullFilePath
   try {
-    var fullFile = fullPath.toFullFilePath()
+    fullFile = fullPath.toFullFilePath()
   } catch (_e) {
     throw new Error(`link to non-existing file ${fullPath.unixified()}`)
   }

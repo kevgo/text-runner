@@ -1,10 +1,8 @@
-// configuration for the compiler: ignore tests for increased speed
-// tests are type-checked and compiled when running the unit tests
 {
   "compilerOptions": {
-    "outDir": "./dist",
-    "declaration": true, /* Generates corresponding '.d.ts' file. */
-    "declarationMap": true /* Generates a sourcemap for each corresponding '.d.ts' file. */
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "./dist"
   },
   "exclude": ["./src/**/*.test.ts", "./text-runner/*.ts"],
   "extends": "./tsconfig.json"

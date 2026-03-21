@@ -28,8 +28,9 @@ export class ExternalActionManager {
     }
     const moduleName = `textrun-${parts[0]}`
     const wantAction = actions.name(parts[1])
+    let module: trExports.IndexFile
     try {
-      var module: trExports.IndexFile = await import(moduleName)
+      module = await import(moduleName)
     } catch (e) {
       if (!(e instanceof Error)) {
         throw e

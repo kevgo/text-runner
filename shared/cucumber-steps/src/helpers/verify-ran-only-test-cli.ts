@@ -1,9 +1,9 @@
+import * as fs from "node:fs/promises"
 import { flatten } from "array-flatten"
 import { assert } from "chai"
-import * as fs from "fs/promises"
 import { globby } from "globby"
 
-import { TRWorld } from "../world.js"
+import type { TRWorld } from "../world.js"
 import * as workspace from "./workspace.js"
 
 export async function verifyRanOnlyTestsCLI(filenames: string[] | string[][], world: TRWorld): Promise<void> {

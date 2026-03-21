@@ -1,5 +1,5 @@
-import * as files from "../filesystem/index.js"
-import { Publications } from "./publications.js"
+import type * as files from "../filesystem/index.js"
+import type { Publications } from "./publications.js"
 
 /** configuration values used by the Text-Runner API */
 export type APIData = Partial<CompleteAPIData>

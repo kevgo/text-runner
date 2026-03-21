@@ -1,14 +1,14 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import got, { HTTPError, TimeoutError } from "got"
 
 import { errorMessage } from "../../errors/error.js"
 import { UserError } from "../../errors/user-error.js"
 import * as files from "../../filesystem/index.js"
 import * as helpers from "../../helpers/index.js"
-import { Args } from "../index.js"
+import type { Args } from "../index.js"
 
 /** The "checkLink" action checks for broken hyperlinks. */
-export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> {
+export async function checkLink(action: Args): Promise<Args["SKIPPING"] | undefined> {
   const target = action.region.nodeOfTypes("link_open").attributes.href
   if (target == null || target === "") {
     throw new Error("link without target")
@@ -27,18 +27,17 @@ export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> 
   }
 
   if (helpers.isLinkToAnchorInSameFile(target)) {
-    const result = checkLinkToAnchorInSameFile(action.location.file, target, action)
-    return result
+    checkLinkToAnchorInSameFile(action.location.file, target, action)
+    return
   }
 
   if (helpers.isLinkToAnchorInOtherFile(target)) {
-    const result = checkLinkToAnchorInOtherFile(action.location, target, action)
-    return result
+    checkLinkToAnchorInOtherFile(action.location, target, action)
+    return
   }
 
   if (helpers.isExternalLink(target)) {
-    const result = await checkExternalLink(target, action)
-    return result
+    return await checkExternalLink(target, action)
   }
 
   await checkLinkToFilesystem(target, action)
@@ -69,9 +68,10 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   const absoluteLink = link.absolutify(containingLocation, action.configuration.publications)
   const anchorName = absoluteLink.anchor()
   const fullPath = absoluteLink.localize(action.configuration.publications, action.configuration.defaultFile)
+  let fullFile: files.FullFilePath
   try {
-    var fullFile = fullPath.toFullFilePath()
-  } catch (e) {
+    fullFile = fullPath.toFullFilePath()
+  } catch (_e) {
     throw new Error(`link to non-existing file ${fullPath.unixified()}`)
   }
 
@@ -82,35 +82,27 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   }
 
   if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
+    const anchors = action.linkTargets.getAnchors(fullFile).map(anchor => `#${anchor}`)
     throw new UserError(
-      `link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`,
-      `File ${fullFile.unixified()} contains these anchors: ${
-        action.linkTargets
-          .getAnchors(fullFile)
-          .map(anchor => `#${anchor}`)
-          .join(", ")
-      }`
+      `link to non-existing anchor ${`#${anchorName}`} in ${fullFile.unixified()}`,
+      `File ${fullFile.unixified()} contains these anchors: ${anchors.join(", ")}`
     )
   }
 
   if (action.linkTargets.anchorType(fullFile, anchorName) === "heading") {
-    action.name(`link to heading ${fullFile.unixified() + "#" + anchorName}`)
+    action.name(`link to heading ${`${fullFile.unixified()}#${anchorName}`}`)
   } else {
     action.name(`link to ${fullFile.unixified()}#${anchorName}`)
   }
 }
 
 function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, action: Args) {
-  const anchorName = target.substr(1)
+  const anchorName = target.substring(1)
   if (!action.linkTargets.hasAnchor(file, anchorName)) {
+    const anchors = action.linkTargets.getAnchors(file).map(anchor => `#${anchor}`)
     throw new UserError(
       `link to non-existing local anchor ${target}`,
-      `These local anchors exist: ${
-        action.linkTargets
-          .getAnchors(file)
-          .map(anchor => `#${anchor}`)
-          .join(", ")
-      }`,
+      `These local anchors exist: ${anchors.join(", ")}`,
       action.location
     )
   }
@@ -136,7 +128,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
         action.name(`link to local directory ${linkedFile.unixified()}`)
         return
       }
-    } catch (e) {
+    } catch (_e) {
       // we can ignore errors here since we keep checking the file below
     }
   }
@@ -144,7 +136,7 @@ async function checkLinkToFilesystem(target: string, action: Args) {
   action.name(`link to local file ${linkedFile.unixified()}`)
   try {
     await fs.stat(fullPath)
-  } catch (err) {
+  } catch (_err) {
     throw new Error(`link to non-existing local file ${linkedFile.unixified()}`)
   }
 }

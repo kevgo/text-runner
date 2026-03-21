@@ -1,4 +1,5 @@
-import util from "util"
+import util from "node:util"
+
 const delay = util.promisify(setTimeout)
 
 export function helloWorldSync(action) {

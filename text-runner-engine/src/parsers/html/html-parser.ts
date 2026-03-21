@@ -1,9 +1,9 @@
+import * as util from "node:util"
 import * as parse5 from "parse5"
-import * as util from "util"
 
 import * as ast from "../../ast/index.js"
-import * as files from "../../filesystem/index.js"
-import { TagMapper } from "../tag-mapper.js"
+import type * as files from "../../filesystem/index.js"
+import type { TagMapper } from "../tag-mapper.js"
 
 /** Parser converts HTML5 source into the standardized AST format. */
 export class Parser {
@@ -60,7 +60,7 @@ export class Parser {
       return this.standardizeTextNode(node, startingLocation)
     }
     if (!instanceOfElement(node)) {
-      throw new Error("unknown tree node: " + util.inspect(node, false, Infinity))
+      throw new Error(`unknown tree node: ${util.inspect(node, false, Infinity)}`)
     }
     if (this.tagMapper.isStandaloneTag(node.nodeName)) {
       return this.standardizeStandaloneNode(node, startingLocation)
@@ -114,8 +114,8 @@ export class Parser {
     } else {
       throw new Error(`cannot determine end line for node ${node}`)
     }
-    if (!node.sourceCodeLocation || (node.sourceCodeLocation && node.sourceCodeLocation.endTag)) {
-      const tag = ("/" + node.tagName) as ast.NodeTag
+    if (!node.sourceCodeLocation || node.sourceCodeLocation?.endTag) {
+      const tag = `/${node.tagName}` as ast.NodeTag
       result.push(
         new ast.Node({
           attributes: {},
@@ -180,6 +180,7 @@ export function standardizeHTMLAttributes(attrs: parse5.Token.Attribute[]): ast.
   return result
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: there are too many possible node types here
 function instanceOfElement(object: any): object is parse5.DefaultTreeAdapterMap["element"] {
   return !!object.nodeName && !!object.tagName && !!object.attrs
 }

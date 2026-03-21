@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import * as textRunner from "text-runner-engine"
 
 export async function nameShort(action: textRunner.actions.Args): Promise<void> {

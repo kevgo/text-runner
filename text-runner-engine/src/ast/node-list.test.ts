@@ -1,5 +1,5 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 
 import { UserError } from "../errors/user-error.js"
 import * as ast from "./index.js"

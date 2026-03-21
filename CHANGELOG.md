@@ -1,5 +1,19 @@
 # Change Log
 
+## 7.5.0
+
+- requires Node 24 or newer
+
+## 7.4.0
+
+- new action: `workspace/copy-file`
+- new action: `workspace/compare-files`
+
+## 7.3.0
+
+- subshell actions can now receive the command to execute via the `command`
+  attribute
+
 ## 7.2.1
 
 - updates dependencies to remove all security warnings

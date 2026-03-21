@@ -1,5 +1,5 @@
+import * as path from "node:path"
 import { globby } from "globby"
-import * as path from "path"
 
 import * as files from "./index.js"
 

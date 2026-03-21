@@ -1,6 +1,6 @@
 {
   "name": "textrun-action",
-  "version": "0.4.1",
+  "version": "0.7.0",
   "license": "ISC",
   "type": "module",
   "exports": "./dist/index.js",
@@ -10,14 +10,14 @@
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
     "doc": "text-runner --format=dot",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
-    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
+    "fix": "biome check --write --unsafe && dprint fmt && sort-package-json --quiet",
+    "lint": "biome check --error-on-warnings && dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc",
     "reset": "rm -rf dist && yarn run build"
   },
   "dependencies": {
-    "text-runner-engine": "7.2.1"
+    "text-runner-engine": "7.5.0"
   },
   "devDependencies": {
-    "text-runner": "7.2.1"
+    "text-runner": "7.5.0"
   }
 }

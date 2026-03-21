@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig-build.json",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet",
-    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../../.depcheckrc",
+    "fix": "biome check --write --unsafe && sort-package-json --quiet",
+    "lint": "biome check --error-on-warnings && sort-package-json --check --quiet && depcheck --config=../../.depcheckrc",
     "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },
@@ -16,10 +16,10 @@
     "array-flatten": "3.0.0",
     "assert-no-diff": "4.1.0",
     "end-child-processes": "2.0.3",
-    "globby": "15.0.0",
+    "globby": "16.1.0",
     "observable-process": "8.0.0",
     "ps-tree": "1.2.0",
     "strip-ansi": "7.1.2",
-    "text-runner-engine": "7.2.1"
+    "text-runner-engine": "7.5.0"
   }
 }

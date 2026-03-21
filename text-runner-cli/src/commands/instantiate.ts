@@ -1,6 +1,6 @@
 import * as textRunner from "text-runner-engine"
 
-import * as config from "../configuration.js"
+import type * as config from "../configuration.js"
 import { HelpCommand } from "./help.js"
 import * as scaffold from "./scaffold.js"
 import { SetupCommand } from "./setup.js"

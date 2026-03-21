@@ -1,4 +1,4 @@
-import * as path from "path"
+import * as path from "node:path"
 
 import * as files from "./index.js"
 
@@ -12,7 +12,7 @@ export class AbsoluteFilePath {
 
   /** provides the directory that contains this file */
   directory(): files.AbsoluteDirPath {
-    return new files.AbsoluteDirPath(path.dirname(this.value) + "/")
+    return new files.AbsoluteDirPath(`${path.dirname(this.value)}/`)
   }
 
   /**

@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner"
+import type * as textRunner from "text-runner"
 
 import { nonRunnable } from "./actions/non-runnable.js"
 import { runAsFile } from "./actions/run-as-file.js"

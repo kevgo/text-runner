@@ -1,10 +1,10 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 
 export async function isMarkdownFile(filepath: string): Promise<boolean> {
   try {
     const fileStats = await fs.stat(filepath)
     return filepath.endsWith(".md") && fileStats.isFile()
-  } catch (e) {
+  } catch (_e) {
     return false
   }
 }

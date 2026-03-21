@@ -3,18 +3,19 @@ import * as textRunner from "text-runner-engine"
 
 import * as helpers from "./helpers/index.js"
 import * as workspace from "./helpers/workspace.js"
-import { TRWorld } from "./world.js"
+import type { TRWorld } from "./world.js"
 
-When(/^calling:$/, { timeout: 20_000 }, async function(this: TRWorld, jsText: string) {
+When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
   const config: textRunner.configuration.APIData = { sourceDir: workspace.absPath.platformified() }
   // define a few variables here, they will be overwritten in the eval call
-  // eslint-disable-next-line prefer-const
+  // biome-ignore lint/style/useConst: this variable is used in the concatenated evaled code
   let command = new textRunner.commands.Run(config)
-  // eslint-disable-next-line prefer-const
+  // biome-ignore lint/style/useConst: this variable is used in the concatenated evaled code
   let observer = new textRunner.ActivityCollector(command)
   // eval the given code
   // @ts-expect-error
-  // eslint-disable-next-line prefer-const,no-empty-function
+  // biome-ignore lint/style/useConst: this variable is used in the concatenated evaled code
+  // biome-ignore lint/correctness/noUnusedFunctionParameters: this param is used in the concatenated evaled code.
   let asyncFunc = async (tr: typeof textRunner, ac: typeof ActivityCollector) => {}
   // NOTE: instantiating an AsyncFunction
   //       (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncFunction)
@@ -23,6 +24,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function(this: TRWorld, jsText: st
   asyncFunc = async function runner(textRunner, MyObserverClass) {
     ${jsText}
   }`
+  // biome-ignore lint/security/noGlobalEval: this evals only safe code from the E2E tests
   eval(funcText)
   try {
     await asyncFunc(textRunner, textRunner.ActivityCollector)
@@ -36,7 +38,7 @@ When(/^calling:$/, { timeout: 20_000 }, async function(this: TRWorld, jsText: st
   }
 })
 
-When(/^calling Text-Runner$/, { timeout: 20_000 }, async function(this: TRWorld) {
+When(/^calling Text-Runner$/, { timeout: 20_000 }, async function (this: TRWorld) {
   const command = new textRunner.commands.Run({
     emptyWorkspace: false,
     sourceDir: workspace.absPath.platformified(),
@@ -58,19 +60,19 @@ When(/^calling Text-Runner$/, { timeout: 20_000 }, async function(this: TRWorld)
 When(
   /^(trying to run|running) "([^"]*)"$/,
   { timeout: 30_000 },
-  async function(this: TRWorld, tryingText: string, command: string) {
+  async function (this: TRWorld, tryingText: string, command: string) {
     this.finishedProcess = await helpers.executeCLI(command, determineExpectError(tryingText), this)
   }
 )
 
-When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function(this: TRWorld, tryingText: string) {
+When(/^(trying to run|running) Text-Runner$/, { timeout: 30_000 }, async function (this: TRWorld, tryingText: string) {
   this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this)
 })
 
 When(
   /^(trying to run|running) Text-Runner in the source directory$/,
   { timeout: 30_000 },
-  async function(this: TRWorld, tryingText: string) {
+  async function (this: TRWorld, tryingText: string) {
     this.finishedProcess = await helpers.executeCLI("run", determineExpectError(tryingText), this, {
       cwd: workspace.absPath.platformified()
     })

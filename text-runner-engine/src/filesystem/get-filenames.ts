@@ -1,7 +1,7 @@
 import { globby } from "globby"
 import isGlob from "is-glob"
 
-import * as configuration from "../configuration/index.js"
+import type * as configuration from "../configuration/index.js"
 import { UserError } from "../errors/user-error.js"
 import * as files from "./index.js"
 

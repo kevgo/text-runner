@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 
 import { appendAsyncCallback } from "../helpers/append-async-callback.js"
 import { hasCallbackPlaceholder } from "../helpers/has-callback-placeholder.js"
@@ -18,12 +18,13 @@ export function runnable(action: textRunner.actions.Args, done: textRunner.expor
   code = replaceVariableDeclarations(code)
 
   // This is used in an eval'ed string below
-  // @ts-ignore: unused variable
+  // @ts-expect-error: unused variable
   const __finished = done
 
   code = hasCallbackPlaceholder(code)
     ? replaceAsyncCallback(code) // async code
     : appendAsyncCallback(code) // sync code
   action.log(code)
+  // biome-ignore lint/security/noGlobalEval: running only user-provided code here
   eval(code)
 }

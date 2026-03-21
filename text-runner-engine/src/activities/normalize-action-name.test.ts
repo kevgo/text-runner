@@ -1,17 +1,17 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 
 import * as files from "../filesystem/index.js"
 import { normalizeActionName } from "./normalize-action-name.js"
 
 suite("normalizeActionName", () => {
   const tests = {
-    "demo/hello-world": "demo/hello-world",
     "demo/HelloWorld": "demo/hello-world",
+    "demo/hello-world": "demo/hello-world",
     "demo/helloWorld": "demo/hello-world",
+    HelloWorld: "hello-world",
     "hello-world": "hello-world",
-    helloWorld: "hello-world",
-    HelloWorld: "hello-world"
+    helloWorld: "hello-world"
   }
   for (const [give, want] of Object.entries(tests)) {
     test(give, () => {

@@ -1,5 +1,5 @@
-import * as ast from "../ast/index.js"
-import { List } from "./index.js"
+import type * as ast from "../ast/index.js"
+import type { List } from "./index.js"
 import { normalizeActionName } from "./normalize-action-name.js"
 
 /** returns all activities found in the given ast.NodeLists */

@@ -1,10 +1,9 @@
-import * as assertNoDiff from "assert-no-diff"
-import * as fs from "fs/promises"
+import * as fs from "node:fs/promises"
+import * as path from "node:path"
 import { suite, test } from "node:test"
-import * as path from "path"
-
+import * as assertNoDiff from "assert-no-diff"
+import type { NodeScaffoldData } from "../../ast/index.js"
 import * as ast from "../../ast/index.js"
-import { NodeScaffoldData } from "../../ast/index.js"
 import * as files from "../../filesystem/index.js"
 import { parse } from "./parse.js"
 

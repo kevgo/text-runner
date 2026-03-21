@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import * as jsonc from "jsonc-reader"
 import * as textRunner from "text-runner-engine"
 
@@ -107,7 +107,7 @@ async function read(cmdLineArgs: config.Data): Promise<string> {
   try {
     const result = await fs.readFile("text-runner.jsonc", "utf8")
     return result
-  } catch (e) {
+  } catch (_e) {
     return ""
   }
 }

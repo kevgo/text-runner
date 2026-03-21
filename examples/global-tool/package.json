@@ -5,14 +5,14 @@
   "type": "module",
   "scripts": {
     "doc": "text-runner --format=dot",
-    "fix": "dprint fmt && sort-package-json --quiet",
-    "lint": "dprint check && sort-package-json --check --quiet"
+    "fix": "biome check --write --unsafe && dprint fmt && sort-package-json --quiet",
+    "lint": "biome check --error-on-warnings && dprint check && sort-package-json --check --quiet"
   },
   "dependencies": {
-    "text-runner": "7.2.1",
-    "textrun-shell": "0.4.1"
+    "text-runner": "7.5.0",
+    "textrun-shell": "0.7.0"
   },
   "devDependencies": {
-    "tsx": "4.20.6"
+    "tsx": "4.21.0"
   }
 }

@@ -1,5 +1,5 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 
 import * as ast from "../ast/index.js"
 import { extractImagesAndLinks } from "./extract-images-and-links.js"

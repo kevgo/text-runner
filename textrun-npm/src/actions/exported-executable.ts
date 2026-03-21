@@ -1,9 +1,9 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import { styleText } from "node:util"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 
 import { trimDollar } from "../helpers/trim-dollar.js"
-import { PackageJson } from "./package-json.js"
+import type { PackageJson } from "./package-json.js"
 
 export async function exportedExecutable(action: textRunner.actions.Args): Promise<void> {
   const commandName = trimDollar(action.region.text().trim())

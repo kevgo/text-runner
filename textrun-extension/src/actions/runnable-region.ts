@@ -1,4 +1,4 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
 import * as textRunner from "text-runner-engine"
 
 /** runs the given content in Text-Runner */

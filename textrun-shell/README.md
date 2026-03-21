@@ -66,6 +66,20 @@ echo Hello world!
 </pre>
 ```
 
+### command attribute
+
+You can provide the command to run via an HTML attribute:
+
+<a type="extension/runnable-region">
+
+```html
+The "echo" command prints text on the command line. For example, let's run:
+
+<pre type="shell/command" command="echo Hello world!"></pre>
+```
+
+</a>
+
 ## shell/command-output
 
 The <b type="action/name-full">shell/command-output</b> action verifies the
@@ -155,6 +169,32 @@ for, and the last one text to enter once the output from the first column has
 appeared. Middle columns are ignored. `<th>` elements are considered
 descriptions and are also ignored.
 
+### command attribute
+
+You can provide the command to run via the `command` HTML attribute. As an
+example, if you run the previous script with this other input:
+
+<table type="shell/command-with-input" command="node greeter.js">
+  <tr>
+    <th>Output to wait for</th>
+    <th>input</th>
+  </tr>
+  <tr>
+    <td>your name</td>
+    <td>Text-Runner</td>
+  </tr>
+  <tr>
+    <td>which day is today</td>
+    <td>Tuesday</td>
+  </tr>
+</table>
+
+Then it prints:
+
+<pre type="shell/command-output">
+Hello Text-Runner, happy Tuesday!
+</pre>
+
 ## shell/server
 
 Long-running processes, for example web or database servers, keep running while
@@ -187,6 +227,11 @@ node server.js
 ```
 
 </a>
+
+### command attribute
+
+You can also provide the command to start the server via the `command`
+attribute.
 
 ## shell/server-output
 

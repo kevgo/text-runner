@@ -1,4 +1,4 @@
-import * as path from "path"
+import * as path from "node:path"
 
 import * as helpers from "../helpers/index.js"
 import * as files from "./index.js"

@@ -1,8 +1,8 @@
-import * as path from "path"
+import * as path from "node:path"
 
 import * as files from "./index.js"
 
-const sepRE = new RegExp("\\" + path.sep, "g")
+const sepRE = new RegExp(`\\${path.sep}`, "g")
 
 /**
  * represents a full path to a file,
@@ -17,7 +17,7 @@ export class FullFilePath {
 
   /** Returns the directory that contains this file */
   directory(): files.FullPath {
-    return new files.FullPath(path.dirname(this.value) + "/")
+    return new files.FullPath(`${path.dirname(this.value)}/`)
   }
 
   /** Returns the file extension of this path */

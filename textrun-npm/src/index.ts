@@ -1,4 +1,4 @@
-import * as textRunner from "text-runner"
+import type * as textRunner from "text-runner"
 
 import { exportedExecutable } from "./actions/exported-executable.js"
 import { install } from "./actions/install.js"

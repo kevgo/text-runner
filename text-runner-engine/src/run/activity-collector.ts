@@ -1,6 +1,6 @@
-import { Activity } from "../activities/index.js"
-import { Command } from "../commands/index.js"
-import * as events from "../events/index.js"
+import type { Activity } from "../activities/index.js"
+import type { Command } from "../commands/index.js"
+import type * as events from "../events/index.js"
 import { StopWatch } from "./stopwatch.js"
 
 /** Statistics about a run of Text-Runner */

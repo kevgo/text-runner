@@ -1,6 +1,6 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
 import * as util from "node:util"
+import { assert } from "chai"
 
 import { makeFullPath } from "./make-full-path.js"
 

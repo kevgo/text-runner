@@ -1,6 +1,6 @@
-import { promises as fs } from "fs"
-import * as path from "path"
-import * as textRunner from "text-runner"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
+import type * as textRunner from "text-runner"
 
 /** creates a binary with the given name in the workspace */
 export default async function bundledExecutable(action: textRunner.actions.Args): Promise<void> {

@@ -1,6 +1,6 @@
 import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 import * as trExt from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"
@@ -35,7 +35,7 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
   // this is also used in the "verify-run-console-output" step
   const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess
   action.log(finished.combinedText)
-  CurrentCommand.set(finished)
+  CurrentCommand.setCurrentCommand(finished)
   if (finished.exitCode !== 0 && !allowError) {
     throw new Error(`command "${commandsToRun}" failed with exit code ${finished.exitCode}`)
   }

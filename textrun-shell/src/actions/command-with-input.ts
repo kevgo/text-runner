@@ -1,6 +1,6 @@
 import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"
@@ -47,7 +47,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
     await enter(processor, inputLine)
   }
   const finished = (await processor.waitForEnd()) as observableProcess.FinishedProcess
-  CurrentCommand.set(finished)
+  CurrentCommand.setCurrentCommand(finished)
   action.log(processor.output.fullText())
 }
 

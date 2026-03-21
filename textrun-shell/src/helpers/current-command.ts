@@ -1,4 +1,4 @@
-import * as observableProcess from "observable-process"
+import type * as observableProcess from "observable-process"
 
 /** CurrentCommand provides global access to the currently running console command. */
 export class CurrentCommand {
@@ -9,7 +9,7 @@ export class CurrentCommand {
     return instance
   }
 
-  static set(process: observableProcess.FinishedProcess): void {
+  static setCurrentCommand(process: observableProcess.FinishedProcess): void {
     instance = process
   }
 }

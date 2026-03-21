@@ -28,8 +28,8 @@ function helloWorldPromise(action) {
 }
 
 module.exports = {
-  helloWorldSync,
   helloWorldAsync,
   helloWorldCallback,
-  helloWorldPromise
+  helloWorldPromise,
+  helloWorldSync
 }

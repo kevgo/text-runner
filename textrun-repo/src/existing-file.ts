@@ -1,4 +1,5 @@
-import { promises as fs } from "node:fs"
+import type * as fs from "node:fs"
+import * as fsp from "node:fs/promises"
 import { styleText } from "node:util"
 import * as textRunner from "text-runner-engine"
 
@@ -7,8 +8,9 @@ export async function existingFile(action: textRunner.actions.Args): Promise<voi
   action.name(`document mentions source code file ${styleText("cyan", fileName)}`)
   const fullPath = action.configuration.sourceDir.joinStr(fileName)
   action.log(`ls ${fullPath}`)
+  let stats: fs.Stats
   try {
-    var stats = await fs.stat(fullPath)
+    stats = await fsp.stat(fullPath)
   } catch (err) {
     if (!textRunner.isFsError(err)) {
       throw err

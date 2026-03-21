@@ -36,7 +36,7 @@ export class Configuration {
       debug(`found path mapping in ${filePath}`)
       const config: ConfigFile = content.default
       return new Configuration(config)
-    } catch (e) {
+    } catch (_e) {
       debug(`found no path mapping in ${filePath}`)
       return Configuration.default()
     }

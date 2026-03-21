@@ -1,5 +1,5 @@
+import * as util from "node:util"
 import MarkdownIt from "markdown-it"
-import * as util from "util"
 
 import * as ast from "../../ast/index.js"
 import { UserError } from "../../errors/user-error.js"
@@ -238,7 +238,7 @@ export class MarkdownParser {
         attributes: standardizeMarkdownItAttributes(node.attrs),
         content: "",
         location,
-        tag: ("/" + node.tag) as ast.NodeTag,
+        tag: `/${node.tag}` as ast.NodeTag,
         type: `${node.tag}_close` as ast.NodeType
       })
     )

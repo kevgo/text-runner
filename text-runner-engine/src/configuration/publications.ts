@@ -1,5 +1,5 @@
-import * as files from "../filesystem/index.js"
-import { Publication, PublicationConfig } from "./publication.js"
+import type * as files from "../filesystem/index.js"
+import { Publication, type PublicationConfig } from "./publication.js"
 
 export class Publications extends Array<Publication> {
   // Creates a new Publications instance based on the given JSON data

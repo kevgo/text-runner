@@ -1,6 +1,6 @@
-import * as ast from "../ast/index.js"
-import * as files from "../filesystem/index.js"
-import { Target, Types } from "./index.js"
+import type * as ast from "../ast/index.js"
+import type * as files from "../filesystem/index.js"
+import type { Target, Types } from "./index.js"
 import { targetURL } from "./target-url.js"
 
 export class List {

@@ -1,4 +1,4 @@
-import * as events from "../events/index.js"
+import type * as events from "../events/index.js"
 
 /** Command describes a Text-Runner command */
 export interface Command {

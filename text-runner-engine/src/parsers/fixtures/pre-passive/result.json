@@ -1,26 +1,26 @@
 [
   {
-    "type": "fence_open",
-    "tag": "pre",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {}
+    "tag": "pre",
+    "type": "fence_open"
   },
   {
-    "type": "text",
-    "tag": "",
+    "attributes": {},
+    "content": "my code",
     "file": "input.*",
     "line": 2,
-    "content": "my code",
-    "attributes": {}
+    "tag": "",
+    "type": "text"
   },
   {
-    "type": "fence_close",
-    "tag": "/pre",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 3,
-    "content": "",
-    "attributes": {}
+    "tag": "/pre",
+    "type": "fence_close"
   }
 ]

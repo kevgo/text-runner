@@ -1,45 +1,45 @@
 [
   {
-    "type": "paragraph_open",
-    "tag": "p",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {}
+    "tag": "p",
+    "type": "paragraph_open"
   },
   {
-    "type": "anchor_open",
-    "tag": "a",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
     "attributes": {
       "name": "foo",
       "type": "bar"
-    }
-  },
-  {
-    "type": "text",
-    "tag": "",
+    },
+    "content": "",
     "file": "input.*",
     "line": 1,
+    "tag": "a",
+    "type": "anchor_open"
+  },
+  {
+    "attributes": {},
     "content": "A foo walks into a bar",
-    "attributes": {}
+    "file": "input.*",
+    "line": 1,
+    "tag": "",
+    "type": "text"
   },
   {
-    "type": "anchor_close",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "/a",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "anchor_close"
   },
   {
-    "type": "paragraph_close",
-    "tag": "/p",
+    "attributes": {},
+    "content": "",
     "file": "input.*",
     "line": 1,
-    "content": "",
-    "attributes": {}
+    "tag": "/p",
+    "type": "paragraph_close"
   }
 ]

@@ -1,26 +1,26 @@
 [
   {
-    "type": "paragraph_open",
+    "attributes": {},
+    "content": "",
+    "file": "input.*",
+    "line": 1,
     "tag": "p",
-    "file": "input.*",
-    "line": 1,
-    "content": "",
-    "attributes": {}
+    "type": "paragraph_open"
   },
   {
-    "type": "text",
-    "tag": "",
-    "file": "input.*",
-    "line": 1,
+    "attributes": {},
     "content": "Hello world!",
-    "attributes": {}
-  },
-  {
-    "type": "paragraph_close",
-    "tag": "/p",
     "file": "input.*",
     "line": 1,
+    "tag": "",
+    "type": "text"
+  },
+  {
+    "attributes": {},
     "content": "",
-    "attributes": {}
+    "file": "input.*",
+    "line": 1,
+    "tag": "/p",
+    "type": "paragraph_close"
   }
 ]

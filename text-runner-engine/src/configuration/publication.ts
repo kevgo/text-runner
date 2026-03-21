@@ -38,7 +38,7 @@ export class Publication implements PublicationConfig {
    * according to the rules of this publication
    */
   publish(localPath: files.FullPath): files.FullLink {
-    const re = new RegExp("^" + this.localPath)
+    const re = new RegExp(`^${this.localPath}`)
     const linkPath = helpers.addLeadingSlash(localPath.unixified()).replace(re, this.publicPath)
     const result = new files.FullLink(linkPath)
     if (this.publicExtension == null) {

@@ -1,9 +1,10 @@
 /* eslint-disable no-empty-function */
-import { assert } from "chai"
+
 import { suite, test } from "node:test"
+import { assert } from "chai"
 
 import { Actions } from "./actions.js"
-import { Action } from "./index.js"
+import type { Action } from "./index.js"
 
 suite("Actions", () => {
   suite("register", () => {

@@ -1,5 +1,5 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 
 import { isLinkToAnchorInSameFile } from "./is-link-to-anchor-in-same-file.js"
 

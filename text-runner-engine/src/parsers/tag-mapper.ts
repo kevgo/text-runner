@@ -1,4 +1,4 @@
-import * as ast from "../ast/node.js"
+import type * as ast from "../ast/node.js"
 
 type TagTypeMapping = Map<ast.NodeTag, ast.NodeType>
 type TypeTagMapping = Map<ast.NodeType, ast.NodeTag>
@@ -81,7 +81,7 @@ export class TagMapper {
 
     // handle generic closing tag
     if (type.endsWith("_close")) {
-      return ("/" + type.substring(0, type.length - 6)) as ast.NodeTag
+      return `/${type.substring(0, type.length - 6)}` as ast.NodeTag
     }
 
     // handle generic stand-alone tag
@@ -106,9 +106,9 @@ export class TagMapper {
 
     // here it is an unknown tag, we assume it is opening-closing
     if (tag.startsWith("/")) {
-      return (tag.substring(1) + "_close") as ast.NodeType
+      return `${tag.substring(1)}_close` as ast.NodeType
     } else {
-      return (tag + "_open") as ast.NodeType
+      return `${tag}_open` as ast.NodeType
     }
   }
 
@@ -125,8 +125,8 @@ export class TagMapper {
   private createTypeTagMappings(): TypeTagMapping {
     const result: TypeTagMapping = new Map()
     for (const [type, tag] of TagMapper.OPEN_CLOSE_MAPPINGS) {
-      result.set((type + "_open") as ast.NodeType, tag)
-      result.set((type + "_close") as ast.NodeType, ("/" + tag) as ast.NodeTag)
+      result.set(`${type}_open` as ast.NodeType, tag)
+      result.set(`${type}_close` as ast.NodeType, `/${tag}` as ast.NodeTag)
     }
     for (const [type, tag] of TagMapper.STANDALONE_MAPPINGS) {
       result.set(type, tag)

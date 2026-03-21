@@ -1,4 +1,4 @@
-import { Activity } from "../activities/index.js"
+import type { Activity } from "../activities/index.js"
 
 export type Args = Failed | Skipped | Start | string | Success | Warning
 

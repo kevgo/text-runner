@@ -1,5 +1,5 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 
 import * as ast from "../../ast/index.js"
 import * as files from "../../filesystem/index.js"
@@ -10,8 +10,8 @@ suite("ClosingTagParser.isClosingTag()", () => {
   const testData = {
     "  < / a > ": true,
     "  </a> ": true,
-    "</a>": true,
     " < a  > ": false,
+    "</a>": true,
     "<a>": false
   }
   const parser = new ClosingTagParser(new TagMapper())

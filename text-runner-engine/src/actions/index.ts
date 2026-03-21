@@ -1,8 +1,8 @@
-import * as ast from "../ast/index.js"
-import * as config from "../configuration/index.js"
-import * as files from "../filesystem/index.js"
-import * as linkTargets from "../link-targets/index.js"
-import * as run from "../run/index.js"
+import type * as ast from "../ast/index.js"
+import type * as config from "../configuration/index.js"
+import type * as files from "../filesystem/index.js"
+import type * as linkTargets from "../link-targets/index.js"
+import type * as run from "../run/index.js"
 
 export { Finder } from "./finder.js"
 export * from "./name.js"

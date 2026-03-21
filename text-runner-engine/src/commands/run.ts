@@ -3,13 +3,13 @@ import { EventEmitter } from "events"
 import * as actions from "../actions/index.js"
 import * as activities from "../activities/index.js"
 import * as configuration from "../configuration/index.js"
-import * as events from "../events/index.js"
+import type * as events from "../events/index.js"
 import * as files from "../filesystem/index.js"
 import * as linkTargets from "../link-targets/index.js"
 import * as parser from "../parsers/index.js"
 import * as run from "../run/index.js"
 import * as workspace from "../workspace/index.js"
-import * as command from "./index.js"
+import type * as command from "./index.js"
 
 /** executes "text-runner run", prints everything, returns the number of errors encountered */
 export class Run implements command.Command {

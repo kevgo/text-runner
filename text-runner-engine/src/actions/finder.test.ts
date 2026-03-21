@@ -1,5 +1,5 @@
-import { assert } from "chai"
 import { suite, test } from "node:test"
+import { assert } from "chai"
 import * as path from "path"
 import * as url from "url"
 
@@ -13,7 +13,7 @@ import {
   loadBuiltinActions,
   loadCustomActions
 } from "./finder.js"
-import { Action } from "./index.js"
+import type { Action } from "./index.js"
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 

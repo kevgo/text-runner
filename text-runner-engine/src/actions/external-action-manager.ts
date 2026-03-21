@@ -1,8 +1,8 @@
-import * as trExports from "../actions/export.js"
+import type * as trExports from "../actions/export.js"
 import * as actions from "../actions/index.js"
-import { Activity } from "../activities/index.js"
+import type { Activity } from "../activities/index.js"
 import { UserError } from "../errors/user-error.js"
-import { Action, FunctionRepo } from "./index.js"
+import type { Action, FunctionRepo } from "./index.js"
 
 /** ExternalActionManager provides external actions from their own NPM modules */
 export class ExternalActionManager {

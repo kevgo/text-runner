@@ -1,8 +1,8 @@
 import { promises as fs } from "fs"
 
-import * as ast from "../../ast/index.js"
+import type * as ast from "../../ast/index.js"
 import * as files from "../../filesystem/index.js"
-import { TagMapper } from "../tag-mapper.js"
+import type { TagMapper } from "../tag-mapper.js"
 import { Parser } from "./html-parser.js"
 
 /** returns the standard AST for the HTML files with the given paths */

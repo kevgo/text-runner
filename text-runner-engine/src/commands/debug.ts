@@ -5,12 +5,12 @@ import * as activities from "../activities/index.js"
 import * as ast from "../ast/index.js"
 import * as configuration from "../configuration/index.js"
 import { UserError } from "../errors/user-error.js"
-import * as events from "../events/index.js"
+import type * as events from "../events/index.js"
 import * as files from "../filesystem/index.js"
 import * as helpers from "../helpers/index.js"
 import * as linkTargets from "../link-targets/index.js"
 import * as parsers from "../parsers/index.js"
-import { Command } from "./command.js"
+import type { Command } from "./command.js"
 
 export const DebugSubCommandValues = ["activities", "ast", "images", "links", "linkTargets"] as const
 export type DebugSubcommand = (typeof DebugSubCommandValues)[number]

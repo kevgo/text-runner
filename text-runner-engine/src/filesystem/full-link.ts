@@ -1,6 +1,6 @@
 import * as path from "path"
 
-import * as configuration from "../configuration/index.js"
+import type * as configuration from "../configuration/index.js"
 import * as helpers from "../helpers/index.js"
 import * as files from "./index.js"
 

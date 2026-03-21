@@ -3,7 +3,7 @@ import * as tmp from "tmp-promise"
 
 import { UserError } from "../errors/user-error.js"
 import * as files from "../filesystem/index.js"
-import * as configuration from "./index.js"
+import type * as configuration from "./index.js"
 import { Publications } from "./publications.js"
 
 export async function addDefaults(partial: configuration.APIData): Promise<configuration.Data> {

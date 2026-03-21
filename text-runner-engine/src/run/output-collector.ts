@@ -1,6 +1,6 @@
 import * as util from "util"
 
-import * as run from "./index.js"
+import type * as run from "./index.js"
 
 /** simulates console.log to collect output from a running action */
 export class OutputCollector {

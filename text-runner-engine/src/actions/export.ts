@@ -1,4 +1,4 @@
-import * as actions from "./index.js"
+import type * as actions from "./index.js"
 
 export type Action = CbAction | PromiseAction | SyncAction
 

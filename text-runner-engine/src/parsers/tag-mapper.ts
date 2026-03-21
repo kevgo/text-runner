@@ -1,4 +1,4 @@
-import * as ast from "../ast/node.js"
+import type * as ast from "../ast/node.js"
 
 type TagTypeMapping = Map<ast.NodeTag, ast.NodeType>
 type TypeTagMapping = Map<ast.NodeType, ast.NodeTag>

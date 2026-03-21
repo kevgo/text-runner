@@ -1,10 +1,9 @@
+import { suite, test } from "node:test"
 import { assert } from "chai"
 import * as fs from "fs/promises"
-import { suite, test } from "node:test"
 import * as path from "path"
-
+import type { NodeScaffoldData } from "../../ast/index.js"
 import * as ast from "../../ast/index.js"
-import { NodeScaffoldData } from "../../ast/index.js"
 import * as files from "../../filesystem/index.js"
 import { TagMapper } from "../tag-mapper.js"
 import { parseHTMLFiles } from "./parse-html-files.js"

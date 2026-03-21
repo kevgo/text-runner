@@ -5,7 +5,7 @@ import { errorMessage } from "../../errors/error.js"
 import { UserError } from "../../errors/user-error.js"
 import * as files from "../../filesystem/index.js"
 import * as helpers from "../../helpers/index.js"
-import { Args } from "../index.js"
+import type { Args } from "../index.js"
 
 /** The "checkLink" action checks for broken hyperlinks. */
 export async function checkLink(action: Args): Promise<Args["SKIPPING"] | void> {
@@ -84,12 +84,10 @@ function checkLinkToAnchorInOtherFile(containingLocation: files.Location, target
   if (!action.linkTargets.hasAnchor(fullFile, anchorName)) {
     throw new UserError(
       `link to non-existing anchor ${"#" + anchorName} in ${fullFile.unixified()}`,
-      `File ${fullFile.unixified()} contains these anchors: ${
-        action.linkTargets
-          .getAnchors(fullFile)
-          .map(anchor => `#${anchor}`)
-          .join(", ")
-      }`
+      `File ${fullFile.unixified()} contains these anchors: ${action.linkTargets
+        .getAnchors(fullFile)
+        .map(anchor => `#${anchor}`)
+        .join(", ")}`
     )
   }
 
@@ -105,12 +103,10 @@ function checkLinkToAnchorInSameFile(file: files.FullFilePath, target: string, a
   if (!action.linkTargets.hasAnchor(file, anchorName)) {
     throw new UserError(
       `link to non-existing local anchor ${target}`,
-      `These local anchors exist: ${
-        action.linkTargets
-          .getAnchors(file)
-          .map(anchor => `#${anchor}`)
-          .join(", ")
-      }`,
+      `These local anchors exist: ${action.linkTargets
+        .getAnchors(file)
+        .map(anchor => `#${anchor}`)
+        .join(", ")}`,
       action.location
     )
   }

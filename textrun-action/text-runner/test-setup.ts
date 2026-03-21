@@ -1,5 +1,5 @@
-import { promises as fs } from "fs"
-import * as textRunner from "text-runner"
+import { promises as fs } from "node:fs"
+import type * as textRunner from "text-runner"
 
 export default async function testSetup(action: textRunner.actions.Args): Promise<void> {
   const codeBlocks = action.region.nodesOfTypes("code")

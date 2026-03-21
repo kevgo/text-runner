@@ -46,6 +46,7 @@
     "json-schema": "ts-json-schema-generator --path text-runner-cli/src/configuration.ts --type Data --tsconfig tsconfig.json --out documentation/text-runner.schema.json"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.8",
     "@cucumber/cucumber": "12.5.0",
     "@eslint/js": "9.39.2",
     "@types/chai": "5.2.3",

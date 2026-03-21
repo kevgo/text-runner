@@ -23,13 +23,21 @@ extend-enable = ["MD060", "MD063", "MD070", "MD073"]
 exclude = [
     ".git",
     ".github",
+    "CHANGELOG.md",
     "documentation",
     "examples",
     "shared",
     "text-runner-cli",
     "text-runner-engine",
     "text-runner-features",
-    "tools"
+    "textrun-action",
+    "textrun-extension",
+    "textrun-javascript",
+    "textrun-make",
+    "textrun-npm",
+    "textrun-repo",
+    "textrun-shell",
+    "textrun-workspace"
 ]
 
 # Respect .gitignore files when scanning directories (default: true)
@@ -52,7 +60,7 @@ tables = false  # Exclude tables from line length check
 # headings = true  # Include headings in line length check
 
 [MD044]
-names = ["rumdl", "Markdown", "GitHub"]  # Proper names that should be capitalized correctly
+names = ["rumdl", "Markdown"]  # Proper names that should be capitalized correctly
 # code-blocks = false  # Check code blocks for proper names (default: false, skips code blocks)
 
 # format tables

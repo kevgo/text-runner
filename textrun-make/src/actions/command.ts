@@ -1,6 +1,6 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
+import * as os from "node:os"
 import { styleText } from "node:util"
-import * as os from "os"
 import * as textRunner from "text-runner-engine"
 
 import { makefileTargets } from "../helpers/makefile-targets.js"
@@ -18,18 +18,15 @@ export async function command(action: textRunner.actions.Args): Promise<void> {
 
   const makefilePath = action.configuration.sourceDir.joinStr(
     action.location.file.directory().platformified(),
-    action.region[0].attributes["dir"] || ".",
+    action.region[0].attributes.dir || ".",
     "Makefile"
   )
   const makefileContent = await fs.readFile(makefilePath, "utf8")
   const haves = makefileTargets(makefileContent)
   for (const want of wants) {
     if (!haves.includes(want)) {
-      throw new Error(
-        `Makefile does not contain command make ${styleText("cyan", want)} but these targets: ${
-          styleText("cyan", haves.join(", "))
-        }`
-      )
+      const targets = styleText("cyan", haves.join(", "))
+      throw new Error(`Makefile does not contain command make ${styleText("cyan", want)} but these targets: ${targets}`)
     }
   }
 }

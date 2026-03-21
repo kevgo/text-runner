@@ -15,7 +15,7 @@ doc:  # runs the documentation tests
 	env $(YARN_ARGS) yarn exec --silent -- turbo run doc $(TURBO_ARGS)
 
 fix: tools/rta@${RUN_THAT_APP_VERSION}  # runs all auto-fixes
-	yarn exec --silent -- dprint fmt
+	yarn exec --silent -- rumdl fmt .
 	yarn exec --silent -- sort-package-json --quiet
 	env $(YARN_ARGS) yarn exec --silent -- turbo run fix $(TURBO_ARGS)
 	tools/rta ghokin fmt replace text-runner-features

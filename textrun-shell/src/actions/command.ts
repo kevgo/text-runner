@@ -1,6 +1,6 @@
 import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
-import type * as textRunner from "text-runner-engine"
+import * as textRunner from "text-runner-engine"
 import * as trExt from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"

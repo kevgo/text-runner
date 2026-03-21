@@ -1,8 +1,8 @@
 import * as assertNoDiff from "assert-no-diff"
 import stripAnsi from "strip-ansi"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 
-import { CurrentCommand } from "../helpers/current-command.js"
+import * as currentCommand from "../helpers/current-command.js"
 
 export function commandOutput(action: textRunner.actions.Args): void {
   action.name("verifying the output of the last run console command")
@@ -11,7 +11,7 @@ export function commandOutput(action: textRunner.actions.Args): void {
     .split("\n")
     .map((line: string) => line.trim())
     .filter((line: string) => line)
-  const actualOutput = stripAnsi(CurrentCommand.instance().combinedText)
+  const actualOutput = stripAnsi(currentCommand.instance().combinedText)
   const actualLines = actualOutput
     .split("\n")
     .map(line => line.trim())

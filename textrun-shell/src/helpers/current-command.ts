@@ -1,17 +1,15 @@
 import type * as observableProcess from "observable-process"
 
 /** CurrentCommand provides global access to the currently running console command. */
-export class CurrentCommand {
-  static instance(): observableProcess.FinishedProcess {
-    if (!instance) {
-      throw new Error("no instance")
-    }
-    return instance
+export function instance(): observableProcess.FinishedProcess {
+  if (!_instance) {
+    throw new Error("no instance")
   }
-
-  static setCurrentCommand(process: observableProcess.FinishedProcess): void {
-    instance = process
-  }
+  return _instance
 }
 
-let instance: null | observableProcess.FinishedProcess = null
+export function set(process: observableProcess.FinishedProcess): void {
+  _instance = process
+}
+
+let _instance: null | observableProcess.FinishedProcess = null

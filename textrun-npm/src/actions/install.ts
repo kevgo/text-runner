@@ -16,9 +16,9 @@ export async function install(action: textRunner.actions.Args): Promise<void> {
   const pkgText = await fs.readFile(pkgJsonPath, "utf-8")
   const pkg: PackageJson = JSON.parse(pkgText)
   if (missesPackageName(installText, pkg.name)) {
-    const have = styleText("cyan", installText)
-    const want = styleText("cyan", pkg.name)
-    throw new Error(`installation instructions ${have} don't contain expected npm package name ${want}`)
+    const text = styleText("cyan", installText)
+    const name = styleText("cyan", pkg.name)
+    throw new Error(`installation instructions ${text} don't contain expected npm package name ${name}`)
   }
 }
 

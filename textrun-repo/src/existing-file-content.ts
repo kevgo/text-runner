@@ -1,8 +1,8 @@
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
+import { styleText } from "node:util"
 import * as assertNoDiff from "assert-no-diff"
 import eol from "eol"
-import { promises as fs } from "fs"
-import { styleText } from "node:util"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function existingFileContent(action: textRunner.actions.Args): Promise<void> {
@@ -17,7 +17,7 @@ export async function existingFileContent(action: textRunner.actions.Args): Prom
   action.name(`document content matches source code file ${styleText("cyan", filePath)}`)
   const fullPath = action.configuration.sourceDir.joinStr(filePath)
   action.log(`cat ${fullPath}`)
-  let actualContent
+  let actualContent: string
   try {
     actualContent = await fs.readFile(fullPath, "utf8")
   } catch (err) {

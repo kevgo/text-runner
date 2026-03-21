@@ -1,7 +1,7 @@
-import * as fs from "fs"
-import { promises as fsp } from "fs"
+import * as fs from "node:fs"
+import { promises as fsp } from "node:fs"
+import * as path from "node:path"
 import { styleText } from "node:util"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function executable(action: textRunner.actions.Args): Promise<void> {

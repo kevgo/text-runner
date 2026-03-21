@@ -1,6 +1,6 @@
 import * as observableProcess from "observable-process"
 
-import { TRWorld } from "../world.js"
+import type { TRWorld } from "../world.js"
 import { makeFullPath } from "./make-full-path.js"
 import * as workspace from "./workspace.js"
 

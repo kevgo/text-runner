@@ -1,4 +1,4 @@
-import * as observableProcess from "observable-process"
+import type * as observableProcess from "observable-process"
 
 /** CurrentServer provides global access to the currently running server process. */
 export class CurrentServer {

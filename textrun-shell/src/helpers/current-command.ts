@@ -1,4 +1,4 @@
-import * as observableProcess from "observable-process"
+import type * as observableProcess from "observable-process"
 
 /** CurrentCommand provides global access to the currently running console command. */
 export class CurrentCommand {

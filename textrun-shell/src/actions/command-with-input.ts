@@ -1,6 +1,6 @@
 import { styleText } from "node:util"
 import * as observableProcess from "observable-process"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 import { callArgs } from "textrun-extension"
 
 import { Configuration } from "../helpers/configuration.js"
@@ -17,7 +17,7 @@ interface ProcessInput {
  * and waits until the command is finished.
  */
 export async function commandWithInput(action: textRunner.actions.Args): Promise<void> {
-  var commandText = action.region[0].attributes["command"]
+  var commandText = action.region[0].attributes.command
   if (commandText === "") {
     throw new Error('empty "command" attribute')
   }
@@ -52,7 +52,7 @@ export async function commandWithInput(action: textRunner.actions.Args): Promise
 }
 
 async function enter(processor: observableProcess.RunningProcess, input: ProcessInput) {
-  processor.stdin.write(input.input + "\n")
+  processor.stdin.write(`${input.input}\n`)
   if (input.textToWait) {
     await processor.stdout.waitForText(input.textToWait)
   }

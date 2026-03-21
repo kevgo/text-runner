@@ -17,8 +17,9 @@ export async function existingFileWithContent(action: textRunner.actions.Args): 
   } else {
     action.name(`verify content of file ${styleText("cyan", fileRelPath)}`)
   }
+  let actualContent: string
   try {
-    var actualContent = await fs.readFile(fullPath, "utf-8")
+    actualContent = await fs.readFile(fullPath, "utf-8")
   } catch (e) {
     if (!textRunner.isFsError(e)) {
       throw e

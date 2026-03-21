@@ -1,4 +1,5 @@
-import { promises as fs } from "node:fs"
+import type * as fs from "node:fs"
+import * as fsp from "node:fs/promises"
 import * as path from "node:path"
 import { styleText } from "node:util"
 import type * as textRunner from "text-runner-engine"
@@ -12,8 +13,9 @@ export async function existingDirectory(action: textRunner.actions.Args): Promis
   const dirRelName = path.join(action.region[0].attributes.dir || ".", dirName)
   action.name(`directory ${styleText("cyan", dirRelName)} exists in the workspace`)
   const fullPath = action.configuration.workspace.joinStr(dirRelName)
+  let stats: fs.Stats
   try {
-    var stats = await fs.lstat(fullPath)
+    stats = await fsp.lstat(fullPath)
   } catch (_err) {
     throw new Error(`directory ${styleText(["cyan", "bold"], dirRelName)} does not exist in the workspace`)
   }

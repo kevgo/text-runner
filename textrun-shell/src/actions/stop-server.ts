@@ -1,5 +1,5 @@
 import { endChildProcesses } from "end-child-processes"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 
 import { CurrentServer } from "../helpers/current-server.js"
 

@@ -11,8 +11,8 @@
     "build": "tsc -p tsconfig-build.json",
     "cuke": "yarn run build && cucumber-js --format=progress",
     "doc": "yarn run build && text-runner --format=dot",
-    "fix": "eslint --fix --ignore-pattern=dist/ . && dprint fmt && sort-package-json --quiet && ../tools/rta ghokin fmt replace features",
-    "lint": "dprint check && sort-package-json --check --quiet && eslint --ignore-pattern=dist/ . && depcheck --config=../.depcheckrc",
+    "fix": "biome check --write --unsafe && dprint fmt && sort-package-json --quiet && ../tools/rta ghokin fmt replace features",
+    "lint": "biome check --error-on-warnings && dprint check && sort-package-json --check --quiet && depcheck --config=../.depcheckrc",
     "reset": "rm -rf dist && yarn run build",
     "unit": "node --test --import tsx 'src/**/*.test.ts'"
   },

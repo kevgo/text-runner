@@ -13,13 +13,15 @@
 
 </div>
 
-Text-Runner is a test framework for technical documentation. It helps keep
-documentation up to date. An example is the text you are reading right now.
+Text-Runner is a test framework for technical documentation.
+It helps keep documentation up to date.
+An example is the text you are reading right now.
 TextRunner verifies it for technical correctness.
 
-As a fully programmable test framework, TextRunner can read and understand any
-form of Markdown-formatted text in any human language as well as complex data in
-tables, bullet point lists, and even images!
+As a fully programmable test framework,
+TextRunner can read and understand any form of Markdown-formatted text in any
+human language as well as complex data in tables, bullet point lists, and even
+images!
 
 ### For users
 
@@ -33,9 +35,9 @@ tables, bullet point lists, and even images!
 
 ### Plugins
 
-This monorepo contains a number of Text-Runner plugins that provide more
-domain-specific functionality. You can think of these plugins as the "standard
-library" of Text-Runner.
+This monorepo contains a number of Text-Runner plugins
+that provide more domain-specific functionality.
+You can think of these plugins as the "standard library" of Text-Runner.
 
 - [repo](textrun-repo/): verify source code files
 - [workspace](textrun-workspace/): modify/verify workspace files

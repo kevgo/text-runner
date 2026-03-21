@@ -1,7 +1,7 @@
 import { flatten } from "array-flatten"
 import { assert } from "chai"
-import * as fs from "fs/promises"
 import { globby } from "globby"
+import * as fs from "node:fs/promises"
 
 import type { TRWorld } from "../world.js"
 import * as workspace from "./workspace.js"

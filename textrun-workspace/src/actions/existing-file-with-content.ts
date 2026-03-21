@@ -1,13 +1,13 @@
-import * as assertNoDiff from "assert-no-diff"
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
 import { styleText } from "node:util"
-import * as path from "path"
+import * as assertNoDiff from "assert-no-diff"
 import * as textRunner from "text-runner-engine"
 
 export async function existingFileWithContent(action: textRunner.actions.Args): Promise<void> {
-  const fileNameAttribute = action.region[0].attributes["filename"]
+  const fileNameAttribute = action.region[0].attributes.filename
   const fileName = fileNameAttribute || action.region.textInNodeOfType("em", "strong")
-  const dirAttribute = action.region[0].attributes["dir"]
+  const dirAttribute = action.region[0].attributes.dir
   const fileRelPath = dirAttribute ? path.join(dirAttribute, fileName) : fileName
   const fullPath = action.configuration.workspace.joinStr(fileRelPath)
   const partialMatch = action.region[0].attributes["partial-match"] !== undefined

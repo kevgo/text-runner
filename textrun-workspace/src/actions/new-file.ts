@@ -1,10 +1,10 @@
-import { promises as fs } from "fs"
+import { promises as fs } from "node:fs"
+import * as path from "node:path"
 import { styleText } from "node:util"
-import * as path from "path"
 import * as textRunner from "text-runner-engine"
 
 export async function newFile(action: textRunner.actions.Args): Promise<void> {
-  let fileName = action.region[0].attributes["filename"] || ""
+  let fileName = action.region[0].attributes.filename || ""
   try {
     fileName ||= action.region.textInNodeOfType("em", "strong")
   } catch (e) {
@@ -23,7 +23,7 @@ export async function newFile(action: textRunner.actions.Args): Promise<void> {
     const guidance = `Cannot determine the content of the file to create.\n${e.guidance}`
     throw new textRunner.UserError(e.message, guidance)
   }
-  const filePath = path.join(action.region[0].attributes["dir"] ?? ".", fileName)
+  const filePath = path.join(action.region[0].attributes.dir ?? ".", fileName)
   action.name(`create file ${styleText("cyan", filePath)}`)
   const fullPath = action.configuration.workspace.joinStr(filePath)
   action.log(`create file ${filePath}`)

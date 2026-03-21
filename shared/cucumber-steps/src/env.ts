@@ -2,7 +2,7 @@ import * as cucumber from "@cucumber/cucumber"
 import { endChildProcesses } from "end-child-processes"
 
 import * as workspace from "./helpers/workspace.js"
-import { TRWorld } from "./world.js"
+import type { TRWorld } from "./world.js"
 
 cucumber.BeforeAll(async () => {
   await workspace.backup()

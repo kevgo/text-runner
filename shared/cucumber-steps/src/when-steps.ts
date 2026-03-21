@@ -3,7 +3,7 @@ import * as textRunner from "text-runner-engine"
 
 import * as helpers from "./helpers/index.js"
 import * as workspace from "./helpers/workspace.js"
-import { TRWorld } from "./world.js"
+import type { TRWorld } from "./world.js"
 
 When(/^calling:$/, { timeout: 20_000 }, async function (this: TRWorld, jsText: string) {
   const config: textRunner.configuration.APIData = { sourceDir: workspace.absPath.platformified() }

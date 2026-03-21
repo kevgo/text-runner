@@ -4,7 +4,7 @@ import * as path from "path"
 import * as url from "url"
 
 import * as workspace from "./helpers/workspace.js"
-import { TRWorld } from "./world.js"
+import type { TRWorld } from "./world.js"
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url))
 

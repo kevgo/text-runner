@@ -1,16 +1,16 @@
+import type * as cucumber from "@cucumber/cucumber"
 import { Then } from "@cucumber/cucumber"
-import * as cucumber from "@cucumber/cucumber"
 import * as assertNoDiff from "assert-no-diff"
 import { assert } from "chai"
 import { promises as fs } from "fs"
 import psTreeR from "ps-tree"
 import stripAnsi from "strip-ansi"
-import * as textRunner from "text-runner-engine"
+import type * as textRunner from "text-runner-engine"
 import * as util from "util"
 
 import * as helpers from "./helpers/index.js"
 import * as workspace from "./helpers/workspace.js"
-import { TRWorld } from "./world.js"
+import type { TRWorld } from "./world.js"
 
 const psTree = util.promisify(psTreeR)
 

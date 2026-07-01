@@ -1,3 +1,5 @@
+SPDX-License-Identifier: ISC
+
 Copyright 2026 Kevin Goslar
 
 Permission to use, copy, modify, and/or distribute this software

@@ -8,13 +8,6 @@
     "text-runner-features",
     "tools"
   ],
-  "markdown": {
-    "lineWidth": 80,
-    "textWrap": "always"
-  },
-  "plugins": [
-    "https://plugins.dprint.dev/markdown-0.18.0.wasm",
-    "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.0.wasm"
-  ],
+  "plugins": ["https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.0.wasm"],
   "yaml": {}
 }

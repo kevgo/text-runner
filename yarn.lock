@@ -1241,6 +1241,41 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@rumdl/cli-darwin-arm64@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-darwin-arm64/-/cli-darwin-arm64-0.1.57.tgz#cf619e913f8d98861ae5225c7d2756582bbf4fad"
+  integrity sha512-rpOU6odsCfJneakLGBthVwKDWhc/ZQmhNqmoXlv1uPFXNDR0Q5TVwLnBmjuBR+929tSD9pzoX0PxbpnXVKHvMQ==
+
+"@rumdl/cli-darwin-x64@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-darwin-x64/-/cli-darwin-x64-0.1.57.tgz#ce97b95a2850be3fa8ab5cde451bd8ff7cdc97e2"
+  integrity sha512-YQRYLP0PoDsTQiymmSTLhvubr+AlNCNNAbhDmoRVh63pNMaaatJ8y2JDqt7qfe72+2CX5TWTuhHFoL+wPNrfEg==
+
+"@rumdl/cli-linux-arm64-musl@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-linux-arm64-musl/-/cli-linux-arm64-musl-0.1.57.tgz#9a80a6d046ea534a9662611191b48f75bcf18909"
+  integrity sha512-V8CmARw6kXKaji6w577xvbJ4taulhyLAc6X0sKL3aAGW2I8wOx9mBV/JwT7K8YbmePCmKNMppc+15qCeFUfDyw==
+
+"@rumdl/cli-linux-arm64@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-linux-arm64/-/cli-linux-arm64-0.1.57.tgz#36e81d0f52cfdb1acdafe1c475c395673b0f6a47"
+  integrity sha512-dgPK6W10r1cMvy6o0BrH5BiX/wM92Drh1TfVbxHTjBt98FlxR1POeWg9n71YTJD5hu0VlsWi0b6Xg8EwwqsUFQ==
+
+"@rumdl/cli-linux-x64-musl@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-linux-x64-musl/-/cli-linux-x64-musl-0.1.57.tgz#11ad73007aaad97feaea657faaf37ea9ef5857bd"
+  integrity sha512-LfKzDtfu+zvK2Bvm+nR+1TgitC1MVJpQf/qcDoTiMgmwNMmV8X9cpiqIFKIcAANh/ax2io2qn1VTHzP7zarH2Q==
+
+"@rumdl/cli-linux-x64@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-linux-x64/-/cli-linux-x64-0.1.57.tgz#212af46b7b90efbcb3a7ffc5ebfeacb23ac0b436"
+  integrity sha512-8751VJMPxCuujE+dkH8p6SOb0uve06umMXDqpsWfbRTXAQkqeJJIAdM/XYTx3miF0S/y2q5TrdBgBkBtG+dOlw==
+
+"@rumdl/cli-win32-x64@0.1.57":
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/@rumdl/cli-win32-x64/-/cli-win32-x64-0.1.57.tgz#b58c4da7c2391a864c2b3ff814beef5f8e9afd88"
+  integrity sha512-3y/WtjVDdqOWq+1NyC+c0/PUg8YSCzkcrbFz4d2PwpOA4dbEFKKzLvLI33+gJ6Jjc/UZ9Afj6HXmuktsu9Uwig==
+
 "@sec-ant/readable-stream@^0.4.1":
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/@sec-ant/readable-stream/-/readable-stream-0.4.1.tgz#60de891bb126abfdc5410fdc6166aca065f10a0c"
@@ -5218,6 +5253,19 @@ rimraf@^4.4.1:
   integrity sha512-Gk8NlF062+T9CqNGn6h4tls3k6T1+/nXdOcSZVikNVtlRdYpA7wRJJMoXmuvOnLW844rPjdQ7JgXCYM6PPC/og==
   dependencies:
     glob "^9.2.0"
+
+rumdl@^0.1.57:
+  version "0.1.57"
+  resolved "https://registry.yarnpkg.com/rumdl/-/rumdl-0.1.57.tgz#f89b0d2c8c599a8c2608280ebc98b210e7fca35f"
+  integrity sha512-LWgghsq88oV1kIn6BcXNFZRAtC7ALBy6HL3oV98RPV8tRUxLLoMWcVK8FAGyrKvbXAmXIpGdhn/6p1D/97UR+g==
+  optionalDependencies:
+    "@rumdl/cli-darwin-arm64" "0.1.57"
+    "@rumdl/cli-darwin-x64" "0.1.57"
+    "@rumdl/cli-linux-arm64" "0.1.57"
+    "@rumdl/cli-linux-arm64-musl" "0.1.57"
+    "@rumdl/cli-linux-x64" "0.1.57"
+    "@rumdl/cli-linux-x64-musl" "0.1.57"
+    "@rumdl/cli-win32-x64" "0.1.57"
 
 run-async@^4.0.5:
   version "4.0.6"

@@ -27,10 +27,10 @@
   },
   "devDependencies": {
     "shared-cucumber-steps": "*",
-    "text-runner": "^7.5.1",
-    "textrun-action": "^0.7.1",
+    "text-runner": "7.5.1",
+    "textrun-action": "0.7.1",
     "textrun-extension": "0.7.1",
-    "textrun-workspace": "^0.7.1",
+    "textrun-workspace": "0.7.1",
     "tsx": "4.21.0"
   }
 }

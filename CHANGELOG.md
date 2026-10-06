@@ -1,5 +1,9 @@
 # Change Log
 
+## 7.5.1
+
+- Windows 11 compatibility
+
 ## 7.5.0
 
 - requires Node 24 or newer

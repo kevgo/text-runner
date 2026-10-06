@@ -81,7 +81,7 @@ versions.
     - `lerna version patch --no-private`
     - `lerna version minor --no-private`
     - `lerna version major --no-private`
-  - make a global search-and-replace for `7.5.1` and `0.7.0` replace with the
+  - make a global search-and-replace for `7.5.1` and `0.7.1` replace with the
     new versions
   - ship this branch
 - `git town sync --all && git tag 7.5.1 && git push --tags`

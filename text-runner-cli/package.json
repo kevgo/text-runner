@@ -30,7 +30,7 @@
     "@babel/code-frame": "7.27.1",
     "cli-cursor": "5.0.0",
     "cli-progress": "3.12.0",
-    "end-child-processes": "2.0.3",
+    "end-child-processes": "2.0.4",
     "jsonc-reader": "0.3.0",
     "minimist": "1.2.8",
     "text-runner-engine": "7.5.0"

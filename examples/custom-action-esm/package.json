@@ -9,7 +9,7 @@
     "lint": "biome check --error-on-warnings && dprint check && sort-package-json --check --quiet"
   },
   "devDependencies": {
-    "text-runner": "7.5.0",
+    "text-runner": "7.5.1",
     "tsx": "4.21.0"
   }
 }

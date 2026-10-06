@@ -9,8 +9,8 @@
     "lint": "biome check --error-on-warnings && dprint check && sort-package-json --check --quiet"
   },
   "dependencies": {
-    "text-runner": "7.5.0",
-    "textrun-shell": "0.7.0"
+    "text-runner": "7.5.1",
+    "textrun-shell": "0.7.1"
   },
   "devDependencies": {
     "tsx": "4.21.0"

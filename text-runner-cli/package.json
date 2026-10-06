@@ -33,7 +33,7 @@
     "end-child-processes": "2.0.4",
     "jsonc-reader": "0.3.0",
     "minimist": "1.2.8",
-    "text-runner-engine": "^7.5.1"
+    "text-runner-engine": "7.5.1"
   },
   "devDependencies": {
     "@types/babel__code-frame": "7.0.6",
